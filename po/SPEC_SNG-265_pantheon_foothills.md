@@ -78,3 +78,84 @@ That is the deep reason this works.**
 3. **Does the observance resource (oath/offering/festival) get built**, or do pantheon foothills reuse the
    existing energy/substrate economy? It is the difference between a flavourful foothill and a genuinely new
    way to play.
+
+
+---
+
+# SNG-265 round 2 — ERIK'S REVEAL: THEY ARE NOT GODS. THEY ARE PEOPLE WHO REFUSED.
+
+Erik: *"Some of them can be heroic, epic, and some legendary. Remember these are humans who have been
+nanotechnology augmented heavily… **they never wanted to transition**. So they call themselves the names of the
+gods — no worries about borrowing here."*
+
+**THIS CORRECTS MY CAUTION, AND I WAS WRONG.** I advised importing *the shape, not the roster* — a sky-father
+rather than Zeus. **That advice is void, and for the best possible reason: the borrowing is DIEGETIC.** Nobody
+in the Valley is doing comparative mythology. **A heavily-augmented human took the name Zeus for himself**,
+because it was the only word big enough for what he had become and because he wanted it. That is not the game
+borrowing a name; that is a CHARACTER borrowing one, in-world, and being judged for it.
+
+## WHAT THIS ACTUALLY IS (and it is better than a pantheon)
+- **They are humans.** Not manifestations, not constructs, not Precursor remnants. **People.**
+- **Augmented heavily with nanotech — and they NEVER WANTED THE TRANSITION.** They took the substrate INTO
+  themselves specifically so they would not have to be dissolved by it. **They chose augmentation as REFUSAL.**
+- **They named themselves after gods.** A person who has become that powerful, and who did it out of refusal,
+  reaches for the biggest name available. **The grandiosity is characterisation, not worldbuilding shorthand.**
+
+**THE FICTION THIS BUYS, which a real pantheon could not:** every one of them is a person who said *no* to the
+end of the world and paid for it by becoming something a person should not be. **They are not divine. They are
+the ones who would not let go** — and they took the names of gods the way a frightened man takes a loud voice.
+That is a much sadder and much better story than an actual pantheon, and it is entirely consistent with the
+Valley's existing tone.
+
+## IT SLOTS INTO LORE THAT IS ALREADY THERE
+`tradition_profiles.json` on the seraphic: **"The Seraphic Orders, continuous with the pre-Transition world IN A
+WAY ALMOST NOTHING ELSE IS."** The angelic pole is ALREADY authored as the tradition with unbroken pre-Transition
+continuity. **The god-named are the sharpest possible instance of that continuity** — and it explains the
+Orders' hierarchy, their certainty, and their unjustified habit of weighing people without consent: *some of
+the people at the top of that hierarchy have been there since before.*
+And `manifest_locals.json`: the Transition *"read intense collective imagination as structured will and enacted
+it."* **The god-named are the inverse case — not imagination made real, but PEOPLE WHO REFUSED TO BE READ.**
+
+## THE TIERING (Erik: "some heroic, epic, and some legendary")
+This plugs directly into the SNG-260 §A **powerBand** ladder rather than needing anything new:
+- **HEROIC-band god-named** — a valley or a city knows them. Locally undefeated, personally reachable, still
+  recognisably a person having a bad century. **These are the ones a party actually meets.**
+- **EPIC-band** — a region's fixed fact. Cannot be fought conventionally; the question is what they WANT and
+  what they will trade. **These are quest-givers, obstacles, and patrons.**
+- **LEGENDARY-band** — a handful, world-scale, possibly no longer entirely present. **The ones whose NAME is a
+  weather system.** A party may spend a campaign never meeting one.
+**AND THIS IS WHERE ERIK'S ARENA IDEA (item 27) AND THE ENDGAME MODELLING (SNG-259) CONVERGE:** the god-named
+ARE the endgame ladder with faces on it. A heroic-band god-named is exactly the "famous contestant you have been
+hearing about" made concrete — and beating one is how a player's own fame climbs toward the band above.
+
+## WHAT CHANGES IN THE FOOTHILL DESIGN
+1. **The foothill is not a religion — it is a FOLLOWING.** Its `access.open: true` is not "anyone may pray"; it
+   is **"anyone may take service with them."** Oath, offering and festival become **service, patronage, and
+   obligation to a living person who can be disappointed.**
+2. **The observance resource survives, and gets better.** You are not petitioning a principle; you are in a
+   RELATIONSHIP with someone who remembers. **The bond mechanics (companion stages) fit this better than a
+   prayer economy would.**
+3. **The foothill crafts are theirs, taught or granted.** A follower of a god-named blazeborn-adjacent figure
+   learns a survivable version of the pole's craft **because a person taught them** — which is exactly the
+   catalog's existing "teacher" access route, and it is already in SNG-011's four ways access opens.
+4. **They can be killed, and they know it.** A heroic-band god-named is beatable. **That is the whole appeal and
+   the whole tragedy** — they made themselves into this so they would not end, and they are still endable.
+
+## WHAT I'D WANT TO GET RIGHT (recommendations, not rules)
+- **They should be tired.** Nothing dates a powerful NPC faster than enjoying it. The ones who refused the
+  Transition have been carrying that refusal for a very long time. Oren Vale's register — *complete answers,
+  no relish* — is the right neighbourhood.
+- **The name should sit slightly wrong on them, and they should know.** A man calling himself Zeus in a valley
+  that has never heard of Greece is making a claim nobody can check, which is either very sad or very dangerous
+  depending on the day. **Let NPCs use the name flatly and let the god-named hear it.**
+- **Not all of them chose well.** Some took a name that flattered them and have spent centuries failing to be
+  it. **That is the best story in the set** — a god-named who is not equal to their own name.
+
+## ERIK'S CALLS, REVISED
+1. **Which band gets authored first?** My strong recommendation: **HEROIC**. It is the one a party meets, it
+   plugs straight into the arena-fame idea, and it is the band where "person, not deity" reads clearest.
+2. **How many, and which names?** A pilot of two or three heroic-band god-named — I would want one who chose
+   badly.
+3. **Do the god-named cluster by AXIS?** (Sky/judgement figures near seraphic, trickster/appetite near abyssal,
+   forge near wright.) The ring supports it, and it would mean **a player's own tradition determines which gods
+   are ambient in their life** — which is a strong, cheap piece of worldbuilding.

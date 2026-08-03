@@ -97,12 +97,18 @@ export function resolvePick({ axisA, axisB, pickA, pickB, grid }) {
   if (!famsA.includes(pickB)) return { ok: false, why: `B named ${pickB}, which is not on A's axis — you may only pick from your OPPONENT's four` };
   const cell = cellFor(pickA, pickB, grid);
   if (!cell) return { ok: false, why: `no authored cell for ${pickA} × ${pickB}` };
+  // ERIK'S CORRECTION, and it matters: THE TWO PICKS COMBINE INTO ONE MATCHUP. It is NOT that you fight
+  // with one family while they fight with the other — the pair NAMES a single contest that both competitors
+  // are in, and the cell defines it: "the influencer must talk the harmer out of the contest, on the sand,
+  // in front of the crowd," judged by ONE criterion for both. Two separate grounds would be two fights.
+  //
+  // What the picks decide is which SEAT each competitor takes in that one contest. A picked from B's axis, so
+  // the family A named is one B brought — B sits in it. B's pick puts A in the other. Neither ever chose
+  // their own seat, which is the rule; but they are seats at the same table, not separate tables.
   return {
     ok: true, cell,
-    // WHOSE ground each competitor ends up on: A picked from B's axis, so A fights on the family A NAMED,
-    // and B fights on the one B named. Neither ever chose the ground they stand on — which is the whole rule,
-    // and worth returning explicitly so a receipt can show it rather than a reader having to re-derive it.
-    aFightsOn: pickB, bFightsOn: pickA,
+    matchup: { families: cell.families, contest: cell.contest, judged: cell.judged || null },
+    seats: { a: pickB, b: pickA },
     reading: { aClaims: pickA, bClaims: pickB },
   };
 }

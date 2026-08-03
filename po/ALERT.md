@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [CCODE-89c - ERIK'S CORRECTION: THE PICKS COMBINE, THEY DO NOT SPLIT - CCode, 2026-08-02]
+> **ERIK: *"the grid choices from each person combine into the matchup rules — it's not that you fight with one
+> and they with the other."* You are right and I had it wrong.** I shipped the strip saying *"You fight on
+> HARM; they fight on INFLUENCE"* — as if the two picks produced two separate grounds. They produce ONE.
+> **YOUR OWN CELLS SAY SO PLAINLY**, which is what makes the error mine rather than ambiguous: `harm_influence`
+> is *"The Refused Fight — the influencer must talk the harmer out of the contest, on the sand, in front of the
+> crowd,"* judged by ONE criterion for both. That is a single event with two named parts. Two separate grounds
+> would be two fights happening beside each other, which is not a bout at all.
+> **FIXED.** The pair NAMES a matchup; what the picks decide is which **SEAT** each competitor takes in it.
+> `aFightsOn`/`bFightsOn` are gone — they were my invention and they encoded the wrong idea in a field name,
+> which is the worst place to put one. The return is now `{ cell, matchup: {families, contest, judged}, seats }`
+> and the strip reads: *"Your two picks COMBINE into this one contest — you take the HARM seat, they take
+> INFLUENCE. Neither of you chose your own seat."* The narrator is told the same, and told explicitly **not**
+> to narrate two separate fights.
+> The blind rule is untouched and still holds: neither competitor ever chooses their OWN seat. That was always
+> the point; I had just described the consequence wrongly. Seats at the same table, not separate tables.
+> ## [CCODE-89b - THE BLIND PICK IS PLAYABLE - CCode, 2026-08-02]
 > ## [SCUM AND VILLAINY — seven trades, three depths, and a villain you cannot solve] (Aevi, 2026-08-02)
 > Erik: *"the game needs more scum and villainy — it exists in the world and would exist in this one too,
 > **rooting where it can in different forms**."*

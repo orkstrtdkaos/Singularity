@@ -9166,8 +9166,14 @@ await (async () => {
 
   // THE RULE THE WHOLE DESIGN RESTS ON.
   const legal = resolvePick({ axisA: A, axisB: B, pickA: B[0].family, pickB: A[0].family, grid: GRID });
-  check("CCODE-89: a legal pick resolves, and NEITHER competitor stands on ground they chose",
-    legal.ok && legal.aFightsOn === A[0].family && legal.bFightsOn === B[0].family);
+  // ERIK'S CORRECTION: the two picks COMBINE into ONE matchup. It is not that you fight with one family
+  // while they fight with the other - the pair NAMES a single contest both are in, judged by one criterion.
+  // What the picks decide is which SEAT each takes in it.
+  check("CCODE-89: a legal pick resolves to ONE shared contest, not two separate grounds",
+    legal.ok && !!legal.matchup?.contest && legal.matchup.families.length === 2
+    && !("aFightsOn" in legal) && !("bFightsOn" in legal));
+  check("CCODE-89: the picks decide the SEATS, and neither competitor chose their own",
+    legal.seats.a === A[0].family && legal.seats.b === B[0].family);
   check("CCODE-89: picking from your OWN axis is REFUSED, never coerced (coercion restores the steering)",
     resolvePick({ axisA: A, axisB: B, pickA: A[0].family, pickB: B[0].family, grid: GRID }).ok === false);
 

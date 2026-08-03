@@ -5121,11 +5121,11 @@ function commitColiseumPick(family) {
   const theirs = championPick(bout.yours, { stance, rng: Math.random });
   const r = resolvePick({ axisA: bout.yours, axisB: bout.theirs, pickA: family, pickB: theirs?.family, grid });
   if (!r.ok) { renderPlay(character.activeScene?.lastTurn || null, { aside: r.why }); return; }
-  bout.picked = { yours: family, theirs: theirs.family, cell: r.cell, aFightsOn: r.aFightsOn, bFightsOn: r.bFightsOn,
+  bout.picked = { yours: family, theirs: theirs.family, cell: r.cell, seats: r.seats, matchup: r.matchup,
     yourRead: readOfPick(family, bout.theirs), theirRead: theirs.why };
   saveCharacter(character);
   // The cell is the CONTEST, so the narrator is told what was chosen and what it means — not asked to invent it.
-  runGM({ resolution: null, playerInput: `(THE BLIND GRID IS REVEALED. You named ${family} from their four — ${bout.picked.yourRead?.says || "your argument about them"}. They named ${theirs.family} from yours — ${theirs.why}. The cell is "${r.cell.name}": ${r.cell.contest} Judged: ${r.cell.judged || "on the bell."} Narrate the reveal and the crowd, then the opening of THIS contest — not a generic bout.)` })
+  runGM({ resolution: null, playerInput: `(THE BLIND GRID IS REVEALED. You named ${family} from their four — ${bout.picked.yourRead?.says || "your argument about them"}. They named ${theirs.family} from yours — ${theirs.why}. The two picks COMBINE into ONE contest — "${r.cell.name}": ${r.cell.contest} You are in the ${r.seats.a} seat; they are in the ${r.seats.b} seat. Judged: ${r.cell.judged || "on the bell."} Narrate the reveal and the crowd, then the opening of THIS contest — not a generic bout, and NOT two separate fights.)` })
     .then(result => { if (result) renderPlay(result.turn, { degraded: result.degraded }); });
 }
 
@@ -5138,7 +5138,7 @@ function coliseumStrip() {
     const p = bout.picked;
     return `<div class="enc-frame col-strip"><div class="col-cell"><strong>${esc(p.cell.name)}</strong> — ${esc(p.cell.contest)}</div>` +
       `<div class="col-read">You named <b>${esc(p.yours)}</b> — ${esc(p.yourRead?.says || "")}. They named <b>${esc(p.theirs)}</b> — ${esc(p.theirRead || "")}.</div>` +
-      `<div class="col-ground">You fight on <b>${esc(p.aFightsOn)}</b>; they fight on <b>${esc(p.bFightsOn)}</b>. Neither of you chose the ground you stand on.</div></div>`;
+      `<div class="col-ground">Your two picks COMBINE into this one contest — you take the <b>${esc(p.seats?.a || "")}</b> seat, they take <b>${esc(p.seats?.b || "")}</b>. Neither of you chose your own seat.${p.matchup?.judged ? ` <span class="col-judged">${esc(p.matchup.judged)}</span>` : ""}</div></div>`;
   }
   return `<div class="enc-frame col-strip">` +
     `<div class="col-axis">THEIR four: ${bout.theirs.map(col).join(" · ")}</div>` +

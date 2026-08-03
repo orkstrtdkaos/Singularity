@@ -111,12 +111,19 @@ export function worldArcsForGM(content, character) {
 
 /** Region view for the GM: content events overlaid with this campaign's stages. */
 export function buildRegionView(content, character) {
-  const ws = character.worldState;
-  const activeEvents = (content.region.activeEvents || []).map(({ eventId, stage }) => ({
+  const ws = character?.worldState;
+  // CCODE-95: `content.region` was read UNGUARDED, so a world with no region could not tick AT ALL — it threw
+  // on the first day. Every other consumer in this codebase tolerates absent content (SNG-055/059: "absence
+  // leaves the gates ungoverned, never breaks load"); this one did not, and it is on the world clock's path,
+  // which is the worst place for the exception. Found by the dev world, which is a world with deliberately
+  // little in it — exactly the case this guard is for.
+  const region = content?.region || null;
+  if (!region) return { activeEvents: [] };
+  const activeEvents = (region.activeEvents || []).map(({ eventId, stage }) => ({
     eventId,
     stage: ws?.eventStages?.[eventId]?.stage ?? stage
   }));
-  return { ...content.region, activeEvents };
+  return { ...region, activeEvents };
 }
 
 /** A location's spectrum as shifted by the world's drift (crisis pressure etc.). */

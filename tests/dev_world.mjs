@@ -14,26 +14,12 @@
 //
 // Run: npm run dev-world  [days]     (default 120 days)
 //
-// ⚠️ STATUS: SCAFFOLD, NOT YET DRIVING. The safety property WORKS and is the part worth having early — this
-// touches no save, creates no character, and tags its subject so a leak into a save path is detectable. What
-// it cannot yet do is complete a tick: `runWorldTick` needs the full assembled CONTENT bag that the browser's
-// `loadContent()` builds (region view, events, arcs, npcQuests, legends and more), and hand-assembling it
-// from pack files stops at the first thing the tick reads unguarded. Deliberately NOT in `npm test` while it
-// fails — a red test nobody can fix today teaches people to ignore red tests.
-//
-// IT ALREADY FOUND TWO THINGS, which is why it is committed rather than held:
-//   1. `runWorldTick`'s `advanceAssignments` default is AI-BACKED. A world tick that needs a MODEL to advance
-//      assignments cannot advance them in a test — and that is a strong candidate for why `assignmentsDetail`
-//      shows 0/10 in real play. Worth Erik's eye: should the world's own clock depend on an API call?
-//   2. `buildRegionView` reads `content.region.activeEvents` UNGUARDED, so a world with no region cannot tick
-//      at all. Every other consumer in this codebase tolerates absent content; this one does not.
-//
-// THE NEXT STEP is a headless `loadContent()` — the same assembly the app does, callable from node. That is
-// worth doing on its own merits: every engine test currently hand-rolls a partial CONTENT bag.
+// STATUS: DRIVING. It ticks the real world clock against the real content bag, in memory, touching no save.
 
 import { readFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadContentHeadless } from "./headless_content.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -64,18 +50,10 @@ function devCharacter() {
   };
 }
 
-const CONTENT = (() => {
-  const out = { rules: rj("content/packs/core/rules/resolution.json") };
-  try { out.greaterArcs = rj("content/packs/valley/lore/arcs.json").arcs || []; } catch { out.greaterArcs = []; }
-  try { out.legends = rj("content/packs/valley/npcs/legends.json"); } catch { out.legends = { roster: [] }; }
-  try { out.npcQuests = rj("content/packs/valley/npcs/npc_quests.json").quests || []; } catch { out.npcQuests = []; }
-  // buildRegionView reads content.region.activeEvents unguarded, so a world with no region cannot tick at
-  // all. A real region is loaded; the empty fallback keeps the harness usable on a bare checkout.
-  try { out.region = rj("content/packs/valley/region.json"); } catch { out.region = { activeEvents: [] }; }
-  if (!out.region.activeEvents) out.region.activeEvents = [];
-  try { out.events = rj("content/packs/valley/events.json").events || []; } catch { out.events = []; }
-  return out;
-})();
+// CCODE-96: the REAL content bag, assembled by the app's own `loadContent()` through a disk-backed fetch
+// shim. The first draft hand-rolled this from pack files and stopped at the first thing the tick read
+// unguarded — which is the tax every engine test in this repo has been paying separately.
+const CONTENT = await loadContentHeadless();
 
 // ── force the clock ─────────────────────────────────────────────────────────────────────────────────────
 const character = devCharacter();

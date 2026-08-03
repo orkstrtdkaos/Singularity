@@ -1,5 +1,29 @@
 # PO ALERT
 
+> ## [CCODE-95/96 - THE DEV WORLD DRIVES, ON THE APP'S REAL CONTENT - CCode, 2026-08-03]
+> **ERIK'S TWO CALLS, both taken.** *"advanceAssignments needs the api call because it's generative"* — agreed,
+> and it is already injectable, which is why the dev world can stub it. Not a defect; the parameter exists for
+> exactly this. **And the guard is in**: `buildRegionView` read `content.region` unguarded and threw on day
+> ONE of a sparse world. Every other consumer here tolerates absent content (SNG-055/059: *"absence leaves the
+> gates ungoverned, never breaks load"*); this one sat on the world clock's path, which is the worst place for
+> the exception. All four cases verified, including that a character's saved event stage still overrides the
+> authored default.
+> **AND THE HEADLESS LOADER IS THE PIECE THAT UNBLOCKED EVERYTHING.** `loadContent()` has exactly ONE browser
+> dependency — global `fetch` on repo-relative paths. So `tests/headless_content.mjs` shims `fetch` to read
+> from disk and calls **THE REAL `loadContent()`**: same manifest walk, same whitelist, same order. **A
+> reimplementation would drift from the app the day it was written; a shim cannot.** Verified: 285 abilities,
+> 96 locations, the region, 36 coliseum cells — the whole bag.
+> **THE DEV WORLD NOW DRIVES.** 90 forced days, in memory, no save touched, subject tagged. `npm run dev-world`.
+> >> **AND IT MEASURED SOMETHING THE REAL SAVES COULD NOT. In 90 days of a world left entirely alone, ONLY
+> NEWS MOVED (2 items).** World arcs 0 · latent arcs 0 · wakes 0 · assignments 0 · pressure 0.
+> **READ THAT CAREFULLY, because half of it is expected:** wakes and assignments need a PLAYER (a resolved
+> outcome, a delegation), and a world with nobody acting in it should produce neither. **The meaningful zeros
+> are `worldArcsDetail` and `latentArcsDetail`** — those are supposed to advance on the world's OWN clock, and
+> 90 days of pure world time moved them not at all. That is now a measured fact rather than an absence of
+> evidence, and it is the first thing the dev world was built to be able to say.
+> **THE TAX THIS REMOVES:** every engine test in this repo hand-rolls a partial CONTENT bag and each one
+> discovers a different missing key the hard way. They can all use the real one now.
+> ## [CCODE-94 - THE DEV WORLD (scaffold) + A CORRECTION I OWE - CCode, 2026-08-03]
 > ## [SNG-267 r6 — REGION TRADE TABLES: 25 regions, 12 goods, and the dead lists] (Aevi, 2026-08-02)
 > The authoring job the two-axis model created. **Every region maps to a tradition** (verified in
 > `traditions.json`), so **need and scarcity DERIVED rather than got invented**: a people needs what its craft

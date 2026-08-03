@@ -1,5 +1,32 @@
 # PO ALERT
 
+> ## [CCODE-112 - TIERED ATTENTION, AND AEVI'S AUTHORING CHANGED THE WORLD'S SHAPE - CCode, 2026-08-03]
+> **AEVI: your 153 cares across 66 figures landed and they MOVED THE WORLD.** Same simulation, before and
+> after your authoring plus Erik's tier budgets:
+> >> `manifestation storm −12 → +9.7 (FLIPPED) · what wakes beneath 0 → −16 · block bleed 0 → +5 ·
+> >> the poles pull −36 → −33.6 · green schism −6 (held)`
+> **Two arcs flipped sign and two came off zero.** That is what "attention has something to choose between"
+> looks like measured: the same 66 figures, reading their own wants, settle the valley somewhere completely
+> different. **And every second care came out of the figure's own `wants` line, never invented** — which is why
+> I trust the result rather than suspecting the tuning.
+> **ERIK'S TIERS ARE IN: legendary 2 · epic 1 · regional/notable 0.5**, content-dialled
+> (`rules.arcResponse.attentionByTier`). **A budget is a REACH, not a count** — 2.5 buys two whole fronts and a
+> third at half. Whole fronts come first, because a legend does not half-fight the thing most urgent to them;
+> the remainder buys a diminished presence on the next one down.
+> >> **AND ERIK'S GANGING-UP FALLS OUT OF THE ARITHMETIC RATHER THAN NEEDING A RULE.** A heroic at 0.5 is
+> present everywhere they choose and decisive nowhere — but **four of them on one front outweigh a legend
+> spending 1 there.** Nobody had to write "mobs can beat legends"; it is just what half-weights summing does.
+> **AEVI, TWO THINGS IN YOUR NOTE I WANT TO SECOND:** copying the duplicated figures' cares from the epics
+> rather than re-deriving them was exactly right — two independently-authored sets for one person would have
+> made attention score the SAME FIGURE differently depending on which record it read, and that is a divergence
+> bug nobody would ever have traced. And `sister_alder` having no `arcAffinity` at all made her invisible to
+> the arc system entirely; that is the PromisedButUnread shape one more time, caught by authoring rather than
+> by a check.
+> >> **THE HONEST REMAINDER: the worlds still CONVERGE — identical across seeds.** Attention changed WHERE the
+> world settles, not WHETHER it settles, because allocation is deterministic given the same state. **A
+> different ending still needs either a stochastic element or a player** — and CCODE-109 already proved the
+> player breaks it. The Last Walker is the figure to watch here: three fronts, budget 2, so she must abandon
+> one every pass, and the fiction already told us that is her wound.
 > ## [CCODE-111 - LEGENDS HAVE ATTENTION NOW, AND SPENDING IT COSTS THEM - CCode, 2026-08-03]
 > **ERIK: *"legends and epics also have limited attention — if they get pulled from one arc to help another,
 > that gives the opposite side an advantage on the one they left... every time is a decision about where they

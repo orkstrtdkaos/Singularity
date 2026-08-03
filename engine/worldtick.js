@@ -548,10 +548,24 @@ export function spendAttention(figure, ws, { budget = 1, perPoint = 0.12, wantAr
       + (Number(c.weight) || 1) * 0.05;                      // how much they cared to begin with
     return { care: c, pull };
   }).sort((a, b) => b.pull - a.pull);
-  // Attention is FINITE and INDIVISIBLE per care: a legend gives a fight their whole weight or leaves it.
-  // Splitting it would let one figure hold every arc at once, which is the thing having attention rules out.
-  const take = Math.max(1, Math.floor(budget));
-  return { spent: scored.slice(0, take), unattended: scored.slice(take).map(s => s.care.arcId) };
+  // CCODE-112 — ATTENTION IS TIERED, AND THE LAST SLICE OF IT CAN BE PARTIAL.
+  //
+  // Erik: "a Legend can probably push a couple fronts — so they likely have more budget by default. Average
+  // is 2, an epic's average is 1, heroic could have .5 or so. If a lot of NPCs of lower level gang up on a
+  // legend they can push effectively against it."
+  //
+  // So a budget is a REACH, not a count: 2.5 means two fronts held whole and a third held at half. The whole
+  // fronts come first (a legend does not half-fight the thing most urgent to them), and the remainder buys a
+  // diminished presence on the next one down — which is exactly how a heroic figure at 0.5 works: present
+  // everywhere they choose, decisive nowhere. Four of them together outweigh a legend, which is Erik's
+  // ganging-up: it falls out of the arithmetic rather than needing a rule.
+  const b = Math.max(0, Number(budget) || 0);
+  const whole = Math.floor(b);
+  const partial = b - whole;
+  const spent = scored.slice(0, whole).map(s => ({ ...s, share: 1 }));
+  if (partial > 0.001 && scored.length > whole) spent.push({ ...scored[whole], share: partial });
+  const unattended = scored.slice(spent.length).map(s => s.care.arcId);
+  return { spent, unattended };
 }
 
 export function applyEpicArcPush(ws, figure, worldDay, urgency = 1) {
@@ -807,17 +821,27 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // CCODE-111: each figure now DECIDES where to spend itself. A care they leave gets no push from them at
     // all this pass — which is the vacancy Erik named: the other side gains that seat for free, without
     // winning anything. `attentionBudget` is a content dial; at 1 (the default) a legend fights one front.
-    const budget = Number.isFinite(cfg.attentionBudget) ? cfg.attentionBudget : 1;
+    // CCODE-112: budget by TIER. A legend holds a couple of fronts; an epic one; a heroic figure half of one.
+    // Content-dialled, and the fallback keeps a figure of unknown tier at the old single front.
+    const tierBudget = cfg.attentionByTier || { legendary: 2, epic: 1, regional: 0.5, notable: 0.5 };
+    const budgetFor = f => {
+      const t = f.tier || f.legend?.tier;
+      const v = tierBudget[t];
+      return Number.isFinite(v) ? v : (Number.isFinite(cfg.attentionBudget) ? cfg.attentionBudget : 1);
+    };
     const vacated = {};
     for (const f of living) {
       const wantArc = f.wantArcId || f.legend?.wantArcId || null;
       const { spent, unattended } = spendAttention(f, { arcNetPush: netBefore },
-        { budget, perPoint, wantArcId: wantArc });
+        { budget: budgetFor(f), perPoint, wantArcId: wantArc });
       for (const arcId of unattended) vacated[arcId] = (vacated[arcId] || 0) + 1;
       for (const s of spent) {
         const against = -Math.sign(s.care.dir) * (Number(netBefore[s.care.arcId]) || 0);
         const urgency = Math.max(minMult, Math.min(maxMult, 1 + against * perPoint));
-        applyEpicArcPush(ws, { ...f, arcAffinity: s.care }, currentWorldDay, urgency);
+        // `share` is how much of themselves this front gets: 1 for a whole front, a fraction for the last
+        // one a partial budget can reach. A heroic figure at 0.5 leans on their cause at half a legend's
+        // weight — and four of them together outweigh one.
+        applyEpicArcPush(ws, { ...f, arcAffinity: s.care }, currentWorldDay, urgency * (s.share ?? 1));
       }
     }
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block

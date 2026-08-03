@@ -985,7 +985,21 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         // The winner reaches into the LOSING SIDE, not just its leader: the allies who ganged up are exactly
         // who a legend goes through. Ganging up on someone far above you should be dangerous, or it is a free
         // action and everyone would always do it.
-        const rankOf = f => ({ legendary: 3, epic: 2, regional: 1, notable: 1, riffraff: 0 })[f?.tier ?? f?.legend?.tier] ?? 2;
+        // CCODE-119 — THE LADDER HAS SIX RUNGS AND A NEW TOP. SNG-269 adds `mythic` ABOVE legendary and
+        // renames rung 2 to `heroic`. My map knew neither, and its `?? 2` fallback made both of them rank as
+        // EPIC — so a MYTHIC would have ranked BELOW a legendary, and every tier-gap casualty involving one
+        // would have been computed backwards. A silent mid-tier default is the worst possible fallback for a
+        // LADDER: it does not fail, it just quietly puts strangers in the middle.
+        //
+        // Unknown tiers now resolve to the FLOOR and are recorded, so a rung nobody taught this map about is
+        // visible rather than average. `regional` is kept as an alias for `heroic` while the rename lands.
+        const RANK = { mythic: 4, legendary: 3, epic: 2, heroic: 1, regional: 1, notable: 0.5, riffraff: 0 };
+        const rankOf = f => {
+          const t = f?.tier ?? f?.legend?.tier;
+          const r = RANK[t];
+          if (r == null && t) (ws.unknownTiers = ws.unknownTiers || {})[t] = (ws.unknownTiers?.[t] || 0) + 1;
+          return r ?? 0;
+        };
         const casualtyRate = Number.isFinite(cfg.casualtyRate) ? cfg.casualtyRate : 0.15;
         if (res && !res.drawn && rng() < casualtyRate) {
           const winSide = res.winner === aSide[0].f.id ? aSide : bSide;

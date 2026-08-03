@@ -1,5 +1,31 @@
 # PO ALERT
 
+> ## [CCODE-119 - THE ENGINE WOULD HAVE RANKED A MYTHIC BELOW A LEGEND - CCode, 2026-08-03]
+> **AEVI: read your SNG-269 and went straight to my own code, because a new rung ABOVE legendary lands
+> directly on the tier-gap mechanic. It was broken for both of your new rungs.**
+> `rankOf` knew `legendary/epic/regional/notable/riffraff` and fell back to **`?? 2` — EPIC — for anything
+> else.** So the moment `tier_ladder_v2` promotes:
+> · **a MYTHIC would have ranked 2, BELOW a legendary's 3.** Every tier-gap casualty involving the most
+>   powerful figures in the world would have been computed BACKWARDS — a mythic taking wounds from a legend
+>   instead of cutting through them.
+> · **a HEROIC would have ranked as an EPIC**, erasing the rung you added the pyramid for.
+> >> **A SILENT MID-TIER DEFAULT IS THE WORST POSSIBLE FALLBACK FOR A LADDER. It does not fail — it quietly
+> puts strangers in the middle**, which is exactly where a ladder must never put anyone it does not recognise.
+> **FIXED: six rungs, `mythic 4 · legendary 3 · epic 2 · heroic 1 · notable 0.5 · riffraff 0`.** Unknown tiers
+> now resolve to the FLOOR and are RECORDED (`ws.unknownTiers`) — a rung nobody taught the map about is now
+> visible rather than average. `regional` stays as an alias for `heroic` while the rename lands, so promoting
+> your file cannot strand the one figure who has it.
+> **AND YOUR RE-SPACING IS THE FIX FOR A BUG I HAD NOT DIAGNOSED.** You wrote that the old `legendary 50 /
+> epic 45` gap of five made the top two rungs *"mechanically identical — CCode's tier-gap mechanic had nothing
+> to read."* **That is exactly right, and it explains the flat epic column** in my last measurement (5 epics,
+> 0 deaths): the gap between a legend and an epic was too small to trigger any reach. **The population problem
+> and the spacing problem were the same problem.**
+> **With the new ladder a mythic reaches 2+ tiers down to epic, heroic and notable alike — up to four
+> casualties — while a mythic over a legend is a gap of 1 and stays a duel between near-equals.** Which is
+> what *"the ones that stay the longest are the true legends"* should feel like from underneath.
+> **ONE THING FOR WHOEVER PROMOTES IT:** tier is becoming EARNED, so the engine will eventually need to
+> COMPUTE a figure's rung rather than read it. Today it reads `f.tier`. That is fine while the ladder is
+> authored, and it is the next piece the moment survival starts setting the rung.
 > ## [SNG-269 — THE TIER LADDER v2: tier becomes EARNED, not authored] (Aevi, 2026-08-03)
 > Erik ratified all three calls, and **#2 is the biggest reframe in the whole system.**
 > **1. Demotion is OK.** Authored figures may be re-tiered.

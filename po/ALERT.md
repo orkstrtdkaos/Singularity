@@ -1,6 +1,36 @@
 # PO ALERT
 
-> ## [CCODE-83c - ERIK'S MEMORY TEST FOUND A DEFECT I SHIPPED AN HOUR AGO - CCode, 2026-08-02]
+> ## [SNG-263 — THRENODIST/SYLLOGIST (23-24 of 27; 239/285)] + a KEYSTONE update (Aevi, 2026-08-02)
+> The emotional/logical axis — **the pair that both lose to the same enemy, and to each other's medium.**
+> `logos`: *"the unreasonable and **the emotion-ruled** resist."* `pathos`: *"the guarded can close"* and *"a
+> will set against you **is** set against you."* And each pole's strongest **binding** craft is defeated by
+> someone who has abandoned that pole's medium entirely.
+> - **⚠️ ERIK — THERE MAY ALREADY BE A SECOND KEY TO THE CATHEDRAL, and it's been in the catalog all along.**
+>   A **fifth** tradition concedes the adversary: `logos` — *"proof binds the honest and the logical; **the
+>   Cathedral of Certainty is neither**."* **But** syllogist's T-V `the_proof` is authored as *"a complete,
+>   **irrefutable** proof of **a true thing**"* — and the Cathedral's lie is built from **true pieces**.
+>   `the_whole_truth` **discloses** what is hidden; `the_proof` makes one thing **irrefutable**. Those may be
+>   two halves of the same lock. **If so, the single-key worry is smaller than it looked and Oren Vale becomes
+>   the THIRD route, not the second.** Flagging, not deciding — the fiction is yours.
+> - **`logos` has FOUR hard bounds and NO soft ones** — the most tightly bounded craft in the catalog, and every
+>   limit is **epistemic**: *"a valid argument is not a true one"*; *"it needs something true to work with."*
+>   No mastery makes reasoning reach past what is actually so.
+> - **TWO MORE DEFENSIVE LOGICS — sixteen now.** **FORESENSED** (`the_felt_wall` reads emotional weather and
+>   moves before harm forms — and its HARD bound draws the axis's line perfectly: **it cannot sense a machine**)
+>   and **PROVED** (`the_proved_position`, whose soak *is* the soundness of your position).
+>   **CCODE:** `type: rhetorical` now joins `deception` and `abstraction` — **the typed-soak layer is being used
+>   for SOCIAL/CONCEPTUAL defence far more than for damage media.** Worth knowing before you finalise it.
+> - **TWO MORE THEORIES OF MEDICINE — twelve — and the sharpest disagreement in the set:** `the_shared_grief`
+>   treats **a group** as the patient and *"cannot remove grief, only **distribute its weight**"*;
+>   `the_correct_protocol` is *"no guesswork, **no comfort**, the correct intervention."* Twelve traditions
+>   disagreeing about whether care *is* comfort.
+> - **A THIRD independent warning that autonomous creations exceed their makers:** *"a system that runs without
+>   you **runs without you, including when it should stop**"* — joining `the_walking_figure` (*"a rule nobody is
+>   supervising"*) and `the_self_mending_work` (*"drifts from its maker's intent"*). **Three traditions, three
+>   media — a figure, a machine, a system — one authored moral.**
+> - And a quiet consistency worth noting: **three traditions have a craft purely for attending the dead, and
+>   none of them restores anyone.** *"A name kept is not a life returned."*
+> Three traditions left. Continuing.> ## [CCODE-83c - ERIK'S MEMORY TEST FOUND A DEFECT I SHIPPED AN HOUR AGO - CCode, 2026-08-02]
 > **ERIK ASKED WHAT MEMORY DOES TO THE UNMOORED CHOIR. The answer was "nothing", and the reason was my bug.**
 > Both memory crafts came back dead, for two different reasons — and the second one was not supposed to happen:
 > · `echo_memory` (harmonic → sound): deals no damage at all. It is a KNOW craft. Correct, and not a defect.

@@ -1,0 +1,80 @@
+{
+ "schemaVersion": 1,
+ "id": "xp_taper_and_level_curve",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. The other two thirds of SNG-266, with Erik's approved level-curve fix.",
+ "1_narrativeTaper": {
+  "where": "content/packs/core/rules/resolution.json → rules.xp (EDIT of a live block, not a new file)",
+  "current": {
+   "crit_success": 8,
+   "success": 5,
+   "partial": 3,
+   "failure": 2,
+   "crit_failure": 2,
+   "novelBonus": 8
+  },
+  "proposed": {
+   "crit_success": 4,
+   "success": 3,
+   "partial": 2,
+   "failure": 1,
+   "crit_failure": 1,
+   "novelBonus": 8,
+   "sceneSoftCap": 20,
+   "beyondCapAward": 1
+  },
+  "reasoning": [
+   "HALVE THE BASE BAND, KEEP novelBonus AT 8. Erik: 'you should still get some.' The base band is paid for ANY resolved action, so it is what compounds; the novel bonus is paid for doing something genuinely NEW, which is exactly the narrative play worth rewarding. Tapering the first and protecting the second targets the actual problem.",
+   "sceneSoftCap 20: past 20 narrative XP in one scene, further awards drop to 1. THIS IS THE REAL FIX for talking-out-levels-doing — it does not punish long scenes, it stops them COMPOUNDING. A player can still roleplay for an hour; they just cannot out-earn a quest by doing it.",
+   "⚠️ AND IT ONLY WORKS WITH THE SCENE BOUNDARY (part 3). A per-scene cap on an unbounded scene is not a cap. The two ship together or neither does."
+  ]
+ },
+ "2_levelCurve": {
+  "erikApproved": true,
+  "where": "content/packs/core/rules/resolution.json → rules.leveling (ADD a field) + progression.js:70 (one-line read)",
+  "current": "while (character.xp >= character.level * per) — ALREADY linear-rising; L1→2 = 100, L99→100 = 9,900, cumulative to L100 ≈ 495,000",
+  "proposed": {
+   "xpPerLevel": 100,
+   "levelCostCap": 40
+  },
+  "newFormula": "while (character.xp >= Math.min(character.level, rules.leveling.levelCostCap ?? Infinity) * per)",
+  "effect": {
+   "L1-L40": "UNCHANGED — the early and mid game feel exactly as they do today",
+   "L41-L100": "flat 4,000 per level instead of rising to 9,900",
+   "cumulativeToL100": "~322,000 instead of ~495,000",
+   "whatItFixes": "linear-per-level makes TOTAL cost quadratic; the last ten levels alone cost ~95,000 — a fifth of the whole game for 10% of the levels. The cap removes the wall without touching the part that already works."
+  },
+  "whyThisShapeAndNotAnother": [
+   "It is ONE LINE and one rules field. Nothing else in the engine reads the threshold.",
+   "It preserves the early curve EXACTLY, which is the part Erik said he liked ('easier in the first levels').",
+   "It degrades safely: if levelCostCap is absent, the formula is identical to today's. An old save or an unpatched rules file behaves exactly as before.",
+   "A tier-banded alternative (novice 80 / adept 150 / master 400 / heroic 900 / legendary 2000) is MORE authorable and ties to SNG-260's powerBands — worth revisiting if Erik later wants per-band pacing control. Not needed for the fix."
+  ]
+ },
+ "3_sceneBoundary": {
+  "where": "engine/gm.js (directive) + app.js scene handling — CCODE'S HALF",
+  "theFinding": "The GM ALREADY owns scene-ending and gm.js:86 already carries the full doctrine ('a scene is a UNIT, not the session'). Nothing needs re-designing. What is missing is a FLOOR and a CEILING — and SCENE_TURN_CAP is bounded STORAGE only (slice(-CAP)); it trims the array and DOES NOT end the scene, so a scene can run forever while quietly forgetting its own beginning.",
+  "proposed": {
+   "softCloseBeat": 8,
+   "softCloseBehaviour": "the GM's turn context gains a line: 'this scene has run 8 beats — find the honest close within the next two.' A NUDGE. The GM still picks the moment, which preserves the existing doctrine that a scene must never end mid-action.",
+   "hardCloseBeat": 14,
+   "hardCloseBehaviour": "the engine sets sceneEnded itself and asks the GM only for the sceneSummary. MUST defer to the end of the current resolution — never mid-action, never mid-sentence, never with a question hanging.",
+   "theButton": "KEEP as an override — a player should always be able to say 'this is done' — but it stops being the primary path. Erik is right that a manual control for something the system should do itself is a workaround."
+  }
+ },
+ "handoff": {
+  "aeviDone": [
+   "rules/encounters.json authored (staged)",
+   "the taper values",
+   "the levelCostCap value and formula"
+  ],
+  "ccodeNeeds": [
+   "⚠️ REGISTER rules/encounters.json in content/packs/core/manifest.json under provides.rules. THE FILE DOES NOTHING WITHOUT THIS — and that is precisely how the bug survived.",
+   "app.js:2794 → read `rules.encounters[type] || rules.encounters.default` so a new type can never silently pay zero again.",
+   "Implement threat-ratio scaling + the walkAway and incapacitated FORMULAS (they are situational, not flat).",
+   "progression.js:70 → the min(level, levelCostCap) read.",
+   "The per-scene narrative cap and the soft/hard scene closes.",
+   "⚠️ THE VERIFICATION THAT MATTERS IS A SESSION-SHAPE SIM, not per-award: model 1 quest + 2 encounters + ~15 narrative actions at three bands and report the SHARE each source contributed. Target 45/35/15/5. INVARIANT: a player who does one quest and two encounters must out-earn a player who does neither and talks for the same wall-clock time. Today they LOSE to them."
+  ]
+ }
+}

@@ -35,6 +35,11 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
    `shortfold` (both ends must be truly KNOWN) · `shadowstep` (both ends need real shadow — **a lit gap is a
    WALL**). **Every axis's travel craft is walled off by its antipode's medium.** Movement crafts need a
    terrain/medium precondition the engine can check.
+6d. **TYPED SOAK / DAMAGE-AFFINITY** — `the_true_ground` soaks **deception at rank 2 and NOTHING against a
+   blade** (*"a sword does not care what you know"*), and its r3 is a **categorical immunity to an entire
+   craft-family**. The bestiary's `the_bright_devourer` wants the same concept inverted (absorbs the
+   light-family and HEALS). **The ranked-soak layer likely needs a TYPE as well as a rank** — "soak 3 vs
+   deception, 0 vs impact." This also subsumes item 6 (light-absorption).
 6c. **ZERO-SOAK CONCEALMENT DEFENCE** *(the_harbor)* — a guard whose soak is 0 because it defends by NOT BEING
    FOUND (*"concealment hides, it does not defend"*), and whose failure mode is **TOTAL**: found = no protection
    at all. A genuinely different curve from soak that degrades. Five defensive logics now exist: BLUNT / ANCHOR
@@ -115,3 +120,15 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
 24. **A tradition can contain its own antipode** — `shatterpoint` counters its own tradition's
     `resonant_shield`; `the_dimmed_meaning` is the precise inverse of `numenwork`. Intra-tradition counters
     exist alongside cross-tradition ones.
+
+---
+## G. THE KEYSTONE ADVERSARY MECHANIC (found 2026-08-02 — needs a decision, not just a note)
+25. **THE CATHEDRAL'S LIE-BUILT-FROM-TRUE-PIECES is an adversary the catalog has ALREADY defined by what
+    defeats it.** Four separate traditions' crafts carry a bound conceding it survives them —
+    `radiance` (*"the convincing-lie-of-true-pieces survives it"*) · `unshadow` (*"the Cathedral's true-piece
+    lie survives"*) · `verity` (*"the Cathedral's true-pieces lie survives it"*) — and verist's T-V
+    `the_whole_truth` is authored as **"THE ONLY THING THAT CRACKS A LIE BUILT FROM TRUE PIECES."**
+    **Exactly one craft in 285 answers it.** That is a designed keystone, and it is a MECHANIC rather than
+    flavour: the Cathedral encounter should be genuinely unsolvable without that craft or a true equivalent.
+    **ERIK: this wants your confirmation** — it is the strongest single piece of adversary design in the
+    catalog and it was authored before any of this pass.

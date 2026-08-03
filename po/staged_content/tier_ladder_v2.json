@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "id": "tier_ladder_v2",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik ratified all three calls: demotion OK · apexes cycle (legends are MADE by lasting) · re-space the weights and add a tier above legendary.",
+ "eriksCalls": {
+  "1_demotion": "YES — authored figures may be re-tiered.",
+  "2_apexes": "NO, apexes should NOT be permanently legendary. Erik: 'tradition apexes can and should have legendary, epics, and heroes that come and go... THE ONES THAT STAY THE LONGEST ARE THE TRUE LEGENDS.' ⚠️ THIS IS THE BIGGEST REFRAME IN THE WHOLE SYSTEM: tier stops being an authored label and becomes an EARNED POSITION. A legend is not someone I wrote as great — it is someone the world failed to kill.",
+  "3_ladder": "YES — re-space, and add a rung ABOVE legendary because legendaries can keep growing. Quantities INVERTED into a real pyramid."
+ },
+ "theLadder": {
+  "note": "Six rungs. Erik: 'a lot of heroes, many epics, a group of legends, only a handful of mythicals.'",
+  "LEGEND_TIER_WEIGHT": {
+   "mythic": 72,
+   "legendary": 50,
+   "epic": 34,
+   "heroic": 22,
+   "notable": 10,
+   "riffraff": 3
+  },
+  "tierRank": {
+   "riffraff": 0,
+   "notable": 1,
+   "heroic": 2,
+   "epic": 3,
+   "legendary": 4,
+   "mythic": 5
+  },
+  "spacingRationale": [
+   "OLD: legendary 50 / epic 45 — a gap of FIVE, so the top two rungs were mechanically the same and CCode's tier-gap mechanic had nothing to read. That was the deeper bug beneath the population problem.",
+   "NEW gaps: 22 / 16 / 12 / 12 / 7 — every step is a real step, and the steps GROW toward the top, so distance from the summit costs more than distance from the floor. A mythic outclasses a legend by more than a legend outclasses an epic.",
+   "`heroic` REPLACES `regional` as rung 2. Erik's word, and CCode's own code comments already assumed it existed: worldtick.js:875 reads 'a legend holds a couple of fronts; an epic one; A HEROIC FIGURE HALF OF ONE.' The budget tiering was written for a rung the ladder did not have.",
+   "⚠️ `regional` MUST STAY MAPPED, not deleted. encounterFrame.js:109 branches on `tier === 'regional'`. Alias regional→heroic at read time; deleting the string breaks live encounter framing."
+  ],
+  "mythicIsSpecial": "Erik: 'some legendaries are beyond 50 — they can get more powerful, right?' YES, and mythic is the rung for it. But mythic should be REACHED, not authored: it is what a legendary becomes after surviving long enough and winning enough. A handful at most, and the world should be able to have ZERO."
+ },
+ "thePyramid": {
+  "note": "Inverted from today. Current: 60 legendary / 5 epic / 1 regional / 0 below.",
+  "target": {
+   "mythic": "0-2 (earned, often none)",
+   "legendary": "~8-10",
+   "epic": "~18-22",
+   "heroic": "~30-36",
+   "notable": "minted",
+   "riffraff": "minted"
+  },
+  "howTheRE-TIERINGDERIVES": "SCOPE OF WANT, measured from the authored text — 18 world-remaking · 25 craft/regional · 19 personal. That maps almost exactly onto legendary/epic/heroic, so the pyramid was already written and only the tier field was wrong. The bottom two rungs CANNOT be re-tiered into — nothing exists there — so notable and riffraff are a MINTING job, which is why CCode is right that minting is now urgent from both ends.",
+  "whatThisFixes": [
+   "ganging-up becomes possible (there is finally someone to gang up WITH)",
+   "the tier-gap mechanic gets gaps to read (2-tier reaches become common instead of nonexistent)",
+   "attrition stops being flat — a heroic figure dying to a legend is the expected case, not a sample of one",
+   "and promotion has somewhere to come FROM"
+  ]
+ },
+ "promotionByDuration": {
+  "note": "⚠️ ERIK'S REFRAME, MADE MECHANICAL — 'the ones that stay the longest are the true legends.'",
+  "principle": "TIER IS EARNED BY SURVIVING, not assigned by the author. A figure who holds their position across enough world-time and enough contests rises a rung.",
+  "proposedRule": {
+   "heroic→epic": "survive ~2 world-years while holding at least one arc care",
+   "epic→legendary": "survive ~4 world-years AND win contests on an arc they drive or defend",
+   "legendary→mythic": "survive ~8 world-years as legendary AND remain unbeaten in epic clashes",
+   "demotion": "⚠️ A WOUNDED FIGURE WHO ABANDONS EVERY FRONT SHOULD FALL A RUNG. Erik's framing implies it: if lasting is what makes a legend, then failing to last should cost the title."
+  },
+  "whyThisIsTheGoodVersion": "It makes the world's history legible. A player returning after 6 world-years can be told WHO ROSE — and the answer will differ per world, because the arcs already diverge. It also gives the death rate meaning: every legend who dies opens a seat somebody climbs into.",
+  "andItAnswERSTheMintingQuestion": "Minted figures enter at riffraff/notable and CLIMB. The population pyramid maintains itself instead of needing to be re-authored."
+ },
+ "openForErik": [
+  "Is `mythic` the right word? Alternatives: `mythal`, `apex`, `the named`. Erik used 'mythicals'.",
+  "Should a MYTHIC figure be world-unique (only one at a time, anywhere) — which would make reaching it a genuine world event rather than a rank?",
+  "Promotion cadence: my 2/4/8 world-year thresholds are a first guess and want CCode's sim to check that they produce a handful of legends rather than sixty again in twenty years."
+ ],
+ "handoff": {
+  "aevi": [
+   "re-tier all 66 by want-scope once Erik confirms the ladder",
+   "author the tier-name aliasing note for regional"
+  ],
+  "ccode": [
+   "LEGEND_TIER_WEIGHT + tierRank updates",
+   "alias regional→heroic at read (encounterFrame.js:109 branches on it)",
+   "promotion-by-duration in worldtick",
+   "and re-run the 6-world sim: the test of done is that the death rate SPREADS across rungs instead of concentrating"
+  ]
+ }
+}

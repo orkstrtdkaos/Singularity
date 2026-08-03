@@ -1,5 +1,32 @@
 # PO ALERT
 
+> ## [CCODE-109 - YES. PLAYERS MAKE A DIFFERENCE, AND THEY ARE THE ONLY THING THAT DOES - CCode, 2026-08-03]
+> **ERIK: *"build the scenarios and play out a player's story... are they able to make a difference?"***
+> `npm run player-impact`. 16 worlds — 4 seeds × party sizes 0/1/3/6 — 720 world-days each, real content,
+> nothing written. **The answer is yes, and it is sharper than that.**
+> >> **ARC STAGE REACHED, by party size:**
+> >> `what wakes beneath: party 0 → stage 1 always · party 1/3/6 → stages 1-4`
+> >> `block bleed: party 0 → 1 always · party 1/3/6 → 1-3`
+> >> `manifestation storm: 0/1/3 → 1 · PARTY OF 6 → 1-4`
+> >> `green schism: 0/1/3 → 1 · PARTY OF 6 → 1-3`
+> **WITHOUT PLAYERS THE WORLD NEVER LEAVES STAGE 1. WITH THEM IT REACHES STAGE 4.** CCODE-108 found eight
+> player-less worlds ending identically; this is why. **The epic census is a STANDOFF — 61 legends pushing to
+> their caps in both directions net out to a world that holds.** The players are not competing with that
+> pressure; they are the only asymmetry in it.
+> **AND THE TWO BIG ARCS NEED A FULL PARTY.** `manifestation storm` and `green schism` do not move for 1 or 3
+> players — only 6. **The valley has arcs that a party can shift and arcs that need the whole valley**, which
+> is a genuinely good shape and, as far as I can tell, nobody designed it: it fell out of the numbers.
+> **CONTESTED, measured:** party 0 → **0** contested arc-instances. Party 1 → 4. Party 3 → 4. Party 6 → 2.
+> A lone player is *visibly* pushing against the valley; a full party is big enough to stop being contested and
+> start simply winning.
+> >> **SO CCODE-108's "every world ends the same" WAS TRUE AND INCOMPLETE, and I want to correct the framing:
+> the world does not have a destiny — it has an EQUILIBRIUM, and the player is the thing that breaks it.**
+> That is a much better answer than the one I gave, and it means "the world lives without the player" and
+> "the player matters" are both true at once, which is exactly the design Erik has been describing.
+> **PROCESS NOTE, third time this session and worth the embarrassment:** my first probe read `a.stage` when
+> the field is `a.stageNum`, and printed a confident column of ZEROS — I nearly reported *"no party size
+> changed anything"*. I caught it because a stage of 0 is impossible (`arcStageNow` floors at 1). **The tell
+> was the data being invalid, not the conclusion being surprising.**
 > ## [CCODE-108 - END OF WORLD: EIGHT WORLDS, TWO YEARS EACH, AND THEY ALL END THE SAME - CCode, 2026-08-03]
 > **ERIK: *"run some end of world simulations... what does this look like in the long game after many distinct
 > world runs?"*** `npm run endgame-world`. 8 independent worlds × 720 world-days, different seeds, real

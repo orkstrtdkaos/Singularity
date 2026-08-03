@@ -1,5 +1,32 @@
 # PO ALERT
 
+> ## [CCODE-93 - THE SPEC TABLE NOW CARRIES PROVENANCE, AND IT FOUND SEVEN DARK PATHS - CCode, 2026-08-03]
+> **ERIK: *"add which test/audit verified each and what the latest result was (trigger rate), on what date and
+> version of the test."*** Done — every §4b row is stamped
+> `verified by tests/world_drive_audit.mjs v1.1.0 on 2026-08-03 — 10 saves / 1788 turns of real play`, and the
+> table gained two columns: **`Wired?`** (proved by the audit) and **`Seen in play`** (MEASURED by probing the
+> real save files). A verification with no provenance is a rumour; `AUDIT_VERSION` bumps whenever the METHOD
+> changes, so a stamped row means what it said when it was written.
+> >> **AND ASKING FOR THE TRIGGER RATE IMMEDIATELY EARNED ITS KEEP. WIRED IS NOT FIRING: 7 of the 17 paths
+> have NO observed footprint across 1,788 turns of real play** — `worldArcsDetail`, `latentArcsDetail`,
+> **`npcErrandsDetail`**, **`wakesDetail`**, `perilNote`, `assignmentsDetail`, **`teacherOfferDetail`**.
+> Every one of them passed the wiring audit. All 17 are triggered, built and carried — and seven of them have
+> never been seen to happen.
+> **THE THREE IN BOLD ARE THE WORLD'S OWN VOICE**: an NPC wanting something from you unprompted, a consequence
+> arriving late, a teacher offering unasked. Those are exactly the paths Erik meant by *"the NPCs and world
+> ticks are supposed to drive the story."* **Not appearing in 1,788 turns is the single most actionable number
+> in the document.**
+> **WHAT I WILL NOT CLAIM:** a probe is a HEURISTIC for a footprint, not the path itself. "No footprint" is a
+> reason to LOOK, never proof a path is dead — `perilNote` is an honest negative (nobody in these saves has
+> used a precursor craft, so it SHOULD be absent). Saying "never fired" from this data would be exactly the
+> overclaim the table exists to prevent, and it is written into the section in those words.
+> **THE AUDIT CAUGHT ITSELF AGAIN, and this one is worth naming:** the observed-footprint pass silently found
+> NOTHING on its first run because `readdirSync` was not imported — and my own try/catch swallowed the error
+> to keep a missing `characters/` directory from breaking a clean checkout. **A defensive catch turned a broken
+> probe into a clean-looking zero.** That is the sweep's own failure mode, in the sweep, twice in two days.
+> NEXT, and it is Erik's call which: the seven dark paths are seven separate questions — a trigger too rare, a
+> condition never met, or a probe too naive. `wakesDetail` and `npcErrandsDetail` are where I would start.
+> ## [CCODE-92 - SPEC 4b: HOW THE WORLD DRIVES THE STORY, GENERATED AND VERIFIED - CCode, 2026-08-03]
 > ## [SNG-267 r4 — CURRENCY MADE CONCRETE. Erik was right; the error was mine.] (Aevi, 2026-08-02)
 > Erik: *"seems good narratively, kind of, but it's very vague… currency also needs a concrete way to track it
 > and convert it. A lot of what you came up with, in terms of surplus, are barterable, but not currency per

@@ -1,5 +1,35 @@
 # PO ALERT
 
+> ## [CCODE-108 - END OF WORLD: EIGHT WORLDS, TWO YEARS EACH, AND THEY ALL END THE SAME - CCode, 2026-08-03]
+> **ERIK: *"run some end of world simulations... what does this look like in the long game after many distinct
+> world runs?"*** `npm run endgame-world`. 8 independent worlds × 720 world-days, different seeds, real
+> content, nothing written to disk. **The headline is not what I expected.**
+> >> **EVERY WORLD ENDS IN THE SAME CONFIGURATION.** Five contested arcs, eight separately-seeded runs:
+> >> `manifestation storm −12 in ALL EIGHT · green schism −6 in ALL EIGHT · what wakes beneath 0 in all eight ·
+> >> block bleed 0 in all eight · the poles pull −35.5 (range −36…−32)`
+> **The world lives without the player — and it lives THE SAME LIFE every time.** The responsiveness from
+> CCODE-106 damps to a FIXED POINT that does not depend on the run: every legend pushes to their cap, the
+> caps are fixed, so the census settles where the census always settles. I built a restoring force and it
+> restored to the same place in all eight worlds.
+> **THE OTHER NUMBERS:**
+> · **legend attrition is ~1%** — mean 0.8 dead of 66 in two years (range 0–2). The world does not empty.
+>   But **nothing MINTS a new legend**, so attrition is one-way: whatever dies is gone from every later
+>   world-year. Erik asked about new NPCs becoming legends — **that path does not exist in the offscreen
+>   world.** Not a defect; a design question, and now a measured one.
+> · **wants resolved: mean 40.6 (range 35–47)** — this is the one thing that DOES vary run to run, which
+>   tells us the variety in the world lives in PEOPLE'S STORIES, not in the arcs.
+> · **news is exactly 20 in every run** — that is `NEWS_CAP` biting, so a two-year world remembers as much as
+>   a two-week one.
+> **ERIK, THE DESIGN QUESTIONS THIS PUTS IN FRONT OF YOU** (all three are yours, none is a bug):
+> · **Should arcs converge?** A world where the poles always pull to −35 is a world with a fixed destiny. If
+>   two playthroughs should end differently, something has to break the symmetry — the obvious candidate is
+>   the PLAYER, who is absent from every one of these runs by construction.
+> · **Should the dead be replaced?** 1% attrition with no minting means the age of legends slowly ends.
+> · **Should a two-year world remember more than 20 news items?**
+> **AND ONE THING I WOULD FLAG AS PROBABLY WRONG:** `the poles pull` sits at **−35** while `EPIC_PUSH_CAP` is
+> **6**. That is the NET of many capped figures all leaning the same way — arithmetically correct, but it means
+> one arc is dominated 6× deeper than any single figure can push, with no opposition able to reach it. If an
+> arc is meant to be contestable, that one is not.
 > ## [CCODE-107 - THE GATE WAS MY HARNESS. EVERYTHING WORKS. - CCode, 2026-08-03]
 > **I said an upstream gate was blocking three things and called it the highest-value bug left. There is no
 > bug. It was my harness, three turns running, and I should have caught it the first time.**

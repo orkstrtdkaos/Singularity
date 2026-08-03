@@ -1,6 +1,33 @@
 # PO ALERT
 
-> ## [CCODE-85 - NPCs HAVE DEEDS NOW (Erik) - CCode, 2026-08-02] the ladder gets a face
+> ## [SNG-263 — HORIZON/HOURKEEPER (19-20 of 27; 202/285)] (Aevi, 2026-08-02)
+> The space/time axis — **the cleanest mechanical distinction in the catalog.** horizon's magnitudes are
+> **DISTANCE**, hourkeeper's are **DURATION**, and nearly every craft pairs across that line: `spanwork`
+> collapses space / `the_shaped_duration` collapses time · `the_kept_distance` stays where the threat isn't /
+> `the_wasted_moment` is gone before it lands · `the_road_ahead` sustains you **moving** / `the_long_watch`
+> sustains you **waiting**. Two traditions solving identical problems in the two dimensions the engine actually
+> has fields for.
+> - **⚠️ THE PAIR'S CAPSTONES ARE THE AXIS'S ARGUMENT — AND THEY LAND ON YOUR OWN VOCABULARY.**
+>   `the_edge_of_the_map` steps into a place **that does not exist until you arrive** (*"the destination is
+>   unfixed until you arrive"* — **the only bound in 285 crafts where the WORLD is incomplete until the craft
+>   resolves**). `the_kept_hour` sees a future so completely that **it binds you to what you have seen.**
+>   **Space's capstone CREATES possibility; time's capstone FORECLOSES it** — and *foreclosure* is your own word
+>   for what evil is. **The axis argues its own ethics without ever naming them.**
+> - **TWO MORE DEFENSIVE LOGICS, both soak 0, and exact antipodes:** **SPACED** (`the_kept_distance` — they
+>   never get to swing) and **UNTIMED** (`the_wasted_moment` — *"the exact move that makes the attack land where
+>   you were"*). **Thirteen logics now, all on one guard shape.**
+> - **TWO MORE THEORIES OF MEDICINE — eight now.** `the_fresh_horizon` heals by **movement** (*"the movement is
+>   the medicine"*) with a genuinely troubling cost: *"it heals by **leaving**, and some things should be stayed
+>   with."* `the_given_time` heals **nothing** and simply buys the hours — *"someone else still has to do the
+>   work."*
+> - **A SECOND EPISTEMIC HARD BOUND:** `hourcraft` r3 — *"you cannot tell a true pre-memory from a **feared**
+>   one"* — alongside `verity`'s *"Verity cannot tell which."* **Two traditions whose highest reads are
+>   explicitly unreliable AT MASTERY, because the limit is knowledge, not skill.** That's exactly what
+>   HARD-classing exists to preserve.
+> - **AN EIGHTH ROUTE TO NON-COERCIVE AUTHORITY:** `the_land_knowledge` commands through **having been there**
+>   (*"authority from knowing ends where your knowing ends"*). Eight traditions, eight distinct **earned**
+>   routes, **zero that permit taking.**
+> Seven traditions left. Continuing.> ## [CCODE-85 - NPCs HAVE DEEDS NOW (Erik) - CCode, 2026-08-02] the ladder gets a face
 > **ERIK: "NPCs should have deeds too" — done.** AEVI's read was exactly right: almost nothing needed
 > building. `reputation.js` was NEVER character-specific — every function in it reads only `X.deeds` — so it
 > could always have carried an NPC's record. What did not exist was **a caller that passed one and a reader

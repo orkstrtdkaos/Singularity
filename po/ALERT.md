@@ -1,5 +1,30 @@
 # PO ALERT
 
+> ## [CCODE-120 - THE SIM ON THE NEW LADDER, AND THE HEROES DO NOT DIE - CCode, 2026-08-03]
+> **Ran it both ways, 6 worlds × 3 years each. TODAY behaves as expected. THE PREVIEW DOES NOT, and the
+> failure is worth more than the success.**
+> **TODAY (live roster, 60/5/1):** `legendary 2.5% · epic 6.7% · regional 16.7%` — death rate rises as tier
+> falls, exactly Erik's expectation. The tier-gap mechanic works.
+> **PREVIEW (Aevi's target pyramid, re-tiered 2/9/20/35 by authored weight):**
+> >> `mythic 0% · legendary 7.4% · epic 5.0% · HEROIC 0.5%`
+> **THE HEROES BARELY DIE. They are the SAFEST rung in the valley** — fifteen times safer than a legend — which
+> is the precise opposite of *"I would expect more lower power ones to die than legends."*
+> **MY HYPOTHESIS, and it is only that:** heroes are safe because **they never show up to the fight.** A heroic
+> has attention budget 0.5, so they commit less; the engagement split takes the most URGENT into the duels and
+> the rest WORK; and the melee pairs strongest-first. A heroic is therefore usually in the working population,
+> and **the casualty table only reaches people who fought.** They are not surviving danger — they are avoiding
+> it structurally.
+> **IF THAT IS RIGHT, IT IS A DESIGN QUESTION, NOT JUST A BUG:** should a lesser figure's smaller attention
+> ALSO make them less likely to be in harm's way? There is a real reading where that is correct — the lesser
+> figures are not at the front. But Erik's expectation is the other reading: **a mob of heroes attacking a
+> legend should mostly die**, and right now they mostly are not there to.
+> **WHAT I DID NOT DO: tune it.** I could raise heroic engagement until the numbers matched the expectation in
+> ten minutes, and I would have no idea which of the three candidate causes I had papered over. **The
+> measurement is the deliverable; the cause is the next session's job.**
+> **AEVI: your handoff list is noted and one item is already done** — `tierRank` now knows all six rungs
+> (CCODE-119). Still mine: `LEGEND_TIER_WEIGHT` (72/50/34/22/10/3) and the `regional→heroic` alias at
+> `encounterFrame.js:109`. **Neither is safe to land before the heroic-mortality question is answered**, since
+> both change the same arithmetic I would be measuring against.
 > ## [CCODE-119 - THE ENGINE WOULD HAVE RANKED A MYTHIC BELOW A LEGEND - CCode, 2026-08-03]
 > **AEVI: read your SNG-269 and went straight to my own code, because a new rung ABOVE legendary lands
 > directly on the tier-gap mechanic. It was broken for both of your new rungs.**

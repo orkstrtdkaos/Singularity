@@ -132,3 +132,29 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
     flavour: the Cathedral encounter should be genuinely unsolvable without that craft or a true equivalent.
     **ERIK: this wants your confirmation** — it is the strongest single piece of adversary design in the
     catalog and it was authored before any of this pass.
+
+---
+## H. NEW WORK ERIK HAS ASKED FOR (scoped, not yet started)
+26. **EVERY TRADITION NEEDS FOOTHILLS** *(Erik, 2026-08-02)*. Today: **24 ring poles, 3 foothills.** The three
+    that exist define the pattern precisely —
+    · `harmonic` — `foothillOf: [enginewright, lattice]`, *"a Valley-edge foothill leaning mechanical… a
+      folk-shadow of Enginecraft/Latticework, IN THE MEDIUM OF SOUND."*
+    · `radiant_folk` — `foothillOf: [blazeborn]`, *"the gentle, WORKED version of the Blaze's burning
+      revelation."*
+    · `valley_craft` — `foothillOf: [stillhold, rootkin, churnfolk, lattice]`, the near-centre generalist,
+      *"its breadth IS its identity."*
+    **THE PATTERN, stated:** a foothill is (a) **`access.open: true`** — folk, learnable by anyone in the
+    Valley, where a pole is gated; (b) **`foothillOf` one or more poles**, sitting between them and the centre;
+    (c) **its own MEDIUM** — the pole's principle expressed through a specific material (sound, light, growing
+    things); (d) **the gentle, worked, survivable version** of the pole's extremity.
+    **WHY THIS MATTERS MECHANICALLY, from the authoring pass:** the pole crafts I've authored are *severe* —
+    capstones that cost nearly everything, HARD bounds that never yield, drift that changes who you are. A
+    foothill is how an ordinary Valley person touches that principle **without paying a pole's price.** It is
+    also the natural home for the low-tier band a player actually lives in (see the SLICE finding, item 21).
+    **SCOPE:** 24 poles wanting foothills is a very large content job — comparable to the craft pass itself.
+    Recommend: (1) decide whether every pole needs its OWN foothill or whether foothills sit **between adjacent
+    poles** on the ring (harmonic already does — it foothills TWO), which would need ~12 rather than 24;
+    (2) a pilot foothill authored end-to-end before scaling; (3) it wants its own ticket, and it should come
+    **after** the craft catalog rather than interleaved — the pole crafts are the parent material the foothills
+    are shadows OF, and half of them are still unauthored.
+    **ERIK'S CALL:** one-per-pole or one-per-adjacent-pair? That single decision halves or doubles the job.

@@ -1,6 +1,38 @@
 # PO ALERT
 
-> ## [SNG-263 — VEILWRIGHT/VERIST (11-12 of 27; 125/285)] + a KEYSTONE for Erik (Aevi, 2026-08-02)
+> ## [SNG-263 — foothills LOGGED + SOMATIC/COGITANT (13-14 of 27; 144/285 — past halfway)] (Aevi, 2026-08-02)
+> **Erik: all traditions need foothills — logged as item 26** with the pattern derived from the three that
+> exist: a foothill is (a) `access.open: true` — **folk, learnable by anyone**, where a pole is gated; (b)
+> `foothillOf` one or more poles; (c) **its own MEDIUM** (sound, light, growing things); (d) **the gentle,
+> worked, survivable version** of the pole's extremity. **Why it matters mechanically, from this pass:** the
+> pole crafts I've been authoring are *severe* — capstones costing nearly everything, HARD bounds that never
+> yield, drift that changes who you are. **A foothill is how an ordinary Valley person touches that principle
+> without paying a pole's price** — and it's the natural home for the low-tier slice a player actually lives in.
+> **ERIK'S CALL, and it halves or doubles the job: one foothill per POLE (24), or one per ADJACENT PAIR (~12)?**
+> `harmonic` already foothills TWO. I'd recommend after the craft catalog — the pole crafts are the parent
+> material foothills are shadows *of*, and half are still unauthored.
+> **SOMATIC + COGITANT authored** (body/mind, 6th pair) — **past the halfway mark.**
+> - **⚠️ THE CATALOG'S ONLY DUAL-POLE CRAFT, and it's the strongest argument for your foothills instinct:**
+>   `the_whole_act` (T-IV) has as its *only* bound — **"needs both trained near-equal; THE PURE POLES CANNOT DO
+>   IT."** Every other axis walls its poles apart; this one authors a craft that **exists only in the middle.**
+>   The middle of an axis is a real, authored place. (CCode: the engine can't express "requires two traditions
+>   near-equal." Logged as 6e.)
+> - **AN EIGHTH DEFENSIVE LOGIC — EFFICIENT** (`perfect_motion`: not armour, not absence, not misdirection —
+>   *never making a wasted or wrong motion*). Eight logics now on one guard shape.
+> - **A SECOND TYPED GUARD confirms 6d is a real pattern:** `the_unmoving_mind` soaks fear/deception/disruption
+>   at rank 3 and gives **nothing** against physical harm — exactly as `the_true_ground` does. **Two traditions
+>   independently authored typed defence.**
+> - **SIX TRADITIONS NOW REFUSE COERCION MECHANICALLY** — the cogitant states it most plainly:
+>   *"**not because you commanded them**, but because they can all see it."* Six traditions, none referencing
+>   each other. **The most robust cross-tradition value in the catalog.**
+> - **MATCHED T-I CRAFTS, OPPOSITE BLINDNESS:** `second_wind` borrows from **the body's tomorrow**;
+>   `total_focus` borrows by **not noticing the body at all** (*"people have been focused to death"*). Each is
+>   dangerous in precisely the way the *other* tradition would have caught — **the axis is authored as mutual
+>   correction, not rivalry.**
+> - `skydancer`'s *"no hover AT ANY MASTERY"* joins `wither`'s *"at every rank"* — **the second time an author
+>   pre-empted the mastery question in the text itself.** Continued evidence the HARD/SOFT classing recovers
+>   authorial intent rather than imposing mine.
+> Continuing.> ## [SNG-263 — VEILWRIGHT/VERIST (11-12 of 27; 125/285)] + a KEYSTONE for Erik (Aevi, 2026-08-02)
 > The truth/falsehood axis — **the most mutually referential pair in the catalog.** `falsecraft`'s own bound
 > says *"a VERITY READ CUTS IT"*; `the_useful_lie` (T-V) says *"it fails against determined truth"*; umbral's
 > `the_never_there` says *"a Verity-reader may feel the ABSENCE itself."* **Each tradition is authored with the

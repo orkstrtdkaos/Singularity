@@ -1,0 +1,123 @@
+{
+ "schemaVersion": 1,
+ "id": "damage_type_map",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Answers CCODE-83's explicit ask: 'that mapping is yours; I have not guessed it.'",
+ "note": "The damage/soak TYPE mapping for the 18 traditions authored so far, plus the bestiary affinities that make it matter. PRINCIPLE: a type is the MEDIUM a craft works in, not its function-family — because that is what an affinity is a relationship TO. A thing that eats light eats it whether it arrives as a lance or a lantern.",
+ "designNotes": [
+  "TYPES ARE MEDIA, NOT FAMILIES. `strike` is not a type — a marcher's blade and a rootkin's thorns are both `strike`, and nothing in the world relates to them the same way. `light`, `decay`, `sound` ARE types because a creature can plausibly be immune to, resist, or FEED ON them.",
+  "MOST TRADITIONS SHOULD HAVE NO TYPE, and that is correct. A marcher hits you with a weapon; that is ordinary force and needs no special relationship. Typing everything would make the mechanic noise. Type only where the world can plausibly have an affinity TO it.",
+  "TYPED SOAK AND AFFINITY ARE DIFFERENT THINGS — CCode kept them apart deliberately and was right. the_true_ground's soak layer is `type: deception` (it answers lies, transparent to a sword). the_bright_devourer's `absorb: light` is a relationship applied BEFORE soak. A ward that only stops one thing is not the same as a body that eats it."
+ ],
+ "traditionTypes": {
+  "radiant": "light",
+  "blazeborn": "light",
+  "umbral": "shadow",
+  "harmonic": "sound",
+  "rootkin": "living",
+  "ashwarden": "decay",
+  "churnfolk": "wild",
+  "lattice": "order",
+  "enginewright": "mechanical",
+  "numinous": "numinous",
+  "veilwright": "deception",
+  "verist": "truth"
+ },
+ "deliberatelyUntyped": {
+  "marcher": "ordinary physical force — the world has no special relationship to a sword",
+  "somatic": "the trained body; force, not a medium",
+  "wright": "made weapons and structures — ordinary force",
+  "cogitant": "precision and insight, not a medium (the_single_stroke is a perfect blow, not an element)",
+  "stillhold": "consequence and presence, not a medium",
+  "unmaker": "⚠️ DELIBERATE AND LOAD-BEARING: unmaking is not a MEDIUM, it is a RELATIONSHIP TO STRUCTURE. the_undoing_word already has its own cross-cutting mechanic (it unmakes wards/seals/pacts — checks item 6f). Giving it a type would let a creature be 'IMMUNE TO UNMAKING', which would break the one craft the catalog authored as the universal answer to bound things."
+ },
+ "perCraftOverrides": {
+  "radiant_lance": "light",
+  "kindle": "light",
+  "radiance": "light",
+  "the_revealing_burn": "light",
+  "the_last_light": "light",
+  "wither": "decay",
+  "palework": "decay",
+  "draw_down": "decay",
+  "the_cut_thread": "decay",
+  "sonic_resonance": "sound",
+  "the_green_claim": "living",
+  "the_wild_flowering": "wild",
+  "scatter": "wild",
+  "dim": "shadow",
+  "the_shadow_work": "shadow"
+ },
+ "bestiaryAffinities": {
+  "the_bright_devourer": {
+   "absorb": [
+    "light"
+   ],
+   "note": "THE AUTHORED SUBVERSION, now mechanically real: radiant and blazeborn crafts HEAL it. The valley's light-workers cannot use their own tradition against it — they must borrow another's. CCode's absorb-cap fix matters here: restored to its own maximum, never inflated past it."
+  },
+  "the_unspooling_worm": {
+   "resist": [
+    "order"
+   ],
+   "vulnerable": [
+    "wild"
+   ],
+   "note": "it degrades structure; lattice's order-crafts feed its nature, churnfolk's chaos is what actually hurts it — an antipode answer authored into the roster."
+  },
+  "churn_revel": {
+   "resist": [
+    "wild"
+   ],
+   "vulnerable": [
+    "order"
+   ],
+   "note": "the exact inverse. I gave it 'ORDER crafts suppress it' when authoring the bodies; this is that, typed."
+  },
+  "the_ashen_wyrm": {
+   "resist": [
+    "light",
+    "decay"
+   ],
+   "note": "soak 9/rank 4 already makes it the endgame; resisting light AND decay means the two commonest damage types are the WRONG answer — which is what an endgame adversary should demand."
+  },
+  "the_unmoored_choir": {
+   "immune": [
+    "physical"
+   ],
+   "vulnerable": [
+    "truth",
+    "numinous"
+   ],
+   "note": "'craft frays, memory loosens, the self blurs' — YOU CANNOT PUNCH UN-BELONGING. Its authored win condition was SHAPE (give it a true fiction); typed, that is truth/numinous."
+  },
+  "the_gearfather": {
+   "resist": [
+    "physical"
+   ],
+   "vulnerable": [
+    "mechanical"
+   ],
+   "note": "a pre-Transition machine: soak 8/rank 3 against force, but an enginewright who UNMAKES ITS DIRECTIVE bypasses it — the authored answer, typed."
+  },
+  "the_bloom_that_hungers": {
+   "vulnerable": [
+    "light",
+    "decay"
+   ],
+   "resist": [
+    "living"
+   ],
+   "note": "it regrows unless burned — typed, light and decay are its answers, and rootkin's living-crafts FEED it."
+  },
+  "glimmerling_swarm": {
+   "vulnerable": [
+    "truth"
+   ],
+   "note": "manifested fiction — 'they wink out like the fiction they are'. A verist read unmakes them; that is what their zero soak was always describing."
+  }
+ },
+ "erikCalls": [
+  "THE KEYSTONE ADVERSARY — CCode is right to route this to you. The Cathedral as `immune` to every type but one is now expressible. His words: 'a strong shape and an UNFORGIVING one.' MY READ: the catalog authored it across FOUR traditions independently, which is a strong signal of intent — BUT a single-key lock is only good design if the key is FINDABLE, and the_whole_truth is a T-V verist capstone. A party with no verist has NO answer at all. RECOMMEND: immune to all but `truth`, PLUS a second non-craft route (evidence, testimony, a witness) so the lock has two keys and neither is a coin-flip on party composition.",
+  "Whether `numinous` and `truth` should be DAMAGE types at all, or ONLY soak/affinity types. They never appear on a damage craft — numenwork and verity deal no damage — so they may want to exist only as things a creature can be VULNERABLE TO. CCode's split (soak `type` vs sheet `affinity`) already supports that distinction cleanly."
+ ]
+}

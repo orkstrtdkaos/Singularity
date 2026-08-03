@@ -1,0 +1,1061 @@
+{
+ "schemaVersion": 1,
+ "id": "peace_violence_axis_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, traditions 17 AND 18 of 27 — STILLHOLD and MARCHER, the peace/violence axis, 8th antipode pair. THE PAIR WITH THE MOST LIVE TENSION IN THE CATALOG, and the reason is structural: both traditions do THE SAME JOB — stop the violence — by opposite means, and each knows the other's answer works. stillhold's the_weight-equivalent is a true word; marcher's the_weight is 'you are simply the more credible force in the room.' Neither is naive. The catalog prices both.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "traditions": {
+  "stillhold": [
+   {
+    "id": "read_the_room",
+    "tier": 1,
+    "functions": [
+     "foresee",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "foresight"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "note": "SOCIAL attribute"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "read what a room is ACTUALLY DOING under what it is SAYING — the alliance forming, the grudge about to speak",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: NAME THE THING EVERYONE IS CAREFULLY NOT SAYING — and know what will happen if it is said",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a read of the mood — half the depth, and nobody notices you looking",
+     "surge": "double the read; KNOWING IT AND SAYING IT ARE DIFFERENT ACTS, and the second is not always right"
+    },
+    "bounds": [
+     {
+      "text": "READS, NOT CALMS — the disciplined mask well",
+      "class": "hard"
+     },
+     {
+      "text": "it reads THE ROOM, NOT THE WORLD — what is decided elsewhere arrives anyway",
+      "class": "hard"
+     },
+     {
+      "text": "KNOWING IT AND SAYING IT ARE DIFFERENT ACTS, and the second is not always right",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Antipode to marcher's read_the_fight, and both are T-I foresight reads of the SAME MOMENT — one reads the social pressure before violence, the other reads the violence's shape once it comes. EIGHTH pair, eighth time the T-I senses carry the axis."
+   },
+   {
+    "id": "calm_word",
+    "tier": 1,
+    "functions": [
+     "bind",
+     "command",
+     "heal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "deescalation",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 2,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "COOL A ROOM off a violence IT HAD ALREADY DECIDED ON — the raised hand comes down, unsure why",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: say THE ONE THING THAT MAKES THE VIOLENCE IMPOSSIBLE — the true word, aimed exactly, that they cannot go past",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "take the heat out — half the effect, and it draws no attention",
+     "surge": "double it; IT COOLS THE HEAT, NOT THE CAUSE"
+    },
+    "bounds": [
+     {
+      "text": "SMALL SCALE at r1; THE SET-ON-BLOOD PASS THROUGH IT",
+      "class": "soft"
+     },
+     {
+      "text": "IT COOLS THE HEAT, NOT THE CAUSE — what made them raise the hand is still there",
+      "class": "hard"
+     },
+     {
+      "text": "YOU MUST ACTUALLY FIND THE TRUE THING — the Stillhold's failures are the times they said the wrong true thing",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "stillcraft",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "reveal",
+     "shield",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "deescalation",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 8,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "deescalation",
+      "delta": "BROKER TRUCES THAT HOLD — agreements weighted by your standing; bind two enemies to a peace NEITHER WANTED but both keep",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "hold a peace AT THE SCALE OF PEOPLES — end a generational feud, STAND A WAR DOWN",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "cool it a little — half the hold, and nobody owes you anything",
+     "surge": "double it; THE WIELDER DRIFTS PEACE-HOT, and peace at all costs becomes its own kind of harm"
+    },
+    "bounds": [
+     {
+      "text": "CANNOT STOP VIOLENCE ALREADY LOOSED",
+      "class": "hard"
+     },
+     {
+      "text": "A TRUCE IS ONLY AS TRUE AS ITS TERMS",
+      "class": "hard"
+     },
+     {
+      "text": "brokering a peace OVER AN INJUSTICE buys time, not peace",
+      "class": "hard"
+     },
+     {
+      "text": "the wielder DRIFTS PEACE-HOT — peace at all costs becomes its own kind of harm",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'Peace at all costs becomes its own kind of harm' — the peace tradition names its own failure mode as sharply as the violence tradition does. Neither pole is the safe one."
+   },
+   {
+    "id": "the_price_shown",
+    "tier": 2,
+    "functions": [
+     "hinder",
+     "reveal"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "reckoning",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 4,
+     "targets": 1,
+     "note": "incapacitating — it stops violence by making the cost undeniable"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "extend to A WHOLE SITUATION — a crowd, a formation, everyone about to participate in something terrible",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: make the reckoning COMPLETE AND LASTING — the person CARRIES it, not a feeling but a settled knowledge they cannot unthink",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "show one cost — half the weight, and it fades",
+     "surge": "double it; A FRIGHTENED CROWD ACTS ON THE SEEING, and you do not control how"
+    },
+    "bounds": [
+     {
+      "text": "ONE PERSON at r1; THOSE WHO HAVE MADE PEACE WITH THE COST ARE UNMOVED",
+      "class": "hard"
+     },
+     {
+      "text": "A FRIGHTENED CROWD ACTS ON THE SEEING — you do not control how",
+      "class": "cost"
+     },
+     {
+      "text": "WHAT YOU SHOW HAS TO BE TRUE — a reckoning assembled from exaggeration fails",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Kin to ashwarden's the_dread (a crowd feels its own ending) — but where the_dread shows DEATH, the_price_shown shows CONSEQUENCE, and its HARD bound is 'what you show has to be TRUE.' Two traditions weaponise foresight of cost; only one is required to be honest about it."
+   },
+   {
+    "id": "the_laid_ground",
+    "tier": 2,
+    "functions": [
+     "make",
+     "sustain",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "peaceGround",
+     "duration",
+     "autonomy"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 3,
+     "soakRank": 1,
+     "duration": 8,
+     "note": "A TENTH DEFENSIVE LOGIC — DISCOURAGED: 'violence becomes HARDER here, not impossible.' It does not block, absorb, evade or pre-empt; it raises the cost of choosing violence at all. soakRank 1 because a determined breaker simply breaks it."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "autonomy",
+      "delta": "INSCRIBE the peace SO IT HOLDS WITHOUT YOU — ward a space against the drift toward violence; it persists after you leave",
+      "from": "r2 grants — a SIXTH autonomy-increment craft"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "a sanctuary that TIME-HOLDS: peace woven into a place so deeply it resists even sustained pressure",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a quiet ground — half the effect, and it costs you nothing to hold",
+     "surge": "double it; MAKING THE GROUND DOES NOT MAKE THE PEACE — people have to want it"
+    },
+    "bounds": [
+     {
+      "text": "THE WARD REQUIRES YOUR PRESENCE at r1",
+      "class": "soft"
+     },
+     {
+      "text": "IT HOLDS AS LONG AS NO ONE ACTIVELY BREAKS IT — a determined breaker breaks it",
+      "class": "hard"
+     },
+     {
+      "text": "MAKING THE GROUND DOES NOT MAKE THE PEACE — people have to want it",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "step_between",
+    "tier": 2,
+    "functions": [
+     "foresee",
+     "move",
+     "shield"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "interposition",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 2,
+     "soakRank": 1,
+     "duration": 2,
+     "targets": 1,
+     "note": "AN ELEVENTH DEFENSIVE LOGIC — INTERPOSED: you take the harm meant for someone else, with your own body. Low soak deliberately: its own bound is 'YOU ARE NOT ARMORED. Some people go through anyway.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "DRAW A LINE WITH YOUR BODY between two SIDES — not just one person but a confrontation; bring a companion into the interposition",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: READ WHERE THE HARM IS GOING AND BE THERE BEFORE IT ARRIVES — sense the moment forming and place yourself at the point",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "step in — half the protection, and you can step back out",
+     "surge": "double it; BEING IN THE WAY IS NOT THE SAME AS STOPPING SOMETHING"
+    },
+    "bounds": [
+     {
+      "text": "YOU ARE NOT ARMORED — SOME PEOPLE GO THROUGH ANYWAY",
+      "class": "hard"
+     },
+     {
+      "text": "TWO PEOPLE ARE NOT A WALL — this is presence and choice, not a barrier",
+      "class": "hard"
+     },
+     {
+      "text": "BEING IN THE WAY IS NOT THE SAME AS STOPPING SOMETHING",
+      "class": "hard"
+     }
+    ],
+    "designNote": "The most morally exposed craft in the catalog: a PHYSICAL-attribute craft in a social tradition, whose entire mechanic is putting your unarmored body where the harm is going. All three bounds are HARD — no mastery makes this safe, ever. That is authorial intent stated three times."
+   },
+   {
+    "id": "safe_ground",
+    "tier": 2,
+    "functions": [
+     "heal",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "sanctuary",
+     "targets",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 24,
+     "targets": 6
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration+targets",
+      "delta": "create LASTING sanctuary — a place that holds its quality WITHOUT CONSTANT TENDING; a larger group can shelter",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: THE GROUND ITSELF SUSTAINS — a sanctuary so established that PEOPLE KNOW TO SEEK IT, that survivors find their way to it",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a night's shelter — half the comfort, and it asks nothing of you",
+     "surge": "double it; INSTITUTIONS REQUIRE TENDING — what the Stillhold builds, others must keep"
+    },
+    "bounds": [
+     {
+      "text": "only as safe as THE SURROUNDING WORLD allows",
+      "class": "hard"
+     },
+     {
+      "text": "the sanctuary's quality DEPENDS ON IT REMAINING GENUINELY SAFE — one betrayal ends it",
+      "class": "hard"
+     },
+     {
+      "text": "INSTITUTIONS REQUIRE TENDING — what the Stillhold builds, others must keep",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "broker_truce",
+    "tier": 3,
+    "functions": [
+     "bind",
+     "restore",
+     "sustain"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "bindStrength",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 720
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "bindStrength",
+      "delta": "a truce BOUND TO SOMETHING BOTH SIDES ACTUALLY VALUE, not merely agreed to",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: bind a peace SO WELL MADE THAT BREAKING IT COSTS MORE THAN THE WAR WOULD — and both sides can SEE it",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a working truce — half the durability, and it can be revisited",
+     "surge": "double it; A TRUCE HOLDS UNTIL ONE SIDE'S NEED OUTGROWS WHAT IT WAS BOUND TO"
+    },
+    "bounds": [
+     {
+      "text": "ONLY AS TRUE AS ITS TERMS — injustice buried buys time, not peace",
+      "class": "hard"
+     },
+     {
+      "text": "A TRUCE HOLDS UNTIL ONE SIDE'S NEED OUTGROWS WHAT IT WAS BOUND TO",
+      "class": "hard"
+     },
+     {
+      "text": "YOU MUST FIND THE THING THEY BOTH VALUE — where no such thing exists, there is no truce to broker",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "the_held_breath",
+    "tier": 4,
+    "functions": [
+     "bind",
+     "resist",
+     "shield"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "standoff",
+     "duration",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "soak": 5,
+     "soakRank": 2,
+     "duration": 2,
+     "targets": 6,
+     "note": "T-IV. 'Hold a razor's-edge standoff open — MAXIMUM THREAT, MAXIMUM RESTRAINT — by sheer presence.' Note the bestiary references this by name: stillcraft r3 'keep a Held Breath from letting out.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration+targets",
+      "delta": "hold the edge ACROSS MANY rather than a few, and LONG ENOUGH FOR SOMETHING TO ACTUALLY CHANGE INSIDE IT — words exchanged, a mind altered",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold it briefly — half the duration, and letting go is safe",
+     "surge": "double it; IT HOLDS, IT DOES NOT END — and ONE SLIP AND IT LOOSES"
+    },
+    "bounds": [
+     {
+      "text": "IT HOLDS, DOESN'T END — nothing is resolved by the holding",
+      "class": "hard"
+     },
+     {
+      "text": "EXHAUSTING",
+      "class": "cost"
+     },
+     {
+      "text": "ONE SLIP AND IT LOOSES",
+      "class": "hard"
+     }
+    ],
+    "designNote": "The pair's thesis craft, and the perfect counterpart to marcher's the_stand: both hold a line at T-II/T-IV, one by BEING THE MORE CREDIBLE VIOLENCE and one by holding maximum threat and maximum restraint in the same instant. the_held_breath does not win — it buys the room the time to change its mind. That is the peace pole's entire argument, mechanised."
+   }
+  ],
+  "marcher": [
+   {
+    "id": "read_the_fight",
+    "tier": 1,
+    "functions": [
+     "foresee",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "foresight",
+     "perceptionDepth"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "note": "PHYSICAL attribute"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "read EVERY FIGHTER AT ONCE — who is committed, who is looking for the door, WHERE THE LINE WILL FAIL FIRST",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "foresight",
+      "delta": "SPECIAL: see the fight's shape BEFORE IT TAKES IT — where this ends, and the two or three ways it could end otherwise",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a glance at the field — half the read, instantly",
+     "surge": "double it; SEEING THE END DOES NOT MEAN YOU CAN CHOOSE IT"
+    },
+    "bounds": [
+     {
+      "text": "READS, NOT WINS — the truly wild are harder to call",
+      "class": "hard"
+     },
+     {
+      "text": "READING THE FIGHT IS NOT SURVIVING IT",
+      "class": "hard"
+     },
+     {
+      "text": "SEEING THE END DOES NOT MEAN YOU CAN CHOOSE IT",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "disarm",
+    "tier": 1,
+    "functions": [
+     "break",
+     "hinder"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "disable",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 2,
+     "targets": 1,
+     "note": "incapacitating — the tradition's non-lethal core"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "disable",
+      "delta": "TAKE THE WEAPON RATHER THAN THE LIFE — cleanly, from a committed strike, WITHOUT OPENING YOURSELF",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: END A FIGHT by taking everything it needed to continue — THE WEAPON, THE FOOTING, THE WILL, in one motion",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "take the weapon — half the effect, and you stay covered",
+     "surge": "double it; AN EMPTIED HAND IS NOT AN ENDED FIGHT"
+    },
+    "bounds": [
+     {
+      "text": "ONE FOE at r1; THE DESPERATE KEEP COMING",
+      "class": "soft"
+     },
+     {
+      "text": "AN EMPTIED HAND IS NOT AN ENDED FIGHT",
+      "class": "hard"
+     },
+     {
+      "text": "IT ENDS THE FIGHT, NOT THE ENMITY — what you disarm today comes back",
+      "class": "cost"
+     }
+    ],
+    "designNote": "The violence tradition's T-I craft is a NON-LETHAL one, and its stated preference is 'take the weapon rather than the life.' Like unmaker's ruinwork, this is the line that keeps the pole from being a villain-tradition."
+   },
+   {
+    "id": "the_edge",
+    "tier": 2,
+    "functions": [
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "targets"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.02,
+     "note": "lethal. The tradition's pure strike-craft — and the only pure single-function craft in either tradition."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "FIGHT MANY, fight cornered, fight wounded AND KEEP THE DISCIPLINE; disarm and disable WITHOUT KILLING WHEN YOU CHOOSE",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: meet EVEN THE GREAT AND THE MANY; end a threat AT THE SCALE OF A WARBAND",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a measured strike — half the force, and it leaves them able to walk away",
+     "surge": "double it; EVERY USE OF THE EDGE WRITES ON YOU"
+    },
+    "bounds": [
+     {
+      "text": "FORCE IS FORCE — it makes enemies and consequences",
+      "class": "hard"
+     },
+     {
+      "text": "THE CALM CAN SLIP",
+      "class": "soft"
+     },
+     {
+      "text": "EVERY USE OF THE EDGE WRITES ON YOU",
+      "class": "cost"
+     },
+     {
+      "text": "the wielder DRIFTS VIOLENCE-HOT — the Ender who forgets peace is what that becomes",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_stand",
+    "tier": 2,
+    "functions": [
+     "resist",
+     "shield",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "soak",
+     "duration",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "soak": 5,
+     "soakRank": 2,
+     "duration": 4,
+     "targets": 1,
+     "note": "THE CATALOG'S PUREST 'BLUNT' GUARD — high soak, ranked, and it simply does not move. Counterpart to stillhold's the_held_breath."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "HOLD A DOORWAY, A BRIDGE, A BREACH — against NUMBERS, for longer than a body should",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: THE LINE DOES NOT BREAK WHILE YOU ARE ON IT — others RALLY to it; it becomes THE FACT THE FIGHT BENDS AROUND",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold a moment — half the soak, and you can still move after",
+     "surge": "double the stand; IT BENDS AROUND YOU — INCLUDING EVERYTHING AIMED AT YOU"
+    },
+    "bounds": [
+     {
+      "text": "HOLDS, DOESN'T ADVANCE — overwhelming force still breaks through",
+      "class": "hard"
+     },
+     {
+      "text": "HOLDING IS NOT WINNING — the line you hold is still a line you are stuck on",
+      "class": "hard"
+     },
+     {
+      "text": "IT BENDS AROUND YOU — INCLUDING EVERYTHING AIMED AT YOU",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "soldiers_hand",
+    "tier": 2,
+    "functions": [
+     "empower",
+     "heal",
+     "reveal"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "healing",
+     "targets"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 1,
+     "targets": 1,
+     "note": "A SIXTH THEORY OF MEDICINE — BATTLEFIELD TRIAGE: it does not mend, it keeps you FUNCTIONAL. Its own bound: 'a wound bound in a fight is bound WRONG — it holds, and it costs later.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "keep TWO people functional through a sustained engagement; read a companion's condition in a glance AND ACT CORRECTLY",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "keep A GROUP fighting PAST WHAT THEY SHOULD SURVIVE; bring a companion back from the edge and PUT THEM WHERE THEY ARE NEEDED",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "patch it — half the effect, and it is bound properly",
+     "surge": "double it; HASTE COSTS — a wound bound in a fight is bound WRONG"
+    },
+    "bounds": [
+     {
+      "text": "HASTE COSTS — a wound bound in a fight is BOUND WRONG; it holds, and it costs later",
+      "class": "hard"
+     },
+     {
+      "text": "YOU CANNOT HEAL WHAT WAS NEVER WHOLE",
+      "class": "hard"
+     },
+     {
+      "text": "this is ACUTE PERFORMANCE IN A CRISIS, not chronic endurance",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A SIXTH THEORY OF MEDICINE: radiant BURNS CLEAN, rootkin RESTORES THE DESIGN, umbral uses DARKNESS, veilwright REFRAMES WITHOUT LYING, unmaker HEALS BY REMOVAL, and marcher KEEPS YOU FUNCTIONAL AND CHARGES YOU LATER. Six traditions, six incompatible theories of what healing IS — and marcher's is the only one that openly does it WRONG on purpose because the fight is now."
+   },
+   {
+    "id": "whats_at_hand",
+    "tier": 2,
+    "functions": [
+     "make",
+     "shield",
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "improvisation"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.02,
+     "variance": 3,
+     "note": "damaging. variance 3 because improvised tools are crude — 'what you make is crude and temporary.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "improvisation",
+      "delta": "improvise MULTIPLE tools at once; make something that will LAST THE WHOLE ENGAGEMENT, not just the opening blow",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: turn A WHOLE ENVIRONMENT INTO AN ARMORY; improvise something with LASTING utility — a barricade that holds, a sealed door",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "grab something — half the tool, and it is ready now",
+     "surge": "double it; YOUR TOOLS STILL BEAR THE MARK OF IMPROVISATION"
+    },
+    "bounds": [
+     {
+      "text": "ONE TOOL AT A TIME at r1; what you make is CRUDE AND TEMPORARY",
+      "class": "soft"
+     },
+     {
+      "text": "your tools BEAR THE MARK OF IMPROVISATION — anyone who looks can tell",
+      "class": "cost"
+     },
+     {
+      "text": "THE MARCHER MAKES WEAPONS, NOT WONDERS",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Direct kin to wright's the_weapon_at_hand — same idea, different tradition, and the bounds distinguish them precisely: the wright's is 'one that will not break, will land, and will hurt'; the marcher's is 'CRUDE AND TEMPORARY… weapons, not wonders.' The maker makes a good weapon; the fighter makes a weapon good enough for now."
+   },
+   {
+    "id": "the_weight",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "command"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "authority",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 4,
+     "scope": 2,
+     "note": "SOCIAL attribute"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "authority",
+      "delta": "PROACTIVE extraction in a deliberate context — interrogation, negotiation, a formal demand. YOU ARE MAKING SOMEONE DECIDE.",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "stop violence AT SCALE — a riot, a mob, a war about to tip. NOT PEACE-CRAFT: 'you are simply the more credible force in the room'",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "let them read you — half the weight, and it stays deniable",
+     "surge": "double it; STOPPING THINGS WITH WEIGHT ALONE TEACHES THE WORLD THAT WEIGHT IS WHAT WORKS"
+    },
+    "bounds": [
+     {
+      "text": "it works IN THE MOMENT violence is still a choice — past that point it is nothing",
+      "class": "hard"
+     },
+     {
+      "text": "COMPLIANCE IS NOT CONSENT — the agreement holds as long as the weight does",
+      "class": "hard"
+     },
+     {
+      "text": "STOPPING THINGS WITH WEIGHT ALONE TEACHES THE WORLD THAT WEIGHT IS WHAT WORKS",
+      "class": "cost"
+     }
+    ],
+    "designNote": "⚠️ THE AXIS'S ENTIRE ARGUMENT, IN ONE CRAFT. the_weight r3 does the SAME JOB as stillcraft r3 — stop a war — and says so explicitly: 'NOT PEACE-CRAFT; you are simply the more credible force in the room.' And the catalog prices it exactly: 'compliance is not consent' and 'teaches the world that weight is what works.' The second coercion-embracing craft (after the_demonstrated_end), priced the same way. The catalog's consistency here is remarkable."
+   },
+   {
+    "id": "the_advance",
+    "tier": 2,
+    "functions": [
+     "move"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "control",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 6,
+     "push": 2,
+     "magnitude": 4,
+     "duration": 3,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "SHAPE WHERE OTHERS GO — force opponents into positions they did not choose; move a companion through a fight",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: CONTROL A FULL FIELD — opponents find themselves in positions they did not choose while you stand where you meant to",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a step with intent — half the control, and it costs nothing",
+     "surge": "double it; THE ADVANCE ASSUMES A FIGHT, and assuming a fight is how you get one"
+    },
+    "bounds": [
+     {
+      "text": "YOUR POSITIONING ONLY at r1",
+      "class": "soft"
+     },
+     {
+      "text": "two people's movement at once DIVIDES ATTENTION",
+      "class": "soft"
+     },
+     {
+      "text": "the wielder DRIFTS VIOLENCE-HOT — THE ADVANCE ASSUMES A FIGHT",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "long_road",
+    "tier": 2,
+    "functions": [
+     "empower",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "targets",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 72,
+     "targets": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "sustain A COMPANION through difficult conditions; SET A MARCH-PACE a group can follow and maintain",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "sustain A FULL GROUP across days; OUTLAST an opponent not by being stronger but by still being there",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "pace it — half the relief, and it asks nothing of the group",
+     "surge": "double it; OUTLASTING REQUIRES THAT SOMETHING IS OVER EVENTUALLY"
+    },
+    "bounds": [
+     {
+      "text": "NOT FOR ACUTE CRISIS — this is days, not moments",
+      "class": "hard"
+     },
+     {
+      "text": "you cannot sustain everyone indefinitely; THE MARCH-PACE IS A COMPROMISE",
+      "class": "hard"
+     },
+     {
+      "text": "OUTLASTING REQUIRES THAT SOMETHING IS OVER EVENTUALLY",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "last_form",
+    "tier": 5,
+    "functions": [
+     "reveal",
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 5,
+      "d": 6
+     },
+     "plus": 6,
+     "marginFloorPer": 0.04,
+     "targets": 1,
+     "note": "T-V capstone, damaging. Like cogitant's the_single_stroke, the highest marginFloorPer band: this craft IS the decisive read."
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: END A FORMAL DUEL IN A SINGLE, UNDENIABLE EXCHANGE — you have read them FULLY and answer PERFECTLY. The capstone is a KIND (a duel resolved by complete reading) at near-total cost.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a half-committed last form is an ordinary exchange, and ordinary exchanges do not end duels.",
+     "surge": "REFUSED — it is already everything you have read and everything you can answer with."
+    },
+    "bounds": [
+     {
+      "text": "ONLY AGAINST ONE COMMITTED OPPONENT",
+      "class": "hard"
+     },
+     {
+      "text": "A FOE WHO REFUSES THE FORM IS OUTSIDE IT ENTIRELY",
+      "class": "hard"
+     }
+    ],
+    "designNote": "FIFTEENTH capstone, identical register — and note the kinship with cogitant's the_single_stroke (read a contest to its one decisive instant). Two traditions, two capstones, the same insight: the highest expression of a fighting art is SEEING, not striking. And both are defeated by an opponent who refuses to give them a decisive instant."
+   }
+  ]
+ },
+ "passFindings": [
+  "THE PAIR WITH THE MOST LIVE TENSION, and it is structural: BOTH TRADITIONS DO THE SAME JOB — stop the violence — by opposite means, and the catalog makes them say so. marcher's the_weight r3 stops a war and states plainly 'NOT PEACE-CRAFT; you are simply THE MORE CREDIBLE FORCE IN THE ROOM'; stillhold's stillcraft r3 stops the same war by holding a peace. Neither is naive and the catalog prices both.",
+  "⚠️ THE AXIS'S ARGUMENT IS FULLY MECHANISED, and consistently: the_weight is the SECOND coercion-embracing craft (after unmaker's the_demonstrated_end), and it is priced identically — 'COMPLIANCE IS NOT CONSENT' and 'STOPPING THINGS WITH WEIGHT ALONE TEACHES THE WORLD THAT WEIGHT IS WHAT WORKS'. Seven traditions refuse coercion; two embrace it; and every one of the two pays a named, authored cost. The catalog is not squeamish — it is consistent.",
+  "TWO MORE DEFENSIVE LOGICS, taking the total to ELEVEN: DISCOURAGED (the_laid_ground — 'violence becomes HARDER here, not impossible'; it raises the cost of choosing violence rather than stopping it) and INTERPOSED (step_between — you put your unarmored body where the harm is going). Full set: BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND / MISDIRECTED / TYPED-IMMUNITY / EFFICIENT / PRE-EMPTED / DISCOURAGED / INTERPOSED.",
+  "step_between IS THE MOST MORALLY EXPOSED CRAFT IN THE CATALOG: a PHYSICAL-attribute craft inside a social tradition whose entire mechanic is putting your unarmored body between harm and someone else — and ALL THREE of its bounds are HARD. 'You are not armored. Some people go through anyway.' No mastery ever makes it safe. That is authorial intent stated three times over.",
+  "A SIXTH THEORY OF MEDICINE, and the only one that is deliberately WRONG: soldiers_hand keeps you FUNCTIONAL rather than mending you — 'a wound bound in a fight is BOUND WRONG; it holds, and it costs later.' Six traditions, six incompatible theories of what healing is, and marcher's openly trades tomorrow for the next ten minutes because the fight is NOW.",
+  "BOTH POLES LEAD WITH A NON-LETHAL CRAFT. marcher's T-I is disarm — 'TAKE THE WEAPON RATHER THAN THE LIFE' — exactly as unmaker's ruinwork r3 is 'end a thing WELL'. Across three destructive traditions (unmaker, ashwarden, marcher) the catalog consistently makes the entry-level craft the RESTRAINED one. That is a deliberate authorial pattern.",
+  "TWO CAPSTONES, ONE INSIGHT: marcher's last_form ('end a duel in a single undeniable exchange — you have READ them fully') and cogitant's the_single_stroke ('read a contest to its ONE DECISIVE INSTANT'). Two unrelated traditions independently conclude that the highest expression of a fighting art is SEEING, not striking — and both are defeated by an opponent who refuses to offer a decisive instant."
+ ]
+}

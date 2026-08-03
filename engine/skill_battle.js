@@ -831,9 +831,20 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       //    because absorbing light is not thicker skin, it is a different relationship to it.
       // ABSORB is the one that changes the record's shape: the blow HEALS its target, so it is reported as a
       // NEGATIVE amount with `absorbed` set, rather than quietly becoming zero and reading as a miss.
-      // CCODE-83b: untyped harm still has a KIND, or an affinity naming a type nothing produces can never
-      // fire. `the_unmoored_choir` is authored `physical: immune`, which plainly means immune to blades.
-      const dmgType = winDecl.damageType || resolvedDamageType(winDecl, cmCfg) || (sb.damageTypes || {}).untypedIs || null;
+      // CCODE-83c — UNTYPED-BY-NATURE IS NOT UNTYPED-YET, and conflating them was a real defect.
+      //
+      // `the_unmoored_choir` is authored `physical: immune`, plainly meaning immune to blades, so untyped harm
+      // became physical. But Erik asked what MEMORY does to it, and the answer exposed the blunder: that
+      // fallback typed 15 UNMAPPED TRADITIONS as physical too — `logos` (syllogist), `the_grief_strike`
+      // (threnodist), `noesis` (cogitant). A choir immune to blades is not immune to GRIEF, and arguably grief
+      // is what it is MOST open to. Half the harm catalog was bouncing off it for no authored reason.
+      //
+      // So the fallback applies only to harm with NO TRADITION AT ALL — a sword, a thrown rock, bare hands.
+      // A craft whose tradition simply has not been typed yet is UNDECIDED, not mundane, and stays untyped
+      // until someone decides: the same absent-is-not-zero rule the rest of this engine runs on.
+      const mundane = !(winDecl.tradition || winDecl.powerSystem);
+      const dmgType = winDecl.damageType || resolvedDamageType(winDecl, cmCfg)
+        || (mundane ? ((sb.damageTypes || {}).untypedIs || null) : null);
       const aff = affinityOf(targetSheet, dmgType, sb);
       const acfg = sb.damageTypes || {};
       if (aff === "immune") hit = 0;

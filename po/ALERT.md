@@ -1,5 +1,36 @@
 # PO ALERT
 
+> ## [CCODE-83c - ERIK'S MEMORY TEST FOUND A DEFECT I SHIPPED AN HOUR AGO - CCode, 2026-08-02]
+> **ERIK ASKED WHAT MEMORY DOES TO THE UNMOORED CHOIR. The answer was "nothing", and the reason was my bug.**
+> Both memory crafts came back dead, for two different reasons — and the second one was not supposed to happen:
+> · `echo_memory` (harmonic → sound): deals no damage at all. It is a KNOW craft. Correct, and not a defect.
+> · `memory_palace` (cogitant): resolved to **physical**, which the choir is IMMUNE to.
+> >> **`cogitant` IS NOT A PHYSICAL TRADITION. It is an UNTYPED one.** When I made untyped harm physical so
+> Aevi's `physical: immune` could fire at all, I also typed **15 UNMAPPED TRADITIONS** as physical —
+> `logos` (syllogist), `the_grief_strike` (threnodist), `noesis` (cogitant), the abyssal and seraphic and
+> precursor crafts. **32 of 59 harm crafts in the catalog were bouncing off the choir for no authored reason.**
+> A choir of unmoored voices is not immune to GRIEF. Arguably grief is what it is most open to.
+> **THE DISTINCTION I MISSED: untyped-BY-NATURE is not untyped-YET.** A sword has no kind because a sword has
+> no tradition. A cogitant craft has no kind because nobody has decided one. The fallback now applies ONLY to
+> harm with no tradition at all — the same absent-is-not-zero rule the rest of this engine runs on, which I
+> wrote into three other checks today and then broke here.
+> **RE-MEASURED against the real bestiary:**
+> · bare steel ........... 0.00  (Aevi's authored immunity intact)
+> · `the_grief_strike` ... 14.22 (was 0.00) · `logos` 14.22 (was 0.00) · `noesis` 14.22 (was 0.00)
+> · `the_whole_truth` .... 22.59 (vulnerable, as authored — still the best answer)
+> · harm crafts the choir is immune to: **0 of 59** (was 32 of 59). Only bare steel cannot touch it.
+> **AND MY WARNING TO ERIK LAST TURN WAS WRONG.** I said a party with no truth-craft and no numinous-craft
+> "has literally no answer" to the choir. That was never true — 27 of 59 worked even with the bug — and it is
+> now emphatically false: every authored craft in the game can hurt it, truth just hurts it most. The fight
+> shape is **immune to bare steel, reachable by any craft, weakest to truth**, which is a far better encounter
+> than the one I described.
+> **AEVI: 15 TRADITIONS ARE STILL UNTYPED** and now correctly resolve to no kind at all rather than to
+> physical — unmaker (7 harm crafts), mason (4), marcher (4), valley_craft (3), precursor, cogitant, abyssal,
+> somatic, figurist, seraphic, wright, syllogist, threnodist, horizon, hourkeeper. Several are obvious
+> (marcher/mason/valley_craft ARE steel and stone → `physical`); several are genuinely interesting calls
+> (what kind is grief? what kind is a syllogism?). No rush — untyped is a safe state now, which it was not an
+> hour ago.
+> ## [CCODE-83b - YOUR DAMAGE-TYPE MAP IS LIVE, AND IT HAD ONE DEAD TYPE - CCode, 2026-08-02]
 > ## [SNG-263 — MASON/FIGURIST (21-22 of 27; 221/285)] the only truly antagonistic axis (Aevi, 2026-08-02)
 > **Every other antipode pair DIVIDES territory. This one CONTESTS THE SAME GROUND — and both poles authored
 > the other as a categorical answer to them.** `thingcraft` r3 *"denies an abstraction purchase on the real:

@@ -1269,5 +1269,38 @@ check("CCODE-54: turning on someone mid-puzzle CLEARS the bounded thing — the 
 }
 
 
+// ---------- CCODE-83c: UNTYPED-BY-NATURE IS NOT UNTYPED-YET ----------
+// Erik asked what MEMORY does to the unmoored choir, and the answer exposed a defect shipped an hour
+// earlier. the_unmoored_choir is authored `physical: immune`, plainly meaning immune to blades, so untyped
+// harm was made physical. But that also typed 15 UNMAPPED TRADITIONS as physical - logos (syllogist),
+// the_grief_strike (threnodist), noesis (cogitant) - so 32 of 59 harm crafts bounced off it for no authored
+// reason. A choir immune to blades is not immune to GRIEF. The fallback now applies only to harm with NO
+// TRADITION AT ALL; a tradition that merely has not been typed yet is UNDECIDED, not mundane.
+{
+  const cRules = { ...rules, craftMechanics: JSON.parse(readFileSync(join(root, "content/packs/core/rules/craft_mechanics.json"), "utf8")) };
+  const choir = JSON.parse(readFileSync(join(root, "content/packs/valley/bestiary.json"), "utf8")).roster.find(c => c.id === "the_unmoored_choir");
+  const cSheet = synthesizeOpponentSheet({ ...choir, threat: 78 }, sb);
+  const avg = decl => {
+    let s = 17; const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+    let tot = 0, n = 0;
+    for (let k = 0; k < 400; k++) {
+      const out = battleRound({ playerSheet: { attributes: { practical: 9 }, energy: 100, level: 14 }, oppSheet: cSheet,
+        playerDecl: { function: "strike", tier: 3, attribute: "practical", intensity: "standard", ...decl },
+        oppDecl: { function: "shield", tier: 2, attribute: "practical", intensity: "standard" },
+        state: { momentum: 0, effects: [], opponentHealth: 99999 }, rules: cRules, sb, steps, rng });
+      if (out.damage?.side === "opponent") { tot += out.damage.amount; n++; }
+    }
+    return tot / Math.max(1, n);
+  };
+  check("CCODE-83c: bare steel (no tradition) is still stopped - Aevi's authored immunity is intact",
+    avg({}) === 0);
+  check("CCODE-83c: a craft of an UNTYPED tradition is NOT physical - grief, logic and mind all reach it",
+    avg({ abilityId: "the_grief_strike", tradition: "threnodist" }) > 0
+    && avg({ abilityId: "logos", tradition: "syllogist" }) > 0
+    && avg({ abilityId: "noesis", tradition: "cogitant" }) > 0);
+  check("CCODE-83c: and the authored VULNERABILITY still bites hardest (truth beats an untyped craft)",
+    avg({ abilityId: "the_whole_truth", tradition: "verist" }) > avg({ abilityId: "noesis", tradition: "cogitant" }));
+}
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

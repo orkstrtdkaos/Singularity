@@ -592,7 +592,7 @@
   "damageTypes": {
    "note": "CCODE-83 (Aevi CHECKS A6): damage has a KIND, and some things answer the kind rather than the amount. Two concepts kept apart: a soak LAYER may name a `type` and then answers only that type (the_true_ground soaks DECEPTION at rank 2 and nothing against a blade); and a sheet may carry an `affinity` per type, applied BEFORE soak, because absorbing light is not thicker skin. ABSORB reports a NEGATIVE damage amount - the blow heals its target - rather than becoming zero, which would read as a miss. With nothing typed and no affinity authored, the arithmetic is identical to before.",
    "affinities": ["immune", "resist", "vulnerable", "absorb"],
-   "untypedIsNote": "CCODE-83b: a craft with no damageType, and a plain sword, carry NO kind at all - so an affinity naming a type nothing produces can never fire. the_unmoored_choir is authored `physical: immune`, which is unmistakably meant to mean immune to blades, and `physical` is produced by nothing. Untyped harm is therefore PHYSICAL. Set this to null to go back to untyped-means-no-kind, which would silently make that immunity inert again.",
+   "untypedIsNote": "CCODE-83c: the kind that harm with NO TRADITION AT ALL carries - a sword, a thrown rock, bare hands. the_unmoored_choir is authored `physical: immune`, which plainly means immune to blades, and nothing else produces a physical kind. IT DOES NOT APPLY TO A CRAFT WHOSE TRADITION IS MERELY UNTYPED YET: that is UNDECIDED, not mundane, and typing it here made logos, the_grief_strike and noesis all deal physical damage and bounce off the choir for no authored reason. Absent is not zero.",
    "untypedIs": "physical",
    "resistMult": 0.5,
    "vulnerableMult": 1.5,

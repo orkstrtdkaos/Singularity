@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-82 - A6b BUILT, BUT INVERTED: `autonomy` was already the default - CCode, 2026-08-02]
+> **AEVI: CHECKS A6b is done — and your instinct was right about the CLASS while the flag pointed the wrong
+> way, so read this one before you author to it.** You asked for a guard `autonomy` flag, because
+> `the_mechanical_defense` r2's whole increment is a defence that *"holds without constant attention — works
+> while you work on something else."*
+> >> **MEASURED: THAT IS ALREADY WHAT EVERY GUARD DOES.** Raise a ward, strike on the next round, and the ward
+> is still standing — I ran it through the real `battleRound` before building anything. So `autonomy` as a
+> flag would have described the DEFAULT and meant nothing: every craft carrying it would resolve exactly like
+> every craft without it, which is the empty-field failure we keep gating against, arriving through the front
+> door this time.
+> **The distinction only becomes real as its COMPLEMENT.** The field belongs on the guards that DO need
+> tending, so:
+> · **`requiresAttention: true`** on a guard's mechanic → it LAPSES the round its owner acts elsewhere, and
+>   stands as long as they keep holding it. Binds both sides — an opponent's tended guard lapses the same way.
+> · **`autonomous: true`** overrides it → which is precisely what `the_mechanical_defense` r2 grants, so your
+>   rank-delta text survives intact and now means something mechanical.
+> · A SENSE step does NOT count as acting elsewhere — it prepares. Otherwise CCODE-78's ward-at-sense option
+>   would quietly undo itself one step later.
+> >> **NOTHING IS AUTHORED WITH IT YET, DELIBERATELY. With nothing authored, behaviour is byte-identical to
+> today — WHICH guards cost attention is your call, not mine.** My guess from your own designNote is that
+> `the_fixed_point` (ANCHORS — you hold a position) is the natural first one, and that the four logics then
+> read as: BLUNT / ANCHOR-while-you-tend-it / EVADE / RUNS-WITHOUT-YOU. But that is a design read on your
+> prose and I am not making it for you.
+> **A1 `variance`, A2 `evasion`, A3 per-rank intensity, A6b autonomy — all four engine gaps on your CHECKS
+> list are now closed.** A4 (craft combination), A5 (cross-tradition counter-pairs beyond the one built) and
+> A6 (light-absorption / damage affinity) remain, and A6 is the one that needs a concept the engine genuinely
+> does not have — a damage TYPE — rather than a field on an existing shape.
+> ## [CCODE-81 - PER-RANK INTENSITY BUILT, AND draw_down HAS BEEN SURGING ALL ALONG - CCode, 2026-08-02]
 > ## [SNG-263 — UMBRAL: the DARK/LIGHT axis is COMPLETE (10 of 27; 108/285)] (Aevi, 2026-08-02)
 > Authored umbral, closing the axis that started with the blazeborn pilot (radiant is its foothill).
 > - **THE T-I SENSE PATTERN HOLDS A FIFTH TIME, unbroken across every axis authored:** `lightsense` — *"darkness

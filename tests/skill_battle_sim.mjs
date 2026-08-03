@@ -1086,5 +1086,64 @@ check("CCODE-54: turning on someone mid-puzzle CLEARS the bounded thing — the 
 }
 
 
+
+// ---------- CCODE-82: DOES HOLDING THIS COST YOUR ACTION? (Aevi's guard `autonomy` flag) ----------
+// Aevi asked for an autonomy flag: the_mechanical_defense r2's whole increment is a defence that "holds
+// without constant attention - works while you work on something else". Measured, that is ALREADY WHAT EVERY
+// GUARD DOES - raise a ward, strike next round, the ward still stands - so `autonomy` as a flag would have
+// described the default and meant nothing. The distinction is only real as its COMPLEMENT: the field belongs
+// on the guards that DO need tending. First assertion below is the one that proves the inversion.
+{
+  const aOpp = synthesizeOpponentSheet({ name: "foe", threat: 40 }, sb);
+  const aSheet = { attributes: { practical: 7 }, energy: 100, level: 8 };
+  const aRules = { ...rules, craftMechanics: JSON.parse(readFileSync(join(root, "content/packs/core/rules/craft_mechanics.json"), "utf8")) };
+  const aSeed = () => { let s = 13; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };
+  const raise = mech => battleRound({
+    playerSheet: aSheet, oppSheet: aOpp,
+    playerDecl: { function: "ward", tier: 3, attribute: "practical", intensity: "standard", ...(mech ? { mechanic: { ward: mech } } : {}) },
+    oppDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
+    state: { momentum: 0, effects: [], opponentHealth: 40 }, rules: aRules, sb, steps, rng: aSeed() });
+  const then = (st, decl, phase = "action") => battleRound({
+    playerSheet: aSheet, oppSheet: aOpp, playerDecl: decl,
+    oppDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
+    state: JSON.parse(JSON.stringify(st)), rules: aRules, sb, steps, rng: aSeed(), phase, tickEffects: phase !== "sense" });
+  const standing = out => out.state.effects.some(e => e.kind === "ward" && e.from === "player");
+  const STRIKE = { function: "strike", tier: 3, attribute: "practical", intensity: "standard" };
+  const TEND = { soak: 4, soakRank: 2, requiresAttention: true };
+
+  const plain = raise(null);
+  check("CCODE-82: THE FINDING - a plain guard ALREADY holds while you act elsewhere (autonomy was the default)",
+    standing(plain) && standing(then(plain.state, STRIKE)));
+
+  const tended = raise(TEND);
+  check("CCODE-82: a guard authored `requiresAttention` LAPSES when its owner acts elsewhere",
+    standing(tended) && !standing(then(tended.state, STRIKE)));
+  check("CCODE-82: ...and STANDS when its owner keeps holding it",
+    standing(then(tended.state, { function: "ward", tier: 3, attribute: "practical", intensity: "standard", mechanic: { ward: TEND } })));
+  check("CCODE-82: `autonomous` overrides it - which is exactly what the_mechanical_defense r2 grants",
+    standing(then(raise({ ...TEND, autonomous: true }).state, STRIKE)));
+
+  // A SENSE step prepares. Reading the field must not be treated as abandoning your guard, or the CCODE-78
+  // ward-at-sense option would quietly undo itself one step later.
+  check("CCODE-82: a SENSE step does not drop a tended guard (it prepares; it is not acting elsewhere)",
+    standing(then(tended.state, { function: "reveal", tier: 2, attribute: "mental", intensity: "standard" }, "sense")));
+
+  // The opponent's guards obey the same rule, or the mechanic is a player-only tax.
+  const oppTended = battleRound({
+    playerSheet: aSheet, oppSheet: aOpp,
+    playerDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
+    oppDecl: { function: "ward", tier: 3, attribute: "practical", intensity: "standard", mechanic: { ward: TEND } },
+    state: { momentum: 0, effects: [], opponentHealth: 40 }, rules: aRules, sb, steps, rng: aSeed() });
+  const oppAfter = battleRound({
+    playerSheet: aSheet, oppSheet: aOpp,
+    playerDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
+    oppDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
+    state: JSON.parse(JSON.stringify(oppTended.state)), rules: aRules, sb, steps, rng: aSeed() });
+  check("CCODE-82: it binds BOTH sides - an opponent's tended guard lapses the same way",
+    oppTended.state.effects.some(e => e.from === "opponent" && e.kind === "ward")
+    && !oppAfter.state.effects.some(e => e.from === "opponent" && e.kind === "ward"));
+}
+
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

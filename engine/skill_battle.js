@@ -189,6 +189,10 @@ function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}
   // 17 and a fight is not 17 rounds long — the tier advantage should be felt, not decisive on its own. And
   // `value` is left alone: a contest-mod and a craft magnitude are different currencies, and quietly making
   // one drive the other is how a number ends up serving two masters.
+  // CCODE-82: does holding this cost your attention? Read from the craft, defaulting to NO — which is
+  // what every guard already did.
+  const tend = { requiresAttention: !!(decl?.mechanic?.[decl.function]?.requiresAttention ?? decl?.mechanic?.requiresAttention),
+                 autonomous: !!(decl?.mechanic?.[decl.function]?.autonomous ?? decl?.mechanic?.autonomous) };
   const durCfg = cfg.craftDuration || {};
   if (durCfg.enabled !== false && cm?.families) {
     const m = mechanicFor(decl, { verb: decl.function, tier: decl.tier, rank: decl.rank || 1,
@@ -208,7 +212,11 @@ function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}
     side: def.target === "opponent" ? other : actor,   // WHOSE roll this modifies
     // CCODE-41: deniesPhase must ride from the content def onto the LIVE effect — without this copy, phaseDenied
     // reads undefined on every effect and the blinding counterplay is inert while still advertised in content.
-    ...(def.deniesPhase ? { deniesPhase: def.deniesPhase } : {}),
+    ...(def.deniesPhase ? { deniesPhase: def.deniesPhase } : {}),
+    // CCODE-82: whether this guard needs TENDING rides from the craft onto the live effect. Same copy the
+    // line above exists for — a flag left on the definition reads `undefined` on the effect and is inert.
+    ...(tend.requiresAttention ? { requiresAttention: true } : {}),
+    ...(tend.autonomous ? { autonomous: true } : {}),
     source: decl.name || decl.function, from: actor
   };
 }
@@ -270,6 +278,9 @@ export function applyEvasion(p, o, playerDecl, oppDecl, sb, cm, setupBonus = 0) 
   }
   return out.length ? out : null;
 }
+
+/** CCODE-82: a SENSE step prepares - it must not be read as 'acting elsewhere' and drop a tended guard. */
+function senseStepEarly(phase, sb) { return phase === "sense" && (sb?.turn || {}).senseMovesMomentum !== true; }
 
 /** Tick every effect down one round and drop the expired. Pure. */
 function tickEffects(effects) {
@@ -575,7 +586,23 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   const landedO = effectFrom(oppDecl, o, "opponent", sb, fxOpts);
   effects = addEffect(effects, landedP, sb);
   effects = addEffect(effects, landedW, sb);
-  effects = addEffect(effects, landedO, sb);
+  effects = addEffect(effects, landedO, sb);
+  // CCODE-82 — A GUARD THAT NEEDS TENDING LAPSES WHEN YOU LOOK AWAY.
+  //
+  // Aevi asked for an `autonomy` flag on the guard shape: `the_mechanical_defense` r2's whole increment is a
+  // defence that "holds without constant attention - works while you work on something else". Measured, that
+  // is ALREADY WHAT EVERY GUARD DOES: raise a ward, strike next round, and the ward is still standing. So
+  // `autonomy` as a flag would have described the default and meant nothing.
+  //
+  // The distinction only becomes real as its COMPLEMENT: the field belongs on the guards that DO need
+  // tending, and `the_mechanical_defense` is then distinguished by not carrying it (or by `autonomous: true`,
+  // which overrides an inherited one). With nothing authored this is byte-identical to before - and today
+  // nothing is authored, deliberately: WHICH guards cost attention is Aevi's call, not mine.
+  const defFns = new Set(sb?.functionMatchup?.defensiveFunctions || []);
+  if (!senseStepEarly(phase, sb)) {
+    const actedElsewhere = { player: !defFns.has(playerDecl.function), opponent: !defFns.has(oppDecl.function) };
+    effects = effects.filter(fx => !(fx.requiresAttention && !fx.autonomous && actedElsewhere[fx.from]));
+  }
 
   const mom = sb.momentum || {};
   const meterMax = mom.meterMax ?? 10, marginScale = mom.marginScale ?? 0.5, crush = mom.surgeCrushEndsIt ?? 8;

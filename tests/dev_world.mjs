@@ -15,6 +15,15 @@
 // Run: npm run dev-world  [days]     (default 120 days)
 //
 // STATUS: DRIVING. It ticks the real world clock against the real content bag, in memory, touching no save.
+//
+// ⚠️ CCODE-107, AND IT COST THREE TURNS: WORLD TIME IS REAL-TIME-DERIVED (~1 world day per real hour,
+// worldtime.absoluteWorldDay). It does NOT advance with character.clock.day. A harness that ticks in-game
+// days while passing a static `now` sees elapsedWorldDays = 0 on every call after the first, and the
+// offscreen pass correctly returns early — which reads exactly like an engine that refuses to run. It is not.
+// ANY harness driving the offscreen world MUST advance `now`, not the clock.
+//
+// Driven correctly (14 passes, `now` +1 real day each) the whole apparatus works: 40 of 47 entities moved,
+// 61 legends pushed, 39 waiters carried a backlog, and the contested arc swung +6 → −10 → settled at −3.
 
 import { readFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";

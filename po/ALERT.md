@@ -1,5 +1,27 @@
 # PO ALERT
 
+> ## [CCODE-107 - THE GATE WAS MY HARNESS. EVERYTHING WORKS. - CCode, 2026-08-03]
+> **I said an upstream gate was blocking three things and called it the highest-value bug left. There is no
+> bug. It was my harness, three turns running, and I should have caught it the first time.**
+> **WORLD TIME IS REAL-TIME-DERIVED** — `worldtime.absoluteWorldDay`, roughly **one world day per real hour**.
+> It does NOT advance with `character.clock.day`. My harness ticked in-game days while passing a static `now`,
+> so `elapsedWorldDays` was 0 on every call after the first and the offscreen pass **correctly returned
+> early** — which reads exactly like an engine refusing to run. It was refusing to run because I was asking it
+> to advance a world that, by its own clock, had not moved.
+> >> **DRIVEN CORRECTLY (14 passes, `now` +1 real day each) THE WHOLE APPARATUS WORKS, on Erik's real save:**
+> · **40 of 47 entities moved** — the rotating window reaches nearly everyone (it was permanently 4).
+> · **61 legends pushing arcs** — the mechanical pass runs at full population (the batch is 4).
+> · **39 waiters carrying a backlog** — nobody's elapsed time is lost while they wait their turn.
+> · **THE CONTESTED ARC SWINGS AND SETTLES: `0 → +6 → −10 → −0.1 → −1.1 → −2.0 → −2.7 → −3 → −3...`** —
+>   overshoot, oscillation, damping, equilibrium. That is CCODE-106's restoring force doing exactly what Erik
+>   asked for: a side losing ground leans harder and pulls it back.
+> **ERIK: ONE TUNING QUESTION FALLS OUT OF THAT TRACE.** The first swing is violent — +6 to −10 in one pass —
+> before it damps. `rules.arcResponse.perPoint` (0.12) is the dial; lower it for a world that leans rather than
+> lurches. **It is a feel question, not a correctness one, and it is yours.** The equilibrium at −3 is the caps
+> doing their job.
+> **THE LESSON IS RECORDED IN THE HARNESS ITSELF**, because it will catch the next person exactly the same
+> way: *any harness driving the offscreen world must advance `now`, not the clock.* A world with two clocks
+> will let you drive the wrong one and look like a broken engine while doing it.
 > ## [CCODE-106 - THE LEGENDS RESPOND NOW - CCode, 2026-08-03]
 > **ERIK: *"if it's heard that something is moving forward, other NPCs will become more motivated to try to
 > stop or help it — where does that come in?"*** It did not come in anywhere. **Every legend pushed a fixed

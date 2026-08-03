@@ -7357,7 +7357,13 @@ await (async () => {
     /for \(const f of living\)/.test(wtSrc208) && /spendAttention\(f, \{ arcNetPush: netBefore \}/.test(wtSrc208)
     && /arcAffinity: e\.care/.test(wtSrc208));
   check("208/CCODE-113: a contested arc is resolved with a REAL battleRound, not arithmetic",
-    /contestArc\(\{ pro: pro\.f, con: con\.f/.test(wtSrc208) && /battleRound\(\{/.test(wtSrc208));
+    /contestArc\(\{ pro: a\.f, con: b\.f/.test(wtSrc208) && /battleRound\(\{/.test(wtSrc208));
+  // CCODE-114: EVERYONE who committed attention fights, paired strongest-against-strongest. A single champion
+  // deciding an arc 55 figures have a stake in was a duel standing in for a war.
+  check("208/CCODE-114: every committed figure fights — the sides PAIR OFF, not one champion each",
+    /for \(let k = 0; k < pairs; k\+\+\)/.test(wtSrc208));
+  check("208/CCODE-114: the outnumbered side's surplus pushes UNOPPOSED (ganging up works)",
+    /pro\.slice\(pairs\), \.\.\.con\.slice\(pairs\)/.test(wtSrc208));
   check("208/CCODE-105: opposing pushes NET per arc, so the arithmetic is settled before anyone narrates",
     /ws\.arcNetPush = net/.test(wtSrc208));
   check("208: a clash still resolves in the narrated branch (an event has a witness)",

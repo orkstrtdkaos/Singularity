@@ -1,5 +1,27 @@
 # PO ALERT
 
+> ## [CCODE-114 - EVERYONE WHO SHOWED UP FIGHTS - CCode, 2026-08-03]
+> **ERIK: *"only the leading figure fights??? seems like all should fight somehow."*** Correct, and it was a
+> **DUEL STANDING IN FOR A WAR** — one champion deciding an arc that 55 figures have a stake in, with everyone
+> else's push merely scaled by how their champion did. That is a tournament, not a world.
+> **THE SIDES NOW PAIR OFF, strongest against strongest, and EVERY PAIR FIGHTS ITS OWN REAL `battleRound`.**
+> Measured in a single pass: `the poles pull` ran **17 duels**, `what wakes beneath` 9, `manifestation storm`
+> 9, `block bleed` 5. Not one contest — seventeen.
+> >> **TWO THINGS FALL OUT THAT NOBODY HAD TO WRITE AS RULES:**
+> · **GANGING UP WORKS, EXACTLY AS ERIK DESCRIBED IT TWO TURNS AGO.** The larger side runs out of opponents and
+>   its surplus pushes **UNOPPOSED** — measured, 12 unopposed figures on the poles arc in one pass. They are
+>   not winning; **nothing is stopping them**, which is what being outnumbered MEANS. Four heroics against one
+>   legend: the legend fights one, three lean on the arc untouched.
+> · **VARIANCE NOW SCALES WITH STAKES, and it is the right way round.** One duel is a coin-flip; seventeen
+>   pairings average out. So a **heavily contested arc moves steadily** and a **thinly contested one is
+>   volatile** — which is why `block bleed` (5 duels) is still the arc that diverges between worlds while
+>   `the poles pull` (17 duels) is now stable. The world is noisy where few people care and firm where many
+>   do. **I did not design that; it is what many rolls versus few rolls does.**
+> **`ws.arcContests` now records per arc: duels fought, wins each side, and how many went unopposed** — so a
+> narrator can say *"the line held, but only just, and on the northern flank nobody came at all."*
+> **AND THE DIVERGENCE SURVIVED THE CHANGE**, which was the risk: averaging seventeen rolls could have washed
+> the stochastic element back out. `block bleed` still lands on different sides in different worlds
+> (−1.5…1.1). **Contested arcs are now stable AND the knife-edge ones are still live.**
 > ## [CCODE-113 - THE ARCS ARE FOUGHT OVER NOW, WITH THE GAME'S OWN DICE. WORLDS DIVERGE. - CCode, 2026-08-03]
 > **ERIK: *"I want there to be some stochastic element... some sort of simulated battle that uses the game
 > mechanics with rolls so the outcomes are not predetermined."*** Built, and **it is the piece that finally

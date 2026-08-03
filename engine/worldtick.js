@@ -896,25 +896,41 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // game mechanics with rolls so the outcomes are not predetermined." For each arc where both sides showed
     // up, the LEADING figure on each side fights a real `battleRound`; the margin scales both sides' pushes.
     // An unopposed arc is not a fight and is not rolled — nobody wins a contest they were alone in.
+    // CCODE-114 — EVERYONE WHO SHOWED UP FIGHTS. Erik: "only the leading figure fights??? seems like all
+    // should fight somehow." Correct, and the first version was a DUEL standing in for a WAR — one champion
+    // deciding an arc that 55 figures have a stake in, with everyone else's push merely scaled by how their
+    // champion did. That is a tournament, not a world.
+    //
+    // Now the two sides PAIR OFF strongest-against-strongest and every pair fights its own real battleRound.
+    // Two things fall out that nobody has to write as rules:
+    //  · GANGING UP WORKS. The larger side runs out of opponents, and its surplus pushes UNOPPOSED — four
+    //    heroics against one legend means the legend fights one of them and three lean on the arc untouched.
+    //  · VARIANCE SCALES WITH STAKES. One duel is a coin-flip; twenty pairings average out, so a heavily
+    //    contested arc moves steadily and a thinly contested one is volatile. That is the right way round.
     const arcOutcomes = {};
     for (const [arcId, sides] of Object.entries(leaning)) {
-      const lead = list => list.slice().sort((a, b) =>
-        ((Number(b.f.legend?.weight ?? b.f.weight) || 5) * b.share) - ((Number(a.f.legend?.weight ?? a.f.weight) || 5) * a.share))[0];
-      const pro = lead(sides.pro), con = lead(sides.con);
-      let res = null;
-      if (pro && con && sbCfg) {
-        res = contestArc({ pro: pro.f, con: con.f, sb: sbCfg, rules: content.rules, steps: content.steps, rng });
-        if (res && !res.drawn) arcOutcomes[arcId] = { winner: res.winner, margin: Math.round(res.margin) };
+      const byWeight = list => list.slice().sort((a, b) =>
+        ((Number(b.f.legend?.weight ?? b.f.weight) || 5) * b.share) - ((Number(a.f.legend?.weight ?? a.f.weight) || 5) * a.share));
+      const pro = byWeight(sides.pro), con = byWeight(sides.con);
+      const pairs = Math.min(pro.length, con.length);
+      let proWins = 0, conWins = 0;
+      for (let k = 0; k < pairs; k++) {
+        const a = pro[k], b = con[k];
+        const res = sbCfg ? contestArc({ pro: a.f, con: b.f, sb: sbCfg, rules: content.rules, steps: content.steps, rng }) : null;
+        const aMult = res ? res.proMult : 1, bMult = res ? res.conMult : 1;
+        if (res && !res.drawn) (res.winner === a.f.id ? proWins++ : conWins++);
+        applyEpicArcPush(ws, { ...a.f, arcAffinity: a.care }, currentWorldDay, a.urgency * a.share * aMult);
+        applyEpicArcPush(ws, { ...b.f, arcAffinity: b.care }, currentWorldDay, b.urgency * b.share * bMult);
       }
-      for (const side of ["pro", "con"]) {
-        const mult = !res ? 1 : (side === "pro" ? res.proMult : res.conMult);
-        for (const e of sides[side]) {
-          applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * mult);
-        }
+      // The surplus on the larger side found nobody to fight. They push at full weight — not because they won,
+      // but because nothing stopped them, which is what being outnumbered MEANS.
+      for (const e of [...pro.slice(pairs), ...con.slice(pairs)]) {
+        applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share);
       }
+      if (pairs) arcOutcomes[arcId] = { pairs, proWins, conWins, unopposed: Math.abs(pro.length - con.length) };
     }
     // What the dice actually decided this pass, so a narrator can say "she held the line" rather than
-    // inventing a reason the number moved.
+    // inventing a reason the number moved — now per ARC, with how many duels each side took.
     ws.arcContests = arcOutcomes;
 
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block

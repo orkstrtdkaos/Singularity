@@ -35,6 +35,11 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
    `shortfold` (both ends must be truly KNOWN) · `shadowstep` (both ends need real shadow — **a lit gap is a
    WALL**). **Every axis's travel craft is walled off by its antipode's medium.** Movement crafts need a
    terrain/medium precondition the engine can check.
+6g. **TYPED SOAK WITH A CAST-TIME TYPE** *(the_warding_mark, figurist)* — CCode's typed-soak model has the
+   type **fixed on the craft** (`thingcraft` is always `type: abstraction`). But `the_warding_mark` wards *"a
+   specific category of thing — an intent, a person, a working"* — **the type is NAMED WHEN IT IS DRAWN.** If
+   typed soak only supports static types, the dynamic case needs support. *(Also note `thingcraft` is the first
+   typed soak authored against an opposing TRADITION rather than a damage medium.)*
 6f. **STANDING EFFECTS MUST BE BREAKABLE** *(the_undoing_word r2, T-IV unmaker)* — it unmakes *"a working, a
    ward, a **seal**, a **pact** held by craft."* That is a direct counter to `sun_seal`, `death_ward`,
    `prism_ward`, `the_maintained_veil`, `the_blaze_wall` and **every standing-effect craft in the catalog**.

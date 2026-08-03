@@ -173,6 +173,63 @@
     ]
    },
    {
+    "id": "the_gathered_strike",
+    "tier": 2,
+    "functions": [
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.03,
+     "note": "NEW CRAFT — the strike somatic's OWN LORE already promised. tradition_profiles withMastery: 'THE WHOLE MASTERED FRAME BEHIND A SINGLE STRIKE — stance, breath, and timing ARRIVING TOGETHER.' That is a damage craft described in the tradition's own summary and absent from its catalog. The higher marginFloorPer is the somatic signature: it rewards a decisive margin, because the whole craft is arriving correctly."
+    },
+    "authoredNew": true,
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "damage",
+      "delta": "STANCE, BREATH AND TIMING ARRIVE TOGETHER — the frame is not assembled in the moment, it was assembled over years and simply LANDS",
+      "from": "authored from the tradition's own withMastery line"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the strike is not FASTER or HARDER — it is INEVITABLE. A body that has been trained this long does not miss the moment it trained for.",
+      "from": "authored: somatic damage is CORRECTNESS, not force — the distinction from marcher"
+     }
+    ],
+    "intensity": {
+     "conserve": "a controlled blow — half the force, and you keep your frame",
+     "surge": "double the strike; the whole frame arriving means the WHOLE frame arriving, and you are committed"
+    },
+    "bounds": [
+     {
+      "text": "IT IS CONTROL, NOT RAW FORCE — a stronger person still hits harder",
+      "class": "hard"
+     },
+     {
+      "text": "the frame must be TRAINED — this is not a technique you improvise",
+      "class": "hard"
+     },
+     {
+      "text": "the whole frame arriving means YOU ARE COMMITTED to arriving",
+      "class": "cost"
+     }
+    ],
+    "designNote": "⚠️ AUTHORED TO FILL ERIK'S GAP — 'somatic are Monks who fight sometimes; they should have crazy damage skills.' And the lore ALREADY PROMISED IT: withMastery says 'the whole mastered frame behind A SINGLE STRIKE — stance, breath, and timing arriving together.' A damage craft named in the tradition's own summary and missing from its catalog is the PromisedButUnread bug at the TRADITION level. Note the deliberate distinction from marcher: marcher's the_edge is FORCE applied with discipline; the_gathered_strike is CORRECTNESS — 'not faster or harder, INEVITABLE.' Two fighting traditions, two theories of what a strike IS."
+   },
+   {
     "id": "perfect_motion",
     "tier": 2,
     "functions": [
@@ -279,6 +336,61 @@
      }
     ],
     "designNote": "FIFTH tradition refusing coercion mechanically — 'people ACCOUNT FOR you, they do not OBEY you.' Five traditions now, none referencing each other."
+   },
+   {
+    "id": "the_broken_rhythm",
+    "tier": 2,
+    "functions": [
+     "hinder",
+     "move"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "disruption",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 3,
+     "targets": 1,
+     "note": "NEW CRAFT — somatic's missing CONTROL role. A body-reader who can break another body's timing."
+    },
+    "authoredNew": true,
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "disruption",
+      "delta": "TAKE THEIR TIMING APART — a touch at the joint mid-motion, a step into the space their weight was going; they do not fall, they simply STOP WORKING for a moment",
+      "from": "authored from body_read: a tradition that reads bodies this well can break one's rhythm"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "break the rhythm of a GROUP moving together — a formation, a dance, a charge; each of them fine alone and NONE OF THEM IN TIME",
+      "from": "authored"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small disruption — half the effect, and they recover cleanly",
+     "surge": "double it; a body you have taken apart remembers how you did it"
+    },
+    "bounds": [
+     {
+      "text": "IT NEEDS A RHYTHM TO BREAK — the still and the already-chaotic are proof against it",
+      "class": "hard"
+     },
+     {
+      "text": "it STOPS, it does not HARM — a stopped person is still a person standing there",
+      "class": "hard"
+     },
+     {
+      "text": "a body you have taken apart REMEMBERS HOW YOU DID IT",
+      "class": "cost"
+     }
+    ],
+    "designNote": "AUTHORED — somatic's missing control role, and derived from its OWN T-I sense: body_read r3 sees 'THE DECISION MADE A HALF-SECOND BEFORE IT IS ACTED ON.' A tradition that reads bodies that precisely obviously knows how to break one's timing. The gap was between two crafts it already had."
    },
    {
     "id": "the_shaped_body",
@@ -973,5 +1085,6 @@
   "THREE MEMORY-RECOVERY CRAFTS ACROSS THREE TRADITIONS, all carrying the same bound: memory_palace ('what you store you keep, INCLUDING WHAT YOU WOULD RATHER HAVE LOST'), harmonic's echo_memory ('what the deep stacks answer, YOU CANNOT UNHEAR'), ashwarden's ask_the_dead ('you will hear things that were not yours to know, AND YOU CANNOT GIVE THEM BACK'). A thematic constant nobody coordinated.",
   "MATCHED T-I CRAFTS, OPPOSITE BLINDNESS: second_wind borrows from the BODY'S TOMORROW; total_focus borrows by NOT NOTICING THE BODY AT ALL ('people have been focused to death'). Same function — push past your limit — and each is dangerous in precisely the way the OTHER tradition would have caught. The axis is authored as a mutual correction, not a rivalry.",
   "skydancer's 'THERE IS NO HOVER AT ANY MASTERY' joins wither's 'living flesh is outside it AT EVERY RANK' — the second time an author has pre-empted the mastery question IN THE TEXT ITSELF. Continued strong evidence that the HARD/SOFT classing recovers authorial intent rather than imposing mine."
- ]
+ ],
+ "gapFillNote": "ERIK'S CORRECTION (2026-08-02): 'Don't treat everything as written in stone — you authored all these in the past. Fill in gaps and rebalance if needed. Make the content better through generative lore.' He is right, and the somatic gap was the clearest case in the catalog: the tradition's own withMastery line promises 'the whole mastered frame behind A SINGLE STRIKE' and the catalog had no strike craft. That is PromisedButUnread at the TRADITION level — the same bug class I have been finding all pass, and I walked past it because I was treating the craft list as fixed. TWO CRAFTS ADDED: the_gathered_strike (the promised damage) and the_broken_rhythm (the missing control role, derived from body_read's existing precision). Somatic goes 2/5 roles -> 4/5."
 }

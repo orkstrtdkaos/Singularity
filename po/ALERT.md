@@ -1,6 +1,35 @@
 # PO ALERT
 
-> ## [CCODE-86b - THE LESSON APPLIED AT THE MINT (partly) - CCode, 2026-08-02]
+> ## [SNG-263 — ABYSSAL/SERAPHIC (25-26 of 27; 264/285) — THE FINAL ANTIPODE PAIR] (Aevi, 2026-08-02)
+> **All twelve axes are now authored.** One tradition left (valley_craft, the near-centre folk generalist).
+> - **⚠️ ERIK/CCODE — THE PRECURSOR STORY IS RICHER THAN "A LOCKED DOOR", AND IT WAS ALREADY WRITTEN.** Both
+>   poles' T-V crafts are described as *"a **precursor-tier working INNATE TO YOUR KIN**"* —
+>   `the_hollow_that_holds` and `the_kept_flame` — and **abyssal/seraphic are exactly the two origins carrying
+>   `innatePrecursor` in origins.json** (latticespeak, address_sense). **Two peoples hold a piece of the
+>   precursor layer NATIVELY, and their capstone IS that piece.** SNG-261 §B has been treating precursor as a
+>   *gated external system*; the catalog also treats it as an **inheritance**. Worth knowing before §B is called
+>   finished. And the axis's shape is perfect: the abyssal channels the substrate through **a hollow that can
+>   swallow**; the seraphic as **a flame that must be fed.**
+> - **NEITHER POLE IS THE GOOD ONE, and the catalog says so in a matched pair of bounds:** `descent` — *"**the
+>   bargain is exactly fair, which is the horror of it**"*; `ascent` — *"**if you are wrong, the judgment binds
+>   anyway**."* **The demonic pole is terrifying because it does NOT cheat. The angelic pole is terrifying
+>   because it does not CHECK.** Best antipode framing in the whole catalog.
+> - **AND IT INVERTS THE CONSENT EXPECTATION DELIBERATELY:** the **demonic** T-IV *"cannot compel the truly
+>   unwilling"* and *"catches only what already wanted the bargain"* — while the **angelic** T-I weighs people
+>   *"**without their consent or knowledge**."* **The abyss requires consent; the order does not.** That makes
+>   abyssal the **eleventh** tradition to refuse coercion mechanically.
+> - **EVERY TRAVEL CRAFT IN THE CATALOG IS TERRAIN-GATED ON A MEDIUM ITS ANTIPODE CANNOT USE — sixteen crafts,
+>   twelve axes, NOT ONE EXCEPTION.** This pair is the most literal: one road *"goes DOWN — there is no version
+>   of this that goes up"*; the other *"goes UP."*
+> - **A THIRD mastery pre-emption written into the prose:** *"it still cannot strike, **at any mastery**"* —
+>   joining `wither`'s *"at every rank"* and `skydancer`'s *"no hover at any mastery."* **Three independent
+>   authors explicitly refusing mastery-erosion** — the strongest evidence yet that HARD-classing recovers real
+>   intent rather than imposing mine.
+> - **Two more defensive logics (eighteen), and both confirm your grouping instinct:** DETERRED
+>   (`the_dread_mantle`) sits cleanly in *before-the-roll*; CONVICTED (`the_shielding_word`, whose soak **is
+>   whether you actually believe it**) in *after-the-roll* — with an autonomy variant whose standing ward holds
+>   to *"what you meant when you said it, even if you change."* **Eighteen logics, still only three mechanisms.**
+> Last tradition next.> ## [CCODE-86b - THE LESSON APPLIED AT THE MINT (partly) - CCode, 2026-08-02]
 > **ERIK: "learn this lesson and apply it to any generated items" — done at the AUTHORING end, and I hit a
 > real wall at the GATE end. Both halves reported honestly below.**
 > **DONE: the GM now has to say what kind of harm it minted.** `deriveItem` gained `damageType` and

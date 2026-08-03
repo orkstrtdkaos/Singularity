@@ -1,0 +1,939 @@
+{
+ "schemaVersion": 1,
+ "id": "concrete_abstract_axis_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, traditions 21 AND 22 of 27 — MASON and FIGURIST, the concrete/abstract axis, 10th antipode pair. THE MOST DIRECTLY ANTAGONISTIC PAIR IN THE CATALOG, and uniquely so: this is the only axis where one pole's crafts make the OTHER POLE'S CRAFTS FAIL BY NAME. thingcraft r3 'denies an abstraction purchase on the real: illusion, glamour, SYMBOL-WORKING AND FIGURE all simply fail in your presence'; the_plain_fact r3 'no symbol acts, NO FIGURE BINDS'. And figurist answers in its own bound: formcraft r3 'THE MASONS CAN DENY IT.' Every other antipode pair divides territory. This one contests the same ground.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "traditions": {
+  "mason": [
+   {
+    "id": "stone_read",
+    "tier": 1,
+    "functions": [
+     "reveal",
+     "track"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "history"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "history",
+      "delta": "read a thing's HISTORY IN ITS MATERIAL — the stresses it took, the repairs, THE DAY IT NEARLY BROKE",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "perceptionDepth",
+      "delta": "a whole structure legible at once — every fault, every honest joint, EVERY LIE THE BUILDER TOLD",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a touch — half the depth, and instant",
+     "surge": "double the read; BUILDINGS YOU LOVE TURN OUT TO BE FULL OF LIES"
+    },
+    "bounds": [
+     {
+      "text": "MATERIALS, NOT MAKERS — it says the beam will fail, not who cut it",
+      "class": "hard"
+     },
+     {
+      "text": "HISTORY, NOT FUTURE — it reports what happened, not what happens next",
+      "class": "hard"
+     },
+     {
+      "text": "BUILDINGS YOU LOVE TURN OUT TO BE FULL OF LIES",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Antipode to figurist's pattern_sense: stone_read knows WHAT A THING IS and cannot read the maker's meaning; pattern_sense knows WHAT FORM IT INSTANCES and 'seeing the pattern is not seeing whether it is a TRUE one.' TENTH pair, tenth time the two T-I senses carry the axis — matter against meaning."
+   },
+   {
+    "id": "the_near_way",
+    "tier": 1,
+    "functions": [
+     "make",
+     "move",
+     "open",
+     "reveal"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "access",
+     "range"
+    ],
+    "mechanic": {
+     "range": 8,
+     "push": 0,
+     "magnitude": 3,
+     "duration": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "access",
+      "delta": "move through a built environment AT THE SPEED ITS CONSTRUCTION ALLOWS — the route that does not backtrack",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: in ANY built structure, FIND OR MAKE the passage — not by brute force, BY KNOWING WHERE THE MATERIAL WANTS TO GIVE",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "find the loose stone — half the speed, and nothing is damaged",
+     "surge": "double it; knowing where the material gives means the structure gives THERE"
+    },
+    "bounds": [
+     {
+      "text": "BUILT structures only — open ground offers a mason nothing",
+      "class": "hard"
+     },
+     {
+      "text": "what you open, you have OPENED — the passage stays for whoever follows",
+      "class": "cost"
+     }
+    ],
+    "designNote": "ELEVENTH terrain-gated travel craft: the_near_way needs BUILT STRUCTURE, exactly as the_root_road needs life and shadowstep needs shadow. And its antipode figurist's the_patterned_way needs a READABLE PATTERN — matter's road versus meaning's road."
+   },
+   {
+    "id": "the_long_haul",
+    "tier": 1,
+    "functions": [
+     "resist",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 24
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "upkeepRelief",
+      "delta": "sustain useful work across a long haul WITHOUT THE DEGRADATION that hits others — the QUALITY does not fall",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: CONTINUE UNTIL THE WORK IS FINISHED, regardless of what the body says. THE TASK COMPLETES.",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "keep going — half the relief, and you can stop when you like",
+     "surge": "double it; the task completing regardless of the body is a promise the BODY has to keep"
+    },
+    "bounds": [
+     {
+      "text": "it sustains WORK, not rest — there is no version of this that restores you",
+      "class": "hard"
+     },
+     {
+      "text": "the task completing regardless of the body is a promise THE BODY HAS TO KEEP",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "thingcraft",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "break",
+     "make",
+     "reveal",
+     "shield"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "materialTruth",
+     "denial"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 8,
+     "soak": 3,
+     "soakRank": 2,
+     "type": "abstraction",
+     "note": "⚠️ THE AXIS'S WEAPON. r3 'denies an abstraction purchase on the real: illusion, glamour, SYMBOL-WORKING AND FIGURE all simply fail in your presence.' Authored with a TYPED soak (CCODE-83's mechanic) against `abstraction` — it is a ward against an entire opposing tradition, and it is TRANSPARENT to a sword."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "materialTruth",
+      "delta": "SET A THING SO IT STAYS — a wall, a joint, a boundary, A CLAIM. What you set does not shift, sag, or come apart",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "denial",
+      "delta": "SPECIAL: DENY AN ABSTRACTION PURCHASE ON THE REAL — illusion, glamour, symbol-working and FIGURE all simply FAIL in your presence",
+      "from": "r3 grants — a categorical denial of a whole opposing craft-family"
+     }
+    ],
+    "intensity": {
+     "conserve": "set it plain — half the hold, and it can be un-set",
+     "surge": "double it; IT DENIES THE ABSTRACT INDISCRIMINATELY — INCLUDING MEANING YOU WANTED"
+    },
+    "bounds": [
+     {
+      "text": "it tells you what a thing IS, NEVER what it means or what it is FOR",
+      "class": "hard"
+     },
+     {
+      "text": "WHAT IS SET IS HARD TO UN-SET, INCLUDING BY YOU",
+      "class": "cost"
+     },
+     {
+      "text": "IT DENIES THE ABSTRACT INDISCRIMINATELY — including meaning you wanted",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ CCODE: this is the first authored use of your TYPED SOAK against an opposing TRADITION rather than a damage medium — `type: abstraction`, which the figurist's whole craft-set is. It is the mechanical expression of 'the Masons can deny it', authored from the denying side. Note it is transparent to everything else: a mason who denies figures still takes a sword normally."
+   },
+   {
+    "id": "sound_repair",
+    "tier": 2,
+    "functions": [
+     "mend",
+     "restore",
+     "reveal"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "repair",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 2,
+     "note": "A NINTH THEORY OF MEDICINE — MATERIAL CORRECTNESS: 'the right material intervention, no more and no less.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "repair",
+      "delta": "restore not just function but STRUCTURAL INTEGRITY — the wall that will not sag, THE WOUND THAT WILL NOT FESTER",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: return a thing FULLY to its proper MATERIAL state — building, body, or system — indistinguishable from unbroken",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "patch it right — half the restoration, and it is correct as far as it goes",
+     "surge": "double it; material correctness is not the same as WELLNESS"
+    },
+    "bounds": [
+     {
+      "text": "it repairs the MATERIAL — a sound body is not a well person",
+      "class": "hard"
+     },
+     {
+      "text": "no more and no less: it will not do MORE than the material requires, even when you want it to",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A NINTH THEORY OF MEDICINE, and the exact antipode of figurist's the_restored_form: mason repairs the MATERIAL ('a sound body is not a well person'); figurist restores the FORM ('the body that heals from the inside out'). Nine traditions, nine theories, one `healing` shape — and this pair's two are a direct philosophical disagreement about what a body IS."
+   },
+   {
+    "id": "the_set_word",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "command"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "authority",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 12,
+     "note": "SOCIAL attribute — authority by SOLIDITY"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "authority",
+      "delta": "make an agreement or declaration THAT STICKS — not because you charmed anyone, BUT BECAUSE THE WEIGHT OF YOUR STANDING HOLDS IT",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: name the PRACTICAL TRUTH so plainly and with such authority that PEOPLE ORGANIZE AROUND IT as if it were a wall",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "say it plain — half the weight, and it invites discussion",
+     "surge": "double it; a word that lands like a wall is a word you cannot walk back"
+    },
+    "bounds": [
+     {
+      "text": "IT IS SOLIDITY, NOT ELOQUENCE — a mason who is WRONG lands just as hard and is just as wrong",
+      "class": "hard"
+     },
+     {
+      "text": "a word that lands like a wall is a word YOU CANNOT WALK BACK",
+      "class": "cost"
+     }
+    ],
+    "designNote": "NINTH route to non-coercive authority: command by PLAIN SOLIDITY. And its HARD bound is unusually honest — 'a mason who is WRONG lands just as hard and is just as wrong.' The craft does not check your correctness."
+   },
+   {
+    "id": "the_plain_fact",
+    "tier": 3,
+    "functions": [
+     "break",
+     "reveal",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "denial",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "soak": 5,
+     "soakRank": 3,
+     "type": "abstraction",
+     "duration": 4,
+     "note": "A FOURTEENTH DEFENSIVE LOGIC — REDUCED: it does not block, evade or absorb; it REDUCES an abstract working to its physical basis, and if it has none, it stops existing. Typed soak rank 3 against `abstraction`."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "denial",
+      "delta": "REDUCE an argument, a glamour, or a DOCTRINE to its physical basis — and if it has none, THAT BECOMES VISIBLE TO ALL",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: in your presence THE TOUCHABLE SIMPLY IS THE REAL — abstraction cannot get purchase, NO SYMBOL ACTS, NO FIGURE BINDS",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "state the concrete — half the reduction, and it reads as a fair question",
+     "surge": "double it; YOU HAVE MADE A WORLD WHERE NOTHING MEANS ANYTHING"
+    },
+    "bounds": [
+     {
+      "text": "SOME ABSTRACTIONS ARE TRUE — reducing them does not unmake them",
+      "class": "hard"
+     },
+     {
+      "text": "A DOCTRINE WITH NO PHYSICAL BASIS IS NOT THEREBY FALSE",
+      "class": "hard"
+     },
+     {
+      "text": "YOU HAVE MADE A WORLD WHERE NOTHING MEANS ANYTHING — some people cannot live in it",
+      "class": "cost"
+     }
+    ],
+    "designNote": "THE FINEST PAIR OF HARD BOUNDS IN THE CATALOG, and they are the mason tradition arguing against ITSELF: 'SOME ABSTRACTIONS ARE TRUE' and 'A DOCTRINE WITH NO PHYSICAL BASIS IS NOT THEREBY FALSE.' The concrete pole's strongest craft carries, as an inviolable limit, the admission that its own worldview is incomplete. No mastery ever reaches past it."
+   },
+   {
+    "id": "the_keystone_blow",
+    "tier": 4,
+    "functions": [
+     "break",
+     "reveal"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 4,
+      "d": 6
+     },
+     "plus": 2,
+     "marginFloorPer": 0.03,
+     "note": "T-IV, damaging"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: WHERE THERE IS NO TRUE KEYSTONE, MAKE ONE — a sequence of lesser strikes that MANUFACTURES the single load-bearing point",
+      "from": "r2 grants — manufacturing the weakness is the T-IV kind-change"
+     }
+    ],
+    "intensity": {
+     "conserve": "one placed strike — half the force, exactly where you meant",
+     "surge": "double it; MANUFACTURING A KEYSTONE TAKES TIME AND COVER"
+    },
+    "bounds": [
+     {
+      "text": "it works only on MADE STRUCTURES with a true keystone at r1",
+      "class": "hard"
+     },
+     {
+      "text": "manufacturing a keystone TAKES TIME AND COVER",
+      "class": "soft"
+     }
+    ]
+   },
+   {
+    "id": "the_unmaking_of_walls",
+    "tier": 5,
+    "functions": [
+     "break"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "scope"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 5,
+      "d": 6
+     },
+     "plus": 6,
+     "marginFloorPer": 0.03,
+     "scope": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: UNMAKE A WHOLE BUILT STRUCTURE back to its raw, un-built MATERIAL. The capstone is a KIND (returning the made to the unmade) at near-total cost.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a half-unmade wall is a ruin, and the Masons consider a ruin worse than either state.",
+     "surge": "REFUSED — it already costs nearly all you have."
+    },
+    "bounds": [
+     {
+      "text": "IT TOUCHES ONLY THE MADE",
+      "class": "hard"
+     },
+     {
+      "text": "IT COSTS NEARLY ALL YOU HAVE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "EIGHTEENTH capstone. Note its near-twin: unmaker's the_last_unmaking ('unmake a thing MEANT TO BE PERMANENT'). Both return made things to nothing — but the mason unmakes STRUCTURE back to MATERIAL, while the unmaker unmakes PERMANENCE ITSELF. Matter versus meaning, one last time, at T-V."
+   }
+  ],
+  "figurist": [
+   {
+    "id": "pattern_sense",
+    "tier": 1,
+    "functions": [
+     "foresee",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "foresight"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "NAME THE FORM EXACTLY — and once named, ITS OTHER INSTANCES BECOME VISIBLE TO YOU EVERYWHERE",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "foresight",
+      "delta": "SPECIAL: read the form of an event, a life, or a history — THE SHAPE IT IS COMPLETING",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a glance at the shape — half the depth, and it does not follow you",
+     "surge": "double it; ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T"
+    },
+    "bounds": [
+     {
+      "text": "SEEING THE PATTERN IS NOT SEEING WHETHER IT IS A TRUE ONE",
+      "class": "hard"
+     },
+     {
+      "text": "ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T",
+      "class": "cost"
+     },
+     {
+      "text": "KNOWING THE SHAPE A LIFE IS COMPLETING DOES NOT PERMIT YOU TO SAY SO",
+      "class": "hard"
+     }
+    ],
+    "designNote": "'Seeing the pattern is not seeing whether it is a TRUE one' is the third EPISTEMIC hard bound in the catalog (with verity's 'cannot tell which' and hourcraft's 'true pre-memory from a feared one'). THREE traditions whose highest reads are unreliable at mastery because the limit is knowledge. And note pattern_sense's cost bound is the exact failure mode lattice's order_sense warned about — 'some messes have no pattern.'"
+   },
+   {
+    "id": "formcraft",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "deceive",
+     "make",
+     "reveal"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "symbolPower",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 8,
+     "scope": 2,
+     "damageType": "abstraction"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "MAKE A SYMBOL THAT ACTS — a mark, a shape, a figure that DOES IN THE WORLD WHAT IT MEANS",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "BUILD AN IDEA INTO THE WORLD so completely it becomes A FACT OTHERS MUST MOVE AROUND — a rule, a boundary, a truth",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small figure — half the power, and it means exactly what you drew",
+     "surge": "double it; A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN"
+    },
+    "bounds": [
+     {
+      "text": "seeing a form DOES NOT GIVE YOU POWER OVER ITS INSTANCE",
+      "class": "hard"
+     },
+     {
+      "text": "A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN",
+      "class": "hard"
+     },
+     {
+      "text": "THE MASONS CAN DENY IT. REALITY CAN, EVENTUALLY, DECLINE.",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ 'THE MASONS CAN DENY IT' — the figurist tradition names its antipode as a HARD counter in its own core craft's bound, and the mason's thingcraft r3 names figures right back. This is the only axis in the catalog where BOTH POLES authored the other as a categorical answer to them. Every other pair divides territory; this one contests the same ground."
+   },
+   {
+    "id": "the_restored_form",
+    "tier": 2,
+    "functions": [
+     "heal",
+     "restore",
+     "reveal"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "restoration",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 2,
+     "note": "A TENTH THEORY OF MEDICINE — FORM RESTORATION: 'not appearance, the FORM a thing is supposed to have', and function follows."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "restoration",
+      "delta": "restore THE UNDERLYING STRUCTURE — the form a person, plan, or object is SUPPOSED to have — AND FUNCTION FOLLOWS",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: return a thing ENTIRELY to its proper form — THE BODY THAT HEALS FROM THE INSIDE OUT, the relationship that finds its shape again",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "restore the outline — half the healing, and nothing is forced",
+     "surge": "double it; restoring the form a thing is SUPPOSED to have requires being right about what it is supposed to be"
+    },
+    "bounds": [
+     {
+      "text": "IT RESTORES THE FORM — a thing whose true form is broken cannot be restored TO it",
+      "class": "hard"
+     },
+     {
+      "text": "restoring what a thing is SUPPOSED to be requires BEING RIGHT about that",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A TENTH THEORY OF MEDICINE and the direct antipode of mason's sound_repair — one repairs the MATERIAL ('a sound body is not a well person'), the other restores the FORM ('the body that heals from the inside out'). The pair disagrees about what a body IS, and both traditions' healing crafts are correct within their own worldview. Ten traditions, ten theories, one shape."
+   },
+   {
+    "id": "the_warding_mark",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "shield",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "ward",
+     "duration",
+     "autonomy"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 4,
+     "soakRank": 2,
+     "type": "category",
+     "duration": 12,
+     "note": "A TYPED GUARD of a new kind: it wards A NAMED CATEGORY of thing — 'an intent, a person, a working' — chosen at casting. CCODE: this is typed soak where the TYPE IS AUTHORED AT CAST TIME rather than fixed on the craft."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "autonomy",
+      "delta": "set a warding figure that HOLDS WITHOUT YOUR CONTINUED ATTENTION — IT KNOWS WHAT IT IS KEEPING BACK and it keeps it back",
+      "from": "r2 grants — a SEVENTH autonomy-increment craft"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: NAME WHAT DOES NOT BELONG HERE with such formal clarity that IT CANNOT BE HERE — the working fails, the intent dissolves",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small mark — half the ward, and it keeps back one thing",
+     "surge": "double it; a ward that knows what it keeps back also decides what belongs"
+    },
+    "bounds": [
+     {
+      "text": "IT WARDS A CATEGORY — a thing outside the named category walks through untouched",
+      "class": "hard"
+     },
+     {
+      "text": "a ward that decides what BELONGS is a ward that can be WRONG about belonging",
+      "class": "cost"
+     }
+    ],
+    "designNote": "⚠️ CCODE: typed soak with the TYPE NAMED AT CAST TIME, not fixed on the craft record. thingcraft's `type: abstraction` is fixed; the_warding_mark's type is chosen when it is drawn. If the typed-soak layer only supports static types, this craft needs the dynamic case. Adding to the checks list."
+   },
+   {
+    "id": "the_patterned_way",
+    "tier": 2,
+    "functions": [
+     "move",
+     "reveal",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "navigation",
+     "range"
+    ],
+    "mechanic": {
+     "range": 12,
+     "push": 0,
+     "magnitude": 4,
+     "duration": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "navigation",
+      "delta": "navigate ANY environment you can read the form of — WITHOUT roads, signs, or memory; THE PATTERN TELLS YOU",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: RECOGNIZE THAT A PLACE IS AN INSTANCE OF A FORM YOU KNOW — and everything about it becomes legible: every exit, every hidden room",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "read the layout — half the certainty, and it costs nothing",
+     "surge": "double it; a place that is NOT an instance of any form you know offers nothing at all"
+    },
+    "bounds": [
+     {
+      "text": "it needs A READABLE PATTERN — genuine chaos or true novelty defeats it",
+      "class": "hard"
+     }
+    ],
+    "designNote": "TWELFTH terrain-gated travel craft, and the antipode of mason's the_near_way: one moves through BUILT STRUCTURE by knowing where material gives; the other moves through any place that INSTANCES A KNOWN FORM. Matter's road and meaning's road."
+   },
+   {
+    "id": "the_held_form",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "persistence",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 24,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "persistence",
+      "delta": "keep the form of something alive ACROSS TIME AND DISTANCE — a relationship, a plan, A PERSON'S SENSE OF THEMSELVES",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: while you HOLD THE FORM perfectly in mind, IT DOES NOT CEASE — the pattern is the sustaining principle",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold the shape — half the persistence, and you can set it down",
+     "surge": "double it; holding a person's sense of themselves means YOU are holding it, and you may be holding it wrong"
+    },
+    "bounds": [
+     {
+      "text": "YOU MUST HOLD IT — attention lapses and the form lapses with it",
+      "class": "hard"
+     },
+     {
+      "text": "holding A PERSON'S SENSE OF THEMSELVES means YOU are holding it, and you may be WRONG about its shape",
+      "class": "cost"
+     }
+    ],
+    "designNote": "⚠️ A §4e IDENTITY-ADJACENT CRAFT authored on the benevolent side: the_held_form r2 sustains 'a person's SENSE OF THEMSELVES.' Where the_unmoored_choir attacks identity and the_revealing_burn strips it, this HOLDS it — and its cost bound is that you may be holding it wrong. The identity layer now has an authored defender as well as attackers."
+   },
+   {
+    "id": "the_walking_figure",
+    "tier": 3,
+    "functions": [
+     "bind",
+     "strike",
+     "summon",
+     "ward"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "autonomy",
+     "persistence"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 8,
+     "damageType": "abstraction",
+     "note": "damaging rung — a sent figure that ACTS"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "persistence",
+      "delta": "THE FIGURE PERSISTS — it keeps meaning, keeps acting, KEEPS THE WARD OR THE RULE IN FORCE AFTER YOU HAVE GONE",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the figure ADAPTS ITS MEANING TO CIRCUMSTANCE — it keeps doing WHAT YOU MEANT even where you did not foresee",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "send a small figure — half the persistence, and it acts once cleanly",
+     "surge": "double it; A STANDING FIGURE IS A RULE NOBODY IS SUPERVISING"
+    },
+    "bounds": [
+     {
+      "text": "it acts ONCE and is SPENT at r1; it acts on WHAT IT MEANS",
+      "class": "hard"
+     },
+     {
+      "text": "A STANDING FIGURE IS A RULE NOBODY IS SUPERVISING",
+      "class": "cost"
+     },
+     {
+      "text": "A FIGURE SENT TO HARM IS A FIGURE THAT WILL DO THE SECOND HARM TOO",
+      "class": "hard"
+     }
+    ],
+    "designNote": "'A standing figure is a rule nobody is supervising' and 'a figure sent to harm will do the SECOND harm too' — the autonomy mechanic given its sharpest authored cost anywhere in the catalog. Compare enginewright's the_self_mending_work ('a work that improves itself DRIFTS FROM ITS MAKER'S INTENT'). Two traditions independently warning that autonomous creations exceed their instructions."
+   },
+   {
+    "id": "the_binding_figure",
+    "tier": 4,
+    "functions": [
+     "bind",
+     "make"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "bindStrength",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 6,
+     "damageType": "abstraction",
+     "note": "T-IV, incapacitating"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "THE FIGURE HOLDS PAST ITS MOMENT — a working, a room, a thing's shape held to the pattern FOR AS LONG AS THE FIGURE STANDS",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a light binding — half the hold, and it releases cleanly",
+     "surge": "double it; THE FIGURE MUST REMAIN PHYSICALLY INTACT AND TRUE — deface it and the binding ends"
+    },
+    "bounds": [
+     {
+      "text": "IT FAILS IF THE FIGURE IS UNTRUE",
+      "class": "hard"
+     },
+     {
+      "text": "THE FIGURE MUST REMAIN PHYSICALLY INTACT — DEFACE IT AND THE BINDING ENDS",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ THE AXIS'S JOKE, AND IT IS A GOOD ONE: the abstract pole's T-IV binding depends on A PHYSICAL OBJECT staying intact. Deface the drawn figure and the abstraction fails. The concrete pole does not merely deny figures philosophically — a mason with a chisel ends one. That is the antagonism made completely practical."
+   },
+   {
+    "id": "the_true_name",
+    "tier": 5,
+    "functions": [
+     "bind",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "bindStrength",
+     "penetration"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 2,
+     "damageType": "abstraction"
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: FIND AND SPEAK A THING'S TRUE NAME, gaining A HOLD ON ITS VERY BEING. The capstone is a KIND (power over a thing's essence) at near-total cost.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a partially-spoken true name is a false name, and a false name forewarns.",
+     "surge": "REFUSED — the finding already costs nearly all you have."
+    },
+    "bounds": [
+     {
+      "text": "A FALSE NAME FAILS AND FOREWARNS",
+      "class": "hard"
+     },
+     {
+      "text": "THE FINDING COSTS NEARLY ALL YOU HAVE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "NINETEENTH capstone — and the perfect antipode to mason's the_unmaking_of_walls. One returns a made thing to raw MATERIAL; the other takes hold of a thing's very BEING by naming it. Matter's capstone unmakes what a thing is BUILT of; meaning's capstone seizes what a thing IS. The axis's argument, one last time, at T-V."
+   }
+  ]
+ },
+ "passFindings": [
+  "⚠️ THE ONLY TRULY ANTAGONISTIC AXIS IN THE CATALOG. Every other antipode pair DIVIDES territory (life/death travel each other's ground, space/time solve the same problems in different dimensions). This one CONTESTS THE SAME GROUND, and both poles authored the other as a categorical answer: thingcraft r3 'denies an abstraction purchase on the real — illusion, glamour, SYMBOL-WORKING AND FIGURE all simply fail in your presence'; the_plain_fact r3 'NO SYMBOL ACTS, NO FIGURE BINDS'; and figurist answers in formcraft's own bound — 'THE MASONS CAN DENY IT. REALITY CAN, EVENTUALLY, DECLINE.'",
+  "⚠️ CCODE — TWO NEW TYPED-SOAK CASES, and one needs a mechanic you may not have: thingcraft carries `type: abstraction` FIXED on the craft (your existing model), but the_warding_mark's type is NAMED AT CAST TIME ('a specific category of thing — an intent, a person, a working'). If typed soak only supports static types, the dynamic case needs support. Adding to the checks list. NOTE ALSO this is the first typed soak authored against an opposing TRADITION rather than a damage medium.",
+  "THE FINEST PAIR OF HARD BOUNDS IN THE CATALOG, and they are a tradition arguing against ITSELF: the_plain_fact carries 'SOME ABSTRACTIONS ARE TRUE — reducing them does not unmake them' and 'A DOCTRINE WITH NO PHYSICAL BASIS IS NOT THEREBY FALSE.' The concrete pole's strongest craft holds, as an inviolable limit, the admission that its own worldview is incomplete. No mastery ever reaches past it.",
+  "THE AXIS'S BEST JOKE IS ALSO ITS BEST MECHANIC: the_binding_figure (the ABSTRACT pole's T-IV) depends on A PHYSICAL OBJECT staying intact — 'deface it and the binding ends.' The concrete pole does not merely deny figures philosophically; a mason with a chisel ends one. The antagonism is completely practical.",
+  "TWO MORE THEORIES OF MEDICINE, and they are a direct philosophical disagreement: mason's sound_repair repairs the MATERIAL ('a sound body is NOT A WELL PERSON'); figurist's the_restored_form restores the FORM ('the body that heals from the inside out'). TEN traditions, ten incompatible theories of what healing IS, one `healing` shape carrying all of them.",
+  "A THIRD EPISTEMIC HARD BOUND: pattern_sense's 'SEEING THE PATTERN IS NOT SEEING WHETHER IT IS A TRUE ONE', with verity's 'cannot tell which' and hourcraft's 'a true pre-memory from a feared one'. And its COST bound is the exact failure lattice's order_sense warned of — 'once you can see it everywhere, YOU WILL SEE IT WHERE IT ISN'T.'",
+  "A §4e IDENTITY CRAFT ON THE BENEVOLENT SIDE, the catalog's first: the_held_form r2 sustains 'A PERSON'S SENSE OF THEMSELVES.' Where the_unmoored_choir ATTACKS identity and the_revealing_burn STRIPS it, this HOLDS it — and its cost is that you may be holding it wrong. The identity layer now has an authored defender, not only attackers.",
+  "TWO TRADITIONS INDEPENDENTLY WARN THAT AUTONOMOUS CREATIONS EXCEED THEIR INSTRUCTIONS: the_walking_figure ('A STANDING FIGURE IS A RULE NOBODY IS SUPERVISING'; 'a figure sent to harm will do THE SECOND HARM TOO') and enginewright's the_self_mending_work ('a work that improves itself DRIFTS FROM ITS MAKER'S INTENT'). The autonomy mechanic has an authored moral, twice over."
+ ]
+}

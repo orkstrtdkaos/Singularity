@@ -7357,13 +7357,16 @@ await (async () => {
     /for \(const f of living\)/.test(wtSrc208) && /spendAttention\(f, \{ arcNetPush: netBefore \}/.test(wtSrc208)
     && /arcAffinity: e\.care/.test(wtSrc208));
   check("208/CCODE-113: a contested arc is resolved with a REAL battleRound, not arithmetic",
-    /contestArc\(\{ pro: a\.f, con: b\.f/.test(wtSrc208) && /battleRound\(\{/.test(wtSrc208));
-  // CCODE-114: EVERYONE who committed attention fights, paired strongest-against-strongest. A single champion
-  // deciding an arc 55 figures have a stake in was a duel standing in for a war.
-  check("208/CCODE-114: every committed figure fights — the sides PAIR OFF, not one champion each",
-    /for \(let k = 0; k < pairs; k\+\+\)/.test(wtSrc208));
-  check("208/CCODE-114: the outnumbered side's surplus pushes UNOPPOSED (ganging up works)",
-    /pro\.slice\(pairs\), \.\.\.con\.slice\(pairs\)/.test(wtSrc208));
+    /contestArc\(\{ pro: champ\(aSide/.test(wtSrc208) && /battleRound\(\{/.test(wtSrc208));
+  // CCODE-115: not everything is a fight. Each pass splits the committed into the ENGAGED (a minority, most
+  // urgent first) who duel, and the rest who WORK at it - a steady push with no roll against a person. A
+  // world where every commitment was a duel would kill most of its legends in a year.
+  check("208/CCODE-115: the committed split into those who FIGHT and those who WORK at it",
+    /directEngagementRate/.test(wtSrc208) && /indirectPushMult/.test(wtSrc208));
+  check("208/CCODE-115: a confrontation is WEIGHT-matched - lesser figures gang up until they can pin a legend",
+    /while \(bw < aw \* 0\.75 && qq\.length\)/.test(wtSrc208));
+  check("208/CCODE-115: an engaged figure with nobody left to face pushes like a worker, not unopposed",
+    /const unfought = \[\.\.\.pq, \.\.\.qq\]/.test(wtSrc208));
   check("208/CCODE-105: opposing pushes NET per arc, so the arithmetic is settled before anyone narrates",
     /ws\.arcNetPush = net/.test(wtSrc208));
   check("208: a clash still resolves in the narrated branch (an event has a witness)",

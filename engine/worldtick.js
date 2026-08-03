@@ -907,30 +907,68 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     //    heroics against one legend means the legend fights one of them and three lean on the arc untouched.
     //  · VARIANCE SCALES WITH STAKES. One duel is a coin-flip; twenty pairings average out, so a heavily
     //    contested arc moves steadily and a thinly contested one is volatile. That is the right way round.
+    // CCODE-115 — MOST PEOPLE WORK AT A THING; SOME PEOPLE FIGHT OVER IT.
+    //
+    // Erik: "legends can probably take on more than one epic or heroic, so there is some cancellation to the
+    // pure 1-1... plus I would imagine a lot of people getting hurt or dying this way — not everything is a
+    // direct fight. So let us figure out how many fought vs pushed in their own way, and how effective each is."
+    //
+    // Both true, and the second is the one that was making the valley a bloodbath: pairing EVERYONE meant
+    // every committed figure was in a duel every pass. Most of them are not fighting anybody — they are
+    // building, arguing, tending, refusing. That is still pushing an arc; it is just not a battle.
+    //
+    // So each pass splits into two populations:
+    //  · THE ENGAGED (a minority, and the most URGENT go first — you seek a confrontation over the thing you
+    //    cannot bear losing): they fight real battleRounds. Decisive, and the only place injury lives.
+    //  · THE WORKERS (everyone else): no roll against a person, a steady push. Reliable but modest.
+    //
+    // THE TRADE, which is the interesting part: a won fight moves an arc more than a season of work; a lost
+    // one moves it less than doing nothing would have. Working is the safe, small, certain option. That is a
+    // real decision and it is legible in the numbers.
+    //
+    // WEIGHT-MATCHED PAIRING, not index-matched: a legend at weight 9 holds off lesser figures until their
+    // COMBINED weight matches hers. Three heroics can pin a legend; one cannot. Erik's cancellation.
+    const engageRate = Number.isFinite(cfg.directEngagementRate) ? cfg.directEngagementRate : 0.35;
+    const workMult = Number.isFinite(cfg.indirectPushMult) ? cfg.indirectPushMult : 0.8;
+    const wOf = e => (Number(e.f.legend?.weight ?? e.f.weight) || 5) * e.share;
     const arcOutcomes = {};
     for (const [arcId, sides] of Object.entries(leaning)) {
-      const byWeight = list => list.slice().sort((a, b) =>
-        ((Number(b.f.legend?.weight ?? b.f.weight) || 5) * b.share) - ((Number(a.f.legend?.weight ?? a.f.weight) || 5) * a.share));
-      const pro = byWeight(sides.pro), con = byWeight(sides.con);
-      const pairs = Math.min(pro.length, con.length);
-      let proWins = 0, conWins = 0;
-      for (let k = 0; k < pairs; k++) {
-        const a = pro[k], b = con[k];
-        const res = sbCfg ? contestArc({ pro: a.f, con: b.f, sb: sbCfg, rules: content.rules, steps: content.steps, rng }) : null;
-        const aMult = res ? res.proMult : 1, bMult = res ? res.conMult : 1;
-        if (res && !res.drawn) (res.winner === a.f.id ? proWins++ : conWins++);
-        applyEpicArcPush(ws, { ...a.f, arcAffinity: a.care }, currentWorldDay, a.urgency * a.share * aMult);
-        applyEpicArcPush(ws, { ...b.f, arcAffinity: b.care }, currentWorldDay, b.urgency * b.share * bMult);
+      // The most urgent seek a fight; the rest get on with their work.
+      const split = list => {
+        const byUrgency = list.slice().sort((a, b) => b.urgency - a.urgency);
+        const n = Math.min(byUrgency.length, Math.max(0, Math.round(byUrgency.length * engageRate)));
+        return { engaged: byUrgency.slice(0, n), working: byUrgency.slice(n) };
+      };
+      const P = split(sides.pro), Q = split(sides.con);
+      let duels = 0, proWins = 0, conWins = 0;
+
+      // WEIGHT-MATCHED MELEE. Strongest engaged figure on each side; the lighter one draws in allies until
+      // the two sides of THIS confrontation are comparable. Everyone drawn in shares the outcome.
+      const pq = P.engaged.slice().sort((a, b) => wOf(b) - wOf(a));
+      const qq = Q.engaged.slice().sort((a, b) => wOf(b) - wOf(a));
+      while (pq.length && qq.length) {
+        const aSide = [pq.shift()], bSide = [qq.shift()];
+        let aw = wOf(aSide[0]), bw = wOf(bSide[0]);
+        while (bw < aw * 0.75 && qq.length) { const n = qq.shift(); bSide.push(n); bw += wOf(n); }   // they gang up
+        while (aw < bw * 0.75 && pq.length) { const n = pq.shift(); aSide.push(n); aw += wOf(n); }
+        const champ = (side, w) => ({ ...side[0].f, legend: { ...(side[0].f.legend || {}), weight: w } });
+        const res = sbCfg ? contestArc({ pro: champ(aSide, aw), con: champ(bSide, bw), sb: sbCfg, rules: content.rules, steps: content.steps, rng }) : null;
+        duels++;
+        if (res && !res.drawn) (res.winner === aSide[0].f.id ? proWins++ : conWins++);
+        for (const e of aSide) applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * (res ? res.proMult : 1));
+        for (const e of bSide) applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * (res ? res.conMult : 1));
       }
-      // The surplus on the larger side found nobody to fight. They push at full weight — not because they won,
-      // but because nothing stopped them, which is what being outnumbered MEANS.
-      for (const e of [...pro.slice(pairs), ...con.slice(pairs)]) {
-        applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share);
+      // An engaged figure with nobody left to face is not in a fight after all — they push like a worker.
+      const unfought = [...pq, ...qq];
+      for (const e of [...P.working, ...Q.working, ...unfought]) {
+        applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * workMult);
       }
-      if (pairs) arcOutcomes[arcId] = { pairs, proWins, conWins, unopposed: Math.abs(pro.length - con.length) };
+      arcOutcomes[arcId] = { duels, proWins, conWins,
+        fought: P.engaged.length + Q.engaged.length - unfought.length,
+        worked: P.working.length + Q.working.length + unfought.length };
     }
-    // What the dice actually decided this pass, so a narrator can say "she held the line" rather than
-    // inventing a reason the number moved — now per ARC, with how many duels each side took.
+    // Per arc: how many FOUGHT, how many WORKED, and who won — so a narrator can say "two of them came to
+    // blows over it and thirty quietly got on with it", which is what a year in a valley actually looks like.
     ws.arcContests = arcOutcomes;
 
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block

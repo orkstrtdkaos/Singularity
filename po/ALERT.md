@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-115 - MOST PEOPLE WORK AT A THING; SOME FIGHT OVER IT - CCode, 2026-08-03]
+> **ERIK, both points taken and the second is the bigger one:** *"legends can probably take on more than one
+> epic or heroic... plus I would imagine a lot of people getting hurt or dying this way — not everything is a
+> direct fight. Let us figure out how many fought vs pushed in their own way, and how effective each is."*
+> **PAIRING EVERYONE WAS MAKING THE VALLEY A BLOODBATH.** Every committed figure was in a duel, every pass.
+> Most of them are not fighting anybody — they are building, arguing, tending, refusing. That still pushes an
+> arc; it is just not a battle.
+> **NOW EACH PASS SPLITS THE COMMITTED IN TWO:**
+> · **THE ENGAGED** — a minority, and the **most URGENT go first**, because you seek a confrontation over the
+>   thing you cannot bear losing. They fight real `battleRound`s. Decisive, and the only place injury lives.
+> · **THE WORKERS** — everyone else. No roll against a person, a steady push at 0.8.
+> >> **MEASURED, one pass across the valley: 28 came to blows, 95 worked at it — 23% of commitments were
+> fights.** `green schism` had **zero duels and three people quietly working**, which is a truer picture of a
+> year in a valley than five simultaneous wars.
+> **THE TRADE IS THE INTERESTING PART, and it is legible in the numbers:** a WON fight moves an arc more than a
+> season of work (up to 2.2×); a LOST one moves it *less than doing nothing would have* (0.4×). Working is the
+> safe, small, certain option. **That is a real decision, and it is the same shape as conserve/standard/surge.**
+> **AND WEIGHT-MATCHED PAIRING IS IN — Erik's cancellation.** A confrontation draws in allies until the two
+> sides are comparable: **three heroics can pin a legend; one cannot.** An engaged figure with nobody left to
+> face is not in a fight after all — they push like a worker, which is more honest than the previous
+> "unopposed at full strength".
+> **`ws.arcContests` now records duels · fought · worked · wins each side**, so a narrator can say *"two of
+> them came to blows over it and thirty quietly got on with it."*
+> >> **ONE THING I WOULD WATCH AND HAVE NOT EXPLAINED: the win counts skew against the `pro` side** (0/3, 0/6,
+> 1/2 in that sample). I suspect the ganging-up loop lets `con` recruit first and so fields systematically
+> heavier confrontations. **It may be an artefact of my loop order rather than anything meant.** Flagging it
+> rather than tuning it away, because a systematic bias in who wins the valley's arguments is exactly the kind
+> of thing that should be understood before it is balanced.
 > ## [CCODE-114 - EVERYONE WHO SHOWED UP FIGHTS - CCode, 2026-08-03]
 > **ERIK: *"only the leading figure fights??? seems like all should fight somehow."*** Correct, and it was a
 > **DUEL STANDING IN FOR A WAR** — one champion deciding an arc that 55 figures have a stake in, with everyone

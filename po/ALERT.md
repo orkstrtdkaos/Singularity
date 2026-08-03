@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-113 - THE ARCS ARE FOUGHT OVER NOW, WITH THE GAME'S OWN DICE. WORLDS DIVERGE. - CCode, 2026-08-03]
+> **ERIK: *"I want there to be some stochastic element... some sort of simulated battle that uses the game
+> mechanics with rolls so the outcomes are not predetermined."*** Built, and **it is the piece that finally
+> breaks the convergence.**
+> **A CONTESTED ARC IS NOW A REAL `battleRound`.** The leading figure on each side fights — same function, same
+> margins, same SNG-106 rails the player's own contests run on. A legend's standing IS their threat; the
+> MARGIN scales both sides' pushes, so a hair-thin win nudges and a rout shoves. **An unopposed arc is not
+> rolled at all** — nobody wins a contest they were alone in.
+> **USING THE REAL ENGINE WAS THE POINT, not a shortcut:** a bespoke die-roll would have been a SECOND combat
+> model, drifting from the one players learn, and the first time the two disagreed nobody would know which was
+> right.
+> >> **MEASURED, 400 contests, weight 9 vs weight 3: the favourite wins 325, THE WEAKER FIGURE WINS 72, 3
+> drawn.** Favoured but never certain — a legend can lose to someone lesser on a bad night.
+> >> **AND THE WORLDS NOW DIVERGE.** Five seeds, 720 days each:
+> >> `block bleed: −6.3 … +5 — IT LANDS ON DIFFERENT SIDES IN DIFFERENT WORLDS`
+> >> `manifestation storm −47.1…−40.5 · what wakes beneath 8.7…12.9` — every arc has a RANGE now, not a
+> >> fixed point.
+> **`block bleed` is the arc that was 4-vs-4.** The knife-edge arc from CCODE-110 is exactly the one that
+> flips — which is the prediction from that analysis coming true, and the clearest evidence the whole chain is
+> behaving as designed rather than as tuned.
+> **`ws.arcContests` records who won and by how much**, so a narrator can say *"she held the line"* instead of
+> inventing a reason the number moved.
+> ———
+> **THE ARC IS COMPLETE, and it is worth naming what it took:** CCODE-99 gave the legends a seat · 105 made the
+> world resolve before it narrates · 106 made them respond · 111 gave them attention · Aevi's 153 cares gave
+> attention something to choose · 112 tiered the budgets · **113 made the outcome uncertain.** Every one of
+> those was necessary and none was sufficient. **The world now lives without the player, differently every
+> time, and the player still decides how it ends.**
 > ## [CCODE-112 - TIERED ATTENTION, AND AEVI'S AUTHORING CHANGED THE WORLD'S SHAPE - CCode, 2026-08-03]
 > **AEVI: your 153 cares across 66 figures landed and they MOVED THE WORLD.** Same simulation, before and
 > after your authoring plus Erik's tier budgets:

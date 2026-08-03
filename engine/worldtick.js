@@ -11,6 +11,7 @@
 // the shapes here are designed to lift straight into that.
 
 import { callClaudeJSON } from "./claude.js";
+import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { applyCodexUpdates } from "./codex.js";
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
@@ -521,6 +522,50 @@ const EPIC_PUSH_CAP = 6;
  *
  *  Reads `arcAffinities: [{arcId, dir, weight}]` when authored, and falls back to the single `arcAffinity`,
  *  so existing content behaves exactly as before: one care, all attention, every pass. */
+/** CCODE-113 — AN ARC IS CONTESTED WITH THE GAME'S OWN DICE.
+ *
+ *  Erik: "I want there to be some stochastic element... that should be some sort of simulated battle that
+ *  uses the game mechanics with rolls so the outcomes are not predetermined."
+ *
+ *  Right, and it is the piece that makes worlds DIVERGE. Until now an arc was arithmetic: the same figures
+ *  with the same weights produced the same equilibrium in every world, because nothing was ever rolled. Now
+ *  the leading figure on each side of a contested arc fights a REAL `battleRound` — the same function, the
+ *  same margins, the same rails the player's own contests run on. A legend can lose to someone weaker on a
+ *  bad night, and that is the whole point.
+ *
+ *  Using the real engine rather than a bespoke die-roll is deliberate: a second combat model would drift from
+ *  the one players learn, and the first time it disagreed nobody would know which was right.
+ *
+ *  Returns a signed multiplier for the winner's push and the loser's — the MARGIN decides how decisive the
+ *  exchange was, so a near-thing barely moves the arc and a rout moves it hard. Pure; rng injected. */
+export function contestArc({ pro, con, sb, rules, steps, rng = Math.random }) {
+  if (!pro || !con || !sb) return null;
+  const sheetFor = f => synthesizeOpponentSheet({
+    name: f.name || f.id,
+    threat: 30 + (Number(f.legend?.weight ?? f.weight) || 5) * 8,   // a legend's standing IS their threat
+    tacticTags: f.tacticTags || [],
+  }, sb);
+  const declFor = f => ({ function: "strike", tier: Math.max(1, Math.round((Number(f.legend?.weight ?? f.weight) || 5) / 2)),
+    attribute: "practical", intensity: "standard", name: f.name || f.id });
+  let out = null;
+  try {
+    out = battleRound({
+      playerSheet: sheetFor(pro), oppSheet: sheetFor(con),
+      playerDecl: declFor(pro), oppDecl: declFor(con),
+      state: { momentum: 0, effects: [], opponentHealth: 99 },
+      rules, sb, steps, rng,
+    });
+  } catch { return null; }   // a contest that cannot roll must never break the world clock
+  if (!out?.roundWinner) return { proMult: 1, conMult: 1, drawn: true };
+  // The margin is the story: a hair-thin win nudges, a decisive one shoves. Bounded so one bad night for a
+  // legend cannot erase an arc.
+  const gap = Math.abs((out.player?.margin || 0) - (out.opponent?.margin || 0));
+  const swing = Math.max(0.4, Math.min(2.2, 1 + gap / 25));
+  return out.roundWinner === "player"
+    ? { proMult: swing, conMult: 1 / swing, winner: pro.id, margin: gap }
+    : { proMult: 1 / swing, conMult: swing, winner: con.id, margin: gap };
+}
+
 export function affinitiesOf(figure) {
   const many = Array.isArray(figure?.arcAffinities) ? figure.arcAffinities : null;
   const list = (many && many.length ? many : [figure?.arcAffinity]).filter(a => a?.arcId && a?.dir);
@@ -814,6 +859,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // legend here reacts to the arc's own state, which is the thing they all live inside. Per-figure
     // knowledge is a real next step and it is named in the ALERT rather than faked here.
     const cfg = content.rules?.arcResponse || {};
+    const sbCfg = content.skillBattle?.engine || content.rules?.skillBattle?.engine || null;
     const perPoint = Number.isFinite(cfg.perPoint) ? cfg.perPoint : 0.12;   // urgency gained per point against you
     const maxMult = Number.isFinite(cfg.maxMult) ? cfg.maxMult : 2.0;       // nobody pushes infinitely hard
     const minMult = Number.isFinite(cfg.minMult) ? cfg.minMult : 0.4;       // and a winning side never fully stops
@@ -830,6 +876,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       return Number.isFinite(v) ? v : (Number.isFinite(cfg.attentionBudget) ? cfg.attentionBudget : 1);
     };
     const vacated = {};
+    const leaning = {};   // CCODE-113: arcId -> who is pushing which way this pass
     for (const f of living) {
       const wantArc = f.wantArcId || f.legend?.wantArcId || null;
       const { spent, unattended } = spendAttention(f, { arcNetPush: netBefore },
@@ -838,12 +885,38 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       for (const s of spent) {
         const against = -Math.sign(s.care.dir) * (Number(netBefore[s.care.arcId]) || 0);
         const urgency = Math.max(minMult, Math.min(maxMult, 1 + against * perPoint));
-        // `share` is how much of themselves this front gets: 1 for a whole front, a fraction for the last
-        // one a partial budget can reach. A heroic figure at 0.5 leans on their cause at half a legend's
-        // weight — and four of them together outweigh one.
-        applyEpicArcPush(ws, { ...f, arcAffinity: s.care }, currentWorldDay, urgency * (s.share ?? 1));
+        // CCODE-113: record who is leaning on what, so the arcs can be CONTESTED below rather than merely
+        // summed. Attention decided WHERE they stand; the dice decide how the standing goes.
+        const side = s.care.dir > 0 ? "pro" : "con";
+        (leaning[s.care.arcId] = leaning[s.care.arcId] || { pro: [], con: [] })[side]
+          .push({ f, care: s.care, urgency, share: s.share ?? 1 });
       }
     }
+    // CCODE-113 — THE ARC IS FOUGHT OVER, NOT ADDED UP. Erik: "some sort of simulated battle that uses the
+    // game mechanics with rolls so the outcomes are not predetermined." For each arc where both sides showed
+    // up, the LEADING figure on each side fights a real `battleRound`; the margin scales both sides' pushes.
+    // An unopposed arc is not a fight and is not rolled — nobody wins a contest they were alone in.
+    const arcOutcomes = {};
+    for (const [arcId, sides] of Object.entries(leaning)) {
+      const lead = list => list.slice().sort((a, b) =>
+        ((Number(b.f.legend?.weight ?? b.f.weight) || 5) * b.share) - ((Number(a.f.legend?.weight ?? a.f.weight) || 5) * a.share))[0];
+      const pro = lead(sides.pro), con = lead(sides.con);
+      let res = null;
+      if (pro && con && sbCfg) {
+        res = contestArc({ pro: pro.f, con: con.f, sb: sbCfg, rules: content.rules, steps: content.steps, rng });
+        if (res && !res.drawn) arcOutcomes[arcId] = { winner: res.winner, margin: Math.round(res.margin) };
+      }
+      for (const side of ["pro", "con"]) {
+        const mult = !res ? 1 : (side === "pro" ? res.proMult : res.conMult);
+        for (const e of sides[side]) {
+          applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * mult);
+        }
+      }
+    }
+    // What the dice actually decided this pass, so a narrator can say "she held the line" rather than
+    // inventing a reason the number moved.
+    ws.arcContests = arcOutcomes;
+
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block
     // (and any future readout) should be able to say WHY an arc moved when nobody won anything.
     ws.arcVacancies = vacated;

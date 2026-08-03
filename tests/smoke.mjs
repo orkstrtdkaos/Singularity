@@ -7351,8 +7351,13 @@ await (async () => {
     // CCODE-111: the push is now per CARE a figure chose to spend attention on, so the call carries the
     // selected affinity rather than the figure's single fixed one. The guarantee is unchanged and stronger:
     // every living legend is considered, every pass, before anything is narrated.
+    // CCODE-113: the push now happens after the arc is CONTESTED, so the call carries the leaning entry's
+    // care rather than `s.care` directly. The guarantee is what matters and it is unchanged: every living
+    // legend is considered, and every care they spend attention on is pushed.
     /for \(const f of living\)/.test(wtSrc208) && /spendAttention\(f, \{ arcNetPush: netBefore \}/.test(wtSrc208)
-    && /arcAffinity: s\.care/.test(wtSrc208));
+    && /arcAffinity: e\.care/.test(wtSrc208));
+  check("208/CCODE-113: a contested arc is resolved with a REAL battleRound, not arithmetic",
+    /contestArc\(\{ pro: pro\.f, con: con\.f/.test(wtSrc208) && /battleRound\(\{/.test(wtSrc208));
   check("208/CCODE-105: opposing pushes NET per arc, so the arithmetic is settled before anyone narrates",
     /ws\.arcNetPush = net/.test(wtSrc208));
   check("208: a clash still resolves in the narrated branch (an event has a witness)",

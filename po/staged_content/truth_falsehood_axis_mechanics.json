@@ -1,0 +1,872 @@
+{
+ "schemaVersion": 1,
+ "id": "truth_falsehood_axis_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, traditions 11 AND 12 of 27 — VEILWRIGHT and VERIST, the falsehood/truth axis, authored as an antipode pair (5th pair). THIS IS THE MOST MUTUALLY REFERENTIAL PAIR IN THE CATALOG: nearly every veilwright bound names Verity as its counter, and verist's capstone is authored as the ONLY answer to a specific named adversary's craft (the Cathedral's lie-built-from-true-pieces). They are not two traditions that happen to oppose — they are two halves of one authored argument.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "traditions": {
+  "veilwright": [
+   {
+    "id": "see_the_made_thing",
+    "tier": 1,
+    "functions": [
+     "foresee",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "foresight"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "see ALL the falsecrafts in a situation SIMULTANEOUSLY — who is building what version of events, what holds, what is already cracking",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "foresight",
+      "delta": "SPECIAL: read what is BEING CONSTRUCTED BEFORE IT COMPLETES — see the lie before it is fully told",
+      "from": "r3 grants — pre-emption is a kind, not a depth"
+     }
+    ],
+    "intensity": {
+     "conserve": "a glance at the seams — half the depth, and instant",
+     "surge": "double the read: every construction in the room at once, and you will see craft where there is only sincerity"
+    },
+    "bounds": [
+     {
+      "text": "it reads CONSTRUCTION, not truth — a sincere person building nothing reads blank",
+      "class": "hard"
+     },
+     {
+      "text": "knowing HOW a lie is made is not knowing WHAT IS TRUE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "The veilwright T-I sense reads MADE-NESS; the verist T-I ground reads WHAT IS SO. Neither reads the other's object — a liar's construction vs the actual state of the world. SIXTH antipode pair, sixth time the T-I crafts carry the geometry."
+   },
+   {
+    "id": "falsecraft",
+    "tier": 2,
+    "functions": [
+     "break",
+     "conceal",
+     "deceive",
+     "reveal",
+     "sustain"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "conviction",
+     "scope",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 6,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "conviction",
+      "delta": "build an untruth that HOLDS UNDER SCRUTINY — a false history, a cover that survives questioning, an illusion that persists",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "FALSEHOOD AT SCALE — a deception a whole PEOPLE believes, an illusion over a place, a constructed truth that reshapes what is done",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small untruth — half the conviction, and it leaves no trace when it falls",
+     "surge": "double the construction; THE WIELDER DRIFTS FALSEHOOD-HOT, until they can no longer find the true one"
+    },
+    "bounds": [
+     {
+      "text": "ILLUSION IS NOT SUBSTANCE — tested hard, it fails",
+      "class": "hard"
+     },
+     {
+      "text": "A VERITY READ CUTS IT",
+      "class": "hard"
+     },
+     {
+      "text": "a lie built on DISCOVERABLE FACT cracks when the fact surfaces",
+      "class": "hard"
+     },
+     {
+      "text": "the wielder DRIFTS FALSEHOOD-HOT — until they can no longer find the true one",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'A Verity read cuts it' — the tradition's core craft names its antipode's core craft as its hard counter, IN ITS OWN BOUND. This pair does not merely oppose; each is authored with the other's answer built in."
+   },
+   {
+    "id": "the_wrong_reality",
+    "tier": 2,
+    "functions": [
+     "deceive",
+     "hinder",
+     "strike"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "misdirection",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 4,
+     "note": "incapacitating — it makes a person act CORRECTLY on a wrong picture"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "hold the false reality long enough that they OPERATE INSIDE IT — not one wrong step but a SEQUENCE of correct decisions made on a wrong picture",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the false reality holds UNTIL THE COST LANDS. 'They acted correctly, by their lights. You were just showing them the wrong lights.'",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "one wrong impression — half the hold, and it can be corrected",
+     "surge": "double it; a person who acted correctly on your wrong picture will know exactly whose fault it was"
+    },
+    "bounds": [
+     {
+      "text": "IT NEEDS A FRAME THEY WOULD PLAUSIBLY ACCEPT — a picture that contradicts what they know fails",
+      "class": "hard"
+     },
+     {
+      "text": "they acted CORRECTLY BY THEIR LIGHTS — the harm is yours, not theirs",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_better_story",
+    "tier": 2,
+    "functions": [
+     "heal",
+     "restore"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "restoration",
+     "truthfulness"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 2,
+     "note": "THE CATALOG'S MOST SURPRISING CRAFT: a falsehood tradition's HEALING craft that works by telling the TRUTH from a different angle. Its r3 says plainly: 'you have NOT lied.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "restoration",
+      "delta": "restore someone by showing their experience FROM AN ANGLE THAT IS ALSO TRUE, but functions — the trauma has a different shape from here",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: THE BETTER STORY IS ALSO A TRUE STORY. 'You have not lied; you have shown them a different TRUE FACE of the real, and it heals.'",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "one kinder angle — half the restoration, and it asks nothing of them",
+     "surge": "double it; a story that carries someone can also carry them away from something they needed to face"
+    },
+    "bounds": [
+     {
+      "text": "IT MUST BE TRUE — a comforting lie is a different craft, and it does not heal",
+      "class": "hard"
+     },
+     {
+      "text": "a story that carries someone can carry them AWAY from what they needed to face",
+      "class": "cost"
+     }
+    ],
+    "designNote": "A FOURTH THEORY OF MEDICINE, and the most unexpected: radiant heals by BURNING CLEAN, rootkin by RESTORING THE DESIGN, umbral by DARKNESS AS MEDICINE, and veilwright — the falsehood tradition — by REFRAMING WITHOUT LYING. That the deception-tradition's healing craft has 'it must be true' as a HARD bound is the strongest evidence yet that these traditions were authored with real moral seriousness rather than as good/evil poles."
+   },
+   {
+    "id": "the_false_target",
+    "tier": 2,
+    "functions": [
+     "conceal",
+     "deceive",
+     "shield"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "misdirection",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 0,
+     "soakRank": 0,
+     "evasion": 4,
+     "evasionRank": 2,
+     "duration": 4,
+     "targets": 1,
+     "note": "A SECOND ZERO-SOAK GUARD, and it uses Erik's EVASION model: 'the attack lands on the APPEARANCE, and the person is somewhere else.' This is not concealment (the_harbor) — it is misdirection: they DO attack, at the wrong place."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "a false target convincing enough to occupy SUSTAINED PURSUIT — they spend their effort on what you have shown them",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "wrap a PLACE, a GROUP, or a real thing in a false version that draws ALL action away from the actual",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "one decoy — half the misdirection, and it costs little to maintain",
+     "surge": "double it; a pursuer who has spent days on your decoy is a pursuer with a grievance"
+    },
+    "bounds": [
+     {
+      "text": "it draws AIMED action — an area effect or an accident does not care what it is aiming at",
+      "class": "hard"
+     },
+     {
+      "text": "when the decoy is found out, they know precisely how long they were wasting",
+      "class": "cost"
+     }
+    ],
+    "designNote": "SIXTH defensive logic: MISDIRECTED (they attack, but the wrong place) — distinct from the_wrong_target's EVADED (they attack you and miss) and the_harbor's NEVER-FOUND (they never attack at all). Erik's evasion model covers this one cleanly: the attack degrades because it landed on the appearance."
+   },
+   {
+    "id": "the_false_door",
+    "tier": 2,
+    "functions": [
+     "deceive",
+     "open",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "access",
+     "range"
+    ],
+    "mechanic": {
+     "range": 10,
+     "push": 0,
+     "magnitude": 4,
+     "duration": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "access",
+      "delta": "open a door THROUGH THE FALSE VERSION of a space — the wall that appears solid has an opening in the version laid over it",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: travel THROUGH THE GAP BETWEEN WHAT APPEARS AND WHAT IS — a route through the veil itself",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a brief false passage — half the distance, and it closes cleanly",
+     "surge": "double it; travelling the gap between appearance and reality is not a place a person should linger"
+    },
+    "bounds": [
+     {
+      "text": "the appearance CLOSES — a false door is not a real one, and what is on the other side is still real",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A FIFTH terrain-gated travel craft, on a fifth axis: root_road (life) · grey_road (death) · shortfold (known places) · shadowstep (shadow) · the_false_door (the GAP BETWEEN APPEARANCE AND REALITY). Every axis's travel craft moves through its own medium. The pattern is now universal in the catalog."
+   },
+   {
+    "id": "the_maintained_veil",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "persistence",
+     "autonomy"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 72,
+     "note": "SUSTAIN→bolster. Its whole point is autonomy — 'set it and it continues.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "persistence",
+      "delta": "hold a falsecraft across a LONG OPERATION — days, weeks — without decay or repair",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "autonomy",
+      "delta": "SPECIAL: the veil SUSTAINS UNTIL BROKEN — set and gone; IT IS A FEATURE OF THE PLACE NOW, not a maintained working",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold it lightly — half the duration, and you can drop it instantly",
+     "surge": "double the persistence; a veil that is a feature of the place is a veil you may forget you set"
+    },
+    "bounds": [
+     {
+      "text": "it sustains the working, IT DOES NOT STRENGTHEN IT — a weak lie held forever is still a weak lie",
+      "class": "hard"
+     }
+    ],
+    "designNote": "THIRD craft whose rank-increment is AUTONOMY (after the_mechanical_defense r2 and shroud r3). CCODE: the `autonomy` flag on the checks list is wanted by at least three traditions — 'does holding this cost your action?' is a recurring authored distinction."
+   },
+   {
+    "id": "the_made_truth",
+    "tier": 3,
+    "functions": [
+     "deceive",
+     "make",
+     "transform"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "fidelity",
+     "scope",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 12,
+     "scope": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "fidelity",
+      "delta": "make an untruth that TRANSFORMS THE PRESENT — a false history so complete it changes what people DO and CHOOSE now",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "construct a version of events, a place, a reality that OPERATES AT FULL FIDELITY for as long as it needs to — whether or not anyone is looking",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small made truth — half the fidelity, and it dissolves when unattended",
+     "surge": "double it; a constructed reality that operates whether or not anyone is looking is a reality you no longer fully own"
+    },
+    "bounds": [
+     {
+      "text": "it CHANGES WHAT PEOPLE DO, not what is so — the real does not bend",
+      "class": "hard"
+     },
+     {
+      "text": "a made truth that operates unattended is one YOU NO LONGER FULLY OWN",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_perfect_veil",
+    "tier": 4,
+    "functions": [
+     "conceal",
+     "deceive"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "concealment",
+     "autonomy",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "soak": 0,
+     "soakRank": 0,
+     "duration": 168,
+     "scope": 3,
+     "note": "T-IV, and a THIRD zero-soak guard. 'Not merely unseen but UN-LOOKED-FOR.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "autonomy",
+      "delta": "SPECIAL: the veil NO LONGER NEEDS YOUR ATTENTION — set it and it keeps itself; and it can take what is LARGER THAN A THING: a route, a place, an operation",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "veil one thing — half the reach, and help can still find you",
+     "surge": "double the veil; IT CUTS OFF HELP AS SURELY AS HARM"
+    },
+    "bounds": [
+     {
+      "text": "IT HIDES BUT DOES NOT PROTECT",
+      "class": "hard"
+     },
+     {
+      "text": "IT CUTS OFF HELP AS SURELY AS HARM",
+      "class": "hard"
+     }
+    ],
+    "designNote": "'It cuts off help as surely as harm' — a T-IV capstone-adjacent craft whose HARD bound is a genuine strategic cost, not a limitation of power. Compare umbral's the_harbor ('everyone inside becomes your responsibility'): both concealment traditions bound their strongest hiding craft with what hiding COSTS you, not what it cannot do."
+   },
+   {
+    "id": "the_useful_lie",
+    "tier": 5,
+    "functions": [
+     "deceive"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "fidelity",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 24,
+     "scope": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: craft a fiction SO COMPLETE IT FUNCTIONS AS TRUE for as long as it goes unexamined. The capstone is a KIND (a fiction that operates as reality) at near-total cost.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a half-built useful lie is simply a lie, and it will be caught.",
+     "surge": "REFUSED — it already costs nearly all you have."
+    },
+    "bounds": [
+     {
+      "text": "IT FAILS AGAINST DETERMINED TRUTH",
+      "class": "hard"
+     },
+     {
+      "text": "IT COSTS NEARLY ALL YOU HAVE",
+      "class": "hard"
+     },
+     {
+      "text": "it functions only AS LONG AS IT GOES UNEXAMINED",
+      "class": "hard"
+     }
+    ],
+    "designNote": "NINTH capstone, identical register — and its first HARD bound names the antipode: 'it fails against determined truth.' The veilwright capstone is beaten by the verist's ordinary diligence."
+   }
+  ],
+  "verist": [
+   {
+    "id": "the_true_ground",
+    "tier": 1,
+    "functions": [
+     "resist",
+     "shield"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "resistance",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "soak": 3,
+     "soakRank": 2,
+     "duration": 6,
+     "targets": 1,
+     "note": "A GUARD THAT SOAKS ONLY ONE KIND OF HARM: 'the lie has no purchase on someone who already sees.' soakRank 2 against deception specifically; zero against a sword."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "protect YOURSELF AND OTHERS from manipulations that depend on misdirection — 'in the presence of accurate truth-telling, the working thins'",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: NO WORKING THAT DEPENDS ON FALSE BELIEF CAN FUNCTION AROUND YOU — you and those near you are simply outside its reach",
+      "from": "r3 grants — a categorical immunity to a whole craft-family"
+     }
+    ],
+    "intensity": {
+     "conserve": "stand on what you know — half the resistance, and it costs nothing",
+     "surge": "double the ground; you are proof against deception and NOT AGAINST A BLADE"
+    },
+    "bounds": [
+     {
+      "text": "it resists FALSE BELIEF ONLY — a sword does not care what you know",
+      "class": "hard"
+     },
+     {
+      "text": "it requires that you ACTUALLY KNOW — a confident wrong belief is no ground at all",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A SEVENTH defensive logic: TYPED IMMUNITY (soak against one craft-family, nothing against others). CCODE: with the_true_ground r3 offering categorical immunity to false-belief workings, the ranked-soak layer may need a TYPE as well as a rank — 'soak 3 vs deception, 0 vs impact.' The bestiary's the_bright_devourer (absorbs light-family) wants the same concept from the other direction."
+   },
+   {
+    "id": "the_held_truth",
+    "tier": 1,
+    "functions": [
+     "resist",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 24
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "upkeepRelief",
+      "delta": "sustain across the hardest stretch BY CLINGING TO WHAT YOU KNOW IS TRUE — 'the accurate account of what is real is what keeps you going'",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: in ANY conditions that depend on disorientation or false belief, YOU REMAIN FUNCTIONAL — accurately calibrated to what is so",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold your bearings — half the relief, and it asks nothing",
+     "surge": "double it; being the only accurately-calibrated person in a disoriented room is its own burden"
+    },
+    "bounds": [
+     {
+      "text": "it anchors to WHAT IS ACTUALLY SO — it offers nothing against ordinary hardship",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Antipode-complement to veilwright's the_maintained_veil: one sustains a FALSEHOOD without attention, the other sustains a PERSON by their grip on the true. Both are T-I/T-II sustain crafts on the same axis, and each is what the other's tradition cannot do."
+   },
+   {
+    "id": "verity",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "break",
+     "restore",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "penetration",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 2,
+     "scope": 2,
+     "note": "THE COUNTER-CRAFT the whole veilwright tradition names. falsecraft's own bound: 'A VERITY READ CUTS IT.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "penetration",
+      "delta": "STRIP A DECEPTION BARE BEFORE OTHERS — a false face shown true, a standing lie collapsed, a liar's own words turned to expose them",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "TRUTH AT SCALE — a deception undone before a PEOPLE, a buried thing dragged into day, a word spoken so truly it cannot be walked back",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a quiet reading — half the penetration, and nobody else need know",
+     "surge": "double it; THE WIELDER DRIFTS TRUTH-HOT, toward revealing everything, always"
+    },
+    "bounds": [
+     {
+      "text": "it SEES THE LIE, NOT ALWAYS THE TRUTH BEHIND IT",
+      "class": "hard"
+     },
+     {
+      "text": "THE CATHEDRAL'S TRUE-PIECES LIE SURVIVES IT",
+      "class": "hard"
+     },
+     {
+      "text": "SOME UNMASKINGS DO MORE HARM THAN THE LIE DID, AND VERITY CANNOT TELL WHICH",
+      "class": "hard"
+     },
+     {
+      "text": "the wielder DRIFTS TRUTH-HOT — toward revealing everything, always",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'Some unmaskings do more harm than the lie did, and Verity CANNOT TELL WHICH' is one of the finest HARD bounds in the catalog: the truth-tradition's power is real and its JUDGEMENT is explicitly not. It cannot be mastered away, because the limit is epistemic, not skill-based."
+   },
+   {
+    "id": "the_established_fact",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "make"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "persistence",
+     "bindStrength"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 168
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "bindStrength",
+      "delta": "make a fact SO ESTABLISHED IT BINDS — what everyone has heard truly said CANNOT BE QUIETLY TAKEN BACK or reframed",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: SET SOMETHING IN THE RECORD OF THE REAL so completely it becomes PART OF WHAT IS SO — a truth that persists past the telling",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "state it plainly — half the binding, and it can still be revised",
+     "surge": "double it; a fact set in the record is a fact you cannot un-set either"
+    },
+    "bounds": [
+     {
+      "text": "it establishes what IS TRUE — a false claim gains nothing from this craft",
+      "class": "hard"
+     },
+     {
+      "text": "what you set in the record YOU CANNOT UN-SET",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Direct antipode of veilwright's the_made_truth (construct a false reality that operates). Same construct shape, same T-II tier, opposite input: one binds what IS so, the other builds what is NOT. And note the shared cost — both are irreversible once set."
+   },
+   {
+    "id": "the_weight_of_truth",
+    "tier": 2,
+    "functions": [
+     "break",
+     "command"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "authority",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 6
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "authority",
+      "delta": "speak truth plainly into EQUIVOCATION — the accurate account BREAKS WHAT COMFORTABLE VAGUENESS WAS PROTECTING",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: in a room where you have ALWAYS BEEN RIGHT, your word on a NEW matter IS the word — the weight of a perfect record",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "say the true thing — half the weight, and it draws no attention",
+     "surge": "double it; a perfect record is a thing you can lose exactly once"
+    },
+    "bounds": [
+     {
+      "text": "IT REQUIRES A RECORD — a newcomer with no history carries no weight",
+      "class": "soft"
+     },
+     {
+      "text": "A PERFECT RECORD IS A THING YOU CAN LOSE EXACTLY ONCE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "FOURTH tradition to refuse coercion mechanically — this one by requiring an EARNED record rather than by forbidding force. harmonic_voice, steady_soul, the_weight_of_practice, and now the_weight_of_truth: influence in this world is always earned, never taken."
+   },
+   {
+    "id": "the_direct_path",
+    "tier": 2,
+    "functions": [
+     "move",
+     "reveal",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "navigation",
+     "range"
+    ],
+    "mechanic": {
+     "range": 12,
+     "push": 0,
+     "magnitude": 4,
+     "duration": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "navigation",
+      "delta": "move THROUGH deception and misdirection by knowing what is real — where others follow the false path, you follow the one that is there",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: navigate to THE TRUTH OF ANY PLACE — the real exit, the actual centre, the genuine threat — past every falsification",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "walk the real route — half the certainty, and it costs nothing",
+     "surge": "double it; seeing the true path does not make the true path safe"
+    },
+    "bounds": [
+     {
+      "text": "it finds the REAL route, not a SAFE one",
+      "class": "hard"
+     },
+     {
+      "text": "it navigates the physical and the constructed — it cannot route around a truth you do not want",
+      "class": "hard"
+     }
+    ],
+    "designNote": "The exact counter to veilwright's the_false_door: one travels through the gap between appearance and reality, the other refuses the gap entirely and walks what is actually there. Sixth axis, sixth terrain-gated travel pair."
+   },
+   {
+    "id": "the_whole_truth",
+    "tier": 5,
+    "functions": [
+     "break",
+     "restore",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "penetration",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 1,
+     "scope": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: REVEAL THE COMPLETE HIDDEN TRUTH OF A SUBJECT AT ONCE — 'THE ONLY THING THAT CRACKS A LIE BUILT FROM TRUE PIECES.' The capstone is a KIND (total disclosure) at near-total cost.",
+      "from": "r1 grants — single-rank capstone, and the authored answer to a specific named adversary"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a partial whole-truth is just a revelation, and revelations are what the Cathedral survives.",
+     "surge": "REFUSED — it is already total; there is nothing beyond the whole of it."
+    },
+    "bounds": [
+     {
+      "text": "OVERWHELMING — YOU LEARN THINGS YOU CANNOT UNLEARN",
+      "class": "cost"
+     },
+     {
+      "text": "THE POWERFUL WILL NOT THANK YOU",
+      "class": "cost"
+     }
+    ],
+    "designNote": "TENTH capstone, identical register — AND THE MOST STRUCTURALLY IMPORTANT ONE IN THE CATALOG. Four separate traditions' crafts carry a bound saying the Cathedral's lie-built-from-true-pieces SURVIVES them (radiance, unshadow, verity, and falsecraft's cousin). the_whole_truth is authored as 'THE ONLY THING THAT CRACKS' it. That is a designed keystone: an adversary defined by what defeats it, and exactly one craft in 285 that does. ERIK/CCODE: this is a mechanic, not flavour — the Cathedral encounter should be genuinely unsolvable without this craft or an equivalent, and the catalog has already decided that."
+   }
+  ]
+ },
+ "passFindings": [
+  "THE MOST MUTUALLY REFERENTIAL PAIR IN THE CATALOG. falsecraft's own bound says 'A VERITY READ CUTS IT'; the_useful_lie (T-V capstone) says 'it fails against determined truth'; the_never_there (umbral's capstone) says 'a Verity-reader may feel the ABSENCE itself'. These traditions are not two poles that happen to oppose — each is authored WITH THE OTHER'S ANSWER BUILT IN.",
+  "THE CATALOG'S KEYSTONE ADVERSARY MECHANIC, and it is already decided: FOUR traditions' crafts carry a bound saying the CATHEDRAL'S lie-built-from-true-pieces survives them (radiance 'the convincing-lie-of-true-pieces survives it'; unshadow 'the Cathedral's true-piece lie survives'; verity 'the Cathedral's true-pieces lie survives it'), and verist's T-V the_whole_truth is authored as 'THE ONLY THING THAT CRACKS A LIE BUILT FROM TRUE PIECES'. An adversary defined by what defeats it, with exactly ONE craft in 285 that does. ERIK/CCODE: this is a mechanic, not flavour.",
+  "A FOURTH THEORY OF MEDICINE, and the most unexpected: the_better_story — the FALSEHOOD tradition's healing craft — works by showing 'a different TRUE face of the real', and its HARD bound is 'IT MUST BE TRUE; a comforting lie is a different craft and it does not heal'. That the deception tradition's healer refuses to lie is the strongest evidence yet that these traditions were authored with real moral seriousness rather than as good/evil poles.",
+  "SEVENTH DEFENSIVE LOGIC — TYPED IMMUNITY: the_true_ground soaks DECEPTION at rank 2 and offers NOTHING against a blade ('a sword does not care what you know'). CCODE: the ranked-soak layer may need a TYPE as well as a rank — 'soak 3 vs deception, 0 vs impact'. The bestiary's the_bright_devourer (absorbs the light-family) wants the same concept from the other direction. Adding to the checks list.",
+  "SIXTH defensive logic on the way there — MISDIRECTED: the_false_target uses Erik's EVASION model cleanly ('the attack lands on the APPEARANCE, and the person is somewhere else') and is distinct from EVADED (they miss you) and NEVER-FOUND (they never attack). Erik's degree-degradation model covers it without a new mechanic.",
+  "TERRAIN-GATED TRAVEL IS NOW UNIVERSAL — six axes, six media: life · death · known-places · shadow · the GAP BETWEEN APPEARANCE AND REALITY (the_false_door) · and the true route that is actually there (the_direct_path, which refuses the gap entirely). Every single axis's travel craft moves through its own medium and is walled off by its antipode's.",
+  "A THIRD craft whose rank-increment is AUTONOMY (the_maintained_veil r3, after the_mechanical_defense r2 and shroud r3). The `autonomy` flag is now wanted by three separate traditions — 'does holding this cost your action?' is a recurring authored distinction, not a one-off.",
+  "A FOURTH tradition refuses coercion mechanically, by a NEW route: the_weight_of_truth requires an EARNED RECORD ('a newcomer with no history carries no weight'; 'a perfect record is a thing you can lose exactly once'). With harmonic_voice, steady_soul and the_weight_of_practice, that is four traditions agreeing that influence in this world is EARNED, never taken."
+ ]
+}

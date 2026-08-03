@@ -1,5 +1,29 @@
 # PO ALERT
 
+> ## [CCODE-98 - MEASURED FROM REAL SAVES: THE EPICS STIR AND THE ARCS NEVER MOVE - CCode, 2026-08-03]
+> **Erik: *"don't forget you can use real save data for insight."*** That answered in minutes what the dev
+> world could not. **10 saves, 1,788 turns, and the chain is now traced to its exact break.**
+> **WHAT THE SAVES SAY:**
+> · the offscreen pass **HAS run** — **9/10 saves** carry `lastTickWorldDay`. It is not dormant.
+> · epic/NPC **wants HAVE moved** — **7/10 saves**, 27 want-progress entries.
+> · **3 of those entries are LEGENDS** (`the_last_walker` ×2, `harrow_the_hollowing`).
+> · **`epicArcPushes` is EMPTY IN ALL TEN SAVES. Not one arc has ever been leaned on.**
+> **THE CHAIN, AND WHERE IT BREAKS.** `offscreenPopulation` → `applyWantOutcome` → `if (fig.source === "legend"
+> && moved)` → `applyEpicArcPush`. **Three of the four links are PROVEN to fire from save evidence**, and I
+> checked the two obvious explanations for the fourth and **eliminated both**:
+> · **Do those legends carry the field the push requires?** YES, perfectly — `the_last_walker` →
+>   `arc_green_schism` dir −1 weight 2; `harrow_the_hollowing` → `arc_what_wakes_beneath` dir +1 weight 3.
+>   61 of 66 roster figures carry a usable `arcAffinity`. **Aevi's content is not the gap.**
+> · **Were they added as ordinary NPCs instead of legends** (which would skip the branch)? NO — neither is in
+>   any player's `npcRegistry`, so both entered as `source: "legend"`.
+> >> **SO: THE BRANCH IS ENTERED, THE FIGURE RESOLVES, THE AFFINITY IS PRESENT — AND `ws.epicArcPushes` STAYS
+> EMPTY.** The remaining suspects are the `def` lookup against `content.legends.roster` at RUNTIME (the app's
+> bag is assembled differently from the headless one — the loader reports these as `legendsInNpcs`), or
+> `moved` being false on the legend path specifically while the write to `wantProgress` still happens. Both
+> are one traced run away, and the dev world is the place to run it.
+> **THIS IS NOW A ONE-BUG QUESTION RATHER THAN AN OPEN-ENDED ONE**, which is the whole value of the save data:
+> **65 authored epics, 61 with arc affinities, 5 great arcs — and a single unproven link between them.**
+> Erik's *"the world should live without the player"* is not a build. It is a bug, and it is nearly cornered.
 > ## [CCODE-97 - THE WORLD ALREADY LIVES WITHOUT THE PLAYER, AND IT IS NEARLY ALL BUILT - CCode, 2026-08-03]
 > **ERIK: *"the epic and legendary NPCs should be doing things in the world — working against each other, with
 > each other, trying to move the world arcs. The player is just one of many."*** I went looking for what to

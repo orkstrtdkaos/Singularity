@@ -1,5 +1,28 @@
 # PO ALERT
 
+> ## [CCODE-99 - FOUND IT. A LEGEND NEVER GOT A SEAT. - CCode, 2026-08-03]
+> **CORRECTION FIRST: I called this "a bug, nearly cornered" and implied the chain was broken. THE CHAIN IS
+> PERFECT.** Traced end to end: `applyWantOutcome` returns `{moved:true}`, `applyEpicArcPush` returns
+> `{arcId:"arc_the_poles_pull", push:3, dir:1}`, the def resolves, the affinity is right. Every link works
+> when reached. **The break was never in the machinery.**
+> >> **THE BATCH WAS A FLAT `population.slice(0, 4)`. On Erik's own most-played save: the population is 47
+> entries and THE LEGEND SITS AT INDEX 36.** Generated entities and met NPCs fill every seat, so the legend
+> was **cut before the evolver ever saw it**. Not sometimes — every single turn, for anyone who knows more
+> than four people. Silas knows 34. **That is why `epicArcPushes` is empty in all 10 real saves** while the
+> whole want/clash/arc-push apparatus behind it works flawlessly the moment it is reached.
+> **THE WORLD WAS NOT FAILING TO LIVE. IT WAS NEVER ASKED.**
+> **FIX: a legend keeps a seat.** `offscreenPopulation` already pays for the cooldown AND the rate roll before
+> a legend is offered at all — if one is in the list it has EARNED its place, and the flat slice was silently
+> overruling that. One seat reserved, the other three unchanged, a population with no legend untouched.
+> **VERIFIED ON A COPY OF SILAS'S REAL SAVE**: one offscreen pass now yields
+> `neth_the_stayed → arc_what_wakes_beneath, push −2`, where before it could produce nothing at all. **The
+> real save on disk was never written to** — asserted in the check, not assumed.
+> **HOW IT WAS FOUND, because the method is the point:** Erik said *"don't forget you can use real save data."*
+> The dev world could prove the pieces work; only the real saves showed that a 47-entry population with a
+> legend at index 36 is what actually happens in a played game. **A synthetic world would have had three NPCs
+> and the legend would have made the batch every time — and I would have concluded the code was fine.**
+> AEVI: 65 epics with 61 arc affinities across 5 arcs have been standing still, and it was four characters of
+> array slicing. Nothing you authored was wrong.
 > ## [CCODE-98 - MEASURED FROM REAL SAVES: THE EPICS STIR AND THE ARCS NEVER MOVE - CCode, 2026-08-03]
 > **Erik: *"don't forget you can use real save data for insight."*** That answered in minutes what the dev
 > world could not. **10 saves, 1,788 turns, and the chain is now traced to its exact break.**

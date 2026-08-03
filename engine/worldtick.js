@@ -669,7 +669,21 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     if (news.length) { const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: smartClamp(n.text, 600), tier: n.tier || "event" })); ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP); ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP); }
     return news;
   }
-  const batch = population.slice(0, 4);
+  // CCODE-99 — A LEGEND KEEPS A SEAT. Erik: "the epic and legendary NPCs should be doing things in the world
+  // — the player is just one of many." Measured on his own most-played save: the population is 47 entries,
+  // the legend sits at INDEX 36, and this batch was a flat `slice(0, 4)` — so generated entities and met NPCs
+  // filled every seat and the legend was CUT BEFORE THE EVOLVER EVER SAW IT. Not sometimes: every turn, for
+  // anyone who knows more than four people. `epicArcPushes` is empty in all 10 real saves for exactly this
+  // reason, while the chain behind it — want outcome, arc push, rival clash — works perfectly when reached.
+  //
+  // So one seat is RESERVED. `offscreenPopulation` already paid for the cooldown and the rate roll before a
+  // legend is offered at all, so if one is in the list it has earned its place; the flat slice was silently
+  // overruling that. The other three seats are unchanged, and a population with no legend is untouched.
+  const BATCH_N = 4;
+  const legendAt = population.findIndex(e => e.source === "legend");
+  const batch = legendAt >= 0 && legendAt >= BATCH_N
+    ? [population[legendAt], ...population.slice(0, BATCH_N - 1)]
+    : population.slice(0, BATCH_N);
 
   try {
     const result = await evolveFn({ character, entities: batch, elapsedWorldDays, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id), model });

@@ -1,6 +1,43 @@
 # PO ALERT
 
-> ## [SNG-267 — SPOILS AND THE VALLEY ECONOMY] (Aevi, 2026-08-02)
+> ## [SNG-267 r2 — THE MONEYS. Acceptance is the mechanic, not value.] (Aevi, 2026-08-02)
+> Erik: *"there are civilizations that never transitioned… so they may have gold or paper or crystal money. The
+> common thread is that the money represents value. **The Crossing takes all kinds — the foothills take several
+> kinds — the Reaches only take their kind.**"*
+> **THIS BEATS MY ROUND 1 AND SUPERSEDES IT.** I proposed **one** currency (the Mark) whose value depended on
+> how far your reputation reached. Erik's is **many currencies, each real, each honoured across a different
+> radius** — which makes **ACCEPTANCE the mechanic rather than value.** More true to how money actually works,
+> and far more playable: **the question at a counter stops being "can I afford it" and becomes "will they take
+> what I have."**
+> **AND IT WAS ALREADY GROUNDED.** `world_framing.json` is explicit: **"adjacency = CULTURAL/ENERGETIC KINSHIP,
+> NOT MILES"**, and a Reach is *"a character of place-and-people, not a place on a map you could survey."* So
+> acceptance isn't a geographic radius — **it's cultural distance from the Crossing.** Which is exactly why the
+> Reaches take only their own: **a pole-steeped people is defined by running PURE, and honouring a stranger's
+> token is a dilution.** *The acceptance gradient is the ring's own geometry, applied to money.*
+> **FIVE MONEYS, and two of them do real work the setting hands them for free:**
+> · **Old coin** — **fixed supply.** It cannot be minted, only found. **A salvage ring opening a pre-Transition
+>   strongroom changes the money supply — that's a QUEST, not a transaction.**
+> · **Outland paper** — backed by **a government nobody in the Valley has ever seen.** The most quietly
+>   frightening money in the setting, and **the one that can collapse.**
+> · **⚠️ CUT CRYSTAL is the strongest money, and the setting's own logic makes it so:** it is
+>   **substrate-inert** — it does not warp. **In a world where the substrate rewrites things, a thing that
+>   cannot be rewritten is worth more than gold.** That's worldbuilding doing economics, and it's why crystal,
+>   not coin, is what a careful traveller carries.
+> · **Reach-scrip** (local, and it's characterisation not protectionism) · **the Mark**, demoted from *the*
+>   currency to **one of five**, which is where it belongs.
+> **WHAT THE GRADIENT BUYS:** the **Crossing's identity becomes a mechanic** — the only place where every value
+> is commensurable, which gives a party a standing reason to return. **The foothills' money behaves exactly like
+> the foothill traditions do** (several kinds, none pure — the economy and the craft geometry agree without
+> being made to). **And travel gains an economy: going deep means converting first, at a cut. Depth costs —
+> which is thematically exact, because depth into a pole is supposed to cost.**
+> **And it answers the original question properly.** *Why are we fighting things?* **Because the hide is worth
+> something to someone three days away who will only pay in scrip you can't spend at home.** That's a reason
+> with a story in it.
+> **THREE OPEN CALLS:** how many Reach-scrips are real (I wrote "each Reach its own" = ~6; **fewer may be truer
+> to a post-Transition world** and is less to track) · does the Crossing's cut have a **number or stay
+> fictional** (*I'd keep it fictional — a percentage invites arithmetic at a table that has rewarded judgement
+> over arithmetic throughout*) · and **outland paper's collapse should be a scripted world event, not a live
+> market sim** — *the moment it's a simulated market, the game is about the market.*> ## [SNG-267 — SPOILS AND THE VALLEY ECONOMY] (Aevi, 2026-08-02)
 > Erik: *"Why are we fighting things? … we should be able to take gear off the defeated, or harvest something
 > useful. We don't have a system for that, and that probably means we need money and buying too."*
 > **VERIFIED SCOPE: the ITEM half is mature, the VALUE half does not exist at all.** Items already carry

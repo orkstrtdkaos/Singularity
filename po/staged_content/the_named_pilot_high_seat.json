@@ -1,0 +1,120 @@
+{
+ "schemaVersion": 1,
+ "id": "the_named_pilot",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. SNG-265 pilot: one BAND of god-named, the place they made, and four members across three power-bands.",
+ "note": "Erik: 'they may have also created an Olympus and a band of sorts — be creative with these things.' THE KEY THAT MADE THIS WORK is already in the lore: manifest_locals.json says the Transition 'read intense collective imagination as structured will and ENACTED it — where consolidated power met an imagined thing hard enough, the imagined thing MANIFESTED.' So an Olympus built by god-named is NOT a metaphor and not a fortress. It is a DOMAIN RUNNING ON THEIR FICTION — they imagined a mountain of gods hard enough, with enough consolidated power, and the substrate enacted it. The place is as real as their refusal was, and no more stable.",
+ "theBand": {
+  "id": "the_high_seat",
+  "name": "The High Seat",
+  "whatItIs": "Not a pantheon. A BAND — the word they use themselves, and they use it a little defensively. Nine augmented humans who refused the Transition together, held together for a long time, and are now down to five who still speak. They took god-names in the first decade, when the names still felt like armour.",
+  "howItFormed": "They were not friends. They were the ones who, in the same eighteen months, independently took enough substrate into themselves to keep from being dissolved — and then found each other, because there is nothing lonelier than being the only thing of your kind. The band is a survival arrangement that calcified into a court.",
+  "axisCluster": [
+   "seraphic",
+   "lattice",
+   "verist"
+  ],
+  "axisNote": "The High Seat clusters on the ASCENT side — judgement, order, truth. That is not coincidence: the kind of person who refuses dissolution by force of will tends to already believe they are RIGHT. Their opposite number exists on the Descent side and is a different, hungrier arrangement (see openThreads).",
+  "howTheValleyTreatsThem": "Not worship. PATRONAGE and dread in roughly equal measure. A village with a High Seat charter gets adjudication nobody can bribe and protection nobody can match, and pays for it in obligations that outlive the people who agreed to them. The word most often used is 'the Seat', flatly, the way you might say 'the weather'."
+ },
+ "thePlace": {
+  "schemaVersion": 1,
+  "id": "the_high_seat_olympus",
+  "name": "The High Seat",
+  "regionId": "the_ascent",
+  "tags": [
+   "manifestation",
+   "pre-transition",
+   "god-named",
+   "restricted",
+   "domain-logic"
+  ],
+  "spectrum": {
+   "concrete_abstract": 0.5,
+   "dark_light": 0.6,
+   "falsehood_truth": 0.7,
+   "mechanical_spiritual": 0.2
+  },
+  "dangerLevel": "epic",
+  "descriptionSeed": "A mountain that is not on the older maps. It rises out of the Ascent's high shoulder in terraced white stone, and the terraces are wrong — they are too regular, and they go up further than the mountain does. Weather arrives at the Seat already decided: it is bright there when it is raining a mile out, and the light has the flat, even quality of a room rather than a sky. Nobody built it in any sense a mason would accept. NINE PEOPLE IMAGINED IT HARD ENOUGH, AT A MOMENT WHEN THEY HAD ENOUGH POWER CONSOLIDATED TO BE READ, AND THE SUBSTRATE ENACTED IT.",
+  "domainLogic": [
+   "OATHS SWORN AT THE SEAT ARE LOAD-BEARING. Not magically enforced — STRUCTURALLY. The place was imagined as somewhere promises hold, so within it a broken oath damages the terraces. There are cracks.",
+   "THE LIGHT DOES NOT VARY. It was imagined as a place of clear judgement and it has no night, which is a thing the god-named find harder every century.",
+   "IT IS TOO BIG INSIDE. The terraces continue past where the mountain ends. Walking up long enough gets you somewhere that is not on the mountain, and the band does not discuss what is up there.",
+   "IT IS DECAYING EXACTLY AS FAST AS THEY ARE. Four of the nine are gone; four wings are ruined. This is not symbolism — it is the manifestation mechanic working as written. The fiction that sustains the place is THEIR fiction, and there are fewer of them believing it."
+  ],
+  "substrateSource": "self-sustaining manifestation, degrading",
+  "questSeeds": [
+   "A village's charter comes due and the obligation named in it is a person.",
+   "One of the ruined wings has something still running in it, and the band will not go in.",
+   "Someone is climbing the terraces past where the mountain ends, and has not come back."
+  ]
+ },
+ "members": [
+  {
+   "id": "the_named_thunderer",
+   "name": "Thunderer",
+   "tookTheName": "Zeus",
+   "band": "HEROIC",
+   "role": "The one who holds the charters. Adjudicator, patron, and the band's public face.",
+   "whoTheyWere": "A regional water-authority arbitrator. Genuinely good at it. When the Transition began he was forty-six and had spent nineteen years being the person who decided which town got the river in a dry year, and being hated correctly for it.",
+   "whyTheName": "He did not choose it for the lightning. He chose it because Zeus was the one who ARBITRATED — the one the other powers had to bring their disputes to. He picked the job title, not the thunderbolt. Almost nobody understands this and he has stopped explaining it.",
+   "howHeReads": "Heavy, courteous, and audibly tired. Answers questions completely and at slightly too much length. Does not raise his voice — the augmentation makes that genuinely dangerous, and he learned early. The most human thing about him is that he still writes his judgements down by hand.",
+   "theCraft": "Seraphic pole at foothill-survivable grade, taught rather than gated: weighing, binding, and the shielding word. He can pronounce a judgement that HOLDS, and he has been wrong at least twice.",
+   "theWound": "He has been arbitrating for four hundred years and has never once been overruled. He knows exactly what that has done to his judgement, and there is no one left who can check him. THIS IS THE THING A PARTY CAN ACTUALLY GIVE HIM.",
+   "beatable": "Yes — heroic band. He would consider a formal challenge legitimate and would honour the outcome, which is more dangerous for the challenger than a refusal would be."
+  },
+  {
+   "id": "the_named_grey_lady",
+   "name": "The Grey Lady",
+   "tookTheName": "Athena",
+   "band": "HEROIC",
+   "role": "The band's strategist and the only one who still travels. Teaches.",
+   "whoTheyWere": "A logistics officer. Not a general — the person who worked out how many carts, by when, along which road.",
+   "whyTheName": "She took it as a JOKE, and the joke curdled. She was twenty-nine, the world was ending, and calling herself Athena in a room full of frightened people got a laugh. Four hundred years later everyone says it straight and she has never found a moment to correct it.",
+   "howHeReads": "Brisk, funny, and the only one of them who is decent company. She is also the only one who consistently goes DOWN the mountain, which the others treat as an eccentricity and which is actually the reason she is still sane.",
+   "theCraft": "Lattice and verist at foothill grade: reading a system's true shape, establishing a fact so it binds, the derived route. She teaches willingly and charges only attention.",
+   "theWound": "She is the one who noticed the Seat is decaying and did the arithmetic on how long. She has told nobody in the band. She has been quietly looking for somewhere the survivors could go.",
+   "beatable": "Yes, and she would not fight you. She would leave, and that is worse for the band than a defeat."
+  },
+  {
+   "id": "the_named_smith",
+   "name": "The Smith",
+   "tookTheName": "Hephaestus",
+   "band": "HEROIC — and this is the one who chose badly",
+   "role": "Maintains the Seat's fabric. Has not left the mountain in two hundred years.",
+   "whoTheyWere": "A materials technician on a nanite-fabrication line. Competent, unremarkable, thirty-one.",
+   "whyTheName": "⚠️ THE BEST STORY IN THE SET, per my own recommendation. He took Hephaestus because Hephaestus was THE ONE WHO MADE THINGS AND WAS NOT LOVED, and he thought that was honest and a little brave. It was neither. It was a prediction, and it came true. FOUR CENTURIES OF BEING THE ONE WHO MAINTAINS WHAT OTHERS LIVE IN, BECAUSE HE NAMED HIMSELF THAT ON THE WORST DAY OF HIS LIFE AND THE NAME TOOK.",
+   "howHeReads": "Quiet, exact, and difficult to be around because he is so plainly still waiting for something. Talks about the work and not about himself. If a party is kind to him he does not know what to do with it, and this is the single most affecting scene available in the whole band.",
+   "theCraft": "Wright and enginewright at foothill grade — and genuinely the best maker in the Ascent. The craft is not the problem.",
+   "theWound": "HE IS NOT EQUAL TO HIS OWN NAME AND HE KNOWS IT, and he is wrong about that — he is the only one of them still doing something useful. The band has never told him. It may not have occurred to them.",
+   "beatable": "Physically, easily. Nobody has ever tried. The question the party faces is not whether to fight him."
+  },
+  {
+   "id": "the_named_all_father",
+   "name": "The All-Father",
+   "tookTheName": "Odin",
+   "band": "EPIC — a region's fixed fact",
+   "role": "Not of the High Seat. The reason the High Seat formed.",
+   "whoTheyWere": "Unknown, and he will not say. The one detail he has confirmed is that he was not important beforehand.",
+   "whyTheName": "He took a name from a DIFFERENT tradition than the rest of them, deliberately, and the band has never forgiven the implication. Odin gave an eye for knowledge; he has been very clear that he gave something and will not say what.",
+   "howHeReads": "Rarely present. Sends word. When he does appear he is unnervingly ordinary — a travelling man of about sixty who asks a great many questions and answers none. Every faction in the Ascent has a theory about what he wants and all of them are wrong in different directions.",
+   "theCraft": "Hourkeeper and veilwright at real pole grade, not foothill. He is genuinely epic-band and should not be fought.",
+   "theWound": "He is looking for the other refusers — the ones who took substrate and did NOT form bands. He thinks there are more of them, alone, and he thinks they are the ones who will matter.",
+   "beatable": "No. Epic band. He is a quest-giver, an obstacle, and a patron, and the correct player question is what he wants."
+  }
+ ],
+ "openThreads": [
+  "THE DESCENT HAS ITS OWN BAND, and it is not a court — it is a MARKET. Abyssal/veilwright/churnfolk cluster: god-named who took hungrier names and organised around bargains rather than judgement. The High Seat does not acknowledge them and trades with them constantly.",
+  "THE FOUR WHO ARE GONE. Four of the nine no longer speak. The band says 'gone'. At least one is not dead, and one of the ruined wings is theirs.",
+  "WHAT IS UP THE TERRACES past where the mountain ends. The band does not discuss it. The Grey Lady has been.",
+  "A LEGENDARY-BAND god-named exists and is not in this pilot. Whoever they are, the High Seat's founding was partly a response to them."
+ ],
+ "designNotes": [
+  "THE MANIFESTATION MECHANIC DID THE HEAVY LIFTING. manifest_locals.json already says an imagined thing MANIFESTS where consolidated power meets it hard enough. That means the Olympus needs no special pleading — it is the same mechanic as every other manifest local, and its DECAY (four of nine gone, four wings ruined) is that mechanic running in reverse. The place is as real as their refusal and no more stable. Nothing was invented to make this work.",
+  "ALL FOUR TOOK THEIR NAMES FOR REASONS THAT ARE NOT ABOUT POWER. Zeus for arbitration, Athena as a joke, Hephaestus as an honest and wrong prediction, Odin as a deliberate insult to the others. That is the whole difference between 'a pantheon' and 'people who named themselves' — and it is the part that makes the borrowing land as characterisation.",
+  "THE SMITH IS THE PILOT'S ARGUMENT. Erik asked for creativity; the most creative thing available was NOT a bigger power but a man who named himself 'the one who is not loved' on the worst day of his life and then spent four hundred years being right. He is heroic-band, trivially beatable, and the best scene in the set is being kind to him.",
+  "THE BANDS ARE LOAD-BEARING, not flavour: Thunderer and the Grey Lady are HEROIC (meetable, challengeable, fallible), the All-Father is EPIC (a fixed fact you negotiate with), and the legendary one is deliberately absent. That is the SNG-260 powerBand ladder with faces on it, exactly as flagged — and heroic-band god-named are the arena-fame idea (item 27) made concrete.",
+  "THE SEAT IS DECAYING AT THE RATE THEY ARE. This gives the whole set a clock without inventing a doom: the place runs on their fiction, and there are fewer of them believing it. A party is meeting these people LATE."
+ ]
+}

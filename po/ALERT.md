@@ -1,6 +1,41 @@
 # PO ALERT
 
-> ## [CCODE-88 - PELL'S GEAR FOUND IN THE CHRONICLE AND MINTED - CCode, 2026-08-02]
+> ## [🏁 SNG-263 — THE CRAFT CATALOG IS COMPLETE. 27/27 TRADITIONS.] (Aevi, 2026-08-02)
+> `valley_craft` authored — **twelve antipode pairs plus three folk traditions, every craft carrying an
+> operative axis, magnitudes, per-rank deltas, per-craft conserve/surge, and SNG-264 bound classes.** All 18
+> staged files resolving clean against the real engine.
+> **⚠️⚠️ ERIK/CCODE — THE MOST IMPORTANT SINGLE FINDING OF THE WHOLE PASS, and it lands on the last tradition:**
+> **`old_roads` RESHAPES SNG-261 §B ENTIRELY.** It is a **T-II craft in the OPEN-ACCESS FOLK tradition** that
+> senses Precursor material, **maps a site's layout by walking it**, judges whether a remnant is **dormant,
+> cycling, or WAKING**, and at r3 **perceives the valley's WHOLE LATTICE and senses when it CHANGES.**
+> **SNG-011's fourth access route — "OLD ROADS MASTERY" — IS NAMED AFTER THIS CRAFT.** Precursor contact was
+> never a locked door: **the Valley's ordinary people have a craft for it.** With the eight other hooks
+> (`prism_sight`, `echo_memory`, `mech_sense`, `command_engine`, `enginecraft`, `tinkers_hand`, `beastfriend`,
+> `stonewise`) that is **nine independent in-catalog routes** — and the folk one is the broadest. It also gives
+> the layer a far better epistemic shape than a door: **the folk can SENSE it, MAP it, and know when it MOVES —
+> and its PURPOSE stays dark.**
+> **VALLEY_CRAFT IS THE MOST MECHANICALLY SPECIFIC TRADITION IN THE CATALOG, and it isn't close:** *"+2 extra
+> health and energy overnight"*, *"travel time −1h"*, *"once per day"*, *"once per season"*, *"once per location
+> per visit"* — stated outright. **Where a pole writes "revelation at scale", the folk tradition writes "+2".**
+> **`hearthbinding` is the argument for what a folk tradition is FOR** — it makes **camp** a mechanic, turns a
+> shared meal into a truce **hostile parties will keep**, and after three nights **names a place into the
+> world's memory.** No pole tradition has anything like it, because **no pole tradition is about ordinary people
+> staying alive together.** ERIK: if the foothills ask (item 26) needs a north star, **this craft is it.**
+> **And the folk are the strictest in the catalog about consent** — `beastfriend`'s three HARD bounds all say
+> the same thing: *"no commands, only trust"* · *"a partner, not a tool"* · **"YOU ASK — ALWAYS. NOTHING HERE IS
+> COMPELLED."** With `greenlore`'s *"it has to be TAKEN, which means it has to be GIVEN."* **Thirteen traditions
+> refuse coercion mechanically, and the ordinary people are the most absolute about it.**
+> **`hunters_strike` is the T-I damage baseline your original benchmark was about** — and its three HARD bounds
+> are all **ethical**, not mechanical: *"no warrior's forms — one target, honest force"* · *"**clean is a
+> discipline, not a mercy** — the animal is still dead"* · *"it is a hunter's craft, **not a soldier's** —
+> turned on people it is what it is."* **The baseline damage craft of the entire game refuses to be comfortable
+> about killing.**
+> Final tallies: **19 defensive logics on 3 mechanisms** (your grouping, item 28, holds) · **14 incompatible
+> theories of medicine on ONE `healing` shape** — the strongest evidence the CCODE-64 schema generalises ·
+> **24 capstones, identical register** · **16 travel crafts, every one terrain-gated on a medium its antipode
+> cannot use, not one exception.**
+> The catalog's last bound is the whole tradition in a line: `boundary_stone` — ***"the old boundaries were set
+> by people who paid for them."***> ## [CCODE-88 - PELL'S GEAR FOUND IN THE CHRONICLE AND MINTED - CCode, 2026-08-02]
 > **ERIK: found them, day 14, the Fell Pell gathering — chronicle entry 1 of Silas's save.** Verbatim:
 > *"Pell's brigandine finished with full protective rune-work collar to hem, ONE RADIANT MARK at the chest
 > from the vial's last scraping, and a PARTIAL SHIELDING WORD seated in its outer ring with the promise of

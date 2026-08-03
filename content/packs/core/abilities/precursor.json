@@ -71,7 +71,52 @@
       ],
       "tradition": "precursor",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "setup",
+      "operativeAxis": [
+        "perceptionDepth",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 6,
+        "duration": 2,
+        "targets": 1,
+        "damageType": "precursor"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "perceptionDepth",
+          "delta": "read a PERSON'S deep vector — standing alignment, not mood; sense when a place's vector has recently MOVED",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: perceive THE UNREPEATABLE COORDINATE of a thing — the point it alone occupies",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "one quiet read — half the depth, and nothing notices being read",
+        "surge": "double it; THE ADDRESS IS FELT, NOT SPOKEN — you can navigate to it and never describe it"
+      },
+      "bounds": [
+        {
+          "text": "ONE TARGET AT A TIME; the read fades when you look away",
+          "class": "hard"
+        },
+        {
+          "text": "NOT MIND-READING — vector is disposition, not thought",
+          "class": "hard"
+        },
+        {
+          "text": "THE ADDRESS IS FELT, NOT SPOKEN",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "latticespeak",
@@ -139,7 +184,51 @@
       ],
       "tradition": "precursor",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "setup",
+      "operativeAxis": [
+        "reach",
+        "fidelity"
+      ],
+      "mechanic": {
+        "magnitude": 6,
+        "duration": 3,
+        "damageType": "precursor"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "fidelity",
+          "delta": "ask a mechanism to PERFORM ITS FUNCTION ONCE, on its terms; read a lattice node's state (dormant/cycling/live)",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "reach",
+          "delta": "SUSTAINED EXCHANGE with any Precursor system, LIVE INCLUDED; negotiate a live remnant toward dormancy",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "one question — half the exchange, and nothing wakes further",
+        "surge": "double it; IT PERFORMS ITS OWN FUNCTION, NOT YOURS"
+      },
+      "bounds": [
+        {
+          "text": "DORMANT ONLY at r1 — live systems ignore or LASH OUT",
+          "class": "soft"
+        },
+        {
+          "text": "IT PERFORMS ITS OWN FUNCTION, NOT YOURS",
+          "class": "hard"
+        },
+        {
+          "text": "PURPOSE GLIMPSED IS NOT PURPOSE GRASPED — the GM holds the truth",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "wake_the_line",
@@ -213,7 +302,53 @@
       ],
       "tradition": "precursor",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "construct",
+      "operativeAxis": [
+        "scope",
+        "control"
+      ],
+      "mechanic": {
+        "magnitude": 7,
+        "duration": 6,
+        "scope": 3,
+        "variance": 4,
+        "damageType": "precursor"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "scope+control",
+          "delta": "wake a FULL STRETCH to sustained function; direct CRUDELY what the waking does",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: rouse A WHOLE LATTICE DISTRICT toward its old purpose; the woken network partly obeys sustained intent",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "wake a little — half the stretch, and it settles again on its own",
+        "surge": "double the waking; A DISTRICT WOKEN IS A DISTRICT AWAKE, and the consequences ripple beyond you"
+      },
+      "bounds": [
+        {
+          "text": "PARTIAL AND BRIEF at r1; you cannot choose exactly what function returns",
+          "class": "hard"
+        },
+        {
+          "text": "DIRECTION IS CRUDE — waking one line TUGS ADJACENT ONES",
+          "class": "hard"
+        },
+        {
+          "text": "A DISTRICT WOKEN IS A DISTRICT AWAKE",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "foreclose",
@@ -282,7 +417,52 @@
       ],
       "tradition": "precursor",
       "nativeOrCombination": "native",
-      "harmRung": "incapacitating"
+      "harmRung": "incapacitating",
+      "shape": "hobble",
+      "operativeAxis": [
+        "denial",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 8,
+        "duration": 1,
+        "targets": 1,
+        "damageType": "precursor"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "duration",
+          "delta": "foreclose a possibility FOR A SCENE — a room stays sealed, a working stays dead",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: foreclose something LASTING — an outcome permanently denied, a door closed for good",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "close one thing briefly — half the hold, and the drift barely registers",
+        "surge": "double it; THE VECTOR-COST IS SEVERE AND LASTING"
+      },
+      "bounds": [
+        {
+          "text": "ONE NARROW POSSIBILITY, the moment only",
+          "class": "hard"
+        },
+        {
+          "text": "EACH USE NUDGES YOUR OWN VECTOR; holding costs continuously and THE DRIFT ACCELERATES",
+          "class": "cost"
+        },
+        {
+          "text": "THE VECTOR-COST IS SEVERE AND LASTING — sustained use walks you somewhere",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "unmake_seal",
@@ -359,7 +539,53 @@
       ],
       "tradition": "precursor",
       "nativeOrCombination": "native",
-      "harmRung": "lethal"
+      "harmRung": "lethal",
+      "shape": "construct",
+      "operativeAxis": [
+        "penetration",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 9,
+        "duration": 2,
+        "scope": 3,
+        "variance": 6,
+        "damageType": "precursor"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "penetration",
+          "delta": "open MAJOR seals — vaults, containments, the doors the valley learned to walk around; sense a seal's PURPOSE-SHADOW",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: open GRAVE SEALS — the ones holding back the worst the Precursors feared; open a thing AT DISTANCE by its address",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "crack a minor binding — half the reach, and you can close it again",
+        "surge": "REFUSED at r3 — a grave seal is opened or it is not; there is no half-opened grave."
+      },
+      "bounds": [
+        {
+          "text": "MINOR SEALS ONLY at r1; what is inside is the GM's",
+          "class": "hard"
+        },
+        {
+          "text": "PURPOSE-SHADOW IS A HINT, NOT CERTAINTY; SOME DOORS NOTICE BEING READ",
+          "class": "hard"
+        },
+        {
+          "text": "NOTHING ABOUT THIS IS AIMED. WHAT COMES OUT WAS CONTAINED BY PEOPLE WHO KNEW MORE THAN YOU.",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "hold_the_aperture",
@@ -434,7 +660,55 @@
       ],
       "tradition": "precursor",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "guard",
+      "operativeAxis": [
+        "anchorStrength",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 9,
+        "soak": 0,
+        "soakRank": 0,
+        "duration": 2,
+        "targets": 1,
+        "damageType": "precursor",
+        "note": "A TWENTIETH DEFENSIVE LOGIC — HELD-OPEN: soak 0, because it does not stop harm; it stops a thing from CLOSING. The only guard in the catalog whose subject is a possibility rather than a person."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "anchorStrength",
+          "delta": "hold open something LARGER — a way that wants to seal, an outcome the lattice is foreclosing, A PERSON THE WORLD IS CLOSING AROUND",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: hold a GREAT APERTURE open against THE LATTICE'S FULL WILL — a district's foreclosure halted, a grave outcome refused",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "hold one thing open briefly — half the duration, and letting go costs nothing",
+        "surge": "double it; THE PUSH-BACK IS RELENTLESS AND REAL"
+      },
+      "bounds": [
+        {
+          "text": "ONE THING, ONE SCENE; costs continuously; WHEN YOU LET GO IT CLOSES",
+          "class": "hard"
+        },
+        {
+          "text": "THE PUSH-BACK IS RELENTLESS; hold too much too long and it takes something",
+          "class": "cost"
+        },
+        {
+          "text": "THIS IS THE HARDEST THING IN THE GAME AND THE GM PRICES IT AS SUCH",
+          "class": "hard"
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

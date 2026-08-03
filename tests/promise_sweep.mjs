@@ -144,6 +144,33 @@ console.log("\nD. GM OPS THE SALVAGE LIST FORGETS — emitted by contract, dropp
   if (!missing.length) console.log("  none — every contract op the engine reads is salvageable");
 }
 
+// -- DOOR 7: A LIST BUILT UP IN PRIORITY ORDER, THEN TRUNCATED AS IF IT WERE NOT --------------------------
+// CCODE-99: `offscreenPopulation` appends generated entities, then met NPCs, then - LAST - the legend that
+// passed a cooldown AND a rate roll to be there. `advanceGeneratedOffscreen` then took `slice(0, 4)`. On a
+// real save the population is 47 long and the legend sits at index 36, so it was cut EVERY TIME. The
+// machinery behind it was flawless; it was simply never asked. Nothing here was declared-and-unread - it was
+// COLLECTED AND THEN SILENTLY DISCARDED, which is the same family through a seventh door.
+//
+// A slice after a SORT is principled: the sort decides what survives. A slice on a list that was appended to
+// in meaningful order is a truncation overruling an ordering nobody wrote down.
+console.log("\nE. LISTS TRUNCATED WITHOUT A SORT - a flat slice overruling the order a list was built in\n");
+{
+  let flagged = 0;
+  for (const [file, src] of Object.entries(ENGINE)) {
+    for (const m of src.matchAll(/(\w+)\.slice\(0,\s*(\d+)\)/g)) {
+      const name = m[1], n = Number(m[2]);
+      if (n > 24) continue;                                  // a generous cap is a guard, not a policy
+      const before = src.slice(Math.max(0, m.index - 700), m.index);
+      if (/\.sort\(/.test(before.slice(-220))) continue;      // sorted just before the cut = principled
+      if (!new RegExp(name + "\\.push\\(").test(before)) continue;   // only lists this scope APPENDED to
+      flagged++;
+      say("REPORT", file + ": `" + name + ".slice(0, " + n + ")` truncates a list that was PUSHED to, with no sort",
+        "if later entries earned their place, this cut discards exactly them (the CCODE-99 shape)");
+    }
+  }
+  if (!flagged) console.log("  none - every bounded list is either sorted first or not built by appending");
+}
+
 console.log(`\n${findings} finding(s). This is a REPORT: each one is a question, not a verdict.`);
 console.log("A finding worth gating gets promoted to a named check, the way all six known doors were.");
 process.exit(0);

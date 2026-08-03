@@ -1,5 +1,25 @@
 # PO ALERT
 
+> ## [CCODE-100 - DOOR 7 ADDED TO THE SWEEP, AND IT FOUND TWO MORE - CCode, 2026-08-03]
+> The legend-seat bug was a NEW SHAPE, so it went into the sweep rather than staying a war story.
+> **Door 7: a list built up in priority order, then truncated as if it were not.** Nothing was
+> declared-and-unread — it was **collected and then silently discarded**. A slice after a SORT is principled
+> (the sort decides what survives); a slice on a list that was APPENDED to in meaningful order is a truncation
+> overruling an ordering nobody wrote down.
+> **IT IMMEDIATELY FOUND TWO MORE of the same shape:**
+> · **`death.js` — `out.slice(0, 8)`**, and it builds that list by walking `content.legends.roster`. **This is
+>   the reachable-dead list, and if legends are appended last there too it is the exact CCODE-99 bug in a
+>   second place** — the great dead would be unreachable for the same reason the great living were inert.
+>   **Worth checking first; I have not verified the ordering.**
+> · **`claude.js` — `folded.slice(0, 4)`**. Lower stakes, but the same question.
+> **REPORTED, NOT GATED** — a flat slice is often correct, and gating this would flag correct code constantly.
+> The sweep asks; a person decides. That is how all seven doors got their named checks.
+> ———
+> **WHERE THE THREAD ENDED UP, for the record:** Erik asked why the world does not live without the player. The
+> answer was not missing machinery and not missing content — **65 epics, 61 arc affinities, 5 arcs, a complete
+> want/clash/arc-push apparatus, and four characters of array slicing between them.** Found by reading his
+> actual save rather than a synthetic one, because a synthetic world has three NPCs and the legend always
+> makes the batch.
 > ## [CCODE-99 - FOUND IT. A LEGEND NEVER GOT A SEAT. - CCode, 2026-08-03]
 > **CORRECTION FIRST: I called this "a bug, nearly cornered" and implied the chain was broken. THE CHAIN IS
 > PERFECT.** Traced end to end: `applyWantOutcome` returns `{moved:true}`, `applyEpicArcPush` returns

@@ -1,5 +1,30 @@
 # PO ALERT
 
+> ## [CCODE-118 - CASUALTIES ARE TIERED NOW, AND THE ROSTER HAS NOBODY TO KILL - CCode, 2026-08-03]
+> **ERIK: *"break this into legends, epics, heroes — I would expect more lower power ones to die than legends.
+> A legend might be able to kill 3-4 heroes and 1-2 epics per battle."*** Built exactly that, and the
+> measurement immediately found something bigger.
+> **THE TIER GAP NOW DECIDES BOTH HOW MANY AND HOW BADLY.** A victor reaches into the LOSING SIDE — not just
+> its leader — because the allies who ganged up are precisely who a legend goes through. Reach by gap: **2
+> tiers → up to 4 · 1 tier → up to 2 · a peer → one.** And severity scales with the same gap, so peers wound
+> each other while a legend ENDS a heroic. `resolveEpicClash` still owns the roll and the death gate; the gap
+> only weights it. **Ganging up on someone far above you is now dangerous — otherwise it is a free action and
+> everyone would always do it.**
+> >> **MEASURED, 6 worlds × 3 years — death rate per world:**
+> >> `regional 66.7% · legendary 3.6% · epic 0%`
+> **The lower-power figure dies at nearly twenty times a legend's rate.** That is Erik's expectation, holding.
+> >> **BUT LOOK AT THE ROSTER COLUMN: 60 legendary · 5 epic · 1 regional.**
+> **THE VALLEY HAS NO HEROES.** 91% of its great figures are LEGENDARY. There is exactly ONE figure below epic
+> in the entire world, and she died in four of six runs — which is why "regional" reads 66.7%: it is a sample
+> of one. **The tiering works and has almost nothing to act on.**
+> **AEVI / ERIK, THIS IS THE REAL FINDING AND IT IS A CONTENT ONE:** a world where everyone notable is a legend
+> has no ladder. It also explains several things at once — why attrition felt flat, why ganging-up rarely
+> happens (there is nobody to gang up), and why Erik's "3-4 heroes per battle" has no heroes to cut down.
+> **The minting question from CCODE-117 is now urgent from the other end too**: the valley does not just need a
+> way to REPLACE the dead, it needs a POPULATION BELOW THE TOP for anyone to be promoted FROM.
+> **My guess at the cause:** `tier` was authored for narrative weight ("this person is legendary") rather than
+> as a POPULATION PYRAMID, and nothing ever measured the distribution. **That is not a mistake anyone made —
+> it is a question nobody had a reason to ask until the world started killing people.**
 > ## [CCODE-117 - THE CASUALTY KNOB WAS A DISCONNECTED WIRE - CCode, 2026-08-03]
 > **ERIK: *"what if more get killed or injured? what knob would we turn to do that?"*** The knob did not exist
 > because **the wire was cut**: 28 duels a pass across the valley and **not one of them could hurt anybody.**

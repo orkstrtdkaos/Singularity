@@ -972,14 +972,44 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         //
         // ONLY THE LEADERS ARE AT RISK: the figures who drew allies in are the ones who met each other. The
         // allies pushed; they did not duel. Putting everyone on the casualty table is how a roster empties.
+        // CCODE-118 — CASUALTIES ARE TIERED, AND A LEGEND CUTS DOWN SEVERAL.
+        //
+        // Erik: "I would expect more lower power ones to die than legends. A legend might be able to kill 3-4
+        // heroes and 1-2 epics per battle."
+        //
+        // The first version risked only the two LEADERS at a flat rate, which made a legend and the heroic who
+        // helped pin her equally likely to fall. That is not a battle, it is a coin-flip between equals who
+        // are not equals. Now the TIER GAP decides both how many the winner can cut down and how badly each
+        // one suffers — so a legend wading through heroics is lethal, and two legends meeting mostly is not.
+        //
+        // The winner reaches into the LOSING SIDE, not just its leader: the allies who ganged up are exactly
+        // who a legend goes through. Ganging up on someone far above you should be dangerous, or it is a free
+        // action and everyone would always do it.
+        const rankOf = f => ({ legendary: 3, epic: 2, regional: 1, notable: 1, riffraff: 0 })[f?.tier ?? f?.legend?.tier] ?? 2;
         const casualtyRate = Number.isFinite(cfg.casualtyRate) ? cfg.casualtyRate : 0.15;
         if (res && !res.drawn && rng() < casualtyRate) {
-          const [wf, lf] = res.winner === aSide[0].f.id ? [aSide[0].f, bSide[0].f] : [bSide[0].f, aSide[0].f];
-          const clash = resolveEpicClash(wf, lf, rng);
-          const outcome = applyEpicClashOutcome(ws, wf, lf, clash.kind, currentWorldDay);
-          if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
-            casualties.push({ arcId, winner: wf.id, loser: lf.id, kind: outcome.finalKind });
-            for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
+          const winSide = res.winner === aSide[0].f.id ? aSide : bSide;
+          const loseSide = winSide === aSide ? bSide : aSide;
+          const wf = winSide[0].f;
+          // How many the victor can go through. A legend over heroics reaches 3-4; over epics 1-2; a peer, one.
+          const reachByGap = cfg.casualtyReachByGap || { "2": 4, "1": 2, "0": 1 };
+          const gapTo = lf => Math.max(0, rankOf(wf) - rankOf(lf));
+          let budget = reachByGap[String(gapTo(loseSide[0].f))] ?? 1;
+          for (const e of loseSide) {
+            if (budget <= 0) break;
+            const gap = gapTo(e.f);
+            // A wider gap is not just more casualties — it is worse ones. Peers wound each other; a legend
+            // ends a heroic. `resolveEpicClash` still owns the roll and the death GATE; this only weights it.
+            const severity = Math.min(1, 0.25 + gap * 0.35);
+            if (rng() > severity) continue;
+            const clash = resolveEpicClash(wf, e.f, rng);
+            const outcome = applyEpicClashOutcome(ws, wf, e.f, clash.kind, currentWorldDay);
+            if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
+              casualties.push({ arcId, winner: wf.id, loser: e.f.id, kind: outcome.finalKind,
+                winnerTier: wf.tier ?? wf.legend?.tier ?? null, loserTier: e.f.tier ?? e.f.legend?.tier ?? null });
+              for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
+            }
+            budget--;
           }
         }
         for (const e of aSide) applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * (res ? res.proMult : 1));

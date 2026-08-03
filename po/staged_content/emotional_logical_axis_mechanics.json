@@ -1,0 +1,945 @@
+{
+ "schemaVersion": 1,
+ "id": "emotional_logical_axis_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, traditions 23 AND 24 of 27 — THRENODIST and SYLLOGIST, the emotional/logical axis, 11th antipode pair. THE PAIR THAT BOTH LOSE TO THE SAME ENEMY: logos' bound says 'the Cathedral of Certainty' survives it; pathos' says 'a will set against you is set against you.' And each is defeated by the OTHER's medium — logos 'the unreasonable and the EMOTION-RULED resist'; pathos 'the guarded can close.' Two traditions that cannot reach what the other reaches, both losing to the same lie.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "traditions": {
+  "threnodist": [
+   {
+    "id": "the_true_feeling",
+    "tier": 1,
+    "functions": [
+     "reveal",
+     "track"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "timeReach"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "range": 15,
+     "note": "SOCIAL attribute throughout this tradition"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "timeReach",
+      "delta": "TRACK A FEELING OVER TIME — follow grief, find WHERE FEAR DEVELOPED, trace the emotional mark a person left in a place",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "read the FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, WHAT A PEOPLE HAVE BEEN RUNNING FROM",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a read of the room — half the depth, and it does not stay with you",
+     "surge": "double it; feeling the truth of a whole history means CARRYING some of it"
+    },
+    "bounds": [
+     {
+      "text": "it reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere",
+      "class": "hard"
+     },
+     {
+      "text": "THE GUARDED CAN CLOSE",
+      "class": "soft"
+     },
+     {
+      "text": "what you read of a history, you carry some of",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Antipode to syllogist's the_axiom_holds: one grounds you in FEELING, the other in WHAT YOU KNOW IS TRUE. ELEVENTH pair, eleventh time the T-I crafts carry the axis — and this pair's are both about what holds a person UP rather than what they perceive."
+   },
+   {
+    "id": "the_wellspring",
+    "tier": 1,
+    "functions": [
+     "empower",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 24,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "your emotional depth SUSTAINS OTHERS — not by removing the hardship but BY CARRYING SOME OF IT WITH THEM",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "the depth sustains the PARTY through the hardest stretch — 'not comfort, DEPTH; not peace, feeling so genuine it holds'",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "draw a little — half the relief, and it costs you nothing",
+     "surge": "double it; CARRYING SOME OF IT WITH THEM means carrying it"
+    },
+    "bounds": [
+     {
+      "text": "it sustains by FEELING, not by easing — a person who wants comfort gets depth instead",
+      "class": "hard"
+     },
+     {
+      "text": "carrying some of it with them MEANS CARRYING IT",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'Not comfort, DEPTH; not peace, feeling so genuine it holds' — the emotional pole's sustain craft explicitly refuses to be comforting. Compare syllogist's the_axiom_holds ('fear, pain and doubt operate BELOW THE LEVEL of what you know'). One holds you by feeling everything; the other by putting feeling underneath knowing."
+   },
+   {
+    "id": "pathos",
+    "tier": 2,
+    "functions": [
+     "command",
+     "empower",
+     "heal",
+     "reveal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "resonance",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 6,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "MOVE A CROWD by feeling-with-them; CARRY A PERSON THROUGH AN EMOTION TOO BIG TO BEAR ALONE",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "FEELING AT THE SCALE OF PEOPLES — turn a room, a mob, a mourning-crowd by the TRUTH of shared feeling",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "share a little — half the effect, and you take on less",
+     "surge": "double it; THE WIELDER DRIFTS EMOTION-HOT, feeling everything, all the time"
+    },
+    "bounds": [
+     {
+      "text": "READS AND SHARES; DOES NOT COMMAND — the guarded can close",
+      "class": "hard"
+     },
+     {
+      "text": "YOU TAKE ON WHAT YOU MOVE — the cost is real",
+      "class": "cost"
+     },
+     {
+      "text": "A WILL SET AGAINST YOU IS SET AGAINST YOU",
+      "class": "hard"
+     },
+     {
+      "text": "the wielder DRIFTS EMOTION-HOT",
+      "class": "cost"
+     }
+    ],
+    "designNote": "TENTH tradition refusing coercion mechanically, and by the most direct route yet: 'READS AND SHARES; DOES NOT COMMAND.' Ten traditions now, ten distinct earned routes, zero that permit taking."
+   },
+   {
+    "id": "the_grief_strike",
+    "tier": 2,
+    "functions": [
+     "break",
+     "hinder"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "emotionalBreach",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 4,
+     "targets": 1,
+     "damageType": "feeling",
+     "note": "incapacitating. THE CATALOG'S MOST ETHICALLY UNCOMFORTABLE CRAFT — it opens a grief someone has been protecting."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "emotionalBreach",
+      "delta": "FIND AND OPEN THE GRIEF A PERSON HAS BEEN PROTECTING — the loss they have not admitted, the feeling they have been holding shut",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: BREAK AN EMOTIONAL FORTIFICATION ENTIRELY — what they were using to stay functional is now open, and requires attending",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a touch of true feeling — half the breach, and they can close again",
+     "surge": "double it; what you open in someone DOES NOT CLOSE BECAUSE YOU ARE DONE WITH IT"
+    },
+    "bounds": [
+     {
+      "text": "IT MUST BE GENUINE FEELING — a manufactured grief is not this craft and does not land",
+      "class": "hard"
+     },
+     {
+      "text": "what you open DOES NOT CLOSE because you are done with it",
+      "class": "hard"
+     },
+     {
+      "text": "breaking what someone was using TO STAY FUNCTIONAL leaves them not functional",
+      "class": "cost"
+     }
+    ],
+    "designNote": "The mirror of ashwarden's the_dread and stillhold's the_price_shown — three traditions weaponise an inner state. This is the most invasive of the three, and the catalog bounds it hardest: it must be TRUE feeling, and what you open does not close on your schedule."
+   },
+   {
+    "id": "the_felt_wall",
+    "tier": 2,
+    "functions": [
+     "foresee",
+     "shield"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "foresight",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 0,
+     "soakRank": 0,
+     "evasion": 4,
+     "evasionRank": 2,
+     "duration": 4,
+     "targets": 1,
+     "note": "A FIFTEENTH DEFENSIVE LOGIC — FORESENSED: soak 0; it reads the EMOTIONAL WEATHER and moves before harm forms. Distinct from PRE-EMPTED (end the threat) and UNTIMED (defeat the timing): this one feels the intent BEFORE it becomes action."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "PROTECT SOMEONE by feeling the danger around THEM — your emotional sense is the guard watching what eyes do not catch",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: what shifts toward violence or harm in a space REACHES YOU FIRST, across the whole space, and you act in the gap",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "keep half an ear on the room — half the warning, and it costs nothing",
+     "surge": "double it; feeling every shift toward harm in a space means FEELING EVERY SHIFT"
+    },
+    "bounds": [
+     {
+      "text": "it senses INTENT — a rockfall, a machine, or an animal has no feeling to read",
+      "class": "hard"
+     },
+     {
+      "text": "feeling every shift toward harm means FEELING EVERY SHIFT",
+      "class": "cost"
+     }
+    ],
+    "designNote": "FIFTEENTH defensive logic — FORESENSED. And note its HARD bound draws the axis's line precisely: it cannot sense a MACHINE. The emotional pole's guard is blind exactly where the mechanical tradition lives."
+   },
+   {
+    "id": "the_made_elegy",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "make"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "persistence",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 168,
+     "scope": 2,
+     "damageType": "feeling"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "BIND A FEELING INTO A MADE THING SO IT ACTS — the song that makes people FEEL what it carries, the totem that steadies",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "make something that carries feeling AT SCALE — art that moves a city, A RITUAL THAT HOLDS A PEOPLE'S GRIEF",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small keepsake — half the persistence, and it holds one feeling plainly",
+     "surge": "double it; a made thing that carries feeling carries it TO EVERYONE, including those who did not ask"
+    },
+    "bounds": [
+     {
+      "text": "THE FEELING MUST BE TRUE to bind — a made sentiment does not hold",
+      "class": "hard"
+     },
+     {
+      "text": "it carries the feeling TO EVERYONE, including those who did not ask",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Direct kin to figurist's formcraft ('a symbol that ACTS') and umbral's glimmer_script — three traditions that bind meaning into an object. The threnodist's binds FEELING, and its HARD bound is the tradition's whole ethic: it must be TRUE."
+   },
+   {
+    "id": "the_feeling_road",
+    "tier": 2,
+    "functions": [
+     "reveal",
+     "track",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "navigation",
+     "range"
+    ],
+    "mechanic": {
+     "range": 50,
+     "push": 0,
+     "magnitude": 4,
+     "duration": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "range",
+      "delta": "travel toward a POWERFUL FEELING in a region as if it were a BEACON — grief, joy, terror — and find what is creating it",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "range",
+      "delta": "follow a feeling's trace ACROSS ANY DISTANCE — track a person BY THEIR EMOTIONAL SIGNATURE",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "follow the trace — half the range, and it fades behind you",
+     "surge": "double it; following a feeling to its source means ARRIVING AT ITS SOURCE"
+    },
+    "bounds": [
+     {
+      "text": "it follows FEELING — a person who feels nothing about where they went leaves no road",
+      "class": "hard"
+     },
+     {
+      "text": "arriving at the source of a great feeling means ARRIVING AT ITS SOURCE",
+      "class": "cost"
+     }
+    ],
+    "designNote": "THIRTEENTH terrain-gated travel craft, and the strangest medium yet: it travels along EMOTIONAL TRACE. Compare the_derived_route (syllogist), which navigates by pure INFERENCE and needs no trace at all. The axis's two roads: one follows what was felt, the other deduces what must be there."
+   },
+   {
+    "id": "the_shared_grief",
+    "tier": 3,
+    "functions": [
+     "empower",
+     "reveal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "distribution",
+     "scope",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 12,
+     "scope": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "distribution",
+      "delta": "the lament FINDS THE TRUE SHAPE OF WHAT IS MOURNED — singing it, you perceive what the grief is ACTUALLY for",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope+duration",
+      "delta": "hold a lament ACROSS DAYS and ACROSS A SETTLEMENT — a whole community mourning as one",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a short lament — half the distribution, and it asks little of the gathering",
+     "surge": "double it; YOU HOLD THE GATHERING WHILE YOU HOLD THE LAMENT"
+    },
+    "bounds": [
+     {
+      "text": "IT CANNOT REMOVE GRIEF, ONLY DISTRIBUTE ITS WEIGHT",
+      "class": "hard"
+     },
+     {
+      "text": "NAMING IS NOT MENDING — a sorrow correctly named CAN WOUND",
+      "class": "hard"
+     },
+     {
+      "text": "you hold the gathering while you hold the lament, and DAYS ARE DAYS",
+      "class": "cost"
+     }
+    ],
+    "designNote": "AN ELEVENTH THEORY OF MEDICINE, and the only one that treats a GROUP as the patient: it cannot remove grief, only DISTRIBUTE ITS WEIGHT across many so none carries it alone. Eleven traditions, eleven theories of what healing is."
+   },
+   {
+    "id": "the_names_of_the_lost",
+    "tier": 4,
+    "functions": [
+     "empower",
+     "reveal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "attendance",
+     "persistence"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 720,
+     "scope": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "persistence",
+      "delta": "THE NAMES KEEP PAST THE LAMENT — sung over a place (a barrow, a battlefield, a hall), THE ATTENDING HOLDS WITHOUT YOU",
+      "from": "r2 grants — an EIGHTH autonomy-increment craft"
+     }
+    ],
+    "intensity": {
+     "conserve": "sing a few names — half the duration, and the lament closes cleanly",
+     "surge": "double it; keeping names past the lament means the place KEEPS THEM"
+    },
+    "bounds": [
+     {
+      "text": "IT CANNOT RESTORE THE DEAD, ONLY ATTEND THEM",
+      "class": "hard"
+     },
+     {
+      "text": "A NAME KEPT IS NOT A LIFE RETURNED",
+      "class": "hard"
+     }
+    ],
+    "designNote": "The gentlest craft in the catalog and one of the most bounded: two HARD bounds, both saying the same thing twice — it does not bring anyone back. Compare ashwarden's the_last_gift (a good final hour) and rootkin's the_last_gift. THREE traditions have a craft purely for attending the dead, and NONE of them restores anyone."
+   },
+   {
+    "id": "the_last_lament",
+    "tier": 5,
+    "functions": [
+     "empower",
+     "restore"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "completion",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 8,
+     "scope": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: sing a COMPLETE LAMENT that lets ALL WHO HEAR FINISH A GRIEF THEY COULD NOT FINISH ALONE. The capstone is a KIND (completing what could not be completed) at near-total cost — AND THE SINGER FEELS EVERY GRIEF IN IT.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a half-sung lament leaves a grief half-finished, which is worse than not beginning.",
+     "surge": "REFUSED — the singer already feels every grief in it."
+    },
+    "bounds": [
+     {
+      "text": "IT COSTS NEARLY ALL YOU HAVE",
+      "class": "hard"
+     },
+     {
+      "text": "THE SINGER FEELS EVERY GRIEF IN IT",
+      "class": "cost"
+     }
+    ],
+    "designNote": "TWENTIETH capstone — and one of only two in the catalog whose effect is PURELY RESTORATIVE (with rootkin's quickening line). The emotional pole's highest craft harms nothing and finishes something. Its cost is that the singer carries all of it."
+   }
+  ],
+  "syllogist": [
+   {
+    "id": "the_axiom_holds",
+    "tier": 1,
+    "functions": [
+     "resist",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 24
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "upkeepRelief",
+      "delta": "sustain through PURE LOGICAL DISCIPLINE — the sequence of correct actions that keeps you going when feeling would not",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: as long as WHAT YOU KNOW IS TRUE REMAINS TRUE, you remain functional around it — the axiom is the ground and the ground holds",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold the line of reasoning — half the relief, and it costs nothing",
+     "surge": "double it; an axiom that turns out to be FALSE takes the ground with it"
+    },
+    "bounds": [
+     {
+      "text": "it requires SOMETHING ACTUALLY TRUE to stand on",
+      "class": "hard"
+     },
+     {
+      "text": "AN AXIOM THAT TURNS OUT TO BE FALSE TAKES THE GROUND WITH IT",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Antipode to threnodist's the_wellspring: one is sustained by FEELING EVERYTHING, the other by putting feeling BELOW THE LEVEL of what is known. And the syllogist's version has the sharper failure: a false axiom takes the whole ground."
+   },
+   {
+    "id": "logos",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "break",
+     "reveal",
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "scope"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.03,
+     "scope": 2,
+     "damageType": "reason",
+     "note": "damaging — 'thought as force' in the argumentative register. Compare cogitant's noesis (also damaging, also mental): noesis out-thinks a SITUATION, logos out-argues a PERSON."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "damage",
+      "delta": "PROVE A THING SO CLEANLY THE PROOF ITSELF CHANGES WHAT PEOPLE MUST DO; CORNER A LIAR IN THEIR OWN LOGIC",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "REASON AT THE SCALE OF PEOPLES — an argument A WHOLE COUNCIL CANNOT ANSWER, a contradiction THAT TOPPLES A DOCTRINE",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "make the point — half the force, and it invites reply",
+     "surge": "double it; A VALID ARGUMENT IS NOT A TRUE ONE, and the unreasonable simply resist"
+    },
+    "bounds": [
+     {
+      "text": "THE UNREASONABLE AND THE EMOTION-RULED RESIST",
+      "class": "hard"
+     },
+     {
+      "text": "A VALID ARGUMENT IS NOT A TRUE ONE",
+      "class": "hard"
+     },
+     {
+      "text": "PROOF BINDS THE HONEST AND THE LOGICAL — THE CATHEDRAL OF CERTAINTY IS NEITHER",
+      "class": "hard"
+     },
+     {
+      "text": "IT NEEDS SOMETHING TRUE TO WORK WITH — Logos cannot prove what is not so",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ FOUR HARD BOUNDS, NO SOFT ONES — the most tightly bounded craft in the catalog, and every limit is EPISTEMIC. And its third bound names THE CATHEDRAL explicitly: 'proof binds the honest and the logical; THE CATHEDRAL OF CERTAINTY IS NEITHER.' That is now the FIFTH tradition to concede the Cathedral survives it (with radiance, unshadow, verity, and pathos' 'a will set against you'). The keystone adversary is even better-authored than I reported."
+   },
+   {
+    "id": "the_correct_protocol",
+    "tier": 2,
+    "functions": [
+     "heal",
+     "mend",
+     "restore",
+     "reveal"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "precision",
+     "completeness"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 2,
+     "note": "A TWELFTH THEORY OF MEDICINE — PROTOCOL: 'no guesswork, no comfort, THE CORRECT INTERVENTION.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "completeness",
+      "delta": "restore THROUGH PROPER SEQUENCE — the correct actions IN THE CORRECT ORDER return the body or system to function",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: restore completely by identifying THE UNDERLYING CAUSE and applying THE FULL CHAIN of correct interventions",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "the correct minimum — half the restoration, and nothing is wasted",
+     "surge": "double it; the correct intervention is CORRECT, not KIND"
+    },
+    "bounds": [
+     {
+      "text": "NO GUESSWORK, NO COMFORT — it does not soothe and does not pretend to",
+      "class": "hard"
+     },
+     {
+      "text": "it requires that the correct protocol IS KNOWN — a novel affliction defeats it",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A TWELFTH THEORY OF MEDICINE, and the exact antipode of threnodist's the_shared_grief: one distributes a feeling across a community, the other applies the known-correct sequence with NO COMFORT. Twelve traditions, twelve theories — and this pair's two are the sharpest disagreement about whether care IS comfort."
+   },
+   {
+    "id": "the_proved_position",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "shield",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "logicalGround",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "soak": 4,
+     "soakRank": 2,
+     "type": "rhetorical",
+     "duration": 8,
+     "note": "A SIXTEENTH DEFENSIVE LOGIC — PROVED: a TYPED guard (rhetorical/social attacks) whose soak is the soundness of your position. 'Attacks must first ANSWER THE PROOF.' Transparent to a blade."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "extend the proved position to cover A SPACE OR A GROUP — a claim so airtight it FUNCTIONS AS A WARD",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "a proved position holds AT SCALE — at the level of INSTITUTIONS, TREATIES, OR LAWS",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "state your ground — half the protection, and it is easy to hold",
+     "surge": "double it; a position proved at the scale of laws is a position you must keep defending"
+    },
+    "bounds": [
+     {
+      "text": "IT WARDS WHAT MUST ANSWER REASON — a fist does not answer the proof",
+      "class": "hard"
+     },
+     {
+      "text": "the position must ACTUALLY BE SOUND — a proved-wrong position wards nothing",
+      "class": "hard"
+     }
+    ],
+    "designNote": "SIXTEENTH defensive logic — PROVED, and the third TYPED guard (with the_true_ground vs deception and thingcraft vs abstraction). CCODE: `type: rhetorical` joins `deception` and `abstraction` — the typed-soak layer is being used for SOCIAL/CONCEPTUAL defence far more than for damage media. Worth knowing when you finalise it."
+   },
+   {
+    "id": "the_derived_route",
+    "tier": 2,
+    "functions": [
+     "foresee",
+     "move",
+     "reveal"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "navigation",
+     "range"
+    ],
+    "mechanic": {
+     "range": 12,
+     "push": 0,
+     "magnitude": 4,
+     "duration": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "navigation",
+      "delta": "DERIVE the correct path through UNKNOWN territory BY INFERENCE — from what you know about the type of space",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: navigate to ANY CONCLUSION THAT FOLLOWS NECESSARILY from known premises — the route that MUST exist, the exit that MUST be there",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "reason it out — half the certainty, and it costs nothing",
+     "surge": "double it; a route that MUST exist by inference still has to actually be there"
+    },
+    "bounds": [
+     {
+      "text": "it needs SOUND PREMISES — reasoning from a wrong assumption arrives confidently at nowhere",
+      "class": "hard"
+     },
+     {
+      "text": "a route that MUST exist BY INFERENCE still has to actually BE THERE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "FOURTEENTH terrain-gated travel craft, and the only one that needs NO terrain at all — it navigates by pure inference. The exact antipode of the_feeling_road (which follows emotional trace). One road is felt, the other deduced, and each is useless where the other works."
+   },
+   {
+    "id": "the_built_system",
+    "tier": 3,
+    "functions": [
+     "bind",
+     "make",
+     "sustain"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "coherence",
+     "scope",
+     "autonomy"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 8760,
+     "scope": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "autonomy",
+      "delta": "build something that MAINTAINS ITSELF THROUGH ITS INTERNAL LOGIC — not enforced, not reminded, RUNNING BECAUSE THE LOGIC RUNS",
+      "from": "r2 grants — a NINTH autonomy-increment craft"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "construct a system so LOGICALLY COHERENT it operates AT SCALE WITHOUT YOU — laws, institutions, mechanisms",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small sound system — half the scope, and you can revise it",
+     "surge": "double it; a system that runs without you RUNS WITHOUT YOU"
+    },
+    "bounds": [
+     {
+      "text": "IT RUNS ON ITS LOGIC — a system whose logic is unsound fails exactly where the flaw is",
+      "class": "hard"
+     },
+     {
+      "text": "a system that runs without you RUNS WITHOUT YOU, including when it should stop",
+      "class": "cost"
+     }
+    ],
+    "designNote": "THE THIRD independent warning that autonomous creations exceed their makers (with the_walking_figure's 'a rule nobody is supervising' and the_self_mending_work's 'drifts from its maker's intent'). Three traditions, three media — a figure, a machine, a system — same authored moral."
+   },
+   {
+    "id": "the_inescapable_conclusion",
+    "tier": 4,
+    "functions": [
+     "bind",
+     "reveal"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "bindStrength",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 6,
+     "targets": 1,
+     "damageType": "reason",
+     "note": "T-IV, incapacitating"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "WALK A WHOLE BODY OF REASONING MINDS to the same conclusion AT ONCE — a council, a court, a school",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "make the argument — half the binding, and they can still walk away thinking",
+     "surge": "double it; IT STILL FAILS ENTIRELY against those who will simply REFUSE"
+    },
+    "bounds": [
+     {
+      "text": "IT FAILS AGAINST THOSE WHO REFUSE REASON ITSELF",
+      "class": "hard"
+     },
+     {
+      "text": "it binds A REASONING MIND — the unreasoning are outside it entirely",
+      "class": "hard"
+     }
+    ],
+    "designNote": "The logical pole's T-IV binds by argument and CANNOT touch someone who simply refuses to reason. Compare threnodist's the_grief_strike, which cannot touch someone who feels nothing genuine. Each pole's strongest binding craft is defeated by a person who has abandoned the pole's own medium."
+   },
+   {
+    "id": "the_proof",
+    "tier": 5,
+    "functions": [
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "completeness",
+     "penetration"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 2,
+     "damageType": "reason"
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: ASSEMBLE AND OFFER A COMPLETE, IRREFUTABLE PROOF of a true thing. The capstone is a KIND (irrefutability itself) at near-total cost.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a partial proof is an argument, and arguments are what the Cathedral survives.",
+     "surge": "REFUSED — it already costs nearly all you have."
+    },
+    "bounds": [
+     {
+      "text": "IT PROVES ONLY THE TRUE",
+      "class": "hard"
+     },
+     {
+      "text": "IT COSTS NEARLY ALL YOU HAVE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "TWENTY-FIRST capstone — and the near-twin of verist's the_whole_truth. Both are T-V, both are pure REVEAL, both cost nearly everything, and both can only operate on what is actually so. The difference is the register: the_whole_truth DISCLOSES everything hidden; the_proof makes ONE thing irrefutable. ERIK: worth knowing there may be TWO keys to the Cathedral after all — the_proof is authored as 'irrefutable', and the Cathedral's lie is built from TRUE pieces, which is exactly what a proof can be assembled against. Flagging rather than deciding."
+   }
+  ]
+ },
+ "passFindings": [
+  "⚠️ A FIFTH TRADITION CONCEDES THE CATHEDRAL, AND THE KEYSTONE IS BETTER-AUTHORED THAN I REPORTED: logos' bound reads 'proof binds the honest and the logical; THE CATHEDRAL OF CERTAINTY IS NEITHER.' With radiance, unshadow, verity and pathos ('a will set against you is set against you'), FIVE traditions independently concede that adversary survives their strongest craft.",
+  "⚠️ ERIK — THERE MAY BE A SECOND KEY ALREADY IN THE CATALOG. syllogist's T-V the_proof is authored as 'a COMPLETE, IRREFUTABLE proof of A TRUE THING', and the Cathedral's lie is built from TRUE PIECES. the_whole_truth DISCLOSES what is hidden; the_proof makes one thing IRREFUTABLE — arguably the other half of the same lock. If so, the single-key worry is smaller than it looked, and Oren Vale becomes the THIRD route rather than the second. FLAGGING, NOT DECIDING — the fiction is yours.",
+  "THE PAIR BOTH LOSE TO THE SAME ENEMY AND TO EACH OTHER'S MEDIUM: logos 'the unreasonable and THE EMOTION-RULED resist'; pathos 'the guarded can close' and 'a will set against you IS set against you'. And each pole's strongest BINDING craft is defeated by someone who has abandoned that pole's medium — the_inescapable_conclusion fails against those who refuse reason; the_grief_strike fails without genuine feeling.",
+  "logos HAS FOUR HARD BOUNDS AND NO SOFT ONES — the most tightly bounded craft in the catalog, and every single limit is EPISTEMIC ('a valid argument is not a true one'; 'it needs something true to work with'). No amount of mastery makes reasoning reach past what is actually so.",
+  "TWO MORE DEFENSIVE LOGICS — sixteen now: FORESENSED (the_felt_wall reads emotional weather and moves before harm forms; its HARD bound draws the axis's line precisely — it CANNOT sense a machine) and PROVED (the_proved_position, a TYPED guard whose soak is the soundness of your position). CCODE: `type: rhetorical` joins `deception` and `abstraction` — the typed-soak layer is being used for SOCIAL/CONCEPTUAL defence far more than for damage media, which is worth knowing before you finalise it.",
+  "TWO MORE THEORIES OF MEDICINE, and they are the sharpest disagreement in the set: the_shared_grief treats A GROUP as the patient and 'cannot remove grief, only DISTRIBUTE ITS WEIGHT'; the_correct_protocol is 'no guesswork, NO COMFORT, the correct intervention.' Twelve traditions, twelve incompatible theories of whether care IS comfort.",
+  "A THIRD INDEPENDENT WARNING THAT AUTONOMOUS CREATIONS EXCEED THEIR MAKERS: the_built_system's 'a system that runs without you RUNS WITHOUT YOU, including when it should stop' joins the_walking_figure ('a rule nobody is supervising') and the_self_mending_work ('drifts from its maker's intent'). Three traditions, three media — a figure, a machine, a system — one authored moral.",
+  "THREE TRADITIONS HAVE A CRAFT PURELY FOR ATTENDING THE DEAD, AND NONE OF THEM RESTORES ANYONE: the_names_of_the_lost ('a name kept is NOT A LIFE RETURNED'), ashwarden's the_last_gift, rootkin's the_last_gift. The catalog is absolutely consistent that death is not undone."
+ ]
+}

@@ -69,7 +69,55 @@
    ],
    "tradition": "unmaker",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.03,
+    "note": "The higher marginFloorPer matches enginewright's the_fault_strike: precision traditions reward a decisive margin over raw force."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "BREAK PRECISELY AT THE FAULT — the thing comes apart WHERE YOU CHOSE and nowhere else",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: END A THING WELL — a building, an institution, a life's work, a war — SO THAT WHAT IT WAS IS HONORED and what comes after is cleaner",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small break — half the force, exactly where you meant",
+    "surge": "double it; PRECISE IS NOT REVERSIBLE — a clean break is still a break"
+   },
+   "bounds": [
+    {
+     "text": "SEEING THE FAULT IS NOT BEING RIGHT THAT IT SHOULD BE BROKEN",
+     "class": "hard"
+    },
+    {
+     "text": "PRECISE IS NOT REVERSIBLE — a clean break is still a break",
+     "class": "hard"
+    },
+    {
+     "text": "YOU MUST BE RIGHT THAT IT SHOULD END — the Unmakers' cult is what being wrong about this becomes",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "fault_sense",
@@ -133,7 +181,51 @@
    ],
    "tradition": "unmaker",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "PHYSICAL attribute — the unmaker reads stress in the body of a thing"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "find THE ONE PIECE whose failure brings the rest — THE KEYSTONE OF THE COLLAPSE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: read the ENTIRE ARC of a thing's decline — how it will end, IN WHAT ORDER, and how long it has",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the stress — half the depth, and you can look away",
+    "surge": "double the read; YOU WILL BE RIGHT, AND NOBODY WILL WANT TO HEAR IT"
+   },
+   "bounds": [
+    {
+     "text": "SEEING THE FAULT DOES NOT TELL YOU WHETHER TO PRESS IT",
+     "class": "hard"
+    },
+    {
+     "text": "FINDING IT MAKES YOU RESPONSIBLE FOR KNOWING IT — you cannot un-see it",
+     "class": "cost"
+    },
+    {
+     "text": "YOU WILL BE RIGHT, AND NOBODY WILL WANT TO HEAR IT",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "makecraft",
@@ -204,7 +296,51 @@
    ],
    "tradition": "wright",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "quality",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 168,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "quality",
+     "delta": "make a thing BETTER THAN IT WAS — improve in the making, so what you raise EXCEEDS what stood",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: deliberately leave a made thing INCOMPLETE — and it KEEPS MAKING ITSELF, growing on, adapting, never done",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "build it plain — half the quality, and it is exactly what was asked for",
+    "surge": "double it; BETTER BY WHOSE MEASURE? The Wrights improve what nobody asked them to improve"
+   },
+   "bounds": [
+    {
+     "text": "QUICK IS NOT SOUND",
+     "class": "hard"
+    },
+    {
+     "text": "BETTER BY WHOSE MEASURE? — the Wrights improve what nobody asked them to improve",
+     "class": "cost"
+    },
+    {
+     "text": "IT NEVER STOPS — the Forge-Eternal is what a whole city of this becomes",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "makers_eye",
@@ -269,7 +405,50 @@
    ],
    "tradition": "wright",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "see the BETTER FORM a thing is capable of, and THE SHORTEST ROAD TO IT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: see what a thing, a place, OR A PERSON is REACHING TOWARD — the shape it would take if nothing stopped it",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a look at the materials — half the vision, and you can set it down",
+    "surge": "double the sight; THERE IS ALWAYS A BETTER SHAPE, and Wrights at this rank cannot leave things alone"
+   },
+   "bounds": [
+    {
+     "text": "SEEING WHAT COULD BE MADE IS NOT KNOWING WHETHER IT SHOULD BE",
+     "class": "hard"
+    },
+    {
+     "text": "THERE IS ALWAYS A BETTER SHAPE — Wrights at this rank cannot leave things alone",
+     "class": "cost"
+    },
+    {
+     "text": "SEEING WHAT SOMEONE COULD BE is the most seductive and most dangerous use of it",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_raised_thing",
@@ -334,7 +513,50 @@
     "FIGHT"
    ],
    "tradition": "wright",
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "speed",
+    "durability"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 72
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "durability",
+     "delta": "what you make HOLDS UNDER PRESSURE — weather, weight, time, a fight; others would not have to repair it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: make something that will BE HERE LONG AFTER YOU — found and used by people who do not know your name",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "throw it up fast — half the durability, and it is standing now",
+    "surge": "double the soundness; SOUND IS NOT FINISHED, and the restlessness is not a flaw the Wrights have solved"
+   },
+   "bounds": [
+    {
+     "text": "QUICK IS NOT SOUND — raised things want tending",
+     "class": "hard"
+    },
+    {
+     "text": "SOUND IS NOT FINISHED — the restlessness is not a flaw the Wrights have solved",
+     "class": "cost"
+    },
+    {
+     "text": "YOU WILL NOT SEE WHAT BECOMES OF IT",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_weapon_at_hand",
@@ -404,7 +626,51 @@
      "harmRung": "damaging"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "speed"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.02,
+    "note": "damaging. The craft MAKES the weapon; the striking is what the weapon then does."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "speed",
+     "delta": "build a weapon FAST ENOUGH TO MATTER IN A FIGHT and good enough to be dangerous — not a masterwork, THE RIGHT THING NOW",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: look at the materials and SEE THE WEAPON THEY ALREADY ARE — build it in moments, exactly what this situation needs",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "something serviceable — half the weapon, made in half the time",
+    "surge": "double the work; a weapon made in haste is still a weapon you made"
+   },
+   "bounds": [
+    {
+     "text": "it makes a WEAPON, not a warrior — it does not swing itself",
+     "class": "hard"
+    },
+    {
+     "text": "requires MATERIALS AT HAND — a bare room offers nothing",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_work_speaks",
@@ -472,7 +738,48 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "authority",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 6,
+    "targets": 4,
+    "note": "SOCIAL attribute"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "authority",
+     "delta": "your work is known enough that NAMING YOURSELF commands genuine respect and OPENS DOORS THAT STAY CLOSED to others",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE THING YOU BUILT IS THE ARGUMENT AND THE EVIDENCE — anyone who has seen it cannot pretend otherwise",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "show the work — half the weight, and it speaks only for itself",
+    "surge": "double it; a reputation built on work is a reputation that must keep producing work"
+   },
+   "bounds": [
+    {
+     "text": "IT REQUIRES REAL WORK TO SHOW — a Wright with nothing built carries nothing",
+     "class": "hard"
+    },
+    {
+     "text": "a reputation built on work MUST KEEP PRODUCING WORK",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_built_way",
@@ -544,7 +851,48 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "access",
+    "range"
+   ],
+   "mechanic": {
+    "range": 10,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 48
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "access",
+     "delta": "open a way through or across ANY natural or built obstacle by CONSTRUCTING what is needed — not by force, BY CRAFT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: build a path WHERE THERE WAS TRULY NONE — spanning what should not be spanned, opening what was sealed — and have it HOLD",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick span — half the reach, and it comes down easily",
+    "surge": "double it; what you build to cross by, others will cross by too"
+   },
+   "bounds": [
+    {
+     "text": "IT TAKES TIME AND MATERIALS — craft is not force",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU BUILD TO CROSS BY, OTHERS WILL CROSS BY TOO",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_ongoing_work",
@@ -612,7 +960,45 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "targets",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 12,
+    "targets": 4,
+    "note": "PHYSICAL attribute — the work is the anchor"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "sustain YOURSELF AND YOUR PARTY through hardship by making useful things — shelter, tools, warmth, structure",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "SPECIAL: START SOMETHING BUILDING AND LEAVE IT — the structure grows, the mechanism runs, THE WORK CONTINUES",
+     "from": "r3 grants — a FIFTH autonomy-increment craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep your hands busy — half the relief, and it asks nothing",
+    "surge": "double it; you must actually BE MAKING SOMETHING — idleness ends it"
+   },
+   "bounds": [
+    {
+     "text": "YOU MUST ACTUALLY BE MAKING SOMETHING — the work is the anchor, and idleness ends it",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_clean_removal",
@@ -687,7 +1073,50 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "precision",
+    "restoration"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "note": "THE DESTRUCTION TRADITION'S HEALING CRAFT — it heals by REMOVING what is interfering. A FIFTH theory of medicine."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "restoration",
+     "delta": "restore function by ENDING THE SPECIFIC THING THAT WAS CONSUMING IT — corruption, disease, obstruction — with precision",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: remove EVERYTHING that should not be there, completely and correctly, so what remains can be WHAT IT WAS MEANT TO BE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "take out the splinter — half the restoration, and nothing else is touched",
+    "surge": "double it; removing everything that should not be there requires being RIGHT about what should not be there"
+   },
+   "bounds": [
+    {
+     "text": "it removes; IT DOES NOT ADD — what was lost stays lost",
+     "class": "hard"
+    },
+    {
+     "text": "removing everything that should not be there REQUIRES BEING RIGHT about what should not be there",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_ended_threat",
@@ -763,7 +1192,50 @@
      "harmRung": "incapacitating"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "preemption",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 0,
+    "soakRank": 0,
+    "duration": 3,
+    "targets": 1,
+    "note": "A NINTH DEFENSIVE LOGIC — PRE-EMPTED: soak 0 because it does not withstand the blow, it ENDS THE THING THAT WOULD STRIKE, before it strikes. 'Not deflecting the blow but ending the thing that would swing it.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "protect SOMEONE ELSE by finding and breaking the specific thing that would harm them — NOT DEFLECTING THE BLOW BUT ENDING THE THING THAT WOULD SWING IT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: identify a danger IN ITS EARLIEST FORM and end it completely, SO IT NEVER BECOMES THE THREAT IT WAS BECOMING",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "end one forming threat — half the reach, and nobody notices it was ever a threat",
+    "surge": "double it; ending threats before they form means nobody will ever know what you prevented"
+   },
+   "bounds": [
+    {
+     "text": "IT REQUIRES SEEING THE THREAT FORM — an ambush already sprung is past it",
+     "class": "hard"
+    },
+    {
+     "text": "NOBODY WILL EVER KNOW WHAT YOU PREVENTED",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_open_material",
@@ -831,7 +1303,43 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "decomposition",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "decomposition",
+     "delta": "break a thing down to where IT HAS NO REMAINING IDENTITY as what it was — it is now MATERIAL, and material can become anything",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: return something complex — a structure, a plan, A FIXED BELIEF — to THE STATE BEFORE IT BECAME THAT SPECIFIC THING",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "take it apart — half the decomposition, and the pieces stay recognisable",
+    "surge": "double it; a thing returned to before-it-was-that-thing cannot be returned TO what it was"
+   },
+   "bounds": [
+    {
+     "text": "A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_demonstrated_end",
@@ -899,7 +1407,47 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "authority",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 6,
+    "targets": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "authority",
+     "delta": "SHOW WHAT YOU CAN DISMANTLE — or name it plainly — and COMMAND THE TERMS of an agreement; THEY KNOW WHAT REFUSAL MEANS",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: YOU ARE THE PERSON WHO DECIDES WHAT ENDS — where endings are at stake, your word is the one that stands",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "let it be known — half the weight, and it reads as information rather than threat",
+    "surge": "double it; authority built on what you can END is authority people obey and do not love"
+   },
+   "bounds": [
+    {
+     "text": "IT REQUIRES A REAL RECORD of ending things — an empty threat is an empty threat",
+     "class": "hard"
+    },
+    {
+     "text": "authority built on what you can END is authority people OBEY AND DO NOT LOVE",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_ended_burden",
@@ -971,7 +1519,44 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 12,
+    "targets": 1,
+    "note": "MENTAL attribute"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "upkeepRelief",
+     "delta": "sustain by RELEASING EVERYTHING NON-ESSENTIAL across a hard stretch — 'not forcing through with more, but NEEDING LESS'",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "end what is consuming YOUR GROUP — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can continue",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "set one thing down — half the relief, and you can pick it back up",
+    "surge": "double it; what you end to sustain yourself, you have ended"
+   },
+   "bounds": [
+    {
+     "text": "WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED — it does not come back when the hard stretch does",
+     "class": "hard"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1020,7 +1605,49 @@
    "challengeTypes": [
     "FIGHT"
    ],
-   "harmRung": "damaging"
+   "harmRung": "damaging",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "scope"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 4,
+     "d": 6
+    },
+    "plus": 2,
+    "marginFloorPer": 0.03,
+    "scope": 3,
+    "note": "T-IV, damaging"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the word reaches WHAT IS BOUND as well as what is BUILT — a working, a ward, a seal, A PACT held by craft. Unmaking bindings rather than objects is the T-IV kind-change.",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "unmake a small assembly — half the reach, and the parts survive",
+    "surge": "double it; unmaking a binding is unmaking whatever the binding was holding"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT TOUCH THE LIVING OR THE SINGULAR",
+     "class": "hard"
+    },
+    {
+     "text": "it costs DEARLY",
+     "class": "cost"
+    },
+    {
+     "text": "unmaking a binding is unmaking WHATEVER THE BINDING WAS HOLDING",
+     "class": "cost"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1058,7 +1685,44 @@
    "challengeTypes": [
     "FIGHT"
    ],
-   "harmRung": "damaging"
+   "harmRung": "damaging",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "scope"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 5,
+     "d": 6
+    },
+    "plus": 6,
+    "marginFloorPer": 0.03,
+    "scope": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: UNMAKE A THING MEANT TO BE PERMANENT — a fixed working, an ancient bond. The capstone is a KIND (ending what was made to never end) at near-total cost, AND THE WORLD RESISTS IT.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — there is no partial unmaking of a permanent thing; it holds or it does not.",
+    "surge": "REFUSED — it already costs nearly all you have and the world is already resisting."
+   },
+   "bounds": [
+    {
+     "text": "IT COSTS NEARLY ALL YOU HAVE",
+     "class": "hard"
+    },
+    {
+     "text": "THE WORLD RESISTS THE UNMAKING OF PERMANENT THINGS",
+     "class": "hard"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1121,7 +1785,52 @@
    "challengeTypes": [
     "CREATE"
    ],
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "quality",
+    "scope",
+    "permanence"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8760,
+    "scope": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "quality",
+     "delta": "bring a made thing BACK TO TRUE rather than patching — find where the making was CUT SHORT and finish it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "make AT SCALE AND FOR TIME — a hall, a bridge, a road built so completely that GENERATIONS use it without knowing your name",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "make it sound — half the scope, and it is finished today",
+    "surge": "double it; SCALE MULTIPLIES THE TIME AND CARE, NEVER REDUCES IT"
+   },
+   "bounds": [
+    {
+     "text": "IT MAKES THE MADE, NOT THE LIVING",
+     "class": "hard"
+    },
+    {
+     "text": "IT CANNOT BE HURRIED without ceasing to be true making",
+     "class": "hard"
+    },
+    {
+     "text": "SCALE MULTIPLIES THE TIME AND CARE, NEVER REDUCES IT",
+     "class": "hard"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1173,7 +1882,44 @@
    "challengeTypes": [
     "CREATE"
    ],
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "restoration",
+    "permanence"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 8760,
+    "note": "T-IV. 'Reforge a broken thing so ITS BREAK BECOMES ITS STRENGTH.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: work breaks THAT SHOULD BE PAST WORKING — a thing shattered rather than cracked, broken many times over. The more breaks worked in, the more the thing becomes ABOUT its breaking.",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "mend the break — half the transformation, and it is simply repaired",
+    "surge": "double it; THE MORE BREAKS WORKED IN, THE MORE THE THING BECOMES ABOUT ITS BREAKING"
+   },
+   "bounds": [
+    {
+     "text": "IT WORKS ON THE MADE, NOT THE LIVING",
+     "class": "hard"
+    },
+    {
+     "text": "IT NEEDS A TRUE BREAK to work — an undamaged thing offers nothing",
+     "class": "hard"
+    },
+    {
+     "text": "the more breaks worked in, THE MORE THE THING BECOMES ABOUT ITS BREAKING",
+     "class": "cost"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1213,7 +1959,40 @@
    "challengeTypes": [
     "CREATE"
    ],
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "quality",
+    "permanence"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 87600,
+    "scope": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: make a SINGLE MASTERWORK that gathers a lifetime's craft into ONE ENDURING, TEACHING THING. The capstone is a KIND (a work that teaches after you) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-made masterwork is an unfinished work, and the Wrights are unsentimental about those.",
+    "surge": "REFUSED — it already demands nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "IT DEMANDS REAL TIME AND NEARLY ALL YOU HAVE",
+     "class": "hard"
+    },
+    {
+     "text": "IT STANDS AS A PROMISE you must then live up to",
+     "class": "cost"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

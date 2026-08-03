@@ -35,6 +35,11 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
    `shortfold` (both ends must be truly KNOWN) · `shadowstep` (both ends need real shadow — **a lit gap is a
    WALL**). **Every axis's travel craft is walled off by its antipode's medium.** Movement crafts need a
    terrain/medium precondition the engine can check.
+6f. **STANDING EFFECTS MUST BE BREAKABLE** *(the_undoing_word r2, T-IV unmaker)* — it unmakes *"a working, a
+   ward, a **seal**, a **pact** held by craft."* That is a direct counter to `sun_seal`, `death_ward`,
+   `prism_ward`, `the_maintained_veil`, `the_blaze_wall` and **every standing-effect craft in the catalog**.
+   The SNG-258 §8 standing-effects layer needs to be **breakable by this craft specifically** — otherwise the
+   destruction pole's T-IV does nothing against half the traditions it was authored to answer.
 6e. **DUAL-POLE CRAFT GATING** *(the_whole_act, T-IV somatic)* — its ONLY bound is *"needs both trained
    near-equal; **THE PURE POLES CANNOT DO IT**."* A craft that requires **two traditions held near-equal**.
    The engine cannot express this, and it is the catalog's only instance — but it is also the clearest proof

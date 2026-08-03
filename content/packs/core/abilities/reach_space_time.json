@@ -67,7 +67,56 @@
    ],
    "tradition": "horizon",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 40,
+    "push": 0,
+    "magnitude": 5,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "CLOSE A DISTANCE YOU CAN SEE — arrive at the far ridge, the far bank, the far door, WITHOUT CROSSING THE BETWEEN",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "distance STOPS BEING AN OBSTACLE for you AND THOSE YOU CARRY — the far place is simply a place you may be",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "cover ground fast — half the distance, and you see everything you pass",
+    "surge": "double it; WHATEVER WAS IN THE BETWEEN IS STILL IN THE BETWEEN"
+   },
+   "bounds": [
+    {
+     "text": "THE GROUND IS STILL CROSSED at r1 — what is on it still meets you",
+     "class": "hard"
+    },
+    {
+     "text": "YOU MUST SEE IT",
+     "class": "soft"
+    },
+    {
+     "text": "WHATEVER WAS IN THE BETWEEN IS STILL IN THE BETWEEN",
+     "class": "hard"
+    },
+    {
+     "text": "THE WORLD IS VERY LARGE — Horizon-Walkers at this depth stop coming home",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "way_sense",
@@ -132,7 +181,51 @@
    ],
    "tradition": "horizon",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "navigation",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 100
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "navigation",
+     "delta": "read a route's TRUE COST before walking it — where it will be hard, where it will be WATCHED, WHERE IT LIES",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "hold A REGION ENTIRE in your sense of it — every way in, every way out, EVERY GAP BETWEEN THE WAYS",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a bearing — half the depth, and instant",
+    "surge": "double the read; REGIONS CHANGE, and the map you hold is the one YOU built"
+   },
+   "bounds": [
+    {
+     "text": "KNOWING THE WAY IS NOT KNOWING WHAT IS ON IT",
+     "class": "hard"
+    },
+    {
+     "text": "A READ ROAD IS STILL A ROAD — it does not walk itself",
+     "class": "hard"
+    },
+    {
+     "text": "REGIONS CHANGE — the map you hold is the one you built, and it ages",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "hourcraft",
@@ -199,7 +292,50 @@
    ],
    "tradition": "hourkeeper",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "temporalDepth",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "duration",
+     "delta": "SLOW DURATION AROUND YOU — a fight, a fall, a conversation STRETCHES, and you have room inside it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: REMEMBER FORWARD — an hour that has NOT HAPPENED arrives in you as memory does, with a memory's specificity AND A MEMORY'S UNRELIABILITY",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold one moment — half the room, and it costs little",
+    "surge": "double it; IT COSTS CONTINUOUSLY AND STEEPLY, and the world outside does not slow with you"
+   },
+   "bounds": [
+    {
+     "text": "THE MOMENT STILL PASSES FOR EVERYONE ELSE — you get to LOOK",
+     "class": "hard"
+    },
+    {
+     "text": "it costs CONTINUOUSLY AND STEEPLY",
+     "class": "cost"
+    },
+    {
+     "text": "YOU CANNOT TELL A TRUE PRE-MEMORY FROM A FEARED ONE",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "hour_sense",
@@ -263,7 +399,50 @@
    ],
    "tradition": "hourkeeper",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "temporalDepth",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "temporalDepth",
+     "delta": "read the AGE of a place, a wound, a working, or A LIE — and WHEN IT WILL FAIL",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "timeReach",
+     "delta": "hold the WHOLE DURATION of a place or a people — its beginning, its hours, and THE HOUR IT IS RUNNING OUT OF",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the clock — half the depth, and it costs nothing",
+    "surge": "double the read; KNOWING A PEOPLE'S REMAINING HOURS AND BEING UNABLE TO SAY SO is the Hourkeeper's particular grief"
+   },
+   "bounds": [
+    {
+     "text": "WHEN, NEVER WHAT — the hour is knowable; THE EVENT IS NOT",
+     "class": "hard"
+    },
+    {
+     "text": "IT COUNTS. IT DOES NOT CARE WHETHER YOU ARE READY.",
+     "class": "hard"
+    },
+    {
+     "text": "knowing a people's remaining hours AND BEING UNABLE TO SAY SO",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_long_reach",
@@ -333,7 +512,51 @@
      "harmRung": "damaging"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "range"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.02,
+    "range": 20
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "damage",
+     "delta": "ATTACK IN FULL MOTION — without losing accuracy or force to the movement; THE SPEED IS THE WEAPON",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "DISTANCE CEASES TO REDUCE YOUR EFFECTIVENESS — across a room or across a field, you arrive with full force",
+     "from": "r3 grants — the increment is pure RANGE/penalty-removal, no damage change"
+    }
+   ],
+   "intensity": {
+    "conserve": "a measured throw — half the reach, and you keep your footing",
+    "surge": "double the reach; arriving at full force means arriving, and arriving is committing"
+   },
+   "bounds": [
+    {
+     "text": "it extends REACH, not power — the same blow, from further",
+     "class": "hard"
+    },
+    {
+     "text": "arriving at full force means ARRIVING — you are now where they are",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_fresh_horizon",
@@ -407,7 +630,51 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "restoration",
+    "targets"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 1,
+    "targets": 1,
+    "note": "A SEVENTH THEORY OF MEDICINE — MOVEMENT AS MEDICINE: 'the movement is the medicine.' It heals by GOING SOMEWHERE ELSE."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "A JOURNEY RESTORES THE PARTY — physically and otherwise; the movement IS the medicine, and you know how to pace it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: SHOW SOMEONE THE NEXT HORIZON AND IT FILLS THEM AGAIN — despair fails against the sight of further to go",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a change of scene — half the restoration, and it costs nothing",
+    "surge": "double it; it heals by LEAVING, and some things should be stayed with"
+   },
+   "bounds": [
+    {
+     "text": "IT REQUIRES ACTUALLY GOING — a person who cannot move gets nothing",
+     "class": "hard"
+    },
+    {
+     "text": "it heals by LEAVING, and some things should be STAYED WITH",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_kept_distance",
@@ -479,7 +746,52 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "evasion",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 0,
+    "soakRank": 0,
+    "evasion": 4,
+    "evasionRank": 2,
+    "duration": 4,
+    "targets": 1,
+    "note": "A TWELFTH DEFENSIVE LOGIC — SPACED: soak 0 because it does not take the blow; it keeps you where the blow cannot reach. Distinct from EVADE (they swing and miss) — here they never get to swing."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "evasion",
+     "delta": "CONTROL the distance — always TOO FAR FOR IT TO ACT, close enough for YOU to",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "stay perpetually WHERE THE THREAT ISN'T — and BRING OTHERS WITH YOU. 'The person who cannot close the gap cannot win.'",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep your spacing — half the control, and it costs no attention",
+    "surge": "double it; keeping distance means you are not holding ground, and some things must be held"
+   },
+   "bounds": [
+    {
+     "text": "it needs SOMEWHERE TO GO — cornered, it is worth nothing",
+     "class": "hard"
+    },
+    {
+     "text": "keeping distance means NOT HOLDING GROUND",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_made_crossing",
@@ -550,7 +862,49 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "access",
+    "range"
+   ],
+   "mechanic": {
+    "range": 15,
+    "push": 0,
+    "magnitude": 5,
+    "duration": 4,
+    "note": "PRACTICAL attribute — the only one in horizon"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "access",
+     "delta": "identify and EXPLOIT THE SPECIFIC POINT where an obstacle can be crossed — not the obvious attempt but the place where it gives",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: MAKE THE CROSSING — any crossing — by knowing exactly where to commit and exactly how. WHAT THE LAND CALLS UNCROSSABLE, YOU CROSS.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "find the ford — half the certainty, and it costs nothing to look",
+    "surge": "double it; knowing exactly where to commit means COMMITTING"
+   },
+   "bounds": [
+    {
+     "text": "it FINDS or MAKES a crossing — it does not make it SAFE",
+     "class": "hard"
+    },
+    {
+     "text": "knowing where to commit means COMMITTING",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_land_knowledge",
@@ -619,7 +973,48 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "authority",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 6,
+    "scope": 2,
+    "note": "MENTAL attribute — command through KNOWING"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "authority",
+     "delta": "USE knowledge of land and distance TO DIRECT OTHERS — the advice that wins a chase, the route that avoids the ambush",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "in TERRITORY YOU HAVE WALKED, your knowledge is comprehensive enough to COMMAND any situation that depends on terrain",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "offer the route — half the authority, and it reads as advice",
+    "surge": "double it; authority from having WALKED it ends at the edge of what you have walked"
+   },
+   "bounds": [
+    {
+     "text": "IT REQUIRES HAVING BEEN THERE — an unwalked region offers nothing",
+     "class": "hard"
+    },
+    {
+     "text": "authority from KNOWING ends where your knowing ends",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_road_ahead",
@@ -687,7 +1082,48 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "targets",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "keep A PARTY moving and functional across BRUTAL DISTANCES — through exhaustion, injury, conditions that would stop them",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "you and your party go on FOR AS LONG AS THE TASK REQUIRES — rest when you must, move when you must, until the road ends",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "set a pace — half the relief, sustainable forever",
+    "surge": "double it; AS LONG AS THERE IS GROUND AHEAD — a party with nowhere to go gets nothing from this"
+   },
+   "bounds": [
+    {
+     "text": "it needs GROUND AHEAD — this sustains MOVEMENT, not a siege",
+     "class": "hard"
+    },
+    {
+     "text": "the road ending is the craft ending",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_wrong_moment",
@@ -757,7 +1193,47 @@
      "harmRung": "lethal"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.03,
+    "note": "lethal rung — timing as a weapon"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "DICTATE WHEN THE CONFRONTATION HAPPENS by waiting for the exact moment that advantages you — the ambush, the interruption",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: act in a SEQUENCE of moments so precisely chosen that the other person IS NEVER IN A POSITION TO RESPOND",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "take the opening — half the advantage, and it passes unnoticed",
+    "surge": "double it; dictating when the confrontation happens means there IS one"
+   },
+   "bounds": [
+    {
+     "text": "IT NEEDS SOMEONE WHO CAN BE CAUGHT OFF-BALANCE — the genuinely ready are outside it",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_given_time",
@@ -827,7 +1303,51 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "duration",
+    "targets"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "targets": 1,
+    "note": "AN EIGHTH THEORY OF MEDICINE — TIME AS MEDICINE: it does not heal, it BUYS THE HOURS in which healing can happen."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "duration",
+     "delta": "CREATE the time a person or situation needs — not by stopping anything, but by MANAGING THE DURATION so that what needs to happen can",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "HOLD OPEN the duration of a recovery, a negotiation, or a healing — AS LONG AS IT REQUIRES — without the outside clock closing it",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "buy a few minutes — half the time, and it costs almost nothing",
+    "surge": "double it; the hours you give have to come from somewhere"
+   },
+   "bounds": [
+    {
+     "text": "IT GIVES TIME, IT DOES NOT HEAL — someone else still has to do the work",
+     "class": "hard"
+    },
+    {
+     "text": "the hours you give HAVE TO COME FROM SOMEWHERE",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_wasted_moment",
@@ -895,7 +1415,52 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "evasion",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 0,
+    "soakRank": 0,
+    "evasion": 5,
+    "evasionRank": 3,
+    "duration": 3,
+    "targets": 1,
+    "note": "THIRTEENTH DEFENSIVE LOGIC — UNTIMED: soak 0; 'not blocking, not armoring, but the exact move that makes the attack land where you were.' It defeats the attack's TIMING. Highest evasionRank in the catalog because it acts on the moment itself."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "PROTECT SOMEONE by watching THEIR threat's timing and CALLING THE MOVE — the dodge, the step, the word — at the instant it works",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: for as long as you ATTEND to a person's safety, NO MOMENT THAT COULD HARM THEM ARRIVES — you see it and fill or empty it",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "watch the timing — half the evasion, and you can do other things",
+    "surge": "double it; attending to someone's safety means ATTENDING — you are doing nothing else"
+   },
+   "bounds": [
+    {
+     "text": "it defeats TIMED harm — a collapsing roof has no timing to defeat",
+     "class": "hard"
+    },
+    {
+     "text": "attending means ATTENDING — at r3 you are doing nothing else",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_shaped_duration",
@@ -964,7 +1529,44 @@
      "harmRung": "incapacitating"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "scope": 2,
+    "note": "incapacitating — bending how long something takes"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "duration",
+     "delta": "COLLAPSE a long span into less — a day's travel with the fatigue of an hour, a complex process completing in time it should not",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: shape how long something takes WITH PRECISION — bend the duration of ANY ongoing process to what you need it to be",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "stretch it a little — half the bend, and nothing notices",
+    "surge": "double it; IT ONLY BENDS WHAT IS ALREADY RUNNING"
+   },
+   "bounds": [
+    {
+     "text": "IT ONLY BENDS WHAT IS ALREADY RUNNING — it starts nothing, stops nothing",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_opened_moment",
@@ -1034,7 +1636,45 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "access",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 5,
+    "push": 0,
+    "magnitude": 6,
+    "duration": 1,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "access",
+     "delta": "OPEN A WINDOW IN TIME — a pause in a guard rotation, a silence in a conversation, A BEAT BETWEEN ALARMS — and move through it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "CREATE THE GAP THAT DIDN'T EXIST — find or open the instant that allows passage, and step through it BRINGING OTHERS",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "slip through a gap — half the window, and it was already there",
+    "surge": "double it; a gap you created is a gap someone will notice was created"
+   },
+   "bounds": [
+    {
+     "text": "it moves you through TIME'S gaps, not space's — a locked door is still locked",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_long_watch",
@@ -1102,7 +1742,46 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 48
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "upkeepRelief",
+     "delta": "sustain any activity REQUIRING PATIENCE ACROSS DURATION — a negotiation, a stake-out, a long recovery",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: HOLD AS LONG AS THE SITUATION REQUIRES — the vigil, the wait, the watch — and remain FULLY FUNCTIONAL throughout",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "settle in — half the relief, and you can leave at any time",
+    "surge": "double it; a person who can wait indefinitely will be ASKED to"
+   },
+   "bounds": [
+    {
+     "text": "it sustains WAITING, not moving — a march gets nothing from it",
+     "class": "hard"
+    },
+    {
+     "text": "a person who can wait indefinitely WILL BE ASKED TO",
+     "class": "cost"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1151,7 +1830,41 @@
    "challengeTypes": [
     "TRAVEL"
    ],
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 500,
+    "push": 0,
+    "magnitude": 7,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "CARRY OTHERS — a party crosses in the same stride; and the requirement SOFTENS: a place DESCRIBED truly enough can be stepped to",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a shorter step — half the distance, and it asks less of you",
+    "surge": "double it; A DESCRIBED PLACE IS A DESCRIBED PLACE, and the Horizon peoples have lost walkers to a good description"
+   },
+   "bounds": [
+    {
+     "text": "it needs a SEEN OR KNOWN place at r1",
+     "class": "hard"
+    },
+    {
+     "text": "A DESCRIBED PLACE IS A DESCRIBED PLACE — the Horizon peoples have lost walkers to a good description",
+     "class": "cost"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1191,7 +1904,41 @@
    "challengeTypes": [
     "TRAVEL"
    ],
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "scope"
+   ],
+   "mechanic": {
+    "range": 9999,
+    "push": 0,
+    "magnitude": 9,
+    "scope": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: STEP BEYOND THE KNOWN WORLD into the unmapped, HELPING CALL A NEW PLACE INTO BEING BY ARRIVING. The capstone is a KIND (travel that CREATES destination) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — you cannot half-step off the edge of the map; you are on it or past it.",
+    "surge": "REFUSED — it already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "IT COSTS NEARLY ALL YOU HAVE",
+     "class": "hard"
+    },
+    {
+     "text": "THE DESTINATION IS UNFIXED UNTIL YOU ARRIVE",
+     "class": "hard"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1243,7 +1990,44 @@
    "challengeTypes": [
     "DEFEND"
    ],
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "hold MORE THAN A SINGLE HOUR — a night's work finished inside a kept evening, a siege's preparation inside one afternoon",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold part of it — half the kept time, and the cost is light",
+    "surge": "double it; THE HOLDER STILL DOES NOT REST, and holding several hours ages you through all of them"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT REWIND, ONLY DELAY THE PASSING",
+     "class": "hard"
+    },
+    {
+     "text": "THE SAME HOUR CANNOT BE HELD TWICE",
+     "class": "hard"
+    },
+    {
+     "text": "THE HOLDER STILL DOES NOT REST — holding several hours ages you through all of them",
+     "class": "cost"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1281,7 +2065,39 @@
    "challengeTypes": [
     "INVESTIGATE"
    ],
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "foresight",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: TRACE ONE POSSIBLE FUTURE TO ITS VERY END, seeing THE WHOLE BRAID OF ITS CONSEQUENCE. The capstone is a KIND (complete consequence-sight) at near-total cost — AND IT BINDS YOU TO WHAT YOU HAVE SEEN.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-traced future is a guess, and the Hourkeepers do not dignify guesses.",
+    "surge": "REFUSED — it already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "IT COSTS NEARLY ALL YOU HAVE",
+     "class": "hard"
+    },
+    {
+     "text": "IT BINDS YOU TO WHAT YOU HAVE SEEN",
+     "class": "cost"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

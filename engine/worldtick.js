@@ -711,6 +711,38 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   // Bounded on purpose: days accumulate as a number, not a transcript. The backlog is how LONG it has been
   // and what was pending, not a second history of the world — that already exists, and duplicating it here
   // would grow every save forever.
+  // CCODE-105 — EVERY LEGEND ACTS EVERY PASS. THE BATCH ONLY DECIDES WHO GETS TOLD.
+  //
+  // Erik: "every NPC is acting every day... there needs to be some way to reconcile the actions — a legend
+  // pushing an arc one way on day 5, then on day 15 we realize another legend countered that push THE SAME
+  // DAY but did not get to have it told until day 15. We need a bit more coherency. Maybe a larger slice?"
+  //
+  // A larger slice makes the incoherence RARER, not absent — it is a sampling fix for a causality bug. The
+  // actual fault is that MECHANICAL RESOLUTION and NARRATION were the same pass, so an arc only moved when
+  // its mover happened to be in the window. Two counter-pushes on the same day could then be told a fortnight
+  // apart, and the second would have to contradict a story the player already heard.
+  //
+  // So they are separated. The mechanical pass below runs over EVERY living legend, EVERY time, and it is
+  // free: pure arithmetic, no generative call. Arc pushes NET — A at +3 and B at −2 on the same day is +1 on
+  // that day, settled before anyone narrates anything. The generative batch is now purely a question of WHOM
+  // TO TELL ABOUT, and telling something late can no longer contradict it, because the arithmetic already
+  // happened on time.
+  //
+  // This also answers "is 4 enough for the world?" — 4 was never the world's reach, only its VOICE. The world
+  // now moves at full population; 4 is how many of those movements get words this pass.
+  {
+    const living = (content.legends?.roster || []).filter(f =>
+      f?.arcAffinity?.arcId && effectiveEpicStatus(ws, f.id, currentWorldDay) !== "dead");
+    for (const f of living) applyEpicArcPush(ws, f, currentWorldDay);
+    // The NET position per arc, so a reader (and the GM block) sees the settled truth rather than one side.
+    const net = {};
+    for (const rec of Object.values(ws.epicArcPushes || {})) {
+      if (!rec?.arcId) continue;
+      net[rec.arcId] = (net[rec.arcId] || 0) + (Number(rec.push) || 0);
+    }
+    ws.arcNetPush = net;
+  }
+
   ws.offscreenBacklog = ws.offscreenBacklog || {};
   const inWindow = new Set(batch.map(e => e.id));
   for (const e of population) {
@@ -746,8 +778,10 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         ws.lastEpicOffscreenDay = currentWorldDay; // stamp the epic cooldown
         const def = (content.legends?.roster || []).find(f => f.id === fig.id);
         if (def) {
-          // SNG-208 §3a: this epic leans on its arc from offstage (the ambient pressure the arcs breathe).
-          applyEpicArcPush(ws, def, currentWorldDay);
+          // SNG-208 §3a: this epic leans on its arc from offstage — ALREADY APPLIED by the mechanical pass
+          // above (CCODE-105), for every living legend, on time. Pushing again here would double-count
+          // exactly the figures that happened to get narrated, which is the old sampling bug wearing the
+          // costume of a fix.
           // SNG-208 §3b: sometimes the stir IS a clash with a living rival — resolved into a durable outcome.
           const liveRivals = (def.rivals || []).filter(rid => effectiveEpicStatus(ws, rid, currentWorldDay) !== "dead");
           if (liveRivals.length && rng() < 0.4) {

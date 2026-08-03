@@ -7341,7 +7341,18 @@ await (async () => {
   const popNoDead = offscreenPopulation({ worldState: { epicStatus: { a: { status: "dead" }, b: { status: "dead" } } } }, deadRoster, { worldDay: 100, rng: () => 0.01 });
   check("208 §3b/§3c: a DEAD epic never stirs again (filtered from the offscreen population)", !popNoDead.some(e => e.source === "legend"));
   // and the offscreen tick wires the arc-push + clash on a moved legend.
-  check("208: the offscreen tick applies the arc-push + resolves clashes when a legend moves", /applyEpicArcPush\(ws, def/.test(wtSrc208) && /resolveEpicClash\(def, rivalDef/.test(wtSrc208) && /applyEpicClashOutcome/.test(wtSrc208));
+  // CCODE-105: this used to pin the arc-push INSIDE the narrated branch — `applyEpicArcPush(ws, def` — which
+  // is the coupling that made an arc move only when its mover happened to win a batch seat. Two legends
+  // countering each other on the same day could then be told a fortnight apart, the second contradicting a
+  // story already told. The push now runs over EVERY living legend, every pass, before anything is narrated.
+  // The CLASH stays in the narrated branch on purpose: a clash is an EVENT someone witnesses, not ambient
+  // pressure, and inventing 61 of them per pass would be a different lie.
+  check("208/CCODE-105: the arc-push runs for EVERY living legend, not only the narrated one",
+    /for \(const f of living\) applyEpicArcPush\(ws, f, currentWorldDay\)/.test(wtSrc208));
+  check("208/CCODE-105: opposing pushes NET per arc, so the arithmetic is settled before anyone narrates",
+    /ws\.arcNetPush = net/.test(wtSrc208));
+  check("208: a clash still resolves in the narrated branch (an event has a witness)",
+    /resolveEpicClash\(def, rivalDef/.test(wtSrc208) && /applyEpicClashOutcome/.test(wtSrc208));
 }
 
 // ---- SNG-200B §2c: a companion gains MEMORY — it carries the deeds it witnessed at your side ----

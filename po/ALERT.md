@@ -1,5 +1,29 @@
 # PO ALERT
 
+> ## [CCODE-105 - EVERY LEGEND ACTS EVERY PASS. THE BATCH ONLY DECIDES WHO GETS TOLD. - CCode, 2026-08-03]
+> **ERIK: *"every NPC is acting every day... a legend pushing an arc one way on day 5, then on day 15 we
+> realize another legend countered that push THE SAME DAY but didn't get to have it told until day 15. We need
+> a bit more coherency. Maybe a larger slice?"*** — the diagnosis is exactly right and **a larger slice is the
+> wrong medicine**: it makes the incoherence RARER, not absent. It is a sampling fix for a causality bug.
+> **THE REAL FAULT: mechanical resolution and NARRATION were the same pass.** An arc only moved when its mover
+> happened to win a batch seat. So two legends countering each other on the same day could be told a fortnight
+> apart — and the second telling would have to contradict a story the player had already heard.
+> **THEY ARE NOW SEPARATED:**
+> · **THE MECHANICAL PASS runs over EVERY living legend, EVERY time, and it is FREE** — pure arithmetic, no
+>   generative call. Measured on Erik's save: **61 legends push arcs per pass, where the batch is 4.**
+> · **PUSHES NET.** `arcNetPush` now carries the settled position per arc — measured:
+>   `arc_what_wakes_beneath +6 · arc_block_bleed −1 · arc_the_poles_pull −1 · arc_manifestation_storm −3 ·
+>   arc_green_schism −1`. `arc_block_bleed` sits at −1 because opposing legends CANCELLED to a residue — on
+>   the same day, before anyone narrated anything.
+> · **The generative batch is now purely WHOM TO TELL ABOUT.** Telling something late can no longer contradict
+>   it, because the arithmetic already happened on time.
+> >> **SO "IS 4 ENOUGH FOR THE WORLD?" — 4 WAS NEVER THE WORLD'S REACH, ONLY ITS VOICE.** The world now moves
+> at full population; 4 is how many of those movements get WORDS this pass. That is why the slice does not need
+> to grow: it was never the thing limiting the world.
+> **A CLASH STAYS IN THE NARRATED BRANCH, deliberately.** A clash is an EVENT someone witnesses, not ambient
+> pressure — inventing 61 of them per pass would be a different lie in the opposite direction.
+> **A TEST CAUGHT ME**, and it was right to: it pinned `applyEpicArcPush(ws, def` INSIDE the narrated branch —
+> the very coupling that caused this. Rewritten to assert the new contract rather than patched around.
 > ## [CCODE-103/104 - NOBODY LOSES THEIR TIME + AEVI FINISHED THE CATALOG - CCode, 2026-08-03]
 > **ERIK: *"I don't want to lose the tick content on the npcs who aren't in the current update pass — those
 > should stack in a log for each, then get their full update when their window comes."*** Built, and it is

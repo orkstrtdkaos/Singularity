@@ -230,3 +230,27 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
     (after) — each optionally TYPED, each optionally AUTONOMOUS. **The sixteen are content flavour on three
     mechanics**, which is exactly the outcome the schema was designed for. Worth confirming against the last
     traditions before anyone builds to it.
+
+29. **PANTHEON FOOTHILLS** *(Erik, 2026-08-02 — specced as `po/SPEC_SNG-265_pantheon_foothills.md`)*. The
+    foothills of seraphic/abyssal, **combined with a neighbour or two**, are where Greek/Norse/etc. pantheons
+    enter the world. **I verified the ring adjacencies first and they are almost embarrassingly well-suited:**
+    · **seraphic** neighbours **verist** (truth) + **lattice** (order) → **judgement + truth + order = the
+      OLYMPIAN shape** (sky-father law, oaths that bind, a hierarchy of domains).
+    · **abyssal** neighbours **veilwright** (falsehood) + **churnfolk** (wild) → **appetite + deception +
+      chaos = the TRICKSTER-AND-HUNGER shape** (gods who bargain, gifts that cost exactly what was named).
+    **Those are the two great mythic families, and nobody designed them to be.** The deeper reason it works:
+    **pantheons ARE how a culture covers a full ring of concerns** — the same job the twelve axes do.
+    **Why the foothill relationship is exactly right:** a pantheon is FOLK (`access.open: true` — you don't
+    join an Order to pray to Zeus), and **a god is the survivable version of a cosmic principle.** `ascent`
+    binds *whether or not you are right* — no person can hold that; **a sky-father you can petition, argue
+    with, and occasionally cheat IS that judgement made bearable.** That is why myth exists, and it is
+    precisely what a foothill is for.
+    **Mechanically:** pole crafts made survivable (T-I–T-III, no capstones, many HARD bounds → SOFT), with the
+    cost landing as **OBLIGATION rather than drift** (a seraphic *drifts judgement-hot*; a devotee **owes the
+    temple**), and a new medium — **OBSERVANCE** (oath, offering, festival-day, omen) — which no pole uses and
+    would be a genuinely new resource shape. Its gods are **legends with cults**, which plugs into `legends.js`
+    and the arena-fame idea (item 27).
+    **CAUTIONS:** import the **shape**, not the **roster** — *a sky-father whose oaths bind* reads as a
+    people's own gods that happen to rhyme with ours; "Zeus, Athena, Ares" reads as borrowed. And **keep the
+    poles unsurvivable** — the gods are bearable *because the thing behind them isn't*.
+    **ERIK'S CALLS:** which shape gets piloted · how literal · and whether the observance resource gets built.

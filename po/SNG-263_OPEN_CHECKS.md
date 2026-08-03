@@ -207,3 +207,26 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
     **WHY IT'S GOOD DESIGN, honestly:** it gives the ladder a FACE. Right now "epic" is a threat number; this
     makes the endgame a **person with a name and a record you have been hearing about for twenty sessions.**
     It also gives SNG-259's endgame modelling something to be *about*. **Wants its own ticket.**
+
+28. **GROUP THE DEFENSIVE LOGICS** *(Erik, 2026-08-02)*. Sixteen distinct ones emerged from authoring, all
+    currently riding the ONE `guard` shape and distinguished only by magnitudes + bounds. **My first-pass
+    grouping — they fall into FOUR families by WHERE THEY ACT in resolution**, which is the only division the
+    engine actually cares about:
+    · **BEFORE THE ROLL — the attack never happens.** PRE-EMPTED (`the_ended_threat` ends the thing that would
+      swing) · NEVER-FOUND (`the_harbor`) · DISCOURAGED (`the_laid_ground` raises the cost of choosing) ·
+      FORESENSED (`the_felt_wall` moves before harm forms).
+    · **ON THE ROLL — the attack happens and misses.** EVADE (`the_wrong_target`) · SPACED
+      (`the_kept_distance`) · UNTIMED (`the_wasted_moment`) · MISDIRECTED (`the_false_target`) · EFFICIENT
+      (`perfect_motion`). **All five are Erik's evasion/degree-degradation model** — they differ in FLAVOUR, not
+      mechanism.
+    · **AFTER THE ROLL — the hit lands and is reduced.** BLUNT (`resonant_shield`) · ANCHOR (`the_fixed_point`)
+      · INTERPOSED (`step_between`, where the reduction is *you*) · RUN-WITHOUT-YOU (`the_mechanical_defense` —
+      soak plus the `autonomy` flag).
+    · **TYPED — answers one KIND and is transparent to the rest.** TYPED-IMMUNITY (`the_true_ground` vs
+      deception) · PROVED (`the_proved_position` vs rhetorical) · and `thingcraft`/`the_plain_fact` vs
+      abstraction. **This is CCode's existing typed-soak mechanic; it's a MODIFIER on the other three families,
+      not a family of its own.**
+    **SO THE ENGINE PROBABLY NEEDS THREE MECHANISMS, NOT SIXTEEN:** prevent (before), degrade (on), reduce
+    (after) — each optionally TYPED, each optionally AUTONOMOUS. **The sixteen are content flavour on three
+    mechanics**, which is exactly the outcome the schema was designed for. Worth confirming against the last
+    traditions before anyone builds to it.

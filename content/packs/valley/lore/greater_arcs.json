@@ -2,14 +2,14 @@
  "schemaVersion": 1,
  "id": "greater_arcs",
  "kind": "meta_arc",
- "note": "World-spanning arcs BEYOND the six Valley-centered ones in world_superstructure. These run across Reaches and domains, at a larger scale and slower burn \u2014 the grain of the whole world, not just the Valley basin. Same doctrine: grain not rails; the world-tick advances them offscreen; the player can join, deflect, ignore-and-feel, or become the hinge. Each names hinge NPCs (legends + domain factions) and which regions it crosses. Authored by Aevi (PO), extending the superstructure to world scale.",
+ "note": "World-spanning arcs BEYOND the six Valley-centered ones in world_superstructure. These run across Reaches and domains, at a larger scale and slower burn — the grain of the whole world, not just the Valley basin. Same doctrine: grain not rails; the world-tick advances them offscreen; the player can join, deflect, ignore-and-feel, or become the hinge. Each names hinge NPCs (legends + domain factions) and which regions it crosses. Authored by Aevi (PO), extending the superstructure to world scale.",
  "arcs": [
   {
    "id": "arc_the_poles_pull",
    "name": "The Poles Pull",
    "scale": "world",
    "pressure": "slow-building, vast",
-   "tendency": "Across the whole world, the pole-dispositions are intensifying \u2014 each Reach drifting harder toward its own extreme. The Lattice orders more, the Blaze burns brighter, the Cogitarium abandons more bodies, the Pale wins ground from the Quick. Untended, the world FORECLOSES pole by pole: every disposition running toward its pure, uninhabitable, dangerous end, the mixed and livable middle thinning everywhere.",
+   "tendency": "Across the whole world, the pole-dispositions are intensifying — each Reach drifting harder toward its own extreme. The Lattice orders more, the Blaze burns brighter, the Cogitarium abandons more bodies, the Pale wins ground from the Quick. Untended, the world FORECLOSES pole by pole: every disposition running toward its pure, uninhabitable, dangerous end, the mixed and livable middle thinning everywhere.",
    "crossesRegions": [
     "all Reaches",
     "the far poles"
@@ -21,7 +21,7 @@
     "keeper_the_unsaid"
    ],
    "ifIgnored": "The habitable middle erodes; Marches narrow; the doubly-charged jewels (the one livable balances) become the last refuges. The world tends toward a scatter of pure, deadly poles with less and less between them.",
-   "ifEngaged": "The framework's question at world scale: the counter to the poles' pull is holding the aperture \u2014 keeping the middle open, defending the balances, refusing each Reach's foreclosure. A player who understands the coordinate model can become an agent of the open against the whole world's drift.",
+   "ifEngaged": "The framework's question at world scale: the counter to the poles' pull is holding the aperture — keeping the middle open, defending the balances, refusing each Reach's foreclosure. A player who understands the coordinate model can become an agent of the open against the whole world's drift.",
    "connectsTo": [
     "arc_what_wakes_beneath"
    ],
@@ -32,25 +32,121 @@
      "stage": 1,
      "name": "Drift",
      "publicFace": "Each Reach is leaning harder into its own extreme; travelers notice the edges of the world getting sharper.",
-     "pressureOnAdvance": "The drift sharpening pushes toward: border regions negotiating harder, moderates losing ground to extremes, a place caught between two Reaches feeling the squeeze first."
+     "pressureOnAdvance": "The drift sharpening pushes toward: border regions negotiating harder, moderates losing ground to extremes, a place caught between two Reaches feeling the squeeze first.",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "watchful",
+       "why": "border-talk everywhere; nothing has happened yet and everyone is looking"
+      }
+     ]
     },
     {
      "stage": 2,
      "name": "Strain",
      "publicFace": "The pull between poles is straining the places caught between them; border regions report the world feeling less negotiable.",
-     "pressureOnAdvance": "The strain pushes toward: a border tearing, refugees from a Reach that pulled too hard, an Accord straining to hold two poles together."
+     "pressureOnAdvance": "The strain pushes toward: a border tearing, refugees from a Reach that pulled too hard, an Accord straining to hold two poles together.",
+     "effects": [
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "__crossDomain__"
+        ]
+       },
+       "mult": 1.35,
+       "why": "⚠️ THE WORLD PULLING APART MAKES BORROWING FROM ANOTHER PEOPLE HARDER — a multiplier on isCrossClass, and the most thematically exact effect in the set"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "luxuries",
+       "demandDelta": -1,
+       "why": "nobody is buying anything they can do without"
+      },
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "strained",
+       "why": "the places caught between are the ones that feel it"
+      }
+     ]
     },
     {
      "stage": 3,
      "name": "Fracture",
      "publicFace": "Somewhere a Reach has pulled hard enough to tear its neighbor; the poles are no longer only intensifying, they are breaking things.",
-     "pressureOnAdvance": "The fracture pushes toward: a Reach breaking its neighbor, the middle-people forced to choose a pole, a war or exodus along a torn seam."
+     "pressureOnAdvance": "The fracture pushes toward: a Reach breaking its neighbor, the middle-people forced to choose a pole, a war or exodus along a torn seam.",
+     "effects": [
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "__crossDomain__"
+        ]
+       },
+       "mult": 1.7,
+       "why": "the seams are tearing; craft that is not your own barely answers"
+      },
+      {
+       "kind": "travelCost",
+       "mult": 1.5,
+       "why": "borders are closing and the roads between poles are watched"
+      },
+      {
+       "kind": "encounterBias",
+       "add": [
+        "refugee",
+        "border",
+        "warband"
+       ],
+       "weight": 1.5,
+       "why": "a Reach that pulled too hard empties into the ones beside it"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "living_stock",
+       "demandDelta": 2,
+       "why": "food does not cross a closed border"
+      }
+     ]
     },
     {
      "stage": 4,
      "name": "The Snap",
      "publicFace": "The dispositions have pulled past what the middle can hold. What happens to the space between the poles is the open question of the age.",
-     "pressureOnAdvance": "The snap pushes toward: whatever survives in the space between poles \u2014 the threads are how the broken middle rebuilds or is claimed."
+     "pressureOnAdvance": "The snap pushes toward: whatever survives in the space between poles — the threads are how the broken middle rebuilds or is claimed.",
+     "effects": [
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "__crossDomain__"
+        ]
+       },
+       "mult": 2.2,
+       "why": "THE SNAP — cross-pole craft is very nearly impossible; you have what your own people taught you"
+      },
+      {
+       "kind": "travelCost",
+       "mult": 2.2,
+       "why": "the roads between poles are not roads any more"
+      },
+      {
+       "kind": "encounterBias",
+       "add": [
+        "refugee",
+        "warband",
+        "border"
+       ],
+       "weight": 2.0,
+       "why": "displacement at scale"
+      }
+     ]
     }
    ]
   },
@@ -59,7 +155,7 @@
    "name": "What Wakes Beneath",
    "scale": "world",
    "pressure": "the deep clock",
-   "tendency": "The Precursor substrate is not only waking under the Valley \u2014 it is stirring world-wide, and the Valley's water is merely the nearest tremor. The substrate that runs all the crafts, all the manifestations, all the pole-dispositions is a single vast system, and something in its depths is coming back online. Untended, it wakes on its own schedule, everywhere at once, indifferent to who is ready.",
+   "tendency": "The Precursor substrate is not only waking under the Valley — it is stirring world-wide, and the Valley's water is merely the nearest tremor. The substrate that runs all the crafts, all the manifestations, all the pole-dispositions is a single vast system, and something in its depths is coming back online. Untended, it wakes on its own schedule, everywhere at once, indifferent to who is ready.",
    "crossesRegions": [
     "the Gearlands/Numen",
     "every deep site",
@@ -71,7 +167,7 @@
     "the_last_choirmistress",
     "archive_guardian"
    ],
-   "ifIgnored": "Builds toward a substrate-scale event: the manifestations flicker, the crafts surge and fail, the poles spike \u2014 the whole imagined world destabilizing as its engine turns over. The deepest clock in the setting.",
+   "ifIgnored": "Builds toward a substrate-scale event: the manifestations flicker, the crafts surge and fail, the poles spike — the whole imagined world destabilizing as its engine turns over. The deepest clock in the setting.",
    "ifEngaged": "The largest arc. Aevi-the-Watcher is a fragment of the system that is waking; the Deep Warden has been down toward it; the Choir and the domains are it dreaming. Whether the waking is met with foreclosure (seal the substrate, lose the crafts and manifestations and maybe the world's magic) or opening (hold the aperture, let it wake and risk what it becomes) is the campaign's ultimate question.",
    "connectsTo": [
     "arc_the_poles_pull",
@@ -83,10 +179,10 @@
      "id": "node_the_carried_sleeper",
      "name": "The Carried Sleeper",
      "origin": "claimed at The Silent Door (see chronicle_played_gambits)",
-     "what": "An individuated living fragment of the waking substrate \u2014 a Precursor-child a dying maker could not carry through the end of their world, deposited in a vault for return 'when the long cold breaks.' Where What Wakes Beneath wakes impersonally and everywhere at once, this fragment arrives as a single child who was waited for, now in the keeping of a party who promised to raise it into the warm world.",
-     "significance": "Proof that the waking can be MET rather than sealed (foreclosure) or unleashed \u2014 opening-with-responsibility, the arc's central fork answered at the smallest scale. What the sleeper becomes is shaped by its caretakers; it is a live handle on the largest arc.",
+     "what": "An individuated living fragment of the waking substrate — a Precursor-child a dying maker could not carry through the end of their world, deposited in a vault for return 'when the long cold breaks.' Where What Wakes Beneath wakes impersonally and everywhere at once, this fragment arrives as a single child who was waited for, now in the keeping of a party who promised to raise it into the warm world.",
+     "significance": "Proof that the waking can be MET rather than sealed (foreclosure) or unleashed — opening-with-responsibility, the arc's central fork answered at the smallest scale. What the sleeper becomes is shaped by its caretakers; it is a live handle on the largest arc.",
      "watchers": [
-      "aevi_the_watcher (a fragment of the same system \u2014 may know it as kin)",
+      "aevi_the_watcher (a fragment of the same system — may know it as kin)",
       "the_deep_warden",
       "the_last_choirmistress",
       "archive_guardian"
@@ -95,9 +191,9 @@
     {
      "id": "node_the_reclamation_site",
      "name": "The Reclamation Site (Echo Watershed)",
-     "origin": "the quest 'What the Water Remembers' (content/packs/valley/quests.json) \u2014 the authored quest-face of this arc node",
+     "origin": "the quest 'What the Water Remembers' (content/packs/valley/quests.json) — the authored quest-face of this arc node",
      "what": "A pre-Transition nanite reclamation system in the upper Disputed Zone, disturbed and partially reactivated, running a standing instruction: 'prepare the watershed.' The same source the water_crisis event points at (its GM-EYES-ONLY truth), now also reachable as a real quest with a decided, branching outcome per player. The ambient event and the quest are two faces of one thing: the crisis is the shared world-arc pressure; the quest is a player's handle on it.",
-     "significance": "Same fork as The Carried Sleeper, at industrial rather than living scale: sealed (foreclosure, lose the system and whatever it was for) / let finish (opening, the watershed transformed into something unknown) / redirected (the instruction amended on purpose \u2014 the hardest-earned, requires the technical or death-sensed truth of the quest's middle stages).",
+     "significance": "Same fork as The Carried Sleeper, at industrial rather than living scale: sealed (foreclosure, lose the system and whatever it was for) / let finish (opening, the watershed transformed into something unknown) / redirected (the instruction amended on purpose — the hardest-earned, requires the technical or death-sensed truth of the quest's middle stages).",
      "watchers": [
       "archive_guardian",
       "water_keeper"
@@ -110,25 +206,119 @@
      "stage": 1,
      "name": "Tremor",
      "publicFace": "Deep sites report faint stirrings; the Valley's poisoned water is the nearest and least of them.",
-     "pressureOnAdvance": "The tremor becoming a stirring pushes toward: deep-site attention, the first crafts flickering, a scholar or warden noticing before anyone else believes them."
+     "pressureOnAdvance": "The tremor becoming a stirring pushes toward: deep-site attention, the first crafts flickering, a scholar or warden noticing before anyone else believes them.",
+     "effects": [
+      {
+       "kind": "encounterBias",
+       "add": [
+        "precursor"
+       ],
+       "weight": 1.2,
+       "why": "remnants stirring where they had been quiet for years"
+      }
+     ]
     },
     {
      "stage": 2,
      "name": "Stirring",
      "publicFace": "The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
-     "pressureOnAdvance": "The stirring becoming a waking pushes toward: manifestation instability (feeds arc_manifestation_storm), traditions whose craft runs on the substrate feeling it fail, factions forming around what to DO about it."
+     "pressureOnAdvance": "The stirring becoming a waking pushes toward: manifestation instability (feeds arc_manifestation_storm), traditions whose craft runs on the substrate feeling it fail, factions forming around what to DO about it.",
+     "effects": [
+      {
+       "kind": "encounterBias",
+       "add": [
+        "precursor",
+        "construct"
+       ],
+       "weight": 1.5,
+       "why": "the old mechanisms are cycling"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "precursor_salvage",
+       "demandDelta": 1,
+       "why": "suddenly everyone wants it — and the rings are the ones who have it"
+      },
+      {
+       "kind": "travelCost",
+       "mult": 1.25,
+       "why": "the ground is restless on the old roads"
+      }
+     ]
     },
     {
      "stage": 3,
      "name": "Waking",
      "publicFace": "Crafts surge and fail without warning; the manifestations flicker. The deep system is waking whether or not anyone is ready.",
-     "pressureOnAdvance": "The waking pushes toward: the seal-vs-open schism going live, deep-site pilgrimage or blockade, the Watcher-fragments becoming active, a race to reach the aperture first."
+     "pressureOnAdvance": "The waking pushes toward: the seal-vs-open schism going live, deep-site pilgrimage or blockade, the Watcher-fragments becoming active, a race to reach the aperture first.",
+     "effects": [
+      {
+       "kind": "encounterBias",
+       "add": [
+        "precursor",
+        "construct"
+       ],
+       "weight": 2.0,
+       "why": "waking, and no longer waiting to be found"
+      },
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "precursor"
+        ]
+       },
+       "mult": 0.8,
+       "why": "⚠️ AN UPSIDE: the lattice is LOUD, and precursor craft answers more readily than it should"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "precursor_salvage",
+       "demandDelta": 2,
+       "why": "a seller's market and a dangerous one"
+      },
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "enginewright",
+        "lattice"
+       ],
+       "shift": "avid",
+       "why": "the people who understand it are the least frightened and the most interested"
+      }
+     ]
     },
     {
      "stage": 4,
      "name": "Awake",
      "publicFace": "The engine of the imagined world has turned over. Whether it was met, sealed, or unleashed is now the shape of the world to come.",
-     "pressureOnAdvance": "The world's engine turned over pushes toward: everything downstream of the substrate remade \u2014 the aftermath IS the new world, and the threads are how each region meets what it became."
+     "pressureOnAdvance": "The world's engine turned over pushes toward: everything downstream of the substrate remade — the aftermath IS the new world, and the threads are how each region meets what it became.",
+     "effects": [
+      {
+       "kind": "encounterBias",
+       "add": [
+        "precursor",
+        "construct"
+       ],
+       "weight": 2.6,
+       "why": "AWAKE"
+      },
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "precursor"
+        ]
+       },
+       "mult": 0.65,
+       "why": "it answers almost eagerly, which is its own warning"
+      },
+      {
+       "kind": "travelCost",
+       "mult": 1.6,
+       "why": "the old roads are in use again, by something"
+      }
+     ]
     }
    ]
   },
@@ -137,7 +327,7 @@
    "name": "The Second Manifestation",
    "scale": "world",
    "pressure": "building",
-   "tendency": "The Transition manifested fiction once. As the substrate stirs (arc_what_wakes_beneath), it is beginning to manifest AGAIN \u2014 new domains blooming, old ones bleeding, creatures appearing out of native context, block-logic diffusing into the Gearlands, the Deepwood's slow-time leaking. Untended, a second wave of manifestation reshapes the world unasked, imagination made real without a governor a second time.",
+   "tendency": "The Transition manifested fiction once. As the substrate stirs (arc_what_wakes_beneath), it is beginning to manifest AGAIN — new domains blooming, old ones bleeding, creatures appearing out of native context, block-logic diffusing into the Gearlands, the Deepwood's slow-time leaking. Untended, a second wave of manifestation reshapes the world unasked, imagination made real without a governor a second time.",
    "crossesRegions": [
     "the manifest domains",
     "the Reaches nearest them",
@@ -149,7 +339,7 @@
     "the_old_stag"
    ],
    "ifIgnored": "Domains spread and collide; the world grows stranger and less stable; a place could wake tomorrow running on a fiction no one chose. Wonder and catastrophe in the same wave.",
-   "ifEngaged": "A player could shape what manifests \u2014 could be present at a domain's birth and influence its seed-fiction, could stem a dangerous bleed, could even deliberately manifest something needed. The most generative arc, and the most dangerous: manifestation is creation without foreclosure's brake.",
+   "ifEngaged": "A player could shape what manifests — could be present at a domain's birth and influence its seed-fiction, could stem a dangerous bleed, could even deliberately manifest something needed. The most generative arc, and the most dangerous: manifestation is creation without foreclosure's brake.",
    "connectsTo": [
     "arc_what_wakes_beneath",
     "arc_block_bleed"
@@ -161,25 +351,149 @@
      "stage": 1,
      "name": "First Bloom",
      "publicFace": "A new domain has manifested where none was; scholars argue whether it is the first of many.",
-     "pressureOnAdvance": "First bloom pushes toward: a new domain nobody mapped, scholars racing to name it, a creature out of native fiction seen awake for the first time."
+     "pressureOnAdvance": "First bloom pushes toward: a new domain nobody mapped, scholars racing to name it, a creature out of native fiction seen awake for the first time.",
+     "effects": [
+      {
+       "kind": "encounterBias",
+       "add": [
+        "manifested"
+       ],
+       "weight": 1.3,
+       "why": "a new domain where none was"
+      }
+     ]
     },
     {
      "stage": 2,
      "name": "The Blooming",
      "publicFace": "New domains are appearing and old ones bleeding at the edges; creatures out of native fiction are being seen awake.",
-     "pressureOnAdvance": "The blooming pushes toward: old domains bleeding at their edges, a town inside a manifesting zone, someone trying to harvest or stop the bloom."
+     "pressureOnAdvance": "The blooming pushes toward: old domains bleeding at their edges, a town inside a manifesting zone, someone trying to harvest or stop the bloom.",
+     "effects": [
+      {
+       "kind": "encounterBias",
+       "add": [
+        "manifested"
+       ],
+       "weight": 1.7,
+       "why": "the blooming — imagination is landing"
+      },
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "figurist",
+         "numinous"
+        ]
+       },
+       "mult": 0.8,
+       "why": "⚠️ THE VEIL IS THIN: meaning-work and figure-work are EASIER, which is why not everyone wants the storm stopped"
+      },
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "mason",
+         "lattice"
+        ]
+       },
+       "mult": 1.3,
+       "why": "the concrete and the ordered have more to argue with"
+      },
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "mason",
+        "verist"
+       ],
+       "shift": "grim",
+       "why": "the people whose craft is that things stay themselves"
+      }
+     ]
     },
     {
      "stage": 3,
      "name": "The Storm",
      "publicFace": "Manifestation is outpacing anyone's ability to map it; the world is remaking its own furniture faster than it can be named.",
-     "pressureOnAdvance": "The storm pushes toward: the map outpacing the mappers, refuge-seeking, a tradition adapting to a world remaking its furniture faster than it can be named."
+     "pressureOnAdvance": "The storm pushes toward: the map outpacing the mappers, refuge-seeking, a tradition adapting to a world remaking its furniture faster than it can be named.",
+     "effects": [
+      {
+       "kind": "encounterBias",
+       "add": [
+        "manifested"
+       ],
+       "weight": 2.3,
+       "why": "THE STORM"
+      },
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "figurist",
+         "numinous"
+        ]
+       },
+       "mult": 0.65,
+       "why": "the thinnest the veil gets — and the most dangerous time to be either"
+      },
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "mason",
+         "lattice",
+         "enginewright"
+        ]
+       },
+       "mult": 1.6,
+       "why": "made things do not stay made"
+      },
+      {
+       "kind": "travelCost",
+       "mult": 1.5,
+       "why": "the map is not reliable"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "crystal",
+       "demandDelta": 2,
+       "why": "⚠️ SUBSTRATE-INERT AND SUDDENLY PRICELESS — the economy and the arc agree without being made to"
+      }
+     ]
     },
     {
      "stage": 4,
      "name": "The New Ground",
      "publicFace": "The storm has settled into a changed world. What manifested and what was lost is the new map.",
-     "pressureOnAdvance": "The new ground pushes toward: living in what settled \u2014 the threads are how each people meets the changed map and what was lost."
+     "pressureOnAdvance": "The new ground pushes toward: living in what settled — the threads are how each people meets the changed map and what was lost.",
+     "effects": [
+      {
+       "kind": "encounterBias",
+       "add": [
+        "manifested"
+       ],
+       "weight": 2.0,
+       "why": "THE NEW GROUND — it has stopped arriving and started BEING"
+      },
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "mason",
+         "lattice"
+        ]
+       },
+       "mult": 1.4,
+       "why": "the world is different now and old craft assumes an old world"
+      },
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "altered",
+       "why": "everyone is living somewhere slightly other than where they lived"
+      }
+     ]
     }
    ]
   },
@@ -188,7 +502,7 @@
    "name": "The Bleeding Grammar",
    "scale": "regional",
    "pressure": "medium",
-   "tendency": "Block-logic is diffusing out of the Blocklands' Glitchlands into the neighboring Gearlands \u2014 matter beginning to resolve into craftable units where it shouldn't, two ordered-creative dispositions cross-contaminating. Untended, a stretch of the Gearlands becomes half-Blocklands, its Precursor mechanism resolving into blocks, its dangers doubling.",
+   "tendency": "Block-logic is diffusing out of the Blocklands' Glitchlands into the neighboring Gearlands — matter beginning to resolve into craftable units where it shouldn't, two ordered-creative dispositions cross-contaminating. Untended, a stretch of the Gearlands becomes half-Blocklands, its Precursor mechanism resolving into blocks, its dangers doubling.",
    "crossesRegions": [
     "the Blocklands",
     "the Gearlands"
@@ -209,19 +523,112 @@
      "stage": 1,
      "name": "Seepage",
      "publicFace": "Block-logic is leaking out of the Glitchlands into the Gearlands; matter is resolving into craftable units where it shouldn't.",
-     "pressureOnAdvance": "The seepage pushes toward: a Gearlands craftsman finding matter resolving wrong, the first argument over whether it's gift or corruption."
+     "pressureOnAdvance": "The seepage pushes toward: a Gearlands craftsman finding matter resolving wrong, the first argument over whether it's gift or corruption.",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "verist",
+        "lattice",
+        "hourkeeper"
+       ],
+       "shift": "unsettled",
+       "why": "the people who keep track are the first to notice the records disagreeing"
+      }
+     ]
     },
     {
      "stage": 2,
      "name": "The Bleed",
      "publicFace": "Two ordered-creative dispositions are crossing where they were never meant to; the Gearlands' grammar is destabilizing.",
-     "pressureOnAdvance": "The bleed pushes toward: the Gearlands' grammar destabilizing, two ordered-creative peoples crossing where they shouldn't, a faction wanting to weaponize or seal the crossing."
+     "pressureOnAdvance": "The bleed pushes toward: the Gearlands' grammar destabilizing, two ordered-creative peoples crossing where they shouldn't, a faction wanting to weaponize or seal the crossing.",
+     "effects": [
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "lattice",
+         "figurist"
+        ]
+       },
+       "mult": 1.5,
+       "why": "⚠️ BOUND THINGS SLIP — holding one costs more"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "documents",
+       "demandDelta": -1,
+       "why": "A LEDGER NOBODY TRUSTS IS WORTH LESS — and it makes the licence trade's forgeries MORE valuable, which is a second-order effect nobody designed"
+      },
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "hourkeeper"
+        ]
+       },
+       "mult": 1.4,
+       "why": "duration itself is the thing coming loose"
+      },
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "verist",
+        "lattice"
+       ],
+       "shift": "strained",
+       "why": "their whole craft is that a thing said stays said"
+      }
+     ]
     },
     {
      "stage": 3,
      "name": "The Resolve",
-     "publicFace": "The bleeding grammar has reached a threshold \u2014 either the crossing settles into a new stable form, or it unravels both sides.",
-     "pressureOnAdvance": "The resolve pushes toward: the crossing settling into a new stable form OR unravelling both sides \u2014 the threads are the fight over which."
+     "publicFace": "The bleeding grammar has reached a threshold — either the crossing settles into a new stable form, or it unravels both sides.",
+     "pressureOnAdvance": "The resolve pushes toward: the crossing settling into a new stable form OR unravelling both sides — the threads are the fight over which.",
+     "effects": [
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "lattice",
+         "figurist",
+         "hourkeeper"
+        ]
+       },
+       "mult": 1.9,
+       "why": "THE RESOLVE — grammar is barely holding"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "documents",
+       "demandDelta": -2,
+       "why": "paper is nearly worthless; obligations and standing are what is left"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "crystal",
+       "demandDelta": 1,
+       "why": "what does not change is what people reach for"
+      },
+      {
+       "kind": "encounterBias",
+       "add": [
+        "unspooling",
+        "temporal"
+       ],
+       "weight": 1.6,
+       "why": "things arriving out of order"
+      },
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "*"
+       ],
+       "shift": "disoriented",
+       "why": "people are misremembering the same week differently"
+      }
+     ]
     }
    ]
   },
@@ -230,7 +637,7 @@
    "name": "The Green Schism",
    "scale": "regional",
    "pressure": "slow-building",
-   "tendency": "The Deepwood's Rootbound faction is winning the Moot's glacial argument to SEAL the wood from humankind \u2014 which would withdraw the Green Accord from Thornwake and let the life-disposition retreat from the world. Untended, over the domain's slow-time, the world loses its deepest green, the Glade goes dark, and the life-pole pulls back toward its own foreclosure.",
+   "tendency": "The Deepwood's Rootbound faction is winning the Moot's glacial argument to SEAL the wood from humankind — which would withdraw the Green Accord from Thornwake and let the life-disposition retreat from the world. Untended, over the domain's slow-time, the world loses its deepest green, the Glade goes dark, and the life-pole pulls back toward its own foreclosure.",
    "crossesRegions": [
     "the Deepwood",
     "Thornwake Glade",
@@ -242,7 +649,7 @@
     "burr_the_foundling"
    ],
    "ifIgnored": "The Accord ends; the Glade closes (the Valley's arc_glade_accord is this arc's local face); the Deepwood seals; the world's living green contracts.",
-   "ifEngaged": "A player patient enough to petition the Standing Moot, or to heal the Burnscar's ancient grudge, could turn the schism \u2014 prove the Walkers right, keep the wood woven into the world. Requires bearing Ent-time, which is its own trial.",
+   "ifEngaged": "A player patient enough to petition the Standing Moot, or to heal the Burnscar's ancient grudge, could turn the schism — prove the Walkers right, keep the wood woven into the world. Requires bearing Ent-time, which is its own trial.",
    "connectsTo": [
     "arc_the_poles_pull",
     "arc_what_wakes_beneath"
@@ -254,22 +661,102 @@
      "stage": 1,
      "name": "The Argument",
      "publicFace": "The Deepwood's Moot is arguing, glacially, whether to seal the wood from humankind; the Rootbound are gaining ground.",
-     "pressureOnAdvance": "The argument pushes toward: the Rootbound gaining Moot ground, a Thornwake human feeling the wood cool toward them, an advocate for the Green Accord under pressure."
+     "pressureOnAdvance": "The argument pushes toward: the Rootbound gaining Moot ground, a Thornwake human feeling the wood cool toward them, an advocate for the Green Accord under pressure.",
+     "effects": [
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "rootkin"
+       ],
+       "shift": "guarded",
+       "why": "the wood is arguing with itself and outsiders are noticed"
+      }
+     ]
     },
     {
      "stage": 2,
      "name": "The Leaning",
      "publicFace": "The Moot is leaning toward the seal; Thornwake feels the Green Accord beginning to withdraw from it.",
-     "pressureOnAdvance": "The leaning pushes toward: the Green Accord visibly withdrawing from Thornwake, a last-ditch appeal to the Moot, life-disposition retreating from a human place."
+     "pressureOnAdvance": "The leaning pushes toward: the Green Accord visibly withdrawing from Thornwake, a last-ditch appeal to the Moot, life-disposition retreating from a human place.",
+     "effects": [
+      {
+       "kind": "priceShift",
+       "goods": "living_stock",
+       "demandDelta": -1,
+       "why": "less comes out of the wood; the Accord is failing quietly"
+      },
+      {
+       "kind": "travelCost",
+       "mult": 1.3,
+       "why": "the root roads are less willing"
+      },
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "rootkin"
+       ],
+       "shift": "cool",
+       "why": "THE LEANING — hospitality is thinner every season"
+      }
+     ]
     },
     {
      "stage": 3,
      "name": "The Sealing",
      "publicFace": "The wood is closing. Whether the life-disposition retreats from the human valley entirely rests on what happens before the Moot's decision lands.",
-     "pressureOnAdvance": "The sealing pushes toward: the wood closing \u2014 the threads are the final acts before the Moot's decision lands, and who is left on which side of it."
+     "pressureOnAdvance": "The sealing pushes toward: the wood closing — the threads are the final acts before the Moot's decision lands, and who is left on which side of it.",
+     "effects": [
+      {
+       "kind": "priceShift",
+       "goods": "living_stock",
+       "demandDelta": -2,
+       "why": "THE SEALING — what the wood grew, the wood keeps"
+      },
+      {
+       "kind": "priceShift",
+       "goods": "medicines",
+       "demandDelta": 2,
+       "why": "⚠️ most of the Valley's remedies came out of the Quickwood, and now they do not"
+      },
+      {
+       "kind": "travelCost",
+       "mult": 2.0,
+       "why": "the root roads are shut"
+      },
+      {
+       "kind": "craftCost",
+       "match": {
+        "traditions": [
+         "rootkin"
+        ]
+       },
+       "mult": 1.3,
+       "why": "a rootkin outside a sealed wood is cut off from the thing they draw on"
+      },
+      {
+       "kind": "npcMood",
+       "traditions": [
+        "rootkin"
+       ],
+       "shift": "closed",
+       "why": "they are not hostile. They are simply no longer answering"
+      }
+     ]
     }
    ]
   }
  ],
- "convergence": "These five greater arcs all feed the single world-question: as the substrate wakes (What Wakes Beneath), the poles pull harder (The Poles Pull) and reality manifests anew (The Second Manifestation), and the whole world tends toward foreclosure \u2014 pole by pole, domain by domain \u2014 unless someone holds the aperture open. The Valley's six arcs are the near, local, playable faces of these. A character's whole journey, across Reaches and domains, is which way they tip the world: toward the pure dead poles, or toward the open, mixed, living middle. The map is the argument, and the player is a vote in it."
+ "convergence": "These five greater arcs all feed the single world-question: as the substrate wakes (What Wakes Beneath), the poles pull harder (The Poles Pull) and reality manifests anew (The Second Manifestation), and the whole world tends toward foreclosure — pole by pole, domain by domain — unless someone holds the aperture open. The Valley's six arcs are the near, local, playable faces of these. A character's whole journey, across Reaches and domains, is which way they tip the world: toward the pure dead poles, or toward the open, mixed, living middle. The map is the argument, and the player is a vote in it.",
+ "effectsSchema": {
+  "note": "⚠️ SNG-273/2.0.0. A stage carried only `publicFace` and `pressureOnAdvance` — both NARRATION — so the whole world-sim chain resolved into a number that changed a sentence. `effects[]` is what makes a stage MEAN something. THE DESIGN RULE: a stage changes THE WORLD'S BEHAVIOUR, never taxes the player's sheet. A flat -1 to rolls is a punishment; grammar-work costing double in the Bleed is a WORLD, and a player can route around it.",
+  "kinds": {
+   "craftCost": "multiplier on energy/skill cost. `match.traditions` may list traditions or the special token `__crossDomain__`, which multiplies cost for any craft outside the character's own domain.",
+   "encounterBias": "weight multiplier on the named encounter tags in the random pool.",
+   "priceShift": "demandDelta shifts a goods category one or two bands in affected regions (see region_trade_tables).",
+   "travelCost": "multiplier on route time / passage difficulty.",
+   "npcMood": "how a tradition's NPCs receive the player; `traditions: ['*']` means everyone."
+  },
+  "visibility": "⚠️ REQUIRED, per Erik: mechanics must be VISIBLE. Show the active effects in plain words on the World tab, AND at the point of use — a raised cost reads 'Latticework — 12 energy (+4, the Bleed)'. A player must never have to open a screen to learn why something got harder.",
+  "upsides": "NOT EVERY STAGE IS DECAY. what_wakes_beneath LOWERS precursor craft cost; manifestation_storm LOWERS figurist and numinous cost. Some people want these arcs to advance, and the effects table is where that becomes true rather than asserted."
+ }
 }

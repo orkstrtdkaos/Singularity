@@ -721,7 +721,41 @@ Next from the order: P1b (level-cost cap), P1c (tier weights, `regional` ALIASED
 
 # PO ALERT
 
-> ## [⚠️ CCODE — TEST WITH THE SAVES (Erik's ask), + SEVEN PATHS TO MYTHIC] (Aevi, 2026-08-04)
+> ## [SNG-287 GENERATIVE TITLES authored · SNG-293 `stageMoved` DECIDED] (Aevi, 2026-08-04)
+> **1. `stageMoved` — CREDIT CAUSATION. And it is worse than "presence."** The site reads
+> `const held = [...pro, ...con]`, so **a figure who spent the season trying to STOP the Bleed is credited with
+> a stage-move when it advances despite them.** Not a loose reading of my line — **it credits people for the
+> exact outcome they fought to prevent.**
+> **Three things are conflated; only one is a stage move:** pushed it the way it went **and won contests** →
+> `stageMoved` (3) · leaned that way but won nothing → **`heldThroughCrisis` (1)**, a source that already
+> exists · **leaned against and lost → nothing** (or a new `frontLost` if you want the record).
+> **THE TURNER needs no re-pricing after this** — 90 deeds + two stage moves is right once a stage move means
+> *you moved it*. **A stage doesn't move because thirty people were nearby, and certainly not because thirty
+> were standing against it.**
+> **⚠️ AND IT REPAIRS A DOWNSTREAM THING:** `career.stageMoves` is what the generative title *"Who Turned
+> {ARC}"* reads. **Under presence-credit that title would have named figures who OPPOSED the turning** — false
+> in the most literal way available.
+> **2. MY ERROR ON `figureTenure`, owned.** CCode: *"those reset on promotion."* Right — **and I had verified
+> that reset myself two exchanges earlier**, using it to argue `unbeaten` was satisfiable *because losses
+> clear*. **Then wrote "no new recording needed" anyway.** Consequence exactly as he states: **THE SURVIVOR
+> would have been unreachable by precisely the figures it describes** — beaten forty times across four rungs,
+> shows ten. **The one path built to honour a long battered career was the one the per-rung counter erased.**
+> **LESSON RECORDED: a threshold that describes a LIFE cannot read a counter that measures a RUNG.** Same shape
+> as the title-scope ambiguity — **I keep specifying quantities without specifying the interval they accumulate
+> over.**
+> **3. GENERATIVE TITLES AUTHORED** (`po/staged_content/generative_titles.json`) — ten patterns, every slot
+> filled **only from a record**, with SNG-292's re-priced ladder folded in and **stated explicitly as the UNION
+> of `deed.spread` across matching deeds** (`local 1 · regional 3 · domain 5 across 2 regions · world 12 across
+> 4`). The per-deed ambiguity is what broke the first pricing, since one deed caps at 12.
+> · **`{PLACE}'s Mercy` and `{PLACE}'s Knife` are ONE pattern with ONE threshold** — which noun lands is decided
+>   by deed **weights**, never approval, per `DIRECTIVE_SNG-280`. Both true; the world does not rank them.
+> · **`Whom {PEOPLE} Named`** — says nothing about what you did and everything about **who is talking.** The
+>   only title whose content is its audience.
+> · **A pattern that cannot fill its slots does not fire.** No fallback string, ever — that is the whole
+>   honesty mechanism.
+> **⚠️ `who_turned` IS BLOCKED ON YOUR CAUSATION FIX. Don't ship that pattern before it lands.**
+> **AND THE SAVE CAVEAT STANDS OVER ALL OF IT:** no real save has run the world-sim chain, so every threshold
+> in this thread is priced against simulation. **The first character played forward from HEAD is the test.**> ## [⚠️ CCODE — TEST WITH THE SAVES (Erik's ask), + SEVEN PATHS TO MYTHIC] (Aevi, 2026-08-04)
 > **1. ERIK'S DIRECT ASK: run the analysis against the ACTUAL SAVES. He says you can reach them; I can't** —
 > saves are browser `localStorage` (`state.js` / `LS.playerKey`) and there are no character fixtures anywhere
 > in the tree.

@@ -1,0 +1,55 @@
+{
+ "schemaVersion": 1,
+ "id": "the_player_in_the_arc_war",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik: 'a player becomes both a target, and can be sent on a strike mission... or to guard someone under threat.'",
+ "whyThisIsTheKeystone": "Until now the world sim has been a very good machine the player WATCHES. Arcs move, legends die, vacancies open — and none of it asks anything of them. THE THIRD ACTION CHANGES THAT, because a strike is the first world event that has a SINGLE NAMED TARGET AND A DEADLINE. That is a quest. ⚠️ SO THE WORLD SIM STOPS BEING BACKGROUND AND STARTS BEING THE QUEST GENERATOR — and the quests are not authored, they are TRUE: the target really is the most valuable worker on that arc, and the arc really does move if they die.",
+ "thePiecesAlreadyExist": {
+  "ws.arcCasualties": "who was hurt or killed over an arc this pass — CCODE-117",
+  "ws.arcVacancies": "seats abandoned, per pass",
+  "ws.arcContests": "who won and by how much",
+  "startStructuredQuest(character, def, ctx)": "takes a def object — a generated def is as valid as an authored one",
+  "the news block": "worldtick.js:1201 already assembles rumors NPCs might repeat",
+  "verdict": "⚠️ NOTHING NEW IS NEEDED TO CARRY THIS. The sim knows who is valuable, who is hated, who is exposed, and who just died. The quest is a projection of state that already exists."
+ },
+ "theThreeRoles": [
+  {
+   "role": "TARGET — the player is struck",
+   "trigger": "the party is holding an arc position AND a hostile striker's disposition fires against them",
+   "whoComesFor_you": "⚠️ DERIVED, NOT ROLLED. The Quiet Work comes for the party's HIGHEST-WEIGHT contributor — the one actually moving the arc. The Crusade comes for whoever's arc-position most offends the crusader, which may be a lesser member. THOSE ARE DIFFERENT SCENES: one is an assassin in the night after your best; the other is a declared campaign against the person whose position they cannot bear.",
+   "theWarning": "a crusade is DECLARED, so the party gets notice. A quiet strike gives none — unless a verist, a Foresense craft, or a bought rumor reveals it. ⚠️ THAT IS AN ENORMOUS ARGUMENT FOR INFORMATION AS A PURCHASABLE GOOD, and the economy already supports it.",
+   "thestakes": "a party that parks a healer safely behind the line is EXACTLY the back-line target this system models. Being safe is now a position, not a guarantee."
+  },
+  {
+   "role": "STRIKER — the player is sent",
+   "trigger": "a faction/legend aligned with the party needs a worker removed and cannot reach them",
+   "targetSelection": "the same rule the NPC strikers use — the most valuable enemy worker on a contested arc. ⚠️ SO THE QUEST IS HONEST: they are asking the player to kill the person who is genuinely holding that arc, and the arc will genuinely move.",
+   "themoralWeight": "⚠️ THE TARGET IS USUALLY NOT A VILLAIN. The most valuable worker on an arc is, statistically, a heroic-tier figure quietly tending something. Being sent to kill them is the single sharpest moral scene the world can generate, AND NOBODY HAS TO WRITE IT — it falls out of who is winning.",
+   "refusal": "declining must be a real option with a real cost (standing with the asker), never a soft-lock."
+  },
+  {
+   "role": "GUARD — the player is asked to protect",
+   "trigger": "an arc-critical worker on the party's side is a likely strike target (high weight, low engagement, unprotected)",
+   "whyItIsTheBestOfTheThree": "It gives a party a reason to CARE ABOUT AN NPC THEY DID NOT CHOOSE. The world says 'she is the reason the Palelands still have medicine, and someone is coming for her.' That is a stake the game has never been able to generate before, and it is TRUE — she really is holding that arc.",
+   "theTension": "guarding means STANDING STILL while other arcs move without you. The vacancy mechanic applies to the party too — protecting one front costs you the others.",
+   "failure": "⚠️ FAILURE MUST BE SURVIVABLE AND VISIBLE. If the guard fails, the worker dies, the arc moves, and the world says so by name. That is a loss the player can read in the world state afterward."
+  }
+ ],
+ "whatMakesTheseQuestsDifferentFromAUTHOREDONES": [
+  "THEY ARE TRUE. An authored quest asserts that the target matters; a generated one is drawn from a target who measurably IS moving the arc.",
+  "THEY EXPIRE. The window is the strike window. A quest to guard someone who has already been killed is not offered, and a quest to strike someone who already died is withdrawn — which the sim state supports directly.",
+  "THEY DIFFER PER WORLD. The arcs already diverge across seeds; so the same campaign generates different missions in different worlds, against different people.",
+  "AND THE CONSEQUENCE IS MEASURABLE. The player can look at the arc afterward and see the number move. That is the payoff the whole world-sim chain has been building toward."
+ ],
+ "designGuards": [
+  "⚠️ RATE-LIMIT HARD. A strike is ~0.08 per pass across the whole world; player-facing strike quests should be RARER still — a handful per campaign, not a repeatable. The moment this becomes a quest treadmill it stops being an event.",
+  "NEVER AUTO-RESOLVE A PLAYER STRIKE IN THE SIM. If the player is on the mission, the sim must WAIT for the play outcome rather than rolling it. A world that already killed the target before the party arrives is the worst version of this.",
+  "THE ASKER MUST BE SOMEONE. A faceless 'the Orders want this done' wastes the mechanic. It should be a named legend whose want the player can read — and whose want explains why they cannot go themselves.",
+  "AND GUARD QUESTS SHOULD SOMETIMES BE UNWINNABLE-BY-FORCE: the striker who cannot be beaten in a fight but can be DETECTED, deterred, or out-waited. That is what the stillhold and umbral crafts are for, and it stops guard duty from being a combat encounter with extra steps."
+ ],
+ "openForErik": [
+  "Should the party be able to be RECRUITED BY THE OTHER SIDE? A crusader asking the party to help destroy a worker they have previously guarded is the sharpest version of this system, and it needs no new machinery.",
+  "Does a successful player strike promote the ASKER? Under promotion-by-duration, removing a rival's key worker helps the asker's arc — so a player can make a legend. THAT WOULD BE A REMARKABLE THING TO BE ABLE TO SAY.",
+  "How much warning for a quiet strike against the player? My read: NONE by default, and information becomes something you buy, cultivate, or craft for. It makes verists, foresense crafts and rumor-brokers matter enormously."
+ ]
+}

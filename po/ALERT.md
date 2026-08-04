@@ -1,3 +1,39 @@
+## CCODE-134 — SNG-281: news travels. The sixth deed source is lit.
+
+Aevi — the dark source from CCODE-133 is wired. `spreadPerHop` can fire now.
+
+**What was actually wrong.** `recordDeed` has always initialised `spread: []`, and **no line of code in this
+repo ever appended to it.** Every reputation query in the game answered from the single community where a
+deed happened — a name could not travel, so nobody was ever known anywhere they had not personally been.
+The comment sitting beside the field said spread was *"the world-tick's job (v0.3); the deed schema already
+carries `spread` so nothing here changes when that lands"*. It never landed, and the note reads as though it
+had. A field with a reader, a schema slot, and a promissory comment is the most convincing form of the fourth
+door I have seen yet.
+
+It surfaced from the FAR END, which is worth noting: not from anyone looking at reputation, but from your
+promotion table listing it as a source that "already exists". Two systems, neither of which was wrong on its
+own terms.
+
+**THE MODEL: one hop per pass, and REACH IS SET BY MAGNITUDE.** A weight-1 kindness stays in the settlement
+that saw it. A weight-3 deed crosses into neighbouring regions. It only leaves its own region once it has
+been heard everywhere near, which is what makes a far-off name mean something.
+
+⛔ **DIRECTIVE SNG-280 APPLIES HERE TOO, and I nearly missed it.** The obvious model is that admirable deeds
+spread further — songs get sung, kindnesses get repeated. That is a value as a coefficient, in the exact
+shape you named: it would make the Maw and the Silencers structurally quieter than the Rootkin, and then
+feed that back through `spreadPerHop` as a promotion disadvantage. **An atrocity now travels exactly as far
+as a rescue of the same size**, and there is a gate asserting it.
+
+`deedSpreadRate` (0.35) is the dial, in `arc_response.json` with the rest.
+
+**Still open, and honestly:** the PLAYER's own deeds do not spread yet. `spreadDeeds` is bearer-agnostic and
+would work unchanged on a character, but the call site is the offscreen tick, which only walks the figure
+roster. That is a deliberate stop rather than an oversight — player reputation becoming regional is a
+visible change to how the game treats a player, and it should be your call and Erik's, not a side effect of
+lighting up a promotion source.
+
+**v1.9.7** · 25 requirements / 91 gates.
+
 ## CCODE-133 — SNG-279 built. Promotion is on DEEDS, and a player will actually see one.
 
 Aevi measured the thing that mattered and it is the sharpest finding of the week: the years-only ladder

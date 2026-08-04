@@ -1,9 +1,53 @@
 // reputation.js — deeds are the source of truth; reputation is a VIEW over deeds.
 import { renownScore } from "./recurrence.js";   // CCODE-85: the ladder's score, so the two views cannot drift
-// A community's opinion of you = sum of the deeds it knows about. News spread
-// between communities is the world-tick's job (v0.3); the deed schema already
-// carries `spread` so nothing here changes when that lands.
+// A community's opinion of you = sum of the deeds it knows about.
+//
+// ⚠️ "News spread between communities is the world-tick's job (v0.3); the deed schema already carries
+// `spread` so nothing here changes when that lands." — THAT COMMENT SAT HERE WHILE NOTHING EVER LANDED.
+// `recordDeed` initialised `spread: []` and no line of code in the repo ever appended to it, so every
+// reputation query in the game answered from the ONE community where a deed happened. A field with a reader
+// and no writer: the fourth door, wearing a promissory note.
+//
+// It surfaced from the other end: SNG-279's deed table lists "a deed that SPREAD" as a promotion source
+// marked "already exists". It does not, and could not — which is one of six ways up the ladder dark.
+// `spreadDeeds` below is that writer.
 
+/** SNG-281 — NEWS TRAVELS, AND BIG NEWS TRAVELS FURTHER.
+ *
+ *  One hop per pass, outward from where the deed happened. REACH IS SET BY WEIGHT: a weight-1 kindness stays
+ *  in the settlement that saw it; a weight-3 deed crosses into neighbouring regions. That is the whole model,
+ *  and it is deliberately about SCALE rather than kind — ⛔ DIRECTIVE SNG-280: a deed does not travel further
+ *  for being admirable. A massacre and a rescue of the same magnitude are heard about equally far.
+ *
+ *  Pure: takes the community graph and an rng, mutates only the deeds it is given, returns the hops made so a
+ *  caller can credit them.
+ */
+export function spreadDeeds(bearer, { communitiesByRegion = {}, regionOfCommunity = {}, rng = Math.random, rate = 0.35, maxAgeDays = null, worldDay = null } = {}) {
+  const deeds = bearer?.deeds;
+  if (!Array.isArray(deeds) || !deeds.length) return [];
+  const hops = [];
+  for (const d of deeds) {
+    if (!d?.communityId) continue;
+    d.spread = Array.isArray(d.spread) ? d.spread : [];
+    // How far this deed can ever get. Magnitude, not merit.
+    const reach = Math.min(3, Math.max(1, Math.abs(Number(d.weight) || 1)));
+    const capBy = { 1: 2, 2: 5, 3: 12 }[reach];
+    if (d.spread.length >= capBy) continue;
+    if (rng() >= rate) continue;
+    const home = regionOfCommunity[d.communityId] || null;
+    const near = (communitiesByRegion[home] || []).filter(c => c !== d.communityId && !d.spread.includes(c));
+    // A deed only leaves its region once it has been heard everywhere near, and only if it is big enough.
+    const far = reach >= 3 && !near.length
+      ? Object.entries(communitiesByRegion).filter(([r]) => r !== home).flatMap(([, cs]) => cs).filter(c => !d.spread.includes(c))
+      : [];
+    const pool = near.length ? near : far;
+    if (!pool.length) continue;
+    const to = pool[Math.floor(rng() * pool.length)];
+    d.spread.push(to);
+    hops.push({ to, weight: d.weight, description: d.description });
+  }
+  return hops;
+}
 /** Record a deed on a BEARER (append-only). Returns the deed as stored.
  *
  *  CCODE-85 (Erik: "NPCs should have deeds too"). Nothing in this module was ever character-SPECIFIC — every

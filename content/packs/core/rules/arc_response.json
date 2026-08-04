@@ -54,6 +54,8 @@
     "retrievalOddsByDepth": { "0": 0.7, "1": 0.45, "2": 0.2, "3": 0 },
     "_retrievalOddsByDepth": "Odds of success at each rung of the death ladder: the threshold · the near dark · the deep dark · the sealed. Failing sinks them further, and a failed reach at the deep dark seals them for good — which is what makes leaving someone in the dark a real choice too. The sealed refuse every road; that entry should stay 0.",
     "retrievalCooldownDays": 30,
+    "deedSpreadRate": 0.35,
+    "_deedSpreadRate": "SNG-281: chance per pass that one of a figure's deeds is heard in one more community. Reach is capped by the deed's WEIGHT (1 stays local, 3 crosses regions) — magnitude, never merit: an atrocity travels exactly as far as a rescue of the same size.",
     "_retrievalCooldownDays": "How long before anyone may reach for the same person again. The waiting is the most askable state there is: they cannot try again yet, and the clock is running."
   },
 

@@ -9780,6 +9780,31 @@ await (async () => {
     && existsSync(join(root, "tests/deed_ladder_sweep.mjs")));
 }
 
+// --- SNG-281: news travels (the writer `spread` never had) ------------------------------------------
+{
+  const { spreadDeeds } = await import("../engine/reputation.js");
+  const G = { communitiesByRegion: { valley: ["v.a","v.b","v.c"], mason: ["m.x","m.y"] },
+              regionOfCommunity: { "v.a":"valley","v.b":"valley","v.c":"valley","m.x":"mason","m.y":"mason" } };
+  const mk = (weight) => ({ deeds: [{ communityId: "v.a", weight, description: "a thing", spread: [] }] });
+  const soak = (b) => { let s = 5; const rng = () => (s = (s*1103515245+12345) % 2147483648) / 2147483648;
+    for (let i = 0; i < 60; i++) spreadDeeds(b, { ...G, rng, rate: 1 }); return b.deeds[0].spread; };
+
+  check("272/281: a deed now SPREADS — the field had a reader and no writer since it was introduced",
+    soak(mk(1)).length > 0);
+  check("272/281: reach is set by MAGNITUDE — a small deed stays local, a large one crosses regions", (() => {
+    const small = soak(mk(1)), big = soak(mk(3));
+    return small.length < big.length && !small.some(c => c.startsWith("m.")) && big.some(c => c.startsWith("m."));
+  })());
+  // ⛔ DIRECTIVE SNG-280: a deed does not travel further for being admirable.
+  check("272/281: an atrocity travels exactly as far as a rescue of the same size (SNG-280)",
+    soak(mk(3)).length === soak(mk(-3)).length);
+  check("272/281: a deed is never heard twice in the same place",
+    (() => { const s = soak(mk(3)); return new Set(s).size === s.length; })());
+  check("272/281: the world tick is the writer, and a hop scores toward promotion",
+    /spreadDeeds\(bearer, \{ communitiesByRegion/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8"))
+    && /creditDeed\(ws, f\.id, "spreadPerHop"/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8")));
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

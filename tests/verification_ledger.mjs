@@ -237,6 +237,16 @@ const LEDGER = [
     note: "Aevi measured the thing that mattered: the years-only ladder needed 15.5 world-years riffraff-to-mythic — ~2,200 player-hours — so the earned-tier system I built was, in play, INVISIBLE. Ladder 4/10/22/70/170 SWEPT (tests/deed_ladder_sweep.mjs): 4.5 rises in a 40-hour run and a mythic in 1 world of 6 at 180 hours, the only shape passing both of her tests. ⚠️ `spreadPerHop` cannot fire — reputation.js carries `spread` and its own header says nothing populates it yet; her table lists it as ‘already exists’.",
   },
   {
+    id: "SNG-281", ask: "(Aevi's deed table listed “a deed that SPREAD” as already existing — it did not)",
+    how: "reputation.js:spreadDeeds — one hop per pass, reach capped by the deed's weight; the world tick is the writer",
+    gates: ["272/281: a deed now SPREADS — the field had a reader and no writer since it was introduced",
+            "272/281: reach is set by MAGNITUDE — a small deed stays local, a large one crosses regions",
+            "272/281: an atrocity travels exactly as far as a rescue of the same size (SNG-280)",
+            "272/281: a deed is never heard twice in the same place",
+            "272/281: the world tick is the writer, and a hop scores toward promotion"],
+    note: "`recordDeed` initialised `spread: []` and NOTHING in the repo ever appended to it, so every reputation query answered from the single community where a deed happened. The comment beside it said spread was ‘the world-tick’s job (v0.3)’ and that job never landed. Found from the far end: it was one of six promotion sources, dark. ⛔ Reach is magnitude, never merit — DIRECTIVE SNG-280 applies to how far news carries, not just to what scores.",
+  },
+  {
     id: "SNG-267", ask: "the player is just one of many — so we need the world to live without the player",
     how: "tests/player_impact.mjs — the same worlds run with and without parties",
     gates: [],

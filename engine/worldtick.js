@@ -13,6 +13,7 @@
 import { callClaudeJSON } from "./claude.js";
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
+import { spreadDeeds } from "./reputation.js";   // SNG-281: news travels, and that is a promotion source
 import { applyCodexUpdates } from "./codex.js";
 import { tierRank, tierBirthWeight } from "./legends.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
@@ -1596,6 +1597,27 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     ws.deedSourcesSeen = ws.deedSourcesSeen || {};
     for (const t of Object.values(ws.figureTenure || {})) {
       for (const d of (t.deedLog || [])) ws.deedSourcesSeen[d.by] = (ws.deedSourcesSeen[d.by] || 0) + 0;
+    }
+    // SNG-281 — NEWS TRAVELS. Aevi's deed table lists "a deed that SPREAD" as a promotion source marked
+    // "already exists"; it did not, because `recordDeed` initialised `spread: []` and nothing ever appended
+    // to it. Every reputation query in the game answered from the one community where a deed happened.
+    //
+    // Built once per pass and reused: the community graph is content, not state.
+    const commsByRegion = {}, regionOfComm = {};
+    for (const loc of Object.values(content.locations || {})) {
+      const c = loc?.communityId, r = loc?.regionId || loc?.region || null;
+      if (!c || !r) continue;
+      (commsByRegion[r] ||= []).includes(c) || commsByRegion[r].push(c);
+      regionOfComm[c] = r;
+    }
+    const spreadRate = Number.isFinite(cfg.deedSpreadRate) ? cfg.deedSpreadRate : 0.35;
+    for (const f of living) {
+      const bearer = character?.npcRegistry?.[f.id];
+      if (!bearer?.deeds?.length) continue;
+      const hops = spreadDeeds(bearer, { communitiesByRegion: commsByRegion, regionOfCommunity: regionOfComm, rng, rate: spreadRate });
+      // SNG-279: 2 per hop — SCALE, not merit. A name that reached four settlements counts twice a name that
+      // reached two, whatever the name is known for.
+      if (hops.length) creditDeed(ws, f.id, "spreadPerHop", { worldDay: currentWorldDay, times: hops.length });
     }
     ws.arcStandings = { risen, fallen };
     // SNG-279 PART 3 — SEE AND FEEL IT, the requirement rather than the garnish. Aevi: "a promotion the

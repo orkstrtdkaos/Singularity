@@ -9852,6 +9852,58 @@ await (async () => {
   })());
 }
 
+// --- SNG-273: a stage CHANGES THE WORLD, not a sentence -----------------------------------------------
+{
+  const AE = await import("../engine/arceffects.js");
+  const appA = readFileSync(join(root, "app.js"), "utf8");
+  const arcsDoc = JSON.parse(readFileSync(join(root, "content/packs/valley/lore/greater_arcs.json"), "utf8"));
+  const allArcs = arcsDoc.greaterArcs || arcsDoc.arcs || [];
+  const content = { greaterArcs: allArcs };
+
+  check("272/273: every authored stage effect is REACHABLE by the reader",
+    AE.activeArcEffects(content, {}, () => 2).length > 0);
+
+  check("272/273: a stage changes what a CRAFT costs, and says which arc did it", (() => {
+    const eff = AE.activeArcEffects(content, {}, () => 2);
+    const note = AE.craftCostNote(12, eff, { crossDomain: true });
+    return !!note && note.adjusted > 12 && /Poles/.test(note.text);
+  })());
+
+  // ⛔ THE DESIGN RULE: a stage changes THE WORLD, never taxes the sheet. A craft the world is not touching
+  // must cost exactly what it always did.
+  check("272/273: a craft the world is NOT touching is unchanged (no blanket tax)", (() => {
+    const eff = AE.activeArcEffects(content, {}, () => 2);
+    return AE.craftCostNote(12, eff, { tradition: "nothing_at_all", crossDomain: false }) === null;
+  })());
+
+  // AND NOT EVERY STAGE IS DECAY — or every arc reads as a misery meter.
+  check("272/273: some stages make things EASIER (an arc advancing is not always bad news)", (() => {
+    let cheaper = false;
+    for (let s = 1; s <= 4; s++) for (const e of AE.activeArcEffects(content, {}, () => s))
+      if (e.kind === "craftCost" && Number(e.mult) < 1) cheaper = true;
+    return cheaper;
+  })());
+
+  check("272/273: the cost is explained AT THE POINT OF USE, not on a tab",
+    /craftCostNote\(energyCost, arcEffectsNow\(\)/.test(appA) && /pendingArcCostNote = note/.test(appA));
+  check("272/273: …and on the World tab in plain words",
+    /effects: effectsInPlainWords\(arcEffectsNow\(\)\)/.test(appA)
+    && /wt-effect/.test(readFileSync(join(root, "engine/worldtab.js"), "utf8")));
+  check("272/273: the encounter POOL leans with the world, at every draw site", (() => {
+    const appSrcB = readFileSync(join(root, "app.js"), "utf8");
+    const wired = (appSrcB.match(/arcBias: encounterBias\(arcEffectsNow\(\)\)/g) || []).length;
+    const draws = (appSrcB.match(/pickEncounter\(/g) || []).length;
+    return wired === draws && draws >= 3;   // every draw, or the world tilts some encounters and not others
+  })());
+  check("272/273: the roads and the mood are wired too",
+    /travelCostFactor\(arcEffectsNow\(\)\)/.test(appA) && /arcMoods: npcMoodLines\(arcEffectsNow\(\)\)/.test(appA)
+    && /arcMoodDetail/.test(readFileSync(join(root, "engine/gm.js"), "utf8")));
+
+  // ⚠️ An effect kind with no consumer must be VISIBLE as such, not silently inert.
+  check("272/273: an effect kind with NO consumer is declared, not left looking live",
+    AE.EFFECT_CONSUMERS.priceShift === null && !!AE.EFFECT_CONSUMERS.craftCost);
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

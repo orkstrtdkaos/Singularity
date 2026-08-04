@@ -222,12 +222,22 @@ export function eligibleEncountersFor(table, location, { cap = 8, power = null, 
     .map(x => x.e);
 }
 
-export function pickEncounter(table, location, rng = Math.random, { flavor = null, ignoreDanger = false } = {}) {
+export function pickEncounter(table, location, rng = Math.random, { flavor = null, ignoreDanger = false, arcBias = null } = {}) {
   let pool = (table?.encounters || []).filter(e => isEligible(e, location, { ignoreDanger }));
   if (flavor) pool = pool.filter(e => e.flavor === flavor);
   if (!pool.length) return null;
   const danger = dangerOf(location);
-  const weights = pool.map(e => Math.max(0.01, (e.weight || 1) * (flavor ? 1 : flavorMultiplier(e.flavor, danger))));
+  // SNG-273: an advanced arc leans on WHAT YOU MEET. `arcBias` is a Map of tag -> weight from the stage's
+  // effects — the world empties refugees onto the roads when a Reach pulls too hard. It multiplies the
+  // existing weight rather than replacing it, so an arc tilts the pool without overruling the place.
+  const biasFor = (e) => {
+    if (!arcBias || !arcBias.size) return 1;
+    const tags = [e.flavor, ...(e.tags || [])].filter(Boolean);
+    let m = 1;
+    for (const t of tags) if (arcBias.has(t)) m = Math.max(m, arcBias.get(t));
+    return m;
+  };
+  const weights = pool.map(e => Math.max(0.01, (e.weight || 1) * (flavor ? 1 : flavorMultiplier(e.flavor, danger)) * biasFor(e)));
   const total = weights.reduce((a, b) => a + b, 0);
   let r = rng() * total;
   for (let i = 0; i < pool.length; i++) { r -= weights[i]; if (r <= 0) return pool[i]; }

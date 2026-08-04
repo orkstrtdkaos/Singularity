@@ -64,7 +64,7 @@ function arcPushes(character, arcId) {
  *  pushes — this actor's + everyone else's (from the last sync) + the EPICS leaning on it from offstage
  *  (SNG-208) — clamped to the arc's real stage range. Not forward-only — a net-negative push pulls the arc
  *  BACK. Module-internal; covered through worldArcsPublic. */
-function arcStageNow(content, character, arcId) {
+export function arcStageNow(content, character, arcId) {
   const arc = findGreaterArc(content, arcId);
   const base = arc?.currentStage ?? 1;
   const total = (arc?.stages || []).length || base;

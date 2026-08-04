@@ -385,5 +385,10 @@
   "purpose": "Builds THE WORLD tab — who is doing what to your arcs — as a pure function of world state, so the render can be EXECUTED in a test instead of pattern-matched against its own source.",
   "playerVisibleSurface": "The World tab on the character sheet: each arc by stage NAME, who is pushing it and who is holding it back (names you have met marked apart), what it cost in casualties and strikes, who is being reached for in the dark, and who has not been home.",
   "whatMakesItFire": "Opening the character sheet and choosing The World; fed by arcPeopleView + worldPeopleFooter off the offscreen world tick."
+ },
+ "arceffects.js": {
+  "purpose": "SNG-273: turns a greater arc's current stage into things the world DOES — what a craft costs, what the roads cost, what you are likely to meet, how people are carrying themselves.",
+  "playerVisibleSurface": "The energy line at the point of use (\"12 energy (+4, The Poles Pull)\"), the effects listed under each arc on The World tab, and the mood of NPCs in play.",
+  "whatMakesItFire": "A greater arc sitting at a stage that carries effects; read fresh on every cost, every travel and every GM turn."
  }
 }

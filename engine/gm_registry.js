@@ -204,6 +204,11 @@ export const GM_CONTEXT = [
     build: (env) => wakesForGM(env.character, env.CONTENT) },
   // SNG-209 §1: the reachable DEAD — figures in the death state at a depth the roads back still reach. A killed
   // figure is a latent hook, not a void; the GM narrates them so death reads as a hard wall, never a delete.
+  // SNG-273: an advanced arc is felt in how PEOPLE are, not only in what things cost. Prose, not a number —
+  // the GM reads it as the mood of the room rather than a modifier.
+  { key: "arcMoodDetail", builder: "arceffects.npcMoodLines (SNG-273)", carries: ["how people are carrying themselves", "why"],
+    reachedBy: "a greater arc at a stage that changes mood", spec: "§25.3", views: ["turn"],
+    build: (env) => (env.arcMoods?.length ? env.arcMoods : null) },
   { key: "reachableDeadDetail", builder: "death.reachableDeadForGM (SNG-209)", carries: ["the dead still within reach", "how deep each has sunk (the wall)"],
     reachedBy: "always (a figure has died and is not yet sealed)", spec: "SNG-209 §1", views: ["turn", "ask"],
     build: (env) => reachableDeadForGM(env.character, env.CONTENT, env.character?.worldState?.lastTickWorldDay ?? null) },

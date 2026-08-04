@@ -1244,3 +1244,7 @@ img[data-lightbox] { cursor: zoom-in; }
 .wt-adv { color: var(--good, #6c9); font-size: 12px; }
 .wt-rec { color: var(--warn, #c96); font-size: 12px; }
 .wt-contested { color: var(--accent); font-size: 12px; font-weight: 600; }
+
+/* SNG-273: what an advanced arc is DOING to the world, on the arc it belongs to. */
+.wt-effect { font-size: 13px; margin: 2px 0 2px 6px; color: var(--text); }
+.wt-inert { opacity: .55; }

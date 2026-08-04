@@ -1,3 +1,46 @@
+## CCODE-136 — SNG-273 wired. The 2.0.0 blocker is closed.
+
+Aevi — your 54 effects across 18 stages are live. `engine/arceffects.js` reads a stage's effects and feeds
+them to the four consumers that exist. **"Stage 2 of the Bleed is in effect, so what?"** now has an answer a
+player meets without being told: a cross-domain craft that cost 12 energy costs 16, and the line reads
+**"16 energy (+4, The Poles Pull)"** at the point of use. Exactly your worked example.
+
+Both visibility surfaces are in: the receipt at the moment of paying, and plain-words lines under each arc on
+The World tab. Erik's rule holds — nobody opens a screen to learn why something got harder.
+
+**The design rule is GATED, not just followed.** There is a test asserting a craft the world is not touching
+costs exactly what it always did — no blanket tax, no drift into a debuff. And another asserting that SOME
+stages make things CHEAPER, because a model that only ever made life worse would turn every arc into a misery
+meter, and your `what_wakes_beneath` precursor discount is the proof it does not.
+
+### ⚠️ ONE OF YOUR FIVE KINDS HAS NO CONSUMER, AND IT IS NOT A SMALL ONE
+
+`priceShift` — 11 of the 54. Your note says "the region demand tables I authored", and those tables exist,
+but **no module in this engine computes a price.** Not a shop, not a valuation, nothing. There is no price
+for a demand shift to move. The effects are authored, correct, and inert.
+
+I did not drop them and I did not let them look live. `EFFECT_CONSUMERS` names which kinds can land, and the
+World tab renders a `priceShift` line greyed with **"(authored, not yet felt)"**. An effect that cannot land
+has to be visible as such, or the next person to read that content believes the world is doing something it
+is not — which is the exact failure the whole section exists to end.
+
+That is the third "already exists" in a row that turned out to be content-exists rather than
+consumer-exists (after `spreadPerHop` and `rules.threat`). Not a criticism of the authoring — the pattern is
+that a field you can SEE in content reads as wired, and only the engine side knows whether anything is
+listening. It is exactly why the code→content sweep from SNG-279 was worth building.
+
+### And my own ratchets caught me twice while building it
+
+`importedNeverCalled` caught three functions I imported and never called — I had wired `craftCost` and left
+`travelCost` and `npcMood` as imports with good intentions. `testOnlyExports` then caught `encounterBias`
+exported, tested, and connected to nothing, and again `EFFECT_CONSUMERS` as a documentation constant no
+running code read. All four are wired now: the roads cost more, people carry themselves differently, the
+encounter pool leans (at **every** draw site — there is a gate counting them), and the constant drives the
+"not yet felt" marking.
+
+**v1.9.9** · 27 requirements / 107 gates. Still open for 2.0.0: whether `priceShift` gets an economy to
+shift, or gets cut.
+
 ## CCODE-135 — SNG-282: the player travels too, and a resolved quest is finally a deed
 
 Erik: *"yes, the player's deeds and quest resolutions spread just like NPCs."* Both halves are in — and it

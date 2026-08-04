@@ -48,8 +48,9 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
+import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter } from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -61,7 +62,7 @@ import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAsp
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
-import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression } from "./engine/skilltree.js";
+import { isCrossClass, tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
@@ -77,7 +78,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.8";
+const APP_VERSION = "1.9.9";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -304,6 +305,7 @@ let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
 let sceneBeats = 0;      // SNG-266/1d: beats this scene has truly run (sceneTurns is TRIMMED; this is not)
+let pendingArcCostNote = null;   // SNG-273: why this craft just cost what it did, in the arc's own name
 // CCODE-02: the stored scene history is BOUNDED. It was unbounded, and a long-running scene that
 // never ended grew to 169 turns (~341KB) on a real save — 59% of a 600KB character — which is what
 // exhausted the localStorage quota and hung character load. Every consumer reads at most
@@ -3938,6 +3940,7 @@ function masteryReadyForGM() {
 function gmEnv(extra = {}) {
   return {
     character, location: hereNow(), CONTENT, sceneTurns, sceneState, sharedScene, profile,
+    arcMoods: npcMoodLines(arcEffectsNow()),   // SNG-273: an advanced arc changes how people carry themselves
     sceneBeats, rules: CONTENT.rules,          // SNG-266/1d: the pacing directive reads both — a builder
                                                // that reads an env key nobody puts here is the same dark wire.
     time: readClock(character.clock),
@@ -5285,6 +5288,19 @@ async function onChoice(choice) {
       intensity = autoIntensity(stdChance, CONTENT.intensity);
     }
     if (energyCost != null) energyCost = scaledEnergy(energyCost, intensity, CONTENT.intensity);
+    // SNG-273 — THE WORLD IS ON THE BILL. Erik: "a player should never have to visit a tab to learn why
+    // something got harder", so the arc's name rides the cost at the moment it is paid. `crossDomain` is the
+    // flag the poles-pull effect keys on — the world pulling apart makes BORROWING from another people
+    // harder, which is exactly one boolean the engine already computes.
+    if (energyCost != null) {
+      const abilityDef = choice.abilityId ? fullCatalog()[choice.abilityId] : null;
+      const note = craftCostNote(energyCost, arcEffectsNow(), {
+        tradition: abilityDef?.powerSystem || null,
+        crossDomain: abilityDef ? isCrossClass(abilityDef, character) : false,
+      });
+      if (note) { energyCost = note.adjusted; pendingArcCostNote = note; }
+      else pendingArcCostNote = null;
+    }
   }
   if (energyCost && character.energy < energyCost) { alert("Not enough energy — rest first."); return; }
   // SNG-090: the substrate — can this CRAFT run here? A weapon/attribute action is unaffected. At the
@@ -5660,7 +5676,7 @@ async function fireEncounter(entryOrFlavor, { dev = false, news = [], aggressor 
   const table = encounterTable();
   if (!table) return false;
   const entry = typeof entryOrFlavor === "string"
-    ? pickEncounter(table, hereNow(), Math.random, { flavor: entryOrFlavor, ignoreDanger: dev })
+    ? pickEncounter(table, hereNow(), Math.random, { flavor: entryOrFlavor, ignoreDanger: dev, arcBias: encounterBias(arcEffectsNow()) })
     : entryOrFlavor;
   if (!entry) { if (dev) renderPlay(character.activeScene?.lastTurn || null, { aside: `No ${entryOrFlavor} encounter fits here.` }); return false; }
   const offer = buildOffer(entry, character, fullCatalog(), CONTENT.rules, { aggressor });
@@ -5731,7 +5747,7 @@ async function maybeRandomEncounter(trigger, news = []) {
   const challenger = challengerOfferFor(trigger, pace.mult);
   if (challenger) return fireEncounter(challenger, { news });
   if (!rollTrigger(trigger, hereNow(), table, Math.random, pace.mult)) return false;
-  const entry = pickEncounter(table, hereNow(), Math.random, {});
+  const entry = pickEncounter(table, hereNow(), Math.random, { arcBias: encounterBias(arcEffectsNow()) });
   if (!entry) return false;
   return fireEncounter(entry, { news });
 }
@@ -5784,7 +5800,7 @@ function maybeNarrativeEncounter(turn, resolution) {
     : kind === "travel" ? rollTrigger("onTravel", loc, table, Math.random, pace.mult)
     : rollNarrativeTime(hoursPassed, loc, table, Math.random, pace.mult);
   if (!fired) return;
-  const entry = pickEncounter(table, loc, Math.random, {});
+  const entry = pickEncounter(table, loc, Math.random, { arcBias: encounterBias(arcEffectsNow()) });
   if (!entry) return;
   // SNG-236 fix A: a STRUCTURED pick (duel/challenge → a real fireable def, SNG-231 fire path) is a
   // RECOGNIZABLE encounter — offer it HARD (a framed choice the GM MUST present), not woven invisibly.
@@ -6188,6 +6204,9 @@ function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, 
 
 async function travelTo(locId, { cost } = {}) {
   if (busy) return;
+  // SNG-273: a closing world makes the ROADS cost more — a property of the world, not a tax on the traveller.
+  { const t = travelCostFactor(arcEffectsNow());
+    if (t.mult !== 1 && cost?.hours) cost = { ...cost, hours: Math.max(0.25, Math.round(cost.hours * t.mult * 4) / 4) }; }
   noteGeneratedAttention(locId, "revisit", readClock(character.clock).day); // §2: returning to a grown place keeps it alive
   addKnownPlace(locId); // SNG-117: somewhere you've been is known
   character.currentLocationId = locId;
@@ -8202,10 +8221,18 @@ async function ensureChronicleParagraph(force = false) {
 // push reads "leaning hard", never 4.7. The engine keeps the floats; the sheet speaks the language.
 // SNG-276 — THE WORLD TAB. The markup lives in `engine/worldtab.js` so it can be EXECUTED in a test rather
 // than pattern-matched; this is the thin shell that feeds it real state and puts it on screen.
+// SNG-273: the effects in force RIGHT NOW. One reader, so the receipt, the World tab and the GM block can
+// never disagree about what the world is doing.
+function arcEffectsNow() {
+  try { return activeArcEffects(CONTENT, character, (arcId) => arcStageNow(CONTENT, character, arcId)); }
+  catch { return []; }
+}
+
 function renderWorldTab() {
   chrome(worldTabHtml({
     arcs: arcPeopleView(character, CONTENT),
     foot: worldPeopleFooter(character, CONTENT),
+    effects: effectsInPlainWords(arcEffectsNow()),   // SNG-273: what the world is doing, in plain words
     name: character.name,
     tabBar: characterTabBar,
     esc,

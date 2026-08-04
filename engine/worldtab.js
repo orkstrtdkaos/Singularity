@@ -13,7 +13,7 @@
 //
 // `esc` is INJECTED rather than imported — the app owns its own escaping, and a second copy of it here is a
 // second thing to get wrong.
-export function worldTabHtml({ arcs = [], foot = {}, name = "", tabBar = () => "", esc = (s) => String(s ?? "") } = {}) {
+export function worldTabHtml({ arcs = [], foot = {}, effects = [], name = "", tabBar = () => "", esc = (s) => String(s ?? "") } = {}) {
   const dirMark = a => a.contested ? `<span class="wt-contested">⚔ contested</span>`
     : a.direction === "advanced" ? `<span class="wt-adv">⤴ advancing</span>`
     : a.direction === "receded" ? `<span class="wt-rec">⤵ pushed back</span>`
@@ -27,7 +27,8 @@ export function worldTabHtml({ arcs = [], foot = {}, name = "", tabBar = () => "
 
   const arcCards = arcs.map(a => `<div class="wt-arc">
     <div class="wt-arc-head"><strong>${esc(a.name)}</strong> — ${esc(a.stageName)} <span class="hint">stage ${a.stageNum}/${a.total}</span> ${dirMark(a)}</div>
-    ${a.publicFace ? `<div class="wt-face">${esc(a.publicFace)}</div>` : ""}
+    ${a.publicFace ? `<div class="wt-face">${esc(a.publicFace)}</div>` : ""}
+    ${(effects.filter(x => x.arcName === a.name)).map(x => `<div class="wt-effect${x.inert ? " wt-inert" : ""}">▸ ${esc(x.text)}${x.inert ? ` <span class="hint">(authored, not yet felt)</span>` : ""}${x.why ? ` <span class="hint">— ${esc(x.why)}</span>` : ""}</div>`).join("")}
     ${side(a.forIt, "pushing it on")}
     ${side(a.againstIt, "holding it back")}
     ${!a.movers.length ? `<div class="hint">nobody is spending themselves on this one right now.</div>` : ""}

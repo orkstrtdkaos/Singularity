@@ -9841,8 +9841,12 @@ await (async () => {
   check("272/282: the resolve call site passes WHERE, or the deed has nowhere to travel from",
     /communityId: hereNow\(\)\?\.communityId \?\? null/.test(readFileSync(join(root, "app.js"), "utf8")));
 
-  check("272/282: the PLAYER is a bearer like any other — their deeds spread in the tick",
-    /if \(character\?\.deeds\?\.length\) \{[\s\S]{0,160}spreadDeeds\(character,/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8")));
+  // ⚠️ CORRECTED. The player was ALREADY spread by `runWorldTick` (v0.5.0, three tests below gate it); I
+  // added a second model without finding the first. The gate now asserts there is exactly ONE writer per
+  // bearer rather than asserting my duplicate exists.
+  check("272/282: the player has exactly ONE spread writer, not two",
+    (() => { const w = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+      return /deed\.spread = \[/.test(w) && !/spreadDeeds\(character,/.test(w); })());
 
   check("272/282: …and spreadDeeds genuinely does not care what kind of bearer it is handed", (() => {
     const player = { name: "P", deeds: [{ communityId: "v.a", weight: 2, description: "x", spread: [] }] };

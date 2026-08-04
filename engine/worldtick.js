@@ -1611,12 +1611,17 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       regionOfComm[c] = r;
     }
     const spreadRate = Number.isFinite(cfg.deedSpreadRate) ? cfg.deedSpreadRate : 0.35;
-    // SNG-282 (Erik): "the player's deeds and quest resolutions spread just like NPCs." The player is a
-    // bearer like any other — `spreadDeeds` never cared what kind of thing it was handed, and reading the
-    // roster only was the reason a player could be famous in one valley town and unheard of in the next.
-    if (character?.deeds?.length) {
-      spreadDeeds(character, { communitiesByRegion: commsByRegion, regionOfCommunity: regionOfComm, rng, rate: spreadRate });
-    }
+    // ⛔ THE PLAYER IS NOT SPREAD HERE, AND THAT IS A CORRECTION TO MY OWN WORK.
+    //
+    // `runWorldTick` has spread the PLAYER's deeds since v0.5.0 ("big deeds spread between communities"),
+    // and three tests gate it. I did not find it: I looked in `reputation.js`, which only READS `spread`,
+    // and grepped for `recordDeed` rather than for `deed.spread` in this file. So CCODE-134 reported the
+    // field had never had a writer, and for two commits the game ran TWO models on the player 14 lines apart
+    // in app.js — the old one spreading a deed everywhere at once, mine spreading it a hop at a time.
+    //
+    // The figures below genuinely had no writer, so that half stands. The player half was already built.
+    // ⚠️ WHICH MODEL SHOULD OWN THE PLAYER IS A DESIGN CALL, NOT MINE TO TAKE QUIETLY — the old one is
+    // shipped, gated and in every save; the graded one matches Erik's "big news travels further". Reported.
     for (const f of living) {
       const bearer = character?.npcRegistry?.[f.id];
       if (!bearer?.deeds?.length) continue;

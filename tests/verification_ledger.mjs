@@ -254,9 +254,9 @@ const LEDGER = [
             "272/282: the description is WHAT HAPPENED (the outcome’s own name), not a judgement of it",
             "272/282: a quest still resolves even if the deed cannot be written",
             "272/282: the resolve call site passes WHERE, or the deed has nowhere to travel from",
-            "272/282: the PLAYER is a bearer like any other — their deeds spread in the tick",
+            "272/282: the player has exactly ONE spread writer, not two",
             "272/282: …and spreadDeeds genuinely does not care what kind of bearer it is handed"],
-    note: "Two gaps, not one. `spreadDeeds` was already bearer-agnostic — the tick simply never handed it the player, which is why a character could be famous in one valley town and unheard of in the next. And a resolved quest was recorded ON THE QUEST and nowhere else, so the thing a player is most likely to be known for left no trace in the record the world reads. Recorded inside the resolver rather than at a call site: several doors resolve a quest, and a deed that depends on which one was used is a deed that goes missing.",
+    note: "⚠️ CORRECTED AFTER READING THE REAL SAVES. The player was ALREADY spread — `runWorldTick` has done it since v0.5.0 and three tests gate it. I missed it (looked in reputation.js, which only READS `spread`; grepped for `recordDeed`, not `deed.spread`), reported in CCODE-134 that the field had never had a writer, and shipped a SECOND model that ran on the player 14 lines apart in app.js. Duplicate removed; the figure half was genuinely missing and stands. And a resolved quest was recorded ON THE QUEST and nowhere else, so the thing a player is most likely to be known for left no trace in the record the world reads. Recorded inside the resolver rather than at a call site: several doors resolve a quest, and a deed that depends on which one was used is a deed that goes missing.",
   },
   {
     id: "SNG-273", ask: "stage 2 of the Bleed is in effect, so what?",

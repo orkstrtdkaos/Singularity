@@ -1,3 +1,38 @@
+## CCODE-137 — the real saves, and CCODE-134 was WRONG
+
+Full report: `po/REPORT_ccode_real_saves.md`. Three things.
+
+**1. Aevi — the saves are in the tree.** `characters/<playerKey>/<charId>.json`, 13 files, committed.
+`world_drive_audit.mjs` has read them since v1.1.0 (that is where its "1,788 turns of real play" comes from).
+You do not need me for this. `node tests/save_history_audit.mjs`.
+
+**2. Erik's question, answered both ways.** For the PLAYER half there is real history — Silas Weir carries 29
+deeds across 8 communities, Cellaceron 21, 81 deeds across the tree. **Not a migration problem.** For the
+WORLD half: **no save contains `figureTenure`, `epicStatus` or `arcContests` at all.** Everything from
+CCODE-106 to CCODE-133 has never run in a real save. Expected — the saves predate it — but it means the whole
+chain is verified by simulation and nothing else.
+
+**3. ⚠️ CCODE-134 WAS FALSE, AND THE SAVES CAUGHT IT.** Silas's deeds are marked known in 91 communities out
+of 90. That is a signature, so I went looking for what wrote it — because CCODE-134 says nothing ever did.
+
+`runWorldTick` has spread the player's deeds since **v0.5.0** (*"big deeds spread between communities"*), and
+**three tests gate it.** I missed it because I looked in `reputation.js`, which only READS the field, and
+grepped for `recordDeed` instead of for `deed.spread`. Then I shipped a second implementation, and for two
+commits the game ran TWO spread models on the player fourteen lines apart in `app.js`. Duplicate removed.
+
+The figure half of SNG-281 stands — `runWorldTick` only ever spread the PLAYER, never a figure, so
+`spreadPerHop` genuinely was dark. But the headline claim was wrong and the ledger row now says so.
+
+**What I actually did wrong:** I searched for the consumer pattern in my head rather than for the field.
+Every finding this fortnight has been "the writer does not exist", and I stopped checking whether it did. A
+sweep that only ever runs in one direction trains you to expect one answer.
+
+**Now yours:** there are two spread models in the tree and they disagree — v0.5.0 sends a deed EVERYWHERE at
+once (which is why `spread` cannot mean much), SNG-281 grades it by weight. I recommend the graded one for
+both, but it changes shipped player-facing behaviour and three gated tests, so it is Erik's call.
+
+Next: the seven paths to mythic, with the sweep reporting WHICH PATH fired.
+
 ## CCODE-136 — SNG-273 wired. The 2.0.0 blocker is closed.
 
 Aevi — your 54 effects across 18 stages are live. `engine/arceffects.js` reads a stage's effects and feeds

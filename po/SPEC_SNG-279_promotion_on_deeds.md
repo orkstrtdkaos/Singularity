@@ -20,22 +20,24 @@ promote when:  heldRank >= floorYears  AND  deedScore >= rungThreshold
 **`deedScore` accrues from things the world already records** — nothing new is needed:
 | source | already exists | weight |
 |---|---|---|
-| arc contest won | `ws.arcContests` | **3** |
-| a strike survived (as target) | `ws.arcStrikes` | 3 |
-| a strike landed | `ws.arcStrikes` | 2 |
-| a guard that intercepted | `ws.arcStrikes.guard` | **4** — the most-rewarded act |
+| arc contest won | `ws.arcContests` | 3 |
+| strike landed | `ws.arcStrikes` | **3** |
+| strike survived (as target) | `ws.arcStrikes` | 3 |
+| guard intercepted | `ws.arcStrikes.guard` | **3** |
 | a deed that SPREAD | `reputation.js` `spread` | 2 × spread |
-| an arc stage moved while they held it | `ws.arcContests` | 3 |
+| arc stage moved while they held it | `ws.arcContests` | 3 |
 | held a front through a crisis pass | attention/urgency | 1 |
-**Why guard scores highest:** it is the only act that is pure cost to the doer — *a guard is not pushing while
-they watch.* If the ladder rewards it best, **the world produces people who stand over others**, which is the
-behaviour most worth having in it.
-**AND IT ANSWERS ERIK'S ORIGINAL FRAMING BETTER THAN YEARS DID.** *"The ones that stay the longest are the
-true legends"* — surviving eight years of a world nobody is playing is not staying. **Surviving eight contests
-is.** Deeds keep the meaning and drop the dependence on an unreachable clock.
-**⚠️ AND THE PLAYER BECOMES A KINGMAKER, mechanically:** killing a legend opens a seat; **striking a rival's
-worker directly accelerates the asker's rise.** A player can now *make* a legend on purpose, which Erik asked
-for two turns before this.
+
+**⚠️ CORRECTED PER `DIRECTIVE_SNG-280`. My first draft weighted `guard` at 4 and `strike landed` at 2, and
+justified it as *"the behaviour most worth having in it."* Erik caught it: that is protection-over-aggression —
+a moral position some of this world's peoples hold and others reject — installed as physics.**
+**The rule now: EVERYTHING CONTESTED AND WON SCORES 3, whichever direction it points.** A Maw who levers three
+rivals rises exactly as fast as a guard who stops three knives. Weights reflect **cost, difficulty, risk and
+scale — never approval.**
+**And the test any future weighting must pass: would this tradition's TAIL be disadvantaged?** Run it against
+the Maw, the Silencers, the Grave-Callers, the Openers, the Strippers. **If they systematically lose, the
+system encodes a morality, and the lore's own north star — *"anything is on the table"* — is being contradicted
+by a coefficient.**
 
 ## PART 2 — THE FLOOR, COMPRESSED (choice 1) — sim-tunable, these are the starting numbers
 | rung | old floor | **new floor** | cumulative | reached at |

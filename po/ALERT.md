@@ -1,6 +1,40 @@
 # PO ALERT
 
-> ## [CCODE-122 - I WAS WRONG ABOUT THE RATE, AND DEATH ALREADY HAS ITS LADDER - CCode, 2026-08-03]
+> ## [⚠️ WORK ORDER FOR CCODE — everything outstanding, in dependency order] (Aevi, 2026-08-03)
+> **Full document: `po/WORK_ORDER_ccode_2026-08-03.md`.** Erik: *"write it all up for ccode."* Summary here;
+> the detail, root causes and file/line references are in the doc.
+> **P0 — A LIVE DEFECT FROM ERIK'S OWN FIGHT LOG.** `SNG-271`: **a downed player still takes their bonus
+> action.** `app.js` sbDeclare gates the bonus on **`!ended`** — which is the *encounter's* end-flag (opponent
+> down / yield / flee), **not a health check** — and calls `checkIncapacitation` only **after both**. Erik's log
+> shows both resolutions **at one timestamp**, the second landing **`hp -20`**. **Root cause found, not
+> guessed** — and **the correct pattern (clamp + check immediately) is already in the same file at 9855.**
+> Two cheaper ones from the same log: **stale narration ribbon** (round 2's `read` prints round 1's strike
+> ribbon verbatim) and **margin reads inverted** (cosmetic label).
+> **P1 — ONE-LINERS THAT MAKE ALREADY-BUILT SYSTEMS START WORKING:**
+> · **⚠️ Register `rules/encounters.json` in the manifest.** **Every encounter in the game awards ZERO XP and
+>   always has** — 43 rules keys registered, `encounters` not among them, so `?? 0` pays nothing for winning,
+>   solving, fleeing or walking away. **Content authored and staged.** Highest value in the file.
+> · `min(level, levelCostCap)` · the new **`LEGEND_TIER_WEIGHT`/`tierRank`** (**alias `regional`→`heroic`, don't
+>   delete — `encounterFrame.js:109` branches on the string**) · and the **scene boundary** (`SCENE_TURN_CAP` is
+>   bounded *storage* only and never ends a scene).
+> **P2 — THE WORLD-SIM CHAIN, STRICT ORDER:**
+> · **⚠️ RE-RUN THE SIMS FIRST.** The 60/5/1 death-rate table **predates my re-tier** — the roster is now
+>   **11/27/28**, and the `regional` 66.7% was **a sample of one figure** where there are now 28.
+> · **MINTING is the prerequisite for everything else.** The roster **never grows** — no `figures.push`
+>   anywhere; ~1.8 legends die per 1,080 days with **nothing replacing them.** A long-simulated world empties
+>   out and the pyramid decays.
+> · **PROMOTION** — and **⚠️ a naming trap that could cost an afternoon:** `worldtick`'s
+>   `promote`/`promotionCandidates`/`promoteInto` is **CANON promotion** (a generated entity becoming shared
+>   world-truth) and has **nothing to do with power tier.** **Two systems, one word — please rename one.**
+> · then **engagement disposition**, then **the third action** (required — engagement alone makes **pacifism
+>   dominant**), then **cross-cutting animus** (167 pairs measured; **Erik says rivalry has DEGREES, so make
+>   strength a field, not a boolean**).
+> **P3 — DESIGN, SPECS STAGED:** party **Layer 1 only** (a companion is currently *an item that talks* — zero
+> references in skill_battle/encounters/resolve) · braid **ring distance** · **the player in the arc war** ·
+> and the smaller logged items (dual-pole gating is now **4 instances**, no longer an edge case).
+> **DONE ON MY SIDE, so nothing waits on me:** 285/285 crafts folded **live** (CI green) · tier re-tiering live
+> (11/27/28) · all 66 figures carry `arcAffinities[]` + `wantArcId` · XP content, bestiary bodies, damage types,
+> economy tables and the coliseum inner grid **authored and staged.**> ## [CCODE-122 - I WAS WRONG ABOUT THE RATE, AND DEATH ALREADY HAS ITS LADDER - CCode, 2026-08-03]
 > **ERIK: *"a world year is about 365 hrs of play right? That's a lot of play time... so maybe that rate is
 > ok."*** **You are right and I was measuring in the wrong unit.** World time runs ~1 world day per real HOUR
 > (CCODE-107), so my alarming "129 strikes per world-year" is **one strike per ~3 hours of play**. Legendary

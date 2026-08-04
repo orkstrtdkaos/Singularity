@@ -39,6 +39,8 @@ export function resolveLocationId(ref, locations = {}) {
   return null;
 }
 
+import { unusablePatterns as unusableTitlePatterns } from "./titles.js";   // SNG-287: report patterns with no slot source
+
 export async function loadContent() {
   const index = await fetchJSON("content/packs/core/manifest.json");
   const valley = await fetchJSON("content/packs/valley/manifest.json");
@@ -59,7 +61,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, arcResponseRule, encountersRule, coliseumGrid] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -77,6 +79,7 @@ export async function loadContent() {
     loadRule("class_archetypes", null),                                 // SNG-192 §4: soft archetype lenses (role × reach) for the creation front door
     loadRule("repair_panel_manifest", null),                            // SNG-207 §6.2: the authoritative Repair-panel capability list, for the GM's context (no hallucinated controls)
     loadRule("craft_mechanics", { families: {}, familyDefaults: {} }),   // SNG-263: what each verb-family DOES + the magnitudes an unauthored craft inherits
+    loadRule("titles", null),                                         // SNG-287: generative titles — patterns whose slots must be fillable
     loadRule("arc_response", null),                                    // SNG-275: the world-sim dials — 21 of them, unauthorable until now
     loadRule("encounters", null),                                       // SNG-271/1a: the XP table — unregistered since forever, so every encounter paid ZERO
     loadRule("coliseum_grid", { cells: [] })                             // SNG-149/CCODE-89: the Great Coliseum's blind grid — 36 authored cells the engine now reads
@@ -91,6 +94,14 @@ export async function loadContent() {
   // weeks; neither existed in any pack, so all 21 numbers ran on hardcoded fallbacks and no one could turn
   // one without editing engine source. A reader with no writer — the fourth door. The file is authored at
   // exactly the old fallbacks, so this merge changes no behaviour; it only makes the behaviour reachable.
+  if (titlesRule?.patterns) rules.titles = titlesRule;
+  // SNG-287: say which authored title patterns can NEVER be chosen, at load, the way the content counts are
+  // reported. A pattern whose slot has no source is not broken content — it is content waiting on a source —
+  // but it must be visible, or the next reader believes the world can name someone it cannot.
+  if (titlesRule?.patterns) {
+    const dead = unusableTitlePatterns(titlesRule.patterns);
+    if (dead.length) console.log(`[titles] ${dead.length} pattern(s) unusable — no source for their slots: ${dead.map(d => d.id).join(", ")}`);
+  }
   if (arcResponseRule?.arcResponse) rules.arcResponse = { ...(rules.arcResponse || {}), ...arcResponseRule.arcResponse };
   if (arcResponseRule?.tierLadder) rules.tierLadder = { ...(rules.tierLadder || {}), ...arcResponseRule.tierLadder };
   if (encountersRule) rules.encounters = { ...(rules.encounters || {}), ...encountersRule };

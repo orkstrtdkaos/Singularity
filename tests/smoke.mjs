@@ -9973,6 +9973,50 @@ await (async () => {
     /path: viaPath\?\.id \|\| null/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8")));
 }
 
+// --- SNG-287: generative titles ----------------------------------------------------------------------
+{
+  const T = await import("../engine/titles.js");
+  const doc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/titles.json"), "utf8"));
+  const P = doc.patterns;
+  const opts = (ws) => ({ ws, patterns: P, arcNames: { a1: "the Bleed" }, traditionNames: { ashwarden: "the Ashwardens" } });
+  const wsWith = (log) => ({ figureTenure: { f: { deedLog: log } }, figureCareer: { f: { retrieved: 0 } } });
+
+  check("272/287: a title is built from the RECORD — an arc actually turned becomes a name", (() => {
+    const b = { id: "f", tradition: "ashwarden", deeds: [{ communityId: "valley.thornwake", weight: 3 }, { communityId: "valley.thornwake", weight: 2 }] };
+    return T.titleFor(b, opts(wsWith([{ by: "stageMoved", arcId: "a1" }])))?.title === "Who Turned the Bleed";
+  })());
+
+  // ⚠️ THE RULE THAT KEEPS THEM HONEST. No record, no name — a title that reaches for a slot with no
+  // source is not flattering, it is false.
+  check("272/287: nothing recorded means NO title (a world where everyone has an epithet has none)",
+    T.titleFor({ id: "z", deeds: [] }, opts({})) === null);
+  check("272/287: no arc moved means no {ARC} title — the pattern is skipped, not guessed at", (() => {
+    const b = { id: "f", tradition: "ashwarden", deeds: [{ communityId: "valley.thornwake", weight: 3 }, { communityId: "valley.thornwake", weight: 2 }] };
+    const t = T.titleFor(b, opts(wsWith([])));
+    return t !== null && !/Turned/.test(t.title);
+  })());
+
+  // ⛔ DIRECTIVE SNG-280: which noun lands is read off the SIGN of the record, never approval.
+  check("272/287: the same pattern names a hard record and a soft one, and the Maw gets a name too", (() => {
+    const hard = { id: "f", deeds: [{ communityId: "v.thornwake", weight: -3 }, { communityId: "v.thornwake", weight: -3 }] };
+    const soft = { id: "f", deeds: [{ communityId: "v.thornwake", weight: 3 }, { communityId: "v.thornwake", weight: 3 }] };
+    const h = T.titleFor(hard, opts(wsWith([])))?.title, s = T.titleFor(soft, opts(wsWith([])))?.title;
+    return /Knife/.test(h || "") && /Mercy/.test(s || "");
+  })());
+  check("272/287: a MIXED record resolves to neither noun (not known for one thing → not told you are)", (() => {
+    const mixed = { id: "f", deeds: [{ communityId: "v.thornwake", weight: 3 }, { communityId: "v.thornwake", weight: -3 }] };
+    const t = T.titleFor(mixed, opts(wsWith([])));
+    return !/Knife|Mercy/.test(t?.title || "");
+  })());
+
+  // ⚠️ Slots the spec asks for that nothing can fill are NAMED, not silently absent.
+  check("272/287: patterns whose slots have no source are declared unusable, not left looking live",
+    T.unusablePatterns(P).length === 3 && Object.keys(T.UNFILLABLE_SLOTS).length === 3);
+
+  check("272/287: a title is spoken when the world finds one, and remembered",
+    /r\.title = named\.title/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8")));
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

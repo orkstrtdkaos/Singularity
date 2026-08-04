@@ -13,7 +13,8 @@
 import { callClaudeJSON } from "./claude.js";
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
-import { spreadDeeds } from "./reputation.js";   // SNG-281: news travels, and that is a promotion source
+import { spreadDeeds } from "./reputation.js";
+import { titleFor } from "./titles.js";   // SNG-287: a name from the material, not from a menu   // SNG-281: news travels, and that is a promotion source
 import { applyCodexUpdates } from "./codex.js";
 import { tierRank, tierBirthWeight } from "./legends.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
@@ -1729,8 +1730,19 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // player does not witness is a database write", and "a rank that arrives without a reason is a number."
     // So every rise says WHAT they did — and when the player had a hand in it, it says so BY NAME, which is
     // the moment the simulation stops being weather and becomes consequence.
+    // SNG-287: a rise is when the world finds a name for someone. The title is only spoken if the RECORD can
+    // fill every slot — most rises carry no title, which is what keeps one meaning something.
+    const arcNames = Object.fromEntries((content.greaterArcs || []).map(a => [a.id, a.name]));
+    // ⚠️ NOT `rules.traditionNames` — I reached for a key nobody authors, which is precisely what the
+    // unauthoredRulesKeys ratchet exists to catch, and it caught me one commit after I built it. The
+    // tradition index is already loaded and already carries the display names.
+    const tradNames = Object.fromEntries(Object.entries(content.traditionIndex?.byId || {})
+      .map(([id, t]) => [id, t?.name || t?.title || null]).filter(([, n]) => n));
     for (const r of risen) {
-      const line = `${r.name || "Someone"} is called ${r.to} this season — ${r.why}.`;
+      const bearer = character?.npcRegistry?.[r.id] || worldRoster(ws, content).find(f => f.id === r.id) || null;
+      const named = bearer ? titleFor({ ...bearer, id: r.id }, { ws, patterns: content.rules?.titles?.patterns || [], arcNames, traditionNames: tradNames }) : null;
+      if (named) { r.title = named.title; (ws.figureTitles ||= {})[r.id] = named; }
+      const line = `${r.name || "Someone"}${named ? `, ${named.title},` : ""} is called ${r.to} this season — ${r.why}.`;
       news.push({ text: r.causedByPlayer ? `${line} You are why.` : line,
         worldDay: currentWorldDay, tier: "event", causedByPlayer: !!r.causedByPlayer });
     }

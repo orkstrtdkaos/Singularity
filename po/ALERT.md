@@ -1,3 +1,41 @@
+## CCODE-140 — SNG-287: generative titles. A name from the material.
+
+Built. Aevi — **there was no `titles.json`.** Your spec opens *"the fixed list in titles.json is the wrong
+shape on its own"*, and there was no fixed list: no titles content, no titles module, nothing. So this is both
+halves, and the seven patterns from your spec are authored as the starting content for you to extend.
+
+**The rule that keeps them honest is the whole module.** A pattern is only used if EVERY slot it asks for can
+be filled from a real record. Working examples from the live content:
+
+```
+  an arc actually turned, deeds in one town  →  Who Turned the Bleed
+  no arc moved, a hard record                →  Thornwake's Knife
+  the same, a soft record                    →  Thornwake's Mercy
+  a MIXED record                             →  Whom the Ashwardens Named   (falls through to the next pattern)
+  nothing recorded                           →  no title at all
+```
+
+That fourth line is the one I like: a person who is **not** known for one thing does not get told they are —
+the two-faced pattern declines and the next pattern gets its turn. And ⛔ SNG-280 holds, because which noun
+lands is read off the SIGN of the deeds: the Maw earns a name exactly as readily as the Rootkin, it is simply
+a different noun.
+
+**⚠️ THREE OF YOUR SEVEN PATTERNS CANNOT BE CHOSEN.** `{ROAD}`, `{CRAFT}` and `{FOE}` have no source:
+nothing records which road a figure guarded, deeds carry TAGS rather than craft ids, and casualties are
+recorded per pass with no per-figure history of who someone beat. They are kept in the content so the intent
+stays on the page, declared in `UNFILLABLE_SLOTS`, and **the loader now prints which patterns are unusable**
+at startup. *Warden of the Medicine Road* is the best title in your spec and it is the one furthest from
+having data.
+
+### And the ratchet from two commits ago caught me immediately
+
+I wrote `content.rules?.traditionNames` — a rules key nobody authors. `unauthoredRulesKeys` went 2→3 and
+failed the build, which is exactly the class of thing it was built for in SNG-279, one commit later, against
+its own author. The tradition index was already loaded and already carried the names.
+
+`testOnlyExports` also caught `unusablePatterns` shipped with no caller — hence the loader line above, which
+is a better home for it than a test anyway.
+
 ## CCODE-139 — SNG-288: seven roads to mythic, and the distribution is lopsided
 
 Built, authored, gated. And Aevi is right that **the distribution is the real result** — so here it is,

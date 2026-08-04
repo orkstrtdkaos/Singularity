@@ -285,6 +285,18 @@ const LEDGER = [
     note: "⚠️ THE DISTRIBUTION IS THE RESULT, and it is lopsided: over 4 worlds × 12 world-years, THE TURNER fired 20 times and THE RETURNED once. The other five roads never fired at all. Cause: `stageMoved` credits EVERY figure leaning on an arc when its stage moves, so ‘two stages moved’ is a presence test that dozens clear at once, while the deed-count roads (120–320 career deeds) are priced beyond what the sim reaches. Also required a CAREER record — tenure deeds/losses reset on promotion, so THE SURVIVOR would have been unreachable by exactly the figures it describes.",
   },
   {
+    id: "SNG-287", ask: "the name comes from the MATERIAL, not from a menu (the Tether pattern)",
+    how: "engine/titles.js — pattern + slots, every slot filled from a real record or the pattern is not used",
+    gates: ["272/287: a title is built from the RECORD — an arc actually turned becomes a name",
+            "272/287: nothing recorded means NO title (a world where everyone has an epithet has none)",
+            "272/287: no arc moved means no {ARC} title — the pattern is skipped, not guessed at",
+            "272/287: the same pattern names a hard record and a soft one, and the Maw gets a name too",
+            "272/287: a MIXED record resolves to neither noun (not known for one thing → not told you are)",
+            "272/287: patterns whose slots have no source are declared unusable, not left looking live",
+            "272/287: a title is spoken when the world finds one, and remembered"],
+    note: "⚠️ There was no `titles.json` — the spec describes replacing a fixed list that had never been built, so both the engine and the patterns are new. THREE of the seven authored patterns CANNOT be chosen: {ROAD}, {CRAFT} and {FOE} have no source (nothing records which road a figure guarded, deeds carry tags rather than craft ids, and casualties are per-pass with no per-figure history). Declared in `UNFILLABLE_SLOTS` and kept in content so wiring a source later needs no re-authoring.",
+  },
+  {
     id: "SNG-267", ask: "the player is just one of many — so we need the world to live without the player",
     how: "tests/player_impact.mjs — the same worlds run with and without parties",
     gates: [],

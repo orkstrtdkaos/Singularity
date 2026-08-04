@@ -6,13 +6,26 @@
       "id": "resonant_sight",
       "tier": "combo",
       "name": "Resonant Sight",
-      "components": ["prism_sight", "sonic_resonance"],
-      "requires": {"prism_sight": 1, "sonic_resonance": 1},
+      "components": [
+        "prism_sight",
+        "sonic_resonance"
+      ],
+      "requires": {
+        "prism_sight": 1,
+        "sonic_resonance": 1
+      },
       "ripenAt": 6,
       "energyCost": 9,
       "attribute": "mental",
-      "axes": {"concrete_abstract": 0.2, "instinct_analysis": 0.3},
-      "effectTags": ["perceive", "reveal", "structural"],
+      "axes": {
+        "concrete_abstract": 0.2,
+        "instinct_analysis": 0.3
+      },
+      "effectTags": [
+        "perceive",
+        "reveal",
+        "structural"
+      ],
       "description": "Light and vibration read together: see a thing by how it rings and refracts at once. Hidden seams, hollow places, and stress-signatures show themselves — what a surface conceals is betrayed by how it answers the braided field.",
       "notFor": "Reading intent or thought (only structure and material); working through the gray water, which returns silence to both senses; seeing what has no resonance and casts no light.",
       "narrationHints": "The two techniques stop being two — light held to a note until the object confesses its inside. Warm where it's whole, wrong where it's been touched.",
@@ -22,13 +35,26 @@
       "id": "wardens_chord",
       "tier": "combo",
       "name": "Warden's Chord",
-      "components": ["sonic_resonance", "resonant_anchor"],
-      "requires": {"sonic_resonance": 2, "resonant_anchor": 1},
+      "components": [
+        "sonic_resonance",
+        "resonant_anchor"
+      ],
+      "requires": {
+        "sonic_resonance": 2,
+        "resonant_anchor": 1
+      },
       "ripenAt": 7,
       "energyCost": 10,
       "attribute": "practical",
-      "axes": {"mechanical_spiritual": -0.2, "individual_collective": 0.3},
-      "effectTags": ["defend", "structural", "hold"],
+      "axes": {
+        "mechanical_spiritual": -0.2,
+        "individual_collective": 0.3
+      },
+      "effectTags": [
+        "defend",
+        "structural",
+        "hold"
+      ],
       "description": "Brace and vibration sung as one held chord: stabilize a failing structure — a bridge, a shaft, a wall mid-collapse — long enough for people to cross or clear. Buys minutes, not permanence.",
       "notFor": "Repairing (only holding); holding against a force that grows; anything you can't touch or stand within reach of.",
       "narrationHints": "A note you hold in your teeth and your knees both. The stone agrees to wait.",
@@ -38,17 +64,513 @@
       "id": "true_ward",
       "tier": "combo",
       "name": "True Ward",
-      "components": ["prism_sight", "prism_ward"],
-      "requires": {"prism_sight": 2, "prism_ward": 1},
+      "components": [
+        "prism_sight",
+        "prism_ward"
+      ],
+      "requires": {
+        "prism_sight": 2,
+        "prism_ward": 1
+      },
       "ripenAt": 6,
       "energyCost": 9,
       "attribute": "mental",
-      "axes": {"concrete_abstract": 0.3, "tradition_innovation": 0.1},
-      "effectTags": ["ward", "reveal", "detect"],
+      "axes": {
+        "concrete_abstract": 0.3,
+        "tradition_innovation": 0.1
+      },
+      "effectTags": [
+        "ward",
+        "reveal",
+        "detect"
+      ],
       "description": "A ward that doesn't just bar but reports: anything crossing it is seen truly as it passes — form, intent-shape, whether it's what it claims. A tripwire that also names the thing that trips it.",
       "notFor": "Stopping what it reveals (it sees, it doesn't hold); reading through deliberate Precursor masking; covering more than a threshold-sized span.",
       "narrationHints": "The ward hums and the hum has eyes. Nothing passes unread.",
       "discoveredBlurb": "Sight and ward have fused — the boundary now perceives what meets it."
+    },
+    {
+      "id": "the_kept_hand",
+      "tier": "combo",
+      "name": "The Kept Hand",
+      "components": [
+        "ask_the_dead",
+        "the_grey_hand"
+      ],
+      "requires": {
+        "ask_the_dead": 1,
+        "the_grey_hand": 1
+      },
+      "ripenAt": 6,
+      "energyCost": 11,
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.5
+      },
+      "effectTags": [
+        "summon",
+        "bind"
+      ],
+      "description": "You ask, and something answers with its hands. A body that has already ended is asked one more question — not to live, but to HOLD. It stands where you set it and does the one thing it agreed to, for as long as the asking lasts. It is not obedient; it is ANSWERING.",
+      "notFor": "Compelling anything unwilling — the asking can be refused, and often is. Anything not recently dead. Restoring the person: what stands is not who was there.",
+      "narrationHints": "It does not lurch upright. It simply is standing, the way a thing that has been asked politely does. The eyes do not track — they ATTEND.",
+      "discoveredBlurb": "Ask the Dead and the Grey Hand have braided enough times to fuse: what you were questioning is now what you are holding."
+    },
+    {
+      "id": "the_unfinished",
+      "tier": "combo",
+      "name": "The Unfinished",
+      "components": [
+        "palework",
+        "the_kept_breath"
+      ],
+      "requires": {
+        "palework": 1,
+        "the_kept_breath": 1
+      },
+      "ripenAt": 7,
+      "energyCost": 13,
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.3
+      },
+      "effectTags": [
+        "sustain",
+        "bind"
+      ],
+      "description": "NOT A RAISING — A PREVENTION. Palework knows the shape of an ending; the Kept Breath holds a threshold. Together they hold a body at the instant BEFORE it finishes, indefinitely. Not alive. Not dead. NOT DONE — and it can be spoken to.",
+      "notFor": "Reversing anything — the ending is still coming and arrives the moment you let go. Comfort: the unfinished know exactly what they are. Anything already complete.",
+      "narrationHints": "The stillness of a held note, not of a corpse. They answer slowly, and are never confused about their condition.",
+      "discoveredBlurb": "Palework and the Kept Breath have braided into one act: you have stopped saying goodbye mid-sentence."
+    },
+    {
+      "id": "the_drawn_answer",
+      "tier": "combo",
+      "name": "The Drawn Answer",
+      "components": [
+        "ask_the_dead",
+        "draw_down"
+      ],
+      "requires": {
+        "ask_the_dead": 1,
+        "draw_down": 1
+      },
+      "ripenAt": 7,
+      "energyCost": 14,
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.6
+      },
+      "effectTags": [
+        "summon",
+        "reveal"
+      ],
+      "description": "What you drew down is not gone; it is FINISHED — and a finished thing can still be asked. It answers with everything it was, once, completely, and then there is nothing left to ask again.",
+      "notFor": "A second asking — there is only ever one. Anything you did not draw down yourself. Kindness: this is the least kind thing in the tradition and the Ashwardens teach it last.",
+      "narrationHints": "The answer comes all at once, in the voice of the thing at its fullest, and the silence after is total.",
+      "discoveredBlurb": "Ask the Dead and Draw Down have braided: what you ended still had one thing to say."
+    },
+    {
+      "id": "the_quick_green",
+      "tier": "combo",
+      "name": "The Quick Green",
+      "components": [
+        "quickening",
+        "the_green_claim"
+      ],
+      "requires": {
+        "quickening": 1,
+        "the_green_claim": 1
+      },
+      "ripenAt": 6,
+      "energyCost": 11,
+      "attribute": "physical",
+      "axes": {
+        "death_life": 0.6
+      },
+      "effectTags": [
+        "make",
+        "strike"
+      ],
+      "description": "Growth called with intent behind it. What quickens does not merely bloom — it reaches, holds, and takes the ground you named.",
+      "notFor": "Precision — the growth is approximate and always has been. Anything on dead or made ground.",
+      "narrationHints": "Not fast the way a strike is fast. Fast the way a season is, compressed until it is frightening.",
+      "discoveredBlurb": "Quickening and the Green Claim have braided: the growing and the claiming are one motion now."
+    },
+    {
+      "id": "the_tended_wound",
+      "tier": "combo",
+      "name": "The Tended Wound",
+      "components": [
+        "staunch",
+        "quickening"
+      ],
+      "requires": {
+        "staunch": 1,
+        "quickening": 1
+      },
+      "ripenAt": 6,
+      "energyCost": 9,
+      "attribute": "mental",
+      "axes": {
+        "death_life": 0.5
+      },
+      "effectTags": [
+        "heal",
+        "sustain"
+      ],
+      "description": "Hold the wound closed AND grow it shut in the same attention. What staunch buys, quickening spends — and nothing is wasted between them.",
+      "notFor": "The already-dead. Wounds beyond the body's own capacity to close: this accelerates healing, it does not replace it.",
+      "narrationHints": "The bleeding stops and the closing starts in the same breath, so there is never a moment of merely-not-worse.",
+      "discoveredBlurb": "Staunch and Quickening have braided: buying time and using it stopped being two things."
+    },
+    {
+      "id": "the_burning_verdict",
+      "tier": "combo",
+      "name": "The Burning Verdict",
+      "components": [
+        "radiance",
+        "unshadow"
+      ],
+      "requires": {
+        "radiance": 1,
+        "unshadow": 1
+      },
+      "ripenAt": 7,
+      "energyCost": 13,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": 0.7,
+        "falsehood_truth": 0.5
+      },
+      "effectTags": [
+        "reveal",
+        "strike"
+      ],
+      "description": "Light that reveals and light that refuses falsehood, held together: what is exposed is also unable to re-form its lie.",
+      "notFor": "The Cathedral's true-pieces lie, which survives both halves separately AND braided. Anything that was never hiding.",
+      "narrationHints": "The concealment does not merely fail — it cannot be re-attempted while the light holds.",
+      "discoveredBlurb": "Radiance and Unshadow have braided: seeing through and holding open became one thing."
+    },
+    {
+      "id": "the_kept_absence",
+      "tier": "combo",
+      "name": "The Kept Absence",
+      "components": [
+        "shroud",
+        "the_harbor"
+      ],
+      "requires": {
+        "shroud": 1,
+        "the_harbor": 1
+      },
+      "ripenAt": 6,
+      "energyCost": 11,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": -0.6
+      },
+      "effectTags": [
+        "conceal",
+        "ward"
+      ],
+      "description": "A shroud that holds a harbor: what you hide is not merely unseen but SHELTERED — a hidden place that keeps what is in it, and keeps keeping it after you have gone.",
+      "notFor": "Defending what is inside — concealment hides, it does not defend, and braiding does not change that. Anything a Verity-reader is actively hunting.",
+      "narrationHints": "The absence has an inside. That is the whole of it.",
+      "discoveredBlurb": "Shroud and the Harbor have braided: hiding a thing and holding it became the same act."
+    },
+    {
+      "id": "the_taken_field",
+      "tier": "combo",
+      "name": "The Taken Field",
+      "components": [
+        "the_advance",
+        "the_stand"
+      ],
+      "requires": {
+        "the_advance": 1,
+        "the_stand": 1
+      },
+      "ripenAt": 6,
+      "energyCost": 12,
+      "attribute": "physical",
+      "axes": {
+        "peace_violence": 0.5
+      },
+      "effectTags": [
+        "move",
+        "shield"
+      ],
+      "description": "Advance and hold as one motion: the ground you take is ground you are already holding by the time they answer.",
+      "notFor": "Ground you have not reached. Holding two positions at once — this is one line, moved.",
+      "narrationHints": "There is no moment between the step and the set. That is what makes it hard to answer.",
+      "discoveredBlurb": "The Advance and the Stand have braided: taking and keeping stopped being sequential."
+    },
+    {
+      "id": "the_clean_end",
+      "tier": "combo",
+      "name": "The Clean End",
+      "components": [
+        "disarm",
+        "soldiers_hand"
+      ],
+      "requires": {
+        "disarm": 1,
+        "soldiers_hand": 1
+      },
+      "ripenAt": 6,
+      "energyCost": 9,
+      "attribute": "physical",
+      "axes": {
+        "peace_violence": -0.2
+      },
+      "effectTags": [
+        "hinder",
+        "heal"
+      ],
+      "description": "Take the weapon and bind the wound in the same motion. The fight ends and the person does not.",
+      "notFor": "An opponent who will not stop. The wound is still bound WRONG — it holds, and it costs them later.",
+      "narrationHints": "The disarming and the tending are one movement, and it reads as mercy because it is.",
+      "discoveredBlurb": "Disarm and the Soldier's Hand have braided: ending it and mending it became one motion."
+    },
+    {
+      "id": "the_held_pattern",
+      "tier": "combo",
+      "name": "The Held Pattern",
+      "components": [
+        "latticework",
+        "the_fixed_point"
+      ],
+      "requires": {
+        "latticework": 1,
+        "the_fixed_point": 1
+      },
+      "ripenAt": 7,
+      "energyCost": 12,
+      "attribute": "mental",
+      "axes": {
+        "chaos_order": 0.6
+      },
+      "effectTags": [
+        "bind",
+        "resist"
+      ],
+      "description": "A plan anchored to a person who will not move. What you bind holds because YOU hold, and the structure inherits your refusal.",
+      "notFor": "Adapting — an over-bound structure cannot, and this makes it worse. Anything requiring you to move.",
+      "narrationHints": "The plan does not merely hold. It holds THE WAY YOU DO, which is the tell.",
+      "discoveredBlurb": "Latticework and the Fixed Point have braided: the structure and the one standing in it are the same thing now."
+    },
+    {
+      "id": "the_lucky_break",
+      "tier": "combo",
+      "name": "The Lucky Break",
+      "components": [
+        "wildcraft",
+        "probability_tilt"
+      ],
+      "requires": {
+        "wildcraft": 1,
+        "probability_tilt": 1
+      },
+      "ripenAt": 6,
+      "energyCost": 11,
+      "attribute": "practical",
+      "axes": {
+        "chaos_order": -0.6
+      },
+      "effectTags": [
+        "break",
+        "empower"
+      ],
+      "description": "Improvisation with the odds leaned on. What comes apart comes apart USEFULLY — not because you aimed it, but because the world was tilted when it broke.",
+      "notFor": "Choosing the outcome — you still do not get to. The world balances its books, and a braided tilt collects harder.",
+      "narrationHints": "It looks like luck. It is luck, applied on purpose, which is the churnfolk's whole argument.",
+      "discoveredBlurb": "Wildcraft and Probability Tilt have braided: the breaking and the leaning became one motion."
+    },
+    {
+      "id": "the_proven_ground",
+      "tier": "combo",
+      "name": "The Proven Ground",
+      "components": [
+        "verity",
+        "the_true_ground"
+      ],
+      "requires": {
+        "verity": 1,
+        "the_true_ground": 1
+      },
+      "ripenAt": 6,
+      "energyCost": 10,
+      "attribute": "mental",
+      "axes": {
+        "falsehood_truth": 0.7
+      },
+      "effectTags": [
+        "reveal",
+        "resist"
+      ],
+      "description": "Read the lie and stand where it cannot reach, at once. You are proof against deception OUT LOUD, and others can stand behind you.",
+      "notFor": "Telling whether an unmasking SHOULD happen — Verity still cannot, and braiding does not grant judgement. A blade.",
+      "narrationHints": "The lie fails and the room notices why in the same beat.",
+      "discoveredBlurb": "Verity and the True Ground have braided: seeing the lie and being unreachable by it are one stance."
+    },
+    {
+      "id": "the_perfect_stranger",
+      "tier": "combo",
+      "name": "The Perfect Stranger",
+      "components": [
+        "blend_in",
+        "the_maintained_veil"
+      ],
+      "requires": {
+        "blend_in": 1,
+        "the_maintained_veil": 1
+      },
+      "ripenAt": 7,
+      "energyCost": 12,
+      "attribute": "social",
+      "axes": {
+        "falsehood_truth": -0.6
+      },
+      "effectTags": [
+        "conceal",
+        "deceive"
+      ],
+      "description": "Unremarkable AND accounted for — a person whose presence has an explanation already standing, held without attention.",
+      "notFor": "A searcher who knows your face and is looking. The veil SUSTAINS the working, it does not strengthen it: a thin story held forever is still thin.",
+      "narrationHints": "Nobody wonders about you, because there is already an answer to the wondering.",
+      "discoveredBlurb": "Blend In and the Maintained Veil have braided: being forgettable and being explained became one thing."
+    },
+    {
+      "id": "the_read_strike",
+      "tier": "combo",
+      "name": "The Read Strike",
+      "components": [
+        "body_read",
+        "perfect_motion"
+      ],
+      "requires": {
+        "body_read": 1,
+        "perfect_motion": 1
+      },
+      "ripenAt": 6,
+      "energyCost": 11,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": 0.4
+      },
+      "effectTags": [
+        "reveal",
+        "move"
+      ],
+      "description": "You saw the decision a half-second before it was acted on, and the motion was already correct. You are where they were going, before they go.",
+      "notFor": "An opponent whose body reports nothing (the trained, the non-human). Power — this is still efficiency, and a perfect motion loses to a strong enough one.",
+      "narrationHints": "It does not look fast. It looks INEVITABLE, which is worse to be on the end of.",
+      "discoveredBlurb": "Body Read and Perfect Motion have braided: seeing it and answering it stopped being two beats."
+    },
+    {
+      "id": "the_answered_judgment",
+      "tier": "combo",
+      "name": "The Answered Judgment",
+      "components": [
+        "ascent",
+        "the_shielding_word"
+      ],
+      "requires": {
+        "ascent": 1,
+        "the_shielding_word": 1
+      },
+      "ripenAt": 7,
+      "energyCost": 14,
+      "attribute": "mental",
+      "axes": {
+        "appetite_judgement": 0.6
+      },
+      "effectTags": [
+        "bind",
+        "ward"
+      ],
+      "description": "Weigh them, and stand between them and what follows. The judgment binds — and the one who spoke it is the one holding the door against its consequences.",
+      "notFor": "Being right. If you are wrong the judgment binds ANYWAY, and you are now warding a verdict you should not have given. A hollow word wards nothing.",
+      "narrationHints": "The pronouncement and the guard are the same instant. Everyone present understands what was just taken on.",
+      "discoveredBlurb": "Ascent and the Shielding Word have braided: judging and standing behind it became one act."
+    },
+    {
+      "id": "the_named_price",
+      "tier": "combo",
+      "name": "The Named Price",
+      "components": [
+        "descent",
+        "the_offered_price"
+      ],
+      "requires": {
+        "descent": 1,
+        "the_offered_price": 1
+      },
+      "ripenAt": 7,
+      "energyCost": 13,
+      "attribute": "social",
+      "axes": {
+        "appetite_judgement": -0.6
+      },
+      "effectTags": [
+        "reveal",
+        "bind"
+      ],
+      "description": "Name the want and name what it costs, together. The bargain is exactly fair and now exactly LEGIBLE — they cannot say afterward that they did not know.",
+      "notFor": "Making it kind. Compelling the unwilling — it still catches only what already wanted it. Collecting is still not optional, and now there are witnesses.",
+      "narrationHints": "No persuasion in it. An accounting, said aloud, and a silence afterward.",
+      "discoveredBlurb": "Descent and the Offered Price have braided: the naming and the pricing became one sentence."
+    },
+    {
+      "id": "the_long_camp",
+      "tier": "combo",
+      "name": "The Long Camp",
+      "components": [
+        "hearthbinding",
+        "greenlore"
+      ],
+      "requires": {
+        "hearthbinding": 1,
+        "greenlore": 1
+      },
+      "ripenAt": 5,
+      "energyCost": 7,
+      "attribute": "practical",
+      "axes": {},
+      "effectTags": [
+        "sustain",
+        "heal"
+      ],
+      "description": "A fire and a brewing kept together. The camp restores more than either alone, and what you brew there keeps better than it should.",
+      "notFor": "A hostile place — hearthbinding still needs somewhere it can hold. Serious wounds.",
+      "narrationHints": "It is not remarkable. Everyone is simply better in the morning than they had any right to be.",
+      "discoveredBlurb": "Hearthbinding and Greenlore have braided: the keeping and the brewing became one evening's work."
+    },
+    {
+      "id": "the_read_ground",
+      "tier": "combo",
+      "name": "The Read Ground",
+      "components": [
+        "wayfinding",
+        "stonewise"
+      ],
+      "requires": {
+        "wayfinding": 1,
+        "stonewise": 1
+      },
+      "ripenAt": 5,
+      "energyCost": 8,
+      "attribute": "practical",
+      "axes": {},
+      "effectTags": [
+        "reveal",
+        "foresee"
+      ],
+      "description": "Trail-sense and stone-sense together: you read what came through AND what the ground will do about it.",
+      "notFor": "True whiteout. Precursor material, which reads only partially to either half.",
+      "narrationHints": "You know where they went and where the ground is about to give, which is usually the same information.",
+      "discoveredBlurb": "Wayfinding and Stonewise have braided: reading the passage and reading the ground became one look."
     }
   ],
   "branchTemplates": [

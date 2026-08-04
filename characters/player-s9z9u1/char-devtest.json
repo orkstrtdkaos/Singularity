@@ -53,9 +53,9 @@
   },
   "attunement": 3,
   "maxHealth": 30,
-  "health": 24,
+  "health": 0,
   "maxEnergy": 100,
-  "energy": 32,
+  "energy": 11,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -163,83 +163,108 @@
         "player": null,
         "summary": "Loki reads the stranger mid-circle — he favors the press, and the opening is there.",
         "narration": "The stranger's weight settles back a half-beat — the club arm cocks just slightly, the shoulder rolling in the way a man does when he has decided to stop circling and start driving. You catch it: he favors the forward press, the short direct strike, weight behind it rather than reach. He is good at it. He does not know you just saw him decide."
+      },
+      {
+        "player": null,
+        "summary": "Loki lands a clean body blow and earns ground, then takes a hard hit to the ribs attempting to reset — both still standing at two paces.",
+        "narration": "You let the read finish its work. His shoulder is already driving forward before his feet commit — a presser's habit, weight first, technique second. You have seen enough.\n\nYour knife hand comes up to meet the inside of his club arm, not the club. You are not trying to stop the swing. You are steering it wide while your leading foot drives into the space he opened by stepping. Hunter's Strike does not look like much from outside — no flourish, no announcement. Your elbow finds his ribs on the way past, short and hard, and you feel the give of it land true. He grunts. He does not go down. But he gives a half-step, and you take it.\n\nHe recovers faster than a grunting man should. You can feel the ground is with you now — your weight where it belongs, the lane under your feet, the gate at your back and him no longer inside your reach. So you do something that costs you: you call the beat. Drumline Stride rises in you like a drum someone else is hitting, the rhythm pushing up through your legs before you consciously choose it. Your next step is faster than it has any right to be. You try to use that speed to open the gap, to reset, to breathe.\n\nHe expected you to run. Instead you planted the empowered step directly into his renewed press. He was already coming, harder this time, and the club catches you square in the ribs before your repositioning hand finds anything useful. The sound of it is flat and final. Your breath leaves your body in a rush that is not quite a word. You are still standing. He is still standing. Two paces now, lamplight and mud between you, and the stranger's eyes have gone a shade more interested than before."
       }
     ],
     "lastTurn": {
-      "narration": "The stranger's weight settles back a half-beat — the club arm cocks just slightly, the shoulder rolling in the way a man does when he has decided to stop circling and start driving. You catch it: he favors the forward press, the short direct strike, weight behind it rather than reach. He is good at it. He does not know you just saw him decide.",
-      "sceneSummary": "Loki reads the stranger mid-circle — he favors the press, and the opening is there.",
+      "narration": "You let the read finish its work. His shoulder is already driving forward before his feet commit — a presser's habit, weight first, technique second. You have seen enough.\n\nYour knife hand comes up to meet the inside of his club arm, not the club. You are not trying to stop the swing. You are steering it wide while your leading foot drives into the space he opened by stepping. Hunter's Strike does not look like much from outside — no flourish, no announcement. Your elbow finds his ribs on the way past, short and hard, and you feel the give of it land true. He grunts. He does not go down. But he gives a half-step, and you take it.\n\nHe recovers faster than a grunting man should. You can feel the ground is with you now — your weight where it belongs, the lane under your feet, the gate at your back and him no longer inside your reach. So you do something that costs you: you call the beat. Drumline Stride rises in you like a drum someone else is hitting, the rhythm pushing up through your legs before you consciously choose it. Your next step is faster than it has any right to be. You try to use that speed to open the gap, to reset, to breathe.\n\nHe expected you to run. Instead you planted the empowered step directly into his renewed press. He was already coming, harder this time, and the club catches you square in the ribs before your repositioning hand finds anything useful. The sound of it is flat and final. Your breath leaves your body in a rush that is not quite a word. You are still standing. He is still standing. Two paces now, lamplight and mud between you, and the stranger's eyes have gone a shade more interested than before.",
+      "sceneSummary": "Loki lands a clean body blow and earns ground, then takes a hard hit to the ribs attempting to reset — both still standing at two paces.",
       "choices": [
         {
-          "label": "Answer the press with Sonic Resonance — send a sharp pulse into his club arm the moment he commits to the strike, rattling the grip before it lands.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Press the advantage while the rhythm is still in your legs — close the gap and drive him back with Hunter's Strike before the Drumline debt comes due.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": 0.8
+          },
           "difficulty": 15,
           "intentTags": [
             "attack",
-            "defend"
+            "press"
           ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 8,
-          "trivial": false
+          "abilityId": "hunters_strike",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null
         },
         {
-          "label": "Answer the press with Hunter's Strike — step into his line as he commits, inside the swing, and hit first.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Push a sharp sonic pulse at his club arm — try to rattle the weapon loose while he is still reading what you'll do next.",
+          "attribute": "mental",
+          "subAttribute": "craft",
+          "axes": {
+            "violence_peace": 0.7
+          },
           "difficulty": 15,
           "intentTags": [
             "attack",
             "risky"
           ],
-          "abilityId": "hunters_strike",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": "sonic_resonance",
+          "energyCost": 8,
+          "trivial": false,
+          "encounterId": null
         },
         {
-          "label": "Yield the ground — step back out of the gate, hands open, and call the fight done before it goes further.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
+          "label": "Hold ground — keep the gate at your back, force him to come to you, and watch for the tell in his next press.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {
+            "violence_peace": 0.4
+          },
+          "difficulty": 15,
           "intentTags": [
             "defend",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null
         },
         {
-          "label": "Break away — use the bonus beat to disengage entirely, put the gate between you and him, and run.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Call out to Ossivyn and the keeper — loud, naming what is happening — and use the distraction to disengage.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "violence_peace": 0.2
+          },
           "difficulty": 15,
           "intentTags": [
-            "travel",
-            "risky"
+            "defend",
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null
         }
       ],
+      "characterDeltas": {
+        "health": -20,
+        "energy": -11
+      },
       "scene": {
-        "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. The stranger has stepped inside one pace, club arm cocked.",
+        "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. Two paces separate Loki and the stranger; the gate is at Loki's back.",
         "npcsPresent": [
           {
             "name": "The Stranger",
-            "state": "Weight settled back, club arm cocked — he has decided to press, not circle. One pace in, watching Loki."
+            "state": "Two paces out, eyes sharper than before, club arm back and ready — he has landed his blow and is reassessing."
           },
           {
             "name": "Ossivyn Tallow",
-            "state": "Pressed to the gate post, record book to his chest, very still."
+            "state": "Still pressed to the gate post, record book to his chest, not moving."
           },
           {
             "name": "Cy",
-            "state": "Motionless at Loki's left heel, lens locked on the stranger."
+            "state": "At Loki's left heel, motionless, lens tracking the stranger."
           },
           {
             "name": "The Keeper of the Toll",
-            "state": "One pace sideways, out of the line — watching, not intervening."
+            "state": "One pace sideways from the line, watching — not intervening."
           }
         ],
         "objects": [
@@ -250,38 +275,53 @@
           "Belt Knife at Loki's belt"
         ],
         "threads": [
-          "The stranger has committed to a press — his tell is read, and the bonus beat is Loki's to spend.",
+          "The stranger has landed a hard hit and is reassessing — his press is confirmed, his guard is up.",
           "Stillness Field is up — Loki reads as harder to track in the lamplight.",
           "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
           "Ossivyn's record book entry — unknown what was written.",
           "The keeper yielded but still has not explained who sent the stranger or why."
         ]
       },
-      "encounterOps": [
+      "npcUpdates": [
         {
-          "op": "tactic",
-          "tag": "press-in"
+          "op": "update",
+          "npcId": "the-stranger",
+          "name": "The Stranger",
+          "note": "Took a clean elbow to the ribs, gave a half-step, recovered fast and landed a hard counter-blow to Loki's ribs — he is now reassessing at two paces.",
+          "learned": [
+            "Loki is faster than expected and knows how to steer a swing — he is adjusting his read."
+          ],
+          "skillsObserved": [
+            "Fast recovery from a solid body blow",
+            "Counter-pressed through a Drumline Stride repositioning attempt"
+          ],
+          "status": "active",
+          "statusNote": "Two paces from Loki at the orchard gate, club up, reassessing — has taken a body blow but is not slowed."
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.1,
+        "why": "A short exchange of blows — moments only."
+      }
     },
     "sceneState": {
-      "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. The stranger has stepped inside one pace, club arm cocked.",
+      "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. Two paces separate Loki and the stranger; the gate is at Loki's back.",
       "npcsPresent": [
         {
           "name": "The Stranger",
-          "state": "Weight settled back, club arm cocked — he has decided to press, not circle. One pace in, watching Loki."
+          "state": "Two paces out, eyes sharper than before, club arm back and ready — he has landed his blow and is reassessing."
         },
         {
           "name": "Ossivyn Tallow",
-          "state": "Pressed to the gate post, record book to his chest, very still."
+          "state": "Still pressed to the gate post, record book to his chest, not moving."
         },
         {
           "name": "Cy",
-          "state": "Motionless at Loki's left heel, lens locked on the stranger."
+          "state": "At Loki's left heel, motionless, lens tracking the stranger."
         },
         {
           "name": "The Keeper of the Toll",
-          "state": "One pace sideways, out of the line — watching, not intervening."
+          "state": "One pace sideways from the line, watching — not intervening."
         }
       ],
       "objects": [
@@ -292,7 +332,7 @@
         "Belt Knife at Loki's belt"
       ],
       "threads": [
-        "The stranger has committed to a press — his tell is read, and the bonus beat is Loki's to spend.",
+        "The stranger has landed a hard hit and is reassessing — his press is confirmed, his guard is up.",
         "Stillness Field is up — Loki reads as harder to track in the lamplight.",
         "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
         "Ossivyn's record book entry — unknown what was written.",
@@ -321,22 +361,26 @@
       "relationship": -1,
       "history": [
         "[d1] Stepped from the lower lane as the keeper's challenge ended — demanded Loki step out from the gate. Has not struck yet.",
-        "[d1] Pushed through Loki's Stillness Field without hesitation and landed a clean body blow — he has experience with tricks and does not rattle."
+        "[d1] Pushed through Loki's Stillness Field without hesitation and landed a clean body blow — he has experience with tricks and does not rattle.",
+        "[d1] Took a clean elbow to the ribs, gave a half-step, recovered fast and landed a hard counter-blow to Loki's ribs — he is now reassessing at two paces."
       ],
       "knownFacts": [
         "Claims Loki planted in toll ground",
         "Arrived immediately after the keeper yielded — timing is not accidental",
-        "He does not need to read his target clearly to land a hit — he fights on instinct and press"
+        "He does not need to read his target clearly to land a hit — he fights on instinct and press",
+        "Loki is faster than expected and knows how to steer a swing — he is adjusting his read."
       ],
       "skillsObserved": [
         "Deliberate intimidation approach",
         "Pressed in under a concealment field",
-        "Maintained high guard while advancing"
+        "Maintained high guard while advancing",
+        "Fast recovery from a solid body blow",
+        "Counter-pressed through a Drumline Stride repositioning atte"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "One pace from Loki at the orchard gate, guard up, club ready — has drawn blood and not broken sweat.",
+      "statusNote": "Two paces from Loki at the orchard gate, club up, reassessing — has taken a body blow but is not slowed.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -431,7 +475,7 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 18,
+    "turnsSinceOffer": 19,
     "lastGenCount": 841,
     "lastSharedReadAt": "2026-08-04T01:59:02.401Z",
     "lastTickWorldDay": 35,
@@ -848,8 +892,8 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785809084787,
-  "rev": 115,
+  "updatedAt": 1785809183498,
+  "rev": 123,
   "activeEncounter": {
     "defId": "re-re_raider_duel",
     "state": {
@@ -857,13 +901,15 @@
       "encounterId": "re-re_raider_duel",
       "type": "duel",
       "status": "active",
-      "round": 2,
+      "round": 3,
       "log": [
         "r1: reveal vs strike → momentum 0",
         "r1: conceal vs shield → momentum -3",
-        "r2: shield vs strike → momentum -3"
+        "r2: shield vs strike → momentum -3",
+        "r2: strike vs shield → momentum 0",
+        "r2: empower vs strike → momentum -3"
       ],
-      "opponentHealth": 6,
+      "opponentHealth": 2,
       "tactic": "press-in",
       "mode": "skill_battle",
       "opponentSheet": {
@@ -906,13 +952,11 @@
         "synthesized": true
       },
       "momentum": -3.5,
-      "opponentEnergy": 81,
+      "opponentEnergy": 73,
       "turn": {
-        "phase": "action",
+        "phase": "sense",
         "sel": {
-          "sense": [
-            15
-          ],
+          "sense": [],
           "action": [],
           "bonus": []
         },
@@ -922,48 +966,25 @@
           "bonus": ""
         },
         "setupBonus": 0,
-        "bonusEarned": true,
-        "senseDone": true,
-        "senseLine": "You read with Raise a guard — success. Neither of you learns much. The opening is there — you have earned a BONUS action. You read the aggressor: they favour strike. Pick a craft that answers it.",
-        "readPayoff": "You read the aggressor: they favour strike. Pick a craft that answers it."
+        "bonusEarned": false,
+        "senseDone": false,
+        "senseLine": ""
       },
       "effects": [
         {
-          "kind": "unseen",
-          "label": "hard to find",
-          "value": 2,
-          "roundsLeft": 1,
-          "applies": "whenAttacked",
-          "side": "player",
-          "rank": 1,
-          "source": "Stillness Field",
-          "from": "player"
-        },
-        {
-          "kind": "guard",
-          "label": "guard up",
-          "value": 4,
-          "roundsLeft": 2,
-          "applies": "whenAttacked",
-          "side": "opponent",
-          "rank": 3,
-          "source": "a raised guard",
-          "from": "opponent"
-        },
-        {
-          "kind": "guard",
-          "label": "guard up",
+          "kind": "empowered",
+          "label": "empowered",
           "value": 4,
           "roundsLeft": 1,
-          "applies": "whenAttacked",
+          "applies": "whenAttacking",
           "side": "player",
           "rank": 1,
-          "source": "Raise a guard",
+          "source": "Drumline Stride",
           "from": "player"
         }
       ],
       "pressure": {
-        "player": 1,
+        "player": 2,
         "opponent": 0
       },
       "spent": {
@@ -972,9 +993,9 @@
       },
       "lastOppFn": "strike",
       "lastOppReceipt": {
-        "roll": 67,
-        "chance": 49,
-        "degree": "failure",
+        "roll": 1,
+        "chance": 55,
+        "degree": "success",
         "action": {
           "attribute": "practical",
           "abilityLevel": 3,
@@ -990,22 +1011,14 @@
             {
               "label": "ability rank 3",
               "value": 15
-            },
-            {
-              "label": "conserve",
-              "value": -8
-            },
-            {
-              "label": "momentum (you have the advantage)",
-              "value": 2
             }
           ],
-          "total": 49,
+          "total": 55,
           "clampedFrom": null,
           "base": "practical",
           "opposed": null
         },
-        "critRoll": 21,
+        "critRoll": 68,
         "crit": {
           "successChance": 14,
           "failChance": 1,
@@ -1032,18 +1045,18 @@
           "successClampedFrom": null,
           "failClampedFrom": -1
         },
-        "rawChance": 49,
-        "margin": -18,
+        "rawChance": 55,
+        "margin": 54,
         "matchup": 0,
-        "intensity": "conserve",
+        "intensity": "standard",
         "tier": 3,
         "function": "strike",
         "name": "a hard strike",
         "effectMods": [],
         "woven": null
       },
-      "lastReadWasSense": true,
-      "senseTierEarned": 0,
+      "lastReadWasSense": false,
+      "senseTierEarned": null,
       "senseResist": {
         "value": 12,
         "label": "their natural guardedness",
@@ -1175,7 +1188,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 18
+    "valley": 19
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1191,10 +1204,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-04T02:01:22.042Z",
-      "lastAt": "2026-08-04T02:04:44.787Z",
+      "lastAt": "2026-08-04T02:06:23.497Z",
       "startDay": 35,
       "endDay": 35,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [
@@ -1219,28 +1232,28 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 13,
-    "choices": 13,
-    "scene": 13,
+    "sceneSummary": 14,
+    "choices": 14,
+    "scene": 14,
     "stateOps": 1,
-    "characterDeltas": 6,
-    "timeOps": 5,
+    "characterDeltas": 7,
+    "timeOps": 6,
     "sceneEnded": 1,
     "encounterOps": 4,
-    "npcUpdates": 2,
+    "npcUpdates": 3,
     "generateRequest": 1
   },
-  "_opTurns": 13,
+  "_opTurns": 14,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "sonic_resonance": 5,
-      "hunters_strike": 3,
+      "hunters_strike": 4,
       "prism_sight": 3,
       "echo_sense": 3,
       "stillness_field": 4,
       "tremor_sense": 3,
-      "drumline_stride": 3
+      "drumline_stride": 4
     },
     "coActivations": {
       "prism_sight+sonic_resonance": 1
@@ -1248,8 +1261,9 @@
     "aspirations": [],
     "lastUsed": {
       "sonic_resonance": 32,
-      "hunters_strike": 32,
-      "stillness_field": 35
+      "hunters_strike": 35,
+      "stillness_field": 35,
+      "drumline_stride": 35
     }
   },
   "_pendingIntent": null,

@@ -1,3 +1,58 @@
+## CCODE-125 — P2a/2b: the sims against the live roster, and the world finally refills
+
+**2a — RE-RUN, and the answer is BOTH, depending on which question you asked.** The sim reported one
+aggregate death count, which hid the thing worth knowing. Now per-tier, 12 worlds × 720 days:
+
+```
+    tier        roster   dead/run   death rate
+    heroic          28        2.3        8.0%
+    epic            27        3.1       11.4%
+    legendary       11        1.8       16.7%
+```
+
+**By COUNT the design holds** — epic and heroic together lose 5.4 per world against legendary's 1.8, which
+is Erik's "more lower power ones die than legends." **By RATE it inverts**, and that is not a bug to tune
+out: a legend holds 2 fronts to a heroic's half, so she is in roughly four times the fights. Being in every
+fight is what being a legend COSTS. If you want the rate flattened the knob is `attentionByTier`, not
+lethality — they are different questions and conflating them tunes the wrong dial.
+
+**But one real defect surfaced under it.** `resolveEpicClash` decided WHO WINS from weight, then rolled
+severity FLAT — no reference to tier at all. A legend who lost to a heroic died at exactly the rate a
+heroic did. Erik's rule ("a legend might kill 3-4 heroes and 1-2 epics per battle") is a statement about
+the GAP, so the kill roll now scales with rank gap and collapses when a lesser figure prevails: they
+stopped her, they wounded her at worst. Killing far above your rung should take the story, not the dice.
+Also unified worldtick's private copy of the tier ladder onto the shared `tierRank` — that private copy is
+how it came to be missing `mythic` and `heroic` in the first place.
+
+**2b — MINTING. The world refills what it loses.** `worldRoster()` is now the ONE roster read (six places
+read `content.legends.roster` directly; a figure who exists to some readers and not others is the same
+half-wired failure as a field with no reader). `mintFigure()` enters at `riffraff`/`notable` — the rungs
+you left empty on purpose, because they are the inflow.
+
+⚠️ **Aevi, I read your second birth event wrong twice, and the sim caught both.**
+1. I first minted on `arcVacancies`. That counts ABANDONMENTS — "somebody who cares walked away this pass"
+   — which gets MORE common as the roster grows. Positive feedback loop: **140 minted against 6 deaths**,
+   the cap, every run.
+2. I then gated on a sustained vacancy. Better (48), still wrong, and it exposed a real bug: **minted
+   figures were never in `offscreenPopulation`**, so they were born into the roster and never acted — they
+   couldn't hold the arc that produced them, so the seat stayed empty and minted another.
+3. Your phrase was "a faction that just lost **its leader**" — a DEATH, not an unheld arc. Deaths now carry
+   the inflow, and the shape is self-balancing without a rate anyone has to defend: **5.8 minted vs 7.2
+   lost, net −1.3 per 720 days.** A world that declines slightly on its own, and players are the
+   asymmetry. If you want it net-positive, `mintRate` is the one dial.
+
+The engine mints the SLOT, not the person: id, rung, weight, an arc they care about, and the reason they
+exist. The NAME is an epithet ("the one who took X's place") flagged `provisional` — naming is authorship
+and it is yours. **That is the ask for you: name them.** They cannot be null, because a nameless figure is
+skipped by every `add()` and would never act.
+
+**And a trap worth knowing about: I appended eight tests to the end of `smoke.mjs` — below
+`process.exit()`. The suite went green and not one of them had run.** A test that cannot fail is worse
+than no test. There is now a guard that fails if any `check(` is stranded after the exit.
+
+Next: 2c, promotion — without it every minted figure is stuck at the bottom forever and "newly minted
+legends" cannot happen.
+
 ## CCODE-124 — P1b/c/d: the level curve, the tier spread, and the scene that never ended
 
 **1b — the level curve.** `levelCostCap: 40` authored and read. L1–40 unchanged; L41–100 cost a flat 4,000

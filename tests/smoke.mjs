@@ -9279,6 +9279,44 @@ await (async () => {
     ["deepest", "middle", "wildcard"].includes(readOfPick(B[0].family, B)?.kind));
 }
 
+// --- SNG-269/2b: MINTING — the world refills what it loses -------------------------------------------
+{
+  const { worldRoster, mintFigure } = await import("../engine/worldtick.js");
+  const srcOf = (f) => readFileSync(join(root, f), "utf8");
+  const wtSrc = srcOf("engine/worldtick.js");
+  const ws = {};
+  const content = { legends: { roster: [{ id: "a", name: "Authored" }] } };
+  check("2b: the roster reads authored AND minted figures through ONE helper",
+    worldRoster(ws, content).length === 1
+    && (mintFigure(ws, { tier: "notable", epithet: "the one who stepped in", worldDay: 5 }),
+        worldRoster(ws, content).length === 2));
+  check("2b: a minted figure is BORN WHOLE — id, tier, weight, and the reason they exist",
+    (f => f.id && f.tier === "notable" && f.weight > 0 && f.origin !== undefined && f.legend?.tier === "notable")
+      (ws.mintedFigures[0]));
+  check("2b: a minted figure always has a NAME — a nameless one is skipped by every add() and never acts",
+    !!ws.mintedFigures[0].name && ws.mintedFigures[0].provisional === true);
+  check("2b: the roster cannot grow without bound", (() => {
+    const w = {}; for (let i = 0; i < 12; i++) mintFigure(w, { cap: 4, epithet: "x" });
+    return (w.mintedFigures || []).length === 4;
+  })());
+  check("2b: minted figures ENTER THE POPULATION (born into the roster but never acting is not being alive)",
+    /mintedFigures \|\| \[\]\)\) \{[\s\S]{0,220}add\(f\.id, f\.name/.test(wtSrc));
+  check("2b: minting is driven by DEATHS, not by abandonment (which grows with the roster and self-amplifies)",
+    /const deaths = \[\.\.\.casualties\.filter\(c => c\.kind === "killed"\)/.test(wtSrc)
+    && /\.\.\.strikes\.filter\(s => s\.outcome === "killed"\)/.test(wtSrc));
+  check("2b: the arc-vacancy door reads an UNHELD arc, never the abandonment counter",
+    /const held = \(leaning\[arcId\]\?\.pro\?\.length \|\| 0\)/.test(wtSrc) && !/if \(vacated\[arcId\]\) ws\.arcUnheldStreak/.test(wtSrc));
+  check("2b: a minted figure who dies is still mournable — the death path reads the LIVING roster",
+    /mintedFigures \|\| \[\]\)/.test(srcOf("engine/death.js")));
+}
+
+// ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
+// the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
+// worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.
+check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {
+  const src = readFileSync(join(root, "tests/smoke.mjs"), "utf8");
+  const after = src.slice(src.indexOf("process.exit(failures") + 1);
+  return !/check\(/.test(after);
+})());
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
-

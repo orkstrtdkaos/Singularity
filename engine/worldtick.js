@@ -14,6 +14,8 @@ import { callClaudeJSON } from "./claude.js";
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { applyCodexUpdates } from "./codex.js";
+import { tierRank, tierBirthWeight } from "./legends.js";
+const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
@@ -648,9 +650,23 @@ export function resolveEpicClash(a, b, rng = Math.random) {
   const winner = aWins ? a : b, loser = aWins ? b : a;
   const margin = Math.abs(roll - pA);
   const r2 = rng();
+  // SNG-269/2a — WHAT LOSING COSTS DEPENDS ON WHO BEAT YOU.
+  //
+  // Weight decided who WINS; severity was then rolled FLAT, with no reference to tier at all. So a legend
+  // who lost to a heroic died at exactly the rate a heroic did. Pair that with the attention model — a
+  // legend holds 2 fronts to a heroic's half, so she shows up in four times the fights — and the top of
+  // the pyramid died FASTEST: measured at legendary 10.6% / epic 8.6% / heroic 4.5% over 720 days, which is
+  // the exact inverse of the design ("more lower power ones should die than legends").
+  //
+  // Erik's rule — "a legend might kill 3-4 heroes and 1-2 epics per battle" — is a statement about the GAP.
+  // Going down the ladder is lethal; going UP it is how you get checked, not how you kill. So the kill roll
+  // scales with the rank gap and collapses when a lesser figure somehow prevails: they stopped her, they
+  // wounded her at best. Killing far above your rung should take the story, not the dice.
+  const gap = tierRank(winner.tier ?? winner.legend?.tier) - tierRank(loser.tier ?? loser.legend?.tier);
+  const lethal = gap >= 0 ? 0.12 * (1 + gap) : 0.12 / (1 + 3 * Math.abs(gap));
   let kind;
   if (margin < 0.08) kind = "stalemate";
-  else if (margin > 0.30 && r2 < 0.12) kind = "killed";   // decisive + rare → a KILLED candidate (still gated on apply)
+  else if (margin > 0.30 && r2 < lethal) kind = "killed";   // decisive + rare → a KILLED candidate (still gated on apply)
   else if (r2 < 0.45) kind = "wounded";
   else kind = "stopped";
   return { winnerId: winner.id, loserId: loser.id, winnerName: winner.name, loserName: loser.name, kind, margin };
@@ -708,6 +724,54 @@ function wantProgressLine(ws, id) {
  *  the specific gap Erik named, `legend.tier` that worldtick has NEVER read — move RARELY (a cooldown + a
  *  rare roll, so the great become daily furniture if they tick every day: rarity is the point). Pure; rng
  *  and the epic cooldown injected. */
+/** SNG-269/2b — THE LIVING ROSTER: the figures the world authored PLUS the ones it has since minted.
+ *
+ *  Aevi (ASSESSMENT_npc_progression, Gap 2): "No `figures.push` anywhere. The world has exactly the 66
+ *  figures I authored, forever." Deaths were one-way — a world simulated long enough empties out, and the
+ *  tier pyramid decays in precisely the way the re-tier was meant to fix.
+ *
+ *  Minted figures live in WORLD STATE, not content: content is read-only and shared, while a minted figure
+ *  belongs to the world that produced them. ⚠️ EVERY roster read goes through here. Six places read
+ *  `content.legends.roster` directly, and a figure who exists to some of them and not others is the same
+ *  half-wired failure as a field with no reader — they would fight in contests but never be surfaced, or
+ *  be killable but never mournable.
+ */
+export function worldRoster(ws, content = {}) {
+  const authored = content.legends?.roster || [];
+  const minted = ws?.mintedFigures || [];
+  return minted.length ? authored.concat(minted) : authored;
+}
+
+/** Mint ONE new figure into the world from an event the world actually produced. Returns the figure, or
+ *  null if the roster is at its cap. Entry is at the BOTTOM (`notable`/`riffraff`) — those rungs are empty
+ *  by design because they are the inflow, not a place anybody was authored into. A minted figure is REAL
+ *  immediately: an id, a tier, a weight, a want, and an arc they care about, which is everything the tick
+ *  needs to let them push, fight, be struck at, and die. */
+export function mintFigure(ws, { tier = "notable", name = null, epithet = null, origin = "", region = null, arcAffinity = null, worldDay = 0, weight = null, cap = 140 } = {}) {
+  ws.mintedFigures = ws.mintedFigures || [];
+  if (ws.mintedFigures.length >= cap) return null;
+  const n = (ws.mintedCounter = (ws.mintedCounter || 0) + 1);
+  const fig = {
+    id: `minted-${n}`,
+    // ⚠️ THE NAME IS AN EPITHET, NOT A NAME. The engine mints the slot and the story; naming is authorship.
+    // But it cannot be NULL — a figure with no name is skipped by every `add()` in `offscreenPopulation`,
+    // and would be born into the roster and then never act. An epithet drawn from the event that made them
+    // is honest, distinguishable, and reads as what it is until content gives them a real name.
+    name: name || epithet || "someone newly spoken of",
+    provisional: !name,
+    tier,
+    weight: weight ?? tierBirthWeight(tier),
+    wants: origin || "to be counted among those who matter",
+    arcAffinity,
+    region,
+    mintedWorldDay: worldDay,
+    origin,                       // WHY they exist — the event that made them, kept so the world can tell it
+    legend: { tier, weight: weight ?? tierBirthWeight(tier) },
+  };
+  ws.mintedFigures.push(fig);
+  return fig;
+}
+
 export function offscreenPopulation(character, content = {}, { worldDay = 0, rng = Math.random, lastEpicDay = null, minEpicGapDays = 3, epicRate = 0.6 } = {}) {
   const out = [];
   const seen = new Set();
@@ -731,8 +795,16 @@ export function offscreenPopulation(character, content = {}, { worldDay = 0, rng
   //    (SNG-208 §3b) are gone from the world and never stir again.
   const coolOk = lastEpicDay == null || (worldDay - lastEpicDay) >= minEpicGapDays;
   if (coolOk && rng() < epicRate) {
-    const greats = (content.legends?.roster || []).filter(f => (f.tier === "legendary" || f.tier === "epic") && effectiveEpicStatus(character?.worldState, f.id, worldDay) !== "dead");
+    const greats = worldRoster(character?.worldState, content).filter(f => (f.tier === "legendary" || f.tier === "epic") && effectiveEpicStatus(character?.worldState, f.id, worldDay) !== "dead");
     if (greats.length) { const f = greats[Math.floor(rng() * greats.length)]; add(f.id, f.name, "npc", f.wants || f.signature, "legend"); }
+  }
+  // 3b. MINTED (SNG-269/2b) — the figures this world made for itself. ⚠️ They must be HERE, not merely in
+  //     `worldRoster`: a figure who is born into the roster but never enters the population exists on paper
+  //     and never acts. That was the bug that made the vacancy streak re-fire forever — the newly minted
+  //     figure could not hold the arc that produced them, so the seat stayed empty and minted another.
+  for (const f of (character?.worldState?.mintedFigures || [])) {
+    if (effectiveEpicStatus(character?.worldState, f.id, worldDay) === "dead") continue;
+    add(f.id, f.name, "npc", f.wants || f.origin, "minted");
   }
   // 4. HEARD OF, not met (§3.2) — a codex PERSON node with no registry entry is exactly "known of, not met."
   //    SNG-199 made MEETING write the registry, so this marker exists for free (met people were filtered out
@@ -773,7 +845,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   // kills, wired in applyEpicClashOutcome); a pre-209 death without a state reads as "near dark" and is left
   // alone until someone stamps it. Names resolved for the news line; the seal itself is a real event.
   const deathNames = new Map();
-  for (const f of (content.legends?.roster || [])) { const st = ws.epicStatus?.[f.id]; if (st) deathNames.set(st, f.name); }
+  for (const f of worldRoster(ws, content)) { const st = ws.epicStatus?.[f.id]; if (st) deathNames.set(st, f.name); }
   for (const n of Object.values(character.npcRegistry || {})) if (n && typeof n === "object") deathNames.set(n, n.name);
   for (const e of deepenDeaths([...deathNames.keys()], currentWorldDay, content.rules || {})) {
     const name = deathNames.get(e);
@@ -845,7 +917,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   // This also answers "is 4 enough for the world?" — 4 was never the world's reach, only its VOICE. The world
   // now moves at full population; 4 is how many of those movements get words this pass.
   {
-    const living = (content.legends?.roster || []).filter(f =>
+    const living = worldRoster(ws, content).filter(f =>
       f?.arcAffinity?.arcId && effectiveEpicStatus(ws, f.id, currentWorldDay) !== "dead");
     // CCODE-106 — THEY RESPOND TO WHAT IS HAPPENING. Erik: "if it's heard that something is moving forward,
     // other NPCs will become more motivated to try to stop or help it — where does that come in?"
@@ -997,12 +1069,13 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         //
         // Unknown tiers now resolve to the FLOOR and are recorded, so a rung nobody taught this map about is
         // visible rather than average. `regional` is kept as an alias for `heroic` while the rename lands.
-        const RANK = { mythic: 4, legendary: 3, epic: 2, heroic: 1, regional: 1, notable: 0.5, riffraff: 0 };
+        // SNG-269: the ladder now has ONE definition (`tierRank`, exported from legends.js). This module
+        // kept its own copy, which is how it came to be missing `mythic` and `heroic` in the first place.
+        // The unknown-tier RECORD stays here — a rung nobody taught the ladder about must stay visible.
         const rankOf = f => {
           const t = f?.tier ?? f?.legend?.tier;
-          const r = RANK[t];
-          if (r == null && t) (ws.unknownTiers = ws.unknownTiers || {})[t] = (ws.unknownTiers?.[t] || 0) + 1;
-          return r ?? 0;
+          if (t && !KNOWN_TIERS.has(t)) (ws.unknownTiers = ws.unknownTiers || {})[t] = (ws.unknownTiers?.[t] || 0) + 1;
+          return tierRank(t);
         };
         const casualtyRate = Number.isFinite(cfg.casualtyRate) ? cfg.casualtyRate : 0.15;
         if (res && !res.drawn && rng() < casualtyRate) {
@@ -1088,6 +1161,77 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block
     // (and any future readout) should be able to say WHY an arc moved when nobody won anything.
     ws.arcVacancies = vacated;
+
+    // SNG-269/2b — THE WORLD REFILLS ITSELF. Aevi (Gap 2): "the roster never grows — a world simulated
+    // long enough empties out, and the tier pyramid decays in exactly the way the re-tier was meant to fix."
+    //
+    // The birth events are ones the world ALREADY PRODUCES; nothing new has to be invented to carry them:
+    //   · A VACANCY — an arc NOBODY was minding this pass, because everyone who cares about it was spending
+    //     their attention somewhere they cared about more. An unheld front is an opening: somebody local
+    //     steps into it. They enter at `notable` — stepping into an empty room is not the same as winning it.
+    //   · A CASUALTY — someone was standing next to the person who fell. Surviving a thing that killed a
+    //     greater figure is exactly how an unknown becomes known; they enter at `riffraff`.
+    // Entry is at the BOTTOM on purpose. `notable` and `riffraff` were empty by design — not an oversight,
+    // but the inflow, waiting for something to flow into them. Promotion (2c) carries them up from here;
+    // this only opens the door.
+    //
+    // ⚠️ THE ENGINE MINTS THE SLOT, NOT THE PERSON. A minted figure gets an id, a rung, a weight, an arc
+    // they care about, and the reason they exist — everything the tick needs to let them push, fight, be
+    // struck at, and die. It does NOT get a name, because naming is authorship and the engine has no
+    // business doing it: they are flagged `provisional` until content names them.
+    const mintRate = Number.isFinite(cfg.mintRate) ? cfg.mintRate : 0.5;
+    const mintCap = Number.isFinite(cfg.mintCap) ? cfg.mintCap : 140;
+    const born = [];
+    // ⚠️ A SINGLE-PASS VACANCY IS NOT RARE — it fires for most arcs most passes, because attention is
+    // scarce by design. Minting on it produced 140 new figures against 6 deaths per world: the cap, every
+    // run. What is actually rare, and actually means something, is a SUSTAINED vacancy — an arc nobody has
+    // held for weeks running. That is when a local steps in, and the fiction is truer for it.
+    const streakForMint = Number.isFinite(cfg.vacancyStreakForMint) ? cfg.vacancyStreakForMint : 8;
+    ws.arcUnheldStreak = ws.arcUnheldStreak || {};
+    // ⛔ NOT `vacated` — that counts ABANDONMENTS ("somebody who cares about this walked away from it"),
+    // which gets MORE common as the roster grows. Minting on it is a positive feedback loop: mint → more
+    // carers → more abandonments → more mints. It produced 55 figures against 8 deaths.
+    // The real signal is an arc NOBODY leaned on at all this pass. That is rare, and it is self-correcting:
+    // the figure minted into it is then holding it, so the seat is no longer empty and the clock stops.
+    for (const arcId of Object.keys(leaning)) {
+      const held = (leaning[arcId]?.pro?.length || 0) + (leaning[arcId]?.con?.length || 0);
+      if (!held) ws.arcUnheldStreak[arcId] = (ws.arcUnheldStreak[arcId] || 0) + 1;
+      else { ws.arcUnheldStreak[arcId] = 0; continue; }
+      if (ws.arcUnheldStreak[arcId] < streakForMint || rng() >= mintRate) continue;
+      ws.arcUnheldStreak[arcId] = 0;   // the seat is taken; the clock restarts
+      const f = mintFigure(ws, { tier: "notable", worldDay: currentWorldDay, arcAffinity: arcId,
+        epithet: `the one who took up ${arcId}`,
+        origin: `stepped into ${arcId} after a long season when nobody was holding it`, cap: mintCap });
+      if (f) born.push(f);
+    }
+    // A DEATH OPENS A SEAT — Aevi's second birth event, read correctly this time. "A faction that just lost
+    // its leader" is a DEATH, not an unheld arc; the arc-vacancy door above turns out to fire almost never
+    // (with 66 figures over 5 arcs, somebody is always leaning on something), so deaths carry the inflow.
+    //
+    // And that is the right shape: the world refills in proportion to what it LOSES, without a rate anyone
+    // has to tune to keep the pyramid standing. One death can produce two kinds of person — the one who
+    // was standing next to it (`riffraff`, they merely survived) and the one who takes the empty chair
+    // (`notable`, they inherited something). Neither has earned the name yet. That is what 2c is for.
+    const deaths = [...casualties.filter(c => c.kind === "killed").map(c => ({ who: c.loser, arcId: c.arcId })),
+                    ...strikes.filter(s => s.outcome === "killed").map(s => ({ who: s.target, arcId: s.arcId }))];
+    for (const d of deaths) {
+      if (rng() < mintRate) {
+        const f = mintFigure(ws, { tier: "riffraff", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
+          epithet: `the one who outlived ${d.who}`,
+          origin: `stood beside ${d.who} and walked away from it`, cap: mintCap });
+        if (f) born.push(f);
+      }
+      if (rng() < mintRate) {
+        const f = mintFigure(ws, { tier: "notable", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
+          epithet: `the one who took ${d.who}'s place`,
+          origin: `took up what ${d.who} left unfinished`, cap: mintCap });
+        if (f) born.push(f);
+      }
+    }
+    if (born.length) {
+      ws.arcBirths = born.map(f => ({ id: f.id, tier: f.tier, origin: f.origin, arcId: f.arcAffinity }));
+      for (const f of born) news.push({ text: `Someone new is being spoken of — they ${f.origin}.`, worldDay: currentWorldDay, tier: "murmur" });
+    } else ws.arcBirths = [];
     // The NET position per arc, so a reader (and the GM block) sees the settled truth rather than one side.
     const net = {};
     for (const rec of Object.values(ws.epicArcPushes || {})) {
@@ -1130,7 +1274,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       const { moved, resolved } = applyWantOutcome(ws, fig.id, outcome, currentWorldDay);
       if (fig.source === "legend" && moved) {
         ws.lastEpicOffscreenDay = currentWorldDay; // stamp the epic cooldown
-        const def = (content.legends?.roster || []).find(f => f.id === fig.id);
+        const def = worldRoster(ws, content).find(f => f.id === fig.id);
         if (def) {
           // SNG-208 §3a: this epic leans on its arc from offstage — ALREADY APPLIED by the mechanical pass
           // above (CCODE-105), for every living legend, on time. Pushing again here would double-count
@@ -1140,7 +1284,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           const liveRivals = (def.rivals || []).filter(rid => effectiveEpicStatus(ws, rid, currentWorldDay) !== "dead");
           if (liveRivals.length && rng() < 0.4) {
             const rid = liveRivals[Math.floor(rng() * liveRivals.length)];
-            const rivalDef = (content.legends?.roster || []).find(f => f.id === rid);
+            const rivalDef = worldRoster(ws, content).find(f => f.id === rid);
             if (rivalDef) {
               const clash = resolveEpicClash(def, rivalDef, rng);
               const winner = clash.winnerId === def.id ? def : rivalDef, loser = clash.loserId === def.id ? def : rivalDef;

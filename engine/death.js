@@ -74,7 +74,12 @@ export function reachableDeadForGM(character, content = {}, currentDay = null) {
     const d = deathDepth(e, day);
     out.push({ name, depth: d, wall: DEATH_DEPTH_NAMES[d], cause: e.deathState?.cause || null });
   };
-  for (const f of (content.legends?.roster || [])) consider(f.name, character?.worldState?.epicStatus?.[f.id]);
+  // SNG-269/2b: the LIVING roster — authored figures PLUS the ones the world has minted since. A minted
+  // figure who dies must be mournable and retrievable like any other; reading only the authored roster
+  // would make them the one kind of dead nobody can go after. Concatenated inline rather than imported —
+  // this module is the pure substrate and owes nothing to worldtick.
+  const roster = (content.legends?.roster || []).concat(character?.worldState?.mintedFigures || []);
+  for (const f of roster) consider(f.name, character?.worldState?.epicStatus?.[f.id]);
   for (const n of Object.values(character?.npcRegistry || {})) if (n && typeof n === "object") consider(n.name, n);
   return out.length ? out.slice(0, 8) : null;
 }

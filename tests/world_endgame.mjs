@@ -58,7 +58,18 @@ for (let run = 0; run < RUNS; run++) {
 
   const ws = character.worldState;
   const status = {};
-  for (const f of ROSTER) { const s = effectiveEpicStatus(ws, f.id, DAYS) || "alive"; status[s] = (status[s] || 0) + 1; }
+  // SNG-269/2a: BY TIER. An aggregate death count hid the thing worth knowing — whether the pyramid loses
+  // its top or its base. Erik: "a legend might kill 3-4 heroes and 1-2 epics per battle", so the tiers are
+  // supposed to die at different rates, and one number cannot show that.
+  const byTier = {};
+  for (const f of ROSTER) {
+    const s = effectiveEpicStatus(ws, f.id, DAYS) || "alive";
+    status[s] = (status[s] || 0) + 1;
+    const t = f.legend?.tier || f.tier || "untiered";
+    (byTier[t] ||= { n: 0, dead: 0, wounded: 0 }).n++;
+    if (s === "dead") byTier[t].dead++;
+    if (s === "wounded") byTier[t].wounded++;
+  }
   results.push({
     run: run + 1,
     dead: status.dead || 0, wounded: status.wounded || 0, stopped: status.stopped || 0,
@@ -66,6 +77,9 @@ for (let run = 0; run < RUNS; run++) {
     arcs: Object.fromEntries(ARCS.map(a => [a, Math.round((ws.arcNetPush?.[a] ?? 0) * 10) / 10])),
     resolvedWants: Object.values(ws.wantProgress || {}).filter(w => w?.status === "resolved").length,
     news: (ws.news || []).length,
+    minted: (ws.mintedFigures || []).length,
+    mintedByTier: (ws.mintedFigures || []).reduce((m, f) => ((m[f.tier] = (m[f.tier] || 0) + 1), m), {}),
+    byTier,
   });
 }
 
@@ -81,8 +95,42 @@ console.log(`\n  ACROSS ${RUNS} WORLDS, after ${DAYS} days each:`);
 console.log(`    legends dead      mean ${mean("dead").toFixed(1)} of ${ROSTER.length}   range ${spread("dead")}`);
 console.log(`    legends wounded   mean ${mean("wounded").toFixed(1)}              range ${spread("wounded")}`);
 console.log(`    wants resolved    mean ${mean("resolvedWants").toFixed(1)}              range ${spread("resolvedWants")}`);
+{
+  // SNG-269/2a — THE PER-TIER TABLE. This is the one that was STALE: the old run sampled ONE `regional`
+  // figure and reported 66.7% for the whole rung. There are 28 in that band now.
+  const tiers = [...new Set(results.flatMap(r => Object.keys(r.byTier)))]
+    .sort((a, b) => (results[0].byTier[b]?.n || 0) - (results[0].byTier[a]?.n || 0));
+  console.log("");
+  console.log("  BY TIER — does the pyramid lose its top or its base?");
+  console.log("    tier          roster   dead/run   death rate   wounded/run");
 
+  // COUNT AND RATE ANSWER DIFFERENT QUESTIONS, and conflating them is how you tune the wrong knob.
+  //   · COUNT says who the world is losing MOST OF — the design intent ("more lower power ones die").
+  //   · RATE says which rung is most DANGEROUS TO BE — and legends sit highest there no matter how
+  //     survivable a single loss is, because the attention model puts them in four times the fights.
+  // That is not a bug to tune out: a legend holds 2 fronts to a heroic's half. Being in every fight IS
+  // what being a legend costs. The knob, if Erik wants the rate flattened, is `attentionByTier` — not
+  // lethality.
+  for (const t of tiers) {
+    const n = results[0].byTier[t]?.n || 0;
+    const d = results.reduce((s, r) => s + (r.byTier[t]?.dead || 0), 0) / results.length;
+    const w = results.reduce((s, r) => s + (r.byTier[t]?.wounded || 0), 0) / results.length;
+    const rate = n ? (100 * d / n).toFixed(1) + "%" : "—";
+    console.log("    " + t.padEnd(12) + "  " + String(n).padStart(6) + "   " + d.toFixed(1).padStart(8) + "   " + rate.padStart(10) + "   " + w.toFixed(1).padStart(11));
+  }
+}
 // DO THE ARCS CONVERGE? The question that decides whether every world tells the same story.
+{
+  // SNG-269/2b — THE INFLOW. Before this, the roster only ever shrank.
+  const m = results.reduce((s, r) => s + r.minted, 0) / results.length;
+  const tiers = {};
+  for (const r of results) for (const [t, n] of Object.entries(r.mintedByTier)) tiers[t] = (tiers[t] || 0) + n / results.length;
+  console.log("");
+  console.log("  THE INFLOW — does the world refill what it loses?");
+  console.log("    minted per world   " + m.toFixed(1) + "   (" + Object.entries(tiers).map(([t, n]) => t + " " + n.toFixed(1)).join("  ·  ") + ")");
+  const lost = results.reduce((s, r) => s + r.dead, 0) / results.length;
+  console.log("    lost per world     " + lost.toFixed(1) + "   → net " + (m - lost >= 0 ? "+" : "") + (m - lost).toFixed(1) + " figures per " + DAYS + " days");
+}
 console.log(`\n  WHERE THE ARCS LANDED — does every world end the same way?`);
 for (const a of ARCS) {
   const vals = results.map(r => r.arcs[a]);
@@ -98,6 +146,6 @@ console.log(`    · legend attrition: ${(100 * deadMean / ROSTER.length).toFixed
 console.log(`      ${deadMean === 0 ? "NOBODY dies — the clash path never reaches a kill, so the roster is immortal." :
   deadMean / ROSTER.length > 0.5 ? "OVER HALF the world's great figures die — the endgame empties itself." :
   "a minority die — the world loses figures without emptying."}`);
-console.log(`    · nothing here MINTS a new legend, so attrition is one-way: whatever dies is gone from every`);
-console.log(`      later world-year. Whether the world should refill is a design question, not a defect.`);
+console.log(`    · the world now MINTS at the bottom (SNG-269/2b), so attrition is no longer one-way — see`);
+console.log(`      the inflow table above. Whether the RATE is right is Erik's call; the mechanism exists now.`);
 console.log(`\nEnd of world: ${RUNS} worlds run, nothing written. (A REPORT — the right numbers are Erik's.)`);

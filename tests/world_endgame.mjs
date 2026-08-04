@@ -78,6 +78,8 @@ for (let run = 0; run < RUNS; run++) {
     resolvedWants: Object.values(ws.wantProgress || {}).filter(w => w?.status === "resolved").length,
     news: (ws.news || []).length,
     minted: (ws.mintedFigures || []).length,
+    promoted: Object.keys(ws.figureTier || {}).length,
+    endTiers: Object.values(ws.figureTier || {}).reduce((m, t) => ((m[t] = (m[t] || 0) + 1), m), {}),
     mintedByTier: (ws.mintedFigures || []).reduce((m, f) => ((m[f.tier] = (m[f.tier] || 0) + 1), m), {}),
     byTier,
   });
@@ -129,6 +131,10 @@ console.log(`    wants resolved    mean ${mean("resolvedWants").toFixed(1)}     
   console.log("  THE INFLOW — does the world refill what it loses?");
   console.log("    minted per world   " + m.toFixed(1) + "   (" + Object.entries(tiers).map(([t, n]) => t + " " + n.toFixed(1)).join("  ·  ") + ")");
   const lost = results.reduce((s, r) => s + r.dead, 0) / results.length;
+  const pr = results.reduce((s, r) => s + r.promoted, 0) / results.length;
+  const et = {};
+  for (const r of results) for (const [t, n] of Object.entries(r.endTiers)) et[t] = (et[t] || 0) + n / results.length;
+  console.log("    re-tiered          " + pr.toFixed(1) + "   (" + (Object.entries(et).map(([t, n]) => t + " " + n.toFixed(1)).join("  ·  ") || "nobody rose") + ")");
   console.log("    lost per world     " + lost.toFixed(1) + "   → net " + (m - lost >= 0 ? "+" : "") + (m - lost).toFixed(1) + " figures per " + DAYS + " days");
 }
 console.log(`\n  WHERE THE ARCS LANDED — does every world end the same way?`);

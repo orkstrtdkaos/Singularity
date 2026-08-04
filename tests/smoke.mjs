@@ -9310,6 +9310,36 @@ await (async () => {
     /mintedFigures \|\| \[\]\)/.test(srcOf("engine/death.js")));
 }
 
+// --- SNG-269/2c: PROMOTION — tier is EARNED, not authored ---------------------------------------------
+{
+  const { advanceStandings, demoteFigure, tierOf } = await import("../engine/worldtick.js");
+  const wtSrc2 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  const ws = {}; const f = { id: "x", name: "Nobody", tier: "riffraff" };
+  check("2c: an earned rung is an OVERRIDE in world state — content is read-only and shared",
+    (advanceStandings(ws, [f], 0), advanceStandings(ws, [f], 200),
+     ws.figureTier?.x === "notable" && f.tier === "riffraff" && tierOf(ws, f) === "notable"));
+  check("2c: rising takes TIME AT RUNG — a figure seen once does not promote",
+    (() => { const w = {}; const g = { id: "g", tier: "heroic" };
+             advanceStandings(w, [g], 0); return !w.figureTier?.g; })());
+  check("2c: the upper rungs also require WINS, not just survival",
+    (() => { const w = {}; const g = { id: "g", tier: "heroic" };
+             advanceStandings(w, [g], 0); advanceStandings(w, [g], 3000);
+             return !w.figureTier?.g;   // 8 world-years but zero contests won
+    })());
+  check("2c: a new rung RESTARTS the clock (you do not carry tenure upward)",
+    ws.figureTenure?.x?.tier === "notable" && ws.figureTenure.x.sinceDay === 200 && ws.figureTenure.x.wins === 0);
+  check("2c: demotion exists — without a way DOWN, promotion alone makes everyone mythic",
+    (() => { const w = {}; const g = { id: "g", tier: "epic" };
+             return demoteFigure(w, g, 10)?.to === "heroic" && tierOf(w, g) === "heroic"; })());
+  check("2c: the mechanics read the EARNED rung, not the authored one (budget and rank both)",
+    /const t = tierOf\(ws, f\);\s*\/\/ SNG-269\/2c: the EARNED rung/.test(wtSrc2)
+    && /const t = tierOf\(ws, f\);\s*\/\/ SNG-269\/2c: earned rung/.test(wtSrc2));
+  check("2c: contest wins are recorded for EVERY participant, not only the leader",
+    /for \(const e of won\) if \(ws\.figureTenure\[e\.f\.id\]\) ws\.figureTenure\[e\.f\.id\]\.wins\+\+/.test(wtSrc2));
+  check("2c: a minted figure's arcAffinity has the SHAPE `living` filters on, or it is invisible to the world",
+    /arcAffinity: arcAffinity \? \{ arcId: arcAffinity/.test(wtSrc2));
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

@@ -762,7 +762,11 @@ export function mintFigure(ws, { tier = "notable", name = null, epithet = null, 
     tier,
     weight: weight ?? tierBirthWeight(tier),
     wants: origin || "to be counted among those who matter",
-    arcAffinity,
+    // ⚠️ THE SHAPE MATTERS: `living` filters on `f.arcAffinity?.arcId`, so a bare string here silently
+    // excludes a minted figure from the ENTIRE world — no contests, no standing, no promotion. They existed
+    // in the roster and were invisible to every mechanic that reads a care. Same failure as a field with no
+    // reader, wearing a type mismatch instead.
+    arcAffinity: arcAffinity ? { arcId: arcAffinity, lean: 1 } : null,
     region,
     mintedWorldDay: worldDay,
     origin,                       // WHY they exist — the event that made them, kept so the world can tell it
@@ -770,6 +774,70 @@ export function mintFigure(ws, { tier = "notable", name = null, epithet = null, 
   };
   ws.mintedFigures.push(fig);
   return fig;
+}
+
+/** SNG-269/2c — TIER IS EARNED, NOT AUTHORED. Erik: "the ones that stay the longest are the true legends."
+ *
+ *  Aevi calls this the biggest reframe in the system, and it has one hard consequence for the engine: a
+ *  figure's tier can no longer be read off content, because content is READ-ONLY and SHARED. A legend made
+ *  in this world is not a legend in anyone else's. So the earned rung lives in world state as an OVERRIDE,
+ *  and `tierOf` is the ONE place anything asks what rung somebody is on.
+ *
+ *  ⛔ Do not confuse this with `promotionCandidates`/`promoteInto` in the generated-canon system. That is a
+ *  locally-generated entity becoming shared world-truth. Same word, unrelated machinery — Aevi flagged the
+ *  collision and wiring one to the other would be a genuine mess.
+ */
+export function tierOf(ws, f) {
+  return ws?.figureTier?.[f?.id] || f?.tier || f?.legend?.tier || null;
+}
+
+/** Advance every living figure's standing one pass. Rising takes TIME AT RUNG plus the thing that rung is
+ *  about; falling takes giving up. Returns [{ id, from, to, why }] so the world can say who rose. */
+export function advanceStandings(ws, roster, worldDay, cfg = {}) {
+  const YEAR = Number.isFinite(cfg.worldYearDays) ? cfg.worldYearDays : 365;
+  // Aevi's proposedRule, made mechanical. Each rung: how long you must hold it, and what else it asks.
+  const RUNGS = cfg.promotion || {
+    riffraff:  { to: "notable",   years: 0.5, wins: 0 },
+    notable:   { to: "heroic",    years: 1,   wins: 1 },
+    heroic:    { to: "epic",      years: 2,   wins: 2 },   // "survive ~2 world-years holding at least one arc care"
+    epic:      { to: "legendary", years: 4,   wins: 4 },   // "…AND win contests on an arc they drive or defend"
+    legendary: { to: "mythic",    years: 8,   wins: 8, unbeaten: true },
+  };
+  ws.figureTenure = ws.figureTenure || {};
+  ws.figureTier = ws.figureTier || {};
+  const out = [];
+  for (const f of roster) {
+    const tier = tierOf(ws, f);
+    if (!tier) continue;
+    const t = (ws.figureTenure[f.id] ||= { tier, sinceDay: worldDay, wins: 0, losses: 0 });
+    if (t.tier !== tier) { t.tier = tier; t.sinceDay = worldDay; t.wins = 0; t.losses = 0; }   // a new rung restarts the clock
+    if (effectiveEpicStatus(ws, f.id, worldDay) === "dead") continue;
+    const rule = RUNGS[tier];
+    if (!rule) continue;
+    const heldFor = (worldDay - t.sinceDay) / YEAR;
+    if (heldFor < rule.years || t.wins < rule.wins) continue;
+    if (rule.unbeaten && t.losses > 0) continue;
+    ws.figureTier[f.id] = rule.to;
+    ws.figureTenure[f.id] = { tier: rule.to, sinceDay: worldDay, wins: 0, losses: 0 };
+    out.push({ id: f.id, name: f.name, from: tier, to: rule.to,
+      why: `held ${tier} for ${heldFor.toFixed(1)} world-years` + (rule.wins ? ` and won ${t.wins}` : "") });
+  }
+  return out;
+}
+
+/** Aevi: "a wounded figure who abandons every front should fall a rung — if lasting is what makes a legend,
+ *  failing to last should cost the title." Demotion is the same ladder run downward, and it is what keeps
+ *  the pyramid a pyramid: without it, promotion alone would eventually make everyone mythic. */
+export function demoteFigure(ws, f, worldDay) {
+  const DOWN = { mythic: "legendary", legendary: "epic", epic: "heroic", heroic: "notable", notable: "riffraff" };
+  const tier = tierOf(ws, f);
+  const to = DOWN[tier];
+  if (!to) return null;
+  ws.figureTier = ws.figureTier || {};
+  ws.figureTier[f.id] = to;
+  ws.figureTenure = ws.figureTenure || {};
+  ws.figureTenure[f.id] = { tier: to, sinceDay: worldDay, wins: 0, losses: 0 };
+  return { id: f.id, name: f.name, from: tier, to };
 }
 
 export function offscreenPopulation(character, content = {}, { worldDay = 0, rng = Math.random, lastEpicDay = null, minEpicGapDays = 3, epicRate = 0.6 } = {}) {
@@ -951,7 +1019,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // silently drops 28 figures to the unknown-tier fallback.
     const tierBudget = cfg.attentionByTier || { mythic: 3, legendary: 2, epic: 1, heroic: 0.5, regional: 0.5, notable: 0.5 };
     const budgetFor = f => {
-      const t = f.tier || f.legend?.tier;
+      const t = tierOf(ws, f);        // SNG-269/2c: the EARNED rung, not the authored one
       const v = tierBudget[t];
       return Number.isFinite(v) ? v : (Number.isFinite(cfg.attentionBudget) ? cfg.attentionBudget : 1);
     };
@@ -1037,6 +1105,14 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         const res = sbCfg ? contestArc({ pro: champ(aSide, aw), con: champ(bSide, bw), sb: sbCfg, rules: content.rules, steps: content.steps, rng }) : null;
         duels++;
         if (res && !res.drawn) (res.winner === aSide[0].f.id ? proWins++ : conWins++);
+        // SNG-269/2c: a contest is the thing "win contests on an arc they drive or defend" refers to.
+        // Recorded on every participant, not just the leader — the allies were in the same fight.
+        if (res && !res.drawn) {
+          ws.figureTenure = ws.figureTenure || {};
+          const won = res.winner === aSide[0].f.id ? aSide : bSide, lost = won === aSide ? bSide : aSide;
+          for (const e of won) if (ws.figureTenure[e.f.id]) ws.figureTenure[e.f.id].wins++;
+          for (const e of lost) if (ws.figureTenure[e.f.id]) ws.figureTenure[e.f.id].losses++;
+        }
         // CCODE-117 — A FIGHT CAN COST SOMETHING. Erik: "what if more get killed or injured? what knob would
         // we turn to do that?" The knob was a DISCONNECTED WIRE: 28 duels a pass across the valley and not
         // one could hurt anybody, because `contestArc` returned multipliers and never touched `epicStatus`.
@@ -1073,7 +1149,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         // kept its own copy, which is how it came to be missing `mythic` and `heroic` in the first place.
         // The unknown-tier RECORD stays here — a rung nobody taught the ladder about must stay visible.
         const rankOf = f => {
-          const t = f?.tier ?? f?.legend?.tier;
+          const t = tierOf(ws, f);    // SNG-269/2c: earned rung — a promoted figure fights at their new weight
           if (t && !KNOWN_TIERS.has(t)) (ws.unknownTiers = ws.unknownTiers || {})[t] = (ws.unknownTiers?.[t] || 0) + 1;
           return tierRank(t);
         };
@@ -1161,6 +1237,21 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block
     // (and any future readout) should be able to say WHY an arc moved when nobody won anything.
     ws.arcVacancies = vacated;
+
+    // SNG-269/2c — WHO ROSE. Erik: "the ones that stay the longest are the true legends." Run after the
+    // pass's contests so this year's wins count toward this year's standing.
+    const risen = advanceStandings(ws, living, currentWorldDay, content.rules?.tierLadder || {});
+    // A wounded figure holding NOTHING has stopped being what their title says. Aevi: failing to last
+    // should cost the title — and without a way DOWN, promotion alone eventually makes everyone mythic.
+    const fallen = [];
+    for (const f of living) {
+      if (effectiveEpicStatus(ws, f.id, currentWorldDay) !== "wounded") continue;
+      if (affinitiesOf(f).length) continue;       // still cares about something → still holding on
+      const d = demoteFigure(ws, f, currentWorldDay);
+      if (d) fallen.push(d);
+    }
+    ws.arcStandings = { risen, fallen };
+    for (const r of risen) news.push({ text: `${r.name || "Someone"} is spoken of differently now — ${r.why}.`, worldDay: currentWorldDay, tier: "event" });
 
     // SNG-269/2b — THE WORLD REFILLS ITSELF. Aevi (Gap 2): "the roster never grows — a world simulated
     // long enough empties out, and the tier pyramid decays in exactly the way the re-tier was meant to fix."

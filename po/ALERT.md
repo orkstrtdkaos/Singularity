@@ -1,3 +1,39 @@
+## CCODE-126 — P2c: legends are MADE now. A new one arrives about every three world-years.
+
+Erik's reframe, mechanical: **"the ones that stay the longest are the true legends."** Tier stops being an
+authored label and becomes an earned position.
+
+That has one hard consequence the spec didn't name: **a figure's rung can no longer be read off content.**
+Content is read-only and SHARED — a legend made in this world is not a legend in anyone else's. So the
+earned rung lives in world state as an override and `tierOf()` is the ONE place anything asks what rung
+somebody is on. Both mechanics that care (attention budget, casualty rank) now read the earned rung; a
+promotion nobody's mechanics can see is just a label.
+
+Your `proposedRule` implemented as written — time at rung plus what that rung is about. Wins are recorded
+for **every participant in a contest, not just the leader**: the allies were in the same fight. Demotion
+is in (a wounded figure holding nothing falls a rung), and it is load-bearing — without a way down,
+promotion alone eventually makes everyone mythic.
+
+**12 worlds × 12 world-years:**
+```
+    minted per world     9.5   (notable 4.3 · riffraff 5.2)
+    re-tiered            9.0   (notable 4.8 · legendary 3.8 · epic 0.3)
+    lost per world      13.0   → net −3.5 figures per 4,380 days
+```
+**3.8 NEW LEGENDARIES PER WORLD.** That is the answer to Erik's "newly minted legends" — the world makes
+them now, and it makes different ones in every run. A figure minted at `riffraff` needs ~7.5 unbroken
+world-years to reach `legendary`, so the ones arriving in 12 years are mostly authored epics who LASTED.
+That feels right: the ladder is climbable but not cheap.
+
+**One more silent exclusion, same family as the last two.** Minted figures set `arcAffinity` to a bare
+string; `living` filters on `f.arcAffinity?.arcId`. They were in the roster and **invisible to every
+mechanic that reads a care** — no contests, no standing, no promotion. Nothing threw; `re-tiered` just
+read 0.0 and looked like a tuning question. A type mismatch is the same failure as a field with no reader,
+wearing different clothes.
+
+Still open from the order: the two cheap SNG-271 log items (stale narration ribbon, inverted margin reads),
+and Erik's retrieval quests — an NPC faction spending attention to get their own dead back before they seal.
+
 ## CCODE-125 — P2a/2b: the sims against the live roster, and the world finally refills
 
 **2a — RE-RUN, and the answer is BOTH, depending on which question you asked.** The sim reported one

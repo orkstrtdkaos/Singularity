@@ -1,0 +1,176 @@
+{
+ "schemaVersion": 1,
+ "id": "generative_titles",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. SNG-287, with SNG-292's re-priced scope ladder folded in.",
+ "supersedes": "the scope thresholds in titles.json (world was 15+, unreachable given the per-deed cap of 12)",
+ "theScopeLadder": {
+  "measuredOver": "⚠️ THE UNION OF `deed.spread` ACROSS THE DEEDS MATCHING THE PATTERN — not a single deed. Stated explicitly because I left it ambiguous the first time and it was the ambiguity that broke the pricing: `spreadDeeds` caps ONE deed by weight at {1:2, 2:5, 3:12}, so a per-deed reading makes any world title unreachable by construction.",
+  "local": {
+   "communities": 1
+  },
+  "regional": {
+   "communities": 3,
+   "withinOneRegion": true
+  },
+  "domain": {
+   "communities": 5,
+   "regions": 2,
+   "sameTradition": true
+  },
+  "world": {
+   "communities": 12,
+   "regions": 4
+  },
+  "legacyCaveat": "⚠️ EXISTING SAVES CARRY PRE-CAP SPREAD — Silas has 11 deeds at 90-91 communities against a weight-3 cap of 12. Under these thresholds EVERY title he could earn is a world title, which erases local and regional scope for him entirely. He is a bad first test case unless the legacy deeds are re-clamped."
+ },
+ "slots": {
+  "note": "⚠️ EVERY SLOT IS FILLED FROM A RECORD. If the record cannot fill it, the pattern does not fire. That is what keeps a generated title TRUE rather than flattering — the same discipline as BOUNDARY-1.",
+  "ARC": {
+   "from": "career.stageMoves attribution",
+   "gate": "⚠️ REQUIRES CCode's causation fix — under presence-credit this named figures who OPPOSED the turning"
+  },
+  "PLACE": {
+   "from": "the communityId where the matching deeds concentrated (mode, not first)"
+  },
+  "ROAD": {
+   "from": "the route with the most guardIntercept deeds"
+  },
+  "CRAFT": {
+   "from": "the craft most used across the matching deeds"
+  },
+  "FOE": {
+   "from": "the highest-band figure beaten in a recorded contest"
+  },
+  "COUNT": {
+   "from": "the count of matching deeds, rendered as a word"
+  },
+  "PEOPLE": {
+   "from": "the tradition of the majority of communities that know the deed"
+  },
+  "REGION": {
+   "from": "the region holding the most knowing communities"
+  }
+ },
+ "patterns": [
+  {
+   "id": "who_turned",
+   "pattern": "Who Turned {ARC}",
+   "scope": "world",
+   "requires": [
+    "ARC"
+   ],
+   "source": "stageMoved (caused)",
+   "example": "Who Turned the Bleed",
+   "note": "The strongest title in the game and the one most damaged by the credit bug. Fires on ONE stage move, because moving a great arc is the largest single act a figure can perform."
+  },
+  {
+   "id": "place_role",
+   "pattern": "{PLACE}'s {ROLE}",
+   "scope": "local",
+   "requires": [
+    "PLACE",
+    "ROLE"
+   ],
+   "source": "the dominant deed tag in one community",
+   "example": "Thornwake's Mercy · Thornwake's Knife",
+   "note": "⚠️ SAME PATTERN, OPPOSITE NOUN. Which {ROLE} lands is decided by the deed WEIGHTS, never by approval — per DIRECTIVE_SNG-280. A place that mostly saw you heal calls you its Mercy; a place that mostly saw you end things calls you its Knife. Both are true and the world does not rank them."
+  },
+  {
+   "id": "road_warden",
+   "pattern": "Warden of {ROAD}",
+   "scope": "regional",
+   "requires": [
+    "ROAD"
+   ],
+   "source": "guardIntercept concentrated on one route",
+   "example": "Warden of the Medicine Road"
+  },
+  {
+   "id": "came_back_for",
+   "pattern": "Who Came Back for {COUNT}",
+   "scope": "world",
+   "requires": [
+    "COUNT"
+   ],
+   "source": "retrieval_success",
+   "example": "Who Came Back for Three",
+   "note": "Ties the death ladder to the name. Three is already a world title in the fixed list; this is its generated form and it counts higher."
+  },
+  {
+   "id": "foes_end",
+   "pattern": "{FOE}'s End",
+   "scope": "regional",
+   "requires": [
+    "FOE"
+   ],
+   "source": "highest-band figure beaten",
+   "example": "the Ashen Wyrm's End"
+  },
+  {
+   "id": "the_craft",
+   "pattern": "The {CRAFT}",
+   "scope": "domain",
+   "requires": [
+    "CRAFT"
+   ],
+   "source": "most-used craft across matching deeds",
+   "example": "the Grey Hand",
+   "note": "A person named for the craft they are known by — the commonest real-world epithet shape and the one that needs no event at all."
+  },
+  {
+   "id": "whom_named",
+   "pattern": "Whom {PEOPLE} Named",
+   "scope": "domain",
+   "requires": [
+    "PEOPLE"
+   ],
+   "source": "the tradition of the knowing communities",
+   "example": "Whom the Ashwardens Named",
+   "note": "⚠️ THE BEST PATTERN IN THE SET. It says NOTHING about what you did and everything about WHO IS TALKING. It is the only title whose content is its audience, and it is the purest expression of domain scope."
+  },
+  {
+   "id": "the_unwelcome_in",
+   "pattern": "Unwelcome in {PLACE}",
+   "scope": "local",
+   "requires": [
+    "PLACE"
+   ],
+   "source": "negative-weight deeds in one community",
+   "example": "Unwelcome in Thornwake",
+   "note": "The inverse, and it must exist. A place can decide about you, and the generated form names the place."
+  },
+  {
+   "id": "of_the_region",
+   "pattern": "{REGION}'s Own",
+   "scope": "regional",
+   "requires": [
+    "REGION"
+   ],
+   "source": "deeds concentrated in one region",
+   "example": "the Palelands' Own",
+   "note": "Belonging as a title. Earned by staying, which almost nothing else in the game rewards."
+  },
+  {
+   "id": "who_stood_at",
+   "pattern": "Who Stood at {PLACE}",
+   "scope": "regional",
+   "requires": [
+    "PLACE"
+   ],
+   "source": "guardIntercept in one community",
+   "example": "Who Stood at the Ford"
+  }
+ ],
+ "theTwoLayers": {
+  "fixed": "ARCHETYPES — Grave-Caller, Silencer, Of the Maw, the Reacher, the Sealer. These are the world's EXISTING words, and earning one is JOINING something that was already there.",
+  "generative": "EVERYTHING ELSE, and it is the majority, because most of what a player does is SPECIFIC — this road, this arc, this town, this foe.",
+  "howTheyInteract": "⚠️ A person may hold both, and they should read differently: 'the Grave-Caller' says what you are; 'Who Turned the Bleed' says what you did. Introduce by the widest-scope title KNOWN IN THE CURRENT COMMUNITY — that rule is what makes scope feel real rather than decorative."
+ },
+ "designNotes": [
+  "⚠️ NO PATTERN IS GATED ON APPROVAL, per DIRECTIVE_SNG-280. `{PLACE}'s Mercy` and `{PLACE}'s Knife` are one pattern with one threshold. `Unwelcome in {PLACE}` costs nothing extra to earn than `{PLACE}'s Own`. The world names what it NOTICES.",
+  "A PATTERN THAT CANNOT FILL ITS SLOTS DOES NOT FIRE — no arc moved, no {ARC} title. This is the whole honesty mechanism and it should never be softened with a fallback string.",
+  "⚠️ `who_turned` IS BLOCKED ON CCODE'S CAUSATION FIX. Under presence-credit it would name figures who fought to PREVENT the turning, which is the most literally false a generated name can be. Do not ship this pattern before that lands.",
+  "AND THESE ARE ALL PROVISIONAL UNTIL A REAL SAVE RUNS THE CHAIN. No save has ever executed the world-sim; every threshold here is priced against simulation and the first character played forward from HEAD is the test."
+ ]
+}

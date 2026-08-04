@@ -1,3 +1,35 @@
+## CCODE-138 — SNG-289: one spread model, graded by weight
+
+Erik: *"i like grading deeds by weight, reconcile the two that way."* Done — the v0.5.0 all-at-once block is
+gone and `spreadDeeds` owns it for the player exactly as it does for figures.
+
+**What changes in play.** A deed used to travel to EVERY community in the world the moment it was old enough,
+provided its weight was 2 or more. Now it travels one hop per pass and its reach is capped by its weight: a
+weight-1 kindness stays in the settlement that saw it, a weight-3 deed crosses into other regions once it has
+been heard everywhere near. Which means `spread` finally carries information — the difference between a name
+known in the next valley and a name known in three regions is now a real difference.
+
+Silas Weir's save is the before-picture: **deeds known in 91 communities out of 90.** Everywhere. His history
+stays as it is — rewriting a player's past to match a new model is a retcon, not a migration.
+
+**The three gated tests were updated to assert the MODEL rather than the old outcome** — that a deed moves,
+that it moves locally first, that it keeps moving on later passes, and that it is never heard twice in the
+same place. The previous test named two specific communities reached in a single tick, which is exactly the
+behaviour being replaced.
+
+Two things worth recording from the reconciliation:
+
+· **A location without `regionId` broke it silently.** My graph was built from that field alone, so a deed
+  whose community had no region had no neighbours and never moved — which reads as "the model chose not to"
+  rather than "the model could not". Community ids are region-namespaced (`valley.millbrook`), so the region
+  now falls back to the namespace and a deed travels even where no location record says where it is.
+
+· **I put an extra tick above the news assertions and broke two unrelated tests.** A test about the spread
+  model failed a test about news counts. Moved below them — worth remembering that shared fixtures make
+  ordering load-bearing.
+
+Next: the seven paths to mythic, and the sweep reporting which path fired.
+
 ## CCODE-137 — the real saves, and CCODE-134 was WRONG
 
 Full report: `po/REPORT_ccode_real_saves.md`. Three things.

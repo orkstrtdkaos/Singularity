@@ -228,7 +228,7 @@ export function effectiveLocation(location, worldState) {
 
 /** Run the tick if days have passed. Mutates character.worldState (and deeds/npcs).
  *  evolveNpcs is injectable for tests; defaults to the AI pass. Never throws. */
-export async function runWorldTick({ character, content, currentDay, advanceAssignments = aiAssignmentAdvancement }) {
+export async function runWorldTick({ character, content, currentDay, advanceAssignments = aiAssignmentAdvancement, rng = Math.random }) {
   if (!character.worldState) character.worldState = initWorldState(currentDay);
   const ws = character.worldState;
   const elapsed = currentDay - (ws.lastTickDay ?? currentDay);
@@ -273,18 +273,35 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
     }
   }
 
-  // 2. news spread: big deeds travel to the region's other communities
-  const communities = [...new Set(Object.values(content.locations).map(l => l.communityId).filter(Boolean))];
-  for (const deed of character.deeds || []) {
-    if (!deed.communityId || Math.abs(deed.weight) < 2) continue;
-    const deedDay = deed.day ?? 0;
-    if (currentDay - deedDay < NEWS_TRAVEL_DAYS) continue;
-    const others = communities.filter(c => c !== deed.communityId && !(deed.spread || []).includes(c));
-    if (!others.length) continue;
-    deed.spread = [...(deed.spread || []), ...others];
-    news.push(`Word has spread beyond ${deed.communityId.split(".").pop()}: ${deed.description}`);
+  // 2. NEWS SPREAD — ONE MODEL, GRADED BY WEIGHT (Erik, SNG-289: "i like grading deeds by weight,
+  //    reconcile the two that way").
+  //
+  //    This block used to send every weight-≥2 deed to EVERY community in the world at once. That is why
+  //    Silas Weir's real save shows deeds known in 91 communities out of 90 — everywhere — and why `spread`
+  //    could not carry information: if every recorded deed reaches all of them, the field distinguishes
+  //    nothing. `spreadDeeds` now owns it for the player exactly as it does for figures: ONE HOP PER PASS,
+  //    reach capped by the deed's weight, so a small deed stays in the settlement that saw it and a large
+  //    one crosses regions once it has been heard everywhere near.
+  //
+  //    ⛔ Magnitude, never merit (DIRECTIVE SNG-280): an atrocity travels exactly as far as a rescue of the
+  //    same size. ⚠️ Existing saves keep their over-spread deeds — rewriting a player's history to match a
+  //    new model is a retcon, not a migration.
+  {
+    const commsByRegion = {}, regionOfComm = {};
+    for (const loc of Object.values(content.locations || {})) {
+      const c = loc?.communityId, r = loc?.regionId || loc?.region || (loc?.communityId ? String(loc.communityId).split(".")[0] : null);
+      if (!c || !r) continue;
+      (commsByRegion[r] ||= []).includes(c) || commsByRegion[r].push(c);
+      regionOfComm[c] = r;
+    }
+    const ready = (character.deeds || []).filter(d => (currentDay - (d.day ?? 0)) >= NEWS_TRAVEL_DAYS);
+    const hops = spreadDeeds({ deeds: ready }, {
+      communitiesByRegion: commsByRegion, regionOfCommunity: regionOfComm, rng, rate: 1,
+    });
+    for (const h of hops) {
+      news.push(`Word has spread beyond its own valley, as far as ${String(h.to).split(".").pop()}: ${h.description}`);
+    }
   }
-
   // 3. SNG-191 §4 THE INVERSION — the world TURNS, it does not narrate. Advance the DELEGATED work
   //    (progress / stall / problem / done); never imagine what a worker was FEELING. News is DERIVED
   //    from what MOVED and only when it bears on the work (§4.3/§4.4); personal colour rides on the

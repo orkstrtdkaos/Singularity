@@ -22,6 +22,8 @@ import { renownScore } from "./recurrence.js";   // CCODE-85: the ladder's score
  *  Pure: takes the community graph and an rng, mutates only the deeds it is given, returns the hops made so a
  *  caller can credit them.
  */
+const allIn = (byRegion, home) => Object.values(byRegion).flat().filter(c => String(c).split(".")[0] === home);
+
 export function spreadDeeds(bearer, { communitiesByRegion = {}, regionOfCommunity = {}, rng = Math.random, rate = 0.35, maxAgeDays = null, worldDay = null } = {}) {
   const deeds = bearer?.deeds;
   if (!Array.isArray(deeds) || !deeds.length) return [];
@@ -34,8 +36,11 @@ export function spreadDeeds(bearer, { communitiesByRegion = {}, regionOfCommunit
     const capBy = { 1: 2, 2: 5, 3: 12 }[reach];
     if (d.spread.length >= capBy) continue;
     if (rng() >= rate) continue;
-    const home = regionOfCommunity[d.communityId] || null;
-    const near = (communitiesByRegion[home] || []).filter(c => c !== d.communityId && !d.spread.includes(c));
+    // ⚠️ FALL BACK TO THE NAMESPACE. Community ids are region-namespaced ("valley.millbrook"), and not
+    // every location record carries a `regionId` — a graph built only from that field leaves such deeds with
+    // no home and no neighbours, so they never travel and it looks like the model declined to move them.
+    const home = regionOfCommunity[d.communityId] || String(d.communityId).split(".")[0] || null;
+    const near = (communitiesByRegion[home] || allIn(communitiesByRegion, home)).filter(c => c !== d.communityId && !d.spread.includes(c));
     // A deed only leaves its region once it has been heard everywhere near, and only if it is big enough.
     const far = reach >= 3 && !near.length
       ? Object.entries(communitiesByRegion).filter(([r]) => r !== home).flatMap(([, cs]) => cs).filter(c => !d.spread.includes(c))

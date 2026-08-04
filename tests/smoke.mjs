@@ -332,11 +332,25 @@ check("same-day tick is a no-op", wanderer.worldState.news.length === 0);
 await runWorldTick({ character: wanderer, content: tickContent, currentDay: 14, evolveNpcs: null });
 check("event advances after stage days (12)", wanderer.worldState.eventStages.water_crisis.stage === 2);
 check("stage shift drifts the spectrum", wanderer.worldState.spectrumDrift.death_life < 0);
-check("big deed spread to other communities", wanderer.deeds[0].spread.includes("valley.harmonic_heights") && wanderer.deeds[0].spread.includes("valley.radiant_plateau"));
+// SNG-289 (Erik): ONE spread model, graded by weight. This asserted the old all-at-once behaviour — a deed
+// reaching two named communities in a single tick. Under the graded model a deed travels ONE HOP per pass,
+// so the test now asserts the model rather than a snapshot of the outcome: it moves, it moves LOCALLY first,
+// and it never lands twice in the same place.
+check("a big deed starts travelling (one hop per pass, not everywhere at once)", wanderer.deeds[0].spread.length === 1);
+check("…and the first hop is somewhere in its OWN region", /^valley\./.test(wanderer.deeds[0].spread[0] || ""));
 check("news generated for both", wanderer.worldState.news.length === 2);
 const unseen = takeUnseenNews(wanderer);
 check("unseen news delivered once", unseen.length === 2 && takeUnseenNews(wanderer).length === 0);
 check("news block for GM renders", newsForGM(wanderer).includes("First Sickness"));
+// SNG-289: the later-passes assertions sit BELOW the news counts on purpose — an extra tick adds news, and
+// running one before `news.length === 2` made a test about the spread model fail a test about the news.
+{
+  const before = wanderer.deeds[0].spread.length;
+  await runWorldTick({ character: wanderer, content: tickContent, currentDay: 21, evolveNpcs: null });
+  check("…and it keeps travelling on later passes", wanderer.deeds[0].spread.length > before);
+  check("…without ever being heard twice in the same place",
+    new Set(wanderer.deeds[0].spread).size === wanderer.deeds[0].spread.length);
+}
 await runWorldTick({ character: wanderer, content: tickContent, currentDay: 30, evolveNpcs: null });
 check("event advances again (12+15=27 < 30)", wanderer.worldState.eventStages.water_crisis.stage === 3);
 await runWorldTick({ character: wanderer, content: tickContent, currentDay: 200, evolveNpcs: null });
@@ -9844,9 +9858,11 @@ await (async () => {
   // ⚠️ CORRECTED. The player was ALREADY spread by `runWorldTick` (v0.5.0, three tests below gate it); I
   // added a second model without finding the first. The gate now asserts there is exactly ONE writer per
   // bearer rather than asserting my duplicate exists.
-  check("272/282: the player has exactly ONE spread writer, not two",
+  // SNG-289 (Erik): ONE model, graded by weight, for the player and for figures alike. The all-at-once
+  // block is gone — so there must be no second writer, and `spreadDeeds` must be the only one.
+  check("272/282: there is exactly ONE spread model, and it is the graded one",
     (() => { const w = readFileSync(join(root, "engine/worldtick.js"), "utf8");
-      return /deed\.spread = \[/.test(w) && !/spreadDeeds\(character,/.test(w); })());
+      return !/deed\.spread = \[/.test(w) && (w.match(/spreadDeeds\(/g) || []).length >= 2; })());
 
   check("272/282: …and spreadDeeds genuinely does not care what kind of bearer it is handed", (() => {
     const player = { name: "P", deeds: [{ communityId: "v.a", weight: 2, description: "x", spread: [] }] };

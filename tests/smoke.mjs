@@ -9365,7 +9365,7 @@ await (async () => {
     /const t = tierOf\(ws, f\);\s*\/\/ SNG-269\/2c: the EARNED rung/.test(wtSrc2)
     && /const t = tierOf\(ws, f\);\s*\/\/ SNG-269\/2c: earned rung/.test(wtSrc2));
   check("2c: contest wins are recorded for EVERY participant, not only the leader",
-    /for \(const e of won\) if \(ws\.figureTenure\[e\.f\.id\]\) ws\.figureTenure\[e\.f\.id\]\.wins\+\+/.test(wtSrc2));
+    /for \(const e of won\) \{ if \(ws\.figureTenure\[e\.f\.id\]\) ws\.figureTenure\[e\.f\.id\]\.wins\+\+; career\(ws, e\.f\.id\)\.wins\+\+; \}/.test(wtSrc2));
   check("2c: a minted figure's arcAffinity has the SHAPE `living` filters on, or it is invisible to the world",
     /arcAffinity: arcAffinity \? \{ arcId: arcAffinity/.test(wtSrc2));
 }
@@ -9922,6 +9922,55 @@ await (async () => {
   // ⚠️ An effect kind with no consumer must be VISIBLE as such, not silently inert.
   check("272/273: an effect kind with NO consumer is declared, not left looking live",
     AE.EFFECT_CONSUMERS.priceShift === null && !!AE.EFFECT_CONSUMERS.craftCost);
+}
+
+// --- SNG-288: seven roads to mythic -------------------------------------------------------------------
+{
+  const wt5 = await import("../engine/worldtick.js");
+  const doc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/arc_response.json"), "utf8"));
+  const PATHS = doc.tierLadder.mythicPaths;
+
+  check("272/288: all seven roads are authored and reachable by the engine", PATHS.length === 7);
+
+  // ⚠️ THE CAREER, NOT THE RUNG. tenure deeds/losses reset on promotion; these paths describe a whole life.
+  check("272/288: the paths read a CAREER that survives promotion", (() => {
+    const ws = {};
+    wt5.career(ws, "f").deeds = 500; wt5.career(ws, "f").losses = 40;
+    const t = (ws.figureTenure ||= {}); t.f = { tier: "legendary", sinceDay: 0, deeds: 0, losses: 0 };
+    return wt5.mythicPathFor(ws, "f", PATHS) !== null;   // qualifies on career despite a zeroed rung
+  })());
+
+  check("272/288: THE SURVIVOR requires a BAD record — a careful figure cannot walk it", (() => {
+    const survivor = PATHS.find(p => p.id === "the_survivor");
+    const ws = {}; const c = wt5.career(ws, "f");
+    c.deeds = 250; c.losses = 0; c.deaths = 0;   // spotless — must NOT qualify as the survivor
+    const spotless = wt5.mythicPathFor(ws, "f", [survivor]);
+    c.losses = 30;
+    const scarred = wt5.mythicPathFor(ws, "f", [survivor]);
+    return spotless === null && scarred?.id === "the_survivor";
+  })());
+
+  check("272/288: a death disqualifies THE SURVIVOR (never once killed is the point)", (() => {
+    const ws = {}; const c = wt5.career(ws, "f");
+    c.deeds = 250; c.losses = 30; c.deaths = 1;
+    return wt5.mythicPathFor(ws, "f", [PATHS.find(p => p.id === "the_survivor")]) === null;
+  })());
+
+  // ⛔ DIRECTIVE SNG-280 — without THE FEARED the top rung silently selects for virtue.
+  check("272/288: THE FEARED is reachable, so the top rung does not select for virtue", (() => {
+    const feared = PATHS.find(p => p.id === "the_feared");
+    const ws = {}; const c = wt5.career(ws, "f"); c.deeds = 200;
+    const bearer = { deeds: Array.from({ length: 24 }, (_, i) => ({ weight: -3, spread: [`c${i}`] })) };
+    return wt5.mythicPathFor(ws, "f", [feared], bearer)?.id === "the_feared";
+  })());
+  check("272/288: …and THE KEPT sits at the same order of difficulty (neither is the real one)", (() => {
+    const f = PATHS.find(p => p.id === "the_feared").condition.deeds;
+    const k = PATHS.find(p => p.id === "the_kept").condition.deeds;
+    return Math.abs(f - k) <= 60;
+  })());
+
+  check("272/288: WHICH ROAD was walked is recorded, not just that they arrived",
+    /path: viaPath\?\.id \|\| null/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8")));
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

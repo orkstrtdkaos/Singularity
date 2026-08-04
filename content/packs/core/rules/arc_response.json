@@ -65,12 +65,87 @@
     "_deedWeights": "⛔ DIRECTIVE SNG-280 — NO MORAL WEIGHTING. Everything CONTESTED AND WON scores the same, whichever direction it points: a Maw who levers three rivals rises exactly as fast as a guard who stops three knives. Aevi's first draft had guard 4 / strike-landed 2, justified as 'the behaviour most worth having'; Erik caught it as protection-over-aggression installed as physics, which would have locked the Maw, the Silencers and the Grave-Callers out of legendary. Weights reflect COST, DIFFICULTY, RISK and SCALE — never approval. heldThroughCrisis is 1 because it is not a contest, not because it is worth less. THE TEST for any change: would a tradition TAIL be disadvantaged?",
     "worldYearDays": 365,
     "_worldYearDays": "One world year. World time is real-time-derived (~1 world day per real hour), so a world year is roughly 365 hours of play.",
+    "mythicPaths": [
+          {
+                "id": "the_unbeaten",
+                "name": "The Unbeaten",
+                "condition": {
+                      "deeds": 120,
+                      "maxLosses": 0
+                },
+                "whatItMeans": "Never brought down. The original condition, kept — but now as ONE road rather than the gate.",
+                "note": "Deed gate LOWERED from 170 to 120: an unbeaten run is short by nature, because a long one is impossible. The condition and the threshold now agree."
+          },
+          {
+                "id": "the_survivor",
+                "name": "The Survivor",
+                "condition": {
+                      "deeds": 200,
+                      "minLosses": 25,
+                      "deaths": 0
+                },
+                "whatItMeans": "⚠️ ERIK'S CASE, AND THE BEST ONE. Beaten again and again and never once killed. The battlescars ARE the qualification — this path REQUIRES a heavy loss count, so it cannot be reached by a careful figure.",
+                "note": "Note the inversion: `minLosses`, not max. The Survivor is the only rung in the game where a bad record is the credential."
+          },
+          {
+                "id": "the_returned",
+                "name": "The Returned",
+                "condition": {
+                      "deeds": 100,
+                      "retrievedFromDeath": 1
+                },
+                "whatItMeans": "Died, and came back up the ladder. Rare by construction — retrieval is uncommon and being retrieved AS a legend more so.",
+                "note": "⚠️ TIES THE DEATH LADDER TO THE TIER LADDER: the retrieval crafts and the sealed-quest now have a promotion consequence."
+          },
+          {
+                "id": "the_prolific",
+                "name": "The Prolific",
+                "condition": {
+                      "deeds": 320
+                },
+                "whatItMeans": "Sheer volume. No perfect record, no dramatic death — just more done than anyone else, for longer.",
+                "note": "The path most figures will actually take, and the least glamorous. It should exist for exactly that reason."
+          },
+          {
+                "id": "the_turner",
+                "name": "Who Turned It",
+                "condition": {
+                      "deeds": 90,
+                      "arcStagesMoved": 2
+                },
+                "whatItMeans": "Moved a great arc twice. The smallest deed count of any path, because moving a world-arc stage is the largest single thing a figure can do.",
+                "note": "Pairs with the generative title 'Who Turned {ARC}'."
+          },
+          {
+                "id": "the_feared",
+                "name": "The Feared",
+                "condition": {
+                      "deeds": 180,
+                      "negativeWeightShare": 0.6,
+                      "spread": 20
+                },
+                "whatItMeans": "⚠️ REQUIRED BY DIRECTIVE_SNG-280. Known widely for deeds the world recorded as harm. The Maw, the Silencers and the Sealers reach mythic by THIS road, and it is exactly as valid as the others.",
+                "note": "Without this path the top rung silently selects for virtue, which is the failure the directive exists to prevent. Its threshold sits BETWEEN the Unbeaten and the Prolific — neither a discount nor a penalty."
+          },
+          {
+                "id": "the_kept",
+                "name": "The Kept",
+                "condition": {
+                      "deeds": 150,
+                      "guardsHeld": 15,
+                      "protectedDeaths": 0
+                },
+                "whatItMeans": "Everyone they stood over is still alive. Fifteen guards held and not one loss behind them.",
+                "note": "The counterweight to the Feared, and deliberately the SAME order of difficulty. Neither is the 'real' mythic."
+          }
+    ],
+    "_mythicPaths": "SNG-288 (Erik overturned the single condition): ANY ONE of these qualifies for mythic, and which one FIRED is recorded and said. `unbeaten` alone was not a high bar but an unsatisfiable one — at the measured 81% favourite win rate, forty contests without a loss is 0.02%. ⛔ DIRECTIVE SNG-280: THE FEARED exists so the top rung does not silently select for virtue, at the same order of difficulty as THE KEPT. ⚠️ These read a figure's CAREER, not their current rung — tenure deeds and losses reset on promotion, so THE SURVIVOR (a long bad record) would be unreachable if read per-rung.",
     "promotion": {
       "riffraff":  { "to": "notable",   "years": 0.05, "deeds": 4 },
       "notable":   { "to": "heroic",    "years": 0.10, "deeds": 10 },
       "heroic":    { "to": "epic",      "years": 0.20, "deeds": 22 },
       "epic":      { "to": "legendary", "years": 0.35, "deeds": 70 },
-      "legendary": { "to": "mythic",    "years": 0.60, "deeds": 170, "unbeaten": true }
+      "legendary": { "to": "mythic",    "years": 0.60, "paths": true }
     },
     "_promotion": "Time at rung PLUS what that rung is about. A new rung restarts the clock — you do not carry tenure upward. `unbeaten` means a single loss at legendary bars the mythic step, which is why mythic is rare rather than merely slow. A figure minted at riffraff needs ~7.5 unbroken world-years to reach legendary."
   }

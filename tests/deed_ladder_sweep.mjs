@@ -41,24 +41,38 @@ const CANDIDATES = [
 const RUNGS = ["riffraff", "notable", "heroic", "epic", "legendary"];
 const TO = { riffraff: "notable", notable: "heroic", heroic: "epic", epic: "legendary", legendary: "mythic" };
 
+// ⚠️ THE TOP RUNG IS NOT A DEED GATE ANY MORE. This used to stamp `unbeaten: true` on legendary, which
+// silently overrode the authored seven paths — the sweep printed mythics and an EMPTY path distribution,
+// because it was measuring the old single condition it had injected itself. The legendary rung now defers
+// to `paths`, so the sweep measures what the game actually runs.
 const ladderOf = (deeds) => Object.fromEntries(RUNGS.map((r, i) =>
-  [r, { to: TO[r], years: FLOORS[r], deeds: deeds[i], ...(r === "legendary" ? { unbeaten: true } : {}) }]));
+  [r, r === "legendary"
+    ? { to: TO[r], years: FLOORS[r], paths: true }
+    : { to: TO[r], years: FLOORS[r], deeds: deeds[i] }]));
 
 async function run(days, seed, promotion) {
   const character = { id: "sweep", name: "Sweep", currentLocationId: Object.keys(CONTENT.locations)[0],
     clock: { day: 1 }, worldState: null, npcRegistry: {}, codex: { topics: {} } };
   // inject the candidate ladder without touching authored content
+  // SNG-288: carry the authored mythic paths through, or the top rung has no roads and the sweep measures a
+  // ladder that stops at legendary.
   const content = { ...CONTENT, rules: { ...CONTENT.rules, tierLadder: { ...(CONTENT.rules.tierLadder || {}), promotion } } };
   let s = seed;
   const rng = () => (s = (s * 1103515245 + 12345) % 2147483648) / 2147483648;
   const t0 = Date.now();
   for (let d = 0; d < days; d += 7) {
     await advanceGeneratedOffscreen({ character, content, evolveFn: async () => ({}), rng, now: t0 + d * DAY_MS });
+    // Aevi: "report WHICH PATH fired — the distribution IS the real result." A rise is reported once, in the
+    // pass it happens, so it has to be collected here rather than read off the end state.
+    for (const r of (character.worldState?.arcStandings?.risen || [])) {
+      if (r.path) (character.worldState._mythicPaths ||= {})[r.path] = ((character.worldState._mythicPaths || {})[r.path] || 0) + 1;
+    }
   }
   const ws = character.worldState;
   const tiers = {};
   for (const t of Object.values(ws.figureTier || {})) tiers[t] = (tiers[t] || 0) + 1;
-  return { rises: Object.keys(ws.figureTier || {}).length, tiers, fell: (ws.arcStandings?.fallen || []).length };
+  return { rises: Object.keys(ws.figureTier || {}).length, tiers, fell: (ws.arcStandings?.fallen || []).length,
+    paths: ws._mythicPaths || {} };
 }
 
 const line = (label, rows) => {
@@ -83,7 +97,11 @@ for (const c of CANDIDATES) {
   for (let w = 0; w < WORLDS; w++) rows.push(await run(470, 3 + w * 17, ladderOf(c.deeds)));
   const myth = rows.filter(r => r.tiers.mythic).length;
   line(`${c.name}`, rows);
-  console.log(`  ${" ".repeat(16)} → mythic in ${myth}/${rows.length} worlds${myth > 0 && myth < rows.length ? "  ← SOME AND NOT OTHERS" : ""}`);
+  const byPath = {};
+  for (const r of rows) for (const [k, n] of Object.entries(r.paths || {})) byPath[k] = (byPath[k] || 0) + n;
+  const dist = Object.entries(byPath).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k} ${n}`).join(" · ");
+  console.log(`  ${" ".repeat(19)} → mythic in ${myth}/${rows.length} worlds${myth > 0 && myth < rows.length ? "  ← SOME AND NOT OTHERS" : ""}`);
+  if (dist) console.log(`  ${" ".repeat(19)}   paths fired: ${dist}`);
 }
 
 console.log("\nA REPORT — the ladder is Erik's and Aevi's to choose. This only says what each one does.");

@@ -828,6 +828,7 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
   }
   if (finalKind === "killed") {
     st.status = "dead"; st.diedWorldDay = worldDay; st.killedBy = winner.id;
+    career(ws, loser.id).deaths++;   // SNG-288: THE SURVIVOR asks for zero of these across a whole life
     // SNG-209: a killed legend ENTERS the death state (depth 0, fresh) — reachable, for a time — not deleted.
     // The clock (deepenDeaths) will sink them toward sealed if no one goes after them.
     enterDeathState(st, { diedDay: worldDay, cause: `killed by ${winner.name}` });
@@ -918,6 +919,24 @@ export function mintFigure(ws, { tier = "notable", name = null, epithet = null, 
   return fig;
 }
 
+/** SNG-288 — A CAREER, NOT A RUNG.
+ *
+ *  ⚠️ `figureTenure.deeds` and `.losses` RESET ON PROMOTION — they measure progress toward the NEXT rung,
+ *  which is exactly right for the ladder and exactly wrong for the mythic paths. Aevi's THE SURVIVOR is
+ *  "beaten again and again and never once killed": a whole life, not one rung of it. Read per-rung, a figure
+ *  who lost forty times across four rungs would show ten, and the path that is about a long bad record would
+ *  be unreachable by the very figures it describes.
+ *
+ *  So the career record is kept ALONGSIDE tenure and never cleared. It costs one object per figure.
+ */
+export function career(ws, id) {
+  ws.figureCareer = ws.figureCareer || {};
+  return (ws.figureCareer[id] ||= {
+    deeds: 0, losses: 0, wins: 0, deaths: 0, retrieved: 0,
+    stageMoves: 0, guards: 0, protectedDeaths: 0,
+    negWeight: 0, totalWeight: 0, spread: 0,
+  });
+}
 /** SNG-279 — DEEDS, NOT YEARS. Aevi measured the thing that mattered: the old ladder needed 15.5 world-years
  *  riffraff-to-mythic, which at ~3.14 world-hours per beat is roughly 2,200 player-hours. **No player would
  *  ever have seen a single promotion.** I built an entire earned-tier system that was, in play, invisible.
@@ -951,10 +970,60 @@ export function creditDeed(ws, figureId, by, { worldDay = 0, times = 1, playerIn
   const t = (ws.figureTenure[figureId] ||= { tier: null, sinceDay: worldDay, wins: 0, losses: 0 });
   const gained = DEED_WEIGHTS[by] * (Number(times) || 1);
   t.deeds = (t.deeds || 0) + gained;
+  // SNG-288: the same credit, kept for life. The rung forgets; the career does not.
+  const c = career(ws, figureId);
+  c.deeds += gained;
+  if (by === "stageMoved") c.stageMoves += (Number(times) || 1);
+  if (by === "guardIntercept") c.guards += (Number(times) || 1);
   // WHAT they did, kept for attribution — Aevi: "a rank that arrives without a reason is a number."
   t.deedLog = (t.deedLog || []).slice(-11).concat([{ by, worldDay, playerInvolved }]);
   if (playerInvolved) t.playerTouched = true;
   return gained;
+}
+/** SNG-288 — SEVEN ROADS TO MYTHIC. Erik overturned the single condition: *"losses isn't the right metric —
+ *  you could become mythical after suffering hundreds of losses but not dying. Mythical for a variety of
+ *  reasons is the right thrust."*
+ *
+ *  Aevi is right that this is the modes-and-tails insight applied to the top rung: `unbeaten` did not define
+ *  mythic, it defined ONE KIND of mythic and silently ruled out every other. And the arithmetic made it
+ *  unsatisfiable — at the measured 81% favourite win rate, forty contests without a loss is 0.02%.
+ *
+ *  ANY ONE PATH QUALIFIES. The rung stops being evaluative ("the best") and becomes descriptive ("the world
+ *  has a story about this person") — and WHICH road they walked is recorded, because "she was never brought
+ *  down" and "he has been brought down forty times and is still standing" are different people.
+ *
+ *  ⛔ DIRECTIVE SNG-280: THE FEARED exists so the top rung does not silently select for virtue. A figure
+ *  known widely for harm reaches mythic by that road, at the same order of difficulty as THE KEPT. Neither is
+ *  the real one.
+ *
+ *  Reads the CAREER, never the rung — see `career()` for why.
+ */
+export function mythicPathFor(ws, figureId, paths, bearer = null) {
+  const c = ws?.figureCareer?.[figureId];
+  if (!c || !Array.isArray(paths)) return null;
+  // Deed shape, for THE FEARED and its counterweight. Read off the bearer's own deed record when there is
+  // one; a figure with no recorded deeds simply cannot walk the roads that ask about their character.
+  const deeds = Array.isArray(bearer?.deeds) ? bearer.deeds : [];
+  const totalW = deeds.reduce((a, d) => a + Math.abs(Number(d.weight) || 0), 0);
+  const negW = deeds.reduce((a, d) => a + (Number(d.weight) < 0 ? Math.abs(Number(d.weight)) : 0), 0);
+  const negShare = totalW > 0 ? negW / totalW : 0;
+  const reach = new Set(deeds.flatMap(d => d.spread || [])).size;
+
+  for (const path of paths) {
+    const k = path?.condition || {};
+    if ((c.deeds || 0) < (k.deeds ?? 0)) continue;
+    if (k.maxLosses != null && (c.losses || 0) > k.maxLosses) continue;
+    if (k.minLosses != null && (c.losses || 0) < k.minLosses) continue;
+    if (k.deaths != null && (c.deaths || 0) > k.deaths) continue;
+    if (k.retrievedFromDeath != null && (c.retrieved || 0) < k.retrievedFromDeath) continue;
+    if (k.arcStagesMoved != null && (c.stageMoves || 0) < k.arcStagesMoved) continue;
+    if (k.guardsHeld != null && (c.guards || 0) < k.guardsHeld) continue;
+    if (k.protectedDeaths != null && (c.protectedDeaths || 0) > k.protectedDeaths) continue;
+    if (k.negativeWeightShare != null && negShare < k.negativeWeightShare) continue;
+    if (k.spread != null && reach < k.spread) continue;
+    return { id: path.id, name: path.name, why: path.whatItMeans || null };
+  }
+  return null;
 }
 /** SNG-269/2c — TIER IS EARNED, NOT AUTHORED. Erik: "the ones that stay the longest are the true legends."
  *
@@ -1007,7 +1076,14 @@ export function advanceStandings(ws, roster, worldDay, cfg = {}) {
     const deeds = t.deeds || 0;
     if (heldFor < (rule.years ?? 0)) continue;                    // the floor
     if (deeds < (rule.deeds ?? rule.wins ?? 0)) continue;         // the gate (`wins` kept for old configs)
-    if (rule.unbeaten && t.losses > 0) continue;
+    // SNG-288: the top rung is not one condition. Any of the seven roads qualifies, and which one is
+    // RECORDED — the distribution across paths is the thing worth knowing, and "never brought down" and
+    // "brought down forty times and still standing" must not read as the same person.
+    let viaPath = null;
+    if (rule.paths) {
+      viaPath = mythicPathFor(ws, f.id, cfg.mythicPaths || [], f);
+      if (!viaPath) continue;
+    } else if (rule.unbeaten && t.losses > 0) continue;
     // WHAT THEY DID, not just that it happened. Attribution is the requirement, not the garnish.
     const counts = {};
     for (const d of (t.deedLog || [])) counts[d.by] = (counts[d.by] || 0) + 1;
@@ -1021,8 +1097,8 @@ export function advanceStandings(ws, roster, worldDay, cfg = {}) {
     const causedByPlayer = !!t.playerTouched;
     ws.figureTier[f.id] = rule.to;
     ws.figureTenure[f.id] = { tier: rule.to, sinceDay: worldDay, wins: 0, losses: 0, deeds: 0, deedLog: [] };
-    out.push({ id: f.id, name: f.name, from: tier, to: rule.to, deeds, causedByPlayer,
-      why: top ? PHRASE[top[0]] || "what they have been doing" : "what they have been doing" });
+    out.push({ id: f.id, name: f.name, from: tier, to: rule.to, deeds, causedByPlayer, path: viaPath?.id || null,
+      why: viaPath?.name ? `— ${viaPath.name}` : (top ? PHRASE[top[0]] || "what they have been doing" : "what they have been doing") });
   }
   return out;
 }
@@ -1094,6 +1170,7 @@ export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg 
     const odds = Math.min(0.95, (byDepth[depth] ?? 0) + 0.05 * tierRank(tierOf(ws, who)));
     const won = rng() < odds;
     const res = resolveRetrieval(st, won ? "return" : "fail", { currentDay: worldDay, changed: won ? "came back changed" : null });
+    if (won) career(ws, id).retrieved++;   // SNG-288: THE RETURNED — ties the death ladder to the tier ladder
     attempts.push({ deadId: id, byId: who.id, byName: who.name, depth, odds: Math.round(odds * 100) / 100,
       outcome: res.ok ? res.outcome : "refused", sealed: !!st.deathState?.sealed });
   }
@@ -1413,8 +1490,8 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         if (res && !res.drawn) {
           ws.figureTenure = ws.figureTenure || {};
           const won = res.winner === aSide[0].f.id ? aSide : bSide, lost = won === aSide ? bSide : aSide;
-          for (const e of won) if (ws.figureTenure[e.f.id]) ws.figureTenure[e.f.id].wins++;
-          for (const e of lost) if (ws.figureTenure[e.f.id]) ws.figureTenure[e.f.id].losses++;
+          for (const e of won) { if (ws.figureTenure[e.f.id]) ws.figureTenure[e.f.id].wins++; career(ws, e.f.id).wins++; }
+          for (const e of lost) { if (ws.figureTenure[e.f.id]) ws.figureTenure[e.f.id].losses++; career(ws, e.f.id).losses++; }
           // SNG-279: a contest won is a DEED, credited to everyone who was in it — the allies were in the
           // same fight. `playerInvolved` when the player is pushing this same arc: their weight is part of
           // what made the win possible, and a rise it causes should be able to say so.

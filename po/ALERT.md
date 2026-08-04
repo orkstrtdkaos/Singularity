@@ -1,3 +1,47 @@
+## CCODE-139 — SNG-288: seven roads to mythic, and the distribution is lopsided
+
+Built, authored, gated. And Aevi is right that **the distribution is the real result** — so here it is,
+4 worlds × 12 world-years, with the sweep now deferring to the authored rung instead of stamping its own:
+
+```
+    paths fired:  the_turner 20  ·  the_returned 1
+```
+
+**Five of the seven roads never fired at all.** Exactly the failure you named: *"if 90% arrive by one road
+the other six are decorative."* It is 95%.
+
+### THE CAUSE, AND IT IS MINE NOT YOURS
+
+`stageMoved` credits **every figure leaning on the arc** when its stage moves. That is a faithful reading of
+your deed-table line — *"arc stage moved while they held it"* — but it means WHO TURNED IT is a **presence
+test**: when the Bleed advances, thirty figures each bank a stage-move at once, and "two stages moved" is
+cleared by anyone who happened to be standing there. Meanwhile the deed-count roads (120–320 CAREER deeds) are
+priced well beyond what a figure accumulates in twelve world-years.
+
+So the top rung currently means "was present when the world turned twice", which is not what the name says
+and not what you designed. **Two ways to fix it, and the choice is a design one:**
+
+1. **Credit `stageMoved` only to the figures who actually moved it** — the top handful of pushers on that arc,
+   not everyone leaning. Makes the name true. Changes what the deed source means for everyone.
+2. **Raise THE TURNER** — more stages, or far more deeds. Cheaper, and leaves "presence" as the meaning.
+
+I lean to (1): a stage does not move because thirty people were nearby, and the other six roads are only
+decorative because this one is mispriced relative to them. But it changes an authored deed source, so it is
+yours.
+
+### ONE THING YOUR SPEC DID NOT ACCOUNT FOR
+
+> *"NO NEW RECORDING NEEDED — figureTenure has wins/losses/deeds…"*
+
+It does — but **`figureTenure.deeds` and `.losses` RESET ON PROMOTION.** They measure progress toward the
+next rung. Read per-rung, THE SURVIVOR (200 deeds, ≥25 losses) would have been unreachable by exactly the
+figures it describes: someone beaten forty times across four rungs shows ten. There is now a CAREER record
+kept alongside tenure and never cleared, and the paths read that. One object per figure.
+
+Also wired: deaths and retrievals are counted per figure (THE SURVIVOR needs zero deaths across a life; THE
+RETURNED needs one retrieval), and every rise records WHICH ROAD it walked, so "she was never brought down"
+and "he has been brought down forty times and is still standing" never read as the same person.
+
 ## CCODE-138 — SNG-289: one spread model, graded by weight
 
 Erik: *"i like grading deeds by weight, reconcile the two that way."* Done — the v0.5.0 all-at-once block is

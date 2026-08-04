@@ -273,6 +273,18 @@ const LEDGER = [
     note: "THE 2.0.0 BLOCKER. A stage carried publicFace and pressureOnAdvance, both narration, so 66 figures of attention, contests and casualties resolved into a number that changed a SENTENCE. Aevi authored 54 effects across 18 stages; 4 of her 5 kinds had a real consumer, and the testOnlyExports ratchet caught me shipping `encounterBias` unwired before it reached HEAD. ⚠️ `priceShift` has NONE — no module in this engine computes a price — so its 11 effects are inert, declared in `EFFECT_CONSUMERS` rather than left looking live.",
   },
   {
+    id: "SNG-288", ask: "losses isn’t the right metric — mythical for a variety of reasons is the right thrust",
+    how: "worldtick.js:career + mythicPathFor — seven roads, any one qualifies, and which one fired is recorded",
+    gates: ["272/288: all seven roads are authored and reachable by the engine",
+            "272/288: the paths read a CAREER that survives promotion",
+            "272/288: THE SURVIVOR requires a BAD record — a careful figure cannot walk it",
+            "272/288: a death disqualifies THE SURVIVOR (never once killed is the point)",
+            "272/288: THE FEARED is reachable, so the top rung does not select for virtue",
+            "272/288: …and THE KEPT sits at the same order of difficulty (neither is the real one)",
+            "272/288: WHICH ROAD was walked is recorded, not just that they arrived"],
+    note: "⚠️ THE DISTRIBUTION IS THE RESULT, and it is lopsided: over 4 worlds × 12 world-years, THE TURNER fired 20 times and THE RETURNED once. The other five roads never fired at all. Cause: `stageMoved` credits EVERY figure leaning on an arc when its stage moves, so ‘two stages moved’ is a presence test that dozens clear at once, while the deed-count roads (120–320 career deeds) are priced beyond what the sim reaches. Also required a CAREER record — tenure deeds/losses reset on promotion, so THE SURVIVOR would have been unreachable by exactly the figures it describes.",
+  },
+  {
     id: "SNG-267", ask: "the player is just one of many — so we need the world to live without the player",
     how: "tests/player_impact.mjs — the same worlds run with and without parties",
     gates: [],

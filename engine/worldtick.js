@@ -579,6 +579,26 @@ export function affinitiesOf(figure) {
   return list;
 }
 
+/** SNG-275 — WHAT A FIGURE DOES WITH THEIR OWN TIME.
+ *
+ *  ⛔ THE ENGINE DOES NOT INVENT A LIFE. Giving Neth a brother the author never wrote is the same class of
+ *  error as naming a minted figure: it is authorship, and an invented family member becomes canon the moment
+ *  a narrator says it aloud. So this reads ONLY authored fields and returns null when there are none — the
+ *  attention is still withheld from the arcs (the mechanic works on day one), there is simply nothing to say
+ *  about where it went.
+ *
+ *  The gap is MEASURED rather than papered over: `ws.personalCoverage` counts how many living figures have a
+ *  life on the page and how many do not, so the hole is a number Aevi can work from instead of a silence.
+ */
+export function personalPursuitOf(figure, rng = Math.random) {
+  const pool = [
+    ...(Array.isArray(figure?.personalVerbs) ? figure.personalVerbs : []),
+    ...(Array.isArray(figure?.interests) ? figure.interests : []),
+    ...(Array.isArray(figure?.kin) ? figure.kin.map(k => typeof k === "string" ? k : k?.line).filter(Boolean) : []),
+  ].filter(v => typeof v === "string" && v.trim());
+  if (!pool.length) return null;
+  return pool[Math.floor(rng() * pool.length)];
+}
 /** CCODE-111 — WHERE THIS FIGURE SPENDS ITSELF THIS PASS.
  *
  *  Urgency per care is the CCODE-106 term: how far that arc has run AGAINST them. Their PRIMARY want breaks
@@ -588,7 +608,8 @@ export function affinitiesOf(figure) {
  *  Returns the cares they will act on, each with the share of attention it gets. Everything else is a seat
  *  they left, and `unattended` names those so the caller can report the cost of the choice rather than
  *  leaving it invisible. */
-export function spendAttention(figure, ws, { budget = 1, perPoint = 0.12, wantArcId = null } = {}) {
+export function spendAttention(figure, ws, { budget = 1, perPoint = 0.12, wantArcId = null,
+                                            personalShare = 0.4, crisisPull = 1.5 } = {}) {
   const cares = affinitiesOf(figure);
   if (!cares.length) return { spent: [], unattended: [] };
   const net = ws?.arcNetPush || {};
@@ -611,13 +632,32 @@ export function spendAttention(figure, ws, { budget = 1, perPoint = 0.12, wantAr
   // diminished presence on the next one down — which is exactly how a heroic figure at 0.5 works: present
   // everywhere they choose, decisive nowhere. Four of them together outweigh a legend, which is Erik's
   // ganging-up: it falls out of the arithmetic rather than needing a rule.
+  // SNG-275 — THE ARCS DO NOT GET ALL OF SOMEBODY.
+  //
+  // Erik: "the Arcs don't necessarily consume all the attention for the NPCs. They probably spend a fair
+  // amount of time just living their lives or pursuing their own interests — hobbies, interests, their own
+  // relationships or family to attend to."
+  //
+  // Until now every point of every figure's budget went to arcs, which quietly said that a person IS their
+  // position on the valley's five arguments. Neth is a teacher who buries the unmourned; she also, presumably,
+  // eats dinner with someone. A PERSONAL CLAIM is held back before the arcs are served.
+  //
+  // ⚠️ AND A CRISIS CAN BORROW IT — which is the part that makes this a story rather than a subtraction.
+  // When one care has run hard enough against a figure, they spend their own life on it: they stop going home.
+  // That is recorded (`neglected`), because a legend who has not been home in a season is a fact the world
+  // should be able to say out loud, and it is the kind of cost that cannot be paid twice without someone
+  // noticing.
   const b = Math.max(0, Number(budget) || 0);
-  const whole = Math.floor(b);
-  const partial = b - whole;
+  const claim = Math.max(0, Math.min(1, Number(personalShare) || 0)) * b;
+  const crisis = scored.length > 0 && scored[0].pull >= crisisPull;
+  const forArcs = crisis ? b : Math.max(0, b - claim);
+
+  const whole = Math.floor(forArcs);
+  const partial = forArcs - whole;
   const spent = scored.slice(0, whole).map(s => ({ ...s, share: 1 }));
   if (partial > 0.001 && scored.length > whole) spent.push({ ...scored[whole], share: partial });
   const unattended = scored.slice(spent.length).map(s => s.care.arcId);
-  return { spent, unattended };
+  return { spent, unattended, personal: crisis ? 0 : claim, neglected: crisis };
 }
 
 export function applyEpicArcPush(ws, figure, worldDay, urgency = 1) {
@@ -1097,13 +1137,31 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       else if (r.sealed) news.push({ text: `${r.byName || "Someone"} reached too deep and lost them for good. That road is closed now.`, worldDay: currentWorldDay, tier: "event" });
     }
 
+    // SNG-275 — the personal claim. Dials live in content beside the rest of the attention model.
+    const personalShare = Number.isFinite(cfg.personalShare) ? cfg.personalShare : 0.4;
+    const crisisPull = Number.isFinite(cfg.crisisPull) ? cfg.crisisPull : 1.5;
+    const personalBeats = [];      // figures whose own life is ON THE PAGE this pass
+    const neglectedLives = [];     // …and the ones who spent it on a crisis instead
+    let livesLived = 0, livesOnThePage = 0;
+
     const vacated = {};
     const leaning = {};   // CCODE-113: arcId -> who is pushing which way this pass
     for (const f of living) {
       const wantArc = f.wantArcId || f.legend?.wantArcId || null;
-      const { spent, unattended } = spendAttention(f, { arcNetPush: netBefore },
+      const { spent, unattended, personal, neglected } = spendAttention(f, { arcNetPush: netBefore },
         // A front spent in the dark is a front not spent on an arc — the cost that makes it a decision.
-        { budget: Math.max(0, budgetFor(f) - (retrievers.has(f.id) ? 1 : 0)), perPoint, wantArcId: wantArc });
+        { budget: Math.max(0, budgetFor(f) - (retrievers.has(f.id) ? 1 : 0)), perPoint, wantArcId: wantArc,
+          // SNG-275: and a share is not the arcs' to spend at all — a person is not only their position on
+          // the valley's five arguments. A crisis can borrow it; that borrowing is recorded, not free.
+          personalShare, crisisPull });
+      if (personal > 0) {
+        const pursuit = personalPursuitOf(f, rng);
+        livesLived++;
+        if (pursuit) { livesOnThePage++; personalBeats.push({ id: f.id, name: f.name, pursuit }); }
+      } else if (neglected) {
+        // the care they are spending themselves on is the one they actually took this pass
+        neglectedLives.push({ id: f.id, name: f.name, arcId: spent[0]?.care?.arcId ?? null });
+      }
       for (const arcId of unattended) vacated[arcId] = (vacated[arcId] || 0) + 1;
       for (const s of spent) {
         const against = -Math.sign(s.care.dir) * (Number(netBefore[s.care.arcId]) || 0);
@@ -1312,6 +1370,18 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block
     // (and any future readout) should be able to say WHY an arc moved when nobody won anything.
     ws.arcVacancies = vacated;
+    // SNG-275 — THE COVERAGE IS THE ASK. `lived` is how many figures kept their own time this pass;
+    // `onThePage` is how many of those had anything AUTHORED to spend it on. The gap between the two is
+    // exactly the content Aevi has yet to write, stated as a number rather than left as a silence.
+    ws.personalCoverage = { lived: livesLived, onThePage: livesOnThePage, neglected: neglectedLives.length };
+    ws.personalBeats = personalBeats;
+    ws.neglectedLives = neglectedLives;
+    for (const b of personalBeats.slice(0, 3)) {
+      news.push({ text: `${b.name} ${b.pursuit}`, worldDay: currentWorldDay, tier: "murmur" });
+    }
+    for (const n of neglectedLives.slice(0, 2)) {
+      news.push({ text: `${n.name} has not been seen at home in a long while — whatever is happening has all of them.`, worldDay: currentWorldDay, tier: "murmur" });
+    }
 
     // SNG-269/2c — WHO ROSE. Erik: "the ones that stay the longest are the true legends." Run after the
     // pass's contests so this year's wins count toward this year's standing.

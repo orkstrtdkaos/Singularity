@@ -9435,27 +9435,29 @@ await (async () => {
   // CCODE-111 — attention is a DECISION, and the seat you leave is NAMED rather than silently dropped.
   check("272/111: a figure with more cares than budget LEAVES one, and the seat it left is named", (() => {
     const f = { id: "f", arcAffinities: [care("a"), care("b"), care("c")] };
-    const { spent, unattended } = wt.spendAttention(f, {}, { budget: 1 });
+    const { spent, unattended } = wt.spendAttention(f, {}, { budget: 1, personalShare: 0 });
     return spent.length === 1 && unattended.length === 2;
   })());
 
   // CCODE-112 — tiered budgets, and Erik's ganging-up falling out of the arithmetic.
+  // ⚠️ `personalShare: 0` ISOLATES THE VARIABLE. SNG-275 reserves part of every budget for a figure's own
+  // life, so these read the arc split only — the personal claim has its own gates below.
   check("272/112: budget is TIERED — a legend holds more fronts than a heroic", (() => {
     const f = { id: "f", arcAffinities: [care("a"), care("b"), care("c")] };
-    const legend = wt.spendAttention(f, {}, { budget: 2 }).spent.length;
-    const heroic = wt.spendAttention(f, {}, { budget: 0.5 }).spent.length;
+    const legend = wt.spendAttention(f, {}, { budget: 2, personalShare: 0 }).spent.length;
+    const heroic = wt.spendAttention(f, {}, { budget: 0.5, personalShare: 0 }).spent.length;
     return legend === 2 && heroic === 1;
   })());
   check("272/112: a fractional budget buys whole fronts first, then a share of one", (() => {
     const f = { id: "f", arcAffinities: [care("a"), care("b"), care("c")] };
-    const { spent } = wt.spendAttention(f, {}, { budget: 2.5 });
+    const { spent } = wt.spendAttention(f, {}, { budget: 2.5, personalShare: 0 });
     return spent.length === 3 && spent[0].share === 1 && spent[1].share === 1
       && Math.abs(spent[2].share - 0.5) < 1e-9;
   })());
   check("272/112: four heroics outweigh one legend — ganging up is arithmetic, not a rule", (() => {
     const f = { id: "f", arcAffinities: [care("a")] };
-    const legend = wt.spendAttention(f, {}, { budget: 2 }).spent[0].share;
-    const heroic = wt.spendAttention(f, {}, { budget: 0.5 }).spent[0].share;
+    const legend = wt.spendAttention(f, {}, { budget: 2, personalShare: 0 }).spent[0].share;
+    const heroic = wt.spendAttention(f, {}, { budget: 0.5, personalShare: 0 }).spent[0].share;
     return heroic * 4 > legend;
   })());
 
@@ -9548,6 +9550,87 @@ await (async () => {
     claimed.length > 0 && missing.length === 0);
   check(`272: every 272/ gate in this suite is claimed by the ledger (${own.length} present)${orphans.length ? " — UNCLAIMED: " + orphans.join(" | ") : ""}`,
     orphans.length === 0);
+}
+
+// --- SNG-275: the arcs do not get all of somebody ----------------------------------------------------
+{
+  const wt2 = await import("../engine/worldtick.js");
+  const c = (arcId, dir = 1, weight = 1) => ({ arcId, dir, weight });
+  const quiet = { arcNetPush: {} };
+
+  check("272/275: a share of every figure is NOT the arcs' to spend", (() => {
+    const f = { id: "f", arcAffinities: [c("a"), c("b")] };
+    const r = wt2.spendAttention(f, quiet, { budget: 2, personalShare: 0.5 });
+    return r.personal === 1 && r.spent.length === 1;
+  })());
+
+  check("272/275: at personalShare 0 the old behaviour is bit-identical (the dial degrades safely)", (() => {
+    const f = { id: "f", arcAffinities: [c("a"), c("b")] };
+    const r = wt2.spendAttention(f, quiet, { budget: 2, personalShare: 0 });
+    return r.personal === 0 && r.spent.length === 2;
+  })());
+
+  check("272/275: a CRISIS borrows the personal claim — and the borrowing is RECORDED, not free", (() => {
+    const f = { id: "f", arcAffinities: [c("burning", 1, 2)] };
+    const onFire = { arcNetPush: { burning: -60 } };
+    const r = wt2.spendAttention(f, onFire, { budget: 1, personalShare: 0.5, crisisPull: 1.5 });
+    return r.neglected === true && r.personal === 0;
+  })());
+
+  check("272/275: an ordinary pass is NOT a crisis (or neglect would mean nothing)", (() => {
+    const f = { id: "f", arcAffinities: [c("a")] };
+    const r = wt2.spendAttention(f, quiet, { budget: 1, personalShare: 0.5, crisisPull: 1.5 });
+    return r.neglected === false && r.personal === 0.5;
+  })());
+
+  // ⛔ THE ENGINE DOES NOT INVENT A LIFE. An unauthored figure gets no fabricated family.
+  check("272/275: personal time reads AUTHORED content and invents nothing", (() => {
+    const bare = wt2.personalPursuitOf({ id: "x", name: "X", wants: "something", role: "Master" });
+    const written = wt2.personalPursuitOf({ id: "y", personalVerbs: ["mends the long net"] }, () => 0);
+    return bare === null && written === "mends the long net";
+  })());
+
+  check("272/275: the CONTENT GAP is measured, not papered over",
+    /ws\.personalCoverage = \{ lived: livesLived, onThePage: livesOnThePage/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8")));
+
+  // SNG-275 — and the dials are REACHABLE at last.
+  check("272/275: the world-sim dials are AUTHORED, not just read (21 of them ran on fallbacks)", (() => {
+    const doc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/arc_response.json"), "utf8"));
+    const a = doc.arcResponse || {};
+    const needed = ["perPoint", "attentionByTier", "personalShare", "crisisPull", "directEngagementRate",
+                    "indirectPushMult", "casualtyRate", "casualtyReachByGap", "strikeRate",
+                    "guardInterceptChance", "mintRate", "mintCap", "vacancyStreakForMint",
+                    "retrievalRate", "retrievalOddsByDepth", "retrievalCooldownDays"];
+    return needed.every(k => a[k] !== undefined) && !!doc.tierLadder?.promotion?.epic;
+  })());
+  check("272/275: the tier table carries BOTH names for the same rung (one name drops 28 figures)", (() => {
+    const doc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/arc_response.json"), "utf8"));
+    const t = doc.arcResponse.attentionByTier;
+    return t.heroic === t.regional && t.heroic !== undefined;
+  })());
+}
+
+// --- SNG-272 (Aevi): a record nothing FINDS ----------------------------------------------------------
+{
+  const appBg = readFileSync(join(root, "app.js"), "utf8");
+  const bgDoc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/backgrounds.json"), "utf8"));
+  const bgs = bgDoc.backgrounds || bgDoc;
+
+  check("272/bg: every authored background id is snake_case (the whole defect was one hyphen)",
+    Array.isArray(bgs) && bgs.length > 0 && bgs.every(b => /^[a-z0-9_]+$/.test(b.id)));
+
+  check("272/bg: every background still carries the mechanics the sheet promises",
+    bgs.every(b => Array.isArray(b.affinity) && Array.isArray(b.grantsAptitudes)));
+
+  check("272/bg: a legacy hyphenated id is REPAIRED on read, so existing saves heal",
+    /const normalised = String\(id\)\.replace\(\/-\/g, "_"\)/.test(appBg));
+
+  // ⚠️ THE REAL DEFECT WAS `|| {}` — a miss that renders a plausible sentence instead of failing.
+  check("272/bg: a total miss is LOUD, not a plausible sentence",
+    /matches NO authored background/.test(appBg));
+
+  check("272/bg: the tooltip goes through the ONE reader, not a second private lookup",
+    !/\(CONTENT\.backgrounds \|\| \[\]\)\.find\(b => b\.id === id\) \|\| \{\}/.test(appBg));
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

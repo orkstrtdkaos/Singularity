@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "id": "arc_response",
+  "kind": "rules",
+  "note": "SNG-275 — THE WORLD-SIMULATION DIALS. Every number the offscreen world runs on, in one place, turnable without touching engine source.",
+  "howToRead": "⚠️ THIS FILE DID NOT EXIST UNTIL 2026-08-04, and the engine had read `rules.arcResponse` for weeks. It was always undefined, so every dial below silently ran on its hardcoded fallback and NOBODY COULD TURN ANY OF THEM. CCode kept saying 'that's the dial, the number is Erik's call' about a block that was not there — a reader with no writer, which is the fourth door of the PromisedButUnread family and exactly what `promise_sweep` exists to catch. Every value here is set to the fallback it replaces, so authoring it changed NO behaviour; it only made the behaviour reachable.",
+
+  "arcResponse": {
+    "_section": "RESPONSIVENESS — how hard a figure pushes when an arc runs against them (CCODE-106).",
+    "perPoint": 0.12,
+    "_perPoint": "Urgency gained per point an arc has run AGAINST a figure. Higher = the world reacts harder to a side winning; at 0 nobody ever notices they are losing.",
+    "maxMult": 2.0,
+    "_maxMult": "Nobody pushes infinitely hard, however badly it is going.",
+    "minMult": 0.4,
+    "_minMult": "…and a winning side never fully stops pushing.",
+
+    "_section2": "ATTENTION — a figure is a budget, and every pass is a decision (CCODE-111/112, SNG-275).",
+    "attentionBudget": 1,
+    "_attentionBudget": "Fallback for a figure whose tier is not in the table below.",
+    "attentionByTier": { "mythic": 3, "legendary": 2, "epic": 1, "heroic": 0.5, "regional": 0.5, "notable": 0.5, "riffraff": 0.25 },
+    "_attentionByTier": "Erik: 'a Legend can push a couple fronts — average is 2, an epic's average is 1, heroic could have .5 or so.' A fractional budget buys whole fronts first, then a partial share of one, so a heroic is present everywhere they choose and decisive nowhere. Four of them outweigh a legend, which is Erik's ganging-up falling out of the arithmetic. ⚠️ `regional` and `heroic` MUST both appear — they are the same rung under two names and a table carrying one silently drops 28 figures.",
+    "personalShare": 0.4,
+    "_personalShare": "SNG-275 (Erik): 'the Arcs don't necessarily consume all the attention for the NPCs — they probably spend a fair amount of time just living their lives.' The fraction held back for hobbies, interests, relationships, family. At 0 a person IS their position on the valley's five arguments; at 1 nobody tends them at all.",
+    "crisisPull": 1.5,
+    "_crisisPull": "…and the pull at which a figure spends their own life on a care anyway — they stop going home. Recorded as `neglectedLives`, never free. LOWER means more figures in crisis: at 1.5 a probe world-year had 20 of 67 neglecting their own lives, which may well be too many. This is the dial for that.",
+
+    "_section3": "THE FIGHTING — who fights, who works, and what it costs (CCODE-113/115/117/118).",
+    "directEngagementRate": 0.35,
+    "_directEngagementRate": "The share of committed figures who seek a CONFRONTATION rather than quietly getting on with it. The most urgent go first. At 0 the valley argues and never comes to blows.",
+    "indirectPushMult": 0.8,
+    "_indirectPushMult": "What a worker's push is worth against a fighter's. Below 1 so that working is the safe, small, certain option — a won fight moves an arc more than a season of work; a lost one moves it less than doing nothing.",
+    "casualtyRate": 0.15,
+    "_casualtyRate": "Chance a decisive arc-fight reaches the injury model at all. At 0 the arcs are bloodless and nobody ever dies over them.",
+    "casualtyReachByGap": { "2": 4, "1": 2, "0": 1 },
+    "_casualtyReachByGap": "Erik: 'a legend might be able to kill 3-4 heros and 1-2 epics per battle.' How many of the losing side a victor can go through, by rank gap. Two rungs down reaches four; a peer reaches one.",
+
+    "_section4": "THE QUIET WORK — strikes and the people who stand over the marked (SNG-270).",
+    "strikeRate": 0.12,
+    "_strikeRate": "Chance per pass that a side sends someone at the other side's most valuable WORKER. This is the only mechanic that reaches the population combat structurally cannot — heroics doing quiet work are the safest people in the valley without it.",
+    "guardInterceptChance": 0.45,
+    "_guardInterceptChance": "Chance a defender standing over the mark turns the strike aside. Standing still is its own cost: they are not pushing while they watch.",
+
+    "_section5": "THE ROSTER — how the world refills what it loses (SNG-269).",
+    "mintRate": 0.5,
+    "_mintRate": "Chance a death produces each of its two possible figures — the one who survived it (riffraff) and the one who took the empty chair (notable). At 0 the roster only ever shrinks; a long-simulated world empties out.",
+    "mintCap": 140,
+    "_mintCap": "A hard ceiling on minted figures so a runaway loop cannot flood the valley.",
+    "vacancyStreakForMint": 8,
+    "_vacancyStreakForMint": "Consecutive passes an arc must go COMPLETELY unheld before a local steps into it. ⚠️ Do not lower this far — a single-pass vacancy is not rare, and minting on it is a feedback loop that produced 140 figures against 6 deaths.",
+
+    "_section6": "THE ROAD BACK — going after your own dead (SNG-270, on the SNG-209 death ladder).",
+    "retrievalRate": 0.25,
+    "_retrievalRate": "Chance per pass that someone who shared a care with the dead goes after them. They pay a FRONT to do it — the arc they would have held goes unheld. At 0 the dead simply sink until they seal and nobody ever comes.",
+    "retrievalOddsByDepth": { "0": 0.7, "1": 0.45, "2": 0.2, "3": 0 },
+    "_retrievalOddsByDepth": "Odds of success at each rung of the death ladder: the threshold · the near dark · the deep dark · the sealed. Failing sinks them further, and a failed reach at the deep dark seals them for good — which is what makes leaving someone in the dark a real choice too. The sealed refuse every road; that entry should stay 0.",
+    "retrievalCooldownDays": 30,
+    "_retrievalCooldownDays": "How long before anyone may reach for the same person again. The waiting is the most askable state there is: they cannot try again yet, and the clock is running."
+  },
+
+  "tierLadder": {
+    "_section": "PROMOTION — tier as an EARNED position (SNG-269/2c). Erik: 'the ones that stay the longest are the true legends.'",
+    "worldYearDays": 365,
+    "_worldYearDays": "One world year. World time is real-time-derived (~1 world day per real hour), so a world year is roughly 365 hours of play.",
+    "promotion": {
+      "riffraff":  { "to": "notable",   "years": 0.5, "wins": 0 },
+      "notable":   { "to": "heroic",    "years": 1,   "wins": 1 },
+      "heroic":    { "to": "epic",      "years": 2,   "wins": 2 },
+      "epic":      { "to": "legendary", "years": 4,   "wins": 4 },
+      "legendary": { "to": "mythic",    "years": 8,   "wins": 8, "unbeaten": true }
+    },
+    "_promotion": "Time at rung PLUS what that rung is about. A new rung restarts the clock — you do not carry tenure upward. `unbeaten` means a single loss at legendary bars the mythic step, which is why mythic is rare rather than merely slow. A figure minted at riffraff needs ~7.5 unbroken world-years to reach legendary."
+  }
+}

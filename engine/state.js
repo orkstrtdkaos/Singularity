@@ -59,7 +59,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, encountersRule, coliseumGrid] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, arcResponseRule, encountersRule, coliseumGrid] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -77,6 +77,7 @@ export async function loadContent() {
     loadRule("class_archetypes", null),                                 // SNG-192 §4: soft archetype lenses (role × reach) for the creation front door
     loadRule("repair_panel_manifest", null),                            // SNG-207 §6.2: the authoritative Repair-panel capability list, for the GM's context (no hallucinated controls)
     loadRule("craft_mechanics", { families: {}, familyDefaults: {} }),   // SNG-263: what each verb-family DOES + the magnitudes an unauthored craft inherits
+    loadRule("arc_response", null),                                    // SNG-275: the world-sim dials — 21 of them, unauthorable until now
     loadRule("encounters", null),                                       // SNG-271/1a: the XP table — unregistered since forever, so every encounter paid ZERO
     loadRule("coliseum_grid", { cells: [] })                             // SNG-149/CCODE-89: the Great Coliseum's blind grid — 36 authored cells the engine now reads
   ]);
@@ -86,6 +87,12 @@ export async function loadContent() {
   // entry and `?? 0` paid nothing. The promoted file supersedes the inline block and adds the `default` rung,
   // so an unknown type falls back instead of silently paying zero. Merged here — not merely fetched — because
   // a loaded-but-unread value is the same bug one layer up.
+  // SNG-275 — THE DIALS BECOME REACHABLE. The engine read `rules.arcResponse` and `rules.tierLadder` for
+  // weeks; neither existed in any pack, so all 21 numbers ran on hardcoded fallbacks and no one could turn
+  // one without editing engine source. A reader with no writer — the fourth door. The file is authored at
+  // exactly the old fallbacks, so this merge changes no behaviour; it only makes the behaviour reachable.
+  if (arcResponseRule?.arcResponse) rules.arcResponse = { ...(rules.arcResponse || {}), ...arcResponseRule.arcResponse };
+  if (arcResponseRule?.tierLadder) rules.tierLadder = { ...(rules.tierLadder || {}), ...arcResponseRule.tierLadder };
   if (encountersRule) rules.encounters = { ...(rules.encounters || {}), ...encountersRule };
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;

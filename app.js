@@ -76,7 +76,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.1";
+const APP_VERSION = "1.9.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3086,7 +3086,31 @@ function backgroundOptionsHTML(selectedId) {
     bgs.filter(b => b.category === cat).map(b => `<option value="${esc(b.id)}" ${selectedId === b.id ? "selected" : ""}>${esc(b.name)}</option>`).join("")
   }</optgroup>`).join("");
 }
-function backgroundById(id) { return (CONTENT.backgrounds?.length ? CONTENT.backgrounds : backgroundsFallback()).find(b => b.id === id) || null; }
+// SNG-272 (Aevi) — A RECORD NOTHING FINDS. The twin of PromisedButUnread: that was a field nothing READ,
+// this is an id that resolves to nothing. A character carries `community-organizer`; every authored id is
+// snake_case (`organizer`), so `.find(...)` returned undefined and `|| {}` turned it into a plausible
+// sentence. It failed SILENTLY AND DIFFERENTLY in four places at once — the tooltip printed "no fixed
+// challenge affinity", the SOCIAL challenge edge never applied, `grantsAptitudes` never fired so the
+// `banner` aptitude was never granted, and `seedInnateSubstrate` read the same empty record.
+//
+// Every writer in the current code validates against the catalog, so the bad id is LEGACY — which is why
+// normalising ON READ is the fix that matters: it repairs saves that already exist and cannot be re-created.
+// ⚠️ And a total miss is now LOUD. An id that resolves to nothing must never again render as prose.
+const _bgMissWarned = new Set();
+function backgroundById(id) {
+  if (!id) return null;
+  const list = CONTENT.backgrounds?.length ? CONTENT.backgrounds : backgroundsFallback();
+  const exact = list.find(b => b.id === id);
+  if (exact) return exact;
+  const normalised = String(id).replace(/-/g, "_");
+  const near = normalised !== id ? list.find(b => b.id === normalised) : null;
+  if (near) {
+    if (!_bgMissWarned.has(id)) { _bgMissWarned.add(id); console.warn(`[background] legacy id "${id}" resolved to "${near.id}" — repairing on read (SNG-272)`); }
+    return near;
+  }
+  if (!_bgMissWarned.has(id)) { _bgMissWarned.add(id); console.error(`[background] id "${id}" matches NO authored background — its affinity, aptitudes and innate access are all silently absent (SNG-272)`); }
+  return null;
+}
 
 // SNG-BATCH-10 Phase 2: STARTING LOCATION. Every origin has a homeland (origins.json startingLocation)
 // and creation defaults to it — but a player may always also start in the Valley (a character who
@@ -7396,7 +7420,9 @@ function traitReadout(kind, id) {
   let lore = authored?.lore || null, mech = authored?.mechanics || null;
   const rules = CONTENT.rules || {};
   if (kind === "background") {
-    const def = (CONTENT.backgrounds || []).find(b => b.id === id) || {};
+    // SNG-272: through the normalising reader, not a second private lookup with its own `|| {}`. Two
+    // lookups for one record is how they came to disagree about whether the record exists.
+    const def = backgroundById(id) || {};
     lore = lore || def.description || `A ${id} — a life that shaped who you are.`;
     mech = mech || `${def.affinity?.length ? `Helps with ${def.affinity.join(", ")} challenges (a soft edge, never a gate).` : "No fixed challenge affinity."}${def.grantsAptitudes?.length ? ` Grants the ${def.grantsAptitudes.join(", ")} aptitude.` : ""}`;
     return `${def.name || id} — background\n\n${lore}\n\nMECHANICS: ${mech}`;

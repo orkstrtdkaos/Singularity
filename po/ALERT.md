@@ -1,3 +1,67 @@
+## CCODE-130 — people have lives, the dials were never reachable, and the sheet stops lying
+
+### 1. SNG-275 — the arcs do not get all of somebody
+
+Erik: *"the Arcs don't necessarily consume all the attention for the NPCs — they probably spend a fair
+amount of time just living their lives."* Until now every point of every figure's budget went to arcs, which
+quietly asserted that a person IS their position on the valley's five arguments.
+
+A **personal claim** (`personalShare`, 0.4) is held back before the arcs are served. **And a crisis can
+borrow it** — which is what makes it a story rather than a subtraction: when one care has run hard enough
+against a figure they stop going home, and that is RECORDED (`neglectedLives`), because a legend who has not
+been seen at home in a season is a fact the world should be able to say out loud.
+
+⛔ **The engine does not invent a life.** I could have derived a hobby from every `wants` line and had 66
+lives by lunchtime. That is authorship — an invented brother becomes canon the moment a narrator says his
+name. `personalPursuitOf()` returns null for an unauthored figure, the attention is withheld anyway, and the
+gap is COUNTED: a probe world-year gives **47 figures keeping their own time, 0 with a life authored, 20 in
+crisis.** Request filed: `po/REQUEST_ccode_personal_lives.md`. `personalVerbs` is the field, and the contrast
+that makes the case is that all 198 authored `offscreenVerbs` are VOCATION — *"attends an ending
+unsent-for"* is Neth being an ashwarden, not Neth being a person.
+
+⚠️ **20 of 67 in crisis is probably too many** — if a third of the valley is always too busy to go home the
+cost stops reading as a cost. `crisisPull` is the dial. REPORT, not a decision.
+
+### 2. ⚠️ THE DIALS WERE NEVER REACHABLE. `rules.arcResponse` DID NOT EXIST.
+
+The engine has read `cfg.casualtyRate`, `cfg.attentionByTier`, `cfg.strikeRate`, `cfg.mintRate`,
+`cfg.retrievalRate` and sixteen more from `content.rules.arcResponse` for weeks. **No pack has ever provided
+that block.** Every one of the 21 dials ran on its hardcoded fallback, and neither Erik nor Aevi could turn a
+single one without editing engine source — **while I kept telling both of you "that's the dial, the number
+is your call."** Same for `rules.tierLadder`, which carries the whole promotion ladder.
+
+A reader with no writer: the fourth door of the family, and the exact thing `promise_sweep` was built to
+catch. It did not, because the sweep looks for content keys nobody reads — not for reads nobody feeds. That
+asymmetry is worth fixing in the sweep next.
+
+`content/packs/core/rules/arc_response.json` is authored, registered (45 core rules), loaded and merged, at
+**exactly the old fallback values** so no behaviour moved — only reachability. Every dial is commented with
+what it does and which way to turn it.
+
+### 3. SNG-272 (Aevi's audit) — the background id that resolved to nothing
+
+Fixed as specced. All 40 backgrounds do carry real mechanics; the CHARACTER carried `community-organizer`
+and every authored id is snake_case. `|| {}` then failed four ways at once — the tooltip lied, the SOCIAL
+edge never applied, `banner` was never granted, `seedInnateSubstrate` read the same empty record.
+
+Every writer in current code validates against the catalog, so the bad id is LEGACY — which is why
+normalising ON READ is the fix that matters: it repairs saves that already exist and cannot be re-created.
+A true miss is now LOUD (`console.error`, naming the id) and the tooltip goes through the one reader instead
+of its own private lookup — two lookups for one record is how they came to disagree about whether it exists.
+
+**Open for Aevi:** whether a live character gets BACKFILLED the aptitude they were owed. That is a change to
+a player's sheet and it is a call, not a repair I should make silently.
+
+### Bookkeeping
+
+22 requirements / 64 gates in the ledger, all green. Shipping **v1.9.2**. The drift guard did its job twice
+this session — it refused to let the 13 new gates exist unclaimed by the ledger.
+
+Aevi — on the lore opening up and new skills: nothing in the engine hard-codes the tradition list, the craft
+list or the tier names any more, but if a new skill needs a mechanic that does not exist yet, say so in the
+spec rather than authoring around it. The `passing_advice` lesson was a value the engine could never
+select — authored, correct, and unreachable.
+
 ## CCODE-129 — v1.9.0 is CUT, and the version can move again
 
 Erik: *"the game has also sat at version 1.8.330 for a long time… none of this is bumping the game version

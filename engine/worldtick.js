@@ -830,6 +830,14 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
   if (finalKind === "killed") {
     st.status = "dead"; st.diedWorldDay = worldDay; st.killedBy = winner.id;
     career(ws, loser.id).deaths++;   // SNG-288: THE SURVIVOR asks for zero of these across a whole life
+    // SNG-294 {FOE} (Aevi: "cheapest — resolveEpicClash already holds winner, loser and both weights").
+    // The BEST foe, by their rung, so "the Ashen Wyrm's End" names the hardest thing they ever put down
+    // rather than the most recent. Makes the roster part of the naming system.
+    {
+      const c = career(ws, winner.id);
+      const band = tierRank(loser.tier ?? loser.legend?.tier);
+      if (!c.bestFoe || band > (c.bestFoe.band ?? -1)) c.bestFoe = { name: loser.name || null, band };
+    }
     // SNG-209: a killed legend ENTERS the death state (depth 0, fresh) — reachable, for a time — not deleted.
     // The clock (deepenDeaths) will sink them toward sealed if no one goes after them.
     enterDeathState(st, { diedDay: worldDay, cause: `killed by ${winner.name}` });
@@ -1383,6 +1391,8 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // SNG-275 — the personal claim. Dials live in content beside the rest of the attention model.
     const personalShare = Number.isFinite(cfg.personalShare) ? cfg.personalShare : 0.4;
     const crisisPull = Number.isFinite(cfg.crisisPull) ? cfg.crisisPull : 1.5;
+    const wonThisPass = {};         // SNG-295: arcId -> Set(ids) who won a contest on it this pass
+    const removedDefender = {};     // SNG-295: arcId -> Set(ids) whose strike emptied a front holding it
     const heldNothing = new Set();  // SNG-279: figures who spent their attention on no front at all
     const personalBeats = [];      // figures whose own life is ON THE PAGE this pass
     const neglectedLives = [];     // …and the ones who spent it on a crisis instead
@@ -1497,6 +1507,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           // same fight. `playerInvolved` when the player is pushing this same arc: their weight is part of
           // what made the win possible, and a rise it causes should be able to say so.
           for (const e of won) creditDeed(ws, e.f.id, "arcContestWon", { worldDay: currentWorldDay, playerInvolved: playerOnArc(arcId) });
+          // SNG-295: WHO won, per arc, this pass. A turning is credited to the people who WON on the side it
+          // moved toward — not to everyone who was standing nearby, which is what made it a presence test.
+          for (const e of won) (wonThisPass[arcId] ||= new Set()).add(e.f.id);
         }
         // CCODE-117 — A FIGHT CAN COST SOMETHING. Erik: "what if more get killed or injured? what knob would
         // we turn to do that?" The knob was a DISCONNECTED WIRE: 28 duels a pass across the valley and not
@@ -1609,6 +1622,10 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           strikes.push({ arcId, target: mark.f.id, sender: sender.f.id, outcome: outcome.finalKind,
             targetTier: mark.f.tier ?? mark.f.legend?.tier ?? null });
           creditDeed(ws, sender.f.id, "strikeLanded", { worldDay: currentWorldDay });
+          // SNG-295 ruling 3 (Erik: "striking defenders is a good mechanic to credit"). Removing the people
+          // who were holding a front IS turning it — by subtraction rather than by pushing. The nastiest
+          // route in the system: a campaign of strikes can turn an arc you never once contested.
+          (removedDefender[arcId] ||= new Set()).add(sender.f.id);
           if (outcome.finalKind !== "killed") creditDeed(ws, mark.f.id, "strikeSurvived", { worldDay: currentWorldDay });
           for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
         }
@@ -1643,8 +1660,43 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       const before = ws.arcStageSeen[arcId];
       ws.arcStageSeen[arcId] = now;
       if (before == null || now === before) continue;
-      const held = [...(leaning[arcId]?.pro || []), ...(leaning[arcId]?.con || [])];
-      for (const e of held) creditDeed(ws, e.f.id, "stageMoved", { worldDay: currentWorldDay, playerInvolved: playerOnArc(arcId) });
+
+      // SNG-295 — WHO TURNED IT. Erik decided all four questions; this is the assembled rule.
+      //
+      // The bug being fixed: this credited EVERY figure leaning on the arc, both sides, so a turning banked
+      // ~30 stage-moves at once and THE TURNER became a presence test — 20 of 21 mythics arrived by it.
+      //
+      // (1) REVERSING COUNTS AS TURNING. Pushing an arc back earns credit exactly as advancing does, and the
+      //     title does not disambiguate: "Who Turned the Bleed" says you moved it, the stories say which way.
+      //     That keeps the Feared and the Kept on identical footing, which DIRECTIVE SNG-280 requires.
+      // (2) SHARED, BUT ONLY THE WINNERS. Every figure on the side it moved toward who WON a contest on this
+      //     arc this pass. A turning is genuinely collective, so naming one figure would be false — but
+      //     having been present is not the same as having done it.
+      // (3) THE VACANCY ROUTE. A figure whose strike removed a defender counts too: they turned it by taking
+      //     away the people who were holding it.
+      // (4) ⛔ NOBODY WHO LEANED AGAINST IT, whatever else they did. That was the whole bug.
+      const wentUp = now > before;
+      const movers = wentUp ? (leaning[arcId]?.pro || []) : (leaning[arcId]?.con || []);
+      const winners = wonThisPass[arcId] || new Set();
+      const strikers = removedDefender[arcId] || new Set();
+      const credited = new Set();
+      for (const e of movers) {
+        if (!winners.has(e.f.id)) continue;
+        credited.add(e.f.id);
+        creditDeed(ws, e.f.id, "stageMoved", { worldDay: currentWorldDay, playerInvolved: playerOnArc(arcId) });
+      }
+      for (const id of strikers) {
+        if (credited.has(id)) continue;
+        credited.add(id);
+        creditDeed(ws, id, "stageMoved", { worldDay: currentWorldDay, playerInvolved: playerOnArc(arcId) });
+      }
+      // …and the ones who leaned WITH it and won nothing were the weight the winners were adding to. They
+      // did not turn it, and the record should say the difference — `heldThroughCrisis` already exists.
+      for (const e of movers) {
+        if (credited.has(e.f.id)) continue;
+        creditDeed(ws, e.f.id, "heldThroughCrisis", { worldDay: currentWorldDay });
+      }
+      ws.arcTurnings = (ws.arcTurnings || []).slice(-19).concat([{ arcId, from: before, to: now, by: [...credited] }]);
     }
     // SNG-275 — THE COVERAGE IS THE ASK. `lived` is how many figures kept their own time this pass;
     // `onThePage` is how many of those had anything AUTHORED to spend it on. The gap between the two is
@@ -1740,7 +1792,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       .map(([id, t]) => [id, t?.name || t?.title || null]).filter(([, n]) => n));
     for (const r of risen) {
       const bearer = character?.npcRegistry?.[r.id] || worldRoster(ws, content).find(f => f.id === r.id) || null;
-      const named = bearer ? titleFor({ ...bearer, id: r.id }, { ws, patterns: content.rules?.titles?.patterns || [], arcNames, traditionNames: tradNames }) : null;
+      const named = bearer ? titleFor({ ...bearer, id: r.id }, { ws, patterns: content.rules?.titles?.patterns || [], arcNames, traditionNames: tradNames, tagEpithets: content.rules?.titles?.tagEpithets || {} }) : null;
       if (named) { r.title = named.title; (ws.figureTitles ||= {})[r.id] = named; }
       const line = `${r.name || "Someone"}${named ? `, ${named.title},` : ""} is called ${r.to} this season — ${r.why}.`;
       news.push({ text: r.causedByPlayer ? `${line} You are why.` : line,

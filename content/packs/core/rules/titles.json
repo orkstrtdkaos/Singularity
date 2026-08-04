@@ -4,7 +4,6 @@
   "kind": "rules",
   "note": "SNG-287 — GENERATIVE TITLES. A name that comes from the material, not from a menu (Aevi, the Tether pattern).",
   "howToRead": "A title is `pattern + slots`, and EVERY slot is filled from a real record or the pattern is not used. No arc moved means no {ARC} title. That rule is what makes a title true rather than flattering — the same discipline as BOUNDARY-1, where prose alone is not a consequence. ⚠️ THREE SLOTS FROM THE SPEC HAVE NO SOURCE YET and any pattern using them is skipped: {ROAD} (nothing records which road a figure guarded), {CRAFT} (deeds carry tags, not craft ids) and {FOE} (casualties are per pass, with no per-figure record of who someone beat). They are listed in `engine/titles.js:UNFILLABLE_SLOTS` rather than left to look available. ⛔ DIRECTIVE SNG-280: where a pattern has two faces, the one that lands is decided by the SIGN OF THE RECORDED DEEDS — a description of what someone is known for, never a verdict on it. The Maw earns a name as readily as the Rootkin; it is simply a different noun.",
-
   "patterns": [
     {
       "id": "who_turned_the_arc",
@@ -14,7 +13,10 @@
     {
       "id": "place_role",
       "pattern": "{PLACE}'s {ROLE}",
-      "roleWords": { "soft": "Mercy", "hard": "Knife" },
+      "roleWords": {
+        "soft": "Mercy",
+        "hard": "Knife"
+      },
       "note": "⛔ THE SAME PATTERN, TWO FACES. Thornwake's Mercy and Thornwake's Knife are the same construction; which noun lands is read off the sign of the deeds. A mixed record resolves to NEITHER and the pattern is skipped — a person who is not known for one thing does not get told they are."
     },
     {
@@ -27,22 +29,31 @@
       "pattern": "Who Came Back for {COUNT}",
       "note": "Only reachable by a figure who has actually been retrieved from the death state more than once. Ties the death ladder to the name."
     },
-
     {
-      "_unavailable": "The three below are authored from the spec and CANNOT BE CHOSEN yet — their slots have no source. Kept so the intent is on the page and so wiring a source later needs no new authoring.",
-      "id": "warden_of_road",
-      "pattern": "Warden of {ROAD}",
-      "note": "⚠️ NEEDS a route/patrol record. Nothing tracks which road a figure guarded most."
+      "id": "warden_of_place",
+      "pattern": "Warden of {PLACE}",
+      "note": "SNG-294 (Aevi): renamed from 'Warden of {ROAD}'. THE WORLD HAS LOCATIONS, NOT NAMED ROUTES — 'the Medicine Road' was fiction the data cannot support. Ships against the place a figure's deeds concentrate in; {ROAD} waits for routes to become things, which the economy and travel-cost effects both want."
     },
     {
-      "id": "the_craft",
-      "pattern": "The {CRAFT}",
-      "note": "⚠️ NEEDS the craft used in a deed to be recorded. Deeds carry tags, not craft ids."
+      "id": "the_tag",
+      "pattern": "The {TAG}",
+      "note": "SNG-294 (Aevi): re-sourced from {CRAFT}. A tag is what the WORLD noticed; a craft id is what the ENGINE resolved. Threading craft ids into reputation would make a deed an engine artifact instead of a social record. Same title, honest source, no plumbing."
     },
     {
       "id": "foes_end",
       "pattern": "{FOE}'s End",
-      "note": "⚠️ NEEDS a per-figure record of who someone beat. Casualties are recorded per pass, not per career."
+      "note": "SNG-294 (Aevi): built — the clash already held winner, loser and both weights, so the best foe is one line. Names the hardest thing they ever put down, by rung rather than recency."
     }
-  ]
+  ],
+  "tagEpithets": {
+    "raise": "Raiser",
+    "guard_success": "Shield",
+    "uncanny": "Strange One",
+    "explorer": "Farwalker",
+    "child-rescuer": "Sheltering Hand",
+    "duel": "Duellist",
+    "prestige": "Named One",
+    "strange": "Strange One"
+  },
+  "_tagEpithets": "SNG-294: the world's word for a habit. A tag becomes an epithet only if the world HAS a word for it — an unmapped tag yields no title rather than a coined one, which is the same honesty rule as the slots."
 }

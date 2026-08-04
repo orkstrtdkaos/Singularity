@@ -39,7 +39,7 @@ export function resolveLocationId(ref, locations = {}) {
   return null;
 }
 
-import { unusablePatterns as unusableTitlePatterns } from "./titles.js";   // SNG-287: report patterns with no slot source
+import { unusablePatterns as unusableTitlePatterns, orderSensitivePatterns } from "./titles.js";   // SNG-287: report patterns with no slot source
 
 export async function loadContent() {
   const index = await fetchJSON("content/packs/core/manifest.json");
@@ -101,6 +101,10 @@ export async function loadContent() {
   if (titlesRule?.patterns) {
     const dead = unusableTitlePatterns(titlesRule.patterns);
     if (dead.length) console.log(`[titles] ${dead.length} pattern(s) unusable — no source for their slots: ${dead.map(d => d.id).join(", ")}`);
+    // SNG-294: and the ones whose reachability depends on ORDER. Not broken — but a pattern below a permissive
+    // one is reached only by records the permissive one declines, which is worth an author knowing.
+    const late = orderSensitivePatterns(titlesRule.patterns);
+    if (late.length) console.log(`[titles] ${late.length} pattern(s) order-sensitive — reached only by records an earlier pattern declines: ${late.map(d => d.id).join(", ")}`);
   }
   if (arcResponseRule?.arcResponse) rules.arcResponse = { ...(rules.arcResponse || {}), ...arcResponseRule.arcResponse };
   if (arcResponseRule?.tierLadder) rules.tierLadder = { ...(rules.tierLadder || {}), ...arcResponseRule.tierLadder };

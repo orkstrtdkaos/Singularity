@@ -10010,11 +10010,61 @@ await (async () => {
   })());
 
   // ⚠️ Slots the spec asks for that nothing can fill are NAMED, not silently absent.
-  check("272/287: patterns whose slots have no source are declared unusable, not left looking live",
-    T.unusablePatterns(P).length === 3 && Object.keys(T.UNFILLABLE_SLOTS).length === 3);
+  // SNG-294: two of the three were then BUILT ({FOE}) or RE-SOURCED ({CRAFT}→{TAG}). Only {ROAD} remains,
+  // and it remains because the world has locations rather than named routes — not because it was forgotten.
+  check("272/287: a slot with no source is declared, not left looking live",
+    T.unusablePatterns(P).length === 0 && Object.keys(T.UNFILLABLE_SLOTS).length === 1);
 
   check("272/287: a title is spoken when the world finds one, and remembered",
     /r\.title = named\.title/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8")));
+}
+
+// --- SNG-295 + SNG-294: who turned it, and the three slots ------------------------------------------
+{
+  const wt6 = await import("../engine/worldtick.js");
+  const T2 = await import("../engine/titles.js");
+  const wsrc6 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  const tdoc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/titles.json"), "utf8"));
+
+  // SNG-295 — Erik ruled on all four questions; these are the four rulings.
+  check("272/295: only the side it moved TOWARD is credited — nobody who leaned against it",
+    /const wentUp = now > before;[\s\S]{0,200}const movers = wentUp \? \(leaning\[arcId\]\?\.pro/.test(wsrc6));
+  check("272/295: and only those who WON — presence is not turning (the bug this fixes)",
+    /if \(!winners\.has\(e\.f\.id\)\) continue;/.test(wsrc6));
+  check("272/295: REVERSING counts as turning (the title says you moved it, not which way)",
+    /const wentUp = now > before/.test(wsrc6) && /: \(leaning\[arcId\]\?\.con \|\| \[\]\)/.test(wsrc6));
+  check("272/295: emptying the front counts — a strike that removed a defender turned it too",
+    /removedDefender\[arcId\] \|\|= new Set\(\)\)\.add\(sender\.f\.id\)/.test(wsrc6));
+  check("272/295: those who leaned WITH it and won nothing still get the smaller credit",
+    /creditDeed\(ws, e\.f\.id, "heldThroughCrisis"/.test(wsrc6));
+
+  // SNG-294 — the three slots, as Aevi ruled each one.
+  check("272/294: {FOE} is BUILT — the hardest thing they put down, by rung not recency",
+    /if \(!c\.bestFoe \|\| band > \(c\.bestFoe\.band \?\? -1\)\)/.test(wsrc6));
+  check("272/294: {CRAFT} was RE-SOURCED to {TAG}, not built — a tag is what the WORLD noticed", (() => {
+    const ids = tdoc.patterns.map(p => p.id);
+    return ids.includes("the_tag") && !ids.includes("the_craft") && !!tdoc.tagEpithets?.raise;
+  })());
+  check("272/294: an UNMAPPED tag yields no title rather than a coined one", (() => {
+    const rec = { deeds: [{ tags: ["nobody_has_a_word_for_this"] }, { tags: ["nobody_has_a_word_for_this"] }, { tags: ["nobody_has_a_word_for_this"] }], tagEpithets: {} };
+    return T2.SLOT_SOURCES.TAG(rec) === null;
+  })());
+  check("272/294: {ROAD} ships as Warden of {PLACE} — the world has locations, not named routes", (() => {
+    const ids = tdoc.patterns.map(p => p.id);
+    return ids.includes("warden_of_place") && !ids.includes("warden_of_road")
+      && Object.keys(T2.UNFILLABLE_SLOTS).length === 1 && !!T2.UNFILLABLE_SLOTS.ROAD;
+  })());
+  check("272/294: every authored pattern is now fillable", T2.unusablePatterns(tdoc.patterns).length === 0);
+
+  // ⚠️ Order can starve a fillable pattern. Reported, not enforced — order is authorship.
+  check("272/294: order-sensitivity is REPORTED, and the flagged patterns still demonstrably fire", (() => {
+    const flagged = T2.orderSensitivePatterns(tdoc.patterns).map(x => x.id);
+    const o = { ws: { figureTenure: { f: { deedLog: [] } }, figureCareer: { f: {} } }, patterns: tdoc.patterns,
+      tagEpithets: tdoc.tagEpithets, arcNames: {}, traditionNames: {} };
+    const wanderer = { id: "f", deeds: [{ communityId: "a.one", weight: 2, tags: ["raise"] },
+      { communityId: "b.two", weight: 2, tags: ["raise"] }, { communityId: "c.three", weight: 2, tags: ["raise"] }] };
+    return flagged.length > 0 && T2.titleFor(wanderer, o)?.title === "The Raiser";
+  })());
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

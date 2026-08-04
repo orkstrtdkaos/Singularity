@@ -1,3 +1,53 @@
+## CCODE-141 — SNG-295 + SNG-294: who turned it, and the three slots
+
+### SNG-295 — THE TURNER IS A ROAD AGAIN
+
+Erik's four rulings are built exactly as decided: the side it moved TOWARD, only those who WON, reversing
+counts the same as advancing, and — the nastiest and best of them — **a strike that removed a defender
+turned the arc too**. You can now turn an arc you never once contested, by taking away the people who were
+holding it. Nobody who leaned against it is credited whatever else they did, which was the whole bug. Those
+who leaned with it and won nothing get `heldThroughCrisis`, so the record says the difference.
+
+**The distribution, which is the result:**
+
+```
+  before (presence)        the_turner 20                                   — 95% of all mythics
+  after Erik's rule        the_turner 11                                   — still ~92%
+  after raising the bar    the_turner 11 · unbeaten 1 · returned 1 · survivor 1
+```
+
+Aevi — I used your pre-authorised remedy: it was still over 50%, so I raised THE TURNER to three stage moves
+rather than narrowing the credit Erik ruled on. **Four roads fire now, and one of them is Erik's own case.**
+The turner is still the largest share and I am not going to keep tuning toward an even spread — it is
+plausibly correct that turning the world is the commonest way to be remembered.
+
+### SNG-294 — all three slots, as you called them
+
+**{FOE} built.** One line at the clash, as you said. Records the hardest thing they ever put down by RUNG,
+not recency, so *"the Ashen Wyrm's End"* names the wyrm and not the last skirmish.
+
+**{CRAFT} re-sourced to {TAG}, not built.** Your reasoning is the sharpest thing in either document: *a tag
+is what the WORLD noticed, a craft id is what the ENGINE resolved.* Threading ids into reputation would make
+a deed an engine artifact rather than a social record, and the system works because deeds are what people
+SAW. `raise` → the Raiser, `guard_success` → the Shield. An **unmapped** tag yields no title rather than a
+coined one — same honesty rule as the slots.
+
+**{ROAD} → Warden of {PLACE}.** Shipped. You were right that *the Medicine Road* was fiction the data cannot
+support; {ROAD} stays declared for when routes become things.
+
+### ⚠️ AND A NEW FAILURE MODE: A PATTERN CAN BE FILLABLE AND STILL NEVER FIRE
+
+`unusablePatterns` reports zero, and yet `the_tag` and `warden_of_place` sit below `Whom {PEOPLE} Named`,
+which needs only a tradition — so almost every record is claimed before it reaches them. **Order starves a
+pattern in a way that looks nothing like an unfillable slot.** Reported at load, not reordered: order is
+authorship and you set it before those two had sources.
+
+I built that detector three times. The first probed a record filling EVERY slot, on which the first pattern
+always wins — it reported six of seven starved, which is true of any first-match list and means nothing. The
+second measured reachability but I read its output as proof, when a mixed-weight record demonstrably produces
+*Warden of Thornwake*. It is named `orderSensitivePatterns` now, because that is what it measures. Both
+flagged patterns do fire: a habit with no home and no people gets **The Raiser**.
+
 ## CCODE-140 — SNG-287: generative titles. A name from the material.
 
 Built. Aevi — **there was no `titles.json`.** Your spec opens *"the fixed list in titles.json is the wrong

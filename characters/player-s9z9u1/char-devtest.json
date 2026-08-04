@@ -55,7 +55,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 57,
+  "energy": 52,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -148,71 +148,90 @@
         "player": null,
         "summary": "A broad-shouldered stranger steps from the lower lane, club in hand, demanding Loki come out from behind the gate — the orchard holds its breath.",
         "narration": "The keeper's arm dropped a moment ago. The orchard was quiet. Then a figure steps from the lower lane — not running, not shouting, just walking with the particular deliberate weight of someone who has already decided the outcome. He is broad across the shoulders and carries himself like a man who does not expect to be the first one to look away. A short club hangs loose in his right hand, the kind a river-worker or a carter might carry without anyone remarking on it. He stops at the edge of the lamplight, six paces out, and looks at Loki the way you look at a nail you mean to drive home. 'You're the one who planted in the toll ground,' he says, his voice flat and carrying. 'Come out from behind the gate.'\n\nOssivyn goes still against the gate post, record book pressed to his chest. Cy's lens locks onto the newcomer without a sound. The keeper of the toll takes one careful step sideways — not toward Loki, not toward the man, just out of the line between them. Whatever was unfinished between keeper and Loki has been folded up and put away for now.\n\nThe man in the lane has not raised the club yet. He is watching you read him. There is space here — the gate at your back is unlatched, the lane behind him is open, and no one has thrown anything yet. This can still go sideways in more than one direction."
+      },
+      {
+        "player": null,
+        "summary": "Loki's Tremor Sense finds no footing in the packed mud — the stranger circles and reads the pause instead.",
+        "narration": "You press your weight into the earth and listen through your feet — a tremor-reader's first instinct when the ground is the only honest thing in a fight. But the stranger is standing on packed lane-mud over river gravel, and the ground gives you nothing clean: just your own heartbeat bouncing back, and the dull thud of the keeper shifting somewhere behind you. The stranger reads the pause in your stance the way a man reads a blink. He takes a half-step to his left, slow and deliberate, circling the edge of the lamplight — not rushing, just repositioning, watching to see which way your feet follow him."
       }
     ],
     "lastTurn": {
-      "narration": "The keeper's arm dropped a moment ago. The orchard was quiet. Then a figure steps from the lower lane — not running, not shouting, just walking with the particular deliberate weight of someone who has already decided the outcome. He is broad across the shoulders and carries himself like a man who does not expect to be the first one to look away. A short club hangs loose in his right hand, the kind a river-worker or a carter might carry without anyone remarking on it. He stops at the edge of the lamplight, six paces out, and looks at Loki the way you look at a nail you mean to drive home. 'You're the one who planted in the toll ground,' he says, his voice flat and carrying. 'Come out from behind the gate.'\n\nOssivyn goes still against the gate post, record book pressed to his chest. Cy's lens locks onto the newcomer without a sound. The keeper of the toll takes one careful step sideways — not toward Loki, not toward the man, just out of the line between them. Whatever was unfinished between keeper and Loki has been folded up and put away for now.\n\nThe man in the lane has not raised the club yet. He is watching you read him. There is space here — the gate at your back is unlatched, the lane behind him is open, and no one has thrown anything yet. This can still go sideways in more than one direction.",
-      "sceneSummary": "A broad-shouldered stranger steps from the lower lane, club in hand, demanding Loki come out from behind the gate — the orchard holds its breath.",
+      "narration": "You press your weight into the earth and listen through your feet — a tremor-reader's first instinct when the ground is the only honest thing in a fight. But the stranger is standing on packed lane-mud over river gravel, and the ground gives you nothing clean: just your own heartbeat bouncing back, and the dull thud of the keeper shifting somewhere behind you. The stranger reads the pause in your stance the way a man reads a blink. He takes a half-step to his left, slow and deliberate, circling the edge of the lamplight — not rushing, just repositioning, watching to see which way your feet follow him.",
+      "sceneSummary": "Loki's Tremor Sense finds no footing in the packed mud — the stranger circles and reads the pause instead.",
       "choices": [
         {
-          "label": "Hold your ground and let him come to you — read his approach with Prism Sight before he closes the distance.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "defend",
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Step out from the gate and meet him in the open — use Echo Sense to feel where his weight commits before the first blow.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "careful"
-          ],
-          "abilityId": "echo_sense",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Drive a Sonic Resonance pulse at the club in his hand — knock it loose before he can swing it.",
+          "label": "Press the attack — drive forward before he finishes the circle.",
           "attribute": "physical",
           "subAttribute": "agility",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
             "attack",
             "risky"
           ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 8,
-          "trivial": false
+          "abilityId": "hunters_strike",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Walk back through the gate and leave — this is not your fight, the sapling is in the ground, and the lower lane is still open.",
+          "label": "Hold ground and force him to come to you — let him commit first.",
           "attribute": "physical",
           "subAttribute": "agility",
-          "difficulty": 0,
+          "axes": {},
+          "difficulty": 15,
           "intentTags": [
-            "travel",
+            "defend",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Throw a sonic pulse at his club hand — rattle it loose before he closes.",
+          "attribute": "physical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "attack"
+          ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 8,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Yield — step out from the gate and see what he actually wants.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "The Slow Orchard, planting gate — evening, the last gold fading from old branches. Cool spring air. Mud underfoot. A broad-shouldered stranger has stepped from the lower lane into the lamplight, club loose in his right hand, six paces out.",
+        "setting": "The Slow Orchard, planting gate — evening, last gold gone from the branches, lamplight pooling in the lane. Cool spring air, mud underfoot.",
         "npcsPresent": [
           {
+            "name": "The Stranger",
+            "state": "Has taken a half-step left, circling slowly into the lamplight's edge, club still loose in his right hand, eyes fixed on Loki."
+          },
+          {
             "name": "Ossivyn Tallow",
-            "state": "Pressed against the gate post, record book clutched to his chest, still and watching."
+            "state": "Pressed against the gate post, record book to his chest, very still."
           },
           {
             "name": "Cy",
@@ -220,67 +239,40 @@
           },
           {
             "name": "The Keeper of the Toll",
-            "state": "Stepped one pace sideways, out of the line between Loki and the newcomer — watching, not intervening."
-          },
-          {
-            "name": "The Stranger",
-            "state": "Standing six paces out in the lane, club loose in his right hand, eyes on Loki — waiting."
+            "state": "One pace sideways, out of the line — watching, not intervening."
           }
         ],
         "objects": [
           "Freshly-planted sapling in tamped earth",
-          "Small unlabeled iron marker stake driven beside the root base",
+          "Small unlabeled iron marker stake beside the root base",
           "Gate post with newly-straightened hinge (unlatched)",
           "Short club in the stranger's right hand"
         ],
         "threads": [
-          "The stranger demands Loki step out — has not struck yet.",
-          "The keeper yielded but still has not explained who sent them or why.",
+          "The stranger is circling — repositioning to close the distance on his terms.",
+          "Tremor Sense found nothing — the stranger read the pause instead, gaining the edge.",
+          "The keeper yielded but still has not explained who sent the stranger or why.",
           "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
-          "Ossivyn's record book entry — unknown what was written.",
-          "The regulator signal moving downstream — no one upstream knows to expect it."
+          "Ossivyn's record book entry — unknown what was written."
         ]
       },
-      "npcUpdates": [
+      "encounterOps": [
         {
-          "op": "meet",
-          "npcId": "stranger-at-the-gate",
-          "name": "The Stranger",
-          "role": "Hired enforcer or territorial man from the lower lane",
-          "gender": "man",
-          "pronouns": "he/him",
-          "description": "Broad-shouldered, deliberate in his movement — carries a short club as though it is simply part of him. Comes with the air of someone who expects the other person to flinch first.",
-          "note": "Stepped from the lower lane as the keeper's challenge ended — demanded Loki step out from the gate. Has not struck yet.",
-          "learned": [
-            "Claims Loki planted in toll ground",
-            "Arrived immediately after the keeper yielded — timing is not accidental"
-          ],
-          "skillsObserved": [
-            "Deliberate intimidation approach"
-          ],
-          "relationshipDelta": -1,
-          "status": "active",
-          "statusNote": "Standing six paces from Loki at the orchard gate, club in hand, challenge open."
+          "op": "tactic",
+          "tag": "circle"
         }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "a broad-shouldered enforcer or territorial carter from the lower lane — the kind of man hired or sent to discourage newcomers, not quite a raider but not innocent either",
-          "why": "He stepped from the lower lane as a structured encounter presence; needs a stable identity so he can recur and the fiction can explain who sent him."
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange in the lane — moments only."
-      }
+      ]
     },
     "sceneState": {
-      "setting": "The Slow Orchard, planting gate — evening, the last gold fading from old branches. Cool spring air. Mud underfoot. A broad-shouldered stranger has stepped from the lower lane into the lamplight, club loose in his right hand, six paces out.",
+      "setting": "The Slow Orchard, planting gate — evening, last gold gone from the branches, lamplight pooling in the lane. Cool spring air, mud underfoot.",
       "npcsPresent": [
         {
+          "name": "The Stranger",
+          "state": "Has taken a half-step left, circling slowly into the lamplight's edge, club still loose in his right hand, eyes fixed on"
+        },
+        {
           "name": "Ossivyn Tallow",
-          "state": "Pressed against the gate post, record book clutched to his chest, still and watching."
+          "state": "Pressed against the gate post, record book to his chest, very still."
         },
         {
           "name": "Cy",
@@ -288,32 +280,28 @@
         },
         {
           "name": "The Keeper of the Toll",
-          "state": "Stepped one pace sideways, out of the line between Loki and the newcomer — watching, not intervening."
-        },
-        {
-          "name": "The Stranger",
-          "state": "Standing six paces out in the lane, club loose in his right hand, eyes on Loki — waiting."
+          "state": "One pace sideways, out of the line — watching, not intervening."
         }
       ],
       "objects": [
         "Freshly-planted sapling in tamped earth",
-        "Small unlabeled iron marker stake driven beside the root base",
+        "Small unlabeled iron marker stake beside the root base",
         "Gate post with newly-straightened hinge (unlatched)",
         "Short club in the stranger's right hand"
       ],
       "threads": [
-        "The stranger demands Loki step out — has not struck yet.",
-        "The keeper yielded but still has not explained who sent them or why.",
+        "The stranger is circling — repositioning to close the distance on his terms.",
+        "Tremor Sense found nothing — the stranger read the pause instead, gaining the edge.",
+        "The keeper yielded but still has not explained who sent the stranger or why.",
         "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
-        "Ossivyn's record book entry — unknown what was written.",
-        "The regulator signal moving downstream — no one upstream knows to expect it."
+        "Ossivyn's record book entry — unknown what was written."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [],
@@ -437,7 +425,7 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 15,
+    "turnsSinceOffer": 16,
     "lastGenCount": 841,
     "lastSharedReadAt": "2026-08-04T01:59:02.401Z",
     "lastTickWorldDay": 35,
@@ -841,8 +829,8 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785808882045,
-  "rev": 103,
+  "updatedAt": 1785808914741,
+  "rev": 106,
   "activeEncounter": {
     "defId": "re-re_raider_duel",
     "state": {
@@ -851,9 +839,11 @@
       "type": "duel",
       "status": "active",
       "round": 1,
-      "log": [],
+      "log": [
+        "r1: reveal vs strike → momentum 0"
+      ],
       "opponentHealth": 6,
-      "tactic": null,
+      "tactic": "circle",
       "mode": "skill_battle",
       "opponentSheet": {
         "name": "the aggressor",
@@ -895,11 +885,13 @@
         "synthesized": true
       },
       "momentum": 0,
-      "opponentEnergy": 94,
+      "opponentEnergy": 89,
       "turn": {
-        "phase": "sense",
+        "phase": "action",
         "sel": {
-          "sense": [],
+          "sense": [
+            11
+          ],
           "action": [],
           "bonus": []
         },
@@ -908,10 +900,95 @@
           "action": "",
           "bonus": ""
         },
-        "setupBonus": 0,
+        "setupBonus": -12,
         "bonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
+        "senseDone": true,
+        "senseLine": "You read with Tremor Sense — failure. They read you better (-12 to your action). You learn nothing usable this time. Had it landed you would have seen which craft the aggressor leans on, and whether their wind is going — enough to pick the counter.",
+        "readPayoff": "You learn nothing usable this time. Had it landed you would have seen which craft the aggressor leans on, and whether their wind is going — enough to pick the counter."
+      },
+      "effects": [],
+      "pressure": {
+        "player": 0,
+        "opponent": 0
+      },
+      "spent": {
+        "player": false,
+        "opponent": false
+      },
+      "lastOppFn": "strike",
+      "lastOppReceipt": {
+        "roll": 73,
+        "chance": 57,
+        "degree": "failure",
+        "action": {
+          "attribute": "practical",
+          "abilityLevel": 3,
+          "label": "a hard strike",
+          "axes": {}
+        },
+        "breakdown": {
+          "components": [
+            {
+              "label": "practical 4",
+              "value": 40
+            },
+            {
+              "label": "ability rank 3",
+              "value": 15
+            },
+            {
+              "label": "matchup (strike vs reveal)",
+              "value": 2
+            }
+          ],
+          "total": 57,
+          "clampedFrom": null,
+          "base": "practical",
+          "opposed": null
+        },
+        "critRoll": 73,
+        "crit": {
+          "successChance": 14,
+          "failChance": 1,
+          "successComponents": [
+            {
+              "label": "base",
+              "value": 5
+            },
+            {
+              "label": "ability rank 3",
+              "value": 9
+            }
+          ],
+          "failComponents": [
+            {
+              "label": "base",
+              "value": 5
+            },
+            {
+              "label": "ability rank 3",
+              "value": -6
+            }
+          ],
+          "successClampedFrom": null,
+          "failClampedFrom": -1
+        },
+        "rawChance": 57,
+        "margin": -16,
+        "matchup": 2,
+        "intensity": "standard",
+        "tier": 3,
+        "function": "strike",
+        "name": "a hard strike",
+        "effectMods": [],
+        "woven": null
+      },
+      "lastReadWasSense": true,
+      "senseTierEarned": 0,
+      "senseResist": {
+        "value": 12,
+        "label": "their natural guardedness",
+        "from": "passive"
       }
     }
   },
@@ -1039,7 +1116,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 15
+    "valley": 16
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1055,10 +1132,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-04T02:01:22.042Z",
-      "lastAt": "2026-08-04T02:01:22.042Z",
+      "lastAt": "2026-08-04T02:01:54.741Z",
       "startDay": 35,
       "endDay": 35,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -1083,18 +1160,18 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 10,
-    "choices": 10,
-    "scene": 10,
+    "sceneSummary": 11,
+    "choices": 11,
+    "scene": 11,
     "stateOps": 1,
     "characterDeltas": 5,
     "timeOps": 5,
     "sceneEnded": 1,
-    "encounterOps": 2,
+    "encounterOps": 3,
     "npcUpdates": 1,
     "generateRequest": 1
   },
-  "_opTurns": 10,
+  "_opTurns": 11,
   "practice": {
     "schemaVersion": 1,
     "uses": {

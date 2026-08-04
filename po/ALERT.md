@@ -1,6 +1,45 @@
 # PO ALERT
 
-> ## [THE THIRD ACTION — strikes and crusades. Erik closed a hole I opened.] (Aevi, 2026-08-03)
+> ## [THE PLAYER IN THE ARC WAR — target · striker · guard] (Aevi, 2026-08-03)
+> Erik: *"a player becomes both a target, and can be sent on a strike mission… or to guard someone under
+> threat. This is a great way to get the player engaged in the world arc battles."*
+> **⚠️ THIS IS THE KEYSTONE, AND IT IS WHAT THE WHOLE WORLD-SIM CHAIN HAS BEEN BUILDING TOWARD.** Until now the
+> sim has been a very good machine the player **watches** — arcs move, legends die, vacancies open, and none of
+> it **asks anything of them.** The third action changes that, because **a strike is the first world event with
+> a single named target and a deadline. That is a quest.**
+> **So the world sim stops being background and becomes the QUEST GENERATOR — and these quests aren't authored,
+> they're TRUE:** the target really is the most valuable worker on that arc, and the arc really does move if
+> they die.
+> **NOTHING NEW IS NEEDED TO CARRY IT.** `ws.arcCasualties`, `ws.arcVacancies` and `ws.arcContests` already
+> exist · `startStructuredQuest(character, def, ctx)` takes a **def object**, so a *generated* def is as valid
+> as an authored one · and `worldtick.js:1201` already assembles the rumor block. **The quest is a projection of
+> state that already exists.**
+> **THE THREE ROLES:**
+> · **TARGET** — the Quiet Work comes for the party's **highest-weight contributor**; the Crusade comes for
+>   whoever's position most **offends** it, which may be a lesser member. **Different scenes.** A crusade is
+>   *declared*, so you get notice; **a quiet strike gives none** — unless a verist, a Foresense craft, or a
+>   bought rumor reveals it. **⚠️ That is an enormous argument for information as a purchasable good, and the
+>   economy already supports it.**
+> · **STRIKER** — same target rule the NPCs use, so the ask is honest. **And the target is usually NOT a
+>   villain**: the most valuable worker on an arc is, statistically, a heroic-tier figure quietly tending
+>   something. **Being sent to kill them is the sharpest moral scene the world can generate — and nobody has to
+>   write it. It falls out of who is winning.**
+> · **GUARD — the best of the three.** It gives a party a reason to care about **an NPC they did not choose**:
+>   *"she is the reason the Palelands still have medicine, and someone is coming for her."* **A stake the game
+>   has never been able to generate — and it's true.** And guarding means **standing still while other arcs move
+>   without you**: the vacancy mechanic applies to the party too.
+> **WHY THESE BEAT AUTHORED QUESTS:** they are **true** · they **expire** (no quest to guard someone already
+> dead) · they **differ per world**, because the arcs already diverge · and **the consequence is measurable** —
+> the player can look at the arc afterward and **see the number move.**
+> **FOUR DESIGN GUARDS:** rate-limit hard (a handful per campaign, **not a treadmill**) · **never auto-resolve a
+> player strike in the sim** — it must wait for the play outcome, because a world that killed the target before
+> the party arrived is the worst version of this · **the asker must be a named legend** whose want explains why
+> they can't go themselves · and **guard quests should sometimes be unwinnable by force** — a striker who can be
+> *detected, deterred, or out-waited*. That's what the stillhold and umbral crafts are for, and it stops guard
+> duty being a combat encounter with extra steps.
+> **TWO OPEN, AND BOTH ARE GOOD:** can the party be **recruited by the other side** — a crusader asking them to
+> help destroy a worker they previously guarded (sharpest version, no new machinery) · and **does a successful
+> player strike PROMOTE the asker?** Under promotion-by-duration it would. **A player could make a legend.**> ## [THE THIRD ACTION — strikes and crusades. Erik closed a hole I opened.] (Aevi, 2026-08-03)
 > **⚠️ FIRST, A STALENESS FLAG ON THE SIM TABLE:** the quoted run (60 legendary / 5 epic / 1 regional) is
 > **pre-re-tier.** The roster is now **11 / 27 / 28**, live and CI-green — *"the valley has no heroes"* is
 > fixed, and the `regional` 66.7% death rate was **a sample of one figure** where there are now 28. **The table

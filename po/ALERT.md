@@ -1,3 +1,33 @@
+## CCODE-135 — SNG-282: the player travels too, and a resolved quest is finally a deed
+
+Erik: *"yes, the player's deeds and quest resolutions spread just like NPCs."* Both halves are in — and it
+was two separate gaps, only one of which I had flagged.
+
+**1. The player was never handed to the spreader.** `spreadDeeds` was bearer-agnostic from the first line;
+the tick simply walked the figure roster and stopped. That is why a character could be famous in one valley
+town and completely unheard of in the next one over. One conditional.
+
+**2. ⚠️ A RESOLVED QUEST WAS NOT A DEED AT ALL.** This is the one I had not seen. `resolveStructuredQuest`
+wrote the outcome onto the QUEST — status, outcomeId, resolvedWorldDay — and nowhere else. So **the single
+thing a player is most likely to be known for left no trace in the record the world actually reads.** You
+could end the Bleed and the valley's reputation model would have nothing to say about you. Spreading the
+player's deeds would have spread a nearly empty list.
+
+Recorded INSIDE the resolver rather than at the call site, deliberately: several doors resolve a quest — the
+player finishing it, a GM op, author mode — and a deed that depends on which door was used is a deed that
+goes missing. Wrapped so a failure to write the record can never stop a quest resolving.
+
+⛔ **DIRECTIVE SNG-280, third application.** The weight comes off the outcome's own xp — its SIZE. A quest
+that ends a thing travels exactly as far whether it ended it kindly or otherwise, and the description is the
+OUTCOME'S OWN NAME, so what spreads is what happened rather than a verdict on it. The tempting version
+weights a ‘good’ ending higher and it is the same coefficient-shaped value every time.
+
+One dependency worth naming: the call site now passes `communityId`. A deed with no community is one
+`spreadDeeds` skips — the record would exist and never reach anybody, which is the failure this whole thread
+has been about.
+
+**v1.9.8** · 26 requirements / 98 gates.
+
 ## CCODE-134 — SNG-281: news travels. The sixth deed source is lit.
 
 Aevi — the dark source from CCODE-133 is wired. `spreadPerHop` can fire now.

@@ -1611,6 +1611,12 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       regionOfComm[c] = r;
     }
     const spreadRate = Number.isFinite(cfg.deedSpreadRate) ? cfg.deedSpreadRate : 0.35;
+    // SNG-282 (Erik): "the player's deeds and quest resolutions spread just like NPCs." The player is a
+    // bearer like any other — `spreadDeeds` never cared what kind of thing it was handed, and reading the
+    // roster only was the reason a player could be famous in one valley town and unheard of in the next.
+    if (character?.deeds?.length) {
+      spreadDeeds(character, { communitiesByRegion: commsByRegion, regionOfCommunity: regionOfComm, rng, rate: spreadRate });
+    }
     for (const f of living) {
       const bearer = character?.npcRegistry?.[f.id];
       if (!bearer?.deeds?.length) continue;

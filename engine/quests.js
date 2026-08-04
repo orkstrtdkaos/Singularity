@@ -12,6 +12,7 @@
 import { namesMatch, resolveByName, smartClamp } from "./namematch.js";
 import { traditionOf } from "./traditions.js";
 import { createWake } from "./wake.js"; // SNG-204: a significant outcome leaves a wake the world continues from
+import { recordDeed } from "./reputation.js";   // SNG-282: a resolved quest is a deed, and deeds travel
 
 /** SNG-217: models often "type" \n / \t as the literal two-character escape inside their JSON strings.
  *  Valid JSON parses that as backslash-n (two chars), which then renders verbatim — literal `\n` on screen
@@ -529,6 +530,12 @@ function applyQuestProse(character, quest, prose, ctx = {}) {
 /** Resolve a structured quest at a chosen outcome — APPLIES its consequences. Prefers the authored
  *  machine-readable effects[]; falls back to prose parsing for legacy outcomes. The floor either way:
  *  a findable chronicle entry so the player can always go back and SEE what they did. */
+/** SNG-282: how big was this outcome? Read off the xp the outcome carries — the one number already stated
+ *  about its scale. Not a judgement of the outcome, just its size. */
+function xpHint(outcome, ctx = {}) {
+  const eff = (outcome?.effects || []).find(e => e?.kind === "xp" || e?.xp != null);
+  return eff?.xp ?? eff?.amount ?? ctx.xpReward ?? 30;
+}
 export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) {
   const q = (character.quests || []).find(x => x.id === slugify(questId) && x.structured);
   if (!q || q.status !== "active") return { ok: false, why: "not an active structured quest" };
@@ -537,6 +544,27 @@ export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) 
   q.status = "resolved";
   q.outcomeId = outcome.id; q.outcomeName = outcome.name;
   q.resolvedAt = ctx.nowISO || null; q.resolvedWorldDay = ctx.worldDay ?? null;
+
+  // SNG-282 (Erik) — "the player's deeds and quest resolutions spread just like NPCs."
+  //
+  // A resolved quest was recorded on the QUEST and nowhere else, so the one thing a player is most likely to
+  // be known for left no trace in the record the world reads. Recorded HERE rather than at a call site
+  // because there are several ways a quest resolves — the player finishing it, a GM op, author mode — and a
+  // deed that depends on which door was used is a deed that goes missing.
+  //
+  // ⛔ WEIGHT IS MAGNITUDE, NOT MERIT (DIRECTIVE SNG-280). It comes off the size of the outcome, so an
+  // outcome that ends a thing travels as far whether it ended it kindly or otherwise. The OUTCOME NAME is
+  // the description, so what spreads is what actually happened rather than a judgement of it.
+  try {
+    const scale = Math.max(0, Math.min(60, Number(xpHint(outcome, ctx)) || 0));
+    recordDeed(character, {
+      description: `${q.title || q.name || "a matter"} — ${outcome.name || outcome.id}`,
+      weight: scale >= 45 ? 3 : scale >= 20 ? 2 : 1,
+      communityId: ctx.communityId ?? null,
+      locationId: ctx.locationId ?? null,
+      tags: ["quest", "resolution", outcome.id].filter(Boolean),
+    }, ctx.aptitudeMods || {});
+  } catch { /* a quest must resolve even if the record cannot be written */ }
   let applied, xp;
   if (Array.isArray(outcome.effects) && outcome.effects.length) {
     ({ applied, xp } = applyQuestEffects(character, q, outcome.effects, ctx));

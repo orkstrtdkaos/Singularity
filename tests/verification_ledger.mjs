@@ -247,6 +247,18 @@ const LEDGER = [
     note: "`recordDeed` initialised `spread: []` and NOTHING in the repo ever appended to it, so every reputation query answered from the single community where a deed happened. The comment beside it said spread was ‘the world-tick’s job (v0.3)’ and that job never landed. Found from the far end: it was one of six promotion sources, dark. ⛔ Reach is magnitude, never merit — DIRECTIVE SNG-280 applies to how far news carries, not just to what scores.",
   },
   {
+    id: "SNG-282", ask: "the player's deeds and quest resolutions spread just like NPCs",
+    how: "worldtick spreads the character as a bearer; quests.js:resolveStructuredQuest records the resolution as a deed",
+    gates: ["272/282: a resolved quest RECORDS A DEED (it used to be written on the quest and nowhere else)",
+            "272/282: a resolution’s weight is its MAGNITUDE — a bigger outcome travels further, not a nicer one",
+            "272/282: the description is WHAT HAPPENED (the outcome’s own name), not a judgement of it",
+            "272/282: a quest still resolves even if the deed cannot be written",
+            "272/282: the resolve call site passes WHERE, or the deed has nowhere to travel from",
+            "272/282: the PLAYER is a bearer like any other — their deeds spread in the tick",
+            "272/282: …and spreadDeeds genuinely does not care what kind of bearer it is handed"],
+    note: "Two gaps, not one. `spreadDeeds` was already bearer-agnostic — the tick simply never handed it the player, which is why a character could be famous in one valley town and unheard of in the next. And a resolved quest was recorded ON THE QUEST and nowhere else, so the thing a player is most likely to be known for left no trace in the record the world reads. Recorded inside the resolver rather than at a call site: several doors resolve a quest, and a deed that depends on which one was used is a deed that goes missing.",
+  },
+  {
     id: "SNG-267", ask: "the player is just one of many — so we need the world to live without the player",
     how: "tests/player_impact.mjs — the same worlds run with and without parties",
     gates: [],

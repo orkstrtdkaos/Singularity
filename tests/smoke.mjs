@@ -9805,6 +9805,53 @@ await (async () => {
     && /creditDeed\(ws, f\.id, "spreadPerHop"/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8")));
 }
 
+// --- SNG-282: the player travels too, and a resolved quest is a deed --------------------------------
+{
+  const { resolveStructuredQuest } = await import("../engine/quests.js");
+  const { spreadDeeds } = await import("../engine/reputation.js");
+  const mkQ = (xp) => ({ id: "c", name: "C", deeds: [],
+    quests: [{ id: "q1", structured: true, status: "active", title: "The Medicine Road",
+      outcomes: [{ id: "held", name: "the road stayed open", effects: [{ kind: "xp", xp }] }] }] });
+
+  check("272/282: a resolved quest RECORDS A DEED (it used to be written on the quest and nowhere else)", (() => {
+    const ch = mkQ(50);
+    resolveStructuredQuest(ch, "q1", "held", { communityId: "valley.millbrook", worldDay: 5 });
+    const d = ch.deeds[0];
+    return !!d && /Medicine Road/.test(d.description) && d.communityId === "valley.millbrook"
+      && d.tags.includes("quest");
+  })());
+
+  // ⛔ DIRECTIVE SNG-280: the weight is the SIZE of the outcome, never a verdict on it.
+  check("272/282: a resolution’s weight is its MAGNITUDE — a bigger outcome travels further, not a nicer one", (() => {
+    const big = mkQ(50), small = mkQ(5);
+    resolveStructuredQuest(big, "q1", "held", { communityId: "v.a" });
+    resolveStructuredQuest(small, "q1", "held", { communityId: "v.a" });
+    return big.deeds[0].weight > small.deeds[0].weight;
+  })());
+
+  check("272/282: the description is WHAT HAPPENED (the outcome’s own name), not a judgement of it", (() => {
+    const ch = mkQ(30);
+    resolveStructuredQuest(ch, "q1", "held", { communityId: "v.a" });
+    return ch.deeds[0].description.includes("the road stayed open");
+  })());
+
+  check("272/282: a quest still resolves even if the deed cannot be written",
+    /a quest must resolve even if the record cannot be written/.test(readFileSync(join(root, "engine/quests.js"), "utf8")));
+
+  check("272/282: the resolve call site passes WHERE, or the deed has nowhere to travel from",
+    /communityId: hereNow\(\)\?\.communityId \?\? null/.test(readFileSync(join(root, "app.js"), "utf8")));
+
+  check("272/282: the PLAYER is a bearer like any other — their deeds spread in the tick",
+    /if \(character\?\.deeds\?\.length\) \{[\s\S]{0,160}spreadDeeds\(character,/.test(readFileSync(join(root, "engine/worldtick.js"), "utf8")));
+
+  check("272/282: …and spreadDeeds genuinely does not care what kind of bearer it is handed", (() => {
+    const player = { name: "P", deeds: [{ communityId: "v.a", weight: 2, description: "x", spread: [] }] };
+    let s = 3; const rng = () => (s = (s*1103515245+12345) % 2147483648) / 2147483648;
+    spreadDeeds(player, { communitiesByRegion: { valley: ["v.a","v.b"] }, regionOfCommunity: { "v.a":"valley","v.b":"valley" }, rng, rate: 1 });
+    return player.deeds[0].spread.length === 1;
+  })());
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

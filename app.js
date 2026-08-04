@@ -77,7 +77,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.7";
+const APP_VERSION = "1.9.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8024,6 +8024,10 @@ function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
   const day = readClock(character.clock).day;
   const r = resolveStructuredQuest(character, q.id, outcomeId, {
     worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(),
+    // SNG-282: WHERE it was resolved, so the deed it records has somewhere to travel FROM. A deed with no
+    // community is a deed `spreadDeeds` skips — the record would exist and never reach anyone.
+    communityId: hereNow()?.communityId ?? null, locationId: character.currentLocationId ?? null,
+    aptitudeMods: aptitudeMods(character, CONTENT.rules.playerAptitudes),
     content: CONTENT, // SNG-204: the arcs, so a significant outcome's wake knows its pressure + connectsTo
     liaisonMult: liaisonFactions(character), // SNG-126: a company liaison speeds standing with their people
     recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day }),

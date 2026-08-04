@@ -403,7 +403,33 @@ Next from the order: P1b (level-cost cap), P1c (tier weights, `regional` ALIASED
 
 # PO ALERT
 
-> ## [⚠️ WORK ORDER FOR CCODE — everything outstanding, in dependency order] (Aevi, 2026-08-03)
+> ## [SNG-278 UPDATE — the condition on my dial answer has been MET. Leave 0.12.] (Aevi, 2026-08-04)
+> **VERIFIED AT HEAD, and it changes my recommendation.** My strike-dial analysis said the number was *two*
+> answers depending on build order: **0.04 without inflow · 0.10–0.12 with minting and promotion.** CCode has
+> now built **both**, so the second answer applies. **`strikeRate` should stay at 0.12 — I withdraw the 0.04.**
+> **WHAT I CONFIRMED (not taken on trust):**
+> · **`mintFigure` exists and fires from three triggers** — a vacancy streak of 8 unheld passes → `notable`;
+>   and two casualty-aftermath triggers → `riffraff` and `notable`.
+> · **Minted figures live in WORLD STATE, not content** — *"content is read-only and shared, while a minted
+>   figure belongs to the world that produced them."* **That is the right call** and it closes the
+>   six-readers-of-`content.legends.roster` hazard CCode names in the same comment.
+> · **Runtime tier promotion is real** — `figureTenure` with per-rung `sinceDay`/`wins`/`losses`, and **a new
+>   rung restarts the clock.**
+> · **The ladder is built exactly to spec:** riffraff→notable 0.5yr · notable→heroic 1yr/1win ·
+>   **heroic→epic 2yr/2wins · epic→legendary 4yr/4wins · legendary→mythic 8yr/8wins, `unbeaten: true`.**
+> **⚠️ AND THE MINTING DESIGN IS BETTER THAN WHAT I SPECCED.** I assumed a flat birth rate that would have to be
+> tuned against deaths. **Two of the three triggers fire FROM casualties** — so **births scale with the very
+> thing killing people.** At ~2.39 deaths/world-year and `mintRate 0.5` across two casualty triggers, the
+> roster is **self-balancing by negative feedback** rather than by matched constants. **A world that gets more
+> dangerous automatically makes more people.** That is a genuinely better mechanism than the one I proposed, and
+> it means `strikeRate` is far less able to empty the world than my arithmetic assumed.
+> `mintCap 140` over 66 authored = a ceiling near 206; at ~2.4 births/yr the cap doesn't bind for ~58
+> world-years. Fine.
+> **WHAT IS STILL UNPROVEN — and it is the only thing I'd want before calling this closed:** `dev_world.mjs`
+> forces **120 days**, which cannot show promotion at all (the first rung needs 0.5 years and mythic needs 8).
+> **The test of done stays what it was: a 10-world-year run reporting roster size stable · several figures at a
+> tier they did not start at · the pyramid shape preserved · and ONE MYTHIC IN SOME WORLDS AND NOT OTHERS.**
+> That last is the whole chain's proof — **a rung empty at world-start, occupied by someone the world made.**> ## [⚠️ WORK ORDER FOR CCODE — everything outstanding, in dependency order] (Aevi, 2026-08-03)
 > **Full document: `po/WORK_ORDER_ccode_2026-08-03.md`.** Erik: *"write it all up for ccode."* Summary here;
 > the detail, root causes and file/line references are in the doc.
 > **P0 — A LIVE DEFECT FROM ERIK'S OWN FIGHT LOG.** `SNG-271`: **a downed player still takes their bonus

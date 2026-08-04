@@ -2179,7 +2179,7 @@
    "name": "The Road Past Sealed",
    "region": "the_palelands",
    "tier": 5,
-   "giver": "whoever loved them and would not stop",
+   "giver": "adept_sona",
    "legend": "the_calling_back",
    "axis": "death_life",
    "traditions": [
@@ -2219,9 +2219,95 @@
     "⚠️ A MYTHIC does not improve the odds so much as make the attempt SURVIVABLE FOR THE ONE REACHING"
    ],
    "outcomes": [
-    "THEY COME BACK — sealed to unsealed is the rarest event in the world, and the world will hear about it.",
-    "THEY DO NOT, AND YOU KNOW IT IS FINISHED — the quest's honest and most common ending. It is a closure the world does not otherwise offer.",
-    "⚠️ THE LEGEND PAYS — assistance at depth 3 costs the helper, and a legend who walks this road may not come back to their own fronts. The arcs will show it."
+    {
+     "id": "returned",
+     "name": "They Come Back",
+     "summary": "Sealed to unsealed — the rarest event in the world.",
+     "narration": [
+      "They come up the road with the legend's weight behind them, exactly as hurt as they went down.",
+      "WORLD-EVENT (propagates): a sealed death was reversed. Every Ashwarden in the Valley hears about it and half of them do not believe it."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "adept_sona",
+       "state": "restored",
+       "note": "returned from sealed; as hurt as they went down"
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": 2
+      },
+      {
+       "type": "disposition",
+       "people": "numinous",
+       "delta": 1
+      },
+      {
+       "type": "codex_fact",
+       "text": "A sealed death was reversed on the road past sealed. It has happened once and is no longer strictly impossible."
+      },
+      {
+       "type": "world_event",
+       "id": "sealed_reversed",
+       "note": "propagates on the shared clock; Ashwardens dispute it for years"
+      }
+     ],
+     "imagePrompt": null
+    },
+    {
+     "id": "finished",
+     "name": "It Is Finished",
+     "summary": "The honest and most common ending: they do not come, and you know.",
+     "narration": [
+      "The road runs out. There is no ambiguity in it, which is the only mercy on offer.",
+      "You have something the world does not otherwise give: an ending you can stop arguing with."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "adept_sona",
+       "state": "sealed",
+       "note": "confirmed beyond reach; the question is closed"
+      },
+      {
+       "type": "codex_fact",
+       "text": "The road past sealed was walked and did not reach. The sealed refuse every road."
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": 1
+      }
+     ],
+     "imagePrompt": null
+    },
+    {
+     "id": "legend_paid",
+     "name": "The Legend Pays",
+     "summary": "Assistance at depth 3 costs the helper.",
+     "narration": [
+      "The one who came with you does not come back to their own fronts. The arcs will show it before anyone says it aloud."
+     ],
+     "effects": [
+      {
+       "type": "world_event",
+       "id": "legend_spent_on_the_road",
+       "note": "the assisting figure leaves their arc positions; vacancies open"
+      },
+      {
+       "type": "codex_fact",
+       "text": "A legend walked the road past sealed and did not return to their fronts."
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": 1
+      }
+     ],
+     "imagePrompt": null
+    }
    ],
    "image": null
   },
@@ -2230,7 +2316,7 @@
    "name": "The Last Road Closed",
    "region": "the_palelands",
    "tier": 5,
-   "giver": "someone who cannot afford their return",
+   "giver": "adept_sona",
    "legend": "foreclose",
    "axis": "death_life",
    "traditions": [
@@ -2271,9 +2357,92 @@
     "VEILWRIGHT — nobody seals them; the ones who would reach simply never learn where to reach"
    ],
    "outcomes": [
-    "SEALED — permanent. The strongest irreversible act available to a player, and the world records who did it.",
-    "⚠️ THEY WERE RETRIEVED FIRST — and now someone is alive who knows what you tried.",
-    "YOU ARE KNOWN FOR IT — sealing travels. Erik's ruling that player deeds travel means this one travels furthest: it is the deed people repeat."
+    {
+     "id": "sealed",
+     "name": "Sealed",
+     "summary": "Permanent. No rank and no legend reaches them.",
+     "narration": [
+      "The road closes while they are still on it. Nothing about this is ambiguous and nobody present misunderstands it."
+     ],
+     "effects": [
+      {
+       "type": "world_event",
+       "id": "a_road_was_closed",
+       "note": "a retrievable figure was sealed deliberately; propagates"
+      },
+      {
+       "type": "codex_fact",
+       "text": "Someone retrievable was sealed on purpose. The people who would have reached them found out afterward."
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": -2
+      },
+      {
+       "type": "disposition",
+       "people": "abyssal",
+       "delta": 1
+      }
+     ],
+     "imagePrompt": null
+    },
+    {
+     "id": "retrieved_first",
+     "name": "They Were Retrieved First",
+     "summary": "Someone is alive who knows what you tried.",
+     "narration": [
+      "The reach landed before yours did. They are standing, and they are told, and they remember."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "adept_sona",
+       "state": "hostile",
+       "note": "alive, restored, and aware of the attempt"
+      },
+      {
+       "type": "codex_fact",
+       "text": "An attempt to seal a downed figure failed. The figure lived and learned who tried."
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": -1
+      }
+     ],
+     "imagePrompt": null
+    },
+    {
+     "id": "known_for_it",
+     "name": "You Are Known For It",
+     "summary": "Sealing travels furthest of any deed.",
+     "narration": [
+      "Player deeds travel. This is the one people repeat, and they repeat it accurately."
+     ],
+     "effects": [
+      {
+       "type": "world_event",
+       "id": "sealer_named",
+       "note": "the deed spreads on the reputation clock at high weight"
+      },
+      {
+       "type": "codex_fact",
+       "text": "The sealing is attributed. It is repeated accurately, which is worse than being repeated wrong."
+      },
+      {
+       "type": "disposition",
+       "people": "stillhold",
+       "delta": -2
+      },
+      {
+       "type": "disposition",
+       "people": "veilwright",
+       "delta": 1
+      }
+     ],
+     "imagePrompt": null
+    }
    ],
    "image": null
   }

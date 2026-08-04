@@ -2191,6 +2191,121 @@
           "class": "hard"
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_lever",
+      "name": "The Lever",
+      "levelReq": 3,
+      "energyCost": 10,
+      "powerSystem": "reach_demonic_angelic",
+      "tradition": "abyssal",
+      "attribute": "social",
+      "axes": {
+        "appetite_judgement": -0.7
+      },
+      "functions": [
+        "bind",
+        "command",
+        "reveal"
+      ],
+      "narrationHints": "There is no shouting in it. You name the thing they cannot lose, and then you wait.",
+      "description": "⚠️ COMPULSION, and the Maw's central craft. You find what a person will not risk — a child, a name, a debt, a body — and you set the bargain against it. They are not persuaded and they are not willing. They are LEVERED, and they will do it, and they will remember who made them.",
+      "notFor": "Someone with genuinely nothing to lose: the Maw's oldest frustration, and rarer than anyone hopes. It also cannot make them AGREE — a levered person complies and hates you, which is a different and more dangerous thing to be owed by.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Lever",
+          "grants": "Find the one thing a person will not risk, and price a demand against it. They comply.",
+          "cannot": "You must find a real lever. A guess that misses tells them exactly what you were reaching for.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "The Held Lever",
+          "grants": "Hold the lever across time — a standing compliance rather than one act. They act as you require until the lever is taken from you.",
+          "cannot": "A held lever must be MAINTAINED, and everything you hold over someone is a thing they are working to remove.",
+          "functions": [
+            "bind",
+            "command"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 3,
+          "name": "The Long Lever",
+          "grants": "Set a lever on a house, an office, or a line — those who take the role take the compulsion, whether or not they know why.",
+          "cannot": "Those who inherit it did not choose it, and the Maw has never argued otherwise.",
+          "functions": [
+            "bind",
+            "command"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
+        }
+      ],
+      "challengeTypes": [
+        "social",
+        "standoff"
+      ],
+      "harmRung": "incapacitating",
+      "nativeOrCombination": "native",
+      "shape": "hobble",
+      "operativeAxis": [
+        "leverage",
+        "duration",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 6,
+        "duration": 24,
+        "targets": 1,
+        "damageType": "appetite"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "duration",
+          "delta": "a STANDING compliance rather than one act",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "SPECIAL: a lever set on a HOUSE or OFFICE — those who take the role take the compulsion",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "name it quietly — half the hold, and it can be walked back",
+        "surge": "double it; EVERYTHING YOU HOLD OVER SOMEONE IS A THING THEY ARE WORKING TO REMOVE"
+      },
+      "bounds": [
+        {
+          "text": "IT NEEDS A REAL LEVER — someone with nothing to lose is genuinely outside it",
+          "class": "hard"
+        },
+        {
+          "text": "COMPLIANCE IS NOT AGREEMENT — a levered person hates you, and that is a dangerous creditor to have",
+          "class": "hard"
+        },
+        {
+          "text": "A HELD LEVER MUST BE MAINTAINED",
+          "class": "cost"
+        },
+        {
+          "text": "THEY REMEMBER WHO MADE THEM",
+          "class": "cost"
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

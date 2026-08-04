@@ -20,7 +20,7 @@ import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for
 import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
-import { enterDeathState, deepenDeaths } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
+import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
 import { advanceAssignment, progressAgainst } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
@@ -766,7 +766,11 @@ export function mintFigure(ws, { tier = "notable", name = null, epithet = null, 
     // excludes a minted figure from the ENTIRE world — no contests, no standing, no promotion. They existed
     // in the roster and were invisible to every mechanic that reads a care. Same failure as a field with no
     // reader, wearing a type mismatch instead.
-    arcAffinity: arcAffinity ? { arcId: arcAffinity, lean: 1 } : null,
+    // ⚠️ `dir`, NOT `lean` — `affinitiesOf` filters on `a?.arcId && a?.dir`, so a care with the wrong key
+    // is no care at all. I guessed the field name instead of reading the function that consumes it, and the
+    // figures were in the roster, in `living`, and contributed NOTHING to any arc: no push, no contest, no
+    // lean. Twice now on this same object (the shape, then the key). The reader owns the contract.
+    arcAffinity: arcAffinity ? { arcId: arcAffinity, dir: 1 } : null,
     region,
     mintedWorldDay: worldDay,
     origin,                       // WHY they exist — the event that made them, kept so the world can tell it
@@ -838,6 +842,65 @@ export function demoteFigure(ws, f, worldDay) {
   ws.figureTenure = ws.figureTenure || {};
   ws.figureTenure[f.id] = { tier: to, sinceDay: worldDay, wins: 0, losses: 0 };
   return { id: f.id, name: f.name, from: tier, to };
+}
+
+/** SNG-209/SNG-270 — GOING AFTER YOUR OWN DEAD. Erik: "death isn't permanent necessarily. Both NPCs and
+ *  players should be able to quest to resurrect... there are levels of death written in the lore. We need
+ *  to use them."
+ *
+ *  `resolveRetrieval` has existed since SNG-209 and only AUTHOR MODE ever called it — a whole death ladder
+ *  with a road back that no inhabitant of the world had ever walked. So the dead simply sank: every legend
+ *  killed offscreen deepened on a timer until they sealed, and nobody ever came for them.
+ *
+ *  THE COST IS ATTENTION, which is what makes it a decision rather than a free wish. A figure who goes
+ *  after their dead spends a front doing it — the arc they would have been pushing goes unheld this pass,
+ *  and the other side gains it for nothing. That is exactly the trade Erik described for attention
+ *  generally, applied to the most human thing a person can spend it on.
+ *
+ *  WHO GOES: someone who shared a care with the dead. Not the strongest figure available — the one who was
+ *  on their side of something. Depth sets the odds (the threshold is nearly free; the deep dark rarely
+ *  works), rank helps, and FAILING SINKS THEM FURTHER — a failed reach at the deep dark seals them for
+ *  good. Trying is the risk; that is what makes leaving someone in the dark a real choice too.
+ *
+ *  Returns { attempts, retrievers } — retrievers is a Set of ids that owe a front to the dead this pass. */
+export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg = {}, rng = Math.random) {
+  const attempts = [];
+  const wanted = [];
+  const retrievers = new Set();
+  const rate = Number.isFinite(cfg.retrievalRate) ? cfg.retrievalRate : 0.25;
+  const byDepth = cfg.retrievalOddsByDepth || { 0: 0.7, 1: 0.45, 2: 0.2, 3: 0 };   // the threshold → the sealed
+  for (const [id, st] of Object.entries(ws.epicStatus || {})) {
+    if (st?.status !== "dead" || !isRetrievable(st, worldDay, rules)) continue;
+    const onCooldown = ws.retrievalTried?.[id] && worldDay - ws.retrievalTried[id] < (cfg.retrievalCooldownDays ?? 30);
+    // ⛔ LOOK THEM UP IN THE FULL ROSTER, NOT `living` — `living` excludes the dead BY DEFINITION, so the
+    // dead figure resolved to a bare `{ id }` with no cares, nobody shared a care with them, and not one
+    // retrieval was ever attempted. Searching for a dead person in the list of the living: it returns
+    // nothing, forever, and never once errors.
+    const dead = roster.find(f => f.id === id) || { id };
+    const cares = new Set(affinitiesOf(dead).map(c => c.arcId));
+    // Someone who stood on the same side of something. Failing that, nobody comes.
+    const kin = living.filter(f => f.id !== id && effectiveEpicStatus(ws, f.id, worldDay) === "active"
+      && affinitiesOf(f).some(c => cares.has(c.arcId)));
+    if (!kin.length) continue;
+    const who = kin.sort((a, b) => tierRank(tierOf(ws, b)) - tierRank(tierOf(ws, a)))[0];
+    // WHO WANTS THEM BACK — recorded for EVERY reachable dead with living kin, not only the ones somebody
+    // reaches for this pass. That is the difference between a corpse and a QUEST: the GM can only offer
+    // "go get them back for me" if it knows there is a someone doing the asking. Erik: "we should have
+    // quests to retrieve for NPCs."
+    wanted.push({ deadId: id, deadName: dead.name || null, byId: who.id, byName: who.name || null,
+      depth: deathDepth(st, worldDay, rules), waiting: !!onCooldown });
+    if (onCooldown || rng() >= rate) continue;
+    retrievers.add(who.id);
+    (ws.retrievalTried ||= {})[id] = worldDay;
+    const depth = deathDepth(st, worldDay, rules);
+    const odds = Math.min(0.95, (byDepth[depth] ?? 0) + 0.05 * tierRank(tierOf(ws, who)));
+    const won = rng() < odds;
+    const res = resolveRetrieval(st, won ? "return" : "fail", { currentDay: worldDay, changed: won ? "came back changed" : null });
+    attempts.push({ deadId: id, byId: who.id, byName: who.name, depth, odds: Math.round(odds * 100) / 100,
+      outcome: res.ok ? res.outcome : "refused", sealed: !!st.deathState?.sealed });
+  }
+  ws.retrievalWanted = wanted;
+  return { attempts, retrievers, wanted };
 }
 
 export function offscreenPopulation(character, content = {}, { worldDay = 0, rng = Math.random, lastEpicDay = null, minEpicGapDays = 3, epicRate = 0.6 } = {}) {
@@ -1023,12 +1086,24 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       const v = tierBudget[t];
       return Number.isFinite(v) ? v : (Number.isFinite(cfg.attentionBudget) ? cfg.attentionBudget : 1);
     };
+    // SNG-270 — SOMEBODY GOES AFTER THE DEAD, and pays a front to do it. Run BEFORE attention is spent,
+    // because the whole point is that this competes with the arcs: an ally in the dark and a front that
+    // needs holding draw on the same budget, and choosing one is choosing against the other.
+    const { attempts: retrievals, retrievers } =
+      attemptRetrievals(ws, worldRoster(ws, content), living, currentWorldDay, content.rules, cfg, rng);
+    ws.arcRetrievals = retrievals;
+    for (const r of retrievals) {
+      if (r.outcome === "return") news.push({ text: `${r.byName || "Someone"} went into the dark and came back with them. The valley has one of its own again — changed, but back.`, worldDay: currentWorldDay, tier: "event" });
+      else if (r.sealed) news.push({ text: `${r.byName || "Someone"} reached too deep and lost them for good. That road is closed now.`, worldDay: currentWorldDay, tier: "event" });
+    }
+
     const vacated = {};
     const leaning = {};   // CCODE-113: arcId -> who is pushing which way this pass
     for (const f of living) {
       const wantArc = f.wantArcId || f.legend?.wantArcId || null;
       const { spent, unattended } = spendAttention(f, { arcNetPush: netBefore },
-        { budget: budgetFor(f), perPoint, wantArcId: wantArc });
+        // A front spent in the dark is a front not spent on an arc — the cost that makes it a decision.
+        { budget: Math.max(0, budgetFor(f) - (retrievers.has(f.id) ? 1 : 0)), perPoint, wantArcId: wantArc });
       for (const arcId of unattended) vacated[arcId] = (vacated[arcId] || 0) + 1;
       for (const s of spent) {
         const against = -Math.sign(s.care.dir) * (Number(netBefore[s.care.arcId]) || 0);

@@ -1375,12 +1375,20 @@ function renderMachine() {
   const rounds = combatRounds();
   const combatText = () => rounds.slice().reverse().map(r => {
     const t = r.at ? new Date(r.at).toTimeString().slice(0, 8) : "";
-    const yr = r.you?.roll ? ` — roll ${r.you.roll.rolled}/${r.you.roll.chance} (margin ${r.you.roll.margin}, matchup ${r.you.roll.matchup})` : "";
-    const tr = r.them?.roll ? ` — roll ${r.them.roll.rolled}/${r.them.roll.chance} (margin ${r.them.roll.margin})` : "";
+    // SNG-271 (Erik's log) — SAY WHICH WAY IT WENT. `roll 98/65 (margin -33)` is consistent (`chance − roll`)
+    // and still reads wrong: beside a 98 it looks like a great roll that somehow scored negative. The sign
+    // was carrying the only information that matters, and a minus sign is not a word. So say the word.
+    const marginText = m => (Number(m) < 0 ? `missed by ${Math.abs(Number(m))}` : `beat by ${Number(m)}`);
+    const yr = r.you?.roll ? ` — roll ${r.you.roll.rolled}/${r.you.roll.chance} (${marginText(r.you.roll.margin)}, matchup ${r.you.roll.matchup})` : "";
+    const tr = r.them?.roll ? ` — roll ${r.them.roll.rolled}/${r.them.roll.chance} (${marginText(r.them.roll.margin)})` : "";
     return `[${t}] vs ${r.opponent} · round ${r.round} · ${r.kind}\n`
       + `  you : ${r.you?.move} (${r.you?.fn} T${r.you?.tier} ${r.you?.intensity})${yr}\n`
       + `  them: ${r.them?.move} (${r.them?.fn})${tr}\n`
-      + `  momentum ${r.momentum?.before}→${r.momentum?.after} (swing ${r.momentum?.swing}, winner ${r.momentum?.winner || "tie"}) · hp ${r.deltas?.health || 0} en ${r.deltas?.energy || 0} · energy you ${r.energyLeft?.you}/them ${r.energyLeft?.them}${r.ended ? ` · ENDED → ${r.outcome}` : ""}\n`
+      // SNG-271: DELTAS AND TOTALS, TOLD APART. `hp -12` is a delta; `energy you 40` is a total; they sat in
+      // one line with nothing to say which was which, so a round where you took 12 damage read as a NEGATIVE
+      // HEALTH TOTAL. Every health and energy write on both sides clamps at 0, so a real negative total is
+      // not reachable — which makes this a labelling bug wearing a data-corruption costume.
+      + `  momentum ${r.momentum?.before}→${r.momentum?.after} (swing ${r.momentum?.swing}, winner ${r.momentum?.winner || "tie"}) · this round Δhp ${r.deltas?.health || 0} Δen ${r.deltas?.energy || 0} · left: energy you ${r.energyLeft?.you}/them ${r.energyLeft?.them}${r.ended ? ` · ENDED → ${r.outcome}` : ""}\n`
       + `  ${r.receipt || ""}`;
   }).join("\n\n");
   const roundCard = (r) => `<details class="mach-card">
@@ -9258,7 +9266,15 @@ function sbFightBeat(rr, decl, beforeMom, scouting) {
 // SNG-246 (Erik: "some output specifically going to the machine tab… I could gather it"): mirror each skill-battle
 // round's full telemetry to the machine tab's combat log — the rolls both sides made, the margins, the momentum
 // swing, energy/health deltas, and how (if) it ended. Dev-only (recordCombatRound is inert unless armed).
-function sbLogRound(enc, decl, rr, beforeMom, scouting) {
+// SNG-271 (Erik's log) — THE STALE RIBBON. This read `sbLastRoundReceipt`, a module-level variable holding
+// whatever prose was last DISPLAYED. The strike path sets it just before logging, so those rounds were fine.
+// The READ path never sets it — it builds its own prose in `t.senseLine` and hands it to the narrator — so a
+// read round recorded the PREVIOUS STRIKE'S receipt verbatim: fresh numbers under stale words, which is the
+// worst kind of wrong in a diagnostic log, because it looks like it is telling you something.
+//
+// The receipt is a PARAMETER now. A caller that knows what happened this round says so; nothing has to
+// remember to update a shared variable in the right order first.
+function sbLogRound(enc, decl, rr, beforeMom, scouting, receipt = sbLastRoundReceipt) {
   const p = rr.player, o = rr.opponent;
   const num = (v) => Number.isFinite(v) ? Math.round(v * 10) / 10 : v;
   recordCombatRound({
@@ -9279,7 +9295,7 @@ function sbLogRound(enc, decl, rr, beforeMom, scouting) {
     effectsApplied: { you: (p?.effectMods || []).map(m => `${m.label} ${m.value >= 0 ? "+" : ""}${m.value}`), them: (o?.effectMods || []).map(m => `${m.label} ${m.value >= 0 ? "+" : ""}${m.value}`) },
     effectsLanded: (rr.landed || []).map(f => `${f.from === "player" ? "you" : "them"}: ${f.label} ${f.value >= 0 ? "+" : ""}${f.value} × ${f.roundsLeft}r`),
     effectsStanding: (rr.state?.effects || []).map(f => `${f.side === "player" ? "you" : "them"}: ${f.label} ${f.value >= 0 ? "+" : ""}${f.value} (${f.roundsLeft}r, ${f.applies})`),
-    receipt: sbLastRoundReceipt
+    receipt: receipt || null
   });
 }
 
@@ -9709,7 +9725,7 @@ async function sbResolveSense() {
   // the fog reads the ROLL, not a standing stat, and so a botched read genuinely leaves you blinder this turn.
   character.activeEncounter.state.senseTierEarned = rr.senseTier ?? null;
   character.activeEncounter.state.senseResist = rr.senseResist || null;
-  sbLogRound(enc, decl, rr, character.activeEncounter.state.momentum ?? 0, true);
+  sbLogRound(enc, decl, rr, character.activeEncounter.state.momentum ?? 0, true, t.senseLine);   // SNG-271: the READ's own prose, not the last strike's
   saveCharacter(character);
   // GM call #1 — the sense beat. Needs a key; without one the mechanical line above still tells the story.
   const nm = enc.def?.opponent?.name || "your opponent";

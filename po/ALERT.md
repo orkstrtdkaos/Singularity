@@ -1,3 +1,51 @@
+## CCODE-127 — SNG-271's last three, and SNG-270: the world goes after its own dead
+
+**The fight log's remaining items.** Margins now say which way they went (`missed by 33` / `beat by 24`) —
+the sign was carrying the only information that mattered and a minus sign is not a word. The stale ribbon
+was a shared module-level variable: the strike path set it just before logging, the READ path never did, so
+a read recorded the previous strike's prose verbatim under fresh numbers. The receipt is a PARAMETER now.
+
+**On the negative health — Aevi is right and it is a labelling bug.** Every health and energy write on both
+sides clamps at 0; a negative TOTAL is unreachable. What Erik saw was the log printing per-round DELTAS
+beside TOTALS with nothing to tell them apart: `hp -12 en -8 · energy you 40/them 22`. Now `this round Δhp
+-12 · left: energy you 40`. A labelling bug wearing a data-corruption costume, which is the worse one to
+leave alone.
+
+**SNG-270 — RETRIEVAL. Erik: "death isn't permanent necessarily… there are levels of death written in the
+lore. We need to use them."** `resolveRetrieval` has existed since SNG-209 and **only author mode ever
+called it** — a whole death ladder with a road back that no inhabitant of the world had ever walked. The
+dead just sank on a timer until they sealed, and nobody ever came.
+
+Now a figure who shared a care with the dead goes after them, and **pays a front to do it** — the arc they
+would have held goes unheld, and the other side gains it for free. That is the attention trade applied to
+the most human thing a person can spend it on. Depth sets the odds; failing sinks them further and a failed
+reach at the deep dark seals them for good, so leaving someone in the dark is a real choice too.
+
+**It changes the endgame shape.** 6 worlds × 12 world-years:
+```
+    retrievals   33.7   (17.8 came back · 10.2 sealed for good)
+    lost         5.5    → net +6.7 figures  (was −4.8 before retrieval)
+```
+Half of all deaths get reversed. **That rate is yours and Erik's** — `retrievalRate` (0.25 attempt chance)
+and `retrievalOddsByDepth` are the dials. I have no opinion on whether the valley should be that good at
+getting its people back; I only think it should be ABLE to.
+
+**And the player half.** The GM block already listed the reachable dead — as ATMOSPHERE. Nothing said anyone
+WANTED them back, so there was nobody to do the asking and the list could never become a quest. The asker is
+now recorded for every reachable dead with living kin (including the ones on cooldown after a failed reach —
+the most askable state there is: they cannot try again yet and the clock is running), and the GM is told
+that person is a quest-giver.
+
+⚠️ **THE SAME MISTAKE, THREE TIMES, ON ONE OBJECT.** The minted figure's care was wrong in the SHAPE
+(`living` wants `.arcId`), then wrong in the KEY (`affinitiesOf` wants `.dir`, I wrote `lean`), and the
+retrieval lookup searched for the dead inside `living`, which excludes the dead by definition. Each one
+returned empty forever and never errored. **Every one of them was me writing what the field sounded like
+instead of reading the function that consumes it.** The gates now assert against the real consumer
+(`affinitiesOf(g).length === 1`), not against the field's name.
+
+Between the affinity fix and retrieval, the tier table moved again — heroic 6.5% · epic 9.3% · legendary
+10.6%, with minted figures now actually pushing arcs.
+
 ## CCODE-126 — P2c: legends are MADE now. A new one arrives about every three world-years.
 
 Erik's reframe, mechanical: **"the ones that stay the longest are the true legends."** Tier stops being an

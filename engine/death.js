@@ -69,18 +69,25 @@ export function deepenDeaths(entities = [], currentDay = null, rules = {}) {
 export function reachableDeadForGM(character, content = {}, currentDay = null) {
   const day = currentDay ?? character?.worldState?.lastTickWorldDay ?? null;
   const out = [];
-  const consider = (name, e) => {
+  // SNG-270: WHO WANTS THEM BACK. A dead person the GM can see is atmosphere; a dead person somebody is
+  // trying to reach is a QUEST the player can be asked to take. The world-tick records the asker while
+  // it decides who spends a front going after their own — this just reads it back.
+  const wantedBy = {};
+  for (const w of (character?.worldState?.retrievalWanted || [])) if (w?.deadId) wantedBy[w.deadId] = w;
+  const consider = (name, e, id = null) => {
     if (!name || !isRetrievable(e, day)) return;
     const d = deathDepth(e, day);
-    out.push({ name, depth: d, wall: DEATH_DEPTH_NAMES[d], cause: e.deathState?.cause || null });
+    const w = id ? wantedBy[id] : null;
+    out.push({ name, depth: d, wall: DEATH_DEPTH_NAMES[d], cause: e.deathState?.cause || null,
+      wantedBy: w?.byName || null, askerWaiting: w?.waiting || false });
   };
   // SNG-269/2b: the LIVING roster — authored figures PLUS the ones the world has minted since. A minted
   // figure who dies must be mournable and retrievable like any other; reading only the authored roster
   // would make them the one kind of dead nobody can go after. Concatenated inline rather than imported —
   // this module is the pure substrate and owes nothing to worldtick.
   const roster = (content.legends?.roster || []).concat(character?.worldState?.mintedFigures || []);
-  for (const f of roster) consider(f.name, character?.worldState?.epicStatus?.[f.id]);
-  for (const n of Object.values(character?.npcRegistry || {})) if (n && typeof n === "object") consider(n.name, n);
+  for (const f of roster) consider(f.name, character?.worldState?.epicStatus?.[f.id], f.id);
+  for (const n of Object.values(character?.npcRegistry || {})) if (n && typeof n === "object") consider(n.name, n, n.id);
   return out.length ? out.slice(0, 8) : null;
 }
 

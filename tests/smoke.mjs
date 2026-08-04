@@ -9281,7 +9281,7 @@ await (async () => {
 
 // --- SNG-269/2b: MINTING — the world refills what it loses -------------------------------------------
 {
-  const { worldRoster, mintFigure } = await import("../engine/worldtick.js");
+  const { worldRoster, mintFigure, affinitiesOf: affinitiesOfFn } = await import("../engine/worldtick.js");
   const srcOf = (f) => readFileSync(join(root, f), "utf8");
   const wtSrc = srcOf("engine/worldtick.js");
   const ws = {};
@@ -9298,6 +9298,13 @@ await (async () => {
   check("2b: the roster cannot grow without bound", (() => {
     const w = {}; for (let i = 0; i < 12; i++) mintFigure(w, { cap: 4, epithet: "x" });
     return (w.mintedFigures || []).length === 4;
+  })());
+  // ⚠️ TWO SEPARATE WAYS THIS OBJECT WAS WRONG, both silent: the SHAPE (`living` wants `.arcId`) and the
+  // KEY (`affinitiesOf` wants `.dir`). Assert against the real CONSUMER, not against what the field is
+  // called — a care the care-reader rejects is not a care, however right it looks.
+  check("2b: a minted figure's care is one `affinitiesOf` actually ACCEPTS (shape AND key)", (() => {
+    const w = {}; const g = mintFigure(w, { arcAffinity: "arc-x", epithet: "e" });
+    return g.arcAffinity?.arcId === "arc-x" && affinitiesOfFn(g).length === 1;
   })());
   check("2b: minted figures ENTER THE POPULATION (born into the roster but never acting is not being alive)",
     /mintedFigures \|\| \[\]\)\) \{[\s\S]{0,220}add\(f\.id, f\.name/.test(wtSrc));
@@ -9338,6 +9345,73 @@ await (async () => {
     /for \(const e of won\) if \(ws\.figureTenure\[e\.f\.id\]\) ws\.figureTenure\[e\.f\.id\]\.wins\+\+/.test(wtSrc2));
   check("2c: a minted figure's arcAffinity has the SHAPE `living` filters on, or it is invisible to the world",
     /arcAffinity: arcAffinity \? \{ arcId: arcAffinity/.test(wtSrc2));
+}
+
+// --- SNG-271: the three remaining items from Erik's fight log ------------------------------------------
+{
+  const appSrc271 = readFileSync(join(root, "app.js"), "utf8");
+  check("271: a margin says WHICH WAY it went — `missed by 33` beats `(margin -33)` beside a roll of 98",
+    /const marginText = m => \(Number\(m\) < 0 \? `missed by \$\{Math\.abs\(Number\(m\)\)\}` : `beat by/.test(appSrc271)
+    && !/\(margin \$\{r\.you\.roll\.margin\}/.test(appSrc271));
+  check("271: the round log takes its receipt as a PARAMETER, not from a shared display variable",
+    /function sbLogRound\(enc, decl, rr, beforeMom, scouting, receipt = sbLastRoundReceipt\)/.test(appSrc271)
+    && /receipt: receipt \|\| null/.test(appSrc271));
+  check("271: a READ logs its OWN prose — not whatever the last strike left standing",
+    /sbLogRound\(enc, decl, rr, character\.activeEncounter\.state\.momentum \?\? 0, true, t\.senseLine\)/.test(appSrc271));
+  check("271: the log tells DELTAS from TOTALS (a -12 delta beside totals reads as negative health)",
+    /this round Δhp \$\{r\.deltas\?\.health/.test(appSrc271) && /left: energy you/.test(appSrc271));
+  check("271: and a negative health TOTAL is structurally unreachable — every write clamps at zero",
+    (appSrc271.match(/character\.health = Math\.max\(0, Math\.min\(character\.maxHealth/g) || []).length >= 4
+    && /opponentHealth = Math\.max\(0,/.test(readFileSync(join(root, "engine/skill_battle.js"), "utf8")));
+}
+
+// --- SNG-270: going after your own dead ---------------------------------------------------------------
+{
+  const { attemptRetrievals } = await import("../engine/worldtick.js");
+  const { reachableDeadForGM, enterDeathState } = await import("../engine/death.js");
+  const wtSrc3 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  const mk = (diedDay) => {
+    const ws = { epicStatus: { dead1: { status: "dead" } } };
+    enterDeathState(ws.epicStatus.dead1, { diedDay, cause: "killed by someone" });
+    const roster = [{ id: "dead1", name: "The Fallen", arcAffinity: { arcId: "a1", dir: 1 } },
+                    { id: "kin1", name: "Their Ally", tier: "legendary", arcAffinity: { arcId: "a1", dir: 1 } }];
+    return { ws, roster };
+  };
+  {
+    const { ws, roster } = mk(0);
+    const r = attemptRetrievals(ws, roster, roster.slice(1), 5, {}, { retrievalRate: 1 }, () => 0.01);
+    check("270: somebody who shared a care goes after their dead — and at the threshold, gets them back",
+      r.attempts[0]?.outcome === "return" && ws.epicStatus.dead1.status === "active");
+    check("270: the retriever OWES A FRONT — attention spent in the dark is not spent on an arc",
+      r.retrievers.has("kin1"));
+  }
+  {
+    const { ws, roster } = mk(0);
+    const r = attemptRetrievals(ws, roster, roster.slice(1), 5, {}, { retrievalRate: 1 }, () => 0.99);
+    check("270: reaching and failing SINKS them — trying is the risk that makes leaving them a real choice",
+      r.attempts[0]?.outcome === "fail" && ws.epicStatus.dead1.deathState.depthOverride > 0);
+  }
+  {
+    const { ws, roster } = mk(0);
+    // nobody shares a care → nobody comes
+    roster[1].arcAffinity = { arcId: "somewhere-else", dir: 1 };
+    const r = attemptRetrievals(ws, roster, roster.slice(1), 5, {}, { retrievalRate: 1 }, () => 0.01);
+    check("270: a stranger does not go into the dark for you", r.attempts.length === 0);
+  }
+  {
+    const { ws, roster } = mk(0);
+    attemptRetrievals(ws, roster, roster.slice(1), 5, {}, { retrievalRate: 0 }, () => 0.5);
+    check("270: the ASKER is recorded even when no NPC reaches this pass — that is what makes it a quest",
+      ws.retrievalWanted?.[0]?.byName === "Their Ally");
+    const seen = reachableDeadForGM({ worldState: ws, npcRegistry: {} },
+      { legends: { roster } }, 5);
+    check("270: the GM is told WHO WANTS THEM BACK, not merely that someone is dead",
+      seen?.[0]?.wantedBy === "Their Ally");
+  }
+  check("270: the dead are looked up in the FULL roster — `living` excludes them by definition",
+    /const dead = roster\.find\(f => f\.id === id\)/.test(wtSrc3));
+  check("270: the GM block frames the asker as a quest-giver, not atmosphere",
+    /WANTING THEM BACK, that person is a quest-giver/.test(readFileSync(join(root, "engine/gm.js"), "utf8")));
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

@@ -54,6 +54,8 @@ for (let run = 0; run < RUNS; run++) {
   const t0 = Date.now();
   for (let d = 0; d < DAYS; d += 7) {   // a pass a week of world time
     await advanceGeneratedOffscreen({ character, content: CONTENT, evolveFn: stub, rng, now: t0 + d * DAY_MS });
+    const w = character.worldState;
+    if (w?.arcRetrievals?.length) (w._allRetrievals ||= []).push(...w.arcRetrievals);   // per-pass; the run wants the total
   }
 
   const ws = character.worldState;
@@ -78,6 +80,9 @@ for (let run = 0; run < RUNS; run++) {
     resolvedWants: Object.values(ws.wantProgress || {}).filter(w => w?.status === "resolved").length,
     news: (ws.news || []).length,
     minted: (ws.mintedFigures || []).length,
+    retrievals: (ws._allRetrievals || []).length,
+    returned: (ws._allRetrievals || []).filter(r => r.outcome === 'return').length,
+    sealed: (ws._allRetrievals || []).filter(r => r.sealed).length,
     promoted: Object.keys(ws.figureTier || {}).length,
     endTiers: Object.values(ws.figureTier || {}).reduce((m, t) => ((m[t] = (m[t] || 0) + 1), m), {}),
     mintedByTier: (ws.mintedFigures || []).reduce((m, f) => ((m[f.tier] = (m[f.tier] || 0) + 1), m), {}),
@@ -135,6 +140,10 @@ console.log(`    wants resolved    mean ${mean("resolvedWants").toFixed(1)}     
   const et = {};
   for (const r of results) for (const [t, n] of Object.entries(r.endTiers)) et[t] = (et[t] || 0) + n / results.length;
   console.log("    re-tiered          " + pr.toFixed(1) + "   (" + (Object.entries(et).map(([t, n]) => t + " " + n.toFixed(1)).join("  ·  ") || "nobody rose") + ")");
+  const rt = results.reduce((s, r) => s + r.retrievals, 0) / results.length;
+  const rb = results.reduce((s, r) => s + r.returned, 0) / results.length;
+  const sl = results.reduce((s, r) => s + r.sealed, 0) / results.length;
+  console.log("    retrievals         " + rt.toFixed(1) + "   (" + rb.toFixed(1) + " came back  ·  " + sl.toFixed(1) + " sealed for good)");
   console.log("    lost per world     " + lost.toFixed(1) + "   → net " + (m - lost >= 0 ? "+" : "") + (m - lost).toFixed(1) + " figures per " + DAYS + " days");
 }
 console.log(`\n  WHERE THE ARCS LANDED — does every world end the same way?`);

@@ -1,0 +1,72 @@
+{
+ "schemaVersion": 1,
+ "id": "minted_figure_content",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik: 'make sure all of these new fields get swept against all the generators so any newly minted things get full content.'",
+ "theAudit": {
+  "swept": "every field authored this session, against `mintFigure` (worldtick.js) — the only generator that produces roster figures.",
+  "findings": [
+   "✅ `tier` — set, and correctly (riffraff/notable via tierBirthWeight).",
+   "✅ `wants` — set, from the minting event's `origin`.",
+   "✅ `arcAffinity` (singular) — set, and CCode's own comment records being burned twice on its SHAPE and its KEY. `affinitiesOf` falls back to it, so a minted figure is not invisible.",
+   "❌ `arcAffinities[]` — NOT SET. A minted figure has exactly ONE care.",
+   "❌ `wantArcId` — NOT SET. No tiebreak when nothing is on fire.",
+   "❌ `personalVerbs` — NOT SET. Zero of the minted have a life off-arc.",
+   "❌ `interests` / `kin` — NOT SET (the other two pools `personalPursuitOf` reads)."
+  ]
+ },
+ "whyItCompounds": {
+  "note": "⚠️ MINTED FIGURES JOIN `worldRoster` AND ARE FULLY PROMOTABLE — `worldRoster` concats them, and `advanceStandings` walks that roster. So a minted figure can rise riffraff → notable → heroic → epic → legendary → mythic.",
+  "theConsequence": "THE WORLD THINS AS IT AGES. The 66 authored figures die at ~2.4/world-year and are replaced by minted ones carrying one care, no want and no life. Over a long campaign the roster is increasingly made of figures who CANNOT hold two fronts, CANNOT abandon one, and have nothing to be doing when they are not fighting. Every mechanic built this session degrades quietly as the cast turns over — and nothing fails, which is why it would not be noticed.",
+  "sharpest": "⚠️ A MINTED FIGURE CAN BECOME MYTHIC WHILE HAVING EXACTLY ONE CARE. The top of the ladder can fill with figures the attention system cannot meaningfully act on."
+ },
+ "theFix_contentSide": {
+  "principle": "SAME RULE AS THE ENGINE'S OWN: the generator must not INVENT A LIFE. So this supplies POOLS keyed on what the mint already knows — the origin event and the tier — rather than authoring a person. A verb drawn from 'survived a casualty' is honest; a brother is not.",
+  "personalVerbsByOrigin": {
+   "casualty_survivor": [
+    "visiting where it happened",
+    "avoiding where it happened",
+    "asking after the ones who did not"
+   ],
+   "faction_leaderless": [
+    "holding a thing together that was not theirs to hold",
+    "waiting for someone who is not coming",
+    "learning what the old one knew"
+   ],
+   "vacancy_filled": [
+    "doing work nobody thanked them for",
+    "finding out why the seat was empty",
+    "staying longer than the last one"
+   ],
+   "arena_risen": [
+    "training where they can be seen",
+    "counting the wins",
+    "looking for a harder opponent"
+   ],
+   "player_ally": [
+    "waiting to be sent for",
+    "telling the story of what they saw",
+    "being changed by it"
+   ],
+   "_default": [
+    "making themselves useful",
+    "being somewhere they were not last season",
+    "keeping at it"
+   ]
+  },
+  "secondCareRule": "⚠️ A MINTED FIGURE SHOULD GET A SECOND CARE, DERIVED NOT ROLLED: their primary is the arc that produced them; their SECOND is the arc most contested in their REGION, at `dir` opposing whoever killed the figure whose vacancy they filled. That is authored-from-circumstance rather than random, and it means minted figures inherit the local argument — which is how real successors work.",
+  "wantArcIdRule": "the primary care, unless the second is the one their origin event names. A figure minted by a casualty on the storm WANTS the storm arc.",
+  "tierProgression": "✅ nothing needed — tierBirthWeight and advanceStandings already handle it."
+ },
+ "otherGenerators": [
+  "⚠️ BRAIDS (`engine/braids.js`) — `deriveMechanic` covers the mechanic block, but SNG-268 ring-distance (cost×tension, the tension bound, `requiresPoles`) is specced and NOT BUILT. A minted braid still gets no tension bound. Still queued in BACKLOG.",
+  "GENERATED NPCS (`generate.js` stubEntity) — do NOT need arc fields: they are people, not roster figures, and giving them arc cares would inflate the contest population. Verified they are not in `worldRoster`. NO ACTION.",
+  "GENERATED CREATURES — the bestiary mechanics pass covered authored ones; a GENERATED creature gets no `class`, affinities or soak. ⚠️ WORTH A SEPARATE CHECK — it is the same shape of gap and I have not audited it.",
+  "⚠️ AND THE ONE I CANNOT CHECK: whether a minted figure ever gets a real NAME. `provisional: !name` means most carry an epithet forever. That is correct per the engine's no-authorship rule, but it means the world's future legends may all be 'someone newly spoken of'. A content pool of NAMES by region would fix it without inventing a person — worth Erik's call."
+ ],
+ "forCCode": [
+  "populate `arcAffinities`, `wantArcId` and `personalVerbs` in `mintFigure` from the pools above. `arcAffinity` stays as-is for the fallback path.",
+  "the second-care rule needs the region's most-contested arc, which `ws.arcContests` already provides.",
+  "⚠️ AND A GATE, SO THIS CANNOT RECUR: a ratchet asserting that every figure in `worldRoster` has `arcAffinities.length >= 1`, a `wantArcId`, and a non-empty personal pool. `ws.personalCoverage` already counts the last one — make it fail rather than report."
+ ]
+}

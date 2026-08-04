@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 27,
+  "xp": 39,
   "attributes": {
     "physical": 6,
     "mental": 8,
@@ -26,6 +26,26 @@
     {
       "abilityId": "hunters_strike",
       "level": 1
+    },
+    {
+      "abilityId": "echo_sense",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "stillness_field",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "tremor_sense",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "drumline_stride",
+      "level": 1,
+      "native": true
     }
   ],
   "alignment": {
@@ -123,141 +143,170 @@
         "player": null,
         "summary": "The keeper of the toll yields — the arm drops, the challenge ends, and the sapling stays in the ground.",
         "narration": "The keeper's right arm comes again — faster than the first, aimed lower, the tell of someone who has recalibrated and committed. You bring your guard up and catch the blow on the outside of your forearm, angling just enough that the force skids off and takes nothing with it. The impact rings up through your arm but you are still standing exactly where you chose to stand.\n\nNeither of you moves for a moment. The orchard holds its breath around you — the gate post, the fresh-turned earth, the little marker stake still catching the last of the light. Then something goes out of the keeper's shoulders. Not all at once. Like a rope that has been cut and is only now realizing it.\n\n\"Enough,\" the keeper says, and the word sounds like it cost them something. They step back one pace, then two, and their right arm drops to their side. They look at the sapling — at the tamped earth, at the stake — and then they look away, toward the lower lane, as though they are counting something in their head that no longer adds up the way it did.\n\nOssivyn Tallow has not moved from the gate post. The record book is still under their arm. They watch the keeper go quiet, and they say nothing — but they write something down."
+      },
+      {
+        "player": null,
+        "summary": "A broad-shouldered stranger steps from the lower lane, club in hand, demanding Loki come out from behind the gate — the orchard holds its breath.",
+        "narration": "The keeper's arm dropped a moment ago. The orchard was quiet. Then a figure steps from the lower lane — not running, not shouting, just walking with the particular deliberate weight of someone who has already decided the outcome. He is broad across the shoulders and carries himself like a man who does not expect to be the first one to look away. A short club hangs loose in his right hand, the kind a river-worker or a carter might carry without anyone remarking on it. He stops at the edge of the lamplight, six paces out, and looks at Loki the way you look at a nail you mean to drive home. 'You're the one who planted in the toll ground,' he says, his voice flat and carrying. 'Come out from behind the gate.'\n\nOssivyn goes still against the gate post, record book pressed to his chest. Cy's lens locks onto the newcomer without a sound. The keeper of the toll takes one careful step sideways — not toward Loki, not toward the man, just out of the line between them. Whatever was unfinished between keeper and Loki has been folded up and put away for now.\n\nThe man in the lane has not raised the club yet. He is watching you read him. There is space here — the gate at your back is unlatched, the lane behind him is open, and no one has thrown anything yet. This can still go sideways in more than one direction."
       }
     ],
     "lastTurn": {
-      "narration": "The keeper's right arm comes again — faster than the first, aimed lower, the tell of someone who has recalibrated and committed. You bring your guard up and catch the blow on the outside of your forearm, angling just enough that the force skids off and takes nothing with it. The impact rings up through your arm but you are still standing exactly where you chose to stand.\n\nNeither of you moves for a moment. The orchard holds its breath around you — the gate post, the fresh-turned earth, the little marker stake still catching the last of the light. Then something goes out of the keeper's shoulders. Not all at once. Like a rope that has been cut and is only now realizing it.\n\n\"Enough,\" the keeper says, and the word sounds like it cost them something. They step back one pace, then two, and their right arm drops to their side. They look at the sapling — at the tamped earth, at the stake — and then they look away, toward the lower lane, as though they are counting something in their head that no longer adds up the way it did.\n\nOssivyn Tallow has not moved from the gate post. The record book is still under their arm. They watch the keeper go quiet, and they say nothing — but they write something down.",
-      "sceneSummary": "The keeper of the toll yields — the arm drops, the challenge ends, and the sapling stays in the ground.",
+      "narration": "The keeper's arm dropped a moment ago. The orchard was quiet. Then a figure steps from the lower lane — not running, not shouting, just walking with the particular deliberate weight of someone who has already decided the outcome. He is broad across the shoulders and carries himself like a man who does not expect to be the first one to look away. A short club hangs loose in his right hand, the kind a river-worker or a carter might carry without anyone remarking on it. He stops at the edge of the lamplight, six paces out, and looks at Loki the way you look at a nail you mean to drive home. 'You're the one who planted in the toll ground,' he says, his voice flat and carrying. 'Come out from behind the gate.'\n\nOssivyn goes still against the gate post, record book pressed to his chest. Cy's lens locks onto the newcomer without a sound. The keeper of the toll takes one careful step sideways — not toward Loki, not toward the man, just out of the line between them. Whatever was unfinished between keeper and Loki has been folded up and put away for now.\n\nThe man in the lane has not raised the club yet. He is watching you read him. There is space here — the gate at your back is unlatched, the lane behind him is open, and no one has thrown anything yet. This can still go sideways in more than one direction.",
+      "sceneSummary": "A broad-shouldered stranger steps from the lower lane, club in hand, demanding Loki come out from behind the gate — the orchard holds its breath.",
       "choices": [
         {
-          "label": "Ask the keeper plainly: who sent them, and what were they paid to guard this gate against.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Turn to Ossivyn — ask what they just wrote in the record book, and whether they know this keeper's name.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Use Prism Sight to read what the keeper is looking at in the lower lane — heat-traces on the road, a direction someone came from, a waiting figure.",
+          "label": "Hold your ground and let him come to you — read his approach with Prism Sight before he closes the distance.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "scout"
+            "defend",
+            "study"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
           "trivial": false
         },
         {
-          "label": "Let the keeper go without a word — watch which way they walk, then follow at a distance.",
+          "label": "Step out from the gate and meet him in the open — use Echo Sense to feel where his weight commits before the first blow.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "attack",
+            "careful"
+          ],
+          "abilityId": "echo_sense",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Drive a Sonic Resonance pulse at the club in his hand — knock it loose before he can swing it.",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
-            "scout",
+            "attack",
+            "risky"
+          ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 8,
+          "trivial": false
+        },
+        {
+          "label": "Walk back through the gate and leave — this is not your fight, the sapling is in the ground, and the lower lane is still open.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
             "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "The Slow Orchard, planting gate — evening, long golden light fading through old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last of the light. Mud underfoot.",
+        "setting": "The Slow Orchard, planting gate — evening, the last gold fading from old branches. Cool spring air. Mud underfoot. A broad-shouldered stranger has stepped from the lower lane into the lamplight, club loose in his right hand, six paces out.",
         "npcsPresent": [
           {
             "name": "Ossivyn Tallow",
-            "state": "Pressed against the gate post, record book open, writing something — watching the keeper."
+            "state": "Pressed against the gate post, record book clutched to his chest, still and watching."
           },
           {
             "name": "Cy",
-            "state": "Motionless at Loki's left heel, lens tracking the keeper's retreat."
+            "state": "Motionless at Loki's left heel, lens locked on the stranger."
           },
           {
             "name": "The Keeper of the Toll",
-            "state": "Stepped back two paces, right arm dropped, looking toward the lower lane — quiet, recalculating."
+            "state": "Stepped one pace sideways, out of the line between Loki and the newcomer — watching, not intervening."
+          },
+          {
+            "name": "The Stranger",
+            "state": "Standing six paces out in the lane, club loose in his right hand, eyes on Loki — waiting."
           }
         ],
         "objects": [
           "Freshly-planted sapling in tamped earth",
           "Small unlabeled iron marker stake driven beside the root base",
-          "Closed record book (carried by Ossivyn, now open)",
-          "Gate post with newly-straightened hinge"
+          "Gate post with newly-straightened hinge (unlatched)",
+          "Short club in the stranger's right hand"
         ],
         "threads": [
-          "The keeper yielded but hasn't explained who sent them or why.",
-          "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed.",
-          "Ossivyn wrote something in the record book just now — unknown what.",
-          "The regulator signal moving downstream — no one upstream knows to expect it.",
-          "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing."
+          "The stranger demands Loki step out — has not struck yet.",
+          "The keeper yielded but still has not explained who sent them or why.",
+          "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
+          "Ossivyn's record book entry — unknown what was written.",
+          "The regulator signal moving downstream — no one upstream knows to expect it."
         ]
-      },
-      "characterDeltas": {
-        "energy": -5
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "keeper-of-the-toll",
-          "name": "The Keeper of the Toll",
-          "note": "Yielded after the second exchange — arm dropped, stepped back, looked toward the lower lane. Did not explain themselves.",
+          "op": "meet",
+          "npcId": "stranger-at-the-gate",
+          "name": "The Stranger",
+          "role": "Hired enforcer or territorial man from the lower lane",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "Broad-shouldered, deliberate in his movement — carries a short club as though it is simply part of him. Comes with the air of someone who expects the other person to flinch first.",
+          "note": "Stepped from the lower lane as the keeper's challenge ended — demanded Loki step out from the gate. Has not struck yet.",
+          "learned": [
+            "Claims Loki planted in toll ground",
+            "Arrived immediately after the keeper yielded — timing is not accidental"
+          ],
+          "skillsObserved": [
+            "Deliberate intimidation approach"
+          ],
+          "relationshipDelta": -1,
           "status": "active",
-          "statusNote": "Yielded at the orchard gate; standing two paces back, quiet and recalculating.",
-          "relationshipDelta": 1
-        },
+          "statusNote": "Standing six paces from Loki at the orchard gate, club in hand, challenge open."
+        }
+      ],
+      "generateRequest": [
         {
-          "op": "update",
-          "npcId": "ossivyn-tallow",
-          "name": "Ossivyn Tallow",
-          "note": "Watched the whole exchange without speaking; wrote something in the record book when the keeper yielded.",
-          "status": "active",
-          "statusNote": "Present at the orchard gate; record book now open, something just written."
+          "type": "npc",
+          "hint": "a broad-shouldered enforcer or territorial carter from the lower lane — the kind of man hired or sent to discourage newcomers, not quite a raider but not innocent either",
+          "why": "He stepped from the lower lane as a structured encounter presence; needs a stable identity so he can recur and the fiction can explain who sent him."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange — the toll-contest resolved in a handful of minutes."
+        "why": "A brief exchange in the lane — moments only."
       }
     },
     "sceneState": {
-      "setting": "The Slow Orchard, planting gate — evening, long golden light fading through old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last of the light. Mud underfoot.",
+      "setting": "The Slow Orchard, planting gate — evening, the last gold fading from old branches. Cool spring air. Mud underfoot. A broad-shouldered stranger has stepped from the lower lane into the lamplight, club loose in his right hand, six paces out.",
       "npcsPresent": [
         {
           "name": "Ossivyn Tallow",
-          "state": "Pressed against the gate post, record book open, writing something — watching the keeper."
+          "state": "Pressed against the gate post, record book clutched to his chest, still and watching."
         },
         {
           "name": "Cy",
-          "state": "Motionless at Loki's left heel, lens tracking the keeper's retreat."
+          "state": "Motionless at Loki's left heel, lens locked on the stranger."
         },
         {
           "name": "The Keeper of the Toll",
-          "state": "Stepped back two paces, right arm dropped, looking toward the lower lane — quiet, recalculating."
+          "state": "Stepped one pace sideways, out of the line between Loki and the newcomer — watching, not intervening."
+        },
+        {
+          "name": "The Stranger",
+          "state": "Standing six paces out in the lane, club loose in his right hand, eyes on Loki — waiting."
         }
       ],
       "objects": [
         "Freshly-planted sapling in tamped earth",
         "Small unlabeled iron marker stake driven beside the root base",
-        "Closed record book (carried by Ossivyn, now open)",
-        "Gate post with newly-straightened hinge"
+        "Gate post with newly-straightened hinge (unlatched)",
+        "Short club in the stranger's right hand"
       ],
       "threads": [
-        "The keeper yielded but hasn't explained who sent them or why.",
-        "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed.",
-        "Ossivyn wrote something in the record book just now — unknown what.",
-        "The regulator signal moving downstream — no one upstream knows to expect it.",
-        "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing."
+        "The stranger demands Loki step out — has not struck yet.",
+        "The keeper yielded but still has not explained who sent them or why.",
+        "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
+        "Ossivyn's record book entry — unknown what was written.",
+        "The regulator signal moving downstream — no one upstream knows to expect it."
       ]
     }
   },
@@ -269,7 +318,37 @@
   },
   "companions": [],
   "quests": [],
-  "npcRegistry": {},
+  "npcRegistry": {
+    "stranger-at-the-gate": {
+      "id": "stranger-at-the-gate",
+      "name": "The Stranger",
+      "role": "Hired enforcer or territorial man from the lower lane",
+      "description": "Broad-shouldered, deliberate in his movement — carries a short club as though it is simply part of him. Comes with the air of someone who expects the other person to flinch first.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": -1,
+      "history": [
+        "[d1] Stepped from the lower lane as the keeper's challenge ended — demanded Loki step out from the gate. Has not struck yet."
+      ],
+      "knownFacts": [
+        "Claims Loki planted in toll ground",
+        "Arrived immediately after the keeper yielded — timing is not accidental"
+      ],
+      "skillsObserved": [
+        "Deliberate intimidation approach"
+      ],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "Standing six paces from Loki at the orchard gate, club in hand, challenge open.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    }
+  },
   "placeMemory": {
     "millbrook": {
       "visits": 1,
@@ -284,12 +363,427 @@
   "worldState": {
     "schemaVersion": 1,
     "lastTickDay": 1,
-    "eventStages": {},
-    "arcStages": {},
-    "spectrumDrift": {},
-    "news": [],
+    "eventStages": {
+      "water_crisis": {
+        "stage": 2,
+        "sinceDay": 13
+      }
+    },
+    "arcStages": {
+      "arc_what_wakes_beneath": {
+        "othersPush": 1
+      },
+      "the_second_manifestation": {
+        "othersPush": 1
+      }
+    },
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — Sorel, Radiant archivist, arrives on the ridgeline and confirms the mound on the northeast-by-east bearing — she was with the Council survey team until markers were moved; the interval she recorded ma (near gen-the-lower-chamber)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — Sorel, Radiant archivist and water-accountability office witness, commits to the investigation of the upstream pre-Transition structure and joins Cellaceron's party moving northeast-by-east into the D (near gen-object-object)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — The Council's secondary purification system is not yet complete — they are racing the preparation order's timeline with infrastructure that may not be ready. (near gen-object-object)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — The Council's secondary purification system is incomplete without the authentication sequence housed at the upstream structure. Whoever reaches it first determines the valley's response to the prepara (near gen-object-object)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 35,
+        "text": "Halvex Coil, the Rewriter and The One Who Doubts the Proof met — and neither could break the other.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 35,
+        "text": "Veln Ashpause: Someone found Veln's body and, noticing his expression of relief rather than fear, quietly told a traveler it was strange — the wrong face for a man who'd just watched violence — and that small wrongness is now a murmur in one roadside ear.",
+        "tier": "ambient"
+      }
+    ],
     "unseenNews": [],
-    "turnsSinceOffer": 14
+    "turnsSinceOffer": 15,
+    "lastGenCount": 841,
+    "lastSharedReadAt": "2026-08-04T01:59:02.401Z",
+    "lastTickWorldDay": 35,
+    "lastCanonWorldDay": 35,
+    "pressureQueue": [],
+    "offscreenCursor": 0,
+    "epicArcPushes": {
+      "the_unbodied_choir_master": {
+        "arcId": "arc_manifestation_storm",
+        "push": 5.046956521739131
+      },
+      "sister_alder": {
+        "arcId": "arc_manifestation_storm",
+        "push": -3.6799999999999997
+      },
+      "the_starless": {
+        "arcId": "arc_manifestation_storm",
+        "push": 6
+      },
+      "halcyon_the_finished": {
+        "arcId": "arc_manifestation_storm",
+        "push": -2.64
+      },
+      "the_farwalker": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.8
+      },
+      "the_gate_that_gapes": {
+        "arcId": "arc_manifestation_storm",
+        "push": 2.4000000000000004
+      },
+      "the_nine_year_master": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.8
+      },
+      "the_edge_seeker": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.8
+      },
+      "the_lost_chord_seeker": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.8
+      },
+      "the_hundred_faces": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.8
+      },
+      "the_last_mercy": {
+        "arcId": "arc_manifestation_storm",
+        "push": -1.6
+      },
+      "the_scouring_hand": {
+        "arcId": "arc_manifestation_storm",
+        "push": -1.6000000000000003
+      },
+      "the_open_figure": {
+        "arcId": "arc_manifestation_storm",
+        "push": -1.6
+      },
+      "iselde_the_wanderer": {
+        "arcId": "arc_manifestation_storm",
+        "push": -0.8
+      },
+      "the_pattern_prophet": {
+        "arcId": "arc_manifestation_storm",
+        "push": -0.8
+      },
+      "the_raw_chord": {
+        "arcId": "arc_manifestation_storm",
+        "push": 3.2
+      },
+      "cinder_vael": {
+        "arcId": "arc_manifestation_storm",
+        "push": 2.4000000000000004
+      },
+      "halvex_coil": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -2.127272727272728
+      },
+      "maren_ossitide": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -2.64
+      },
+      "neth_the_stayed": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.5151515151515151
+      },
+      "sunwrack_valen": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 2.196969696969697
+      },
+      "the_last_choirmistress": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -2.4
+      },
+      "harrow_the_hollowing": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 4
+      },
+      "the_burning_certainty": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 4
+      },
+      "the_hour_hoarder": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 1.6
+      },
+      "the_ninefold_ascendant": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 4
+      },
+      "the_oathbreaker_sel": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 1.6
+      },
+      "the_cogitant_ninefold": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.6
+      },
+      "the_last_seraph": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.6
+      },
+      "the_clockmother": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.6
+      },
+      "the_apostate_choir": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -0.8
+      },
+      "the_long_grudge": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -0.8
+      },
+      "the_glad_dissolution": {
+        "arcId": "arc_block_bleed",
+        "push": 0.9090909090909091
+      },
+      "the_doubting_lattice": {
+        "arcId": "arc_block_bleed",
+        "push": 1.6
+      },
+      "the_unbound_churn": {
+        "arcId": "arc_block_bleed",
+        "push": 0.8
+      },
+      "the_still_lattice": {
+        "arcId": "arc_block_bleed",
+        "push": -0.8000000000000003
+      },
+      "the_cornerstone": {
+        "arcId": "arc_block_bleed",
+        "push": -1.6
+      },
+      "prodigal_gearheart": {
+        "arcId": "arc_block_bleed",
+        "push": -0.8
+      },
+      "the_bridgewright": {
+        "arcId": "arc_block_bleed",
+        "push": -0.8
+      },
+      "overseer_grael": {
+        "arcId": "arc_block_bleed",
+        "push": -1.6
+      },
+      "thornmother_sealed": {
+        "arcId": "arc_the_poles_pull",
+        "push": 6
+      },
+      "ember_who_banks_the_fire": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.9090909090909091
+      },
+      "the_deep_lantern": {
+        "arcId": "arc_the_poles_pull",
+        "push": -4.4
+      },
+      "the_weeping_archive": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.9090909090909091
+      },
+      "the_hollow_king": {
+        "arcId": "arc_the_poles_pull",
+        "push": 2.8
+      },
+      "the_edge_that_holds": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.4285714285714286
+      },
+      "morvane_the_harvest": {
+        "arcId": "arc_the_poles_pull",
+        "push": 4.4
+      },
+      "vessa_truename": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.9090909090909091
+      },
+      "keeper_the_unsaid": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.9090909090909091
+      },
+      "the_ender_who_forgot": {
+        "arcId": "arc_the_poles_pull",
+        "push": 2.4000000000000004
+      },
+      "the_lidded_calm": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.6
+      },
+      "the_appetite": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.6
+      },
+      "the_final_argument": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.6
+      },
+      "the_unravelled_mind": {
+        "arcId": "arc_the_poles_pull",
+        "push": 0.8
+      },
+      "the_unbending_witness": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.6
+      },
+      "the_hundred_hands": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.6
+      },
+      "the_one_who_stayed_embodied": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.6
+      },
+      "the_kind_liar": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.8
+      },
+      "first_flame_ateph": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.8
+      },
+      "the_undefeated": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.8
+      },
+      "the_two_who_are_one": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.8
+      },
+      "the_archive_that_walks": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.8
+      },
+      "the_war_ender": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.6
+      },
+      "the_penitent_maw": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.8
+      },
+      "the_first_moot": {
+        "arcId": "arc_green_schism",
+        "push": -1.6
+      },
+      "the_last_walker": {
+        "arcId": "arc_green_schism",
+        "push": -1.6
+      }
+    },
+    "epicStatus": {
+      "the_doubting_lattice": {
+        "status": "active"
+      }
+    },
+    "arcContests": {
+      "arc_manifestation_storm": {
+        "duels": 2,
+        "proWins": 0,
+        "conWins": 2,
+        "fought": 4,
+        "worked": 13
+      },
+      "arc_what_wakes_beneath": {
+        "duels": 3,
+        "proWins": 1,
+        "conWins": 2,
+        "fought": 6,
+        "worked": 11
+      },
+      "arc_block_bleed": {
+        "duels": 1,
+        "proWins": 0,
+        "conWins": 1,
+        "fought": 2,
+        "worked": 7
+      },
+      "arc_the_poles_pull": {
+        "duels": 5,
+        "proWins": 4,
+        "conWins": 1,
+        "fought": 11,
+        "worked": 20
+      },
+      "arc_green_schism": {
+        "duels": 0,
+        "proWins": 0,
+        "conWins": 0,
+        "fought": 0,
+        "worked": 3
+      }
+    },
+    "arcCasualties": [],
+    "arcStrikes": [
+      {
+        "arcId": "arc_block_bleed",
+        "target": "the_doubting_lattice",
+        "sender": "halvex_coil",
+        "outcome": "stalemate",
+        "targetTier": "heroic"
+      }
+    ],
+    "arcVacancies": {
+      "arc_what_wakes_beneath": 17,
+      "arc_the_poles_pull": 18,
+      "arc_manifestation_storm": 22,
+      "arc_block_bleed": 15
+    },
+    "arcNetPush": {
+      "arc_manifestation_storm": 10.326956521739135,
+      "arc_what_wakes_beneath": 2.3145454545454536,
+      "arc_block_bleed": -2.290909090909091,
+      "arc_the_poles_pull": 0.535064935064937,
+      "arc_green_schism": -3.2
+    },
+    "offscreenBacklog": {},
+    "wantProgress": {
+      "veln-ashpause": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 35,
+        "lastOutcome": "progress"
+      }
+    }
   },
   "bio": null,
   "subAttributes": {
@@ -313,7 +807,8 @@
         "label": "Veln Ashpause",
         "kind": "person",
         "facts": [
-          "[d1] Veln foreknew something about the confluence or its players — he watched the fight from the brush and emerged with relief on his face. He was killed before he could speak. What he knew died with him."
+          "[d1] Veln foreknew something about the confluence or its players — he watched the fight from the brush and emerged with relief on his face. He was killed before he could speak. What he knew died with him.",
+          "[d1] [while away] Someone found Veln's body and, noticing his expression of relief rather than fear, quietly told a traveler it was strange — the wrong face for a man who'd just watched violence — and that small wrongness is now a murmur in one roadside ear."
         ],
         "links": [
           "disputed-zone"
@@ -321,6 +816,19 @@
         "aliases": [],
         "createdDay": 1,
         "entityId": "veln-ashpause",
+        "updatedDay": 1
+      },
+      "stranger-at-the-gate": {
+        "id": "stranger-at-the-gate",
+        "label": "The Stranger",
+        "kind": "person",
+        "facts": [
+          "[d1] Hired enforcer or territorial man from the lower lane"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "stranger-at-the-gate",
         "updatedDay": 1
       }
     }
@@ -333,9 +841,80 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785613835989,
-  "rev": 91,
-  "activeEncounter": null,
+  "updatedAt": 1785808882045,
+  "rev": 103,
+  "activeEncounter": {
+    "defId": "re-re_raider_duel",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-re_raider_duel",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 6,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the aggressor",
+        "attributes": {
+          "practical": 4,
+          "physical": 4,
+          "mental": 4,
+          "social": 4
+        },
+        "energy": 94,
+        "maxEnergy": 94,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 3,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 3,
+            "attribute": "practical"
+          }
+        ],
+        "health": 6,
+        "soak": 1,
+        "soakLayers": [
+          {
+            "rank": 1,
+            "value": 1
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 94,
+      "turn": {
+        "phase": "sense",
+        "sel": {
+          "sense": [],
+          "action": [],
+          "bonus": []
+        },
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
+        },
+        "setupBonus": 0,
+        "bonusEarned": false,
+        "senseDone": false,
+        "senseLine": ""
+      }
+    }
+  },
   "customEncounters": {
     "re-enc_the_sealed_door": {
       "schemaVersion": 1,
@@ -425,12 +1004,42 @@
         "notes": "Contests by will, not by blade — wants something from you and is certain of the right to it. Yields the point when their certainty cracks."
       },
       "stakes": "Losing costs you the point — you pay, you turn back, or it becomes a fight on their terms. It does not cost you blood."
+    },
+    "re-re_raider_duel": {
+      "schemaVersion": 1,
+      "id": "re-re_raider_duel",
+      "type": "duel",
+      "name": "A Hostile Meeting",
+      "minDanger": 3,
+      "setup": "A hostile meeting that may come to blows — a raider, a desperate soul, a territorial thing. Offered with a clear decline/flee path (SNG-002b); the fight is a choice, and yielding is honored on both sides.",
+      "lethal": false,
+      "avoidable": true,
+      "fromRandom": true,
+      "flavor": "fight",
+      "opponent": {
+        "name": "the aggressor",
+        "health": 6,
+        "threat": 45,
+        "yieldAt": 2,
+        "fleeDifficulty": 15,
+        "spectrum": {
+          "violence_peace": -0.3,
+          "chaos_order": -0.3
+        },
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
+      },
+      "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
     }
   },
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 14
+    "valley": 15
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -442,6 +1051,14 @@
       "startDay": 32,
       "endDay": 32,
       "beats": 14
+    },
+    {
+      "id": "sess-2",
+      "startedAt": "2026-08-04T02:01:22.042Z",
+      "lastAt": "2026-08-04T02:01:22.042Z",
+      "startDay": 35,
+      "endDay": 35,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -470,20 +1087,28 @@
     "choices": 10,
     "scene": 10,
     "stateOps": 1,
-    "characterDeltas": 6,
+    "characterDeltas": 5,
     "timeOps": 5,
     "sceneEnded": 1,
     "encounterOps": 2,
-    "npcUpdates": 1
+    "npcUpdates": 1,
+    "generateRequest": 1
   },
   "_opTurns": 10,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "sonic_resonance": 5,
-      "hunters_strike": 1
+      "hunters_strike": 3,
+      "prism_sight": 3,
+      "echo_sense": 3,
+      "stillness_field": 3,
+      "tremor_sense": 3,
+      "drumline_stride": 3
     },
-    "coActivations": {},
+    "coActivations": {
+      "prism_sight+sonic_resonance": 1
+    },
     "aspirations": [],
     "lastUsed": {
       "sonic_resonance": 32,
@@ -495,5 +1120,23 @@
   "legendGovernor": {
     "lastDeployDay": 32,
     "lastBeat": "witness_power"
+  },
+  "customAbilities": {},
+  "companionBonds": {},
+  "precursorAccess": [],
+  "teachers": {},
+  "foreclosed": [],
+  "forkChoices": {},
+  "nativeGrantsVersion": 1,
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "backfillVersion": 1,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {},
+    "creature": {}
   }
 }

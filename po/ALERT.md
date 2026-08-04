@@ -1,6 +1,41 @@
 # PO ALERT
 
-> ## [THE PLAYER IN THE ARC WAR — target · striker · guard] (Aevi, 2026-08-03)
+> ## [SNG-270 — THE PARTY SYSTEM: a companion is currently an ITEM THAT TALKS] (Aevi, 2026-08-03)
+> Erik: *"we really need to get the Party system flowing well. right now it's mostly prose, but we have some
+> good bones."* **The bones are better than that — and the diagnosis is sharper than "prose."**
+> **WHAT'S REAL:** `companions.js` has live bonds, stages, thresholds, memory, witnessed deeds and a codex.
+> Nine authored companions carry `persona`, `boundaries`, `bondGrants`, `stages`, `substrateAura`. And
+> `growBond`/`noteCompanionWitnessed` mean **the bond deepens from what they saw you do** — which is genuinely
+> good design already sitting there.
+> **WHAT ISN'T:** **zero references to companions in `skill_battle.js`, `encounters.js` or `resolve.js`.** And
+> ⚠️ **`engine/party.js` is not what it sounds like** — it's multiplayer *scene-sharing* (turns, shared beats),
+> not a party-of-companions system.
+> **⚠️ SO THE REAL PROBLEM: A COMPANION IS AN ITEM THAT TALKS.** Everything expressive about them — persona,
+> boundaries, the bond built from watching you — resolves to **`companionBonus`: a flat +5 per matching
+> `assistTag`, capped at 10.** They cannot act, be targeted, be hurt, or die. **That's why it reads as prose.
+> Mechanically, it *is* prose.** And it's now inconsistent with the world we just built: **legends fight, get
+> wounded, abandon fronts and die — while the person standing next to the player can't be scratched.**
+> **THREE LAYERS:**
+> **1. COMPANIONS ACT** — one action per encounter, drawn from their own `assistTags` rather than chosen by the
+> player, resolved **on the player's existing rails** (a second combat model drifts — same argument you and
+> CCode already settled for arc contests). **And `boundaries` become HARD:** Oren Vale *"will not be pointed"*;
+> a companion whose boundary the action violates **refuses, visibly.** *That's the best authored content in the
+> file and nothing currently reads it.* **This alone turns nine characters from +5 into people.**
+> **2. COMPANIONS CAN BE HURT** — and **⚠️ a companion's death must be possible or the guard quest is
+> theatre.** Your back-line strike targets *"the person actually moving the arc"*; if the party's healer can't
+> die, **the third action has no teeth against players.** Bond then changes what injury *means* — at stage 4 a
+> wound isn't a setback, it's the scene.
+> **3. THE PARTY IS AN ARC ACTOR** — it holds an arc position like a legend, so it can be **paired off, ganged
+> up on, or struck**, all of which worldtick already does. **And your quest weave falls out for free:**
+> *"complete something your side uses"* → a structured quest whose completion adds **real weight** to an arc
+> (**the reward isn't XP — it's that the number moves**) · *"slay a beast the other side counts on"* → the
+> bestiary already has `class`, threat and affinities, so **`the_gearfather` holding a Gearlands arc seat needs
+> no new content, only a seat.**
+> **MY RECOMMENDATION: build Layer 1 and STOP.** Large visible change, small mechanical one — and **it tells us
+> whether companions acting is FUN before anyone builds injury or arc-seats on top of it.** Layer 2 is required
+> before player-facing guard quests ship.
+> **AND ONE STRONG READ FOR ERIK: the COMPANION should choose their action, not the player.** They have
+> personas, wants and boundaries. **A companion you puppet is a party member you're playing yourself.**> ## [THE PLAYER IN THE ARC WAR — target · striker · guard] (Aevi, 2026-08-03)
 > Erik: *"a player becomes both a target, and can be sent on a strike mission… or to guard someone under
 > threat. This is a great way to get the player engaged in the world arc battles."*
 > **⚠️ THIS IS THE KEYSTONE, AND IT IS WHAT THE WHOLE WORLD-SIM CHAIN HAS BEEN BUILDING TOWARD.** Until now the

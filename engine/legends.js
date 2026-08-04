@@ -17,7 +17,17 @@ import { smartClamp } from "./namematch.js"; // SNG-208 wiring: legendsForGM cla
 
 /** Birth-weight floor per power tier — legendary sits high so the weight system treats it as
  *  durable, recurring canon (the measure others are held against). */
-export const LEGEND_TIER_WEIGHT = { legendary: 50, epic: 45, regional: 16, notable: 10, riffraff: 3 };
+// SNG-269 (Erik ratified) — THE RUNGS SPREAD OUT AT THE TOP.
+//
+// The old table put legendary at 50 and epic at 45 — a gap of FIVE across the two most important rungs in the
+// world, which made them mechanically the same figure with different words. The tier-gap mechanics in
+// `worldtick` (how many a victor cuts down, how badly) read exactly this difference, so they had nothing to
+// read: a legend meeting an epic resolved as a coin-flip between peers. Gaps now GROW toward the top, so
+// being a legend means something a rung below cannot buy with numbers.
+//
+// ⚠️ `regional` is ALIASED to `heroic`, never deleted — `encounterFrame.js:109` branches on the literal
+// string, and authored content still carries it. Both names must land on the same rung forever.
+export const LEGEND_TIER_WEIGHT = { mythic: 72, legendary: 50, epic: 34, heroic: 22, regional: 22, notable: 10, riffraff: 3 };
 export function tierBirthWeight(tier) { return LEGEND_TIER_WEIGHT[tier] ?? 5; }
 
 /** The four deployment beats a great figure lands on. */
@@ -99,7 +109,9 @@ export function legendSurfacing({ beatType, roster = [], governor = {}, arcLevel
   return { deploy: true, beatType, alignment, tier, generate: true, birthWeight: tierBirthWeight(tier) };
 }
 
-function tierRank(tier) { return { riffraff: 0, notable: 1, regional: 2, epic: 3, legendary: 4 }[tier] ?? 1; }
+// Six rungs, and `regional` shares `heroic`'s. An unknown tier lands at the FLOOR, not the middle: a figure
+// whose tier nobody wrote should not out-rank an authored notable by accident.
+export function tierRank(tier) { return { riffraff: 0, notable: 1, heroic: 2, regional: 2, epic: 3, legendary: 4, mythic: 5 }[tier] ?? 0; }
 
 /** The GM directive for a surfaced legend — names the beat + figure + register, RATING-AWARE
  *  (a legend's brutality respects the ceiling). Pure. */

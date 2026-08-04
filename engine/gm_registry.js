@@ -368,10 +368,15 @@ export const GM_CONTEXT = [
   { key: "scenePacingDetail", builder: "gm_registry (scene length pressure)", carries: ["scene has run long", "find its close"],
     reachedBy: "always (paced)", spec: "§11", views: ["turn"],
     build: (env) => {
-      const n = env.sceneTurns?.length || 0;
-      if (n < 18) return null;
-      return n >= 30
-        ? `THIS SCENE HAS RUN ${n} BEATS — far past a natural length. Bring it to an honest close THIS BEAT unless the character is mid-action: let the moment finish, and emit "sceneEnded": true with a sceneSummary covering the whole scene. A new scene opens on the next beat.`
+      // SNG-266/1d — COUNT BEATS, NOT MEMORY. This read `sceneTurns.length`, which is BOUNDED STORAGE
+      // (`slice(-40)`): a scene that ran 200 beats reported 40 forever, so the pressure to close plateaued
+      // exactly when it should have become irresistible. `sceneBeats` is the real count and never trims.
+      const soft = env.rules?.scene?.softCloseBeats ?? 8;
+      const hard = env.rules?.scene?.hardCloseBeats ?? 14;
+      const n = env.sceneBeats ?? env.sceneTurns?.length ?? 0;
+      if (n < soft) return null;
+      return n >= hard
+        ? `THIS SCENE HAS RUN ${n} BEATS — past its length. Bring it to an honest close THIS BEAT unless the character is mid-action — IF YOU DO NOT, THE ENGINE CLOSES IT FOR YOU and your sceneSummary becomes the chronicle entry as-is, so write that summary as if it were the last thing you say about this scene: let the moment finish, and emit "sceneEnded": true with a sceneSummary covering the whole scene. A new scene opens on the next beat.`
         : `This scene has run ${n} beats. Start looking for its natural close — when the current exchange resolves, end it ("sceneEnded": true) with a summing-up. Do not force it mid-action.`;
     } },
 ];

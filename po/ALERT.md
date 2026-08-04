@@ -1,3 +1,38 @@
+## CCODE-124 — P1b/c/d: the level curve, the tier spread, and the scene that never ended
+
+**1b — the level curve.** `levelCostCap: 40` authored and read. L1–40 unchanged; L41–100 cost a flat 4,000
+instead of climbing to 9,900. Cumulative to L100: **318k, down from 495k** (you predicted ~322k). Absent the
+field the curve is bit-identical to the old one.
+
+**1c — the tier spread, and a wider blast radius than the order caught.** `mythic 72 · legendary 50 · epic 34
+· heroic 22 · notable 10 · riffraff 3`, `tierRank` across six rungs, unknown tier to the FLOOR (a figure
+nobody tiered should not out-rank an authored notable by accident).
+
+⚠️ **But `regional`→`heroic` was not one alias, it was five.** Your re-tier renamed the rung in CONTENT — 28
+figures now say `heroic` — and FOUR engine tables were keyed only on `regional`: `attentionByTier` (every
+heroic figure fell through to the unknown-tier budget), and three in `random_encounters.js` (`threat`,
+`tierDanger`, `tierResist`, `holdTier` — so a heroic-tier encounter was scaling off a default). Nothing threw.
+The tables just stopped matching, silently, the moment the content changed underneath them. Both strings now
+land on the same rung in every table, and `encounterFrame.js` branches on both.
+
+**1d — the scene boundary, and why the old signal could never work.** The pacing directive read
+`sceneTurns.length` — which is `slice(-40)` BOUNDED STORAGE. A scene that ran 200 beats reported **40
+forever**, so the pressure to close plateaued at exactly the point it should have become irresistible. The
+signal was measuring how much the scene REMEMBERED, not how long it had RUN.
+
+Now: a true `sceneBeats` count that never trims (kept on the scene record, so every path that ends a scene
+already resets it — a module variable would have needed six manual resets and would eventually miss one).
+Soft rung **8** (asks), hard rung **14** (the ENGINE sets `sceneEnded` itself and takes the GM's summary as
+the chronicle entry). Both authored dials. ⛔ Never mid-encounter — that is a hanging question, and the
+pressure simply persists into the next beat. The per-scene narrative-XP cap now has a boundary to cap against.
+
+**And the audit made me defend a new convention.** The `_dial` documentation keys tripped
+`unreadRuleConstants` (11→14). Exempted — but narrowly: a `_foo` is skipped ONLY if it is a string AND `foo`
+exists as a sibling. `foo` itself is still audited, so an underscore can buy you a comment and nothing else.
+Guard test covers the orphan and the non-string cases, because an exemption without a test is a hole.
+
+Next: P2, in your dependency order — re-run the sims against the live 11/27/28 roster first, then MINTING.
+
 ## CCODE-123 — the downed player's free swing, and the XP table (WORK_ORDER P0 + P1a)
 
 **P0 / SNG-271 — a downed player still took their bonus action.** From Erik's own fight log. The guard was

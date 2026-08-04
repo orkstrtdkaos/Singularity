@@ -106,7 +106,7 @@ export function collapseFloor(def, eligibility = null) {
   // fallback (no layer): epic never; regional now collapsible on a demolishing crit (aligns with Aevi); else tier.
   if (tier === "epic") return null;
   if (tier === "riffraff") return "success";
-  if (tier === "notable" || tier === "regional") return "crit_success";
+  if (tier === "notable" || tier === "regional" || tier === "heroic") return "crit_success";
   const danger = [def?.danger, def?.minDanger, def?.dangerLevel].find(d => Number.isFinite(d));
   if (Number.isFinite(danger)) return danger >= 4 ? null : danger >= 2 ? "crit_success" : "success";
   return "crit_success"; // unknown → conservative (a clean crit only)
@@ -327,7 +327,7 @@ export function frameExits(kind, def, state, exitLabels = null) {
  *  `danger`/`minDanger`, else the stage count as a proxy). Pure; defaults to the lighter "banner". */
 export function frameSize(def, state = {}) {
   const tier = def?.tier || null;
-  if (tier === "regional" || tier === "epic") return "takeover";
+  if (tier === "regional" || tier === "heroic" || tier === "epic") return "takeover";
   if (tier === "riffraff" || tier === "notable") return "banner";
   const danger = [def?.danger, def?.minDanger, def?.dangerLevel].find(d => Number.isFinite(d));
   if (Number.isFinite(danger)) return danger >= 3 ? "takeover" : "banner";

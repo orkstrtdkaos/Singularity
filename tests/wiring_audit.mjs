@@ -404,6 +404,11 @@ const unreadRuleConstants = (() => {
     if (Array.isArray(node)) { for (const v of node) walk(v, path); return; }   // array entries are data, not dials
     for (const [k, v] of Object.entries(node)) {
       if (ANNOTATION_KEYS.has(k)) continue;
+      // `_foo` is DOCUMENTATION FOR `foo`, sitting beside it so the dial explains itself where it is turned.
+      // Exempt — but NARROWLY, or the underscore becomes a place to hide a dial: it must be a string, and the
+      // key it documents must actually exist as a sibling. `foo` itself is still audited, so the only thing an
+      // underscore can buy you is a comment.
+      if (k.startsWith("_") && typeof v === "string" && Object.hasOwn(node, k.slice(1))) continue;
       if (v && typeof v === "object") { walk(v, path.concat(k)); continue; }
       if (!new RegExp(`\\b${k.replace(/[^\w]/g, "\\$&")}\\b`).test(consumers)) out.push(path.concat(k).join("."));
     }
@@ -413,6 +418,17 @@ const unreadRuleConstants = (() => {
 })();
 check("unread-rule-constant guard can fail (a dial no module names is detected as unread)",
   !/\bfabricatedPhantomDial\b/.test(engineSrc + appSrc));
+
+// …and the doc-key exemption must not become a hiding place. A `_foo` with no sibling `foo` is NOT
+// documentation, it is an unread constant wearing an underscore, and it must still be caught.
+check("the `_doc` exemption only covers a string documenting a REAL sibling dial", (() => {
+  const probe = (node) => { const out = []; for (const [k, v] of Object.entries(node)) {
+    if (k.startsWith("_") && typeof v === "string" && Object.hasOwn(node, k.slice(1))) continue;
+    out.push(k); } return out; };
+  return probe({ realDial: 1, _realDial: "docs" }).join() === "realDial"
+      && probe({ _orphanDial: "docs" }).join() === "_orphanDial"
+      && probe({ numericHider: 1, _numericHider: 42 }).includes("_numericHider");
+})());
 // Naming them costs nothing and saves the next person writing a bespoke script (which is easy to point at
 // the wrong directory and get a confidently wrong answer): SHOW_UNREAD_RULE_CONSTANTS=1 node tests/wiring_audit.mjs
 if (process.env.SHOW_UNREAD_RULE_CONSTANTS === "1") {

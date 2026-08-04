@@ -44,7 +44,8 @@ export function deriveDangerLevel(location, { baseDanger = null } = {}) {
 const BEAST_TIER = {
   riffraff: { minDanger: 1, threat: 22, weight: 3 },
   notable:  { minDanger: 2, threat: 38, weight: 2 },
-  regional: { minDanger: 3, threat: 55, weight: 1 },
+  heroic:   { minDanger: 3, threat: 55, weight: 1 },   // SNG-269: the live name for this rung
+  regional: { minDanger: 3, threat: 55, weight: 1 },   // …and its alias, kept for authored content
   epic:     { minDanger: 4, threat: 78, weight: 1 }
 };
 
@@ -346,7 +347,7 @@ export function generatedCreatureEncounters(character) {
  *  Same shape and same merge point as `bestiaryEncounters` (SNG-229) — one precedent, not a second mechanism.
  *  `minDanger` comes from the authored tier so a regional puzzle doesn't surface on a quiet road. Pure. */
 export function frameExemplarEncounters(doc) {
-  const tierDanger = { riffraff: 0, notable: 1, regional: 2, epic: 3 };
+  const tierDanger = { riffraff: 0, notable: 1, heroic: 2, regional: 2, epic: 3, legendary: 4, mythic: 5 };
   return (doc?.exemplarEncounters || []).map(e => ({
     id: e.id,
     // `kind` is what routes it (buildOffer reads kind first) — carried through verbatim so a standoff stays a
@@ -372,7 +373,7 @@ export function frameExemplarEncounters(doc) {
  *  weight. Her stage BEATS become the hint ladder: a beat is exactly "what you'd understand at this layer", so the
  *  authored understanding survives without her having to write hintTiers twice. Pure. */
 export function synthesizePuzzleDef(entry) {
-  const tierResist = { riffraff: 8, notable: 18, regional: 30, epic: 42 };
+  const tierResist = { riffraff: 8, notable: 18, heroic: 30, regional: 30, epic: 42, legendary: 56, mythic: 70 };
   return {
     // NOT titleFromFlavor: Aevi's puzzles carry flavor "dangerous", which that map turns into "Hard Ground" — so a
     // sealed precursor mechanism rendered under a hazard's name (caught by clicking the dev button, 2026-08-01).
@@ -385,7 +386,7 @@ export function synthesizePuzzleDef(entry) {
     // CCODE-53: the craft chip rendered "ward tnotable" because `tier` here is the BESTIARY tier (a word:
     // riffraff/notable/regional/epic) while the sheet wants a NUMBER. Carry a numeric craft tier separately
     // rather than overloading one field with two vocabularies.
-    holdTier: { riffraff: 1, notable: 2, regional: 3, epic: 4 }[entry.tier] || 2,
+    holdTier: { riffraff: 1, notable: 2, heroic: 3, regional: 3, epic: 4, legendary: 5, mythic: 6 }[entry.tier] || 2,
     hintTiers: entry.hintTiers?.length ? entry.hintTiers : (entry.stages || []).map(s => s.beat).filter(Boolean),
     codexUnlocks: entry.codexUnlocks || [],
     ...(entry.premise ? { premise: entry.premise } : {}), ...(entry.wards ? { wards: entry.wards } : {}),

@@ -302,6 +302,7 @@ let wheelSuggestFilter = false; // SNG-218 §3 (Erik): the "✨ Suggested" filte
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
+let sceneBeats = 0;      // SNG-266/1d: beats this scene has truly run (sceneTurns is TRIMMED; this is not)
 // CCODE-02: the stored scene history is BOUNDED. It was unbounded, and a long-running scene that
 // never ended grew to 169 turns (~341KB) on a real save — 59% of a 600KB character — which is what
 // exhausted the localStorage quota and hung character load. Every consumer reads at most
@@ -3823,6 +3824,7 @@ async function enterPlay() {
   }
   if (character.activeScene?.turns?.length) {
     sceneTurns = character.activeScene.turns;
+    sceneBeats = character.activeScene.beats || sceneTurns.length;   // a reload must not restart the clock
     sceneState = character.activeScene.sceneState || null;
     renderPlay(character.activeScene.lastTurn, { resumed: true, newsFlash: news, aside: backfillAside });
   } else {
@@ -3903,6 +3905,8 @@ function masteryReadyForGM() {
 function gmEnv(extra = {}) {
   return {
     character, location: hereNow(), CONTENT, sceneTurns, sceneState, sharedScene, profile,
+    sceneBeats, rules: CONTENT.rules,          // SNG-266/1d: the pacing directive reads both — a builder
+                                               // that reads an env key nobody puts here is the same dark wire.
     time: readClock(character.clock),
     worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), // SNG-173: recency needs a clock
     app: {
@@ -4124,7 +4128,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     // turn that state lagged the fiction — the same self-heal contract SNG-009 uses for lost ops.
     try {
       character.opLossPending = true;
-      character.activeScene = { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: result.turn, sceneState };
+      character.activeScene = { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: result.turn, sceneState, beats: sceneBeats };
       saveCharacter(character);
     } catch (err2) { console.error("[applyTurn] recovery save also failed:", err2); }
   }
@@ -5040,9 +5044,26 @@ function applyTurn(turn, resolution, playerWords = null) {
   if (turn.sceneSummary) {
     sceneTurns.push({ player: playerWords || null, summary: turn.sceneSummary, narration: turn.narration || "" }); // SNG-081: keep the player's half
     if (sceneTurns.length > SCENE_TURN_CAP) sceneTurns = sceneTurns.slice(-SCENE_TURN_CAP); // CCODE-02: bounded storage
+    // SNG-266/1d: the count of beats this scene has ACTUALLY run, which `sceneTurns.length` stops telling us
+    // the moment the storage cap bites. Kept on the scene record itself so it dies with the scene — every
+    // path that ends one already nulls `activeScene`, and a counter needing six manual resets would
+    // eventually miss one and leave a scene permanently "long".
+    sceneBeats = (character.activeScene?.beats || 0) + 1;
     if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; character._intentAsked = null; } // SNG-145: a new scene may ask again
   }
-  character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState };
+  // THE HARD CLOSE (SNG-266/1d). The soft rung ASKS the GM to close; this rung does not ask. A scene that
+  // runs forever is not a long scene — it is a scene with no chronicle entry, no per-scene XP boundary, and
+  // no memory of its own beginning once the storage cap trims the front off it.
+  // ⛔ NEVER MID-ACTION: an open encounter is a hanging question, and cutting a scene there would strand
+  // the player mid-swing. In that case the pressure simply persists into the next beat.
+  const hardClose = CONTENT.rules?.scene?.hardCloseBeats ?? 14;
+  if (!turn.sceneEnded && sceneBeats >= hardClose && !activeEnc() && turn.sceneSummary) {
+    turn.sceneEnded = true;
+    character.chronicle.push(turn.sceneSummary);
+    sceneTurns = []; sceneState = null; character._intentAsked = null;
+    turn._engineClosedScene = sceneBeats;
+  }
+  character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState, beats: sceneBeats };
   saveCharacter(character); saveProfile(profile);
 
   // shared-world consequences (best-effort, never blocks play)

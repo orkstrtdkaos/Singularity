@@ -207,8 +207,13 @@
       "wits"
     ]
   },
+  "scene": {
+    "softCloseBeats": 8,                "_softCloseBeats": "SNG-266/1d: the GM starts LOOKING for the close here — a directive, not an order. Never mid-action.",
+    "hardCloseBeats": 14,               "_hardCloseBeats": "…and here the ENGINE closes the scene itself if the GM did not. A scene is a UNIT, not a session; the narrative-XP per-scene cap is meaningless without a boundary."
+  },
   "leveling": {
     "xpPerLevel": 100,
+    "levelCostCap": 40,                 "_levelCostCap": "SNG-266/1b (Erik approved): cost rises with level up to this rung, then holds flat. L1-40 unchanged; L41-100 cost 4,000 each instead of climbing to 9,900. Remove the field and the curve is bit-identical to the old one.",
     "subPointPerLevel": 1,
     "skillPointPerLevel": 1,
     "subAttributeCap": 20,

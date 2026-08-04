@@ -4976,9 +4976,25 @@ await (async () => {
     time: readClock(newClock()), resolution: null, playerInput: null, exactWords: null, itemAdvance: [], travelDirective: null, ephemera: {},
     app: { fullCatalog: () => ({}), FN_INDEX: () => ({ families: [], verbToFamily: {}, byFamily: {} }), activeEnc: () => null,
       listAvailableEncounters: () => null, masteryReadyForGM: () => null, ratingLineForGM: () => "R", maybeLegendDetail: () => null, sharedCanonForGM: () => null } });
-  check("158: a young scene gets NO pacing pressure (silent until it matters)", assembleGMContext("turn", mk(5)).scenePacingDetail === null);
-  check("158: a long scene is told to look for its close", /looking for its natural close/.test(assembleGMContext("turn", mk(20)).scenePacingDetail || ""));
-  check("158: a runaway scene is told to close it THIS beat", /THIS BEAT/.test(assembleGMContext("turn", mk(40)).scenePacingDetail || ""));
+  // SNG-266/1d: the RUNGS are Aevi's to tune (8/14 today), so assert the SHAPE against the authored dial
+  // rather than against numbers — a test that hard-codes tuning fails on every legitimate tuning change.
+  const sceneDial = { scene: { softCloseBeats: 8, hardCloseBeats: 14 } };
+  const paced = (beats) => assembleGMContext("turn", { ...mk(0), sceneBeats: beats, rules: sceneDial }).scenePacingDetail || "";
+  const SOFT = sceneDial.scene.softCloseBeats, HARD = sceneDial.scene.hardCloseBeats;
+  check("158: a young scene gets NO pacing pressure (silent until it matters)", paced(SOFT - 1) === "");
+  check("158: a long scene is told to look for its close", /looking for its natural close/.test(paced(SOFT)));
+  check("158: a runaway scene is told to close it THIS beat", /THIS BEAT/.test(paced(HARD)));
+  // — and the three truths that made 1d necessary —
+  check("266/1d: the pacing signal counts BEATS, not trimmed storage (a 200-beat scene says 200, not 40)",
+    /RUN 200 BEATS/.test(assembleGMContext("turn", { ...mk(40), sceneBeats: 200, rules: sceneDial }).scenePacingDetail || ""));
+  check("266/1d: the hard rung WARNS that the engine will close it (the soft rung only asks)",
+    /ENGINE CLOSES IT FOR YOU/.test(paced(HARD)) && !/ENGINE CLOSES IT FOR YOU/.test(paced(SOFT)));
+  check("266/1d: the ENGINE closes the scene itself at the hard cap — and never mid-encounter",
+    /sceneBeats >= hardClose && !activeEnc\(\)/.test(appSrc158) && /turn\.sceneEnded = true;/.test(appSrc158));
+  check("266/1d: the true beat count rides the scene record, so ending a scene resets it for free",
+    /beats: sceneBeats/.test(appSrc158) && /sceneBeats = \(character\.activeScene\?\.beats \|\| 0\) \+ 1/.test(appSrc158));
+  check("266/1d: a reload does not restart the scene clock",
+    /sceneBeats = character\.activeScene\.beats \|\| sceneTurns\.length/.test(appSrc158));
   check("158: the pacing note reaches the prompt via the scene tier", /if \(scenePacingDetail\) scene\.push\(/.test(gmSrc158));
   check("158: the contract tells the GM WHEN to end a scene (it previously had the field and no instruction)",
     /"sceneEnded": SCENES ARE SUPPOSED TO END/.test(gmSrc158) && /DO NOT hold one scene open across a whole session/.test(gmSrc158));

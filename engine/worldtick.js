@@ -874,7 +874,10 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // winning anything. `attentionBudget` is a content dial; at 1 (the default) a legend fights one front.
     // CCODE-112: budget by TIER. A legend holds a couple of fronts; an epic one; a heroic figure half of one.
     // Content-dialled, and the fallback keeps a figure of unknown tier at the old single front.
-    const tierBudget = cfg.attentionByTier || { legendary: 2, epic: 1, regional: 0.5, notable: 0.5 };
+    // SNG-269: BOTH tier strings. The roster re-tier renamed this rung `heroic`; `regional` survives as an
+    // alias because authored content and `encounterFrame` still say it. A table carrying only one name
+    // silently drops 28 figures to the unknown-tier fallback.
+    const tierBudget = cfg.attentionByTier || { mythic: 3, legendary: 2, epic: 1, heroic: 0.5, regional: 0.5, notable: 0.5 };
     const budgetFor = f => {
       const t = f.tier || f.legend?.tier;
       const v = tierBudget[t];

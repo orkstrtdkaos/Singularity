@@ -67,7 +67,12 @@ export function syncParentAttributes(character) {
 export function applyLevelUps(character, rules) {
   const per = rules.leveling?.xpPerLevel ?? 100;
   const msgs = [];
-  while (character.xp >= character.level * per) {
+  // SNG-266/1b — THE LEVEL CURVE FLATTENS. Erik approved. Cost rises with level up to `levelCostCap`, then
+  // holds. L1–40 are unchanged; L41–100 cost a flat 4,000 instead of climbing to 9,900, which takes the
+  // cumulative climb from ~495k to ~322k. DEGRADES SAFELY: with the field absent, `?? Infinity` makes the
+  // min() a no-op and the curve is bit-identical to today.
+  const costCap = rules.leveling?.levelCostCap ?? Infinity;
+  while (character.xp >= Math.min(character.level, costCap) * per) {
     character.level++;
     character.attunement = (character.attunement || 0) + 1;
     character.maxHealth += 5; character.maxEnergy += 5;

@@ -9414,6 +9414,142 @@ await (async () => {
     /WANTING THEM BACK, that person is a quest-giver/.test(readFileSync(join(root, "engine/gm.js"), "utf8")));
 }
 
+// --- SNG-272: THE WORLD-SIM CHAIN, GATED -------------------------------------------------------------
+// The verification ledger (tests/verification_ledger.mjs) asked each of Erik's asks "what proves this?" and
+// found NOTHING behind the whole world-simulation chain — attention, tiered budgets, real-dice contests,
+// the engaged/working split, casualties, tier-gap lethality, strikes and guards. Two weeks of the
+// most-worked-on system in the game, entirely ungated. These are the missing gates.
+{
+  const wt = await import("../engine/worldtick.js");
+  const wsrc = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  const care = (arcId, dir = 1, weight = 1) => ({ arcId, dir, weight });
+
+  // CCODE-106 — responsiveness: an arc running AGAINST you pulls harder.
+  check("272/106: a figure pushes HARDER on an arc that has run against them", (() => {
+    const f = { id: "f", arcAffinities: [care("quiet", 1), care("losing", 1)] };
+    const ws = { arcNetPush: { quiet: 0, losing: -40 } };
+    const { spent } = wt.spendAttention(f, ws, { budget: 1 });
+    return spent[0]?.care.arcId === "losing";
+  })());
+
+  // CCODE-111 — attention is a DECISION, and the seat you leave is NAMED rather than silently dropped.
+  check("272/111: a figure with more cares than budget LEAVES one, and the seat it left is named", (() => {
+    const f = { id: "f", arcAffinities: [care("a"), care("b"), care("c")] };
+    const { spent, unattended } = wt.spendAttention(f, {}, { budget: 1 });
+    return spent.length === 1 && unattended.length === 2;
+  })());
+
+  // CCODE-112 — tiered budgets, and Erik's ganging-up falling out of the arithmetic.
+  check("272/112: budget is TIERED — a legend holds more fronts than a heroic", (() => {
+    const f = { id: "f", arcAffinities: [care("a"), care("b"), care("c")] };
+    const legend = wt.spendAttention(f, {}, { budget: 2 }).spent.length;
+    const heroic = wt.spendAttention(f, {}, { budget: 0.5 }).spent.length;
+    return legend === 2 && heroic === 1;
+  })());
+  check("272/112: a fractional budget buys whole fronts first, then a share of one", (() => {
+    const f = { id: "f", arcAffinities: [care("a"), care("b"), care("c")] };
+    const { spent } = wt.spendAttention(f, {}, { budget: 2.5 });
+    return spent.length === 3 && spent[0].share === 1 && spent[1].share === 1
+      && Math.abs(spent[2].share - 0.5) < 1e-9;
+  })());
+  check("272/112: four heroics outweigh one legend — ganging up is arithmetic, not a rule", (() => {
+    const f = { id: "f", arcAffinities: [care("a")] };
+    const legend = wt.spendAttention(f, {}, { budget: 2 }).spent[0].share;
+    const heroic = wt.spendAttention(f, {}, { budget: 0.5 }).spent[0].share;
+    return heroic * 4 > legend;
+  })());
+
+  // CCODE-113 — the contest is ROLLED with the player's own dice, not decided by comparing weights.
+  check("272/113: an arc contest rolls REAL battleRounds, not a weight comparison",
+    /battleRound\(/.test(wsrc) && /export function contestArc/.test(wsrc));
+  check("272/113: the same weights can produce EITHER winner — the outcome is not predetermined", (() => {
+    const sbEng = JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_battle_system.json"), "utf8")).engine;
+    const pro = { id: "p", name: "Pro", legend: { weight: 6 } };
+    const con = { id: "c", name: "Con", legend: { weight: 6 } };
+    const winners = new Set();
+    let seed = 1; const rng = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+    for (let i = 0; i < 60; i++) {
+      const r = wt.contestArc({ pro, con, sb: sbEng, rules, steps: {}, rng });
+      if (r && r.winner) winners.add(r.winner);
+    }
+    return winners.size === 2;
+  })());
+
+  // CCODE-115 — most people work at a thing; some fight over it. The heavier side draws allies in.
+  check("272/115: most figures WORK at an arc; a minority FIGHT over it",
+    /const engageRate = Number\.isFinite\(cfg\.directEngagementRate\)/.test(wsrc)
+    && /engaged: byUrgency\.slice\(0, n\), working: byUrgency\.slice\(n\)/.test(wsrc));
+  check("272/115: a heavier figure draws in allies until the sides are comparable",
+    /while \(bw < aw \* 0\.75 && qq\.length\)/.test(wsrc) && /while \(aw < bw \* 0\.75 && pq\.length\)/.test(wsrc));
+  check("272/115: working is the safe small option — a fight moves an arc more, or less than nothing",
+    /const workMult = Number\.isFinite\(cfg\.indirectPushMult\)/.test(wsrc));
+
+  // CCODE-117/118 — fights cost something, through ONE injury model, and the tier gap sets the toll.
+  check("272/117: an arc fight can COST something — one injury model, not two",
+    /casualtyRate/.test(wsrc) && /resolveEpicClash\(wf, e\.f, rng\)/.test(wsrc));
+  check("272/118: the tier GAP decides how many a victor cuts down",
+    /const reachByGap = cfg\.casualtyReachByGap/.test(wsrc));
+
+  // SNG-269a — what LOSING costs depends on who beat you, not on a flat roll.
+  check("272/269: what losing COSTS depends on the rank gap, not a flat roll", (() => {
+    if (!/const lethal = gap >= 0 \? 0\.12 \* \(1 \+ gap\)/.test(wsrc)) return false;
+    const kindsOf = (a, b) => {
+      const out = new Set();
+      let seed = 7; const rng = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+      for (let i = 0; i < 600; i++) out.add(wt.resolveEpicClash(a, b, rng).kind);
+      return out;
+    };
+    const big = { id: "L", name: "L", tier: "legendary", legend: { weight: 9 } };
+    const small = { id: "h", name: "h", tier: "heroic", legend: { weight: 1 } };
+    return kindsOf(big, small).has("killed");
+  })());
+
+  // SNG-270a — the quiet work: a strike reaches the people combat cannot, and a guard can stop it.
+  check("272/270: a strike reaches the population combat structurally cannot",
+    /const mark = defenders\.working\.slice\(\)\.sort/.test(wsrc));
+  check("272/270: a guard can INTERCEPT a strike, and standing still is its own cost",
+    /const guarded = guard && rng\(\) < \(Number\.isFinite\(cfg\.guardInterceptChance\)/.test(wsrc)
+    && /outcome: "guarded"/.test(wsrc));
+
+  // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
+  check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
+  check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));
+  check("272/268: a figure outside the batch STACKS its beats instead of losing them", /offscreenBacklog/.test(wsrc));
+}
+
+// --- SNG-272: the two P0/P1 gates the ledger also found missing --------------------------------------
+{
+  const appL = readFileSync(join(root, "app.js"), "utf8");
+  const encR = JSON.parse(readFileSync(join(root, "content/packs/core/rules/encounters.json"), "utf8"));
+  check("272/266: an unknown encounter type falls back to `default` rather than paying zero",
+    /const t = encXp\[enc\.def\.type\] \|\| encXp\.default \|\| \{\}/.test(appL) && Number(encR.default && encR.default.winXp) > 0);
+  check("272/271: a downed player does not take a bonus action",
+    /if \(!ended && checkIncapacitation\(character\)\)/.test(appL));
+}
+
+// --- SNG-272: the ledger cannot drift from the suite -------------------------------------------------
+// `tests/verification_ledger.mjs` proves itself when it runs — but a ledger nobody runs is the same rumour
+// in a nicer format. This guard is static and costs nothing: every gate the ledger CLAIMS must exist here,
+// and every `272/` gate here must be CLAIMED there. Drift in either direction fails the normal test run.
+{
+  const ledgerSrc = readFileSync(join(root, "tests/verification_ledger.mjs"), "utf8");
+  const mySrc = readFileSync(join(root, "tests/smoke.mjs"), "utf8");
+  // Parse the `gates: [...]` arrays, not a prefix. The first version matched only `272/` and covered 20 of
+  // 51 claims — so a `2c:` or `270:` gate could be deleted and only a manual ledger run would notice, which
+  // is exactly the gap this guard exists to close.
+  const gateBlocks = [...ledgerSrc.matchAll(/gates:\s*\[([\s\S]*?)\]/g)].map(m => m[1]);
+  const claimed = gateBlocks.flatMap(b => [...b.matchAll(/"((?:[^"\\]|\\.)*)"/g)].map(m => m[1]));
+  const present = [...mySrc.matchAll(/check\("((?:[^"\\]|\\.)*)"/g)].map(m => m[1]);
+  const missing = claimed.filter(c => !present.includes(c));
+  const own = present.filter(c => c.startsWith("272/"));
+  const orphans = own.filter(c => !claimed.includes(c));
+  const unclaimed = present.filter(c => !claimed.includes(c));
+  check(`272: every gate the ledger claims exists in this suite (${claimed.length} claimed)${missing.length ? " — MISSING: " + missing.join(" | ") : ""}`,
+    claimed.length > 0 && missing.length === 0);
+  check(`272: every 272/ gate in this suite is claimed by the ledger (${own.length} present)${orphans.length ? " — UNCLAIMED: " + orphans.join(" | ") : ""}`,
+    orphans.length === 0);
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

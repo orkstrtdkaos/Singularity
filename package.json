@@ -23,6 +23,7 @@
     "craft-crit": "node tests/craft_crit.mjs",
     "sweep": "node tests/promise_sweep.mjs",
     "world-drive": "node tests/world_drive_audit.mjs",
+    "ledger": "node tests/verification_ledger.mjs --write",
     "dev-world": "node tests/dev_world.mjs",
     "endgame-world": "node tests/world_endgame.mjs",
     "player-impact": "node tests/player_impact.mjs"

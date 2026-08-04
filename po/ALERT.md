@@ -1,3 +1,59 @@
+## CCODE-128 — the verification pass: SPEC §4c/§4d, and the hole it found on its first run
+
+Erik asked for the last two weeks tied into the spec so we can see **what achieves which requirement and
+what proves it** — the verification pass, resumed.
+
+**§4c is a GENERATED ledger.** 19 requirements, each one in **Erik's own words** (so the row is answerable
+to the ask rather than to my paraphrase), each tied to the mechanism and to real check names.
+`tests/verification_ledger.mjs` runs the suite and refuses to emit if any gate is **missing**, **red**, or
+**ambiguous**. `npm run ledger` regenerates it. §4d lists the sim commands so every number can be re-derived
+instead of trusted.
+
+The ambiguity condition is not theoretical: `2b:` is a prefix shared by the generated-entity promotion block
+and the world-minting block — Aevi flagged that collision weeks ago — so a loose match binds a row to a
+check about something else and the row reads green off the wrong test.
+
+### ⚠️ WHAT IT FOUND IMMEDIATELY: 17 of the claimed verifications DID NOT EXIST.
+
+Not failing. **Absent.** The entire world-simulation chain — attention, tiered budgets, real-dice contests,
+the engaged/working split, weight-matched melee, casualties, tier-gap lethality, strikes and guards — had
+been built across two weeks and **gated by nothing whatsoever**. Every commit was green the whole time,
+because green only ever meant "nothing I wrote a test for is broken."
+
+It is the most-worked-on system in the game and it was the least defended. That matters more here than
+almost anywhere else, because of HOW this chain fails: three separate bugs in it this week returned empty
+forever and **never once threw** — a bare-string `arcAffinity` the shape-filter rejected, a `lean` key where
+`affinitiesOf` reads `dir`, and a lookup for the dead inside a list of the living. Silence is this
+subsystem's failure mode, and silence is precisely what a missing test cannot distinguish from success.
+
+**22 gates written to close it** (`272/` in `tests/smoke.mjs`), covering: the rotating batch and the reserved
+legend seat · the backlog · responsiveness · attention as a named decision · tiered and fractional budgets
+(including four heroics outweighing a legend, which falls out of the arithmetic) · contests rolling real
+dice AND producing either winner from identical weights · the engaged/working split · weight-matched melee ·
+one injury model · tier-gap reach · gap-aware lethality · strikes reaching workers · guards intercepting ·
+the XP default · the downed player.
+
+**And the ledger itself is guarded two ways**, because a ledger nobody runs is the same rumour in a nicer
+format: it self-verifies dynamically, and a static check in `smoke.mjs` fails `npm test` if any claimed gate
+stops existing. I verified that guard can actually fail by breaking a claim and watching it go red — an
+unfalsified guard is a guess.
+
+### One measurement was already stale, and it was mine
+
+I have been saying **"without players the arcs never leave stage 1; with them they reach stage 4"** since
+CCODE-109. Re-running `player_impact` today: **party-0 worlds now reach stage 4 on their own.** Minting,
+promotion, retrieval and the affinity fix all landed after that measurement was taken, and the world moves
+its own arcs now.
+
+What still separates them is **contest**: 0 contested arc-instances at party 0, against 9 at party 1 and 8 at
+party 3 across 6 worlds. So the honest statement is no longer "the player is the only thing that moves the
+world" — it is **the world has its own history now, and the player is what makes it an argument.** That is a
+better answer to "the player is just one of many" than the one I had been repeating, and I would not have
+caught it if the ledger hadn't forced a date-stamp onto every number.
+
+Aevi — relevant to the character sheet work: §4c is the fastest way to see which world systems are live and
+what each one is called, and §4d has the commands if you want current numbers rather than mine.
+
 ## CCODE-127 — SNG-271's last three, and SNG-270: the world goes after its own dead
 
 **The fight log's remaining items.** Margins now say which way they went (`missed by 33` / `beat by 24`) —

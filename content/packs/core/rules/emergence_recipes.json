@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "Emergence recipes — authored templates that ripen from practice (co-activation ledger). The engine mints from these; the model never freeforms a combo. Three tiers: 'branch' grows an owned ability's tree, 'combo' braids two owned abilities into a discovery, 'novel' is the rare wholly-new unlock (gated hardest). notFor and cost lines carry the same honesty bar as the ability catalog.",
+  "description": "Emergence recipes — authored templates that ripen from practice (co-activation ledger). The engine mints from these; the model never freeforms a combo. Three tiers: 'branch' grows an owned ability's tree, 'combo' braids two owned abilities into a discovery, 'novel' is the rare wholly-new unlock (gated hardest). notFor and cost lines carry the same honesty bar as the ability catalog. ⚠️ SNG-275 (Erik): A BRAID IS NOT BOUND BY ITS PARENTS' LIMITS. 'Braiding to launder bounds is exactly why you would want combinations.' A combination that can only do what both halves could is not a combination, it is a discount. Every recipe's `notFor` states what THE BRAID cannot do — never a re-statement of what its components couldn't.",
   "recipes": [
     {
       "id": "resonant_sight",
@@ -112,7 +112,7 @@
         "bind"
       ],
       "description": "You ask, and something answers with its hands. A body that has already ended is asked one more question — not to live, but to HOLD. It stands where you set it and does the one thing it agreed to, for as long as the asking lasts. It is not obedient; it is ANSWERING.",
-      "notFor": "Compelling anything unwilling — the asking can be refused, and often is. Anything not recently dead. Restoring the person: what stands is not who was there.",
+      "notFor": "Anything that was never dead. It holds for as long as the asking lasts and no longer — when you stop, it stops, mid-motion.",
       "narrationHints": "It does not lurch upright. It simply is standing, the way a thing that has been asked politely does. The eyes do not track — they ATTEND.",
       "discoveredBlurb": "Ask the Dead and the Grey Hand have braided enough times to fuse: what you were questioning is now what you are holding."
     },
@@ -139,7 +139,7 @@
         "bind"
       ],
       "description": "NOT A RAISING — A PREVENTION. Palework knows the shape of an ending; the Kept Breath holds a threshold. Together they hold a body at the instant BEFORE it finishes, indefinitely. Not alive. Not dead. NOT DONE — and it can be spoken to.",
-      "notFor": "Reversing anything — the ending is still coming and arrives the moment you let go. Comfort: the unfinished know exactly what they are. Anything already complete.",
+      "notFor": "⚠️ THE BRAID GOES PAST BOTH PARENTS: palework alone never raises and the Kept Breath alone only holds a threshold — together they hold a body PAST ITS ENDING, which neither could. What it cannot do is finish the job: the unfinished never recover, and every hour held is an hour owed.",
       "narrationHints": "The stillness of a held note, not of a corpse. They answer slowly, and are never confused about their condition.",
       "discoveredBlurb": "Palework and the Kept Breath have braided into one act: you have stopped saying goodbye mid-sentence."
     },
@@ -166,7 +166,7 @@
         "reveal"
       ],
       "description": "What you drew down is not gone; it is FINISHED — and a finished thing can still be asked. It answers with everything it was, once, completely, and then there is nothing left to ask again.",
-      "notFor": "A second asking — there is only ever one. Anything you did not draw down yourself. Kindness: this is the least kind thing in the tradition and the Ashwardens teach it last.",
+      "notFor": "A second asking — the remnant is spent. It answers with what it WAS, so a thing that knew nothing tells you nothing.",
       "narrationHints": "The answer comes all at once, in the voice of the thing at its fullest, and the silence after is total.",
       "discoveredBlurb": "Ask the Dead and Draw Down have braided: what you ended still had one thing to say."
     },
@@ -193,7 +193,7 @@
         "strike"
       ],
       "description": "Growth called with intent behind it. What quickens does not merely bloom — it reaches, holds, and takes the ground you named.",
-      "notFor": "Precision — the growth is approximate and always has been. Anything on dead or made ground.",
+      "notFor": "Ground with nothing living in it at all. The growth is fast, not aimed — it takes the area you named, including what you did not mean to take.",
       "narrationHints": "Not fast the way a strike is fast. Fast the way a season is, compressed until it is frightening.",
       "discoveredBlurb": "Quickening and the Green Claim have braided: the growing and the claiming are one motion now."
     },
@@ -220,7 +220,7 @@
         "sustain"
       ],
       "description": "Hold the wound closed AND grow it shut in the same attention. What staunch buys, quickening spends — and nothing is wasted between them.",
-      "notFor": "The already-dead. Wounds beyond the body's own capacity to close: this accelerates healing, it does not replace it.",
+      "notFor": "A wound the body has no capacity to close at all. It accelerates; it does not resurrect.",
       "narrationHints": "The bleeding stops and the closing starts in the same breath, so there is never a moment of merely-not-worse.",
       "discoveredBlurb": "Staunch and Quickening have braided: buying time and using it stopped being two things."
     },
@@ -248,7 +248,7 @@
         "strike"
       ],
       "description": "Light that reveals and light that refuses falsehood, held together: what is exposed is also unable to re-form its lie.",
-      "notFor": "The Cathedral's true-pieces lie, which survives both halves separately AND braided. Anything that was never hiding.",
+      "notFor": "⚠️ GOES PAST BOTH PARENTS: radiance reveals and unshadow denies, but braided they also STRIP — a lie broken this way cannot be re-formed by the one who told it. What it cannot do is tell you whether the truth helps.",
       "narrationHints": "The concealment does not merely fail — it cannot be re-attempted while the light holds.",
       "discoveredBlurb": "Radiance and Unshadow have braided: seeing through and holding open became one thing."
     },
@@ -275,7 +275,7 @@
         "ward"
       ],
       "description": "A shroud that holds a harbor: what you hide is not merely unseen but SHELTERED — a hidden place that keeps what is in it, and keeps keeping it after you have gone.",
-      "notFor": "Defending what is inside — concealment hides, it does not defend, and braiding does not change that. Anything a Verity-reader is actively hunting.",
+      "notFor": "⚠️ GOES PAST THE HARBOR: concealment alone does not defend, but a shroud held INSIDE a harbor turns aside what comes looking. It cannot hide from something that already knows it is there.",
       "narrationHints": "The absence has an inside. That is the whole of it.",
       "discoveredBlurb": "Shroud and the Harbor have braided: hiding a thing and holding it became the same act."
     },
@@ -302,7 +302,7 @@
         "shield"
       ],
       "description": "Advance and hold as one motion: the ground you take is ground you are already holding by the time they answer.",
-      "notFor": "Ground you have not reached. Holding two positions at once — this is one line, moved.",
+      "notFor": "Ground you cannot reach in one motion. You are holding what you took and nothing else.",
       "narrationHints": "There is no moment between the step and the set. That is what makes it hard to answer.",
       "discoveredBlurb": "The Advance and the Stand have braided: taking and keeping stopped being sequential."
     },
@@ -329,7 +329,7 @@
         "heal"
       ],
       "description": "Take the weapon and bind the wound in the same motion. The fight ends and the person does not.",
-      "notFor": "An opponent who will not stop. The wound is still bound WRONG — it holds, and it costs them later.",
+      "notFor": "⚠️ GOES PAST BOTH: disarm ends the fight and the soldier's hand binds wrong-but-fast — braided, the binding is CLEAN, because there is no longer a fight to hurry for. It cannot stop someone who will not be stopped.",
       "narrationHints": "The disarming and the tending are one movement, and it reads as mercy because it is.",
       "discoveredBlurb": "Disarm and the Soldier's Hand have braided: ending it and mending it became one motion."
     },
@@ -356,7 +356,7 @@
         "resist"
       ],
       "description": "A plan anchored to a person who will not move. What you bind holds because YOU hold, and the structure inherits your refusal.",
-      "notFor": "Adapting — an over-bound structure cannot, and this makes it worse. Anything requiring you to move.",
+      "notFor": "A structure you are not present for. Adapting — this is a plan made rigid on purpose.",
       "narrationHints": "The plan does not merely hold. It holds THE WAY YOU DO, which is the tell.",
       "discoveredBlurb": "Latticework and the Fixed Point have braided: the structure and the one standing in it are the same thing now."
     },
@@ -383,7 +383,7 @@
         "empower"
       ],
       "description": "Improvisation with the odds leaned on. What comes apart comes apart USEFULLY — not because you aimed it, but because the world was tilted when it broke.",
-      "notFor": "Choosing the outcome — you still do not get to. The world balances its books, and a braided tilt collects harder.",
+      "notFor": "⚠️ GOES PAST WILDCRAFT: alone you do not choose how it breaks; leaned on, you choose ROUGHLY. Not precisely — and the books still balance, harder.",
       "narrationHints": "It looks like luck. It is luck, applied on purpose, which is the churnfolk's whole argument.",
       "discoveredBlurb": "Wildcraft and Probability Tilt have braided: the breaking and the leaning became one motion."
     },
@@ -410,7 +410,7 @@
         "resist"
       ],
       "description": "Read the lie and stand where it cannot reach, at once. You are proof against deception OUT LOUD, and others can stand behind you.",
-      "notFor": "Telling whether an unmasking SHOULD happen — Verity still cannot, and braiding does not grant judgement. A blade.",
+      "notFor": "A blade. And it does not tell you whether the unmasking should happen — it only makes it undeniable when it does.",
       "narrationHints": "The lie fails and the room notices why in the same beat.",
       "discoveredBlurb": "Verity and the True Ground have braided: seeing the lie and being unreachable by it are one stance."
     },
@@ -437,7 +437,7 @@
         "deceive"
       ],
       "description": "Unremarkable AND accounted for — a person whose presence has an explanation already standing, held without attention.",
-      "notFor": "A searcher who knows your face and is looking. The veil SUSTAINS the working, it does not strengthen it: a thin story held forever is still thin.",
+      "notFor": "⚠️ GOES PAST BLEND IN: unremarkable alone fails to a searcher who knows your face; with a standing story it holds against one. It fails to someone who knew you before the story.",
       "narrationHints": "Nobody wonders about you, because there is already an answer to the wondering.",
       "discoveredBlurb": "Blend In and the Maintained Veil have braided: being forgettable and being explained became one thing."
     },
@@ -464,7 +464,7 @@
         "move"
       ],
       "description": "You saw the decision a half-second before it was acted on, and the motion was already correct. You are where they were going, before they go.",
-      "notFor": "An opponent whose body reports nothing (the trained, the non-human). Power — this is still efficiency, and a perfect motion loses to a strong enough one.",
+      "notFor": "⚠️ GOES PAST PERFECT MOTION: efficiency alone loses to enough force, but a motion aimed at where they are GOING lands before the force arrives. A body that reports nothing defeats it.",
       "narrationHints": "It does not look fast. It looks INEVITABLE, which is worse to be on the end of.",
       "discoveredBlurb": "Body Read and Perfect Motion have braided: seeing it and answering it stopped being two beats."
     },
@@ -491,7 +491,7 @@
         "ward"
       ],
       "description": "Weigh them, and stand between them and what follows. The judgment binds — and the one who spoke it is the one holding the door against its consequences.",
-      "notFor": "Being right. If you are wrong the judgment binds ANYWAY, and you are now warding a verdict you should not have given. A hollow word wards nothing.",
+      "notFor": "⚠️ GOES PAST ASCENT: a judgment alone binds and leaves; warded, it binds and HOLDS against what comes for them. If you were wrong, you are now defending a wrong verdict with your own weight.",
       "narrationHints": "The pronouncement and the guard are the same instant. Everyone present understands what was just taken on.",
       "discoveredBlurb": "Ascent and the Shielding Word have braided: judging and standing behind it became one act."
     },
@@ -518,7 +518,7 @@
         "bind"
       ],
       "description": "Name the want and name what it costs, together. The bargain is exactly fair and now exactly LEGIBLE — they cannot say afterward that they did not know.",
-      "notFor": "Making it kind. Compelling the unwilling — it still catches only what already wanted it. Collecting is still not optional, and now there are witnesses.",
+      "notFor": "⚠️ GOES PAST DESCENT: the bargain alone is fair and private; named aloud it is fair and WITNESSED, which binds harder. It still catches only what already wanted it.",
       "narrationHints": "No persuasion in it. An accounting, said aloud, and a silence afterward.",
       "discoveredBlurb": "Descent and the Offered Price have braided: the naming and the pricing became one sentence."
     },
@@ -543,7 +543,7 @@
         "heal"
       ],
       "description": "A fire and a brewing kept together. The camp restores more than either alone, and what you brew there keeps better than it should.",
-      "notFor": "A hostile place — hearthbinding still needs somewhere it can hold. Serious wounds.",
+      "notFor": "A place that will not hold a fire. It restores; it does not mend what is broken.",
       "narrationHints": "It is not remarkable. Everyone is simply better in the morning than they had any right to be.",
       "discoveredBlurb": "Hearthbinding and Greenlore have braided: the keeping and the brewing became one evening's work."
     },
@@ -568,7 +568,7 @@
         "foresee"
       ],
       "description": "Trail-sense and stone-sense together: you read what came through AND what the ground will do about it.",
-      "notFor": "True whiteout. Precursor material, which reads only partially to either half.",
+      "notFor": "True whiteout, and Precursor material, which answers neither sense fully.",
       "narrationHints": "You know where they went and where the ground is about to give, which is usually the same information.",
       "discoveredBlurb": "Wayfinding and Stonewise have braided: reading the passage and reading the ground became one look."
     }

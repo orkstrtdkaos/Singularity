@@ -55,7 +55,7 @@
   "maxHealth": 30,
   "health": 24,
   "maxEnergy": 100,
-  "energy": 37,
+  "energy": 32,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -158,95 +158,76 @@
         "player": null,
         "summary": "Loki's Tremor Sense fails again; the Stillness Field blurs their position but the stranger presses in under it and lands a solid blow to the ribs.",
         "narration": "You press your attention into the ground one more time, searching for the tell in his footfall — the shift of weight before a rush, the planted heel before a swing. Nothing comes back clean. The stranger's feet are too still, too practiced, and the mud eats the vibration before it reaches you. He reads the pause in your concentration the way a dog reads a tucked tail. He knows you reached for something and came up empty.\n\nYou pull the Stillness Field up fast — a pocket of hush dropping around you like a cupped hand, the kind that blurs the edges of where you are, makes the eye slide off. It is not invisibility. It is the moment before anyone is sure. Cy does not move. Ossivyn, pressed to the gate post, goes very still as if he feels it too.\n\nThe stranger does not hesitate. He has seen tricks before, or he has fought without needing to see. His guard comes up — club forearm crossing his centerline, body angling behind it — and he pushes into you while the hush is still settling. He does not swing wild. He steps in and drives the butt of the club into your ribs with short deliberate force, the kind of hit that does not need to be pretty. You take it. Three hard knocks of pain bloom up your left side and you feel it in your back teeth. But you are still standing, and in the lamplight's edge you are a harder target to read than you were a moment ago.\n\nThe two of you breathe. He is one pace closer now. His guard is still up, club held high and ready. Your side aches. The orchard is very quiet."
+      },
+      {
+        "player": null,
+        "summary": "Loki reads the stranger mid-circle — he favors the press, and the opening is there.",
+        "narration": "The stranger's weight settles back a half-beat — the club arm cocks just slightly, the shoulder rolling in the way a man does when he has decided to stop circling and start driving. You catch it: he favors the forward press, the short direct strike, weight behind it rather than reach. He is good at it. He does not know you just saw him decide."
       }
     ],
     "lastTurn": {
-      "narration": "You press your attention into the ground one more time, searching for the tell in his footfall — the shift of weight before a rush, the planted heel before a swing. Nothing comes back clean. The stranger's feet are too still, too practiced, and the mud eats the vibration before it reaches you. He reads the pause in your concentration the way a dog reads a tucked tail. He knows you reached for something and came up empty.\n\nYou pull the Stillness Field up fast — a pocket of hush dropping around you like a cupped hand, the kind that blurs the edges of where you are, makes the eye slide off. It is not invisibility. It is the moment before anyone is sure. Cy does not move. Ossivyn, pressed to the gate post, goes very still as if he feels it too.\n\nThe stranger does not hesitate. He has seen tricks before, or he has fought without needing to see. His guard comes up — club forearm crossing his centerline, body angling behind it — and he pushes into you while the hush is still settling. He does not swing wild. He steps in and drives the butt of the club into your ribs with short deliberate force, the kind of hit that does not need to be pretty. You take it. Three hard knocks of pain bloom up your left side and you feel it in your back teeth. But you are still standing, and in the lamplight's edge you are a harder target to read than you were a moment ago.\n\nThe two of you breathe. He is one pace closer now. His guard is still up, club held high and ready. Your side aches. The orchard is very quiet.",
-      "sceneSummary": "Loki's Tremor Sense fails again; the Stillness Field blurs their position but the stranger presses in under it and lands a solid blow to the ribs.",
+      "narration": "The stranger's weight settles back a half-beat — the club arm cocks just slightly, the shoulder rolling in the way a man does when he has decided to stop circling and start driving. You catch it: he favors the forward press, the short direct strike, weight behind it rather than reach. He is good at it. He does not know you just saw him decide.",
+      "sceneSummary": "Loki reads the stranger mid-circle — he favors the press, and the opening is there.",
       "choices": [
         {
-          "label": "Strike back — push him off-balance with a sonic burst while he's committed to close range",
+          "label": "Answer the press with Sonic Resonance — send a sharp pulse into his club arm the moment he commits to the strike, rattling the grip before it lands.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
+          "intentTags": [
+            "attack",
+            "defend"
+          ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 8,
+          "trivial": false
+        },
+        {
+          "label": "Answer the press with Hunter's Strike — step into his line as he commits, inside the swing, and hit first.",
           "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {
-            "violence_peace": 0.8
-          },
+          "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
             "attack",
             "risky"
           ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 8,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Drive in with the belt knife — close the remaining distance and make the club useless at this range",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.9
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "gamble"
-          ],
           "abilityId": "hunters_strike",
           "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Hold the Stillness Field and let him come — stay hard to read, wait for him to overcommit",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {
-            "violence_peace": 0.4
-          },
-          "difficulty": 15,
+          "label": "Yield the ground — step back out of the gate, hands open, and call the fight done before it goes further.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
           "intentTags": [
             "defend",
             "careful"
           ],
-          "abilityId": "stillness_field",
-          "energyCost": 6,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         },
         {
-          "label": "Call it — yield the gate, name your terms out loud, and see if that ends this before someone gets seriously hurt",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "violence_peace": 0.1
-          },
+          "label": "Break away — use the bonus beat to disengage entirely, put the gate between you and him, and run.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
-            "negotiate",
-            "careful"
+            "travel",
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         }
       ],
-      "characterDeltas": {
-        "health": -3,
-        "energy": -10
-      },
       "scene": {
-        "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. The stranger has stepped inside one pace.",
+        "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. The stranger has stepped inside one pace, club arm cocked.",
         "npcsPresent": [
           {
             "name": "The Stranger",
-            "state": "Guard up, club high and ready, one pace in — breathing controlled, watching Loki."
+            "state": "Weight settled back, club arm cocked — he has decided to press, not circle. One pace in, watching Loki."
           },
           {
             "name": "Ossivyn Tallow",
@@ -269,36 +250,26 @@
           "Belt Knife at Loki's belt"
         ],
         "threads": [
-          "The stranger has closed distance and his guard is up — the pace advantage is his now.",
+          "The stranger has committed to a press — his tell is read, and the bonus beat is Loki's to spend.",
           "Stillness Field is up — Loki reads as harder to track in the lamplight.",
           "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
           "Ossivyn's record book entry — unknown what was written.",
           "The keeper yielded but still has not explained who sent the stranger or why."
         ]
       },
-      "npcUpdates": [
+      "encounterOps": [
         {
-          "op": "update",
-          "npcId": "the-stranger",
-          "name": "The Stranger",
-          "note": "Pushed through Loki's Stillness Field without hesitation and landed a clean body blow — he has experience with tricks and does not rattle.",
-          "learned": [
-            "He does not need to read his target clearly to land a hit — he fights on instinct and press"
-          ],
-          "skillsObserved": [
-            "Pressed in under a concealment field",
-            "Maintained high guard while advancing"
-          ],
-          "statusNote": "One pace from Loki at the orchard gate, guard up, club ready — has drawn blood and not broken sweat."
+          "op": "tactic",
+          "tag": "press-in"
         }
       ]
     },
     "sceneState": {
-      "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. The stranger has stepped inside one pace.",
+      "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. The stranger has stepped inside one pace, club arm cocked.",
       "npcsPresent": [
         {
           "name": "The Stranger",
-          "state": "Guard up, club high and ready, one pace in — breathing controlled, watching Loki."
+          "state": "Weight settled back, club arm cocked — he has decided to press, not circle. One pace in, watching Loki."
         },
         {
           "name": "Ossivyn Tallow",
@@ -321,7 +292,7 @@
         "Belt Knife at Loki's belt"
       ],
       "threads": [
-        "The stranger has closed distance and his guard is up — the pace advantage is his now.",
+        "The stranger has committed to a press — his tell is read, and the bonus beat is Loki's to spend.",
         "Stillness Field is up — Loki reads as harder to track in the lamplight.",
         "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
         "Ossivyn's record book entry — unknown what was written.",
@@ -332,7 +303,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [],
@@ -460,7 +431,7 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 17,
+    "turnsSinceOffer": 18,
     "lastGenCount": 841,
     "lastSharedReadAt": "2026-08-04T01:59:02.401Z",
     "lastTickWorldDay": 35,
@@ -877,8 +848,8 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785808999023,
-  "rev": 112,
+  "updatedAt": 1785809084787,
+  "rev": 115,
   "activeEncounter": {
     "defId": "re-re_raider_duel",
     "state": {
@@ -889,10 +860,11 @@
       "round": 2,
       "log": [
         "r1: reveal vs strike → momentum 0",
-        "r1: conceal vs shield → momentum -3"
+        "r1: conceal vs shield → momentum -3",
+        "r2: shield vs strike → momentum -3"
       ],
       "opponentHealth": 6,
-      "tactic": "circle",
+      "tactic": "press-in",
       "mode": "skill_battle",
       "opponentSheet": {
         "name": "the aggressor",
@@ -934,11 +906,13 @@
         "synthesized": true
       },
       "momentum": -3.5,
-      "opponentEnergy": 84,
+      "opponentEnergy": 81,
       "turn": {
-        "phase": "sense",
+        "phase": "action",
         "sel": {
-          "sense": [],
+          "sense": [
+            15
+          ],
           "action": [],
           "bonus": []
         },
@@ -948,9 +922,10 @@
           "bonus": ""
         },
         "setupBonus": 0,
-        "bonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
+        "bonusEarned": true,
+        "senseDone": true,
+        "senseLine": "You read with Raise a guard — success. Neither of you learns much. The opening is there — you have earned a BONUS action. You read the aggressor: they favour strike. Pick a craft that answers it.",
+        "readPayoff": "You read the aggressor: they favour strike. Pick a craft that answers it."
       },
       "effects": [
         {
@@ -974,6 +949,17 @@
           "rank": 3,
           "source": "a raised guard",
           "from": "opponent"
+        },
+        {
+          "kind": "guard",
+          "label": "guard up",
+          "value": 4,
+          "roundsLeft": 1,
+          "applies": "whenAttacked",
+          "side": "player",
+          "rank": 1,
+          "source": "Raise a guard",
+          "from": "player"
         }
       ],
       "pressure": {
@@ -984,15 +970,15 @@
         "player": false,
         "opponent": false
       },
-      "lastOppFn": "shield",
+      "lastOppFn": "strike",
       "lastOppReceipt": {
-        "roll": 7,
-        "chance": 67,
-        "degree": "success",
+        "roll": 67,
+        "chance": 49,
+        "degree": "failure",
         "action": {
           "attribute": "practical",
           "abilityLevel": 3,
-          "label": "a raised guard",
+          "label": "a hard strike",
           "axes": {}
         },
         "breakdown": {
@@ -1006,16 +992,20 @@
               "value": 15
             },
             {
-              "label": "you read them first",
-              "value": 12
+              "label": "conserve",
+              "value": -8
+            },
+            {
+              "label": "momentum (you have the advantage)",
+              "value": 2
             }
           ],
-          "total": 67,
+          "total": 49,
           "clampedFrom": null,
           "base": "practical",
           "opposed": null
         },
-        "critRoll": 82,
+        "critRoll": 21,
         "crit": {
           "successChance": 14,
           "failChance": 1,
@@ -1042,18 +1032,18 @@
           "successClampedFrom": null,
           "failClampedFrom": -1
         },
-        "rawChance": 67,
-        "margin": 60,
+        "rawChance": 49,
+        "margin": -18,
         "matchup": 0,
-        "intensity": "standard",
+        "intensity": "conserve",
         "tier": 3,
-        "function": "shield",
-        "name": "a raised guard",
+        "function": "strike",
+        "name": "a hard strike",
         "effectMods": [],
         "woven": null
       },
-      "lastReadWasSense": false,
-      "senseTierEarned": null,
+      "lastReadWasSense": true,
+      "senseTierEarned": 0,
       "senseResist": {
         "value": 12,
         "label": "their natural guardedness",
@@ -1185,7 +1175,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 17
+    "valley": 18
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1201,10 +1191,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-04T02:01:22.042Z",
-      "lastAt": "2026-08-04T02:03:19.022Z",
+      "lastAt": "2026-08-04T02:04:44.787Z",
       "startDay": 35,
       "endDay": 35,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -1229,18 +1219,18 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 12,
-    "choices": 12,
-    "scene": 12,
+    "sceneSummary": 13,
+    "choices": 13,
+    "scene": 13,
     "stateOps": 1,
     "characterDeltas": 6,
     "timeOps": 5,
     "sceneEnded": 1,
-    "encounterOps": 3,
+    "encounterOps": 4,
     "npcUpdates": 2,
     "generateRequest": 1
   },
-  "_opTurns": 12,
+  "_opTurns": 13,
   "practice": {
     "schemaVersion": 1,
     "uses": {

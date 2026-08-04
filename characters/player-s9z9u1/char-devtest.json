@@ -53,9 +53,9 @@
   },
   "attunement": 3,
   "maxHealth": 30,
-  "health": 30,
+  "health": 24,
   "maxEnergy": 100,
-  "energy": 52,
+  "energy": 37,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -153,52 +153,28 @@
         "player": null,
         "summary": "Loki's Tremor Sense finds no footing in the packed mud — the stranger circles and reads the pause instead.",
         "narration": "You press your weight into the earth and listen through your feet — a tremor-reader's first instinct when the ground is the only honest thing in a fight. But the stranger is standing on packed lane-mud over river gravel, and the ground gives you nothing clean: just your own heartbeat bouncing back, and the dull thud of the keeper shifting somewhere behind you. The stranger reads the pause in your stance the way a man reads a blink. He takes a half-step to his left, slow and deliberate, circling the edge of the lamplight — not rushing, just repositioning, watching to see which way your feet follow him."
+      },
+      {
+        "player": null,
+        "summary": "Loki's Tremor Sense fails again; the Stillness Field blurs their position but the stranger presses in under it and lands a solid blow to the ribs.",
+        "narration": "You press your attention into the ground one more time, searching for the tell in his footfall — the shift of weight before a rush, the planted heel before a swing. Nothing comes back clean. The stranger's feet are too still, too practiced, and the mud eats the vibration before it reaches you. He reads the pause in your concentration the way a dog reads a tucked tail. He knows you reached for something and came up empty.\n\nYou pull the Stillness Field up fast — a pocket of hush dropping around you like a cupped hand, the kind that blurs the edges of where you are, makes the eye slide off. It is not invisibility. It is the moment before anyone is sure. Cy does not move. Ossivyn, pressed to the gate post, goes very still as if he feels it too.\n\nThe stranger does not hesitate. He has seen tricks before, or he has fought without needing to see. His guard comes up — club forearm crossing his centerline, body angling behind it — and he pushes into you while the hush is still settling. He does not swing wild. He steps in and drives the butt of the club into your ribs with short deliberate force, the kind of hit that does not need to be pretty. You take it. Three hard knocks of pain bloom up your left side and you feel it in your back teeth. But you are still standing, and in the lamplight's edge you are a harder target to read than you were a moment ago.\n\nThe two of you breathe. He is one pace closer now. His guard is still up, club held high and ready. Your side aches. The orchard is very quiet."
       }
     ],
     "lastTurn": {
-      "narration": "You press your weight into the earth and listen through your feet — a tremor-reader's first instinct when the ground is the only honest thing in a fight. But the stranger is standing on packed lane-mud over river gravel, and the ground gives you nothing clean: just your own heartbeat bouncing back, and the dull thud of the keeper shifting somewhere behind you. The stranger reads the pause in your stance the way a man reads a blink. He takes a half-step to his left, slow and deliberate, circling the edge of the lamplight — not rushing, just repositioning, watching to see which way your feet follow him.",
-      "sceneSummary": "Loki's Tremor Sense finds no footing in the packed mud — the stranger circles and reads the pause instead.",
+      "narration": "You press your attention into the ground one more time, searching for the tell in his footfall — the shift of weight before a rush, the planted heel before a swing. Nothing comes back clean. The stranger's feet are too still, too practiced, and the mud eats the vibration before it reaches you. He reads the pause in your concentration the way a dog reads a tucked tail. He knows you reached for something and came up empty.\n\nYou pull the Stillness Field up fast — a pocket of hush dropping around you like a cupped hand, the kind that blurs the edges of where you are, makes the eye slide off. It is not invisibility. It is the moment before anyone is sure. Cy does not move. Ossivyn, pressed to the gate post, goes very still as if he feels it too.\n\nThe stranger does not hesitate. He has seen tricks before, or he has fought without needing to see. His guard comes up — club forearm crossing his centerline, body angling behind it — and he pushes into you while the hush is still settling. He does not swing wild. He steps in and drives the butt of the club into your ribs with short deliberate force, the kind of hit that does not need to be pretty. You take it. Three hard knocks of pain bloom up your left side and you feel it in your back teeth. But you are still standing, and in the lamplight's edge you are a harder target to read than you were a moment ago.\n\nThe two of you breathe. He is one pace closer now. His guard is still up, club held high and ready. Your side aches. The orchard is very quiet.",
+      "sceneSummary": "Loki's Tremor Sense fails again; the Stillness Field blurs their position but the stranger presses in under it and lands a solid blow to the ribs.",
       "choices": [
         {
-          "label": "Press the attack — drive forward before he finishes the circle.",
+          "label": "Strike back — push him off-balance with a sonic burst while he's committed to close range",
           "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "subAttribute": "strength",
+          "axes": {
+            "violence_peace": 0.8
+          },
           "difficulty": 15,
           "intentTags": [
             "attack",
             "risky"
-          ],
-          "abilityId": "hunters_strike",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Hold ground and force him to come to you — let him commit first.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "defend",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Throw a sonic pulse at his club hand — rattle it loose before he closes.",
-          "attribute": "physical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "attack"
           ],
           "abilityId": "sonic_resonance",
           "energyCost": 8,
@@ -207,13 +183,52 @@
           "emergenceId": null
         },
         {
-          "label": "Yield — step out from the gate and see what he actually wants.",
+          "label": "Drive in with the belt knife — close the remaining distance and make the club useless at this range",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": 0.9
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "attack",
+            "gamble"
+          ],
+          "abilityId": "hunters_strike",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hold the Stillness Field and let him come — stay hard to read, wait for him to overcommit",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {
+            "violence_peace": 0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "defend",
+            "careful"
+          ],
+          "abilityId": "stillness_field",
+          "energyCost": 6,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Call it — yield the gate, name your terms out loud, and see if that ends this before someone gets seriously hurt",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
+          "axes": {
+            "violence_peace": 0.1
+          },
+          "difficulty": 15,
           "intentTags": [
-            "negotiate"
+            "negotiate",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -222,16 +237,20 @@
           "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": -3,
+        "energy": -10
+      },
       "scene": {
-        "setting": "The Slow Orchard, planting gate — evening, last gold gone from the branches, lamplight pooling in the lane. Cool spring air, mud underfoot.",
+        "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. The stranger has stepped inside one pace.",
         "npcsPresent": [
           {
             "name": "The Stranger",
-            "state": "Has taken a half-step left, circling slowly into the lamplight's edge, club still loose in his right hand, eyes fixed on Loki."
+            "state": "Guard up, club high and ready, one pace in — breathing controlled, watching Loki."
           },
           {
             "name": "Ossivyn Tallow",
-            "state": "Pressed against the gate post, record book to his chest, very still."
+            "state": "Pressed to the gate post, record book to his chest, very still."
           },
           {
             "name": "Cy",
@@ -246,33 +265,44 @@
           "Freshly-planted sapling in tamped earth",
           "Small unlabeled iron marker stake beside the root base",
           "Gate post with newly-straightened hinge (unlatched)",
-          "Short club in the stranger's right hand"
+          "Short club in the stranger's right hand",
+          "Belt Knife at Loki's belt"
         ],
         "threads": [
-          "The stranger is circling — repositioning to close the distance on his terms.",
-          "Tremor Sense found nothing — the stranger read the pause instead, gaining the edge.",
-          "The keeper yielded but still has not explained who sent the stranger or why.",
+          "The stranger has closed distance and his guard is up — the pace advantage is his now.",
+          "Stillness Field is up — Loki reads as harder to track in the lamplight.",
           "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
-          "Ossivyn's record book entry — unknown what was written."
+          "Ossivyn's record book entry — unknown what was written.",
+          "The keeper yielded but still has not explained who sent the stranger or why."
         ]
       },
-      "encounterOps": [
+      "npcUpdates": [
         {
-          "op": "tactic",
-          "tag": "circle"
+          "op": "update",
+          "npcId": "the-stranger",
+          "name": "The Stranger",
+          "note": "Pushed through Loki's Stillness Field without hesitation and landed a clean body blow — he has experience with tricks and does not rattle.",
+          "learned": [
+            "He does not need to read his target clearly to land a hit — he fights on instinct and press"
+          ],
+          "skillsObserved": [
+            "Pressed in under a concealment field",
+            "Maintained high guard while advancing"
+          ],
+          "statusNote": "One pace from Loki at the orchard gate, guard up, club ready — has drawn blood and not broken sweat."
         }
       ]
     },
     "sceneState": {
-      "setting": "The Slow Orchard, planting gate — evening, last gold gone from the branches, lamplight pooling in the lane. Cool spring air, mud underfoot.",
+      "setting": "The Slow Orchard, planting gate — evening, lamplight pooling in the lane, cool spring air, mud underfoot. The stranger has stepped inside one pace.",
       "npcsPresent": [
         {
           "name": "The Stranger",
-          "state": "Has taken a half-step left, circling slowly into the lamplight's edge, club still loose in his right hand, eyes fixed on"
+          "state": "Guard up, club high and ready, one pace in — breathing controlled, watching Loki."
         },
         {
           "name": "Ossivyn Tallow",
-          "state": "Pressed against the gate post, record book to his chest, very still."
+          "state": "Pressed to the gate post, record book to his chest, very still."
         },
         {
           "name": "Cy",
@@ -287,21 +317,22 @@
         "Freshly-planted sapling in tamped earth",
         "Small unlabeled iron marker stake beside the root base",
         "Gate post with newly-straightened hinge (unlatched)",
-        "Short club in the stranger's right hand"
+        "Short club in the stranger's right hand",
+        "Belt Knife at Loki's belt"
       ],
       "threads": [
-        "The stranger is circling — repositioning to close the distance on his terms.",
-        "Tremor Sense found nothing — the stranger read the pause instead, gaining the edge.",
-        "The keeper yielded but still has not explained who sent the stranger or why.",
+        "The stranger has closed distance and his guard is up — the pace advantage is his now.",
+        "Stillness Field is up — Loki reads as harder to track in the lamplight.",
         "The man in the lower Annex who paid for the false charge — unnamed, unaddressed.",
-        "Ossivyn's record book entry — unknown what was written."
+        "Ossivyn's record book entry — unknown what was written.",
+        "The keeper yielded but still has not explained who sent the stranger or why."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 15,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [],
@@ -318,19 +349,23 @@
       },
       "relationship": -1,
       "history": [
-        "[d1] Stepped from the lower lane as the keeper's challenge ended — demanded Loki step out from the gate. Has not struck yet."
+        "[d1] Stepped from the lower lane as the keeper's challenge ended — demanded Loki step out from the gate. Has not struck yet.",
+        "[d1] Pushed through Loki's Stillness Field without hesitation and landed a clean body blow — he has experience with tricks and does not rattle."
       ],
       "knownFacts": [
         "Claims Loki planted in toll ground",
-        "Arrived immediately after the keeper yielded — timing is not accidental"
+        "Arrived immediately after the keeper yielded — timing is not accidental",
+        "He does not need to read his target clearly to land a hit — he fights on instinct and press"
       ],
       "skillsObserved": [
-        "Deliberate intimidation approach"
+        "Deliberate intimidation approach",
+        "Pressed in under a concealment field",
+        "Maintained high guard while advancing"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Standing six paces from Loki at the orchard gate, club in hand, challenge open.",
+      "statusNote": "One pace from Loki at the orchard gate, guard up, club ready — has drawn blood and not broken sweat.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -425,7 +460,7 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 16,
+    "turnsSinceOffer": 17,
     "lastGenCount": 841,
     "lastSharedReadAt": "2026-08-04T01:59:02.401Z",
     "lastTickWorldDay": 35,
@@ -818,6 +853,19 @@
         "createdDay": 1,
         "entityId": "stranger-at-the-gate",
         "updatedDay": 1
+      },
+      "a-broad-shouldered-enforcer-or-territori": {
+        "id": "a-broad-shouldered-enforcer-or-territori",
+        "label": "a broad-shouldered enforcer or territorial carter from the l",
+        "kind": "person",
+        "facts": [
+          "[d1] someone of Millbrook"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "a-broad-shouldered-enforcer-or-territori",
+        "updatedDay": 1
       }
     }
   },
@@ -829,8 +877,8 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785808914741,
-  "rev": 106,
+  "updatedAt": 1785808999023,
+  "rev": 112,
   "activeEncounter": {
     "defId": "re-re_raider_duel",
     "state": {
@@ -838,9 +886,10 @@
       "encounterId": "re-re_raider_duel",
       "type": "duel",
       "status": "active",
-      "round": 1,
+      "round": 2,
       "log": [
-        "r1: reveal vs strike → momentum 0"
+        "r1: reveal vs strike → momentum 0",
+        "r1: conceal vs shield → momentum -3"
       ],
       "opponentHealth": 6,
       "tactic": "circle",
@@ -884,14 +933,12 @@
         ],
         "synthesized": true
       },
-      "momentum": 0,
-      "opponentEnergy": 89,
+      "momentum": -3.5,
+      "opponentEnergy": 84,
       "turn": {
-        "phase": "action",
+        "phase": "sense",
         "sel": {
-          "sense": [
-            11
-          ],
+          "sense": [],
           "action": [],
           "bonus": []
         },
@@ -900,30 +947,52 @@
           "action": "",
           "bonus": ""
         },
-        "setupBonus": -12,
+        "setupBonus": 0,
         "bonusEarned": false,
-        "senseDone": true,
-        "senseLine": "You read with Tremor Sense — failure. They read you better (-12 to your action). You learn nothing usable this time. Had it landed you would have seen which craft the aggressor leans on, and whether their wind is going — enough to pick the counter.",
-        "readPayoff": "You learn nothing usable this time. Had it landed you would have seen which craft the aggressor leans on, and whether their wind is going — enough to pick the counter."
+        "senseDone": false,
+        "senseLine": ""
       },
-      "effects": [],
+      "effects": [
+        {
+          "kind": "unseen",
+          "label": "hard to find",
+          "value": 2,
+          "roundsLeft": 1,
+          "applies": "whenAttacked",
+          "side": "player",
+          "rank": 1,
+          "source": "Stillness Field",
+          "from": "player"
+        },
+        {
+          "kind": "guard",
+          "label": "guard up",
+          "value": 4,
+          "roundsLeft": 2,
+          "applies": "whenAttacked",
+          "side": "opponent",
+          "rank": 3,
+          "source": "a raised guard",
+          "from": "opponent"
+        }
+      ],
       "pressure": {
-        "player": 0,
+        "player": 1,
         "opponent": 0
       },
       "spent": {
         "player": false,
         "opponent": false
       },
-      "lastOppFn": "strike",
+      "lastOppFn": "shield",
       "lastOppReceipt": {
-        "roll": 73,
-        "chance": 57,
-        "degree": "failure",
+        "roll": 7,
+        "chance": 67,
+        "degree": "success",
         "action": {
           "attribute": "practical",
           "abilityLevel": 3,
-          "label": "a hard strike",
+          "label": "a raised guard",
           "axes": {}
         },
         "breakdown": {
@@ -937,16 +1006,16 @@
               "value": 15
             },
             {
-              "label": "matchup (strike vs reveal)",
-              "value": 2
+              "label": "you read them first",
+              "value": 12
             }
           ],
-          "total": 57,
+          "total": 67,
           "clampedFrom": null,
           "base": "practical",
           "opposed": null
         },
-        "critRoll": 73,
+        "critRoll": 82,
         "crit": {
           "successChance": 14,
           "failChance": 1,
@@ -973,18 +1042,18 @@
           "successClampedFrom": null,
           "failClampedFrom": -1
         },
-        "rawChance": 57,
-        "margin": -16,
-        "matchup": 2,
+        "rawChance": 67,
+        "margin": 60,
+        "matchup": 0,
         "intensity": "standard",
         "tier": 3,
-        "function": "strike",
-        "name": "a hard strike",
+        "function": "shield",
+        "name": "a raised guard",
         "effectMods": [],
         "woven": null
       },
-      "lastReadWasSense": true,
-      "senseTierEarned": 0,
+      "lastReadWasSense": false,
+      "senseTierEarned": null,
       "senseResist": {
         "value": 12,
         "label": "their natural guardedness",
@@ -1116,7 +1185,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 16
+    "valley": 17
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1132,10 +1201,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-04T02:01:22.042Z",
-      "lastAt": "2026-08-04T02:01:54.741Z",
+      "lastAt": "2026-08-04T02:03:19.022Z",
       "startDay": 35,
       "endDay": 35,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -1160,18 +1229,18 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 11,
-    "choices": 11,
-    "scene": 11,
+    "sceneSummary": 12,
+    "choices": 12,
+    "scene": 12,
     "stateOps": 1,
-    "characterDeltas": 5,
+    "characterDeltas": 6,
     "timeOps": 5,
     "sceneEnded": 1,
     "encounterOps": 3,
-    "npcUpdates": 1,
+    "npcUpdates": 2,
     "generateRequest": 1
   },
-  "_opTurns": 11,
+  "_opTurns": 12,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -1179,7 +1248,7 @@
       "hunters_strike": 3,
       "prism_sight": 3,
       "echo_sense": 3,
-      "stillness_field": 3,
+      "stillness_field": 4,
       "tremor_sense": 3,
       "drumline_stride": 3
     },
@@ -1189,7 +1258,8 @@
     "aspirations": [],
     "lastUsed": {
       "sonic_resonance": 32,
-      "hunters_strike": 32
+      "hunters_strike": 32,
+      "stillness_field": 35
     }
   },
   "_pendingIntent": null,
@@ -1211,9 +1281,75 @@
   "backfillVersion": 1,
   "generated": {
     "schemaVersion": 1,
-    "npc": {},
+    "npc": {
+      "a-broad-shouldered-enforcer-or-territori": {
+        "schemaVersion": 1,
+        "id": "a-broad-shouldered-enforcer-or-territori",
+        "name": "a broad-shouldered enforcer or territorial carter from the l",
+        "role": "someone of Millbrook",
+        "spectrum": {
+          "violence_peace": 0.5,
+          "chaos_order": 0.3,
+          "death_life": 0.30000000000000004,
+          "mechanical_spiritual": 0.2,
+          "concrete_abstract": -0.5,
+          "falsehood_truth": -0.05
+        },
+        "fears": "being undone by the very grain of this place",
+        "wants": "to go on as they are, in a world that won't quite let them",
+        "knowledge": [],
+        "voiceHints": "",
+        "personality": {},
+        "communityId": "valley.millbrook",
+        "homeLocation": "millbrook",
+        "reactsToReputation": {},
+        "_gen": {
+          "entityId": "a-broad-shouldered-enforcer-or-territori",
+          "type": "npc",
+          "birthWeight": 8,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-devtest",
+            "locationId": "millbrook",
+            "day": 1,
+            "worldDay": null,
+            "hint": "a broad-shouldered enforcer or territorial carter from the lower lane — the kind of man hired or sent to discourage newc",
+            "why": "He stepped from the lower lane as a structured encounter presence; needs a stable identity so he can recur and the ficti"
+          },
+          "attentionHistory": [],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": true,
+          "romanceEligible": true,
+          "contract": {
+            "verdict": "thin",
+            "worst": "DEGRADED",
+            "missing": [
+              "disposition",
+              "appearance"
+            ],
+            "vague": [],
+            "why": "npc: THIN — missing disposition, appearance"
+          }
+        },
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20a%20broad-shouldered%20enforcer%20or%20territorial%20carter%20from%20the%20l%2C%20someone%20of%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=262&nologo=true"
+      }
+    },
     "location": {},
     "arc": {},
     "creature": {}
-  }
+  },
+  "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "a broad-shouldered enforcer or territorial carter from the l",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20a%20broad-shouldered%20enforcer%20or%20territorial%20carter%20from%20the%20l%2C%20someone%20of%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=262&nologo=true",
+      "caption": "a broad-shouldered enforcer or territorial carter from the l",
+      "worldDay": 35,
+      "at": "2026-08-04T02:01:57.698Z"
+    }
+  ]
 }

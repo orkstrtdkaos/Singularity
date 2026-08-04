@@ -433,6 +433,41 @@ if (importedNeverCalled.length) console.log(`note  ${importedNeverCalled.length}
 // Ratcheted, not absolute — resolution.json legitimately carries constants read by content or authored ahead
 // of their consumer. The baseline pins today's count; a NEW orphan fails the build.
 const ANNOTATION_KEYS = new Set(["note", "notes", "comment", "_comment", "schemaVersion", "label", "description", "band", "tier", "precision"]);
+// ---------- 3d. UNAUTHORED RULES KEYS (SNG-279) ----------
+// The MIRROR of `unreadRuleConstants` above, and the direction nothing had ever checked. That one catches an
+// authored dial no module reads. This catches a dial a module READS THAT NOBODY AUTHORED — and that is the
+// worse direction, because the failure is silent by construction: the whole job of `?? fallback` is to not
+// complain, so an unauthored dial behaves exactly like one set to its default, and the only symptom is that
+// turning it does nothing.
+//
+// Aevi (SNG-278) generalised it after counting THREE instances in one week — the encounters XP table, the
+// background id, and `rules.arcResponse`, where all 21 world-simulation dials ran on hardcoded fallbacks
+// while I told her and Erik "that's the dial, the number is your call."
+//
+// A RATCHET, not a gate: the known-pending ones stay (threat.js says in its own comment that it is awaiting
+// Aevi's authored ladder, CCODE-52). It only refuses NEW ones.
+//
+// ⚠️ ONLY `CONTENT.rules.X` / `content.rules.X` COUNTS. A module parameter named `rules` is not necessarily
+// the merged bag — `intensity.js` reads `rules.steps` and is passed `CONTENT.intensity`, where `steps` is
+// authored and correct. Counting bare reads would make this cry wolf, and a noisy ratchet is one people
+// learn to skip.
+const unauthoredRulesKeys = (() => {
+  const provided = new Set(Object.keys(JSON.parse(read("content/packs/core/rules/resolution.json"))));
+  const stateSrc = read("engine/state.js");
+  for (const m of stateSrc.matchAll(/\brules\.([A-Za-z_$][\w$]*)\s*=/g)) provided.add(m[1]);
+  const all = engineSrc + "\n" + appSrc;
+  const written = new Set([...all.matchAll(/\brules\.([A-Za-z_$][\w$]*)\s*=/g)].map(m => m[1]));
+  const readKeys = new Set();
+  for (const re of [/\bCONTENT\.rules\??\.([A-Za-z_$][\w$]*)/g, /\bcontent\.rules\??\.([A-Za-z_$][\w$]*)/g]) {
+    for (const m of all.matchAll(re)) readKeys.add(m[1]);
+  }
+  return [...readKeys].filter(k => !provided.has(k) && !written.has(k)).sort();
+})();
+check("unauthored-rules-key guard can fail (a key read from the bag that no pack provides is detected)",
+  !/CONTENT\.rules\.fabricatedPhantomBlock/.test(engineSrc + appSrc));
+if (process.env.SHOW_UNAUTHORED_RULES_KEYS === "1" && unauthoredRulesKeys.length) {
+  console.log(`note  ${unauthoredRulesKeys.length} unauthored rules key(s) read from the bag:\n      ${unauthoredRulesKeys.join("\n      ")}`);
+}
 const unreadRuleConstants = (() => {
   const consumers = engineSrc + "\n" + appSrc;
   const out = [];
@@ -480,7 +515,8 @@ const measured = {
   abilitiesCombatClaimedNotTaught: combatUntaught.length,
   rawProseCaps: rawProseCaps.length,
   importedNeverCalled: importedNeverCalled.length,
-  unreadRuleConstants: unreadRuleConstants.length
+  unreadRuleConstants: unreadRuleConstants.length,
+  unauthoredRulesKeys: unauthoredRulesKeys.length
 };
 
 const baselinePath = join(root, "tests", "wiring_baseline.json");

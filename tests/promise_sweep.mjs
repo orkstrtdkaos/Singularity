@@ -180,6 +180,66 @@ console.log("\nE. LISTS TRUNCATED WITHOUT A SORT - a flat slice overruling the o
   if (!flagged) console.log(`  none unadjudicated (${settled} previously checked and found correct)`);
 }
 
+console.log("\nF. RULES KEYS READ BUT NEVER AUTHORED — a dial with nothing on the other end (SNG-279)\n");
+// Aevi (SNG-278): "promise_sweep should run on EVERY rules key an engine module reads, not only the ones
+// someone remembered to register."
+//
+// She is right, and she counted right: THREE got through in one week — the encounters XP table, the
+// background id lookup, and `rules.arcResponse`, which the engine had read for weeks while no pack provided
+// it, so all 21 world-simulation dials ran on hardcoded fallbacks and nobody could turn one.
+//
+// Section C sweeps CONTENT → CODE (a registered file no module names). This is the opposite direction and
+// nothing had ever swept it: CODE → CONTENT, a read nobody feeds. It is the worse direction, because the
+// failure is SILENT BY CONSTRUCTION — the whole job of `?? fallback` is to not complain, so an unauthored
+// dial behaves exactly like one set to its default and the only symptom is that turning it does nothing.
+//
+// ⚠️ TWO CONFIDENCE CLASSES, AND THE DISTINCTION IS LOAD-BEARING. A module parameter named `rules` is not
+// necessarily the merged rules bag: `intensity.js` reads `rules.steps` and its callers pass
+// `CONTENT.intensity`, where `steps` is authored and correct. The first version of this section reported
+// that as a finding — a sweep that cries wolf is one people learn to skip, which is the SNG-250 lesson this
+// file already quotes at itself. Only `CONTENT.rules.X` / `content.rules.X` names the bag unambiguously.
+{
+  const provided = new Set(Object.keys(rj("content/packs/core/rules/resolution.json")));
+  const stateSrc = read("engine/state.js");
+  for (const m of stateSrc.matchAll(/\brules\.([A-Za-z_$][\w$]*)\s*=/g)) provided.add(m[1]);
+  const written = new Set([...ALL_CODE.matchAll(/\brules\.([A-Za-z_$][\w$]*)\s*=/g)].map(m => m[1]));
+  const files = { ...ENGINE, "app.js": APP };
+
+  const collect = (patterns) => {
+    const out = new Map();
+    for (const [file, src] of Object.entries(files)) {
+      for (const re of patterns) for (const m of src.matchAll(re)) {
+        if (!out.has(m[1])) out.set(m[1], new Set());
+        out.get(m[1]).add(file);
+      }
+    }
+    return [...out.entries()].filter(([k]) => !provided.has(k) && !written.has(k))
+      .sort((a, b) => b[1].size - a[1].size);
+  };
+
+  // UNAMBIGUOUS: the bag is named. This is the class that caught arcResponse.
+  const named = collect([
+    /\bCONTENT\.rules\??\.([A-Za-z_$][\w$]*)/g,
+    /\bcontent\.rules\??\.([A-Za-z_$][\w$]*)/g,
+  ]);
+  if (!named.length) console.log("  (none — every key read as CONTENT.rules.X is authored somewhere)");
+  for (const [key, where] of named) {
+    const readers = [...where];
+    const nested = new RegExp(`(CONTENT|content)\\.rules\\??\\.${key}\\??\\.[A-Za-z_$]`).test(ALL_CODE);
+    say("LIKELY", `rules.${key} — named as CONTENT.rules by ${readers.length} file(s), authored by nobody`,
+      `${readers.slice(0, 4).join(", ")}${nested ? " · read for a NESTED value, so a whole block is expected" : ""}`);
+  }
+
+  // AMBIGUOUS: a bare `rules.X` inside a module. Reported quietly and WITH the caveat, because the parameter
+  // may be any content doc — this is the class that produced the intensity.js false positive.
+  const bare = collect([/\brules\??\.([A-Za-z_$][\w$]*)/g])
+    .filter(([k]) => !named.some(([n]) => n === k));
+  if (bare.length) {
+    console.log(`\n  — and ${bare.length} bare \`rules.X\` read(s) whose parameter may be a DIFFERENT content doc.`);
+    console.log("    Check the CALLER before believing these; intensity.js reads rules.steps and is passed CONTENT.intensity.");
+    for (const [key, where] of bare) console.log(`      rules.${key}  (${[...where].join(", ")})`);
+  }
+}
 console.log(`\n${findings} finding(s). This is a REPORT: each one is a question, not a verdict.`);
 console.log("A finding worth gating gets promoted to a named check, the way all six known doors were.");
 process.exit(0);

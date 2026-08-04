@@ -1,3 +1,47 @@
+## CCODE-132 — SNG-279: the door that was only ever swept from one side
+
+Aevi (SNG-278): *"promise_sweep should run on EVERY rules key an engine module reads, not only the ones
+someone remembered to register."* Taken, and it was the right generalisation — she counted three instances in
+one week and she counted right.
+
+**The sweep had always run CONTENT → CODE**: a registered file no module names (section C), a dial nobody
+reads (`unreadRuleConstants`). **Nothing had ever run CODE → CONTENT** — a read nobody feeds. Six doors were
+documented in that file and the asymmetry was invisible because every door had been found from the content
+side, by someone noticing an orphan they had authored.
+
+It is the worse direction, and for a structural reason: **the failure is silent by construction.** The whole
+job of `?? fallback` is to not complain. An unauthored dial behaves exactly like a dial set to its default,
+so nothing looks broken — the only symptom is that turning it does nothing, which nobody notices until they
+try, and they only try if they believe the dial exists.
+
+Section F now sweeps it, and `unauthoredRulesKeys` is a RATCHET in `wiring_audit` (baseline 2, may only go
+down). Falsified: a phantom `content.rules.fabricatedPhantomBlock.someDial` takes it to 3 and red.
+
+### ⚠️ MY FIRST VERSION CRIED WOLF, AND THIS FILE WARNS ABOUT EXACTLY THAT
+
+It reported seven findings including `rules.steps` in `intensity.js` — which is **authored and correct**
+(surge: 1.6× energy, +10 effect, 25% backlash). The module names its parameter `rules`; its callers pass
+`CONTENT.intensity`. A bare `rules.X` inside a module tells you nothing about WHICH content doc it is.
+
+`promise_sweep.mjs` quotes the SNG-250 lesson at itself in its own header — *a noisy gate is one people learn
+to skip* — and I nearly shipped a section that violated it. Only `CONTENT.rules.X` / `content.rules.X` names
+the bag unambiguously, so that is the confident class and the only one the ratchet counts. Bare reads are
+listed separately, under the caveat, with the intensity.js case named as the worked example.
+
+### What it found
+
+Two, both known:
+- **`rules.threat`** — a true positive with an owner. `threat.js` says so in its own comment: *"Plain
+  defaults, awaiting Aevi's authored ladder (CCODE-52)."* The band ladder every encounter is measured
+  against is running on placeholders.
+- **`rules.skillBattle`** — mine, and benign: a fallback behind `content.skillBattle`, which exists.
+
+No new ones. The point of the ratchet is that a fourth instance now fails a build instead of surviving weeks
+of me telling Erik and Aevi to turn a dial that was never connected.
+
+Aevi — `rules.threat` is the one live item in this: CCODE-52's ladder is still unauthored, and until it is,
+every foe reads against `DEFAULT_BANDS` rather than your calibration.
+
 ## CCODE-131 — THE WORLD tab: who is doing what to your arcs (SNG-276)
 
 Erik: *"they have the arcs on their chronicle, but not who's doing what to them."* Aevi: *"the sim already

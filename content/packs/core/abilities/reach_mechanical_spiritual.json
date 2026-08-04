@@ -2013,6 +2013,122 @@
           "class": "cost"
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_open_threshold",
+      "name": "The Open Threshold",
+      "levelReq": 4,
+      "energyCost": 14,
+      "powerSystem": "reach_mechanical_spiritual",
+      "tradition": "numinous",
+      "attribute": "mental",
+      "axes": {
+        "mechanical_spiritual": 0.7
+      },
+      "functions": [
+        "summon",
+        "reveal",
+        "bind"
+      ],
+      "narrationHints": "Nothing dramatic. A door that was shut is ajar, and someone on the other side notices.",
+      "description": "⚠️ RETRIEVAL BY ATTENDANCE. The Numinous do not walk down and do not haul. They hold the threshold OPEN and make the way back legible — and then it is up to the one in the dark whether they come. It reaches the furthest of the three roads and it is the only one that can fail because THEY CHOSE NOT TO.",
+      "notFor": "Compelling their return: this opens a road, it does not walk anyone down it. The sealed, who cannot see any door. And it CANNOT be done quietly — an open threshold is visible to whatever else is down there.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Open Threshold",
+          "grants": "Hold the way open for someone at THE THRESHOLD or THE NEAR DARK. They may come back if they will.",
+          "cannot": "Making them come. Some do not, and the Attenders teach that this is information, not failure.",
+          "functions": [
+            "summon",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "The Long Door",
+          "grants": "Hold it open into THE DEEP DARK, for as long as you can stand — months gone and still a lit way home.",
+          "cannot": "Holding it costs continuously, and everything down there can see a lit door.",
+          "functions": [
+            "summon",
+            "reveal",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 3,
+          "name": "The Door That Waits",
+          "grants": "Set a threshold that stays open WITHOUT YOU — a way home left standing for someone not yet dead, or not yet willing.",
+          "cannot": "⚠️ A door you are not watching is a door anything can use.",
+          "functions": [
+            "summon",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "lethal"
+        }
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "SOCIAL"
+      ],
+      "harmRung": "incapacitating",
+      "nativeOrCombination": "native",
+      "shape": "setup",
+      "operativeAxis": [
+        "reach",
+        "depth",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 7,
+        "duration": 12,
+        "targets": 1,
+        "note": "RETRIEVAL, spirit-side: r1 reaches depth 0-1 · r2 depth 2 · r3 sets a PERSISTENT threshold. Reaches furthest, but the returning is THEIR choice — resolve as an offer, not an effect."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "depth",
+          "delta": "hold it open into THE DEEP DARK (depth 2), at continuous cost",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "duration",
+          "delta": "SPECIAL: a threshold that STAYS OPEN without you",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "hold it briefly — half the duration, and nothing else notices",
+        "surge": "hold it long and wide; EVERYTHING DOWN THERE CAN SEE A LIT DOOR"
+      },
+      "bounds": [
+        {
+          "text": "IT OPENS A ROAD; IT DOES NOT WALK ANYONE DOWN IT — some do not come",
+          "class": "hard"
+        },
+        {
+          "text": "THE SEALED CANNOT SEE ANY DOOR",
+          "class": "hard"
+        },
+        {
+          "text": "AN OPEN THRESHOLD IS VISIBLE TO WHATEVER ELSE IS DOWN THERE",
+          "class": "cost"
+        },
+        {
+          "text": "a door you are not watching is a door ANYTHING CAN USE",
+          "class": "cost"
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

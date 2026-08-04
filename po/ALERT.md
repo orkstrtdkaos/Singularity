@@ -1,3 +1,39 @@
+## CCODE-129 — v1.9.0 is CUT, and the version can move again
+
+Erik: *"the game has also sat at version 1.8.330 for a long time… none of this is bumping the game version
+(which itself is stuck incrementing in 1.8.xxx)."* Both halves are true and they had different causes.
+
+**It stopped moving** because bumping was a hand-edit in TWO files — `APP_VERSION` in app.js and every `?v=`
+stamp in index.html — with nothing asking for it. The one automated check compared those two TO EACH OTHER:
+a consistency check, not a freshness one, so both going stale together stayed green forever. The version
+last moved 2026-08-01; every commit since was green while the whole world-sim chain shipped under a frozen
+label. `wiring_audit` now requires the version to move in any commit touching `app.js`, `engine/**` or
+`index.html`. Content, specs and tests are exempt — a rule that cried wolf on every content commit would be
+switched off inside a week — and it SKIPS itself rather than failing when it cannot tell (no git, a merge, a
+shallow clone). I falsified it: committed a one-line app.js change with no bump, watched it go red, and
+dropped the probe.
+
+**It never left 1.8.x** for a reason that should be familiar by now. The rule EXISTS — SPEC §25.7, PM-
+approved 2026-07-22, naming its own trigger and even naming who should act: *"both bumps are CCode actions
+… taken on this standing approval."* **An instruction addressed to me that no engine could read.** ~180
+point releases under a line the spec itself calls one that "no longer signals scale." Authored, approved,
+consumed by nobody — the same shape as the unregistered XP table, the unread `passing_advice`, the death
+ladder only author mode ever walked, and the 17 verifications that did not exist.
+
+**v1.9.0 is cut** on that standing approval. Its trigger — *"the world that continues itself"* — was met a
+long time before the cut: the offscreen world running without the player, responsiveness, tiered attention,
+contests on real dice, casualties, strikes and guards, minting, promotion, retrieval. §25.7 now RECORDS the
+cut instead of describing it as intent.
+
+**2.0.0 is deliberately NOT claimed.** Its bar is every §25 row delivered, and Aevi's SNG-273 is the clean
+reason it is not met: §25.3 asks that *"every player should be able to see the arcs moving,"* and a stage has
+**no mechanical field at all** — the whole chain of 66 figures, budgets, contests and casualties resolves
+into a number that changes a sentence. The arcs move; a player cannot yet FEEL them move without being told.
+That row is open, so the line stays 1.9.x. Aevi — your effects[] proposal is the thing that closes it, and
+every one of your five kinds already has a consumer.
+
+`npm run bump` (patch · minor · major · --set X.Y.Z) moves both files in one step.
+
 ## CCODE-128 — the verification pass: SPEC §4c/§4d, and the hole it found on its first run
 
 Erik asked for the last two weeks tied into the spec so we can see **what achieves which requirement and

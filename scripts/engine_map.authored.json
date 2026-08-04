@@ -380,5 +380,10 @@
   "purpose": "SNG-263: THE CRAFT MECHANICAL BODY. Erik: 'every function described needs a matching game mechanic that can be verified.' The audit found 285 crafts carrying `functions` and not one field for damage, healing, duration, range, area or rank — of 24 verbs only strike and break did anything, so heal on 31 crafts healed nothing and reveal, the largest family at 114 crafts, did nothing at all. This resolves a verb to its family's effect-SHAPE and then to real numbers: magnitudes, Erik's tier ladder (T-II doubles, T-III beats linear, T-IV/V flagged special), the per-rank delta, and per-intensity scaling. Damage is ROLLED, calibrated so a T-I strike's maximum can kill a 5-health peer and its average takes 2-3 hits.",
   "playerVisibleSurface": "NONE directly — the player meets it as crafts that finally DO what their description says: a ward that actually reduces incoming harm, a heal that restores health, a bind that applies a named penalty, and a rank-up that changes a number they can point at.",
   "whatMakesItFire": "Pure and injected: every magnitude, multiplier and band comes from rules/craft_mechanics.json. NEVER invents a number, and NEVER reports a zero for a dimension a verb does not use — 'no range' and 'range 0' must not look alike."
+ },
+ "worldtab.js": {
+  "purpose": "Builds THE WORLD tab — who is doing what to your arcs — as a pure function of world state, so the render can be EXECUTED in a test instead of pattern-matched against its own source.",
+  "playerVisibleSurface": "The World tab on the character sheet: each arc by stage NAME, who is pushing it and who is holding it back (names you have met marked apart), what it cost in casualties and strikes, who is being reached for in the dark, and who has not been home.",
+  "whatMakesItFire": "Opening the character sheet and choosing The World; fed by arcPeopleView + worldPeopleFooter off the offscreen world tick."
  }
 }

@@ -8092,7 +8092,12 @@ await (async () => {
   // §C-2: the merge — the character surface is ONE screen with a Traits | Chronicle tab bar.
   check("215 §C-2: a Traits | Chronicle tab bar helper drives the merged character surface", /function characterTabBar\(active\)/.test(appSrcC) && /id="tab-traits"/.test(appSrcC) && /id="tab-chronicle"/.test(appSrcC));
   check("215 §C-2: both surfaces render the tab bar (Traits sheet + Chronicle)", /characterTabBar\("traits"\)/.test(appSrcC) && /characterTabBar\("chronicle"\)/.test(appSrcC));
-  check("215 §C-2: the tabs switch between the two renders", /getElementById\("tab-chronicle"\)[\s\S]{0,60}renderChronicle\(\)/.test(appSrcC) && /getElementById\("tab-traits"\)[\s\S]{0,60}renderCharacterScreen\(\)/.test(appSrcC));
+  // SNG-276: wiring moved into ONE `wireCharacterTabs()` — each render used to wire its own buttons, which
+  // is how a third tab gets added to the markup and stays dead on two of the three screens. Assert the
+  // INTENT (every tab reaches its render) rather than the old per-render pattern.
+  check("215 §C-2: the tabs switch between the renders", /go\("tab-chronicle", \(\) => renderChronicle\(\)\)/.test(appSrcC) && /go\("tab-traits", \(\) => renderCharacterScreen\(\)\)/.test(appSrcC));
+  check("276: EVERY character render wires the tab bar (a tab dead on one screen is the bug this prevents)",
+    (appSrcC.match(/wireCharacterTabs\(\);/g) || []).length >= 3);
   check("215 §C-2 dedup: the old standalone 'The Chronicle' button is gone (the tab replaces it), lived-story not duplicated on Traits", !/id="cs-chronicle"/.test(appSrcC) && /the Chronicle tab's job now/.test(appSrcC));
   check("215 §C-2: the tab bar is styled", /\.char-tabs \{ display: flex/.test(cssC) && /\.char-tab\.on \{/.test(cssC));
 }
@@ -9631,6 +9636,80 @@ await (async () => {
 
   check("272/bg: the tooltip goes through the ONE reader, not a second private lookup",
     !/\(CONTENT\.backgrounds \|\| \[\]\)\.find\(b => b\.id === id\) \|\| \{\}/.test(appBg));
+}
+
+// --- SNG-276: THE WORLD tab — who is doing what to your arcs -----------------------------------------
+{
+  const wt3 = await import("../engine/worldtick.js");
+  const { worldTabHtml } = await import("../engine/worldtab.js");
+  const appW = readFileSync(join(root, "app.js"), "utf8");
+  const cssW = readFileSync(join(root, "style.css"), "utf8");
+
+  const content = { greaterArcs: [{ id: "a1", name: "The Bleed", currentStage: 1,
+    stages: [{ stage: 1, name: "Drift", publicFace: "something is loose" }] }],
+    legends: { roster: [{ id: "big", name: "The Burning Certainty" }, { id: "small", name: "Neth" }] } };
+  const ch = {
+    npcRegistry: { small: { id: "small", name: "Neth" } },   // met Neth, only heard of the other
+    codex: { topics: {} },
+    worldState: {
+      epicArcPushes: { big: { arcId: "a1", push: 5.5 }, small: { arcId: "a1", push: -1 } },
+      arcCasualties: [{ arcId: "a1", winner: "big", loser: "small", kind: "wounded" }],
+      arcStrikes: [{ arcId: "a1", target: "small", sender: "big", outcome: "guarded", guard: "small" }],
+      arcContests: { a1: { duels: 2, worked: 30 } },
+      arcVacancies: { a1: 3 },
+      arcRetrievals: [{ arcId: "a1", deadId: "small", byId: "big", outcome: "return" }],
+      neglectedLives: [{ id: "big", name: "The Burning Certainty" }],
+      retrievalWanted: [{ deadId: "small", deadName: "Neth", byId: "big", byName: "The Burning Certainty", depth: 1, waiting: true }],
+    },
+  };
+  const view = wt3.arcPeopleView(ch, content);
+  const a = view[0];
+
+  check("272/276: the arcs carry WHO is pushing them, by name and by side",
+    a.forIt[0]?.name === "The Burning Certainty" && a.againstIt[0]?.name === "Neth");
+  check("272/276: a name you have MET is marked apart from one you have only heard",
+    a.againstIt[0]?.known === true && a.forIt[0]?.known === false);
+  check("272/276: the stage reads by NAME, never as a raw number (show the state, not the machine)",
+    a.stageName === "Drift" && !/\d\.\d{3}/.test(a.stageName));
+  // ⛔ AND IT IS NOT THE PUSH. `push` saturates at the cap, so within a world-year every figure on an arc
+  // holds the same number and any banding of it prints one phrase beside every name — which is what the
+  // first three versions did. The band reads AUTHORED care weight, which actually varies.
+  check("272/276: the phrase beside a name reads authored CARE, not the saturated push",
+    typeof a.forIt[0]?.lean === "string" && /life’s work|bone|stake/.test(a.forIt[0].lean));
+  check("272/276: …and it DISCRIMINATES — different care weights read differently", (() => {
+    const c2 = JSON.parse(JSON.stringify(content));
+    c2.legends.roster[0].arcAffinity = { arcId: "a1", dir: 1, weight: 3 };
+    c2.legends.roster[1].arcAffinity = { arcId: "a1", dir: -1, weight: 1 };
+    const v2 = wt3.arcPeopleView(ch, c2);
+    return v2[0].forIt[0].lean !== v2[0].againstIt[0].lean;
+  })());
+  check("272/276: casualties, strikes and retrievals all resolve to NAMES",
+    a.casualties[0]?.loser?.name === "Neth" && a.strikes[0]?.target?.name === "Neth"
+    && a.retrievals[0]?.dead?.name === "Neth");
+  check("272/276: the seats that emptied and the fights that happened are both surfaced",
+    a.vacancy === 3 && a.contest?.duels === 2);
+
+  // ⛔ The tab composes `worldArcsPublic`, which withholds each arc's sealed `truth`. It must not leak it.
+  check("272/276: the tab inherits spoiler discipline — the arc's sealed truth is never on it",
+    a.publicFace === "something is loose" && a.truth === undefined);
+
+  const foot = wt3.worldPeopleFooter(ch, content);
+  check("272/276: who is NOT going home, and who is being reached for, are world-level facts",
+    foot.neglected[0]?.name === "The Burning Certainty" && foot.wanted[0]?.dead === "Neth" && foot.wanted[0]?.waiting === true);
+
+  check("272/276: the tab exists, is wired, and is styled",
+    /id="tab-world"/.test(appW) && /function renderWorldTab\(\)/.test(appW) && /\.wt-arc \{/.test(cssW));
+  // SNG-276: the markup lives in `engine/worldtab.js` now, so read it THERE — and better, EXECUTE it: this
+  // is the whole reason the template was extracted out of app.js.
+  check("272/276: an empty world says so rather than rendering a blank page", (() => {
+    const html = worldTabHtml({ arcs: [], foot: {}, name: "Nobody", tabBar: () => "", esc: s => String(s ?? "") });
+    return /The world has not moved yet/.test(html) && wt3.arcPeopleView({}, {}).length === 0;
+  })());
+  check("272/276: the tab RENDERS — executed against real state, not pattern-matched against its source", (() => {
+    const html = worldTabHtml({ arcs: view, foot, name: "Probe", tabBar: () => "", esc: s => String(s ?? "") });
+    return html.length > 400 && html.includes("Neth") && html.includes("The Burning Certainty")
+      && !/undefined|NaN|\[object/.test(html);
+  })());
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

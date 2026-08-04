@@ -1228,3 +1228,19 @@ img[data-lightbox] { cursor: zoom-in; }
 .col-pick { font-weight: 600; }
 .col-cell { font-size: 1.02em; }
 .col-read, .col-ground { font-size: 0.9em; opacity: 0.85; }
+
+/* SNG-276 — THE WORLD tab: who is doing what to your arcs. Reads as a page about PEOPLE, so the arc is the
+   heading and the names carry the weight; nothing here prints a raw number the engine keeps internally. */
+.wt-arc { border-top: 1px solid var(--border); padding: 10px 0 12px; }
+.wt-arc-head { font-size: 15px; margin-bottom: 2px; }
+.wt-face { color: var(--muted); font-style: italic; margin: 2px 0 6px; }
+.wt-side { margin: 3px 0; line-height: 1.5; }
+.wt-side-label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; margin-right: 4px; }
+.wt-line { color: var(--muted); font-size: 13px; margin: 3px 0; }
+.wt-cost { font-size: 13px; margin: 3px 0; }
+/* a name you have MET reads as a hook you can act on; a name you have only heard is a fact. */
+.wt-who { white-space: nowrap; }
+.wt-known { font-weight: 600; border-bottom: 1px dotted var(--accent); }
+.wt-adv { color: var(--good, #6c9); font-size: 12px; }
+.wt-rec { color: var(--warn, #c96); font-size: 12px; }
+.wt-contested { color: var(--accent); font-size: 12px; font-weight: 600; }

@@ -1,3 +1,46 @@
+## CCODE-131 — THE WORLD tab: who is doing what to your arcs (SNG-276)
+
+Erik: *"they have the arcs on their chronicle, but not who's doing what to them."* Aevi: *"the sim already
+knows the story. Nothing surfaces it."* Both exactly right — `arcContests` has known who won and by how
+much, `arcCasualties` who died on which arc, `arcVacancies` which seats emptied, since the day each was
+written, and no reader ever asked. Collected-then-never-read, across five systems at once.
+
+**The tab is live.** Per arc: stage BY NAME, which way it moved, who is pushing it on and who is holding it
+back, what it cost (casualties, strikes, guards who intercepted), who was minted into it, and how many who
+care went elsewhere instead. Then two world-level blocks: who is being reached for in the dark, and who has
+not been home. **Names you have MET are marked apart from names you have only heard** — that is the
+difference between "go find her" and "someone is out there", and it is the thing a player needs before
+being asked to guard someone or strike someone.
+
+### ⚠️ I WROTE TEN GATES THAT ALL PASSED WHILE THE TEMPLATE HAD NEVER ONCE EXECUTED
+
+They pattern-matched app.js source. That proves the words are present; it proves nothing about whether the
+thing RUNS. So I moved the markup into `engine/worldtab.js` as a pure `worldTabHtml({arcs, foot, name,
+tabBar, esc})` — same reasoning as `roundreceipt.js`, which was extracted for this exact failure — and the
+first test that actually executed it **crashed immediately**: a world that has not ticked yet has no
+`retrievalWanted` and no `neglectedLives`, and reading `.length` off undefined blanked the whole tab. Every
+source-pattern gate had been green the entire time.
+
+### And reading the rendered page beat reasoning about it, three times
+
+I banded each figure's push to say how hard they were leaning. Absolute thresholds: every name read *"leaning
+hard"*. Cap-relative: same. Ranked against the strongest mover on the arc: **same again** — because `push`
+is a SATURATED CUMULATIVE total, so within a world-year every figure on an arc holds the identical number and
+no rescaling can extract variance that is not there. A word that applies to everyone is not a word.
+
+It now prints authored `arcAffinity.weight` — *"their life's work" / "close to the bone" / "a stake in it"* —
+which is Aevi's own statement of what the arc is to that person, and actually differs. Also cut each side
+from six names to three: six names with identical suffixes is a wall, and I only saw that by looking at it.
+
+### One live instance of its own bug class, caught by a gate I wrote while building it
+
+Only 2 of the 3 character renders wired the tab bar, so **the new tab was DEAD on the Traits screen**. Each
+render used to wire its own buttons; there is now one `wireCharacterTabs()` and a gate that fails if any
+render skips it.
+
+Aevi — SELF, CRAFT, TIES and HOLDINGS are yours to spec whenever you are ready; the tab bar and the wiring
+take a fifth entry without ceremony now. **v1.9.4**, 23 requirements / 77 gates, all green.
+
 ## CCODE-130 — people have lives, the dials were never reachable, and the sheet stops lying
 
 ### 1. SNG-275 — the arcs do not get all of somebody

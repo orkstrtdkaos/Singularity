@@ -48,7 +48,8 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic } from "./engine/worldtick.js";
+import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -76,7 +77,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.2";
+const APP_VERSION = "1.9.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7457,10 +7458,19 @@ function traitReadout(kind, id) {
 
 // SNG-215 §C-2: the character surface is ONE screen with two tabs — Traits (who you ARE) and Chronicle (who
 // you've BECOME). The bar switches between the two renders; the user sees a single character view with tabs.
+// SNG-276: ONE wiring function for the tab bar. Each render used to wire its own buttons, which is how a
+// third tab gets added to the markup and stays dead on two of the three screens.
+function wireCharacterTabs() {
+  const go = (id, fn) => { const b = document.getElementById(id); if (b) b.onclick = fn; };
+  go("tab-traits", () => renderCharacterScreen());
+  go("tab-chronicle", () => renderChronicle());
+  go("tab-world", () => renderWorldTab());
+}
 function characterTabBar(active) {
   return `<div class="char-tabs">
     <button class="char-tab${active === "traits" ? " on" : ""}" id="tab-traits">Traits</button>
     <button class="char-tab${active === "chronicle" ? " on" : ""}" id="tab-chronicle">📜 Chronicle</button>
+    <button class="char-tab${active === "world" ? " on" : ""}" id="tab-world">🌍 The World</button>
   </div>`;
 }
 
@@ -7603,7 +7613,7 @@ function renderCharacterScreen() {
   const luBtn2 = document.getElementById("cs-levelup"); if (luBtn2) luBtn2.onclick = () => renderLevelUp();
   const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => { wheelLearnMode = false; renderSkillWheel(); }; // SNG-218 §3: full kit view (owned crafts shown)
   const repBtn = document.getElementById("cs-repair"); if (repBtn) repBtn.onclick = () => renderRepairScreen();
-  const chrTab = document.getElementById("tab-chronicle"); if (chrTab) chrTab.onclick = () => renderChronicle(); // SNG-215 §C-2: the Chronicle tab
+  wireCharacterTabs();
   // SNG-053 form editor: describe the character's physical form so the portrait renders it
   const formB = document.getElementById("cs-form");
   if (formB) formB.onclick = () => {
@@ -8179,6 +8189,26 @@ async function ensureChronicleParagraph(force = false) {
   }
 }
 
+// SNG-276 — THE WORLD TAB. Erik: "they have the arcs on their chronicle, but not who's doing what to them."
+//
+// The data has all existed for weeks and nothing read it: `arcContests` knew who won and by how much,
+// `arcCasualties` who died on which arc, `arcVacancies` which seats emptied. Collected then never read.
+//
+// PRINCIPLE (Aevi): SHOW THE STATE, NOT THE MACHINE. A stage reads "Drift · stage 1/4", never 2.351351; a
+// push reads "leaning hard", never 4.7. The engine keeps the floats; the sheet speaks the language.
+// SNG-276 — THE WORLD TAB. The markup lives in `engine/worldtab.js` so it can be EXECUTED in a test rather
+// than pattern-matched; this is the thin shell that feeds it real state and puts it on screen.
+function renderWorldTab() {
+  chrome(worldTabHtml({
+    arcs: arcPeopleView(character, CONTENT),
+    foot: worldPeopleFooter(character, CONTENT),
+    name: character.name,
+    tabBar: characterTabBar,
+    esc,
+    name: character.name,
+  }));
+  wireCharacterTabs();
+}
 function renderChronicle() {
   const cache = character.chronicleCache;
   const stale = chronicleIsStale(character);
@@ -8298,7 +8328,7 @@ function renderChronicle() {
     const host = document.querySelector(".screen"); if (host) { const d = document.createElement("div"); d.className = "insight"; d.style.marginTop = "6px"; d.textContent = note; host.prepend(d); }
   };
   document.getElementById("chr-back").onclick = () => renderCharacterScreen();
-  const trTab = document.getElementById("tab-traits"); if (trTab) trTab.onclick = () => renderCharacterScreen(); // SNG-215 §C-2: the Traits tab
+  wireCharacterTabs();   // SNG-276: all three tabs, from the one place — this screen wired only Traits
   if (!cache?.text && !character._chronicleBusy && getApiKey()) ensureChronicleParagraph(false); // write once on first open
 }
 

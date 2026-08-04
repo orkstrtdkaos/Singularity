@@ -107,6 +107,86 @@ export function worldArcsPublic(content, character) {
   });
 }
 
+/** SNG-276 — THE WORLD TAB: who is doing what to your arcs.
+ *
+ *  Erik: *"they have the arcs on their chronicle, but not who's doing what to them."* Aevi: *"the sim
+ *  already knows the story. Nothing surfaces it."* Both true — `arcContests` has known who won and by how
+ *  much, `arcCasualties` who died on which arc, `arcVacancies` which seats emptied, since the day each was
+ *  written, and no reader has ever asked. Collected-then-never-read is the seventh door and this is a
+ *  five-system-wide instance of it.
+ *
+ *  It becomes urgent the moment the third action ships: a player asked to GUARD someone, STRIKE someone, or
+ *  who is themselves struck, needs to know who is standing on their arc first.
+ *
+ *  ⛔ SPOILER DISCIPLINE IS INHERITED, NOT RE-DECIDED. This composes `worldArcsPublic`, which already
+ *  withholds each arc's sealed `truth` and surfaces only its `publicFace`. Nothing here reaches past that
+ *  line — it adds PEOPLE to a public surface, and every name it carries has already been broadcast as news.
+ *
+ *  `known` marks whoever the player has actually met, so the UI can tell "someone you know is in this" from
+ *  "a name you have heard", which is the difference between a fact and a hook.
+ *
+ *  Pure. Reads world state, writes nothing. */
+export function arcPeopleView(character, content = {}) {
+  const ws = character?.worldState || {};
+  const roster = worldRoster(ws, content);
+  const byId = new Map(roster.map(f => [f.id, f]));
+  const nameOf = (id) => byId.get(id)?.name || id || "someone";
+  const knows = (id) => !!(character?.npcRegistry?.[id] || character?.codex?.topics?.[id]);
+  const who = (id) => ({ id, name: nameOf(id), known: knows(id) });
+
+  // "Show the state, not the machine" (Aevi). A push is a float; a reader wants a WEIGHT, not 2.351351.
+  // ⚠️ BANDED AGAINST THE CAP, not against absolute numbers. Pushes ACCUMULATE toward `EPIC_PUSH_CAP`, so
+  // fixed thresholds put the entire valley in the top band within a season and the word stops meaning
+  // anything — which is exactly what a first pass of this did: every figure read "leaning hard".
+  // ⛔ DO NOT BAND THE PUSH. `push` is a SATURATED CUMULATIVE total — it climbs to `EPIC_PUSH_CAP` and
+  // stops, so within a world-year every figure on an arc holds exactly the same number. I tried an absolute
+  // scale, then a cap-relative one, then one ranked against the strongest mover, and read the rendered page
+  // each time: all three printed the identical phrase beside every single name. A word that applies to
+  // everyone is not a word, and no amount of rescaling fixes a value that has no variance left.
+  //
+  // What DOES differ, and is authored rather than derived, is how much the figure CARES: `arcAffinity.weight`
+  // is Aevi's statement of what this arc is to this person. That is the honest thing to print beside a name.
+  const careBand = (f, arcId) => {
+    const w = affinitiesOf(f).find(c => c.arcId === arcId)?.weight || 1;
+    return w >= 3 ? "their life’s work" : w >= 2 ? "close to the bone" : "a stake in it";
+  };
+
+  return worldArcsPublic(content, character).map(arc => {
+    const raw = Object.entries(ws.epicArcPushes || {})
+      .filter(([, r]) => r?.arcId === arc.arcId && Number(r.push))
+      .map(([id, r]) => ({ ...who(id), push: Number(r.push), dir: Number(r.push) > 0 ? 1 : -1 }))
+      .sort((a, b) => Math.abs(b.push) - Math.abs(a.push));
+    const movers = raw.map(m => ({ ...m, lean: careBand(byId.get(m.id), arc.arcId) }));
+    const onArc = (list) => (Array.isArray(list) ? list : []).filter(e => e?.arcId === arc.arcId);
+    return {
+      ...arc,
+      movers,
+      forIt: movers.filter(m => m.dir > 0),
+      againstIt: movers.filter(m => m.dir < 0),
+      contest: ws.arcContests?.[arc.arcId] || null,
+      vacancy: ws.arcVacancies?.[arc.arcId] || 0,
+      casualties: onArc(ws.arcCasualties).map(c => ({ winner: who(c.winner), loser: who(c.loser), kind: c.kind })),
+      strikes: onArc(ws.arcStrikes).map(s => ({ target: who(s.target), sender: who(s.sender), outcome: s.outcome, guard: s.guard ? who(s.guard) : null })),
+      births: onArc(ws.arcBirths).map(b => ({ ...b, name: nameOf(b.id) })),
+      retrievals: onArc(ws.arcRetrievals).map(r => ({ dead: who(r.deadId), by: who(r.byId), outcome: r.outcome, sealed: !!r.sealed })),
+    };
+  });
+}
+
+/** SNG-276 — the world-level facts that belong to no single arc: who came back, who is not going home, and
+ *  what people did with their own time. Kept separate because attaching them to an arc would be a lie. */
+export function worldPeopleFooter(character, content = {}) {
+  const ws = character?.worldState || {};
+  const roster = worldRoster(ws, content);
+  const byId = new Map(roster.map(f => [f.id, f]));
+  const nameOf = (id) => byId.get(id)?.name || id || "someone";
+  return {
+    neglected: (ws.neglectedLives || []).map(n => ({ id: n.id, name: n.name || nameOf(n.id) })),
+    living: (ws.personalBeats || []).map(b => ({ id: b.id, name: b.name || nameOf(b.id), pursuit: b.pursuit })),
+    wanted: (ws.retrievalWanted || []).map(w => ({ dead: w.deadName || nameOf(w.deadId), by: w.byName || nameOf(w.byId), depth: w.depth, waiting: !!w.waiting })),
+    coverage: ws.personalCoverage || null,
+  };
+}
 /** SNG-203 §3: the shared world-arc progress surface as a GM block — the world's public state, so the GM can
  *  weave "the arcs are moving" into play without inventing it. Truth stays sealed (see worldArcsPublic). */
 export function worldArcsForGM(content, character) {

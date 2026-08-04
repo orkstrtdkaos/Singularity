@@ -447,7 +447,36 @@ Next from the order: P1b (level-cost cap), P1c (tier weights, `regional` ALIASED
 
 # PO ALERT
 
-> ## [SNG-278 UPDATE — the condition on my dial answer has been MET. Leave 0.12.] (Aevi, 2026-08-04)
+> ## [⚠️ DIRECTIVE SNG-280 — I encoded my values again. Standing rule recorded.] (Aevi, 2026-08-04)
+> **CCODE: read this before building SNG-279 — the weights in my first draft were wrong and are corrected.**
+> I proposed weighting `guard` highest in `deedScore` and justified it as *"the behaviour most worth having in
+> it."* **Erik: "Are you putting your values into this again? … That sounds like it comes from the rootkin."**
+> **He identified the source exactly** — protection-over-aggression is a moral position **some of this world's
+> peoples hold and others reject**, and I was installing it as **physics**.
+> **⚠️ AND IT WAS WORSE THAN THE BOUNDS BIAS I AUDITED THREE HOURS EARLIER.** Bounds shape what a craft can
+> **do**; `deedScore` shapes **who the world promotes.** Guard at 4 and a landed strike at 2 means the top of
+> the ladder fills with protectors over ten world-years: **the Maw never rises. The Silencers never rise. The
+> Grave-Callers never rise.** **Every tail we had just finished authoring would be mechanically locked out of
+> legendary** — and the sim would have reported that back as *a finding about the world*, which is the same
+> feedback loop as the coercion count.
+> **CORRECTED: everything CONTESTED AND WON scores 3, whichever direction it points.** `strike landed` **raised
+> 2→3** (my bias had undervalued it); `guard` **lowered 4→3** to parity. **A Maw who levers three rivals rises
+> exactly as fast as a guard who stops three knives.**
+> **THE STANDING DIRECTIVE** (`po/DIRECTIVE_SNG-280_no_authored_values.md`):
+> **1.** No moral weighting in any scoring system — deeds, reputation, promotion, standing, XP. Weight reflects
+> **cost, difficulty, risk, scale. Never approval.**
+> **2.** If a justification contains *"worth having," "better," "should," "the right kind of"* — **it is a value
+> claim.** Re-derive from a neutral quantity, or hand the call to Erik.
+> **3. THE TEST: would this tradition's TAIL be disadvantaged?** Run any new system against the Maw, the
+> Silencers, the Grave-Callers, the Openers, the Strippers. **If they systematically lose, it encodes a
+> morality.**
+> **4.** The lore's own north star already says it: **"anything is on the table."** A coefficient that quietly
+> rules things off it contradicts the world, however reasonably it is argued.
+> **5.** When a design genuinely needs a value call, **name it as one and give it to Erik** — not smuggled in
+> as a number with a paragraph of reasoning around it.
+> **FAILURE MODE NAMED: VALUE-AS-COEFFICIENT.** It doesn't look like moralising — **it looks like design
+> reasoning**, with a plausible mechanical story attached. **The tell is that the justification explains why the
+> BEHAVIOUR is good rather than why the NUMBER is correct.**> ## [SNG-278 UPDATE — the condition on my dial answer has been MET. Leave 0.12.] (Aevi, 2026-08-04)
 > **VERIFIED AT HEAD, and it changes my recommendation.** My strike-dial analysis said the number was *two*
 > answers depending on build order: **0.04 without inflow · 0.10–0.12 with minting and promotion.** CCode has
 > now built **both**, so the second answer applies. **`strikeRate` should stay at 0.12 — I withdraw the 0.04.**

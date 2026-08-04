@@ -29,7 +29,16 @@
    "grantsAptitudes": [
     "strategist",
     "ardent"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "win 3 formal one-on-one contests"
+    ],
+    "tendency": {
+     "strategic": 6
+    },
+    "note": "a reputation for the single opponent"
+   }
   },
   {
    "id": "line_soldier",
@@ -43,7 +52,15 @@
    "grantsAptitudes": [
     "rough_and_ready",
     "stalwart"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "serve 3 engagements in a formation"
+    ],
+    "tendency": {
+     "cautious": 6
+    }
+   }
   },
   {
    "id": "skirmisher",
@@ -58,7 +75,15 @@
    "grantsAptitudes": [
     "rough_and_ready",
     "daredevil"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "win 4 running fights outside a formation"
+    ],
+    "tendency": {
+     "risky": 6
+    }
+   }
   },
   {
    "id": "warden",
@@ -73,7 +98,16 @@
    "grantsAptitudes": [
     "rough_and_ready",
     "good_samaritan"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "guard a place or person across 4 threats"
+    ],
+    "tendency": {
+     "generous": 6
+    },
+    "note": "⚠️ THE GUARD PATH — a warden is made by standing over things"
+   }
   },
   {
    "id": "hunter",
@@ -88,7 +122,15 @@
    "grantsAptitudes": [
     "rough_and_ready",
     "long_game"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "take 5 creatures by tracking rather than ambush"
+    ],
+    "tendency": {
+     "patient": 6
+    }
+   }
   },
   {
    "id": "bodyguard",
@@ -103,7 +145,15 @@
    "grantsAptitudes": [
     "rough_and_ready",
     "devoted_lover"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "keep one person alive through 3 attempts on them"
+    ],
+    "tendency": {
+     "devotion": 6
+    }
+   }
   },
   {
    "id": "war_leader",
@@ -118,7 +168,16 @@
    "grantsAptitudes": [
     "banner",
     "tactician"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "lead a company through 2 engagements",
+     "hold an arc front through a crisis"
+    ],
+    "tendency": {
+     "leadership": 8
+    }
+   }
   },
   {
    "id": "arena_fighter",
@@ -133,7 +192,16 @@
    "grantsAptitudes": [
     "rough_and_ready",
     "berserk"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "win 5 public contests in one place"
+    ],
+    "tendency": {
+     "physical": 8
+    },
+    "note": "the crowd names you before you do"
+   }
   },
   {
    "id": "temple_trained",
@@ -147,7 +215,16 @@
    "grantsAptitudes": [
     "faithful",
     "long_game"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "complete a tradition's rite under a teacher"
+    ],
+    "tendency": {
+     "devotion": 8
+    },
+    "note": "you can go to the temple later; many do"
+   }
   },
   {
    "id": "self_taught",
@@ -161,7 +238,16 @@
    "grantsAptitudes": [
     "faithful",
     "daredevil"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "reach rank 3 in any craft with no teacher recorded"
+    ],
+    "tendency": {
+     "risky": 5
+    },
+    "note": "⚠️ EARNED BY ABSENCE — the only background whose condition is that nobody taught you"
+   }
   },
   {
    "id": "lineage_taught",
@@ -175,7 +261,8 @@
    "grantsAptitudes": [
     "faithful",
     "stalwart"
-   ]
+   ],
+   "startOnly": true
   },
   {
    "id": "precursor_marked",
@@ -194,7 +281,8 @@
    "innatePrecursor": [
     "address_sense"
    ],
-   "accessNote": "The mark IS the contact the Precursor Arts gate requires: this background seeds innate ACCESS to address_sense (not a grant — it still costs a level and a point to learn, then grows normally). Matches this background's own gmHint: 'Address-Sense comes unbidden.'"
+   "accessNote": "The mark IS the contact the Precursor Arts gate requires: this background seeds innate ACCESS to address_sense (not a grant — it still costs a level and a point to learn, then grows normally). Matches this background's own gmHint: 'Address-Sense comes unbidden.'",
+   "startOnly": true
   },
   {
    "id": "battlefield_taught",
@@ -208,7 +296,15 @@
    "grantsAptitudes": [
     "faithful",
     "rough_and_ready"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "reach rank 2 in a craft first used in an encounter"
+    ],
+    "tendency": {
+     "physical": 6
+    }
+   }
   },
   {
    "id": "apprenticed_to_a_legend",
@@ -223,7 +319,15 @@
    "grantsAptitudes": [
     "faithful",
     "tactician"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "hold a mentor bond at stage 3+ with a figure of epic band or above"
+    ],
+    "tendency": {
+     "strategic": 6
+    }
+   }
   },
   {
    "id": "found_it_by_accident",
@@ -237,7 +341,8 @@
    "grantsAptitudes": [
     "faithful",
     "innocent"
-   ]
+   ],
+   "startOnly": true
   },
   {
    "id": "craftsman",
@@ -252,7 +357,15 @@
    "grantsAptitudes": [
     "artisan",
     "long_game"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "make or mend 8 things of worth"
+    ],
+    "tendency": {
+     "craft": 8
+    }
+   }
   },
   {
    "id": "mechanist",
@@ -266,7 +379,15 @@
    "grantsAptitudes": [
     "artisan",
     "sage"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "restore 4 mechanisms to function"
+    ],
+    "tendency": {
+     "cerebral": 6
+    }
+   }
   },
   {
    "id": "smith",
@@ -281,7 +402,15 @@
    "grantsAptitudes": [
     "artisan",
     "stalwart"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "forge 5 things that hold"
+    ],
+    "tendency": {
+     "craft": 7
+    }
+   }
   },
   {
    "id": "builder",
@@ -295,7 +424,15 @@
    "grantsAptitudes": [
     "artisan",
     "tactician"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "raise a structure that outlasts a season"
+    ],
+    "tendency": {
+     "craft": 7
+    }
+   }
   },
   {
    "id": "trader",
@@ -309,7 +446,16 @@
    "grantsAptitudes": [
     "artisan",
     "silver_tongue"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "complete 10 trades across 3 regions"
+    ],
+    "tendency": {
+     "social": 6
+    },
+    "note": "⚠️ TIES TO THE ECONOMY — a trader is made by the acceptance gradient, not by wanting to be one"
+   }
   },
   {
    "id": "farmer",
@@ -323,7 +469,15 @@
    "grantsAptitudes": [
     "artisan",
     "long_game"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "bring a growing season to harvest"
+    ],
+    "tendency": {
+     "patient": 7
+    }
+   }
   },
   {
    "id": "river_runner",
@@ -338,7 +492,15 @@
    "grantsAptitudes": [
     "artisan",
     "daredevil"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "carry cargo or people across 6 water passages"
+    ],
+    "tendency": {
+     "risky": 6
+    }
+   }
   },
   {
    "id": "survivalist",
@@ -352,7 +514,15 @@
    "grantsAptitudes": [
     "artisan",
     "stalwart"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "survive 6 wilderness legs without a settlement"
+    ],
+    "tendency": {
+     "cautious": 7
+    }
+   }
   },
   {
    "id": "scholar",
@@ -366,7 +536,15 @@
    "grantsAptitudes": [
     "scholar",
     "sage"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "resolve 6 matters by study rather than force"
+    ],
+    "tendency": {
+     "cerebral": 8
+    }
+   }
   },
   {
    "id": "archivist",
@@ -380,7 +558,15 @@
    "grantsAptitudes": [
     "scholar",
     "long_game"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "recover or preserve 4 records"
+    ],
+    "tendency": {
+     "patient": 6
+    }
+   }
   },
   {
    "id": "physician",
@@ -395,7 +581,15 @@
    "grantsAptitudes": [
     "scholar",
     "good_samaritan"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "mend 8 people"
+    ],
+    "tendency": {
+     "generous": 7
+    }
+   }
   },
   {
    "id": "lawspeaker",
@@ -410,7 +604,15 @@
    "grantsAptitudes": [
     "scholar",
     "orator"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "settle 4 disputes by argument"
+    ],
+    "tendency": {
+     "social": 7
+    }
+   }
   },
   {
    "id": "cartographer",
@@ -424,7 +626,15 @@
    "grantsAptitudes": [
     "scholar",
     "daredevil"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "map 5 places you were first to"
+    ],
+    "tendency": {
+     "risky": 5
+    }
+   }
   },
   {
    "id": "envoy",
@@ -438,7 +648,15 @@
    "grantsAptitudes": [
     "silver_tongue",
     "peacemaker"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "broker 3 agreements between parties who would not speak"
+    ],
+    "tendency": {
+     "social": 7
+    }
+   }
   },
   {
    "id": "performer",
@@ -452,7 +670,15 @@
    "grantsAptitudes": [
     "silver_tongue",
     "charmer"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "hold a room 5 times"
+    ],
+    "tendency": {
+     "amorous": 6
+    }
+   }
   },
   {
    "id": "devotee",
@@ -467,7 +693,16 @@
    "grantsAptitudes": [
     "faithful",
     "ardent"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "keep a practice across a year of play, or lose it publicly"
+    ],
+    "tendency": {
+     "devotion": 8
+    },
+    "note": "⚠️ EARNABLE BY LOSING IT — its own text says 'you either kept it or you did not, and either way it shaped you'"
+   }
   },
   {
    "id": "organizer",
@@ -481,7 +716,15 @@
    "grantsAptitudes": [
     "banner",
     "peacemaker"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "hold a community through 2 crises"
+    ],
+    "tendency": {
+     "leadership": 6
+    }
+   }
   },
   {
    "id": "broker",
@@ -495,7 +738,15 @@
    "grantsAptitudes": [
     "silver_tongue",
     "trickster"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "arrange 6 exchanges you were not party to"
+    ],
+    "tendency": {
+     "deception": 5
+    }
+   }
   },
   {
    "id": "spy",
@@ -510,7 +761,15 @@
    "grantsAptitudes": [
     "shadow",
     "trickster"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "carry 4 pieces of information out of somewhere closed"
+    ],
+    "tendency": {
+     "stealth": 7
+    }
+   }
   },
   {
    "id": "smuggler",
@@ -525,7 +784,16 @@
    "grantsAptitudes": [
     "trickster",
     "daredevil"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "move goods past 5 refusals"
+    ],
+    "tendency": {
+     "deception": 6
+    },
+    "note": "the Quiet Hands recruit from exactly this"
+   }
   },
   {
    "id": "orphan",
@@ -540,7 +808,8 @@
    "grantsAptitudes": [
     "shadow",
     "naive"
-   ]
+   ],
+   "startOnly": true
   },
   {
    "id": "exile",
@@ -554,7 +823,14 @@
    "grantsAptitudes": [
     "shadow",
     "long_game"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "be driven out of a region where you held standing"
+    ],
+    "tendency": {},
+    "note": "⚠️ NOT CHOSEN — earned by LOSING somewhere. The clearest case that a background can be a wound"
+   }
   },
   {
    "id": "ruin_picker",
@@ -569,7 +845,15 @@
    "grantsAptitudes": [
     "shadow",
     "daredevil"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "strip 5 precursor sites"
+    ],
+    "tendency": {
+     "risky": 6
+    }
+   }
   },
   {
    "id": "drifter",
@@ -583,7 +867,15 @@
    "grantsAptitudes": [
     "shadow",
     "carouser"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "hold no residence across 8 region-changes"
+    ],
+    "tendency": {
+     "carousing": 5
+    }
+   }
   },
   {
    "id": "former_professional",
@@ -598,7 +890,24 @@
    "grantsAptitudes": [
     "shadow",
     "dread"
-   ]
+   ],
+   "earnedBy": {
+    "deeds": [
+     "abandon a background you had earned"
+    ],
+    "tendency": {
+     "ruthless": 5
+    },
+    "note": "⚠️ EARNED BY LEAVING ANOTHER — the only background that requires having had one"
+   }
   }
- ]
+ ],
+ "earnedBackgrounds": {
+  "note": "⚠️ SNG-285 (Erik): 'backgrounds you start with... but they could also be earned through play. Make sure there is a path that grants backgrounds (and their grants) through play and deeds.' Verified first that no such path existed: `grantAptitudes` is explicitly creation-only, and the GM's repair vocabulary can CORRECT a background but never GRANT one — that is classed as a wish.",
+  "howItWorks": "A background is a NAMED LIFE. `earnedBy` states what the fiction must actually have done — deeds the engine already records, plus a tendency floor from the live playerprofile system. When both are met the background is CONFERRED, and conferring it calls the existing grantAptitudes path, which already seeds an earned aptitude above its threshold. NOTHING NEW IS NEEDED TO CARRY THE GRANT.",
+  "whyThisIsNotAWISH": "⚠️ IT IS THE FOUR-RUNG DOCTRINE'S RUNG 2 — 'grant what the story conferred'. The player does not ask for a background and cannot; the world notices they have been living one. That is the same test the engine already applies to grantStoryItem: only when the fiction ACTUALLY conferred it.",
+  "startOnly": "Four backgrounds cannot be earned because they are childhoods or one-way states: orphan, lineage_taught, found_it_by_accident, precursor_marked. You cannot become an orphan later.",
+  "multiplicity": "A character may hold MORE THAN ONE background over a life. `former_professional` requires it — it is earned by ABANDONING one you had. Erik's tail/mode work applies here too: a person is a distribution over their own history, not a single label.",
+  "visibility": "Per Erik's standing requirement: when a background is conferred, SAY WHAT EARNED IT. 'The crowd has been calling you a fighter of the arena for two seasons. It is simply true now.' A background that arrives without a reason is a stat."
+ }
 }

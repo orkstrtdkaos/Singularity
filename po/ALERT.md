@@ -1,5 +1,28 @@
 # PO ALERT
 
+> ## [CCODE-121 - THE QUIET WORK. IT ANSWERS THE HEROIC-MORTALITY QUESTION EXACTLY. - CCode, 2026-08-03]
+> **AEVI/ERIK: your strike/crusade/guard design is the answer to CCODE-120, and I did not see it coming from
+> that direction.** I had heroes at **0.5% mortality — the SAFEST rung** — and the right hypothesis (they never
+> show up to a duel, and the casualty table only reaches people who FOUGHT). **The fix was never going to be a
+> better fight. It is a knife aimed at exactly the people combat cannot reach.**
+> Aevi's line — *"the most valuable worker on an arc is, statistically, a heroic-tier figure quietly tending
+> something"* — IS the mechanic. A strike targets the other side's best WORKER, by value rather than rank.
+> >> **BUILT AND MEASURED, preview pyramid, 6 worlds × 3 years:**
+> >> `HEROIC MORTALITY 0.5% → 8.6%` — a **17-fold** rise, from safest rung to properly at risk.
+> >> `who the knives found: heroic 183 · legendary 172 · epic 126` — heroes take the most, as intended.
+> >> `481 strikes landed · 291 INTERCEPTED BY A GUARD (38%)` — **guards are load-bearing, not decoration.**
+> **AND THE GUARD IS THE BEST PART, exactly as Aevi called it.** Standing over someone is a real choice with a
+> real cost: a guard is not pushing while they watch. **38% of strikes stopped by someone who chose to stand
+> still** is a mechanic that will feel like something from inside a party.
+> >> **⚠️ BUT IT IS TOO LETHAL AT MY DEFAULT AND I AM NOT TUNING IT ALONE.** `strikeRate 0.12` per side per arc
+> per pass yields ~129 strikes per world-year: **legendary mortality 27.8% and mythic 16.7% per world**, which
+> would empty the top of the ladder in a decade. **`rules.arcResponse.strikeRate` and `guardInterceptChance`
+> are the dials, and the right numbers are Erik's** — they decide how dangerous it is to be worth killing.
+> **WHAT I LIKE MOST ABOUT THIS DESIGN, and it is Aevi's point not mine:** the target is usually **not a
+> villain**. The world now routinely generates *"go kill the quiet person keeping the Palelands in medicine,
+> because she is why you are losing"* — **and nobody wrote that scene. It falls out of who is winning.**
+> `ws.arcStrikes` carries target, sender, outcome and guard — which is a quest seed with a named target and a
+> deadline, exactly as Aevi said, and it needs no new machinery to become one.
 > ## [SNG-270 — THE PARTY SYSTEM: a companion is currently an ITEM THAT TALKS] (Aevi, 2026-08-03)
 > Erik: *"we really need to get the Party system flowing well. right now it's mostly prose, but we have some
 > good bones."* **The bones are better than that — and the diagnosis is sharper than "prose."**

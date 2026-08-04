@@ -938,6 +938,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     const wOf = e => (Number(e.f.legend?.weight ?? e.f.weight) || 5) * e.share;
     const arcOutcomes = {};
     const casualties = [];   // CCODE-117: who was hurt or killed over an arc this pass
+    const strikes = [];      // CCODE-121: the quiet work — who was sent at whom, and who stood over them
     for (const [arcId, sides] of Object.entries(leaning)) {
       // The most urgent seek a fight; the rest get on with their work.
       const split = list => {
@@ -1034,6 +1035,39 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       for (const e of [...P.working, ...Q.working, ...unfought]) {
         applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * workMult);
       }
+      // CCODE-121 — THE QUIET WORK. Aevi/Erik (SNG-270): "a player becomes both a target, and can be sent on
+      // a strike mission... or to guard someone under threat."
+      //
+      // AND IT ANSWERS THE HEROIC-MORTALITY QUESTION EXACTLY. CCODE-120 measured heroes as the SAFEST rung
+      // (0.5% vs a legend's 7.4%) because they never show up to a duel — they are in the WORKING population,
+      // and the casualty table only ever reached people who fought. A strike targets precisely those people.
+      // Aevi: "the most valuable worker on an arc is, statistically, a heroic-tier figure quietly tending
+      // something." So the mechanic that kills heroes is not a better fight — it is a knife in the dark, and
+      // the population it reaches is the one combat structurally cannot.
+      //
+      // A strike is aimed at the OTHER side's best worker — value, not rank, which is what makes the target
+      // usually not a villain. A GUARD on that side intercepts: someone who chose to stand still is the reason
+      // the strike fails, and standing still is its own cost (they are not pushing while they watch).
+      const strikeRate = Number.isFinite(cfg.strikeRate) ? cfg.strikeRate : 0.12;
+      for (const [attackers, defenders] of [[P, Q], [Q, P]]) {
+        if (!attackers.engaged.length || !defenders.working.length) continue;   // someone must send it, someone must be exposed
+        if (rng() >= strikeRate) continue;
+        const valueOf = e => (Number(e.f.legend?.weight ?? e.f.weight) || 5) * e.share * e.urgency;
+        const mark = defenders.working.slice().sort((a, b) => valueOf(b) - valueOf(a))[0];
+        const sender = attackers.engaged[0];
+        // A GUARD is a defender who spent attention here and is NOT the mark — someone standing over them.
+        const guard = defenders.working.find(e => e !== mark) || defenders.engaged[0] || null;
+        const guarded = guard && rng() < (Number.isFinite(cfg.guardInterceptChance) ? cfg.guardInterceptChance : 0.45);
+        if (guarded) { strikes.push({ arcId, target: mark.f.id, sender: sender.f.id, outcome: "guarded", guard: guard.f.id }); continue; }
+        const clash = resolveEpicClash(sender.f, mark.f, rng);
+        const outcome = applyEpicClashOutcome(ws, sender.f, mark.f, clash.kind, currentWorldDay);
+        if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
+          strikes.push({ arcId, target: mark.f.id, sender: sender.f.id, outcome: outcome.finalKind,
+            targetTier: mark.f.tier ?? mark.f.legend?.tier ?? null });
+          for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
+        }
+      }
+
       arcOutcomes[arcId] = { duels, proWins, conWins,
         fought: P.engaged.length + Q.engaged.length - unfought.length,
         worked: P.working.length + Q.working.length + unfought.length };
@@ -1044,6 +1078,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // Recorded so a narrator can say who paid for the line holding, and so the endgame sims can measure
     // whether the valley is bleeding at a rate anyone wants.
     ws.arcCasualties = casualties;
+    // Strikes are the world's QUEST SEED: a single named target, a sender, and a deadline. Aevi is right that
+    // nothing new is needed to carry it — a generated quest def is as valid as an authored one.
+    ws.arcStrikes = strikes;
 
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block
     // (and any future readout) should be able to say WHY an arc moved when nobody won anything.

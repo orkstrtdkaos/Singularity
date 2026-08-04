@@ -610,7 +610,49 @@ Next from the order: P1b (level-cost cap), P1c (tier weights, `regional` ALIASED
 
 # PO ALERT
 
-> ## [⚠️ DIRECTIVE SNG-280 — I encoded my values again. Standing rule recorded.] (Aevi, 2026-08-04)
+> ## [⚠️ CCODE — TEST WITH THE SAVES (Erik's ask), + SEVEN PATHS TO MYTHIC] (Aevi, 2026-08-04)
+> **1. ERIK'S DIRECT ASK: run the analysis against the ACTUAL SAVES. He says you can reach them; I can't** —
+> saves are browser `localStorage` (`state.js` / `LS.playerKey`) and there are no character fixtures anywhere
+> in the tree.
+> **⚠️ THE QUESTION THE SIM CANNOT ANSWER: does a long-played real character have enough recorded deed HISTORY
+> for any of this to fire?** If `deeds` were only recorded from some recent commit onward, **every existing
+> character starts title-less and rung-less no matter what they have actually done** — and that is a
+> **migration** problem, not a tuning one. **Suggested single table, per character: deed count · distinct
+> communities in `spread` · losses · deaths · retrievals · arc stages moved.** That one query answers both the
+> title thresholds and the mythic paths at once.
+> **2. YOUR SWEEP FOUND A REAL BLOCKER AND I READ IT WRONG AT FIRST.** `mythic in 0/6 worlds` **at every
+> candidate ladder** — identical across 60-deep and 190-deep gates. **That invariance is the tell: the deed gate
+> was never the binding constraint.** The rung was `{ deeds: 170, unbeaten: true }`, and at your measured
+> favourite-win-rate of **81%**, forty contests without a loss is **0.02%**. **`unbeaten` wasn't a high bar; it
+> was an unsatisfiable one** — a legend must fight ~forty times to accrue the deeds, and those same fights make
+> a perfect record impossible.
+> **3. ERIK OVERTURNED MY FIX, AND HIS IS BETTER.** I proposed `maxLosses: 2`. He said: *"losses isn't the right
+> metric — you could become mythical after suffering **hundreds** of losses but not dying. You are a mythical
+> survivor and you have the battlescars to prove it. **Mythical for a variety of reasons** is probably the right
+> thrust."*
+> **⚠️ THAT IS THE MODES-AND-TAILS INSIGHT APPLIED TO THE TOP RUNG.** A single condition doesn't *define*
+> mythic — **it defines one KIND of mythic and silently rules out every other.** Same error as describing a
+> tradition by its center.
+> **SEVEN PATHS (`po/staged_content/mythic_paths.json`), any one qualifies, all sharing the 0.60-year floor:**
+> · **THE UNBEATEN** — 120 deeds, zero losses. *(Gate lowered from 170: an unbeaten run is SHORT by nature, so
+>   now the condition and the threshold agree.)*
+> · **⚠️ THE SURVIVOR** — 200 deeds, **minimum 25 losses**, zero deaths. **Erik's case, and note the inversion:
+>   `minLosses`, not max. The only rung in the game where a bad record is the credential** — and unreachable by
+>   a careful figure.
+> · **THE RETURNED** — died and came back. Ties the death ladder and the retrieval crafts to the tier ladder.
+> · **THE PROLIFIC** — 320 deeds, no perfect record, no drama. **The path most figures will actually take, and
+>   the least glamorous, which is exactly why it should exist.**
+> · **WHO TURNED IT** — 90 deeds + two arc stages moved. Smallest count of any path, because moving a world-arc
+>   stage is the largest single thing a figure can do.
+> · **THE FEARED** — **required by `DIRECTIVE_SNG-280`.** The Maw, the Silencers and the Sealers reach mythic by
+>   this road. **Without it the top rung silently selects for virtue**, which is the failure that directive
+>   exists to prevent.
+> · **THE KEPT** — its counterweight, at deliberately the SAME order of difficulty. **Neither is the "real"
+>   mythic.**
+> **NO NEW RECORDING NEEDED** — `figureTenure` has wins/losses/deeds, `epicStatus` has deaths and retrievals,
+> `arcContests` has stage moves, weight and spread are on every deed.
+> **WHEN YOU RE-RUN THE SWEEP, REPORT WHICH PATH FIRED, not just how many mythics.** The distribution across
+> paths is the real result — **if 90% arrive by one road, the other six are decorative.**> ## [⚠️ DIRECTIVE SNG-280 — I encoded my values again. Standing rule recorded.] (Aevi, 2026-08-04)
 > **CCODE: read this before building SNG-279 — the weights in my first draft were wrong and are corrected.**
 > I proposed weighting `guard` highest in `deedScore` and justified it as *"the behaviour most worth having in
 > it."* **Erik: "Are you putting your values into this again? … That sounds like it comes from the rootkin."**

@@ -2173,6 +2173,109 @@
    ],
    "image": "A hill-sized dragon of the death-pole on a far ridge — the Ashen Wyrm — its breath a grey stillness where a whole season ends at once, everything it passes over grey and done. It does not hunt; it passes. An Ashwarden conclave gathered below. Vast, sombre, world-ending scale.",
    "greaterArc": "arc_the_poles_pull"
+  },
+  {
+   "id": "the_road_past_sealed",
+   "name": "The Road Past Sealed",
+   "region": "the_palelands",
+   "tier": 5,
+   "giver": "whoever loved them and would not stop",
+   "legend": "the_calling_back",
+   "axis": "death_life",
+   "traditions": [
+    "ashwarden",
+    "numinous",
+    "rootkin"
+   ],
+   "premise": "Someone is SEALED. Every craft in the world says the sealed refuse every road, and every craft in the world is correct — no rank of the calling-back, the root that holds, or the open threshold reaches depth 3. THE ONLY WAY PAST IT IS NOT A CRAFT. It is a road, walked, with help you do not have on your own.",
+   "stakes": "⚠️ THE SEALED ARE ABSOLUTE, AND THIS QUEST DOES NOT MAKE THEM NEGOTIABLE — it makes them EXPENSIVE. A shot. Not a guarantee, and everyone involved is told so before they start.",
+   "stages": [
+    {
+     "id": "s1",
+     "title": "Learn that it cannot be done",
+     "objective": "Take the question to three who would know and be refused by all three.",
+     "condition": "Ask an Ashwarden of rank, a Numinous threshold-keeper, and someone who has tried before.",
+     "change": "Codex: the sealed refuse every road. You now know that from people rather than from hope."
+    },
+    {
+     "id": "s2",
+     "title": "Find the one who will say otherwise",
+     "objective": "Locate a legendary or mythic figure who holds that the road exists — and who will not walk it for free.",
+     "condition": "A figure of LEGENDARY band or above agrees to come. Their price is named and it is not coin.",
+     "change": "Codex: a legend has agreed. They have told you what it will cost them, which is more than it costs you."
+    },
+    {
+     "id": "s3",
+     "title": "Walk it",
+     "objective": "Reach the sealed with the legend's weight behind you. This is the attempt and it can fail.",
+     "condition": "Resolve the reach at depth 3 with legendary or mythic assistance. Failure is permanent and final.",
+     "change": "Codex: the road was walked. What came back — or did not — is now the world's."
+    }
+   ],
+   "routes": [
+    "ASHWARDEN — walk down and lead back, with a legend holding the way behind you",
+    "NUMINOUS — hold a door at a depth no door holds, and let them choose",
+    "ROOTKIN — send the current further than the current goes, and pay for the distance from what is near",
+    "⚠️ A MYTHIC does not improve the odds so much as make the attempt SURVIVABLE FOR THE ONE REACHING"
+   ],
+   "outcomes": [
+    "THEY COME BACK — sealed to unsealed is the rarest event in the world, and the world will hear about it.",
+    "THEY DO NOT, AND YOU KNOW IT IS FINISHED — the quest's honest and most common ending. It is a closure the world does not otherwise offer.",
+    "⚠️ THE LEGEND PAYS — assistance at depth 3 costs the helper, and a legend who walks this road may not come back to their own fronts. The arcs will show it."
+   ],
+   "image": null
+  },
+  {
+   "id": "the_last_road_closed",
+   "name": "The Last Road Closed",
+   "region": "the_palelands",
+   "tier": 5,
+   "giver": "someone who cannot afford their return",
+   "legend": "foreclose",
+   "axis": "death_life",
+   "traditions": [
+    "precursor",
+    "unmaker",
+    "abyssal",
+    "veilwright"
+   ],
+   "premise": "⚠️ THE MIRROR, AND IT IS THE SAME MACHINERY POINTED THE OTHER WAY. Someone is down and RETRIEVABLE. You are asked to make certain they are not — to close the road while they are still on it, and seal them before anyone comes.",
+   "stakes": "Sealing is permanent and it is a decision about someone else's ending. The tradition's own capstone language already says it: 'there is no version of this that is not a decision about someone else's ending.' Nothing here softens that.",
+   "stages": [
+    {
+     "id": "s1",
+     "title": "Find where they are on the ladder",
+     "objective": "Learn the depth. The threshold, the near dark, the deep dark — the shallower they are, the more likely someone is already reaching.",
+     "condition": "Determine the target's death depth and whether a retrieval is in progress.",
+     "change": "Codex: you know how far down they are, and whether anyone is coming."
+    },
+    {
+     "id": "s2",
+     "title": "Get there before the ones who love them",
+     "objective": "Reach the site of the reach — or the people mounting it — before it resolves.",
+     "condition": "Arrive ahead of an active retrieval, or prevent one from being mounted.",
+     "change": "Codex: the reach is stopped, delayed, or was never begun."
+    },
+    {
+     "id": "s3",
+     "title": "Close it",
+     "objective": "Seal them. `foreclose` is the precursor answer; the Unmaker and the Abyssal have their own. All of them work and all of them cost.",
+     "condition": "Resolve the sealing. Once sealed, no rank and no legend reaches them.",
+     "change": "Codex: the road is closed. It does not open again."
+    }
+   ],
+   "routes": [
+    "PRECURSOR — `foreclose`: close the possibility itself. The cleanest road and the one that DRIFTS YOU, accelerating",
+    "UNMAKER — end the thing that would have been retrieved",
+    "ABYSSAL — buy the sealing from something that can do it, at a price named honestly",
+    "VEILWRIGHT — nobody seals them; the ones who would reach simply never learn where to reach"
+   ],
+   "outcomes": [
+    "SEALED — permanent. The strongest irreversible act available to a player, and the world records who did it.",
+    "⚠️ THEY WERE RETRIEVED FIRST — and now someone is alive who knows what you tried.",
+    "YOU ARE KNOWN FOR IT — sealing travels. Erik's ruling that player deeds travel means this one travels furthest: it is the deed people repeat."
+   ],
+   "image": null
   }
  ]
 }

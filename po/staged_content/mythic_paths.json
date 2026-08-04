@@ -1,0 +1,101 @@
+{
+ "schemaVersion": 1,
+ "id": "mythic_paths",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik overturns the single-condition rung.",
+ "eriksCorrection": "'I think losses isn't the right metric... you could become mythical after suffering HUNDREDS of losses but not dying - you are a mythical survivor and you have the battlescars to prove it. Mythical for a variety of reasons is probably the right thrust.'",
+ "whyHeIsRight": "⚠️ IT IS THE MODES-AND-TAILS INSIGHT APPLIED TO THE TOP RUNG. A single `unbeaten` condition does not define mythic — IT DEFINES ONE KIND OF MYTHIC, and then silently rules out every other kind. The same error as a tradition described by its center: correct about the case it names, wrong that the case is the category. And it was worse than a narrow definition, because the arithmetic made it UNSATISFIABLE: at the measured 81% win rate, forty contests without a loss is 0.02%.",
+ "theModel": {
+  "rule": "ANY ONE PATH QUALIFIES. All share the same floor (0.60 years at legendary); each names a different KIND of figure, and the path taken IS the title.",
+  "sharedFloor": {
+   "years": 0.6,
+   "tier": "legendary"
+  },
+  "attribution": "⚠️ WHICH PATH FIRED MUST BE RECORDED AND SAID. 'She is mythic. She was never brought down' and 'He is mythic. He has been brought down forty times and is still standing' are different people, and the world should say which."
+ },
+ "paths": [
+  {
+   "id": "the_unbeaten",
+   "name": "The Unbeaten",
+   "condition": {
+    "deeds": 120,
+    "maxLosses": 0
+   },
+   "whatItMeans": "Never brought down. The original condition, kept — but now as ONE road rather than the gate.",
+   "note": "Deed gate LOWERED from 170 to 120: an unbeaten run is short by nature, because a long one is impossible. The condition and the threshold now agree."
+  },
+  {
+   "id": "the_survivor",
+   "name": "The Survivor",
+   "condition": {
+    "deeds": 200,
+    "minLosses": 25,
+    "deaths": 0
+   },
+   "whatItMeans": "⚠️ ERIK'S CASE, AND THE BEST ONE. Beaten again and again and never once killed. The battlescars ARE the qualification — this path REQUIRES a heavy loss count, so it cannot be reached by a careful figure.",
+   "note": "Note the inversion: `minLosses`, not max. The Survivor is the only rung in the game where a bad record is the credential."
+  },
+  {
+   "id": "the_returned",
+   "name": "The Returned",
+   "condition": {
+    "deeds": 100,
+    "retrievedFromDeath": 1
+   },
+   "whatItMeans": "Died, and came back up the ladder. Rare by construction — retrieval is uncommon and being retrieved AS a legend more so.",
+   "note": "⚠️ TIES THE DEATH LADDER TO THE TIER LADDER: the retrieval crafts and the sealed-quest now have a promotion consequence."
+  },
+  {
+   "id": "the_prolific",
+   "name": "The Prolific",
+   "condition": {
+    "deeds": 320
+   },
+   "whatItMeans": "Sheer volume. No perfect record, no dramatic death — just more done than anyone else, for longer.",
+   "note": "The path most figures will actually take, and the least glamorous. It should exist for exactly that reason."
+  },
+  {
+   "id": "the_turner",
+   "name": "Who Turned It",
+   "condition": {
+    "deeds": 90,
+    "arcStagesMoved": 2
+   },
+   "whatItMeans": "Moved a great arc twice. The smallest deed count of any path, because moving a world-arc stage is the largest single thing a figure can do.",
+   "note": "Pairs with the generative title 'Who Turned {ARC}'."
+  },
+  {
+   "id": "the_feared",
+   "name": "The Feared",
+   "condition": {
+    "deeds": 180,
+    "negativeWeightShare": 0.6,
+    "spread": 20
+   },
+   "whatItMeans": "⚠️ REQUIRED BY DIRECTIVE_SNG-280. Known widely for deeds the world recorded as harm. The Maw, the Silencers and the Sealers reach mythic by THIS road, and it is exactly as valid as the others.",
+   "note": "Without this path the top rung silently selects for virtue, which is the failure the directive exists to prevent. Its threshold sits BETWEEN the Unbeaten and the Prolific — neither a discount nor a penalty."
+  },
+  {
+   "id": "the_kept",
+   "name": "The Kept",
+   "condition": {
+    "deeds": 150,
+    "guardsHeld": 15,
+    "protectedDeaths": 0
+   },
+   "whatItMeans": "Everyone they stood over is still alive. Fifteen guards held and not one loss behind them.",
+   "note": "The counterweight to the Feared, and deliberately the SAME order of difficulty. Neither is the 'real' mythic."
+  }
+ ],
+ "whatThisFixes": [
+  "MYTHIC BECOMES REACHABLE — the sweep reported 0/6 worlds at every candidate because `unbeaten` was the only door and it was welded shut. Seven doors, each satisfiable, each meaning something different.",
+  "⚠️ AND IT MAKES THE RUNG DESCRIPTIVE INSTEAD OF EVALUATIVE. 'Mythic' stops meaning 'the best' and starts meaning 'the world has a story about this person.' A Survivor with forty losses and a Feared with a trail of harm are both mythic, and the world says WHICH.",
+  "IT USES DATA THAT ALREADY EXISTS: figureTenure tracks wins/losses/deeds; epicStatus tracks deaths and retrievals; arcContests tracks stage moves; deed weight and spread are on every deed record. NO NEW RECORDING IS NEEDED.",
+  "AND IT GIVES THE PLAYER SEVEN ROUTES rather than one unreachable one — including three (Survivor, Feared, Prolific) that reward simply CONTINUING, which is the most player-accessible shape there is."
+ ],
+ "forCCode": [
+  "⚠️ ERIK'S ASK, DIRECTLY: TEST WITH THE ACTUAL SAVES. He says you can reach them and I cannot — saves are browser localStorage and there are no fixtures in the tree. The question the sim CANNOT answer: does a long-played real character have enough recorded deed HISTORY for any of this to fire? If deeds were only recorded from some recent commit onward, every existing character starts title-less and rung-less no matter what they have done, and that is a migration problem rather than a tuning one.",
+  "Then re-run deed_ladder_sweep with the seven paths and report WHICH PATH fired, not just how many mythics. The distribution across paths is the real result — if 90% arrive by one road, the others are decorative.",
+  "Suggested first check on the saves: for each character, count deeds, distinct communities in `spread`, losses, deaths, retrievals, and arc stages moved. That single table answers both the title thresholds and the mythic paths at once."
+ ]
+}

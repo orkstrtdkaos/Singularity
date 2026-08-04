@@ -2270,6 +2270,242 @@
      "class": "hard"
     }
    ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_set_hand",
+   "name": "The Set Hand",
+   "levelReq": 3,
+   "energyCost": 9,
+   "powerSystem": "reach_death_life",
+   "tradition": "ashwarden",
+   "attribute": "mental",
+   "axes": {
+    "death_life": -0.6,
+    "body_mind": -0.1
+   },
+   "functions": [
+    "summon",
+    "bind",
+    "command"
+   ],
+   "narrationHints": "It stands the way a tool stands. Nothing behind the eyes and nothing wrong with the work.",
+   "description": "⚠️ RAISING. The Grave-Callers' craft, and the Palelands have never pretended otherwise: you set a body that has finished back to work. It does not think, does not remember, and does not tire. Labour is short in the Palelands and the dead are many, and this is the arithmetic the polite half of the tradition will not say out loud.",
+   "notFor": "The recently living who are still ARGUING with their ending — that is The Unfinished, and it is a different working. Anything that requires judgement: a set hand does exactly what it was set to and nothing adjacent. And it will not pass in a town that knows what it is looking at.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Set Hand",
+     "grants": "Set one finished body to a simple repeated task — carry, haul, turn, hold. It works until you unset it or it comes apart.",
+     "cannot": "One body, one task, and the task must be simple enough to state in a sentence.",
+     "functions": [
+      "summon",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Crew",
+     "grants": "Set several, and give them a task with STEPS. They will do the steps in order and will not improvise when a step fails.",
+     "cannot": "They do not adapt. A crew whose third step is blocked will attempt the third step until you come and say otherwise.",
+     "functions": [
+      "summon",
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    },
+    {
+     "rank": 3,
+     "name": "The Long Labour",
+     "grants": "Set bodies that hold for SEASONS, and give a standing instruction they resume without you. The Palelands' quarries and dykes have run on this for four hundred years.",
+     "cannot": "What you set outlives your attention, and the Palelands are full of crews nobody remembers setting. Some are still working.",
+     "functions": [
+      "summon",
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "labor",
+    "siege",
+    "logistics"
+   ],
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "scope",
+    "persistence",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 720,
+    "targets": 1,
+    "scope": 2,
+    "damageType": "decay",
+    "note": "CONSTRUCT, not damage — the craft's output is LABOUR. targets/scope are bodies set; duration is how long they hold."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "several bodies, and a task with ORDERED STEPS",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "persistence",
+     "delta": "SPECIAL: they hold for SEASONS and resume a standing instruction without you",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "set one, simply — half the duration, and it comes apart cleanly when you are done",
+    "surge": "set a crew for a season; WHAT YOU SET OUTLIVES YOUR ATTENTION"
+   },
+   "bounds": [
+    {
+     "text": "THE FINISHED ONLY — anything still ending is a different working",
+     "class": "hard"
+    },
+    {
+     "text": "NO JUDGEMENT IN IT — a set hand does exactly what it was set to and nothing adjacent",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS VISIBLE FOR WHAT IT IS, and most places have a law about it",
+     "class": "cost"
+    },
+    {
+     "text": "what you set OUTLIVES YOUR ATTENTION — the Palelands are full of crews nobody remembers setting",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_forced_bloom",
+   "name": "The Forced Bloom",
+   "levelReq": 3,
+   "energyCost": 10,
+   "powerSystem": "reach_death_life",
+   "tradition": "rootkin",
+   "attribute": "physical",
+   "axes": {
+    "death_life": 0.6
+   },
+   "functions": [
+    "transform",
+    "hinder",
+    "heal"
+   ],
+   "narrationHints": "It does not stop when it should. That is the whole of it, and everyone watching understands at once.",
+   "description": "⚠️ LIFE IMPOSED. The Bloom-Wrights' craft: growth driven into a body that did not ask for it. Used well, it closes a wound faster than a wound can close. Used as the Bloom-Wrights use it, it grows a thing until the growing is the injury — a limb that will not stop, a field that strangles itself, a body that becomes more of itself than it can carry.",
+   "notFor": "Anything not alive. Precision — quickening has never known when to stop, and this is that failure aimed on purpose. And it CANNOT BE HALF-GIVEN once it takes: growth is not a dial you turn back down.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Forced Bloom",
+     "grants": "Drive growth into a living thing past its own pace — a wound closed in moments, a sapling to a staff, a field to harvest out of season.",
+     "cannot": "It takes what growing takes. The body spends what the growth costs, and it does not get to decline.",
+     "functions": [
+      "transform",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Overgrowth",
+     "grants": "Grow a thing PAST its right size. In a body this is an injury that looks like health; in a field it is a season's yield and a dead soil after.",
+     "cannot": "You cannot stop it partway. What you start finishes growing.",
+     "functions": [
+      "transform",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 3,
+     "name": "The Strangling Green",
+     "grants": "Drive growth into someone until the growth is what harms them — bone that keeps going, green that fills a chest. The Quickwood does not teach this rank and cannot stop it being learned.",
+     "cannot": "It is unmistakable and it is slow. Everyone present knows exactly what is happening, including them.",
+     "functions": [
+      "transform",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "harm",
+    "heal",
+    "siege"
+   ],
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "growth"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 3,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.02,
+    "damageType": "living",
+    "note": "T-III damage on the authored ladder. Note it is ALSO a heal at r1 — the same craft, different answer to what it is for."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "growth",
+     "delta": "growth PAST right size — an injury that looks like health",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the growth itself becomes the harm — bone that keeps going, green that fills a chest",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a measured push — half the growth, and it stops where you meant",
+    "surge": "double it; GROWTH IS NOT A DIAL YOU TURN BACK DOWN"
+   },
+   "bounds": [
+    {
+     "text": "THE LIVING ONLY",
+     "class": "hard"
+    },
+    {
+     "text": "IT CANNOT BE STOPPED PARTWAY — what you start finishes growing",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS SLOW AND UNMISTAKABLE — everyone present knows what is happening, including them",
+     "class": "cost"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

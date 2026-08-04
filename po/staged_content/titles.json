@@ -1,0 +1,317 @@
+{
+ "schemaVersion": 1,
+ "id": "titles",
+ "kind": "rules",
+ "note": "⚠️ SNG-286 (Erik): 'think about how players should/could earn titles as they play - could be earned in certain domains or in the world... or locally or all.' TITLES ARE WHAT THE WORLD CALLS YOU, and the world already has the machinery: `recordDeed` carries tags/weight and `spreadDeeds` walks a deed community by community. A TITLE IS A DEED PATTERN THAT TRAVELLED FAR ENOUGH TO BECOME A NAME.",
+ "theScopeLadder": {
+  "note": "⚠️ SCOPE IS NOT PRESTIGE — IT IS REACH. Erik's four scopes map exactly onto how far the deeds spread. A local title is not a lesser title; it is a title that one place means and nowhere else has heard.",
+  "local": {
+   "reach": "1 community",
+   "spread": ">= 1",
+   "flavour": "they call you this in one town. It is the most personal kind and the easiest to lose by leaving."
+  },
+  "regional": {
+   "reach": "a region (~4 communities of 96)",
+   "spread": ">= 4 in one region",
+   "flavour": "a reach knows you. This is where a title starts arriving ahead of you."
+  },
+  "domain": {
+   "reach": "a tradition, anywhere it is practised",
+   "spread": ">= 6 across >= 2 regions, deeds tagged to one tradition",
+   "flavour": "⚠️ THE MOST INTERESTING SCOPE: known to your CRAFT rather than your geography. A Grave-Caller is known to Ashwardens in reaches they have never visited, and unknown to the farmers next door."
+  },
+  "world": {
+   "reach": "everywhere",
+   "spread": ">= 15 across >= 4 regions",
+   "flavour": "the Valley knows the name. Roughly a sixth of all communities — rare, and it should be."
+  }
+ },
+ "howTitlesAreEarned": {
+  "principle": "THE WORLD NAMES YOU; YOU DO NOT CLAIM IT. Same doctrine as earned backgrounds — rung 2, 'grant what the story conferred.' A player cannot ask for a title and the engine must refuse if they do.",
+  "mechanism": "a title fires when a DEED PATTERN (tag + minimum weight + count) has SPREAD to the scope's threshold. All three inputs already exist on the deed record.",
+  "multiplicity": "⚠️ A PERSON MAY HOLD SEVERAL AT DIFFERENT SCOPES, and they may disagree. Being 'the Mercy of Thornwake' locally and 'the Grave-Caller' at domain scope is not a contradiction — it is the same person read by two audiences, and it is the best thing this system can produce.",
+  "display": "the title a person is introduced by is the one with the WIDEST scope KNOWN HERE — so a world title always lands, a domain title lands only among that tradition, and a local title only at home."
+ },
+ "titles": [
+  {
+   "id": "grave_caller",
+   "name": "The Grave-Caller",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "raise",
+     "set_hand"
+    ],
+    "count": 5,
+    "minWeight": 1,
+    "tradition": "ashwarden"
+   },
+   "note": "⚠️ THE TAIL, EARNED. Erik's own correction made this reachable: the Palelands' other half, and now a player can be it."
+  },
+  {
+   "id": "easer",
+   "name": "The Easer",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "ease_death",
+     "attend_dying"
+    ],
+    "count": 6,
+    "minWeight": 1,
+    "tradition": "ashwarden"
+   },
+   "note": "The mode, not the tail. Both are Ashwarden titles and the tradition holds both without embarrassment."
+  },
+  {
+   "id": "silencer",
+   "name": "The Silencer",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "kill_by_resonance"
+    ],
+    "count": 4,
+    "minWeight": -1,
+    "tradition": "harmonic"
+   },
+   "note": "They find the note of a heart and hold it until it stops."
+  },
+  {
+   "id": "bloom_wright",
+   "name": "The Bloom-Wright",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "forced_growth"
+    ],
+    "count": 5,
+    "tradition": "rootkin"
+   }
+  },
+  {
+   "id": "maw",
+   "name": "Of the Maw",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "compel",
+     "lever"
+    ],
+    "count": 6,
+    "minWeight": -1,
+    "tradition": "abyssal"
+   },
+   "note": "Not a name anyone gives themselves. It is what the traders call the ones who stopped trading."
+  },
+  {
+   "id": "stripper",
+   "name": "The Stripper",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "unmask"
+    ],
+    "count": 6,
+    "tradition": "verist"
+   },
+   "note": "Earned by unmaskings that cost the unmasked — the tail of truth-telling."
+  },
+  {
+   "id": "quieter",
+   "name": "The Quieter",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "end_a_conflict_by_force"
+    ],
+    "count": 4,
+    "tradition": "stillhold"
+   },
+   "note": "The calmest violence in the world, and the Stillhold do not disown them."
+  },
+  {
+   "id": "name_taker",
+   "name": "The Name-Taker",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "identity_replace"
+    ],
+    "count": 4,
+    "tradition": "veilwright"
+   }
+  },
+  {
+   "id": "opener",
+   "name": "The Opener",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "unbidden_read"
+    ],
+    "count": 5,
+    "tradition": "cogitant"
+   }
+  },
+  {
+   "id": "walker",
+   "name": "Walker of the Old Roads",
+   "scope": "domain",
+   "earnedBy": {
+    "tags": [
+     "precursor_site",
+     "old_roads"
+    ],
+    "count": 8,
+    "tradition": "precursor"
+   }
+  },
+  {
+   "id": "the_reacher",
+   "name": "The Reacher",
+   "scope": "world",
+   "earnedBy": {
+    "tags": [
+     "retrieval_success"
+    ],
+    "count": 3,
+    "minWeight": 2
+   },
+   "note": "⚠️ THREE RETRIEVALS IS A WORLD TITLE. Bringing someone back is rare enough that three makes you the person they send for."
+  },
+  {
+   "id": "the_sealer",
+   "name": "The Sealer",
+   "scope": "world",
+   "earnedBy": {
+    "tags": [
+     "sealed_someone"
+    ],
+    "count": 1,
+    "minWeight": -3
+   },
+   "note": "⚠️ ONE DEED. Sealing a retrievable person is the deed that travels furthest — and per Erik's ruling that player deeds travel, this is the one people repeat accurately."
+  },
+  {
+   "id": "kingmaker",
+   "name": "Kingmaker",
+   "scope": "world",
+   "earnedBy": {
+    "tags": [
+     "caused_promotion"
+    ],
+    "count": 2,
+    "minWeight": 2
+   },
+   "note": "⚠️ EARNED BY MAKING SOMEONE ELSE A LEGEND — the player's side of promotion-on-deeds. Two is enough because it is nearly impossible to do by accident."
+  },
+  {
+   "id": "the_unbeaten",
+   "name": "The Unbeaten",
+   "scope": "world",
+   "earnedBy": {
+    "tags": [
+     "contest_won"
+    ],
+    "count": 12,
+    "minWeight": 1,
+    "requires": "no recorded loss"
+   },
+   "note": "The only title with a NEGATIVE condition — it is lost the first time you lose.",
+   "lostBy": "one recorded contest loss"
+  },
+  {
+   "id": "arc_turner",
+   "name": "Who Turned the ___",
+   "scope": "world",
+   "earnedBy": {
+    "tags": [
+     "arc_stage_moved"
+    ],
+    "count": 1,
+    "minWeight": 3
+   },
+   "note": "⚠️ NAMED FOR THE ARC — 'Who Turned the Bleed'. One is enough; a stage moving is a world event."
+  },
+  {
+   "id": "the_kept",
+   "name": "The Kept Word",
+   "scope": "regional",
+   "earnedBy": {
+    "tags": [
+     "promise_honoured"
+    ],
+    "count": 6,
+    "minWeight": 1
+   },
+   "note": "Held mostly by people who are not otherwise remarkable, which is the point."
+  },
+  {
+   "id": "road_warden",
+   "name": "Warden of the ___ Road",
+   "scope": "regional",
+   "earnedBy": {
+    "tags": [
+     "guard_success"
+    ],
+    "count": 5,
+    "minWeight": 1
+   },
+   "note": "Named for the road. A guard title, and it is regional because roads are."
+  },
+  {
+   "id": "the_owed",
+   "name": "The One Who Is Owed",
+   "scope": "regional",
+   "earnedBy": {
+    "tags": [
+     "debt_created"
+    ],
+    "count": 8
+   },
+   "note": "Not admiration. People who are owed are known, and it is not always warm."
+  },
+  {
+   "id": "hearth_name",
+   "name": "A Hearth-Name",
+   "scope": "local",
+   "earnedBy": {
+    "tags": [
+     "*"
+    ],
+    "count": 10,
+    "minWeight": 1,
+    "sameCommunity": true
+   },
+   "note": "⚠️ THE MOST COMMON TITLE IN THE WORLD: ten good deeds in ONE place. Almost every long-played character earns one, and it is worth nothing anywhere else. That is not a weakness — it is what a home is."
+  },
+  {
+   "id": "the_unwelcome",
+   "name": "The Unwelcome",
+   "scope": "local",
+   "earnedBy": {
+    "tags": [
+     "*"
+    ],
+    "count": 6,
+    "maxWeight": -1,
+    "sameCommunity": true
+   },
+   "note": "The inverse, and it should exist. A place can decide about you.",
+   "lostBy": "leaving for a long enough time"
+  }
+ ],
+ "designNotes": [
+  "⚠️ NO TITLE IS AWARDED FOR VIRTUE, per DIRECTIVE_SNG-280. Every one is earned by a COUNTED, TAGGED, SPREAD deed pattern. The Grave-Caller and the Easer sit at the same scope with the same thresholds; the Sealer is a world title and so is the Reacher. The world names what it notices, and it notices magnitude, not merit.",
+  "SCOPE IS REACH, NOT RANK. A hearth-name is not a lesser title than a world title — it is a title one place means. And a domain title is the strangest and best: known to your craft in reaches you have never visited, unknown to the farmers next door.",
+  "TITLES CAN CONTRADICT EACH OTHER AND SHOULD. 'The Mercy of Thornwake' locally and 'the Grave-Caller' at domain scope is one person read by two audiences.",
+  "THE TAILS ARE NOW PLAYER-REACHABLE. The modes-and-tails lore pass named what each tradition looks like at its far end; these titles are how a PLAYER arrives there — not by declaring it, but by being called it after the sixth time."
+ ],
+ "forCCode": [
+  "deed tags: the `earnedBy.tags` above need emitting at the relevant moments (a retrieval succeeding, a sealing, a stage moved, a guard intercepting). Most are already recorded events looking for a tag.",
+  "scope resolution reads `deed.spread.length` and the regions those communities sit in — both already exist.",
+  "⚠️ DISPLAY RULE: introduce a person by the widest-scope title KNOWN IN THE CURRENT COMMUNITY. A world title always lands; a domain title lands only among that tradition; a hearth-name lands only at home. That single rule is what makes scope feel real rather than decorative.",
+  "AND SAY WHAT EARNED IT, per Erik's standing requirement: 'they have started calling you the Reacher on this side of the water.'"
+ ]
+}

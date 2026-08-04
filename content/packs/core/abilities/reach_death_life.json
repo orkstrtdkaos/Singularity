@@ -2504,6 +2504,223 @@
      "class": "cost"
     }
    ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_calling_back",
+   "name": "The Calling Back",
+   "levelReq": 3,
+   "energyCost": 12,
+   "powerSystem": "reach_death_life",
+   "tradition": "ashwarden",
+   "attribute": "mental",
+   "axes": {
+    "death_life": -0.4
+   },
+   "functions": [
+    "heal",
+    "summon",
+    "reveal"
+   ],
+   "narrationHints": "You say the name the way you would say it across a room, not across a grave. That is the whole technique.",
+   "description": "⚠️ RETRIEVAL. The Ashwarden road runs both ways, and this is the walk back. You reach for someone who has died and bring them up the ladder — from the threshold, and at rank, from further down. THE DEEPER THEY HAVE SUNK, THE HARDER THE REACH AND THE MORE IT COSTS YOU.",
+   "notFor": "The SEALED, who refuse every road. Anyone dead of a cause still acting — pull them back into a poison and they simply die again. And it does not heal: what comes back comes back exactly as hurt as it went down.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "From the Threshold",
+     "grants": "Reach someone at THE THRESHOLD (dead within a day). A standard roll against their depth; success walks them back up.",
+     "cannot": "Anything past the threshold. If the reach fails, THEY SINK — a failed calling costs them a rung.",
+     "functions": [
+      "heal",
+      "summon"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "From the Near Dark",
+     "grants": "Reach into THE NEAR DARK (up to a month down). Harder, and the roll is against a longer road.",
+     "cannot": "The deep dark. And the further you reach, the more of the way back you walk yourself.",
+     "functions": [
+      "heal",
+      "summon",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "From the Deep Dark",
+     "grants": "Reach into THE DEEP DARK — months gone, the road nearly closed. It works rarely and it is never free.",
+     "cannot": "THE SEALED. A failed reach at this depth SEALS THEM, and the tradition holds that as the reason to be certain before you try.",
+     "functions": [
+      "heal",
+      "summon",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "INVESTIGATE"
+   ],
+   "harmRung": "incapacitating",
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "reach",
+    "depth"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 2,
+    "targets": 1,
+    "duration": 0,
+    "damageType": "decay",
+    "note": "RETRIEVAL: the roll is against DEATH DEPTH. r1 reaches depth 0 · r2 depth 1 · r3 depth 2 · depth 3 (sealed) is closed to every rank."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "depth",
+     "delta": "reach THE NEAR DARK (depth 1) — up to a month down",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "depth",
+     "delta": "SPECIAL: reach THE DEEP DARK (depth 2), months gone and the road nearly closed",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "reach once, shallow — half the cost, and a failure does not sink them",
+    "surge": "reach past your rank; A FAILED REACH SINKS THEM, AND AT THE DEEP DARK IT SEALS THEM"
+   },
+   "bounds": [
+    {
+     "text": "THE SEALED REFUSE EVERY ROAD — no rank reaches depth 3",
+     "class": "hard"
+    },
+    {
+     "text": "A FAILED REACH SINKS THEM A RUNG; at the deep dark it SEALS them",
+     "class": "cost"
+    },
+    {
+     "text": "WHAT COMES BACK COMES BACK AS HURT AS IT WENT DOWN — this is retrieval, not healing",
+     "class": "hard"
+    },
+    {
+     "text": "you walk the road too, and the walking MARKS YOU",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_root_that_holds",
+   "name": "The Root That Holds",
+   "levelReq": 4,
+   "energyCost": 13,
+   "powerSystem": "reach_death_life",
+   "tradition": "rootkin",
+   "attribute": "physical",
+   "axes": {
+    "death_life": 0.7
+   },
+   "functions": [
+    "heal",
+    "sustain",
+    "summon"
+   ],
+   "narrationHints": "Green comes up through them and does not ask. They arrive coughing and alive and furious.",
+   "description": "⚠️ RETRIEVAL BY LIFE, not by asking. Where the Ashwarden walks down and leads someone back, the Rootkin sends the living current after them and hauls. It is cruder, it is faster, and it reaches less far — but what it returns comes back GROWING, and that is worth something the grey road cannot offer.",
+   "notFor": "The deep dark and the sealed — the current does not run that far down. And it takes what growing takes: the returned are ravenous, and something nearby is less alive than it was.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Root That Holds",
+     "grants": "Reach someone at THE THRESHOLD with the living current. They come back whole and starving.",
+     "cannot": "Anything past the threshold. The current takes its fuel from what is near — and near includes you.",
+     "functions": [
+      "heal",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Deep Green",
+     "grants": "Reach into THE NEAR DARK. The current runs further than it should and something pays for the distance.",
+     "cannot": "The deep dark. The cost is drawn from the living around you and you do not fully choose from what.",
+     "functions": [
+      "heal",
+      "sustain",
+      "summon"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "EXPLORE"
+   ],
+   "harmRung": "incapacitating",
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "reach",
+    "depth"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 3,
+    "targets": 1,
+    "damageType": "living",
+    "note": "RETRIEVAL, life-side: r1 reaches depth 0 · r2 depth 1. Reaches LESS FAR than the_calling_back and returns them in better condition."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "depth",
+     "delta": "reach THE NEAR DARK (depth 1); the cost is drawn from the living nearby",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a shallow pull — half the draw, and it takes only from you",
+    "surge": "double the reach; SOMETHING NEARBY IS LESS ALIVE THAN IT WAS"
+   },
+   "bounds": [
+    {
+     "text": "IT DOES NOT REACH THE DEEP DARK OR THE SEALED — the current stops",
+     "class": "hard"
+    },
+    {
+     "text": "THE COST IS DRAWN FROM THE LIVING NEARBY, and you do not fully choose from what",
+     "class": "cost"
+    },
+    {
+     "text": "what returns comes back RAVENOUS",
+     "class": "cost"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

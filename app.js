@@ -2791,7 +2791,12 @@ function wardDenialFor(def, family, ability) {
 function endEncounter(outcome) {
   const enc = activeEnc();
   if (!enc) return;
-  const t = CONTENT.rules.encounters?.[enc.def.type] || {};
+  // SNG-271/1a: `rules/encounters.json` was NEVER REGISTERED — 43 rules keys and `encounters` not among them —
+  // so this lookup was always undefined and `?? 0` paid nothing. Winning, solving, fleeing, walking away:
+  // every encounter in the game has awarded ZERO XP, always. Now registered, loaded, and falling back to
+  // `default` so a NEW encounter type can never silently pay zero the same way again.
+  const encXp = CONTENT.rules.encounters || {};
+  const t = encXp[enc.def.type] || encXp.default || {};
   const xpMap = { opponent_fell: t.winXp, opponent_yielded: t.winXp, fled: t.fleeXp, yielded: t.yieldXp, completed: t.completeXp, abandoned: t.abandonXp, solved: t.solveXp, walked_away: t.walkAwayXp, incapacitated: 0 };
   character.xp += Math.max(0, xpMap[outcome] ?? 0);
   for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules);
@@ -9759,6 +9764,19 @@ async function sbExecuteTurn() {
   applyRR(rr, aDecl, "Action");
   saveCharacter(character);
   let ended = rr.ended, endRR = rr;
+  // SNG-271 (Erik's own fight log) — A DOWNED PLAYER STILL TOOK THEIR BONUS ACTION.
+  //
+  // `ended` is the ENCOUNTER's end-flag (opponent down / yield / flee). It says nothing about whether YOU are
+  // still standing, and `checkIncapacitation` ran only AFTER both resolutions — so a player dropped by the
+  // action swung again from the floor. Erik's log shows both at one timestamp, the second landing hp -20.
+  //
+  // The fix is the pattern already in this file at the single-round path: check the moment the action lands,
+  // not at the end of the turn. A turn is not an atomic unit when one of its halves can end you.
+  if (!ended && checkIncapacitation(character)) {
+    character.activeEncounter.state.turn = sbFreshTurn();
+    saveCharacter(character);
+    sbBusy = false; sbEnd({ ...rr, ended: true, outcome: "incapacitated" }); return;
+  }
   // BONUS — a FULL action; it ticks the turn's effects, being the last step.
   if (!ended && bDecl) {
     const br = skillBattleRound(character.activeEncounter.state, enc.def, bDecl, { character, rules: CONTENT.rules, sb, steps,

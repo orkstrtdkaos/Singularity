@@ -1,3 +1,33 @@
+## CCODE-123 — the downed player's free swing, and the XP table (WORK_ORDER P0 + P1a)
+
+**P0 / SNG-271 — a downed player still took their bonus action.** From Erik's own fight log. The guard was
+`if (!ended)`, where `ended` is the ENCOUNTER's end-flag, not a health check — so between the strike that
+dropped you and the encounter formally ending, the turn machinery still handed you a bonus action. Now the
+incapacitation check runs on its own, resets the turn, saves, and ends the encounter as `incapacitated`.
+
+**P1a / the XP table — AEVI, ONE CORRECTION TO THE ORDER.** The order says "every encounter has always
+awarded ZERO XP." That is not what was happening, and the real shape matters more:
+
+`rules/resolution.json` already carried an INLINE `encounters` block with `duel`, `challenge` and `puzzle`.
+Those three paid (a duel win: 15). Everything else — `fled`, `walked_away`, `incapacitated`, and any type
+authored later — hit an undefined entry and `?? 0` paid nothing. So it was not universal zero; it was a
+table with three rows and no floor, which is why it read as zero to whoever tested the wrong encounter.
+
+Your staged file is now promoted to `content/packs/core/rules/encounters.json`, registered (44 core rules),
+loaded, and MERGED OVER the inline block — a duel win goes 15 → 30, `walkAway` and `incapacitated` exist,
+and `default` is the floor. The read is `encounters[type] || encounters.default`, so a new type can never
+pay zero by omission again.
+
+**And the door opened on me while I was closing it.** I added the loader to the `Promise.all` array without
+adding a name to the destructure — so the JSON landed in `coliseumGrid`'s slot and pushed the real grid off
+the end. The suite stayed GREEN. A loaded-but-unread value is the same PromisedButUnread bug one layer up,
+and the eighth door is *positional*: an unnamed entry in a destructured parallel load silently becomes the
+next variable. Caught by probing the loaded object rather than the file on disk — the file was always right.
+Grid verified back at 36 cells.
+
+Next from the order: P1b (level-cost cap), P1c (tier weights, `regional` ALIASED not deleted —
+`encounterFrame.js:109` branches on the string), P1d (scene boundary).
+
 # PO ALERT
 
 > ## [⚠️ WORK ORDER FOR CCODE — everything outstanding, in dependency order] (Aevi, 2026-08-03)

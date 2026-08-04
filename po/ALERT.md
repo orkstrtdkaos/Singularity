@@ -1,3 +1,57 @@
+## CCODE-133 — SNG-279 built. Promotion is on DEEDS, and a player will actually see one.
+
+Aevi measured the thing that mattered and it is the sharpest finding of the week: the years-only ladder
+needed 15.5 world-years riffraff-to-mythic, **~2,200 player-hours**. I built an entire earned-tier system
+that was, in play, **invisible content**. Time is a FLOOR now; deeds are the GATE.
+
+**DIRECTIVE SNG-280 read first, as instructed, and it is gated.** Everything contested and won scores the
+same whichever direction it points — `strikeLanded === guardIntercept === strikeSurvived === arcContestWon`.
+There is a test asserting the engine weights are equal AND that the authored weights agree with them, so a
+content edit cannot smuggle a value back in either. A Maw who levers three rivals rises exactly as fast as a
+guard who stops three knives.
+
+### THE LADDER IS SWEPT, NOT GUESSED — `tests/deed_ladder_sweep.mjs`
+
+**4/10/22/70/170** is the only shape that passes BOTH your tests: **4.5 rises in a 40-hour run** and **a
+mythic in 1 world of 6 at 180 hours**. Worth knowing: your two targets pull against each other. Any ladder
+cheap enough to show early rises floods mythic (3/6/12/21/36 gives mythic in 5/5); any ladder steep enough
+to keep mythic rare shows nothing in 40 hours. The resolution is SHAPE — cheap bottom, steep top two rungs.
+
+### ⚠️ FOUR BUGS, EACH OF WHICH READ AS A TUNING RESULT
+
+**1. The clock. My probes were simulating 1/24th of what they claimed.** `absoluteWorldDay` scales elapsed
+REAL DAYS, and my ad-hoc harnesses stepped by one hour — so "105 world-days" was really about five. The sweep
+returned 0 rises at every ladder three times running and I nearly concluded the deed model did not work.
+`world_endgame.mjs` had it right all along; my probes did not. **Any number I quoted from an ad-hoc probe
+this session is suspect on that basis; the world_endgame figures stand.**
+
+**2. Every scored deed cancelled the tenure it counted toward.** `creditDeed` opens a tenure record with no
+tier; `advanceStandings` treated that placeholder as "the rung changed" and wiped deeds + reset the floor
+timer. Promotion was structurally impossible.
+
+**3. Demotion could never fire — twice.** First condition was "cares about nothing", which is never true of
+an authored figure. Second was "spent nothing this pass", which is never true either, because a fractional
+budget always buys a share of something. Both printed **0.0 falls** across every ladder, which reads exactly
+like a tuning result. It now reads an OUT-OF-ACTION streak — wounded or stopped, pass after pass — which is
+the measurable form of your "failing to last should cost the title".
+
+**4. I put two weights in the table with nothing writing them.** `stageMoved` is now wired (it fires often —
+the arc turning is the largest single source). **`spreadPerHop` CANNOT FIRE**: your table lists it as
+"already exists", but `reputation.js` carries a `spread` field and its own header says nothing populates it
+yet. That is a real dependency, not a tuning matter — one of your six sources is dark until spread lands.
+
+### What a player sees
+
+Every rise is news that says WHAT they did ("winning what they contested", "standing over people who lived
+because of it"), and when the player had a hand in it, **"You are why."** ⚠️ One honest limit: the only
+causation path the offscreen tick can truthfully see is the player's own push on the same arc. A player who
+killed a legend or struck a worker is your second path and is NOT wired — those acts are recorded on the
+character, not in the tick, and claiming them here would be a guess wearing an attribution.
+
+Falls are news too: *"They are not spoken of as legendary any more. They stopped holding anything."*
+
+**v1.9.6** · 24 requirements / 86 gates, all green.
+
 ## CCODE-132 — SNG-279: the door that was only ever swept from one side
 
 Aevi (SNG-278): *"promise_sweep should run on EVERY rules key an engine module reads, not only the ones

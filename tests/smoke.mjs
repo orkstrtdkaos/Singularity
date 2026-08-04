@@ -9324,11 +9324,15 @@ await (async () => {
 
 // --- SNG-269/2c: PROMOTION — tier is EARNED, not authored ---------------------------------------------
 {
-  const { advanceStandings, demoteFigure, tierOf } = await import("../engine/worldtick.js");
+  const { advanceStandings, demoteFigure, tierOf, creditDeed: creditDeedFn } = await import("../engine/worldtick.js");
   const wtSrc2 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
   const ws = {}; const f = { id: "x", name: "Nobody", tier: "riffraff" };
+  // SNG-279: the gate is DEEDS now, with time as a floor — so this must earn its rise, not merely wait.
   check("2c: an earned rung is an OVERRIDE in world state — content is read-only and shared",
-    (advanceStandings(ws, [f], 0), advanceStandings(ws, [f], 200),
+    (advanceStandings(ws, [f], 0),
+     creditDeedFn(ws, "x", "arcContestWon", { worldDay: 1 }),
+     creditDeedFn(ws, "x", "arcContestWon", { worldDay: 2 }),
+     advanceStandings(ws, [f], 200),
      ws.figureTier?.x === "notable" && f.tier === "riffraff" && tierOf(ws, f) === "notable"));
   check("2c: rising takes TIME AT RUNG — a figure seen once does not promote",
     (() => { const w = {}; const g = { id: "g", tier: "heroic" };
@@ -9338,8 +9342,8 @@ await (async () => {
              advanceStandings(w, [g], 0); advanceStandings(w, [g], 3000);
              return !w.figureTier?.g;   // 8 world-years but zero contests won
     })());
-  check("2c: a new rung RESTARTS the clock (you do not carry tenure upward)",
-    ws.figureTenure?.x?.tier === "notable" && ws.figureTenure.x.sinceDay === 200 && ws.figureTenure.x.wins === 0);
+  check("2c: a new rung RESTARTS the clock AND the deed score (you do not carry either upward)",
+    ws.figureTenure?.x?.tier === "notable" && ws.figureTenure.x.sinceDay === 200 && ws.figureTenure.x.deeds === 0);
   check("2c: demotion exists — without a way DOWN, promotion alone makes everyone mythic",
     (() => { const w = {}; const g = { id: "g", tier: "epic" };
              return demoteFigure(w, g, 10)?.to === "heroic" && tierOf(w, g) === "heroic"; })());
@@ -9710,6 +9714,70 @@ await (async () => {
     return html.length > 400 && html.includes("Neth") && html.includes("The Burning Certainty")
       && !/undefined|NaN|\[object/.test(html);
   })());
+}
+
+// --- SNG-279: promotion on DEEDS, and DIRECTIVE SNG-280 -------------------------------------------
+{
+  const wt4 = await import("../engine/worldtick.js");
+  const wsrc4 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  const ladderDoc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/arc_response.json"), "utf8"));
+
+  // ⛔ DIRECTIVE SNG-280 — THE LOAD-BEARING ONE. Everything contested and won scores the same, whichever
+  // direction it points. A Maw who levers three rivals rises exactly as fast as a guard who stops three.
+  check("272/279: no moral weighting — strike and guard score IDENTICALLY (DIRECTIVE SNG-280)",
+    wt4.DEED_WEIGHTS.strikeLanded === wt4.DEED_WEIGHTS.guardIntercept
+    && wt4.DEED_WEIGHTS.strikeSurvived === wt4.DEED_WEIGHTS.guardIntercept
+    && wt4.DEED_WEIGHTS.arcContestWon === wt4.DEED_WEIGHTS.guardIntercept);
+  check("272/279: …and the authored weights agree with the engine (a content edit cannot smuggle a value in)",
+    (() => { const w = ladderDoc.tierLadder?.deedWeights || {};
+      return w.strikeLanded === w.guardIntercept && w.strikeSurvived === w.arcContestWon; })());
+
+  check("272/279: a deed is CREDITED and remembered with what it was", (() => {
+    const ws = {}; wt4.creditDeed(ws, "f", "arcContestWon", { worldDay: 5 });
+    const t = ws.figureTenure.f;
+    return t.deeds === 3 && t.deedLog[0].by === "arcContestWon";
+  })());
+
+  check("272/279: promotion needs BOTH the floor and the deeds", (() => {
+    const cfg = { promotion: { heroic: { to: "epic", years: 0.2, deeds: 6 } }, worldYearDays: 365 };
+    const f = { id: "h", tier: "heroic" };
+    const early = {}; wt4.advanceStandings(early, [f], 0, cfg);
+    for (let i = 0; i < 3; i++) wt4.creditDeed(early, "h", "arcContestWon", { worldDay: 1 });
+    const noFloor = wt4.advanceStandings(early, [f], 10, cfg).length;      // deeds yes, floor no
+    const late = {}; wt4.advanceStandings(late, [f], 0, cfg);
+    const noDeeds = wt4.advanceStandings(late, [f], 300, cfg).length;      // floor yes, deeds no
+    return noFloor === 0 && noDeeds === 0;
+  })());
+
+  // ⚠️ THE BUG THAT MADE EVERY PROMOTION IMPOSSIBLE: creditDeed opens a tenure record with no tier, and
+  // advanceStandings treated that placeholder as "the rung changed", wiping the deeds it had just counted.
+  check("272/279: a deed credited BEFORE standings does not reset the tenure it counts toward", (() => {
+    const ws = {};
+    wt4.creditDeed(ws, "x", "arcContestWon", { worldDay: 1 });
+    wt4.advanceStandings(ws, [{ id: "x", tier: "heroic" }], 2, { promotion: {}, worldYearDays: 365 });
+    return ws.figureTenure.x.deeds === 3;   // survived the pass
+  })());
+
+  check("272/279: a rise says WHAT they did, and names the player when they caused it", (() => {
+    const cfg = { promotion: { heroic: { to: "epic", years: 0, deeds: 3 } }, worldYearDays: 365 };
+    const ws = {}; const f = { id: "h", name: "H", tier: "heroic" };
+    wt4.advanceStandings(ws, [f], 0, cfg);
+    wt4.creditDeed(ws, "h", "guardIntercept", { worldDay: 1, playerInvolved: true });
+    const r = wt4.advanceStandings(ws, [f], 5, cfg)[0];
+    return !!r && typeof r.why === "string" && r.why.length > 4 && r.causedByPlayer === true;
+  })());
+
+  check("272/279: the news carries the attribution and the player credit",
+    /You are why\./.test(wsrc4) && /causedByPlayer: !!r\.causedByPlayer/.test(wsrc4));
+
+  // Demotion had TWO unreachable conditions before this landed; both read as 0.0 falls in the sweep.
+  check("272/279: falling reads an OUT-OF-ACTION streak, not “owns no cares” (which is never true)",
+    /ws\.outOfAction\[f\.id\] = \(st === "wounded" \|\| st === "stopped"\)/.test(wsrc4)
+    && !/if \(affinitiesOf\(f\)\.length\) continue;/.test(wsrc4));
+
+  check("272/279: the ladder is SWEPT, and the sweep exists to re-derive it",
+    ladderDoc.tierLadder?.promotion?.epic?.deeds === 70
+    && existsSync(join(root, "tests/deed_ladder_sweep.mjs")));
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

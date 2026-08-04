@@ -59,14 +59,16 @@
 
   "tierLadder": {
     "_section": "PROMOTION — tier as an EARNED position (SNG-269/2c). Erik: 'the ones that stay the longest are the true legends.'",
+    "deedWeights": { "arcContestWon": 3, "strikeLanded": 3, "strikeSurvived": 3, "guardIntercept": 3, "stageMoved": 3, "spreadPerHop": 2, "heldThroughCrisis": 1 },
+    "_deedWeights": "⛔ DIRECTIVE SNG-280 — NO MORAL WEIGHTING. Everything CONTESTED AND WON scores the same, whichever direction it points: a Maw who levers three rivals rises exactly as fast as a guard who stops three knives. Aevi's first draft had guard 4 / strike-landed 2, justified as 'the behaviour most worth having'; Erik caught it as protection-over-aggression installed as physics, which would have locked the Maw, the Silencers and the Grave-Callers out of legendary. Weights reflect COST, DIFFICULTY, RISK and SCALE — never approval. heldThroughCrisis is 1 because it is not a contest, not because it is worth less. THE TEST for any change: would a tradition TAIL be disadvantaged?",
     "worldYearDays": 365,
     "_worldYearDays": "One world year. World time is real-time-derived (~1 world day per real hour), so a world year is roughly 365 hours of play.",
     "promotion": {
-      "riffraff":  { "to": "notable",   "years": 0.5, "wins": 0 },
-      "notable":   { "to": "heroic",    "years": 1,   "wins": 1 },
-      "heroic":    { "to": "epic",      "years": 2,   "wins": 2 },
-      "epic":      { "to": "legendary", "years": 4,   "wins": 4 },
-      "legendary": { "to": "mythic",    "years": 8,   "wins": 8, "unbeaten": true }
+      "riffraff":  { "to": "notable",   "years": 0.05, "deeds": 4 },
+      "notable":   { "to": "heroic",    "years": 0.10, "deeds": 10 },
+      "heroic":    { "to": "epic",      "years": 0.20, "deeds": 22 },
+      "epic":      { "to": "legendary", "years": 0.35, "deeds": 70 },
+      "legendary": { "to": "mythic",    "years": 0.60, "deeds": 170, "unbeaten": true }
     },
     "_promotion": "Time at rung PLUS what that rung is about. A new rung restarts the clock — you do not carry tenure upward. `unbeaten` means a single loss at legendary bars the mythic step, which is why mythic is rare rather than merely slow. A figure minted at riffraff needs ~7.5 unbroken world-years to reach legendary."
   }

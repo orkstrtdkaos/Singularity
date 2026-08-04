@@ -900,6 +900,44 @@ export function mintFigure(ws, { tier = "notable", name = null, epithet = null, 
   return fig;
 }
 
+/** SNG-279 — DEEDS, NOT YEARS. Aevi measured the thing that mattered: the old ladder needed 15.5 world-years
+ *  riffraff-to-mythic, which at ~3.14 world-hours per beat is roughly 2,200 player-hours. **No player would
+ *  ever have seen a single promotion.** I built an entire earned-tier system that was, in play, invisible.
+ *
+ *  So time-in-rank becomes a FLOOR and the gate becomes DEEDS — and Aevi is right that it answers Erik's
+ *  framing better than years did: surviving eight years of a world nobody is playing is not staying;
+ *  surviving eight contests is.
+ *
+ *  ⛔ DIRECTIVE SNG-280 — NO MORAL WEIGHTING. Every contested thing WON scores the same, whichever direction
+ *  it points. A Maw who levers three rivals rises exactly as fast as a guard who stops three knives. Aevi's
+ *  first draft weighted guard 4 and a landed strike 2 and justified it as "the behaviour most worth having";
+ *  Erik caught it as protection-over-aggression installed as physics, which would have locked the Maw, the
+ *  Silencers and the Grave-Callers out of legendary and then reported that back as a finding about the world.
+ *  The weights below reflect COST, DIFFICULTY, RISK and SCALE. Never approval.
+ */
+export const DEED_WEIGHTS = {
+  arcContestWon:  3,   // you were in a contest and it went your way
+  strikeLanded:   3,   // you reached someone the fighting could not — same price as stopping one
+  strikeSurvived: 3,   // you were the mark and you are still here
+  guardIntercept: 3,   // you stood over someone and it held
+  stageMoved:     3,   // the arc itself moved while you were holding it
+  spreadPerHop:   2,   // a deed that travelled: 2 per hop, so scale sets the score
+  heldThroughCrisis: 1, // you kept a front on a pass that cost you your own time
+};
+
+/** Credit a figure for something the world already recorded. `by` is a source key from DEED_WEIGHTS.
+ *  `playerInvolved` marks a deed the PLAYER had a hand in, so a rise it later causes can say so by name. */
+export function creditDeed(ws, figureId, by, { worldDay = 0, times = 1, playerInvolved = false } = {}) {
+  if (!figureId || !DEED_WEIGHTS[by]) return 0;
+  ws.figureTenure = ws.figureTenure || {};
+  const t = (ws.figureTenure[figureId] ||= { tier: null, sinceDay: worldDay, wins: 0, losses: 0 });
+  const gained = DEED_WEIGHTS[by] * (Number(times) || 1);
+  t.deeds = (t.deeds || 0) + gained;
+  // WHAT they did, kept for attribution — Aevi: "a rank that arrives without a reason is a number."
+  t.deedLog = (t.deedLog || []).slice(-11).concat([{ by, worldDay, playerInvolved }]);
+  if (playerInvolved) t.playerTouched = true;
+  return gained;
+}
 /** SNG-269/2c — TIER IS EARNED, NOT AUTHORED. Erik: "the ones that stay the longest are the true legends."
  *
  *  Aevi calls this the biggest reframe in the system, and it has one hard consequence for the engine: a
@@ -920,12 +958,16 @@ export function tierOf(ws, f) {
 export function advanceStandings(ws, roster, worldDay, cfg = {}) {
   const YEAR = Number.isFinite(cfg.worldYearDays) ? cfg.worldYearDays : 365;
   // Aevi's proposedRule, made mechanical. Each rung: how long you must hold it, and what else it asks.
+  // SNG-279: `years` is now a FLOOR, and `deeds` is the gate. Aevi's compressed floors put the full ladder at
+  // 1.30 world-years instead of 15.5 — a mythic reachable in a long campaign instead of never. A busy figure
+  // clears a floor on deeds; a quiet one waits. That asymmetry is the point: the world's risers are the ones
+  // who were DOING something.
   const RUNGS = cfg.promotion || {
-    riffraff:  { to: "notable",   years: 0.5, wins: 0 },
-    notable:   { to: "heroic",    years: 1,   wins: 1 },
-    heroic:    { to: "epic",      years: 2,   wins: 2 },   // "survive ~2 world-years holding at least one arc care"
-    epic:      { to: "legendary", years: 4,   wins: 4 },   // "…AND win contests on an arc they drive or defend"
-    legendary: { to: "mythic",    years: 8,   wins: 8, unbeaten: true },
+    riffraff:  { to: "notable",   years: 0.05, deeds: 4 },
+    notable:   { to: "heroic",    years: 0.10, deeds: 10 },
+    heroic:    { to: "epic",      years: 0.20, deeds: 22 },
+    epic:      { to: "legendary", years: 0.35, deeds: 70 },
+    legendary: { to: "mythic",    years: 0.60, deeds: 170, unbeaten: true },
   };
   ws.figureTenure = ws.figureTenure || {};
   ws.figureTier = ws.figureTier || {};
@@ -934,17 +976,35 @@ export function advanceStandings(ws, roster, worldDay, cfg = {}) {
     const tier = tierOf(ws, f);
     if (!tier) continue;
     const t = (ws.figureTenure[f.id] ||= { tier, sinceDay: worldDay, wins: 0, losses: 0 });
-    if (t.tier !== tier) { t.tier = tier; t.sinceDay = worldDay; t.wins = 0; t.losses = 0; }   // a new rung restarts the clock
+    // A NEW RUNG restarts the clock — but only a REAL one. `creditDeed` may have opened this record first,
+    // with no tier on it, and treating that placeholder as "the rung changed" wiped the figure's deeds and
+    // reset their floor timer on the very next pass. Nobody could ever cross a floor: every scored deed
+    // silently cancelled the tenure that deed was supposed to count toward.
+    if (t.tier == null) { t.tier = tier; }                       // adopt, do not reset
+    else if (t.tier !== tier) { t.tier = tier; t.sinceDay = worldDay; t.wins = 0; t.losses = 0; t.deeds = 0; t.deedLog = []; }
     if (effectiveEpicStatus(ws, f.id, worldDay) === "dead") continue;
     const rule = RUNGS[tier];
     if (!rule) continue;
     const heldFor = (worldDay - t.sinceDay) / YEAR;
-    if (heldFor < rule.years || t.wins < rule.wins) continue;
+    const deeds = t.deeds || 0;
+    if (heldFor < (rule.years ?? 0)) continue;                    // the floor
+    if (deeds < (rule.deeds ?? rule.wins ?? 0)) continue;         // the gate (`wins` kept for old configs)
     if (rule.unbeaten && t.losses > 0) continue;
+    // WHAT THEY DID, not just that it happened. Attribution is the requirement, not the garnish.
+    const counts = {};
+    for (const d of (t.deedLog || [])) counts[d.by] = (counts[d.by] || 0) + 1;
+    const top = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+    const PHRASE = {
+      arcContestWon: "winning what they contested", strikeLanded: "reaching people others could not",
+      strikeSurvived: "surviving what was sent at them", guardIntercept: "standing over people who lived because of it",
+      stageMoved: "being there when it turned", spreadPerHop: "a name that travelled",
+      heldThroughCrisis: "holding a front at their own cost",
+    };
+    const causedByPlayer = !!t.playerTouched;
     ws.figureTier[f.id] = rule.to;
-    ws.figureTenure[f.id] = { tier: rule.to, sinceDay: worldDay, wins: 0, losses: 0 };
-    out.push({ id: f.id, name: f.name, from: tier, to: rule.to,
-      why: `held ${tier} for ${heldFor.toFixed(1)} world-years` + (rule.wins ? ` and won ${t.wins}` : "") });
+    ws.figureTenure[f.id] = { tier: rule.to, sinceDay: worldDay, wins: 0, losses: 0, deeds: 0, deedLog: [] };
+    out.push({ id: f.id, name: f.name, from: tier, to: rule.to, deeds, causedByPlayer,
+      why: top ? PHRASE[top[0]] || "what they have been doing" : "what they have been doing" });
   }
   return out;
 }
@@ -1217,9 +1277,17 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       else if (r.sealed) news.push({ text: `${r.byName || "Someone"} reached too deep and lost them for good. That road is closed now.`, worldDay: currentWorldDay, tier: "event" });
     }
 
+    // SNG-279 — IS THE PLAYER PUSHING THIS ARC? Aevi: when a player act crossed the threshold, the rise must
+    // say so by name. This is the ONE causation path the offscreen tick can honestly see: the player's own
+    // push on the same arc. (A player who killed a legend or struck a worker is a second path and is NOT
+    // wired — those acts are recorded on the character, not in the tick, and claiming them here would be a
+    // guess wearing an attribution.)
+    const playerOnArc = (arcId) => { try { return (arcPushes(character, arcId)?.mine || 0) !== 0; } catch { return false; } };
+
     // SNG-275 — the personal claim. Dials live in content beside the rest of the attention model.
     const personalShare = Number.isFinite(cfg.personalShare) ? cfg.personalShare : 0.4;
     const crisisPull = Number.isFinite(cfg.crisisPull) ? cfg.crisisPull : 1.5;
+    const heldNothing = new Set();  // SNG-279: figures who spent their attention on no front at all
     const personalBeats = [];      // figures whose own life is ON THE PAGE this pass
     const neglectedLives = [];     // …and the ones who spent it on a crisis instead
     let livesLived = 0, livesOnThePage = 0;
@@ -1234,6 +1302,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           // SNG-275: and a share is not the arcs' to spend at all — a person is not only their position on
           // the valley's five arguments. A crisis can borrow it; that borrowing is recorded, not free.
           personalShare, crisisPull });
+      if (!spent.length) heldNothing.add(f.id);   // SNG-279: put themselves nowhere this pass
       if (personal > 0) {
         const pursuit = personalPursuitOf(f, rng);
         livesLived++;
@@ -1241,6 +1310,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       } else if (neglected) {
         // the care they are spending themselves on is the one they actually took this pass
         neglectedLives.push({ id: f.id, name: f.name, arcId: spent[0]?.care?.arcId ?? null });
+        // SNG-279: holding a front on a pass that cost you your own life is a deed. Weight 1 — it is real
+        // but it is not a contest; scale and risk are lower, which is the only reason it scores less.
+        creditDeed(ws, f.id, "heldThroughCrisis", { worldDay: currentWorldDay });
       }
       for (const arcId of unattended) vacated[arcId] = (vacated[arcId] || 0) + 1;
       for (const s of spent) {
@@ -1325,6 +1397,10 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           const won = res.winner === aSide[0].f.id ? aSide : bSide, lost = won === aSide ? bSide : aSide;
           for (const e of won) if (ws.figureTenure[e.f.id]) ws.figureTenure[e.f.id].wins++;
           for (const e of lost) if (ws.figureTenure[e.f.id]) ws.figureTenure[e.f.id].losses++;
+          // SNG-279: a contest won is a DEED, credited to everyone who was in it — the allies were in the
+          // same fight. `playerInvolved` when the player is pushing this same arc: their weight is part of
+          // what made the win possible, and a rise it causes should be able to say so.
+          for (const e of won) creditDeed(ws, e.f.id, "arcContestWon", { worldDay: currentWorldDay, playerInvolved: playerOnArc(arcId) });
         }
         // CCODE-117 — A FIGHT CAN COST SOMETHING. Erik: "what if more get killed or injured? what knob would
         // we turn to do that?" The knob was a DISCONNECTED WIRE: 28 duels a pass across the valley and not
@@ -1423,12 +1499,21 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         // A GUARD is a defender who spent attention here and is NOT the mark — someone standing over them.
         const guard = defenders.working.find(e => e !== mark) || defenders.engaged[0] || null;
         const guarded = guard && rng() < (Number.isFinite(cfg.guardInterceptChance) ? cfg.guardInterceptChance : 0.45);
-        if (guarded) { strikes.push({ arcId, target: mark.f.id, sender: sender.f.id, outcome: "guarded", guard: guard.f.id }); continue; }
+        if (guarded) {
+          strikes.push({ arcId, target: mark.f.id, sender: sender.f.id, outcome: "guarded", guard: guard.f.id });
+          // SNG-279 / ⛔ DIRECTIVE SNG-280: the guard and the survivor score the SAME as the striker. Standing
+          // over someone and reaching past someone are both contested things won; nothing here ranks them.
+          creditDeed(ws, guard.f.id, "guardIntercept", { worldDay: currentWorldDay });
+          creditDeed(ws, mark.f.id, "strikeSurvived", { worldDay: currentWorldDay });
+          continue;
+        }
         const clash = resolveEpicClash(sender.f, mark.f, rng);
         const outcome = applyEpicClashOutcome(ws, sender.f, mark.f, clash.kind, currentWorldDay);
         if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
           strikes.push({ arcId, target: mark.f.id, sender: sender.f.id, outcome: outcome.finalKind,
             targetTier: mark.f.tier ?? mark.f.legend?.tier ?? null });
+          creditDeed(ws, sender.f.id, "strikeLanded", { worldDay: currentWorldDay });
+          if (outcome.finalKind !== "killed") creditDeed(ws, mark.f.id, "strikeSurvived", { worldDay: currentWorldDay });
           for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
         }
       }
@@ -1450,6 +1535,21 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block
     // (and any future readout) should be able to say WHY an arc moved when nobody won anything.
     ws.arcVacancies = vacated;
+
+    // SNG-279 — THE ARC ITSELF TURNED WHILE THEY WERE HOLDING IT. The rarest and largest of the six sources:
+    // it takes the whole valley leaning one way for a season. Credited to everyone who leaned on it, not to a
+    // leader — a stage does not move because one person pushed.
+    ws.arcStageSeen = ws.arcStageSeen || {};
+    for (const arcId of Object.keys(leaning)) {
+      let now = null;
+      try { now = arcStageNow(content, character, arcId); } catch { now = null; }
+      if (now == null) continue;
+      const before = ws.arcStageSeen[arcId];
+      ws.arcStageSeen[arcId] = now;
+      if (before == null || now === before) continue;
+      const held = [...(leaning[arcId]?.pro || []), ...(leaning[arcId]?.con || [])];
+      for (const e of held) creditDeed(ws, e.f.id, "stageMoved", { worldDay: currentWorldDay, playerInvolved: playerOnArc(arcId) });
+    }
     // SNG-275 — THE COVERAGE IS THE ASK. `lived` is how many figures kept their own time this pass;
     // `onThePage` is how many of those had anything AUTHORED to spend it on. The gap between the two is
     // exactly the content Aevi has yet to write, stated as a number rather than left as a silence.
@@ -1470,13 +1570,48 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // should cost the title — and without a way DOWN, promotion alone eventually makes everyone mythic.
     const fallen = [];
     for (const f of living) {
-      if (effectiveEpicStatus(ws, f.id, currentWorldDay) !== "wounded") continue;
-      if (affinitiesOf(f).length) continue;       // still cares about something → still holding on
+
+      // ⚠️ WHAT "ABANDONS EVERY FRONT" HAS TO MEAN MECHANICALLY. Two readings failed: "cares about
+      // nothing" can never be true of an authored figure, and "spent nothing this pass" can never be true
+      // either, because a fractional budget always buys a share of something. Both produced 0.0 falls
+      // across every ladder in the sweep, which reads exactly like a tuning result and is not one.
+      //
+      // Aevi's framing is "failing to last should cost the title". The measurable version of not lasting is
+      // being OUT OF ACTION — wounded or stopped, pass after pass, while the front they hold goes on without
+      // them. That is a figure the world stops calling what it used to call them.
+      ws.outOfAction = ws.outOfAction || {};
+      const st = effectiveEpicStatus(ws, f.id, currentWorldDay);
+      ws.outOfAction[f.id] = (st === "wounded" || st === "stopped") ? (ws.outOfAction[f.id] || 0) + 1 : 0;
+      if (ws.outOfAction[f.id] < (Number.isFinite(cfg.fallAfterPasses) ? cfg.fallAfterPasses : 2)) continue;
+      ws.outOfAction[f.id] = 0;       // they still put themselves somewhere → still holding on
       const d = demoteFigure(ws, f, currentWorldDay);
       if (d) fallen.push(d);
     }
+    // ⚠️ WHICH SOURCES ACTUALLY FIRE. A weight in the table with nothing writing it is the bug family this
+    // repo keeps finding, so the engine COUNTS its own sources rather than trusting the table.
+    // KNOWN GAP: `spreadPerHop` cannot fire — `reputation.js` carries a `spread` field and its own header says
+    // nothing populates it yet ("carries `spread` so nothing here changes when that lands"). Aevi's spec lists
+    // that source as "already exists"; it does not. Recorded here rather than left to look like a tuning
+    // problem the first time somebody wonders why nobody scores for a name that travelled.
+    ws.deedSourcesSeen = ws.deedSourcesSeen || {};
+    for (const t of Object.values(ws.figureTenure || {})) {
+      for (const d of (t.deedLog || [])) ws.deedSourcesSeen[d.by] = (ws.deedSourcesSeen[d.by] || 0) + 0;
+    }
     ws.arcStandings = { risen, fallen };
-    for (const r of risen) news.push({ text: `${r.name || "Someone"} is spoken of differently now — ${r.why}.`, worldDay: currentWorldDay, tier: "event" });
+    // SNG-279 PART 3 — SEE AND FEEL IT, the requirement rather than the garnish. Aevi: "a promotion the
+    // player does not witness is a database write", and "a rank that arrives without a reason is a number."
+    // So every rise says WHAT they did — and when the player had a hand in it, it says so BY NAME, which is
+    // the moment the simulation stops being weather and becomes consequence.
+    for (const r of risen) {
+      const line = `${r.name || "Someone"} is called ${r.to} this season — ${r.why}.`;
+      news.push({ text: r.causedByPlayer ? `${line} You are why.` : line,
+        worldDay: currentWorldDay, tier: "event", causedByPlayer: !!r.causedByPlayer });
+    }
+    // And the inverse is the sharper one. Aevi: "Nobody stood over him."
+    for (const f of fallen) {
+      news.push({ text: `${f.name || "Someone"} is not spoken of as ${f.from} any more. They stopped holding anything.`,
+        worldDay: currentWorldDay, tier: "event" });
+    }
 
     // SNG-269/2b — THE WORLD REFILLS ITSELF. Aevi (Gap 2): "the roster never grows — a world simulated
     // long enough empties out, and the tier pyramid decays in exactly the way the re-tier was meant to fix."

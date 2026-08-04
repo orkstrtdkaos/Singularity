@@ -1,0 +1,72 @@
+{
+ "schemaVersion": 1,
+ "id": "cross_cutting_alliances_and_animus",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik saw an emergent property and named its exception. Both are measurable.",
+ "theEmergentProperty": {
+  "erik": "'not all world arcs have the same set of characters on opposing sides — so that's pretty interesting if you are against some on one effort and working with them on another.'",
+  "MEASURED": {
+   "pairsSharingAnArc": 1879,
+   "purelyAllied": 879,
+   "purelyOpposed": 833,
+   "CROSS_CUTTING": 167
+  },
+  "verdict": "⚠️ 167 PAIRS ARE ALREADY CROSS-CUTTING — allied on one arc, opposed on another. NOBODY DESIGNED THIS. It fell out of giving 66 figures multiple authored cares, and it is ~9% of all arc-sharing pairs, which is a good rate: common enough to be encountered, rare enough to be notable.",
+  "examples": [
+   {
+    "pair": "cinder_vael + halvex_coil",
+    "shape": "ALLIED on what_wakes_beneath · OPPOSED on manifestation_storm AND block_bleed",
+    "note": "⚠️ THE BEST ONE IN THE SET. Both want the waking — Cinder to make the next thing, Halvex to patch the world into a silent order. They will work together to open it AND fight each other over everything that follows. That is a whole campaign in one pair, and it was never written."
+   },
+   {
+    "pair": "neth_the_stayed + the_lidded_calm",
+    "shape": "ALLIED against the waking · OPPOSED on the poles",
+    "note": "An ashwarden who wants nobody to die unattended, and a figure who wants calm at any cost. They agree the waking must stay shut and disagree about everything the calm costs."
+   },
+   {
+    "pair": "vessa_truename + the_still_lattice",
+    "shape": "OPPOSED on the poles · ALLIED on block_bleed",
+    "note": "An honest-bargain abyssal and an order-absolutist both need a stable grammar. They will defend it together and never speak otherwise."
+   }
+  ]
+ },
+ "theException": {
+  "erik": "'this probably wouldn't happen with a few legends or traditions because of the animus they have for each other, but most it could work.'",
+  "THE_DATA_ALREADY_HAS_IT": "⚠️ `rivals` is authored on 58 of 62 epics. The animus is not something to invent — it is a field that exists and nothing currently reads.",
+  "MEASURED_CONFLICTS": "Only THREE rival-pairs are also cross-cutting: the_last_mercy/the_scouring_hand · the_still_lattice/the_open_figure · the_farwalker/the_gate_that_gapes. A tiny, hand-checkable set — which means the animus rule costs almost nothing to apply and changes almost nothing except where it matters.",
+  "theRule": {
+   "principle": "A NAMED RIVAL IS NEVER AN ALLY, ON ANY ARC. The shared position is real; the cooperation is not.",
+   "mechanically": "If two figures are rivals and would land on the same side of an arc, they do NOT combine. Proposed: each still pushes, but neither counts toward the other's weight-matched pairing — so they are on the same side and fight ALONE. ⚠️ THE ARC STILL MOVES; THEY JUST WILL NOT STAND TOGETHER.",
+   "whyThisIsBetterThanCancelling": "Making rivals cancel would be tidier and worse. Two people who hate each other both pushing the same rock still move the rock — they simply refuse to coordinate, take no shared credit, and are individually easier to gang up on. That is TRUE, and it makes animus a TACTICAL LIABILITY rather than a flavour note.",
+   "theThreeCases": [
+    {
+     "pair": "the_last_mercy + the_scouring_hand",
+     "reading": "Both would end things. One ends them WELL, the other ends them ENTIRELY. Their shared arc-position is an accident of direction, not agreement — the animus rule is exactly right here."
+    },
+    {
+     "pair": "the_farwalker + the_gate_that_gapes",
+     "reading": "One guards the waygate; one wants it opened. That they overlap on a second arc should NOT make them collaborators for a season."
+    },
+    {
+     "pair": "the_still_lattice + the_open_figure",
+     "reading": "⚠️ THIS ONE I'D FLAG: they are allied on TWO arcs and opposed on one. A blanket rule makes them permanent non-cooperators, which may be too strong. Erik's own words allow it — 'a FEW legends' — so this may be a case where the rivalry is real but not absolute."
+    }
+   ]
+  }
+ },
+ "theThirdLayer_traditionAnimus": {
+  "erik_said_traditions_too": "'a few legends OR TRADITIONS because of the animus they have for each other'",
+  "derivable": "The ring already gives it: `opposite` in traditions.json. But NOT every antipode pair should be animus — I authored most of them as MUTUAL CORRECTION rather than hatred (body/mind is a mutual correction; life/death travel each other's ground). ⚠️ THE ONE PAIR I WOULD CALL TRUE ANIMUS IS MASON/FIGURIST — the only axis in the whole catalog where each pole's crafts make the OTHER'S CRAFTS FAIL BY NAME ('no symbol acts, no figure binds' / 'THE MASONS CAN DENY IT'). Those two cannot cooperate because their crafts are mutually nullifying, not because they dislike each other.",
+  "recommendation": "Tradition-level animus should be a SHORT authored list, not derived from `opposite`. Start with mason/figurist and let play add to it."
+ },
+ "whatThisBuys": [
+  "⚠️ A PLAYER CAN BE ON BOTH SIDES OF THE SAME PERSON, and the game can say so plainly: 'you fought beside her at the seals in spring, and you will be across from her at the wood in autumn.' That is a relationship no authored quest chain produces.",
+  "IT MAKES THE STRIKE/CRUSADE SYSTEM MUCH SHARPER. Being sent to kill a worker you were allied with two arcs ago is the sharpest version of Erik's moral scene — and 167 pairs means it will happen without contrivance.",
+  "AND IT GIVES RECRUITMENT-BY-THE-OTHER-SIDE ITS MECHANISM. Erik already said the other side can try to recruit the party; a cross-cutting figure is EXACTLY who would make that approach, because they can point at a real shared interest."
+ ],
+ "openForErik": [
+  "Should rivals CANCEL, or merely refuse to coordinate? My read is refuse-to-coordinate (above) — cancelling erases a real push and makes animus feel like arithmetic rather than character.",
+  "the_still_lattice / the_open_figure are allied on 2 arcs and opposed on 1. Blanket animus may be too strong for them specifically. Is rivalry ABSOLUTE, or does it have degrees?",
+  "Do you want tradition-level animus beyond mason/figurist? I would keep the list very short — most antipodes are mutual correction, and calling them all hatred flattens what the catalog spent 285 crafts distinguishing."
+ ]
+}

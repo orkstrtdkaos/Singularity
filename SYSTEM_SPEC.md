@@ -988,3 +988,30 @@ The 1.8.x line carried ~180 point releases and no longer signals scale. **Two mi
 **Both bumps are CCode actions** (they touch `index.html`/`app.js`) taken on this standing approval —
 recorded here as intent. 1.9.x is the road; **2.0.0 is reached when §25's rows are all struck.**
 
+#### ✅ v1.9.0 CUT — 2026-08-04 (SNG-274)
+
+The trigger condition was met a long time before the cut happened. *"The world that continues itself"* is
+the headline this line was named for, and the cluster landed in pieces across two weeks: the offscreen world
+that runs without the player, responsiveness, tiered attention, contests rolled with the player's own dice,
+casualties, strikes and guards, minting at the bottom, promotion by duration and deed, and retrieval from
+the death ladder. **The version sat at 1.8.330 through all of it.**
+
+⚠️ **Why it froze, and why nothing caught it.** Bumping was a hand-edit in two files with nothing asking
+for it, and the one automated check compared `APP_VERSION` to `index.html`'s cache stamp — a CONSISTENCY
+check. Both going stale together stayed green forever. The freshness gate is now in `wiring_audit`: if a
+commit touches `app.js`, `engine/**` or `index.html`, the version must move in that same commit. Content,
+specs and tests do not require a bump — a rule that cried wolf on every content commit would be switched
+off inside a week.
+
+And the minor roll never happened because **this section is the rule** — PM-approved, naming its own trigger,
+even naming who should act on it (*"both bumps are CCode actions"*) — and no engine can read a paragraph.
+~180 point releases under a line this document itself calls one that "no longer signals scale." It is the
+same shape as every other finding this fortnight: **authored, approved, and consumed by nobody.**
+`node scripts/bump_version.mjs [patch|minor|major|--set X.Y.Z]` now moves both files in one step.
+
+**2.0.0 is NOT claimed, and here is the honest reason.** Its bar is every §25 row delivered. §25.3 asks that
+*"every player should be able to see the arcs moving"* — and Aevi's SNG-273 finding is that **a stage has no
+mechanical field at all**: the whole chain of 66 figures, attention budgets, contests, casualties and
+vacancies resolves into a number that changes a sentence. The arcs move; a player cannot yet FEEL them move
+without being told. That is a real row still open, so the line stays at 1.9.x.
+

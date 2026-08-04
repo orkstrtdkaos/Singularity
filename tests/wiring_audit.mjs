@@ -154,6 +154,43 @@ check("APP_VERSION matches index.html's cache stamp (feedback reports name the r
   !!appVersion && stamps.length > 0 && stamps.every(s => s === appVersion),
   `APP_VERSION=${appVersion}, index.html stamps=${[...new Set(stamps)].join("/")}`);
 
+// ---------- 3b. version FRESHNESS (SNG-274) ----------
+// The check above proves app.js and index.html AGREE. That is consistency, not freshness — both going stale
+// together stays green forever, and that is exactly what happened: the version last moved 2026-08-01 and
+// every commit since was green while the whole world-simulation chain shipped under a frozen label.
+//
+// So: if a commit touched the SOURCE THE VERSION DESCRIBES (app.js, engine/**, index.html), the version must
+// have moved in that same commit. Content, specs, tests and docs do not require a bump — they do not change
+// what a player is running, and a rule that cried wolf on every content commit would be turned off inside a
+// week.
+//
+// ⚠️ SKIPS ITSELF rather than failing when it cannot know (no git, no parent commit, a merge). A gate that
+// fails on a shallow clone teaches people to ignore gates.
+{
+  let verdict = null;   // null = cannot tell, so say nothing
+  try {
+    const { execFileSync } = await import("node:child_process");
+    const git = (...a) => execFileSync("git", a, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+    const parents = git("rev-list", "--parents", "-n", "1", "HEAD").split(/\s+/);
+    if (parents.length === 2) {   // exactly one parent: an ordinary commit, not a merge or a root
+      const touched = git("diff", "--name-only", "HEAD~1", "HEAD").split(/\r?\n/).filter(Boolean);
+      const versioned = touched.filter(f => f === "app.js" || f === "index.html" || f.startsWith("engine/"));
+      if (versioned.length) {
+        const before = git("show", "HEAD~1:app.js").match(/const APP_VERSION = "([^"]+)"/)?.[1] || null;
+        verdict = { moved: !!before && before !== appVersion, before, files: versioned.length, sample: versioned.slice(0, 3) };
+      }
+    }
+  } catch { verdict = null; }
+
+  if (verdict === null) {
+    console.log("note  version freshness: not checkable here (no git, a merge, or no source change in HEAD)");
+  } else {
+    check(`the version MOVED with the source it describes (HEAD changed ${verdict.files} versioned file(s): ${verdict.sample.join(", ")})`,
+      verdict.moved,
+      `still ${appVersion} — run: node scripts/bump_version.mjs   (or "minor" / "--set X.Y.Z" for a milestone)`);
+  }
+}
+
 // ---------- 3c. unread-writes: every gameplay control the Settings screen writes has a live reader ----------
 // SNG-205 §3: the batch's recurring bug is a dial the UI writes that NOTHING reads — `encounterRate` was the
 // cautionary tale (Erik maxed it, saw no change, because it had zero consumers; the real control is

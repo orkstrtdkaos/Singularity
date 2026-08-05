@@ -11,7 +11,8 @@
     "melee",
     "structural"
    ],
-   "consumable": false
+   "consumable": false,
+   "worth": "valuable"
   },
   {
    "id": "prism_lens",
@@ -26,7 +27,8 @@
    ],
    "consumable": false,
    "substrateCharge": 0.06,
-   "substrateNote": "Cut Radiant crystal — a focus that gathers as well as splits."
+   "substrateNote": "Cut Radiant crystal — a focus that gathers as well as splits.",
+   "worth": "valuable"
   },
   {
    "id": "wardens_knife",
@@ -38,7 +40,8 @@
     "wild",
     "quiet"
    ],
-   "consumable": false
+   "consumable": false,
+   "worth": "valuable"
   },
   {
    "id": "pass_cloak",
@@ -50,7 +53,8 @@
     "stealth",
     "travel"
    ],
-   "consumable": false
+   "consumable": false,
+   "worth": "valuable"
   },
   {
    "id": "channel_pole",
@@ -62,7 +66,8 @@
     "travel",
     "reach"
    ],
-   "consumable": false
+   "consumable": false,
+   "worth": "useful"
   },
   {
    "id": "greenlore_satchel",
@@ -74,7 +79,8 @@
     "plants",
     "remedy"
    ],
-   "consumable": false
+   "consumable": false,
+   "worth": "useful"
   },
   {
    "id": "quiet_boots",
@@ -86,7 +92,8 @@
     "travel",
     "grip"
    ],
-   "consumable": false
+   "consumable": false,
+   "worth": "valuable"
   },
   {
    "id": "storm_glass",
@@ -97,7 +104,8 @@
     "weather",
     "travel"
    ],
-   "consumable": false
+   "consumable": false,
+   "worth": "useful"
   },
   {
    "id": "healers_draught",
@@ -110,7 +118,8 @@
    "consumable": true,
    "effects": {
     "health": 8
-   }
+   },
+   "worth": "trivial"
   },
   {
    "id": "clarity_tea",
@@ -124,7 +133,8 @@
    "consumable": true,
    "effects": {
     "energy": 10
-   }
+   },
+   "worth": "trivial"
   },
   {
    "id": "smoke_bead",
@@ -135,7 +145,8 @@
     "stealth",
     "escape"
    ],
-   "consumable": true
+   "consumable": true,
+   "worth": "trivial"
   },
   {
    "id": "toll_chits",
@@ -146,7 +157,8 @@
     "barter",
     "favor"
    ],
-   "consumable": true
+   "consumable": true,
+   "worth": "trivial"
   },
   {
    "id": "choir_shard",
@@ -209,7 +221,8 @@
     ]
    },
    "substrateCharge": 0.09,
-   "substrateNote": "Stone from the drowned tiers of a pre-Transition work. It came out of a pool and it kept some."
+   "substrateNote": "Stone from the drowned tiers of a pre-Transition work. It came out of a pool and it kept some.",
+   "worth": "valuable"
   }
  ]
 }

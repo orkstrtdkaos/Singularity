@@ -1791,6 +1791,194 @@
           "class": "hard"
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_unsurvivable_fact",
+      "name": "The Unsurvivable Fact",
+      "levelReq": 5,
+      "energyCost": 13,
+      "powerSystem": "reach_falsehood_truth",
+      "tradition": "verist",
+      "attribute": "mental",
+      "axes": {
+        "falsehood_truth": 0.8
+      },
+      "functions": [
+        "reveal",
+        "strike"
+      ],
+      "narrationHints": "They say one true thing. The person hears it, and afterward there is nobody to talk to.",
+      "description": "⚠️ THE STRIPPERS' CRAFT, AND IT IS NOT DAMAGE. A Verist finds the one true thing a person has built their whole standing on not knowing — and says it, plainly, where it cannot be unheard. Some people survive that. The Strippers select for the ones who will not.",
+      "notFor": "⚠️ IT REQUIRES A REAL FACT. You cannot invent it, and a false one does nothing at all. It also needs a load-bearing lie to break — a person with nothing built on a lie is untouchable by this and the Strippers find them tedious.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Unsurvivable Fact",
+          "grants": "Say the true thing they have built their standing on not knowing. They are UNDONE — cannot act on what they were, and everyone present knows why.",
+          "cannot": "Anyone whose life is not built on a lie. Inventing the fact.",
+          "functions": [
+            "reveal",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "Said Where It Carries",
+          "grants": "Say it where it spreads. What breaks is not the person's day but their PLACE — and some do not outlive losing it.",
+          "cannot": "Choosing whether they outlive it. That is theirs and it is not quick.",
+          "functions": [
+            "reveal",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "lethal"
+        }
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ],
+      "harmRung": "lethal",
+      "nativeOrCombination": "native",
+      "shape": "hobble",
+      "operativeAxis": [
+        "exposure",
+        "reach"
+      ],
+      "mechanic": {
+        "magnitude": 8,
+        "duration": 720,
+        "targets": 1,
+        "damageType": "truth",
+        "note": "⚠️ HOBBLE, NOT DAMAGE — a CONDITIONAL kill. r1 undoes their standing; r2 makes it public and durable. The lethal outcome is DELAYED and never certain: the engine resolves it as a death only if the target's standing was their whole footing. That is the mechanical path — you do not roll damage, you remove what they were standing on."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "reach",
+          "delta": "SPECIAL: said where it CARRIES — what breaks is their place, not their day",
+          "from": "r2 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "say it to them alone — undone, and it stays between you",
+        "surge": "say it where it carries; SOME DO NOT OUTLIVE LOSING THEIR PLACE"
+      },
+      "bounds": [
+        {
+          "text": "IT REQUIRES A REAL FACT — a false one does nothing",
+          "class": "hard"
+        },
+        {
+          "text": "A PERSON WITH NOTHING BUILT ON A LIE IS UNTOUCHABLE BY THIS",
+          "class": "hard"
+        },
+        {
+          "text": "YOU DO NOT CHOOSE WHETHER THEY OUTLIVE IT",
+          "class": "cost"
+        },
+        {
+          "text": "Verity cannot tell whether the unmasking does more harm than the lie did — AND NEITHER CAN YOU",
+          "class": "cost"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_perfect_erasure",
+      "name": "The Perfect Erasure",
+      "levelReq": 5,
+      "energyCost": 14,
+      "powerSystem": "reach_falsehood_truth",
+      "tradition": "veilwright",
+      "attribute": "social",
+      "axes": {
+        "falsehood_truth": -0.8
+      },
+      "functions": [
+        "deceive",
+        "bind",
+        "strike"
+      ],
+      "narrationHints": "Nobody kills them. It is simply that after a while there is no longer anyone there to be.",
+      "description": "⚠️ THE NAME-TAKERS' CRAFT, AND ITS KILL IS ADMINISTRATIVE. You do not replace a person for an evening — you replace them until the replacement is the one people know, and the original has no name, no standing, no account, and nowhere that will take them. They die of that, and the record shows no crime.",
+      "notFor": "Anyone unknown to begin with — you can only erase what was WRITTEN. And it is SLOW: months, not minutes, and reversible right up until it is not.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Perfect Erasure",
+          "grants": "Hold a replaced identity so long it BINDS — the original's name is no longer theirs anywhere it is checked.",
+          "cannot": "Anyone unrecorded. Speed: it takes months.",
+          "functions": [
+            "deceive",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "No One At All",
+          "grants": "Continue until there is nowhere that will take them. What follows is not something you did, which is the point.",
+          "cannot": "Undoing it later — a name given back is not a life given back.",
+          "functions": [
+            "deceive",
+            "bind",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "lethal"
+        }
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "STEALTH"
+      ],
+      "harmRung": "lethal",
+      "nativeOrCombination": "native",
+      "shape": "hobble",
+      "operativeAxis": [
+        "erasure",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 7,
+        "duration": 2160,
+        "targets": 1,
+        "damageType": "deception",
+        "note": "⚠️ THE SLOWEST KILL IN THE CATALOG — 90 days of held duration. A HOBBLE that becomes lethal by attrition, not by a strike. It is answerable at any point by anyone who restores the record, which is the counterplay."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "erasure",
+          "delta": "SPECIAL: continue until there is nowhere that will take them",
+          "from": "r2 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "hold it a while — reversible, and they know something is wrong",
+        "surge": "hold it to the end; A NAME GIVEN BACK IS NOT A LIFE GIVEN BACK"
+      },
+      "bounds": [
+        {
+          "text": "YOU CAN ONLY ERASE WHAT WAS WRITTEN",
+          "class": "hard"
+        },
+        {
+          "text": "IT TAKES MONTHS AND IS ANSWERABLE THE WHOLE TIME by anyone who restores the record",
+          "class": "hard"
+        },
+        {
+          "text": "WHAT FOLLOWS IS NOT SOMETHING YOU DID, WHICH IS THE POINT",
+          "class": "cost"
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

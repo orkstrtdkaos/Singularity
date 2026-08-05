@@ -1722,7 +1722,19 @@
      "class": "cost"
     }
    ],
-   "plainly": "A endurance/craft/physical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 30 days Ranks: rank 2 deepens permanence; rank 3 adds to special."
+   "plainly": "A endurance/craft/physical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 30 days Ranks: rank 2 deepens permanence; rank 3 adds to special.",
+   "upkeep": {
+    "prepHoursByRank": {
+     "1": 168,
+     "2": 504,
+     "3": 1440
+    },
+    "prepCondition": "daily training, uninterrupted",
+    "attended": true,
+    "interruptible": true,
+    "onInterrupt": "progress is kept; the schedule resumes",
+    "note": "⚠️ ATTENDED: TRUE and correctly so — you cannot train someone else's body for them, and the presence IS the craft. Weeks at r1 rising to two months at r3. Its mechanic.duration is 720h, so the RESULT lasts a month once built: a good ratio, and the first craft in the sweep where the investment clearly earns out."
+   }
   },
   {
    "id": "the_weight_of_presence",

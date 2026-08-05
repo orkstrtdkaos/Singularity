@@ -676,6 +676,19 @@ export function contestArc({ pro, con, sb, rules, steps, rng = Math.random }) {
  *  authored. ⚠️ Every reader must come through here or an evolved care is a record nothing acts on: the
  *  shift would be written, reported in the news, and then ignored by the next pass. */
 export function currentCares(ws, figure) {
+  // SNG-303b — A CRUSADE IS PAID IN COMMITMENT, AND THIS IS WHERE THE BILL LANDS. Aevi's spec: "a crusader
+  // abandons their other arcs entirely for the duration — the attention budget goes to ZERO on everything
+  // else. So a crusade CREATES VACANCIES on the crusader's own side."
+  //
+  // ⚠️ The price is not a penalty bolted on beside the mechanic — it is the ORDINARY cost of attention,
+  // charged in full, through machinery that already existed. A figure on crusade cares about exactly one
+  // thing; every other front they held falls out as `unattended`, which the attention pass already counts as
+  // a vacated seat. Nothing new had to learn what a crusade is.
+  //
+  // ⚠️ BOTH `arcId` AND `dir`, or `affinitiesOf` filters it straight back out and the crusade is a record
+  // nothing acts on. That exact shape has been got wrong three times in this file.
+  const crusade = ws?.crusades?.[figure?.id];
+  if (crusade?.arcId && crusade?.dir) return [{ arcId: crusade.arcId, dir: crusade.dir }];
   const evolved = ws?.figureCares?.[figure?.id];
   return Array.isArray(evolved) && evolved.length ? evolved : affinitiesOf(figure);
 }
@@ -684,6 +697,188 @@ export function affinitiesOf(figure) {
   const many = Array.isArray(figure?.arcAffinities) ? figure.arcAffinities : null;
   const list = (many && many.length ? many : [figure?.arcAffinity]).filter(a => a?.arcId && a?.dir);
   return list;
+}
+
+/** SNG-306 — THE PRICE OF STANDING HIGH. Erik: *"striking isn't just about the back line… between arc pushes
+ *  there are ever present assassination risks — duel to the death challenges etc. we can use these to keep
+ *  the Mythicals under control."*
+ *
+ *  THE MEASURED PROBLEM (BRIEF_world_presets, 2026-08-05): mythics go 1.0 → 1.8 → 13.5 → 20.3 across 1/2/4/8
+ *  world-years. Nothing applied pressure at the top — deeds only accumulate, and the only way down was to
+ *  stop caring entirely. The ladder had a floor and no ceiling.
+ *
+ *  This is the ceiling, and it is not a decay term. Erik's shape is better than a decay because it is a
+ *  STORY: standing high is what draws people who want what you have. A challenge is a duel with a name on
+ *  each side, it resolves through the same injury model as everything else, and losing it can kill you.
+ *
+ *  ⛔ DIRECTIVE SNG-280 — PROMINENCE, NOT MERIT. The rate is keyed to the RUNG and nothing else. A mythic of
+ *  the Maw and a mythic who has spent forty years mending the same wall are challenged at exactly the same
+ *  rate, because what draws a challenger is that you are worth beating. Nothing here reads alignment,
+ *  tradition, or what the standing was earned doing.
+ *
+ *  Pure: reads the field and the dials, returns the pairing. Every mutation stays with the caller. */
+export function planChallenge({ figure, pool = [], tierOf: tierFn = (f) => f?.tier, cfg = {}, rng = Math.random } = {}) {
+  const rung = tierRank(tierFn(figure));
+  const byTier = cfg.challengeByTier || {};
+  const t = tierFn(figure);
+  const chance = Number(byTier[t === "regional" ? "heroic" : t]);
+  if (!Number.isFinite(chance) || chance <= 0) return null;
+  if (rng() >= chance) return null;
+
+  // ⚠️ THE CHALLENGER COMES FROM BELOW, AND NOT FROM FAR BELOW. Someone must have something to gain (so not a
+  // peer or better) and a reason to think they can (so not four rungs down). `reach` is the window.
+  const reach = Number.isFinite(cfg.challengerReach) ? cfg.challengerReach : 2;
+  const candidates = pool.filter(c => {
+    if (!c || c.id === figure?.id) return false;
+    const r = tierRank(tierFn(c));
+    return r < rung && r >= rung - reach;
+  });
+  if (!candidates.length) return null;
+  // The hungriest of those who could: the closest below, since they have the least distance to make up.
+  const best = candidates.sort((a, b) => tierRank(tierFn(b)) - tierRank(tierFn(a)));
+  const band = best.filter(c => tierRank(tierFn(c)) === tierRank(tierFn(best[0])));
+  return { defender: figure, challenger: band[Math.floor(rng() * band.length)] || band[0], rung };
+}
+
+/** SNG-304 — THE HOLDING STREAK. Erik: "a streak of holding could give an edge… something that builds to a
+ *  point. It would get dropped down if interrupted."
+ *
+ *  Holding the SAME care across consecutive passes builds a counter; the counter adds to the push that care
+ *  gets. It BUILDS TO A POINT — capped — so a long hold is strong, never unbounded.
+ *
+ *  ⚠️ THE EDGE IS ON PUSH ONLY, not on urgency. Urgency also decides who steps into a fight and who a striker
+ *  aims at; folding the streak into it would quietly make constant people more warlike and more targeted,
+ *  which is not what Erik asked for and not what the mechanic is about. */
+export function holdEdge(streak, holdCfg = {}) {
+  const per = Number.isFinite(holdCfg.perPass) ? holdCfg.perPass : 0.10;
+  const cap = Number.isFinite(holdCfg.cap) ? holdCfg.cap : 0.50;
+  return 1 + Math.min(cap, Math.max(0, Number(streak) || 0) * per);
+}
+
+/** Is this pass the one that pays? ⚠️ EXTRACTED because the answer is a DESIGN CHOICE with a measured cost,
+ *  and a choice buried inside a 400-line loop is one nobody can check or change. Aevi's spec is once per hold
+ *  (`crossing 5 consecutive passes credits heldTheLine`); `deedRepeats` pays every 5 instead, which is far
+ *  stronger than it sounds — see `node tests/holding_effect.mjs` for both numbers. */
+export function holdDeedDue(streak, threshold = 5, repeats = false) {
+  const n = Number(streak) || 0, t = Number(threshold) || 5;
+  if (n <= 0 || t <= 0) return false;
+  return repeats ? n % t === 0 : n === t;
+}
+
+/** How many consecutive passes this figure has held this care. */
+export function holdStreak(ws, figureId, arcId) {
+  return Number(ws?.careHeld?.[figureId]?.[arcId]) || 0;
+}
+
+/** ⚠️ TWO DIFFERENT LOSSES, TWO DIFFERENT PRICES. Aevi: "RESET TO ZERO on abandoning the care; HALVE on being
+ *  driven off (wounded/struck). Losing a front you were forced off is not the same as leaving it."
+ *
+ *  This is the driven-off half, and it lives at the ONE place every wound in the world passes through
+ *  (`applyEpicClashOutcome`) — melee casualties and strikes alike. Putting it at the call sites would mean
+ *  every future way of hurting somebody has to remember to call it, which is how a rule quietly stops
+ *  applying to the newest thing in the game. */
+export function halveHold(ws, figureId) {
+  const held = ws?.careHeld?.[figureId];
+  if (!held) return;
+  for (const k of Object.keys(held)) held[k] = Math.floor((Number(held[k]) || 0) / 2);
+}
+
+/** SNG-303b — HOW READILY THIS FIGURE REACHES PAST A FRONT LINE. Aevi's spec: "a figure with a `strikes`
+ *  disposition > 0". A multiplier on `strikeRate`, exactly parallel to `engages`.
+ *
+ *  ⛔ DIRECTIVE SNG-280: this describes METHOD, not merit — the same rule that governs `engages`. A tradition
+ *  at 2.0 is not worse than one at 0.2; it is one whose crafts are about reaching what is guarded. Aevi's own
+ *  spec says it plainly: "a declared campaign to destroy someone who was tending a wood is not obviously
+ *  better than a knife in the dark." Nothing here ranks the two. */
+export function strikeDispositionOf(figure, strikeCfg = {}) {
+  const t = figure?.tradition || figure?.legend?.tradition || null;
+  const m = (t && strikeCfg?.byTradition?.[t] != null) ? Number(strikeCfg.byTradition[t]) : 1;
+  return Number.isFinite(m) && m >= 0 ? m : 1;
+}
+
+/** SNG-303b — THE TWO KINDS. Same effect, opposite method, opposite price.
+ *
+ *  · `quiet`   — stealth. The target does not know. Pays in EXPOSURE: a failure identifies the striker.
+ *  · `crusade` — declared. Everyone knows. Pays in COMMITMENT: every other front is abandoned outright.
+ *
+ *  ⚠️ WHICH TRADITION DOES WHICH IS CONTENT, NOT ENGINE. Deciding that umbral knifes and blazeborn declares
+ *  is a characterisation judgement about a people — it is Aevi's to make, and an engine that hardcoded the
+ *  lists would be encoding exactly the values SNG-280 forbids. Unauthored falls back to `quiet`, which is the
+ *  behaviour that already shipped, so an empty table changes nothing rather than silently inventing crusades. */
+export function strikeKindFor(figure, strikeCfg = {}) {
+  const t = figure?.tradition || figure?.legend?.tradition || null;
+  return (t && strikeCfg?.kindByTradition?.[t] === "crusade") ? "crusade" : "quiet";
+}
+
+/** SNG-303b — WHO IS SENT AT WHOM, AND WHETHER ANYONE STANDS IN THE WAY.
+ *
+ *  ⚠️ EXTRACTED SO IT CAN BE EXECUTED. The two gates that covered this before were SOURCE-PATTERN checks —
+ *  regexes matched against worldtick.js — and they passed happily while the sender was drawn from the wrong
+ *  pool for the mechanic's whole life. That is the same failure as the ten whois/worldtab gates that went
+ *  green over a template which crashed the moment it ran. A decision this branchy has to be CALLED.
+ *
+ *  Pure: reads the two sides and the dials, returns the plan. Every mutation stays with the caller. */
+export function planStrike({ attackers, defenders, arcId, strikeCfg = {}, strikeRate = 0.12,
+                             guardInterceptChance = 0.45, exposure = {}, rng = Math.random,
+                             weightOf = e => (Number(e?.f?.legend?.weight ?? e?.f?.weight) || 5) * (e?.share ?? 1) } = {}) {
+  const aWorking = attackers?.working || [], dWorking = defenders?.working || [];
+  // ⚠️ BOTH POOLS ARE `working`. The striker is NOT in the melee — that is the point of the third action, and
+  // drawing them from `engaged` gave a figure a duel and a knife in the same pass.
+  if (!aWorking.length || !dWorking.length) return null;
+
+  const candidates = aWorking
+    .map(e => ({ e, disp: strikeDispositionOf(e.f, strikeCfg) }))
+    .filter(c => c.disp > 0)
+    .sort((a, b) => (b.disp - a.disp) || ((b.e.urgency ?? 0) - (a.e.urgency ?? 0)));
+  if (!candidates.length) return null;                       // a side of pure non-strikers sends nobody
+
+  const sender = candidates[0].e, disp = candidates[0].disp;
+  const kind = strikeKindFor(sender.f, strikeCfg);
+  // ⛔ "THE MOST HATED WORKER" IS NOT A MORAL RANKING, and building it as one would be VALUE-AS-COEFFICIENT
+  // wearing a different hat. Aevi's selection rule is POSITIONAL: "the enemy worker with the highest weight ON
+  // THE ARC THE CRUSADER MOST WANTS, i.e. the one doing the thing they cannot bear." So offence is distance
+  // from what you want — symmetric, every tradition can feel it, and none is rated for feeling it.
+  if (kind === "crusade" && (sender.f?.wantArcId || null) !== arcId) return null;
+  if (rng() >= strikeRate * disp) return null;
+
+  // An EXPOSED striker is a known one. Aevi: a failed quiet strike "raises the rate at which they are
+  // targeted in return" — being identified is what makes you worth reaching for.
+  const bonus = Number.isFinite(strikeCfg.exposedTargetBonus) ? strikeCfg.exposedTargetBonus : 2;
+  const mult = e => (exposure?.[e.f?.id] ? bonus : 1);
+  // QUIET picks by VALUE (who is actually moving the arc). CRUSADE picks by WEIGHT on the wanted arc (the
+  // biggest thing standing where they cannot bear it) — efficiency against offence.
+  const valueOf = e => weightOf(e) * (e.urgency ?? 1) * mult(e);
+  const mark = kind === "crusade"
+    ? dWorking.slice().sort((a, b) => (weightOf(b) * mult(b)) - (weightOf(a) * mult(a)))[0]
+    : dWorking.slice().sort((a, b) => valueOf(b) - valueOf(a))[0];
+
+  const guard = dWorking.find(e => e !== mark) || defenders?.engaged?.[0] || null;
+  // ⚠️ THE METHOD HAS TO MEAN SOMETHING MECHANICAL, or "stealth" and "declared" are decorative prose — a
+  // content field the engine cannot read, which is the fifth door of the PromisedButUnread family. You can
+  // stand in front of what you see coming: a DECLARED crusade is easier to intercept. That is the only
+  // advantage stealth gets, and it is the whole of what "the target does not know" buys.
+  const declaredMult = Number.isFinite(strikeCfg.declaredInterceptMult) ? strikeCfg.declaredInterceptMult : 1.6;
+  const interceptChance = kind === "crusade"
+    ? Math.min(0.95, guardInterceptChance * declaredMult) : guardInterceptChance;
+  const guarded = !!guard && rng() < interceptChance;
+  return { sender, mark, guard, kind, interceptChance, guarded };
+}
+
+/** ⚠️ IS IT AUTHORED YET? Neither table exists in content today, so every tradition strikes at the same rate
+ *  and every strike is quiet. That is not a defect — it is the shipped behaviour, unchanged — but it must be
+ *  a REPORTED number rather than a silence, or "the two kinds are built" reads as "the two kinds happen".
+ *  Named the way `economyCoverage` names the economy's unreachable second axis. */
+export function strikeCoverage(strikeCfg = {}, roster = []) {
+  const traditions = [...new Set(roster.map(f => f?.tradition || f?.legend?.tradition).filter(Boolean))];
+  const withDisp = traditions.filter(t => strikeCfg?.byTradition?.[t] != null).length;
+  const crusaders = traditions.filter(t => strikeCfg?.kindByTradition?.[t] === "crusade");
+  return {
+    traditions: traditions.length, withDisposition: withDisp, crusadeTraditions: crusaders.length,
+    crusades: crusaders, bothKindsLive: crusaders.length > 0,
+    note: crusaders.length === 0
+      ? "every strike is QUIET — no tradition is authored as a crusader, so the declared kind never fires"
+      : "both kinds reachable",
+  };
 }
 
 /** SNG-275 — WHAT A FIGURE DOES WITH THEIR OWN TIME.
@@ -831,6 +1026,11 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
   let finalKind = kind, event = null, codex = null;
   const news = [];
   if (kind === "stalemate") { news.push(`${winner.name} and ${loser.name} met — and neither could break the other.`); ws.epicStatus[loser.id] = st; return { finalKind: "stalemate", news, event, codex }; }
+  // SNG-304 — DRIVEN OFF HALVES THE HOLD; only walking away resets it. Aevi: "losing a front you were forced
+  // off is not the same as leaving it." This sits at the one place EVERY wound in the world passes through —
+  // melee casualties and strikes both land here — so a future way of hurting somebody cannot forget to pay it.
+  // ⛔ NOT on stalemate: nobody was driven anywhere. That is the line above, and it returns before this.
+  halveHold(ws, loser.id);
   if (kind === "killed") {
     const tooSoon = ws.lastEpicDeathDay != null && (worldDay - ws.lastEpicDeathDay) < deathCooldownDays;
     if (tooSoon) finalKind = "stopped"; // GATE: a second death too soon is downgraded — deaths stay landmarks
@@ -883,7 +1083,7 @@ function wantProgressLine(ws, id) {
 /** SNG-269/2b — THE LIVING ROSTER: the figures the world authored PLUS the ones it has since minted.
  *
  *  Aevi (ASSESSMENT_npc_progression, Gap 2): "No `figures.push` anywhere. The world has exactly the 66
- *  figures I authored, forever." Deaths were one-way — a world simulated long enough empties out, and the
+ *  figures I authored, forever." Deaths were one-way — a world run long enough empties out, and the
  *  tier pyramid decays in precisely the way the re-tier was meant to fix.
  *
  *  Minted figures live in WORLD STATE, not content: content is read-only and shared, while a minted figure
@@ -920,6 +1120,13 @@ export function mintFigure(ws, { tier = "notable", name = null, epithet = null, 
     tier,
     weight: weight ?? tierBirthWeight(tier),
     wants: origin || "to be counted among those who matter",
+    // ⚠️ WHY THEY EXIST, KEPT. `originKind` was used only to pick a verb pool and then thrown away, so
+    // nothing downstream could tell a successor from a survivor — and a gate asserting "nobody is born of
+    // the killing field" PASSED VACUOUSLY, because `m.originKind` was undefined on every figure and
+    // `undefined !== "casualty_survivor"` is true. A field that does not exist satisfies every test that
+    // asks what it is not. It is also the thing a narrator needs to say "this is the one the abyssal sent".
+    originKind,
+    region: region || null,
     // ⚠️ THE SHAPE MATTERS: `living` filters on `f.arcAffinity?.arcId`, so a bare string here silently
     // excludes a minted figure from the ENTIRE world — no contests, no standing, no promotion. They existed
     // in the roster and were invisible to every mechanic that reads a care. Same failure as a field with no
@@ -1099,6 +1306,17 @@ export const DEED_WEIGHTS = {
   stageMoved:     3,   // the arc itself moved while you were holding it
   spreadPerHop:   2,   // a deed that travelled: 2 per hop, so scale sets the score
   heldThroughCrisis: 1, // you kept a front on a pass that cost you your own time
+  // SNG-304 (Aevi): "the deed ledger had seven sources, six combat-shaped, and the only non-combat one fires
+  // ONLY when holding COST YOU YOUR PERSONAL TIME — you were paid for sacrifice, never for work. Meanwhile
+  // `applyEpicArcPush` shows that LEANING is what actually moves arcs, every pass, for every figure. THE
+  // LEDGER REWARDED THE AMPLIFIER AND IGNORED THE ENGINE." Weight 3, the same as a contest won, because
+  // holding a front for five straight passes is what moves an arc and nothing was paying for it.
+  //
+  // ⛔ NOT A PEACEFUL-FIGURE PRIZE, per DIRECTIVE SNG-280 and Aevi's own guard on it: a marcher who holds one
+  // front for five passes earns it identically. It rewards CONSTANCY — available to everyone, characteristic
+  // of nobody — and the figures who chase every fire will never have it. That is the trade, and it is
+  // symmetric. This is the answer to SNG-300's finding that every deed source but one needed a fight.
+  heldTheLine:    3,
 };
 
 /** Credit a figure for something the world already recorded. `by` is a source key from DEED_WEIGHTS.
@@ -1392,6 +1610,11 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   const deathNames = new Map();
   for (const f of worldRoster(ws, content)) { const st = ws.epicStatus?.[f.id]; if (st) deathNames.set(st, f.name); }
   for (const n of Object.values(character.npcRegistry || {})) if (n && typeof n === "object") deathNames.set(n, n.name);
+  // ⚠️ SNG-309 — AND THE PLAYER. This pass walked the roster and the NPC registry and stopped there, so a
+  // dead player would sit at their starting depth FOREVER: never sinking, never sealing, permanently
+  // retrievable. Putting the player on the death ladder is only half the job — the clock has to reach them
+  // too, or "your party can still come for you" is not a race against anything.
+  if (character?.status === "dead" && character.deathState) deathNames.set(character, character.name || "You");
   for (const e of deepenDeaths([...deathNames.keys()], currentWorldDay, content.rules || {})) {
     const name = deathNames.get(e);
     if (name) news.push({ text: `${name} has passed beyond the roads back — the dark has closed over them, and no return remains.`, worldDay: currentWorldDay, tier: "event" });
@@ -1521,12 +1744,28 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // SNG-275 — the personal claim. Dials live in content beside the rest of the attention model.
     const personalShare = Number.isFinite(cfg.personalShare) ? cfg.personalShare : 0.4;
     const crisisPull = Number.isFinite(cfg.crisisPull) ? cfg.crisisPull : 1.5;
+    // SNG-304 — the holding streak's dials, read once per pass.
+    const holdCfg = cfg.holding || {};
+    const holdThreshold = Number.isFinite(holdCfg.deedAtPasses) ? holdCfg.deedAtPasses : 5;
+    const holdRepeats = holdCfg.deedRepeats === true;   // Aevi's spec is once per hold; see the note below
     const wonThisPass = {};         // SNG-295: arcId -> Set(ids) who won a contest on it this pass
     const removedDefender = {};     // SNG-295: arcId -> Set(ids) whose strike emptied a front holding it
     const heldNothing = new Set();  // SNG-279: figures who spent their attention on no front at all
     const personalBeats = [];      // figures whose own life is ON THE PAGE this pass
     const neglectedLives = [];     // …and the ones who spent it on a crisis instead
     let livesLived = 0, livesOnThePage = 0;
+
+    // SNG-303b — CRUSADES AND EXPOSURE END, and they must end HERE, before attention is spent. A crusade
+    // whose term ran out but is still sitting in `ws.crusades` keeps collapsing that figure's cares to one
+    // arc forever — a figure permanently reduced to a single front by an event twelve world-years ago. Aevi
+    // left the duration question open ("one pass, or until resolved? … probably a content dial"), so it IS a
+    // dial: `crusadeDays`, defaulting to a season, expired in exactly one place.
+    for (const [id, c] of Object.entries(ws.crusades || {})) {
+      if (!c || !(Number(c.untilDay) > currentWorldDay)) delete ws.crusades[id];
+    }
+    for (const [id, x] of Object.entries(ws.figureExposure || {})) {
+      if (!x || !(Number(x.untilDay) > currentWorldDay)) delete ws.figureExposure[id];
+    }
 
     const vacated = {};
     const leaning = {};   // CCODE-113: arcId -> who is pushing which way this pass
@@ -1562,6 +1801,20 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       const idle = (ws.careIdle[f.id] ||= {});
       for (const arcId of unattended) idle[arcId] = (idle[arcId] || 0) + 1;
       for (const s of spent) if (idle[s.care.arcId]) idle[s.care.arcId] = 0;
+      // SNG-304 — THE HOLDING STREAK, the mirror image of `careIdle`. Consecutive passes on the SAME care.
+      ws.careHeld = ws.careHeld || {};
+      const held = (ws.careHeld[f.id] ||= {});
+      for (const arcId of unattended) held[arcId] = 0;      // ⚠️ ABANDONING RESETS TO ZERO — see halveHold
+      for (const s of spent) {
+        const n = (held[s.care.arcId] = (held[s.care.arcId] || 0) + 1);
+        // ⚠️ ONCE PER HOLD BY DEFAULT — Aevi's spec, literally: "crossing 5 consecutive passes credits
+        // `heldTheLine`". I built the repeating version first (pay every 5) on the argument that a one-shot
+        // stops noticing the thing it was added to notice, and MEASURED IT: repeating made heldTheLine 41%
+        // of all deed credits against arcContestWon's 11%, and pushed the mean rise rate to 78% across the
+        // board — a streak of 185 passes pays 37 times. That is a real design choice with a real cost, so it
+        // is a DIAL set to what she actually wrote, not to what I inferred. `holdRepeats` turns it back on.
+        if (holdDeedDue(n, holdThreshold, holdRepeats)) creditDeed(ws, f.id, "heldTheLine", { worldDay: currentWorldDay, arcId: s.care.arcId, passes: n });
+      }
       for (const s of spent) {
         const against = -Math.sign(s.care.dir) * (Number(netBefore[s.care.arcId]) || 0);
         const urgency = Math.max(minMult, Math.min(maxMult, 1 + against * perPoint));
@@ -1735,13 +1988,15 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
             budget--;
           }
         }
-        for (const e of aSide) applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * (res ? res.proMult : 1));
-        for (const e of bSide) applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * (res ? res.conMult : 1));
+        // SNG-304: the holding streak is an edge on PUSH. A figure who has held this front for five passes
+        // leans half again as hard as one who arrived this week — that is the whole of Erik's "builds to a point".
+        for (const e of aSide) applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * (res ? res.proMult : 1) * holdEdge(holdStreak(ws, e.f.id, arcId), holdCfg));
+        for (const e of bSide) applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * (res ? res.conMult : 1) * holdEdge(holdStreak(ws, e.f.id, arcId), holdCfg));
       }
       // An engaged figure with nobody left to face is not in a fight after all — they push like a worker.
       const unfought = [...pq, ...qq];
       for (const e of [...P.working, ...Q.working, ...unfought]) {
-        applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * workMult);
+        applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * workMult * holdEdge(holdStreak(ws, e.f.id, arcId), holdCfg));
       }
       // CCODE-121 — THE QUIET WORK. Aevi/Erik (SNG-270): "a player becomes both a target, and can be sent on
       // a strike mission... or to guard someone under threat."
@@ -1756,18 +2011,47 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       // A strike is aimed at the OTHER side's best worker — value, not rank, which is what makes the target
       // usually not a villain. A GUARD on that side intercepts: someone who chose to stand still is the reason
       // the strike fails, and standing still is its own cost (they are not pushing while they watch).
+      // SNG-303b — THE RECONCILE PASS AGAINST AEVI'S STAGED SPEC. Four divergences, and the first inverted the
+      // mechanic's entire purpose:
+      //
+      // ⚠️ 1. THE STRIKER WAS DRAWN FROM THE **ENGAGED** POOL. The spec is explicit — "drawn from the WORKING
+      //       pool of their own side (a striker is not in the melee — that is the point)". Taking the sender
+      //       from `engaged` meant a figure FOUGHT A DUEL AND SENT A KNIFE IN THE SAME PASS: two actions for
+      //       one, which is precisely the "MUST NOT BE FREE, or everyone strikes" the spec warns about.
+      //
+      //       And it defeated the reason the mechanic exists. Erik closed a hole where pacifism was dominant;
+      //       Aevi's fix gives the concealment traditions "a world-scale role… without ever winning a duel."
+      //       But a side had to HAVE someone in the melee to strike at all — so umbral, veilwright and
+      //       stillhold, at engage rates of 0.4/0.4/0.15, were the LEAST able to use the mechanic built for
+      //       them, while the marchers who already dominated the fighting got it as a free extra action.
+      //
+      //    2. `strikes` disposition existed in the spec and nowhere else — every tradition struck alike.
+      //    3. Only one of the two kinds was built (quiet targeting), so `crusade` was inert.
+      //    4. Neither cost existed. A strike was free in both currencies.
       const strikeRate = Number.isFinite(cfg.strikeRate) ? cfg.strikeRate : 0.12;
+      const strikeCfg = cfg.strikes || {};
       for (const [attackers, defenders] of [[P, Q], [Q, P]]) {
-        if (!attackers.engaged.length || !defenders.working.length) continue;   // someone must send it, someone must be exposed
-        if (rng() >= strikeRate) continue;
-        const valueOf = e => (Number(e.f.legend?.weight ?? e.f.weight) || 5) * e.share * e.urgency;
-        const mark = defenders.working.slice().sort((a, b) => valueOf(b) - valueOf(a))[0];
-        const sender = attackers.engaged[0];
-        // A GUARD is a defender who spent attention here and is NOT the mark — someone standing over them.
-        const guard = defenders.working.find(e => e !== mark) || defenders.engaged[0] || null;
-        const guarded = guard && rng() < (Number.isFinite(cfg.guardInterceptChance) ? cfg.guardInterceptChance : 0.45);
+        const plan = planStrike({ attackers, defenders, arcId, strikeCfg, strikeRate, rng, weightOf: wOf,
+          exposure: ws.figureExposure || {},
+          guardInterceptChance: Number.isFinite(cfg.guardInterceptChance) ? cfg.guardInterceptChance : 0.45 });
+        if (!plan) continue;
+        const { sender, mark, guard, kind, guarded } = plan;
+        // ⚠️ COMMITMENT IS PAID UP FRONT — before the roll, not on success. Aevi: "the price is paid up front,
+        // and it is visible." A crusade that is turned aside at the door still emptied the fronts behind it.
+        if (kind === "crusade" && sender.care?.dir) {
+          const days = Number.isFinite(strikeCfg.crusadeDays) ? strikeCfg.crusadeDays : 90;
+          (ws.crusades ||= {})[sender.f.id] =
+            { arcId, dir: sender.care.dir, target: mark.f.id, untilDay: currentWorldDay + days, since: currentWorldDay };
+        }
         if (guarded) {
-          strikes.push({ arcId, target: mark.f.id, sender: sender.f.id, outcome: "guarded", guard: guard.f.id });
+          // ⚠️ EXPOSURE IS THE QUIET WORK'S PRICE, AND ONLY THE QUIET WORK'S. Aevi: "a failed strike does not
+          // wound the striker — it IDENTIFIES them." A crusader cannot be exposed; they announced it.
+          if (kind === "quiet") {
+            const days = Number.isFinite(strikeCfg.exposureDays) ? strikeCfg.exposureDays : 180;
+            (ws.figureExposure ||= {})[sender.f.id] =
+              { arcId, knownTo: mark.f.id, worldDay: currentWorldDay, untilDay: currentWorldDay + days };
+          }
+          strikes.push({ arcId, kind, target: mark.f.id, sender: sender.f.id, outcome: "guarded", guard: guard.f.id });
           // SNG-279 / ⛔ DIRECTIVE SNG-280: the guard and the survivor score the SAME as the striker. Standing
           // over someone and reaching past someone are both contested things won; nothing here ranks them.
           creditDeed(ws, guard.f.id, "guardIntercept", { worldDay: currentWorldDay });
@@ -1777,7 +2061,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         const clash = resolveEpicClash(sender.f, mark.f, rng);
         const outcome = applyEpicClashOutcome(ws, sender.f, mark.f, clash.kind, currentWorldDay);
         if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
-          strikes.push({ arcId, target: mark.f.id, sender: sender.f.id, outcome: outcome.finalKind,
+          strikes.push({ arcId, kind, target: mark.f.id, sender: sender.f.id, outcome: outcome.finalKind,
             targetTier: mark.f.tier ?? mark.f.legend?.tier ?? null });
           creditDeed(ws, sender.f.id, "strikeLanded", { worldDay: currentWorldDay });
           // SNG-295 ruling 3 (Erik: "striking defenders is a good mechanic to credit"). Removing the people
@@ -1796,6 +2080,45 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // Per arc: how many FOUGHT, how many WORKED, and who won — so a narrator can say "two of them came to
     // blows over it and thirty quietly got on with it", which is what a year in a valley actually looks like.
     ws.arcContests = arcOutcomes;
+    // SNG-306 — BETWEEN THE ARC PUSHES: the challenges. Erik: "striking isn't just about the back line —
+    // between arc pushes there are ever present assassination risks, duel to the death challenges etc."
+    //
+    // ⚠️ THIS IS NOT PART OF AN ARC. That is the point of it. Everything else in this pass happens BECAUSE
+    // two people want the valley to go different ways; a challenge happens because somebody is worth beating.
+    // It reaches figures who held no front at all this pass, which is exactly the population that was
+    // accumulating standing with nothing able to touch it.
+    const challenges = [];
+    {
+      const cRate = cfg.challenges || {};
+      const field = living.filter(f => (ws.epicStatus?.[f.id]?.status || "active") === "active");
+      for (const f of field) {
+        const plan = planChallenge({ figure: f, pool: field, tierOf: (x) => tierOf(ws, x), cfg: cRate, rng });
+        if (!plan) continue;
+        const { challenger } = plan;
+        // ⚠️ THE SAME INJURY MODEL AS EVERYTHING ELSE. A wound taken in a duel over the valley, a wound taken
+        // from a knife in the dark, and a wound taken in a challenge all mean the same thing — one model, so
+        // a death is a death wherever it came from and `deathCooldownDays` still keeps them landmarks.
+        const clash = resolveEpicClash(challenger, f, rng);
+        const outcome = applyEpicClashOutcome(ws, clash.kind === "killed" || clash.kind === "wounded" ? challenger : f,
+                                              clash.kind === "killed" || clash.kind === "wounded" ? f : challenger,
+                                              clash.kind, currentWorldDay);
+        if (!outcome?.finalKind || outcome.finalKind === "already_dead") continue;
+        challenges.push({ defender: f.id, defenderName: f.name, challenger: challenger.id,
+          challengerName: challenger.name, outcome: outcome.finalKind, tier: tierOf(ws, f) });
+        // ⛔ NO DEED FOR THE DEFENDER SIMPLY FOR SURVIVING BEING FAMOUS, and none for the challenger just
+        // for trying. Beating someone above you is a contest won and scores as one; that is the existing
+        // source and it does not need a second name.
+        if (outcome.finalKind !== "stalemate") {
+          const won = (outcome.finalKind === "killed" || outcome.finalKind === "wounded") ? challenger : f;
+          creditDeed(ws, won.id, "arcContestWon", { worldDay: currentWorldDay });
+          career(ws, won.id).wins++;
+          career(ws, won.id === challenger.id ? f.id : challenger.id).losses++;
+        }
+        for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
+      }
+    }
+    ws.arcChallenges = challenges;
+
     // Recorded so a narrator can say who paid for the line holding, and so the endgame sims can measure
     // whether the valley is bleeding at a rate anyone wants.
     ws.arcCasualties = casualties;
@@ -1860,6 +2183,11 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // `onThePage` is how many of those had anything AUTHORED to spend it on. The gap between the two is
     // exactly the content Aevi has yet to write, stated as a number rather than left as a silence.
     ws.personalCoverage = { lived: livesLived, onThePage: livesOnThePage, neglected: neglectedLives.length };
+    // SNG-303b — THE SAME TREATMENT FOR THE TWO KINDS. `kindByTradition` is empty, so every strike in the
+    // valley is quiet and the crusade path never fires. That is a fact about the CONTENT, not a defect, and
+    // it is stated here as a number for the same reason: "the two kinds are built" and "the two kinds happen"
+    // are different claims, and the second one is currently false.
+    ws.strikeCoverage = strikeCoverage((cfg && cfg.strikes) || {}, living);
     ws.personalBeats = personalBeats;
     ws.neglectedLives = neglectedLives;
     for (const b of personalBeats.slice(0, 3)) {
@@ -1992,7 +2320,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // SNG-279 PART 3 — SEE AND FEEL IT, the requirement rather than the garnish. Aevi: "a promotion the
     // player does not witness is a database write", and "a rank that arrives without a reason is a number."
     // So every rise says WHAT they did — and when the player had a hand in it, it says so BY NAME, which is
-    // the moment the simulation stops being weather and becomes consequence.
+    // the moment the world engine stops being weather and becomes consequence.
     // SNG-287: a rise is when the world finds a name for someone. The title is only spoken if the RECORD can
     // fill every slot — most rises carry no title, which is what keeps one meaning something.
     const arcNames = Object.fromEntries((content.greaterArcs || []).map(a => [a.id, a.name]));
@@ -2075,22 +2403,87 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // has to tune to keep the pyramid standing. One death can produce two kinds of person — the one who
     // was standing next to it (`riffraff`, they merely survived) and the one who takes the empty chair
     // (`notable`, they inherited something). Neither has earned the name yet. That is what 2c is for.
-    const deaths = [...casualties.filter(c => c.kind === "killed").map(c => ({ who: c.loser, arcId: c.arcId })),
-                    ...strikes.filter(s => s.outcome === "killed").map(s => ({ who: s.target, arcId: s.arcId }))];
+    // ⚠️ SNG-306b — ERIK'S CORRECTION, AND THEN HIS CORRECTION OF MY CORRECTION.
+    //
+    // He said the killing fields should not be the population producers: *"they don't COME from the field
+    // they died in, they come from the home places."* I read that as "delete the battlefield mint" and cut
+    // `casualty_survivor` outright. Wrong: *"I didn't mean that no one is minted in the battle as a new NPC
+    // or role — they should be. I meant that the successors have home lands; it's just that the MOMENT mints
+    // them in the game."*
+    //
+    // ⚠️ THAT IS A DISTINCTION BETWEEN TWO DIFFERENT THINGS, AND I COLLAPSED THEM:
+    //
+    //     MINTING IS WHEN THEY ENTER THE STORY. It is not when they come into existence.
+    //
+    // Everyone the world mints was already alive somewhere, living an ordinary life in the place they are
+    // from. A death is the MOMENT that makes them matter — the one who stood beside it and walked away is
+    // now somebody the valley has a name for, and the one who takes the empty chair was sent for. Both are
+    // real births-into-the-story. What was wrong was never the second mint; it was that neither of them
+    // came from anywhere.
+    //
+    // So both mints stay, and BOTH carry a homeland. Population size is a separate question with its own
+    // dial (`mintRate`) — conflating "where are they from" with "how many are there" is what produced my
+    // over-correction, and they should be turned independently.
+    //
+    // ⛔ TRADITION IS STANDING IN FOR HOME, AND THAT IS A STOPGAP. `homeLocation` is the right key and it is
+    // authored on 5 of 66 figures, only one of which resolves to a real location — so keying on it today
+    // would mean 61 figures who come from nowhere. Tradition is on 66 of 66 and IS a people with places in
+    // the fiction. When homes are authored this becomes the finer grain, not a rewrite.
+    // ⚠️ `casualties[].loser` IS AN ID, NOT A NAME. I wrote `c.loserId ?? null` looking for an id field that
+    // does not exist, so every battlefield death resolved to no origin and its heirs came from nowhere —
+    // caught by the homeland gate, which is the whole reason to assert a POSITIVE rather than an absence.
+    // The same slip has been printing raw ids into epithets ("the one who outlived sister_alder") since the
+    // mint was written; the name is looked up now.
+    // ⚠️ AND THE ORIGIN LINE SAYS **HOW**. Erik: *"'walked away from it' is ambiguous."* He is right, and in
+    // this world it is ambiguous in a specific and bad way — abandoning a front is a real mechanic here
+    // (`careIdle`, `vacated`), so "walked away" reads as DESERTION rather than survival. The engine already
+    // knows which of the three ways this person died; the line should just say so.
+    const deaths = [...casualties.filter(c => c.kind === "killed").map(c => ({ arcId: c.arcId, id: c.loser, how: "melee" })),
+                    ...strikes.filter(s => s.outcome === "killed").map(s => ({ arcId: s.arcId, id: s.target, how: s.kind === "crusade" ? "crusade" : "strike" })),
+                    ...challenges.filter(c => c.outcome === "killed").map(c => ({ arcId: null, id: c.defender, how: "challenge" }))];
+    /** What the survivor lived through, in the plainest words that are still true. */
+    const survivedWhat = (how, who) => ({
+      melee:     `survived the fighting that killed ${who}`,
+      strike:    `was standing beside ${who} when they were cut down`,
+      crusade:   `was with ${who} when they were hunted down`,
+      challenge: `watched ${who} called out, and outlived them`,
+    }[how] || `outlived ${who}`);
+    /** Who they were and where they were FROM: their authored home if there is one, else their people. Both
+     *  are returned so the origin line can name the truest thing it has, and so `homeland` stops being a
+     *  stand-in the day Aevi authors the field. */
+    const originOf = (id) => {
+      const f = worldRoster(ws, content).find(x => x?.id === id);
+      const people = f?.tradition || f?.legend?.tradition || null;
+      const home = f?.homeLocation || f?.legend?.homeLocation || null;
+      return { name: f?.name || id || "someone", people, home, where: home || people || null };
+    };
     for (const d of deaths) {
+      const from = originOf(d.id);
+      d.who = from.name;
       if (rng() < mintRate) {
+        // THE ONE WHO SURVIVED IT. They were not made by the battle — the battle is simply where the valley
+        // first heard of them. They went home afterwards, and home is a place they already had.
         const f = mintFigure(ws, { tier: "riffraff", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
           originKind: "casualty_survivor", secondArc: loudestArc(d.arcId), pools: mintPools, rng,
+          region: from.home || null,
           epithet: `the one who outlived ${d.who}`,
-          origin: `stood beside ${d.who} and walked away from it`, cap: mintCap });
-        if (f) born.push(f);
+          origin: from.where
+            ? `of the ${from.where}; ${survivedWhat(d.how, d.who)}`
+            : survivedWhat(d.how, d.who),
+          cap: mintCap });
+        if (f) { f.tradition = from.people || null; f.homeland = from.where || null; born.push(f); }
       }
       if (rng() < mintRate) {
+        // THE ONE WHO TAKES THE CHAIR. Sent for, from the same place, because that is who sends a successor.
         const f = mintFigure(ws, { tier: "notable", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
           originKind: "faction_leaderless", secondArc: loudestArc(d.arcId), pools: mintPools, rng,
+          region: from.home || null,
           epithet: `the one who took ${d.who}'s place`,
-          origin: `took up what ${d.who} left unfinished`, cap: mintCap });
-        if (f) born.push(f);
+          origin: from.where
+            ? `sent by the ${from.where} to take up what ${d.who} left unfinished`
+            : `took up what ${d.who} left unfinished`,
+          cap: mintCap });
+        if (f) { f.tradition = from.people || null; f.homeland = from.where || null; born.push(f); }
       }
     }
     if (born.length) {

@@ -81,7 +81,7 @@ export async function loadContent() {
     loadRule("repair_panel_manifest", null),                            // SNG-207 §6.2: the authoritative Repair-panel capability list, for the GM's context (no hallucinated controls)
     loadRule("craft_mechanics", { families: {}, familyDefaults: {} }),   // SNG-263: what each verb-family DOES + the magnitudes an unauthored craft inherits
     loadRule("titles", null),                                         // SNG-287: generative titles — patterns whose slots must be fillable
-    loadRule("arc_response", null),                                    // SNG-275: the world-sim dials — 21 of them, unauthorable until now
+    loadRule("arc_response", null),                                    // SNG-275: the world-engine dials — 21 of them, unauthorable until now
     loadRule("encounters", null),                                       // SNG-271/1a: the XP table — unregistered since forever, so every encounter paid ZERO
     loadRule("coliseum_grid", { cells: [] }),
     // SNG-300 — ⚠️ IN THIS ARRAY, not the second one. `economyRule` is destructured from THIS Promise.all,

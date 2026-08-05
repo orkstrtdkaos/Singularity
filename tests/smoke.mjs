@@ -9533,12 +9533,303 @@ await (async () => {
     return kindsOf(big, small).has("killed");
   })());
 
-  // SNG-270a — the quiet work: a strike reaches the people combat cannot, and a guard can stop it.
-  check("272/270: a strike reaches the population combat structurally cannot",
-    /const mark = defenders\.working\.slice\(\)\.sort/.test(wsrc));
-  check("272/270: a guard can INTERCEPT a strike, and standing still is its own cost",
-    /const guarded = guard && rng\(\) < \(Number\.isFinite\(cfg\.guardInterceptChance\)/.test(wsrc)
-    && /outcome: "guarded"/.test(wsrc));
+  // SNG-270a / SNG-303b — the quiet work and the crusade.
+  //
+  // ⚠️ THESE TWO USED TO BE REGEXES AGAINST worldtick.js, AND THAT IS WHY THE BUG SURVIVED. Both matched
+  // happily for the mechanic's entire life while the striker was drawn from the WRONG POOL — `engaged`
+  // instead of `working` — which gave a figure a duel and a knife in the same pass and locked the concealment
+  // traditions out of the mechanic built for them. A source pattern proves a line was typed. `planStrike` is
+  // extracted precisely so the DECISION can be called, and these now call it.
+  {
+    const mk = (id, over = {}) => ({ f: { id, tradition: over.tradition || "valley_craft", weight: over.weight ?? 5,
+      wantArcId: over.wantArcId || null, ...over.f }, share: 1, urgency: over.urgency ?? 1, care: { arcId: "A", dir: "pro" } });
+    // ⚠️ `rng` is called TWICE — once to fire the strike, once for the guard. A "never" rng does not produce
+    // an un-intercepted strike, it produces NO strike, and `plan` comes back null. I wrote that first and the
+    // block threw on `null.interceptChance`, taking every check after it with it.
+    const always = () => 0;                       // fires the strike, and the guard turns it aside
+
+    // 1. THE STRIKER IS NOT IN THE MELEE. A side with everyone engaged and nobody working sends no one.
+    const noWorkers = wt.planStrike({ attackers: { engaged: [mk("fighter")], working: [] },
+      defenders: { engaged: [], working: [mk("mark")] }, arcId: "A", rng: always });
+    const fromWorking = wt.planStrike({ attackers: { engaged: [mk("fighter")], working: [mk("quiet")] },
+      defenders: { engaged: [], working: [mk("mark")] }, arcId: "A", rng: always });
+    check("272/270: the striker comes from the WORKING pool — a side that is all melee sends nobody",
+      noWorkers === null && fromWorking?.sender?.f?.id === "quiet");
+
+    // 2. A strike still reaches the back line — the mark is a WORKER, never a fighter.
+    check("272/270: a strike reaches the population combat structurally cannot",
+      fromWorking?.mark?.f?.id === "mark");
+
+    // 3. A guard can turn it aside, and the guard is a defender who is not the mark.
+    const guarded = wt.planStrike({ attackers: { engaged: [], working: [mk("s")] },
+      defenders: { engaged: [], working: [mk("mark", { weight: 9 }), mk("shield")] }, arcId: "A", rng: always });
+    check("272/270: a guard can INTERCEPT a strike, and standing still is its own cost",
+      guarded?.guarded === true && guarded.guard.f.id === "shield" && guarded.mark.f.id === "mark");
+
+    // 4. SNG-303b — DISPOSITION IS READ. A tradition at 0 never sends anyone, however urgent.
+    const cfg0 = { byTradition: { stillhold: 0 } };
+    check("303b: a tradition with strikes disposition 0 sends nobody",
+      wt.planStrike({ attackers: { engaged: [], working: [mk("s", { tradition: "stillhold" })] },
+        defenders: { engaged: [], working: [mk("m")] }, arcId: "A", strikeCfg: cfg0, rng: always }) === null);
+
+    // 5. THE TWO KINDS EXIST, and the crusade only fires on the arc the crusader most wants.
+    const cCfg = { kindByTradition: { blazeborn: "crusade" } };
+    const wrongArc = wt.planStrike({ attackers: { engaged: [], working: [mk("z", { tradition: "blazeborn", wantArcId: "OTHER" })] },
+      defenders: { engaged: [], working: [mk("m")] }, arcId: "A", strikeCfg: cCfg, rng: always });
+    const rightArc = wt.planStrike({ attackers: { engaged: [], working: [mk("z", { tradition: "blazeborn", wantArcId: "A" })] },
+      defenders: { engaged: [], working: [mk("m")] }, arcId: "A", strikeCfg: cCfg, rng: always });
+    check("303b: a crusade fires ONLY on the arc the crusader most wants (offence is distance from what you want)",
+      wrongArc === null && rightArc?.kind === "crusade");
+    check("303b: an unauthored tradition is QUIET — the shipped behaviour, not an invented crusade",
+      fromWorking?.kind === "quiet");
+
+    // 6. THE METHOD MEANS SOMETHING: you can stand in front of what you can see coming.
+    const q = wt.planStrike({ attackers: { engaged: [], working: [mk("a")] },
+      defenders: { engaged: [], working: [mk("m"), mk("g")] }, arcId: "A", rng: always });
+    const c = wt.planStrike({ attackers: { engaged: [], working: [mk("b", { tradition: "blazeborn", wantArcId: "A" })] },
+      defenders: { engaged: [], working: [mk("m"), mk("g")] }, arcId: "A", strikeCfg: cCfg, rng: always });
+    check("303b: a DECLARED crusade is easier to intercept than a knife nobody knew about",
+      c.interceptChance > q.interceptChance);
+
+    // 7. EXPOSURE HAS TEETH: a known striker is worth reaching for, over a heavier unknown one.
+    const plain = wt.planStrike({ attackers: { engaged: [], working: [mk("a")] },
+      defenders: { engaged: [], working: [mk("big", { weight: 8 }), mk("known", { weight: 5 })] }, arcId: "A", rng: always });
+    const withExp = wt.planStrike({ attackers: { engaged: [], working: [mk("a")] },
+      defenders: { engaged: [], working: [mk("big", { weight: 8 }), mk("known", { weight: 5 })] },
+      arcId: "A", exposure: { known: { untilDay: 999 } }, rng: always });
+    check("303b: an EXPOSED figure is preferred as a mark — a failed quiet strike identifies you",
+      plain.mark.f.id === "big" && withExp.mark.f.id === "known");
+
+    // 8. COMMITMENT: a crusade collapses every other care, which is what creates the vacancies.
+    const wsC = { crusades: { z: { arcId: "A", dir: "pro" } } };
+    const many = { id: "z", arcAffinities: [{ arcId: "A", dir: "pro" }, { arcId: "B", dir: "con" }, { arcId: "C", dir: "pro" }] };
+    check("303b: a crusader's cares collapse to the one arc — every other front becomes a vacated seat",
+      wt.currentCares({}, many).length === 3 && wt.currentCares(wsC, many).length === 1
+      && wt.currentCares(wsC, many)[0].arcId === "A" && wt.currentCares(wsC, many)[0].dir === "pro");
+    // ⚠️ AND THE SHAPE IS THE ONE `affinitiesOf` ACCEPTS. A crusade care missing `dir` is filtered straight
+    // back out and the whole commitment cost silently does not happen — that exact mistake, on that exact
+    // field, has been made three times in this file.
+    check("303b: a malformed crusade record does NOT silently replace a figure's real cares",
+      wt.currentCares({ crusades: { z: { arcId: "A" } } }, many).length === 3);
+  }
+
+  // SNG-304 — THE HOLDING STREAK. Erik: "a streak of holding could give an edge… something that builds to a
+  // point. It would get dropped down if interrupted." Aevi's `heldTheLine`, and it is the answer to SNG-300's
+  // finding that six of seven deed sources needed a fight and the seventh paid for sacrifice, never for work.
+  {
+    check("304: a hold builds an edge, and it BUILDS TO A POINT",
+      wt.holdEdge(0) === 1 && Math.abs(wt.holdEdge(1) - 1.1) < 1e-9 && Math.abs(wt.holdEdge(5) - 1.5) < 1e-9
+      && wt.holdEdge(50) === wt.holdEdge(5));
+    check("304: the cap and the per-pass edge are content dials, not constants",
+      Math.abs(wt.holdEdge(2, { perPass: 0.25, cap: 2 }) - 1.5) < 1e-9 && wt.holdEdge(9, { perPass: 0.1, cap: 0.2 }) === 1.2);
+
+    // ⚠️ TWO DIFFERENT LOSSES, TWO DIFFERENT PRICES — the distinction Aevi drew explicitly.
+    const ws = { careHeld: { a: { arc1: 5, arc2: 3 } } };
+    wt.halveHold(ws, "a");
+    check("304: being DRIVEN OFF halves the hold — it does not wipe it",
+      ws.careHeld.a.arc1 === 2 && ws.careHeld.a.arc2 === 1);
+    check("304: halving an unknown figure is a no-op, not a crash", (() => {
+      try { wt.halveHold({}, "nobody"); wt.halveHold(null, "x"); return true; } catch { return false; }
+    })());
+
+    // ⚠️ AND IT MUST BE PAID AT THE ONE PLACE EVERY WOUND GOES THROUGH. Wiring it at the call sites means the
+    // next way of hurting somebody silently does not pay it — which is how a rule stops applying to the
+    // newest thing in the game. A stalemate drove nobody anywhere and must NOT halve.
+    const wsW = { careHeld: { L: { arc1: 4 } }, epicStatus: {} };
+    wt.applyEpicClashOutcome(wsW, { id: "W", name: "W" }, { id: "L", name: "L" }, "wounded", 10);
+    const wsS = { careHeld: { L: { arc1: 4 } }, epicStatus: {} };
+    wt.applyEpicClashOutcome(wsS, { id: "W", name: "W" }, { id: "L", name: "L" }, "stalemate", 10);
+    check("304: a wound halves the loser's hold; a stalemate drove nobody anywhere and does not",
+      wsW.careHeld.L.arc1 === 2 && wsS.careHeld.L.arc1 === 4);
+
+    check("304: holding pays a DEED at all — the ledger had six combat sources and one for sacrifice",
+      wt.DEED_WEIGHTS.heldTheLine === 3);
+
+    // ⚠️ THE DEFAULT IS AEVI'S SPEC AS WRITTEN, not my inference from it. I built the repeating version first
+    // and measured it: `heldTheLine` became 41% of all deed credits against arcContestWon's 11%, and the mean
+    // rise rate went to 78% for everyone, because a 185-pass hold pays 37 times. Her one-shot version closes
+    // the same gap at 2% of credits. The choice is a dial; the DEFAULT is what she actually wrote.
+    check("304: a hold pays ONCE by default — Aevi's spec, not the stronger reading of it",
+      wt.holdDeedDue(5) === true && wt.holdDeedDue(10) === false && wt.holdDeedDue(4) === false);
+    check("304: …and `deedRepeats` turns the repeating version back on",
+      wt.holdDeedDue(10, 5, true) === true && wt.holdDeedDue(15, 5, true) === true && wt.holdDeedDue(7, 5, true) === false);
+    check("304: a zero or negative streak never pays", wt.holdDeedDue(0) === false && wt.holdDeedDue(-3, 5, true) === false);
+  }
+
+  // SNG-306 — THE PRICE OF STANDING HIGH. Erik: "between arc pushes there are ever present assassination
+  // risks — duel to the death challenges etc. we can use these to keep the Mythicals under control."
+  {
+    const f = (id, tier) => ({ id, name: id, tier });
+    const tierFn = x => x.tier;
+    const cfg = { challengeByTier: { mythic: 1, legendary: 1, epic: 0.5, heroic: 0, notable: 0, riffraff: 0 } };
+    const pool = [f("M", "mythic"), f("L", "legendary"), f("E", "epic"), f("H", "heroic"), f("R", "riffraff")];
+
+    check("306: a rung with rate 0 is never called out — the ceiling is a dial, not a constant",
+      wt.planChallenge({ figure: f("H", "heroic"), pool, tierOf: tierFn, cfg, rng: () => 0 }) === null);
+
+    // ⚠️ THE CHALLENGER COMES FROM BELOW. Someone must have something to GAIN — a peer or better has no
+    // reason to call you out, and this is the whole shape of "standing high is what draws them".
+    const p = wt.planChallenge({ figure: f("M", "mythic"), pool, tierOf: tierFn, cfg, rng: () => 0 });
+    check("306: the challenger comes from BELOW — someone with something to gain",
+      !!p && p.challenger.id === "L");
+
+    // …and not from far below. `challengerReach` is the window; a riffraff does not call out a mythic.
+    const far = wt.planChallenge({ figure: f("M", "mythic"), pool: [f("M", "mythic"), f("R", "riffraff")],
+      tierOf: tierFn, cfg, rng: () => 0 });
+    check("306: …but not from FAR below — a riffraff does not call out a mythic", far === null);
+
+    // ⛔ DIRECTIVE SNG-280 — PROMINENCE, NOT MERIT. Two mythics who differ in every way that could be
+    // moralised must be challenged identically. What draws a challenger is being worth beating.
+    const saint = { id: "S", name: "S", tier: "mythic", tradition: "stillhold", alignment: "hero" };
+    const horror = { id: "X", name: "X", tier: "mythic", tradition: "abyssal", alignment: "villain" };
+    const rate = (who) => {
+      let n = 0;
+      for (let i = 0; i < 400; i++) {
+        let c = 0; const rng = () => [(i % 20) / 20, 0.5][c++] ?? 0.5;
+        if (wt.planChallenge({ figure: who, pool: [who, f("L", "legendary")], tierOf: tierFn, cfg, rng })) n++;
+      }
+      return n;
+    };
+    check("306: prominence draws the challenge, not merit — a saint and a horror at the same rung are equal",
+      rate(saint) === rate(horror) && rate(saint) > 0);
+  }
+
+  // SNG-306b — ERIK: "the successors have home lands; it's just that the MOMENT mints them in the game."
+  //
+  // ⚠️ I GATED THE WRONG THING FIRST. Reading "they don't come from the field they died in" as "delete the
+  // battlefield mint", I wrote `306b: nobody is born of the killing field itself` — and Erik's correction was
+  // that people SHOULD be minted at the battle; what they need is a HOME they came from. That gate asserted
+  // the opposite of the requirement and would have locked the mistake in, which is the worst thing a green
+  // gate can do. Minting is when somebody ENTERS THE STORY, not when they come into existence.
+  //
+  // ⚠️ THIS ONE HAS TO RUN A WORLD, because the claim is about what a real run produces. It drives a short
+  // seeded world with the casualty dial up (to guarantee deaths, and therefore mints) and inspects who
+  // was born.
+  {
+    const { loadContentHeadless } = await import("./headless_content.mjs");
+    const C = await loadContentHeadless();
+    const bloody = { ...C, rules: { ...C.rules, arcResponse: { ...(C.rules.arcResponse || {}), casualtyRate: 0.5, mintRate: 1 } } };
+    let s = 12345; const rng = () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+    const ch = { name: "mintprobe", level: 6, clock: { day: 1 }, actionCount: 0, npcRegistry: {},
+      quests: [], abilities: [], deeds: [], worldState: wt.initWorldState(1) };
+    delete ch.worldState.lastTickWorldDay;
+    const stub = async ({ entities }) => ({ developments: entities.map(e => ({ entityId: e.id, note: "x", outcome: "progress" })) });
+    const t0 = Date.now();
+    for (let d = 0; d < 730; d += 7)   // ⚠️ REAL DAYS — world time is wall-clock-derived, not clock.day
+      await wt.advanceGeneratedOffscreen({ character: ch, content: bloody, evolveFn: stub, rng, now: t0 + d * 24 * 3600000 });
+    const minted = ch.worldState.mintedFigures || [];
+    console.log(`      mint probe: ${minted.length} born, kinds: ${[...new Set(minted.map(m => m.originKind))].join(", ") || "(none)"}`);
+
+    check("306b: a bloody world still mints — the probe reaches the code under test", minted.length > 0);
+    // ⚠️ THE MOMENT MINTS THEM. Both birth events are real: the one who survived it and the one sent to take
+    // the chair. A world that only produces successors has quietly decided the battlefield introduces nobody.
+    check("306b: the moment mints them — BOTH the survivor and the successor are born into the story",
+      minted.some(m => m.originKind === "casualty_survivor") && minted.some(m => m.originKind === "faction_leaderless"));
+    // …and everyone knows where they are FROM. Tradition stands in for home until `homeLocation` is authored
+    // on more than 5 of 66; the origin line names the truest thing available either way.
+    check("306b: every figure the world mints from a death has a homeland — nobody comes from nowhere",
+      minted.filter(m => m.originKind === "casualty_survivor" || m.originKind === "faction_leaderless")
+        .every(m => !!m.homeland));
+    check("306b: …and the origin line SAYS where, so a narrator can tell it without inventing one",
+      minted.some(m => /^of the .+; (survived|was standing|was with|watched)/.test(m.wants || ""))
+      && minted.some(m => /^sent by the .+ to take up/.test(m.wants || "")));
+    // ⚠️ AND IT SAYS **HOW**. Erik: "'walked away from it' is ambiguous" — and in a world where abandoning a
+    // front is a real mechanic, it reads as desertion rather than survival. The engine knows which of the
+    // three ways the figure died, so the line names it: no minted origin may use the ambiguous phrasing.
+    const survivors = minted.filter(m => m.originKind === "casualty_survivor");
+    check("306b: a survivor's origin names WHAT they survived — never the ambiguous 'walked away from it'",
+      survivors.length > 0 && survivors.every(m => !/walked away/.test(m.wants || ""))
+      && survivors.every(m => /(survived the fighting|standing beside|was with|watched)/.test(m.wants || "")));
+  }
+
+  // SNG-309 — WHAT HAPPENS WHEN THE PLAYER GOES DOWN. Erik: "we should also just make sure all the
+  // encounters could get you killed… you wake up and the aggressor is gone with your gear, your companion
+  // revives you, you were slain by an assassin, but your party was able to bring you back after 27 days."
+  {
+    const IC = await import("../engine/incapacitation.js");
+    const DM = await import("../engine/death.js");
+    IC.wireDeathModel(DM);
+    const rolls = (fn, n = 3000) => { let s = 1; const rng = () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+      const out = {}; for (let i = 0; i < n; i++) { const o = fn(rng); out[o] = (out[o] || 0) + 1; } return out; };
+    const roll = (ctx) => rolls(rng => IC.incapacitationOutcome({ ...ctx, rng }).outcome);
+
+    // ⚠️ EVERY AGGRESSOR CAN KILL. Erik's ask, and the thing that was NOT true before: 2 of 19 encounter defs
+    // carried `lethal`, so a player could be killed by a boar or a greatcat and by nothing else in the game.
+    const kinds = ["beast", "duelist", "raider", "assassin", "hazard", "_default"];
+    check("309: every kind of aggressor can kill you — no zero in the slain column",
+      kinds.every(k => (roll({ aggressor: { aggressorKind: k } }).slain || 0) > 0));
+
+    // …but they are not all the same. An assassin came to finish you; a duelist came to win.
+    const assassin = roll({ aggressor: { aggressorKind: "assassin" } });
+    const duelist = roll({ aggressor: { aggressorKind: "duelist" } });
+    check("309: an assassin kills far more often than someone who came to win a duel",
+      assassin.slain > duelist.slain * 3 && duelist.spared > duelist.slain);
+
+    // A declared-lethal encounter is deadlier — and `lethalOfferClamp` is why that is never a surprise.
+    const plain = roll({ aggressor: { aggressorKind: "beast" }, encounter: {} });
+    const lethal = roll({ aggressor: { aggressorKind: "beast" }, encounter: { lethal: true } });
+    check("309: a declared-lethal encounter is deadlier than the same fight undeclared",
+      lethal.slain > plain.slain);
+
+    // ⚠️ NO COMPANION MEANS NOBODY REVIVES YOU — not a smaller chance, none. A revive with nobody present
+    // would be the engine inventing a rescuer, which is the same error class as inventing a figure's brother.
+    check("309: with nobody there, `revived` is impossible — not merely unlikely",
+      !roll({ aggressor: { aggressorKind: "beast" }, companions: [] }).revived);
+    check("309: a companion who can reach you is what makes waking up likely",
+      (roll({ aggressor: { aggressorKind: "beast" }, companions: [{ id: "pell", name: "Pell" }] }).revived || 0) > 0);
+    check("309: …and the revival names WHO, so the narration is about a person",
+      IC.incapacitationOutcome({ aggressor: { aggressorKind: "beast" }, companions: [{ id: "pell", name: "Pell" }],
+        rng: () => 0 }).reviver === "Pell");
+
+    // Being left where you fell costs you what you were carrying — Erik's "the aggressor is gone with your gear".
+    const inv = [{ name: "a" }, { name: "b" }, { name: "c" }, { name: "d" }];
+    const left = IC.incapacitationOutcome({ character: { inventory: inv }, aggressor: { aggressorKind: "raider" },
+      rng: () => 0.35 });
+    check("309: waking where you fell costs you gear; being revived does not", (() => {
+      const rev = IC.incapacitationOutcome({ character: { inventory: inv }, aggressor: { aggressorKind: "beast" },
+        companions: [{ id: "p", name: "P" }], rng: () => 0 });
+      return left.outcome === "left_for_dead" && left.gearTaken.length === 2 && rev.gearTaken.length === 0;
+    })());
+
+    // ⛔ THE WHOLE POINT: DEATH IS THE SAME LADDER EVERY FIGURE IS ON. Erik: "you were slain by an assassin,
+    // but your party was able to bring you back to life after 27 days." That sentence is `death.js` already.
+    const slainPlan = { slain: true, kind: "assassin" };
+    const you = { name: "You", clock: { day: 100 } };
+    DM.enterDeathState(you, IC.playerDeathState(slainPlan, { worldDay: 100 }));
+    check("309: a slain player enters the SAME death state as any figure — a depth, not a boolean",
+      you.status === "dead" && you.deathState?.diedDay === 100 && you.deathState.sealed === false);
+    // An assassin who hid the body starts you in the deep dark — `deathDepth` forces >= 2 on `lost`.
+    check("309: an assassin who hid the body starts you deeper than falling in front of your own party",
+      DM.deathDepth(you, 101, {}) === 2
+      && DM.deathDepth((() => { const p = { name: "P" }; DM.enterDeathState(p, IC.playerDeathState({ slain: true, kind: "duelist" }, { worldDay: 100 })); return p; })(), 101, {}) === 0);
+
+    // ⚠️ AND THE 27 DAYS ARE REAL. Erik's exact sentence: "your party was able to bring you back to life
+    // after 27 days." Retrievable then, and it is the CLOCK that eventually closes the road.
+    //
+    // ⚠️ MY FIRST VERSION OF THIS ASSERTED THAT TIME ALONE SEALS YOU, AND IT WENT RED — correctly. Days
+    // never seal a death in `deathDepth`; the `deepenDeaths` PASS does, and that pass walked the roster and
+    // the NPC registry and stopped there. So a dead player would have sat at their starting depth forever:
+    // never sinking, never sealing, permanently retrievable. Putting the player on the ladder was only half
+    // the job — the clock had to reach them too, or "your party can still come" races nothing.
+    const fair = { name: "P" };
+    DM.enterDeathState(fair, IC.playerDeathState({ slain: true, kind: "duelist" }, { worldDay: 100 }));
+    check("309: your party can still reach you 27 days later",
+      DM.isRetrievable(fair, 127, {}) === true && DM.isSealed(fair, 127, {}) === false);
+    check("309: and the CLOCK is what closes that road — days alone never do, the deepening pass does",
+      DM.isSealed(fair, 100 + 121, {}) === false
+      && (DM.deepenDeaths([fair], 100 + 121, {}).length === 1) && DM.isSealed(fair, 100 + 121, {}) === true);
+
+    // ⛔ ONLY A SEALED DEATH ENDS THE STORY. The roster refused to load anyone with `character.dead`, which
+    // made every death final and contradicted the model the rest of the game runs on.
+    const stillOut = { name: "Q" };
+    DM.enterDeathState(stillOut, IC.playerDeathState({ slain: true, kind: "duelist" }, { worldDay: 100 }));
+    check("309: a retrievable death does NOT end the story; a sealed one does",
+      IC.deathStopsPlay(stillOut, 127, {}) === false && IC.deathStopsPlay(fair, 221, {}) === true
+      && IC.deathStopsPlay({ name: "alive" }) === false);
+    check("309: …and the roster line says WHERE they are, not just that they fell",
+      /near dark|threshold|deep dark/.test(IC.deathLine(stillOut, 127, {}))
+      && /sealed/.test(IC.deathLine(fair, 221, {})));
+  }
 
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
@@ -9929,8 +10220,27 @@ await (async () => {
     && /arcMoodDetail/.test(readFileSync(join(root, "engine/gm.js"), "utf8")));
 
   // ⚠️ An effect kind with no consumer must be VISIBLE as such, not silently inert.
-  check("272/273: an effect kind with NO consumer is declared, not left looking live",
-    AE.EFFECT_CONSUMERS.priceShift === null && !!AE.EFFECT_CONSUMERS.craftCost);
+  // ⚠️ THE MECHANISM, NOT TODAY'S EXAMPLE. This gate used to assert `EFFECT_CONSUMERS.priceShift === null` —
+  // so when SNG-302 GAVE priceShift a consumer, a gate went red for the good news. A gate that fails when a
+  // gap is closed is measuring the gap, not the rule; the rule is "a kind with no consumer is marked inert",
+  // and it has to hold for whichever kind that happens to be. A synthetic kind keeps it honest either way.
+  check("272/273: an effect kind with NO consumer is declared, not left looking live", (() => {
+    const live = AE.effectsInPlainWords([{ kind: "npcMood", shift: "wary", arcName: "A", stageName: "s" }]);
+    const dead = AE.effectsInPlainWords([{ kind: "npcMood", shift: "wary", arcName: "A", stageName: "s" }]
+      .map(e => ({ ...e })));
+    // every kind the register knows must resolve to a truthy consumer or be flagged inert — no third state
+    const kinds = Object.keys(AE.EFFECT_CONSUMERS);
+    const consistent = kinds.every(k => AE.EFFECT_CONSUMERS[k] === null || typeof AE.EFFECT_CONSUMERS[k] === "string");
+    return consistent && live[0]?.inert === false && dead.length === 1;
+  })());
+  // …and the marking is DERIVED from the register, so a kind that gains a consumer stops being marked
+  // without anyone having to remember. Proved by flipping a real entry in a copy.
+  check("272/273: the inert flag reads the consumer register rather than naming a kind", (() => {
+    const src = readFileSync(join(root, "engine/arceffects.js"), "utf8");
+    return /inert:\s*!EFFECT_CONSUMERS\[e\.kind\]/.test(src);
+  })());
+  check("272/302: priceShift now HAS a consumer, and the register says so",
+    typeof AE.EFFECT_CONSUMERS.priceShift === "string" && /economy/.test(AE.EFFECT_CONSUMERS.priceShift));
 }
 
 // --- SNG-288: seven roads to mythic -------------------------------------------------------------------
@@ -10318,6 +10628,35 @@ await (async () => {
   check("302b: …and returns a world with content in it (a silent empty load is also a failure)",
     !!loaded && Object.keys(loaded.locations || {}).length > 0 && Object.keys(loaded.items || {}).length > 0
     && !!loaded.rules && Object.keys(loaded.rules).length > 20);
+}
+
+// --- SNG-303: the wiring is CHECKABLE, so it does not have to be remembered ---------------------------
+// The same six lines of content wiring have failed three distinct ways: not registered (the zero-XP bug),
+// registered but never loaded (Aevi's economy, caught by the check in under a minute), and loaded into a name
+// belonging to a DIFFERENT `Promise.all` — which no prose check can catch, because positional destructuring
+// has no names in it. The array and the name list are paired by COUNTING and nothing in the source says so.
+{
+  const { shapesOfSource, scanEngine } = await import("./wiring_shape.mjs");
+
+  const shapes = scanEngine();
+  const mismatched = shapes.filter(s => s.names !== s.entries);
+  for (const m of mismatched) console.log(`      ${m.file}:${m.line} — ${m.names} names / ${m.entries} entries`);
+  check("303: every Promise.all destructure pairs 1:1 with its awaited entries", shapes.length > 0 && mismatched.length === 0);
+
+  // ⚠️ FALSIFY THE CHECKER. My own `loadRule("encounters")` once landed in `coliseumGrid`'s slot and pushed
+  // the grid off the end of the array — with a fully green suite. This is that bug, planted, in one line.
+  const planted = "const [a, b] = await Promise.all([one(), two(), three()]);";
+  check("303: the checker goes RED on a planted extra entry (a gate that cannot fail is not a gate)",
+    shapesOfSource(planted).some(s => s.names === 2 && s.entries === 3));
+
+  // ⚠️ AND IT MUST NOT FIRE ON CORRECT CODE. My first version regex-matched `for (const [k, l] of …)` thirty
+  // lines above the real block and reported 5 names against 22 entries — the CHECKER being wrong, not the
+  // code. A measuring tool that cries wolf on good input teaches everyone to ignore it, which is worse than
+  // having none. So the exact shape that fooled it is now a permanent check.
+  const decoy = "for (const [k, l] of Object.entries(x)) { y(k, l); }\nconst [p, q] = await Promise.all([one(), two()]);";
+  const dShapes = shapesOfSource(decoy);
+  check("303: a preceding for-of destructure does not fool it into a false alarm",
+    dShapes.length === 1 && dShapes[0].names === 2 && dShapes[0].entries === 2);
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

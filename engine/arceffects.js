@@ -1,7 +1,7 @@
 // engine/arceffects.js — SNG-273: a stage CHANGES THE WORLD, not a sentence.
 //
 // Erik: *"stage 2 of the Bleed is in effect, so what?"* Aevi's finding was that a stage carried only
-// `publicFace` and `pressureOnAdvance`, both NARRATION — so the entire world-simulation chain, 66 figures and
+// `publicFace` and `pressureOnAdvance`, both NARRATION — so the entire world-engine chain, 66 figures and
 // their attention and contests and casualties, resolved into a number that changed a sentence. This is the
 // module that makes an advanced arc something a player FEELS.
 //
@@ -108,17 +108,22 @@ export function npcMoodLines(effects, { tradition = null } = {}) {
   return lines;
 }
 
-/** ⚠️ WHICH KINDS CAN ACTUALLY LAND. Aevi's spec says all five have an existing consumer; four do.
- *  There is NO pricing path anywhere in the engine — no module computes a price — so `priceShift` has
- *  nothing to shift, and its 11 authored effects are inert. They are kept, surfaced in words on the World
- *  tab, and named here rather than quietly dropped: an effect that cannot land must be visible as such, or
- *  the next person to read the content will believe the world is doing something it is not. */
+/** ⚠️ WHICH KINDS CAN ACTUALLY LAND. This is the register that keeps "authored" and "felt" as separate
+ *  claims: an effect with no consumer is kept, surfaced in words on the World tab, and marked `inert` — never
+ *  quietly dropped, because the next person to read the content would otherwise believe the world is doing
+ *  something it is not.
+ *
+ *  ⚠️ AND IT HAS TO BE KEPT HONEST IN BOTH DIRECTIONS. `priceShift` sat at `null` for a long time with the
+ *  note "no module in this engine computes a price" — true when written, and FALSE from SNG-302, when
+ *  economy.js shipped `shiftNeed`. The stale `null` then propagated: `npm run coverage` printed "priceShift
+ *  has NO consumer" on every run for a mechanic I had built myself. A register of what is inert is worth
+ *  nothing if nobody updates it when something stops being inert. */
 export const EFFECT_CONSUMERS = {
   craftCost: "resolution cost path (app.js energy cost)",
   travelCost: "travelTo cost",
   encounterBias: "random_encounters pool weighting",
   npcMood: "gm.js NPC block",
-  priceShift: null,   // ← no consumer exists; see above
+  priceShift: "economy.js:shiftNeed (SNG-302)",
 };
 
 /** SNG-273 visibility — the World tab's plain-words list of what the world is currently doing to you.
@@ -139,10 +144,10 @@ export function effectsInPlainWords(effects) {
   };
   return (effects || []).map(e => {
     const t = say(e);
-    // ⚠️ AN EFFECT THAT CANNOT LAND IS MARKED, NOT HIDDEN. `priceShift` is authored and inert because no
-    // module in this engine computes a price. Showing it silently alongside the live ones would tell a
-    // reader the world is doing something it is not — which is the exact failure this whole section exists
-    // to end. `inert` lets the surface say "authored, not yet felt".
+    // ⚠️ AN EFFECT THAT CANNOT LAND IS MARKED, NOT HIDDEN. Showing an inert effect silently alongside the
+    // live ones would tell a reader the world is doing something it is not — the exact failure this section
+    // exists to end. `inert` lets the surface say "authored, not yet felt". It reads EFFECT_CONSUMERS rather
+    // than naming a kind, so a kind that GAINS a consumer stops being marked without anyone remembering to.
     return t ? { arcName: e.arcName, stageName: e.stageName, text: t, why: e.why || null, kind: e.kind,
                  inert: !EFFECT_CONSUMERS[e.kind] } : null;
   }).filter(Boolean);

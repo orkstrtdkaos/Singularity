@@ -47,6 +47,38 @@
     "_strikeRate": "Chance per pass that a side sends someone at the other side's most valuable WORKER. This is the only mechanic that reaches the population combat structurally cannot — heroics doing quiet work are the safest people in the valley without it.",
     "guardInterceptChance": 0.45,
     "_guardInterceptChance": "Chance a defender standing over the mark turns the strike aside. Standing still is its own cost: they are not pushing while they watch.",
+
+
+    "_section4c": "THE PRICE OF STANDING HIGH — challenges between the arc pushes (SNG-306).",
+    "challenges": {
+      "_note": "Erik: 'striking isn't just about the back line — between arc pushes there are ever present assassination risks, duel to the death challenges etc. we can use these to keep the Mythicals under control.' ⛔ DIRECTIVE SNG-280 — PROMINENCE, NOT MERIT: the rate is keyed to the RUNG and nothing else. A mythic of the Maw and a mythic who has spent forty years mending the same wall are challenged identically, because what draws a challenger is being worth beating. Nothing here reads alignment or tradition.",
+      "challengeByTier": {
+        "mythic": 0.1,
+        "legendary": 0.05,
+        "epic": 0.02,
+        "heroic": 0.005,
+        "regional": 0.005,
+        "notable": 0,
+        "riffraff": 0
+      },
+      "_challengeByTier": "Chance per pass that a figure at this rung is called out. ⚠️ `regional` and `heroic` MUST both appear — same rung, two names, and a table carrying one silently spares 28 figures. At all-zero the ceiling is off and the top of the ladder fills up: measured 1.0 → 1.8 → 13.5 → 20.3 mythics across 1/2/4/8 world-years with no challenge at all. See po/BRIEF_world_presets.md.",
+      "challengerReach": 2,
+      "_challengerReach": "How many rungs below a challenger may come from. They must have something to gain (so never a peer or better) and some reason to think they can (so not four rungs down). At 1 only the rung immediately below ever calls anyone out."
+    },
+
+    "_section4b": "THE HOLDING STREAK — an edge that builds to a point, and drops if interrupted (SNG-304).",
+    "holding": {
+      "_note": "Erik: 'a streak of holding could give an edge... something that builds to a point. It would get dropped down if interrupted.' Aevi's `heldTheLine`. ⛔ NOT a peaceful-figure prize (DIRECTIVE SNG-280) — a marcher who holds one front for five passes earns it identically. It rewards CONSTANCY, which is available to everyone and characteristic of nobody, and the figures who chase every fire will never have it. That is the trade.",
+      "perPass": 0.1,
+      "_perPass": "How much a consecutive pass on the SAME care adds to that care's PUSH. At 0 the streak is recorded and does nothing.",
+      "cap": 0.5,
+      "_cap": "⚠️ BUILDS TO A POINT. The most a hold can ever be worth, however long it runs — at 0.5 a five-pass holder leans half again as hard as someone who arrived this week, and a fifty-pass holder leans exactly the same as the five-pass one.",
+      "deedAtPasses": 5,
+      "_deedAtPasses": "Consecutive passes that credit the `heldTheLine` deed (weight 3, the same as a contest won). The streak has to be UNBROKEN — abandoning the care resets it to zero, being driven off halves it.",
+      "deedRepeats": false,
+      "_deedRepeats": "⚠️ MEASURED BOTH WAYS, see `node tests/holding_effect.mjs`. At false (Aevi's spec as written — 'crossing 5 consecutive passes credits heldTheLine') a hold pays ONCE and must be broken and rebuilt to pay again. At true it pays every 5 passes, which sounds fairer to a long holder and is much stronger than it looks: a 185-pass hold pays 37 times, `heldTheLine` became 41% of all deed credits against arcContestWon's 11%, and the mean rise rate went to 78% for every tradition. The gap it was built to close (marcher 50% vs stillhold 8%) closes either way. This is the dial for how much the ladder loosens."
+    },
+
     "_section5": "THE ROSTER — how the world refills what it loses (SNG-269).",
     "mintRate": 0.5,
     "_mintRate": "Chance a death produces each of its two possible figures — the one who survived it (riffraff) and the one who took the empty chair (notable). At 0 the roster only ever shrinks; a long-simulated world empties out.",
@@ -113,6 +145,14 @@
     },
     "strikes": {
       "_note": "⚠️ SNG-319 (Aevi's call, CCode flagged it). `resolutionMode: removal` and a separate `strikes` disposition were THE SAME BEHAVIOUR under two names — removal IS striking. Two dials for one thing is how a mechanic ends up half-wired to each, so they are collapsed here. WHICH NAME SURVIVES: `strikes`, because it names the ACT and `removal` named a category; and because kindByTradition already sits beside it, so one block now answers both 'how often do they strike' and 'when they do, is it quiet or declared'. `resolutionMode` keeps its other four values and loses `removal` — a tradition that removes people is a tradition that strikes, and it is read from here.",
+      "crusadeDays": 90,
+      "_crusadeDays": "SNG-303b (CCode's dial, merged into Aevi's block). For this many days a crusader cares about NOTHING but the arc they declared on, and every other front they held is a seat they vacated — that is the crusade's whole price, and it is paid up front. At 0 a crusade costs nothing and becomes strictly better than a quiet strike.",
+      "exposureDays": 180,
+      "_exposureDays": "How long a failed QUIET strike leaves the striker known. Exposure is not a wound; it is being identified.",
+      "exposedTargetBonus": 2,
+      "_exposedTargetBonus": "How much more worth reaching for an exposed figure is — a failed strike raises the rate at which they are targeted in return. At 1 exposure is inert and the quiet work has no price at all.",
+      "declaredInterceptMult": 1.6,
+      "_declaredInterceptMult": "You can stand in front of what you can see coming: a DECLARED crusade is this much easier for a guard to turn aside than a knife nobody knew about. It is the only mechanical advantage stealth gets, and the whole of what the target not knowing it is coming buys. At 1 the two kinds are identical in play and the distinction is decorative.",
       "byTradition": {
         "umbral": 1.6,
         "veilwright": 1.5,

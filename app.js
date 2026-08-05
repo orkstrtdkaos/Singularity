@@ -37,6 +37,14 @@ import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainC
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed } from "./engine/companions.js";
+// SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
+import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
+import * as DeathModel from "./engine/death.js";
+import { enterDeathState } from "./engine/death.js";
+// ⚠️ ONE OWNER OF "HOW DEEP IS THIS DEATH". `incapacitation.js` asks `death.js` rather than keeping a
+// second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
+// duplicated in this codebase, and each time the copies drifted before anyone noticed.
+wireDeathModel(DeathModel);
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -79,7 +87,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.21";
+const APP_VERSION = "1.9.31";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1840,7 +1848,10 @@ function renderRoster() {
       // migrate/play, so a stale local copy is replaced (never re-stamped as "fresh").
       const pull = await syncPullCharacter(loadCharacter(btn.dataset.play));
       const c = migrate(pull.character);
-      if (c.dead) { alert(c.name + " fell in the valley. Their story is over."); renderRoster(); return; }
+      // SNG-309/SNG-209 — ⛔ ONLY A SEALED DEATH IS A TERMINUS. Death is a STATE at a DEPTH with a road
+      // back; this alert used to fire on `c.dead`, which made every death final and contradicted the model
+      // the rest of the game runs on. A retrievable death says where they are and that someone still can.
+      if (deathStopsPlay(c)) { alert(deathLine(c)); renderRoster(); return; }
       character = c;
       if (pull.note) character._reconcileNotes = [...(character._reconcileNotes || []), pull.note];
       saveCharacter(character); enterPlay();
@@ -1933,7 +1944,7 @@ async function renderDiscoverCharacters(entry) {
   body.innerHTML = chars.map(c => {
     const here = !!loadCharacter(c.id);
     return `<div class="roster-item">
-      <div><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin || "")} · level ${c.level ?? 1}${c.dead ? " · fallen" : ""}${here ? " · already here" : ""}</span></div>
+      <div><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin || "")} · level ${c.level ?? 1}${deathStopsPlay(c) ? " · sealed" : (c.status === "dead" ? " · in the dark" : "")}${here ? " · already here" : ""}</span></div>
       <div><button class="btn" data-adopt="${esc(c.id)}">${here ? "Play" : "Adopt & play"}</button></div>
     </div>`;
   }).join("");
@@ -2929,8 +2940,40 @@ function endEncounter(outcome) {
   character.activeEncounter = null;
   movesOpen = false; // SNG-252b §2a: reset to COLLAPSED, so the next encounter opens clean
   if (outcome === "incapacitated") {
-    if (enc.def.lethal) { character.dead = true; }
-    else { character.health = Math.max(1, character.health); character.energy = Math.max(5, character.energy); }
+    // SNG-309 — GOING DOWN IS NOT THE END, AND IT IS NOT NOTHING EITHER.
+    //
+    // This used to be two lines: `lethal` set `character.dead = true` (a TERMINUS — the roster says "their
+    // story is over" and refuses to load them), and every other defeat restored you to 1 hp at no cost at
+    // all. Two of nineteen encounter defs are lethal, so in practice a player could be killed by a wild boar
+    // or a greatcat and by nothing else in the game — not by an assassin, not by a legend.
+    //
+    // Now what happens next depends on WHO put you there and who was with you, and death — when it comes —
+    // enters the SAME ladder every figure in the valley is on (SNG-209), so a party can come after you.
+    const plan = incapacitationOutcome({
+      character, encounter: enc.def, aggressor: enc.def?.opponent || enc.opponent || {},
+      companions: activeCompanions(character, CONTENT.companions), rules: CONTENT.rules,
+    });
+    character.lastIncapacitation = { ...plan, day: character.clock?.day ?? null };
+    if (plan.gearTaken.length) {
+      const gone = new Set(plan.gearTaken);
+      character.inventory = (character.inventory || []).filter(i => !gone.has(i?.customName || i?.name));
+    }
+    if (plan.slain) {
+      // ⛔ NOT `character.dead`. That flag is the TERMINUS and belongs only to a SEALED death — while a death
+      // is retrievable the character is dead and STILL ON THE BOARD, which is the whole of SNG-209.
+      // ⚠️ THE WORLD DAY, NOT `character.clock.day`. `deathDepth` subtracts `diedDay` from whatever day it
+      // is handed, and the deepening pass runs on `absoluteWorldDay` — stamping this with the character's
+      // own story clock would compare two different clocks and produce a depth that means nothing. The same
+      // units trap as stepping a world harness by hours instead of days.
+      let deathDay = 0; try { deathDay = absoluteWorldDay(); } catch { deathDay = character.clock?.day ?? 0; }
+      enterDeathState(character, playerDeathState(plan, { worldDay: deathDay }));
+      character.health = 0;
+    } else {
+      character.health = Math.max(1, character.health);
+      character.energy = Math.max(5, character.energy);
+      character.clock = character.clock || { day: 1 };
+      character.clock.day = (character.clock.day || 1) + (plan.daysDown || 0);   // time passes while you are down
+    }
   }
   saveCharacter(character);
 }

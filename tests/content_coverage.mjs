@@ -45,6 +45,22 @@ const FIELDS = [
 
 console.log("CONTENT COVERAGE (SNG-301) — is it authored yet? A number with a date on it, not a memory.\n");
 
+// ⚠️ WHERE THE LOG IS, PRINTED WHERE THE AUTHOR WILL SEE IT. Aevi worked 35 entries behind the log without
+// anything telling her — she believed CCODE-121 was the head while it was at CCODE-156, which meant five
+// finished mechanics sat waiting on content she did not know was wanted. The coverage report is the one
+// command an author runs anyway, so it is the right place for "the log has moved". A number nobody has to
+// remember to check is the only kind that stays true.
+{
+  const { readFileSync } = await import("node:fs");
+  const { join, dirname } = await import("node:path");
+  const { fileURLToPath } = await import("node:url");
+  try {
+    const alert = readFileSync(join(dirname(fileURLToPath(import.meta.url)), "..", "po/ALERT.md"), "utf8");
+    const head = alert.match(/^## (CCODE-\d+)/m);
+    if (head) console.log(`  📋 po/ALERT.md is at ${head[1]} — if the last one you read is older, start at the top of that file.\n`);
+  } catch { /* the log is not required for a coverage run */ }
+}
+
 for (const g of FIELDS) {
   const pop = g.over();
   console.log(`  ${g.group} — ${pop.length} record(s)\n`);
@@ -67,7 +83,14 @@ for (const g of FIELDS) {
   for (const s of stages) for (const e of s.effects || []) kinds[e.kind] = (kinds[e.kind] || 0) + 1;
   console.log(`  Arc stage effects — ${withEffects.length}/${stages.length} stages carry effects`);
   console.log(`    by kind: ${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(" · ") || "(none)"}`);
-  console.log("    ⚠️ `priceShift` has NO consumer in the engine — see arceffects.js:EFFECT_CONSUMERS.\n");
+  // ⚠️ ASK THE REGISTER, DO NOT REPEAT WHAT IT SAID ONCE. This line used to hardcode "`priceShift` has NO
+  // consumer" — true when written, and false from SNG-302 onward. A report built to kill stale numbers spent
+  // days printing a stale claim about a mechanic I had built myself. Derived now, so it cannot drift again.
+  const { EFFECT_CONSUMERS } = await import("../engine/arceffects.js");
+  const inert = Object.keys(kinds).filter((k) => !EFFECT_CONSUMERS[k]);
+  console.log(inert.length
+    ? `    ⚠️ authored but INERT (no consumer in the engine): ${inert.join(", ")} — see arceffects.js:EFFECT_CONSUMERS\n`
+    : `    ✓ every authored effect kind has a consumer — see arceffects.js:EFFECT_CONSUMERS\n`);
 }
 
 // The economy: authored richly, but the second axis needs items to carry a goods category.

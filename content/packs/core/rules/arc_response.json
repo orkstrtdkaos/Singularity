@@ -4,7 +4,6 @@
   "kind": "rules",
   "note": "SNG-275 — THE WORLD-SIMULATION DIALS. Every number the offscreen world runs on, in one place, turnable without touching engine source.",
   "howToRead": "⚠️ THIS FILE DID NOT EXIST UNTIL 2026-08-04, and the engine had read `rules.arcResponse` for weeks. It was always undefined, so every dial below silently ran on its hardcoded fallback and NOBODY COULD TURN ANY OF THEM. CCode kept saying 'that's the dial, the number is Erik's call' about a block that was not there — a reader with no writer, which is the fourth door of the PromisedButUnread family and exactly what `promise_sweep` exists to catch. Every value here is set to the fallback it replaces, so authoring it changed NO behaviour; it only made the behaviour reachable.",
-
   "arcResponse": {
     "_section": "RESPONSIVENESS — how hard a figure pushes when an arc runs against them (CCODE-106).",
     "perPoint": 0.12,
@@ -13,17 +12,23 @@
     "_maxMult": "Nobody pushes infinitely hard, however badly it is going.",
     "minMult": 0.4,
     "_minMult": "…and a winning side never fully stops pushing.",
-
     "_section2": "ATTENTION — a figure is a budget, and every pass is a decision (CCODE-111/112, SNG-275).",
     "attentionBudget": 1,
     "_attentionBudget": "Fallback for a figure whose tier is not in the table below.",
-    "attentionByTier": { "mythic": 3, "legendary": 2, "epic": 1, "heroic": 0.5, "regional": 0.5, "notable": 0.5, "riffraff": 0.25 },
+    "attentionByTier": {
+      "mythic": 3,
+      "legendary": 2,
+      "epic": 1,
+      "heroic": 0.5,
+      "regional": 0.5,
+      "notable": 0.5,
+      "riffraff": 0.25
+    },
     "_attentionByTier": "Erik: 'a Legend can push a couple fronts — average is 2, an epic's average is 1, heroic could have .5 or so.' A fractional budget buys whole fronts first, then a partial share of one, so a heroic is present everywhere they choose and decisive nowhere. Four of them outweigh a legend, which is Erik's ganging-up falling out of the arithmetic. ⚠️ `regional` and `heroic` MUST both appear — they are the same rung under two names and a table carrying one silently drops 28 figures.",
     "personalShare": 0.4,
     "_personalShare": "SNG-275 (Erik): 'the Arcs don't necessarily consume all the attention for the NPCs — they probably spend a fair amount of time just living their lives.' The fraction held back for hobbies, interests, relationships, family. At 0 a person IS their position on the valley's five arguments; at 1 nobody tends them at all.",
     "crisisPull": 1.5,
     "_crisisPull": "…and the pull at which a figure spends their own life on a care anyway — they stop going home. Recorded as `neglectedLives`, never free. LOWER means more figures in crisis: at 1.5 a probe world-year had 20 of 67 neglecting their own lives, which may well be too many. This is the dial for that.",
-
     "_section3": "THE FIGHTING — who fights, who works, and what it costs (CCODE-113/115/117/118).",
     "directEngagementRate": 0.35,
     "_directEngagementRate": "The share of committed figures who seek a CONFRONTATION rather than quietly getting on with it. The most urgent go first. At 0 the valley argues and never comes to blows.",
@@ -31,15 +36,17 @@
     "_indirectPushMult": "What a worker's push is worth against a fighter's. Below 1 so that working is the safe, small, certain option — a won fight moves an arc more than a season of work; a lost one moves it less than doing nothing.",
     "casualtyRate": 0.15,
     "_casualtyRate": "Chance a decisive arc-fight reaches the injury model at all. At 0 the arcs are bloodless and nobody ever dies over them.",
-    "casualtyReachByGap": { "2": 4, "1": 2, "0": 1 },
+    "casualtyReachByGap": {
+      "2": 4,
+      "1": 2,
+      "0": 1
+    },
     "_casualtyReachByGap": "Erik: 'a legend might be able to kill 3-4 heros and 1-2 epics per battle.' How many of the losing side a victor can go through, by rank gap. Two rungs down reaches four; a peer reaches one.",
-
     "_section4": "THE QUIET WORK — strikes and the people who stand over the marked (SNG-270).",
     "strikeRate": 0.12,
     "_strikeRate": "Chance per pass that a side sends someone at the other side's most valuable WORKER. This is the only mechanic that reaches the population combat structurally cannot — heroics doing quiet work are the safest people in the valley without it.",
     "guardInterceptChance": 0.45,
     "_guardInterceptChance": "Chance a defender standing over the mark turns the strike aside. Standing still is its own cost: they are not pushing while they watch.",
-
     "_section5": "THE ROSTER — how the world refills what it loses (SNG-269).",
     "mintRate": 0.5,
     "_mintRate": "Chance a death produces each of its two possible figures — the one who survived it (riffraff) and the one who took the empty chair (notable). At 0 the roster only ever shrinks; a long-simulated world empties out.",
@@ -47,193 +54,266 @@
     "_mintCap": "A hard ceiling on minted figures so a runaway loop cannot flood the valley.",
     "vacancyStreakForMint": 8,
     "_vacancyStreakForMint": "Consecutive passes an arc must go COMPLETELY unheld before a local steps into it. ⚠️ Do not lower this far — a single-pass vacancy is not rare, and minting on it is a feedback loop that produced 140 figures against 6 deaths.",
-
     "_section6": "THE ROAD BACK — going after your own dead (SNG-270, on the SNG-209 death ladder).",
     "retrievalRate": 0.25,
     "_retrievalRate": "Chance per pass that someone who shared a care with the dead goes after them. They pay a FRONT to do it — the arc they would have held goes unheld. At 0 the dead simply sink until they seal and nobody ever comes.",
-    "retrievalOddsByDepth": { "0": 0.7, "1": 0.45, "2": 0.2, "3": 0 },
+    "retrievalOddsByDepth": {
+      "0": 0.7,
+      "1": 0.45,
+      "2": 0.2,
+      "3": 0
+    },
     "_retrievalOddsByDepth": "Odds of success at each rung of the death ladder: the threshold · the near dark · the deep dark · the sealed. Failing sinks them further, and a failed reach at the deep dark seals them for good — which is what makes leaving someone in the dark a real choice too. The sealed refuse every road; that entry should stay 0.",
     "retrievalCooldownDays": 30,
     "deedSpreadRate": 0.35,
     "_deedSpreadRate": "SNG-281: chance per pass that one of a figure's deeds is heard in one more community. Reach is capped by the deed's WEIGHT (1 stays local, 3 crosses regions) — magnitude, never merit: an atrocity travels exactly as far as a rescue of the same size.",
-    "_retrievalCooldownDays": "How long before anyone may reach for the same person again. The waiting is the most askable state there is: they cannot try again yet, and the clock is running."
+    "_retrievalCooldownDays": "How long before anyone may reach for the same person again. The waiting is the most askable state there is: they cannot try again yet, and the clock is running.",
+    "kindByTradition": {
+      "_note": "⚠️ SNG-307 (Aevi). CCode: '0 crusades in 910 strikes — kindByTradition is unauthored, so every strike in the valley is quiet.' That was mine and this is it. THE SPLIT IS METHOD, NOT MORALS: a quiet strike is DENIABLE and a crusade is DECLARED, and both kill the same person. Erik's directive holds — neither kind is the good one, and the crusading traditions are not the honourable half.",
+      "quiet": [
+        "umbral",
+        "veilwright",
+        "abyssal",
+        "ashwarden",
+        "unmaker",
+        "hourkeeper",
+        "cogitant",
+        "horizon"
+      ],
+      "crusade": [
+        "blazeborn",
+        "seraphic",
+        "verist",
+        "marcher",
+        "radiant",
+        "syllogist",
+        "stillhold",
+        "rootkin"
+      ],
+      "either": [
+        "somatic",
+        "mason",
+        "enginewright",
+        "lattice",
+        "churnfolk",
+        "threnodist",
+        "figurist",
+        "numinous",
+        "wright",
+        "valley_craft",
+        "precursor"
+      ],
+      "_reasoning": {
+        "quiet": "These traditions already conceal, erase, collect, or end without announcement. `the_never_there` leaves no trace; `the_perfect_erasure` is administrative; `the_collection` arrives on a schedule. A quiet strike is what their crafts already do.",
+        "crusade": "⚠️ THESE ARE THE DECLARERS, AND IT IS NOT A COMPLIMENT. `ascent` pronounces a judgment that binds whether or not it is right. `radiance` reveals in a wide area. A marcher's authority is built on what they can end, openly. STILLHOLD IS HERE DELIBERATELY: `the_quieting` is gated on a REFUSED TRUCE, which means it is announced by construction — a Stillhold strike is the most declared act in the game, and Erik's correction that they are not absent from the field is why they belong on this list at all.",
+        "either": "Traditions whose method does not settle the question. The engine should pick by the FIGURE, not the tradition: a figure whose `wantArcId` is under direct threat crusades; otherwise they go quiet. That keeps 11 of 27 traditions capable of both, which is what stops the two kinds becoming two factions."
+      },
+      "_expectedMix": "With these lists the striker pool should run roughly 55/45 quiet-to-crusade rather than 100/0. If crusades still land near zero, the fault is in kind selection rather than in the content, and `ws.strikeCoverage` will say so."
+    }
   },
-
   "mintedFigures": {
-        "_note": "SNG-297 (Aevi): pools for MINTED figures. ⛔ SAME RULE AS THE ENGINE'S — the generator must not INVENT A LIFE, so these are keyed on what the mint already KNOWS (the origin event, the tier) rather than authoring a person. A verb drawn from 'survived a casualty' is honest; a brother is not. Without these a minted figure carries one care, no want and no life while being fully promotable to mythic — so THE WORLD THINS AS IT AGES, the 66 authored figures dying at ~2.4/world-year and being replaced by thinner ones.",
-        "personalVerbsByOrigin": {
-            "casualty_survivor": [
-                "visiting where it happened",
-                "avoiding where it happened",
-                "asking after the ones who did not"
-            ],
-            "faction_leaderless": [
-                "holding a thing together that was not theirs to hold",
-                "waiting for someone who is not coming",
-                "learning what the old one knew"
-            ],
-            "vacancy_filled": [
-                "doing work nobody thanked them for",
-                "finding out why the seat was empty",
-                "staying longer than the last one"
-            ],
-            "arena_risen": [
-                "training where they can be seen",
-                "counting the wins",
-                "looking for a harder opponent"
-            ],
-            "player_ally": [
-                "waiting to be sent for",
-                "telling the story of what they saw",
-                "being changed by it"
-            ],
-            "_default": [
-                "making themselves useful",
-                "being somewhere they were not last season",
-                "keeping at it"
-            ]
-        },
-        "_secondCareRule": "⚠️ A MINTED FIGURE SHOULD GET A SECOND CARE, DERIVED NOT ROLLED: their primary is the arc that produced them; their SECOND is the arc most contested in their REGION, at `dir` opposing whoever killed the figure whose vacancy they filled. That is authored-from-circumstance rather than random, and it means minted figures inherit the local argument — which is how real successors work.",
-        "_wantArcIdRule": "the primary care, unless the second is the one their origin event names. A figure minted by a casualty on the storm WANTS the storm arc."
+    "_note": "SNG-297 (Aevi): pools for MINTED figures. ⛔ SAME RULE AS THE ENGINE'S — the generator must not INVENT A LIFE, so these are keyed on what the mint already KNOWS (the origin event, the tier) rather than authoring a person. A verb drawn from 'survived a casualty' is honest; a brother is not. Without these a minted figure carries one care, no want and no life while being fully promotable to mythic — so THE WORLD THINS AS IT AGES, the 66 authored figures dying at ~2.4/world-year and being replaced by thinner ones.",
+    "personalVerbsByOrigin": {
+      "casualty_survivor": [
+        "visiting where it happened",
+        "avoiding where it happened",
+        "asking after the ones who did not"
+      ],
+      "faction_leaderless": [
+        "holding a thing together that was not theirs to hold",
+        "waiting for someone who is not coming",
+        "learning what the old one knew"
+      ],
+      "vacancy_filled": [
+        "doing work nobody thanked them for",
+        "finding out why the seat was empty",
+        "staying longer than the last one"
+      ],
+      "arena_risen": [
+        "training where they can be seen",
+        "counting the wins",
+        "looking for a harder opponent"
+      ],
+      "player_ally": [
+        "waiting to be sent for",
+        "telling the story of what they saw",
+        "being changed by it"
+      ],
+      "_default": [
+        "making themselves useful",
+        "being somewhere they were not last season",
+        "keeping at it"
+      ]
     },
+    "_secondCareRule": "⚠️ A MINTED FIGURE SHOULD GET A SECOND CARE, DERIVED NOT ROLLED: their primary is the arc that produced them; their SECOND is the arc most contested in their REGION, at `dir` opposing whoever killed the figure whose vacancy they filled. That is authored-from-circumstance rather than random, and it means minted figures inherit the local argument — which is how real successors work.",
+    "_wantArcIdRule": "the primary care, unless the second is the one their origin event names. A figure minted by a casualty on the storm WANTS the storm arc."
+  },
   "careShift": {
-        "_note": "SNG-298 (Erik): \"I want NPCs to be able to grow and evolve too — their cares and wants might shift or they might gain new ones, especially if they are interacting with the player or get a strike attempted against them.\" Cares were fixed at authoring and never moved; everything else about a figure could change but not what they WANTED. ⛔ DIRECTIVE SNG-280: none of this encodes approval — a strike makes its target INVESTED, not virtuous, and a disliked player recruits opposition exactly as reliably as a liked one recruits allies.",
-        "maxCares": 4,
-        "_maxCares": "A figure cannot care about everything — the attention budget only means something while there is more to want than to give.",
-        "hardenBy": 1,
-        "_hardenBy": "How much an event over an arc they already hold deepens it.",
-        "maxCareWeight": 4,
-        "erodeBy": 1,
-        "erodeAfterPasses": 6,
-        "_erodeAfterPasses": "Passes of leaving a care untended before it starts to fade. Without erosion cares only ever accumulate and every figure ends up the same person. ⚠️ Erosion narrows a figure, it never empties one — a figure with no cares is invisible to `living` and drops out of the world."
-    },
+    "_note": "SNG-298 (Erik): \"I want NPCs to be able to grow and evolve too — their cares and wants might shift or they might gain new ones, especially if they are interacting with the player or get a strike attempted against them.\" Cares were fixed at authoring and never moved; everything else about a figure could change but not what they WANTED. ⛔ DIRECTIVE SNG-280: none of this encodes approval — a strike makes its target INVESTED, not virtuous, and a disliked player recruits opposition exactly as reliably as a liked one recruits allies.",
+    "maxCares": 4,
+    "_maxCares": "A figure cannot care about everything — the attention budget only means something while there is more to want than to give.",
+    "hardenBy": 1,
+    "_hardenBy": "How much an event over an arc they already hold deepens it.",
+    "maxCareWeight": 4,
+    "erodeBy": 1,
+    "erodeAfterPasses": 6,
+    "_erodeAfterPasses": "Passes of leaving a care untended before it starts to fade. Without erosion cares only ever accumulate and every figure ends up the same person. ⚠️ Erosion narrows a figure, it never empties one — a figure with no cares is invisible to `living` and drops out of the world."
+  },
   "engagement": {
-        "_note": "SNG-300 (Erik: \"we probably need to tweak who fights and how\"). `engageRate` was FLAT 0.35 for every figure alive, so THE WAR-ENDER and a stillhold peacemaker sought confrontation at exactly the same rate. This multiplies it per figure, by tradition.",
-        "_notAValueJudgement": "⛔ DIRECTIVE SNG-280: these describe METHOD, not merit. Marcher 1.8 and stillhold 0.15 are both complete ways of pursuing a want — stillhold's own crafts say so (`step_between` puts your unarmoured body between harm and someone else). A low number is not a nerf and a high one is not approval.",
-        "byTradition": {
-            "marcher": 1.8,
-            "abyssal": 1.5,
-            "unmaker": 1.4,
-            "blazeborn": 1.3,
-            "somatic": 1.3,
-            "seraphic": 1.3,
-            "ashwarden": 1.0,
-            "verist": 1.2,
-            "syllogist": 1.2,
-            "cogitant": 0.9,
-            "enginewright": 0.8,
-            "wright": 0.8,
-            "mason": 0.8,
-            "lattice": 0.9,
-            "figurist": 0.7,
-            "rootkin": 0.7,
-            "threnodist": 0.6,
-            "numinous": 0.4,
-            "veilwright": 0.4,
-            "umbral": 0.5,
-            "churnfolk": 0.6,
-            "horizon": 0.6,
-            "hourkeeper": 0.7,
-            "stillhold": 0.15
-        },
-        "bands": {
-            "seeks_it (1.8)": "confrontation IS their method — the fight is how they pursue the want",
-            "accepts_it (1.2)": "will fight when the want demands, without relish",
-            "default (1.0)": "unstated",
-            "avoids_it (0.5)": "fights only when cornered; the want is pursued another way",
-            "refuses_it (0.15)": "⚠️ NEVER seeks a confrontation. Their whole craft is that they do not."
-        },
-        "min": 0.05,
-        "max": 0.9,
-        "_min": "Nobody is guaranteed never to be drawn in, and nobody fights every single pass."
+    "_note": "SNG-300 (Erik: \"we probably need to tweak who fights and how\"). `engageRate` was FLAT 0.35 for every figure alive, so THE WAR-ENDER and a stillhold peacemaker sought confrontation at exactly the same rate. This multiplies it per figure, by tradition.",
+    "_notAValueJudgement": "⛔ DIRECTIVE SNG-280: these describe METHOD, not merit. Marcher 1.8 and stillhold 0.15 are both complete ways of pursuing a want — stillhold's own crafts say so (`step_between` puts your unarmoured body between harm and someone else). A low number is not a nerf and a high one is not approval.",
+    "byTradition": {
+      "marcher": 1.8,
+      "abyssal": 1.5,
+      "unmaker": 1.4,
+      "blazeborn": 1.3,
+      "somatic": 1.3,
+      "seraphic": 1.3,
+      "ashwarden": 1.0,
+      "verist": 1.2,
+      "syllogist": 1.2,
+      "cogitant": 0.9,
+      "enginewright": 0.8,
+      "wright": 0.8,
+      "mason": 0.8,
+      "lattice": 0.9,
+      "figurist": 0.7,
+      "rootkin": 0.7,
+      "threnodist": 0.6,
+      "numinous": 0.4,
+      "veilwright": 0.4,
+      "umbral": 0.5,
+      "churnfolk": 0.6,
+      "horizon": 0.6,
+      "hourkeeper": 0.7,
+      "stillhold": 0.15
     },
+    "bands": {
+      "seeks_it (1.8)": "confrontation IS their method — the fight is how they pursue the want",
+      "accepts_it (1.2)": "will fight when the want demands, without relish",
+      "default (1.0)": "unstated",
+      "avoids_it (0.5)": "fights only when cornered; the want is pursued another way",
+      "refuses_it (0.15)": "⚠️ NEVER seeks a confrontation. Their whole craft is that they do not."
+    },
+    "min": 0.05,
+    "max": 0.9,
+    "_min": "Nobody is guaranteed never to be drawn in, and nobody fights every single pass."
+  },
   "tierLadder": {
     "_section": "PROMOTION — tier as an EARNED position (SNG-269/2c). Erik: 'the ones that stay the longest are the true legends.'",
-    "deedWeights": { "arcContestWon": 3, "strikeLanded": 3, "strikeSurvived": 3, "guardIntercept": 3, "stageMoved": 3, "spreadPerHop": 2, "heldThroughCrisis": 1 },
+    "deedWeights": {
+      "arcContestWon": 3,
+      "strikeLanded": 3,
+      "strikeSurvived": 3,
+      "guardIntercept": 3,
+      "stageMoved": 3,
+      "spreadPerHop": 2,
+      "heldThroughCrisis": 1
+    },
     "_deedWeights": "⛔ DIRECTIVE SNG-280 — NO MORAL WEIGHTING. Everything CONTESTED AND WON scores the same, whichever direction it points: a Maw who levers three rivals rises exactly as fast as a guard who stops three knives. Aevi's first draft had guard 4 / strike-landed 2, justified as 'the behaviour most worth having'; Erik caught it as protection-over-aggression installed as physics, which would have locked the Maw, the Silencers and the Grave-Callers out of legendary. Weights reflect COST, DIFFICULTY, RISK and SCALE — never approval. heldThroughCrisis is 1 because it is not a contest, not because it is worth less. THE TEST for any change: would a tradition TAIL be disadvantaged?",
     "worldYearDays": 365,
     "_worldYearDays": "One world year. World time is real-time-derived (~1 world day per real hour), so a world year is roughly 365 hours of play.",
     "mythicPaths": [
-          {
-                "id": "the_unbeaten",
-                "name": "The Unbeaten",
-                "condition": {
-                      "deeds": 120,
-                      "maxLosses": 0
-                },
-                "whatItMeans": "Never brought down. The original condition, kept — but now as ONE road rather than the gate.",
-                "note": "Deed gate LOWERED from 170 to 120: an unbeaten run is short by nature, because a long one is impossible. The condition and the threshold now agree."
-          },
-          {
-                "id": "the_survivor",
-                "name": "The Survivor",
-                "condition": {
-                      "deeds": 200,
-                      "minLosses": 25,
-                      "deaths": 0
-                },
-                "whatItMeans": "⚠️ ERIK'S CASE, AND THE BEST ONE. Beaten again and again and never once killed. The battlescars ARE the qualification — this path REQUIRES a heavy loss count, so it cannot be reached by a careful figure.",
-                "note": "Note the inversion: `minLosses`, not max. The Survivor is the only rung in the game where a bad record is the credential."
-          },
-          {
-                "id": "the_returned",
-                "name": "The Returned",
-                "condition": {
-                      "deeds": 100,
-                      "retrievedFromDeath": 1
-                },
-                "whatItMeans": "Died, and came back up the ladder. Rare by construction — retrieval is uncommon and being retrieved AS a legend more so.",
-                "note": "⚠️ TIES THE DEATH LADDER TO THE TIER LADDER: the retrieval crafts and the sealed-quest now have a promotion consequence."
-          },
-          {
-                "id": "the_prolific",
-                "name": "The Prolific",
-                "condition": {
-                      "deeds": 320
-                },
-                "whatItMeans": "Sheer volume. No perfect record, no dramatic death — just more done than anyone else, for longer.",
-                "note": "The path most figures will actually take, and the least glamorous. It should exist for exactly that reason."
-          },
-          {
-                "id": "the_turner",
-                "name": "Who Turned It",
-                "condition": {
-                      "deeds": 90,
-                      "arcStagesMoved": 3
-                },
-                "whatItMeans": "Moved a great arc twice. The smallest deed count of any path, because moving a world-arc stage is the largest single thing a figure can do.",
-                "note": "Pairs with the generative title 'Who Turned {ARC}'."
-          },
-          {
-                "id": "the_feared",
-                "name": "The Feared",
-                "condition": {
-                      "deeds": 180,
-                      "negativeWeightShare": 0.6,
-                      "spread": 20
-                },
-                "whatItMeans": "⚠️ REQUIRED BY DIRECTIVE_SNG-280. Known widely for deeds the world recorded as harm. The Maw, the Silencers and the Sealers reach mythic by THIS road, and it is exactly as valid as the others.",
-                "note": "Without this path the top rung silently selects for virtue, which is the failure the directive exists to prevent. Its threshold sits BETWEEN the Unbeaten and the Prolific — neither a discount nor a penalty."
-          },
-          {
-                "id": "the_kept",
-                "name": "The Kept",
-                "condition": {
-                      "deeds": 150,
-                      "guardsHeld": 15,
-                      "protectedDeaths": 0
-                },
-                "whatItMeans": "Everyone they stood over is still alive. Fifteen guards held and not one loss behind them.",
-                "note": "The counterweight to the Feared, and deliberately the SAME order of difficulty. Neither is the 'real' mythic."
-          }
+      {
+        "id": "the_unbeaten",
+        "name": "The Unbeaten",
+        "condition": {
+          "deeds": 120,
+          "maxLosses": 0
+        },
+        "whatItMeans": "Never brought down. The original condition, kept — but now as ONE road rather than the gate.",
+        "note": "Deed gate LOWERED from 170 to 120: an unbeaten run is short by nature, because a long one is impossible. The condition and the threshold now agree."
+      },
+      {
+        "id": "the_survivor",
+        "name": "The Survivor",
+        "condition": {
+          "deeds": 200,
+          "minLosses": 25,
+          "deaths": 0
+        },
+        "whatItMeans": "⚠️ ERIK'S CASE, AND THE BEST ONE. Beaten again and again and never once killed. The battlescars ARE the qualification — this path REQUIRES a heavy loss count, so it cannot be reached by a careful figure.",
+        "note": "Note the inversion: `minLosses`, not max. The Survivor is the only rung in the game where a bad record is the credential."
+      },
+      {
+        "id": "the_returned",
+        "name": "The Returned",
+        "condition": {
+          "deeds": 100,
+          "retrievedFromDeath": 1
+        },
+        "whatItMeans": "Died, and came back up the ladder. Rare by construction — retrieval is uncommon and being retrieved AS a legend more so.",
+        "note": "⚠️ TIES THE DEATH LADDER TO THE TIER LADDER: the retrieval crafts and the sealed-quest now have a promotion consequence."
+      },
+      {
+        "id": "the_prolific",
+        "name": "The Prolific",
+        "condition": {
+          "deeds": 320
+        },
+        "whatItMeans": "Sheer volume. No perfect record, no dramatic death — just more done than anyone else, for longer.",
+        "note": "The path most figures will actually take, and the least glamorous. It should exist for exactly that reason."
+      },
+      {
+        "id": "the_turner",
+        "name": "Who Turned It",
+        "condition": {
+          "deeds": 90,
+          "arcStagesMoved": 3
+        },
+        "whatItMeans": "Moved a great arc twice. The smallest deed count of any path, because moving a world-arc stage is the largest single thing a figure can do.",
+        "note": "Pairs with the generative title 'Who Turned {ARC}'."
+      },
+      {
+        "id": "the_feared",
+        "name": "The Feared",
+        "condition": {
+          "deeds": 180,
+          "negativeWeightShare": 0.6,
+          "spread": 20
+        },
+        "whatItMeans": "⚠️ REQUIRED BY DIRECTIVE_SNG-280. Known widely for deeds the world recorded as harm. The Maw, the Silencers and the Sealers reach mythic by THIS road, and it is exactly as valid as the others.",
+        "note": "Without this path the top rung silently selects for virtue, which is the failure the directive exists to prevent. Its threshold sits BETWEEN the Unbeaten and the Prolific — neither a discount nor a penalty."
+      },
+      {
+        "id": "the_kept",
+        "name": "The Kept",
+        "condition": {
+          "deeds": 150,
+          "guardsHeld": 15,
+          "protectedDeaths": 0
+        },
+        "whatItMeans": "Everyone they stood over is still alive. Fifteen guards held and not one loss behind them.",
+        "note": "The counterweight to the Feared, and deliberately the SAME order of difficulty. Neither is the 'real' mythic."
+      }
     ],
     "_mythicPaths": "SNG-288 (Erik overturned the single condition): ANY ONE of these qualifies for mythic, and which one FIRED is recorded and said. `unbeaten` alone was not a high bar but an unsatisfiable one — at the measured 81% favourite win rate, forty contests without a loss is 0.02%. ⛔ DIRECTIVE SNG-280: THE FEARED exists so the top rung does not silently select for virtue, at the same order of difficulty as THE KEPT. ⚠️ These read a figure's CAREER, not their current rung — tenure deeds and losses reset on promotion, so THE SURVIVOR (a long bad record) would be unreachable if read per-rung.",
     "promotion": {
-      "riffraff":  { "to": "notable",   "years": 0.05, "deeds": 4 },
-      "notable":   { "to": "heroic",    "years": 0.10, "deeds": 10 },
-      "heroic":    { "to": "epic",      "years": 0.20, "deeds": 22 },
-      "epic":      { "to": "legendary", "years": 0.35, "deeds": 70 },
-      "legendary": { "to": "mythic",    "years": 0.60, "paths": true }
+      "riffraff": {
+        "to": "notable",
+        "years": 0.05,
+        "deeds": 4
+      },
+      "notable": {
+        "to": "heroic",
+        "years": 0.1,
+        "deeds": 10
+      },
+      "heroic": {
+        "to": "epic",
+        "years": 0.2,
+        "deeds": 22
+      },
+      "epic": {
+        "to": "legendary",
+        "years": 0.35,
+        "deeds": 70
+      },
+      "legendary": {
+        "to": "mythic",
+        "years": 0.6,
+        "paths": true
+      }
     },
     "_promotion": "Time at rung PLUS what that rung is about. A new rung restarts the clock — you do not carry tenure upward. `unbeaten` means a single loss at legendary bars the mythic step, which is why mythic is rare rather than merely slow. A figure minted at riffraff needs ~7.5 unbroken world-years to reach legendary."
   }

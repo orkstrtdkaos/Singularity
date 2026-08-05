@@ -1528,7 +1528,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A investigate action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about an hour Ranks: rank 2 deepens recallDepth+timeReach; rank 3 extends timeReach. Limit: open sky holds almost nothing."
+   "plainly": "A investigate action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about an hour Ranks: rank 2 deepens recallDepth+timeReach; rank 3 extends timeReach. Limit: open sky holds almost nothing.",
+   "upkeep": {
+    "prepHours": 8,
+    "prepCondition": "uninterrupted sleep",
+    "interruptible": true,
+    "onInterrupt": "recoverable next night"
+   }
   },
   {
    "schemaVersion": 1,
@@ -1700,7 +1706,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A create/investigate action that strengthens someone. Its strength is rated 8 out of 10, and lasts for about a day Limit: iT Costs Nearly All You Have."
+   "plainly": "A create/investigate action that strengthens someone. Its strength is rated 8 out of 10, and lasts for about a day Limit: iT Costs Nearly All You Have.",
+   "upkeep": {
+    "prepHours": 0,
+    "spendsAllEnergy": true,
+    "recoveryHours": 8,
+    "note": "costs the whole pool; unusable again until a full night"
+   }
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

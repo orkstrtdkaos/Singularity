@@ -1018,10 +1018,7 @@
    "plainly": "A social/investigate action that strengthens someone. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about an hour Ranks: rank 2 extends targets. Limit: iT Does Not Postpone Death — the gift is The Hour, not more hours.",
    "upkeep": {
     "prepHours": 0,
-    "cooldownHours": {
-     "all": 720
-    },
-    "note": "COOLDOWN ADDED: a capstone that ends a life should not be available twice in a month."
+    "note": "⚠️ COOLDOWN REMOVED (Erik), same reason. A rootkin T4 capstone that ends a life is limited by who can reach it and by what using it does to them — not by a calendar."
    }
   },
   {
@@ -1576,9 +1573,7 @@
    "plainly": "A fight action that deals damage. It rolls 5d6+6 It affects 1 target Limit: iT Costs Almost Everything You Have.",
    "upkeep": {
     "prepHours": 0,
-    "cooldownHours": {
-     "all": 720
-    }
+    "note": "⚠️ COOLDOWN REMOVED (Erik). It is a T5 ashwarden capstone — the difficulty of OBTAINING it is already the limit, and very few people in the world can use it at all. A weeks-long cooldown on top of that is a second gate behind a locked door. Its cost is what it costs the wielder, not a timer."
    }
   },
   {
@@ -2676,10 +2671,7 @@
      "2": 720,
      "3": 2880
     },
-    "cooldownHours": {
-     "3": 720
-    },
-    "note": "targetAge reach by rank, matching death.js. Cooldown on r3: a deep-dark reach is not a weekly act."
+    "note": "⚠️ COOLDOWN REMOVED. Retrieval is already gated hard — by depth, by the sealed being unreachable, and by a failed reach SINKING them. Stacking a timer on that punishes the thing the tradition exists to do."
    }
   },
   {

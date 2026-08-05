@@ -65,3 +65,28 @@ content must not ship without `plainly` from here on** — a check should enforc
 enforced *quality* is not possible.
 **CCODE: a ratchet on `plainly` presence for any craft touched after this date would stop the debt growing
 while it is being paid.**
+
+
+---
+
+## AMENDMENT 1 — IT APPLIES TO MY OWN WRITING, NOT ONLY TO AUTHORED CONTENT
+**Ratified same day, because I broke the directive within hours of writing it.**
+I specced an arc-standings table with a `how` column and labelled the rows **"by winning", "by holding", "by
+standing over", "by turning."** Erik: *"Standing over WHAT? Turning WHAT? Winning — I would guess you mean
+battle victories or duel wins."*
+**⚠️ THE ORIGINAL DIRECTIVE WAS SCOPED TOO NARROWLY. I wrote it about crafts, bounds and lore — CONTENT — and
+then produced jargon in a SPEC, which I had exempted without noticing.**
+### THE SHARPER RULE
+**A word is jargon when it means something to me because I have been using it all session, and nothing to
+anyone else.** These are the highest-risk sites, in order:
+1. **⚠️ UI LABELS AND COLUMN HEADERS — worst of all.** No room for context to rescue a bad word.
+2. **Spec section names and enum values** — they become code identifiers and then column headers.
+3. **My own summary prose to Erik.** If I would have to explain the phrase in the next sentence, it failed.
+### THE TEST
+**Read the phrase as if you have never seen this project.** *"By standing over"* — over **what**? *"By
+turning"* — turning **what**? If the phrase needs the previous six hours of conversation to parse, **it is not
+a label, it is a private note.**
+### AND THE TELL, SPECIFIC TO ME
+**I compress a mechanic I understand well into a short evocative phrase and mistake the compression for
+clarity.** *"By turning"* felt precise to me because I know it means *personally pushed an arc to a new
+stage.* **Compression is not concision. Concision is short AND complete.**

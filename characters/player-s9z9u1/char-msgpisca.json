@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 16,
+  "xp": 18,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -44,9 +44,9 @@
   "alignment": {},
   "attunement": 1,
   "maxHealth": 35,
-  "health": 35,
+  "health": 32,
   "maxEnergy": 100,
-  "energy": 76,
+  "energy": 61,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -78,12 +78,27 @@
       "pinned": true
     }
   ],
-  "deeds": [],
+  "deeds": [
+    {
+      "at": "2026-08-05T23:59:30.101Z",
+      "locationId": "the_thinning",
+      "communityId": "the.thinning",
+      "description": "Attempted to bridge the veil and speak with a being from the other side — an act of courage and foolishness in equal measure",
+      "tags": [
+        "risky",
+        "devote"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 1,
+      "worldDay": 36
+    }
+  ],
   "relationships": {},
   "chronicle": [],
-  "currentLocationId": "the_thinning",
+  "currentLocationId": "gen-object-object",
   "activeScene": {
-    "locationId": "the_thinning",
+    "locationId": "gen-object-object",
     "turns": [
       {
         "player": null,
@@ -109,137 +124,201 @@
         "player": "Hold the connection open — keep speaking, deepen the practice, make yourself a more stable bridge",
         "summary": "Splarf attempts to bridge the veil and speak with the figure, but the connection ruptures under the strain. The presence withdraws—pulled back through, leaving behind frustration and a sense of urgent unmet purpose.",
         "narration": "The story falters on your tongue.\n\nYou push deeper into the old words, trying to hold the thread of connection steady, but the practice that usually settles you into stillness begins to fray instead. The figure in the thin place leans forward—a movement too fluid, too many angles—and the veil SCREAMS. It is not a sound made of air; it is the boundary itself protesting, the hum becoming a shriek that drives needles through your temples.\n\nBoo hisses and vanishes into the shadows of the lean-to.\n\nYour voice cracks. The story breaks mid-phrase. The connection snaps like a rope under too much weight, and the figure is pulled backward—not away, but THROUGH, as if the veil has finally had enough and is dragging it home. For one terrible instant you see its face clearly: it is not looking at you with malice or hunger, but with something worse. Disappointment. An urgent need unfulfilled. The last thing you feel across the breaking thread is a single, clear emotion: *failure to deliver.*\n\nThen the veil slams shut. The waygate clearing goes silent. The hum drops to a low, resentful throb. The figure is gone—not fled, but yanked back to whatever side of the boundary it came from. The thin place feels emptier now. Angrier."
+      },
+      {
+        "player": "Step out into the waygate clearing itself and offer yourself as a more solid anchor for the figure to reach.",
+        "summary": "The figure was pulled back through the veil before the bridge could be completed; the thin place has closed in anger and will not yield again.",
+        "narration": "You stumble out of the lean-to into the harsh midday light, palms raised, trying to steady your breathing. The waygate clearing stretches before you — that strange open space where the veil thins to something almost negotiable. The humming is sharper here, angrier, the air itself seeming to vibrate at a frequency just beyond your teeth.\n\nYou open your mouth to call out, to offer yourself as bridge, as anchor, as anything that might hold — but the veil has already sealed itself shut. The thin place where the figure stood is now simply trees and grass and the low hum of an offended boundary. The presence that was reading the valley is gone. Pulled back through. Left incomplete.\n\nWhat remains is the silence after a scream — heavy, resentful, final. The waygate itself has dimmed, its usual soft luminescence muted to almost nothing. Boo emerges from the shadows of the lean-to behind you, placing itself deliberately between your legs — not comfort, but a clear statement: *enough*.\n\nYou are alone in the clearing. Whatever was sent to deliver something to this valley has failed, and the veil has made clear what it thinks of further attempts."
       }
     ],
     "lastTurn": {
-      "narration": "The story falters on your tongue.\n\nYou push deeper into the old words, trying to hold the thread of connection steady, but the practice that usually settles you into stillness begins to fray instead. The figure in the thin place leans forward—a movement too fluid, too many angles—and the veil SCREAMS. It is not a sound made of air; it is the boundary itself protesting, the hum becoming a shriek that drives needles through your temples.\n\nBoo hisses and vanishes into the shadows of the lean-to.\n\nYour voice cracks. The story breaks mid-phrase. The connection snaps like a rope under too much weight, and the figure is pulled backward—not away, but THROUGH, as if the veil has finally had enough and is dragging it home. For one terrible instant you see its face clearly: it is not looking at you with malice or hunger, but with something worse. Disappointment. An urgent need unfulfilled. The last thing you feel across the breaking thread is a single, clear emotion: *failure to deliver.*\n\nThen the veil slams shut. The waygate clearing goes silent. The hum drops to a low, resentful throb. The figure is gone—not fled, but yanked back to whatever side of the boundary it came from. The thin place feels emptier now. Angrier.",
-      "sceneSummary": "Splarf attempts to bridge the veil and speak with the figure, but the connection ruptures under the strain. The presence withdraws—pulled back through, leaving behind frustration and a sense of urgent unmet purpose.",
+      "narration": "You stumble out of the lean-to into the harsh midday light, palms raised, trying to steady your breathing. The waygate clearing stretches before you — that strange open space where the veil thins to something almost negotiable. The humming is sharper here, angrier, the air itself seeming to vibrate at a frequency just beyond your teeth.\n\nYou open your mouth to call out, to offer yourself as bridge, as anchor, as anything that might hold — but the veil has already sealed itself shut. The thin place where the figure stood is now simply trees and grass and the low hum of an offended boundary. The presence that was reading the valley is gone. Pulled back through. Left incomplete.\n\nWhat remains is the silence after a scream — heavy, resentful, final. The waygate itself has dimmed, its usual soft luminescence muted to almost nothing. Boo emerges from the shadows of the lean-to behind you, placing itself deliberately between your legs — not comfort, but a clear statement: *enough*.\n\nYou are alone in the clearing. Whatever was sent to deliver something to this valley has failed, and the veil has made clear what it thinks of further attempts.",
+      "sceneSummary": "The figure was pulled back through the veil before the bridge could be completed; the thin place has closed in anger and will not yield again.",
       "choices": [
         {
-          "label": "Wait here in the lean-to and watch the veil, watching for what comes next.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "⚔ Face A Pale Reader",
+          "encounterId": "gm-a-pale-reader",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+            "risky",
+            "commit"
+          ]
         },
         {
-          "label": "Step out into the waygate clearing itself and offer yourself as a more solid anchor for the figure to reach.",
+          "label": "Find someone in the settlement who remembers the last time the veil opened like this — ask them what came through before, and what it wanted",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "risky",
-            "devote"
+            "scout",
+            "study"
+          ],
+          "abilityId": "storykeeper",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Sit with the closed veil and use Numen-Sense again — try to read what the opening left behind, the scar of it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
           ],
           "abilityId": "numen_sense",
           "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Leave the shelter and walk into the settlement proper. Someone here will know what that presence was—or why it pulled back.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Search the clearing and the lean-to carefully for anything the figure might have dropped or left behind — a mark, an object, any trace of what it was trying to deliver",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 12,
           "intentTags": [
             "scout",
-            "plan"
+            "search"
           ],
-          "abilityId": "storykeeper",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         },
         {
-          "label": "Sit with what just happened. Use The Unbroken Practice to steady yourself and think clearly about what that emotion—failure—meant.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Walk back into the settlement proper and find where the news is gathered — the healer's house, the wayhouse, the place where people trade what they've heard about the Water Crisis and what's waking beneath",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {},
-          "difficulty": 10,
+          "difficulty": 0,
           "intentTags": [
-            "careful",
-            "devote"
+            "travel",
+            "scout"
           ],
-          "abilityId": "the_unbroken_practice",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Attempted to bridge the veil and speak with a being from the other side — an act of courage and foolishness in equal measure",
+          "tags": [
+            "risky",
+            "devote"
+          ],
+          "weight": 1,
+          "communityId": "the.thinning"
+        }
+      ],
       "characterDeltas": {
-        "health": 0,
-        "energy": -3,
+        "health": -3,
+        "energy": -12,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
+      "ledgerEvents": [
+        {
+          "what": "The veil at The Thinning sealed itself in anger after a failed bridge-attempt; it will not open to further crossing for some time",
+          "tags": [
+            "world-state",
+            "barrier",
+            "failure"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": false
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-document-and-the-ditch",
+          "title": "The Document and the Ditch",
+          "summary": "Find the filing that erased Crestfall Notch from the map",
+          "giver": "Hoss (the mending woman who raised you)",
+          "note": "You are at The Thinning, a place of thin records and displaced knowledge — exactly the kind of place where a document like that might surface. But first, something on the other side of the veil tried to reach the valley, and the veil sealed before you could learn what it was trying to deliver. The answer might be connected.",
+          "xpReward": 0
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
+      "adoptSchool": {},
       "offer": {
-        "thing": "The sharp, aching certainty that whatever came through the veil came to DELIVER something, not to take — and you interrupted it mid-act.",
-        "from": "the figure's emotion bleeding through the connection as it broke — not hunger or malice, but a thing sent to do work, and the work undone"
+        "thing": "A pale reader approaches the settlement — a figure from the margins of the Lattice-Cities, moving with the eerie precision of order-craft trained",
+        "from": "The world's greater arc: The Poles Pull — each Reach leaning harder into its own extreme; travelers notice the edges getting sharper. Something ordered is moving. This is the soft pressure of that drift made concrete."
       },
       "stageOps": [],
       "scene": {
-        "setting": "The lean-to shelter at the edge of The Thinning settlement, midday now, light still bent and strange. The waygate clearing visible through the open doorway. The veil hums low and discordant, angrier than before. The thin place stands empty.",
+        "setting": "The waygate clearing at The Thinning, midday in early spring. The thin place is sealed shut now, the veil dark and resentful. The hum is low and angry. Light is harsh and ordinary, the strange bent quality of the air faded.",
         "npcsPresent": [],
         "objects": [
-          "Your bedroll",
-          "Traveler's Pack",
-          "Waterskin",
-          "your chisel for stone-carving"
+          "The waygate (dimmed, its luminescence muted)",
+          "Your bedroll and Traveler's Pack in the lean-to behind you",
+          "Your chisel for stone-carving",
+          "Waterskin (boiled, worth more every week the river runs gray)"
         ],
         "threads": [
-          "What the figure was sent to deliver",
-          "Why the veil is opening wider",
-          "Where Boo went",
-          "Whether the figure can come back"
+          "What was the figure sent to deliver?",
+          "Why did the veil open, and why did it seal so violently?",
+          "Where did Boo go when the veil screamed, and what did it sense?"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "boo",
+          "name": "Boo",
+          "role": "Companion — an Umbral-touched thing of the deep dark that finds you interesting",
+          "gender": "they/it (no gender as such)",
+          "pronouns": "they/them or it/its",
+          "note": "Hissed and vanished into shadows when the veil screamed; has returned and placed itself deliberately between your legs in the clearing — not comfort, but a clear statement of *enough*. Boo's boundaries are being respected: it will not be pushed further toward the thin places or toward light.",
+          "learned": [
+            "The veil-scream carried something Boo recognizes and rejects — a presence it does not trust"
+          ],
+          "skillsObserved": [
+            "Reading danger in the dark; knowing when to withdraw"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Present with Splarf, withdrawn but loyal; has set a boundary against further veil-work"
+        }
+      ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The figure that came through the veil reads as a SENT THING—tasked with delivery of something specific to the valley. Its retreat was not flight but compulsion: it was pulled back through the boundary before its work was done, and the emotion it carried was failure, not triumph. The urgency of its purpose was unmistakable.",
+          "text": "The veil at The Thinning has sealed itself in anger after Splarf's failed attempt to bridge it and speak with the figure. It will not yield to further crossing or communication for some time. The thin place is closed.",
+          "subjectId": "the.thinning"
+        },
+        {
+          "op": "add",
+          "text": "The figure that came through the veil was pulled back through the boundary before it could complete its delivery. Its withdrawal was compulsive, not chosen — the veil itself forced it back. The work remains undone, and the failure carries weight on the other side.",
           "subjectId": null
         }
       ],
       "placeUpdates": [
         {
-          "note": "The veil has become angry and more tightly shut after the attempted bridge-crossing. The hum is lower, resentful. The thin place feels emptier.",
+          "note": "The veil is now sealed and angry, refusing further crossing. The thin place reads as closed and resentful. The waygate's luminescence has dimmed — it will not open for travel until the anger fades.",
           "flag": {
-            "veilState": "angered",
-            "presencePulledBack": true
+            "veilState": "sealed_angry",
+            "presenceWithdrawn": true,
+            "bridgeAttemptFailed": true
           }
         }
       ],
-      "discovery": null,
       "codexUpdates": [
         {
           "topic": "the-figure-in-the-thin-place",
           "label": "The Figure in the Thin Place",
           "kind": "mystery",
           "entityId": null,
-          "fact": "The figure is a SENT THING—tasked, purposeful, aware. It came to DELIVER, not to take or harm. When the connection broke, it was pulled back through the veil by force, not by choice. Its final emotion across the breaking thread was failure: the work undone, the delivery not completed. Whatever it came to give the valley remains undelivered.",
+          "fact": "The figure was pulled back through the veil by force before it could deliver what it was sent to deliver. The veil sealed itself in anger, rejecting the bridge Splarf attempted to hold. The failure carries weight — the work remains undone on the other side.",
           "links": [
             "what-wakes-beneath",
             "the-thinning",
@@ -247,52 +326,71 @@
           ]
         }
       ],
-      "generateRequest": [],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "a pale reader of the Lattice-Cities, moving toward The Thinning with the precision of order-craft trained",
+          "why": "The world's arc of The Poles Pull is bending toward order; something from the mechanical/structured end is entering play, drawn by the thickening significance-density at The Thinning"
+        }
+      ],
       "encounterOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 1,
-        "why": "the attempt to bridge, the veil's resistance, the figure's retreat — a charged and draining moment"
+      "newEncounter": {
+        "type": "duel",
+        "name": "A Pale Reader",
+        "setup": "A figure approaches the waygate clearing from the settlement proper — tall, angular, moving with the eerie precision of lattice-trained discipline. Its skin reads as almost translucent, and its eyes track your position with geometric accuracy. It does not draw a weapon. It does not seem to need to.",
+        "lethal": false,
+        "opponent": {
+          "name": "A Pale Reader",
+          "health": 5,
+          "threat": 28,
+          "yieldAt": 2,
+          "fleeDifficulty": 18,
+          "tacticTags": [
+            "precise",
+            "relentless",
+            "ordered"
+          ]
+        }
       },
-      "moveTo": null,
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
+      "timeOps": {},
+      "moveTo": {},
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
+      "deriveItem": {},
+      "imagePrompt": "The moment the veil sealed: light fracturing through the boundary as it snaps shut, the figure's silhouette pulled backward into the other side, and Splarf standing alone in the clearing with hands still raised, the waygate's glow dying to ember-red.",
+      "newAbility": {},
+      "gambitOps": {},
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
+      "markDefiningMoment": {},
+      "markTeacher": {},
+      "offerPromotion": {},
+      "offerAcquisition": {},
+      "offerIntent": {},
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The lean-to shelter at the edge of The Thinning settlement, midday now, light still bent and strange. The waygate clearing visible through the open doorway. The veil hums low and discordant, angrier than before. The thin place stands empty.",
+      "setting": "The waygate clearing at The Thinning, midday in early spring. The thin place is sealed shut now, the veil dark and resentful. The hum is low and angry. Light is harsh and ordinary, the strange bent quality of the air faded.",
       "npcsPresent": [],
       "objects": [
-        "Your bedroll",
-        "Traveler's Pack",
-        "Waterskin",
-        "your chisel for stone-carving"
+        "The waygate (dimmed, its luminescence muted)",
+        "Your bedroll and Traveler's Pack in the lean-to behind you",
+        "Your chisel for stone-carving",
+        "Waterskin (boiled, worth more every week the river runs gray)"
       ],
       "threads": [
-        "What the figure was sent to deliver",
-        "Why the veil is opening wider",
-        "Where Boo went",
-        "Whether the figure can come back"
+        "What was the figure sent to deliver?",
+        "Why did the veil open, and why did it seal so violently?",
+        "Where did Boo go when the veil screamed, and what did it sense?"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 13,
+    "hour": 14,
     "realAnchor": null
   },
   "companions": [
@@ -414,7 +512,9 @@
       ],
       "stageIndex": 0,
       "completedStages": [],
-      "progress": [],
+      "progress": [
+        "You are at The Thinning, a place of thin records and displaced knowledge — exactly the kind of place where a document like that might surface. But first, something on the other side of the veil tried to reach the valley, and the veil sealed before you could learn what it was trying to deliver. The answer might be connected."
+      ],
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
       "startedWorldDay": 36
@@ -426,16 +526,25 @@
       "visits": 1,
       "notes": [
         "[d1] The veil here is actively thin and opening — a figure partially-real stands in the thin place, reading the settlement. The humming tone persists.",
-        "[d1] The veil has become angry and more tightly shut after the attempted bridge-crossing. The hum is lower, resentful. The thin place feels emptier."
+        "[d1] The veil has become angry and more tightly shut after the attempted bridge-crossing. The hum is lower, resentful. The thin place feels emptier.",
+        "[d1] The veil is now sealed and angry, refusing further crossing. The thin place reads as closed and resentful. The waygate's luminescence has dimmed — it will not open for travel until the anger fades."
       ],
       "flags": {
-        "veilState": "angered",
+        "veilState": "sealed_angry",
         "presenceDetected": true,
-        "presencePulledBack": true
+        "presencePulledBack": true,
+        "presenceWithdrawn": true
       },
       "vectorsKnown": [
         "mechanical_spiritual"
       ]
+    },
+    "gen-object-object": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 1,
+      "vectorsKnown": []
     }
   },
   "worldState": {
@@ -527,6 +636,10 @@
       {
         "thing": "The sharp, aching certainty that whatever came through the veil came to DELIVER something, not to take — and you interrupted it mid-act.",
         "from": "the figure's emotion bleeding through the connection as it broke — not hunger or malice, but a thing sent to do work, and the work undone"
+      },
+      {
+        "thing": "A pale reader approaches the settlement — a figure from the margins of the Lattice-Cities, moving with the eerie precision of order-craft…",
+        "from": "The world's greater arc: The Poles Pull — each Reach leaning harder into its own extreme; travelers notice the edges getting sharper…"
       }
     ]
   },
@@ -613,7 +726,8 @@
           "[d1] A figure that is half-real, wrongly-jointed, with a face that reveals layers — stepped through the veil at The Thinning. It reads the valley with focused attention. The veil is not just thin here; it is actively opening, and whatever this is, it came THROUGH.",
           "[d1] The presence reads as profound PURPOSE — not malice, but a thing sent, a thing tasked. It is aware of being sensed and tracks Splarf's attention. The veil sings around it because it is not OF this side. Whatever is pulling the veil open, it is not the Numinous.",
           "[d1] The figure is aware and trying to ANSWER across the veil — it understands speech, recognizes the old language, and attempted to reply in kind. The gulf between the sides is too wide for full communication; the veil strains when it tries. Its effort costs it something — a flicker, a pulling-back.",
-          "[d1] The figure is a SENT THING—tasked, purposeful, aware. It came to DELIVER, not to take or harm. When the connection broke, it was pulled back through the veil by force, not by choice. Its final emotion across the breaking thread was failure: the work undone, the delivery not completed. Whatever it…"
+          "[d1] The figure is a SENT THING—tasked, purposeful, aware. It came to DELIVER, not to take or harm. When the connection broke, it was pulled back through the veil by force, not by choice. Its final emotion across the breaking thread was failure: the work undone, the delivery not completed. Whatever it…",
+          "[d1] The figure was pulled back through the veil by force before it could deliver what it was sent to deliver. The veil sealed itself in anger, rejecting the bridge Splarf attempted to hold. The failure carries weight — the work remains undone on the other side."
         ],
         "links": [
           "what-wakes-beneath",
@@ -623,22 +737,36 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "gen-object-object": {
+        "id": "gen-object-object",
+        "label": "[Object Object]",
+        "kind": "place",
+        "facts": [
+          "[d1] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "gen-object-object",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "stealth": 11.747942578124999,
-    "strategic": 0.9268593749999999,
-    "cautious": 2.852484375,
-    "cerebral": 1.9256250000000001,
-    "patient": 1,
-    "devotion": 1
+    "stealth": 11.454244013671874,
+    "strategic": 0.9036878906249999,
+    "cautious": 2.781172265625,
+    "cerebral": 1.877484375,
+    "patient": 0.975,
+    "devotion": 1.975,
+    "risky": 1
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 4,
+  "actionCount": 5,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -686,6 +814,14 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "location",
+      "prompt": "[Object Object]",
+      "url": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true",
+      "caption": "[Object Object]",
+      "worldDay": 36,
+      "at": "2026-08-05T23:59:30.112Z"
+    },
     {
       "kind": "moment",
       "prompt": "A figure that is not quite solid stands in the space between trees at dawn — shape human but wrong, too many joints, face that shifts when looked at. Light bends around it. Behind, through the trees, ",
@@ -860,12 +996,51 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785974273995,
-  "rev": 22,
+  "updatedAt": 1785974370112,
+  "rev": 23,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
-    "location": {},
+    "location": {
+      "gen-object-object": {
+        "id": "gen-object-object",
+        "name": "[Object Object]",
+        "regionId": "the_numinous_reach",
+        "descriptionSeed": "A place the road led to — [Object Object]. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "the_thinning"
+        ],
+        "_mintedAs": "transit",
+        "dangerLevel": 3,
+        "_gen": {
+          "type": "location",
+          "tier": "fresh",
+          "engagementScore": 2,
+          "birthWeight": 1,
+          "rating": null,
+          "attentionHistory": [
+            {
+              "kind": "revisit",
+              "day": 1
+            }
+          ],
+          "createdDay": 1,
+          "provenance": {
+            "locationId": "the_thinning",
+            "day": null,
+            "hint": "transit"
+          },
+          "lastAttentionDay": 1
+        },
+        "map": {
+          "x": 413.2969295284196,
+          "y": 40
+        }
+      }
+    },
     "arc": {},
     "creature": {},
     "item": {}
@@ -873,7 +1048,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 5
+    "the_numinous_reach": 6
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -881,10 +1056,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-05T23:57:53.985Z",
+      "lastAt": "2026-08-05T23:59:30.095Z",
       "startDay": 36,
       "endDay": 36,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [
@@ -899,37 +1074,55 @@
       "text": "The figure that came through the veil reads as a SENT THING—tasked with delivery of something specific to the valley. Its retreat was not flight but compulsion: it was pulled back through the boundary before its work was done, and the emotion it carried was failure, not triumph. The urgency of its…",
       "day": 1,
       "subjectId": null
+    },
+    {
+      "id": "the.thinning",
+      "text": "The veil at The Thinning has sealed itself in anger after Splarf's failed attempt to bridge it and speak with the figure. It will not yield to further crossing or communication for some time. The thin place is closed.",
+      "day": 1,
+      "subjectId": "the.thinning"
+    },
+    {
+      "id": "f4",
+      "text": "The figure that came through the veil was pulled back through the boundary before it could complete its delivery. Its withdrawal was compulsive, not chosen — the veil itself forced it back. The work remains undone, and the failure carries weight on the other side.",
+      "day": 1,
+      "subjectId": null
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 3,
+      "applied": 4,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 5,
-    "scene": 5,
-    "choices": 5,
-    "offer": 3,
-    "codexUpdates": 5,
-    "imagePrompt": 3,
-    "gambitApt": 4,
-    "sceneEnded": 5,
-    "characterDeltas": 4,
+    "sceneSummary": 6,
+    "scene": 6,
+    "choices": 6,
+    "offer": 4,
+    "codexUpdates": 6,
+    "imagePrompt": 4,
+    "gambitApt": 5,
+    "sceneEnded": 6,
+    "characterDeltas": 5,
     "arcOps": 1,
-    "factUpdates": 2,
-    "placeUpdates": 2,
-    "timeOps": 1
+    "factUpdates": 3,
+    "placeUpdates": 3,
+    "timeOps": 1,
+    "deeds": 1,
+    "ledgerEvents": 1,
+    "questUpdates": 1,
+    "npcUpdates": 1,
+    "generateRequest": 1,
+    "newEncounter": 1
   },
-  "_opTurns": 5,
+  "_opTurns": 6,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "beastfriend": 1,
-      "numen_sense": 1,
+      "numen_sense": 2,
       "storykeeper": 1,
       "the_unbroken_practice": 1
     },
@@ -955,7 +1148,7 @@
   },
   "customAbilities": {},
   "companionBonds": {
-    "hush": 0.25
+    "hush": 0.75
   },
   "teachers": {},
   "foreclosed": [
@@ -968,5 +1161,42 @@
     "hash": "d0|b|c|q|L1|The family that took Splarf in after his parents",
     "text": "You have become the kind of person who keeps a question like a stone in the pocket — worn smooth from handling, never set down. When the tone-guild's claim took the Notch lease two winters ago, you stood in the doorway and watched Hoss load everything she and her father owned into a single cart, and she never looked back, and you have not stopped looking since. The specific document. The specific clerk. The specific signature that made a family erasable. You are barely known to the Numinous, a stranger to everyone else, carrying nothing of consequence yet — only that question, and the particular grief of someone who lost his first parents and then, very quietly, lost his second ones too.",
     "at": "2026-08-05T23:27:57.338Z"
+  },
+  "companionMemory": {
+    "hush": [
+      {
+        "text": "Attempted to bridge the veil and speak with a being from the other side — an act of courage and foolishness in equal measure",
+        "weight": 1,
+        "day": 1
+      }
+    ]
+  },
+  "customEncounters": {
+    "gm-a-pale-reader": {
+      "schemaVersion": 1,
+      "id": "gm-a-pale-reader",
+      "type": "duel",
+      "name": "A Pale Reader",
+      "setup": "A figure approaches the waygate clearing from the settlement proper — tall, angular, moving with the eerie precision of lattice-trained discipline. Its skin reads as almost translucent, and its eyes track your position with geometric accuracy. It does not draw a weapon. It does not seem to need to.",
+      "lethal": false,
+      "opponent": {
+        "name": "A Pale Reader",
+        "health": 5,
+        "threat": 28,
+        "yieldAt": 2,
+        "fleeDifficulty": 18,
+        "tacticTags": [
+          "precise",
+          "relentless",
+          "ordered"
+        ]
+      }
+    }
+  },
+  "knownPlaces": [
+    "gen-object-object"
+  ],
+  "locationImages": {
+    "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   }
 }

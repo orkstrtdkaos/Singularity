@@ -110,6 +110,41 @@
       },
       "_expectedMix": "With these lists the striker pool should run roughly 55/45 quiet-to-crusade rather than 100/0. If crusades still land near zero, the fault is in kind selection rather than in the content, and `ws.strikeCoverage` will say so.",
       "_supersededBy": "rules.strikes.kindByTradition — canonical. This copy is kept only for existing readers."
+    },
+    "strikes": {
+      "_note": "⚠️ SNG-319 (Aevi's call, CCode flagged it). `resolutionMode: removal` and a separate `strikes` disposition were THE SAME BEHAVIOUR under two names — removal IS striking. Two dials for one thing is how a mechanic ends up half-wired to each, so they are collapsed here. WHICH NAME SURVIVES: `strikes`, because it names the ACT and `removal` named a category; and because kindByTradition already sits beside it, so one block now answers both 'how often do they strike' and 'when they do, is it quiet or declared'. `resolutionMode` keeps its other four values and loses `removal` — a tradition that removes people is a tradition that strikes, and it is read from here.",
+      "byTradition": {
+        "umbral": 1.6,
+        "veilwright": 1.5,
+        "abyssal": 1.4,
+        "ashwarden": 1.0,
+        "unmaker": 1.2,
+        "hourkeeper": 0.9,
+        "cogitant": 0.7,
+        "horizon": 0.8,
+        "precursor": 0.9,
+        "marcher": 1.3,
+        "blazeborn": 1.2,
+        "seraphic": 1.1,
+        "verist": 0.9,
+        "syllogist": 0.6,
+        "stillhold": 0.8,
+        "rootkin": 0.7,
+        "radiant": 0.5,
+        "somatic": 1.0,
+        "mason": 0.6,
+        "enginewright": 0.7,
+        "lattice": 0.8,
+        "churnfolk": 0.9,
+        "threnodist": 0.5,
+        "figurist": 0.6,
+        "wright": 0.5,
+        "valley_craft": 0.8,
+        "numinous": 0.4,
+        "harmonic": 0.5
+      },
+      "_reasoning": "The rate is HOW READILY A TRADITION REACHES FOR REMOVAL AS AN ANSWER, not how violent they are and not how much I approve of them. Per DIRECTIVE_SNG-280 it derives from method: umbral and veilwright top the list because removal is what their crafts DO — the_stopped_breath and the_perfect_erasure are both removals — while numinous is lowest because attention has no removal in it at all. ⚠️ STILLHOLD SITS AT 0.8, MID-LOW RATHER THAN BOTTOM: the_quieting is a removal and they teach it, they just require a refused truce first, which lowers the RATE without denying the ACT. That is Erik's correction held: not absent from the field, just slower to reach.",
+      "_replacesResolutionModeRemoval": true
     }
   },
   "mintedFigures": {

@@ -1898,6 +1898,96 @@
      "class": "hard"
     }
    ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_reduction",
+   "name": "The Reduction",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_concrete_abstract",
+   "tradition": "mason",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.8
+   },
+   "functions": [
+    "reveal",
+    "break"
+   ],
+   "narrationHints": "They take it apart in front of them, honestly, piece by piece, until nothing is left that was worth standing up for.",
+   "description": "⚠️ THE LEVELLERS' CRAFT. A Mason reduces the abstract to what can be touched. Turned on a person it takes their faith, their vow, their grief, their reason for the last twenty years, and shows them the physical basis of each — accurately. What is left is a person in a world where nothing means anything, and some do not go on in it.",
+   "notFor": "Anyone whose footing is ALREADY physical — a stonecutter who believes in stone cannot be reduced further. And it is HONEST: every reduction must be true, which is why it works and why it cannot be aimed at a lie.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Reduction",
+     "grants": "Reduce one thing they live by to its physical basis, truthfully. It does not come back the same.",
+     "cannot": "Reducing something already concrete. Lying.",
+     "functions": [
+      "reveal",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "Nothing Left Standing",
+     "grants": "Reduce all of it. They are intact, correct about everything, and have nothing left worth standing up for.",
+     "cannot": "Restoring it. Nobody has ever restored it.",
+     "functions": [
+      "reveal",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "hobble",
+   "operativeAxis": [
+    "reduction",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 720,
+    "targets": 1,
+    "note": "⚠️ A HOBBLE WHOSE LETHALITY IS THE ABSENCE OF A REASON TO CONTINUE. Never a damage roll; slow, uncertain, and gated on the target having had something abstract to lose."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "SPECIAL: all of it — intact, correct, nothing left worth standing up for",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "reduce one thing — they argue, and they keep the rest",
+    "surge": "all of it; NOBODY HAS EVER RESTORED IT"
+   },
+   "bounds": [
+    {
+     "text": "EVERY REDUCTION MUST BE TRUE — it cannot be aimed at a lie",
+     "class": "hard"
+    },
+    {
+     "text": "SOMEONE ALREADY STANDING ON THE PHYSICAL CANNOT BE REDUCED FURTHER",
+     "class": "hard"
+    },
+    {
+     "text": "IT DOES NOT COME BACK. NOBODY HAS EVER RESTORED IT",
+     "class": "cost"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

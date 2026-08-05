@@ -122,7 +122,15 @@
           "class": "hard"
         }
       ],
-      "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 extends timeReach+travelSpeed; rank 3 adds to special. Limit: nO Effect IN True Whiteout; cannot track flyers."
+      "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 extends timeReach+travelSpeed; rank 3 adds to special. Limit: nO Effect IN True Whiteout; cannot track flyers.",
+      "upkeep": {
+        "trailAgeHoursMax": 24,
+        "byRank": {
+          "1": 24,
+          "2": 72,
+          "3": 168
+        }
+      }
     },
     {
       "id": "greenlore",
@@ -1209,7 +1217,12 @@
           "class": "cost"
         }
       ],
-      "plainly": "A survive action that strengthens someone. Its strength is rated 2 out of 10 It affects 6 targets, and lasts for about 8 hours Ranks: rank 2 deepens restoration; rank 3 adds to persistence. Limit: needs AN Evening And Minimal Materials; no benefit in a hostile place."
+      "plainly": "A survive action that strengthens someone. Its strength is rated 2 out of 10 It affects 6 targets, and lasts for about 8 hours Ranks: rank 2 deepens restoration; rank 3 adds to persistence. Limit: needs AN Evening And Minimal Materials; no benefit in a hostile place.",
+      "upkeep": {
+        "prepHours": 72,
+        "prepCondition": "same camp three nights",
+        "yields": "the camp becomes a named place"
+      }
     },
     {
       "id": "keen_appraisal",

@@ -651,7 +651,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A radiant working that stores light in vessels for later release. It fills from any light source, fastest in direct noon sun and slowest by lantern, so it is always gaining something. Another radiant can aim a light craft at the vessels to convert their own energy into charge at half an hour per point, up to a day's worth per scene. While worn, it also drinks light-type damage aimed at you instead of letting it land, turning that harm into charge as well — but only light: shadow, edges and everything else pass straight through.",
+   "plainly": "A radiant working that stores light in vessels for later release. It fills from any light source, fastest in direct noon sun and slowest by lantern, so it is always gaining something. Another radiant can aim a light craft at the vessels to convert their own energy into charge. While worn it also drinks light-type damage aimed at you and turns it into charge — only light; shadow and edges pass through. It holds up to its rank's capacity. Past that you get about two hours of warning, and then it bursts for 6d6 light damage on everyone who can see it, blinding them for the scene and destroying the vessel — cover blocks it, since it travels by sight. You can instead tap and channel the excess as a released working of your own aiming; failing that check vents half and you take the rest. A charged vessel can be carried off by someone else.",
    "upkeep": {
     "prepHoursByRank": {
      "1": 8,
@@ -684,7 +684,42 @@
      "capPerScene": 12,
      "note": "⚠️ ERIK: the Well is also a DEFENCE. Light aimed at the bearer is drunk instead of landing, and the harm becomes charge. It answers only LIGHT — a shadow or an edge goes straight through — so it is a counter to one thing rather than armour."
     },
-    "note": "a rate, not a gate: the Well is never idle, and prepHours are direct-noon equivalents"
+    "note": "a rate, not a gate: the Well is never idle, and prepHours are direct-noon equivalents",
+    "capacityHoursByRank": {
+     "1": 8,
+     "2": 72,
+     "3": 168
+    },
+    "overcharge": [
+     {
+      "thresholdPct": 100,
+      "graceHours": 2,
+      "warning": "the vessels ring faintly and the light in them stops being still",
+      "onBurst": {
+       "damageDice": {
+        "n": 6,
+        "d": 6
+       },
+       "damageType": "light",
+       "area": "everyone within sight of the vessels",
+       "alsoBlinds": "all who see it, for the scene",
+       "destroysVessel": true
+      },
+      "note": "⚠️ ERIK: 'a light well that gets overcharged could potentially blow up catastrophically.' It does. Past capacity there is a two-hour grace where the vessels WARN — they ring, and the light stops being still — and then it bursts for 6d6 light on everyone in sight, blinds them for the scene, and the vessel is gone. Note it hits BY SIGHT, not by radius: taking cover behind something opaque is the counterplay, which is exactly right for light."
+     }
+    ],
+    "venting": {
+     "action": "tap and channel",
+     "checkAgainst": "the excess above capacity",
+     "onSuccess": "the excess is spent as a released working — full effect, your choosing of target",
+     "onFailure": "you vent half and take the rest yourself",
+     "note": "⚠️ ERIK: 'unless the user is able to tap it and channel the output.' So overcharge is not a punishment, it is a DECISION UNDER PRESSURE: a Radiant who sees the ring coming can spend the excess deliberately and get a very large working out of it. THE BEST USE OF THE WELL IS TO DELIBERATELY OVERFILL IT AND THEN AIM IT, and the risk of getting that wrong is the price."
+    },
+    "takeable": {
+     "canBeTaken": true,
+     "worth": "valuable while charged, trivial when empty",
+     "note": "⚠️ ERIK: 'yes a charged vessel is takeable.' A full Well is portable stored power and worth stealing — and a thief who does not know the capacity is carrying something that will burst. That is a good hook rather than a griefing problem, because the danger travels with the prize."
+    }
    }
   },
   {

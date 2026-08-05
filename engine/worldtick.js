@@ -805,9 +805,39 @@ export function strikeDispositionOf(figure, strikeCfg = {}) {
  *  is a characterisation judgement about a people — it is Aevi's to make, and an engine that hardcoded the
  *  lists would be encoding exactly the values SNG-280 forbids. Unauthored falls back to `quiet`, which is the
  *  behaviour that already shipped, so an empty table changes nothing rather than silently inventing crusades. */
-export function strikeKindFor(figure, strikeCfg = {}) {
+/** ⚠️ THE READER MOVES, NOT THE CONTENT. Aevi authored the kinds as `{ quiet: [...], crusade: [...],
+ *  either: [...] }` at `arcResponse.kindByTradition`, while this module read `{ tradition: "quiet" }` at
+ *  `arcResponse.strikes.kindByTradition` — a miss on BOTH path and shape, so the crusade never fired despite
+ *  being fully authored. Fifth time this week that a writer and a reader have failed to meet.
+ *
+ *  ⛔ AND HER SHAPE IS THE BETTER ONE, so this bends to it rather than asking her to re-key a file. A
+ *  list-per-kind is how a person naturally writes this, and it can express `either` — a tradition that does
+ *  BOTH — which a tradition→kind map cannot say at all. Accepts either shape, from either path. */
+export function normalizeStrikeKinds(cfg = {}) {
+  const raw = cfg?.strikes?.kindByTradition || cfg?.kindByTradition || {};
+  const out = {};
+  for (const [k, v] of Object.entries(raw)) {
+    if (k.startsWith("_")) continue;                        // authoring notes, not data
+    if (Array.isArray(v)) { for (const t of v) if (typeof t === "string") out[t] = k; }   // kind -> [traditions]
+    else if (typeof v === "string") out[k] = v;                                           // tradition -> kind
+  }
+  return out;
+}
+
+/** Which kind THIS figure uses on THIS arc.
+ *
+ *  `either` is a real third value, resolved by circumstance rather than by a coin: a tradition that does both
+ *  DECLARES over the thing they most want and goes quiet everywhere else. That reuses the crusade's own gate
+ *  (`wantArcId`) instead of inventing a second rule, and it makes "either" a character — open about what they
+ *  care most about, discreet about the rest — rather than a shrug. */
+export function strikeKindFor(figure, kinds = {}, { arcId = null } = {}) {
   const t = figure?.tradition || figure?.legend?.tradition || null;
-  return (t && strikeCfg?.kindByTradition?.[t] === "crusade") ? "crusade" : "quiet";
+  // Tolerate a raw cfg block as well as a normalized map — not every call site is mine.
+  const map = (kinds && (kinds.kindByTradition || kinds.strikes)) ? normalizeStrikeKinds(kinds) : kinds;
+  const k = t ? map?.[t] : null;
+  if (k === "crusade") return "crusade";
+  if (k === "either") return (arcId != null && (figure?.wantArcId || null) === arcId) ? "crusade" : "quiet";
+  return "quiet";
 }
 
 /** SNG-303b — WHO IS SENT AT WHOM, AND WHETHER ANYONE STANDS IN THE WAY.
@@ -818,7 +848,7 @@ export function strikeKindFor(figure, strikeCfg = {}) {
  *  green over a template which crashed the moment it ran. A decision this branchy has to be CALLED.
  *
  *  Pure: reads the two sides and the dials, returns the plan. Every mutation stays with the caller. */
-export function planStrike({ attackers, defenders, arcId, strikeCfg = {}, strikeRate = 0.12,
+export function planStrike({ attackers, defenders, arcId, strikeCfg = {}, strikeKinds = null, strikeRate = 0.12,
                              guardInterceptChance = 0.45, exposure = {}, rng = Math.random,
                              weightOf = e => (Number(e?.f?.legend?.weight ?? e?.f?.weight) || 5) * (e?.share ?? 1) } = {}) {
   const aWorking = attackers?.working || [], dWorking = defenders?.working || [];
@@ -833,7 +863,7 @@ export function planStrike({ attackers, defenders, arcId, strikeCfg = {}, strike
   if (!candidates.length) return null;                       // a side of pure non-strikers sends nobody
 
   const sender = candidates[0].e, disp = candidates[0].disp;
-  const kind = strikeKindFor(sender.f, strikeCfg);
+  const kind = strikeKindFor(sender.f, strikeKinds || strikeCfg, { arcId });
   // ⛔ "THE MOST HATED WORKER" IS NOT A MORAL RANKING, and building it as one would be VALUE-AS-COEFFICIENT
   // wearing a different hat. Aevi's selection rule is POSITIONAL: "the enemy worker with the highest weight ON
   // THE ARC THE CRUSADER MOST WANTS, i.e. the one doing the thing they cannot bear." So offence is distance
@@ -2030,8 +2060,12 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       //    4. Neither cost existed. A strike was free in both currencies.
       const strikeRate = Number.isFinite(cfg.strikeRate) ? cfg.strikeRate : 0.12;
       const strikeCfg = cfg.strikes || {};
+      // ⚠️ NORMALIZED FROM THE WHOLE `arcResponse` BLOCK, not from `cfg.strikes`, because Aevi's kinds live
+      // at `arcResponse.kindByTradition` in a list-per-kind shape. Reading only `cfg.strikes.kindByTradition`
+      // is what made 910 strikes produce 0 crusades against a fully authored table.
+      const strikeKinds = normalizeStrikeKinds(cfg);
       for (const [attackers, defenders] of [[P, Q], [Q, P]]) {
-        const plan = planStrike({ attackers, defenders, arcId, strikeCfg, strikeRate, rng, weightOf: wOf,
+        const plan = planStrike({ attackers, defenders, arcId, strikeCfg, strikeKinds, strikeRate, rng, weightOf: wOf,
           exposure: ws.figureExposure || {},
           guardInterceptChance: Number.isFinite(cfg.guardInterceptChance) ? cfg.guardInterceptChance : 0.45 });
         if (!plan) continue;

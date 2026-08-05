@@ -9580,6 +9580,31 @@ await (async () => {
       defenders: { engaged: [], working: [mk("m")] }, arcId: "A", strikeCfg: cCfg, rng: always });
     check("303b: a crusade fires ONLY on the arc the crusader most wants (offence is distance from what you want)",
       wrongArc === null && rightArc?.kind === "crusade");
+    // ⚠️ AEVI'S SHAPE, AT AEVI'S PATH. She authored `{quiet:[...], crusade:[...], either:[...]}` at
+    // `arcResponse.kindByTradition`; this module read `{tradition:"quiet"}` at `arcResponse.strikes.
+    // kindByTradition` — a miss on BOTH path and shape, so 910 strikes produced 0 crusades against a fully
+    // authored table. The READER moved, because a list-per-kind is how a person writes this and it can say
+    // `either`, which a tradition→kind map cannot express at all.
+    {
+      const { loadContentHeadless: lch } = await import("./headless_content.mjs");
+      const liveContent = await lch();
+      const live = wt.normalizeStrikeKinds(liveContent.rules?.arcResponse || {});
+      const vals = Object.values(live);
+      check("303c: the AUTHORED strike kinds reach the engine — both shape and path",
+        Object.keys(live).length >= 20 && vals.filter(v => v === "crusade").length > 0 && vals.filter(v => v === "quiet").length > 0);
+      // both shapes, so neither author nor reader has to remember which one this file uses
+      check("303c: kind→[traditions] and tradition→kind both normalize to the same answer",
+        wt.normalizeStrikeKinds({ kindByTradition: { crusade: ["blazeborn"] } }).blazeborn === "crusade"
+        && wt.normalizeStrikeKinds({ strikes: { kindByTradition: { blazeborn: "crusade" } } }).blazeborn === "crusade");
+      check("303c: authoring notes (_note, _reasoning) are not mistaken for traditions",
+        !("_note" in wt.normalizeStrikeKinds({ kindByTradition: { _note: "x", quiet: ["umbral"] } })));
+      // ⛔ `either` is resolved by circumstance, not a coin: they declare over what they most want.
+      const k = { somatic: "either" };
+      check("303c: an `either` tradition DECLARES over the arc it most wants and goes quiet elsewhere",
+        wt.strikeKindFor({ tradition: "somatic", wantArcId: "A" }, k, { arcId: "A" }) === "crusade"
+        && wt.strikeKindFor({ tradition: "somatic", wantArcId: "B" }, k, { arcId: "A" }) === "quiet");
+    }
+
     check("303b: an unauthored tradition is QUIET — the shipped behaviour, not an invented crusade",
       fromWorking?.kind === "quiet");
 

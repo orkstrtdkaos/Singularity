@@ -598,7 +598,7 @@
      "rank": 1,
      "name": "Improvised",
      "grants": "Quickly make a functional weapon from available materials — one that will not break, will land, and will hurt.",
-     "cannot": null,
+     "cannot": "Anything rank 2 adds — build a weapon fast enough to matter in a fight and good enough to be dangerous — not a masterwork, but the right thing for what you're facing right now; it makes a WEAPON, not a warrior.",
      "functions": [
       "make",
       "strike"
@@ -610,7 +610,7 @@
      "rank": 2,
      "name": "Made to Harm",
      "grants": "Build a weapon fast enough to matter in a fight and good enough to be dangerous — not a masterwork, but the right thing for what you're facing right now.",
-     "cannot": null,
+     "cannot": "Anything rank 3 adds — look at the materials at hand and see the weapon they are already; it makes a WEAPON, not a warrior.",
      "functions": [
       "make",
       "strike"
@@ -622,7 +622,7 @@
      "rank": 3,
      "name": "The Right Tool",
      "grants": "Look at the materials at hand and see the weapon they are already; build it in moments, and it is exactly what this situation required.",
-     "cannot": null,
+     "cannot": "Nothing further; this is the craft's ceiling; it makes a WEAPON, not a warrior.",
      "functions": [
       "make",
       "strike"
@@ -712,7 +712,7 @@
      "rank": 1,
      "name": "Demonstrated Craft",
      "grants": "Show what you have made — or make something now — and let its quality stand as argument; the person who would have dismissed you reconsiders.",
-     "cannot": null,
+     "cannot": "Anything rank 2 adds — your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim; IT REQUIRES REAL WORK TO SHOW.",
      "functions": [
       "reveal"
      ],
@@ -723,7 +723,7 @@
      "rank": 2,
      "name": "The Reputation",
      "grants": "Your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim.",
-     "cannot": null,
+     "cannot": "Anything rank 3 adds — the thing you have built is the argument and the evidence; IT REQUIRES REAL WORK TO SHOW.",
      "functions": [
       "reveal",
       "command"
@@ -735,7 +735,7 @@
      "rank": 3,
      "name": "Undeniable",
      "grants": "The thing you have built is the argument and the evidence. Anyone who has seen it cannot pretend otherwise — and they have all seen it.",
-     "cannot": null,
+     "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES REAL WORK TO SHOW; and it still costs what it costs: a reputation built on work MUST KEEP PRODUCING WORK.",
      "functions": [
       "reveal",
       "command"
@@ -824,7 +824,7 @@
      "rank": 1,
      "name": "The Crossing",
      "grants": "Build a passage across an obstacle — a bridge, a stair, a ramp — quickly enough that the party can use it before circumstances change.",
-     "cannot": null,
+     "cannot": "Anything rank 2 adds — open a way through or across any natural or built obstacle by constructing what's needed — not by force, by craft; IT TAKES TIME AND MATERIALS.",
      "functions": [
       "make",
       "open"
@@ -836,7 +836,7 @@
      "rank": 2,
      "name": "Made Passage",
      "grants": "Open a way through or across any natural or built obstacle by constructing what's needed — not by force, by craft.",
-     "cannot": null,
+     "cannot": "Anything rank 3 adds — build a path where there was truly none — spanning what shouldn't be spanned, opening what was sealed — and have it hold the weight it needs to hold; IT TAKES TIME AND MATERIALS.",
      "functions": [
       "make",
       "open"
@@ -848,7 +848,7 @@
      "rank": 3,
      "name": "The Road That Wasn't",
      "grants": "Build a path where there was truly none — spanning what shouldn't be spanned, opening what was sealed — and have it hold the weight it needs to hold.",
-     "cannot": null,
+     "cannot": "Nothing further; this is the craft's ceiling; IT TAKES TIME AND MATERIALS; and it still costs what it costs: WHAT YOU BUILD TO CROSS BY, OTHERS WILL CROSS BY TOO.",
      "functions": [
       "make",
       "open",
@@ -936,7 +936,7 @@
      "rank": 1,
      "name": "Hands Moving",
      "grants": "As long as you are making something, fear, grief, exhaustion, and cold have less purchase — the work is the anchor that keeps you functional.",
-     "cannot": null,
+     "cannot": "Anything rank 2 adds — sustain yourself and your party through hardship by making useful things — shelter, tools, warmth, structure — that make the hardship survivable; YOU MUST ACTUALLY BE MAKING SOMETHING.",
      "functions": [
       "sustain"
      ],
@@ -947,7 +947,7 @@
      "rank": 2,
      "name": "Built Through It",
      "grants": "Sustain yourself and your party through hardship by making useful things — shelter, tools, warmth, structure — that make the hardship survivable.",
-     "cannot": null,
+     "cannot": "Anything rank 3 adds — start something building and leave it — the structure grows, the mechanism runs, the work continues; YOU MUST ACTUALLY BE MAKING SOMETHING.",
      "functions": [
       "sustain",
       "empower"
@@ -959,7 +959,7 @@
      "rank": 3,
      "name": "Left in Motion",
      "grants": "Start something building and leave it — the structure grows, the mechanism runs, the work continues. What you set in motion sustains beyond your direct attention.",
-     "cannot": null,
+     "cannot": "Nothing further; this is the craft's ceiling; YOU MUST ACTUALLY BE MAKING SOMETHING.",
      "functions": [
       "sustain",
       "empower"
@@ -1045,7 +1045,7 @@
      "rank": 1,
      "name": "Precise Removal",
      "grants": "Identify and remove exactly what is interfering with a person or system's recovery — the splinter, the bad element, the thing that was keeping it from healing on its own.",
-     "cannot": null,
+     "cannot": "Anything rank 2 adds — restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain; it removes.",
      "functions": [
       "reveal",
       "break"
@@ -1057,7 +1057,7 @@
      "rank": 2,
      "name": "What Shouldn't Be There",
      "grants": "Restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain.",
-     "cannot": null,
+     "cannot": "Anything rank 3 adds — remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference; it removes.",
      "functions": [
       "reveal",
       "break",
@@ -1071,7 +1071,7 @@
      "rank": 3,
      "name": "Clean",
      "grants": "Remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference.",
-     "cannot": null,
+     "cannot": "Nothing further; this is the craft's ceiling; it removes.",
      "functions": [
       "reveal",
       "break",
@@ -1165,7 +1165,7 @@
      "rank": 1,
      "name": "Early Intervention",
      "grants": "See a threat forming and end it at the source — the plan that collapses before it executes, the attack that never completes because you dismantled its condition.",
-     "cannot": null,
+     "cannot": "Anything rank 2 adds — protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it; IT REQUIRES SEEING THE THREAT FORM.",
      "functions": [
       "foresee",
       "break"
@@ -1177,7 +1177,7 @@
      "rank": 2,
      "name": "The Stopped Thing",
      "grants": "Protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it. The threat is not turned aside; it is disabled at the point it was coming from, and whoever was carrying it is weakened out of the fight rather than merely stopped.",
-     "cannot": null,
+     "cannot": "Anything rank 3 adds — identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming; IT REQUIRES SEEING THE THREAT FORM.",
      "functions": [
       "foresee",
       "break",
@@ -1191,7 +1191,7 @@
      "rank": 3,
      "name": "Before It Arrives",
      "grants": "Identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming.",
-     "cannot": null,
+     "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES SEEING THE THREAT FORM; and it still costs what it costs: NOBODY WILL EVER KNOW WHAT YOU PREVENTED.",
      "functions": [
       "foresee",
       "break",
@@ -1282,7 +1282,7 @@
      "rank": 1,
      "name": "Back to Parts",
      "grants": "Disassemble a made thing into its components without destroying the components — what was one thing becomes usable pieces of something else.",
-     "cannot": null,
+     "cannot": "Anything rank 2 adds — break a thing down to the point where it has no remaining identity as what it was — it is now material, and material can become anything; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS.",
      "functions": [
       "break"
      ],
@@ -1293,7 +1293,7 @@
      "rank": 2,
      "name": "Unformed",
      "grants": "Break a thing down to the point where it has no remaining identity as what it was — it is now material, and material can become anything.",
-     "cannot": null,
+     "cannot": "Anything rank 3 adds — return something complex — a structure, a plan, a fixed belief — to the state before it became that specific thing, clearing the way for something new to take form; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS.",
      "functions": [
       "break",
       "transform"
@@ -1305,7 +1305,7 @@
      "rank": 3,
      "name": "The Open Form",
      "grants": "Return something complex — a structure, a plan, a fixed belief — to the state before it became that specific thing, clearing the way for something new to take form.",
-     "cannot": null,
+     "cannot": "Nothing further; this is the craft's ceiling; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS.",
      "functions": [
       "break",
       "transform"
@@ -1387,7 +1387,7 @@
      "rank": 1,
      "name": "The Known Capacity",
      "grants": "Your reputation for ending things precisely and completely gives weight to what you say — a warning from you lands differently than from someone without your history.",
-     "cannot": null,
+     "cannot": "Anything rank 2 adds — show what you can dismantle — or name it plainly — and command the terms of an agreement; IT REQUIRES A REAL RECORD of ending things.",
      "functions": [
       "command"
      ],
@@ -1398,7 +1398,7 @@
      "rank": 2,
      "name": "The Demonstrated Threat",
      "grants": "Show what you can dismantle — or name it plainly — and command the terms of an agreement; they know what refusal means.",
-     "cannot": null,
+     "cannot": "Anything rank 3 adds — you are the person who decides what ends; IT REQUIRES A REAL RECORD of ending things.",
      "functions": [
       "command",
       "bind"
@@ -1410,7 +1410,7 @@
      "rank": 3,
      "name": "The Final Authority",
      "grants": "You are the person who decides what ends. In a situation where endings are at stake, your word is the one that stands — not because you outranked anyone, but because everyone knows you can do what you say.",
-     "cannot": null,
+     "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES A REAL RECORD of ending things; and it still costs what it costs: authority built on what you can END is authority people OBEY AND DO NOT LOVE.",
      "functions": [
       "command",
       "bind"
@@ -1497,7 +1497,7 @@
      "rank": 1,
      "name": "The Cut",
      "grants": "Identify precisely what is consuming your capacity — exhaustion, fear, a specific obligation — and end it cleanly so you can continue.",
-     "cannot": null,
+     "cannot": "Anything rank 2 adds — sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
       "reveal",
       "break"
@@ -1509,7 +1509,7 @@
      "rank": 2,
      "name": "What You Don't Need",
      "grants": "Sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction.",
-     "cannot": null,
+     "cannot": "Anything rank 3 adds — end what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
       "reveal",
       "break",
@@ -1522,7 +1522,7 @@
      "rank": 3,
      "name": "The Lighter Load",
      "grants": "End what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on.",
-     "cannot": null,
+     "cannot": "Nothing further; this is the craft's ceiling; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
       "reveal",
       "break",

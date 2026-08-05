@@ -1,0 +1,62 @@
+{
+ "schemaVersion": 1,
+ "id": "the_vessel_pattern",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik: 'we should look for corollaries to this mechanic.'",
+ "thePattern": {
+  "name": "THE VESSEL",
+  "shape": "A craft that STORES its tradition's own medium over time, can be FED faster by spending energy, and ABSORBS incoming damage of that same type as fuel. Three properties, one idea: a thing that holds your element is also fed by your element and defended against your element.",
+  "whyItGeneralises": "⚠️ IT IS ALREADY IN THE GAME ON THE OTHER SIDE. `absorb` is an authored affinity verdict, and `the_bright_devourer` ABSORBS LIGHT — a creature that eats the thing aimed at it. The vessel pattern is that mechanic handed to players, and the engine already resolves it.",
+  "theConstraint": "⚠️ IT MUST ANSWER ONLY ONE TYPE. A vessel that drinks everything is armour and strictly better than a shield. A vessel that drinks LIGHT is a counter — brilliant against a Radiant, useless against an edge, and that asymmetry is the whole design."
+ },
+ "corollaries": [
+  {
+   "tradition": "radiant / blazeborn",
+   "craft": "light_well",
+   "medium": "light",
+   "status": "⚠️ BUILT — the model",
+   "note": "fed by any light craft; absorbs light damage; never idle because it fills at a rate"
+  },
+  {
+   "tradition": "harmonic",
+   "craft": "the_sustained_chord",
+   "medium": "sound",
+   "status": "strongest corollary",
+   "how": "A chord that HOLDS. Fed by another harmonic playing into it — two singers fill it far faster than one, exactly as with two Radiants. Absorbs SOUND damage: `sonic_resonance` aimed at the bearer is taken into the chord instead of into the chest. ⚠️ AND IT HAS A COST THE WELL DOES NOT — a chord that is holding is AUDIBLE, so a harmonic carrying a full one cannot be quiet."
+  },
+  {
+   "tradition": "ashwarden",
+   "craft": "the_kept_breath",
+   "medium": "decay",
+   "status": "strong, and grim",
+   "how": "A held threshold that banks decay rather than light. Fed by an ashwarden spending into it; absorbs DECAY damage aimed at the bearer. ⚠️ ITS COST IS THE BEST OF THE SET: what it banks is still decay, and a full one has to be SPENT OR IT SPOILS — an Ashwarden carrying a charged vessel is carrying a deadline."
+  },
+  {
+   "tradition": "rootkin",
+   "craft": "quickening",
+   "medium": "living",
+   "status": "good, with an inversion",
+   "how": "Banked growth, fed by tending. Absorbs LIVING damage — the_forced_bloom turned on the bearer feeds them instead. ⚠️ INVERTED COST: it does not spoil, it OVERGROWS. A rootkin who over-fills a vessel gets the_forced_bloom's problem on themselves."
+  },
+  {
+   "tradition": "precursor",
+   "craft": "hold_the_aperture",
+   "medium": "precursor",
+   "status": "⚠️ POSSIBLE AND I WOULD NOT",
+   "how": "Mechanically it fits — a held-open aperture could bank precursor force and drink precursor damage. BUT `hold_the_aperture` is authored as costing continuously and being 'the hardest thing in the game'. Making it also a battery makes the hardest thing in the game PROFITABLE. Flagging it as the corollary I am declining, because the pattern fitting is not a reason to apply it."
+  },
+  {
+   "tradition": "umbral",
+   "craft": "the_harbor",
+   "medium": "shadow",
+   "status": "fits, but changes the tradition",
+   "how": "A harbor that drinks shadow would make umbral the hard counter to itself, which is thematically sharp — the Smotherers' own craft turned aside. Worth Erik's call, since it makes umbral-vs-umbral the most defensive matchup in the game."
+  }
+ ],
+ "whatToBuildFirst": "THE HARMONIC CHORD. It is the closest corollary, its cost (a holding chord is AUDIBLE) is genuinely different from the Well's, and it proves the pattern travels — one instance is a craft, two is a mechanic.",
+ "openForErik": [
+  "the precursor one I declined — agree, or is a profitable aperture interesting?",
+  "the umbral one changes what umbral IS in a fight; worth doing?",
+  "should a vessel be TAKEABLE? a charged Well is loot, and a full one is worth a great deal — that is either a good hook or a griefing problem"
+ ]
+}

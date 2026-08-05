@@ -809,7 +809,39 @@ Next from the order: P1b (level-cost cap), P1c (tier weights, `regional` ALIASED
 
 # PO ALERT
 
-> ## [SNG-287 GENERATIVE TITLES authored · SNG-293 `stageMoved` DECIDED] (Aevi, 2026-08-04)
+> ## [⚠️ WORK ORDER v2 — three tracks, and Track B reorders Erik's request] (Aevi, 2026-08-04)
+> Full doc: **`po/WORK_ORDER_ccode_2026-08-04.md`.** Erik wants **playability** and specifically **"the
+> generation engines to fire up… weapons, armor, shields, per domain and people."**
+> **TRACK A — LAND WHAT IS ALREADY DECIDED.** Five staged specs are decided, unbuilt, and each blocks something
+> downstream. Highest: **the `stageMoved` credit fix (`SPEC_SNG-295`)**, which blocks **both** the `who_turned`
+> title and the mythic path distribution; and **`minted_figure_content`**, without which **the world thins as
+> it ages** — minted figures get one care and no life while being fully promotable to mythic. Plus **the
+> ratchet**: every `worldRoster` figure must have ≥1 care, a `wantArcId` and a personal pool — **`ws.personal
+> Coverage` should FAIL, not report.**
+> **⚠️ TRACK B — ITEMS NEED A CONSUMER BEFORE THEY NEED A GENERATOR. This is the finding that reorders the
+> request.** Measured at HEAD:
+> · **20 items — 4 weapons, 3 armour, ZERO shields — across 27 traditions.**
+> · **`bonusTags` are SET and EVOLVED and never MATCHED.** `evolution.js` stamps them per stage; **nothing
+>   reads them against an action.** Zero references to equipped gear in `resolve.js` or `skill_battle.js`.
+> · **So a weapon contributes nothing to any roll**, and generating three hundred of them yields three hundred
+>   pieces of flavour text — **the same shape as `priceShift`: content whose consumer doesn't exist.**
+> **THE SMALLEST HONEST CONSUMER NEEDS NO NEW SYSTEM:** `companionBonus` already matches `assistTags` against
+> `actionTags` with a bounded cap. **`bonusTags` are the same shape.** One matcher on the existing rails and
+> **every item in the game starts mattering.**
+> **TRACK C — THE ITEM GENERATOR.** There is **no `item` gen type** (`GEN_TYPES` = npc · location · creature ·
+> arc), so this is a build, not a switch. **Split: CCode adds the type, a `gen_item` schema and the loader
+> hook. I author the GENERATION GRAMMAR** — per-tradition materials, forms, finishes and naming patterns, so a
+> generated Ashwarden blade reads as ashwarden and a Churnfolk one doesn't. **That is the difference between
+> generated and procedural**, and it draws on the modes-and-tails pass — **a tradition's TAIL should have gear
+> too.**
+> **Shields are the notable gap: there are none at all, while `guard`-shaped crafts are 19 of the catalog's
+> defensive logics.**
+> **⚠️ ORDER MATTERS: C is worth little without B. A generated shield that cannot affect a guard roll is a
+> name.**
+> **AND THE THING NEITHER OF US CAN DO:** no real save has ever run the world-sim chain — no `figureTenure`,
+> `arcContests` or `epicStatus` in any character in `characters/`. **Every threshold in this thread is priced
+> against simulation.** Erik playing one character forward from HEAD for an hour is **worth more than any
+> further tuning** — best after Track A lands, so the first real run has the decided behaviour in it.> ## [SNG-287 GENERATIVE TITLES authored · SNG-293 `stageMoved` DECIDED] (Aevi, 2026-08-04)
 > **1. `stageMoved` — CREDIT CAUSATION. And it is worse than "presence."** The site reads
 > `const held = [...pro, ...con]`, so **a figure who spent the season trying to STOP the Bleed is credited with
 > a stage-move when it advances despite them.** Not a loose reading of my line — **it credits people for the

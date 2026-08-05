@@ -58,5 +58,43 @@
   "the precursor one I declined — agree, or is a profitable aperture interesting?",
   "the umbral one changes what umbral IS in a fight; worth doing?",
   "should a vessel be TAKEABLE? a charged Well is loot, and a full one is worth a great deal — that is either a good hook or a griefing problem"
- ]
+ ],
+ "theFourProperties": {
+  "note": "⚠️ ERIK COMPLETED THE PATTERN. A vessel is not three properties, it is SIX, and the last three are what make it a risk rather than free storage.",
+  "1_stores": "holds its tradition's medium, filling at a rate",
+  "2_fedByCraft": "another practitioner can spend energy into it to fill it faster",
+  "3_absorbs": "drinks incoming damage OF ITS OWN TYPE ONLY, converting harm to charge",
+  "4_capacity": "⚠️ a hard ceiling, equal to the rank's prep cost — a vessel holds exactly what it took to fill",
+  "5_overcharge": "⚠️ past capacity it WARNS, then fails — and each medium fails in ITS OWN WAY",
+  "6_venting": "⚠️ the excess can be tapped and aimed instead, which turns overcharge from a punishment into a DECISION UNDER PRESSURE",
+  "7_takeable": "a charged vessel can be carried off — and a thief who does not know the capacity is carrying a bomb"
+ },
+ "overchargeByMedium": {
+  "note": "⚠️ THE BEST PART OF ERIK'S ADDITION: every element fails differently, so the same mechanic produces five completely different scenes. None of these is 'it explodes' with a reskin.",
+  "light": {
+   "fails": "BURSTS — 6d6 to everyone WITHIN SIGHT, blinding them for the scene",
+   "counterplay": "opaque cover, because it travels by sight rather than by radius",
+   "built": true
+  },
+  "sound": {
+   "fails": "SHATTERS — everything brittle nearby breaks, and the bearer's hearing goes first",
+   "counterplay": "distance and soft ground; and the chord was audible the whole time, so it is the one overcharge everyone SAW coming"
+  },
+  "decay": {
+   "fails": "⚠️ BLOOMS — the banked rot does not detonate, it SPREADS, and keeps spreading until something stops it",
+   "counterplay": "it is slow, so it is answerable — but by then it is a place with a problem rather than a moment with one"
+  },
+  "living": {
+   "fails": "⚠️ OVERGROWS INTO THE BEARER — the growth has nowhere else to go and takes the nearest living thing, which is you",
+   "counterplay": "be standing next to something else alive, which is a horrible decision to have to make"
+  },
+  "shadow": {
+   "fails": "⚠️ COLLAPSES INWARD — the harbor folds and everything sheltered inside is gone with it",
+   "counterplay": "empty it first; the cost of the umbral vessel is that its failure kills what it was protecting"
+  },
+  "appetite": {
+   "fails": "COLLECTS — the debt comes due against the bearer, at the price they set for others"
+  }
+ },
+ "theDesignRule": "⚠️ A VESSEL'S OVERCHARGE MUST BE THE TRADITION'S OWN NIGHTMARE, not a generic explosion. The light one hurts everyone who can see. The shadow one kills what you were protecting. The living one grows into you. If two traditions' vessels fail the same way, one of them is authored wrong."
 }

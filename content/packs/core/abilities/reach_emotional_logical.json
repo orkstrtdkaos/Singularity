@@ -1996,6 +1996,184 @@
           "class": "cost"
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_grief_that_stops",
+      "name": "The Grief That Stops",
+      "levelReq": 5,
+      "energyCost": 13,
+      "powerSystem": "reach_emotional_logical",
+      "tradition": "threnodist",
+      "attribute": "mental",
+      "axes": {
+        "emotional_logical": -0.8
+      },
+      "functions": [
+        "bind"
+      ],
+      "narrationHints": "They set it down inside them the way you would set down a stone. The heart is not built to carry that.",
+      "description": "⚠️ THE HEART-TUNERS' CRAFT. Pathos SHARES a feeling; this INSTALLS one at a weight no body holds. Not sorrow — sorrow's full weight, all at once, without the years that usually come with it. Some hearts stop. Most do not, and those people are changed.",
+      "notFor": "A heart with nothing to grieve — it uses THEIR losses, not invented ones, so someone who has lost nothing is nearly immune. And it CANNOT BE AIMED at an outcome: you set the weight down, the body decides.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Grief That Stops",
+          "grants": "Set the full weight of their own losses on them at once. They are overwhelmed and afterward not the same.",
+          "cannot": "Inventing a grief. Anyone who has lost nothing.",
+          "functions": [
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "All Of It",
+          "grants": "Set every loss down together with nothing held back. A heart sometimes stops. You will not know beforehand which.",
+          "cannot": "Knowing beforehand. Taking it back once set.",
+          "functions": [
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "lethal"
+        }
+      ],
+      "challengeTypes": [
+        "SOCIAL"
+      ],
+      "harmRung": "lethal",
+      "nativeOrCombination": "native",
+      "shape": "hobble",
+      "operativeAxis": [
+        "weight",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 8,
+        "duration": 6,
+        "targets": 1,
+        "damageType": "grief",
+        "note": "⚠️ A HOBBLE WITH A LETHAL TAIL — the kill is a possibility, never a roll you aim. Resolve r2 as incapacitation plus a small independent chance of a stopped heart, weighted by how much the target has actually lost. NOT a FIGHT craft: it does not fight."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "weight",
+          "delta": "SPECIAL: every loss at once, nothing held back — a heart sometimes stops",
+          "from": "r2 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a measure of it — they weep and they stand",
+        "surge": "all of it; YOU WILL NOT KNOW BEFOREHAND WHICH"
+      },
+      "bounds": [
+        {
+          "text": "IT USES THEIR OWN LOSSES — someone who has lost nothing is nearly immune",
+          "class": "hard"
+        },
+        {
+          "text": "IT CANNOT BE AIMED AT AN OUTCOME — you set the weight down, the body decides",
+          "class": "hard"
+        },
+        {
+          "text": "THE ONES WHO LIVE ARE CHANGED, and they know who did it",
+          "class": "cost"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_closing_argument",
+      "name": "The Closing Argument",
+      "levelReq": 5,
+      "energyCost": 12,
+      "powerSystem": "reach_emotional_logical",
+      "tradition": "syllogist",
+      "attribute": "mental",
+      "axes": {
+        "emotional_logical": 0.8
+      },
+      "functions": [
+        "reveal",
+        "bind"
+      ],
+      "narrationHints": "Every step is one they agreed to. That is what makes the last step impossible to refuse.",
+      "description": "⚠️ THE CORNERS' CRAFT. A Syllogist walks a person, honestly, from premises they already hold to a conclusion that ends them — that the work was worthless, that they cannot be forgiven, that the only consistent act remaining is the one they will now perform. NOTHING IN IT IS FALSE. That is the whole horror.",
+      "notFor": "Anyone who will not reason — the unreasonable are genuinely immune and the Corners resent it. And it CANNOT USE A FALSE PREMISE: the argument must be sound or it does nothing at all.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Closing Argument",
+          "grants": "Walk them, honestly, to a conclusion that unmakes their footing. They cannot act against it while it holds.",
+          "cannot": "A false premise. Anyone who refuses to follow.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "The Only Consistent Act",
+          "grants": "Reach the conclusion where the consistent act is a final one — and STOP TALKING. What they do next is theirs.",
+          "cannot": "Making them. It is their hand and both of you know it.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "lethal"
+        }
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "PUZZLE"
+      ],
+      "harmRung": "lethal",
+      "nativeOrCombination": "native",
+      "shape": "hobble",
+      "operativeAxis": [
+        "soundness",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 8,
+        "duration": 48,
+        "targets": 1,
+        "damageType": "truth",
+        "note": "⚠️ THE ONLY KILL IN THE CATALOG THE WIELDER DOES NOT PERFORM. Resolve as a hobble; the lethal outcome is the target's OWN act, gated on the argument being sound and the target being a reasoner. The engine should never render it as damage dealt."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "soundness",
+          "delta": "SPECIAL: the conclusion where the only consistent act is final — and you stop talking",
+          "from": "r2 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "walk them partway — shaken, and they can turn back",
+        "surge": "reach the end; IT IS THEIR HAND, AND BOTH OF YOU KNOW IT"
+      },
+      "bounds": [
+        {
+          "text": "IT CANNOT USE A FALSE PREMISE — an unsound argument does nothing",
+          "class": "hard"
+        },
+        {
+          "text": "THE UNREASONABLE ARE IMMUNE",
+          "class": "hard"
+        },
+        {
+          "text": "YOU DO NOT PERFORM IT. IT IS THEIR HAND, AND BOTH OF YOU KNOW IT",
+          "class": "cost"
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

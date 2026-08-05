@@ -1997,7 +1997,15 @@
           "class": "cost"
         }
       ],
-      "plainly": "A stealth and social working held over about 90 days, not a single roll. You must already be impersonating someone whose identity is written down somewhere. Each month you hold it, the original loses one category of access: first their name, then their standing, then anywhere that would house them. At rank 2 the process completes and they have nothing left. Anyone who restores one of those records at any point breaks the whole working. A target who was never recorded anywhere cannot be erased."
+      "plainly": "A stealth and social working held over about 90 days, not a single roll. You must already be impersonating someone whose identity is written down somewhere. Each month you hold it, the original loses one category of access: first their name, then their standing, then anywhere that would house them. At rank 2 the process completes and they have nothing left. Anyone who restores one of those records at any point breaks the whole working. A target who was never recorded anywhere cannot be erased.",
+      "upkeep": {
+        "prepHours": 2160,
+        "prepCondition": "the impersonation held continuously",
+        "attended": false,
+        "interruptible": true,
+        "onInterrupt": "⚠️ THE WHOLE WORKING BREAKS — anyone who restores one record ends it",
+        "note": "⚠️ ATTENDED: FALSE. You do not sit with an erasure; you live as them and the records rot on their own. That is what makes it 90 days a player can spend elsewhere — and what makes the counterplay real, since it is answerable the entire time by someone who was never watching you."
+      }
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

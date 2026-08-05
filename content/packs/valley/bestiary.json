@@ -36,7 +36,9 @@
  "roster": [
   {
    "id": "glimmerling_swarm",
-   "affinity": {"truth": "vulnerable"},
+   "affinity": {
+    "truth": "vulnerable"
+   },
    "class": "manifested_creature",
    "tier": "riffraff",
    "name": "glimmerlings",
@@ -47,7 +49,8 @@
     "WARD (shield the eyes)",
     "UNMAKE (dispel the flicker)"
    ],
-   "clean": "They wink out like the fiction they are. No blood, no cry."
+   "clean": "They wink out like the fiction they are. No blood, no cry.",
+   "aggressorKind": "raider"
   },
   {
    "id": "hollow_pace",
@@ -61,7 +64,8 @@
     "MOVE (leave its route)",
     "KNOW (read the old logic)"
    ],
-   "clean": "You are switching off a machine that forgot how to stop. Its maker mourned it long ago."
+   "clean": "You are switching off a machine that forgot how to stop. Its maker mourned it long ago.",
+   "aggressorKind": "assassin"
   },
   {
    "id": "warpling_hare",
@@ -75,7 +79,8 @@
     "HARM (end it fast)",
     "KNOW (predict the warp)"
    ],
-   "clean": "The hare is already gone. What's left is a wound wearing its shape."
+   "clean": "The hare is already gone. What's left is a wound wearing its shape.",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_wrong_stag",
@@ -90,7 +95,8 @@
     "KNOW (read where it'll charge)",
     "UNMAKE (silence the lattice)"
    ],
-   "clean": "The old stag of the wood would weep to see it. Ending it is the mercy the warp denied."
+   "clean": "The old stag of the wood would weep to see it. Ending it is the mercy the warp denied.",
+   "aggressorKind": "assassin"
   },
   {
    "id": "tessellith",
@@ -106,11 +112,16 @@
     "SHAPE (impose your own order)"
    ],
    "readsAlsoFrom": "arc_block_bleed",
-   "clean": "It is the bleed made flesh — geometry, not a being. You are correcting a grammar error that grew teeth."
+   "clean": "It is the bleed made flesh — geometry, not a being. You are correcting a grammar error that grew teeth.",
+   "aggressorKind": "hazard"
   },
   {
    "id": "the_unmoored_choir",
-   "affinity": {"physical": "immune", "truth": "vulnerable", "numinous": "vulnerable"},
+   "affinity": {
+    "physical": "immune",
+    "truth": "vulnerable",
+    "numinous": "vulnerable"
+   },
    "class": "manifested_creature",
    "tier": "epic",
    "name": "the unmoored choir",
@@ -124,7 +135,8 @@
     "MOVE (survive inside it)"
    ],
    "readsAlsoFrom": "arc_manifestation_storm",
-   "clean": "A birth that went wrong and never became anyone. Ending it is the stemming 'Present at the Birth' offers — grief for a wonder, not a death."
+   "clean": "A birth that went wrong and never became anyone. Ending it is the stemming 'Present at the Birth' offers — grief for a wonder, not a death.",
+   "aggressorKind": "hazard"
   },
   {
    "id": "cinder_mote_drift",
@@ -138,7 +150,8 @@
     "MOVE (stay ahead of the drift)",
     "UNMAKE (starve it of fuel)"
    ],
-   "clean": "Light with no eye behind it. Snuffing it is housekeeping."
+   "clean": "Light with no eye behind it. Snuffing it is housekeeping.",
+   "aggressorKind": "hazard"
   },
   {
    "id": "rust_choir_gnats",
@@ -152,7 +165,8 @@
     "HARM (disperse the swarm)",
     "MEND (undo their bad mending)"
    ],
-   "clean": "A directive with no maker. Ending it frees nothing that can feel freed."
+   "clean": "A directive with no maker. Ending it frees nothing that can feel freed.",
+   "aggressorKind": "raider"
   },
   {
    "id": "mire_gulper",
@@ -166,7 +180,8 @@
     "HARM (kill it fast)",
     "WARD (break the grip)"
    ],
-   "clean": "A hunger that outgrew its body. No mercy owed, none possible."
+   "clean": "A hunger that outgrew its body. No mercy owed, none possible.",
+   "aggressorKind": "beast"
   },
   {
    "id": "pale_reader",
@@ -180,7 +195,8 @@
     "SWAY (break its loop)",
     "HARM (disperse it)"
    ],
-   "clean": "An echo of a thought no one is thinking. Silencing it ends nothing."
+   "clean": "An echo of a thought no one is thinking. Silencing it ends nothing.",
+   "aggressorKind": "beast"
   },
   {
    "id": "gloamwolf_pack",
@@ -195,7 +211,8 @@
     "WARD (hold the line)",
     "MOVE (don't get herded)"
    ],
-   "clean": "Wolves are honest. These aren't wolves anymore. End it and the wood can have its wolves back."
+   "clean": "Wolves are honest. These aren't wolves anymore. End it and the wood can have its wolves back.",
+   "aggressorKind": "beast"
   },
   {
    "id": "toll_wraith",
@@ -209,7 +226,8 @@
     "HARM (break the wraith)",
     "SWAY (refuse the price)"
    ],
-   "clean": "A rule with no ruler, guarding a gate that fell. Breaking it opens the road."
+   "clean": "A rule with no ruler, guarding a gate that fell. Breaking it opens the road.",
+   "aggressorKind": "beast"
   },
   {
    "id": "lantern_ambusher",
@@ -223,7 +241,8 @@
     "HARM (kill the frame)",
     "MOVE (break the ambush)"
    ],
-   "clean": "A trap that outlived its war. It baits; it doesn't grieve."
+   "clean": "A trap that outlived its war. It baits; it doesn't grieve.",
+   "aggressorKind": "beast"
   },
   {
    "id": "weeping_stone",
@@ -237,7 +256,8 @@
     "SWAY (hold your own feeling)",
     "MOVE (get clear before you can't)"
    ],
-   "clean": "Feeling with no one feeling it. Ending it is a mercy to everyone in earshot."
+   "clean": "Feeling with no one feeling it. Ending it is a mercy to everyone in earshot.",
+   "aggressorKind": "beast"
   },
   {
    "id": "quill_swarm",
@@ -252,7 +272,8 @@
     "HARM (scatter the flock)",
     "KNOW (read the bank)"
    ],
-   "clean": "A murmuration with the murmur gone to malice. Scattering it is clean."
+   "clean": "A murmuration with the murmur gone to malice. Scattering it is clean.",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_kept_hunger",
@@ -266,7 +287,8 @@
     "UNMAKE (break the seal for good)",
     "HARM (end the vessel)"
    ],
-   "clean": "A jar that learned to hunt. What's inside was ended long ago; this only echoes it."
+   "clean": "A jar that learned to hunt. What's inside was ended long ago; this only echoes it.",
+   "aggressorKind": "beast"
   },
   {
    "id": "glass_stalker",
@@ -280,11 +302,15 @@
     "WARD (block the unseen strike)",
     "HARM (hit what you can barely see)"
    ],
-   "clean": "A truth so plain it's invisible, gone predatory. Seeing it kill it is the whole fight."
+   "clean": "A truth so plain it's invisible, gone predatory. Seeing it kill it is the whole fight.",
+   "aggressorKind": "beast"
   },
   {
    "id": "churn_revel",
-   "affinity": {"wild": "resist", "order": "vulnerable"},
+   "affinity": {
+    "wild": "resist",
+    "order": "vulnerable"
+   },
    "class": "manifested_creature",
    "tier": "notable",
    "name": "a churn-revel",
@@ -295,7 +321,8 @@
     "HARM (hit the shifting core)",
     "KNOW (find the one constant)"
    ],
-   "clean": "Joy with nothing behind the laugh. Ending it quiets a wrongness, not a soul."
+   "clean": "Joy with nothing behind the laugh. Ending it quiets a wrongness, not a soul.",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_unrefusing_blade",
@@ -310,7 +337,8 @@
     "HARM (end it before it ends you)",
     "SWAY (there is nothing left to sway — and learning that IS the fight)"
    ],
-   "clean": "The person who took the contract is gone; the contract wears their hands. You are not killing them. You are ending what took their place."
+   "clean": "The person who took the contract is gone; the contract wears their hands. You are not killing them. You are ending what took their place.",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_pure_of_ash",
@@ -325,7 +353,8 @@
     "HARM (stop a stopper)",
     "SWAY (test whether any person remains — the answer is no)"
    ],
-   "clean": "The cult-of-purity ate the warden. What's left administers death as doctrine. Ending it is the mercy they forgot how to withhold."
+   "clean": "The cult-of-purity ate the warden. What's left administers death as doctrine. Ending it is the mercy they forgot how to withhold.",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_severed_choir",
@@ -340,11 +369,15 @@
     "HARM (break certainty made armor)",
     "KNOW (find the seam doubt left)"
    ],
-   "clean": "They severed the part that could be wrong. What judges you now is a verdict, not a person. There is no one left to appeal to — only the sentence to end."
+   "clean": "They severed the part that could be wrong. What judges you now is a verdict, not a person. There is no one left to appeal to — only the sentence to end.",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_gearfather",
-   "affinity": {"physical": "resist", "mechanical": "vulnerable"},
+   "affinity": {
+    "physical": "resist",
+    "mechanical": "vulnerable"
+   },
    "class": "feral_construct",
    "tier": "regional",
    "name": "the Gearfather",
@@ -356,11 +389,16 @@
     "HARM (there is no one part)",
     "KNOW (find the rotted core)"
    ],
-   "clean": "A maker with no plan and no maker. It builds nothing and won't stop. Ending it lets the ground be ground."
+   "clean": "A maker with no plan and no maker. It builds nothing and won't stop. Ending it lets the ground be ground.",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_bloom_that_hungers",
-   "affinity": {"living": "resist", "light": "vulnerable", "decay": "vulnerable"},
+   "affinity": {
+    "living": "resist",
+    "light": "vulnerable",
+    "decay": "vulnerable"
+   },
    "class": "substrate_warped_beast",
    "tier": "regional",
    "name": "the Bloom-That-Hungers",
@@ -372,11 +410,15 @@
     "HARM (find the heart in the mass)",
     "MOVE (don't root in place)"
    ],
-   "clean": "Growth is not always good. This one grows to eat. Burning it back is the garden's mercy."
+   "clean": "Growth is not always good. This one grows to eat. Burning it back is the garden's mercy.",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_ashen_wyrm",
-   "affinity": {"light": "resist", "decay": "resist"},
+   "affinity": {
+    "light": "resist",
+    "decay": "resist"
+   },
    "class": "great_manifestation",
    "tier": "epic",
    "name": "the Ashen Wyrm",
@@ -390,11 +432,14 @@
     "MOVE (a campaign of position)"
    ],
    "clean": "A dragon is a domain that forgot everything but appetite. This one's appetite is endings. It cannot be reasoned with because there is no it — only the death-pole, flying. Ending it is the largest mercy the valley will ever be asked to give.",
-   "epicNote": "Domain-scale. Not a fight — a campaign (ties SNG-208 offscreen-epic/arc). A growing world-threat; slaying it is a saga, not an encounter."
+   "epicNote": "Domain-scale. Not a fight — a campaign (ties SNG-208 offscreen-epic/arc). A growing world-threat; slaying it is a saga, not an encounter.",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_bright_devourer",
-   "affinity": {"light": "absorb"},
+   "affinity": {
+    "light": "absorb"
+   },
    "class": "great_manifestation",
    "tier": "epic",
    "name": "the Bright Devourer",
@@ -408,11 +453,15 @@
     "MOVE (a war without cover)"
    ],
    "clean": "Truth that devours what it shows. There is no one behind the light — only the light-pole, hungry. To end it is to let the world keep its shadows, which is to say, keep its secrets, which is to say, keep itself.",
-   "epicNote": "Domain-scale. A campaign, not a fight. Antipode of the Ashen Wyrm — the two dragons are the death/life... no, dark/light poles given wing. (SNG-208 arc-scale threat.)"
+   "epicNote": "Domain-scale. A campaign, not a fight. Antipode of the Ashen Wyrm — the two dragons are the death/life... no, dark/light poles given wing. (SNG-208 arc-scale threat.)",
+   "aggressorKind": "beast"
   },
   {
    "id": "the_unspooling_worm",
-   "affinity": {"order": "resist", "wild": "vulnerable"},
+   "affinity": {
+    "order": "resist",
+    "wild": "vulnerable"
+   },
    "class": "great_manifestation",
    "tier": "epic",
    "name": "the Unspooling Worm",
@@ -425,7 +474,8 @@
     "UNMAKE (fight ruin with ruin)",
     "WARD (protect what can't be walled)"
    ],
-   "clean": "Clearing with nothing left to clear FOR. It unmakes because unmaking is all that remains of what it was. Ending it lets the made things stay made."
+   "clean": "Clearing with nothing left to clear FOR. It unmakes because unmaking is all that remains of what it was. Ending it lets the made things stay made.",
+   "aggressorKind": "beast"
   }
  ]
 }

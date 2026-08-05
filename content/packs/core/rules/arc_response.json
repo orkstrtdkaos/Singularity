@@ -96,6 +96,17 @@
         "_secondCareRule": "⚠️ A MINTED FIGURE SHOULD GET A SECOND CARE, DERIVED NOT ROLLED: their primary is the arc that produced them; their SECOND is the arc most contested in their REGION, at `dir` opposing whoever killed the figure whose vacancy they filled. That is authored-from-circumstance rather than random, and it means minted figures inherit the local argument — which is how real successors work.",
         "_wantArcIdRule": "the primary care, unless the second is the one their origin event names. A figure minted by a casualty on the storm WANTS the storm arc."
     },
+  "careShift": {
+        "_note": "SNG-298 (Erik): \"I want NPCs to be able to grow and evolve too — their cares and wants might shift or they might gain new ones, especially if they are interacting with the player or get a strike attempted against them.\" Cares were fixed at authoring and never moved; everything else about a figure could change but not what they WANTED. ⛔ DIRECTIVE SNG-280: none of this encodes approval — a strike makes its target INVESTED, not virtuous, and a disliked player recruits opposition exactly as reliably as a liked one recruits allies.",
+        "maxCares": 4,
+        "_maxCares": "A figure cannot care about everything — the attention budget only means something while there is more to want than to give.",
+        "hardenBy": 1,
+        "_hardenBy": "How much an event over an arc they already hold deepens it.",
+        "maxCareWeight": 4,
+        "erodeBy": 1,
+        "erodeAfterPasses": 6,
+        "_erodeAfterPasses": "Passes of leaving a care untended before it starts to fade. Without erosion cares only ever accumulate and every figure ends up the same person. ⚠️ Erosion narrows a figure, it never empties one — a figure with no cares is invisible to `living` and drops out of the world."
+    },
   "tierLadder": {
     "_section": "PROMOTION — tier as an EARNED position (SNG-269/2c). Erik: 'the ones that stay the longest are the true legends.'",
     "deedWeights": { "arcContestWon": 3, "strikeLanded": 3, "strikeSurvived": 3, "guardIntercept": 3, "stageMoved": 3, "spreadPerHop": 2, "heldThroughCrisis": 1 },

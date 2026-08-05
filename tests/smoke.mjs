@@ -7384,7 +7384,9 @@ await (async () => {
     // CCODE-113: the push now happens after the arc is CONTESTED, so the call carries the leaning entry's
     // care rather than `s.care` directly. The guarantee is what matters and it is unchanged: every living
     // legend is considered, and every care they spend attention on is pushed.
-    /for \(const f of living\)/.test(wtSrc208) && /spendAttention\(f, \{ arcNetPush: netBefore \}/.test(wtSrc208)
+    // SNG-298: the figure handed to `spendAttention` now carries its EVOLVED cares (`fNow`), so a shift
+    // actually changes behaviour instead of being announced and ignored. The guarantee is the same one.
+    /for \(const f of living\)/.test(wtSrc208) && /spendAttention\(fNow, \{ arcNetPush: netBefore \}/.test(wtSrc208)
     && /arcAffinity: e\.care/.test(wtSrc208));
   check("208/CCODE-113: a contested arc is resolved with a REAL battleRound, not arithmetic",
     /contestArc\(\{ pro: champ\(aSide/.test(wtSrc208) && /battleRound\(\{/.test(wtSrc208));
@@ -10130,6 +10132,45 @@ await (async () => {
     const thin = (ws.mintedFigures || []).filter(f => !(f.arcAffinities?.length >= 1 && f.wantArcId && f.personalVerbs?.length));
     return thin.length === 0;
   })());
+}
+
+// --- SNG-298: NPCs change their minds ---------------------------------------------------------------
+{
+  const wt8 = await import("../engine/worldtick.js");
+  const wsrc8 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  const f = () => ({ id: "n", arcAffinities: [{ arcId: "bleed", dir: -1, weight: 2 }] });
+
+  check("272/298: an attempt on their life over an arc they hold makes them DIG IN",
+    wt8.evolveCares(f(), { struckOnArcs: [{ arcId: "bleed" }] }).cares.find(c => c.arcId === "bleed").weight === 3);
+  check("272/298: …and over an arc they had no opinion on, they GAIN one",
+    wt8.evolveCares(f(), { struckOnArcs: [{ arcId: "poles" }] }).cares.some(c => c.arcId === "poles"));
+
+  // ⛔ DIRECTIVE SNG-280 — the player cannot farm allies by being agreeable.
+  check("272/298: a DISLIKED player recruits the opposite side just as reliably", (() => {
+    const liked = wt8.evolveCares(f(), { playerArcs: [{ arcId: "storm", dir: 1 }], relationship: 3 });
+    const disliked = wt8.evolveCares(f(), { playerArcs: [{ arcId: "storm", dir: 1 }], relationship: -3 });
+    const a = liked.cares.find(c => c.arcId === "storm"), b = disliked.cares.find(c => c.arcId === "storm");
+    return a.dir === 1 && b.dir === -1;
+  })());
+  check("272/298: knowing the player does NOT flip someone already leaning the other way", (() => {
+    const r = wt8.evolveCares(f(), { playerArcs: [{ arcId: "bleed", dir: 1 }], relationship: 5 });
+    return r.cares.find(c => c.arcId === "bleed").dir === -1;   // still theirs
+  })());
+
+  check("272/298: a care left untended fades — without erosion everyone ends up caring about everything",
+    wt8.evolveCares(f(), { idleArcs: ["bleed"] }).cares.find(c => c.arcId === "bleed").weight === 1);
+  check("272/298: …but erosion NEVER empties them (a figure with no cares drops out of the world)",
+    wt8.evolveCares({ id: "x", arcAffinities: [{ arcId: "a", dir: 1, weight: 1 }] }, { idleArcs: ["a"] }).cares.length === 1);
+  check("272/298: a figure cannot end up caring about everything",
+    wt8.evolveCares(f(), { struckOnArcs: [{ arcId: "p1" }, { arcId: "p2" }, { arcId: "p3" }, { arcId: "p4" }, { arcId: "p5" }],
+      cfg: { maxCares: 4 } }).cares.length <= 4);
+
+  // ⚠️ THE WIRE THAT MAKES IT REAL: attention must read the EVOLVED cares, or the shift is announced and ignored.
+  check("272/298: the pass spends attention on the cares as they are NOW, not as authored",
+    /const fNow = \{ \.\.\.f, arcAffinities: currentCares\(ws, f\) \}/.test(wsrc8)
+    && /spendAttention\(fNow,/.test(wsrc8));
+  check("272/298: the change is told in the arc’s NAME, not its id",
+    /nameOfArc\(hard\.arcId\)/.test(wsrc8) && /nameOfArc = \(id\)/.test(wsrc8));
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

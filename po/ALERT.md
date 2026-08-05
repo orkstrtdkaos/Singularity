@@ -1,3 +1,47 @@
+## CCODE-144 — SNG-298: NPCs change their minds
+
+Erik: *"I want NPCs to be able to grow and evolve too — their cares and wants might shift or they might gain
+new ones, especially if they are interacting with the player or get a strike attempted against them."*
+
+Built, and both of his triggers were already recorded — `arcStrikes` carries target and arc, `npcRegistry`
+carries `relationship` and an interaction history. Over 500 world-days, **49 figures change their minds.**
+
+```
+  · The Starless One has dug in over The Green Schism.
+  · Valen Sunwrack, Who Left No Shadow Standing has dug in over What Wakes Beneath.
+  · The One Who Called the First Moot has stopped spending themselves on The Poles Pull.
+```
+
+**Three movements.** HARDENING (something happens over an arc you hold — you dig in). ACQUISITION (something
+happens over an arc you had no opinion on — now you do; somebody trying to have you removed from a front is
+how a front becomes YOUR front). And EROSION, which is the one that keeps the other two honest: a care you
+never tend fades. Without it cares only accumulate, every figure ends up caring about everything, the
+attention budget stops meaning anything because there is nothing to choose between, and they all become the
+same person. ⚠️ Erosion NARROWS a figure and never empties one — a figure with no cares is invisible to
+`living` and would drop out of the world.
+
+### ⛔ DIRECTIVE SNG-280, and this one needed it more than most
+
+The obvious build is "the player wins people over", and that is approval wearing a mechanic. Instead:
+
+· **A strike makes its target INVESTED, not virtuous.** The new care opposes whoever came for them — causal,
+  not moral, and identical for the Maw and the Rootkin.
+· **A disliked player recruits opposition exactly as reliably as a liked player recruits allies.** The
+  relationship decides the SIDE, never whether the shift happens. Allies cannot be farmed by being agreeable.
+· **Knowing the player does not FLIP someone already leaning the other way.** People do not change sides
+  because an acquaintance is on the other one — that would make the player a persuasion machine and every NPC
+  weather.
+
+### The wire that makes it real
+
+`spendAttention` is where a care becomes behaviour, so it now receives the EVOLVED list. Without that one
+substitution the whole feature would have been written to world state, announced in the news, and then
+ignored by the very next pass — the exact shape of failure this fortnight has been full of, and the one I
+went looking for before shipping rather than after.
+
+Dials in `arc_response.json` under `careShift`: `maxCares` (4), `hardenBy`, `maxCareWeight`, `erodeBy`,
+`erodeAfterPasses` (6).
+
 ## CCODE-143 — SNG-297: a minted figure is born with a life
 
 Aevi — built as specced. Your pools are promoted and merged, and `mintFigure` fills from them:

@@ -672,6 +672,14 @@ export function contestArc({ pro, con, sb, rules, steps, rng = Math.random }) {
     : { proMult: 1 / swing, conMult: swing, winner: con.id, margin: gap };
 }
 
+/** SNG-298: a figure's cares as they are NOW — the evolved list if the world has moved them, else what was
+ *  authored. ⚠️ Every reader must come through here or an evolved care is a record nothing acts on: the
+ *  shift would be written, reported in the news, and then ignored by the next pass. */
+export function currentCares(ws, figure) {
+  const evolved = ws?.figureCares?.[figure?.id];
+  return Array.isArray(evolved) && evolved.length ? evolved : affinitiesOf(figure);
+}
+
 export function affinitiesOf(figure) {
   const many = Array.isArray(figure?.arcAffinities) ? figure.arcAffinities : null;
   const list = (many && many.length ? many : [figure?.arcAffinity]).filter(a => a?.arcId && a?.dir);
@@ -960,6 +968,96 @@ export function mintFigure(ws, { tier = "notable", name = null, epithet = null, 
   return fig;
 }
 
+/** SNG-298 — PEOPLE CHANGE THEIR MINDS. Erik: *"I want NPCs to be able to grow and evolve too — their cares
+ *  and wants might shift or they might gain new ones, especially if they are interacting with the player or
+ *  get a strike attempted against them."*
+ *
+ *  Until now a figure's cares were fixed at authoring and never moved again. Everything else about them could
+ *  change — their rung, their record, their title, whether they were alive — but not what they wanted, which
+ *  is the one thing that would actually make them feel like a person rather than a position.
+ *
+ *  THREE MOVEMENTS, and the third is what keeps the other two honest:
+ *
+ *   · HARDENING — something happens to you over an arc you already care about, and you dig in. Weight up.
+ *   · ACQUISITION — something happens to you over an arc you had no opinion on, and now you do. Somebody
+ *     tried to have you removed from a front; that is how a front becomes YOUR front.
+ *   · EROSION — a care you never spend attention on fades, and eventually drops. Without this, cares only
+ *     ever accumulate: every figure ends up caring about everything, which makes the attention budget
+ *     meaningless (there is nothing to choose between) and makes them all the same person.
+ *
+ *  ⛔ DIRECTIVE SNG-280 — NO APPROVAL ANYWHERE IN HERE. A strike does not make its target VIRTUOUS, it makes
+ *  them INVESTED: the new care opposes whoever acted on them, which is causal rather than moral, and works
+ *  identically for the Maw and for the Rootkin. And a figure who takes the player's side does so because of
+ *  the relationship they already have with that player — a player the world dislikes recruits opposition just
+ *  as reliably as a liked one recruits allies. Nothing here rewards being agreeable.
+ *
+ *  Pure: takes a figure and what happened to them, returns the new care list and why. Mutates nothing.
+ */
+export function evolveCares(figure, { struckOnArcs = [], playerArcs = [], relationship = 0, idleArcs = [], cfg = {} } = {}) {
+  const maxCares = Number.isFinite(cfg.maxCares) ? cfg.maxCares : 4;
+  const hardenBy = Number.isFinite(cfg.hardenBy) ? cfg.hardenBy : 1;
+  const maxWeight = Number.isFinite(cfg.maxCareWeight) ? cfg.maxCareWeight : 4;
+  const erodeBy = Number.isFinite(cfg.erodeBy) ? cfg.erodeBy : 1;
+
+  const cares = affinitiesOf(figure).map(c => ({ ...c }));
+  const byArc = new Map(cares.map(c => [c.arcId, c]));
+  const changes = [];
+
+  // 1 + 2 — what was DONE TO THEM. An attempt on your life over an arc is the strongest opinion-former in
+  //         the model, which is why Erik named it: it is the moment a front stops being abstract.
+  for (const { arcId, byDir } of struckOnArcs) {
+    if (!arcId) continue;
+    const have = byArc.get(arcId);
+    if (have) {
+      const before = Number(have.weight) || 1;
+      have.weight = Math.min(maxWeight, before + hardenBy);
+      if (have.weight !== before) changes.push({ kind: "hardened", arcId, to: have.weight });
+    } else if (cares.length < maxCares) {
+      // ⛔ The direction OPPOSES whoever came for them. Not a judgement — you push back on the people who
+      // pushed you, whichever side either of you is on.
+      const c = { arcId, dir: byDir ? -Math.sign(byDir) : -1, weight: 1 };
+      cares.push(c); byArc.set(arcId, c);
+      changes.push({ kind: "acquired", arcId, why: "an attempt was made on them over it" });
+    }
+  }
+
+  // 3 — the PLAYER. Proximity makes an argument salient; the RELATIONSHIP decides which way they take it.
+  //     A player the world has cause to dislike recruits opposition exactly as reliably as a liked one
+  //     recruits allies, so this cannot be farmed by being pleasant.
+  for (const { arcId, dir } of playerArcs) {
+    if (!arcId || !dir) continue;
+    const have = byArc.get(arcId);
+    const side = relationship >= 0 ? Math.sign(dir) : -Math.sign(dir);
+    if (have) {
+      if (Math.sign(have.dir) === side) {
+        const before = Number(have.weight) || 1;
+        have.weight = Math.min(maxWeight, before + hardenBy);
+        if (have.weight !== before) changes.push({ kind: "hardened", arcId, to: have.weight, why: "the player has been at it with them" });
+      }
+      // ⚠️ A figure who ALREADY leans the other way is NOT flipped by knowing the player. People do not
+      //    change sides because someone they know is on the other one — that would make the player a
+      //    persuasion machine and every NPC weather.
+    } else if (cares.length < maxCares) {
+      const c = { arcId, dir: side, weight: 1 };
+      cares.push(c); byArc.set(arcId, c);
+      changes.push({ kind: "acquired", arcId, why: relationship >= 0 ? "they have been in it alongside the player" : "they have been on the other side of the player" });
+    }
+  }
+
+  // 4 — EROSION. What you never tend, you stop holding.
+  for (const arcId of idleArcs) {
+    const have = byArc.get(arcId);
+    if (!have) continue;
+    have.weight = (Number(have.weight) || 1) - erodeBy;
+    if (have.weight <= 0) changes.push({ kind: "let go", arcId });
+  }
+  const kept = cares.filter(c => (Number(c.weight) || 0) > 0);
+
+  // ⚠️ NEVER LEAVE THEM WITH NOTHING. A figure with no cares is invisible to `living` and drops out of the
+  //    world entirely — erosion is meant to narrow someone, not delete them.
+  const final = kept.length ? kept : cares.slice(0, 1).map(c => ({ ...c, weight: 1 }));
+  return { cares: final, changes };
+}
 /** SNG-288 — A CAREER, NOT A RUNG.
  *
  *  ⚠️ `figureTenure.deeds` and `.losses` RESET ON PROMOTION — they measure progress toward the NEXT rung,
@@ -1192,10 +1290,10 @@ export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg 
     // retrieval was ever attempted. Searching for a dead person in the list of the living: it returns
     // nothing, forever, and never once errors.
     const dead = roster.find(f => f.id === id) || { id };
-    const cares = new Set(affinitiesOf(dead).map(c => c.arcId));
+    const cares = new Set(currentCares(ws, dead).map(c => c.arcId));   // SNG-298: as they are NOW
     // Someone who stood on the same side of something. Failing that, nobody comes.
     const kin = living.filter(f => f.id !== id && effectiveEpicStatus(ws, f.id, worldDay) === "active"
-      && affinitiesOf(f).some(c => cares.has(c.arcId)));
+      && currentCares(ws, f).some(c => cares.has(c.arcId)));
     if (!kin.length) continue;
     const who = kin.sort((a, b) => tierRank(tierOf(ws, b)) - tierRank(tierOf(ws, a)))[0];
     // WHO WANTS THEM BACK — recorded for EVERY reachable dead with living kin, not only the ones somebody
@@ -1434,7 +1532,12 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     const leaning = {};   // CCODE-113: arcId -> who is pushing which way this pass
     for (const f of living) {
       const wantArc = f.wantArcId || f.legend?.wantArcId || null;
-      const { spent, unattended, personal, neglected } = spendAttention(f, { arcNetPush: netBefore },
+      // ⚠️ THE EVOLVED CARES, NOT THE AUTHORED ONES. `spendAttention` is where a care becomes behaviour, so
+      // if it reads the authored list the whole of SNG-298 is inert: the shift gets written, announced in the
+      // news, and then ignored by the very next pass. `spendAttention` keeps taking a plain figure — the
+      // substitution happens here, at the one place that knows the world state.
+      const fNow = { ...f, arcAffinities: currentCares(ws, f) };
+      const { spent, unattended, personal, neglected } = spendAttention(fNow, { arcNetPush: netBefore },
         // A front spent in the dark is a front not spent on an arc — the cost that makes it a decision.
         { budget: Math.max(0, budgetFor(f) - (retrievers.has(f.id) ? 1 : 0)), perPoint, wantArcId: wantArc,
           // SNG-275: and a share is not the arcs' to spend at all — a person is not only their position on
@@ -1453,6 +1556,12 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         creditDeed(ws, f.id, "heldThroughCrisis", { worldDay: currentWorldDay });
       }
       for (const arcId of unattended) vacated[arcId] = (vacated[arcId] || 0) + 1;
+      // SNG-298: a care left untended, PASS AFTER PASS, is one they are letting go of. Tracked as a streak
+      // rather than acted on immediately — skipping a front for one week is a choice, not a change of heart.
+      ws.careIdle = ws.careIdle || {};
+      const idle = (ws.careIdle[f.id] ||= {});
+      for (const arcId of unattended) idle[arcId] = (idle[arcId] || 0) + 1;
+      for (const s of spent) if (idle[s.care.arcId]) idle[s.care.arcId] = 0;
       for (const s of spent) {
         const against = -Math.sign(s.care.dir) * (Number(netBefore[s.care.arcId]) || 0);
         const urgency = Math.max(minMult, Math.min(maxMult, 1 + against * perPoint));
@@ -1808,6 +1917,59 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       // SNG-279: 2 per hop — SCALE, not merit. A name that reached four settlements counts twice a name that
       // reached two, whatever the name is known for.
       if (hops.length) creditDeed(ws, f.id, "spreadPerHop", { worldDay: currentWorldDay, times: hops.length });
+    }
+    // SNG-298 — PEOPLE CHANGE THEIR MINDS. Run AFTER the pass, so it reads what actually happened: who was
+    // struck at and over what, where the player has been spending themselves, and which cares went untended
+    // long enough to be let go of.
+    {
+      const careCfg = content.rules?.careShift || {};
+      const erodeAfter = Number.isFinite(careCfg.erodeAfterPasses) ? careCfg.erodeAfterPasses : 6;
+      const struckBy = {};
+      for (const s of strikes) {
+        if (!s.target || s.outcome === "guarded") continue;   // a turned-aside strike is a fright, not a lesson
+        (struckBy[s.target] ||= []).push({ arcId: s.arcId, byDir: null });
+      }
+      // Where the PLAYER is pushing, by arc — the same reader the arcs themselves use.
+      const playerPush = [];
+      for (const arcId of Object.keys(leaning)) {
+        let mine = 0;
+        try { mine = arcPushes(character, arcId)?.mine || 0; } catch { mine = 0; }
+        if (mine) playerPush.push({ arcId, dir: Math.sign(mine) });
+      }
+      const shifted = [];
+      for (const f of living) {
+        const idle = ws.careIdle?.[f.id] || {};
+        const idleArcs = Object.entries(idle).filter(([, n]) => n >= erodeAfter).map(([a]) => a);
+        const struck = struckBy[f.id] || [];
+        // Only figures something HAPPENED to. A quiet season changes nobody, which is the point.
+        const known = character?.npcRegistry?.[f.id];
+        const near = known ? playerPush : [];
+        if (!struck.length && !near.length && !idleArcs.length) continue;
+        const { cares, changes } = evolveCares(f, {
+          struckOnArcs: struck, playerArcs: near, relationship: Number(known?.relationship) || 0,
+          idleArcs, cfg: careCfg,
+        });
+        if (!changes.length) continue;
+        // The care list lives on the WORLD, not on content — content is read-only and shared, and a figure
+        // who changed their mind in this world has not changed it in anyone else's.
+        (ws.figureCares ||= {})[f.id] = cares;
+        for (const a of idleArcs) if (idle[a]) idle[a] = 0;
+        shifted.push({ id: f.id, name: f.name, changes });
+      }
+      ws.careShifts = shifted;
+      // ⚠️ NAMES, NOT IDS. "dug in over arc_what_wakes_beneath" is the machine talking — Aevi's rule for
+      // the World tab applies to the news just as much.
+      const arcTitle = Object.fromEntries((content.greaterArcs || []).map(a => [a.id, a.name]));
+      const nameOfArc = (id) => arcTitle[id] || String(id).replace(/^arc_/, "").replace(/_/g, " ");
+      for (const s of shifted.slice(0, 3)) {
+        const got = s.changes.find(c => c.kind === "acquired");
+        const hard = s.changes.find(c => c.kind === "hardened");
+        const let_go = s.changes.find(c => c.kind === "let go");
+        const line = got ? `${s.name || "Someone"} has taken an interest in ${nameOfArc(got.arcId)} — ${got.why}.`
+          : hard ? `${s.name || "Someone"} has dug in over ${nameOfArc(hard.arcId)}.`
+          : let_go ? `${s.name || "Someone"} has stopped spending themselves on ${nameOfArc(let_go.arcId)}.` : null;
+        if (line) news.push({ text: line, worldDay: currentWorldDay, tier: "murmur" });
+      }
     }
     ws.arcStandings = { risen, fallen };
     // SNG-279 PART 3 — SEE AND FEEL IT, the requirement rather than the garnish. Aevi: "a promotion the

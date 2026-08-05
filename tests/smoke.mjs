@@ -9914,6 +9914,50 @@ await (async () => {
       /typeof v === "number" && Number\.isFinite\(v\)/.test(src));
   }
 
+  // SNG-310 — SOMEBODY IS OUT TO GET YOU. Erik: "yes the player can be struck, but that event is a GM
+  // narrated encounter. The fact that someone is out to get you triggers it though."
+  {
+    // ⛔ THE LOAD-BEARING ASSERTION: the engine MARKS and never RESOLVES. Every other strike settles offscreen
+    // through resolveEpicClash because both parties are offscreen; one aimed at the player cannot, because
+    // resolving it would decide a fight the player was never in. That is Design Law 1, and it is the whole
+    // difference between "the world can reach you" and "the world plays you".
+    const src310 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+    const block = src310.slice(src310.indexOf("if (mark.f.id === PLAYER_MARK_ID)"), src310.indexOf("const outcome = applyEpicClashOutcome(ws, sender.f, mark.f"));
+    check("310: a strike aimed at the PLAYER is recorded, never resolved — the engine marks, the GM narrates",
+      block.length > 0 && /pendingStrikes/.test(block) && !/resolveEpicClash|applyEpicClashOutcome/.test(block));
+
+    check("310: an unmarked player has no threat at all — silence, not an empty object",
+      wt.threatToPlayer({}) === null && wt.threatToPlayer({ pendingStrikes: [] }) === null);
+
+    // ⚠️ THE TWO KINDS DIVERGE, AND IT FALLS OUT OF THE MODEL: a crusade is DECLARED, a knife is not.
+    const declared = wt.threatToPlayer({ pendingStrikes: [
+      { arcId: "A", kind: "crusade", sender: "s1", senderName: "The Burning Certainty", announced: true, worldDay: 10 }] });
+    const quiet = wt.threatToPlayer({ pendingStrikes: [
+      { arcId: "A", kind: "quiet", sender: "s2", senderName: "Nobody You Know", announced: false, worldDay: 10 }] });
+    check("310: a CRUSADE against the player names its sender — being told is what a crusade IS",
+      declared.known.length === 1 && declared.known[0].sender === "The Burning Certainty" && declared.unseen === 0);
+    check("310: a QUIET strike is counted but names nobody — they learn it when it arrives",
+      quiet.marked === true && quiet.count === 1 && quiet.known.length === 0 && quiet.unseen === 1);
+
+    // ⛔ THE SEED CARRIES WHAT MAKES IT COST SOMETHING. `assassin` is the highest slain weight in the
+    // incapacitation table, and the threat band puts a warning and a forced Decline in front of it — so a
+    // GM who brings this to a head gets the consequence machinery for free rather than improvising it.
+    const IC310 = await import("../engine/incapacitation.js");
+    const EN310 = await import("../engine/encounters.js");
+    const { loadContentHeadless: lch310 } = await import("./headless_content.mjs");
+    const C310 = await lch310();
+    const seed = declared.seed;
+    check("310: the seed is an ASSASSIN — finishing you was the errand, and the ladder knows what that costs",
+      seed.aggressorKind === "assassin"
+      && IC310.aggressorKind({ aggressorKind: seed.aggressorKind }, {}) === "assassin");
+    check("310: …and the seed is WARNED — a band that forces a label and a Decline into the offer",
+      EN310.isLethalEncounter({ threat: seed.threat }, C310.rules) === true);
+
+    // A resolved threat stops being one — otherwise the player is marked forever by one old errand.
+    check("310: a resolved threat clears — nobody is hunted forever by a closed errand",
+      wt.threatToPlayer({ pendingStrikes: [{ arcId: "A", announced: true, resolved: true }] }) === null);
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

@@ -740,6 +740,50 @@ export function planChallenge({ figure, pool = [], tierOf: tierFn = (f) => f?.ti
   return { defender: figure, challenger: band[Math.floor(rng() * band.length)] || band[0], rung };
 }
 
+/** SNG-310 — SOMEBODY IS OUT TO GET YOU. Erik: *"yes the player can be struck, but that event is a GM
+ *  narrated encounter. The fact that someone is out to get you triggers it though."*
+ *
+ *  ⛔ SO THE WORLD ENGINE MARKS, AND NEVER RESOLVES. That is Design Law 1 exactly — the GM narrates and
+ *  proposes; the engine never advances a scene on the player's behalf. Every other strike in the valley
+ *  settles offscreen through `resolveEpicClash` because both parties are offscreen. One aimed at the PLAYER
+ *  cannot: resolving it would decide a fight the player never got to be in, which is the one thing this
+ *  codebase does not do.
+ *
+ *  What the engine produces instead is a THREAT — a named sender, an arc, a kind, a day. That is the trigger.
+ *  The encounter is the GM's to narrate, and everything needed to make it COST something already exists:
+ *  `aggressorKind: assassin` decides what happens if the player goes down (finishing them was the errand, at
+ *  8× a duelist's rate), the threat band puts a warning and a forced Decline in front of it, and the
+ *  incapacitation ladder catches them if it goes badly.
+ *
+ *  ⚠️ THE TWO KINDS DIVERGE HERE, AND IT FALLS OUT OF THE MODEL RATHER THAN BEING INVENTED FOR THE PLAYER.
+ *  A CRUSADE IS DECLARED — the player is told, because being told is what a crusade IS. A QUIET strike is
+ *  not: they learn it when it arrives. `announced` carries exactly that difference. */
+/** The id the player wears when they stand in a strike pool. Never a real figure id, and never added to
+ *  `living` — the player must be REACHABLE by a strike without being dragged into melee, casualties or
+ *  promotion, none of which the offscreen world may decide for them. */
+export const PLAYER_MARK_ID = "__player__";
+
+export function threatToPlayer(ws) {
+  const pending = (ws?.pendingStrikes || []).filter(t => t && !t.resolved);
+  if (!pending.length) return null;
+  const declared = pending.filter(t => t.announced);
+  return {
+    marked: true,
+    count: pending.length,
+    // What the player may be TOLD. A quiet strike counts toward `unseen` and names nobody.
+    known: declared.map(t => ({ sender: t.senderName || t.sender, arcId: t.arcId, since: t.worldDay })),
+    unseen: pending.length - declared.length,
+    // ⛔ AN ENCOUNTER SEED, NOT AN ENCOUNTER. The GM decides when and how this comes to a head.
+    seed: {
+      aggressorKind: "assassin",
+      threat: "grave",
+      why: declared.length
+        ? `${declared[0].senderName || "someone"} has declared against you over ${declared[0].arcId}`
+        : "someone has been sent, and they did not announce it",
+    },
+  };
+}
+
 /** SNG-304 — THE HOLDING STREAK. Erik: "a streak of holding could give an edge… something that builds to a
  *  point. It would get dropped down if interrupted."
  *
@@ -2074,7 +2118,19 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       // is what made 910 strikes produce 0 crusades against a fully authored table.
       const strikeKinds = normalizeStrikeKinds(cfg);
       for (const [attackers, defenders] of [[P, Q], [Q, P]]) {
-        const plan = planStrike({ attackers, defenders, arcId, strikeCfg, strikeKinds, strikeRate, rng, weightOf: wOf,
+        // SNG-310 — ⚠️ THE PLAYER STANDS IN THE POOL, AND ONLY IN THIS POOL. They are added to the defending
+        // side's WORKING list purely so `planStrike` can choose them as a mark; they are never in `living`,
+        // never in `leaning`, and so never in a melee, a casualty table or a promotion. Standing on a front
+        // is what makes someone worth sending a knife at — that logic now applies to the player too, which
+        // is Erik's ruling, without the offscreen world deciding anything else about them.
+        const playerHere = playerOnArc(arcId);
+        const dSide = playerHere
+          ? { ...defenders, working: [...defenders.working, {
+              f: { id: PLAYER_MARK_ID, name: character?.name || "you",
+                   weight: Math.max(1, Number(character?.level) || 1) },
+              care: { arcId, dir: "pro" }, urgency: 1, share: 1 }] }
+          : defenders;
+        const plan = planStrike({ attackers, defenders: dSide, arcId, strikeCfg, strikeKinds, strikeRate, rng, weightOf: wOf,
           exposure: ws.figureExposure || {},
           guardInterceptChance: Number.isFinite(cfg.guardInterceptChance) ? cfg.guardInterceptChance : 0.45 });
         if (!plan) continue;
@@ -2102,6 +2158,31 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           continue;
         }
         const clash = resolveEpicClash(sender.f, mark.f, rng);
+        // SNG-310 — ⛔ IS THE MARK THE PLAYER? Then the engine MARKS and does not resolve.
+        //
+        // Erik: "yes the player can be struck, but that event is a GM narrated encounter. The fact that
+        // someone is out to get you triggers it though." Every other strike settles here because both
+        // parties are offscreen; this one cannot, because resolving it would decide a fight the player was
+        // never in. So it becomes a pending threat and the loop moves on.
+        //
+        // The player is reachable only when they are actually HOLDING this front — `playerOnArc` is the same
+        // test that decides whether a deed is player-touched. Standing on an arc is what makes you worth
+        // sending someone at, which is the whole logic of the mechanic applied evenly to the player.
+        if (mark.f.id === PLAYER_MARK_ID) {
+          (ws.pendingStrikes ||= []).push({
+            arcId, kind, sender: sender.f.id, senderName: sender.f.name || null,
+            // A CRUSADE IS DECLARED AND A KNIFE IS NOT — the player is told about one and not the other,
+            // which is the difference between the two kinds, not a rule written for the player's benefit.
+            announced: kind === "crusade",
+            worldDay: currentWorldDay, resolved: false,
+          });
+          news.push({ text: kind === "crusade"
+            ? `${sender.f.name || "Someone"} has declared against you over ${arcId}. They are not hiding it.`
+            : `Word reaches you that someone has been sent. No name, no face — only that it has been done.`,
+            worldDay: currentWorldDay, tier: "event" });
+          creditDeed(ws, sender.f.id, "strikeLanded", { worldDay: currentWorldDay });
+          continue;
+        }
         const outcome = applyEpicClashOutcome(ws, sender.f, mark.f, clash.kind, currentWorldDay);
         if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
           strikes.push({ arcId, kind, target: mark.f.id, sender: sender.f.id, outcome: outcome.finalKind,

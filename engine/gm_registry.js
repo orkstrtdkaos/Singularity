@@ -41,6 +41,7 @@ import { legendsForGM } from "./legends.js"; // SNG-208 wiring: legends pursuabl
 import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to become the next thread
 import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HERE, so the GM can be honest about it
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
+import { threatToPlayer } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
@@ -230,6 +231,17 @@ export const GM_CONTEXT = [
   { key: "reachableDeadDetail", builder: "death.reachableDeadForGM (SNG-209)", carries: ["the dead still within reach", "how deep each has sunk (the wall)"],
     reachedBy: "always (a figure has died and is not yet sealed)", spec: "SNG-209 §1", views: ["turn", "ask"],
     build: (env) => reachableDeadForGM(env.character, env.CONTENT, env.character?.worldState?.lastTickWorldDay ?? null) },
+
+  // SNG-310 — ⚠️ SOMEBODY IS OUT TO GET YOU, AND THE GM HAS TO KNOW OR IT NEVER HAPPENS. Erik: "yes the
+  // player can be struck, but that event is a GM narrated encounter. The fact that someone is out to get you
+  // triggers it though." The world engine MARKS and never resolves; this is the seam where the mark becomes
+  // something a scene can be made of. Without this entry the whole mechanic is a field nobody reads — the
+  // PromisedButUnread family aimed at the sharpest consequence in the game.
+  { key: "threatToPlayer", builder: "worldtick.threatToPlayer (SNG-310)",
+    carries: ["that someone has been sent for the player", "who, WHEN THEY DECLARED IT", "how many have not"],
+    reachedBy: "the offscreen world chose the player as a strike target while they held a contested front",
+    spec: "SNG-310", views: ["turn", "ask"],
+    build: (env) => threatToPlayer(env.character?.worldState) },
 
   // ---- turn-only: pass-throughs from runGM's own parameters ----
   { key: "resolution", builder: "runGM param (resolve.resolveAction)", carries: ["this action's mechanical outcome"],

@@ -1621,7 +1621,7 @@
    },
    "bounds": [
     {
-     "text": "IT CANNOT HARM, ONLY HOLD",
+     "text": "IT CANNOT HARM, ONLY HOLD — the chord itself does no damage at any rank; the only harm it can do is an overcharge burst, which is a failure rather than a use",
      "class": "hard"
     },
     {
@@ -1633,7 +1633,68 @@
      "class": "hard"
     }
    ],
-   "plainly": "A defend/create action that strengthens someone. Its strength is rated 6 out of 10 It affects 6 targets, and lasts for about a day Ranks: rank 2 adds to special. Limit: iT Cannot Harm, Only Hold."
+   "plainly": "A harmonic working that holds a chord to strengthen everyone attuned to it. It fills fastest when a second harmonic plays into it, slower from a crowd, wind or water, and not at all in true silence — so it is nearly always gaining something. Another harmonic can spend energy into it to fill it faster. While it holds, sound-type damage aimed at you goes into the chord instead of into you and becomes charge — sound only. It holds up to its rank's capacity; past that you get about an hour of warning, the chord goes sharp, and then it bursts for 3d6 to everything brittle within earshot and deafens you for a day. You can instead release the excess as a working of your own aiming; failing that check vents half and deafens you for the scene. A chord cannot be stolen — it is carried in the carrying — but it is audible the whole time, so anyone listening knows how full it is.",
+   "upkeep": {
+    "prepHoursByRank": {
+     "1": 1,
+     "2": 12
+    },
+    "accrual": "rate",
+    "attended": false,
+    "interruptible": true,
+    "onInterrupt": "nothing is lost — the chord keeps what it holds and resumes",
+    "rateBySource": {
+     "a second harmonic playing into it": 1.0,
+     "a crowd singing": 0.7,
+     "running water or wind": 0.25,
+     "ordinary room noise": 0.05,
+     "true silence": 0.0
+    },
+    "fedByCraft": {
+     "acceptsDamageType": "sound",
+     "hoursPerEnergy": 0.5,
+     "maxPerScene": 12,
+     "note": "a second harmonic playing into the chord fills it at full rate — the cooperative multiplier, same as two Radiants at a Well"
+    },
+    "absorbs": {
+     "damageType": "sound",
+     "convertsToCharge": true,
+     "hoursPerPointAbsorbed": 0.25,
+     "capPerScene": 8,
+     "note": "sonic_resonance aimed at the bearer is taken INTO the chord instead of into the chest. Sound only — an edge or a shadow passes straight through."
+    },
+    "capacityHoursByRank": {
+     "1": 1,
+     "2": 12
+    },
+    "overcharge": {
+     "thresholdPct": 100,
+     "graceHours": 1,
+     "warning": "the chord goes sharp, and everyone attuned to it feels their teeth ache",
+     "onBurst": {
+      "damageDice": {
+       "n": 3,
+       "d": 6
+      },
+      "damageType": "sound",
+      "area": "everything brittle within earshot",
+      "alsoDeafens": "the bearer, for a day",
+      "destroysVessel": true
+     },
+     "note": "⚠️ THE ONE OVERCHARGE EVERYONE SAW COMING. A holding chord is audible the whole time it is filling, so unlike the Well nobody is surprised — including your enemies, who can hear how full you are."
+    },
+    "venting": {
+     "action": "release the chord",
+     "checkAgainst": "the excess above capacity",
+     "onSuccess": "the excess is spent as a released working of your aiming",
+     "onFailure": "you vent half and are deafened for the scene"
+    },
+    "takeable": {
+     "canBeTaken": false,
+     "note": "⚠️ THE VESSEL THAT CANNOT BE STOLEN — a chord is not an object. It is carried in the carrying, so an enemy who wants it must make you stop, not take a thing off you. That asymmetry with the Well is the point."
+    },
+    "note": "⚠️ THE SECOND VESSEL, and it proves the pattern travels: one instance is a craft, two is a mechanic."
+   }
   },
   {
    "schemaVersion": 1,

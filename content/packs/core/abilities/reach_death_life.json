@@ -1015,7 +1015,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/investigate action that strengthens someone. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about an hour Ranks: rank 2 extends targets. Limit: iT Does Not Postpone Death — the gift is The Hour, not more hours."
+   "plainly": "A social/investigate action that strengthens someone. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about an hour Ranks: rank 2 extends targets. Limit: iT Does Not Postpone Death — the gift is The Hour, not more hours.",
+   "upkeep": {
+    "prepHours": 0,
+    "cooldownHours": {
+     "all": 720
+    },
+    "note": "COOLDOWN ADDED: a capstone that ends a life should not be available twice in a month."
+   }
   },
   {
    "schemaVersion": 1,
@@ -1566,7 +1573,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight action that deals damage. It rolls 5d6+6 It affects 1 target Limit: iT Costs Almost Everything You Have."
+   "plainly": "A fight action that deals damage. It rolls 5d6+6 It affects 1 target Limit: iT Costs Almost Everything You Have.",
+   "upkeep": {
+    "prepHours": 0,
+    "cooldownHours": {
+     "all": 720
+    }
+   }
   },
   {
    "id": "the_grey_road",
@@ -2657,13 +2670,16 @@
    ],
    "plainly": "A survive/investigate action that restores health. It rolls 2d6+2 It affects 1 target Ranks: rank 2 deepens depth; rank 3 deepens depth. Limit: the Sealed Refuse Every Road — no rank reaches depth 3.",
    "upkeep": {
-    "targetAgeHoursMax": 720,
+    "prepHours": 0,
     "byRank": {
      "1": 24,
      "2": 720,
      "3": 2880
     },
-    "note": "⚠️ matches the death ladder exactly: r1 reaches the threshold (24h), r2 the near dark (720h), r3 the deep dark (2880h)"
+    "cooldownHours": {
+     "3": 720
+    },
+    "note": "targetAge reach by rank, matching death.js. Cooldown on r3: a deep-dark reach is not a weekly act."
    }
   },
   {

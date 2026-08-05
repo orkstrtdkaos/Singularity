@@ -658,11 +658,20 @@
      "2": 72,
      "3": 168
     },
-    "prepCondition": "clear noon each day",
+    "accrual": "rate",
     "attended": false,
     "interruptible": true,
-    "onInterrupt": "the days already banked are kept; the count resumes",
-    "note": "⚠️ ERIK: 'the ones that require a long time to build should be able to be cast but not require you to stick around while it builds.' So `attended: false` — you set the vessels out and LEAVE. The week of clear noons is elapsed world-time, not player-time, and a broken run now KEEPS what was banked rather than losing everything."
+    "onInterrupt": "nothing is lost — the vessels keep what they hold and resume",
+    "rateBySource": {
+     "direct noon sun": 1.0,
+     "bright daylight": 0.6,
+     "overcast day": 0.3,
+     "a large fire": 0.2,
+     "a lantern or hearth": 0.08,
+     "starlight alone": 0.02,
+     "sealed dark": 0.0
+    },
+    "note": "⚠️ ERIK'S CORRECTION, and it is a better craft. It does NOT require a clear noon — it takes light from anywhere there is light: sun, fire, a lantern. Direct noon is simply the FASTEST source. prepHoursByRank are now hours OF DIRECT NOON EQUIVALENT, so 168h at r3 is a week of perfect noons or a much longer stretch of firelight. THE WELL IS NEVER IDLE, which removes the dead-day problem: a Radiant on a month of overcast is still filling it, slowly, and can choose to hurry by finding better light. That is a decision where there used to be a wait."
    }
   },
   {
@@ -1560,11 +1569,15 @@
      "2": 24,
      "3": 2160
     },
+    "accrual": "gate",
     "prepCondition": "community consent, sustained",
     "attended": false,
     "interruptible": true,
     "onInterrupt": "decays without upkeep",
-    "note": "a season-fence is community work that proceeds without you standing in it"
+    "cooldownHours": {
+     "3": 720
+    },
+    "note": "GATE, not rate: you have the village's consent or you do not, and half-consent banks nothing."
    }
   },
   {

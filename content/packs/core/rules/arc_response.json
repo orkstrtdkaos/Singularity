@@ -108,7 +108,8 @@
         "crusade": "⚠️ THESE ARE THE DECLARERS, AND IT IS NOT A COMPLIMENT. `ascent` pronounces a judgment that binds whether or not it is right. `radiance` reveals in a wide area. A marcher's authority is built on what they can end, openly. STILLHOLD IS HERE DELIBERATELY: `the_quieting` is gated on a REFUSED TRUCE, which means it is announced by construction — a Stillhold strike is the most declared act in the game, and Erik's correction that they are not absent from the field is why they belong on this list at all.",
         "either": "Traditions whose method does not settle the question. The engine should pick by the FIGURE, not the tradition: a figure whose `wantArcId` is under direct threat crusades; otherwise they go quiet. That keeps 11 of 27 traditions capable of both, which is what stops the two kinds becoming two factions."
       },
-      "_expectedMix": "With these lists the striker pool should run roughly 55/45 quiet-to-crusade rather than 100/0. If crusades still land near zero, the fault is in kind selection rather than in the content, and `ws.strikeCoverage` will say so."
+      "_expectedMix": "With these lists the striker pool should run roughly 55/45 quiet-to-crusade rather than 100/0. If crusades still land near zero, the fault is in kind selection rather than in the content, and `ws.strikeCoverage` will say so.",
+      "_supersededBy": "rules.strikes.kindByTradition — canonical. This copy is kept only for existing readers."
     }
   },
   "mintedFigures": {
@@ -316,5 +317,76 @@
       }
     },
     "_promotion": "Time at rung PLUS what that rung is about. A new rung restarts the clock — you do not carry tenure upward. `unbeaten` means a single loss at legendary bars the mythic step, which is why mythic is rare rather than merely slow. A figure minted at riffraff needs ~7.5 unbroken world-years to reach legendary."
+  },
+  "strikes": {
+    "_note": "⚠️ SNG-317. CCode reads `strikes.byTradition`; I had authored the lists under `arcResponse.kindByTradition`. Same content, different path — a writer and a reader that never met, which is the fourth shape of this failure this week. The canonical home is HERE, and arcResponse keeps its copy only so nothing that already reads it breaks.",
+    "_collapsedDial": "⚠️ CCODE'S FLAG, ACCEPTED: `resolutionMode: 'removal'` and the `strikes` disposition are THE SAME BEHAVIOUR — removal IS striking. Two dials for one thing is how a mechanic ends up half-wired to each. `strikes` survives, because it names the ACT rather than a category of act, and `removal` is withdrawn from the resolutionMode vocabulary. Traditions that had it now carry a strikes rate instead.",
+    "byTradition": {
+      "umbral": 0.3,
+      "veilwright": 0.28,
+      "abyssal": 0.24,
+      "ashwarden": 0.14,
+      "unmaker": 0.2,
+      "hourkeeper": 0.1,
+      "cogitant": 0.08,
+      "horizon": 0.12,
+      "blazeborn": 0.18,
+      "seraphic": 0.16,
+      "verist": 0.1,
+      "marcher": 0.22,
+      "radiant": 0.06,
+      "syllogist": 0.08,
+      "stillhold": 0.12,
+      "rootkin": 0.08,
+      "somatic": 0.16,
+      "mason": 0.06,
+      "enginewright": 0.08,
+      "lattice": 0.1,
+      "churnfolk": 0.1,
+      "threnodist": 0.05,
+      "figurist": 0.06,
+      "numinous": 0.04,
+      "wright": 0.05,
+      "valley_craft": 0.1,
+      "precursor": 0.12
+    },
+    "_rateReasoning": "How often a figure of this tradition reaches for a strike at all, independent of KIND. The former `removal` traditions (umbral, veilwright, horizon) sit highest because removal was always striking under another name. NUMINOUS AND THRENODIST SIT LOWEST AND ARE NOT ZERO — per DIRECTIVE_SNG-280 no tradition is incapable, only disinclined.",
+    "kindByTradition": {
+      "quiet": [
+        "umbral",
+        "veilwright",
+        "abyssal",
+        "ashwarden",
+        "unmaker",
+        "hourkeeper",
+        "cogitant",
+        "horizon"
+      ],
+      "crusade": [
+        "blazeborn",
+        "seraphic",
+        "verist",
+        "marcher",
+        "radiant",
+        "syllogist",
+        "stillhold",
+        "rootkin"
+      ],
+      "either": [
+        "somatic",
+        "mason",
+        "enginewright",
+        "lattice",
+        "churnfolk",
+        "threnodist",
+        "figurist",
+        "numinous",
+        "wright",
+        "valley_craft",
+        "precursor"
+      ]
+    },
+    "_kindReasoning": "METHOD, NOT MORALS: a quiet strike is DENIABLE and a crusade is DECLARED, and both kill the same person. STILLHOLD IS ON THE CRUSADE LIST DELIBERATELY — `the_quieting` is gated on a REFUSED TRUCE, so it is announced by construction and a Stillhold strike is the most declared act in the game. The 11 in `either` are picked per FIGURE, not per tradition: one whose wantArcId is under direct threat crusades, otherwise they go quiet — which stops the two kinds becoming two factions.",
+    "_expectedMix": "roughly 55/45 quiet-to-crusade. If crusades still land near zero, the fault is kind selection rather than content, and ws.strikeCoverage will say so."
   }
 }

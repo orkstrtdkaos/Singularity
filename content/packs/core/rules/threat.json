@@ -2,66 +2,66 @@
  "schemaVersion": 1,
  "id": "threat",
  "kind": "rules",
- "note": "⚠️ SNG-322 / CCODE-52. The threat ladder — how bad this is, IN THE WORDS A PLAYER MEETS, rather than a number they never see. FIVE BANDS, because the ladder has exactly one job that matters: to make the line where a fight can kill you VISIBLE AND NAMED. Fewer than five and the warned/unwarned line lands in the middle of a band; more than five and the bands stop being distinguishable in a sentence.",
+ "note": "⚠️ SNG-322 / CCODE-52. The threat ladder: HOW STRONG THIS IS RELATIVE TO YOU, in plain words. Five bands, because the ladder's one job is to make the point where you are outmatched visible and named.",
  "theLine": "⚠️ THE DECISION ERIK LEFT ME: the warned line sits between `hard` and `grave`. At `grave` and above, the encounter is declared lethal, `lethalOfferClamp` fires, and THE PLAYER IS TOLD AND OFFERED A DECLINE. Below it they are not. One line, stated once, and the ladder decides it rather than a flag hand-set per encounter — which was the whole point of CCODE-52.",
  "bands": [
   {
    "id": "trivial",
-   "name": "Beneath notice",
+   "name": "Much weaker than you",
    "tierGap": [
     -99,
     -2
    ],
-   "meaning": "You will win. The only cost is time, and the only risk is looking foolish.",
+   "meaning": "You should win comfortably. Losing would take a run of bad rolls or a bad decision — but it is possible, and being outnumbered or ambushed changes it.",
    "lethal": false,
    "warn": false
   },
   {
    "id": "fair",
-   "name": "An even thing",
+   "name": "An even match",
    "tierGap": [
     -1,
     0
    ],
-   "meaning": "A real contest you are expected to win. You may be hurt; you will not be killed.",
+   "meaning": "Either side can win. Expect to be hurt. You can die here on bad luck, the same as anyone can.",
    "lethal": false,
    "warn": false
   },
   {
    "id": "hard",
-   "name": "Above your weight",
+   "name": "Stronger than you",
    "tierGap": [
     1,
     2
    ],
-   "meaning": "You can lose this. Losing costs you something you will still be carrying next week — a wound that lingers, gear gone, standing spent.",
+   "meaning": "You are likely to lose unless something is in your favour — numbers, ground, preparation. Losing costs you something lasting.",
    "lethal": false,
    "warn": false,
-   "note": "⚠️ THE LAST BAND WHERE LOSING IS NOT DYING. This is where most encounters should sit."
+   "note": "⚠️ WHERE MOST CONTENT SHOULD SIT. Not because it is safe — because it is where a fight is a real question."
   },
   {
    "id": "grave",
-   "name": "This can kill you",
+   "name": "Much stronger than you",
    "tierGap": [
     3,
     4
    ],
-   "meaning": "Going down here means going down for real: incapacitated, and what happens next is not yours to decide.",
+   "meaning": "You are expected to lose. Going down here is likely rather than unlucky, and what happens after you go down is decided by who put you there.",
    "lethal": true,
    "warn": true,
-   "note": "⚠️ THE WARNED LINE. The name is the warning — it is not a mood word, it is a statement of consequence, and a player who reads it and continues has chosen."
+   "note": "⚠️ THE WARNED LINE, and the warning is about ODDS rather than about death: the player is told they are outmatched and offered a Decline. Everything below can also kill you; this is where it stops being bad luck and starts being the expected outcome."
   },
   {
    "id": "beyond",
-   "name": "Nothing here is for you",
+   "name": "Far beyond you",
    "tierGap": [
     5,
     99
    ],
-   "meaning": "You are not the intended answer to this. Fighting it is not a hard fight; it is a decision to die.",
+   "meaning": "There is no version of this fight you win by fighting well. If you engage, you lose; the only questions are how fast and what it costs.",
    "lethal": true,
    "warn": true,
-   "note": "⚠️ IT MUST EXIST SEPARATELY FROM `grave`, or the game has no way to say 'this is not a difficulty, it is a wall'. A player should be able to meet a legend at full strength and be TOLD that."
+   "note": "⚠️ SEPARATE FROM `grave` because the game needs a way to say 'this is not a difficulty, it is a wall' — a player meeting a legend at full strength should be told that plainly."
   }
  ],
  "howItIsUsed": {
@@ -69,5 +69,7 @@
   "decidesTheOffer": "`warn: true` fires lethalOfferClamp — explicit choice plus a Decline option",
   "pairsWithAggressorKind": "⚠️ BAND SAYS HOW LIKELY YOU GO DOWN; `aggressorKind` SAYS WHAT HAPPENS WHEN YOU DO. A `grave` beast and a `grave` assassin are equally likely to drop you and completely different afterwards — the beast moves on, the assassin finishes the errand and hides the body. Two dials, two questions, no overlap."
  },
- "authoringGuidance": "Most content should be `fair` or `hard`. If everything is `grave`, nothing is — the warning stops being information and becomes noise, which is the failure mode this ladder exists to prevent."
+ "authoringGuidance": "Most content should be `fair` or `hard`. If everything is `grave`, nothing is — the warning stops being information and becomes noise, which is the failure mode this ladder exists to prevent.",
+ "correction": "⚠️ ERIK CAUGHT THE FIRST NAMES AS FLOWERY AND, WORSE, INACCURATE: 'any of those could kill you.' He is right. 'Beneath notice' and 'An even thing' implied safety, and 'This can kill you' implied the others could not — which is FALSE, because a wild boar can kill you and a bad fall can kill you. The names were doing MOOD WORK instead of INFORMATION WORK. THE BAND MEASURES RELATIVE STRENGTH, NOT LETHALITY. Lethality is what `aggressorKind` and the dice decide. So the names now say only what they measure.",
+ "whatTheBandDoesNotSay": "⚠️ IT DOES NOT SAY WHETHER YOU CAN DIE. You can die in any band. The band says HOW LIKELY YOU ARE TO LOSE; `aggressorKind` says WHAT HAPPENS WHEN YOU DO. A `trivial` assassin will still finish you if the dice go badly — that combination is rare and it is not impossible, and the ladder must never imply otherwise."
 }

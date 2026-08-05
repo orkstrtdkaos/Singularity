@@ -62,7 +62,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -95,7 +95,8 @@ export async function loadContent() {
     // loadRule goes in the SAME array as the name it fills.
     loadRule("charges", null),
     loadRule("threat", null),
-    loadRule("incapacitation", null)   // SNG-323: aggressor weights, tunable instead of a const   // SNG-322/CCODE-52: the threat ladder — bands decide the lethal flag and the warn offer   // SNG-316: what satisfies each prep condition, so the tick can bank a charge without reading prose
+    loadRule("incapacitation", null),
+    loadRule("ties", null)   // SNG-328: how kin and interests accrue from what the world already records   // SNG-323: aggressor weights, tunable instead of a const   // SNG-322/CCODE-52: the threat ladder — bands decide the lethal flag and the warn offer   // SNG-316: what satisfies each prep condition, so the tick can bank a charge without reading prose
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -134,7 +135,8 @@ export async function loadContent() {
   if (economyRule) rules.economy = economyRule;
   if (chargesRule) rules.charges = chargesRule;
   if (threatRule) rules.threat = threatRule;
-  if (incapRule) rules.incapacitation = incapRule;   // SNG-323   // SNG-322: the threat ladder   // SNG-316: the charge-condition vocabulary
+  if (incapRule) rules.incapacitation = incapRule;
+  if (tiesRule) rules.ties = tiesRule;   // SNG-328   // SNG-323   // SNG-322: the threat ladder   // SNG-316: the charge-condition vocabulary
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
   // SNG-263: the craft-mechanics config rides the rules bag so battleRound reads it off a value it already

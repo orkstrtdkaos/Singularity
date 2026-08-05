@@ -590,7 +590,14 @@
           "class": "hard"
         }
       ],
-      "plainly": "A puzzle action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 3, and lasts for about 2 hours Ranks: rank 2 deepens penetration; rank 3 adds to special. Limit: minor Seals Only at r1; what is inside is the GM's."
+      "plainly": "A puzzle action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 3, and lasts for about 2 hours Ranks: rank 2 deepens penetration; rank 3 adds to special. Limit: minor Seals Only at r1; what is inside is the GM's.",
+      "upkeep": {
+        "prepHours": 0,
+        "cooldownHours": {
+          "3": 2160
+        },
+        "note": "⚠️ COOLDOWN ADDED at r3 only. Opening a GRAVE SEAL should not be repeatable within a season, whatever the energy says."
+      }
     },
     {
       "id": "hold_the_aperture",

@@ -1248,3 +1248,11 @@ img[data-lightbox] { cursor: zoom-in; }
 /* SNG-273: what an advanced arc is DOING to the world, on the arc it belongs to. */
 .wt-effect { font-size: 13px; margin: 2px 0 2px 6px; color: var(--text); }
 .wt-inert { opacity: .55; }
+
+/* SNG-299 — a name the world can answer for. Underlined rather than coloured: these appear INSIDE prose,
+   and a paragraph full of coloured words stops reading like prose. */
+.whois { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit;
+  cursor: pointer; border-bottom: 1px dotted var(--accent); }
+.whois:hover, .whois:focus { color: var(--accent); }
+.whois-head { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.whois-line { margin: 4px 0; }

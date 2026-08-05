@@ -10173,6 +10173,54 @@ await (async () => {
     /nameOfArc\(hard\.arcId\)/.test(wsrc8) && /nameOfArc = \(id\)/.test(wsrc8));
 }
 
+// --- SNG-299: who is that, and where do I read more -------------------------------------------------
+{
+  const W = await import("../engine/whois.js");
+  const appW2 = readFileSync(join(root, "app.js"), "utf8");
+  const content = { greaterArcs: [{ id: "a1", name: "The Bleed", stages: [{ stage: 2, name: "Strain", publicFace: "it shows at the edges", truth: "SEALED — must never reach a player" }] }] };
+  const roster = [{ id: "n", name: "Neth", tradition: "ashwarden", role: "Master", wants: "that none die unattended" }];
+  const ws = { figureTier: { n: "legendary" }, figureTitles: { n: { title: "Whom the Ashwardens Named", slots: {} } },
+    figureCares: { n: [{ arcId: "a1", dir: -1, weight: 2 }] }, arcStageSeen: { a1: 2 } };
+  const ctx = { ws, content, character: { codex: { topics: {} } }, roster };
+
+  check("272/299: a figure answers with their rung, their title and what they are caught up in NOW", (() => {
+    const k = W.whoIs("n", "figure", ctx);
+    return /Whom the Ashwardens Named/.test(k.lines[0]) && k.lines.some(l => /legendary/.test(l))
+      && k.lines.some(l => /The Bleed/.test(l));
+  })());
+
+  // ⛔ THE SEALED TRUTH IS NOT THE PLAYER’S TO READ FROM A POPUP.
+  check("272/299: an arc gives its publicFace and NEVER its sealed truth", (() => {
+    const k = W.whoIs("a1", "arc", ctx);
+    return /it shows at the edges/.test(k.lines.join(" ")) && !/SEALED/.test(JSON.stringify(k));
+  })());
+
+  check("272/299: a term explains itself", /lasted/.test(W.whoIs("legendary", "tier", ctx).lines[0]));
+
+  // ⚠️ NOTHING KNOWN → NO LINK. A popup that says "a figure of the valley" promises a lookup and shrugs.
+  check("272/299: an unknown name returns null rather than a composed description",
+    W.whoIs("nobody", "figure", ctx) === null && W.whoIs("no_such_arc", "arc", ctx) === null);
+
+  check("272/299: the codex button appears only where a codex page EXISTS", (() => {
+    const without = W.whoIs("n", "figure", ctx);
+    const with_ = W.whoIs("n", "figure", { ...ctx, character: { codex: { topics: { n: { label: "Neth" } } } } });
+    return without.codexId === null && with_.codexId === "n";
+  })());
+
+  check("272/299: the index prefers the LONGEST name, so a full name beats the surname inside it", (() => {
+    const idx = W.knownIndex({ roster: [{ id: "n", name: "Neth, Who Has Buried More" }, { id: "m", name: "Neth" }] });
+    return idx[0].name.length > idx[idx.length - 1].name.length;
+  })());
+
+  // The DOM pass: text nodes only, every match, and never inside an existing control.
+  check("272/299: names are linked by walking TEXT NODES, never by rewriting rendered HTML",
+    /createTreeWalker\(root, NodeFilter\.SHOW_TEXT/.test(appW2) && /SKIP\.has\(el\.tagName\)/.test(appW2));
+  check("272/299: EVERY name in a sentence is linked, not just the first",
+    /while \(cursor < text\.length\)/.test(appW2) && /at === best\.at && e\.name\.length > best\.e\.name\.length/.test(appW2));
+  check("272/299: the pass runs for every screen, from chrome(), and can never take one down",
+    /try \{ linkifyKnown\(app\); \} catch/.test(appW2));
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

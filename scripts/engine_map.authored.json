@@ -395,5 +395,10 @@
   "purpose": "SNG-287: builds a figure's or player's earned title from their own record — pattern plus slots, where every slot must be fillable or the pattern is skipped.",
   "playerVisibleSurface": "The name spoken when someone rises (\"Neth, Who Turned the Bleed, is called legendary this season\"), and the title kept on the figure afterwards.",
   "whatMakesItFire": "A promotion, when the bearer's deed record can fill every slot of an authored pattern; most rises carry no title, which is what keeps one meaning something."
+ },
+ "whois.js": {
+  "purpose": "SNG-299: answers 'who or what is that?' for any name the world has a record of — figures, arcs, titles and tiers — and says where the fuller account lives.",
+  "playerVisibleSurface": "Any known name in any rendered prose is underlined and clickable; the popup gives what the world knows, with a codex button when a page exists.",
+  "whatMakesItFire": "Clicking a linkified name; the index is rebuilt on every render from the roster, the arcs, the player's codex and the titles actually earned."
  }
 }

@@ -49,6 +49,7 @@ import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./en
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
+import { knownIndex, whoIs } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
@@ -78,7 +79,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.17";
+const APP_VERSION = "1.9.18";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -117,6 +118,16 @@ app.addEventListener("click", e => { const el = e.target.closest?.("[data-vital]
 // SNG-149/CCODE-89b: naming one of the champion's four. Their pick is computed from your AXIS, not your choice, so it is genuinely blind.
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-colpick]"); if (el) { e.preventDefault(); commitColiseumPick(el.dataset.colpick); } });
 // SNG-106: tap the roll's chance → the full component breakdown (the resolver's retained math, verbatim).
+// SNG-299 (Erik): "all of these new titles and terms and npcs need clickable popups describing who and what
+// they are, with a link to the codex page." Same delegation the roll breakdown uses — one listener, any
+// number of names, no per-render wiring to forget.
+app.addEventListener("click", e => {
+  const el = e.target.closest?.("[data-whois]");
+  if (!el) return;
+  e.preventDefault();
+  const known = whoIs(el.dataset.whois, el.dataset.whoiskind, whoIsCtx());
+  if (known) showWhoIs(known);
+});
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-breakdown]"); if (el) { e.preventDefault(); try { showBreakdownPopover(JSON.parse(el.dataset.breakdown)); } catch { /* malformed — no popup */ } } });
 // SNG-118: tap a play-style aptitude chip → its effect + description (reuses the one popover surface).
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-aptchip]"); if (el) { e.preventDefault(); showPopoverText(el.dataset.aptchip); } });
@@ -222,6 +233,99 @@ function showHelp(id) {
 
 // SNG-104: the same dismissable popover the info-dot uses, but from RAW TEXT (showHelp needs a help-id).
 // Reuses the .help-overlay/.help-card surface so the phone tap-away + Got-it dismiss is identical.
+// SNG-299 — everything the lookup is allowed to know, gathered once.
+function whoIsCtx() {
+  const ws = character?.worldState || {};
+  return { ws, content: CONTENT, character, roster: worldRoster(ws, CONTENT) };
+}
+
+/** The popup itself. Deliberately shaped like the roll breakdown: what it is, what is known, and a way
+ *  through to the full record — the codex button appears ONLY when a codex page actually exists, because an
+ *  offer to "read more" that leads nowhere is worse than not offering. */
+function showWhoIs(known) {
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="${esc(known.label)}">
+    <div class="whois-head">${esc(known.label)} <span class="hint">· ${esc(known.kind)}</span></div>
+    <div class="help-short">${known.lines.map(l => `<div class="whois-line">${esc(l)}</div>`).join("")}</div>
+    <div class="help-foot">
+      ${known.codexId ? `<button class="btn secondary" id="whois-codex">📖 Read the codex page</button>` : ""}
+      <button class="btn" id="help-close">Got it</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  const cx = document.getElementById("whois-codex");
+  if (cx) cx.onclick = () => { close(); renderCodexScreen("", known.codexId); };
+}
+
+/** SNG-299 — make known names clickable, AFTER render, by walking TEXT NODES.
+ *
+ *  ⚠️ NOT a regex over the rendered HTML. That would happily rewrite inside an attribute or a tag name and
+ *  corrupt the markup in ways that only show up on the one screen nobody tested. Walking text nodes cannot
+ *  touch markup at all, and it skips the places a link would be wrong — inside an existing button or link,
+ *  inside the player's own prose input.
+ *
+ *  Only names the world can ANSWER for are linked: `knownIndex` is built from the roster, the arcs, the
+ *  player's own codex and the titles actually earned. A name with no record stays plain text.
+ */
+function linkifyKnown(root) {
+  if (!root || !character) return;
+  let index;
+  try {
+    const ws = character.worldState || {};
+    index = knownIndex({
+      roster: worldRoster(ws, CONTENT), arcs: CONTENT.greaterArcs || [],
+      codexTopics: character.codex?.topics || {}, titles: ws.figureTitles || {},
+    });
+  } catch { return; }
+  if (!index.length) return;
+  const SKIP = new Set(["BUTTON", "A", "INPUT", "TEXTAREA", "SCRIPT", "STYLE", "SELECT", "OPTION"]);
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => {
+      if (!n.nodeValue || n.nodeValue.length < 3) return NodeFilter.FILTER_REJECT;
+      for (let el = n.parentElement; el && el !== root; el = el.parentElement) {
+        if (SKIP.has(el.tagName) || el.dataset?.whois) return NodeFilter.FILTER_REJECT;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    },
+  });
+  const targets = [];
+  while (walker.nextNode()) targets.push(walker.currentNode);
+  // ⚠️ EVERY name in the node, not just the first. "The Starless One has dug in over The Green Schism"
+  //    carries two things worth asking about, and a first-match-only pass leaves the arc as plain text —
+  //    which is precisely the half of the sentence a player is most likely to not recognise.
+  for (const node of targets) {
+    const text = node.nodeValue;
+    const frag = document.createDocumentFragment();
+    let cursor = 0, linked = false;
+    while (cursor < text.length) {
+      // The earliest match wins; ties go to the LONGEST name, so a full name beats the bare surname inside it.
+      let best = null;
+      for (const e of index) {
+        const at = text.indexOf(e.name, cursor);
+        if (at < 0) continue;
+        if (!best || at < best.at || (at === best.at && e.name.length > best.e.name.length)) best = { e, at };
+      }
+      if (!best) break;
+      frag.appendChild(document.createTextNode(text.slice(cursor, best.at)));
+      const b = document.createElement("button");
+      b.className = "whois"; b.type = "button";
+      b.dataset.whois = best.e.id; b.dataset.whoiskind = best.e.kind;
+      b.title = "who is this?";
+      b.textContent = best.e.name;
+      frag.appendChild(b);
+      cursor = best.at + best.e.name.length;
+      linked = true;
+    }
+    if (!linked) continue;
+    frag.appendChild(document.createTextNode(text.slice(cursor)));
+    node.parentNode?.replaceChild(frag, node);
+  }
+}
+
 function showPopoverText(text) {
   document.getElementById("help-pop")?.remove();
   const pop = document.createElement("div");
@@ -518,6 +622,10 @@ function chrome(inner) {
   if (machBtn) machBtn.onclick = () => renderMachine();
   const authBtn = document.getElementById("nav-author");
   if (authBtn) authBtn.onclick = () => renderAuthorPanel();
+  // SNG-299: every screen renders through chrome(), so the pass lives HERE — a new screen gets clickable
+  // names for free and no render can forget to wire it. Best-effort: a lookup failure must never take a
+  // screen down with it.
+  try { linkifyKnown(app); } catch { /* names stay plain text */ }
 }
 
 // ---------- SNG-053: image lightbox (click any portrait/scene/moment art → larger view) ----------

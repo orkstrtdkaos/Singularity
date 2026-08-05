@@ -2565,6 +2565,100 @@
      "class": "hard"
     }
    ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_stopped_breath",
+   "name": "The Stopped Breath",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_dark_light",
+   "tradition": "umbral",
+   "attribute": "mental",
+   "axes": {
+    "dark_light": -0.7
+   },
+   "functions": [
+    "strike",
+    "conceal"
+   ],
+   "narrationHints": "There is no struggle. There is a person, and then there is a person who has stopped.",
+   "description": "⚠️ THE SMOTHERERS' CRAFT. Concealment turned INWARD — you hide a person's breath from them, then their sight, then their name for what is happening. What is left walks a few steps and goes down, and nothing about it looks like violence.",
+   "notFor": "Anything that does not breathe. A braced target who knows you are there — this needs them unaware, which is why it is a back-line craft and not a duelling one. And it is SLOW: they have time to be found.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Stopped Breath",
+     "grants": "Hide a person's own breath from them. They weaken; unattended, they die.",
+     "cannot": "A braced or warned target. It takes long minutes.",
+     "functions": [
+      "strike",
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal"
+    },
+    {
+     "rank": 2,
+     "name": "The Unlit Room",
+     "grants": "Take sight and sound with it, so they cannot find help or be found calling.",
+     "cannot": "Anyone already being attended to.",
+     "functions": [
+      "strike",
+      "conceal"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "STEALTH",
+    "FIGHT"
+   ],
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "concealment"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 3,
+     "d": 6
+    },
+    "plus": 1,
+    "targets": 1,
+    "damageType": "shadow",
+    "note": "⚠️ SLOW damage — resolves over minutes, and a healer reaching them in time answers it. That makes it an ATTRITION kill, not a craft-kill, if anyone is watching."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "concealment",
+     "delta": "sight and sound go with the breath — they cannot call or be found",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "one breath taken — half the damage, and they recover if left alone",
+    "surge": "double it; IT IS STILL SLOW, AND SLOW MEANS SOMEONE CAN REACH THEM"
+   },
+   "bounds": [
+    {
+     "text": "THEY MUST BE UNAWARE — a braced target simply notices",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS SLOW; A HEALER WHO REACHES THEM IN TIME UNDOES IT",
+     "class": "hard"
+    },
+    {
+     "text": "nothing about it looks like violence, and THAT IS WHAT PEOPLE REMEMBER ABOUT YOU",
+     "class": "cost"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

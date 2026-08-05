@@ -20,7 +20,8 @@
     "*"
    ],
    "routing": "narrative",
-   "seed": "A small cache the country gave up — a dry hollow, a forgotten pack, a good tool left by someone who didn't come back. Offer the find; let the player take or leave it."
+   "seed": "A small cache the country gave up — a dry hollow, a forgotten pack, a good tool left by someone who didn't come back. Offer the find; let the player take or leave it.",
+   "threat": "trivial"
   },
   {
    "id": "re_kind_stranger",
@@ -31,7 +32,8 @@
     "*"
    ],
    "routing": "narrative",
-   "seed": "A traveler going the other way shares something freely — a warning about the road ahead, a hot meal, a piece of true news. No trick, no price. The valley is not only teeth."
+   "seed": "A traveler going the other way shares something freely — a warning about the road ahead, a hot meal, a piece of true news. No trick, no price. The valley is not only teeth.",
+   "threat": "trivial"
   },
   {
    "id": "re_shortcut_revealed",
@@ -51,7 +53,8 @@
     ],
     "attribute": "practical",
     "difficulty": 45
-   }
+   },
+   "threat": "trivial"
   },
   {
    "id": "re_passing_flock",
@@ -63,7 +66,8 @@
    ],
    "routing": "narrative",
    "seed": "A moment of ordinary life on the road — a shepherd and their flock, children racing a hoop, an old woman naming the weather. Atmosphere and a small human exchange; nothing is at stake, and that is the point.",
-   "aggressorKind": "beast"
+   "aggressorKind": "beast",
+   "threat": "trivial"
   },
   {
    "id": "re_weather_turn",
@@ -75,7 +79,8 @@
    ],
    "routing": "narrative",
    "seed": "The sky changes its mind — a sudden squall, a fog, a hard clear cold. A choice: push through, shelter, or wait it out, each with a small texture but no danger.",
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "trivial"
   },
   {
    "id": "re_precursor_light",
@@ -88,7 +93,8 @@
    "routing": "narrative",
    "seed": "Something the old world left, being lovely for no one — light that was never lamplight moving under still water, a buried line briefly waking to hum a chord and going quiet. Wonder, not threat. Glimpsed, never explained.",
    "loreTier": "precursor-glimpse",
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "trivial"
   },
   {
    "id": "re_valley_vista",
@@ -99,7 +105,8 @@
     "*"
    ],
    "routing": "narrative",
-   "seed": "The country opens and offers itself — a vista, a field of something in bloom, a confluence where two rivers braid. A held breath. Optionally restores a little energy for the pause taken."
+   "seed": "The country opens and offers itself — a vista, a field of something in bloom, a confluence where two rivers braid. A held breath. Optionally restores a little energy for the pause taken.",
+   "threat": "trivial"
   },
   {
    "id": "re_rockfall_hazard",
@@ -112,7 +119,8 @@
    "routing": "challenge",
    "seed": "The land itself turns hazard — a rockslide, a rotten bridge, a flash current. A short challenge to cross safe; partial failure costs health/time, not the whole road.",
    "stages": 2,
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "hard"
   },
   {
    "id": "re_wrong_ground",
@@ -125,7 +133,8 @@
    "routing": "narrative",
    "seed": "A place that is subtly wrong — a stretch where the Precursor lattice runs too close, the compass-sense swims, something watches without eyes. Unnerving and mildly costly; leaving is a choice, not a fight.",
    "loreTier": "precursor-glimpse",
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "hard"
   },
   {
    "id": "re_cutpurse",
@@ -150,7 +159,8 @@
     "difficulty": 50,
     "onFail": "loseItemOrValuables"
    },
-   "aggressorKind": "raider"
+   "aggressorKind": "raider",
+   "threat": "fair"
   },
   {
    "id": "re_toll_bandits",
@@ -168,7 +178,8 @@
    "seed": "Someone claims the road and asks a price to pass. It can be paid, talked down (Mediator's Tongue), slipped (Quiet Step), or refused into a fight. Always a way through that isn't blood.",
    "avoidable": true,
    "dangerNote": "Erik's ruling 2026-07-19: toll bandits belong on the old switchback. Danger is reduced LOCALLY — by someone clearing them out — never by a universal floor that keeps them out of the road they are named for. The stakes dial governs what a 'safe region' means now.",
-   "aggressorKind": "raider"
+   "aggressorKind": "raider",
+   "threat": "hard"
   },
   {
    "id": "re_pursuit_flee",
@@ -186,7 +197,8 @@
     "wayfinding",
     "drumline_stride"
    ],
-   "aggressorKind": "beast"
+   "aggressorKind": "beast",
+   "threat": "hard"
   },
   {
    "id": "re_creature_chase",
@@ -205,7 +217,8 @@
    "peacefulOut": "beastfriend",
    "lethal": false,
    "lethalNote": "Erik's ruling 2026-07-19: the CHASE is not lethal — its whole design is that Beastfriend can end it and the peaceful out is always on the table. **Unless it turns into a fight.** A pursuit and a duel are different encounters: choosing to stand and fight a predator is choosing a lethal encounter, and wild animals are lethal because they are. That escalation must arrive through lethalOfferClamp (SNG-002b) — OFFERED and marked, never imposed by the chase itself.",
-   "dangerNote": "minDanger 3 -> 2 per Erik's ruling on re_toll_bandits: danger is reduced LOCALLY, never by a universal floor that keeps an encounter out of the country it belongs in."
+   "dangerNote": "minDanger 3 -> 2 per Erik's ruling on re_toll_bandits: danger is reduced LOCALLY, never by a universal floor that keeps an encounter out of the country it belongs in.",
+   "threat": "hard"
   },
   {
    "id": "re_raider_duel",
@@ -227,7 +240,8 @@
     "yieldAt": 0.25
    },
    "seed": "A hostile meeting that may come to blows — a raider, a desperate soul, a territorial thing. Offered with a clear decline/flee path (SNG-002b); the fight is a choice, and yielding is honored on both sides.",
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "grave"
   },
   {
    "id": "re_zone_hostile",
@@ -247,7 +261,8 @@
     "yieldAt": 0.2
    },
    "seed": "In the Disputed Zone the ground itself is contested — a harder hostile encounter, still avoidable, still yield-able. Lethal only if telegraphed and entered by choice.",
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "beyond"
   },
   {
    "id": "re_center_opposites",
@@ -258,7 +273,8 @@
     "the_center"
    ],
    "routing": "narrative",
-   "seed": "Two people from antipodal Reaches sharing a table — genuinely, awkwardly, without violence. In any other place on the world this would be a story. Here it is Tuesday, and that is the whole miracle of the Crossing. Let the player notice it or not."
+   "seed": "Two people from antipodal Reaches sharing a table — genuinely, awkwardly, without violence. In any other place on the world this would be a story. Here it is Tuesday, and that is the whole miracle of the Crossing. Let the player notice it or not.",
+   "threat": "trivial"
   },
   {
    "id": "re_center_champion",
@@ -270,7 +286,8 @@
    ],
    "routing": "narrative",
    "seed": "A Coliseum champion, off-duty, unrecognized, being extremely ordinary — buying bread, arguing about the price. If the player is decent to them, they say something about their craft that is worth more than a purse.",
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "trivial"
   },
   {
    "id": "re_center_bookmaker",
@@ -285,7 +302,8 @@
    "tags": [
     "market",
     "social"
-   ]
+   ],
+   "threat": "fair"
   },
   {
    "id": "re_center_recruiter",
@@ -299,7 +317,8 @@
    "seed": "A recruiter for one of the twenty-four, working the crowd, offering a place among their people. They are not lying and they are not disinterested. The offer is real and it has a price the player will not see until later.",
    "tags": [
     "social"
-   ]
+   ],
+   "threat": "trivial"
   },
   {
    "id": "re_umbral_courtesy",
@@ -310,7 +329,8 @@
     "umbral_depths"
    ],
    "routing": "narrative",
-   "seed": "An Umbral steadies the player in the dark without being asked and without comment, and is faintly, courteously amused by the groping. Being helped by someone who can see you and whom you cannot see is its own particular feeling."
+   "seed": "An Umbral steadies the player in the dark without being asked and without comment, and is faintly, courteously amused by the groping. Being helped by someone who can see you and whom you cannot see is its own particular feeling.",
+   "threat": "trivial"
   },
   {
    "id": "re_umbral_harbored",
@@ -325,7 +345,8 @@
    "tags": [
     "dark",
     "refuge"
-   ]
+   ],
+   "threat": "trivial"
   },
   {
    "id": "re_umbral_lamp",
@@ -339,7 +360,8 @@
    "seed": "Somebody has brought a lamp into the deep city. The Umbrals have not said anything. The silence is getting worse, and the player is standing in the light.",
    "tags": [
     "dark"
-   ]
+   ],
+   "threat": "hard"
   },
   {
    "id": "re_unlit_whisper",
@@ -355,7 +377,8 @@
     "dark",
     "cult"
    ],
-   "aggressorKind": "assassin"
+   "aggressorKind": "assassin",
+   "threat": "grave"
   },
   {
    "id": "re_blaze_honesty",
@@ -366,7 +389,8 @@
     "radiant_wastes"
    ],
    "routing": "narrative",
-   "seed": "A Blazeborn tells the player something completely true about themselves within a minute of meeting, without malice, and is bewildered by the reaction. They were being friendly."
+   "seed": "A Blazeborn tells the player something completely true about themselves within a minute of meeting, without malice, and is bewildered by the reaction. They were being friendly.",
+   "threat": "trivial"
   },
   {
    "id": "re_blaze_creep",
@@ -381,7 +405,8 @@
    "tags": [
     "light"
    ],
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "hard"
   },
   {
    "id": "re_glass_vista",
@@ -393,7 +418,8 @@
    ],
    "routing": "narrative",
    "seed": "The glass plain at dusk, and the light going through it sideways, and the whole ruined country lit from underneath like something holy. It cost a civilization to make this view. It is still one of the most beautiful things in the world.",
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "trivial"
   },
   {
    "id": "re_rootkin_patience",
@@ -404,7 +430,8 @@
     "the_quickwood"
    ],
    "routing": "narrative",
-   "seed": "A Rootkin answers a question the player asked twenty minutes ago, having thought about it properly, and is puzzled that this is remarkable."
+   "seed": "A Rootkin answers a question the player asked twenty minutes ago, having thought about it properly, and is puzzled that this is remarkable.",
+   "threat": "trivial"
   },
   {
    "id": "re_grown_door",
@@ -415,7 +442,8 @@
     "the_quickwood"
    ],
    "routing": "narrative",
-   "seed": "A door of living wood that knows the player now — third visit — and opens before they touch it. Nobody mentions it. It is simply how doors work here, once you have been enough times to matter."
+   "seed": "A door of living wood that knows the player now — third visit — and opens before they touch it. Nobody mentions it. It is simply how doors work here, once you have been enough times to matter.",
+   "threat": "trivial"
   },
   {
    "id": "re_orchard_stone",
@@ -427,7 +455,8 @@
    ],
    "routing": "narrative",
    "seed": "Someone in the Slow Orchard is planting a tree for a person not yet born, and will not see it fruit, and invites the player to help dig. It takes an hour. It is the most restful hour the player will have all season.",
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "trivial"
   },
   {
    "id": "re_hollowing_edge",
@@ -443,7 +472,8 @@
     "border",
     "death"
    ],
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "hard"
   },
   {
    "id": "re_marcher_measure",
@@ -455,7 +485,8 @@
    ],
    "routing": "narrative",
    "seed": "A Marcher takes the player's measure in one long look and says a single sentence about how they would die. It is not a threat. It is a professional courtesy and it is accurate.",
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "trivial"
   },
   {
    "id": "re_held_line",
@@ -467,7 +498,8 @@
    ],
    "routing": "narrative",
    "seed": "A line of Marchers holding a breach against a rout — badly outnumbered, entirely unmoving — and the fighting bending around them. The player is not part of this. They are simply seeing what the best can do.",
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "hard"
   },
   {
    "id": "re_stillhold_quiet",
@@ -481,7 +513,8 @@
    "seed": "Inside the Stillhold's walls the player realizes they have not heard a raised voice in a day, and that this is the most unsettling thing that has happened to them all week.",
    "tags": [
     "peace"
-   ]
+   ],
+   "threat": "trivial"
   },
   {
    "id": "re_lattice_schedule",
@@ -492,7 +525,8 @@
     "the_lattice_cities"
    ],
    "routing": "narrative",
-   "seed": "The player's day has been scheduled for them. Helpfully. Correctly. Better than they would have scheduled it. Nobody asked."
+   "seed": "The player's day has been scheduled for them. Helpfully. Correctly. Better than they would have scheduled it. Nobody asked.",
+   "threat": "trivial"
   },
   {
    "id": "re_lattice_deviation",
@@ -503,7 +537,8 @@
     "the_lattice_cities"
    ],
    "routing": "narrative",
-   "seed": "Someone has deviated from their schedule by four minutes and is being gently, thoroughly helped back onto it by people who love them."
+   "seed": "Someone has deviated from their schedule by four minutes and is being gently, thoroughly helped back onto it by people who love them.",
+   "threat": "fair"
   },
   {
    "id": "re_wright_repair",
@@ -514,7 +549,8 @@
     "the_gearlands"
    ],
    "routing": "narrative",
-   "seed": "An Enginewright repairs something of the player's, unasked, better than it was — and is genuinely hurt if the player objects. This is how affection is expressed here."
+   "seed": "An Enginewright repairs something of the player's, unasked, better than it was — and is genuinely hurt if the player objects. This is how affection is expressed here.",
+   "threat": "trivial"
   },
   {
    "id": "re_engine_noise",
@@ -529,7 +565,8 @@
    "tags": [
     "mechanical"
    ],
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "grave"
   },
   {
    "id": "re_thin_moment",
@@ -541,7 +578,8 @@
    ],
    "routing": "narrative",
    "seed": "The veil goes thin for a moment, without warning, and the player sees something they will not be able to describe and will not stop trying to.",
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "trivial"
   },
   {
    "id": "re_numen_pull",
@@ -556,7 +594,8 @@
    "tags": [
     "spiritual",
     "cult"
-   ]
+   ],
+   "threat": "grave"
   },
   {
    "id": "re_public_grief",
@@ -567,7 +606,8 @@
     "the_feeling_coast"
    ],
    "routing": "narrative",
-   "seed": "A public grieving in full flood, in a hall built to amplify it, and strangers sitting with a stranger's worst thing. The player is invited to sit. It is free. It has never turned anyone away."
+   "seed": "A public grieving in full flood, in a hall built to amplify it, and strangers sitting with a stranger's worst thing. The player is invited to sit. It is free. It has never turned anyone away.",
+   "threat": "trivial"
   },
   {
    "id": "re_named_feeling",
@@ -578,7 +618,8 @@
     "the_feeling_coast"
    ],
    "routing": "narrative",
-   "seed": "A Threnodist asks the player what they are actually feeling and does not accept 'fine' — and keeps not accepting it, kindly, until something true comes out."
+   "seed": "A Threnodist asks the player what they are actually feeling and does not accept 'fine' — and keeps not accepting it, kindly, until something true comes out.",
+   "threat": "trivial"
   },
   {
    "id": "re_gentle_disproof",
@@ -590,7 +631,8 @@
    ],
    "routing": "narrative",
    "seed": "A Syllogist disproves, gently and completely, something the player has believed their whole life — and then, seeing their face, abandons their own position the moment the player finds a hole in it. Both of these are the same virtue.",
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "trivial"
   },
   {
    "id": "re_kind_host",
@@ -604,7 +646,8 @@
    "seed": "A host of impeccable warmth who has told the player nine untrue things and one true one, and the true one is the dangerous one.",
    "tags": [
     "social"
-   ]
+   ],
+   "threat": "fair"
   },
   {
    "id": "re_told_stone",
@@ -616,7 +659,8 @@
    ],
    "routing": "narrative",
    "seed": "A field of plain stones, each carrying one true sentence somebody could not say in life. Anyone may add one. The player may add one. Nobody may ever remove it.",
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "trivial"
   },
   {
    "id": "re_verist_look",
@@ -631,7 +675,8 @@
    "tags": [
     "social"
    ],
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "fair"
   },
   {
    "id": "re_named_want",
@@ -646,7 +691,8 @@
    "tags": [
     "social"
    ],
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "fair"
   },
   {
    "id": "re_fair_bargain",
@@ -660,7 +706,8 @@
    "seed": "A bargain is offered that is exactly, perfectly fair — and the player wants it very badly, and the price is exactly what it is worth, and nobody is going to stop them.",
    "tags": [
     "social"
-   ]
+   ],
+   "threat": "fair"
   },
   {
    "id": "re_mercy_borne",
@@ -671,7 +718,8 @@
     "the_ascent"
    ],
    "routing": "narrative",
-   "seed": "A mercy-bearer sets down someone's twenty-year weight, and takes it up themselves, and walks away carrying it, and does not appear to think this is remarkable."
+   "seed": "A mercy-bearer sets down someone's twenty-year weight, and takes it up themselves, and walks away carrying it, and does not appear to think this is remarkable.",
+   "threat": "trivial"
   },
   {
    "id": "re_weighed",
@@ -686,7 +734,8 @@
    "tags": [
     "social"
    ],
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "fair"
   },
   {
    "id": "re_weighed_true",
@@ -698,7 +747,8 @@
    ],
    "routing": "narrative",
    "seed": "A Mason puts a hand on something of the player's and tells them exactly what it is, what it is worth, and where it will fail. They are right about all three.",
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "trivial"
   },
   {
    "id": "re_walking_argument",
@@ -710,7 +760,8 @@
    ],
    "routing": "narrative",
    "seed": "A building that is an argument, and walking through it the player finds themselves agreeing, and cannot afterward reconstruct why.",
-   "aggressorKind": "duelist"
+   "aggressorKind": "duelist",
+   "threat": "trivial"
   },
   {
    "id": "re_walker_offer",
@@ -721,7 +772,8 @@
     "the_open_reach"
    ],
    "routing": "narrative",
-   "seed": "A Horizon-Walker offers to take the player anywhere, and means it, and will not stay when they get there."
+   "seed": "A Horizon-Walker offers to take the player anywhere, and means it, and will not stay when they get there.",
+   "threat": "trivial"
   },
   {
    "id": "re_pre_remembered",
@@ -732,7 +784,8 @@
     "the_kept_reach"
    ],
    "routing": "narrative",
-   "seed": "An Hourkeeper looks at the player with an expression of terrible sympathy and says nothing at all. They have pre-remembered something. They will not say what. They cannot stop knowing it."
+   "seed": "An Hourkeeper looks at the player with an expression of terrible sympathy and says nothing at all. They have pre-remembered something. They will not say what. They cannot stop knowing it.",
+   "threat": "fair"
   },
   {
    "id": "re_good_ending",
@@ -743,7 +796,8 @@
     "the_unmade"
    ],
    "routing": "narrative",
-   "seed": "An Unmaker is ending something beloved, correctly and well, and the people who loved it are watching and cannot argue because the Unmaker is right."
+   "seed": "An Unmaker is ending something beloved, correctly and well, and the people who loved it are watching and cannot argue because the Unmaker is right.",
+   "threat": "trivial"
   },
   {
    "id": "re_unfinished_glory",
@@ -754,7 +808,8 @@
     "the_making"
    ],
    "routing": "narrative",
-   "seed": "The Half-Cathedral in its two-hundredth year and its fourth design, scaffolded to the sky, and it will never be finished, and that is what it is for."
+   "seed": "The Half-Cathedral in its two-hundredth year and its fourth design, scaffolded to the sky, and it will never be finished, and that is what it is for.",
+   "threat": "trivial"
   },
   {
    "id": "re_helpful_wright",
@@ -765,7 +820,8 @@
     "the_making"
    ],
    "routing": "narrative",
-   "seed": "A Wright improves something of the player's that the player did not want improved, cannot un-improve, and now has to live with. It IS better. That is not the point."
+   "seed": "A Wright improves something of the player's that the player did not want improved, cannot un-improve, and now has to live with. It IS better. That is not the point.",
+   "threat": "trivial"
   },
   {
    "id": "re_churn_road",
@@ -780,7 +836,8 @@
    "tags": [
     "chaos"
    ],
-   "aggressorKind": "hazard"
+   "aggressorKind": "hazard",
+   "threat": "hard"
   },
   {
    "id": "re_churn_luck",
@@ -792,7 +849,8 @@
    ],
    "routing": "narrative",
    "seed": "Something absurdly, improbably lucky happens, and a Churnfolk nearby nods as if this were the expected outcome, which — here — it was.",
-   "aggressorKind": "raider"
+   "aggressorKind": "raider",
+   "threat": "trivial"
   },
   {
    "id": "re_mistaken_for",
@@ -814,7 +872,8 @@
     "difficulty": 45,
     "onFail": "loseItemOrValuables"
    },
-   "aggressorKind": "assassin"
+   "aggressorKind": "assassin",
+   "threat": "trivial"
   },
   {
    "id": "re_urgent_courier",
@@ -831,7 +890,8 @@
     "quiet_step",
     "wayfinding",
     "drumline_stride"
-   ]
+   ],
+   "threat": "trivial"
   },
   {
    "id": "re_small_debt_called",
@@ -844,7 +904,8 @@
    "routing": "narrative",
    "seed": "A small claim comes due — a favor owed, a shared cost, a thing borrowed and not returned, surfacing at an inconvenient moment. It can be paid, talked down (Mediator's Tongue), worked off, or refused into a cooling of relations. Never violence — just the friction of a place where people remember what they're owed.",
    "avoidable": true,
-   "aggressorKind": "raider"
+   "aggressorKind": "raider",
+   "threat": "trivial"
   },
   {
    "id": "re_spooked_animal",
@@ -866,7 +927,8 @@
     "difficulty": 40,
     "onFail": "minorSetback"
    },
-   "aggressorKind": "beast"
+   "aggressorKind": "beast",
+   "threat": "trivial"
   }
  ],
  "triggerRules": {

@@ -20,7 +20,12 @@
       "effects": {
         "energy": 10
       },
-      "consumable": true
+      "consumable": true,
+      "bonusTags": [
+        "weather",
+        "travel",
+        "survival"
+      ]
     },
     {
       "id": "belt_knife",
@@ -76,7 +81,12 @@
       "effects": {
         "health": 8
       },
-      "consumable": true
+      "consumable": true,
+      "bonusTags": [
+        "heal",
+        "remedy",
+        "grip"
+      ]
     },
     {
       "id": "dried_rations",
@@ -86,7 +96,12 @@
       "effects": {
         "energy": 15
       },
-      "consumable": true
+      "consumable": true,
+      "bonusTags": [
+        "travel",
+        "survival",
+        "weather"
+      ]
     },
     {
       "id": "prism_chip",

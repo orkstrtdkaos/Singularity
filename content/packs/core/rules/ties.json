@@ -1,0 +1,72 @@
+{
+ "schemaVersion": 1,
+ "id": "ties",
+ "kind": "rules",
+ "note": "⚠️ SNG-328 (Erik: 'a way for them to gain these or mint this as time goes on'). Authored `kin` and `interests` are a starting spread; THIS IS HOW THEY ACCRUE. The rule that keeps it honest: A TIE IS MINTED FROM SOMETHING THE WORLD ALREADY RECORDED, never invented at runtime. The engine does not make up a brother — it notices that these two people have been in the same place doing the same thing for a year and gives that a line.",
+ "kinTriggers": [
+  {
+   "id": "stood_over",
+   "from": "guardIntercept where the same figure guarded the same person 3+ times",
+   "line": "{other}, whom they have stood over more than once",
+   "note": "⚠️ THE BEST ONE. A guard relationship IS a tie, and it is already counted — nothing new is recorded."
+  },
+  {
+   "id": "pulled_back",
+   "from": "a successful retrieval between two figures",
+   "line": "{other}, who came back up the road for them",
+   "note": "the retrieval crafts now produce relationships, not just survivals"
+  },
+  {
+   "id": "survived_together",
+   "from": "both figures present at 2+ arc casualties on the same front",
+   "line": "{other}, who was there both times"
+  },
+  {
+   "id": "shared_home",
+   "from": "the same homeLocation for 2+ world-years",
+   "line": "{other}, who has been down the hall for years",
+   "note": "⚠️ this is what makes the_stillhold's three opposed figures into a household rather than a coincidence"
+  },
+  {
+   "id": "the_one_not_reached",
+   "from": "a casualty on a front this figure held",
+   "line": "{other}, whom they did not reach",
+   "note": "⚠️ A TIE TO SOMEONE DEAD IS STILL A TIE, and it is the one sister_alder is authored with. Grief is a relationship the world can record."
+  },
+  {
+   "id": "named_rival",
+   "from": "the authored `rivals` field, on first contest between them",
+   "line": "{other}, who they have never beaten / who they cannot stop beating",
+   "note": "turns the 60/66 rivals field into something that appears in a life rather than only in a sim"
+  }
+ ],
+ "interestTriggers": [
+  {
+   "id": "the_place_they_kept",
+   "from": "holding one care 5+ consecutive passes",
+   "line": "the {arc}, which they have not let go of"
+  },
+  {
+   "id": "learned_from_a_teacher",
+   "from": "a mentor bond reaching stage 3",
+   "line": "whatever {other} was really teaching, which was not the craft"
+  },
+  {
+   "id": "the_thing_they_made",
+   "from": "a craft used to make something that persisted a season",
+   "line": "the {thing} they made, and whether it is still standing"
+  },
+  {
+   "id": "after_a_loss",
+   "from": "a figure demoted or losing a front",
+   "line": "something quiet they took up afterwards"
+  }
+ ],
+ "rules": {
+  "cap": "⚠️ 4 kin and 4 interests. Past that a figure is a list rather than a person, and personalPursuitOf draws from a pool — an unbounded pool makes every draw meaningless.",
+  "authoredFirst": "authored ties are never displaced; minted ones fill the remaining slots",
+  "decay": "⚠️ AN INTEREST CAN LAPSE — no reinforcement in 3 world-years and it drops. KIN DOES NOT: a tie to someone you stood over, or did not reach, is not something you stop having.",
+  "theDead": "kin whose subject died KEEPS the tie and rewrites the line to past tense. That is the whole reason to model this."
+ },
+ "forCCode": "every trigger reads something already recorded — guardIntercept counts, arcCasualties, figureTenure, homeLocation, the rivals field, mentor bonds. NOTHING NEW IS TRACKED. Mint on the world tick, cap at 4, and honour authored entries first."
+}

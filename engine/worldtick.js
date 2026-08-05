@@ -784,6 +784,53 @@ export function threatToPlayer(ws) {
   };
 }
 
+/** SNG-311 — AND SOMEONE MAY STAND OVER YOU. Erik: *"if you get marked for a strike, you can also be chosen
+ *  as warranting a guardian, or several… plus it gives a lot of use of the various hiding and warding
+ *  skills. Feels very VIP and end game, but could be mid game too."*
+ *
+ *  ⛔ THE SYMMETRY WAS ALREADY IN THE MODEL AND THE PLAYER WAS THE ONE EXCEPTION. A marked FIGURE gets a
+ *  guard — `guardIntercept`, weight 3, and "standing still is its own cost: they are not pushing while they
+ *  watch." The player was the only marked party nobody could stand over. This closes that with the rule the
+ *  rest of the valley already runs on: somebody who shares your care comes, and they pay a front to do it.
+ *
+ *  ⚠️ IT IS THE RETRIEVAL RULE, NOT A NEW ONE. `attemptRetrievals` picks who goes into the dark for you by
+ *  "someone who stood on the same side of something", highest rung first. A guardian is that same sentence
+ *  pointed at the living — which means a guardian is never a stranger the engine invented, but someone whose
+ *  stake the world can already name.
+ *
+ *  ⛔ AND IT RESOLVES NOTHING. Like the threat itself (SNG-310) this MARKS: it says who has put themselves
+ *  between the player and what is coming. Whether they arrive in time, whether the player hid well enough,
+ *  whether a ward held — that is the encounter, and the encounter is the GM's. Erik's "use of the hiding and
+ *  warding skills" lives exactly there, in a scene the player plays rather than a roll the world makes. */
+export function guardiansFor(ws, roster = [], worldDay = 0, cfg = {}) {
+  if (!threatToPlayer(ws)) return null;                    // nobody stands over an unmarked person
+  const arcs = new Set((ws.pendingStrikes || []).filter(t => t && !t.resolved).map(t => t.arcId).filter(Boolean));
+  if (!arcs.size) return null;
+
+  // Someone who stood on the same side of something — the retrieval rule, pointed at the living.
+  const able = (roster || []).filter(f => f?.id && f.id !== PLAYER_MARK_ID
+    && effectiveEpicStatus(ws, f.id, worldDay) === "active"
+    && currentCares(ws, f).some(c => arcs.has(c.arcId)));
+  if (!able.length) return { marked: true, guardians: [], note: "nobody who shares this fight is free to stand over you" };
+
+  // ⚠️ HIGHEST RUNG FIRST, AND THAT IS WHERE "VERY VIP" COMES FROM — it is arithmetic, not flavour. A legend
+  // choosing to stand still for you costs exactly what a legend standing still ever costs: they hold two
+  // fronts (`attentionByTier`), and one of them is now you.
+  const ranked = able.slice().sort((a, b) => tierRank(tierOf(ws, b)) - tierRank(tierOf(ws, a)));
+  const many = Math.max(1, Math.min(Number(cfg.guardiansMax) || 3, ranked.length));
+  return {
+    marked: true,
+    guardians: ranked.slice(0, many).map(f => ({
+      id: f.id, name: f.name || f.id, tier: tierOf(ws, f),
+      // WHY THEM — so a narrator can say the reason rather than assert the fact.
+      shares: currentCares(ws, f).map(c => c.arcId).find(a => arcs.has(a)) || null,
+    })),
+    // ⛔ THE COST, NAMED. A guardian is not free protection; it is a front they are not pushing, the same
+    // price `guardIntercept` has always carried. A player who accepts one is spending someone.
+    cost: "each of them is standing still to do it — a front they are not pushing while they watch",
+  };
+}
+
 /** SNG-304 — THE HOLDING STREAK. Erik: "a streak of holding could give an edge… something that builds to a
  *  point. It would get dropped down if interrupted."
  *

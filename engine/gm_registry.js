@@ -41,7 +41,7 @@ import { legendsForGM } from "./legends.js"; // SNG-208 wiring: legends pursuabl
 import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to become the next thread
 import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HERE, so the GM can be honest about it
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
-import { threatToPlayer } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
+import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
@@ -242,6 +242,17 @@ export const GM_CONTEXT = [
     reachedBy: "the offscreen world chose the player as a strike target while they held a contested front",
     spec: "SNG-310", views: ["turn", "ask"],
     build: (env) => threatToPlayer(env.character?.worldState) },
+
+  // SNG-311 — ⛔ AND WHO IS STANDING OVER THEM. The symmetric half of SNG-310: a marked FIGURE has always
+  // been able to draw a guard, and the player was the one marked party nobody could stand over. Same rule as
+  // retrieval — somebody who shares the care comes — and the same cost: a front they are not pushing.
+  { key: "guardiansDetail", builder: "worldtick.guardiansFor (SNG-311)",
+    carries: ["who has put themselves between the player and what is coming", "what they share with the player", "what it is costing them"],
+    reachedBy: "the player is marked for a strike and someone alive shares the care it is about",
+    spec: "SNG-311", views: ["turn", "ask"],
+    build: (env) => guardiansFor(env.character?.worldState, worldRoster(env.character?.worldState || {}, env.CONTENT || {}),
+                                 env.character?.worldState?.lastTickWorldDay ?? 0,
+                                 env.CONTENT?.rules?.arcResponse || {}) },
 
   // ---- turn-only: pass-throughs from runGM's own parameters ----
   { key: "resolution", builder: "runGM param (resolve.resolveAction)", carries: ["this action's mechanical outcome"],

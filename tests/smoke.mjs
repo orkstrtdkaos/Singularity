@@ -9958,6 +9958,45 @@ await (async () => {
       wt.threatToPlayer({ pendingStrikes: [{ arcId: "A", announced: true, resolved: true }] }) === null);
   }
 
+  // SNG-311 — AND SOMEONE MAY STAND OVER YOU. Erik: "if you get marked for a strike, you can also be chosen
+  // as warranting a guardian, or several… feels very VIP and end game, but could be mid game too."
+  {
+    const ws311 = { pendingStrikes: [{ arcId: "A", kind: "quiet", announced: false, resolved: false }], epicStatus: {} };
+    const roster311 = [
+      { id: "leg", name: "The War-Ender", tier: "legendary", arcAffinities: [{ arcId: "A", dir: "pro" }] },
+      { id: "not", name: "A Notable", tier: "notable", arcAffinities: [{ arcId: "A", dir: "pro" }] },
+      { id: "else", name: "Elsewhere", tier: "epic", arcAffinities: [{ arcId: "B", dir: "pro" }] },
+    ];
+
+    // ⛔ NOBODY STANDS OVER AN UNMARKED PERSON. A guardian who appears without a threat is the engine
+    // inventing a rescuer — the same error class as inventing a figure's brother.
+    check("311: an unmarked player draws no guardian at all",
+      wt.guardiansFor({}, roster311, 0) === null && wt.guardiansFor({ pendingStrikes: [] }, roster311, 0) === null);
+
+    const g = wt.guardiansFor(ws311, roster311, 0);
+    // The retrieval rule, pointed at the living: somebody who stood on the same side of something.
+    check("311: a guardian is someone who SHARES the fight the strike is about — never a stranger",
+      g.guardians.length > 0 && g.guardians.every(x => x.shares === "A")
+      && !g.guardians.some(x => x.id === "else"));
+    // ⚠️ HIGHEST RUNG FIRST — this is where "very VIP" comes from, and it is arithmetic, not flavour.
+    check("311: the highest rung comes first — a legend standing still for you is the expensive version",
+      g.guardians[0].id === "leg");
+    // ⛔ AND IT IS NOT FREE PROTECTION. The cost line is what stops it being played as safety.
+    check("311: the cost is NAMED — a guardian is a front somebody is not pushing",
+      /standing still/.test(g.cost) && /not pushing/.test(g.cost));
+
+    // An absence is a SITUATION, not a blank. Distinguishing "nobody came" from "not marked" is what lets
+    // the GM play the emptiness instead of quietly manufacturing a rescuer.
+    const alone = wt.guardiansFor(ws311, [{ id: "x", name: "X", tier: "epic", arcAffinities: [{ arcId: "Z", dir: "pro" }] }], 0);
+    check("311: marked with nobody who shares it reports the ABSENCE, not null",
+      alone && alone.marked === true && alone.guardians.length === 0 && /nobody who shares/.test(alone.note));
+
+    // The dead do not stand over anyone.
+    const wsDead = { ...ws311, epicStatus: { leg: { status: "dead" } } };
+    check("311: the dead do not guard — effectiveEpicStatus is the same gate the rest of the world uses",
+      !wt.guardiansFor(wsDead, roster311, 0).guardians.some(x => x.id === "leg"));
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

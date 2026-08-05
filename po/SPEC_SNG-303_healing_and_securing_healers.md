@@ -18,10 +18,30 @@ mendFactor:  none 1.4 · folk 1.0 · traditionHealer 0.6 · healingCapstone 0.4
 ```
 **⚠️ `none` is 1.4, not 1.0 — Erik's point exactly. The flat 8 is not the floor, it is the FOLK case.**
 Without the skills, injuries last **longer** than today's baseline.
-### 1b · THE DEATH DOWNGRADE
-A `killed` candidate becomes `wounded` **if a healing craft of sufficient tier is present on the loser's side**
-— **once**, and **the healer is SPENT for a cooldown** (proposed 20 days). A side with a great healer loses
-fewer people, **then the healer is out of reach and the next death lands.**
+### 1b · ⚠️ CORRECTED BY ERIK — A HEALER DOES NOT ANSWER A KILLING CRAFT
+My first draft had a healer downgrade a `killed` candidate to `wounded`. **Erik: *"there are killing crafts —
+so a healer isn't really going to affect those. For that you need someone who can RESURRECT. And THAT is a
+very high level skill."***
+**He is right, and it draws a line the sim does not currently have: DEATHS HAVE KINDS.**
+| how they died | can a healer answer it? | what answers it |
+|---|---|---|
+| **a killing craft landed** — `the_edge`, `draw_down`, the capstones | **NO. Nothing a healer does reaches this.** | **retrieval only** — and retrieval is T-III to T-V |
+| **wounds and attrition** — bled out, went untended, a wound that turned | **YES** — this is exactly what mending is for | a healer on the front |
+| **a strike in the back line** | **partly** — a struck worker who is reached in time survives | a healer, if present at all |
+**So the downgrade stays, but ONLY for the attrition kind.** A figure who dies to a craft built to end people
+**dies**, and the only road back is `the_calling_back`, `the_root_that_holds` or `the_open_threshold` —
+**exactly the three crafts already authored, at T-III/T-IV, reaching depth 0–2 and never the sealed.**
+**⚠️ THIS IS THE BETTER DESIGN AND IT COSTS ALMOST NOTHING:** `enterDeathState` **already takes a `cause`**,
+and `worldtick.js:851` already passes one — *as a prose string.* **Make it a KIND** (`craft_kill` ·
+`attrition` · `strike`) alongside the prose, and both halves fall out:
+- **a healer shortens wounds and prevents attrition deaths** — common, cheap, everywhere.
+- **a resurrector answers a craft-kill** — rare, expensive, and now the single most valuable person a side can
+  hold, **far above a healer.**
+**AND IT REPRICES THE WHOLE FRONT ECONOMY:** a side with a healer bleeds less. **A side with a RESURRECTOR
+cannot be permanently reduced** — which is exactly why the other side would strike one first. **The Quiet Work
+should weight a resurrector well above a healer** (proposed ×2.2 vs ×1.6), because killing the person who
+undoes your kills is the most rational thing an assassin ever does.
+
 ### 1c · WHO HAS IT — nothing new to author
 Read the loser's tradition against the catalog's `shape: healing`.
 **Strong:** rootkin · ashwarden (Easers) · numinous · valley_craft (`greenlore` is **folk and open-access**,
@@ -66,6 +86,13 @@ a healing tradition.** That is a side *securing* a healer, using minting that al
    if losing a healer doesn't measurably raise a front's deaths, the mechanic is decorative.*
 5. **how often the death-downgrade fires, and whether the cooldown binds.** If it fires every pass, 20 days is
    too short and a great healer is immortality by proxy.
+6. **⚠️ DEATHS BY KIND — `craft_kill` vs `attrition` vs `strike`.** *This is the number that validates the
+   split.* If attrition deaths are a tiny minority, the healer mechanic is marginal and the resurrector is
+   doing all the work — which would be worth knowing before either ships.
+7. **resurrector presence vs permanent roster loss on a front.** *If a front with a resurrector still shrinks
+   at the same rate, retrieval isn't reaching the world sim* — which it currently isn't, since `resolveRetrieval`
+   exists and no world-sim path calls it for a figure killed in a clash.
+
 **FAIL CONDITIONS I would want called out:**
 - **if arm B and arm C look the same**, the valuation isn't wired.
 - **if healer-rich traditions become unkillable**, the downgrade cooldown is too generous.

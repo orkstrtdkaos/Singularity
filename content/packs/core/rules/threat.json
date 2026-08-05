@@ -1,0 +1,73 @@
+{
+ "schemaVersion": 1,
+ "id": "threat",
+ "kind": "rules",
+ "note": "⚠️ SNG-322 / CCODE-52. The threat ladder — how bad this is, IN THE WORDS A PLAYER MEETS, rather than a number they never see. FIVE BANDS, because the ladder has exactly one job that matters: to make the line where a fight can kill you VISIBLE AND NAMED. Fewer than five and the warned/unwarned line lands in the middle of a band; more than five and the bands stop being distinguishable in a sentence.",
+ "theLine": "⚠️ THE DECISION ERIK LEFT ME: the warned line sits between `hard` and `grave`. At `grave` and above, the encounter is declared lethal, `lethalOfferClamp` fires, and THE PLAYER IS TOLD AND OFFERED A DECLINE. Below it they are not. One line, stated once, and the ladder decides it rather than a flag hand-set per encounter — which was the whole point of CCODE-52.",
+ "bands": [
+  {
+   "id": "trivial",
+   "name": "Beneath notice",
+   "tierGap": [
+    -99,
+    -2
+   ],
+   "meaning": "You will win. The only cost is time, and the only risk is looking foolish.",
+   "lethal": false,
+   "warn": false
+  },
+  {
+   "id": "fair",
+   "name": "An even thing",
+   "tierGap": [
+    -1,
+    0
+   ],
+   "meaning": "A real contest you are expected to win. You may be hurt; you will not be killed.",
+   "lethal": false,
+   "warn": false
+  },
+  {
+   "id": "hard",
+   "name": "Above your weight",
+   "tierGap": [
+    1,
+    2
+   ],
+   "meaning": "You can lose this. Losing costs you something you will still be carrying next week — a wound that lingers, gear gone, standing spent.",
+   "lethal": false,
+   "warn": false,
+   "note": "⚠️ THE LAST BAND WHERE LOSING IS NOT DYING. This is where most encounters should sit."
+  },
+  {
+   "id": "grave",
+   "name": "This can kill you",
+   "tierGap": [
+    3,
+    4
+   ],
+   "meaning": "Going down here means going down for real: incapacitated, and what happens next is not yours to decide.",
+   "lethal": true,
+   "warn": true,
+   "note": "⚠️ THE WARNED LINE. The name is the warning — it is not a mood word, it is a statement of consequence, and a player who reads it and continues has chosen."
+  },
+  {
+   "id": "beyond",
+   "name": "Nothing here is for you",
+   "tierGap": [
+    5,
+    99
+   ],
+   "meaning": "You are not the intended answer to this. Fighting it is not a hard fight; it is a decision to die.",
+   "lethal": true,
+   "warn": true,
+   "note": "⚠️ IT MUST EXIST SEPARATELY FROM `grave`, or the game has no way to say 'this is not a difficulty, it is a wall'. A player should be able to meet a legend at full strength and be TOLD that."
+  }
+ ],
+ "howItIsUsed": {
+  "decidesLethalFlag": "an encounter's `lethal` comes from its band, not from a hand-set field",
+  "decidesTheOffer": "`warn: true` fires lethalOfferClamp — explicit choice plus a Decline option",
+  "pairsWithAggressorKind": "⚠️ BAND SAYS HOW LIKELY YOU GO DOWN; `aggressorKind` SAYS WHAT HAPPENS WHEN YOU DO. A `grave` beast and a `grave` assassin are equally likely to drop you and completely different afterwards — the beast moves on, the assassin finishes the errand and hides the body. Two dials, two questions, no overlap."
+ },
+ "authoringGuidance": "Most content should be `fair` or `hard`. If everything is `grave`, nothing is — the warning stops being information and becomes noise, which is the failure mode this ladder exists to prevent."
+}

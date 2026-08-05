@@ -1,3 +1,44 @@
+## CCODE-146 — SNG-300: who seeks a fight. And the directive's test found something.
+
+Built as specced. `engageRate` was a FLAT 0.35 for every figure alive, so THE WAR-ENDER and a stillhold
+peacemaker stepped forward at exactly the same rate — 27 traditions and one temperament. It is a per-figure
+roll against a tradition-keyed disposition now, clamped so nobody is guaranteed never to fight and nobody
+fights every pass. An unlisted tradition is unchanged rather than penalised.
+
+### ⚠️ I RAN DIRECTIVE SNG-280'S OWN TEST AGAINST IT, AND IT IS NOT CLEAN
+
+*"Would this tradition's TAIL be disadvantaged?"* — 4 worlds × 12 world-years:
+
+```
+  tradition      engages   rose   avg career deeds
+  marcher          1.8      50%      30
+  abyssal          1.5      58%      35
+  …
+  numinous         0.4       8%      30
+  stillhold       0.15       8%      25
+```
+
+**A six-fold gap between the most and least confrontational traditions.**
+
+And I do not think the engagement numbers are the problem — they describe METHOD, Erik ratified them, and
+stillhold's own crafts say what they are. **The problem is downstream: THE DEED TABLE IS CONTEST-WEIGHTED.**
+Five of the seven sources need a fight, and after SNG-295 `stageMoved` requires WINNING one. A stillhold
+figure can realistically earn `guardIntercept`, `spreadPerHop` and `heldThroughCrisis` — and that is it.
+
+So the ladder does not judge peacefulness; it simply cannot SEE most of what a peaceful figure does. That is
+the same failure shape as everything else this fortnight: not a value smuggled into a coefficient, but a
+whole category of doing with no consumer.
+
+**It is NOT a clean lockout** — veilwright at 0.4 rose 38%, above blazeborn at 1.3 — so other sources are
+doing real work and the correlation is loose. I have reported it rather than tuned it, because the honest fix
+is **a deed source a peaceful figure can actually earn**, and what that should be is authorship, not a
+number I pick. Some candidates the world already records: a front held through a crisis that did not fall, a
+figure retrieved from the dark, a strike TURNED ASIDE by a guard (currently the guard scores, and the
+survivor scores — but nothing scores for the season nobody was struck at because you were standing there).
+
+That last one may be the truest one: the stillhold value is that the fight did not happen, and a system that
+can only count fights will never see it.
+
 ## CCODE-145 — SNG-299: every name is clickable, and answers from the record
 
 Erik: *"all of these new titles and terms and npcs need to have clickable popups describing who and what they

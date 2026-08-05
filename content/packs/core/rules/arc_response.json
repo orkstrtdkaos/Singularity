@@ -107,6 +107,46 @@
         "erodeAfterPasses": 6,
         "_erodeAfterPasses": "Passes of leaving a care untended before it starts to fade. Without erosion cares only ever accumulate and every figure ends up the same person. ⚠️ Erosion narrows a figure, it never empties one — a figure with no cares is invisible to `living` and drops out of the world."
     },
+  "engagement": {
+        "_note": "SNG-300 (Erik: \"we probably need to tweak who fights and how\"). `engageRate` was FLAT 0.35 for every figure alive, so THE WAR-ENDER and a stillhold peacemaker sought confrontation at exactly the same rate. This multiplies it per figure, by tradition.",
+        "_notAValueJudgement": "⛔ DIRECTIVE SNG-280: these describe METHOD, not merit. Marcher 1.8 and stillhold 0.15 are both complete ways of pursuing a want — stillhold's own crafts say so (`step_between` puts your unarmoured body between harm and someone else). A low number is not a nerf and a high one is not approval.",
+        "byTradition": {
+            "marcher": 1.8,
+            "abyssal": 1.5,
+            "unmaker": 1.4,
+            "blazeborn": 1.3,
+            "somatic": 1.3,
+            "seraphic": 1.3,
+            "ashwarden": 1.0,
+            "verist": 1.2,
+            "syllogist": 1.2,
+            "cogitant": 0.9,
+            "enginewright": 0.8,
+            "wright": 0.8,
+            "mason": 0.8,
+            "lattice": 0.9,
+            "figurist": 0.7,
+            "rootkin": 0.7,
+            "threnodist": 0.6,
+            "numinous": 0.4,
+            "veilwright": 0.4,
+            "umbral": 0.5,
+            "churnfolk": 0.6,
+            "horizon": 0.6,
+            "hourkeeper": 0.7,
+            "stillhold": 0.15
+        },
+        "bands": {
+            "seeks_it (1.8)": "confrontation IS their method — the fight is how they pursue the want",
+            "accepts_it (1.2)": "will fight when the want demands, without relish",
+            "default (1.0)": "unstated",
+            "avoids_it (0.5)": "fights only when cornered; the want is pursued another way",
+            "refuses_it (0.15)": "⚠️ NEVER seeks a confrontation. Their whole craft is that they do not."
+        },
+        "min": 0.05,
+        "max": 0.9,
+        "_min": "Nobody is guaranteed never to be drawn in, and nobody fights every single pass."
+    },
   "tierLadder": {
     "_section": "PROMOTION — tier as an EARNED position (SNG-269/2c). Erik: 'the ones that stay the longest are the true legends.'",
     "deedWeights": { "arcContestWon": 3, "strikeLanded": 3, "strikeSurvived": 3, "guardIntercept": 3, "stageMoved": 3, "spreadPerHop": 2, "heldThroughCrisis": 1 },

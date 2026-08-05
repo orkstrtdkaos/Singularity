@@ -367,6 +367,16 @@ const LEDGER = [
     note: "A fortnight of work put names in the player’s face — figures who rose, titles the world found, arcs that turned — and every one was a bare string. ⛔ The lookup answers ONLY from the record and returns null when nothing is known, so the name stays plain: a popup reading ‘a figure of the valley’ promises a lookup and delivers a shrug. Linkifying walks TEXT NODES rather than rewriting HTML, which cannot corrupt markup and cannot link inside an existing control — verified against a real DOM, where the first version also revealed it was linking only the FIRST name in a sentence.",
   },
   {
+    id: "SNG-300", ask: "we probably need to tweak who fights and how",
+    how: "worldtick.js:engageOf — the engaged/working split is a per-figure roll against a tradition-keyed disposition",
+    gates: ["272/300: engagement is a property of the FIGURE, not a quota on the side",
+            "272/300: it is keyed on tradition, and the table is authored",
+            "272/300: a peacemaker and a war-ender no longer seek confrontation at the same rate",
+            "272/300: nobody is guaranteed to never fight, and nobody fights every pass",
+            "272/300: an unlisted tradition is unchanged, not penalised"],
+    note: "⚠️ MEASURED AGAINST DIRECTIVE SNG-280’S OWN TEST, and it found something: over 4 worlds × 12 world-years, marcher (1.8) figures rose 50% of the time and stillhold (0.15) 8%. The engagement numbers describe METHOD rather than merit, as ratified — but the DEED TABLE is contest-weighted (five of seven sources need a fight, and `stageMoved` now requires WINNING one), so a peaceful tradition earns more slowly on the ladder. Not a clean lockout (veilwright at 0.4 rose 38%, above blazeborn at 1.3), and reported rather than tuned: the fix would be a deed source a peaceful figure can actually earn, which is content.",
+  },
+  {
     id: "SNG-267", ask: "the player is just one of many — so we need the world to live without the player",
     how: "tests/player_impact.mjs — the same worlds run with and without parties",
     gates: [],

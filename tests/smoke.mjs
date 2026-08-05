@@ -9503,9 +9503,11 @@ await (async () => {
   })());
 
   // CCODE-115 — most people work at a thing; some fight over it. The heavier side draws allies in.
+  // SNG-300: the quota became a PER-FIGURE roll, so the assertion moves from the mechanism to the outcome —
+  // most still work, a minority still fight, and now WHICH figures depends on who they are.
   check("272/115: most figures WORK at an arc; a minority FIGHT over it",
     /const engageRate = Number\.isFinite\(cfg\.directEngagementRate\)/.test(wsrc)
-    && /engaged: byUrgency\.slice\(0, n\), working: byUrgency\.slice\(n\)/.test(wsrc));
+    && /\(rng\(\) < engageOf\(e\.f\) \? engaged : working\)\.push\(e\)/.test(wsrc));
   check("272/115: a heavier figure draws in allies until the sides are comparable",
     /while \(bw < aw \* 0\.75 && qq\.length\)/.test(wsrc) && /while \(aw < bw \* 0\.75 && pq\.length\)/.test(wsrc));
   check("272/115: working is the safe small option — a fight moves an arc more, or less than nothing",
@@ -10219,6 +10221,24 @@ await (async () => {
     /while \(cursor < text\.length\)/.test(appW2) && /at === best\.at && e\.name\.length > best\.e\.name\.length/.test(appW2));
   check("272/299: the pass runs for every screen, from chrome(), and can never take one down",
     /try \{ linkifyKnown\(app\); \} catch/.test(appW2));
+}
+
+// --- SNG-300: who seeks a fight ----------------------------------------------------------------------
+{
+  const wsrcE = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  const docE = JSON.parse(readFileSync(join(root, "content/packs/core/rules/arc_response.json"), "utf8"));
+  const eng = docE.engagement;
+
+  check("272/300: engagement is a property of the FIGURE, not a quota on the side",
+    /\(rng\(\) < engageOf\(e\.f\) \? engaged : working\)\.push\(e\)/.test(wsrcE));
+  check("272/300: it is keyed on tradition, and the table is authored",
+    !!eng?.byTradition?.marcher && !!eng.byTradition.stillhold && Object.keys(eng.byTradition).length >= 20);
+  check("272/300: a peacemaker and a war-ender no longer seek confrontation at the same rate",
+    eng.byTradition.marcher > eng.byTradition.stillhold * 5);
+  check("272/300: nobody is guaranteed to never fight, and nobody fights every pass",
+    /Math\.max\(lo, Math\.min\(hi, engageRate/.test(wsrcE) && eng.min > 0 && eng.max < 1);
+  check("272/300: an unlisted tradition is unchanged, not penalised",
+    /engageCfg\.byTradition\?\.\[t\] != null\) \? Number\(engageCfg\.byTradition\[t\]\) : 1/.test(wsrcE));
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

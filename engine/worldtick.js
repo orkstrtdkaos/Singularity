@@ -1609,6 +1609,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // WEIGHT-MATCHED PAIRING, not index-matched: a legend at weight 9 holds off lesser figures until their
     // COMBINED weight matches hers. Three heroics can pin a legend; one cannot. Erik's cancellation.
     const engageRate = Number.isFinite(cfg.directEngagementRate) ? cfg.directEngagementRate : 0.35;
+    const engageCfg = content.rules?.engagement || {};   // SNG-300: per-tradition disposition
     const workMult = Number.isFinite(cfg.indirectPushMult) ? cfg.indirectPushMult : 0.8;
     const wOf = e => (Number(e.f.legend?.weight ?? e.f.weight) || 5) * e.share;
     const arcOutcomes = {};
@@ -1616,10 +1617,26 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     const strikes = [];      // CCODE-121: the quiet work — who was sent at whom, and who stood over them
     for (const [arcId, sides] of Object.entries(leaning)) {
       // The most urgent seek a fight; the rest get on with their work.
+      // SNG-300 — WHO SEEKS A FIGHT IS A PROPERTY OF THE PERSON, not a quota on the side.
+      //
+      // This took a flat share of each side by urgency, so THE WAR-ENDER and a stillhold peacemaker were
+      // equally likely to be in the fighting — the roster had 27 traditions and one temperament.
+      //
+      // ⛔ DIRECTIVE SNG-280: the multiplier describes METHOD, not merit. Stillhold at 0.15 is not a weak
+      // marcher, it is a tradition whose crafts put an unarmoured body between harm and someone else. Every
+      // figure still keeps their urgency ordering; what changes is how readily each one steps forward.
+      const engageOf = (f) => {
+        const t = f?.tradition || f?.legend?.tradition || null;
+        const mult = (t && engageCfg.byTradition?.[t] != null) ? Number(engageCfg.byTradition[t]) : 1;
+        const lo = Number.isFinite(engageCfg.min) ? engageCfg.min : 0.05;
+        const hi = Number.isFinite(engageCfg.max) ? engageCfg.max : 0.9;
+        return Math.max(lo, Math.min(hi, engageRate * (Number.isFinite(mult) ? mult : 1)));
+      };
       const split = list => {
         const byUrgency = list.slice().sort((a, b) => b.urgency - a.urgency);
-        const n = Math.min(byUrgency.length, Math.max(0, Math.round(byUrgency.length * engageRate)));
-        return { engaged: byUrgency.slice(0, n), working: byUrgency.slice(n) };
+        const engaged = [], working = [];
+        for (const e of byUrgency) (rng() < engageOf(e.f) ? engaged : working).push(e);
+        return { engaged, working };
       };
       const P = split(sides.pro), Q = split(sides.con);
       let duels = 0, proWins = 0, conWins = 0;

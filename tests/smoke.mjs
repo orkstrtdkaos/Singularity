@@ -9600,7 +9600,16 @@ await (async () => {
         !("_note" in wt.normalizeStrikeKinds({ kindByTradition: { _note: "x", quiet: ["umbral"] } })));
       // ⛔ `either` is resolved by circumstance, not a coin: they declare over what they most want.
       const k = { somatic: "either" };
-      check("303c: an `either` tradition DECLARES over the arc it most wants and goes quiet elsewhere",
+        // ⚠️ AND THE COVERAGE REPORT MUST AGREE WITH THE MECHANIC. `strikeCoverage` read the old path and the
+      // old shape, so after the reader moved it kept printing "no tradition is authored as a crusader, the
+      // declared kind never fires" while 279 crusades per run were firing. A report that contradicts the
+      // thing it reports on is worse than none — it is aimed at the person deciding whether to author.
+      check("303c: the coverage report AGREES with the reader — no crusader claim while crusades fire", (() => {
+        const cov = wt.strikeCoverage(liveContent.rules?.arcResponse || {}, liveContent.legends?.roster || []);
+        const declaring = Object.values(live).filter(v => v === "crusade" || v === "either").length;
+        return cov.bothKindsLive === (declaring > 0) && cov.crusadeTraditions > 0;
+      })());
+        check("303c: an `either` tradition DECLARES over the arc it most wants and goes quiet elsewhere",
         wt.strikeKindFor({ tradition: "somatic", wantArcId: "A" }, k, { arcId: "A" }) === "crusade"
         && wt.strikeKindFor({ tradition: "somatic", wantArcId: "B" }, k, { arcId: "A" }) === "quiet");
     }

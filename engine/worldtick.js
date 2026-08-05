@@ -898,16 +898,25 @@ export function planStrike({ attackers, defenders, arcId, strikeCfg = {}, strike
  *  and every strike is quiet. That is not a defect — it is the shipped behaviour, unchanged — but it must be
  *  a REPORTED number rather than a silence, or "the two kinds are built" reads as "the two kinds happen".
  *  Named the way `economyCoverage` names the economy's unreachable second axis. */
-export function strikeCoverage(strikeCfg = {}, roster = []) {
+export function strikeCoverage(cfg = {}, roster = []) {
   const traditions = [...new Set(roster.map(f => f?.tradition || f?.legend?.tradition).filter(Boolean))];
+  const strikeCfg = cfg?.strikes || cfg || {};
   const withDisp = traditions.filter(t => strikeCfg?.byTradition?.[t] != null).length;
-  const crusaders = traditions.filter(t => strikeCfg?.kindByTradition?.[t] === "crusade");
+  // ⚠️ ASK THE SAME NORMALIZER THE ENGINE ASKS. This read `strikeCfg.kindByTradition[t] === "crusade"`
+  // directly — the old path AND the old shape — so after SNG-303c moved the reader it went on reporting
+  // "no tradition is authored as a crusader, the declared kind never fires" while 279 crusades per run
+  // were firing. A coverage report that contradicts the mechanic it reports on is worse than no report:
+  // it is the stale-claim failure aimed squarely at the person deciding whether to author something.
+  const kinds = normalizeStrikeKinds(cfg?.strikes ? cfg : { strikes: strikeCfg, kindByTradition: cfg?.kindByTradition });
+  const crusaders = traditions.filter(t => kinds[t] === "crusade");
+  const eithers = traditions.filter(t => kinds[t] === "either");
   return {
-    traditions: traditions.length, withDisposition: withDisp, crusadeTraditions: crusaders.length,
-    crusades: crusaders, bothKindsLive: crusaders.length > 0,
-    note: crusaders.length === 0
+    traditions: traditions.length, withDisposition: withDisp,
+    crusadeTraditions: crusaders.length, eitherTraditions: eithers.length,
+    crusades: crusaders, bothKindsLive: crusaders.length + eithers.length > 0,
+    note: crusaders.length + eithers.length === 0
       ? "every strike is QUIET — no tradition is authored as a crusader, so the declared kind never fires"
-      : "both kinds reachable",
+      : `both kinds reachable — ${crusaders.length} declare, ${eithers.length} do either`,
   };
 }
 
@@ -2221,7 +2230,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // valley is quiet and the crusade path never fires. That is a fact about the CONTENT, not a defect, and
     // it is stated here as a number for the same reason: "the two kinds are built" and "the two kinds happen"
     // are different claims, and the second one is currently false.
-    ws.strikeCoverage = strikeCoverage((cfg && cfg.strikes) || {}, living);
+    // ⚠️ THE WHOLE `arcResponse` BLOCK, not `cfg.strikes` — the kinds live at `arcResponse.kindByTradition`,
+    // so handing this the inner block is what made the coverage report contradict the running mechanic.
+    ws.strikeCoverage = strikeCoverage(cfg || {}, living);
     ws.personalBeats = personalBeats;
     ws.neglectedLives = neglectedLives;
     for (const b of personalBeats.slice(0, 3)) {

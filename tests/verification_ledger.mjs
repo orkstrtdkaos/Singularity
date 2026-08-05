@@ -184,6 +184,7 @@ const LEDGER = [
             "303c: kind→[traditions] and tradition→kind both normalize to the same answer",
             "303c: authoring notes (_note, _reasoning) are not mistaken for traditions",
             "303c: an `either` tradition DECLARES over the arc it most wants and goes quiet elsewhere",
+            "303c: the coverage report AGREES with the reader — no crusader claim while crusades fire",
             "303b: a DECLARED crusade is easier to intercept than a knife nobody knew about",
             "303b: an EXPOSED figure is preferred as a mark — a failed quiet strike identifies you",
             "303b: a crusader's cares collapse to the one arc — every other front becomes a vacated seat",

@@ -1,0 +1,52 @@
+{
+ "schemaVersion": 1,
+ "id": "healing_in_the_world",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik: 'we also have healing skills... do those get factored in against the injury and death rates? If you don't have those skills the resulting injuries and deaths should be higher.'",
+ "theAnswer": {
+  "short": "⚠️ NO. HEALING IS NOT A FACTOR ANYWHERE IN THE WORLD SIM. Not in the death gate, not in the wound duration, not in who gets hurt.",
+  "traced": [
+   "`applyEpicClashOutcome` sets `st.status = 'wounded'; st.woundedUntilDay = worldDay + 8` — ⚠️ A FLAT EIGHT DAYS FOR EVERYONE. A figure travelling with a Rootkin healer and a figure alone in the Palelands recover at exactly the same rate.",
+   "the `killed` gate is a roll plus a cooldown. NOTHING about the loser's access to mending enters it.",
+   "`blunt` is `wounded ? 0.5 : 1` — a flat halving, with no way to reduce it.",
+   "and ⚠️ THE ASYMMETRY THAT MAKES IT ODD: `death.js` has a FULL retrieval system — depth, decay, odds by depth, sealing, `resolveRetrieval` — so THE WORLD MODELS BRINGING BACK THE DEAD IN DETAIL AND MODELS TENDING THE LIVING NOT AT ALL. You can be pulled back from the near dark by a craft, but nobody can shorten your convalescence."
+  ],
+  "consequence": "Erik's instinct is right and the gap is one-sided: the sim currently says a valley full of healers and a valley with none produce IDENTICAL injury and death numbers. Every mortality figure we have tuned this week — 8.6% heroic, 27.8% legendary, the strike rates, the guard intercept — was measured in a world where MEDICINE DOES NOT EXIST."
+ },
+ "theProposal": {
+  "principle": "⚠️ HEALING SHOULD NOT PREVENT THE WOUND. It should change WHAT THE WOUND COSTS — the same shape as the retrieval ladder, which does not prevent death, it answers it.",
+  "1_woundDuration": {
+   "now": "flat `worldDay + 8`",
+   "proposed": "`8 × mendFactor`, where mendFactor falls with access to healing craft on the wounded figure's own side",
+   "mendFactor": {
+    "none": 1.4,
+    "folk": 1.0,
+    "tradition_healer": 0.6,
+    "a_healing_capstone_present": 0.4
+   },
+   "why": "⚠️ NOTE `none` IS 1.4, NOT 1.0 — that is Erik's point exactly: WITHOUT the skills, injuries last LONGER than the current baseline. The flat 8 is not the floor; it is the FOLK case."
+  },
+  "2_theDeathGate": {
+   "now": "a roll, then a cooldown",
+   "proposed": "a `killed` candidate becomes `wounded` if a healing craft of sufficient tier is present on the loser's side — ⚠️ ONCE, and the healer is SPENT for a cooldown",
+   "why": "this is the 'a healer saved them' beat, and it should be finite. A side with a great healer loses fewer people, and then the healer is out of reach for a while and the next death lands."
+  },
+  "3_whoHasIt": {
+   "source": "⚠️ NOTHING NEW TO AUTHOR — the craft catalog already carries `shape: healing` and 14 healing theories across the traditions. A figure's tradition tells you what mending they can reach.",
+   "strongest": "rootkin, ashwarden (the Easers), numinous, valley_craft (greenlore is FOLK and open-access, which is the point)",
+   "none": "⚠️ unmaker, marcher, umbral, veilwright, precursor — these traditions have NO healing shape at all, so their figures sit at mendFactor 1.4 and die more. THAT IS THE MECHANIC ERIK IS ASKING FOR, and it falls straight out of the catalog with nothing invented."
+  },
+  "4_andTheRetrievalLADDERALREADYAGREES": "`the_calling_back`, `the_root_that_holds` and `the_open_threshold` are all held by traditions that ALSO have the strongest mending. So a Rootkin front loses fewer figures AND recovers the ones it loses. That compounding is correct and it is already authored — the sim simply reads none of it."
+ },
+ "whatThisChangesInNUMBERS": [
+  "⚠️ EVERY MORTALITY NUMBER WE TUNED THIS WEEK IS FROM A WORLD WITH NO MEDICINE. Heroic 8.6%, legendary 27.8%, the strike rate at 0.12, guardInterceptChance 0.45 — all measured with mendFactor implicitly 1.0 and flat.",
+  "Adding healing will LOWER deaths on healer-rich fronts and RAISE the spread between traditions. The averages may barely move while the VARIANCE goes up a lot, which is the more interesting world.",
+  "⚠️ SO THIS SHOULD LAND BEFORE ANY FURTHER MORTALITY TUNING, not after — otherwise we tune twice."
+ ],
+ "forCCode": [
+  "`woundedUntilDay = worldDay + Math.round(8 * mendFactor(loser, ws, content))`",
+  "mendFactor reads the loser's tradition against the craft catalog's `shape: healing` — the data exists, nothing new is recorded",
+  "the death-gate downgrade needs a per-healer cooldown so it cannot fire every pass",
+  "⚠️ AND THE READOUT MATTERS, per Erik's standing visibility rule: when a wound is shortened or a death downgraded, SAY WHO DID IT. 'She would have died at the ford. The Quickwood had someone there.' That is the whole feature — the number is the mechanism, the name is the point."
+ ]
+}

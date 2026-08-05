@@ -392,18 +392,49 @@ export function sanitizeNewEncounter(raw) {
         tier: Math.max(1, Math.min(5, s.tier | 0 || 1)), attribute: String(s.attribute || "practical").slice(0, 12) })) } : {}) } };
 }
 
+/** SNG-322 — THE BAND DECIDES, NOT A HAND-SET FLAG. Aevi's threat ladder (`rules.threat`) carries `lethal`
+ *  and `warn` per band, and it was authored onto 62 encounters — while nothing in the engine read
+ *  `rules.threat` at all, so `def.lethal` was still hand-set on exactly 2 defs. That is CCODE-52's whole
+ *  point and it was the sixth writer/reader miss of the week.
+ *
+ *  ⚠️ `def.threat` IS A BAND ID (a string), NOT `def.opponent.threat` (a 10–70 difficulty number). Two
+ *  different things share the word; this reads only the band ladder and never the number.
+ *
+ *  ⛔ AND THE BAND DOES NOT SAY WHETHER YOU CAN DIE. Aevi's own guard, kept here because it is the thing a
+ *  reader will get wrong: you can die in ANY band. The band says how likely you are to LOSE; `aggressorKind`
+ *  says what happens when you do. A `trivial` assassin will still finish you. */
+export function threatBandOf(def, rules = {}) {
+  const id = typeof def?.threat === "string" ? def.threat : null;
+  if (!id) return null;
+  return (rules?.threat?.bands || []).find(b => b?.id === id) || null;
+}
+
+/** Is this encounter one the player must be WARNED about and allowed to decline?
+ *  `def.lethal` still wins when set — an author may always mark a specific thing — but the band is what
+ *  decides it at scale. */
+export function isLethalEncounter(def, rules = {}) {
+  if (def?.lethal === true) return true;
+  const band = threatBandOf(def, rules);
+  return !!(band && (band.lethal === true || band.warn === true));
+}
+
 /** SNG-002b (ratified): a lethal encounter is always OFFERED, never imposed.
  *  Clamps a GM choice list: any choice starting a lethal encounter is marked,
  *  never trivial, and a guaranteed decline choice is appended if missing. */
-export function lethalOfferClamp(choices, catalog = {}) {
+export function lethalOfferClamp(choices, catalog = {}, rules = {}) {
   const out = [...(choices || [])];
   let lethalOffered = false;
   for (const c of out) {
     const def = c?.encounterId ? catalog[c.encounterId] : null;
-    if (def?.lethal) {
+    if (def && isLethalEncounter(def, rules)) {
       lethalOffered = true;
       c.trivial = false; // entry must be an explicit, informed choice
-      if (!/lethal|deadly|kill/i.test(c.label || "")) c.label = `⚠ ${c.label} (lethal stakes)`;
+      // ⚠️ THE WARNING IS ABOUT ODDS, NOT ABOUT DEATH — Aevi's line, and the band names carry it. Saying
+      // "lethal stakes" on `grave` while `fair` says nothing implies the even match cannot kill you, which
+      // is false and is exactly the misreading her rewrite was for. So the label names the BAND.
+      const band = threatBandOf(def, rules);
+      const say = band?.name ? band.name.toLowerCase() : "lethal stakes";
+      if (!/lethal|deadly|kill|weaker|even match|stronger|beyond/i.test(c.label || "")) c.label = `⚠ ${c.label} (${say})`;
     }
   }
   const hasDecline = out.some(c => !c.encounterId && /decline|refuse|back away|walk away|leave|avoid/i.test(c.label || ""));

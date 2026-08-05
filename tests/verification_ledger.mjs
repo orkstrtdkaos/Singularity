@@ -112,6 +112,18 @@ const LEDGER = [
     note: "⚠️ THESE TWO GATES WERE REGEXES AGAINST worldtick.js, AND THAT IS HOW THE BUG SURVIVED: both matched for the mechanic's entire life while the striker was drawn from `engaged` instead of `working`. A source pattern proves a line was typed, not that the decision is right. `planStrike` is extracted so the decision can be CALLED, and all three now call it.",
   },
   {
+    id: "SNG-322", ask: "CCODE-52: the threat ladder — and the band should decide the lethal flag rather than it being hand-set per def",
+    how: "encounters.js:threatBandOf + isLethalEncounter — Aevi's 5-band ladder decides the warning, at scale",
+    gates: ["322: the authored threat ladder REACHES the engine",
+            "322: the band reader reads the BAND, never the difficulty number",
+            "322: a WARNED band makes an encounter lethal-for-offer with no hand-set flag",
+            "322: …and an unwarned band does not — but an explicit def.lethal still wins",
+            "322: a banded encounter is marked, made non-trivial, and a Decline is forced into the list",
+            "322: the label names the BAND — the warning is about odds, not a promise about death",
+            "322: the difficulty reader takes only a real number, never a band string"],
+    note: "Aevi authored the ladder and mapped `threat` onto 62 encounters from the already-authored `minDanger` rather than re-judging by hand — so the bands AGREE with the danger figures the table always carried instead of quietly disagreeing. ⚠️ AND NOTHING IN THE ENGINE READ `rules.threat`: `def.lethal` was still hand-set on exactly 2 of 19 defs, so the derivation that makes CCODE-52 real was authored and unwired — the sixth writer/reader miss of the week. ⚠️ A NAME COLLISION SITS UNDER IT: `def.threat` is a BAND ID (string) while `def.opponent.threat` is a 10–70 difficulty NUMBER, and random_encounters.js fell through to the former — Number('trivial') is NaN, which `|| 0` silently turns into zero. Nothing broke (none of those 62 carried a numeric threat before, so the fallback was already 0), but a numeric reader aimed at a string field is a trap waiting for whoever changes either side; it now takes only a real number. ⛔ AEVI'S GUARD KEPT IN THE LABEL: the warning is about ODDS, not about death — you can die in any band, and saying 'lethal stakes' on `grave` while `fair` says nothing would imply an even match cannot kill you.",
+  },
+  {
     id: "SNG-309", ask: "there is a way to die… make sure all the encounters could get you killed. We need an incapacitation system — you wake up and the aggressor is gone with your gear, your companion revives you, you were slain by an assassin, but your party was able to bring you back to life after 27 days",
     how: "engine/incapacitation.js — health<=0 is an INCAPACITATION with an outcome; a slain player enters the same death.js ladder as any figure",
     gates: ["309: every kind of aggressor can kill you — no zero in the slain column",

@@ -80,14 +80,14 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
-import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
+import { lethalOfferClamp, isLethalEncounter, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.32";
+const APP_VERSION = "1.9.33";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2950,7 +2950,11 @@ function endEncounter(outcome) {
     // Now what happens next depends on WHO put you there and who was with you, and death — when it comes —
     // enters the SAME ladder every figure in the valley is on (SNG-209), so a party can come after you.
     const plan = incapacitationOutcome({
-      character, encounter: enc.def, aggressor: enc.def?.opponent || enc.opponent || {},
+      // ⚠️ THE DERIVED LETHALITY, not the hand-set flag — the same answer `lethalOfferClamp` warned on.
+      // If the warning and the consequence read different fields, the game warns about one thing and does
+      // another, which is worse than not warning at all.
+      character, aggressor: enc.def?.opponent || enc.opponent || {},
+      encounter: { ...enc.def, lethal: isLethalEncounter(enc.def, CONTENT.rules) },
       companions: activeCompanions(character, CONTENT.companions), rules: CONTENT.rules,
     });
     character.lastIncapacitation = { ...plan, day: character.clock?.day ?? null };
@@ -10767,7 +10771,7 @@ function renderPlay(turn, opts = {}) {
     // SKILL BATTLE the fight IS the option set (skillBattlePanel below) — the GM's stale story-choices are
     // suppressed so they don't sit under the moves. Ask-GM + the free-type field stay.
     if (activeEnc()?.state?.mode !== "skill_battle") {
-    turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
+    turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) }, CONTENT.rules);
     for (const c of turn.choices || []) {
       if (c.emergenceId && !validEmergenceId(character, CONTENT.emergence, CONTENT.rules, c.emergenceId)) c.emergenceId = null;
     }

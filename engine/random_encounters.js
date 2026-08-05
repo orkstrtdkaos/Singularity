@@ -199,7 +199,13 @@ export function eligibleEncountersFor(table, location, { cap = 8, power = null, 
   // keeps working, and the REGION supplies the cast either way. That is the whole model in one function.
   const draw = Number.isFinite(power) ? sampleThreat(power, rng, threatCfg) : null;
   if (draw) {
-    const threatOf = e => Number(e.opponent?.threat ?? e.threat) || 0;
+    // ⚠️ `e.threat` IS NOW A BAND ID (a string), NOT A NUMBER. SNG-322 authored the threat ladder onto 62
+  // entries, and this line fell through to it: Number('trivial') is NaN, which `|| 0` silently turns into
+  // zero. It happens to match the old behaviour (none of these carried a numeric `threat` before, so the
+  // fallback was already 0), so nothing broke — but a numeric reader pointed at a string field is a trap
+  // waiting for the next person to change either side. It now takes only a real number.
+  const numeric = v => (typeof v === "number" && Number.isFinite(v) ? v : null);
+  const threatOf = e => numeric(e.opponent?.threat) ?? numeric(e.threat) ?? 0;
     const near = (table?.encounters || [])
       .filter(e => (e.routing === "duel" || e.routing === "challenge" || e.routing === "opposed") && isEligible(e, location))
       // "a boar at lvl 20 isn't really an encounter anymore, unless it's a special encounter"

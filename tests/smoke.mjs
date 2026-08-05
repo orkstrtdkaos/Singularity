@@ -9856,6 +9856,52 @@ await (async () => {
       && /sealed/.test(IC.deathLine(fair, 221, {})));
   }
 
+  // SNG-322 — THE BAND DECIDES THE LETHAL FLAG. Aevi authored `rules.threat` (5 bands, each carrying
+  // `lethal`/`warn`) onto 62 encounters, and NOTHING IN THE ENGINE READ IT — `def.lethal` was still hand-set
+  // on exactly 2 defs. That is CCODE-52's whole point, and the sixth writer/reader miss of the week.
+  {
+    const EN = await import("../engine/encounters.js");
+    const { loadContentHeadless: lch2 } = await import("./headless_content.mjs");
+    const live = await lch2();
+    const R = live.rules;
+
+    check("322: the authored threat ladder REACHES the engine", (R.threat?.bands || []).length >= 3);
+    // ⚠️ `def.threat` is a BAND ID; `def.opponent.threat` is a 10–70 difficulty number. Same word, two
+    // things, and the band reader must never touch the number.
+    check("322: the band reader reads the BAND, never the difficulty number",
+      EN.threatBandOf({ threat: "grave" }, R)?.id === "grave"
+      && EN.threatBandOf({ opponent: { threat: 55 } }, R) === null
+      && EN.threatBandOf({ threat: 55 }, R) === null);
+
+    // A warned band makes an encounter lethal-for-offer WITHOUT anyone hand-setting a flag.
+    const graveId = (R.threat.bands.find(b => b.warn === true) || {}).id;
+    const calmId = (R.threat.bands.find(b => b.warn !== true) || {}).id;
+    check("322: a WARNED band makes an encounter lethal-for-offer with no hand-set flag",
+      !!graveId && EN.isLethalEncounter({ threat: graveId }, R) === true);
+    check("322: …and an unwarned band does not — but an explicit def.lethal still wins",
+      !!calmId && EN.isLethalEncounter({ threat: calmId }, R) === false
+      && EN.isLethalEncounter({ threat: calmId, lethal: true }, R) === true);
+
+    // The offer clamp: marked, never trivial, and a Decline forced into the list.
+    const clamped = EN.lethalOfferClamp(
+      [{ label: "Face it", encounterId: "x", trivial: true }],
+      { x: { id: "x", threat: graveId } }, R);
+    check("322: a banded encounter is marked, made non-trivial, and a Decline is forced into the list",
+      clamped[0].trivial === false && /⚠/.test(clamped[0].label)
+      && clamped.some(c => !c.encounterId && /decline/i.test(c.label)));
+    // ⛔ AEVI'S GUARD, KEPT: the warning is about ODDS, not about death. Labelling `grave` "lethal stakes"
+    // while `fair` says nothing implies an even match cannot kill you, which is false.
+    check("322: the label names the BAND — the warning is about odds, not a promise about death",
+      !/lethal stakes/.test(clamped[0].label));
+
+    // ⚠️ AND THE NUMERIC READER MUST NOT SWALLOW THE BAND. `Number("trivial")` is NaN, which `|| 0` turns
+    // silently into zero. Nothing broke (these entries carried no numeric threat before), but a numeric
+    // reader pointed at a string field is a trap waiting for whoever changes either side.
+    const src = readFileSync(join(root, "engine/random_encounters.js"), "utf8");
+    check("322: the difficulty reader takes only a real number, never a band string",
+      /typeof v === "number" && Number\.isFinite\(v\)/.test(src));
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

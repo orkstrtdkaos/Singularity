@@ -1988,6 +1988,97 @@
      "class": "hard"
     }
    ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_taken_apart",
+   "name": "The Taken Apart",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_body_mind",
+   "tradition": "somatic",
+   "attribute": "physical",
+   "axes": {
+    "body_mind": 0.6
+   },
+   "functions": [
+    "strike"
+   ],
+   "narrationHints": "They read the body the way a mason reads a wall, and then they go to the seams.",
+   "description": "⚠️ THE BREAKERS' CRAFT. A body is a structure, and a somatic who has mastered their own knows exactly where another one comes apart. Joint, then rhythm, then nerve. It is precise, it is unhurried, and it is entirely survivable right up until it is not.",
+   "notFor": "Anything not built like a body. Speed — this is not a fast kill and was never meant to be; a Breaker who is rushed does damage and nothing more.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Taken Apart",
+     "grants": "Go to the seams — joints and rhythm. They stop being able to fight long before they stop.",
+     "cannot": "A fast resolution. Non-bodies.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Last Seam",
+     "grants": "Continue past fighting-stopped to stopped. Precise, and the practitioner is never in doubt about which they did.",
+     "cannot": ": there is no ambiguity available; the tradition does not let you claim you did not mean to.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL"
+   ],
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 4,
+     "d": 6
+    },
+    "plus": 1,
+    "marginFloorPer": 0.03,
+    "targets": 1,
+    "note": "⚠️ SLOW and precise — r1 incapacitates, r2 continues. The two-step IS the craft: a Breaker always passes through 'they cannot fight' on the way."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: continue past fighting-stopped to stopped",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "seams only — they cannot fight, and they live",
+    "surge": "the last seam; THERE IS NO AMBIGUITY AVAILABLE ABOUT WHICH YOU DID"
+   },
+   "bounds": [
+    {
+     "text": "BODIES ONLY",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS SLOW — a rushed Breaker only does damage",
+     "class": "hard"
+    },
+    {
+     "text": "IT PASSES THROUGH 'THEY CANNOT FIGHT' FIRST, so continuing is a SECOND DECISION",
+     "class": "cost"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

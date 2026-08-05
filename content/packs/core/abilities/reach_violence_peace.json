@@ -2130,6 +2130,99 @@
           "class": "cost"
         }
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_quieting",
+      "name": "The Quieting",
+      "levelReq": 4,
+      "energyCost": 13,
+      "powerSystem": "reach_violence_peace",
+      "tradition": "stillhold",
+      "attribute": "physical",
+      "axes": {
+        "peace_violence": 0.2
+      },
+      "functions": [
+        "strike",
+        "ward"
+      ],
+      "narrationHints": "They step in the way they always step in. The difference is that this time it does not stop.",
+      "description": "⚠️ THE QUIETERS' CRAFT, and the calmest violence in the world. Stillhold ends a conflict by ending the one who will not stop — with the same interposing step, the same read of the room, and no change of expression. They teach it last and they do not pretend it is something else.",
+      "notFor": "Anyone who would have stopped. ⚠️ It is not available to a Stillhold who has not first TRIED the other roads — the craft is gated on a refused truce, which is a mechanical condition, not a moral one. And a Quieter is never afterward trusted to broker.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Quieting",
+          "grants": "End one who has refused a truce and is mid-harm. Interposition that does not yield.",
+          "cannot": "Anyone who has not refused a truce first. A struck-from-behind kill — this is face-on.",
+          "functions": [
+            "strike",
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "lethal"
+        },
+        {
+          "rank": 2,
+          "name": "The Held Field",
+          "grants": "Do it in the middle of a fight without the fight closing on you — the field stays still around it.",
+          "cannot": "Doing it twice in one place; the second time the room turns on you.",
+          "functions": [
+            "strike",
+            "ward"
+          ],
+          "gains": "deepen",
+          "harmRung": "lethal"
+        }
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "DEFEND"
+      ],
+      "harmRung": "lethal",
+      "nativeOrCombination": "native",
+      "shape": "damage",
+      "operativeAxis": [
+        "damage",
+        "control"
+      ],
+      "mechanic": {
+        "dice": {
+          "n": 4,
+          "d": 6
+        },
+        "plus": 2,
+        "targets": 1,
+        "note": "⚠️ HIGH damage, hard gate. It is not a duelling craft — it is one decisive act after the other roads failed."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: the field stays still around it — the fight does not close on you",
+          "from": "r2 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a warning that is nearly the act — half damage, and they may still stop",
+        "surge": "the full act; A QUIETER IS NEVER AFTERWARD TRUSTED TO BROKER"
+      },
+      "bounds": [
+        {
+          "text": "GATED ON A REFUSED TRUCE — you must have offered and been turned down",
+          "class": "hard"
+        },
+        {
+          "text": "FACE-ON ONLY; it is not a killing from behind",
+          "class": "hard"
+        },
+        {
+          "text": "A QUIETER IS NEVER AFTERWARD TRUSTED TO BROKER — the standing is spent",
+          "class": "cost"
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

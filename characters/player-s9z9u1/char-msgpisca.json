@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 14,
+  "xp": 16,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -46,7 +46,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 100,
-  "energy": 80,
+  "energy": 76,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -104,125 +104,195 @@
         "player": "Use Storykeeper to speak an old tale aloud — call across the veil in the oldest language you know",
         "summary": "Splarf calls across the veil in old numinous speech; the figure answers and the veil strains to hold the bridge.",
         "narration": "You draw breath and begin to speak — not the valley tongue, but the old ritual-speech your own people use when addressing the thin places. The words come rough at first, then smoother as the practice steadies you: a story of the first crossing, when the boundaries were negotiable and names had power. Your voice carries it out into the thin place like an anchor cast into deep water.\n\nThe figure stills. The hum of the waygate wavers, catches, shifts into something almost like listening. For a moment — just a moment — the veil reads as less hostile to your speaking. The presence turns its weight-of-attention fully toward you, and you feel the thread of connection take hold.\n\nBut the story you know is a valley-echo of an older thing. The figure's shape begins to move, begins to answer in a language that slides sideways through your understanding — not words, more like the spaces BETWEEN words, meaning you almost-grasp before it dissolves. It is trying to speak back across the boundary, trying to use your bridge, but something about the gulf between the sides is too wide. The veil shivers and the hum drops into discord. The figure's form flickers — there, not-there, there again — and it pulls back slightly, as if the effort of crossing has cost something. The connection strains and does not snap, but it frays."
+      },
+      {
+        "player": "Hold the connection open — keep speaking, deepen the practice, make yourself a more stable bridge",
+        "summary": "Splarf attempts to bridge the veil and speak with the figure, but the connection ruptures under the strain. The presence withdraws—pulled back through, leaving behind frustration and a sense of urgent unmet purpose.",
+        "narration": "The story falters on your tongue.\n\nYou push deeper into the old words, trying to hold the thread of connection steady, but the practice that usually settles you into stillness begins to fray instead. The figure in the thin place leans forward—a movement too fluid, too many angles—and the veil SCREAMS. It is not a sound made of air; it is the boundary itself protesting, the hum becoming a shriek that drives needles through your temples.\n\nBoo hisses and vanishes into the shadows of the lean-to.\n\nYour voice cracks. The story breaks mid-phrase. The connection snaps like a rope under too much weight, and the figure is pulled backward—not away, but THROUGH, as if the veil has finally had enough and is dragging it home. For one terrible instant you see its face clearly: it is not looking at you with malice or hunger, but with something worse. Disappointment. An urgent need unfulfilled. The last thing you feel across the breaking thread is a single, clear emotion: *failure to deliver.*\n\nThen the veil slams shut. The waygate clearing goes silent. The hum drops to a low, resentful throb. The figure is gone—not fled, but yanked back to whatever side of the boundary it came from. The thin place feels emptier now. Angrier."
       }
     ],
     "lastTurn": {
-      "narration": "You draw breath and begin to speak — not the valley tongue, but the old ritual-speech your own people use when addressing the thin places. The words come rough at first, then smoother as the practice steadies you: a story of the first crossing, when the boundaries were negotiable and names had power. Your voice carries it out into the thin place like an anchor cast into deep water.\n\nThe figure stills. The hum of the waygate wavers, catches, shifts into something almost like listening. For a moment — just a moment — the veil reads as less hostile to your speaking. The presence turns its weight-of-attention fully toward you, and you feel the thread of connection take hold.\n\nBut the story you know is a valley-echo of an older thing. The figure's shape begins to move, begins to answer in a language that slides sideways through your understanding — not words, more like the spaces BETWEEN words, meaning you almost-grasp before it dissolves. It is trying to speak back across the boundary, trying to use your bridge, but something about the gulf between the sides is too wide. The veil shivers and the hum drops into discord. The figure's form flickers — there, not-there, there again — and it pulls back slightly, as if the effort of crossing has cost something. The connection strains and does not snap, but it frays.",
-      "sceneSummary": "Splarf calls across the veil in old numinous speech; the figure answers and the veil strains to hold the bridge.",
+      "narration": "The story falters on your tongue.\n\nYou push deeper into the old words, trying to hold the thread of connection steady, but the practice that usually settles you into stillness begins to fray instead. The figure in the thin place leans forward—a movement too fluid, too many angles—and the veil SCREAMS. It is not a sound made of air; it is the boundary itself protesting, the hum becoming a shriek that drives needles through your temples.\n\nBoo hisses and vanishes into the shadows of the lean-to.\n\nYour voice cracks. The story breaks mid-phrase. The connection snaps like a rope under too much weight, and the figure is pulled backward—not away, but THROUGH, as if the veil has finally had enough and is dragging it home. For one terrible instant you see its face clearly: it is not looking at you with malice or hunger, but with something worse. Disappointment. An urgent need unfulfilled. The last thing you feel across the breaking thread is a single, clear emotion: *failure to deliver.*\n\nThen the veil slams shut. The waygate clearing goes silent. The hum drops to a low, resentful throb. The figure is gone—not fled, but yanked back to whatever side of the boundary it came from. The thin place feels emptier now. Angrier.",
+      "sceneSummary": "Splarf attempts to bridge the veil and speak with the figure, but the connection ruptures under the strain. The presence withdraws—pulled back through, leaving behind frustration and a sense of urgent unmet purpose.",
       "choices": [
         {
-          "label": "Hold the connection open — keep speaking, deepen the practice, make yourself a more stable bridge",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 20,
-          "intentTags": [
-            "sustain",
-            "devote"
-          ],
-          "abilityId": "the_unbroken_practice",
-          "energyCost": 1,
-          "trivial": false
-        },
-        {
-          "label": "Ask plainly — speak in the valley tongue and ask the figure its name, its task, what it came to find",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "negotiate",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Step back to safety and watch — break the speaking, let the veil settle, see what the figure does when you stop reaching",
+          "label": "Wait here in the lean-to and watch the veil, watching for what comes next.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "study"
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step out into the waygate clearing itself and offer yourself as a more solid anchor for the figure to reach.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "risky",
+            "devote"
           ],
           "abilityId": "numen_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Call Boo forward — send the shadow-companion out into the thin place to meet the figure where it stands",
+          "label": "Leave the shelter and walk into the settlement proper. Someone here will know what that presence was—or why it pulled back.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 12,
           "intentTags": [
-            "help"
+            "scout",
+            "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
+          "abilityId": "storykeeper",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Sit with what just happened. Use The Unbroken Practice to steady yourself and think clearly about what that emotion—failure—meant.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 10,
+          "intentTags": [
+            "careful",
+            "devote"
+          ],
+          "abilityId": "the_unbroken_practice",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -4
+        "energy": -3,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
-      "deeds": [],
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
-      "npcUpdates": [],
-      "codexUpdates": [
-        {
-          "topic": "the_figure_in_the_thin_place",
-          "label": "The Figure in the Thin Place",
-          "kind": "mystery",
-          "fact": "The figure is aware and trying to ANSWER across the veil — it understands speech, recognizes the old language, and attempted to reply in kind. The gulf between the sides is too wide for full communication; the veil strains when it tries. Its effort costs it something — a flicker, a pulling-back.",
-          "links": [
-            "what_wakes_beneath",
-            "the_thinning"
-          ]
-        }
-      ],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "The sharp, aching certainty that whatever came through the veil came to DELIVER something, not to take — and you interrupted it mid-act.",
+        "from": "the figure's emotion bleeding through the connection as it broke — not hunger or malice, but a thing sent to do work, and the work undone"
+      },
+      "stageOps": [],
       "scene": {
-        "setting": "The lean-to shelter at the edge of The Thinning settlement, early morning. Light bent and strange. The air tastes of copper and honeysuckle. Through the open doorway, the waygate clearing is visible beyond. The veil hums at a lower, more discordant frequency now.",
+        "setting": "The lean-to shelter at the edge of The Thinning settlement, midday now, light still bent and strange. The waygate clearing visible through the open doorway. The veil hums low and discordant, angrier than before. The thin place stands empty.",
         "npcsPresent": [],
         "objects": [
           "Your bedroll",
           "Traveler's Pack",
           "Waterskin",
-          "Boo — in shadow at the doorway, still watching",
-          "The figure in the thin place — flickering slightly, pulled back, still present but struggling"
+          "your chisel for stone-carving"
         ],
         "threads": [
-          "What the figure IS and what name it goes by; What it is tasked to do in the valley; Whether you can build a stronger bridge to communicate; Why the veil is opening and for how long; What the Water Crisis and What Wakes Beneath have to do with this presence"
+          "What the figure was sent to deliver",
+          "Why the veil is opening wider",
+          "Where Boo went",
+          "Whether the figure can come back"
         ]
       },
+      "npcUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The figure that came through the veil reads as a SENT THING—tasked with delivery of something specific to the valley. Its retreat was not flight but compulsion: it was pulled back through the boundary before its work was done, and the emotion it carried was failure, not triumph. The urgency of its purpose was unmistakable.",
+          "subjectId": null
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The veil has become angry and more tightly shut after the attempted bridge-crossing. The hum is lower, resentful. The thin place feels emptier.",
+          "flag": {
+            "veilState": "angered",
+            "presencePulledBack": true
+          }
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-figure-in-the-thin-place",
+          "label": "The Figure in the Thin Place",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The figure is a SENT THING—tasked, purposeful, aware. It came to DELIVER, not to take or harm. When the connection broke, it was pulled back through the veil by force, not by choice. Its final emotion across the breaking thread was failure: the work undone, the delivery not completed. Whatever it came to give the valley remains undelivered.",
+          "links": [
+            "what-wakes-beneath",
+            "the-thinning",
+            "the-water-crisis"
+          ]
+        }
+      ],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 1,
+        "why": "the attempt to bridge, the veil's resistance, the figure's retreat — a charged and draining moment"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The lean-to shelter at the edge of The Thinning settlement, early morning. Light bent and strange. The air tastes of copper and honeysuckle. Through the open doorway, the waygate clearing is visible beyond. The veil hums at a lower, more discordant frequency now.",
+      "setting": "The lean-to shelter at the edge of The Thinning settlement, midday now, light still bent and strange. The waygate clearing visible through the open doorway. The veil hums low and discordant, angrier than before. The thin place stands empty.",
       "npcsPresent": [],
       "objects": [
         "Your bedroll",
         "Traveler's Pack",
         "Waterskin",
-        "Boo — in shadow at the doorway, still watching",
-        "The figure in the thin place — flickering slightly, pulled back, still present b"
+        "your chisel for stone-carving"
       ],
       "threads": [
-        "What the figure IS and what name it goes by; What it is tasked to do in the valley; Whether you can build a stronger bridge to communicate; Why the veil is open"
+        "What the figure was sent to deliver",
+        "Why the veil is opening wider",
+        "Where Boo went",
+        "Whether the figure can come back"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 12,
+    "hour": 13,
     "realAnchor": null
   },
   "companions": [
@@ -355,11 +425,13 @@
     "the_thinning": {
       "visits": 1,
       "notes": [
-        "[d1] The veil here is actively thin and opening — a figure partially-real stands in the thin place, reading the settlement. The humming tone persists."
+        "[d1] The veil here is actively thin and opening — a figure partially-real stands in the thin place, reading the settlement. The humming tone persists.",
+        "[d1] The veil has become angry and more tightly shut after the attempted bridge-crossing. The hum is lower, resentful. The thin place feels emptier."
       ],
       "flags": {
-        "veilState": "opening",
-        "presenceDetected": true
+        "veilState": "angered",
+        "presenceDetected": true,
+        "presencePulledBack": true
       },
       "vectorsKnown": [
         "mechanical_spiritual"
@@ -441,24 +513,8 @@
     "lastSharedReadAt": "2026-08-05T23:38:26.825Z",
     "lastTickWorldDay": 36,
     "lastCanonWorldDay": 36,
-    "pressureQueue": [
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
-        "subjectId": "beast_pale_reader",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "A a pale reader has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_pale_reader",
-          "name": "a pale reader"
-        },
-        "addedDay": 1,
-        "locationId": "the_thinning"
-      }
-    ],
-    "turnsSinceOffer": 2,
+    "pressureQueue": [],
+    "turnsSinceOffer": 0,
     "recentOffers": [
       {
         "thing": "Boo's sudden, absolute attention — the way it has turned to watch you watch it, as if something has shifted in the settlement or the veil…",
@@ -467,6 +523,10 @@
       {
         "thing": "A figure that stepped through the veil — something half-real, reading the valley, standing at the thin place",
         "from": "The stirring arc 'What Wakes Beneath' — the substrate flickering, and now something on the other side has noticed the thinning. The veil's…"
+      },
+      {
+        "thing": "The sharp, aching certainty that whatever came through the veil came to DELIVER something, not to take — and you interrupted it mid-act.",
+        "from": "the figure's emotion bleeding through the connection as it broke — not hunger or malice, but a thing sent to do work, and the work undone"
       }
     ]
   },
@@ -552,11 +612,13 @@
         "facts": [
           "[d1] A figure that is half-real, wrongly-jointed, with a face that reveals layers — stepped through the veil at The Thinning. It reads the valley with focused attention. The veil is not just thin here; it is actively opening, and whatever this is, it came THROUGH.",
           "[d1] The presence reads as profound PURPOSE — not malice, but a thing sent, a thing tasked. It is aware of being sensed and tracks Splarf's attention. The veil sings around it because it is not OF this side. Whatever is pulling the veil open, it is not the Numinous.",
-          "[d1] The figure is aware and trying to ANSWER across the veil — it understands speech, recognizes the old language, and attempted to reply in kind. The gulf between the sides is too wide for full communication; the veil strains when it tries. Its effort costs it something — a flicker, a pulling-back."
+          "[d1] The figure is aware and trying to ANSWER across the veil — it understands speech, recognizes the old language, and attempted to reply in kind. The gulf between the sides is too wide for full communication; the veil strains when it tries. Its effort costs it something — a flicker, a pulling-back.",
+          "[d1] The figure is a SENT THING—tasked, purposeful, aware. It came to DELIVER, not to take or harm. When the connection broke, it was pulled back through the veil by force, not by choice. Its final emotion across the breaking thread was failure: the work undone, the delivery not completed. Whatever it…"
         ],
         "links": [
           "what-wakes-beneath",
-          "the-thinning"
+          "the-thinning",
+          "the-water-crisis"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -565,16 +627,18 @@
     }
   },
   "tendencies": {
-    "stealth": 12.049171874999999,
-    "strategic": 0.9506249999999999,
-    "cautious": 2.925625,
-    "cerebral": 1.975
+    "stealth": 11.747942578124999,
+    "strategic": 0.9268593749999999,
+    "cautious": 2.852484375,
+    "cerebral": 1.9256250000000001,
+    "patient": 1,
+    "devotion": 1
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 3,
+  "actionCount": 4,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -796,8 +860,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785974191387,
-  "rev": 21,
+  "updatedAt": 1785974273995,
+  "rev": 22,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -809,7 +873,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 4
+    "the_numinous_reach": 5
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -817,10 +881,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-05T23:56:31.372Z",
+      "lastAt": "2026-08-05T23:57:53.985Z",
       "startDay": 36,
       "endDay": 36,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [
@@ -829,37 +893,45 @@
       "text": "A figure stepped through the veil at The Thinning — half-real, too many joints, reading the valley with attention that suggests intelligence and purpose. The veil is not merely thin; it is open, and something on the other side has found it.",
       "day": 1,
       "subjectId": null
+    },
+    {
+      "id": "f2",
+      "text": "The figure that came through the veil reads as a SENT THING—tasked with delivery of something specific to the valley. Its retreat was not flight but compulsion: it was pulled back through the boundary before its work was done, and the emotion it carried was failure, not triumph. The urgency of its…",
+      "day": 1,
+      "subjectId": null
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 2,
+      "applied": 3,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 4,
-    "scene": 4,
-    "choices": 4,
-    "offer": 2,
-    "codexUpdates": 4,
+    "sceneSummary": 5,
+    "scene": 5,
+    "choices": 5,
+    "offer": 3,
+    "codexUpdates": 5,
     "imagePrompt": 3,
-    "gambitApt": 3,
-    "sceneEnded": 4,
-    "characterDeltas": 3,
+    "gambitApt": 4,
+    "sceneEnded": 5,
+    "characterDeltas": 4,
     "arcOps": 1,
-    "factUpdates": 1,
-    "placeUpdates": 1
+    "factUpdates": 2,
+    "placeUpdates": 2,
+    "timeOps": 1
   },
-  "_opTurns": 4,
+  "_opTurns": 5,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "beastfriend": 1,
       "numen_sense": 1,
-      "storykeeper": 1
+      "storykeeper": 1,
+      "the_unbroken_practice": 1
     },
     "coActivations": {},
     "aspirations": [
@@ -877,7 +949,8 @@
     "lastUsed": {
       "beastfriend": 36,
       "numen_sense": 36,
-      "storykeeper": 36
+      "storykeeper": 36,
+      "the_unbroken_practice": 36
     }
   },
   "customAbilities": {},

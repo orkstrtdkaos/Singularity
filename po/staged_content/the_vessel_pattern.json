@@ -78,23 +78,32 @@
   },
   "sound": {
    "fails": "SHATTERS — everything brittle nearby breaks, and the bearer's hearing goes first",
-   "counterplay": "distance and soft ground; and the chord was audible the whole time, so it is the one overcharge everyone SAW coming"
+   "counterplay": "distance and soft ground; and the chord was audible the whole time, so it is the one overcharge everyone SAW coming",
+   "plainly": "When it bursts, everything brittle within earshot breaks — glass, ceramic, bone at 3d6 — and the bearer is deafened for a day, taking a penalty to anything needing hearing."
   },
   "decay": {
    "fails": "⚠️ BLOOMS — the banked rot does not detonate, it SPREADS, and keeps spreading until something stops it",
-   "counterplay": "it is slow, so it is answerable — but by then it is a place with a problem rather than a moment with one"
+   "counterplay": "it is slow, so it is answerable — but by then it is a place with a problem rather than a moment with one",
+   "plainly": "When it bursts, the banked rot enters the ground and spreads outward one zone per day, spoiling food, water and worked material as it goes. It does not stop on its own; it stops when someone with a decay craft or enough labour halts it. Nothing takes damage at the moment it bursts."
   },
   "living": {
-   "fails": "⚠️ OVERGROWS INTO THE BEARER — the growth has nowhere else to go and takes the nearest living thing, which is you",
-   "counterplay": "be standing next to something else alive, which is a horrible decision to have to make"
+   "fails": "OVERGROWS INTO THE NEAREST LIVING THING",
+   "plainly": "When it bursts, the banked growth takes the single nearest living creature and forces growth into it for 5d6 living damage, continuing at 1d6 per round until that creature dies or the charge is used up. The bearer is usually nearest, so the bearer is usually the target.",
+   "targetRule": "the nearest living creature by distance, measured from the vessel. Ties resolve toward the bearer.",
+   "whatCountsAsLiving": "any creature. ⚠️ PLANTS DO NOT COUNT — the growth wants something that can be grown PAST its shape, and a tree has no shape to exceed. This is why a rootkin cannot simply stand in a forest.",
+   "counterplay": "⚠️ THE ONLY WAY TO NOT BE THE TARGET IS FOR ANOTHER CREATURE TO BE CLOSER TO THE VESSEL THAN YOU ARE. Set the vessel down and walk away and it takes whatever wanders near — livestock, a companion animal, a person. Hold it and it takes you. THERE IS NO OPTION WHERE NOTHING IS HURT, which is the point: the rootkin overcharge is the only one in the set whose counterplay is DECIDING WHO INSTEAD OF YOU.",
+   "andTheVentIsDifferentToo": "venting a living overcharge does not fire it outward — it puts the growth into something ON PURPOSE. A rootkin who vents well heals a field or a herd; one who vents badly has still chosen a target, and the record shows they chose."
   },
   "shadow": {
    "fails": "⚠️ COLLAPSES INWARD — the harbor folds and everything sheltered inside is gone with it",
-   "counterplay": "empty it first; the cost of the umbral vessel is that its failure kills what it was protecting"
+   "counterplay": "empty it first; the cost of the umbral vessel is that its failure kills what it was protecting",
+   "plainly": "When it bursts, the harbor folds. Everyone and everything sheltered inside it is gone — not damaged, GONE, removed from play with no body. The bearer survives, standing where the harbor was."
   },
   "appetite": {
-   "fails": "COLLECTS — the debt comes due against the bearer, at the price they set for others"
+   "fails": "COLLECTS — the debt comes due against the bearer, at the price they set for others",
+   "plainly": "When it bursts, every bargain the bearer holds comes due at once, against the bearer, at whatever price they set for the other party."
   }
  },
- "theDesignRule": "⚠️ A VESSEL'S OVERCHARGE MUST BE THE TRADITION'S OWN NIGHTMARE, not a generic explosion. The light one hurts everyone who can see. The shadow one kills what you were protecting. The living one grows into you. If two traditions' vessels fail the same way, one of them is authored wrong."
+ "theDesignRule": "⚠️ A VESSEL'S OVERCHARGE MUST BE THE TRADITION'S OWN NIGHTMARE, not a generic explosion. The light one hurts everyone who can see. The shadow one kills what you were protecting. The living one grows into you. If two traditions' vessels fail the same way, one of them is authored wrong.",
+ "clarityNote": "⚠️ ADDED AFTER ERIK CAUGHT 'stand next to something else alive — a horrible decision to have to make' as vague, HOURS AFTER I amended DIRECTIVE_SNG-306 to cover my own writing. It was evocative and it specified nothing: not the damage, not how the target is chosen, not whether a plant counts. Every overcharge now carries a `plainly` alongside its evocative line — the same twin rule the crafts get. The tell was that I wrote the CONSEQUENCE ('a horrible decision') instead of the RULE ('the nearest living creature, ties toward the bearer')."
 }

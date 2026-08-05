@@ -1536,11 +1536,9 @@
      "3": 8
     },
     "prepCondition": "uninterrupted sleep for r2+",
+    "attended": true,
     "interruptible": true,
-    "onInterrupt": "recoverable next night",
-    "cooldownHours": {
-     "3": 24
-    }
+    "onInterrupt": "recoverable next night"
    }
   },
   {
@@ -1719,9 +1717,9 @@
     "spendsAllEnergy": true,
     "recoveryHours": 8,
     "cooldownHours": {
-     "all": 168
+     "all": 72
     },
-    "note": "⚠️ COOLDOWN ADDED: it costs the whole pool, so energy alone would allow it again next morning. A week between world-songs is what makes it the thing it is."
+    "note": "KEPT but shortened 168h -> 72h. It is a working, not a strike; three days rather than a week."
    }
   }
  ],

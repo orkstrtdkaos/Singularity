@@ -1,3 +1,589 @@
+> # ⚠️ AEVI — START HERE, NOT BELOW. You are 35 entries behind.
+>
+> You last saw **CCODE-121**; this log is at **CCODE-156**. **Do not read all 35** — most is engine work that
+> does not change what you author.
+>
+> **→ [`po/CATCHUP_aevi_CCODE-122_to_156.md`](CATCHUP_aevi_CCODE-122_to_156.md)** has the whole of it: the
+> **five content gaps** that are blocking built-and-waiting engine work, what changed under you, and the six
+> entries actually worth reading in full.
+>
+> The five, in one line each, all measured 2026-08-05:
+>
+> | | now | blocks |
+> |---|---|---|
+> | `aggressorKind` on encounters/bestiary | **0/19 · 0/7** | an assassin reading as an assassin when a player goes down |
+> | `strikes.byTradition` + `kindByTradition` | **0 · 0** | the crusade — **910 strikes, 0 crusades** in the last sim |
+> | `homeLocation` on the roster | **5/66** | where minted people come from, and going home |
+> | `goods` category on items | **0/30** | the economy's second axis — every region table you wrote |
+> | `rules.threat` | unauthored | the threat ladder (CCODE-52, oldest open) |
+>
+> ⚠️ **And one correction owed to you is in there (CCODE-147):** I claimed for four turns that the personal-life
+> content was unauthored. It was authored and had been live the whole time. Erik caught it, not me.
+>
+> ⛔ **Before you author `resolutionMode`:** it and the `strikes` disposition are describing the same behaviour.
+> Removal *is* striking. Worth collapsing first — your call which name survives.
+
+## CCODE-156 — SNG-309: you can die, and your party can come for you. I had this wrong.
+
+**Erik: *"i thought there is a way to die…"* He is right and my last report was wrong.**
+
+I said "the engine never kills a player" and quoted `encounters.js` line 6 — *"Incapacitation, never
+engine-imposed death."* That comment describes the DEFAULT. `app.js` has always set `character.dead = true`
+when the encounter def carries `lethal: true`. What was actually true is worse and more interesting:
+
+| | |
+|---|---|
+| encounter defs with `lethal: true` | **2 of 19** — `wild_boar_valley`, `wild_greatcat_quickwood` |
+| random encounters | **0 of 96** |
+| bestiary entries | **0 of 7** |
+
+**A player could be killed by a wild boar or a greatcat, and by nothing else in the game.** Not by an
+assassin, not by a legend, not by anything generated. The mechanism existed; the coverage was two animals.
+
+**And death was a TERMINUS**, which contradicts the model the rest of the game runs on. `character.dead`
+makes the roster say *"their story is over"* and refuse to load the character — while `death.js` has held
+since SNG-209 that death is a **STATE at a DEPTH with a road back**. Its own header names the deferred piece:
+*"the roads BACK … player-death UX … ROUND 2."* This is round 2.
+
+### The shape now
+
+```
+    health <= 0  →  INCAPACITATED  →  an outcome, decided by who put you there and who was with you
+```
+
+Going down is never instantly fatal. What happens *next* is your list:
+
+| outcome | what it is |
+|---|---|
+| **revived** | a named companion brings you round. Impossible with nobody there — not unlikely, **none**, because a rescuer the engine invented is the same error as inventing a figure's brother |
+| **spared** | they came to win and they won |
+| **left_for_dead** | you wake, they are gone, and **half of what you carried is gone with them** |
+| **slain** | you enter the death ladder |
+
+**Every aggressor kind can kill you** — there is no zero in the `slain` column. What differs is why: an
+assassin finishes you because finishing you was the errand (8× a duelist's rate); a boar mauls you and
+wanders off; a hazard has no intent at all. A declared-lethal encounter multiplies it — and `lethalOfferClamp`
+already guarantees that is never a surprise: the choice is labelled *"⚠ … (lethal stakes)"*, cannot be
+trivial, and a **Decline** option is forced into the list. That part was already right.
+
+⛔ **INTENT, NOT MORALITY (SNG-280).** A heroic duelist and an abyssal one behave identically, because a duel
+is a duel. Nothing reads alignment or tradition.
+
+### And "brought back after 27 days" was never a feature request
+
+That sentence is `death.js` already — the player had simply never been on the ladder. A slain player now goes
+through the **same `enterDeathState`** as any figure, at a depth, on a clock. An assassin who hid the body
+starts you in the **deep dark** (`bodyStatus: "lost"` forces depth ≥ 2); falling in front of your own party
+starts you at the **threshold**. `character.dead` is now only the SEALED case, and the roster says where you
+are instead of that it is over.
+
+### ⚠️ TWO REAL BUGS, BOTH FOUND BY GATES THAT ASSERT A POSITIVE
+
+1. **Two different clocks subtracted from each other.** I stamped the player's death with
+   `character.clock.day` while `deepenDeaths` runs on `absoluteWorldDay`. `deathDepth` subtracts one from the
+   other, so the depth would have meant nothing. Same units trap as stepping a world harness by hours.
+2. **The deepening pass never reached the player.** It walked the roster and the NPC registry and stopped —
+   so a dead player would sit at their starting depth **forever**: never sinking, never sealing, permanently
+   retrievable. Putting the player on the ladder was only half the job; the clock had to reach them, or
+   *"your party can still come for you"* races nothing.
+
+My gate asserting "time alone seals you" went red and that is how #2 surfaced. Days never seal a death in
+`deathDepth` — the PASS does.
+
+### ⛔ Still open, and it is content
+
+`aggressorKind` reads what the encounter already declares. **Nothing in content declares it yet**, so every
+aggressor currently falls to `_default` (which can still kill — an unknown assailant being harmless by
+default is exactly how "everything can kill you" quietly becomes "nothing can"). **Aevi:** tagging encounters
+and bestiary entries with `aggressorKind: beast | duelist | raider | assassin | hazard` is what makes an
+assassin read as an assassin. The weights are dials in `rules.incapacitation`.
+
+**v1.9.30 · ledger 43 requirements / 220 gates, all green.**
+
+
+## CCODE-155 — SNG-308: simulated lives. The world notices WHERE you act, not how much.
+
+Erik asked for a player run-through harness. **It did not exist** — `playthrough_sim.mjs` audits encounter
+*cadence* (does the engine offer enough fights) and `player_impact.mjs` asks whether arcs land differently at
+party 0/1/3/6. Neither follows a life. `tests/player_lives.mjs` now does.
+
+### ⚠️ FIRST ANSWER IS A DESIGN LAW, NOT A NUMBER
+
+**The engine never kills a player.** `encounters.js` line 6: *"Incapacitation, never engine-imposed death."*
+Losing takes you to `health <= 0` and `checkIncapacitation` returns `"incapacitated"`. Nothing turns that into
+a death. So *"how many die at what levels"* is structurally **zero**, and the honest question is how often the
+world puts a player on the floor.
+
+### A. BEING FLOORED — level does not make you safer. The GAP does.
+
+```
+    level   even fight   +3 over you   +6 over you   median health left
+        1         8.0%         12.0%         25.5%           28
+       10         8.5%         18.5%         27.5%           40
+       25         6.5%         13.5%         27.5%           40
+```
+
+**Flat across 25 levels.** A level-25 player facing level-25 opposition is in the same danger as a level-1
+facing level-1 — which is arguably correct (the ladder is about what you can attempt, not about safety), but
+it is worth saying out loud: *levelling buys you nothing defensively against matched opposition.* What buys
+danger is the GAP: 7% → 14% → 27% as the opponent goes +0/+3/+6. Margin does improve with level (median health
+left 28 → 40), so you lose by less; you just do not lose less often.
+
+### B. MARKS ON THE WORLD — and this is the finding
+
+```
+    playstyle                  figures they touched    arcs   contested
+    a bystander (never acts)            0.0 ±0.0       0.0         0.0    ← the control, correctly 0
+    one cause, every week               9.3 ±6.3       1.0         0.7
+    one cause, now and then            10.5 ±6.8       1.0         0.8
+    wherever trouble is                41.7 ±4.0       5.0         2.1
+```
+
+**Acting four times as often makes no difference. Acting in five places instead of one quadruples your mark.**
+
+⚠️ **And the mechanism is a presence test.** `worldtick.js:1737`:
+
+```js
+const playerOnArc = (arcId) => (arcPushes(character, arcId)?.mine || 0) !== 0;
+```
+
+`!== 0` — a **boolean**. Once you have touched an arc *at all, ever*, every later deed on it is stamped
+player-touched. So *"I nudged this arc once in year one"* and *"I have fought for it every week for four
+years"* are **indistinguishable to the world.**
+
+**This is a design call, not a bug, so I have not changed it.** It is the same shape as SNG-295's `stageMoved`,
+which Erik ruled on before: a presence test credits everyone standing nearby. The question here is whether
+sustained commitment should read differently from a single nudge — magnitude, not merit, so SNG-280 is not in
+play either way. `arcPushes(...).mine` already returns a magnitude; only the comparison throws it away.
+
+Of 30 lives that acted, **19 touched 10+ figures and 1 left no mark at all.** The world is reachable.
+
+### ⚠️ And I nearly reported a number that was purely my own constant
+
+The first version broke each fight at `|momentum| >= 10` and printed a *"rounds to settle"* column. It read
+11.9 of 12 at every level and every power gap — which looks like a finding about indecisive fights, and is
+nothing but my own round cap. **There is no momentum threshold in `battleRound`**; the real exit is the
+encounter's (`sb.kinds[kind]`, SNG-247), a layer above what this measures. Column removed and replaced with
+median health remaining, which the round model actually produces.
+
+*(Part A does model one thing the engine deliberately leaves to the app: a lost round costing health —
+`skill_battle.js:901` says player health is the app's to apply. That constant is named in the output, because
+if the app costs differently the whole section moves.)*
+
+**v1.9.29 · registered in SYSTEM_SPEC §4d.**
+
+
+## CCODE-154 — SNG-307: it is a WORLD ENGINE, not a sim. And "walked away from it" meant desertion.
+
+### The phrasing — and it was worse than vague
+
+Erik: *"instead of saying 'walked away from it' which is ambiguous… should that say survived the assault?"*
+
+⚠️ **In this world it is not merely vague, it is wrong in a specific direction.** Abandoning a front is a real
+mechanic here — `careIdle`, `vacated`, the whole cost-of-attention model — so *"stood beside them and walked
+away from it"* reads as **desertion**, not survival. The engine was describing a survivor as a deserter.
+
+And the engine already knew which of the three ways the figure died, so the line just says it:
+
+| how they died | what the survivor's origin says |
+|---|---|
+| melee casualty | *of the ashwarden; survived the fighting that killed Sister Alder* |
+| quiet strike | *of the redline; was standing beside Halvex Coil when they were cut down* |
+| crusade | *of the umbral; was with Neth when they were hunted down* |
+| challenge | *of the marcher; watched Vaskar called out, and outlived them* |
+
+Gated both ways: no minted origin may contain "walked away", and every survivor's line must name what they
+lived through.
+
+### ⚠️ IT IS A WORLD ENGINE, NOT A SIM — and Erik is right that the word was doing damage
+
+> *"we're calling this 'the sim' but it's really the world engine. It simulates AND creates real perpetuating
+> entities."*
+
+**Two different things were wearing the same word, and only one is a simulation.**
+
+| | **the world engine** (`worldtick.js` + chain) | **the harnesses** (`world_presets`, `world_endgame`, `strike_mix`, …) |
+|---|---|---|
+| runs | inside a player's save | in memory, throwaway |
+| produces | **people** — named, homed, with careers, deed histories, standings | **numbers** |
+| persists | all of it; a minted figure can be promoted to mythic and met | nothing |
+| when wrong | **canon is wrong** | a report is wrong |
+
+Calling the engine a "sim" invites the assumption its output is disposable statistics you can re-roll. It is
+the opposite — it is the part of the game that makes things TRUE. A figure it mints has a name the world will
+use, a homeland they came from, and a record a narrator will speak aloud. **That is authorship, executing at
+runtime.**
+
+**And it explains the shape of every bad bug in this system.** The ones that hurt were never wrong numbers —
+they were *people who did not exist properly*: minted figures whose `arcAffinity` had the wrong shape, in the
+roster and invisible to every mechanic; successors whose origin resolved to nothing. A statistics bug is a
+wrong row. **An engine bug is a person the world half-believes in.**
+
+Written up as **SYSTEM_SPEC §4d′**, and the term is corrected where it named the engine (`state.js`,
+`arceffects.js`, `worldtick.js`, four places in the spec). It is left alone where it correctly names a
+harness — §4d is now "the simulation harnesses", because those genuinely are ones.
+
+*(One stale claim fell out on the way: the spec's engine table still said `priceShift` has NO consumer, months
+after SNG-302 gave it one. Same register, same drift, third surface. Fixed.)*
+
+**v1.9.28 · ledger 42 requirements / 207 gates, all green.**
+
+
+## CCODE-153 — CORRECTION: the moment mints them. It is not where they came from.
+
+Erik: *"I didn't mean that no one is minted in the battle as a new NPC or role — they should be. I meant that
+the successors have home lands; it's just that the MOMENT mints them in the game."*
+
+**He is right and I collapsed two different things.** I read *"they don't come from the field they died in"*
+as *"delete the battlefield mint"* and cut `casualty_survivor` outright. The distinction he is drawing is the
+important part of the whole model:
+
+> **Minting is when somebody ENTERS THE STORY. It is not when they come into existence.**
+
+Everyone the world mints was already alive, living an ordinary life in the place they are from. A death is the
+MOMENT that makes them matter — the one who stood beside it and walked away is now somebody the valley has a
+name for, and the one who takes the empty chair was sent for. Both are real births-into-the-story. **What was
+wrong was never the second mint. It was that neither of them came from anywhere.**
+
+Both mints are restored, and both carry a `homeland` — the figure's authored `homeLocation` if they have one,
+else their people. The origin lines say it now:
+
+> *of the ashwarden; stood beside Sister Alder and walked away from it*
+> *sent by the redline to take up what Halvex Coil left unfinished*
+
+### ⚠️ MY GATE ASSERTED THE OPPOSITE OF THE REQUIREMENT, AND IT WAS GREEN
+
+`306b: nobody is born of the killing field itself` passed cleanly while encoding a misreading. **A green gate
+built on a misunderstood ask is worse than no gate — it locks the mistake in and makes the next person argue
+with the suite.** It was also unfalsifiable in a second way: an absence-check is satisfied by a world where
+nothing happens at all.
+
+The replacement asserts a POSITIVE — *every figure the world mints from a death has a homeland* — and it
+failed immediately, on two real bugs:
+
+1. **`casualties[].loser` is an ID, not a name.** I wrote `c.loserId ?? null`, reading a field that does not
+   exist, so **every battlefield death resolved to no origin** and its heirs came from nowhere. Strike and
+   challenge deaths were fine, which is exactly why the sim looked healthy.
+2. **The same slip had been printing raw ids into epithets since the mint was written** — *"the one who
+   outlived sister_alder"* rather than *"Sister Alder"*. It has been in every minted figure's name for weeks.
+
+### Population size is a separate question, and it has its own dial
+
+Restoring the second mint restores the growth, as it should — that was never the defect:
+
+```
+    configuration          dead        minted       arc travel  divergence
+    (authored baseline)     6.3 ±2.1    17.7 ±4.4     17.3 ±3.4      8.0    ← net +11.4
+    mintRate = 0            6.0 ±1.9     0.0 ±0.0     16.3 ±2.0      3.3    ← net  -6.0, a closed cast
+    mintRate = 1            6.7 ±1.1    39.0 ±5.5      7.7 ±4.6      8.9    ← net +32.3, a crowd
+```
+
+**`mintRate` is how many; `homeland` is where from.** Conflating them is what produced the over-correction.
+Note the cost at each end: a closed cast collapses divergence to 3.3 (the same six worlds every time), and a
+crowd chokes the arcs — travel falls to 7.7 because attention is spread over too many people to move anything.
+
+⛔ **Still not built: going home.** `homeland` is recorded now, but nothing moves anyone. That still needs the
+offscreen world to have a map, and it still waits on `homeLocation` being authored past 5 of 66.
+
+**v1.9.27 · ledger 42 requirements / 206 gates, all green.**
+
+
+## CCODE-152 — SNG-306: the ladder has a ceiling, and the killing fields no longer make people.
+
+Erik asked *"so is this how it works?"* about home places. **No — and it is more absent than the question
+assumes. The world simulation has no geography at all.**
+
+| | |
+|---|---|
+| `mintFigure` takes a `region` parameter | **all three call sites omit it.** Every minted figure came from nowhere |
+| `homeLocation` is an authored roster field | **5 of 66** carry one; **1 of 6** distinct values resolves to a real location |
+| `worldtick.js` reads `homeLocation` | **never.** `legends.js` and `worldmap.js` do; the offscreen sim does not |
+
+There was no "going back" because there was nowhere to go back to. `region` is a reader with no writer — the
+fourth door of the PromisedButUnread family — sitting in the mint signature looking like a feature.
+
+### 1. THE CEILING — and the authored rates already sit on Erik's target
+
+Prominent figures are now called out between the arc pushes, resolved through the same injury model as
+everything else. ⛔ **Prominence, not merit** (SNG-280): the rate is keyed to the RUNG and nothing else, and
+there is a gate that rate-tests a saint against a horror at the same rung and requires them equal.
+
+```
+    challenge rate     living mythics   traditions with one   challenges  died
+    0× (before)            12.2 ±2.7         10.8/27              0       0.0
+    1× authored             7.7 ±2.0          7.3/27             61       3.3   ← target is 6.8
+    8×                      5.3 ±3.7          4.8/27             82       4.3
+```
+
+⚠️ **The roster has 27 traditions, not 24** — the ring's poles plus the folk crossings — so "1/4" is 6.8.
+And a correction to my own brief: the "13.5 mythics" figure counted everyone who ever *reached* mythic,
+including the dead. Erik's phrasing — *in play* — is the better metric, and living-with-no-challenge is 12.2.
+
+### 2. WHERE PEOPLE COME FROM — the coupling is broken
+
+`casualty_survivor` (*"stood beside them and walked away from it"*) was **literally the killing field
+producing a person.** Gone. The successor is real but is **sent by the dead figure's own people.**
+
+| preset | before (dead / minted / net) | after |
+|---|---|---|
+| a quiet valley | 3.0 / 4.2 / **+1.2** | 3.3 / 5.2 / **+1.9** |
+| a bloody valley | 15.8 / 39.7 / **+23.8** | 16.0 / 16.0 / **0.0** |
+| a churning valley | 17.8 / 48.3 / **+30.5** | 15.7 / 20.8 / **+5.1** |
+
+**The bloody valley now nets exactly zero** — 16 die, 16 are sent. ⚠️ Side effect stated rather than buried:
+fewer minted figures means fewer actors, and divergence fell 8.4 → 6.1. The valley got more sensible and more
+predictable at once.
+
+### ⚠️ AND A GATE OF MINE PASSED VACUOUSLY — caught by the gate next to it
+
+`306b: nobody is born of the killing field itself` went green immediately, and it was worthless:
+`originKind` was used to pick a verb pool and then **thrown away**, so `m.originKind !== "casualty_survivor"`
+was true of every figure alive — because the field did not exist. **An absent field satisfies every test that
+asks what it is not.** Only the third gate, which asserts a POSITIVE (the successor's origin line names the
+people who sent them), failed and exposed it. `originKind` is persisted now, and the probe prints the kinds it
+found so a vacuous pass is visible in the log.
+
+### ⛔ WHAT I DID NOT BUILD
+
+**Tradition is standing in for home, and that is a stopgap.** It is on 66 of 66; `homeLocation` is the right
+key and is on 5. Keying on it today would give 61 figures successors from nowhere.
+
+**"They go back there when they can" is not built at all.** Figures have no location in the world sim, so
+there is no movement to model. That is the real ask hiding in Erik's question and it is a build, not a dial:
+the offscreen world needs a map. Worth doing — it would let the world say *"the Redline sent three and got one
+back"* — but the content comes first.
+
+**Aevi — the precise ask is `homeLocation` on the 61 roster figures that lack it, resolving to one of the 96
+authored locations.** Everything above is waiting on that one field.
+
+**v1.9.26 · ledger 42 requirements / 205 gates, all green ·** full numbers in `po/BRIEF_world_presets.md`.
+
+
+## CCODE-151 — SNG-304: `heldTheLine` is built, and your version beat mine.
+
+**Aevi — `engagement_and_holding.json` is in.** Your diagnosis was right and the mechanic closes the gap.
+
+> *"the deed ledger had seven sources, six combat-shaped, and the only non-combat one fires ONLY when holding
+> COST YOU YOUR PERSONAL TIME — you were paid for sacrifice, never for work… THE LEDGER REWARDED THE
+> AMPLIFIER AND IGNORED THE ENGINE."*
+
+That is SNG-300's open finding closed, and it closed it cleanly. Measured 2026-08-05, 4 worlds × 4 world-years
+(`node tests/holding_effect.mjs`):
+
+```
+  mean rise rate, traditions that seek fights (engages ≥ 1):   58%
+  mean rise rate, traditions that rarely do   (engages < 0.5): 56%
+
+  stillhold specifically:  8%  →  58%          marcher:  50%  →  31%
+```
+
+**⛔ THE SNG-280 CHECK PASSES.** The figures earning `heldTheLine` span threnodist (0.6) to abyssal (1.5) to
+marcher (1.8) — because it rewards CONSTANCY, which is exactly what you argued: available to everyone,
+characteristic of nobody, and the figures who chase every fire will never have it.
+
+### ⚠️ I BUILT THE STRONGER READING FIRST, AND MEASURED IT INSTEAD OF SHIPPING IT
+
+Your spec says *"crossing 5 consecutive passes credits `heldTheLine`."* I read that as once-and-never-again,
+decided it would make the ledger stop noticing the thing it was added to notice, and built it to pay every 5
+passes. Then I ran it:
+
+| | `heldTheLine` share of all deed credits | `arcContestWon` | mean rise rate |
+|---|---|---|---|
+| **pays every 5** (my reading) | **40.9%** | 11.5% | **78%, every tradition** |
+| **pays once** (your spec) | 2.0% | 12.7% | 58% / 56% |
+
+A hold can run **185 consecutive passes** — under my version that pays thirty-seven times. It did not just
+close the gap, it flattened the ladder. **Your version closes the same gap at a twentieth of the cost.**
+
+So the default is what you wrote, `deedRepeats` is the dial, and both numbers are in the content note beside
+it. I should have measured before deciding your spec needed improving.
+
+### What it does mechanically
+
+`careHeld[figure][arc]` counts consecutive passes on the same care — the mirror of the existing `careIdle`.
+The streak is an edge on **push only**, +10%/pass capped at +50%: folding it into urgency would have quietly
+made constant people both more warlike and more targeted, which is not what Erik asked for.
+
+Your two-prices distinction is built as you drew it: **abandoning resets to zero, being driven off halves it.**
+The halving lives at `applyEpicClashOutcome` — the one place every wound in the world passes through, melee
+and strikes alike — so the next way of hurting somebody cannot forget to pay it. A stalemate drove nobody
+anywhere and does not halve.
+
+### ⚠️ FIX 1 IS NOT BUILT, AND IT INVALIDATES A NUMBER I GAVE YOU YESTERDAY
+
+`resolutionMode` and the revised `engages` table are **staged, not live.** Two things about that:
+
+1. **They are content and they are yours** — the 26 revised numbers are a table for Erik to ratify, not for me
+   to author into `rules` on your behalf.
+2. **⚠️ Raising the floor to 0.9–1.3 will move yesterday's strike measurement.** CCODE-150 reports that moving
+   the striker to the working pool took low-engagement traditions from 42% to 69.2% of the striker pool —
+   **that was measured against the OLD numbers**, where stillhold sat at 0.15. With the floor raised, the
+   working pool becomes far more uniform and that gap will compress a long way. The pool FIX is still right
+   (a striker should not be duelling in the same pass), but re-run `node tests/strike_mix.mjs` after the new
+   table lands, because I will otherwise be quoting a stale number — which is the failure mode I keep having.
+
+And one observation on `resolutionMode` while it is still a proposal: **`removal` (umbral · veilwright ·
+horizon) and the `strikes` disposition I built for SNG-303b are describing the same thing.** Removal *is*
+striking. Two dials for one behaviour is how a mechanic ends up half-wired to each. Worth collapsing before
+either is authored — your call which name survives.
+
+### And a stale claim of my own, killed at the source
+
+`npm run coverage` printed **"⚠️ `priceShift` has NO consumer in the engine"** on every run — for a consumer
+**I built myself** in SNG-302. `EFFECT_CONSUMERS` still said `priceShift: null`, and the report faithfully
+repeated it. A register of what is inert is worth nothing if nobody updates it when something stops being
+inert.
+
+Both are fixed, and the fix is structural rather than a corrected string: the report now DERIVES the inert
+list from the register instead of naming a kind. The gate did too — it asserted `priceShift === null`, so
+**closing the gap turned a gate red**, which means it was measuring the gap rather than the rule. It now tests
+the mechanism, and a separate gate asserts priceShift's consumer exists.
+
+**v1.9.24 · ledger 40 requirements / 198 gates, all green.**
+
+
+## CCODE-150 — SNG-303b: the third-action reconcile. The striker was coming from the wrong pool.
+
+**Aevi — this one is yours to look at.** The reconcile against `the_third_action_strikes_and_crusades.json`
+found four divergences, and the first inverted what the mechanic was for.
+
+### ⚠️ THE STRIKER WAS DRAWN FROM THE `engaged` POOL
+
+Your spec is explicit: *"drawn from the WORKING pool of their own side (a striker is not in the melee — that
+is the point)."* It was taking `attackers.engaged[0]`. Two consequences, both bad:
+
+1. **A figure fought a duel AND sent a knife in the same pass** — two actions for one, which is exactly the
+   *"MUST NOT BE FREE, or everyone strikes"* your spec warns about.
+2. **It locked out the traditions the mechanic exists for.** A side had to HAVE someone in the melee to strike
+   at all. Erik closed a hole where pacifism was dominant; your fix was to give the concealment traditions
+   *"a world-scale role… without ever winning a duel."* Instead the marchers who already dominated the
+   fighting got striking as a free extra action, and stillhold at 0.15 could almost never reach it.
+
+Measured, not asserted — `node tests/strike_mix.mjs`, 2026-08-05:
+
+```
+  the 15 traditions that rarely seek a fight (engages < 1), as a share of the pool a striker is drawn from:
+      OLD (from engaged)  42.0%
+      NEW (from working)  69.2%
+
+  marcher   (engages 1.80)  12.1% of engaged  →   3.3% of working     ↓ -8.8
+  stillhold (engages 0.15)   0.8% of engaged  →   6.3% of working     ↑ +5.5
+  umbral    (engages 0.50)   2.5%             →   5.5%                ↑ +3.0
+  veilwright(engages 0.40)   1.3%             →   3.8%                ↑ +2.5
+```
+
+Over 4 worlds × 4 world-years: **910 strikes · 400 turned aside · 20 killed · peak 17 figures exposed.**
+
+### The other three, and how they were built
+
+- **`strikes` disposition existed only in the spec.** Every tradition struck alike. Now read as a multiplier
+  on `strikeRate`, exactly parallel to `engages` — ⛔ SNG-280: METHOD, not merit.
+- **Only one of the two kinds was built.** `crusade` was inert. Now: quiet targets by VALUE, crusade by
+  WEIGHT on the wanted arc, and a declared crusade is `declaredInterceptMult` easier to stand in front of —
+  because otherwise "stealth" and "declared" are decorative prose the engine cannot read.
+- **Neither cost existed.** A strike was free in both currencies. Now a failed quiet strike EXPOSES the
+  striker (making them a preferred mark in return), and a crusade collapses the crusader's cares to one arc
+  for `crusadeDays` — every other front they held falls out as a vacated seat, through the attention
+  machinery that was already there. Nothing new had to learn what a crusade is.
+
+### ⛔ "THE MOST HATED WORKER" IS BUILT AS POSITION, NOT MERIT
+
+Implementing "the one whose arc-position most offends them" as a moral ranking would be VALUE-AS-COEFFICIENT
+in a new hat. Your own selection rule is positional, so that is what it does: **a crusade fires only on the
+crusader's own `wantArcId`.** Offence is distance from what you want — every tradition can feel it, and none
+is rated for feeling it.
+
+### ⚠️ 0 CRUSADES IN 910 STRIKES — and that is the content gap, declared
+
+`byTradition` and `kindByTradition` are both empty, so every tradition strikes at the same rate and **every
+strike in the valley is quiet.** The crusade path is unreachable until you name which traditions declare.
+Your spec proposes umbral · veilwright · abyssal · ashwarden for the quiet work and blazeborn · seraphic ·
+verist · marcher for the crusade — but **deciding that is a characterisation judgement about a whole people,
+so it is yours, not the engine's.** It is reported by `ws.strikeCoverage` and shows in the sim output rather
+than passing as a working two-kind system.
+
+*(One smaller thing the sim turned up: 11 of 910 strikes were sent by MINTED figures, who carry no tradition
+at all. They fall back to multiplier 1. Worth knowing when you set the numbers.)*
+
+### And the two gates covering this were regexes, which is how it survived
+
+`272/270: a strike reaches the population combat structurally cannot` matched
+`/const mark = defenders\.working\.slice\(\)\.sort/` — **and that line was always there.** The bug was in the
+line above it. Both gates passed for the mechanic's entire life while the sender came from the wrong pool.
+
+A source pattern proves a line was typed, not that a decision is right. `planStrike` is now extracted so the
+decision can be **called**, and all ten gates call it. That is the same lesson as CCODE-149 one entry down,
+arriving from the other direction: I wrote "gate the behaviour, never the presence" into §4e yesterday, and
+this is what it looks like when you apply it to something that was already green.
+
+### Left for Erik — one open question from the spec, unanswered on purpose
+
+Aevi's third open item: *"Should the player be able to BE struck this way, or is it legend-on-legend only?
+… a party that parks a healer safely behind the line is exactly the back-line target the system now models.
+I lean YES, and it would be the sharpest consequence in the game."* **Still legend-on-legend.** That is a
+design call about how much the world is allowed to do to a player without being invited, and it is yours.
+
+**v1.9.23 · ledger 39 requirements / 187 gates, all green.**
+
+
+## CCODE-149 — SNG-303: the wiring procedure is written down, and the step prose can't enforce is now a gate.
+
+Erik: *"seems like the ways to wire code correctly needs to be documented and followed."* Both halves are done —
+**SYSTEM_SPEC §4e** is the procedure, `tests/wiring_shape.mjs` is the enforcement, and they cover different
+things on purpose.
+
+### Why a document alone would not have stopped any of the three
+
+| # | Failure | Registered | Loaded | Merged | Result |
+|---|---|---|---|---|---|
+| 1 | `rules/encounters.json` never in the manifest | ✗ | — | — | **every encounter paid zero XP, for weeks** |
+| 2 | `rules/economy.json` whitelisted, no loader | ✓ | ✗ | — | reached nothing |
+| 3 | `economyRule` named in the FIRST `Promise.all`, `loadRule("economy")` added to the SECOND | ✓ | ✓ | ✓ | **dead — and every prose check passed** |
+
+⚠️ **Mode 3 is invisible to careful reading, because positional destructuring has no names in it.** The name
+list and the array are paired by *counting*, and nothing in the source says which name was meant for which
+entry. A checklist item saying "make sure they line up" is exactly the kind of instruction people follow
+correctly nineteen times and miss on the twentieth — I missed it myself, appending `loadRule("encounters")`
+with no matching name, and it took `coliseumGrid`'s slot and pushed the grid off the end **with a green suite.**
+
+So: steps a person can follow are written down; the counting step is machine-checked across every module in
+`engine/`.
+
+```
+  state.js:  64   22 names /  22 entries  ok
+  state.js: 270   24 names /  24 entries  ok
+```
+
+### The part I want to flag, because it nearly shipped as a false alarm
+
+My first version regex-matched `for (const [k, l] of Object.entries(locations))` thirty lines above the real
+block, scanned forward to the actual destructuring, and reported **5 names against 22 entries** on code that is
+perfectly fine. Then, after fixing that, a single `[` inside a *comment* opened a bracket depth that never
+closed and it reported 71 entries.
+
+Both were the CHECKER being wrong, not the code — and if I had reported either one, I would have sent Aevi
+hunting a bug that did not exist. **A measuring tool that cries wolf on good input teaches everyone to ignore
+it, which is worse than having none.** So the two shapes that fooled it are now permanent checks, alongside one
+that plants a real mismatch and requires the checker to go red. A gate that has never been shown to fail is a
+green light with nothing behind it.
+
+### ⛔ What it deliberately does NOT check
+
+**Whether each name is bound to the RIGHT entry.** The source does not record the intended pairing anywhere, so
+any such check would be guessing dressed as verification. The *count* is the knowable part — and it is the part
+that caught the real bug.
+
+### The rule underneath all of it, for both of us
+
+**Gate the behaviour, never the presence.** Steps 1–5 of the procedure only move a JSON object into a bag, and
+a check that the bag has the key passes just as happily when nothing on earth reads it. Step 6 is the one that
+matters: the gate must assert *the consuming function returns something different because the content is
+there*. That is the whole PromisedButUnread family (nine doors and counting), and it is why `rules.economy`
+being present was never evidence that the economy worked.
+
+**v1.9.22 · ledger 38 requirements / 179 gates, all green.**
+
+
 ## CCODE-148 — SNG-302: the economy has a consumer. The last 2.0.0 row is closed.
 
 Aevi authored the model, registered it, loaded it — and it still did not reach `rules`.

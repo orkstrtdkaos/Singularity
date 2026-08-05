@@ -4,7 +4,7 @@
 |---|---|
 | **Status** | `round-2-complete + BATCH-11 build` — Aevi (PO) authored the DESIGN + CONTRACT layers; CCode ROUND 2 (v1.8.26) substrate-verified every claim; **BATCH-11 (v1.8.105–108, 2026-07-18) added Law 16 + §23 (the Wiring Contract, machine-gated), SNG-145 intent gates (§11), SNG-148 waygates (§9), the 146a–c/f multiplayer fixes (§18), and 147a/d skill-integrity (ratcheted in `npm test`).** |
 | **Supersedes** | System Specification v1.0 (which predates the great circle, traditions, domains, the generative world, shared canon, and ~20 of the 38 engine modules) |
-| **HEAD verified** | BATCH-11 at **v1.8.105** · confirmed against origin: 79 engine modules · 48 core rules files · 96 locations / 25 regions · 301 abilities / 24 traditions (+3 folk) · 44 combinations · 41 NPCs · 9 companions · 58 random-encounter entries. **Count freshness is now machine-gated** — `tests/wiring_audit.mjs` fails the build when this line drifts from HEAD (the 38/137-era drift, found by BATCH-11 §0, must not recur silently). |
+| **HEAD verified** | BATCH-11 at **v1.8.105** · confirmed against origin: 80 engine modules · 48 core rules files · 96 locations / 25 regions · 301 abilities / 24 traditions (+3 folk) · 44 combinations · 41 NPCs · 9 companions · 58 random-encounter entries. **Count freshness is now machine-gated** — `tests/wiring_audit.mjs` fails the build when this line drifts from HEAD (the 38/137-era drift, found by BATCH-11 §0, must not recur silently). |
 | **Authoring rule** | Aevi owns §2 (laws), §4–§18 (design + contracts), §21 (process). **CCode owns implementation detail** — module APIs, signatures, dispatch, data flow — marked `[CCODE]`. A claim in this document that contradicts HEAD is a **bug in this document**; report it. |
 
 > **How to read this.** This is the *contract*, not the code. It states what each system is **supposed** to do and what must remain true. Where it says `[CCODE]`, the implementation is authoritative and CCode fills it. Where it states a **law** or a **floor**, the code must conform — not the other way round.
@@ -109,7 +109,8 @@ index.html ──> app.js  (all UI, screens, creation, play loop, sidebars, whee
 | `genschema.js` | A dependency-free JSON-Schema validate+repair subset. **API** `validate, missingRequired, defaultFor`. **NEVER** implements full draft-2020-12 — only the subset the schemas need. |
 | `roundreceipt.js` | The round receipt the player reads and the GM narrates FROM. **API** `roundVerdict, gainPhrase, interactionClause, receiptLine, SB_VERB, SB_DEFENSIVE`. Pure — meter word and meter max are injected. **NEVER** lives inside app.js again: it shipped a permanent "neither gains — it's even" on every round of every fight precisely because it was untestable there. A reporting layer is a CLAIM about the rules, and a claim no test can read is a claim nobody is checking. |
 | `worldtab.js` | THE WORLD tab's markup, as a pure function of world state. **API** `worldTabHtml`. Takes `{arcs, foot, name, tabBar, esc}` and returns HTML; `esc` and the tab bar are INJECTED so the app keeps one escaper. **NEVER** back inside app.js, for roundreceipt.js's exact reason: a render buried in the app can only be tested by pattern-matching its source, which proves the words are present and proves nothing about whether it runs — ten source gates passed while the template had never executed, and the first test that actually ran it found a crash on any world that had not ticked yet. |
-| `arceffects.js` | SNG-273: what an advanced arc DOES. **API** `activeArcEffects, craftCostFactor, craftCostNote, travelCostFactor, encounterBias, npcMoodLines, effectsInPlainWords, EFFECT_CONSUMERS`. A stage carried only narration, so the whole world-sim chain resolved into a number that changed a sentence. THE RULE: a stage changes THE WORLD, never taxes the sheet — grammar-work costing double is a world you can route around; −1 to rolls is a punishment. ⚠️ `priceShift` has NO consumer (no module in the engine computes a price); its effects are inert and `EFFECT_CONSUMERS` says so rather than letting the content look live. |
+| `incapacitation.js` | SNG-309: what happens when the player goes down. **API** `incapacitationOutcome, aggressorKind, playerDeathState, deathStopsPlay, deathLine, wireDeathModel, INCAP_OUTCOMES`. `health <= 0` → INCAPACITATED → an OUTCOME decided by who put you there and who was with you: revived · spared · left_for_dead (your gear is gone) · slain. ⚠️ **EVERY aggressor kind can kill** — before this, 2 of 19 encounter defs carried `lethal`, so a player could be killed by a boar or a greatcat and by nothing else. ⛔ INTENT, NOT MORALITY (SNG-280): an assassin finishes you because that was the errand; a heroic and an abyssal duelist behave identically. ⛔ A slain player enters the SAME `death.js` ladder as any figure — `character.dead` is the TERMINUS and belongs only to a SEALED death. |
+| `arceffects.js` | SNG-273: what an advanced arc DOES. **API** `activeArcEffects, craftCostFactor, craftCostNote, travelCostFactor, encounterBias, npcMoodLines, effectsInPlainWords, EFFECT_CONSUMERS`. A stage carried only narration, so the whole world-engine chain resolved into a number that changed a sentence. THE RULE: a stage changes THE WORLD, never taxes the sheet — grammar-work costing double is a world you can route around; −1 to rolls is a punishment. `EFFECT_CONSUMERS` is the register of which kinds can actually land; a kind with no consumer is surfaced marked `inert` rather than left looking live. ⚠️ It must be kept honest in BOTH directions — `priceShift` sat at `null` here long after SNG-302 gave it one, and `npm run coverage` repeated the stale claim on every run. **Every effect kind currently has a consumer.** |
 | `titles.js` | SNG-287: a name that comes from the MATERIAL, not a menu. **API** `titleFor, SLOT_SOURCES, UNFILLABLE_SLOTS, unusablePatterns`. A title is pattern + slots and **every slot must be fillable from a real record or the pattern is not used** — no arc moved, no {ARC} title. That rule is the module: a title reaching for a slot with no source is not flattering, it is FALSE (BOUNDARY-1). ⛔ SNG-280: which face of a two-faced pattern lands is read off the SIGN of the deeds, so the Maw earns a name as readily as the Rootkin. ⚠️ {ROAD}/{CRAFT}/{FOE} have no source yet and are declared unusable rather than left looking live. |
 | `whois.js` | SNG-299: who or what is that name, and where do I read more. **API** `knownIndex, whoIs, TIER_MEANING`. Answers ONLY from what the world recorded — rung from `tierOf`, cares from `currentCares`, title from `figureTitles`, fate from `epicStatus`. **Returns null when nothing is known and the name is then not made clickable**: a popup reading "a figure of the valley" is worse than none, because it promises a lookup and delivers a shrug. The codex button appears only where a codex page exists. |
 | `economy.js` | SNG-302: what a thing is worth HERE. **API** `priceOf, priceLine, shiftNeed, regionDemand, economyCoverage`. `price = worthBand × need × scarcity`, and **NEED DOMINATES** — `none` is a hard zero, because nobody bids on what nobody uses. The IRREPLACEABLE is REFUSED a price rather than given a large one. Closes `priceShift`, inert since SNG-273 for want of anything that could compute a price. ⚠️ The second axis is not live: 30/30 items carry a worth band, 0/30 a goods category, so no region table is reachable — declared in `economyCoverage`. |
@@ -309,7 +310,7 @@ the world-minting block (Aevi flagged the collision), so a loose match silently 
 something else entirely and the whole row reads green off the wrong test.
 
 > ⚠️ **WHAT THIS TABLE FOUND ON ITS FIRST RUN.** 17 of the claimed verifications **did not exist**. Not
-> failing — absent. The entire world-simulation chain (attention, tiered budgets, real-dice contests, the
+> failing — absent. The entire world-engine chain (attention, tiered budgets, real-dice contests, the
 > engaged/working split, weight-matched melee, casualties, tier-gap lethality, strikes and guards) had been
 > built over two weeks and **gated by nothing at all**. It was the most-worked-on system in the game and the
 > least defended, and no one would have noticed until it silently stopped working — which, on this
@@ -352,7 +353,7 @@ rather than trusted. One row (`SNG-267`) is measurement-only and says so.
 | `SNG-281` | *"(Aevi's deed table listed “a deed that SPREAD” as already existing — it did not)"* | reputation.js:spreadDeeds — one hop per pass, reach capped by the deed's weight; the world tick is the writer | **5 gates** in `tests/smoke.mjs` | `recordDeed` initialised `spread: []` and NOTHING in the repo ever appended to it, so every reputation query answered from the single community where a deed happened. The comment beside it said spread was ‘the world-tick’s job (v0.3)’ and that job never landed. Found from the far end: it was one of six promotion sources, dark. ⛔ Reach is magnitude, never merit — DIRECTIVE SNG-280 applies to how far news carries, not just to what scores. |
 | `SNG-282` | *"the player's deeds and quest resolutions spread just like NPCs"* | worldtick spreads the character as a bearer; quests.js:resolveStructuredQuest records the resolution as a deed | **7 gates** in `tests/smoke.mjs` | ⚠️ CORRECTED AFTER READING THE REAL SAVES. The player was ALREADY spread — `runWorldTick` has done it since v0.5.0 and three tests gate it. I missed it (looked in reputation.js, which only READS `spread`; grepped for `recordDeed`, not `deed.spread`), reported in CCODE-134 that the field had never had a writer, and shipped a SECOND model that ran on the player 14 lines apart in app.js. Erik (SNG-289) then ruled the graded model wins for both: the v0.5.0 block sent a deed to EVERY community at once, which is why Silas is known in 91 of 90 and why the field could not carry information. One model now, weight-graded, player and figures alike. And a resolved quest was recorded ON THE QUEST and nowhere else, so the thing a player is most likely to be known for left no trace in the record the world reads. Recorded inside the resolver rather than at a call site: several doors resolve a quest, and a deed that depends on which one was used is a deed that goes missing. |
 | `SNG-273` | *"stage 2 of the Bleed is in effect, so what?"* | engine/arceffects.js — a stage's effects reach the cost path, the roads, the encounter pool and the GM's NPC block | **9 gates** in `tests/smoke.mjs` | THE 2.0.0 BLOCKER. A stage carried publicFace and pressureOnAdvance, both narration, so 66 figures of attention, contests and casualties resolved into a number that changed a SENTENCE. Aevi authored 54 effects across 18 stages; 4 of her 5 kinds had a real consumer, and the testOnlyExports ratchet caught me shipping `encounterBias` unwired before it reached HEAD. ⚠️ `priceShift` has NONE — no module in this engine computes a price — so its 11 effects are inert, declared in `EFFECT_CONSUMERS` rather than left looking live. |
-| `SNG-288` | *"losses isn’t the right metric — mythical for a variety of reasons is the right thrust"* | worldtick.js:career + mythicPathFor — seven roads, any one qualifies, and which one fired is recorded | **7 gates** in `tests/smoke.mjs` | ⚠️ THE DISTRIBUTION IS THE RESULT, and it is lopsided: over 4 worlds × 12 world-years, THE TURNER fired 20 times and THE RETURNED once. The other five roads never fired at all. Cause: `stageMoved` credits EVERY figure leaning on an arc when its stage moves, so ‘two stages moved’ is a presence test that dozens clear at once, while the deed-count roads (120–320 career deeds) are priced beyond what the sim reaches. Also required a CAREER record — tenure deeds/losses reset on promotion, so THE SURVIVOR would have been unreachable by exactly the figures it describes. |
+| `SNG-288` | *"losses isn’t the right metric — mythical for a variety of reasons is the right thrust"* | worldtick.js:career + mythicPathFor — seven roads, any one qualifies, and which one fired is recorded | **7 gates** in `tests/smoke.mjs` | ⚠️ THE DISTRIBUTION IS THE RESULT, and it is lopsided: over 4 worlds × 12 world-years, THE TURNER fired 20 times and THE RETURNED once. The other five roads never fired at all. Cause: `stageMoved` credits EVERY figure leaning on an arc when its stage moves, so ‘two stages moved’ is a presence test that dozens clear at once, while the deed-count roads (120–320 career deeds) are priced beyond what the engine reaches. Also required a CAREER record — tenure deeds/losses reset on promotion, so THE SURVIVOR would have been unreachable by exactly the figures it describes. |
 | `SNG-287` | *"the name comes from the MATERIAL, not from a menu (the Tether pattern)"* | engine/titles.js — pattern + slots, every slot filled from a real record or the pattern is not used | **7 gates** in `tests/smoke.mjs` | ⚠️ There was no `titles.json` — the spec describes replacing a fixed list that had never been built, so both the engine and the patterns are new. THREE of the seven authored patterns CANNOT be chosen: {ROAD}, {CRAFT} and {FOE} have no source (nothing records which road a figure guarded, deeds carry tags rather than craft ids, and casualties are per-pass with no per-figure history). Declared in `UNFILLABLE_SLOTS` and kept in content so wiring a source later needs no re-authoring. |
 | `SNG-295` | *"who actually turned an arc (Erik answered all four questions)"* | worldtick.js — credit goes to winners on the side it moved toward, plus strikers who emptied the front; never to the other side | **5 gates** in `tests/smoke.mjs` | The presence-test bug: credit went to EVERY figure leaning either way, so a turning banked ~30 stage-moves and THE TURNER was 20 of 21 mythics. After the fix, 11; after raising its bar to three stage moves (Aevi's pre-authorised remedy — raise the bar, never narrow the credit Erik ruled on), FOUR roads fire: turner 11 · unbeaten 1 · returned 1 · survivor 1. Erik's own case is live. |
 | `SNG-294` | *"the three unfillable title slots — build, rename, or drop"* | titles.js — {FOE} recorded at the clash, {CRAFT} re-sourced to {TAG}, {ROAD} shipped as Warden of {PLACE} | **6 gates** in `tests/smoke.mjs` | Aevi's call on {CRAFT} is the sharp one: a tag is what the WORLD noticed and a craft id is what the ENGINE resolved, so threading ids into reputation would make a deed an engine artifact rather than a social record. ⚠️ Order can starve a fillable pattern — reported rather than reordered, since order is authorship. My first two starvation detectors both measured something adjacent to the question before the third measured reachability. |
@@ -369,11 +370,39 @@ rather than trusted. One row (`SNG-267`) is measurement-only and says so.
 
 ⚠️ **A GATE AND A MEASUREMENT ARE DIFFERENT CLAIMS.** A gate is re-proved on every run of the suite and this
 document fails to build if one is missing, ambiguous, or red. A **measurement** is an observation stamped with
-the date it was taken (2026-08-04) and goes stale the moment anyone turns a dial — the sim commands are named
+the date it was taken (2026-08-04) and goes stale the moment anyone turns a dial — the harness commands are named
 in §4d so any number here can be re-derived rather than trusted.
 <!-- END verification-ledger -->
 
-### 4d. Re-deriving the numbers — the simulation commands
+### 4d′. ⚠️ IT IS A WORLD ENGINE, NOT A SIM — and the difference is not pedantry (SNG-307)
+
+Erik: *"we're calling this 'the sim' but it's really the world engine. It simulates AND creates real
+perpetuating entities."*
+
+**Two different things wear the same word in this repo, and only one of them is a simulation.**
+
+| | **The world engine** — `worldtick.js` and its chain | **The harnesses** — `tests/world_presets.mjs`, `world_endgame.mjs`, `strike_mix.mjs`, … |
+|---|---|---|
+| where it runs | inside a player's save | in memory, throwaway |
+| what it produces | **people** — named, homed, with careers, deed histories, rivals, and standings that outlive every pass | **numbers** |
+| what persists | all of it. A minted figure enters the roster, can be promoted to mythic, can be met | nothing. They write no save, touch no file |
+| when it is wrong | canon is wrong — a figure exists who should not, or a real one is silently inert | a report is wrong |
+
+**"Sim" is the wrong word for the first column and the right word for the second.** Calling the engine a sim
+invites the assumption that its output is disposable statistics you can re-roll — and it is the opposite: it
+is the part of the game that makes things *true*. A figure it mints has a name the world will use, a homeland
+they came from, and a record that a narrator will speak aloud. That is authorship, executing at runtime.
+
+⚠️ **This mattered concretely, twice.** The bugs that hurt most in this system were not bad numbers; they were
+*people who did not exist properly* — minted figures whose `arcAffinity` had the wrong shape and were
+therefore in the roster and invisible to every mechanic, and successors whose origin resolved to nothing so
+they came from nowhere. A statistics bug is a wrong row. **An engine bug is a person the world half-believes
+in.** That is the standard the whole `PromisedButUnread` discipline (§4e) exists to hold.
+
+Use **world engine** for `worldtick.js` and the chain it drives. Use **simulation** only for the harnesses in
+the table below, which genuinely are ones.
+
+### 4d. Re-deriving the numbers — the simulation harnesses
 
 Every measurement in §4c came from one of these. They are REPORTS: they write nothing, gate nothing, and the
 right values are Erik's and Aevi's to choose. They exist so that a claim about how the world behaves can be
@@ -385,6 +414,10 @@ re-run instead of believed.
 | `node tests/player_impact.mjs` | can a player make a difference? Runs the same worlds at party 0/1/3/6 and reports where the arcs land and how many are visibly CONTESTED | ~2 min |
 | `node tests/world_drive_audit.mjs` | the §4b table — every path by which the world reaches the narrator unasked, and whether each has been seen in real save data | seconds |
 | `node tests/content_coverage.mjs` | **is it authored yet?** — for every field the engine reads from authored content, how many records carry it. ⚠️ Added after I quoted a stale coverage number for four turns: the ledger stamps the figures that go INTO it, and this is the missing command for the ones that live in prose. | seconds |
+| `node tests/player_lives.mjs [lives] [days]` | **what happens to a simulated player?** — how often the world floors them, by level and by power gap (real `battleRound` calls), and how many world figures carry their fingerprints (the engine's own `playerTouched` stamp). ⚠️ "How many die" is structurally ZERO: `encounters.js` — *"Incapacitation, never engine-imposed death"* | ~1 min |
+| `node tests/world_presets.mjs [mode] [worlds] [days]` | **which dials make which kind of world?** — a one-dial-at-a-time sensitivity sweep plus six named preset characters, each run as a POPULATION with mean ±sd and a per-arc divergence figure (do worlds at the same settings end differently?). Written up in `po/BRIEF_world_presets.md` | ~30s |
+| `node tests/holding_effect.mjs [runs] [days]` | **does `heldTheLine` fire, and does it close the gap?** — deed credits by source, who earns the holding deed (the SNG-280 check), and rise rates by tradition. ⚠️ This is what proves the streak actually REACHES its threshold in a live world; `holdEdge(5) === 1.5` proves arithmetic, not reachability | ~1 min |
+| `node tests/strike_mix.mjs [runs] [days]` | **who strikes?** — the exact composition of the pool the striker is drawn from, by tradition, plus the live senders across seeded worlds. Added because the SNG-303b reconcile made a claim about a distribution, and a claim about a distribution has to be measured | ~1 min |
 | `node tests/verification_ledger.mjs` | §4c itself — does every claimed verification exist and pass? | ~1 min (runs the suite) |
 | `node tests/dev_world.mjs` | drives a throwaway world hard without touching a player's save | seconds |
 
@@ -392,6 +425,63 @@ re-run instead of believed.
 **not** advance with `character.clock.day`. Any harness driving the offscreen world must advance `now`, or it
 measures a world that never moved and reports the stillness as a finding. That mistake has been made in this
 repo and reported as an upstream gate before it was traced.
+
+### 4e. Wiring a new thing in — the procedure (SNG-303)
+
+Erik: *"seems like the ways to wire code correctly needs to be documented and followed."*
+
+**The same six lines of content wiring have now failed three separate times, each in a different way, and every
+one of them was silent.** Not a crash, not a red test — the game simply behaved as if the content did not
+exist. That is not three mistakes; it is one missing procedure. Here it is.
+
+#### The three ways it has actually broken
+
+| # | Failure | What it looked like | Caught by |
+|---|---|---|---|
+| 1 | **Authored, never registered** | `rules/encounters.json` sat on disk for weeks. The manifest never listed it, so `CONTENT.rules.encounters` was `undefined` and **every encounter paid zero XP.** | nothing — found by hand |
+| 2 | **Registered, never loaded** | `rules/economy.json` was whitelisted and reached no loader. | the registration check, in under a minute |
+| 3 | **Loaded into the wrong array** | `economyRule` was destructured from the **first** `Promise.all`; `loadRule("economy")` was added to the **second**, thirty lines down. The name resolved to `undefined`; `rules.economy = economyRule` merged nothing. **Registered ✓ loaded ✓ merged ✓ — and dead.** | `tests/wiring_shape.mjs` |
+
+⚠️ **Mode 3 is the one prose cannot prevent, because positional destructuring has no names in it.** The name
+list and the array are paired by *counting*, and nothing in the source records which name was meant for which
+entry. I made this exact mistake myself earlier: I appended `loadRule("encounters")` to an array without adding
+a name, it took `coliseumGrid`'s slot and pushed the grid off the end — **with a fully green suite.**
+
+#### The procedure — a new rules file, end to end
+
+1. **Author** `content/packs/core/rules/<name>.json`.
+2. **Register** it in `content/packs/core/manifest.json`. The manifest is a **load whitelist** (SNG-064): a file
+   not named there does not exist, however correct it is.
+3. **Load** it — add `loadRule("<name>")` to a `Promise.all` in `engine/state.js`.
+4. **Name it in the SAME array.** Add `<name>Rule` to that block's destructuring, **at the same position.**
+   ⚠️ *Same block.* There are two `Promise.all`s in `state.js` (≈line 64 and ≈line 270) and they look alike.
+5. **Merge** it: `if (<name>Rule) rules.<name> = <name>Rule;`
+6. **Read it from a module, and gate the READ.** The gate must assert that *the consuming function returns
+   something different because the content is there* — not that the file parses, not that the key exists.
+
+**Step 6 is the whole point.** Steps 1–5 only move a JSON object into a bag; a check that the bag has a key in
+it passes just as happily when nothing on earth reads that key. That is the **PromisedButUnread** bug family
+(§4b), and it has at least nine distinct doors — a rules constant no module reads, a reader with no writer, a
+content field the engine cannot see, a value that is authored but unreachable, data collected and then
+discarded. **Gate the behaviour, never the presence.**
+
+#### What is enforced, and what is only written down
+
+`node tests/wiring_shape.mjs` (also inside `npm test`) asserts that in every `const [...] = await
+Promise.all([...])` across `engine/`, **the number of destructured names equals the number of awaited
+entries.** That is exactly what "added an entry over here and a name over there" produces, and it cannot be
+argued with. The checker is itself falsified by two permanent checks: it must go **red** on a planted extra
+entry, and it must **not** fire on a `for (const [k, l] of …)` sitting above a correct block — my first version
+did, reporting 5 names against 22 entries on code that was fine. *A measuring tool that cries wolf on good
+input teaches everyone to ignore it, which is worse than having none.*
+
+⛔ **Deliberately NOT checked: whether each name is bound to the RIGHT entry.** The source does not record the
+intended pairing, so any such check would be guessing. The count is the knowable part — and it is the part that
+caught the real bug.
+
+The **ratchets** in `tests/wiring_baseline.json` cover the standing version of the same question: counts of
+rules constants nothing reads, rules keys nobody authors, exports only tests call, imports never invoked. They
+may only go **down**. Adding a ninth unread constant fails the suite even if every step above was followed.
 
 ## 5. The Great Circle (the spine of the whole game)
 

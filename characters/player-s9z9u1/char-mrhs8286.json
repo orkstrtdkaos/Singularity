@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 29,
-  "xp": 2836,
+  "xp": 2841,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -179,7 +179,7 @@
   "alignment": {
     "spectrumId": -0.023815840511569635,
     "violence_peace": 0.09078381765624999,
-    "chaos_order": 0.24652962003904677,
+    "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
     "concrete_abstract": -0.03496367597441142,
     "death_life": -0.17787615557957992,
@@ -193,7 +193,7 @@
   "maxHealth": 170,
   "health": 170,
   "maxEnergy": 240,
-  "energy": 223,
+  "energy": 219,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1995,7 +1995,183 @@
     "The morning at the east-side draw-well closes: two nodes marked, three more named by pattern — the midrow wayhouse, the mill gate, and something high on the ridge. Pell confirms the wayhouse through ironsense. The relay network's shape is known, if not yet complete. The scene ends here; the road forward is plain."
   ],
   "currentLocationId": "gen-object-object",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-object-object",
+    "turns": [
+      {
+        "player": "Head to the midrow wayhouse — read it with Order-Sense while Pell's ironsense is already pointing that way",
+        "summary": "Order-Sense confirms the midrow wayhouse as a relay node — dormant, geometrically placed, connected south to the mill gate and north toward the ridge. Pell's ironsense agrees.",
+        "narration": "The midrow wayhouse is squat and practical — fieldstone base, a roof repaired twice with different-colored slate, a hitching ring on the south wall that nobody has used in years. The door is unlocked. Inside: a cold hearth, a split bench, and the smell of dust and old woodsmoke. Pell steps to the east wall and sets two fingers flat against the stone, already looking somewhere past the room.\n\nSilas lets Order-Sense settle quietly into the structure. He is not pushing it — just opening, the way you open a window to check the weather. The wayhouse answers without ceremony. It is exactly what it appears to be on the outside, and beneath that it is something older: a relay station, one node in a chain that once carried signal traffic along the watershed road. The stone is not special. The placement is. Whoever built this sat it at the exact interval the network required, and the interval is still there — geometry does not forget.\n\nThe node itself is dormant, not dead. A small pulse moves through the floor joists in the same rhythm Silas has felt twice before this morning, slower than a heartbeat and much more patient. The chain runs south toward the mill gate and north toward the ridge. He can feel both directions the way you feel a hallway through a wall — not the rooms, just the line.\n\nPell lifts her fingers from the stone and looks at him. \"Same read,\" she says quietly. \"Old, and waiting.\""
+      }
+    ],
+    "lastTurn": {
+      "narration": "The midrow wayhouse is squat and practical — fieldstone base, a roof repaired twice with different-colored slate, a hitching ring on the south wall that nobody has used in years. The door is unlocked. Inside: a cold hearth, a split bench, and the smell of dust and old woodsmoke. Pell steps to the east wall and sets two fingers flat against the stone, already looking somewhere past the room.\n\nSilas lets Order-Sense settle quietly into the structure. He is not pushing it — just opening, the way you open a window to check the weather. The wayhouse answers without ceremony. It is exactly what it appears to be on the outside, and beneath that it is something older: a relay station, one node in a chain that once carried signal traffic along the watershed road. The stone is not special. The placement is. Whoever built this sat it at the exact interval the network required, and the interval is still there — geometry does not forget.\n\nThe node itself is dormant, not dead. A small pulse moves through the floor joists in the same rhythm Silas has felt twice before this morning, slower than a heartbeat and much more patient. The chain runs south toward the mill gate and north toward the ridge. He can feel both directions the way you feel a hallway through a wall — not the rooms, just the line.\n\nPell lifts her fingers from the stone and looks at him. \"Same read,\" she says quietly. \"Old, and waiting.\"",
+      "sceneSummary": "Order-Sense confirms the midrow wayhouse as a relay node — dormant, geometrically placed, connected south to the mill gate and north toward the ridge. Pell's ironsense agrees.",
+      "choices": [
+        {
+          "label": "Attempt to wake the node — press a small pulse of Order-Sense into the relay point and see if it answers",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.6
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "risky"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Map what you have — mark the wayhouse, the mill gate, and the ridge point on a sketch before moving on",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Head to the mill gate next — complete the chain from south to north, node by node",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Veth whether a dormant relay node like this was ever part of ashwarden patrol practice — she held a warden post for eleven years",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        }
+      ],
+      "characterDeltas": {
+        "energy": -2
+      },
+      "scene": {
+        "setting": "Inside the midrow wayhouse — a cold, dusty one-room fieldstone structure on the watershed road. Door unlocked, hearth cold, bench split along one side. Morning light through a single east-facing window.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Fingers lifted from the east wall, watching Silas for his read."
+          },
+          {
+            "name": "Veth (Stillwater) Ondra",
+            "state": "Standing near the doorway, taking in the room."
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on the hitching ring outside, visible through the window."
+          }
+        ],
+        "objects": [
+          "Cold hearth",
+          "Split bench",
+          "Hitching ring on south exterior wall",
+          "Dust and old woodsmoke smell"
+        ],
+        "threads": [
+          "The relay chain runs south to the mill gate and north toward the ridge — both directions felt but not yet visited.",
+          "The node is dormant, not dead — whether it can be woken is an open question."
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Confirmed the wayhouse node through ironsense from inside the room — 'same read,' unprompted.",
+          "learned": [
+            "The midrow wayhouse node reads dormant and old through ironsense — consistent with Order-Sense findings."
+          ],
+          "skillsObserved": [
+            "ironsense confirmation of a relay node from interior contact — matches Order-Sense read without prompting"
+          ],
+          "statusNote": "Inside the midrow wayhouse, fingers lifted from the east wall."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Present at the wayhouse — standing near the doorway as the node is read.",
+          "statusNote": "Inside the midrow wayhouse, near the door."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "relay-network-midrow-wayhouse",
+          "label": "Midrow Wayhouse — Relay Node",
+          "kind": "place",
+          "fact": "Order-Sense confirms the midrow wayhouse as a dormant relay node — geometrically placed at the exact interval the network requires. Signal runs south toward the mill gate and north toward the ridge. Node is dormant, not dead. Pell's ironsense agrees.",
+          "links": [
+            "millbrook",
+            "the-water-crisis",
+            "what-the-water-remembers"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief stop and reading at the wayhouse — a quarter-hour at most."
+      },
+      "placeUpdates": [
+        {
+          "subPlace": {
+            "name": "Midrow Wayhouse",
+            "parent": "valley",
+            "note": "A dormant pre-Transition relay node on the watershed road — fieldstone, cold hearth, geometrically placed. The relay chain runs south to the mill gate and north toward the ridge.",
+            "visited": true
+          }
+        }
+      ]
+    },
+    "sceneState": {
+      "setting": "Inside the midrow wayhouse — a cold, dusty one-room fieldstone structure on the watershed road. Door unlocked, hearth cold, bench split along one side. Morning light through a single east-facing window.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Fingers lifted from the east wall, watching Silas for his read."
+        },
+        {
+          "name": "Veth (Stillwater) Ondra",
+          "state": "Standing near the doorway, taking in the room."
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched on the hitching ring outside, visible through the window."
+        }
+      ],
+      "objects": [
+        "Cold hearth",
+        "Split bench",
+        "Hitching ring on south exterior wall",
+        "Dust and old woodsmoke smell"
+      ],
+      "threads": [
+        "The relay chain runs south to the mill gate and north toward the ridge — both directions felt but not yet visited.",
+        "The node is dormant, not dead — whether it can be woken is an open question."
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 14,
@@ -3424,7 +3600,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Read the radiant burn-mark through ironsense at the bowl's northwest edge — confirmed it as bright-heat, not forge-heat, sitting in the frost not under it. Moved to Silas's side without being asked.",
         "[d14] Named the next move plainly — walk back to the gate, check Logana, go home. Stood and brushed frost from her knee. No ceremony.",
         "[d14] Read the message at Silas's shoulder and named the implication plainly — a Blazeborn doesn't come to the Zone by accident.",
         "[d14] Received the shadow-sheet from Silas with instructions to write Mara and begin the flow of workers and materials for a warden post.",
@@ -3433,28 +3608,29 @@
         "[d14] Held Memory steady through the warpling's lunge; wiped the butt-end clean after the strike without being asked.",
         "[d14] Fell into step without a word at Silas's signal — handed Memory back and walked with him to the east well.",
         "[d14] Watched the Boundary-Stone ward seat into the well cap and named it clean without ceremony.",
-        "[d14] Confirmed the midrow wayhouse as a likely node through ironsense from the well cap — old signal, not strong."
+        "[d14] Confirmed the midrow wayhouse as a likely node through ironsense from the well cap — old signal, not strong.",
+        "[d14] Confirmed the wayhouse node through ironsense from inside the room — 'same read,' unprompted."
       ],
       "knownFacts": [
-        "Memory is now hers to carry; Silas holds the call. The shadow-twin on the bench is his half of the design.",
         "Silas named his love to her plainly and directly, no hedging.",
         "The Blazeborn traveler carries no working or primed iron — confirmed by ironsense at close range",
         "The fold reads as old and solid through ironsense — not resisting the wright's contact.",
         "The made gate holds at every angle with no seam between the original intention and Silas's close — named by ironsense as solid.",
         "The burn-mark at the reclamation bowl's northwest edge is bright-heat, not forge-heat — recent enough to sit in the frost layer, not beneath it.",
         "A Blazeborn traveler of middle years was logged at the main Hub gate four days ago, destination the Left Branch. He has not returned.",
-        "The midrow wayhouse carries an ironsense trace — old and quiet, but present"
+        "The midrow wayhouse carries an ironsense trace — old and quiet, but present",
+        "The midrow wayhouse node reads dormant and old through ironsense — consistent with Order-Sense findings."
       ],
       "skillsObserved": [
-        "accurate tactile reporting of a working's feel under hands-o",
         "ironsense read of a person at close range — confirmed absenc",
         "ironsense read of the fold's quality through contact-point —",
         "ironsense read of a pre-Transition working at range — confir",
         "ironsense discrimination of radiant heat from forge-heat at ",
-        "ironsense confirmation of a node signal at range through a c"
+        "ironsense confirmation of a node signal at range through a c",
+        "ironsense confirmation of a relay node from interior contact"
       ],
       "status": "active",
-      "statusNote": "At the east-side well, two fingers on the cap, attention moved east toward the wayhouse.",
+      "statusNote": "Inside the midrow wayhouse, fingers lifted from the east wall.",
       "lastSeen": {
         "locationId": "gen-object-object",
         "day": 14
@@ -4134,7 +4310,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Received Silas's account of the badger and the warden without ceremony. Named both as real, then held the lesson steady: what remains is a death that does not choose and cannot be turned.",
         "[d14] Took the right side of the road without prompting, eyes on the tree-line.",
         "[d14] Named the node's silence plainly — the upstream pressure is gone, Logana is just holding the ground now.",
         "[d14] Named quietly, unprompted, that the node beneath the stall is not the only one — has knowledge of the relay network's scope that she has not yet spoken aloud",
@@ -4143,7 +4318,8 @@
         "[d14] Named two likely node-sites from the Working Model's shape — the east-side shallow-draw well and the north gate registry. Ordered her knowledge rather than reached for it.",
         "[d14] Walked to the well at Silas's right — waiting on what he reads before adding her own knowledge.",
         "[d14] Read the completed ward's weight without ceremony — attention without comment.",
-        "[d14] Named three probable node locations from the relay network's pattern — midrow wayhouse, mill gate, and a high point on the ridge above town. Reasoning from oldest roads and speaking-distance south and east."
+        "[d14] Named three probable node locations from the relay network's pattern — midrow wayhouse, mill gate, and a high point on the ridge above town. Reasoning from oldest roads and speaking-distance south and east.",
+        "[d14] Present at the wayhouse — standing near the doorway as the node is read."
       ],
       "knownFacts": [
         "The relay node beneath the Sheaf and Bowl stall is not isolated — Veth knows of others",
@@ -4166,7 +4342,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the east-side well, reading the ridge — three more nodes named, her part of the mapping complete for now.",
+      "statusNote": "Inside the midrow wayhouse, near the door.",
       "lastSeen": {
         "locationId": "gen-object-object",
         "day": 14
@@ -5542,7 +5718,17 @@
       "notes": [],
       "flags": {},
       "lastVisit": 14,
-      "vectorsKnown": []
+      "vectorsKnown": [],
+      "subPlaces": {
+        "midrow-wayhouse": {
+          "name": "Midrow Wayhouse",
+          "parentId": "gen-object-object",
+          "day": 14,
+          "visited": true,
+          "note": "A dormant pre-Transition relay node on the watershed road — fieldstone, cold hearth, geometrically placed. The relay chain runs south to the mill gate and north toward the ridge.",
+          "parentUnresolved": "valley"
+        }
+      }
     }
   },
   "worldState": {
@@ -5690,7 +5876,7 @@
     "lastTickWorldDay": 35,
     "lastCanonWorldDay": 35,
     "lastGenCount": 859,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The message-tube's header tab carries a second notation beneath the delivery address — small, in a different hand, added after the primary…",
@@ -9353,22 +9539,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.61511635489147,
-    "cerebral": 22.476462862649576,
-    "social": 8.290917504557683,
-    "generous": 3.376906470071614,
-    "cautious": 9.542102445951341,
-    "physical": 1.114388724490376,
-    "risky": 0.26728967361491246,
-    "ruthless": 0.5817777766579907,
-    "carousing": 0.09458978596970367,
-    "amorous": 0.3477115554641205,
-    "patient": 0.21070272342743293,
-    "stealth": 0.000020332610596279854,
-    "devotion": 0.8308575999244379,
-    "craft": 0.7215588717049675,
-    "leadership": 0.31375884655982517,
-    "deception": 0.09736988212753267
+    "strategic": 19.124738446019183,
+    "cerebral": 22.914551291083338,
+    "social": 8.083644566943741,
+    "generous": 3.292483808319824,
+    "cautious": 10.303549884802559,
+    "physical": 1.0865290063781166,
+    "risky": 0.26060743177453966,
+    "ruthless": 0.5672333322415409,
+    "carousing": 0.09222504132046108,
+    "amorous": 0.3390187665775175,
+    "patient": 0.2054351553417471,
+    "stealth": 0.000019824295331372857,
+    "devotion": 0.8100861599263269,
+    "craft": 0.7035198999123433,
+    "leadership": 0.3059148753958295,
+    "deception": 0.09493563507434435
   },
   "aptitudes": [
     "strategist",
@@ -9377,7 +9563,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 914,
+  "actionCount": 915,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -9807,8 +9993,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785896951427,
-  "rev": 1634,
+  "updatedAt": 1785897323198,
+  "rev": 1635,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -12966,7 +13152,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 96,
+      "order_sense": 97,
       "palework": 31,
       "deathsense": 45,
       "shadowstep": 25,
@@ -13060,7 +13246,7 @@
     "lastUsed": {
       "deathsense": 28,
       "the-attended-end": 28,
-      "order_sense": 28,
+      "order_sense": 36,
       "boundary_stone": 28,
       "palework": 25,
       "the_shadow_work": 25,
@@ -13730,7 +13916,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 120
+    "the_center": 121
   },
   "foreclosed": [
     "rootkin",
@@ -13949,10 +14135,10 @@
     {
       "id": "sess-22",
       "startedAt": "2026-08-05T02:29:11.422Z",
-      "lastAt": "2026-08-05T02:29:11.422Z",
+      "lastAt": "2026-08-05T02:35:23.192Z",
       "startDay": 36,
       "endDay": 36,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -14301,15 +14487,15 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 287,
-    "choices": 286,
-    "characterDeltas": 124,
-    "scene": 287,
-    "npcUpdates": 256,
+    "sceneSummary": 288,
+    "choices": 287,
+    "characterDeltas": 125,
+    "scene": 288,
+    "npcUpdates": 257,
     "factUpdates": 23,
-    "placeUpdates": 55,
-    "codexUpdates": 181,
-    "timeOps": 278,
+    "placeUpdates": 56,
+    "codexUpdates": 182,
+    "timeOps": 279,
     "imagePrompt": 7,
     "sceneEnded": 67,
     "itemUpdates": 6,
@@ -14330,7 +14516,7 @@
     "encounterOps": 1,
     "gambitApt": 1
   },
-  "_opTurns": 287,
+  "_opTurns": 288,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

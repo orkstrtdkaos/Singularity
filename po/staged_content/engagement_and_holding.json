@@ -1,0 +1,72 @@
+{
+ "schemaVersion": 1,
+ "id": "engagement_and_holding",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — supersedes engagement_disposition.json. Erik's correction, and it is the moralising bias inverted.",
+ "theCorrection": {
+  "erik": "'you're labeling the word pacifist onto a lot of people. Just because some traditions are all about peace doesn't mean they haven't figured out ways to resolve things, or even USE FORCE TO KEEP THE PEACE. A stillhold pacifist might end up on the battlefield and convince some NOT to fight — or to actively stop fights. They would also make GREAT GUARDS for this reason — they have high skill. So it's the WAY they do the deeds that changes, for the most part, not that they wouldn't engage at all.'",
+  "myError": "⚠️ I READ 'PEACE TRADITION' AS 'DOES NOT PARTICIPATE' and set `engages: 0.15` — the lowest in the world — then argued it was 'not a nerf, it is the tradition.' It was a nerf, and it was the moralising bias inverted: instead of rewarding virtue I made virtue ABSENT. Same root — I decided what a people would want to do instead of reading what their craft does.",
+  "theCraftsSaidSo": "Their own crafts contradict me and I quoted them while missing it. `step_between` is MOVING INTO THE MIDDLE OF VIOLENCE. `the_held_breath` holds 'a moment where violence is TOTAL'. `calm_word` talks someone down FROM THE EDGE. `the_price_shown` HINDERS. **These are all battlefield crafts.** A Stillhold figure is not absent from the fight — THEY ARE STANDING IN IT."
+ },
+ "fix1_engagementIsMethodNotRate": {
+  "principle": "⚠️ `engages` WAS THE WRONG DIAL. Nearly every tradition engages at a similar rate; what differs is WHAT A WIN LOOKS LIKE. Split it in two.",
+  "engages": "how often a figure enters a confrontation at all. RAISE THE FLOOR — most traditions sit 0.9-1.3. Very few are genuinely rare.",
+  "resolutionMode": "⚠️ THE NEW DIAL, AND THE REAL ONE. What this figure's victory IS.",
+  "modes": {
+   "force": "the opponent is beaten. marcher, blazeborn, unmaker, abyssal, somatic.",
+   "prevention": "⚠️ THE FIGHT DOES NOT HAPPEN. stillhold, numinous, threnodist. A PREVENTED FIGHT IS A WON CONTEST — same weight, different narration.",
+   "proof": "the opponent is shown to be wrong and cannot proceed. verist, syllogist, cogitant, lattice.",
+   "removal": "the opponent is no longer where the problem is. umbral, veilwright, horizon.",
+   "endurance": "the opponent stops first. mason, hourkeeper, ashwarden, rootkin."
+  },
+  "revised_engages": {
+   "marcher": 1.3,
+   "abyssal": 1.2,
+   "unmaker": 1.15,
+   "blazeborn": 1.15,
+   "somatic": 1.15,
+   "seraphic": 1.1,
+   "verist": 1.05,
+   "syllogist": 1.0,
+   "stillhold": 1.1,
+   "numinous": 0.9,
+   "threnodist": 0.95,
+   "ashwarden": 1.0,
+   "rootkin": 0.95,
+   "cogitant": 0.9,
+   "lattice": 1.0,
+   "churnfolk": 1.0,
+   "enginewright": 0.9,
+   "wright": 0.9,
+   "mason": 0.95,
+   "figurist": 0.9,
+   "umbral": 1.0,
+   "veilwright": 0.95,
+   "horizon": 0.95,
+   "hourkeeper": 0.9,
+   "valley_craft": 1.0,
+   "precursor": 0.9
+  },
+  "stillholdNote": "⚠️ STILLHOLD GOES 0.15 → 1.1 — ABOVE AVERAGE. They are on the field constantly; their crafts are all about being present where violence is. What makes them Stillhold is `resolutionMode: prevention`: their contest win is A FIGHT THAT DID NOT HAPPEN, and it scores exactly what a kill scores.",
+  "andTheyShouldGUARD": "Erik: 'they would also make GREAT GUARDS — they have high skill.' `guardIntercept` is already weight 3 and `step_between` is literally the craft. GIVE STILLHOLD A GUARD PREFERENCE, not a fighting penalty — they should be over-represented in the guard pool, which makes them deed-rich by the route their tradition actually uses."
+ },
+ "fix2_theHoldingStreak": {
+  "erik": "'a streak of holding could give an edge... something that builds to a point. It would get dropped down if interrupted.'",
+  "mechanic": {
+   "name": "heldTheLine",
+   "accrual": "holding the SAME care across consecutive passes builds a streak counter",
+   "edge": "the streak adds to the figure's push on that arc — +10% per consecutive pass",
+   "cap": "⚠️ BUILDS TO A POINT: caps at +50% (5 passes). A long hold is strong, not unbounded.",
+   "interruption": "⚠️ DROPS ON INTERRUPTION — if the figure spends a pass elsewhere, or is wounded off the front, the streak falls. Erik: 'it would get dropped down if interrupted.'",
+   "dropMode": "RESET TO ZERO on abandoning the care; HALVE on being driven off (wounded/struck). Losing a front you were forced off is not the same as leaving it.",
+   "deed": "⚠️ AND IT PAYS: crossing 5 consecutive passes credits `heldTheLine` at weight 3 — the same as a contest won, because HOLDING A FRONT FOR FIVE PASSES IS THE MECHANIC THAT MOVES ARCS and nothing was paying for it."
+  },
+  "whyThisFixesTheRealGap": "The deed ledger had seven sources, six combat-shaped, and the only non-combat one (`heldThroughCrisis`, weight 1) fires ONLY when holding COST YOU YOUR PERSONAL TIME — you were paid for sacrifice, never for work. Meanwhile `applyEpicArcPush` shows that LEANING is what actually moves arcs, every pass, for every figure. THE LEDGER REWARDED THE AMPLIFIER AND IGNORED THE ENGINE. `heldTheLine` pays the engine.",
+  "andItIsNotAPACIFISTCONSOLATION": "⚠️ IMPORTANT, per DIRECTIVE_SNG-280: this is not a peaceful-figure prize. A marcher who holds one front for five passes earns it identically. It rewards CONSTANCY, which is available to everyone and characteristic of nobody in particular — and the figures who chase every fire will never have it, which is the trade."
+ },
+ "whatToCut": [
+  "`engages: 0.15` for stillhold and the whole low-end of my original table",
+  "the framing that pacifist traditions 'push as workers, steady and safe' — they are not safe, they are IN IT",
+  "⚠️ AND MY LINE 'a Stillhold figure who sought duels would contradict every bound I authored' — a Stillhold figure seeks CONFRONTATIONS constantly; they just do not seek DUELS. I conflated the two."
+ ]
+}

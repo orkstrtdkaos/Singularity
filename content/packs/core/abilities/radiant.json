@@ -653,11 +653,18 @@
    ],
    "plainly": "A survive/explore action that strengthens someone. Its strength is rated 2 out of 10, and lasts for about 8 hours Ranks: rank 2 extends vessels+duration; rank 3 extends duration. Limit: nothing brighter than the day you banked.",
    "upkeep": {
-    "prepHours": 168,
+    "prepHoursByRank": {
+     "1": 8,
+     "2": 72,
+     "3": 168
+    },
     "prepCondition": "clear noon each day",
     "interruptible": false,
     "onInterrupt": "lost entirely",
-    "note": "⚠️ ERIK'S EXAMPLE. A week of clear noons = 168 world-hours of gated preparation, and broken early it is GONE. That is the single largest up-front investment in the catalog and until now no simulation could see it."
+    "cooldownHours": {
+     "3": 336
+    },
+    "note": "⚠️ CORRECTED. I had applied r3's 168h to the whole craft, which priced one lantern-night above a camp that heals six people. The bound said so plainly — 'the GREAT CACHE takes a week of clear noons' — and the great cache is r3. Cooldown on r3 only: a season's cache cannot be rebuilt weekly."
    }
   },
   {
@@ -1415,7 +1422,10 @@
    "upkeep": {
     "prepHours": 1,
     "energyAsHours": 24,
-    "note": "one hour of work drains a day's labour of energy — the ratio is the cost"
+    "cooldownHours": {
+     "all": 24
+    },
+    "note": "one hour drains a day's labour; the cooldown stops a surgeon working twice in a day"
    }
   },
   {
@@ -1546,11 +1556,18 @@
    ],
    "plainly": "A survive/stealth/investigate action that reduces incoming harm. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 extends wards+reportFidelity; rank 3 extends duration. Limit: a light-crafter who Sees it can step around it.",
    "upkeep": {
-    "prepHours": 2160,
+    "prepHoursByRank": {
+     "1": 2,
+     "2": 24,
+     "3": 2160
+    },
     "prepCondition": "community consent, sustained",
     "interruptible": true,
     "onInterrupt": "decays without upkeep",
-    "note": "a season-fence is community work, not a personal working"
+    "cooldownHours": {
+     "3": 720
+    },
+    "note": "same flattening corrected: r1 is one doorway till dawn, r3 is a compound for a season"
    }
   },
   {

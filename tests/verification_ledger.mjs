@@ -124,6 +124,15 @@ const LEDGER = [
     note: "Aevi authored the ladder and mapped `threat` onto 62 encounters from the already-authored `minDanger` rather than re-judging by hand — so the bands AGREE with the danger figures the table always carried instead of quietly disagreeing. ⚠️ AND NOTHING IN THE ENGINE READ `rules.threat`: `def.lethal` was still hand-set on exactly 2 of 19 defs, so the derivation that makes CCODE-52 real was authored and unwired — the sixth writer/reader miss of the week. ⚠️ A NAME COLLISION SITS UNDER IT: `def.threat` is a BAND ID (string) while `def.opponent.threat` is a 10–70 difficulty NUMBER, and random_encounters.js fell through to the former — Number('trivial') is NaN, which `|| 0` silently turns into zero. Nothing broke (none of those 62 carried a numeric threat before, so the fallback was already 0), but a numeric reader aimed at a string field is a trap waiting for whoever changes either side; it now takes only a real number. ⛔ AEVI'S GUARD KEPT IN THE LABEL: the warning is about ODDS, not about death — you can die in any band, and saying 'lethal stakes' on `grave` while `fair` says nothing would imply an even match cannot kill you.",
   },
   {
+    id: "SNG-327", ask: "(Aevi) `interests` and `kin` authored — a smattering, per Erik",
+    how: "worldtick.js:personalPursuitOf — the alternate pools it has always read, now with content in them",
+    gates: ["327: every authored `kin` entry is READABLE by personalPursuitOf — none silently dropped",
+            "327: every authored `interests` entry is readable too",
+            "327: a kin line actually comes out of the consumer, not merely past the filter",
+            "327: …and a kin entry in an unreadable shape WOULD be caught"],
+    note: "Coverage 2026-08-05: `interests` 31/66, `kin` 26/66 — and 26/26 + 31/31 of the authored entries REACH the reader. ⚠️ THE SHAPE CONTRACT IS THE RISK, NOT THE COUNT: `personalPursuitOf` takes kin as `typeof k === 'string' ? k : k?.line`, so an entry written as `{name, relation}` would be dropped with no error — the fifth door of the PromisedButUnread family, and at its most dangerous inside a POOL, because a partially-readable list still looks like it works. Aevi authored `{line: '…'}` without being told, so nothing was lost; the gate exists for the next one. It asserts REACHABILITY rather than presence, checks a line actually comes out of the consumer rather than merely past the filter, and is falsified by an unreadable shape. ⛔ THESE REMAIN ALTERNATES: `personalVerbs` at 66/66 already satisfied this reader on its own, so `personalCoverage` is unchanged at 48/48 on the page — the content adds VARIETY to what a figure is doing with their own time, not reach. Saying it closed a gap would be an overclaim; it deepened a pool that was already full.",
+  },
+  {
     id: "SNG-311", ask: "if you get marked for a strike, you can also be chosen as warranting a guardian, or several… plus it gives a lot of use of the various hiding and warding skills",
     how: "worldtick.js:guardiansFor — the retrieval rule pointed at the living, surfaced to the GM",
     gates: ["311: an unmarked player draws no guardian at all",

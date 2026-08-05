@@ -9997,6 +9997,48 @@ await (async () => {
       !wt.guardiansFor(wsDead, roster311, 0).guardians.some(x => x.id === "leg"));
   }
 
+  // SNG-327 — KIN AND INTERESTS ARE AUTHORED NOW, so the SHAPE CONTRACT needs a gate before it can be broken.
+  //
+  // ⚠️ `personalPursuitOf` reads kin as `typeof k === "string" ? k : k?.line`. Aevi authored `{line: "..."}`
+  // and every entry reaches the reader — but the next one written as `{name, relation}` would be silently
+  // dropped: no error, no warning, the figure simply has less of a life than the file says. That is the
+  // fifth door of the PromisedButUnread family (a content field the engine cannot read), and it is at its
+  // most dangerous in a pool, because a partially-readable list still LOOKS like it works.
+  //
+  // ⛔ SO THIS GATES REACHABILITY, NOT PRESENCE: every authored entry must come back out of the consumer.
+  {
+    const { loadContentHeadless: lch327 } = await import("./headless_content.mjs");
+    const C327 = await lch327();
+    const R327 = (C327.legends?.roster || []).filter(f => f?.id);
+    // the reader's own extraction, replicated from personalPursuitOf so the two cannot drift apart silently
+    const kinLines = f => (Array.isArray(f?.kin) ? f.kin : []).map(k => (typeof k === "string" ? k : k?.line)).filter(Boolean);
+    const intLines = f => (Array.isArray(f?.interests) ? f.interests : []).filter(v => typeof v === "string" && v.trim());
+    const authored = (k) => R327.reduce((n, f) => n + (Array.isArray(f[k]) ? f[k].length : 0), 0);
+    const reaching = (fn) => R327.reduce((n, f) => n + fn(f).length, 0);
+
+    check("327: every authored `kin` entry is READABLE by personalPursuitOf — none silently dropped",
+      authored("kin") > 0 && reaching(kinLines) === authored("kin"));
+    check("327: every authored `interests` entry is readable too",
+      authored("interests") > 0 && reaching(intLines) === authored("interests"));
+
+    // …and behaviourally: a kin line actually comes OUT. Counting is not proof that the pool is reachable.
+    check("327: a kin line actually comes out of the consumer, not merely past the filter", (() => {
+      const f = R327.find(x => kinLines(x).length);
+      if (!f) return false;
+      const pool = new Set(kinLines(f));
+      let seed = 7; const rng = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+      for (let i = 0; i < 400; i++) if (pool.has(wt.personalPursuitOf(f, rng))) return true;
+      return false;
+    })());
+
+    // ⛔ AND THE GATE MUST BE ABLE TO FAIL. A shape the reader cannot take has to be caught, or this check
+    // is a green light over an unread field — the exact thing it exists to prevent.
+    check("327: …and a kin entry in an unreadable shape WOULD be caught", (() => {
+      const bad = { id: "x", kin: [{ name: "a brother", relation: "kin" }] };
+      return kinLines(bad).length === 0 && wt.personalPursuitOf(bad, () => 0) === null;
+    })());
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

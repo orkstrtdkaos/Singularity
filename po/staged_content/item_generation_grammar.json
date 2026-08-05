@@ -1,0 +1,1008 @@
+{
+ "schemaVersion": 1,
+ "id": "item_generation_grammar",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged, ready to drop in when CCode adds the `item` gen type.",
+ "note": "⚠️ THE GRAMMAR, NOT THE ITEMS. Erik: 'fire the item creation engine to fill in weapons, armor, shields etc. Each domain and people could have some flavor of these.' This supplies what a generator draws from so its output BELONGS — a generated Ashwarden blade should read as ashwarden and a Churnfolk one should not. THAT IS THE DIFFERENCE BETWEEN GENERATED AND PROCEDURAL.",
+ "dependsOn": "⚠️ TRACK B. `bonusTags` are currently SET and never MATCHED — nothing reads them against an action. Until the matcher lands, every item this produces is flavour text. The grammar is safe to author now; it should not SHIP before its consumer.",
+ "howItComposes": {
+  "formula": "{finish} {form} of {people}  ·  or  {people}'s {form}  ·  or  the {material} {form}",
+  "fields": "a generated item fills: id, name, kind, description, bonusTags, consumable:false — the live schema, nothing new.",
+  "bonusTagRule": "⚠️ TAGS COME FROM THE TRADITION, NOT THE FORM. A blade is `melee`+`edge` whoever made it; what makes it ASHWARDEN is `death`+`quiet`. That way the matcher rewards carrying gear that suits your craft, which is the point.",
+  "tierRule": "kind alone does not set power. A generated item is `tier` 1-3 from the maker's standing; the grammar supplies flavour, not numbers."
+ },
+ "universalForms": {
+  "weapon": [
+   "blade",
+   "long knife",
+   "spear",
+   "axe",
+   "hammer",
+   "staff",
+   "bow",
+   "sling",
+   "cudgel"
+  ],
+  "armor": [
+   "coat",
+   "brigandine",
+   "harness",
+   "robe",
+   "mail",
+   "jack",
+   "guard-coat"
+  ],
+  "shield": [
+   "round shield",
+   "buckler",
+   "tower shield",
+   "wall-board",
+   "targe",
+   "bracer-guard"
+  ],
+  "note": "⚠️ SHIELDS DID NOT EXIST — zero in the game, against 19 authored defensive logics. Every tradition gets shield forms below, including the ones whose shield is not a board."
+ },
+ "byTradition": {
+  "marcher": {
+   "materials": [
+    "good steel",
+    "red-iron",
+    "oiled leather"
+   ],
+   "weaponForms": [
+    "blade",
+    "spear",
+    "axe"
+   ],
+   "armorForms": [
+    "brigandine",
+    "harness"
+   ],
+   "shieldForms": [
+    "round shield",
+    "tower shield"
+   ],
+   "bonusTags": [
+    "melee",
+    "edge",
+    "honor"
+   ],
+   "namePatterns": [
+    "{people}'s {form}",
+    "the Redline {form}"
+   ],
+   "tailVariant": {
+    "name": "an Ender's {form}",
+    "tags": [
+     "melee",
+     "edge",
+     "ruthless"
+    ],
+    "note": "the discipline stripped out — same steel, no forms"
+   }
+  },
+  "stillhold": {
+   "materials": [
+    "unmarked wood",
+    "padded cloth",
+    "plain iron"
+   ],
+   "weaponForms": [
+    "staff",
+    "cudgel"
+   ],
+   "armorForms": [
+    "guard-coat",
+    "padded jack"
+   ],
+   "shieldForms": [
+    "wall-board",
+    "tower shield"
+   ],
+   "bonusTags": [
+    "peace",
+    "protection",
+    "truce"
+   ],
+   "namePatterns": [
+    "the Held {form}",
+    "a Mediator's {form}"
+   ],
+   "tailVariant": {
+    "name": "a Quieter's {form}",
+    "tags": [
+     "peace",
+     "melee",
+     "final"
+    ],
+    "note": "⚠️ the calmest violence in the world, and its gear is still unmarked"
+   },
+   "note": "Stillhold makes the best SHIELDS in the Valley and the worst weapons, on purpose."
+  },
+  "ashwarden": {
+   "materials": [
+    "pale ash-wood",
+    "grey iron",
+    "bone-inlay"
+   ],
+   "weaponForms": [
+    "long knife",
+    "staff"
+   ],
+   "armorForms": [
+    "grey coat",
+    "ash-robe"
+   ],
+   "shieldForms": [
+    "buckler",
+    "targe"
+   ],
+   "bonusTags": [
+    "death",
+    "quiet",
+    "ritual"
+   ],
+   "namePatterns": [
+    "a Pale {form}",
+    "the Grey {form}"
+   ],
+   "tailVariant": {
+    "name": "a Grave-Caller's {form}",
+    "tags": [
+     "death",
+     "binding",
+     "labor"
+    ],
+    "note": "marked for setting hands, not for fighting"
+   }
+  },
+  "rootkin": {
+   "materials": [
+    "living wood",
+    "braided vine",
+    "green-cured hide"
+   ],
+   "weaponForms": [
+    "staff",
+    "spear",
+    "sling"
+   ],
+   "armorForms": [
+    "woven coat",
+    "bark-harness"
+   ],
+   "shieldForms": [
+    "round shield",
+    "targe"
+   ],
+   "bonusTags": [
+    "plants",
+    "heal",
+    "remedy"
+   ],
+   "namePatterns": [
+    "a Green {form}",
+    "the Quickwood {form}"
+   ],
+   "tailVariant": {
+    "name": "a Bloom-Wright's {form}",
+    "tags": [
+     "plants",
+     "growth",
+     "harm"
+    ],
+    "note": "it keeps growing after it is made, which is the problem"
+   }
+  },
+  "blazeborn": {
+   "materials": [
+    "kindled glass",
+    "fire-blued steel",
+    "ember-brass"
+   ],
+   "weaponForms": [
+    "blade",
+    "spear"
+   ],
+   "armorForms": [
+    "scale-coat",
+    "bright harness"
+   ],
+   "shieldForms": [
+    "bright targe",
+    "buckler"
+   ],
+   "bonusTags": [
+    "radiant",
+    "energy",
+    "reveal"
+   ],
+   "namePatterns": [
+    "a Kindled {form}",
+    "the Bright {form}"
+   ],
+   "tailVariant": {
+    "name": "an Assayer's {form}",
+    "tags": [
+     "radiant",
+     "reveal",
+     "harm"
+    ],
+    "note": "made to find out what someone is"
+   }
+  },
+  "umbral": {
+   "materials": [
+    "blackened steel",
+    "matte leather",
+    "unpolished horn"
+   ],
+   "weaponForms": [
+    "long knife",
+    "sling"
+   ],
+   "armorForms": [
+    "dark coat",
+    "quiet jack"
+   ],
+   "shieldForms": [
+    "buckler",
+    "bracer-guard"
+   ],
+   "bonusTags": [
+    "stealth",
+    "quiet",
+    "cold"
+   ],
+   "namePatterns": [
+    "an Unlit {form}",
+    "the Quiet {form}"
+   ],
+   "tailVariant": {
+    "name": "a Smotherer's {form}",
+    "tags": [
+     "stealth",
+     "quiet",
+     "binding"
+    ]
+   }
+  },
+  "verist": {
+   "materials": [
+    "plain steel",
+    "undyed cloth",
+    "clear glass"
+   ],
+   "weaponForms": [
+    "blade",
+    "staff"
+   ],
+   "armorForms": [
+    "plain coat",
+    "witness-robe"
+   ],
+   "shieldForms": [
+    "targe",
+    "round shield"
+   ],
+   "bonusTags": [
+    "witness",
+    "reveal",
+    "standing"
+   ],
+   "namePatterns": [
+    "a Plain {form}",
+    "the Attested {form}"
+   ],
+   "tailVariant": {
+    "name": "a Stripper's {form}",
+    "tags": [
+     "witness",
+     "reveal",
+     "harm"
+    ]
+   }
+  },
+  "veilwright": {
+   "materials": [
+    "false-finished steel",
+    "borrowed cloth",
+    "two-faced lacquer"
+   ],
+   "weaponForms": [
+    "long knife",
+    "cudgel"
+   ],
+   "armorForms": [
+    "merchant's coat",
+    "plain-seeming jack"
+   ],
+   "shieldForms": [
+    "buckler"
+   ],
+   "bonusTags": [
+    "stealth",
+    "social",
+    "etiquette"
+   ],
+   "namePatterns": [
+    "a Borrowed {form}",
+    "the Other {form}"
+   ],
+   "tailVariant": {
+    "name": "a Name-Taker's {form}",
+    "tags": [
+     "stealth",
+     "social",
+     "binding"
+    ],
+    "note": "⚠️ it belonged to someone, and the someone is the point"
+   }
+  },
+  "lattice": {
+   "materials": [
+    "measured steel",
+    "gridded plate",
+    "ruled bone"
+   ],
+   "weaponForms": [
+    "blade",
+    "hammer"
+   ],
+   "armorForms": [
+    "ordered harness",
+    "mail"
+   ],
+   "shieldForms": [
+    "tower shield",
+    "wall-board"
+   ],
+   "bonusTags": [
+    "structural",
+    "binding",
+    "standing"
+   ],
+   "namePatterns": [
+    "a Ruled {form}",
+    "the Registered {form}"
+   ],
+   "tailVariant": {
+    "name": "a Fixer's {form}",
+    "tags": [
+     "structural",
+     "binding",
+     "hobble"
+    ]
+   }
+  },
+  "churnfolk": {
+   "materials": [
+    "found metal",
+    "mismatched leather",
+    "luck-marked wood"
+   ],
+   "weaponForms": [
+    "axe",
+    "cudgel",
+    "sling"
+   ],
+   "armorForms": [
+    "patched jack",
+    "found harness"
+   ],
+   "shieldForms": [
+    "round shield",
+    "found board"
+   ],
+   "bonusTags": [
+    "wild",
+    "escape",
+    "barter"
+   ],
+   "namePatterns": [
+    "a Found {form}",
+    "the Unspooled {form}"
+   ],
+   "tailVariant": {
+    "name": "an Unspooler's {form}",
+    "tags": [
+     "wild",
+     "structural",
+     "break"
+    ],
+    "note": "made to come apart, and to take things apart"
+   }
+  },
+  "enginewright": {
+   "materials": [
+    "worked brass",
+    "precursor alloy",
+    "geared steel"
+   ],
+   "weaponForms": [
+    "hammer",
+    "blade"
+   ],
+   "armorForms": [
+    "plated harness",
+    "mechanism-coat"
+   ],
+   "shieldForms": [
+    "bracer-guard",
+    "plated targe"
+   ],
+   "bonusTags": [
+    "structural",
+    "precursor-glimpse",
+    "energy"
+   ],
+   "namePatterns": [
+    "a Geared {form}",
+    "the Wrought {form}"
+   ],
+   "tailVariant": {
+    "name": "a Coil {form}",
+    "tags": [
+     "structural",
+     "binding",
+     "precursor-glimpse"
+    ],
+    "note": "fitted to a body as if the body were a device"
+   }
+  },
+  "numinous": {
+   "materials": [
+    "untooled wood",
+    "river stone",
+    "unbleached linen"
+   ],
+   "weaponForms": [
+    "staff"
+   ],
+   "armorForms": [
+    "attending robe",
+    "plain coat"
+   ],
+   "shieldForms": [
+    "targe",
+    "wall-board"
+   ],
+   "bonusTags": [
+    "ritual",
+    "focus",
+    "witness"
+   ],
+   "namePatterns": [
+    "an Attended {form}",
+    "the Threshold {form}"
+   ],
+   "tailVariant": {
+    "name": "a Dimmer's {form}",
+    "tags": [
+     "ritual",
+     "quiet",
+     "hobble"
+    ],
+    "note": "⚠️ meaning withdrawn — the quietest atrocity, and the gear is unremarkable"
+   }
+  },
+  "threnodist": {
+   "materials": [
+    "resonant wood",
+    "tear-glass",
+    "mourning cloth"
+   ],
+   "weaponForms": [
+    "staff",
+    "long knife"
+   ],
+   "armorForms": [
+    "lament-robe",
+    "carrier's coat"
+   ],
+   "shieldForms": [
+    "targe"
+   ],
+   "bonusTags": [
+    "resonance",
+    "social",
+    "heal"
+   ],
+   "namePatterns": [
+    "a Carried {form}",
+    "the Lament {form}"
+   ],
+   "tailVariant": {
+    "name": "a Heart-Tuner's {form}",
+    "tags": [
+     "resonance",
+     "social",
+     "binding"
+    ]
+   }
+  },
+  "syllogist": {
+   "materials": [
+    "squared steel",
+    "ruled slate",
+    "proof-marked iron"
+   ],
+   "weaponForms": [
+    "blade",
+    "staff"
+   ],
+   "armorForms": [
+    "scholar's harness",
+    "ordered coat"
+   ],
+   "shieldForms": [
+    "targe",
+    "round shield"
+   ],
+   "bonusTags": [
+    "knowledge",
+    "structural",
+    "learn"
+   ],
+   "namePatterns": [
+    "a Proven {form}",
+    "the Settled {form}"
+   ],
+   "tailVariant": {
+    "name": "a Corner's {form}",
+    "tags": [
+     "knowledge",
+     "social",
+     "hobble"
+    ]
+   }
+  },
+  "somatic": {
+   "materials": [
+    "wrapped cord",
+    "weighted wood",
+    "hand-worn leather"
+   ],
+   "weaponForms": [
+    "staff",
+    "cudgel"
+   ],
+   "armorForms": [
+    "training harness",
+    "unarmored wrap"
+   ],
+   "shieldForms": [
+    "bracer-guard",
+    "buckler"
+   ],
+   "bonusTags": [
+    "melee",
+    "grip",
+    "escape"
+   ],
+   "namePatterns": [
+    "a Trained {form}",
+    "the Frame {form}"
+   ],
+   "tailVariant": {
+    "name": "a Breaker's {form}",
+    "tags": [
+     "melee",
+     "grip",
+     "harm"
+    ],
+    "note": "made for joints"
+   }
+  },
+  "cogitant": {
+   "materials": [
+    "cold alloy",
+    "instrument glass",
+    "thought-etched steel"
+   ],
+   "weaponForms": [
+    "long knife",
+    "staff"
+   ],
+   "armorForms": [
+    "instrumented coat",
+    "thin harness"
+   ],
+   "shieldForms": [
+    "buckler"
+   ],
+   "bonusTags": [
+    "knowledge",
+    "focus",
+    "reveal"
+   ],
+   "namePatterns": [
+    "an Instrumented {form}",
+    "the Unaided {form}"
+   ],
+   "tailVariant": {
+    "name": "an Opener's {form}",
+    "tags": [
+     "knowledge",
+     "focus",
+     "binding"
+    ]
+   }
+  },
+  "seraphic": {
+   "materials": [
+    "kept bronze",
+    "charter-sealed steel",
+    "ordered white"
+   ],
+   "weaponForms": [
+    "blade",
+    "spear"
+   ],
+   "armorForms": [
+    "order harness",
+    "charter coat"
+   ],
+   "shieldForms": [
+    "tower shield",
+    "targe"
+   ],
+   "bonusTags": [
+    "standing",
+    "binding",
+    "ritual"
+   ],
+   "namePatterns": [
+    "an Issued {form}",
+    "the Kept {form}"
+   ],
+   "tailVariant": {
+    "name": "a Sentence {form}",
+    "tags": [
+     "standing",
+     "binding",
+     "harm"
+    ],
+    "note": "the judgment binds anyway, and so does this"
+   }
+  },
+  "abyssal": {
+   "materials": [
+    "debt-black iron",
+    "bargained leather",
+    "hollow brass"
+   ],
+   "weaponForms": [
+    "long knife",
+    "blade"
+   ],
+   "armorForms": [
+    "market coat",
+    "hollow harness"
+   ],
+   "shieldForms": [
+    "buckler",
+    "targe"
+   ],
+   "bonusTags": [
+    "barter",
+    "favor",
+    "binding"
+   ],
+   "namePatterns": [
+    "a Struck {form}",
+    "the Priced {form}"
+   ],
+   "tailVariant": {
+    "name": "a Maw {form}",
+    "tags": [
+     "barter",
+     "binding",
+     "harm"
+    ],
+    "note": "⚠️ it was fairly paid for, which is the horror"
+   }
+  },
+  "mason": {
+   "materials": [
+    "dressed stone",
+    "cut granite",
+    "true iron"
+   ],
+   "weaponForms": [
+    "hammer",
+    "cudgel"
+   ],
+   "armorForms": [
+    "stone-scale harness",
+    "heavy coat"
+   ],
+   "shieldForms": [
+    "wall-board",
+    "tower shield"
+   ],
+   "bonusTags": [
+    "structural",
+    "grip",
+    "protection"
+   ],
+   "namePatterns": [
+    "a Dressed {form}",
+    "the Cut {form}"
+   ],
+   "tailVariant": {
+    "name": "a Leveller's {form}",
+    "tags": [
+     "structural",
+     "reveal",
+     "break"
+    ]
+   }
+  },
+  "figurist": {
+   "materials": [
+    "marked wood",
+    "drawn slate",
+    "bound cord"
+   ],
+   "weaponForms": [
+    "staff",
+    "long knife"
+   ],
+   "armorForms": [
+    "figured robe",
+    "marked coat"
+   ],
+   "shieldForms": [
+    "targe",
+    "buckler"
+   ],
+   "bonusTags": [
+    "binding",
+    "focus",
+    "reveal"
+   ],
+   "namePatterns": [
+    "a Figured {form}",
+    "the Drawn {form}"
+   ],
+   "tailVariant": {
+    "name": "a Shaper's {form}",
+    "tags": [
+     "binding",
+     "focus",
+     "hobble"
+    ]
+   }
+  },
+  "wright": {
+   "materials": [
+    "good steel",
+    "sound oak",
+    "honest brass"
+   ],
+   "weaponForms": [
+    "blade",
+    "hammer",
+    "axe"
+   ],
+   "armorForms": [
+    "made harness",
+    "sound coat"
+   ],
+   "shieldForms": [
+    "round shield",
+    "tower shield"
+   ],
+   "bonusTags": [
+    "structural",
+    "grip",
+    "standing"
+   ],
+   "namePatterns": [
+    "a Made {form}",
+    "the Sound {form}"
+   ],
+   "tailVariant": {
+    "name": "a Forge-Eternal {form}",
+    "tags": [
+     "structural",
+     "binding",
+     "grip"
+    ],
+    "note": "it improves whether or not you asked"
+   }
+  },
+  "unmaker": {
+   "materials": [
+    "fault-lined iron",
+    "spent metal",
+    "ending-marked wood"
+   ],
+   "weaponForms": [
+    "blade",
+    "hammer"
+   ],
+   "armorForms": [
+    "worn harness",
+    "spare coat"
+   ],
+   "shieldForms": [
+    "buckler"
+   ],
+   "bonusTags": [
+    "break",
+    "cold",
+    "structural"
+   ],
+   "namePatterns": [
+    "an Ending {form}",
+    "the Spent {form}"
+   ],
+   "tailVariant": {
+    "name": "a Last One's {form}",
+    "tags": [
+     "break",
+     "cold",
+     "harm"
+    ]
+   }
+  },
+  "horizon": {
+   "materials": [
+    "light alloy",
+    "road leather",
+    "waycloth"
+   ],
+   "weaponForms": [
+    "spear",
+    "bow",
+    "sling"
+   ],
+   "armorForms": [
+    "traveller's coat",
+    "light harness"
+   ],
+   "shieldForms": [
+    "targe",
+    "bracer-guard"
+   ],
+   "bonusTags": [
+    "travel",
+    "reach",
+    "escape"
+   ],
+   "namePatterns": [
+    "a Far {form}",
+    "the Road {form}"
+   ],
+   "tailVariant": {
+    "name": "a Leaver's {form}",
+    "tags": [
+     "travel",
+     "reach",
+     "stealth"
+    ]
+   }
+  },
+  "hourkeeper": {
+   "materials": [
+    "counted brass",
+    "slow-cured wood",
+    "kept iron"
+   ],
+   "weaponForms": [
+    "staff",
+    "blade"
+   ],
+   "armorForms": [
+    "vigil coat",
+    "kept harness"
+   ],
+   "shieldForms": [
+    "wall-board",
+    "targe"
+   ],
+   "bonusTags": [
+    "focus",
+    "ritual",
+    "weather"
+   ],
+   "namePatterns": [
+    "a Counted {form}",
+    "the Kept {form}"
+   ],
+   "tailVariant": {
+    "name": "an Hour-Thief's {form}",
+    "tags": [
+     "focus",
+     "binding",
+     "cold"
+    ]
+   }
+  },
+  "precursor": {
+   "materials": [
+    "precursor alloy",
+    "address-etched steel",
+    "lattice glass"
+   ],
+   "weaponForms": [
+    "blade",
+    "staff"
+   ],
+   "armorForms": [
+    "remnant harness",
+    "lattice coat"
+   ],
+   "shieldForms": [
+    "bracer-guard",
+    "targe"
+   ],
+   "bonusTags": [
+    "precursor-glimpse",
+    "translate",
+    "structural"
+   ],
+   "namePatterns": [
+    "an Old {form}",
+    "the Addressed {form}"
+   ],
+   "tailVariant": {
+    "name": "a Shutter's {form}",
+    "tags": [
+     "precursor-glimpse",
+     "binding",
+     "cold"
+    ],
+    "note": "⚠️ foreclosure as governance, carried"
+   }
+  },
+  "valley_craft": {
+   "materials": [
+    "honest iron",
+    "seasoned ash",
+    "tanned hide"
+   ],
+   "weaponForms": [
+    "axe",
+    "spear",
+    "sling",
+    "long knife"
+   ],
+   "armorForms": [
+    "work coat",
+    "hide jack"
+   ],
+   "shieldForms": [
+    "round shield",
+    "targe"
+   ],
+   "bonusTags": [
+    "grip",
+    "weather",
+    "hunt"
+   ],
+   "namePatterns": [
+    "a Valley {form}",
+    "{people}'s own {form}"
+   ],
+   "tailVariant": {
+    "name": "a plain dangerous {form}",
+    "tags": [
+     "grip",
+     "hunt",
+     "harm"
+    ],
+    "note": "⚠️ ordinary gear, and harder to see coming than any pole"
+   }
+  }
+ },
+ "designNotes": [
+  "⚠️ SHIELDS EXIST NOW, AND THEY DIDN'T. Zero in the game against 19 authored defensive logics. Every tradition gets shield forms — including the ones whose 'shield' is a bracer, a board, or a wrap.",
+  "⚠️ STILLHOLD MAKES THE BEST SHIELDS AND THE WORST WEAPONS, on purpose. That is the tradition expressed as gear rather than asserted in prose, and it is the clearest test that this grammar is doing its job.",
+  "EVERY TRADITION HAS A TAIL VARIANT, per the modes-and-tails pass. A Grave-Caller's knife, a Maw blade, a Smotherer's cord. THE TAIL IS NOT A BETTER ITEM — it is the same form with different tags, because a tail is a different answer to what the craft is FOR, not more power.",
+  "TAGS COME FROM THE TRADITION, NOT THE FORM. A blade is melee+edge whoever made it; what makes it ashwarden is death+quiet. Once Track B's matcher lands, that makes carrying gear that suits your craft mechanically real — which is the whole reason to generate any of this.",
+  "AND THE NAMING PATTERNS ARE DELIBERATELY PLAIN. 'A Pale Long Knife' and 'the Redline Spear' — no invented proper nouns, because a generator that invents names invents lore, and the engine's own rule is that it must not."
+ ]
+}

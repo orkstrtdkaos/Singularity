@@ -61,7 +61,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -114,6 +114,11 @@ export async function loadContent() {
   if (arcResponseRule?.careShift) rules.careShift = arcResponseRule.careShift;
   if (arcResponseRule?.engagement) rules.engagement = arcResponseRule.engagement;   // SNG-300: who seeks a fight   // SNG-298: how a figure changes their mind
   if (encountersRule) rules.encounters = { ...(rules.encounters || {}), ...encountersRule };
+  // SNG-300: THE ECONOMY. Registered-but-unloaded is the failure CCODE-55 catches and the one that made every
+  // encounter pay zero XP for weeks — the file existed and was whitelisted and reached nothing. Merged here in
+  // the same breath as the registration so `worth`, the currencies and the per-region need/scarcity are all
+  // readable off `rules`, which is what gives `priceShift` a price to shift.
+  if (economyRule) rules.economy = economyRule;
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
   // SNG-263: the craft-mechanics config rides the rules bag so battleRound reads it off a value it already
@@ -304,7 +309,8 @@ export async function loadContent() {
     // the GM what a reasonable grant READS like in each level/craft band, so grants are authored to FIT the
     // ceiling rather than authored big and then refused. Registered in the manifest but loaded by nothing until
     // now, which would have made it dead content (SNG-064): the numbers would clamp and the voice never arrive.
-    loadRule("earned_power_guidance", { bands: {} })
+    loadRule("earned_power_guidance", { bands: {} }),
+    loadRule("economy", null)   // SNG-300: worth bands, currencies, per-region need/scarcity — the consumer priceShift waited for
   ]);
   const genSchemas = {}; // SNG-BATCH-9 validation schemas that generate(type, context) authors against
   if (genNpc) genSchemas.npc = genNpc;

@@ -62,7 +62,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -93,7 +93,8 @@ export async function loadContent() {
     // loadRule in the second Promise.all thirty lines down, where the name resolved to undefined and
     // merged nothing. Positional destructuring makes that failure silent, so the rule is: the
     // loadRule goes in the SAME array as the name it fills.
-    loadRule("charges", null)   // SNG-316: what satisfies each prep condition, so the tick can bank a charge without reading prose
+    loadRule("charges", null),
+    loadRule("threat", null)   // SNG-322/CCODE-52: the threat ladder — bands decide the lethal flag and the warn offer   // SNG-316: what satisfies each prep condition, so the tick can bank a charge without reading prose
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -130,7 +131,8 @@ export async function loadContent() {
   // the same breath as the registration so `worth`, the currencies and the per-region need/scarcity are all
   // readable off `rules`, which is what gives `priceShift` a price to shift.
   if (economyRule) rules.economy = economyRule;
-  if (chargesRule) rules.charges = chargesRule;   // SNG-316: the charge-condition vocabulary
+  if (chargesRule) rules.charges = chargesRule;
+  if (threatRule) rules.threat = threatRule;   // SNG-322: the threat ladder   // SNG-316: the charge-condition vocabulary
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
   // SNG-263: the craft-mechanics config rides the rules bag so battleRound reads it off a value it already

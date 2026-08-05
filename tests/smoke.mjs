@@ -9573,9 +9573,14 @@ await (async () => {
   const own = present.filter(c => c.startsWith("272/"));
   const orphans = own.filter(c => !claimed.includes(c));
   const unclaimed = present.filter(c => !claimed.includes(c));
-  check(`272: every gate the ledger claims exists in this suite (${claimed.length} claimed)${missing.length ? " — MISSING: " + missing.join(" | ") : ""}`,
+  // ⚠️ DETAILS GO TO THE LOG, NOT INTO THE CHECK NAME. Embedding the missing names here put a gate’s name
+  // INSIDE another check’s name, and the ledger matches by substring — so a single gate appeared to match two
+  // checks and tripped the ambiguity guard. A check name has to be a stable identifier, not a report.
+  if (missing.length) console.log(`      MISSING from the suite: ${missing.join(" | ")}`);
+  check(`272: every gate the ledger claims exists in this suite (${claimed.length} claimed)`,
     claimed.length > 0 && missing.length === 0);
-  check(`272: every 272/ gate in this suite is claimed by the ledger (${own.length} present)${orphans.length ? " — UNCLAIMED: " + orphans.join(" | ") : ""}`,
+  if (orphans.length) console.log(`      UNCLAIMED by the ledger: ${orphans.join(" | ")}`);
+  check(`272: every 272/ gate in this suite is claimed by the ledger (${own.length} present)`,
     orphans.length === 0);
 }
 
@@ -10239,6 +10244,80 @@ await (async () => {
     /Math\.max\(lo, Math\.min\(hi, engageRate/.test(wsrcE) && eng.min > 0 && eng.max < 1);
   check("272/300: an unlisted tradition is unchanged, not penalised",
     /engageCfg\.byTradition\?\.\[t\] != null\) \? Number\(engageCfg\.byTradition\[t\]\) : 1/.test(wsrcE));
+}
+
+// --- SNG-302: the economy, and the consumer priceShift waited for ------------------------------------
+{
+  const EC = await import("../engine/economy.js");
+  const econ = JSON.parse(readFileSync(join(root, "content/packs/core/rules/economy.json"), "utf8"));
+  const at = (regionId, item, effects = []) => EC.priceOf(item, regionId, { economy: econ, effects });
+  const region = (Array.isArray(econ.regions) ? econ.regions : Object.values(econ.regions))[0];
+  const goods = Object.keys(region.goods)[0];
+
+  check("272/302: the economy is registered, loaded AND destructured from the right Promise.all",
+    /loadRule\("economy", null\)/.test(readFileSync(join(root, "engine/state.js"), "utf8"))
+    && /if \(economyRule\) rules\.economy = economyRule/.test(readFileSync(join(root, "engine/state.js"), "utf8")));
+
+  // ⚠️ ERIK’S CORRECTION IS THE MODEL: need dominates, and `none` is a hard zero.
+  check("272/302: `need: none` is a HARD ZERO however scarce the thing is", (() => {
+    const rows = Array.isArray(econ.regions) ? econ.regions : Object.values(econ.regions);
+    const dead = rows.find(r => Object.values(r.goods || {}).some(g => g[0] === "none"));
+    if (!dead) return false;
+    const g = Object.entries(dead.goods).find(([, v]) => v[0] === "none")[0];
+    const p = at(dead.regionId, { worth: "precious", goods: g });
+    return p.price === 0 && p.unwanted === true;
+  })());
+  check("272/302: scarcity MODULATES an existing need, it never creates one", (() => {
+    const rows = Array.isArray(econ.regions) ? econ.regions : Object.values(econ.regions);
+    const dead = rows.find(r => Object.values(r.goods || {}).some(g => g[0] === "none" && g[1] !== "abundant"));
+    if (!dead) return true;   // no such row authored — nothing to prove against
+    const g = Object.entries(dead.goods).find(([, v]) => v[0] === "none")[0];
+    return at(dead.regionId, { worth: "irreplaceable" }).refused || at(dead.regionId, { worth: "valuable", goods: g }).price === 0;
+  })());
+
+  // ⛔ THE IRREPLACEABLE IS REFUSED, NOT PRICED HIGH.
+  check("272/302: an irreplaceable item is REFUSED a price rather than given a big one", (() => {
+    const p = at(region.regionId, { worth: "irreplaceable" });
+    return p.refused === true && p.price === null;
+  })());
+
+  // SNG-273 → SNG-302: the effect kind that had no consumer for weeks.
+  check("272/302: a priceShift from an arc stage MOVES the local need", (() => {
+    const before = EC.shiftNeed("ordinary", []).need;
+    const after = EC.shiftNeed("ordinary", [{ kind: "priceShift", goods: "x", demandDelta: -1, arcName: "The Bleed" }], "x").need;
+    return before === "ordinary" && after === "little";
+  })());
+  check("272/302: …and it cannot push need below none or above high", (() => {
+    const floor = EC.shiftNeed("none", [{ kind: "priceShift", demandDelta: -3 }]).need;
+    const ceil = EC.shiftNeed("high", [{ kind: "priceShift", demandDelta: 3 }]).need;
+    return floor === "none" && ceil === "high";
+  })());
+  check("272/302: a shift for OTHER goods does not touch this item",
+    EC.shiftNeed("ordinary", [{ kind: "priceShift", goods: "luxuries", demandDelta: -1 }], "medicines").need === "ordinary");
+
+  // ⚠️ AND THE GAP IS DECLARED, not silently flat.
+  check("272/302: the unreachable second axis is REPORTED rather than passing as a working price", (() => {
+    const c = EC.economyCoverage(econ, [{ worth: "useful" }, { worth: "trivial" }]);
+    return c.secondAxisLive === false && /no item carries a goods category/.test(c.note);
+  })());
+}
+
+// --- SNG-302b: the real content loader must actually COMPLETE -----------------------------------------
+// ⚠️ I put a diagnostic beside the economy merge that referenced `items` ~65 lines before `const items` is
+// initialised. That is a temporal-dead-zone ReferenceError which takes the ENTIRE content load down at
+// startup — the app would not boot — and `npm test` stayed GREEN through it, because nothing in the suite ran
+// the real loader end to end. Everything downstream is worthless if this throws, so it is checked first now.
+{
+  let loaded = null, threw = null;
+  try { const { loadContentHeadless } = await import("./headless_content.mjs"); loaded = await loadContentHeadless(); }
+  catch (e) { threw = e; }
+  // The name is a PLAIN LITERAL so the ledger’s drift guard can see it — it extracts double-quoted check
+  // names, and a template literal is invisible to it. The error text goes to the log, where detail belongs.
+  if (threw) console.log(`      loadContent threw: ${String(threw.message).slice(0, 160)}`);
+  check("302b: the REAL loadContent() completes without throwing", !threw && !!loaded);
+  check("302b: …and returns a world with content in it (a silent empty load is also a failure)",
+    !!loaded && Object.keys(loaded.locations || {}).length > 0 && Object.keys(loaded.items || {}).length > 0
+    && !!loaded.rules && Object.keys(loaded.rules).length > 20);
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

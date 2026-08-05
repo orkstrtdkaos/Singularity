@@ -70,6 +70,16 @@ for (const g of FIELDS) {
   console.log("    ⚠️ `priceShift` has NO consumer in the engine — see arceffects.js:EFFECT_CONSUMERS.\n");
 }
 
+// The economy: authored richly, but the second axis needs items to carry a goods category.
+{
+  const { economyCoverage } = await import("../engine/economy.js");
+  const c = economyCoverage(CONTENT.rules?.economy, Object.values(CONTENT.items || {}));
+  console.log(`  Economy — ${c.withWorth}/${c.items} items carry a worth band, ${c.withGoods}/${c.items} carry a goods category`);
+  console.log(`    ${c.categories} goods categories · ${c.regionsPriced} regions priced`);
+  console.log(`    → ${c.note}
+`);
+}
+
 // Title patterns: authored vs actually reachable, which are different questions.
 {
   const pats = CONTENT.rules?.titles?.patterns || [];

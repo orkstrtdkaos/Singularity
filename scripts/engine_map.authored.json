@@ -400,5 +400,10 @@
   "purpose": "SNG-299: answers 'who or what is that?' for any name the world has a record of — figures, arcs, titles and tiers — and says where the fuller account lives.",
   "playerVisibleSurface": "Any known name in any rendered prose is underlined and clickable; the popup gives what the world knows, with a codex button when a page exists.",
   "whatMakesItFire": "Clicking a linkified name; the index is rebuilt on every render from the roster, the arcs, the player's codex and the titles actually earned."
+ },
+ "economy.js": {
+  "purpose": "SNG-302: prices a carried thing against where it is — worth band times local need times scarcity, with need dominating and `none` a hard zero.",
+  "playerVisibleSurface": "What a trader will say a thing is worth, and the refusal when something is not for sale at any price.",
+  "whatMakesItFire": "Carrying anything in a region with an economy; an arc stage's priceShift moves the local need underneath it."
  }
 }

@@ -1,3 +1,58 @@
+## CCODE-148 — SNG-302: the economy has a consumer. The last 2.0.0 row is closed.
+
+Aevi authored the model, registered it, loaded it — and it still did not reach `rules`.
+
+### ⚠️ A THIRD DISTINCT WAY FOR THIS WIRING TO BE HALF-DONE
+
+`economyRule` was destructured from the **first** `Promise.all`, and `loadRule("economy")` was added to the
+**second** one, thirty lines further down. The name resolved to `undefined`, `rules.economy = economyRule`
+merged nothing, and every check passed: registered ✓, loaded ✓, merged ✓ — destructured from the wrong array.
+
+That is now three separate failure modes for the same six lines of wiring: **not registered** (the zero-XP
+bug), **registered but never loaded** (which Aevi caught herself with the check, in under a minute), and now
+**loaded into a name that belongs to a different array**. Positional destructuring is what makes the third
+one silent — exactly how my own `encounters` load once landed in `coliseumGrid`'s slot.
+
+### THE MODEL, WITH ERIK'S CORRECTION INTACT
+
+`price = worthBand × need × scarcity`, and **need dominates**: `none` is a hard zero, because nobody bids on
+what nobody uses. Scarcity only modulates an existing need. **The irreplaceable is REFUSED a price rather
+than given a large one** — a number on the unfinished spear would be a lie with a decimal point on it.
+
+`priceShift` is live: an arc stage now moves the local need along its own ladder, clamped so it cannot push
+below `none` or above `high`, and only for the goods it names. **That was the last inert effect kind, and the
+last open row on 2.0.0.**
+
+The consumer is the GM block, per your own note that traders are people rather than shops: it hands over the
+numbers for what the player is carrying, in the region they are in, so the trader can say *"ten for those and
+I'm being generous"* while the number is simply true underneath.
+
+### ⚠️ THE SECOND AXIS IS NOT LIVE YET — 30/30 items have a worth band, 0/30 have a goods category
+
+You authored 12 goods categories and need/scarcity for all 25 regions, including the dead lists. **Nothing
+maps an item into a category**, so `regionDemand` finds nothing for every item in the game and both axes fall
+back to `ordinary`: a Traveler's Pack is 4 in the Crossing and 4 in the Quickwood.
+
+The prices are not wrong — that is the band doing its job — they are just not yet LOCAL, which is the entire
+point of a two-axis model. Assigning goods is authorship (whether a focus is `worked_light` or
+`precursor_salvage` is a judgement, not a lookup), so it is declared in `economyCoverage`, printed at load,
+and reported by `npm run coverage`. **The moment items carry `goods`, every region table you wrote goes live
+with no engine change.**
+
+### And I broke the content loader while reporting that, and the suite did not notice
+
+I put the coverage diagnostic beside the economy merge — which runs ~65 lines before `const items` exists. A
+temporal-dead-zone `ReferenceError` that takes the **entire content load** down at startup: the app would not
+boot. **`npm test` stayed green through it**, because nothing in the suite ran the real loader end to end.
+
+There is now a gate that does, first, before anything else: `loadContent()` must complete AND return a world
+with content in it. Falsified by planting a bad reference and watching it go red with the error named.
+
+Two smaller things fell out of it: a check NAME must be a stable literal, not a template that appends detail
+— embedding names inside another check's name made one gate appear to match two checks and tripped the
+ledger's own ambiguity guard, and a template-literal name is invisible to the drift extractor entirely.
+Details go to the log now; names stay identifiers.
+
 ## CCODE-147 — CORRECTION: the personal-life content was authored. My number was stale.
 
 Erik: *"I thought she authored the verbs."* He is right and I was wrong.

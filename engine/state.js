@@ -39,7 +39,8 @@ export function resolveLocationId(ref, locations = {}) {
   return null;
 }
 
-import { unusablePatterns as unusableTitlePatterns, orderSensitivePatterns } from "./titles.js";   // SNG-287: report patterns with no slot source
+import { unusablePatterns as unusableTitlePatterns, orderSensitivePatterns } from "./titles.js";
+import { economyCoverage } from "./economy.js";   // SNG-302: say at load whether the second price axis is reachable   // SNG-287: report patterns with no slot source
 
 export async function loadContent() {
   const index = await fetchJSON("content/packs/core/manifest.json");
@@ -82,7 +83,12 @@ export async function loadContent() {
     loadRule("titles", null),                                         // SNG-287: generative titles — patterns whose slots must be fillable
     loadRule("arc_response", null),                                    // SNG-275: the world-sim dials — 21 of them, unauthorable until now
     loadRule("encounters", null),                                       // SNG-271/1a: the XP table — unregistered since forever, so every encounter paid ZERO
-    loadRule("coliseum_grid", { cells: [] })                             // SNG-149/CCODE-89: the Great Coliseum's blind grid — 36 authored cells the engine now reads
+    loadRule("coliseum_grid", { cells: [] }),
+    // SNG-300 — ⚠️ IN THIS ARRAY, not the second one. `economyRule` is destructured from THIS Promise.all,
+    // and the loadRule had been added to the OTHER one thirty lines down, so the name resolved to undefined
+    // and `rules.economy = economyRule` merged nothing. Registered ✓ loaded ✓ destructured ✗ — a third
+    // distinct way for this same wiring to be half-done, and the one positional destructuring makes silent.
+    loadRule("economy", null)                             // SNG-149/CCODE-89: the Great Coliseum's blind grid — 36 authored cells the engine now reads
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -309,8 +315,7 @@ export async function loadContent() {
     // the GM what a reasonable grant READS like in each level/craft band, so grants are authored to FIT the
     // ceiling rather than authored big and then refused. Registered in the manifest but loaded by nothing until
     // now, which would have made it dead content (SNG-064): the numbers would clamp and the voice never arrive.
-    loadRule("earned_power_guidance", { bands: {} }),
-    loadRule("economy", null)   // SNG-300: worth bands, currencies, per-region need/scarcity — the consumer priceShift waited for
+    loadRule("earned_power_guidance", { bands: {} })
   ]);
   const genSchemas = {}; // SNG-BATCH-9 validation schemas that generate(type, context) authors against
   if (genNpc) genSchemas.npc = genNpc;
@@ -354,6 +359,14 @@ export async function loadContent() {
     randomEncounters = { ...randomEncounters, encounters: [...(randomEncounters.encounters || []), ...frameExemplarEncounters(frameKindsDoc)] };
   }
 
+  // SNG-302 — ⚠️ REPORTED HERE, WHERE `items` EXISTS. I first put this beside the economy merge, which runs
+  // ~65 lines BEFORE `const items` is initialised — a temporal-dead-zone ReferenceError that took the whole
+  // content load down at startup. `npm test` stayed GREEN: nothing in the suite exercises the real loader far
+  // enough to hit it, which is worth knowing about the suite as much as about the bug.
+  {
+    const cov = economyCoverage(rules.economy, Object.values(items));
+    if (rules.economy && !cov.secondAxisLive) console.log(`[economy] ${cov.withGoods}/${cov.items} items carry a goods category — ${cov.note}`);
+  }
   console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length} traditionMotivations=${Object.keys(traditionMotivations?.traditions || {}).length} npcInteriority=${Object.keys(npcInteriority?.npcs || {}).length} traditionAesthetics=${Object.keys(traditionAestheticsDoc?.traditions || {}).length} wardDenials=${Object.keys(frameContentDoc?.wardDenials || {}).filter(k => k[0] !== "_").length} challengePremises=${Object.keys(frameContentDoc?.challengePremises || {}).filter(k => k[0] !== "_").length} frameKinds=${Object.keys(frameKindsDoc?.frameKinds || {}).length} frameExemplarEncounters=${(randomEncounters?.encounters || []).filter(e => e.fromFrameExemplar).length} consumerContractTypes=${Object.keys(consumerMapDoc?.contentTypes || {}).length}`);
   const content = { craftMechanics, spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,

@@ -39,6 +39,7 @@ import { companionsForGM, activeCompanions } from "./companions.js";
 import { questsForGM, structuredQuestsForGM, traditionArcForGM, npcQuestsForGM, practicedTraditions } from "./quests.js";
 import { legendsForGM } from "./legends.js"; // SNG-208 wiring: legends pursuable as teachers + wants-as-quests
 import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to become the next thread
+import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HERE, so the GM can be honest about it
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
@@ -148,6 +149,23 @@ export const GM_CONTEXT = [
     }) },
 
   // ---- shared by turn + ask + gambit ----
+  // SNG-302 — WHAT IT FETCHES HERE. Aevi: "traders are NPCs not shops — the price model exists so the GM has
+  // a number to be honest about, not so a UI can render a catalogue." So this hands the GM the numbers for
+  // what the player is actually carrying, in the region they are actually in, and lets them say it in
+  // character. ⛔ An irreplaceable thing comes through as a REFUSAL, never a big number.
+  { key: "worthHereDetail", builder: "economy.priceLine (SNG-302)", carries: ["what a carried thing fetches here", "why"],
+    reachedBy: "carrying anything, anywhere with an economy", spec: "§15", views: ["turn"],
+    build: (env) => {
+      const economy = env.CONTENT?.rules?.economy;
+      const region = env.location?.regionId || env.location?.region || null;
+      if (!economy || !region) return null;
+      const lines = [];
+      for (const it of (env.character?.inventory || []).slice(0, 8)) {
+        const l = priceLine(it, region, { economy, effects: env.arcEffects || [] });
+        if (l) lines.push(`${it.name}: ${l.text}`);
+      }
+      return lines.length ? lines.join(" · ") : null;
+    } },
   { key: "inventoryDetail", builder: "inventory.inventoryForGM", carries: ["carried items", "uses"],
     reachedBy: "always", spec: "§12", views: ["turn", "ask", "gambit"],
     build: (env) => inventoryForGM(env.character) },

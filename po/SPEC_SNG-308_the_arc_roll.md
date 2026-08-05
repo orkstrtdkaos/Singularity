@@ -42,15 +42,21 @@ read by the side that owns them, is *who we must protect*. Read by the other sid
 | **streak** | `ws.arcUnheldStreak` | ⚠️ constancy — the holding bonus, visible |
 | status | `ws.epicStatus` | active / wounded / dead / sealed |
 | **how** | derived | ⚠️ **THE "AND HOW THEY HAD THE EFFECTS" COLUMN** |
-### ⚠️ THE "HOW" COLUMN IS THE POINT
-A number tells you *who* to kill. **The `how` tells you whether you can.** It is one derived phrase from that
-figure's dominant deed source:
-- *"by winning"* — contests. **Beatable in a fight.**
-- *"by holding"* — a long streak, few contests. **Cannot be beaten off, only removed.**
-- *"by mending"* — a healer. **Removing them raises the whole front's mortality.**
-- *"by standing over"* — guards. **They are why your last strike failed.**
-- *"by turning"* — moved a stage. **The most dangerous entry on the board.**
-**Two figures at identical net push and opposite `how` require completely different answers, and that is what
+### ⚠️ THE "HOW" COLUMN IS THE POINT — AND MY FIRST LABELS WERE JARGON
+**Erik caught these, hours after I wrote the directive against exactly this:** *"Standing over WHAT? Turning
+WHAT? Winning — I would guess you mean battle victories or duel wins."*
+**He is right. "By holding", "by standing over", "by turning" are MY internal shorthand** — words that carry
+meaning because I have been using them all session, and none because they name nothing. **A column label is
+the worst place for that: there is no room for context to rescue it.**
+**The labels, said properly:**
+| label | what it actually means | what it tells you about removing them |
+|---|---|---|
+| **Wins fights** | most of their push comes from **won duels and arc contests** | **beatable in a fight — send someone stronger** |
+| **Never leaves** | push comes from **holding one position for many consecutive passes**, rarely fighting | **you cannot beat them off a front; they have to be killed or lured away** |
+| **Heals the wounded** | carries a healing craft and **shortens their side's recoveries** | **killing them raises the whole front's death rate, not just their own** |
+| **Guards others** | **intercepts strikes aimed at their own side's people** | **they are why your last assassin failed — remove them first** |
+| **Moved the arc** | has **personally pushed this arc to a new stage** | **the most dangerous name on the board; everything else is contributing, this one has changed the world** |
+**Two figures with the same net push and different rows here need completely different answers, which is what
 turns a leaderboard into a plan.**
 
 ## WHAT IT NEEDS

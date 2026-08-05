@@ -1,3 +1,47 @@
+## CCODE-145 — SNG-299: every name is clickable, and answers from the record
+
+Erik: *"all of these new titles and terms and npcs need to have clickable popups describing who and what they
+are, with a link to the codex page for details."*
+
+A fortnight of work put names in the player's face — figures who rose, titles the world found, arcs that
+turned, tiers that mean something now — and every one was a bare string. *"The Unravelled Mind, Whom The
+Cogitants Named, is called epic this season"* has three things in it a player could not look up.
+
+Now any name the world can answer for is underlined in place, wherever it appears:
+
+```
+  Neth, Who Has Buried More Than She Has Known  · figure
+    Called Whom the Ashwardens Named.
+    legendary — they have lasted, and been counted
+    Of the ashwarden.  ·  Master
+    Wants: That no one dies unattended in her reach.
+    Currently caught up in: What Wakes Beneath.
+    [Read the codex page]
+```
+
+**⛔ IT ANSWERS ONLY FROM THE RECORD, AND RETURNS NOTHING WHEN THERE IS NONE.** Rung from `tierOf`, cares from
+`currentCares`, title from `figureTitles`, fate from `epicStatus`. A name with no record is simply not made
+clickable — a popup reading *"a figure of the valley"* is worse than no popup, because it promises a lookup
+and delivers a shrug. Same rule as the title slots and the arc effects. The codex button appears **only where
+a codex page actually exists**, for the same reason.
+
+An arc gives its `publicFace` and **never** its sealed `truth` — gated, because a popup is exactly the kind of
+convenience surface a spoiler leaks through.
+
+### Two things the browser caught that reasoning did not
+
+**Linkifying walks TEXT NODES, not rendered HTML.** A regex over markup would happily rewrite inside an
+attribute or a tag and corrupt exactly the screens nobody tested. The walker cannot touch markup at all and
+skips existing controls — verified against a real DOM: a name inside a `<button>` stayed plain, a
+`title="The Poles Pull"` attribute stayed intact.
+
+**And that same test showed the first version linked only the FIRST name in a sentence.** *"The Starless One
+has dug in over The Green Schism"* left the arc as plain text — the half a player is least likely to
+recognise. Every match is linked now, earliest first, longest name winning a tie so a full name beats the
+surname inside it.
+
+The pass runs from `chrome()`, so every screen gets it and no future render can forget to wire it.
+
 ## CCODE-144 — SNG-298: NPCs change their minds
 
 Erik: *"I want NPCs to be able to grow and evolve too — their cares and wants might shift or they might gain

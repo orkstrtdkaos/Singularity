@@ -1,0 +1,624 @@
+{
+  "schemaVersion": 1,
+  "id": "char-msgpisca",
+  "playerKey": "player-s9z9u1",
+  "name": "Splarf",
+  "origin": "numinous",
+  "nativeTradition": "numinous",
+  "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
+  "background": "orphan",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 4,
+    "mental": 2,
+    "social": 2,
+    "practical": 4
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "beastfriend",
+      "level": 1
+    },
+    {
+      "abilityId": "storykeeper",
+      "level": 1
+    },
+    {
+      "abilityId": "numen_sense",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "steady_soul",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "the_unbroken_practice",
+      "level": 1,
+      "native": true
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 35,
+  "health": 35,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "bonusTags": [
+        "weather",
+        "travel",
+        "survival"
+      ],
+      "consumable": true,
+      "pinned": true
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "the_thinning",
+  "activeScene": {
+    "locationId": "the_thinning",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Splarf wakes at The Thinning to a settlement gripped by the Water Crisis and whispers of something stirring beneath the world's crafts.",
+        "narration": "You wake to the sound of the veil thinning. Not a sound that ears hear — a sound that runs through the bones, a tone that slides between the notes, a presence-made-audible. The Thinning is waking up.\n\nThe lean-to you've sheltered in for the night sits at the edge of the settlement, where buildings give way to grass and the grass gives way to the thin places where the world gets negotiable. Morning light here doesn't fall straight. It bends. The air tastes like copper and honeysuckle, flavors that don't belong to spring. Through the open doorway you can see Boo — or the shadow-shape that is probably Boo — sitting exactly where it was when you slept, watching the space between the trees where something used to be.\n\nFolk are moving in the settlement behind you, voices taut and practical. You catch fragments as you roll from your bedroll: boiled water, upstream, sick families. The Water Crisis has reached this far. But there's something else underneath it — a tremor in how people are speaking, a word that keeps surfacing: substrate. Something under everything is coming back online.\n\nBoo's head turns toward the deeper wood. Toward the veil."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You wake to the sound of the veil thinning. Not a sound that ears hear — a sound that runs through the bones, a tone that slides between the notes, a presence-made-audible. The Thinning is waking up.\n\nThe lean-to you've sheltered in for the night sits at the edge of the settlement, where buildings give way to grass and the grass gives way to the thin places where the world gets negotiable. Morning light here doesn't fall straight. It bends. The air tastes like copper and honeysuckle, flavors that don't belong to spring. Through the open doorway you can see Boo — or the shadow-shape that is probably Boo — sitting exactly where it was when you slept, watching the space between the trees where something used to be.\n\nFolk are moving in the settlement behind you, voices taut and practical. You catch fragments as you roll from your bedroll: boiled water, upstream, sick families. The Water Crisis has reached this far. But there's something else underneath it — a tremor in how people are speaking, a word that keeps surfacing: substrate. Something under everything is coming back online.\n\nBoo's head turns toward the deeper wood. Toward the veil.",
+      "sceneSummary": "Splarf wakes at The Thinning to a settlement gripped by the Water Crisis and whispers of something stirring beneath the world's crafts.",
+      "scene": {
+        "setting": "A lean-to shelter at the edge of The Thinning settlement, where the veil between worlds runs thin — morning light bent and strange, the air tasting of copper and honeysuckle. Early spring. The settlement proper lies behind, voices carrying on the wind.",
+        "npcsPresent": [
+          {
+            "name": "Boo",
+            "state": "Sitting at the edge of shadows, watching the space between the trees — still and attentive in a way that feels like warning."
+          }
+        ],
+        "objects": [
+          "Your bedroll",
+          "Traveler's Pack",
+          "Waterskin",
+          "The open doorway facing the thin places"
+        ],
+        "threads": [
+          "What the veil is trying to tell you through that bent light and bone-deep tone",
+          "The Water Crisis — families upstream falling ill, boiling water becoming standard",
+          "What Wakes Beneath — something under everything coming back online",
+          "Veln Ashpause's death at the braided confluence — a name that reaches even here",
+          "What Boo is watching in the space between the trees"
+        ]
+      },
+      "choices": [
+        {
+          "label": "Step out into the thin light and let your senses open — feel what the veil is trying to show you.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 12,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "numen_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Follow Boo's gaze into the space between the trees — see what the dark has already found.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 10,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "beastfriend",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Move into the settlement and ask people directly what they've heard — the Water Crisis, the stirring, the death at the confluence.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 9,
+          "intentTags": [
+            "investigate",
+            "careful"
+          ],
+          "abilityId": "storykeeper",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Pack up and move — The Thinning doesn't feel safe right now, and the valley is speaking in a language that feels loud.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Boo's sudden, absolute attention — the way it has turned to watch you watch it, as if something has shifted in the settlement or the veil itself",
+        "from": "What Wakes Beneath advancing to Stirring — the substrate flickering — something the dark knows before anything else"
+      },
+      "stageOps": [],
+      "npcUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "what_wakes_beneath",
+          "label": "What Wakes Beneath",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The substrate that runs the crafts is flickering in more than one place at once. Something under everything is coming back online. The Umbrals and other sensitive people are noticing first.",
+          "links": [
+            "the_water_crisis"
+          ]
+        },
+        {
+          "topic": "the_water_crisis",
+          "label": "The Water Crisis",
+          "kind": "event",
+          "entityId": null,
+          "fact": "Families upstream are falling ill. Boiling water has become universal practice. Harmonic and Radiant leaders are trading public accusations. The crisis has reached the valley's lower settlements.",
+          "links": [
+            "what_wakes_beneath"
+          ]
+        },
+        {
+          "topic": "veln_ashpause_death",
+          "label": "Veln Ashpause — Killed",
+          "kind": "event",
+          "entityId": null,
+          "fact": "Veln Ashpause was killed at the braided confluence below the rise in the Disputed Zone. The news has reached even The Thinning.",
+          "links": []
+        }
+      ],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "Early morning at The Thinning — bent light that refuses to fall straight, honeysuckle and copper in the air made visible as a shimmer. A cat-shaped shadow at the edge of the frame, watching into a space between trees where the world is negotiable. The veil made palpable.",
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/Early%20morning%20at%20The%20Thinning%20%E2%80%94%20bent%20light%20that%20refuses%20to%20fall%20straight%2C%20honeysuckle%20and%20copper%20in%20the%20air%20made%20visible%20as%20a%20shimmer.%20A%20cat-shaped%20shadow%20at%20the%20edge%20of%20the%20frame%2C%20watching%20into%20a%20space%20between%20trees%20where%20the%20world%20is%20negotiable.%20The%20veil%20made%20palpable.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=16124&nologo=true"
+    },
+    "sceneState": {
+      "setting": "A lean-to shelter at the edge of The Thinning settlement, where the veil between worlds runs thin — morning light bent and strange, the air tasting of copper and honeysuckle. Early spring. The settlement proper lies behind, voices carrying on the wind.",
+      "npcsPresent": [
+        {
+          "name": "Boo",
+          "state": "Sitting at the edge of shadows, watching the space between the trees — still and attentive in a way that feels like warn"
+        }
+      ],
+      "objects": [
+        "Your bedroll",
+        "Traveler's Pack",
+        "Waterskin",
+        "The open doorway facing the thin places"
+      ],
+      "threads": [
+        "What the veil is trying to tell you through that bent light and bone-deep tone",
+        "The Water Crisis — families upstream falling ill, boiling water becoming standard",
+        "What Wakes Beneath — something under everything coming back online",
+        "Veln Ashpause's death at the braided confluence — a name that reaches even here",
+        "What Boo is watching in the space between the trees"
+      ]
+    },
+    "beats": 1
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 9,
+    "realAnchor": null
+  },
+  "companions": [
+    "hush"
+  ],
+  "companionNames": {
+    "hush": "Boo"
+  },
+  "quests": [],
+  "npcRegistry": {},
+  "placeMemory": {
+    "the_thinning": {
+      "visits": 1,
+      "notes": [],
+      "flags": {}
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 2,
+        "sinceDay": 13
+      }
+    },
+    "arcStages": {
+      "arc_what_wakes_beneath": {
+        "othersPush": 1
+      },
+      "the_second_manifestation": {
+        "othersPush": 1
+      }
+    },
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 36,
+        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — Sorel, Radiant archivist, arrives on the ridgeline and confirms the mound on the northeast-by-east bearing — she was with the Council survey team until markers were moved; the interval she recorded ma (near gen-the-lower-chamber)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — Sorel, Radiant archivist and water-accountability office witness, commits to the investigation of the upstream pre-Transition structure and joins Cellaceron's party moving northeast-by-east into the D (near gen-object-object)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — The Council's secondary purification system is not yet complete — they are racing the preparation order's timeline with infrastructure that may not be ready. (near gen-object-object)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "This reaches your area — The Council's secondary purification system is incomplete without the authentication sequence housed at the upstream structure. Whoever reaches it first determines the valley's response to the prepara (near gen-object-object)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "Word reaches you: Veln Ashpause was killed at the braided confluence below the rise in the Disputed Zone. (near millbrook)",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 36,
+        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
+        "tier": "event"
+      }
+    ],
+    "unseenNews": [],
+    "lastGenCount": 887,
+    "lastSharedReadAt": "2026-08-05T23:17:21.988Z",
+    "lastTickWorldDay": 36,
+    "lastCanonWorldDay": 36,
+    "pressureQueue": [],
+    "turnsSinceOffer": 0,
+    "recentOffers": [
+      {
+        "thing": "Boo's sudden, absolute attention — the way it has turned to watch you watch it, as if something has shifted in the settlement or the veil…",
+        "from": "What Wakes Beneath advancing to Stirring — the substrate flickering — something the dark knows before anything else"
+      }
+    ]
+  },
+  "domains": {
+    "primary": "numinous",
+    "secondary": "hourkeeper",
+    "tertiary": "churnfolk"
+  },
+  "schools": {
+    "numinous": "num_unbodied",
+    "hourkeeper": "hou_keeping",
+    "churnfolk": "chu_riding"
+  },
+  "form": "Normal homely dude.",
+  "bio": {
+    "hometown": "Crestfall Notch, a wind-scoured saddle pass in the upper Harmonic Heights where the ridge-currents create near-constant low resonance — not a proper Heights settlement, just a handful of families who serviced the old relay infrastructure before the De-technologizing and then simply stayed, growing root vegetables in terraced shelves cut into the rock face",
+    "residence": "A rented lean-to workshop bolted to the outer wall of a granary on the valley floor, in the loose market settlement of Dirtmouth Crossing — drafty, cluttered with half-repaired tools, but his; he sleeps on a cot wedged between a workbench and a wall hung with other people's broken things",
+    "livelihood": "Itinerant mending — he walks a rotating circuit of valley-floor farms and lower-Heights outposts, fixing what the De-technologizing left behind: hand pumps, ox harnesses, millstone housings, the occasional photonic lamp whose crystal mount has cracked. He charges in grain, meal, or coin, whatever a household can spare",
+    "hobbies": "Rough-stone carving (he carries a small chisel and works river cobbles into dense, unpretty animal shapes while he walks); load-bearing — he voluntarily takes on the heaviest physical labor he can find in each settlement, less for pay than for the clean satisfaction of it; and a quiet habit of sitting near the Heights resonance vents at dusk to listen, though he could not explain why",
+    "motivation": "The family that took Splarf in after his parents died — a mending woman named Hoss and her elderly father — lost their Notch lease two winters ago to a resource claim filed by a Heights tone-guild asserting ancestral acoustic rights over the pass. Splarf watched Hoss pack everything she owned into a single cart and walk downhill without a word. He wants to find the specific document, the specific clerk, the specific decision that made that legal — not to overturn the world, just to understand exactly how a family gets erased on paper, and whether anything can be written back",
+    "story": "Splarf was left at Crestfall Notch as an infant — no note, no name anyone recognized — and raised communally by the pass families until Hoss formally took him in at age four. He grew into the kind of person a settlement leans on without noticing: the one who re-digs the drainage channel before anyone else sees it flooding, who carries the injured neighbor down three switchbacks without complaint. When the tone-guild eviction came, his physical capability meant nothing against ink and seal, and that specific helplessness lodged in him like a splinter. He has spent two years on the valley circuit now, fixing things and quietly asking questions of anyone who has dealt with guild claims, Plateau light-law, or valley-floor common-right traditions — building, slowly and without a plan, toward the moment he understands enough to do something that actually counts."
+  },
+  "subAttributes": {
+    "strength": 4,
+    "agility": 4,
+    "reason": 2,
+    "insight": 2,
+    "presence": 2,
+    "rapport": 2,
+    "craft": 4,
+    "wits": 4
+  },
+  "pendingSubPoints": 2,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "what-wakes-beneath": {
+        "id": "what-wakes-beneath",
+        "label": "What Wakes Beneath",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The substrate that runs the crafts is flickering in more than one place at once. Something under everything is coming back online. The Umbrals and other sensitive people are noticing first."
+        ],
+        "links": [
+          "the-water-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "the-water-crisis": {
+        "id": "the-water-crisis",
+        "label": "The Water Crisis",
+        "kind": "event",
+        "facts": [
+          "[d1] Families upstream are falling ill. Boiling water has become universal practice. Harmonic and Radiant leaders are trading public accusations. The crisis has reached the valley's lower settlements."
+        ],
+        "links": [
+          "what-wakes-beneath"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "veln-ashpause-death": {
+        "id": "veln-ashpause-death",
+        "label": "Veln Ashpause — Killed",
+        "kind": "event",
+        "facts": [
+          "[d1] Veln Ashpause was killed at the braided confluence below the rise in the Disputed Zone. The news has reached even The Thinning."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {
+    "stealth": 13
+  },
+  "aptitudes": [
+    "shadow",
+    "naive"
+  ],
+  "actionCount": 0,
+  "grantsVersion": 1,
+  "precursorAccess": [],
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "grantedAptitudes": [
+    "shadow",
+    "naive"
+  ],
+  "peopleDisposition": {
+    "numinous": 4,
+    "hourkeeper": 2,
+    "churnfolk": 1,
+    "enginewright": -1
+  },
+  "standingLedger": [
+    {
+      "at": 1,
+      "kind": "seed",
+      "entries": [
+        {
+          "people": "numinous",
+          "delta": 4,
+          "why": "born to this people"
+        },
+        {
+          "people": "hourkeeper",
+          "delta": 2,
+          "why": "kin to this people"
+        },
+        {
+          "people": "churnfolk",
+          "delta": 1,
+          "why": "a hand in this people's craft"
+        },
+        {
+          "people": "enginewright",
+          "delta": -1,
+          "why": "the far side of the circle from your own"
+        }
+      ],
+      "text": "Your birth and training are known: numinous +4, hourkeeper +2, churnfolk +1, enginewright -1."
+    }
+  ],
+  "nativeGrantsVersion": 1,
+  "reconcileVersion": 22,
+  "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Early morning at The Thinning — bent light that refuses to fall straight, honeysuckle and copper in the air made visible as a shimmer. A cat-shaped shadow at the edge of the frame, watching into a spa",
+      "url": "https://image.pollinations.ai/prompt/Early%20morning%20at%20The%20Thinning%20%E2%80%94%20bent%20light%20that%20refuses%20to%20fall%20straight%2C%20honeysuckle%20and%20copper%20in%20the%20air%20made%20visible%20as%20a%20shimmer.%20A%20cat-shaped%20shadow%20at%20the%20edge%20of%20the%20frame%2C%20watching%20into%20a%20space%20between%20trees%20where%20the%20world%20is%20negotiable.%20The%20veil%20made%20palpable.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=16124&nologo=true",
+      "caption": "Splarf wakes at The Thinning to a settlement gripped by the Water Crisis and whispers of s",
+      "worldDay": 36,
+      "at": "2026-08-05T23:17:43.209Z"
+    },
+    {
+      "kind": "portrait",
+      "prompt": "Splarf",
+      "url": "https://image.pollinations.ai/prompt/Normal%20homely%20dude.%2C%20full-body%20character%20portrait%2C%20named%20Splarf%2C%20of%20the%20numinous%2C%20orphan%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20The%20family%20that%20took%20Splarf%20in%20after%20his%20parents%20died%20%E2%80%94%20a%20mending%20woman%20named%20Hoss%20and%20her%20elderly%20father%20%E2%80%94%20lost%20their%20N%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=61326&nologo=true",
+      "caption": "Splarf — numinous",
+      "worldDay": 36,
+      "at": "2026-08-05T23:17:21.286Z"
+    }
+  ],
+  "portrait": "https://image.pollinations.ai/prompt/Normal%20homely%20dude.%2C%20full-body%20character%20portrait%2C%20named%20Splarf%2C%20of%20the%20numinous%2C%20orphan%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20The%20family%20that%20took%20Splarf%20in%20after%20his%20parents%20died%20%E2%80%94%20a%20mending%20woman%20named%20Hoss%20and%20her%20elderly%20father%20%E2%80%94%20lost%20their%20N%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=61326&nologo=true",
+  "personalArc": {
+    "id": "splarf-thread",
+    "name": "The Thread of Crestfall Notch, A Wind Scoured Saddle Pass In The Upper Harmonic Heights Where The Ridge Currents Create Near Constant Low Resonance — Not A Proper Heights Settlement, Just A Handful Of Families Who Serviced The Old Relay Infrastructure Before The De Technologizing And Then Simply Stayed, Growing Root Vegetables In Terraced Shelves Cut Into The Rock Face",
+    "arcId": "splarf_personal_arc",
+    "boundToCharacter": "Splarf",
+    "boundToPlayer": "player-s9z9u1",
+    "region": "valley",
+    "tier": "personal",
+    "premise": "Splarf carries an unfinished thing: The family that took Splarf in after his parents died — a mending woman named Hoss and her elderly father — lost their Notch lease two winters ago to a resource claim filed by a Heights tone-guild asserting ancestral acoustic rights over the pass. Splarf watched Hoss pack everything she owned into a single cart and walk downhill without a word. He wants to find the specific document, the specific clerk, the specific decision that made that legal — not to overturn the world, just to understand exactly how a family gets erased on paper, and whether anything can be written back. The valley will give them the chance to face it.",
+    "stakes": "who they become when the thing they left behind finally catches up",
+    "legendNpc": null,
+    "legend": null,
+    "stages": [
+      {
+        "id": "s1",
+        "objective": "a first sign of The family that took Splarf in after his parents died — a mending woman named Hoss and her elderly father — lost their Notch lease two winters ago to a resource claim filed by a Heights tone-guild asserting ancestral acoustic rights over the pass. Splarf watched Hoss pack everything she owned into a single cart and walk downhill without a word. He wants to find the specific document, the specific clerk, the specific decision that made that legal — not to overturn the world, just to understand exactly how a family gets erased on paper, and whether anything can be written back surfaces in the valley"
+      },
+      {
+        "id": "s2",
+        "objective": "the thread deepens — what it costs to pull it becomes clear"
+      },
+      {
+        "id": "s3",
+        "objective": "the reckoning — and the choice of what to do with it"
+      }
+    ],
+    "routes": {
+      "numinous": "answer it as your people would",
+      "seek": "seek the truth of it, wherever it leads"
+    },
+    "outcomes": [
+      {
+        "id": "numinous",
+        "name": "Numinous",
+        "effects": []
+      },
+      {
+        "id": "seek",
+        "name": "Seek",
+        "effects": []
+      }
+    ],
+    "structured": true,
+    "source": "personal_fallback",
+    "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
+  },
+  "updatedAt": 1785971863209,
+  "rev": 5,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {},
+    "creature": {},
+    "item": {}
+  },
+  "company": [],
+  "_pinsInitialized": true,
+  "regionsKnown": {
+    "the_numinous_reach": 1
+  },
+  "opLossPending": false,
+  "_applyFailures": null,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-08-05T23:17:43.184Z",
+      "lastAt": "2026-08-05T23:17:43.184Z",
+      "startDay": 36,
+      "endDay": 36,
+      "beats": 1
+    }
+  ],
+  "establishedFacts": [],
+  "_opLedger": {
+    "offer": {
+      "applied": 1,
+      "rejected": 0,
+      "lastWhy": null
+    }
+  },
+  "_pendingArrival": null,
+  "_opEmitted": {
+    "sceneSummary": 1,
+    "scene": 1,
+    "choices": 1,
+    "offer": 1,
+    "codexUpdates": 1,
+    "imagePrompt": 1,
+    "gambitApt": 1,
+    "sceneEnded": 1
+  },
+  "_opTurns": 1
+}

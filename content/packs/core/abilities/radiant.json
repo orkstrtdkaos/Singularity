@@ -651,7 +651,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/explore action that strengthens someone. Its strength is rated 2 out of 10, and lasts for about 8 hours Ranks: rank 2 extends vessels+duration; rank 3 extends duration. Limit: nothing brighter than the day you banked.",
+   "plainly": "A radiant working that stores light in vessels for later release. It fills from any light source, fastest in direct noon sun and slowest by lantern, so it is always gaining something. Another radiant can aim a light craft at the vessels to convert their own energy into charge at half an hour per point, up to a day's worth per scene. While worn, it also drinks light-type damage aimed at you instead of letting it land, turning that harm into charge as well — but only light: shadow, edges and everything else pass straight through.",
    "upkeep": {
     "prepHoursByRank": {
      "1": 8,
@@ -671,7 +671,20 @@
      "starlight alone": 0.02,
      "sealed dark": 0.0
     },
-    "note": "⚠️ ERIK'S CORRECTION, and it is a better craft. It does NOT require a clear noon — it takes light from anywhere there is light: sun, fire, a lantern. Direct noon is simply the FASTEST source. prepHoursByRank are now hours OF DIRECT NOON EQUIVALENT, so 168h at r3 is a week of perfect noons or a much longer stretch of firelight. THE WELL IS NEVER IDLE, which removes the dead-day problem: a Radiant on a month of overcast is still filling it, slowly, and can choose to hurry by finding better light. That is a decision where there used to be a wait."
+    "fedByCraft": {
+     "acceptsDamageType": "light",
+     "hoursPerEnergy": 0.5,
+     "maxPerScene": 24,
+     "note": "⚠️ ERIK: a Radiant can BEAM INTO A WELL to charge it fast. Any light-type craft aimed at a vessel converts its energy into charge at half an hour per point, capped at a day's worth per scene. That is a real decision — spend your own pool now to have a full Well sooner — and it makes two Radiants together far more than twice one."
+    },
+    "absorbs": {
+     "damageType": "light",
+     "convertsToCharge": true,
+     "hoursPerPointAbsorbed": 0.25,
+     "capPerScene": 12,
+     "note": "⚠️ ERIK: the Well is also a DEFENCE. Light aimed at the bearer is drunk instead of landing, and the harm becomes charge. It answers only LIGHT — a shadow or an edge goes straight through — so it is a counter to one thing rather than armour."
+    },
+    "note": "a rate, not a gate: the Well is never idle, and prepHours are direct-noon equivalents"
    }
   },
   {

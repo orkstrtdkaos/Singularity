@@ -328,6 +328,17 @@ const LEDGER = [
     note: "⚠️ Aevi ordered this BEHIND a Track B that turned out to be already built. Her premise was that bonusTags are ‘SET and EVOLVED and NEVER MATCHED’ — but `equipmentBonus` matches them into resolve.js's named `equipment` term, `wieldBonusFor` feeds the skill-battle contestMods as CCODE-43's ‘wielded gear’ line, and 27 of 30 authored items already carry them. The consumer exists twice. What her measurement DID find is real and is content: ZERO shields, which is now a kind of its own in the schema. Erik's original order was right.",
   },
   {
+    id: "SNG-297", ask: "make sure all of these new fields get swept against all the generators so any newly minted things get full content",
+    how: "worldtick.js:mintFigure — two cares, a want, and a life, all derived from the minting event; pools in arc_response.json",
+    gates: ["272/297: a minted figure has MORE THAN ONE care — it can hold two fronts and abandon one",
+            "272/297: the second care is DERIVED from circumstance and OPPOSES the first (they inherit the argument)",
+            "272/297: it has a wantArcId — something to be for when nothing is on fire",
+            "272/297: it has a LIFE off-arc, drawn from its own origin event",
+            "272/297: with no pools authored it gets NO fabricated life (silence over invention)",
+            "272/297: every MINTED figure is born whole, and the count of thin ones may only go down"],
+    note: "Aevi's audit: a minted figure had ONE care, no want and no life — while being fully promotable to mythic, since `worldRoster` concats them and `advanceStandings` walks that roster. The 66 authored figures die at ~2.4/world-year and were being replaced by figures who could not hold two fronts or abandon one, so THE WORLD THINNED AS IT AGED. ⛔ The pools are keyed on the origin EVENT, never on a person — a verb drawn from ‘survived a casualty’ is honest; a brother is not. The second care is the loudest local argument, from `arcContests`, so a successor inherits the fight rather than picking one.",
+  },
+  {
     id: "SNG-267", ask: "the player is just one of many — so we need the world to live without the player",
     how: "tests/player_impact.mjs — the same worlds run with and without parties",
     gates: [],

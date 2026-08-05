@@ -59,6 +59,43 @@
     "_retrievalCooldownDays": "How long before anyone may reach for the same person again. The waiting is the most askable state there is: they cannot try again yet, and the clock is running."
   },
 
+  "mintedFigures": {
+        "_note": "SNG-297 (Aevi): pools for MINTED figures. ⛔ SAME RULE AS THE ENGINE'S — the generator must not INVENT A LIFE, so these are keyed on what the mint already KNOWS (the origin event, the tier) rather than authoring a person. A verb drawn from 'survived a casualty' is honest; a brother is not. Without these a minted figure carries one care, no want and no life while being fully promotable to mythic — so THE WORLD THINS AS IT AGES, the 66 authored figures dying at ~2.4/world-year and being replaced by thinner ones.",
+        "personalVerbsByOrigin": {
+            "casualty_survivor": [
+                "visiting where it happened",
+                "avoiding where it happened",
+                "asking after the ones who did not"
+            ],
+            "faction_leaderless": [
+                "holding a thing together that was not theirs to hold",
+                "waiting for someone who is not coming",
+                "learning what the old one knew"
+            ],
+            "vacancy_filled": [
+                "doing work nobody thanked them for",
+                "finding out why the seat was empty",
+                "staying longer than the last one"
+            ],
+            "arena_risen": [
+                "training where they can be seen",
+                "counting the wins",
+                "looking for a harder opponent"
+            ],
+            "player_ally": [
+                "waiting to be sent for",
+                "telling the story of what they saw",
+                "being changed by it"
+            ],
+            "_default": [
+                "making themselves useful",
+                "being somewhere they were not last season",
+                "keeping at it"
+            ]
+        },
+        "_secondCareRule": "⚠️ A MINTED FIGURE SHOULD GET A SECOND CARE, DERIVED NOT ROLLED: their primary is the arc that produced them; their SECOND is the arc most contested in their REGION, at `dir` opposing whoever killed the figure whose vacancy they filled. That is authored-from-circumstance rather than random, and it means minted figures inherit the local argument — which is how real successors work.",
+        "_wantArcIdRule": "the primary care, unless the second is the one their origin event names. A figure minted by a casualty on the storm WANTS the storm arc."
+    },
   "tierLadder": {
     "_section": "PROMOTION — tier as an EARNED position (SNG-269/2c). Erik: 'the ones that stay the longest are the true legends.'",
     "deedWeights": { "arcContestWon": 3, "strikeLanded": 3, "strikeSurvived": 3, "guardIntercept": 3, "stageMoved": 3, "spreadPerHop": 2, "heldThroughCrisis": 1 },

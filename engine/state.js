@@ -108,6 +108,9 @@ export async function loadContent() {
   }
   if (arcResponseRule?.arcResponse) rules.arcResponse = { ...(rules.arcResponse || {}), ...arcResponseRule.arcResponse };
   if (arcResponseRule?.tierLadder) rules.tierLadder = { ...(rules.tierLadder || {}), ...arcResponseRule.tierLadder };
+  // SNG-297: the pools a minted figure is built from. Merged explicitly — a block sitting in the file that
+  // nothing lifts into `rules` is a writer with no reader, which is the sweep's own finding pointed at me.
+  if (arcResponseRule?.mintedFigures) rules.mintedFigures = arcResponseRule.mintedFigures;
   if (encountersRule) rules.encounters = { ...(rules.encounters || {}), ...encountersRule };
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;

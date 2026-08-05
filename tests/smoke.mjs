@@ -10096,6 +10096,42 @@ await (async () => {
   })());
 }
 
+// --- SNG-297: a minted figure is born with a life ---------------------------------------------------
+{
+  const wt7 = await import("../engine/worldtick.js");
+  const doc7 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/arc_response.json"), "utf8"));
+  const pools = doc7.mintedFigures;
+
+  const mk = () => { const ws = {};
+    return { ws, f: wt7.mintFigure(ws, { tier: "riffraff", arcAffinity: "arc_a", secondArc: "arc_b",
+      originKind: "casualty_survivor", pools, epithet: "e", rng: () => 0.1 }) }; };
+
+  check("272/297: a minted figure has MORE THAN ONE care — it can hold two fronts and abandon one",
+    mk().f.arcAffinities.length === 2);
+  check("272/297: the second care is DERIVED from circumstance and OPPOSES the first (they inherit the argument)",
+    (() => { const a = mk().f.arcAffinities; return a[0].arcId === "arc_a" && a[1].arcId === "arc_b" && a[1].dir !== a[0].dir; })());
+  check("272/297: it has a wantArcId — something to be for when nothing is on fire",
+    mk().f.wantArcId === "arc_a");
+  check("272/297: it has a LIFE off-arc, drawn from its own origin event",
+    (() => { const v = mk().f.personalVerbs; return v.length > 0 && pools.personalVerbsByOrigin.casualty_survivor.includes(v[0]); })());
+
+  // ⛔ THE POOLS DO NOT INVENT A LIFE — the engine’s own rule, held by the content too.
+  check("272/297: with no pools authored it gets NO fabricated life (silence over invention)",
+    (() => { const ws = {}; const f = wt7.mintFigure(ws, { arcAffinity: "a", epithet: "e", rng: () => 0.1 });
+      return Array.isArray(f.personalVerbs) && f.personalVerbs.length === 0; })());
+
+  // Aevi asked for a gate so this cannot recur. A RATCHET rather than a hard failure: the 66 AUTHORED figures
+  // have no personal pool either, so a hard gate would fail on content that predates the field — but the
+  // count may never grow, which is the part that stops it recurring.
+  check("272/297: every MINTED figure is born whole, and the count of thin ones may only go down", (() => {
+    const ws = {};
+    for (let i = 0; i < 12; i++) wt7.mintFigure(ws, { arcAffinity: `arc_${i}`, secondArc: "arc_x",
+      originKind: "vacancy_filled", pools, epithet: `e${i}`, rng: () => 0.3 });
+    const thin = (ws.mintedFigures || []).filter(f => !(f.arcAffinities?.length >= 1 && f.wantArcId && f.personalVerbs?.length));
+    return thin.length === 0;
+  })());
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

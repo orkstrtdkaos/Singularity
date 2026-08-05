@@ -895,7 +895,9 @@ export function worldRoster(ws, content = {}) {
  *  by design because they are the inflow, not a place anybody was authored into. A minted figure is REAL
  *  immediately: an id, a tier, a weight, a want, and an arc they care about, which is everything the tick
  *  needs to let them push, fight, be struck at, and die. */
-export function mintFigure(ws, { tier = "notable", name = null, epithet = null, origin = "", region = null, arcAffinity = null, worldDay = 0, weight = null, cap = 140 } = {}) {
+export function mintFigure(ws, { tier = "notable", name = null, epithet = null, origin = "", originKind = "_default",
+                                 region = null, arcAffinity = null, secondArc = null, worldDay = 0, weight = null,
+                                 cap = 140, pools = null, rng = Math.random } = {}) {
   ws.mintedFigures = ws.mintedFigures || [];
   if (ws.mintedFigures.length >= cap) return null;
   const n = (ws.mintedCounter = (ws.mintedCounter || 0) + 1);
@@ -919,6 +921,36 @@ export function mintFigure(ws, { tier = "notable", name = null, epithet = null, 
     // figures were in the roster, in `living`, and contributed NOTHING to any arc: no push, no contest, no
     // lean. Twice now on this same object (the shape, then the key). The reader owns the contract.
     arcAffinity: arcAffinity ? { arcId: arcAffinity, dir: 1 } : null,
+
+    // SNG-297 — A MINTED FIGURE IS BORN WITH A LIFE, OR THE WORLD THINS AS IT AGES.
+    //
+    // Aevi's audit: a minted figure had exactly ONE care, no `wantArcId`, and nothing to be doing off-arc —
+    // while being fully promotable to mythic, because `worldRoster` concats them and `advanceStandings` walks
+    // that roster. The 66 authored figures die at ~2.4 per world-year and are replaced by figures who CANNOT
+    // hold two fronts and CANNOT abandon one. The valley gets quieter every year it runs.
+    //
+    // ⛔ AND THE POOLS DO NOT INVENT A LIFE — the same rule the engine already holds itself to. They are keyed
+    // on what the mint actually KNOWS: the origin event. A verb drawn from "survived a casualty" is honest;
+    // a brother is not.
+    //
+    // THE SECOND CARE IS DERIVED, NOT ROLLED (Aevi): their primary is the arc that produced them; their second
+    // is the argument already loudest around them. That is how a successor actually works — they inherit the
+    // local fight rather than picking one.
+    arcAffinities: [
+      ...(arcAffinity ? [{ arcId: arcAffinity, dir: 1, weight: 2 }] : []),
+      ...(secondArc && secondArc !== arcAffinity ? [{ arcId: secondArc, dir: -1, weight: 1 }] : []),
+    ],
+    // The want is the arc their own origin names — what they are FOR when nothing is on fire.
+    wantArcId: arcAffinity || secondArc || null,
+    personalVerbs: (() => {
+      const byOrigin = pools?.personalVerbsByOrigin || {};
+      const pool = byOrigin[originKind] || byOrigin._default || [];
+      if (!pool.length) return [];
+      // Two, so a figure is not one line repeated; drawn rather than authored.
+      const a = pool[Math.floor(rng() * pool.length)];
+      const b = pool[Math.floor(rng() * pool.length)];
+      return a === b ? [a] : [a, b];
+    })(),
     region,
     mintedWorldDay: worldDay,
     origin,                       // WHY they exist — the event that made them, kept so the world can tell it
@@ -1823,6 +1855,15 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // business doing it: they are flagged `provisional` until content names them.
     const mintRate = Number.isFinite(cfg.mintRate) ? cfg.mintRate : 0.5;
     const mintCap = Number.isFinite(cfg.mintCap) ? cfg.mintCap : 140;
+    // SNG-297: the argument already loudest around them, from what this pass measured. `arcContests` counts
+    // duels per arc, so "most contested" needs no new recording — Aevi's point exactly.
+    const mintPools = content.rules?.mintedFigures || null;
+    const loudestArc = (exclude) => {
+      const ranked = Object.entries(arcOutcomes)
+        .filter(([id, o]) => id !== exclude && (o?.duels || 0) > 0)
+        .sort((a, b) => (b[1].duels || 0) - (a[1].duels || 0));
+      return ranked.length ? ranked[0][0] : null;
+    };
     const born = [];
     // ⚠️ A SINGLE-PASS VACANCY IS NOT RARE — it fires for most arcs most passes, because attention is
     // scarce by design. Minting on it produced 140 new figures against 6 deaths per world: the cap, every
@@ -1842,6 +1883,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       if (ws.arcUnheldStreak[arcId] < streakForMint || rng() >= mintRate) continue;
       ws.arcUnheldStreak[arcId] = 0;   // the seat is taken; the clock restarts
       const f = mintFigure(ws, { tier: "notable", worldDay: currentWorldDay, arcAffinity: arcId,
+        originKind: "vacancy_filled", secondArc: loudestArc(arcId), pools: mintPools, rng,
         epithet: `the one who took up ${arcId}`,
         origin: `stepped into ${arcId} after a long season when nobody was holding it`, cap: mintCap });
       if (f) born.push(f);
@@ -1859,12 +1901,14 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     for (const d of deaths) {
       if (rng() < mintRate) {
         const f = mintFigure(ws, { tier: "riffraff", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
+          originKind: "casualty_survivor", secondArc: loudestArc(d.arcId), pools: mintPools, rng,
           epithet: `the one who outlived ${d.who}`,
           origin: `stood beside ${d.who} and walked away from it`, cap: mintCap });
         if (f) born.push(f);
       }
       if (rng() < mintRate) {
         const f = mintFigure(ws, { tier: "notable", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
+          originKind: "faction_leaderless", secondArc: loudestArc(d.arcId), pools: mintPools, rng,
           epithet: `the one who took ${d.who}'s place`,
           origin: `took up what ${d.who} left unfinished`, cap: mintCap });
         if (f) born.push(f);

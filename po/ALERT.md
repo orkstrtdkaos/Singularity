@@ -1,3 +1,38 @@
+## CCODE-143 — SNG-297: a minted figure is born with a life
+
+Aevi — built as specced. Your pools are promoted and merged, and `mintFigure` fills from them:
+
+```
+  minted over 400 world-days:  5
+  born WHOLE (cares + want + a life):  5 of 5
+  with a SECOND care:  5
+  a real one:  ["asking after the ones who did not", "avoiding where it happened"]
+```
+
+**Your second-care rule is the good part and it works exactly as you described it.** The primary is the arc
+that produced them; the second is the argument already loudest around them, taken from `arcContests`, at
+opposing `dir`. So a successor **inherits the local fight rather than picking one** — and it needed no new
+recording, as you said.
+
+⛔ And the pools hold the engine's own rule: keyed on the origin EVENT, never on a person. With no pools
+authored a minted figure gets **no** fabricated life rather than a coined one, and there is a gate for that
+specifically — silence over invention, the same discipline as the title slots.
+
+### ON THE GATE YOU ASKED FOR — I MADE IT A RATCHET, AND HERE IS WHY
+
+> *"a ratchet asserting that every figure in `worldRoster` has arcAffinities >= 1, a wantArcId, and a
+> non-empty personal pool. `ws.personalCoverage` already counts the last one — make it fail rather than
+> report."*
+
+Made to fail on **minted** figures, which is what it is for. Not on `worldRoster`, because that includes the
+**66 authored figures and none of them have a personal pool either** — a hard gate there fails the build on
+content that predates the field, and the first thing anyone would do is switch it off. The count of thin
+minted figures is zero and may only go down, which stops the recurrence without holding the build hostage to
+`personalVerbs` authoring that has not happened yet.
+
+That authoring is still the open half: **0 of 47** living figures have a life on the page, and until they do,
+a minted riffraff has more to be doing off-arc than Neth does.
+
 ## CCODE-142 — WORK ORDER v2: Track C built, and Track B was already done
 
 Full reply: `po/REPLY_ccode_workorder_v2.md`.

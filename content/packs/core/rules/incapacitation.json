@@ -1,0 +1,46 @@
+{
+ "schemaVersion": 1,
+ "id": "incapacitation",
+ "kind": "rules",
+ "note": "⚠️ SNG-323. The engine ships DEFAULT_WEIGHTS and reads rules.incapacitation.byAggressor if it exists. CCode's defaults are well-judged and I am keeping four of five unchanged — authoring them here makes them TUNABLE rather than a const, which is the same argument I made about prose costs.",
+ "byAggressor": {
+  "beast": {
+   "revived": 2,
+   "spared": 0,
+   "left_for_dead": 6,
+   "slain": 2
+  },
+  "duelist": {
+   "revived": 2,
+   "spared": 5,
+   "left_for_dead": 2,
+   "slain": 1
+  },
+  "raider": {
+   "revived": 1,
+   "spared": 1,
+   "left_for_dead": 6,
+   "slain": 2
+  },
+  "assassin": {
+   "revived": 1,
+   "spared": 0,
+   "left_for_dead": 1,
+   "slain": 8
+  },
+  "hazard": {
+   "revived": 3,
+   "spared": 0,
+   "left_for_dead": 5,
+   "slain": 3
+  },
+  "_default": {
+   "revived": 2,
+   "spared": 2,
+   "left_for_dead": 4,
+   "slain": 2
+  }
+ },
+ "theOneChange": "⚠️ `hazard.left_for_dead` 4 → 5. A cliff does not decide anything, so the one outcome a hazard cannot produce is a CHOICE — it cannot spare you and it cannot finish you deliberately. Raising left-for-dead relative to slain says the likeliest end to a bad fall is being FOUND, not being killed, and that whether you live is about who is looking for you rather than about the fall. Everything else is CCode's and unchanged: duelist spared 5 (they won; the point was winning) and assassin slain 8 are both exactly right.",
+ "whyThisIsAuthoredAtAll": "A weight nobody can edit is a design decision frozen into a const. These are dials the sim should be able to sweep — especially `assassin.slain`, which is the single number deciding how much a strike against a player actually threatens them."
+}

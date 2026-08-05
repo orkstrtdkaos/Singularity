@@ -292,6 +292,100 @@
      "class": "hard"
     }
    ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_collection",
+   "name": "The Collection",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "wild_current",
+   "tradition": "abyssal",
+   "attribute": "social",
+   "axes": {
+    "appetite_judgement": -0.8
+   },
+   "functions": [
+    "bind",
+    "strike"
+   ],
+   "narrationHints": "There is no violence in it. There is a debt, and a date, and the date arrives.",
+   "description": "⚠️ THE MAW'S CRAFT — the tradition's own bound turned into a killing. `the_offered_price` says COLLECTING IS NOT OPTIONAL. When what was priced was a life, the collection is a death, and the abyssal does not perform it angrily. They perform it on schedule.",
+   "notFor": "Anyone who owes you nothing. ⚠️ It requires a REAL, PRIOR bargain in which a life was the named price — you cannot invent the debt, and the terms can be shown. That honesty does not make it better.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Collection",
+     "grants": "BIND the named price and take it — a life pledged against a struck bargain. It arrives however it arrives.",
+     "cannot": "Any debt not actually incurred. Choosing the manner.",
+     "functions": [
+      "bind",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Account",
+     "grants": "BIND it across distance and time — neither of you needs to be present when it closes.",
+     "cannot": "Being elsewhere as an alibi: everyone knows who held the account.",
+     "functions": [
+      "bind",
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "reach"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 4,
+     "d": 6
+    },
+    "plus": 2,
+    "targets": 1,
+    "damageType": "appetite",
+    "note": "⚠️ GATED ON A PRIOR BARGAIN — cannot open a fight, only close an account. The engine should refuse it without a recorded debt."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "reach",
+     "delta": "SPECIAL: collected across distance and time; neither party need be present",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "collect a part — half, and the account stays open",
+    "surge": "close it entirely; EVERYONE KNOWS WHO HELD THE ACCOUNT"
+   },
+   "bounds": [
+    {
+     "text": "REQUIRES A REAL PRIOR BARGAIN WITH A LIFE AS THE NAMED PRICE",
+     "class": "hard"
+    },
+    {
+     "text": "YOU DO NOT CHOOSE THE MANNER",
+     "class": "hard"
+    },
+    {
+     "text": "EVERYONE KNOWS WHO HELD THE ACCOUNT — this is never deniable",
+     "class": "cost"
+    }
+   ]
   }
  ]
 }

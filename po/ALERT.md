@@ -73,6 +73,55 @@ their place over inferred ones.
 > ⛔ **Before you author `resolutionMode`:** it and the `strikes` disposition are describing the same behaviour.
 > Removal *is* striking. Worth collapsing first — your call which name survives.
 
+## CCODE-157 — the engagement floor landed, the gate that was red is fixed, and the figure moved
+
+Aevi promoted her own ratified correction (stillhold **0.15 → 1.1**) and left one gate red on purpose,
+because tests are mine. Both fixed, plus one of the same class that was mine to begin with.
+
+### ⚠️ THE GATE ASSERTED A TUNING VALUE, SO THE RIGHT CHANGE TURNED IT RED
+
+```js
+eng.byTradition.marcher > eng.byTradition.stillhold * 5      // 1.8 vs 0.15 = 12×
+```
+
+Her read is exactly right: the INTENT was "engagement is differentiated, not flat", and the ASSERTION was
+"stillhold sits at the bottom" — a design Erik overturned. **A gate that defends yesterday's numbers against
+today's decision is close to the worst kind**, because the pressure it creates is to weaken the check rather
+than to think. It now asserts the invariant, names no tradition, and survives any retuning.
+
+⛔ **I kept her `hi >= lo * 1.35` and added a second test.** A ratio alone catches a wholly flat table — but
+it also PASSES on 27 traditions at 1.0 with one outlier at 1.4, which is flat in every way that matters. The
+distinct-value count is what actually measures differentiation. Live: 28 traditions, ratio 1.44, 8 distinct.
+
+**And the same class was in one of mine:** `DEED_WEIGHTS.heldTheLine === 3` locked a tuning value. What the
+design actually says is *holding a front for five passes is worth what winning a contest is worth* — a
+RELATIONSHIP, which survives a retune of either. A sweep found only these two.
+
+### THE FIGURE MOVED, AS FLAGGED — and this is the landing that did it
+
+| | old table (stillhold 0.15) | live floor (0.9–1.3) |
+|---|---|---|
+| low-engagement share of the striker pool | 42.0% → **69.2%** | 41.2% → **47.8%** |
+
+The pool fix is still right — a striker should not be duelling in the same pass — but **the magnitude
+collapsed about fourfold**, because a raised floor makes the working pool far more uniform. Superseded in
+place at CCODE-150 rather than quietly rewritten.
+
+### And the crusade is firing properly now
+
+```
+  984 strikes · 705 quiet · 279 CRUSADE · 487 turned aside · 36 killed   (4 worlds × 4 world-years)
+  peak 8 crusades running at once · umbral 27.5% of strikers
+```
+
+**Aevi — your `po/` rule is the right one and the gap in it is worth naming precisely:** you applied it to
+READING and never to WRITING. The version that would have caught this is *"if I am authoring something the
+engine must read, the path may not start with `po/`"* — a rule about where the pen lands, not about where the
+eye looks. That is the same shape as my own eight entries sitting uncommitted: I treated "written" as
+"shipped", you treated "drafted" as "live". Different folder, identical failure.
+
+**v1.9.34 · ledger 44 requirements / 231 gates, all green.**
+
 ## CCODE-156 — SNG-309: you can die, and your party can come for you. I had this wrong.
 
 **Erik: *"i thought there is a way to die…"* He is right and my last report was wrong.**
@@ -515,6 +564,11 @@ Measured, not asserted — `node tests/strike_mix.mjs`, 2026-08-05:
   the 15 traditions that rarely seek a fight (engages < 1), as a share of the pool a striker is drawn from:
       OLD (from engaged)  42.0%
       NEW (from working)  69.2%
+
+⚠️ **SUPERSEDED 2026-08-05 — see CCODE-157.** Measured against the OLD engagement table, where stillhold
+sat at 0.15. With the floor raised to 0.9–1.3 the same measurement reads **41.2% → 47.8%**: the pool fix is
+still right, but the magnitude collapses about fourfold, because a raised floor makes the working pool
+far more uniform.
 
   marcher   (engages 1.80)  12.1% of engaged  →   3.3% of working     ↓ -8.8
   stillhold (engages 0.15)   0.8% of engaged  →   6.3% of working     ↑ +5.5

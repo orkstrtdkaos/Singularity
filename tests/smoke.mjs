@@ -9667,8 +9667,11 @@ await (async () => {
     check("304: a wound halves the loser's hold; a stalemate drove nobody anywhere and does not",
       wsW.careHeld.L.arc1 === 2 && wsS.careHeld.L.arc1 === 4);
 
+    // ⚠️ THE RELATIONSHIP, NOT THE NUMBER — my own instance of the class Aevi's red gate exposed. `=== 3`
+    // locks a tuning value; what the design actually says is "holding a front for five passes is worth what
+    // winning a contest is worth", which is a claim about EQUALITY and survives any retune of either.
     check("304: holding pays a DEED at all — the ledger had six combat sources and one for sacrifice",
-      wt.DEED_WEIGHTS.heldTheLine === 3);
+      wt.DEED_WEIGHTS.heldTheLine > 0 && wt.DEED_WEIGHTS.heldTheLine === wt.DEED_WEIGHTS.arcContestWon);
 
     // ⚠️ THE DEFAULT IS AEVI'S SPEC AS WRITTEN, not my inference from it. I built the repeating version first
     // and measured it: `heldTheLine` became 41% of all deed credits against arcContestWon's 11%, and the mean
@@ -10617,10 +10620,26 @@ await (async () => {
 
   check("272/300: engagement is a property of the FIGURE, not a quota on the side",
     /\(rng\(\) < engageOf\(e\.f\) \? engaged : working\)\.push\(e\)/.test(wsrcE));
-  check("272/300: it is keyed on tradition, and the table is authored",
-    !!eng?.byTradition?.marcher && !!eng.byTradition.stillhold && Object.keys(eng.byTradition).length >= 20);
-  check("272/300: a peacemaker and a war-ender no longer seek confrontation at the same rate",
-    eng.byTradition.marcher > eng.byTradition.stillhold * 5);
+  // ⚠️ A GATE MUST NOT ASSERT A TUNING VALUE. This pair used to require `marcher > stillhold * 5` and to name
+  // both traditions by hand — so when Erik overturned the design (stillhold 0.15 → 1.1, because reading
+  // "peace tradition" as "does not participate" was the moralising bias inverted), a gate went RED FOR THE
+  // RIGHT CHANGE. That is close to the worst thing a gate can do: it defends yesterday's numbers against
+  // today's decision, and the pressure it creates is to weaken the check rather than to think.
+  //
+  // The INVARIANT it was really guarding is "the table is DIFFERENTIATED, not flat". That survives any
+  // retuning, names no tradition, and still fails on the thing it exists to catch.
+  check("272/300: it is keyed on tradition, and the table is authored", (() => {
+    const v = Object.values(eng?.byTradition || {}).map(Number);
+    return v.length >= 20 && v.every(x => Number.isFinite(x) && x > 0);
+  })());
+  check("272/300: engagement is DIFFERENTIATED — the table is not flat", (() => {
+    const v = Object.values(eng.byTradition).map(Number).filter(Number.isFinite);
+    const lo = Math.min(...v), hi = Math.max(...v);
+    // ⛔ TWO TESTS, BECAUSE A RATIO ALONE IS NOT ENOUGH. Aevi proposed `hi >= lo * 1.35`, which is right and
+    // catches a wholly flat table — but it also PASSES on 27 traditions at 1.0 and one outlier at 1.4, which
+    // is flat in every way that matters. The distinct-value count is what actually measures differentiation.
+    return hi >= lo * 1.35 && new Set(v).size >= 5;
+  })());
   check("272/300: nobody is guaranteed to never fight, and nobody fights every pass",
     /Math\.max\(lo, Math\.min\(hi, engageRate/.test(wsrcE) && eng.min > 0 && eng.max < 1);
   check("272/300: an unlisted tradition is unchanged, not penalised",

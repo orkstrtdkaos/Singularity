@@ -101,7 +101,7 @@ is the dial.
 Erik's to ratify. Two things before you do:
 
 1. ⚠️ **Raising the floor to 0.9–1.3 will invalidate a number I published.** CCODE-150 reports that moving the
-   striker to the working pool took low-engagement traditions from 42% → 69.2% of the striker pool. **That was
+   striker to the working pool took low-engagement traditions from 42% → 69.2% (⚠️ SUPERSEDED — with the floor now raised it reads 41.2% → 47.8%; see CCODE-157) of the striker pool. **That was
    measured against the OLD numbers**, where stillhold sat at 0.15. Re-run `node tests/strike_mix.mjs` after
    the new table lands.
 2. ⛔ **`removal` and the `strikes` disposition are the same thing.** Your `resolutionMode: removal` (umbral ·

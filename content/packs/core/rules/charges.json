@@ -1,0 +1,109 @@
+{
+ "schemaVersion": 1,
+ "id": "charges",
+ "kind": "rules",
+ "note": "⚠️ SNG-311/316. The vocabulary a charge tracker evaluates. `upkeep.prepCondition` and `upkeep.rateBySource` on 17 crafts name conditions in words; this says what SATISFIES each one, so the tick can decide how much a pass banks without a human reading prose.",
+ "accrualKinds": {
+  "rate": "every pass banks something; the source sets the multiplier. There is no zero pass unless the source itself is zero.",
+  "gate": "a pass banks its full hours or nothing. Half-satisfying a gate banks nothing."
+ },
+ "conditions": {
+  "clear noon": {
+   "kind": "rate",
+   "evaluate": "light level at the vessel's location",
+   "sources": {
+    "direct noon sun": 1.0,
+    "bright daylight": 0.6,
+    "overcast day": 0.3,
+    "a large fire": 0.2,
+    "a lantern or hearth": 0.08,
+    "starlight alone": 0.02,
+    "sealed dark": 0.0
+   },
+   "inputs": [
+    "location.indoors",
+    "location.lightSource",
+    "worldClock.hour",
+    "weather"
+   ],
+   "note": "⚠️ NOT a gate. Erik's correction: the Well runs whenever there is light of any kind and is merely fastest at noon."
+  },
+  "a second voice": {
+   "kind": "rate",
+   "evaluate": "sound present at the bearer",
+   "sources": {
+    "a second harmonic playing into it": 1.0,
+    "a crowd singing": 0.7,
+    "running water or wind": 0.25,
+    "ordinary room noise": 0.05,
+    "true silence": 0.0
+   },
+   "inputs": [
+    "party composition",
+    "location.ambientSound",
+    "whether an ally spent an action feeding it"
+   ]
+  },
+  "uninterrupted sleep": {
+   "kind": "gate",
+   "evaluate": "the pass contained a full rest that was not broken",
+   "satisfiedBy": "a rest of 8+ hours with no encounter resolved during it",
+   "brokenBy": [
+    "an encounter",
+    "travel",
+    "a watch stood"
+   ],
+   "inputs": [
+    "restLog"
+   ]
+  },
+  "same camp": {
+   "kind": "gate",
+   "evaluate": "the bearer ended the pass at the same location as the previous pass",
+   "satisfiedBy": "identical locationId across consecutive nights",
+   "note": "⚠️ THE ONLY CONDITION WHOSE FAILURE RESETS THE COUNT TO ZERO rather than pausing it — a named place is made by continuity, so a broken run is not a shorter run, it is a different run."
+  },
+  "daily training": {
+   "kind": "rate",
+   "evaluate": "how much of the pass went to deliberate practice",
+   "sources": {
+    "full daily training": 1.0,
+    "training most days": 0.6,
+    "occasional work": 0.25,
+    "nothing": 0.0
+   },
+   "inputs": [
+    "how the character spent their beats"
+   ],
+   "note": "a rate on Erik's principle generalised: partial training is not nothing"
+  },
+  "community consent": {
+   "kind": "gate",
+   "evaluate": "standing with the host community",
+   "satisfiedBy": "standing at or above `accepted` in the community holding the ward",
+   "brokenBy": [
+    "standing falling below accepted",
+    "the community being displaced"
+   ],
+   "note": "⚠️ THE ONLY CONDITION SOMEONE ELSE CAN REVOKE. A prism ward is not yours; it is theirs and you maintain it."
+  },
+  "impersonation held": {
+   "kind": "gate",
+   "evaluate": "the assumed identity is unbroken and the records still stand",
+   "satisfiedBy": "no record of the original restored, and the impersonation not publicly exposed",
+   "brokenBy": [
+    "any record restored",
+    "public exposure"
+   ],
+   "note": "⚠️ THE ONLY CONDITION AN OPPONENT CAN END DELIBERATELY, and it ends the whole working rather than pausing it — which is the counterplay to a 90-day erasure."
+  }
+ },
+ "display": {
+  "rule": "⚠️ COUNT THE CONDITION, NOT THE HOURS. 'Light Well — 5 of 7 clear noons banked' beats '71%', and when the source is weather-gated the remaining hours are not knowable anyway. Show hours only where the condition is plain elapsed time.",
+  "advanced": "one line when a pass banks, naming the source: 'A clear noon. The vessels take it.'",
+  "blocked": "⚠️ REQUIRED — one line when a pass banks little or nothing: 'Overcast. The Well took almost nothing today.' A stalled counter that is silent reads as a bug.",
+  "nearCapacity": "⚠️ REQUIRED at 90%+: the vessel's authored warning line, so the player can choose to vent before it bursts.",
+  "complete": "'The Well is full.'"
+ },
+ "forCCode": "all inputs above already exist on the world clock, location records, rest log and standing tables. The tracker needs `character.charges[]` advanced in the assignments tick pass; nothing new is recorded. Rates multiply the pass's hours; gates bank all or nothing."
+}

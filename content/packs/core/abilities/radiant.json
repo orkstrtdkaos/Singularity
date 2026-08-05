@@ -659,12 +659,10 @@
      "3": 168
     },
     "prepCondition": "clear noon each day",
-    "interruptible": false,
-    "onInterrupt": "lost entirely",
-    "cooldownHours": {
-     "3": 336
-    },
-    "note": "⚠️ CORRECTED. I had applied r3's 168h to the whole craft, which priced one lantern-night above a camp that heals six people. The bound said so plainly — 'the GREAT CACHE takes a week of clear noons' — and the great cache is r3. Cooldown on r3 only: a season's cache cannot be rebuilt weekly."
+    "attended": false,
+    "interruptible": true,
+    "onInterrupt": "the days already banked are kept; the count resumes",
+    "note": "⚠️ ERIK: 'the ones that require a long time to build should be able to be cast but not require you to stick around while it builds.' So `attended: false` — you set the vessels out and LEAVE. The week of clear noons is elapsed world-time, not player-time, and a broken run now KEEPS what was banked rather than losing everything."
    }
   },
   {
@@ -1422,10 +1420,11 @@
    "upkeep": {
     "prepHours": 1,
     "energyAsHours": 24,
+    "attended": true,
     "cooldownHours": {
      "all": 24
     },
-    "note": "one hour drains a day's labour; the cooldown stops a surgeon working twice in a day"
+    "note": "KEPT: the cooldown is the surgeon's own exhaustion, which is a body limit rather than a rule"
    }
   },
   {
@@ -1562,12 +1561,10 @@
      "3": 2160
     },
     "prepCondition": "community consent, sustained",
+    "attended": false,
     "interruptible": true,
     "onInterrupt": "decays without upkeep",
-    "cooldownHours": {
-     "3": 720
-    },
-    "note": "same flattening corrected: r1 is one doorway till dawn, r3 is a compound for a season"
+    "note": "a season-fence is community work that proceeds without you standing in it"
    }
   },
   {

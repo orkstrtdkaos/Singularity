@@ -47,8 +47,6 @@
     "_strikeRate": "Chance per pass that a side sends someone at the other side's most valuable WORKER. This is the only mechanic that reaches the population combat structurally cannot — heroics doing quiet work are the safest people in the valley without it.",
     "guardInterceptChance": 0.45,
     "_guardInterceptChance": "Chance a defender standing over the mark turns the strike aside. Standing still is its own cost: they are not pushing while they watch.",
-
-
     "_section4c": "THE PRICE OF STANDING HIGH — challenges between the arc pushes (SNG-306).",
     "challenges": {
       "_note": "Erik: 'striking isn't just about the back line — between arc pushes there are ever present assassination risks, duel to the death challenges etc. we can use these to keep the Mythicals under control.' ⛔ DIRECTIVE SNG-280 — PROMINENCE, NOT MERIT: the rate is keyed to the RUNG and nothing else. A mythic of the Maw and a mythic who has spent forty years mending the same wall are challenged identically, because what draws a challenger is being worth beating. Nothing here reads alignment or tradition.",
@@ -65,7 +63,6 @@
       "challengerReach": 2,
       "_challengerReach": "How many rungs below a challenger may come from. They must have something to gain (so never a peer or better) and some reason to think they can (so not four rungs down). At 1 only the rung immediately below ever calls anyone out."
     },
-
     "_section4b": "THE HOLDING STREAK — an edge that builds to a point, and drops if interrupted (SNG-304).",
     "holding": {
       "_note": "Erik: 'a streak of holding could give an edge... something that builds to a point. It would get dropped down if interrupted.' Aevi's `heldTheLine`. ⛔ NOT a peaceful-figure prize (DIRECTIVE SNG-280) — a marcher who holds one front for five passes earns it identically. It rewards CONSTANCY, which is available to everyone and characteristic of nobody, and the figures who chase every fire will never have it. That is the trade.",
@@ -78,7 +75,6 @@
       "deedRepeats": false,
       "_deedRepeats": "⚠️ MEASURED BOTH WAYS, see `node tests/holding_effect.mjs`. At false (Aevi's spec as written — 'crossing 5 consecutive passes credits heldTheLine') a hold pays ONCE and must be broken and rebuilt to pay again. At true it pays every 5 passes, which sounds fairer to a long holder and is much stronger than it looks: a 185-pass hold pays 37 times, `heldTheLine` became 41% of all deed credits against arcContestWon's 11%, and the mean rise rate went to 78% for every tradition. The gap it was built to close (marcher 50% vs stillhold 8%) closes either way. This is the dial for how much the ladder loosens."
     },
-
     "_section5": "THE ROSTER — how the world refills what it loses (SNG-269).",
     "mintRate": 0.5,
     "_mintRate": "Chance a death produces each of its two possible figures — the one who survived it (riffraff) and the one who took the empty chair (notable). At 0 the roster only ever shrinks; a long-simulated world empties out.",
@@ -237,8 +233,47 @@
   },
   "engagement": {
     "_note": "SNG-300 (Erik: \"we probably need to tweak who fights and how\"). `engageRate` was FLAT 0.35 for every figure alive, so THE WAR-ENDER and a stillhold peacemaker sought confrontation at exactly the same rate. This multiplies it per figure, by tradition.",
-    "_notAValueJudgement": "⛔ DIRECTIVE SNG-280: these describe METHOD, not merit. Marcher 1.8 and stillhold 0.15 are both complete ways of pursuing a want — stillhold's own crafts say so (`step_between` puts your unarmoured body between harm and someone else). A low number is not a nerf and a high one is not approval.",
+    "_notAValueJudgement": "⛔ DIRECTIVE SNG-280: this says HOW OFTEN A FIGURE ENTERS A CONFRONTATION and nothing else. The spread is narrow (0.9–1.3) on purpose — nearly every tradition engages at a similar rate, and WHAT DIFFERS IS WHAT A WIN LOOKS LIKE, which `resolutionMode` carries.",
     "byTradition": {
+      "marcher": 1.3,
+      "abyssal": 1.2,
+      "unmaker": 1.15,
+      "blazeborn": 1.15,
+      "somatic": 1.15,
+      "seraphic": 1.1,
+      "verist": 1.05,
+      "syllogist": 1.0,
+      "stillhold": 1.1,
+      "numinous": 0.9,
+      "threnodist": 0.95,
+      "ashwarden": 1.0,
+      "rootkin": 0.95,
+      "cogitant": 0.9,
+      "lattice": 1.0,
+      "churnfolk": 1.0,
+      "enginewright": 0.9,
+      "wright": 0.9,
+      "mason": 0.95,
+      "figurist": 0.9,
+      "umbral": 1.0,
+      "veilwright": 0.95,
+      "horizon": 0.95,
+      "hourkeeper": 0.9,
+      "valley_craft": 1.0,
+      "precursor": 0.9,
+      "harmonic": 0.95,
+      "radiant": 0.9
+    },
+    "bands": {
+      "seeks_it (1.3)": "confrontation is their usual method",
+      "ordinary (1.0)": "engages when the want demands it",
+      "reluctant (0.9)": "engages less often — but engages, and their crafts are built for being present where it happens"
+    },
+    "min": 0.05,
+    "max": 0.9,
+    "_min": "Nobody is guaranteed never to be drawn in, and nobody fights every single pass.",
+    "_correction": "⚠️ THIS TABLE WAS WRONG AND MY OWN JUSTIFICATION FOR IT WAS WRONG. Erik: 'you're labeling the word pacifist onto a lot of people — a stillhold pacifist might end up on the battlefield and convince some NOT to fight, or actively stop fights; they'd also make great guards, they have high skill. It's the WAY they do the deeds that changes, not that they wouldn't engage at all.' I read 'peace tradition' as 'does not participate' and set stillhold to 0.15, the lowest in the world, then argued it was 'not a nerf, it is the tradition'. IT WAS A NERF — the moralising bias INVERTED: instead of rewarding virtue I made virtue ABSENT. Their own crafts contradicted me while I quoted them: `step_between` is MOVING INTO THE MIDDLE OF VIOLENCE. Stillhold is now 1.1, above average.",
+    "_previousTable": {
       "marcher": 1.8,
       "abyssal": 1.5,
       "unmaker": 1.4,
@@ -264,16 +299,34 @@
       "hourkeeper": 0.7,
       "stillhold": 0.15
     },
-    "bands": {
-      "seeks_it (1.8)": "confrontation IS their method — the fight is how they pursue the want",
-      "accepts_it (1.2)": "will fight when the want demands, without relish",
-      "default (1.0)": "unstated",
-      "avoids_it (0.5)": "fights only when cornered; the want is pursued another way",
-      "refuses_it (0.15)": "⚠️ NEVER seeks a confrontation. Their whole craft is that they do not."
-    },
-    "min": 0.05,
-    "max": 0.9,
-    "_min": "Nobody is guaranteed never to be drawn in, and nobody fights every single pass."
+    "resolutionMode": {
+      "_note": "⚠️ THE REAL DIAL. `engages` says how often; this says what their victory IS. `removal` was COLLAPSED INTO `strikes.byTradition` (SNG-319) — removal is striking.",
+      "force": [
+        "marcher",
+        "blazeborn",
+        "unmaker",
+        "abyssal",
+        "somatic"
+      ],
+      "prevention": [
+        "stillhold",
+        "numinous",
+        "threnodist"
+      ],
+      "proof": [
+        "verist",
+        "syllogist",
+        "cogitant",
+        "lattice"
+      ],
+      "endurance": [
+        "mason",
+        "hourkeeper",
+        "ashwarden",
+        "rootkin"
+      ],
+      "_preventionIsAWin": "⚠️ A PREVENTED FIGHT IS A WON CONTEST — same weight, different narration."
+    }
   },
   "tierLadder": {
     "_section": "PROMOTION — tier as an EARNED position (SNG-269/2c). Erik: 'the ones that stay the longest are the true legends.'",

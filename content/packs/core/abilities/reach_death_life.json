@@ -1483,7 +1483,11 @@
      "class": "cost"
     }
    ],
-   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about an hour Ranks: rank 2 extends questions; rank 3 deepens recallDepth. Limit: recently — a week is far, a season is gone."
+   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about an hour Ranks: rank 2 extends questions; rank 3 deepens recallDepth. Limit: recently — a week is far, a season is gone.",
+   "upkeep": {
+    "targetAgeHoursMax": 168,
+    "note": "a week is far, a season is gone — the reach is measured from time of death"
+   }
   },
   {
    "schemaVersion": 1,
@@ -2410,7 +2414,11 @@
      "class": "cost"
     }
    ],
-   "plainly": "A create/survive action that makes or animates something. Its strength is rated 6 out of 10 It affects 1 target across a scope of 2, and lasts for about 30 days Ranks: rank 2 extends targets; rank 3 extends persistence. Limit: the Finished Only — anything still ending is a different working."
+   "plainly": "A create/survive action that makes or animates something. Its strength is rated 6 out of 10 It affects 1 target across a scope of 2, and lasts for about 30 days Ranks: rank 2 extends targets; rank 3 extends persistence. Limit: the Finished Only — anything still ending is a different working.",
+   "upkeep": {
+    "persistHours": 2160,
+    "note": "set bodies hold for seasons; the duration IS the craft"
+   }
   },
   {
    "schemaVersion": 1,
@@ -2647,7 +2655,16 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/investigate action that restores health. It rolls 2d6+2 It affects 1 target Ranks: rank 2 deepens depth; rank 3 deepens depth. Limit: the Sealed Refuse Every Road — no rank reaches depth 3."
+   "plainly": "A survive/investigate action that restores health. It rolls 2d6+2 It affects 1 target Ranks: rank 2 deepens depth; rank 3 deepens depth. Limit: the Sealed Refuse Every Road — no rank reaches depth 3.",
+   "upkeep": {
+    "targetAgeHoursMax": 720,
+    "byRank": {
+     "1": 24,
+     "2": 720,
+     "3": 2880
+    },
+    "note": "⚠️ matches the death ladder exactly: r1 reaches the threshold (24h), r2 the near dark (720h), r3 the deep dark (2880h)"
+   }
   },
   {
    "schemaVersion": 1,

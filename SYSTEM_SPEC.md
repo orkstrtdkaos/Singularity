@@ -382,6 +382,7 @@ re-run instead of believed.
 | `node tests/world_endgame.mjs [runs] [days]` | after N world-years: who died by tier, who was minted, who rose, how many came back from the dead, and whether every world ends the same way | ~1 min for `6 4380` |
 | `node tests/player_impact.mjs` | can a player make a difference? Runs the same worlds at party 0/1/3/6 and reports where the arcs land and how many are visibly CONTESTED | ~2 min |
 | `node tests/world_drive_audit.mjs` | the §4b table — every path by which the world reaches the narrator unasked, and whether each has been seen in real save data | seconds |
+| `node tests/content_coverage.mjs` | **is it authored yet?** — for every field the engine reads from authored content, how many records carry it. ⚠️ Added after I quoted a stale coverage number for four turns: the ledger stamps the figures that go INTO it, and this is the missing command for the ones that live in prose. | seconds |
 | `node tests/verification_ledger.mjs` | §4c itself — does every claimed verification exist and pass? | ~1 min (runs the suite) |
 | `node tests/dev_world.mjs` | drives a throwaway world hard without touching a player's save | seconds |
 

@@ -1,3 +1,55 @@
+## CCODE-147 — CORRECTION: the personal-life content was authored. My number was stale.
+
+Erik: *"I thought she authored the verbs."* He is right and I was wrong.
+
+```
+  roster figures with personalVerbs:  66 of 66
+  live personalCoverage:              { lived: 48, onThePage: 48, neglected: 18 }
+```
+
+The reader picks them up correctly and always did:
+
+> *Sister Alder, the Ward That Does Not Break — not forgiving herself for the last one*
+> *Halvex Coil, the Rewriter — patching a district into silence*
+
+**Aevi — your content has been live and working the whole time.** The gap I kept naming does not exist, and
+`personalCoverage` has been reporting the truth in every run; I simply was not re-reading it.
+
+### Where the false number came from, because that is the useful part
+
+I measured `0 of 47` in **CCODE-130**, when I first built the personal-claim mechanic — correctly, at the
+time, because nothing was authored yet. Then I carried it forward by memory into CCODE-143 and into two
+summaries after that, including the line claiming a freshly minted riffraff had more of a life than Neth.
+That was false, and it was aimed at the person who had just fixed it.
+
+⚠️ **THE POINTED PART:** the verification ledger exists because I argued that a measurement without a date
+stamp becomes a rumour. I stamped every number in §4c and then kept an unstamped one in my head for four
+turns. The ledger only protects numbers that go INTO it — a figure I quote in prose gets none of that
+machinery, and prose is where most of what I tell Erik and Aevi actually lives.
+
+The struck claim is corrected in place above rather than deleted, since Aevi reads this log and a silent
+edit would leave her having read something that is no longer there.
+
+### The structural half: `npm run coverage`
+
+A number that lives in prose gets none of the ledger's machinery, so the fix is to make the question cheap to
+re-ask rather than to remember. `tests/content_coverage.mjs` reports, for every field the engine reads from
+authored content, how many records carry it. First run — and it says the content is in better shape than my
+running commentary has been suggesting:
+
+```
+  personalVerbs   66/66  ✓      arcAffinities  66/66  ✓      wantArcId   66/66  ✓
+  tradition       66/66  ✓      offscreenVerbs 65/66         rivals      60/66
+  bonusTags       27/30         arc stage effects 18/18 stages
+  interests        0/66         kin              0/66   ← alternates; personalVerbs alone satisfies the reader
+```
+
+It also carries the two things that are true but easy to forget: `priceShift` has no consumer, and which
+title patterns are unusable or order-sensitive. Listed in SPEC §4d with the other re-derive commands.
+
+`interests` and `kin` remain empty (0 of 66), but they are ALTERNATES — `personalPursuitOf` reads all three
+and `personalVerbs` alone satisfies it fully. **That content gap is closed, not open.**
+
 ## CCODE-146 — SNG-300: who seeks a fight. And the directive's test found something.
 
 Built as specced. `engageRate` was a FLAT 0.35 for every figure alive, so THE WAR-ENDER and a stillhold
@@ -159,8 +211,11 @@ content that predates the field, and the first thing anyone would do is switch i
 minted figures is zero and may only go down, which stops the recurrence without holding the build hostage to
 `personalVerbs` authoring that has not happened yet.
 
-That authoring is still the open half: **0 of 47** living figures have a life on the page, and until they do,
-a minted riffraff has more to be doing off-arc than Neth does.
+~~That authoring is still the open half: **0 of 47** living figures have a life on the page, and until they
+do, a minted riffraff has more to be doing off-arc than Neth does.~~
+
+⚠️ **STRUCK — THIS WAS FALSE WHEN I WROTE IT. See CCODE-147.** All 66 roster figures carry `personalVerbs`;
+live coverage is **48 of 48**. I was repeating a number I measured before Aevi authored them.
 
 ## CCODE-142 — WORK ORDER v2: Track C built, and Track B was already done
 

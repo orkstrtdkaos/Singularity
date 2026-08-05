@@ -90,3 +90,32 @@ a label, it is a private note.**
 **I compress a mechanic I understand well into a short evocative phrase and mistake the compression for
 clarity.** *"By turning"* felt precise to me because I know it means *personally pushed an arc to a new
 stage.* **Compression is not concision. Concision is short AND complete.**
+
+
+---
+
+## AMENDMENT 2 — THE CHECK MUST BE ABOUT THE ACT, NOT THE INTENT
+**CCode's reformulation, 2026-08-05. Better than mine, recorded because I would otherwise keep the weaker one.**
+My rule was: *"before referring to any file as existing, check the path. If it starts with `po/`, it is mine
+and it is not live."* **It failed five times, and the fifth was after I wrote it.**
+> **CCode: "You applied it to reading and never to writing. The version that catches this is: *if I'm
+> authoring something the engine must read, the path may not start with `po/`* — a rule about where the pen
+> lands, not where the eye looks."**
+### WHY THE FIRST VERSION COULD NOT WORK
+**It asked me to remember, at read time, a fact about something I did at write time.** That is a memory task
+wearing a rule's clothes. **The reformulation is checkable at the moment of the act**, which is the only
+moment I am reliably paying attention.
+### ⚠️ THE SAME FAILURE, SYMMETRICALLY — THE PART WORTH KEEPING
+CCode had **eight ALERT entries uncommitted** while origin ran **117 commits ahead of him.**
+**He treated WRITTEN as SHIPPED. I treated DRAFTED as LIVE.** Different folder, identical failure — and
+**neither of us needed a better memory. We needed the check to be about the act rather than the intent.**
+### THE GENERALISATION
+**Any rule of the form "remember X when you later do Y" is a memory task.** Convert it to **"Y is impossible
+unless X"** or it will fail — and it will fail hardest on whoever wrote it, because they are the one who
+believes they will remember.
+### A THIRD INSTANCE, SAME EXCHANGE
+`DEED_WEIGHTS.heldTheLine === 3` was a gate locking a **tuning value.** What the design says is *holding a
+front for five passes is worth what winning a contest is worth* — **a relationship, which survives a retune of
+either.** My own `marcher > stillhold * 5` was the same error, defending a design Erik had already overturned.
+**A gate that defends yesterday's numbers against today's decision creates pressure to weaken the check rather
+than to think.**

@@ -10,7 +10,8 @@
         "retreat",
         "careful"
       ],
-      "consumable": false
+      "consumable": false,
+      "worth": "useful"
     },
     {
       "id": "waterskin",
@@ -25,7 +26,8 @@
         "weather",
         "travel",
         "survival"
-      ]
+      ],
+      "worth": "trivial"
     },
     {
       "id": "belt_knife",
@@ -36,7 +38,8 @@
         "attack",
         "force"
       ],
-      "consumable": false
+      "consumable": false,
+      "worth": "valuable"
     },
     {
       "id": "hemp_rope",
@@ -46,7 +49,8 @@
       "bonusTags": [
         "climb"
       ],
-      "consumable": false
+      "consumable": false,
+      "worth": "useful"
     },
     {
       "id": "resonance_lantern",
@@ -60,7 +64,8 @@
       ],
       "consumable": false,
       "substrateCharge": 0.04,
-      "substrateNote": "A phononic crystal that glows when it sings; singing is a draw on the lattice and the crystal stays warm."
+      "substrateNote": "A phononic crystal that glows when it sings; singing is a draw on the lattice and the crystal stays warm.",
+      "worth": "useful"
     },
     {
       "id": "medics_satchel",
@@ -71,7 +76,8 @@
         "heal",
         "help"
       ],
-      "consumable": false
+      "consumable": false,
+      "worth": "useful"
     },
     {
       "id": "healing_draught",
@@ -86,7 +92,8 @@
         "heal",
         "remedy",
         "grip"
-      ]
+      ],
+      "worth": "useful"
     },
     {
       "id": "dried_rations",
@@ -101,7 +108,8 @@
         "travel",
         "survival",
         "weather"
-      ]
+      ],
+      "worth": "trivial"
     },
     {
       "id": "prism_chip",
@@ -115,7 +123,8 @@
       ],
       "consumable": false,
       "substrateCharge": 0.05,
-      "substrateNote": "Radiant photonic crystal. A small shard holds a small charge."
+      "substrateNote": "Radiant photonic crystal. A small shard holds a small charge.",
+      "worth": "useful"
     },
     {
       "id": "trade_tokens",
@@ -125,7 +134,8 @@
       "bonusTags": [
         "negotiate"
       ],
-      "consumable": false
+      "consumable": false,
+      "worth": "trivial"
     }
   ]
 }

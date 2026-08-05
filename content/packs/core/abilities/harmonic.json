@@ -1530,10 +1530,17 @@
    ],
    "plainly": "A investigate action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about an hour Ranks: rank 2 deepens recallDepth+timeReach; rank 3 extends timeReach. Limit: open sky holds almost nothing.",
    "upkeep": {
-    "prepHours": 8,
-    "prepCondition": "uninterrupted sleep",
+    "prepHoursByRank": {
+     "1": 0,
+     "2": 8,
+     "3": 8
+    },
+    "prepCondition": "uninterrupted sleep for r2+",
     "interruptible": true,
-    "onInterrupt": "recoverable next night"
+    "onInterrupt": "recoverable next night",
+    "cooldownHours": {
+     "3": 24
+    }
    }
   },
   {
@@ -1711,7 +1718,10 @@
     "prepHours": 0,
     "spendsAllEnergy": true,
     "recoveryHours": 8,
-    "note": "costs the whole pool; unusable again until a full night"
+    "cooldownHours": {
+     "all": 168
+    },
+    "note": "⚠️ COOLDOWN ADDED: it costs the whole pool, so energy alone would allow it again next morning. A week between world-songs is what makes it the thing it is."
    }
   }
  ],

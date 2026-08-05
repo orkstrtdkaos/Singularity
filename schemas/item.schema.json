@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated item",
+  "description": "SNG-296 / WORK ORDER v2 Track C. A generated piece of gear. ⚠️ THE MECHANICAL HOOK IS `bonusTags`, not `effects` — the consumer map records that 19/19 authored valley items carry neither an `effect` nor an `effects` field: gear resolves through `bonusTags` (inventory.js:equipmentBonus and wieldBonusFor), and only CONSUMABLES resolve through `effects`. An item generated without bonusTags is a name — exactly the failure the born-whole contract exists to prevent.",
+  "type": "object",
+  "required": ["id", "name", "kind", "description", "bonusTags"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1, "description": "catalog key; without it an inventory entry can never be re-linked to its bonuses (inventory.js:37)" },
+    "name": { "type": "string", "minLength": 1 },
+    "kind": {
+      "type": "string",
+      "enum": ["weapon", "shield", "armor", "focus", "tool", "consumable", "misc"],
+      "description": "⚠️ `shield` is new here. The catalog has ZERO shields at HEAD while guard-shaped crafts are 19 of the defensive logics — Aevi's finding, and the reason the enum names it explicitly rather than letting shields hide under `armor`."
+    },
+    "description": { "type": "string", "minLength": 1 },
+    "bonusTags": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "THE MECHANICAL HOOK. Matched against an action's tags by equipmentBonus (ordinary rolls) and wieldBonusFor (skill-battle rounds). Empty means the item cannot affect any roll."
+    },
+    "tradition": { "type": "string", "description": "whose people made it — the grammar Aevi authors keys on this, so an ashwarden blade reads ashwarden" },
+    "worth": { "type": "string", "description": "a band, not a price — there is no pricing engine" },
+    "provenance": { "type": "string", "description": "where it came from, so a found thing has a history" },
+    "effects": {
+      "type": "array",
+      "description": "CONSUMABLES ONLY. Gear does not use this — see the description above.",
+      "items": { "type": "object" }
+    },
+    "image": { "type": "string" }
+  },
+  "additionalProperties": true
+}

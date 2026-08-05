@@ -28,13 +28,22 @@ import { checkBorn, describeBorn } from "./borncontract.js";  // SNG-250 §4: th
 // FIGHTABLE" — which is why opening it needed the encounter-pool seam wired at the same time (a minted
 // creature that never reaches the pool is content that exists and silently does not; see
 // generatedCreatureEncounters below).
-export const GEN_TYPES = ["npc", "location", "arc", "creature"];
+// SNG-296 (WORK ORDER v2 Track C): `item` joins them. Erik: "I'd really like the generation engines to
+// fire up" — weapons, armour and shields per domain and people.
+//
+// ⚠️ AEVI ORDERED C BEHIND B ("items need a consumer before they need a generator"), on the finding that
+// bonusTags are "SET and EVOLVED and NEVER MATCHED". THAT IS NOT THE CASE AT HEAD, and it is why this could
+// be built straight away: `equipmentBonus` (inventory.js:322) matches bonusTags against an action's tags and
+// feeds resolve.js's named `equipment` term, `wieldBonusFor` feeds the skill-battle `contestMods` as CCODE-43's
+// "wielded gear" line, and 27 of the 30 authored items already carry bonusTags. The consumer exists twice.
+// What her measurement did find, and it is real, is the CONTENT gap: ZERO shields in the catalog.
+export const GEN_TYPES = ["npc", "location", "arc", "creature", "item"];
 const DEFAULT_SESSION_CAP = 6; // governor: mints per scene/session before we prefer reuse-only
 
 /** Ensure the per-save generated-content store exists. Lives on the character so it syncs
  *  and participates in cross-device load-latest (SNG-BATCH-7). */
 export function ensureGenerated(character) {
-  if (!character.generated) character.generated = { schemaVersion: 1, npc: {}, location: {}, arc: {}, creature: {} };
+  if (!character.generated) character.generated = { schemaVersion: 1, npc: {}, location: {}, arc: {}, creature: {}, item: {} };
   for (const t of GEN_TYPES) if (!character.generated[t]) character.generated[t] = {};
   return character;
 }
@@ -110,6 +119,26 @@ export function stubEntity(type, context = {}, schema = {}) {
       look: `something native to ${loc.name || "this place"}, hard to fix in the eye`,
       danger: "it is dangerous the way the country around it is dangerous — it does not hunt you, it simply does not yield",
       pressures: ["KNOW (read what it is)", "WARD (keep it off you)"]
+    });
+  } else if (type === "item") {
+    // SNG-250 §3: the STUB must be born whole, and for an item that means it must be able to AFFECT A ROLL.
+    // The whole-item test is not "has a description" — a described item with no `bonusTags` is flavour text,
+    // which is precisely the failure mode Aevi named for generated gear. So the stub always carries a tag,
+    // derived from what the thing IS rather than invented: a weapon helps you strike, a shield helps you
+    // guard, armour helps you endure. Bland on purpose — a stub should be the least interesting version of
+    // itself, and the authored grammar is what makes a generated blade read as ashwarden.
+    const kind = context.itemKind || "tool";
+    const TAGS = {
+      weapon: ["attack", "force"], shield: ["guard", "protect"], armor: ["endure", "protect"],
+      focus: ["channel", "careful"], tool: ["careful", "make"], consumable: ["recover"], misc: ["carry"],
+    };
+    Object.assign(base, {
+      kind,
+      description: `a plain ${kind} out of ${loc.name || region}, honest and unremarkable`,
+      bonusTags: TAGS[kind] || TAGS.tool,
+      tradition: context.tradition || null,
+      worth: "common",
+      provenance: `made in ${loc.name || region}`,
     });
   } else if (type === "arc") {
     Object.assign(base, {

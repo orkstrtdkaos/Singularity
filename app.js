@@ -78,7 +78,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.14";
+const APP_VERSION = "1.9.15";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2337,6 +2337,12 @@ function hydrateGeneratedIntoContent(c) {
   ensureGenerated(c);
   for (const rec of generatedRecords(c, "location")) if (!CONTENT.locations[rec.id]) CONTENT.locations[rec.id] = rec;
   for (const rec of generatedRecords(c, "npc")) if (!CONTENT.npcs[rec.id]) CONTENT.npcs[rec.id] = rec;
+  // SNG-296 — A GENERATED ITEM MUST REACH THE CATALOG, or it is a record nothing can equip. The whole
+  // mechanical path for gear runs through the catalog: `fromCatalog`/`resolveInventoryItem` re-link an
+  // inventory entry to its `bonusTags`, and without that link `equipmentBonus` and `wieldBonusFor` find
+  // nothing to match — the item would look right in the bag and contribute to no roll. Same one-line hook
+  // the other two types get, and the reason to write it in the same breath as the gen type.
+  for (const rec of generatedRecords(c, "item")) if (!CONTENT.items[rec.id]) CONTENT.items[rec.id] = rec;
 }
 
 /** §2 engagement: record an implicit attention signal on a generated entity by id (across

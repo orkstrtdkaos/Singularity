@@ -318,6 +318,16 @@ const LEDGER = [
     note: "Aevi's call on {CRAFT} is the sharp one: a tag is what the WORLD noticed and a craft id is what the ENGINE resolved, so threading ids into reputation would make a deed an engine artifact rather than a social record. ⚠️ Order can starve a fillable pattern — reported rather than reordered, since order is authorship. My first two starvation detectors both measured something adjacent to the question before the third measured reachability.",
   },
   {
+    id: "SNG-296", ask: "get back to playability, and I'd really like the generation engines to fire up",
+    how: "generate.js — `item` joins npc/location/arc/creature; schemas/item.schema.json; hydrated into CONTENT.items on enterPlay",
+    gates: ["272/296: `item` is a generation type",
+            "272/296: SHIELD is a kind of its own — the catalog had none and guard crafts are 19 of the defensive logics",
+            "272/296: the schema REQUIRES the mechanical hook, not just a description",
+            "272/296: a generated item is hydrated into the item catalog",
+            "272/296: a generated shield actually changes a guard roll (the consumer Aevi thought was missing)"],
+    note: "⚠️ Aevi ordered this BEHIND a Track B that turned out to be already built. Her premise was that bonusTags are ‘SET and EVOLVED and NEVER MATCHED’ — but `equipmentBonus` matches them into resolve.js's named `equipment` term, `wieldBonusFor` feeds the skill-battle contestMods as CCODE-43's ‘wielded gear’ line, and 27 of 30 authored items already carry them. The consumer exists twice. What her measurement DID find is real and is content: ZERO shields, which is now a kind of its own in the schema. Erik's original order was right.",
+  },
+  {
     id: "SNG-267", ask: "the player is just one of many — so we need the world to live without the player",
     how: "tests/player_impact.mjs — the same worlds run with and without parties",
     gates: [],

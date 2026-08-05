@@ -10067,6 +10067,35 @@ await (async () => {
   })());
 }
 
+// --- SNG-296 (WORK ORDER v2 Track C): the item generator ---------------------------------------------
+{
+  const G = await import("../engine/generate.js");
+  const INV = await import("../engine/inventory.js");
+  const appI = readFileSync(join(root, "app.js"), "utf8");
+  const schema = JSON.parse(readFileSync(join(root, "schemas/item.schema.json"), "utf8"));
+
+  check("272/296: `item` is a generation type", G.GEN_TYPES.includes("item"));
+  check("272/296: SHIELD is a kind of its own — the catalog had none and guard crafts are 19 of the defensive logics",
+    (schema.properties.kind.enum || []).includes("shield"));
+
+  // ⚠️ BORN WHOLE MEANS IT CAN AFFECT A ROLL. A described item with no bonusTags is flavour text.
+  check("272/296: the schema REQUIRES the mechanical hook, not just a description",
+    (schema.required || []).includes("bonusTags") && schema.properties.bonusTags.minItems >= 1);
+
+  // The whole point: a generated item must reach the CATALOG, or nothing can re-link it to its bonuses.
+  check("272/296: a generated item is hydrated into the item catalog",
+    /generatedRecords\(c, "item"\)\) if \(!CONTENT\.items\[rec\.id\]\) CONTENT\.items\[rec\.id\] = rec/.test(appI));
+
+  // …and end to end: a generated shield in the bag changes a guard roll.
+  check("272/296: a generated shield actually changes a guard roll (the consumer Aevi thought was missing)", (() => {
+    const rules = { baseChance: { equipmentBonus: 5, equipmentBonusCap: 10, equipmentBonusTopN: 1 } };
+    const bearer = { inventory: [{ id: "gen-shield", name: "a plain shield", kind: "shield", bonusTags: ["guard", "protect"] }] };
+    const helped = INV.equipmentBonus(bearer, ["guard"], rules);
+    const unrelated = INV.equipmentBonus(bearer, ["persuade"], rules);
+    return helped.bonus > 0 && helped.helpers.length === 1 && unrelated.bonus === 0;
+  })());
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

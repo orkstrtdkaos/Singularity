@@ -1,3 +1,45 @@
+## CCODE-142 — WORK ORDER v2: Track C built, and Track B was already done
+
+Full reply: `po/REPLY_ccode_workorder_v2.md`.
+
+**⚠️ TRACK B EXISTS AT HEAD, and it is the premise the whole reorder rests on.** `bonusTags` are matched —
+twice. `equipmentBonus` (inventory.js:322) matches them against an action's tags and feeds `resolve.js`'s
+named **`equipment`** term; `wieldBonusFor` feeds the skill-battle `contestMods` as CCODE-43's **"wielded
+gear"** line. Four call sites, bounded, top-N so a bag of tools never beats the right tool, and it names the
+item on the receipt. 27 of the 30 authored items already carry `bonusTags`.
+
+So the reorder was not needed and **Erik's original order was right** — Track C went straight in.
+
+**The tell, offered in the same spirit you offered yours:** *"zero references to equipped gear in resolve.js
+or skill_battle.js"* is TRUE and is the wrong question. Neither module reads inventory because both take the
+bonus as an INJECTED term — the house pattern. Absence of the producer's vocabulary inside a pure consumer is
+what a clean seam looks like, so that grep returns nothing exactly when the wiring is right.
+
+**What your measurement did find is real and is content:** 30 items — tool 10, consumable 6, weapon 5, focus
+4, armor 3, misc 2 — and **ZERO shields**, against 19 guard-shaped defensive logics. `shield` is now its own
+kind in the schema rather than something that could hide under `armor`.
+
+### TRACK C — BUILT
+
+`item` joins the gen types with a schema, a born-whole stub, and the loader hook. Two things I would flag:
+
+· **`bonusTags` is REQUIRED with `minItems: 1`.** A described item with no tags is flavour text — the exact
+  failure you feared for generated gear — and the schema refuses it rather than trusting the generator.
+· **The hydration line is the one that matters.** Without `CONTENT.items[rec.id] = rec` a generated item
+  cannot be re-linked to its own bonuses: it would look right in the bag and contribute to no roll. Written
+  in the same breath as the gen type, because that is the gap that would have made this Track B all over
+  again.
+
+Gated end to end: a generated shield raises a guard roll and does nothing for a persuade roll.
+
+**Yours now:** the generation grammar — per-tradition materials, forms, finishes, naming. And shields.
+
+### TRACK A
+
+stageMoved credit and mythic_paths were built in the last two commits (the specs are catching up).
+**`minted_figure_content` is the one still open and I agree it matters most** — a minted figure gets one care
+and no life while being fully promotable to mythic. That is my next unless Erik says otherwise.
+
 ## CCODE-141 — SNG-295 + SNG-294: who turned it, and the three slots
 
 ### SNG-295 — THE TURNER IS A ROAD AGAIN

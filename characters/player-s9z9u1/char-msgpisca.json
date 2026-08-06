@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 84,
+  "xp": 89,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -43,13 +43,13 @@
   ],
   "alignment": {
     "spectrumId": -0.09036875,
-    "mechanical_spiritual": -0.015
+    "mechanical_spiritual": 0.0007500000000000007
   },
   "attunement": 1,
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 100,
-  "energy": 4,
+  "energy": 0,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -66,6 +66,23 @@
       "imageStamp": 1,
       "imagePrompt": "A worn canvas pack with good straps — bedroll, flint, mess kit, and the small comforts of the road. The tinderbox has been opened and used to kindle a fire at The Thinning's waygate clearing.",
       "imageDirty": true
+    },
+    {
+      "id": null,
+      "name": "The Ledger Assignment—Void",
+      "kind": "quest",
+      "qty": 1,
+      "description": "An old Precursor-era document, sealed and signed, that assigns Crestfall Notch to a resource-keeping post and names Hoss as its assignee. The seal at the bottom has been crossed through—not erased, but marked *void*. The messenger's message was plain: the assignment ends here. She is free.",
+      "consumable": false,
+      "_contract": {
+        "verdict": "reject",
+        "missing": [
+          "id"
+        ],
+        "vague": [
+          "effect-resolvable"
+        ]
+      }
     }
   ],
   "deeds": [
@@ -123,6 +140,20 @@
         "reaching"
       ],
       "weight": 1,
+      "spread": [],
+      "day": 3,
+      "worldDay": 37
+    },
+    {
+      "at": "2026-08-06T18:06:47.568Z",
+      "locationId": "the_thinning",
+      "communityId": "numinous.thinning",
+      "description": "Stood vigil beside a wounded sentinel and saw her through the choice to yield—released the boundary by refusing to ask refusal of her.",
+      "tags": [
+        "valor",
+        "mercy"
+      ],
+      "weight": 2,
       "spread": [],
       "day": 3,
       "worldDay": 37
@@ -196,23 +227,25 @@
         "player": "Tell Cevaine plainly what Boo read: the sender is not a threat, it is a messenger drowning in time, and the message is meant for you.",
         "summary": "At The Thinning's sealed veil on the dawn of day three, Splarf tells Cevaine plainly what Boo read from the dark side of the boundary: the sender is a messenger, desperate to deliver a message meant for Splarf about Hoss and what was taken. Cevaine recognizes this as the variable that changes everything—and the veil, hearing that its message has found its witness, begins to shift from refusal toward acceptance.",
         "narration": "You turn back to Cevaine, and the words come without calculation—clean, plain, the kind of truth that needs no craft to carry it.\n\n\"The sender is not a threat,\" you say quietly. \"Boo read the dark side. It's drowning in time, and the message—it's meant for me. It knows Hoss. It knows what was taken.\"\n\nCevaine's eyes track to you. For a moment the sentinel remains exactly as she is—geometry held, discipline intact—but something shifts behind that precision. A lattice-reader processes information the way a structure holds weight: by distributing it. She has been bearing this alone, the refusal and the cost and the mounting pressure from the other side. Now she has a variable that changes the equation.\n\nThe veil's hum steadies slightly. Not a breaking, not a surrender—but a *recognition*. The boundary reads your readiness the way it read your story, and the pressure on the other side of the distortion shifts from urgent to *waiting*. Desperate still, but no longer pushing. The sender has heard that the message has a witness on this side, and that changes something.\n\nCevaine's voice, when it comes, is barely audible. \"The form cannot open the boundary. But it can... stop *refusing*.\" She does not look at you. Her eyes remain on the veil's fractures. \"If you are ready. If you have chosen this.\"\n\nThe sealed veil hums its double-tone, and for the first time in three days, it does not sound like a door holding against the dark. It sounds like a door waiting to be opened.\n\n*✦ The Document and the Ditch — a step forward.*"
+      },
+      {
+        "player": "Accept the opening—tell Cevaine to let the boundary yield, and prepare yourself to meet what comes through.",
+        "summary": "At The Thinning's sealed veil on the dawn of day three, Splarf tells Cevaine to let the boundary open, and the sentinel releases her hold. The messenger crosses through, exhausted and purposeful, and delivers the document that voids the ledger assignment—Hoss is free.",
+        "narration": "You take a breath—the kind the Practice teaches, all the way down—and speak the words Cevaine needs to hear, the ones that dissolve the geometry she has been holding alone.\n\n\"Let it open,\" you say. \"I'm ready. I'm here.\"\n\nCevaine's eyes close for the first time since you arrived. Not defeat. Recognition. The form she has been holding—that lattice of perfect refusal, distributed weight, geometric precision—begins to loosen. Not collapse. Release. And as it does, the veil shifts. The double-tone hum that has been steady for days becomes something almost musical, almost *relieved*. The fractures of light-distortion at the boundary's edge spread and brighten.\n\nThe sealed veil is *opening*.\n\nYou feel it before you see it—the pressure from the other side, no longer pushing but *arriving*. The air at the clearing's edge becomes thick with something that is not quite presence, not quite sound. Boo withdraws into shadow at the forest's margin, reading what comes. Cevaine steps back from the boundary, her shoulders dropping as if she has set down a weight she has carried for three days without rest. The sentinel's discipline does not break—it simply *becomes something else*. Not refusal. Readiness.\n\nThe veil trembles. Within the distortion, something takes shape—a figure, the same too-many-jointed geometry you glimpsed before, but this time it does not pause. This time it *crosses*. The light-fractures bloom into something almost like a door, and the messenger steps through into the cold dawn of the valley.\n\nIt reads the air, reads *you*, reads the cleared space with that same purpose-shaped attention it had when it first came. Its form stabilizes in the real world—more solid now, more *present*—and you understand suddenly, clearly: it is exhausted. Whatever the veil held it back from, whatever cost its failure to deliver has carried on the other side, it is spent.\n\nThe figure turns to you. Its voice, when it comes, is not quite speech—it is the sound of time moving backward, a note in a frequency that makes your teeth ache.\n\n\"Splarf,\" it says, as if confirming something it has always known. \"The ledger ends here. The assignment is *void*. She is free.\"\n\nIn its too-many-jointed hands: a document. Old paper, Precursor-era, the seal at its bottom holding the weight of a decision that unmade a family.\n\nThe sender does not offer it gently. It *places* it—directly into your hands, with the certainty of something that has traveled a long way to put something exactly where it belongs.\n\n*✦ The Ledger Assignment—Void — added to your pack.*\n\n*✦ The Document and the Ditch — a step forward.*"
       }
     ],
     "lastTurn": {
-      "narration": "You turn back to Cevaine, and the words come without calculation—clean, plain, the kind of truth that needs no craft to carry it.\n\n\"The sender is not a threat,\" you say quietly. \"Boo read the dark side. It's drowning in time, and the message—it's meant for me. It knows Hoss. It knows what was taken.\"\n\nCevaine's eyes track to you. For a moment the sentinel remains exactly as she is—geometry held, discipline intact—but something shifts behind that precision. A lattice-reader processes information the way a structure holds weight: by distributing it. She has been bearing this alone, the refusal and the cost and the mounting pressure from the other side. Now she has a variable that changes the equation.\n\nThe veil's hum steadies slightly. Not a breaking, not a surrender—but a *recognition*. The boundary reads your readiness the way it read your story, and the pressure on the other side of the distortion shifts from urgent to *waiting*. Desperate still, but no longer pushing. The sender has heard that the message has a witness on this side, and that changes something.\n\nCevaine's voice, when it comes, is barely audible. \"The form cannot open the boundary. But it can... stop *refusing*.\" She does not look at you. Her eyes remain on the veil's fractures. \"If you are ready. If you have chosen this.\"\n\nThe sealed veil hums its double-tone, and for the first time in three days, it does not sound like a door holding against the dark. It sounds like a door waiting to be opened.\n\n*✦ The Document and the Ditch — a step forward.*",
-      "sceneSummary": "At The Thinning's sealed veil on the dawn of day three, Splarf tells Cevaine plainly what Boo read from the dark side of the boundary: the sender is a messenger, desperate to deliver a message meant for Splarf about Hoss and what was taken. Cevaine recognizes this as the variable that changes everything—and the veil, hearing that its message has found its witness, begins to shift from refusal toward acceptance.",
+      "narration": "You take a breath—the kind the Practice teaches, all the way down—and speak the words Cevaine needs to hear, the ones that dissolve the geometry she has been holding alone.\n\n\"Let it open,\" you say. \"I'm ready. I'm here.\"\n\nCevaine's eyes close for the first time since you arrived. Not defeat. Recognition. The form she has been holding—that lattice of perfect refusal, distributed weight, geometric precision—begins to loosen. Not collapse. Release. And as it does, the veil shifts. The double-tone hum that has been steady for days becomes something almost musical, almost *relieved*. The fractures of light-distortion at the boundary's edge spread and brighten.\n\nThe sealed veil is *opening*.\n\nYou feel it before you see it—the pressure from the other side, no longer pushing but *arriving*. The air at the clearing's edge becomes thick with something that is not quite presence, not quite sound. Boo withdraws into shadow at the forest's margin, reading what comes. Cevaine steps back from the boundary, her shoulders dropping as if she has set down a weight she has carried for three days without rest. The sentinel's discipline does not break—it simply *becomes something else*. Not refusal. Readiness.\n\nThe veil trembles. Within the distortion, something takes shape—a figure, the same too-many-jointed geometry you glimpsed before, but this time it does not pause. This time it *crosses*. The light-fractures bloom into something almost like a door, and the messenger steps through into the cold dawn of the valley.\n\nIt reads the air, reads *you*, reads the cleared space with that same purpose-shaped attention it had when it first came. Its form stabilizes in the real world—more solid now, more *present*—and you understand suddenly, clearly: it is exhausted. Whatever the veil held it back from, whatever cost its failure to deliver has carried on the other side, it is spent.\n\nThe figure turns to you. Its voice, when it comes, is not quite speech—it is the sound of time moving backward, a note in a frequency that makes your teeth ache.\n\n\"Splarf,\" it says, as if confirming something it has always known. \"The ledger ends here. The assignment is *void*. She is free.\"\n\nIn its too-many-jointed hands: a document. Old paper, Precursor-era, the seal at its bottom holding the weight of a decision that unmade a family.\n\nThe sender does not offer it gently. It *places* it—directly into your hands, with the certainty of something that has traveled a long way to put something exactly where it belongs.\n\n*✦ The Ledger Assignment—Void — added to your pack.*\n\n*✦ The Document and the Ditch — a step forward.*",
+      "sceneSummary": "At The Thinning's sealed veil on the dawn of day three, Splarf tells Cevaine to let the boundary open, and the sentinel releases her hold. The messenger crosses through, exhausted and purposeful, and delivers the document that voids the ledger assignment—Hoss is free.",
       "choices": [
         {
-          "label": "Accept the opening—tell Cevaine to let the boundary yield, and prepare yourself to meet what comes through.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.3
-          },
+          "label": "Take the document. Ask the messenger what it cost to get here, and whether it survived the crossing intact.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "devote",
-            "careful"
+            "comfort"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -221,34 +254,13 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Cevaine what happens to her if the veil opens—what does the cost of refusal become if she stops refusing?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "mechanical_spiritual": 0
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "comfort",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Numen-Sense one more time—read what the veil is *about to show you* before you commit to opening it.",
+          "label": "Take the document, but read it with Numen-Sense first, before you let it fully settle in the valley. It came through a sealed boundary; it may carry thin-place weight.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.7
-          },
-          "difficulty": 10,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
           "abilityId": "numen_sense",
           "energyCost": 3,
@@ -257,42 +269,76 @@
           "emergenceId": null
         },
         {
-          "label": "Wait and watch—give Cevaine and the boundary a moment to find equilibrium before you decide.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.2
-          },
+          "label": "Turn to Cevaine first. She held the line until it broke her form. Ask her what happens to her now that the sentinel's work is done.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "endure"
+            "comfort"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Stood vigil beside a wounded sentinel and saw her through the choice to yield—released the boundary by refusing to ask refusal of her.",
+          "tags": [
+            "valor",
+            "mercy"
+          ],
+          "weight": 2,
+          "communityId": null
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
-        "inventoryAdd": [],
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "The Ledger Assignment—Void",
+            "kind": "quest",
+            "description": "An old Precursor-era document, sealed and signed, that assigns Crestfall Notch to a resource-keeping post and names Hoss as its assignee. The seal at the bottom has been crossed through—not erased, but marked *void*. The messenger's message was plain: the assignment ends here. She is free.",
+            "consumable": false,
+            "effects": {}
+          }
+        ],
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
+      "ledgerEvents": [
+        {
+          "what": "The sealed veil at The Thinning opened and a messenger crossed through, delivering a document that voids Hoss's resource-assignment to Crestfall Notch.",
+          "tags": [
+            "thin-place-event",
+            "ledger-voided",
+            "message-delivered"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": false
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-document-and-the-ditch",
           "title": "The Document and the Ditch",
-          "summary": "To know exactly how a family becomes a line in a ledger—and whether that knowledge becomes repair, or ruin, or something the law has no category for.",
-          "giver": "yourself—the splinter that won't leave",
-          "note": "Boo read the dark side of the sealed veil and confirmed the sender knows Hoss by name. The message is about the ledger, the assignment, the eviction. The sender has been tasked with delivery and is desperate to complete it. The boundary is about to yield.",
+          "summary": "To know exactly how a family becomes a line in a ledger — and whether that knowledge becomes repair, or ruin, or something the law has no category for.",
+          "giver": null,
+          "note": "Splarf received the voided ledger assignment from a messenger sent from the other side of the sealed veil. The document itself is in hand; the assignment is void, and Hoss is named as free from the Notch claim.",
           "xpReward": null
+        }
+      ],
+      "stageOps": [
+        {
+          "questId": "the-document-and-the-ditch",
+          "stageId": "s2",
+          "evidence": "The messenger delivered the document that voids the ledger assignment—Hoss is free from the resource claim. Splarf now holds the proof in his hands."
         }
       ],
       "standingOps": [],
@@ -300,135 +346,171 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "The boundary is about to open—but Splarf has a choice about *how* it opens, and that choice will shape what emerges.",
-        "from": "Three days of vigil, Boo's dark reading, Cevaine's cracking form, and the sender's desperation—all converging on this moment. The veil itself is offering: acceptance in place of refusal."
+        "thing": "The messenger's exhaustion and the weight it carries—something on the other side of the veil paid a price for this delivery.",
+        "from": "The thin place itself, and the sender's desperation to reach Splarf and Hoss."
       },
-      "stageOps": [
-        {
-          "questId": "the-document-and-the-ditch",
-          "stageId": "s1",
-          "evidence": "Splarf learned that the sender on the other side of the sealed veil is a messenger tasked with delivering something to him specifically about Hoss and the eviction—the ledger assignment, the resource claim, the erasure. The sender has been waiting and pushing for three days to complete that delivery. The message exists, and it is about to arrive."
-        }
-      ],
       "scene": {
-        "setting": "The Thinning's waygate clearing at grey dawn, early spring. The sealed veil hums its double-tone, the hum now steadier—no longer angry refusal but waiting acceptance. Fractures of light-distortion visible at its edges. The fire has burned to coals, still holding warmth. The forest beyond the veil's edge is thick with watching, but the pressure from the sender has shifted from urgent pushing to desperate waiting. Cevaine stands at the boundary, the form still holding but visibly compromised—tremor in the frame, the discipline wearing itself down like a stone in current.",
+        "setting": "The Thinning's waygate clearing at grey dawn, early spring. The sealed veil has opened—its double-tone hum now musical and almost relieved, light-fractures spreading into something like a doorway. The fire has burned to coals. The forest beyond reads as quieter, watching less urgently.",
         "npcsPresent": [
           {
             "name": "Cevaine of the Seventh Measure",
-            "state": "Standing at the veil's edge in absolute discipline, eyes aware and reading, the form beginning to show visible strain. She has just recognized that the message has a witness on this side, and the variable has changed the equation she is holding. Waiting for Splarf's choice."
+            "state": "Standing back from the veil's edge, shoulders dropped, the sentinel's form released from its lattice of refusal. Her eyes track the messenger and Splarf with clear, exhausted attention. The discipline holds but it is no longer rigid—it is *present*."
+          },
+          {
+            "name": "The Messenger",
+            "state": "Crossed through the opened veil. Its too-many-jointed form is more solid now, more *anchored* to the valley, but visibly exhausted. It has placed the voided ledger directly into Splarf's hands and reads the clearing with purpose-shaped attention."
           }
         ],
         "objects": [
+          "The voided ledger assignment (in Splarf's hands)",
           "Fire (burned to coals, still holding warmth)",
           "Lean-to shelter (rough shelter-frame, spare)",
-          "Traveler's Pack (Splarf's pack, by the fire)",
-          "The sealed veil (humming double-tone, fractures of light-distortion spreading at its edges, now waiting rather than refusing)"
+          "Traveler's Pack (by the fire)",
+          "The opened veil (hum now musical, fractures spreading, light-distortion active)"
         ],
         "threads": [
-          "What is about to come through the veil, and will Splarf be ready to receive it?",
-          "What happens to Cevaine when the boundary opens and she no longer needs to hold the form?",
-          "What does the message contain—what was the sender tasked to deliver about Hoss and the ledger?"
+          "What the messenger will do now that its delivery is complete—will it return through the veil or remain?",
+          "What state Cevaine's form will settle into now that the sentinel's burden is released—can she rest?",
+          "What weight or thin-place quality the voided document itself carries—does it need to be read, grounded, or sealed in some way?"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "note": "Cevaine has heard that the message has a witness on this side, and the variable has changed the equation she is holding. The refusal is no longer the only option. The form is still intact but the recognition shows: she can stop bearing this alone.",
+          "name": "Cevaine of the Seventh Measure",
+          "role": "Sentinel of the sealed veil; Lattice-trained order-reader",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": null,
+          "note": "Held the sealed boundary against mounting pressure for three days until Splarf told her she could yield. Released her form and stepped back from the veil's edge as the messenger crossed through.",
           "learned": [
-            "The messenger on the other side is not a threat—it is drowning in time, desperate to deliver a message meant for Splarf.",
-            "Cevaine's refusal has been holding back something that very much needs to arrive, and the cost of that refusal is now visible in her body.",
-            "The sentinel's discipline can hold form through blood loss and exhaustion, but the choice to hold or yield is no longer purely geometric—it is now *relational*."
+            "The veil's pressure was not hostile but desperate—a messenger drowning in time, tasked with delivery.",
+            "The variable that changed the equation was Splarf's readiness to receive the message—the sentinel's refusal was transformed into acceptance once she knew the message had found its witness."
+          ],
+          "skillsObserved": [
+            "The ability to hold lattice-form even as it breaks under pressure",
+            "The discipline to yield without abandoning precision",
+            "The willingness to be moved by presence rather than plea"
           ],
           "relationshipDelta": 1,
-          "statusNote": "Standing sentinel at the sealed veil, discipline holding but visibly compromised, the form now showing strain. The variable has changed. Waiting for Splarf's choice on whether to accept the opening."
+          "status": "active",
+          "statusNote": "Standing vigil at the opened veil. The sentinel's form has been released from refusal; the cost of holding is now visible in her body, but her eyes remain clear."
+        },
+        {
+          "op": "meet",
+          "npcId": "the-messenger",
+          "name": "The Messenger",
+          "role": "A sent thing tasked with delivering a voided ledger assignment—origin unknown, purpose clear.",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "description": "Too-many-jointed geometry, half-real on the valley side of the veil. Its form stabilizes in the real world but remains distorted—something that does not quite fit into ordinary space. Its voice is the sound of time moving backward.",
+          "note": "Crossed through the opened veil at dawn on day three and delivered the voided ledger assignment directly to Splarf. Exhausted from the crossing, purposeful in delivery.",
+          "learned": [
+            "The messenger knows Hoss by name and understands the weight of the ledger assignment that erased her family.",
+            "The message was plain: the assignment ends, and Hoss is free.",
+            "The crossing cost something on the other side—the sender's desperation to complete the delivery carried real weight."
+          ],
+          "skillsObserved": [
+            "Capability to cross sealed boundaries when readiness is established",
+            "Ability to locate and address the intended recipient across reality-barriers",
+            "Knowledge of Precursor-era administrative structures and their reversal"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Crossed through the veil and delivered the document. Current intention unclear—whether it will return through the boundary or remain in the valley."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The ledger assignment that erased Hoss's family from Crestfall Notch has been voided—a messenger from beyond the sealed veil delivered the proof, and Hoss is named as free from the resource claim.",
+          "subjectId": "hoss"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "The sealed veil's mood has shifted from angry refusal to waiting acceptance. The hum is steadier. The boundary is no longer pushing back against crossing—it is preparing to yield. The sender's desperation has become recognition that the message has a witness on this side.",
+          "note": "The sealed veil opened on the dawn of day three when Splarf told Cevaine to let it yield. A messenger crossed through and delivered a voided ledger assignment. The veil remains open, its hum now musical rather than resentful.",
           "flag": {
-            "veilState": "shifting_toward_opening",
-            "pressureQuality": "waiting_rather_than_pushing"
+            "veilState": "opened_by_choice",
+            "messageDelivered": true,
+            "presenceOfMessenger": true
           }
         }
       ],
-      "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-veil-opens",
-          "label": "The Veil's Shift",
+          "topic": "the-voided-assignment",
+          "label": "The Ledger Assignment—Void",
           "kind": "lore",
-          "entityId": "the-thinning",
-          "fact": "The sealed veil at The Thinning is no longer refusing crossing—it has shifted toward *acceptance*. The boundary was being forced from the other side, and Cevaine's discipline was holding it back. Now that the messenger's purpose is understood (delivery of a message about Hoss and the ledger), the veil itself has recognized Splarf as the intended receiver. The shift from refusal to waiting opens the possibility of opening.",
+          "entityId": "hoss",
+          "fact": "The resource-assignment that bound Hoss to Crestfall Notch as a keeper post has been voided. A messenger from beyond the sealed veil delivered the proof—an old Precursor-era document with the seal crossed through and marked *void*. Hoss is free from the claim.",
           "links": [
-            "cevaine",
             "the-document-and-the-ditch",
-            "the-figure-in-the-thin-place",
-            "what-wakes-beneath"
+            "crestfall-notch",
+            "the-thinning",
+            "the-messenger"
           ]
         },
         {
-          "topic": "cevaine-the-variable-changes",
-          "label": "The Sentinel's Recognition",
+          "topic": "the-messenger",
+          "label": "The Messenger",
           "kind": "person",
-          "entityId": "cevaine",
-          "fact": "Cevaine's discipline is a lattice-trained structure that processes information by distributing weight. When Splarf told her that the message has a witness on this side, the variable changed the equation she has been holding. The refusal is no longer the only option. She can now *stop* refusing—and the cost of that choice becomes visible in her visible contemplation.",
+          "fact": "A sent thing tasked with delivering a voided ledger assignment to Splarf. Its form is too-many-jointed geometry, half-real, existing at the boundary between the valley and the thin place. Its voice is the sound of time moving backward. It knows Hoss by name and understands the weight of the assignment that erased her family. After crossing the opened veil, it delivered the document with certainty: the assignment ends, she is free.",
           "links": [
-            "cevaine",
             "the-thinning",
-            "lattice-order-logic"
+            "the-voided-assignment",
+            "hoss"
           ]
         }
       ],
-      "generateRequest": null,
+      "imagePrompt": "A figure of too-many-jointed geometry stepping through a veil of light-fractures at dawn—its form more solid in the valley but still distorted, too real and not real at once. Behind it, the thin place still glowing. In its hands, a document with a seal marked void. Cevaine standing back, shoulders dropped, the sentinel's form finally released. Splarf receiving what his vigil has earned.",
+      "generateRequest": [],
       "encounterOps": [],
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": null,
+      "timeOps": {
+        "hoursPassed": 1,
+        "why": "the opening of the veil and the messenger's crossing took focused presence through the early dawn"
+      },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "The Thinning's cleared boundary at grey dawn: Cevaine stands in absolute geometric discipline at the edge of the sealed veil, her angular frame trembling with visible strain, eyes fixed on the distortion—but now *aware*, now *reading* something other than resistance. The veil's hum wavers between anger and waiting. Splarf stands a breath away, grief and readiness in equal measure. Boo emerges from a shadow at the boundary's edge, a creature of absence made present. The forest beyond watches. The distortion shifts—not breaking, but *beginning to open*.",
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Thinning's waygate clearing at grey dawn, early spring. The sealed veil hums its double-tone, the hum now steadier—no longer angry refusal but waiting acceptance. Fractures of light-distortion visible at its edges. The fire has burned to coals, still holding warmth. The forest beyond the veil's edge is thick with watching, but the pressure from the sender has shifted from urgent pushing to…",
+      "setting": "The Thinning's waygate clearing at grey dawn, early spring. The sealed veil has opened—its double-tone hum now musical and almost relieved, light-fractures spreading into something like a doorway. The fire has burned to coals. The forest beyond reads as quieter, watching less urgently.",
       "npcsPresent": [
         {
           "name": "Cevaine of the Seventh Measure",
-          "state": "Standing at the veil's edge in absolute discipline, eyes aware and reading, the form beginning to show visible strain. S"
+          "state": "Standing back from the veil's edge, shoulders dropped, the sentinel's form released from its lattice of refusal. Her eye"
+        },
+        {
+          "name": "The Messenger",
+          "state": "Crossed through the opened veil. Its too-many-jointed form is more solid now, more *anchored* to the valley, but visibly"
         }
       ],
       "objects": [
+        "The voided ledger assignment (in Splarf's hands)",
         "Fire (burned to coals, still holding warmth)",
         "Lean-to shelter (rough shelter-frame, spare)",
-        "Traveler's Pack (Splarf's pack, by the fire)",
-        "The sealed veil (humming double-tone, fractures of light-distortion spreading at"
+        "Traveler's Pack (by the fire)",
+        "The opened veil (hum now musical, fractures spreading, light-distortion active)"
       ],
       "threads": [
-        "What is about to come through the veil, and will Splarf be ready to receive it?",
-        "What happens to Cevaine when the boundary opens and she no longer needs to hold the form?",
-        "What does the message contain—what was the sender tasked to deliver about Hoss and the ledger?"
+        "What the messenger will do now that its delivery is complete—will it return through the veil or remain?",
+        "What state Cevaine's form will settle into now that the sentinel's burden is released—can she rest?",
+        "What weight or thin-place quality the voided document itself carries—does it need to be read, grounded, or sealed in some way?"
       ]
     },
-    "beats": 12
+    "beats": 13
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 6,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [
@@ -548,20 +630,21 @@
           ]
         }
       ],
-      "stageIndex": 1,
+      "stageIndex": 2,
       "completedStages": [
-        "s1"
+        "s1",
+        "s2"
       ],
       "progress": [
-        "At The Thinning, Splarf stands between a sealed veil and a wounded sentinel, with a purpose-shaped darkness waiting beyond. No document surfaces here—but the clarity deepens: some work cannot be completed by force of will alone. Rest is not weakness; it is the work itself.",
-        "The veil's own sealed agency teaches: some boundaries choose. Some refusals are not breakable but are *true*. Hoss's erasure may not be fixable by the same logic that created it. The ledger may not be the place to write back.",
         "The boundary's recognition reveals: the eviction was not merely administrative—it was *known* on the other side of the veil, and something was being sent to address it. The figure was a messenger, and its failure to cross compounds a specific, named loss.",
         "The veil carries fragments of a pre-Transition ledger: Crestfall Notch was mapped as a *resource-keeping assignment*, with Hoss as the assignee. The figure was meant to deliver notice that the assignment had ended—but the full message remains incomplete, and the veil's hold is fracturing under the pressure from the other side.",
         "Splarf reads the sealed veil and learns it carries a fragment of the pre-Transition ledger—Crestfall Notch mapped as a resource-keeping post, Hoss as its assignee. The figure from the veil was sent to *end* that assignment. The full message remains blocked by the veil's tiring hold.",
         "Splarf stands vigil with Cevaine at the sealed veil, offering shared presence rather than persuasion. The sentinel's form holds, but it is no longer alone—and Boo moves to read what lies on the dark side of the boundary.",
         "Boo reads the dark side of the sealed veil and confirms the sender knows Hoss by name. The message is about Hoss, about the assignment, about the ledger—and the figure is desperate to deliver it.",
         "Boo read the dark side of the sealed veil and confirmed the sender knows Hoss by name. The message is about the ledger, the assignment, the eviction. The sender has been tasked with delivery and is desperate to complete it. The boundary is about to yield.",
-        "↳ Splarf learned that the sender on the other side of the sealed veil is a messenger tasked with delivering something to him specifically about Hoss and the eviction—the ledger assignment, the…"
+        "↳ Splarf learned that the sender on the other side of the sealed veil is a messenger tasked with delivering something to him specifically about Hoss and the eviction—the ledger assignment, the…",
+        "Splarf received the voided ledger assignment from a messenger sent from the other side of the sealed veil. The document itself is in hand; the assignment is void, and Hoss is named as free from the Notch claim.",
+        "↳ The messenger delivered the document that voids the ledger assignment—Hoss is free from the resource claim. Splarf now holds the proof in his hands."
       ],
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
@@ -572,15 +655,14 @@
     "cevaine": {
       "id": "cevaine",
       "name": "Cevaine",
-      "role": "Sentinel of the sealed veil; Lattice-trained order-reader tasked with holding the boundary",
+      "role": "Sentinel of the sealed veil; Lattice-trained order-reader",
       "description": "Tall, angular, skin nearly translucent. Eyes that track with geometric precision. Moves with the eerie discipline of lattice-trained structure-thinking.",
       "firstMet": {
         "locationId": "gen-object-object",
         "day": 1
       },
-      "relationship": 9,
+      "relationship": 10,
       "history": [
-        "[d2] Refused aid—the discipline will not permit a change in posture while serving as sentinel. Form is now visibly compensating (left hand gripped to thigh, voice showing effort) but remains unbroken. Blood loss sealed by cold and compensation, not treated. The first genuine fracture in absolute form.",
         "[d2] The sentinel's discipline continues to hold form through blood loss and standing without rest. The fracture in their voice deepens. They refuse aid—the practice will not permit a change in posture while the veil is watched.",
         "[d3] Splarf used Numen-Sense to read the veil's state and learned that the boundary is tiring—the sentinel may now sense this too, or may already know it from the Lattice's own reading. The silence between them is no longer refusal but a shared crisis.",
         "[d3] The discipline is now visibly compensating—the form is breaking because the veil is trying to open, and Cevaine's hold is the only thing preventing it. This is the moment where absolute geometry meets a choice it cannot calculate.",
@@ -589,30 +671,31 @@
         "[d3] Splarf called Boo to sense the veil's dark side—and the sentinel's form cracked for the first time. Her eyes opened and *questioned*. The discipline has held through blood loss, through exhaustion, through refusal of aid—but it cannot hold against what Boo revealed: the veil is not holding. It is…",
         "[d3] Splarf offered shared presence—not persuasion, not demand, but a willingness to stand in the same choice. Cevaine's form recognized this, and for the first time since the vigil began, the sentinel is not alone. The discipline holds, but the recognition has shifted something in the work.",
         "[d3] Splarf offered shared presence and Boo read the dark side of the veil. The sentinel saw him truly—a moment of recognition without words. The form still holds, but the fractures are spreading. Cevaine knows now that someone stands with her, and that knowledge has changed something in the choice…",
-        "[d3] Cevaine has heard that the message has a witness on this side, and the variable has changed the equation she is holding. The refusal is no longer the only option. The form is still intact but the recognition shows: she can stop bearing this alone."
+        "[d3] Cevaine has heard that the message has a witness on this side, and the variable has changed the equation she is holding. The refusal is no longer the only option. The form is still intact but the recognition shows: she can stop bearing this alone.",
+        "[d3] Held the sealed boundary against mounting pressure for three days until Splarf told her she could yield. Released her form and stepped back from the veil's edge as the messenger crossed through."
       ],
       "knownFacts": [
-        "The figure that was sent knows Hoss by name; the dark remembers what the light sealed away",
-        "Cevaine can *see* someone who meets her in stillness rather than against it; mutual recognition can reach a Lattice-trained mind without words",
         "The sentinel's refusal is not loneliness but duty—and duty becomes easier to hold when witnessed, even silently",
         "Shared presence without demand can be read by a Lattice-trained mind as real understanding",
         "The sentinel's refusal is a chosen cost, not a given—and witnessing that choice makes the holding easier to sustain",
         "The messenger on the other side is not a threat—it is drowning in time, desperate to deliver a message meant for Splarf.",
         "Cevaine's refusal has been holding back something that very much needs to arrive, and the cost of that refusal is now visible in her body.",
-        "The sentinel's discipline can hold form through blood loss and exhaustion, but the choice to hold or yield is no longer purely geometric—it is now *relational*."
+        "The sentinel's discipline can hold form through blood loss and exhaustion, but the choice to hold or yield is no longer purely geometric—it is now *relational*.",
+        "The veil's pressure was not hostile but desperate—a messenger drowning in time, tasked with delivery.",
+        "The variable that changed the equation was Splarf's readiness to receive the message—the sentinel's refusal was transformed into acceptance once she knew the message had found its witness."
       ],
       "skillsObserved": [
-        "The ability to hold form even as it breaks",
-        "The willingness to be the dam against something she does not",
-        "Discipline so precise it can hold form even as it fractures",
         "Willingness to admit, under pressure, what the true nature o",
         "The ability to read presence without words—Cevaine read Spla",
-        "Continued discipline under mounting pressure—the form does n"
+        "Continued discipline under mounting pressure—the form does n",
+        "The ability to hold lattice-form even as it breaks under pre",
+        "The discipline to yield without abandoning precision",
+        "The willingness to be moved by presence rather than plea"
       ],
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Standing sentinel at the sealed veil, discipline holding but visibly compromised, the form now showing strain. The variable has changed. Waiting for Splarf's choice on whether to accept the opening.",
+      "statusNote": "Standing vigil at the opened veil. The sentinel's form has been released from refusal; the cost of holding is now visible in her body, but her eyes remain clear.",
       "domains": {
         "primary": "lattice"
       },
@@ -623,7 +706,44 @@
       },
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Cevaine%2C%20Woman%2C%20Lattice-trained%20order-reader%20of%20the%20Seventh%20Measure%3B%20sentinel%20at%20the%20sealed%20veil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39649&nologo=true",
       "_portraitTier": "devoted",
-      "met": 3
+      "met": 4
+    },
+    "the-messenger": {
+      "id": "the-messenger",
+      "name": "The Messenger",
+      "role": "A sent thing tasked with delivering a voided ledger assignment—origin unknown, purpose clear.",
+      "description": "Too-many-jointed geometry, half-real on the valley side of the veil. Its form stabilizes in the real world but remains distorted—something that does not quite fit into ordinary space. Its voice is the sound of time moving backward.",
+      "firstMet": {
+        "locationId": "the_thinning",
+        "day": 3
+      },
+      "relationship": 0,
+      "history": [
+        "[d3] Crossed through the opened veil at dawn on day three and delivered the voided ledger assignment directly to Splarf. Exhausted from the crossing, purposeful in delivery."
+      ],
+      "knownFacts": [
+        "The messenger knows Hoss by name and understands the weight of the ledger assignment that erased her family.",
+        "The message was plain: the assignment ends, and Hoss is free.",
+        "The crossing cost something on the other side—the sender's desperation to complete the delivery carried real weight."
+      ],
+      "skillsObserved": [
+        "Capability to cross sealed boundaries when readiness is esta",
+        "Ability to locate and address the intended recipient across ",
+        "Knowledge of Precursor-era administrative structures and the"
+      ],
+      "status": "active",
+      "gender": "nonbinary",
+      "pronouns": "they/them",
+      "statusNote": "Crossed through the veil and delivered the document. Current intention unclear—whether it will return through the boundary or remain in the valley.",
+      "domains": {
+        "primary": "numinous"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "the_thinning",
+        "day": 3
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -637,10 +757,11 @@
         "[d2] The veil's mood has shifted from resigned waiting to something approaching calm—as if the vigil itself has become a kind of answer, even an incomplete one. The thin place reads as less hostile.",
         "[d2] The Thinning clearing is stripped of resources—no firewood, no food plants, no medicinal growth within the clearing's boundary. The forest beyond the veil thickens against approach; the humming presence reads as present and observant. The boundary appears deliberately scoured.",
         "[d3] The veil is tiring under constant pressure from the sender on the other side. It is holding by active choice, not passive seal—the hold is chosen moment by moment, and the cost is mounting.",
-        "[d3] The sealed veil's mood has shifted from angry refusal to waiting acceptance. The hum is steadier. The boundary is no longer pushing back against crossing—it is preparing to yield. The sender's desperation has become recognition that the message has a witness on this side."
+        "[d3] The sealed veil's mood has shifted from angry refusal to waiting acceptance. The hum is steadier. The boundary is no longer pushing back against crossing—it is preparing to yield. The sender's desperation has become recognition that the message has a witness on this side.",
+        "[d3] The sealed veil opened on the dawn of day three when Splarf told Cevaine to let it yield. A messenger crossed through and delivered a voided ledger assignment. The veil remains open, its hum now musical rather than resentful."
       ],
       "flags": {
-        "veilState": "shifting_toward_opening",
+        "veilState": "opened_by_choice",
         "presenceDetected": true,
         "presencePulledBack": true,
         "presenceWithdrawn": true,
@@ -648,7 +769,8 @@
         "resourceState": "depleted",
         "boundaryQuality": "thickened_observant",
         "pressureLevel": "constant_testing",
-        "pressureQuality": "waiting_rather_than_pushing"
+        "pressureQuality": "waiting_rather_than_pushing",
+        "messageDelivered": true
       },
       "vectorsKnown": [
         "mechanical_spiritual"
@@ -891,10 +1013,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "Cevaine's admission that the veil is being *forced* open, not chosen—the boundary is under active attack from the other side, and the…",
-        "from": "Cevaine's own words under pressure, a crack in the stoic refusal"
-      },
-      {
         "thing": "Boo's sensing of the veil's true state: the pressure from the other side is not hostile but *desperate*—the sender is running out of time…",
         "from": "Boo's nature as an umbral thing that reads shadows differently than sunlight can—the companion's loyalty has deepened the character's…"
       },
@@ -909,6 +1027,10 @@
       {
         "thing": "The boundary is about to open—but Splarf has a choice about *how* it opens, and that choice will shape what emerges.",
         "from": "Three days of vigil, Boo's dark reading, Cevaine's cracking form, and the sender's desperation—all converging on this moment. The veil…"
+      },
+      {
+        "thing": "The messenger's exhaustion and the weight it carries—something on the other side of the veil paid a price for this delivery.",
+        "from": "The thin place itself, and the sender's desperation to reach Splarf and Hoss."
       }
     ],
     "offscreenCursor": 1,
@@ -3589,25 +3711,61 @@
         "aliases": [],
         "createdDay": 3,
         "updatedDay": 3
+      },
+      "the-messenger": {
+        "id": "the-messenger",
+        "label": "The Messenger",
+        "kind": "person",
+        "facts": [
+          "[d3] A sent thing tasked with delivering a voided ledger assignment—origin unknown, purpose clear.",
+          "[d3] A sent thing tasked with delivering a voided ledger assignment to Splarf. Its form is too-many-jointed geometry, half-real, existing at the boundary between the valley and the thin place. Its voice is the sound of time moving backward. It knows Hoss by name and understands the weight of the…"
+        ],
+        "links": [
+          "the-thinning",
+          "the-voided-assignment",
+          "hoss"
+        ],
+        "aliases": [],
+        "createdDay": 3,
+        "entityId": "the-messenger",
+        "updatedDay": 3
+      },
+      "hoss": {
+        "id": "hoss",
+        "label": "The Ledger Assignment—Void",
+        "kind": "lore",
+        "facts": [
+          "[d3] The resource-assignment that bound Hoss to Crestfall Notch as a keeper post has been voided. A messenger from beyond the sealed veil delivered the proof—an old Precursor-era document with the seal crossed through and marked *void*. Hoss is free from the claim."
+        ],
+        "links": [
+          "the-document-and-the-ditch",
+          "crestfall-notch",
+          "the-thinning",
+          "the-messenger"
+        ],
+        "aliases": [],
+        "createdDay": 3,
+        "entityId": "hoss",
+        "updatedDay": 3
       }
     }
   },
   "tendencies": {
-    "stealth": 5.496677869391996,
-    "strategic": 5.321813396002625,
-    "cautious": 8.428055869973994,
-    "cerebral": 6.097904591067651,
-    "patient": 5.928589266312719,
-    "devotion": 0.9477656298478938,
-    "risky": 4.176831298745931,
-    "generous": 4.929813220361159,
-    "social": 7.172423257149021,
-    "craft": 1.2378676524278271
+    "stealth": 5.359260922657196,
+    "strategic": 5.188768061102559,
+    "cautious": 9.217354473224644,
+    "cerebral": 5.945456976290959,
+    "patient": 5.780374534654901,
+    "devotion": 1.9240714891016966,
+    "risky": 4.072410516277283,
+    "generous": 4.80656788985213,
+    "social": 6.993112675720296,
+    "craft": 1.2069209611171314
   },
   "aptitudes": [
     "naive"
   ],
-  "actionCount": 34,
+  "actionCount": 35,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3893,8 +4051,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786038782932,
-  "rev": 111,
+  "updatedAt": 1786039607571,
+  "rev": 112,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4025,7 +4183,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 40
+    "the_numinous_reach": 41
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -4041,10 +4199,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-06T12:00:39.112Z",
-      "lastAt": "2026-08-06T17:53:02.930Z",
+      "lastAt": "2026-08-06T18:06:47.566Z",
       "startDay": 37,
       "endDay": 37,
-      "beats": 19
+      "beats": 20
     }
   ],
   "establishedFacts": [
@@ -4089,43 +4247,49 @@
       "text": "The veil's tiring hold is not passive resignation—it is a *chosen refusal* of something that very much needs to arrive. The cost of that choice is mounting visibly in Cevaine's body. The sentinel knows this and is choosing to pay it, moment by moment.",
       "day": 3,
       "subjectId": null
+    },
+    {
+      "id": "hoss",
+      "text": "The ledger assignment that erased Hoss's family from Crestfall Notch has been voided—a messenger from beyond the sealed veil delivered the proof, and Hoss is named as free from the resource claim.",
+      "day": 3,
+      "subjectId": "hoss"
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 23,
+      "applied": 24,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 38,
-    "scene": 38,
-    "choices": 38,
-    "offer": 21,
-    "codexUpdates": 25,
-    "imagePrompt": 16,
+    "sceneSummary": 39,
+    "scene": 39,
+    "choices": 39,
+    "offer": 22,
+    "codexUpdates": 26,
+    "imagePrompt": 17,
     "gambitApt": 31,
-    "sceneEnded": 38,
-    "characterDeltas": 28,
+    "sceneEnded": 39,
+    "characterDeltas": 29,
     "arcOps": 1,
-    "factUpdates": 5,
-    "placeUpdates": 9,
-    "timeOps": 23,
-    "deeds": 4,
-    "ledgerEvents": 2,
-    "questUpdates": 11,
-    "npcUpdates": 30,
+    "factUpdates": 6,
+    "placeUpdates": 10,
+    "timeOps": 24,
+    "deeds": 5,
+    "ledgerEvents": 3,
+    "questUpdates": 12,
+    "npcUpdates": 31,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
     "markDefiningMoment": 1,
     "_engineClosedScene": 2,
     "itemUpdates": 1,
-    "stageOps": 1
+    "stageOps": 2
   },
-  "_opTurns": 38,
+  "_opTurns": 39,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -4158,7 +4322,7 @@
   },
   "customAbilities": {},
   "companionBonds": {
-    "hush": 2.75
+    "hush": 3.25
   },
   "teachers": {},
   "foreclosed": [
@@ -4192,6 +4356,11 @@
       {
         "text": "Spoke a story of chosen refusal to a sealed boundary—and was recognized by it in return.",
         "weight": 1,
+        "day": 3
+      },
+      {
+        "text": "Stood vigil beside a wounded sentinel and saw her through the choice to yield—released the boundary by refusing to ask refusal of her.",
+        "weight": 2,
         "day": 3
       }
     ]
@@ -4252,8 +4421,9 @@
     "help": 1,
     "comfort": 1,
     "sustain": 2,
-    "careful": 1,
+    "careful": 2,
     "speak": 1,
-    "honest": 1
+    "honest": 1,
+    "devote": 1
   }
 }

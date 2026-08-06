@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 36,
+  "xp": 38,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -42,13 +42,13 @@
     }
   ],
   "alignment": {
-    "spectrumId": 0
+    "spectrumId": -0.05
   },
   "attunement": 1,
   "maxHealth": 35,
   "health": 32,
   "maxEnergy": 100,
-  "energy": 15,
+  "energy": 6,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -99,7 +99,7 @@
   ],
   "currentLocationId": "the_thinning",
   "activeScene": {
-    "locationId": "gen-object-object",
+    "locationId": "the_thinning",
     "turns": [
       {
         "player": "Ask Cevain3 if she'd like to join you while you investigate what Boo has sensed.",
@@ -135,20 +135,27 @@
         "player": "Rest here a moment—the practice, steady breathing, centering yourself while Cevaine stands sentinel. You need to think.",
         "summary": "At The Thinning's sealed waygate, Splarf centers through the Unbroken Practice while Cevaine stands watch. The veil refuses by choice, the dark waits with purpose, and a task remains undelivered on the other side.",
         "narration": "You settle into the deep breathing of the Unbroken Practice, your body finding the stillness that holds when everything else fractures. Your eyes lower, not closing—aware but unfocused—as your breath finds its anchor in the slow count Hoss taught you winters ago. Cevaine remains a few paces distant, hand near their injured shoulder, watching the veil and the dark beyond with the geometric precision that sees patterns where ordinary sight sees only shadow.\n\nYour thoughts arrange themselves like stones settling in still water. The veil seals by *choice*—not mechanism but decision. The thing in the dark is *sent*, tasked with delivery, and *waits* because it cannot cross. The sender on the other side persists. This is not a chance event; it is an ongoing push, a problem that will not resolve itself simply by being ignored.\n\nThe night deepens around you both. Early spring's chill bites at exposed skin, and the copper-taint of the earth rises with the damp. You can feel Boo somewhere in the margins of the dark—not anxious, but attending, the way it always attends when something is unresolved. Cevaine's breathing is steady, though you catch the slight wince when they shift weight off the wounded shoulder.\n\nOne clear thought surfaces: whatever stands on the other side of that veil, it did not come with violence in mind. It came with a task. And tasks that matter usually matter to *someone*—someone with enough reach to move things from the other side of a sealed boundary."
+      },
+      {
+        "player": "Use story sense to tell Cevaine a story about why it's important to treat and injury - something from the lattice cities so she will be convinced to let you look at her injured shoulder.",
+        "summary": "Splarf offered Cevaine a story drawn from Lattice wisdom about precision and structural failure, hoping to convince them to accept aid for their injured shoulder. Cevaine heard the logic but chose the work—the veil remains sealed, the dark remains watching, and the sentinel remains at post.",
+        "narration": "You turn fully toward Cevaine, drawing on the deep well of stories you carry—the kind that settle into a listener like stones finding the bottom of still water. You think of the Lattice-Cities you've heard described in fragments: precision, order, the geometric discipline that holds even when bodies fail. You begin quietly, your voice steady in the way Storykeeper-trained voices carry.\n\n\"There's a story they tell in the order-houses,\" you say, \"about a reader who held a breach-seal for three days and three nights without moving. Geometric precision, perfect stillness. But on the third night, her shoulder began to fail—small at first, imperceptible to anyone but her. She thought it was discipline enough to ignore it. By dawn, the seal had cracked. Not because the reader wasn't strong enough. Because the body, unmended, becomes a variable. And the Seventh Measure teaches that unaccounted variables collapse the pattern.\"\n\nYou watch Cevaine's face as you speak—those angular features, the way their eyes track the geometry of your words as if searching for the seam where they might fit into their own rigid framework. You're offering them something in their own language: precision cannot hold without the foundation intact. The body is structure, too.\n\nCevaine's gaze holds on yours for a moment longer than before. Then, slowly, they look away—back toward the veil, back toward the dark. Their hand does not lower from their shoulder. \"The Seventh Measure does not account for stubbornness,\" they say quietly. \"And I am still reading. The breach does not move while I am here.\" It is not a refusal, exactly. It is a deferral. The story found its mark—you can see the calculation happen behind their eyes—but it did not move them to action. Not yet. The wound can wait. The veil cannot."
       }
     ],
     "lastTurn": {
-      "narration": "You settle into the deep breathing of the Unbroken Practice, your body finding the stillness that holds when everything else fractures. Your eyes lower, not closing—aware but unfocused—as your breath finds its anchor in the slow count Hoss taught you winters ago. Cevaine remains a few paces distant, hand near their injured shoulder, watching the veil and the dark beyond with the geometric precision that sees patterns where ordinary sight sees only shadow.\n\nYour thoughts arrange themselves like stones settling in still water. The veil seals by *choice*—not mechanism but decision. The thing in the dark is *sent*, tasked with delivery, and *waits* because it cannot cross. The sender on the other side persists. This is not a chance event; it is an ongoing push, a problem that will not resolve itself simply by being ignored.\n\nThe night deepens around you both. Early spring's chill bites at exposed skin, and the copper-taint of the earth rises with the damp. You can feel Boo somewhere in the margins of the dark—not anxious, but attending, the way it always attends when something is unresolved. Cevaine's breathing is steady, though you catch the slight wince when they shift weight off the wounded shoulder.\n\nOne clear thought surfaces: whatever stands on the other side of that veil, it did not come with violence in mind. It came with a task. And tasks that matter usually matter to *someone*—someone with enough reach to move things from the other side of a sealed boundary.",
-      "sceneSummary": "At The Thinning's sealed waygate, Splarf centers through the Unbroken Practice while Cevaine stands watch. The veil refuses by choice, the dark waits with purpose, and a task remains undelivered on the other side.",
+      "narration": "You turn fully toward Cevaine, drawing on the deep well of stories you carry—the kind that settle into a listener like stones finding the bottom of still water. You think of the Lattice-Cities you've heard described in fragments: precision, order, the geometric discipline that holds even when bodies fail. You begin quietly, your voice steady in the way Storykeeper-trained voices carry.\n\n\"There's a story they tell in the order-houses,\" you say, \"about a reader who held a breach-seal for three days and three nights without moving. Geometric precision, perfect stillness. But on the third night, her shoulder began to fail—small at first, imperceptible to anyone but her. She thought it was discipline enough to ignore it. By dawn, the seal had cracked. Not because the reader wasn't strong enough. Because the body, unmended, becomes a variable. And the Seventh Measure teaches that unaccounted variables collapse the pattern.\"\n\nYou watch Cevaine's face as you speak—those angular features, the way their eyes track the geometry of your words as if searching for the seam where they might fit into their own rigid framework. You're offering them something in their own language: precision cannot hold without the foundation intact. The body is structure, too.\n\nCevaine's gaze holds on yours for a moment longer than before. Then, slowly, they look away—back toward the veil, back toward the dark. Their hand does not lower from their shoulder. \"The Seventh Measure does not account for stubbornness,\" they say quietly. \"And I am still reading. The breach does not move while I am here.\" It is not a refusal, exactly. It is a deferral. The story found its mark—you can see the calculation happen behind their eyes—but it did not move them to action. Not yet. The wound can wait. The veil cannot.",
+      "sceneSummary": "Splarf offered Cevaine a story drawn from Lattice wisdom about precision and structural failure, hoping to convince them to accept aid for their injured shoulder. Cevaine heard the logic but chose the work—the veil remains sealed, the dark remains watching, and the sentinel remains at post.",
       "choices": [
         {
-          "label": "Ask Cevaine directly: what would a Lattice-trained order-reader do, if a problem had no seam to close? Is standing watch the answer?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Step closer and examine the wound directly—respect their choice, but tend it anyway while they stand watch",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "negotiate"
+            "careful",
+            "help",
+            "craft"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -157,29 +164,14 @@
           "emergenceId": null
         },
         {
-          "label": "Move closer to the forest's edge and call out again—this time not a question, but an offering. Tell the waiting thing you understand it cannot cross, and ask what it needs delivered, and to whom.",
+          "label": "Join Cevaine at the veil's edge—stand sentinel together, hand near their shoulder, offering presence as grounding the way the Lattice does",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 20,
-          "intentTags": [
-            "careful",
-            "risky"
-          ],
-          "abilityId": "steady_soul",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Head back down toward the Marcher line you glimpsed earlier. If the veil is sealed by choice and something is sending from the other side, someone in the valley must know why—or at least know where to ask.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "help",
+            "comfort"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -188,16 +180,34 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Boo what it senses about the waiting thing—is it kin to the dark, or a visitor wearing it? Does it mean harm?",
+          "label": "Ask Cevaine directly: what would it take for them to accept care? Not as pressure—as real question",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 12,
+          "intentTags": [
+            "negotiate",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Return to your centering breath and wait—sometimes the answer comes not from pushing, but from patient attention to what already is",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": 10,
+          "difficulty": 0,
           "intentTags": [
-            "study"
+            "study",
+            "careful",
+            "devote"
           ],
-          "abilityId": "beastfriend",
-          "energyCost": 0,
+          "abilityId": "the_unbroken_practice",
+          "energyCost": 1,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -206,76 +216,49 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-document-and-the-ditch",
-          "title": "The Document and the Ditch",
-          "summary": "To know exactly how a family becomes a line in a ledger — and whether that knowledge becomes repair, or ruin, or something the law has no category for.",
-          "giver": null,
-          "note": "The sealed veil shows the shape of an ongoing push from the other side—not a chance event, but a task persisting. Something was sent with purpose and cannot complete it. The mystery deepens: what is being delivered, and why does the valley's boundary refuse it?",
-          "xpReward": null
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": {
-        "thing": "The realization that the veil itself is choosing—that boundaries can be agents, not just barriers",
-        "from": "Cevaine's admission that geometric precision cannot read will, and Splarf's own contact with the sealed boundary revealing intention, not mere mechanism"
-      },
+      "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Thinning's sealed waygate clearing, full night now. Early spring dark, cold air carrying the copper-taint of the earth. The humming shimmer-line of the veil holds firm at the forest's far edge, luminous against absolute black. Deadfall scattered across stone. The purpose-shaped presence in the Disputed Zone woods beyond remains at a distance, patient and watching.",
+        "setting": "The Thinning's sealed waygate clearing, full night, early spring dark. The veil's humming shimmer-line holds firm at the forest's edge, luminous against absolute black. Deadfall scattered across stone. The copper-taint of the earth beneath your feet. Cold air carrying the weight of things unfinished.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Standing sentinel a few paces back from the veil, shoulders rigid despite the visible shoulder injury. Eyes tracking the boundary with geometric precision. Breathing steady. Hand near the wound, ready but not urgent. Waiting."
+            "state": "Standing sentinel a few paces from the veil, shoulders rigid with pain they will not acknowledge, hand near the wounded shoulder, eyes tracking the boundary with geometric precision—still reading, still waiting, still refusing to move"
           }
         ],
         "objects": [
-          "The sealed veil—shimmer and hum, geometrically precise yet deliberately choosing",
+          "The sealed veil—shimmer and hum, luminous, deliberately refusing",
           "Deadfall scattered across stone and earth",
-          "The dark of the Disputed Zone forest—held at distance, not fleeing but giving space",
-          "Copper-tainted earth beneath your feet"
+          "The dark of the Disputed Zone forest—held at distance, patient, waiting with purpose"
         ],
         "threads": [
-          "The purpose-shaped thing in the dark waits—aware, sent, tasked with something undelivered",
-          "The veil seals by choice, not mere barrier-logic—something has decided what crosses and what does not",
-          "Cevaine stands at the edge of geometric understanding, admitting a problem that pattern cannot solve",
-          "The sender on the other side continues to push, and the veil continues to refuse"
+          "The purpose-shaped thing in the dark waits—aware, sent, tasked with something undelivered; patience suggests it will try again",
+          "Cevaine stands wounded at the edge of geometric understanding, admitting the veil's agency but not accepting care",
+          "The sender on the other side continues to push, and the veil continues to refuse—the work remains undone"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "name": null,
-          "role": null,
-          "gender": null,
-          "pronouns": null,
-          "description": null,
-          "note": "Now standing sentinel at the sealed veil with Splarf, admitting openly that geometric precision cannot read will or choice—that a boundary refusing is not pattern but agency. This is the deepest visible crack yet in the Seventh Measure's absolute method. Shoulders tense with pain from the shoulder wound, but present and watching, offering Lattice-trained witness to a problem that cannot be solved.",
+          "note": "Splarf offered a story from Lattice wisdom about structural failure and precision's dependence on foundation—Cevaine heard it, understood the logic, but chose the sentinel's work over care. The wound goes tended by choice.",
           "learned": [
-            "Geometric precision has no category for things that choose—only for patterns that can be read and predicted",
-            "A boundary that refuses repeated crossing is making a decision, not executing structure",
-            "Some problems have no seam to close; they require a different kind of thinking entirely"
+            "Cevaine's discipline can hear reason in its own language—pattern, structure, precision—but will defer care for what is perceived as more urgent"
           ],
           "skillsObserved": [],
           "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Active, injured shoulder, standing sentinel at The Thinning's sealed veil with Splarf. Now questioning the limits of their own geometric precision.",
-          "revealName": null,
-          "nameExtend": null,
-          "bondType": "ally",
-          "bondStage": null
+          "statusNote": "Actively wounded, standing sentinel, admitting the limit of geometric precision—now also demonstrating the limit of reason against chosen sacrifice"
         }
       ],
       "factUpdates": [],
@@ -283,27 +266,13 @@
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-figure-in-the-thin-place",
-          "label": "The Figure in the Thin Place",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "The sealed veil demonstrates that the sender on the other side continues to push—this is not a chance opening but an ongoing attempt to deliver something. The veil holds it back deliberately, by choice. The task remains unfinished, and the urgency of that failure carries weight.",
-          "links": [
-            "what-wakes-beneath",
-            "the-water-crisis",
-            "the-thinning",
-            "veil-as-boundary-agent"
-          ]
-        },
-        {
-          "topic": "veil-as-boundary-agent",
-          "label": "Veil as Boundary—Agent",
-          "kind": "lore",
-          "entityId": null,
-          "fact": "The sealed veil at The Thinning demonstrates agency. It refuses crossing, responds to contact with clarified intention (refusal, not anger), and holds against repeated attempts to open it from the other side. It seals by *choice*, not mechanism. A boundary may be a thinking thing—or at the very least, a thing that chooses what passes and what does not.",
+          "topic": "cevaine-and-duty",
+          "label": "Cevaine's Choice",
+          "kind": "person",
+          "entityId": "cevaine",
+          "fact": "Cevaine of the Seventh Measure will not leave their post, even wounded, even when offered reason in the language of their own tradition. The work—reading the veil, standing sentinel—takes precedence over care.",
           "links": [
             "the-thinning",
-            "what-wakes-beneath",
             "cevaine",
             "lattice-order-logic"
           ]
@@ -315,14 +284,15 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 1,
-        "why": "The centering breath and Splarf's deep thinking while Cevaine holds watch—a full shift of attention and gathering stillness, moving toward full night"
+        "hoursPassed": 0.5,
+        "why": "the depth of centering, the conversation with Cevaine, the waiting in the cold"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
       "imagePrompt": null,
+      "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
       "markDefiningMoment": null,
@@ -333,27 +303,25 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Thinning's sealed waygate clearing, full night now. Early spring dark, cold air carrying the copper-taint of the earth. The humming shimmer-line of the veil holds firm at the forest's far edge, luminous against absolute black. Deadfall scattered across stone. The purpose-shaped presence in the Disputed Zone woods beyond remains at a distance, patient and watching.",
+      "setting": "The Thinning's sealed waygate clearing, full night, early spring dark. The veil's humming shimmer-line holds firm at the forest's edge, luminous against absolute black. Deadfall scattered across stone. The copper-taint of the earth beneath your feet. Cold air carrying the weight of things unfinished.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Standing sentinel a few paces back from the veil, shoulders rigid despite the visible shoulder injury. Eyes tracking the"
+          "state": "Standing sentinel a few paces from the veil, shoulders rigid with pain they will not acknowledge, hand near the wounded "
         }
       ],
       "objects": [
-        "The sealed veil—shimmer and hum, geometrically precise yet deliberately choosing",
+        "The sealed veil—shimmer and hum, luminous, deliberately refusing",
         "Deadfall scattered across stone and earth",
-        "The dark of the Disputed Zone forest—held at distance, not fleeing but giving sp",
-        "Copper-tainted earth beneath your feet"
+        "The dark of the Disputed Zone forest—held at distance, patient, waiting with pur"
       ],
       "threads": [
-        "The purpose-shaped thing in the dark waits—aware, sent, tasked with something undelivered",
-        "The veil seals by choice, not mere barrier-logic—something has decided what crosses and what does not",
-        "Cevaine stands at the edge of geometric understanding, admitting a problem that pattern cannot solve",
-        "The sender on the other side continues to push, and the veil continues to refuse"
+        "The purpose-shaped thing in the dark waits—aware, sent, tasked with something undelivered; patience suggests it will try again",
+        "Cevaine stands wounded at the edge of geometric understanding, admitting the veil's agency but not accepting care",
+        "The sender on the other side continues to push, and the veil continues to refuse—the work remains undone"
       ]
     },
-    "beats": 7
+    "beats": 8
   },
   "clock": {
     "schemaVersion": 1,
@@ -503,7 +471,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d1] Declined Splarf's offered aid with precision and distance. Their shoulder is injured but they reject tending. They have turned their focus to the tree-line and the advancing dark, visibly withdrawing into stillness after their defeat.",
         "[d1] Yielded to Splarf in ritual contest. Now admitting that geometric precision cannot solve this breach. They are waiting to understand what Splarf means to do. For the first time, they are uncertain about the Lattice's answer.",
         "[d1] Splarf asked Cevaine plainly what the Lattice intends for the sealed breach. The order-reader admitted uncertainty — a fracture in their geometric confidence. They are waiting to see what Splarf chooses to do. Standing watch at the tree-line now, accepting the weight of not-knowing.",
         "[d1] Yielded to the character's invitation to investigate the dark. Admitting uncertainty has opened something — they are no longer looking only at the veil, but at the character who stood against precision itself.",
@@ -512,17 +479,18 @@
         "[d1] Heard Splarf call out to the dark thing in the old tongue. Confirmed it heard but did not answer. Now standing at Splarf's shoulder, hand grounding, admitting that this is a problem geometric precision cannot solve. Waiting to see what Splarf will choose next.",
         "[d1] Watched Splarf make contact with the sealed veil itself and read intention in its hum. Now standing closer, hand near Splarf's shoulder—offering presence as a grounding point, the Lattice way of saying: I see the limit of my own thinking, and I will hold the ground while you stand at that edge.",
         "[d1] Cevaine admitted that geometric precision cannot read will or choice—that a boundary refusing repeated crossing attempts is not pattern but agency. This is the first visible crack in the Seventh Measure's absolute method. They now stand sentinel at Splarf's side, waiting to understand a problem…",
-        "[d1] Now standing sentinel at the sealed veil with Splarf, admitting openly that geometric precision cannot read will or choice—that a boundary refusing is not pattern but agency. This is the deepest visible crack yet in the Seventh Measure's absolute method. Shoulders tense with pain from the shoulder…"
+        "[d1] Now standing sentinel at the sealed veil with Splarf, admitting openly that geometric precision cannot read will or choice—that a boundary refusing is not pattern but agency. This is the deepest visible crack yet in the Seventh Measure's absolute method. Shoulders tense with pain from the shoulder…",
+        "[d1] Splarf offered a story from Lattice wisdom about structural failure and precision's dependence on foundation—Cevaine heard it, understood the logic, but chose the sentinel's work over care. The wound goes tended by choice."
       ],
       "knownFacts": [
-        "The other side continues to send, and the veil holds it back deliberately",
         "A boundary can be a thinking thing—or at least a thing that resists, chooses, refuses",
         "A barrier that refuses is a choice, not structure",
         "Geometric precision has no category for will",
         "The veil's agency is either a new thing the Seventh Measure cannot account for, or the boundary itself is thinking",
         "Geometric precision has no category for things that choose—only for patterns that can be read and predicted",
         "A boundary that refuses repeated crossing is making a decision, not executing structure",
-        "Some problems have no seam to close; they require a different kind of thinking entirely"
+        "Some problems have no seam to close; they require a different kind of thinking entirely",
+        "Cevaine's discipline can hear reason in its own language—pattern, structure, precision—but will defer care for what is perceived as more urgent"
       ],
       "skillsObserved": [
         "absolute tracking and positioning",
@@ -535,13 +503,13 @@
       "status": "active",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "statusNote": "Active, injured shoulder, standing sentinel at The Thinning's sealed veil with Splarf. Now questioning the limits of their own geometric precision.",
+      "statusNote": "Actively wounded, standing sentinel, admitting the limit of geometric precision—now also demonstrating the limit of reason against chosen sacrifice",
       "domains": {
         "primary": "lattice"
       },
       "domainsSource": "role",
       "lastSeen": {
-        "locationId": "gen-object-object",
+        "locationId": "the_thinning",
         "day": 1
       }
     }
@@ -702,12 +670,28 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 889,
-    "lastSharedReadAt": "2026-08-06T01:56:54.775Z",
+    "lastGenCount": 899,
+    "lastSharedReadAt": "2026-08-06T11:50:18.676Z",
     "lastTickWorldDay": 37,
     "lastCanonWorldDay": 37,
-    "pressureQueue": [],
-    "turnsSinceOffer": 0,
+    "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_hollow_pace",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a hollow-pace has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_hollow_pace",
+          "name": "a hollow-pace"
+        },
+        "addedDay": 1,
+        "locationId": "the_thinning"
+      }
+    ],
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Cevaine's admission that geometric thinking cannot solve the moving-thing's choice—a crack in their structured world that opens toward…",
@@ -3190,7 +3174,8 @@
         "kind": "lore",
         "facts": [
           "[d1] Cevaine of the Seventh Measure has encountered something that geometric precision cannot solve: the veil's own agency, and the stillness of The Unbroken Practice. They are waiting to understand how to think about problems that have no seam to close.",
-          "[d1] Geometric precision cannot read choice or will. A boundary that refuses is not structure but agency—a decision. The Seventh Measure has no category for things that choose."
+          "[d1] Geometric precision cannot read choice or will. A boundary that refuses is not structure but agency—a decision. The Seventh Measure has no category for things that choose.",
+          "[d1] Cevaine of the Seventh Measure will not leave their post, even wounded, even when offered reason in the language of their own tradition. The work—reading the veil, standing sentinel—takes precedence over care."
         ],
         "links": [
           "the-unbroken-practice",
@@ -3201,7 +3186,8 @@
         ],
         "aliases": [
           "The Lattice Cannot Read Stillness",
-          "The Seventh Measure's Limit"
+          "The Seventh Measure's Limit",
+          "Cevaine's Choice"
         ],
         "createdDay": 1,
         "entityId": "cevaine",
@@ -3228,22 +3214,22 @@
     }
   },
   "tendencies": {
-    "stealth": 8.892268912331005,
-    "strategic": 2.3982195720266066,
-    "cautious": 4.900385894633852,
-    "cerebral": 4.1953029246580265,
-    "patient": 1.7569213803350268,
-    "devotion": 1.5332510011914646,
-    "risky": 2.6538139958564377,
-    "generous": 1.6773312019300801,
-    "social": 2.6025794796876522,
-    "craft": 0.9506249999999999
+    "stealth": 8.66996218952273,
+    "strategic": 2.3382640827259413,
+    "cautious": 4.777876247268006,
+    "cerebral": 4.090420351541575,
+    "patient": 1.7129983458266511,
+    "devotion": 1.494919726161678,
+    "risky": 2.5874686459600267,
+    "generous": 1.635397921881828,
+    "social": 5.537514992695461,
+    "craft": 0.9268593749999999
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 15,
+  "actionCount": 16,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3489,8 +3475,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785983028725,
-  "rev": 60,
+  "updatedAt": 1786017639115,
+  "rev": 63,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3590,7 +3576,9 @@
             }
           ],
           "lastAttentionDay": 1,
-          "needsDepth": "nominated"
+          "needsDepth": "nominated",
+          "promotedWorldDay": 37,
+          "canonTier": "canonical"
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
@@ -3615,7 +3603,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 21
+    "the_numinous_reach": 22
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -3627,6 +3615,14 @@
       "startDay": 36,
       "endDay": 37,
       "beats": 21
+    },
+    {
+      "id": "sess-2",
+      "startedAt": "2026-08-06T12:00:39.112Z",
+      "lastAt": "2026-08-06T12:00:39.112Z",
+      "startDay": 37,
+      "endDay": 37,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -3664,36 +3660,36 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 20,
-    "scene": 20,
-    "choices": 20,
+    "sceneSummary": 21,
+    "scene": 21,
+    "choices": 21,
     "offer": 11,
-    "codexUpdates": 13,
+    "codexUpdates": 14,
     "imagePrompt": 9,
-    "gambitApt": 17,
-    "sceneEnded": 20,
-    "characterDeltas": 11,
+    "gambitApt": 18,
+    "sceneEnded": 21,
+    "characterDeltas": 12,
     "arcOps": 1,
     "factUpdates": 3,
     "placeUpdates": 4,
-    "timeOps": 8,
+    "timeOps": 9,
     "deeds": 2,
     "ledgerEvents": 1,
     "questUpdates": 4,
-    "npcUpdates": 12,
+    "npcUpdates": 13,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
     "markDefiningMoment": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 20,
+  "_opTurns": 21,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "beastfriend": 2,
       "numen_sense": 3,
-      "storykeeper": 1,
+      "storykeeper": 2,
       "the_unbroken_practice": 2,
       "steady_soul": 1
     },
@@ -3702,18 +3698,18 @@
       {
         "abilityId": "greenlore",
         "since": "2026-08-05T23:25:06.049Z",
-        "progress": 3
+        "progress": 4
       },
       {
         "abilityId": "wayfinding",
         "since": "2026-08-05T23:25:30.590Z",
-        "progress": 3
+        "progress": 4
       }
     ],
     "lastUsed": {
       "beastfriend": 37,
       "numen_sense": 37,
-      "storykeeper": 36,
+      "storykeeper": 37,
       "the_unbroken_practice": 37,
       "steady_soul": 37
     }
@@ -3779,5 +3775,6 @@
     "lastDeployDay": 37,
     "lastBeat": "witness_power"
   },
-  "_intentAsked": null
+  "_intentAsked": null,
+  "syncedAt": 1785983028725
 }

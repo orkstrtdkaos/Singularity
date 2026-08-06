@@ -4,7 +4,10 @@
  "name": "Gearsflat",
  "regionId": "the_foothills",
  "communityId": "gearsflat",
- "spectrum": "mechanical_spiritual",
+ "spectrum": {
+  "mechanical_spiritual": -0.4,
+  "order_chaos": 0.25
+ },
  "tags": [
   "settlement",
   "foothill",
@@ -19,14 +22,17 @@
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
  "dangerLevel": 1,
- "image": null,
+ "image": "content/packs/valley/assets/gearsflat.jpg",
  "questSeeds": [],
  "map": {
   "x": 390,
   "y": 192
  },
  "encounterSeeds": [],
- "poleIntensity": 0.5,
+ "poleIntensity": {
+  "mechanical": 0.4,
+  "order": 0.25
+ },
  "substrateSource": {
   "kind": "pool",
   "delta": 0.2,

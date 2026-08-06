@@ -137,7 +137,9 @@
       ],
       "effect": "Ring a place and READ what rings back — map a location's whole pole-disposition and hidden co-firings at once. Resonance as sonar for the coordinate-world.",
       "cannot": "Loud — announces you; reveals disposition, not intent; a dead-silent (origin-flat) place returns nothing.",
-      "discovery": "use — resonate then perceive; a Heights rune-reader's trick"
+      "discovery": "use — resonate then perceive; a Heights rune-reader's trick",
+      "braidName": "Shatterlight",
+      "braidKey": "prism_sight+sonic_resonance"
     },
     {
       "id": "the_harbor_light",
@@ -403,7 +405,9 @@
       "effect": "You see an ending's exact hour and can bring it to that hour precisely — no sooner, no crueller, no waste. The Ashwarden mercy.",
       "cannot": "It cannot bring an ending that was not already coming. Used to hasten what should have lived, it marks the wielder — permanently, visibly.",
       "discovery": "use — read a death, then tend it in the same beat; or taught in the Hollow March",
-      "combinationTier": "within-tradition"
+      "combinationTier": "within-tradition",
+      "braidName": "The Counted End",
+      "braidKey": "deathsense+palework"
     },
     {
       "id": "the_lattice_engine",
@@ -1151,7 +1155,9 @@
       "effect": "You read a thing's STRUCTURE and its ENDING at once — where it bears load, and where it is already dying. **The two readings do not want to share a channel.** What you get is a map with two layers, slightly out of register: the load-bearing seam speaking one language and the death-register speaking another. **Rough. But readable — and the MISALIGNMENT is itself the information.** Where the two disagree, something is wrong with the thing in a way neither reading alone would find.",
       "cannot": "⛔ **IT NEVER RESOLVES CLEANLY.** Stop trying to hold the two apart and you get noise; stop trying to hold them together and you get noise. **You must simply let both be present and accept the double vision.** It costs more than either reading alone, and it will always be rough.",
       "discovery": "use — deathsense and order-sense held open in the same act, on a thing that is both STRUCTURED and DYING. **Discovered in play by Silas Weir at the rune-binding, 2026-07-12** — he stopped fighting the friction and let the two readings sit out of register, and the runes landed where the spear already had an opinion about what it was.",
-      "authoredFrom": "⛔ EMERGENT — this recipe did not exist. It was created by a player co-activating two abilities the game had no combination for. The GM narrated it perfectly and the engine minted nothing. **Authored retroactively so the discovery is real.**"
+      "authoredFrom": "⛔ EMERGENT — this recipe did not exist. It was created by a player co-activating two abilities the game had no combination for. The GM narrated it perfectly and the engine minted nothing. **Authored retroactively so the discovery is real.**",
+      "braidName": "The Double Register",
+      "braidKey": "deathsense+order_sense"
     }
   ],
   "discoverability": {
@@ -1187,5 +1193,43 @@
       "The Turning Word"
     ]
   },
-  "canonPairing": "⛔ SNG-344: THE PAIR IS CANON — this file and world/braid_recipes.json are NOT competitors and neither supersedes the other. Zero ids in common, and they key differently (parts:[a,b] here vs braidKey 'a+b' there). This file is the MECHANICAL authority; world/braid_recipes.json is the NAMING authority. One NAMES a braid, the other RESOLVES it. Do not merge, do not delete, do not 'reconcile' by dropping either — the join is an authored crosswalk (Aevi, SNG-344), not an engine merge. ⚠️ THREE OF THE SEVEN NAMED BRAIDS ALREADY HAVE A MECHANICAL RECIPE HERE UNDER A DIFFERENT NAME: Undying Ledger = the_double_register, Shatterlight = the_sounding, The Hollowing Sight = the_counted_end. Those are naming COLLISIONS to resolve, not blanks to fill — one pairing must not surface two names to the player."
+  "canonPairing": "⛔ SNG-344: THE PAIR IS CANON — this file and world/braid_recipes.json are NOT competitors and neither supersedes the other. Zero ids in common, and they key differently (parts:[a,b] here vs braidKey 'a+b' there). This file is the MECHANICAL authority; world/braid_recipes.json is the NAMING authority. One NAMES a braid, the other RESOLVES it. Do not merge, do not delete, do not 'reconcile' by dropping either — the join is an authored crosswalk (Aevi, SNG-344), not an engine merge. ⚠️ THREE OF THE SEVEN NAMED BRAIDS ALREADY HAVE A MECHANICAL RECIPE HERE UNDER A DIFFERENT NAME: Undying Ledger = the_double_register, Shatterlight = the_sounding, The Hollowing Sight = the_counted_end. Those are naming COLLISIONS to resolve, not blanks to fill — one pairing must not surface two names to the player.",
+  "_pairing": "⚠️ SNG-344. THE PAIR IS CANON, NOT EITHER FILE. This table says what a combination DOES; `world/braid_recipes.json` NAMES it. Entries with a `braidName` are linked; the rest are mechanics whose braid has not been named yet, and naming them is authoring rather than merging.",
+  "_stillToName": {
+    "_note": "⚠️ THE 4 NAMED BRAIDS WITH NO MECHANICS — the other half of the crosswalk, and the harder half: these need an `effect` and a `cannot` authored, not a name chosen.",
+    "pending": [
+      {
+        "braidKey": "order_sense+palework",
+        "name": "Ashen Meridian",
+        "parts": [
+          "order_sense",
+          "palework"
+        ]
+      },
+      {
+        "braidKey": "the-attended-end+the_shadow_work",
+        "name": "Marrow's Wings",
+        "parts": [
+          "the-attended-end",
+          "the_shadow_work"
+        ]
+      },
+      {
+        "braidKey": "boundary_stone+the_shielding_word",
+        "name": "You Shall Not Pass",
+        "parts": [
+          "boundary_stone",
+          "the_shielding_word"
+        ]
+      },
+      {
+        "braidKey": "deathsense+the-attended-end",
+        "name": "The Received Ending",
+        "parts": [
+          "deathsense",
+          "the-attended-end"
+        ]
+      }
+    ]
+  }
 }

@@ -2025,14 +2025,14 @@
     "transform"
    ],
    "narrationHints": "A travel and puzzle action. You draw the figure of a rising thing and occupy it, and it mu",
-   "description": "⚠️ FIGURIST FLIGHT, AND IT IS SHAPE-TAKING. A figurist works in forms; to fly, they take the form of something that already does. You become a hawk, a gull, a moth — a real one, at that thing's real size, with that thing's real limits.",
-   "notFor": "⚠️ YOUR OWN BODY'S ADVANTAGES. A hawk has no hands, carries nothing, and speaks to no one. You get flight and you get a bird's life for the duration.",
+   "description": "⚠️ FIGURIST FLIGHT — shape-taking. A figurist works in forms, so to fly they take the form of something that does. Your gear comes with you, folded into the form, and you remain yourself inside it. The limit is how long you can hold a shape that is not yours.",
+   "notFor": "Permanence. The form is held, not become, and holding it is the whole cost.",
    "tree": [
     {
      "rank": 1,
      "name": "The Borrowed Form",
-     "grants": "Take the form of a small flying creature and fly as it flies. Your gear does not come with you.",
-     "cannot": "Carrying anything. Speaking. Using any craft that needs hands.",
+     "grants": "Take the form of a flying creature and fly as it flies, gear and mind intact, for about an hour.",
+     "cannot": "Holding it past the hour, or taking anyone with you.",
      "functions": [
       "travel",
       "transform"
@@ -2042,9 +2042,21 @@
     },
     {
      "rank": 2,
-     "name": "The Kept Self",
-     "grants": "Take a larger form and keep your own mind sharp in it — you can still think, plan, and remember detail.",
-     "cannot": "Keeping your voice or your hands. It is still an animal's body.",
+     "name": "The Long Form",
+     "grants": "Hold it for a day — enough to cross a leg — and carry one other person in a form of their own.",
+     "cannot": "Taking more than one other, or holding past the day without setting down.",
+     "functions": [
+      "travel",
+      "transform"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Shared Form",
+     "grants": "⚠️ Take the whole party up together, each in their own shape, for a day.",
+     "cannot": "Doing it to anyone unwilling, or twice in a day.",
      "functions": [
       "travel",
       "transform"
@@ -2055,7 +2067,7 @@
    ],
    "challengeTypes": [
     "TRAVEL",
-    "PUZZLE"
+    "EXPLORE"
    ],
    "harmRung": "none",
    "nativeOrCombination": "native",
@@ -2066,9 +2078,10 @@
    ],
    "mechanic": {
     "magnitude": 7,
-    "duration": 10,
+    "duration": 24,
+    "targets": 4,
     "range": "route-scale",
-    "note": "⚠️ FLIGHT AT THE COST OF BEING A PERSON. Halves a leg's days and you arrive with nothing you were carrying — the gear has to travel some other way or wait."
+    "note": "⚠️ A PARTY TRAVEL CRAFT, which is the point. Gear travels; judgement is intact; the limit is DURATION and HOW MANY, never whether it works."
    },
    "rankDeltas": [],
    "intensity": {
@@ -2077,19 +2090,19 @@
    },
    "bounds": [
     {
-     "text": "YOUR GEAR DOES NOT COME WITH YOU — it stays where you changed",
+     "text": "THE FORM IS HELD, NOT BECOME — when the duration ends you are yourself, wherever you are",
      "class": "hard"
     },
     {
-     "text": "NO HANDS, NO VOICE — you cannot use most crafts, open anything, or speak while flying",
-     "class": "hard"
-    },
-    {
-     "text": "at rank 1 even your mind thins toward the animal's; ⚠️ RANK 2 IS WHAT BUYS YOUR JUDGEMENT BACK",
+     "text": "⚠️ IF THE HOLD ENDS MID-AIR YOU FALL, so duration is the thing to plan around",
      "class": "cost"
+    },
+    {
+     "text": "everyone you carry must be WILLING",
+     "class": "hard"
     }
    ],
-   "plainly": "A travel and explore action. You take the form of a real flying creature — a hawk, a gull, a moth — at that creature's real size and with its real limits, and fly as it flies, which roughly halves a leg's days. Your gear does not transform with you: it stays where you changed and has to travel some other way or wait. You have no hands and no voice, so you cannot use most crafts, carry anything, open anything or speak. At rank 1 your thinking thins toward the animal's as well; rank 2 is what buys your own judgement back inside the form."
+   "plainly": "A travel and explore action. You take the form of a flying creature and fly as it flies, with your gear folded into the form and your own mind intact. Rank 1 holds about an hour, solo. Rank 2 holds a day — enough to cross a leg — and carries one other person in a form of their own. Rank 3 takes the whole party up together, each in their own shape, for a day. The limit is duration and how many, not what you can do: when the hold ends you are yourself again wherever you are, so if it ends mid-air you fall. Anyone you carry has to be willing."
   },
   {
    "schemaVersion": 1,
@@ -2108,14 +2121,14 @@
     "transform"
    ],
    "narrationHints": "A travel and create action, and the mason does not fly — they build. Stone rises under you",
-   "description": "⚠️ MASON FLIGHT, AND THEY DO NOT FLY — THEY STAND ON SOMETHING. Stone comes up under the foot exactly when the foot needs it and drops away behind. It is a stair nobody built, made and unmade one tread at a time, and it moves at the speed you can climb.",
-   "notFor": "Speed, and carrying. It is a stair — you go up it at stair pace, and it holds one person and their load.",
+   "description": "⚠️ MASON FLIGHT — they do not fly, they stand on something. Stone comes up under the foot exactly when it is needed. Alone it is footing for one; at rank it carries a party; and at the top the Mason may LEAVE IT THERE, which is how half the Valley's old crossings were made.",
+   "notFor": "Speed. It moves at the pace you can climb or walk, and answers a cliff or a gap rather than a distance.",
    "tree": [
     {
      "rank": 1,
      "name": "The Rising Step",
-     "grants": "Climb open air on stone that arrives under each foot — up a cliff, a wall, a gorge side.",
-     "cannot": "Going fast, or holding it still to stand on.",
+     "grants": "Climb open air on stone that arrives under each foot — a cliff, a wall, a gorge side.",
+     "cannot": "Bringing anyone with you; it is one person's footing.",
      "functions": [
       "travel",
       "transform"
@@ -2125,9 +2138,21 @@
     },
     {
      "rank": 2,
-     "name": "The Held Tread",
-     "grants": "Hold a few treads at once and cross a gap, or stand where there is nothing to stand on.",
-     "cannot": "Holding more than a few — this is footing, not a bridge.",
+     "name": "The Company Stair",
+     "grants": "⚠️ Raise it for a PARTY — treads broad and steady enough that everyone crosses, pack animals with them.",
+     "cannot": "Holding it after the last of them is across.",
+     "functions": [
+      "travel",
+      "transform"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Kept Crossing",
+     "grants": "⚠️ CHOOSE TO LEAVE IT. The stone stays: a real crossing on the map that anyone may use, forever.",
+     "cannot": "Taking it back — a kept crossing is the world's now, not yours.",
      "functions": [
       "travel",
       "transform"
@@ -2138,6 +2163,7 @@
    ],
    "challengeTypes": [
     "TRAVEL",
+    "EXPLORE",
     "CREATE"
    ],
    "harmRung": "none",
@@ -2149,9 +2175,9 @@
    ],
    "mechanic": {
     "magnitude": 7,
-    "duration": 4,
+    "duration": 6,
     "range": "local",
-    "note": "⚠️ CORRECTED. Local, not route-scale — it answers a VERTICAL or a GAP, not a journey. A leg blocked by a cliff or a chasm becomes passable; a leg that is merely long stays long."
+    "note": "⚠️ LOCAL, and it scales by WHO CROSSES rather than how far. r1 one person · r2 the party and animals · r3 permanent map infrastructure."
    },
    "rankDeltas": [],
    "intensity": {
@@ -2160,19 +2186,19 @@
    },
    "bounds": [
     {
-     "text": "IT MOVES AT CLIMBING PACE — it answers a cliff, never a distance",
+     "text": "IT ANSWERS A CLIFF OR A GAP, NEVER A DISTANCE — a long leg stays long",
      "class": "hard"
     },
     {
-     "text": "IT IS FOOTING, NOT A BRIDGE — a few treads at a time, one person and their load",
+     "text": "at rank 1 it carries ONE PERSON AND THEIR LOAD",
      "class": "hard"
     },
     {
-     "text": "the stone drops away behind you, SO NOBODY FOLLOWS AND YOU CANNOT GO BACK THE SAME WAY",
+     "text": "⚠️ A KEPT CROSSING IS PERMANENT AND PUBLIC — everyone after uses it, INCLUDING WHOEVER YOU WERE AVOIDING",
      "class": "cost"
     }
    ],
-   "plainly": "A travel and explore action. Stone arrives under each foot as you need it and falls away behind, so you climb open air at ordinary climbing pace — up a cliff, a wall or the side of a gorge. At rank 2 you can hold a few treads at once to cross a gap or stand where there is no footing. It answers a vertical or a chasm, not a distance: a leg blocked by a cliff becomes passable, a leg that is merely long stays long. It carries one person and their load, and because the stone drops away, nobody can follow you and you cannot return the same way."
+   "plainly": "A travel and explore action. Stone arrives under each foot as you need it, so you climb or cross open air at ordinary pace — a cliff, a wall, a gorge. It answers a vertical or a gap rather than a distance, so a leg that is merely long stays long. Rank 1 carries one person and their load. Rank 2 raises it broad and steady enough for a whole party and their pack animals. At rank 3 you may leave it standing, putting a permanent crossing on the map that anyone can use, including whoever you were avoiding."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

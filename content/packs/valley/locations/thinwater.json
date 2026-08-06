@@ -4,7 +4,11 @@
  "name": "Thinwater",
  "regionId": "the_foothills",
  "communityId": "thinwater",
- "spectrum": "mechanical_spiritual",
+ "spectrum": {
+  "mechanical_spiritual": 0.4,
+  "emotional_logical": -0.2,
+  "concrete_abstract": 0.25
+ },
  "tags": [
   "settlement",
   "foothill",
@@ -19,14 +23,18 @@
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
  "dangerLevel": 1,
- "image": null,
+ "image": "content/packs/valley/assets/thinwater.jpg",
  "questSeeds": [],
  "map": {
   "x": 350,
   "y": 180
  },
  "encounterSeeds": [],
- "poleIntensity": 0.5,
+ "poleIntensity": {
+  "spiritual": 0.4,
+  "emotional": 0.2,
+  "abstract": 0.25
+ },
  "substrateSource": {
   "kind": "pool",
   "delta": 0.2,

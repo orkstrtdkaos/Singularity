@@ -157,6 +157,14 @@ const LEDGER = [
     note: "The store used to `slice(-40)`, silently dropping the OLDEST CANON THE GM EVER ESTABLISHED — so a long game could contradict itself about its own early events with nothing to report it. Third instance of the same shape this session, after `knownPlaces` and the gallery: a cap on a LOG is housekeeping, a cap on WHAT IS TRUE is amnesia. The cost was real (facts are rendered every turn) but belonged to the VIEW. ⚠️ THE VIEW NAMES WHAT IT LEFT OUT — a silently-windowed view reads exactly like a complete one, which is how a GM comes to believe the ledger is short. ⛔ KIN NEVER AGE OUT, and nothing new is tracked to achieve it: `bondType` already carried `family`, so the tie was recorded all along and simply meant nothing to anything. It now marks the person unevictable from the Dunbar circle AND pins a fact — and it NEVER invents how they are kin, because naming someone's mother when the fiction only said 'family' would be the engine writing canon.",
   },
   {
+    id: "SNG-342", ask: "(Aevi) a ratchet: every file in provides.rules must have a loadRule call, or sit on a declared list with a one-line reason",
+    how: "content/packs/core/rules_classification.json — the declaration; content_ci.mjs enforces it; smoke.mjs gates ARRIVAL",
+    gates: ["every registered rules file is fetched, or DECLARED with a reason (SNG-342)",
+            "…and each declaration carries a REASON, not just a name (SNG-342)",
+            "342: a rule that loads must ARRIVE NON-EMPTY — a fallback is not a load"],
+    note: "⚠️ THE OLD GATE REPORTED ONE ORPHAN WHILE TEN FILES WENT UNFETCHED. It skipped any file whose own `kind` wasn't \"rules\" — and `kind` is free text the author typed, so nine files opted out by declaring `emergence`, `world_structure`, `social_mechanic_spec`. Aevi: \"reference doc and forgotten wiring are indistinguishable from outside.\" They were indistinguishable from INSIDE too: the escape hatch was a string with no vocabulary behind it, and a COUNT (KNOWN_ORPHAN_RULES = 1) cannot tell you WHICH. ⛔ CLASSIFIED, NOT WIRED — Aevi's own constraint: \"a file wired without a consumer that wants it is the same failure with more steps.\" Four are permanent design canon, two are specs for unbuilt features, three already have consumers by another door. TWO ARE REAL GAPS and stay LOUD every run: martial_paths (baselineDefense is a mechanic no code honours) and combination_recipes (56 recipes parallel to the LOADED world/braid_recipes.json — which set is canon is a content decision, not mine). ⚠️ AND THE ARRIVAL GATE IS MY OWN REGRESSION, CAUGHT LATE: my SNG-331 resolver fix (exact filename, so `ties` stops matching `location_affiniTIES`) silently emptied emergence — there is no rules/emergence.json, the content lives in emergence_recipes.json, which only the substring matcher found. 21 recipes fell to a `{recipes: []}` fallback and every gate stayed green for ten versions, because every gate asked whether the file was declared, registered, and well-formed. NONE ASKED WHETHER THE CONTENT ARRIVED. A fallback is not a load; reachable is not arrived.",
+  },
+  {
     id: "SNG-343", ask: "(found in play by Erik) there are also slices cutting off text",
     how: "personalArc.js — both store-time caps removed; reconcile 26 flags what was already severed",
     gates: ["343: the fixture is long enough to have been cut by the old cap",
@@ -664,20 +672,27 @@ const LEDGER = [
 
 // ── VERIFY ────────────────────────────────────────────────────────────────────────────────────────────────
 function runSuite() {
-  // smoke.mjs calls process.exit(1) on failure, so a non-zero exit is expected data, not an error.
-  try {
-    return execFileSync(process.execPath, [join(root, "tests/smoke.mjs")], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
-  } catch (e) {
-    return String(e.stdout || "");
+  // ⚠️ SNG-342: this used to run smoke.mjs ALONE, so no requirement could cite a content_ci gate — and
+  // content_ci is where the CONTENT-INTEGRITY gates live (orphaned files, dead keys, unread manifests).
+  // A requirement whose verification lived there had to either move its gate or go unclaimed. Both files
+  // now feed the ledger; both exit non-zero on failure, so a non-zero exit is expected data, not an error.
+  const parts = [];
+  for (const f of ["tests/smoke.mjs", "tests/content_ci.mjs"]) {
+    try { parts.push(execFileSync(process.execPath, [join(root, f)], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })); }
+    catch (e) { parts.push(String(e.stdout || "")); }
   }
+  return parts.join("\n");
 }
 
 const out = runSuite();
 const lines = out.split(/\r?\n/);
 const results = new Map();   // check name → "PASS" | "FAIL"
 for (const l of lines) {
-  const m = /^(PASS|FAIL)\s{2}(.+)$/.exec(l);
-  if (m) results.set(m[2].trim(), m[1]);
+  // ⚠️ TWO DIALECTS. smoke.mjs prints "PASS"/"FAIL"; content_ci.mjs prints "ok"/"FAIL" — reading only the
+  // first is how a content_ci gate reads as MISSING rather than green, which is a false alarm in the exact
+  // shape of a real one. Normalize at the door so a requirement can cite a gate in either file.
+  const m = /^(PASS|FAIL|ok)\s{2}(.+)$/.exec(l);
+  if (m) results.set(m[2].trim(), m[1] === "ok" ? "PASS" : m[1]);
 }
 
 let failures = 0;

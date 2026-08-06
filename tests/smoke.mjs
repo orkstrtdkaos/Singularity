@@ -10710,6 +10710,32 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-342 — THE GATE THAT WOULD HAVE CAUGHT MY OWN REGRESSION.
+  //
+  // My SNG-331 resolver fix (match the exact filename, so `loadRule("ties")` stops matching
+  // `location_affini-TIES.json`) silently emptied emergence: there is no `rules/emergence.json` — the
+  // content lives in `emergence_recipes.json`, which ONLY the substring matcher found. 21 recipes and a
+  // branch template fell through to `loadRule("emergence", {recipes: [], branchTemplates: {}})`, its own
+  // fallback, and EVERY GATE STAYED GREEN for ten versions — because every gate asked whether the file
+  // was declared, registered, and well-formed. None asked whether the content ARRIVED.
+  //
+  // ⛔ A FALLBACK IS NOT A LOAD. Reachable is not the same as arrived. The whole class of "resolver
+  // silently returns nothing" is invisible until something asserts the payload is non-empty at the far end.
+  {
+    const { loadContentHeadless: lch342 } = await import("./headless_content.mjs");
+    const C342 = await lch342();
+    const arrivals = {
+      "emergence.recipes":              (C342.emergence?.recipes || []).length,
+      "emergence.branchTemplates":      Object.keys(C342.emergence?.branchTemplates || {}).length,
+      "rules.ties.kinTriggers":         Object.keys(C342.rules?.ties?.kinTriggers || {}).length,
+      "rules.questStructure":           Object.keys(C342.rules?.questStructure || {}).length,
+    };
+    const empty = Object.entries(arrivals).filter(([, n]) => n === 0).map(([k]) => k);
+    for (const [k, n] of Object.entries(arrivals)) if (n === 0) console.log(`      ARRIVED EMPTY (fell to fallback): ${k}`);
+    check("342: a rule that loads must ARRIVE NON-EMPTY — a fallback is not a load", empty.length === 0,
+      `${empty.join(", ")} resolved to nothing and fell back silently`);
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));
@@ -10738,7 +10764,13 @@ await (async () => {
   // is exactly the gap this guard exists to close.
   const gateBlocks = [...ledgerSrc.matchAll(/gates:\s*\[([\s\S]*?)\]/g)].map(m => m[1]);
   const claimed = gateBlocks.flatMap(b => [...b.matchAll(/"((?:[^"\\]|\\.)*)"/g)].map(m => m[1]));
-  const present = [...mySrc.matchAll(/check\("((?:[^"\\]|\\.)*)"/g)].map(m => m[1]);
+  // ⚠️ SNG-342: "this suite" is now TWO files. The ledger may cite a content_ci gate (that is where the
+  // content-integrity checks live), and reading only smoke.mjs reported those as MISSING — a red gate
+  // accusing the ledger of claiming something imaginary, when the gate was real and green one file over.
+  // ⛔ Kept as a WHITELIST of two named files, not a directory sweep: "every .mjs in tests/" would let a
+  // requirement point at a scratch harness and call itself verified.
+  const ciSrc = readFileSync(join(root, "tests/content_ci.mjs"), "utf8");
+  const present = [...(mySrc + ciSrc).matchAll(/check\("((?:[^"\\]|\\.)*)"/g)].map(m => m[1]);
   const missing = claimed.filter(c => !present.includes(c));
   const own = present.filter(c => c.startsWith("272/"));
   const orphans = own.filter(c => !claimed.includes(c));

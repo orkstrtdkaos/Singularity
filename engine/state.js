@@ -151,9 +151,23 @@ export async function loadContent() {
   // name that appears inside a longer one is the same trap waiting: `ties`/`affinities`, and a future
   // `charges`/`surcharges`, `arc`/`hierarchy`, `set`/`offset` would all land the same way.
   const rulePath = (name) => {
-    const want = `rules/${name}.json`;
-    const p = (index.provides.rules || []).find(r => r === want || r.endsWith(`/${name}.json`));
-    return p ? `content/packs/core/${p}` : null;
+    const rules = index.provides.rules || [];
+    // 1. EXACT FILENAME WINS. This is the SNG-331 fix: `loadRule("ties")` must not match
+    //    `location_affinities.json` just because "affini-TIES" contains it.
+    const exact = rules.find(r => r === `rules/${name}.json` || r.endsWith(`/${name}.json`));
+    if (exact) return `content/packs/core/${exact}`;
+    // 2. ⚠️ THEN AN *UNAMBIGUOUS* SUBSTRING, because exact-only BROKE `emergence`. There is no
+    //    `rules/emergence.json` — the content lives in `emergence_recipes.json`, and the old substring
+    //    resolver found it. My SNG-331 fix removed that and silently emptied 21 recipes and a branch
+    //    template: `loadRule("emergence", {recipes:[],branchTemplates:[]})` fell to its own fallback and
+    //    every gate stayed green, because nothing asserted the recipes were non-empty.
+    //
+    //    ⛔ UNAMBIGUOUS IS THE WHOLE POINT. One match is a filename convention nobody wrote down; TWO is
+    //    the `ties` bug, and it now refuses rather than guessing which was meant.
+    const near = rules.filter(r => r.split("/").pop().replace(/\.json$/, "").includes(name));
+    if (near.length === 1) return `content/packs/core/${near[0]}`;
+    if (near.length > 1) console.warn(`[rules] "${name}" matches ${near.length} files ambiguously — refusing to guess:`, near.join(", "));
+    return null;
   };
   const resPath = rulePath("resolution");
   if (!resPath) throw new Error("manifest: core provides.rules is missing resolution.json (the base rules)");

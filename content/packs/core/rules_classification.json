@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "rules_classification",
+  "note": "SNG-342. Aevi: 'today reference doc and forgotten wiring are indistinguishable from outside.' Every rules file registered in the manifest that no loader fetches is listed HERE with a reason, or the build fails. This file is deliberately NOT registered in provides.rules — it is a statement about content, not content. Sits beside rules/ rather than inside it so directory sweeps of the rules corpus do not treat it as a rule.",
+
+  "runtime_unwired": {
+    "_note": "Operational content with no consumer. These are REAL GAPS, not decisions. Listed so they are visible rather than silent; each needs a consumer that WANTS it (Aevi: 'a file wired without a consumer is the same failure with more steps'), so none is wired here.",
+    "martial_paths": "SNG-342/CCode: baselineDefense says every character can defend itself with no build investment — that is a MECHANIC, not guidance, and no code honours it. formKits and martialBackgrounds are equipment/skill tables of the kind SNG-339 consumes. Needs a consumer in resolve.js or inventory.js; flagged for Aevi rather than wired blind.",
+    "combination_recipes": "56 cross-domain recipes + theTwelveBraids, kind=emergence. NOT superseded by world/braid_recipes.json — that is a separate loaded store with its own recipes. Two parallel authored sets, one live and one dark. Needs Erik/Aevi to say which is canon before either is wired; merging them is a content decision, not an engine one."
+  },
+
+  "reference_pending_build": {
+    "_note": "Design specs for work not yet built. Each carries a buildImplication section — the author's own statement that code should follow. Unloaded is CORRECT today; the debt is the unbuilt feature, not the missing wiring.",
+    "cross_axis_modifiers": "Erik's 2026-07-07 correction on how the two thin Reaches (emotional_logical, falsehood_truth, demonic_angelic) modify across axes. Its buildImplication describes a modifier system that does not exist yet. Spec first, wiring after.",
+    "pole_signatures": "Explicitly 'the content-and-resolution layer SNG-027 leans on but left undefined'. It is the missing half of the social contest, written down so it stops being lost. Wire it when social contest is built."
+  },
+
+  "reference_permanent": {
+    "_note": "Design canon and audits. These are for humans — Aevi authoring, Erik deciding. They will never have an engine consumer and should not be counted as debt.",
+    "peoples_of_kind": "SNG-089 canon: which traditions do not resonate with human civilization. Shapes what Aevi authors; the engine reads the resulting content, never this rationale.",
+    "gambit_design": "RECOVERED canon (2026-07-12) — the gambit definition lost when it lived only in a spec file. Its gmRules are authoring guidance for how Aevi writes gambits, not a runtime table.",
+    "challenge_design": "RECOVERED canon (2026-07-12) — the SNG-049 correction, principle, and modes. Guidance for authoring challenges. Deliberately kept as content so it cannot be lost again the way the original spec was.",
+    "skill_utility_audit": "Erik's meta-critique: in D&D a spell's use is obvious, many of ours are not. An AUDIT — coverageFindings and novelUses are findings about the corpus, not data the engine reads."
+  },
+
+  "wired_elsewhere": {
+    "_note": "Registered, not fetched by the loader, but genuinely consumed — the consumer is a CI check rather than engine code. Not orphans.",
+    "power_sources": "Read by tests/content_ci.mjs (3c-vii), which cross-checks power classification against substrate band centres. The audit IS its consumer.",
+    "resolution": "Fetched via rulePath(\"resolution\") + fetchJSON rather than loadRule — a real load through a different door.",
+    "emergence_recipes": "Fetched as loadRule(\"emergence\") — the file name and the rule name differ, which is exactly how the SNG-331 resolver regression hid."
+  }
+}

@@ -396,10 +396,42 @@ for (const pack of PACKS) {
     if (loaded(r) || ciRead(r)) continue;                     // has a real consumer
     orphanOperational.push(r.split("/").pop());
   }
-  const KNOWN_ORPHAN_RULES = 1;   // quest_structure.json — authoring guidance, not engine-consumed (Aevi's to reclassify)
-  if (orphanOperational.length) console.log(`note  SNG-183 L4: ${orphanOperational.length} operational rules file(s) registered but read by neither loader nor CI: ${orphanOperational.join(", ")}`);
-  check("no NEW operational rules file is registered-but-unread (SNG-183 L4)", orphanOperational.length <= KNOWN_ORPHAN_RULES,
-    `${orphanOperational.length} exceeds the ${KNOWN_ORPHAN_RULES} recorded — wire it into the loader, give it a CI reader, or mark its kind as a design reference`);
+  // ⛔ SNG-342 — A COUNT IS NOT A CLASSIFICATION. This was `KNOWN_ORPHAN_RULES = 1` and reported ONE
+  // orphan while ten registered files went unfetched — because the loop above skips any file whose own
+  // `kind` isn't "rules", and `kind` is free text the author typed. Nine files opted out of this gate by
+  // declaring `emergence`, `world_structure`, `social_mechanic_spec`. Aevi: "reference doc and forgotten
+  // wiring are indistinguishable from outside." They were indistinguishable from INSIDE too: the escape
+  // hatch was a string with no controlled vocabulary behind it.
+  //
+  // Now every registered rules file the loader does not fetch must be NAMED in rules_classification.json
+  // with a reason. Silence is no longer a passing answer, and a new file cannot opt out by inventing a kind.
+  const CLASS = rj("content/packs/core/rules_classification.json");
+  const declared = new Map();
+  for (const [bucket, entries] of Object.entries(CLASS)) {
+    if (bucket === "schemaVersion" || bucket === "id" || bucket === "note") continue;
+    for (const [name, reason] of Object.entries(entries)) {
+      if (name === "_note") continue;
+      declared.set(name, { bucket, reason });
+    }
+  }
+  const undeclared = [], thin = [];
+  for (const r of rules) {
+    const name = r.split("/").pop().replace(/\.json$/, "");
+    if (loaded(r) || ciRead(r)) continue;                     // has a real consumer
+    const d = declared.get(name);
+    if (!d) { undeclared.push(name); continue; }
+    if (typeof d.reason !== "string" || d.reason.length < 40) thin.push(name);
+  }
+  for (const u of undeclared) console.log(`      registered, unfetched, UNDECLARED: ${u}`);
+  check("every registered rules file is fetched, or DECLARED with a reason (SNG-342)", undeclared.length === 0,
+    `${undeclared.length} registered but read by nobody and named nowhere: ${undeclared.join(", ")} — wire it, or classify it in rules_classification.json`);
+  check("…and each declaration carries a REASON, not just a name (SNG-342)", thin.length === 0,
+    `${thin.join(", ")} declared with no substantive reason`);
+  // The gaps stay LOUD. runtime_unwired is content with no consumer — a real debt, reported every run so
+  // it cannot settle into the background the way these ten did.
+  const gaps = Object.keys(CLASS.runtime_unwired || {}).filter(k => k !== "_note");
+  if (gaps.length) console.log(`note  SNG-342: ${gaps.length} runtime file(s) authored but unconsumed (declared, not resolved): ${gaps.join(", ")}`);
+  if (orphanOperational.length) console.log(`note  SNG-183 L4: operational-kind orphans: ${orphanOperational.join(", ")}`);
 }
 
 // (3d) romance guidance — the doc pulled into the GM prompt on romantic intent must load and carry

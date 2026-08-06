@@ -4,7 +4,11 @@
  "name": "The Low Market",
  "regionId": "the_foothills",
  "communityId": "the_low_market",
- "spectrum": "demonic_angelic",
+ "spectrum": {
+  "demonic_angelic": -0.35,
+  "falsehood_truth": -0.25,
+  "order_chaos": -0.2
+ },
  "tags": [
   "settlement",
   "foothill",
@@ -19,14 +23,18 @@
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
  "dangerLevel": 1,
- "image": null,
+ "image": "content/packs/valley/assets/the_low_market.jpg",
  "questSeeds": [],
  "map": {
   "x": 348,
   "y": 400
  },
  "encounterSeeds": [],
- "poleIntensity": 0.5,
+ "poleIntensity": {
+  "demonic": 0.35,
+  "falsehood": 0.25,
+  "chaos": 0.2
+ },
  "substrateSource": {
   "kind": "pool",
   "delta": 0.2,

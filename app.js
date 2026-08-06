@@ -1,7 +1,7 @@
 // app.js — Singularity v0.1 shell: character creation, the play loop, settings.
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
-import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId, locationRefToString, isCoercedObjectName } from "./engine/state.js";
+import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
 import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
@@ -87,7 +87,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.40";
+const APP_VERSION = "1.9.41";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6082,7 +6082,12 @@ function maybeWorldPressure(turn, resolution) {
 function addKnownPlace(id) {
   if (!id) return;
   character.knownPlaces = character.knownPlaces || [];
-  if (!character.knownPlaces.includes(id)) character.knownPlaces = [...character.knownPlaces, id].slice(-80);
+  // SNG-330 — ⚠️ THE CAP WAS BELOW THE ATLAS. 80, against 118 authored locations: a well-travelled
+  // character SILENTLY FORGOT the oldest place they knew, and `isKnown` gates naming, description and map
+  // labelling — so somewhere you went in your first hour became "an unknown place" again. Forgetting where
+  // you started is the worst possible eviction order. The cap now sits above the whole atlas with room to
+  // grow; if it ever needs to evict, that must be least-recently-SEEN, never oldest-learned.
+  if (!character.knownPlaces.includes(id)) character.knownPlaces = [...character.knownPlaces, id].slice(-400);
 }
 
 // SNG-122: a clear travel expression in the player's own words — "head to / go to / travel to / set out
@@ -6305,6 +6310,11 @@ function mintTransitLocation(moveRef) {
   character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)
   CONTENT.locations[id] = rec;              // live this session
   if (here && Array.isArray(here.connections) && !here.connections.includes(id)) here.connections = [...here.connections, id]; // bidirectional reach
+    // SNG-330 — ⚠️ AND WRITE IT SOMEWHERE THAT SURVIVES. The line above mutates AUTHORED content, which is
+    // shared and never saved, so the edge vanished on reload and took the Travel button with it. This is
+    // the persisting twin of `generated.location`, which has always saved the other half.
+    character.placeEdges = character.placeEdges || {};
+    if (here?.id) character.placeEdges[here.id] = [...new Set([...(character.placeEdges[here.id] || []), id])];
   addKnownPlace(id);
   return id;
 }
@@ -6617,7 +6627,7 @@ function renderMap(selectedId = null) {
     ${locs.map((l, li) => {
       const P = pos[l.id];
       const visited = isVisited(l.id);
-      const reachable = connectedToHere.includes(l.id);
+      const reachable = canTravelBetween(here, l.id, CONTENT.locations, character.placeEdges);
       const pm = character.placeMemory?.[l.id];
       const dl = Math.max(0, Math.min(4, l.dangerLevel | 0)); // SNG-080: graduated danger, findable on the map
       const cls = `map-node ${terrainClass(l)} dl${dl} ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${dl >= 3 ? "danger" : ""} ${selectedId === l.id ? "selected" : ""}`;
@@ -6656,7 +6666,9 @@ function renderMap(selectedId = null) {
     const visited = isVisited(l.id);
     const known = isKnown(l.id); // SNG-117
     const pm = character.placeMemory?.[l.id];
-    const reachable = connectedToHere.includes(l.id);
+    // SNG-330: SYMMETRIC. Reading only `connectedToHere` lost the Travel button on any place whose
+    // reciprocal edge was written to AUTHORED content and therefore never saved.
+    const reachable = canTravelBetween(here, l.id, CONTENT.locations, character.placeEdges);
     details = `<div class="map-details">
       <div class="map-details-head">
         <h3>${esc(known ? l.name : "An unknown place")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : ""}</h3>
@@ -6683,7 +6695,15 @@ function renderMap(selectedId = null) {
             return days == null ? "" : `<div class="hint" style="margin-top:4px">${days < 1 ? "less than a day" : `about ${Math.round(days)} day${Math.round(days) === 1 ? "" : "s"}`} on foot — ${days > 40 ? "a waygate is the difference between a journey and a life" : "walkable, if you have the season for it"}.</div>`;
           })()}`
         + `<button class="opt" id="map-lookinside" data-inside="${esc(l.id)}" style="margin:8px 0 0 6px" title="What's within this place">⌂ Look inside</button>`
-        : `<div class="hint" style="margin-top:6px">Not directly reachable from ${esc(CONTENT.locations[here]?.name || "here")} — travel via a connected place.</div>`) : ""}
+        : `<div class="hint" style="margin-top:6px">Not directly reachable from ${esc(CONTENT.locations[here]?.name || "here")}${(() => {
+            // SNG-330 hardening 1 — ⚠️ SAY WHY, AND SAY WHICH. "travel via a connected place" told the player
+            // nothing they did not already know; the data to name one is sitting in `connections`. A refusal
+            // that does not point anywhere is a dead end wearing an explanation.
+            const via = (CONTENT.locations[l.id]?.connections || [])
+              .filter(c => canTravelBetween(here, c, CONTENT.locations, character.placeEdges))
+              .map(c => CONTENT.locations[c]?.name).filter(Boolean).slice(0, 2);
+            return via.length ? ` — go by way of ${via.join(" or ")}.` : " — travel via a connected place.";
+          })()}</div>`) : ""}
       ${(() => { // SNG-148: standing at a gate, aiming at another gate — routing decides (named/hub); never a failure
         const r = l.id !== here ? resolveWaygateTransit({ character, destId: l.id, locations: CONTENT.locations }) : null;
         if (!r) return "";

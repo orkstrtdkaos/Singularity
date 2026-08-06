@@ -10131,6 +10131,57 @@ await (async () => {
     })());
   }
 
+  // SNG-330 — THE TRAVEL BUTTON VANISHED ON A PLACE THE PLAYER HAD WALKED TO. Found in play by Erik,
+  // traced by Aevi. The map read ONE array (here's own `connections`) and never asked whether the
+  // DESTINATION lists here — harmless for authored content, fatal for minted places, because the reciprocal
+  // edge was written onto AUTHORED content, which is shared and never saved.
+  {
+    const ST330 = await import("../engine/state.js");
+    const locs = { crossing: { id: "crossing", connections: ["ford"] }, ford: { id: "ford", connections: ["crossing"] },
+      // the minted shape: it lists `crossing`, and crossing does NOT list it back (that edge was lost on reload)
+      "gen-the-pass": { id: "gen-the-pass", connections: ["crossing"] } };
+
+    check("330: an edge in EITHER direction is a road — the destination listing here is enough",
+      ST330.canTravelBetween("crossing", "gen-the-pass", locs) === true
+      && ST330.canTravelBetween("gen-the-pass", "crossing", locs) === true);
+    check("330: an unconnected place is still unreachable — symmetry is not permissiveness",
+      ST330.canTravelBetween("ford", "gen-the-pass", locs) === false
+      && ST330.canTravelBetween("crossing", "nowhere", locs) === false
+      && ST330.canTravelBetween("crossing", "crossing", locs) === false);
+    // ⛔ THE PERSISTING TWIN: a road the player made themselves, written where it survives a reload.
+    check("330: a player-made edge in `placeEdges` counts, in either direction",
+      ST330.canTravelBetween("ford", "gen-the-pass", locs, { ford: ["gen-the-pass"] }) === true
+      && ST330.canTravelBetween("gen-the-pass", "ford", locs, { ford: ["gen-the-pass"] }) === true);
+
+    // The repair: every edge a save asserts from one side is restored on the other. Derived, never invented.
+    const RC330 = await import("../engine/reconcile.js");
+    const step330 = RC330.CHARACTER_STEPS.find(x => x.id === "restore-lost-place-edges");
+    const c330 = { generated: { location: { "gen-the-pass": { id: "gen-the-pass", connections: ["crossing"] } } } };
+    step330.apply(c330);
+    check("330: the repair puts back the return road from what the save already asserts",
+      (c330.placeEdges?.crossing || []).includes("gen-the-pass"));
+    const snap330 = JSON.stringify(c330);
+    step330.apply(c330);
+    check("330: …and running it twice changes nothing", JSON.stringify(c330) === snap330);
+    check("330: the repair INVENTS no road — a save with no generated places gains no edges", (() => {
+      const empty = { generated: { location: {} } };
+      step330.apply(empty);
+      return !empty.placeEdges || Object.keys(empty.placeEdges).length === 0;
+    })());
+
+    // ⚠️ AND THE CAP MUST SIT ABOVE THE ATLAS. It was 80 against 118 authored locations, so a well-travelled
+    // character silently forgot the oldest place they knew — and `isKnown` gates naming, description and map
+    // labelling, so a place from your first hour became "an unknown place" again.
+    {
+      const appSrc330 = readFileSync(join(root, "app.js"), "utf8");
+      const m = appSrc330.match(/knownPlaces = \[\.\.\.character\.knownPlaces, id\]\.slice\(-(\d+)\)/);
+      const { loadContentHeadless: lch330 } = await import("./headless_content.mjs");
+      const atlas = Object.keys((await lch330()).locations || {}).length;
+      check("330: the knownPlaces cap sits above the whole atlas — nobody forgets where they started",
+        !!m && Number(m[1]) > atlas);
+    }
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

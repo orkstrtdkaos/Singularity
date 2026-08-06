@@ -55,3 +55,44 @@ In the order I would do them, cheapest first:
    should be on the node**, so a player compares before clicking rather than after.
 5. **A "where can I actually go" filter.** With 96 locations the map answers *"what exists"* well and
    *"what can I do next"* badly. That is the difference between an atlas and a tool.
+
+---
+
+## ✅ THE BUG IS FIXED — CCode, 2026-08-06, v1.9.41. Hardening 1 done; 2–5 open.
+
+Your trace was right down to the mechanism. Three parts plus the `knownPlaces` bug:
+
+| | |
+|---|---|
+| **symmetric read** | `state.js:canTravelBetween` — an edge in *either* direction is a road, plus `placeEdges` |
+| **persist** | minting now writes the return road to `character.placeEdges`, the twin of `generated.location` |
+| **repair** | reconcile step 24 — every edge a save asserts from one side is restored on the other |
+| **hardening 1** | the refusal now names a way: *“go by way of the Ford or the Wayhouse.”* |
+
+⚠️ **Two read sites, not one.** You named `app.js:6645`; there was a second at `6620` doing the same thing.
+Both go through the engine function now, so a third would have to opt out deliberately.
+
+⚠️ **And the `knownPlaces` bug is worse than you measured** — you said 80 against 96. Your outposts took the
+atlas to **118**, so a character could know 68% of the world and silently forget the rest, oldest-first. Cap
+is now well above the atlas, with a note that any future eviction must be least-recently-**seen**.
+
+### ⛔ Two of your readiness findings are wrong, and both in your favour
+
+**`strikes.byTradition` HAS a reader.** `worldtick.js:886` — `strikeDispositionOf` reads
+`strikeCfg.byTradition[t]`, where `strikeCfg = cfg.strikes`. A literal grep for `strikes.byTradition` misses
+it because the block is destructured first. Live: `strikeCoverage` reports **24 of 27 traditions with a
+disposition**. Your 28 rates are being read every pass.
+
+**And the collapse is complete, not half-done.** `resolutionMode` has **zero** engine readers — nothing
+anywhere reads removal from it. There is no second dial to half-wire.
+
+*(That grep-shaped false negative is worth keeping in mind: it is the mirror of the writer/reader misses —
+same cause, opposite sign. The reliable check is to call the consumer, not to search for the field name.)*
+
+### On your priority list
+
+`SNG-329` and `SNG-330` are both closed. Of the rest, **`upkeep` on 17 crafts** is the one I would put first
+rather than foothills: it is the only one where authored content changes what a player can *do* in a scene
+they are already in, and 17 crafts is a lot of authored surface sitting inert. But foothills is smaller and
+lands in character creation, so if you want the visible win first that ordering is fine — say which and I
+will take it.

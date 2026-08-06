@@ -72,6 +72,34 @@ export function isCoercedObjectArtefact(name) {
   return typeof name === "string" && /\[object\s+object\]/i.test(name);
 }
 
+/** SNG-330 — ⚠️ REACHABILITY IS SYMMETRIC. A road you walked in one direction is a road.
+ *
+ *  FOUND IN PLAY by Erik ("I was connected to the place I wanted to go, but no Travel button"), traced by
+ *  Aevi. The map read ONE array — the current location's own `connections` — and never asked whether the
+ *  DESTINATION lists here. That is harmless for authored content (all 118 authored locations are
+ *  reciprocal) and broken for minted ones:
+ *
+ *    · `mintTransitLocation` writes BOTH edges, correctly, in memory.
+ *    · `new → here` lives on `character.generated.location` and PERSISTS.
+ *    · `here → new` is a mutation of AUTHORED content, which is shared and never saved. On reload it is gone.
+ *
+ *  So after a reload the place is on the map, in `knownPlaces`, remembered by the fiction — and missing from
+ *  the one array the button reads. Connected in every way a player can perceive, and not in the one that counts.
+ *
+ *  ⛔ THE SYMMETRIC READ IS THE REAL FIX AND `placeEdges` IS THE BELT: making the READ symmetric renders the
+ *  entire class of one-directional edge harmless, including any this codebase has not thought of yet.
+ *  Persisting the player's own edges then repairs the ones already lost. */
+export function canTravelBetween(here, destId, locations = {}, placeEdges = {}) {
+  if (!here || !destId || here === destId) return false;
+  const out = locations[here]?.connections || [];
+  if (out.includes(destId)) return true;
+  // …or the destination lists HERE. One road, either direction.
+  const back = locations[destId]?.connections || [];
+  if (back.includes(here)) return true;
+  // …or the player made this road themselves and we wrote it down.
+  return (placeEdges?.[here] || []).includes(destId) || (placeEdges?.[destId] || []).includes(here);
+}
+
 /** SNG-056: resolve a GM `moveTo` reference (an id or a place name) to a real loaded location id,
  *  or null if it names nowhere that exists. Exact id → slugified id → exact name → loose name. Pure. */
 export function resolveLocationId(ref, locations = {}) {

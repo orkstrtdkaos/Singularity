@@ -749,6 +749,38 @@ export const CHARACTER_STEPS = [
       return { note: `Removed ${bad.length} place record(s) that were never really named.` };
     }
   },
+  {
+    version: 24, id: "restore-lost-place-edges", playerFacing: true,
+    // SNG-330 — ⚠️ THE ROADS A PLAYER ALREADY WALKED, PUT BACK.
+    //
+    // `mintTransitLocation` wrote both edges but only one of them could persist: `new → here` lives on
+    // `character.generated.location`, while `here → new` mutated AUTHORED content, which is shared and
+    // never saved. On reload the return road was gone, and with it the Travel button — while the place
+    // still showed on the map, still read as known, and the fiction still remembered going there.
+    //
+    // ⛔ THIS IS ADDITIVE AND DERIVED, WHICH IS WHAT LETS IT RUN AT ALL: every edge it writes is one the
+    // save already asserts from the other side. It invents no road — it copies `new → here` back as
+    // `here → new` into `placeEdges`, where it can survive. Reconcile's law is "derives from durable state,
+    // never fabricates history", and the generated store IS the durable state here.
+    apply: (character) => {
+      const gen = character?.generated?.location;
+      if (!gen || typeof gen !== "object") return {};
+      character.placeEdges = character.placeEdges || {};
+      let restored = 0;
+      for (const [id, rec] of Object.entries(gen)) {
+        for (const other of (Array.isArray(rec?.connections) ? rec.connections : [])) {
+          if (!other || other === id) continue;
+          const have = character.placeEdges[other] || [];
+          if (have.includes(id)) continue;
+          character.placeEdges[other] = [...have, id];
+          restored++;
+        }
+      }
+      if (!restored) return {};
+      console.log(`[reconcile] sng-330: restored ${restored} return road(s) that could not persist`);
+      return { notes: [`The way back from ${restored} place${restored === 1 ? "" : "s"} you found is on your map again.`] };
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

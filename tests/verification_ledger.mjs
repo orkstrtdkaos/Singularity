@@ -133,6 +133,18 @@ const LEDGER = [
     note: "Coverage 2026-08-05: `interests` 31/66, `kin` 26/66 — and 26/26 + 31/31 of the authored entries REACH the reader. ⚠️ THE SHAPE CONTRACT IS THE RISK, NOT THE COUNT: `personalPursuitOf` takes kin as `typeof k === 'string' ? k : k?.line`, so an entry written as `{name, relation}` would be dropped with no error — the fifth door of the PromisedButUnread family, and at its most dangerous inside a POOL, because a partially-readable list still looks like it works. Aevi authored `{line: '…'}` without being told, so nothing was lost; the gate exists for the next one. It asserts REACHABILITY rather than presence, checks a line actually comes out of the consumer rather than merely past the filter, and is falsified by an unreadable shape. ⛔ THESE REMAIN ALTERNATES: `personalVerbs` at 66/66 already satisfied this reader on its own, so `personalCoverage` is unchanged at 48/48 on the page — the content adds VARIETY to what a figure is doing with their own time, not reach. Saying it closed a gap would be an overclaim; it deepened a pool that was already full.",
   },
   {
+    id: "SNG-330", ask: "(found in PLAY by Erik) I was connected to the place I wanted to go, but no Travel button",
+    how: "state.js:canTravelBetween — reachability is symmetric; placeEdges persists the player's own roads; reconcile 24 restores the lost ones",
+    gates: ["330: an edge in EITHER direction is a road — the destination listing here is enough",
+            "330: an unconnected place is still unreachable — symmetry is not permissiveness",
+            "330: a player-made edge in `placeEdges` counts, in either direction",
+            "330: the repair puts back the return road from what the save already asserts",
+            "330: …and running it twice changes nothing",
+            "330: the repair INVENTS no road — a save with no generated places gains no edges",
+            "330: the knownPlaces cap sits above the whole atlas — nobody forgets where they started"],
+    note: "Aevi's trace: the map read ONE array (here's own `connections`) and never asked whether the DESTINATION lists here. Harmless for authored content — all 118 authored locations are reciprocal — and fatal for minted ones, because `mintTransitLocation` writes both edges but only one can persist: `new → here` lives on `generated.location`, while `here → new` mutates AUTHORED content, which is shared and never saved. After a reload the place was on the map, in knownPlaces, remembered by the fiction, and missing from the one array the button reads. ⛔ THE SYMMETRIC READ IS THE REAL FIX AND `placeEdges` IS THE BELT: making the READ symmetric renders the whole class of one-directional edge harmless including ones nobody has thought of, and persisting the player's own roads repairs what was already lost. ⚠️ TWO READ SITES, NOT ONE — the defect named app.js:6645 and there was a second at 6620 doing the same thing. ⚠️ AND A SECOND BUG FOUND ALONGSIDE IT, worse than reported: the `knownPlaces` cap was 80 against an atlas Aevi had just grown to 118, so a well-travelled character SILENTLY FORGOT the oldest place they knew — and `isKnown` gates naming, description and map labelling, so somewhere from their first hour became 'an unknown place' again. Forgetting where you started is the worst possible eviction order.",
+  },
+  {
     id: "SNG-329", ask: "(found in PLAY by Erik, first real play-leg) the current location renders [object Object]",
     how: "state.js:locationRefToString + a mint that refuses, and reconcile step 23 for the saves already carrying it",
     gates: ["329: a nested `{location:{id}}` yields the id, not the text of an object",

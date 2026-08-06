@@ -81,16 +81,16 @@
       },
       {
         "player": "Read the boot-tracks ahead more carefully — age, weight, pace, direction",
-        "summary": "Aelyn read the boot-tracks on the kept road — lean adult, confident gait, half a day to a full day ahead, moving northeast with purpose. Branch offered a single-word verdict: knowing.",
-        "narration": "You slow your pace and let your eyes drop to the road. The boot-tracks are sharper than they looked from a distance — the mud took them clean, the way it takes any impression in the first hour after softening. You read them as you walk: the stride is steady, unhurried, neither long nor short. An adult, probably lean rather than heavy — the tracks sink maybe two fingers deep where a heavier person would press four. The heel comes down first and slightly to the outside, the kind of gait someone develops over years of walking rough ground. No stumble, no hesitation at the root-ridge where Branch paused. Whoever this was, they know how to move through a wood.\n\nThe direction is clear: northeast, consistent, no wandering to examine anything along the sides. This person was going somewhere specific and knew how to find it. The age is harder — the tracks have been in and out of shadow, and shadow slows drying. Your best read: half a day ahead of you, maybe a full day. The mud at the deepest point of one print has a dry skin over wet underneath. Last night, or early this morning.\n\nBranch stops beside you and looks down at the same track, then up the road. It does not speak for a long moment. Then, one slow word: \"Knowing.\" It taps one root-foot beside the print — not touching it, just indicating. The word seems to be its verdict on the person, not the print.\n\nThe thread at your sternum pulls steady ahead. Same direction as the tracks."
+        "summary": "Aelyn reads the boot-tracks — one person, carrying weight, moving northeast at a steady walk, roughly a day ahead.",
+        "narration": "You slow your pace at the next clear section of road where the canopy breaks slightly and light reaches the mud. The boot-tracks are pressed deep enough to have been made when this ground was wetter — yesterday morning, before the overnight chill firmed the surface. Someone of reasonable size, moving at a steady walk rather than a hurry. No stagger, no drag. They were not lost or injured. The stride is even and purposeful, each foot landing square, and the spacing tells you this person was carrying weight — a pack, probably, from the slight deepening at the heel. They were headed northeast, the same direction as your thread, without deviation at the root-ridges where the road narrows.\n\nBranch stops beside you and lowers its head toward the nearest print. A long, slow moment passes. Then: \"One. Walking. Carrying.\" It lifts its head again and looks northeast down the road. \"Yesterday.\"\n\nThe tracks don't veer off into the trees and don't show anyone coming back the same way. Whoever this was, they continued into the Quickwood and did not return on this road — at least not yet. The thread at your sternum pulls steady in the same direction, unchanged."
       }
     ],
     "lastTurn": {
-      "narration": "You slow your pace and let your eyes drop to the road. The boot-tracks are sharper than they looked from a distance — the mud took them clean, the way it takes any impression in the first hour after softening. You read them as you walk: the stride is steady, unhurried, neither long nor short. An adult, probably lean rather than heavy — the tracks sink maybe two fingers deep where a heavier person would press four. The heel comes down first and slightly to the outside, the kind of gait someone develops over years of walking rough ground. No stumble, no hesitation at the root-ridge where Branch paused. Whoever this was, they know how to move through a wood.\n\nThe direction is clear: northeast, consistent, no wandering to examine anything along the sides. This person was going somewhere specific and knew how to find it. The age is harder — the tracks have been in and out of shadow, and shadow slows drying. Your best read: half a day ahead of you, maybe a full day. The mud at the deepest point of one print has a dry skin over wet underneath. Last night, or early this morning.\n\nBranch stops beside you and looks down at the same track, then up the road. It does not speak for a long moment. Then, one slow word: \"Knowing.\" It taps one root-foot beside the print — not touching it, just indicating. The word seems to be its verdict on the person, not the print.\n\nThe thread at your sternum pulls steady ahead. Same direction as the tracks.",
-      "sceneSummary": "Aelyn read the boot-tracks on the kept road — lean adult, confident gait, half a day to a full day ahead, moving northeast with purpose. Branch offered a single-word verdict: knowing.",
+      "narration": "You slow your pace at the next clear section of road where the canopy breaks slightly and light reaches the mud. The boot-tracks are pressed deep enough to have been made when this ground was wetter — yesterday morning, before the overnight chill firmed the surface. Someone of reasonable size, moving at a steady walk rather than a hurry. No stagger, no drag. They were not lost or injured. The stride is even and purposeful, each foot landing square, and the spacing tells you this person was carrying weight — a pack, probably, from the slight deepening at the heel. They were headed northeast, the same direction as your thread, without deviation at the root-ridges where the road narrows.\n\nBranch stops beside you and lowers its head toward the nearest print. A long, slow moment passes. Then: \"One. Walking. Carrying.\" It lifts its head again and looks northeast down the road. \"Yesterday.\"\n\nThe tracks don't veer off into the trees and don't show anyone coming back the same way. Whoever this was, they continued into the Quickwood and did not return on this road — at least not yet. The thread at your sternum pulls steady in the same direction, unchanged.",
+      "sceneSummary": "Aelyn reads the boot-tracks — one person, carrying weight, moving northeast at a steady walk, roughly a day ahead.",
       "choices": [
         {
-          "label": "Push the pace — close the gap with whoever is ahead before they reach wherever they're going",
+          "label": "Pick up the pace — close the gap between you and whoever is a day ahead.",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 15,
@@ -101,38 +101,40 @@
           "trivial": false
         },
         {
-          "label": "Ask the Speaking Grove — reach out to the trees along the road and ask what they have sensed of the person who passed",
+          "label": "Ask the grove — touch the nearest root-ridge and see if the living wood remembers the person who passed.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
           "abilityId": "the_speaking_grove",
           "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Keep walking at your current pace — steady, watching, not rushing. The thread will guide you.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Check whether anyone is ahead on the road right now — not tracks, but presence.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "scout",
             "study"
           ],
+          "abilityId": "lifesense",
+          "energyCost": 3,
           "trivial": false
-        },
-        {
-          "label": "Keep your current pace and stay alert — watch the road ahead and the tree-line for any sign the tracks stop or turn",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Branch what it meant by 'knowing' — it chose that word deliberately",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
         }
       ],
       "scene": {
@@ -140,34 +142,33 @@
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Standing beside Aelyn, looking up the road after its single-word verdict, root-feet still."
+            "state": "Standing beside Aelyn at the boot-tracks, head raised again, looking northeast down the road."
           }
         ],
         "objects": [
-          "Boot-tracks in the road mud — adult-sized, lean, confident heel-strike, half a day to a full day old, moving northeast",
+          "Boot-tracks in the road mud — adult-sized, same direction, roughly a day old, stride even and weight-bearing",
           "A root-ridge crossing the road where Branch paused",
           "Traveler's Pack on Aelyn's back",
           "The kept road stretching northeast into the Quickwood"
         ],
         "threads": [
-          "The thread at Aelyn's sternum pulls steady northeast — same direction as the tracks",
-          "Branch said 'knowing' about the person who made the tracks — what it meant is unasked",
-          "Someone a half-day to a full day ahead, moving with purpose on the same road"
+          "The thread at Aelyn's sternum pulls steady northeast",
+          "One person, carrying weight, moved through here a day ago — heading the same direction, not yet returned",
+          "Branch has confirmed the tracks but not said anything further about what, if anything, it sensed at the root-ridge"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "rootkin-tender",
-          "name": "Rootkin Tender",
-          "note": "Not present — Aelyn is on the road",
-          "status": "active",
-          "statusNote": "Keeping her watch at the Heartroot entrance hall, tending the sapling and monitoring the cold passage-root."
+          "name": "Maren",
+          "note": "Not present — recalled for context only.",
+          "statusNote": "Keeping her night-watch in the entrance hall, sleeping there rather than her chamber to stay near the sapling."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short stretch of walking and reading the tracks — a quarter hour at most"
+        "why": "A short pause on the road to read the tracks."
       }
     },
     "sceneState": {
@@ -175,19 +176,19 @@
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Standing beside Aelyn, looking up the road after its single-word verdict, root-feet still."
+          "state": "Standing beside Aelyn at the boot-tracks, head raised again, looking northeast down the road."
         }
       ],
       "objects": [
-        "Boot-tracks in the road mud — adult-sized, lean, confident heel-strike, half a d",
+        "Boot-tracks in the road mud — adult-sized, same direction, roughly a day old, st",
         "A root-ridge crossing the road where Branch paused",
         "Traveler's Pack on Aelyn's back",
         "The kept road stretching northeast into the Quickwood"
       ],
       "threads": [
-        "The thread at Aelyn's sternum pulls steady northeast — same direction as the tracks",
-        "Branch said 'knowing' about the person who made the tracks — what it meant is unasked",
-        "Someone a half-day to a full day ahead, moving with purpose on the same road"
+        "The thread at Aelyn's sternum pulls steady northeast",
+        "One person, carrying weight, moved through here a day ago — heading the same direction, not yet returned",
+        "Branch has confirmed the tracks but not said anything further about what, if anything, it sensed at the root-ridge"
       ]
     },
     "beats": 3
@@ -285,7 +286,7 @@
         "[d1] Named her belief plainly: Caelum went to the Ashwarden lands because the Rootkin would have pressed him to lean into the green, and the Ashwardens work with what a thing actually is. Doesn't know what he gave them in return but believes Aelyn will recognize it.",
         "[d1] Aelyn thanked her plainly before stepping out — Maren accepted it with a small nod, fingers lifting briefly from the sapling and returning.",
         "[d1] Aelyn spent the night in the outer nook; the Tender kept her watch inside through the night as she has been doing.",
-        "[d2] Not present — Aelyn is on the road"
+        "[d2] Not present — recalled for context only."
       ],
       "knownFacts": [
         "Caelum Kantoro left thirty years ago with no stated destination — he stood in the doorway, looked northeast, and walked",
@@ -300,7 +301,7 @@
       "gender": null,
       "pronouns": null,
       "_backfilledFrom": "establishedFacts",
-      "statusNote": "Keeping her watch at the Heartroot entrance hall, tending the sapling and monitoring the cold passage-root.",
+      "statusNote": "Keeping her night-watch in the entrance hall, sleeping there rather than her chamber to stay near the sapling.",
       "domains": {
         "primary": "rootkin"
       },
@@ -506,7 +507,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-08-06T17:22:44.178Z",
+    "lastSharedReadAt": "2026-08-06T17:25:38.681Z",
     "lastTickWorldDay": 37,
     "lastCanonWorldDay": 37,
     "lastGenCount": 905,
@@ -3191,8 +3192,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1786037138242,
-  "rev": 107,
+  "updatedAt": 1786037173539,
+  "rev": 109,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -3400,7 +3401,7 @@
     {
       "id": "sess-3",
       "startedAt": "2026-08-06T17:23:29.867Z",
-      "lastAt": "2026-08-06T17:25:38.241Z",
+      "lastAt": "2026-08-06T17:26:13.538Z",
       "startDay": 37,
       "endDay": 37,
       "beats": 3
@@ -3566,19 +3567,18 @@
   },
   "_intentAsked": null,
   "_opEmitted": {
-    "sceneSummary": 9,
-    "choices": 9,
-    "scene": 9,
+    "sceneSummary": 8,
+    "choices": 8,
+    "scene": 8,
     "questUpdates": 4,
     "codexUpdates": 6,
-    "timeOps": 9,
-    "sceneEnded": 4,
+    "timeOps": 8,
+    "sceneEnded": 3,
     "characterDeltas": 3,
-    "npcUpdates": 8,
-    "offer": 1,
-    "placeUpdates": 1
+    "npcUpdates": 7,
+    "offer": 1
   },
-  "_opTurns": 9,
+  "_opTurns": 8,
   "knownPlaces": [
     "gen-quickwood-margin"
   ],

@@ -122,7 +122,7 @@
     },
     {
       "id": "the_sounding",
-      "name": "The Sounding",
+      "name": "Shatterlight",
       "parts": [
         "sonic_resonance",
         "prism_sight"
@@ -139,7 +139,11 @@
       "cannot": "Loud — announces you; reveals disposition, not intent; a dead-silent (origin-flat) place returns nothing.",
       "discovery": "use — resonate then perceive; a Heights rune-reader's trick",
       "braidName": "Shatterlight",
-      "braidKey": "prism_sight+sonic_resonance"
+      "braidKey": "prism_sight+sonic_resonance",
+      "_renamed": {
+        "was": "The Sounding",
+        "why": "⚠️ SHATTERLIGHT WINS, and the rename lands HERE rather than on the braid table. I decided Shatterlight beats 'The Sounding' — the one case where the evocative name is the MORE accurate one, because it is the only name that says both parts are present: the splitting and the ringing. Then my own resync rule ('braid name = mechanical name') blindly flipped it back. The decision was right; the ENFORCEMENT overwrote it. Fixed by moving the winning name into the mechanical table, so the rule and the decision agree instead of fighting."
+      }
     },
     {
       "id": "the_harbor_light",

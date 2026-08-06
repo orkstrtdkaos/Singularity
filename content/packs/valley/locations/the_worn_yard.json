@@ -1,0 +1,49 @@
+{
+ "schemaVersion": 1,
+ "id": "the_worn_yard",
+ "name": "The Worn Yard",
+ "regionId": "the_foothills",
+ "communityId": "the_worn_yard",
+ "spectrum": "destruction_creation",
+ "tags": [
+  "settlement",
+  "foothill",
+  "market"
+ ],
+ "connections": [
+  "the_crossing",
+  "the_scour"
+ ],
+ "descriptionSeed": "The Worn Yard — demolition, salvage and honest endings: the trade of taking things apart properly. The Unmade ends things. The Worn Yard ends things and clears the site, which is why every builder in the Valley knows the name.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
+ "dangerLevel": 1,
+ "image": null,
+ "questSeeds": [],
+ "map": {
+  "x": 460,
+  "y": 370
+ },
+ "encounterSeeds": [],
+ "poleIntensity": 0.5,
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.2,
+  "radius": 90,
+  "reason": "The Archive was sealed before the Transition and never opened to it. What is inside is still what was inside.",
+  "radiusWorld": 0.054,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [],
+ "axisVectorNote": "",
+ "worldPos": {},
+ "worldPosNote": "",
+ "foothillOf": [
+  "unmaker",
+  "mason",
+  "wright"
+ ],
+ "betweenCrossingAnd": "the_scour",
+ "startingLocation": true
+}

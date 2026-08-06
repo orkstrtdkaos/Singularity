@@ -4,7 +4,11 @@
  "name": "Plainstead",
  "regionId": "the_foothills",
  "communityId": "plainstead",
- "spectrum": "falsehood_truth",
+ "spectrum": {
+  "falsehood_truth": 0.4,
+  "emotional_logical": 0.3,
+  "order_chaos": 0.25
+ },
  "tags": [
   "settlement",
   "foothill",
@@ -19,14 +23,18 @@
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
  "dangerLevel": 1,
- "image": null,
+ "image": "content/packs/valley/assets/plainstead.jpg",
  "questSeeds": [],
  "map": {
   "x": 270,
   "y": 335
  },
  "encounterSeeds": [],
- "poleIntensity": 0.5,
+ "poleIntensity": {
+  "truth": 0.4,
+  "logical": 0.3,
+  "order": 0.25
+ },
  "substrateSource": {
   "kind": "pool",
   "delta": 0.2,

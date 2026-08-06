@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 2,
-  "xp": 135,
+  "xp": 137,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -44,7 +44,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 96,
+  "energy": 93,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -98,55 +98,82 @@
         "player": "Press on at the same pace — close the gap further before deciding anything",
         "summary": "Aelyn closed the gap and spotted the traveler — sixty paces ahead on the kept road, pack on back, unaware.",
         "narration": "You follow Branch's gaze east for a moment — the trees are the same close-packed birch and older oak they have been, light sliding down through the canopy in pale columns, nothing obvious moving. Then you face forward again and keep walking.\n\nThe kept road bends gently northeast and the canopy thickens. The mud here holds the boot-tracks clean and deep, and you can feel the gap closing — not because the pace has changed, but because the distance has. The thread at your sternum pulls with slightly more insistence, like a cord being drawn taut one hand-width at a time.\n\nAround a root-ridge that humps wide across the road, the trees thin briefly. In that short window of gray-green morning light, you see a figure ahead on the path — a person, pack on their back, moving at the same steady walk the tracks promised. They have not heard you yet. The distance is maybe sixty paces.\n\nBranch stops walking. One bud at its shoulder opens a little. It says, quietly, \"Person.\""
+      },
+      {
+        "player": "Open Lifesense — read their vitals and condition from here before any contact",
+        "summary": "Aelyn attempted Lifesense on the traveler from sixty paces but the Quickwood's own pulse drowned it out — the traveler remains unread.",
+        "narration": "You stop on the road, sixty paces back, and reach for Lifesense — that quiet opening of attention that lets the living world speak its state to you. You settle your breathing, let your shoulders drop, and cast your sense forward along the path.\n\nIt doesn't land. The Quickwood's own pulse is too loud here — root-traffic moving in every direction underfoot, the canopy alive with birds and insects and the slow sap-work of dozens of trees, all of it crowding the channel you're trying to thread toward one distant figure. You feel the wood, feel Branch's steady warmth beside you, feel your own heartbeat. You cannot isolate the traveler from the noise. They remain a shape and a pack and a steady walk, nothing more.\n\nBranch notices. It turns its bud toward you without stopping. \"Too much,\" it says, after a moment. A fair assessment.\n\nThe traveler moves on ahead, unaware. The thread at your sternum pulls northeast — not urgently, but without ambiguity."
       }
     ],
     "lastTurn": {
-      "narration": "You follow Branch's gaze east for a moment — the trees are the same close-packed birch and older oak they have been, light sliding down through the canopy in pale columns, nothing obvious moving. Then you face forward again and keep walking.\n\nThe kept road bends gently northeast and the canopy thickens. The mud here holds the boot-tracks clean and deep, and you can feel the gap closing — not because the pace has changed, but because the distance has. The thread at your sternum pulls with slightly more insistence, like a cord being drawn taut one hand-width at a time.\n\nAround a root-ridge that humps wide across the road, the trees thin briefly. In that short window of gray-green morning light, you see a figure ahead on the path — a person, pack on their back, moving at the same steady walk the tracks promised. They have not heard you yet. The distance is maybe sixty paces.\n\nBranch stops walking. One bud at its shoulder opens a little. It says, quietly, \"Person.\"",
-      "sceneSummary": "Aelyn closed the gap and spotted the traveler — sixty paces ahead on the kept road, pack on back, unaware.",
+      "narration": "You stop on the road, sixty paces back, and reach for Lifesense — that quiet opening of attention that lets the living world speak its state to you. You settle your breathing, let your shoulders drop, and cast your sense forward along the path.\n\nIt doesn't land. The Quickwood's own pulse is too loud here — root-traffic moving in every direction underfoot, the canopy alive with birds and insects and the slow sap-work of dozens of trees, all of it crowding the channel you're trying to thread toward one distant figure. You feel the wood, feel Branch's steady warmth beside you, feel your own heartbeat. You cannot isolate the traveler from the noise. They remain a shape and a pack and a steady walk, nothing more.\n\nBranch notices. It turns its bud toward you without stopping. \"Too much,\" it says, after a moment. A fair assessment.\n\nThe traveler moves on ahead, unaware. The thread at your sternum pulls northeast — not urgently, but without ambiguity.",
+      "sceneSummary": "Aelyn attempted Lifesense on the traveler from sixty paces but the Quickwood's own pulse drowned it out — the traveler remains unread.",
       "choices": [
         {
-          "label": "Call out plainly — announce yourself before you close further",
+          "label": "Call out — a greeting, traveler to traveler, nothing more",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "persuade"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Close the last distance quietly and read the person before speaking — posture, gear, bearing",
+          "label": "Close the gap to thirty paces and try Lifesense again — tighter range, less noise",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.4
+          },
           "difficulty": 15,
+          "intentTags": [
+            "careful",
+            "scout"
+          ],
+          "abilityId": "lifesense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hang back and watch — let them move, see how they walk, what they carry, where they look",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
             "scout",
             "careful"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Open Lifesense — read their vitals and condition from here before any contact",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask Branch quietly — does it sense anything about the person ahead?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "death_life": 0.2
+          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "lifesense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Hold your distance and watch how they move — wait for them to pause or reveal something on their own",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
@@ -154,11 +181,11 @@
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Stopped on the road beside Aelyn, one bud open, watching the figure ahead."
+            "state": "Stopped beside Aelyn, bud turned toward her after noticing the failed Lifesense attempt, watching."
           },
           {
             "name": "Unknown traveler",
-            "state": "Moving northeast at a steady walk, unaware of Aelyn, pack on back."
+            "state": "Moving northeast at a steady walk, unaware of Aelyn, sixty paces ahead."
           }
         ],
         "objects": [
@@ -168,14 +195,25 @@
           "The kept road stretching northeast into the Quickwood"
         ],
         "threads": [
-          "The thread at Aelyn's sternum is pulling more distinctly — the gap is closing",
-          "Branch stopped and opened a bud — it has noticed something about the person or the eastern tree-line",
-          "The traveler is unaware of Aelyn — sixty paces ahead, moving steady"
+          "The thread at Aelyn's sternum pulls northeast with steady insistence — the gap is real but closing",
+          "Branch noticed something about the eastern tree-line earlier — it has not explained what",
+          "The traveler is unaware of Aelyn — sixty paces ahead, moving steady",
+          "Lifesense was drowned by the Quickwood's own pulse — the traveler remains unread"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "rootkin-tender",
+          "name": "Rootkin Tender",
+          "note": "Not present — recalled for continuity only.",
+          "status": "active",
+          "statusNote": "Keeping her watch at the Heartroot entrance hall, tending the sapling."
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "a stretch of walking deeper into the Quickwood, closing distance on the traveler"
+        "hoursPassed": 0.25,
+        "why": "a brief stop on the road to attempt Lifesense"
       }
     },
     "sceneState": {
@@ -183,11 +221,11 @@
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Stopped on the road beside Aelyn, one bud open, watching the figure ahead."
+          "state": "Stopped beside Aelyn, bud turned toward her after noticing the failed Lifesense attempt, watching."
         },
         {
           "name": "Unknown traveler",
-          "state": "Moving northeast at a steady walk, unaware of Aelyn, pack on back."
+          "state": "Moving northeast at a steady walk, unaware of Aelyn, sixty paces ahead."
         }
       ],
       "objects": [
@@ -197,12 +235,13 @@
         "The kept road stretching northeast into the Quickwood"
       ],
       "threads": [
-        "The thread at Aelyn's sternum is pulling more distinctly — the gap is closing",
-        "Branch stopped and opened a bud — it has noticed something about the person or the eastern tree-line",
-        "The traveler is unaware of Aelyn — sixty paces ahead, moving steady"
+        "The thread at Aelyn's sternum pulls northeast with steady insistence — the gap is real but closing",
+        "Branch noticed something about the eastern tree-line earlier — it has not explained what",
+        "The traveler is unaware of Aelyn — sixty paces ahead, moving steady",
+        "Lifesense was drowned by the Quickwood's own pulse — the traveler remains unread"
       ]
     },
-    "beats": 6
+    "beats": 7
   },
   "clock": {
     "schemaVersion": 1,
@@ -298,7 +337,8 @@
         "[d1] Aelyn thanked her plainly before stepping out — Maren accepted it with a small nod, fingers lifting briefly from the sapling and returning.",
         "[d1] Aelyn spent the night in the outer nook; the Tender kept her watch inside through the night as she has been doing.",
         "[d2] Not present — recalled for context only.",
-        "[d2] Not present — recalled for context only."
+        "[d2] Not present — recalled for context only.",
+        "[d2] Not present — recalled for continuity only."
       ],
       "knownFacts": [
         "Caelum Kantoro left thirty years ago with no stated destination — he stood in the doorway, looked northeast, and walked",
@@ -322,7 +362,7 @@
         "locationId": "gen-quickwood-margin",
         "day": 2
       },
-      "met": 2
+      "met": 3
     }
   },
   "placeMemory": {
@@ -561,7 +601,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "latentArcs": {
       "heartwood-hollowing": {
         "id": "heartwood-hollowing",
@@ -3155,18 +3195,18 @@
     }
   },
   "tendencies": {
-    "cerebral": 13.257565725139449,
-    "cautious": 8.50092708610546,
-    "generous": 0.528769378214802,
-    "social": 3.861391349766915,
-    "strategic": 3.5890722493537397,
-    "devotion": 4.133915827832868,
-    "patient": 2.203610169574039
+    "cerebral": 13.926126582010962,
+    "cautious": 8.288403908952823,
+    "generous": 0.5155501437594319,
+    "social": 3.764856566022742,
+    "strategic": 3.4993454431198963,
+    "devotion": 4.030567932137046,
+    "patient": 2.148519915334688
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 63,
+  "actionCount": 64,
   "grantsVersion": 1,
   "reconcileVersion": 24,
   "gallery": [
@@ -3204,8 +3244,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1786039128732,
-  "rev": 112,
+  "updatedAt": 1786039176007,
+  "rev": 113,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -3254,7 +3294,7 @@
     "item": {}
   },
   "regionsKnown": {
-    "the_quickwood": 64
+    "the_quickwood": 65
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -3361,14 +3401,14 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "lifesense": 7,
+      "lifesense": 8,
       "the_speaking_grove": 11,
       "prism_sight": 1
     },
     "coActivations": {},
     "aspirations": [],
     "lastUsed": {
-      "lifesense": 24,
+      "lifesense": 37,
       "the_speaking_grove": 37
     }
   },
@@ -3414,10 +3454,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-08-06T17:23:29.867Z",
-      "lastAt": "2026-08-06T17:58:48.729Z",
+      "lastAt": "2026-08-06T17:59:36.005Z",
       "startDay": 37,
       "endDay": 37,
-      "beats": 6
+      "beats": 7
     }
   ],
   "livingCurrentAccess": [
@@ -3580,18 +3620,18 @@
   },
   "_intentAsked": null,
   "_opEmitted": {
-    "sceneSummary": 11,
-    "choices": 11,
-    "scene": 11,
+    "sceneSummary": 12,
+    "choices": 12,
+    "scene": 12,
     "questUpdates": 4,
     "codexUpdates": 6,
-    "timeOps": 11,
+    "timeOps": 12,
     "sceneEnded": 3,
     "characterDeltas": 3,
-    "npcUpdates": 8,
+    "npcUpdates": 9,
     "offer": 1
   },
-  "_opTurns": 11,
+  "_opTurns": 12,
   "knownPlaces": [
     "gen-quickwood-margin"
   ],
@@ -3615,6 +3655,6 @@
     "travel": 3,
     "careful": 4,
     "scout": 1,
-    "study": 1
+    "study": 2
   }
 }

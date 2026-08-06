@@ -42,7 +42,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.0475
+    "spectrumId": -0.095125
   },
   "attunement": 1,
   "maxHealth": 35,
@@ -55,12 +55,16 @@
       "name": "Traveler's Pack",
       "kind": "tool",
       "qty": 1,
-      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, and the small comforts of the road. The tinderbox has been opened and used to kindle a fire at The Thinning's waygate clearing.",
       "bonusTags": [
         "retreat",
         "careful"
       ],
-      "consumable": false
+      "consumable": false,
+      "provenance": "The tinderbox within it held tinder that caught when nothing else would—the road's small wisdom made real.",
+      "imageStamp": 1,
+      "imagePrompt": "A worn canvas pack with good straps — bedroll, flint, mess kit, and the small comforts of the road. The tinderbox has been opened and used to kindle a fire at The Thinning's waygate clearing.",
+      "imageDirty": true
     }
   ],
   "deeds": [
@@ -155,69 +159,88 @@
         "player": "Try again with the fire—use the Unbroken Practice to steady your focus and coax the spark to catch",
         "summary": "At The Thinning's sealed waygate, deep night closes in cold and without fire. The sentinel holds. The dark waits. Splarf settles into the long hours ahead, exhausted and grounded, the Practice sustaining what stubbornness cannot.",
         "narration": "You kneel in the scattered deadfall, striking flint against steel with the precision the Unbroken Practice demands—each motion steady, centered, the kind of deliberate focus that usually carries you through. But tonight the spark doesn't catch. It flares, gutters, dies against the damp wood. You try again. And again. The Practice holds you steady; your hands do not shake. But steadiness is not enough when the wood itself refuses. Spring wet runs deep, and whatever discipline you bring to it, fire needs tinder that *wants* to burn.\n\nAfter the fourth attempt, you sit back on your heels. The deadfall lies dark and resentful at your knees. Behind you, Cevaine does not move—still facing the veil, still bleeding, still refusing the admission that some problems have no form to solve. Boo has pressed itself into a shadow at the forest-line, a presence more felt than seen. The night is cold. The veil hums its refusal. And you are going to spend it without fire.\n\nYou gather what you can—the foraged spring greens from your pack, bitter sorrel and young plantain that won't fill but will steady you. You eat slowly, sitting near the gathering of useless wood, and pull your cloak closer. The Unbroken Practice teaches you to continue when everything else is stripped away. Tonight, what's stripped is warmth. What continues is the watching, and the waiting, and the cold clarity that some nights you simply endure.\n\n*− foraged spring greens — taken from you.*"
+      },
+      {
+        "player": "my travelers pack has a tinderbox with tinder, use that to start the fire.",
+        "summary": "At The Thinning's sealed waygate, deep into the cold night, Splarf builds a fire from the Traveler's Pack's tinder and settles in to wait—Cevaine stands sentinel despite their wound, the dark watches from the forest's edge, and the veil refuses crossing.",
+        "narration": "You reach for the Traveler's Pack, fingers finding the tinderbox by touch—a worn brass cylinder with dried tinder wrapped tight inside. This is what the road teaches you to carry: the thing that actually catches when the world is damp and cold and holding. You strike the flint with steady hands, and this time the spark finds purchase on tinder that *wants* to burn.\n\nThe flame catches small and bright. You feed it carefully—the smallest twigs first, then the least-damp of the deadfall, coaxing rather than forcing. The fire builds. It's not large, but it's real: a circle of warmth in the deep night, pushing back the dark and the cold in equal measure. The veil's phosphorescent hum continues behind you, resentful and sealed. Cevaine does not acknowledge the fire. But their shoulders relax, fractionally, just enough that you know they feel it.\n\nBoo emerges from the shadow-line at the fire's edge, settling into a crouch where the heat reaches but the light doesn't quite catch. The cat-shape holds for a moment, then dissolves back into something less definable as it watches the flames. The forest beyond the clearing holds still. The dark waits. But you have warmth now, and that is something—the first small thing you've managed to *make* work since the veil sealed itself against you.\n\n*✦ Traveler's Pack has changed — description, provenance, image.*"
       }
     ],
     "lastTurn": {
-      "narration": "You kneel in the scattered deadfall, striking flint against steel with the precision the Unbroken Practice demands—each motion steady, centered, the kind of deliberate focus that usually carries you through. But tonight the spark doesn't catch. It flares, gutters, dies against the damp wood. You try again. And again. The Practice holds you steady; your hands do not shake. But steadiness is not enough when the wood itself refuses. Spring wet runs deep, and whatever discipline you bring to it, fire needs tinder that *wants* to burn.\n\nAfter the fourth attempt, you sit back on your heels. The deadfall lies dark and resentful at your knees. Behind you, Cevaine does not move—still facing the veil, still bleeding, still refusing the admission that some problems have no form to solve. Boo has pressed itself into a shadow at the forest-line, a presence more felt than seen. The night is cold. The veil hums its refusal. And you are going to spend it without fire.\n\nYou gather what you can—the foraged spring greens from your pack, bitter sorrel and young plantain that won't fill but will steady you. You eat slowly, sitting near the gathering of useless wood, and pull your cloak closer. The Unbroken Practice teaches you to continue when everything else is stripped away. Tonight, what's stripped is warmth. What continues is the watching, and the waiting, and the cold clarity that some nights you simply endure.\n\n*− foraged spring greens — taken from you.*",
-      "sceneSummary": "At The Thinning's sealed waygate, deep night closes in cold and without fire. The sentinel holds. The dark waits. Splarf settles into the long hours ahead, exhausted and grounded, the Practice sustaining what stubbornness cannot.",
+      "narration": "You reach for the Traveler's Pack, fingers finding the tinderbox by touch—a worn brass cylinder with dried tinder wrapped tight inside. This is what the road teaches you to carry: the thing that actually catches when the world is damp and cold and holding. You strike the flint with steady hands, and this time the spark finds purchase on tinder that *wants* to burn.\n\nThe flame catches small and bright. You feed it carefully—the smallest twigs first, then the least-damp of the deadfall, coaxing rather than forcing. The fire builds. It's not large, but it's real: a circle of warmth in the deep night, pushing back the dark and the cold in equal measure. The veil's phosphorescent hum continues behind you, resentful and sealed. Cevaine does not acknowledge the fire. But their shoulders relax, fractionally, just enough that you know they feel it.\n\nBoo emerges from the shadow-line at the fire's edge, settling into a crouch where the heat reaches but the light doesn't quite catch. The cat-shape holds for a moment, then dissolves back into something less definable as it watches the flames. The forest beyond the clearing holds still. The dark waits. But you have warmth now, and that is something—the first small thing you've managed to *make* work since the veil sealed itself against you.\n\n*✦ Traveler's Pack has changed — description, provenance, image.*",
+      "sceneSummary": "At The Thinning's sealed waygate, deep into the cold night, Splarf builds a fire from the Traveler's Pack's tinder and settles in to wait—Cevaine stands sentinel despite their wound, the dark watches from the forest's edge, and the veil refuses crossing.",
       "choices": [
         {
-          "label": "Settle into the Practice—meditate through the night, using steady discipline to anchor yourself while the hours turn cold",
+          "label": "Tend to yourself—eat from the foraged spring greens, rest by the fire, let exhaustion finally take what it needs.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "rest",
+            "endure"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Watch the fire and the forest both through the long hours—keep vigil with Cevaine, the sentinel and the watcher.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "sustain",
-            "endure",
-            "devote"
+            "guard",
+            "endure"
           ],
-          "abilityId": "the_unbroken_practice",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Move closer to Cevaine and sit nearby—not tending the wound, just present, and watch the veil together through the night",
+          "label": "Approach Cevaine one more time—not to tend the wound, but to stand beside them at the veil, present in the watch.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "calm",
-            "comfort",
+            "help",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null
+          "abilityId": "steady_soul",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Walk the perimeter with Boo—keep moving to stay warm, and put yourself between the forest-line and Cevaine, reading what the dark is doing",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Let the fire burn and Boo watch—settle into meditation with the Unbroken Practice, centering deeper into the night.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
-          "difficulty": 12,
+          "difficulty": 0,
           "intentTags": [
-            "guard",
-            "defend",
-            "scout"
+            "devote",
+            "endure"
           ],
-          "abilityId": "numen_sense",
-          "energyCost": 3,
+          "abilityId": "the_unbroken_practice",
+          "energyCost": 1,
           "trivial": false,
-          "encounterId": null
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -5,
+        "energy": 0,
         "inventoryAdd": [],
-        "inventoryRemove": [
-          "foraged spring greens"
-        ],
+        "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
@@ -225,51 +248,83 @@
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
+      "adoptSchool": null,
       "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "The Thinning's sealed waygate clearing, deep night now—the cold settling into the stone and earth. The veil's luminous shimmer persists, humming low and resentful, refusing crossing. Deadfall scattered unsparked across the ground. No fire. The Disputed Zone forest holds at the veil's edge, patient and watching.",
+        "setting": "The Thinning's sealed waygate clearing, deep night now—the veil's phosphorescent hum persisting low and resentful, refusing crossing. A small fire burns at the clearing's center, built from the Traveler's Pack's tinder, pushing back the cold. Deadfall scattered around it. The Disputed Zone forest holds at the veil's edge, patient and watching.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Standing sentinel at the veil's edge, rigidly still, shoulders held against pain they will not acknowledge. The wound at their shoulder bled fresh; they have not moved to tend it. Facing the sealed boundary, tracking nothing with geometric precision."
+            "state": "Standing sentinel at the veil's edge, rigidly still, shoulders held against pain they will not acknowledge. The wound at their shoulder bleeds fresh. They do not acknowledge the fire, but their shoulders have relaxed fractionally—they feel its warmth."
           }
         ],
         "objects": [
           "The sealed veil—shimmer and hum, deliberately refusing",
-          "Scattered deadfall—gathered for fire, damp, unsparked",
-          "Traveler's Pack (bedroll, flint, mess kit, carried comforts)",
+          "Small fire burning bright at the clearing's center",
+          "Scattered deadfall around the fire's warmth",
+          "Traveler's Pack (tinderbox now depleted, other gear intact)",
           "Foraged spring greens (partially consumed)",
-          "The dark of the Disputed Zone forest—held at distance by veil's light, patient and aware"
+          "Boo at the fire's edge, watching"
         ],
         "threads": [
           "The sentinel refuses all aid and will not break form through the night",
           "The sealed veil continues to hum—the sender on the other side has not stopped pushing",
-          "The purpose-shaped darkness in the forest waits with intention",
-          "Splarf is exhausted (energy 4/100) and settling into a cold night without fire or real warmth"
+          "The purpose-shaped darkness in the forest waits with intention at the clearing's edge",
+          "Splarf is exhausted (energy 4/100) but now has fire and warmth to sustain the vigil"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "note": "Refused aid again. Will not move. The Lattice discipline holds form above flesh even as the wound bleeds. Standing through the cold night at the sealed veil, sentinel-still, tracking nothing but refusing everything.",
+          "name": "Cevaine",
+          "role": "Lattice-Cities order-reader of the Seventh Measure, sentinel at the sealed veil",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Splarf built fire at the clearing's center despite Cevaine's refusal of direct care. Cevaine does not acknowledge it, but their shoulders have relaxed fractionally—the warmth reaches them. The sentinel holds form, but the discipline permits the comfort of fire.",
           "learned": [
-            "Geometric precision cannot hold form AND accept care—one must yield. Cevaine chooses the form."
+            "The Unbroken Practice is not merely a discipline of will—it is a discipline that permits the small kindnesses the body requires to endure"
           ],
-          "statusNote": "Standing sentinel at the sealed veil with a bleeding shoulder, refusing aid absolutely, holding form through pain through the night—the Lattice discipline takes precedence over flesh."
+          "statusNote": "Standing sentinel at the sealed veil despite their bleeding shoulder, refusing direct aid absolutely. The fire warms them without requiring them to break form."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
+      "discovery": null,
       "codexUpdates": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "the fire attempt and the settling into the long cold night"
+        "why": "The fire building and settling—a brief reprieve of time, gathering warmth"
       },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [
+        {
+          "name": "Traveler's Pack",
+          "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, and the small comforts of the road. The tinderbox has been opened and used to kindle a fire at The Thinning's waygate clearing.",
+          "provenance": "The tinderbox within it held tinder that caught when nothing else would—the road's small wisdom made real."
+        }
+      ],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Thinning's sealed waygate clearing, deep night now—the cold settling into the stone and earth. The veil's luminous shimmer persists, humming low and resentful, refusing crossing. Deadfall scattered unsparked across the ground. No fire. The Disputed Zone forest holds at the veil's edge, patient and watching.",
+      "setting": "The Thinning's sealed waygate clearing, deep night now—the veil's phosphorescent hum persisting low and resentful, refusing crossing. A small fire burns at the clearing's center, built from the Traveler's Pack's tinder, pushing back the cold. Deadfall scattered around it. The Disputed Zone forest holds at the veil's edge, patient and watching.",
       "npcsPresent": [
         {
           "name": "Cevaine",
@@ -278,19 +333,20 @@
       ],
       "objects": [
         "The sealed veil—shimmer and hum, deliberately refusing",
-        "Scattered deadfall—gathered for fire, damp, unsparked",
-        "Traveler's Pack (bedroll, flint, mess kit, carried comforts)",
+        "Small fire burning bright at the clearing's center",
+        "Scattered deadfall around the fire's warmth",
+        "Traveler's Pack (tinderbox now depleted, other gear intact)",
         "Foraged spring greens (partially consumed)",
-        "The dark of the Disputed Zone forest—held at distance by veil's light, patient a"
+        "Boo at the fire's edge, watching"
       ],
       "threads": [
         "The sentinel refuses all aid and will not break form through the night",
         "The sealed veil continues to hum—the sender on the other side has not stopped pushing",
-        "The purpose-shaped darkness in the forest waits with intention",
-        "Splarf is exhausted (energy 4/100) and settling into a cold night without fire or real warmth"
+        "The purpose-shaped darkness in the forest waits with intention at the clearing's edge",
+        "Splarf is exhausted (energy 4/100) but now has fire and warmth to sustain the vigil"
       ]
     },
-    "beats": 11
+    "beats": 12
   },
   "clock": {
     "schemaVersion": 1,
@@ -433,7 +489,7 @@
     "cevaine": {
       "id": "cevaine",
       "name": "Cevaine",
-      "role": "Lattice-Cities order-reader of the Seventh Measure",
+      "role": "Lattice-Cities order-reader of the Seventh Measure, sentinel at the sealed veil",
       "description": "Tall, angular, skin nearly translucent. Eyes that track with geometric precision. Moves with the eerie discipline of lattice-trained structure-thinking.",
       "firstMet": {
         "locationId": "gen-object-object",
@@ -441,7 +497,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d1] Cevaine applied geometric precision to read the moving thing and found no resolving pattern—it moves by choice, not logic. This is the moment geometric thinking reaches its limit. They are now waiting to understand a thing that does not solve.",
         "[d1] Confirmed to Splarf that what moves in the dark is purpose-shaped, not animal—a thing that chooses its path rather than following the geometry of natural motion.",
         "[d1] Heard Splarf call out to the dark thing in the old tongue. Confirmed it heard but did not answer. Now standing at Splarf's shoulder, hand grounding, admitting that this is a problem geometric precision cannot solve. Waiting to see what Splarf will choose next.",
         "[d1] Watched Splarf make contact with the sealed veil itself and read intention in its hum. Now standing closer, hand near Splarf's shoulder—offering presence as a grounding point, the Lattice way of saying: I see the limit of my own thinking, and I will hold the ground while you stand at that edge.",
@@ -450,17 +505,18 @@
         "[d1] Splarf offered a story from Lattice wisdom about structural failure and precision's dependence on foundation—Cevaine heard it, understood the logic, but chose the sentinel's work over care. The wound goes tended by choice.",
         "[d1] Splarf reached to tend their wound; Cevaine refused care absolutely, stepping back, presenting only the sound side of their body. The Lattice discipline holds form above flesh. They return to watching the veil.",
         "[d1] Splarf offered a story from Lattice wisdom about precision and structural failure—Cevaine heard it, understood the logic, but chose the work over care. The wound remains tended by choice. Now standing through a cold night at the sealed veil while Splarf fails to build fire.",
-        "[d2] Refused aid again. Will not move. The Lattice discipline holds form above flesh even as the wound bleeds. Standing through the cold night at the sealed veil, sentinel-still, tracking nothing but refusing everything."
+        "[d2] Refused aid again. Will not move. The Lattice discipline holds form above flesh even as the wound bleeds. Standing through the cold night at the sealed veil, sentinel-still, tracking nothing but refusing everything.",
+        "[d2] Splarf built fire at the clearing's center despite Cevaine's refusal of direct care. Cevaine does not acknowledge it, but their shoulders have relaxed fractionally—the warmth reaches them. The sentinel holds form, but the discipline permits the comfort of fire."
       ],
       "knownFacts": [
-        "The veil's agency is either a new thing the Seventh Measure cannot account for, or the boundary itself is thinking",
         "Geometric precision has no category for things that choose—only for patterns that can be read and predicted",
         "A boundary that refuses repeated crossing is making a decision, not executing structure",
         "Some problems have no seam to close; they require a different kind of thinking entirely",
         "Cevaine's discipline can hear reason in its own language—pattern, structure, precision—but will defer care for what is perceived as more urgent",
         "Cevaine will not break geometric form even when bleeding—care is subordinate to the work of the watch",
         "Refusal is not anger; it is precision applied to what matters most",
-        "Geometric precision cannot hold form AND accept care—one must yield. Cevaine chooses the form."
+        "Geometric precision cannot hold form AND accept care—one must yield. Cevaine chooses the form.",
+        "The Unbroken Practice is not merely a discipline of will—it is a discipline that permits the small kindnesses the body requires to endure"
       ],
       "skillsObserved": [
         "absolute tracking and positioning",
@@ -473,7 +529,7 @@
       "status": "active",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "statusNote": "Standing sentinel at the sealed veil with a bleeding shoulder, refusing aid absolutely, holding form through pain through the night—the Lattice discipline takes precedence over flesh.",
+      "statusNote": "Standing sentinel at the sealed veil despite their bleeding shoulder, refusing direct aid absolutely. The fire warms them without requiring them to break form.",
       "domains": {
         "primary": "lattice"
       },
@@ -661,7 +717,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Cevaine's admission that geometric precision cannot solve this—and their willingness to stand at the edge of their own knowing",
@@ -3184,22 +3240,22 @@
     }
   },
   "tendencies": {
-    "stealth": 8.035835736254668,
-    "strategic": 3.142241986300314,
-    "cautious": 7.354044392370169,
-    "cerebral": 3.7912444505171043,
-    "patient": 2.5877085761889234,
-    "devotion": 1.3855803630653838,
-    "risky": 2.3982195720266066,
-    "generous": 2.46640889575169,
-    "social": 5.1324976851828445,
-    "craft": 1.8096933010253904
+    "stealth": 7.834939842848302,
+    "strategic": 4.063685936642806,
+    "cautious": 7.1701932825609145,
+    "cerebral": 3.696463339254177,
+    "patient": 2.5230158617842,
+    "devotion": 1.350940853988749,
+    "risky": 2.3382640827259413,
+    "generous": 2.404748673357898,
+    "social": 5.004185243053273,
+    "craft": 1.7644509684997556
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 19,
+  "actionCount": 20,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3445,8 +3501,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786026377532,
-  "rev": 68,
+  "updatedAt": 1786026459534,
+  "rev": 69,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3577,7 +3633,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 25
+    "the_numinous_reach": 26
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -3593,10 +3649,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-06T12:00:39.112Z",
-      "lastAt": "2026-08-06T14:26:17.531Z",
+      "lastAt": "2026-08-06T14:27:39.533Z",
       "startDay": 37,
       "endDay": 37,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [
@@ -3634,30 +3690,31 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 24,
-    "scene": 24,
-    "choices": 24,
+    "sceneSummary": 25,
+    "scene": 25,
+    "choices": 25,
     "offer": 12,
     "codexUpdates": 14,
     "imagePrompt": 9,
-    "gambitApt": 19,
-    "sceneEnded": 24,
-    "characterDeltas": 15,
+    "gambitApt": 20,
+    "sceneEnded": 25,
+    "characterDeltas": 16,
     "arcOps": 1,
     "factUpdates": 3,
     "placeUpdates": 4,
-    "timeOps": 11,
+    "timeOps": 12,
     "deeds": 2,
     "ledgerEvents": 1,
     "questUpdates": 5,
-    "npcUpdates": 16,
+    "npcUpdates": 17,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
     "markDefiningMoment": 1,
-    "_engineClosedScene": 1
+    "_engineClosedScene": 1,
+    "itemUpdates": 1
   },
-  "_opTurns": 24,
+  "_opTurns": 25,
   "practice": {
     "schemaVersion": 1,
     "uses": {

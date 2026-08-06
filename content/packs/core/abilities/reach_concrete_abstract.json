@@ -2011,7 +2011,7 @@
   {
    "schemaVersion": 1,
    "id": "the_drawn_ascent",
-   "name": "The Drawn Ascent",
+   "name": "The Borrowed Form",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_concrete_abstract",
@@ -2025,27 +2025,29 @@
     "transform"
    ],
    "narrationHints": "A travel and puzzle action. You draw the figure of a rising thing and occupy it, and it mu",
-   "description": "⚠️ FIGURIST FLIGHT: you draw the figure of a rising thing and then occupy it. What lifts is not you — it is the pattern, and you are inside it. It holds exactly as long as the figure holds, and a figure held under strain begins to simplify.",
-   "notFor": "Improvising. The figure must be drawn before you rise, and redrawing it midair is not available.",
+   "description": "⚠️ FIGURIST FLIGHT, AND IT IS SHAPE-TAKING. A figurist works in forms; to fly, they take the form of something that already does. You become a hawk, a gull, a moth — a real one, at that thing's real size, with that thing's real limits.",
+   "notFor": "⚠️ YOUR OWN BODY'S ADVANTAGES. A hawk has no hands, carries nothing, and speaks to no one. You get flight and you get a bird's life for the duration.",
    "tree": [
     {
      "rank": 1,
-     "name": "The Drawn Ascent",
-     "grants": "Draw a rising figure and occupy it — controlled flight for as long as the figure holds.",
-     "cannot": "Drawing it after you have left the ground.",
+     "name": "The Borrowed Form",
+     "grants": "Take the form of a small flying creature and fly as it flies. Your gear does not come with you.",
+     "cannot": "Carrying anything. Speaking. Using any craft that needs hands.",
      "functions": [
-      "travel"
+      "travel",
+      "transform"
      ],
      "gains": "broaden",
      "harmRung": "none"
     },
     {
      "rank": 2,
-     "name": "The Sustained Figure",
-     "grants": "Hold it across a route. ⚠️ Under strain it SIMPLIFIES — losing detail, then control, then shape.",
-     "cannot": "Keeping full control once it has begun to simplify.",
+     "name": "The Kept Self",
+     "grants": "Take a larger form and keep your own mind sharp in it — you can still think, plan, and remember detail.",
+     "cannot": "Keeping your voice or your hands. It is still an animal's body.",
      "functions": [
-      "travel"
+      "travel",
+      "transform"
      ],
      "gains": "deepen",
      "harmRung": "none"
@@ -2066,7 +2068,7 @@
     "magnitude": 7,
     "duration": 10,
     "range": "route-scale",
-    "note": "⚠️ DEGRADES RATHER THAN FAILS. A long leg does not drop you; it makes the flight progressively cruder until you set down."
+    "note": "⚠️ FLIGHT AT THE COST OF BEING A PERSON. Halves a leg's days and you arrive with nothing you were carrying — the gear has to travel some other way or wait."
    },
    "rankDeltas": [],
    "intensity": {
@@ -2075,25 +2077,25 @@
    },
    "bounds": [
     {
-     "text": "THE FIGURE MUST BE DRAWN BEFORE YOU RISE — no improvising midair",
+     "text": "YOUR GEAR DOES NOT COME WITH YOU — it stays where you changed",
      "class": "hard"
     },
     {
-     "text": "⚠️ IT DEGRADES RATHER THAN FAILS — detail, then control, then shape",
+     "text": "NO HANDS, NO VOICE — you cannot use most crafts, open anything, or speak while flying",
+     "class": "hard"
+    },
+    {
+     "text": "at rank 1 even your mind thins toward the animal's; ⚠️ RANK 2 IS WHAT BUYS YOUR JUDGEMENT BACK",
      "class": "cost"
-    },
-    {
-     "text": "a simplified figure cannot be restored in the air; you set down and draw again",
-     "class": "hard"
     }
    ],
-   "plainly": "A travel and puzzle action. You draw the figure of a rising thing and occupy it, and it must be drawn before you leave the ground — there is no improvising midair. It holds as long as the figure does. At rank 2 you can carry it across a route, but under strain the figure simplifies: first it loses detail, then control, then shape. It degrades rather than failing, so a long leg makes the flight progressively cruder until you set down and draw again."
+   "plainly": "A travel and explore action. You take the form of a real flying creature — a hawk, a gull, a moth — at that creature's real size and with its real limits, and fly as it flies, which roughly halves a leg's days. Your gear does not transform with you: it stays where you changed and has to travel some other way or wait. You have no hands and no voice, so you cannot use most crafts, carry anything, open anything or speak. At rank 1 your thinking thins toward the animal's as well; rank 2 is what buys your own judgement back inside the form."
   },
   {
    "schemaVersion": 1,
    "id": "the_raised_road",
-   "name": "The Raised Road",
-   "levelReq": 5,
+   "name": "The Rising Step",
+   "levelReq": 4,
    "energyCost": 14,
    "powerSystem": "reach_concrete_abstract",
    "tradition": "mason",
@@ -2106,27 +2108,29 @@
     "transform"
    ],
    "narrationHints": "A travel and create action, and the mason does not fly — they build. Stone rises under you",
-   "description": "⚠️ MASON FLIGHT, AND IT IS THE MOST LITERAL ANSWER IN THE SET: they do not fly. They build. Stone rises under the foot and stays risen — a causeway through the air that is still there next season, and next century.",
-   "notFor": "Speed and secrecy. It is slow to raise, and it is a permanent visible structure that anyone can afterwards use.",
+   "description": "⚠️ MASON FLIGHT, AND THEY DO NOT FLY — THEY STAND ON SOMETHING. Stone comes up under the foot exactly when the foot needs it and drops away behind. It is a stair nobody built, made and unmade one tread at a time, and it moves at the speed you can climb.",
+   "notFor": "Speed, and carrying. It is a stair — you go up it at stair pace, and it holds one person and their load.",
    "tree": [
     {
      "rank": 1,
-     "name": "The Raised Road",
-     "grants": "Raise a span of stone road through the air, walked at normal pace. It stays.",
-     "cannot": "Doing it quickly, or unmaking it afterwards.",
+     "name": "The Rising Step",
+     "grants": "Climb open air on stone that arrives under each foot — up a cliff, a wall, a gorge side.",
+     "cannot": "Going fast, or holding it still to stand on.",
      "functions": [
-      "travel"
+      "travel",
+      "transform"
      ],
      "gains": "broaden",
      "harmRung": "none"
     },
     {
      "rank": 2,
-     "name": "The Long Causeway",
-     "grants": "Raise a whole crossing. ⚠️ It becomes a real route on the map, for everyone, forever.",
-     "cannot": "Making it yours. A road is a road, and others will use it.",
+     "name": "The Held Tread",
+     "grants": "Hold a few treads at once and cross a gap, or stand where there is nothing to stand on.",
+     "cannot": "Holding more than a few — this is footing, not a bridge.",
      "functions": [
-      "travel"
+      "travel",
+      "transform"
      ],
      "gains": "deepen",
      "harmRung": "none"
@@ -2144,10 +2148,10 @@
     "duration"
    ],
    "mechanic": {
-    "magnitude": 8,
-    "duration": 0,
-    "range": "route-scale",
-    "note": "⚠️ THE ONLY FLIGHT THAT PERMANENTLY CHANGES THE MAP. Slowest to use and it adds a connection every future traveller inherits."
+    "magnitude": 7,
+    "duration": 4,
+    "range": "local",
+    "note": "⚠️ CORRECTED. Local, not route-scale — it answers a VERTICAL or a GAP, not a journey. A leg blocked by a cliff or a chasm becomes passable; a leg that is merely long stays long."
    },
    "rankDeltas": [],
    "intensity": {
@@ -2156,19 +2160,19 @@
    },
    "bounds": [
     {
-     "text": "IT IS SLOW TO RAISE — this is building, not flying",
+     "text": "IT MOVES AT CLIMBING PACE — it answers a cliff, never a distance",
      "class": "hard"
     },
     {
-     "text": "⚠️ IT IS PERMANENT AND PUBLIC. You have added a route to the world and cannot take it back",
-     "class": "cost"
+     "text": "IT IS FOOTING, NOT A BRIDGE — a few treads at a time, one person and their load",
+     "class": "hard"
     },
     {
-     "text": "everyone who comes after uses it, INCLUDING WHOEVER YOU WERE AVOIDING",
+     "text": "the stone drops away behind you, SO NOBODY FOLLOWS AND YOU CANNOT GO BACK THE SAME WAY",
      "class": "cost"
     }
    ],
-   "plainly": "A travel and create action, and the mason does not fly — they build. Stone rises under your foot and stays risen, walked at normal pace. It is slow, because it is construction rather than flight. At rank 2 you raise a whole crossing, and it becomes a real route on the map for everyone, permanently: you have added a connection to the world, you cannot take it back, and everyone who comes after uses it — including whoever you were avoiding."
+   "plainly": "A travel and explore action. Stone arrives under each foot as you need it and falls away behind, so you climb open air at ordinary climbing pace — up a cliff, a wall or the side of a gorge. At rank 2 you can hold a few treads at once to cross a gap or stand where there is no footing. It answers a vertical or a chasm, not a distance: a leg blocked by a cliff becomes passable, a leg that is merely long stays long. It carries one person and their load, and because the stone drops away, nobody can follow you and you cannot return the same way."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

@@ -2007,6 +2007,168 @@
     }
    ],
    "plainly": "A social or puzzle contest against the target's conviction. Every reduction you make must be factually true; the GM will reject a false one and the craft fails. On a win, one belief they act from stops giving them any bonus, permanently. At rank 2 you do this to all of them at once and they lose every conviction-based bonus they had. Some targets do not continue afterward; that is the GM's call and it is slow. A target whose motivations are already purely physical is immune."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_drawn_ascent",
+   "name": "The Drawn Ascent",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_concrete_abstract",
+   "tradition": "figurist",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.6
+   },
+   "functions": [
+    "travel",
+    "transform"
+   ],
+   "narrationHints": "A travel and puzzle action. You draw the figure of a rising thing and occupy it, and it mu",
+   "description": "⚠️ FIGURIST FLIGHT: you draw the figure of a rising thing and then occupy it. What lifts is not you — it is the pattern, and you are inside it. It holds exactly as long as the figure holds, and a figure held under strain begins to simplify.",
+   "notFor": "Improvising. The figure must be drawn before you rise, and redrawing it midair is not available.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Drawn Ascent",
+     "grants": "Draw a rising figure and occupy it — controlled flight for as long as the figure holds.",
+     "cannot": "Drawing it after you have left the ground.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Sustained Figure",
+     "grants": "Hold it across a route. ⚠️ Under strain it SIMPLIFIES — losing detail, then control, then shape.",
+     "cannot": "Keeping full control once it has begun to simplify.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL",
+    "PUZZLE"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 10,
+    "range": "route-scale",
+    "note": "⚠️ DEGRADES RATHER THAN FAILS. A long leg does not drop you; it makes the flight progressively cruder until you set down."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "one drawn ascent",
+    "surge": "hold the figure across a route; UNDER STRAIN IT SIMPLIFIES"
+   },
+   "bounds": [
+    {
+     "text": "THE FIGURE MUST BE DRAWN BEFORE YOU RISE — no improvising midair",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT DEGRADES RATHER THAN FAILS — detail, then control, then shape",
+     "class": "cost"
+    },
+    {
+     "text": "a simplified figure cannot be restored in the air; you set down and draw again",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A travel and puzzle action. You draw the figure of a rising thing and occupy it, and it must be drawn before you leave the ground — there is no improvising midair. It holds as long as the figure does. At rank 2 you can carry it across a route, but under strain the figure simplifies: first it loses detail, then control, then shape. It degrades rather than failing, so a long leg makes the flight progressively cruder until you set down and draw again."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_raised_road",
+   "name": "The Raised Road",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_concrete_abstract",
+   "tradition": "mason",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": 0.8
+   },
+   "functions": [
+    "travel",
+    "transform"
+   ],
+   "narrationHints": "A travel and create action, and the mason does not fly — they build. Stone rises under you",
+   "description": "⚠️ MASON FLIGHT, AND IT IS THE MOST LITERAL ANSWER IN THE SET: they do not fly. They build. Stone rises under the foot and stays risen — a causeway through the air that is still there next season, and next century.",
+   "notFor": "Speed and secrecy. It is slow to raise, and it is a permanent visible structure that anyone can afterwards use.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Raised Road",
+     "grants": "Raise a span of stone road through the air, walked at normal pace. It stays.",
+     "cannot": "Doing it quickly, or unmaking it afterwards.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Causeway",
+     "grants": "Raise a whole crossing. ⚠️ It becomes a real route on the map, for everyone, forever.",
+     "cannot": "Making it yours. A road is a road, and others will use it.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL",
+    "CREATE"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 0,
+    "range": "route-scale",
+    "note": "⚠️ THE ONLY FLIGHT THAT PERMANENTLY CHANGES THE MAP. Slowest to use and it adds a connection every future traveller inherits."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "one raised span",
+    "surge": "raise a causeway; A ROAD IS A ROAD, AND OTHERS WILL USE IT"
+   },
+   "bounds": [
+    {
+     "text": "IT IS SLOW TO RAISE — this is building, not flying",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ IT IS PERMANENT AND PUBLIC. You have added a route to the world and cannot take it back",
+     "class": "cost"
+    },
+    {
+     "text": "everyone who comes after uses it, INCLUDING WHOEVER YOU WERE AVOIDING",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A travel and create action, and the mason does not fly — they build. Stone rises under your foot and stays risen, walked at normal pace. It is slow, because it is construction rather than flight. At rank 2 you raise a whole crossing, and it becomes a real route on the map for everyone, permanently: you have added a connection to the world, you cannot take it back, and everyone who comes after uses it — including whoever you were avoiding."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

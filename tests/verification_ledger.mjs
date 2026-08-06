@@ -133,6 +133,13 @@ const LEDGER = [
     note: "Coverage 2026-08-05: `interests` 31/66, `kin` 26/66 — and 26/26 + 31/31 of the authored entries REACH the reader. ⚠️ THE SHAPE CONTRACT IS THE RISK, NOT THE COUNT: `personalPursuitOf` takes kin as `typeof k === 'string' ? k : k?.line`, so an entry written as `{name, relation}` would be dropped with no error — the fifth door of the PromisedButUnread family, and at its most dangerous inside a POOL, because a partially-readable list still looks like it works. Aevi authored `{line: '…'}` without being told, so nothing was lost; the gate exists for the next one. It asserts REACHABILITY rather than presence, checks a line actually comes out of the consumer rather than merely past the filter, and is falsified by an unreadable shape. ⛔ THESE REMAIN ALTERNATES: `personalVerbs` at 66/66 already satisfied this reader on its own, so `personalCoverage` is unchanged at 48/48 on the page — the content adds VARIETY to what a figure is doing with their own time, not reach. Saying it closed a gap would be an overclaim; it deepened a pool that was already full.",
   },
   {
+    id: "SNG-332", ask: "remove the cap on images too — that's local storage and I don't want good ones dropping into thin air",
+    how: "art.js — GALLERY_CAP is Infinity; capGallery keeps the smart-eviction rule for an explicit cap",
+    gates: ["332: adding 600 images drops none — a record is not a log",
+            "332: …and the smart eviction still works when a cap is asked for explicitly"],
+    note: "⚠️ SAFE FOR A REASON WORTH MEASURING RATHER THAN ASSUMING: the gallery stores REMOTE URLS, not image bytes — across every save on disk, 125 entries, ZERO data-URIs, zero inline bytes. An entry is a few hundred bytes of metadata, so the cap of 240 was protecting ~100KB and costing a player their older art. ⛔ AND IT HAD ALREADY BEEN WRONG ONCE: 48 dropped art (Erik: 'I don't see the ones from before') and was raised to 240 — the same bug with a bigger number, waiting for a longer game. A limit that keeps having to be raised is a limit that should not exist; same shape as `knownPlaces`, a cap on a RECORD rather than on a log. ⛔ THE QuotaExceededError SEEN IN TEST OUTPUT IS NOT THIS: it comes from `preserveRecovery`, which is already guarded (prune first, write inside a try, evict harder and retry once, fail quietly) precisely because a safety net must never be the thing that breaks the app. The gallery was never the pressure.",
+  },
+  {
     id: "SNG-331", ask: "(found while wiring Erik's ties-as-facts request) rules.ties held the location-affinities table",
     how: "state.js:rulePath — match the FILENAME, never a substring of the path",
     gates: ["331: every merged rules key holds the CONTENT OF ITS OWN FILE, not a substring match",

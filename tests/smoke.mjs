@@ -2504,6 +2504,23 @@ await (async () => {
   const capped2 = capGallery(g2, 1, "the-face"); // keep only 1 — but the portrait is protected
   check("CCODE-31: the CURRENT portrait is never evicted by the cap", capped2.some(x => x.url === "the-face"));
   check("CCODE-31: under the cap, the gallery is returned untouched", capGallery(g2, 99, "the-face") === g2);
+
+  // SNG-332 — ⛔ AND BY DEFAULT THERE IS NO CAP AT ALL. Erik: "I don't want good ones dropping into thin
+  // air." Safe because the gallery stores REMOTE URLS, not image bytes — measured across every save on
+  // disk: 125 entries, zero data-URIs, zero inline bytes. The cap was protecting ~100KB of metadata and
+  // costing a player their older art. It had already been wrong once (48 → 240); 240 was the same bug with
+  // a bigger number, which is the tell that it should not exist.
+  {
+    const many = Array.from({ length: 600 }, (_, i) => ({ kind: i % 3 ? "moment" : "portrait", url: `u${i}` }));
+    const ch332 = { gallery: [], portrait: "u0" };
+    for (const g of many) addGalleryImage(ch332, { kind: g.kind, url: g.url });
+    check("332: adding 600 images drops none — a record is not a log",
+      ch332.gallery.length === 600);
+    check("332: …and the smart eviction still works when a cap is asked for explicitly", (() => {
+      const kept = capGallery(ch332.gallery, 10, "u0");
+      return kept.length === 10 && kept.some(g => g.url === "u0");
+    })());
+  }
 })();
 
 // --- SNG-048: narrative register = f(disposition, rating) ---

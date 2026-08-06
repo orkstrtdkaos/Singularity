@@ -275,10 +275,23 @@ export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, see
 
 // ---------- SNG-035: the character gallery / Saga ----------
 
-// CCODE-31: a generous cap for a legacy document — was 48, which silently dropped a player's OLDER art (Erik:
-// "I don't see the ones from before") once skill/moment images flooded in. Now large, and when it IS reached the
-// eviction is smart (below): never the current portrait, transient beats (moment/scene) go first.
-const GALLERY_CAP = 240;
+// SNG-332 — ⛔ NO CAP. Erik: "I want to remove the cap on images too — I don't want good ones dropping into
+// thin air." He is right, and the reason it is SAFE is worth writing down rather than assumed:
+//
+// ⚠️ THE GALLERY STORES REMOTE URLS, NOT IMAGE BYTES. Measured across every save on disk: 125 entries,
+// ZERO data-URIs, zero inline bytes. An entry is `{kind, prompt≤200, url, caption≤120, worldDay, at}` — a
+// few hundred bytes of metadata. The cap of 240 was protecting on the order of 100KB, which is not a saving;
+// it was a real loss bought with nothing.
+//
+// ⛔ AND THE HISTORY IS THE ARGUMENT. This cap has been WRONG TWICE: 48 silently dropped a player's older
+// art (Erik: "I don't see the ones from before") and was raised to 240; 240 is the same bug with a larger
+// number waiting for a longer game. A limit that keeps having to be raised is a limit that should not
+// exist — the same lesson as `knownPlaces`, and the same shape: a cap on a RECORD, not on a log.
+//
+// `capGallery` is KEPT and still honours an explicit cap: it holds the smart-eviction rule (never the
+// current portrait, transient beats first), which is what to reach for if a real storage ceiling ever
+// arrives. It is simply no longer applied by default.
+const GALLERY_CAP = Infinity;
 // The transient kinds — a beat's snapshot — are the first to go when the gallery is genuinely full; the
 // meaningful record (portraits, people, places, skills, beasts) persists as long as possible.
 const TRANSIENT_KINDS = new Set(["moment", "scene"]);

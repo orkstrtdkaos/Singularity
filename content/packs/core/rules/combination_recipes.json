@@ -390,7 +390,7 @@
     },
     {
       "id": "the_counted_end",
-      "name": "The Counted End",
+      "name": "Pale Reckoning",
       "parts": [
         "palework",
         "deathsense"
@@ -402,12 +402,16 @@
       "domains": [
         "ashwarden"
       ],
-      "effect": "You see an ending's exact hour and can bring it to that hour precisely — no sooner, no crueller, no waste. The Ashwarden mercy.",
-      "cannot": "It cannot bring an ending that was not already coming. Used to hasten what should have lived, it marks the wielder — permanently, visibly.",
+      "effect": "You see an ending's exact hour, and you can call it in early. ⚠️ **THE UTILITY: you are not overcoming a thing's life, only moving it to an hour already owed — so it costs a fraction of killing outright and cannot be resisted by strength.** Against anything already dying, wounded, rotten or failing it is the cheapest ending in the game. Against something whole it does nothing at all. **The Ashwarden mercy is the same act pointed at a person: no sooner, no crueller, no waste.**",
+      "cannot": "⛔ **IT CANNOT BRING AN ENDING THAT WAS NOT ALREADY COMING** — against anything whole and healthy it simply fails and the cost is spent. Used to hasten what should have lived, it marks the wielder permanently and visibly.",
       "discovery": "use — read a death, then tend it in the same beat; or taught in the Hollow March",
       "combinationTier": "within-tradition",
       "braidName": "The Counted End",
-      "braidKey": "deathsense+palework"
+      "braidKey": "deathsense+palework",
+      "_renamed": {
+        "was": "The Counted End",
+        "why": "⚠️ 'The Counted End' sounded pointless — Erik: 'no sooner, no crueller… what's it doing then? what's the utility?' My Amendment 3 failure: I wrote what the craft IS and never what it is FOR. PALE RECKONING names both parts (palework + the death-read) and the act — a reckoning is calling in what is already owed. ⚠️ And it avoids 'The Owed Hour', which I nearly used and which collides in the ear with my own `The Borrowed Hour`."
+      }
     },
     {
       "id": "the_lattice_engine",
@@ -1136,7 +1140,7 @@
     },
     {
       "id": "the_double_register",
-      "name": "The Double Register",
+      "name": "The Fault Reading",
       "parts": [
         "deathsense",
         "order_sense"
@@ -1152,12 +1156,16 @@
       ],
       "combinationTier": "cross-axis",
       "harmRung": "none",
-      "effect": "You read a thing's STRUCTURE and its ENDING at once — where it bears load, and where it is already dying. **The two readings do not want to share a channel.** What you get is a map with two layers, slightly out of register: the load-bearing seam speaking one language and the death-register speaking another. **Rough. But readable — and the MISALIGNMENT is itself the information.** Where the two disagree, something is wrong with the thing in a way neither reading alone would find.",
+      "effect": "You read a thing's STRUCTURE and its ENDING at once — where it bears load, and where it is already dying. **The two readings do not want to share a channel**, so you get a map with two layers slightly out of register. ⚠️ **THE MISALIGNMENT IS THE POINT AND THE USE: where the layers disagree, you have found the fault** — the seam carrying weight it can no longer carry. Neither reading alone finds it, and it tells you exactly where a bridge, a wall, an argument or a body gives way first.",
       "cannot": "⛔ **IT NEVER RESOLVES CLEANLY.** Stop trying to hold the two apart and you get noise; stop trying to hold them together and you get noise. **You must simply let both be present and accept the double vision.** It costs more than either reading alone, and it will always be rough.",
       "discovery": "use — deathsense and order-sense held open in the same act, on a thing that is both STRUCTURED and DYING. **Discovered in play by Silas Weir at the rune-binding, 2026-07-12** — he stopped fighting the friction and let the two readings sit out of register, and the runes landed where the spear already had an opinion about what it was.",
       "authoredFrom": "⛔ EMERGENT — this recipe did not exist. It was created by a player co-activating two abilities the game had no combination for. The GM narrated it perfectly and the engine minted nothing. **Authored retroactively so the discovery is real.**",
       "braidName": "The Double Register",
-      "braidKey": "deathsense+order_sense"
+      "braidKey": "deathsense+order_sense",
+      "_renamed": {
+        "was": "The Double Register",
+        "why": "⚠️ 'The Double Register' named the METHOD and nothing else — Erik: 'could mean a lot of doubles; needs a hint of what braided and what it's for.' A FAULT is both a structural failure line (order-sense) and a thing going wrong (death-sense), so the name carries both parts AND the use."
+      }
     }
   ],
   "discoverability": {
@@ -1231,5 +1239,13 @@
         ]
       }
     ]
+  },
+  "_duplicateNames": {
+    "_note": "⚠️ FOUND BY MY OWN UNIQUENESS ASSERTION WHILE RENAMING, AND NOT MINE: two names each appear on two different recipes. A player shown either would have no way to tell which combination they hold.",
+    "duplicates": [
+      "The Harbored Flame",
+      "The Meaning-Engine"
+    ],
+    "_forErik": "which of each pair keeps the name is a content call — flagged rather than silently resolved."
   }
 }

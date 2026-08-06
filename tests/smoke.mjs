@@ -10378,6 +10378,76 @@ await (async () => {
       && !/gallery.*data:image\/|addGalleryImage\([^)]*base64/.test(appSrc335));
   }
 
+  // SNG-339 — TWO BONUS TERMS THAT COULD NEVER FIRE. Aevi, from Erik's play: a level-1 character sits at
+  // 40% on a routine action, and "a walking disaster" was his phrase. She traced it to `character.skills`
+  // being read and written by nothing.
+  //
+  // ⚠️ IT IS WORSE THAN SHE FOUND: `action.skillId` has no writer EITHER, and no vocabulary was ever defined
+  // for it. The term was not dormant — it was STRUCTURALLY UNREACHABLE, costing up to 10 points a rank to
+  // every character in the game's history including a level-29 one.
+  {
+    const INV = await import("../engine/inventory.js");
+    const R339 = { baseChance: { skillBonus: 10, skillBonusCap: 20 } };
+
+    check("339: training keys on the ACTION TAGS the game already has — not a ninth vocabulary",
+      INV.skillBonus({ skills: { stealth: 2 } }, ["stealth"], R339).bonus === 20
+      && INV.skillBonus({ skills: { stealth: 2 } }, ["negotiate"], R339).bonus === 0);
+    check("339: an untrained character gets nothing, and says so without throwing",
+      INV.skillBonus({}, ["stealth"], R339).bonus === 0
+      && INV.skillBonus({ skills: {} }, [], R339).trained.length === 0);
+    // ⚠️ BEST SKILL ONLY. Being trained in three things that touch one action is not three times as good at
+    // it — a summing version makes a broad character strictly better than a deep one at everything, which is
+    // the opposite of what a skill is for.
+    check("339: the BEST training counts, never the sum of everything that touches the action",
+      INV.skillBonus({ skills: { stealth: 1, quiet: 1, careful: 1 } }, ["stealth", "quiet", "careful"], R339).bonus === 10);
+    check("339: …and it is capped, so no rank ladder outruns the curve",
+      INV.skillBonus({ skills: { stealth: 9 } }, ["stealth"], R339).bonus === 20);
+    check("339: it names what helped, so the receipt can say why",
+      INV.skillBonus({ skills: { climb: 3 } }, ["climb"], R339).trained[0] === "climb 3");
+
+    // ⛔ §4 — AND THE ZERO MUST BE VISIBLE. `add()` drops a 0-valued term, so a character with no training
+    // and no gear saw NO LINES for either — which reads as "does not apply to me" rather than "you have
+    // nothing here". That silence is part of why this survived; an explicit zero is the anti-recurrence.
+    const { successChance } = await import("../engine/resolve.js");
+    const { loadContentHeadless: lch339 } = await import("./headless_content.mjs");
+    const C339 = await lch339();
+    const ctx339 = { character: { attributes: { practical: 2 }, subAttributes: {}, alignment: {} },
+      action: { attribute: "practical", intentTags: ["scout"], difficulty: 0 },
+      location: null, rules: C339.rules, equipmentBonus: 0, skillBonus: 0 };
+    successChance(ctx339);
+    const labels = (ctx339._breakdown?.components || []).map(c => c.label);
+    check("339 §4: an untrained, unequipped character SEES both zero terms rather than two silent omissions",
+      labels.includes("training") && labels.includes("equipment"));
+
+    // §1 — THE GRANT SHAPE Aevi asked for: a flat map of ACTION TAG -> RANK per background/tradition, on the
+    // same vocabulary the gear already matches, so a trade's training and a trade's tools agree by construction.
+    const R1 = { startingSkills: { grantCap: 2,
+      byBackground: { orphan: { stealth: 1, quiet: 1 } },
+      byTradition: { umbral: { stealth: 1 } } } };
+    check("339 §1: background and tradition both grant, and ranks add across them",
+      INV.startingSkills({ backgroundId: "orphan", traditionId: "umbral" }, R1).stealth === 2);
+    check("339 §1: …but the grant is CAPPED — creation makes you good, never finished",
+      INV.startingSkills({ backgroundId: "orphan", traditionId: "umbral" },
+        { startingSkills: { ...R1.startingSkills, grantCap: 1 } }).stealth === 1);
+    // ⛔ INVENTS NOTHING. An unlisted background grants nothing rather than a guess — papering over a missing
+    // table would hide the exact gap this ticket exists to surface.
+    check("339 §1: an unlisted background grants NOTHING rather than a guess",
+      Object.keys(INV.startingSkills({ backgroundId: "nobody" }, R1)).length === 0
+      && Object.keys(INV.startingSkills({}, {})).length === 0);
+    check("339 §1: authoring notes in the table are not mistaken for skills",
+      !("_note" in INV.startingSkills({ backgroundId: "x" }, { startingSkills: { byBackground: { x: { _note: "hi", climb: 1 } } } })));
+
+    // §3 — IT GROWS BY DOING, and it counts USES not successes: rewarding only success would make the
+    // already-good better and leave the struggling character exactly where this ticket found them.
+    const learner = {};
+    for (let i = 0; i < 25; i++) INV.practiceSkill(learner, ["stealth"], { startingSkills: { usesPerRank: 25, maxRank: 2 } });
+    check("339 §3: training is gainable in play — 25 uses is rank 1",
+      learner.skills.stealth === 1 && learner.skillUses.stealth === 25);
+    for (let i = 0; i < 200; i++) INV.practiceSkill(learner, ["stealth"], { startingSkills: { usesPerRank: 25, maxRank: 2 } });
+    check("339 §3: …and it stops at maxRank, so practice never outruns the curve",
+      learner.skills.stealth === 2);
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

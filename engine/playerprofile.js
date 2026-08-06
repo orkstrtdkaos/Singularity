@@ -1,3 +1,4 @@
+import { practiceSkill } from "./inventory.js"; // SNG-339 §3: training grows by doing, at the one place every action is recorded
 // playerprofile.js — play-style accrual + player identity.
 // SNG-BATCH-7 Phase 1: the profile is now IDENTITY (playerKey/displayName/
 // charactersPlayed); the earned STYLE (tendencies/aptitudes/actionCount) lives on
@@ -125,6 +126,14 @@ export function updateProfile(holder, intentTags = [], rulesAptitudes = [], rule
     if (tendency) holder.tendencies[tendency] = (holder.tendencies[tendency] || 0) + 1;
   }
   holder.actionCount = (holder.actionCount || 0) + 1;
+  // SNG-339 §3 — ⚠️ TRAINING GROWS BY DOING, at the one place every action's intent tags are already
+  // recorded. Aevi: "skills must be gainable in play, or they are a creation-only stat that decays in
+  // relevance — level 29 with zero skills is the current end state."
+  //
+  // ⛔ IT COUNTS USES, NOT SUCCESSES. Rewarding only success makes the character who is already good at a
+  // thing get better at it while the one who is struggling never improves — precisely backwards for the
+  // problem this ticket exists to solve. Failing at something hard is practice.
+  try { practiceSkill(holder, intentTags, rules); } catch { /* style tracking must never break a turn */ }
   holder.aptitudes = deriveAptitudes(holder, rulesAptitudes, rules);
   return holder;
 }

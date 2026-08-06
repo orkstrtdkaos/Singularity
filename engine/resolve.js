@@ -18,7 +18,7 @@ export function spectrumAlignment(a = {}, b = {}) {
  *  action: { attribute, skillId?, axes?, abilityLevel?, difficulty (0-100 penalty), planned? }
  *  aptitudeMods: flat map merged from the player's aptitudes (see playerprofile.js). */
 export function successChance(ctx) {
-  const { character, action, location, rules, aptitudeMods = {}, equipmentBonus = 0, substratePenalty = 0 } = ctx;
+  const { character, action, location, rules, aptitudeMods = {}, equipmentBonus = 0, skillBonus = 0, substratePenalty = 0 } = ctx;
   const bc = rules.baseChance;
   // SNG-106: retain every component so the breakdown popup shows the REAL math, never a re-derivation.
   // `add` is the single accumulation site — every term goes through it, so sum(components) === chance
@@ -26,6 +26,11 @@ export function successChance(ctx) {
   const components = [];
   let chance = 0;
   const add = (label, value) => { if (value) components.push({ label, value }); chance += value; };
+  // SNG-339 §4 — ⚠️ A ZERO TERM IS DROPPED BY `add`, AND THAT IS PART OF HOW TWO OF THEM HID THIS LONG.
+  // Aevi: "if a character has no skill and no gear, the breakdown should say so rather than silently omitting
+  // two lines." A missing line reads as "this does not apply to me"; an explicit zero reads as "you could
+  // have had something here, and you have nothing." That difference is the whole diagnosis she did by hand.
+  const addAlways = (label, value) => { components.push({ label, value, zero: !value }); chance += value; };
 
   // Sub-attributes (strength/agility, reason/insight, presence/rapport, craft/wits)
   // are the real target when present; the parent attribute is the fallback.
@@ -37,7 +42,13 @@ export function successChance(ctx) {
   add(`${attrName} ${attrLevel}`, Math.min(attrLevel, soft) * bc.attributeMultiplier);
   if (attrLevel > soft) add(`${attrName} mastery (beyond ${soft})`, Math.max(0, attrLevel - soft) * (bc.attributePerPointBeyond ?? 5));
 
+  // SNG-339 — ⚠️ THE OLD SKILL TERM COULD NEVER FIRE. It keyed on `action.skillId`, which NOTHING writes,
+  // against `character.skills`, which nothing writes either, using a vocabulary that was never defined. Not
+  // dormant — unreachable, and it has been quietly costing every character up to 10 points a rank since
+  // the file was written. The legacy read is kept for any save that somehow carries one.
   if (action.skillId && character.skills?.[action.skillId]) add(`skill: ${action.skillId}`, character.skills[action.skillId] * bc.skillBonus);
+  // Training now keys on the ACTION TAGS the game already uses for equipment, computed by inventory.skillBonus.
+  addAlways("training", skillBonus);
   if (action.abilityLevel) add(`ability rank ${action.abilityLevel}`, action.abilityLevel * bc.abilityLevelBonus);
 
   // Spectrum modifiers: who-you-are vs what-you're-doing, and does the place help? Clamped as a TOTAL —
@@ -91,7 +102,7 @@ export function successChance(ctx) {
   }
 
   // Equipment: the right tool in your pack helps (computed by inventory.equipmentBonus)
-  add("equipment", equipmentBonus);
+  addAlways("equipment", equipmentBonus);
 
   // Novel/combined ability use is harder — unless it's a technique the character already DISCOVERED.
   if (action.discoveryBonus) add("discovered technique", action.discoveryBonus);

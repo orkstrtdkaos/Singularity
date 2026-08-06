@@ -319,6 +319,101 @@ export function consumeItem(character, name) {
  *  more). Only the top `equipmentBonusTopN` contributors (default 1) count; the total cap stays
  *  a backstop. `helpers` names which item(s) actually aided, so the roll receipt can say so.
  *  Data-driven from rules.baseChance. */
+/** SNG-339 — TRAINING, THE OTHER HALF OF THE SAME QUESTION.
+ *
+ *  Aevi found that `character.skills` is read by resolve.js and WRITTEN BY NOTHING. It is worse than that:
+ *  `action.skillId` has no writer either, and no vocabulary exists for it — so the term is not dormant, it is
+ *  STRUCTURALLY UNREACHABLE. Up to 10 points per rank that no character could ever hold.
+ *
+ *  ⛔ IT KEYS ON THE ACTION TAGS THE GAME ALREADY HAS. `equipmentBonus` matches `item.bonusTags` against the
+ *  action's tags, and 53 of those tags are already authored across the item catalogue. Training answers the
+ *  same question the tool does — "does what you bring help with THIS?" — so it reads the same vocabulary
+ *  rather than inventing a ninth one nobody would keep in sync.
+ *
+ *  ⚠️ BEST SKILL ONLY, not the sum. Being trained in three things that all touch this action is not three
+ *  times as good at it, and a summing version would make a broad character strictly better than a deep one at
+ *  everything — which is the opposite of what a skill is for. Mirrors equipmentBonus's topN for the same reason.
+ *
+ *  Pure. Returns { bonus, trained } so the receipt can name what helped. */
+/** SNG-339 §1/§3 — WHERE TRAINING COMES FROM, AND HOW IT GROWS.
+ *
+ *  ⛔ THE SHAPE AEVI ASKED FOR ("I will write the tables once CCode says what shape the granting code
+ *  wants"). Content authors a flat map of ACTION TAG -> RANK against a background or tradition id:
+ *
+ *      rules.startingSkills = {
+ *        byBackground: { orphan:  { stealth: 1, quiet: 1 }, ... },
+ *        byTradition:  { umbral:  { stealth: 1 }, ... }
+ *      }
+ *
+ *  The tags are the SAME 53 already authored across `item.bonusTags`, so a background's training and a
+ *  trade's tools speak one vocabulary and an author can see at a glance that an orphan who is good at
+ *  moving unseen and a cloak that helps you move unseen agree.
+ *
+ *  ⚠️ RANKS ADD ACROSS SOURCES BUT THE GRANT IS CAPPED. Erik's goal is that a competent character
+ *  usually succeeds at a routine task, NOT that creation hands out a ceiling — a background and a tradition
+ *  that both teach stealth make you notably good at it, not unbeatable at it.
+ *
+ *  ⛔ AND IT INVENTS NOTHING. An unlisted background grants nothing rather than a guess; Aevi's note that
+ *  the orphan's ONLY two aptitudes are penalties is a content bug she is fixing, and the engine must not
+ *  paper over it with an invented consolation. Pure: returns the map, writes nothing.
+ */
+export function startingSkills({ backgroundId = null, traditionId = null } = {}, rules = {}) {
+  const cfg = rules?.startingSkills || {};
+  const capRank = Number.isFinite(cfg.grantCap) ? cfg.grantCap : 2;
+  const out = {};
+  const merge = (table) => {
+    for (const [tag, rank] of Object.entries(table || {})) {
+      if (tag.startsWith("_")) continue;
+      const r = Number(rank);
+      if (!Number.isFinite(r) || r <= 0) continue;
+      out[tag] = Math.min(capRank, (out[tag] || 0) + r);
+    }
+  };
+  if (backgroundId) merge(cfg.byBackground?.[backgroundId]);
+  if (traditionId) merge(cfg.byTradition?.[traditionId]);
+  return out;
+}
+
+/** SNG-339 §3 — TRAINING GROWS BY DOING, or it is a creation-only stat that decays in relevance.
+ *  Aevi: "level 29 with zero skills is the current end state."
+ *
+ *  ⚠️ IT COUNTS USES, NOT SUCCESSES. Rewarding only success means the character who is already good at a
+ *  thing gets better at it and the one who is struggling never improves — which is precisely backwards for
+ *  the problem this ticket exists to solve. Failing at something hard IS practice.
+ *
+ *  Mutates `character.skills` and returns the tag that ranked up, or null. */
+export function practiceSkill(character, actionTags = [], rules = {}) {
+  const cfg = rules?.startingSkills || {};
+  const per = Number.isFinite(cfg.usesPerRank) ? cfg.usesPerRank : 25;
+  const maxRank = Number.isFinite(cfg.maxRank) ? cfg.maxRank : 2;
+  if (!character || !actionTags?.length) return null;
+  character.skills = character.skills || {};
+  character.skillUses = character.skillUses || {};
+  let ranked = null;
+  for (const tag of actionTags) {
+    if (typeof tag !== "string" || !tag) continue;
+    const uses = (character.skillUses[tag] = (Number(character.skillUses[tag]) || 0) + 1);
+    const earned = Math.min(maxRank, Math.floor(uses / per));
+    if (earned > (Number(character.skills[tag]) || 0)) { character.skills[tag] = earned; ranked = tag; }
+  }
+  return ranked;
+}
+
+export function skillBonus(character, actionTags = [], rules = {}) {
+  const per = rules?.baseChance?.skillBonus ?? 10;
+  const cap = rules?.baseChance?.skillBonusCap ?? 20;
+  const skills = character?.skills || {};
+  const hits = [];
+  for (const t of actionTags || []) {
+    const rank = Number(skills[t]) || 0;
+    if (rank > 0) hits.push({ tag: t, rank, b: rank * per });
+  }
+  if (!hits.length) return { bonus: 0, trained: [] };
+  hits.sort((a, z) => z.b - a.b);
+  const best = hits[0];
+  return { bonus: Math.min(cap, best.b), trained: [`${best.tag} ${best.rank}`] };
+}
+
 export function equipmentBonus(character, actionTags = [], rules) {
   const per = rules.baseChance.equipmentBonus ?? 5;
   const cap = rules.baseChance.equipmentBonusCap ?? 10;

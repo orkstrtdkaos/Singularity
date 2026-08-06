@@ -27,7 +27,7 @@ import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, merg
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
-import { wieldBonusFor, usableCombatItems, normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem } from "./engine/inventory.js";
+import { wieldBonusFor, usableCombatItems, normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js";
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
@@ -87,7 +87,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.46";
+const APP_VERSION = "1.9.47";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3694,6 +3694,22 @@ function renderCreate() {
     seedInnateSubstrate(character, originRecord(character.origin), fullCatalog(), backgroundById(character.background) || {}); // SNG-131 + SNG-261 §B: innate ACCESS from BOTH the people you're from (origin) and what happened to you (background — a precursor marking is the second kind)
     { const g = backgroundById(character.background)?.grantsAptitudes; if (g?.length) grantAptitudes(character, g, CONTENT.rules.playerAptitudes, CONTENT.rules); } // SNG-113: lineage aptitude(s)
     seedStandingAtCreation(character, { traditionIndex: CONTENT.traditionIndex, rules: CONTENT.rules, day: 1 }); // BATCH-12 §3b: being Rootkin-born should mean the Rootkin have heard of you
+    // SNG-339 §1/§2 — ⚠️ A CHARACTER IS COMPETENT AT THE THING THEY CAME FROM. Aevi, from Erik's play: a
+    // level-1 character sits at 40% on a routine action, because two bonus terms the curve ASSUMED they
+    // would have have never reached anybody. Training is granted here, from the background and tradition
+    // they already chose, on the same action-tag vocabulary the gear matches.
+    //
+    // ⛔ IT INVENTS NOTHING. An unlisted background grants nothing rather than a guess — the tables are
+    // Aevi's, and papering over a missing one would hide exactly the gap this ticket exists to surface.
+    {
+      const granted = startingSkills({ backgroundId: character.background, traditionId: character.domains?.primary }, CONTENT.rules);
+      if (Object.keys(granted).length) {
+        character.skills = { ...(character.skills || {}), ...granted };
+        console.log(`[creation] training granted: ${Object.entries(granted).map(([t, r]) => `${t} ${r}`).join(', ')}`);
+      } else {
+        console.warn(`[creation] NO starting training for background=${character.background} tradition=${character.domains?.primary} — rules.startingSkills has no entry, so this character begins untrained`);
+      }
+    }
     character.nativeGrantsVersion = 1; // born with the starter kit — no retro native-grant owed
     character.reconcileVersion = topReconcileVersion("character"); // born current — no migration owed (no aggregate seed)
     character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
@@ -5660,10 +5676,13 @@ async function onChoice(choice) {
     if (encDiff) action.difficultySource = `${encD.def.name || "the opposition"}${encD.def.opponent?.threat ? ` (threat ${encD.def.opponent.threat})` : ""}`;
   }
   const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
+  // SNG-339 — TRAINING, ON THE SAME TAGS THE GEAR MATCHES. The old skill term keyed on `action.skillId`,
+  // which nothing ever wrote, so up to 10 points a rank were unreachable for every character ever made.
+  const trained = skillBonus(character, action.intentTags, CONTENT.rules);
   const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules, character);
   const aff = affinityFor(action, location);
   const iMod = usesAbility ? effectMod(intensity, CONTENT.intensity) : 0;
-  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus + iMod, substratePenalty: substrate?.chancePenalty || 0 });
+  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, skillBonus: trained.bonus, equipmentBonus: equip.bonus + comp.bonus + aff.bonus + iMod, substratePenalty: substrate?.chancePenalty || 0 });
   // SNG-169 §2c: keep the ITEM helpers separately. `equipHelpers` mixes items and companions, and
   // the roll receipt makes item names tappable — a companion name looked up as an item would
   // silently do nothing. Both lists are kept: equipHelpers stays for the bond-growth check above.

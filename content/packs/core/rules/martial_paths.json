@@ -167,7 +167,9 @@
       "noSharedAliases": "no alias may appear on two kits; a 2+ match REFUSES, so a shared alias disables both",
       "explicitWins": "character.formKit always beats prose matching",
       "defaultIsNotDetected": "human_and_default has no aliases by design — it is the fallback, not a form to recognise",
-      "⚠️_whenInDoubtLeaveItOut": "a missing alias costs one player an explicit formKit setting. A wrong alias hands a stranger a combat kit and nobody notices."
+      "⚠️_whenInDoubtLeaveItOut": "a missing alias costs one player an explicit formKit setting. A wrong alias hands a stranger a combat kit and nobody notices.",
+      "⚠️_theOneException": "⚠️ `ent` VIOLATES THE WHOLE-WORD RULE ABOVE AND IS KEPT DELIBERATELY. I checked it: it is a substring of gentle, present, different, patient, absent, talent, silent, violent, parent, moment and competent — ELEVEN common words. It survives ONLY because the matcher uses word boundaries, which is exactly the dependency my own rule says an alias list should not have. It stays because it is the form's own name and a player WILL write 'an ent'. ⚠️ SO IT IS MARKED RATHER THAN SILENT: if the boundary matching ever regresses, THIS is the alias that breaks, and it hands a bark-and-timber combat kit to anyone described as patient. Every OTHER alias in this file is safe without the matcher's help — `ent` is the single point where content and code are load-bearing for each other.",
+      "_testForNewAliases": "Before adding one, check it against: gentle, present, different, patient, absent, talent, silent, violent, parent, moment, competent, lattice, blocked. If your new alias is a substring of any of them and is NOT the form's own name, do not add it — pick the distinctive word instead (heartwood over wood, treefolk over tree)."
     }
   },
   "martialBackgrounds": {

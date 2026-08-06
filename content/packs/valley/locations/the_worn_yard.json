@@ -4,7 +4,10 @@
  "name": "The Worn Yard",
  "regionId": "the_foothills",
  "communityId": "the_worn_yard",
- "spectrum": "destruction_creation",
+ "spectrum": {
+  "destruction_creation": -0.35,
+  "concrete_abstract": -0.3
+ },
  "tags": [
   "settlement",
   "foothill",
@@ -19,14 +22,17 @@
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
  "dangerLevel": 1,
- "image": null,
+ "image": "content/packs/valley/assets/the_worn_yard.jpg",
  "questSeeds": [],
  "map": {
   "x": 460,
   "y": 370
  },
  "encounterSeeds": [],
- "poleIntensity": 0.5,
+ "poleIntensity": {
+  "destruction": 0.35,
+  "concrete": 0.3
+ },
  "substrateSource": {
   "kind": "pool",
   "delta": 0.2,

@@ -2770,6 +2770,90 @@
     }
    ],
    "plainly": "A survive/explore action that restores health. It rolls 2d6+3 It affects 1 target Ranks: rank 2 deepens depth. Limit: iT Does Not Reach The Deep Dark OR The Sealed — the current stops."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_carried_green",
+   "name": "The Carried Green",
+   "levelReq": 4,
+   "energyCost": 13,
+   "powerSystem": "reach_death_life",
+   "tradition": "rootkin",
+   "attribute": "physical",
+   "axes": {
+    "death_life": 0.6
+   },
+   "functions": [
+    "transform",
+    "travel"
+   ],
+   "narrationHints": "Vines come up to meet them and hand them on. It is not graceful and it does not stop.",
+   "description": "⚠️ ROOTKIN FLIGHT, AND IT IS NOT WINGS. Erik's own example: the living world lifts you. Vines rise, take your weight, and pass you to the next growth — a continuous swung passage above the ground rather than through the air. At rank 2 you grow the wings yourself, which the Quickwood considers vulgar and effective.",
+   "notFor": "⚠️ BARE STONE, OPEN WATER, THE UNMADE — anywhere nothing grows, this does nothing at all. It is the most route-dependent flight in the game and the Rootkin do not consider that a flaw.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Carried Green",
+     "grants": "Be lifted and passed along by growth — roughly twice walking speed, above the ground, wherever things grow.",
+     "cannot": "Anywhere nothing grows. Fine control: you go where the green goes.",
+     "functions": [
+      "transform",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Grown Wing",
+     "grants": "Grow wings of living matter and fly under your own control. They are real, they are yours, and they must be fed.",
+     "cannot": "Keeping them indefinitely — held past a day they begin drawing on you as growth does.",
+     "functions": [
+      "transform",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL",
+    "EXPLORE",
+    "CHASE"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 12,
+    "range": "route-scale",
+    "note": "⚠️ ROUTE-DEPENDENT FLIGHT. On a leg through growing country it halves travel days; over bare stone or water it is unavailable. That asymmetry is the craft."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "be carried where the green already leads — half the cost, no wings",
+    "surge": "grow the wing; IT IS LIVING MATTER AND IT MUST BE FED"
+   },
+   "bounds": [
+    {
+     "text": "NOTHING GROWS, NOTHING LIFTS — bare stone, open water and the Unmade are closed to it",
+     "class": "hard"
+    },
+    {
+     "text": "at rank 1 YOU GO WHERE THE GREEN GOES — the route is chosen by what is growing, not by you",
+     "class": "hard"
+    },
+    {
+     "text": "a grown wing held past a day DRAWS ON YOU the way any growth draws on its ground",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A travel and explore action. Vines and growth lift you and pass you along at about twice walking speed, above the ground — but only where things grow, so bare stone, open water and the Unmade are closed to it entirely, and at rank 1 the route is whatever the green offers rather than what you chose. At rank 2 you grow real wings and fly under your own control; held longer than a day they start drawing on your own body the way any growth draws on its ground. On a journey leg through growing country it roughly halves the days."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

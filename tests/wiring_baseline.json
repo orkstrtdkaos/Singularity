@@ -9,6 +9,7 @@
   "rawProseCaps": 63,
   "modulesMissingFromSpecMap": 15,
   "importedNeverCalled": 5,
-  "unreadRuleConstants": 11,
-  "unauthoredRulesKeys": 1
+  "unreadRuleConstants": 26,
+  "unauthoredRulesKeys": 1,
+  "_unreadRuleConstants": "SNG-340 \u2014 11 \u2192 26 because the MEASUREMENT got more accurate, not because the codebase got worse. The scanner is text-based and could not see a key sharing a line with another key; Aevi's whole-file reserialization put each on its own line, and 15 constants that had ALWAYS been unread became visible. Verified by hand: `oneWay`, `backgroundGrantable`, `ratingCeilingBounded`, `dependsOn` and `energy.regenPerRest` have ZERO readers across engine/ and app.js. \u26a0\ufe0f A CHECK THAT CANNOT SEE PART OF ITS OWN DOMAIN REPORTS A CLEAN NUMBER \u2014 the ratchet was right and blind at once, which is the same family as everything else this week. Rebaselined rather than papered over; the 15 are a separate ticket because 'delete it' is wrong for at least some of them."
 }

@@ -10170,10 +10170,31 @@ await (async () => {
     // now, so a third path is covered without anyone remembering this.
     {
       const appSrc329 = readFileSync(join(root, "app.js"), "utf8");
-      const writes = (appSrc329.match(/character\.generated\.location\[[a-zA-Z]+\] = /g) || []).length;
-      check("329b: nothing writes generated.location except the one guarded commit", writes === 1);
-      check("329b: …and that commit refuses a name that is a coerced object",
-        /function commitGeneratedLocation[\s\S]{0,400}isCoercedObjectName\(rec\?\.name\)/.test(appSrc329));
+      // ⚠️ THIS GATE COUNTED WRITES AND DID NOT LOCATE THEM, WHICH IS HOW IT PASSED OVER A BROKEN FIX.
+      // My edit replaced the FIRST occurrence of the write — which was inside the helper I had just
+      // inserted — so `commitGeneratedLocation` lost its write and CALLED ITSELF (infinite recursion),
+      // while `mintTransitLocation` kept its raw unguarded one. Exactly one write existed, so `=== 1`
+      // was true and green. Counting is not locating; the check must name the function it lives in.
+      const lines329 = appSrc329.split(String.fromCharCode(10)).map(l => l.replace(String.fromCharCode(13), ""));
+      const owner = (needle) => {
+        const at = lines329.findIndex(l => l.includes(needle));
+        if (at < 0) return null;
+        for (let k = at; k >= 0; k--) if (/^function /.test(lines329[k])) return lines329[k].trim();
+        return null;
+      };
+      check("329b: the ONLY write to generated.location lives inside the guard, not merely exists once",
+        (appSrc329.match(/generated\.location\[[a-zA-Z]+\] = rec/g) || []).length === 1
+        && /^function commitGeneratedLocation/.test(owner("generated.location[id] = rec") || ""));
+      // ⛔ AND THE GUARD MUST NOT CALL ITSELF. A self-recursive commit blows the stack the first time a
+      // waygate is minted in play — a crash no headless test can reach, because app.js does not run here.
+      check("329b: the guard does not recurse into itself", (() => {
+        const at = lines329.findIndex(l => l.startsWith("function commitGeneratedLocation"));
+        if (at < 0) return false;
+        for (let k = at + 1; k < lines329.length && lines329[k] !== "}"; k++) {
+          if (lines329[k].includes("commitGeneratedLocation(")) return false;
+        }
+        return true;
+      })());
     }
     check("329: no shipped save carries a place minted from a coerced object", (() => {
       const walk = (d) => readdirSync(d, { withFileTypes: true })
@@ -10446,6 +10467,24 @@ await (async () => {
     for (let i = 0; i < 200; i++) INV.practiceSkill(learner, ["stealth"], { startingSkills: { usesPerRank: 25, maxRank: 2 } });
     check("339 §3: …and it stops at maxRank, so practice never outruns the curve",
       learner.skills.stealth === 2);
+
+    // SNG-339b — ⚠️ THE GRANT ONLY FIRED AT CREATION, AND EVERY EXISTING CHARACTER ALREADY EXISTS. Erik asked
+    // for Splarf to stop failing; Splarf was made before the tables existed, so the feature reached him not
+    // at all. Same shape as `personal-arc-backfill`: a save from before a feature gains what it is owed.
+    {
+      const RC339 = await import("../engine/reconcile.js");
+      const step = RC339.CHARACTER_STEPS.find(x => x.id === "grant-starting-training");
+      const rules339 = { startingSkills: { grantCap: 2, byBackground: { orphan: { stealth: 1, survival: 1 } } } };
+      const existing = { name: "Splarf", background: "orphan", skills: {} };
+      step.apply(existing, { content: { rules: rules339 } });
+      check("339b: an existing character is granted the training they came with, on next load",
+        existing.skills.stealth === 1 && existing.skills.survival === 1);
+      // ⛔ NEVER LOWERS WHAT PLAY HAS EARNED — reconcile's own law is additive-only.
+      const practised = { name: "Veteran", background: "orphan", skills: { stealth: 2 } };
+      step.apply(practised, { content: { rules: rules339 } });
+      check("339b: …and it never lowers a rank that play has already earned",
+        practised.skills.stealth === 2 && practised.skills.survival === 1);
+    }
   }
 
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.

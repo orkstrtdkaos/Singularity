@@ -87,7 +87,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.47";
+const APP_VERSION = "1.9.48";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6363,7 +6363,8 @@ function commitGeneratedLocation(id, rec) {
     return null;
   }
   ensureGenerated(character);
-  if (!commitGeneratedLocation(id, rec)) return null;
+  character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)
+  CONTENT.locations[id] = rec;              // live this session
   return id;
 }
 
@@ -6406,8 +6407,7 @@ function mintTransitLocation(moveRef) {
   // (the "Center"/"The Crossing" duplicate) shows up here; the fix is an alias on the canonical file, or the
   // reparent lever if it's really a sub-place. A genuinely new place is expected and fine.
   console.log(`[transit-mint] coined "${name}" (${id})${promotedFrom ? ` — nested under ${promotedFrom.parentId}` : " — top-level, no matching place found"}. If this duplicates a real place, add an alias to its canonical file or reparent it (Author panel).`);
-  character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)
-  CONTENT.locations[id] = rec;              // live this session
+  if (!commitGeneratedLocation(id, rec)) return null;   // SNG-329b: the one door
   if (here && Array.isArray(here.connections) && !here.connections.includes(id)) here.connections = [...here.connections, id]; // bidirectional reach
     // SNG-330 — ⚠️ AND WRITE IT SOMEWHERE THAT SURVIVES. The line above mutates AUTHORED content, which is
     // shared and never saved, so the edge vanished on reload and took the Travel button with it. This is

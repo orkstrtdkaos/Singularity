@@ -26,6 +26,7 @@ import { mintableBraidsFor, buildBraidDef, mintBraid } from "./braids.js"; // SN
 import { findExistingNpc, prettifyNpcName, REGISTRY_CAP } from "./npcs.js"; // SNG-199/205: registry + codex backfill
 import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
 import { isCoercedObjectArtefact } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
+import { startingSkills } from "./inventory.js"; // SNG-339b: the training an existing character came with
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -779,6 +780,36 @@ export const CHARACTER_STEPS = [
       if (!restored) return {};
       console.log(`[reconcile] sng-330: restored ${restored} return road(s) that could not persist`);
       return { notes: [`The way back from ${restored} place${restored === 1 ? "" : "s"} you found is on your map again.`] };
+    }
+  },
+  {
+    version: 25, id: "grant-starting-training", playerFacing: true,
+    // SNG-339b — ⚠️ THE GRANT ONLY FIRED AT CREATION, AND EVERY EXISTING CHARACTER ALREADY EXISTS.
+    //
+    // Erik: "I'm ready for Splarf to stop failing everything now." Splarf is level 1 with `skills: {}` — the
+    // tables Aevi authored are live and correct, and they reach nobody who was made before them. This is
+    // precisely what reconcile is for, and the same shape as `personal-arc-backfill`: a save from before a
+    // feature existed gains what it is owed on next login.
+    //
+    // ⛔ IT GRANTS ONLY WHAT CREATION WOULD HAVE, and never lowers an existing rank — a character who has
+    // already practised something keeps the higher number. Deriving from `background` + `domains.primary`,
+    // both of which the save already carries; nothing is invented and nothing is guessed.
+    apply: (c, ctx) => {
+      const rules = ctx?.content?.rules || ctx?.rules;
+      if (!rules?.startingSkills) return {};                 // tables unauthored — grant nothing, say nothing
+      const owed = startingSkills({ backgroundId: c.background, traditionId: c.domains?.primary }, rules);
+      const tags = Object.keys(owed);
+      if (!tags.length) return {};
+      c.skills = c.skills || {};
+      const gained = [];
+      for (const [tag, rank] of Object.entries(owed)) {
+        if ((Number(c.skills[tag]) || 0) >= rank) continue;  // never lower what play has already earned
+        c.skills[tag] = rank;
+        gained.push(`${tag} ${rank}`);
+      }
+      if (!gained.length) return {};
+      console.log(`[reconcile] sng-339b: granted the training ${c.name || "this character"} came with — ${gained.join(", ")}`);
+      return { notes: [`What you came from finally counts for something: ${gained.join(", ")}.`] };
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

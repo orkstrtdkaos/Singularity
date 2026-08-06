@@ -10539,6 +10539,88 @@ await (async () => {
       && PP.aptitudeStandingLine(once, "shadow", R340) === null);
   }
 
+  // SNG-341 — A QUEST STAGE HAS A REQUIREMENT NOW. Erik, from play: "it progressed basically 1 stage per
+  // beat… if you can learn, obtain, and deliver the required objectives in 3 beats it's not really a quest."
+  //
+  // ⚠️ THE CAUSE: `condition` is PROSE and nothing ever parsed it, so a stage was complete when someone SAID
+  // it was. Three beats finished a three-stage quest because the structure was never load-bearing.
+  {
+    const Q = await import("../engine/quests.js");
+    const ch = {
+      inventory: [{ id: "filtration_log", name: "Filtration Log" }],
+      knownPlaces: ["the_crossing"],
+      npcRegistry: { fendt: { id: "fendt", name: "Fendt" } },
+      codex: { topics: { "the_marked_period": { title: "The Marked Period" } } },
+      encounterLog: [{ id: "the_sealed_door", won: true }],
+    };
+    const met = (requires, ctx) => Q.stageRequirementsMet(ch, { requires }, ctx);
+
+    // ⛔ NO REQUIREMENTS = MET. Every quest authored before this has none; refusing them would break every
+    // live quest in every save to enforce a rule their content never agreed to.
+    check("341: a stage with no requires[] is still satisfiable — old quests are not broken by a new rule",
+      met([]).met === true && met(undefined).met === true && met([]).unrequired === true);
+
+    // Each kind reads state the game ALREADY tracks — nothing new is recorded to make this work.
+    check("341: obtain reads inventory · reach reads knownPlaces · speak reads the registry · learn reads the codex",
+      met([{ kind: "obtain", what: "Filtration Log" }]).met
+      && met([{ kind: "reach", what: "the_crossing" }]).met
+      && met([{ kind: "speak", what: "Fendt" }]).met
+      && met([{ kind: "learn", what: "The Marked Period" }]).met
+      && met([{ kind: "resolve", what: "the_sealed_door" }]).met);
+    check("341: …and each REFUSES when the thing is not true",
+      !met([{ kind: "obtain", what: "a sword" }]).met
+      && !met([{ kind: "reach", what: "the_maw" }]).met
+      && !met([{ kind: "speak", what: "Nobody" }]).met
+      && !met([{ kind: "learn", what: "a secret" }]).met);
+
+    // ⚠️ DELIVER IS TWO FACTS AND THE ENGINE CAN ONLY SEE ONE HONESTLY: the item is GONE and the person is
+    // met. Checking "you had it" would require a history nothing keeps.
+    check("341: deliver requires the item to be GONE and the recipient known",
+      !met([{ kind: "deliver", item: "Filtration Log", to: "Fendt" }]).met      // still holding it
+      && met([{ kind: "deliver", item: "a letter", to: "Fendt" }]).met);        // handed over
+
+    // ⛔ THE REFUSAL NAMES WHAT IS MISSING, so a GM can turn it into a scene. "cannot advance" is a wall;
+    // "the clerk still has not seen the filing" is playable.
+    const short = met([{ kind: "obtain", what: "a sword", hint: "you still do not have the blade" }]);
+    check("341: a refusal NAMES what is missing rather than just saying no",
+      short.missing.length === 1 && /do not have the blade/.test(short.missing[0]));
+
+    // ⛔ `beats` IS SITUATIONAL, NOT THE DEFAULT — Erik: "don't make beats a standard go-to." And it counts
+    // from when the STAGE became current, or a late stage inherits a debt it never incurred and opens
+    // already satisfied.
+    check("341: beats counts from when the stage became current, not from the quest's start",
+      !met([{ kind: "beats", what: 3 }], { beatsOnStage: 1 }).met
+      && met([{ kind: "beats", what: 3 }], { beatsOnStage: 3 }).met);
+
+    // An engine that does not understand a kind must not block a quest on it.
+    check("341: an unknown requirement kind never blocks — forward-compatible with content we have not built",
+      met([{ kind: "sacrifice_a_goat", what: "billy" }]).met);
+
+    // AND THE GATE ITSELF: evidence alone is no longer enough.
+    const c2 = { actionCount: 0, quests: [{ id: "q", structured: true, status: "active", stageIndex: 0,
+      stages: [{ id: "s1", requires: [{ kind: "obtain", what: "a sword" }] }, { id: "s2" }] }] };
+    const refused = Q.advanceStructuredQuest(c2, { questId: "q", stageId: "s1", evidence: "I found it, honest" });
+    check("341: a stage cannot be talked closed — evidence without the requirement is refused",
+      refused.ok === false && refused.why === "requirements-unmet" && refused.missing.length === 1);
+    c2.inventory = [{ name: "a sword" }];
+    const allowed = Q.advanceStructuredQuest(c2, { questId: "q", stageId: "s1", evidence: "took it off the rack" });
+    check("341: …and passes once the world actually agrees",
+      allowed.ok === true && c2.quests[0].stageIndex === 1);
+
+    // ⚠️ AND THE GM MUST SEE THE GAP, or it keeps trying to close a stage the engine keeps refusing — and to
+    // the player that is indistinguishable from a stuck quest. Naming it turns the refusal into the scene.
+    const c3 = { actionCount: 0, quests: [{ id: "q", structured: true, status: "active", stageIndex: 0,
+      title: "The Filing", stakes: "a name cleared", stages: [
+        { id: "s1", objective: "find the log", condition: "obtain the filtration log",
+          requires: [{ kind: "obtain", what: "Filtration Log", hint: "you still do not have the log" }] }] }] };
+    const block = Q.structuredQuestsForGM(c3, {});
+    check("341: the GM prompt names what is STILL NEEDED, so a refusal becomes playable",
+      /STILL NEEDED/.test(block || "") && /do not have the log/.test(block || ""));
+    c3.inventory = [{ name: "Filtration Log" }];
+    check("341: …and says nothing once the requirement is met — no noise on a stage that can close",
+      !/STILL NEEDED/.test(Q.structuredQuestsForGM(c3, {}) || ""));
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

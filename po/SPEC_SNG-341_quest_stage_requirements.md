@@ -73,3 +73,70 @@ tokens is a checklist.**
   rather than options** — *"the clerk signed because the filing was technically correct"* is the discovery of
   stage 2, printed before stage 1 begins. **The route label should be visible; its reasoning should not,
   until the stage that earns it.** Rewriting those is content and mine.
+
+---
+
+## ✅ ENGINE DONE — CCode, 2026-08-06, v1.9.50. `requires[]` is the gate. Your 17 quests are unblocked.
+
+Your diagnosis was exact, and there is one thing worse in it than you wrote:
+
+### ⚠️ THE SCHEMA HAD ALREADY PROMISED THIS
+
+`condition`'s own description in `world_arc_quest.schema.json` read:
+
+> *“ENGINE-TESTABLE: place reached / person spoken to / thing obtained / truth learned / roll passed.
+> Never vague ‘investigate further’.”*
+
+**A contract written and never implemented** — the same shape as `oneWay` one ticket ago, and the third
+time this week that authored text described behaviour nothing had built. I have corrected that description
+in place rather than leave it to mislead whoever authors next: `condition` is now documented as the
+player-facing sentence, and `requires[]` is documented as the gate.
+
+### THE SHAPE
+
+```jsonc
+"requires": [
+  { "kind": "obtain", "what": "Filtration Log", "hint": "you still do not have the log" },
+  { "kind": "speak",  "what": "Fendt" },
+  { "kind": "deliver", "item": "the sealed brief", "to": "Ossian" }
+]
+```
+
+All seven kinds read state the game already tracks — nothing new is recorded to make this work.
+
+| | |
+|---|---|
+| `learn` | codex topics |
+| `obtain` / `reach` / `speak` | inventory · knownPlaces · npcRegistry |
+| `deliver` | ⚠️ the item is **gone** AND the recipient is known — see below |
+| `resolve` | the encounter log |
+| `beats` | ⛔ situational only |
+
+⚠️ **`deliver` is two facts and the engine can only see one honestly.** “You had it” needs a history nothing
+keeps, so it checks the half that is durable: the item is no longer in inventory and the recipient is met.
+Worth knowing when you author — a delivery of something the player never held will pass.
+
+### THREE THINGS I BUILT AROUND YOUR CONSTRAINTS
+
+**`hint` is part of the shape.** Your point that a refusal must be playable is the reason: the missing
+requirement is surfaced **in the GM prompt** as *STILL NEEDED*, not just returned to a caller. Without that
+the GM keeps trying to close a stage the engine keeps refusing, and to the player that is indistinguishable
+from a stuck quest. Write hints as the thing the player would notice — *“the clerk still has not seen the
+filing”*, not *“obtain filtration_log”*.
+
+**No `requires[]` means met.** All 17 of your quests have none today, and refusing them would break every
+live quest in every save to enforce a rule their content never agreed to. Author at your own pace.
+
+**`beats` counts from when the STAGE became current**, not from the quest start — otherwise stage 3 of a
+long quest opens already satisfied, which is the opposite of the requirement's purpose. And I have kept
+your framing in the schema description verbatim, because the next person to reach for it will be reaching
+for a timer.
+
+### On the two things you called yours
+
+The generated-quest prompt is the cheapest half and it is still the half that matters most — **`requires[]`
+makes dependency possible; only the prompt makes it HAPPEN.** A generated quest with three independent
+stages will still read as three errands even with requirements on each.
+
+The route-reveal note is yours and I have not touched it. Your read is right: a label is an option, a
+reason is a discovery, and printing the reason before the stage that earns it spends the discovery early.

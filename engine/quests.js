@@ -275,6 +275,73 @@ export function startStructuredQuest(character, def, ctx = {}) {
  *  the engine buys precision we cannot verify. Check 2 is what actually protects the player.
  *
  *  Returns { ok, why?, change?, stage?, awaitingResolution? }. A rejection is RECORDED, never silent. */
+/** SNG-341 — A STAGE HAS A REQUIREMENT NOW. Erik, from play: *"it progressed basically 1 stage per beat…
+ *  if you can learn, obtain, and deliver the required objectives in 3 beats it's not really a quest."*
+ *
+ *  ⚠️ THE CAUSE: a stage's `condition` is PROSE and nothing has ever parsed it. Stages closed through the
+ *  "Mark this stage met" path — **a stage was complete when someone said it was** — so one narrative beat that
+ *  gestured at the objective closed it, because there was nothing on the other side to disagree. Three beats
+ *  finished a three-stage quest because the structure was never load-bearing.
+ *
+ *  `condition` STAYS as the player-facing sentence. `requires[]` is the gate, and every kind reads state the
+ *  game already tracks — nothing new is recorded to make this work.
+ *
+ *  ⛔ `beats` IS NOT THE DEFAULT AND MUST NOT BECOME ONE. Erik: "don't make beats a standard go-to, only on
+ *  quests that make sense." A minimum-beats floor applied everywhere is A TIMER, and a timer does not make a
+ *  quest denser — it makes a fast quest slow. An urgent errand that SHOULD resolve in two beats becomes worse.
+ *  Use it only where waiting IS the content: a vigil, a convalescence, a reply that has to travel.
+ *  ⚠️ A thin stage is fixed by giving it a real requirement, never by making the player wait for it.
+ *
+ *  Pure. Returns { met, missing[], checked[] } — `missing` names what is not yet true, so a refusal can say
+ *  WHY rather than just no.
+ */
+export function stageRequirementsMet(character, stage, ctx = {}) {
+  const reqs = Array.isArray(stage?.requires) ? stage.requires : [];
+  // ⛔ NO REQUIREMENTS = MET. Every quest authored before this shipped has none, and refusing them all would
+  // break every live quest in every save to enforce a rule their content never agreed to.
+  if (!reqs.length) return { met: true, missing: [], checked: [], unrequired: true };
+
+  const norm = (v) => String(v || "").toLowerCase().trim();
+  const has = (list, want) => (list || []).some(x => norm(typeof x === "string" ? x : (x?.id || x?.name)) === norm(want)
+    || norm(typeof x === "string" ? x : (x?.name || x?.id)) === norm(want));
+
+  const codexHas = (want) => {
+    const topics = character?.codex?.topics || {};
+    if (topics[want]) return true;
+    return Object.values(topics).some(t => norm(t?.title || t?.name) === norm(want));
+  };
+
+  const checked = [], missing = [];
+  for (const r of reqs) {
+    const kind = norm(r?.kind), what = r?.what ?? r?.id ?? r?.name;
+    let ok = false;
+    switch (kind) {
+      case "learn":   ok = codexHas(what); break;
+      case "obtain":  ok = has(character?.inventory, what); break;
+      case "reach":   ok = (character?.knownPlaces || []).some(p => norm(p) === norm(what)); break;
+      case "speak":   ok = !!(character?.npcRegistry || {})[what]
+                        || Object.values(character?.npcRegistry || {}).some(n => norm(n?.name) === norm(what)); break;
+      // DELIVER is two facts at once: you had it, and they have it now. The engine can only see the second
+      // half honestly — the item is GONE from inventory and the person is met — so that is what it checks.
+      case "deliver": ok = !has(character?.inventory, r?.item ?? what)
+                        && (!!(character?.npcRegistry || {})[r?.to] 
+                            || Object.values(character?.npcRegistry || {}).some(n => norm(n?.name) === norm(r?.to))); break;
+      case "resolve": ok = (character?.encounterLog || []).some(e => norm(e?.id || e?.defId) === norm(what) && e?.won); break;
+      // ⛔ SITUATIONAL ONLY — see the note above. Counted from when the stage BECAME current, not from the
+      // quest start, or a late stage inherits a debt it never incurred.
+      case "beats": {
+        const since = Number(ctx?.beatsOnStage);
+        ok = Number.isFinite(since) && since >= (Number(what) || 0);
+        break;
+      }
+      default: ok = true;   // an unknown kind cannot block a quest on an engine that does not understand it
+    }
+    checked.push({ kind, what, ok });
+    if (!ok) missing.push(r?.hint || `${kind}: ${what}`);
+  }
+  return { met: !missing.length, missing, checked };
+}
+
 export function advanceStructuredQuest(character, op = {}, ctx = {}) {
   const qid = op.questId ? slugify(op.questId) : null;
   const q = (character.quests || []).find(x => x.id === qid && x.structured);
@@ -293,6 +360,21 @@ export function advanceStructuredQuest(character, op = {}, ctx = {}) {
   }
   const evidence = smartClamp(String(op.evidence || "").trim(), 200);
   if (!evidence) return { ok: false, why: "no-evidence", questId: qid };
+
+  // SNG-341 — ⛔ AND THE STAGE'S REQUIREMENTS MUST ACTUALLY BE TRUE. Until now `evidence` was the whole gate:
+  // a sentence asserting the stage happened. That is the model marking its own homework, and it is why a
+  // three-stage quest closed in three beats — nothing on the other side could disagree.
+  //
+  // ⚠️ EVIDENCE IS STILL REQUIRED. This does not replace it: the requirement says the world CHANGED, the
+  // evidence says HOW, and the player is owed both. A stage that is mechanically satisfied but narratively
+  // unexplained is the same silence in the other direction.
+  const beatsOnStage = Math.max(0, (Number(character?.actionCount) || 0) - (Number(q.stageStartedAt) || 0));
+  const req = stageRequirementsMet(character, current, { ...ctx, beatsOnStage });
+  if (!req.met) {
+    // The refusal NAMES what is missing, so the GM can turn it into a scene rather than a wall — "the clerk
+    // still has not seen the filing" is playable; "cannot advance" is not.
+    return { ok: false, why: "requirements-unmet", questId: qid, stageId: op.stageId, missing: req.missing };
+  }
 
   const r = completeQuestStage(character, q.id, op.stageId);   // the EXISTING applier, unchanged
   if (!r.ok) return { ok: false, why: r.why, questId: qid };
@@ -314,6 +396,10 @@ export function completeQuestStage(character, questId, stageId) {
   q.completedStages = q.completedStages || [];
   if (!q.completedStages.includes(stageId)) q.completedStages.push(stageId);
   q.stageIndex = Math.max(q.stageIndex || 0, Math.min(si + 1, q.stages.length));
+  // SNG-341 — ⚠️ STAMP WHEN THE NEW STAGE BECAME CURRENT, so a `beats` requirement counts from THERE.
+  // Counting from the quest's start would make a late stage inherit a debt it never incurred: stage 3 of a
+  // long quest would open already satisfied, which is the opposite of what the requirement is for.
+  q.stageStartedAt = Number(character?.actionCount) || 0;
   const change = q.stages[si].change;
   if (change && !(q.progress || []).includes(change)) q.progress = [...(q.progress || []), change].slice(-12);
   // CCODE-16: the invariant "every stage behind you → the decision opens" lives HERE, in the one applier
@@ -662,7 +748,16 @@ export function structuredQuestsForGM(character, opts = {}) {
     const stage = q.stages[q.stageIndex] || q.stages[q.stages.length - 1];
     const open = routesForCharacter(q, character).filter(r => r.open).map(r => r.trad);
     let line = `- [${q.id}] ${q.title} (axis: ${q.axis || "?"}) — STAKES: ${q.stakes}\n  Now: ${stage?.objective || "resolve"}${stage?.condition ? ` (${stage.condition})` : ""}${open.length ? `\n  This character's domains open: ${open.join(", ")}` : ""}`;
-    // SNG-162 §1: the stage the model may report against, named explicitly. Without the id in the
+    // SNG-341 — ⚠️ THE GM MUST SEE WHAT IS STILL MISSING, or it will keep trying to close a stage the
+    // engine will keep refusing, and the refusal is invisible to the player as anything but a stuck quest.
+    // Naming the gap turns it into the scene: "the clerk still has not seen the filing" is playable.
+    {
+      const beatsOnStage = Math.max(0, (Number(character?.actionCount) || 0) - (Number(q.stageStartedAt) || 0));
+      const req = stage ? stageRequirementsMet(character, stage, { beatsOnStage }) : { met: true, missing: [] };
+      if (!req.met) line += `
+  STILL NEEDED before this stage can close (do NOT report it met until these are true): ${req.missing.join("; ")}.`;
+    }
+    // SNG-162 §1: the stage the model may report against, named explicitly. Without the id in the    // SNG-162 §1: the stage the model may report against, named explicitly. Without the id in the
     // prompt the GM cannot emit a stageOp that passes the current-stage gate.
     if (stage?.id && !q.awaitingResolution) {
       line += `\n  CURRENT STAGE ID: "${stage.id}" — if the character's actions THIS BEAT satisfy that condition, emit stageOps for it.`;

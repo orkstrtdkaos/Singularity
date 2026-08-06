@@ -88,14 +88,19 @@
         "player": "Ask the grove — touch the nearest root-ridge and see if the living wood remembers the person who passed.",
         "summary": "Aelyn asked the root-ridge to remember the traveler who passed — the wood did not attend; Branch observed it is simply old and far away.",
         "narration": "You crouch at the root-ridge and press your palm flat against the wood — bark rough and damp, the cold still in it from the night. You open the Grove-speak the way the Tender showed you: quiet first, then a question, patient as water.\n\nNothing comes back. Not silence exactly — the wood is alive, and you can feel that much, the slow pulse of sap moving against your hand. But it does not attend to you. The root-ridge is old and indifferent, its attention turned inward, downward, toward its own long business. Whatever the Quickwood's living fabric remembers of the person who passed here, it does not choose to share it with you now — and you cannot make it.\n\nYou stay crouched a moment longer, hand on the bark, but the connection does not open. You are not yet someone this wood knows. You stand and brush the damp from your palm.\n\nBranch has not moved from beside you. Its buds are closed against the cool air. After a moment it says, in its slow creak: \"Old. Not — listening.\" It puts one root-foot on the ridge, leaves it there a second, then steps over. It seems to mean: the root is deep and old and not unkind, just far away. Then it looks northeast down the road, where the boot-tracks continue."
+      },
+      {
+        "player": "Keep walking northeast at a steady pace — follow the thread and the boot-tracks, close the distance",
+        "summary": "Aelyn and Branch walk deeper into the Quickwood on the kept road, closing distance on the traveler ahead.",
+        "narration": "You rise from your crouch and keep moving. The road stretches ahead in long, quiet segments — root-ridges crossing at intervals, the mud darkening where the canopy is thickest, pale where a gap lets in the thin spring light. The boot-tracks stay clear in the softer sections, still pointing northeast, still steady. You match the stride without thinking about it, settling into a road-pace that eats distance without wearing you down.\n\nBranch moves beside you in its deliberate way, roots re-gripping the packed center of the path with each step. After a while it says — one word, unhurried — \"Closer.\" You glance at it. It is looking not at the tracks but at the trees to the east, where the canopy is slightly thinner. You feel it too: the thread at your sternum has a faint pull to it now, less like a direction and more like a lean. The gap between you and whoever walked this road before is smaller than it was at the margin.\n\nThe Quickwood around you is not unfriendly, exactly — just old, and not interested. Water drips. A bird moves somewhere high in the branches, too far up to see. The boot-tracks hold their line, and the road holds its north-east, and morning moves through the canopy above you in slow green light."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch at the root-ridge and press your palm flat against the wood — bark rough and damp, the cold still in it from the night. You open the Grove-speak the way the Tender showed you: quiet first, then a question, patient as water.\n\nNothing comes back. Not silence exactly — the wood is alive, and you can feel that much, the slow pulse of sap moving against your hand. But it does not attend to you. The root-ridge is old and indifferent, its attention turned inward, downward, toward its own long business. Whatever the Quickwood's living fabric remembers of the person who passed here, it does not choose to share it with you now — and you cannot make it.\n\nYou stay crouched a moment longer, hand on the bark, but the connection does not open. You are not yet someone this wood knows. You stand and brush the damp from your palm.\n\nBranch has not moved from beside you. Its buds are closed against the cool air. After a moment it says, in its slow creak: \"Old. Not — listening.\" It puts one root-foot on the ridge, leaves it there a second, then steps over. It seems to mean: the root is deep and old and not unkind, just far away. Then it looks northeast down the road, where the boot-tracks continue.",
-      "sceneSummary": "Aelyn asked the root-ridge to remember the traveler who passed — the wood did not attend; Branch observed it is simply old and far away.",
+      "narration": "You rise from your crouch and keep moving. The road stretches ahead in long, quiet segments — root-ridges crossing at intervals, the mud darkening where the canopy is thickest, pale where a gap lets in the thin spring light. The boot-tracks stay clear in the softer sections, still pointing northeast, still steady. You match the stride without thinking about it, settling into a road-pace that eats distance without wearing you down.\n\nBranch moves beside you in its deliberate way, roots re-gripping the packed center of the path with each step. After a while it says — one word, unhurried — \"Closer.\" You glance at it. It is looking not at the tracks but at the trees to the east, where the canopy is slightly thinner. You feel it too: the thread at your sternum has a faint pull to it now, less like a direction and more like a lean. The gap between you and whoever walked this road before is smaller than it was at the margin.\n\nThe Quickwood around you is not unfriendly, exactly — just old, and not interested. Water drips. A bird moves somewhere high in the branches, too far up to see. The boot-tracks hold their line, and the road holds its north-east, and morning moves through the canopy above you in slow green light.",
+      "sceneSummary": "Aelyn and Branch walk deeper into the Quickwood on the kept road, closing distance on the traveler ahead.",
       "choices": [
         {
-          "label": "Keep walking northeast at a steady pace — follow the thread and the boot-tracks, close the distance",
+          "label": "Press on at the same pace — close the gap further before deciding anything",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
@@ -103,99 +108,94 @@
             "travel",
             "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Lifesense — reach out ahead on the road and feel for any living presence within range",
+          "label": "Use Lifesense — reach ahead through the wood and feel how far the living warmth of another person extends",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "scout",
-            "study"
+            "careful"
           ],
           "abilityId": "lifesense",
           "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Check the next section of boot-tracks — look for anything that changed: a stumble, a stop, a second set of prints joining or crossing",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask Branch quietly — it touched the ridge too; did it sense anything the Grove-speak missed?",
+          "label": "Ask Branch what it senses in the trees to the east — it noticed something",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "help",
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
+        },
+        {
+          "label": "Call out — a traveler's hail, the kind that says you are not a threat",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "Inside the Quickwood on the kept road — canopy filtering light to green-gray, ten or so minutes northeast of the Margin, mud soft underfoot, trees close on both sides.",
+        "setting": "Inside the Quickwood on the kept road — canopy filtering light to green-gray, deeper into the wood now, mud soft underfoot, trees close on both sides.",
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Standing beside Aelyn on the far side of the root-ridge, looking northeast down the road."
+            "state": "Moving beside Aelyn, watching the eastern tree-line, having said 'Closer.'"
           }
         ],
         "objects": [
-          "Boot-tracks in the road mud — adult-sized, a day old, moving northeast",
-          "The root-ridge Aelyn just touched — old, damp, indifferent",
-          "The kept road stretching northeast into the Quickwood",
-          "Traveler's Pack on Aelyn's back"
+          "Boot-tracks in the road mud — still clear in softer sections, pointing northeast",
+          "Root-ridges crossing the road at intervals",
+          "Traveler's Pack on Aelyn's back",
+          "The kept road stretching northeast into the Quickwood"
         ],
         "threads": [
-          "The thread at Aelyn's sternum pulls steady northeast",
-          "One person, carrying weight, moved through here a day ago — heading the same direction, not yet returned",
-          "The Quickwood's older wood does not know Aelyn yet — the Grove found no purchase here"
+          "The thread at Aelyn's sternum is pulling more distinctly — the gap is closing",
+          "Branch noticed something in the eastern tree-line and said 'Closer' — it is unclear what it sensed",
+          "One person, carrying weight, is ahead on this road — not yet in sight or range"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "rootkin-tender",
-          "name": "Rootkin Tender",
-          "note": "Not present — recalled for context only.",
-          "statusNote": "Keeping her watch at the Heartroot entrance hall, tending the sapling."
-        }
-      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief stop at the root-ridge — a minute crouched, a minute standing, then back to the road."
+        "hoursPassed": 0.5,
+        "why": "steady walking deeper into the Quickwood"
       }
     },
     "sceneState": {
-      "setting": "Inside the Quickwood on the kept road — canopy filtering light to green-gray, ten or so minutes northeast of the Margin, mud soft underfoot, trees close on both sides.",
+      "setting": "Inside the Quickwood on the kept road — canopy filtering light to green-gray, deeper into the wood now, mud soft underfoot, trees close on both sides.",
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Standing beside Aelyn on the far side of the root-ridge, looking northeast down the road."
+          "state": "Moving beside Aelyn, watching the eastern tree-line, having said 'Closer.'"
         }
       ],
       "objects": [
-        "Boot-tracks in the road mud — adult-sized, a day old, moving northeast",
-        "The root-ridge Aelyn just touched — old, damp, indifferent",
-        "The kept road stretching northeast into the Quickwood",
-        "Traveler's Pack on Aelyn's back"
+        "Boot-tracks in the road mud — still clear in softer sections, pointing northeast",
+        "Root-ridges crossing the road at intervals",
+        "Traveler's Pack on Aelyn's back",
+        "The kept road stretching northeast into the Quickwood"
       ],
       "threads": [
-        "The thread at Aelyn's sternum pulls steady northeast",
-        "One person, carrying weight, moved through here a day ago — heading the same direction, not yet returned",
-        "The Quickwood's older wood does not know Aelyn yet — the Grove found no purchase here"
+        "The thread at Aelyn's sternum is pulling more distinctly — the gap is closing",
+        "Branch noticed something in the eastern tree-line and said 'Closer' — it is unclear what it sensed",
+        "One person, carrying weight, is ahead on this road — not yet in sight or range"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
@@ -554,7 +554,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "latentArcs": {
       "heartwood-hollowing": {
         "id": "heartwood-hollowing",
@@ -3148,18 +3148,18 @@
     }
   },
   "tendencies": {
-    "cerebral": 13.946157238805469,
-    "cautious": 6.864880563950517,
-    "generous": 0.5562334024613302,
-    "social": 4.06195013782187,
-    "strategic": 3.7754869158224746,
-    "devotion": 4.348629404689408,
-    "patient": 2.318064609676833
+    "cerebral": 13.597503307835332,
+    "cautious": 7.693258549851754,
+    "generous": 0.5423275673997969,
+    "social": 3.960401384376323,
+    "strategic": 3.6810997429269126,
+    "devotion": 4.239913669572172,
+    "patient": 2.260112994434912
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 61,
+  "actionCount": 62,
   "grantsVersion": 1,
   "reconcileVersion": 24,
   "gallery": [
@@ -3197,8 +3197,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1786037302778,
-  "rev": 110,
+  "updatedAt": 1786037345775,
+  "rev": 111,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -3247,7 +3247,7 @@
     "item": {}
   },
   "regionsKnown": {
-    "the_quickwood": 62
+    "the_quickwood": 63
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -3407,10 +3407,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-08-06T17:23:29.867Z",
-      "lastAt": "2026-08-06T17:28:22.777Z",
+      "lastAt": "2026-08-06T17:29:05.774Z",
       "startDay": 37,
       "endDay": 37,
-      "beats": 4
+      "beats": 5
     }
   ],
   "livingCurrentAccess": [
@@ -3573,18 +3573,18 @@
   },
   "_intentAsked": null,
   "_opEmitted": {
-    "sceneSummary": 9,
-    "choices": 9,
-    "scene": 9,
+    "sceneSummary": 10,
+    "choices": 10,
+    "scene": 10,
     "questUpdates": 4,
     "codexUpdates": 6,
-    "timeOps": 9,
+    "timeOps": 10,
     "sceneEnded": 3,
     "characterDeltas": 3,
     "npcUpdates": 8,
     "offer": 1
   },
-  "_opTurns": 9,
+  "_opTurns": 10,
   "knownPlaces": [
     "gen-quickwood-margin"
   ],
@@ -3605,8 +3605,8 @@
     }
   },
   "skillUses": {
-    "travel": 1,
-    "careful": 2,
+    "travel": 2,
+    "careful": 3,
     "scout": 1,
     "study": 1
   }

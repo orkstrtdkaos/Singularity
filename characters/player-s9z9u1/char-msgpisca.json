@@ -46,7 +46,7 @@
   "maxHealth": 35,
   "health": 32,
   "maxEnergy": 100,
-  "energy": 56,
+  "energy": 51,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -139,16 +139,21 @@
         "player": null,
         "summary": "Cevaine confronts Splarf at the waygate clearing; the duel begins — but the order-reader's precision outpaces Splarf's attempts to read them.",
         "narration": "You try to read Cevaine the way a storykeeper reads a crowd — hunting for the pattern in how they hold themselves, the rhythm of their breathing, the small tells that say what they're about to do. But their precision defeats you. They move like a sentence already written, every gesture locked into a structure you can't quite parse before it's already becoming the next one. By the time you think you've found the seam in their form, they've already shifted — eyes tracking a fraction of movement you haven't made yet, body angling toward a counter you haven't thrown. They read you like a problem already solved."
+      },
+      {
+        "player": null,
+        "summary": "Round 2 of the contest with Cevaine: Splarf attempted to read them with Storykeeper but their precision defeated the attempt; a direct strike landed but their guard is now raised and their anticipation has shifted the fight's balance.",
+        "narration": "You've read harder fights than this, in smaller spaces, with less light to work with. But Cevaine isn't a fight — they're a sentence being spoken in real time, and every word of it is already accounted for.\n\nYou reach for the pattern anyway, the way a storykeeper reads a crowd's mood before the storytelling starts. Your eyes hunt for the rhythm in how they stand, the breath-tells, the small weight-shifts that promise what comes next. For a moment — just a moment — you think you have it. There. The left shoulder rides high. The knees are tracking something. You could work with this.\n\nThen they move, and it's like you were reading a different person entirely.\n\nYou commit to a strike instead — direct, honest, no flourish. A plain blow at their center. Your body remembers the weight of it, the shoulder roll that puts everything behind the hand. It's the kind of strike that works because it's *true*, because it doesn't lie and doesn't ask permission.\n\nFor one breath, it connects. You feel the solid contact, the resistance of their guard, and you've bought yourself ground — real, measurable ground. Your feet are better planted now. Your center is tighter. You can breathe.\n\nBut Cevaine's guard rises in the same moment, measured and exact, and you realize they *anticipated* the strike before you threw it. Not because they read you better — because they calculated that a storykeeper, faced with a precision they can't parse, will abandon subtlety and go for something clean and true. They were right. And their guard is now *up*, disciplined, locked into a geometry that makes you understand, for the first time, that this order-reader is not here to tire you out. They're here to solve you.\n\nYou and Cevaine stand now perhaps three strides apart, breathing, the clearing's hum pressing down on both of you like a held note."
       }
     ],
     "lastTurn": {
-      "narration": "You try to read Cevaine the way a storykeeper reads a crowd — hunting for the pattern in how they hold themselves, the rhythm of their breathing, the small tells that say what they're about to do. But their precision defeats you. They move like a sentence already written, every gesture locked into a structure you can't quite parse before it's already becoming the next one. By the time you think you've found the seam in their form, they've already shifted — eyes tracking a fraction of movement you haven't made yet, body angling toward a counter you haven't thrown. They read you like a problem already solved.",
-      "sceneSummary": "Cevaine confronts Splarf at the waygate clearing; the duel begins — but the order-reader's precision outpaces Splarf's attempts to read them.",
+      "narration": "You've read harder fights than this, in smaller spaces, with less light to work with. But Cevaine isn't a fight — they're a sentence being spoken in real time, and every word of it is already accounted for.\n\nYou reach for the pattern anyway, the way a storykeeper reads a crowd's mood before the storytelling starts. Your eyes hunt for the rhythm in how they stand, the breath-tells, the small weight-shifts that promise what comes next. For a moment — just a moment — you think you have it. There. The left shoulder rides high. The knees are tracking something. You could work with this.\n\nThen they move, and it's like you were reading a different person entirely.\n\nYou commit to a strike instead — direct, honest, no flourish. A plain blow at their center. Your body remembers the weight of it, the shoulder roll that puts everything behind the hand. It's the kind of strike that works because it's *true*, because it doesn't lie and doesn't ask permission.\n\nFor one breath, it connects. You feel the solid contact, the resistance of their guard, and you've bought yourself ground — real, measurable ground. Your feet are better planted now. Your center is tighter. You can breathe.\n\nBut Cevaine's guard rises in the same moment, measured and exact, and you realize they *anticipated* the strike before you threw it. Not because they read you better — because they calculated that a storykeeper, faced with a precision they can't parse, will abandon subtlety and go for something clean and true. They were right. And their guard is now *up*, disciplined, locked into a geometry that makes you understand, for the first time, that this order-reader is not here to tire you out. They're here to solve you.\n\nYou and Cevaine stand now perhaps three strides apart, breathing, the clearing's hum pressing down on both of you like a held note.",
+      "sceneSummary": "Round 2 of the contest with Cevaine: Splarf attempted to read them with Storykeeper but their precision defeated the attempt; a direct strike landed but their guard is now raised and their anticipation has shifted the fight's balance.",
       "choices": [
         {
-          "label": "Strike hard and direct — test their reflexes with speed",
+          "label": "Press the advantage harder—throw another strike at their rising guard before they can reset",
           "attribute": "physical",
-          "subAttribute": "agility",
+          "subAttribute": "strength",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
@@ -158,27 +163,26 @@
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": "pale-reader-duel"
         },
         {
-          "label": "Defend and wait — let them commit to an opening",
+          "label": "Defend and watch — hold ground, protect your center, and observe the geometry of how they move their guard",
           "attribute": "physical",
-          "subAttribute": "strength",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": 12,
           "intentTags": [
             "defend",
-            "careful"
+            "careful",
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": "pale-reader-duel"
         },
         {
-          "label": "Use Steady the Soul to ground yourself and read the moment more clearly",
+          "label": "Use Numen-Sense to feel what this thin place is trying to tell you — read not Cevaine's body but the significance-density they carry",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
@@ -187,27 +191,25 @@
             "study",
             "careful"
           ],
-          "abilityId": "steady_soul",
-          "energyCost": 4,
+          "abilityId": "numen_sense",
+          "energyCost": 3,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": "pale-reader-duel"
         },
         {
-          "label": "Try to talk — ask Cevaine what they actually want here",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Break from the fight — turn and run for the settlement path, putting distance between you and this confrontation",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
-          "difficulty": 16,
+          "difficulty": 12,
           "intentTags": [
-            "negotiate",
-            "careful"
+            "flee",
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": "pale-reader-duel"
         }
       ],
       "deeds": [],
@@ -215,17 +217,12 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
       "scene": {
-        "setting": "The waygate clearing at The Thinning, afternoon light harsh and ordinary. The sealed veil stands dark and resentful behind you; the settlement path lies open to the north. Cevaine stands at the clearing's edge between you and retreat, body positioned at geometric precision, eyes locked on you.",
+        "setting": "The waygate clearing at The Thinning, afternoon light harsh and ordinary. The sealed veil stands dark and resentful behind Splarf; the settlement path lies open to the north. Cevaine stands three strides away, body at geometric precision, eyes locked, guard raised.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Standing at calculated distance, reading Splarf's form and position with relentless precision, waiting for the next move"
+            "state": "Standing at calculated distance with raised guard, reading Splarf's form with relentless precision, waiting for the next move"
           }
         ],
         "objects": [
@@ -234,43 +231,26 @@
           "Your chisel for stone-carving"
         ],
         "threads": [
-          "What does Cevaine intend to do about the breach?",
+          "Will you continue the fight with Cevaine, or find another way?",
           "Where did Boo go?",
-          "Will you fight Cevaine or find another way?"
+          "What does Cevaine intend to do about the breach you made?"
         ]
       },
       "npcUpdates": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
+      "encounterOps": [
+        {
+          "op": "tactic",
+          "tag": "precise"
+        }
+      ],
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The waygate clearing at The Thinning, afternoon light harsh and ordinary. The sealed veil stands dark and resentful behind you; the settlement path lies open to the north. Cevaine stands at the clearing's edge between you and retreat, body positioned at geometric precision, eyes locked on you.",
+      "setting": "The waygate clearing at The Thinning, afternoon light harsh and ordinary. The sealed veil stands dark and resentful behind Splarf; the settlement path lies open to the north. Cevaine stands three strides away, body at geometric precision, eyes locked, guard raised.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Standing at calculated distance, reading Splarf's form and position with relentless precision, waiting for the next move"
+          "state": "Standing at calculated distance with raised guard, reading Splarf's form with relentless precision, waiting for the next"
         }
       ],
       "objects": [
@@ -279,17 +259,17 @@
         "Your chisel for stone-carving"
       ],
       "threads": [
-        "What does Cevaine intend to do about the breach?",
+        "Will you continue the fight with Cevaine, or find another way?",
         "Where did Boo go?",
-        "Will you fight Cevaine or find another way?"
+        "What does Cevaine intend to do about the breach you made?"
       ]
     },
-    "beats": 8
+    "beats": 9
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [
@@ -558,7 +538,7 @@
     "lastTickWorldDay": 36,
     "lastCanonWorldDay": 36,
     "pressureQueue": [],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Boo's sudden, absolute attention — the way it has turned to watch you watch it, as if something has shifted in the settlement or the veil…",
@@ -968,8 +948,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785974818001,
-  "rev": 30,
+  "updatedAt": 1785974924988,
+  "rev": 35,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1105,7 +1085,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 8
+    "the_numinous_reach": 9
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1113,10 +1093,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-06T00:06:57.993Z",
+      "lastAt": "2026-08-06T00:08:44.987Z",
       "startDay": 36,
       "endDay": 37,
-      "beats": 8
+      "beats": 9
     }
   ],
   "establishedFacts": [
@@ -1154,14 +1134,14 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 8,
-    "scene": 8,
-    "choices": 8,
+    "sceneSummary": 9,
+    "scene": 9,
+    "choices": 9,
     "offer": 4,
     "codexUpdates": 7,
     "imagePrompt": 5,
     "gambitApt": 7,
-    "sceneEnded": 8,
+    "sceneEnded": 9,
     "characterDeltas": 5,
     "arcOps": 1,
     "factUpdates": 3,
@@ -1172,9 +1152,10 @@
     "questUpdates": 1,
     "npcUpdates": 2,
     "generateRequest": 1,
-    "newEncounter": 1
+    "newEncounter": 1,
+    "encounterOps": 1
   },
-  "_opTurns": 8,
+  "_opTurns": 9,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -1263,12 +1244,13 @@
       "encounterId": "gm-a-pale-reader",
       "type": "duel",
       "status": "active",
-      "round": 1,
+      "round": 2,
       "log": [
-        "r1: foresee vs strike → momentum 0"
+        "r1: foresee vs strike → momentum 0",
+        "r1: strike vs shield → momentum 5"
       ],
-      "opponentHealth": 5,
-      "tactic": null,
+      "opponentHealth": 2,
+      "tactic": "precise",
       "mode": "skill_battle",
       "opponentSheet": {
         "name": "A Pale Reader",
@@ -1309,14 +1291,12 @@
         ],
         "synthesized": true
       },
-      "momentum": 0,
-      "opponentEnergy": 69,
+      "momentum": 4.6000000000000005,
+      "opponentEnergy": 64,
       "turn": {
-        "phase": "action",
+        "phase": "sense",
         "sel": {
-          "sense": [
-            5
-          ],
+          "sense": [],
           "action": [],
           "bonus": []
         },
@@ -1325,13 +1305,24 @@
           "action": "",
           "bonus": ""
         },
-        "setupBonus": -9,
+        "setupBonus": 0,
         "bonusEarned": false,
-        "senseDone": true,
-        "senseLine": "You read with Storykeeper — failure. They read you better (-9 to your action). You learn nothing usable this time. Had it landed you would have seen which craft A Pale Reader leans on, and whether their wind is going — enough to pick the counter.",
-        "readPayoff": "You learn nothing usable this time. Had it landed you would have seen which craft A Pale Reader leans on, and whether their wind is going — enough to pick the counter."
+        "senseDone": false,
+        "senseLine": ""
       },
-      "effects": [],
+      "effects": [
+        {
+          "kind": "guard",
+          "label": "guard up",
+          "value": 2,
+          "roundsLeft": 1,
+          "applies": "whenAttacked",
+          "side": "opponent",
+          "rank": 2,
+          "source": "a raised guard",
+          "from": "opponent"
+        }
+      ],
       "pressure": {
         "player": 0,
         "opponent": 0
@@ -1340,15 +1331,15 @@
         "player": false,
         "opponent": false
       },
-      "lastOppFn": "strike",
+      "lastOppFn": "shield",
       "lastOppReceipt": {
-        "roll": 12,
-        "chance": 28,
-        "degree": "success",
+        "roll": 54,
+        "chance": 39,
+        "degree": "partial",
         "action": {
           "attribute": "practical",
           "abilityLevel": 2,
-          "label": "a hard strike",
+          "label": "a raised guard",
           "axes": {}
         },
         "breakdown": {
@@ -1362,16 +1353,16 @@
               "value": 10
             },
             {
-              "label": "matchup (strike vs foresee)",
-              "value": -2
+              "label": "you read them first",
+              "value": 9
             }
           ],
-          "total": 28,
+          "total": 39,
           "clampedFrom": null,
           "base": "practical",
           "opposed": null
         },
-        "critRoll": 73,
+        "critRoll": null,
         "crit": {
           "successChance": 11,
           "failChance": 1,
@@ -1398,18 +1389,18 @@
           "successClampedFrom": null,
           "failClampedFrom": null
         },
-        "rawChance": 28,
-        "margin": 16,
-        "matchup": -2,
+        "rawChance": 39,
+        "margin": -15,
+        "matchup": 0,
         "intensity": "standard",
         "tier": 2,
-        "function": "strike",
-        "name": "a hard strike",
+        "function": "shield",
+        "name": "a raised guard",
         "effectMods": [],
         "woven": null
       },
-      "lastReadWasSense": true,
-      "senseTierEarned": 0,
+      "lastReadWasSense": false,
+      "senseTierEarned": null,
       "senseResist": {
         "value": 6,
         "label": "their natural guardedness",

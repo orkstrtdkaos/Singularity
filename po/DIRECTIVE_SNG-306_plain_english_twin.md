@@ -119,3 +119,37 @@ front for five passes is worth what winning a contest is worth* — **a relation
 either.** My own `marcher > stillhold * 5` was the same error, defending a design Erik had already overturned.
 **A gate that defends yesterday's numbers against today's decision creates pressure to weaken the check rather
 than to think.**
+
+
+---
+
+## AMENDMENT 3 — WOULD A PLAYER ACTUALLY USE THIS FOR THE THING IT IS FOR?
+**Erik, 2026-08-06: "audit what you write — ask yourself if a player would actually use this for the intent."**
+**Ratified after I authored four flight crafts in a row that a player would not fly with.**
+
+### THE FAILURE, NAMED: COST THAT NEGATES PURPOSE
+A craft exists to do something. **If its cost cancels the reason to use it, the craft is decoration** — and it
+will pass every check I have, because the schema is complete, the bounds are checkable, the `plainly` is
+plain, and **the thing is still useless.**
+| what I wrote | why nobody would use it |
+|---|---|
+| `the_borrowed_hour` — skip the journey, **the world runs the full duration anyway** | ⚠️ **you gain nothing.** You gave up the days and the world moved the same. Erik: *"makes the skill useless."* |
+| `the_raised_road` — **build a road** to travel | *"takes forever and you never get to your destination."* A travel craft slower than walking. |
+| `the_borrowed_form` — fly, **leaving your gear and your judgement** | a party travel craft that arrives with no equipment and no wits. **Nobody takes that trip.** |
+| `the_carried_green` r1 — **excluded** water, stone, desert | I priced terrain as impossible when Erik wanted it priced as *hard* |
+### THE TEST, IN ORDER
+1. **What is this FOR?** State the intent in one clause.
+2. **Would a player choose it over the ordinary way?** If walking is better, the craft is worse than nothing —
+   **it occupies a slot and teaches the player the tradition is weak.**
+3. **Does the cost make it unusable, or make it interesting?** ⚠️ **The difference: an interesting cost changes
+   HOW you use it. A negating cost removes the reason to.** *"Your gear stays behind"* on a travel craft is
+   negating. *"You arrive announced"* on the same craft is interesting.
+4. **Where should the limit go instead?** Usually **duration, rank, or scale** — never the thing the craft is
+   for. **Limit how long, how often, or how many; do not limit whether it works.**
+
+### AND THE PATTERN UNDERNEATH, WHICH IS MINE
+**I reach for a dramatic cost because it reads well, and dramatic costs are usually negating ones.** *"You
+lose your judgement", "the world moves without you", "you must build it first"* — **each is a good sentence
+and a dead mechanic.** The evocative register that `DIRECTIVE_SNG-306` caught in my *prose* also drives my
+*design*, and it is harder to see there because the sentence is doing its job while the craft is not.
+**Ask the question in the amendment title before writing the bounds, not after.**

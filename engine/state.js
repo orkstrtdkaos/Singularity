@@ -3,6 +3,7 @@
 // via sync.js pushes character + player profile to the shared repo when a PAT is
 // configured. Content packs always load from the served repo files.
 
+import { martialAbilityRecords } from "./martial.js";
 import { reconcileContent } from "./reconcile.js";
 import { applySubstrateField } from "./substrate.js";
 import { loadLegends } from "./legends.js";
@@ -178,7 +179,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -216,7 +217,8 @@ export async function loadContent() {
     // SNG-341b — the SHAPE a quest must have. Aevi authored and registered it; these are the other three
     // legs. In THIS array, beside the name that receives it — the rule she wrote after `economy` was
     // destructured from one Promise.all while its loadRule sat in another.
-    loadRule("quest_structure", null)
+    loadRule("quest_structure", null),
+    loadRule("martial_paths", null)
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -258,6 +260,7 @@ export async function loadContent() {
   if (incapRule) rules.incapacitation = incapRule;
   if (tiesRule) rules.ties = tiesRule;   // SNG-328   // SNG-323   // SNG-322: the threat ladder   // SNG-316: the charge-condition vocabulary
   if (questStructureRule) rules.questStructure = questStructureRule;   // SNG-341b
+  if (martialRule) rules.martialPaths = martialRule;   // SNG-345
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
   // SNG-263: the craft-mechanics config rides the rules bag so battleRound reads it off a value it already
@@ -501,6 +504,19 @@ export async function loadContent() {
     if (rules.economy && !cov.secondAxisLive) console.log(`[economy] ${cov.withGoods}/${cov.items} items carry a goods category — ${cov.note}`);
   }
   console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length} traditionMotivations=${Object.keys(traditionMotivations?.traditions || {}).length} npcInteriority=${Object.keys(npcInteriority?.npcs || {}).length} traditionAesthetics=${Object.keys(traditionAestheticsDoc?.traditions || {}).length} wardDenials=${Object.keys(frameContentDoc?.wardDenials || {}).filter(k => k[0] !== "_").length} challengePremises=${Object.keys(frameContentDoc?.challengePremises || {}).filter(k => k[0] !== "_").length} frameKinds=${Object.keys(frameKindsDoc?.frameKinds || {}).length} frameExemplarEncounters=${(randomEncounters?.encounters || []).filter(e => e.fromFrameExemplar).length} consumerContractTypes=${Object.keys(consumerMapDoc?.contentTypes || {}).length}`);
+  // SNG-345 — THE MARTIAL FLOOR JOINS THE CATALOG. martial_paths was authored 2026-07-07 with an
+  // engineNote naming its own implementation ("4 free zero-cost abilities at creation, powerSystem
+  // 'baseline'") and nothing read it, so every character reached play unable to defend itself without
+  // spending build. ⚠️ DERIVED, NOT COPIED into an abilities pack: two hand-synced copies of one kit is
+  // the SNG-344 crosswalk drift before it happens — those braid tables disagreed within ten minutes.
+  // ⛔ AUTHORED CONTENT WINS: an id already in the pack is never overwritten by its projection.
+  if (martialRule) {
+    const derived = martialAbilityRecords(martialRule);
+    let merged = 0;
+    for (const [id, rec] of Object.entries(derived)) if (!abilities[id]) { abilities[id] = rec; merged++; }
+    console.log(`[rules] martial: ${merged}/${Object.keys(derived).length} baseline+form abilities merged into the catalog`);
+  }
+
   const content = { craftMechanics, spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.

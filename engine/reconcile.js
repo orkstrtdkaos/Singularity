@@ -13,6 +13,7 @@
 // backfill.js remains the XP/bonds/practice credit pass (extend, don't replace) —
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
+import { grantMartialKit } from "./martial.js";
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates } from "./codex.js";
 import { dedupeQuests, normalizeProse } from "./quests.js";
 import { dedupeInventory } from "./inventory.js";
@@ -841,6 +842,38 @@ export const CHARACTER_STEPS = [
       if (!hit.length) return {};
       console.log(`[reconcile] sng-343: flagged ${hit.length} quest string(s) severed by the old store-time cap — ${hit.join(", ")}`);
       return { notes: [`Some quest text was cut short by a storage fault and has been flagged — the telling will fill it back in.`] };
+    }
+  },
+  {
+    version: 27, id: "grant-baseline-defense", playerFacing: true,
+    // SNG-345 — martial_paths' OWN engineNote asked for this step by name: "SNG-022 reconciliation grants
+    // them to existing characters on login (your Ent gets its branch-club next login)." The content said
+    // so on 2026-07-07 and nothing read it, which is why Splarf reached level 1 with no way to defend
+    // itself that did not come out of a build.
+    //
+    // ⚠️ THE FLOOR IS NOT A REWARD, so it is granted unconditionally rather than offered: Aevi's line
+    // is "not a class, a FLOOR — the universal animal competence of protecting yourself." Offering it would
+    // make it a choice, and a floor you can decline is not a floor.
+    apply: (c, ctx) => {
+      // ⛔ READ FROM WHAT THE CALLER ACTUALLY PASSES. I wrote `ctx.rules.martialPaths` first; the character
+      // ctx is `{ content, profile }` and carries no `rules`, so this step would have run on every login,
+      // found undefined, returned silently, and gated green — the PromisedButUnread family, reintroduced
+      // inside the commit closing it. Both paths accepted so a caller that DOES pass `rules` also works,
+      // and the miss is now LOUD rather than a silent no-op.
+      const martial = ctx?.rules?.martialPaths || ctx?.content?.rules?.martialPaths;
+      // Warn only when a REAL ctx was passed and the rules are missing from it. Tests deliberately call
+      // reconcile(x, "character", {}) with no ctx at all; warning there fires nine times a suite and trains
+      // everyone to scroll past the one that matters.
+      if (!martial) {
+        if (ctx?.content || ctx?.rules) console.warn("[reconcile] sng-345: ctx carries no martialPaths — baseline kit NOT granted");
+        return {};
+      }
+      const { granted, kit, why } = grantMartialKit(c, martial);
+      if (!granted.length) return {};
+      console.log(`[reconcile] sng-345: granted ${granted.length} baseline ability(ies)${kit ? ` + the ${kit} form kit` : ""} — ${why}: ${granted.join(", ")}`);
+      return { notes: [kit
+        ? `You have always known how to defend yourself — and your form has its own answers. (${granted.length} abilities, free.)`
+        : `You have always known how to defend yourself: brace, strike, break away, call for help. (${granted.length} abilities, free.)`] };
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

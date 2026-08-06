@@ -60,8 +60,13 @@ export function breadthUsed(character) {
   // growth that must NOT count as chosen breadth (progression.js docstring + skill_capacity.json note).
   // The flag was written and never read, so a ≥3-anchor tradition (harmonic/radiant_folk 5, churnfolk/
   // mason 3) blew past the level-1 cap of 2 → atCapacity → could learn NOTHING new until level 5.
+  // ⛔ SNG-345: `baseline` JOINS `native` HERE, AND OMITTING IT WOULD HAVE BEEN CATASTROPHIC. The martial
+  // floor grants 4 free abilities; the level-1 breadth cap is 2. Counted as chosen breadth, EVERY NEW
+  // CHARACTER WOULD BE BORN AT DOUBLE CAPACITY — able to learn nothing at all until level 5 — which is the
+  // exact failure the paragraph above describes for `native`, one flag later. A floor that consumes the
+  // build it exists to underwrite is worse than no floor at all.
   const custom = new Set(Object.keys(character.customAbilities || {}));
-  return (character.abilities || []).filter(a => !custom.has(a.abilityId) && !a.native).length;
+  return (character.abilities || []).filter(a => !custom.has(a.abilityId) && !a.native && !a.baseline).length;
 }
 
 export function breadthCap(character, skillCapacity) {

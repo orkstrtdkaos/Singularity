@@ -10710,6 +10710,79 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-345 — THE MARTIAL FLOOR. Erik: "every character can defend itself, no build required." The content
+  // said so on 2026-07-07, carried an engineNote naming the implementation, and NOTHING READ IT until the
+  // SNG-342 sweep listed it as a real gap. Splarf reached level 1 with no defense that didn't cost a build.
+  {
+    const { loadContentHeadless: lch345 } = await import("./headless_content.mjs");
+    const C345 = await lch345();
+    const { grantMartialKit, baselineAbilityIds, isBaselineAbility, formKitFor, martialAbilityRecords } =
+      await import("../engine/martial.js");
+    const { breadthUsed, atCapacity } = await import("../engine/skilltree.js");
+    const martial = C345.rules?.martialPaths;
+
+    check("345: martial_paths REACHES the rules — the file is loaded, not merely registered", !!martial);
+    check("345: …and arrives non-empty — 4 baseline abilities and at least one form kit",
+      (martial?.baselineDefense?.kit || []).length === 4 && (martial?.formKits?.kits || []).length > 0);
+
+    // ⛔ GRANTED IS NOT USABLE. The recurring failure in this codebase is content that exists and
+    // silently does not (SNG-229 bestiary, SNG-226 discoveries): an ability id on the sheet that resolves
+    // to no record renders as a blank row the player cannot choose. So the CATALOG is checked, not the grant.
+    const missing = baselineAbilityIds(martial).filter(id => !C345.abilities?.[id]);
+    check("345: every baseline ability RESOLVES IN THE CATALOG — granted is not the same as usable",
+      missing.length === 0, `${missing.join(", ")} granted but absent from CONTENT.abilities`);
+    const recs = Object.values(martialAbilityRecords(martial));
+    check("345: …and each is BORN WHOLE — name, description, notFor, zero cost, level 1 (SNG-250 §3)",
+      recs.every(r => r.name && r.description && r.notFor && r.energyCost === 0 && r.levelReq === 1));
+
+    // The floor is granted, idempotent, and does not re-grant on a second login.
+    const fresh = { abilities: [], level: 1 };
+    const g1 = grantMartialKit(fresh, martial);
+    const g2 = grantMartialKit(fresh, martial);
+    check("345: a character with nothing is granted the whole floor", g1.granted.length === 4);
+    check("345: …and a second pass grants NOTHING — reconcile runs on every login", g2.granted.length === 0);
+
+    // ⛔ THE CAP BUG THAT WOULD HAVE BROKEN EVERY NEW CHARACTER. Level-1 breadth cap is 2; the floor is
+    // 4. If the free kit counted as chosen breadth, every character would be born at DOUBLE capacity and
+    // able to learn nothing until level 5 — the same failure `native` already caused once.
+    check("345: the free kit does NOT consume build capacity", breadthUsed(fresh) === 0);
+    check("345: …so a level-1 character holding the whole floor can still learn",
+      atCapacity({ ...fresh, level: 1 }, C345.skillCapacity) === false);
+    check("345: a baseline ability is recognised as baseline, and an authored one is not",
+      isBaselineAbility(baselineAbilityIds(martial)[0], martial) === true
+      && isBaselineAbility("prism_sight", martial) === false);
+
+    // ⚠️ FORM PROSE IS NOT AN ENUM. character.form is free text, so a form kit is resolved by an
+    // UNAMBIGUOUS alias match — and my first version used `includes`, where the alias "ent" matched
+    // "gentle", "present", "different", handing a bark-and-timber kit to any human described politely.
+    // That is SNG-331's `ties` bug (matching `location_affinities`) reintroduced one file over.
+    check("345: an explicit character.formKit wins over prose",
+      formKitFor({ formKit: "ent", form: "a quiet human" }, martial).kit?.form === "ent");
+    check("345: form prose matches on WORD BOUNDARIES, never substrings",
+      formKitFor({ form: "a gentle, patient, different sort of present company" }, martial).kit === null);
+    check("345: …and a real Ent still matches",
+      formKitFor({ form: "a towering treefolk of bark and heartwood" }, martial).kit?.form === "ent");
+    // ⛔ AND THE STEP RUNS WITH THE CTX THE APP ACTUALLY PASSES. I wrote `ctx.rules.martialPaths` first;
+    // app.js passes `{ content: CONTENT, profile }` and carries no `rules`, so the step would have run on
+    // every login, found undefined, returned silently, and gated green — PromisedButUnread, in the commit
+    // closing PromisedButUnread. Testing the function in isolation would NOT have caught it; only running
+    // the step through the caller's real ctx shape does.
+    {
+      const { reconcile } = await import("../engine/reconcile.js");
+      const old = { id: "pre-345", abilities: [], level: 1, reconcileVersion: 26 };
+      reconcile(old, "character", { content: C345, profile: { tendencies: {}, aptitudes: [] } });
+      const ids = new Set((old.abilities || []).map(a => a.abilityId));
+      const owed = baselineAbilityIds(martial).filter(id => !ids.has(id));
+      check("345: an EXISTING save gains the floor on login, through the ctx app.js really passes",
+        owed.length === 0, `still missing after reconcile: ${owed.join(", ")}`);
+      check("345: …and the granted records are flagged baseline, so they never eat build capacity",
+        (old.abilities || []).filter(a => a.baseline).length === 4);
+    }
+
+    const entKit = grantMartialKit({ abilities: [], form: "a towering treefolk of bark and heartwood" }, martial);
+    check("345: an Ent is granted the floor AND its form kit — Erik's branch-club", entKit.granted.length > 4 && entKit.kit === "ent");
+  }
+
   // SNG-342 — THE GATE THAT WOULD HAVE CAUGHT MY OWN REGRESSION.
   //
   // My SNG-331 resolver fix (match the exact filename, so `loadRule("ties")` stops matching

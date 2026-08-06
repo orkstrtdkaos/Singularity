@@ -1,6 +1,7 @@
 // app.js — Singularity v0.1 shell: character creation, the play loop, settings.
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
+import { grantMartialKit } from "./engine/martial.js";
 import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
@@ -87,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.55";
+const APP_VERSION = "1.9.56";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3691,6 +3692,9 @@ function renderCreate() {
     ensureCharacterStyle(character); // SNG-BATCH-7: this character earns its OWN play-style
     character.grantsVersion = 1; // born after banked growth — no retro grant owed
     applyNativeGrants(character, CONTENT.rules); // SNG-101b: granted their primary tradition's basics by right of being what they are
+    // SNG-345: the martial FLOOR, granted at creation so nobody plays a single beat helpless. Reconcile
+    // step 27 covers characters who already exist; this covers the ones being born.
+    { const m = grantMartialKit(character, CONTENT.rules.martialPaths); if (m.granted.length) console.log(`[chargen] baseline kit: ${m.granted.join(", ")}${m.kit ? ` (+${m.kit} form kit)` : ""} — ${m.why}`); }
     seedInnateSubstrate(character, originRecord(character.origin), fullCatalog(), backgroundById(character.background) || {}); // SNG-131 + SNG-261 §B: innate ACCESS from BOTH the people you're from (origin) and what happened to you (background — a precursor marking is the second kind)
     { const g = backgroundById(character.background)?.grantsAptitudes; if (g?.length) grantAptitudes(character, g, CONTENT.rules.playerAptitudes, CONTENT.rules); } // SNG-113: lineage aptitude(s)
     seedStandingAtCreation(character, { traditionIndex: CONTENT.traditionIndex, rules: CONTENT.rules, day: 1 }); // BATCH-12 §3b: being Rootkin-born should mean the Rootkin have heard of you

@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 24,
+  "xp": 26,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -48,7 +48,7 @@
   "maxHealth": 35,
   "health": 32,
   "maxEnergy": 100,
-  "energy": 28,
+  "energy": 23,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -115,38 +115,26 @@
         "player": "Use Beastfriend to try to read what the thing in the dark is—its mood, intent, what it hunts",
         "summary": "Splarf reaches for Beastfriend to read the dark's movement and finds only an awareness that does not answer to the craft—something aware but not animal. Cevaine confirms: this is purpose, not hunger.",
         "narration": "You step forward into the clearing's edge, reaching for the practice that has steadied you since childhood—that soft, patient opening Hoss taught you, the one that lets you feel what moves in a living thing's chest. You breathe slow. You wait for the resonance that comes when you are truly still.\n\nNothing answers.\n\nBoo's absence from your shoulder suddenly feels deliberate. The cat-shape has withdrawn into the deadfall, a thin ribbon of shadow pooling between two stones, and its silence carries a message you understand without words: this is not a beast. Not the kind your practice reaches. Whatever moves in the forest is aware in a way that does not wear fur or breath—it has noticed you noticing it, and the feeling of being read, in turn, lands like cold water down the spine. The dark at the forest's edge does not dim. It deepens. Whatever looks out from it is patient. It has all evening.\n\nCevaine's voice comes low and careful, their geometric precision still trained on the trees. \"Your practice finds nothing because there is nothing for it to find. A beast has wants, hungers, a shape the discipline can read. That—\" they indicate the dark with the smallest movement of their chin, \"—has purpose. It is not the same thing.\""
+      },
+      {
+        "player": "Call out to it plainly in the old language—if it is purpose-shaped and aware, it understands speech. Ask what it wants.",
+        "summary": "Splarf called out to the purpose-shaped thing in the dark in the old tongue, but it would not answer—only drew nearer, watching, waiting with the patience of something sent.",
+        "narration": "You draw breath and speak into the dark—not loudly, but clearly, in the old tongue Hoss taught you, the language that predates the Transition and carries weight in thin places. Your voice is steady.\n\n\"What do you want?\" you ask it. Simple. Direct. The words hang in the clearing's copper-tainted air.\n\nFor a moment—long enough that your heart counts the seconds—nothing. The forest edge does not move. The humming from the sealed veil behind you does not change. Even Boo's absence feels like it is holding its breath.\n\nThen the darkness shivers. Not a physical thing—a shimmer like heat-haze, but wrong, too deliberate. The forest's absolute black pulls back from the clearing's edge incrementally, as if the tree-line itself is retreating. The movement stops. The dark settles again, closer than before, but still holding.\n\nCevaine's hand touches your shoulder—precise, geometric, a point of contact that reads as grounding rather than comfort. \"It heard,\" they say quietly. \"It does not answer.\"\n\nThe thing in the dark has pulled nearer to the cleared space, to you. It is aware. It heard your words. But whatever purpose shapes it, whatever delivery it was sent to make, it does not meet you with language. The silence that follows feels not like refusal but like waiting—as if something on the far side of that dark still turns over what you asked, and the answer, when it comes, will not be in any tongue you know."
       }
     ],
     "lastTurn": {
-      "narration": "You step forward into the clearing's edge, reaching for the practice that has steadied you since childhood—that soft, patient opening Hoss taught you, the one that lets you feel what moves in a living thing's chest. You breathe slow. You wait for the resonance that comes when you are truly still.\n\nNothing answers.\n\nBoo's absence from your shoulder suddenly feels deliberate. The cat-shape has withdrawn into the deadfall, a thin ribbon of shadow pooling between two stones, and its silence carries a message you understand without words: this is not a beast. Not the kind your practice reaches. Whatever moves in the forest is aware in a way that does not wear fur or breath—it has noticed you noticing it, and the feeling of being read, in turn, lands like cold water down the spine. The dark at the forest's edge does not dim. It deepens. Whatever looks out from it is patient. It has all evening.\n\nCevaine's voice comes low and careful, their geometric precision still trained on the trees. \"Your practice finds nothing because there is nothing for it to find. A beast has wants, hungers, a shape the discipline can read. That—\" they indicate the dark with the smallest movement of their chin, \"—has purpose. It is not the same thing.\"",
-      "sceneSummary": "Splarf reaches for Beastfriend to read the dark's movement and finds only an awareness that does not answer to the craft—something aware but not animal. Cevaine confirms: this is purpose, not hunger.",
+      "narration": "You draw breath and speak into the dark—not loudly, but clearly, in the old tongue Hoss taught you, the language that predates the Transition and carries weight in thin places. Your voice is steady.\n\n\"What do you want?\" you ask it. Simple. Direct. The words hang in the clearing's copper-tainted air.\n\nFor a moment—long enough that your heart counts the seconds—nothing. The forest edge does not move. The humming from the sealed veil behind you does not change. Even Boo's absence feels like it is holding its breath.\n\nThen the darkness shivers. Not a physical thing—a shimmer like heat-haze, but wrong, too deliberate. The forest's absolute black pulls back from the clearing's edge incrementally, as if the tree-line itself is retreating. The movement stops. The dark settles again, closer than before, but still holding.\n\nCevaine's hand touches your shoulder—precise, geometric, a point of contact that reads as grounding rather than comfort. \"It heard,\" they say quietly. \"It does not answer.\"\n\nThe thing in the dark has pulled nearer to the cleared space, to you. It is aware. It heard your words. But whatever purpose shapes it, whatever delivery it was sent to make, it does not meet you with language. The silence that follows feels not like refusal but like waiting—as if something on the far side of that dark still turns over what you asked, and the answer, when it comes, will not be in any tongue you know.",
+      "sceneSummary": "Splarf called out to the purpose-shaped thing in the dark in the old tongue, but it would not answer—only drew nearer, watching, waiting with the patience of something sent.",
       "choices": [
         {
-          "label": "Step directly into the tree-line with Boo and let it lead—whatever it is, the dark is its home; you'll follow where it's safest.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "sneak",
-            "careful",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Call out to it plainly in the old language—if it is purpose-shaped and aware, it understands speech. Ask what it wants.",
+          "label": "Step closer to the tree-line with Boo. Match its patience and see what it does when you enter its territory.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 20,
           "intentTags": [
-            "negotiate",
-            "risky"
+            "risky",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -155,9 +143,9 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Cevaine to read it geometrically again—if it moves by choice, that choice must leave some trace. What pattern is it following?",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Ask Cevaine to map the thing's position and movement with geometric precision—if it will not speak, perhaps its pattern will reveal what it wants.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": 18,
           "intentTags": [
@@ -171,15 +159,30 @@
           "emergenceId": null
         },
         {
-          "label": "Step back from the tree-line. Hold your ground at the veil's edge and wait—let it come to you if it means to, on ground you can see.",
+          "label": "Step back to the veil's edge and try again to bridge it—if the thing came from the other side, perhaps the veil itself knows what it wants, or who sent it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 25,
+          "intentTags": [
+            "risky",
+            "craft"
+          ],
+          "abilityId": "numen_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wait here in the clearing—you, Cevaine, and Boo—and let the thing approach if it will. Some silences need to be sat with until they break on their own.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "defend",
             "careful",
-            "endure"
+            "study"
           ],
           "abilityId": "the_unbroken_practice",
           "energyCost": 1,
@@ -191,7 +194,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -202,39 +205,38 @@
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": {
-        "thing": "Cevaine's admission that geometric precision cannot solve this—and their willingness to stand at the edge of their own knowing",
-        "from": "Splarf's practice of holding stillness and form, which opened a space for Cevaine to move beyond the Lattice's need to solve everything"
-      },
+      "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Thinning's waygate clearing, evening deepening to full dusk. The sealed veil hums low at the forest's far edge—a shimmer-line between here and the thin place, absolutely closed. Deadfall scattered underfoot. The tree-line ahead is absolute darkness—not the darkness of night, but of something that drinks light. The air carries copper-taint and turned earth. A line of distant Marchers holds a breach somewhere beyond the ridge.",
+        "setting": "The Thinning's waygate clearing at full dusk—evening has darkened to the edge of true night. The sealed veil hums at the forest's far edge, a shimmer-line that refuses. The absolute darkness of the Disputed Zone woods has pulled slightly closer to the cleared space—the tree-line retreated a few paces, then held. Deadfall scattered underfoot; the copper-taint of turned earth thick in the air. A distant Marcher line still holds the breach to the south, their torches small and far.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Standing sentinel at the veil's sealed face, geometric precision still trained on the dark forest-edge, their injured shoulder held despite visible cost. Still waiting to understand what Splarf means to do."
+            "state": "Standing beside Splarf, hand still resting on their shoulder—geometric precision tuned not to the dark but to the character's steadiness. Eyes tracking the forest edge. Processing a question that has no seam to close."
           }
         ],
         "objects": [
           "The sealed veil—shimmer and hum at the forest's deep edge",
           "Deadfall and stone underfoot",
-          "The absolute dark of the Disputed Zone wood beyond the clearing"
+          "The dark of the Disputed Zone wood—now slightly closer, having retreated and held"
         ],
         "threads": [
-          "What does not follow geometric pattern—what moves by choice in the dark, and what does it want?",
-          "Boo's withdrawal into shadow—a signal that this is not a beast",
-          "Cevaine's new willingness to walk toward what cannot be solved",
-          "The sealed veil's continued humming—still closed, still refusing"
+          "The thing in the dark is aware and listening—but will not answer in language",
+          "The veil remains sealed, refusing all crossing",
+          "The purpose-shaped presence is patient and waiting—for what?",
+          "Boo's withdrawal into shadow—confirming this is not a beast, not hunger"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
+          "note": "Heard Splarf call out to the dark thing in the old tongue. Confirmed it heard but did not answer. Now standing at Splarf's shoulder, hand grounding, admitting that this is a problem geometric precision cannot solve. Waiting to see what Splarf will choose next.",
           "learned": [
-            "Geometric precision cannot find a pattern in a being that moves by will rather than law"
+            "The thing in the dark heard the old language but will not speak it back",
+            "Some problems have no seam to close—they only have waiting"
           ],
-          "note": "Confirmed to Splarf that what moves in the dark is purpose-shaped, not animal—a thing that chooses its path rather than following the geometry of natural motion."
+          "statusNote": "Active, injured shoulder, standing sentinel at the clearing's edge—learning how to think about things that move by choice rather than pattern"
         }
       ],
       "factUpdates": [],
@@ -245,10 +247,10 @@
           "topic": "the-figure-in-the-thin-place",
           "label": "The Figure in the Thin Place",
           "kind": "mystery",
-          "fact": "There may be another awareness in or near the dark—present in the Disputed Zone forest, purpose-shaped like the figure that came through the veil, aware of being noticed. It is patient. It is waiting.",
+          "fact": "The thing in the dark heard Splarf call out in the old tongue and understood the words—but it will not answer. It pulled closer to the clearing instead, watching, waiting with purpose-shaped patience. It does not meet language with language.",
           "links": [
             "what-wakes-beneath",
-            "the-water-crisis",
+            "the-thinning",
             "cevaine"
           ]
         }
@@ -260,38 +262,39 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "evening deepening as the conversation extends"
+        "why": "the evening deepens; dusk is settling toward full night"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
       "imagePrompt": null,
-      "gambitOps": null,
+      "sceneEnded": false,
       "gambitApt": false,
-      "sceneEnded": false
+      "gambitOps": null,
+      "offerIntent": null
     },
     "sceneState": {
-      "setting": "The Thinning's waygate clearing, evening deepening to full dusk. The sealed veil hums low at the forest's far edge—a shimmer-line between here and the thin place, absolutely closed. Deadfall scattered underfoot. The tree-line ahead is absolute darkness—not the darkness of night, but of something that drinks light. The air carries copper-taint and turned earth. A line of distant Marchers holds a…",
+      "setting": "The Thinning's waygate clearing at full dusk—evening has darkened to the edge of true night. The sealed veil hums at the forest's far edge, a shimmer-line that refuses. The absolute darkness of the Disputed Zone woods has pulled slightly closer to the cleared space—the tree-line retreated a few paces, then held. Deadfall scattered underfoot; the copper-taint of turned earth thick in the air. A…",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Standing sentinel at the veil's sealed face, geometric precision still trained on the dark forest-edge, their injured sh"
+          "state": "Standing beside Splarf, hand still resting on their shoulder—geometric precision tuned not to the dark but to the charac"
         }
       ],
       "objects": [
         "The sealed veil—shimmer and hum at the forest's deep edge",
         "Deadfall and stone underfoot",
-        "The absolute dark of the Disputed Zone wood beyond the clearing"
+        "The dark of the Disputed Zone wood—now slightly closer, having retreated and hel"
       ],
       "threads": [
-        "What does not follow geometric pattern—what moves by choice in the dark, and what does it want?",
-        "Boo's withdrawal into shadow—a signal that this is not a beast",
-        "Cevaine's new willingness to walk toward what cannot be solved",
-        "The sealed veil's continued humming—still closed, still refusing"
+        "The thing in the dark is aware and listening—but will not answer in language",
+        "The veil remains sealed, refusing all crossing",
+        "The purpose-shaped presence is patient and waiting—for what?",
+        "Boo's withdrawal into shadow—confirming this is not a beast, not hunger"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
@@ -446,17 +449,18 @@
         "[d1] Splarf asked Cevaine plainly what the Lattice intends for the sealed breach. The order-reader admitted uncertainty — a fracture in their geometric confidence. They are waiting to see what Splarf chooses to do. Standing watch at the tree-line now, accepting the weight of not-knowing.",
         "[d1] Yielded to the character's invitation to investigate the dark. Admitting uncertainty has opened something — they are no longer looking only at the veil, but at the character who stood against precision itself.",
         "[d1] Cevaine applied geometric precision to read the moving thing and found no resolving pattern—it moves by choice, not logic. This is the moment geometric thinking reaches its limit. They are now waiting to understand a thing that does not solve.",
-        "[d1] Confirmed to Splarf that what moves in the dark is purpose-shaped, not animal—a thing that chooses its path rather than following the geometry of natural motion."
+        "[d1] Confirmed to Splarf that what moves in the dark is purpose-shaped, not animal—a thing that chooses its path rather than following the geometry of natural motion.",
+        "[d1] Heard Splarf call out to the dark thing in the old tongue. Confirmed it heard but did not answer. Now standing at Splarf's shoulder, hand grounding, admitting that this is a problem geometric precision cannot solve. Waiting to see what Splarf will choose next."
       ],
       "knownFacts": [
-        "Cevaine does not know what comes next — an unprecedented admission from a Lattice-trained order-reader.",
-        "The Lattice's response to the breach is not automatic; it depends on what the character who held the practice decides.",
         "Cevaine does not return to the veil's study when asked to walk into a problem without a seam",
         "The geometric mind can choose to move toward what it cannot solve",
         "There is something in the dark that moves without predictable geometric logic",
         "A thing that moves by choice rather than following the geometry of natural motion",
         "Geometric precision cannot predict the actions of something that chooses its own path",
-        "Geometric precision cannot find a pattern in a being that moves by will rather than law"
+        "Geometric precision cannot find a pattern in a being that moves by will rather than law",
+        "The thing in the dark heard the old language but will not speak it back",
+        "Some problems have no seam to close—they only have waiting"
       ],
       "skillsObserved": [
         "geometric precision of movement",
@@ -468,7 +472,7 @@
       "status": "active",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "statusNote": "Active, injured shoulder, walking into the dark with Splarf and Boo — still learning how to think.",
+      "statusNote": "Active, injured shoulder, standing sentinel at the clearing's edge—learning how to think about things that move by choice rather than pattern",
       "domains": {
         "primary": "lattice"
       },
@@ -573,15 +577,69 @@
         "worldDay": 36,
         "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
         "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 37,
+        "text": "The Ender Who Forgot Why and The Penitent Maw met — and neither could break the other.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 37,
+        "text": "A legend has fallen: The One Who Called the First Moot has killed Cinder Vael, the Wright Who Would Not Stop. The world is one great figure lighter, and The One Who Called the First Moot the more feared for it.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 37,
+        "text": "Neth, Who Has Buried More Than She Has Known checked The Kind Liar — for now, The Kind Liar's designs are held.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 37,
+        "text": "The Raw Chord checked The Weeping Archive — for now, The Weeping Archive's designs are held.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 37,
+        "text": "Sister Alder, the Ward That Does Not Break learning a faster road",
+        "tier": "murmur"
+      },
+      {
+        "day": 1,
+        "worldDay": 37,
+        "text": "Halvex Coil, the Rewriter patching a district into silence",
+        "tier": "murmur"
+      },
+      {
+        "day": 1,
+        "worldDay": 37,
+        "text": "Overseer Grael of the Edge District noticing a name that should not be there",
+        "tier": "murmur"
+      },
+      {
+        "day": 1,
+        "worldDay": 37,
+        "text": "Someone new is being spoken of — they of the the_ceaseless; watched Cinder Vael, the Wright Who Would Not Stop called out, and outlived them.",
+        "tier": "murmur"
+      },
+      {
+        "day": 1,
+        "worldDay": 37,
+        "text": "Cevaine of the Seventh Measure: Cevaine has begun annotating a secondary margin of the Seventh Measure's reading-texts — not with corrections, but with questions about what a perfectly centered stillness would even look like written down, the first visible crack in his formal method.",
+        "tier": "ambient"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 887,
-    "lastSharedReadAt": "2026-08-05T23:38:26.825Z",
-    "lastTickWorldDay": 36,
-    "lastCanonWorldDay": 36,
+    "lastGenCount": 889,
+    "lastSharedReadAt": "2026-08-06T01:56:54.775Z",
+    "lastTickWorldDay": 37,
+    "lastCanonWorldDay": 37,
     "pressureQueue": [],
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Cevaine admitting uncertainty — that the Lattice-Cities' way of solving cannot solve this kind of breach.",
@@ -603,7 +661,2322 @@
         "thing": "Cevaine's admission that geometric precision cannot solve this—and their willingness to stand at the edge of their own knowing",
         "from": "Splarf's practice of holding stillness and form, which opened a space for Cevaine to move beyond the Lattice's need to solve everything"
       }
-    ]
+    ],
+    "offscreenCursor": 1,
+    "retrievalWanted": [],
+    "arcRetrievals": [],
+    "careIdle": {
+      "sister_alder": {
+        "arc_what_wakes_beneath": 1,
+        "arc_the_poles_pull": 1
+      },
+      "halvex_coil": {
+        "arc_manifestation_storm": 1
+      },
+      "overseer_grael": {
+        "arc_the_poles_pull": 1
+      },
+      "maren_ossitide": {
+        "arc_the_poles_pull": 1
+      },
+      "the_hollow_king": {
+        "arc_what_wakes_beneath": 1
+      },
+      "cinder_vael": {
+        "arc_what_wakes_beneath": 1,
+        "arc_block_bleed": 1
+      },
+      "the_last_walker": {
+        "arc_the_poles_pull": 1,
+        "arc_manifestation_storm": 1
+      },
+      "neth_the_stayed": {
+        "arc_green_schism": 1,
+        "arc_the_poles_pull": 1
+      },
+      "morvane_the_harvest": {
+        "arc_what_wakes_beneath": 1
+      },
+      "halcyon_the_finished": {
+        "arc_manifestation_storm": 0
+      },
+      "vessa_truename": {
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "thornmother_sealed": {},
+      "the_last_choirmistress": {
+        "arc_manifestation_storm": 1
+      },
+      "the_unbodied_choir_master": {},
+      "sunwrack_valen": {},
+      "ember_who_banks_the_fire": {
+        "arc_manifestation_storm": 1
+      },
+      "the_deep_lantern": {
+        "arc_manifestation_storm": 1
+      },
+      "the_starless": {
+        "arc_manifestation_storm": 1
+      },
+      "the_weeping_archive": {
+        "arc_block_bleed": 1
+      },
+      "the_raw_chord": {},
+      "the_cogitant_ninefold": {
+        "arc_block_bleed": 1
+      },
+      "harrow_the_hollowing": {
+        "arc_manifestation_storm": 1
+      },
+      "the_last_mercy": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_scouring_hand": {
+        "arc_the_poles_pull": 1
+      },
+      "the_edge_that_holds": {
+        "arc_block_bleed": 1,
+        "arc_green_schism": 1
+      },
+      "the_ender_who_forgot": {
+        "arc_manifestation_storm": 1
+      },
+      "keeper_the_unsaid": {
+        "arc_block_bleed": 1
+      },
+      "the_lidded_calm": {
+        "arc_what_wakes_beneath": 1,
+        "arc_green_schism": 1
+      },
+      "the_unbending_witness": {
+        "arc_block_bleed": 1,
+        "arc_manifestation_storm": 1
+      },
+      "the_last_seraph": {
+        "arc_the_poles_pull": 1
+      },
+      "the_burning_certainty": {},
+      "the_clockmother": {
+        "arc_manifestation_storm": 1,
+        "arc_block_bleed": 1
+      },
+      "the_hour_hoarder": {
+        "arc_manifestation_storm": 1
+      },
+      "the_hundred_hands": {
+        "arc_what_wakes_beneath": 1,
+        "arc_green_schism": 1
+      },
+      "the_appetite": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_ninefold_ascendant": {
+        "arc_manifestation_storm": 1
+      },
+      "the_one_who_stayed_embodied": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_glad_dissolution": {
+        "arc_manifestation_storm": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_still_lattice": {
+        "arc_manifestation_storm": 1
+      },
+      "the_final_argument": {
+        "arc_block_bleed": 1
+      },
+      "the_kind_liar": {
+        "arc_manifestation_storm": 1
+      },
+      "the_cornerstone": {
+        "arc_manifestation_storm": 1,
+        "arc_green_schism": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_open_figure": {
+        "arc_block_bleed": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_farwalker": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_gate_that_gapes": {
+        "arc_what_wakes_beneath": 1
+      },
+      "first_flame_ateph": {
+        "arc_manifestation_storm": 1
+      },
+      "the_first_moot": {
+        "arc_the_poles_pull": 1
+      },
+      "the_oathbreaker_sel": {
+        "arc_the_poles_pull": 1
+      },
+      "the_nine_year_master": {},
+      "prodigal_gearheart": {
+        "arc_manifestation_storm": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_edge_seeker": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_lost_chord_seeker": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_undefeated": {
+        "arc_the_poles_pull": 0
+      },
+      "the_doubting_lattice": {
+        "arc_the_poles_pull": 1
+      },
+      "the_apostate_choir": {
+        "arc_manifestation_storm": 1
+      },
+      "the_two_who_are_one": {
+        "arc_manifestation_storm": 1,
+        "arc_block_bleed": 1
+      },
+      "iselde_the_wanderer": {
+        "arc_green_schism": 1,
+        "arc_block_bleed": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_unravelled_mind": {
+        "arc_block_bleed": 1
+      },
+      "the_hundred_faces": {},
+      "the_long_grudge": {},
+      "the_archive_that_walks": {
+        "arc_block_bleed": 1,
+        "arc_manifestation_storm": 1
+      },
+      "the_bridgewright": {
+        "arc_manifestation_storm": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_war_ender": {
+        "arc_the_poles_pull": 0
+      },
+      "the_penitent_maw": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_pattern_prophet": {
+        "arc_what_wakes_beneath": 1,
+        "arc_block_bleed": 1
+      },
+      "the_unbound_churn": {
+        "arc_the_poles_pull": 1
+      }
+    },
+    "careHeld": {
+      "sister_alder": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 1
+      },
+      "halvex_coil": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1,
+        "arc_block_bleed": 1
+      },
+      "overseer_grael": {
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "maren_ossitide": {
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_hollow_king": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
+      },
+      "cinder_vael": {
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 0,
+        "arc_manifestation_storm": 0
+      },
+      "the_last_walker": {
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 0,
+        "arc_green_schism": 1
+      },
+      "neth_the_stayed": {
+        "arc_green_schism": 0,
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "morvane_the_harvest": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
+      },
+      "halcyon_the_finished": {
+        "arc_manifestation_storm": 1
+      },
+      "vessa_truename": {
+        "arc_the_poles_pull": 1,
+        "arc_block_bleed": 0
+      },
+      "thornmother_sealed": {
+        "arc_green_schism": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_last_choirmistress": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_unbodied_choir_master": {
+        "arc_what_wakes_beneath": 1,
+        "arc_manifestation_storm": 1
+      },
+      "sunwrack_valen": {
+        "arc_the_poles_pull": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "ember_who_banks_the_fire": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_deep_lantern": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_starless": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1,
+        "arc_green_schism": 1
+      },
+      "the_weeping_archive": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 0
+      },
+      "the_raw_chord": {
+        "arc_the_poles_pull": 1,
+        "arc_manifestation_storm": 1
+      },
+      "the_cogitant_ninefold": {
+        "arc_block_bleed": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "harrow_the_hollowing": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_last_mercy": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_scouring_hand": {
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_edge_that_holds": {
+        "arc_block_bleed": 0,
+        "arc_green_schism": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_ender_who_forgot": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "keeper_the_unsaid": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_lidded_calm": {
+        "arc_what_wakes_beneath": 0,
+        "arc_green_schism": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_unbending_witness": {
+        "arc_block_bleed": 0,
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_last_seraph": {
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_burning_certainty": {
+        "arc_what_wakes_beneath": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_clockmother": {
+        "arc_manifestation_storm": 0,
+        "arc_block_bleed": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_hour_hoarder": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_hundred_hands": {
+        "arc_what_wakes_beneath": 0,
+        "arc_green_schism": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_appetite": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_ninefold_ascendant": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_one_who_stayed_embodied": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_glad_dissolution": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "the_still_lattice": {
+        "arc_manifestation_storm": 0,
+        "arc_block_bleed": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_final_argument": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_kind_liar": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 0
+      },
+      "the_cornerstone": {
+        "arc_manifestation_storm": 0,
+        "arc_green_schism": 0,
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 1
+      },
+      "the_open_figure": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_farwalker": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_gate_that_gapes": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "first_flame_ateph": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_first_moot": {
+        "arc_the_poles_pull": 0,
+        "arc_green_schism": 1
+      },
+      "the_oathbreaker_sel": {
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_nine_year_master": {
+        "arc_manifestation_storm": 1
+      },
+      "prodigal_gearheart": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 1
+      },
+      "the_edge_seeker": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_lost_chord_seeker": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_undefeated": {
+        "arc_the_poles_pull": 1
+      },
+      "the_doubting_lattice": {
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "the_apostate_choir": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_two_who_are_one": {
+        "arc_manifestation_storm": 0,
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
+      "iselde_the_wanderer": {
+        "arc_green_schism": 0,
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_unravelled_mind": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_hundred_faces": {
+        "arc_manifestation_storm": 1
+      },
+      "the_long_grudge": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_archive_that_walks": {
+        "arc_block_bleed": 0,
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_bridgewright": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "the_war_ender": {
+        "arc_the_poles_pull": 1
+      },
+      "the_penitent_maw": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_pattern_prophet": {
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_unbound_churn": {
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      }
+    },
+    "figureTenure": {
+      "the_farwalker": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_last_mercy": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_unbodied_choir_master": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "guardIntercept",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "cinder_vael": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "strikeSurvived",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "neth_the_stayed": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 6,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          },
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_last_choirmistress": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_burning_certainty": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "sunwrack_valen": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_hollow_king": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_ender_who_forgot": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "vessa_truename": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "guardIntercept",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_deep_lantern": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "strikeSurvived",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_starless": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 6,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          },
+          {
+            "by": "guardIntercept",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "thornmother_sealed": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "strikeSurvived",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_first_moot": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_raw_chord": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 37,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "sister_alder": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "halvex_coil": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "overseer_grael": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "maren_ossitide": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_last_walker": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "morvane_the_harvest": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "halcyon_the_finished": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "ember_who_banks_the_fire": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_weeping_archive": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_cogitant_ninefold": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "harrow_the_hollowing": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_scouring_hand": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_edge_that_holds": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "keeper_the_unsaid": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_lidded_calm": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_unbending_witness": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_last_seraph": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_clockmother": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_hour_hoarder": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_hundred_hands": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_appetite": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_ninefold_ascendant": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_one_who_stayed_embodied": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_glad_dissolution": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_still_lattice": {
+        "tier": "legendary",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_final_argument": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_kind_liar": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_cornerstone": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_open_figure": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_gate_that_gapes": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "first_flame_ateph": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_oathbreaker_sel": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_nine_year_master": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "prodigal_gearheart": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_edge_seeker": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_lost_chord_seeker": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_undefeated": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_doubting_lattice": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_apostate_choir": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_two_who_are_one": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "iselde_the_wanderer": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_unravelled_mind": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_hundred_faces": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_long_grudge": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_archive_that_walks": {
+        "tier": "epic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_bridgewright": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_war_ender": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_penitent_maw": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_pattern_prophet": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_unbound_churn": {
+        "tier": "heroic",
+        "sinceDay": 37,
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    "figureCareer": {
+      "the_farwalker": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "sister_alder": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_last_mercy": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_lost_chord_seeker": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_unbodied_choir_master": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 1,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "cinder_vael": {
+        "deeds": 3,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 1,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "neth_the_stayed": {
+        "deeds": 6,
+        "losses": 0,
+        "wins": 2,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_last_choirmistress": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "halvex_coil": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_burning_certainty": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_apostate_choir": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "sunwrack_valen": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "ember_who_banks_the_fire": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_weeping_archive": {
+        "deeds": 0,
+        "losses": 2,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_hollow_king": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "keeper_the_unsaid": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_one_who_stayed_embodied": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_two_who_are_one": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_ender_who_forgot": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_penitent_maw": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "vessa_truename": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 1,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_deep_lantern": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_starless": {
+        "deeds": 6,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 1,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_first_moot": {
+        "deeds": 3,
+        "losses": 1,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0,
+        "bestFoe": {
+          "name": "Cinder Vael, the Wright Who Would Not Stop",
+          "band": 3
+        }
+      },
+      "thornmother_sealed": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_kind_liar": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_raw_chord": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      }
+    },
+    "epicArcPushes": {
+      "the_farwalker": {
+        "arcId": "arc_manifestation_storm",
+        "push": 1.4520000000000002
+      },
+      "sister_alder": {
+        "arcId": "arc_manifestation_storm",
+        "push": -0.6
+      },
+      "the_lost_chord_seeker": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.15
+      },
+      "the_last_mercy": {
+        "arcId": "arc_manifestation_storm",
+        "push": -2.9040000000000004
+      },
+      "cinder_vael": {
+        "arcId": "arc_manifestation_storm",
+        "push": 1.584
+      },
+      "the_unbodied_choir_master": {
+        "arcId": "arc_manifestation_storm",
+        "push": 2.9920000000000004
+      },
+      "the_raw_chord": {
+        "arcId": "arc_manifestation_storm",
+        "push": 2.8160000000000007
+      },
+      "the_gate_that_gapes": {
+        "arcId": "arc_manifestation_storm",
+        "push": 1.584
+      },
+      "the_nine_year_master": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.264
+      },
+      "the_edge_seeker": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.264
+      },
+      "the_hundred_faces": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.264
+      },
+      "halcyon_the_finished": {
+        "arcId": "arc_manifestation_storm",
+        "push": -1.056
+      },
+      "the_scouring_hand": {
+        "arcId": "arc_manifestation_storm",
+        "push": -2.4640000000000004
+      },
+      "the_open_figure": {
+        "arcId": "arc_manifestation_storm",
+        "push": -0.528
+      },
+      "iselde_the_wanderer": {
+        "arcId": "arc_manifestation_storm",
+        "push": -0.264
+      },
+      "the_pattern_prophet": {
+        "arcId": "arc_manifestation_storm",
+        "push": -0.264
+      },
+      "halvex_coil": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 1.1480000000000001
+      },
+      "neth_the_stayed": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -2.9040000000000004
+      },
+      "the_last_choirmistress": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -2.9040000000000004
+      },
+      "the_burning_certainty": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 6
+      },
+      "the_apostate_choir": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -0.15
+      },
+      "sunwrack_valen": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 6
+      },
+      "harrow_the_hollowing": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 2.9920000000000004
+      },
+      "the_hour_hoarder": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 1.056
+      },
+      "the_ninefold_ascendant": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 2.9920000000000004
+      },
+      "maren_ossitide": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.056
+      },
+      "the_cogitant_ninefold": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -0.528
+      },
+      "the_last_seraph": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.056
+      },
+      "the_clockmother": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.056
+      },
+      "the_long_grudge": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -0.264
+      },
+      "the_oathbreaker_sel": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 0.528
+      },
+      "the_glad_dissolution": {
+        "arcId": "arc_block_bleed",
+        "push": 0.528
+      },
+      "the_doubting_lattice": {
+        "arcId": "arc_block_bleed",
+        "push": 0.528
+      },
+      "the_unbound_churn": {
+        "arcId": "arc_block_bleed",
+        "push": 0.264
+      },
+      "overseer_grael": {
+        "arcId": "arc_block_bleed",
+        "push": -0.528
+      },
+      "the_still_lattice": {
+        "arcId": "arc_block_bleed",
+        "push": -2.2880000000000007
+      },
+      "the_cornerstone": {
+        "arcId": "arc_block_bleed",
+        "push": -1.056
+      },
+      "prodigal_gearheart": {
+        "arcId": "arc_block_bleed",
+        "push": -0.264
+      },
+      "the_bridgewright": {
+        "arcId": "arc_block_bleed",
+        "push": -0.264
+      },
+      "ember_who_banks_the_fire": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.6
+      },
+      "the_weeping_archive": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.6
+      },
+      "the_hollow_king": {
+        "arcId": "arc_the_poles_pull",
+        "push": 2.9040000000000004
+      },
+      "keeper_the_unsaid": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.3
+      },
+      "the_one_who_stayed_embodied": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.3
+      },
+      "the_two_who_are_one": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.15
+      },
+      "the_ender_who_forgot": {
+        "arcId": "arc_the_poles_pull",
+        "push": 4.356000000000001
+      },
+      "the_penitent_maw": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.15
+      },
+      "morvane_the_harvest": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.056
+      },
+      "thornmother_sealed": {
+        "arcId": "arc_the_poles_pull",
+        "push": 2.9920000000000004
+      },
+      "the_starless": {
+        "arcId": "arc_the_poles_pull",
+        "push": 3.6080000000000005
+      },
+      "the_lidded_calm": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.056
+      },
+      "the_appetite": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.056
+      },
+      "the_unravelled_mind": {
+        "arcId": "arc_the_poles_pull",
+        "push": 0.264
+      },
+      "vessa_truename": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.528
+      },
+      "the_deep_lantern": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.056
+      },
+      "the_edge_that_holds": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.056
+      },
+      "the_unbending_witness": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.056
+      },
+      "the_hundred_hands": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.056
+      },
+      "the_kind_liar": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.264
+      },
+      "first_flame_ateph": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.528
+      },
+      "the_undefeated": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.264
+      },
+      "the_archive_that_walks": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.528
+      },
+      "the_war_ender": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.528
+      },
+      "the_final_argument": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.056
+      },
+      "the_first_moot": {
+        "arcId": "arc_green_schism",
+        "push": -0.3
+      },
+      "the_last_walker": {
+        "arcId": "arc_green_schism",
+        "push": -0.528
+      }
+    },
+    "figureExposure": {
+      "the_scouring_hand": {
+        "arcId": "arc_manifestation_storm",
+        "knownTo": "cinder_vael",
+        "worldDay": 37,
+        "untilDay": 217
+      },
+      "the_starless": {
+        "arcId": "arc_the_poles_pull",
+        "knownTo": "the_deep_lantern",
+        "worldDay": 37,
+        "untilDay": 217
+      }
+    },
+    "epicStatus": {
+      "the_penitent_maw": {
+        "status": "active"
+      },
+      "cinder_vael": {
+        "status": "dead",
+        "diedWorldDay": 37,
+        "killedBy": "the_first_moot",
+        "deathState": {
+          "diedDay": 37,
+          "bodyStatus": "intact",
+          "sealed": false,
+          "depthOverride": null,
+          "cause": "killed by The One Who Called the First Moot"
+        }
+      },
+      "the_kind_liar": {
+        "status": "stopped",
+        "stoppedUntilDay": 40,
+        "stoppedBy": "neth_the_stayed"
+      },
+      "the_weeping_archive": {
+        "status": "stopped",
+        "stoppedUntilDay": 40,
+        "stoppedBy": "the_raw_chord"
+      }
+    },
+    "crusades": {
+      "the_last_walker": {
+        "arcId": "arc_green_schism",
+        "dir": -1,
+        "target": "thornmother_sealed",
+        "untilDay": 127,
+        "since": 37
+      }
+    },
+    "arcContests": {
+      "arc_manifestation_storm": {
+        "duels": 2,
+        "proWins": 1,
+        "conWins": 1,
+        "fought": 4,
+        "worked": 12
+      },
+      "arc_what_wakes_beneath": {
+        "duels": 2,
+        "proWins": 1,
+        "conWins": 1,
+        "fought": 5,
+        "worked": 12
+      },
+      "arc_block_bleed": {
+        "duels": 0,
+        "proWins": 0,
+        "conWins": 0,
+        "fought": 0,
+        "worked": 9
+      },
+      "arc_the_poles_pull": {
+        "duels": 3,
+        "proWins": 3,
+        "conWins": 0,
+        "fought": 9,
+        "worked": 22
+      },
+      "arc_green_schism": {
+        "duels": 1,
+        "proWins": 1,
+        "conWins": 0,
+        "fought": 2,
+        "worked": 2
+      }
+    },
+    "lastEpicDeathDay": 37,
+    "arcChallenges": [
+      {
+        "defender": "cinder_vael",
+        "defenderName": "Cinder Vael, the Wright Who Would Not Stop",
+        "challenger": "the_first_moot",
+        "challengerName": "The One Who Called the First Moot",
+        "outcome": "killed",
+        "tier": "epic"
+      },
+      {
+        "defender": "neth_the_stayed",
+        "defenderName": "Neth, Who Has Buried More Than She Has Known",
+        "challenger": "the_kind_liar",
+        "challengerName": "The Kind Liar",
+        "outcome": "stopped",
+        "tier": "epic"
+      },
+      {
+        "defender": "the_raw_chord",
+        "defenderName": "The Raw Chord",
+        "challenger": "the_weeping_archive",
+        "challengerName": "The Weeping Archive",
+        "outcome": "stopped",
+        "tier": "legendary"
+      }
+    ],
+    "arcCasualties": [
+      {
+        "arcId": "arc_the_poles_pull",
+        "winner": "the_ender_who_forgot",
+        "loser": "the_penitent_maw",
+        "kind": "stalemate",
+        "winnerTier": "epic",
+        "loserTier": "heroic"
+      }
+    ],
+    "arcStrikes": [
+      {
+        "arcId": "arc_manifestation_storm",
+        "kind": "quiet",
+        "target": "cinder_vael",
+        "sender": "the_scouring_hand",
+        "outcome": "guarded",
+        "guard": "the_unbodied_choir_master"
+      },
+      {
+        "arcId": "arc_the_poles_pull",
+        "kind": "quiet",
+        "target": "the_deep_lantern",
+        "sender": "the_starless",
+        "outcome": "guarded",
+        "guard": "vessa_truename"
+      },
+      {
+        "arcId": "arc_green_schism",
+        "kind": "crusade",
+        "target": "thornmother_sealed",
+        "sender": "the_last_walker",
+        "outcome": "guarded",
+        "guard": "the_starless"
+      }
+    ],
+    "arcVacancies": {
+      "arc_what_wakes_beneath": 17,
+      "arc_the_poles_pull": 18,
+      "arc_manifestation_storm": 23,
+      "arc_block_bleed": 15,
+      "arc_green_schism": 6
+    },
+    "arcStageSeen": {
+      "arc_manifestation_storm": 4,
+      "arc_what_wakes_beneath": 4,
+      "arc_block_bleed": 1,
+      "arc_the_poles_pull": 4,
+      "arc_green_schism": 1
+    },
+    "personalCoverage": {
+      "lived": 66,
+      "onThePage": 66,
+      "neglected": 0
+    },
+    "strikeCoverage": {
+      "traditions": 27,
+      "withDisposition": 24,
+      "crusadeTraditions": 7,
+      "eitherTraditions": 9,
+      "crusades": [
+        "rootkin",
+        "blazeborn",
+        "marcher",
+        "stillhold",
+        "verist",
+        "seraphic",
+        "syllogist"
+      ],
+      "bothKindsLive": true,
+      "note": "both kinds reachable — 7 declare, 9 do either"
+    },
+    "personalBeats": [
+      {
+        "id": "sister_alder",
+        "name": "Sister Alder, the Ward That Does Not Break",
+        "pursuit": "learning a faster road"
+      },
+      {
+        "id": "halvex_coil",
+        "name": "Halvex Coil, the Rewriter",
+        "pursuit": "patching a district into silence"
+      },
+      {
+        "id": "overseer_grael",
+        "name": "Overseer Grael of the Edge District",
+        "pursuit": "noticing a name that should not be there"
+      },
+      {
+        "id": "maren_ossitide",
+        "name": "Maren Ossitide, Who Buried the Drowned Year",
+        "pursuit": "Neth, who wants the same thing and works the other end of the Palelands"
+      },
+      {
+        "id": "the_hollow_king",
+        "name": "The Hollow King of the Wild Half",
+        "pursuit": "holding court for no one"
+      },
+      {
+        "id": "cinder_vael",
+        "name": "Cinder Vael, the Wright Who Would Not Stop",
+        "pursuit": "arguing with Halcyon by letter, for twenty years, about finishing"
+      },
+      {
+        "id": "the_last_walker",
+        "name": "The Last Walker of the Sealed Wood",
+        "pursuit": "a Thornwake child who asks about the world outside"
+      },
+      {
+        "id": "neth_the_stayed",
+        "name": "Neth, Who Has Buried More Than She Has Known",
+        "pursuit": "sleeping, badly, for the first time in four days"
+      },
+      {
+        "id": "morvane_the_harvest",
+        "name": "Morvane of the Harvest Hand",
+        "pursuit": "re-reading her own old judgements and finding them soft"
+      },
+      {
+        "id": "halcyon_the_finished",
+        "name": "Halcyon, Who Built One Perfect Thing",
+        "pursuit": "teaching one student, slowly"
+      },
+      {
+        "id": "vessa_truename",
+        "name": "Vessa Who Trades in True Names",
+        "pursuit": "playing cards badly and on purpose, to watch people cheat"
+      },
+      {
+        "id": "thornmother_sealed",
+        "name": "The Thornmother of the Closing Wood",
+        "pursuit": "turning a delegation away at the treeline"
+      },
+      {
+        "id": "the_last_choirmistress",
+        "name": "The Last Choirmistress",
+        "pursuit": "writing down a word she is not sure she heard"
+      },
+      {
+        "id": "the_unbodied_choir_master",
+        "name": "The Choirmaster Who Would Not Return",
+        "pursuit": "dissolving a little further on purpose"
+      },
+      {
+        "id": "sunwrack_valen",
+        "name": "Valen Sunwrack, Who Left No Shadow Standing",
+        "pursuit": "burning out one more shadowed place"
+      },
+      {
+        "id": "ember_who_banks_the_fire",
+        "name": "Ember, Who Banks the Fire",
+        "pursuit": "arguing with Valen by letter and not sending it"
+      },
+      {
+        "id": "the_deep_lantern",
+        "name": "The Deep Lantern, Who Walks Where Light Won't",
+        "pursuit": "walking an old woman home the same route each week"
+      },
+      {
+        "id": "the_starless",
+        "name": "The Starless One",
+        "pursuit": "refusing light offered kindly"
+      },
+      {
+        "id": "the_weeping_archive",
+        "name": "The Weeping Archive",
+        "pursuit": "pressing flowers, which is keeping a small grief"
+      },
+      {
+        "id": "the_raw_chord",
+        "name": "The Raw Chord",
+        "pursuit": "apologising to someone she overwhelmed"
+      },
+      {
+        "id": "the_cogitant_ninefold",
+        "name": "The Cogitant Ninefold",
+        "pursuit": "being disappointed by an easy opponent"
+      },
+      {
+        "id": "harrow_the_hollowing",
+        "name": "Harrow, Who Makes People Into Mechanisms",
+        "pursuit": "dismissing a flaw as tolerance"
+      },
+      {
+        "id": "the_last_mercy",
+        "name": "The Last Mercy",
+        "pursuit": "visiting an ending she granted years ago"
+      },
+      {
+        "id": "the_scouring_hand",
+        "name": "The Scouring Hand",
+        "pursuit": "finding a fault in a thing that had none"
+      },
+      {
+        "id": "the_edge_that_holds",
+        "name": "Kesh Ardent, the Edge That Holds",
+        "pursuit": "the family on the Redline he stood a watch for, unasked, years ago"
+      },
+      {
+        "id": "the_ender_who_forgot",
+        "name": "The Ender Who Forgot Why",
+        "pursuit": "looking for the reason afterward"
+      },
+      {
+        "id": "keeper_the_unsaid",
+        "name": "The Keeper of the Unsaid",
+        "pursuit": "checking that the peace has held"
+      },
+      {
+        "id": "the_lidded_calm",
+        "name": "The Lidded Calm",
+        "pursuit": "calculating whose burden the calm cost"
+      },
+      {
+        "id": "the_unbending_witness",
+        "name": "Seraphine the Unbending Witness",
+        "pursuit": "long walks, alone, in weather"
+      },
+      {
+        "id": "the_last_seraph",
+        "name": "The Last Seraph of the Pre-Transition Choir",
+        "pursuit": "tending a chapter that no longer meets"
+      },
+      {
+        "id": "the_burning_certainty",
+        "name": "The Burning Certainty",
+        "pursuit": "burning what fails the test"
+      },
+      {
+        "id": "the_clockmother",
+        "name": "The Clockmother, Who Keeps the Deep Hour",
+        "pursuit": "guarding the one power she does not use"
+      },
+      {
+        "id": "the_hour_hoarder",
+        "name": "The Hour-Hoarder",
+        "pursuit": "spending someone else's time to keep it"
+      },
+      {
+        "id": "the_hundred_hands",
+        "name": "The Hundred Hands",
+        "pursuit": "a body she trained who now trains others"
+      },
+      {
+        "id": "the_appetite",
+        "name": "The Appetite",
+        "pursuit": "being briefly, genuinely satisfied and finding it unbearable"
+      },
+      {
+        "id": "the_ninefold_ascendant",
+        "name": "The Ninefold Ascendant",
+        "pursuit": "shedding a little more body"
+      },
+      {
+        "id": "the_one_who_stayed_embodied",
+        "name": "The One Who Stayed Embodied",
+        "pursuit": "a partner who does not follow the thinking and stays anyway"
+      },
+      {
+        "id": "the_glad_dissolution",
+        "name": "The Glad Dissolution",
+        "pursuit": "keeping the churn moving"
+      },
+      {
+        "id": "the_still_lattice",
+        "name": "The Still Lattice",
+        "pursuit": "disliking a season for changing"
+      },
+      {
+        "id": "the_final_argument",
+        "name": "The Final Argument",
+        "pursuit": "reasoning a feeling out of someone"
+      },
+      {
+        "id": "the_kind_liar",
+        "name": "The Kind Liar",
+        "pursuit": "checking whether the kindness held"
+      },
+      {
+        "id": "the_cornerstone",
+        "name": "The Cornerstone",
+        "pursuit": "dry-stone walling, for the pleasure of a thing that holds"
+      },
+      {
+        "id": "the_open_figure",
+        "name": "The Open Figure",
+        "pursuit": "arguing with the Still Lattice, at distance"
+      },
+      {
+        "id": "the_farwalker",
+        "name": "The Farwalker",
+        "pursuit": "walking a distance to prove it is crossable"
+      },
+      {
+        "id": "the_gate_that_gapes",
+        "name": "The Gate That Gapes",
+        "pursuit": "being untroubled by what came through"
+      },
+      {
+        "id": "first_flame_ateph",
+        "name": "Ateph of the First Flame",
+        "pursuit": "watching other people's fires"
+      },
+      {
+        "id": "the_first_moot",
+        "name": "The One Who Called the First Moot",
+        "pursuit": "listening longer than anyone expects"
+      },
+      {
+        "id": "the_oathbreaker_sel",
+        "name": "Sel Who Broke the Warding",
+        "pursuit": "not asking for forgiveness"
+      },
+      {
+        "id": "the_nine_year_master",
+        "name": "The Nine-Year Master",
+        "pursuit": "training against her own strong side"
+      },
+      {
+        "id": "prodigal_gearheart",
+        "name": "Gearheart, Who Built at Twelve What Masters Couldn't",
+        "pursuit": "starting again the next morning"
+      },
+      {
+        "id": "the_edge_seeker",
+        "name": "The One Who Walks Toward the Edge",
+        "pursuit": "going further than last time"
+      },
+      {
+        "id": "the_lost_chord_seeker",
+        "name": "Seeker of the Lost Chord",
+        "pursuit": "listening for it in ordinary sound"
+      },
+      {
+        "id": "the_undefeated",
+        "name": "Saehara the Undefeated",
+        "pursuit": "looking for someone who deserves the win"
+      },
+      {
+        "id": "the_doubting_lattice",
+        "name": "The One Who Doubts the Proof",
+        "pursuit": "being ignored by her own order"
+      },
+      {
+        "id": "the_apostate_choir",
+        "name": "The Apostate of the Choir",
+        "pursuit": "not saying she has lost it"
+      },
+      {
+        "id": "the_two_who_are_one",
+        "name": "The Two Who Are One",
+        "pursuit": "they garden; it is the only thing they do separately"
+      },
+      {
+        "id": "iselde_the_wanderer",
+        "name": "Iselde Wend, She Who Reads the Long Roads",
+        "pursuit": "two places that stopped speaking, and she carries word between them"
+      },
+      {
+        "id": "the_unravelled_mind",
+        "name": "The Unravelled Mind",
+        "pursuit": "being understood by one person for one moment"
+      },
+      {
+        "id": "the_hundred_faces",
+        "name": "The One With a Hundred Faces",
+        "pursuit": "forgetting which one is hers"
+      },
+      {
+        "id": "the_long_grudge",
+        "name": "The One Who Has Not Forgotten",
+        "pursuit": "wondering what she is afterward"
+      },
+      {
+        "id": "the_archive_that_walks",
+        "name": "The Archive That Walks",
+        "pursuit": "memorising a true thing nobody wants"
+      },
+      {
+        "id": "the_bridgewright",
+        "name": "The One Who Bridged the Unbridgeable",
+        "pursuit": "building something that will outlast the argument"
+      },
+      {
+        "id": "the_war_ender",
+        "name": "The One Who Ended the Long War",
+        "pursuit": "the ones who would not take the door out, whose names he keeps"
+      },
+      {
+        "id": "the_penitent_maw",
+        "name": "The Penitent Maw",
+        "pursuit": "everyone she ever struck a bargain with, and she is finding them"
+      },
+      {
+        "id": "the_pattern_prophet",
+        "name": "The One Who Reads the Coming Shape",
+        "pursuit": "describing the pattern to someone who leaves"
+      },
+      {
+        "id": "the_unbound_churn",
+        "name": "The Unbound",
+        "pursuit": "leaving somewhere good"
+      }
+    ],
+    "neglectedLives": [],
+    "figureTier": {},
+    "outOfAction": {
+      "sister_alder": 0,
+      "halvex_coil": 0,
+      "overseer_grael": 0,
+      "maren_ossitide": 0,
+      "the_hollow_king": 0,
+      "cinder_vael": 0,
+      "the_last_walker": 0,
+      "neth_the_stayed": 0,
+      "morvane_the_harvest": 0,
+      "halcyon_the_finished": 0,
+      "vessa_truename": 0,
+      "thornmother_sealed": 0,
+      "the_last_choirmistress": 0,
+      "the_unbodied_choir_master": 0,
+      "sunwrack_valen": 0,
+      "ember_who_banks_the_fire": 0,
+      "the_deep_lantern": 0,
+      "the_starless": 0,
+      "the_weeping_archive": 1,
+      "the_raw_chord": 0,
+      "the_cogitant_ninefold": 0,
+      "harrow_the_hollowing": 0,
+      "the_last_mercy": 0,
+      "the_scouring_hand": 0,
+      "the_edge_that_holds": 0,
+      "the_ender_who_forgot": 0,
+      "keeper_the_unsaid": 0,
+      "the_lidded_calm": 0,
+      "the_unbending_witness": 0,
+      "the_last_seraph": 0,
+      "the_burning_certainty": 0,
+      "the_clockmother": 0,
+      "the_hour_hoarder": 0,
+      "the_hundred_hands": 0,
+      "the_appetite": 0,
+      "the_ninefold_ascendant": 0,
+      "the_one_who_stayed_embodied": 0,
+      "the_glad_dissolution": 0,
+      "the_still_lattice": 0,
+      "the_final_argument": 0,
+      "the_kind_liar": 1,
+      "the_cornerstone": 0,
+      "the_open_figure": 0,
+      "the_farwalker": 0,
+      "the_gate_that_gapes": 0,
+      "first_flame_ateph": 0,
+      "the_first_moot": 0,
+      "the_oathbreaker_sel": 0,
+      "the_nine_year_master": 0,
+      "prodigal_gearheart": 0,
+      "the_edge_seeker": 0,
+      "the_lost_chord_seeker": 0,
+      "the_undefeated": 0,
+      "the_doubting_lattice": 0,
+      "the_apostate_choir": 0,
+      "the_two_who_are_one": 0,
+      "iselde_the_wanderer": 0,
+      "the_unravelled_mind": 0,
+      "the_hundred_faces": 0,
+      "the_long_grudge": 0,
+      "the_archive_that_walks": 0,
+      "the_bridgewright": 0,
+      "the_war_ender": 0,
+      "the_penitent_maw": 0,
+      "the_pattern_prophet": 0,
+      "the_unbound_churn": 0
+    },
+    "deedSourcesSeen": {
+      "arcContestWon": 0,
+      "guardIntercept": 0,
+      "strikeSurvived": 0
+    },
+    "careShifts": [],
+    "arcStandings": {
+      "risen": [],
+      "fallen": []
+    },
+    "arcUnheldStreak": {
+      "arc_manifestation_storm": 0,
+      "arc_what_wakes_beneath": 0,
+      "arc_block_bleed": 0,
+      "arc_the_poles_pull": 0,
+      "arc_green_schism": 0
+    },
+    "mintedFigures": [
+      {
+        "id": "minted-1",
+        "name": "the one who outlived Cinder Vael, the Wright Who Would Not Stop",
+        "provisional": true,
+        "tier": "riffraff",
+        "weight": 3,
+        "wants": "of the the_ceaseless; watched Cinder Vael, the Wright Who Would Not Stop called out, and outlived them",
+        "originKind": "casualty_survivor",
+        "region": "the_ceaseless",
+        "arcAffinity": null,
+        "arcAffinities": [
+          {
+            "arcId": "arc_the_poles_pull",
+            "dir": -1,
+            "weight": 1
+          }
+        ],
+        "wantArcId": "arc_the_poles_pull",
+        "personalVerbs": [
+          "asking after the ones who did not"
+        ],
+        "mintedWorldDay": 37,
+        "origin": "of the the_ceaseless; watched Cinder Vael, the Wright Who Would Not Stop called out, and outlived them",
+        "legend": {
+          "tier": "riffraff",
+          "weight": 3
+        },
+        "tradition": "wright",
+        "homeland": "the_ceaseless"
+      }
+    ],
+    "mintedCounter": 1,
+    "arcBirths": [
+      {
+        "id": "minted-1",
+        "tier": "riffraff",
+        "origin": "of the the_ceaseless; watched Cinder Vael, the Wright Who Would Not Stop called out, and outlived them",
+        "arcId": null
+      }
+    ],
+    "arcNetPush": {
+      "arc_manifestation_storm": 3.290000000000002,
+      "arc_what_wakes_beneath": 10.798,
+      "arc_block_bleed": -3.080000000000001,
+      "arc_the_poles_pull": 9.384,
+      "arc_green_schism": -0.8280000000000001
+    },
+    "offscreenBacklog": {},
+    "wantProgress": {
+      "cevaine-of-the-seventh-measure": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 37,
+        "lastOutcome": "progress"
+      }
+    }
   },
   "domains": {
     "primary": "numinous",
@@ -690,7 +3063,8 @@
           "[d1] The figure is aware and trying to ANSWER across the veil — it understands speech, recognizes the old language, and attempted to reply in kind. The gulf between the sides is too wide for full communication; the veil strains when it tries. Its effort costs it something — a flicker, a pulling-back.",
           "[d1] The figure is a SENT THING—tasked, purposeful, aware. It came to DELIVER, not to take or harm. When the connection broke, it was pulled back through the veil by force, not by choice. Its final emotion across the breaking thread was failure: the work undone, the delivery not completed. Whatever it…",
           "[d1] The figure was pulled back through the veil by force before it could deliver what it was sent to deliver. The veil sealed itself in anger, rejecting the bridge Splarf attempted to hold. The failure carries weight — the work remains undone on the other side.",
-          "[d1] There may be another awareness in or near the dark—present in the Disputed Zone forest, purpose-shaped like the figure that came through the veil, aware of being noticed. It is patient. It is waiting."
+          "[d1] There may be another awareness in or near the dark—present in the Disputed Zone forest, purpose-shaped like the figure that came through the veil, aware of being noticed. It is patient. It is waiting.",
+          "[d1] The thing in the dark heard Splarf call out in the old tongue and understood the words—but it will not answer. It pulled closer to the clearing instead, watching, waiting with purpose-shaped patience. It does not meet language with language."
         ],
         "links": [
           "what-wakes-beneath",
@@ -723,7 +3097,8 @@
           "[d1] Lattice-Cities order-reader walking The Thinning's edge — applying structural precision to a place that dissolves structure",
           "[d1] Lattice-Cities order-reader",
           "[d1] A Lattice-trained order-reader views the veil-breach as a structural problem, not a spiritual one. They are tasked with solving such problems. The breach is not negotiable to them — only solvable.",
-          "[d1] Cevaine recognizes that absolute geometric precision, while formidable, cannot read stillness that is not absence — a discipline so centered it yields no pattern to be solved."
+          "[d1] Cevaine recognizes that absolute geometric precision, while formidable, cannot read stillness that is not absence — a discipline so centered it yields no pattern to be solved.",
+          "[d1] [while away] Cevaine has begun annotating a secondary margin of the Seventh Measure's reading-texts — not with corrections, but with questions about what a perfectly centered stillness would even look like written down, the first visible crack in his formal method."
         ],
         "links": [
           "the-thinning",
@@ -760,21 +3135,21 @@
     }
   },
   "tendencies": {
-    "stealth": 9.839977944355347,
-    "strategic": 2.6538139958564377,
-    "cautious": 4.316076308089405,
-    "cerebral": 3.5635123122329677,
-    "patient": 0.8375915934997556,
-    "devotion": 1.6966598945251465,
-    "risky": 0.8590683010253904,
-    "generous": 1.8560956933593749,
-    "social": 1.854312890625
+    "stealth": 9.593978495746462,
+    "strategic": 2.5874686459600267,
+    "cautious": 4.20817440038717,
+    "cerebral": 3.4744245044271436,
+    "patient": 0.8166518036622618,
+    "devotion": 1.6542433971620178,
+    "risky": 1.8375915934997558,
+    "generous": 1.8096933010253904,
+    "social": 2.807955068359375
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 11,
+  "actionCount": 12,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1020,8 +3395,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785975952650,
-  "rev": 52,
+  "updatedAt": 1785982404399,
+  "rev": 55,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1103,7 +3478,14 @@
             ],
             "vague": [],
             "why": "npc: THIN — missing disposition"
-          }
+          },
+          "offscreen": [
+            {
+              "worldDay": 37,
+              "note": "Cevaine has begun annotating a secondary margin of the Seventh Measure's reading-texts — not with corrections, but with questions about what a perfectly centered stillness would even look like written down, the first visible crack in his formal method.",
+              "outcome": "progress"
+            }
+          ]
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
@@ -1167,7 +3549,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 17
+    "the_numinous_reach": 18
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1175,10 +3557,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-06T00:25:52.633Z",
+      "lastAt": "2026-08-06T02:13:24.380Z",
       "startDay": 36,
       "endDay": 37,
-      "beats": 17
+      "beats": 18
     }
   ],
   "establishedFacts": [
@@ -1219,7 +3601,7 @@
     "sceneSummary": 17,
     "scene": 17,
     "choices": 17,
-    "offer": 9,
+    "offer": 8,
     "codexUpdates": 10,
     "imagePrompt": 7,
     "gambitApt": 14,

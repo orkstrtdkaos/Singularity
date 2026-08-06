@@ -1786,6 +1786,107 @@
         "numinous": 6,
         "threnodist": 7
       }
+    },
+    {
+      "traditionId": "god_named",
+      "name": "The God-Named",
+      "craft": "Service",
+      "civilization": "The God-Named — heavily augmented humans who never wanted the Transition, took the substrate into themselves rather than be dissolved by it, and named themselves after gods because it was the only word big enough. They are not divine. They are the ones who would not let go.",
+      "axis": "demonic_angelic",
+      "pole": "foothill",
+      "locus": "The Named Heights",
+      "region": "the_foothills",
+      "foothillOf": [
+        "seraphic",
+        "lattice",
+        "verist"
+      ],
+      "disposition": {
+        "primary": "angelic",
+        "secondary": "order"
+      },
+      "bearer": "following",
+      "cultOfPurity": "followers who believe the name rather than the person — and defend it harder than he does",
+      "aesthetic": "borrowed grandeur worn slightly wrong; a hall built for someone taller; a man addressed by a name nobody in this valley can check",
+      "abilities": [
+        "the_sworn_word",
+        "the_weighed_favour",
+        "the_borrowed_name"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true,
+        "open": true
+      },
+      "status": "authored",
+      "opposite": "veilwright",
+      "adjacent": [
+        {
+          "traditionId": "seraphic",
+          "steps": 1
+        },
+        {
+          "traditionId": "lattice",
+          "steps": 1
+        },
+        {
+          "traditionId": "verist",
+          "steps": 1
+        }
+      ],
+      "_note": "⚠️ THE FOOTHILL RELATIONSHIP, STATED MECHANICALLY: `ascent` binds whether or not you are right, and no person can hold that. AN OATH SWORN TO A GOD-NAMED CAN BE BROKEN, AT A PRICE. Same principle, survivable — which is the entire reason a foothill exists. The cost lands as OBLIGATION rather than drift: a seraphic drifts judgement-hot; a follower owes someone who remembers.",
+      "_notAReligion": "⚠️ `access.open` here does not mean 'anyone may pray'. It means ANYONE MAY TAKE SERVICE. You are not petitioning a principle — you are in a relationship with a living person who can be disappointed, which is why this reuses bond stages rather than a prayer economy."
+    },
+    {
+      "traditionId": "bargainers",
+      "name": "The Bargainers",
+      "craft": "Terms",
+      "civilization": "The Bargainers — the god-named who went down instead of up. Augmented the same way, refused the same Transition, and took the names of the tricksters and the hungry ones. Their gifts are real and cost exactly what was named, and unlike the Maw they can be haggled with.",
+      "axis": "demonic_angelic",
+      "pole": "foothill",
+      "locus": "The Low Halls",
+      "region": "the_foothills",
+      "foothillOf": [
+        "abyssal",
+        "veilwright",
+        "churnfolk"
+      ],
+      "disposition": {
+        "primary": "demonic",
+        "secondary": "chaos"
+      },
+      "bearer": "following",
+      "cultOfPurity": "the ones who keep every term to the letter and have forgotten why terms existed",
+      "aesthetic": "a good table, a fair scale, an exit that is always shown to you and always costed",
+      "abilities": [
+        "the_named_price",
+        "the_clever_fulfilment",
+        "the_open_door"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true,
+        "open": true
+      },
+      "status": "authored",
+      "opposite": "seraphic",
+      "adjacent": [
+        {
+          "traditionId": "abyssal",
+          "steps": 1
+        },
+        {
+          "traditionId": "veilwright",
+          "steps": 1
+        },
+        {
+          "traditionId": "churnfolk",
+          "steps": 1
+        }
+      ],
+      "_note": "⚠️ THE SURVIVABLE VERSION OF THE MAW. `descent`'s bargain is exactly fair, which is the horror of it — there is no arguing with a fair price. A BARGAINER'S TERMS CAN BE HAGGLED, TRICKED, OR FULFILLED CLEVERLY, and that difference is the foothill. It is also the difference between a monster and a counterparty."
     }
   ],
   "folkTraditions": [

@@ -507,6 +507,12 @@ img[data-lightbox] { cursor: zoom-in; }
 .lightbox-close { position: absolute; top: -12px; right: -12px; width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--panel); color: var(--ink); font-size: 16px; cursor: pointer; }
 .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 60px; border: none; background: rgba(0,0,0,.4); color: #fff; font-size: 30px; cursor: pointer; border-radius: 8px; }
 .lightbox-nav.prev { left: -52px; } .lightbox-nav.next { right: -52px; }
+/* SNG-335 — save the picture to disk. Sits opposite the close button rather than over the image: it is a
+   deliberate action, not a chrome control, and it must never be the thing a player hits reaching for ✕. */
+.lightbox-save { position: absolute; top: -12px; left: -12px; height: 34px; padding: 0 14px; border-radius: 17px;
+  border: none; background: var(--panel); color: var(--ink); font-size: 13px; cursor: pointer; white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35); }
+.lightbox-save:disabled { opacity: .7; cursor: default; }
 @media (max-width: 640px) { .lightbox-nav.prev { left: 4px; } .lightbox-nav.next { right: 4px; } }
 /* SNG-059 creation v2: the great circle domain picker */
 .great-circle { width: 100%; max-height: 60vh; display: block; }

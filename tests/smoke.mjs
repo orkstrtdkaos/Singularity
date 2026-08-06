@@ -1093,7 +1093,7 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
 
 // --- SNG-012: memory & input fidelity ---
 {
-  const { ensureFacts, applyFactUpdates, factsForGM } = await import("../engine/facts.js");
+  const { ensureFacts, applyFactUpdates, factsForGM, pinFact } = await import("../engine/facts.js");
   const { setNpcName, nameIsUnknown } = await import("../engine/npcs.js");
   const fc = {};
   ensureFacts(fc);
@@ -1102,7 +1102,38 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("fact added once (dedupe)", fc.establishedFacts.length === 1 && fc.establishedFacts[0].subjectId === "teva");
   check("factsForGM feeds the whole ledger", factsForGM(fc).includes("Teva was rescued"));
   for (let i = 0; i < 50; i++) applyFactUpdates(fc, [{ op: "add", text: "routine fact " + i }], { day: i });
-  check("facts ledger caps generously (40)", fc.establishedFacts.length <= 40);
+  // SNG-334 — ⛔ THE STORE NO LONGER CAPS, AND THIS GATE ASSERTED THAT IT DID. Erik: "it seems good that we
+  // want the ability to reach any TRUE thing, but what gets sent each turn needs a reasonable cap." The old
+  // check defended a `slice(-40)` that silently dropped the oldest canon the GM ever established, so a long
+  // game could contradict itself about its own early events. The cost is real; it belongs to the VIEW.
+  check("334: the fact STORE never forgets — reaching any true thing is the point", (() => {
+    const many = { establishedFacts: [] };
+    for (let i = 0; i < 300; i++) applyFactUpdates(many, [{ op: "establish", text: `fact ${i}` }], {});
+    return many.establishedFacts.length === 300;
+  })());
+  check("334: …but the VIEW is budgeted, and says how much it left unsaid", (() => {
+    const many = { establishedFacts: [] };
+    for (let i = 0; i < 300; i++) applyFactUpdates(many, [{ op: "establish", text: `fact ${i}` }], {});
+    const view = factsForGM(many, 40);
+    // ⚠️ A silently-windowed view reads exactly like a complete one — that is how a GM comes to believe the
+    // ledger is short. The remainder must be NAMED, or "what is true" and "what I was told" quietly merge.
+    return view.split("\n").length <= 41 && /260 more you established earlier/.test(view) && view.includes("fact 299");
+  })());
+  // ⛔ AND A TIE TO A PERSON NEVER AGES OUT. Erik: "ones that tie to people should be saved as facts — like
+  // my player's mother, or Pell's father."
+  check("334: a PINNED fact is always sent, however old and however full the ledger", (() => {
+    const many = { establishedFacts: [] };
+    pinFact(many, "Pell's father is the ferryman at the Crossing", { day: 1 });
+    for (let i = 0; i < 300; i++) applyFactUpdates(many, [{ op: "establish", text: `fact ${i}` }], {});
+    const view = factsForGM(many, 10);
+    return view.includes("Pell's father") && view.includes("fact 299");
+  })());
+  check("334: pinning the same fact twice does not duplicate it", (() => {
+    const c = { establishedFacts: [] };
+    pinFact(c, "Her mother is alive", { day: 2 });
+    pinFact(c, "Her mother is alive", { day: 9 });
+    return c.establishedFacts.filter(f => f.text === "Her mother is alive").length === 1;
+  })());
   applyFactUpdates(fc, [{ op: "resolve", subjectId: "teva" }], {});
   check("resolve retires a fact", !fc.establishedFacts.some(x => x.subjectId === "teva"));
 
@@ -10257,6 +10288,82 @@ await (async () => {
       check("331: known substring collisions are declared, and none of them changes what loads",
         collide.length === 0 || collide.every(c => c.startsWith("ties →")));
     }
+  }
+
+  // SNG-333 — DUNBAR'S NUMBER, AND MEETING SOMEONE AGAIN PROTECTS THEM. Erik: "150 known relationships…
+  // we need the insertion order as a default, but if you interface with the NPCs then it should count those
+  // interactions and keep the ones you meet more than once from dropping off."
+  {
+    const NP = await import("../engine/npcs.js");
+    check("333: the circle is Dunbar's number, not an array bound", NP.REGISTRY_CAP === 150);
+
+    // ⛔ THE RULE: least-met first, oldest-first among equals. Everyone met once is spent before anyone met twice.
+    const reg = {
+      once_old:  { id: "once_old",  met: 1, firstMet: { day: 1 } },
+      once_new:  { id: "once_new",  met: 1, firstMet: { day: 50 } },
+      twice:     { id: "twice",     met: 2, firstMet: { day: 2 } },
+      many:      { id: "many",      met: 9, firstMet: { day: 3 } },
+    };
+    check("333: the least-met goes first, and the oldest breaks the tie",
+      NP.evictionCandidate(reg) === "once_old");
+    check("333: someone you met twice outlives everyone you met once", (() => {
+      const r = { ...reg }; delete r.once_old; delete r.once_new;
+      return NP.evictionCandidate(r) === "twice";     // only after the singles are gone
+    })());
+
+    // ⛔ KIN ARE NEVER CANDIDATES — Erik: "ones that tie to people should be saved as facts, like my player's
+    // mother." Somebody's family is not an acquaintance the circle can afford to forget.
+    check("333: kin are never evicted, and a registry of only kin refuses rather than drops one",
+      NP.evictionCandidate({ mum: { id: "mum", met: 1, kin: "mother", firstMet: { day: 0 } } }) === null);
+    check("333: with kin present, the evictable stranger goes instead",
+      NP.evictionCandidate({ mum: { id: "mum", met: 1, kin: "mother", firstMet: { day: 0 } },
+                             guy: { id: "guy", met: 1, firstMet: { day: 9 } } }) === "guy");
+    check("333: an empty circle has nobody to evict", NP.evictionCandidate({}) === null);
+
+    // SNG-334 — ⛔ AND THE TIE BECOMES A PINNED FACT. Erik: "ones that tie to people should be saved as
+    // facts — like my player's mother, or Pell's father."
+    const kinN = { id: "pell_da", name: "Oren", role: "the ferryman at the Crossing" };
+    NP.advanceBond(kinN, { bondType: "family" }, null, 4);
+    check("334: a FAMILY bond marks the person as kin — the field the circle already protects",
+      kinN.kin === "family" && NP.evictionCandidate({ [kinN.id]: kinN }) === null);
+    check("334: …and it yields a fact worth pinning, naming what the fiction actually said",
+      /Oren is family — the ferryman at the Crossing\./.test(NP.kinFact(kinN)));
+    // ⛔ NEVER INVENTS THE RELATION. If the GM only said "family", the fact says family and no more.
+    const vague = { id: "x", name: "Someone" };
+    NP.advanceBond(vague, { bondType: "family" }, null, 1);
+    check("334: it never invents HOW they are kin — that would be the engine writing canon",
+      NP.kinFact(vague) === "Someone is family." && NP.kinFact({ id: "y", name: "Stranger" }) === null);
+    check("334: a `sworn` bond is kin too — a bond you both chose",
+      (() => { const sw = { id: "s", name: "Vaskar" }; NP.advanceBond(sw, { bondType: "sworn" }, null, 1);
+               return sw.kin === "sworn" && /sworn to you/.test(NP.kinFact(sw)); })());
+  }
+
+  // SNG-335 — SAVE AN IMAGE WHERE NO LINK CAN EXPIRE. Erik: "add an option to save an image locally — that
+  // would preserve it even if the url vanishes." Removing the cap (SNG-332) keeps the ENTRY forever, but an
+  // entry is a URL: if the host expires it the record survives and the picture does not.
+  {
+    const AR = await import("../engine/art.js");
+    // ⚠️ THE FILENAME IS THE WHOLE VALUE OF A SAVED FILE. `image_47.png` in a downloads folder is junk.
+    check("335: the file is named from the caption the player already read",
+      AR.imageFileName("The Low Lamp Inn — the common room at dusk", "location", "png")
+        === "singularity-the-low-lamp-inn.png");
+    check("335: …and falls back to the KIND rather than to nothing",
+      AR.imageFileName("", "portrait", "jpg") === "singularity-portrait.jpg"
+      && AR.imageFileName("   ", "beast") === "singularity-beast.png");
+    check("335: a caption of pure punctuation still yields a usable name",
+      /^singularity-image\.png$/.test(AR.imageFileName("!!! ???", "")));
+    // The extension: content-type wins, the URL is the fallback, png is the floor.
+    check("335: the extension follows the content-type, then the url, then png",
+      AR.imageExtFor("x/y", "image/jpeg") === "jpg"
+      && AR.imageExtFor("https://h/a/b.webp?sig=1") === "webp"
+      && AR.imageExtFor("https://h/no-extension") === "png");
+    // ⛔ AND THE BYTES MUST NEVER REACH THE SAVE. Base64 in the gallery would be ~1.3× the image against a
+    // ~5MB localStorage budget the save ALSO syncs to GitHub — a few kept images would break SAVING, which
+    // is a worse failure than a dead link.
+    const appSrc335 = readFileSync(join(root, "app.js"), "utf8");
+    check("335: the download writes to disk and never inlines the image into the character",
+      /URL\.createObjectURL\(blob\)/.test(appSrc335) && /revokeObjectURL/.test(appSrc335)
+      && !/gallery.*data:image\/|addGalleryImage\([^)]*base64/.test(appSrc335));
   }
 
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.

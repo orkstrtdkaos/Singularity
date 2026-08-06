@@ -309,6 +309,29 @@ export function galleryCategory(g = {}) {
   return "moments"; // moment / scene / quest / anything else — the beats worth a picture
 }
 
+/** SNG-335 — A FILENAME THE PLAYER WILL RECOGNISE SIX MONTHS FROM NOW.
+ *
+ *  Erik: "add an option to save an image locally — that would preserve it even if the url vanishes."
+ *  Removing the gallery cap keeps the ENTRY forever, but an entry is a URL; only a file on disk survives
+ *  the host expiring it.
+ *
+ *  ⚠️ THE NAME IS THE WHOLE VALUE OF A SAVED FILE. `image_47.png` in a downloads folder is indistinguishable
+ *  from junk, so this builds it from the caption the player already read under the picture, and falls back to
+ *  the kind rather than to nothing. Pure — the fetching is the app's. */
+export function imageFileName(caption = "", kind = "image", ext = "png") {
+  const base = String(caption || "").split(" — ")[0].trim() || String(kind || "image");
+  const slug = base.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 60);
+  return `singularity-${slug || "image"}.${ext}`;
+}
+
+/** The extension a URL implies, defaulting to png. Content-type wins when the caller has one. */
+export function imageExtFor(url = "", contentType = "") {
+  const fromType = /image\/(png|jpeg|jpg|webp|gif)/i.exec(String(contentType || ""));
+  if (fromType) return fromType[1].toLowerCase() === "jpeg" ? "jpg" : fromType[1].toLowerCase();
+  const fromUrl = /\.(png|jpe?g|webp|gif)(?:[?#]|$)/i.exec(String(url || ""));
+  return fromUrl ? fromUrl[1].toLowerCase().replace("jpeg", "jpg") : "png";
+}
+
 export function ensureGallery(character) {
   if (character && !Array.isArray(character.gallery)) character.gallery = [];
   return character;

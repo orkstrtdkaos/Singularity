@@ -41,8 +41,54 @@ export function reconcileGeneratedNpcWithMeet(character, npcUpdates, req, rec) {
   return rec.id;
 }
 
-export const REGISTRY_CAP = 40; // SNG-199/205: shared with the reconcile registry-backfill — one cap, one home
+// SNG-333 — DUNBAR'S NUMBER. Erik: "150 known relationships." It was 40, and 40 is not a social circle;
+// it is the number of people you meet in a long afternoon. The cap is now the one number anthropology
+// actually offers for "people you can hold a relationship with", which is a far better answer than a
+// round number picked to bound an array.
+export const REGISTRY_CAP = 150; // SNG-199/205: shared with the reconcile registry-backfill — one cap, one home
 const CAPS = { registry: REGISTRY_CAP, history: 10, knownFacts: 8, skills: 6 };
+
+export function kinFact(n) {
+  if (!n || !n.kin) return null;
+  const who = n.name || n.id;
+  if (!who) return null;
+  const rel = String(n.relationship || n.role || "").trim();
+  if (n.kin === "sworn") return `${who} is sworn to you — a bond you both chose.`;
+  return rel ? `${who} is family — ${rel}.` : `${who} is family.`;
+}
+
+/** SNG-333 — WHO GOES WHEN THE CIRCLE IS FULL.
+ *
+ *  Erik's rule, exactly: insertion order by default, and meeting someone again protects them. So the
+ *  candidate is the LEAST-MET person, oldest-first among equals — which means everyone you met once is
+ *  spent before anyone you met twice, and a person you keep running into is effectively permanent.
+ *
+ *  ⛔ KIN ARE NEVER CANDIDATES. Erik: "ones that tie to people should be saved as facts — like my
+ *  player's mother, or Pell's father." Someone who is somebody's family is not an acquaintance the
+ *  circle can afford to forget, whatever the arithmetic says. Returns null when everyone is protected,
+ *  and the caller then refuses the newcomer rather than dropping a relative.
+ *
+ *  Pure over the registry. */
+/** SNG-334 — THE SENTENCE A KIN TIE IS WORTH, or null if this person is not kin.
+ *
+ *  Erik's examples are the shape: "my player's mother", "Pell's father". A relation is a fact ABOUT THE
+ *  WORLD, not a warmth score — it stays true when the score cools, when they leave, and after they die.
+ *  The caller pins it (`facts.pinFact`), which is what makes it survive both the fact budget and the
+ *  Dunbar circle.
+ *
+ *  ⛔ IT READS ONLY WHAT IS RECORDED and invents no relation — if the GM never said HOW they are kin, the
+ *  fact says they are kin and nothing more. Naming someone's mother when the fiction only said "family"
+ *  would be the engine writing canon, which is the one thing it must not do. */
+export function evictionCandidate(reg = {}) {
+  const rows = Object.values(reg).filter(n => n && n.id && !n.kin && !n.isKin);
+  if (!rows.length) return null;
+  rows.sort((a, b) => {
+    const am = Number(a.met) || 0, bm = Number(b.met) || 0;
+    if (am !== bm) return am - bm;                                   // least-met first
+    return (a.firstMet?.day ?? 0) - (b.firstMet?.day ?? 0);          // then oldest-known first
+  });
+  return rows[0].id;
+}
 
 // SNG-108: relationship KIND + arc, orthogonal to the −10..+10 score. The score is INTENSITY; the
 // bondType is the NATURE of the bond; a romantic bond additionally carries a growth STAGE tended by
@@ -117,7 +163,19 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       // only a "meet" may create a person; updates for unknown people are dropped
       // (this is what let the legacy path spawn duplicate id-named entries)
       if (u.op && u.op !== "meet") continue;
-      if (Object.keys(reg).length >= CAPS.registry) continue; // registry full — keep the people who matter
+      // SNG-333 — ⛔ EVICT, DO NOT REFUSE. This used to `continue`, so once you knew 40 people you could
+      // never meet anyone again — the comment said "keep the people who matter" while the actual rule was
+      // insertion order, which is not the same thing and is not what anybody wants.
+      //
+      // Erik's rule: insertion order as the DEFAULT, but a second meeting protects you. So the person who
+      // goes is the least-met, oldest-first among equals — and anyone you have met more than once outlives
+      // everyone you met exactly once. ⛔ KIN ARE NEVER EVICTED: a tie is saved as a FACT (SNG-334) and the
+      // person it names is not a passing acquaintance.
+      if (Object.keys(reg).length >= CAPS.registry) {
+        const goner = evictionCandidate(reg);
+        if (!goner) continue;                  // everyone left is protected — refuse rather than drop kin
+        delete reg[goner];
+      }
       n = reg[id] = {
         id,
         name: prettifyNpcName(String(u.name || id)).slice(0, 60),
@@ -201,7 +259,15 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       n.relationship = Math.max(-10, Math.min(10, n.relationship + Math.max(-2, Math.min(2, u.relationshipDelta))));
     }
     // SNG-108: bond KIND + romantic STAGE — applied AFTER the score so the stage floor sees the fresh value.
-    if (u.bondType || u.bondStage) advanceBond(n, { bondType: u.bondType, bondStage: u.bondStage }, ctx.rules, ctx.day);
+    if (u.bondType || u.bondStage) {
+      advanceBond(n, { bondType: u.bondType, bondStage: u.bondStage }, ctx.rules, ctx.day);
+      // SNG-334 — ⛔ AND A TIE TO A PERSON BECOMES A PINNED FACT, HERE, at the one place a bond changes.
+      // Erik: "ones that tie to people should be saved as facts — like my player's mother, or Pell's
+      // father." Pinned means it outlives the fact budget AND the Dunbar circle: the two things that
+      // would otherwise quietly lose it.
+      const kf = kinFact(n);
+      if (kf) pinFact(character, kf, { day: ctx.day ?? null, subjectId: n.id });
+    }
     if (u.status && ["active", "injured", "missing", "dead", "departed"].includes(u.status)) n.status = u.status;
     if (u.statusNote) n.statusNote = smartClamp(String(u.statusNote), 240); // SNG-152
     // CCODE-85 (Erik: "NPCs should have deeds too"). reputation.js was never character-specific — every
@@ -235,6 +301,10 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       } catch (err) { if (typeof console !== "undefined") console.warn("[npcUpdates] affiliation enrichment failed (person still registered):", err?.message); }
     }
     n.lastSeen = { locationId: ctx.locationId || null, day: ctx.day ?? null };
+    // SNG-333 — ⚠️ COUNT THE MEETINGS. Erik: "if you interface with the NPCs then it should count those
+    // interactions and keep the ones you meet more than once from dropping off." This is the only new
+    // field, and it is written at the one place every interaction already passes through.
+    n.met = (Number(n.met) || 0) + 1;
   }
   return character.npcRegistry;
 }
@@ -313,6 +383,14 @@ export function advanceBond(n, { bondType, bondStage } = {}, rules = null, day =
   if (bondType && BOND_TYPES.includes(bondType) && bondType !== n.bondType) {
     n.bondType = bondType; changed = true;
     n.history = [...(n.history || []), `[d${day ?? "?"}] Your bond becomes ${bondType}.`].slice(-CAPS.history);
+    // SNG-334 — ⛔ A TIE TO A PERSON IS NOT AN ACQUAINTANCE. Erik: "ones that tie to people should be saved
+    // as facts — like my player's mother, or Pell's father." `family` and `sworn` are the two bonds that
+    // name a permanent relation rather than a degree of warmth, so they mark the person as KIN: unevictable
+    // from the circle (SNG-333), and worth a pinned fact the GM is always told.
+    //
+    // ⚠️ NOTHING NEW IS TRACKED — Aevi's own rule for the ties system. `bondType` already existed and already
+    // carried `family`. The tie was recorded all along; it simply meant nothing to anything.
+    if (bondType === "family" || bondType === "sworn") n.kin = bondType;
   }
   if (bondStage && (n.bondType || bondType) === "romantic" && ROMANTIC_STAGES.includes(bondStage)) {
     const wantIdx = ROMANTIC_STAGES.indexOf(bondStage);

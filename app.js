@@ -32,7 +32,7 @@ import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive }
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory } from "./engine/art.js";
+import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
@@ -87,7 +87,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.44";
+const APP_VERSION = "1.9.45";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -640,6 +640,30 @@ function chrome(inner) {
 
 /** Open a modal lightbox over a list of images (arrow-through when >1). Esc / click-backdrop /
  *  ✕ dismiss; ←/→ navigate. Reused by portraits, NPC/location art, moment art, and the gallery. */
+/** SNG-335 — fetch the bytes and hand them to the browser as a download.
+ *
+ *  ⛔ THE BYTES NEVER TOUCH THE SAVE. Inlining as base64 would be ~1.3× the image per picture against a
+ *  ~5MB localStorage budget that the save ALSO syncs to GitHub — a few kept images would break saving, which
+ *  is a far worse failure than a dead link. The file goes to the player's disk; the gallery keeps its URL.
+ *
+ *  ⚠️ THE OBJECT URL IS REVOKED. A blob URL left un-revoked pins the whole image in memory for the life of
+ *  the tab, which for a player browsing a long gallery is exactly the leak nobody notices. */
+async function downloadImage(url, caption = "", kind = "image") {
+  const res = await fetch(url, { mode: "cors" });
+  if (!res.ok) throw new Error(`fetch ${res.status}`);
+  const blob = await res.blob();
+  const ext = imageExtFor(url, blob.type);
+  const href = URL.createObjectURL(blob);
+  try {
+    const a = document.createElement("a");
+    a.href = href; a.download = imageFileName(caption, kind, ext);
+    document.body.appendChild(a); a.click(); a.remove();
+  } finally {
+    setTimeout(() => URL.revokeObjectURL(href), 1000);
+  }
+  return true;
+}
+
 function openLightbox(items, start = 0) {
   const list = (items || []).filter(it => it && it.url);
   if (!list.length) return;
@@ -659,8 +683,36 @@ function openLightbox(items, start = 0) {
       ${it.caption ? `<div class="lightbox-cap">${esc(it.caption)}${list.length > 1 ? ` · ${i + 1}/${list.length}` : ""}</div>` : ""}
       ${list.length > 1 ? `<button class="lightbox-nav prev" data-lbprev>‹</button><button class="lightbox-nav next" data-lbnext>›</button>` : ""}
       <button class="lightbox-close" data-lbclose>✕</button>
+      <button class="lightbox-save" data-lbsave title="Save this image to your device — it stays yours even if the link expires">⤓ Save</button>
     </div>`;
     el.querySelector("[data-lbclose]").onclick = close;
+    // SNG-335 — ⚠️ SAVE IT WHERE NO LINK CAN EXPIRE. Erik: "add an option to save an image locally — that
+    // would preserve it even if the url vanishes."
+    //
+    // ⛔ THIS IS THE ONLY THING THAT ACTUALLY PROTECTS THE PICTURE. Removing the gallery cap (SNG-332) keeps
+    // the ENTRY forever, but an entry is a URL: if the host expires it, the record survives and the image
+    // does not. A file on the player's own disk is outside anything this app can lose.
+    //
+    // ⛔ AND IT DOES NOT INLINE INTO THE SAVE. Base64 in `character.gallery` would be ~1.3× the image per
+    // picture against localStorage's ~5MB, and the save also syncs to GitHub — a handful of kept images
+    // would break SAVING, which is a far worse failure than a dead link. The bytes go to disk; the save
+    // keeps the metadata it always kept.
+    const saveBtn = el.querySelector("[data-lbsave]");
+    if (saveBtn) saveBtn.onclick = async (ev) => {
+      ev.stopPropagation();
+      saveBtn.disabled = true; saveBtn.textContent = "…saving";
+      try {
+        await downloadImage(it.url, it.caption);
+        saveBtn.textContent = "✓ saved";
+      } catch (err) {
+        // ⚠️ NAME THE REASON. A silent failure here reads as success, and the player finds out when they go
+        // looking for a file that was never written.
+        console.warn("[gallery] save failed", err);
+        saveBtn.textContent = "✕ couldn't save";
+        saveBtn.title = "Could not fetch the image — the link may already have expired. Try right-click → Save image as…";
+      }
+      setTimeout(() => { saveBtn.disabled = false; saveBtn.textContent = "⤓ Save"; }, 2500);
+    };
     const prev = el.querySelector("[data-lbprev]"); if (prev) prev.onclick = (e) => { e.stopPropagation(); i = (i - 1 + list.length) % list.length; render(); };
     const next = el.querySelector("[data-lbnext]"); if (next) next.onclick = (e) => { e.stopPropagation(); i = (i + 1) % list.length; render(); };
   };

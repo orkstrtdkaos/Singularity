@@ -40,16 +40,53 @@ export function applyFactUpdates(character, updates = [], ctx = {}) {
     });
     notes.push(`established: ${text}`);
   }
-  // keep the newest CAP; the ledger never drops on a fixed window like the chronicle
-  if (character.establishedFacts.length > CAP) {
-    character.establishedFacts = character.establishedFacts.slice(-CAP);
-  }
+  // SNG-334 — ⛔ THE STORE IS UNBOUNDED NOW. Erik: "it seems good that we want the ability to reach any TRUE
+  // thing, but what gets sent each turn needs a reasonable cap."
+  //
+  // This used to `slice(-CAP)` at 40, silently dropping the OLDEST CANON THE GM EVER ESTABLISHED — so a long
+  // game could contradict itself about its own early events and nothing would report it. Same bug as
+  // `knownPlaces`, in a second place: a cap on a LOG is housekeeping; a cap on WHAT IS TRUE is amnesia.
+  //
+  // The cost the cap was paying for is real — these are rendered into the prompt every turn — but it belongs
+  // to the VIEW, not the store. Nothing is forgotten; `factsForGM` decides what gets said.
   return notes;
 }
 
-/** The full active ledger for the GM — fed every turn, never windowed. */
-export function factsForGM(character) {
+/** SNG-334 — THE VIEW, WHICH IS WHERE THE CAP BELONGS.
+ *
+ *  The store never forgets; this decides what is worth the prompt's room THIS TURN. Two rules, in order:
+ *
+ *   1. ⛔ PINNED FACTS ARE ALWAYS SENT. A tie to a person — "my player's mother", "Pell's father" — is not a
+ *      fact that ages out. Erik asked for exactly those to be saved as facts, and a fact you cannot rely on
+ *      being told is not saved in any sense that matters.
+ *   2. Then the most recent, up to the budget. Recency is the right default for the rest because the GM is
+ *      being reminded rather than taught — and nothing here is lost, only unsaid.
+ *
+ *  ⚠️ IT SAYS HOW MUCH IT LEFT OUT. A silently-windowed view reads exactly like a complete one, which is how
+ *  a GM comes to believe the ledger is short. Naming the remainder keeps "what is true" and "what I was told
+ *  this turn" as separate claims. */
+export function factsForGM(character, budget = CAP) {
   const facts = character.establishedFacts || [];
   if (!facts.length) return null;
-  return facts.map(f => `- ${f.text}${f.day != null ? ` (day ${f.day})` : ""}`).join("\n");
+  const pinned = facts.filter(f => f?.pinned);
+  const rest = facts.filter(f => !f?.pinned);
+  const room = Math.max(0, budget - pinned.length);
+  const shown = [...pinned, ...rest.slice(-room)];
+  const hidden = facts.length - shown.length;
+  const line = f => `- ${f.text}${f.day != null ? ` (day ${f.day})` : ""}`;
+  return shown.map(line).join("\n") + (hidden > 0
+    ? `\n- (…and ${hidden} more you established earlier — still true; ask if it matters)` : "");
+}
+
+/** ⛔ A FACT THAT NAMES A RELATIONSHIP IS PINNED. Erik: "ones that tie to people should be saved as facts —
+ *  like my player's mother, or Pell's father." Kin do not age out of what the GM is told. */
+export function pinFact(character, text, ctx = {}) {
+  ensureFacts(character);
+  const t = smartClamp(String(text || ""), 300);
+  if (!t) return null;
+  const existing = character.establishedFacts.find(f => f.text === t);
+  if (existing) { existing.pinned = true; return existing; }
+  const rec = { text: t, day: ctx.day ?? null, subjectId: ctx.subjectId ? String(ctx.subjectId).slice(0, 40) : null, pinned: true };
+  character.establishedFacts.push(rec);
+  return rec;
 }

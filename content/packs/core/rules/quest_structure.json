@@ -40,7 +40,7 @@
   },
   "stageChain": {
     "_theLaw": "⚠️ EACH STAGE MUST NEED SOMETHING THE STAGE BEFORE IT PRODUCED. This is the law that makes a sequence into a story. Erik, from play: 'if you can learn, obtain, and deliver the required objectives in 3 beats it's not really a quest.' The cause was not that stages closed too fast — it was that THEY DID NOT NEED EACH OTHER, so the order never mattered and nothing accumulated.",
-    "_theTest": "Ask: COULD A PLAYER DO STAGE 3 FIRST? If yes, you have written three errands with a shared title. If no — because stage 3 needs the name stage 2 found, and stage 2 needs the document stage 1 took — you have written a quest.",
+    "_theTest": "⚠️ ASK IT OUT LOUD BEFORE YOU WRITE STAGE 3: COULD A PLAYER DO STAGE 3 FIRST?\nIf yes, you have written three errands with a shared title. If no — because stage 3 needs the name stage 2 found, and stage 2 needs the document stage 1 took — you have written a quest.\nFAILS THE TEST: (1) find the filing (2) find the clerk (3) write back. Each is findable alone; the order is decoration.\nPASSES THE TEST: (1) take the filing — it names a seal you cannot read (2) find who owns that seal, which only the filing tells you (3) write back, which needs the filing AS EVIDENCE and the clerk AS ADDRESSEE.\n⚠️ THE DIFFERENCE IS ONE SENTENCE PER STAGE: each one must END by producing the thing the next one NEEDS.",
     "howToChain": {
       "learn→act": "stage 1 finds out WHO or WHERE; stage 2 requires that name and cannot begin without it",
       "obtain→use": "stage 1 takes the thing; stage 2 needs it in hand — and ⚠️ if the player loses it, the quest bends rather than breaking",
@@ -56,6 +56,25 @@
     "_theRule": "⚠️ A ROUTE'S LABEL MAY BE VISIBLE; ITS REASONING MAY NOT. Erik, from play: 'it gave away some things with the greyed out approaches.' He was right, and the fault is in how I authored them — I wrote routes as EXPLANATIONS rather than OPTIONS.",
     "wrong": "Answer — the clerk signed because the filing was technically correct and no one from the pass appeared to contest it.",
     "right": "Answer — there is a person whose signature made this legal. You have not found out why yet.",
-    "why": "The wrong version prints THE DISCOVERY OF STAGE 2 before stage 1 begins. A route should name what you could DO and what it would cost you — never what you would learn by doing it. The reasoning belongs to the stage that earns it."
+    "why": "The wrong version prints THE DISCOVERY OF STAGE 2 before stage 1 begins. A route should name what you could DO and what it would cost you — never what you would learn by doing it. The reasoning belongs to the stage that earns it.",
+    "examples": [
+      {
+        "wrong": "Answer — the clerk signed because the filing was technically correct and no one from the pass appeared to contest it.",
+        "right": "Answer — there is a person whose signature made this legal. You have not found out why yet.",
+        "why": "the wrong version prints the DISCOVERY of stage 2 before stage 1 begins"
+      },
+      {
+        "wrong": "Repair — the common-right traditions Splarf has assembled over two years are enough to file a counter-claim; it will be slow and inglorious but it will hold.",
+        "right": "Repair — you may know enough law to answer this on its own terms. It would be slow.",
+        "why": "the wrong version answers 'will it work?', which is the question the stage exists to make the player sweat"
+      },
+      {
+        "wrong": "Name — the document is valid, the clerk acted legally, and the law as written does not reach Hoss's case.",
+        "right": "Name — you could say plainly what was done and who did it. Nothing would be undone by it.",
+        "why": "the wrong version delivers the quest's whole THESIS in a route label; there is nothing left to arrive at"
+      }
+    ],
+    "_theShape": "⚠️ A ROUTE IS A DOOR, NOT A SUMMARY. Name what the player could DO and what it would COST them. Never name what they would LEARN by doing it, whether it would WORK, or what it would MEAN. Those three belong to the stage that earns them.\nA good route fits in one line and leaves a question open. If yours needs two sentences to explain the reasoning, the reasoning is stage content and you have written it in the wrong place.",
+    "_lengthIsATell": "⚠️ IF A ROUTE RUNS PAST ABOUT EIGHTY CHARACTERS, IT HAS PROBABLY STOPPED BEING AN OPTION AND STARTED BEING AN EXPLANATION. Length is the cheapest signal that this rule is being broken."
   }
 }

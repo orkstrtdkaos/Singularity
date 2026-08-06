@@ -1,0 +1,72 @@
+{
+ "schemaVersion": 1,
+ "id": "greenforge",
+ "name": "Greenforge",
+ "regionId": "the_foothills",
+ "communityId": "greenforge",
+ "spectrum": {
+  "death_life": 0.3,
+  "destruction_creation": 0.3
+ },
+ "tags": [
+  "outpost",
+  "settlement"
+ ],
+ "connections": [
+  "the_heartroot",
+  "the_forge_eternal"
+ ],
+ "descriptionSeed": "Greenforge — an outpost where growers and makers work the same timber. The rootkin raise it and the wrights cut it, which is an argument they have settled by dividing the year rather than the wood.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
+ "dangerLevel": 1,
+ "image": "content/packs/valley/assets/greenforge.jpg",
+ "questSeeds": [],
+ "map": {
+  "x": 620,
+  "y": 305
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "life": 0.3,
+  "creation": 0.3
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.2,
+  "radius": 90,
+  "reason": "The Archive was sealed before the Transition and never opened to it. What is inside is still what was inside.",
+  "radiusWorld": 0.054,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.3,
+  0,
+  0,
+  0.3
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ An outpost balances EXACTLY TWO domains, so exactly two components are non-zero and both are modest — the signature that distinguishes an outpost from a foothill.",
+ "worldPos": {
+  "colatitude": 85,
+  "longitude": 246,
+  "depth": 0
+ },
+ "worldPosNote": "⚠️ THE MIDPOINT BETWEEN the_heartroot AND the_forge_eternal. An outpost sits where two domains meet in balance, so its position is the average of the two it balances — not a step out from the centre, which is what a foothill is.",
+ "outpostOf": [
+  "rootkin",
+  "wright"
+ ],
+ "betweenPoles": [
+  "the_heartroot",
+  "the_forge_eternal"
+ ]
+}

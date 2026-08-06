@@ -1782,6 +1782,87 @@
     },
     "note": "KEPT but shortened 168h -> 72h. It is a working, not a strike; three days rather than a week."
    }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_carrying_note",
+   "name": "The Carrying Note",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "harmonic",
+   "tradition": "harmonic",
+   "attribute": "mental",
+   "axes": {
+    "harmonic": 0.6
+   },
+   "functions": [
+    "travel",
+    "transform"
+   ],
+   "narrationHints": "A travel and explore action. You ride a note the moving air is already holding, which make",
+   "description": "⚠️ HARMONIC FLIGHT: you find the note the air is already holding and ride it. Not lift — RESONANCE, which means the air has to be doing something. Still air is silent air, and silent air holds nothing up.",
+   "notFor": "Still air, sealed rooms, and anywhere the wind has stopped. It is loud, and everything within a mile hears the note.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Carrying Note",
+     "grants": "Ride a sustained note on moving air — fast, and audible for a mile.",
+     "cannot": "Still air. Silence. Arriving unheard.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Carry",
+     "grants": "Cross a route on the wind's own chord, faster the worse the weather.",
+     "cannot": "Choosing your own direction against a strong wind — you go with it or you fight it.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL",
+    "EXPLORE"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8,
+    "range": "route-scale",
+    "note": "⚠️ WEATHER-DEPENDENT AND LOUD. Faster in bad weather, unavailable in still air, and every leg arrives announced by sound."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "one carried passage",
+    "surge": "ride the storm; YOU GO WITH THE WIND OR YOU FIGHT IT"
+   },
+   "bounds": [
+    {
+     "text": "STILL AIR HOLDS NOTHING UP — no wind, no flight",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS AUDIBLE FOR A MILE",
+     "class": "cost"
+    },
+    {
+     "text": "at rank 2 you go WHERE THE WIND GOES unless you spend to fight it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A travel and explore action. You ride a note the moving air is already holding, which makes it fast in wind and completely unavailable in still air or sealed places. It is audible for a mile, so every leg arrives announced by sound. At rank 2 it gets faster the worse the weather, but you travel where the wind is going unless you pay extra to fight it."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

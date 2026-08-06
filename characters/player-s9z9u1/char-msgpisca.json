@@ -41,12 +41,14 @@
       "native": true
     }
   ],
-  "alignment": {},
+  "alignment": {
+    "spectrumId": 0
+  },
   "attunement": 1,
   "maxHealth": 35,
   "health": 32,
   "maxEnergy": 100,
-  "energy": 27,
+  "energy": 37,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -59,23 +61,6 @@
         "careful"
       ],
       "consumable": false
-    },
-    {
-      "id": "waterskin",
-      "name": "Waterskin",
-      "kind": "consumable",
-      "qty": 1,
-      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
-      "effects": {
-        "energy": 10
-      },
-      "bonusTags": [
-        "weather",
-        "travel",
-        "survival"
-      ],
-      "consumable": true,
-      "pinned": true
     }
   ],
   "deeds": [
@@ -113,7 +98,153 @@
     "At The Thinning's waygate clearing, evening deepens. Splarf consulted Boo about the dark gathering at the forest's edge while Cevaine stood sentinel, the sealed veil humming between them and mystery. Something moves in the woods—something that does not announce itself."
   ],
   "currentLocationId": "gen-object-object",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-object-object",
+    "turns": [
+      {
+        "player": "Ask Cevain3 if she'd like to join you while you investigate what Boo has sensed.",
+        "summary": "At The Thinning's sealed waygate, evening deepens. Splarf asks Cevaine to join the investigation of Boo's sensed presence. The Lattice-reader, yielding to the character's unbroken form and admitting uncertainty, agrees to walk into the dark. A line of Marchers holds a distant breach — a grace glimpsed at the world's edge. The thin place remains sealed behind them. The veil hums, unanswered.",
+        "narration": "You turn from the forest edge where Boo's attention has fixed itself and find Cevaine still at the veil's sealed face, the geometric precision of their stance unwavering even as the evening deepens around them. The humming from the thin place has not changed pitch. You cross the clearing toward them, your footsteps loud on the deadfall.\n\n\"There's something moving in the dark,\" you say. It's not a question, the way you say it. \"Boo knows. I'm going to follow. Come with me.\"\n\nCevaine turns slowly — every movement still carrying that lattice-trained geometry, as if they are solving the angle of turning itself. Their eyes, which have been tracking the veil's shape, find you instead. For a moment they simply look at you, and you see it again: the fracture you put there when you held the form against their absolute precision. The thing that told them certainty has limits.\n\n\"The breach is sealed,\" Cevaine says. Not a refusal. An observation. But they do not return their gaze to the veil. They are waiting — still waiting — to understand how to think about a problem that has no seam to close.\n\n\"I don't know what's in the dark either,\" you say quietly. \"But we're going to find out.\"\n\nCevaine's shoulder — the one they've been favoring, the injury from the yield — tightens slightly. Then they nod, a single geometric motion. They step away from the veil, toward the tree line where Boo's shape is barely visible, a nothing among shadows. \"The Lattice solves what it can solve,\" they say. \"Let us see what this is.\"\n\nThe three of you move together into the gathering dark."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You turn from the forest edge where Boo's attention has fixed itself and find Cevaine still at the veil's sealed face, the geometric precision of their stance unwavering even as the evening deepens around them. The humming from the thin place has not changed pitch. You cross the clearing toward them, your footsteps loud on the deadfall.\n\n\"There's something moving in the dark,\" you say. It's not a question, the way you say it. \"Boo knows. I'm going to follow. Come with me.\"\n\nCevaine turns slowly — every movement still carrying that lattice-trained geometry, as if they are solving the angle of turning itself. Their eyes, which have been tracking the veil's shape, find you instead. For a moment they simply look at you, and you see it again: the fracture you put there when you held the form against their absolute precision. The thing that told them certainty has limits.\n\n\"The breach is sealed,\" Cevaine says. Not a refusal. An observation. But they do not return their gaze to the veil. They are waiting — still waiting — to understand how to think about a problem that has no seam to close.\n\n\"I don't know what's in the dark either,\" you say quietly. \"But we're going to find out.\"\n\nCevaine's shoulder — the one they've been favoring, the injury from the yield — tightens slightly. Then they nod, a single geometric motion. They step away from the veil, toward the tree line where Boo's shape is barely visible, a nothing among shadows. \"The Lattice solves what it can solve,\" they say. \"Let us see what this is.\"\n\nThe three of you move together into the gathering dark.",
+      "sceneSummary": "At The Thinning's sealed waygate, evening deepens. Splarf asks Cevaine to join the investigation of Boo's sensed presence. The Lattice-reader, yielding to the character's unbroken form and admitting uncertainty, agrees to walk into the dark. A line of Marchers holds a distant breach — a grace glimpsed at the world's edge. The thin place remains sealed behind them. The veil hums, unanswered.",
+      "choices": [
+        {
+          "label": "Move deeper into the woods, following Boo's silent lead.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cevaine what they sense, geometrically, about what's moving in the dark.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Pause and listen — use Numen-Sense to feel what the dark is carrying right now.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "numen_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": {},
+      "offer": {
+        "thing": "Cevaine's admission and agreement to walk into uncertainty with you",
+        "from": "the fracture you opened in their geometric certainty when you held the form; they are learning that problems with no seams can still be walked toward"
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "The Thinning's waygate clearing, full evening now. The sealed veil hums a low, steady note at the forest's deep edge. Deadfall scattered across the ground. The clearing is open enough to move freely, but the dark beyond the trees is absolute. The air smells of turned earth and the copper-note the thin places carry. Distant: the sound of Marchers holding a breach, a rout bending around their unmoving line.",
+        "npcsPresent": [
+          {
+            "name": "Cevaine",
+            "state": "Stepping away from the veil, moving with geometric precision toward the tree line. Favoring their injured shoulder slightly. Eyes fixed on you and Boo now, not on the sealed thin place."
+          }
+        ],
+        "objects": [
+          "The sealed veil — a shimmer at the forest's edge, humming steadily",
+          "Deadfall and stone underfoot",
+          "The darkness of the Disputed Zone wood beyond the clearing's open ground"
+        ],
+        "threads": [
+          "What is moving in the dark that Boo has sensed — something that does not announce itself",
+          "Cevaine's new willingness to walk into uncertainty, to solve what cannot be solved geometrically",
+          "The sealed veil's continued humming — still closed, still refusing further crossing"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cevaine",
+          "note": "Yielded to the character's invitation to investigate the dark. Admitting uncertainty has opened something — they are no longer looking only at the veil, but at the character who stood against precision itself.",
+          "learned": [
+            "Cevaine does not return to the veil's study when asked to walk into a problem without a seam",
+            "The geometric mind can choose to move toward what it cannot solve"
+          ],
+          "relationshipDelta": 1,
+          "statusNote": "Active, injured shoulder, walking into the dark with Splarf and Boo — still learning how to think."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": {},
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "evening deepens to near-dark as the three prepare and begin to move"
+      },
+      "moveTo": {},
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": {},
+      "imagePrompt": "Evening fading. Cevaine — angular, translucent-skinned, eyes tracking geometry in motion — steps away from the sealed veil's shimmer and moves toward the tree line where Boo is barely visible: a shape that is cat-like only when looked at directly, fur that reads as absence. Between them, Splarf stands at the clearing's edge, looking into the dark. The distant sound of a rout bending around Marchers' unmoving line. Three figures about to enter what announces nothing.",
+      "gambitOps": {},
+      "gambitApt": false,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Thinning's waygate clearing, full evening now. The sealed veil hums a low, steady note at the forest's deep edge. Deadfall scattered across the ground. The clearing is open enough to move freely, but the dark beyond the trees is absolute. The air smells of turned earth and the copper-note the thin places carry. Distant: the sound of Marchers holding a breach, a rout bending around their…",
+      "npcsPresent": [
+        {
+          "name": "Cevaine",
+          "state": "Stepping away from the veil, moving with geometric precision toward the tree line. Favoring their injured shoulder sligh"
+        }
+      ],
+      "objects": [
+        "The sealed veil — a shimmer at the forest's edge, humming steadily",
+        "Deadfall and stone underfoot",
+        "The darkness of the Disputed Zone wood beyond the clearing's open ground"
+      ],
+      "threads": [
+        "What is moving in the dark that Boo has sensed — something that does not announce itself",
+        "Cevaine's new willingness to walk into uncertainty, to solve what cannot be solved geometrically",
+        "The sealed veil's continued humming — still closed, still refusing further crossing"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -258,23 +389,24 @@
         "locationId": "gen-object-object",
         "day": 1
       },
-      "relationship": 3,
+      "relationship": 4,
       "history": [
         "[d1] Confronted Splarf at the waygate clearing, holding them accountable for breaching the veil with old-language speech. Treats the breach as a structural problem to be solved.",
         "[d1] Yielded to Splarf in ritual contest at the waygate clearing. Recognized in Splarf's unshakeable practice something that resists geometric precision. First willingness to acknowledge a limitation in their own system.",
         "[d1] Declined Splarf's offered aid with precision and distance. Their shoulder is injured but they reject tending. They have turned their focus to the tree-line and the advancing dark, visibly withdrawing into stillness after their defeat.",
         "[d1] Yielded to Splarf in ritual contest. Now admitting that geometric precision cannot solve this breach. They are waiting to understand what Splarf means to do. For the first time, they are uncertain about the Lattice's answer.",
-        "[d1] Splarf asked Cevaine plainly what the Lattice intends for the sealed breach. The order-reader admitted uncertainty — a fracture in their geometric confidence. They are waiting to see what Splarf chooses to do. Standing watch at the tree-line now, accepting the weight of not-knowing."
+        "[d1] Splarf asked Cevaine plainly what the Lattice intends for the sealed breach. The order-reader admitted uncertainty — a fracture in their geometric confidence. They are waiting to see what Splarf chooses to do. Standing watch at the tree-line now, accepting the weight of not-knowing.",
+        "[d1] Yielded to the character's invitation to investigate the dark. Admitting uncertainty has opened something — they are no longer looking only at the veil, but at the character who stood against precision itself."
       ],
       "knownFacts": [
-        "Cevaine is of the Seventh Measure and trained in lattice precision",
-        "They do not see the breach as negotiable — only as a problem",
         "The Unbroken Practice — a discipline so still and centered that it cannot be anticipated, because it is not a pattern to be read.",
         "The veil sealed itself — it did not wait for Lattice technique.",
         "The figure on the other side was not attacking — it was trying to speak.",
         "Cevaine recognizes a limit to what geometric thinking can solve.",
         "Cevaine does not know what comes next — an unprecedented admission from a Lattice-trained order-reader.",
-        "The Lattice's response to the breach is not automatic; it depends on what the character who held the practice decides."
+        "The Lattice's response to the breach is not automatic; it depends on what the character who held the practice decides.",
+        "Cevaine does not return to the veil's study when asked to walk into a problem without a seam",
+        "The geometric mind can choose to move toward what it cannot solve"
       ],
       "skillsObserved": [
         "geometric precision of movement",
@@ -286,7 +418,7 @@
       "status": "active",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "statusNote": "Active, injured shoulder, standing watch. Present at the clearing edge, facing the dark.",
+      "statusNote": "Active, injured shoulder, walking into the dark with Splarf and Boo — still learning how to think.",
       "domains": {
         "primary": "lattice"
       },
@@ -402,10 +534,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "A figure that stepped through the veil — something half-real, reading the valley, standing at the thin place",
-        "from": "The stirring arc 'What Wakes Beneath' — the substrate flickering, and now something on the other side has noticed the thinning. The veil's…"
-      },
-      {
         "thing": "The sharp, aching certainty that whatever came through the veil came to DELIVER something, not to take — and you interrupted it mid-act.",
         "from": "the figure's emotion bleeding through the connection as it broke — not hunger or malice, but a thing sent to do work, and the work undone"
       },
@@ -420,6 +548,10 @@
       {
         "thing": "Boo's warning — something in the woods that does not make the small familiar sounds of night",
         "from": "Boo's own nature and what it knows of the dark; the thinning boundary where things from both sides of the veil might walk"
+      },
+      {
+        "thing": "Cevaine's admission and agreement to walk into uncertainty with you",
+        "from": "the fracture you opened in their geometric certainty when you held the form; they are learning that problems with no seams can still be…"
       }
     ]
   },
@@ -576,21 +708,21 @@
     }
   },
   "tendencies": {
-    "stealth": 10.616473447609405,
-    "strategic": 1.8375915934997558,
-    "cautious": 3.5777555878845213,
-    "cerebral": 1.7401639943847658,
-    "patient": 0.9036878906249999,
-    "devotion": 1.8305472656250001,
-    "risky": 0.9268593749999999,
-    "generous": 0.9506249999999999,
-    "social": 0.975
+    "stealth": 10.35106161141917,
+    "strategic": 2.791651803662262,
+    "cautious": 3.4883116981874083,
+    "cerebral": 2.6966598945251468,
+    "patient": 0.8810956933593749,
+    "devotion": 1.784783583984375,
+    "risky": 0.9036878906249999,
+    "generous": 0.9268593749999999,
+    "social": 1.950625
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 8,
+  "actionCount": 9,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -836,8 +968,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785975528081,
-  "rev": 47,
+  "updatedAt": 1785975772850,
+  "rev": 49,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -973,7 +1105,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 14
+    "the_numinous_reach": 15
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -981,10 +1113,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-06T00:18:48.076Z",
+      "lastAt": "2026-08-06T00:22:52.836Z",
       "startDay": 36,
       "endDay": 37,
-      "beats": 14
+      "beats": 15
     }
   ],
   "establishedFacts": [
@@ -1015,37 +1147,37 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 6,
+      "applied": 7,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 14,
-    "scene": 14,
-    "choices": 14,
-    "offer": 6,
+    "sceneSummary": 15,
+    "scene": 15,
+    "choices": 15,
+    "offer": 7,
     "codexUpdates": 9,
-    "imagePrompt": 6,
-    "gambitApt": 11,
-    "sceneEnded": 14,
+    "imagePrompt": 7,
+    "gambitApt": 12,
+    "sceneEnded": 15,
     "characterDeltas": 8,
     "arcOps": 1,
     "factUpdates": 3,
     "placeUpdates": 3,
-    "timeOps": 4,
+    "timeOps": 5,
     "deeds": 2,
     "ledgerEvents": 1,
     "questUpdates": 2,
-    "npcUpdates": 6,
+    "npcUpdates": 7,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
     "markDefiningMoment": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 14,
+  "_opTurns": 15,
   "practice": {
     "schemaVersion": 1,
     "uses": {

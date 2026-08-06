@@ -1,0 +1,345 @@
+{
+ "schemaVersion": 1,
+ "id": "foothills",
+ "kind": "locations",
+ "note": "⚠️ SNG-334. THE TWELVE FOOTHILLS, AS PLACES. Erik: 'prominent settlements where the majority of the people from the adjacent domains congregate — a local power, philosophically the midpoint between the Crossing and the pole bastion. The pole capital is very much more pure; the foothill locations are PRACTICAL.' Each sits at the LITERAL MIDPOINT of the Crossing's coordinates and its pole capital's, is connected to both, draws on 2-3 ADJACENT domains rather than one, and is a legal starting location for a character whose domain matches.",
+ "principle": "⚠️ THE CAPITAL IS PURE, THE FOOTHILL IS PRACTICAL. That single sentence generated every description here.",
+ "locations": [
+  {
+   "id": "greyhearth",
+   "name": "Greyhearth",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 510,
+    "y": 310
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "ashwarden",
+    "threnodist",
+    "numinous"
+   ],
+   "betweenCrossingAnd": "the_quiet_ground",
+   "connections": [
+    "the_crossing",
+    "the_quiet_ground"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Greyhearth — the burying trades, the mourning trades and the quiet ones — a town that buries the whole valley and does not find it grim. Everyone here has handled a body or sung over one. It is the most matter-of-fact place in the Valley about the thing everyone else will not name."
+  },
+  {
+   "id": "kindlerow",
+   "name": "Kindlerow",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 510,
+    "y": 325
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "blazeborn",
+    "radiant_folk",
+    "wright"
+   ],
+   "betweenCrossingAnd": "the_blaze",
+   "connections": [
+    "the_crossing",
+    "the_blaze"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Kindlerow — forges, lamp-makers and assayers — light as a trade rather than a doctrine. The Blaze burns things out. Kindlerow sells you a lamp, mends your kit, and tells you honestly what your metal is worth."
+  },
+  {
+   "id": "greenmarch",
+   "name": "Greenmarch",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 480,
+    "y": 245
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "rootkin",
+    "valley_craft",
+    "churnfolk"
+   ],
+   "betweenCrossingAnd": "the_heartroot",
+   "connections": [
+    "the_crossing",
+    "the_heartroot"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Greenmarch — the wood's-edge market — growers, foragers, and people who will not be told which side of the Accord they are on. The Quickwood argues about sealing. Greenmarch trades through the argument, and has for six generations."
+  },
+  {
+   "id": "hardline",
+   "name": "Hardline",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 610,
+    "y": 335
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "marcher",
+    "somatic",
+    "stillhold"
+   ],
+   "betweenCrossingAnd": "the_redline",
+   "connections": [
+    "the_crossing",
+    "the_redline"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Hardline — drill-yards, body-halls and mediators, in one town, deliberately. The only place where a marcher and a stillholder train in the same yard. It works because everyone here has needed both."
+  },
+  {
+   "id": "the_low_market",
+   "name": "The Low Market",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 348,
+    "y": 400
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "abyssal",
+    "veilwright",
+    "churnfolk"
+   ],
+   "betweenCrossingAnd": "the_maw",
+   "connections": [
+    "the_crossing",
+    "the_maw"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "The Low Market — the honest end of the Descent's trade — bargains with the terms written down. Not far enough down to be the Maw, not near enough the Crossing to be respectable. Everything is for sale and the price is on it."
+  },
+  {
+   "id": "stair_hollow",
+   "name": "Stair Hollow",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 350,
+    "y": 175
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "seraphic",
+    "lattice",
+    "verist"
+   ],
+   "betweenCrossingAnd": "choirheight",
+   "connections": [
+    "the_crossing",
+    "choirheight"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Stair Hollow — courts, registries and oath-halls beneath the Ascent — judgement you can appeal. ⚠️ The god-named hold court here. The Choir-Height weighs you whether you asked or not; in Stair Hollow you can bring a case, lose, and go home."
+  },
+  {
+   "id": "gearsflat",
+   "name": "Gearsflat",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 390,
+    "y": 192
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "enginewright",
+    "lattice",
+    "precursor"
+   ],
+   "betweenCrossingAnd": "the_great_engine",
+   "connections": [
+    "the_crossing",
+    "the_great_engine"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Gearsflat — workshops, salvage yards, and the people who know which old thing is safe to switch on. The Gearlands builds cathedrals of mechanism. Gearsflat fixes your pump and sells you a part that fits."
+  },
+  {
+   "id": "thinwater",
+   "name": "Thinwater",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 350,
+    "y": 180
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "numinous",
+    "threnodist",
+    "figurist"
+   ],
+   "betweenCrossingAnd": "the_numen",
+   "connections": [
+    "the_crossing",
+    "the_numen"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Thinwater — shrines, listening-houses and pattern-readers, where the veil is workably thin. The Numen is where meaning is overwhelming. Thinwater is where you can go and ask about it and then have lunch."
+  },
+  {
+   "id": "dusklow",
+   "name": "Dusklow",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 200,
+    "y": 315
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "umbral",
+    "veilwright",
+    "threnodist"
+   ],
+   "betweenCrossingAnd": "the_underlight",
+   "connections": [
+    "the_crossing",
+    "the_underlight"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Dusklow — the lit edge of the dark — guides, discreet trades, and people who keep confidences professionally. You hire a guide here to go down, and you come back here to be told what you saw. Nobody in Dusklow repeats anything."
+  },
+  {
+   "id": "plainstead",
+   "name": "Plainstead",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 270,
+    "y": 335
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "verist",
+    "syllogist",
+    "lattice"
+   ],
+   "betweenCrossingAnd": "the_unblinking_stone",
+   "connections": [
+    "the_crossing",
+    "the_unblinking_stone"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Plainstead — arbitration, assay and record — where a dispute goes when both sides want it settled and neither wants blood. Boring on purpose. The Stark Reach will strip you to the truth; Plainstead will just tell you who owns the field."
+  },
+  {
+   "id": "longshore",
+   "name": "Longshore",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 390,
+    "y": 380
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "horizon",
+    "hourkeeper",
+    "mason"
+   ],
+   "betweenCrossingAnd": "the_long_span",
+   "connections": [
+    "the_crossing",
+    "the_long_span"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "Longshore — the waygate town — outfitters, bridge-wrights, and people who know how long a road really takes. Everyone here is either leaving or has just arrived. The one place in the Valley where nobody asks where you are from."
+  },
+  {
+   "id": "the_worn_yard",
+   "name": "The Worn Yard",
+   "regionId": "the_foothills",
+   "kind": "settlement",
+   "map": {
+    "x": 460,
+    "y": 370
+   },
+   "dangerLevel": 1,
+   "tags": [
+    "settlement",
+    "foothill",
+    "market"
+   ],
+   "foothillOf": [
+    "unmaker",
+    "mason",
+    "wright"
+   ],
+   "betweenCrossingAnd": "the_scour",
+   "connections": [
+    "the_crossing",
+    "the_scour"
+   ],
+   "startingLocation": true,
+   "descriptionSeed": "The Worn Yard — demolition, salvage and honest endings — the trade of taking things apart properly. The Unmade ends things. The Worn Yard ends things and clears the site, which is why every builder in the Valley knows the name."
+  }
+ ]
+}

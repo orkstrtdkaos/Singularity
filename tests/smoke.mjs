@@ -7443,7 +7443,30 @@ await (async () => {
 
   // the integration: the 62 staged epics are loaded content, merged into the roster, and the GM sees pursuable legends.
   const epicFile = JSON.parse(readFileSync(join(root, "content/packs/valley/tradition_epics.json"), "utf8"));
-  check("208-wire: the 62 tradition-epics are loaded content (all arcAffinity → real arcs, all tradition → real ring)", epicFile.epics.length === 62);
+  // ⚠️ THIS GATE WAS WRONG IN TWO WAYS AT ONCE, AND AEVI'S CONTENT FOUND BOTH BY GROWING.
+  //
+  //   1. It asserted `epics.length === 62` — a COUNT that content is allowed to grow. She authored the
+  //      foothills (62 → 66) and a CORRECT addition turned the build red: the same class as the
+  //      `marcher > stillhold * 5` gate, a check defending yesterday's content against today's.
+  //   2. ⛔ WORSE — THE NAME PROMISED TWO CHECKS THE ASSERTION NEVER MADE. It read "all arcAffinity → real
+  //      arcs, all tradition → real ring" and validated NEITHER. It sat green for months over a claim it
+  //      was not testing: the words were doing work the code was not, which is the same shape as a stale
+  //      coverage report and just as trustworthy.
+  //
+  // It now asserts a FLOOR (growth is fine, silent emptying is not) and actually performs the two checks
+  // its name has been making all along.
+  const { loadContentHeadless: lch208 } = await import("./headless_content.mjs");
+  const liveEpicContent = await lch208();
+  check("208-wire: the tradition-epics are loaded content (all arcAffinity → real arcs, all tradition → real ring)", (() => {
+    const epics = epicFile.epics || [];
+    if (epics.length < 60) return false;                       // a floor, never a fixed count
+    const arcIds = new Set((liveEpicContent.greaterArcs || []).map(a => a.id));
+    const ring = liveEpicContent.traditionIndex?.byId || {};
+    const badArc = epics.filter(e => e.arcAffinity?.arcId && !arcIds.has(e.arcAffinity.arcId));
+    const badTrad = epics.filter(e => e.tradition && !ring[e.tradition]);
+    for (const e of [...badArc, ...badTrad].slice(0, 5)) console.log(`      unresolvable: ${e.id} arc=${e.arcAffinity?.arcId} tradition=${e.tradition}`);
+    return !badArc.length && !badTrad.length;
+  })());
   const stSrc = readFileSync(join(root, "engine/state.js"), "utf8");
   check("208-wire: state.js merges the epics into ONE legends roster (staged → loaded, epics win overlaps)", /tradition_epics\.json/.test(stSrc) && /epics win on overlap/.test(stSrc));
   const gmSrc208w = readFileSync(join(root, "engine/gm.js"), "utf8");

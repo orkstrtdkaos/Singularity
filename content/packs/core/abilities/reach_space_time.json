@@ -2123,6 +2123,167 @@
     }
    ],
    "plainly": "A investigate action that reveals information or sets up a later action. Its strength is rated 9 out of 10, and lasts for about an hour Limit: iT Costs Nearly All You Have."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_stepped_span",
+   "name": "The Stepped Span",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_space_time",
+   "tradition": "horizon",
+   "attribute": "mental",
+   "axes": {
+    "space_time": 0.7
+   },
+   "functions": [
+    "travel",
+    "transform"
+   ],
+   "narrationHints": "A travel and explore action. A bridge forms one pace ahead of your foot and unmakes behind",
+   "description": "⚠️ HORIZON FLIGHT, AND IT IS NOT FLIGHT — it is a bridge you make one pace ahead of your own foot. A span forms where you are about to step and unmakes behind you. To a watcher you are walking on nothing, unhurried, in a straight line over whatever was in the way.",
+   "notFor": "Speed — this is a WALK, and it does not go faster than one. It crosses; it does not hurry.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Stepped Span",
+     "grants": "Walk across open air in a straight line, one span at a time, at walking pace.",
+     "cannot": "Hurrying, or turning sharply. A span goes where you were already going.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Span",
+     "grants": "Hold it for a whole crossing — a gorge, a flood, a closed border, a lake.",
+     "cannot": "Carrying much: the span holds you and what you can lift, not a caravan.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL",
+    "EXPLORE"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 6,
+    "range": "route-scale",
+    "note": "⚠️ IT REMOVES OBSTACLES, NOT DAYS. A leg blocked by terrain becomes passable at normal walking speed — the opposite of every other flight, which trades cost for time."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "one span, one obstacle",
+    "surge": "a whole crossing; IT IS STILL ONLY WALKING PACE"
+   },
+   "bounds": [
+    {
+     "text": "IT DOES NOT GO FASTER THAN A WALK — it removes the obstacle, never the distance",
+     "class": "hard"
+    },
+    {
+     "text": "A SPAN GOES WHERE YOU WERE ALREADY GOING — no sharp turns, no hurrying",
+     "class": "hard"
+    },
+    {
+     "text": "it holds YOU and what you can lift, not a caravan",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A travel and explore action. A bridge forms one pace ahead of your foot and unmakes behind you, so you walk across open air in a straight line at ordinary walking pace. It removes obstacles rather than distance — a leg blocked by a gorge, flood or closed border becomes passable, but takes exactly as many days as walking it would. At rank 2 you can hold it for a whole crossing. It carries you and what you can lift, not a group."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_borrowed_hour",
+   "name": "The Borrowed Hour",
+   "levelReq": 5,
+   "energyCost": 15,
+   "powerSystem": "reach_space_time",
+   "tradition": "hourkeeper",
+   "attribute": "mental",
+   "axes": {
+    "space_time": -0.7
+   },
+   "functions": [
+    "travel",
+    "transform"
+   ],
+   "narrationHints": "A travel action that costs no energy and no days, because it costs kept hours instead — a ",
+   "description": "⚠️ HOURKEEPER FLIGHT, AND THEY DO NOT LEAVE THE GROUND AT ALL. You spend hours you have kept, and arrive as though you had walked the whole way — because in every sense the world can check, you did. The road happened. You simply were not in it for the length of it.",
+   "notFor": "⚠️ AN HOUR YOU HAVE NOT KEPT. This spends a real stored resource, and an Hourkeeper with an empty account walks like anyone.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Borrowed Hour",
+     "grants": "Spend kept hours to cross a leg in a fraction of its days. The journey happened; you were not present for it.",
+     "cannot": "Arriving before you set out, or spending hours you do not have.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Borrowing",
+     "grants": "Spend across a whole route. ⚠️ You arrive having AGED the difference — the hours came from somewhere.",
+     "cannot": "Getting them back. Spent time is spent.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 0,
+    "range": "route-scale",
+    "note": "⚠️ THE ONLY TRAVEL THAT COSTS NO ENERGY AND NO DAYS — it costs KEPT HOURS, a resource that must have been banked. And at rank 2 the traveller ages the difference."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "borrow one leg's worth",
+    "surge": "borrow the whole route; YOU ARRIVE HAVING AGED THE DIFFERENCE"
+   },
+   "bounds": [
+    {
+     "text": "IT SPENDS KEPT HOURS — with an empty account you walk like anyone",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AT RANK 2 YOU AGE THE DIFFERENCE. The hours came from somewhere and it was you",
+     "class": "cost"
+    },
+    {
+     "text": "the road still happened — anything waiting on it simply did not meet you",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A travel action that costs no energy and no days, because it costs kept hours instead — a resource you must have banked beforehand, and with an empty account you walk like anyone. You spend them and arrive as though you had walked the whole way; the journey genuinely happened, you were just not present for its length, so nothing on the road meets you. At rank 2 you can spend across a whole route, and you arrive having aged the difference, which does not come back."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

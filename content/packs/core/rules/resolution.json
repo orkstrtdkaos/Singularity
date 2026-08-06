@@ -84,13 +84,34 @@
     }
   ],
   "renownBands": [
-    { "min": 40, "band": "legendary" },
-    { "min": 18, "band": "renowned" },
-    { "min": 6, "band": "talked about" },
-    { "min": 1, "band": "locally known" },
-    { "min": -5, "band": "unremarkable" },
-    { "min": -17, "band": "ill-regarded" },
-    { "min": -999, "band": "notorious" }
+    {
+      "min": 40,
+      "band": "legendary"
+    },
+    {
+      "min": 18,
+      "band": "renowned"
+    },
+    {
+      "min": 6,
+      "band": "talked about"
+    },
+    {
+      "min": 1,
+      "band": "locally known"
+    },
+    {
+      "min": -5,
+      "band": "unremarkable"
+    },
+    {
+      "min": -17,
+      "band": "ill-regarded"
+    },
+    {
+      "min": -999,
+      "band": "notorious"
+    }
   ],
   "reputationBands": [
     {
@@ -208,12 +229,15 @@
     ]
   },
   "scene": {
-    "softCloseBeats": 8,                "_softCloseBeats": "SNG-266/1d: the GM starts LOOKING for the close here — a directive, not an order. Never mid-action.",
-    "hardCloseBeats": 14,               "_hardCloseBeats": "…and here the ENGINE closes the scene itself if the GM did not. A scene is a UNIT, not a session; the narrative-XP per-scene cap is meaningless without a boundary."
+    "softCloseBeats": 8,
+    "_softCloseBeats": "SNG-266/1d: the GM starts LOOKING for the close here — a directive, not an order. Never mid-action.",
+    "hardCloseBeats": 14,
+    "_hardCloseBeats": "…and here the ENGINE closes the scene itself if the GM did not. A scene is a UNIT, not a session; the narrative-XP per-scene cap is meaningless without a boundary."
   },
   "leveling": {
     "xpPerLevel": 100,
-    "levelCostCap": 40,                 "_levelCostCap": "SNG-266/1b (Erik approved): cost rises with level up to this rung, then holds flat. L1-40 unchanged; L41-100 cost 4,000 each instead of climbing to 9,900. Remove the field and the curve is bit-identical to the old one.",
+    "levelCostCap": 40,
+    "_levelCostCap": "SNG-266/1b (Erik approved): cost rises with level up to this rung, then holds flat. L1-40 unchanged; L41-100 cost 4,000 each instead of climbing to 9,900. Remove the field and the curve is bit-identical to the old one.",
     "subPointPerLevel": 1,
     "skillPointPerLevel": 1,
     "subAttributeCap": 20,
@@ -748,5 +772,294 @@
   },
   "aptitudeDecay": 0.975,
   "aptitudeKeepMargin": 4,
-  "aptitudeFadeBand": 2
+  "aptitudeFadeBand": 2,
+  "startingSkills": {
+    "_note": "⚠️ SNG-339 §2. What a character KNOWS HOW TO DO before anyone teaches them a craft. Keyed on the action-tag vocabulary the game already uses — the same 54 tags authored on item.bonusTags — so a background's training and a trade's tools answer the same question in the same words. No ninth vocabulary.",
+    "grantCap": 2,
+    "usesPerRank": 25,
+    "maxRank": 2,
+    "_theRule": "A background grants what that LIFE taught, and a tradition grants what the CRAFT needs alongside itself. They stack to a cap of 2, so a hunter of the horizon is genuinely better at scouting than either alone — and no combination exceeds the cap, which is what stops a build reaching rank 3 at creation.",
+    "_whyTwoEach": "Two tags per source, never more. ⚠️ A background is a LIFE, not a career package: an orphan learned to move unseen and to go without, and everything else they picked up later belongs to play.",
+    "_orphanNote": "⚠️ ERIK'S CASE. `orphan` grants stealth + survival — which is what the shadow aptitude's -3 social was, until now, THE ONLY EXPRESSION OF. The penalty stays and stops being the whole story.",
+    "byBackground": {
+      "orphan": {
+        "stealth": 1,
+        "survival": 1
+      },
+      "exile": {
+        "travel": 1,
+        "survival": 1
+      },
+      "drifter": {
+        "travel": 1,
+        "barter": 1
+      },
+      "spy": {
+        "stealth": 1,
+        "investigate": 1
+      },
+      "ruin_picker": {
+        "scout": 1,
+        "precursor-glimpse": 1
+      },
+      "former_professional": {
+        "careful": 1,
+        "analyze": 1
+      },
+      "line_soldier": {
+        "melee": 1,
+        "protection": 1
+      },
+      "skirmisher": {
+        "attack": 1,
+        "escape": 1
+      },
+      "warden": {
+        "protection": 1,
+        "scout": 1
+      },
+      "hunter": {
+        "hunt": 1,
+        "scout": 1
+      },
+      "bodyguard": {
+        "protection": 1,
+        "careful": 1
+      },
+      "arena_fighter": {
+        "melee": 1,
+        "force": 1
+      },
+      "duelist": {
+        "edge": 1,
+        "focus": 1
+      },
+      "war_leader": {
+        "force": 1,
+        "standing": 1
+      },
+      "craftsman": {
+        "structural": 1,
+        "grip": 1
+      },
+      "mechanist": {
+        "structural": 1,
+        "analyze": 1
+      },
+      "smith": {
+        "structural": 1,
+        "energy": 1
+      },
+      "builder": {
+        "structural": 1,
+        "climb": 1
+      },
+      "trader": {
+        "barter": 1,
+        "negotiate": 1
+      },
+      "farmer": {
+        "plants": 1,
+        "weather": 1
+      },
+      "river_runner": {
+        "water": 1,
+        "travel": 1
+      },
+      "survivalist": {
+        "survival": 1,
+        "weather": 1
+      },
+      "scholar": {
+        "knowledge": 1,
+        "analyze": 1
+      },
+      "archivist": {
+        "knowledge": 1,
+        "witness": 1
+      },
+      "physician": {
+        "heal": 1,
+        "remedy": 1
+      },
+      "lawspeaker": {
+        "negotiate": 1,
+        "witness": 1
+      },
+      "cartographer": {
+        "travel": 1,
+        "scout": 1
+      },
+      "envoy": {
+        "negotiate": 1,
+        "etiquette": 1
+      },
+      "performer": {
+        "social": 1,
+        "favor": 1
+      },
+      "broker": {
+        "barter": 1,
+        "favor": 1
+      },
+      "organizer": {
+        "help": 1,
+        "social": 1
+      },
+      "smuggler": {
+        "stealth": 1,
+        "barter": 1
+      },
+      "devotee": {
+        "ritual": 1,
+        "focus": 1
+      },
+      "temple_trained": {
+        "ritual": 1,
+        "learn": 1
+      },
+      "self_taught": {
+        "learn": 1,
+        "careful": 1
+      },
+      "lineage_taught": {
+        "learn": 1,
+        "honor": 1
+      },
+      "precursor_marked": {
+        "precursor-glimpse": 1,
+        "reveal": 1
+      },
+      "battlefield_taught": {
+        "melee": 1,
+        "survival": 1
+      },
+      "apprenticed_to_a_legend": {
+        "learn": 1,
+        "analyze": 1
+      },
+      "found_it_by_accident": {
+        "reveal": 1,
+        "careful": 1
+      }
+    },
+    "byTradition": {
+      "ashwarden": {
+        "death": 1,
+        "quiet": 1
+      },
+      "rootkin": {
+        "plants": 1,
+        "heal": 1
+      },
+      "blazeborn": {
+        "radiant": 1,
+        "force": 1
+      },
+      "radiant_folk": {
+        "radiant": 1,
+        "reveal": 1
+      },
+      "umbral": {
+        "stealth": 1,
+        "quiet": 1
+      },
+      "harmonic": {
+        "resonance": 1,
+        "social": 1
+      },
+      "numinous": {
+        "focus": 1,
+        "ritual": 1
+      },
+      "threnodist": {
+        "resonance": 1,
+        "witness": 1
+      },
+      "verist": {
+        "witness": 1,
+        "reveal": 1
+      },
+      "veilwright": {
+        "stealth": 1,
+        "social": 1
+      },
+      "syllogist": {
+        "analyze": 1,
+        "knowledge": 1
+      },
+      "cogitant": {
+        "analyze": 1,
+        "focus": 1
+      },
+      "lattice": {
+        "structural": 1,
+        "binding": 1
+      },
+      "enginewright": {
+        "structural": 1,
+        "energy": 1
+      },
+      "precursor": {
+        "precursor-glimpse": 1,
+        "translate": 1
+      },
+      "mason": {
+        "structural": 1,
+        "grip": 1
+      },
+      "wright": {
+        "structural": 1,
+        "grip": 1
+      },
+      "unmaker": {
+        "force": 1,
+        "analyze": 1
+      },
+      "marcher": {
+        "melee": 1,
+        "honor": 1
+      },
+      "stillhold": {
+        "peace": 1,
+        "mediate": 1
+      },
+      "somatic": {
+        "grip": 1,
+        "climb": 1
+      },
+      "churnfolk": {
+        "wild": 1,
+        "escape": 1
+      },
+      "figurist": {
+        "analyze": 1,
+        "reveal": 1
+      },
+      "horizon": {
+        "travel": 1,
+        "scout": 1
+      },
+      "hourkeeper": {
+        "focus": 1,
+        "careful": 1
+      },
+      "abyssal": {
+        "barter": 1,
+        "bind": 1
+      },
+      "valley_craft": {
+        "survival": 1,
+        "help": 1
+      },
+      "god_named": {
+        "standing": 1,
+        "honor": 1
+      },
+      "bargainers": {
+        "barter": 1,
+        "negotiate": 1
+      }
+    }
+  }
 }

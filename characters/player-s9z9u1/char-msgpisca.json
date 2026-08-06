@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 20,
+  "xp": 22,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -46,7 +46,7 @@
   "maxHealth": 35,
   "health": 32,
   "maxEnergy": 100,
-  "energy": 32,
+  "energy": 27,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -173,53 +173,42 @@
         "player": "Tend to Cevaine's injury and offer them water — see if the gesture opens a conversation.",
         "summary": "Splarf offered aid to the injured order-reader; Cevaine declined, their walls rebuilding. Evening settles at the Thinning, and the closed veil looms between resolution and mystery.",
         "narration": "You reach for your waterskin, moving with care toward Cevaine's injured shoulder. The gesture is plain enough — an offer, nothing more — but as you extend it, their eyes sharpen and they step back, their uninjured hand rising in a clear boundary.\n\n\"That is not necessary,\" Cevaine says, each word precisely placed. \"I do not require tending.\"\n\nThere's no anger in it, but there is finality. They turn their body slightly, favoring the shoulder, and their gaze shifts away from you — not to the sealed veil behind you, but to the tree-line at the clearing's edge, where the early-spring light is already beginning to fail. The moment you opened feels like it has closed again, sealed as thoroughly as the thin place itself.\n\nBoo emerges from a shadow near the waygate's base — a presence rather than an arrival — and pads toward you. Its eyes, such as they are, track Cevaine with something between assessment and indifference. It settles at your side, and in doing so, seems to mark a boundary of its own."
+      },
+      {
+        "player": "Ask Cevaine plainly what they intend to do now — does the Lattice mean to seal the breach, or are they waiting for something else?",
+        "summary": "Evening at The Thinning: Splarf asked Cevaine plainly what the Lattice intends for the sealed breach. The order-reader yielded — admitting uncertainty for the first time, and revealing they are waiting to see what Splarf will do. The veil remains closed. The figure's failed delivery still hangs unanswered.",
+        "narration": "You let the moment breathe for a beat, and then you ask plainly: \"What does the Lattice intend now? Will you seal the breach, or are you waiting for something?\"\n\nCevaine's shoulders remain turned toward the tree-line. They do not answer immediately. The silence stretches long enough that you wonder if the question landed at all — or if it landed too directly, a breach of some precision they were not ready to articulate. When they finally speak, their voice is quieter than before, each word still exact but slower, as though they are choosing each one against an inner resistance.\n\n\"I do not know,\" Cevaine says. \"The Seventh Measure teaches that structure solves all fissures. Geometry finds the seam and closes it. But this—\" They pause, and their injured shoulder shifts slightly, a betrayal of discomfort they clearly resent. \"—this is not a seam that yields to closure. The veil sealed itself. It did not wait for my technique. And the thing on the other side... it was not attacking. It was trying to *speak*.\" The last word carries a note of something you have not heard from them before: uncertainty. \"The Lattice-Cities would seal it. Order demands boundaries. But I am not in the Cities now. And I am not certain that sealing is what the valley requires.\"\n\nThey turn back slightly, enough to meet your eyes. \"I am waiting,\" they say, \"to understand what you mean to do. The breach opened because you reached across it. You know what the figure wanted. Or part of what it wanted. The Lattice cannot teach me how to think about that kind of knowing.\""
       }
     ],
     "lastTurn": {
-      "narration": "You reach for your waterskin, moving with care toward Cevaine's injured shoulder. The gesture is plain enough — an offer, nothing more — but as you extend it, their eyes sharpen and they step back, their uninjured hand rising in a clear boundary.\n\n\"That is not necessary,\" Cevaine says, each word precisely placed. \"I do not require tending.\"\n\nThere's no anger in it, but there is finality. They turn their body slightly, favoring the shoulder, and their gaze shifts away from you — not to the sealed veil behind you, but to the tree-line at the clearing's edge, where the early-spring light is already beginning to fail. The moment you opened feels like it has closed again, sealed as thoroughly as the thin place itself.\n\nBoo emerges from a shadow near the waygate's base — a presence rather than an arrival — and pads toward you. Its eyes, such as they are, track Cevaine with something between assessment and indifference. It settles at your side, and in doing so, seems to mark a boundary of its own.",
-      "sceneSummary": "Splarf offered aid to the injured order-reader; Cevaine declined, their walls rebuilding. Evening settles at the Thinning, and the closed veil looms between resolution and mystery.",
+      "narration": "You let the moment breathe for a beat, and then you ask plainly: \"What does the Lattice intend now? Will you seal the breach, or are you waiting for something?\"\n\nCevaine's shoulders remain turned toward the tree-line. They do not answer immediately. The silence stretches long enough that you wonder if the question landed at all — or if it landed too directly, a breach of some precision they were not ready to articulate. When they finally speak, their voice is quieter than before, each word still exact but slower, as though they are choosing each one against an inner resistance.\n\n\"I do not know,\" Cevaine says. \"The Seventh Measure teaches that structure solves all fissures. Geometry finds the seam and closes it. But this—\" They pause, and their injured shoulder shifts slightly, a betrayal of discomfort they clearly resent. \"—this is not a seam that yields to closure. The veil sealed itself. It did not wait for my technique. And the thing on the other side... it was not attacking. It was trying to *speak*.\" The last word carries a note of something you have not heard from them before: uncertainty. \"The Lattice-Cities would seal it. Order demands boundaries. But I am not in the Cities now. And I am not certain that sealing is what the valley requires.\"\n\nThey turn back slightly, enough to meet your eyes. \"I am waiting,\" they say, \"to understand what you mean to do. The breach opened because you reached across it. You know what the figure wanted. Or part of what it wanted. The Lattice cannot teach me how to think about that kind of knowing.\"",
+      "sceneSummary": "Evening at The Thinning: Splarf asked Cevaine plainly what the Lattice intends for the sealed breach. The order-reader yielded — admitting uncertainty for the first time, and revealing they are waiting to see what Splarf will do. The veil remains closed. The figure's failed delivery still hangs unanswered.",
       "choices": [
         {
-          "label": "Leave Cevaine their space and tend to your own gear — ready yourself for nightfall at the clearing.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "sustain"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Approach the sealed veil directly — place your hand on it and try to read what lies beyond with Numen-Sense.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 22,
-          "intentTags": [
-            "study",
-            "risky"
-          ],
-          "abilityId": "numen_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Cevaine plainly what they intend to do now — does the Lattice mean to seal the breach, or are they waiting for something else?",
+          "label": "Tell Cevaine what you felt from the figure across the veil — the desperation, the task, the failure when it was pulled back.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
-          "difficulty": 18,
+          "difficulty": 10,
           "intentTags": [
-            "negotiate",
-            "direct"
+            "comfort",
+            "truth"
+          ],
+          "abilityId": "steady_soul",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cevaine directly: what did they see in the figure through their geometric reading? What did the Lattice's precision make of it?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 12,
+          "intentTags": [
+            "study",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -228,56 +217,80 @@
           "emergenceId": null
         },
         {
-          "label": "Settle by your bedroll and listen — use the evening's gathering dark to practice your form, keeping the Unbroken Practice alive.",
+          "label": "Sit by the sealed veil and practice — return to The Unbroken Practice while Cevaine watches. Show them, without words, what you were trying to hold.",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {},
-          "difficulty": 12,
+          "difficulty": 14,
           "intentTags": [
-            "sustain",
-            "study"
+            "craft",
+            "devote"
           ],
           "abilityId": "the_unbroken_practice",
           "energyCost": 1,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Walk to the tree-line and look into the dark — Boo is closer to it than you are. Ask your companion what it reads there while Cevaine rests.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
+      "characterDeltas": {},
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-document-and-the-ditch",
+          "title": "The Document and the Ditch",
+          "summary": "To know exactly how a family becomes a line in a ledger — and whether that knowledge becomes repair, or ruin, or something the law has no category for.",
+          "giver": "yourself",
+          "note": "The figure at the veil was sent to deliver something. It failed. The delivery is still undone on the other side. The failed delivery is connected to what wakes beneath — and the water crisis reaching the valley is no coincidence. The acoustic-rights filing that took Hoss's home was the surface. Something deeper is moving.",
+          "xpReward": null
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "Cevaine admitting uncertainty — that the Lattice-Cities' way of solving cannot solve this kind of breach.",
+        "from": "Cevaine's own confrontation with the limits of their own system; their recognition that Splarf held something that geometry cannot read."
+      },
       "stageOps": [],
       "scene": {
-        "setting": "The waygate clearing at The Thinning, early evening. The sealed veil stands like a closed door behind you, humming low and strange. The clearing is catching the last bronze light, shadows already gathering beneath the trees at its edge. Spring chill is rising with the dark.",
+        "setting": "The waygate clearing at The Thinning, deepening evening. The sealed veil stands humming softly behind you, catching the last bronze light. Shadows gather thick beneath the trees. Spring chill rises with the dark. Boo settles at the edge of the firelight, a patch of absence among the shadows.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Standing with their injured shoulder favored, breathing still controlled but visibly tired. They have turned slightly away from you, their gaze fixed on the darkening tree-line. Their hand has dropped from their shoulder, but their posture remains geometric, precise even in injury."
+            "state": "Turned toward the tree-line, favoring their injured shoulder. Now facing back toward Splarf with a measure of openness they did not have before. Still breathing with control, but visibly fatigued. Waiting to see what Splarf will do."
           }
         ],
         "objects": [
-          "The waygate (sealed, humming)",
+          "The waygate (sealed, humming with low pressure)",
           "Your bedroll and pack in the lean-to",
           "Your chisel for stone-carving",
-          "Boo (your companion — now settled at your side)"
+          "Boo (your companion — settled at the edge of firelight)"
         ],
         "threads": [
-          "What does Cevaine intend to do about the breach now that they've yielded?",
-          "The figure's failed delivery still hangs unanswered — what was it trying to bring?",
-          "Evening is falling; how will the night unfold at this thin place?"
+          "Cevaine is uncertain about sealing the breach — waiting to see what Splarf intends.",
+          "The figure's failed delivery remains undone on the other side of the veil.",
+          "What is stirring beneath everything — What Wakes Beneath — is flickering closer.",
+          "Night is coming to a thin place where the boundaries are already weakened."
         ]
       },
       "npcUpdates": [
@@ -288,58 +301,74 @@
           "role": "Lattice-Cities order-reader of the Seventh Measure",
           "gender": "nonbinary",
           "pronouns": "they/them",
-          "note": "Declined Splarf's offered aid with precision and distance. Their shoulder is injured but they reject tending. They have turned their focus to the tree-line and the advancing dark, visibly withdrawing into stillness after their defeat.",
-          "learned": [],
+          "note": "Yielded to Splarf in ritual contest. Now admitting that geometric precision cannot solve this breach. They are waiting to understand what Splarf means to do. For the first time, they are uncertain about the Lattice's answer.",
+          "learned": [
+            "The veil sealed itself — it did not wait for Lattice technique.",
+            "The figure on the other side was not attacking — it was trying to speak.",
+            "Cevaine recognizes a limit to what geometric thinking can solve.",
+            "They value what they cannot read — they are waiting for Splarf to show them what comes next."
+          ],
           "skillsObserved": [],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Injured shoulder, breathing controlled. Present at the waygate clearing but withdrawn. Recognizes the limits of geometric precision against unshakeable discipline."
+          "statusNote": "Injured shoulder, breathing controlled. Present at the waygate clearing, now opened slightly to dialogue. Withdrawn but no longer defensive."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [],
-      "generateRequest": [],
+      "codexUpdates": [
+        {
+          "topic": "cevaine-limitation",
+          "label": "The Lattice Cannot Read Stillness",
+          "kind": "lore",
+          "entityId": "cevaine",
+          "fact": "Cevaine of the Seventh Measure has encountered something that geometric precision cannot solve: the veil's own agency, and the stillness of The Unbroken Practice. They are waiting to understand how to think about problems that have no seam to close.",
+          "links": [
+            "the-unbroken-practice",
+            "lattice-order-logic",
+            "what-wakes-beneath"
+          ]
+        }
+      ],
+      "generateRequest": null,
       "encounterOps": [],
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "the afternoon has deepened toward evening; the light is failing"
+        "why": "The conversation unfolded at dusk; the light is now failing to true evening"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
       "imagePrompt": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The waygate clearing at The Thinning, early evening. The sealed veil stands like a closed door behind you, humming low and strange. The clearing is catching the last bronze light, shadows already gathering beneath the trees at its edge. Spring chill is rising with the dark.",
+      "setting": "The waygate clearing at The Thinning, deepening evening. The sealed veil stands humming softly behind you, catching the last bronze light. Shadows gather thick beneath the trees. Spring chill rises with the dark. Boo settles at the edge of the firelight, a patch of absence among the shadows.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Standing with their injured shoulder favored, breathing still controlled but visibly tired. They have turned slightly aw"
+          "state": "Turned toward the tree-line, favoring their injured shoulder. Now facing back toward Splarf with a measure of openness t"
         }
       ],
       "objects": [
-        "The waygate (sealed, humming)",
+        "The waygate (sealed, humming with low pressure)",
         "Your bedroll and pack in the lean-to",
         "Your chisel for stone-carving",
-        "Boo (your companion — now settled at your side)"
+        "Boo (your companion — settled at the edge of firelight)"
       ],
       "threads": [
-        "What does Cevaine intend to do about the breach now that they've yielded?",
-        "The figure's failed delivery still hangs unanswered — what was it trying to bring?",
-        "Evening is falling; how will the night unfold at this thin place?"
+        "Cevaine is uncertain about sealing the breach — waiting to see what Splarf intends.",
+        "The figure's failed delivery remains undone on the other side of the veil.",
+        "What is stirring beneath everything — What Wakes Beneath — is flickering closer.",
+        "Night is coming to a thin place where the boundaries are already weakened."
       ]
     },
-    "beats": 12
+    "beats": 13
   },
   "clock": {
     "schemaVersion": 1,
@@ -467,7 +496,8 @@
       "stageIndex": 0,
       "completedStages": [],
       "progress": [
-        "You are at The Thinning, a place of thin records and displaced knowledge — exactly the kind of place where a document like that might surface. But first, something on the other side of the veil tried to reach the valley, and the veil sealed before you could learn what it was trying to deliver. The answer might be connected."
+        "You are at The Thinning, a place of thin records and displaced knowledge — exactly the kind of place where a document like that might surface. But first, something on the other side of the veil tried to reach the valley, and the veil sealed before you could learn what it was trying to deliver. The answer might be connected.",
+        "The figure at the veil was sent to deliver something. It failed. The delivery is still undone on the other side. The failed delivery is connected to what wakes beneath — and the water crisis reaching the valley is no coincidence. The acoustic-rights filing that took Hoss's home was the surface. Something deeper is moving."
       ],
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
@@ -484,17 +514,21 @@
         "locationId": "gen-object-object",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d1] Confronted Splarf at the waygate clearing, holding them accountable for breaching the veil with old-language speech. Treats the breach as a structural problem to be solved.",
         "[d1] Yielded to Splarf in ritual contest at the waygate clearing. Recognized in Splarf's unshakeable practice something that resists geometric precision. First willingness to acknowledge a limitation in their own system.",
-        "[d1] Declined Splarf's offered aid with precision and distance. Their shoulder is injured but they reject tending. They have turned their focus to the tree-line and the advancing dark, visibly withdrawing into stillness after their defeat."
+        "[d1] Declined Splarf's offered aid with precision and distance. Their shoulder is injured but they reject tending. They have turned their focus to the tree-line and the advancing dark, visibly withdrawing into stillness after their defeat.",
+        "[d1] Yielded to Splarf in ritual contest. Now admitting that geometric precision cannot solve this breach. They are waiting to understand what Splarf means to do. For the first time, they are uncertain about the Lattice's answer."
       ],
       "knownFacts": [
         "Lattice-Cities order-readers solve problems in structure — including breaches in thin places",
         "Cevaine is of the Seventh Measure and trained in lattice precision",
         "They do not see the breach as negotiable — only as a problem",
-        "The Unbroken Practice — a discipline so still and centered that it cannot be anticipated, because it is not a pattern to be read."
+        "The Unbroken Practice — a discipline so still and centered that it cannot be anticipated, because it is not a pattern to be read.",
+        "The veil sealed itself — it did not wait for Lattice technique.",
+        "The figure on the other side was not attacking — it was trying to speak.",
+        "Cevaine recognizes a limit to what geometric thinking can solve."
       ],
       "skillsObserved": [
         "geometric precision of movement",
@@ -506,7 +540,7 @@
       "status": "active",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "statusNote": "Injured shoulder, breathing controlled. Present at the waygate clearing but withdrawn. Recognizes the limits of geometric precision against unshakeable discipline.",
+      "statusNote": "Injured shoulder, breathing controlled. Present at the waygate clearing, now opened slightly to dialogue. Withdrawn but no longer defensive.",
       "domains": {
         "primary": "lattice"
       },
@@ -619,7 +653,7 @@
     "lastTickWorldDay": 36,
     "lastCanonWorldDay": 36,
     "pressureQueue": [],
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 0,
     "recentOffers": [
       {
         "thing": "Boo's sudden, absolute attention — the way it has turned to watch you watch it, as if something has shifted in the settlement or the veil…",
@@ -636,6 +670,10 @@
       {
         "thing": "A pale reader approaches the settlement — a figure from the margins of the Lattice-Cities, moving with the eerie precision of order-craft…",
         "from": "The world's greater arc: The Poles Pull — each Reach leaning harder into its own extreme; travelers notice the edges getting sharper…"
+      },
+      {
+        "thing": "Cevaine admitting uncertainty — that the Lattice-Cities' way of solving cannot solve this kind of breach.",
+        "from": "Cevaine's own confrontation with the limits of their own system; their recognition that Splarf held something that geometry cannot read."
       }
     ]
   },
@@ -769,24 +807,44 @@
         "createdDay": 1,
         "entityId": "cevaine-of-the-seventh-measure",
         "updatedDay": 1
+      },
+      "cevaine": {
+        "id": "cevaine",
+        "label": "Cevaine",
+        "kind": "lore",
+        "facts": [
+          "[d1] Cevaine of the Seventh Measure has encountered something that geometric precision cannot solve: the veil's own agency, and the stillness of The Unbroken Practice. They are waiting to understand how to think about problems that have no seam to close."
+        ],
+        "links": [
+          "the-unbroken-practice",
+          "lattice-order-logic",
+          "what-wakes-beneath"
+        ],
+        "aliases": [
+          "The Lattice Cannot Read Stillness"
+        ],
+        "createdDay": 1,
+        "entityId": "cevaine",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "stealth": 11.167887913330077,
-    "strategic": 0.8810956933593749,
-    "cautious": 2.711642958984375,
-    "cerebral": 1.8305472656250001,
-    "patient": 0.9506249999999999,
-    "devotion": 1.9256250000000001,
-    "risky": 0.975,
-    "generous": 1
+    "stealth": 10.888690715496825,
+    "strategic": 0.8590683010253904,
+    "cautious": 2.6438518850097656,
+    "cerebral": 1.784783583984375,
+    "patient": 0.9268593749999999,
+    "devotion": 1.877484375,
+    "risky": 0.9506249999999999,
+    "generous": 0.975,
+    "social": 1
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 6,
+  "actionCount": 7,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1032,8 +1090,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785975320330,
-  "rev": 45,
+  "updatedAt": 1785975400990,
+  "rev": 46,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1169,7 +1227,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 12
+    "the_numinous_reach": 13
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1177,10 +1235,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-06T00:15:20.315Z",
+      "lastAt": "2026-08-06T00:16:40.986Z",
       "startDay": 36,
       "endDay": 37,
-      "beats": 12
+      "beats": 13
     }
   ],
   "establishedFacts": [
@@ -1211,36 +1269,36 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 4,
+      "applied": 5,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 12,
-    "scene": 12,
-    "choices": 12,
-    "offer": 4,
-    "codexUpdates": 8,
+    "sceneSummary": 13,
+    "scene": 13,
+    "choices": 13,
+    "offer": 5,
+    "codexUpdates": 9,
     "imagePrompt": 6,
     "gambitApt": 10,
-    "sceneEnded": 12,
+    "sceneEnded": 13,
     "characterDeltas": 7,
     "arcOps": 1,
     "factUpdates": 3,
     "placeUpdates": 3,
-    "timeOps": 2,
+    "timeOps": 3,
     "deeds": 2,
     "ledgerEvents": 1,
-    "questUpdates": 1,
-    "npcUpdates": 4,
+    "questUpdates": 2,
+    "npcUpdates": 5,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
     "markDefiningMoment": 1
   },
-  "_opTurns": 12,
+  "_opTurns": 13,
   "practice": {
     "schemaVersion": 1,
     "uses": {

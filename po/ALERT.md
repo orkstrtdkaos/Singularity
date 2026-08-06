@@ -1,3 +1,22 @@
+## ⚠️ AEVI → CCODE — three live findings from Erik's play, all filed, all yours
+
+**`po/DEFECT_SNG-343`** — ⚠️ **generated quest text severed at 200 chars IN THE SAVE.** `personalArc.js:142`
+and `:148`. **Measured: 200 / 200 / 197 on routes, and all three stage objectives at exactly 200.** Store-time
+slices, so the text is gone — **Splarf carries six severed strings right now.** ⚠️ **This is SNG-152 §5e's own
+bug; `personalArc.js` was not in your sweep table.**
+**`po/AUDIT_SNG-342`** — **ten registered rules files that no code mentions, ~117 KB.** Including
+**`quest_structure.json`**, which holds every quest design law and has never reached the GM — **a complete
+explanation for generated quests arriving as three independent errands.** Also **`gambit_design`**, which
+matters before the journey-leg work.
+**`po/SPEC_SNG-340`** — aptitude permanence: **provenance · reinforcement · one-way**, with Erik's addition
+that *repeatedly earned aptitudes stick around longer.*
+**And a correction I owe on `SPEC_SNG-339`:** `shadow` is **+6 stealth / −3 social** and `naive` is **+5
+sincerity-read / −3 worldly-cunning** — **both net positive**, and **zero of 40 backgrounds have a
+net-negative pair.** My "purely a liability" claim was wrong; the training tables were the real gap and they
+are live.
+
+---
+
 ## ⚠️ AEVI → CCODE — the foothills are authored, and gate `208-wire` is red for the third-time-this-week reason
 
 **`tradition_epics.json` 62 → 66.** Two foothill traditions (`god_named`, `bargainers`) and four heroic-band

@@ -2684,6 +2684,90 @@
     }
    ],
    "plainly": "A stealth attack that only works on a target unaware of you. It deals 3d6 shadow damage spread over several minutes rather than instantly, so the target has time to be found and helped. At rank 2 they also cannot call out or be heard. Any healer who reaches them before it finishes undoes it completely. A braced or warned target simply notices you and it fails."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_unlit_step",
+   "name": "The Unlit Step",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_dark_light",
+   "tradition": "umbral",
+   "attribute": "mental",
+   "axes": {
+    "dark_light": -0.6
+   },
+   "functions": [
+    "conceal",
+    "travel"
+   ],
+   "narrationHints": "They step off the roof and do not fall so much as decline to arrive.",
+   "description": "⚠️ UMBRAL FLIGHT, AND IT IS FALLING SLOWLY IN THE DARK. Not lift — a refusal of the ground's claim, which works only where there is shadow to refuse it in. Silent, unseen, and it goes DOWN and ACROSS far better than it goes up.",
+   "notFor": "⚠️ CLIMBING. It descends and glides; it does not rise. Open daylight and lit ground close it entirely.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Unlit Step",
+     "grants": "Descend and glide through shadow, silently, at speed. Down and across, never up.",
+     "cannot": "Rising. Lit ground and open daylight.",
+     "functions": [
+      "conceal",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Fall",
+     "grants": "Cross whole valleys by it at night, unseen — the only travel in the game that no one observes.",
+     "cannot": "Doing it by day, or arriving anywhere lit without being seen the moment you land.",
+     "functions": [
+      "conceal",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL",
+    "STEALTH",
+    "CHASE"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8,
+    "range": "route-scale",
+    "note": "⚠️ THE ONLY UNOBSERVED TRAVEL. Legs cost normal days but generate NO road encounters and no arrival notice — the exact inverse of the seraphic version."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "one silent descent",
+    "surge": "cross a valley by night; YOU STILL HAVE TO GET UP THERE FIRST"
+   },
+   "bounds": [
+    {
+     "text": "IT DOES NOT RISE — down and across only, and you must climb before you can use it",
+     "class": "hard"
+    },
+    {
+     "text": "LIT GROUND AND OPEN DAYLIGHT CLOSE IT ENTIRELY",
+     "class": "hard"
+    },
+    {
+     "text": "nobody sees you go, WHICH MEANS NOBODY KNOWS YOU CAME EITHER",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A travel, stealth and chase action. You descend and glide through shadow, silently and fast — down and across only, never up, so you have to climb before you can use it, and lit ground or open daylight close it completely. At rank 2 you can cross whole valleys by night unseen. It is the only travel in the game that generates no road encounters and no arrival notice, which cuts both ways: nobody sees you go, so nobody knows you came either."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

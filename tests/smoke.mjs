@@ -10169,16 +10169,19 @@ await (async () => {
       return !empty.placeEdges || Object.keys(empty.placeEdges).length === 0;
     })());
 
-    // ⚠️ AND THE CAP MUST SIT ABOVE THE ATLAS. It was 80 against 118 authored locations, so a well-travelled
-    // character silently forgot the oldest place they knew — and `isKnown` gates naming, description and map
-    // labelling, so a place from your first hour became "an unknown place" again.
+    // ⛔ AND THERE IS NO CAP AT ALL NOW. Erik: "that doesn't seem to serve a purpose." It was 80 against an
+    // atlas of 118, so a well-travelled character silently forgot the oldest place they knew — and `isKnown`
+    // gates naming, description and map labelling, so somewhere from their first hour became "an unknown
+    // place" again. Raising it above the atlas was the smaller half of the answer.
+    //
+    // ⚠️ THE DISTINCTION THIS GATE EXISTS TO HOLD: a cap on a LOG is housekeeping; a cap on KNOWLEDGE is
+    // data loss wearing the same syntax. `knownPlaces` is not a record of where you have been — it is the
+    // set of facts about what this character KNOWS, and every entry changes what the game will say to them.
     {
       const appSrc330 = readFileSync(join(root, "app.js"), "utf8");
-      const m = appSrc330.match(/knownPlaces = \[\.\.\.character\.knownPlaces, id\]\.slice\(-(\d+)\)/);
-      const { loadContentHeadless: lch330 } = await import("./headless_content.mjs");
-      const atlas = Object.keys((await lch330()).locations || {}).length;
-      check("330: the knownPlaces cap sits above the whole atlas — nobody forgets where they started",
-        !!m && Number(m[1]) > atlas);
+      check("330b: knownPlaces has NO cap — knowledge a player earned is never evicted",
+        /knownPlaces = \[\.\.\.character\.knownPlaces, id\];/.test(appSrc330)
+        && !/knownPlaces = \[\.\.\.character\.knownPlaces, id\]\.slice\(/.test(appSrc330));
     }
   }
 

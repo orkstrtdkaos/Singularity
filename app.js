@@ -87,7 +87,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.41";
+const APP_VERSION = "1.9.42";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6082,12 +6082,19 @@ function maybeWorldPressure(turn, resolution) {
 function addKnownPlace(id) {
   if (!id) return;
   character.knownPlaces = character.knownPlaces || [];
-  // SNG-330 — ⚠️ THE CAP WAS BELOW THE ATLAS. 80, against 118 authored locations: a well-travelled
-  // character SILENTLY FORGOT the oldest place they knew, and `isKnown` gates naming, description and map
-  // labelling — so somewhere you went in your first hour became "an unknown place" again. Forgetting where
-  // you started is the worst possible eviction order. The cap now sits above the whole atlas with room to
-  // grow; if it ever needs to evict, that must be least-recently-SEEN, never oldest-learned.
-  if (!character.knownPlaces.includes(id)) character.knownPlaces = [...character.knownPlaces, id].slice(-400);
+  // SNG-330b — ⛔ NO CAP. Erik: "that doesn't seem to serve a purpose." It did not.
+  //
+  // It was 80, against an atlas that had grown to 118, so a well-travelled character SILENTLY FORGOT the
+  // oldest place they knew — and `isKnown` gates naming, description and map labelling, so somewhere from
+  // their first hour became "an unknown place" again. I raised it above the atlas; that was the smaller
+  // half of the answer.
+  //
+  // ⚠️ THE DISTINCTION WORTH KEEPING: a cap on a LOG is housekeeping — you do not need every line of the
+  // news, and `slice(-40)` on a scene's turns costs nothing. A cap on KNOWLEDGE is data loss wearing the
+  // same syntax. `knownPlaces` is not a log of where you have been; it is the set of facts about what this
+  // character KNOWS, and every entry changes what the game will say to them. Nothing that a player earned
+  // by going somewhere should have a ceiling, and its growth is bounded by the world anyway.
+  if (!character.knownPlaces.includes(id)) character.knownPlaces = [...character.knownPlaces, id];
 }
 
 // SNG-122: a clear travel expression in the player's own words — "head to / go to / travel to / set out

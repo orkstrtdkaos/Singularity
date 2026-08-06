@@ -2328,6 +2328,173 @@
         }
       ],
       "plainly": "A social/investigate action that weakens or restricts a target. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends duration; rank 3 extends targets. Limit: iT Needs A Real Lever — someone with nothing to lose is genuinely outside it."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_lifted_word",
+      "name": "The Lifted Word",
+      "levelReq": 5,
+      "energyCost": 15,
+      "powerSystem": "reach_demonic_angelic",
+      "tradition": "seraphic",
+      "attribute": "mental",
+      "axes": {
+        "demonic_angelic": 0.8
+      },
+      "functions": [
+        "transform",
+        "reveal",
+        "travel"
+      ],
+      "narrationHints": "They do not flap. They are simply higher than they were, and everyone below has stopped talking.",
+      "description": "⚠️ SERAPHIC FLIGHT, AND IT IS A DECLARATION. The Orders do not fly to travel; they fly to be SEEN flying. Height is the argument — a judgement delivered from above is the same judgement and lands differently, and every Order knows it.",
+      "notFor": "Discretion. Anyone within sight sees exactly what you are and what tradition taught you. It cannot be done quietly and the Orders would not want it to be.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Lifted Word",
+          "grants": "Rise and hold above a place, under control, for as long as you can pay. Everyone present sees.",
+          "cannot": "Doing it unseen. Travelling far — this is presence, not distance.",
+          "functions": [
+            "transform",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Long Ascent",
+          "grants": "Travel by it — cross country above the roads, arriving visibly and from the wrong direction.",
+          "cannot": "Arriving unannounced. You are a light in the sky for the whole approach.",
+          "functions": [
+            "transform",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
+        }
+      ],
+      "challengeTypes": [
+        "TRAVEL",
+        "SOCIAL"
+      ],
+      "harmRung": "none",
+      "nativeOrCombination": "native",
+      "shape": "reposition",
+      "operativeAxis": [
+        "movement",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 8,
+        "duration": 6,
+        "range": "route-scale",
+        "note": "⚠️ FLIGHT THAT CANNOT BE HIDDEN. Travel legs are fast and arrive PRE-ANNOUNCED — every settlement on the route sees you pass, which changes what waits at the end."
+      },
+      "rankDeltas": [],
+      "intensity": {
+        "conserve": "rise and hold — half the duration, and only over one place",
+        "surge": "cross country aloft; YOU ARE A LIGHT IN THE SKY FOR THE WHOLE APPROACH"
+      },
+      "bounds": [
+        {
+          "text": "IT CANNOT BE DONE QUIETLY — everyone within sight sees what you are",
+          "class": "hard"
+        },
+        {
+          "text": "⚠️ YOU ARRIVE ANNOUNCED, ALWAYS. Whatever waited at the end has had the whole approach to prepare",
+          "class": "cost"
+        },
+        {
+          "text": "at rank 1 it is PRESENCE, NOT DISTANCE — height over one place, not a journey",
+          "class": "hard"
+        }
+      ],
+      "plainly": "A travel and social action, and it cannot be hidden. You rise and hold above a place under control for as long as you can pay the energy, and everyone in sight sees exactly what you are. At rank 2 you can cross country by it, which is fast but arrives pre-announced — every settlement on the route watches you pass, so whatever waits at the end has had the entire approach to prepare. Rank 1 is presence over one place rather than distance."
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_borne_bargain",
+      "name": "The Borne Bargain",
+      "levelReq": 5,
+      "energyCost": 14,
+      "powerSystem": "reach_demonic_angelic",
+      "tradition": "abyssal",
+      "attribute": "social",
+      "axes": {
+        "appetite_judgement": -0.7
+      },
+      "functions": [
+        "bind",
+        "travel"
+      ],
+      "narrationHints": "Something carries them. It is not visible and it is not free, and they will not say what it is.",
+      "description": "⚠️ ABYSSAL FLIGHT, AND YOU DO NOT DO IT — SOMETHING CARRIES YOU. A bargain struck for passage: fast, silent, and priced like everything else. What bears you up is real, it is owed, and it remembers the trip.",
+      "notFor": "Anyone unwilling to owe. The price is named before you rise and it is not refundable if you land early.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Borne Bargain",
+          "grants": "Be carried aloft and across at speed. The price is named up front and paid on arrival.",
+          "cannot": "Bargaining after you are airborne. The terms are fixed at the moment you leave the ground.",
+          "functions": [
+            "bind",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Standing Passage",
+          "grants": "A standing arrangement — passage whenever you call for it, on an account that accrues.",
+          "cannot": "Forgetting the account. It is being kept whether or not you keep it.",
+          "functions": [
+            "bind",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
+        }
+      ],
+      "challengeTypes": [
+        "TRAVEL",
+        "SOCIAL"
+      ],
+      "harmRung": "none",
+      "nativeOrCombination": "native",
+      "shape": "reposition",
+      "operativeAxis": [
+        "movement",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 7,
+        "duration": 8,
+        "range": "route-scale",
+        "note": "⚠️ THE FASTEST TRAVEL IN THE GAME AND THE ONLY ONE THAT ACCRUES A DEBT. Legs cost almost no days and add to an account the world tracks."
+      },
+      "rankDeltas": [],
+      "intensity": {
+        "conserve": "one passage, priced and paid on landing",
+        "surge": "open a standing account; IT IS BEING KEPT WHETHER OR NOT YOU KEEP IT"
+      },
+      "bounds": [
+        {
+          "text": "THE PRICE IS NAMED BEFORE YOU RISE and is not refundable if you land early",
+          "class": "hard"
+        },
+        {
+          "text": "⚠️ AT RANK 2 THE ACCOUNT ACCRUES, and an abyssal account is collectable — see `the_collection`",
+          "class": "cost"
+        },
+        {
+          "text": "what bears you up REMEMBERS THE TRIP",
+          "class": "cost"
+        }
+      ],
+      "plainly": "A travel and social action. You do not fly; something carries you, fast and silent, on a price named before you leave the ground and paid on arrival — it is not refunded if you land early. At rank 2 you open a standing arrangement you can call on any time, on an account that accrues and is being kept whether or not you keep it, and an abyssal account is collectable. It is the fastest travel in the game and the only one that leaves you owing."
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

@@ -25,6 +25,7 @@ import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: se
 import { mintableBraidsFor, buildBraidDef, mintBraid } from "./braids.js"; // SNG-196: mint the braids a character already earned
 import { findExistingNpc, prettifyNpcName, REGISTRY_CAP } from "./npcs.js"; // SNG-199/205: registry + codex backfill
 import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
+import { isCoercedObjectArtefact } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -710,7 +711,44 @@ export const CHARACTER_STEPS = [
       if (reopened) console.log(`[reconcile] sng-204/235: re-opened ${reopened} flat-completed structured quest(s) to their decision (refreshed ${refreshed} outcome effect-set(s) from the current def)`);
       return {};
     }
-  }
+  },
+  {
+    version: 23, id: "repair-coerced-object-locations", playerFacing: true,
+    // SNG-329 — ⚠️ THE DAMAGE IS ALREADY ON DISK, so a forward fix is only two-thirds of the job.
+    //
+    // `moveTo.location` could arrive as an OBJECT; `String(ref)` turned it into the literal text
+    // "[object Object]", slugified to `gen-object-object`, TITLE-CASED to "[Object Object]", and minted into
+    // `character.generated.location` — a write that persists, survives reload, and feeds its own
+    // `descriptionSeed` back to the GM as context. Found in play by Erik (Splarf), traced by Aevi.
+    //
+    // ⛔ THE TITLE-CASING IS WHY IT SURVIVED. "[Object Object]" is a well-formed string with capitals and
+    // spaces — every "does it have a name" check in this codebase passes it, and it reads like a place.
+    // Three saves carry it, two from characters older than that play session.
+    //
+    // ⛔ AND IT DROPS RATHER THAN RENAMES. A record whose name was never real has no true name to restore;
+    // inventing one would put a place into someone's canon the fiction never named. Dropping returns the
+    // save to the state it would have had if the mint had refused — which is what the mint now does. If the
+    // player is standing in it, they are moved to the place it was minted FROM rather than stranded.
+    apply: (character) => {
+      const gen = character?.generated?.location;
+      if (!gen || typeof gen !== "object") return {};
+      // ⛔ THE NARROW CHECK, NOT THE MINT'S WIDE ONE. `isCoercedObjectName` also catches a MISSING name,
+      // which is a different defect with a non-destructive fix — and using it here deleted a legitimate
+      // fixture in the suite, which is exactly how I found out. A migration that deletes must be scoped to
+      // the damage: only the `[object Object]` artefact was never a real place.
+      const bad = Object.entries(gen).filter(([, rec]) => isCoercedObjectArtefact(rec?.name));
+      if (!bad.length) return {};
+      for (const [id, rec] of bad) {
+        if (character.currentLocationId === id) {
+          character.currentLocationId = (Array.isArray(rec?.connections) && rec.connections[0]) || character.startingLocation || null;
+        }
+        if (Array.isArray(character.knownPlaces)) character.knownPlaces = character.knownPlaces.filter(k => k !== id);
+        delete gen[id];
+      }
+      console.log(`[reconcile] sng-329: dropped ${bad.length} location(s) minted from a coerced object — ${bad.map(([id]) => id).join(", ")}`);
+      return { note: `Removed ${bad.length} place record(s) that were never really named.` };
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

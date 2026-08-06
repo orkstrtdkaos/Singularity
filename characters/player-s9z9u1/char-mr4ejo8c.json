@@ -4257,44 +4257,6 @@
           "y": 154.0432512816442
         },
         "dangerLevel": 2
-      },
-      "gen-object-object": {
-        "id": "gen-object-object",
-        "name": "[Object Object]",
-        "regionId": "valley",
-        "descriptionSeed": "A place the road led to — [Object Object]. The fiction brought you here before the map knew its name.",
-        "tags": [
-          "transitional"
-        ],
-        "connections": [
-          "gen-the-lower-chamber"
-        ],
-        "_mintedAs": "transit",
-        "dangerLevel": 2,
-        "_gen": {
-          "type": "location",
-          "tier": "fresh",
-          "engagementScore": 2,
-          "birthWeight": 1,
-          "rating": null,
-          "attentionHistory": [
-            {
-              "kind": "revisit",
-              "day": 9
-            }
-          ],
-          "createdDay": 9,
-          "provenance": {
-            "locationId": "gen-the-lower-chamber",
-            "day": null,
-            "hint": "transit"
-          },
-          "lastAttentionDay": 9
-        },
-        "map": {
-          "x": 598.194509510675,
-          "y": 97.3064770219602
-        }
       }
     },
     "arc": {}
@@ -4670,7 +4632,6 @@
   ],
   "knownPlaces": [
     "gen-the-lower-chamber",
-    "gen-object-object",
     "disputed_zone_fringe"
   ],
   "_turnApplyError": {

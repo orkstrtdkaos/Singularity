@@ -1,7 +1,7 @@
 // app.js — Singularity v0.1 shell: character creation, the play loop, settings.
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
-import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
+import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId, locationRefToString, isCoercedObjectName } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
 import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
@@ -87,7 +87,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.38";
+const APP_VERSION = "1.9.39";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5145,7 +5145,11 @@ function applyTurn(turn, resolution, playerWords = null) {
   // SNG-056: THE HEADER FOLLOWS THE FICTION. When the GM narration moved the character to a real
   // place, update the AUTHORITATIVE currentLocationId so every location surface (header, map "you
   // are here", GM context) agrees with the prose — instead of the header showing a stale place.
-  const moveRef = turn.moveTo && (turn.moveTo.location || turn.moveTo.id || turn.moveTo);
+  // SNG-329 — ⚠️ COERCE BEFORE ANYTHING WRITES IT DOWN. `turn.moveTo.location` may ITSELF be an object
+  // (`{ location: { id, name } }`), and this handed that object onward untouched — where `String(ref)` turned
+  // it into the literal text "[object Object]", minted it as a place, and SAVED it. Found in play by Erik on
+  // the first real play-leg; three saves already carry the artefact.
+  const moveRef = locationRefToString(turn.moveTo && (turn.moveTo.location || turn.moveTo.id || turn.moveTo));
   if (moveRef) {
     // SNG-117: the header follows the fiction even to a place with no record yet — resolve it, or MINT it
     // (a named-but-unrecorded destination like "the pass" becomes a real, travelable place). Never no-op
@@ -6260,8 +6264,18 @@ async function arriveAtPending() {
  *  (keyed off the normalized name, so "the pass" mints exactly once — Q1). Deterministic (no model call);
  *  the world-gen path can flesh it out later. Returns the id. */
 function mintTransitLocation(moveRef) {
+  // SNG-329 — ⛔ THE MINT IS A WRITE TO THE SAVE, SO IT IS THE STRICTEST GATE IN THIS PATH, NOT THE LOOSEST.
+  // Aevi's framing, and it is right: this path is permissive ON PURPOSE ("a named-but-unrecorded destination
+  // like 'the pass' becomes a real place"), and permissive input plus a PERSISTING write is exactly where a
+  // malformed value becomes permanent. Everything upstream may guess; this may not.
+  const ref = locationRefToString(moveRef);
+  if (!ref || isCoercedObjectName(ref)) {
+    console.warn("[mint] refused a location reference that is not a usable name:", moveRef);
+    return null;                       // the header keeps its last real place rather than gaining a fake one
+  }
   ensureGenerated(character);
-  const id = "gen-" + slugify(String(moveRef));
+  moveRef = ref;
+  const id = "gen-" + slugify(ref);
   if (CONTENT.locations[id]) { addKnownPlace(id); return id; } // already a real place — reuse, never dup
   const here = CONTENT.locations[character.currentLocationId];
   const existing = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existing[l.id] = l.map;

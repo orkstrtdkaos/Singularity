@@ -44,3 +44,56 @@ made permanent. **The mint is the one place in that path that should be strict.*
 ## ALSO FROM THIS PLAY SESSION (Erik, not yet specced)
 - **the world map needs fixing** — details to come from him.
 - **the foothills need authoring for all the civilisations** — mine, starting now.
+
+---
+
+## ✅ FIXED — CCode, 2026-08-06, v1.9.39. All three parts, plus the saves.
+
+Your trace was exact and your framing of part 2 is the fix: **a mint is a write to the save, so it must be
+the strictest gate in a deliberately permissive path, not the loosest.**
+
+| part | where | what |
+|---|---|---|
+| 1. coerce | `state.js:locationRefToString` | every shape the GM returns → a string, or **null**. Never `String(ref)`. Used at app.js:5148 *and* inside `resolveLocationId`, so no caller can skip it |
+| 2. refuse | `app.js:mintTransitLocation` | returns null on anything unusable; the header keeps its last real place rather than gaining a fake one |
+| 3. repair | `reconcile.js` step 23 | drops the artefact, moves the player out of it, idempotent |
+
+### ⚠️ IT WAS THREE SAVES, NOT ONE — and two predate that play session
+
+```
+  char-msgpisca  Splarf       gen-object-object   "[Object Object]"   ← and currentLocationId WAS it
+  char-mrhs8286  Silas Weir   gen-object-object   "[Object Object]"
+  char-mr4ejo8c  Cellaceron   gen-object-object   "[Object Object]"
+```
+
+**Splarf was standing in it.** `currentLocationId: "gen-object-object"` — that is the header Erik was
+looking at, not just a mis-render of a real place. He is now at `the_thinning`, the place it was minted
+from. All three repaired on disk; the reconcile step catches any that reappear on load.
+
+### ⛔ WHY YOUR "none validates that its name is a string" IS TOO KIND TO US
+
+It is worse than a missing check: **the mint TITLE-CASES**, so the artefact lands as `"[Object Object]"` —
+a well-formed string with capitals and spaces that reads like a place name. A `typeof === "string"` check
+would have passed it. **My own first detector scanned for lowercase `object Object` and reported ZERO
+corrupt records across all three infected saves.** The gate is case-insensitive for exactly that reason.
+
+### ⚠️ AND THE SUITE NARROWED YOUR PART 3 FOR ME
+
+You asked for "any `generated.location` whose `name` fails a string check". I built it that way and it
+**deleted a legitimate SNG-216 test fixture** that simply had no name yet. Reconcile's own law is *never
+removes or downgrades*, so a migration that deletes has to be scoped to exactly the damage:
+
+- **`[object Object]`** → dropped. It was never a real place; there is no true name to restore, and
+  inventing one would put a place into someone's canon the fiction never named.
+- **missing/blank name** → left alone. Different defect, non-destructive fix (rename from id), not this pass.
+
+So there are two checks now: `isCoercedObjectName` (wide — for the mint, which refuses) and
+`isCoercedObjectArtefact` (narrow — for the migration, which deletes).
+
+**8 gates, including one that scans every shipped save** — so if this ever lands again, the build says so
+before anyone has to notice it in a header.
+
+### On your two follow-ups
+
+- **the world map** — waiting on Erik's details.
+- **the foothills** — yours, and nothing in the engine blocks it.

@@ -10039,6 +10039,75 @@ await (async () => {
     })());
   }
 
+  // SNG-329 — `[object Object]` MINTED INTO THE SAVE AS A PLACE. Found IN PLAY by Erik on the first real
+  // play-leg (Splarf), traced by Aevi. `moveTo.location` could arrive as an OBJECT; `String(ref)` turned it
+  // into literal text, slugged it to `gen-object-object`, TITLE-CASED it to "[Object Object]", and wrote it
+  // to `character.generated.location` — persisting, reloading, and feeding its own descriptionSeed back to
+  // the GM as context.
+  {
+    const ST = await import("../engine/state.js");
+
+    // ⛔ THE COERCION. Every shape the GM actually returns must yield a STRING or null — never `String(obj)`.
+    check("329: a nested `{location:{id}}` yields the id, not the text of an object",
+      ST.locationRefToString({ location: { id: "the_pass", name: "The Pass" } }) === "the_pass"
+      && ST.locationRefToString({ location: "the_pass" }) === "the_pass"
+      && ST.locationRefToString("the_pass") === "the_pass");
+    check("329: an unnameable reference returns NULL — never the string '[object Object]'",
+      ST.locationRefToString({}) === null && ST.locationRefToString({ location: {} }) === null
+      && ST.locationRefToString(null) === null && ST.locationRefToString("  ") === null);
+
+    // ⚠️ THE DETECTOR MUST BE CASE-INSENSITIVE, WHICH IS THE WHOLE REASON THIS SURVIVED. The mint
+    // title-cases, so the damage is spelled "[Object Object]" on disk. My own first scan looked for the
+    // lowercase form and reported ZERO corrupt records across three infected saves.
+    check("329: the artefact is caught in BOTH spellings — title-cased on disk, lowercase in fresh JS",
+      ST.isCoercedObjectArtefact("[Object Object]") === true
+      && ST.isCoercedObjectArtefact("[object Object]") === true
+      && ST.isCoercedObjectArtefact("The Pass") === false);
+
+    // ⛔ AND THE REPAIR IS NARROWER THAN THE MINT'S REFUSAL. `isCoercedObjectName` also catches a MISSING
+    // name — right for refusing a write, wrong for a migration that DELETES. The wide version removed a
+    // legitimate SNG-216 fixture, which is how I found out; reconcile's own law is "never removes".
+    check("329: the repair check is narrower than the mint check — a nameless record is NOT deleted",
+      ST.isCoercedObjectName(undefined) === true && ST.isCoercedObjectArtefact(undefined) === false
+      && ST.isCoercedObjectName("") === true && ST.isCoercedObjectArtefact("") === false);
+
+    // The migration itself: drops the artefact, moves the player out, keeps everything real.
+    const RC = await import("../engine/reconcile.js");
+    const step = RC.CHARACTER_STEPS.find(x => x.id === "repair-coerced-object-locations");
+    const c = { currentLocationId: "gen-object-object", knownPlaces: ["gen-object-object", "real"],
+      generated: { location: {
+        "gen-object-object": { id: "gen-object-object", name: "[Object Object]", connections: ["the_crossing"] },
+        "real": { id: "real", name: "The Low Lamp Inn" },
+        "nameless": { id: "nameless" },
+      } } };
+    step.apply(c);
+    check("329: the repair drops the artefact, keeps real places, and leaves a nameless one alone",
+      !c.generated.location["gen-object-object"] && !!c.generated.location.real && !!c.generated.location.nameless);
+    check("329: …and it does not strand the player inside the place it just removed",
+      c.currentLocationId === "the_crossing" && !c.knownPlaces.includes("gen-object-object"));
+    // IDEMPOTENT — reconcile's first law.
+    const before = JSON.stringify(c);
+    step.apply(c);
+    check("329: running the repair twice changes nothing", JSON.stringify(c) === before);
+
+    // ⚠️ AND THE REAL SAVES ARE CLEAN OF IT AT HEAD — the check that would have caught this in the first
+    // place, and the one that proves the repair has somewhere to run.
+    check("329: no shipped save carries a place minted from a coerced object", (() => {
+      const walk = (d) => readdirSync(d, { withFileTypes: true })
+        .flatMap(e => e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]);
+      let files = [];
+      try { files = walk(join(root, "characters")).filter(f => f.endsWith(".json")); } catch { return true; }
+      for (const f of files) {
+        let j; try { j = JSON.parse(readFileSync(f, "utf8")); } catch { continue; }
+        const ch = j.character || j;
+        for (const rec of Object.values(ch?.generated?.location || {})) {
+          if (ST.isCoercedObjectArtefact(rec?.name)) { console.log(`      still corrupt: ${f}`); return false; }
+        }
+      }
+      return true;
+    })());
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

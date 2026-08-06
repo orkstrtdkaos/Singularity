@@ -1994,7 +1994,7 @@
     "Silas Weir assumed the Left Branch approach watch, took delivery of a Hub message about Cael, attended Deni Cors's whistling for Logana as an Ashwarden should, walked Deni through the made gate, named the coming waypost the Whistling Woman after her song, handed the shadow-sheet to Pell with instructions to write Mara about workers and materials, left Veth thinking about the post's layout, and made the first clean routine crossing of the gate. Deni filed her registry entry and departed south. The post is not yet built — but it is named, staffed, on the circuit's record, and begun.",
     "The morning at the east-side draw-well closes: two nodes marked, three more named by pattern — the midrow wayhouse, the mill gate, and something high on the ridge. Pell confirms the wayhouse through ironsense. The relay network's shape is known, if not yet complete. The scene ends here; the road forward is plain."
   ],
-  "currentLocationId": "gen-object-object",
+  "currentLocationId": "the_crossing",
   "activeScene": {
     "locationId": "gen-object-object",
     "turns": [
@@ -12786,44 +12786,6 @@
           "x": 272.37251111495743,
           "y": 297.10793550220046
         }
-      },
-      "gen-object-object": {
-        "id": "gen-object-object",
-        "name": "[Object Object]",
-        "regionId": "the_center",
-        "descriptionSeed": "A place the road led to — [Object Object]. The fiction brought you here before the map knew its name.",
-        "tags": [
-          "transitional"
-        ],
-        "connections": [
-          "the_crossing"
-        ],
-        "_mintedAs": "transit",
-        "dangerLevel": 2,
-        "_gen": {
-          "type": "location",
-          "tier": "fresh",
-          "engagementScore": 2,
-          "birthWeight": 1,
-          "rating": null,
-          "attentionHistory": [
-            {
-              "kind": "revisit",
-              "day": 14
-            }
-          ],
-          "createdDay": 14,
-          "provenance": {
-            "locationId": "the_crossing",
-            "day": null,
-            "hint": "transit"
-          },
-          "lastAttentionDay": 14
-        },
-        "map": {
-          "x": 295.6723737765526,
-          "y": 233.26322574031602
-        }
       }
     },
     "arc": {
@@ -13940,8 +13902,7 @@
     "gen-hub-north-gate-district-street",
     "gen-mara-wells-store",
     "gen-disputed-zone-left-branch-entrance",
-    "gen-the-made-gate",
-    "gen-object-object"
+    "gen-the-made-gate"
   ],
   "opLossLog": [
     {

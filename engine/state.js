@@ -19,9 +19,65 @@ const LS = {
 
 // ---------- content packs ----------
 
+/** SNG-329 — ⚠️ A LOCATION REFERENCE MUST BECOME A STRING *BEFORE* ANYTHING WRITES IT DOWN.
+ *
+ *  FOUND IN PLAY by Erik on the first real play-leg (Splarf), traced by Aevi. The GM may return `moveTo` as
+ *  `{ location: "the_pass" }` OR as `{ location: { id, name } }`. The nested-object form fell through to
+ *  `String(ref)` and became the literal text "[object Object]" — slugified to `gen-object-object`,
+ *  title-cased to "[Object Object]", and MINTED INTO THE SAVE as a place.
+ *
+ *  ⛔ AND THE TITLE-CASING IS WHY NOBODY CAUGHT IT. "[Object Object]" is a perfectly good STRING with
+ *  capitals and spaces: it passes every "is there a name" check in the codebase and reads like a place.
+ *  A corruption that survives normalization comes out looking like content. My own first detector scanned
+ *  for lowercase `object Object` and reported ZERO corrupt records across three infected saves.
+ *
+ *  Returns a usable string, or null. Null is the only other answer — a reference nobody can name is a
+ *  reference nobody should mint. */
+export function locationRefToString(ref) {
+  if (ref == null) return null;
+  if (typeof ref === "string") { const s = ref.trim(); return s || null; }
+  if (typeof ref === "number" && Number.isFinite(ref)) return String(ref);
+  if (typeof ref === "object") {
+    // The shapes the GM actually returns, most specific first.
+    for (const k of ["id", "locationId", "location", "name"]) {
+      const v = ref[k];
+      if (typeof v === "string" && v.trim()) return v.trim();
+      // ONE level of nesting — `{ location: { id } }` — and no further, because past that we are guessing.
+      if (v && typeof v === "object") {
+        for (const k2 of ["id", "locationId", "name"]) {
+          if (typeof v[k2] === "string" && v[k2].trim()) return v[k2].trim();
+        }
+      }
+    }
+  }
+  return null;                     // ⛔ never `String(ref)` — that is the bug, and it persists to the save
+}
+
+/** ⚠️ IS THIS NAME THE ARTEFACT OF A COERCED OBJECT? Used by the mint (to refuse) and by the repair pass
+ *  (to find the ones already written). Case-insensitive on purpose: the mint title-cases, so the damage is
+ *  spelled `[Object Object]` on disk and `[object Object]` in fresh JS. */
+export function isCoercedObjectName(name) {
+  return typeof name !== "string" || !name.trim() || /\[object\s+object\]/i.test(name);
+}
+
+/** ⚠️ NARROWER, AND THE DIFFERENCE MATTERS FOR A REPAIR PASS. `isCoercedObjectName` is right for the MINT
+ *  (refuse anything unusable). It is too wide for a MIGRATION, which deletes: a record with a missing or
+ *  blank name is a different defect with a non-destructive fix (rename it from its id), while the
+ *  `[object Object]` artefact is a place that was never named at all and has nothing to restore.
+ *
+ *  I learned this from the suite rather than from reasoning: the wide check deleted a legitimate SNG-216
+ *  fixture that simply had no name yet. Reconcile's own law is "NEVER removes or downgrades", so the
+ *  exception has to be as narrow as the damage. */
+export function isCoercedObjectArtefact(name) {
+  return typeof name === "string" && /\[object\s+object\]/i.test(name);
+}
+
 /** SNG-056: resolve a GM `moveTo` reference (an id or a place name) to a real loaded location id,
  *  or null if it names nowhere that exists. Exact id → slugified id → exact name → loose name. Pure. */
 export function resolveLocationId(ref, locations = {}) {
+  // SNG-329: coerce FIRST. An object reference used to stringify to "[object Object]", match nothing, and
+  // fall through to a mint that wrote the artefact into the save.
+  ref = locationRefToString(ref);
   if (!ref) return null;
   const raw = String(ref).trim();
   if (locations[raw]) return raw;

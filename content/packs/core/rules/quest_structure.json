@@ -24,7 +24,9 @@
     "The best quests have no clean exit. Someone is worse off whatever you choose; the quest is about WHO, and that is the player's to answer for.",
     "Never punish the route. Force, guile, and care are all legitimate; they lead to DIFFERENT outcomes, not better and worse ones.",
     "The consequence must be findable later. If the player cannot go back and SEE what they did, it did not happen.",
-    "A quest should make at least one person permanently different — including, sometimes, the player."
+    "A quest should make at least one person permanently different — including, sometimes, the player.",
+    "⚠️ EACH STAGE MUST NEED SOMETHING THE STAGE BEFORE IT PRODUCED — see `stageChain`. If a player could do stage 3 first, you have written three errands with a shared title.",
+    "⚠️ NEVER USE A TIME FLOOR TO MAKE A STAGE FEEL SUBSTANTIAL. Density comes from what a stage REQUIRES, never from how long it is held open."
   ],
   "effectVocabulary": {
     "npc_state": "an NPC's life/standing/death changes",
@@ -35,5 +37,25 @@
     "quest_seed": "this outcome opens the next thing",
     "ally": "an NPC becomes bound to you",
     "xp": "engine-clamped"
+  },
+  "stageChain": {
+    "_theLaw": "⚠️ EACH STAGE MUST NEED SOMETHING THE STAGE BEFORE IT PRODUCED. This is the law that makes a sequence into a story. Erik, from play: 'if you can learn, obtain, and deliver the required objectives in 3 beats it's not really a quest.' The cause was not that stages closed too fast — it was that THEY DID NOT NEED EACH OTHER, so the order never mattered and nothing accumulated.",
+    "_theTest": "Ask: COULD A PLAYER DO STAGE 3 FIRST? If yes, you have written three errands with a shared title. If no — because stage 3 needs the name stage 2 found, and stage 2 needs the document stage 1 took — you have written a quest.",
+    "howToChain": {
+      "learn→act": "stage 1 finds out WHO or WHERE; stage 2 requires that name and cannot begin without it",
+      "obtain→use": "stage 1 takes the thing; stage 2 needs it in hand — and ⚠️ if the player loses it, the quest bends rather than breaking",
+      "act→consequence": "stage 1 makes something true; stage 2 exists BECAUSE it is true, and would not otherwise",
+      "meet→trust": "stage 1 encounters someone; stage 2 needs them to help, which they will not do on first meeting"
+    },
+    "requiresField": "Every stage after the first should carry `requires[]` naming what the earlier stage produced — `learn` a fact, `obtain` an item, `speak` to a person, `reach` a place. THE ENGINE REFUSES A STAGE WHOSE REQUIREMENTS ARE UNMET AND TELLS YOU WHY, so the chain is enforced rather than merely described.",
+    "⚠️_notATimer": "Do NOT reach for `beats` to make a stage feel substantial. A minimum-beats floor is a TIMER, and a timer makes a fast quest slow rather than making a thin quest dense. Use `beats` ONLY where waiting IS the content — a vigil, a stakeout, a reply that has to travel, a growing season. A THIN STAGE IS FIXED BY GIVING IT A REAL REQUIREMENT, NEVER BY MAKING THE PLAYER WAIT FOR IT.",
+    "⚠️_notAFetchQuest": "The requirement is not busywork; it is THE THING THAT MUST BE TRUE BEFORE THE NEXT SCENE CAN HAPPEN. The test: if a player described how they satisfied the stage and it sounded like a story, it is right. If it sounded like an errand list, it is wrong. A stage needing a name, a document and two days of travel is a story; a stage needing three tokens is a checklist.",
+    "stagesShouldNotAllBeFindable": "⚠️ AT LEAST ONE STAGE SHOULD BE ABOUT A PERSON DECIDING SOMETHING, not about locating an object. A quest made only of retrievals has no one in it."
+  },
+  "routeReveal": {
+    "_theRule": "⚠️ A ROUTE'S LABEL MAY BE VISIBLE; ITS REASONING MAY NOT. Erik, from play: 'it gave away some things with the greyed out approaches.' He was right, and the fault is in how I authored them — I wrote routes as EXPLANATIONS rather than OPTIONS.",
+    "wrong": "Answer — the clerk signed because the filing was technically correct and no one from the pass appeared to contest it.",
+    "right": "Answer — there is a person whose signature made this legal. You have not found out why yet.",
+    "why": "The wrong version prints THE DISCOVERY OF STAGE 2 before stage 1 begins. A route should name what you could DO and what it would cost you — never what you would learn by doing it. The reasoning belongs to the stage that earns it."
   }
 }

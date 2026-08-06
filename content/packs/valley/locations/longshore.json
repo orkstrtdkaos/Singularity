@@ -4,7 +4,10 @@
  "name": "Longshore",
  "regionId": "the_foothills",
  "communityId": "longshore",
- "spectrum": "space_time",
+ "spectrum": {
+  "space_time": 0.4,
+  "concrete_abstract": -0.2
+ },
  "tags": [
   "settlement",
   "foothill",
@@ -19,14 +22,17 @@
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
  "dangerLevel": 1,
- "image": null,
+ "image": "content/packs/valley/assets/longshore.jpg",
  "questSeeds": [],
  "map": {
   "x": 390,
   "y": 380
  },
  "encounterSeeds": [],
- "poleIntensity": 0.5,
+ "poleIntensity": {
+  "space": 0.4,
+  "concrete": 0.2
+ },
  "substrateSource": {
   "kind": "pool",
   "delta": 0.2,

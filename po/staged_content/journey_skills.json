@@ -1,0 +1,169 @@
+{
+ "schemaVersion": 1,
+ "id": "journey_skills",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged pending SNG-331's build. Erik: 'this will bring lots of skills into play... what other skills are obviously useful here?'",
+ "theFinding": "⚠️ 96 OF 301 CRAFTS ALREADY CLAIM TRAVEL, EXPLORE, SURVIVE, CHASE OR STEALTH — very nearly a third of the catalog. The journey does not need new crafts; IT NEEDS A SURFACE THAT ASKS THE EXISTING ONES A QUESTION. Right now those 96 claim a challenge type the game has almost no occasion to raise, which is why the road has felt thin: the crafts were authored for a journey system that did not exist yet.",
+ "byJourneyStage": {
+  "1_planning": {
+   "question": "can I see the route at all?",
+   "crafts": [
+    {
+     "id": "wayfinding",
+     "trad": "valley_craft",
+     "t": 1,
+     "does": "⚠️ THE FOLK ONE, and it should be the baseline — reveals the route's waypoints and rough days without a guide. Open access, so every party can plan."
+    },
+    {
+     "id": "way_sense",
+     "trad": "horizon",
+     "t": 1,
+     "does": "the horizon version: bearing and distance to a place you have never been"
+    },
+    {
+     "id": "pattern_sense",
+     "trad": "figurist",
+     "t": 1,
+     "does": "reads the SHAPE of a route — where it doubles back, where it is forced through one crossing"
+    },
+    {
+     "id": "the_edge_of_the_map",
+     "trad": "horizon",
+     "t": 5,
+     "does": "⚠️ THE CAPSTONE ANSWER TO THE WILDS: routes through country nobody has mapped, which is exactly the option Erik wants offered"
+    }
+   ],
+   "effect": "reveal waypoints · reveal danger per node · reduce the 'you have no account of this stretch' gaps"
+  },
+  "2_provisioning": {
+   "question": "how much do I need to carry?",
+   "crafts": [
+    {
+     "id": "greenlore",
+     "trad": "valley_craft",
+     "t": 1,
+     "does": "⚠️ FOLK AND OPEN — forage on the move. The single most journey-relevant craft in the game and it is available to anyone."
+    },
+    {
+     "id": "wildcraft",
+     "trad": "churnfolk",
+     "t": 2,
+     "does": "makes camp out of what is there; converts a cold night into a roofed one"
+    },
+    {
+     "id": "beastfriend",
+     "trad": "valley_craft",
+     "t": 1,
+     "does": "an animal carries more than you do, and finds water"
+    },
+    {
+     "id": "lifesense",
+     "trad": "rootkin",
+     "t": 1,
+     "does": "finds what is alive nearby — water, game, and what is hunting you"
+    }
+   ],
+   "effect": "⚠️ REDUCE PROVISIONS NEEDED PER DAY. This is what makes the provision mechanic interesting rather than punitive: a party with greenlore plans a different journey than one without."
+  },
+  "3_onTheRoad": {
+   "question": "what does the road cost me?",
+   "crafts": [
+    {
+     "id": "long_road",
+     "trad": "marcher",
+     "t": 2,
+     "does": "⚠️ IT IS LITERALLY NAMED FOR THIS — marches further per day, which shortens the whole route"
+    },
+    {
+     "id": "second_wind",
+     "trad": "somatic",
+     "t": 1,
+     "does": "one more leg when you should have stopped"
+    },
+    {
+     "id": "staunch",
+     "trad": "rootkin",
+     "t": 1,
+     "does": "the road hurts you; this is why a party without a healer feels every leg"
+    },
+    {
+     "id": "safe_ground",
+     "trad": "stillhold",
+     "t": 2,
+     "does": "a camp nothing comes to — turns a dangerous night into a merely cold one"
+    },
+    {
+     "id": "the_laid_ground",
+     "trad": "stillhold",
+     "t": 2,
+     "does": "the guarded camp, and the reason Erik's guard work belongs on the road too"
+    },
+    {
+     "id": "shroud",
+     "trad": "umbral",
+     "t": 2,
+     "does": "⚠️ pass through a dangerous node WITHOUT being seen — the counter to a high-danger leg that is not a fight"
+    },
+    {
+     "id": "death_ward",
+     "trad": "ashwarden",
+     "t": 3,
+     "does": "the leg through the Palelands stops being lethal"
+    }
+   ],
+   "effect": "fewer camps · lower effective danger · fewer encounters rolled"
+  },
+  "4_shortcuts": {
+   "question": "can I not walk it?",
+   "crafts": [
+    {
+     "id": "the_grey_road",
+     "trad": "ashwarden",
+     "t": 2,
+     "does": "⚠️ ERIK NAMED IT FIRST AND IT IS THE BEST ONE — travel by the road the dead use. Fast, and it costs something other than time."
+    },
+    {
+     "id": "spanwork",
+     "trad": "horizon",
+     "t": 2,
+     "does": "cross one impassable thing — a gorge, a flood, a closed border"
+    },
+    {
+     "id": "the_far_step",
+     "trad": "horizon",
+     "t": 4,
+     "does": "skip a leg entirely"
+    },
+    {
+     "id": "thin_place",
+     "trad": "numinous",
+     "t": 3,
+     "does": "a shortcut that exists only where the veil is already thin, so it is route-dependent rather than universal"
+    },
+    {
+     "id": "the_walking_figure",
+     "trad": "figurist",
+     "t": 3,
+     "does": "send a figure of yourself ahead — scouts a leg without walking it"
+    }
+   ],
+   "effect": "⚠️ SKIP LEGS AT A COST. And the design rule: A SHORTCUT SHOULD COST SOMETHING THE JOURNEY DOES NOT — the grey road costs standing with the dead, spanwork costs the crossing itself, the far step costs energy. Never merely 'less time for more energy', or every journey collapses into the same optimisation."
+  },
+  "5_flight": {
+   "question": "Erik: 'even the movement/teleport skills... flight itself'",
+   "note": "⚠️ NO FLIGHT CRAFT EXISTS. I checked. `light_bending`, `the_far_step` and `spanwork` are the nearest, and none of them leaves the ground. THAT IS A GAP AND PROBABLY A DELIBERATE ONE TO FILL: flight is the most obvious travel answer in any world with this much craft, and its absence is conspicuous now that the journey has a surface. If it gets authored, the journey is where it should prove itself — and the cost should be that YOU SEE THE ROUTE AND MEET NONE OF IT, which is precisely what a journey system exists to give you."
+  }
+ },
+ "theQuestShape": {
+  "erik": "'once you build your journey and set off, it becomes a quest-like item you can see the progress of'",
+  "why": "⚠️ AND THE MACHINERY IS ALREADY THERE. A journey is a multi-stage thing with waypoints, a condition per stage, and a change on completion — WHICH IS EXACTLY THE QUEST SCHEMA (id/stages/condition/change). A leg is a stage. Arriving is the condition. The change is where you are.",
+  "progress": "legs completed, days elapsed, provisions remaining — the same readout shape as a charge, and it should count THE THING (legs, nights) rather than a percentage, per the charge display rule",
+  "interruption": "⚠️ THE GOOD PART: a journey that is a tracked object CAN BE INTERRUPTED AND RESUMED. An encounter mid-leg does not cancel it; a route that closes behind you re-plans it; and a party that turns back has a record of how far they got. That is not available to a one-hop button."
+ },
+ "whatIWouldAuthor": [
+  "the direction vocabulary in this world's voice (upriver, poleward, toward the Ascent)",
+  "per-craft journey effects for the ~30 crafts above — the numbers, not the prose",
+  "forage yields by region, which the region tables' `living_stock` need/scarcity already implies",
+  "⚠️ and a flight craft, if Erik wants one — but I would want his call first, because a world where people can fly is a different world and the absence may be authored"
+ ]
+}

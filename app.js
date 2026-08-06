@@ -87,7 +87,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.45";
+const APP_VERSION = "1.9.46";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6327,6 +6327,27 @@ async function arriveAtPending() {
  *  lightweight generated location adjacent to where you left, with a stable id + map coord. Idempotent
  *  (keyed off the normalized name, so "the pass" mints exactly once — Q1). Deterministic (no model call);
  *  the world-gen path can flesh it out later. Returns the id. */
+/** SNG-329b — ⛔ THE ONE DOOR EVERY MINTED PLACE GOES THROUGH.
+ *
+ *  I fixed `mintTransitLocation` because that is the path the defect report named, and Erik played, and
+ *  `[object Object]` came back — caught by the gate I had just written. There was a SECOND minting path
+ *  (`mintWaygate`) doing the same `String(ref)` on the same kind of value, and I had not swept for siblings.
+ *  That is the second time this week the report named one site and there were two (SNG-330 had two read
+ *  sites for reachability).
+ *
+ *  So the guard moves to THE WRITE. Every caller may guess; nothing gets into `generated.location` — which
+ *  persists, reloads, and feeds its own descriptionSeed back to the GM — without a real name. A future third
+ *  mint path is covered without anyone remembering this conversation. */
+function commitGeneratedLocation(id, rec) {
+  if (!id || isCoercedObjectName(id) || isCoercedObjectName(rec?.name)) {
+    console.warn("[mint] REFUSED a location with no real name — nothing written to the save:", id, rec?.name);
+    return null;
+  }
+  ensureGenerated(character);
+  if (!commitGeneratedLocation(id, rec)) return null;
+  return id;
+}
+
 function mintTransitLocation(moveRef) {
   // SNG-329 — ⛔ THE MINT IS A WRITE TO THE SAVE, SO IT IS THE STRICTEST GATE IN THIS PATH, NOT THE LOOSEST.
   // Aevi's framing, and it is right: this path is permissive ON PURPOSE ("a named-but-unrecorded destination
@@ -6387,7 +6408,9 @@ function mintTransitLocation(moveRef) {
  *  legacy {id, connectsTo[]} and the richer {gateId, connects[]:{to,kind,default,requires}, at, networkCapable}. */
 function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, networkCapable, waygateTier } = {}) {
   ensureGenerated(character);
-  const gid = "gen-" + slugify(String(id || gateId || `waygate-${name || "made-gate"}`));
+  // SNG-329b — the same `String(obj)` trap as the transit mint. Coerce properly; the write refuses anyway.
+  const gidRef = locationRefToString(id) || locationRefToString(gateId) || `waygate-${locationRefToString(name) || "made-gate"}`;
+  const gid = "gen-" + slugify(gidRef);
 
   // SNG-243 §3: resolve each rich connection's `to` to a REAL location id (SNG-232 seam — a connection target
   // that can't resolve would mint a broken travel edge; drop it loudly instead). Keep kind/default/requires.
@@ -6438,8 +6461,7 @@ function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, 
     _mintedAs: "made_waygate",
     map: coordForGenerated(gid, anchor?.map, existingMaps)
   };
-  character.generated.location[gid] = rec;
-  CONTENT.locations[gid] = rec;
+  if (!commitGeneratedLocation(gid, rec)) return null;   // SNG-329b: one door for every minted place
   for (const a of targets) linkBack(a);
   addKnownPlace(gid);
   console.log(`[made-waygate] "${rec.name}" (${gid}) minted + discovered → connections ${targets.join(", ") || "(nowhere yet)"}${networkCapable ? " · networkCapable" : ""}${defaultTo ? ` · default→${defaultTo}` : ""}`);

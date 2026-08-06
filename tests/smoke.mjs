@@ -10163,6 +10163,18 @@ await (async () => {
 
     // ⚠️ AND THE REAL SAVES ARE CLEAN OF IT AT HEAD — the check that would have caught this in the first
     // place, and the one that proves the repair has somewhere to run.
+    // ⛔ AND EVERY MINT ROUTES THROUGH ONE GUARDED WRITE. I fixed the path the defect report named, Erik
+    // played, and `[object Object]` came back — caught by this very gate. There was a SECOND mint
+    // (`mintWaygate`) doing the same `String(ref)` on the same kind of value, and I had not swept for
+    // siblings. Second time this week a report named one site and there were two. The guard is on the WRITE
+    // now, so a third path is covered without anyone remembering this.
+    {
+      const appSrc329 = readFileSync(join(root, "app.js"), "utf8");
+      const writes = (appSrc329.match(/character\.generated\.location\[[a-zA-Z]+\] = /g) || []).length;
+      check("329b: nothing writes generated.location except the one guarded commit", writes === 1);
+      check("329b: …and that commit refuses a name that is a coerced object",
+        /function commitGeneratedLocation[\s\S]{0,400}isCoercedObjectName\(rec\?\.name\)/.test(appSrc329));
+    }
     check("329: no shipped save carries a place minted from a coerced object", (() => {
       const walk = (d) => readdirSync(d, { withFileTypes: true })
         .flatMap(e => e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]);

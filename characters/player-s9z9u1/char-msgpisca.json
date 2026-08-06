@@ -133,7 +133,7 @@
     "At The Thinning's waygate clearing, evening deepens. Splarf consulted Boo about the dark gathering at the forest's edge while Cevaine stood sentinel, the sealed veil humming between them and mystery. Something moves in the woods—something that does not announce itself.",
     "At The Thinning's sealed waygate, deep in the second night, Splarf builds a fire and settles into vigil beside Cevaine—the wounded sentinel refusing all aid, the veil remaining sealed and angry, and the purposeful dark continuing its patient watch from the forest's edge."
   ],
-  "currentLocationId": "gen-object-object",
+  "currentLocationId": "the_thinning",
   "activeScene": {
     "locationId": "gen-object-object",
     "turns": [
@@ -3769,46 +3769,7 @@
         "image": "https://image.pollinations.ai/prompt/A%20pale%20woman%20in%20her%20middle%20forties%2C%20slight%20and%20very%20upright%2C%20with%20close-cropped%20silver-ash%20hair%20still%20carrying%20the%20grid-lines%20of%20a%20Lattice%20reader's%20field-shave%20%E2%80%94%20the%20scalp%20marked%20in%20faint%20geometric%20se%2C%20character%20portrait%2C%20named%20Cevaine%20of%20the%20Seventh%20Measure%2C%20Lattice-Cities%20order-reader%20walking%20The%20Thinning's%20edge%20%E2%80%94%20applying%20structural%20precision%20to%20a%20place%20t%2C%20Speaks%20in%20the%20clipped%2C%20load-bearing%20syntax%20of%20the%20Lattice%20%E2%80%94%20every%20sentence%20is%20a%20measurement%2C%20every%20p%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=50726&nologo=true"
       }
     },
-    "location": {
-      "gen-object-object": {
-        "id": "gen-object-object",
-        "name": "[Object Object]",
-        "regionId": "the_numinous_reach",
-        "descriptionSeed": "A place the road led to — [Object Object]. The fiction brought you here before the map knew its name.",
-        "tags": [
-          "transitional"
-        ],
-        "connections": [
-          "the_thinning"
-        ],
-        "_mintedAs": "transit",
-        "dangerLevel": 3,
-        "_gen": {
-          "type": "location",
-          "tier": "fresh",
-          "engagementScore": 2,
-          "birthWeight": 1,
-          "rating": null,
-          "attentionHistory": [
-            {
-              "kind": "revisit",
-              "day": 3
-            }
-          ],
-          "createdDay": 3,
-          "provenance": {
-            "locationId": "the_thinning",
-            "day": null,
-            "hint": "transit"
-          },
-          "lastAttentionDay": 3
-        },
-        "map": {
-          "x": 413.2969295284196,
-          "y": 40
-        }
-      }
-    },
+    "location": {},
     "arc": {},
     "creature": {},
     "item": {}
@@ -4000,9 +3961,7 @@
       }
     }
   },
-  "knownPlaces": [
-    "gen-object-object"
-  ],
+  "knownPlaces": [],
   "locationImages": {
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },

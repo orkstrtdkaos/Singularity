@@ -136,7 +136,25 @@ export async function loadContent() {
   // when the manifest was re-registered, which nulls baseChance/d100/energy) and never by a hardcoded
   // path (origins/backgrounds/regions/accords used to bypass the manifest entirely). rulePath finds the
   // entry by the file's distinctive stem; the array's ORDER never matters again.
-  const rulePath = name => { const p = (index.provides.rules || []).find(r => r.includes(name)); return p ? `content/packs/core/${p}` : null; };
+  // SNG-331 — ⚠️ MATCH THE FILENAME, NOT A SUBSTRING OF THE PATH.
+  //
+  // This was `.find(r => r.includes(name))`, and `"rules/location_affinities.json".includes("ties")` is
+  // TRUE — "affini**ties**". `location_affinities.json` is registered earlier, so `loadRule("ties")` returned
+  // it, and `rules.ties` has been the location-affinities table since the day Aevi authored the ties file.
+  //
+  // ⛔ A NEW DOOR IN THE PromisedButUnread FAMILY, AND THE NASTIEST YET: registered ✓ loaded ✓ destructured
+  // into the right name ✓ merged ✓ — and it was THE WRONG FILE. Every check we built for this family asks
+  // whether the wiring reaches something; none asked whether it reached the RIGHT something. The content
+  // was never unread — it was read past.
+  //
+  // One collision exists today. The resolver is the fix rather than the filename, because any short rule
+  // name that appears inside a longer one is the same trap waiting: `ties`/`affinities`, and a future
+  // `charges`/`surcharges`, `arc`/`hierarchy`, `set`/`offset` would all land the same way.
+  const rulePath = (name) => {
+    const want = `rules/${name}.json`;
+    const p = (index.provides.rules || []).find(r => r === want || r.endsWith(`/${name}.json`));
+    return p ? `content/packs/core/${p}` : null;
+  };
   const resPath = rulePath("resolution");
   if (!resPath) throw new Error("manifest: core provides.rules is missing resolution.json (the base rules)");
   // Every optional core rule loads the same way: found by name in the manifest, fetched, fallback on

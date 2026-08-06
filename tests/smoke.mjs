@@ -10185,6 +10185,63 @@ await (async () => {
     }
   }
 
+  // SNG-331 — ⚠️ THE RULE RESOLVER MATCHED A SUBSTRING OF THE PATH, SO A RULE LOADED THE WRONG FILE.
+  //
+  // `rulePath` was `.find(r => r.includes(name))`, and `"rules/location_affinities.json".includes("ties")`
+  // is TRUE — "affini**ties**". location_affinities is registered earlier, so `loadRule("ties")` returned
+  // IT, and `rules.ties` was the location-affinities table from the day Aevi authored the ties file.
+  //
+  // ⛔ THE NASTIEST DOOR IN THE PromisedButUnread FAMILY SO FAR: registered ✓ loaded ✓ destructured into the
+  // right name ✓ merged ✓ — and it was THE WRONG FILE. Every check built for this family asks whether the
+  // wiring REACHES something. None asked whether it reached the RIGHT something. The content was never
+  // unread; it was read past.
+  {
+    const { loadContentHeadless: lch331 } = await import("./headless_content.mjs");
+    const C331 = await lch331();
+    const rulesDir = join(root, "content/packs/core/rules");
+    const sig = (o) => (o && typeof o === "object"
+      ? Object.keys(o).filter(k => !k.startsWith("_")).sort().slice(0, 5).join(",") : String(o));
+    // ⛔ arcResponse and resolution are intentionally NOT whole-file (one is an inner block, the other IS
+    // the rules bag) — named here rather than silently skipped, so the exemption is visible.
+    const byDesign = new Set(["arcResponse", "resolution"]);
+    const wrong = [];
+    for (const f of readdirSync(rulesDir).filter(x => x.endsWith(".json"))) {
+      const key = f.replace(/\.json$/, "").replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+      if (byDesign.has(key)) continue;
+      const loaded = C331.rules?.[key];
+      if (loaded === undefined) continue;                    // not merged into `rules` — a different question
+      const file = JSON.parse(readFileSync(join(rulesDir, f), "utf8"));
+      if (sig(loaded) !== sig(file)) wrong.push(`${key}: loaded[${sig(loaded)}] file[${sig(file)}]`);
+    }
+    for (const w of wrong) console.log(`      ${w}`);
+    check("331: every merged rules key holds the CONTENT OF ITS OWN FILE, not a substring match", !wrong.length);
+
+    // …and the collision itself, asserted directly, so a future short name cannot reintroduce it.
+    check("331: `ties` resolves to ties.json — not to location_affinities.json, which contains it",
+      Array.isArray(C331.rules?.ties?.kinTriggers) && C331.rules.ties.kinTriggers.length > 0
+      && !("tagAliases" in (C331.rules.ties || {})));
+
+    // ⛔ AND THE PROPERTY, NOT TODAY'S INSTANCE. A source-pattern check on `rulePath` would prove a line was
+    // typed; this proves the manifest cannot hide another collision. For EVERY registered rule, the first
+    // path a substring search would return must be that rule's own file — the exact condition that made
+    // `ties` load location_affinities, checked across all 51 rather than the one that bit.
+    {
+      const manifest = JSON.parse(readFileSync(join(root, "content/packs/core/manifest.json"), "utf8"));
+      const regs = manifest.provides?.rules || [];
+      const collide = [];
+      for (const path of regs) {
+        const name = path.split("/").pop().replace(/\.json$/, "");
+        const substringWinner = regs.find(r => r.includes(name));
+        if (substringWinner !== path) collide.push(`${name} → ${substringWinner}`);
+      }
+      for (const c of collide) console.log(`      substring collision: ${c}`);
+      // The collisions may EXIST (a short name inside a long one is legal); what must hold is that the
+      // resolver does not use substring matching, proved by every merged key matching its file above.
+      check("331: known substring collisions are declared, and none of them changes what loads",
+        collide.length === 0 || collide.every(c => c.startsWith("ties →")));
+    }
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

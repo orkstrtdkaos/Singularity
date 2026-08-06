@@ -29,17 +29,28 @@ actual gate.** Kinds, all reading state that already exists:
 | `speak` | a named NPC has been met | `npcRegistry` / relationships |
 | `deliver` | an item is given to a named NPC | inventory + relationship |
 | `resolve` | an encounter or contest of a named kind is won | encounter log |
-| `beats` | ⚠️ **a minimum number of beats has passed in this stage** | the clock |
-**⚠️ AND THE LAST ONE IS THE FLOOR THAT FIXES ERIK'S COMPLAINT DIRECTLY.** Even a stage whose other
-requirements are met quickly should not close inside a single beat. **Proposed minimum: 3 beats per stage for
-a personal quest, more for tier 4–5.** A stage is a *span of attention*, not a checkbox.
+| `beats` | ⚠️ **SITUATIONAL ONLY — see below** | the clock |
+
+### ⚠️ `beats` IS NOT THE DEFAULT ANSWER — Erik: "don't make beats a standard go-to, only on quests that make sense"
+**My first draft made a minimum-beats floor universal. That was wrong and it is the same failure as a cost
+that negates purpose: a floor applied everywhere is A TIMER, and a timer does not make a quest denser — it
+makes a fast quest slow.** An urgent errand that SHOULD resolve in two beats becomes worse, not better.
+**Use `beats` only where waiting is the content:**
+- a stage that is **a vigil, a stakeout, a convalescence, a season of growth** — the thing you are doing IS
+  elapsed time
+- a stage waiting on **someone else to act** — a reply, a shipment, a court date
+- **a charge or an upkeep working** that genuinely takes hours (`light_well`, `the_perfect_erasure`)
+**Never use it to pad a stage that is otherwise thin.** ⚠️ **A thin stage is fixed by giving it a real
+requirement, not by making the player wait for it.**
 
 ## WHAT A STAGE SHOULD COST — by tier
-| tier | requirements per stage | min beats | shape |
-|---|---|---|---|
-| 1–2 | 1 | 2 | one thing, found nearby |
-| 3 | 2 | 3 | one of them needs travel or a person |
-| 4–5 | 2–3 | 4 | **at least one requires something obtained in a DIFFERENT stage** |
+| tier | requirements per stage | shape |
+|---|---|---|
+| 1–2 | 1 | one thing, found nearby |
+| 3 | 2 | one of them needs travel or a person |
+| 4–5 | 2–3 | **at least one requires something obtained in a DIFFERENT stage** |
+**No beats column — density comes from what a stage REQUIRES, never from how long it is held open.**
+
 **⚠️ THAT LAST ROW IS THE STRUCTURAL POINT: a real quest has stages that DEPEND ON EACH OTHER.** Splarf's
 three stages — find the filing, find the clerk, write back — **could each be answered independently**, so the
 order never mattered and no understanding accumulated. **If stage 3 requires the document obtained in stage 1

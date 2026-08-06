@@ -279,6 +279,26 @@ ${standingDetail}`);
   if (inventoryDetail) scene.push(`## INVENTORY (usable in scenes — reference items by their exact names)\n${inventoryDetail}`);
   if (evolvedItemsDetail) scene.push(`## LIVING GEAR (evolving items the character carries — honor the current stage's character; never advance a stage yourself, the engine gates it)\n${evolvedItemsDetail}`);
   if (questsDetail) scene.push(`## ACTIVE QUESTS\n${questsDetail}`);
+  // SNG-341b — ⚠️ THE SHAPE A QUEST MUST HAVE, surfaced where quests are actually made. Aevi authored and
+  // registered `rules/quest_structure.json`; it reached nothing until now.
+  //
+  // ⛔ THIS IS THE HALF THAT MAKES SNG-341 REAL. `requires[]` made stage dependency POSSIBLE; only this makes
+  // it HAPPEN — a generated quest with three independent stages still reads as three errands even with a
+  // requirement on each. Erik's diagnosis was not that stages closed too fast, it was that they did not NEED
+  // each other, so the order never mattered and nothing accumulated.
+  if (rules?.questStructure) {
+    const qs = rules.questStructure;
+    const nl = String.fromCharCode(10);
+    const out = ["## WHAT MAKES A QUEST (SNG-065/341 — read this BEFORE inventing one, and before adding a stage to one)."];
+    if (qs.theRule) out.push(qs.theRule);
+    if (qs.stageChain?._theLaw) out.push("STAGE CHAIN — " + qs.stageChain._theLaw);
+    if (qs.stageChain?._theTest) out.push("  THE TEST: " + qs.stageChain._theTest);
+    if (qs.routeReveal?._theRule) out.push("ROUTES — " + qs.routeReveal._theRule);
+    if (qs.routeReveal?.right) out.push("  RIGHT: " + qs.routeReveal.right);
+    if (qs.routeReveal?.wrong) out.push("  WRONG (do not do this): " + qs.routeReveal.wrong);
+    for (const l of (qs.designLaws || [])) out.push("· " + l);
+    scene.push(out.join(nl));
+  }
   if (structuredQuestsDetail) scene.push(`## STRUCTURED QUESTS (authored — honor the STAKES and the current stage; weave the routes this character's domains open.\nNEVER resolve a quest or hand out a branch, effect or XP yourself — the engine does that. But DO REPORT PROGRESS: when the character's actions this beat satisfy the CURRENT stage's condition, emit "stageOps" naming that stage id with one sentence of evidence. You are OBSERVING, not adjudicating — the engine decides whether it counts, and it may only ever be the CURRENT stage. Omitting this is how a quest sits unfinished while the player does the thing it asked for.\n\nQUEST CLARITY (SNG-239 — a quest gets CLEARER as it advances): a stage's earned reveal is a PAYOUT, not a secret. When the character satisfies a stage, STATE what they learned PLAINLY and concretely — name the thing in words a player gets on the first read (Rule 5's concrete-default applies to quest TRUTH, not just sensory prose). "It is a pre-Transition reclamation system, still running, ordered to prepare the watershed, and nearly finished" — NOT "the hollow is an ear that might one day transmit." A vivid image MAY accompany the plain truth but MUST NOT replace it. As a quest advances OPEN QUESTIONS DROP — a later stage CLOSES uncertainties, it never opens new ones; at the decision the player must clearly understand what they are deciding and what each road does. Rule 4's "earned fragments, never plainly" is for GM-EYES-ONLY secret truth the player has NOT worked for — it does NOT apply to a stage reveal the player HAS earned. Pay out what they earned.)\n${structuredQuestsDetail}`);
   if (traditionArcDetail) scene.push(`## TRADITION ARC (SNG-203 — the character's path to their tradition's deep teacher and its ultimate skill. Surface the beat AS ATMOSPHERE and OPPORTUNITY: the teacher is a distant real presence, the beat's gate is how it opens. Do NOT dump the arc — let it be felt, offer the beat's quest when the scene invites it. The capstone is learned in a SCENE, never announced as unlocked.)\n${traditionArcDetail}`);
   if (npcErrandsDetail) scene.push(`## ${npcErrandsDetail}`);

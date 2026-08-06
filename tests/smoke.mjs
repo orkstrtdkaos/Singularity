@@ -10621,6 +10621,42 @@ await (async () => {
       !/STILL NEEDED/.test(Q.structuredQuestsForGM(c3, {}) || ""));
   }
 
+  // SNG-341b — THE OTHER THREE LEGS. Aevi authored and registered `rules/quest_structure.json`; it reached
+  // nothing. loadRule + destructure (same array) + merge + surface.
+  //
+  // ⛔ THIS IS THE HALF THAT MAKES SNG-341 REAL. `requires[]` made stage dependency POSSIBLE; only the prompt
+  // makes it HAPPEN — a generated quest with three independent stages still reads as three errands even with
+  // a requirement on each.
+  {
+    const { loadContentHeadless: lch341b } = await import("./headless_content.mjs");
+    const C341 = await lch341b();
+    const qs = C341.rules?.questStructure;
+    check("341b: quest_structure REACHES rules — registered was only one of four legs",
+      !!qs && !!qs.theRule && !!qs.stageChain && !!qs.routeReveal);
+
+    // ⚠️ AND IT MUST LAND IN THE PROMPT, not merely in `rules`. A loaded-but-unread rule is the same bug one
+    // layer up, which is the whole reason this ticket existed.
+    const GM341 = await import("../engine/gm.js");
+    const tiers = GM341.buildTiers({
+      character: { name: "T", attributes: {}, quests: [] }, location: { id: "here", name: "Here" }, region: null, lore: null,
+      rules: C341.rules, resolution: null, playerInput: "", recentTurns: [], timeLabel: "",
+    });
+    const prompt = JSON.stringify(tiers);
+    check("341b: the STAGE CHAIN law lands in the GM prompt — stage N+1 must need what stage N produced",
+      /STAGE CHAIN/.test(prompt) && /NEED SOMETHING THE STAGE BEFORE IT PRODUCED/i.test(prompt));
+    // ⛔ Erik: "it gave away some things with the greyed out approaches." A label is an option; a reason is a
+    // discovery, and printing the reason before the stage that earns it spends the discovery early.
+    check("341b: the ROUTE REVEAL rule lands too, with the right/wrong examples that make it actionable",
+      /ROUTES/.test(prompt) && /RIGHT:/.test(prompt) && /WRONG \(do not do this\):/.test(prompt));
+    check("341b: …and the quest LAW itself — if you cannot name the cost of ignoring it, it is not a quest",
+      /not a quest/i.test(prompt) && /errand/i.test(prompt));
+    // A world with the rule absent must not throw — content can always be missing.
+    check("341b: a missing quest_structure is silent, never a crash",
+      (() => { try { GM341.buildTiers({ character: { name: "T", attributes: {}, quests: [] }, rules: {},
+        location: { id: "here", name: "Here" }, region: null, lore: null, resolution: null, playerInput: "", recentTurns: [], timeLabel: "" }); return true; }
+        catch { return false; } })());
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

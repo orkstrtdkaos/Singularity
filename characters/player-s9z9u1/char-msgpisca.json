@@ -129,268 +129,203 @@
         "player": "Step out into the waygate clearing itself and offer yourself as a more solid anchor for the figure to reach.",
         "summary": "The figure was pulled back through the veil before the bridge could be completed; the thin place has closed in anger and will not yield again.",
         "narration": "You stumble out of the lean-to into the harsh midday light, palms raised, trying to steady your breathing. The waygate clearing stretches before you — that strange open space where the veil thins to something almost negotiable. The humming is sharper here, angrier, the air itself seeming to vibrate at a frequency just beyond your teeth.\n\nYou open your mouth to call out, to offer yourself as bridge, as anchor, as anything that might hold — but the veil has already sealed itself shut. The thin place where the figure stood is now simply trees and grass and the low hum of an offended boundary. The presence that was reading the valley is gone. Pulled back through. Left incomplete.\n\nWhat remains is the silence after a scream — heavy, resentful, final. The waygate itself has dimmed, its usual soft luminescence muted to almost nothing. Boo emerges from the shadows of the lean-to behind you, placing itself deliberately between your legs — not comfort, but a clear statement: *enough*.\n\nYou are alone in the clearing. Whatever was sent to deliver something to this valley has failed, and the veil has made clear what it thinks of further attempts."
+      },
+      {
+        "player": null,
+        "summary": "A Lattice-trained order-reader confronts Splarf at the waygate clearing, holding him accountable for breaching the veil — the contest begins.",
+        "narration": "The figure emerges from the settlement path with the kind of precision that makes your skin prickle. It walks as if every step has been measured and approved by some internal geometry. Tall, angular, its skin so pale it seems to catch the light and scatter it wrong — you recognize the bearing immediately. Lattice-Cities order-reader. The kind of person who sees the world as a problem in structure, and solves it accordingly.\n\nIt does not rush. It does not need to. When it reaches the edge of the waygate clearing, it stops exactly where the light shifts from dappled to direct, and its eyes find you with the precision of a compass needle finding north.\n\n\"You called across the veil,\" it says. The voice is precise, clipped, the valley-tongue shaped like something the speaker learned from a diagram. \"In old language. Inviting what should have stayed sealed.\"\n\nBoo does not emerge from the shadows of the lean-to. The waygate hums low and resentful behind you. The clearing is open on all sides — nowhere to run that would not be running.\n\n\"I am Cevaine,\" the figure continues. \"Of the Seventh Measure. The Lattice does not permit breaches in the thin places. You have opened one. That is a structural problem. I solve structural problems.\""
       }
     ],
     "lastTurn": {
-      "narration": "You stumble out of the lean-to into the harsh midday light, palms raised, trying to steady your breathing. The waygate clearing stretches before you — that strange open space where the veil thins to something almost negotiable. The humming is sharper here, angrier, the air itself seeming to vibrate at a frequency just beyond your teeth.\n\nYou open your mouth to call out, to offer yourself as bridge, as anchor, as anything that might hold — but the veil has already sealed itself shut. The thin place where the figure stood is now simply trees and grass and the low hum of an offended boundary. The presence that was reading the valley is gone. Pulled back through. Left incomplete.\n\nWhat remains is the silence after a scream — heavy, resentful, final. The waygate itself has dimmed, its usual soft luminescence muted to almost nothing. Boo emerges from the shadows of the lean-to behind you, placing itself deliberately between your legs — not comfort, but a clear statement: *enough*.\n\nYou are alone in the clearing. Whatever was sent to deliver something to this valley has failed, and the veil has made clear what it thinks of further attempts.",
-      "sceneSummary": "The figure was pulled back through the veil before the bridge could be completed; the thin place has closed in anger and will not yield again.",
+      "narration": "The figure emerges from the settlement path with the kind of precision that makes your skin prickle. It walks as if every step has been measured and approved by some internal geometry. Tall, angular, its skin so pale it seems to catch the light and scatter it wrong — you recognize the bearing immediately. Lattice-Cities order-reader. The kind of person who sees the world as a problem in structure, and solves it accordingly.\n\nIt does not rush. It does not need to. When it reaches the edge of the waygate clearing, it stops exactly where the light shifts from dappled to direct, and its eyes find you with the precision of a compass needle finding north.\n\n\"You called across the veil,\" it says. The voice is precise, clipped, the valley-tongue shaped like something the speaker learned from a diagram. \"In old language. Inviting what should have stayed sealed.\"\n\nBoo does not emerge from the shadows of the lean-to. The waygate hums low and resentful behind you. The clearing is open on all sides — nowhere to run that would not be running.\n\n\"I am Cevaine,\" the figure continues. \"Of the Seventh Measure. The Lattice does not permit breaches in the thin places. You have opened one. That is a structural problem. I solve structural problems.\"",
+      "sceneSummary": "A Lattice-trained order-reader confronts Splarf at the waygate clearing, holding him accountable for breaching the veil — the contest begins.",
       "choices": [
         {
-          "label": "⚔ Face A Pale Reader",
-          "encounterId": "gm-a-pale-reader",
+          "label": "Press the attack — match their precision with speed and commitment",
           "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "risky",
-            "commit"
-          ]
-        },
-        {
-          "label": "Find someone in the settlement who remembers the last time the veil opened like this — ask them what came through before, and what it wanted",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "scout",
-            "study"
+            "attack",
+            "press",
+            "risky"
           ],
-          "abilityId": "storykeeper",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Sit with the closed veil and use Numen-Sense again — try to read what the opening left behind, the scar of it",
+          "label": "Defend and read — hold ground, watch for the pattern in their movement",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": 15,
+          "difficulty": 12,
           "intentTags": [
+            "defend",
             "study",
             "careful"
           ],
           "abilityId": "numen_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Search the clearing and the lean-to carefully for anything the figure might have dropped or left behind — a mark, an object, any trace of what it was trying to deliver",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 12,
-          "intentTags": [
-            "scout",
-            "search"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Walk back into the settlement proper and find where the news is gathered — the healer's house, the wayhouse, the place where people trade what they've heard about the Water Crisis and what's waking beneath",
+          "label": "Speak first — use Storykeeper to name what just happened and stake your claim to it",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": 14,
           "intentTags": [
-            "travel",
-            "scout"
+            "negotiate",
+            "deceive",
+            "rally"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        }
-      ],
-      "deeds": [
+          "abilityId": "storykeeper",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
         {
-          "description": "Attempted to bridge the veil and speak with a being from the other side — an act of courage and foolishness in equal measure",
-          "tags": [
-            "risky",
-            "devote"
+          "label": "Steady the Soul — reach toward Cevaine with presence and calm, seeking understanding before conflict",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 16,
+          "intentTags": [
+            "negotiate",
+            "calm",
+            "careful"
           ],
-          "weight": 1,
-          "communityId": "the.thinning"
+          "abilityId": "steady_soul",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "health": -3,
-        "energy": -12,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [
-        {
-          "what": "The veil at The Thinning sealed itself in anger after a failed bridge-attempt; it will not open to further crossing for some time",
-          "tags": [
-            "world-state",
-            "barrier",
-            "failure"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {},
-          "impactsLocal": false
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-document-and-the-ditch",
-          "title": "The Document and the Ditch",
-          "summary": "Find the filing that erased Crestfall Notch from the map",
-          "giver": "Hoss (the mending woman who raised you)",
-          "note": "You are at The Thinning, a place of thin records and displaced knowledge — exactly the kind of place where a document like that might surface. But first, something on the other side of the veil tried to reach the valley, and the veil sealed before you could learn what it was trying to deliver. The answer might be connected.",
-          "xpReward": 0
-        }
-      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": {},
-      "offer": {
-        "thing": "A pale reader approaches the settlement — a figure from the margins of the Lattice-Cities, moving with the eerie precision of order-craft trained",
-        "from": "The world's greater arc: The Poles Pull — each Reach leaning harder into its own extreme; travelers notice the edges getting sharper. Something ordered is moving. This is the soft pressure of that drift made concrete."
-      },
+      "adoptSchool": null,
+      "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The waygate clearing at The Thinning, midday in early spring. The thin place is sealed shut now, the veil dark and resentful. The hum is low and angry. Light is harsh and ordinary, the strange bent quality of the air faded.",
-        "npcsPresent": [],
+        "setting": "The waygate clearing at The Thinning, afternoon light harsh and ordinary. The sealed veil stands dark and resentful behind you; the settlement path lies open to the north. The lean-to with your bedroll and pack is behind and to the left. Cevaine stands at the clearing's edge, between you and retreat.",
+        "npcsPresent": [
+          {
+            "name": "Cevaine",
+            "state": "Standing at ease, waiting — eyes tracking, body ready, unarmed but not defenseless"
+          }
+        ],
         "objects": [
-          "The waygate (dimmed, its luminescence muted)",
-          "Your bedroll and Traveler's Pack in the lean-to behind you",
+          "The waygate (sealed, humming low)",
+          "Your bedroll and pack in the lean-to",
           "Your chisel for stone-carving",
-          "Waterskin (boiled, worth more every week the river runs gray)"
+          "Waterskin (boiled)"
         ],
         "threads": [
-          "What was the figure sent to deliver?",
-          "Why did the veil open, and why did it seal so violently?",
-          "Where did Boo go when the veil screamed, and what did it sense?"
+          "What does Cevaine intend to do about the breach?",
+          "Where did Boo go?",
+          "What will you do when the figure tried to reach you?"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "boo",
-          "name": "Boo",
-          "role": "Companion — an Umbral-touched thing of the deep dark that finds you interesting",
-          "gender": "they/it (no gender as such)",
-          "pronouns": "they/them or it/its",
-          "note": "Hissed and vanished into shadows when the veil screamed; has returned and placed itself deliberately between your legs in the clearing — not comfort, but a clear statement of *enough*. Boo's boundaries are being respected: it will not be pushed further toward the thin places or toward light.",
+          "op": "meet",
+          "npcId": "cevaine",
+          "name": "Cevaine",
+          "role": "Lattice-Cities order-reader",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "description": "Tall, angular, skin nearly translucent. Eyes that track with geometric precision. Moves with the eerie discipline of lattice-trained structure-thinking.",
+          "note": "Confronted Splarf at the waygate clearing, holding them accountable for breaching the veil with old-language speech. Treats the breach as a structural problem to be solved.",
           "learned": [
-            "The veil-scream carried something Boo recognizes and rejects — a presence it does not trust"
+            "Lattice-Cities order-readers solve problems in structure — including breaches in thin places",
+            "Cevaine is of the Seventh Measure and trained in lattice precision",
+            "They do not see the breach as negotiable — only as a problem"
           ],
           "skillsObserved": [
-            "Reading danger in the dark; knowing when to withdraw"
+            "geometric precision of movement",
+            "absolute tracking and positioning"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Present with Splarf, withdrawn but loyal; has set a boundary against further veil-work"
+          "statusNote": "Present at the waygate clearing, facing Splarf in contest"
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The veil at The Thinning has sealed itself in anger after Splarf's failed attempt to bridge it and speak with the figure. It will not yield to further crossing or communication for some time. The thin place is closed.",
-          "subjectId": "the.thinning"
-        },
-        {
-          "op": "add",
-          "text": "The figure that came through the veil was pulled back through the boundary before it could complete its delivery. Its withdrawal was compulsive, not chosen — the veil itself forced it back. The work remains undone, and the failure carries weight on the other side.",
-          "subjectId": null
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The veil is now sealed and angry, refusing further crossing. The thin place reads as closed and resentful. The waygate's luminescence has dimmed — it will not open for travel until the anger fades.",
-          "flag": {
-            "veilState": "sealed_angry",
-            "presenceWithdrawn": true,
-            "bridgeAttemptFailed": true
-          }
-        }
-      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-figure-in-the-thin-place",
-          "label": "The Figure in the Thin Place",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "The figure was pulled back through the veil by force before it could deliver what it was sent to deliver. The veil sealed itself in anger, rejecting the bridge Splarf attempted to hold. The failure carries weight — the work remains undone on the other side.",
+          "topic": "cevaine-breach-reading",
+          "label": "Cevaine's Reading of the Veil-Breach",
+          "kind": "lore",
+          "entityId": "cevaine",
+          "fact": "A Lattice-trained order-reader views the veil-breach as a structural problem, not a spiritual one. They are tasked with solving such problems. The breach is not negotiable to them — only solvable.",
           "links": [
-            "what-wakes-beneath",
             "the-thinning",
-            "the-water-crisis"
+            "what-wakes-beneath"
           ]
         }
       ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "a pale reader of the Lattice-Cities, moving toward The Thinning with the precision of order-craft trained",
-          "why": "The world's arc of The Poles Pull is bending toward order; something from the mechanical/structured end is entering play, drawn by the thickening significance-density at The Thinning"
-        }
-      ],
+      "generateRequest": [],
       "encounterOps": [],
-      "newEncounter": {
-        "type": "duel",
-        "name": "A Pale Reader",
-        "setup": "A figure approaches the waygate clearing from the settlement proper — tall, angular, moving with the eerie precision of lattice-trained discipline. Its skin reads as almost translucent, and its eyes track your position with geometric accuracy. It does not draw a weapon. It does not seem to need to.",
-        "lethal": false,
-        "opponent": {
-          "name": "A Pale Reader",
-          "health": 5,
-          "threat": 28,
-          "yieldAt": 2,
-          "fleeDifficulty": 18,
-          "tacticTags": [
-            "precise",
-            "relentless",
-            "ordered"
-          ]
-        }
-      },
-      "unlockPrecursor": {},
-      "unlockSubstrate": {},
-      "timeOps": {},
-      "moveTo": {},
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": {},
-      "imagePrompt": "The moment the veil sealed: light fracturing through the boundary as it snaps shut, the figure's silhouette pulled backward into the other side, and Splarf standing alone in the clearing with hands still raised, the waygate's glow dying to ember-red.",
-      "newAbility": {},
-      "gambitOps": {},
+      "deriveItem": null,
+      "imagePrompt": "A pale, angular figure in the harsh daylight of the waygate clearing — Cevaine, skin almost translucent, eyes tracking with geometric precision. Behind them, the sealed veil hums dark and resentful. Splarf stands alone, caught between the closed thin place and an order-reader who solves structural problems.",
+      "newAbility": null,
+      "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": {},
-      "markTeacher": {},
-      "offerPromotion": {},
-      "offerAcquisition": {},
-      "offerIntent": {},
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The waygate clearing at The Thinning, midday in early spring. The thin place is sealed shut now, the veil dark and resentful. The hum is low and angry. Light is harsh and ordinary, the strange bent quality of the air faded.",
-      "npcsPresent": [],
+      "setting": "The waygate clearing at The Thinning, afternoon light harsh and ordinary. The sealed veil stands dark and resentful behind you; the settlement path lies open to the north. The lean-to with your bedroll and pack is behind and to the left. Cevaine stands at the clearing's edge, between you and retreat.",
+      "npcsPresent": [
+        {
+          "name": "Cevaine",
+          "state": "Standing at ease, waiting — eyes tracking, body ready, unarmed but not defenseless"
+        }
+      ],
       "objects": [
-        "The waygate (dimmed, its luminescence muted)",
-        "Your bedroll and Traveler's Pack in the lean-to behind you",
+        "The waygate (sealed, humming low)",
+        "Your bedroll and pack in the lean-to",
         "Your chisel for stone-carving",
-        "Waterskin (boiled, worth more every week the river runs gray)"
+        "Waterskin (boiled)"
       ],
       "threads": [
-        "What was the figure sent to deliver?",
-        "Why did the veil open, and why did it seal so violently?",
-        "Where did Boo go when the veil screamed, and what did it sense?"
+        "What does Cevaine intend to do about the breach?",
+        "Where did Boo go?",
+        "What will you do when the figure tried to reach you?"
       ]
     },
-    "beats": 6
+    "beats": 7
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -520,7 +455,43 @@
       "startedWorldDay": 36
     }
   ],
-  "npcRegistry": {},
+  "npcRegistry": {
+    "cevaine": {
+      "id": "cevaine",
+      "name": "Cevaine",
+      "role": "Lattice-Cities order-reader",
+      "description": "Tall, angular, skin nearly translucent. Eyes that track with geometric precision. Moves with the eerie discipline of lattice-trained structure-thinking.",
+      "firstMet": {
+        "locationId": "gen-object-object",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Confronted Splarf at the waygate clearing, holding them accountable for breaching the veil with old-language speech. Treats the breach as a structural problem to be solved."
+      ],
+      "knownFacts": [
+        "Lattice-Cities order-readers solve problems in structure — including breaches in thin places",
+        "Cevaine is of the Seventh Measure and trained in lattice precision",
+        "They do not see the breach as negotiable — only as a problem"
+      ],
+      "skillsObserved": [
+        "geometric precision of movement",
+        "absolute tracking and positioning"
+      ],
+      "status": "active",
+      "gender": "nonbinary",
+      "pronouns": "they/them",
+      "statusNote": "Present at the waygate clearing, facing Splarf in contest",
+      "domains": {
+        "primary": "lattice"
+      },
+      "domainsSource": "role",
+      "lastSeen": {
+        "locationId": "gen-object-object",
+        "day": 1
+      }
+    }
+  },
   "placeMemory": {
     "the_thinning": {
       "visits": 1,
@@ -623,7 +594,7 @@
     "lastTickWorldDay": 36,
     "lastCanonWorldDay": 36,
     "pressureQueue": [],
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Boo's sudden, absolute attention — the way it has turned to watch you watch it, as if something has shifted in the settlement or the veil…",
@@ -750,6 +721,27 @@
         "createdDay": 1,
         "entityId": "gen-object-object",
         "updatedDay": 1
+      },
+      "cevaine-of-the-seventh-measure": {
+        "id": "cevaine-of-the-seventh-measure",
+        "label": "Cevaine of the Seventh Measure",
+        "kind": "person",
+        "facts": [
+          "[d1] Lattice-Cities order-reader walking The Thinning's edge — applying structural precision to a place that dissolves structure",
+          "[d1] Lattice-Cities order-reader",
+          "[d1] A Lattice-trained order-reader views the veil-breach as a structural problem, not a spiritual one. They are tasked with solving such problems. The breach is not negotiable to them — only solvable."
+        ],
+        "links": [
+          "the-thinning",
+          "what-wakes-beneath"
+        ],
+        "aliases": [
+          "Cevaine",
+          "Cevaine's Reading of the Veil-Breach"
+        ],
+        "createdDay": 1,
+        "entityId": "cevaine-of-the-seventh-measure",
+        "updatedDay": 1
       }
     }
   },
@@ -814,6 +806,22 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "beast",
+      "prompt": "A thin, translucent figure-shape that copies whatever craft it last saw, badly — a manifested echo of Cogitant memory, running a stolen gesture on loop.",
+      "url": "https://image.pollinations.ai/prompt/a%20dangerous%20creature%2C%20a%20pale%20reader%3A%20A%20thin%2C%20translucent%20figure-shape%20that%20copies%20whatever%20craft%20it%20last%20saw%2C%20badly%20%E2%80%94%20a%20manifested%20echo%20of%20Cogitant%20memory%2C%20running%20a%20stolen%20gesture%20on%20loop.%20%E2%80%94%20dark%20fantasy%20creature%20art%2C%20ominous%2C%20no%20text%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=640&height=512&seed=94698&nologo=true",
+      "caption": "a pale reader",
+      "worldDay": 37,
+      "at": "2026-08-06T00:01:20.619Z"
+    },
+    {
+      "kind": "npc",
+      "prompt": "Cevaine of the Seventh Measure",
+      "url": "https://image.pollinations.ai/prompt/A%20pale%20woman%20in%20her%20middle%20forties%2C%20slight%20and%20very%20upright%2C%20with%20close-cropped%20silver-ash%20hair%20still%20carrying%20the%20grid-lines%20of%20a%20Lattice%20reader's%20field-shave%20%E2%80%94%20the%20scalp%20marked%20in%20faint%20geometric%20se%2C%20character%20portrait%2C%20named%20Cevaine%20of%20the%20Seventh%20Measure%2C%20Lattice-Cities%20order-reader%20walking%20The%20Thinning's%20edge%20%E2%80%94%20applying%20structural%20precision%20to%20a%20place%20t%2C%20Speaks%20in%20the%20clipped%2C%20load-bearing%20syntax%20of%20the%20Lattice%20%E2%80%94%20every%20sentence%20is%20a%20measurement%2C%20every%20p%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=50726&nologo=true",
+      "caption": "Cevaine of the Seventh Measure",
+      "worldDay": 36,
+      "at": "2026-08-05T23:59:58.833Z"
+    },
     {
       "kind": "location",
       "prompt": "[Object Object]",
@@ -996,11 +1004,96 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785974370112,
-  "rev": 23,
+  "updatedAt": 1785974500231,
+  "rev": 27,
   "generated": {
     "schemaVersion": 1,
-    "npc": {},
+    "npc": {
+      "cevaine-of-the-seventh-measure": {
+        "schemaVersion": 1,
+        "id": "cevaine-of-the-seventh-measure",
+        "name": "Cevaine of the Seventh Measure",
+        "role": "Lattice-Cities order-reader walking The Thinning's edge — applying structural precision to a place that dissolves structure",
+        "homeLocation": "the_numinous_reach",
+        "communityId": "lattice.seventhmeasure",
+        "personality": {
+          "warmth": 0.2,
+          "trust": 0.3,
+          "candor": 0.8,
+          "patience": 0.7
+        },
+        "spectrum": {
+          "mechanical_spiritual": -0.6,
+          "concrete_abstract": 0.4,
+          "body_mind": 0.5,
+          "falsehood_truth": 0.7
+        },
+        "voiceHints": "Speaks in the clipped, load-bearing syntax of the Lattice — every sentence is a measurement, every pause a tolerance-check. Pauses a half-beat too long before proper nouns that have no structural equivalent in her training. At The Thinning she has begun to hear things she cannot index, and she reports them anyway, precisely, in the same tone she uses for grid-tolerances. This frightens her more than she will say.",
+        "knowledge": [
+          "The Lattice-Cities' order-craft: how to read significance-density in a structure the way a builder reads load — where it concentrates, where it will give",
+          "That the thickening at The Thinning is not metaphor; she has numbers for it, and the numbers are accelerating",
+          "The seven canonical Measures by which Lattice readers classify a phenomenon — and that The Thinning fails all seven cleanly, sitting in the margins between each",
+          "Early-spring is when the veil-disciplines of this place are said to be thinnest; she chose her arrival date with characteristic deliberateness",
+          "Nothing, yet, of what lives on the other side — and the gap in her index troubles her the way a missing load-bearing wall troubles an engineer"
+        ],
+        "wants": "To map the significance-density of The Thinning in Lattice notation — to give the order-craft a grammar for what the mystic disciplines only gesture at — and to bring the completed schema back before the Poles Pull bends so far it snaps.",
+        "fears": "That precision is itself a kind of blindness here. That the more exactly she measures, the more the thing being measured withdraws. That she will produce a perfect record of her own failure to perceive.",
+        "reactsToReputation": {
+          "structured": "immediate collegial respect, though she will test their definitions",
+          "numinous-trained": "careful, formal curiosity — asks for demonstrations before she believes anything",
+          "chaotic": "not hostility, but visible effort; she counts her breaths and finds the tolerance",
+          "seeking": "recognises the posture and says almost nothing, which is, for her, a form of welcome"
+        },
+        "appearance": "A pale woman in her middle forties, slight and very upright, with close-cropped silver-ash hair still carrying the grid-lines of a Lattice reader's field-shave — the scalp marked in faint geometric sections, grown out two seasons but not yet gone. Eyes of a washed-out grey-green that move in short, deliberate arcs, as though scanning a document. She wears the buff-and-iron travelling coat of the Seventh Measure, its hem already marked with early-spring mud, and carries a brass annotation-frame — a folding lattice of fine wire she holds up to sight through when she wants to read spatial density. In the Reach's light the frame throws moving shadow-grids across whatever she examines. She has not yet decided whether this is a useful datum or a distortion.",
+        "people": "human",
+        "domains": {
+          "primary": "figurist",
+          "secondary": "syllogist",
+          "tertiary": "numinous"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own. Cevaine is Lattice-born and order-trained; her tertiary numinous is not practice but exposure — The Thinning is already teaching her a third language she did not come here to learn.",
+        "functions": [
+          "reveal",
+          "bind",
+          "ward"
+        ],
+        "functionsNote": "Her order-craft reveals significance-density; her Lattice notation binds phenomena into schema; her presence at The Thinning's edge functions as a ward — the precision she carries slows the dissolution slightly, as a surveyor's stake slows the drift of a boundary. She does not know the third function yet.",
+        "_gen": {
+          "entityId": "cevaine-of-the-seventh-measure",
+          "type": "npc",
+          "birthWeight": 2,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-msgpisca",
+            "locationId": "gen-object-object",
+            "day": 1,
+            "worldDay": null,
+            "hint": "a pale reader of the Lattice-Cities, moving toward The Thinning with the precision of order-craft trained",
+            "why": "The world's arc of The Poles Pull is bending toward order; something from the mechanical/structured end is entering play"
+          },
+          "attentionHistory": [],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true,
+          "contract": {
+            "verdict": "thin",
+            "worst": "DEGRADED",
+            "missing": [
+              "disposition"
+            ],
+            "vague": [],
+            "why": "npc: THIN — missing disposition"
+          }
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20pale%20woman%20in%20her%20middle%20forties%2C%20slight%20and%20very%20upright%2C%20with%20close-cropped%20silver-ash%20hair%20still%20carrying%20the%20grid-lines%20of%20a%20Lattice%20reader's%20field-shave%20%E2%80%94%20the%20scalp%20marked%20in%20faint%20geometric%20se%2C%20character%20portrait%2C%20named%20Cevaine%20of%20the%20Seventh%20Measure%2C%20Lattice-Cities%20order-reader%20walking%20The%20Thinning's%20edge%20%E2%80%94%20applying%20structural%20precision%20to%20a%20place%20t%2C%20Speaks%20in%20the%20clipped%2C%20load-bearing%20syntax%20of%20the%20Lattice%20%E2%80%94%20every%20sentence%20is%20a%20measurement%2C%20every%20p%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=50726&nologo=true"
+      }
+    },
     "location": {
       "gen-object-object": {
         "id": "gen-object-object",
@@ -1048,7 +1141,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 6
+    "the_numinous_reach": 7
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1056,10 +1149,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-05T23:59:30.095Z",
+      "lastAt": "2026-08-06T00:01:40.218Z",
       "startDay": 36,
-      "endDay": 36,
-      "beats": 6
+      "endDay": 37,
+      "beats": 7
     }
   ],
   "establishedFacts": [
@@ -1097,14 +1190,14 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 6,
-    "scene": 6,
-    "choices": 6,
+    "sceneSummary": 7,
+    "scene": 7,
+    "choices": 7,
     "offer": 4,
-    "codexUpdates": 6,
-    "imagePrompt": 4,
-    "gambitApt": 5,
-    "sceneEnded": 6,
+    "codexUpdates": 7,
+    "imagePrompt": 5,
+    "gambitApt": 6,
+    "sceneEnded": 7,
     "characterDeltas": 5,
     "arcOps": 1,
     "factUpdates": 3,
@@ -1113,11 +1206,11 @@
     "deeds": 1,
     "ledgerEvents": 1,
     "questUpdates": 1,
-    "npcUpdates": 1,
+    "npcUpdates": 2,
     "generateRequest": 1,
     "newEncounter": 1
   },
-  "_opTurns": 6,
+  "_opTurns": 7,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -1198,5 +1291,81 @@
   ],
   "locationImages": {
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
+  },
+  "activeEncounter": {
+    "defId": "gm-a-pale-reader",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "gm-a-pale-reader",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 5,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "A Pale Reader",
+        "attributes": {
+          "practical": 2,
+          "physical": 2,
+          "mental": 2,
+          "social": 2
+        },
+        "energy": 74,
+        "maxEnergy": 74,
+        "tacticTags": [
+          "precise",
+          "relentless",
+          "ordered"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 2,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 2,
+            "attribute": "practical"
+          }
+        ],
+        "health": 5,
+        "soak": 1,
+        "soakLayers": [
+          {
+            "rank": 1,
+            "value": 1
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 74,
+      "turn": {
+        "phase": "sense",
+        "sel": {
+          "sense": [],
+          "action": [],
+          "bonus": []
+        },
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
+        },
+        "setupBonus": 0,
+        "bonusEarned": false,
+        "senseDone": false,
+        "senseLine": ""
+      }
+    }
+  },
+  "legendGovernor": {
+    "lastDeployDay": 37,
+    "lastBeat": "witness_power"
   }
 }

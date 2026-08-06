@@ -390,6 +390,88 @@
     }
    ],
    "plainly": "Not an attack you can open with. It requires a previously recorded bargain in which a life was the named price; without one the engine refuses it. When invoked it deals 4d6 plus 2 and the target gets no defence, because the debt was already agreed. At rank 2 neither party needs to be present. Everyone learns who held the account — it is never deniable."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_lucky_fall",
+   "name": "The Lucky Fall",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "wild_current",
+   "tradition": "churnfolk",
+   "attribute": "physical",
+   "axes": {
+    "order_chaos": -0.7
+   },
+   "functions": [
+    "travel",
+    "transform"
+   ],
+   "narrationHints": "A travel, chase and explore action. You throw yourself and improbability carries you — a g",
+   "description": "⚠️ CHURNFOLK FLIGHT, AND IT IS NOT CONTROLLED. You throw yourself and the world declines to finish the job — a gust, a cart, a passing bird, a rope you did not know was there. You get where you were going. Nobody, including you, can say how.",
+   "notFor": "⚠️ A DESTINATION. You steer by INTENT and the world supplies the method, so you arrive near where you meant, at a time you did not choose.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Lucky Fall",
+     "grants": "Cross ground by improbable means at improbable speed. You arrive near where you meant.",
+     "cannot": "Choosing the route, the method, or the exact arrival point.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Luck",
+     "grants": "Do it across a whole route. The improbabilities compound and so does what they cost bystanders.",
+     "cannot": "Doing it twice in one place — the second time the luck comes from nearer to home.",
+     "functions": [
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL",
+    "CHASE",
+    "EXPLORE"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "range": "route-scale",
+    "note": "⚠️ FASTEST AND LEAST RELIABLE. Halves a leg's days on a success and on a failure deposits you somewhere adjacent and interesting, which is a different thing from a failure."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "one improbable crossing",
+    "surge": "the whole route; THE SECOND TIME, THE LUCK COMES FROM NEARER HOME"
+   },
+   "bounds": [
+    {
+     "text": "YOU DO NOT CHOOSE THE METHOD OR THE MOMENT — only roughly the destination",
+     "class": "hard"
+    },
+    {
+     "text": "A FAILURE DOES NOT DROP YOU, IT MISPLACES YOU — somewhere adjacent, and usually interesting",
+     "class": "cost"
+    },
+    {
+     "text": "done twice in one place, THE LUCK IS TAKEN FROM SOMEONE NEARBY",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A travel, chase and explore action. You throw yourself and improbability carries you — a gust, a cart, a rope nobody knew was there — arriving near where you meant at a time you did not pick. You steer by intent only; the world supplies the method. On a success it roughly halves the leg's days. On a failure it does not drop you, it misplaces you somewhere adjacent and usually interesting. Used twice in the same place, the luck starts coming from people nearby."
   }
  ]
 }

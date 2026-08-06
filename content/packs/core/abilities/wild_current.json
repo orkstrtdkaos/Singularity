@@ -408,14 +408,14 @@
     "transform"
    ],
    "narrationHints": "A travel, chase and explore action. You throw yourself and improbability carries you — a g",
-   "description": "⚠️ CHURNFOLK FLIGHT, AND IT IS THE SIMPLEST IN THE SET: wings. They have always half-had them. The churn is fae-natured, and what other traditions build or bargain for, a churnfolk simply lets happen — which is why theirs is the least reliable and the least effortful.",
-   "notFor": "⚠️ RELIABILITY. They come when the churn is willing. A churnfolk who NEEDS them is measurably less likely to get them.",
+   "description": "⚠️ CHURNFOLK FLIGHT. The churn is fae-natured and this craft borrows that nature — so it is LEARNED, not innate. An orc, a goblin, or anyone else with churnfolk training flies the way a fae does, because the craft makes the wings, not the blood.",
+   "notFor": "⚠️ RELIABILITY. They come when the churn is willing, and needing them badly makes them less likely.",
    "tree": [
     {
      "rank": 1,
      "name": "Fae Wings",
-     "grants": "Wings, at will, for short flights — over a wall, across a river, out of a fall.",
-     "cannot": "Depending on them. Under real need the odds worsen rather than improve.",
+     "grants": "Wings at will for short flights — over a wall, across a river, out of a fall. Anyone who learned it, whatever they are.",
+     "cannot": "Depending on them; under real need the odds worsen.",
      "functions": [
       "travel",
       "transform"
@@ -426,8 +426,20 @@
     {
      "rank": 2,
      "name": "The Long Glide",
-     "grants": "Fly a whole leg. Fast, tireless, and it goes where the churn feels like going as much as where you do.",
-     "cannot": "Holding a straight line against the churn's own drift.",
+     "grants": "Fly a whole leg, fast and tireless, drifting toward where the churn is going.",
+     "cannot": "Holding a true line against the drift without paying extra.",
+     "functions": [
+      "travel",
+      "transform"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Given Wing",
+     "grants": "⚠️ Give wings to others — the party flies with you, a shorter span each.",
+     "cannot": "Giving them to more than a few, or to anyone unwilling.",
      "functions": [
       "travel",
       "transform"
@@ -452,7 +464,7 @@
     "magnitude": 6,
     "duration": 8,
     "range": "route-scale",
-    "note": "⚠️ FAST AND UNRELIABLE. Halves a leg's days when it works; the failure is that they do not come, not that they fail midair — a churnfolk is never dropped, only grounded."
+    "note": "⚠️ LEARNED, NOT LINEAGE — any tradition-trained character flies. r3 extends it to the party, which makes it a journey answer rather than a personal one."
    },
    "rankDeltas": [],
    "intensity": {
@@ -461,19 +473,19 @@
    },
    "bounds": [
     {
-     "text": "⚠️ THEY COME WHEN THE CHURN IS WILLING — and NEEDING them lowers the odds rather than raising them",
+     "text": "⚠️ THE CRAFT MAKES THE WINGS, NOT THE BLOOD — an orc or goblin who learned it flies like a fae",
+     "class": "soft"
+    },
+    {
+     "text": "THEY COME WHEN THE CHURN IS WILLING, and needing them badly lowers the odds",
      "class": "hard"
     },
     {
-     "text": "A FAILURE GROUNDS YOU, IT NEVER DROPS YOU — the churn does not kill its own this way",
+     "text": "A FAILURE GROUNDS YOU, IT NEVER DROPS YOU",
      "class": "hard"
-    },
-    {
-     "text": "at rank 2 you drift; holding a true line costs extra every leg",
-     "class": "cost"
     }
    ],
-   "plainly": "A travel, chase and explore action. You have wings when the churn is willing — at rank 1 short flights over a wall, across a river, out of a fall; at rank 2 a whole leg, which roughly halves its days. The catch is reliability rather than danger: needing them badly makes them less likely to come, and a failure simply grounds you rather than dropping you midair. At rank 2 you also drift toward where the churn is going, and holding a true line costs extra on every leg."
+   "plainly": "A travel, chase and explore action, learned rather than inherited — anyone with churnfolk training flies this way, whatever they are. Rank 1 is short flights: over a wall, across a river, out of a fall. Rank 2 flies a whole leg and roughly halves its days, though you drift toward where the churn is going unless you pay to hold a line. Rank 3 gives wings to the rest of the party for a shorter span each. The catch is reliability rather than danger: needing them badly makes them less likely to come, and a failure grounds you rather than dropping you."
   }
  ]
 }

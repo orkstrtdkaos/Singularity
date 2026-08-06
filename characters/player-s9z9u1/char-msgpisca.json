@@ -46,7 +46,7 @@
   "maxHealth": 35,
   "health": 32,
   "maxEnergy": 100,
-  "energy": 46,
+  "energy": 36,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -92,6 +92,20 @@
       "spread": [],
       "day": 1,
       "worldDay": 36
+    },
+    {
+      "at": "2026-08-06T00:13:47.746Z",
+      "locationId": "gen-object-object",
+      "communityId": null,
+      "description": "Faced down a Lattice-trained order-reader in ritual contest and won without breaking the form — stood against geometric precision itself and held.",
+      "tags": [
+        "valor",
+        "discipline"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 1,
+      "worldDay": 37
     }
   ],
   "relationships": {},
@@ -149,63 +163,97 @@
         "player": null,
         "summary": "Splarf attempts to read Cevaine's form with The Unbroken Practice but finds only geometric anticipation — the order-reader's precision extends even to reading attempts.",
         "narration": "You settle into the form, the practiced breathing that has held you steady through worse than this. The discipline is there — your anchor, the one thing Cevaine cannot read because it lives inside you, not in how you stand. You watch their shoulders, their weight, the way their eyes lead their hands. For a breath, you think you have it: there's a pattern in how they reset between movements, a micro-pause where the geometry resets itself. You could slip through that seam.\n\nThen Cevaine moves again, and the seam closes before you can use it. They've already anticipated the read itself — they're not just precise, they're one step ahead of precision. Their guard doesn't lower. Their breathing doesn't tell you anything. They stand there, waiting for your next move, and the clearing holds its breath with them."
+      },
+      {
+        "player": null,
+        "summary": "Splarf defeats Cevaine of the Seventh Measure in a skill-contest at the waygate clearing. The order-reader yields, recognizing in Splarf's unbreakable form something their geometric precision cannot solve.",
+        "narration": "Your fist finds the gap you've been hunting — not through reading Cevaine's geometry, but through something simpler: they are tired, and tired things slow, and the pause between their resets grows a fraction longer.\n\nYou drive forward into that seam. Your strike lands clean on the shoulder, hard enough that their arm drops and their guard breaks open. They step back, breathing still measured but now visibly sharp, and their eyes track you with something new in them — not defeat, but acknowledgment. A problem that will not yield to geometry alone.\n\n\"You hold something I cannot structure,\" Cevaine says, their voice precise as their movement. \"The practice. The discipline within. The Lattice does not account for... stillness that is not absence.\"\n\nThey lower their hands fully. The contest is finished. You've won, and they're yielding — not because they've been broken, but because they've recognized a truth their order-logic had already calculated: pressing further would gain nothing but damage."
       }
     ],
     "lastTurn": {
-      "narration": "You settle into the form, the practiced breathing that has held you steady through worse than this. The discipline is there — your anchor, the one thing Cevaine cannot read because it lives inside you, not in how you stand. You watch their shoulders, their weight, the way their eyes lead their hands. For a breath, you think you have it: there's a pattern in how they reset between movements, a micro-pause where the geometry resets itself. You could slip through that seam.\n\nThen Cevaine moves again, and the seam closes before you can use it. They've already anticipated the read itself — they're not just precise, they're one step ahead of precision. Their guard doesn't lower. Their breathing doesn't tell you anything. They stand there, waiting for your next move, and the clearing holds its breath with them.",
-      "sceneSummary": "Splarf attempts to read Cevaine's form with The Unbroken Practice but finds only geometric anticipation — the order-reader's precision extends even to reading attempts.",
+      "narration": "Your fist finds the gap you've been hunting — not through reading Cevaine's geometry, but through something simpler: they are tired, and tired things slow, and the pause between their resets grows a fraction longer.\n\nYou drive forward into that seam. Your strike lands clean on the shoulder, hard enough that their arm drops and their guard breaks open. They step back, breathing still measured but now visibly sharp, and their eyes track you with something new in them — not defeat, but acknowledgment. A problem that will not yield to geometry alone.\n\n\"You hold something I cannot structure,\" Cevaine says, their voice precise as their movement. \"The practice. The discipline within. The Lattice does not account for... stillness that is not absence.\"\n\nThey lower their hands fully. The contest is finished. You've won, and they're yielding — not because they've been broken, but because they've recognized a truth their order-logic had already calculated: pressing further would gain nothing but damage.",
+      "sceneSummary": "Splarf defeats Cevaine of the Seventh Measure in a skill-contest at the waygate clearing. The order-reader yields, recognizing in Splarf's unbreakable form something their geometric precision cannot solve.",
       "choices": [
         {
-          "label": "Press the attack — commit to a direct strike and trust your strength to break through",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Shift your stance to defense — make yourself harder to read by offering nothing to anticipate",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 12,
-          "intentTags": [
-            "defend",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Call out to Cevaine — speak plainly about what they're trying to solve, and ask if there's a way through this that doesn't end in a duel",
+          "label": "Ask Cevaine directly: what will they do about the veil-breach now that the contest is done?",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
-          "difficulty": 18,
+          "difficulty": 0,
           "intentTags": [
-            "negotiate",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tend to Cevaine's injury and offer them water — see if the gesture opens a conversation.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "calm"
+          ],
+          "abilityId": "steady_soul",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step back and let Cevaine have a moment to breathe — do not press them while they're still processing.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Call out to Boo — where did your companion go during the fight?",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": "beastfriend",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {},
+      "deeds": [
+        {
+          "description": "Faced down a Lattice-trained order-reader in ritual contest and won without breaking the form — stood against geometric precision itself and held.",
+          "tags": [
+            "valor",
+            "discipline"
+          ],
+          "weight": 2,
+          "communityId": null
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -5,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
@@ -215,11 +263,11 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The waygate clearing at The Thinning, afternoon light harsh and ordinary. The sealed veil stands dark and resentful behind Splarf; the settlement path lies open to the north. Cevaine stands three strides away, body at geometric precision, eyes locked, guard still raised, waiting.",
+        "setting": "The waygate clearing at The Thinning, late afternoon light going bronze and long. The sealed veil stands behind you like a closed door. Cevaine stands three strides away, one hand at their shoulder, breathing measured and deliberate, eyes tracking you with a new kind of attention.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Standing at calculated distance with raised guard, breathing in measured intervals, eyes tracking Splarf with relentless precision, waiting for the next move"
+            "state": "Standing with shoulder injured, hand lowered, breathing controlled, processing the contest's end"
           }
         ],
         "objects": [
@@ -228,16 +276,49 @@
           "Your chisel for stone-carving"
         ],
         "threads": [
-          "Will you continue the fight with Cevaine, or find another way?",
-          "Where did Boo go?",
-          "What does Cevaine intend to do about the breach you made?"
+          "What does Cevaine intend to do about the breach now?",
+          "Where did Boo go during the fight?"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cevaine",
+          "name": "Cevaine",
+          "role": "Lattice-Cities order-reader",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "description": null,
+          "note": "Yielded to Splarf in ritual contest at the waygate clearing. Recognized in Splarf's unshakeable practice something that resists geometric precision. First willingness to acknowledge a limitation in their own system.",
+          "learned": [
+            "The Unbroken Practice — a discipline so still and centered that it cannot be anticipated, because it is not a pattern to be read."
+          ],
+          "skillsObserved": [
+            "Extreme geometric precision in combat",
+            "Lattice-trained structural thinking applied to movement",
+            "The ability to read and anticipate an opponent before they move"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Present at the waygate clearing, injured shoulder, breathing controlled, reconsidering their approach to the veil-breach"
+        }
+      ],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "cevaine-of-the-seventh-measure",
+          "label": "Cevaine of the Seventh Measure",
+          "kind": "person",
+          "entityId": "cevaine",
+          "fact": "Cevaine recognizes that absolute geometric precision, while formidable, cannot read stillness that is not absence — a discipline so centered it yields no pattern to be solved.",
+          "links": [
+            "the-thinning",
+            "lattice-order-logic"
+          ]
+        }
+      ],
       "generateRequest": [],
       "encounterOps": [],
       "newEncounter": null,
@@ -248,11 +329,14 @@
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "The moment after the strike lands: Cevaine's guard broken open, shoulder dropping, their body angled back a step. Splarf's fist still bright with the impact. Cevaine's eyes — still precise, still tracking — but now holding something new: recognition that geometry alone cannot account for everything.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
+      "markDefiningMoment": {
+        "abilityId": "the_unbroken_practice",
+        "why": "The contest against Cevaine was decided when Splarf settled into the form and held it — the practice itself became the answer, unreadable and unshakeable, carrying the moment."
+      },
       "markTeacher": null,
       "offerPromotion": null,
       "offerAcquisition": null,
@@ -260,11 +344,11 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The waygate clearing at The Thinning, afternoon light harsh and ordinary. The sealed veil stands dark and resentful behind Splarf; the settlement path lies open to the north. Cevaine stands three strides away, body at geometric precision, eyes locked, guard still raised, waiting.",
+      "setting": "The waygate clearing at The Thinning, late afternoon light going bronze and long. The sealed veil stands behind you like a closed door. Cevaine stands three strides away, one hand at their shoulder, breathing measured and deliberate, eyes tracking you with a new kind of attention.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Standing at calculated distance with raised guard, breathing in measured intervals, eyes tracking Splarf with relentless"
+          "state": "Standing with shoulder injured, hand lowered, breathing controlled, processing the contest's end"
         }
       ],
       "objects": [
@@ -273,17 +357,16 @@
         "Your chisel for stone-carving"
       ],
       "threads": [
-        "Will you continue the fight with Cevaine, or find another way?",
-        "Where did Boo go?",
-        "What does Cevaine intend to do about the breach you made?"
+        "What does Cevaine intend to do about the breach now?",
+        "Where did Boo go during the fight?"
       ]
     },
-    "beats": 10
+    "beats": 11
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -423,23 +506,28 @@
         "locationId": "gen-object-object",
         "day": 1
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
-        "[d1] Confronted Splarf at the waygate clearing, holding them accountable for breaching the veil with old-language speech. Treats the breach as a structural problem to be solved."
+        "[d1] Confronted Splarf at the waygate clearing, holding them accountable for breaching the veil with old-language speech. Treats the breach as a structural problem to be solved.",
+        "[d1] Yielded to Splarf in ritual contest at the waygate clearing. Recognized in Splarf's unshakeable practice something that resists geometric precision. First willingness to acknowledge a limitation in their own system."
       ],
       "knownFacts": [
         "Lattice-Cities order-readers solve problems in structure — including breaches in thin places",
         "Cevaine is of the Seventh Measure and trained in lattice precision",
-        "They do not see the breach as negotiable — only as a problem"
+        "They do not see the breach as negotiable — only as a problem",
+        "The Unbroken Practice — a discipline so still and centered that it cannot be anticipated, because it is not a pattern to be read."
       ],
       "skillsObserved": [
         "geometric precision of movement",
-        "absolute tracking and positioning"
+        "absolute tracking and positioning",
+        "Extreme geometric precision in combat",
+        "Lattice-trained structural thinking applied to movement",
+        "The ability to read and anticipate an opponent before they m"
       ],
       "status": "active",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "statusNote": "Present at the waygate clearing, facing Splarf in contest",
+      "statusNote": "Present at the waygate clearing, injured shoulder, breathing controlled, reconsidering their approach to the veil-breach",
       "domains": {
         "primary": "lattice"
       },
@@ -552,7 +640,7 @@
     "lastTickWorldDay": 36,
     "lastCanonWorldDay": 36,
     "pressureQueue": [],
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Boo's sudden, absolute attention — the way it has turned to watch you watch it, as if something has shifted in the settlement or the veil…",
@@ -687,11 +775,13 @@
         "facts": [
           "[d1] Lattice-Cities order-reader walking The Thinning's edge — applying structural precision to a place that dissolves structure",
           "[d1] Lattice-Cities order-reader",
-          "[d1] A Lattice-trained order-reader views the veil-breach as a structural problem, not a spiritual one. They are tasked with solving such problems. The breach is not negotiable to them — only solvable."
+          "[d1] A Lattice-trained order-reader views the veil-breach as a structural problem, not a spiritual one. They are tasked with solving such problems. The breach is not negotiable to them — only solvable.",
+          "[d1] Cevaine recognizes that absolute geometric precision, while formidable, cannot read stillness that is not absence — a discipline so centered it yields no pattern to be solved."
         ],
         "links": [
           "the-thinning",
-          "what-wakes-beneath"
+          "what-wakes-beneath",
+          "lattice-order-logic"
         ],
         "aliases": [
           "Cevaine",
@@ -962,8 +1052,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785975128832,
-  "rev": 38,
+  "updatedAt": 1785975227759,
+  "rev": 44,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1099,7 +1189,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 10
+    "the_numinous_reach": 11
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1107,10 +1197,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-06T00:12:08.827Z",
+      "lastAt": "2026-08-06T00:13:47.744Z",
       "startDay": 36,
       "endDay": 37,
-      "beats": 10
+      "beats": 11
     }
   ],
   "establishedFacts": [
@@ -1148,28 +1238,29 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 10,
-    "scene": 10,
-    "choices": 10,
+    "sceneSummary": 11,
+    "scene": 11,
+    "choices": 11,
     "offer": 4,
-    "codexUpdates": 7,
-    "imagePrompt": 5,
-    "gambitApt": 8,
-    "sceneEnded": 10,
-    "characterDeltas": 5,
+    "codexUpdates": 8,
+    "imagePrompt": 6,
+    "gambitApt": 9,
+    "sceneEnded": 11,
+    "characterDeltas": 6,
     "arcOps": 1,
     "factUpdates": 3,
     "placeUpdates": 3,
     "timeOps": 1,
-    "deeds": 1,
+    "deeds": 2,
     "ledgerEvents": 1,
     "questUpdates": 1,
-    "npcUpdates": 2,
+    "npcUpdates": 3,
     "generateRequest": 1,
     "newEncounter": 1,
-    "encounterOps": 1
+    "encounterOps": 1,
+    "markDefiningMoment": 1
   },
-  "_opTurns": 10,
+  "_opTurns": 11,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -1200,7 +1291,7 @@
   },
   "customAbilities": {},
   "companionBonds": {
-    "hush": 0.75
+    "hush": 1.25
   },
   "teachers": {},
   "foreclosed": [
@@ -1219,6 +1310,11 @@
       {
         "text": "Attempted to bridge the veil and speak with a being from the other side — an act of courage and foolishness in equal measure",
         "weight": 1,
+        "day": 1
+      },
+      {
+        "text": "Faced down a Lattice-trained order-reader in ritual contest and won without breaking the form — stood against geometric precision itself and held.",
+        "weight": 2,
         "day": 1
       }
     ]
@@ -1251,185 +1347,7 @@
   "locationImages": {
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
-  "activeEncounter": {
-    "defId": "gm-a-pale-reader",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "gm-a-pale-reader",
-      "type": "duel",
-      "status": "active",
-      "round": 2,
-      "log": [
-        "r1: foresee vs strike → momentum 0",
-        "r1: strike vs shield → momentum 5",
-        "r2: resist vs strike → momentum 5"
-      ],
-      "opponentHealth": 2,
-      "tactic": "precise",
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "A Pale Reader",
-        "attributes": {
-          "practical": 2,
-          "physical": 2,
-          "mental": 2,
-          "social": 2
-        },
-        "energy": 74,
-        "maxEnergy": 74,
-        "tacticTags": [
-          "precise",
-          "relentless",
-          "ordered"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 2,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 2,
-            "attribute": "practical"
-          }
-        ],
-        "health": 5,
-        "soak": 1,
-        "soakLayers": [
-          {
-            "rank": 1,
-            "value": 1
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 4.6000000000000005,
-      "opponentEnergy": 56,
-      "turn": {
-        "phase": "action",
-        "sel": {
-          "sense": [
-            12
-          ],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": 0,
-        "bonusEarned": false,
-        "senseDone": true,
-        "senseLine": "You read with The Unbroken Practice — failure. Neither of you learns much. You learn nothing usable this time. Had it landed you would have seen which craft A Pale Reader leans on, and whether their wind is going — enough to pick the counter.",
-        "readPayoff": "You learn nothing usable this time. Had it landed you would have seen which craft A Pale Reader leans on, and whether their wind is going — enough to pick the counter."
-      },
-      "effects": [
-        {
-          "kind": "guard",
-          "label": "guard up",
-          "value": 2,
-          "roundsLeft": 1,
-          "applies": "whenAttacked",
-          "side": "opponent",
-          "rank": 2,
-          "source": "a raised guard",
-          "from": "opponent"
-        }
-      ],
-      "pressure": {
-        "player": 0,
-        "opponent": 0
-      },
-      "spent": {
-        "player": false,
-        "opponent": false
-      },
-      "lastOppFn": "strike",
-      "lastOppReceipt": {
-        "roll": 69,
-        "chance": 38,
-        "degree": "failure",
-        "action": {
-          "attribute": "practical",
-          "abilityLevel": 2,
-          "label": "a hard strike",
-          "axes": {}
-        },
-        "breakdown": {
-          "components": [
-            {
-              "label": "practical 2",
-              "value": 20
-            },
-            {
-              "label": "ability rank 2",
-              "value": 10
-            },
-            {
-              "label": "surge",
-              "value": 10
-            },
-            {
-              "label": "momentum (you're on the back foot)",
-              "value": -2
-            }
-          ],
-          "total": 38,
-          "clampedFrom": null,
-          "base": "practical",
-          "opposed": null
-        },
-        "critRoll": 37,
-        "crit": {
-          "successChance": 11,
-          "failChance": 1,
-          "successComponents": [
-            {
-              "label": "base",
-              "value": 5
-            },
-            {
-              "label": "ability rank 2",
-              "value": 6
-            }
-          ],
-          "failComponents": [
-            {
-              "label": "base",
-              "value": 5
-            },
-            {
-              "label": "ability rank 2",
-              "value": -4
-            }
-          ],
-          "successClampedFrom": null,
-          "failClampedFrom": null
-        },
-        "rawChance": 38,
-        "margin": -31,
-        "matchup": 0,
-        "intensity": "surge",
-        "tier": 2,
-        "function": "strike",
-        "name": "a hard strike",
-        "effectMods": [],
-        "woven": null
-      },
-      "lastReadWasSense": true,
-      "senseTierEarned": 0,
-      "senseResist": {
-        "value": 6,
-        "label": "their natural guardedness",
-        "from": "passive"
-      }
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 37,
     "lastBeat": "witness_power"

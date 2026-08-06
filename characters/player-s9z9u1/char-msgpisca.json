@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 92,
+  "xp": 95,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -172,6 +172,21 @@
       "spread": [],
       "day": 3,
       "worldDay": 37
+    },
+    {
+      "at": "2026-08-06T22:00:44.715Z",
+      "locationId": "the_thinning",
+      "communityId": "valley.thinning",
+      "description": "Held vigil at a sealed boundary without breaking, and witnessed a desperate messenger complete a final delivery—the cost of crossing paid with presence, the message received",
+      "tags": [
+        "patience",
+        "witness",
+        "mercy"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 3,
+      "worldDay": 37
     }
   ],
   "relationships": {},
@@ -181,11 +196,279 @@
     "At dawn on day three, Splarf takes the voided ledger assignment from the messenger and learns the price of its delivery—the sender on the other side is fading, the crossing drained them, and the document itself is final proof that Hoss is free."
   ],
   "currentLocationId": "the_thinning",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_thinning",
+    "turns": [
+      {
+        "player": "record the story with storykeeper.",
+        "summary": "At The Thinning's waygate clearing on the third dawn, Splarf received the voided ledger assignment from a messenger who crossed a sealed boundary and paid for it with presence—the document proves Hoss free from the Notch claim. Cevaine held sentinel over the crossing, her lattice-form bleeding and breaking. Splarf stood vigil beside her without demand, and when he told her she could yield, the veil shifted from sealed refusal to opening acceptance. The messenger delivered what was sent, exhausted and half-real. Splarf recorded the three days as story, but the thinness scattered some of the edges—the tale holds, but not entirely solid.",
+        "narration": "You settle onto your heels near the cooling fire, Boo a shadow-weight at your shoulder, and begin to speak—not to Cevaine, not to The Messenger, but to the clearing itself, to the veil, to the weight of what has passed here. Your voice finds the shape of three days: the figure reading the valley with too many joints; the sealed boundary and the sentinel's discipline holding form through blood loss and exhaustion; the messenger crossing at dawn, paying presence for passage, delivering a voided ledger in a voice that sounds like time moving backward.\n\nThe story WANTS to come through clear—you know how to shape it, how to carry the weight of a thing so that others can hold it. But the veil is thin here in ways that aren't about distance. As you speak, the words seem to scatter slightly, their edges fraying. You catch them, pull them back into order, speak them again. Some land sharp and clear—Cevaine's lattice-form yielding without breaking, the choice made moment by moment. Others blur as they leave your mouth, as if the thinness itself is pulling at the edges, rendering the story into something half-present, half-remembered.\n\nYou push through it. The story takes shape enough—three days, a boundary, a messenger, a document, a cost paid. But you know, as you finish, that something is missing from what you've recorded. The full weight of the sender's fading, the exact texture of the vigil, the specific ache in Cevaine's form as she chose to yield—these pieces are present in your telling, but not entirely solid. They exist in the clearing now like the thin place itself exists: real, but not entirely grounded. The veil seems to listen anyway. The hum shifts, almost musical."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You settle onto your heels near the cooling fire, Boo a shadow-weight at your shoulder, and begin to speak—not to Cevaine, not to The Messenger, but to the clearing itself, to the veil, to the weight of what has passed here. Your voice finds the shape of three days: the figure reading the valley with too many joints; the sealed boundary and the sentinel's discipline holding form through blood loss and exhaustion; the messenger crossing at dawn, paying presence for passage, delivering a voided ledger in a voice that sounds like time moving backward.\n\nThe story WANTS to come through clear—you know how to shape it, how to carry the weight of a thing so that others can hold it. But the veil is thin here in ways that aren't about distance. As you speak, the words seem to scatter slightly, their edges fraying. You catch them, pull them back into order, speak them again. Some land sharp and clear—Cevaine's lattice-form yielding without breaking, the choice made moment by moment. Others blur as they leave your mouth, as if the thinness itself is pulling at the edges, rendering the story into something half-present, half-remembered.\n\nYou push through it. The story takes shape enough—three days, a boundary, a messenger, a document, a cost paid. But you know, as you finish, that something is missing from what you've recorded. The full weight of the sender's fading, the exact texture of the vigil, the specific ache in Cevaine's form as she chose to yield—these pieces are present in your telling, but not entirely solid. They exist in the clearing now like the thin place itself exists: real, but not entirely grounded. The veil seems to listen anyway. The hum shifts, almost musical.",
+      "sceneSummary": "At The Thinning's waygate clearing on the third dawn, Splarf received the voided ledger assignment from a messenger who crossed a sealed boundary and paid for it with presence—the document proves Hoss free from the Notch claim. Cevaine held sentinel over the crossing, her lattice-form bleeding and breaking. Splarf stood vigil beside her without demand, and when he told her she could yield, the veil shifted from sealed refusal to opening acceptance. The messenger delivered what was sent, exhausted and half-real. Splarf recorded the three days as story, but the thinness scattered some of the edges—the tale holds, but not entirely solid.",
+      "choices": [
+        {
+          "label": "Step toward the veil with the ledger—test whether it will let you cross back to the valley-side with it",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 12,
+          "intentTags": [
+            "careful",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cevaine what comes next for her—what the lattice-trained do when the form yields and the sentinel duty ends",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "comfort"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask the veil plainly: does it know where Hoss is now, or how to find her",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "numen_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask what happened to the sender—who sent the messenger, and why the crossing cost them everything",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 18,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [
+        {
+          "description": "Held vigil at a sealed boundary without breaking, and witnessed a desperate messenger complete a final delivery—the cost of crossing paid with presence, the message received",
+          "tags": [
+            "patience",
+            "witness",
+            "mercy"
+          ],
+          "weight": 2,
+          "communityId": "valley.thinning"
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-document-and-the-ditch",
+          "title": "The Document and the Ditch",
+          "summary": "Record the story of three days—a sealed veil, a sent messenger, a voided ledger, and the price of crossing",
+          "giver": null,
+          "note": "Splarf recorded the three days as story—the veil listened, but the thinness scattered some edges. The tale holds, but not entirely solid.",
+          "xpReward": null
+        }
+      ],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Boo moves to the veil's edge and sits—a clear, patient gesture of attention—and the hum shifts in response, as if something on the other side recognizes the gesture",
+        "from": "Boo's nature: an Umbral-touched thing that knows which shadows are honest and which are being used; its recognition of the sender's presence still reaching across the boundary"
+      },
+      "stageOps": [
+        {
+          "questId": "the-document-and-the-ditch",
+          "stageId": "stage_4_record",
+          "evidence": "Splarf spoke the story of the three days—the sealed veil, the sentinel's discipline, the desperate crossing, the voided document—aloud in the clearing, holding the weight of it even as the thinness scattered some edges"
+        }
+      ],
+      "scene": {
+        "setting": "The Thinning's waygate clearing, early morning on day three. The fire has burned low. The veil hums, musical now rather than resentful. The thin place reads as tired but no longer hostile. Cevaine sits near the waygate's luminescence, her form visibly exhausted, the lattice-discipline still holding but visibly compensating. The Messenger is no longer present—it crossed through and faded into the deeper thin place. Splarf stands near the cooling fire, the voided ledger in his hands, Boo a shadow-weight at the clearing's edge.",
+        "npcsPresent": [
+          {
+            "name": "Cevaine",
+            "state": "Resting near the waygate, her lattice-form visibly exhausted. She watches the clearing with geometric precision, but the watch is softer now—less refusal, more observation. Blood has dried on her sleeves. She is breathing."
+          }
+        ],
+        "objects": [
+          "The cooling fire, embers still glowing",
+          "The Ledger Assignment—Void, in Splarf's hands",
+          "The waygate's luminescence, steady and open",
+          "Traveler's Pack, near the fire"
+        ],
+        "threads": [
+          "Cevaine will need real rest and care soon—the form cannot hold much longer without it",
+          "The sender's fading presence on the other side—the crossing cost them dearly, and they are still reaching across the boundary",
+          "The veil is open now, but it is tired—how long will it remain passable",
+          "The document is in hand, but the question of what comes next—finding Hoss, understanding the full truth of the eviction, deciding what can be written back—remains unresolved"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cevaine",
+          "name": "Cevaine",
+          "role": "Sentinel of the sealed veil; Lattice-trained order-reader",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": null,
+          "note": "Held the sentinel's form through three days of mounting pressure from the other side. Yielded her refusal when Splarf told her she could, releasing the boundary by choosing not to hold it anymore. Her form is visibly exhausted now—blood dried on her sleeves, the lattice-discipline still compensating but nearing its limit.",
+          "learned": [
+            "The discipline to recognize when the structure of refusal is the problem, and when yielding is the lattice-answer",
+            "That presence without demand can honor a form even as it yields"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Released from sentinel duty. Exhausted, but no longer holding a sealed boundary. Resting at the clearing, visible cost of the three-day vigil written in her body."
+        },
+        {
+          "op": "update",
+          "npcId": "the-messenger",
+          "name": "The Messenger",
+          "role": "A sent thing, tasked with delivery",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "description": null,
+          "note": "Crossed through the opened veil at dawn and delivered the voided ledger assignment directly to Splarf. Exhausted from the crossing—something on the other side gave everything to send this. The messenger then faded into the deeper thin place, its work complete.",
+          "learned": [
+            "The sender on the other side knows Hoss by name and understood the weight of erasure",
+            "The crossing cost presence—something paid the price of walking between worlds",
+            "The urgency was final, not strategic—this was a last message"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "departed",
+          "statusNote": "Crossed through the veil and faded into the thin place. Its task is complete. The sender on the other side is fading—the crossing cost them dearly."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The veil's mood has shifted to tired acceptance. The boundary is open and musical, no longer sealed or resentful. The thin place reads as exhausted but present. The clearing itself feels different—the thin place is no longer pushing back against the valley-side, but it is clearly worn.",
+          "flag": {
+            "veilState": "open_and_musical",
+            "presenceQuality": "tired_but_present",
+            "boundaryQuality": "accepting",
+            "messageDelivered": true,
+            "senderStillReaching": true
+          }
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-vigil-of-presence",
+          "label": "The Vigil of Presence",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "A vigil held without demand—standing beside something without reaching, without asking, without insisting on refusal—can be a form of work that even a lattice-trained order-reader can recognize and honor. Presence without demand can change the equation of refusal. The form released, but the choice remained lattice-true.",
+          "links": [
+            "cevaine",
+            "the-unbroken-practice",
+            "the-thinning",
+            "what-wakes-beneath"
+          ]
+        },
+        {
+          "topic": "story-in-thin-places",
+          "label": "Story in Thin Places",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "Recording a story at a thin place scatters some of the edges—the words seem to fray as they leave your mouth, as if the thinness itself is pulling at them. Some pieces land sharp and clear; others blur into something half-remembered. The full weight of the experience is present in the telling, but not entirely solid. The thin place listens anyway.",
+          "links": [
+            "the-thinning",
+            "storykeeper",
+            "numen-sense"
+          ]
+        }
+      ],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 2,
+        "why": "the story-recording and the settling that follows as dawn breaks full across the clearing"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "A figure stands at the edge of a thin place at dawn—the veil luminescent and musical behind them, a document held in steady hands, a shadow-form of a cat-thing at the clearing's edge watching with eyes that catch no light. The story has been recorded. Something on the other side is still reaching.",
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Thinning's waygate clearing, early morning on day three. The fire has burned low. The veil hums, musical now rather than resentful. The thin place reads as tired but no longer hostile. Cevaine sits near the waygate's luminescence, her form visibly exhausted, the lattice-discipline still holding but visibly compensating. The Messenger is no longer present—it crossed through and faded into the…",
+      "npcsPresent": [
+        {
+          "name": "Cevaine",
+          "state": "Resting near the waygate, her lattice-form visibly exhausted. She watches the clearing with geometric precision, but the"
+        }
+      ],
+      "objects": [
+        "The cooling fire, embers still glowing",
+        "The Ledger Assignment—Void, in Splarf's hands",
+        "The waygate's luminescence, steady and open",
+        "Traveler's Pack, near the fire"
+      ],
+      "threads": [
+        "Cevaine will need real rest and care soon—the form cannot hold much longer without it",
+        "The sender's fading presence on the other side—the crossing cost them dearly, and they are still reaching across the boundary",
+        "The veil is open now, but it is tired—how long will it remain passable",
+        "The document is in hand, but the question of what comes next—finding Hoss, understanding the full truth of the eviction, deciding what can be written back—remai"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 8,
+    "hour": 11,
     "realAnchor": null
   },
   "companions": [
@@ -219,18 +502,15 @@
       "stages": [
         {
           "id": "s1",
-          "objective": "the claim on paper — somewhere in the Thinning's traffic of displaced knowledge and guild-adjacent record-runners, the acoustic-rights filing that named Crestfall Notch has been copied, cited, or carr",
-          "_severed": true
+          "objective": "the claim on paper — somewhere in the Thinning's traffic of displaced knowledge and guild-adjacent record-runners, the acoustic-rights filing that named Crestfall Notch has been copied, cited, or carr"
         },
         {
           "id": "s2",
-          "objective": "the clerk with the seal — the enginewright and hourkeeper networks know who processes Plateau light-law filings; someone certified that the tone-guild's ancestral acoustic claim met the statutory thre",
-          "_severed": true
+          "objective": "the clerk with the seal — the enginewright and hourkeeper networks know who processes Plateau light-law filings; someone certified that the tone-guild's ancestral acoustic claim met the statutory thre"
         },
         {
           "id": "s3",
-          "objective": "what gets written back — armed with the document, the clerk, and two years of circuit-knowledge about how common-right traditions actually function for the numinous and churnfolk of the lower pass, Sp",
-          "_severed": true
+          "objective": "what gets written back — armed with the document, the clerk, and two years of circuit-knowledge about how common-right traditions actually function for the numinous and churnfolk of the lower pass, Sp"
         }
       ],
       "routes": {
@@ -315,25 +595,19 @@
         "s3"
       ],
       "progress": [
-        "Splarf reads the sealed veil and learns it carries a fragment of the pre-Transition ledger—Crestfall Notch mapped as a resource-keeping post, Hoss as its assignee. The figure from the veil was sent to *end* that assignment. The full message remains blocked by the veil's tiring hold.",
-        "Splarf stands vigil with Cevaine at the sealed veil, offering shared presence rather than persuasion. The sentinel's form holds, but it is no longer alone—and Boo moves to read what lies on the dark side of the boundary.",
         "Boo reads the dark side of the sealed veil and confirms the sender knows Hoss by name. The message is about Hoss, about the assignment, about the ledger—and the figure is desperate to deliver it.",
         "Boo read the dark side of the sealed veil and confirmed the sender knows Hoss by name. The message is about the ledger, the assignment, the eviction. The sender has been tasked with delivery and is desperate to complete it. The boundary is about to yield.",
         "↳ Splarf learned that the sender on the other side of the sealed veil is a messenger tasked with delivering something to him specifically about Hoss and the eviction—the ledger assignment, the…",
         "Splarf received the voided ledger assignment from a messenger sent from the other side of the sealed veil. The document itself is in hand; the assignment is void, and Hoss is named as free from the Notch claim.",
         "↳ The messenger delivered the document that voids the ledger assignment—Hoss is free from the resource claim. Splarf now holds the proof in his hands.",
         "The messenger revealed that the sender on the other side is fading—the cost of the crossing was presence itself. The urgency was final.",
-        "↳ Splarf took the voided ledger assignment from the messenger's hands and learned that the sender on the other side spent their own presence to complete the delivery—the cost was real, the urgency was…"
+        "↳ Splarf took the voided ledger assignment from the messenger's hands and learned that the sender on the other side spent their own presence to complete the delivery—the cost was real, the urgency was…",
+        "Splarf recorded the three days as story—the veil listened, but the thinness scattered some edges. The tale holds, but not entirely solid."
       ],
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
       "startedWorldDay": 36,
-      "awaitingResolution": true,
-      "_severedRoutes": [
-        "repair",
-        "answer",
-        "name"
-      ]
+      "awaitingResolution": true
     }
   ],
   "npcRegistry": {
@@ -348,7 +622,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Splarf used Numen-Sense to read the veil's state and learned that the boundary is tiring—the sentinel may now sense this too, or may already know it from the Lattice's own reading. The silence between them is no longer refusal but a shared crisis.",
         "[d3] The discipline is now visibly compensating—the form is breaking because the veil is trying to open, and Cevaine's hold is the only thing preventing it. This is the moment where absolute geometry meets a choice it cannot calculate.",
         "[d3] The discipline is now visibly compensating—the form is holding against the veil's tiring attempt to open, but the sentinel herself is beginning to show the cost. Blood loss is readable in the temples. The breathing is audible. The practice has limits, and they are being reached.",
         "[d3] Splarf attempted to reach Cevaine through shared presence and readiness—an offer to shoulder the veil's hold together. The sentinel's form fractured for a moment, then hardened. Cevaine's resistance is now explicit: the veil is not being chosen open by the boundary itself, but is being *forced*…",
@@ -357,17 +630,18 @@
         "[d3] Splarf offered shared presence and Boo read the dark side of the veil. The sentinel saw him truly—a moment of recognition without words. The form still holds, but the fractures are spreading. Cevaine knows now that someone stands with her, and that knowledge has changed something in the choice…",
         "[d3] Cevaine has heard that the message has a witness on this side, and the variable has changed the equation she is holding. The refusal is no longer the only option. The form is still intact but the recognition shows: she can stop bearing this alone.",
         "[d3] Held the sealed boundary against mounting pressure for three days until Splarf told her she could yield. Released her form and stepped back from the veil's edge as the messenger crossed through.",
-        "[d3] Released the sentinel's burden at Splarf's word—allowed the veil to open by yielding her refusal. The cost of holding is now visible in her exhausted form. The geometric discipline that held her together has been released, and she stands in the clearing as someone who has made an irreversible…"
+        "[d3] Released the sentinel's burden at Splarf's word—allowed the veil to open by yielding her refusal. The cost of holding is now visible in her exhausted form. The geometric discipline that held her together has been released, and she stands in the clearing as someone who has made an irreversible…",
+        "[d3] Held the sentinel's form through three days of mounting pressure from the other side. Yielded her refusal when Splarf told her she could, releasing the boundary by choosing not to hold it anymore. Her form is visibly exhausted now—blood dried on her sleeves, the lattice-discipline still…"
       ],
       "knownFacts": [
-        "The sentinel's refusal is a chosen cost, not a given—and witnessing that choice makes the holding easier to sustain",
-        "The messenger on the other side is not a threat—it is drowning in time, desperate to deliver a message meant for Splarf.",
         "Cevaine's refusal has been holding back something that very much needs to arrive, and the cost of that refusal is now visible in her body.",
         "The sentinel's discipline can hold form through blood loss and exhaustion, but the choice to hold or yield is no longer purely geometric—it is now *relational*.",
         "The veil's pressure was not hostile but desperate—a messenger drowning in time, tasked with delivery.",
         "The variable that changed the equation was Splarf's readiness to receive the message—the sentinel's refusal was transformed into acceptance once she knew the message had found its witness.",
         "The variable that changed the equation was Splarf's readiness to receive the message—the sentinel's refusal was transformed into acceptance once she knew the message had a witness on this side",
-        "The discipline to yield without abandoning precision—the form released, but the choice remains lattice-true"
+        "The discipline to yield without abandoning precision—the form released, but the choice remains lattice-true",
+        "The discipline to recognize when the structure of refusal is the problem, and when yielding is the lattice-answer",
+        "That presence without demand can honor a form even as it yields"
       ],
       "skillsObserved": [
         "Continued discipline under mounting pressure—the form does n",
@@ -380,7 +654,7 @@
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Released from sentinel duty at The Thinning. Visibly exhausted, but no longer holding a sealed boundary. Present in the clearing, resting.",
+      "statusNote": "Released from sentinel duty. Exhausted, but no longer holding a sealed boundary. Resting at the clearing, visible cost of the three-day vigil written in her body.",
       "domains": {
         "primary": "lattice"
       },
@@ -391,12 +665,12 @@
       },
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Cevaine%2C%20Woman%2C%20Lattice-trained%20order-reader%20of%20the%20Seventh%20Measure%3B%20sentinel%20at%20the%20sealed%20veil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39649&nologo=true",
       "_portraitTier": "devoted",
-      "met": 5
+      "met": 6
     },
     "the-messenger": {
       "id": "the-messenger",
       "name": "The Messenger",
-      "role": "A sent thing, tasked with delivery—now revealed as having paid the crossing's full price",
+      "role": "A sent thing, tasked with delivery",
       "description": "Too-many-jointed geometry, half-real on the valley side of the veil. Its form stabilizes in the real world but remains distorted—something that does not quite fit into ordinary space. Its voice is the sound of time moving backward.",
       "firstMet": {
         "locationId": "the_thinning",
@@ -405,15 +679,18 @@
       "relationship": 1,
       "history": [
         "[d3] Crossed through the opened veil at dawn on day three and delivered the voided ledger assignment directly to Splarf. Exhausted from the crossing, purposeful in delivery.",
-        "[d3] Delivered the voided ledger assignment successfully. Revealed that the sender on the other side is fading—the crossing cost the sender their own presence. The messenger's form is now more solid, more anchored to the valley-side, but visibly strained from the effort of delivery."
+        "[d3] Delivered the voided ledger assignment successfully. Revealed that the sender on the other side is fading—the crossing cost the sender their own presence. The messenger's form is now more solid, more anchored to the valley-side, but visibly strained from the effort of delivery.",
+        "[d3] Crossed through the opened veil at dawn and delivered the voided ledger assignment directly to Splarf. Exhausted from the crossing—something on the other side gave everything to send this. The messenger then faded into the deeper thin place, its work complete."
       ],
       "knownFacts": [
-        "The messenger knows Hoss by name and understands the weight of the ledger assignment that erased her family.",
         "The message was plain: the assignment ends, and Hoss is free.",
         "The crossing cost something on the other side—the sender's desperation to complete the delivery carried real weight.",
         "The sender knew Hoss by name and understood the weight of erasure",
         "The crossing cost presence—something on the other side gave everything to send this",
-        "The urgency was final, not strategic"
+        "The urgency was final, not strategic",
+        "The sender on the other side knows Hoss by name and understood the weight of erasure",
+        "The crossing cost presence—something paid the price of walking between worlds",
+        "The urgency was final, not strategic—this was a last message"
       ],
       "skillsObserved": [
         "Capability to cross sealed boundaries when readiness is esta",
@@ -422,10 +699,10 @@
         "Capability to hold the voided document intact across a seale",
         "Ability to communicate the cost of crossing through gesture "
       ],
-      "status": "active",
+      "status": "departed",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "statusNote": "Crossed through the opened veil and delivered the message. Currently present in the clearing, awaiting direction or fading.",
+      "statusNote": "Crossed through the veil and faded into the thin place. Its task is complete. The sender on the other side is fading—the crossing cost them dearly.",
       "domains": {
         "primary": "numinous"
       },
@@ -434,7 +711,7 @@
         "locationId": "the_thinning",
         "day": 3
       },
-      "met": 2
+      "met": 3
     }
   },
   "placeMemory": {
@@ -450,10 +727,11 @@
         "[d3] The veil is tiring under constant pressure from the sender on the other side. It is holding by active choice, not passive seal—the hold is chosen moment by moment, and the cost is mounting.",
         "[d3] The sealed veil's mood has shifted from angry refusal to waiting acceptance. The hum is steadier. The boundary is no longer pushing back against crossing—it is preparing to yield. The sender's desperation has become recognition that the message has a witness on this side.",
         "[d3] The sealed veil opened on the dawn of day three when Splarf told Cevaine to let it yield. A messenger crossed through and delivered a voided ledger assignment. The veil remains open, its hum now musical rather than resentful.",
-        "[d3] The veil has shifted from sealed and resistant to open and musical—the boundary is no longer refusing, but has released its hold. The thin place reads as tired but no longer resentful. The clearing itself feels different: the thin place is no longer actively pushing back against the valley-side."
+        "[d3] The veil has shifted from sealed and resistant to open and musical—the boundary is no longer refusing, but has released its hold. The thin place reads as tired but no longer resentful. The clearing itself feels different: the thin place is no longer actively pushing back against the valley-side.",
+        "[d3] The veil's mood has shifted to tired acceptance. The boundary is open and musical, no longer sealed or resentful. The thin place reads as exhausted but present. The clearing itself feels different—the thin place is no longer pushing back against the valley-side, but it is clearly worn."
       ],
       "flags": {
-        "veilState": "opened_by_choice",
+        "veilState": "open_and_musical",
         "presenceDetected": true,
         "presencePulledBack": true,
         "presenceWithdrawn": true,
@@ -705,10 +983,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "A moment of mutual recognition between you and Cevaine—not words, not argument, but the felt knowledge that you are standing in the same…",
-        "from": "Your own willingness to stand beside the sentinel without asking her to yield; her capacity to *see* someone who meets her in stillness…"
-      },
-      {
         "thing": "the urgent clarity of what Boo has read — the sender knows Hoss, is drowning in time, and Cevaine is paying an absolute cost to hold a…",
         "from": "Boo's reading of the dark side — an Umbral thing seeing what light cannot, the desperation on the other side of the seal"
       },
@@ -723,6 +997,10 @@
       {
         "thing": "The messenger's revelation that the sender is fading—something on the other side paid the final price to send this document",
         "from": "The Messenger's own words, and the weight of what a desperate crossing costs"
+      },
+      {
+        "thing": "Boo moves to the veil's edge and sits—a clear, patient gesture of attention—and the hum shifts in response, as if something on the other…",
+        "from": "Boo's nature: an Umbral-touched thing that knows which shadows are honest and which are being used; its recognition of the sender's…"
       }
     ],
     "offscreenCursor": 1,
@@ -3472,25 +3750,58 @@
         "aliases": [],
         "createdDay": 3,
         "updatedDay": 3
+      },
+      "the-vigil-of-presence": {
+        "id": "the-vigil-of-presence",
+        "label": "The Vigil of Presence",
+        "kind": "lore",
+        "facts": [
+          "[d3] A vigil held without demand—standing beside something without reaching, without asking, without insisting on refusal—can be a form of work that even a lattice-trained order-reader can recognize and honor. Presence without demand can change the equation of refusal. The form released, but the choice…"
+        ],
+        "links": [
+          "cevaine",
+          "the-unbroken-practice",
+          "the-thinning",
+          "what-wakes-beneath"
+        ],
+        "aliases": [],
+        "createdDay": 3,
+        "updatedDay": 3
+      },
+      "story-in-thin-places": {
+        "id": "story-in-thin-places",
+        "label": "Story in Thin Places",
+        "kind": "lore",
+        "facts": [
+          "[d3] Recording a story at a thin place scatters some of the edges—the words seem to fray as they leave your mouth, as if the thinness itself is pulling at them. Some pieces land sharp and clear; others blur into something half-remembered. The full weight of the experience is present in the telling, but…"
+        ],
+        "links": [
+          "the-thinning",
+          "storykeeper",
+          "numen-sense"
+        ],
+        "aliases": [],
+        "createdDay": 3,
+        "updatedDay": 3
       }
     }
   },
   "tendencies": {
-    "stealth": 5.225279399590766,
-    "strategic": 5.059048859574995,
-    "cautious": 8.986920611394028,
-    "cerebral": 5.796820551883685,
-    "patient": 5.635865171288528,
-    "devotion": 1.8759697018741541,
-    "risky": 3.9706002533703506,
-    "generous": 4.686403692605826,
-    "social": 7.818284858827288,
-    "craft": 1.176747937089203
+    "stealth": 5.094647414600997,
+    "strategic": 4.93257263808562,
+    "cautious": 8.762247596109177,
+    "cerebral": 6.651900038086593,
+    "patient": 5.494968542006315,
+    "devotion": 1.8290704593273002,
+    "risky": 3.8713352470360918,
+    "generous": 4.56924360029068,
+    "social": 7.622827737356605,
+    "craft": 1.1473292386619731
   },
   "aptitudes": [
     "naive"
   ],
-  "actionCount": 36,
+  "actionCount": 37,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3783,8 +4094,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786039855302,
-  "rev": 113,
+  "updatedAt": 1786053644719,
+  "rev": 115,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3915,7 +4226,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 42
+    "the_numinous_reach": 43
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -3935,6 +4246,14 @@
       "startDay": 37,
       "endDay": 37,
       "beats": 21
+    },
+    {
+      "id": "sess-3",
+      "startedAt": "2026-08-06T22:00:44.715Z",
+      "lastAt": "2026-08-06T22:00:44.715Z",
+      "startDay": 37,
+      "endDay": 37,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -3989,46 +4308,46 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 25,
+      "applied": 26,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 40,
-    "scene": 40,
-    "choices": 40,
-    "offer": 23,
-    "codexUpdates": 27,
-    "imagePrompt": 18,
-    "gambitApt": 32,
-    "sceneEnded": 40,
-    "characterDeltas": 30,
+    "sceneSummary": 41,
+    "scene": 41,
+    "choices": 41,
+    "offer": 24,
+    "codexUpdates": 28,
+    "imagePrompt": 19,
+    "gambitApt": 33,
+    "sceneEnded": 41,
+    "characterDeltas": 31,
     "arcOps": 1,
     "factUpdates": 7,
-    "placeUpdates": 11,
-    "timeOps": 24,
-    "deeds": 6,
+    "placeUpdates": 12,
+    "timeOps": 25,
+    "deeds": 7,
     "ledgerEvents": 4,
-    "questUpdates": 13,
-    "npcUpdates": 32,
+    "questUpdates": 14,
+    "npcUpdates": 33,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3,
     "itemUpdates": 1,
-    "stageOps": 3,
+    "stageOps": 4,
     "standingOps": 1
   },
-  "_opTurns": 40,
+  "_opTurns": 41,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "beastfriend": 3,
       "numen_sense": 5,
-      "storykeeper": 3,
+      "storykeeper": 4,
       "the_unbroken_practice": 3,
       "steady_soul": 6
     },
@@ -4037,12 +4356,12 @@
       {
         "abilityId": "greenlore",
         "since": "2026-08-05T23:25:06.049Z",
-        "progress": 6
+        "progress": 7
       },
       {
         "abilityId": "wayfinding",
         "since": "2026-08-05T23:25:30.590Z",
-        "progress": 6
+        "progress": 7
       }
     ],
     "lastUsed": {
@@ -4055,7 +4374,7 @@
   },
   "customAbilities": {},
   "companionBonds": {
-    "hush": 3.75
+    "hush": 4.25
   },
   "teachers": {},
   "foreclosed": [
@@ -4098,6 +4417,11 @@
       },
       {
         "text": "Stood vigil at a sealed boundary without breaking, and held the space long enough for a sent thing to complete its desperate delivery",
+        "weight": 2,
+        "day": 3
+      },
+      {
+        "text": "Held vigil at a sealed boundary without breaking, and witnessed a desperate messenger complete a final delivery—the cost of crossing paid with presence, the message received",
         "weight": 2,
         "day": 3
       }
@@ -4162,6 +4486,10 @@
     "careful": 2,
     "speak": 1,
     "honest": 1,
-    "devote": 1
-  }
+    "devote": 1,
+    "study": 1
+  },
+  "_stageOpRefusals": [
+    "the-document-and-the-ditch: not-current-stage (named \"stage_4_record\", current is \"null\")"
+  ]
 }

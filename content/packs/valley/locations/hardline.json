@@ -4,7 +4,10 @@
  "name": "Hardline",
  "regionId": "the_foothills",
  "communityId": "hardline",
- "spectrum": "violence_peace",
+ "spectrum": {
+  "violence_peace": -0.15,
+  "body_mind": 0.35
+ },
  "tags": [
   "settlement",
   "foothill",
@@ -19,14 +22,17 @@
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
  "dangerLevel": 1,
- "image": null,
+ "image": "content/packs/valley/assets/hardline.jpg",
  "questSeeds": [],
  "map": {
   "x": 610,
   "y": 335
  },
  "encounterSeeds": [],
- "poleIntensity": 0.5,
+ "poleIntensity": {
+  "violence": 0.15,
+  "body": 0.35
+ },
  "substrateSource": {
   "kind": "pool",
   "delta": 0.2,

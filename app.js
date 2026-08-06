@@ -8,7 +8,7 @@ import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finis
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
-import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
+import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL, aptitudeStandingLine } from "./engine/playerprofile.js";
 import { gmTurn, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
 import { namesToAvoid } from "./engine/namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
@@ -87,7 +87,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.48";
+const APP_VERSION = "1.9.49";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7710,7 +7710,13 @@ function aptitudeChips() {
     const name = a.id.replace(/_/g, " ");
     const isFading = fading.has(a.id), isLineage = lineage.has(a.id);
     const modLine = Object.entries(a.mods || {}).map(([k, v]) => `${k.replace(/([A-Z])/g, " $1").toLowerCase().trim()} ${v > 0 ? "+" : ""}${v}`).join(", ");
-    const detail = `${name}${isLineage ? " · lineage" : ""}${isFading ? " · fading" : ""}\n${a.description || ""}${modLine ? `\n\n${modLine}` : ""}`;
+    // SNG-340 §4 — ⚠️ SAY WHY IT IS STICKING. Aevi, applying the zero-terms lesson: "Shadow — from your
+    // childhood" reads differently from "Shadow — earned, twice", and durability nobody can see is durability
+    // nobody can plan around. A player who does not know a background aptitude is PERMANENT will play as
+    // though it can be lost; one who does not know an earned one is two re-earnings from permanent has no
+    // reason to go back to it.
+    const standing = aptitudeStandingLine(character, a.id, CONTENT.rules);
+    const detail = `${name}${standing ? " · " + standing : ""}${isLineage ? " · lineage" : ""}${isFading ? " · fading" : ""}\n${a.description || ""}${modLine ? `\n\n${modLine}` : ""}`;
     return `<button class="aptitude-chip axis-${esc(a.axis || "earned")}${isFading ? " fading" : ""}${isLineage ? " lineage" : ""}" data-aptchip="${esc(detail)}" title="tap for detail">${esc(name)}${isFading ? " ⌁" : ""}</button>`;
   }).join("")}</div>`;
 }

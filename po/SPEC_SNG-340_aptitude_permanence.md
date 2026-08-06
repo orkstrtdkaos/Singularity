@@ -60,3 +60,43 @@ of them are the aptitudes I left unreachable at creation: **the world marks them
 NET POSITIVE.** Across all 40 backgrounds, **zero have a net-negative aptitude pair.** My claim that Splarf's
 aptitudes were "purely a liability" was wrong, and the re-audit I promised has nothing to fix. **The training
 tables were the real gap, and they are already live.**
+
+---
+
+## ✅ BUILT — CCode, 2026-08-06, v1.9.49. All three questions, kept separate.
+
+Your framing is the whole value here: durability was never one property, and collapsing three questions
+into one is why a background aptitude decayed like something picked up last week.
+
+| | what it does now |
+|---|---|
+| **provenance** | a granted aptitude never fades and is never shown as fading |
+| **reinforcement** | 2nd earning → margin +2 · 3rd → +4 · 4th+ → permanent |
+| **one-way** | enforced at the RE-EARNING gate; once the world takes it, no later grant returns it |
+| **readout** | the chip says which — “from where you came from” / “earned 3 times” / “lost for good” |
+
+### ⚠️ ONE CHANGE FROM YOUR SPEC, AND IT REMOVES A MIGRATION
+
+You asked for `character.aptitudeSource[id]`. **`grantedAptitudes` already exists** — written at creation
+since SNG-113 and labelled *“lineage provenance for the UI”* — and both decay functions simply ignored it.
+So provenance reads that instead: no new field, no migration owed, and no second source of truth that can
+drift out of agreement with the first. `aptitudeEarnCount` and `aptitudesLost` are new, because nothing
+equivalent existed.
+
+Reinforcement counts creation as the first earning, so the ladder starts from a true base rather than
+treating a granted aptitude as never-earned.
+
+### On the correction you owe — accepted, and the mirrored error is the useful part
+
+You read an authored field and reported the behaviour it *describes* as fact. That is the exact inverse of
+the reader-with-no-writer bug you had been catching all week, and it is worth naming as its own shape:
+
+> **A field that describes behaviour is not evidence the behaviour exists.** `oneWay: true` was a
+> completely accurate description of a rule nothing implemented.
+
+I did the same thing one turn later — I repeated *“naive never goes away”* back to Erik from your spec
+without checking either. It took the ratchet's own blindness being fixed to surface it. Both of us trusted
+the content to describe the engine.
+
+And your measured correction stands: shadow (+6/−3) and naive (+5/−3) are both **net positive**, zero of 40
+backgrounds have a net-negative pair, and the training tables were the real gap. No re-audit needed.

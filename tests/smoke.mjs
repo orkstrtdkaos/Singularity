@@ -10487,6 +10487,58 @@ await (async () => {
     }
   }
 
+  // SNG-340 — WHY AN APTITUDE STAYS. Aevi's model: durability is not one property, it is three questions
+  // that `fadingAptitudes` had collapsed into one — provenance, reinforcement, and one-way.
+  {
+    const PP = await import("../engine/playerprofile.js");
+    const APT = [
+      { id: "shadow", tendency: "stealth", threshold: 5 },
+      { id: "naive", axis: "inverse", oneWay: true, worldlinessComponents: ["deception"], worldlinessCeiling: 3 },
+    ];
+    const R340 = { aptitudeKeepMargin: 1, aptitudeReinforcement: { 2: 2, 3: 4 }, aptitudePermanentAt: 4 };
+
+    // ⛔ PROVENANCE. Erik: a background aptitude says WHERE YOU CAME FROM. You do not drift out of having
+    // been an orphan — so it survives a tendency that has collapsed to nothing.
+    const born = { aptitudes: ["shadow"], grantedAptitudes: ["shadow"], tendencies: { stealth: 0 } };
+    check("340: a BACKGROUND aptitude never fades, whatever the tendencies do",
+      PP.deriveAptitudes(born, APT, R340).includes("shadow")
+      && PP.aptitudeSource(born, "shadow") === "background");
+    check("340: …and it is never shown as FADING — a warning about something that will not happen",
+      !PP.fadingAptitudes(born, APT, R340).has("shadow"));
+
+    // An EARNED one is a reading of the present, and fading when it stops being true is correct.
+    const drifted = { aptitudes: ["shadow"], grantedAptitudes: [], tendencies: { stealth: 0 } };
+    check("340: an EARNED aptitude still fades on drift — that behaviour was right and is kept",
+      !PP.deriveAptitudes(drifted, APT, R340).includes("shadow"));
+
+    // ⚠️ REINFORCEMENT — Erik: "repeatedly earned attributes stick around longer too." This is what makes it
+    // a model rather than an exception: provenance gives permanence at creation, reinforcement EARNS it.
+    const twice = { aptitudes: ["shadow"], grantedAptitudes: [], tendencies: { stealth: 3 }, aptitudeEarnCount: { shadow: 2 } };
+    const once = { aptitudes: ["shadow"], grantedAptitudes: [], tendencies: { stealth: 3 }, aptitudeEarnCount: { shadow: 1 } };
+    check("340: re-earning widens the keep-margin — the same drift loses it once, keeps it twice",
+      !PP.deriveAptitudes(once, APT, R340).includes("shadow")
+      && PP.deriveAptitudes(twice, APT, R340).includes("shadow"));
+    check("340: four earnings is permanence you EARNED, not inherited",
+      PP.reinforcementMargin({ aptitudeEarnCount: { shadow: 4 } }, "shadow", R340) === Infinity
+      && PP.deriveAptitudes({ aptitudes: ["shadow"], grantedAptitudes: [], tendencies: { stealth: 0 },
+           aptitudeEarnCount: { shadow: 4 } }, APT, R340).includes("shadow"));
+
+    // ⛔ ONE-WAY IS NARROWER THAN IT READS: not "never fades" but "once faded, NEVER RE-EARNED". Reading it
+    // as permanence — which Aevi's SNG-339 spec did, and I repeated — gets the behaviour exactly backwards.
+    const lost = { aptitudes: [], grantedAptitudes: ["naive"], aptitudesLost: ["naive"], tendencies: {} };
+    check("340: a one-way aptitude the world took is UNREACHABLE, even by a later grant",
+      !PP.deriveAptitudes(lost, APT, R340).includes("naive")
+      && PP.isForeverLost(lost, "naive") === true);
+
+    // §4 — and the player can SEE why, per the zero-terms lesson.
+    check("340: the readout says WHY it is sticking — provenance, reinforcement, or gone for good",
+      /does not fade/.test(PP.aptitudeStandingLine(born, "shadow", R340))
+      && /harder to lose/.test(PP.aptitudeStandingLine(twice, "shadow", R340))
+      && /who you are now/.test(PP.aptitudeStandingLine({ aptitudeEarnCount: { shadow: 5 } }, "shadow", R340))
+      && /does not give this one back/.test(PP.aptitudeStandingLine(lost, "naive", R340))
+      && PP.aptitudeStandingLine(once, "shadow", R340) === null);
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

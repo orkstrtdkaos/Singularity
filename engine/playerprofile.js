@@ -134,7 +134,20 @@ export function updateProfile(holder, intentTags = [], rulesAptitudes = [], rule
   // thing get better at it while the one who is struggling never improves — precisely backwards for the
   // problem this ticket exists to solve. Failing at something hard is practice.
   try { practiceSkill(holder, intentTags, rules); } catch { /* style tracking must never break a turn */ }
-  holder.aptitudes = deriveAptitudes(holder, rulesAptitudes, rules);
+  // SNG-340 — ⚠️ COUNT THE EARNINGS AND REMEMBER THE LOSSES, at the one place aptitudes are recomputed.
+  // Erik: "remember repeatedly earned attributes stick around longer too." An aptitude gained, lost and
+  // regained is harder to lose each time; one the world has taken away for good must never come back.
+  {
+    const before = new Set(holder.aptitudes || []);
+    holder.aptitudes = deriveAptitudes(holder, rulesAptitudes, rules);
+    const after = new Set(holder.aptitudes);
+    holder.aptitudeEarnCount = holder.aptitudeEarnCount || {};
+    const byId = Object.fromEntries((rulesAptitudes || []).map(a => [a.id, a]));
+    for (const id of after) if (!before.has(id)) holder.aptitudeEarnCount[id] = (Number(holder.aptitudeEarnCount[id]) || 0) + 1;
+    for (const id of before) if (!after.has(id) && byId[id]?.oneWay) {
+      holder.aptitudesLost = [...new Set([...(holder.aptitudesLost || []), id])];   // gone, and unreachable
+    }
+  }
   return holder;
 }
 
@@ -149,17 +162,85 @@ function worldliness(profile, components = []) {
  *    threshold − aptitudeKeepMargin (so a single off-tag turn never flickers it, but a real shift drops it).
  *  • INVERSE (innocence) — NEVER earned by play; granted at creation and KEPT while a composite worldliness
  *    score is below the ceiling. One-way: once worldliness crosses (or it's otherwise lost), it does not return. */
+/** SNG-340 — WHY AN APTITUDE STAYS. Aevi's model: durability is not one property, it is three separate
+ *  questions that `fadingAptitudes` had collapsed into one.
+ *
+ *  ⛔ PROVENANCE. Erik: "character creation backgrounds are MEANT to provide permanent aptitudes." A granted
+ *  aptitude says WHERE YOU CAME FROM; an earned one is a reading of who you currently are. You do not drift
+ *  out of having been an orphan. Fading is correct for the second kind and wrong for the first.
+ *
+ *  ⚠️ AND THE FIELD ALREADY EXISTED. `grantedAptitudes` has been written at creation since SNG-113, labelled
+ *  "lineage provenance for the UI" — and both decay functions ignored it. Aevi asked for a new
+ *  `aptitudeSource` map; this reuses what is already on every save instead, so no migration is owed and no
+ *  second source of truth can disagree with the first. */
+export function aptitudeSource(holder, id) {
+  return (holder?.grantedAptitudes || []).includes(id) ? "background" : "earned";
+}
+
+/** SNG-340 — REINFORCEMENT. Erik: "remember repeatedly earned attributes stick around longer too."
+ *
+ *  ⚠️ THIS IS THE PART THAT MAKES IT A MODEL RATHER THAN AN EXCEPTION: provenance hands you permanence at
+ *  creation, and reinforcement is how you EARN it afterwards. A thing you have come back to four times is
+ *  who you are, and the system should agree. Returns the extra keep-margin an earn-count buys. */
+export function reinforcementMargin(holder, id, rules = {}) {
+  const steps = rules.aptitudeReinforcement || { 2: 2, 3: 4 };
+  const permanentAt = rules.aptitudePermanentAt ?? 4;
+  const n = Number(holder?.aptitudeEarnCount?.[id]) || 0;
+  if (n >= permanentAt) return Infinity;             // earned permanence — drift can no longer reach it
+  let best = 0;
+  for (const [at, m] of Object.entries(steps)) if (n >= Number(at)) best = Math.max(best, Number(m) || 0);
+  return best;
+}
+
+/** SNG-340 — ONE-WAY, AND IT IS NARROWER THAN IT READS. Aevi: `oneWay` does NOT mean "never fades" — it means
+ *  "once faded, NEVER RE-EARNED". `innocent`, `naive` and `sheltered` are states the world takes OFF you and
+ *  cannot put back. You can stop being naive; you cannot become naive again.
+ *
+ *  ⛔ SO IT IS ENFORCED AT THE RE-EARNING GATE, NEVER AT THE FADING GATE — which is why reading it as
+ *  "permanent" (as her SNG-339 spec did, and as I repeated) got the behaviour exactly backwards. */
+export function isForeverLost(holder, id) {
+  return (holder?.aptitudesLost || []).includes(id);
+}
+
+/** SNG-340 — WHY THIS ONE IS STICKING, in words a player can read.
+ *
+ *  Aevi, applying the zero-terms lesson from SNG-339 §4: *"Shadow — from your childhood" reads differently
+ *  from "Shadow — earned, twice." A player should be able to see why something is sticking.*
+ *
+ *  ⚠️ THE SAME PRINCIPLE AS THE ZERO TERMS: durability that is invisible is durability nobody can plan
+ *  around. A player who does not know their background aptitude is permanent will play as though it can be
+ *  lost — and one who does not know an earned one is two re-earnings from permanent has no reason to go back
+ *  to it. Returns null when there is nothing worth saying. */
+export function aptitudeStandingLine(holder, id, rules = {}) {
+  if (!holder || !id) return null;
+  if (isForeverLost(holder, id)) return "lost for good — the world does not give this one back";
+  if (aptitudeSource(holder, id) === "background") return "from where you came from — it does not fade";
+  const n = Number(holder.aptitudeEarnCount?.[id]) || 0;
+  const permanentAt = rules.aptitudePermanentAt ?? 4;
+  if (n >= permanentAt) return `earned ${n} times over — this is simply who you are now`;
+  if (n > 1) return `earned ${n} times — harder to lose than it was`;
+  return null;                       // earned once: the ordinary case needs no explanation
+}
+
 export function deriveAptitudes(profile, rulesAptitudes = [], rules = {}) {
   const held = new Set(profile.aptitudes || []);
   const margin = rules.aptitudeKeepMargin ?? 0;
   const out = [];
   for (const a of rulesAptitudes) {
+    // SNG-340 ⛔ ONE-WAY IS ENFORCED HERE, AT THE RE-EARNING GATE. Once the world has taken `naive` off you,
+    // nothing puts it back — not drift, not a later grant. That is what `oneWay` actually means.
+    if (a.oneWay && isForeverLost(profile, a.id)) continue;
     if (a.axis === "inverse") {
       if (held.has(a.id) && worldliness(profile, a.worldlinessComponents) < (a.worldlinessCeiling ?? 0)) out.push(a.id);
       continue; // inverse aptitudes are only ever GRANTED (creation), never auto-earned
     }
+    // ⛔ PROVENANCE: a background aptitude says where you came from, not who you currently are. It does not
+    // fade, whatever the tendencies do — you do not drift out of having been an orphan.
+    if (aptitudeSource(profile, a.id) === "background") { out.push(a.id); continue; }
     const t = profile.tendencies?.[a.tendency] || 0;
-    const floor = held.has(a.id) ? a.threshold - margin : a.threshold;
+    // ⚠️ REINFORCEMENT widens the keep-margin: a thing you have come back to is harder to drift out of.
+    const keep = margin + reinforcementMargin(profile, a.id, rules);
+    const floor = held.has(a.id) ? a.threshold - keep : a.threshold;
     if (t >= floor) out.push(a.id);
   }
   return out;
@@ -174,6 +255,11 @@ export function fadingAptitudes(profile, rulesAptitudes = [], rules = {}) {
   const fading = new Set();
   for (const a of rulesAptitudes) {
     if (!held.has(a.id)) continue;
+    // SNG-340 — ⛔ A THING THAT CANNOT BE LOST IS NEVER "ABOUT TO BE LOST". Showing a background aptitude as
+    // fading is a warning about something that will not happen, which is worse than no warning: it teaches
+    // the player to distrust the ones that ARE real.
+    if (aptitudeSource(profile, a.id) === "background") continue;
+    if (reinforcementMargin(profile, a.id, rules) === Infinity) continue;   // earned permanence
     if (a.axis === "inverse") { const w = worldliness(profile, a.worldlinessComponents); if (w >= (a.worldlinessCeiling ?? 0) - band) fading.add(a.id); }
     else { const t = profile.tendencies?.[a.tendency] || 0; if (t < (a.threshold - margin) + band) fading.add(a.id); }
   }
@@ -193,6 +279,9 @@ export function grantAptitudes(holder, ids = [], rulesAptitudes = [], rules = {}
     if (!holder.aptitudes.includes(id)) { holder.aptitudes.push(id); granted.push(id); }
   }
   holder.grantedAptitudes = [...new Set([...(holder.grantedAptitudes || []), ...ids])]; // lineage provenance for the UI
+  // SNG-340: creation is the FIRST earning for anything granted, so reinforcement counts from a true base.
+  holder.aptitudeEarnCount = holder.aptitudeEarnCount || {};
+  for (const id of ids) holder.aptitudeEarnCount[id] = Math.max(1, Number(holder.aptitudeEarnCount[id]) || 0);
   holder.aptitudes = deriveAptitudes(holder, rulesAptitudes, rules); // reconcile (keeps granted earned + inverse held)
   // an inverse aptitude just added must survive the reconcile even though deriveAptitudes only KEEPS held ones:
   for (const id of ids) if (byId[id]?.axis === "inverse" && !holder.aptitudes.includes(id) && worldliness(holder, byId[id].worldlinessComponents) < (byId[id].worldlinessCeiling ?? 0)) holder.aptitudes.push(id);

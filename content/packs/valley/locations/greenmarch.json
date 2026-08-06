@@ -4,7 +4,10 @@
  "name": "Greenmarch",
  "regionId": "the_foothills",
  "communityId": "greenmarch",
- "spectrum": "death_life",
+ "spectrum": {
+  "death_life": 0.4,
+  "order_chaos": -0.2
+ },
  "tags": [
   "settlement",
   "foothill",
@@ -19,14 +22,17 @@
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
  "dangerLevel": 1,
- "image": null,
+ "image": "content/packs/valley/assets/greenmarch.jpg",
  "questSeeds": [],
  "map": {
   "x": 480,
   "y": 245
  },
  "encounterSeeds": [],
- "poleIntensity": 0.5,
+ "poleIntensity": {
+  "life": 0.4,
+  "chaos": 0.2
+ },
  "substrateSource": {
   "kind": "pool",
   "delta": 0.2,

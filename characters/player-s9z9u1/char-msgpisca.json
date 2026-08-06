@@ -48,7 +48,7 @@
   "maxHealth": 35,
   "health": 33,
   "maxEnergy": 100,
-  "energy": 0,
+  "energy": 40,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -114,285 +114,15 @@
   ],
   "relationships": {},
   "chronicle": [
-    "At The Thinning's waygate clearing, evening deepens. Splarf consulted Boo about the dark gathering at the forest's edge while Cevaine stood sentinel, the sealed veil humming between them and mystery. Something moves in the woods—something that does not announce itself."
+    "At The Thinning's waygate clearing, evening deepens. Splarf consulted Boo about the dark gathering at the forest's edge while Cevaine stood sentinel, the sealed veil humming between them and mystery. Something moves in the woods—something that does not announce itself.",
+    "At The Thinning's sealed waygate, deep in the second night, Splarf builds a fire and settles into vigil beside Cevaine—the wounded sentinel refusing all aid, the veil remaining sealed and angry, and the purposeful dark continuing its patient watch from the forest's edge."
   ],
   "currentLocationId": "the_thinning",
-  "activeScene": {
-    "locationId": "the_thinning",
-    "turns": [
-      {
-        "player": "Ask Cevain3 if she'd like to join you while you investigate what Boo has sensed.",
-        "summary": "At The Thinning's sealed waygate, evening deepens. Splarf asks Cevaine to join the investigation of Boo's sensed presence. The Lattice-reader, yielding to the character's unbroken form and admitting uncertainty, agrees to walk into the dark. A line of Marchers holds a distant breach — a grace glimpsed at the world's edge. The thin place remains sealed behind them. The veil hums, unanswered.",
-        "narration": "You turn from the forest edge where Boo's attention has fixed itself and find Cevaine still at the veil's sealed face, the geometric precision of their stance unwavering even as the evening deepens around them. The humming from the thin place has not changed pitch. You cross the clearing toward them, your footsteps loud on the deadfall.\n\n\"There's something moving in the dark,\" you say. It's not a question, the way you say it. \"Boo knows. I'm going to follow. Come with me.\"\n\nCevaine turns slowly — every movement still carrying that lattice-trained geometry, as if they are solving the angle of turning itself. Their eyes, which have been tracking the veil's shape, find you instead. For a moment they simply look at you, and you see it again: the fracture you put there when you held the form against their absolute precision. The thing that told them certainty has limits.\n\n\"The breach is sealed,\" Cevaine says. Not a refusal. An observation. But they do not return their gaze to the veil. They are waiting — still waiting — to understand how to think about a problem that has no seam to close.\n\n\"I don't know what's in the dark either,\" you say quietly. \"But we're going to find out.\"\n\nCevaine's shoulder — the one they've been favoring, the injury from the yield — tightens slightly. Then they nod, a single geometric motion. They step away from the veil, toward the tree line where Boo's shape is barely visible, a nothing among shadows. \"The Lattice solves what it can solve,\" they say. \"Let us see what this is.\"\n\nThe three of you move together into the gathering dark."
-      },
-      {
-        "player": "Ask Cevaine what they sense, geometrically, about what's moving in the dark.",
-        "summary": "Cevaine reads the moving thing geometrically and finds no predictable pattern—it moves by choice, not logic. Boo surfaces, tracking the dark.",
-        "narration": "Cevaine's eyes settle on you with that unsettling precision—tracking the thought behind your words before you finish speaking. They turn to face the dark tree-line fully, their injured shoulder moving with visible cost but no hesitation.\n\n\"What does the dark hold that your shadow-thing has found?\" they ask. It is not quite a question the way they phrase it. Their head tilts, the movement too geometric to be casual—Lattice-trained sight working, translating space into angles and distance into pure mathematics. You see them reading the tree-line as if it were a text written in shadow and position.\n\nTheir breath steadies. \"There is something that does not hold a constant position,\" they say quietly. \"It moves in ways that do not follow the geometry of running or walking. The angles of its motion are—\" they pause, and it is the first time you have heard uncertainty in their voice since they admitted the veil's agency \"—are not solving themselves. A pattern that should resolve into predictability, and does not.\" They lower their hand. \"Whatever it is, it does not move like a thing that follows logic. It moves like a thing that chooses.\"\n\nBoo emerges from the shadow at your left heel—not arriving, but becoming visible, as if it had always been there and only now decided you should see it. Its head tracks toward the dark, utterly still otherwise."
-      },
-      {
-        "player": "Use Beastfriend to try to read what the thing in the dark is—its mood, intent, what it hunts",
-        "summary": "Splarf reaches for Beastfriend to read the dark's movement and finds only an awareness that does not answer to the craft—something aware but not animal. Cevaine confirms: this is purpose, not hunger.",
-        "narration": "You step forward into the clearing's edge, reaching for the practice that has steadied you since childhood—that soft, patient opening Hoss taught you, the one that lets you feel what moves in a living thing's chest. You breathe slow. You wait for the resonance that comes when you are truly still.\n\nNothing answers.\n\nBoo's absence from your shoulder suddenly feels deliberate. The cat-shape has withdrawn into the deadfall, a thin ribbon of shadow pooling between two stones, and its silence carries a message you understand without words: this is not a beast. Not the kind your practice reaches. Whatever moves in the forest is aware in a way that does not wear fur or breath—it has noticed you noticing it, and the feeling of being read, in turn, lands like cold water down the spine. The dark at the forest's edge does not dim. It deepens. Whatever looks out from it is patient. It has all evening.\n\nCevaine's voice comes low and careful, their geometric precision still trained on the trees. \"Your practice finds nothing because there is nothing for it to find. A beast has wants, hungers, a shape the discipline can read. That—\" they indicate the dark with the smallest movement of their chin, \"—has purpose. It is not the same thing.\""
-      },
-      {
-        "player": "Call out to it plainly in the old language—if it is purpose-shaped and aware, it understands speech. Ask what it wants.",
-        "summary": "Splarf called out to the purpose-shaped thing in the dark in the old tongue, but it would not answer—only drew nearer, watching, waiting with the patience of something sent.",
-        "narration": "You draw breath and speak into the dark—not loudly, but clearly, in the old tongue Hoss taught you, the language that predates the Transition and carries weight in thin places. Your voice is steady.\n\n\"What do you want?\" you ask it. Simple. Direct. The words hang in the clearing's copper-tainted air.\n\nFor a moment—long enough that your heart counts the seconds—nothing. The forest edge does not move. The humming from the sealed veil behind you does not change. Even Boo's absence feels like it is holding its breath.\n\nThen the darkness shivers. Not a physical thing—a shimmer like heat-haze, but wrong, too deliberate. The forest's absolute black pulls back from the clearing's edge incrementally, as if the tree-line itself is retreating. The movement stops. The dark settles again, closer than before, but still holding.\n\nCevaine's hand touches your shoulder—precise, geometric, a point of contact that reads as grounding rather than comfort. \"It heard,\" they say quietly. \"It does not answer.\"\n\nThe thing in the dark has pulled nearer to the cleared space, to you. It is aware. It heard your words. But whatever purpose shapes it, whatever delivery it was sent to make, it does not meet you with language. The silence that follows feels not like refusal but like waiting—as if something on the far side of that dark still turns over what you asked, and the answer, when it comes, will not be in any tongue you know."
-      },
-      {
-        "player": "Step back to the veil's edge and try again to bridge it—if the thing came from the other side, perhaps the veil itself knows what it wants, or who sent it.",
-        "summary": "At the sealed veil of The Thinning, Splarf makes contact with the boundary itself and learns it was sealed not in anger at them, but in refusal—the other side keeps sending, and the veil holds it back.",
-        "narration": "You step back toward the sealed veil, your breath steadying into the deep, centering rhythm of the Unbroken Practice. The humming shimmer-line holds its distance, luminous against the darkening forest. You place your palm against the invisible boundary—not pushing, but resting, the way you'd rest your hand on a living thing's chest to feel its heartbeat.\n\nThe veil does not reject you. There is a moment—thin, suspended—where you feel something like recognition pulse against your skin. Not anger this time. Attention. The boundary hums louder, resonance climbing, and you sense the *shape* of what stands on the other side: not the figure that came through, but the *intention* behind it. A vast, patient structure of purpose. The veil was not sealed in rage at you, you understand now—it was sealed in refusal of what sent the figure. A door slamming shut against something that keeps trying to open it.\n\nThe message is plain and terrible: *This crossing should not be used. This delivery should not be made. The thing on the other side will not stop sending.*\n\nYour hand pulls back. The veil's hum settles to a low, watchful tone. Behind you, Cevaine stands motionless, their geometric precision still trained on the forest's edge—where the purpose-shaped darkness waits with the patience of something under orders."
-      },
-      {
-        "player": "Turn to Cevaine and ask what they make of this—is the veil itself a thinking thing, or are you reading intention into barrier-logic?",
-        "summary": "At The Thinning's sealed waygate, Splarf contacts the veil itself and discovers it seals by choice, not force—a boundary with agency. Cevaine admits that geometric precision cannot account for will. The purpose-shaped darkness waits.",
-        "narration": "You turn from the veil, your palm still tingling with the residue of that contact. Cevaine stands a few paces back, shoulders rigid despite the visible pain in that wounded shoulder, eyes tracking the space where you touched the boundary as if measuring it geometrically against something only they can see.\n\n\"Is it thinking?\" you ask plainly. \"Or am I reading intention into something that's just... structure? Barrier-logic?\"\n\nCevaine's angular face turns toward you. For a long moment they don't answer—not hesitation, but the careful pause of someone whose absolute precision is meeting its own limit. When they speak, their voice carries a fractional uncertainty you haven't heard before.\n\n\"The Seventh Measure teaches that all things resolve into pattern,\" they say, still watching the veil. \"A barrier is geometric. It *should* yield to analysis—to understand its shape is to understand its function.\" They pause. The veil hums, steady and unyielding. \"But a barrier that *refuses*... that seals *against* repeated attempts, that holds intention in its refusal... that is not pattern. That is *choice*.\" Their hand extends slightly toward the veil, then stops. \"I cannot read what chooses. Geometry cannot account for will. So either the veil is something the Seventh Measure has no category for, or—\" they turn to meet your eyes, and there is genuine disquiet there, \"—or the boundary itself is a thinking thing. A thing that has decided what may cross and what may not. And I do not know which answer is worse.\"\n\nBoo surfaces from the deadfall, a ribbon of shadow coalescing back near your feet, and settles with a deliberateness that feels like agreement. The dark thing in the forest has drawn back further—not retreating, but giving ground, patient, *waiting*."
-      },
-      {
-        "player": "Rest here a moment—the practice, steady breathing, centering yourself while Cevaine stands sentinel. You need to think.",
-        "summary": "At The Thinning's sealed waygate, Splarf centers through the Unbroken Practice while Cevaine stands watch. The veil refuses by choice, the dark waits with purpose, and a task remains undelivered on the other side.",
-        "narration": "You settle into the deep breathing of the Unbroken Practice, your body finding the stillness that holds when everything else fractures. Your eyes lower, not closing—aware but unfocused—as your breath finds its anchor in the slow count Hoss taught you winters ago. Cevaine remains a few paces distant, hand near their injured shoulder, watching the veil and the dark beyond with the geometric precision that sees patterns where ordinary sight sees only shadow.\n\nYour thoughts arrange themselves like stones settling in still water. The veil seals by *choice*—not mechanism but decision. The thing in the dark is *sent*, tasked with delivery, and *waits* because it cannot cross. The sender on the other side persists. This is not a chance event; it is an ongoing push, a problem that will not resolve itself simply by being ignored.\n\nThe night deepens around you both. Early spring's chill bites at exposed skin, and the copper-taint of the earth rises with the damp. You can feel Boo somewhere in the margins of the dark—not anxious, but attending, the way it always attends when something is unresolved. Cevaine's breathing is steady, though you catch the slight wince when they shift weight off the wounded shoulder.\n\nOne clear thought surfaces: whatever stands on the other side of that veil, it did not come with violence in mind. It came with a task. And tasks that matter usually matter to *someone*—someone with enough reach to move things from the other side of a sealed boundary."
-      },
-      {
-        "player": "Use story sense to tell Cevaine a story about why it's important to treat and injury - something from the lattice cities so she will be convinced to let you look at her injured shoulder.",
-        "summary": "Splarf offered Cevaine a story drawn from Lattice wisdom about precision and structural failure, hoping to convince them to accept aid for their injured shoulder. Cevaine heard the logic but chose the work—the veil remains sealed, the dark remains watching, and the sentinel remains at post.",
-        "narration": "You turn fully toward Cevaine, drawing on the deep well of stories you carry—the kind that settle into a listener like stones finding the bottom of still water. You think of the Lattice-Cities you've heard described in fragments: precision, order, the geometric discipline that holds even when bodies fail. You begin quietly, your voice steady in the way Storykeeper-trained voices carry.\n\n\"There's a story they tell in the order-houses,\" you say, \"about a reader who held a breach-seal for three days and three nights without moving. Geometric precision, perfect stillness. But on the third night, her shoulder began to fail—small at first, imperceptible to anyone but her. She thought it was discipline enough to ignore it. By dawn, the seal had cracked. Not because the reader wasn't strong enough. Because the body, unmended, becomes a variable. And the Seventh Measure teaches that unaccounted variables collapse the pattern.\"\n\nYou watch Cevaine's face as you speak—those angular features, the way their eyes track the geometry of your words as if searching for the seam where they might fit into their own rigid framework. You're offering them something in their own language: precision cannot hold without the foundation intact. The body is structure, too.\n\nCevaine's gaze holds on yours for a moment longer than before. Then, slowly, they look away—back toward the veil, back toward the dark. Their hand does not lower from their shoulder. \"The Seventh Measure does not account for stubbornness,\" they say quietly. \"And I am still reading. The breach does not move while I am here.\" It is not a refusal, exactly. It is a deferral. The story found its mark—you can see the calculation happen behind their eyes—but it did not move them to action. Not yet. The wound can wait. The veil cannot."
-      },
-      {
-        "player": "Step closer and examine the wound directly—respect their choice, but tend it anyway while they stand watch",
-        "summary": "At The Thinning's sealed waygate, Splarf reached to tend Cevaine's wound and was refused—the Lattice sentinel will not break form, will not admit that care takes precedence over the work of watching the veil.",
-        "narration": "You step closer, and Cevaine's eyes snap toward you with geometric precision—a warning that doesn't need words. Their hand tightens near the wound, and you see it clearly now in the veil's phosphorescent glow: blood has soaked through the binding at their shoulder, fresh enough that it still glistens. You reach out, voice steady and careful, moving as if you're approaching something skittish.\n\n\"Let me look. Just look. I'm not asking you to stop.\"\n\nCevaine does not move. But their breathing changes—a minute shift in the rhythm of someone holding harder against pain than they were a moment before. You've closed the distance to arm's reach when they speak, quiet and absolute: \"No.\"\n\nIt's not refusal born of stubbornness. It's the voice of someone whose entire discipline rests on holding form, on not breaking the geometry of their own stance. To let you touch the wound is to admit the wound matters more than the work. To accept care is to release one of the threads holding them upright.\n\nYou reach anyway—a small gesture, respectful, just your fingers extended—and Cevaine steps back. Not far. Just enough. Their shoulder turns slightly away from you, presenting the sound side of their body instead. The message is clear: the sentinel does not fall, and the work does not pause for flesh.\n\nThe veil hums between you, steady and sealed. The dark beyond the trees holds its watching stillness. Cevaine's hand settles back near the wound, applying pressure with the same geometric discipline they apply to everything else, and their eyes return to the boundary."
-      },
-      {
-        "player": "Accept the situation for now... but start setting up camp by building a fire for warmth and foraging for any healing herbs or food nearby.",
-        "summary": "At The Thinning's sealed waygate, Splarf attempts to prepare camp—building fire and foraging for provisions—but finds the wood too damp and their exhaustion too complete; the night settles with the veil sealed, Cevaine standing sentinel despite their wound, and the purposeful darkness waiting at the forest's edge.",
-        "narration": "You nod to yourself, breath settling. The veil's sealed. Cevaine won't move. The thing in the dark will wait. You have the night ahead, and the body always speaks its own language—fire first, then what the forest offers.\n\nYou gather deadfall from the clearing's scattered timber, stacking it methodically while Cevaine stands sentinel, their form rigid against the veil's phosphorescent glow. The wood is damp from early-spring melt, but you find a dry core beneath the outer bark and lay it carefully. Boo watches from the shadow-line, unimpressed.\n\nBut as you kneel to strike flint—your hands are steady, trained—you realize the problem. You have no tinder, no kindling of consequence, and the wood needs more heat than you can generate without preparation. The dampness runs deeper than you thought. You strike once, twice—sparks catch nothing. The third attempt produces a whisper of smoke that dies before it can grow. Your energy is nearly gone; every motion costs. The practice has steadied your mind, but it has not fed you, and the cold deepens as night settles fully over the Disputed Zone.\n\nYou abandon the fire-attempt and turn instead to the forest's edge, moving carefully along the clearing's border where the deadfall thins and the spring growth has begun—early shoots, the green that breaks through rot. You find sorrel, young and bitter-bright, and what might be plantain. You know these plants from the Heights work, from Hoss's careful hands teaching you which leaves mean healing and which mean nothing. You gather what you can into your palm, but your exhaustion makes you clumsy; you tear rather than cleanly harvest, and the pile is meager—enough for a handful of bitter greens, not a meal.\n\nWhen you turn back, Cevaine has not moved. The veil hums its sealed note. The dark at the forest's edge watches with purpose-shaped patience. And the fire remains unlit.\n\n*✦ foraged spring greens — added to your pack.*"
-      },
-      {
-        "player": "Try again with the fire—use the Unbroken Practice to steady your focus and coax the spark to catch",
-        "summary": "At The Thinning's sealed waygate, deep night closes in cold and without fire. The sentinel holds. The dark waits. Splarf settles into the long hours ahead, exhausted and grounded, the Practice sustaining what stubbornness cannot.",
-        "narration": "You kneel in the scattered deadfall, striking flint against steel with the precision the Unbroken Practice demands—each motion steady, centered, the kind of deliberate focus that usually carries you through. But tonight the spark doesn't catch. It flares, gutters, dies against the damp wood. You try again. And again. The Practice holds you steady; your hands do not shake. But steadiness is not enough when the wood itself refuses. Spring wet runs deep, and whatever discipline you bring to it, fire needs tinder that *wants* to burn.\n\nAfter the fourth attempt, you sit back on your heels. The deadfall lies dark and resentful at your knees. Behind you, Cevaine does not move—still facing the veil, still bleeding, still refusing the admission that some problems have no form to solve. Boo has pressed itself into a shadow at the forest-line, a presence more felt than seen. The night is cold. The veil hums its refusal. And you are going to spend it without fire.\n\nYou gather what you can—the foraged spring greens from your pack, bitter sorrel and young plantain that won't fill but will steady you. You eat slowly, sitting near the gathering of useless wood, and pull your cloak closer. The Unbroken Practice teaches you to continue when everything else is stripped away. Tonight, what's stripped is warmth. What continues is the watching, and the waiting, and the cold clarity that some nights you simply endure.\n\n*− foraged spring greens — taken from you.*"
-      },
-      {
-        "player": "my travelers pack has a tinderbox with tinder, use that to start the fire.",
-        "summary": "At The Thinning's sealed waygate, deep into the cold night, Splarf builds a fire from the Traveler's Pack's tinder and settles in to wait—Cevaine stands sentinel despite their wound, the dark watches from the forest's edge, and the veil refuses crossing.",
-        "narration": "You reach for the Traveler's Pack, fingers finding the tinderbox by touch—a worn brass cylinder with dried tinder wrapped tight inside. This is what the road teaches you to carry: the thing that actually catches when the world is damp and cold and holding. You strike the flint with steady hands, and this time the spark finds purchase on tinder that *wants* to burn.\n\nThe flame catches small and bright. You feed it carefully—the smallest twigs first, then the least-damp of the deadfall, coaxing rather than forcing. The fire builds. It's not large, but it's real: a circle of warmth in the deep night, pushing back the dark and the cold in equal measure. The veil's phosphorescent hum continues behind you, resentful and sealed. Cevaine does not acknowledge the fire. But their shoulders relax, fractionally, just enough that you know they feel it.\n\nBoo emerges from the shadow-line at the fire's edge, settling into a crouch where the heat reaches but the light doesn't quite catch. The cat-shape holds for a moment, then dissolves back into something less definable as it watches the flames. The forest beyond the clearing holds still. The dark waits. But you have warmth now, and that is something—the first small thing you've managed to *make* work since the veil sealed itself against you.\n\n*✦ Traveler's Pack has changed — description, provenance, image.*"
-      },
-      {
-        "player": "Approach Cevaine one more time—not to tend the wound, but to stand beside them at the veil, present in the watch.",
-        "summary": "At the sealed veil, Splarf stands sentinel beside Cevaine through the cold night—not offering aid the Lattice-trained sentinel will refuse, but present in the watch. The dark waits. The fire burns. The veil holds its anger.",
-        "narration": "You rise from the fire's warmth, the deadfall glowing soft orange behind you, and cross the clearing to where Cevaine stands. You do not reach for their shoulder this time. You do not offer words or stories. You simply step into their peripheral vision—far enough that you are not crowding, close enough that the choice to notice you is theirs alone.\n\nCevaine's eyes track slightly. Not acceptance. Not refusal. A geometric acknowledgment that you are present.\n\nThe veil hums between you both, phosphorescent and sealed and angry, its refusal held with the precision of something that has decided. On the other side, nothing moves. The sender has stopped pushing—not forever, you sense, but for now. The night is cold enough to see your breath. Cevaine's shoulders are held so tightly they barely rise and fall.\n\nYou stand there. You do not speak. The Practice teaches you how to be present without asking anything in return—how to hold stillness without demanding it be received. It is a small thing. It is everything the moment allows.\n\nBoo emerges from the shadows at the clearing's edge and settles at your feet, its absence-black fur drinking what little firelight reaches this far. Even the dark thing understands: sometimes the work of watching is not done alone."
-      }
-    ],
-    "lastTurn": {
-      "narration": "You rise from the fire's warmth, the deadfall glowing soft orange behind you, and cross the clearing to where Cevaine stands. You do not reach for their shoulder this time. You do not offer words or stories. You simply step into their peripheral vision—far enough that you are not crowding, close enough that the choice to notice you is theirs alone.\n\nCevaine's eyes track slightly. Not acceptance. Not refusal. A geometric acknowledgment that you are present.\n\nThe veil hums between you both, phosphorescent and sealed and angry, its refusal held with the precision of something that has decided. On the other side, nothing moves. The sender has stopped pushing—not forever, you sense, but for now. The night is cold enough to see your breath. Cevaine's shoulders are held so tightly they barely rise and fall.\n\nYou stand there. You do not speak. The Practice teaches you how to be present without asking anything in return—how to hold stillness without demanding it be received. It is a small thing. It is everything the moment allows.\n\nBoo emerges from the shadows at the clearing's edge and settles at your feet, its absence-black fur drinking what little firelight reaches this far. Even the dark thing understands: sometimes the work of watching is not done alone.",
-      "sceneSummary": "At the sealed veil, Splarf stands sentinel beside Cevaine through the cold night—not offering aid the Lattice-trained sentinel will refuse, but present in the watch. The dark waits. The fire burns. The veil holds its anger.",
-      "choices": [
-        {
-          "label": "Stay through the rest of the night, maintaining the vigil beside Cevaine until dawn breaks or the veil shifts",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "sustain",
-            "guard",
-            "steady"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Cevaine a direct question about what they understand of the veil's agency—what structure looks like when it chooses",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Return to the fire and rest—you are exhausted (energy 0/100), and the Practice teaches that rest is work too",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "endure",
-            "sustain"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [
-        {
-          "description": "Stood vigil beside a wounded sentinel without demanding gratitude or refusal—held presence as its own form of work",
-          "tags": [
-            "steadfastness",
-            "respect",
-            "peace"
-          ],
-          "weight": 1,
-          "communityId": "numinous"
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-document-and-the-ditch",
-          "title": "The Document and the Ditch",
-          "summary": "To know exactly how a family becomes a line in a ledger — and whether that knowledge becomes repair, or ruin",
-          "giver": "internal",
-          "note": "The veil's own sealed agency teaches: some boundaries choose. Some refusals are not breakable but are *true*. Hoss's erasure may not be fixable by the same logic that created it. The ledger may not be the place to write back.",
-          "xpReward": null
-        }
-      ],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Boo emerged from shadow to settle at your feet—a deliberate choice to be near rather than distant, the first clear gesture toward you the Umbral-touched thing has made",
-        "from": "Your own presence at the watch without demand; the practice that taught you how to be without requiring return"
-      },
-      "stageOps": [],
-      "scene": {
-        "setting": "The Thinning's sealed waygate clearing, deep night—phosphorescent veil humming low and angry at the forest's edge. Fire burns soft orange at the clearing's center. Cevaine stands sentinel at the veil's boundary, their form rigid and wound held closed by discipline. The dark waits beyond the tree-line, patient and purposeful.",
-        "npcsPresent": [
-          {
-            "name": "Cevaine",
-            "state": "Standing sentinel at the sealed veil despite their bleeding shoulder, refusing care, holding geometric form against pain. They have noted Splarf's presence—a shift so small it reads as measurement rather than acceptance."
-          }
-        ],
-        "objects": [
-          "The sealed veil—phosphorescent, humming, deliberately refusing",
-          "Fire burning at the clearing's center (tinder depleted; deadfall sustaining)",
-          "Scattered deadfall around the fire",
-          "Traveler's Pack (tinderbox now empty)",
-          "Foraged spring greens (partially consumed)",
-          "Boo at the fire's edge, now settled at Splarf's feet"
-        ],
-        "threads": [
-          "The sentinel refuses all aid and holds form despite the wound—will they make it through the night intact?",
-          "The sealed veil continues to hum low—the sender has stopped pushing (for now), but the delivery remains incomplete",
-          "The purposeful darkness in the forest watches and waits—what are its intentions, and will the night hold it back?",
-          "Splarf is exhausted (energy 0/100)—how much longer can the body sustain this vigil?"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "cevaine",
-          "name": "Cevaine",
-          "role": "Lattice-Cities order-reader of the Seventh Measure; sentinel at the sealed veil",
-          "gender": "nonbinary",
-          "pronouns": "they/them",
-          "note": "Splarf stood beside them at the veil without reaching, without demanding care—the first gesture of presence Cevaine has acknowledged. Their shoulders relaxed fractionally. The work of watching may, Cevaine is learning, have room for two.",
-          "learned": [
-            "Geometric precision can stand beside stillness without needing to solve it—presence does not require understanding",
-            "The Lattice discipline can hold form AND acknowledge another's presence—these are not mutually exclusive"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Wounded but standing; bleeding shoulder; will not break form. Now standing watch with Splarf present beside them at the sealed veil."
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "presence-without-demand",
-          "label": "Presence Without Demand",
-          "kind": "lore",
-          "entityId": null,
-          "fact": "The Practice teaches how to be present without asking anything in return—how to hold stillness without demanding it be received. This is a form of work that the Lattice-trained order-reader can recognize and, perhaps, honor.",
-          "links": [
-            "the-unbroken-practice",
-            "cevaine",
-            "lattice-order-logic"
-          ]
-        }
-      ],
-      "generateRequest": [],
-      "encounterOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0,
-        "why": "Still deep night; Splarf is standing vigil—time moves differently in the watch"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Two figures stand at the boundary between worlds: a Lattice-trained sentinel rigid with discipline and pain, and a numinous mender at ease in stillness, side by side facing a phosphorescent sealed veil that hums with deliberate refusal. Behind them, a small fire glows warm orange. At their feet, a shadow-thing of deep dark settles as if finally choosing a side. The night is cold and held.",
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/Two%20figures%20stand%20at%20the%20boundary%20between%20worlds%3A%20a%20Lattice-trained%20sentinel%20rigid%20with%20discipline%20and%20pain%2C%20and%20a%20numinous%20mender%20at%20ease%20in%20stillness%2C%20side%20by%20side%20facing%20a%20phosphorescent%20sealed%20veil%20that%20hums%20with%20deliberate%20refusal.%20Behind%20them%2C%20a%20small%20fire%20glows%20warm%20orange.%20At%20their%20feet%2C%20a%20s%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=83959&nologo=true"
-    },
-    "sceneState": {
-      "setting": "The Thinning's sealed waygate clearing, deep night—phosphorescent veil humming low and angry at the forest's edge. Fire burns soft orange at the clearing's center. Cevaine stands sentinel at the veil's boundary, their form rigid and wound held closed by discipline. The dark waits beyond the tree-line, patient and purposeful.",
-      "npcsPresent": [
-        {
-          "name": "Cevaine",
-          "state": "Standing sentinel at the sealed veil despite their bleeding shoulder, refusing care, holding geometric form against pain"
-        }
-      ],
-      "objects": [
-        "The sealed veil—phosphorescent, humming, deliberately refusing",
-        "Fire burning at the clearing's center (tinder depleted; deadfall sustaining)",
-        "Scattered deadfall around the fire",
-        "Traveler's Pack (tinderbox now empty)",
-        "Foraged spring greens (partially consumed)",
-        "Boo at the fire's edge, now settled at Splarf's feet"
-      ],
-      "threads": [
-        "The sentinel refuses all aid and holds form despite the wound—will they make it through the night intact?",
-        "The sealed veil continues to hum low—the sender has stopped pushing (for now), but the delivery remains incomplete",
-        "The purposeful darkness in the forest watches and waits—what are its intentions, and will the night hold it back?",
-        "Splarf is exhausted (energy 0/100)—how much longer can the body sustain this vigil?"
-      ]
-    },
-    "beats": 13
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 2,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [
@@ -539,7 +269,6 @@
       },
       "relationship": 7,
       "history": [
-        "[d1] Heard Splarf call out to the dark thing in the old tongue. Confirmed it heard but did not answer. Now standing at Splarf's shoulder, hand grounding, admitting that this is a problem geometric precision cannot solve. Waiting to see what Splarf will choose next.",
         "[d1] Watched Splarf make contact with the sealed veil itself and read intention in its hum. Now standing closer, hand near Splarf's shoulder—offering presence as a grounding point, the Lattice way of saying: I see the limit of my own thinking, and I will hold the ground while you stand at that edge.",
         "[d1] Cevaine admitted that geometric precision cannot read will or choice—that a boundary refusing repeated crossing attempts is not pattern but agency. This is the first visible crack in the Seventh Measure's absolute method. They now stand sentinel at Splarf's side, waiting to understand a problem…",
         "[d1] Now standing sentinel at the sealed veil with Splarf, admitting openly that geometric precision cannot read will or choice—that a boundary refusing is not pattern but agency. This is the deepest visible crack yet in the Seventh Measure's absolute method. Shoulders tense with pain from the shoulder…",
@@ -548,17 +277,18 @@
         "[d1] Splarf offered a story from Lattice wisdom about precision and structural failure—Cevaine heard it, understood the logic, but chose the work over care. The wound remains tended by choice. Now standing through a cold night at the sealed veil while Splarf fails to build fire.",
         "[d2] Refused aid again. Will not move. The Lattice discipline holds form above flesh even as the wound bleeds. Standing through the cold night at the sealed veil, sentinel-still, tracking nothing but refusing everything.",
         "[d2] Splarf built fire at the clearing's center despite Cevaine's refusal of direct care. Cevaine does not acknowledge it, but their shoulders have relaxed fractionally—the warmth reaches them. The sentinel holds form, but the discipline permits the comfort of fire.",
-        "[d2] Splarf stood beside them at the veil without reaching, without demanding care—the first gesture of presence Cevaine has acknowledged. Their shoulders relaxed fractionally. The work of watching may, Cevaine is learning, have room for two."
+        "[d2] Splarf stood beside them at the veil without reaching, without demanding care—the first gesture of presence Cevaine has acknowledged. Their shoulders relaxed fractionally. The work of watching may, Cevaine is learning, have room for two.",
+        "[d2] Through the long night, Cevaine has held geometric form at the sealed veil despite blood loss and cold. Splarf stood vigil beside them without demanding acceptance—the first gesture the sentinel has witnessed that does not require a response. The watch continues. The form holds."
       ],
       "knownFacts": [
-        "Some problems have no seam to close; they require a different kind of thinking entirely",
-        "Cevaine's discipline can hear reason in its own language—pattern, structure, precision—but will defer care for what is perceived as more urgent",
         "Cevaine will not break geometric form even when bleeding—care is subordinate to the work of the watch",
         "Refusal is not anger; it is precision applied to what matters most",
         "Geometric precision cannot hold form AND accept care—one must yield. Cevaine chooses the form.",
         "The Unbroken Practice is not merely a discipline of will—it is a discipline that permits the small kindnesses the body requires to endure",
         "Geometric precision can stand beside stillness without needing to solve it—presence does not require understanding",
-        "The Lattice discipline can hold form AND acknowledge another's presence—these are not mutually exclusive"
+        "The Lattice discipline can hold form AND acknowledge another's presence—these are not mutually exclusive",
+        "The Practice can be presence without demand—it can stand beside another's refusal and ask nothing in return",
+        "Geometric precision may be held alongside another's presence without requiring interaction or understanding"
       ],
       "skillsObserved": [
         "absolute tracking and positioning",
@@ -571,7 +301,7 @@
       "status": "active",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "statusNote": "Wounded but standing; bleeding shoulder; will not break form. Now standing watch with Splarf present beside them at the sealed veil.",
+      "statusNote": "Wounded but standing; bleeding shoulder held by discipline; will not break form; standing watch through the cold night at the sealed veil with Splarf present beside them",
       "domains": {
         "primary": "lattice"
       },
@@ -761,7 +491,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Cevaine's hand has shifted—resting now on the place your shoulder was, a mirror of comfort offered in the form of structural support",
@@ -3300,22 +3030,22 @@
     }
   },
   "tendencies": {
-    "stealth": 7.639066346777094,
-    "strategic": 3.962093788226736,
-    "cautious": 7.990938450496891,
-    "cerebral": 3.604051755772822,
-    "patient": 2.459940465239595,
-    "devotion": 1.3171673326390303,
-    "risky": 2.2798074806577926,
-    "generous": 3.3446299565239506,
-    "social": 4.879080611976941,
-    "craft": 1.7203396942872617
+    "stealth": 7.448089688107666,
+    "strategic": 3.863041443521068,
+    "cautious": 7.791164989234469,
+    "cerebral": 3.5139504618785016,
+    "patient": 4.3984419536086055,
+    "devotion": 1.2842381493230546,
+    "risky": 2.222812293641348,
+    "generous": 3.261014207610852,
+    "social": 4.757103596677518,
+    "craft": 1.6773312019300801
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 21,
+  "actionCount": 22,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3577,8 +3307,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786026710474,
-  "rev": 71,
+  "updatedAt": 1786026912521,
+  "rev": 72,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3709,7 +3439,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 27
+    "the_numinous_reach": 28
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -3725,10 +3455,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-06T12:00:39.112Z",
-      "lastAt": "2026-08-06T14:31:50.471Z",
+      "lastAt": "2026-08-06T14:35:12.520Z",
       "startDay": 37,
       "endDay": 37,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [
@@ -3766,31 +3496,31 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 26,
-    "scene": 26,
-    "choices": 26,
+    "sceneSummary": 27,
+    "scene": 27,
+    "choices": 27,
     "offer": 13,
     "codexUpdates": 15,
     "imagePrompt": 10,
-    "gambitApt": 21,
-    "sceneEnded": 26,
-    "characterDeltas": 17,
+    "gambitApt": 22,
+    "sceneEnded": 27,
+    "characterDeltas": 18,
     "arcOps": 1,
     "factUpdates": 3,
     "placeUpdates": 4,
-    "timeOps": 13,
+    "timeOps": 14,
     "deeds": 3,
     "ledgerEvents": 1,
     "questUpdates": 6,
-    "npcUpdates": 18,
+    "npcUpdates": 19,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
     "markDefiningMoment": 1,
-    "_engineClosedScene": 1,
+    "_engineClosedScene": 2,
     "itemUpdates": 1
   },
-  "_opTurns": 26,
+  "_opTurns": 27,
   "practice": {
     "schemaVersion": 1,
     "uses": {

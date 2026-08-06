@@ -549,6 +549,38 @@ Form-based. **Parity is mandatory:** identical character shape, same domain coun
 - **92 locations across 24 regions.** Every pole has a homeland, its city, and **its cult at the pure locus**. **The Centre (`the_center`)** — The Crossing, **The Great Coliseum**, the Hundred Markets, **The Quiet House**, **The Axis Gate** (the world's travel hub: twelve roads, one per axis).
 - **Location record:** `regionId` · `spectrum{}` (signed axis values) · **`poleIntensity{}`** (pole → 0..1, **derived from spectrum**: sign selects the pole, magnitude is the intensity — *it is an OBJECT, never a float*) · `tags[]` · `connections[]` · `descriptionSeed` · `encounterFlavor` · `dangerLevel` · `questSeeds[]` · `map{x,y}`.
 - **Connections are BIDIRECTIONAL.** A one-way edge is a bug (the world once had 20 leave-only edges and 4 unreachable locations). CI enforces (§20).
+## ⚠️ WHAT "THE VALLEY" IS — a correction, and it is mine to have made repeatedly
+
+**The Valley is a REGION.** It is one of twenty-six, it holds twelve locations, and it sits near the Crossing.
+It is **not** the world, and it is **not** a synonym for the setting.
+**Its locations:** Millbrook · Harmonic Heights (Lower Terrace) · Radiant Plateau (Edge District) · Archive
+Hollow · Echo River Crossing · Greywater Stilts · Kestrel's Roost · The Old Switchback · The Sunken Choir ·
+Thornwake Glade · Raven's Home · The Disputed Zone (Fringe).
+**Why it holds those places specifically:** the Valley is a **making-crossing** — order, light, practical,
+mechanical. **That is why Harmonic Heights and the Radiant Plateau are both there, near Millbrook: those two
+domains crossed at that spot, and the settlement pattern followed.** The geography is a consequence of which
+dispositions met, not a backdrop they were placed on.
+
+### THE ERROR
+**I have written "the Valley" to mean the whole setting roughly 65 times** — across craft descriptions, lore,
+foothill text and my own notes. Every one of those makes a region-sized claim sound world-sized. *"Every
+builder in the Valley knows the name"* means something much smaller than I intended, and *"the calmest
+violence in the Valley"* is a claim about twelve locations.
+**⚠️ THE RULE: "the Valley" names that region and nothing else.** For the setting as a whole, name what is
+actually meant — **the Reaches**, **the ring**, **the whole map**, or the specific regions in scope. If a
+sentence needs a word for everywhere, it should say *everywhere*, not borrow a place-name.
+
+### AND THE STRUCTURE THIS SITS IN — settlement by how many domains balance
+| kind | domains in balance | example |
+|---|---|---|
+| **the Crossing** | ⚠️ **all of them** — which is why it is the largest settlement on the map | The Crossing |
+| **foothill** | **two or three adjacent**, having moved out from the centre toward a pole | Kindlerow, Greyhearth |
+| **outpost** | ⚠️ **exactly two**, meeting in balance | *to be authored* |
+| **pole capital** | **one**, at its extreme | The Blaze, The Maw |
+**The count of balanced domains determines the size, and the position follows from it.** The Crossing is huge
+because everything balances there. A foothill is a town because two or three do. An outpost is small because
+only two do. **A capital is not on this ladder at all — it is what a place looks like when nothing balances.**
+
 - **Geography = disposition.** Regions sit where their dispositional profile puts them; **adjacency is kinship.** The Valley is a **making-crossing** (order + light + practical + mechanical) — which is *why* Harmonic and Radiant are neighbours there and *why* both craft.
 - **Affinity/drift `[CCODE: drift rates, decay]`:** two DIFFERENT mechanics, and the design's implied bridge between them is **not built**:
   - **Affinity (per-roll only):** `affinities.js` reads the location's `spectrum` and the action's `axes` and returns a **capped bonus to that single d100 roll** (type-tag cap ±12; vector cap 8–24) with a "the place favoured this" receipt. It is **pure — it never writes character state.**

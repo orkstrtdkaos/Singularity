@@ -2222,14 +2222,14 @@
     "transform"
    ],
    "narrationHints": "A travel action that costs no energy and no days, because it costs kept hours instead — a ",
-   "description": "⚠️ HOURKEEPER FLIGHT, AND THEY NEVER LEAVE THE GROUND. You spend hours you banked earlier and arrive as though you had walked it — because you did, in every sense the world can check. The road happened without you in it.",
-   "notFor": "⚠️ AN HOUR YOU HAVE NOT KEPT. It spends a real stored resource, and an Hourkeeper with an empty account walks like anyone.",
+   "description": "⚠️ HOURKEEPER FLIGHT, AND THE TIME COMES FROM AROUND YOU. You take hours from what is nearby and spend them on the road — a plant buds and blooms and withers in a breath, a beam greys, a stone weathers a season. You cross in a fraction of the days. THE COUNTRY YOU LEFT LOOKS OLDER THAN IT SHOULD.",
+   "notFor": "⚠️ EMPTY GROUND. It needs things nearby with time in them — growth, worked wood, stone, people. A salt flat has nothing to take.",
    "tree": [
     {
      "rank": 1,
      "name": "The Borrowed Hour",
-     "grants": "Spend kept hours to cross a leg in a fraction of its days. Nothing on the road meets you.",
-     "cannot": "Arriving before you set out, or spending hours you do not have.",
+     "grants": "Take time from the plants, timber and stone around you and spend it crossing. A leg costs a fraction of its days.",
+     "cannot": "Taking from nothing — bare rock and salt give little, and you go barely faster.",
      "functions": [
       "travel",
       "transform"
@@ -2239,9 +2239,21 @@
     },
     {
      "rank": 2,
-     "name": "The Long Borrowing",
-     "grants": "⚠️ Spend across a whole route — and the WORLD MOVES THE FULL SPAN while you do not. Arcs advance, people act, and anything with a deadline resolves without you.",
-     "cannot": "Getting them back, or learning what changed before you arrive.",
+     "name": "The Wide Draw",
+     "grants": "Draw from a whole stretch at once and cross a route in days rather than weeks. What you drew from is visibly aged and stays that way.",
+     "cannot": "Hiding it. Anyone who knows the country sees what happened to it.",
+     "functions": [
+      "travel",
+      "transform"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Taken Year",
+     "grants": "⚠️ Take time from a PERSON. They age the difference and you cross on it. This is a strike and is recognised as one.",
+     "cannot": "Taking it back, or taking it unnoticed from someone who survives.",
      "functions": [
       "travel",
       "transform"
@@ -2251,7 +2263,8 @@
     }
    ],
    "challengeTypes": [
-    "TRAVEL"
+    "TRAVEL",
+    "FIGHT"
    ],
    "harmRung": "none",
    "nativeOrCombination": "native",
@@ -2264,7 +2277,8 @@
     "magnitude": 8,
     "duration": 0,
     "range": "route-scale",
-    "note": "⚠️ THE COST IS WORLD-TIME, NOT PLAYER AGE. The world tick runs the FULL walked duration while the traveller skips it — arcs advance, strikes land, charges complete, quests expire. You save your days and the world spends its own."
+    "damageType": "temporal",
+    "note": "⚠️ THE COST IS THE SURROUNDINGS, NOT THE TRAVELLER. r1/r2 permanently age the country drawn from. r3 is a strike: aging a person to fuel the crossing."
    },
    "rankDeltas": [],
    "intensity": {
@@ -2273,19 +2287,19 @@
    },
    "bounds": [
     {
-     "text": "IT SPENDS KEPT HOURS — with an empty account you walk like anyone",
+     "text": "IT NEEDS SOMETHING NEARBY WITH TIME IN IT — bare salt and dead rock give almost nothing",
      "class": "hard"
     },
     {
-     "text": "⚠️ THE WORLD RUNS THE WHOLE JOURNEY WITHOUT YOU. Arcs move, people are struck, deadlines pass — you arrive on time and into a later world",
+     "text": "⚠️ WHAT YOU DREW FROM STAYS AGED — fields fail, timber rots, and the people who live there notice",
      "class": "cost"
     },
     {
-     "text": "nothing on the road meets you, WHICH INCLUDES ANYTHING THAT NEEDED YOU",
+     "text": "at rank 3 it is A STRIKE, recognised as one, and standing falls accordingly",
      "class": "cost"
     }
    ],
-   "plainly": "A travel action costing no energy and no days, because it spends kept hours instead — a resource you must have banked beforehand, and with an empty account you walk like anyone. You arrive as though you had walked the whole way, so nothing on the road meets you. The cost is that the world does not wait: the world clock advances the full walking duration while you skip it, so arcs move stages, strikes land, charges finish and anything on a deadline resolves without you. You save your days and the world spends its own."
+   "plainly": "A travel action, and at rank 3 also an attack. You take time out of the things around you — plants bud and wither, timber greys, stone weathers — and spend it on the road, crossing a leg in a fraction of its days. It needs things nearby with time in them, so bare salt or dead rock give almost nothing. What you drew from stays aged: crops fail, wood rots, and the people who live there notice and know what did it. At rank 2 you draw from a whole stretch and cross a route in days rather than weeks. At rank 3 you can take the time from a person instead, who ages the difference while you travel on it, which is a recognised attack and costs you standing."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

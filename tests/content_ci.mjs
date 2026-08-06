@@ -447,6 +447,77 @@ for (const pack of PACKS) {
       `${unknown.join(" · ")} — add it to kind_vocabulary in rules_classification.json with a one-line meaning`);
   }
 
+  // ⛔ SNG-344d — THE CROSSWALK IS BIDIRECTIONAL, SO THE CHECK MUST BE. Aevi built pointers both ways
+  // (braid.mechanicalRecipe → recipe.id, and recipe.braidKey → braid) and asserted ONE of them at write
+  // time. Within ten minutes she renamed two recipes and the braid table went stale — she caught and fixed
+  // that direction; the REVERSE link kept the pre-rename names (`the_counted_end.braidName` still said "The
+  // Counted End" while the braid displayed "Pale Reckoning") because nothing looked that way. Same bug,
+  // third occurrence, invisible only because the assertion had a direction.
+  //
+  // ⚠️ AND THESE RUN IN THE SUITE, not in the authoring tool. A write-time assertion protects the author
+  // who runs it; it cannot protect the file from anyone else, and it does not re-run when the OTHER file
+  // changes — which is precisely how a pointer between two files goes stale.
+  {
+    const braidFile = JSON.parse(readFileSync(join(root, "world/braid_recipes.json"), "utf8"));
+    const braids = braidFile.recipes || {};
+    const combo = rj("content/packs/core/rules/combination_recipes.json");
+    const byId = new Map((combo.recipes || []).map(r => [r.id, r]));
+    const sortPair = (a) => [...(a || [])].sort().join("+");
+
+    const dangling = [], disagree = [], revDisagree = [], keyDisagree = [];
+    for (const [key, b] of Object.entries(braids)) {
+      if (!b.mechanicalRecipe) continue;
+      const m = byId.get(b.mechanicalRecipe);
+      if (!m) { dangling.push(`${key} → ${b.mechanicalRecipe}`); continue; }
+      // forward: a braid displays its mechanical recipe's CURRENT name (Aevi's rule, now enforced here)
+      if (b.name !== m.name) disagree.push(`${key}: braid says "${b.name}", mechanics say "${m.name}"`);
+      // the pointer must also point at the recipe for the SAME PARTS — a name match is not a parts match
+      if (sortPair(m.parts) !== sortPair(key.split("+"))) keyDisagree.push(`${key} → ${m.id} (parts ${sortPair(m.parts)})`);
+    }
+    for (const r of combo.recipes || []) {
+      if (!r.braidKey) continue;
+      const b = braids[r.braidKey];
+      if (!b) { dangling.push(`${r.id} → braid ${r.braidKey}`); continue; }
+      if (r.braidName !== b.name) revDisagree.push(`${r.id}.braidName="${r.braidName}" but braid displays "${b.name}"`);
+    }
+    for (const d of [...dangling, ...disagree, ...revDisagree, ...keyDisagree]) console.log(`      crosswalk: ${d}`);
+    check("344d: every crosswalk pointer RESOLVES — neither file names a record the other lacks",
+      dangling.length === 0, dangling.join(" · "));
+    check("344d: a braid displays its mechanical recipe's CURRENT name (forward link agrees)",
+      disagree.length === 0, disagree.join(" · "));
+    check("344d: …and the recipe's braidName matches the braid — THE REVERSE LINK IS CHECKED TOO",
+      revDisagree.length === 0, revDisagree.join(" · "));
+    check("344d: a pointer links records for the SAME PARTS, not merely the same name",
+      keyDisagree.length === 0, keyDisagree.join(" · "));
+
+    // ⚠️ alsoKnownAs is a LIST. It was authored as a comma-joined STRING on three braids and absent on
+    // four — so `.map()` throws, `.length` counts characters, and de-duplication (which Aevi's own fix
+    // depends on) is not well-defined. A folk name containing a comma would silently split into two.
+    const akaShape = [], akaSelf = [], dupNames = [];
+    const seenName = new Map();
+    for (const [key, b] of Object.entries(braids)) {
+      if ("alsoKnownAs" in b && !Array.isArray(b.alsoKnownAs)) akaShape.push(`${key} (${typeof b.alsoKnownAs})`);
+      if (Array.isArray(b.alsoKnownAs) && b.alsoKnownAs.includes(b.name)) akaSelf.push(`${key}: "${b.name}" is an alias of itself`);
+      if (seenName.has(b.name)) dupNames.push(`"${b.name}" on ${seenName.get(b.name)} and ${key}`);
+      seenName.set(b.name, key);
+    }
+    check("344d: alsoKnownAs is an ARRAY wherever present — never a comma-joined string",
+      akaShape.length === 0, akaShape.join(" · "));
+    check("344d: no name is listed as an alias of itself", akaSelf.length === 0, akaSelf.join(" · "));
+    check("344d: no two braids share a display name", dupNames.length === 0, dupNames.join(" · "));
+
+    // ⛔ RATCHET, NOT A GATE — the two duplicate mechanical names Aevi's assertion found are NOT hers and
+    // which one keeps the name is Erik's content call. Recorded so it cannot GROW while he decides; a gate
+    // would force me to resolve a question that is not mine.
+    const names = new Map();
+    for (const r of combo.recipes || []) { if (!r.name) continue; names.set(r.name, (names.get(r.name) || 0) + 1); }
+    const dupMech = [...names].filter(([, n]) => n > 1).map(([k]) => k);
+    const KNOWN_DUP_MECH = 2;   // "The Harbored Flame", "The Meaning-Engine" — awaiting Erik (SNG-344b)
+    if (dupMech.length) console.log(`note  SNG-344b: ${dupMech.length} mechanical name(s) on two recipes each, awaiting Erik's call: ${dupMech.join(", ")}`);
+    check("344d: duplicate mechanical names do not GROW past the pair awaiting Erik's call",
+      dupMech.length <= KNOWN_DUP_MECH, `${dupMech.length} exceeds the ${KNOWN_DUP_MECH} recorded: ${dupMech.join(", ")}`);
+  }
+
   const gaps = Object.keys(CLASS.runtime_unwired || {}).filter(k => k !== "_note");
   if (gaps.length) console.log(`note  SNG-342: ${gaps.length} runtime file(s) authored but unconsumed (declared, not resolved): ${gaps.join(", ")}`);
   if (orphanOperational.length) console.log(`note  SNG-183 L4: operational-kind orphans: ${orphanOperational.join(", ")}`);

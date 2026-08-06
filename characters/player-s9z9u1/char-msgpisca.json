@@ -15,7 +15,12 @@
     "social": 2,
     "practical": 4
   },
-  "skills": {},
+  "skills": {
+    "stealth": 1,
+    "survival": 1,
+    "focus": 1,
+    "ritual": 1
+  },
   "abilities": [
     {
       "abilityId": "beastfriend",
@@ -49,7 +54,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 100,
-  "energy": 0,
+  "energy": 40,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -233,21 +238,25 @@
         "player": "Because I think you're gorgeous, highly disciplined, and capable.  I want to get to know you and learn from eachother as we progress through these events.",
         "summary": "At The Thinning's waygate in early morning, Splarf offered Cevaine genuine presence and the possibility of learning together. She accepted—not easily, but completely. The sentinel's form is releasing, and a path forward is named.",
         "narration": "You sit beside Cevaine at the waygate's edge, the morning light catching the geometry of her profile—angular, precise, still holding form even in exhaustion. The forest beyond the clearing is quiet now, the veil's hum settled into something almost peaceful. You take a breath, and the words come plainly, without the careful scaffolding you usually build around difficult things.\n\n\"I think you're gorgeous,\" you say, and mean it—the lattice-trained discipline that moves through her like architecture, the way she held the boundary together when it would have broken, the sheer capability of her. \"Highly disciplined. Capable in a way that matters.\" You pause, letting her process that, then continue. \"I want to get to know you. Learn from each other as we move through what comes next. Not in a way that asks you to stop being what you are—but alongside it. With it.\"\n\nCevaine's eyes shift—not away, but inward for a moment, as if the geometry of your words is being traced through her structure. When she looks back at you, there's something different in her gaze. The precision hasn't left, but underneath it, something is... considering. Reconsidering. She reaches out slowly, deliberately—the lattice-trained move with purpose, nothing wasted—and her hand rests on your shoulder. Not a gesture of comfort. An acknowledgment. A threshold being named.\n\n\"The form does not know how to be known,\" she says quietly. \"It was built to hold, not to... open.\" She pauses, her fingers steady against you. \"But you stood vigil without demand. You told me I could yield and meant it.\" Another pause—longer, weighted. \"That is not a small thing in the lattice-reading. That is a ground I have not stood on.\" She tilts her head slightly, and for the first time you see her smile—narrow, considered, real. \"Yes. Downhill. Together. And we will learn what the form becomes when it does not have to hold alone.\"\n\nThe morning light seems to settle around you both. The waygate's luminescence steadies. Something in the air changes—not resolved, but opened. A door acknowledged.\n\n*✦ The Lattice-Cities: +1 — stood vigil without demand and told a wounded sentinel she could yield—honored the lattice's form by allowing it to break with dignity.*"
+      },
+      {
+        "player": "Rest here with Cevaine before heading downhill—the waygate is open, but a full sleep would serve you both better than travel while exhausted.",
+        "summary": "Splarf and Cevaine rested together at the waygate clearing through the afternoon, the vigil complete and the boundary open, before the road downhill.",
+        "narration": "The afternoon settles into the clearing with the weight of three sleepless days behind you both. Cevaine's form, released from sentinel-duty, moves differently now—less a structure holding itself rigid and more a person allowing gravity its honest work. Her hand stays on your shoulder as you both shift closer to the fire's warmth, the waygate's luminescence steady and open above you.\n\n\"Rest is a stage,\" she says again, and this time the words carry less precision and more permission—to herself as much as to you. You arrange the bedroll from your Traveler's Pack, and she settles onto it with the careful deliberation of someone learning how to let muscles stop compensating. You lie beside her in the early-spring afternoon, Boo a dark weight at the fire's edge, the forest beyond the clearing accepting this pause as its own kind of truth.\n\nYou sleep the sleep of vigil-keepers—not deep, but genuine. The veil hums its now-musical note. Cevaine's breathing steadies into something that reads like healing. The ledger assignment rests nearby, voided and final, a paper that says *free*. When you wake hours later, the light has tilted toward evening, and something in the clearing feels different—less urgent, more like a place where people have genuinely rested and can now choose what comes next."
       }
     ],
     "lastTurn": {
-      "narration": "You sit beside Cevaine at the waygate's edge, the morning light catching the geometry of her profile—angular, precise, still holding form even in exhaustion. The forest beyond the clearing is quiet now, the veil's hum settled into something almost peaceful. You take a breath, and the words come plainly, without the careful scaffolding you usually build around difficult things.\n\n\"I think you're gorgeous,\" you say, and mean it—the lattice-trained discipline that moves through her like architecture, the way she held the boundary together when it would have broken, the sheer capability of her. \"Highly disciplined. Capable in a way that matters.\" You pause, letting her process that, then continue. \"I want to get to know you. Learn from each other as we move through what comes next. Not in a way that asks you to stop being what you are—but alongside it. With it.\"\n\nCevaine's eyes shift—not away, but inward for a moment, as if the geometry of your words is being traced through her structure. When she looks back at you, there's something different in her gaze. The precision hasn't left, but underneath it, something is... considering. Reconsidering. She reaches out slowly, deliberately—the lattice-trained move with purpose, nothing wasted—and her hand rests on your shoulder. Not a gesture of comfort. An acknowledgment. A threshold being named.\n\n\"The form does not know how to be known,\" she says quietly. \"It was built to hold, not to... open.\" She pauses, her fingers steady against you. \"But you stood vigil without demand. You told me I could yield and meant it.\" Another pause—longer, weighted. \"That is not a small thing in the lattice-reading. That is a ground I have not stood on.\" She tilts her head slightly, and for the first time you see her smile—narrow, considered, real. \"Yes. Downhill. Together. And we will learn what the form becomes when it does not have to hold alone.\"\n\nThe morning light seems to settle around you both. The waygate's luminescence steadies. Something in the air changes—not resolved, but opened. A door acknowledged.\n\n*✦ The Lattice-Cities: +1 — stood vigil without demand and told a wounded sentinel she could yield—honored the lattice's form by allowing it to break with dignity.*",
-      "sceneSummary": "At The Thinning's waygate in early morning, Splarf offered Cevaine genuine presence and the possibility of learning together. She accepted—not easily, but completely. The sentinel's form is releasing, and a path forward is named.",
+      "narration": "The afternoon settles into the clearing with the weight of three sleepless days behind you both. Cevaine's form, released from sentinel-duty, moves differently now—less a structure holding itself rigid and more a person allowing gravity its honest work. Her hand stays on your shoulder as you both shift closer to the fire's warmth, the waygate's luminescence steady and open above you.\n\n\"Rest is a stage,\" she says again, and this time the words carry less precision and more permission—to herself as much as to you. You arrange the bedroll from your Traveler's Pack, and she settles onto it with the careful deliberation of someone learning how to let muscles stop compensating. You lie beside her in the early-spring afternoon, Boo a dark weight at the fire's edge, the forest beyond the clearing accepting this pause as its own kind of truth.\n\nYou sleep the sleep of vigil-keepers—not deep, but genuine. The veil hums its now-musical note. Cevaine's breathing steadies into something that reads like healing. The ledger assignment rests nearby, voided and final, a paper that says *free*. When you wake hours later, the light has tilted toward evening, and something in the clearing feels different—less urgent, more like a place where people have genuinely rested and can now choose what comes next.",
+      "sceneSummary": "Splarf and Cevaine rested together at the waygate clearing through the afternoon, the vigil complete and the boundary open, before the road downhill.",
       "choices": [
         {
-          "label": "Rest here with Cevaine before heading downhill—the waygate is open, but a full sleep would serve you both better than travel while exhausted.",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Ask Cevaine if she's ready to travel downhill now—the waygate is open, Hoss is somewhere below, and the two of you have ground to cover.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "care"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -256,217 +265,139 @@
           "emergenceId": null
         },
         {
-          "label": "Travel downhill now, moving at a gentle pace—Cevaine needs rest, but the form may hold longer in motion, and every hour toward Hoss is an hour closer.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "space_time": 0.3
-          },
+          "label": "Sit up and listen—the clearing feels different now, and you're not certain whether that's the veil settling or something new arriving. Check what Boo reads in the forest edge.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "care"
+            "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "numen_sense",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Cevaine what she needs most right now—food, water, more time sitting still, or something the lattice-trained know about yielding that you don't yet.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "mechanical_spiritual": 0.4
-          },
+          "label": "Before you move, look at the voided ledger assignment in the afternoon light—really look at it. What does a document that erases a family look like when it's been crossed through and marked void?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "negotiate",
-            "care"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Sit with her in silence for a while longer—let the moment breathe, and watch what happens when a lattice-trained form doesn't have to hold anything at all.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "mechanical_spiritual": 0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "care",
-            "comfort"
-          ],
-          "abilityId": "steady_soul",
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "storykeeper",
+          "energyCost": 4,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Offered genuine presence to a wounded sentinel—not healing, not demand, but the willingness to stand and learn alongside someone whose form was breaking. Cevaine accepted.",
-          "tags": [
-            "patience",
-            "presence",
-            "valor"
-          ],
-          "weight": 2,
-          "communityId": "numinous.thinning"
-        }
-      ],
+      "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
+        "health": 3,
+        "energy": 40,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
-      "standingOps": [
-        {
-          "people": "lattice",
-          "delta": 1,
-          "why": "stood vigil without demand and told a wounded sentinel she could yield—honored the lattice's form by allowing it to break with dignity"
-        }
-      ],
+      "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": {},
+      "adoptSchool": null,
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Thinning's waygate clearing, midday on day three. The fire is now ash. The waygate's luminescence is steady and open, the veil musical. Splarf and Cevaine sit together at the waygate's edge. The forest beyond is quiet. Early spring light angles through the clearing.",
+        "setting": "The Thinning's waygate clearing, afternoon on day three. The fire is now warm ash. The waygate's luminescence is steady and open, the veil musical. Early-spring light angles across the clearing at a lower angle than morning—the afternoon is deepening toward evening. Splarf and Cevaine have just woken from several hours of rest on the bedroll.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Sitting with precision at the waygate's edge beside Splarf, her hand resting on his shoulder—the form visibly releasing, blood loss stopped, exhaustion settling into something like peace. Lattice discipline still present, but no longer compensating. Considering what comes next."
+            "state": "Waking beside Splarf, her form visibly steadier now—the lattice-trained discipline has re-integrated through rest. Her hand still rests on his shoulder. She is watching the clearing with the geometric precision that defines her, but the exhaustion that was breaking through has receded. She looks at Splarf with something like readiness."
           }
         ],
         "objects": [
-          "The cooling fire, now ash",
+          "The cooling fire, now warm ash",
           "The Ledger Assignment—Void, in Splarf's possession",
           "The waygate's luminescence, steady and open",
-          "Traveler's Pack, near the fire",
-          "Boo, a shadow at Splarf's shoulder"
+          "Traveler's Pack (bedroll now used)",
+          "Boo, a shadow at the clearing's edge near the fire"
         ],
         "threads": [
-          "Cevaine's recovery and the path downhill",
+          "The road downhill—where it leads and how long it takes",
           "Finding Hoss and delivering the voided ledger",
-          "What Cevaine needs most before travel",
-          "The newly-named bond between Splarf and Cevaine and what it means for the road ahead"
+          "What Cevaine carries with her now that sentinel duty is ended",
+          "Whether the open veil will remain open, or close behind them as they leave"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "name": "Cevaine",
-          "role": "Sentinel of the sealed veil; Lattice-trained order-reader",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Splarf offered genuine presence and the possibility of learning together—not asking her to stop being the form, but to open alongside it. She accepted completely. Her hand rests on his shoulder. The sentinel duty has yielded. The lattice-form is releasing. A bond is named: learning together, moving together downhill.",
-          "learned": [
-            "Presence without demand can change the equation—the form can yield when the ground beneath it shifts from refusal to shared standing",
-            "The lattice permits not just rest, but connection—a stage of the cycle she has not walked before"
-          ],
-          "skillsObserved": [
-            "The ability to yield with precision—to release the form without losing its geometry",
-            "The willingness to trust what she could not have predicted"
-          ],
-          "relationshipDelta": 2,
-          "status": "active",
-          "statusNote": "Resting at the waygate, form releasing, sentinel duty complete. Accepted Splarf's offer of learning and movement together. Ready to travel downhill when the form has steadied enough.",
-          "bondType": "romantic",
-          "bondStage": "courting",
-          "deed": {
-            "description": "Held a sealed boundary open by pure discipline for three days while something on the other side pushed with mounting desperation—and then chose to yield when given the ground to stand on. Released the sentinel's burden with precision.",
-            "weight": 3,
-            "tags": [
-              "valor",
-              "discipline",
-              "mercy"
-            ]
-          }
+          "note": "Rested beside Splarf through the afternoon—the form has re-integrated. The sentinel's exhaustion has receded, and readiness is visible now. She moves with precision but without the compensatory stiffness that marked blood loss and sustained discipline.",
+          "statusNote": "Resting at the waygate, form steadied through sleep. Ready to travel downhill when Splarf is ready.",
+          "relationshipDelta": 0
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
-      "discovery": {},
-      "codexUpdates": [
-        {
-          "topic": "cevaine_the_sentinel",
-          "label": "Cevaine — Released",
-          "kind": "person",
-          "entityId": "cevaine",
-          "fact": "The sentinel of the sealed veil who held form through blood loss and exhaustion released her burden when offered genuine presence without demand. The lattice-trained form can yield with precision. She has accepted Splarf's offer to learn together and travel downhill.",
-          "links": [
-            "the-thinning",
-            "lattice-order-logic",
-            "the-document-and-the-ditch"
-          ]
-        }
-      ],
+      "discovery": null,
+      "codexUpdates": [],
       "generateRequest": [],
       "encounterOps": [],
-      "newEncounter": {},
-      "unlockPrecursor": {},
-      "unlockSubstrate": {},
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 2,
-        "why": "The moment of acknowledgment, and the settling after—time for rest and readiness before choosing the next move"
+        "hoursPassed": 4,
+        "why": "rested together through the afternoon — a rest that is not full sleep, but genuine enough to restore clarity and steadiness"
       },
-      "moveTo": {},
+      "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": {},
-      "imagePrompt": "Splarf and Cevaine sit side by side at the waygate's luminescent edge in spring morning light. Cevaine's angular profile is turned slightly toward him, her hand steady on his shoulder. Her geometric precision is visible but no longer rigid—something in her form has opened. The veil hums softly behind them, musical and at rest. Boo is a shadow at Splarf's other side. The moment holds: threshold acknowledged, ground shared.",
-      "newAbility": {},
-      "gambitOps": {},
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": {},
-      "markTeacher": {},
-      "offerPromotion": {},
-      "offerAcquisition": {},
-      "offerIntent": {},
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Thinning's waygate clearing, midday on day three. The fire is now ash. The waygate's luminescence is steady and open, the veil musical. Splarf and Cevaine sit together at the waygate's edge. The forest beyond is quiet. Early spring light angles through the clearing.",
+      "setting": "The Thinning's waygate clearing, afternoon on day three. The fire is now warm ash. The waygate's luminescence is steady and open, the veil musical. Early-spring light angles across the clearing at a lower angle than morning—the afternoon is deepening toward evening. Splarf and Cevaine have just woken from several hours of rest on the bedroll.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Sitting with precision at the waygate's edge beside Splarf, her hand resting on his shoulder—the form visibly releasing,"
+          "state": "Waking beside Splarf, her form visibly steadier now—the lattice-trained discipline has re-integrated through rest. Her h"
         }
       ],
       "objects": [
-        "The cooling fire, now ash",
+        "The cooling fire, now warm ash",
         "The Ledger Assignment—Void, in Splarf's possession",
         "The waygate's luminescence, steady and open",
-        "Traveler's Pack, near the fire",
-        "Boo, a shadow at Splarf's shoulder"
+        "Traveler's Pack (bedroll now used)",
+        "Boo, a shadow at the clearing's edge near the fire"
       ],
       "threads": [
-        "Cevaine's recovery and the path downhill",
+        "The road downhill—where it leads and how long it takes",
         "Finding Hoss and delivering the voided ledger",
-        "What Cevaine needs most before travel",
-        "The newly-named bond between Splarf and Cevaine and what it means for the road ahead"
+        "What Cevaine carries with her now that sentinel duty is ended",
+        "Whether the open veil will remain open, or close behind them as they leave"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 14,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -500,15 +431,18 @@
       "stages": [
         {
           "id": "s1",
-          "objective": "the claim on paper — somewhere in the Thinning's traffic of displaced knowledge and guild-adjacent record-runners, the acoustic-rights filing that named Crestfall Notch has been copied, cited, or carr"
+          "objective": "the claim on paper — somewhere in the Thinning's traffic of displaced knowledge and guild-adjacent record-runners, the acoustic-rights filing that named Crestfall Notch has been copied, cited, or carr",
+          "_severed": true
         },
         {
           "id": "s2",
-          "objective": "the clerk with the seal — the enginewright and hourkeeper networks know who processes Plateau light-law filings; someone certified that the tone-guild's ancestral acoustic claim met the statutory thre"
+          "objective": "the clerk with the seal — the enginewright and hourkeeper networks know who processes Plateau light-law filings; someone certified that the tone-guild's ancestral acoustic claim met the statutory thre",
+          "_severed": true
         },
         {
           "id": "s3",
-          "objective": "what gets written back — armed with the document, the clerk, and two years of circuit-knowledge about how common-right traditions actually function for the numinous and churnfolk of the lower pass, Sp"
+          "objective": "what gets written back — armed with the document, the clerk, and two years of circuit-knowledge about how common-right traditions actually function for the numinous and churnfolk of the lower pass, Sp",
+          "_severed": true
         }
       ],
       "routes": {
@@ -605,7 +539,12 @@
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
       "startedWorldDay": 36,
-      "awaitingResolution": true
+      "awaitingResolution": true,
+      "_severedRoutes": [
+        "repair",
+        "answer",
+        "name"
+      ]
     }
   ],
   "npcRegistry": {
@@ -620,7 +559,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Splarf offered shared presence and Boo read the dark side of the veil. The sentinel saw him truly—a moment of recognition without words. The form still holds, but the fractures are spreading. Cevaine knows now that someone stands with her, and that knowledge has changed something in the choice…",
         "[d3] Cevaine has heard that the message has a witness on this side, and the variable has changed the equation she is holding. The refusal is no longer the only option. The form is still intact but the recognition shows: she can stop bearing this alone.",
         "[d3] Held the sealed boundary against mounting pressure for three days until Splarf told her she could yield. Released her form and stepped back from the veil's edge as the messenger crossed through.",
         "[d3] Released the sentinel's burden at Splarf's word—allowed the veil to open by yielding her refusal. The cost of holding is now visible in her exhausted form. The geometric discipline that held her together has been released, and she stands in the clearing as someone who has made an irreversible…",
@@ -629,7 +567,8 @@
         "[d3] Offered a path downhill with Splarf. Considering whether abandoning sentinel duty is lattice-true. The form is yielding, the vigil's purpose complete, but the discipline resists simple departure. She asks for reason before she moves—a question, not a refusal.",
         "[d3] Splarf offered genuine presence and the possibility of learning together—not asking her to stop being the form, but to open alongside it. She accepted completely. Her hand rests on his shoulder. The sentinel duty has yielded. The lattice-form is releasing. A bond is named: learning together…",
         "[d3] Your bond becomes romantic.",
-        "[d3] Your bond deepens — courting."
+        "[d3] Your bond deepens — courting.",
+        "[d3] Rested beside Splarf through the afternoon—the form has re-integrated. The sentinel's exhaustion has receded, and readiness is visible now. She moves with precision but without the compensatory stiffness that marked blood loss and sustained discipline."
       ],
       "knownFacts": [
         "That presence without demand can honor a form even as it yields",
@@ -652,7 +591,7 @@
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Resting at the waygate, form releasing, sentinel duty complete. Accepted Splarf's offer of learning and movement together. Ready to travel downhill when the form has steadied enough.",
+      "statusNote": "Resting at the waygate, form steadied through sleep. Ready to travel downhill when Splarf is ready.",
       "domains": {
         "primary": "lattice"
       },
@@ -663,7 +602,7 @@
       },
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Cevaine%2C%20Woman%2C%20Lattice-trained%20order-reader%20of%20the%20Seventh%20Measure%3B%20sentinel%20at%20the%20sealed%20veil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39649&nologo=true",
       "_portraitTier": "devoted",
-      "met": 9,
+      "met": 10,
       "bondType": "romantic",
       "bondStage": "courting",
       "deeds": [
@@ -899,8 +838,8 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 905,
-    "lastSharedReadAt": "2026-08-06T17:50:29.596Z",
+    "lastGenCount": 910,
+    "lastSharedReadAt": "2026-08-06T22:15:41.092Z",
     "lastTickWorldDay": 37,
     "lastCanonWorldDay": 37,
     "pressureQueue": [
@@ -980,7 +919,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The messenger's exhaustion and the weight it carries—something on the other side of the veil paid a price for this delivery.",
@@ -3788,22 +3727,23 @@
     }
   },
   "tendencies": {
-    "stealth": 4.722021718542446,
-    "strategic": 4.571801192478139,
-    "cautious": 8.121371330525003,
-    "cerebral": 6.165375911863415,
-    "patient": 5.093063108488633,
-    "devotion": 1.6952911027630644,
-    "risky": 3.5881833674833428,
-    "generous": 4.23504626758817,
-    "social": 9.990914352379006,
-    "craft": 1.063412861065462,
-    "amorous": 1
+    "stealth": 4.603971175578884,
+    "strategic": 4.457506162666186,
+    "cautious": 7.918337047261877,
+    "cerebral": 6.011241514066829,
+    "patient": 4.965736530776417,
+    "devotion": 1.6529088251939876,
+    "risky": 3.498478783296259,
+    "generous": 5.129170110898466,
+    "social": 9.74114149356953,
+    "craft": 1.0368275395388256,
+    "amorous": 0.975
   },
   "aptitudes": [
+    "shadow",
     "naive"
   ],
-  "actionCount": 40,
+  "actionCount": 41,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3864,7 +3804,7 @@
     }
   ],
   "nativeGrantsVersion": 1,
-  "reconcileVersion": 24,
+  "reconcileVersion": 26,
   "gallery": [
     {
       "kind": "moment",
@@ -3955,7 +3895,7 @@
       "at": "2026-08-05T23:17:21.286Z"
     }
   ],
-  "portrait": "https://image.pollinations.ai/prompt/Normal%20homely%20dude.%2C%20full-body%20character%20portrait%2C%20named%20Splarf%2C%20of%20the%20numinous%2C%20orphan%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20The%20family%20that%20took%20Splarf%20in%20after%20his%20parents%20died%20%E2%80%94%20a%20mending%20woman%20named%20Hoss%20and%20her%20elderly%20father%20%E2%80%94%20lost%20their%20N%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=61326&nologo=true",
+  "portrait": "https://image.pollinations.ai/prompt/A%20pale%20woman%20in%20her%20middle%20forties%2C%20slight%20and%20very%20upright%2C%20with%20close-cropped%20silver-ash%20hair%20still%20carrying%20the%20grid-lines%20of%20a%20Lattice%20reader's%20field-shave%20%E2%80%94%20the%20scalp%20marked%20in%20faint%20geometric%20se%2C%20character%20portrait%2C%20named%20Cevaine%20of%20the%20Seventh%20Measure%2C%20Lattice-Cities%20order-reader%20walking%20The%20Thinning's%20edge%20%E2%80%94%20applying%20structural%20precision%20to%20a%20place%20t%2C%20Speaks%20in%20the%20clipped%2C%20load-bearing%20syntax%20of%20the%20Lattice%20%E2%80%94%20every%20sentence%20is%20a%20measurement%2C%20every%20p%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=50726&nologo=true",
   "personalArc": {
     "id": "the-document-and-the-ditch",
     "name": "The Document and the Ditch",
@@ -4104,8 +4044,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786054332579,
-  "rev": 118,
+  "updatedAt": 1786054639108,
+  "rev": 123,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4236,7 +4176,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 46
+    "the_numinous_reach": 47
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -4260,10 +4200,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-08-06T22:00:44.715Z",
-      "lastAt": "2026-08-06T22:12:12.576Z",
+      "lastAt": "2026-08-06T22:17:19.106Z",
       "startDay": 37,
       "endDay": 37,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [
@@ -4329,8 +4269,8 @@
     "scene": 44,
     "choices": 44,
     "offer": 26,
-    "codexUpdates": 29,
-    "imagePrompt": 20,
+    "codexUpdates": 28,
+    "imagePrompt": 19,
     "gambitApt": 35,
     "sceneEnded": 43,
     "characterDeltas": 33,
@@ -4338,7 +4278,7 @@
     "factUpdates": 7,
     "placeUpdates": 12,
     "timeOps": 28,
-    "deeds": 8,
+    "deeds": 7,
     "ledgerEvents": 4,
     "questUpdates": 14,
     "npcUpdates": 36,
@@ -4349,7 +4289,7 @@
     "_engineClosedScene": 3,
     "itemUpdates": 1,
     "stageOps": 4,
-    "standingOps": 2
+    "standingOps": 1
   },
   "_opTurns": 44,
   "practice": {
@@ -4495,7 +4435,7 @@
   "_pendingLedger": [],
   "placeEdges": {},
   "skillUses": {
-    "help": 1,
+    "help": 2,
     "comfort": 3,
     "sustain": 2,
     "careful": 2,
@@ -4506,9 +4446,14 @@
     "negotiate": 1,
     "travel": 1,
     "romantic": 1,
-    "rapport": 1
+    "rapport": 1,
+    "care": 1
   },
   "_stageOpRefusals": [
     "the-document-and-the-ditch: not-current-stage (named \"stage_4_record\", current is \"null\")"
-  ]
+  ],
+  "portraitPinned": true,
+  "aptitudeEarnCount": {
+    "shadow": 1
+  }
 }

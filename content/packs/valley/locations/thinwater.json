@@ -1,0 +1,49 @@
+{
+ "schemaVersion": 1,
+ "id": "thinwater",
+ "name": "Thinwater",
+ "regionId": "the_foothills",
+ "communityId": "thinwater",
+ "spectrum": "mechanical_spiritual",
+ "tags": [
+  "settlement",
+  "foothill",
+  "market"
+ ],
+ "connections": [
+  "the_crossing",
+  "the_numen"
+ ],
+ "descriptionSeed": "Thinwater — shrines, listening-houses and pattern-readers, where the veil is workably thin. The Numen is where meaning is overwhelming. Thinwater is where you can go and ask about it and then have lunch.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
+ "dangerLevel": 1,
+ "image": null,
+ "questSeeds": [],
+ "map": {
+  "x": 350,
+  "y": 180
+ },
+ "encounterSeeds": [],
+ "poleIntensity": 0.5,
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.2,
+  "radius": 90,
+  "reason": "The Archive was sealed before the Transition and never opened to it. What is inside is still what was inside.",
+  "radiusWorld": 0.054,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [],
+ "axisVectorNote": "",
+ "worldPos": {},
+ "worldPosNote": "",
+ "foothillOf": [
+  "numinous",
+  "threnodist",
+  "figurist"
+ ],
+ "betweenCrossingAnd": "the_numen",
+ "startingLocation": true
+}

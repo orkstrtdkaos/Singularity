@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 22,
+  "xp": 24,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -48,7 +48,7 @@
   "maxHealth": 35,
   "health": 32,
   "maxEnergy": 100,
-  "energy": 37,
+  "energy": 28,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -110,22 +110,27 @@
         "player": "Ask Cevaine what they sense, geometrically, about what's moving in the dark.",
         "summary": "Cevaine reads the moving thing geometrically and finds no predictable pattern—it moves by choice, not logic. Boo surfaces, tracking the dark.",
         "narration": "Cevaine's eyes settle on you with that unsettling precision—tracking the thought behind your words before you finish speaking. They turn to face the dark tree-line fully, their injured shoulder moving with visible cost but no hesitation.\n\n\"What does the dark hold that your shadow-thing has found?\" they ask. It is not quite a question the way they phrase it. Their head tilts, the movement too geometric to be casual—Lattice-trained sight working, translating space into angles and distance into pure mathematics. You see them reading the tree-line as if it were a text written in shadow and position.\n\nTheir breath steadies. \"There is something that does not hold a constant position,\" they say quietly. \"It moves in ways that do not follow the geometry of running or walking. The angles of its motion are—\" they pause, and it is the first time you have heard uncertainty in their voice since they admitted the veil's agency \"—are not solving themselves. A pattern that should resolve into predictability, and does not.\" They lower their hand. \"Whatever it is, it does not move like a thing that follows logic. It moves like a thing that chooses.\"\n\nBoo emerges from the shadow at your left heel—not arriving, but becoming visible, as if it had always been there and only now decided you should see it. Its head tracks toward the dark, utterly still otherwise."
+      },
+      {
+        "player": "Use Beastfriend to try to read what the thing in the dark is—its mood, intent, what it hunts",
+        "summary": "Splarf reaches for Beastfriend to read the dark's movement and finds only an awareness that does not answer to the craft—something aware but not animal. Cevaine confirms: this is purpose, not hunger.",
+        "narration": "You step forward into the clearing's edge, reaching for the practice that has steadied you since childhood—that soft, patient opening Hoss taught you, the one that lets you feel what moves in a living thing's chest. You breathe slow. You wait for the resonance that comes when you are truly still.\n\nNothing answers.\n\nBoo's absence from your shoulder suddenly feels deliberate. The cat-shape has withdrawn into the deadfall, a thin ribbon of shadow pooling between two stones, and its silence carries a message you understand without words: this is not a beast. Not the kind your practice reaches. Whatever moves in the forest is aware in a way that does not wear fur or breath—it has noticed you noticing it, and the feeling of being read, in turn, lands like cold water down the spine. The dark at the forest's edge does not dim. It deepens. Whatever looks out from it is patient. It has all evening.\n\nCevaine's voice comes low and careful, their geometric precision still trained on the trees. \"Your practice finds nothing because there is nothing for it to find. A beast has wants, hungers, a shape the discipline can read. That—\" they indicate the dark with the smallest movement of their chin, \"—has purpose. It is not the same thing.\""
       }
     ],
     "lastTurn": {
-      "narration": "Cevaine's eyes settle on you with that unsettling precision—tracking the thought behind your words before you finish speaking. They turn to face the dark tree-line fully, their injured shoulder moving with visible cost but no hesitation.\n\n\"What does the dark hold that your shadow-thing has found?\" they ask. It is not quite a question the way they phrase it. Their head tilts, the movement too geometric to be casual—Lattice-trained sight working, translating space into angles and distance into pure mathematics. You see them reading the tree-line as if it were a text written in shadow and position.\n\nTheir breath steadies. \"There is something that does not hold a constant position,\" they say quietly. \"It moves in ways that do not follow the geometry of running or walking. The angles of its motion are—\" they pause, and it is the first time you have heard uncertainty in their voice since they admitted the veil's agency \"—are not solving themselves. A pattern that should resolve into predictability, and does not.\" They lower their hand. \"Whatever it is, it does not move like a thing that follows logic. It moves like a thing that chooses.\"\n\nBoo emerges from the shadow at your left heel—not arriving, but becoming visible, as if it had always been there and only now decided you should see it. Its head tracks toward the dark, utterly still otherwise.",
-      "sceneSummary": "Cevaine reads the moving thing geometrically and finds no predictable pattern—it moves by choice, not logic. Boo surfaces, tracking the dark.",
+      "narration": "You step forward into the clearing's edge, reaching for the practice that has steadied you since childhood—that soft, patient opening Hoss taught you, the one that lets you feel what moves in a living thing's chest. You breathe slow. You wait for the resonance that comes when you are truly still.\n\nNothing answers.\n\nBoo's absence from your shoulder suddenly feels deliberate. The cat-shape has withdrawn into the deadfall, a thin ribbon of shadow pooling between two stones, and its silence carries a message you understand without words: this is not a beast. Not the kind your practice reaches. Whatever moves in the forest is aware in a way that does not wear fur or breath—it has noticed you noticing it, and the feeling of being read, in turn, lands like cold water down the spine. The dark at the forest's edge does not dim. It deepens. Whatever looks out from it is patient. It has all evening.\n\nCevaine's voice comes low and careful, their geometric precision still trained on the trees. \"Your practice finds nothing because there is nothing for it to find. A beast has wants, hungers, a shape the discipline can read. That—\" they indicate the dark with the smallest movement of their chin, \"—has purpose. It is not the same thing.\"",
+      "sceneSummary": "Splarf reaches for Beastfriend to read the dark's movement and finds only an awareness that does not answer to the craft—something aware but not animal. Cevaine confirms: this is purpose, not hunger.",
       "choices": [
         {
-          "label": "Step into the tree-line with Cevaine and Boo and follow what's moving",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Step directly into the tree-line with Boo and let it lead—whatever it is, the dark is its home; you'll follow where it's safest.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "scout",
+            "sneak",
             "careful",
-            "travel"
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -134,40 +139,63 @@
           "emergenceId": null
         },
         {
-          "label": "Use Beastfriend to try to read what the thing in the dark is—its mood, intent, what it hunts",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Call out to it plainly in the old language—if it is purpose-shaped and aware, it understands speech. Ask what it wants.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {},
-          "difficulty": 15,
+          "difficulty": 20,
+          "intentTags": [
+            "negotiate",
+            "risky"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cevaine to read it geometrically again—if it moves by choice, that choice must leave some trace. What pattern is it following?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 18,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "beastfriend",
-          "energyCost": 6,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Cevaine what they think will happen if you cross the clearing's edge—what does their geometric sense predict",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Step back from the tree-line. Hold your ground at the veil's edge and wait—let it come to you if it means to, on ground you can see.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "careful"
+            "defend",
+            "careful",
+            "endure"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "the_unbroken_practice",
+          "energyCost": 1,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
@@ -175,16 +203,16 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Cevaine's admission that geometric thinking cannot solve the moving-thing's choice—a crack in their structured world that opens toward what comes next",
-        "from": "Cevaine's own decision to walk into the dark despite uncertainty, and the character's unbroken form that made that choice possible"
+        "thing": "Cevaine's admission that geometric precision cannot solve this—and their willingness to stand at the edge of their own knowing",
+        "from": "Splarf's practice of holding stillness and form, which opened a space for Cevaine to move beyond the Lattice's need to solve everything"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Thinning's waygate clearing at evening's deep. The sealed veil still hums low at the forest's far edge. Deadfall scattered across open ground. The tree-line is absolute darkness—whatever moves there is invisible but present. The air carries the copper-note of thin places and turned earth. Distant sound of Marchers holding a distant breach.",
+        "setting": "The Thinning's waygate clearing, evening deepening to full dusk. The sealed veil hums low at the forest's far edge—a shimmer-line between here and the thin place, absolutely closed. Deadfall scattered underfoot. The tree-line ahead is absolute darkness—not the darkness of night, but of something that drinks light. The air carries copper-taint and turned earth. A line of distant Marchers holds a breach somewhere beyond the ridge.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Facing the dark tree-line, geometric precision reading the movement within it, their injured shoulder held despite pain, for the first time uncertain about what they are solving"
+            "state": "Standing sentinel at the veil's sealed face, geometric precision still trained on the dark forest-edge, their injured shoulder held despite visible cost. Still waiting to understand what Splarf means to do."
           }
         ],
         "objects": [
@@ -193,56 +221,62 @@
           "The absolute dark of the Disputed Zone wood beyond the clearing"
         ],
         "threads": [
-          "What does not follow geometric pattern—what moves by choice in the dark",
+          "What does not follow geometric pattern—what moves by choice in the dark, and what does it want?",
+          "Boo's withdrawal into shadow—a signal that this is not a beast",
           "Cevaine's new willingness to walk toward what cannot be solved",
-          "The sealed veil's continued humming—still closed, still refusing",
-          "Boo's sensed presence and what it signals"
+          "The sealed veil's continued humming—still closed, still refusing"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "note": "Cevaine applied geometric precision to read the moving thing and found no resolving pattern—it moves by choice, not logic. This is the moment geometric thinking reaches its limit. They are now waiting to understand a thing that does not solve.",
           "learned": [
-            "There is something in the dark that moves without predictable geometric logic",
-            "A thing that moves by choice rather than following the geometry of natural motion",
-            "Geometric precision cannot predict the actions of something that chooses its own path"
+            "Geometric precision cannot find a pattern in a being that moves by will rather than law"
           ],
-          "relationshipDelta": 0
+          "note": "Confirmed to Splarf that what moves in the dark is purpose-shaped, not animal—a thing that chooses its path rather than following the geometry of natural motion."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "the-figure-in-the-thin-place",
+          "label": "The Figure in the Thin Place",
+          "kind": "mystery",
+          "fact": "There may be another awareness in or near the dark—present in the Disputed Zone forest, purpose-shaped like the figure that came through the veil, aware of being noticed. It is patient. It is waiting.",
+          "links": [
+            "what-wakes-beneath",
+            "the-water-crisis",
+            "cevaine"
+          ]
+        }
+      ],
       "generateRequest": [],
       "encounterOps": [],
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {},
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "evening deepening as the conversation extends"
+      },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
       "imagePrompt": null,
-      "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Thinning's waygate clearing at evening's deep. The sealed veil still hums low at the forest's far edge. Deadfall scattered across open ground. The tree-line is absolute darkness—whatever moves there is invisible but present. The air carries the copper-note of thin places and turned earth. Distant sound of Marchers holding a distant breach.",
+      "setting": "The Thinning's waygate clearing, evening deepening to full dusk. The sealed veil hums low at the forest's far edge—a shimmer-line between here and the thin place, absolutely closed. Deadfall scattered underfoot. The tree-line ahead is absolute darkness—not the darkness of night, but of something that drinks light. The air carries copper-taint and turned earth. A line of distant Marchers holds a…",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Facing the dark tree-line, geometric precision reading the movement within it, their injured shoulder held despite pain,"
+          "state": "Standing sentinel at the veil's sealed face, geometric precision still trained on the dark forest-edge, their injured sh"
         }
       ],
       "objects": [
@@ -251,13 +285,13 @@
         "The absolute dark of the Disputed Zone wood beyond the clearing"
       ],
       "threads": [
-        "What does not follow geometric pattern—what moves by choice in the dark",
+        "What does not follow geometric pattern—what moves by choice in the dark, and what does it want?",
+        "Boo's withdrawal into shadow—a signal that this is not a beast",
         "Cevaine's new willingness to walk toward what cannot be solved",
-        "The sealed veil's continued humming—still closed, still refusing",
-        "Boo's sensed presence and what it signals"
+        "The sealed veil's continued humming—still closed, still refusing"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
@@ -411,17 +445,18 @@
         "[d1] Yielded to Splarf in ritual contest. Now admitting that geometric precision cannot solve this breach. They are waiting to understand what Splarf means to do. For the first time, they are uncertain about the Lattice's answer.",
         "[d1] Splarf asked Cevaine plainly what the Lattice intends for the sealed breach. The order-reader admitted uncertainty — a fracture in their geometric confidence. They are waiting to see what Splarf chooses to do. Standing watch at the tree-line now, accepting the weight of not-knowing.",
         "[d1] Yielded to the character's invitation to investigate the dark. Admitting uncertainty has opened something — they are no longer looking only at the veil, but at the character who stood against precision itself.",
-        "[d1] Cevaine applied geometric precision to read the moving thing and found no resolving pattern—it moves by choice, not logic. This is the moment geometric thinking reaches its limit. They are now waiting to understand a thing that does not solve."
+        "[d1] Cevaine applied geometric precision to read the moving thing and found no resolving pattern—it moves by choice, not logic. This is the moment geometric thinking reaches its limit. They are now waiting to understand a thing that does not solve.",
+        "[d1] Confirmed to Splarf that what moves in the dark is purpose-shaped, not animal—a thing that chooses its path rather than following the geometry of natural motion."
       ],
       "knownFacts": [
-        "Cevaine recognizes a limit to what geometric thinking can solve.",
         "Cevaine does not know what comes next — an unprecedented admission from a Lattice-trained order-reader.",
         "The Lattice's response to the breach is not automatic; it depends on what the character who held the practice decides.",
         "Cevaine does not return to the veil's study when asked to walk into a problem without a seam",
         "The geometric mind can choose to move toward what it cannot solve",
         "There is something in the dark that moves without predictable geometric logic",
         "A thing that moves by choice rather than following the geometry of natural motion",
-        "Geometric precision cannot predict the actions of something that chooses its own path"
+        "Geometric precision cannot predict the actions of something that chooses its own path",
+        "Geometric precision cannot find a pattern in a being that moves by will rather than law"
       ],
       "skillsObserved": [
         "geometric precision of movement",
@@ -549,10 +584,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "A pale reader approaches the settlement — a figure from the margins of the Lattice-Cities, moving with the eerie precision of order-craft…",
-        "from": "The world's greater arc: The Poles Pull — each Reach leaning harder into its own extreme; travelers notice the edges getting sharper…"
-      },
-      {
         "thing": "Cevaine admitting uncertainty — that the Lattice-Cities' way of solving cannot solve this kind of breach.",
         "from": "Cevaine's own confrontation with the limits of their own system; their recognition that Splarf held something that geometry cannot read."
       },
@@ -567,6 +598,10 @@
       {
         "thing": "Cevaine's admission that geometric thinking cannot solve the moving-thing's choice—a crack in their structured world that opens toward…",
         "from": "Cevaine's own decision to walk into the dark despite uncertainty, and the character's unbroken form that made that choice possible"
+      },
+      {
+        "thing": "Cevaine's admission that geometric precision cannot solve this—and their willingness to stand at the edge of their own knowing",
+        "from": "Splarf's practice of holding stillness and form, which opened a space for Cevaine to move beyond the Lattice's need to solve everything"
       }
     ]
   },
@@ -654,12 +689,14 @@
           "[d1] The presence reads as profound PURPOSE — not malice, but a thing sent, a thing tasked. It is aware of being sensed and tracks Splarf's attention. The veil sings around it because it is not OF this side. Whatever is pulling the veil open, it is not the Numinous.",
           "[d1] The figure is aware and trying to ANSWER across the veil — it understands speech, recognizes the old language, and attempted to reply in kind. The gulf between the sides is too wide for full communication; the veil strains when it tries. Its effort costs it something — a flicker, a pulling-back.",
           "[d1] The figure is a SENT THING—tasked, purposeful, aware. It came to DELIVER, not to take or harm. When the connection broke, it was pulled back through the veil by force, not by choice. Its final emotion across the breaking thread was failure: the work undone, the delivery not completed. Whatever it…",
-          "[d1] The figure was pulled back through the veil by force before it could deliver what it was sent to deliver. The veil sealed itself in anger, rejecting the bridge Splarf attempted to hold. The failure carries weight — the work remains undone on the other side."
+          "[d1] The figure was pulled back through the veil by force before it could deliver what it was sent to deliver. The veil sealed itself in anger, rejecting the bridge Splarf attempted to hold. The failure carries weight — the work remains undone on the other side.",
+          "[d1] There may be another awareness in or near the dark—present in the Disputed Zone forest, purpose-shaped like the figure that came through the veil, aware of being noticed. It is patient. It is waiting."
         ],
         "links": [
           "what-wakes-beneath",
           "the-thinning",
-          "the-water-crisis"
+          "the-water-crisis",
+          "cevaine"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -723,21 +760,21 @@
     }
   },
   "tendencies": {
-    "stealth": 10.09228507113369,
-    "strategic": 2.7218605085707055,
-    "cautious": 3.401103905732723,
-    "cerebral": 2.629243397162018,
-    "patient": 0.8590683010253904,
-    "devotion": 1.7401639943847658,
-    "risky": 0.8810956933593749,
-    "generous": 1.9036878906249999,
-    "social": 1.901859375
+    "stealth": 9.839977944355347,
+    "strategic": 2.6538139958564377,
+    "cautious": 4.316076308089405,
+    "cerebral": 3.5635123122329677,
+    "patient": 0.8375915934997556,
+    "devotion": 1.6966598945251465,
+    "risky": 0.8590683010253904,
+    "generous": 1.8560956933593749,
+    "social": 1.854312890625
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 10,
+  "actionCount": 11,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -983,8 +1020,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785975872210,
-  "rev": 51,
+  "updatedAt": 1785975952650,
+  "rev": 52,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1130,7 +1167,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 16
+    "the_numinous_reach": 17
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1138,10 +1175,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-06T00:24:32.204Z",
+      "lastAt": "2026-08-06T00:25:52.633Z",
       "startDay": 36,
       "endDay": 37,
-      "beats": 16
+      "beats": 17
     }
   ],
   "establishedFacts": [
@@ -1172,41 +1209,41 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 8,
+      "applied": 9,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 16,
-    "scene": 16,
-    "choices": 16,
-    "offer": 8,
-    "codexUpdates": 9,
+    "sceneSummary": 17,
+    "scene": 17,
+    "choices": 17,
+    "offer": 9,
+    "codexUpdates": 10,
     "imagePrompt": 7,
-    "gambitApt": 13,
-    "sceneEnded": 16,
-    "characterDeltas": 8,
+    "gambitApt": 14,
+    "sceneEnded": 17,
+    "characterDeltas": 9,
     "arcOps": 1,
     "factUpdates": 3,
     "placeUpdates": 3,
-    "timeOps": 5,
+    "timeOps": 6,
     "deeds": 2,
     "ledgerEvents": 1,
     "questUpdates": 2,
-    "npcUpdates": 8,
+    "npcUpdates": 9,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
     "markDefiningMoment": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 16,
+  "_opTurns": 17,
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "beastfriend": 1,
+      "beastfriend": 2,
       "numen_sense": 2,
       "storykeeper": 1,
       "the_unbroken_practice": 1,
@@ -1217,16 +1254,16 @@
       {
         "abilityId": "greenlore",
         "since": "2026-08-05T23:25:06.049Z",
-        "progress": 2
+        "progress": 3
       },
       {
         "abilityId": "wayfinding",
         "since": "2026-08-05T23:25:30.590Z",
-        "progress": 2
+        "progress": 3
       }
     ],
     "lastUsed": {
-      "beastfriend": 36,
+      "beastfriend": 37,
       "numen_sense": 36,
       "storykeeper": 36,
       "the_unbroken_practice": 36,

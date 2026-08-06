@@ -1,0 +1,72 @@
+{
+ "schemaVersion": 1,
+ "id": "the_measured_engine",
+ "name": "The Measured Engine",
+ "regionId": "the_foothills",
+ "communityId": "the_measured_engine",
+ "spectrum": {
+  "mechanical_spiritual": -0.3,
+  "space_time": 0.3
+ },
+ "tags": [
+  "outpost",
+  "settlement"
+ ],
+ "connections": [
+  "the_great_engine",
+  "the_long_span"
+ ],
+ "descriptionSeed": "The Measured Engine — an outpost where mechanism meets distance: waygate-wrights, pump-fitters and the people who maintain the long roads. Everything here either moves things or moves you.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
+ "dangerLevel": 1,
+ "image": "content/packs/valley/assets/the_measured_engine.jpg",
+ "questSeeds": [],
+ "map": {
+  "x": 440,
+  "y": 282
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "mechanical": 0.3,
+  "space": 0.3
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.2,
+  "radius": 90,
+  "reason": "The Archive was sealed before the Transition and never opened to it. What is inside is still what was inside.",
+  "radiusWorld": 0.054,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  0,
+  0,
+  0.3,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ An outpost balances EXACTLY TWO domains, so exactly two components are non-zero and both are modest — the signature that distinguishes an outpost from a foothill.",
+ "worldPos": {
+  "colatitude": 80,
+  "longitude": 143,
+  "depth": -2
+ },
+ "worldPosNote": "⚠️ THE MIDPOINT BETWEEN the_great_engine AND the_long_span. An outpost sits where two domains meet in balance, so its position is the average of the two it balances — not a step out from the centre, which is what a foothill is.",
+ "outpostOf": [
+  "enginewright",
+  "horizon"
+ ],
+ "betweenPoles": [
+  "the_great_engine",
+  "the_long_span"
+ ]
+}

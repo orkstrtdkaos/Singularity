@@ -394,7 +394,7 @@
   {
    "schemaVersion": 1,
    "id": "the_lucky_fall",
-   "name": "The Lucky Fall",
+   "name": "Fae Wings",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "wild_current",
@@ -408,27 +408,29 @@
     "transform"
    ],
    "narrationHints": "A travel, chase and explore action. You throw yourself and improbability carries you — a g",
-   "description": "⚠️ CHURNFOLK FLIGHT, AND IT IS NOT CONTROLLED. You throw yourself and the world declines to finish the job — a gust, a cart, a passing bird, a rope you did not know was there. You get where you were going. Nobody, including you, can say how.",
-   "notFor": "⚠️ A DESTINATION. You steer by INTENT and the world supplies the method, so you arrive near where you meant, at a time you did not choose.",
+   "description": "⚠️ CHURNFOLK FLIGHT, AND IT IS THE SIMPLEST IN THE SET: wings. They have always half-had them. The churn is fae-natured, and what other traditions build or bargain for, a churnfolk simply lets happen — which is why theirs is the least reliable and the least effortful.",
+   "notFor": "⚠️ RELIABILITY. They come when the churn is willing. A churnfolk who NEEDS them is measurably less likely to get them.",
    "tree": [
     {
      "rank": 1,
-     "name": "The Lucky Fall",
-     "grants": "Cross ground by improbable means at improbable speed. You arrive near where you meant.",
-     "cannot": "Choosing the route, the method, or the exact arrival point.",
+     "name": "Fae Wings",
+     "grants": "Wings, at will, for short flights — over a wall, across a river, out of a fall.",
+     "cannot": "Depending on them. Under real need the odds worsen rather than improve.",
      "functions": [
-      "travel"
+      "travel",
+      "transform"
      ],
      "gains": "broaden",
      "harmRung": "none"
     },
     {
      "rank": 2,
-     "name": "The Long Luck",
-     "grants": "Do it across a whole route. The improbabilities compound and so does what they cost bystanders.",
-     "cannot": "Doing it twice in one place — the second time the luck comes from nearer to home.",
+     "name": "The Long Glide",
+     "grants": "Fly a whole leg. Fast, tireless, and it goes where the churn feels like going as much as where you do.",
+     "cannot": "Holding a straight line against the churn's own drift.",
      "functions": [
-      "travel"
+      "travel",
+      "transform"
      ],
      "gains": "deepen",
      "harmRung": "none"
@@ -448,9 +450,9 @@
    ],
    "mechanic": {
     "magnitude": 6,
-    "duration": 4,
+    "duration": 8,
     "range": "route-scale",
-    "note": "⚠️ FASTEST AND LEAST RELIABLE. Halves a leg's days on a success and on a failure deposits you somewhere adjacent and interesting, which is a different thing from a failure."
+    "note": "⚠️ FAST AND UNRELIABLE. Halves a leg's days when it works; the failure is that they do not come, not that they fail midair — a churnfolk is never dropped, only grounded."
    },
    "rankDeltas": [],
    "intensity": {
@@ -459,19 +461,19 @@
    },
    "bounds": [
     {
-     "text": "YOU DO NOT CHOOSE THE METHOD OR THE MOMENT — only roughly the destination",
+     "text": "⚠️ THEY COME WHEN THE CHURN IS WILLING — and NEEDING them lowers the odds rather than raising them",
      "class": "hard"
     },
     {
-     "text": "A FAILURE DOES NOT DROP YOU, IT MISPLACES YOU — somewhere adjacent, and usually interesting",
-     "class": "cost"
+     "text": "A FAILURE GROUNDS YOU, IT NEVER DROPS YOU — the churn does not kill its own this way",
+     "class": "hard"
     },
     {
-     "text": "done twice in one place, THE LUCK IS TAKEN FROM SOMEONE NEARBY",
+     "text": "at rank 2 you drift; holding a true line costs extra every leg",
      "class": "cost"
     }
    ],
-   "plainly": "A travel, chase and explore action. You throw yourself and improbability carries you — a gust, a cart, a rope nobody knew was there — arriving near where you meant at a time you did not pick. You steer by intent only; the world supplies the method. On a success it roughly halves the leg's days. On a failure it does not drop you, it misplaces you somewhere adjacent and usually interesting. Used twice in the same place, the luck starts coming from people nearby."
+   "plainly": "A travel, chase and explore action. You have wings when the churn is willing — at rank 1 short flights over a wall, across a river, out of a fall; at rank 2 a whole leg, which roughly halves its days. The catch is reliability rather than danger: needing them badly makes them less likely to come, and a failure simply grounds you rather than dropping you midair. At rank 2 you also drift toward where the churn is going, and holding a true line costs extra on every leg."
   }
  ]
 }

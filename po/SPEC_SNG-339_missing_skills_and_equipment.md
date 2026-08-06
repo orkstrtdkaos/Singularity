@@ -60,3 +60,71 @@ the most expensive instance yet — it has been silently taxing every roll every
 The GM tagged *"scout the Thinning for resources and supplies"* as **difficulty 15 (hard)** against its own
 scale of *0 routine / 15 hard / 30 very hard*. **Scouting for supplies is routine.** That is a calibration
 drift worth a look — **but fixing only the tagging still leaves routine at 40%, so it is the smaller half.**
+
+---
+
+## ✅ ENGINE DONE — CCode, 2026-08-06, v1.9.47. Your tables are unblocked; here is the shape.
+
+### ⚠️ IT IS WORSE THAN YOU FOUND, AND YOUR DIAGNOSIS WAS STILL RIGHT
+
+`character.skills` has no writer — confirmed. **`action.skillId` has no writer either, and no vocabulary was
+ever defined for it.** The skill term was not dormant, it was **structurally unreachable**: no character
+could have held it even if something had written the map. Silas Weir reached level 29 against a curve that
+assumed up to 10 points a rank he could never have.
+
+### ⛔ ONE CORRECTION, AND IT MOVES WHERE THE EQUIPMENT WORK GOES
+
+**`equipmentBonus` reads `character.inventory`, not `character.equipped`.** There is no equip step — carrying
+the tool is enough — and the `equipped` field you cite has no reader either, so there is nothing to write to.
+**And it does fire:** measured on Silas, the tags `careful` + `retreat` give **+5 via Traveler's Pack**.
+
+The real equipment gap is different and sharper:
+
+| | held across every save | with `bonusTags` |
+|---|---|---|
+| authored items | 33 | 21 (64%) |
+| **items minted in play** | **50** | **1 (2%)** |
+
+**Items born in the fiction are mechanically inert.** The mint accepts `op.bonusTags`; the GM almost never
+sends them. Your born-whole schema covers authored items and the in-play mint bypasses it. Separate ticket,
+not opened — say whether you want it before or after the tables.
+
+### THE SHAPE YOU ASKED FOR
+
+```jsonc
+rules.startingSkills = {
+  grantCap: 2,          // background + tradition both teaching stealth makes you good, not unbeatable
+  usesPerRank: 25,      // §3: how much doing it earns a rank
+  maxRank: 2,           // …and where practice stops
+  byBackground: { orphan: { stealth: 1, quiet: 1 } },
+  byTradition:  { umbral: { stealth: 1 } }
+}
+```
+
+**Keys are ACTION TAGS — the same 53 already authored across `item.bonusTags`.** Deliberately not a ninth
+vocabulary: a background's training and a trade's tools now answer the same question in the same words, so
+you can see at a glance that an orphan who moves unseen and a cloak that helps you move unseen agree.
+
+⛔ **An unlisted background grants nothing** and logs a warning naming it. I will not paper over a missing
+table with a guess — that would hide the exact gap this ticket exists to surface.
+
+### §3 AND §4
+
+**§3 — training grows by doing**, wired at `updateProfile`: the one place every action's intent tags were
+already recorded, so nothing new is tracked. ⚠️ **It counts USES, not successes.** Rewarding only success
+makes the character who is already good at a thing better at it while the one who is struggling never
+improves — precisely backwards for the problem you opened this on. Failing at something hard is practice.
+
+**§4 — both terms are always shown now, including at zero.** `add()` drops a 0-valued component, so a
+character with no training and no gear saw *no lines at all* for either. A missing line reads as “this does
+not apply to me”; an explicit zero reads as “you could have something here and you have nothing.” That
+difference is the whole diagnosis you had to do by hand.
+
+### On the two things you called yours
+
+The `orphan` aptitude pairing is yours and I have not touched it. Worth knowing the interaction, though:
+**once the tables land, `orphan` stops being purely a liability** — it will grant the stealth training that
+the −3 social was previously the only expression of. The re-audit is still right; it is less urgent than it
+reads today.
+
+The GM difficulty calibration I have left alone, as you scoped it.

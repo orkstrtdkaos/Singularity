@@ -1,0 +1,49 @@
+{
+ "schemaVersion": 1,
+ "id": "greenmarch",
+ "name": "Greenmarch",
+ "regionId": "the_foothills",
+ "communityId": "greenmarch",
+ "spectrum": "death_life",
+ "tags": [
+  "settlement",
+  "foothill",
+  "market"
+ ],
+ "connections": [
+  "the_crossing",
+  "the_heartroot"
+ ],
+ "descriptionSeed": "Greenmarch — the wood's-edge market: growers, foragers, and people who will not be told which side of the Accord they are on. The Quickwood argues about sealing; Greenmarch trades through the argument, and has for six generations.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
+ "dangerLevel": 1,
+ "image": null,
+ "questSeeds": [],
+ "map": {
+  "x": 480,
+  "y": 245
+ },
+ "encounterSeeds": [],
+ "poleIntensity": 0.5,
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.2,
+  "radius": 90,
+  "reason": "The Archive was sealed before the Transition and never opened to it. What is inside is still what was inside.",
+  "radiusWorld": 0.054,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [],
+ "axisVectorNote": "",
+ "worldPos": {},
+ "worldPosNote": "",
+ "foothillOf": [
+  "rootkin",
+  "valley_craft",
+  "churnfolk"
+ ],
+ "betweenCrossingAnd": "the_heartroot",
+ "startingLocation": true
+}

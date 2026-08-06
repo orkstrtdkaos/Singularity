@@ -38,7 +38,7 @@
     },
     "deathsense+order_sense": {
       "braidKey": "deathsense+order_sense",
-      "name": "Undying Ledger",
+      "name": "The Double Register",
       "description": "Where Deathsense reads the cold signatures of endings and Order-Sense traces the rigid lattice of what-must-be, The Undying Ledger fuses both into a single sovereign perception: the practitioner sees not merely that death approaches, nor merely that patterns hold their shape — but reads the precise architecture of fate itself, the numbered threads that bind each living thing to its appointed…",
       "notFor": "The Undying Ledger cannot create new fates, resurrect the dead, alter an entry already fulfilled, or perceive anything outside the axis of endings and structured order — it is blind to chaos, to love, to chance that has not yet…",
       "emergentFunction": "bind",
@@ -69,7 +69,10 @@
         "characterId": "char-mrhs8286",
         "characterName": "Silas Weir"
       },
-      "foundWorldDay": 22
+      "foundWorldDay": 22,
+      "alsoKnownAs": "Undying Ledger",
+      "mechanicalRecipe": "the_double_register",
+      "_collision": "⚠️ THE MECHANICAL NAME WINS. 'Undying Ledger' sounds like necromantic bookkeeping and the craft is structural survey — you read where a thing bears load and where it is already dying. 'The Double Register' says exactly that, twice over: two readings at once, and a register is a record AND a range. 'Undying Ledger' is kept as a folk name."
     },
     "prism_sight+sonic_resonance": {
       "braidKey": "prism_sight+sonic_resonance",
@@ -104,7 +107,10 @@
         "characterId": "char-mr4ejo8c",
         "characterName": "Cellaceron"
       },
-      "foundWorldDay": 23
+      "foundWorldDay": 23,
+      "alsoKnownAs": "The Sounding",
+      "mechanicalRecipe": "the_sounding",
+      "_collision": "⚠️ THE EVOCATIVE NAME WINS, AND IT IS THE EXCEPTION. 'The Sounding' is accurate and generic — every tradition sounds something. 'Shatterlight' is the only name in either table that tells you BOTH parts are present: the splitting and the ringing. Accuracy is the test, and here the evocative name is more accurate. 'The Sounding' is kept as the working term practitioners use."
     },
     "the-attended-end+the_shadow_work": {
       "braidKey": "the-attended-end+the_shadow_work",
@@ -168,7 +174,7 @@
     },
     "deathsense+palework": {
       "braidKey": "deathsense+palework",
-      "name": "The Hollowing Sight",
+      "name": "The Counted End",
       "description": "Five times the ashwarden stood at the threshold where death whispers and pale force strikes, and the two crafts listened to each other until they became one. Deathsense no longer merely foresees endings — it feeds them to Palework like coordinates. Palework no longer merely hinders and strikes — it operates on what the Sight has already identified as structurally doomed. Together they do…",
       "notFor": "The Hollowing Sight cannot manufacture death where none was approaching — it finds no purchase on the hale and unbroken. It cannot heal, restore, or protect. It cannot be used without first perceiving the target's deathward tendency…",
       "emergentFunction": "open",
@@ -199,7 +205,10 @@
         "characterId": "char-mrhs8286",
         "characterName": "Silas Weir"
       },
-      "foundWorldDay": 26
+      "foundWorldDay": 26,
+      "alsoKnownAs": "The Hollowing Sight",
+      "mechanicalRecipe": "the_counted_end",
+      "_collision": "⚠️ THE MECHANICAL NAME WINS, AND THE OTHER IS ACTIVELY MISLEADING. The craft brings an ending to its exact hour — 'no sooner, no crueller, no waste'. 'The Hollowing Sight' implies SEEING and implies hollowing out; the craft does neither. A name that misdescribes a killing craft is worse than a dull one. 'The Hollowing Sight' is retired to the braid's own lore text, where its five-times origin story still belongs."
     },
     "deathsense+the-attended-end": {
       "braidKey": "deathsense+the-attended-end",
@@ -237,5 +246,6 @@
       "foundWorldDay": 26
     }
   },
-  "canonPairing": "⛔ SNG-344: THE PAIR IS CANON — this file and content/packs/core/rules/combination_recipes.json are NOT competitors and neither supersedes the other. Zero ids in common, and they key differently (braidKey 'a+b' here vs parts:[a,b] there). This file is the NAMING authority; content/packs/core/rules/combination_recipes.json is the MECHANICAL authority. One NAMES a braid, the other RESOLVES it. Do not merge, do not delete, do not 'reconcile' by dropping either — the join is an authored crosswalk (Aevi, SNG-344), not an engine merge. ⚠️ THREE OF THE SEVEN NAMED BRAIDS ALREADY HAVE A MECHANICAL RECIPE HERE UNDER A DIFFERENT NAME: Undying Ledger = the_double_register, Shatterlight = the_sounding, The Hollowing Sight = the_counted_end. Those are naming COLLISIONS to resolve, not blanks to fill — one pairing must not surface two names to the player."
+  "canonPairing": "⛔ SNG-344: THE PAIR IS CANON — this file and content/packs/core/rules/combination_recipes.json are NOT competitors and neither supersedes the other. Zero ids in common, and they key differently (braidKey 'a+b' here vs parts:[a,b] there). This file is the NAMING authority; content/packs/core/rules/combination_recipes.json is the MECHANICAL authority. One NAMES a braid, the other RESOLVES it. Do not merge, do not delete, do not 'reconcile' by dropping either — the join is an authored crosswalk (Aevi, SNG-344), not an engine merge. ⚠️ THREE OF THE SEVEN NAMED BRAIDS ALREADY HAVE A MECHANICAL RECIPE HERE UNDER A DIFFERENT NAME: Undying Ledger = the_double_register, Shatterlight = the_sounding, The Hollowing Sight = the_counted_end. Those are naming COLLISIONS to resolve, not blanks to fill — one pairing must not surface two names to the player.",
+  "_pairing": "⚠️ SNG-344. THE PAIR IS CANON, NOT EITHER FILE. This table NAMES a braid; `rules/combination_recipes.json` says what it DOES. Neither supersedes the other. Every entry here that has a mechanical recipe carries `mechanicalRecipe`; the display name is resolved and `alsoKnownAs` keeps the losing name as folk usage, so nothing authored is thrown away and ONE PAIRING SURFACES ONE NAME."
 }

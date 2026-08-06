@@ -2222,16 +2222,17 @@
     "transform"
    ],
    "narrationHints": "A travel action that costs no energy and no days, because it costs kept hours instead — a ",
-   "description": "⚠️ HOURKEEPER FLIGHT, AND THEY DO NOT LEAVE THE GROUND AT ALL. You spend hours you have kept, and arrive as though you had walked the whole way — because in every sense the world can check, you did. The road happened. You simply were not in it for the length of it.",
-   "notFor": "⚠️ AN HOUR YOU HAVE NOT KEPT. This spends a real stored resource, and an Hourkeeper with an empty account walks like anyone.",
+   "description": "⚠️ HOURKEEPER FLIGHT, AND THEY NEVER LEAVE THE GROUND. You spend hours you banked earlier and arrive as though you had walked it — because you did, in every sense the world can check. The road happened without you in it.",
+   "notFor": "⚠️ AN HOUR YOU HAVE NOT KEPT. It spends a real stored resource, and an Hourkeeper with an empty account walks like anyone.",
    "tree": [
     {
      "rank": 1,
      "name": "The Borrowed Hour",
-     "grants": "Spend kept hours to cross a leg in a fraction of its days. The journey happened; you were not present for it.",
+     "grants": "Spend kept hours to cross a leg in a fraction of its days. Nothing on the road meets you.",
      "cannot": "Arriving before you set out, or spending hours you do not have.",
      "functions": [
-      "travel"
+      "travel",
+      "transform"
      ],
      "gains": "broaden",
      "harmRung": "none"
@@ -2239,10 +2240,11 @@
     {
      "rank": 2,
      "name": "The Long Borrowing",
-     "grants": "Spend across a whole route. ⚠️ You arrive having AGED the difference — the hours came from somewhere.",
-     "cannot": "Getting them back. Spent time is spent.",
+     "grants": "⚠️ Spend across a whole route — and the WORLD MOVES THE FULL SPAN while you do not. Arcs advance, people act, and anything with a deadline resolves without you.",
+     "cannot": "Getting them back, or learning what changed before you arrive.",
      "functions": [
-      "travel"
+      "travel",
+      "transform"
      ],
      "gains": "deepen",
      "harmRung": "none"
@@ -2262,7 +2264,7 @@
     "magnitude": 8,
     "duration": 0,
     "range": "route-scale",
-    "note": "⚠️ THE ONLY TRAVEL THAT COSTS NO ENERGY AND NO DAYS — it costs KEPT HOURS, a resource that must have been banked. And at rank 2 the traveller ages the difference."
+    "note": "⚠️ THE COST IS WORLD-TIME, NOT PLAYER AGE. The world tick runs the FULL walked duration while the traveller skips it — arcs advance, strikes land, charges complete, quests expire. You save your days and the world spends its own."
    },
    "rankDeltas": [],
    "intensity": {
@@ -2275,15 +2277,15 @@
      "class": "hard"
     },
     {
-     "text": "⚠️ AT RANK 2 YOU AGE THE DIFFERENCE. The hours came from somewhere and it was you",
+     "text": "⚠️ THE WORLD RUNS THE WHOLE JOURNEY WITHOUT YOU. Arcs move, people are struck, deadlines pass — you arrive on time and into a later world",
      "class": "cost"
     },
     {
-     "text": "the road still happened — anything waiting on it simply did not meet you",
-     "class": "soft"
+     "text": "nothing on the road meets you, WHICH INCLUDES ANYTHING THAT NEEDED YOU",
+     "class": "cost"
     }
    ],
-   "plainly": "A travel action that costs no energy and no days, because it costs kept hours instead — a resource you must have banked beforehand, and with an empty account you walk like anyone. You spend them and arrive as though you had walked the whole way; the journey genuinely happened, you were just not present for its length, so nothing on the road meets you. At rank 2 you can spend across a whole route, and you arrive having aged the difference, which does not come back."
+   "plainly": "A travel action costing no energy and no days, because it spends kept hours instead — a resource you must have banked beforehand, and with an empty account you walk like anyone. You arrive as though you had walked the whole way, so nothing on the road meets you. The cost is that the world does not wait: the world clock advances the full walking duration while you skip it, so arcs move stages, strikes land, charges finish and anything on a deadline resolves without you. You save your days and the world spends its own."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

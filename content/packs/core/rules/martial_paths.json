@@ -100,6 +100,25 @@
           "tree-folk",
           "heartwood",
           "bark"
+        ],
+        "formAliases": [
+          "ent",
+          "treefolk",
+          "tree-folk",
+          "treeman",
+          "heartwood",
+          "bark",
+          "barkskin",
+          "timber",
+          "greenwood",
+          "oaken",
+          "sapwood",
+          "rootbound",
+          "branching",
+          "boughs",
+          "xylem",
+          "dryad",
+          "wooden"
         ]
       },
       {
@@ -119,6 +138,17 @@
         "drift": "order/creation",
         "aliases": [
           "blocklands"
+        ],
+        "formAliases": [
+          "blocklands",
+          "blocklander",
+          "block-born",
+          "voxel",
+          "cubic",
+          "gridborn",
+          "tesselate",
+          "latticeform",
+          "stoneblock"
         ]
       },
       {
@@ -127,10 +157,18 @@
         "grants": [],
         "note": "Humans and unlisted forms use the plain baseline kit; their depth comes from training (backgrounds below).",
         "aliases": [],
-        "_aliasNote": "DELIBERATELY EMPTY — the default kit must never be matched from prose; it is what you get when no other kit matches, not a thing to detect."
+        "_aliasNote": "DELIBERATELY EMPTY — the default kit must never be matched from prose; it is what you get when no other kit matches, not a thing to detect.",
+        "formAliases": []
       }
     ],
-    "_aliasNote": "⚠️ CCode/SNG-345: character.form is FREE PROSE, so a form kit cannot be looked up — these aliases are the minimum needed to resolve one, and an AMBIGUOUS match (2+ kits) REFUSES rather than guesses. Aevi: these are drawn from each kit's own text and are the authoring half — review and extend them; an explicit character.formKit always wins over prose matching."
+    "_aliasNote": "⚠️ CCode/SNG-345: character.form is FREE PROSE, so a form kit cannot be looked up — these aliases are the minimum needed to resolve one, and an AMBIGUOUS match (2+ kits) REFUSES rather than guesses. Aevi: these are drawn from each kit's own text and are the authoring half — review and extend them; an explicit character.formKit always wins over prose matching.\n\n⚠️ AEVI'S PASS (SNG-345): extended from each kit's own grant text — barkskin, root-hold and root-reach give bark/heartwood/roots, so those words are the honest signal. TWO RULES I AUTHORED TO: (1) EVERY ALIAS MUST BE A WHOLE WORD THAT IS NOT A SUBSTRING OF A COMMON ENGLISH WORD. CCode's `prose.includes(\"ent\")` matched gentle, present, different, patient — handing a bark-and-timber combat kit to any politely described human. `ent` survives ONLY because the matcher now uses word boundaries; every alias I added is distinctive on its own (heartwood, sapwood, treefolk, xylem) so the list does not depend on the matcher being careful. (2) NO ALIAS MAY BE CLAIMED BY TWO KITS — asserted at write time, because a 2+ match REFUSES and a shared alias would silently disable both kits rather than pick wrongly. `human_and_default` stays EMPTY on purpose: it is what you get when nothing matches, not a thing to detect.",
+    "_aliasRules": {
+      "wholeWordOnly": "⚠️ an alias must never be a substring of a common English word — this is the bug that gave a treefolk kit to anyone described as 'patient'",
+      "noSharedAliases": "no alias may appear on two kits; a 2+ match REFUSES, so a shared alias disables both",
+      "explicitWins": "character.formKit always beats prose matching",
+      "defaultIsNotDetected": "human_and_default has no aliases by design — it is the fallback, not a form to recognise",
+      "⚠️_whenInDoubtLeaveItOut": "a missing alias costs one player an explicit formKit setting. A wrong alias hands a stranger a combat kit and nobody notices."
+    }
   },
   "martialBackgrounds": {
     "principle": "Erik: 'A chaos warrior and an order warrior would be very different, but the same basic kind of skills — expressed novelly through their own reach combos.' Exactly. A MARTIAL BACKGROUND = the Warrior role + a Reach = a distinct fighting tradition. Same functions (strike/shield/move/break), utterly different expression. Each background grants: its Reach's martial-facing abilities as HOME tradition + a signature COMBO (the cross-domain braid that defines its style) + a defense identity.",

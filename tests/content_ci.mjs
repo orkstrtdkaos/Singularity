@@ -429,6 +429,24 @@ for (const pack of PACKS) {
     `${thin.join(", ")} declared with no substantive reason`);
   // The gaps stay LOUD. runtime_unwired is content with no consumer — a real debt, reported every run so
   // it cannot settle into the background the way these ten did.
+  // ⛔ SNG-344 — `kind` IS A CLOSED VOCABULARY, because it was never merely descriptive. The orphan loop
+  // above branches on it, so authoring an ACCURATE new word (`emergence`, `social_mechanic_spec`) silently
+  // exempted that file from the check. Aevi: "a field I treated as a label was load-bearing for a gate, and
+  // my accuracy in naming a thing is exactly what removed it from the check — in a content-driven engine
+  // there is no such thing as a purely descriptive field." An unknown value now FAILS rather than exempts.
+  {
+    const VOCAB = new Set(Object.keys(CLASS.kind_vocabulary || {}).filter(k => k !== "_note"));
+    const unknown = [];
+    for (const r of rules) {
+      let doc; try { doc = rj(`content/packs/core/${r}`); } catch { continue; }
+      if (doc.kind && !VOCAB.has(doc.kind)) unknown.push(`${r.split("/").pop()} declares kind="${doc.kind}"`);
+    }
+    for (const u of unknown) console.log(`      unknown kind (a new word changes gate behaviour): ${u}`);
+    check("`kind` is a CLOSED vocabulary — a new value fails rather than silently exempting (SNG-344)",
+      VOCAB.size > 0 && unknown.length === 0,
+      `${unknown.join(" · ")} — add it to kind_vocabulary in rules_classification.json with a one-line meaning`);
+  }
+
   const gaps = Object.keys(CLASS.runtime_unwired || {}).filter(k => k !== "_note");
   if (gaps.length) console.log(`note  SNG-342: ${gaps.length} runtime file(s) authored but unconsumed (declared, not resolved): ${gaps.join(", ")}`);
   if (orphanOperational.length) console.log(`note  SNG-183 L4: operational-kind orphans: ${orphanOperational.join(", ")}`);

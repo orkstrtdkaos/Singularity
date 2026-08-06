@@ -1,0 +1,72 @@
+{
+ "schemaVersion": 1,
+ "id": "the_grindstone",
+ "name": "The Grindstone",
+ "regionId": "the_foothills",
+ "communityId": "the_grindstone",
+ "spectrum": {
+  "violence_peace": -0.3,
+  "body_mind": 0.3
+ },
+ "tags": [
+  "outpost",
+  "settlement"
+ ],
+ "connections": [
+  "the_redline",
+  "the_flesh_temple"
+ ],
+ "descriptionSeed": "The Grindstone — an outpost where soldiers come to be trained properly and body-workers come to see what real use does to a person. One long yard, one bathhouse, and a queue for both.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
+ "dangerLevel": 1,
+ "image": "content/packs/valley/assets/the_grindstone.jpg",
+ "questSeeds": [],
+ "map": {
+  "x": 540,
+  "y": 470
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "violence": 0.3,
+  "body": 0.3
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.2,
+  "radius": 90,
+  "reason": "The Archive was sealed before the Transition and never opened to it. What is inside is still what was inside.",
+  "radiusWorld": 0.054,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.3,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ Exactly two non-zero components — the signature of a two-domain balance, and what distinguishes an outpost from a foothill.",
+ "worldPos": {
+  "colatitude": 87,
+  "longitude": 101,
+  "depth": 0
+ },
+ "worldPosNote": "⚠️ THE MIDPOINT BETWEEN the_redline AND the_flesh_temple — an outpost sits where two domains meet, so its position is the average of the two it balances rather than a step out from the centre.",
+ "outpostOf": [
+  "marcher",
+  "somatic"
+ ],
+ "betweenPoles": [
+  "the_redline",
+  "the_flesh_temple"
+ ]
+}

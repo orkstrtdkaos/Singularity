@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 59,
+  "xp": 61,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -49,7 +49,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 100,
-  "energy": 57,
+  "energy": 45,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -111,6 +111,21 @@
       "spread": [],
       "day": 2,
       "worldDay": 37
+    },
+    {
+      "at": "2026-08-06T15:12:45.272Z",
+      "locationId": "the_thinning",
+      "communityId": "numinous",
+      "description": "Spoke a story of chosen refusal to a sealed boundary—and was recognized by it in return.",
+      "tags": [
+        "witness",
+        "truth-telling",
+        "reaching"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 3,
+      "worldDay": 37
     }
   ],
   "relationships": {},
@@ -118,9 +133,9 @@
     "At The Thinning's waygate clearing, evening deepens. Splarf consulted Boo about the dark gathering at the forest's edge while Cevaine stood sentinel, the sealed veil humming between them and mystery. Something moves in the woods—something that does not announce itself.",
     "At The Thinning's sealed waygate, deep in the second night, Splarf builds a fire and settles into vigil beside Cevaine—the wounded sentinel refusing all aid, the veil remaining sealed and angry, and the purposeful dark continuing its patient watch from the forest's edge."
   ],
-  "currentLocationId": "the_thinning",
+  "currentLocationId": "gen-object-object",
   "activeScene": {
-    "locationId": "the_thinning",
+    "locationId": "gen-object-object",
     "turns": [
       {
         "player": "Sleep deeply—let the exhaustion take you fully under for what remains of the night",
@@ -146,21 +161,26 @@
         "player": "Use Numen-Sense on the veil itself—feel what the sealed boundary is actually *doing*, whether it is weakening or holding steady, and whether the presence on the other side is still pushing.",
         "summary": "Deep in the night of day three, Splarf reads the sealed veil through Numen-Sense and discovers: the boundary is holding firm, but at growing cost; the sender on the other side continues to push, testing, learning; the veil's hold is chosen but tiring, not a permanent state.",
         "narration": "You step to the veil's edge in the deep night, the sealed boundary humming its patient note. Boo has gone to ground somewhere in the dark—present but withheld. The fire has burned to coals, and Cevaine stands motionless at the sentinel's post, a shape of absolute discipline against the darkness.\n\nYou place your palm against the veil and open yourself to what it carries.\n\nThe sensation arrives almost immediately—not words, not images, but a KIND of knowing that lands in your chest like cold water. The boundary is *holding*. That much is clear and absolute. But it is not idle holding. There is pressure against it from the other side—patient, relentless, shaped like purpose rather than rage. The thing on the far boundary has not stopped pushing. It has simply accepted that the veil will not yield, and it is now trying something else. Testing. Learning.\n\nBut there is something else beneath that pressure—a secondary current in the veil's own intention. The sealed boundary is not merely refusing. It is *choosing* to hold, moment by moment, as if the choice itself requires constant effort. And that effort is beginning to fray at the edges. Not failure—not yet. But the veil reads to you as tired. Not angry anymore, not resigned. Tired, in the way a thing grows tired when it has been working very hard to keep something out, and the work never stops.\n\nYour hand tingles against the boundary. The humming changes pitch as you touch it—shifts from resigned to something almost like acknowledgment. For just a moment, the veil *knows* you are listening. Then the sensation withdraws, the humming settles back to its patient note, and you understand: whatever stands on the other side still wants in. And the veil is buying time by holding steady—but the cost of that holding is visible now, written in the fatigue beneath the refusal."
+      },
+      {
+        "player": "Try something the veil might not be expecting—use Storykeeper to recall an old story of a boundary that had to choose, and speak it aloud to the veil as witness and question.",
+        "summary": "At dawn on day three, Splarf attempts to speak the veil's choice back to it through story—but the sealed boundary recognizes him instead, and the recognition reaches toward Hoss, toward the ledger, toward delivery of something the figure was sent to bring.",
+        "narration": "You stand at the veil's edge as the first grey light touches the eastern sky, Cevaine's breathing barely audible behind you—a sound like wind through a held form. The boundary hums its tired note, and you decide to speak to it in the only language you have: story.\n\nYou draw up a tale from your memory—old and precise, the kind a storykeeper carries word-perfect. A boundary that learned to choose. A gate that refused a king. You shape the words with care, speaking them aloud to the sealed veil, offering the story as a mirror: *You are not alone in this choice. You are not the first thing to refuse.*\n\nThe veil's hum sharpens. Not anger—something worse. Recognition.\n\nThe sealed boundary does not simply reject your story. It *answers* it. The humming tone splits into two frequencies at once—a harmony that was never meant to sound together—and the sound reaches *backward* through you, finding every story you have ever told, every word you have ever shaped with precision, and it pulls at them like a thread in cloth. The veil is not listening to your tale of boundaries choosing. It is *reading* you. Reading what you carry. Reading the registry of every mouth that has passed through Crestfall Notch, every name recorded in the relay station's acoustic logs, every family whose voice once resonated in that pass before the De-technologizing left them silent.\n\nIt finds Hoss. It *knows* Hoss—the mending woman who packed without a word, whose voice never carried the Heights resonance, who was always outside the chords that bound the pass together. And the veil wants to show you something about that. Wants to *deliver* something about that. The pressure on the boundary spikes, no longer testing but urgent, and Cevaine's form visibly shudders—the only break in discipline you have ever seen—because the veil is no longer refusing. It is *trying to open*."
       }
     ],
     "lastTurn": {
-      "narration": "You step to the veil's edge in the deep night, the sealed boundary humming its patient note. Boo has gone to ground somewhere in the dark—present but withheld. The fire has burned to coals, and Cevaine stands motionless at the sentinel's post, a shape of absolute discipline against the darkness.\n\nYou place your palm against the veil and open yourself to what it carries.\n\nThe sensation arrives almost immediately—not words, not images, but a KIND of knowing that lands in your chest like cold water. The boundary is *holding*. That much is clear and absolute. But it is not idle holding. There is pressure against it from the other side—patient, relentless, shaped like purpose rather than rage. The thing on the far boundary has not stopped pushing. It has simply accepted that the veil will not yield, and it is now trying something else. Testing. Learning.\n\nBut there is something else beneath that pressure—a secondary current in the veil's own intention. The sealed boundary is not merely refusing. It is *choosing* to hold, moment by moment, as if the choice itself requires constant effort. And that effort is beginning to fray at the edges. Not failure—not yet. But the veil reads to you as tired. Not angry anymore, not resigned. Tired, in the way a thing grows tired when it has been working very hard to keep something out, and the work never stops.\n\nYour hand tingles against the boundary. The humming changes pitch as you touch it—shifts from resigned to something almost like acknowledgment. For just a moment, the veil *knows* you are listening. Then the sensation withdraws, the humming settles back to its patient note, and you understand: whatever stands on the other side still wants in. And the veil is buying time by holding steady—but the cost of that holding is visible now, written in the fatigue beneath the refusal.",
-      "sceneSummary": "Deep in the night of day three, Splarf reads the sealed veil through Numen-Sense and discovers: the boundary is holding firm, but at growing cost; the sender on the other side continues to push, testing, learning; the veil's hold is chosen but tiring, not a permanent state.",
+      "narration": "You stand at the veil's edge as the first grey light touches the eastern sky, Cevaine's breathing barely audible behind you—a sound like wind through a held form. The boundary hums its tired note, and you decide to speak to it in the only language you have: story.\n\nYou draw up a tale from your memory—old and precise, the kind a storykeeper carries word-perfect. A boundary that learned to choose. A gate that refused a king. You shape the words with care, speaking them aloud to the sealed veil, offering the story as a mirror: *You are not alone in this choice. You are not the first thing to refuse.*\n\nThe veil's hum sharpens. Not anger—something worse. Recognition.\n\nThe sealed boundary does not simply reject your story. It *answers* it. The humming tone splits into two frequencies at once—a harmony that was never meant to sound together—and the sound reaches *backward* through you, finding every story you have ever told, every word you have ever shaped with precision, and it pulls at them like a thread in cloth. The veil is not listening to your tale of boundaries choosing. It is *reading* you. Reading what you carry. Reading the registry of every mouth that has passed through Crestfall Notch, every name recorded in the relay station's acoustic logs, every family whose voice once resonated in that pass before the De-technologizing left them silent.\n\nIt finds Hoss. It *knows* Hoss—the mending woman who packed without a word, whose voice never carried the Heights resonance, who was always outside the chords that bound the pass together. And the veil wants to show you something about that. Wants to *deliver* something about that. The pressure on the boundary spikes, no longer testing but urgent, and Cevaine's form visibly shudders—the only break in discipline you have ever seen—because the veil is no longer refusing. It is *trying to open*.",
+      "sceneSummary": "At dawn on day three, Splarf attempts to speak the veil's choice back to it through story—but the sealed boundary recognizes him instead, and the recognition reaches toward Hoss, toward the ledger, toward delivery of something the figure was sent to bring.",
       "choices": [
         {
-          "label": "Ask Cevaine directly what the Lattice reads from the veil's structure—is the sentinel sensing the same fatigue, the same pressure building?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Hold Cevaine steady—the form is breaking and the veil is about to yield. This is the moment to prevent the sentinel from shattering.",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {},
-          "difficulty": 15,
+          "difficulty": 20,
           "intentTags": [
-            "negotiate",
-            "study"
+            "defend",
+            "steady"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -169,47 +189,45 @@
           "emergenceId": null
         },
         {
-          "label": "Reinforce the fire and prepare to hold vigil for the rest of the night alongside Cevaine—add your presence to the work, whether the sentinel accepts it or not.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Step back from the veil and let it open—whatever delivery is coming has waited long enough, and you have your answer now: the veil knows you, and it knows Hoss. Let the boundary choose.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "endure",
-            "careful"
+            "careful",
+            "risky"
           ],
-          "abilityId": "the_unbroken_practice",
-          "energyCost": 1,
-          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Try something the veil might not be expecting—use Storykeeper to recall an old story of a boundary that had to choose, and speak it aloud to the veil as witness and question.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Use Numen-Sense again—push deeper into what the veil is trying to show you about Hoss, about the eviction, about why the figure was sent. Read past the boundary itself to the meaning underneath.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
-          "difficulty": 20,
+          "difficulty": 25,
           "intentTags": [
             "study",
             "risky"
           ],
-          "abilityId": "storykeeper",
-          "energyCost": 4,
+          "abilityId": "numen_sense",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Wake Cevaine fully and insist—not on aid, but on rotating the vigil. One person cannot hold this alone, and the veil's fatigue means time is shortening.",
+          "label": "Call Boo out of the dark—let your companion see what the veil is about to do, and use its presence as a counter-weight to what is breaking at the boundary.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": 18,
+          "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "negotiate"
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -218,7 +236,18 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Spoke a story of chosen refusal to a sealed boundary—and was recognized by it in return.",
+          "tags": [
+            "witness",
+            "truth-telling",
+            "reaching"
+          ],
+          "weight": 1,
+          "communityId": "numinous"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": -3,
@@ -226,117 +255,153 @@
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
+      "ledgerEvents": [
+        {
+          "what": "The sealed veil at The Thinning recognizes Splarf and reaches toward the ledger's stake—the eviction, the family loss, the sent delivery all converging",
+          "tags": [
+            "the_document_and_the_ditch",
+            "what_wakes_beneath",
+            "veil_agency"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-document-and-the-ditch",
+          "title": "The Document and the Ditch",
+          "summary": "The veil itself knows Hoss. The sent figure was delivering something about the eviction.",
+          "giver": "Splarf's own need",
+          "note": "The boundary's recognition reveals: the eviction was not merely administrative—it was *known* on the other side of the veil, and something was being sent to address it. The figure was a messenger, and its failure to cross compounds a specific, named loss.",
+          "xpReward": 0
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
+      "adoptSchool": {},
       "offer": {
-        "thing": "The veil itself is beginning to tire—the boundary's hold is no longer indefinite",
-        "from": "the nature of chosen refusal, the cost of constant work against constant pressure; the veil is a thinking thing under strain"
+        "thing": "The veil's desperate attempt to open—a boundary that has held by chosen effort and is now at the breaking point of its resolve",
+        "from": "Your story of chosen boundaries reached the veil and it answered by recognizing you, reaching toward what it was sent to deliver"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Thinning's waygate clearing in deep night, day three—fire burned to coals, the sealed veil humming its patient, tired note. Spring darkness is near-total; the weak moon casts long shadows through the forest edge. The clearing reads calm now, not hostile, but exhausted.",
+        "setting": "The Thinning's cleared waygate ground at grey dawn, the sealed veil shimmering with two-tone hum, Cevaine standing sentinel with the first visible break in their form, the forest edge still and watchful, the coals of last night's fire cooling in the center of the clearing.",
         "npcsPresent": [
           {
-            "name": "Cevaine",
-            "state": "Standing sentinel at the veil, unmoving, the discipline holding but the voice carrying visible strain. The left hand remains gripped to the thigh. Blood loss continues in the slow, inexorable way that suggests the form is only *delaying*, not solving."
+            "name": "Cevaine of the Seventh Measure",
+            "state": "Standing at the veil's edge, the discipline visibly compensating now, left hand gripped hard to the thigh—the form is breaking because the veil is no longer refusing but trying to open. Their voice carries effort and the echo of something being *held back* rather than held *steady*."
           }
         ],
         "objects": [
-          "Fire (burned to coals, still warm)",
+          "Fire (burned to coals, cooling)",
           "Lean-to shelter",
           "Traveler's Pack",
-          "The sealed veil (humming, resigned, now readable as tired)"
+          "The sealed veil (humming double-tone, pressure mounting from the other side, the boundary on the edge of choosing to yield)"
         ],
         "threads": [
-          "The veil is tiring under the strain of constant refusal—how much longer will it hold?",
-          "The sender on the other side continues to push, testing, learning—what will it try next?",
-          "Cevaine's discipline is compensating but not healing; blood loss continues",
-          "Whether Splarf's presence beside the sentinel actually changes anything, or merely witnesses what is already happening"
+          "The veil is about to open—Cevaine's discipline is the only thing holding it back now",
+          "The figure's delivery is connected to Hoss and the eviction—what was it meant to bring?",
+          "The boundary has recognized Splarf personally—what does that recognition mean?",
+          "Boo is somewhere in the dark, present but withheld—what will it do if the veil opens?"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "note": "Splarf used Numen-Sense to read the veil's state and learned that the boundary is tiring—the sentinel may now sense this too, or may already know it from the Lattice's own reading. The silence between them is no longer refusal but a shared crisis.",
+          "name": "Cevaine of the Seventh Measure",
+          "role": "Lattice-trained order-reader; sentinel at the sealed veil",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "The discipline is now visibly compensating—the form is breaking because the veil is trying to open, and Cevaine's hold is the only thing preventing it. This is the moment where absolute geometry meets a choice it cannot calculate.",
           "learned": [
-            "The veil is holding by constant choice, not by permanent seal",
-            "The sender on the other side is still pushing—testing the boundary, learning its shape",
-            "The work of refusal is costly; the boundary will not hold indefinitely"
+            "The discipline has limits—and they are being reached now",
+            "A boundary that chooses is a mathematical problem the Lattice cannot solve",
+            "The form holds, but it is now holding *against* rather than *for*"
+          ],
+          "skillsObserved": [
+            "The ability to hold form even as it breaks",
+            "The willingness to be the dam against something she does not fully understand"
           ],
           "relationshipDelta": 0,
-          "statusNote": "Standing sentinel at the veil despite ongoing blood loss, discipline holding but now visibly compensating. The form is working against time and the body's slow failure."
+          "status": "active",
+          "statusNote": "Standing sentinel at the veil despite blood loss, discipline compensating but now visibly at the breaking point—the form holds but the cost is mounting by the moment"
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The veil is tiring under constant pressure from the sender on the other side. It is holding by active choice, not passive seal—the hold is chosen moment by moment, and the cost is mounting.",
-          "flag": {
-            "veilState": "holding_tiring",
-            "pressureLevel": "constant_testing",
-            "urgency": "escalating"
-          }
-        }
-      ],
-      "discovery": null,
+      "placeUpdates": [],
+      "discovery": {},
       "codexUpdates": [
         {
-          "topic": "veil-fatigue",
-          "label": "The Veil's Tiring Hold",
-          "kind": "lore",
-          "entityId": "thinning",
-          "fact": "The sealed veil at The Thinning is holding by active, chosen effort—not a passive state. It is refusing crossing moment by moment, against constant pressure from the sender on the other side. The work is costly and the boundary is beginning to tire. This is not a permanent seal but a holding action with a visible end-point approaching.",
+          "topic": "the-veil-knows-hoss",
+          "label": "The Veil Knows Hoss",
+          "kind": "mystery",
+          "entityId": "cevaine",
+          "fact": "The sealed veil at The Thinning recognized Splarf through his story and reached toward knowledge of Hoss—the mending woman who packed and left Crestfall Notch. The boundary knows her, and the sent figure was meant to deliver something *about* that loss.",
           "links": [
+            "the-document-and-the-ditch",
+            "hoss",
             "what-wakes-beneath",
-            "the-figure-in-the-thin-place",
+            "the-figure-in-the-thin-place"
+          ]
+        },
+        {
+          "topic": "the-veil-tries-to-open",
+          "label": "The Veil's Breaking Choice",
+          "kind": "lore",
+          "fact": "The sealed boundary is no longer refusing. It is trying to *open*—the pressure from the other side is no longer testing but urgent, and Cevaine's discipline is the only thing holding the opening back. The veil wants to deliver, and the cost of that wanting is breaking the sentinel's form.",
+          "links": [
+            "cevaine",
             "veil-as-boundary-agent",
-            "the-document-and-the-ditch"
+            "what-wakes-beneath",
+            "the-figure-in-the-thin-place"
           ]
         }
       ],
       "generateRequest": [],
       "encounterOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
+      "newEncounter": {},
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
       "timeOps": {
-        "hoursPassed": 4,
-        "why": "hours of deep night passed in meditation and vigil at the veil's edge; Splarf's awareness opened to the boundary's state"
+        "hoursPassed": 0.5,
+        "why": "The pre-dawn hours burned away and the moment of the veil's breaking choice arrived at first light"
       },
-      "moveTo": null,
+      "moveTo": {},
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
+      "deriveItem": {},
+      "imagePrompt": "A sealed boundary shimmering with two frequencies at once—the humming veil lit by grey dawn—with a figure in absolute geometric stillness before it, discipline visible as a held form, and a shadow-dark silhouette at the veil's edge, reaching toward delivery.",
+      "gambitOps": {},
+      "gambitApt": false,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Thinning's waygate clearing in deep night, day three—fire burned to coals, the sealed veil humming its patient, tired note. Spring darkness is near-total; the weak moon casts long shadows through the forest edge. The clearing reads calm now, not hostile, but exhausted.",
+      "setting": "The Thinning's cleared waygate ground at grey dawn, the sealed veil shimmering with two-tone hum, Cevaine standing sentinel with the first visible break in their form, the forest edge still and watchful, the coals of last night's fire cooling in the center of the clearing.",
       "npcsPresent": [
         {
-          "name": "Cevaine",
-          "state": "Standing sentinel at the veil, unmoving, the discipline holding but the voice carrying visible strain. The left hand rem"
+          "name": "Cevaine of the Seventh Measure",
+          "state": "Standing at the veil's edge, the discipline visibly compensating now, left hand gripped hard to the thigh—the form is br"
         }
       ],
       "objects": [
-        "Fire (burned to coals, still warm)",
+        "Fire (burned to coals, cooling)",
         "Lean-to shelter",
         "Traveler's Pack",
-        "The sealed veil (humming, resigned, now readable as tired)"
+        "The sealed veil (humming double-tone, pressure mounting from the other side, the"
       ],
       "threads": [
-        "The veil is tiring under the strain of constant refusal—how much longer will it hold?",
-        "The sender on the other side continues to push, testing, learning—what will it try next?",
-        "Cevaine's discipline is compensating but not healing; blood loss continues",
-        "Whether Splarf's presence beside the sentinel actually changes anything, or merely witnesses what is already happening"
+        "The veil is about to open—Cevaine's discipline is the only thing holding it back now",
+        "The figure's delivery is connected to Hoss and the eviction—what was it meant to bring?",
+        "The boundary has recognized Splarf personally—what does that recognition mean?",
+        "Boo is somewhere in the dark, present but withheld—what will it do if the veil opens?"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
@@ -469,7 +534,8 @@
         "The figure's failure to complete its delivery is confirmed—the veil itself sealed in refusal of repeated attempts. The sender persists. This is not a chance event but an ongoing drive.",
         "The sealed veil shows the shape of an ongoing push from the other side—not a chance event, but a task persisting. Something was sent with purpose and cannot complete it. The mystery deepens: what is being delivered, and why does the valley's boundary refuse it?",
         "At The Thinning, Splarf stands between a sealed veil and a wounded sentinel, with a purpose-shaped darkness waiting beyond. No document surfaces here—but the clarity deepens: some work cannot be completed by force of will alone. Rest is not weakness; it is the work itself.",
-        "The veil's own sealed agency teaches: some boundaries choose. Some refusals are not breakable but are *true*. Hoss's erasure may not be fixable by the same logic that created it. The ledger may not be the place to write back."
+        "The veil's own sealed agency teaches: some boundaries choose. Some refusals are not breakable but are *true*. Hoss's erasure may not be fixable by the same logic that created it. The ledger may not be the place to write back.",
+        "The boundary's recognition reveals: the eviction was not merely administrative—it was *known* on the other side of the veil, and something was being sent to address it. The figure was a messenger, and its failure to cross compounds a specific, named loss."
       ],
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
@@ -480,7 +546,7 @@
     "cevaine": {
       "id": "cevaine",
       "name": "Cevaine",
-      "role": "Lattice-trained order-reader of the Seventh Measure; sentinel at the sealed veil",
+      "role": "Lattice-trained order-reader; sentinel at the sealed veil",
       "description": "Tall, angular, skin nearly translucent. Eyes that track with geometric precision. Moves with the eerie discipline of lattice-trained structure-thinking.",
       "firstMet": {
         "locationId": "gen-object-object",
@@ -488,7 +554,6 @@
       },
       "relationship": 7,
       "history": [
-        "[d1] Splarf offered a story from Lattice wisdom about precision and structural failure—Cevaine heard it, understood the logic, but chose the work over care. The wound remains tended by choice. Now standing through a cold night at the sealed veil while Splarf fails to build fire.",
         "[d2] Refused aid again. Will not move. The Lattice discipline holds form above flesh even as the wound bleeds. Standing through the cold night at the sealed veil, sentinel-still, tracking nothing but refusing everything.",
         "[d2] Splarf built fire at the clearing's center despite Cevaine's refusal of direct care. Cevaine does not acknowledge it, but their shoulders have relaxed fractionally—the warmth reaches them. The sentinel holds form, but the discipline permits the comfort of fire.",
         "[d2] Splarf stood beside them at the veil without reaching, without demanding care—the first gesture of presence Cevaine has acknowledged. Their shoulders relaxed fractionally. The work of watching may, Cevaine is learning, have room for two.",
@@ -497,30 +562,31 @@
         "[d2] Through the full second night, held vigil at the veil without rest or aid, blood loss continuing, discipline never broken. The form is now visibly compensating—left hand gripped against thigh, voice carrying the first fracture of admission: 'geometric precision does not account for physiological…",
         "[d2] Refused aid—the discipline will not permit a change in posture while serving as sentinel. Form is now visibly compensating (left hand gripped to thigh, voice showing effort) but remains unbroken. Blood loss sealed by cold and compensation, not treated. The first genuine fracture in absolute form.",
         "[d2] The sentinel's discipline continues to hold form through blood loss and standing without rest. The fracture in their voice deepens. They refuse aid—the practice will not permit a change in posture while the veil is watched.",
-        "[d3] Splarf used Numen-Sense to read the veil's state and learned that the boundary is tiring—the sentinel may now sense this too, or may already know it from the Lattice's own reading. The silence between them is no longer refusal but a shared crisis."
+        "[d3] Splarf used Numen-Sense to read the veil's state and learned that the boundary is tiring—the sentinel may now sense this too, or may already know it from the Lattice's own reading. The silence between them is no longer refusal but a shared crisis.",
+        "[d3] The discipline is now visibly compensating—the form is breaking because the veil is trying to open, and Cevaine's hold is the only thing preventing it. This is the moment where absolute geometry meets a choice it cannot calculate."
       ],
       "knownFacts": [
-        "The discipline can hold a body steady through blood loss and exhaustion by pure form-holding, but it cannot solve the problem—only defer it",
-        "To Cevaine, the work (watching the veil) takes absolute precedence over the body's needs; care would constitute a failure of attention",
-        "The discipline compensates for the wound but does not solve it",
         "Standing sentinel while bleeding and sleepless is approaching a hard limit",
         "Cevaine will not accept help while the work continues",
         "The veil is holding by constant choice, not by permanent seal",
         "The sender on the other side is still pushing—testing the boundary, learning its shape",
-        "The work of refusal is costly; the boundary will not hold indefinitely"
+        "The work of refusal is costly; the boundary will not hold indefinitely",
+        "The discipline has limits—and they are being reached now",
+        "A boundary that chooses is a mathematical problem the Lattice cannot solve",
+        "The form holds, but it is now holding *against* rather than *for*"
       ],
       "skillsObserved": [
-        "Standing steady at an unsolved problem rather than retreatin",
-        "Absolute form-holding through the night without rest",
         "Discipline strong enough to compensate for ongoing injury",
         "Willingness to admit—barely—that the practice has limits",
         "Absolute form-holding under conditions that would break ordi",
-        "Willingness to prioritize the work over the body's survival"
+        "Willingness to prioritize the work over the body's survival",
+        "The ability to hold form even as it breaks",
+        "The willingness to be the dam against something she does not"
       ],
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Standing sentinel at the veil despite ongoing blood loss, discipline holding but now visibly compensating. The form is working against time and the body's slow failure.",
+      "statusNote": "Standing sentinel at the veil despite blood loss, discipline compensating but now visibly at the breaking point—the form holds but the cost is mounting by the moment",
       "domains": {
         "primary": "lattice"
       },
@@ -560,7 +626,7 @@
       ]
     },
     "gen-object-object": {
-      "visits": 1,
+      "visits": 2,
       "notes": [
         "[d1] The sealed veil showed responsiveness to direct contact—it hums louder when touched, and the intention behind it is legible as refusal of repeated crossing attempts from the other side"
       ],
@@ -568,7 +634,7 @@
         "veil_sealed_resistant": true,
         "veil_shows_agency": true
       },
-      "lastVisit": 1,
+      "lastVisit": 3,
       "vectorsKnown": []
     }
   },
@@ -705,10 +771,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The realization that the veil itself is choosing—that boundaries can be agents, not just barriers",
-        "from": "Cevaine's admission that geometric precision cannot read will, and Splarf's own contact with the sealed boundary revealing intention, not…"
-      },
-      {
         "thing": "the realization that you have almost no energy left—and that pushing through the night without rest or heat may cost more than you gain",
         "from": "the failure of the fire-building and the body's own limits catching up after the practice, the failed bridge-attempt, and the hours of…"
       },
@@ -723,6 +785,10 @@
       {
         "thing": "The veil itself is beginning to tire—the boundary's hold is no longer indefinite",
         "from": "the nature of chosen refusal, the cost of constant work against constant pressure; the veil is a thinking thing under strain"
+      },
+      {
+        "thing": "The veil's desperate attempt to open—a boundary that has held by chosen effort and is now at the breaking point of its resolve",
+        "from": "Your story of chosen boundaries reached the veil and it answered by recognizing you, reaching toward what it was sent to deliver"
       }
     ],
     "offscreenCursor": 1,
@@ -3189,14 +3255,18 @@
           "[d1] Cevaine of the Seventh Measure will not leave their post, even wounded, even when offered reason in the language of their own tradition. The work—reading the veil, standing sentinel—takes precedence over care.",
           "[d2] The Unbroken Practice—standing present without demand, without reaching, without requiring response—reads to the Lattice-trained discipline as a form of work that can be recognized and honored. A full night of stillness beside stillness changes the veil's anger into resignation. Presence itself…",
           "[d2] A discipline of absolute geometric form can hold a body steady through blood loss, through cold, through the refusal of care—but only to a point. Cevaine's own admission: the form is now *compensating*, not solving. This is the first visible crack in their practice—not a breaking, but a bending at…",
-          "[d2] The Unbroken Practice can hold form through blood loss and exhaustion by pure geometric discipline, but it cannot heal the body—it can only defer the problem. Changing posture reads as doubt to a Lattice-trained sentinel; stillness is the work itself. The form is holding, but it is now…"
+          "[d2] The Unbroken Practice can hold form through blood loss and exhaustion by pure geometric discipline, but it cannot heal the body—it can only defer the problem. Changing posture reads as doubt to a Lattice-trained sentinel; stillness is the work itself. The form is holding, but it is now…",
+          "[d3] The sealed veil at The Thinning recognized Splarf through his story and reached toward knowledge of Hoss—the mending woman who packed and left Crestfall Notch. The boundary knows her, and the sent figure was meant to deliver something *about* that loss."
         ],
         "links": [
           "the-unbroken-practice",
           "lattice-order-logic",
           "what-wakes-beneath",
           "the-thinning",
-          "veil-as-boundary-agent"
+          "veil-as-boundary-agent",
+          "the-document-and-the-ditch",
+          "hoss",
+          "the-figure-in-the-thin-place"
         ],
         "aliases": [
           "The Lattice Cannot Read Stillness",
@@ -3204,11 +3274,12 @@
           "Cevaine's Choice",
           "The Practice as Witness",
           "Precision Meeting Physiology",
-          "Cevaine's Discipline at Its Limit"
+          "Cevaine's Discipline at Its Limit",
+          "The Veil Knows Hoss"
         ],
         "createdDay": 1,
         "entityId": "cevaine",
-        "updatedDay": 2
+        "updatedDay": 3
       },
       "veil-agency": {
         "id": "veil-agency",
@@ -3279,25 +3350,42 @@
         "createdDay": 3,
         "entityId": "thinning",
         "updatedDay": 3
+      },
+      "the-veil-tries-to-open": {
+        "id": "the-veil-tries-to-open",
+        "label": "The Veil's Breaking Choice",
+        "kind": "lore",
+        "facts": [
+          "[d3] The sealed boundary is no longer refusing. It is trying to *open*—the pressure from the other side is no longer testing but urgent, and Cevaine's discipline is the only thing holding the opening back. The veil wants to deliver, and the cost of that wanting is breaking the sentinel's form."
+        ],
+        "links": [
+          "cevaine",
+          "veil-as-boundary-agent",
+          "what-wakes-beneath",
+          "the-figure-in-the-thin-place"
+        ],
+        "aliases": [],
+        "createdDay": 3,
+        "updatedDay": 3
       }
     }
   },
   "tendencies": {
-    "stealth": 6.5624797479460355,
-    "strategic": 6.353709179155196,
-    "cautious": 7.791621293266831,
-    "cerebral": 4.0961266186393335,
-    "patient": 4.779136153440738,
-    "devotion": 1.1315367026163572,
-    "risky": 2.909135339073666,
-    "generous": 4.750749949309656,
-    "social": 4.191463491896954,
-    "craft": 1.4778892983578975
+    "stealth": 6.398417754247385,
+    "strategic": 6.194866449676316,
+    "cautious": 7.596830760935161,
+    "cerebral": 4.9937234531733505,
+    "patient": 4.659657749604719,
+    "devotion": 1.1032482850509482,
+    "risky": 3.8364069555968245,
+    "generous": 4.631981200576914,
+    "social": 4.08667690459953,
+    "craft": 1.44094206589895
   },
   "aptitudes": [
     "naive"
   ],
-  "actionCount": 27,
+  "actionCount": 28,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3567,8 +3655,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786028940594,
-  "rev": 78,
+  "updatedAt": 1786029165278,
+  "rev": 80,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3681,7 +3769,46 @@
         "image": "https://image.pollinations.ai/prompt/A%20pale%20woman%20in%20her%20middle%20forties%2C%20slight%20and%20very%20upright%2C%20with%20close-cropped%20silver-ash%20hair%20still%20carrying%20the%20grid-lines%20of%20a%20Lattice%20reader's%20field-shave%20%E2%80%94%20the%20scalp%20marked%20in%20faint%20geometric%20se%2C%20character%20portrait%2C%20named%20Cevaine%20of%20the%20Seventh%20Measure%2C%20Lattice-Cities%20order-reader%20walking%20The%20Thinning's%20edge%20%E2%80%94%20applying%20structural%20precision%20to%20a%20place%20t%2C%20Speaks%20in%20the%20clipped%2C%20load-bearing%20syntax%20of%20the%20Lattice%20%E2%80%94%20every%20sentence%20is%20a%20measurement%2C%20every%20p%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=50726&nologo=true"
       }
     },
-    "location": {},
+    "location": {
+      "gen-object-object": {
+        "id": "gen-object-object",
+        "name": "[Object Object]",
+        "regionId": "the_numinous_reach",
+        "descriptionSeed": "A place the road led to — [Object Object]. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "the_thinning"
+        ],
+        "_mintedAs": "transit",
+        "dangerLevel": 3,
+        "_gen": {
+          "type": "location",
+          "tier": "fresh",
+          "engagementScore": 2,
+          "birthWeight": 1,
+          "rating": null,
+          "attentionHistory": [
+            {
+              "kind": "revisit",
+              "day": 3
+            }
+          ],
+          "createdDay": 3,
+          "provenance": {
+            "locationId": "the_thinning",
+            "day": null,
+            "hint": "transit"
+          },
+          "lastAttentionDay": 3
+        },
+        "map": {
+          "x": 413.2969295284196,
+          "y": 40
+        }
+      }
+    },
     "arc": {},
     "creature": {},
     "item": {}
@@ -3699,7 +3826,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 33
+    "the_numinous_reach": 34
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -3715,10 +3842,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-06T12:00:39.112Z",
-      "lastAt": "2026-08-06T15:09:00.592Z",
+      "lastAt": "2026-08-06T15:12:45.271Z",
       "startDay": 37,
       "endDay": 37,
-      "beats": 12
+      "beats": 13
     }
   ],
   "establishedFacts": [
@@ -3749,30 +3876,30 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 16,
+      "applied": 17,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 32,
-    "scene": 32,
-    "choices": 32,
-    "offer": 15,
-    "codexUpdates": 20,
-    "imagePrompt": 10,
-    "gambitApt": 26,
-    "sceneEnded": 32,
-    "characterDeltas": 23,
+    "sceneSummary": 33,
+    "scene": 33,
+    "choices": 33,
+    "offer": 16,
+    "codexUpdates": 21,
+    "imagePrompt": 11,
+    "gambitApt": 27,
+    "sceneEnded": 33,
+    "characterDeltas": 24,
     "arcOps": 1,
     "factUpdates": 3,
     "placeUpdates": 8,
-    "timeOps": 18,
-    "deeds": 3,
-    "ledgerEvents": 1,
-    "questUpdates": 6,
-    "npcUpdates": 24,
+    "timeOps": 19,
+    "deeds": 4,
+    "ledgerEvents": 2,
+    "questUpdates": 7,
+    "npcUpdates": 25,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -3780,13 +3907,13 @@
     "_engineClosedScene": 2,
     "itemUpdates": 1
   },
-  "_opTurns": 32,
+  "_opTurns": 33,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "beastfriend": 2,
       "numen_sense": 4,
-      "storykeeper": 2,
+      "storykeeper": 3,
       "the_unbroken_practice": 3,
       "steady_soul": 4
     },
@@ -3795,12 +3922,12 @@
       {
         "abilityId": "greenlore",
         "since": "2026-08-05T23:25:06.049Z",
-        "progress": 4
+        "progress": 5
       },
       {
         "abilityId": "wayfinding",
         "since": "2026-08-05T23:25:30.590Z",
-        "progress": 4
+        "progress": 5
       }
     ],
     "lastUsed": {
@@ -3813,7 +3940,7 @@
   },
   "customAbilities": {},
   "companionBonds": {
-    "hush": 2.25
+    "hush": 2.75
   },
   "teachers": {},
   "foreclosed": [
@@ -3843,6 +3970,11 @@
         "text": "Stood vigil beside a wounded sentinel without demanding gratitude or refusal—held presence as its own form of work",
         "weight": 1,
         "day": 2
+      },
+      {
+        "text": "Spoke a story of chosen refusal to a sealed boundary—and was recognized by it in return.",
+        "weight": 1,
+        "day": 3
       }
     ]
   },
@@ -3868,7 +4000,9 @@
       }
     }
   },
-  "knownPlaces": [],
+  "knownPlaces": [
+    "gen-object-object"
+  ],
   "locationImages": {
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
@@ -3894,6 +4028,25 @@
       "why": "repaired via the Repair panel",
       "worldDay": 37,
       "at": "2026-08-06T14:49:32.036Z"
+    }
+  ],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-08-06T15:12:45.277Z",
+      "worldDay": 37,
+      "who": "char-msgpisca",
+      "playerKey": "player-s9z9u1",
+      "where": "the_thinning",
+      "what": "The sealed veil at The Thinning recognizes Splarf and reaches toward the ledger's stake—the eviction, the family loss, the sent delivery all converging",
+      "tags": [
+        "the_document_and_the_ditch",
+        "what_wakes_beneath",
+        "veil_agency"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true
     }
   ]
 }

@@ -2788,29 +2788,41 @@
     "travel"
    ],
    "narrationHints": "Vines come up to meet them and hand them on. It is not graceful and it does not stop.",
-   "description": "⚠️ ROOTKIN FLIGHT, AND IT IS NOT WINGS. Erik's own example: the living world lifts you. Vines rise, take your weight, and pass you to the next growth — a continuous swung passage above the ground rather than through the air. At rank 2 you grow the wings yourself, which the Quickwood considers vulgar and effective.",
-   "notFor": "⚠️ BARE STONE, OPEN WATER, THE UNMADE — anywhere nothing grows, this does nothing at all. It is the most route-dependent flight in the game and the Rootkin do not consider that a flaw.",
+   "description": "⚠️ ROOTKIN FLIGHT, AND IT IS NOT WINGS AT FIRST. The living world lifts you: vines rise, take your weight, hand you on. Where growth is thick this is easy. Where it is thin — open water, bare stone, desert — it is a matter of finding the little there is and asking far more of it, which is a question of rank rather than possibility.",
+   "notFor": "⚠️ THE TRULY DEAD GROUND — the Unmade, worked stone with nothing in the seams, salt flats. Everywhere else has something, and rank decides whether it is enough.",
    "tree": [
     {
      "rank": 1,
      "name": "The Carried Green",
-     "grants": "Be lifted and passed along by growth — roughly twice walking speed, above the ground, wherever things grow.",
-     "cannot": "Anywhere nothing grows. Fine control: you go where the green goes.",
+     "grants": "Be lifted and handed along by thick growth — forest, field, marsh — at about twice walking speed.",
+     "cannot": "Thin country. Over open water or bare rock there is not enough to take your weight.",
      "functions": [
-      "transform",
-      "travel"
+      "travel",
+      "transform"
      ],
      "gains": "broaden",
      "harmRung": "none"
     },
     {
      "rank": 2,
-     "name": "The Grown Wing",
-     "grants": "Grow wings of living matter and fly under your own control. They are real, they are yours, and they must be fed.",
-     "cannot": "Keeping them indefinitely — held past a day they begin drawing on you as growth does.",
+     "name": "The Thin Growth",
+     "grants": "⚠️ Work with what little there is: seaweed and lily mats over water, the scrub in a rock seam, the plants at a desert's edge. Slower, harder, and it holds.",
+     "cannot": "Ground with genuinely nothing living in it, and hurrying — thin growth carries you at a walk.",
      "functions": [
-      "transform",
-      "travel"
+      "travel",
+      "transform"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Grown Wing",
+     "grants": "Grow wings of living matter and fly under your own control, independent of what is below you.",
+     "cannot": "Keeping them past a day without feeding them as any growth is fed.",
+     "functions": [
+      "travel",
+      "transform"
      ],
      "gains": "deepen",
      "harmRung": "none"
@@ -2832,7 +2844,7 @@
     "magnitude": 6,
     "duration": 12,
     "range": "route-scale",
-    "note": "⚠️ ROUTE-DEPENDENT FLIGHT. On a leg through growing country it halves travel days; over bare stone or water it is unavailable. That asymmetry is the craft."
+    "note": "⚠️ RANK ANSWERS TERRAIN. r1 halves days in thick country. r2 works anywhere something grows — water, stone, desert — at walking pace rather than double. r3 is terrain-independent true flight."
    },
    "rankDeltas": [],
    "intensity": {
@@ -2841,11 +2853,11 @@
    },
    "bounds": [
     {
-     "text": "NOTHING GROWS, NOTHING LIFTS — bare stone, open water and the Unmade are closed to it",
+     "text": "ONLY THE TRULY DEAD GROUND IS CLOSED — the Unmade, salt flats, worked stone with nothing in the seams",
      "class": "hard"
     },
     {
-     "text": "at rank 1 YOU GO WHERE THE GREEN GOES — the route is chosen by what is growing, not by you",
+     "text": "THIN GROWTH CARRIES YOU AT A WALK, not at speed — rank 2 buys reach, not haste",
      "class": "hard"
     },
     {
@@ -2853,7 +2865,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A travel and explore action. Vines and growth lift you and pass you along at about twice walking speed, above the ground — but only where things grow, so bare stone, open water and the Unmade are closed to it entirely, and at rank 1 the route is whatever the green offers rather than what you chose. At rank 2 you grow real wings and fly under your own control; held longer than a day they start drawing on your own body the way any growth draws on its ground. On a journey leg through growing country it roughly halves the days."
+   "plainly": "A travel and explore action. Growth lifts you and hands you along — in thick country like forest or marsh that is about twice walking speed and roughly halves a leg's days. At rank 2 you can work with very little: seaweed and lily mats across open water, scrub in a rock seam, the plants at a desert's edge — it carries you at walking pace rather than fast, but it goes where rank 1 cannot. Only genuinely dead ground is closed to it, meaning the Unmade, salt flats, and worked stone with nothing living in the seams. At rank 3 you grow real wings and fly independent of what is below you; held past a day they draw on your own body."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

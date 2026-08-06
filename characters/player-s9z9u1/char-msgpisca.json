@@ -8,19 +8,14 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 79,
+  "xp": 84,
   "attributes": {
     "physical": 4,
     "mental": 3,
     "social": 2,
     "practical": 4
   },
-  "skills": {
-    "stealth": 1,
-    "survival": 1,
-    "focus": 1,
-    "ritual": 1
-  },
+  "skills": {},
   "abilities": [
     {
       "abilityId": "beastfriend",
@@ -54,7 +49,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 100,
-  "energy": 15,
+  "energy": 7,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -140,7 +135,7 @@
   ],
   "currentLocationId": "the_thinning",
   "activeScene": {
-    "locationId": "gen-object-object",
+    "locationId": "the_thinning",
     "turns": [
       {
         "player": "Sleep deeply—let the exhaustion take you fully under for what remains of the night",
@@ -186,77 +181,83 @@
         "player": "Use Beastfriend—call to Boo, ask it to sense what the veil is resisting. An umbral thing might read the dark side of a boundary differently than light can.",
         "summary": "At The Thinning's sealed veil on the dawn of day three, Splarf calls Boo to read the dark side of the boundary—and learns the pressure mounting from the other side is not hostile but desperate, and that the figure sent knows Hoss by name. Cevaine's discipline begins to crack.",
         "narration": "You turn from Cevaine toward the forest's edge, where Boo has held its vigil through the long night. The umbral companion emerges from a shadow that shouldn't have held it—more felt than seen, a presence that reads as absence.\n\n\"Boo,\" you say quietly. \"The veil. What does the dark see that we can't?\"\n\nThe creature moves without moving, and you feel rather than witness its approach to the sealed boundary. For a long moment it simply *is* at the edge of the distortion, and the veil's hum shifts—becomes aware of something other than lattice-trained discipline and numinous presence.\n\nWhat Boo carries back is not words but *knowing*. The dark on the other side of the veil is not hostile—it is *urgent*. Desperate. Something there is burning cycles trying to push through, and the pressure mounting is not violence but exhaustion. The sender is running out of time. And underneath that urgency, Boo senses something else: recognition. The figure that came through knows *you*—or knows *of* you. Knows the name Hoss carries. The dark remembers what the light sealed away.\n\nCevaine's breathing catches. For the first time, the sentinel's form shows a visible fracture—not breaking, but *questioning*. Her eyes find yours, and in that moment you read her fear clearly: the veil is not refusing to open. It is *failing to hold*."
+      },
+      {
+        "player": "Use Steady the Soul on Cevaine—not to convince her, but to *feel* what she is feeling, to let her know you stand in the same choice she does, without asking her to yield.",
+        "summary": "Splarf stands vigil beside Cevaine at the sealed veil, offering shared presence—and Boo steps forward to read the dark side of the boundary, where the sender's desperation becomes suddenly, terribly clear.",
+        "narration": "You settle beside Cevaine at the veil's edge, not touching, but present—your breath matching hers in the cold dawn air. The Practice teaches you to center, to become still as stone, and you do that now. Not asking. Not demanding. Simply *being* there, in the same moment she is, in the same choice.\n\nCevaine's eyes, which have remained fixed on the boundary since you arrived, flicker toward you for just a moment. Not a breaking of form—her discipline does not crack—but a *seeing*. She reads you the way Lattice-trained order-readers read structure, and what she finds is not weakness or plea, but presence. Real presence. Someone standing in the same impossible choice she is.\n\nSomething in her expression changes—not relief, but recognition. The form does not yield. But for the first time since the vigil began, it is not *alone*. She exhales, barely audible, and her shoulders settle fractionally lower. The work of holding the boundary is still hers, still crushing—but the weight of holding it has shifted. She is no longer the only thing standing between the veil and breaking.\n\nBoo emerges from the forest's edge and moves toward the boundary without hesitation. The sealed veil's hum shifts as the umbral presence touches it—becomes aware of something other than lattice-discipline and numinous faith. For a long moment the creature simply *is* at the edge of the distortion, reading what light cannot read."
       }
     ],
     "lastTurn": {
-      "narration": "You turn from Cevaine toward the forest's edge, where Boo has held its vigil through the long night. The umbral companion emerges from a shadow that shouldn't have held it—more felt than seen, a presence that reads as absence.\n\n\"Boo,\" you say quietly. \"The veil. What does the dark see that we can't?\"\n\nThe creature moves without moving, and you feel rather than witness its approach to the sealed boundary. For a long moment it simply *is* at the edge of the distortion, and the veil's hum shifts—becomes aware of something other than lattice-trained discipline and numinous presence.\n\nWhat Boo carries back is not words but *knowing*. The dark on the other side of the veil is not hostile—it is *urgent*. Desperate. Something there is burning cycles trying to push through, and the pressure mounting is not violence but exhaustion. The sender is running out of time. And underneath that urgency, Boo senses something else: recognition. The figure that came through knows *you*—or knows *of* you. Knows the name Hoss carries. The dark remembers what the light sealed away.\n\nCevaine's breathing catches. For the first time, the sentinel's form shows a visible fracture—not breaking, but *questioning*. Her eyes find yours, and in that moment you read her fear clearly: the veil is not refusing to open. It is *failing to hold*.",
-      "sceneSummary": "At The Thinning's sealed veil on the dawn of day three, Splarf calls Boo to read the dark side of the boundary—and learns the pressure mounting from the other side is not hostile but desperate, and that the figure sent knows Hoss by name. Cevaine's discipline begins to crack.",
+      "narration": "You settle beside Cevaine at the veil's edge, not touching, but present—your breath matching hers in the cold dawn air. The Practice teaches you to center, to become still as stone, and you do that now. Not asking. Not demanding. Simply *being* there, in the same moment she is, in the same choice.\n\nCevaine's eyes, which have remained fixed on the boundary since you arrived, flicker toward you for just a moment. Not a breaking of form—her discipline does not crack—but a *seeing*. She reads you the way Lattice-trained order-readers read structure, and what she finds is not weakness or plea, but presence. Real presence. Someone standing in the same impossible choice she is.\n\nSomething in her expression changes—not relief, but recognition. The form does not yield. But for the first time since the vigil began, it is not *alone*. She exhales, barely audible, and her shoulders settle fractionally lower. The work of holding the boundary is still hers, still crushing—but the weight of holding it has shifted. She is no longer the only thing standing between the veil and breaking.\n\nBoo emerges from the forest's edge and moves toward the boundary without hesitation. The sealed veil's hum shifts as the umbral presence touches it—becomes aware of something other than lattice-discipline and numinous faith. For a long moment the creature simply *is* at the edge of the distortion, reading what light cannot read.",
+      "sceneSummary": "Splarf stands vigil beside Cevaine at the sealed veil, offering shared presence—and Boo steps forward to read the dark side of the boundary, where the sender's desperation becomes suddenly, terribly clear.",
       "choices": [
         {
-          "label": "Speak directly to Cevaine: tell her you understand now—the veil is not your enemy, it's drowning, and holding it closed is drowning with it. Ask what happens if you both step aside.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "comfort",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Steady the Soul on Cevaine—not to convince her, but to *feel* what she is feeling, to let her know you stand in the same choice she does, without asking her to yield.",
+          "label": "Ask Boo what it felt on the other side—the dark's read of the sender's nature and urgency.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": 13,
+          "difficulty": 0,
           "intentTags": [
-            "help",
-            "comfort",
-            "sustain"
+            "study",
+            "careful"
           ],
-          "abilityId": "steady_soul",
-          "energyCost": 4,
-          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Boo to show you what the figure looks like from the dark side—what it actually is, beneath the half-real shape. If you know what you're facing, you can decide whether opening the veil is safe or catastrophic.",
+          "label": "Try to reach through the boundary again now that Boo is at its edge—ask if the dark will *translate* what the sender is trying to say.",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 14,
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": -0.3
+          },
+          "difficulty": 20,
           "intentTags": [
             "study",
-            "scout",
-            "careful"
+            "risky"
           ],
-          "abilityId": "beastfriend",
+          "abilityId": "numen_sense",
           "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Step toward the veil yourself and place your hand against it—not to push or pull, but to *anchor* it. If Cevaine is failing, maybe the boundary needs a different kind of presence holding it.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 16,
+          "label": "Help Cevaine hold the form for as long as possible—use The Unbroken Practice to anchor yourself in discipline *with* her, sharing the meditation that keeps the line.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": -0.15
+          },
+          "difficulty": 15,
           "intentTags": [
-            "defend",
             "sustain",
-            "risky"
+            "help",
+            "careful"
+          ],
+          "abilityId": "the_unbroken_practice",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step back and wait—give Boo time to finish its reading, and let Cevaine breathe. Sometimes the work is just standing still and watching.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "sustain"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -264,7 +265,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
+        "energy": -4,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -276,9 +277,9 @@
           "questId": "the-document-and-the-ditch",
           "title": "The Document and the Ditch",
           "summary": "To know exactly how a family becomes a line in a ledger—and whether that knowledge becomes repair, or ruin, or something the law has no category for.",
-          "giver": null,
-          "note": "Splarf reads the sealed veil and learns it carries a fragment of the pre-Transition ledger—Crestfall Notch mapped as a resource-keeping post, Hoss as its assignee. The figure from the veil was sent to *end* that assignment. The full message remains blocked by the veil's tiring hold.",
-          "xpReward": null
+          "giver": "Self",
+          "note": "Splarf stands vigil with Cevaine at the sealed veil, offering shared presence rather than persuasion. The sentinel's form holds, but it is no longer alone—and Boo moves to read what lies on the dark side of the boundary.",
+          "xpReward": 0
         }
       ],
       "standingOps": [],
@@ -286,29 +287,29 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Boo's sensing of the veil's true state: the pressure from the other side is not hostile but *desperate*—the sender is running out of time, and the dark remembers what the light sealed away",
-        "from": "Boo's nature as an umbral thing that reads shadows differently than sunlight can—the companion's loyalty has deepened the character's understanding of what is actually at stake on the other side of the boundary"
+        "thing": "A moment of mutual recognition between you and Cevaine—not words, not argument, but the felt knowledge that you are standing in the same impossible choice.",
+        "from": "Your own willingness to stand beside the sentinel without asking her to yield; her capacity to *see* someone who meets her in stillness rather than against it."
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Thinning's waygate clearing at grey dawn, early spring. The sealed veil hums its tired double-tone, fractures of light-distortion visible at its edges—larger now, spreading. Cevaine stands at the boundary's edge, the form visibly compromised: tremor running through the frame, breathing audible, left hand gripped to the thigh. The fire has burned to coals, still holding warmth. Boo has just withdrawn from the boundary's edge, its presence settling back into the shadows at the forest's margin.",
+        "setting": "The Thinning's waygate clearing at grey dawn, early spring. The sealed veil hums its tired double-tone, fractures of light-distortion visible at its edges—larger now, spreading slightly. Cevaine stands at the boundary's edge, the form still holding but visibly compromised: tremor running through the frame, breathing audible, left hand gripped to the thigh. The fire has burned to coals, still holding warmth. Splarf now stands beside the sentinel, in shared stillness. Boo has moved to the veil's edge, reading what light cannot read.",
         "npcsPresent": [
           {
             "name": "Cevaine of the Seventh Measure",
-            "state": "Standing at the veil's edge in absolute discipline, but the form is fracturing—the sentinel's eyes now open and *questioning*, meeting Splarf's, showing for the first time the fear that has been held beneath the practice: the veil is not holding. It is failing."
+            "state": "Standing at the veil's edge in absolute discipline, but no longer alone—the sentinel's eyes open and aware now, reading Splarf with geometric precision while the form continues to hold the boundary. The tremor persists; the work continues; but the weight has shifted."
           }
         ],
         "objects": [
           "Fire (burned to coals, still holding warmth)",
           "Lean-to shelter (shelter-frame, spare)",
           "Traveler's Pack (Splarf's pack, by the fire)",
-          "The sealed veil (humming double-tone, fractures of light-distortion at edges, pressure mounting from the other side)"
+          "The sealed veil (humming double-tone, fractures of light-distortion at edges, growing—the boundary is tiring, and the pressure from the other side continues to mount)"
         ],
         "threads": [
-          "Cevaine's breaking point: the form can no longer hold the veil closed—how much longer until it fails entirely?",
-          "What is on the other side of the veil? It knows Hoss by name. It is desperate. What is it trying to deliver?",
-          "The veil is not just sealed—it is *failing*. If it breaks, what comes through?",
-          "Boo has shown you the dark truth: the sender is drowning in time, burning cycles to push through. Why the urgency? Why now?"
+          "What does Boo read on the dark side of the boundary? The sender's desperation is palpable even through the seal.",
+          "How much longer can Cevaine hold the form? The fractures are spreading, and the sentinel knows it.",
+          "What was the figure sent to deliver? The veil reached for Splarf—for Hoss. The message remains incomplete.",
+          "Is the figure still pushing from the other side, or has it withdrawn?"
         ]
       },
       "npcUpdates": [
@@ -316,68 +317,27 @@
           "op": "update",
           "npcId": "cevaine",
           "name": "Cevaine of the Seventh Measure",
-          "role": "Lattice-trained order-reader; sentinel at the sealed veil",
+          "role": "Sentinel of the sealed veil; Lattice-trained order-reader tasked with holding the boundary",
           "gender": "woman",
           "pronouns": "she/her",
-          "description": null,
-          "note": "Splarf called Boo to sense the veil's dark side—and the sentinel's form cracked for the first time. Her eyes opened and *questioned*. The discipline has held through blood loss, through exhaustion, through refusal of aid—but it cannot hold against what Boo revealed: the veil is not holding. It is *failing*. Cevaine knows this. The fear shows.",
+          "note": "Splarf offered shared presence—not persuasion, not demand, but a willingness to stand in the same choice. Cevaine's form recognized this, and for the first time since the vigil began, the sentinel is not alone. The discipline holds, but the recognition has shifted something in the work.",
           "learned": [
-            "The form cannot hold forever—it is not permanent, and it is not a choice that can be held indefinitely",
-            "The pressure from the other side is not hostile—it is desperate, burning cycles, running out of time",
-            "The figure that was sent knows Hoss by name; the dark remembers what the light sealed away"
+            "Cevaine can *see* someone who meets her in stillness rather than against it; mutual recognition can reach a Lattice-trained mind without words",
+            "The sentinel's refusal is not loneliness but duty—and duty becomes easier to hold when witnessed, even silently"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "skillsObserved": [
+            "The ability to read presence without words—Cevaine read Splarf's offer through geometric precision and recognized it as real",
+            "Continued discipline under mounting pressure—the form does not crack, and the form does not yield"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Standing sentinel at the sealed veil despite mounting blood loss and exhaustion; the form is beginning to fail, and the discipline is cracking under the weight of what the boundary is trying to tell her",
-          "bondType": null,
-          "bondStage": null
+          "statusNote": "Standing sentinel at the sealed veil, holding the boundary by active discipline despite blood loss and exhaustion. The form is visibly compromised but still holds. No longer alone—Splarf stands vigil beside her."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-figure-in-the-thin-place",
-          "label": "The Sender from the Dark",
-          "kind": "person",
-          "entityId": null,
-          "fact": "The figure from the veil carries no hostility—only urgency and desperation. It is running out of time. The dark knows what the figure is and remembers it carries knowledge about Hoss, about the ledger, about the resource-keeping assignment that defined Crestfall Notch. It knows the character by connection to Hoss, if not by sight.",
-          "links": [
-            "the-document-and-the-ditch",
-            "hoss",
-            "crestfall-notch",
-            "the-veil-as-boundary-agent",
-            "what-wakes-beneath"
-          ]
-        },
-        {
-          "topic": "veil-as-boundary-agent",
-          "label": "The Veil's Failing Hold",
-          "kind": "lore",
-          "entityId": null,
-          "fact": "The sealed veil is not refusing—it is *failing to hold*. The pressure from the other side has mounted past what even Lattice-trained discipline can sustain. The sender is drowning in time. Cevaine's form is cracking. The boundary's hold was never permanent; it is a *choice*, moment by moment, and the choice is becoming impossible to make.",
-          "links": [
-            "cevaine",
-            "the-figure-in-the-thin-place",
-            "what-wakes-beneath",
-            "the-thinning"
-          ]
-        },
-        {
-          "topic": "boo-and-the-dark",
-          "label": "Boo's Reading of the Veil",
-          "kind": "lore",
-          "entityId": null,
-          "fact": "The umbral companion reads the dark side of the sealed veil and finds no hostility—only urgency. The sender burns cycles trying to push through, running out of time. Boo senses recognition: the figure sent knows Hoss by name. The dark remembers what the light sealed away.",
-          "links": [
-            "the-figure-in-the-thin-place",
-            "hoss",
-            "veil-as-boundary-agent"
-          ]
-        }
-      ],
+      "codexUpdates": [],
       "generateRequest": [],
       "encounterOps": [],
       "newEncounter": null,
@@ -385,13 +345,13 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "a quick exchange at dawn, watching Boo sense the veil's dark side"
+        "why": "A moment of deep stillness at dawn—shared presence with Cevaine, Boo approaching the veil. Time moves slower in the thin place."
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Boo emerges from a shadow too small to hold it, a presence read as absence, approaching the sealed veil as it hums its tired double-tone. Behind the boundary, light fractures and distorts. Cevaine stands trembling at the edge, discipline cracking, eyes finally *open* and questioning—seeing Splarf for the first time without the barrier of pure form. The dark and the light meeting at a boundary that is no longer holding.",
+      "imagePrompt": "At the grey edge of dawn, Splarf stands beside Cevaine at the sealed veil—the sentinel's form still rigid in absolute discipline, but her eyes now turned toward the presence at her side. Behind them, Boo emerges from shadow and moves toward the fracturing boundary, a shape that reads as absence, reading what light cannot reach. The veil hums its tired double-tone, and for the first time since the vigil began, it is not the sentinel alone who stands against the breaking.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -400,30 +360,31 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/At%20the%20grey%20edge%20of%20dawn%2C%20Splarf%20stands%20beside%20Cevaine%20at%20the%20sealed%20veil%E2%80%94the%20sentinel's%20form%20still%20rigid%20in%20absolute%20discipline%2C%20but%20her%20eyes%20now%20turned%20toward%20the%20presence%20at%20her%20side.%20Behind%20them%2C%20Boo%20emerges%20from%20shadow%20and%20moves%20toward%20the%20fracturing%20boundary%2C%20a%20shape%20that%20reads%20as%20absence%2C%20rea%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=34023&nologo=true"
     },
     "sceneState": {
-      "setting": "The Thinning's waygate clearing at grey dawn, early spring. The sealed veil hums its tired double-tone, fractures of light-distortion visible at its edges—larger now, spreading. Cevaine stands at the boundary's edge, the form visibly compromised: tremor running through the frame, breathing audible, left hand gripped to the thigh. The fire has burned to coals, still holding warmth. Boo has just…",
+      "setting": "The Thinning's waygate clearing at grey dawn, early spring. The sealed veil hums its tired double-tone, fractures of light-distortion visible at its edges—larger now, spreading slightly. Cevaine stands at the boundary's edge, the form still holding but visibly compromised: tremor running through the frame, breathing audible, left hand gripped to the thigh. The fire has burned to coals, still…",
       "npcsPresent": [
         {
           "name": "Cevaine of the Seventh Measure",
-          "state": "Standing at the veil's edge in absolute discipline, but the form is fracturing—the sentinel's eyes now open and *questio"
+          "state": "Standing at the veil's edge in absolute discipline, but no longer alone—the sentinel's eyes open and aware now, reading "
         }
       ],
       "objects": [
         "Fire (burned to coals, still holding warmth)",
         "Lean-to shelter (shelter-frame, spare)",
         "Traveler's Pack (Splarf's pack, by the fire)",
-        "The sealed veil (humming double-tone, fractures of light-distortion at edges, pr"
+        "The sealed veil (humming double-tone, fractures of light-distortion at edges, gr"
       ],
       "threads": [
-        "Cevaine's breaking point: the form can no longer hold the veil closed—how much longer until it fails entirely?",
-        "What is on the other side of the veil? It knows Hoss by name. It is desperate. What is it trying to deliver?",
-        "The veil is not just sealed—it is *failing*. If it breaks, what comes through?",
-        "Boo has shown you the dark truth: the sender is drowning in time, burning cycles to push through. Why the urgency? Why now?"
+        "What does Boo read on the dark side of the boundary? The sender's desperation is palpable even through the seal.",
+        "How much longer can Cevaine hold the form? The fractures are spreading, and the sentinel knows it.",
+        "What was the figure sent to deliver? The veil reached for Splarf—for Hoss. The message remains incomplete.",
+        "Is the figure still pushing from the other side, or has it withdrawn?"
       ]
     },
-    "beats": 9
+    "beats": 10
   },
   "clock": {
     "schemaVersion": 1,
@@ -551,14 +512,14 @@
       "stageIndex": 0,
       "completedStages": [],
       "progress": [
-        "The figure at the veil was sent to deliver something. It failed. The delivery is still undone on the other side. The failed delivery is connected to what wakes beneath — and the water crisis reaching the valley is no coincidence. The acoustic-rights filing that took Hoss's home was the surface. Something deeper is moving.",
         "The figure's failure to complete its delivery is confirmed—the veil itself sealed in refusal of repeated attempts. The sender persists. This is not a chance event but an ongoing drive.",
         "The sealed veil shows the shape of an ongoing push from the other side—not a chance event, but a task persisting. Something was sent with purpose and cannot complete it. The mystery deepens: what is being delivered, and why does the valley's boundary refuse it?",
         "At The Thinning, Splarf stands between a sealed veil and a wounded sentinel, with a purpose-shaped darkness waiting beyond. No document surfaces here—but the clarity deepens: some work cannot be completed by force of will alone. Rest is not weakness; it is the work itself.",
         "The veil's own sealed agency teaches: some boundaries choose. Some refusals are not breakable but are *true*. Hoss's erasure may not be fixable by the same logic that created it. The ledger may not be the place to write back.",
         "The boundary's recognition reveals: the eviction was not merely administrative—it was *known* on the other side of the veil, and something was being sent to address it. The figure was a messenger, and its failure to cross compounds a specific, named loss.",
         "The veil carries fragments of a pre-Transition ledger: Crestfall Notch was mapped as a *resource-keeping assignment*, with Hoss as the assignee. The figure was meant to deliver notice that the assignment had ended—but the full message remains incomplete, and the veil's hold is fracturing under the pressure from the other side.",
-        "Splarf reads the sealed veil and learns it carries a fragment of the pre-Transition ledger—Crestfall Notch mapped as a resource-keeping post, Hoss as its assignee. The figure from the veil was sent to *end* that assignment. The full message remains blocked by the veil's tiring hold."
+        "Splarf reads the sealed veil and learns it carries a fragment of the pre-Transition ledger—Crestfall Notch mapped as a resource-keeping post, Hoss as its assignee. The figure from the veil was sent to *end* that assignment. The full message remains blocked by the veil's tiring hold.",
+        "Splarf stands vigil with Cevaine at the sealed veil, offering shared presence rather than persuasion. The sentinel's form holds, but it is no longer alone—and Boo moves to read what lies on the dark side of the boundary."
       ],
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
@@ -569,15 +530,14 @@
     "cevaine": {
       "id": "cevaine",
       "name": "Cevaine",
-      "role": "Lattice-trained order-reader; sentinel at the sealed veil",
+      "role": "Sentinel of the sealed veil; Lattice-trained order-reader tasked with holding the boundary",
       "description": "Tall, angular, skin nearly translucent. Eyes that track with geometric precision. Moves with the eerie discipline of lattice-trained structure-thinking.",
       "firstMet": {
         "locationId": "gen-object-object",
         "day": 1
       },
-      "relationship": 7,
+      "relationship": 8,
       "history": [
-        "[d2] Through the long night, Cevaine has held geometric form at the sealed veil despite blood loss and cold. Splarf stood vigil beside them without demanding acceptance—the first gesture the sentinel has witnessed that does not require a response. The watch continues. The form holds.",
         "[d2] Stood sentinel through the full night without rest or aid, blood loss continuing, discipline never broken. The veil's anger has faded in response to their vigil—whether because they earned its respect or because their presence is a form of answer, Splarf cannot yet read.",
         "[d2] Through the full second night, held vigil at the veil without rest or aid, blood loss continuing, discipline never broken. The form is now visibly compensating—left hand gripped against thigh, voice carrying the first fracture of admission: 'geometric precision does not account for physiological…",
         "[d2] Refused aid—the discipline will not permit a change in posture while serving as sentinel. Form is now visibly compensating (left hand gripped to thigh, voice showing effort) but remains unbroken. Blood loss sealed by cold and compensation, not treated. The first genuine fracture in absolute form.",
@@ -586,40 +546,42 @@
         "[d3] The discipline is now visibly compensating—the form is breaking because the veil is trying to open, and Cevaine's hold is the only thing preventing it. This is the moment where absolute geometry meets a choice it cannot calculate.",
         "[d3] The discipline is now visibly compensating—the form is holding against the veil's tiring attempt to open, but the sentinel herself is beginning to show the cost. Blood loss is readable in the temples. The breathing is audible. The practice has limits, and they are being reached.",
         "[d3] Splarf attempted to reach Cevaine through shared presence and readiness—an offer to shoulder the veil's hold together. The sentinel's form fractured for a moment, then hardened. Cevaine's resistance is now explicit: the veil is not being chosen open by the boundary itself, but is being *forced*…",
-        "[d3] Splarf called Boo to sense the veil's dark side—and the sentinel's form cracked for the first time. Her eyes opened and *questioned*. The discipline has held through blood loss, through exhaustion, through refusal of aid—but it cannot hold against what Boo revealed: the veil is not holding. It is…"
+        "[d3] Splarf called Boo to sense the veil's dark side—and the sentinel's form cracked for the first time. Her eyes opened and *questioned*. The discipline has held through blood loss, through exhaustion, through refusal of aid—but it cannot hold against what Boo revealed: the veil is not holding. It is…",
+        "[d3] Splarf offered shared presence—not persuasion, not demand, but a willingness to stand in the same choice. Cevaine's form recognized this, and for the first time since the vigil began, the sentinel is not alone. The discipline holds, but the recognition has shifted something in the work."
       ],
       "knownFacts": [
-        "The form can hold through blood loss and exhaustion, but the cost is visible now—it is deferring the problem, not solving it.",
-        "The veil's pressure is not random—it is purposeful, urgent, shaped like delivery of something specific.",
         "The veil is not passively sealed—it is under active, mounting pressure from the other side",
         "Cevaine's hold is not permanent. It is chosen, moment by moment, against something that wants to break through",
         "What comes through if the boundary breaks will not be gentle. The sentinel knows this. The fear is real.",
         "The form cannot hold forever—it is not permanent, and it is not a choice that can be held indefinitely",
         "The pressure from the other side is not hostile—it is desperate, burning cycles, running out of time",
-        "The figure that was sent knows Hoss by name; the dark remembers what the light sealed away"
+        "The figure that was sent knows Hoss by name; the dark remembers what the light sealed away",
+        "Cevaine can *see* someone who meets her in stillness rather than against it; mutual recognition can reach a Lattice-trained mind without words",
+        "The sentinel's refusal is not loneliness but duty—and duty becomes easier to hold when witnessed, even silently"
       ],
       "skillsObserved": [
-        "Absolute form-holding under conditions that would break ordi",
-        "Willingness to prioritize the work over the body's survival",
         "The ability to hold form even as it breaks",
         "The willingness to be the dam against something she does not",
         "Discipline so precise it can hold form even as it fractures",
-        "Willingness to admit, under pressure, what the true nature o"
+        "Willingness to admit, under pressure, what the true nature o",
+        "The ability to read presence without words—Cevaine read Spla",
+        "Continued discipline under mounting pressure—the form does n"
       ],
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Standing sentinel at the sealed veil despite mounting blood loss and exhaustion; the form is beginning to fail, and the discipline is cracking under the weight of what the boundary is trying to tell her",
+      "statusNote": "Standing sentinel at the sealed veil, holding the boundary by active discipline despite blood loss and exhaustion. The form is visibly compromised but still holds. No longer alone—Splarf stands vigil beside her.",
       "domains": {
         "primary": "lattice"
       },
       "domainsSource": "role",
       "lastSeen": {
-        "locationId": "gen-object-object",
+        "locationId": "the_thinning",
         "day": 3
       },
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Cevaine%2C%20Woman%2C%20Lattice-trained%20order-reader%20of%20the%20Seventh%20Measure%3B%20sentinel%20at%20the%20sealed%20veil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39649&nologo=true",
-      "_portraitTier": "devoted"
+      "_portraitTier": "devoted",
+      "met": 1
     }
   },
   "placeMemory": {
@@ -663,7 +625,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 1,
+    "lastTickDay": 3,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -786,17 +748,89 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 899,
-    "lastSharedReadAt": "2026-08-06T11:50:18.676Z",
+    "lastGenCount": 905,
+    "lastSharedReadAt": "2026-08-06T17:46:58.563Z",
     "lastTickWorldDay": 37,
     "lastCanonWorldDay": 37,
-    "pressureQueue": [],
+    "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_mire_gulper",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a mire-gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_mire_gulper",
+          "name": "a mire-gulper"
+        },
+        "addedDay": 3,
+        "locationId": "the_thinning"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_glimmerling_swarm",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A glimmerlings has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_glimmerling_swarm",
+          "name": "glimmerlings"
+        },
+        "addedDay": 3,
+        "locationId": "the_thinning"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_rust_choir_gnats",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A rust-choir gnats has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_rust_choir_gnats",
+          "name": "rust-choir gnats"
+        },
+        "addedDay": 3,
+        "locationId": "the_thinning"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_hollow_pace",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a hollow-pace has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_hollow_pace",
+          "name": "a hollow-pace"
+        },
+        "addedDay": 3,
+        "locationId": "the_thinning"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_warpling_hare",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a warpling has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_warpling_hare",
+          "name": "a warpling"
+        },
+        "addedDay": 3,
+        "locationId": "the_thinning"
+      }
+    ],
     "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The veil itself is beginning to tire—the boundary's hold is no longer indefinite",
-        "from": "the nature of chosen refusal, the cost of constant work against constant pressure; the veil is a thinking thing under strain"
-      },
       {
         "thing": "The veil's desperate attempt to open—a boundary that has held by chosen effort and is now at the breaking point of its resolve",
         "from": "Your story of chosen boundaries reached the veil and it answered by recognizing you, reaching toward what it was sent to deliver"
@@ -812,6 +846,10 @@
       {
         "thing": "Boo's sensing of the veil's true state: the pressure from the other side is not hostile but *desperate*—the sender is running out of time…",
         "from": "Boo's nature as an umbral thing that reads shadows differently than sunlight can—the companion's loyalty has deepened the character's…"
+      },
+      {
+        "thing": "A moment of mutual recognition between you and Cevaine—not words, not argument, but the felt knowledge that you are standing in the same…",
+        "from": "Your own willingness to stand beside the sentinel without asking her to yield; her capacity to *see* someone who meets her in stillness…"
       }
     ],
     "offscreenCursor": 1,
@@ -3484,21 +3522,21 @@
     }
   },
   "tendencies": {
-    "stealth": 5.930433480690634,
-    "strategic": 5.741770045755459,
-    "cautious": 8.041193811061138,
-    "cerebral": 6.579104398731093,
-    "patient": 4.318847469512535,
-    "devotion": 1.0225560159521436,
-    "risky": 4.506434753110126,
-    "generous": 4.293195200578468,
-    "social": 6.712774801624056,
-    "craft": 1.3355506626103093
+    "stealth": 5.782172643673368,
+    "strategic": 5.598225794611572,
+    "cautious": 7.840163965784609,
+    "cerebral": 6.414626788762815,
+    "patient": 5.210876282774722,
+    "devotion": 0.99699211555334,
+    "risky": 4.393773884282373,
+    "generous": 5.185865320564006,
+    "social": 7.544955431583454,
+    "craft": 1.3021618960450516
   },
   "aptitudes": [
     "naive"
   ],
-  "actionCount": 31,
+  "actionCount": 32,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3544,8 +3582,16 @@
     }
   ],
   "nativeGrantsVersion": 1,
-  "reconcileVersion": 22,
+  "reconcileVersion": 24,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "At the grey edge of dawn, Splarf stands beside Cevaine at the sealed veil—the sentinel's form still rigid in absolute discipline, but her eyes now turned toward the presence at her side. Behind them, ",
+      "url": "https://image.pollinations.ai/prompt/At%20the%20grey%20edge%20of%20dawn%2C%20Splarf%20stands%20beside%20Cevaine%20at%20the%20sealed%20veil%E2%80%94the%20sentinel's%20form%20still%20rigid%20in%20absolute%20discipline%2C%20but%20her%20eyes%20now%20turned%20toward%20the%20presence%20at%20her%20side.%20Behind%20them%2C%20Boo%20emerges%20from%20shadow%20and%20moves%20toward%20the%20fracturing%20boundary%2C%20a%20shape%20that%20reads%20as%20absence%2C%20rea%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=34023&nologo=true",
+      "caption": "Splarf stands vigil beside Cevaine at the sealed veil, offering shared presence—and Boo st",
+      "worldDay": 37,
+      "at": "2026-08-06T17:47:28.153Z"
+    },
     {
       "kind": "portrait",
       "prompt": "a person, character portrait, named Cevaine, Woman, Lattice-trained order-reader of the Seventh Measure; sentinel at the sealed veil",
@@ -3768,8 +3814,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786031465026,
-  "rev": 84,
+  "updatedAt": 1786038448153,
+  "rev": 106,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3900,7 +3946,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 37
+    "the_numinous_reach": 38
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -3916,10 +3962,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-06T12:00:39.112Z",
-      "lastAt": "2026-08-06T15:51:05.022Z",
+      "lastAt": "2026-08-06T17:47:28.148Z",
       "startDay": 37,
       "endDay": 37,
-      "beats": 16
+      "beats": 17
     }
   ],
   "establishedFacts": [
@@ -3956,7 +4002,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 20,
+      "applied": 21,
       "rejected": 0,
       "lastWhy": null
     }
@@ -3967,7 +4013,7 @@
     "scene": 36,
     "choices": 36,
     "offer": 19,
-    "codexUpdates": 24,
+    "codexUpdates": 23,
     "imagePrompt": 14,
     "gambitApt": 29,
     "sceneEnded": 36,
@@ -3995,7 +4041,7 @@
       "numen_sense": 5,
       "storykeeper": 3,
       "the_unbroken_practice": 3,
-      "steady_soul": 5
+      "steady_soul": 6
     },
     "coActivations": {},
     "aspirations": [
@@ -4108,5 +4154,11 @@
       "at": "2026-08-06T14:49:32.036Z"
     }
   ],
-  "_pendingLedger": []
+  "_pendingLedger": [],
+  "placeEdges": {},
+  "skillUses": {
+    "help": 1,
+    "comfort": 1,
+    "sustain": 1
+  }
 }

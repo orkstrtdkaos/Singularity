@@ -41,10 +41,27 @@
   "radiusWorld": 0.054,
   "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
  },
- "axisVector": [],
- "axisVectorNote": "",
- "worldPos": {},
- "worldPosNote": "",
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.4,
+  0,
+  0,
+  0,
+  0.3
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
+ "worldPos": {
+  "colatitude": 45,
+  "longitude": 270,
+  "depth": 0
+ },
+ "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_blaze, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
  "foothillOf": [
   "blazeborn",
   "radiant_folk",

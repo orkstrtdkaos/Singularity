@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 1,
-  "xp": 26,
+  "xp": 31,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -48,7 +48,7 @@
   "maxHealth": 35,
   "health": 32,
   "maxEnergy": 100,
-  "energy": 23,
+  "energy": 18,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -120,20 +120,55 @@
         "player": "Call out to it plainly in the old language—if it is purpose-shaped and aware, it understands speech. Ask what it wants.",
         "summary": "Splarf called out to the purpose-shaped thing in the dark in the old tongue, but it would not answer—only drew nearer, watching, waiting with the patience of something sent.",
         "narration": "You draw breath and speak into the dark—not loudly, but clearly, in the old tongue Hoss taught you, the language that predates the Transition and carries weight in thin places. Your voice is steady.\n\n\"What do you want?\" you ask it. Simple. Direct. The words hang in the clearing's copper-tainted air.\n\nFor a moment—long enough that your heart counts the seconds—nothing. The forest edge does not move. The humming from the sealed veil behind you does not change. Even Boo's absence feels like it is holding its breath.\n\nThen the darkness shivers. Not a physical thing—a shimmer like heat-haze, but wrong, too deliberate. The forest's absolute black pulls back from the clearing's edge incrementally, as if the tree-line itself is retreating. The movement stops. The dark settles again, closer than before, but still holding.\n\nCevaine's hand touches your shoulder—precise, geometric, a point of contact that reads as grounding rather than comfort. \"It heard,\" they say quietly. \"It does not answer.\"\n\nThe thing in the dark has pulled nearer to the cleared space, to you. It is aware. It heard your words. But whatever purpose shapes it, whatever delivery it was sent to make, it does not meet you with language. The silence that follows feels not like refusal but like waiting—as if something on the far side of that dark still turns over what you asked, and the answer, when it comes, will not be in any tongue you know."
+      },
+      {
+        "player": "Step back to the veil's edge and try again to bridge it—if the thing came from the other side, perhaps the veil itself knows what it wants, or who sent it.",
+        "summary": "At the sealed veil of The Thinning, Splarf makes contact with the boundary itself and learns it was sealed not in anger at them, but in refusal—the other side keeps sending, and the veil holds it back.",
+        "narration": "You step back toward the sealed veil, your breath steadying into the deep, centering rhythm of the Unbroken Practice. The humming shimmer-line holds its distance, luminous against the darkening forest. You place your palm against the invisible boundary—not pushing, but resting, the way you'd rest your hand on a living thing's chest to feel its heartbeat.\n\nThe veil does not reject you. There is a moment—thin, suspended—where you feel something like recognition pulse against your skin. Not anger this time. Attention. The boundary hums louder, resonance climbing, and you sense the *shape* of what stands on the other side: not the figure that came through, but the *intention* behind it. A vast, patient structure of purpose. The veil was not sealed in rage at you, you understand now—it was sealed in refusal of what sent the figure. A door slamming shut against something that keeps trying to open it.\n\nThe message is plain and terrible: *This crossing should not be used. This delivery should not be made. The thing on the other side will not stop sending.*\n\nYour hand pulls back. The veil's hum settles to a low, watchful tone. Behind you, Cevaine stands motionless, their geometric precision still trained on the forest's edge—where the purpose-shaped darkness waits with the patience of something under orders."
       }
     ],
     "lastTurn": {
-      "narration": "You draw breath and speak into the dark—not loudly, but clearly, in the old tongue Hoss taught you, the language that predates the Transition and carries weight in thin places. Your voice is steady.\n\n\"What do you want?\" you ask it. Simple. Direct. The words hang in the clearing's copper-tainted air.\n\nFor a moment—long enough that your heart counts the seconds—nothing. The forest edge does not move. The humming from the sealed veil behind you does not change. Even Boo's absence feels like it is holding its breath.\n\nThen the darkness shivers. Not a physical thing—a shimmer like heat-haze, but wrong, too deliberate. The forest's absolute black pulls back from the clearing's edge incrementally, as if the tree-line itself is retreating. The movement stops. The dark settles again, closer than before, but still holding.\n\nCevaine's hand touches your shoulder—precise, geometric, a point of contact that reads as grounding rather than comfort. \"It heard,\" they say quietly. \"It does not answer.\"\n\nThe thing in the dark has pulled nearer to the cleared space, to you. It is aware. It heard your words. But whatever purpose shapes it, whatever delivery it was sent to make, it does not meet you with language. The silence that follows feels not like refusal but like waiting—as if something on the far side of that dark still turns over what you asked, and the answer, when it comes, will not be in any tongue you know.",
-      "sceneSummary": "Splarf called out to the purpose-shaped thing in the dark in the old tongue, but it would not answer—only drew nearer, watching, waiting with the patience of something sent.",
+      "narration": "You step back toward the sealed veil, your breath steadying into the deep, centering rhythm of the Unbroken Practice. The humming shimmer-line holds its distance, luminous against the darkening forest. You place your palm against the invisible boundary—not pushing, but resting, the way you'd rest your hand on a living thing's chest to feel its heartbeat.\n\nThe veil does not reject you. There is a moment—thin, suspended—where you feel something like recognition pulse against your skin. Not anger this time. Attention. The boundary hums louder, resonance climbing, and you sense the *shape* of what stands on the other side: not the figure that came through, but the *intention* behind it. A vast, patient structure of purpose. The veil was not sealed in rage at you, you understand now—it was sealed in refusal of what sent the figure. A door slamming shut against something that keeps trying to open it.\n\nThe message is plain and terrible: *This crossing should not be used. This delivery should not be made. The thing on the other side will not stop sending.*\n\nYour hand pulls back. The veil's hum settles to a low, watchful tone. Behind you, Cevaine stands motionless, their geometric precision still trained on the forest's edge—where the purpose-shaped darkness waits with the patience of something under orders.",
+      "sceneSummary": "At the sealed veil of The Thinning, Splarf makes contact with the boundary itself and learns it was sealed not in anger at them, but in refusal—the other side keeps sending, and the veil holds it back.",
       "choices": [
         {
-          "label": "Step closer to the tree-line with Boo. Match its patience and see what it does when you enter its territory.",
+          "label": "Turn to Cevaine and ask what they make of this—is the veil itself a thinking thing, or are you reading intention into barrier-logic?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Call out again to the thing in the dark—now that you understand the veil's refusal, ask if it will speak plainly about why it was sent.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 20,
           "intentTags": [
-            "risky",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Leave the veil and move deeper into the forest with Cevaine and Boo—if the thing will not speak at the boundary, perhaps it will elsewhere, on ground that is not sealed.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
             "careful"
           ],
           "abilityId": null,
@@ -143,43 +178,11 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Cevaine to map the thing's position and movement with geometric precision—if it will not speak, perhaps its pattern will reveal what it wants.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 18,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step back to the veil's edge and try again to bridge it—if the thing came from the other side, perhaps the veil itself knows what it wants, or who sent it.",
+          "label": "Step back from the veil and sit—hold stillness, the practice itself—and wait to see if the dark thing will interpret patience as an opening.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": 25,
-          "intentTags": [
-            "risky",
-            "craft"
-          ],
-          "abilityId": "numen_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Wait here in the clearing—you, Cevaine, and Boo—and let the thing approach if it will. Some silences need to be sat with until they break on their own.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
+          "difficulty": 12,
           "intentTags": [
             "careful",
             "study"
@@ -194,107 +197,140 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -2
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-document-and-the-ditch",
+          "note": "The figure's failure to complete its delivery is confirmed—the veil itself sealed in refusal of repeated attempts. The sender persists. This is not a chance event but an ongoing drive."
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "Cevaine's hand has shifted—resting now on the place your shoulder was, a mirror of comfort offered in the form of structural support",
+        "from": "Cevaine's admission that geometric precision has limits, and their recognition that Splarf stood against that limitation. They are offering what a Lattice-reader offers: presence as a grounding point."
+      },
       "stageOps": [],
       "scene": {
-        "setting": "The Thinning's waygate clearing at full dusk—evening has darkened to the edge of true night. The sealed veil hums at the forest's far edge, a shimmer-line that refuses. The absolute darkness of the Disputed Zone woods has pulled slightly closer to the cleared space—the tree-line retreated a few paces, then held. Deadfall scattered underfoot; the copper-taint of turned earth thick in the air. A distant Marcher line still holds the breach to the south, their torches small and far.",
+        "setting": "The Thinning's sealed waygate clearing at full dusk. The veil—a shimmer-line that hums, now resonant from Splarf's contact—holds at the forest's far edge. The Disputed Zone woods behind it are absolute dark. The ground beneath is deadfall and stone, copper-tainted earth. The purpose-shaped darkness waits at the tree-line, patient, aware.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Standing beside Splarf, hand still resting on their shoulder—geometric precision tuned not to the dark but to the character's steadiness. Eyes tracking the forest edge. Processing a question that has no seam to close."
+            "state": "Standing at the clearing's edge, hand extended slightly in Splarf's direction—shoulder injury visible but ignored, eyes still tracking the forest with geometric precision, now calibrated not to the dark but to the character's breathing"
           }
         ],
         "objects": [
-          "The sealed veil—shimmer and hum at the forest's deep edge",
-          "Deadfall and stone underfoot",
-          "The dark of the Disputed Zone wood—now slightly closer, having retreated and held"
+          "The sealed veil—shimmer and hum",
+          "Deadfall scattered underfoot",
+          "The dark of the Disputed Zone wood—held at a distance, waiting"
         ],
         "threads": [
-          "The thing in the dark is aware and listening—but will not answer in language",
-          "The veil remains sealed, refusing all crossing",
-          "The purpose-shaped presence is patient and waiting—for what?",
-          "Boo's withdrawal into shadow—confirming this is not a beast, not hunger"
+          "The thing in the dark continues to wait—purpose-shaped, aware, not speaking but listening",
+          "The veil itself has demonstrated agency—it seals not randomly but in refusal of repeated attempts to cross",
+          "Someone or something on the other side continues to send, despite the veil's refusal",
+          "Boo remains withdrawn in shadow, watching—confirming this is not animal business"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "note": "Heard Splarf call out to the dark thing in the old tongue. Confirmed it heard but did not answer. Now standing at Splarf's shoulder, hand grounding, admitting that this is a problem geometric precision cannot solve. Waiting to see what Splarf will choose next.",
+          "name": "Cevaine",
+          "note": "Watched Splarf make contact with the sealed veil itself and read intention in its hum. Now standing closer, hand near Splarf's shoulder—offering presence as a grounding point, the Lattice way of saying: I see the limit of my own thinking, and I will hold the ground while you stand at that edge.",
           "learned": [
-            "The thing in the dark heard the old language but will not speak it back",
-            "Some problems have no seam to close—they only have waiting"
+            "The veil was not sealed in anger at the character, but in refusal of what stands on the other side",
+            "The other side continues to send, and the veil holds it back deliberately",
+            "A boundary can be a thinking thing—or at least a thing that resists, chooses, refuses"
           ],
-          "statusNote": "Active, injured shoulder, standing sentinel at the clearing's edge—learning how to think about things that move by choice rather than pattern"
+          "relationshipDelta": 1,
+          "statusNote": "Active, injured shoulder, now standing sentinel with hand-distance from Splarf—learning to think about choice rather than pattern"
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The sealed veil showed responsiveness to direct contact—it hums louder when touched, and the intention behind it is legible as refusal of repeated crossing attempts from the other side",
+          "flag": {
+            "veil_sealed_resistant": true,
+            "veil_shows_agency": true
+          }
+        }
+      ],
       "discovery": null,
       "codexUpdates": [
         {
           "topic": "the-figure-in-the-thin-place",
           "label": "The Figure in the Thin Place",
           "kind": "mystery",
-          "fact": "The thing in the dark heard Splarf call out in the old tongue and understood the words—but it will not answer. It pulled closer to the clearing instead, watching, waiting with purpose-shaped patience. It does not meet language with language.",
+          "entityId": null,
+          "fact": "The veil was sealed not in anger at Splarf, but in refusal of what stands on the other side. The sender persists in trying to cross—the veil holds it back deliberately. This is an ongoing push, not a chance opening.",
           "links": [
             "what-wakes-beneath",
+            "the-water-crisis",
+            "the-thinning"
+          ]
+        },
+        {
+          "topic": "veil-agency",
+          "label": "Veil as Boundary-Agent",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "The sealed veil at The Thinning demonstrates agency. It refuses crossing, responds to contact with clarified intention, and holds against repeated attempts to open it from the other side. A boundary may be a thinking thing—or at the very least, a thing that chooses.",
+          "links": [
             "the-thinning",
-            "cevaine"
+            "what-wakes-beneath"
           ]
         }
       ],
-      "generateRequest": [],
+      "generateRequest": null,
       "encounterOps": [],
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "the evening deepens; dusk is settling toward full night"
+        "why": "contact with the veil, sustained stillness, and the conversation with Cevaine"
       },
       "moveTo": null,
       "stateOps": [],
-      "itemUpdates": [],
+      "itemUpdates": null,
       "deriveItem": null,
-      "imagePrompt": null,
-      "sceneEnded": false,
-      "gambitApt": false,
+      "imagePrompt": "The sealed veil at The Thinning—a shimmer-line glowing faintly against absolute dark, vibrating with new resonance. Splarf's palm still warm from contact, drawing back. Cevaine standing at the forest's edge, hand extended but not touching, eyes tracking something the geometry cannot hold. Behind them both, Boo surfaces from shadow—a ribbon of absence with unlit eyes, watching the darkness wait.",
       "gambitOps": null,
-      "offerIntent": null
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Thinning's waygate clearing at full dusk—evening has darkened to the edge of true night. The sealed veil hums at the forest's far edge, a shimmer-line that refuses. The absolute darkness of the Disputed Zone woods has pulled slightly closer to the cleared space—the tree-line retreated a few paces, then held. Deadfall scattered underfoot; the copper-taint of turned earth thick in the air. A…",
+      "setting": "The Thinning's sealed waygate clearing at full dusk. The veil—a shimmer-line that hums, now resonant from Splarf's contact—holds at the forest's far edge. The Disputed Zone woods behind it are absolute dark. The ground beneath is deadfall and stone, copper-tainted earth. The purpose-shaped darkness waits at the tree-line, patient, aware.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Standing beside Splarf, hand still resting on their shoulder—geometric precision tuned not to the dark but to the charac"
+          "state": "Standing at the clearing's edge, hand extended slightly in Splarf's direction—shoulder injury visible but ignored, eyes "
         }
       ],
       "objects": [
-        "The sealed veil—shimmer and hum at the forest's deep edge",
-        "Deadfall and stone underfoot",
-        "The dark of the Disputed Zone wood—now slightly closer, having retreated and hel"
+        "The sealed veil—shimmer and hum",
+        "Deadfall scattered underfoot",
+        "The dark of the Disputed Zone wood—held at a distance, waiting"
       ],
       "threads": [
-        "The thing in the dark is aware and listening—but will not answer in language",
-        "The veil remains sealed, refusing all crossing",
-        "The purpose-shaped presence is patient and waiting—for what?",
-        "Boo's withdrawal into shadow—confirming this is not a beast, not hunger"
+        "The thing in the dark continues to wait—purpose-shaped, aware, not speaking but listening",
+        "The veil itself has demonstrated agency—it seals not randomly but in refusal of repeated attempts to cross",
+        "Someone or something on the other side continues to send, despite the veil's refusal",
+        "Boo remains withdrawn in shadow, watching—confirming this is not animal business"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
@@ -423,7 +459,8 @@
       "completedStages": [],
       "progress": [
         "You are at The Thinning, a place of thin records and displaced knowledge — exactly the kind of place where a document like that might surface. But first, something on the other side of the veil tried to reach the valley, and the veil sealed before you could learn what it was trying to deliver. The answer might be connected.",
-        "The figure at the veil was sent to deliver something. It failed. The delivery is still undone on the other side. The failed delivery is connected to what wakes beneath — and the water crisis reaching the valley is no coincidence. The acoustic-rights filing that took Hoss's home was the surface. Something deeper is moving."
+        "The figure at the veil was sent to deliver something. It failed. The delivery is still undone on the other side. The failed delivery is connected to what wakes beneath — and the water crisis reaching the valley is no coincidence. The acoustic-rights filing that took Hoss's home was the surface. Something deeper is moving.",
+        "The figure's failure to complete its delivery is confirmed—the veil itself sealed in refusal of repeated attempts. The sender persists. This is not a chance event but an ongoing drive."
       ],
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
@@ -440,7 +477,7 @@
         "locationId": "gen-object-object",
         "day": 1
       },
-      "relationship": 4,
+      "relationship": 5,
       "history": [
         "[d1] Confronted Splarf at the waygate clearing, holding them accountable for breaching the veil with old-language speech. Treats the breach as a structural problem to be solved.",
         "[d1] Yielded to Splarf in ritual contest at the waygate clearing. Recognized in Splarf's unshakeable practice something that resists geometric precision. First willingness to acknowledge a limitation in their own system.",
@@ -450,17 +487,18 @@
         "[d1] Yielded to the character's invitation to investigate the dark. Admitting uncertainty has opened something — they are no longer looking only at the veil, but at the character who stood against precision itself.",
         "[d1] Cevaine applied geometric precision to read the moving thing and found no resolving pattern—it moves by choice, not logic. This is the moment geometric thinking reaches its limit. They are now waiting to understand a thing that does not solve.",
         "[d1] Confirmed to Splarf that what moves in the dark is purpose-shaped, not animal—a thing that chooses its path rather than following the geometry of natural motion.",
-        "[d1] Heard Splarf call out to the dark thing in the old tongue. Confirmed it heard but did not answer. Now standing at Splarf's shoulder, hand grounding, admitting that this is a problem geometric precision cannot solve. Waiting to see what Splarf will choose next."
+        "[d1] Heard Splarf call out to the dark thing in the old tongue. Confirmed it heard but did not answer. Now standing at Splarf's shoulder, hand grounding, admitting that this is a problem geometric precision cannot solve. Waiting to see what Splarf will choose next.",
+        "[d1] Watched Splarf make contact with the sealed veil itself and read intention in its hum. Now standing closer, hand near Splarf's shoulder—offering presence as a grounding point, the Lattice way of saying: I see the limit of my own thinking, and I will hold the ground while you stand at that edge."
       ],
       "knownFacts": [
-        "Cevaine does not return to the veil's study when asked to walk into a problem without a seam",
-        "The geometric mind can choose to move toward what it cannot solve",
-        "There is something in the dark that moves without predictable geometric logic",
         "A thing that moves by choice rather than following the geometry of natural motion",
         "Geometric precision cannot predict the actions of something that chooses its own path",
         "Geometric precision cannot find a pattern in a being that moves by will rather than law",
         "The thing in the dark heard the old language but will not speak it back",
-        "Some problems have no seam to close—they only have waiting"
+        "Some problems have no seam to close—they only have waiting",
+        "The veil was not sealed in anger at the character, but in refusal of what stands on the other side",
+        "The other side continues to send, and the veil holds it back deliberately",
+        "A boundary can be a thinking thing—or at least a thing that resists, chooses, refuses"
       ],
       "skillsObserved": [
         "geometric precision of movement",
@@ -472,7 +510,7 @@
       "status": "active",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "statusNote": "Active, injured shoulder, standing sentinel at the clearing's edge—learning how to think about things that move by choice rather than pattern",
+      "statusNote": "Active, injured shoulder, now standing sentinel with hand-distance from Splarf—learning to think about choice rather than pattern",
       "domains": {
         "primary": "lattice"
       },
@@ -503,8 +541,13 @@
     },
     "gen-object-object": {
       "visits": 1,
-      "notes": [],
-      "flags": {},
+      "notes": [
+        "[d1] The sealed veil showed responsiveness to direct contact—it hums louder when touched, and the intention behind it is legible as refusal of repeated crossing attempts from the other side"
+      ],
+      "flags": {
+        "veil_sealed_resistant": true,
+        "veil_shows_agency": true
+      },
       "lastVisit": 1,
       "vectorsKnown": []
     }
@@ -639,12 +682,8 @@
     "lastTickWorldDay": 37,
     "lastCanonWorldDay": 37,
     "pressureQueue": [],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Cevaine admitting uncertainty — that the Lattice-Cities' way of solving cannot solve this kind of breach.",
-        "from": "Cevaine's own confrontation with the limits of their own system; their recognition that Splarf held something that geometry cannot read."
-      },
       {
         "thing": "Boo's warning — something in the woods that does not make the small familiar sounds of night",
         "from": "Boo's own nature and what it knows of the dark; the thinning boundary where things from both sides of the veil might walk"
@@ -660,6 +699,10 @@
       {
         "thing": "Cevaine's admission that geometric precision cannot solve this—and their willingness to stand at the edge of their own knowing",
         "from": "Splarf's practice of holding stillness and form, which opened a space for Cevaine to move beyond the Lattice's need to solve everything"
+      },
+      {
+        "thing": "Cevaine's hand has shifted—resting now on the place your shoulder was, a mirror of comfort offered in the form of structural support",
+        "from": "Cevaine's admission that geometric precision has limits, and their recognition that Splarf stood against that limitation. They are…"
       }
     ],
     "offscreenCursor": 1,
@@ -3064,7 +3107,8 @@
           "[d1] The figure is a SENT THING—tasked, purposeful, aware. It came to DELIVER, not to take or harm. When the connection broke, it was pulled back through the veil by force, not by choice. Its final emotion across the breaking thread was failure: the work undone, the delivery not completed. Whatever it…",
           "[d1] The figure was pulled back through the veil by force before it could deliver what it was sent to deliver. The veil sealed itself in anger, rejecting the bridge Splarf attempted to hold. The failure carries weight — the work remains undone on the other side.",
           "[d1] There may be another awareness in or near the dark—present in the Disputed Zone forest, purpose-shaped like the figure that came through the veil, aware of being noticed. It is patient. It is waiting.",
-          "[d1] The thing in the dark heard Splarf call out in the old tongue and understood the words—but it will not answer. It pulled closer to the clearing instead, watching, waiting with purpose-shaped patience. It does not meet language with language."
+          "[d1] The thing in the dark heard Splarf call out in the old tongue and understood the words—but it will not answer. It pulled closer to the clearing instead, watching, waiting with purpose-shaped patience. It does not meet language with language.",
+          "[d1] The veil was sealed not in anger at Splarf, but in refusal of what stands on the other side. The sender persists in trying to cross—the veil holds it back deliberately. This is an ongoing push, not a chance opening."
         ],
         "links": [
           "what-wakes-beneath",
@@ -3131,25 +3175,41 @@
         "createdDay": 1,
         "entityId": "cevaine",
         "updatedDay": 1
+      },
+      "veil-agency": {
+        "id": "veil-agency",
+        "label": "Veil as Boundary-Agent",
+        "kind": "lore",
+        "facts": [
+          "[d1] The sealed veil at The Thinning demonstrates agency. It refuses crossing, responds to contact with clarified intention, and holds against repeated attempts to open it from the other side. A boundary may be a thinking thing—or at the very least, a thing that chooses."
+        ],
+        "links": [
+          "the-thinning",
+          "what-wakes-beneath"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "stealth": 9.593978495746462,
-    "strategic": 2.5874686459600267,
-    "cautious": 4.20817440038717,
-    "cerebral": 3.4744245044271436,
-    "patient": 0.8166518036622618,
-    "devotion": 1.6542433971620178,
-    "risky": 1.8375915934997558,
-    "generous": 1.8096933010253904,
-    "social": 2.807955068359375
+    "stealth": 9.3541290333528,
+    "strategic": 2.522781929811026,
+    "cautious": 4.102970040377491,
+    "cerebral": 3.387563891816465,
+    "patient": 0.7962355085707052,
+    "devotion": 1.6128873122329674,
+    "risky": 2.791651803662262,
+    "generous": 1.7644509684997556,
+    "social": 2.7377561916503903,
+    "craft": 1
   },
   "aptitudes": [
     "shadow",
     "naive"
   ],
-  "actionCount": 12,
+  "actionCount": 13,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3395,8 +3455,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785982404399,
-  "rev": 55,
+  "updatedAt": 1785982498453,
+  "rev": 56,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3549,7 +3609,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 18
+    "the_numinous_reach": 19
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -3557,10 +3617,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-05T23:17:43.184Z",
-      "lastAt": "2026-08-06T02:13:24.380Z",
+      "lastAt": "2026-08-06T02:14:58.437Z",
       "startDay": 36,
       "endDay": 37,
-      "beats": 18
+      "beats": 19
     }
   ],
   "establishedFacts": [
@@ -3591,42 +3651,42 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 9,
+      "applied": 10,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 17,
-    "scene": 17,
-    "choices": 17,
-    "offer": 8,
-    "codexUpdates": 10,
-    "imagePrompt": 7,
-    "gambitApt": 14,
-    "sceneEnded": 17,
-    "characterDeltas": 9,
+    "sceneSummary": 18,
+    "scene": 18,
+    "choices": 18,
+    "offer": 9,
+    "codexUpdates": 11,
+    "imagePrompt": 8,
+    "gambitApt": 15,
+    "sceneEnded": 18,
+    "characterDeltas": 10,
     "arcOps": 1,
     "factUpdates": 3,
-    "placeUpdates": 3,
-    "timeOps": 6,
+    "placeUpdates": 4,
+    "timeOps": 7,
     "deeds": 2,
     "ledgerEvents": 1,
-    "questUpdates": 2,
-    "npcUpdates": 9,
+    "questUpdates": 3,
+    "npcUpdates": 10,
     "generateRequest": 1,
     "newEncounter": 1,
     "encounterOps": 1,
     "markDefiningMoment": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 17,
+  "_opTurns": 18,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "beastfriend": 2,
-      "numen_sense": 2,
+      "numen_sense": 3,
       "storykeeper": 1,
       "the_unbroken_practice": 1,
       "steady_soul": 1
@@ -3646,7 +3706,7 @@
     ],
     "lastUsed": {
       "beastfriend": 37,
-      "numen_sense": 36,
+      "numen_sense": 37,
       "storykeeper": 36,
       "the_unbroken_practice": 36,
       "steady_soul": 37

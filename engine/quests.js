@@ -748,6 +748,14 @@ export function structuredQuestsForGM(character, opts = {}) {
     const stage = q.stages[q.stageIndex] || q.stages[q.stages.length - 1];
     const open = routesForCharacter(q, character).filter(r => r.open).map(r => r.trad);
     let line = `- [${q.id}] ${q.title} (axis: ${q.axis || "?"}) — STAKES: ${q.stakes}\n  Now: ${stage?.objective || "resolve"}${stage?.condition ? ` (${stage.condition})` : ""}${open.length ? `\n  This character's domains open: ${open.join(", ")}` : ""}`;
+    // SNG-343 — ⚠️ AND IF THIS STAGE'S TEXT WAS SEVERED, SAY SO. A store-time cap cut six of Splarf's
+    // quest strings mid-word and the rest was never written down. It cannot be recovered — but a GM that
+    // knows the sentence is incomplete can finish the thought in play, which is the only route back to a
+    // whole quest. Told to the GM, never shown to the player as a defect marker: "[truncated]" on screen
+    // says the game is broken and leaves the sentence exactly as broken.
+    if (stage?._severed) line += `\n  ⚠ THIS OBJECTIVE WAS CUT SHORT BY A STORAGE FAULT and ends mid-sentence. Do NOT quote it as written — restate the objective whole and in your own words, consistent with the stakes.`;
+    if ((q._severedRoutes || []).length) line += `
+  ⚠ These routes were also cut short (${q._severedRoutes.join(", ")}) — treat their text as incomplete and re-describe them rather than reading them back.`;
     // SNG-341 — ⚠️ THE GM MUST SEE WHAT IS STILL MISSING, or it will keep trying to close a stage the
     // engine will keep refusing, and the refusal is invisible to the player as anything but a stuck quest.
     // Naming the gap turns it into the scene: "the clerk still has not seen the filing" is playable.

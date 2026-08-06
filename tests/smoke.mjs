@@ -10657,6 +10657,59 @@ await (async () => {
         catch { return false; } })());
   }
 
+  // SNG-343 — GENERATED QUEST TEXT WAS SEVERED AT 200 CHARS, IN THE SAVE. Found in play by Erik: Splarf's
+  // routes ended mid-word — "it will be slow, inglorious, and m". Six severed strings in one save.
+  //
+  // ⚠️ WORSE THAN A DISPLAY CAP: both slices ran at STORE time, so the rest was never written down and no
+  // re-render brings it back. And it is SNG-152 §5e's own bug in a file that sweep never covered — same cut,
+  // same number, same discovery route: a player read it on screen.
+  {
+    const PA = await import("../engine/personalArc.js");
+    const long = "The clerk who signed it is still alive and still working, and the reason the signature was "
+      + "accepted has never been written down anywhere that anyone outside the office could read it, which "
+      + "is precisely why nobody has ever been able to contest the thing properly.";
+    check("343: the fixture is long enough to have been cut by the old cap", long.length > 200);
+
+    // ⛔ BEHAVIOURAL, NOT A SOURCE PATTERN. The store path itself must not sever — a regex over the file
+    // would prove a line was deleted, not that the text survives the round trip.
+    const arc = PA.sanitizePersonalArc(
+      { name: "A", premise: "p", stakes: "s",
+        stages: [{ objective: long }],
+        routes: { answer: long } },
+      { name: "T", background: "orphan" }, {});
+    check("343: a long stage objective survives storage WHOLE — no cut, no ellipsis",
+      arc.stages[0].objective === long);
+    check("343: …and so does a long route",
+      Object.values(arc.routes)[0] === long);
+    check("343: nothing in the stored arc is exactly 200 characters ending mid-word", (() => {
+      const strings = [...arc.stages.map(x => x.objective), ...Object.values(arc.routes)];
+      return !strings.some(t => typeof t === "string" && t.length === 200 && !/[.!?"'’”)\]]\s*$/.test(t));
+    })());
+
+    // THE REPAIR: six strings are already severed in a live save and cannot be recovered.
+    const RC343 = await import("../engine/reconcile.js");
+    const step343 = RC343.CHARACTER_STEPS.find(x => x.id === "flag-severed-quest-prose");
+    const cut = "x".repeat(193) + " and th";                       // 200, ends mid-word
+    const whole = "y".repeat(199) + ".";                           // 200, ends properly
+    const c343 = { quests: [{ id: "q", stages: [{ id: "s1", objective: cut }, { id: "s2", objective: whole }],
+      routes: { answer: cut, name: whole } }] };
+    step343.apply(c343);
+    check("343: the repair flags a severed string and leaves a legitimately-200 one alone",
+      c343.quests[0].stages[0]._severed === true && !c343.quests[0].stages[1]._severed
+      && c343.quests[0]._severedRoutes.includes("answer") && !c343.quests[0]._severedRoutes.includes("name"));
+
+    // ⛔ AND THE FLAG IS FOR THE GM, NOT A SCAR SHOWN TO THE PLAYER. "[truncated]" on screen says the game is
+    // broken and leaves the sentence just as broken; telling the GM lets it finish the thought in play,
+    // which is the only route back to a whole quest that exists.
+    const Q343 = await import("../engine/quests.js");
+    const block = Q343.structuredQuestsForGM({ actionCount: 0, quests: [{ id: "q", structured: true,
+      status: "active", stageIndex: 0, title: "T", stakes: "s", _severedRoutes: ["answer"],
+      stages: [{ id: "s1", objective: cut, _severed: true }] }] }, {});
+    check("343: the GM is told the text was cut and to restate it whole, rather than quote the fragment",
+      /CUT SHORT BY A STORAGE FAULT/.test(block || "") && /restate the objective whole/.test(block || "")
+      && /routes were also cut short/.test(block || ""));
+  }
+
   // SNG-268 — the rotating window and the backlog: nobody waits forever, nobody loses their beats.
   check("272/268: the offscreen batch ROTATES so no one waits forever", /offscreenCursor/.test(wsrc));
   check("272/268: a legend always gets a seat in the batch", /legend seat|legendSeat/i.test(wsrc));

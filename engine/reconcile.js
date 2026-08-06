@@ -812,6 +812,37 @@ export const CHARACTER_STEPS = [
       return { notes: [`What you came from finally counts for something: ${gained.join(", ")}.`] };
     }
   },
+  {
+    version: 26, id: "flag-severed-quest-prose", playerFacing: true,
+    // SNG-343 — ⚠️ SIX SEVERED STRINGS ARE ALREADY IN SPLARF'S SAVE, and they cannot be recovered: the cut
+    // ran at STORE time, so the rest was never written down.
+    //
+    // ⛔ THE CHOICE MATTERS AND I AM NOT REGENERATING. Aevi named three options — regenerate the quest, mark
+    // the fields incomplete, or leave them silently. Regenerating REWRITES CANON THE PLAYER HAS ALREADY READ
+    // AND MAY HAVE ACTED ON, which is a worse harm than a broken sentence: the quest they are halfway
+    // through would quietly become a different quest. Leaving it silent is the option she rightly called
+    // worst. So it is MARKED — and marked in the direction of repair-through-play rather than a scar.
+    //
+    // ⚠️ THE FLAG IS FOR THE GM, NOT THE PLAYER. A visible "[truncated]" tells the player the game is broken
+    // and leaves the sentence just as broken. Telling the GM the text was severed lets it finish the
+    // thought naturally in the next beat, which is the only route back to a whole quest that exists.
+    apply: (c) => {
+      // Exactly 200 and ending mid-word is the signature of the old `slice(0, 200)`. Checking both
+      // together avoids flagging a legitimately 200-character sentence that happens to end on a boundary.
+      const severed = (t) => typeof t === "string" && t.length === 200 && !/[.!?"’”)\]]\s*$/.test(t);
+      const hit = [];
+      for (const q of c.quests || []) {
+        for (const st of q.stages || []) if (severed(st.objective)) { st._severed = true; hit.push(`${q.id}/${st.id}`); }
+        for (const [k, v] of Object.entries(q.routes || {})) if (severed(v)) {
+          q._severedRoutes = [...new Set([...(q._severedRoutes || []), k])];
+          hit.push(`${q.id}/route:${k}`);
+        }
+      }
+      if (!hit.length) return {};
+      console.log(`[reconcile] sng-343: flagged ${hit.length} quest string(s) severed by the old store-time cap — ${hit.join(", ")}`);
+      return { notes: [`Some quest text was cut short by a storage fault and has been flagged — the telling will fill it back in.`] };
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

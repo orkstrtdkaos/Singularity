@@ -219,15 +219,18 @@
       "stages": [
         {
           "id": "s1",
-          "objective": "the claim on paper — somewhere in the Thinning's traffic of displaced knowledge and guild-adjacent record-runners, the acoustic-rights filing that named Crestfall Notch has been copied, cited, or carr"
+          "objective": "the claim on paper — somewhere in the Thinning's traffic of displaced knowledge and guild-adjacent record-runners, the acoustic-rights filing that named Crestfall Notch has been copied, cited, or carr",
+          "_severed": true
         },
         {
           "id": "s2",
-          "objective": "the clerk with the seal — the enginewright and hourkeeper networks know who processes Plateau light-law filings; someone certified that the tone-guild's ancestral acoustic claim met the statutory thre"
+          "objective": "the clerk with the seal — the enginewright and hourkeeper networks know who processes Plateau light-law filings; someone certified that the tone-guild's ancestral acoustic claim met the statutory thre",
+          "_severed": true
         },
         {
           "id": "s3",
-          "objective": "what gets written back — armed with the document, the clerk, and two years of circuit-knowledge about how common-right traditions actually function for the numinous and churnfolk of the lower pass, Sp"
+          "objective": "what gets written back — armed with the document, the clerk, and two years of circuit-knowledge about how common-right traditions actually function for the numinous and churnfolk of the lower pass, Sp",
+          "_severed": true
         }
       ],
       "routes": {
@@ -325,7 +328,12 @@
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
       "startedWorldDay": 36,
-      "awaitingResolution": true
+      "awaitingResolution": true,
+      "_severedRoutes": [
+        "repair",
+        "answer",
+        "name"
+      ]
     }
   ],
   "npcRegistry": {

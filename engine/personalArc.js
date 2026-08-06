@@ -139,13 +139,22 @@ export function sanitizePersonalArc(raw, character, ctx = {}) {
       .map(a => resolveArcAnchor(a, candidates)).filter(Boolean).slice(0, 3);
     return {
       id: `s${i + 1}`,
-      objective: String(st?.objective || st || `stage ${i + 1}`).slice(0, 200),
+      // SNG-343 — ⛔ NO CAP. This severed the player-facing objective at exactly 200 characters AT STORE
+      // TIME, so the rest was gone from the save and no re-render brought it back. Erik read "copied,
+      // cited, or carr" on screen — the same discovery route, the same number, and the same bug SNG-152 §5e
+      // was built to end. `personalArc.js` was simply not in that sweep.
+      //
+      // ⚠️ THE MARKER IS THE TELL: other caps in this codebase carry `// prose-cap-ok` for genuinely internal
+      // strings. These two never did, because they are not internal — they are the quest the player reads.
+      // If length ever needs limiting it belongs at RENDER time, where it is reversible.
+      objective: String(st?.objective || st || `stage ${i + 1}`),
       anchors,
       unanchored: anchors.length === 0 || undefined   // §1c.1: visible, so "not ready to show" is checkable
     };
   });
   const routes = {};
-  if (raw.routes && typeof raw.routes === "object") for (const [k, v] of Object.entries(raw.routes).slice(0, 3)) routes[slug(k) || k] = String(v).slice(0, 200);
+  // SNG-343 — ⛔ NO CAP, same reason: a route is player-facing prose and this cut it mid-word into the save.
+  if (raw.routes && typeof raw.routes === "object") for (const [k, v] of Object.entries(raw.routes).slice(0, 3)) routes[slug(k) || k] = String(v);
   if (!Object.keys(routes).length && s.primary) routes[s.primary] = "walk it as your people would";
   const legend = raw.legend && (raw.legend.name || typeof raw.legend === "string")
     ? { name: String(raw.legend.name || raw.legend).slice(0, 60), role: String(raw.legend.role || "the force your story is about").slice(0, 120) } : null;

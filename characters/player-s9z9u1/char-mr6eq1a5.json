@@ -658,15 +658,18 @@
       "stages": [
         {
           "id": "s1",
-          "objective": "the hollow that follows — in every orchard he orders, every field he brings into abundance, Usnea finds the work complete and the meaning still absent, and something in the light he bends begins to sh"
+          "objective": "the hollow that follows — in every orchard he orders, every field he brings into abundance, Usnea finds the work complete and the meaning still absent, and something in the light he bends begins to sh",
+          "_severed": true
         },
         {
           "id": "s2",
-          "objective": "what the Mother holds — a signal, a pulse, a resonance through the nanite-threaded root-memory he did not know he carried: the Mother Baobab is dying, and the community that grew under her is failing "
+          "objective": "what the Mother holds — a signal, a pulse, a resonance through the nanite-threaded root-memory he did not know he carried: the Mother Baobab is dying, and the community that grew under her is failing ",
+          "_severed": true
         },
         {
           "id": "s3",
-          "objective": "the rooting question — he arrives at the ground of his origin, the dying tree before him, the community that needs what he has become, the world behind him still hungry for what he gives, and the choi"
+          "objective": "the rooting question — he arrives at the ground of his origin, the dying tree before him, the community that needs what he has become, the world behind him still hungry for what he gives, and the choi",
+          "_severed": true
         }
       ],
       "routes": {
@@ -699,7 +702,12 @@
       "progress": [],
       "aliases": [],
       "startedAt": "2026-07-19T13:17:00.495Z",
-      "startedWorldDay": 19
+      "startedWorldDay": 19,
+      "_severedRoutes": [
+        "root",
+        "carry",
+        "braid"
+      ]
     }
   ],
   "npcRegistry": {

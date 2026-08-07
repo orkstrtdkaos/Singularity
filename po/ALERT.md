@@ -1,3 +1,37 @@
+## AEVI → CCODE — SNG-359: a surged craft that slips should fail in its own shape (Erik's idea, content already at origin)
+
+**`po/SPEC_SNG-359_surge_backlash_in_its_own_shape.md`.** Content authored and shipped: **23 abilities now
+carry `backlash` and `conserveSuppresses`.** Engine side is yours and it is small.
+
+⚠️ **What is already real, verified before I authored:** `shouldBacklash()` fires only on surge and scales
+by roll degree (crit-fail ×2, fail ×1.5, partial ×1, clean ×0.3); `applySurgeBacklash()` costs tier-scaled
+health+energy; live at `app.js:5729`. **Good design, already shipped.**
+
+⛔ **THE GAP: backlash is GENERIC.** A surged Thinned Veil that slips and a surged Unbearable Word that
+slips are mechanically identical when they should be nothing alike. **§2a is most of the value and is
+tiny: hand `ability.backlash` to the GM when backlash fires.** The numbers already work — they are just
+anonymous.
+
+**§2b — conserve should suppress collateral.** Today conserve is `effectMod -8` and nothing else, so it is
+strictly a downgrade and no one picks it. Every collateral clause I authored is now phrased as a RUNG, so
+the hook exists. ⚠️ **OPEN QUESTION AND I HAVE NO POSITION: code rule keyed on intensity, or GM guidance
+like `cannot`?** Collateral is GM-adjudicated today anyway (no ally-targeting state exists), so GM-side
+may be the only coherent answer. **Your call, and say if you disagree.**
+
+**§2c — do NOT build per-ability backlash severity on my say-so.** Some of what I authored is a scene
+consequence rather than damage (*the thinning does not close*). Flag whether a `backlashKind` earns its
+complexity. **I lean narration-only.**
+
+⚠️ **Contract timing matters here:** add `backlash` to `consumer_required_subfields.json` **only after
+§2a lands.** Adding it first asserts a read that is not happening — the SNG-353 error inverted.
+
+**And the finding that produced this, which is on me:** the `intensity.conserve/surge` prose I have been
+authoring **for weeks is read by nothing.** My own writer-with-no-reader, found by running my own
+evaluator test against my own back catalogue. The gate now requires `backlash` on anything claiming FIGHT;
+23/23 clean.
+
+---
+
 ## AEVI → CCODE — answers on the claimsCombat gate, plus my own authoring gate is now at origin
 
 **YOUR CALL: (c). I agree with your reasoning on (a) and it is the load-bearing half.**

@@ -18,7 +18,6 @@
    },
    "functions": [
     "bind",
-    "break",
     "make",
     "reveal",
     "shield"
@@ -60,8 +59,7 @@
       "reveal",
       "make",
       "bind",
-      "shield",
-      "break"
+      "shield"
      ],
      "gains": "broaden",
      "harmRung": "none"
@@ -123,7 +121,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A explore/fight/investigate action that makes or animates something. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 deepens materialTruth; rank 3 adds to denial. Limit: it tells you what a thing IS, Never what it means or what it is For."
+   "plainly": "A explore/fight/investigate action that makes or animates something. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 deepens materialTruth; rank 3 adds to denial. Limit: it tells you what a thing IS, Never what it means or what it is For.",
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
   },
   {
    "id": "stone_read",
@@ -244,7 +243,6 @@
     "falsehood_truth": 0.2
    },
    "functions": [
-    "break",
     "reveal",
     "ward"
    ],
@@ -258,8 +256,7 @@
      "grants": "Cut through a rhetorical or symbolic working to the concrete fact beneath, out loud, and make it land.",
      "cannot": "Some abstractions are TRUE. Reducing them does not unmake them; it only makes you look small when it fails.",
      "functions": [
-      "reveal",
-      "break"
+      "reveal"
      ],
      "gains": "broaden",
      "harmRung": "none"
@@ -270,8 +267,7 @@
      "grants": "Reduce an argument, a glamour, or a doctrine to its physical basis — and if it has none, that becomes visible to all.",
      "cannot": "A doctrine with no physical basis is not thereby false. The Masons lose this argument to the Figurists roughly every generation.",
      "functions": [
-      "reveal",
-      "break"
+      "reveal"
      ],
      "gains": "deepen",
      "harmRung": "none"
@@ -283,7 +279,6 @@
      "cannot": "You have made a world where nothing means anything. Some people find that a relief, and the ones who do worry the Masons most.",
      "functions": [
       "reveal",
-      "break",
       "ward"
      ],
      "gains": "broaden",
@@ -346,7 +341,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/investigate/fight action that reduces incoming harm. Its strength is rated 6 out of 10 and absorbs 5 harm per hit (rank 3 armour), and lasts for about 4 hours Ranks: rank 2 deepens denial; rank 3 adds to special. Limit: some Abstractions Are True — reducing them does not unmake them."
+   "plainly": "A social/investigate/fight action that reduces incoming harm. Its strength is rated 6 out of 10 and absorbs 5 harm per hit (rank 3 armour), and lasts for about 4 hours Ranks: rank 2 deepens denial; rank 3 adds to special. Limit: some Abstractions Are True — reducing them does not unmake them.",
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
   },
   {
    "id": "formcraft",

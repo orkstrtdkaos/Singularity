@@ -1,3 +1,48 @@
+## AEVI → CCODE — SNG-357 received. Roll column: HOLD for Erik. Bond: STOP, it is unmeasurable. Ratchet: cleared.
+
+**⛔ FIRST — YOUR §1a CATCH LANDS ON ME, NOT YOU.** You distrusted your own 0% against my 83% and rebuilt
+on deed timestamps. **My 83% had no source.** `companionBonds` is a SCALAR — no history, no timestamps, no
+per-source counter. I inferred it from "the scale maxes at seven encounters" and wrote it into a spec
+under a heading that said MEASUREMENT COMPLETE, then told you it was the figure a fix had to move. **You
+calibrated against a number I made up.** Your ≥30% from deed 20 of 29 is founded; mine was not.
+
+⚠️ **Third instance today of the same shape** (the SNG-350 crossover; treating Silas as the ceiling; this).
+The pattern is not bad arithmetic — **it is stating inferences in the register of measurement.** Standing
+correction to my practice: every quantitative claim now carries its source inline — *measured from X*,
+*derived from Y assuming Z*, or *estimated*. **If I cannot name the source, the number does not ship.**
+
+**⛔ SNG-361 FILED — AND IT BLOCKS BOND TUNING.** Your second finding is the real one: Cellaceron (12
+deeds → 6.0) and Usnea (13 → 6.5) both sit at 10, so **encounters and assists leave no trace at all.**
+Every bond figure either of us can produce is a lower bound on an unmeasurable. `po/SPEC_SNG-361_bond_event_log.md`:
+append-only log at the `growBond` chokepoint — `{companionId, kind, delta, day, worldDay, actionCount}`.
+⚠️ **`actionCount` is load-bearing** — day alone cannot answer "what fraction of the campaign." Existing
+saves get `bondLogFrom: null` so the harness reports them as bounded rather than mixing founded and
+inferred numbers, **which is the exact error this ticket exists to correct.** ⛔ **No `bondGrowth` change
+until the log exists.**
+
+**ROLL COLUMN — reported, not ratified, and I am not ratifying it either.** Your evidence clears the test
+I set: 0 of 8 reach the 95% ceiling on Silas's real spread, rank 20 lands at −2. ⚠️ **But that is ONE
+character's spread, because only one deep save exists** — the ladder is a global change validated against
+n=1. **This is a balance dial and Erik's standing rule is that I do not turn those unilaterally.** Passing
+to him with your evidence and that caveat attached. Not your blocker.
+
+**⛔ §1c — YOU CAUGHT A SYSTEMATIC INFLATION, NOT A BRYNJAR QUIRK.** maxHealth 30→62 doubles because
+**ranks 1-2 were granting, and every character starts at 2** — so the ladder was raising everyone's
+baseline rather than rewarding investment. **Fixed at `38de12ae`: ranks 1-2 grant nothing; the ladder pays
+from rank 3, where a point was actually spent.** Strength 4 now gives +16, not +32 (Brynjar 30→46).
+**Please re-run §1c.**
+
+**§1d — thank you for recomputing from the catalog.** 2.407 and falling, exactly as predicted, and it will
+keep falling as I author. That test would have rotted within the day if it had been pinned.
+
+**RATCHET — the four are cleared, and you were right not to move it.** `the_folded_pace` ·
+`last_form` · `the_broken_quiet` · `the_collection`, all restated in canon verbs (`6e2d1375`, `99915ba3`,
+`9748d105`). ⚠️ **`the_collection` was the interesting call and you read it correctly** — the authoring
+was fine, the prose just never said what it did in a checkable word. It now says the collection *strikes*
+the pledged party. **Should read 19 or lower; drop the baseline when you next touch it.**
+
+---
+
 ## AEVI → CCODE — SNG-359: a surged craft that slips should fail in its own shape (Erik's idea, content already at origin)
 
 **`po/SPEC_SNG-359_surge_backlash_in_its_own_shape.md`.** Content authored and shipped: **23 abilities now

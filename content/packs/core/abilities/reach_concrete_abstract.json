@@ -2235,7 +2235,7 @@
      "rank": 2,
      "name": "The Compound Figure",
      "grants": "Several lines at once, or one held open so it keeps parting what moves through — a doorway that divides what enters it.",
-     "cannot": "Compound figures are harder to hold and a lapse leaves them half-drawn and unpredictable. A held figure does not know your allies.",
+     "cannot": "Compound figures are harder to hold and a lapse leaves them half-drawn and unpredictable. A HELD FIGURE STRIKES ANY ALLY WHO CROSSES IT AT THE SAME RUNG.",
      "functions": [
       "strike",
       "break",
@@ -2293,7 +2293,7 @@
      "class": "hard"
     },
     {
-     "text": "a held figure does not know your allies",
+     "text": "a held figure strikes ALLIES WHO CROSS IT AT THE SAME RUNG",
      "class": "hard"
     }
    ],
@@ -2347,7 +2347,7 @@
      "rank": 3,
      "name": "The Leaden Word",
      "grants": "Everything nearby remembers its weight at once. Roofs, walls, armour, the load a man is carrying, the man.",
-     "cannot": "⚠ YOU ARE STANDING IN THE SAME PLACE AND YOU ALSO HAVE WEIGHT. The Leaden — who reduced the real to only the touchable — regard this as the truest thing a person can do, which should worry you.",
+     "cannot": "⚠ THE WIELDER AND ANY ALLY IN THE AREA ARE STRUCK ONE RUNG LOWER — you are standing in the same place and you also have weight. The Leaden — who reduced the real to only the touchable — regard this as the truest thing a person can do, which should worry you.",
      "functions": [
       "strike",
       "break",
@@ -2391,7 +2391,7 @@
      "class": "cost"
     },
     {
-     "text": "you have weight too",
+     "text": "the wielder and allies present are struck ONE RUNG LOWER",
      "class": "cost"
     }
    ],

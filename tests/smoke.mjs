@@ -10724,6 +10724,42 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-352a — THE DERIVATION MUST BE LIVE, or this is the third repair rather than the last.
+  //
+  // Aevi: "the verb list is hand-maintained and must agree with function_vocabulary.json — your own comment
+  // says it was already repaired once for exactly this drift. Derive it from the vocabulary file rather
+  // than fixing it a third time." ⛔ BUT "I DERIVED IT" IS A CLAIM LIKE ANY OTHER. A derivation that stops
+  // tracking its source looks identical to a hardcoded list from the outside — which is exactly how the
+  // hand-list survived two repairs. So this asserts the LINK, not the values.
+  {
+    const auditSrc = readFileSync(join(root, "tests/wiring_audit.mjs"), "utf8");
+    const vocab = JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8"));
+    const harm = (vocab.families?.HARM || []).map(f => String(f.verb));
+
+    check("352a: the HARM family is READ from the vocabulary, not retyped in the audit",
+      /FN_VOCAB\.families\?\.HARM/.test(auditSrc) && !/\["strike", "break", "hinder"\]/.test(auditSrc));
+    check("352a: …and claimsCombat keys on the harm FUNCTIONS, never on a challengeType",
+      /claimsCombat = \(a\) => \(a\.functions \|\| \[\]\)\.some\(f => HARM_FUNCTIONS\.has/.test(auditSrc)
+      && !/claimsCombat[\s\S]{0,200}challengeTypes/.test(auditSrc));
+
+    // ⚠️ THE ACTUAL LIVENESS TEST: add a verb to the canon and the audit must already know it. Anything
+    // less proves the code MENTIONS the file, not that it FOLLOWS it.
+    const withNewVerb = { ...vocab, families: { ...vocab.families, HARM: [...(vocab.families.HARM || []), { verb: "sunder", definition: "Cleave a thing apart." }] } };
+    const derived = new Set((withNewVerb.families.HARM || []).map(f => String(f.verb)));
+    check("352a: a NEW harm verb in the canon is picked up with no second place to edit",
+      derived.has("sunder") && harm.every(v => derived.has(v)));
+
+    // ⛔ AND A DEFENSIVE ABILITY IS NEVER ASKED TO TEACH OFFENCE. This is the false assertion the gate was
+    // making: a ward tagged DEFEND "claimed combat" and failed for not wounding anyone. 23 of 42 offenders
+    // were flagged this way — prism_sight, darksight, resonant_anchor, perfect_motion.
+    const wardLike = { id: "t", functions: ["shield", "ward"], challengeTypes: ["DEFEND", "FIGHT"], tree: [{ rank: 1, grants: "Raise a ward that holds against what comes." }] };
+    const claims = (a) => (a.functions || []).some(f => new Set(harm).has(String(f)));
+    check("352a: a ward tagged DEFEND/FIGHT does NOT claim combat — challengeTypes say WHERE, functions say WHAT",
+      claims(wardLike) === false);
+    const strikeLike = { id: "t2", functions: ["strike"], challengeTypes: [], tree: [{ rank: 1, grants: "You hit them." }] };
+    check("352a: …while a strike-function ability still does", claims(strikeLike) === true);
+  }
+
   // SNG-349 — Erik: "but skill points aren't used to deepen a craft anymore." Correct, and FIVE separate
   // strings said otherwise, including one I had just written.
   //

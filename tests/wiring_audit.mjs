@@ -300,18 +300,47 @@ const HARM_RUNGS = new Set(["none", "damaging", "incapacitating", "lethal"]);
 const missingHarm = abilityRecords.filter(a => a.harmRung === undefined);
 const badHarm = abilityRecords.filter(a => a.harmRung !== undefined && !HARM_RUNGS.has(a.harmRung));
 const nonCanonTypes = abilityRecords.filter(a => (a.challengeTypes || []).some(t => !CANON_TYPES.has(String(t))));
-// combat claimed in metadata but no rank grants teach it.
-// SNG-147d BUG (Aevi, PO, 2026-07-18): this read `a.ranks`, which ability records do not have —
-// they carry `tree`. teachesCombat was therefore ALWAYS false and the metric counted every ability
-// that CLAIMS combat, not those that fail to teach it. The gate could never pass. Fixed to `tree`.
-// SNG-147d/A2: the verb list MUST carry the canon definitions from
-// content/packs/core/rules/function_vocabulary.json — `hinder` is defined there as
-// "WEAKEN, drain, impair, or slow" and `break` as "Harm or DESTROY a THING". Omitting those
-// words made the gate contradict the canon it enforces and flag correct content (Aevi, PO). (147c's negation-aware core signal:
-// strike/break/hinder function or FIGHT/DUEL/DEFEND type, with no offensive verb in any grants)
-const claimsCombat = (a) => (a.functions || []).some(f => ["strike", "break", "hinder"].includes(String(f))) ||
-  (a.challengeTypes || []).some(t => ["FIGHT", "DUEL", "DEFEND"].includes(String(t)));
-const teachesCombat = (a) => (a.tree || a.ranks || []).some(r => /\b(strike|striking|attack|wound|fell|down(s|ing)?|disable|disarm|end(s|ing)? (a|the|an)\b|bring .{0,20}down|stop(s|ping)? (a|the|an)\b|break(s|ing)?|shatter|force|drive (back|off)|repel|bind|pin|stagger|fight|combat|offen[cs]|harm|weaken\w*|drain\w*|impair\w*|slow(s|ing)?|destroy\w*|dismantl\w*|unmak\w*)\b/i.test(String(r.grants || "")));
+// ---------- SNG-352a: what "claims combat" MEANS, derived from the canon that defines it ----------
+//
+// ⛔ THE GATE WAS ASSERTING SOMETHING FALSE ABOUT DEFENCE. `claimsCombat` fired on a FIGHT|DUEL|DEFEND
+// challengeType, so a WARD tagged DEFEND "claimed combat" and was then failed for not teaching offence.
+// Aevi: "the gate is asserting something false about what a defensive ability is" — and (b), fixing it by
+// tagging wards with harm they should not have, would have been repairing a bad test by corrupting content.
+// 23 of the 42 offenders were flagged by challengeType ALONE: prism_sight, darksight, resonant_anchor,
+// perfect_motion — reveals, shields and wards, correctly tagged as USABLE in a fight.
+//
+// challengeTypes answers WHERE A CRAFT CAN BE USED. functions answer WHAT IT DOES. Only the second is a
+// claim about harm, and the vocabulary already says which those are: the HARM family.
+//
+// ⚠️ DERIVED, NOT RETYPED. Aevi: "the verb list is hand-maintained and must agree with
+// function_vocabulary.json — your own comment says it was already repaired once for exactly this drift.
+// Derive it from the vocabulary file rather than fixing it a third time." So the HARM family and the verbs
+// inside its own definitions are READ FROM THE FILE. Add a fourth harm verb to the canon and this audit
+// picks it up on the next run, with no second place to remember.
+const FN_VOCAB = JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8"));
+const HARM_FAMILY = (FN_VOCAB.families?.HARM || []);
+const HARM_FUNCTIONS = new Set(HARM_FAMILY.map(f => String(f.verb)));
+
+// The canon verbs: each family member's own name, plus the words its DEFINITION uses to define it
+// ("Harm a LIVING thing" → harm; "WEAKEN, drain, impair, or slow" → weaken/drain/impair/slow).
+const canonVerbs = new Set();
+for (const f of HARM_FAMILY) {
+  canonVerbs.add(String(f.verb).toLowerCase());
+  for (const w of String(f.definition || "").toLowerCase().match(/[a-z]{4,}/g) || []) {
+    if (["thing", "living", "directly", "that", "this", "with", "without", "space", "debuff", "structure", "formation", "working", "object"].includes(w)) continue;
+    canonVerbs.add(w);
+  }
+}
+// \u26a0\ufe0f AND AN HONESTLY-LABELLED SUPPLEMENT. A rank's `grants` is PROSE, and prose reaches for synonyms the
+// canon never enumerates \u2014 "disarm", "stagger", "drive back" are offensive by any reading and appear in no
+// definition. Pretending the vocabulary could supply them would be the wrong kind of purity; the point of
+// deriving the CANON half is that the half which CAN drift no longer does.
+const PROSE_SYNONYMS = ["attack", "wound", "fell", "disable", "disarm", "shatter", "repel", "pin", "stagger",
+  "fight", "combat", "dismantl", "unmak", "bring .{0,20}down", "drive (back|off)"];
+const OFFENSIVE_RE = new RegExp(String.raw`\b(` + [...canonVerbs].concat(PROSE_SYNONYMS).map(v => v + String.raw`\w*`).join("|") + String.raw`)\b`, "i");
+
+const claimsCombat = (a) => (a.functions || []).some(f => HARM_FUNCTIONS.has(String(f)));
+const teachesCombat = (a) => (a.tree || a.ranks || []).some(r => OFFENSIVE_RE.test(String(r.grants || "")));
 const combatUntaught = abilityRecords.filter(a => claimsCombat(a) && !teachesCombat(a));
 
 // ---------- SNG-152 §5e: the gate that makes this the LAST truncation fix ----------

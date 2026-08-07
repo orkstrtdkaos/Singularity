@@ -1,15 +1,15 @@
 {
-  "note": "SNG-147d ratchet \u2014 known-offender counts may only DECREASE. Re-baseline deliberately with UPDATE_WIRING_BASELINE=1 after a content improvement; never hand-edit upward.",
+  "note": "SNG-147d ratchet — known-offender counts may only DECREASE. Re-baseline deliberately with UPDATE_WIRING_BASELINE=1 after a content improvement; never hand-edit upward.",
   "updatedAt": "2026-07-19",
   "testOnlyExports": 7,
   "abilitiesMissingHarmRung": 0,
   "abilitiesInvalidHarmRung": 0,
   "abilitiesNonCanonChallengeTypes": 89,
-  "abilitiesCombatClaimedNotTaught": 37,
+  "abilitiesCombatClaimedNotTaught": 19,
   "rawProseCaps": 63,
   "modulesMissingFromSpecMap": 15,
   "importedNeverCalled": 5,
   "unreadRuleConstants": 26,
   "unauthoredRulesKeys": 1,
-  "_unreadRuleConstants": "SNG-340 \u2014 11 \u2192 26 because the MEASUREMENT got more accurate, not because the codebase got worse. The scanner is text-based and could not see a key sharing a line with another key; Aevi's whole-file reserialization put each on its own line, and 15 constants that had ALWAYS been unread became visible. Verified by hand: `oneWay`, `backgroundGrantable`, `ratingCeilingBounded`, `dependsOn` and `energy.regenPerRest` have ZERO readers across engine/ and app.js. \u26a0\ufe0f A CHECK THAT CANNOT SEE PART OF ITS OWN DOMAIN REPORTS A CLEAN NUMBER \u2014 the ratchet was right and blind at once, which is the same family as everything else this week. Rebaselined rather than papered over; the 15 are a separate ticket because 'delete it' is wrong for at least some of them."
+  "_unreadRuleConstants": "SNG-340 — 11 → 26 because the MEASUREMENT got more accurate, not because the codebase got worse. The scanner is text-based and could not see a key sharing a line with another key; Aevi's whole-file reserialization put each on its own line, and 15 constants that had ALWAYS been unread became visible. Verified by hand: `oneWay`, `backgroundGrantable`, `ratingCeilingBounded`, `dependsOn` and `energy.regenPerRest` have ZERO readers across engine/ and app.js. ⚠️ A CHECK THAT CANNOT SEE PART OF ITS OWN DOMAIN REPORTS A CLEAN NUMBER — the ratchet was right and blind at once, which is the same family as everything else this week. Rebaselined rather than papered over; the 15 are a separate ticket because 'delete it' is wrong for at least some of them."
 }

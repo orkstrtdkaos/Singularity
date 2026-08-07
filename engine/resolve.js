@@ -17,6 +17,37 @@ export function spectrumAlignment(a = {}, b = {}) {
 /** Compute true success chance for an action. Everything is data-driven from rules JSON.
  *  action: { attribute, skillId?, axes?, abilityLevel?, difficulty (0-100 penalty), planned? }
  *  aptitudeMods: flat map merged from the player's aptitudes (see playerprofile.js). */
+/** SNG-346 — THE ONE PLACE A DIFFICULTY IS NORMALIZED. Four doors read this field (the intent sanitizer,
+ *  two prompt contracts, and gambit's step validator) and they disagreed, which is how a five-band scale
+ *  would have shipped working in one path and silently flattened in three.
+ *
+ *  ⛔ THE LEGACY NUMBERS MAP ONTO THE NEW SCALE EXACTLY, WHICH IS WHY THIS IS SAFE: the old vocabulary
+ *  (0 routine / 15 hard / 30 very hard) IS the negative half of Erik's symmetric scale (normal 0 / hard −15 /
+ *  very hard −30). Erik's design does not move any band that already existed — it ADDS the positive half
+ *  nobody could express. So every in-flight turn and every save keeps its exact meaning.
+ *
+ *  ⚠️ A NUMBER THAT IS NOT ON THE LADDER STAYS A NUMBER. An encounter's threat (35) is an OPPOSED term,
+ *  not a band, and must not be rounded onto the ladder — the two are different things that happen to share
+ *  a field. */
+export const DIFFICULTY_BANDS = ["very_easy", "easy", "normal", "hard", "very_hard"];
+const LEGACY_TO_BAND = { 0: "normal", 15: "hard", 30: "very_hard" };
+
+export function normalizeDifficulty(raw) {
+  if (typeof raw === "string") {
+    const k = raw.trim().toLowerCase().replace(/[\s-]+/g, "_");
+    if (DIFFICULTY_BANDS.includes(k)) return k;
+    const n = Number(raw);                                   // "15" — a number that arrived as text
+    if (Number.isFinite(n) && n in LEGACY_TO_BAND) return LEGACY_TO_BAND[n];
+    if (Number.isFinite(n)) return Math.max(0, Math.min(70, Math.round(n)));
+    console.warn(`[resolve] unknown difficulty "${raw}" — treating as normal`);
+    return "normal";
+  }
+  const n = Number(raw);
+  if (!Number.isFinite(n)) return "normal";
+  if (n in LEGACY_TO_BAND) return LEGACY_TO_BAND[n];          // the old three-band vocabulary, unchanged in meaning
+  return Math.max(0, Math.min(70, Math.round(n)));            // an opposed threat — stays a penalty
+}
+
 export function successChance(ctx) {
   const { character, action, location, rules, aptitudeMods = {}, equipmentBonus = 0, skillBonus = 0, substratePenalty = 0 } = ctx;
   const bc = rules.baseChance;
@@ -121,8 +152,33 @@ export function successChance(ctx) {
 
   // Difficulty — the OPPOSED term lives here (an encounter's threat becomes difficulty). Name its source
   // when the caller passes one (SNG-106): "the raider (threat 35)" instead of an anonymous "difficulty".
-  const diff = Number(action.difficulty) || 0;
+  // ⛔ SNG-346 — TWO KINDS OF DIFFICULTY, AND THEY ARE NOT THE SAME THING.
+  //
+  //   A BAND is the task's own character ("easy", "hard") on Erik's symmetric scale, and it can HELP:
+  //   very easy +30 · easy +15 · normal 0 · hard −15 · very hard −30. Aevi's insight is that "easy becomes
+  //   a BONUS rather than the absence of a penalty" — a flat base lifts every band equally, so easy and
+  //   hard stay 15 apart however high you push it. Widening the spread was the actual fix.
+  //
+  //   A NUMBER is an OPPOSED term — an encounter's threat, an opponent who rolled. It is always a penalty
+  //   and always keeps its source name ("the raider (threat 35)"), and it is NOT on the band ladder.
+  //
+  // ⚠️ BOTH ARE LIVE AT ONCE. A hard task against a real opponent is band + threat, so they accumulate as
+  // SEPARATE named lines rather than one blended number — the breakdown must say WHY, and "difficulty −50"
+  // teaches the player nothing about which half they could have changed.
+  const bands = rules.difficultyBands || {};
+  const bandKey = typeof action.difficulty === "string" ? action.difficulty.trim().toLowerCase().replace(/[\s-]+/g, "_") : null;
+  if (bandKey) {
+    // ⛔ AN UNKNOWN BAND IS NEVER SILENTLY ZERO. The GM emits this field; a typo or a band nobody defined
+    // would otherwise read as "normal" and look exactly like a correct call. Loud, and treated as normal.
+    if (!(bandKey in bands)) console.warn(`[resolve] unknown difficulty band "${action.difficulty}" — treating as normal; known:`, Object.keys(bands).filter(k => !k.startsWith("_")).join(", "));
+    else if (bands[bandKey]) add(bandKey.replace(/_/g, " "), bands[bandKey]);
+  }
+  // The opposed/legacy numeric term. Still a PENALTY by sign convention, unchanged for every existing save.
+  const diff = bandKey ? 0 : (Number(action.difficulty) || 0);
   if (diff) add(action.difficultySource || "difficulty", -diff);
+  // A band and an opponent can both apply: `opposedDifficulty` carries the threat when `difficulty` is a band.
+  const opposed = Number(action.opposedDifficulty) || 0;
+  if (opposed) add(action.difficultySource || "opposed", -opposed);
 
   // hard guard: malformed inputs must never reach the dice as NaN
   if (!Number.isFinite(chance)) {

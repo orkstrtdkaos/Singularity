@@ -1061,5 +1061,14 @@
         "negotiate": 1
       }
     }
+  },
+  "difficultyBands": {
+    "_note": "⛔ SNG-346 — ERIK'S SYMMETRIC SCALE. Values are MODIFIERS TO THE ROLL (positive helps), not penalties. Aevi: \"the insight is that EASY BECOMES A BONUS rather than the absence of a penalty\" — a flat base lifts every band equally, so easy and hard stay 15 apart no matter how high you push it. This widens the spread instead of raising the floor, which was the actual defect. Every band is 15 points apart so the ladder is learnable: a player can hold the whole scale in their head.",
+    "_target": "Erik: a level 1 should succeed 2/3 of the time at easy things and fail 2/3 of the time at hard things. Modelled at attr 4 + starting training: 65% easy / 35% hard. Target was 67/33.",
+    "very_easy": 30,
+    "easy": 15,
+    "normal": 0,
+    "hard": -15,
+    "very_hard": -30
   }
 }

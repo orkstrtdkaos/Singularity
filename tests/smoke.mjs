@@ -541,7 +541,11 @@ check("all locations carry map coordinates", true);
 const nanChance = successChance({ character: char, action: { label: "x", attribute: "social", axes: { violence_peace: "very peaceful" }, difficulty: "moderate" }, location: loc, rules });
 check("malformed action still yields finite chance", Number.isFinite(nanChance));
 const badIntent = sanitizeIntent({ label: "Build rapport", attribute: "social", subAttribute: "vibes", difficulty: "moderate", axes: { violence_peace: "high", chaos_order: 0.4 }, intentTags: ["rapport"], abilityId: "ghost_walk", comboAbilities: "not-an-array", novelUse: "yes" }, { abilities: [{ abilityId: "prism_sight", level: 1 }] });
-check("intent sanitizer clamps everything", badIntent.difficulty === 0 && badIntent.subAttribute === null && badIntent.abilityId === null && Array.isArray(badIntent.comboAbilities) && badIntent.axes.chaos_order === 0.4 && !("violence_peace" in badIntent.axes));
+// ⚠️ SNG-346 changed the REPRESENTATION of a clamped difficulty, not its meaning: an unrecognised string
+// used to land on the number 0 and now lands on the band "normal", which is the same neutral task. The old
+// assertion read `=== 0` and so went red on a correct change — a gate pinned to a value where the
+// requirement was a BEHAVIOUR. It now asserts the behaviour: garbage in, neutral out, and never NaN.
+check("intent sanitizer clamps everything", (badIntent.difficulty === "normal" || badIntent.difficulty === 0) && badIntent.subAttribute === null && badIntent.abilityId === null && Array.isArray(badIntent.comboAbilities) && badIntent.axes.chaos_order === 0.4 && !("violence_peace" in badIntent.axes));
 const sanChance = successChance({ character: char, action: badIntent, location: loc, rules });
 check("sanitized intent rolls clean", Number.isFinite(sanChance) && sanChance > 0);
 // 2) named NPC updates: update-only ops can't create ghosts; fuzzy match prevents twins
@@ -10708,6 +10712,66 @@ await (async () => {
     check("343: the GM is told the text was cut and to restate it whole, rather than quote the fragment",
       /CUT SHORT BY A STORAGE FAULT/.test(block || "") && /restate the objective whole/.test(block || "")
       && /routes were also cut short/.test(block || ""));
+  }
+
+  // SNG-346 — ERIK'S SYMMETRIC DIFFICULTY SCALE. Aevi: "the insight is that EASY BECOMES A BONUS rather
+  // than the absence of a penalty" — a flat base lifts every band equally, so easy and hard stay 15 apart
+  // however high you push it. Widening the spread was the actual fix, and it needs no base at all.
+  //
+  // ⚠️ GATED ON STRUCTURE, NOT ON TUNING. Which numbers sit on the ladder is Erik's dial (SNG-280), and a
+  // gate asserting `easy === 15` goes red the moment he turns it — that mistake has been made twice in this
+  // suite already. What IS structural: the ordering must be monotonic, every door must agree, and the
+  // legacy vocabulary must keep its exact meaning.
+  {
+    const { loadContentHeadless: lch346 } = await import("./headless_content.mjs");
+    const C346 = await lch346();
+    const { successChance, normalizeDifficulty, DIFFICULTY_BANDS } = await import("../engine/resolve.js");
+    const { sanitizeIntent } = await import("../engine/gm.js");
+    const rules346 = C346.rules;
+    const who = { attributes: { social: 4 }, subAttributes: { presence: 4 }, alignment: {}, energy: 50 };
+    const at = (d) => successChance({ character: who, action: { attribute: "social", subAttribute: "presence", tags: [], difficulty: d }, location: null, rules: rules346 });
+
+    check("346: the band table REACHES the rules", !!rules346.difficultyBands
+      && DIFFICULTY_BANDS.every(b => typeof rules346.difficultyBands[b] === "number"));
+
+    // ⛔ THE ORDERING IS THE REQUIREMENT. "Easy is a bonus" means easy must be strictly BETTER than normal —
+    // which is the whole design, and is unsayable in the old three-band vocabulary.
+    const ladder = DIFFICULTY_BANDS.map(at);
+    check("346: the ladder is STRICTLY MONOTONIC — very easy > easy > normal > hard > very hard",
+      ladder.every((v, i) => i === 0 || v < ladder[i - 1]), ladder.join(" > "));
+    check("346: easy is a BONUS, not the absence of a penalty — it beats normal",
+      at("easy") > at("normal") && at("very_easy") > at("easy"));
+    check("346: …and the spread is EVEN, so the ladder is learnable in one look",
+      new Set([at("very_easy") - at("easy"), at("easy") - at("normal"), at("normal") - at("hard"), at("hard") - at("very_hard")]).size === 1);
+
+    // ⛔ THE LEGACY VOCABULARY KEEPS ITS EXACT MEANING. The old 0/15/30 IS the negative half of the new
+    // scale, so no in-flight turn and no save changes meaning — this is why the migration is safe.
+    check("346: legacy 0/15/30 map onto the new ladder with NO change of meaning",
+      normalizeDifficulty(0) === "normal" && normalizeDifficulty(15) === "hard" && normalizeDifficulty(30) === "very_hard");
+    check("346: an OPPOSED threat stays a number — a raider's 35 is not a band, and is never rounded onto the ladder",
+      normalizeDifficulty(35) === 35 && at(35) < at("normal"));
+
+    // ⛔ ALL FOUR DOORS, BECAUSE THREE WOULD HAVE EATEN IT. sanitizeIntent read `Number(raw.difficulty)`,
+    // so a band became NaN and fell to 0 = normal — every easy task silently flattened to neutral, which is
+    // EXACTLY the drift this spec exists to fix. Counting doors is not finding them: the field is read by
+    // the intent sanitizer, two prompt contracts, and gambit's step validator.
+    const sane = sanitizeIntent({ label: "scout for supplies", difficulty: "easy" }, { abilities: [] }, "scout");
+    check("346: the intent sanitizer PRESERVES a band — it used to coerce it to NaN then 0", sane.difficulty === "easy");
+    check("346: …and still refuses malformed input (a stray string can never reach the dice)",
+      sanitizeIntent({ label: "x", difficulty: "banana" }, { abilities: [] }, "x").difficulty === "normal");
+    const gambitSrc = readFileSync(join(root, "engine/gambit.js"), "utf8");
+    check("346: gambit steps use the SAME normalizer — a plan cannot price a task differently from an action",
+      gambitSrc.includes("normalizeDifficulty(steps[i]?.difficulty)"));
+
+    // ⚠️ THE PROMPT IS HALF THE FEATURE. Aevi: left as-is this "ships a five-band scale the narrator can
+    // only address three bands of, and every task that should have been +15 gets tagged 0."
+    const gmSrc = readFileSync(join(root, "engine/gm.js"), "utf8");
+    check("346: the GM's vocabulary names ALL FIVE bands — it could only say three",
+      ["very easy", "easy", "normal", "hard", "very hard"].every(b => gmSrc.includes(`"${b}"`)));
+    check("346: …and carries the calibration rule that stops the one-way drift to 'normal'",
+      /nothing is opposing the character, it is NOT normal/i.test(gmSrc));
+    check("346: …and teaches by example, including the call that misfired on Erik",
+      /scouting for supplies/i.test(gmSrc));
   }
 
   // SNG-345 — THE MARTIAL FLOOR. Erik: "every character can defend itself, no build required." The content

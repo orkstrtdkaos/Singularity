@@ -10743,6 +10743,59 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-363 — CROSS-CHARACTER NEWS HAD NO DISTANCE AND NO SIGNIFICANCE GATE. Erik: "Why is Silas hearing
+  // about something Splarf did? It's not huge news and they're far apart."
+  //
+  // ⛔ The filter was: not you · newer than last read · not hidden. `e.where` was read ONLY TO PRINT
+  // "(near X)" — it never decided whether you heard it — and `slice(-5)` capped by RECENCY, so a burst of
+  // small local events could crowd out a genuinely large one. Erik was describing the system as written.
+  {
+    const { newsReach, ledgerWeight, collapseLedgerEvents } = await import("../engine/worldtick.js");
+    const R = { "valley.millbrook": "valley", "march.redline": "march" };
+    const at = (w, extra = {}) => newsReach({ whereCommunity: "march.redline", ...extra },
+      { myCommunity: "valley.millbrook", myRegion: "valley", regionOfCommunity: R, weight: w });
+
+    check("363: a small event a region away does NOT reach you — Erik's exact complaint", at(0.05).heard === false);
+    check("363: …but a large one does — magnitude, never merit (SNG-281's rule, reused)", at(0.9).heard === true);
+    check("363: an event in your own community always reaches you, however small",
+      newsReach({ whereCommunity: "valley.millbrook" }, { myCommunity: "valley.millbrook", myRegion: "valley", regionOfCommunity: R, weight: 0 }).heard === true);
+
+    // ⛔ impactsLocal BYPASSES DISTANCE. It exists precisely for an event crossing into another player's
+    // area, is escrow-confirmed by the acting player (SNG-145), and gating it by distance would break a
+    // deliberate mechanism. Distance gates AMBIENT news, never a directed consequence.
+    check("363: impactsLocal bypasses the distance gate entirely", at(0.01, { impactsLocal: true }).heard === true);
+
+    // ⚠️ AN UNPLACEABLE EVENT IS JUDGED ON WEIGHT, NEVER SILENTLY DROPPED. Three live entries carry
+    // `where: "gen-object-object"` — pre-SNG-329 residue — and a gate requiring a resolvable place would
+    // have deleted them from the world rather than reported them.
+    const unplaceable = newsReach({}, { myCommunity: "valley.millbrook", myRegion: "valley", regionOfCommunity: R, weight: 0.9 });
+    check("363: an unplaceable event is judged on weight alone, not dropped", unplaceable.heard === true && unplaceable.band === "unplaceable");
+
+    // §3 — one beat logged twice. Measured: the true double-log is FOUR MINUTES apart; the distinct pair at
+    // the same place is a different world-day. The CLOCK separates them where prose cannot.
+    const day = (n, atISO, what) => ({ who: "c1", where: "the_thinning", worldDay: n, at: atISO, what, tags: [] });
+    const collapsed = collapseLedgerEvents([
+      day(36, "2026-08-05T23:59:30Z", "The veil at The Thinning sealed itself after a failed bridge-attempt"),
+      day(37, "2026-08-06T18:06:00Z", "The sealed veil at The Thinning opened and a messenger crossed through"),
+      day(37, "2026-08-06T18:10:00Z", "The sealed veil at The Thinning opened by choice and allowed safe passage through"),
+    ]);
+    check("363: two tellings of one beat, minutes apart, collapse to one", collapsed.length === 2);
+    check("363: …the survivor keeps the FULLER telling", /safe passage/.test(collapsed[1].what));
+    check("363: …and a genuinely distinct earlier event at the same place SURVIVES", /sealed itself/.test(collapsed[0].what));
+    // ⚠️ Aevi's constraint: a real escalation at one place in one day must survive. Hours apart ⇒ never collapsed.
+    const escalation = collapseLedgerEvents([
+      day(37, "2026-08-06T09:00:00Z", "The sealed veil at The Thinning opened and a messenger crossed through"),
+      day(37, "2026-08-06T19:00:00Z", "The sealed veil at The Thinning opened and a messenger crossed through again"),
+    ]);
+    check("363: a real escalation hours apart is NEVER collapsed — collapse, never drop", escalation.length === 2);
+
+    // ⚠️ THE WEIGHT SIGNAL AEVI PROPOSED IS EMPTY IN PRACTICE — measured, not assumed.
+    check("363: weight still rises with spectral movement where it exists",
+      ledgerWeight({ spectrumDeltas: { a: 0.5 }, tags: [] }) > ledgerWeight({ spectrumDeltas: {}, tags: [] }));
+    check("363: …and an entry with NO spectrumDeltas still gets a usable weight (7 of 8 live entries have none)",
+      ledgerWeight({ visibility: "witnessed", tags: ["a", "b"], spectrumDeltas: {} }) > 0);
+  }
+
   // SNG-360 — SIX MERGE DECISIONS DUMPED ON THE PLAYER, AND THE REASON THERE WERE SIX.
   //
   // Erik: "the user can't make all these calls and WHY are there so many to begin with!! these need an

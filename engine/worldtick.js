@@ -401,6 +401,101 @@ async function aiSeedArcs({ character, content, count }) {
  *  one valley is true for everyone. Event stages merge to the furthest reached,
  *  spectrum drift to the strongest pressure, other characters' deeds arrive as
  *  news — and the consolidated region state is pushed back for the next player. */
+
+/** SNG-363 — HOW FAR NEWS TRAVELS, AND HOW BIG IT HAS TO BE. Erik: "Why is Silas hearing about something
+ *  Splarf did? It's not huge news and they're far apart."
+ *
+ *  ⛔ THE FILTER WAS: not you · newer than last read · not hidden. No distance, no significance. `e.where`
+ *  was read ONLY TO PRINT "(near X)" — it never decided whether you heard it — and `slice(-5)` capped by
+ *  RECENCY, so a burst of small local events from one character could crowd out a genuinely large one.
+ *
+ *  ⚠️ AND THE RIGHT MODEL ALREADY EXISTED TWENTY LINES ABOVE. The SNG-281 deed-spread does this properly:
+ *  one hop per pass, reach capped by weight, "MAGNITUDE, NEVER MERIT — an atrocity travels exactly as far
+ *  as a rescue of the same size." Aevi: this is the same bug, in the same file, already fixed once for
+ *  deeds and never applied here. Same region map, same principle.
+ *
+ *  ⛔ `impactsLocal` BYPASSES DISTANCE ENTIRELY. That flag exists precisely for an event that crosses into
+ *  another player's area, it is escrow-confirmed by the acting player (SNG-145), and gating it by distance
+ *  would break a deliberate mechanism. Distance gates AMBIENT news; it never gates a directed consequence.
+ */
+export function newsReach(entry, { myCommunity = null, myRegion = null, regionOfCommunity = {}, weight = 0, thresholds = {} } = {}) {
+  if (entry?.impactsLocal) return { heard: true, why: "directed at your area", band: "directed" };
+  const t = { sameRegion: thresholds.sameRegion ?? 0, adjacent: thresholds.adjacent ?? 0.2, far: thresholds.far ?? 0.6 };
+  const whereComm = entry?.whereCommunity || null;
+  const whereRegion = whereComm ? regionOfCommunity[whereComm] : (entry?.whereRegion || null);
+  // ⚠️ AN UNPLACEABLE EVENT IS JUDGED ON WEIGHT ALONE, NEVER SILENTLY DROPPED. Three live entries carry
+  // `where: "gen-object-object"` — pre-SNG-329 residue from a coerced location id — and a gate that
+  // required a resolvable place would have deleted them from the world rather than reported them.
+  if (!whereRegion) return { heard: weight >= t.far, why: weight >= t.far ? "large enough to travel anywhere" : "cannot be placed, and not large enough to carry", band: "unplaceable" };
+  if (myCommunity && whereComm === myCommunity) return { heard: true, why: "happened where you are", band: "here" };
+  if (myRegion && whereRegion === myRegion) return { heard: weight >= t.sameRegion, why: "your region", band: "region" };
+  return { heard: weight >= t.far, why: weight >= t.far ? "large enough to cross regions" : "too far and too small", band: "far" };
+}
+
+/** The magnitude of a ledger entry, DERIVED rather than authored.
+ *
+ *  ⚠️ AEVI PROPOSED Σ|spectrumDeltas| AND ASKED IT BE TRIED BEFORE ADDING A FIELD — "if it proves too
+ *  coarse, that finding justifies the field". MEASURED ON THE LIVE LEDGER: only ONE of eight entries
+ *  carries any spectrumDeltas at all, and Σ is 0.00 for the other seven. It is not too coarse; it is
+ *  ABSENT, because the op contract lists `"spectrumDeltas": {}` and the GM almost never fills it.
+ *
+ *  ⛔ So Σ is used where it EXISTS and a second derived signal carries the rest: `visibility` (a witnessed
+ *  event is public, a rumour is not) and tag count as a proxy for how much the beat touched. This is still
+ *  derivation, not authoring — no new field for a future GM call to forget — but it does not pretend a
+ *  signal that is empty in practice is doing the work. */
+export function ledgerWeight(entry) {
+  const spectral = Object.values(entry?.spectrumDeltas || {}).reduce((n, v) => n + Math.abs(Number(v) || 0), 0);
+  const witnessed = entry?.visibility === "witnessed" ? 0.15 : 0;
+  const reach = Math.min(0.2, ((entry?.tags || []).length || 0) * 0.05);
+  return Math.min(1, spectral + witnessed + reach);
+}
+
+
+/** SNG-363 §3 — ONE BEAT, LOGGED TWICE. Erik: "there are several of the same event with the veil." Measured
+ *  — not display duplicates, three separate ledger WRITES from one character at one place:
+ *    23:59  the veil sealed itself after a failed bridge-attempt
+ *    18:06  the sealed veil opened and a messenger crossed
+ *    18:10  the sealed veil opened by choice and allowed safe passage
+ *  The last two are FOUR MINUTES APART and are one veil-opening written as two consequences. The first is
+ *  a legitimately distinct earlier event and must survive.
+ *
+ *  ⛔ COLLAPSE, NEVER DROP — Aevi's constraint, and it is the right one: a genuine escalation at one place
+ *  in one day is real. The survivor keeps the LONGER text, because between two tellings of one beat the
+ *  fuller one is the one that says what happened.
+ *
+ *  Similarity is deliberately crude and word-based rather than a distance metric: two tellings of one beat
+ *  share most of their nouns, and anything cleverer would start deciding that DIFFERENT events are the same,
+ *  which is the failure this must not have. */
+export function collapseLedgerEvents(entries = [], { withinMinutes = 20, overlap = 0.28 } = {}) {
+  const words = (t) => new Set(String(t || "").toLowerCase().match(/[a-z]{4,}/g) || []);
+  const ms = (t) => { const n = +new Date(t); return Number.isFinite(n) ? n : null; };
+  const out = [];
+  for (const e of entries) {
+    const ew = words(e.what), et = ms(e.at);
+    const twin = out.find(o => {
+      if (o.who !== e.who || o.where !== e.where) return false;
+      if ((o.worldDay ?? null) !== (e.worldDay ?? null)) return false;
+      // ⛔ THE CLOCK IS THE DISCRIMINATOR, NOT THE PROSE. Measured on the live ledger: the true double-log
+      // is FOUR MINUTES apart and shares 0.31 of its words; the genuinely distinct pair at the same place is
+      // a different world-day and eighteen hours. Word overlap alone could not separate them without a
+      // threshold low enough to start eating real escalations — which is precisely the loss Aevi ruled out.
+      const ot = ms(o.at);
+      if (et === null || ot === null || Math.abs(et - ot) > withinMinutes * 60000) return false;
+      const ow = words(o.what);
+      if (!ow.size || !ew.size) return false;
+      return [...ew].filter(w => ow.has(w)).length / Math.min(ow.size, ew.size) >= overlap;
+    });
+    if (!twin) { out.push({ ...e }); continue; }
+    // COLLAPSE, NEVER DROP. The survivor keeps the LONGER telling, because between two accounts of one beat
+    // the fuller one is the one that says what happened; tags and impactsLocal union so nothing is lost.
+    if (String(e.what || "").length > String(twin.what || "").length) twin.what = e.what;
+    twin.tags = [...new Set([...(twin.tags || []), ...(e.tags || [])])];
+    twin.impactsLocal = twin.impactsLocal || e.impactsLocal;
+    twin.collapsed = (twin.collapsed || 1) + 1;
+  }
+  return out;
+}
+
 export async function syncSharedWorld({ character, content }) {
   if (!syncEnabled() || !character.worldState) return { synced: false };
   const ws = character.worldState;
@@ -427,7 +522,29 @@ export async function syncSharedWorld({ character, content }) {
     // 2. other characters' consequences reach you as news
     const since = ws.lastSharedReadAt || "1970";
     const ledger = await fetchLedger(0);
-    const fromOthers = ledger.filter(e => e.who !== character.id && e.at > since && e.visibility !== "hidden").slice(-5);
+    // SNG-363 — the same region map the deed-spread builds, for the same reason.
+    const regionOfComm363 = {};
+    for (const loc of Object.values(content.locations || {})) {
+      const c = loc?.communityId, r = loc?.regionId || loc?.region || (loc?.communityId ? String(loc.communityId).split(".")[0] : null);
+      if (c && r) regionOfComm363[c] = r;
+    }
+    const hereLoc = content.locations?.[character.currentLocationId] || {};
+    const myComm = hereLoc.communityId || null;
+    const myRegion = hereLoc.regionId || hereLoc.region || (myComm ? String(myComm).split(".")[0] : null);
+    const placeOf = (id) => content.locations?.[id] || null;
+    const candidates = collapseLedgerEvents(ledger.filter(e => e.who !== character.id && e.at > since && e.visibility !== "hidden"));
+    const judged = candidates.map(e => {
+      const loc = placeOf(e.where);
+      const w = ledgerWeight(e);
+      const reach = newsReach({ ...e, whereCommunity: loc?.communityId || null, whereRegion: loc?.regionId || loc?.region || null },
+        { myCommunity: myComm, myRegion, regionOfCommunity: regionOfComm363, weight: w });
+      return { e, w, reach };
+    }).filter(x => x.reach.heard);
+    // ⚠️ TOP 5 BY WEIGHT, NOT THE LAST 5. `slice(-5)` capped by recency, so a burst of small local events
+    // from one character crowded out a genuinely large distant one — Aevi's point, and the reason the cap
+    // itself was part of the bug rather than a mitigation of it.
+    const fromOthers = judged.sort((a, b) => b.w - a.w).slice(0, 5).map(x => x.e);
+    if (candidates.length !== fromOthers.length) console.log(`[news] sng-363: ${candidates.length - fromOthers.length} of ${candidates.length} cross-character event(s) did not reach here (distance/weight)`);
     // SNG-041 RECONCILIATION: another character's event dates by the SHARED absolute world-day
     // (derived from its real-time .at, or its own worldDay stamp) — so their timeline and yours
     // share ONE calendar. This is the fix for the Day-8-vs-Day-11 drift.

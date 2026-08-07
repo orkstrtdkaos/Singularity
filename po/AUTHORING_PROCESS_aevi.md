@@ -108,3 +108,28 @@ place-state).
 - **Leave the record.** Corrections annotate; they do not overwrite.
 - ⚠️ **The gate grows by incident.** Every new way I get this wrong becomes a check. It is not finished
   and is not meant to be.
+
+---
+
+## §6 — T5: RANK IS MASTERY *(added 2026-08-07 after Erik: "why are there still skills that would suck to take to lvl 3?")*
+
+⛔ **Depth is EARNED, not bought.** Rank 2 lands on practice; rank 3 is a GM-marked defining moment. The
+player did not choose to arrive — so **a cost that appears for the first time at rank 3 makes mastery a
+punishment for something they did not opt into.** I did this to six of nine abilities in one batch:
+*"the wielder is measured too," "the wielder is struck one rung lower."*
+
+**And once in a worse form — rank 3 taking CONTROL away** (`the_offered_mouth`: *"it stops when it is
+done, not when you are"*). That is T4 failing at the top of the ladder, where it does the most damage.
+
+**THE RULE:**
+- **Rank = mastery. Strictly better than the rank below, always.** More reach, more precision, and —
+  the best shape — *control the lower ranks did not have*: exempt your own, set where it falls, call it
+  off, stand outside the run.
+- **`intensity.surge` = where risk lives.** A cost the player CHOOSES is a real decision. A cost bolted
+  to a rank they earned is a tax on progress.
+
+⚠️ **The good rank-3 grant is usually the removal of an earlier limitation, not a bigger number.**
+`the_spent_hour` rank 3 is not "more time taken" — it is *the levy passes you by*.
+
+⚠️ **Positional costs remain fine** — "if you are inside the ruin" is avoidable by play and is a real
+tactical constraint, not a tax. The gate distinguishes these.

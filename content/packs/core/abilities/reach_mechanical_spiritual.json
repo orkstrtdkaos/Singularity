@@ -2154,7 +2154,7 @@
    "id": "the_thinned_veil",
    "name": "The Thinned Veil",
    "levelReq": 1,
-   "energyCost": 6,
+   "energyCost": 7,
    "powerSystem": "reach_mechanical_spiritual",
    "attribute": "mental",
    "axes": {
@@ -2163,98 +2163,98 @@
    },
    "functions": [
     "strike",
-    "hinder"
+    "break",
+    "reveal"
    ],
-   "narrationHints": "You thin the veil where they are standing. Nothing touches them — the world simply stops holding them as firmly as it holds everyone else, and the body panics before the mind understands why.",
-   "description": "The Numinous first offense: not a blow but a local loosening of the real, delivered at distance and needing no contact at all.",
-   "notFor": "Wounding (nothing is cut, nothing bleeds); the already-thin (Numinous, spirits, the Unbodied — they are at home in it); precision (it loosens a place, not a person); doing it quietly — every Numen-sense within reach feels it happen.",
+   "narrationHints": "You thin the veil to a membrane where they are standing — and something on the other side, which has been waiting a very long time, gets a claw through. Then a tooth. Then more of itself. The wounds are real, wet, and shaped wrong.",
+   "description": "The Numinous first offense: you do not strike them. You open a hole and let what lives on the other side do it, and it is glad to.",
+   "notFor": "Control (you open the way; you do NOT direct what comes through, and it will take whoever is nearest); subtlety (every numen-sense for a mile feels this); closing it quickly once something is committed to the opening.",
    "tree": [
     {
      "rank": 1,
-     "name": "The Loosening",
-     "grants": "Thin the veil around one standing figure at a distance. Footing, breath, and certainty go unreliable — they stagger, drop what they hold, lose the thread of what they were doing.",
-     "cannot": "It CANNOT WOUND. The already-thin are unaffected and may be delighted. Anyone with numen-sense knows exactly who did it and from where.",
+     "name": "The Claw Through",
+     "grants": "Thin the veil at a target within sight until something reaches through — a claw opens them shoulder to hip, a mouth takes a hand, acid comes through as a thrown thing and does not stop eating. Real wounds that do not close clean.",
+     "cannot": "YOU DO NOT AIM IT. It reaches for what is nearest the thinning, which is sometimes not who you intended. It wants to come further, and every use teaches it the way.",
      "functions": [
       "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Wider Gap",
+     "grants": "Hold the thinning open. Something keeps coming through it for as long as you sustain — a mauling that continues while you stand there, or several reaches at once across a front.",
+     "cannot": "Sustaining means standing near an open hole with a hungry thing in it. Your own are in reach. Things on that side talk to each other, and now some of them know your face.",
+     "functions": [
+      "strike",
+      "break",
       "hinder"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating"
     },
     {
-     "rank": 2,
-     "name": "The Wide Thinning",
-     "grants": "Widen it to a place rather than a person — a doorway, a bridgehead, a ring of ground. Anything crossing it arrives wrong-footed and stays that way.",
-     "cannot": "You cannot exempt your own. The thinning is a PLACE, and your allies cross the same ground. Holding it costs continuously.",
-     "functions": [
-      "strike",
-      "hinder",
-      "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "incapacitating"
-    },
-    {
      "rank": 3,
-     "name": "The Veil Undone",
-     "grants": "Thin it near to nothing. What was solid is negotiable; what was certain is not. People do not fight in this and mostly cannot.",
-     "cannot": "You are standing in it too, and you are more porous than they are, not less. Something on the other side may notice the opening — that is the Numinous' oldest and least-discussed cost.",
+     "name": "What Comes Most Of The Way",
+     "grants": "The veil parts. Something gets most of itself through, and for a few moments it is HERE, and it does what it does. People die in this.",
+     "cannot": "⚠ IT DOES NOT LEAVE WHEN YOU ARE FINISHED. Closing behind it is a separate and much harder problem, and if you cannot, you have not won a fight — you have started something the valley will be dealing with after you.",
      "functions": [
       "strike",
+      "break",
       "hinder",
-      "bind",
-      "reveal"
+      "summon"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "lethal"
     }
    ],
    "challengeTypes": [
-    "FIGHT",
-    "PUZZLE"
+    "FIGHT"
    ],
    "tradition": "numinous",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
    "shape": "strike",
    "operativeAxis": [
-    "scope",
-    "duration"
+    "magnitude",
+    "scope"
    ],
    "mechanic": {
-    "magnitude": 5,
-    "duration": 2,
+    "magnitude": 8,
+    "duration": 1,
     "scope": 2
    },
    "intensity": {
-    "conserve": "a hand's breadth of thinning — one person, one moment",
-    "surge": "thin it near to nothing; SOMETHING ON THE OTHER SIDE MAY NOTICE THE OPENING"
+    "conserve": "a hand's breadth — one reach, one wound",
+    "surge": "part it; SOMETHING GETS MOST OF THE WAY THROUGH AND DOES NOT LEAVE WHEN YOU ARE DONE"
    },
    "bounds": [
     {
-     "text": "IT CANNOT WOUND — nothing is cut, nothing bleeds",
+     "text": "YOU DO NOT AIM IT — it takes what is nearest the thinning",
      "class": "hard"
     },
     {
-     "text": "the ALREADY-THIN are unaffected",
+     "text": "your own are in reach",
      "class": "hard"
     },
     {
-     "text": "you cannot exempt your own — it is a PLACE",
-     "class": "hard"
+     "text": "every numen-sense for a mile knows",
+     "class": "cost"
     },
     {
-     "text": "anyone with numen-sense knows who did it",
+     "text": "IT DOES NOT LEAVE WHEN YOU ARE FINISHED",
      "class": "cost"
     }
    ],
-   "plainly": "A fight/puzzle action that unsteadies those standing where the veil thins. Rated 5 of 10 across a scope of 2 for about two hours. Limit: it cannot wound."
+   "plainly": "A fight action that opens a hole and lets something through to wound. Rated 8 of 10 across a scope of 2. Limit: you do not aim it — it takes what is nearest."
   },
   {
    "id": "the_seized_works",
    "name": "The Seized Works",
    "levelReq": 1,
-   "energyCost": 5,
+   "energyCost": 6,
    "powerSystem": "reach_mechanical_spiritual",
    "attribute": "practical",
    "axes": {
@@ -2262,34 +2262,35 @@
     "concrete_abstract": 0.3
    },
    "functions": [
-    "hinder",
-    "break"
+    "strike",
+    "break",
+    "hinder"
    ],
-   "narrationHints": "The buckle, the hinge, the lock, the drawn mechanism — it seizes at the moment of use. No sabotage anyone can find afterward, because nothing was cut. It was simply told to stop.",
-   "description": "The Enginewrights' first offense: you do not strike the person, you strike what they are relying on, and only ever the made part of it.",
-   "notFor": "Anything unmade (a fist, a stone, a beast — the craft has nothing to grip); killing; working at a distance you cannot see; permanence (a seized mechanism can be worked free, and a good wright will).",
+   "narrationHints": "You do not stop the mechanism. You stop it AT LOAD — the drawn cord at release, the turning axle at speed, the pressure-vessel at full — and a made thing under strain that is suddenly told not to move puts all of it somewhere. Usually into the hand holding it.",
+   "description": "The Enginewrights' first offense: their own principle turned outward. Every mechanism stores force, and force that cannot go where it was going goes into whoever is nearest.",
+   "notFor": "Anything unmade (a fist, a stone, a beast — nothing to seize); working past what you can perceive; choosing exactly where the force goes — you decide WHEN, the mechanism decides where.",
    "tree": [
     {
      "rank": 1,
-     "name": "The Stopped Mechanism",
-     "grants": "Seize one worked mechanism within a few paces at the moment of use — a crossbow's release, a lock's tumbler, a gate's winch, a buckle under strain. It does not break; it refuses.",
-     "cannot": "MADE THINGS ONLY. A knife in a hand is not a mechanism. It must be CLOSE and you must be able to perceive it. It can be worked free in a minute or two by someone who knows the piece.",
+     "name": "Seized At Load",
+     "grants": "Seize a worked mechanism at the moment of maximum strain. The crossbow's limbs come apart into the shooter's face; the buckle binds and the strap crushes; the winch's pawl snaps and the load falls on them.",
+     "cannot": "MADE THINGS ONLY, and it must be UNDER LOAD — a mechanism at rest just stops, which is useful and is not this. You must perceive it. The force goes where the mechanism sends it, not where you want.",
      "functions": [
-      "hinder",
+      "strike",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "damaging"
     },
     {
      "rank": 2,
      "name": "The Failing Line",
-     "grants": "Take several at once, or take one and hold it seized while you do something else. A line of armed men is a line of men holding gear that will not answer.",
-     "cannot": "Holding costs continuously. Enginewrights are common enough that a rival can unseize what you seized, and will enjoy doing it in front of people.",
+     "grants": "Take several at once at the moment a line commits — a rank of drawn weapons, a team on a rope, a gate under its own weight. Gear becomes the thing that hurts them.",
+     "cannot": "A rival wright can feel this being done and answer it. And you have made everyone present distrust their own equipment, including your own people.",
      "functions": [
-      "hinder",
+      "strike",
       "break",
-      "bind"
+      "hinder"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating"
@@ -2297,16 +2298,16 @@
     {
      "rank": 3,
      "name": "The Great Refusal",
-     "grants": "A mill, a gate-house, a war-engine, a lattice-work — a system, not a piece. It stops, and it stays stopped as long as you attend it.",
-     "cannot": "You have stopped something a whole place depends on, and places notice. Some mechanisms are load-bearing for people who had nothing to do with your fight.",
+     "grants": "A mill-wheel, a war-engine, a lattice-work, a pressure-house. Systems store enormous force, and you decide the instant it stops going where it was going.",
+     "cannot": "⚠ A SYSTEM'S STORED FORCE DOES NOT DISCRIMINATE. This kills people who were operating it and often people who were only near it, and a mill is load-bearing for a village that had nothing to do with your fight.",
      "functions": [
-      "hinder",
+      "strike",
       "break",
-      "bind",
+      "hinder",
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "lethal"
     }
    ],
    "challengeTypes": [
@@ -2316,39 +2317,39 @@
    "tradition": "enginewright",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
-   "shape": "hinder",
+   "shape": "strike",
    "operativeAxis": [
-    "precision",
-    "scope"
+    "magnitude",
+    "precision"
    ],
    "mechanic": {
-    "magnitude": 6,
-    "duration": 2,
+    "magnitude": 7,
+    "duration": 1,
     "scope": 2
    },
    "intensity": {
-    "conserve": "one small piece — a buckle, a latch",
-    "surge": "take a whole system; YOU HAVE STOPPED SOMETHING A PLACE DEPENDS ON"
+    "conserve": "seize a small piece — it fails, it does not maim",
+    "surge": "take a whole system; ITS STORED FORCE DOES NOT DISCRIMINATE"
    },
    "bounds": [
     {
-     "text": "MADE THINGS ONLY — a fist or a stone offers nothing to grip",
+     "text": "MADE THINGS ONLY — a fist offers nothing to seize",
      "class": "hard"
     },
     {
-     "text": "must be CLOSE and PERCEIVED",
+     "text": "must be UNDER LOAD — a mechanism at rest merely stops",
      "class": "hard"
     },
     {
-     "text": "a seized mechanism can be WORKED FREE",
-     "class": "soft"
+     "text": "you choose WHEN; the mechanism chooses WHERE",
+     "class": "hard"
     },
     {
-     "text": "you may have stopped something uninvolved people depend on",
+     "text": "stored force does not discriminate",
      "class": "cost"
     }
    ],
-   "plainly": "A fight/puzzle action that makes an opponent's gear refuse at the moment of use. Rated 6 of 10 across a scope of 2 for about two hours. Limit: made things only."
+   "plainly": "A fight/puzzle action that fails an opponent's gear violently into them. Rated 7 of 10 across a scope of 2. Limit: made things only, and under load."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

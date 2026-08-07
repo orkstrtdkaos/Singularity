@@ -88,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.64";
+const APP_VERSION = "1.9.65";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4622,8 +4622,9 @@ function showBraidMoment(def) {
   // kind of cool. The player still earned it through their own play; someone found it first.
   const finder = def._recognition?.firstFinder || (def.minted?.adoptedFrom ? def.minted.adoptedFrom.characterName : null);
   const isRecognition = !isDiscovery && !!(def._recognition || def.minted?.adoptedFrom);
-  const kicker = isDiscovery ? "A TECHNIQUE DISCOVERED" : isRecognition ? "A BRAID RECOGNISED" : "A BRAID FORMS";
-  const arrow = isDiscovery ? "found in the doing — a thing neither could do apart" : isRecognition ? "you have earned, together" : "braided together into";
+  const isBondGift = def.kind === "bondGift";
+  const kicker = isBondGift ? "A BOND DEEPENS" : isDiscovery ? "A TECHNIQUE DISCOVERED" : isRecognition ? "A BRAID RECOGNISED" : "A BRAID FORMS";
+  const arrow = isBondGift ? `taught to you by ${esc(def._teacherName || "your companion")} — what the bond was always for` : isDiscovery ? "found in the doing — a thing neither could do apart" : isRecognition ? "you have earned, together" : "braided together into";
   const pop = document.createElement("div");
   pop.id = "help-pop"; pop.className = "help-overlay";
   // CCODE-26: dismissing the moment — "Hold it close", tap-away, OR after "Make it mine" (all route through
@@ -4814,6 +4815,36 @@ async function syncBraidRecipes({ character, profile } = {}) {
       for (const { local, recipe } of result.adopted) { const d = braidDefByKey(local.braidKey); if (d && d.minted.namedBy !== "player") adoptRecipeOntoLocal(d, recipe); else if (d) { d.minted.shared = true; d.minted.worldName = recipe.name; d.minted.adoptedFrom = recipe.contributedBy || null; } }
       saveCharacter(character);
     }
+    // ⛔ SNG-353c — ADOPTION WAS ONLY EVER A SIDE-EFFECT OF PUBLISHING, so a braid could never learn
+    // that its canonical name had changed. The submission filter above is `!d.minted.shared` — "already-
+    // shared never re-submits" — which is correct for PUBLISHING and fatal for ADOPTING: once a braid has
+    // been shared it never re-enters mergeRecipes, never appears in `result.adopted`, and never sees a
+    // later rename. Aevi renamed two recipes in SNG-344 and no held braid would ever have picked them up.
+    //
+    // ⚠️ Aevi flagged this without being able to prove it, and pointed at `braid_order_sense_palework`
+    // ("Order-Sense × Palework", a stub name). That one is already correct — it reads "Ashen Meridian".
+    // The real case is `braid_deathsense_palework`: held as "The Hollowing Sight", authored as "Pale
+    // Reckoning", `namedBy: "gm"`, and permanently stale. Her instinct was right; the mechanism was one
+    // step over.
+    //
+    // ⚠️ A PLAYER'S NAME IS NEVER TAKEN. It is kept, and the world's name recorded alongside it —
+    // which is what the publish path already does, and is the whole reason `namedBy` exists.
+    {
+      const store = braidRecipeStore?.recipes || {};
+      let renamed = 0;
+      for (const b of character.braids || []) {
+        const d = character.customAbilities?.[b.id];
+        const rec = d?.minted?.from ? store[[...d.minted.from].sort().join("+")] : null;
+        if (!d || !rec || !rec.name || rec.name === d.name) continue;
+        if (d.minted.namedBy === "player") { d.minted.worldName = rec.name; continue; }
+        // Keep what it was called — the player read that name in play, and SNG-344's own convention is
+        // that a superseded name becomes folk usage rather than disappearing.
+        d.minted.alsoKnownAs = [...new Set([...(d.minted.alsoKnownAs || []), d.name])].filter(n => n !== rec.name);
+        adoptRecipeOntoLocal(d, rec);
+        renamed++;
+      }
+      if (renamed) { console.log(`[recipes] sng-353c: ${renamed} held braid(s) adopted the canonical name`); saveCharacter(character); }
+    }
   } catch (err) { console.warn("[recipes] sync skipped:", err?.message); }
 }
 
@@ -4975,6 +5006,12 @@ function applyTurn(turn, resolution, playerWords = null) {
           character.customAbilities = character.customAbilities || {};
           character.customAbilities[def.id] = def;
           character.abilities.push({ abilityId: def.id, level: 1 });
+          // ⛔ ERIK'S RULING: THE GOAL IS LEGIBLE, THE ARRIVAL IS AN EVENT. The panel names the gift and its
+          // threshold and seals what it does; when it lands it uses the SAME celebration a discovered braid
+          // gets, not a line in a status list. Reuses a ceremony that already exists rather than inventing
+          // a second one — and this is the first craft in the game TAUGHT BY A COMPANION rather than a
+          // catalog, which is exactly the kind of thing that deserves the surface.
+          try { showBraidMoment({ ...def, kind: "bondGift", _teacherName: character.companionNames?.[c.id] || c.name }); } catch { /* a ceremony must never break the turn */ }
           turn.narration += `
 
 *✦ Your bond with ${c.name} deepens into something new: **${def.name}**.*`;
@@ -11243,6 +11280,13 @@ function renderPlay(turn, opts = {}) {
     renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} parts from your company — the road may cross again.` });
   };
   // SNG-057: rename a companion (the GM + portraits use the chosen name)
+  // SNG-353: the panel Erik reached for and did not find — bound on BOTH surfaces (company row and codex),
+  // because the codex is where he actually looked. Keyboard-reachable too: these were `title=` tooltips,
+  // and the whole point is that hover is not a delivery mechanism.
+  for (const el of app.querySelectorAll("[data-companion]")) {
+    el.onclick = () => showCompanionPanel(el.dataset.companion);
+    el.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showCompanionPanel(el.dataset.companion); } };
+  }
   for (const btn of app.querySelectorAll("[data-rename]")) btn.onclick = () => {
     const id = btn.dataset.rename; const c = CONTENT.companions[id]; if (!c) return;
     const next = prompt(`What do you call ${c.name}?`, character.companionNames?.[id] || c.name);

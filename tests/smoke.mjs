@@ -10743,6 +10743,69 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-353 — THE COMPANIONS WERE FULLY AUTHORED AND ALMOST ENTIRELY INVISIBLE. Erik, in play: "I searched
+  // codex but can't find what they do or the growing bond meaning… they don't have a popup info either."
+  //
+  // ⛔ HE DID NOT MISS IT. IT WAS NOT THERE. Twelve authored fields per companion, two and a half reachable.
+  // ⚠️ This is the INVERSE of the bug we keep catching: SNG-339 found readers with no writers, SNG-342 found
+  // registered files nothing loads. This is a WRITER WITH NO READER — and Aevi's point is the sharp one:
+  // the consumer contract asserts that content supplies what consumers read, and NEVER that an authored
+  // field has a consumer at all. A field nothing reads passes every gate we own.
+  {
+    const appSrc353 = readFileSync(join(root, "app.js"), "utf8");
+    const { loadContentHeadless: lch353 } = await import("./headless_content.mjs");
+    const C353 = await lch353();
+    const comps = Object.values(C353.companions || {});
+
+    // Every field the defect names must reach a surface. Asserted against the RENDERER, because "it is
+    // authored" was already true — that was the whole bug.
+    // ⚠️ No regex here on purpose: an escaped \b in this file has twice become a literal backspace
+    // character through the authoring tooling. `includes` cannot be mangled, and the question is simply
+    // whether the panel reads the field at all.
+    const panelStart = appSrc353.indexOf("function showCompanionPanel");
+    const panelSrc = panelStart < 0 ? "" : appSrc353.slice(panelStart, panelStart + 6000);
+    check("353: the panel function exists at all", panelStart > 0);
+    // ⚠️ UNROLLED ON PURPOSE. These were a loop with a TEMPLATE-LITERAL name, and the ledger's 272 guard
+    // scans SOURCE for `check("…")` literals — so a gate whose name is constructed at runtime can be
+    // claimed by a requirement and never found, which reads exactly like a deleted gate. A gate name has
+    // to be a findable constant, the same lesson 272 already carries about not embedding data in it.
+    check("353: `persona` reaches a surface (it was authored and rendered NOWHERE)", panelSrc.includes("c.persona"));
+    check("353: `knowledge` reaches a surface (it was authored and rendered NOWHERE)", panelSrc.includes("c.knowledge"));
+    check("353: `boundaries` reaches a surface (it was authored and rendered NOWHERE)", panelSrc.includes("c.boundaries"));
+    check("353: `appearance` reaches a surface (it was authored and rendered NOWHERE)", panelSrc.includes("c.appearance"));
+    check("353: `stages` reaches a surface (it was authored and rendered NOWHERE)", panelSrc.includes("c.stages"));
+
+    check("353: boundaries render VERBATIM — never summarised",
+      /comp-boundaries[\s\S]{0,200}esc\(c\.boundaries\)/.test(appSrc353));
+
+    // ⛔ THE TWO TOOLTIPS WERE THE ONLY DELIVERY FOR role AND appearance, AND HOVER DOES NOT EXIST ON TOUCH.
+    check("353: the panel opens from BOTH the company row and the codex — the codex is where Erik looked",
+      (appSrc353.match(/data-companion=/g) || []).length >= 2);
+    check("353: …and it is keyboard-reachable, not hover-only", /onkeydown[\s\S]{0,120}showCompanionPanel/.test(appSrc353));
+
+    // §1 — the bond reads as PROGRESS, not a score. Every number was already computed and never said.
+    const { companionStageThresholds, bondOf } = await import("../engine/companions.js");
+    const c0 = comps.find(c => (c.stages || []).length > 1) || comps[0];
+    const th = companionStageThresholds((c0.stages || []).length, C353.rules);
+    check("353: the engine already knew the next threshold — it just never said it", th.length > 0);
+    check("353: the badge reads bond x/max and names the next threshold",
+      /bond \$\{b\.bond\}\/\$\{mx\}/.test(appSrc353) && /next \$\{nx\}/.test(appSrc353));
+
+    // ⛔ ERIK'S RULING: NAME IT, SEAL THE REST. bondGrants was read at exactly ONE place — the moment it
+    // fired — so "what does the growing bond mean" was authored per companion and unreachable until the
+    // question stopped mattering. A reward the player cannot see is not an incentive, it is a surprise.
+    const panel = appSrc353.slice(appSrc353.indexOf("function showCompanionPanel"), appSrc353.indexOf("function showCompanionPanel") + 6000);
+    check("353: the bond gift is NAMED as a goal, with its threshold", /will teach you <strong>\$\{esc\(g\.name\)\}/.test(panel));
+    check("353: …and SEALED — no grants text, no functions, no ranks leak into the panel",
+      !/g\.description/.test(panel) && !/g\.functions/.test(panel) && !/g\.notFor/.test(panel));
+    check("353: …and its ARRIVAL is the braid/mint celebration, not a status line",
+      /showBraidMoment\(\{ \.\.\.def, kind: "bondGift"/.test(appSrc353) && /A BOND DEEPENS/.test(appSrc353));
+
+    // Nothing new was authored — the ticket's own claim, worth holding to.
+    check("353: no companion needed new content — every field already existed",
+      comps.every(c => c.persona && c.boundaries && Array.isArray(c.knowledge)));
+  }
+
   // SNG-355 — THE GM COULD NOT ADD OR REMOVE A PARTY MEMBER. ONLY A BUTTON COULD.
   //
   // Erik: "the story had let some of them depart while still remaining in my party." recruit() and

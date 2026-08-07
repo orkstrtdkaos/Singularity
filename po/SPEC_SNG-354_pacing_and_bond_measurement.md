@@ -77,34 +77,42 @@ is populated on only one save (Cellaceron, 8 entries). Needs its own pass; do no
 
 ---
 
-## §3 — ⛔ RANK 20 DOES NOT EXIST. THE REAL CEILING IS 9.
+## §3 — ⛔⛔ CORRECTED 2026-08-07 — I CALLED SILAS THE CEILING. ERIK: *"he's mid tier."*
 
-Erik asked for a ladder specifying *"what each point up to 20 gets you."* **`subAttributeCap` is 20.
-Measured across every real save, the highest sub-attribute anyone has ever reached is 9.**
+**MY ORIGINAL §3 CLAIMED "RANK 20 DOES NOT EXIST" AND RECOMMENDED TAPERING RANKS 11–20. THAT WAS WRONG,
+and the error is worth naming precisely because it is a repeatable one:**
 
-| sub | highest reached | by |
-|---|---|---|
-| presence | **9** | Silas, lvl 29 |
-| craft | **9** | Silas, lvl 29 |
-| reason / insight / rapport | 7 | Silas, lvl 29 |
-| wits | 6 | Silas, lvl 29 |
-| agility | 5 | Silas, lvl 29 |
-| strength | 4 | Usnea, lvl 5 |
+> **I conflated the deepest save I could measure with the ceiling of the game.** Silas is the furthest
+> anyone has *played*, so I treated level 29 / sub-9 as the top of the curve. Erik: he holds two warden
+> stations, a smithy, a pregnant wife, and four company allies — **that is a character in the MIDDLE of
+> his arc.** The empirical maximum is not the design maximum, and nothing in the data could have told me
+> which one I was looking at. Only the person playing knows.
 
-**Silas at level 29 has 29 sub-points spread across 8 subs and his best is 9.** A player who dumped
-*every* point into one sub from level 1 would reach 20 at level ~19 — about 478 actions — and **nobody
-plays that way**, because the roll reads the sub the GM names, so a single-sub specialist is helpless
-whenever the GM names a different one.
+**Same shape as the SNG-350 crossover error earlier today: I described the shape my recommendation
+needed instead of the shape the evidence supported.** Twice in one session, both caught by Erik.
 
-⚠️ **Authoring ranks 10–20 in detail would be authoring for a character who has never existed.** That is
-Amendment 3's exact failure — writing content a player will not use.
+### §3a — Re-derived with level 29 as MID
 
-**PO RECOMMENDATION: author ranks 1–10 in full detail, and 11–20 as a declared taper.** Ranks 1–10 cover
-every real character including Silas. The taper is honest about being aspirational. ⚠️ **Alternatively
-lower `subAttributeCap` to ~12** so the cap means something — but that is a real design loss if long
-campaigns are meant to reach further, and it is Erik's call, not mine.
+| phase | levels | actions @25.2/lvl | sub-ranks reached | evidence |
+|---|---|---|---|---|
+| **early** | 1–8 | ≤200 | **1–4** | 6 of 11 real characters |
+| **mid** | 9–35 | ≤880 | **5–10** | **Silas, lvl 29, subs 4–9** |
+| **late** | 36–70+ | 900–1,800+ | **11–18** | not yet played |
+| **deep** | 70+ | 1,800+ | 19–20 | the cap, reachable in a long campaign |
 
----
+**Sub-9 at level 29 is therefore a MID-GAME reading, not a ceiling.** A character continuing to level 60
+banks 60 sub-points; concentrated across the three or four subs a specialist actually uses, **ranks 15–20
+are genuinely reachable.**
+
+⛔ **REVERSED RECOMMENDATION: author all twenty ranks in real detail.** The taper I proposed would have
+hollowed out exactly the phase Erik is describing as the interesting one — fortresses, businesses, world
+arcs. **Ranks 11–20 are not aspirational padding; they are the late game, and they are where the nuance
+Erik asked for has to live.**
+
+⚠️ **What survives from the original §3, and still matters:** nobody single-stats — Silas spread 29 points
+across all 8 subs — because the roll reads whichever sub the GM names, so a specialist is helpless the
+moment a different one is called. **The ladder must reward spread as well as depth**, or it fights how the
+resolution system actually works. That observation was measured and holds regardless of where the ceiling is.
 
 ## §4 — WHAT THIS MEANS FOR THE LADDER (Erik's phase framing, fitted to the data)
 
@@ -113,10 +121,10 @@ world arcs, fortresses, party members, businesses."* **The data supports this an
 
 | phase | sub-rank reached | what the ladder should grant |
 |---|---|---|
-| **early** (lvl 1–5, ≤150 actions) | **ranks 1–4** | ⚠️ the survival floor — health, energy, the basics. **Most players never see past here.** Front-load legibility. |
-| **mid** (lvl 6–12, ≤330 actions) | **ranks 5–7** | power, reach, effectiveness — the soft-cap crossing lands here, which is the right place for "mastery begins" |
-| **late** (lvl 13–29+) | **ranks 8–10** | the nuanced grants — standing, company capacity, holdings, world-arc leverage |
-| **beyond** | ranks 11–20 | declared taper; no real character has been here |
+| **early** (lvl 1–8, ≤200 actions) | **ranks 1–4** | ⚠️ the survival floor — health, energy, the basics. **Most players never see past here.** Front-load legibility. |
+| **mid** (lvl 9–35) | **ranks 5–10** | power, reach, effectiveness. **Silas lives here.** The soft-cap crossing belongs at rank 5–7, not 4. |
+| **late** (lvl 36–70+) | **ranks 11–18** | ⚠️ the nuanced tier — standing, company capacity, holdings, world-arc leverage. **BLOCKED: see SNG-355 §2 — three of those four have no state model to attach to.** |
+| **deep** (70+) | ranks 19–20 | the cap, reached only in a very long campaign |
 
 ⛔ **THE SOFT CAP LANDS IN THE WRONG PLACE.** `attributeSoftCap: 4` — so mastery's diminishing return
 begins at the **top of early game**, exactly where Erik says a player still needs base competence.

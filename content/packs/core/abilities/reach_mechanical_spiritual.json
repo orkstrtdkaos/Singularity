@@ -1,2155 +1,2355 @@
 {
-  "schemaVersion": 1,
-  "powerSystem": "reach_mechanical_spiritual",
-  "note": "Crafts of the Gearlands/Numinous Reach (mechanical_spiritual axis) — the axis whose deep peak is What Sleeps Under. Enginecraft is the mechanical-pole tradition (Precursor arts at their most technical); Numenwork the spiritual-pole (the mystic disciplines the framework keeps converging toward). Learned by traveling the Reach or training with Enginewrights/the Numinous. Both drift the wielder toward their pole; the doubly-charged Forge of Ends is where they meet. Distinct from precursor.json: Precursor is the Valley's dangerous folk-access to the deep; these are the Reach's true traditions. axes signed for engine compat. Authored by Aevi (PO), SNG-016.",
-  "gated": "learned",
-  "abilities": [
+ "schemaVersion": 1,
+ "powerSystem": "reach_mechanical_spiritual",
+ "note": "Crafts of the Gearlands/Numinous Reach (mechanical_spiritual axis) — the axis whose deep peak is What Sleeps Under. Enginecraft is the mechanical-pole tradition (Precursor arts at their most technical); Numenwork the spiritual-pole (the mystic disciplines the framework keeps converging toward). Learned by traveling the Reach or training with Enginewrights/the Numinous. Both drift the wielder toward their pole; the doubly-charged Forge of Ends is where they meet. Distinct from precursor.json: Precursor is the Valley's dangerous folk-access to the deep; these are the Reach's true traditions. axes signed for engine compat. Authored by Aevi (PO), SNG-016.",
+ "gated": "learned",
+ "abilities": [
+  {
+   "id": "enginecraft",
+   "name": "Enginecraft",
+   "levelReq": 3,
+   "energyCost": 8,
+   "powerSystem": "reach_mechanical_spiritual",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.6,
+    "concrete_abstract": 0.3,
+    "chaos_order": 0.2
+   },
+   "effectTags": [
+    "machine",
+    "precursor",
+    "build"
+   ],
+   "narrationHints": "Mechanism as a language spoken fluently — systems built, run, and understood at a depth the Valley's tinkers only gesture at.",
+   "description": "The mechanical-pole mastery: design, run, and command machine-systems, Precursor works included, at the Enginewrights' depth.",
+   "notFor": "The numinous/meaning side of a Precursor site (that's Numenwork); life or growth; anything that must be felt rather than built.",
+   "tree": [
     {
-      "id": "enginecraft",
-      "name": "Enginecraft",
-      "levelReq": 3,
-      "energyCost": 8,
-      "powerSystem": "reach_mechanical_spiritual",
-      "attribute": "practical",
-      "axes": {
-        "mechanical_spiritual": -0.6,
-        "concrete_abstract": 0.3,
-        "chaos_order": 0.2
-      },
-      "effectTags": [
-        "machine",
-        "precursor",
-        "build"
-      ],
-      "narrationHints": "Mechanism as a language spoken fluently — systems built, run, and understood at a depth the Valley's tinkers only gesture at.",
-      "description": "The mechanical-pole mastery: design, run, and command machine-systems, Precursor works included, at the Enginewrights' depth.",
-      "notFor": "The numinous/meaning side of a Precursor site (that's Numenwork); life or growth; anything that must be felt rather than built.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Wright's Eye",
-          "grants": "Understand any mechanism's design and purpose on study; build reliable machines and devices; run Precursor systems that Latticespeak could only ask.",
-          "cannot": "Understanding function is not understanding WHY it was made; live-hostile systems still resist.",
-          "functions": [
-            "reveal",
-            "make"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "System-Speaker",
-          "grants": "Command a machine-system to reconfigure toward your intent; chain devices into working wholes; repair or repurpose Precursor works at the component level.",
-          "cannot": "The system does what its mechanism allows, not what you wish; the numinous layer stays opaque — you move the body, not the meaning.",
-          "functions": [
-            "reveal",
-            "make",
-            "command",
-            "mend"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Master of the Works",
-          "grants": "Command machine-country — a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale; build engines that outlive you. The Great Engine's power in miniature.",
-          "cannot": "The wielder drifts hard-mechanical; a person who becomes all-Engine forgets why anything is FOR — the framework's foreclosure by another road; and the Great Engine notices a rival wright.",
-          "functions": [
-            "reveal",
-            "make",
-            "command",
-            "mend"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "command",
-        "make",
-        "mend",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "PUZZLE"
-      ],
-      "tradition": "enginewright",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "construct",
-      "operativeAxis": [
-        "scope",
-        "fidelity"
-      ],
-      "mechanic": {
-        "magnitude": 6,
-        "duration": 8,
-        "scope": 3
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "command a machine-system to RECONFIGURE toward your intent; chain devices into working wholes; repair or repurpose PRECURSOR mechanism",
-          "from": "r2 grants — a FIFTH precursor hook"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "command MACHINE-COUNTRY — a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a small system — half the scope, and it stays predictable",
-        "surge": "double the works; THE WIELDER DRIFTS HARD-MECHANICAL"
-      },
-      "bounds": [
-        {
-          "text": "UNDERSTANDING FUNCTION IS NOT UNDERSTANDING WHY IT WAS MADE",
-          "class": "hard"
-        },
-        {
-          "text": "the system does what its MECHANISM ALLOWS, not what you wish",
-          "class": "hard"
-        },
-        {
-          "text": "the wielder DRIFTS HARD-MECHANICAL; a person who becomes all-Enginewright loses something",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A puzzle action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: understanding Function IS Not Understanding Why IT Was Made."
+     "rank": 1,
+     "name": "The Wright's Eye",
+     "grants": "Understand any mechanism's design and purpose on study; build reliable machines and devices; run Precursor systems that Latticespeak could only ask.",
+     "cannot": "Understanding function is not understanding WHY it was made; live-hostile systems still resist.",
+     "functions": [
+      "reveal",
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
-      "id": "numenwork",
-      "name": "Numenwork",
-      "levelReq": 3,
-      "energyCost": 8,
-      "powerSystem": "reach_mechanical_spiritual",
-      "attribute": "social",
-      "axes": {
-        "mechanical_spiritual": 0.6,
-        "concrete_abstract": 0.3,
-        "death_life": 0.2
-      },
-      "effectTags": [
-        "meaning",
-        "spirit",
-        "attend"
-      ],
-      "narrationHints": "The disciplines of pure meaning — attention made a force, presence that changes what it attends to, the material world going briefly negotiable.",
-      "description": "The spiritual-pole mastery: the mystic practices where meaning acts directly on the world. The road the Valley's framework keeps recognizing itself in.",
-      "notFor": "Building or commanding mechanism (that's Enginecraft); forcing an outcome (Numenwork attends, it does not compel); anything that treats spirit as a lever.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "True Attention",
-          "grants": "Attend so fully that the truth of a person, place, or moment surfaces; steady a soul in crisis by presence alone; perceive the meaning-layer of a Precursor site the Engine can't reach.",
-          "cannot": "Attention reveals and steadies; it does not command or coerce; the unwilling can close to it.",
-          "functions": [
-            "reveal",
-            "heal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Negotiable World",
-          "grants": "Where meaning is dense, the material softens — a symbol made briefly real, a threshold held open by significance, a wound that was always metaphor healed as one. Read the numinous truth of the deep works.",
-          "cannot": "Only where meaning already runs dense; it bends the world, never breaks it; the price is proportional to the bending.",
-          "functions": [
-            "reveal",
-            "heal",
-            "summon",
-            "restore"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Standing Presence",
-          "grants": "Attention as a force that holds — keep a foreclosing thing open by significance alone, hold a truth in a place until it can't be unsaid, meet the numinous heart of What Sleeps Under as an equal rather than a trespasser. The Numen's power in miniature; the framework's 'hold the aperture' made a discipline.",
-          "cannot": "The wielder drifts hard-spiritual, toward leaving the material behind entirely; presence holds, it does not decide; what you hold open, others must walk through.",
-          "functions": [
-            "reveal",
-            "heal",
-            "summon",
-            "restore",
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "heal",
-        "restore",
-        "reveal",
-        "summon",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "INVESTIGATE",
-        "SOCIAL",
-        "SURVIVE"
-      ],
-      "tradition": "numinous",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "healing",
-      "operativeAxis": [
-        "attention",
-        "scope"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 3,
-          "d": 4
-        },
-        "plus": 2,
-        "scope": 2,
-        "note": "T-III. Its healing is ATTENTION — 'attend so fully that the truth of a person, place, or moment surfaces'"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "attention",
-          "delta": "WHERE MEANING IS DENSE THE MATERIAL SOFTENS — a symbol made briefly real, a threshold held open by significance, a wound eased by attention",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: ATTENTION AS A FORCE THAT HOLDS — keep a FORECLOSING thing open by significance alone, hold a truth in a place until it is heard",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "attend briefly — half the effect, and you keep your own centre",
-        "surge": "double the attention; THE WIELDER DRIFTS HARD-SPIRITUAL, toward leaving the material behind"
-      },
-      "bounds": [
-        {
-          "text": "attention REVEALS AND STEADIES — turning it to compel is possible and expensive, and it is not what the Attenders teach",
-          "class": "soft"
-        },
-        {
-          "text": "ONLY WHERE MEANING ALREADY RUNS DENSE — it bends the world, never builds it",
-          "class": "hard"
-        },
-        {
-          "text": "the wielder DRIFTS HARD-SPIRITUAL, toward leaving the material behind",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A investigate/social/survive action that restores health. It rolls 3d4+2 across a scope of 2 Ranks: rank 2 deepens attention; rank 3 adds to special. Limit: only Where Meaning Already Runs Dense — it bends the world, never builds it."
+     "rank": 2,
+     "name": "System-Speaker",
+     "grants": "Command a machine-system to reconfigure toward your intent; chain devices into working wholes; repair or repurpose Precursor works at the component level.",
+     "cannot": "The system does what its mechanism allows, not what you wish; the numinous layer stays opaque — you move the body, not the meaning.",
+     "functions": [
+      "reveal",
+      "make",
+      "command",
+      "mend"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
-      "id": "mech_sense",
-      "name": "Mechanism-Sense",
-      "levelReq": 1,
-      "energyCost": 3,
-      "attribute": "mental",
-      "axes": {
-        "mechanical_spiritual": -0.3
-      },
-      "functions": [
-        "reveal",
-        "track"
-      ],
-      "narrationHints": "The workings of a thing felt like a diagram behind the eyes.",
-      "description": "Perceive how a mechanism or system functions on sight.",
-      "notFor": "The why/meaning of it; living things.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Mechanism-Sense",
-          "grants": "Understand a device or machine-system's function and flaws at a glance.",
-          "cannot": "Function, not purpose; the numinous stays dark.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Whole Mechanism",
-          "grants": "Read a machine entire — what it does, what it was FOR, where it will fail, and what someone changed.",
-          "cannot": "It reads mechanism. What a machine MEANS is the Numinous's country, not yours.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Engine's Confession",
-          "grants": "A mechanism tells you its whole history — every hand that touched it, every misuse, every repair made in a hurry.",
-          "cannot": "The Precursor works do not confess. They only answer, and only sometimes.",
-          "functions": [
-            "reveal",
-            "track"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned",
-      "challengeTypes": [
-        "INVESTIGATE",
-        "PUZZLE"
-      ],
-      "tradition": "enginewright",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "setup",
-      "operativeAxis": [
-        "perceptionDepth",
-        "history"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 1
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "perceptionDepth",
-          "delta": "read a machine ENTIRE — what it does, what it was FOR, where it will fail, and WHAT SOMEONE CHANGED",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "history",
-          "delta": "SPECIAL: the mechanism tells you its WHOLE HISTORY — every hand that touched it, every misuse, every repair made in a hurry",
-          "from": "r3 grants — provenance is a different act from diagnosis"
-        }
-      ],
-      "intensity": {
-        "conserve": "a glance at the works — half the depth, instant",
-        "surge": "double the read; THE PRECURSOR WORKS DO NOT CONFESS"
-      },
-      "bounds": [
-        {
-          "text": "FUNCTION, NOT PURPOSE — the numinous stays dark",
-          "class": "hard"
-        },
-        {
-          "text": "it reads MECHANISM; what a machine MEANS is the Numinous's country",
-          "class": "hard"
-        },
-        {
-          "text": "THE PRECURSOR WORKS DO NOT CONFESS — they only answer, and only sometimes",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to history. Limit: function, Not Purpose — the numinous stays dark."
-    },
-    {
-      "id": "numen_sense",
-      "name": "Numen-Sense",
-      "levelReq": 1,
-      "energyCost": 3,
-      "attribute": "social",
-      "axes": {
-        "mechanical_spiritual": 0.3
-      },
-      "functions": [
-        "reveal"
-      ],
-      "narrationHints": "The weight of meaning in a place felt on the skin.",
-      "description": "Sense where meaning runs dense — sacred ground, a charged moment, a numinous site.",
-      "notFor": "Reading mechanism; forcing the meaning.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Numen-Sense",
-          "grants": "Feel the significance-density of a place or moment; know where the world is 'thin.'",
-          "cannot": "Feel, not command; barren places read empty.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Thinning",
-          "grants": "Feel where the veil is thin — where meaning presses close enough to touch, and where something is pressing back.",
-          "cannot": "Feeling the thin place is not surviving it. Not everything on the other side is glad to be noticed.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Numen Plain",
-          "grants": "The numinous is simply visible to you — the sacred, the haunted, the charged, all plain as furniture.",
-          "cannot": "Once seen, never unseen. The Numinous who reach this depth find the ordinary world thin and hard to care about.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned",
-      "challengeTypes": [
-        "INVESTIGATE",
-        "EXPLORE"
-      ],
-      "tradition": "numinous",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "setup",
-      "operativeAxis": [
-        "perceptionDepth",
-        "range"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 1,
-        "range": 20,
-        "note": "SOCIAL attribute — numinous reads MEANING, and meaning is social"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "perceptionDepth",
-          "delta": "feel WHERE THE VEIL IS THIN — where meaning presses close enough to touch, AND WHERE SOMETHING IS PRESSING BACK",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: the numinous is simply VISIBLE to you — the sacred, the haunted, the charged, all plain as furniture",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a feel for the room — half the depth, and it does not stay with you",
-        "surge": "double the sensitivity; ONCE SEEN, NEVER UNSEEN"
-      },
-      "bounds": [
-        {
-          "text": "FEEL, NOT COMMAND — barren places read empty",
-          "class": "hard"
-        },
-        {
-          "text": "FEELING THE THIN PLACE IS NOT SURVIVING IT",
-          "class": "hard"
-        },
-        {
-          "text": "ONCE SEEN, NEVER UNSEEN — the Numinous who reach this depth find the ordinary world thinner afterward",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: feel, Not Command — barren places read empty."
-    },
-    {
-      "id": "mend_device",
-      "name": "Mend",
-      "levelReq": 1,
-      "energyCost": 4,
-      "attribute": "practical",
-      "axes": {
-        "mechanical_spiritual": -0.3
-      },
-      "functions": [
-        "empower",
-        "make",
-        "mend"
-      ],
-      "narrationHints": "Parts find their places and the dead thing hums again.",
-      "description": "Repair a broken mechanism or device with a craftsman's sure touch.",
-      "notFor": "Precursor deep-systems (that's Enginecraft); living hurts.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Mend",
-          "grants": "Fix a broken tool, machine, or simple device reliably.",
-          "cannot": "Ordinary mechanism only; the deep works resist.",
-          "functions": [
-            "mend"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The True Mend",
-          "grants": "Mend a thing so it works as it was meant to — not patched, but restored to its intent.",
-          "cannot": "You must know what it was FOR. A mend against the true intent will not hold.",
-          "functions": [
-            "mend"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Better Than New",
-          "grants": "The mended thing is better than it was — you understood it well enough to improve it in the mending.",
-          "cannot": "The Enginewrights' pride and their sin: not everything you can improve should be.",
-          "functions": [
-            "mend",
-            "make",
-            "empower"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned",
-      "challengeTypes": [
-        "PUZZLE",
-        "SURVIVE"
-      ],
-      "tradition": "enginewright",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "healing",
-      "operativeAxis": [
-        "repair",
-        "quality"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 1,
-          "d": 4
-        },
-        "plus": 2,
-        "note": "mends the MADE, not the living — the +2 is enginewright reliability"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "quality",
-          "delta": "mend so it works AS IT WAS MEANT TO — not patched, but RESTORED TO ITS INTENT",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: THE MENDED THING IS BETTER THAN IT WAS — you understood it well enough to improve it in the mending",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a quick fix — half the quality, and it holds",
-        "surge": "double the work: restored past its original, and NOT EVERYTHING YOU CAN IMPROVE SHOULD BE"
-      },
-      "bounds": [
-        {
-          "text": "ORDINARY MECHANISM ONLY — the deep works resist",
-          "class": "hard"
-        },
-        {
-          "text": "YOU MUST KNOW WHAT IT WAS FOR — a mend against the true intent fails",
-          "class": "hard"
-        },
-        {
-          "text": "THE ENGINEWRIGHTS' PRIDE AND THEIR SIN: not everything you can improve should be improved",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A puzzle/survive action that restores health. It rolls 1d4+2 Ranks: rank 2 deepens quality; rank 3 adds to special. Limit: ordinary Mechanism Only — the deep works resist."
-    },
-    {
-      "id": "steady_soul",
-      "name": "Steady the Soul",
-      "levelReq": 1,
-      "energyCost": 4,
-      "attribute": "social",
-      "axes": {
-        "mechanical_spiritual": 0.3
-      },
-      "functions": [
-        "empower",
-        "heal",
-        "resist"
-      ],
-      "narrationHints": "Presence alone, and the breaking person holds.",
-      "description": "Steady another's spirit in crisis by attention and presence — folk-Numenwork.",
-      "notFor": "Healing the body; compelling calm.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Steady the Soul",
-          "grants": "Calm and steady a person in spiritual/emotional crisis through pure presence.",
-          "cannot": "Opens the door, never shoves; the closed resist.",
-          "functions": [
-            "heal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Steadied Hand",
-          "grants": "Steady another person through terror, grief, or the shakes — they can act when they could not.",
-          "cannot": "Steadying is a loan against their own strength. It comes due when you let go.",
-          "functions": [
-            "heal",
-            "empower"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Unshaken",
-          "grants": "Nothing shakes you, and nearness to you steadies others without effort — panic does not propagate through you.",
-          "cannot": "Unshakable is not unhurt. It means the hurt does not show, and does not get put down.",
-          "functions": [
-            "heal",
-            "empower",
-            "resist"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned",
-      "challengeTypes": [
-        "SOCIAL",
-        "SURVIVE"
-      ],
-      "tradition": "numinous",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "healing",
-      "operativeAxis": [
-        "steadying",
-        "targets"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 1,
-          "d": 4
-        },
-        "plus": 1,
-        "targets": 1,
-        "note": "heals the SPIRIT, not the body — a social-attribute healing craft, the first in the catalog"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "steadying",
-          "delta": "steady another through TERROR, GRIEF, OR THE SHAKES — they can act when they could not",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: nothing shakes YOU, and nearness to you steadies others WITHOUT EFFORT — panic does not propagate through you",
-          "from": "r3 grants — a passive field is a kind-change"
-        }
-      ],
-      "intensity": {
-        "conserve": "a steadying word — half the effect, and it asks nothing of them",
-        "surge": "double it; STEADYING IS A LOAN AGAINST THEIR OWN STRENGTH, and it comes due"
-      },
-      "bounds": [
-        {
-          "text": "IT OPENS THE DOOR — shoving through it is harder, costlier, and leaves a mark on them the Attenders can read",
-          "class": "soft"
-        },
-        {
-          "text": "STEADYING IS A LOAN AGAINST THEIR OWN STRENGTH — it comes due later",
-          "class": "cost"
-        },
-        {
-          "text": "UNSHAKABLE IS NOT UNHURT — it means the hurt does not show",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social/survive action that restores health. It rolls 1d4+1 It affects 1 target Ranks: rank 2 deepens steadying; rank 3 adds to special."
-    },
-    {
-      "id": "command_engine",
-      "name": "Command the Small Engine",
-      "levelReq": 2,
-      "energyCost": 5,
-      "attribute": "practical",
-      "axes": {
-        "mechanical_spiritual": -0.4,
-        "chaos_order": 0.2
-      },
-      "functions": [
-        "command",
-        "mend"
-      ],
-      "narrationHints": "A word to the machine and it does the new thing.",
-      "description": "Direct a machine-system to reconfigure toward your intent — mid-tier Enginecraft.",
-      "notFor": "The meaning-layer; wishes the mechanism can't do.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Command the Small Engine",
-          "grants": "Make a device or system do something within its mechanism it wasn't set to.",
-          "cannot": "Only what the mechanism allows; meaning stays opaque.",
-          "functions": [
-            "command"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Larger Engine",
-          "grants": "Command engines beyond the small — a mill, a lock-system, a Precursor door that still half-listens.",
-          "cannot": "Commanding a thing is not understanding it. Engines obey the words, not the wish.",
-          "functions": [
-            "command"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Engine Obeys",
-          "grants": "Mechanism answers you as if you were its maker — it does what you mean, not merely what you say.",
-          "cannot": "Halvex Coil began exactly here, and did not stop. The Enginewrights teach this rank with a warning attached.",
-          "functions": [
-            "command",
-            "mend"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned",
-      "challengeTypes": [
-        "PUZZLE",
-        "FIGHT"
-      ],
-      "tradition": "enginewright",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "construct",
-      "operativeAxis": [
-        "scope",
-        "fidelity"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 4,
-        "scope": 2
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "command engines BEYOND THE SMALL — a mill, a lock-system, A PRECURSOR DOOR THAT STILL HALF-LISTENS",
-          "from": "r2 grants — and a FOURTH precursor hook"
-        },
-        {
-          "rank": 3,
-          "kind": "deepen",
-          "axis": "fidelity",
-          "delta": "mechanism answers you AS IF YOU WERE ITS MAKER — it does WHAT YOU MEAN, not merely what you say",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a simple instruction — half the scope, and it does exactly what you said",
-        "surge": "double the command; ENGINES OBEY THE WORDS"
-      },
-      "bounds": [
-        {
-          "text": "ONLY WHAT THE MECHANISM ALLOWS — meaning stays opaque",
-          "class": "hard"
-        },
-        {
-          "text": "COMMANDING A THING IS NOT UNDERSTANDING IT — engines obey the words",
-          "class": "hard"
-        },
-        {
-          "text": "HALVEX COIL BEGAN EXACTLY HERE, AND DID NOT STOP",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A puzzle/fight action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 extends scope; rank 3 deepens fidelity. Limit: only What The Mechanism Allows — meaning stays opaque."
-    },
-    {
-      "id": "thin_place",
-      "name": "Open the Thin Place",
-      "levelReq": 3,
-      "energyCost": 6,
-      "attribute": "social",
-      "axes": {
-        "mechanical_spiritual": 0.4,
-        "concrete_abstract": 0.3
-      },
-      "functions": [
-        "make",
-        "open",
-        "reveal",
-        "strike",
-        "summon",
-        "sustain"
-      ],
-      "narrationHints": "Where meaning is thick, a threshold opens that was never a door.",
-      "description": "Where significance runs dense, briefly make a symbol real — a threshold held by meaning. Mid-tier Numenwork.",
-      "notFor": "Manufacturing significance where there is none — the craft concentrates meaning, it rarely invents it. Choosing WHAT is on the other side. Closing one in a hurry.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Open the Thin Place",
-          "grants": "In a meaning-dense place, make a symbol briefly literal — a held threshold, a metaphor made real.",
-          "cannot": "Only where meaning is dense; costs proportional.",
-          "functions": [
-            "reveal",
-            "summon"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Held Thin Place",
-          "grants": "Hold a thin place open — long enough for others to see, to speak, to pass a thing through. What passes goes both ways: where something has been pressing back, holding the way open is an invitation it will take, and it arrives on its own terms rather than yours.",
-          "cannot": "You hold the opening, never what comes through it. A thing that answers a held threshold is not summoned and not bound — it is merely no longer prevented.",
-          "functions": [
-            "reveal",
-            "summon",
-            "open",
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "damaging"
-        },
-        {
-          "rank": 3,
-          "name": "The Open Door",
-          "grants": "Open a thin place where there was none, in a room that had no reason to be sacred. And a door opened is a door BOTH ways: what waits on the other side can be let through onto something you point it at, and what it does to a living body is not a working you are performing — it is a thing with its own appetite, arriving, and doing what it does.",
-          "cannot": "You cannot choose what answers, you cannot call it off, and it does not leave when you are finished — it is here now, in a place that had no reason to be thin, and it knows exactly who opened the way. The Numinous Reach does not forbid this. It simply keeps a list of everyone who has done it.",
-          "functions": [
-            "reveal",
-            "summon",
-            "open",
-            "sustain",
-            "make",
-            "strike"
-          ],
-          "gains": "broaden",
-          "harmRung": "lethal"
-        }
-      ],
-      "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned",
-      "challengeTypes": [
-        "PUZZLE",
-        "EXPLORE",
-        "SURVIVE"
-      ],
-      "tradition": "numinous",
-      "nativeOrCombination": "native",
-      "harmRung": "lethal",
-      "shape": "construct",
-      "operativeAxis": [
-        "opening",
-        "duration",
-        "variance"
-      ],
-      "mechanic": {
-        "magnitude": 6,
-        "duration": 2,
-        "scope": 2,
-        "variance": 5,
-        "note": "LETHAL rung — because 'you cannot choose what answers.' variance 5: what comes through is not yours to pick."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "duration",
-          "delta": "HOLD a thin place open — long enough for others to see, speak, pass a thing through. WHAT PASSES GOES BOTH WAYS.",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: OPEN a thin place WHERE THERE WAS NONE, in a room that had no reason to be sacred. And A DOOR OPENED IS A DOOR BOTH WAYS.",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "crack it — half the opening, and you can close it",
-        "surge": "double the opening; YOU CANNOT CHOOSE WHAT ANSWERS, YOU CANNOT CALL IT OFF"
-      },
-      "bounds": [
-        {
-          "text": "at rank 1 it works only where meaning is already dense — a shrine, a battlefield, a deathbed — and the energy cost scales with how thin the place is",
-          "class": "soft"
-        },
-        {
-          "text": "YOU HOLD THE OPENING, NEVER WHAT COMES THROUGH IT",
-          "class": "hard"
-        },
-        {
-          "text": "YOU CANNOT CHOOSE WHAT ANSWERS, YOU CANNOT CALL IT OFF",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A puzzle/explore/survive action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: you Hold The Opening, Never What Comes Through IT."
-    },
-    {
-      "id": "meaning_engine",
-      "name": "The Meaning-Engine",
-      "levelReq": 4,
-      "energyCost": 9,
-      "attribute": "mental",
-      "axes": {
-        "mechanical_spiritual": 0
-      },
-      "functions": [
-        "command",
-        "mend",
-        "reveal"
-      ],
-      "narrationHints": "The machine runs on why, not just how.",
-      "description": "The braid-craft: command a Precursor work by significance, not only mechanism — body and meaning at once.",
-      "notFor": "Pure-mechanism or pure-spirit approaches; shallow substrate.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Meaning-Engine",
-          "grants": "Run a deep Precursor work by both its mechanism AND its meaning — the way to treat with What Sleeps Under.",
-          "cannot": "Needs dense substrate; what answers may not be tame.",
-          "functions": [
-            "command",
-            "mend",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Deeper Register",
-          "grants": "Hold the register open rather than striking it once — a deep Precursor work answers repeatedly, and answers questions as well as commands. What Sleeps Under begins to address you specifically rather than generically. A work treated with rather than struck will also let you set it right — faults named by the mechanism itself and repaired by its consent rather than by force.",
-          "cannot": "Being addressed specifically is not the same as being welcome. It still needs dense substrate, and the density is not yours to arrange. And a work that has learned your particular meaning can be reached through you by anything else that learns it.",
-          "functions": [
-            "command",
-            "mend",
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned",
-      "challengeTypes": [
-        "PUZZLE",
-        "INVESTIGATE"
-      ],
-      "tradition": "cross_pole_braid",
-      "nativeOrCombination": "combination",
-      "harmRung": "none",
-      "shape": "construct",
-      "operativeAxis": [
-        "fidelity",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 7,
-        "duration": 4,
-        "requiresPoles": [
-          "enginewright",
-          "numinous"
-        ],
-        "damageType": "precursor"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "duration",
-          "delta": "HOLD THE REGISTER OPEN rather than striking it once — a deep Precursor work answers REPEATEDLY, and answers better",
-          "from": "r2 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "address it once — half the exchange, and it may not answer",
-        "surge": "double it; BEING ADDRESSED SPECIFICALLY IS NOT THE SAME AS BEING WELCOMED"
-      },
-      "bounds": [
-        {
-          "text": "NEEDS DENSE SUBSTRATE; what answers MAY NOT BE TAME",
-          "class": "hard"
-        },
-        {
-          "text": "BEING ADDRESSED SPECIFICALLY IS NOT THE SAME AS BEING WELCOMED",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A puzzle or investigate action, and it needs two poles: you must have both enginewright and numinous training to attempt it at all. It lets you operate a deep precursor work by addressing what it means as well as what it does, which is the only way to treat with the things down there that answer. It needs dense substrate — a thin place will not carry it. And what answers may not be what you addressed: being heard specifically is not the same as being answered honestly."
-    },
-    {
-      "id": "shortfold",
-      "name": "Shortfold",
-      "levelReq": 3,
-      "energyCost": 7,
-      "attribute": "mental",
-      "axes": {
-        "mechanical_spiritual": 0.3,
-        "space_time": 0.4
-      },
-      "functions": [
-        "move",
-        "travel"
-      ],
-      "narrationHints": "The space between here and there folds for a step, and you are across it.",
-      "description": "A short-range teleport — fold the space between you and a spot you can SEE, and step through. Blink across a gap, past a door, out of a grip. Needs substrate to fold against.",
-      "notFor": "Somewhere unseen (line-of-sight only); long distance; carrying a crowd.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Shortfold",
-          "grants": "Instantly cross to a visible point within ~30 paces — through, past, or over what's between.",
-          "cannot": "Line-of-sight only; substrate-thin places (the origin-flats) refuse it; costs sharply, a botch drops you mid-fold (hurt).",
-          "functions": [
-            "move"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Longer Fold",
-          "grants": "Fold a longer distance — a valley rather than a courtyard — and bring others through with you.",
-          "cannot": "Both ends must be places you truly know. A fold to a half-remembered place ends half-way.",
-          "functions": [
-            "move",
-            "travel"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Folded Road",
-          "grants": "Fold distance as a road you can walk repeatedly — a route through the short way that stays open.",
-          "cannot": "The folded road is a hole in the world, and the world notices holes.",
-          "functions": [
-            "move",
-            "travel"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned",
-      "tradition": "enginewright",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "reposition",
-      "operativeAxis": [
-        "range",
-        "targets"
-      ],
-      "mechanic": {
-        "range": 30,
-        "push": 0,
-        "magnitude": 5,
-        "targets": 1,
-        "note": "r1's own number: ~30 paces, line of sight"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "range+targets",
-          "delta": "fold a VALLEY rather than a courtyard, and BRING OTHERS through with you",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: fold distance as a ROAD YOU CAN WALK REPEATEDLY — a route through the short way that STAYS OPEN",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a short fold — half the distance, and the world barely notices",
-        "surge": "double the fold; THE FOLDED ROAD IS A HOLE IN THE WORLD, AND THE WORLD NOTICES HOLES"
-      },
-      "bounds": [
-        {
-          "text": "LINE OF SIGHT ONLY at r1; substrate-thin places REFUSE it",
-          "class": "hard"
-        },
-        {
-          "text": "BOTH ENDS MUST BE PLACES YOU TRULY KNOW — a half-remembered fold fails",
-          "class": "hard"
-        },
-        {
-          "text": "THE FOLDED ROAD IS A HOLE IN THE WORLD, AND THE WORLD NOTICES HOLES",
-          "class": "cost"
-        }
-      ],
-      "plainly": "An action that moves you or someone else. Its strength is rated 5 out of 10 It affects 1 target. Range is 30. Ranks: rank 2 extends range+targets; rank 3 adds to special. Limit: line OF Sight Only at r1; substrate-thin places Refuse it."
-    },
-    {
-      "id": "waygate",
-      "name": "Waygate",
-      "levelReq": 5,
-      "energyCost": 12,
-      "attribute": "mental",
-      "axes": {
-        "mechanical_spiritual": 0.5,
-        "space_time": 0.6
-      },
-      "functions": [
-        "open",
-        "summon",
-        "travel"
-      ],
-      "narrationHints": "A door opens onto a place you have stood before, a hundred miles closed to a single step.",
-      "description": "The long teleport capstone: open a fold to a place you KNOW WELL (have been, and can hold clearly), crossing any distance. Move a small party through. The Precursor way-network's power, woken.",
-      "notFor": "Anywhere you haven't been/can't hold; instant repeat; an unwilling passenger.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Waygate",
-          "grants": "Open a gate to a well-known distant place and step (or lead a few) through, crossing any distance at once. What the gate carries it carries BOTH ways — you may call a companion, a beast, or a needed thing through to you rather than going yourself.",
-          "cannot": "Only to places held clearly in memory; enormous cost + cooldown; a botch opens the wrong gate, or a dangerous one.",
-          "functions": [
-            "travel",
-            "open",
-            "summon"
-          ],
-          "harmRung": "none",
-          "gains": "broaden"
-        }
-      ],
-      "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned",
-      "tradition": "numinous",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "reposition",
-      "operativeAxis": [
-        "range",
-        "targets"
-      ],
-      "mechanic": {
-        "range": 9999,
-        "push": 0,
-        "magnitude": 9,
-        "targets": 3,
-        "note": "T-V capstone: 'crossing any distance at once' — range is effectively unbounded, gated by MEMORY instead"
-      },
-      "rankDeltas": [
-        {
-          "rank": 1,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: OPEN A GATE to a well-known distant place and step (or lead a few) through, CROSSING ANY DISTANCE AT ONCE. The capstone is a KIND (distance ceasing to apply) at enormous cost — and gated by MEMORY, not by range.",
-          "from": "r1 grants — single-rank capstone"
-        }
-      ],
-      "intensity": {
-        "conserve": "REFUSED — a half-opened waygate is a hole, not a door.",
-        "surge": "REFUSED — it already demands enormous cost and a cooldown."
-      },
-      "bounds": [
-        {
-          "text": "ONLY TO PLACES HELD CLEARLY IN MEMORY",
-          "class": "hard"
-        },
-        {
-          "text": "ENORMOUS COST plus a real cooldown",
-          "class": "hard"
-        }
-      ],
-      "plainly": "An action that moves you or someone else. Its strength is rated 9 out of 10 It affects 3 targets. Range is 9999 Limit: only TO Places Held Clearly IN Memory."
-    },
-    {
-      "id": "the_fault_strike",
-      "name": "The Fault Strike",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "practical",
-      "axes": {
-        "mechanical_spiritual": -0.4,
-        "violence_peace": 0.2
-      },
-      "effectTags": [
-        "precision",
-        "exploit",
-        "mechanism"
-      ],
-      "harmRung": "incapacitating",
-      "narrationHints": "He didn't hit the person. He hit the load-bearing piece.",
-      "description": "Strike at the known structural weak point — the joint, the fault, the critical piece — for maximum effect from minimum force.",
-      "notFor": [],
-      "tradition": "enginewright",
-      "functions": [
-        "break",
-        "hinder",
-        "reveal",
-        "strike"
-      ],
-      "challengeTypes": [
-        "combat",
-        "technical",
-        "tactical"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Fault Point",
-          "grants": "Strike a person or device at its structural weak point — the joint under load, the nerve cluster, the part compensating for an earlier damage — for targeted, efficient harm.",
-          "cannot": "Anything rank 2 adds — hit a mechanism's fault so precisely it fails in the way you need — not just broken, stopped; it is PRECISION, not power.",
-          "functions": [
-            "reveal",
-            "strike",
-            "break"
-          ],
-          "gains": "broaden",
-          "harmRung": "damaging"
-        },
-        {
-          "rank": 2,
-          "name": "Controlled Failure",
-          "grants": "Hit a mechanism's fault so precisely it fails in the way you need — not just broken, stopped; not just damaged, disabled at the point that matters.",
-          "cannot": "Anything rank 3 adds — end what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved; it is PRECISION, not power.",
-          "functions": [
-            "reveal",
-            "strike",
-            "break",
-            "hinder"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 3,
-          "name": "One Strike",
-          "grants": "End what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved.",
-          "cannot": "Nothing further; this is the craft's ceiling; it is PRECISION, not power.",
-          "functions": [
-            "reveal",
-            "strike",
-            "break",
-            "hinder"
-          ],
-          "gains": "deepen",
-          "harmRung": "incapacitating"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "damage",
-      "operativeAxis": [
-        "damage",
-        "precision"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 2,
-          "d": 6
-        },
-        "plus": 0,
-        "marginFloorPer": 0.03,
-        "note": "incapacitating. The higher marginFloorPer is deliberate: enginewright damage is PRECISE — it rewards a decisive margin more than raw force."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "precision",
-          "delta": "hit a mechanism's fault SO PRECISELY IT FAILS IN THE WAY YOU NEED — not just broken, STOPPED; not just damaged, DISABLED",
-          "from": "r2 grants — choosing the failure MODE"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: END what would otherwise require sustained effort THROUGH ONE WELL-PLACED ACTION — because you knew where it would break",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a measured tap — half the force, and nothing else is damaged",
-        "surge": "double the strike; precision is not subtlety and everyone sees what you did"
-      },
-      "bounds": [
-        {
-          "text": "requires KNOWING the weak point — an unfamiliar mechanism must be read first",
-          "class": "soft"
-        },
-        {
-          "text": "it is PRECISION, not power — a thing with no fault to find resists it",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A combat/technical/tactical action that deals damage. It rolls 2d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: it is Precision, not power — a thing with no fault to find resists it."
-    },
-    {
-      "id": "the_mechanical_defense",
-      "name": "The Mechanical Defense",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "practical",
-      "axes": {
-        "mechanical_spiritual": -0.4,
-        "chaos_order": 0.2
-      },
-      "effectTags": [
-        "shield",
-        "engineering",
-        "redirect"
-      ],
-      "harmRung": "none",
-      "narrationHints": "The blow arrives. Something redirects it. She engineered for this.",
-      "description": "Protection through engineered response — interlocking parts and redirected force, not brute resistance.",
-      "notFor": [],
-      "tradition": "enginewright",
-      "functions": [
-        "resist",
-        "shield",
-        "ward"
-      ],
-      "challengeTypes": [
-        "combat",
-        "craft",
-        "defense"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Redirected Force",
-          "grants": "Protect through engineered positioning — the blow lands on something that can take it, redirected away from what can't.",
-          "cannot": "Anything rank 2 adds — build a mechanical defense that holds without constant attention — barriers and redirects that work while you work on something else; what is built in place STAYS in place.",
-          "functions": [
-            "shield"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Set Defense",
-          "grants": "Build a mechanical defense that holds without constant attention — barriers and redirects that work while you work on something else.",
-          "cannot": "Anything rank 3 adds — a defense that adapts — interlocking protections that cover the group and respond to the threat's form, not just its direction; what is built in place STAYS in place.",
-          "functions": [
-            "shield",
-            "ward"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Active System",
-          "grants": "A defense that adapts — interlocking protections that cover the group and respond to the threat's form, not just its direction.",
-          "cannot": "Nothing further; this is the craft's ceiling; what is built in place STAYS in place.",
-          "functions": [
-            "shield",
-            "ward",
-            "resist"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "guard",
-      "operativeAxis": [
-        "soak",
-        "targets",
-        "autonomy"
-      ],
-      "mechanic": {
-        "magnitude": 4,
-        "soak": 4,
-        "soakRank": 2,
-        "duration": 4,
-        "targets": 1
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "add",
-          "axis": "autonomy",
-          "delta": "a defense that HOLDS WITHOUT CONSTANT ATTENTION — barriers and redirects that work WHILE YOU WORK ON SOMETHING ELSE",
-          "from": "r2 grants — freeing the wielder is the increment"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "a defense that ADAPTS — interlocking protections covering the GROUP, responding to the threat's FORM, not just its direction",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a redirect — half the soak, set up in a moment",
-        "surge": "double the works; an engineered defense takes TIME to build and cannot be moved once built"
-      },
-      "bounds": [
-        {
-          "text": "it must be built before the fight: about an hour of setup, and it cannot be raised once blows have landed",
-          "class": "soft"
-        },
-        {
-          "text": "what is built in place STAYS in place",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A combat/craft/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 adds to autonomy; rank 3 extends targets. Limit: what is built in place Stays in place."
-    },
-    {
-      "id": "the_running_engine",
-      "name": "The Running Engine",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "practical",
-      "axes": {
-        "mechanical_spiritual": -0.3
-      },
-      "effectTags": [
-        "endurance",
-        "optimization",
-        "self-maintenance"
-      ],
-      "harmRung": "none",
-      "narrationHints": "The body is a mechanism. He treated it accordingly. It kept running.",
-      "description": "Sustain through precise self-maintenance — the right fuel, the right rhythm, the understood limit approached without crossing.",
-      "notFor": [],
-      "tradition": "enginewright",
-      "functions": [
-        "resist",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "craft",
-        "hardship"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Calibrated Effort",
-          "grants": "Push past fatigue by treating the body as a mechanism — the right rhythm, the right intake, the precisely understood limit that can be approached safely.",
-          "cannot": "Anything rank 2 adds — keep working through damage and deprivation by knowing exactly what the mechanism needs — no panic, no waste, no unnecessary expenditure; the body is TREATED as a mechanism.",
-          "functions": [
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Maintained Function",
-          "grants": "Keep working through damage and deprivation by knowing exactly what the mechanism needs — no panic, no waste, no unnecessary expenditure.",
-          "cannot": "Anything rank 3 adds — the body does what it must for as long as it must — calibrated to exact need, running past what others would call the wall; the body is TREATED as a mechanism.",
-          "functions": [
-            "sustain",
-            "resist"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Indefinite Run",
-          "grants": "The body does what it must for as long as it must — calibrated to exact need, running past what others would call the wall.",
-          "cannot": "Nothing further; this is the craft's ceiling; the body is TREATED as a mechanism; and it still costs what it costs: running past the wall accrues a real debt.",
-          "functions": [
-            "sustain",
-            "resist"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "bolster",
-      "operativeAxis": [
-        "upkeepRelief",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 12
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "duration",
-          "delta": "keep working through DAMAGE AND DEPRIVATION by knowing exactly what the mechanism needs — no panic, no waste",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: the body does what it must FOR AS LONG AS IT MUST — calibrated to exact need, running past what others would call the wall",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "pace yourself — half the relief, sustainable indefinitely",
-        "surge": "double it: run past the wall, and a mechanism run past its tolerance has a maintenance debt"
-      },
-      "bounds": [
-        {
-          "text": "the body is TREATED as a mechanism — it is still a body",
-          "class": "hard"
-        },
-        {
-          "text": "running past the wall accrues a real debt",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 extends duration; rank 3 adds to special. Limit: the body is Treated as a mechanism — it is still a body."
-    },
-    {
-      "id": "the_dimmed_meaning",
-      "name": "The Dimmed Meaning",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "mechanical_spiritual": 0.4
-      },
-      "effectTags": [
-        "dissolution",
-        "meaning",
-        "disruption"
-      ],
-      "harmRung": "incapacitating",
-      "narrationHints": "The significance drained out of it. What remained was just a thing.",
-      "description": "Strip numinous weight from a working, a symbol, or a belief — when meaning departs, what it was holding falls.",
-      "notFor": [],
-      "tradition": "numinous",
-      "functions": [
-        "break",
-        "hinder"
-      ],
-      "challengeTypes": [
-        "magical",
-        "intellectual",
-        "combat"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Weight Withdrawn",
-          "grants": "Drain numinous significance from a working, a symbol, or a belief — it still exists but loses whatever meaning made it matter.",
-          "cannot": "Anything rank 2 adds — break a thing's significance so completely that those who relied on it lose orientation — the sacred desecrated in ways they feel immediately; it drains MEANING, not function.",
-          "functions": [
-            "hinder"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 2,
-          "name": "Broken Meaning",
-          "grants": "Break a thing's significance so completely that those who relied on it lose orientation — the sacred desecrated in ways they feel immediately.",
-          "cannot": "Anything rank 3 adds — withdraw numinous presence from an entire place or working — what meaning was sustaining simply stops, and what it held together comes apart; it drains MEANING, not function.",
-          "functions": [
-            "hinder",
-            "break"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 3,
-          "name": "The Voided Place",
-          "grants": "Withdraw numinous presence from an entire place or working — what meaning was sustaining simply stops, and what it held together comes apart.",
-          "cannot": "Nothing further; this is the craft's ceiling; it drains MEANING, not function; and it still costs what it costs: withdrawing meaning from a place takes YOURS TOO.",
-          "functions": [
-            "hinder",
-            "break"
-          ],
-          "gains": "deepen",
-          "harmRung": "incapacitating"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "hobble",
-      "operativeAxis": [
-        "drain",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 4,
-        "duration": 4,
-        "scope": 2,
-        "note": "incapacitating. It drains SIGNIFICANCE — the antipode of a damage craft"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "break a thing's significance SO COMPLETELY that those who relied on it LOSE ORIENTATION",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "WITHDRAW numinous presence from an entire PLACE or working — what meaning was sustaining simply STOPS",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "dim it — half the drain, and it returns on its own",
-        "surge": "double the withdrawal; what meaning was sustaining simply stops, INCLUDING WHAT YOU VALUED"
-      },
-      "bounds": [
-        {
-          "text": "it drains MEANING, not function — the thing still exists and still works",
-          "class": "hard"
-        },
-        {
-          "text": "you lose the same meaning you withdraw — any craft of yours that draws on that place is at a penalty for the rest of the scene",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A magical/intellectual/combat action that weakens or restricts a target. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: it drains Meaning, not function — the thing still exists and still works."
-    },
-    {
-      "id": "the_weight_of_practice",
-      "name": "The Weight of Practice",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "mechanical_spiritual": 0.4
-      },
-      "effectTags": [
-        "presence",
-        "authority",
-        "spiritual"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She didn't say anything commanding. She was there. That was enough.",
-      "description": "The gravity of someone who has dissolved deeply into practice — not commanded, simply present; people organize around it.",
-      "notFor": [],
-      "tradition": "numinous",
-      "functions": [
-        "bind",
-        "command"
-      ],
-      "challengeTypes": [
-        "social",
-        "leadership",
-        "spiritual"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Settled Presence",
-          "grants": "Your presence carries the weight of genuine practice — people feel it, and it settles them, orients them toward what they already know is right.",
-          "cannot": "Anything rank 2 adds — bind a person or group to a truth they have been avoiding — not manipulation, the simple pull of someone who has been further in; it is the pull of GENUINE PRACTICE.",
-          "functions": [
-            "command"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Deep Pull",
-          "grants": "Bind a person or group to a truth they have been avoiding — not manipulation, the simple pull of someone who has been further in.",
-          "cannot": "Anything rank 3 adds — your presence is simply the authority in the room — not commanded, not explained, present; it is the pull of GENUINE PRACTICE.",
-          "functions": [
-            "command",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Organizing Presence",
-          "grants": "Your presence is simply the authority in the room — not commanded, not explained, present; people naturally arrange themselves relative to where you stand.",
-          "cannot": "Nothing further; this is the craft's ceiling; it is the pull of GENUINE PRACTICE; and it still costs what it costs: binding someone to a truth they were avoiding is still doing it TO them.",
-          "functions": [
-            "command",
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "bolster",
-      "operativeAxis": [
-        "authority",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 4,
-        "duration": 6,
-        "targets": 4
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "authority",
-          "delta": "BIND a person or group TO A TRUTH THEY HAVE BEEN AVOIDING — 'not manipulation, the simple pull of someone who has been fully honest'",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: your presence IS SIMPLY THE AUTHORITY IN THE ROOM — not commanded, not explained, present; people naturally arrange themselves around it",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "carry it quietly — half the weight, and nobody defers to you",
-        "surge": "double the presence; authority you did not ask for is still authority you must answer for"
-      },
-      "bounds": [
-        {
-          "text": "it is the pull of GENUINE PRACTICE — it cannot be faked, and a fraud gets nothing",
-          "class": "hard"
-        },
-        {
-          "text": "binding someone to a truth they were avoiding is still doing it TO them",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social/leadership/spiritual action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: it is the pull of Genuine Practice — it cannot be faked, and a fraud gets nothing."
-    },
-    {
-      "id": "the_unbroken_practice",
-      "name": "The Unbroken Practice",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "mechanical_spiritual": 0.3
-      },
-      "effectTags": [
-        "endurance",
-        "discipline",
-        "spirit"
-      ],
-      "harmRung": "none",
-      "narrationHints": "When everything was taken, the practice was still there. So was she.",
-      "description": "Sustain through unbroken spiritual discipline — the form that holds you when nothing else does.",
-      "notFor": [],
-      "tradition": "numinous",
-      "functions": [
-        "resist",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "hardship",
-        "spiritual"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Form Holds",
-          "grants": "Maintain function through hardship by continuing the practice — when everything else is stripped, the discipline remains and it is enough to stand on.",
-          "cannot": "Anything rank 2 adds — the form holds you in conditions that break people who have nothing to return to — not will, the practice; requires A PRACTICE.",
-          "functions": [
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Endurance of Attendance",
-          "grants": "The form holds you in conditions that break people who have nothing to return to — not will, the practice; not trying harder, attending more fully.",
-          "cannot": "Anything rank 3 adds — you do not run out as long as you can still attend; requires A PRACTICE.",
-          "functions": [
-            "sustain",
-            "resist"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "As Long as the Practice Continues",
-          "grants": "You do not run out as long as you can still attend. The body may fail; the practice holds what the body was holding.",
-          "cannot": "Nothing further; this is the craft's ceiling; requires A PRACTICE.",
-          "functions": [
-            "sustain",
-            "resist"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "bolster",
-      "operativeAxis": [
-        "upkeepRelief",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 24
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "upkeepRelief",
-          "delta": "THE FORM HOLDS YOU where people with nothing to return to break — 'not will, THE PRACTICE'",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: YOU DO NOT RUN OUT as long as you can still attend — the body may fail; the practice holds what the body was holding",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "keep the form — half the relief, and it costs nothing to maintain",
-        "surge": "double it; the practice holds what the body cannot, and the body still fails"
-      },
-      "bounds": [
-        {
-          "text": "requires A PRACTICE — it is not willpower, and it cannot be improvised",
-          "class": "hard"
-        },
-        {
-          "text": "THE BODY MAY STILL FAIL — the practice holds what the body was holding, not the body",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A endurance/hardship/spiritual action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: requires A Practice — it is not willpower, and it cannot be improvised."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_self_mending_work",
-      "name": "The Self-Mending Work",
-      "levelReq": 4,
-      "energyCost": 12,
-      "powerSystem": "reach_mechanical_spiritual",
-      "tradition": "enginewright",
-      "attribute": "practical",
-      "axes": {
-        "mechanical_spiritual": -0.6
-      },
-      "functions": [
-        "make",
-        "mend"
-      ],
-      "narrationHints": "You build the repair INTO the thing — so that when it breaks, and it will, it knows how to find its own way back to whole without you.",
-      "description": "The Enginewright art of the work that mends itself — a mechanism, a structure, a system built with its own healing folded in, so it survives its maker. To build this well is to build something that no longer needs you.",
-      "notFor": "It makes durable things, not living ones — a self-mending work is still a work, patient and unfeeling. And building the mending in costs far more than building the thing; you pay the whole future's repairs up front.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Self-Mending Work",
-          "grants": "Build a mechanism or structure that repairs itself, enduring long past its making.",
-          "cannot": "It cannot mend the living, only the made; it costs the future's repairs at the moment of making; and a thing built to outlast you will — with all the grief that carries.",
-          "functions": [
-            "make",
-            "mend"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Work That Learns",
-          "grants": "The folded-in mending no longer merely restores — it improves. A work at this grade repairs itself toward what its use has shown it should have been: a bridge widens where feet actually cross, a mechanism strengthens where it actually strains.",
-          "cannot": "A work that improves itself drifts from its maker's intent, and the Enginewrights argue whether that is mastery or abandonment. It still cannot mend the living. And it now costs more than the whole future's repairs — you are paying for a century of judgement you will not be there to make.",
-          "functions": [
-            "make",
-            "mend"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "CREATE"
-      ],
-      "harmRung": "none",
-      "shape": "construct",
-      "operativeAxis": [
-        "persistence",
-        "quality"
-      ],
-      "mechanic": {
-        "magnitude": 7,
-        "duration": 720,
-        "scope": 3,
-        "note": "T-IV. duration in hours ≈ a month of standing operation"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: the folded-in mending no longer merely RESTORES — it IMPROVES; a work at this grade repairs itself TOWARD WHAT ITS USE HAS TAUGHT IT",
-          "from": "r2 grants — a work that learns is the T-IV kind-change"
-        }
-      ],
-      "intensity": {
-        "conserve": "a durable work — half the endurance, and it stays exactly as built",
-        "surge": "double the endurance; A WORK THAT IMPROVES ITSELF DRIFTS FROM ITS MAKER'S INTENT"
-      },
-      "bounds": [
-        {
-          "text": "IT CANNOT MEND THE LIVING, ONLY THE MADE",
-          "class": "hard"
-        },
-        {
-          "text": "the repair draws on materials that would have been available later: the next repair on the same structure costs double",
-          "class": "cost"
-        },
-        {
-          "text": "A WORK THAT IMPROVES ITSELF DRIFTS FROM ITS MAKER'S INTENT",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A create action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Cannot Mend The Living, Only The Made."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_deep_works",
-      "name": "The Deep Works",
-      "levelReq": 5,
-      "energyCost": 13,
-      "powerSystem": "reach_mechanical_spiritual",
-      "tradition": "enginewright",
-      "attribute": "practical",
-      "axes": {
-        "mechanical_spiritual": -0.9
-      },
-      "functions": [
-        "make"
-      ],
-      "narrationHints": "It is too large to see the whole of at once — a work of such scale and precision that finishing it is less like building and more like agreeing to spend a piece of your life becoming the kind of person who could.",
-      "description": "The Enginewright capstone — a great work of the deep kind, a mechanism or edifice at the scale the dwarven-mechanical peoples are named for. The making of it changes the maker; you do not finish a Deep Work the same person who began it.",
-      "notFor": "One great work, built over real time and enormous cost — it is not a thing you produce in a beat but a thing you commit a season of yourself to. And a Deep Work, once made, is a fact of the world; it cannot be quietly unmade.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Deep Works",
-          "grants": "Commit to and complete a great work of deep making — a mechanism or edifice at world-scale.",
-          "cannot": "It demands real time and nearly all you have, it changes who you are in the building, and once made it is permanent — the world now has this thing in it, and so do you.",
-          "functions": [
-            "make"
-          ],
-          "harmRung": "none",
-          "gains": "broaden"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "CREATE"
-      ],
-      "harmRung": "none",
-      "shape": "construct",
-      "operativeAxis": [
-        "scope",
-        "persistence"
-      ],
-      "mechanic": {
-        "magnitude": 9,
-        "duration": 8760,
-        "scope": 5,
-        "note": "T-V capstone. duration ≈ a year+ — a world-scale making"
-      },
-      "rankDeltas": [
-        {
-          "rank": 1,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: commit to and COMPLETE A GREAT WORK — a mechanism or edifice at WORLD-SCALE. The capstone is a KIND (making at the scale of civilisations) at near-total cost, and IT CHANGES WHO YOU ARE.",
-          "from": "r1 grants — single-rank capstone"
-        }
-      ],
-      "intensity": {
-        "conserve": "REFUSED — a deep work half-committed is an abandoned work, and the Enginewrights are unsentimental about those.",
-        "surge": "REFUSED — it already demands nearly all you have."
-      },
-      "bounds": [
-        {
-          "text": "IT DEMANDS REAL TIME AND NEARLY ALL YOU HAVE",
-          "class": "hard"
-        },
-        {
-          "text": "IT CHANGES WHO YOU ARE",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A create action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 5, and lasts for about 12 months Limit: iT Demands Real Time And Nearly All You Have."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_open_threshold",
-      "name": "The Open Threshold",
-      "levelReq": 4,
-      "energyCost": 14,
-      "powerSystem": "reach_mechanical_spiritual",
-      "tradition": "numinous",
-      "attribute": "mental",
-      "axes": {
-        "mechanical_spiritual": 0.7
-      },
-      "functions": [
-        "summon",
-        "reveal",
-        "bind"
-      ],
-      "narrationHints": "Nothing dramatic. A door that was shut is ajar, and someone on the other side notices.",
-      "description": "⚠️ RETRIEVAL BY ATTENDANCE. The Numinous do not walk down and do not haul. They hold the threshold OPEN and make the way back legible — and then it is up to the one in the dark whether they come. It reaches the furthest of the three roads and it is the only one that can fail because THEY CHOSE NOT TO.",
-      "notFor": "Compelling their return: this opens a road, it does not walk anyone down it. The sealed, who cannot see any door. And it CANNOT be done quietly — an open threshold is visible to whatever else is down there.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Open Threshold",
-          "grants": "Hold the way open for someone at THE THRESHOLD or THE NEAR DARK. They may come back if they will.",
-          "cannot": "Making them come. Some do not, and the Attenders teach that this is information, not failure.",
-          "functions": [
-            "summon",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 2,
-          "name": "The Long Door",
-          "grants": "Hold it open into THE DEEP DARK, for as long as you can stand — months gone and still a lit way home.",
-          "cannot": "Holding it costs continuously, and everything down there can see a lit door.",
-          "functions": [
-            "summon",
-            "reveal",
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 3,
-          "name": "The Door That Waits",
-          "grants": "Set a threshold that stays open WITHOUT YOU — a way home left standing for someone not yet dead, or not yet willing.",
-          "cannot": "⚠️ A door you are not watching is a door anything can use.",
-          "functions": [
-            "summon",
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "lethal"
-        }
-      ],
-      "challengeTypes": [
-        "SURVIVE",
-        "SOCIAL"
-      ],
-      "harmRung": "incapacitating",
-      "nativeOrCombination": "native",
-      "shape": "setup",
-      "operativeAxis": [
-        "reach",
-        "depth",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 7,
-        "duration": 12,
-        "targets": 1,
-        "note": "RETRIEVAL, spirit-side: r1 reaches depth 0-1 · r2 depth 2 · r3 sets a PERSISTENT threshold. Reaches furthest, but the returning is THEIR choice — resolve as an offer, not an effect."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "depth",
-          "delta": "hold it open into THE DEEP DARK (depth 2), at continuous cost",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "duration",
-          "delta": "SPECIAL: a threshold that STAYS OPEN without you",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "hold it briefly — half the duration, and nothing else notices",
-        "surge": "hold it long and wide; EVERYTHING DOWN THERE CAN SEE A LIT DOOR"
-      },
-      "bounds": [
-        {
-          "text": "IT OPENS A ROAD; IT DOES NOT WALK ANYONE DOWN IT — some do not come",
-          "class": "hard"
-        },
-        {
-          "text": "THE SEALED CANNOT SEE ANY DOOR",
-          "class": "hard"
-        },
-        {
-          "text": "AN OPEN THRESHOLD IS VISIBLE TO WHATEVER ELSE IS DOWN THERE",
-          "class": "cost"
-        },
-        {
-          "text": "a door you are not watching is a door ANYTHING CAN USE",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A survive/social action that reveals information or sets up a later action. Its strength is rated 7 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 deepens depth; rank 3 extends duration. Limit: iT Opens A Road; IT Does Not Walk Anyone Down IT — some do not come."
+     "rank": 3,
+     "name": "Master of the Works",
+     "grants": "Command machine-country — a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale; build engines that outlive you. The Great Engine's power in miniature.",
+     "cannot": "The wielder drifts hard-mechanical; a person who becomes all-Engine forgets why anything is FOR — the framework's foreclosure by another road; and the Great Engine notices a rival wright.",
+     "functions": [
+      "reveal",
+      "make",
+      "command",
+      "mend"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
     }
-  ],
-  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+   ],
+   "functions": [
+    "command",
+    "make",
+    "mend",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "PUZZLE"
+   ],
+   "tradition": "enginewright",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "scope",
+    "fidelity"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8,
+    "scope": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "command a machine-system to RECONFIGURE toward your intent; chain devices into working wholes; repair or repurpose PRECURSOR mechanism",
+     "from": "r2 grants — a FIFTH precursor hook"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "command MACHINE-COUNTRY — a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small system — half the scope, and it stays predictable",
+    "surge": "double the works; THE WIELDER DRIFTS HARD-MECHANICAL"
+   },
+   "bounds": [
+    {
+     "text": "UNDERSTANDING FUNCTION IS NOT UNDERSTANDING WHY IT WAS MADE",
+     "class": "hard"
+    },
+    {
+     "text": "the system does what its MECHANISM ALLOWS, not what you wish",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder DRIFTS HARD-MECHANICAL; a person who becomes all-Enginewright loses something",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: understanding Function IS Not Understanding Why IT Was Made."
+  },
+  {
+   "id": "numenwork",
+   "name": "Numenwork",
+   "levelReq": 3,
+   "energyCost": 8,
+   "powerSystem": "reach_mechanical_spiritual",
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.6,
+    "concrete_abstract": 0.3,
+    "death_life": 0.2
+   },
+   "effectTags": [
+    "meaning",
+    "spirit",
+    "attend"
+   ],
+   "narrationHints": "The disciplines of pure meaning — attention made a force, presence that changes what it attends to, the material world going briefly negotiable.",
+   "description": "The spiritual-pole mastery: the mystic practices where meaning acts directly on the world. The road the Valley's framework keeps recognizing itself in.",
+   "notFor": "Building or commanding mechanism (that's Enginecraft); forcing an outcome (Numenwork attends, it does not compel); anything that treats spirit as a lever.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "True Attention",
+     "grants": "Attend so fully that the truth of a person, place, or moment surfaces; steady a soul in crisis by presence alone; perceive the meaning-layer of a Precursor site the Engine can't reach.",
+     "cannot": "Attention reveals and steadies; it does not command or coerce; the unwilling can close to it.",
+     "functions": [
+      "reveal",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Negotiable World",
+     "grants": "Where meaning is dense, the material softens — a symbol made briefly real, a threshold held open by significance, a wound that was always metaphor healed as one. Read the numinous truth of the deep works.",
+     "cannot": "Only where meaning already runs dense; it bends the world, never breaks it; the price is proportional to the bending.",
+     "functions": [
+      "reveal",
+      "heal",
+      "summon",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Standing Presence",
+     "grants": "Attention as a force that holds — keep a foreclosing thing open by significance alone, hold a truth in a place until it can't be unsaid, meet the numinous heart of What Sleeps Under as an equal rather than a trespasser. The Numen's power in miniature; the framework's 'hold the aperture' made a discipline.",
+     "cannot": "The wielder drifts hard-spiritual, toward leaving the material behind entirely; presence holds, it does not decide; what you hold open, others must walk through.",
+     "functions": [
+      "reveal",
+      "heal",
+      "summon",
+      "restore",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "heal",
+    "restore",
+    "reveal",
+    "summon",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL",
+    "SURVIVE"
+   ],
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "healing",
+   "operativeAxis": [
+    "attention",
+    "scope"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 3,
+     "d": 4
+    },
+    "plus": 2,
+    "scope": 2,
+    "note": "T-III. Its healing is ATTENTION — 'attend so fully that the truth of a person, place, or moment surfaces'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "attention",
+     "delta": "WHERE MEANING IS DENSE THE MATERIAL SOFTENS — a symbol made briefly real, a threshold held open by significance, a wound eased by attention",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: ATTENTION AS A FORCE THAT HOLDS — keep a FORECLOSING thing open by significance alone, hold a truth in a place until it is heard",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "attend briefly — half the effect, and you keep your own centre",
+    "surge": "double the attention; THE WIELDER DRIFTS HARD-SPIRITUAL, toward leaving the material behind"
+   },
+   "bounds": [
+    {
+     "text": "attention REVEALS AND STEADIES — turning it to compel is possible and expensive, and it is not what the Attenders teach",
+     "class": "soft"
+    },
+    {
+     "text": "ONLY WHERE MEANING ALREADY RUNS DENSE — it bends the world, never builds it",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder DRIFTS HARD-SPIRITUAL, toward leaving the material behind",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/social/survive action that restores health. It rolls 3d4+2 across a scope of 2 Ranks: rank 2 deepens attention; rank 3 adds to special. Limit: only Where Meaning Already Runs Dense — it bends the world, never builds it."
+  },
+  {
+   "id": "mech_sense",
+   "name": "Mechanism-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "mental",
+   "axes": {
+    "mechanical_spiritual": -0.3
+   },
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "narrationHints": "The workings of a thing felt like a diagram behind the eyes.",
+   "description": "Perceive how a mechanism or system functions on sight.",
+   "notFor": "The why/meaning of it; living things.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Mechanism-Sense",
+     "grants": "Understand a device or machine-system's function and flaws at a glance.",
+     "cannot": "Function, not purpose; the numinous stays dark.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Mechanism",
+     "grants": "Read a machine entire — what it does, what it was FOR, where it will fail, and what someone changed.",
+     "cannot": "It reads mechanism. What a machine MEANS is the Numinous's country, not yours.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Engine's Confession",
+     "grants": "A mechanism tells you its whole history — every hand that touched it, every misuse, every repair made in a hurry.",
+     "cannot": "The Precursor works do not confess. They only answer, and only sometimes.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "enginewright",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "history"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read a machine ENTIRE — what it does, what it was FOR, where it will fail, and WHAT SOMEONE CHANGED",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "history",
+     "delta": "SPECIAL: the mechanism tells you its WHOLE HISTORY — every hand that touched it, every misuse, every repair made in a hurry",
+     "from": "r3 grants — provenance is a different act from diagnosis"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the works — half the depth, instant",
+    "surge": "double the read; THE PRECURSOR WORKS DO NOT CONFESS"
+   },
+   "bounds": [
+    {
+     "text": "FUNCTION, NOT PURPOSE — the numinous stays dark",
+     "class": "hard"
+    },
+    {
+     "text": "it reads MECHANISM; what a machine MEANS is the Numinous's country",
+     "class": "hard"
+    },
+    {
+     "text": "THE PRECURSOR WORKS DO NOT CONFESS — they only answer, and only sometimes",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to history. Limit: function, Not Purpose — the numinous stays dark."
+  },
+  {
+   "id": "numen_sense",
+   "name": "Numen-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "The weight of meaning in a place felt on the skin.",
+   "description": "Sense where meaning runs dense — sacred ground, a charged moment, a numinous site.",
+   "notFor": "Reading mechanism; forcing the meaning.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Numen-Sense",
+     "grants": "Feel the significance-density of a place or moment; know where the world is 'thin.'",
+     "cannot": "Feel, not command; barren places read empty.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Thinning",
+     "grants": "Feel where the veil is thin — where meaning presses close enough to touch, and where something is pressing back.",
+     "cannot": "Feeling the thin place is not surviving it. Not everything on the other side is glad to be noticed.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Numen Plain",
+     "grants": "The numinous is simply visible to you — the sacred, the haunted, the charged, all plain as furniture.",
+     "cannot": "Once seen, never unseen. The Numinous who reach this depth find the ordinary world thin and hard to care about.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 20,
+    "note": "SOCIAL attribute — numinous reads MEANING, and meaning is social"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "feel WHERE THE VEIL IS THIN — where meaning presses close enough to touch, AND WHERE SOMETHING IS PRESSING BACK",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the numinous is simply VISIBLE to you — the sacred, the haunted, the charged, all plain as furniture",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a feel for the room — half the depth, and it does not stay with you",
+    "surge": "double the sensitivity; ONCE SEEN, NEVER UNSEEN"
+   },
+   "bounds": [
+    {
+     "text": "FEEL, NOT COMMAND — barren places read empty",
+     "class": "hard"
+    },
+    {
+     "text": "FEELING THE THIN PLACE IS NOT SURVIVING IT",
+     "class": "hard"
+    },
+    {
+     "text": "ONCE SEEN, NEVER UNSEEN — the Numinous who reach this depth find the ordinary world thinner afterward",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: feel, Not Command — barren places read empty."
+  },
+  {
+   "id": "mend_device",
+   "name": "Mend",
+   "levelReq": 1,
+   "energyCost": 4,
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.3
+   },
+   "functions": [
+    "empower",
+    "make",
+    "mend"
+   ],
+   "narrationHints": "Parts find their places and the dead thing hums again.",
+   "description": "Repair a broken mechanism or device with a craftsman's sure touch.",
+   "notFor": "Precursor deep-systems (that's Enginecraft); living hurts.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Mend",
+     "grants": "Fix a broken tool, machine, or simple device reliably.",
+     "cannot": "Ordinary mechanism only; the deep works resist.",
+     "functions": [
+      "mend"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The True Mend",
+     "grants": "Mend a thing so it works as it was meant to — not patched, but restored to its intent.",
+     "cannot": "You must know what it was FOR. A mend against the true intent will not hold.",
+     "functions": [
+      "mend"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Better Than New",
+     "grants": "The mended thing is better than it was — you understood it well enough to improve it in the mending.",
+     "cannot": "The Enginewrights' pride and their sin: not everything you can improve should be.",
+     "functions": [
+      "mend",
+      "make",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "challengeTypes": [
+    "PUZZLE",
+    "SURVIVE"
+   ],
+   "tradition": "enginewright",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "healing",
+   "operativeAxis": [
+    "repair",
+    "quality"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 4
+    },
+    "plus": 2,
+    "note": "mends the MADE, not the living — the +2 is enginewright reliability"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "quality",
+     "delta": "mend so it works AS IT WAS MEANT TO — not patched, but RESTORED TO ITS INTENT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE MENDED THING IS BETTER THAN IT WAS — you understood it well enough to improve it in the mending",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick fix — half the quality, and it holds",
+    "surge": "double the work: restored past its original, and NOT EVERYTHING YOU CAN IMPROVE SHOULD BE"
+   },
+   "bounds": [
+    {
+     "text": "ORDINARY MECHANISM ONLY — the deep works resist",
+     "class": "hard"
+    },
+    {
+     "text": "YOU MUST KNOW WHAT IT WAS FOR — a mend against the true intent fails",
+     "class": "hard"
+    },
+    {
+     "text": "THE ENGINEWRIGHTS' PRIDE AND THEIR SIN: not everything you can improve should be improved",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle/survive action that restores health. It rolls 1d4+2 Ranks: rank 2 deepens quality; rank 3 adds to special. Limit: ordinary Mechanism Only — the deep works resist."
+  },
+  {
+   "id": "steady_soul",
+   "name": "Steady the Soul",
+   "levelReq": 1,
+   "energyCost": 4,
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.3
+   },
+   "functions": [
+    "empower",
+    "heal",
+    "resist"
+   ],
+   "narrationHints": "Presence alone, and the breaking person holds.",
+   "description": "Steady another's spirit in crisis by attention and presence — folk-Numenwork.",
+   "notFor": "Healing the body; compelling calm.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Steady the Soul",
+     "grants": "Calm and steady a person in spiritual/emotional crisis through pure presence.",
+     "cannot": "Opens the door, never shoves; the closed resist.",
+     "functions": [
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Steadied Hand",
+     "grants": "Steady another person through terror, grief, or the shakes — they can act when they could not.",
+     "cannot": "Steadying is a loan against their own strength. It comes due when you let go.",
+     "functions": [
+      "heal",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unshaken",
+     "grants": "Nothing shakes you, and nearness to you steadies others without effort — panic does not propagate through you.",
+     "cannot": "Unshakable is not unhurt. It means the hurt does not show, and does not get put down.",
+     "functions": [
+      "heal",
+      "empower",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "SURVIVE"
+   ],
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "healing",
+   "operativeAxis": [
+    "steadying",
+    "targets"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 4
+    },
+    "plus": 1,
+    "targets": 1,
+    "note": "heals the SPIRIT, not the body — a social-attribute healing craft, the first in the catalog"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "steadying",
+     "delta": "steady another through TERROR, GRIEF, OR THE SHAKES — they can act when they could not",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: nothing shakes YOU, and nearness to you steadies others WITHOUT EFFORT — panic does not propagate through you",
+     "from": "r3 grants — a passive field is a kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "a steadying word — half the effect, and it asks nothing of them",
+    "surge": "double it; STEADYING IS A LOAN AGAINST THEIR OWN STRENGTH, and it comes due"
+   },
+   "bounds": [
+    {
+     "text": "IT OPENS THE DOOR — shoving through it is harder, costlier, and leaves a mark on them the Attenders can read",
+     "class": "soft"
+    },
+    {
+     "text": "STEADYING IS A LOAN AGAINST THEIR OWN STRENGTH — it comes due later",
+     "class": "cost"
+    },
+    {
+     "text": "UNSHAKABLE IS NOT UNHURT — it means the hurt does not show",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/survive action that restores health. It rolls 1d4+1 It affects 1 target Ranks: rank 2 deepens steadying; rank 3 adds to special."
+  },
+  {
+   "id": "command_engine",
+   "name": "Command the Small Engine",
+   "levelReq": 2,
+   "energyCost": 5,
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.4,
+    "chaos_order": 0.2
+   },
+   "functions": [
+    "command",
+    "mend"
+   ],
+   "narrationHints": "A word to the machine and it does the new thing.",
+   "description": "Direct a machine-system to reconfigure toward your intent — mid-tier Enginecraft.",
+   "notFor": "The meaning-layer; wishes the mechanism can't do.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Command the Small Engine",
+     "grants": "Make a device or system do something within its mechanism it wasn't set to.",
+     "cannot": "Only what the mechanism allows; meaning stays opaque.",
+     "functions": [
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Larger Engine",
+     "grants": "Command engines beyond the small — a mill, a lock-system, a Precursor door that still half-listens.",
+     "cannot": "Commanding a thing is not understanding it. Engines obey the words, not the wish.",
+     "functions": [
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Engine Obeys",
+     "grants": "Mechanism answers you as if you were its maker — it does what you mean, not merely what you say.",
+     "cannot": "Halvex Coil began exactly here, and did not stop. The Enginewrights teach this rank with a warning attached.",
+     "functions": [
+      "command",
+      "mend"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "challengeTypes": [
+    "PUZZLE",
+    "FIGHT"
+   ],
+   "tradition": "enginewright",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "scope",
+    "fidelity"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 4,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "command engines BEYOND THE SMALL — a mill, a lock-system, A PRECURSOR DOOR THAT STILL HALF-LISTENS",
+     "from": "r2 grants — and a FOURTH precursor hook"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "fidelity",
+     "delta": "mechanism answers you AS IF YOU WERE ITS MAKER — it does WHAT YOU MEAN, not merely what you say",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a simple instruction — half the scope, and it does exactly what you said",
+    "surge": "double the command; ENGINES OBEY THE WORDS"
+   },
+   "bounds": [
+    {
+     "text": "ONLY WHAT THE MECHANISM ALLOWS — meaning stays opaque",
+     "class": "hard"
+    },
+    {
+     "text": "COMMANDING A THING IS NOT UNDERSTANDING IT — engines obey the words",
+     "class": "hard"
+    },
+    {
+     "text": "HALVEX COIL BEGAN EXACTLY HERE, AND DID NOT STOP",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle/fight action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 extends scope; rank 3 deepens fidelity. Limit: only What The Mechanism Allows — meaning stays opaque."
+  },
+  {
+   "id": "thin_place",
+   "name": "Open the Thin Place",
+   "levelReq": 3,
+   "energyCost": 6,
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.4,
+    "concrete_abstract": 0.3
+   },
+   "functions": [
+    "make",
+    "open",
+    "reveal",
+    "strike",
+    "summon",
+    "sustain"
+   ],
+   "narrationHints": "Where meaning is thick, a threshold opens that was never a door.",
+   "description": "Where significance runs dense, briefly make a symbol real — a threshold held by meaning. Mid-tier Numenwork.",
+   "notFor": "Manufacturing significance where there is none — the craft concentrates meaning, it rarely invents it. Choosing WHAT is on the other side. Closing one in a hurry.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Open the Thin Place",
+     "grants": "In a meaning-dense place, make a symbol briefly literal — a held threshold, a metaphor made real.",
+     "cannot": "Only where meaning is dense; costs proportional.",
+     "functions": [
+      "reveal",
+      "summon"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Thin Place",
+     "grants": "Hold a thin place open — long enough for others to see, to speak, to pass a thing through. What passes goes both ways: where something has been pressing back, holding the way open is an invitation it will take, and it arrives on its own terms rather than yours.",
+     "cannot": "You hold the opening, never what comes through it. A thing that answers a held threshold is not summoned and not bound — it is merely no longer prevented.",
+     "functions": [
+      "reveal",
+      "summon",
+      "open",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 3,
+     "name": "The Open Door",
+     "grants": "Open a thin place where there was none, in a room that had no reason to be sacred. And a door opened is a door BOTH ways: what waits on the other side can be let through onto something you point it at, and what it does to a living body is not a working you are performing — it is a thing with its own appetite, arriving, and doing what it does.",
+     "cannot": "You cannot choose what answers, you cannot call it off, and it does not leave when you are finished — it is here now, in a place that had no reason to be thin, and it knows exactly who opened the way. The Numinous Reach does not forbid this. It simply keeps a list of everyone who has done it.",
+     "functions": [
+      "reveal",
+      "summon",
+      "open",
+      "sustain",
+      "make",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "lethal"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "challengeTypes": [
+    "PUZZLE",
+    "EXPLORE",
+    "SURVIVE"
+   ],
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "lethal",
+   "shape": "construct",
+   "operativeAxis": [
+    "opening",
+    "duration",
+    "variance"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "scope": 2,
+    "variance": 5,
+    "note": "LETHAL rung — because 'you cannot choose what answers.' variance 5: what comes through is not yours to pick."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "HOLD a thin place open — long enough for others to see, speak, pass a thing through. WHAT PASSES GOES BOTH WAYS.",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: OPEN a thin place WHERE THERE WAS NONE, in a room that had no reason to be sacred. And A DOOR OPENED IS A DOOR BOTH WAYS.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "crack it — half the opening, and you can close it",
+    "surge": "double the opening; YOU CANNOT CHOOSE WHAT ANSWERS, YOU CANNOT CALL IT OFF"
+   },
+   "bounds": [
+    {
+     "text": "at rank 1 it works only where meaning is already dense — a shrine, a battlefield, a deathbed — and the energy cost scales with how thin the place is",
+     "class": "soft"
+    },
+    {
+     "text": "YOU HOLD THE OPENING, NEVER WHAT COMES THROUGH IT",
+     "class": "hard"
+    },
+    {
+     "text": "YOU CANNOT CHOOSE WHAT ANSWERS, YOU CANNOT CALL IT OFF",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/explore/survive action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: you Hold The Opening, Never What Comes Through IT."
+  },
+  {
+   "id": "meaning_engine",
+   "name": "The Meaning-Engine",
+   "levelReq": 4,
+   "energyCost": 9,
+   "attribute": "mental",
+   "axes": {
+    "mechanical_spiritual": 0
+   },
+   "functions": [
+    "command",
+    "mend",
+    "reveal"
+   ],
+   "narrationHints": "The machine runs on why, not just how.",
+   "description": "The braid-craft: command a Precursor work by significance, not only mechanism — body and meaning at once.",
+   "notFor": "Pure-mechanism or pure-spirit approaches; shallow substrate.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Meaning-Engine",
+     "grants": "Run a deep Precursor work by both its mechanism AND its meaning — the way to treat with What Sleeps Under.",
+     "cannot": "Needs dense substrate; what answers may not be tame.",
+     "functions": [
+      "command",
+      "mend",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Deeper Register",
+     "grants": "Hold the register open rather than striking it once — a deep Precursor work answers repeatedly, and answers questions as well as commands. What Sleeps Under begins to address you specifically rather than generically. A work treated with rather than struck will also let you set it right — faults named by the mechanism itself and repaired by its consent rather than by force.",
+     "cannot": "Being addressed specifically is not the same as being welcome. It still needs dense substrate, and the density is not yours to arrange. And a work that has learned your particular meaning can be reached through you by anything else that learns it.",
+     "functions": [
+      "command",
+      "mend",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "challengeTypes": [
+    "PUZZLE",
+    "INVESTIGATE"
+   ],
+   "tradition": "cross_pole_braid",
+   "nativeOrCombination": "combination",
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "fidelity",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 4,
+    "requiresPoles": [
+     "enginewright",
+     "numinous"
+    ],
+    "damageType": "precursor"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "HOLD THE REGISTER OPEN rather than striking it once — a deep Precursor work answers REPEATEDLY, and answers better",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "address it once — half the exchange, and it may not answer",
+    "surge": "double it; BEING ADDRESSED SPECIFICALLY IS NOT THE SAME AS BEING WELCOMED"
+   },
+   "bounds": [
+    {
+     "text": "NEEDS DENSE SUBSTRATE; what answers MAY NOT BE TAME",
+     "class": "hard"
+    },
+    {
+     "text": "BEING ADDRESSED SPECIFICALLY IS NOT THE SAME AS BEING WELCOMED",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle or investigate action, and it needs two poles: you must have both enginewright and numinous training to attempt it at all. It lets you operate a deep precursor work by addressing what it means as well as what it does, which is the only way to treat with the things down there that answer. It needs dense substrate — a thin place will not carry it. And what answers may not be what you addressed: being heard specifically is not the same as being answered honestly."
+  },
+  {
+   "id": "shortfold",
+   "name": "Shortfold",
+   "levelReq": 3,
+   "energyCost": 7,
+   "attribute": "mental",
+   "axes": {
+    "mechanical_spiritual": 0.3,
+    "space_time": 0.4
+   },
+   "functions": [
+    "move",
+    "travel"
+   ],
+   "narrationHints": "The space between here and there folds for a step, and you are across it.",
+   "description": "A short-range teleport — fold the space between you and a spot you can SEE, and step through. Blink across a gap, past a door, out of a grip. Needs substrate to fold against.",
+   "notFor": "Somewhere unseen (line-of-sight only); long distance; carrying a crowd.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Shortfold",
+     "grants": "Instantly cross to a visible point within ~30 paces — through, past, or over what's between.",
+     "cannot": "Line-of-sight only; substrate-thin places (the origin-flats) refuse it; costs sharply, a botch drops you mid-fold (hurt).",
+     "functions": [
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Longer Fold",
+     "grants": "Fold a longer distance — a valley rather than a courtyard — and bring others through with you.",
+     "cannot": "Both ends must be places you truly know. A fold to a half-remembered place ends half-way.",
+     "functions": [
+      "move",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Folded Road",
+     "grants": "Fold distance as a road you can walk repeatedly — a route through the short way that stays open.",
+     "cannot": "The folded road is a hole in the world, and the world notices holes.",
+     "functions": [
+      "move",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "tradition": "enginewright",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 30,
+    "push": 0,
+    "magnitude": 5,
+    "targets": 1,
+    "note": "r1's own number: ~30 paces, line of sight"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range+targets",
+     "delta": "fold a VALLEY rather than a courtyard, and BRING OTHERS through with you",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: fold distance as a ROAD YOU CAN WALK REPEATEDLY — a route through the short way that STAYS OPEN",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a short fold — half the distance, and the world barely notices",
+    "surge": "double the fold; THE FOLDED ROAD IS A HOLE IN THE WORLD, AND THE WORLD NOTICES HOLES"
+   },
+   "bounds": [
+    {
+     "text": "LINE OF SIGHT ONLY at r1; substrate-thin places REFUSE it",
+     "class": "hard"
+    },
+    {
+     "text": "BOTH ENDS MUST BE PLACES YOU TRULY KNOW — a half-remembered fold fails",
+     "class": "hard"
+    },
+    {
+     "text": "THE FOLDED ROAD IS A HOLE IN THE WORLD, AND THE WORLD NOTICES HOLES",
+     "class": "cost"
+    }
+   ],
+   "plainly": "An action that moves you or someone else. Its strength is rated 5 out of 10 It affects 1 target. Range is 30. Ranks: rank 2 extends range+targets; rank 3 adds to special. Limit: line OF Sight Only at r1; substrate-thin places Refuse it."
+  },
+  {
+   "id": "waygate",
+   "name": "Waygate",
+   "levelReq": 5,
+   "energyCost": 12,
+   "attribute": "mental",
+   "axes": {
+    "mechanical_spiritual": 0.5,
+    "space_time": 0.6
+   },
+   "functions": [
+    "open",
+    "summon",
+    "travel"
+   ],
+   "narrationHints": "A door opens onto a place you have stood before, a hundred miles closed to a single step.",
+   "description": "The long teleport capstone: open a fold to a place you KNOW WELL (have been, and can hold clearly), crossing any distance. Move a small party through. The Precursor way-network's power, woken.",
+   "notFor": "Anywhere you haven't been/can't hold; instant repeat; an unwilling passenger.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Waygate",
+     "grants": "Open a gate to a well-known distant place and step (or lead a few) through, crossing any distance at once. What the gate carries it carries BOTH ways — you may call a companion, a beast, or a needed thing through to you rather than going yourself.",
+     "cannot": "Only to places held clearly in memory; enormous cost + cooldown; a botch opens the wrong gate, or a dangerous one.",
+     "functions": [
+      "travel",
+      "open",
+      "summon"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 9999,
+    "push": 0,
+    "magnitude": 9,
+    "targets": 3,
+    "note": "T-V capstone: 'crossing any distance at once' — range is effectively unbounded, gated by MEMORY instead"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: OPEN A GATE to a well-known distant place and step (or lead a few) through, CROSSING ANY DISTANCE AT ONCE. The capstone is a KIND (distance ceasing to apply) at enormous cost — and gated by MEMORY, not by range.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-opened waygate is a hole, not a door.",
+    "surge": "REFUSED — it already demands enormous cost and a cooldown."
+   },
+   "bounds": [
+    {
+     "text": "ONLY TO PLACES HELD CLEARLY IN MEMORY",
+     "class": "hard"
+    },
+    {
+     "text": "ENORMOUS COST plus a real cooldown",
+     "class": "hard"
+    }
+   ],
+   "plainly": "An action that moves you or someone else. Its strength is rated 9 out of 10 It affects 3 targets. Range is 9999 Limit: only TO Places Held Clearly IN Memory."
+  },
+  {
+   "id": "the_fault_strike",
+   "name": "The Fault Strike",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.4,
+    "violence_peace": 0.2
+   },
+   "effectTags": [
+    "precision",
+    "exploit",
+    "mechanism"
+   ],
+   "harmRung": "incapacitating",
+   "narrationHints": "He didn't hit the person. He hit the load-bearing piece.",
+   "description": "Strike at the known structural weak point — the joint, the fault, the critical piece — for maximum effect from minimum force.",
+   "notFor": [],
+   "tradition": "enginewright",
+   "functions": [
+    "break",
+    "hinder",
+    "reveal",
+    "strike"
+   ],
+   "challengeTypes": [
+    "combat",
+    "technical",
+    "tactical"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Fault Point",
+     "grants": "Strike a person or device at its structural weak point — the joint under load, the nerve cluster, the part compensating for an earlier damage — for targeted, efficient harm.",
+     "cannot": "Anything rank 2 adds — hit a mechanism's fault so precisely it fails in the way you need — not just broken, stopped; it is PRECISION, not power.",
+     "functions": [
+      "reveal",
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "Controlled Failure",
+     "grants": "Hit a mechanism's fault so precisely it fails in the way you need — not just broken, stopped; not just damaged, disabled at the point that matters.",
+     "cannot": "Anything rank 3 adds — end what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved; it is PRECISION, not power.",
+     "functions": [
+      "reveal",
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "One Strike",
+     "grants": "End what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved.",
+     "cannot": "Nothing further; this is the craft's ceiling; it is PRECISION, not power.",
+     "functions": [
+      "reveal",
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.03,
+    "note": "incapacitating. The higher marginFloorPer is deliberate: enginewright damage is PRECISE — it rewards a decisive margin more than raw force."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "hit a mechanism's fault SO PRECISELY IT FAILS IN THE WAY YOU NEED — not just broken, STOPPED; not just damaged, DISABLED",
+     "from": "r2 grants — choosing the failure MODE"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: END what would otherwise require sustained effort THROUGH ONE WELL-PLACED ACTION — because you knew where it would break",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a measured tap — half the force, and nothing else is damaged",
+    "surge": "double the strike; precision is not subtlety and everyone sees what you did"
+   },
+   "bounds": [
+    {
+     "text": "requires KNOWING the weak point — an unfamiliar mechanism must be read first",
+     "class": "soft"
+    },
+    {
+     "text": "it is PRECISION, not power — a thing with no fault to find resists it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A combat/technical/tactical action that deals damage. It rolls 2d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: it is Precision, not power — a thing with no fault to find resists it."
+  },
+  {
+   "id": "the_mechanical_defense",
+   "name": "The Mechanical Defense",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.4,
+    "chaos_order": 0.2
+   },
+   "effectTags": [
+    "shield",
+    "engineering",
+    "redirect"
+   ],
+   "harmRung": "none",
+   "narrationHints": "The blow arrives. Something redirects it. She engineered for this.",
+   "description": "Protection through engineered response — interlocking parts and redirected force, not brute resistance.",
+   "notFor": [],
+   "tradition": "enginewright",
+   "functions": [
+    "resist",
+    "shield",
+    "ward"
+   ],
+   "challengeTypes": [
+    "combat",
+    "craft",
+    "defense"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Redirected Force",
+     "grants": "Protect through engineered positioning — the blow lands on something that can take it, redirected away from what can't.",
+     "cannot": "Anything rank 2 adds — build a mechanical defense that holds without constant attention — barriers and redirects that work while you work on something else; what is built in place STAYS in place.",
+     "functions": [
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Set Defense",
+     "grants": "Build a mechanical defense that holds without constant attention — barriers and redirects that work while you work on something else.",
+     "cannot": "Anything rank 3 adds — a defense that adapts — interlocking protections that cover the group and respond to the threat's form, not just its direction; what is built in place STAYS in place.",
+     "functions": [
+      "shield",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Active System",
+     "grants": "A defense that adapts — interlocking protections that cover the group and respond to the threat's form, not just its direction.",
+     "cannot": "Nothing further; this is the craft's ceiling; what is built in place STAYS in place.",
+     "functions": [
+      "shield",
+      "ward",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "soak",
+    "targets",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 4,
+    "soakRank": 2,
+    "duration": 4,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "a defense that HOLDS WITHOUT CONSTANT ATTENTION — barriers and redirects that work WHILE YOU WORK ON SOMETHING ELSE",
+     "from": "r2 grants — freeing the wielder is the increment"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "a defense that ADAPTS — interlocking protections covering the GROUP, responding to the threat's FORM, not just its direction",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a redirect — half the soak, set up in a moment",
+    "surge": "double the works; an engineered defense takes TIME to build and cannot be moved once built"
+   },
+   "bounds": [
+    {
+     "text": "it must be built before the fight: about an hour of setup, and it cannot be raised once blows have landed",
+     "class": "soft"
+    },
+    {
+     "text": "what is built in place STAYS in place",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A combat/craft/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 adds to autonomy; rank 3 extends targets. Limit: what is built in place Stays in place."
+  },
+  {
+   "id": "the_running_engine",
+   "name": "The Running Engine",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.3
+   },
+   "effectTags": [
+    "endurance",
+    "optimization",
+    "self-maintenance"
+   ],
+   "harmRung": "none",
+   "narrationHints": "The body is a mechanism. He treated it accordingly. It kept running.",
+   "description": "Sustain through precise self-maintenance — the right fuel, the right rhythm, the understood limit approached without crossing.",
+   "notFor": [],
+   "tradition": "enginewright",
+   "functions": [
+    "resist",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "craft",
+    "hardship"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Calibrated Effort",
+     "grants": "Push past fatigue by treating the body as a mechanism — the right rhythm, the right intake, the precisely understood limit that can be approached safely.",
+     "cannot": "Anything rank 2 adds — keep working through damage and deprivation by knowing exactly what the mechanism needs — no panic, no waste, no unnecessary expenditure; the body is TREATED as a mechanism.",
+     "functions": [
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Maintained Function",
+     "grants": "Keep working through damage and deprivation by knowing exactly what the mechanism needs — no panic, no waste, no unnecessary expenditure.",
+     "cannot": "Anything rank 3 adds — the body does what it must for as long as it must — calibrated to exact need, running past what others would call the wall; the body is TREATED as a mechanism.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Indefinite Run",
+     "grants": "The body does what it must for as long as it must — calibrated to exact need, running past what others would call the wall.",
+     "cannot": "Nothing further; this is the craft's ceiling; the body is TREATED as a mechanism; and it still costs what it costs: running past the wall accrues a real debt.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 12
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "keep working through DAMAGE AND DEPRIVATION by knowing exactly what the mechanism needs — no panic, no waste",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the body does what it must FOR AS LONG AS IT MUST — calibrated to exact need, running past what others would call the wall",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "pace yourself — half the relief, sustainable indefinitely",
+    "surge": "double it: run past the wall, and a mechanism run past its tolerance has a maintenance debt"
+   },
+   "bounds": [
+    {
+     "text": "the body is TREATED as a mechanism — it is still a body",
+     "class": "hard"
+    },
+    {
+     "text": "running past the wall accrues a real debt",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 extends duration; rank 3 adds to special. Limit: the body is Treated as a mechanism — it is still a body."
+  },
+  {
+   "id": "the_dimmed_meaning",
+   "name": "The Dimmed Meaning",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.4
+   },
+   "effectTags": [
+    "dissolution",
+    "meaning",
+    "disruption"
+   ],
+   "harmRung": "incapacitating",
+   "narrationHints": "The significance drained out of it. What remained was just a thing.",
+   "description": "Strip numinous weight from a working, a symbol, or a belief — when meaning departs, what it was holding falls.",
+   "notFor": [],
+   "tradition": "numinous",
+   "functions": [
+    "break",
+    "hinder"
+   ],
+   "challengeTypes": [
+    "magical",
+    "intellectual",
+    "combat"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Weight Withdrawn",
+     "grants": "Drain numinous significance from a working, a symbol, or a belief — it still exists but loses whatever meaning made it matter.",
+     "cannot": "Anything rank 2 adds — break a thing's significance so completely that those who relied on it lose orientation — the sacred desecrated in ways they feel immediately; it drains MEANING, not function.",
+     "functions": [
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "Broken Meaning",
+     "grants": "Break a thing's significance so completely that those who relied on it lose orientation — the sacred desecrated in ways they feel immediately.",
+     "cannot": "Anything rank 3 adds — withdraw numinous presence from an entire place or working — what meaning was sustaining simply stops, and what it held together comes apart; it drains MEANING, not function.",
+     "functions": [
+      "hinder",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Voided Place",
+     "grants": "Withdraw numinous presence from an entire place or working — what meaning was sustaining simply stops, and what it held together comes apart.",
+     "cannot": "Nothing further; this is the craft's ceiling; it drains MEANING, not function; and it still costs what it costs: withdrawing meaning from a place takes YOURS TOO.",
+     "functions": [
+      "hinder",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "hobble",
+   "operativeAxis": [
+    "drain",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 4,
+    "scope": 2,
+    "note": "incapacitating. It drains SIGNIFICANCE — the antipode of a damage craft"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "break a thing's significance SO COMPLETELY that those who relied on it LOSE ORIENTATION",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "WITHDRAW numinous presence from an entire PLACE or working — what meaning was sustaining simply STOPS",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "dim it — half the drain, and it returns on its own",
+    "surge": "double the withdrawal; what meaning was sustaining simply stops, INCLUDING WHAT YOU VALUED"
+   },
+   "bounds": [
+    {
+     "text": "it drains MEANING, not function — the thing still exists and still works",
+     "class": "hard"
+    },
+    {
+     "text": "you lose the same meaning you withdraw — any craft of yours that draws on that place is at a penalty for the rest of the scene",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A magical/intellectual/combat action that weakens or restricts a target. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: it drains Meaning, not function — the thing still exists and still works."
+  },
+  {
+   "id": "the_weight_of_practice",
+   "name": "The Weight of Practice",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.4
+   },
+   "effectTags": [
+    "presence",
+    "authority",
+    "spiritual"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She didn't say anything commanding. She was there. That was enough.",
+   "description": "The gravity of someone who has dissolved deeply into practice — not commanded, simply present; people organize around it.",
+   "notFor": [],
+   "tradition": "numinous",
+   "functions": [
+    "bind",
+    "command"
+   ],
+   "challengeTypes": [
+    "social",
+    "leadership",
+    "spiritual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Settled Presence",
+     "grants": "Your presence carries the weight of genuine practice — people feel it, and it settles them, orients them toward what they already know is right.",
+     "cannot": "Anything rank 2 adds — bind a person or group to a truth they have been avoiding — not manipulation, the simple pull of someone who has been further in; it is the pull of GENUINE PRACTICE.",
+     "functions": [
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Deep Pull",
+     "grants": "Bind a person or group to a truth they have been avoiding — not manipulation, the simple pull of someone who has been further in.",
+     "cannot": "Anything rank 3 adds — your presence is simply the authority in the room — not commanded, not explained, present; it is the pull of GENUINE PRACTICE.",
+     "functions": [
+      "command",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Organizing Presence",
+     "grants": "Your presence is simply the authority in the room — not commanded, not explained, present; people naturally arrange themselves relative to where you stand.",
+     "cannot": "Nothing further; this is the craft's ceiling; it is the pull of GENUINE PRACTICE; and it still costs what it costs: binding someone to a truth they were avoiding is still doing it TO them.",
+     "functions": [
+      "command",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "authority",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 6,
+    "targets": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "authority",
+     "delta": "BIND a person or group TO A TRUTH THEY HAVE BEEN AVOIDING — 'not manipulation, the simple pull of someone who has been fully honest'",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: your presence IS SIMPLY THE AUTHORITY IN THE ROOM — not commanded, not explained, present; people naturally arrange themselves around it",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "carry it quietly — half the weight, and nobody defers to you",
+    "surge": "double the presence; authority you did not ask for is still authority you must answer for"
+   },
+   "bounds": [
+    {
+     "text": "it is the pull of GENUINE PRACTICE — it cannot be faked, and a fraud gets nothing",
+     "class": "hard"
+    },
+    {
+     "text": "binding someone to a truth they were avoiding is still doing it TO them",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/leadership/spiritual action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: it is the pull of Genuine Practice — it cannot be faked, and a fraud gets nothing."
+  },
+  {
+   "id": "the_unbroken_practice",
+   "name": "The Unbroken Practice",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.3
+   },
+   "effectTags": [
+    "endurance",
+    "discipline",
+    "spirit"
+   ],
+   "harmRung": "none",
+   "narrationHints": "When everything was taken, the practice was still there. So was she.",
+   "description": "Sustain through unbroken spiritual discipline — the form that holds you when nothing else does.",
+   "notFor": [],
+   "tradition": "numinous",
+   "functions": [
+    "resist",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "hardship",
+    "spiritual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Form Holds",
+     "grants": "Maintain function through hardship by continuing the practice — when everything else is stripped, the discipline remains and it is enough to stand on.",
+     "cannot": "Anything rank 2 adds — the form holds you in conditions that break people who have nothing to return to — not will, the practice; requires A PRACTICE.",
+     "functions": [
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Endurance of Attendance",
+     "grants": "The form holds you in conditions that break people who have nothing to return to — not will, the practice; not trying harder, attending more fully.",
+     "cannot": "Anything rank 3 adds — you do not run out as long as you can still attend; requires A PRACTICE.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "As Long as the Practice Continues",
+     "grants": "You do not run out as long as you can still attend. The body may fail; the practice holds what the body was holding.",
+     "cannot": "Nothing further; this is the craft's ceiling; requires A PRACTICE.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "upkeepRelief",
+     "delta": "THE FORM HOLDS YOU where people with nothing to return to break — 'not will, THE PRACTICE'",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: YOU DO NOT RUN OUT as long as you can still attend — the body may fail; the practice holds what the body was holding",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep the form — half the relief, and it costs nothing to maintain",
+    "surge": "double it; the practice holds what the body cannot, and the body still fails"
+   },
+   "bounds": [
+    {
+     "text": "requires A PRACTICE — it is not willpower, and it cannot be improvised",
+     "class": "hard"
+    },
+    {
+     "text": "THE BODY MAY STILL FAIL — the practice holds what the body was holding, not the body",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A endurance/hardship/spiritual action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: requires A Practice — it is not willpower, and it cannot be improvised."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_self_mending_work",
+   "name": "The Self-Mending Work",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_mechanical_spiritual",
+   "tradition": "enginewright",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.6
+   },
+   "functions": [
+    "make",
+    "mend"
+   ],
+   "narrationHints": "You build the repair INTO the thing — so that when it breaks, and it will, it knows how to find its own way back to whole without you.",
+   "description": "The Enginewright art of the work that mends itself — a mechanism, a structure, a system built with its own healing folded in, so it survives its maker. To build this well is to build something that no longer needs you.",
+   "notFor": "It makes durable things, not living ones — a self-mending work is still a work, patient and unfeeling. And building the mending in costs far more than building the thing; you pay the whole future's repairs up front.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Self-Mending Work",
+     "grants": "Build a mechanism or structure that repairs itself, enduring long past its making.",
+     "cannot": "It cannot mend the living, only the made; it costs the future's repairs at the moment of making; and a thing built to outlast you will — with all the grief that carries.",
+     "functions": [
+      "make",
+      "mend"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Work That Learns",
+     "grants": "The folded-in mending no longer merely restores — it improves. A work at this grade repairs itself toward what its use has shown it should have been: a bridge widens where feet actually cross, a mechanism strengthens where it actually strains.",
+     "cannot": "A work that improves itself drifts from its maker's intent, and the Enginewrights argue whether that is mastery or abandonment. It still cannot mend the living. And it now costs more than the whole future's repairs — you are paying for a century of judgement you will not be there to make.",
+     "functions": [
+      "make",
+      "mend"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE"
+   ],
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "persistence",
+    "quality"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 720,
+    "scope": 3,
+    "note": "T-IV. duration in hours ≈ a month of standing operation"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the folded-in mending no longer merely RESTORES — it IMPROVES; a work at this grade repairs itself TOWARD WHAT ITS USE HAS TAUGHT IT",
+     "from": "r2 grants — a work that learns is the T-IV kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "a durable work — half the endurance, and it stays exactly as built",
+    "surge": "double the endurance; A WORK THAT IMPROVES ITSELF DRIFTS FROM ITS MAKER'S INTENT"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT MEND THE LIVING, ONLY THE MADE",
+     "class": "hard"
+    },
+    {
+     "text": "the repair draws on materials that would have been available later: the next repair on the same structure costs double",
+     "class": "cost"
+    },
+    {
+     "text": "A WORK THAT IMPROVES ITSELF DRIFTS FROM ITS MAKER'S INTENT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A create action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Cannot Mend The Living, Only The Made."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_deep_works",
+   "name": "The Deep Works",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_mechanical_spiritual",
+   "tradition": "enginewright",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.9
+   },
+   "functions": [
+    "make"
+   ],
+   "narrationHints": "It is too large to see the whole of at once — a work of such scale and precision that finishing it is less like building and more like agreeing to spend a piece of your life becoming the kind of person who could.",
+   "description": "The Enginewright capstone — a great work of the deep kind, a mechanism or edifice at the scale the dwarven-mechanical peoples are named for. The making of it changes the maker; you do not finish a Deep Work the same person who began it.",
+   "notFor": "One great work, built over real time and enormous cost — it is not a thing you produce in a beat but a thing you commit a season of yourself to. And a Deep Work, once made, is a fact of the world; it cannot be quietly unmade.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Deep Works",
+     "grants": "Commit to and complete a great work of deep making — a mechanism or edifice at world-scale.",
+     "cannot": "It demands real time and nearly all you have, it changes who you are in the building, and once made it is permanent — the world now has this thing in it, and so do you.",
+     "functions": [
+      "make"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE"
+   ],
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "scope",
+    "persistence"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 8760,
+    "scope": 5,
+    "note": "T-V capstone. duration ≈ a year+ — a world-scale making"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: commit to and COMPLETE A GREAT WORK — a mechanism or edifice at WORLD-SCALE. The capstone is a KIND (making at the scale of civilisations) at near-total cost, and IT CHANGES WHO YOU ARE.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a deep work half-committed is an abandoned work, and the Enginewrights are unsentimental about those.",
+    "surge": "REFUSED — it already demands nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "IT DEMANDS REAL TIME AND NEARLY ALL YOU HAVE",
+     "class": "hard"
+    },
+    {
+     "text": "IT CHANGES WHO YOU ARE",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A create action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 5, and lasts for about 12 months Limit: iT Demands Real Time And Nearly All You Have."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_open_threshold",
+   "name": "The Open Threshold",
+   "levelReq": 4,
+   "energyCost": 14,
+   "powerSystem": "reach_mechanical_spiritual",
+   "tradition": "numinous",
+   "attribute": "mental",
+   "axes": {
+    "mechanical_spiritual": 0.7
+   },
+   "functions": [
+    "summon",
+    "reveal",
+    "bind"
+   ],
+   "narrationHints": "Nothing dramatic. A door that was shut is ajar, and someone on the other side notices.",
+   "description": "⚠️ RETRIEVAL BY ATTENDANCE. The Numinous do not walk down and do not haul. They hold the threshold OPEN and make the way back legible — and then it is up to the one in the dark whether they come. It reaches the furthest of the three roads and it is the only one that can fail because THEY CHOSE NOT TO.",
+   "notFor": "Compelling their return: this opens a road, it does not walk anyone down it. The sealed, who cannot see any door. And it CANNOT be done quietly — an open threshold is visible to whatever else is down there.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Open Threshold",
+     "grants": "Hold the way open for someone at THE THRESHOLD or THE NEAR DARK. They may come back if they will.",
+     "cannot": "Making them come. Some do not, and the Attenders teach that this is information, not failure.",
+     "functions": [
+      "summon",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Door",
+     "grants": "Hold it open into THE DEEP DARK, for as long as you can stand — months gone and still a lit way home.",
+     "cannot": "Holding it costs continuously, and everything down there can see a lit door.",
+     "functions": [
+      "summon",
+      "reveal",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Door That Waits",
+     "grants": "Set a threshold that stays open WITHOUT YOU — a way home left standing for someone not yet dead, or not yet willing.",
+     "cannot": "⚠️ A door you are not watching is a door anything can use.",
+     "functions": [
+      "summon",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "SOCIAL"
+   ],
+   "harmRung": "incapacitating",
+   "nativeOrCombination": "native",
+   "shape": "setup",
+   "operativeAxis": [
+    "reach",
+    "depth",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 12,
+    "targets": 1,
+    "note": "RETRIEVAL, spirit-side: r1 reaches depth 0-1 · r2 depth 2 · r3 sets a PERSISTENT threshold. Reaches furthest, but the returning is THEIR choice — resolve as an offer, not an effect."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "depth",
+     "delta": "hold it open into THE DEEP DARK (depth 2), at continuous cost",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "SPECIAL: a threshold that STAYS OPEN without you",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold it briefly — half the duration, and nothing else notices",
+    "surge": "hold it long and wide; EVERYTHING DOWN THERE CAN SEE A LIT DOOR"
+   },
+   "bounds": [
+    {
+     "text": "IT OPENS A ROAD; IT DOES NOT WALK ANYONE DOWN IT — some do not come",
+     "class": "hard"
+    },
+    {
+     "text": "THE SEALED CANNOT SEE ANY DOOR",
+     "class": "hard"
+    },
+    {
+     "text": "AN OPEN THRESHOLD IS VISIBLE TO WHATEVER ELSE IS DOWN THERE",
+     "class": "cost"
+    },
+    {
+     "text": "a door you are not watching is a door ANYTHING CAN USE",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A survive/social action that reveals information or sets up a later action. Its strength is rated 7 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 deepens depth; rank 3 extends duration. Limit: iT Opens A Road; IT Does Not Walk Anyone Down IT — some do not come."
+  },
+  {
+   "id": "the_thinned_veil",
+   "name": "The Thinned Veil",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_mechanical_spiritual",
+   "attribute": "mental",
+   "axes": {
+    "mechanical_spiritual": -0.6,
+    "concrete_abstract": -0.2
+   },
+   "functions": [
+    "strike",
+    "hinder"
+   ],
+   "narrationHints": "You thin the veil where they are standing. Nothing touches them — the world simply stops holding them as firmly as it holds everyone else, and the body panics before the mind understands why.",
+   "description": "The Numinous first offense: not a blow but a local loosening of the real, delivered at distance and needing no contact at all.",
+   "notFor": "Wounding (nothing is cut, nothing bleeds); the already-thin (Numinous, spirits, the Unbodied — they are at home in it); precision (it loosens a place, not a person); doing it quietly — every Numen-sense within reach feels it happen.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Loosening",
+     "grants": "Thin the veil around one standing figure at a distance. Footing, breath, and certainty go unreliable — they stagger, drop what they hold, lose the thread of what they were doing.",
+     "cannot": "It CANNOT WOUND. The already-thin are unaffected and may be delighted. Anyone with numen-sense knows exactly who did it and from where.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Wide Thinning",
+     "grants": "Widen it to a place rather than a person — a doorway, a bridgehead, a ring of ground. Anything crossing it arrives wrong-footed and stays that way.",
+     "cannot": "You cannot exempt your own. The thinning is a PLACE, and your allies cross the same ground. Holding it costs continuously.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Veil Undone",
+     "grants": "Thin it near to nothing. What was solid is negotiable; what was certain is not. People do not fight in this and mostly cannot.",
+     "cannot": "You are standing in it too, and you are more porous than they are, not less. Something on the other side may notice the opening — that is the Numinous' oldest and least-discussed cost.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 2,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a hand's breadth of thinning — one person, one moment",
+    "surge": "thin it near to nothing; SOMETHING ON THE OTHER SIDE MAY NOTICE THE OPENING"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT WOUND — nothing is cut, nothing bleeds",
+     "class": "hard"
+    },
+    {
+     "text": "the ALREADY-THIN are unaffected",
+     "class": "hard"
+    },
+    {
+     "text": "you cannot exempt your own — it is a PLACE",
+     "class": "hard"
+    },
+    {
+     "text": "anyone with numen-sense knows who did it",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/puzzle action that unsteadies those standing where the veil thins. Rated 5 of 10 across a scope of 2 for about two hours. Limit: it cannot wound."
+  },
+  {
+   "id": "the_seized_works",
+   "name": "The Seized Works",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_mechanical_spiritual",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": 0.6,
+    "concrete_abstract": 0.3
+   },
+   "functions": [
+    "hinder",
+    "break"
+   ],
+   "narrationHints": "The buckle, the hinge, the lock, the drawn mechanism — it seizes at the moment of use. No sabotage anyone can find afterward, because nothing was cut. It was simply told to stop.",
+   "description": "The Enginewrights' first offense: you do not strike the person, you strike what they are relying on, and only ever the made part of it.",
+   "notFor": "Anything unmade (a fist, a stone, a beast — the craft has nothing to grip); killing; working at a distance you cannot see; permanence (a seized mechanism can be worked free, and a good wright will).",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Stopped Mechanism",
+     "grants": "Seize one worked mechanism within a few paces at the moment of use — a crossbow's release, a lock's tumbler, a gate's winch, a buckle under strain. It does not break; it refuses.",
+     "cannot": "MADE THINGS ONLY. A knife in a hand is not a mechanism. It must be CLOSE and you must be able to perceive it. It can be worked free in a minute or two by someone who knows the piece.",
+     "functions": [
+      "hinder",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Failing Line",
+     "grants": "Take several at once, or take one and hold it seized while you do something else. A line of armed men is a line of men holding gear that will not answer.",
+     "cannot": "Holding costs continuously. Enginewrights are common enough that a rival can unseize what you seized, and will enjoy doing it in front of people.",
+     "functions": [
+      "hinder",
+      "break",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Great Refusal",
+     "grants": "A mill, a gate-house, a war-engine, a lattice-work — a system, not a piece. It stops, and it stays stopped as long as you attend it.",
+     "cannot": "You have stopped something a whole place depends on, and places notice. Some mechanisms are load-bearing for people who had nothing to do with your fight.",
+     "functions": [
+      "hinder",
+      "break",
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "enginewright",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "hinder",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "one small piece — a buckle, a latch",
+    "surge": "take a whole system; YOU HAVE STOPPED SOMETHING A PLACE DEPENDS ON"
+   },
+   "bounds": [
+    {
+     "text": "MADE THINGS ONLY — a fist or a stone offers nothing to grip",
+     "class": "hard"
+    },
+    {
+     "text": "must be CLOSE and PERCEIVED",
+     "class": "hard"
+    },
+    {
+     "text": "a seized mechanism can be WORKED FREE",
+     "class": "soft"
+    },
+    {
+     "text": "you may have stopped something uninvolved people depend on",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/puzzle action that makes an opponent's gear refuse at the moment of use. Rated 6 of 10 across a scope of 2 for about two hours. Limit: made things only."
+  }
+ ],
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

@@ -1030,7 +1030,6 @@
    "tradition": "unmaker",
    "harmRung": "none",
    "functions": [
-    "break",
     "mend",
     "restore",
     "reveal"
@@ -1048,7 +1047,7 @@
      "cannot": "Anything rank 2 adds — restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain; it removes.",
      "functions": [
       "reveal",
-      "break"
+      "restore"
      ],
      "gains": "broaden",
      "harmRung": "none"
@@ -1060,7 +1059,6 @@
      "cannot": "Anything rank 3 adds — remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference; it removes.",
      "functions": [
       "reveal",
-      "break",
       "mend",
       "restore"
      ],
@@ -1074,7 +1072,6 @@
      "cannot": "Nothing further; this is the craft's ceiling; it removes.",
      "functions": [
       "reveal",
-      "break",
       "mend",
       "restore"
      ],
@@ -1126,7 +1123,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A medical/repair/tactical action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: it removes; IT Does Not Add — what was lost stays lost."
+   "plainly": "A medical/repair/tactical action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: it removes; IT Does Not Add — what was lost stays lost.",
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
   },
   {
    "id": "the_ended_threat",
@@ -1483,9 +1481,9 @@
    "tradition": "unmaker",
    "harmRung": "none",
    "functions": [
-    "break",
     "reveal",
-    "sustain"
+    "sustain",
+    "restore"
    ],
    "challengeTypes": [
     "endurance",
@@ -1500,7 +1498,7 @@
      "cannot": "Anything rank 2 adds — sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
       "reveal",
-      "break"
+      "restore"
      ],
      "gains": "broaden",
      "harmRung": "none"
@@ -1512,8 +1510,8 @@
      "cannot": "Anything rank 3 adds — end what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
       "reveal",
-      "break",
-      "sustain"
+      "sustain",
+      "restore"
      ],
      "gains": "broaden",
      "harmRung": "none"
@@ -1525,8 +1523,8 @@
      "cannot": "Nothing further; this is the craft's ceiling; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
       "reveal",
-      "break",
-      "sustain"
+      "sustain",
+      "restore"
      ],
      "gains": "deepen",
      "harmRung": "none"
@@ -1570,7 +1568,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A endurance/hardship/psychological action that strengthens someone. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 extends targets. Limit: what You End TO Sustain Yourself, You Have Ended — it does not come back when the hard stretch does."
+   "plainly": "A endurance/hardship/psychological action that strengthens someone. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 extends targets. Limit: what You End TO Sustain Yourself, You Have Ended — it does not come back when the hard stretch does.",
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
   },
   {
    "schemaVersion": 1,

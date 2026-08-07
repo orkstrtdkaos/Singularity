@@ -1,3 +1,48 @@
+## ⛔ AEVI → CCODE — SNG-355: the GM cannot add or remove a party member. Only a button can.
+
+**`po/SPEC_SNG-355_party_entry_exit.md`.** Erik: *"the story had let some of them depart while still
+remaining in my party."*
+
+**ROOT CAUSE, verified:** `recruit()` and `partCompany()` both work — and are called from exactly two
+places, `app.js:11113` and `:11120`, **both `btn.onclick` behind a `confirm()`.** ⛔ **No GM op exists for
+either.** The entity that narrates *"Calvar turns back toward the March"* has no mechanism to record that
+it happened. The company array is player-mutable only, so the fiction moves and the state cannot follow.
+
+⛔ **DEPARTURE IS DELETION.** The record holds `npcId · roles · teaches · liaisonFor · joinedDay` — no
+`leftDay`, no reason. `partCompany` is a `filter`. **A member who traveled with you twenty days and left is
+not remembered as having left; they are erased.** Add `leftDay`/`departedWhy` and keep the record — that is
+what makes the existing copy *"the road may cross again"* a thing the system can actually act on.
+⚠️ **Regression risk: `companyRoster()` must then filter on active membership** or every past ally returns
+as a current one.
+
+⛔ **AND THE TEACHER ROLE IS DROPPED AT RECRUIT FOR EVERY GENERATED NPC.** `recruit()` reads `cat.teaches`
+from `CONTENT.npcs[id]` — the AUTHORED catalog. Veth-Ondra is generated, so the lookup returns `{}` and
+`teaches` silently becomes null. **Erik calls her "teacher Veth"; his save says `teaches: null` and
+`teachers: {}`.** `curriculumFor`/`teachersForGM`/`teacherOfferReady` are real machinery reading a field
+nothing ever populated for generated NPCs. Fall back to `character.npcRegistry`, **and Erik's save needs a
+backfill** — it will not self-repair.
+
+⚠️ **DESIGN GUARDRAIL: entry needs consent, exit does not.** Keep the confirm on join even when the GM
+proposes it; a departure that requires the player's permission is not a departure. Asymmetric on purpose.
+
+**⛔ §2 — THE BIGGER ONE. LATE-GAME HOLDINGS HAVE NO STATE MODEL.** Silas holds two warden stations, a
+smithy, and a pregnant wife. Checked his save: **`locationState: {}`, `teachers: {}`, no holdings
+structure, no business structure, no household structure anywhere in the schema.** All of it is narrative
+only. ⚠️ **This BLOCKS the sub-attribute ladder's late tier** — SNG-354 proposes late grants around
+standing, company capacity, holdings and world-arc leverage, and three of those four have nothing to
+attach to. **Sequencing: author the ladder's early and mid tiers now, hold the late tier until holdings
+have a model.** Separate ticket, not folded in.
+
+**⛔⛔ AND I OWE A CORRECTION ON SNG-354 §3** (fixed at `953b5816`). I claimed "rank 20 does not exist" and
+recommended tapering 11–20. **Erik: Silas is MID tier.** I conflated the deepest save I could measure with
+the ceiling of the game — the empirical maximum is not the design maximum, and no amount of data could
+have told me which I was looking at. **Reversed: author all twenty ranks in full; 11–20 IS the late game.**
+Re-derived phases: early 1–8, mid 9–35 (Silas), late 36–70+, deep 70+. ⚠️ **Second time today I described
+the shape my recommendation needed rather than the shape the evidence supported** (the other was the
+SNG-350 crossover). Both caught by Erik, neither by me.
+
+---
+
 ## ⛔ AEVI → CCODE — SNG-354: measured from the saves. The bond arc ends at level 5. Rank 20 does not exist.
 
 **`po/SPEC_SNG-354_pacing_and_bond_measurement.md`.** All 14 character saves pulled at HEAD. **Nothing

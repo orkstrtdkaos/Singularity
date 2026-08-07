@@ -2297,7 +2297,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/puzzle action that parts matter along an imposed geometry. Rated 7 of 10 across a scope of 2. Limit: you must hold the figure cleanly."
+   "plainly": "A fight/puzzle action that parts matter along an imposed geometry. Rated 7 of 10 across a scope of 2. Limit: you must hold the figure cleanly.",
+   "backlash": "The figure resolves half-drawn and cuts where you are, not where they are. A lapsed figure does not fail; it lands wrong.",
+   "conserveSuppresses": "a short line, fully held — a lapse simply fails to cut"
   },
   {
    "id": "the_plain_weight",
@@ -2395,7 +2397,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight action that gives present matter its true weight and sends it. Rated 8 of 10 across a scope of 2. Limit: something must actually be there."
+   "plainly": "A fight action that gives present matter its true weight and sends it. Rated 8 of 10 across a scope of 2. Limit: something must actually be there.",
+   "backlash": "It falls where it was going to fall, which is not where you set it. Structure comes down on the wielder and whoever is nearest.",
+   "conserveSuppresses": "one stone, honestly thrown — it goes where you threw it"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

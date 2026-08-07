@@ -2866,6 +2866,210 @@
     }
    ],
    "plainly": "A travel and explore action. Growth lifts you and hands you along — in thick country like forest or marsh that is about twice walking speed and roughly halves a leg's days. At rank 2 you can work with very little: seaweed and lily mats across open water, scrub in a rock seam, the plants at a desert's edge — it carries you at walking pace rather than fast, but it goes where rank 1 cannot. Only genuinely dead ground is closed to it, meaning the Unmade, salt flats, and worked stone with nothing living in the seams. At rank 3 you grow real wings and fly independent of what is below you; held past a day they draw on your own body."
+  },
+  {
+   "id": "the_snaring_green",
+   "name": "The Snaring Green",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_death_life",
+   "attribute": "practical",
+   "axes": {
+    "death_life": 0.6,
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "hinder",
+    "bind"
+   ],
+   "narrationHints": "Root and briar and green wood come up through the ground where they are standing — not fast, exactly, but faster than a person expects a plant to do anything, and it does not let go.",
+   "description": "The Rootkin's first offense, and it refuses to be a killing craft: it holds, it slows, it takes the ground away. What happens next is yours to decide.",
+   "notFor": "Killing (the green holds, it does not slay); bare stone, deep water, or salted earth — it needs something to grow FROM; speed (a running target clears it); the fire-carrying, who simply burn through.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Green Comes Up",
+     "grants": "Root and briar surge through soil or leaf-litter around a target within sight. Footing is gone, movement is halved, a charge dies where it stood. It holds until cut or burned.",
+     "cannot": "NEEDS LIVING GROUND — no stone floors, no deep water, no salted earth. A quick target may clear it. Blade and fire both answer it.",
+     "functions": [
+      "hinder",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Field",
+     "grants": "Take a stretch of ground rather than a target — a path, a ford, a clearing mouth. Anything crossing is slowed and caught, and it stays green after you stop attending it.",
+     "cannot": "It does not know your allies from theirs. And you have changed a place; the Rootkin hold you responsible for what you grow and where.",
+     "functions": [
+      "hinder",
+      "bind",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Grove Answers",
+     "grants": "The green rises as if it meant to — a company held, a road closed, a grove that was not there this morning and now is.",
+     "cannot": "⚠ IT IS ALIVE AND IT REMAINS. You have made a thing that will keep growing, and it will outlast the reason you made it. The Unceasing consider that a virtue; the Ashwardens will come and look at you.",
+     "functions": [
+      "hinder",
+      "bind",
+      "strike",
+      "make"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "rootkin",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "hinder",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "a snare at the ankles — brief, local",
+    "surge": "the grove rises; IT IS ALIVE AND IT REMAINS, and will outlast your reason for it"
+   },
+   "bounds": [
+    {
+     "text": "IT HOLDS, IT DOES NOT SLAY",
+     "class": "hard"
+    },
+    {
+     "text": "NEEDS LIVING GROUND — not stone, not deep water, not salt",
+     "class": "hard"
+    },
+    {
+     "text": "BLADE AND FIRE both answer it",
+     "class": "soft"
+    },
+    {
+     "text": "it does not know your allies from theirs",
+     "class": "hard"
+    },
+    {
+     "text": "what you grow REMAINS",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/puzzle action that roots opponents in place with living growth. Rated 5 of 10 across a scope of 3 for about six hours. Limit: it holds, it does not slay."
+  },
+  {
+   "id": "the_hastened_grey",
+   "name": "The Hastened Grey",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_death_life",
+   "attribute": "mental",
+   "axes": {
+    "death_life": -0.6,
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "strike",
+    "hinder"
+   ],
+   "narrationHints": "You lay a hand on the thing and move its ending closer. A blade greys and dulls, a rope parts, a green branch goes brittle, a wound stops closing. Everything was already going there. You only asked it to hurry.",
+   "description": "The Ashwardens' first offense, and it is bound by their whole discipline: it hastens what is ALREADY ending, and it will not begin an ending that was not underway.",
+   "notFor": "⛔ Hastening a PERSON'S ending — the Ashwarden law, absolute, and the craft itself will not do it; starting an ending (only ever hurrying one); anything new, whole and well-kept; working at any distance — this is a hand on the thing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Grey Hand",
+     "grants": "Touch a worn, damaged, or already-failing thing and bring its ending forward — a notched blade, a strained rope, a cracked shaft, a wound that was not going to close well.",
+     "cannot": "⛔ NOT ON A PERSON. TOUCH ONLY. And it needs the ending to be ALREADY UNDERWAY — a new, sound, well-kept thing offers nothing to hasten.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Nearer End",
+     "grants": "Work at a pace's distance, and on the sound as well as the failing — though a sound thing costs far more and gives less. What you touch does not recover.",
+     "cannot": "The cost of taking a whole thing is real and is paid by you. And people watch a grey hand differently afterward; the Valley has stories.",
+     "functions": [
+      "strike",
+      "hinder",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Keeper's Due",
+     "grants": "What you set ending, ends. Gates, engines, walls, wards — the made world is full of things quietly failing, and you can call all of them due at once.",
+     "cannot": "⛔ THE LAW STILL HOLDS: NOT ON A PERSON, and an Ashwarden who bends it is hunted by their own. And the Hollow — who would end everything to end suffering — will find you interesting, which is its own problem.",
+     "functions": [
+      "strike",
+      "hinder",
+      "break",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "precision",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 3,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "a small hastening — a notch deepens, a strand parts",
+    "surge": "call it all due; THE LAW STILL HOLDS and your own will hunt you if you bend it"
+   },
+   "bounds": [
+    {
+     "text": "⛔ NOT ON A PERSON — Ashwarden law, and the craft itself refuses",
+     "class": "hard"
+    },
+    {
+     "text": "HASTENS an ending; will not BEGIN one",
+     "class": "hard"
+    },
+    {
+     "text": "TOUCH ONLY at first rank",
+     "class": "hard"
+    },
+    {
+     "text": "what you take does not recover",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/puzzle action that brings a failing object's ending forward. Rated 6 of 10 on one target for about three hours. Limit: never on a person."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

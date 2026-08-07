@@ -1855,6 +1855,204 @@
     }
    ],
    "plainly": "A survival/endurance/logistics action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it finds Enough, never Plenty."
+  },
+  {
+   "id": "the_long_odds_come_in",
+   "name": "The Long Odds Come In",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_chaos_order",
+   "attribute": "practical",
+   "axes": {
+    "chaos_order": -0.6,
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "strike",
+    "break",
+    "hinder"
+   ],
+   "narrationHints": "Nothing is aimed at them. The strap simply parts, the footing simply goes, the ember simply finds the oil, the horse simply decides. Any one of these was possible. You made all of them likely at once, and then stood back.",
+   "description": "The Churnfolk's first offense: you do not attack, you spend the world's unlikeliness. Whatever could go wrong for them, does.",
+   "notFor": "Choosing WHICH misfortune (you buy that something goes wrong, never what); a target with nothing around them — bare ground and no gear gives the Churn nothing to work with; repeating it (the odds you spent are spent); anything you need to happen on a schedule.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Turn of It",
+     "grants": "Spend the Churn against one target in a place with things in it. Something fails against them — gear, footing, an animal, a bystander's elbow, the weather. Real harm, entirely deniable.",
+     "cannot": "YOU DO NOT CHOOSE WHAT. The GM picks the misfortune from what is actually present. A target in a bare, empty place is nearly immune. It works ONCE cleanly; the second use in a scene is weaker and stranger.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Run of Bad",
+     "grants": "Spend it wider — a squad, a caravan, a line. Several small catastrophes at once, none of them traceable to you.",
+     "cannot": "⚠ THE CHURN DOES NOT SORT: allies in the same area are struck ONE RUNG LOWER by the same run of luck. And nobody believes it was luck twice.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Long Odds",
+     "grants": "The genuinely unlikely thing. The keystone, the powder, the flood-gate, the one animal that could have ended this. It comes in.",
+     "cannot": "⚠ YOU ARE ALSO IN THE WORLD. The wielder is struck ONE RUNG LOWER by the same run. And the Churn takes what it takes — the unlikely thing may cost a place, a bridge, or someone you needed alive.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "churnfolk",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "magnitude",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a small turn of luck — a slip, a snapped strap",
+    "surge": "the long odds; THE WIELDER IS STRUCK ONE RUNG LOWER and the Churn may take what you needed"
+   },
+   "bounds": [
+    {
+     "text": "YOU DO NOT CHOOSE WHAT — the GM picks from what is present",
+     "class": "hard"
+    },
+    {
+     "text": "a bare, empty place gives the Churn nothing",
+     "class": "hard"
+    },
+    {
+     "text": "ALLIES IN THE AREA ARE STRUCK ONE RUNG LOWER",
+     "class": "hard"
+    },
+    {
+     "text": "at rank 3 THE WIELDER IS STRUCK ONE RUNG LOWER",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/puzzle action that makes the world go wrong for a target. Rated 7 of 10 across a scope of 2. Limit: you buy that something fails, never which."
+  },
+  {
+   "id": "the_predicted_man",
+   "name": "The Predicted Man",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_chaos_order",
+   "attribute": "mental",
+   "axes": {
+    "chaos_order": 0.6,
+    "concrete_abstract": 0.2
+   },
+   "functions": [
+    "strike",
+    "hinder",
+    "bind"
+   ],
+   "narrationHints": "You do not react. You were already there. The Lattice does not fight a person, it resolves them — reads the shape they are committed to and puts the consequence exactly where they are about to be.",
+   "description": "The Lattice-Cities' first offense: prediction closed into a trap. Harm delivered by arriving first.",
+   "notFor": "The genuinely unpredictable (the Churn-touched, the mad, the improvising — chaos is the Lattice's antipode and it shows); a target you have not observed; anything on a first meeting; being surprised yourself.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Closed Line",
+     "grants": "Read a target you have watched this scene and place harm where they are going — a blade already at the height their head will reach, a step onto ground you prepared. The wound lands because they walked into it.",
+     "cannot": "REQUIRES OBSERVATION — at least one exchange watched. The improvising, the panicked, and the Churn-touched cannot be read and this simply fails against them.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Solved Position",
+     "grants": "Every line they have is a line you have costed. Take the ones that hurt them and leave one that does not, and they will take it.",
+     "cannot": "A person who accepts a bad outcome to break the pattern escapes it. Holding the solve costs continuously.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Resolved Man",
+     "grants": "There is no line. Every option terminates, and you have placed the terminations. They are finished before it looks like anything is happening.",
+     "cannot": "⚠ THE INNER RING DOES THIS TO PEOPLE and calls freedom a defect. Doing it well is a step toward them, and the Lattice notices who is good at it.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "lattice",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "precision",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 2,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "close one line",
+    "surge": "resolve them entirely; THE INNER RING NOTICES WHO IS GOOD AT THIS"
+   },
+   "bounds": [
+    {
+     "text": "REQUIRES OBSERVATION — at least one exchange watched",
+     "class": "hard"
+    },
+    {
+     "text": "the IMPROVISING and CHURN-TOUCHED cannot be read — it fails outright",
+     "class": "hard"
+    },
+    {
+     "text": "someone who accepts a bad outcome breaks the solve",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A fight/puzzle action that places harm where a predictable opponent is going. Rated 7 of 10 on one target. Limit: it requires observation and fails on the unpredictable."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

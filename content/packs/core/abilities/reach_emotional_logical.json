@@ -1,2201 +1,2401 @@
 {
-  "schemaVersion": 1,
-  "powerSystem": "reach_emotional_logical",
-  "note": "Crafts of the emotional_logical axis — a horizon Reach now brought online. Pathos is the emotional-pole tradition (feeling as force, resonance-of-heart); Logos the logical-pole (reason as force, inference-as-power). Learned by traveling the Reach or training with the Deepfeelers / the Reasoners. Both drift the wielder toward their pole. Function tags included per canon. axes signed for engine compat. Authored by Aevi (PO), SNG-016 — first horizon-axis tradition.",
-  "gated": "learned",
-  "abilities": [
+ "schemaVersion": 1,
+ "powerSystem": "reach_emotional_logical",
+ "note": "Crafts of the emotional_logical axis — a horizon Reach now brought online. Pathos is the emotional-pole tradition (feeling as force, resonance-of-heart); Logos the logical-pole (reason as force, inference-as-power). Learned by traveling the Reach or training with the Deepfeelers / the Reasoners. Both drift the wielder toward their pole. Function tags included per canon. axes signed for engine compat. Authored by Aevi (PO), SNG-016 — first horizon-axis tradition.",
+ "gated": "learned",
+ "abilities": [
+  {
+   "id": "pathos",
+   "name": "Pathos",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.5,
+    "demonic_angelic": 0.1
+   },
+   "functions": [
+    "command",
+    "empower",
+    "heal",
+    "reveal"
+   ],
+   "narrationHints": "Feeling made a force — the true emotion of a room surfaced, a grief shared and eased, a passion kindled or cooled by one who feels it first and hardest.",
+   "description": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation — resonance; the Deepfeelers' art.",
+   "notFor": "Forcing a feeling on the unwilling (Pathos resonates, it does not compel); cold analysis (that's Logos); faking an emotion — Pathos works by feeling it truly first.",
+   "tree": [
     {
-      "id": "pathos",
-      "name": "Pathos",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_emotional_logical",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.5,
-        "demonic_angelic": 0.1
-      },
-      "functions": [
-        "command",
-        "empower",
-        "heal",
-        "reveal"
-      ],
-      "narrationHints": "Feeling made a force — the true emotion of a room surfaced, a grief shared and eased, a passion kindled or cooled by one who feels it first and hardest.",
-      "description": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation — resonance; the Deepfeelers' art.",
-      "notFor": "Forcing a feeling on the unwilling (Pathos resonates, it does not compel); cold analysis (that's Logos); faking an emotion — Pathos works by feeling it truly first.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Open Heart",
-          "grants": "Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.",
-          "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it.",
-          "functions": [
-            "reveal",
-            "heal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Shared Fire",
-          "grants": "Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.",
-          "cannot": "You take on what you move — the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it.",
-          "functions": [
-            "reveal",
-            "heal",
-            "empower",
-            "command"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Deep Chord",
-          "grants": "Feeling at the scale of peoples — turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.",
-          "cannot": "The wielder drifts emotion-hot — feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling.",
-          "functions": [
-            "reveal",
-            "heal",
-            "empower",
-            "command"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "challengeTypes": [
-        "SOCIAL",
-        "FIGHT"
-      ],
-      "tradition": "threnodist",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "bolster",
-      "operativeAxis": [
-        "resonance",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 5,
-        "duration": 6,
-        "scope": 2
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "MOVE A CROWD by feeling-with-them; CARRY A PERSON THROUGH AN EMOTION TOO BIG TO BEAR ALONE",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "FEELING AT THE SCALE OF PEOPLES — turn a room, a mob, a mourning-crowd by the TRUTH of shared feeling",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "share a little — half the effect, and you take on less",
-        "surge": "double it; THE WIELDER DRIFTS EMOTION-HOT, feeling everything, all the time"
-      },
-      "bounds": [
-        {
-          "text": "READS AND SHARES readily; SETTING a feeling that was not there is far harder, and the guarded can close",
-          "class": "soft"
-        },
-        {
-          "text": "YOU TAKE ON WHAT YOU MOVE — the cost is real",
-          "class": "cost"
-        },
-        {
-          "text": "A WILL SET AGAINST YOU IS SET AGAINST YOU",
-          "class": "hard"
-        },
-        {
-          "text": "the wielder DRIFTS EMOTION-HOT",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: a Will Set Against You IS Set Against You."
+     "rank": 1,
+     "name": "The Open Heart",
+     "grants": "Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.",
+     "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it.",
+     "functions": [
+      "reveal",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
-      "id": "logos",
-      "name": "Logos",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_emotional_logical",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.5,
-        "concrete_abstract": 0.2
-      },
-      "functions": [
-        "bind",
-        "break",
-        "reveal",
-        "strike"
-      ],
-      "narrationHints": "Reason made a force — an argument that lands like a blow, a contradiction exposed, a conclusion so clean it changes what people must do.",
-      "description": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
-      "notFor": "Reaching a heart set against reason (that's Pathos); wisdom (Logos is valid, not necessarily wise); a premise that's false — Logos builds truly on what it's given, garbage in and all.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Clear Argument",
-          "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
-          "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false.",
-          "functions": [
-            "reveal",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Binding Proof",
-          "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
-          "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force.",
-          "functions": [
-            "reveal",
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Necessary Conclusion",
-          "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it reorganises what everyone present thought they knew. And turned on one person: a contradiction opened in what they have built themselves on, which does not wound the body and takes the ground out from under them all the same. They will keep standing. They will not keep believing.",
-          "cannot": "It needs something true to work with — Logos cannot prove a falsehood, only forge one that the next sound mind unpicks. It fails against those who will simply refuse a true conclusion. And the Syllogists hold that a person you have taken apart this way is owed the time to rebuild, which is a debt many of them do not pay.",
-          "functions": [
-            "reveal",
-            "bind",
-            "break",
-            "strike"
-          ],
-          "gains": "broaden",
-          "harmRung": "damaging"
-        }
-      ],
-      "challengeTypes": [
-        "SOCIAL",
-        "FIGHT",
-        "PUZZLE"
-      ],
-      "tradition": "syllogist",
-      "nativeOrCombination": "native",
-      "harmRung": "damaging",
-      "shape": "damage",
-      "operativeAxis": [
-        "damage",
-        "scope"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 2,
-          "d": 6
-        },
-        "plus": 0,
-        "marginFloorPer": 0.03,
-        "scope": 2,
-        "damageType": "reason",
-        "note": "damaging — 'thought as force' in the argumentative register. Compare cogitant's noesis (also damaging, also mental): noesis out-thinks a SITUATION, logos out-argues a PERSON."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "damage",
-          "delta": "PROVE A THING SO CLEANLY THE PROOF ITSELF CHANGES WHAT PEOPLE MUST DO; CORNER A LIAR IN THEIR OWN LOGIC",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "REASON AT THE SCALE OF PEOPLES — an argument A WHOLE COUNCIL CANNOT ANSWER, a contradiction THAT TOPPLES A DOCTRINE",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "make the point — half the force, and it invites reply",
-        "surge": "double it; A VALID ARGUMENT IS NOT A TRUE ONE, and the unreasonable simply resist"
-      },
-      "bounds": [
-        {
-          "text": "THE UNREASONABLE AND THE EMOTION-RULED RESIST",
-          "class": "hard"
-        },
-        {
-          "text": "A VALID ARGUMENT IS NOT A TRUE ONE",
-          "class": "hard"
-        },
-        {
-          "text": "PROOF BINDS THE HONEST AND THE LOGICAL — THE CATHEDRAL OF CERTAINTY IS NEITHER",
-          "class": "hard"
-        },
-        {
-          "text": "IT NEEDS SOMETHING TRUE TO WORK WITH — Logos cannot prove what is not so",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A social/fight/puzzle action that deals damage. It rolls 2d6 reason damage across a scope of 2 Ranks: rank 2 deepens damage; rank 3 extends scope. Limit: the Unreasonable And The Emotion-Ruled Resist."
+     "rank": 2,
+     "name": "The Shared Fire",
+     "grants": "Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.",
+     "cannot": "You take on what you move — the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it.",
+     "functions": [
+      "reveal",
+      "heal",
+      "empower",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
-      "id": "the_turning_word",
-      "name": "The Turning Word",
-      "levelReq": 4,
-      "energyCost": 9,
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.2
-      },
-      "functions": [
-        "bind",
-        "heal",
-        "reveal"
-      ],
-      "narrationHints": "The room turns — a crowd, a court, a mob — moved as one by the exact true thing said the exact right way.",
-      "description": "The social capstone: move a whole gathering at once — turn a hostile crowd, sway a council, stop a mob — by finding and speaking the one thing that reaches all of them. Pathos and Logos fused into mass persuasion.",
-      "notFor": "Individual mind-control; moving those with no shared feeling or reason; forcing against a set will.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Turning Word",
-          "grants": "Turn a crowd or council decisively — the room moves as one when you find the word that reaches them.",
-          "cannot": "Needs a real shared chord to strike; a crowd set immovably resists; you feel/carry what you move.",
-          "functions": [
-            "bind",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Word That Holds",
-          "grants": "The turning holds past the moment — a crowd moved stays moved after you have gone, a council's decision keeps its shape when you are not in the room. And where there is no shared chord to strike, you can make one: name the thing they did not know they held in common. A room turned off something ugly does not merely stop: the turning closes the rift that was opening in it, and people who were a minute from being enemies go back to being neighbours.",
-          "cannot": "A chord you made is a chord you are answerable for; the Rhetors hold that inventing a commonality is how peoples are built and also how they are ruined. It still cannot move a will genuinely set. And you carry what you move for as long as it stays moved.",
-          "functions": [
-            "bind",
-            "heal",
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "powerSystem": "reach_emotional_logical",
-      "gated": "learned",
-      "tradition": "cross_pole_braid",
-      "nativeOrCombination": "combination",
-      "harmRung": "none",
-      "shape": "bolster",
-      "operativeAxis": [
-        "persuasion",
-        "scope",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 7,
-        "duration": 6,
-        "scope": 3,
-        "requiresPoles": [
-          "threnodist",
-          "syllogist"
-        ]
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "duration",
-          "delta": "THE TURNING HOLDS PAST THE MOMENT — a crowd moved STAYS moved after you have gone; a council's decision keeps",
-          "from": "r2 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "reach a few — half the scope, and nobody feels handled",
-        "surge": "double it; A CHORD YOU MADE IS A CHORD YOU ARE ANSWERABLE FOR"
-      },
-      "bounds": [
-        {
-          "text": "NEEDS A REAL SHARED CHORD TO STRIKE — a crowd set immovably resists",
-          "class": "hard"
-        },
-        {
-          "text": "A CHORD YOU MADE IS A CHORD YOU ARE ANSWERABLE FOR",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social action, and it needs two poles: threnodist and syllogist together. You turn an entire crowd or council at once by finding the one thing they all already feel and saying it. It needs a real shared chord to strike — a crowd with nothing in common cannot be turned, and the craft fails outright rather than working weakly. And you are answerable for what you struck: a room you turned toward something will hold you responsible for where it goes, which is a debt that outlasts the scene."
-    },
-    {
-      "id": "the_grief_strike",
-      "name": "The Grief Strike",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.4
-      },
-      "effectTags": [
-        "grief",
-        "emotional",
-        "wound"
-      ],
-      "harmRung": "incapacitating",
-      "narrationHints": "It doesn't hurt where you put your hands. It hurts where you feel.",
-      "description": "Strike at the emotional self — send a true, intense feeling at a person in a way they cannot close off.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "break",
-        "hinder"
-      ],
-      "challengeTypes": [
-        "social",
-        "psychological",
-        "combat"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The True Feeling",
-          "grants": "Direct a genuine, intense feeling at a person — grief, shame, terror — that they cannot close off because it is true and they know it.",
-          "cannot": "Anything rank 2 adds — find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening; IT MUST BE GENUINE FEELING.",
-          "functions": [
-            "hinder"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 2,
-          "name": "The Unguarded Place",
-          "grants": "Find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening.",
-          "cannot": "Anything rank 3 adds — break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again; IT MUST BE GENUINE FEELING.",
-          "functions": [
-            "hinder",
-            "break"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 3,
-          "name": "The Shattered Fortification",
-          "grants": "Break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again.",
-          "cannot": "Nothing further; this is the craft's ceiling; IT MUST BE GENUINE FEELING; and it still costs what it costs: breaking what someone was using TO STAY FUNCTIONAL leaves them not functional.",
-          "functions": [
-            "hinder",
-            "break"
-          ],
-          "gains": "deepen",
-          "harmRung": "incapacitating"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "hobble",
-      "operativeAxis": [
-        "emotionalBreach",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 5,
-        "duration": 4,
-        "targets": 1,
-        "damageType": "feeling",
-        "note": "incapacitating. THE CATALOG'S MOST ETHICALLY UNCOMFORTABLE CRAFT — it opens a grief someone has been protecting."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "emotionalBreach",
-          "delta": "FIND AND OPEN THE GRIEF A PERSON HAS BEEN PROTECTING — the loss they have not admitted, the feeling they have been holding shut",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: BREAK AN EMOTIONAL FORTIFICATION ENTIRELY — what they were using to stay functional is now open, and requires attending",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a touch of true feeling — half the breach, and they can close again",
-        "surge": "double it; what you open in someone DOES NOT CLOSE BECAUSE YOU ARE DONE WITH IT"
-      },
-      "bounds": [
-        {
-          "text": "IT MUST BE GENUINE FEELING — a manufactured grief is not this craft and does not land",
-          "class": "hard"
-        },
-        {
-          "text": "what you open DOES NOT CLOSE because you are done with it",
-          "class": "hard"
-        },
-        {
-          "text": "breaking what someone was using TO STAY FUNCTIONAL leaves them not functional",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social/psychological/combat action that weakens or restricts a target. Its strength is rated 5 out of 10 It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens emotionalBreach; rank 3 adds to special. Limit: iT Must BE Genuine Feeling — a manufactured grief is not this craft and does not land."
-    },
-    {
-      "id": "the_felt_wall",
-      "name": "The Felt Wall",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.3
-      },
-      "effectTags": [
-        "warning",
-        "feeling",
-        "protection"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She felt the danger before the knife moved. Feeling was always faster.",
-      "description": "Protect through emotional early warning — the feeling of threat before it fully forms.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "foresee",
-        "shield"
-      ],
-      "challengeTypes": [
-        "combat",
-        "social",
-        "defense"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Early Feel",
-          "grants": "Feel a threat forming in a room's emotional weather — in a person's shifting feeling-state — in time to move before the action completes.",
-          "cannot": "Anything rank 2 adds — protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch; it senses INTENT.",
-          "functions": [
-            "foresee"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Feeling Guard",
-          "grants": "Protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch.",
-          "cannot": "Anything rank 3 adds — what shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives; it senses INTENT.",
-          "functions": [
-            "foresee",
-            "shield"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Felt Ward",
-          "grants": "What shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives.",
-          "cannot": "Nothing further; this is the craft's ceiling; it senses INTENT; and it still costs what it costs: feeling every shift toward harm means FEELING EVERY SHIFT.",
-          "functions": [
-            "foresee",
-            "shield"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "guard",
-      "operativeAxis": [
-        "foresight",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 4,
-        "soak": 0,
-        "soakRank": 0,
-        "evasion": 4,
-        "evasionRank": 2,
-        "duration": 4,
-        "targets": 1,
-        "note": "A FIFTEENTH DEFENSIVE LOGIC — FORESENSED: soak 0; it reads the EMOTIONAL WEATHER and moves before harm forms. Distinct from PRE-EMPTED (end the threat) and UNTIMED (defeat the timing): this one feels the intent BEFORE it becomes action."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "PROTECT SOMEONE by feeling the danger around THEM — your emotional sense is the guard watching what eyes do not catch",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: what shifts toward violence or harm in a space REACHES YOU FIRST, across the whole space, and you act in the gap",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "keep half an ear on the room — half the warning, and it costs nothing",
-        "surge": "double it; feeling every shift toward harm in a space means FEELING EVERY SHIFT"
-      },
-      "bounds": [
-        {
-          "text": "it senses INTENT — a rockfall, a machine, or an animal has no feeling to read",
-          "class": "hard"
-        },
-        {
-          "text": "feeling every shift toward harm means FEELING EVERY SHIFT",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it senses Intent — a rockfall, a machine, or an animal has no feeling to read."
-    },
-    {
-      "id": "the_true_feeling",
-      "name": "The True Feeling",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.3
-      },
-      "effectTags": [
-        "feeling",
-        "perception",
-        "truth"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She knew what the room was feeling before anyone spoke.",
-      "description": "Read what is actually felt — not what is shown, what is present.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "reveal",
-        "track"
-      ],
-      "challengeTypes": [
-        "social",
-        "investigation",
-        "intellectual"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Actual State",
-          "grants": "Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.",
-          "cannot": "Anything rank 2 adds — track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched; it reads WHAT IS FELT, not what is TRUE.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Feeling Trail",
-          "grants": "Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
-          "cannot": "Anything rank 3 adds — read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming; it reads WHAT IS FELT, not what is TRUE.",
-          "functions": [
-            "reveal",
-            "track"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Emotional History",
-          "grants": "Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.",
-          "cannot": "Nothing further; this is the craft's ceiling; it reads WHAT IS FELT, not what is TRUE; and it still costs what it costs: what you read of a history, you carry some of.",
-          "functions": [
-            "reveal",
-            "track"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "setup",
-      "operativeAxis": [
-        "perceptionDepth",
-        "timeReach"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 1,
-        "range": 15,
-        "note": "SOCIAL attribute throughout this tradition"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "timeReach",
-          "delta": "TRACK A FEELING OVER TIME — follow grief, find WHERE FEAR DEVELOPED, trace the emotional mark a person left in a place",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "deepen",
-          "axis": "perceptionDepth",
-          "delta": "read the FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, WHAT A PEOPLE HAVE BEEN RUNNING FROM",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a read of the room — half the depth, and it does not stay with you",
-        "surge": "double it; feeling the truth of a whole history means CARRYING some of it"
-      },
-      "bounds": [
-        {
-          "text": "it reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere",
-          "class": "hard"
-        },
-        {
-          "text": "THE GUARDED CAN CLOSE",
-          "class": "soft"
-        },
-        {
-          "text": "what you read of a history, you carry some of",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social/investigation/intellectual action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 15. Ranks: rank 2 extends timeReach; rank 3 deepens perceptionDepth. Limit: it reads What IS Felt, not what is True — a person sincerely wrong reads sincere."
-    },
-    {
-      "id": "the_made_elegy",
-      "name": "The Made Elegy",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.4,
-        "destruction_creation": 0.1
-      },
-      "effectTags": [
-        "art",
-        "grief",
-        "made"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She made the grief into something with edges you could touch.",
-      "description": "Give feeling a form — make something that holds emotion correctly, so it can persist, be shared, or returned to.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "bind",
-        "make"
-      ],
-      "challengeTypes": [
-        "art",
-        "social",
-        "craft"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Feeling Held",
-          "grants": "Make something that holds a feeling correctly — a song, an object, a gesture — so the feeling persists in it and can be shared or returned to.",
-          "cannot": "Anything rank 2 adds — bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it; THE FEELING MUST BE TRUE to bind.",
-          "functions": [
-            "make"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Acting Elegy",
-          "grants": "Bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it.",
-          "cannot": "Anything rank 3 adds — make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone; THE FEELING MUST BE TRUE to bind.",
-          "functions": [
-            "make",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Lasting Work",
-          "grants": "Make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone.",
-          "cannot": "Nothing further; this is the craft's ceiling; THE FEELING MUST BE TRUE to bind; and it still costs what it costs: it carries the feeling TO EVERYONE, including those who did not ask.",
-          "functions": [
-            "make",
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "construct",
-      "operativeAxis": [
-        "persistence",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 5,
-        "duration": 168,
-        "scope": 2,
-        "damageType": "feeling"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "add",
-          "axis": "special",
-          "delta": "BIND A FEELING INTO A MADE THING SO IT ACTS — the song that makes people FEEL what it carries, the totem that steadies",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "make something that carries feeling AT SCALE — art that moves a city, A RITUAL THAT HOLDS A PEOPLE'S GRIEF",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a small keepsake — half the persistence, and it holds one feeling plainly",
-        "surge": "double it; a made thing that carries feeling carries it TO EVERYONE, including those who did not ask"
-      },
-      "bounds": [
-        {
-          "text": "THE FEELING MUST BE TRUE to bind — a made sentiment does not hold",
-          "class": "hard"
-        },
-        {
-          "text": "it carries the feeling TO EVERYONE, including those who did not ask",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A art/social/craft action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 adds to special; rank 3 extends scope. Limit: the Feeling Must BE True to bind — a made sentiment does not hold."
-    },
-    {
-      "id": "the_feeling_road",
-      "name": "The Feeling Road",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.3
-      },
-      "effectTags": [
-        "navigation",
-        "feeling",
-        "track"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She followed the grief the way others follow a road.",
-      "description": "Navigate by feeling — find a person, a place, or a source by following the emotional resonance it leaves.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "reveal",
-        "track",
-        "travel"
-      ],
-      "challengeTypes": [
-        "navigation",
-        "investigation",
-        "social"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Resonance Trail",
-          "grants": "Navigate toward a feeling — find a person, a place, or a source by following the emotional trace they leave across a space.",
-          "cannot": "Anything rank 2 adds — travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it; it follows FEELING.",
-          "functions": [
-            "reveal",
-            "track"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Feeling Landmark",
-          "grants": "Travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it.",
-          "cannot": "Anything rank 3 adds — follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community; it follows FEELING.",
-          "functions": [
-            "reveal",
-            "track",
-            "travel"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Long Trail",
-          "grants": "Follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community.",
-          "cannot": "Nothing further; this is the craft's ceiling; it follows FEELING; and it still costs what it costs: arriving at the source of a great feeling means ARRIVING AT ITS SOURCE.",
-          "functions": [
-            "reveal",
-            "track",
-            "travel"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "reposition",
-      "operativeAxis": [
-        "navigation",
-        "range"
-      ],
-      "mechanic": {
-        "range": 50,
-        "push": 0,
-        "magnitude": 4,
-        "duration": 4
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "range",
-          "delta": "travel toward a POWERFUL FEELING in a region as if it were a BEACON — grief, joy, terror — and find what is creating it",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "range",
-          "delta": "follow a feeling's trace ACROSS ANY DISTANCE — track a person BY THEIR EMOTIONAL SIGNATURE",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "follow the trace — half the range, and it fades behind you",
-        "surge": "double it; following a feeling to its source means ARRIVING AT ITS SOURCE"
-      },
-      "bounds": [
-        {
-          "text": "it follows FEELING — a person who feels nothing about where they went leaves no road",
-          "class": "hard"
-        },
-        {
-          "text": "arriving at the source of a great feeling means ARRIVING AT ITS SOURCE",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A navigation/investigation/social action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 4 hours. Range is 50. Ranks: rank 2 extends range; rank 3 extends range. Limit: it follows Feeling — a person who feels nothing about where they went leaves no road."
-    },
-    {
-      "id": "the_wellspring",
-      "name": "The Wellspring",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.3,
-        "death_life": 0.1
-      },
-      "effectTags": [
-        "endurance",
-        "feeling",
-        "depth"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She was exhausted and the feeling was still there. The feeling was enough.",
-      "description": "Sustain through emotional depth — what others run out of, you find more of in the next wave.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "empower",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "hardship",
-        "social"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "More in the Depth",
-          "grants": "Sustain through the depth of feeling — where others run dry, you find the next wave of grief or joy, and it holds you.",
-          "cannot": "Anything rank 2 adds — your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone; it sustains by FEELING, not by easing.",
-          "functions": [
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Carried Weight",
-          "grants": "Your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone. And they are braver for it: a person who is not carrying it alone attempts things they would not have attempted, and does them better.",
-          "cannot": "Anything rank 3 adds — the depth sustains the party through the hardest stretch — not comfort, depth; it sustains by FEELING, not by easing.",
-          "functions": [
-            "sustain",
-            "empower"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Wellspring Holds",
-          "grants": "The depth sustains the party through the hardest stretch — not comfort, depth; not peace, feeling so genuine it holds people together until it's over.",
-          "cannot": "Nothing further; this is the craft's ceiling; it sustains by FEELING, not by easing; and it still costs what it costs: carrying some of it with them MEANS CARRYING IT.",
-          "functions": [
-            "sustain",
-            "empower"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "bolster",
-      "operativeAxis": [
-        "upkeepRelief",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 24,
-        "targets": 1
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "your emotional depth SUSTAINS OTHERS — not by removing the hardship but BY CARRYING SOME OF IT WITH THEM",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "the depth sustains the PARTY through the hardest stretch — 'not comfort, DEPTH; not peace, feeling so genuine it holds'",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "draw a little — half the relief, and it costs you nothing",
-        "surge": "double it; CARRYING SOME OF IT WITH THEM means carrying it"
-      },
-      "bounds": [
-        {
-          "text": "it sustains by FEELING, not by easing — a person who wants comfort gets depth instead",
-          "class": "hard"
-        },
-        {
-          "text": "carrying some of it with them MEANS CARRYING IT",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A endurance/hardship/social action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: it sustains by Feeling, not by easing — a person who wants comfort gets depth instead."
-    },
-    {
-      "id": "the_correct_protocol",
-      "name": "The Correct Protocol",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.4
-      },
-      "effectTags": [
-        "diagnosis",
-        "treatment",
-        "precision"
-      ],
-      "harmRung": "none",
-      "narrationHints": "He knew exactly what was wrong. The treatment followed.",
-      "description": "Heal through precise diagnosis and correct procedure — the methodical application of what is known to work.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "heal",
-        "mend",
-        "restore",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "medical",
-        "craft",
-        "intellectual"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Correct Diagnosis",
-          "grants": "Diagnose and treat through methodical application of what is known to work — no guesswork, no comfort, the correct intervention.",
-          "cannot": "Anything rank 2 adds — restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out; NO GUESSWORK, NO COMFORT.",
-          "functions": [
-            "reveal",
-            "heal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "By Protocol",
-          "grants": "Restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out.",
-          "cannot": "Anything rank 3 adds — restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left; NO GUESSWORK, NO COMFORT.",
-          "functions": [
-            "reveal",
-            "heal",
-            "mend",
-            "restore"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Root Cause",
-          "grants": "Restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left.",
-          "cannot": "Nothing further; this is the craft's ceiling; NO GUESSWORK, NO COMFORT.",
-          "functions": [
-            "reveal",
-            "heal",
-            "mend",
-            "restore"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "healing",
-      "operativeAxis": [
-        "precision",
-        "completeness"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 2,
-          "d": 4
-        },
-        "plus": 2,
-        "note": "A TWELFTH THEORY OF MEDICINE — PROTOCOL: 'no guesswork, no comfort, THE CORRECT INTERVENTION.'"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "completeness",
-          "delta": "restore THROUGH PROPER SEQUENCE — the correct actions IN THE CORRECT ORDER return the body or system to function",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: restore completely by identifying THE UNDERLYING CAUSE and applying THE FULL CHAIN of correct interventions",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "the correct minimum — half the restoration, and nothing is wasted",
-        "surge": "double it; the correct intervention is CORRECT, not KIND"
-      },
-      "bounds": [
-        {
-          "text": "NO GUESSWORK, NO COMFORT — it does not soothe and does not pretend to",
-          "class": "hard"
-        },
-        {
-          "text": "it requires that the correct protocol IS KNOWN — a novel affliction defeats it",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A medical/craft/intellectual action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens completeness; rank 3 adds to special. Limit: nO Guesswork, NO Comfort — it does not soothe and does not pretend to."
-    },
-    {
-      "id": "the_proved_position",
-      "name": "The Proved Position",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.4
-      },
-      "effectTags": [
-        "logic",
-        "proof",
-        "protection"
-      ],
-      "harmRung": "none",
-      "narrationHints": "He had proved it. They could attack him all they liked. The proof still stood.",
-      "description": "Protect through irrefutable argument — attacks on a proved position must answer the proof before they can land.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "bind",
-        "shield",
-        "ward"
-      ],
-      "challengeTypes": [
-        "social",
-        "intellectual",
-        "defense"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Proved Ground",
-          "grants": "Establish a position so logically secure that attacks — social, rhetorical, physical — must first answer the proof before they have any purchase.",
-          "cannot": "Anything rank 2 adds — extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial; IT WARDS WHAT MUST ANSWER REASON.",
-          "functions": [
-            "shield"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Extended Proof",
-          "grants": "Extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial.",
-          "cannot": "Anything rank 3 adds — a proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established; IT WARDS WHAT MUST ANSWER REASON.",
-          "functions": [
-            "shield",
-            "ward"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Self-Maintaining Proof",
-          "grants": "A proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established.",
-          "cannot": "Nothing further; this is the craft's ceiling; IT WARDS WHAT MUST ANSWER REASON.",
-          "functions": [
-            "shield",
-            "ward",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "guard",
-      "operativeAxis": [
-        "logicalGround",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 5,
-        "soak": 4,
-        "soakRank": 2,
-        "type": "rhetorical",
-        "duration": 8,
-        "note": "A SIXTEENTH DEFENSIVE LOGIC — PROVED: a TYPED guard (rhetorical/social attacks) whose soak is the soundness of your position. 'Attacks must first ANSWER THE PROOF.' Transparent to a blade."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "extend the proved position to cover A SPACE OR A GROUP — a claim so airtight it FUNCTIONS AS A WARD",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "a proved position holds AT SCALE — at the level of INSTITUTIONS, TREATIES, OR LAWS",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "state your ground — half the protection, and it is easy to hold",
-        "surge": "double it; a position proved at the scale of laws is a position you must keep defending"
-      },
-      "bounds": [
-        {
-          "text": "IT WARDS WHAT MUST ANSWER REASON — a fist does not answer the proof",
-          "class": "hard"
-        },
-        {
-          "text": "the position must ACTUALLY BE SOUND — a proved-wrong position wards nothing",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A social/intellectual/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: iT Wards What Must Answer Reason — a fist does not answer the proof."
-    },
-    {
-      "id": "the_built_system",
-      "name": "The Built System",
-      "levelReq": 3,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.5,
-        "chaos_order": 0.2
-      },
-      "effectTags": [
-        "system",
-        "logic",
-        "construct"
-      ],
-      "harmRung": "none",
-      "narrationHints": "He didn't build a thing. He built a rule, and the rule built things.",
-      "description": "Build a logical structure that operates in the world — a system whose internal logic sustains it without constant maintenance.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "bind",
-        "make",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "intellectual",
-        "leadership",
-        "craft"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Working Rule",
-          "grants": "Design a system — legal, social, procedural — that functions because the logic it runs on is sound.",
-          "cannot": "Anything rank 2 adds — build something that maintains itself through its internal logic — not enforced, not reminded, running because the reasoning it embodies is correct; IT RUNS ON ITS LOGIC.",
-          "functions": [
-            "make"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Self-Regulating",
-          "grants": "Build something that maintains itself through its internal logic — not enforced, not reminded, running because the reasoning it embodies is correct.",
-          "cannot": "Anything rank 3 adds — construct a system so logically coherent it operates at scale without you — the laws, institutions, or mechanisms that run because the reasoning they embody is right; IT RUNS ON ITS LOGIC.",
-          "functions": [
-            "make",
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Lasting Structure",
-          "grants": "Construct a system so logically coherent it operates at scale without you — the laws, institutions, or mechanisms that run because the reasoning they embody is right.",
-          "cannot": "Nothing further; this is the craft's ceiling; IT RUNS ON ITS LOGIC; and it still costs what it costs: a system that runs without you RUNS WITHOUT YOU, including when it should stop.",
-          "functions": [
-            "make",
-            "sustain",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "construct",
-      "operativeAxis": [
-        "coherence",
-        "scope",
-        "autonomy"
-      ],
-      "mechanic": {
-        "magnitude": 6,
-        "duration": 8760,
-        "scope": 3
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "add",
-          "axis": "autonomy",
-          "delta": "build something that MAINTAINS ITSELF THROUGH ITS INTERNAL LOGIC — not enforced, not reminded, RUNNING BECAUSE THE LOGIC RUNS",
-          "from": "r2 grants — a NINTH autonomy-increment craft"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "construct a system so LOGICALLY COHERENT it operates AT SCALE WITHOUT YOU — laws, institutions, mechanisms",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a small sound system — half the scope, and you can revise it",
-        "surge": "double it; a system that runs without you RUNS WITHOUT YOU"
-      },
-      "bounds": [
-        {
-          "text": "IT RUNS ON ITS LOGIC — a system whose logic is unsound fails exactly where the flaw is",
-          "class": "hard"
-        },
-        {
-          "text": "a system that runs without you RUNS WITHOUT YOU, including when it should stop",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A intellectual/leadership/craft action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 adds to autonomy; rank 3 extends scope. Limit: iT Runs ON Its Logic — a system whose logic is unsound fails exactly where the flaw is."
-    },
-    {
-      "id": "the_derived_route",
-      "name": "The Derived Route",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.3
-      },
-      "effectTags": [
-        "navigation",
-        "reasoning",
-        "inference"
-      ],
-      "harmRung": "none",
-      "narrationHints": "He hadn't walked it. He had worked it out.",
-      "description": "Navigate through pure reasoning — derive the correct path from what you know before taking a step.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "foresee",
-        "move",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "navigation",
-        "intellectual",
-        "tactical"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Reasoned Path",
-          "grants": "Navigate any space by reasoning about it — what must be true about the layout, the route, the exits — without needing to see it first.",
-          "cannot": "Anything rank 2 adds — derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits; it needs SOUND PREMISES.",
-          "functions": [
-            "reveal",
-            "move"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Inferred Route",
-          "grants": "Derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits.",
-          "cannot": "Anything rank 3 adds — navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires; it needs SOUND PREMISES.",
-          "functions": [
-            "reveal",
-            "move",
-            "foresee"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Necessary Route",
-          "grants": "Navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires.",
-          "cannot": "Nothing further; this is the craft's ceiling; it needs SOUND PREMISES.",
-          "functions": [
-            "reveal",
-            "move",
-            "foresee"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "reposition",
-      "operativeAxis": [
-        "navigation",
-        "range"
-      ],
-      "mechanic": {
-        "range": 12,
-        "push": 0,
-        "magnitude": 4,
-        "duration": 3
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "navigation",
-          "delta": "DERIVE the correct path through UNKNOWN territory BY INFERENCE — from what you know about the type of space",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: navigate to ANY CONCLUSION THAT FOLLOWS NECESSARILY from known premises — the route that MUST exist, the exit that MUST be there",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "reason it out — half the certainty, and it costs nothing",
-        "surge": "double it; a route that MUST exist by inference still has to actually be there"
-      },
-      "bounds": [
-        {
-          "text": "it needs SOUND PREMISES — reasoning from a wrong assumption arrives confidently at nowhere",
-          "class": "hard"
-        },
-        {
-          "text": "a route that MUST exist BY INFERENCE still has to actually BE THERE",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A navigation/intellectual/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it needs Sound Premises — reasoning from a wrong assumption arrives confidently at nowhere."
-    },
-    {
-      "id": "the_axiom_holds",
-      "name": "The Axiom Holds",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.3
-      },
-      "effectTags": [
-        "certainty",
-        "endurance",
-        "logic"
-      ],
-      "harmRung": "none",
-      "narrationHints": "The certainty was enough. The axiom held and therefore so did he.",
-      "description": "Sustain through the certainty of what you know — fear, pain, and doubt don't reach the level of the axioms.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "resist",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "hardship",
-        "intellectual"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Axiomatic Ground",
-          "grants": "Hold function under pressure through the certainty of what you know — fear, pain, and doubt operate below the level the axioms hold.",
-          "cannot": "Anything rank 2 adds — sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them; it requires SOMETHING ACTUALLY TRUE to stand on.",
-          "functions": [
-            "resist"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Correct Sequence",
-          "grants": "Sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them.",
-          "cannot": "Anything rank 3 adds — as long as what you know is true remains true, you remain functional around it; it requires SOMETHING ACTUALLY TRUE to stand on.",
-          "functions": [
-            "resist",
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Axiom Holds",
-          "grants": "As long as what you know is true remains true, you remain functional around it. The axiom is the ground and the ground does not give.",
-          "cannot": "Nothing further; this is the craft's ceiling; it requires SOMETHING ACTUALLY TRUE to stand on.",
-          "functions": [
-            "resist",
-            "sustain"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "bolster",
-      "operativeAxis": [
-        "upkeepRelief",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 24
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "upkeepRelief",
-          "delta": "sustain through PURE LOGICAL DISCIPLINE — the sequence of correct actions that keeps you going when feeling would not",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: as long as WHAT YOU KNOW IS TRUE REMAINS TRUE, you remain functional around it — the axiom is the ground and the ground holds",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "hold the line of reasoning — half the relief, and it costs nothing",
-        "surge": "double it; an axiom that turns out to be FALSE takes the ground with it"
-      },
-      "bounds": [
-        {
-          "text": "it requires SOMETHING ACTUALLY TRUE to stand on",
-          "class": "hard"
-        },
-        {
-          "text": "AN AXIOM THAT TURNS OUT TO BE FALSE TAKES THE GROUND WITH IT",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A endurance/hardship/intellectual action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it requires Something Actually True to stand on."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_inescapable_conclusion",
-      "name": "The Inescapable Conclusion",
-      "levelReq": 4,
-      "energyCost": 11,
-      "powerSystem": "reach_emotional_logical",
-      "tradition": "syllogist",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.6
-      },
-      "functions": [
-        "bind",
-        "reveal"
-      ],
-      "narrationHints": "You lay the premises down one at a time, each one they must agree to, until they arrive — of their own reasoning — at a conclusion they would have run from if they'd seen it coming.",
-      "description": "The Syllogist art of the inescapable argument — a chain of reasoning so sound that agreeing to the start compels agreeing to the end, binding a mind by its own logic. Not deception; the opposite. The trap is that it is TRUE.",
-      "notFor": "It binds only the reasonable — a mind that will simply refuse a true conclusion cannot be caught by one. And a true argument binds you too; you cannot walk someone to a conclusion you are unwilling to stand on yourself.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Inescapable Conclusion",
-          "grants": "Bind a reasoning mind to a conclusion by an argument it cannot honestly escape.",
-          "cannot": "It fails against those who refuse reason itself, it binds its wielder to the same truth, and a conclusion someone was walked into by force of logic can curdle into resentment of the one who walked them.",
-          "functions": [
-            "bind",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 2,
-          "name": "The Standing Proof",
-          "grants": "Walk a whole body of reasoning minds to the same conclusion at once — a council, a court, a school — and the binding holds against later private doubt, because each of them watched the others agree. The chain can be built across days now rather than one exchange.",
-          "cannot": "It still fails entirely against those who will simply refuse a true conclusion, and a group holds more of them than a person does. It binds you to the same truth, publicly and on the record. And a conclusion a body was walked into together curdles together — the Syllogists have begun more than one schism this way.",
-          "functions": [
-            "bind",
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "incapacitating"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "SOCIAL",
-        "INVESTIGATE"
-      ],
-      "harmRung": "incapacitating",
-      "shape": "hobble",
-      "operativeAxis": [
-        "bindStrength",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 7,
-        "duration": 6,
-        "targets": 1,
-        "damageType": "reason",
-        "note": "T-IV, incapacitating"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "WALK A WHOLE BODY OF REASONING MINDS to the same conclusion AT ONCE — a council, a court, a school",
-          "from": "r2 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "make the argument — half the binding, and they can still walk away thinking",
-        "surge": "double it; IT STILL FAILS ENTIRELY against those who will simply REFUSE"
-      },
-      "bounds": [
-        {
-          "text": "IT FAILS AGAINST THOSE WHO REFUSE REASON ITSELF",
-          "class": "hard"
-        },
-        {
-          "text": "it binds A REASONING MIND — the unreasoning are outside it entirely",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A social/investigate action that weakens or restricts a target. Its strength is rated 7 out of 10 It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets. Limit: iT Fails Against Those Who Refuse Reason Itself."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_proof",
-      "name": "The Proof",
-      "levelReq": 5,
-      "energyCost": 13,
-      "powerSystem": "reach_emotional_logical",
-      "tradition": "syllogist",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.9
-      },
-      "functions": [
-        "reveal"
-      ],
-      "narrationHints": "You assemble it whole — the complete proof, every step airtight, of a thing that is simply TRUE — and lay it before the world, and the world has no honest answer but to accept it.",
-      "description": "The Syllogist capstone — a complete, irrefutable proof of a true thing, assembled and offered so soundly that no honest mind can deny it. The deepest gift of the logical kind, and the loneliest: to be right past all argument is to be right, often, alone.",
-      "notFor": "One proof, once, at enormous cost — it can only prove what is actually true; there is no proof of a falsehood, only clever forgery that the next sound mind unpicks. And a proof, once offered, is loose in the world; you cannot un-prove a thing.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Proof",
-          "grants": "Assemble and offer a complete, irrefutable proof of a true thing.",
-          "cannot": "It proves only the true, it costs nearly all you have, and to be irrefutably right is a lonely country — the proof convinces, but conviction is not love.",
-          "functions": [
-            "reveal"
-          ],
-          "harmRung": "none",
-          "gains": "broaden"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "INVESTIGATE",
-        "SOCIAL"
-      ],
-      "harmRung": "none",
-      "shape": "setup",
-      "operativeAxis": [
-        "completeness",
-        "penetration"
-      ],
-      "mechanic": {
-        "magnitude": 9,
-        "duration": 2,
-        "damageType": "reason"
-      },
-      "rankDeltas": [
-        {
-          "rank": 1,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: ASSEMBLE AND OFFER A COMPLETE, IRREFUTABLE PROOF of a true thing. The capstone is a KIND (irrefutability itself) at near-total cost.",
-          "from": "r1 grants — single-rank capstone"
-        }
-      ],
-      "intensity": {
-        "conserve": "REFUSED — a partial proof is an argument, and arguments are what the Cathedral survives.",
-        "surge": "REFUSED — it already costs nearly all you have."
-      },
-      "bounds": [
-        {
-          "text": "IT PROVES ONLY THE TRUE",
-          "class": "hard"
-        },
-        {
-          "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 9 out of 10, and lasts for about 2 hours Limit: iT Proves Only The True."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_shared_grief",
-      "name": "The Shared Grief",
-      "levelReq": 3,
-      "energyCost": 7,
-      "powerSystem": "reach_emotional_logical",
-      "tradition": "threnodist",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.4,
-        "death_life": 0.1
-      },
-      "functions": [
-        "empower",
-        "reveal"
-      ],
-      "narrationHints": "You take up the lament and others find their own grief given shape in it — not lessened, but no longer carried alone, the weight spread across every voice that joins.",
-      "description": "The Threnodist art of the shared lament — a song of grief that lets many carry one sorrow together, so no single heart bears the whole. The mourning-singers' first true gift.",
-      "notFor": "It shares grief, it does not erase it — a sorrow sung together is still a sorrow. And the one who leads the lament carries the gathering-point; you hold the grief of all who join while you sing.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Shared Grief",
-          "grants": "Lead a shared lament that spreads one grief across many, so none carries it alone.",
-          "cannot": "It cannot remove grief, only distribute its weight; the singer bears the gathering of it; and a grief shared is a grief made real to everyone who joins the song.",
-          "functions": [
-            "empower"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Named Sorrow",
-          "grants": "The lament finds the true shape of what is mourned. Singing it, you perceive what the grief is ACTUALLY for — the loss beneath the stated one — and those who join hear it named as well, often for the first time.",
-          "cannot": "Naming is not mending; a sorrow correctly named can wound worse before it eases. The singer cannot choose what surfaces, and what the lament names in company cannot be unnamed.",
-          "functions": [
-            "empower",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Long Lament",
-          "grants": "Hold a lament across days rather than a night, and across a settlement rather than a room — a whole community may carry one loss together until it is bearable. The gathering-point can be handed to another singer, so the lament outlasts any one voice.",
-          "cannot": "You hold the gathering while you hold the lament, and days of it mark the singer; handing the point on requires a singer able to take it; and a grief carried by everyone becomes part of what that place IS — the GM records it in the world, not the character.",
-          "functions": [
-            "empower",
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "SOCIAL"
-      ],
-      "harmRung": "none",
-      "shape": "bolster",
-      "operativeAxis": [
-        "distribution",
-        "scope",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 6,
-        "duration": 12,
-        "scope": 3
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "distribution",
-          "delta": "the lament FINDS THE TRUE SHAPE OF WHAT IS MOURNED — singing it, you perceive what the grief is ACTUALLY for",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope+duration",
-          "delta": "hold a lament ACROSS DAYS and ACROSS A SETTLEMENT — a whole community mourning as one",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a short lament — half the distribution, and it asks little of the gathering",
-        "surge": "double it; YOU HOLD THE GATHERING WHILE YOU HOLD THE LAMENT"
-      },
-      "bounds": [
-        {
-          "text": "IT CANNOT REMOVE GRIEF, ONLY DISTRIBUTE ITS WEIGHT",
-          "class": "hard"
-        },
-        {
-          "text": "NAMING IS NOT MENDING — a sorrow correctly named CAN WOUND",
-          "class": "hard"
-        },
-        {
-          "text": "you hold the gathering while you hold the lament, and DAYS ARE DAYS",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social action that strengthens someone. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens distribution; rank 3 extends scope+duration. Limit: iT Cannot Remove Grief, Only Distribute Its Weight."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_names_of_the_lost",
-      "name": "The Names of the Lost",
-      "levelReq": 4,
-      "energyCost": 11,
-      "powerSystem": "reach_emotional_logical",
-      "tradition": "threnodist",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.6,
-        "death_life": 0.2
-      },
-      "functions": [
-        "empower",
-        "reveal"
-      ],
-      "narrationHints": "You sing the names — all of them, every one lost — and for the length of the song they are not gone, exactly; they are HELD, present in the keeping of their names.",
-      "description": "The Threnodist art of the naming-song — a lament that holds the lost present through the keeping of their names, so that for a while the dead are not absent but attended. The deep work of those who refuse to let go be the same as forget.",
-      "notFor": "It holds the lost in memory, it does not return them — a name kept is not a life restored. And to sing all the names is to carry all the losses at once, for the length of the song and after.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Names of the Lost",
-          "grants": "Sing the names of the lost, holding them present in memory for the length of the lament.",
-          "cannot": "It cannot restore the dead, only attend them; it lays every named loss on the singer at once; and the song ends, and they are gone again, and you chose to feel that twice.",
-          "functions": [
-            "empower",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Kept Names",
-          "grants": "The names keep past the lament. Sung over a place — a barrow, a battlefield, a hall — the attending holds without you, and any who come after feel the lost attended there. The song can hold names you were told rather than only names you carried yourself. Those who hear the names are strengthened by the attending — steadied, clearer about what they are doing and why, and harder to move off it.",
-          "cannot": "It still does not return them; a name kept is not a life restored. A place that holds its lost is a place that does not move on, which is not always mercy. And a name taken from another's telling is held on trust — sing one wrong and the Threnodists count it a wound.",
-          "functions": [
-            "empower",
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "SOCIAL"
-      ],
-      "harmRung": "none",
-      "shape": "bolster",
-      "operativeAxis": [
-        "attendance",
-        "persistence"
-      ],
-      "mechanic": {
-        "magnitude": 7,
-        "duration": 720,
-        "scope": 3
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "add",
-          "axis": "persistence",
-          "delta": "THE NAMES KEEP PAST THE LAMENT — sung over a place (a barrow, a battlefield, a hall), THE ATTENDING HOLDS WITHOUT YOU",
-          "from": "r2 grants — an EIGHTH autonomy-increment craft"
-        }
-      ],
-      "intensity": {
-        "conserve": "sing a few names — half the duration, and the lament closes cleanly",
-        "surge": "double it; keeping names past the lament means the place KEEPS THEM"
-      },
-      "bounds": [
-        {
-          "text": "IT CANNOT RESTORE THE DEAD, ONLY ATTEND THEM",
-          "class": "hard"
-        },
-        {
-          "text": "A NAME KEPT IS NOT A LIFE RETURNED",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A social action that strengthens someone. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 30 days Ranks: rank 2 adds to persistence. Limit: iT Cannot Restore The Dead, Only Attend Them."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_last_lament",
-      "name": "The Last Lament",
-      "levelReq": 5,
-      "energyCost": 13,
-      "powerSystem": "reach_emotional_logical",
-      "tradition": "threnodist",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.9,
-        "death_life": 0.3
-      },
-      "functions": [
-        "empower",
-        "restore"
-      ],
-      "narrationHints": "You sing the whole of it — every grief you have ever held, gathered into one lament so complete that those who hear it are, at the end, somehow lighter, having grieved fully at last the thing they never finished grieving.",
-      "description": "The Threnodist capstone — the complete lament, all grief given full voice at once, that lets those who hear it finally finish a mourning they could not finish alone. The greatest and costliest gift of the singers: to be grieved completely is to be freed.",
-      "notFor": "One lament, once, at enormous cost — it lets others complete a grief, but the singer must carry the whole of it to give it, and a grief fully sung is fully felt. It cannot make loss not have happened; it can only let it be, at last, mourned.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Last Lament",
-          "grants": "Sing a complete lament that lets all who hear finish a grief they could not finish alone.",
-          "cannot": "It costs nearly all you have, it makes the singer feel every grief entire, and it does not undo loss — it only, mercifully, completes the mourning of it.",
-          "functions": [
-            "empower",
-            "restore"
-          ],
-          "harmRung": "none",
-          "gains": "broaden"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "SOCIAL"
-      ],
-      "harmRung": "none",
-      "shape": "bolster",
-      "operativeAxis": [
-        "completion",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 9,
-        "duration": 8,
-        "scope": 4
-      },
-      "rankDeltas": [
-        {
-          "rank": 1,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: sing a COMPLETE LAMENT that lets ALL WHO HEAR FINISH A GRIEF THEY COULD NOT FINISH ALONE. The capstone is a KIND (completing what could not be completed) at near-total cost — AND THE SINGER FEELS EVERY GRIEF IN IT.",
-          "from": "r1 grants — single-rank capstone"
-        }
-      ],
-      "intensity": {
-        "conserve": "REFUSED — a half-sung lament leaves a grief half-finished, which is worse than not beginning.",
-        "surge": "REFUSED — the singer already feels every grief in it."
-      },
-      "bounds": [
-        {
-          "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
-          "class": "hard"
-        },
-        {
-          "text": "THE SINGER FEELS EVERY GRIEF IN IT",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social action that strengthens someone. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: iT Costs Nearly All You Have."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_grief_that_stops",
-      "name": "The Grief That Stops",
-      "levelReq": 5,
-      "energyCost": 13,
-      "powerSystem": "reach_emotional_logical",
-      "tradition": "threnodist",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": -0.8
-      },
-      "functions": [
-        "bind"
-      ],
-      "narrationHints": "They set it down inside them the way you would set down a stone. The heart is not built to carry that.",
-      "description": "⚠️ THE HEART-TUNERS' CRAFT. Pathos SHARES a feeling; this INSTALLS one at a weight no body holds. Not sorrow — sorrow's full weight, all at once, without the years that usually come with it. Some hearts stop. Most do not, and those people are changed.",
-      "notFor": "A heart with nothing to grieve — it uses THEIR losses, not invented ones, so someone who has lost nothing is nearly immune. And it CANNOT BE AIMED at an outcome: you set the weight down, the body decides.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Grief That Stops",
-          "grants": "Set the full weight of their own losses on them at once. They are overwhelmed and afterward not the same.",
-          "cannot": "Inventing a grief. Anyone who has lost nothing.",
-          "functions": [
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 2,
-          "name": "All Of It",
-          "grants": "Set every loss down together with nothing held back. A heart sometimes stops. You will not know beforehand which.",
-          "cannot": "Knowing beforehand. Taking it back once set.",
-          "functions": [
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "lethal"
-        }
-      ],
-      "challengeTypes": [
-        "SOCIAL"
-      ],
-      "harmRung": "lethal",
-      "nativeOrCombination": "native",
-      "shape": "hobble",
-      "operativeAxis": [
-        "weight",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 8,
-        "duration": 6,
-        "targets": 1,
-        "damageType": "grief",
-        "note": "⚠️ A HOBBLE WITH A LETHAL TAIL — the kill is a possibility, never a roll you aim. Resolve r2 as incapacitation plus a small independent chance of a stopped heart, weighted by how much the target has actually lost. NOT a FIGHT craft: it does not fight."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "weight",
-          "delta": "SPECIAL: every loss at once, nothing held back — a heart sometimes stops",
-          "from": "r2 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a measure of it — they weep and they stand",
-        "surge": "all of it; YOU WILL NOT KNOW BEFOREHAND WHICH"
-      },
-      "bounds": [
-        {
-          "text": "IT USES THEIR OWN LOSSES — someone who has lost nothing is nearly immune",
-          "class": "hard"
-        },
-        {
-          "text": "IT CANNOT BE AIMED AT AN OUTCOME — you set the weight down, the body decides",
-          "class": "hard"
-        },
-        {
-          "text": "THE ONES WHO LIVE ARE CHANGED, and they know who did it",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social contest against the target's composure, drawing only on losses they have actually suffered — a target who has lost nothing gets a large bonus to resist. On a win they are incapacitated for several minutes and carry a lasting penalty to composure rolls afterward. At rank 2 the GM additionally rolls a small independent chance that the target's heart stops, scaled to how much they have genuinely lost. You cannot aim for that outcome and you cannot call it off once cast."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_closing_argument",
-      "name": "The Closing Argument",
-      "levelReq": 5,
-      "energyCost": 12,
-      "powerSystem": "reach_emotional_logical",
-      "tradition": "syllogist",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.8
-      },
-      "functions": [
-        "reveal",
-        "bind"
-      ],
-      "narrationHints": "Every step is one they agreed to. That is what makes the last step impossible to refuse.",
-      "description": "⚠️ THE CORNERS' CRAFT. A Syllogist walks a person, honestly, from premises they already hold to a conclusion that ends them — that the work was worthless, that they cannot be forgiven, that the only consistent act remaining is the one they will now perform. NOTHING IN IT IS FALSE. That is the whole horror.",
-      "notFor": "Anyone who will not reason — the unreasonable are genuinely immune and the Corners resent it. And it CANNOT USE A FALSE PREMISE: the argument must be sound or it does nothing at all.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Closing Argument",
-          "grants": "Walk them, honestly, to a conclusion that unmakes their footing. They cannot act against it while it holds.",
-          "cannot": "A false premise. Anyone who refuses to follow.",
-          "functions": [
-            "reveal",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 2,
-          "name": "The Only Consistent Act",
-          "grants": "Reach the conclusion where the consistent act is a final one — and STOP TALKING. What they do next is theirs.",
-          "cannot": "Making them. It is their hand and both of you know it.",
-          "functions": [
-            "reveal",
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "lethal"
-        }
-      ],
-      "challengeTypes": [
-        "SOCIAL",
-        "PUZZLE"
-      ],
-      "harmRung": "lethal",
-      "nativeOrCombination": "native",
-      "shape": "hobble",
-      "operativeAxis": [
-        "soundness",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 8,
-        "duration": 48,
-        "targets": 1,
-        "damageType": "truth",
-        "note": "⚠️ THE ONLY KILL IN THE CATALOG THE WIELDER DOES NOT PERFORM. Resolve as a hobble; the lethal outcome is the target's OWN act, gated on the argument being sound and the target being a reasoner. The engine should never render it as damage dealt."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "soundness",
-          "delta": "SPECIAL: the conclusion where the only consistent act is final — and you stop talking",
-          "from": "r2 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "walk them partway — shaken, and they can turn back",
-        "surge": "reach the end; IT IS THEIR HAND, AND BOTH OF YOU KNOW IT"
-      },
-      "bounds": [
-        {
-          "text": "IT CANNOT USE A FALSE PREMISE — an unsound argument does nothing",
-          "class": "hard"
-        },
-        {
-          "text": "THE UNREASONABLE ARE IMMUNE",
-          "class": "hard"
-        },
-        {
-          "text": "YOU DO NOT PERFORM IT. IT IS THEIR HAND, AND BOTH OF YOU KNOW IT",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social contest against the target's resolve. You must be able to state a sound argument from something they already believe — the GM judges soundness, and an unsound argument fails automatically. On a win they cannot act against that conclusion for the rest of the scene. At rank 2, if the conclusion is that a final act is the only consistent one, the GM decides whether the target performs it; you never roll for that part. The target may disengage from the conversation at any time, and anyone who refuses to reason is immune outright."
+     "rank": 3,
+     "name": "The Deep Chord",
+     "grants": "Feeling at the scale of peoples — turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.",
+     "cannot": "The wielder drifts emotion-hot — feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling.",
+     "functions": [
+      "reveal",
+      "heal",
+      "empower",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
     }
-  ],
-  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "tradition": "threnodist",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "resonance",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "MOVE A CROWD by feeling-with-them; CARRY A PERSON THROUGH AN EMOTION TOO BIG TO BEAR ALONE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "FEELING AT THE SCALE OF PEOPLES — turn a room, a mob, a mourning-crowd by the TRUTH of shared feeling",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "share a little — half the effect, and you take on less",
+    "surge": "double it; THE WIELDER DRIFTS EMOTION-HOT, feeling everything, all the time"
+   },
+   "bounds": [
+    {
+     "text": "READS AND SHARES readily; SETTING a feeling that was not there is far harder, and the guarded can close",
+     "class": "soft"
+    },
+    {
+     "text": "YOU TAKE ON WHAT YOU MOVE — the cost is real",
+     "class": "cost"
+    },
+    {
+     "text": "A WILL SET AGAINST YOU IS SET AGAINST YOU",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder DRIFTS EMOTION-HOT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: a Will Set Against You IS Set Against You."
+  },
+  {
+   "id": "logos",
+   "name": "Logos",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.5,
+    "concrete_abstract": 0.2
+   },
+   "functions": [
+    "bind",
+    "break",
+    "reveal",
+    "strike"
+   ],
+   "narrationHints": "Reason made a force — an argument that lands like a blow, a contradiction exposed, a conclusion so clean it changes what people must do.",
+   "description": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
+   "notFor": "Reaching a heart set against reason (that's Pathos); wisdom (Logos is valid, not necessarily wise); a premise that's false — Logos builds truly on what it's given, garbage in and all.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Clear Argument",
+     "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
+     "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Binding Proof",
+     "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
+     "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Necessary Conclusion",
+     "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it reorganises what everyone present thought they knew. And turned on one person: a contradiction opened in what they have built themselves on, which does not wound the body and takes the ground out from under them all the same. They will keep standing. They will not keep believing.",
+     "cannot": "It needs something true to work with — Logos cannot prove a falsehood, only forge one that the next sound mind unpicks. It fails against those who will simply refuse a true conclusion. And the Syllogists hold that a person you have taken apart this way is owed the time to rebuild, which is a debt many of them do not pay.",
+     "functions": [
+      "reveal",
+      "bind",
+      "break",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "syllogist",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "scope"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.03,
+    "scope": 2,
+    "damageType": "reason",
+    "note": "damaging — 'thought as force' in the argumentative register. Compare cogitant's noesis (also damaging, also mental): noesis out-thinks a SITUATION, logos out-argues a PERSON."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "damage",
+     "delta": "PROVE A THING SO CLEANLY THE PROOF ITSELF CHANGES WHAT PEOPLE MUST DO; CORNER A LIAR IN THEIR OWN LOGIC",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "REASON AT THE SCALE OF PEOPLES — an argument A WHOLE COUNCIL CANNOT ANSWER, a contradiction THAT TOPPLES A DOCTRINE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "make the point — half the force, and it invites reply",
+    "surge": "double it; A VALID ARGUMENT IS NOT A TRUE ONE, and the unreasonable simply resist"
+   },
+   "bounds": [
+    {
+     "text": "THE UNREASONABLE AND THE EMOTION-RULED RESIST",
+     "class": "hard"
+    },
+    {
+     "text": "A VALID ARGUMENT IS NOT A TRUE ONE",
+     "class": "hard"
+    },
+    {
+     "text": "PROOF BINDS THE HONEST AND THE LOGICAL — THE CATHEDRAL OF CERTAINTY IS NEITHER",
+     "class": "hard"
+    },
+    {
+     "text": "IT NEEDS SOMETHING TRUE TO WORK WITH — Logos cannot prove what is not so",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/fight/puzzle action that deals damage. It rolls 2d6 reason damage across a scope of 2 Ranks: rank 2 deepens damage; rank 3 extends scope. Limit: the Unreasonable And The Emotion-Ruled Resist."
+  },
+  {
+   "id": "the_turning_word",
+   "name": "The Turning Word",
+   "levelReq": 4,
+   "energyCost": 9,
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.2
+   },
+   "functions": [
+    "bind",
+    "heal",
+    "reveal"
+   ],
+   "narrationHints": "The room turns — a crowd, a court, a mob — moved as one by the exact true thing said the exact right way.",
+   "description": "The social capstone: move a whole gathering at once — turn a hostile crowd, sway a council, stop a mob — by finding and speaking the one thing that reaches all of them. Pathos and Logos fused into mass persuasion.",
+   "notFor": "Individual mind-control; moving those with no shared feeling or reason; forcing against a set will.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Turning Word",
+     "grants": "Turn a crowd or council decisively — the room moves as one when you find the word that reaches them.",
+     "cannot": "Needs a real shared chord to strike; a crowd set immovably resists; you feel/carry what you move.",
+     "functions": [
+      "bind",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Word That Holds",
+     "grants": "The turning holds past the moment — a crowd moved stays moved after you have gone, a council's decision keeps its shape when you are not in the room. And where there is no shared chord to strike, you can make one: name the thing they did not know they held in common. A room turned off something ugly does not merely stop: the turning closes the rift that was opening in it, and people who were a minute from being enemies go back to being neighbours.",
+     "cannot": "A chord you made is a chord you are answerable for; the Rhetors hold that inventing a commonality is how peoples are built and also how they are ruined. It still cannot move a will genuinely set. And you carry what you move for as long as it stays moved.",
+     "functions": [
+      "bind",
+      "heal",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_emotional_logical",
+   "gated": "learned",
+   "tradition": "cross_pole_braid",
+   "nativeOrCombination": "combination",
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "persuasion",
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 6,
+    "scope": 3,
+    "requiresPoles": [
+     "threnodist",
+     "syllogist"
+    ]
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "THE TURNING HOLDS PAST THE MOMENT — a crowd moved STAYS moved after you have gone; a council's decision keeps",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "reach a few — half the scope, and nobody feels handled",
+    "surge": "double it; A CHORD YOU MADE IS A CHORD YOU ARE ANSWERABLE FOR"
+   },
+   "bounds": [
+    {
+     "text": "NEEDS A REAL SHARED CHORD TO STRIKE — a crowd set immovably resists",
+     "class": "hard"
+    },
+    {
+     "text": "A CHORD YOU MADE IS A CHORD YOU ARE ANSWERABLE FOR",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social action, and it needs two poles: threnodist and syllogist together. You turn an entire crowd or council at once by finding the one thing they all already feel and saying it. It needs a real shared chord to strike — a crowd with nothing in common cannot be turned, and the craft fails outright rather than working weakly. And you are answerable for what you struck: a room you turned toward something will hold you responsible for where it goes, which is a debt that outlasts the scene."
+  },
+  {
+   "id": "the_grief_strike",
+   "name": "The Grief Strike",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.4
+   },
+   "effectTags": [
+    "grief",
+    "emotional",
+    "wound"
+   ],
+   "harmRung": "incapacitating",
+   "narrationHints": "It doesn't hurt where you put your hands. It hurts where you feel.",
+   "description": "Strike at the emotional self — send a true, intense feeling at a person in a way they cannot close off.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "break",
+    "hinder"
+   ],
+   "challengeTypes": [
+    "social",
+    "psychological",
+    "combat"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The True Feeling",
+     "grants": "Direct a genuine, intense feeling at a person — grief, shame, terror — that they cannot close off because it is true and they know it.",
+     "cannot": "Anything rank 2 adds — find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening; IT MUST BE GENUINE FEELING.",
+     "functions": [
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Unguarded Place",
+     "grants": "Find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening.",
+     "cannot": "Anything rank 3 adds — break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again; IT MUST BE GENUINE FEELING.",
+     "functions": [
+      "hinder",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Shattered Fortification",
+     "grants": "Break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT MUST BE GENUINE FEELING; and it still costs what it costs: breaking what someone was using TO STAY FUNCTIONAL leaves them not functional.",
+     "functions": [
+      "hinder",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "hobble",
+   "operativeAxis": [
+    "emotionalBreach",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "targets": 1,
+    "damageType": "feeling",
+    "note": "incapacitating. THE CATALOG'S MOST ETHICALLY UNCOMFORTABLE CRAFT — it opens a grief someone has been protecting."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "emotionalBreach",
+     "delta": "FIND AND OPEN THE GRIEF A PERSON HAS BEEN PROTECTING — the loss they have not admitted, the feeling they have been holding shut",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: BREAK AN EMOTIONAL FORTIFICATION ENTIRELY — what they were using to stay functional is now open, and requires attending",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a touch of true feeling — half the breach, and they can close again",
+    "surge": "double it; what you open in someone DOES NOT CLOSE BECAUSE YOU ARE DONE WITH IT"
+   },
+   "bounds": [
+    {
+     "text": "IT MUST BE GENUINE FEELING — a manufactured grief is not this craft and does not land",
+     "class": "hard"
+    },
+    {
+     "text": "what you open DOES NOT CLOSE because you are done with it",
+     "class": "hard"
+    },
+    {
+     "text": "breaking what someone was using TO STAY FUNCTIONAL leaves them not functional",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/psychological/combat action that weakens or restricts a target. Its strength is rated 5 out of 10 It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens emotionalBreach; rank 3 adds to special. Limit: iT Must BE Genuine Feeling — a manufactured grief is not this craft and does not land."
+  },
+  {
+   "id": "the_felt_wall",
+   "name": "The Felt Wall",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3
+   },
+   "effectTags": [
+    "warning",
+    "feeling",
+    "protection"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She felt the danger before the knife moved. Feeling was always faster.",
+   "description": "Protect through emotional early warning — the feeling of threat before it fully forms.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "foresee",
+    "shield"
+   ],
+   "challengeTypes": [
+    "combat",
+    "social",
+    "defense"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Early Feel",
+     "grants": "Feel a threat forming in a room's emotional weather — in a person's shifting feeling-state — in time to move before the action completes.",
+     "cannot": "Anything rank 2 adds — protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch; it senses INTENT.",
+     "functions": [
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Feeling Guard",
+     "grants": "Protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch.",
+     "cannot": "Anything rank 3 adds — what shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives; it senses INTENT.",
+     "functions": [
+      "foresee",
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Felt Ward",
+     "grants": "What shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives.",
+     "cannot": "Nothing further; this is the craft's ceiling; it senses INTENT; and it still costs what it costs: feeling every shift toward harm means FEELING EVERY SHIFT.",
+     "functions": [
+      "foresee",
+      "shield"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "foresight",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 0,
+    "soakRank": 0,
+    "evasion": 4,
+    "evasionRank": 2,
+    "duration": 4,
+    "targets": 1,
+    "note": "A FIFTEENTH DEFENSIVE LOGIC — FORESENSED: soak 0; it reads the EMOTIONAL WEATHER and moves before harm forms. Distinct from PRE-EMPTED (end the threat) and UNTIMED (defeat the timing): this one feels the intent BEFORE it becomes action."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "PROTECT SOMEONE by feeling the danger around THEM — your emotional sense is the guard watching what eyes do not catch",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: what shifts toward violence or harm in a space REACHES YOU FIRST, across the whole space, and you act in the gap",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep half an ear on the room — half the warning, and it costs nothing",
+    "surge": "double it; feeling every shift toward harm in a space means FEELING EVERY SHIFT"
+   },
+   "bounds": [
+    {
+     "text": "it senses INTENT — a rockfall, a machine, or an animal has no feeling to read",
+     "class": "hard"
+    },
+    {
+     "text": "feeling every shift toward harm means FEELING EVERY SHIFT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it senses Intent — a rockfall, a machine, or an animal has no feeling to read."
+  },
+  {
+   "id": "the_true_feeling",
+   "name": "The True Feeling",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3
+   },
+   "effectTags": [
+    "feeling",
+    "perception",
+    "truth"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She knew what the room was feeling before anyone spoke.",
+   "description": "Read what is actually felt — not what is shown, what is present.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "challengeTypes": [
+    "social",
+    "investigation",
+    "intellectual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Actual State",
+     "grants": "Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.",
+     "cannot": "Anything rank 2 adds — track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched; it reads WHAT IS FELT, not what is TRUE.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Feeling Trail",
+     "grants": "Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
+     "cannot": "Anything rank 3 adds — read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming; it reads WHAT IS FELT, not what is TRUE.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Emotional History",
+     "grants": "Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.",
+     "cannot": "Nothing further; this is the craft's ceiling; it reads WHAT IS FELT, not what is TRUE; and it still costs what it costs: what you read of a history, you carry some of.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 15,
+    "note": "SOCIAL attribute throughout this tradition"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "timeReach",
+     "delta": "TRACK A FEELING OVER TIME — follow grief, find WHERE FEAR DEVELOPED, trace the emotional mark a person left in a place",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, WHAT A PEOPLE HAVE BEEN RUNNING FROM",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the room — half the depth, and it does not stay with you",
+    "surge": "double it; feeling the truth of a whole history means CARRYING some of it"
+   },
+   "bounds": [
+    {
+     "text": "it reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere",
+     "class": "hard"
+    },
+    {
+     "text": "THE GUARDED CAN CLOSE",
+     "class": "soft"
+    },
+    {
+     "text": "what you read of a history, you carry some of",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigation/intellectual action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 15. Ranks: rank 2 extends timeReach; rank 3 deepens perceptionDepth. Limit: it reads What IS Felt, not what is True — a person sincerely wrong reads sincere."
+  },
+  {
+   "id": "the_made_elegy",
+   "name": "The Made Elegy",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.4,
+    "destruction_creation": 0.1
+   },
+   "effectTags": [
+    "art",
+    "grief",
+    "made"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She made the grief into something with edges you could touch.",
+   "description": "Give feeling a form — make something that holds emotion correctly, so it can persist, be shared, or returned to.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "bind",
+    "make"
+   ],
+   "challengeTypes": [
+    "art",
+    "social",
+    "craft"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Feeling Held",
+     "grants": "Make something that holds a feeling correctly — a song, an object, a gesture — so the feeling persists in it and can be shared or returned to.",
+     "cannot": "Anything rank 2 adds — bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it; THE FEELING MUST BE TRUE to bind.",
+     "functions": [
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Acting Elegy",
+     "grants": "Bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it.",
+     "cannot": "Anything rank 3 adds — make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone; THE FEELING MUST BE TRUE to bind.",
+     "functions": [
+      "make",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Lasting Work",
+     "grants": "Make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone.",
+     "cannot": "Nothing further; this is the craft's ceiling; THE FEELING MUST BE TRUE to bind; and it still costs what it costs: it carries the feeling TO EVERYONE, including those who did not ask.",
+     "functions": [
+      "make",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "persistence",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 168,
+    "scope": 2,
+    "damageType": "feeling"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "BIND A FEELING INTO A MADE THING SO IT ACTS — the song that makes people FEEL what it carries, the totem that steadies",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "make something that carries feeling AT SCALE — art that moves a city, A RITUAL THAT HOLDS A PEOPLE'S GRIEF",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small keepsake — half the persistence, and it holds one feeling plainly",
+    "surge": "double it; a made thing that carries feeling carries it TO EVERYONE, including those who did not ask"
+   },
+   "bounds": [
+    {
+     "text": "THE FEELING MUST BE TRUE to bind — a made sentiment does not hold",
+     "class": "hard"
+    },
+    {
+     "text": "it carries the feeling TO EVERYONE, including those who did not ask",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A art/social/craft action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 adds to special; rank 3 extends scope. Limit: the Feeling Must BE True to bind — a made sentiment does not hold."
+  },
+  {
+   "id": "the_feeling_road",
+   "name": "The Feeling Road",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3
+   },
+   "effectTags": [
+    "navigation",
+    "feeling",
+    "track"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She followed the grief the way others follow a road.",
+   "description": "Navigate by feeling — find a person, a place, or a source by following the emotional resonance it leaves.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "challengeTypes": [
+    "navigation",
+    "investigation",
+    "social"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Resonance Trail",
+     "grants": "Navigate toward a feeling — find a person, a place, or a source by following the emotional trace they leave across a space.",
+     "cannot": "Anything rank 2 adds — travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it; it follows FEELING.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Feeling Landmark",
+     "grants": "Travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it.",
+     "cannot": "Anything rank 3 adds — follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community; it follows FEELING.",
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Long Trail",
+     "grants": "Follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community.",
+     "cannot": "Nothing further; this is the craft's ceiling; it follows FEELING; and it still costs what it costs: arriving at the source of a great feeling means ARRIVING AT ITS SOURCE.",
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "navigation",
+    "range"
+   ],
+   "mechanic": {
+    "range": 50,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "travel toward a POWERFUL FEELING in a region as if it were a BEACON — grief, joy, terror — and find what is creating it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "follow a feeling's trace ACROSS ANY DISTANCE — track a person BY THEIR EMOTIONAL SIGNATURE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "follow the trace — half the range, and it fades behind you",
+    "surge": "double it; following a feeling to its source means ARRIVING AT ITS SOURCE"
+   },
+   "bounds": [
+    {
+     "text": "it follows FEELING — a person who feels nothing about where they went leaves no road",
+     "class": "hard"
+    },
+    {
+     "text": "arriving at the source of a great feeling means ARRIVING AT ITS SOURCE",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A navigation/investigation/social action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 4 hours. Range is 50. Ranks: rank 2 extends range; rank 3 extends range. Limit: it follows Feeling — a person who feels nothing about where they went leaves no road."
+  },
+  {
+   "id": "the_wellspring",
+   "name": "The Wellspring",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3,
+    "death_life": 0.1
+   },
+   "effectTags": [
+    "endurance",
+    "feeling",
+    "depth"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She was exhausted and the feeling was still there. The feeling was enough.",
+   "description": "Sustain through emotional depth — what others run out of, you find more of in the next wave.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "empower",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "hardship",
+    "social"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "More in the Depth",
+     "grants": "Sustain through the depth of feeling — where others run dry, you find the next wave of grief or joy, and it holds you.",
+     "cannot": "Anything rank 2 adds — your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone; it sustains by FEELING, not by easing.",
+     "functions": [
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Carried Weight",
+     "grants": "Your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone. And they are braver for it: a person who is not carrying it alone attempts things they would not have attempted, and does them better.",
+     "cannot": "Anything rank 3 adds — the depth sustains the party through the hardest stretch — not comfort, depth; it sustains by FEELING, not by easing.",
+     "functions": [
+      "sustain",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Wellspring Holds",
+     "grants": "The depth sustains the party through the hardest stretch — not comfort, depth; not peace, feeling so genuine it holds people together until it's over.",
+     "cannot": "Nothing further; this is the craft's ceiling; it sustains by FEELING, not by easing; and it still costs what it costs: carrying some of it with them MEANS CARRYING IT.",
+     "functions": [
+      "sustain",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "your emotional depth SUSTAINS OTHERS — not by removing the hardship but BY CARRYING SOME OF IT WITH THEM",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "the depth sustains the PARTY through the hardest stretch — 'not comfort, DEPTH; not peace, feeling so genuine it holds'",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "draw a little — half the relief, and it costs you nothing",
+    "surge": "double it; CARRYING SOME OF IT WITH THEM means carrying it"
+   },
+   "bounds": [
+    {
+     "text": "it sustains by FEELING, not by easing — a person who wants comfort gets depth instead",
+     "class": "hard"
+    },
+    {
+     "text": "carrying some of it with them MEANS CARRYING IT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A endurance/hardship/social action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: it sustains by Feeling, not by easing — a person who wants comfort gets depth instead."
+  },
+  {
+   "id": "the_correct_protocol",
+   "name": "The Correct Protocol",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.4
+   },
+   "effectTags": [
+    "diagnosis",
+    "treatment",
+    "precision"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He knew exactly what was wrong. The treatment followed.",
+   "description": "Heal through precise diagnosis and correct procedure — the methodical application of what is known to work.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "heal",
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "medical",
+    "craft",
+    "intellectual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Correct Diagnosis",
+     "grants": "Diagnose and treat through methodical application of what is known to work — no guesswork, no comfort, the correct intervention.",
+     "cannot": "Anything rank 2 adds — restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out; NO GUESSWORK, NO COMFORT.",
+     "functions": [
+      "reveal",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "By Protocol",
+     "grants": "Restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out.",
+     "cannot": "Anything rank 3 adds — restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left; NO GUESSWORK, NO COMFORT.",
+     "functions": [
+      "reveal",
+      "heal",
+      "mend",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Root Cause",
+     "grants": "Restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left.",
+     "cannot": "Nothing further; this is the craft's ceiling; NO GUESSWORK, NO COMFORT.",
+     "functions": [
+      "reveal",
+      "heal",
+      "mend",
+      "restore"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "precision",
+    "completeness"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "note": "A TWELFTH THEORY OF MEDICINE — PROTOCOL: 'no guesswork, no comfort, THE CORRECT INTERVENTION.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "completeness",
+     "delta": "restore THROUGH PROPER SEQUENCE — the correct actions IN THE CORRECT ORDER return the body or system to function",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: restore completely by identifying THE UNDERLYING CAUSE and applying THE FULL CHAIN of correct interventions",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "the correct minimum — half the restoration, and nothing is wasted",
+    "surge": "double it; the correct intervention is CORRECT, not KIND"
+   },
+   "bounds": [
+    {
+     "text": "NO GUESSWORK, NO COMFORT — it does not soothe and does not pretend to",
+     "class": "hard"
+    },
+    {
+     "text": "it requires that the correct protocol IS KNOWN — a novel affliction defeats it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A medical/craft/intellectual action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens completeness; rank 3 adds to special. Limit: nO Guesswork, NO Comfort — it does not soothe and does not pretend to."
+  },
+  {
+   "id": "the_proved_position",
+   "name": "The Proved Position",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.4
+   },
+   "effectTags": [
+    "logic",
+    "proof",
+    "protection"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He had proved it. They could attack him all they liked. The proof still stood.",
+   "description": "Protect through irrefutable argument — attacks on a proved position must answer the proof before they can land.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "bind",
+    "shield",
+    "ward"
+   ],
+   "challengeTypes": [
+    "social",
+    "intellectual",
+    "defense"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Proved Ground",
+     "grants": "Establish a position so logically secure that attacks — social, rhetorical, physical — must first answer the proof before they have any purchase.",
+     "cannot": "Anything rank 2 adds — extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial; IT WARDS WHAT MUST ANSWER REASON.",
+     "functions": [
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Extended Proof",
+     "grants": "Extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial.",
+     "cannot": "Anything rank 3 adds — a proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established; IT WARDS WHAT MUST ANSWER REASON.",
+     "functions": [
+      "shield",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Self-Maintaining Proof",
+     "grants": "A proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT WARDS WHAT MUST ANSWER REASON.",
+     "functions": [
+      "shield",
+      "ward",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "logicalGround",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "soak": 4,
+    "soakRank": 2,
+    "type": "rhetorical",
+    "duration": 8,
+    "note": "A SIXTEENTH DEFENSIVE LOGIC — PROVED: a TYPED guard (rhetorical/social attacks) whose soak is the soundness of your position. 'Attacks must first ANSWER THE PROOF.' Transparent to a blade."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "extend the proved position to cover A SPACE OR A GROUP — a claim so airtight it FUNCTIONS AS A WARD",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "a proved position holds AT SCALE — at the level of INSTITUTIONS, TREATIES, OR LAWS",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "state your ground — half the protection, and it is easy to hold",
+    "surge": "double it; a position proved at the scale of laws is a position you must keep defending"
+   },
+   "bounds": [
+    {
+     "text": "IT WARDS WHAT MUST ANSWER REASON — a fist does not answer the proof",
+     "class": "hard"
+    },
+    {
+     "text": "the position must ACTUALLY BE SOUND — a proved-wrong position wards nothing",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/intellectual/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: iT Wards What Must Answer Reason — a fist does not answer the proof."
+  },
+  {
+   "id": "the_built_system",
+   "name": "The Built System",
+   "levelReq": 3,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.5,
+    "chaos_order": 0.2
+   },
+   "effectTags": [
+    "system",
+    "logic",
+    "construct"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He didn't build a thing. He built a rule, and the rule built things.",
+   "description": "Build a logical structure that operates in the world — a system whose internal logic sustains it without constant maintenance.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "bind",
+    "make",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "intellectual",
+    "leadership",
+    "craft"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Working Rule",
+     "grants": "Design a system — legal, social, procedural — that functions because the logic it runs on is sound.",
+     "cannot": "Anything rank 2 adds — build something that maintains itself through its internal logic — not enforced, not reminded, running because the reasoning it embodies is correct; IT RUNS ON ITS LOGIC.",
+     "functions": [
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Self-Regulating",
+     "grants": "Build something that maintains itself through its internal logic — not enforced, not reminded, running because the reasoning it embodies is correct.",
+     "cannot": "Anything rank 3 adds — construct a system so logically coherent it operates at scale without you — the laws, institutions, or mechanisms that run because the reasoning they embody is right; IT RUNS ON ITS LOGIC.",
+     "functions": [
+      "make",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Lasting Structure",
+     "grants": "Construct a system so logically coherent it operates at scale without you — the laws, institutions, or mechanisms that run because the reasoning they embody is right.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT RUNS ON ITS LOGIC; and it still costs what it costs: a system that runs without you RUNS WITHOUT YOU, including when it should stop.",
+     "functions": [
+      "make",
+      "sustain",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "coherence",
+    "scope",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8760,
+    "scope": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "build something that MAINTAINS ITSELF THROUGH ITS INTERNAL LOGIC — not enforced, not reminded, RUNNING BECAUSE THE LOGIC RUNS",
+     "from": "r2 grants — a NINTH autonomy-increment craft"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "construct a system so LOGICALLY COHERENT it operates AT SCALE WITHOUT YOU — laws, institutions, mechanisms",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small sound system — half the scope, and you can revise it",
+    "surge": "double it; a system that runs without you RUNS WITHOUT YOU"
+   },
+   "bounds": [
+    {
+     "text": "IT RUNS ON ITS LOGIC — a system whose logic is unsound fails exactly where the flaw is",
+     "class": "hard"
+    },
+    {
+     "text": "a system that runs without you RUNS WITHOUT YOU, including when it should stop",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A intellectual/leadership/craft action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 adds to autonomy; rank 3 extends scope. Limit: iT Runs ON Its Logic — a system whose logic is unsound fails exactly where the flaw is."
+  },
+  {
+   "id": "the_derived_route",
+   "name": "The Derived Route",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.3
+   },
+   "effectTags": [
+    "navigation",
+    "reasoning",
+    "inference"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He hadn't walked it. He had worked it out.",
+   "description": "Navigate through pure reasoning — derive the correct path from what you know before taking a step.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "foresee",
+    "move",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "navigation",
+    "intellectual",
+    "tactical"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Reasoned Path",
+     "grants": "Navigate any space by reasoning about it — what must be true about the layout, the route, the exits — without needing to see it first.",
+     "cannot": "Anything rank 2 adds — derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits; it needs SOUND PREMISES.",
+     "functions": [
+      "reveal",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Inferred Route",
+     "grants": "Derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits.",
+     "cannot": "Anything rank 3 adds — navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires; it needs SOUND PREMISES.",
+     "functions": [
+      "reveal",
+      "move",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Necessary Route",
+     "grants": "Navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires.",
+     "cannot": "Nothing further; this is the craft's ceiling; it needs SOUND PREMISES.",
+     "functions": [
+      "reveal",
+      "move",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "navigation",
+    "range"
+   ],
+   "mechanic": {
+    "range": 12,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "navigation",
+     "delta": "DERIVE the correct path through UNKNOWN territory BY INFERENCE — from what you know about the type of space",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: navigate to ANY CONCLUSION THAT FOLLOWS NECESSARILY from known premises — the route that MUST exist, the exit that MUST be there",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "reason it out — half the certainty, and it costs nothing",
+    "surge": "double it; a route that MUST exist by inference still has to actually be there"
+   },
+   "bounds": [
+    {
+     "text": "it needs SOUND PREMISES — reasoning from a wrong assumption arrives confidently at nowhere",
+     "class": "hard"
+    },
+    {
+     "text": "a route that MUST exist BY INFERENCE still has to actually BE THERE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A navigation/intellectual/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it needs Sound Premises — reasoning from a wrong assumption arrives confidently at nowhere."
+  },
+  {
+   "id": "the_axiom_holds",
+   "name": "The Axiom Holds",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.3
+   },
+   "effectTags": [
+    "certainty",
+    "endurance",
+    "logic"
+   ],
+   "harmRung": "none",
+   "narrationHints": "The certainty was enough. The axiom held and therefore so did he.",
+   "description": "Sustain through the certainty of what you know — fear, pain, and doubt don't reach the level of the axioms.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "resist",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "hardship",
+    "intellectual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Axiomatic Ground",
+     "grants": "Hold function under pressure through the certainty of what you know — fear, pain, and doubt operate below the level the axioms hold.",
+     "cannot": "Anything rank 2 adds — sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them; it requires SOMETHING ACTUALLY TRUE to stand on.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Correct Sequence",
+     "grants": "Sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them.",
+     "cannot": "Anything rank 3 adds — as long as what you know is true remains true, you remain functional around it; it requires SOMETHING ACTUALLY TRUE to stand on.",
+     "functions": [
+      "resist",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Axiom Holds",
+     "grants": "As long as what you know is true remains true, you remain functional around it. The axiom is the ground and the ground does not give.",
+     "cannot": "Nothing further; this is the craft's ceiling; it requires SOMETHING ACTUALLY TRUE to stand on.",
+     "functions": [
+      "resist",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "upkeepRelief",
+     "delta": "sustain through PURE LOGICAL DISCIPLINE — the sequence of correct actions that keeps you going when feeling would not",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: as long as WHAT YOU KNOW IS TRUE REMAINS TRUE, you remain functional around it — the axiom is the ground and the ground holds",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold the line of reasoning — half the relief, and it costs nothing",
+    "surge": "double it; an axiom that turns out to be FALSE takes the ground with it"
+   },
+   "bounds": [
+    {
+     "text": "it requires SOMETHING ACTUALLY TRUE to stand on",
+     "class": "hard"
+    },
+    {
+     "text": "AN AXIOM THAT TURNS OUT TO BE FALSE TAKES THE GROUND WITH IT",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A endurance/hardship/intellectual action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it requires Something Actually True to stand on."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_inescapable_conclusion",
+   "name": "The Inescapable Conclusion",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "syllogist",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.6
+   },
+   "functions": [
+    "bind",
+    "reveal"
+   ],
+   "narrationHints": "You lay the premises down one at a time, each one they must agree to, until they arrive — of their own reasoning — at a conclusion they would have run from if they'd seen it coming.",
+   "description": "The Syllogist art of the inescapable argument — a chain of reasoning so sound that agreeing to the start compels agreeing to the end, binding a mind by its own logic. Not deception; the opposite. The trap is that it is TRUE.",
+   "notFor": "It binds only the reasonable — a mind that will simply refuse a true conclusion cannot be caught by one. And a true argument binds you too; you cannot walk someone to a conclusion you are unwilling to stand on yourself.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Inescapable Conclusion",
+     "grants": "Bind a reasoning mind to a conclusion by an argument it cannot honestly escape.",
+     "cannot": "It fails against those who refuse reason itself, it binds its wielder to the same truth, and a conclusion someone was walked into by force of logic can curdle into resentment of the one who walked them.",
+     "functions": [
+      "bind",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Proof",
+     "grants": "Walk a whole body of reasoning minds to the same conclusion at once — a council, a court, a school — and the binding holds against later private doubt, because each of them watched the others agree. The chain can be built across days now rather than one exchange.",
+     "cannot": "It still fails entirely against those who will simply refuse a true conclusion, and a group holds more of them than a person does. It binds you to the same truth, publicly and on the record. And a conclusion a body was walked into together curdles together — the Syllogists have begun more than one schism this way.",
+     "functions": [
+      "bind",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "harmRung": "incapacitating",
+   "shape": "hobble",
+   "operativeAxis": [
+    "bindStrength",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 6,
+    "targets": 1,
+    "damageType": "reason",
+    "note": "T-IV, incapacitating"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "WALK A WHOLE BODY OF REASONING MINDS to the same conclusion AT ONCE — a council, a court, a school",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "make the argument — half the binding, and they can still walk away thinking",
+    "surge": "double it; IT STILL FAILS ENTIRELY against those who will simply REFUSE"
+   },
+   "bounds": [
+    {
+     "text": "IT FAILS AGAINST THOSE WHO REFUSE REASON ITSELF",
+     "class": "hard"
+    },
+    {
+     "text": "it binds A REASONING MIND — the unreasoning are outside it entirely",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/investigate action that weakens or restricts a target. Its strength is rated 7 out of 10 It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets. Limit: iT Fails Against Those Who Refuse Reason Itself."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_proof",
+   "name": "The Proof",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "syllogist",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.9
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You assemble it whole — the complete proof, every step airtight, of a thing that is simply TRUE — and lay it before the world, and the world has no honest answer but to accept it.",
+   "description": "The Syllogist capstone — a complete, irrefutable proof of a true thing, assembled and offered so soundly that no honest mind can deny it. The deepest gift of the logical kind, and the loneliest: to be right past all argument is to be right, often, alone.",
+   "notFor": "One proof, once, at enormous cost — it can only prove what is actually true; there is no proof of a falsehood, only clever forgery that the next sound mind unpicks. And a proof, once offered, is loose in the world; you cannot un-prove a thing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Proof",
+     "grants": "Assemble and offer a complete, irrefutable proof of a true thing.",
+     "cannot": "It proves only the true, it costs nearly all you have, and to be irrefutably right is a lonely country — the proof convinces, but conviction is not love.",
+     "functions": [
+      "reveal"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL"
+   ],
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "completeness",
+    "penetration"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 2,
+    "damageType": "reason"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: ASSEMBLE AND OFFER A COMPLETE, IRREFUTABLE PROOF of a true thing. The capstone is a KIND (irrefutability itself) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a partial proof is an argument, and arguments are what the Cathedral survives.",
+    "surge": "REFUSED — it already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "IT PROVES ONLY THE TRUE",
+     "class": "hard"
+    },
+    {
+     "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 9 out of 10, and lasts for about 2 hours Limit: iT Proves Only The True."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_shared_grief",
+   "name": "The Shared Grief",
+   "levelReq": 3,
+   "energyCost": 7,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "threnodist",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.4,
+    "death_life": 0.1
+   },
+   "functions": [
+    "empower",
+    "reveal"
+   ],
+   "narrationHints": "You take up the lament and others find their own grief given shape in it — not lessened, but no longer carried alone, the weight spread across every voice that joins.",
+   "description": "The Threnodist art of the shared lament — a song of grief that lets many carry one sorrow together, so no single heart bears the whole. The mourning-singers' first true gift.",
+   "notFor": "It shares grief, it does not erase it — a sorrow sung together is still a sorrow. And the one who leads the lament carries the gathering-point; you hold the grief of all who join while you sing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shared Grief",
+     "grants": "Lead a shared lament that spreads one grief across many, so none carries it alone.",
+     "cannot": "It cannot remove grief, only distribute its weight; the singer bears the gathering of it; and a grief shared is a grief made real to everyone who joins the song.",
+     "functions": [
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Named Sorrow",
+     "grants": "The lament finds the true shape of what is mourned. Singing it, you perceive what the grief is ACTUALLY for — the loss beneath the stated one — and those who join hear it named as well, often for the first time.",
+     "cannot": "Naming is not mending; a sorrow correctly named can wound worse before it eases. The singer cannot choose what surfaces, and what the lament names in company cannot be unnamed.",
+     "functions": [
+      "empower",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Long Lament",
+     "grants": "Hold a lament across days rather than a night, and across a settlement rather than a room — a whole community may carry one loss together until it is bearable. The gathering-point can be handed to another singer, so the lament outlasts any one voice.",
+     "cannot": "You hold the gathering while you hold the lament, and days of it mark the singer; handing the point on requires a singer able to take it; and a grief carried by everyone becomes part of what that place IS — the GM records it in the world, not the character.",
+     "functions": [
+      "empower",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "distribution",
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 12,
+    "scope": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "distribution",
+     "delta": "the lament FINDS THE TRUE SHAPE OF WHAT IS MOURNED — singing it, you perceive what the grief is ACTUALLY for",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope+duration",
+     "delta": "hold a lament ACROSS DAYS and ACROSS A SETTLEMENT — a whole community mourning as one",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a short lament — half the distribution, and it asks little of the gathering",
+    "surge": "double it; YOU HOLD THE GATHERING WHILE YOU HOLD THE LAMENT"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT REMOVE GRIEF, ONLY DISTRIBUTE ITS WEIGHT",
+     "class": "hard"
+    },
+    {
+     "text": "NAMING IS NOT MENDING — a sorrow correctly named CAN WOUND",
+     "class": "hard"
+    },
+    {
+     "text": "you hold the gathering while you hold the lament, and DAYS ARE DAYS",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social action that strengthens someone. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens distribution; rank 3 extends scope+duration. Limit: iT Cannot Remove Grief, Only Distribute Its Weight."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_names_of_the_lost",
+   "name": "The Names of the Lost",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "threnodist",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.6,
+    "death_life": 0.2
+   },
+   "functions": [
+    "empower",
+    "reveal"
+   ],
+   "narrationHints": "You sing the names — all of them, every one lost — and for the length of the song they are not gone, exactly; they are HELD, present in the keeping of their names.",
+   "description": "The Threnodist art of the naming-song — a lament that holds the lost present through the keeping of their names, so that for a while the dead are not absent but attended. The deep work of those who refuse to let go be the same as forget.",
+   "notFor": "It holds the lost in memory, it does not return them — a name kept is not a life restored. And to sing all the names is to carry all the losses at once, for the length of the song and after.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Names of the Lost",
+     "grants": "Sing the names of the lost, holding them present in memory for the length of the lament.",
+     "cannot": "It cannot restore the dead, only attend them; it lays every named loss on the singer at once; and the song ends, and they are gone again, and you chose to feel that twice.",
+     "functions": [
+      "empower",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Kept Names",
+     "grants": "The names keep past the lament. Sung over a place — a barrow, a battlefield, a hall — the attending holds without you, and any who come after feel the lost attended there. The song can hold names you were told rather than only names you carried yourself. Those who hear the names are strengthened by the attending — steadied, clearer about what they are doing and why, and harder to move off it.",
+     "cannot": "It still does not return them; a name kept is not a life restored. A place that holds its lost is a place that does not move on, which is not always mercy. And a name taken from another's telling is held on trust — sing one wrong and the Threnodists count it a wound.",
+     "functions": [
+      "empower",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "attendance",
+    "persistence"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 720,
+    "scope": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "THE NAMES KEEP PAST THE LAMENT — sung over a place (a barrow, a battlefield, a hall), THE ATTENDING HOLDS WITHOUT YOU",
+     "from": "r2 grants — an EIGHTH autonomy-increment craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "sing a few names — half the duration, and the lament closes cleanly",
+    "surge": "double it; keeping names past the lament means the place KEEPS THEM"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT RESTORE THE DEAD, ONLY ATTEND THEM",
+     "class": "hard"
+    },
+    {
+     "text": "A NAME KEPT IS NOT A LIFE RETURNED",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social action that strengthens someone. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 30 days Ranks: rank 2 adds to persistence. Limit: iT Cannot Restore The Dead, Only Attend Them."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_last_lament",
+   "name": "The Last Lament",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "threnodist",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.9,
+    "death_life": 0.3
+   },
+   "functions": [
+    "empower",
+    "restore"
+   ],
+   "narrationHints": "You sing the whole of it — every grief you have ever held, gathered into one lament so complete that those who hear it are, at the end, somehow lighter, having grieved fully at last the thing they never finished grieving.",
+   "description": "The Threnodist capstone — the complete lament, all grief given full voice at once, that lets those who hear it finally finish a mourning they could not finish alone. The greatest and costliest gift of the singers: to be grieved completely is to be freed.",
+   "notFor": "One lament, once, at enormous cost — it lets others complete a grief, but the singer must carry the whole of it to give it, and a grief fully sung is fully felt. It cannot make loss not have happened; it can only let it be, at last, mourned.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Last Lament",
+     "grants": "Sing a complete lament that lets all who hear finish a grief they could not finish alone.",
+     "cannot": "It costs nearly all you have, it makes the singer feel every grief entire, and it does not undo loss — it only, mercifully, completes the mourning of it.",
+     "functions": [
+      "empower",
+      "restore"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "completion",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 8,
+    "scope": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: sing a COMPLETE LAMENT that lets ALL WHO HEAR FINISH A GRIEF THEY COULD NOT FINISH ALONE. The capstone is a KIND (completing what could not be completed) at near-total cost — AND THE SINGER FEELS EVERY GRIEF IN IT.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-sung lament leaves a grief half-finished, which is worse than not beginning.",
+    "surge": "REFUSED — the singer already feels every grief in it."
+   },
+   "bounds": [
+    {
+     "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
+     "class": "hard"
+    },
+    {
+     "text": "THE SINGER FEELS EVERY GRIEF IN IT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social action that strengthens someone. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: iT Costs Nearly All You Have."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_grief_that_stops",
+   "name": "The Grief That Stops",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "threnodist",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": -0.8
+   },
+   "functions": [
+    "bind"
+   ],
+   "narrationHints": "They set it down inside them the way you would set down a stone. The heart is not built to carry that.",
+   "description": "⚠️ THE HEART-TUNERS' CRAFT. Pathos SHARES a feeling; this INSTALLS one at a weight no body holds. Not sorrow — sorrow's full weight, all at once, without the years that usually come with it. Some hearts stop. Most do not, and those people are changed.",
+   "notFor": "A heart with nothing to grieve — it uses THEIR losses, not invented ones, so someone who has lost nothing is nearly immune. And it CANNOT BE AIMED at an outcome: you set the weight down, the body decides.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Grief That Stops",
+     "grants": "Set the full weight of their own losses on them at once. They are overwhelmed and afterward not the same.",
+     "cannot": "Inventing a grief. Anyone who has lost nothing.",
+     "functions": [
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "All Of It",
+     "grants": "Set every loss down together with nothing held back. A heart sometimes stops. You will not know beforehand which.",
+     "cannot": "Knowing beforehand. Taking it back once set.",
+     "functions": [
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "hobble",
+   "operativeAxis": [
+    "weight",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 6,
+    "targets": 1,
+    "damageType": "grief",
+    "note": "⚠️ A HOBBLE WITH A LETHAL TAIL — the kill is a possibility, never a roll you aim. Resolve r2 as incapacitation plus a small independent chance of a stopped heart, weighted by how much the target has actually lost. NOT a FIGHT craft: it does not fight."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "weight",
+     "delta": "SPECIAL: every loss at once, nothing held back — a heart sometimes stops",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a measure of it — they weep and they stand",
+    "surge": "all of it; YOU WILL NOT KNOW BEFOREHAND WHICH"
+   },
+   "bounds": [
+    {
+     "text": "IT USES THEIR OWN LOSSES — someone who has lost nothing is nearly immune",
+     "class": "hard"
+    },
+    {
+     "text": "IT CANNOT BE AIMED AT AN OUTCOME — you set the weight down, the body decides",
+     "class": "hard"
+    },
+    {
+     "text": "THE ONES WHO LIVE ARE CHANGED, and they know who did it",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social contest against the target's composure, drawing only on losses they have actually suffered — a target who has lost nothing gets a large bonus to resist. On a win they are incapacitated for several minutes and carry a lasting penalty to composure rolls afterward. At rank 2 the GM additionally rolls a small independent chance that the target's heart stops, scaled to how much they have genuinely lost. You cannot aim for that outcome and you cannot call it off once cast."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_closing_argument",
+   "name": "The Closing Argument",
+   "levelReq": 5,
+   "energyCost": 12,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "syllogist",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.8
+   },
+   "functions": [
+    "reveal",
+    "bind"
+   ],
+   "narrationHints": "Every step is one they agreed to. That is what makes the last step impossible to refuse.",
+   "description": "⚠️ THE CORNERS' CRAFT. A Syllogist walks a person, honestly, from premises they already hold to a conclusion that ends them — that the work was worthless, that they cannot be forgiven, that the only consistent act remaining is the one they will now perform. NOTHING IN IT IS FALSE. That is the whole horror.",
+   "notFor": "Anyone who will not reason — the unreasonable are genuinely immune and the Corners resent it. And it CANNOT USE A FALSE PREMISE: the argument must be sound or it does nothing at all.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Closing Argument",
+     "grants": "Walk them, honestly, to a conclusion that unmakes their footing. They cannot act against it while it holds.",
+     "cannot": "A false premise. Anyone who refuses to follow.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Only Consistent Act",
+     "grants": "Reach the conclusion where the consistent act is a final one — and STOP TALKING. What they do next is theirs.",
+     "cannot": "Making them. It is their hand and both of you know it.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "hobble",
+   "operativeAxis": [
+    "soundness",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 48,
+    "targets": 1,
+    "damageType": "truth",
+    "note": "⚠️ THE ONLY KILL IN THE CATALOG THE WIELDER DOES NOT PERFORM. Resolve as a hobble; the lethal outcome is the target's OWN act, gated on the argument being sound and the target being a reasoner. The engine should never render it as damage dealt."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "soundness",
+     "delta": "SPECIAL: the conclusion where the only consistent act is final — and you stop talking",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "walk them partway — shaken, and they can turn back",
+    "surge": "reach the end; IT IS THEIR HAND, AND BOTH OF YOU KNOW IT"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT USE A FALSE PREMISE — an unsound argument does nothing",
+     "class": "hard"
+    },
+    {
+     "text": "THE UNREASONABLE ARE IMMUNE",
+     "class": "hard"
+    },
+    {
+     "text": "YOU DO NOT PERFORM IT. IT IS THEIR HAND, AND BOTH OF YOU KNOW IT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social contest against the target's resolve. You must be able to state a sound argument from something they already believe — the GM judges soundness, and an unsound argument fails automatically. On a win they cannot act against that conclusion for the rest of the scene. At rank 2, if the conclusion is that a final act is the only consistent one, the GM decides whether the target performs it; you never roll for that part. The target may disengage from the conversation at any time, and anyone who refuses to reason is immune outright."
+  },
+  {
+   "id": "the_keening",
+   "name": "The Keening",
+   "levelReq": 1,
+   "energyCost": 7,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.6,
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "strike",
+    "hinder"
+   ],
+   "narrationHints": "A grief-cry pitched past speech — not loud so much as TRUE, and the truth of it buckles the knees of everyone in earshot. Heard, never aimed.",
+   "description": "The Threnodists' first offense: a lament released rather than thrown. It lands on everyone who can hear it, including you.",
+   "notFor": "Killing (it staggers, it does not slay); a silent kill; sparing your friends — everyone in earshot takes it, and so do you; anything that does not feel.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Cry Let Go",
+     "grants": "Release a grief you actually hold as sound. Everyone in earshot who can feel is staggered — weapons lowered, a charge broken, a pursuit stalled for a breath. It works through walls and in the dark.",
+     "cannot": "It is UNAIMED — allies in earshot are staggered too, and so are you, a little. The deaf are untouched. It needs a grief you truly carry; a performed one makes noise and nothing else.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Note",
+     "grants": "Sustain it — the stagger holds while you keen, and those caught cannot rally. Or narrow it to one throat and drop them where they stand.",
+     "cannot": "Sustaining costs you the whole time; you cannot act while you hold it. The grief-hardened ride it out. Narrowing to one means the rest hear a woman weeping and come to see.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Threnody",
+     "grants": "The full lament — a crowd, a hall, a street stopped where it stands and made to feel what you feel. Fights end. So do speeches, executions, and processions.",
+     "cannot": "You are emptied by it — what you spent, you no longer carry, and some of it does not come back. A tradition of grief-singers can answer it in kind.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "tradition": "threnodist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 1,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "a single sob — one target, brief, and you keep most of the grief",
+    "surge": "double the reach; YOU ARE EMPTIED, and some of what you spent does not come back"
+   },
+   "bounds": [
+    {
+     "text": "UNAIMED — allies and the wielder are caught too",
+     "class": "hard"
+    },
+    {
+     "text": "needs a grief YOU ACTUALLY HOLD; a performed one is only noise",
+     "class": "hard"
+    },
+    {
+     "text": "the DEAF are untouched",
+     "class": "hard"
+    },
+    {
+     "text": "you are EMPTIED by what you spend",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/social action that staggers everyone in earshot. Rated 5 of 10 across a scope of 3, lasting about an hour. Limit: unaimed — allies and the wielder are caught too."
+  },
+  {
+   "id": "the_contradiction",
+   "name": "The Contradiction",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.6,
+    "falsehood_truth": 0.2
+   },
+   "functions": [
+    "hinder",
+    "break"
+   ],
+   "narrationHints": "You name the flaw in what someone is doing WHILE they are doing it, and the doing comes apart. Not a taunt — a demonstration. Spoken, precise, and only ever second.",
+   "description": "The Syllogists' first offense, and the strangest shape on the circle: it cannot start a fight, only unmake a move already underway.",
+   "notFor": "Opening an exchange (there must be a claim or an action to contradict); the mindless, the mid-swing berserk, anything not REASONING; being right — it works on the flaw, so a sound plan is immune.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Named Flaw",
+     "grants": "Interrupt an action or claim by naming its actual error out loud — the plan with the gap, the boast with the hole, the ritual with the wrong step. The move falters and must be reworked.",
+     "cannot": "REACTIVE ONLY — nothing to contradict means nothing happens. The flaw must be REAL; inventing one is Falsecraft and this is not that. The unreasoning are immune.",
+     "functions": [
+      "hinder",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Reductio",
+     "grants": "Follow their position to where it collapses. A commitment they made becomes a thing they cannot act on — the oath that now forbids the blow, the doctrine that now forbids the door.",
+     "cannot": "They must have STATED the position; you cannot bind someone to a belief they never claimed. The shameless simply proceed anyway.",
+     "functions": [
+      "hinder",
+      "break",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Collapse",
+     "grants": "Take a whole structure apart in front of the people who live in it — a case, a command, a faith. What they were doing stops, and it stays stopped.",
+     "cannot": "You have made a permanent enemy of everyone whose ground you took, and the truth of it will not soften that. A structure with no flaw stands, and you look like a fool.",
+     "functions": [
+      "hinder",
+      "break",
+      "bind",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "tradition": "syllogist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "hinder",
+   "operativeAxis": [
+    "precision",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "a single objection — they lose the beat, no more",
+    "surge": "take the whole structure; YOU HAVE MADE A PERMANENT ENEMY of everyone standing on it"
+   },
+   "bounds": [
+    {
+     "text": "REACTIVE ONLY — it cannot open, only unmake a move underway",
+     "class": "hard"
+    },
+    {
+     "text": "the flaw must be REAL — a sound plan is immune",
+     "class": "hard"
+    },
+    {
+     "text": "the UNREASONING are untouched",
+     "class": "hard"
+    },
+    {
+     "text": "you make enemies of everyone whose ground you took",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/fight action that stops a move already underway. Rated 6 of 10 on one target for about two hours. Limit: reactive only — it cannot open an exchange."
+  }
+ ],
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

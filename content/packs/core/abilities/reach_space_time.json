@@ -2300,6 +2300,205 @@
     }
    ],
    "plainly": "A travel action, and at rank 3 also an attack. You take time out of the things around you — plants bud and wither, timber greys, stone weathers — and spend it on the road, crossing a leg in a fraction of its days. It needs things nearby with time in them, so bare salt or dead rock give almost nothing. What you drew from stays aged: crops fail, wood rots, and the people who live there notice and know what did it. At rank 2 you draw from a whole stretch and cross a route in days rather than weeks. At rank 3 you can take the time from a person instead, who ages the difference while you travel on it, which is a recognised attack and costs you standing."
+  },
+  {
+   "id": "the_folded_pace",
+   "name": "The Folded Pace",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_space_time",
+   "attribute": "physical",
+   "axes": {
+    "space_time": -0.6,
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "strike",
+    "break",
+    "move"
+   ],
+   "narrationHints": "Distance is a thing you carry. You put some of it where it should not be — inside a stride, inside a swing, inside a body — and the parts of them that were a hand apart are suddenly not.",
+   "description": "The Horizon-Walkers' first offense: span applied inward. A road-craft turned on a person.",
+   "notFor": "Precision at range (you fold near yourself; far work is for Spanwork proper); anything anchored or warded against span; a quiet exit — folding is felt by every Walker nearby; folding what you cannot see whole.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Wrong Stride",
+     "grants": "Fold a pace of distance into a target within a few strides. A leg arrives where the other leg is; an arm crosses a span that was not there. Joints and bone do not survive the arithmetic.",
+     "cannot": "SHORT RANGE — a few strides, and you must see the whole of what you fold. Warded or anchored targets are immune, and the March keeps such wards.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Gathered Ground",
+     "grants": "Fold the ground instead — pull a line of them into the same few feet, or put a wall where their charge already is.",
+     "cannot": "⚠ FOLDED GROUND TAKES ALLIES TOO, one rung lower — space does not check colours. It unfolds when you stop, and things that were folded come back wrong.",
+     "functions": [
+      "strike",
+      "break",
+      "move",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Closed Span",
+     "grants": "Fold enough distance into a person that there is no room left in them for the distance they are made of.",
+     "cannot": "⚠ THE WIELDER IS STRUCK ONE RUNG LOWER — you are holding a fold and standing next to it. The Unlanded, who never arrive anywhere, end up this way by degrees.",
+     "functions": [
+      "strike",
+      "break",
+      "move"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "tradition": "horizon",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "magnitude",
+    "precision"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a hand's fold — a wrenched joint",
+    "surge": "close the span; THE WIELDER IS STRUCK ONE RUNG LOWER"
+   },
+   "bounds": [
+    {
+     "text": "SHORT RANGE — a few strides, and you must see the whole",
+     "class": "hard"
+    },
+    {
+     "text": "warded or anchored targets are IMMUNE",
+     "class": "hard"
+    },
+    {
+     "text": "FOLDED GROUND TAKES ALLIES TOO, one rung lower",
+     "class": "hard"
+    },
+    {
+     "text": "at rank 3 the wielder is struck one rung lower",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight action that folds distance into a target's body. Rated 7 of 10 across a scope of 2. Limit: short range, and you must see the whole of what you fold."
+  },
+  {
+   "id": "the_spent_hour",
+   "name": "The Spent Hour",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_space_time",
+   "attribute": "mental",
+   "axes": {
+    "space_time": 0.6,
+    "death_life": -0.3
+   },
+   "functions": [
+    "strike",
+    "hinder"
+   ],
+   "narrationHints": "You take time off a thing. Not from its future — from it, now. Steel ages through in the swing, a rope goes to dust in the grip, a wound arrives having already gone bad, a man spends years standing still.",
+   "description": "The Hourkeepers' first offense: duration levied. Everything has time in it and you can take some.",
+   "notFor": "Giving time back (it is spent, not moved); the timeless and the Precursor-warded; taking time from something you are not touching or holding in sight; doing it fast — the Hourkeepers' craft is patient even when it is violent.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Levy",
+     "grants": "Take time off what one target relies on, or off the target. Gear ages through at the moment of use; a wound presents days old and septic; a body pays years in a breath and feels every one.",
+     "cannot": "ONE THING AT A TIME and it must be in reach or in clear sight. What you spend cannot be returned — including if you were wrong about who deserved it.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Toll",
+     "grants": "Levy continuously — they age, their gear fails piece by piece, and their wounds keep arriving older than they are.",
+     "cannot": "⚠ THE HOUR DOES NOT SORT: allies in the area are struck ONE RUNG LOWER by the same toll, and their gear ages with everyone else's.",
+     "functions": [
+      "strike",
+      "hinder",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Duration",
+     "grants": "Take all of it at once. What was going to be a life happens now, in front of you, quickly.",
+     "cannot": "⚠ THE WIELDER IS STRUCK ONE RUNG LOWER — you are standing inside the levy and you also have time in you. The Stopped, who will not let a moment pass, began by doing this too often.",
+     "functions": [
+      "strike",
+      "hinder",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "hourkeeper",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "magnitude",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 2,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a small levy — a strap perishes, a wound sours",
+    "surge": "the whole duration; THE WIELDER IS STRUCK ONE RUNG LOWER"
+   },
+   "bounds": [
+    {
+     "text": "ONE THING AT A TIME, in reach or clear sight",
+     "class": "hard"
+    },
+    {
+     "text": "what is spent CANNOT BE RETURNED",
+     "class": "cost"
+    },
+    {
+     "text": "ALLIES ARE STRUCK ONE RUNG LOWER by the toll",
+     "class": "hard"
+    },
+    {
+     "text": "at rank 3 the wielder is struck one rung lower",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/puzzle action that spends the time out of a target or their gear. Rated 7 of 10 across a scope of 2. Limit: one thing at a time, and what is spent cannot be returned."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

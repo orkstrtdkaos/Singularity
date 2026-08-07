@@ -37,7 +37,7 @@ import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode,
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
-import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed } from "./engine/companions.js";
+import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds } from "./engine/companions.js";
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
 import * as DeathModel from "./engine/death.js";
@@ -46,7 +46,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady } from "./engine/company.js";
+import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
@@ -60,7 +60,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow } from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -88,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.63";
+const APP_VERSION = "1.9.64";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4511,6 +4511,101 @@ function showBraidRename(def, onDone) {
   document.getElementById("braid-rename-go").onclick = () => { const v = String(document.getElementById("braid-rename-in").value || "").trim(); if (v) { renameBraid(def, v); close(); } };
 }
 
+/** SNG-353 — THE COMPANION DETAIL PANEL. Erik, in play: "I seem to have lost the bubble on where to find
+ *  their information… I searched codex but can't find what they do or the growing bond meaning… they don't
+ *  have a popup info either."
+ *
+ *  ⛔ HE DID NOT MISS IT. IT WAS NOT THERE. Every companion carries twelve authored fields and the player
+ *  could reach two and a half: `persona`, `knowledge`, `boundaries`, `stages`, `substrateAura` rendered
+ *  NOWHERE, and `role`/`appearance` only as `title=` tooltips — which do not exist on touch. On a phone a
+ *  companion was a name and an unscaled number.
+ *
+ *  ⚠️ THIS IS THE INVERSE OF THE BUG WE KEEP CATCHING. SNG-339 found readers with no writers; SNG-342 found
+ *  registered files nothing loads. This is a WRITER WITH NO READER — careful in-grain authoring that
+ *  reaches no surface — and Aevi's point stands: the consumer-contract sweep cannot catch it, because it
+ *  asserts that content supplies what consumers read and never that an authored field has a consumer at all.
+ *  Nothing here is new content. Every word was already written. */
+function showCompanionPanel(companionId) {
+  const c = CONTENT.companions?.[companionId];
+  if (!c) return;
+  document.getElementById("help-pop")?.remove();
+  const b = bondOf(character, c.id, CONTENT.rules, c.stages);
+  const thresholds = companionStageThresholds(b.stageCount, CONTENT.rules);
+  const maxBond = CONTENT.rules?.companions?.tiers?.maxBond ?? 10;
+  const grantAt = CONTENT.rules?.companions?.tiers?.grantAt ?? 6;
+  const dn = character.companionNames?.[c.id] || c.name;
+  const has = (id) => (character.abilities || []).some(a => a.abilityId === id);
+
+  // §1 — THE BOND READS AS PROGRESS, NOT A SCORE. Every number here was already computed and never said.
+  const nextIdx = thresholds.findIndex(t => b.bond < t);
+  const nextAt = nextIdx === -1 ? null : thresholds[nextIdx];
+
+  const list = (arr) => (arr || []).map(x => `<li>${esc(String(x))}</li>`).join("");
+  // ⚠️ assistTags RENDERED AS WHEN THEY HELP, NOT AS RAW TAGS. "assists: deathsense, scout, watch, tend"
+  // is a data dump; a player needs "she helps when you scout, watch, or tend."
+  const tags = (c.assistTags || []).map(t => esc(String(t).replace(/_/g, " ")));
+  const assistLine = tags.length
+    ? `They help when you ${tags.length === 1 ? tags[0] : tags.slice(0, -1).join(", ") + " or " + tags[tags.length - 1]}.`
+    : "";
+
+  const stageRows = (c.stages || []).map((st, i) => {
+    const at = i === 0 ? 0 : thresholds[i - 1];
+    const reached = b.stage >= st.stage;
+    const isNext = !reached && at === nextAt;
+    return `<div class="comp-stage ${reached ? "reached" : isNext ? "next" : "locked"}">
+      <span class="comp-stage-mark">${reached ? "●" : isNext ? "◐" : "○"}</span>
+      <span class="comp-stage-name">${esc(st.name || `Stage ${st.stage}`)}</span>
+      <span class="hint">${reached ? (i === 0 ? "from the first" : `reached at bond ${at}`) : `at bond ${at}`}</span>
+      ${reached && st.narrationHints ? `<div class="hint comp-stage-note">${esc(st.narrationHints)}</div>` : ""}
+    </div>`;
+  }).join("");
+
+  // ⛔ ERIK'S RULING: NAME IT, SEAL THE REST. The bond grant is read at exactly ONE place today — the
+  // moment it fires — so the answer to "what does the growing bond mean" was authored per companion and
+  // structurally unreachable until the question stopped mattering. A reward the player cannot see is not
+  // an incentive, it is a surprise. So the NAME and the THRESHOLD show as a destination, and nothing else:
+  // no grants text, no functions, no ranks. It makes the bond a goal without spending the gift.
+  const g = c.bondGrants;
+  const giftBlock = !g ? "" : has(g.id)
+    ? `<div class="comp-gift earned"><span class="sys-label">What the bond taught you</span>
+         <div><strong>${esc(g.name)}</strong> <span class="hint">— yours now; find it among your crafts</span></div></div>`
+    : `<div class="comp-gift"><span class="sys-label">What the bond will teach you</span>
+         <div>At bond ${grantAt}, ${esc(dn)} will teach you <strong>${esc(g.name)}</strong>.</div>
+         <div class="hint">What it does is theirs to show you.</div></div>`;
+
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card comp-card" role="dialog" aria-label="${esc(dn)}">
+    <h3>${esc(dn)}${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""}</h3>
+    <div class="hint comp-role">${esc(c.role || "")}</div>
+
+    <div class="comp-bond">
+      <div class="comp-bond-line"><strong>bond ${b.bond}/${maxBond}</strong> · stage ${b.stage} of ${b.stageCount}${nextAt != null ? ` · next at ${nextAt}` : " · deepest"}</div>
+      <div class="comp-bond-bar"><span style="width:${Math.max(2, Math.min(100, b.bond / maxBond * 100))}%"></span></div>
+    </div>
+
+    ${c.appearance ? `<p class="comp-appearance">${esc(c.appearance)}</p>` : ""}
+    ${c.persona ? `<p>${esc(c.persona)}</p>` : ""}
+
+    ${(c.knowledge || []).length ? `<div class="comp-sec"><span class="sys-label">What they know</span><ul>${list(c.knowledge)}</ul></div>` : ""}
+    ${assistLine ? `<div class="comp-sec"><span class="sys-label">How they help</span><div>${assistLine}</div></div>` : ""}
+
+    ${c.boundaries ? `<div class="comp-sec comp-boundaries"><span class="sys-label">What they will not do</span>
+      <div>${esc(c.boundaries)}</div></div>` : ""}
+
+    ${stageRows ? `<div class="comp-sec"><span class="sys-label">The bond, stage by stage</span>${stageRows}</div>` : ""}
+    ${giftBlock}
+    ${c.substrateNote ? `<div class="hint comp-sec">${esc(c.substrateNote)}</div>` : ""}
+
+    <button class="btn" id="comp-close">Close</button>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.onclick = (e) => { if (e.target === pop) close(); };
+  document.getElementById("comp-close").onclick = close;
+}
+
+
 /** The mint MOMENT modal — reuses the .help-overlay surface (phone tap-away identical) with its own
  *  celebratory .braid-moment styling. Carries the optional rename control inline. */
 function showBraidMoment(def) {
@@ -7938,7 +8033,13 @@ function renderCharacterScreen() {
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests ${infoDot("quest.routes")}</h3>
       ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions ${infoDot("companion.bond")}</h3>
-      ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
+      ${activeCompanions(character, CONTENT.companions).map(c => { const b = bondOf(character, c.id, CONTENT.rules, c.stages); const mx = CONTENT.rules?.companions?.tiers?.maxBond ?? 10;
+        // ⚠️ THE CODEX IS WHERE ERIK LOOKED, so it is the second tap target rather than an afterthought —
+        // and it showed a raw tag dump ("assists: deathsense, scout, watch, tend") where a sentence belongs.
+        const tg = (c.assistTags || []).map(t => esc(String(t).replace(/_/g, " ")));
+        const help = tg.length ? `helps when you ${tg.length === 1 ? tg[0] : tg.slice(0, -1).join(", ") + " or " + tg[tg.length - 1]}` : "";
+        return `<div class="codex-fact comp-open" data-companion="${esc(c.id)}" role="button" tabindex="0" style="cursor:pointer" title="Tap for the full record"><strong>${esc(character.companionNames?.[c.id] || c.name)}</strong> — ${esc(help)} <span class="hint">· bond ${b.bond}/${mx} · stage ${b.stage} of ${b.stageCount} — tap</span></div>`;
+      }).join("") || "<div class='insight'>traveling alone</div>"}</div>
     ${canLevelUp(character) ? `<button class="btn" id="cs-levelup" style="margin-top:10px; margin-right:8px">⬆ Level Up${character.skillPoints ? ` (${character.skillPoints})` : ""}</button>` : ""}
     <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">✦ Skill Wheel</button>
     <button class="btn secondary" id="cs-repair" style="margin-top:10px; margin-right:8px" title="Fix what the game got wrong at creation — domains, background, form, or an ability you never chose. No arguing with the GM.">🔧 Repair character</button>
@@ -10654,7 +10755,11 @@ function renderPlay(turn, opts = {}) {
       // SNG-135: ONE tight flex row per member — name · inline badge · compact action. Roster/roles/recruit
       // gating (SNG-126) unchanged; the companion description moves to the row title (hover) instead of a
       // printed line. data-rename/part/partally/recruit hooks are identical — layout only.
-      const compBody = comps.length ? `<div class="company-group"><div class="sys-label">Companions</div>${comps.map(id => { const c = CONTENT.companions[id]; const dn = character.companionNames?.[id] || c.name; const b = bondOf(character, c.id, CONTENT.rules, c.stages); return `<div class="company-row" title="${esc(c.role)}${c.appearance ? " — " + c.appearance : ""}"><span class="company-name">${esc(dn)}${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""}</span><span class="company-badge ${b.bond >= 3 ? "on" : ""}" title="bond grows through shared deeds, assists, and encounters — s${b.stageCount} is their deepest">bond ${b.bond}${b.stage > 1 ? ` · s${b.stage}` : ""}</span><span class="company-actions"><button class="company-action companion-rename" data-rename="${esc(id)}" title="Name them">✎</button><button class="company-action companion-part" data-part="${esc(id)}" title="Part ways">✕</button></span></div>`; }).join("")}</div>` : "";
+      const compBody = comps.length ? `<div class="company-group"><div class="sys-label">Companions</div>${comps.map(id => { const c = CONTENT.companions[id]; const dn = character.companionNames?.[id] || c.name; const b = bondOf(character, c.id, CONTENT.rules, c.stages); const th = companionStageThresholds(b.stageCount, CONTENT.rules); const nx = th.find(t => b.bond < t); const mx = CONTENT.rules?.companions?.tiers?.maxBond ?? 10;
+        // ⛔ SNG-353 — THE WHOLE NAME IS THE TAP TARGET, because `title=` was the ONLY delivery for role
+        // and appearance and hover does not exist on touch. And the badge reads as PROGRESS, not a score:
+        // every number in it (`bond 4/10 · s2 · next at 7`) was already computed and never said.
+        return `<div class="company-row"><span class="company-name comp-open" data-companion="${esc(id)}" role="button" tabindex="0" title="Tap for who they are, what they know, and what they will not do">${esc(dn)}${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""}</span><span class="company-badge ${b.bond >= 3 ? "on" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${b.bond}/${mx}${b.stage > 1 ? ` · s${b.stage}` : ""}${nx != null ? ` · next ${nx}` : ""}</span><span class="company-actions"><button class="company-action companion-rename" data-rename="${esc(id)}" title="Name them">✎</button><button class="company-action companion-part" data-part="${esc(id)}" title="Part ways">✕</button></span></div>`; }).join("")}</div>` : "";
       const allyBody = (roster.length || recruitable.length) ? `<div class="company-group"><div class="sys-label">Allies</div>${
         roster.map(r => `<div class="company-row" title="${esc(roleBadges(r.roles))}${r.teaches ? " · teaches " + traditionLabel(r.teaches) : ""}${r.liaisonFor ? " · liaison" : ""}"><span class="company-name">${esc(r.name)}</span><span class="company-badge" title="roles they hold in your company">${esc(roleBadges(r.roles))}</span>${r.teaches ? `<span class="company-badge on" title="a trainer — their presence lets you learn this people's capstones">⚔</span>` : ""}${r.liaisonFor ? `<span class="company-badge" title="a liaison — faster standing with their people">🤝</span>` : ""}<span class="company-actions">${r.recruited ? `<button class="company-action ally-part" data-partally="${esc(r.npcId)}" title="Part ways">✕</button>` : ""}</span></div>`).join("")
       }${recruitable.map(p => `<div class="company-row" title="${esc(p.label || "at your side")}"><span class="company-name">${esc(p.name)}</span><span class="company-badge hint">${esc(p.label || "at your side")}</span><span class="company-actions"><button class="company-action recruit" data-recruit="${esc(p.id)}" title="Ask them to travel with you">＋</button></span></div>`).join("")}</div>` : "";

@@ -12,7 +12,7 @@ RUNGS={"none","damaging","incapacitating","lethal"}
 # ⛔ CLASS 3 — phrases that assert a mechanic the engine cannot evaluate.
 # Each maps to the state variable that does not exist. Verified 2026-08-07.
 NO_MECHANIC=[
- (r"\ballies?\b|\byour own\b|\bfriend", "FRIENDLY FIRE — no ally-targeting state exists; the GM must be told concretely (e.g. 'allies in the area are struck one rung lower')"),
+ (r"\ballies?\b|your own (people|are|is|inside|in the)|\bfriendly\b", "FRIENDLY FIRE — no ally-targeting state exists; the GM must be told concretely (e.g. 'allies in the area are struck one rung lower')"),
  (r"standing in (it|the same)|you also have|takes? the same", "SELF-HARM — no wielder-harm mechanic exists; state the rung the wielder takes"),
  (r"\bthe peace is spent\b|already be there|held (tension|down)|a genuinely \w+ room", "PLACE-STATE — no location tension/mood variable exists; either name a real precondition or cut it"),
 ]
@@ -53,11 +53,33 @@ def check(abilities, existing_ids, V):
             fails.append(f"{i}: tree reaches damaging/lethal but functions declare no strike/break")
         if combat and rungs and all(r=='none' for r in rungs):
             fails.append(f"{i}: ⛔ an offensive ability whose every rank is harmRung 'none'")
+        # ⛔ CLASS 5 — RANK IS MASTERY (Erik 2026-08-07: "why are there still skills that would
+        # suck to take to lvl 3?"). Depth is EARNED, not bought — a GM-marked defining moment.
+        # A cost that appears FIRST at rank 3 makes arriving at mastery a downgrade. Costs of this
+        # kind belong on intensity.surge, which the player chooses.
+        SELFTAX=re.compile(r"wielder is (struck|measured)|wielder takes|the cost is your own",re.I)
+        AVOIDABLE=re.compile(r"\bif (inside|still present|you are inside)\b",re.I)
+        tr=a.get('tree',[])
+        if len(tr)==3:
+            hits=[bool(SELFTAX.search(t.get('cannot','') or '')) for t in tr]
+            if hits[2] and not hits[0] and not hits[1] and not AVOIDABLE.search(tr[2].get('cannot','') or ''):
+                fails.append(f"{i}: ⛔ RANK 3 INTRODUCES A MANDATORY SELF-TAX absent at ranks 1-2. "
+                             f"Rank is mastery and is EARNED — move this cost to intensity.surge.")
+            g3=(tr[2].get('grants','') or ''); g2=(tr[1].get('grants','') or '')
+            if len(g3) < len(g2)*0.6:
+                warns.append(f"{i}: rank 3 grants less text than rank 2 — check it is strictly better")
+
         # CLASS 3 — asserted mechanics with no evaluator
         blob=" ".join([a.get('notFor','')]+[t.get('cannot','') for t in a.get('tree',[])]
                       +[b.get('text','') for b in a.get('bounds',[])]).lower()
+        # a mention is FINE if it names a concrete rung or a checkable precondition —
+        # that is GM-adjudicable. It is only a warning when it is atmosphere.
+        CONCRETE=r"one rung lower|same rung|at 'damaging'|at \"damaging\"|struck at|point at|pointed at|no harm rung"
         for pat,why in NO_MECHANIC:
-            if re.search(pat,blob): warns.append(f"{i}: {why}")
+            for m in re.finditer(pat,blob):
+                window=blob[max(0,m.start()-160):m.end()+220]
+                if not re.search(CONCRETE,window):
+                    warns.append(f"{i}: {why}"); break
     return fails,warns
 
 if __name__=="__main__":

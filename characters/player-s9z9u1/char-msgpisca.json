@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 2,
-  "xp": 108,
+  "xp": 110,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -74,7 +74,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 105,
-  "energy": 105,
+  "energy": 104,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -287,22 +287,59 @@
         "player": "Let her sleep and rest yourself—drift into your own quietness, keeping watch from beneath her weight",
         "summary": "At the Lower-Pass Waystation, Splarf and Cevaine rest—the vigil ended, the boundary's pressure finally released, dawn arriving soft and unhurried in a shelter that knows how to hold quiet.",
         "narration": "You settle deeper into stillness, your arm a steady hold, and let the weight of her rest against you become its own kind of answer. The fire breathes. The caretaker moves through the shelter with unhurried grace, adding wood when the flames need it, moving the water-hook when someone might need it—present without intruding, the way this place seems to understand presence should work.\n\nTime moves differently here. The early-spring dawn creeps across the stone floor inch by inch, and you don't count the hours. Cevaine sleeps the sleep of someone whose form finally released—deep, dreamless, the kind of rest that rewrites what the body remembers about exhaustion. Her breathing matches the fire's rhythm. Outside, the lower pass is waking: you hear a shepherd calling to distant goats, the caw of spring crows, the soft rush of melt-water in the ravine below. None of it disturbs the shelter.\n\nBoo materializes from a shadow near the doorway—not entering the light, but present at its threshold, watching the path downhill with the attention it gives to things that matter. The dark has withdrawn from the forest edge. Whatever was gathering there has moved on, or settled, or decided to wait. The sealed veil's desperate pressure is gone; you feel its absence like a held breath finally released.\n\nYou drift, not quite sleeping, not quite awake. Cevaine's weight anchors you to the bench, to the warmth, to this moment that asks nothing of either of you."
+      },
+      {
+        "player": "Stay in the shelter longer—let the morning fully arrive, let the caretaker offer what they offer, resist the pull downhill",
+        "summary": "At the Lower-Pass Waystation at dawn, the shelter's warmth and the caretaker's quiet care offer rest—but Splarf feels the pull of the circuit and the path downhill, and stillness begins to chafe against the need to move forward.",
+        "narration": "You settle deeper into the stillness, letting the morning light inch across the stone floor. Cevaine sleeps against you, her breathing steady and unhurried. The caretaker moves through the shelter with that same quiet competence—tending the fire, setting fresh water at the hook, arranging blankets on the bench nearest the warmth.\n\nBut something in you won't settle. Your legs ache to move. The circuit calls—outposts to visit, farms that need hands, and somewhere downhill, Hoss. The path tugs at you with the same pull it always does, the same weight that sent you walking two years ago. The shelter is warm. The fire is kind. The caretaker asks nothing of you. And none of it changes what you know: that the voided ledger is in your pack, that Hoss is free of the claim, that the next step—writing back, finding her, placing this proof in her hands—is waiting somewhere the shelter cannot reach.\n\nYou feel it in your shoulders first. The restlessness. The itch that says *move*. The shelter holds you, yes—but it is holding you *still*, and you were never built to be still for long."
       }
     ],
     "lastTurn": {
-      "narration": "You settle deeper into stillness, your arm a steady hold, and let the weight of her rest against you become its own kind of answer. The fire breathes. The caretaker moves through the shelter with unhurried grace, adding wood when the flames need it, moving the water-hook when someone might need it—present without intruding, the way this place seems to understand presence should work.\n\nTime moves differently here. The early-spring dawn creeps across the stone floor inch by inch, and you don't count the hours. Cevaine sleeps the sleep of someone whose form finally released—deep, dreamless, the kind of rest that rewrites what the body remembers about exhaustion. Her breathing matches the fire's rhythm. Outside, the lower pass is waking: you hear a shepherd calling to distant goats, the caw of spring crows, the soft rush of melt-water in the ravine below. None of it disturbs the shelter.\n\nBoo materializes from a shadow near the doorway—not entering the light, but present at its threshold, watching the path downhill with the attention it gives to things that matter. The dark has withdrawn from the forest edge. Whatever was gathering there has moved on, or settled, or decided to wait. The sealed veil's desperate pressure is gone; you feel its absence like a held breath finally released.\n\nYou drift, not quite sleeping, not quite awake. Cevaine's weight anchors you to the bench, to the warmth, to this moment that asks nothing of either of you.",
-      "sceneSummary": "At the Lower-Pass Waystation, Splarf and Cevaine rest—the vigil ended, the boundary's pressure finally released, dawn arriving soft and unhurried in a shelter that knows how to hold quiet.",
+      "narration": "You settle deeper into the stillness, letting the morning light inch across the stone floor. Cevaine sleeps against you, her breathing steady and unhurried. The caretaker moves through the shelter with that same quiet competence—tending the fire, setting fresh water at the hook, arranging blankets on the bench nearest the warmth.\n\nBut something in you won't settle. Your legs ache to move. The circuit calls—outposts to visit, farms that need hands, and somewhere downhill, Hoss. The path tugs at you with the same pull it always does, the same weight that sent you walking two years ago. The shelter is warm. The fire is kind. The caretaker asks nothing of you. And none of it changes what you know: that the voided ledger is in your pack, that Hoss is free of the claim, that the next step—writing back, finding her, placing this proof in her hands—is waiting somewhere the shelter cannot reach.\n\nYou feel it in your shoulders first. The restlessness. The itch that says *move*. The shelter holds you, yes—but it is holding you *still*, and you were never built to be still for long.",
+      "sceneSummary": "At the Lower-Pass Waystation at dawn, the shelter's warmth and the caretaker's quiet care offer rest—but Splarf feels the pull of the circuit and the path downhill, and stillness begins to chafe against the need to move forward.",
       "choices": [
         {
-          "label": "Wake as the morning deepens and ask Cevaine what she needs—what comes next, what she chooses",
+          "label": "Pack up quietly and slip out into the morning—you can walk the circuit and carry the letter with you. The road finds what stillness never will.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask the caretaker directly: where does the path downhill lead? What settlements? Who passes through here regularly?",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful",
-            "ask"
+            "study"
+          ],
+          "abilityId": "storykeeper",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wake Cevaine—ask what she intends to do. Does she continue downhill with you, or return to the boundary? Let her choose, and let that choice move you.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -311,36 +348,18 @@
           "emergenceId": null
         },
         {
-          "label": "Stay in the shelter longer—let the morning fully arrive, let the caretaker offer what they offer, resist the pull downhill",
+          "label": "Stay a little longer—sit with the restlessness itself. Watch the fire. Listen to what the shelter still has to teach before the path pulls you away.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "endure",
-            "rest"
+            "study",
+            "careful"
           ],
-          "abilityId": "the_unbroken_practice",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Slip out quietly while Cevaine sleeps—move down the path to scout what waits below, what the daylight reveals",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout",
-            "careful",
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "numen_sense",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -348,33 +367,43 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 8,
-        "energy": 35,
+        "health": 0,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-document-and-the-ditch",
+          "title": "The Document and the Ditch",
+          "summary": "Armed with the voided ledger and facing the choice of what gets written back.",
+          "giver": "The Messenger / The sender on the other side",
+          "note": "The document is in hand. Hoss is free of the claim. Now the pull downhill—to find her, to place the proof in her hands, to learn what she chooses to do with her own freedom.",
+          "xpReward": null
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": {},
+      "adoptSchool": null,
       "offer": {
-        "thing": "The caretaker approaches with warm food—something simple, root-stock in broth, bread that smells of yesterday's baking—and sets it near the fire for whenever hunger arrives",
-        "from": "their practice of tending travelers; the way they've read that two people who held vigil need nourishment before choice"
+        "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
+        "from": "The nature of the waystation itself, and the caretaker's own practice of tending fire and travelers"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Lower-Pass Waystation interior at full dawn—stone shelter built into the rock face, central fireplace warm and steady, spring light now filling the doorway clearly. The shelter's interior is fully lit and warm; outside, the morning is clear and cold, the pass waking to the sound of melt-water and crows.",
+        "setting": "The Lower-Pass Waystation interior at full dawn—stone shelter built into the rock face, central fireplace glowing warm and steady, spring morning light flooding through the open doorway. The shelter is warm and held; outside, the pass is waking to melt-water sound and bird-call. The path downhill is visible from the threshold.",
         "npcsPresent": [
           {
             "name": "The Waystation Caretaker",
-            "state": "Moving quietly through the shelter, tending the fire, setting food near the warmth for whoever needs it. Present without demand, attentive to need without intrusion."
+            "state": "Moving with unhurried care through the shelter—tending the fire, arranging blankets, setting water and fresh food within reach. Present without intrusion, reading what travelers might need and providing it without question."
           },
           {
             "name": "Cevaine",
-            "state": "Asleep against Splarf's side, her lattice-trained body finally released into deep rest. Breathing steady and even. The sentinel-form has loosened; the choice to rest has rewritten her posture."
+            "state": "Still asleep against Splarf's side, breathing steady and even, her lattice-trained form finally released into deep rest. Oblivious to the restlessness beginning to move in her companion."
           }
         ],
         "objects": [
@@ -383,14 +412,15 @@
           "Carved shelves holding supplies—blankets, dried goods, water, simple food",
           "Water hook for filling vessels",
           "Wood-stack for the fire, well-tended",
-          "A simple bowl of root-stock broth and bread, set near the fire to warm",
-          "The open doorway to the spring dawn outside"
+          "Splarf's Traveler's Pack, resting near the bench",
+          "The Ledger Assignment—Void, inside the pack",
+          "Spring morning light streaming through the open doorway"
         ],
         "threads": [
           "What Cevaine will choose when she wakes—whether to continue downhill or return to the boundary",
-          "What waits on the path below—who passes, whether Hoss has come this way, what the daylight reveals",
-          "The caretaker's own story—why they tend this fire, what brings them to this threshold place",
-          "Boo's watch at the forest's edge—what it observes, what it knows has moved on or settled"
+          "What waits on the path below—who passes, whether Hoss has come this way, what news the settlements carry",
+          "The pull of the circuit and the waiting work—farms and outposts that need hands, people who expect Splarf's return",
+          "Where the voided ledger goes next—how to find Hoss, how to place this proof in her hands"
         ]
       },
       "npcUpdates": [
@@ -398,30 +428,20 @@
           "op": "update",
           "npcId": "cevaine",
           "name": "Cevaine",
-          "note": "Has entered full rest against Splarf—her lattice-trained form finally releasing the discipline that held her upright through the vigil. Sleep is deep and unguarded. This is integration, a stage the form permits.",
-          "learned": [
-            "Rest is not failure—it is integration, a stage the form permits and even honors",
-            "The body released can trust its anchor",
-            "Sleep is a form of choice, and she can choose it"
-          ],
-          "statusNote": "Asleep at the Lower-Pass Waystation, resting against Splarf, the vigil ended, her sentinel-form finally loosened into true rest",
-          "relationshipDelta": 0
-        },
-        {
-          "op": "update",
-          "npcId": "waystation-caretaker",
-          "name": "The Waystation Caretaker",
-          "note": "Has offered nourishment without demand—setting food near the fire for two people who held vigil and need sustenance before choice. Their practice is to read what travelers need and provide it without question or intrusion.",
-          "statusNote": "Tending the waystation fire at dawn, welcoming travelers with warmth and acceptance, offering food and shelter as a pure gift",
-          "relationshipDelta": 0
+          "role": "Sentinel of the sealed veil (now released); lattice-trained order-reader",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": null,
+          "note": "Sleeping deeply at the waystation, her sentinel-form finally released, the discipline that held the veil breaking yielding to rest. Her hand rests relaxed at her side, her breathing matched to the shelter's quiet rhythm.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Resting at the Lower-Pass Waystation, asleep against Splarf's side, her form released and at peace."
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The Lower-Pass Waystation has become a place of rest and integration—a shelter where vigil becomes stillness, where the discipline can release, where presence without demand is honored as a form of holding."
-        }
-      ],
+      "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [],
       "generateRequest": [],
@@ -430,14 +450,14 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 6,
-        "why": "dawn to full morning—rest that rewrites what exhaustion means"
+        "hoursPassed": 2,
+        "why": "The morning deepened; time moved in stillness while the caretaker worked and Cevaine slept. Two hours of shelter, and the restlessness began to kindle."
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "A woman asleep against a traveler's chest in a stone shelter's firelight—her angular form finally released from its geometric precision, her breathing matched to the fire's rhythm. Spring dawn fills the doorway. Outside, the pass is waking. Inside, there is only quiet and the weight of permission to rest.",
+      "imagePrompt": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -446,19 +466,18 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/A%20woman%20asleep%20against%20a%20traveler's%20chest%20in%20a%20stone%20shelter's%20firelight%E2%80%94her%20angular%20form%20finally%20released%20from%20its%20geometric%20precision%2C%20her%20breathing%20matched%20to%20the%20fire's%20rhythm.%20Spring%20dawn%20fills%20the%20doorway.%20Outside%2C%20the%20pass%20is%20waking.%20Inside%2C%20there%20is%20only%20quiet%20and%20the%20weight%20of%20permission%20to%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=85131&nologo=true"
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Lower-Pass Waystation interior at full dawn—stone shelter built into the rock face, central fireplace warm and steady, spring light now filling the doorway clearly. The shelter's interior is fully lit and warm; outside, the morning is clear and cold, the pass waking to the sound of melt-water and crows.",
+      "setting": "The Lower-Pass Waystation interior at full dawn—stone shelter built into the rock face, central fireplace glowing warm and steady, spring morning light flooding through the open doorway. The shelter is warm and held; outside, the pass is waking to melt-water sound and bird-call. The path downhill is visible from the threshold.",
       "npcsPresent": [
         {
           "name": "The Waystation Caretaker",
-          "state": "Moving quietly through the shelter, tending the fire, setting food near the warmth for whoever needs it. Present without"
+          "state": "Moving with unhurried care through the shelter—tending the fire, arranging blankets, setting water and fresh food within"
         },
         {
           "name": "Cevaine",
-          "state": "Asleep against Splarf's side, her lattice-trained body finally released into deep rest. Breathing steady and even. The s"
+          "state": "Still asleep against Splarf's side, breathing steady and even, her lattice-trained form finally released into deep rest."
         }
       ],
       "objects": [
@@ -467,22 +486,23 @@
         "Carved shelves holding supplies—blankets, dried goods, water, simple food",
         "Water hook for filling vessels",
         "Wood-stack for the fire, well-tended",
-        "A simple bowl of root-stock broth and bread, set near the fire to warm",
-        "The open doorway to the spring dawn outside"
+        "Splarf's Traveler's Pack, resting near the bench",
+        "The Ledger Assignment—Void, inside the pack",
+        "Spring morning light streaming through the open doorway"
       ],
       "threads": [
         "What Cevaine will choose when she wakes—whether to continue downhill or return to the boundary",
-        "What waits on the path below—who passes, whether Hoss has come this way, what the daylight reveals",
-        "The caretaker's own story—why they tend this fire, what brings them to this threshold place",
-        "Boo's watch at the forest's edge—what it observes, what it knows has moved on or settled"
+        "What waits on the path below—who passes, whether Hoss has come this way, what news the settlements carry",
+        "The pull of the circuit and the waiting work—farms and outposts that need hands, people who expect Splarf's return",
+        "Where the voided ledger goes next—how to find Hoss, how to place this proof in her hands"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 11,
+    "hour": 13,
     "realAnchor": null
   },
   "companions": [
@@ -612,14 +632,14 @@
         "s3"
       ],
       "progress": [
-        "Boo read the dark side of the sealed veil and confirmed the sender knows Hoss by name. The message is about the ledger, the assignment, the eviction. The sender has been tasked with delivery and is desperate to complete it. The boundary is about to yield.",
         "↳ Splarf learned that the sender on the other side of the sealed veil is a messenger tasked with delivering something to him specifically about Hoss and the eviction—the ledger assignment, the…",
         "Splarf received the voided ledger assignment from a messenger sent from the other side of the sealed veil. The document itself is in hand; the assignment is void, and Hoss is named as free from the Notch claim.",
         "↳ The messenger delivered the document that voids the ledger assignment—Hoss is free from the resource claim. Splarf now holds the proof in his hands.",
         "The messenger revealed that the sender on the other side is fading—the cost of the crossing was presence itself. The urgency was final.",
         "↳ Splarf took the voided ledger assignment from the messenger's hands and learned that the sender on the other side spent their own presence to complete the delivery—the cost was real, the urgency was…",
         "Splarf recorded the three days as story—the veil listened, but the thinness scattered some edges. The tale holds, but not entirely solid.",
-        "Descended from The Thinning with the voided ledger assignment in hand and Cevaine at their side. The document is proof—Hoss is free from the claim. Now the question becomes: what gets written back, and who writes it?"
+        "Descended from The Thinning with the voided ledger assignment in hand and Cevaine at their side. The document is proof—Hoss is free from the claim. Now the question becomes: what gets written back, and who writes it?",
+        "The document is in hand. Hoss is free of the claim. Now the pull downhill—to find her, to place the proof in her hands, to learn what she chooses to do with her own freedom."
       ],
       "aliases": [],
       "startedAt": "2026-08-05T23:21:17.511Z",
@@ -644,7 +664,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Waking from deep rest, her form genuinely released from sentinel-duty. The lattice-trained discipline is reasserting, but Splarf's steady presence without demand is teaching her that yielding can be a choice, not a break. She is learning to carry her form lighter.",
         "[d3] She wakes from deep rest with her form genuinely released from sentinel-duty. The lattice-trained discipline is reasserting only softly now. She reads Splarf with directness and acceptance. She is ready to move downhill.",
         "[d3] Standing and ready to travel downhill. The sentinel discipline is reasserting gently now, no longer a cage but a framework. The form holds, but choice is present within it.",
         "[d3] Descended from The Thinning into early spring dark, her wounds healing cleanly, her form reasserted but gentler now—no longer the cage of refusal but a framework chosen moment by moment. She reads the waystation with precision and asks silently: ready? She is ready.",
@@ -653,7 +672,8 @@
         "[d4] Descended from The Thinning's sealed veil and entered the waystation shelter. She chose to sit beside Splarf—maintaining careful distance, but present. Her sentinel-form is beginning to release its tension as warmth reaches her.",
         "[d4] At the waystation, her sentinel-form finally loosens into rest. She sits beside Splarf, maintaining careful distance but present. Her breathing deepens toward sleep. The discipline that held the veil is beginning to release—not shattering, but yielding with precision, moment by moment.",
         "[d4] Descended from The Thinning's opened veil with Splarf at her side. Entered the waystation shelter and allowed her lattice-trained form to release into rest—falling asleep against Splarf's shoulder, the discipline finally yielding to exhaustion. The sentinel's form is no longer held rigid by duty…",
-        "[d4] Has entered full rest against Splarf—her lattice-trained form finally releasing the discipline that held her upright through the vigil. Sleep is deep and unguarded. This is integration, a stage the form permits."
+        "[d4] Has entered full rest against Splarf—her lattice-trained form finally releasing the discipline that held her upright through the vigil. Sleep is deep and unguarded. This is integration, a stage the form permits.",
+        "[d4] Sleeping deeply at the waystation, her sentinel-form finally released, the discipline that held the veil breaking yielding to rest. Her hand rests relaxed at her side, her breathing matched to the shelter's quiet rhythm."
       ],
       "knownFacts": [
         "She is learning to hold the form as hers, not as a barrier",
@@ -676,7 +696,7 @@
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Asleep at the Lower-Pass Waystation, resting against Splarf, the vigil ended, her sentinel-form finally loosened into true rest",
+      "statusNote": "Resting at the Lower-Pass Waystation, asleep against Splarf's side, her form released and at peace.",
       "domains": {
         "primary": "lattice"
       },
@@ -687,7 +707,7 @@
       },
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Cevaine%2C%20Woman%2C%20Lattice-trained%20order-reader%20of%20the%20Seventh%20Measure%3B%20sentinel%20at%20the%20sealed%20veil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39649&nologo=true",
       "_portraitTier": "devoted",
-      "met": 19,
+      "met": 20,
       "bondType": "romantic",
       "bondStage": "courting",
       "deeds": [
@@ -1088,10 +1108,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The forest edge has gone quiet—the watcher truly withdrawn, leaving only ordinary dark. Boo's attention settles. The clearing is no longer…",
-        "from": "three days of vigil and presence released their own kind of answer; the thin place is no longer pushing back"
-      },
-      {
         "thing": "A caretaker tending the waystation fire—someone established in routine, calm, and asking nothing but offering shelter without hesitation.",
         "from": "The waystation itself, a place of rest built into the pass for travelers; and the fiction's own need for a grounded, tended presence at…"
       },
@@ -1106,6 +1122,10 @@
       {
         "thing": "The caretaker approaches with warm food—something simple, root-stock in broth, bread that smells of yesterday's baking—and sets it near…",
         "from": "their practice of tending travelers; the way they've read that two people who held vigil need nourishment before choice"
+      },
+      {
+        "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
+        "from": "The nature of the waystation itself, and the caretaker's own practice of tending fire and travelers"
       }
     ],
     "offscreenCursor": 5,
@@ -5094,25 +5114,25 @@
     }
   },
   "tendencies": {
-    "stealth": 3.3127800340155273,
-    "strategic": 3.964312750530781,
-    "cautious": 12.58495354810424,
-    "cerebral": 6.052333757258604,
-    "patient": 4.573087711885869,
-    "devotion": 1.1893478793255499,
-    "risky": 2.5173247661077163,
-    "generous": 6.759664197045904,
-    "social": 10.59462057288155,
-    "craft": 0.7460475838599907,
-    "amorous": 3.237959180456931,
-    "leadership": 0.9036878906249999
+    "stealth": 3.229960533165139,
+    "strategic": 3.8652049317675115,
+    "cautious": 12.270329709401633,
+    "cerebral": 5.901025413327139,
+    "patient": 5.458760519088722,
+    "devotion": 1.159614182342411,
+    "risky": 2.454391646955023,
+    "generous": 6.590672592119756,
+    "social": 10.32975505855951,
+    "craft": 0.7273963942634909,
+    "amorous": 3.157010200945508,
+    "leadership": 0.8810956933593749
   },
   "aptitudes": [
     "stalwart",
     "shadow",
     "naive"
   ],
-  "actionCount": 54,
+  "actionCount": 55,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -5509,8 +5529,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786072313956,
-  "rev": 169,
+  "updatedAt": 1786072449500,
+  "rev": 170,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5702,7 +5722,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 60
+    "the_numinous_reach": 61
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -5726,10 +5746,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-08-06T22:00:44.715Z",
-      "lastAt": "2026-08-07T03:11:53.948Z",
+      "lastAt": "2026-08-07T03:14:09.488Z",
       "startDay": 37,
       "endDay": 38,
-      "beats": 18
+      "beats": 19
     }
   ],
   "establishedFacts": [
@@ -5784,30 +5804,30 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 33,
+      "applied": 34,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 54,
-    "scene": 54,
-    "choices": 54,
-    "offer": 30,
+    "sceneSummary": 55,
+    "scene": 55,
+    "choices": 55,
+    "offer": 31,
     "codexUpdates": 29,
     "imagePrompt": 24,
-    "gambitApt": 40,
-    "sceneEnded": 53,
-    "characterDeltas": 42,
+    "gambitApt": 41,
+    "sceneEnded": 54,
+    "characterDeltas": 43,
     "arcOps": 1,
     "factUpdates": 7,
     "placeUpdates": 15,
-    "timeOps": 35,
+    "timeOps": 36,
     "deeds": 9,
     "ledgerEvents": 4,
-    "questUpdates": 15,
-    "npcUpdates": 46,
+    "questUpdates": 16,
+    "npcUpdates": 47,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -5818,14 +5838,14 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 54,
+  "_opTurns": 55,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "beastfriend": 3,
       "numen_sense": 5,
       "storykeeper": 4,
-      "the_unbroken_practice": 3,
+      "the_unbroken_practice": 4,
       "steady_soul": 8
     },
     "coActivations": {},
@@ -5845,7 +5865,7 @@
       "beastfriend": 37,
       "numen_sense": 37,
       "storykeeper": 37,
-      "the_unbroken_practice": 37,
+      "the_unbroken_practice": 38,
       "steady_soul": 38
     }
   },
@@ -5989,7 +6009,9 @@
     "prepare": 1,
     "meditate": 1,
     "flirt": 1,
-    "guard": 1
+    "guard": 1,
+    "endure": 1,
+    "rest": 1
   },
   "_stageOpRefusals": [
     "the-document-and-the-ditch: not-current-stage (named \"stage_4_record\", current is \"null\")"

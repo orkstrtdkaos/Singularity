@@ -133,3 +133,26 @@ done, not when you are"*). That is T4 failing at the top of the ladder, where it
 
 ⚠️ **Positional costs remain fine** — "if you are inside the ruin" is avoidable by play and is a real
 tactical constraint, not a tax. The gate distinguishes these.
+
+---
+
+## §7 — T6: THE CANNOT IS THE BACKLASH *(added 2026-08-07, Erik's insight)*
+
+Erik: *"many of the cannots could actually translate into surge failure costs… similar to a conserve
+being able to avoid the negative effects."*
+
+⚠️ **I had been writing every failure mode into `cannot`, where it can only ever be a prohibition, while
+`surge` — which is the game's actual risk dial and is fully wired — got a line of flavour.** The
+constraint and the failure were the same thought and I was only writing half of it.
+
+- **`backlash`** — what going wrong looks like for THIS craft. ⛔ **Not "you take damage."** The Thinned
+  Veil's backlash is *the thinning does not close.* The Offered Mouth's is *it looks at the person who
+  showed it.* **Derive it from the craft's own `cannot`; that is where it was already hiding.**
+- **`conserveSuppresses`** — what conserve buys beyond a smaller number. ⚠️ **Without this, conserve is
+  strictly worse and no one ever picks it.** With it, conserve is *"the snare stays at bind only — no
+  bite, on anyone, including you."* That is a decision.
+
+⚠️ **Verified before authoring, per T3:** `shouldBacklash()` and `applySurgeBacklash()` are live, degree-
+scaled and tier-costed. **The prose `intensity.conserve/surge` I had been authoring for weeks was read by
+nothing** — my own writer-with-no-reader, found by running my own evaluator test on my own back
+catalogue. The gate now requires `backlash` on anything that claims FIGHT.

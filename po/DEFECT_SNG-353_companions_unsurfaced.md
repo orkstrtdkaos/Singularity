@@ -72,10 +72,14 @@ Tapping a companion — in the company row **and** the codex block — opens a p
    hasten an ending, ever, for any reason, including mercy"* is characterisation and a rule at once.
 4. **The bond ladder** — every authored stage, with its threshold, marked reached / next / locked. The
    next stage's threshold is named. **What the current stage changed is named.**
-5. **What the bond teaches** — `bondGrants.name` and what it grants, shown as a **goal** with its
-   threshold, before it unlocks. ⚠️ **PO judgement call for Erik: name it, or tease it?** Naming it makes
-   the bond a legible goal; teasing preserves the gift. **I lean naming it** — a companion arc is long
-   enough that a visible destination helps more than a surprise pays — but this one is genuinely yours.
+5. **What the bond teaches** — ⛔ **ERIK RULED 2026-08-07: NAME IT, HIDE THE REST.** Show
+   `bondGrants.name` and its bond threshold as a visible goal — *"At bond 6, Marrow will teach you The
+   Ashward"* — and **nothing else**. No grants text, no ranks, no functions. The player knows there is a
+   named thing coming and what it will cost to reach; what it DOES stays sealed.
+   ⚠️ **AND WHEN IT UNLOCKS IT USES THE BRAID/MINT CELEBRATION FORMAT** — the same reveal treatment a
+   discovered braid gets, not a line in a status list. The goal is legible; the arrival is an event.
+   This is the better answer than the one I proposed (I leaned name-everything): it makes the bond a
+   destination without spending the gift, and it reuses a celebration surface that already exists.
 
 **No new authored content is required for any of this.** Every field exists. This is a rendering ticket.
 

@@ -1,2501 +1,2701 @@
 {
-  "schemaVersion": 1,
-  "powerSystem": "reach_demonic_angelic",
-  "gated": "learned",
-  "note": "Crafts of The Descent/The Ascent (demonic_angelic axis). DESCENT is the demonic-pole craft of the Abyssal Choir — appetite, bargain, the honesty about hunger the pious lack; ASCENT is the angelic-pole craft of the Seraphic Orders — mercy, judgment, luminous certainty. Neither is 'evil' or 'good' in the flat sense: the Choir's honesty about want is a real virtue and the Orders' certainty is a real danger. The pure loci (The Maw, The Choir-Height) are cult-held. Authored by Aevi, SNG-054.",
-  "abilities": [
+ "schemaVersion": 1,
+ "powerSystem": "reach_demonic_angelic",
+ "gated": "learned",
+ "note": "Crafts of The Descent/The Ascent (demonic_angelic axis). DESCENT is the demonic-pole craft of the Abyssal Choir — appetite, bargain, the honesty about hunger the pious lack; ASCENT is the angelic-pole craft of the Seraphic Orders — mercy, judgment, luminous certainty. Neither is 'evil' or 'good' in the flat sense: the Choir's honesty about want is a real virtue and the Orders' certainty is a real danger. The pure loci (The Maw, The Choir-Height) are cult-held. Authored by Aevi, SNG-054.",
+ "abilities": [
+  {
+   "id": "descent",
+   "name": "Descent",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.5,
+    "chaos_order": -0.2,
+    "emotional_logical": -0.2
+   },
+   "functions": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "narrationHints": "Something in the room admits what it wants, and the admitting has teeth.",
+   "description": "The demonic-pole mastery: appetite named, bargains struck, the refusal to pretend that want is not the engine. Not evil — the honest hunger.",
+   "notFor": "Pretending you do not want what you want (that is the Orders' failure, not the Choir's); mercy without price; anything that requires you to be innocent.",
+   "tree": [
     {
-      "id": "descent",
-      "name": "Descent",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_demonic_angelic",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.5,
-        "chaos_order": -0.2,
-        "emotional_logical": -0.2
-      },
-      "functions": [
-        "bind",
-        "command",
-        "reveal"
-      ],
-      "narrationHints": "Something in the room admits what it wants, and the admitting has teeth.",
-      "description": "The demonic-pole mastery: appetite named, bargains struck, the refusal to pretend that want is not the engine. Not evil — the honest hunger.",
-      "notFor": "Pretending you do not want what you want (that is the Orders' failure, not the Choir's); mercy without price; anything that requires you to be innocent.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Named Want",
-          "grants": "Name what a person actually wants — not what they claim, not what they should — and speak it aloud so they hear it.",
-          "cannot": "Naming a want is not granting it. Some people will hate you forever for the naming.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Bargain",
-          "grants": "Strike a binding bargain: both sides get what they truly want, and both sides pay what it truly costs.",
-          "cannot": "The Bargain is exactly fair, which is the horror of it. It will not protect someone from the price of their own wanting.",
-          "functions": [
-            "reveal",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Deep Descent",
-          "grants": "Descend into a person, a place, or an institution and surface with its true engine — the appetite it is actually running on, however it dresses.",
-          "cannot": "What you surface with, you now carry. The Choir's deepest are unable to see anyone as anything but their hunger, and are usually right, and are unbearable.",
-          "functions": [
-            "reveal",
-            "bind",
-            "command"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "SOCIAL",
-        "INVESTIGATE",
-        "FIGHT"
-      ],
-      "tradition": "abyssal",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "bolster",
-      "operativeAxis": [
-        "namingPower",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 5,
-        "duration": 6,
-        "scope": 2
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "add",
-          "axis": "special",
-          "delta": "STRIKE A BINDING BARGAIN: BOTH SIDES GET WHAT THEY TRULY WANT, AND BOTH SIDES PAY WHAT IT TRULY COSTS",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "DESCEND INTO a person, a place, or an institution and SURFACE WITH ITS TRUE ENGINE — the appetite it actually runs on",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "name it quietly — half the force, and they can pretend they did not hear",
-        "surge": "double it; WHAT YOU SURFACE WITH, YOU NOW CARRY"
-      },
-      "bounds": [
-        {
-          "text": "NAMING A WANT IS NOT GRANTING IT — some people will hate you for the naming alone",
-          "class": "hard"
-        },
-        {
-          "text": "THE BARGAIN IS EXACTLY FAIR, WHICH IS THE HORROR OF IT",
-          "class": "hard"
-        },
-        {
-          "text": "WHAT YOU SURFACE WITH, YOU NOW CARRY",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social/investigate/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 adds to special; rank 3 extends scope. Limit: naming A Want IS Not Granting IT — some people will hate you for the naming alone."
+     "rank": 1,
+     "name": "The Named Want",
+     "grants": "Name what a person actually wants — not what they claim, not what they should — and speak it aloud so they hear it.",
+     "cannot": "Naming a want is not granting it. Some people will hate you forever for the naming.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
-      "id": "appetite_sense",
-      "name": "Appetite-Sense",
-      "levelReq": 1,
-      "energyCost": 3,
-      "powerSystem": "reach_demonic_angelic",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.3
-      },
-      "functions": [
-        "reveal"
-      ],
-      "narrationHints": "You can feel the shape of what they are hungry for before they say a word.",
-      "description": "Sense the true want under the presented want — the first gift of the Descent.",
-      "notFor": "Reading facts (that is Verity); reading feeling (that is Pathos). This reads HUNGER.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Appetite-Sense",
-          "grants": "Feel what a person actually wants, beneath what they are asking for.",
-          "cannot": "It reads want, not intent. What they will DO about the want is a different craft.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Hollow Read",
-          "grants": "Feel the want a person is refusing to admit to themselves — the one doing the most work.",
-          "cannot": "Knowing the want they deny is a weapon, and it is very hard not to use it.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Whole Hunger",
-          "grants": "Read the appetite of a crowd, a faction, a city — what the whole thing is actually reaching for.",
-          "cannot": "A crowd's hunger is not the sum of its people's. It is stupider and much stronger.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "SOCIAL",
-        "INVESTIGATE"
-      ],
-      "tradition": "abyssal",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "setup",
-      "operativeAxis": [
-        "perceptionDepth",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 1,
-        "range": 10,
-        "note": "SOCIAL attribute throughout"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "perceptionDepth",
-          "delta": "feel the want A PERSON IS REFUSING TO ADMIT TO THEMSELVES — the one doing the most work",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "read the appetite of A CROWD, A FACTION, A CITY — what the whole thing is actually reaching for",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a read of the want — half the depth, and it stays surface",
-        "surge": "double it; KNOWING THE WANT THEY DENY IS A WEAPON, and it is very hard to un-know"
-      },
-      "bounds": [
-        {
-          "text": "IT READS WANT, NOT INTENT — what they will DO about it is their own",
-          "class": "hard"
-        },
-        {
-          "text": "KNOWING THE WANT THEY DENY IS A WEAPON, and very hard to un-know",
-          "class": "cost"
-        },
-        {
-          "text": "A CROWD'S HUNGER IS NOT THE SUM OF ITS PEOPLE'S — it is its own thing",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 extends scope. Limit: iT Reads Want, Not Intent — what they will DO about it is their own."
+     "rank": 2,
+     "name": "The Bargain",
+     "grants": "Strike a binding bargain: both sides get what they truly want, and both sides pay what it truly costs.",
+     "cannot": "The Bargain is exactly fair, which is the horror of it. It will not protect someone from the price of their own wanting.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
-      "id": "the_offered_price",
-      "name": "The Offered Price",
-      "levelReq": 2,
-      "energyCost": 5,
-      "powerSystem": "reach_demonic_angelic",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.4,
-        "falsehood_truth": 0.2
-      },
-      "functions": [
-        "bind",
-        "foresee",
-        "reveal"
-      ],
-      "narrationHints": "The price is named plainly, and it is worse for being fair.",
-      "description": "Name the true price of a thing someone wants — exactly, honestly, with nothing hidden.",
-      "notFor": "Lying about the price (Falsecraft's country, and the Choir despises it); forcing the taking.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Offered Price",
-          "grants": "Name what a thing will truly cost the person who wants it. They may still take it.",
-          "cannot": "Naming the price does not stop them. It only means they cannot say they were not told.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Held Price",
-          "grants": "The price, once named and accepted, BINDS — it will be paid, in the coin named, whatever they do afterward.",
-          "cannot": "You are now the one who holds it. Collecting is not optional, even when you have come to love them.",
-          "functions": [
-            "reveal",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The True Cost",
-          "grants": "Name what a course of action will ultimately cost — not the ledger price, the real one, years out.",
-          "cannot": "People do not believe true costs. The Choir's oldest grief is being right and ignored.",
-          "functions": [
-            "reveal",
-            "bind",
-            "foresee"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "SOCIAL",
-        "INVESTIGATE"
-      ],
-      "tradition": "abyssal",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "setup",
-      "operativeAxis": [
-        "foresight",
-        "bindStrength"
-      ],
-      "mechanic": {
-        "magnitude": 5,
-        "duration": 8
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "add",
-          "axis": "bindStrength",
-          "delta": "the price, ONCE NAMED AND ACCEPTED, BINDS — it will be paid, IN THE COIN NAMED, whatever they do afterward",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "deepen",
-          "axis": "foresight",
-          "delta": "name what a course of action will ULTIMATELY cost — not the ledger price, THE REAL ONE, YEARS OUT",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "name the cost — half the binding, and it is only information",
-        "surge": "double it; YOU ARE NOW THE ONE WHO HOLDS IT, and COLLECTING IS NOT OPTIONAL"
-      },
-      "bounds": [
-        {
-          "text": "NAMING THE PRICE DOES NOT STOP THEM — it only means they knew",
-          "class": "hard"
-        },
-        {
-          "text": "YOU ARE NOW THE ONE WHO HOLDS IT — COLLECTING IS NOT OPTIONAL",
-          "class": "hard"
-        },
-        {
-          "text": "PEOPLE DO NOT BELIEVE TRUE COSTS — the Choir's oldest grief",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to bindStrength; rank 3 deepens foresight. Limit: naming The Price Does Not Stop Them — it only means they knew."
-    },
-    {
-      "id": "ascent",
-      "name": "Ascent",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_demonic_angelic",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.5,
-        "chaos_order": 0.2,
-        "dark_light": 0.2
-      },
-      "functions": [
-        "bind",
-        "command",
-        "restore",
-        "reveal"
-      ],
-      "narrationHints": "The light here does not warm. It measures.",
-      "description": "The angelic-pole mastery: mercy given, judgment pronounced, the luminous certainty that both heals and terrifies. Not good in the flat sense — certainty is a danger.",
-      "notFor": "Doubt (the Orders have very little); mercy that costs the giver nothing; being wrong gracefully.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Measuring Eye",
-          "grants": "See a person's moral weight — what they have done, what it cost others, what they carry.",
-          "cannot": "It measures the deed, not the person. The Orders forget this distinction constantly and catastrophically.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Mercy",
-          "grants": "Grant a real absolution — lift a weight a person has carried, genuinely, and they will feel it leave.",
-          "cannot": "Mercy given is mercy TAKEN ON. The weight does not vanish; it moves to you.",
-          "functions": [
-            "reveal",
-            "restore"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Judgment",
-          "grants": "Pronounce a judgment that BINDS — it is true, everyone present knows it is true, and it does not come undone.",
-          "cannot": "If you are wrong, the judgment binds anyway. The Seraphic Orders' history is a long argument about that sentence.",
-          "functions": [
-            "reveal",
-            "restore",
-            "bind",
-            "command"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "SOCIAL",
-        "INVESTIGATE",
-        "FIGHT"
-      ],
-      "tradition": "seraphic",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "bolster",
-      "operativeAxis": [
-        "judgement",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 5,
-        "duration": 8,
-        "scope": 2
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "add",
-          "axis": "special",
-          "delta": "GRANT A REAL ABSOLUTION — LIFT A WEIGHT a person has carried, genuinely, and THEY WILL FEEL IT LEAVE",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: PRONOUNCE A JUDGMENT THAT BINDS — it is true, everyone present knows it is true, AND IT DOES NOT COME UNDONE",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "weigh it quietly — half the force, and nothing is pronounced",
-        "surge": "double it; IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY"
-      },
-      "bounds": [
-        {
-          "text": "IT MEASURES THE DEED, NOT THE PERSON",
-          "class": "hard"
-        },
-        {
-          "text": "MERCY GIVEN IS MERCY TAKEN ON — the weight does not vanish, IT MOVES TO YOU",
-          "class": "hard"
-        },
-        {
-          "text": "IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A social/investigate/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 adds to special; rank 3 adds to special. Limit: iT Measures The Deed, Not The Person."
-    },
-    {
-      "id": "the_measuring_eye",
-      "name": "The Weighing Look",
-      "levelReq": 1,
-      "energyCost": 3,
-      "powerSystem": "reach_demonic_angelic",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.3
-      },
-      "functions": [
-        "reveal"
-      ],
-      "narrationHints": "You are being looked at by something that is adding you up.",
-      "description": "See the moral weight a person carries — the first gift of the Ascent.",
-      "notFor": "Reading want (Appetite-Sense); reading truth (Verity). This reads WEIGHT — deed and cost.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Weighing Look",
-          "grants": "See roughly what a person carries — the harm done, the harm borne.",
-          "cannot": "It sees weight, not story. A heavy person may be heavy for good reasons.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Clear Ledger",
-          "grants": "See the specifics: what was done, to whom, and whether it was ever answered for.",
-          "cannot": "Seeing the ledger tempts you to collect on it. That is the Orders' besetting sin.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Unblinking Measure",
-          "grants": "Weigh anyone, at any distance, without their consent or knowledge.",
-          "cannot": "Nobody survives being weighed forever. Including you, and the Orders do it to their own.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "SOCIAL",
-        "INVESTIGATE"
-      ],
-      "tradition": "seraphic",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "setup",
-      "operativeAxis": [
-        "perceptionDepth",
-        "range"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 1,
-        "range": 20,
-        "note": "MENTAL attribute throughout — judgement is mental where appetite is social"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "perceptionDepth",
-          "delta": "see THE SPECIFICS: what was done, TO WHOM, and WHETHER IT WAS EVER ANSWERED FOR",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "range",
-          "delta": "WEIGH ANYONE, AT ANY DISTANCE, WITHOUT THEIR CONSENT OR KNOWLEDGE",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a glance at the weight — half the detail, and you can look away",
-        "surge": "double it; NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU"
-      },
-      "bounds": [
-        {
-          "text": "IT SEES WEIGHT, NOT STORY — a heavy person may be heavy for good reasons",
-          "class": "hard"
-        },
-        {
-          "text": "SEEING THE LEDGER TEMPTS YOU TO COLLECT ON IT",
-          "class": "cost"
-        },
-        {
-          "text": "NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: iT Sees Weight, Not Story — a heavy person may be heavy for good reasons."
-    },
-    {
-      "id": "the_shielding_word",
-      "name": "The Shielding Word",
-      "levelReq": 3,
-      "energyCost": 6,
-      "powerSystem": "reach_demonic_angelic",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.4,
-        "violence_peace": 0.2
-      },
-      "functions": [
-        "resist",
-        "shield",
-        "ward"
-      ],
-      "narrationHints": "A word is spoken and the blow simply does not arrive.",
-      "description": "Interpose a spoken certainty between harm and a person — the Seraphic ward, which is why the Orders are loved despite everything.",
-      "notFor": "Warding what deserves to land (the Orders will not, and this is either integrity or arrogance depending on who you ask).",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Shielding Word",
-          "grants": "Ward one person from one harm with a spoken certainty.",
-          "cannot": "You must actually believe it. A hollow word wards nothing, and everyone can hear the hollow.",
-          "functions": [
-            "ward",
-            "shield"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Standing Ward",
-          "grants": "The ward holds over a place and a people, for as long as you keep speaking for them.",
-          "cannot": "You must keep speaking. And you must keep meaning it, which is harder.",
-          "functions": [
-            "ward",
-            "shield",
-            "resist"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Unbroken Word",
-          "grants": "A ward that holds after you have gone — a word spoken so wholly it keeps standing on its own.",
-          "cannot": "It stands on what you meant when you said it. If you change, it does not. Sister Alder's ward is of this kind, and she has thought about that a great deal.",
-          "functions": [
-            "ward",
-            "shield",
-            "resist"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "FIGHT",
-        "SOCIAL"
-      ],
-      "tradition": "seraphic",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "guard",
-      "operativeAxis": [
-        "ward",
-        "targets",
-        "autonomy"
-      ],
-      "mechanic": {
-        "magnitude": 6,
-        "soak": 5,
-        "soakRank": 2,
-        "duration": 8,
-        "targets": 1,
-        "note": "A guard whose soak IS YOUR CONVICTION — 'you must ACTUALLY BELIEVE IT. A hollow word wards nothing.'"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "the ward holds over A PLACE AND A PEOPLE — FOR AS LONG AS YOU KEEP SPEAKING FOR THEM",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "autonomy",
-          "delta": "SPECIAL: a ward that HOLDS AFTER YOU HAVE GONE — a word spoken so wholly it KEEPS STANDING ON ITS OWN",
-          "from": "r3 grants — a TENTH autonomy-increment craft"
-        }
-      ],
-      "intensity": {
-        "conserve": "speak one ward — half the protection, and it costs you nothing to mean",
-        "surge": "double it; YOU MUST KEEP MEANING IT, WHICH IS THE HARDER HALF"
-      },
-      "bounds": [
-        {
-          "text": "YOU MUST ACTUALLY BELIEVE IT — A HOLLOW WORD WARDS NOTHING",
-          "class": "hard"
-        },
-        {
-          "text": "you must KEEP SPEAKING, and KEEP MEANING IT",
-          "class": "hard"
-        },
-        {
-          "text": "IT STANDS ON WHAT YOU MEANT WHEN YOU SAID IT — IF YOU CHANGE, IT DOES NOT",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A fight/social action that reduces incoming harm. Its strength is rated 6 out of 10 and absorbs 5 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 8 hours Ranks: rank 2 extends targets; rank 3 adds to autonomy. Limit: you Must Actually Believe IT — A Hollow Word Wards Nothing."
-    },
-    {
-      "id": "the_appetite_strike",
-      "name": "The Appetite Strike",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.4
-      },
-      "effectTags": [
-        "desire",
-        "wound",
-        "appetite"
-      ],
-      "harmRung": "incapacitating",
-      "narrationHints": "She didn't hit the person. She hit what the person was protecting.",
-      "description": "Strike at a person's hunger — not the body, but what they've been keeping safe by not admitting it.",
-      "notFor": [],
-      "tradition": "abyssal",
-      "functions": [
-        "hinder",
-        "strike"
-      ],
-      "challengeTypes": [
-        "combat",
-        "social",
-        "psychological"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Unguarded Want",
-          "grants": "Strike at what a person most doesn't want to lose — they are fortified against the ordinary attack but have no guard on what they want.",
-          "cannot": "Anything rank 2 adds — name the appetite and hit it — not the body, what the body has been protecting; it needs a REAL, HELD appetite.",
-          "functions": [
-            "strike"
-          ],
-          "gains": "broaden",
-          "harmRung": "damaging"
-        },
-        {
-          "rank": 2,
-          "name": "Named and Struck",
-          "grants": "Name the appetite and hit it — not the body, what the body has been protecting. The wound is real and lands where they cannot wall it out.",
-          "cannot": "Anything rank 3 adds — hit what they kept unnamed; it needs a REAL, HELD appetite.",
-          "functions": [
-            "strike",
-            "hinder"
-          ],
-          "gains": "broaden",
-          "harmRung": "damaging"
-        },
-        {
-          "rank": 3,
-          "name": "The Thing They Would Not Name",
-          "grants": "Hit what they kept unnamed. They will know what was struck. They will not be the same on the other side of it.",
-          "cannot": "Nothing further; this is the craft's ceiling; it needs a REAL, HELD appetite.",
-          "functions": [
-            "strike",
-            "hinder"
-          ],
-          "gains": "deepen",
-          "harmRung": "incapacitating"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "damage",
-      "operativeAxis": [
-        "damage",
-        "precision"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 2,
-          "d": 6
-        },
-        "plus": 0,
-        "marginFloorPer": 0.03,
-        "damageType": "appetite",
-        "note": "incapacitating. It strikes what a person has been PROTECTING, not their body."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "precision",
-          "delta": "NAME THE APPETITE AND HIT IT — not the body, WHAT THE BODY HAS BEEN PROTECTING; the wound is real",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: HIT WHAT THEY KEPT UNNAMED. They will know what was struck. THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT.",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a glancing blow — half the wound, and it is deniable",
-        "surge": "double it; THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT"
-      },
-      "bounds": [
-        {
-          "text": "it needs a REAL, HELD appetite — a person who wants nothing is proof against it",
-          "class": "hard"
-        },
-        {
-          "text": "THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A combat/social/psychological action that deals damage. It rolls 2d6 appetite damage Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: it needs a Real, Held appetite — a person who wants nothing is proof against it."
-    },
-    {
-      "id": "the_consumed_wound",
-      "name": "The Consumed Wound",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.3
-      },
-      "effectTags": [
-        "healing",
-        "price",
-        "consumption"
-      ],
-      "harmRung": "none",
-      "narrationHints": "The price is paid. So is the wound.",
-      "description": "Offer a wound or pain to the deep — it will be taken. What the abyss eats doesn't come back, but neither does the hurt.",
-      "notFor": [],
-      "tradition": "abyssal",
-      "functions": [
-        "break",
-        "heal",
-        "restore"
-      ],
-      "challengeTypes": [
-        "medical",
-        "magical",
-        "hardship"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Give It Down",
-          "grants": "Offer a wound, pain, or carried weight to the deep — the abyss will take it. The wound goes with it.",
-          "cannot": "Anything rank 2 adds — not healed in the ordinary sense — gone; IT REMOVES, IT DOES NOT MEND.",
-          "functions": [
-            "heal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Consumed Entirely",
-          "grants": "Not healed in the ordinary sense — gone; the abyss ate it and what remains is the person without what they were carrying.",
-          "cannot": "Anything rank 3 adds — take a wound from another into yourself and offer it down; IT REMOVES, IT DOES NOT MEND.",
-          "functions": [
-            "heal",
-            "break"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Transfer",
-          "grants": "Take a wound from another into yourself and offer it down. You carry it briefly; then you don't; then neither does anyone.",
-          "cannot": "Nothing further; this is the craft's ceiling; IT REMOVES, IT DOES NOT MEND.",
-          "functions": [
-            "heal",
-            "break",
-            "restore"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "healing",
-      "operativeAxis": [
-        "removal",
-        "targets"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 2,
-          "d": 4
-        },
-        "plus": 2,
-        "targets": 1,
-        "note": "A THIRTEENTH THEORY OF MEDICINE — CONSUMPTION: 'not healed in the ordinary sense — GONE; the abyss ate it.'"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "removal",
-          "delta": "NOT HEALED — GONE. The abyss ate it, and what remains is THE PERSON WITHOUT WHAT THEY WERE CARRYING",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "TAKE A WOUND FROM ANOTHER INTO YOURSELF and offer it down — you carry it briefly; then you do not; then NEITHER OF YOU DOES",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "offer a little — half the removal, and you keep the rest",
-        "surge": "double it; WHAT THE ABYSS EATS DOES NOT COME BACK, including the parts that were load-bearing"
-      },
-      "bounds": [
-        {
-          "text": "IT REMOVES, IT DOES NOT MEND — what is eaten is GONE",
-          "class": "hard"
-        },
-        {
-          "text": "what the abyss eats DOES NOT COME BACK, INCLUDING THE PARTS THAT WERE LOAD-BEARING",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A medical/magical/hardship action that restores health. It rolls 2d4+2 It affects 1 target Ranks: rank 2 deepens removal; rank 3 extends targets. Limit: iT Removes, IT Does Not Mend — what is eaten is Gone."
-    },
-    {
-      "id": "the_dread_mantle",
-      "name": "The Dread Mantle",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.4
-      },
-      "effectTags": [
-        "dread",
-        "protection",
-        "weight"
-      ],
-      "harmRung": "none",
-      "narrationHints": "What she'd seen was still on her. Things that hadn't seen it backed away.",
-      "description": "Carry what you've been through as armor — the weight of where you've been deters what would prey on the ordinary.",
-      "notFor": [],
-      "tradition": "abyssal",
-      "functions": [
-        "hinder",
-        "shield",
-        "ward"
-      ],
-      "challengeTypes": [
-        "combat",
-        "social",
-        "defense"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Let It Show",
-          "grants": "Let what you carry show — the depth of where you've been. Things that prey on the vulnerable find another target.",
-          "cannot": "Anything rank 2 adds — the dread around you is a genuine deterrent — not fear you project but weight others feel before they decide; IT DETERS THOSE WHO CHOOSE.",
-          "functions": [
-            "ward"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Real Weight",
-          "grants": "The dread around you is a genuine deterrent — not fear you project but weight others feel before they decide. Those who press anyway do it weakened: the nerve goes out of the approach, the first move comes slower and worse than they meant it to.",
-          "cannot": "Anything rank 3 adds — the mantle arrives before you do; IT DETERS THOSE WHO CHOOSE.",
-          "functions": [
-            "ward",
-            "hinder"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "It Precedes You",
-          "grants": "The mantle arrives before you do. Those who would act against you are navigating something they don't want to examine, and most choose not to.",
-          "cannot": "Nothing further; this is the craft's ceiling; IT DETERS THOSE WHO CHOOSE; and it still costs what it costs: a mantle that arrives before you means YOU ARE NEVER ARRIVING SOMEWHERE FRESH.",
-          "functions": [
-            "ward",
-            "hinder",
-            "shield"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "guard",
-      "operativeAxis": [
-        "deterrence",
-        "autonomy"
-      ],
-      "mechanic": {
-        "magnitude": 5,
-        "soak": 0,
-        "soakRank": 0,
-        "evasion": 3,
-        "evasionRank": 1,
-        "duration": 8,
-        "note": "A SEVENTEENTH DEFENSIVE LOGIC — DETERRED: soak 0. It does not stop harm; it makes attackers CHOOSE A DIFFERENT TARGET. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family with DISCOURAGED and NEVER-FOUND."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "deterrence",
-          "delta": "the dread is a GENUINE DETERRENT — not fear you project but WEIGHT OTHERS FEEL BEFORE THEY DECIDE",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "autonomy",
-          "delta": "SPECIAL: THE MANTLE ARRIVES BEFORE YOU DO — those who would act against you are navigating something they do not want to",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "let a little show — half the deterrence, and you pass for ordinary",
-        "surge": "double it; a mantle that arrives before you do means YOU ARE NEVER ARRIVING SOMEWHERE FRESH"
-      },
-      "bounds": [
-        {
-          "text": "IT DETERS THOSE WHO CHOOSE — a beast, a machine, or a fanatic is undeterred",
-          "class": "hard"
-        },
-        {
-          "text": "a mantle that arrives before you means YOU ARE NEVER ARRIVING SOMEWHERE FRESH",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 8 hours Ranks: rank 2 deepens deterrence; rank 3 adds to autonomy. Limit: iT Deters Those Who Choose — a beast, a machine, or a fanatic is undeterred."
-    },
-    {
-      "id": "the_called_form",
-      "name": "The Called Form",
-      "levelReq": 3,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.5
-      },
-      "effectTags": [
-        "summon",
-        "desire",
-        "form"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She reached down and pulled something up. It stood there, not quite a thing.",
-      "description": "Call something from the deep — the fear beneath the anger, the hunger beneath the pride — and give it form.",
-      "notFor": [],
-      "tradition": "abyssal",
-      "functions": [
-        "command",
-        "reveal",
-        "summon",
-        "transform"
-      ],
-      "challengeTypes": [
-        "magical",
-        "social",
-        "tactical"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Surfaced Want",
-          "grants": "Summon the underside of a thing — the fear beneath the anger, the hunger beneath the pride — and give it momentary form in the room.",
-          "cannot": "Anything rank 2 adds — call a form from the deep that serves a purpose — an appetite made briefly real, a fear given body — and it holds until it is dismissed; what you call is AN APPETITE GIVEN FORM.",
-          "functions": [
-            "summon",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Called and Held",
-          "grants": "Call a form from the deep that serves a purpose — an appetite made briefly real, a fear given body — and it holds until it is dismissed.",
-          "cannot": "Anything rank 3 adds — what you call up holds, acts in the world, and is yours to direct until you release it; what you call is AN APPETITE GIVEN FORM.",
-          "functions": [
-            "summon",
-            "reveal",
-            "transform"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "What You Called Is Yours",
-          "grants": "What you call up holds, acts in the world, and is yours to direct until you release it. It is not docile. It is yours.",
-          "cannot": "Nothing further; this is the craft's ceiling; what you call is AN APPETITE GIVEN FORM; and it still costs what it costs: IT IS NOT DOCILE. IT IS DIRECTED.",
-          "functions": [
-            "summon",
-            "reveal",
-            "transform",
-            "command"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "construct",
-      "operativeAxis": [
-        "summonPower",
-        "control"
-      ],
-      "mechanic": {
-        "magnitude": 6,
-        "duration": 4,
-        "variance": 4,
-        "damageType": "appetite"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "summonPower",
-          "delta": "CALL A FORM FROM THE DEEP THAT SERVES A PURPOSE — an appetite made briefly real, A FEAR GIVEN BODY",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "control",
-          "delta": "what you call up HOLDS, ACTS, and is YOURS TO DIRECT until you release it. 'IT IS NOT DOCILE. IT IS DIRECTED.'",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "call something small — half the power, and it goes back easily",
-        "surge": "double it; IT IS NOT DOCILE. IT IS DIRECTED."
-      },
-      "bounds": [
-        {
-          "text": "what you call is AN APPETITE GIVEN FORM — it wants what it is",
-          "class": "hard"
-        },
-        {
-          "text": "IT IS NOT DOCILE. IT IS DIRECTED. — the difference matters when you stop directing",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A magical/social/tactical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens summonPower; rank 3 extends control. Limit: what you call is AN Appetite Given Form — it wants what it is."
-    },
-    {
-      "id": "the_descent_path",
-      "name": "The Descent Path",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.4,
-        "space_time": -0.1
-      },
-      "effectTags": [
-        "passage",
-        "below",
-        "descent"
-      ],
-      "harmRung": "none",
-      "narrationHints": "The way down is always there. You just have to be willing to look for it.",
-      "description": "Find or make the passage to the below — the literal underground, the hidden layer, the place others don't know to reach.",
-      "notFor": [],
-      "tradition": "abyssal",
-      "functions": [
-        "open",
-        "reveal",
-        "travel"
-      ],
-      "challengeTypes": [
-        "exploration",
-        "stealth",
-        "navigation"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Way Down",
-          "grants": "Find the passage to the below — the underground route, the hidden bottom of a space, the layer the map doesn't show.",
-          "cannot": "Anything rank 2 adds — travel through the below — beneath sight, beneath light, along the layer others don't know how to reach; it goes DOWN.",
-          "functions": [
-            "reveal",
-            "open"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Deep Road",
-          "grants": "Travel through the below — beneath sight, beneath light, along the layer others don't know how to reach.",
-          "cannot": "Anything rank 3 adds — take others down the descent path and bring them back up; it goes DOWN.",
-          "functions": [
-            "reveal",
-            "open",
-            "travel"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Guide the Descent",
-          "grants": "Take others down the descent path and bring them back up. The route is yours to walk now and to share.",
-          "cannot": "Nothing further; this is the craft's ceiling; it goes DOWN; and it still costs what it costs: the below is A PLACE, and places have inhabitants.",
-          "functions": [
-            "reveal",
-            "open",
-            "travel"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "reposition",
-      "operativeAxis": [
-        "access",
-        "targets"
-      ],
-      "mechanic": {
-        "range": 10,
-        "push": 0,
-        "magnitude": 4,
-        "duration": 4,
-        "targets": 1
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "access",
-          "delta": "TRAVEL THROUGH THE BELOW — beneath sight, beneath light, ALONG THE LAYER OTHERS DO NOT KNOW HOW TO REACH",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "TAKE OTHERS DOWN and BRING THEM BACK UP — the route is yours to walk and to share",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "find the way down — half the depth, and you can turn back easily",
-        "surge": "double it; the below is a place, and places have inhabitants"
-      },
-      "bounds": [
-        {
-          "text": "it goes DOWN — there is no version of this that goes up",
-          "class": "hard"
-        },
-        {
-          "text": "the below is A PLACE, and places have inhabitants",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A exploration/stealth/navigation action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 10. Ranks: rank 2 deepens access; rank 3 extends targets. Limit: it goes Down — there is no version of this that goes up."
-    },
-    {
-      "id": "the_choir_sustains",
-      "name": "The Choir Sustains",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.3
-      },
-      "effectTags": [
-        "communion",
-        "sustain",
-        "deep"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She was running out. Then she wasn't. Something below was still going.",
-      "description": "Sustain through communion with the choir — when you begin to fail, the deep holds what the above has exhausted.",
-      "notFor": [],
-      "tradition": "abyssal",
-      "functions": [
-        "empower",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "hardship",
-        "survival"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Deep Holds",
-          "grants": "When you begin to run out, the communion sustains — something from below keeps going what above has exhausted.",
-          "cannot": "Anything rank 2 adds — draw from the depth to carry your party through the hardest part — the energy isn't yours, but it is available to those who have been where you have been; THE ENERGY IS NOT YOURS.",
-          "functions": [
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Sustaining the Group",
-          "grants": "Draw from the depth to carry your party through the hardest part — the energy isn't yours, but it is available to those who have been where you have been.",
-          "cannot": "Anything rank 3 adds — the communion sustains indefinitely in conditions of deprivation — as long as the connection holds, you and yours hold; THE ENERGY IS NOT YOURS.",
-          "functions": [
-            "sustain",
-            "empower"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Unexhausted Deep",
-          "grants": "The communion sustains indefinitely in conditions of deprivation — as long as the connection holds, you and yours hold. And the communion gives more than endurance: those who share it are steadier of hand and clearer of head than they were before it took them — better at what they do, not merely still able to do it.",
-          "cannot": "Nothing further; this is the craft's ceiling; THE ENERGY IS NOT YOURS.",
-          "functions": [
-            "sustain",
-            "empower"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "bolster",
-      "operativeAxis": [
-        "upkeepRelief",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 24,
-        "targets": 1
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "draw from the depth to carry YOUR PARTY through the hardest part — 'the energy is not yours, but it is available'",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: the communion sustains INDEFINITELY in deprivation — as long as the connection holds, you and yours do not run out",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "draw a little — half the relief, and the debt is small",
-        "surge": "double it; THE ENERGY IS NOT YOURS, and what is not yours is borrowed"
-      },
-      "bounds": [
-        {
-          "text": "THE ENERGY IS NOT YOURS — it comes from the communion, and the communion is a relationship",
-          "class": "hard"
-        },
-        {
-          "text": "as long as THE CONNECTION HOLDS — a severed abyssal has nothing",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A endurance/hardship/survival action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: the Energy IS Not Yours — it comes from the communion, and the communion is a relationship."
-    },
-    {
-      "id": "the_judged_strike",
-      "name": "The Judged Strike",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.4,
-        "violence_peace": 0.1
-      },
-      "effectTags": [
-        "judgment",
-        "condemnation",
-        "strike"
-      ],
-      "harmRung": "lethal",
-      "narrationHints": "The blow wasn't just a blow. It said something.",
-      "description": "Strike with the weight of judgment — the blow carries condemnation; the target knows what it means.",
-      "notFor": [],
-      "tradition": "seraphic",
-      "functions": [
-        "strike",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "combat",
-        "social",
-        "tactical"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Warranted Blow",
-          "grants": "Strike with the weight of judgment — the blow lands harder because it is warranted; the target knows it.",
-          "cannot": "Anything rank 2 adds — a judged blow harms and reveals — what they have done is named in the moment of impact; THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED.",
-          "harmRung": "damaging",
-          "functions": [
-            "strike"
-          ],
-          "gains": "broaden"
-        },
-        {
-          "rank": 2,
-          "name": "Named in the Strike",
-          "grants": "A judged blow harms and reveals — what they have done is named in the moment of impact; all present understand the context.",
-          "cannot": "Anything rank 3 adds — strike with the full authority of the order — the blow is both physical and pronouncement; THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED.",
-          "harmRung": "damaging",
-          "functions": [
-            "strike",
-            "reveal"
-          ],
-          "gains": "broaden"
-        },
-        {
-          "rank": 3,
-          "name": "Hierarchy's Strike",
-          "grants": "Strike with the full authority of the order — the blow is both physical and pronouncement; what was done is named, weighed, and answered.",
-          "cannot": "Nothing further; this is the craft's ceiling; THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED; and it still costs what it costs: a blow that is also a pronouncement is one YOU CANNOT TAKE BACK.",
-          "harmRung": "lethal",
-          "functions": [
-            "strike",
-            "reveal"
-          ],
-          "gains": "deepen"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "damage",
-      "operativeAxis": [
-        "damage",
-        "revelation"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 2,
-          "d": 6
-        },
-        "plus": 0,
-        "marginFloorPer": 0.03,
-        "damageType": "judgement",
-        "note": "lethal rung"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "add",
-          "axis": "revelation",
-          "delta": "a judged blow HARMS AND REVEALS — what they have done is NAMED IN THE MOMENT OF IMPACT; all present understand",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: strike with THE FULL AUTHORITY OF THE ORDER — the blow is both PHYSICAL AND PRONOUNCEMENT",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a measured blow — half the force, and nothing is announced",
-        "surge": "double it; a blow that is also a pronouncement is a pronouncement you cannot take back"
-      },
-      "bounds": [
-        {
-          "text": "THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED — an unwarranted strike is just a strike",
-          "class": "hard"
-        },
-        {
-          "text": "a blow that is also a pronouncement is one YOU CANNOT TAKE BACK",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A combat/social/tactical action that deals damage. It rolls 2d6 judgement damage Ranks: rank 2 adds to revelation; rank 3 adds to special. Limit: the Blow Lands Harder Because IT IS Warranted — an unwarranted strike is just a strike."
-    },
-    {
-      "id": "the_raised_form",
-      "name": "The Raised Form",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.4,
-        "destruction_creation": 0.2
-      },
-      "effectTags": [
-        "make",
-        "order",
-        "hierarchy"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She didn't just build it. She raised it. There's a difference.",
-      "description": "Make through seraphic authority — what is raised embodies proper order and organizes what surrounds it.",
-      "notFor": [],
-      "tradition": "seraphic",
-      "functions": [
-        "command",
-        "make",
-        "summon"
-      ],
-      "challengeTypes": [
-        "craft",
-        "leadership",
-        "magical"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Ordered Thing",
-          "grants": "Make something that embodies proper order — a structure, a space, an object whose form holds the hierarchy clearly.",
-          "cannot": "Anything rank 2 adds — raise a form that organizes what surrounds it — the made thing sets the tone for the space it occupies; it instantiates what a thing SHOULD be.",
-          "functions": [
-            "make"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Organizing Made",
-          "grants": "Raise a form that organizes what surrounds it — the made thing sets the tone for the space it occupies.",
-          "cannot": "Anything rank 3 adds — summon the form a thing should have and instantiate it — the building that should stand, the arrangement that should be — made real by the authority to say what is proper; it instantiates what a thing SHOULD be.",
-          "functions": [
-            "make",
-            "command"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "What Should Exist",
-          "grants": "Summon the form a thing should have and instantiate it — the building that should stand, the arrangement that should be — made real by the authority to say what is proper.",
-          "cannot": "Nothing further; this is the craft's ceiling; it instantiates what a thing SHOULD be; and it still costs what it costs: a form that sets the tone SETS IT FOR EVERYONE, including those who did not choose it.",
-          "functions": [
-            "make",
-            "command",
-            "summon"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "construct",
-      "operativeAxis": [
-        "order",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 5,
-        "duration": 168,
-        "scope": 2
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "order",
-          "delta": "raise a form that ORGANIZES WHAT SURROUNDS IT — the made thing SETS THE TONE for the space it occupies",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: SUMMON THE FORM A THING SHOULD HAVE and INSTANTIATE IT — the building that should stand, the arrangement that should hold",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "raise something plain — half the influence, and it organizes only itself",
-        "surge": "double it; a form that sets the tone SETS IT FOR EVERYONE"
-      },
-      "bounds": [
-        {
-          "text": "it instantiates what a thing SHOULD be — which requires being RIGHT about that",
-          "class": "hard"
-        },
-        {
-          "text": "a form that sets the tone SETS IT FOR EVERYONE, including those who did not choose it",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A craft/leadership/magical action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens order; rank 3 adds to special. Limit: it instantiates what a thing Should be — which requires being Right about that."
-    },
-    {
-      "id": "the_ascent_path",
-      "name": "The Ascent Path",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.4,
-        "space_time": -0.1
-      },
-      "effectTags": [
-        "ascent",
-        "travel",
-        "height"
-      ],
-      "harmRung": "none",
-      "narrationHints": "The way up is always there for those who are meant to go.",
-      "description": "Ascend past what should be a physical limit — and open the ascent path for others.",
-      "notFor": [],
-      "tradition": "seraphic",
-      "functions": [
-        "move",
-        "open",
-        "travel"
-      ],
-      "challengeTypes": [
-        "exploration",
-        "tactical",
-        "navigation"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Past the Limit",
-          "grants": "Ascend past what should be a physical barrier — scale what isn't scalable, reach the height that closes off the ordinary approach.",
-          "cannot": "Anything rank 2 adds — show the ascent path and others can follow — the route up that wasn't there before is there now for those you lead; it goes UP.",
-          "functions": [
-            "move",
-            "open"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Opened Way",
-          "grants": "Show the ascent path and others can follow — the route up that wasn't there before is there now for those you lead.",
-          "cannot": "Anything rank 3 adds — travel the ascent as a road — any height, any approach — and carry your party with you to wherever the way up leads; it goes UP.",
-          "functions": [
-            "move",
-            "open",
-            "travel"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Choir-Height",
-          "grants": "Travel the ascent as a road — any height, any approach — and carry your party with you to wherever the way up leads.",
-          "cannot": "Nothing further; this is the craft's ceiling; it goes UP.",
-          "functions": [
-            "move",
-            "open",
-            "travel"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "reposition",
-      "operativeAxis": [
-        "range",
-        "targets"
-      ],
-      "mechanic": {
-        "range": 15,
-        "push": 0,
-        "magnitude": 4,
-        "duration": 4,
-        "targets": 1
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "SHOW THE ASCENT PATH AND OTHERS CAN FOLLOW — the route up that was not there is there now FOR THOSE YOU SHOW",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "range",
-          "delta": "travel the ascent AS A ROAD — any height, any approach — and CARRY YOUR PARTY to wherever the way up leads",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "climb what shouldn't be climbable — half the height, and you can come down",
-        "surge": "double it; the way up leads where the way up leads"
-      },
-      "bounds": [
-        {
-          "text": "it goes UP — there is no version of this that goes down",
-          "class": "hard"
-        },
-        {
-          "text": "THE WAY UP LEADS WHERE THE WAY UP LEADS — you do not choose the destination, only the climb",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A exploration/tactical/navigation action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 15. Ranks: rank 2 extends targets; rank 3 extends range. Limit: it goes UP — there is no version of this that goes down."
-    },
-    {
-      "id": "the_sustained_order",
-      "name": "The Sustained Order",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.3
-      },
-      "effectTags": [
-        "hierarchy",
-        "sustain",
-        "communion"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She wasn't doing it alone. She hadn't been for a while.",
-      "description": "Sustain through participation in the hierarchy — the order holds those who hold to it.",
-      "notFor": [],
-      "tradition": "seraphic",
-      "functions": [
-        "empower",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "hardship",
-        "leadership"
-      ],
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Order Holds",
-          "grants": "Draw from the hierarchy to go on — the seraphic who holds their place in the order does not run out alone.",
-          "cannot": "Anything rank 2 adds — sustain your party through the hierarchy's resources — not comfort but genuine sustaining authority; YOU MUST HOLD YOUR PLACE IN THE ORDER.",
-          "functions": [
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "What the Order Provides",
-          "grants": "Sustain your party through the hierarchy's resources — not comfort but genuine sustaining authority; what the order gives, you carry some of.",
-          "cannot": "Anything rank 3 adds — in the hardest conditions, the seraphic who remains part of the order remains part of what the order can do — which is more than any single body can; YOU MUST HOLD YOUR PLACE IN THE ORDER.",
-          "functions": [
-            "sustain",
-            "empower"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Part of What the Order Can Do",
-          "grants": "In the hardest conditions, the seraphic who remains part of the order remains part of what the order can do — which is more than any single body can. And a body inside the order does not merely last: it works better than it could alone — surer, faster to act, and braver than the same person standing outside the hierarchy.",
-          "cannot": "Nothing further; this is the craft's ceiling; YOU MUST HOLD YOUR PLACE IN THE ORDER; and it still costs what it costs: what the order gives, THE ORDER MAY ASK BACK.",
-          "functions": [
-            "sustain",
-            "empower"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "nativeOrCombination": "native",
-      "shape": "bolster",
-      "operativeAxis": [
-        "upkeepRelief",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 24,
-        "targets": 1
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "sustain your party THROUGH THE HIERARCHY'S RESOURCES — not comfort but GENUINE SUSTAINING AUTHORITY",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: the seraphic who REMAINS PART OF THE ORDER remains part of WHAT THE ORDER CAN DO",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "draw on your standing — half the relief, and it asks nothing of the order",
-        "surge": "double it; what the order gives, THE ORDER MAY ASK BACK"
-      },
-      "bounds": [
-        {
-          "text": "YOU MUST HOLD YOUR PLACE IN THE ORDER — a seraphic cast out has nothing",
-          "class": "hard"
-        },
-        {
-          "text": "what the order gives, THE ORDER MAY ASK BACK",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A endurance/hardship/leadership action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: you Must Hold Your Place IN The Order — a seraphic cast out has nothing."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_deep_covenant",
-      "name": "The Deep Covenant",
-      "levelReq": 4,
-      "energyCost": 12,
-      "powerSystem": "reach_demonic_angelic",
-      "tradition": "abyssal",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.6
-      },
-      "functions": [
-        "bind",
-        "command"
-      ],
-      "narrationHints": "You do not raise your voice. You offer the terms, and the terms are already inside them, and they find themselves agreeing to a thing they will spend years explaining to themselves.",
-      "description": "The Abyssal art of the binding pact — a covenant offered so precisely to the hollow in someone that refusing it feels like refusing themselves. Not domination. Invitation, with a hook already set.",
-      "notFor": "It only binds what already wanted the bargain; a whole soul with nothing owed has nothing for the hook to catch. And a covenant witnessed and named aloud by a third party can be broken.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Deep Covenant",
-          "grants": "Bind a willing-if-they-knew-it party to a lasting pact that shapes their choices toward your end.",
-          "cannot": "It cannot compel the truly unwilling, it frays when spoken plainly by a witness, and every covenant you set is a thread that runs both ways — they are bound to you, and you to the keeping of it.",
-          "functions": [
-            "command",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 2,
-          "name": "The Covenant That Spreads",
-          "grants": "Set a covenant on a household, a company, or an office rather than a person — those who take the role take the pact with it, without ever being offered it. And a covenant you already hold can be tightened: the hook set deeper, the choices narrowed further.",
-          "cannot": "It still catches only what already wanted the bargain; a body with nothing owed offers nothing to hook. A covenant on an office becomes known to that office in time, and they will go looking for the witness who can name it aloud. And tightening a hook is felt — they may not know what, but they know.",
-          "functions": [
-            "command",
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "incapacitating"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "SOCIAL"
-      ],
-      "harmRung": "incapacitating",
-      "shape": "construct",
-      "operativeAxis": [
-        "bindStrength",
-        "scope"
-      ],
-      "mechanic": {
-        "magnitude": 7,
-        "duration": 720,
-        "scope": 2,
-        "note": "T-IV, incapacitating"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "scope",
-          "delta": "set a covenant on A HOUSEHOLD, A COMPANY, OR AN OFFICE rather than a person — THOSE WHO TAKE THE ROLE TAKE THE PACT",
-          "from": "r2 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a light covenant — half the hold, and it can be spoken out of",
-        "surge": "double it; IT CATCHES ONLY WHAT ALREADY WANTED THE BARGAIN"
-      },
-      "bounds": [
-        {
-          "text": "⚠️ IT NEEDS A LEVER — a want, a debt, a person they will not lose. The unwilling with NOTHING to lose are genuinely outside it, and they are rarer than anyone hopes",
-          "class": "hard"
-        },
-        {
-          "text": "IT FRAYS WHEN SPOKEN OF openly",
-          "class": "soft"
-        },
-        {
-          "text": "A WILLING TAKER BINDS CHEAPLY; AN UNWILLING ONE BINDS DEARLY — the covenant still closes on someone who refused it, but the price is paid by the one who set it",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A social action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about 30 days Ranks: rank 2 extends scope. Limit: ⚠️ IT Needs A Lever — a want, a debt, a person they will not lose. The unwilling with Nothing to lose are genuinely outside it, and they are rarer than anyone hopes."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_drowning_deep",
-      "name": "The Drowning Deep",
-      "levelReq": 5,
-      "energyCost": 14,
-      "powerSystem": "reach_demonic_angelic",
-      "tradition": "abyssal",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.9
-      },
-      "functions": [
-        "hinder",
-        "reveal"
-      ],
-      "narrationHints": "The floor of the world opens under one person's certainty and they feel, for one endless moment, exactly how far down it goes — and how alone they are at the top of that fall.",
-      "description": "The deepest Abyssal working — you show someone the full depth beneath their footing, the vertigo of a self with no floor. Most who receive it never stand quite the same way again. The Abyssals do it anyway.",
-      "notFor": "One person, once, and it costs you enormously. It cannot touch someone at genuine peace with their own depths — they simply look down and are not afraid. And it cannot be undone: you cannot un-show a person the deep.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Drowning Deep",
-          "grants": "Show one person the full depth beneath their footing. What they were most certain of stops bearing weight — they hesitate where they never hesitated, and the vertigo weakens every act that rested on that certainty until they either rebuild it or find another floor to stand on.",
-          "cannot": "It costs nearly all you have. It fails entirely against someone at genuine peace with their own depths — they look down and are simply not afraid. And it CANNOT BE TAKEN BACK: you have shown them the deep and they have seen it, and the Abyssals are honest that this is the cruelest thing they do.",
-          "functions": [
-            "reveal",
-            "hinder"
-          ],
-          "harmRung": "incapacitating",
-          "gains": "broaden"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "SOCIAL"
-      ],
-      "harmRung": "incapacitating",
-      "shape": "hobble",
-      "operativeAxis": [
-        "certaintyBreach",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 9,
-        "duration": 4,
-        "targets": 1,
-        "damageType": "appetite",
-        "note": "T-V capstone, incapacitating"
-      },
-      "rankDeltas": [
-        {
-          "rank": 1,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: SHOW ONE PERSON THE FULL DEPTH BENEATH THEIR FOOTING — what they were most certain of STOPS BEARING WEIGHT. The capstone is a KIND (unmaking certainty itself) at near-total cost.",
-          "from": "r1 grants — single-rank capstone"
-        }
-      ],
-      "intensity": {
-        "conserve": "REFUSED — a partial drowning is a doubt, and doubts are survivable.",
-        "surge": "REFUSED — it already costs nearly all you have."
-      },
-      "bounds": [
-        {
-          "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
-          "class": "hard"
-        },
-        {
-          "text": "IT FAILS ENTIRELY AGAINST THOSE WITH NOTHING BENEATH THEM",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A social action that weakens or restricts a target. Its strength is rated 9 out of 10 It affects 1 target, and lasts for about 4 hours Limit: iT Costs Nearly All You Have."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_unfaltering_light",
-      "name": "The Unfaltering Light",
-      "levelReq": 4,
-      "energyCost": 12,
-      "powerSystem": "reach_demonic_angelic",
-      "tradition": "seraphic",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.6
-      },
-      "functions": [
-        "empower",
-        "ward"
-      ],
-      "narrationHints": "The light does not flare. It simply does not stop — a steadiness that outlasts the thing trying to break it, until the breaking tires first.",
-      "description": "The Seraphic art of the light that does not gutter — a radiance sustained past all reason to sustain it, warding a place or a person through what should overwhelm them.",
-      "notFor": "It shields but does not strike; it can hold a line and never take ground. And holding it burns you as surely as it warms them — a light that never falters is paid for by the one who carries it.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Unfaltering Light",
-          "grants": "Sustain an unbreakable ward of radiance over a person or place, outlasting the assault against it.",
-          "cannot": "It cannot attack, only endure; it drains you the whole while it holds; and if you fall, the light falls with you.",
-          "functions": [
-            "ward",
-            "empower"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Light That Carries",
-          "grants": "The ward extends from a person to a company, and from a stand to a march — it moves with those it covers. Those inside are not merely shielded but sustained: they do not tire as they should, and wounds taken within it do not worsen while the light holds. and they are made better by it rather than merely preserved — hands steadier, aim truer, fear further off than it has any right to be.",
-          "cannot": "It still cannot strike, at any mastery. It still burns you before it burns anything else. Extending it to a company means feeling each of them, continuously. And if you fall now, considerably more falls with you than before.",
-          "functions": [
-            "ward",
-            "empower"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "DEFEND"
-      ],
-      "harmRung": "none",
-      "shape": "guard",
-      "operativeAxis": [
-        "endurance",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 7,
-        "soak": 6,
-        "soakRank": 3,
-        "duration": 8,
-        "targets": 4,
-        "note": "T-IV — the catalog's purest endurance guard"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "the ward extends FROM A PERSON TO A COMPANY, and from a stand TO A MARCH — IT MOVES WITH THOSE IT COVERS",
-          "from": "r2 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "hold a smaller light — half the endurance, and it drains you less",
-        "surge": "double it; IT STILL CANNOT STRIKE, AT ANY MASTERY. IT STILL BURNS YOU THE WHOLE WHILE."
-      },
-      "bounds": [
-        {
-          "text": "IT CANNOT ATTACK, ONLY ENDURE — AT ANY MASTERY",
-          "class": "hard"
-        },
-        {
-          "text": "IT DRAINS YOU THE WHOLE WHILE",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A defend action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 6 harm per hit (rank 3 armour) It affects 4 targets, and lasts for about 8 hours Ranks: rank 2 extends targets. Limit: iT Cannot Attack, Only Endure — AT Any Mastery."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_kept_flame",
-      "name": "The Kept Flame",
-      "levelReq": 5,
-      "energyCost": 13,
-      "powerSystem": "reach_demonic_angelic",
-      "tradition": "seraphic",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.9,
-        "mechanical_spiritual": 0.4
-      },
-      "functions": [
-        "empower",
-        "sustain"
-      ],
-      "narrationHints": "For a moment you are lit from a source that was old before the Transition — the substrate itself answering, the way it answered when your kind first refused to give it up. It is the most yourself you will ever feel, and the most not-yours.",
-      "description": "The Seraphic capstone that IS a precursor act — the radiance drawn straight from the fabricated substrate your people never surrendered. This is why the Seraphs are what they are: the light is the nanites, kept flowing, and keeping them flowing is a precursor working few living things can survive channeling.",
-      "notFor": "It draws on the substrate directly — power beyond the ordinary tiers, and a standing cost to keep it lit; let it lapse and the flame does not politely dim, it gutters and takes something of you with it. Only a people who never gave up the nanites can hold this without being unmade.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Kept Flame",
-          "grants": "Channel the fabricated substrate directly as sustained radiant power — a precursor-tier working innate to your kind.",
-          "cannot": "It carries an ongoing upkeep the whole time it burns, it can unmake one who is not substrate-born, and it marks you to anything that reads the substrate — you are a lit thing in a dark room, and not everything in the dark is friendly.",
-          "functions": [
-            "empower",
-            "sustain"
-          ],
-          "harmRung": "none",
-          "gains": "broaden"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "DEFEND"
-      ],
-      "innatePrecursor": true,
-      "harmRung": "none",
-      "shape": "bolster",
-      "operativeAxis": [
-        "substrateChannel",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 9,
-        "duration": 8,
-        "damageType": "light",
-        "note": "T-V. ⚠️ 'A PRECURSOR-TIER WORKING INNATE TO YOUR KIN' — the second of exactly two in the catalog."
-      },
-      "rankDeltas": [
-        {
-          "rank": 1,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: CHANNEL THE FABRICATED SUBSTRATE DIRECTLY as sustained radiant power — a precursor-tier working INNATE TO YOUR KIN. The capstone is a KIND (direct substrate channelling) with ONGOING UPKEEP the whole time it burns.",
-          "from": "r1 grants — single-rank capstone"
-        }
-      ],
-      "intensity": {
-        "conserve": "REFUSED — a half-kept flame goes out, and what it was holding goes with it.",
-        "surge": "REFUSED — it already carries upkeep the whole time it burns."
-      },
-      "bounds": [
-        {
-          "text": "IT CARRIES ONGOING UPKEEP THE WHOLE TIME IT BURNS",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A defend action that strengthens someone. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep The Whole Time IT Burns."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_hollow_that_holds",
-      "name": "The Hollow That Holds",
-      "levelReq": 5,
-      "energyCost": 13,
-      "powerSystem": "reach_demonic_angelic",
-      "tradition": "abyssal",
-      "attribute": "social",
-      "axes": {
-        "demonic_angelic": -0.9,
-        "mechanical_spiritual": 0.4
-      },
-      "functions": [
-        "open",
-        "sustain"
-      ],
-      "narrationHints": "You open the hollow in yourself — the one your people never filled, never closed, never gave up — and for a moment it is not an absence but a MOUTH, and the substrate pours through it, and you are the deepest thing in any room.",
-      "description": "The Abyssal capstone that IS a precursor act — the deep hollow the Abyssals kept, where their ancestors declined to give the nanites up, opened as a channel to the substrate itself. Where the Seraphs keep the light, the Abyssals kept the depth; both drink from the same well, and neither can stop.",
-      "notFor": "It draws the substrate through the kept hollow — power past the ordinary tiers, at a standing cost, and let it lapse and the hollow does not simply close, it HUNGERS. Only a people who kept the deep can channel it without being swallowed by it.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Hollow That Holds",
-          "grants": "Channel the fabricated substrate through the kept Abyssal hollow — a precursor-tier working innate to your kind.",
-          "cannot": "It carries an ongoing upkeep while open, it can swallow one who is not abyssal-born, and it marks you to anything that reads the substrate — the deep calls to the deep, and not all of it is on your side.",
-          "functions": [
-            "open",
-            "sustain"
-          ],
-          "harmRung": "none",
-          "gains": "broaden"
-        }
-      ],
-      "gated": "learned",
-      "nativeOrCombination": "native",
-      "challengeTypes": [
-        "SOCIAL"
-      ],
-      "harmRung": "none",
-      "innatePrecursor": true,
-      "shape": "construct",
-      "operativeAxis": [
-        "substrateChannel",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 9,
-        "duration": 8,
-        "note": "T-V. ⚠️ 'A PRECURSOR-TIER WORKING INNATE TO YOUR KIN' — one of exactly two in the catalog."
-      },
-      "rankDeltas": [
-        {
-          "rank": 1,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: CHANNEL THE FABRICATED SUBSTRATE through the KEPT ABYSSAL HOLLOW — a precursor-tier working INNATE TO YOUR KIN. The capstone is a KIND (direct substrate channelling) with ONGOING UPKEEP.",
-          "from": "r1 grants — single-rank capstone"
-        }
-      ],
-      "intensity": {
-        "conserve": "REFUSED — a hollow half-opened is a hollow that swallows what it should have held.",
-        "surge": "REFUSED — it already carries ongoing upkeep the whole time it is open."
-      },
-      "bounds": [
-        {
-          "text": "IT CARRIES ONGOING UPKEEP WHILE OPEN",
-          "class": "hard"
-        },
-        {
-          "text": "IT CAN SWALLOW what it was meant to hold",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A social action that makes or animates something. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep While Open."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_lever",
-      "name": "The Lever",
-      "levelReq": 3,
-      "energyCost": 10,
-      "powerSystem": "reach_demonic_angelic",
-      "tradition": "abyssal",
-      "attribute": "social",
-      "axes": {
-        "appetite_judgement": -0.7
-      },
-      "functions": [
-        "bind",
-        "command",
-        "reveal"
-      ],
-      "narrationHints": "There is no shouting in it. You name the thing they cannot lose, and then you wait.",
-      "description": "⚠️ COMPULSION, and the Maw's central craft. You find what a person will not risk — a child, a name, a debt, a body — and you set the bargain against it. They are not persuaded and they are not willing. They are LEVERED, and they will do it, and they will remember who made them.",
-      "notFor": "Someone with genuinely nothing to lose: the Maw's oldest frustration, and rarer than anyone hopes. It also cannot make them AGREE — a levered person complies and hates you, which is a different and more dangerous thing to be owed by.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Lever",
-          "grants": "Find the one thing a person will not risk, and price a demand against it. They comply.",
-          "cannot": "You must find a real lever. A guess that misses tells them exactly what you were reaching for.",
-          "functions": [
-            "reveal",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 2,
-          "name": "The Held Lever",
-          "grants": "Hold the lever across time — a standing compliance rather than one act. They act as you require until the lever is taken from you.",
-          "cannot": "A held lever must be MAINTAINED, and everything you hold over someone is a thing they are working to remove.",
-          "functions": [
-            "bind",
-            "command"
-          ],
-          "gains": "deepen",
-          "harmRung": "incapacitating"
-        },
-        {
-          "rank": 3,
-          "name": "The Long Lever",
-          "grants": "Set a lever on a house, an office, or a line — those who take the role take the compulsion, whether or not they know why.",
-          "cannot": "Those who inherit it did not choose it, and the Maw has never argued otherwise.",
-          "functions": [
-            "bind",
-            "command"
-          ],
-          "gains": "deepen",
-          "harmRung": "incapacitating"
-        }
-      ],
-      "challengeTypes": [
-        "SOCIAL",
-        "INVESTIGATE"
-      ],
-      "harmRung": "incapacitating",
-      "nativeOrCombination": "native",
-      "shape": "hobble",
-      "operativeAxis": [
-        "leverage",
-        "duration",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 6,
-        "duration": 24,
-        "targets": 1,
-        "damageType": "appetite"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "duration",
-          "delta": "a STANDING compliance rather than one act",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "SPECIAL: a lever set on a HOUSE or OFFICE — those who take the role take the compulsion",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "name it quietly — half the hold, and it can be walked back",
-        "surge": "double it; EVERYTHING YOU HOLD OVER SOMEONE IS A THING THEY ARE WORKING TO REMOVE"
-      },
-      "bounds": [
-        {
-          "text": "IT NEEDS A REAL LEVER — someone with nothing to lose is genuinely outside it",
-          "class": "hard"
-        },
-        {
-          "text": "COMPLIANCE IS NOT AGREEMENT — a levered person hates you, and that is a dangerous creditor to have",
-          "class": "hard"
-        },
-        {
-          "text": "A HELD LEVER MUST BE MAINTAINED",
-          "class": "cost"
-        },
-        {
-          "text": "THEY REMEMBER WHO MADE THEM",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social/investigate action that weakens or restricts a target. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends duration; rank 3 extends targets. Limit: iT Needs A Real Lever — someone with nothing to lose is genuinely outside it."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_lifted_word",
-      "name": "The Lifted Word",
-      "levelReq": 5,
-      "energyCost": 15,
-      "powerSystem": "reach_demonic_angelic",
-      "tradition": "seraphic",
-      "attribute": "mental",
-      "axes": {
-        "demonic_angelic": 0.8
-      },
-      "functions": [
-        "transform",
-        "reveal",
-        "travel"
-      ],
-      "narrationHints": "They do not flap. They are simply higher than they were, and everyone below has stopped talking.",
-      "description": "⚠️ SERAPHIC FLIGHT, AND IT IS A DECLARATION. The Orders do not fly to travel; they fly to be SEEN flying. Height is the argument — a judgement delivered from above is the same judgement and lands differently, and every Order knows it.",
-      "notFor": "Discretion. Anyone within sight sees exactly what you are and what tradition taught you. It cannot be done quietly and the Orders would not want it to be.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Lifted Word",
-          "grants": "Rise and hold above a place, under control, for as long as you can pay. Everyone present sees.",
-          "cannot": "Doing it unseen. Travelling far — this is presence, not distance.",
-          "functions": [
-            "transform",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Long Ascent",
-          "grants": "Travel by it — cross country above the roads, arriving visibly and from the wrong direction.",
-          "cannot": "Arriving unannounced. You are a light in the sky for the whole approach.",
-          "functions": [
-            "transform",
-            "travel"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "challengeTypes": [
-        "TRAVEL",
-        "SOCIAL"
-      ],
-      "harmRung": "none",
-      "nativeOrCombination": "native",
-      "shape": "reposition",
-      "operativeAxis": [
-        "movement",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 8,
-        "duration": 6,
-        "range": "route-scale",
-        "note": "⚠️ FLIGHT THAT CANNOT BE HIDDEN. Travel legs are fast and arrive PRE-ANNOUNCED — every settlement on the route sees you pass, which changes what waits at the end."
-      },
-      "rankDeltas": [],
-      "intensity": {
-        "conserve": "rise and hold — half the duration, and only over one place",
-        "surge": "cross country aloft; YOU ARE A LIGHT IN THE SKY FOR THE WHOLE APPROACH"
-      },
-      "bounds": [
-        {
-          "text": "IT CANNOT BE DONE QUIETLY — everyone within sight sees what you are",
-          "class": "hard"
-        },
-        {
-          "text": "⚠️ YOU ARRIVE ANNOUNCED, ALWAYS. Whatever waited at the end has had the whole approach to prepare",
-          "class": "cost"
-        },
-        {
-          "text": "at rank 1 it is PRESENCE, NOT DISTANCE — height over one place, not a journey",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A travel and social action, and it cannot be hidden. You rise and hold above a place under control for as long as you can pay the energy, and everyone in sight sees exactly what you are. At rank 2 you can cross country by it, which is fast but arrives pre-announced — every settlement on the route watches you pass, so whatever waits at the end has had the entire approach to prepare. Rank 1 is presence over one place rather than distance."
-    },
-    {
-      "schemaVersion": 1,
-      "id": "the_borne_bargain",
-      "name": "The Borne Bargain",
-      "levelReq": 5,
-      "energyCost": 14,
-      "powerSystem": "reach_demonic_angelic",
-      "tradition": "abyssal",
-      "attribute": "social",
-      "axes": {
-        "appetite_judgement": -0.7
-      },
-      "functions": [
-        "bind",
-        "travel"
-      ],
-      "narrationHints": "Something carries them. It is not visible and it is not free, and they will not say what it is.",
-      "description": "⚠️ ABYSSAL FLIGHT, AND YOU DO NOT DO IT — SOMETHING CARRIES YOU. A bargain struck for passage: fast, silent, and priced like everything else. What bears you up is real, it is owed, and it remembers the trip.",
-      "notFor": "Anyone unwilling to owe. The price is named before you rise and it is not refundable if you land early.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Borne Bargain",
-          "grants": "Be carried aloft and across at speed. The price is named up front and paid on arrival.",
-          "cannot": "Bargaining after you are airborne. The terms are fixed at the moment you leave the ground.",
-          "functions": [
-            "bind",
-            "travel"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Standing Passage",
-          "grants": "A standing arrangement — passage whenever you call for it, on an account that accrues.",
-          "cannot": "Forgetting the account. It is being kept whether or not you keep it.",
-          "functions": [
-            "bind",
-            "travel"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "challengeTypes": [
-        "TRAVEL",
-        "SOCIAL"
-      ],
-      "harmRung": "none",
-      "nativeOrCombination": "native",
-      "shape": "reposition",
-      "operativeAxis": [
-        "movement",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 7,
-        "duration": 8,
-        "range": "route-scale",
-        "note": "⚠️ THE FASTEST TRAVEL IN THE GAME AND THE ONLY ONE THAT ACCRUES A DEBT. Legs cost almost no days and add to an account the world tracks."
-      },
-      "rankDeltas": [],
-      "intensity": {
-        "conserve": "one passage, priced and paid on landing",
-        "surge": "open a standing account; IT IS BEING KEPT WHETHER OR NOT YOU KEEP IT"
-      },
-      "bounds": [
-        {
-          "text": "THE PRICE IS NAMED BEFORE YOU RISE and is not refundable if you land early",
-          "class": "hard"
-        },
-        {
-          "text": "⚠️ AT RANK 2 THE ACCOUNT ACCRUES, and an abyssal account is collectable — see `the_collection`",
-          "class": "cost"
-        },
-        {
-          "text": "what bears you up REMEMBERS THE TRIP",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A travel and social action. You do not fly; something carries you, fast and silent, on a price named before you leave the ground and paid on arrival — it is not refunded if you land early. At rank 2 you open a standing arrangement you can call on any time, on an account that accrues and is being kept whether or not you keep it, and an abyssal account is collectable. It is the fastest travel in the game and the only one that leaves you owing."
+     "rank": 3,
+     "name": "The Deep Descent",
+     "grants": "Descend into a person, a place, or an institution and surface with its true engine — the appetite it is actually running on, however it dresses.",
+     "cannot": "What you surface with, you now carry. The Choir's deepest are unable to see anyone as anything but their hunger, and are usually right, and are unbearable.",
+     "functions": [
+      "reveal",
+      "bind",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     }
-  ],
-  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE",
+    "FIGHT"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "namingPower",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "STRIKE A BINDING BARGAIN: BOTH SIDES GET WHAT THEY TRULY WANT, AND BOTH SIDES PAY WHAT IT TRULY COSTS",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "DESCEND INTO a person, a place, or an institution and SURFACE WITH ITS TRUE ENGINE — the appetite it actually runs on",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "name it quietly — half the force, and they can pretend they did not hear",
+    "surge": "double it; WHAT YOU SURFACE WITH, YOU NOW CARRY"
+   },
+   "bounds": [
+    {
+     "text": "NAMING A WANT IS NOT GRANTING IT — some people will hate you for the naming alone",
+     "class": "hard"
+    },
+    {
+     "text": "THE BARGAIN IS EXACTLY FAIR, WHICH IS THE HORROR OF IT",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU SURFACE WITH, YOU NOW CARRY",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 adds to special; rank 3 extends scope. Limit: naming A Want IS Not Granting IT — some people will hate you for the naming alone."
+  },
+  {
+   "id": "appetite_sense",
+   "name": "Appetite-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You can feel the shape of what they are hungry for before they say a word.",
+   "description": "Sense the true want under the presented want — the first gift of the Descent.",
+   "notFor": "Reading facts (that is Verity); reading feeling (that is Pathos). This reads HUNGER.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Appetite-Sense",
+     "grants": "Feel what a person actually wants, beneath what they are asking for.",
+     "cannot": "It reads want, not intent. What they will DO about the want is a different craft.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Hollow Read",
+     "grants": "Feel the want a person is refusing to admit to themselves — the one doing the most work.",
+     "cannot": "Knowing the want they deny is a weapon, and it is very hard not to use it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Hunger",
+     "grants": "Read the appetite of a crowd, a faction, a city — what the whole thing is actually reaching for.",
+     "cannot": "A crowd's hunger is not the sum of its people's. It is stupider and much stronger.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 10,
+    "note": "SOCIAL attribute throughout"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "feel the want A PERSON IS REFUSING TO ADMIT TO THEMSELVES — the one doing the most work",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "read the appetite of A CROWD, A FACTION, A CITY — what the whole thing is actually reaching for",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the want — half the depth, and it stays surface",
+    "surge": "double it; KNOWING THE WANT THEY DENY IS A WEAPON, and it is very hard to un-know"
+   },
+   "bounds": [
+    {
+     "text": "IT READS WANT, NOT INTENT — what they will DO about it is their own",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING THE WANT THEY DENY IS A WEAPON, and very hard to un-know",
+     "class": "cost"
+    },
+    {
+     "text": "A CROWD'S HUNGER IS NOT THE SUM OF ITS PEOPLE'S — it is its own thing",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 extends scope. Limit: iT Reads Want, Not Intent — what they will DO about it is their own."
+  },
+  {
+   "id": "the_offered_price",
+   "name": "The Offered Price",
+   "levelReq": 2,
+   "energyCost": 5,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.4,
+    "falsehood_truth": 0.2
+   },
+   "functions": [
+    "bind",
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "The price is named plainly, and it is worse for being fair.",
+   "description": "Name the true price of a thing someone wants — exactly, honestly, with nothing hidden.",
+   "notFor": "Lying about the price (Falsecraft's country, and the Choir despises it); forcing the taking.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Offered Price",
+     "grants": "Name what a thing will truly cost the person who wants it. They may still take it.",
+     "cannot": "Naming the price does not stop them. It only means they cannot say they were not told.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Price",
+     "grants": "The price, once named and accepted, BINDS — it will be paid, in the coin named, whatever they do afterward.",
+     "cannot": "You are now the one who holds it. Collecting is not optional, even when you have come to love them.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The True Cost",
+     "grants": "Name what a course of action will ultimately cost — not the ledger price, the real one, years out.",
+     "cannot": "People do not believe true costs. The Choir's oldest grief is being right and ignored.",
+     "functions": [
+      "reveal",
+      "bind",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "foresight",
+    "bindStrength"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 8
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "bindStrength",
+     "delta": "the price, ONCE NAMED AND ACCEPTED, BINDS — it will be paid, IN THE COIN NAMED, whatever they do afterward",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "foresight",
+     "delta": "name what a course of action will ULTIMATELY cost — not the ledger price, THE REAL ONE, YEARS OUT",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "name the cost — half the binding, and it is only information",
+    "surge": "double it; YOU ARE NOW THE ONE WHO HOLDS IT, and COLLECTING IS NOT OPTIONAL"
+   },
+   "bounds": [
+    {
+     "text": "NAMING THE PRICE DOES NOT STOP THEM — it only means they knew",
+     "class": "hard"
+    },
+    {
+     "text": "YOU ARE NOW THE ONE WHO HOLDS IT — COLLECTING IS NOT OPTIONAL",
+     "class": "hard"
+    },
+    {
+     "text": "PEOPLE DO NOT BELIEVE TRUE COSTS — the Choir's oldest grief",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to bindStrength; rank 3 deepens foresight. Limit: naming The Price Does Not Stop Them — it only means they knew."
+  },
+  {
+   "id": "ascent",
+   "name": "Ascent",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.5,
+    "chaos_order": 0.2,
+    "dark_light": 0.2
+   },
+   "functions": [
+    "bind",
+    "command",
+    "restore",
+    "reveal"
+   ],
+   "narrationHints": "The light here does not warm. It measures.",
+   "description": "The angelic-pole mastery: mercy given, judgment pronounced, the luminous certainty that both heals and terrifies. Not good in the flat sense — certainty is a danger.",
+   "notFor": "Doubt (the Orders have very little); mercy that costs the giver nothing; being wrong gracefully.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Measuring Eye",
+     "grants": "See a person's moral weight — what they have done, what it cost others, what they carry.",
+     "cannot": "It measures the deed, not the person. The Orders forget this distinction constantly and catastrophically.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Mercy",
+     "grants": "Grant a real absolution — lift a weight a person has carried, genuinely, and they will feel it leave.",
+     "cannot": "Mercy given is mercy TAKEN ON. The weight does not vanish; it moves to you.",
+     "functions": [
+      "reveal",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Judgment",
+     "grants": "Pronounce a judgment that BINDS — it is true, everyone present knows it is true, and it does not come undone.",
+     "cannot": "If you are wrong, the judgment binds anyway. The Seraphic Orders' history is a long argument about that sentence.",
+     "functions": [
+      "reveal",
+      "restore",
+      "bind",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE",
+    "FIGHT"
+   ],
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "judgement",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 8,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "GRANT A REAL ABSOLUTION — LIFT A WEIGHT a person has carried, genuinely, and THEY WILL FEEL IT LEAVE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: PRONOUNCE A JUDGMENT THAT BINDS — it is true, everyone present knows it is true, AND IT DOES NOT COME UNDONE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "weigh it quietly — half the force, and nothing is pronounced",
+    "surge": "double it; IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY"
+   },
+   "bounds": [
+    {
+     "text": "IT MEASURES THE DEED, NOT THE PERSON",
+     "class": "hard"
+    },
+    {
+     "text": "MERCY GIVEN IS MERCY TAKEN ON — the weight does not vanish, IT MOVES TO YOU",
+     "class": "hard"
+    },
+    {
+     "text": "IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/investigate/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 adds to special; rank 3 adds to special. Limit: iT Measures The Deed, Not The Person."
+  },
+  {
+   "id": "the_measuring_eye",
+   "name": "The Weighing Look",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You are being looked at by something that is adding you up.",
+   "description": "See the moral weight a person carries — the first gift of the Ascent.",
+   "notFor": "Reading want (Appetite-Sense); reading truth (Verity). This reads WEIGHT — deed and cost.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Weighing Look",
+     "grants": "See roughly what a person carries — the harm done, the harm borne.",
+     "cannot": "It sees weight, not story. A heavy person may be heavy for good reasons.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Clear Ledger",
+     "grants": "See the specifics: what was done, to whom, and whether it was ever answered for.",
+     "cannot": "Seeing the ledger tempts you to collect on it. That is the Orders' besetting sin.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unblinking Measure",
+     "grants": "Weigh anyone, at any distance, without their consent or knowledge.",
+     "cannot": "Nobody survives being weighed forever. Including you, and the Orders do it to their own.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 20,
+    "note": "MENTAL attribute throughout — judgement is mental where appetite is social"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "see THE SPECIFICS: what was done, TO WHOM, and WHETHER IT WAS EVER ANSWERED FOR",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "WEIGH ANYONE, AT ANY DISTANCE, WITHOUT THEIR CONSENT OR KNOWLEDGE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the weight — half the detail, and you can look away",
+    "surge": "double it; NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU"
+   },
+   "bounds": [
+    {
+     "text": "IT SEES WEIGHT, NOT STORY — a heavy person may be heavy for good reasons",
+     "class": "hard"
+    },
+    {
+     "text": "SEEING THE LEDGER TEMPTS YOU TO COLLECT ON IT",
+     "class": "cost"
+    },
+    {
+     "text": "NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: iT Sees Weight, Not Story — a heavy person may be heavy for good reasons."
+  },
+  {
+   "id": "the_shielding_word",
+   "name": "The Shielding Word",
+   "levelReq": 3,
+   "energyCost": 6,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.4,
+    "violence_peace": 0.2
+   },
+   "functions": [
+    "resist",
+    "shield",
+    "ward"
+   ],
+   "narrationHints": "A word is spoken and the blow simply does not arrive.",
+   "description": "Interpose a spoken certainty between harm and a person — the Seraphic ward, which is why the Orders are loved despite everything.",
+   "notFor": "Warding what deserves to land (the Orders will not, and this is either integrity or arrogance depending on who you ask).",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shielding Word",
+     "grants": "Ward one person from one harm with a spoken certainty.",
+     "cannot": "You must actually believe it. A hollow word wards nothing, and everyone can hear the hollow.",
+     "functions": [
+      "ward",
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Ward",
+     "grants": "The ward holds over a place and a people, for as long as you keep speaking for them.",
+     "cannot": "You must keep speaking. And you must keep meaning it, which is harder.",
+     "functions": [
+      "ward",
+      "shield",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unbroken Word",
+     "grants": "A ward that holds after you have gone — a word spoken so wholly it keeps standing on its own.",
+     "cannot": "It stands on what you meant when you said it. If you change, it does not. Sister Alder's ward is of this kind, and she has thought about that a great deal.",
+     "functions": [
+      "ward",
+      "shield",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "guard",
+   "operativeAxis": [
+    "ward",
+    "targets",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "soak": 5,
+    "soakRank": 2,
+    "duration": 8,
+    "targets": 1,
+    "note": "A guard whose soak IS YOUR CONVICTION — 'you must ACTUALLY BELIEVE IT. A hollow word wards nothing.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "the ward holds over A PLACE AND A PEOPLE — FOR AS LONG AS YOU KEEP SPEAKING FOR THEM",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "SPECIAL: a ward that HOLDS AFTER YOU HAVE GONE — a word spoken so wholly it KEEPS STANDING ON ITS OWN",
+     "from": "r3 grants — a TENTH autonomy-increment craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "speak one ward — half the protection, and it costs you nothing to mean",
+    "surge": "double it; YOU MUST KEEP MEANING IT, WHICH IS THE HARDER HALF"
+   },
+   "bounds": [
+    {
+     "text": "YOU MUST ACTUALLY BELIEVE IT — A HOLLOW WORD WARDS NOTHING",
+     "class": "hard"
+    },
+    {
+     "text": "you must KEEP SPEAKING, and KEEP MEANING IT",
+     "class": "hard"
+    },
+    {
+     "text": "IT STANDS ON WHAT YOU MEANT WHEN YOU SAID IT — IF YOU CHANGE, IT DOES NOT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/social action that reduces incoming harm. Its strength is rated 6 out of 10 and absorbs 5 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 8 hours Ranks: rank 2 extends targets; rank 3 adds to autonomy. Limit: you Must Actually Believe IT — A Hollow Word Wards Nothing."
+  },
+  {
+   "id": "the_appetite_strike",
+   "name": "The Appetite Strike",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.4
+   },
+   "effectTags": [
+    "desire",
+    "wound",
+    "appetite"
+   ],
+   "harmRung": "incapacitating",
+   "narrationHints": "She didn't hit the person. She hit what the person was protecting.",
+   "description": "Strike at a person's hunger — not the body, but what they've been keeping safe by not admitting it.",
+   "notFor": [],
+   "tradition": "abyssal",
+   "functions": [
+    "hinder",
+    "strike"
+   ],
+   "challengeTypes": [
+    "combat",
+    "social",
+    "psychological"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Unguarded Want",
+     "grants": "Strike at what a person most doesn't want to lose — they are fortified against the ordinary attack but have no guard on what they want.",
+     "cannot": "Anything rank 2 adds — name the appetite and hit it — not the body, what the body has been protecting; it needs a REAL, HELD appetite.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "Named and Struck",
+     "grants": "Name the appetite and hit it — not the body, what the body has been protecting. The wound is real and lands where they cannot wall it out.",
+     "cannot": "Anything rank 3 adds — hit what they kept unnamed; it needs a REAL, HELD appetite.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 3,
+     "name": "The Thing They Would Not Name",
+     "grants": "Hit what they kept unnamed. They will know what was struck. They will not be the same on the other side of it.",
+     "cannot": "Nothing further; this is the craft's ceiling; it needs a REAL, HELD appetite.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.03,
+    "damageType": "appetite",
+    "note": "incapacitating. It strikes what a person has been PROTECTING, not their body."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "NAME THE APPETITE AND HIT IT — not the body, WHAT THE BODY HAS BEEN PROTECTING; the wound is real",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: HIT WHAT THEY KEPT UNNAMED. They will know what was struck. THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glancing blow — half the wound, and it is deniable",
+    "surge": "double it; THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT"
+   },
+   "bounds": [
+    {
+     "text": "it needs a REAL, HELD appetite — a person who wants nothing is proof against it",
+     "class": "hard"
+    },
+    {
+     "text": "THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A combat/social/psychological action that deals damage. It rolls 2d6 appetite damage Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: it needs a Real, Held appetite — a person who wants nothing is proof against it."
+  },
+  {
+   "id": "the_consumed_wound",
+   "name": "The Consumed Wound",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.3
+   },
+   "effectTags": [
+    "healing",
+    "price",
+    "consumption"
+   ],
+   "harmRung": "none",
+   "narrationHints": "The price is paid. So is the wound.",
+   "description": "Offer a wound or pain to the deep — it will be taken. What the abyss eats doesn't come back, but neither does the hurt.",
+   "notFor": [],
+   "tradition": "abyssal",
+   "functions": [
+    "break",
+    "heal",
+    "restore"
+   ],
+   "challengeTypes": [
+    "medical",
+    "magical",
+    "hardship"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Give It Down",
+     "grants": "Offer a wound, pain, or carried weight to the deep — the abyss will take it. The wound goes with it.",
+     "cannot": "Anything rank 2 adds — not healed in the ordinary sense — gone; IT REMOVES, IT DOES NOT MEND.",
+     "functions": [
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Consumed Entirely",
+     "grants": "Not healed in the ordinary sense — gone; the abyss ate it and what remains is the person without what they were carrying.",
+     "cannot": "Anything rank 3 adds — take a wound from another into yourself and offer it down; IT REMOVES, IT DOES NOT MEND.",
+     "functions": [
+      "heal",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Transfer",
+     "grants": "Take a wound from another into yourself and offer it down. You carry it briefly; then you don't; then neither does anyone.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT REMOVES, IT DOES NOT MEND.",
+     "functions": [
+      "heal",
+      "break",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "removal",
+    "targets"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "targets": 1,
+    "note": "A THIRTEENTH THEORY OF MEDICINE — CONSUMPTION: 'not healed in the ordinary sense — GONE; the abyss ate it.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "removal",
+     "delta": "NOT HEALED — GONE. The abyss ate it, and what remains is THE PERSON WITHOUT WHAT THEY WERE CARRYING",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "TAKE A WOUND FROM ANOTHER INTO YOURSELF and offer it down — you carry it briefly; then you do not; then NEITHER OF YOU DOES",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "offer a little — half the removal, and you keep the rest",
+    "surge": "double it; WHAT THE ABYSS EATS DOES NOT COME BACK, including the parts that were load-bearing"
+   },
+   "bounds": [
+    {
+     "text": "IT REMOVES, IT DOES NOT MEND — what is eaten is GONE",
+     "class": "hard"
+    },
+    {
+     "text": "what the abyss eats DOES NOT COME BACK, INCLUDING THE PARTS THAT WERE LOAD-BEARING",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A medical/magical/hardship action that restores health. It rolls 2d4+2 It affects 1 target Ranks: rank 2 deepens removal; rank 3 extends targets. Limit: iT Removes, IT Does Not Mend — what is eaten is Gone."
+  },
+  {
+   "id": "the_dread_mantle",
+   "name": "The Dread Mantle",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.4
+   },
+   "effectTags": [
+    "dread",
+    "protection",
+    "weight"
+   ],
+   "harmRung": "none",
+   "narrationHints": "What she'd seen was still on her. Things that hadn't seen it backed away.",
+   "description": "Carry what you've been through as armor — the weight of where you've been deters what would prey on the ordinary.",
+   "notFor": [],
+   "tradition": "abyssal",
+   "functions": [
+    "hinder",
+    "shield",
+    "ward"
+   ],
+   "challengeTypes": [
+    "combat",
+    "social",
+    "defense"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Let It Show",
+     "grants": "Let what you carry show — the depth of where you've been. Things that prey on the vulnerable find another target.",
+     "cannot": "Anything rank 2 adds — the dread around you is a genuine deterrent — not fear you project but weight others feel before they decide; IT DETERS THOSE WHO CHOOSE.",
+     "functions": [
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Real Weight",
+     "grants": "The dread around you is a genuine deterrent — not fear you project but weight others feel before they decide. Those who press anyway do it weakened: the nerve goes out of the approach, the first move comes slower and worse than they meant it to.",
+     "cannot": "Anything rank 3 adds — the mantle arrives before you do; IT DETERS THOSE WHO CHOOSE.",
+     "functions": [
+      "ward",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "It Precedes You",
+     "grants": "The mantle arrives before you do. Those who would act against you are navigating something they don't want to examine, and most choose not to.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT DETERS THOSE WHO CHOOSE; and it still costs what it costs: a mantle that arrives before you means YOU ARE NEVER ARRIVING SOMEWHERE FRESH.",
+     "functions": [
+      "ward",
+      "hinder",
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "deterrence",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "soak": 0,
+    "soakRank": 0,
+    "evasion": 3,
+    "evasionRank": 1,
+    "duration": 8,
+    "note": "A SEVENTEENTH DEFENSIVE LOGIC — DETERRED: soak 0. It does not stop harm; it makes attackers CHOOSE A DIFFERENT TARGET. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family with DISCOURAGED and NEVER-FOUND."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "deterrence",
+     "delta": "the dread is a GENUINE DETERRENT — not fear you project but WEIGHT OTHERS FEEL BEFORE THEY DECIDE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "SPECIAL: THE MANTLE ARRIVES BEFORE YOU DO — those who would act against you are navigating something they do not want to",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "let a little show — half the deterrence, and you pass for ordinary",
+    "surge": "double it; a mantle that arrives before you do means YOU ARE NEVER ARRIVING SOMEWHERE FRESH"
+   },
+   "bounds": [
+    {
+     "text": "IT DETERS THOSE WHO CHOOSE — a beast, a machine, or a fanatic is undeterred",
+     "class": "hard"
+    },
+    {
+     "text": "a mantle that arrives before you means YOU ARE NEVER ARRIVING SOMEWHERE FRESH",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 8 hours Ranks: rank 2 deepens deterrence; rank 3 adds to autonomy. Limit: iT Deters Those Who Choose — a beast, a machine, or a fanatic is undeterred."
+  },
+  {
+   "id": "the_called_form",
+   "name": "The Called Form",
+   "levelReq": 3,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.5
+   },
+   "effectTags": [
+    "summon",
+    "desire",
+    "form"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She reached down and pulled something up. It stood there, not quite a thing.",
+   "description": "Call something from the deep — the fear beneath the anger, the hunger beneath the pride — and give it form.",
+   "notFor": [],
+   "tradition": "abyssal",
+   "functions": [
+    "command",
+    "reveal",
+    "summon",
+    "transform"
+   ],
+   "challengeTypes": [
+    "magical",
+    "social",
+    "tactical"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Surfaced Want",
+     "grants": "Summon the underside of a thing — the fear beneath the anger, the hunger beneath the pride — and give it momentary form in the room.",
+     "cannot": "Anything rank 2 adds — call a form from the deep that serves a purpose — an appetite made briefly real, a fear given body — and it holds until it is dismissed; what you call is AN APPETITE GIVEN FORM.",
+     "functions": [
+      "summon",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Called and Held",
+     "grants": "Call a form from the deep that serves a purpose — an appetite made briefly real, a fear given body — and it holds until it is dismissed.",
+     "cannot": "Anything rank 3 adds — what you call up holds, acts in the world, and is yours to direct until you release it; what you call is AN APPETITE GIVEN FORM.",
+     "functions": [
+      "summon",
+      "reveal",
+      "transform"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "What You Called Is Yours",
+     "grants": "What you call up holds, acts in the world, and is yours to direct until you release it. It is not docile. It is yours.",
+     "cannot": "Nothing further; this is the craft's ceiling; what you call is AN APPETITE GIVEN FORM; and it still costs what it costs: IT IS NOT DOCILE. IT IS DIRECTED.",
+     "functions": [
+      "summon",
+      "reveal",
+      "transform",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "summonPower",
+    "control"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "variance": 4,
+    "damageType": "appetite"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "summonPower",
+     "delta": "CALL A FORM FROM THE DEEP THAT SERVES A PURPOSE — an appetite made briefly real, A FEAR GIVEN BODY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "control",
+     "delta": "what you call up HOLDS, ACTS, and is YOURS TO DIRECT until you release it. 'IT IS NOT DOCILE. IT IS DIRECTED.'",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "call something small — half the power, and it goes back easily",
+    "surge": "double it; IT IS NOT DOCILE. IT IS DIRECTED."
+   },
+   "bounds": [
+    {
+     "text": "what you call is AN APPETITE GIVEN FORM — it wants what it is",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS NOT DOCILE. IT IS DIRECTED. — the difference matters when you stop directing",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A magical/social/tactical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens summonPower; rank 3 extends control. Limit: what you call is AN Appetite Given Form — it wants what it is."
+  },
+  {
+   "id": "the_descent_path",
+   "name": "The Descent Path",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.4,
+    "space_time": -0.1
+   },
+   "effectTags": [
+    "passage",
+    "below",
+    "descent"
+   ],
+   "harmRung": "none",
+   "narrationHints": "The way down is always there. You just have to be willing to look for it.",
+   "description": "Find or make the passage to the below — the literal underground, the hidden layer, the place others don't know to reach.",
+   "notFor": [],
+   "tradition": "abyssal",
+   "functions": [
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "challengeTypes": [
+    "exploration",
+    "stealth",
+    "navigation"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Way Down",
+     "grants": "Find the passage to the below — the underground route, the hidden bottom of a space, the layer the map doesn't show.",
+     "cannot": "Anything rank 2 adds — travel through the below — beneath sight, beneath light, along the layer others don't know how to reach; it goes DOWN.",
+     "functions": [
+      "reveal",
+      "open"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Deep Road",
+     "grants": "Travel through the below — beneath sight, beneath light, along the layer others don't know how to reach.",
+     "cannot": "Anything rank 3 adds — take others down the descent path and bring them back up; it goes DOWN.",
+     "functions": [
+      "reveal",
+      "open",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Guide the Descent",
+     "grants": "Take others down the descent path and bring them back up. The route is yours to walk now and to share.",
+     "cannot": "Nothing further; this is the craft's ceiling; it goes DOWN; and it still costs what it costs: the below is A PLACE, and places have inhabitants.",
+     "functions": [
+      "reveal",
+      "open",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "access",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 10,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 4,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "access",
+     "delta": "TRAVEL THROUGH THE BELOW — beneath sight, beneath light, ALONG THE LAYER OTHERS DO NOT KNOW HOW TO REACH",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "TAKE OTHERS DOWN and BRING THEM BACK UP — the route is yours to walk and to share",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "find the way down — half the depth, and you can turn back easily",
+    "surge": "double it; the below is a place, and places have inhabitants"
+   },
+   "bounds": [
+    {
+     "text": "it goes DOWN — there is no version of this that goes up",
+     "class": "hard"
+    },
+    {
+     "text": "the below is A PLACE, and places have inhabitants",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A exploration/stealth/navigation action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 10. Ranks: rank 2 deepens access; rank 3 extends targets. Limit: it goes Down — there is no version of this that goes up."
+  },
+  {
+   "id": "the_choir_sustains",
+   "name": "The Choir Sustains",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.3
+   },
+   "effectTags": [
+    "communion",
+    "sustain",
+    "deep"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She was running out. Then she wasn't. Something below was still going.",
+   "description": "Sustain through communion with the choir — when you begin to fail, the deep holds what the above has exhausted.",
+   "notFor": [],
+   "tradition": "abyssal",
+   "functions": [
+    "empower",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "hardship",
+    "survival"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Deep Holds",
+     "grants": "When you begin to run out, the communion sustains — something from below keeps going what above has exhausted.",
+     "cannot": "Anything rank 2 adds — draw from the depth to carry your party through the hardest part — the energy isn't yours, but it is available to those who have been where you have been; THE ENERGY IS NOT YOURS.",
+     "functions": [
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Sustaining the Group",
+     "grants": "Draw from the depth to carry your party through the hardest part — the energy isn't yours, but it is available to those who have been where you have been.",
+     "cannot": "Anything rank 3 adds — the communion sustains indefinitely in conditions of deprivation — as long as the connection holds, you and yours hold; THE ENERGY IS NOT YOURS.",
+     "functions": [
+      "sustain",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unexhausted Deep",
+     "grants": "The communion sustains indefinitely in conditions of deprivation — as long as the connection holds, you and yours hold. And the communion gives more than endurance: those who share it are steadier of hand and clearer of head than they were before it took them — better at what they do, not merely still able to do it.",
+     "cannot": "Nothing further; this is the craft's ceiling; THE ENERGY IS NOT YOURS.",
+     "functions": [
+      "sustain",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "draw from the depth to carry YOUR PARTY through the hardest part — 'the energy is not yours, but it is available'",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the communion sustains INDEFINITELY in deprivation — as long as the connection holds, you and yours do not run out",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "draw a little — half the relief, and the debt is small",
+    "surge": "double it; THE ENERGY IS NOT YOURS, and what is not yours is borrowed"
+   },
+   "bounds": [
+    {
+     "text": "THE ENERGY IS NOT YOURS — it comes from the communion, and the communion is a relationship",
+     "class": "hard"
+    },
+    {
+     "text": "as long as THE CONNECTION HOLDS — a severed abyssal has nothing",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A endurance/hardship/survival action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: the Energy IS Not Yours — it comes from the communion, and the communion is a relationship."
+  },
+  {
+   "id": "the_judged_strike",
+   "name": "The Judged Strike",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.4,
+    "violence_peace": 0.1
+   },
+   "effectTags": [
+    "judgment",
+    "condemnation",
+    "strike"
+   ],
+   "harmRung": "lethal",
+   "narrationHints": "The blow wasn't just a blow. It said something.",
+   "description": "Strike with the weight of judgment — the blow carries condemnation; the target knows what it means.",
+   "notFor": [],
+   "tradition": "seraphic",
+   "functions": [
+    "strike",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "combat",
+    "social",
+    "tactical"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Warranted Blow",
+     "grants": "Strike with the weight of judgment — the blow lands harder because it is warranted; the target knows it.",
+     "cannot": "Anything rank 2 adds — a judged blow harms and reveals — what they have done is named in the moment of impact; THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED.",
+     "harmRung": "damaging",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "Named in the Strike",
+     "grants": "A judged blow harms and reveals — what they have done is named in the moment of impact; all present understand the context.",
+     "cannot": "Anything rank 3 adds — strike with the full authority of the order — the blow is both physical and pronouncement; THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED.",
+     "harmRung": "damaging",
+     "functions": [
+      "strike",
+      "reveal"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 3,
+     "name": "Hierarchy's Strike",
+     "grants": "Strike with the full authority of the order — the blow is both physical and pronouncement; what was done is named, weighed, and answered.",
+     "cannot": "Nothing further; this is the craft's ceiling; THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED; and it still costs what it costs: a blow that is also a pronouncement is one YOU CANNOT TAKE BACK.",
+     "harmRung": "lethal",
+     "functions": [
+      "strike",
+      "reveal"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "revelation"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.03,
+    "damageType": "judgement",
+    "note": "lethal rung"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "revelation",
+     "delta": "a judged blow HARMS AND REVEALS — what they have done is NAMED IN THE MOMENT OF IMPACT; all present understand",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: strike with THE FULL AUTHORITY OF THE ORDER — the blow is both PHYSICAL AND PRONOUNCEMENT",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a measured blow — half the force, and nothing is announced",
+    "surge": "double it; a blow that is also a pronouncement is a pronouncement you cannot take back"
+   },
+   "bounds": [
+    {
+     "text": "THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED — an unwarranted strike is just a strike",
+     "class": "hard"
+    },
+    {
+     "text": "a blow that is also a pronouncement is one YOU CANNOT TAKE BACK",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A combat/social/tactical action that deals damage. It rolls 2d6 judgement damage Ranks: rank 2 adds to revelation; rank 3 adds to special. Limit: the Blow Lands Harder Because IT IS Warranted — an unwarranted strike is just a strike."
+  },
+  {
+   "id": "the_raised_form",
+   "name": "The Raised Form",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.4,
+    "destruction_creation": 0.2
+   },
+   "effectTags": [
+    "make",
+    "order",
+    "hierarchy"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She didn't just build it. She raised it. There's a difference.",
+   "description": "Make through seraphic authority — what is raised embodies proper order and organizes what surrounds it.",
+   "notFor": [],
+   "tradition": "seraphic",
+   "functions": [
+    "command",
+    "make",
+    "summon"
+   ],
+   "challengeTypes": [
+    "craft",
+    "leadership",
+    "magical"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Ordered Thing",
+     "grants": "Make something that embodies proper order — a structure, a space, an object whose form holds the hierarchy clearly.",
+     "cannot": "Anything rank 2 adds — raise a form that organizes what surrounds it — the made thing sets the tone for the space it occupies; it instantiates what a thing SHOULD be.",
+     "functions": [
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Organizing Made",
+     "grants": "Raise a form that organizes what surrounds it — the made thing sets the tone for the space it occupies.",
+     "cannot": "Anything rank 3 adds — summon the form a thing should have and instantiate it — the building that should stand, the arrangement that should be — made real by the authority to say what is proper; it instantiates what a thing SHOULD be.",
+     "functions": [
+      "make",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "What Should Exist",
+     "grants": "Summon the form a thing should have and instantiate it — the building that should stand, the arrangement that should be — made real by the authority to say what is proper.",
+     "cannot": "Nothing further; this is the craft's ceiling; it instantiates what a thing SHOULD be; and it still costs what it costs: a form that sets the tone SETS IT FOR EVERYONE, including those who did not choose it.",
+     "functions": [
+      "make",
+      "command",
+      "summon"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "order",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 168,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "order",
+     "delta": "raise a form that ORGANIZES WHAT SURROUNDS IT — the made thing SETS THE TONE for the space it occupies",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: SUMMON THE FORM A THING SHOULD HAVE and INSTANTIATE IT — the building that should stand, the arrangement that should hold",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "raise something plain — half the influence, and it organizes only itself",
+    "surge": "double it; a form that sets the tone SETS IT FOR EVERYONE"
+   },
+   "bounds": [
+    {
+     "text": "it instantiates what a thing SHOULD be — which requires being RIGHT about that",
+     "class": "hard"
+    },
+    {
+     "text": "a form that sets the tone SETS IT FOR EVERYONE, including those who did not choose it",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A craft/leadership/magical action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens order; rank 3 adds to special. Limit: it instantiates what a thing Should be — which requires being Right about that."
+  },
+  {
+   "id": "the_ascent_path",
+   "name": "The Ascent Path",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.4,
+    "space_time": -0.1
+   },
+   "effectTags": [
+    "ascent",
+    "travel",
+    "height"
+   ],
+   "harmRung": "none",
+   "narrationHints": "The way up is always there for those who are meant to go.",
+   "description": "Ascend past what should be a physical limit — and open the ascent path for others.",
+   "notFor": [],
+   "tradition": "seraphic",
+   "functions": [
+    "move",
+    "open",
+    "travel"
+   ],
+   "challengeTypes": [
+    "exploration",
+    "tactical",
+    "navigation"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Past the Limit",
+     "grants": "Ascend past what should be a physical barrier — scale what isn't scalable, reach the height that closes off the ordinary approach.",
+     "cannot": "Anything rank 2 adds — show the ascent path and others can follow — the route up that wasn't there before is there now for those you lead; it goes UP.",
+     "functions": [
+      "move",
+      "open"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Opened Way",
+     "grants": "Show the ascent path and others can follow — the route up that wasn't there before is there now for those you lead.",
+     "cannot": "Anything rank 3 adds — travel the ascent as a road — any height, any approach — and carry your party with you to wherever the way up leads; it goes UP.",
+     "functions": [
+      "move",
+      "open",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Choir-Height",
+     "grants": "Travel the ascent as a road — any height, any approach — and carry your party with you to wherever the way up leads.",
+     "cannot": "Nothing further; this is the craft's ceiling; it goes UP.",
+     "functions": [
+      "move",
+      "open",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 15,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 4,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "SHOW THE ASCENT PATH AND OTHERS CAN FOLLOW — the route up that was not there is there now FOR THOSE YOU SHOW",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "travel the ascent AS A ROAD — any height, any approach — and CARRY YOUR PARTY to wherever the way up leads",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "climb what shouldn't be climbable — half the height, and you can come down",
+    "surge": "double it; the way up leads where the way up leads"
+   },
+   "bounds": [
+    {
+     "text": "it goes UP — there is no version of this that goes down",
+     "class": "hard"
+    },
+    {
+     "text": "THE WAY UP LEADS WHERE THE WAY UP LEADS — you do not choose the destination, only the climb",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A exploration/tactical/navigation action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 15. Ranks: rank 2 extends targets; rank 3 extends range. Limit: it goes UP — there is no version of this that goes down."
+  },
+  {
+   "id": "the_sustained_order",
+   "name": "The Sustained Order",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.3
+   },
+   "effectTags": [
+    "hierarchy",
+    "sustain",
+    "communion"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She wasn't doing it alone. She hadn't been for a while.",
+   "description": "Sustain through participation in the hierarchy — the order holds those who hold to it.",
+   "notFor": [],
+   "tradition": "seraphic",
+   "functions": [
+    "empower",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "hardship",
+    "leadership"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Order Holds",
+     "grants": "Draw from the hierarchy to go on — the seraphic who holds their place in the order does not run out alone.",
+     "cannot": "Anything rank 2 adds — sustain your party through the hierarchy's resources — not comfort but genuine sustaining authority; YOU MUST HOLD YOUR PLACE IN THE ORDER.",
+     "functions": [
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "What the Order Provides",
+     "grants": "Sustain your party through the hierarchy's resources — not comfort but genuine sustaining authority; what the order gives, you carry some of.",
+     "cannot": "Anything rank 3 adds — in the hardest conditions, the seraphic who remains part of the order remains part of what the order can do — which is more than any single body can; YOU MUST HOLD YOUR PLACE IN THE ORDER.",
+     "functions": [
+      "sustain",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Part of What the Order Can Do",
+     "grants": "In the hardest conditions, the seraphic who remains part of the order remains part of what the order can do — which is more than any single body can. And a body inside the order does not merely last: it works better than it could alone — surer, faster to act, and braver than the same person standing outside the hierarchy.",
+     "cannot": "Nothing further; this is the craft's ceiling; YOU MUST HOLD YOUR PLACE IN THE ORDER; and it still costs what it costs: what the order gives, THE ORDER MAY ASK BACK.",
+     "functions": [
+      "sustain",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "sustain your party THROUGH THE HIERARCHY'S RESOURCES — not comfort but GENUINE SUSTAINING AUTHORITY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the seraphic who REMAINS PART OF THE ORDER remains part of WHAT THE ORDER CAN DO",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "draw on your standing — half the relief, and it asks nothing of the order",
+    "surge": "double it; what the order gives, THE ORDER MAY ASK BACK"
+   },
+   "bounds": [
+    {
+     "text": "YOU MUST HOLD YOUR PLACE IN THE ORDER — a seraphic cast out has nothing",
+     "class": "hard"
+    },
+    {
+     "text": "what the order gives, THE ORDER MAY ASK BACK",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A endurance/hardship/leadership action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: you Must Hold Your Place IN The Order — a seraphic cast out has nothing."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_deep_covenant",
+   "name": "The Deep Covenant",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "abyssal",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.6
+   },
+   "functions": [
+    "bind",
+    "command"
+   ],
+   "narrationHints": "You do not raise your voice. You offer the terms, and the terms are already inside them, and they find themselves agreeing to a thing they will spend years explaining to themselves.",
+   "description": "The Abyssal art of the binding pact — a covenant offered so precisely to the hollow in someone that refusing it feels like refusing themselves. Not domination. Invitation, with a hook already set.",
+   "notFor": "It only binds what already wanted the bargain; a whole soul with nothing owed has nothing for the hook to catch. And a covenant witnessed and named aloud by a third party can be broken.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Deep Covenant",
+     "grants": "Bind a willing-if-they-knew-it party to a lasting pact that shapes their choices toward your end.",
+     "cannot": "It cannot compel the truly unwilling, it frays when spoken plainly by a witness, and every covenant you set is a thread that runs both ways — they are bound to you, and you to the keeping of it.",
+     "functions": [
+      "command",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Covenant That Spreads",
+     "grants": "Set a covenant on a household, a company, or an office rather than a person — those who take the role take the pact with it, without ever being offered it. And a covenant you already hold can be tightened: the hook set deeper, the choices narrowed further.",
+     "cannot": "It still catches only what already wanted the bargain; a body with nothing owed offers nothing to hook. A covenant on an office becomes known to that office in time, and they will go looking for the witness who can name it aloud. And tightening a hook is felt — they may not know what, but they know.",
+     "functions": [
+      "command",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "harmRung": "incapacitating",
+   "shape": "construct",
+   "operativeAxis": [
+    "bindStrength",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 720,
+    "scope": 2,
+    "note": "T-IV, incapacitating"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "set a covenant on A HOUSEHOLD, A COMPANY, OR AN OFFICE rather than a person — THOSE WHO TAKE THE ROLE TAKE THE PACT",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a light covenant — half the hold, and it can be spoken out of",
+    "surge": "double it; IT CATCHES ONLY WHAT ALREADY WANTED THE BARGAIN"
+   },
+   "bounds": [
+    {
+     "text": "⚠️ IT NEEDS A LEVER — a want, a debt, a person they will not lose. The unwilling with NOTHING to lose are genuinely outside it, and they are rarer than anyone hopes",
+     "class": "hard"
+    },
+    {
+     "text": "IT FRAYS WHEN SPOKEN OF openly",
+     "class": "soft"
+    },
+    {
+     "text": "A WILLING TAKER BINDS CHEAPLY; AN UNWILLING ONE BINDS DEARLY — the covenant still closes on someone who refused it, but the price is paid by the one who set it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about 30 days Ranks: rank 2 extends scope. Limit: ⚠️ IT Needs A Lever — a want, a debt, a person they will not lose. The unwilling with Nothing to lose are genuinely outside it, and they are rarer than anyone hopes."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_drowning_deep",
+   "name": "The Drowning Deep",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "abyssal",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.9
+   },
+   "functions": [
+    "hinder",
+    "reveal"
+   ],
+   "narrationHints": "The floor of the world opens under one person's certainty and they feel, for one endless moment, exactly how far down it goes — and how alone they are at the top of that fall.",
+   "description": "The deepest Abyssal working — you show someone the full depth beneath their footing, the vertigo of a self with no floor. Most who receive it never stand quite the same way again. The Abyssals do it anyway.",
+   "notFor": "One person, once, and it costs you enormously. It cannot touch someone at genuine peace with their own depths — they simply look down and are not afraid. And it cannot be undone: you cannot un-show a person the deep.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Drowning Deep",
+     "grants": "Show one person the full depth beneath their footing. What they were most certain of stops bearing weight — they hesitate where they never hesitated, and the vertigo weakens every act that rested on that certainty until they either rebuild it or find another floor to stand on.",
+     "cannot": "It costs nearly all you have. It fails entirely against someone at genuine peace with their own depths — they look down and are simply not afraid. And it CANNOT BE TAKEN BACK: you have shown them the deep and they have seen it, and the Abyssals are honest that this is the cruelest thing they do.",
+     "functions": [
+      "reveal",
+      "hinder"
+     ],
+     "harmRung": "incapacitating",
+     "gains": "broaden"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "harmRung": "incapacitating",
+   "shape": "hobble",
+   "operativeAxis": [
+    "certaintyBreach",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 4,
+    "targets": 1,
+    "damageType": "appetite",
+    "note": "T-V capstone, incapacitating"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: SHOW ONE PERSON THE FULL DEPTH BENEATH THEIR FOOTING — what they were most certain of STOPS BEARING WEIGHT. The capstone is a KIND (unmaking certainty itself) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a partial drowning is a doubt, and doubts are survivable.",
+    "surge": "REFUSED — it already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
+     "class": "hard"
+    },
+    {
+     "text": "IT FAILS ENTIRELY AGAINST THOSE WITH NOTHING BENEATH THEM",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social action that weakens or restricts a target. Its strength is rated 9 out of 10 It affects 1 target, and lasts for about 4 hours Limit: iT Costs Nearly All You Have."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_unfaltering_light",
+   "name": "The Unfaltering Light",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "seraphic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.6
+   },
+   "functions": [
+    "empower",
+    "ward"
+   ],
+   "narrationHints": "The light does not flare. It simply does not stop — a steadiness that outlasts the thing trying to break it, until the breaking tires first.",
+   "description": "The Seraphic art of the light that does not gutter — a radiance sustained past all reason to sustain it, warding a place or a person through what should overwhelm them.",
+   "notFor": "It shields but does not strike; it can hold a line and never take ground. And holding it burns you as surely as it warms them — a light that never falters is paid for by the one who carries it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Unfaltering Light",
+     "grants": "Sustain an unbreakable ward of radiance over a person or place, outlasting the assault against it.",
+     "cannot": "It cannot attack, only endure; it drains you the whole while it holds; and if you fall, the light falls with you.",
+     "functions": [
+      "ward",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Light That Carries",
+     "grants": "The ward extends from a person to a company, and from a stand to a march — it moves with those it covers. Those inside are not merely shielded but sustained: they do not tire as they should, and wounds taken within it do not worsen while the light holds. and they are made better by it rather than merely preserved — hands steadier, aim truer, fear further off than it has any right to be.",
+     "cannot": "It still cannot strike, at any mastery. It still burns you before it burns anything else. Extending it to a company means feeling each of them, continuously. And if you fall now, considerably more falls with you than before.",
+     "functions": [
+      "ward",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "DEFEND"
+   ],
+   "harmRung": "none",
+   "shape": "guard",
+   "operativeAxis": [
+    "endurance",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "soak": 6,
+    "soakRank": 3,
+    "duration": 8,
+    "targets": 4,
+    "note": "T-IV — the catalog's purest endurance guard"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "the ward extends FROM A PERSON TO A COMPANY, and from a stand TO A MARCH — IT MOVES WITH THOSE IT COVERS",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold a smaller light — half the endurance, and it drains you less",
+    "surge": "double it; IT STILL CANNOT STRIKE, AT ANY MASTERY. IT STILL BURNS YOU THE WHOLE WHILE."
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT ATTACK, ONLY ENDURE — AT ANY MASTERY",
+     "class": "hard"
+    },
+    {
+     "text": "IT DRAINS YOU THE WHOLE WHILE",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A defend action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 6 harm per hit (rank 3 armour) It affects 4 targets, and lasts for about 8 hours Ranks: rank 2 extends targets. Limit: iT Cannot Attack, Only Endure — AT Any Mastery."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_kept_flame",
+   "name": "The Kept Flame",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "seraphic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.9,
+    "mechanical_spiritual": 0.4
+   },
+   "functions": [
+    "empower",
+    "sustain"
+   ],
+   "narrationHints": "For a moment you are lit from a source that was old before the Transition — the substrate itself answering, the way it answered when your kind first refused to give it up. It is the most yourself you will ever feel, and the most not-yours.",
+   "description": "The Seraphic capstone that IS a precursor act — the radiance drawn straight from the fabricated substrate your people never surrendered. This is why the Seraphs are what they are: the light is the nanites, kept flowing, and keeping them flowing is a precursor working few living things can survive channeling.",
+   "notFor": "It draws on the substrate directly — power beyond the ordinary tiers, and a standing cost to keep it lit; let it lapse and the flame does not politely dim, it gutters and takes something of you with it. Only a people who never gave up the nanites can hold this without being unmade.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Kept Flame",
+     "grants": "Channel the fabricated substrate directly as sustained radiant power — a precursor-tier working innate to your kind.",
+     "cannot": "It carries an ongoing upkeep the whole time it burns, it can unmake one who is not substrate-born, and it marks you to anything that reads the substrate — you are a lit thing in a dark room, and not everything in the dark is friendly.",
+     "functions": [
+      "empower",
+      "sustain"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "DEFEND"
+   ],
+   "innatePrecursor": true,
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "substrateChannel",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 8,
+    "damageType": "light",
+    "note": "T-V. ⚠️ 'A PRECURSOR-TIER WORKING INNATE TO YOUR KIN' — the second of exactly two in the catalog."
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: CHANNEL THE FABRICATED SUBSTRATE DIRECTLY as sustained radiant power — a precursor-tier working INNATE TO YOUR KIN. The capstone is a KIND (direct substrate channelling) with ONGOING UPKEEP the whole time it burns.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-kept flame goes out, and what it was holding goes with it.",
+    "surge": "REFUSED — it already carries upkeep the whole time it burns."
+   },
+   "bounds": [
+    {
+     "text": "IT CARRIES ONGOING UPKEEP THE WHOLE TIME IT BURNS",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A defend action that strengthens someone. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep The Whole Time IT Burns."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_hollow_that_holds",
+   "name": "The Hollow That Holds",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "abyssal",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.9,
+    "mechanical_spiritual": 0.4
+   },
+   "functions": [
+    "open",
+    "sustain"
+   ],
+   "narrationHints": "You open the hollow in yourself — the one your people never filled, never closed, never gave up — and for a moment it is not an absence but a MOUTH, and the substrate pours through it, and you are the deepest thing in any room.",
+   "description": "The Abyssal capstone that IS a precursor act — the deep hollow the Abyssals kept, where their ancestors declined to give the nanites up, opened as a channel to the substrate itself. Where the Seraphs keep the light, the Abyssals kept the depth; both drink from the same well, and neither can stop.",
+   "notFor": "It draws the substrate through the kept hollow — power past the ordinary tiers, at a standing cost, and let it lapse and the hollow does not simply close, it HUNGERS. Only a people who kept the deep can channel it without being swallowed by it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Hollow That Holds",
+     "grants": "Channel the fabricated substrate through the kept Abyssal hollow — a precursor-tier working innate to your kind.",
+     "cannot": "It carries an ongoing upkeep while open, it can swallow one who is not abyssal-born, and it marks you to anything that reads the substrate — the deep calls to the deep, and not all of it is on your side.",
+     "functions": [
+      "open",
+      "sustain"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "harmRung": "none",
+   "innatePrecursor": true,
+   "shape": "construct",
+   "operativeAxis": [
+    "substrateChannel",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 8,
+    "note": "T-V. ⚠️ 'A PRECURSOR-TIER WORKING INNATE TO YOUR KIN' — one of exactly two in the catalog."
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: CHANNEL THE FABRICATED SUBSTRATE through the KEPT ABYSSAL HOLLOW — a precursor-tier working INNATE TO YOUR KIN. The capstone is a KIND (direct substrate channelling) with ONGOING UPKEEP.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a hollow half-opened is a hollow that swallows what it should have held.",
+    "surge": "REFUSED — it already carries ongoing upkeep the whole time it is open."
+   },
+   "bounds": [
+    {
+     "text": "IT CARRIES ONGOING UPKEEP WHILE OPEN",
+     "class": "hard"
+    },
+    {
+     "text": "IT CAN SWALLOW what it was meant to hold",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social action that makes or animates something. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep While Open."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_lever",
+   "name": "The Lever",
+   "levelReq": 3,
+   "energyCost": 10,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "abyssal",
+   "attribute": "social",
+   "axes": {
+    "appetite_judgement": -0.7
+   },
+   "functions": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "narrationHints": "There is no shouting in it. You name the thing they cannot lose, and then you wait.",
+   "description": "⚠️ COMPULSION, and the Maw's central craft. You find what a person will not risk — a child, a name, a debt, a body — and you set the bargain against it. They are not persuaded and they are not willing. They are LEVERED, and they will do it, and they will remember who made them.",
+   "notFor": "Someone with genuinely nothing to lose: the Maw's oldest frustration, and rarer than anyone hopes. It also cannot make them AGREE — a levered person complies and hates you, which is a different and more dangerous thing to be owed by.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Lever",
+     "grants": "Find the one thing a person will not risk, and price a demand against it. They comply.",
+     "cannot": "You must find a real lever. A guess that misses tells them exactly what you were reaching for.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Lever",
+     "grants": "Hold the lever across time — a standing compliance rather than one act. They act as you require until the lever is taken from you.",
+     "cannot": "A held lever must be MAINTAINED, and everything you hold over someone is a thing they are working to remove.",
+     "functions": [
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Long Lever",
+     "grants": "Set a lever on a house, an office, or a line — those who take the role take the compulsion, whether or not they know why.",
+     "cannot": "Those who inherit it did not choose it, and the Maw has never argued otherwise.",
+     "functions": [
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "harmRung": "incapacitating",
+   "nativeOrCombination": "native",
+   "shape": "hobble",
+   "operativeAxis": [
+    "leverage",
+    "duration",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 24,
+    "targets": 1,
+    "damageType": "appetite"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "a STANDING compliance rather than one act",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "SPECIAL: a lever set on a HOUSE or OFFICE — those who take the role take the compulsion",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "name it quietly — half the hold, and it can be walked back",
+    "surge": "double it; EVERYTHING YOU HOLD OVER SOMEONE IS A THING THEY ARE WORKING TO REMOVE"
+   },
+   "bounds": [
+    {
+     "text": "IT NEEDS A REAL LEVER — someone with nothing to lose is genuinely outside it",
+     "class": "hard"
+    },
+    {
+     "text": "COMPLIANCE IS NOT AGREEMENT — a levered person hates you, and that is a dangerous creditor to have",
+     "class": "hard"
+    },
+    {
+     "text": "A HELD LEVER MUST BE MAINTAINED",
+     "class": "cost"
+    },
+    {
+     "text": "THEY REMEMBER WHO MADE THEM",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate action that weakens or restricts a target. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends duration; rank 3 extends targets. Limit: iT Needs A Real Lever — someone with nothing to lose is genuinely outside it."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_lifted_word",
+   "name": "The Lifted Word",
+   "levelReq": 5,
+   "energyCost": 15,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "seraphic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.8
+   },
+   "functions": [
+    "transform",
+    "reveal",
+    "travel"
+   ],
+   "narrationHints": "They do not flap. They are simply higher than they were, and everyone below has stopped talking.",
+   "description": "⚠️ SERAPHIC FLIGHT, AND IT IS A DECLARATION. The Orders do not fly to travel; they fly to be SEEN flying. Height is the argument — a judgement delivered from above is the same judgement and lands differently, and every Order knows it.",
+   "notFor": "Discretion. Anyone within sight sees exactly what you are and what tradition taught you. It cannot be done quietly and the Orders would not want it to be.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Lifted Word",
+     "grants": "Rise and hold above a place, under control, for as long as you can pay. Everyone present sees.",
+     "cannot": "Doing it unseen. Travelling far — this is presence, not distance.",
+     "functions": [
+      "transform",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Ascent",
+     "grants": "Travel by it — cross country above the roads, arriving visibly and from the wrong direction.",
+     "cannot": "Arriving unannounced. You are a light in the sky for the whole approach.",
+     "functions": [
+      "transform",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL",
+    "SOCIAL"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 6,
+    "range": "route-scale",
+    "note": "⚠️ FLIGHT THAT CANNOT BE HIDDEN. Travel legs are fast and arrive PRE-ANNOUNCED — every settlement on the route sees you pass, which changes what waits at the end."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "rise and hold — half the duration, and only over one place",
+    "surge": "cross country aloft; YOU ARE A LIGHT IN THE SKY FOR THE WHOLE APPROACH"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT BE DONE QUIETLY — everyone within sight sees what you are",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ YOU ARRIVE ANNOUNCED, ALWAYS. Whatever waited at the end has had the whole approach to prepare",
+     "class": "cost"
+    },
+    {
+     "text": "at rank 1 it is PRESENCE, NOT DISTANCE — height over one place, not a journey",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A travel and social action, and it cannot be hidden. You rise and hold above a place under control for as long as you can pay the energy, and everyone in sight sees exactly what you are. At rank 2 you can cross country by it, which is fast but arrives pre-announced — every settlement on the route watches you pass, so whatever waits at the end has had the entire approach to prepare. Rank 1 is presence over one place rather than distance."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_borne_bargain",
+   "name": "The Borne Bargain",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "abyssal",
+   "attribute": "social",
+   "axes": {
+    "appetite_judgement": -0.7
+   },
+   "functions": [
+    "bind",
+    "travel"
+   ],
+   "narrationHints": "Something carries them. It is not visible and it is not free, and they will not say what it is.",
+   "description": "⚠️ ABYSSAL FLIGHT, AND YOU DO NOT DO IT — SOMETHING CARRIES YOU. A bargain struck for passage: fast, silent, and priced like everything else. What bears you up is real, it is owed, and it remembers the trip.",
+   "notFor": "Anyone unwilling to owe. The price is named before you rise and it is not refundable if you land early.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Borne Bargain",
+     "grants": "Be carried aloft and across at speed. The price is named up front and paid on arrival.",
+     "cannot": "Bargaining after you are airborne. The terms are fixed at the moment you leave the ground.",
+     "functions": [
+      "bind",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Passage",
+     "grants": "A standing arrangement — passage whenever you call for it, on an account that accrues.",
+     "cannot": "Forgetting the account. It is being kept whether or not you keep it.",
+     "functions": [
+      "bind",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "TRAVEL",
+    "SOCIAL"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "movement",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 8,
+    "range": "route-scale",
+    "note": "⚠️ THE FASTEST TRAVEL IN THE GAME AND THE ONLY ONE THAT ACCRUES A DEBT. Legs cost almost no days and add to an account the world tracks."
+   },
+   "rankDeltas": [],
+   "intensity": {
+    "conserve": "one passage, priced and paid on landing",
+    "surge": "open a standing account; IT IS BEING KEPT WHETHER OR NOT YOU KEEP IT"
+   },
+   "bounds": [
+    {
+     "text": "THE PRICE IS NAMED BEFORE YOU RISE and is not refundable if you land early",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ AT RANK 2 THE ACCOUNT ACCRUES, and an abyssal account is collectable — see `the_collection`",
+     "class": "cost"
+    },
+    {
+     "text": "what bears you up REMEMBERS THE TRIP",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A travel and social action. You do not fly; something carries you, fast and silent, on a price named before you leave the ground and paid on arrival — it is not refunded if you land early. At rank 2 you open a standing arrangement you can call on any time, on an account that accrues and is being kept whether or not you keep it, and an abyssal account is collectable. It is the fastest travel in the game and the only one that leaves you owing."
+  },
+  {
+   "id": "the_name_invoked",
+   "name": "The Name Invoked",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": 0.5,
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "hinder",
+    "command"
+   ],
+   "narrationHints": "You say the name you carry — the borrowed, too-large, unverifiable name — the way it was meant to be said, and the ones who believe it falter. Nothing happens to the ones who don't.",
+   "description": "The God-Named's first offense: authority made a weapon, and it works exactly as far as it is believed and not one step further.",
+   "notFor": "Proving anything (the name is borrowed, and it stays borrowed); the unimpressed, the foreign, and anyone who has checked; a second use on someone who watched the first fail; killing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Spoken Name",
+     "grants": "Speak the name into a moment and those who credit it stop — a raised hand lowers, a mob's front rank hesitates, a door is opened that was not going to be. Enough time to act, or to leave.",
+     "cannot": "It works ONLY on those who believe the name. Strangers, foreigners, and anyone who has actually checked feel nothing. Fail once in front of someone and the name is thinner for them forever.",
+     "functions": [
+      "hinder",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Weight of It",
+     "grants": "Hold the moment rather than buying a breath — those who credit the name will not act against you while you hold it, and some will obey a small instruction.",
+     "cannot": "Holding it is exhausting and visible. Each instruction spends belief; ask for something the name would not ask for and you spend it all at once.",
+     "functions": [
+      "hinder",
+      "command",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Name in Full",
+     "grants": "The name at its full height in front of a crowd that carries it. A charge stops. A judgment is reversed. A hall kneels.",
+     "cannot": "You are now what they knelt to and the valley will hold you to it. The cult that believes the NAME rather than you will defend it harder than you do — and they will notice first when you fall short.",
+     "functions": [
+      "hinder",
+      "command",
+      "bind",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "tradition": "god_named",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "hinder",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 2,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "a quiet use — one person, one beat, and the name is barely spent",
+    "surge": "the name at full height; YOU ARE NOW WHAT THEY KNELT TO and will be held to it"
+   },
+   "bounds": [
+    {
+     "text": "works ONLY on those who BELIEVE the name",
+     "class": "hard"
+    },
+    {
+     "text": "the name is BORROWED and proves nothing",
+     "class": "hard"
+    },
+    {
+     "text": "fail once in front of someone and it is thinner for them FOREVER",
+     "class": "cost"
+    },
+    {
+     "text": "you are held to what you claimed",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/fight action that halts those who credit your name. Rated 5 of 10 across a scope of 3 for about two hours. Limit: it works only on those who believe the name."
+  },
+  {
+   "id": "the_struck_term",
+   "name": "The Struck Term",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.5,
+    "falsehood_truth": 0.3
+   },
+   "functions": [
+    "strike",
+    "bind"
+   ],
+   "narrationHints": "You offer terms that are genuinely good and genuinely costly, they take them, and the cost lands. No trick, no fine print — the harm was named aloud and accepted, which is the whole craft.",
+   "description": "The Bargainers' first offense, and the only one on the circle that requires the target's agreement: an attack you cannot make on someone who says no.",
+   "notFor": "Anything unwilling — refusal ends it completely; lying about the price (the Bargainers' whole standing rests on the price being exact); a term you cannot actually deliver; ambush, surprise, or anyone who cannot hear you out.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Terms Offered",
+     "grants": "Name a real exchange to someone who wants something — a passage, a name, a wound closed — with a real cost attached. If they accept, they get the thing and pay the price, and the price can be a way out of the fight for you.",
+     "cannot": "REFUSAL ENDS IT — there is no forcing this, and the cautious simply walk. You must DELIVER what you promised, exactly. And you have to have something they actually want.",
+     "functions": [
+      "strike",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Exact Price",
+     "grants": "Structure the cost so it falls where it is useful to you — a debt owed, an advantage surrendered, a door held open. Still stated plainly; still accepted freely.",
+     "cannot": "Everyone watching now knows what you do with a table. The wary stop wanting things in front of you, which is a real and growing cost.",
+     "functions": [
+      "strike",
+      "bind",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Standing Term",
+     "grants": "A bargain that keeps — an ongoing arrangement someone entered willingly and cannot simply stop paying. The Bargainers' actual power in the foothills.",
+     "cannot": "It BINDS YOU TOO, and the Bargainers keep their terms; you have entered a relationship, not won an exchange. Break your side once and no one in the foothills sits at your table again.",
+     "functions": [
+      "strike",
+      "bind",
+      "hinder",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "tradition": "bargainers",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "precision",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 8,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "small terms, small price — barely a hook",
+    "surge": "a standing term; IT BINDS YOU TOO, and you have entered a relationship, not won an exchange"
+   },
+   "bounds": [
+    {
+     "text": "REFUSAL ENDS IT — there is no forcing this",
+     "class": "hard"
+    },
+    {
+     "text": "the price must be NAMED EXACTLY and must be TRUE",
+     "class": "hard"
+    },
+    {
+     "text": "you must DELIVER what you promised",
+     "class": "cost"
+    },
+    {
+     "text": "a standing term BINDS YOU TOO",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/fight action that costs an opponent something they agreed to pay. Rated 5 of 10 on one target for about eight hours. Limit: refusal ends it — there is no forcing this."
+  }
+ ],
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

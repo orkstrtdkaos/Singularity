@@ -337,7 +337,41 @@ for (const f of HARM_FAMILY) {
 // deriving the CANON half is that the half which CAN drift no longer does.
 const PROSE_SYNONYMS = ["attack", "wound", "fell", "disable", "disarm", "shatter", "repel", "pin", "stagger",
   "fight", "combat", "dismantl", "unmak", "bring .{0,20}down", "drive (back|off)"];
-const OFFENSIVE_RE = new RegExp(String.raw`\b(` + [...canonVerbs].concat(PROSE_SYNONYMS).map(v => v + String.raw`\w*`).join("|") + String.raw`)\b`, "i");
+
+// ⛔ SNG-352b — `\w*` SUFFIXING CATCHES CONJUGATIONS AND NEVER IRREGULARS, AND PROSE REACHES FOR THE PAST
+// TENSE CONSTANTLY. Aevi hit this twice in one batch: she wrote "is struck by every door that closes" — a
+// true statement about harm — and the gate structurally could not read it, because `strike\w*` does not
+// match "struck". She fixed it by rewriting to the present form.
+//
+// ⚠️ THAT FIX IS THE PROBLEM, NOT THE RESOLUTION. She had already ruled out option (b) on exactly this
+// principle — "that would have you fix a bad test by corrupting content" — and then a bad test quietly made
+// her weaken a well-made line to satisfy a regex. A tool that costs the author their better phrasing is
+// levying a tax, and the tax is invisible because the build goes green either way.
+//
+// She flagged it as a known blind spot rather than a request. It is cheap, it is MY gate, and the cost
+// lands on HER, so it gets fixed: the irregular forms of the verbs actually in play, listed against their
+// base so the pairing is inspectable. English has no rule to derive these from — that is what irregular
+// means — so this is an enumeration by necessity, not by laziness.
+const IRREGULAR_PAST = {
+  strike: ["struck", "stricken"], break: ["broke", "broken"], fell: ["fell", "fallen"],
+  drive: ["drove", "driven"], bring: ["brought"], tear: ["tore", "torn"], slay: ["slew", "slain"],
+  bind: ["bound"], shake: ["shook", "shaken"], freeze: ["froze", "frozen"], bleed: ["bled"],
+  rend: ["rent"], smite: ["smote", "smitten"], throw: ["threw", "thrown"], beat: ["beaten"],
+  shoot: ["shot"], cut: ["cut"], hurt: ["hurt"], burn: ["burnt"],
+};
+const irregularsFor = (verbs) => {
+  const out = new Set();
+  for (const v of verbs) {
+    const base = String(v).replace(/\\w\*$/, "");
+    for (const form of IRREGULAR_PAST[base] || []) out.add(form);
+  }
+  return [...out];
+};
+const OFFENSIVE_TERMS = [...canonVerbs].concat(PROSE_SYNONYMS);
+const OFFENSIVE_RE = new RegExp(String.raw`\b(`
+  + OFFENSIVE_TERMS.map(v => v + String.raw`\w*`)
+    .concat(irregularsFor(OFFENSIVE_TERMS))       // irregulars matched WHOLE — no suffixing, that is the point
+    .join("|") + String.raw`)\b`, "i");
 
 const claimsCombat = (a) => (a.functions || []).some(f => HARM_FUNCTIONS.has(String(f)));
 const teachesCombat = (a) => (a.tree || a.ranks || []).some(r => OFFENSIVE_RE.test(String(r.grants || "")));

@@ -10658,7 +10658,19 @@ function renderPlay(turn, opts = {}) {
       const allyBody = (roster.length || recruitable.length) ? `<div class="company-group"><div class="sys-label">Allies</div>${
         roster.map(r => `<div class="company-row" title="${esc(roleBadges(r.roles))}${r.teaches ? " · teaches " + traditionLabel(r.teaches) : ""}${r.liaisonFor ? " · liaison" : ""}"><span class="company-name">${esc(r.name)}</span><span class="company-badge" title="roles they hold in your company">${esc(roleBadges(r.roles))}</span>${r.teaches ? `<span class="company-badge on" title="a trainer — their presence lets you learn this people's capstones">⚔</span>` : ""}${r.liaisonFor ? `<span class="company-badge" title="a liaison — faster standing with their people">🤝</span>` : ""}<span class="company-actions">${r.recruited ? `<button class="company-action ally-part" data-partally="${esc(r.npcId)}" title="Part ways">✕</button>` : ""}</span></div>`).join("")
       }${recruitable.map(p => `<div class="company-row" title="${esc(p.label || "at your side")}"><span class="company-name">${esc(p.name)}</span><span class="company-badge hint">${esc(p.label || "at your side")}</span><span class="company-actions"><button class="company-action recruit" data-recruit="${esc(p.id)}" title="Ask them to travel with you">＋</button></span></div>`).join("")}</div>` : "";
-      return `<details class="sidebar-sec" data-sec="company"${sectionOpen("company", true) ? " open" : ""}><summary><span class="sec-title">Company</span>${count ? ` <span class="sec-sum">(${count})</span>` : ""}</summary><div class="sec-body">${partyBody}${compBody}${allyBody}</div></details>`;
+      // ⛔ SNG-355 §1d — THOSE WHO TRAVELLED WITH YOU. Departure is a status now, so the roster can say
+      // what it never could: who walked with you, and for how long. Aevi: a companion panel that cannot
+      // say "travelled with you, days 17–34" is missing the interesting half.
+      //
+      // ⚠️ COLLAPSED BY DEFAULT and below the living roster — it is history, not standing state, and a
+      // long campaign's dead and departed should not push the people actually beside you off the screen.
+      const gone = formerCompany(character);
+      const goneBody = gone.length ? `<details class="company-group" style="margin-top:4px"><summary class="sys-label" style="cursor:pointer">Travelled with you (${gone.length})</summary>${
+        gone.map(m => { const nm = character.npcRegistry?.[m.npcId]?.name || m.npcId;
+          const span = m.joinedDay != null && m.leftDay != null ? `days ${m.joinedDay}–${m.leftDay}` : m.leftDay != null ? `left day ${m.leftDay}` : "no longer with you";
+          return `<div class="company-row" title="${esc(m.departedWhy || "")}"><span class="company-name hint">${esc(nm)}</span><span class="company-badge hint">${esc(span)}</span></div>`;
+        }).join("")}</details>` : "";
+      return `<details class="sidebar-sec" data-sec="company"${sectionOpen("company", true) ? " open" : ""}><summary><span class="sec-title">Company</span>${count ? ` <span class="sec-sum">(${count})</span>` : ""}</summary><div class="sec-body">${partyBody}${compBody}${allyBody}${goneBody}</div></details>`;
     })()}
     ${(() => { // SNG-121: Items — the PINNED quick-access set; the rest is one tap away in the full Inventory
       ensurePins(character);

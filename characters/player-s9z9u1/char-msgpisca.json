@@ -67,7 +67,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.12497990703124999,
+    "spectrumId": -0.11873091167968748,
     "mechanical_spiritual": 0.0007500000000000007
   },
   "attunement": 2,
@@ -241,6 +241,20 @@
       "spread": [],
       "day": 3,
       "worldDay": 38
+    },
+    {
+      "at": "2026-08-07T03:09:24.288Z",
+      "locationId": "the_thinning",
+      "communityId": "valley.thinning",
+      "description": "Held space for a lattice-trained sentinel to release her form and rest—choosing presence without demand over any attempt to heal or fix",
+      "tags": [
+        "mercy",
+        "patience"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 4,
+      "worldDay": 38
     }
   ],
   "relationships": {},
@@ -263,82 +277,83 @@
         "player": "Watch the fire and listen—let Cevaine sleep if she needs to, and keep a quiet vigil over the shelter and its threshold.",
         "summary": "At the Lower-Pass Waystation, vigil becomes rest. Splarf and Cevaine settle into the shelter's warmth while the caretaker tends the fire and Boo keeps watch—the sealed boundary finally released, its desperate pressure gone, leaving only the quiet work of healing and permission to simply be.",
         "narration": "You watch the fire breathe, flame and shadow trading place in the stone hearth. Cevaine's breathing steadies beside you, her lattice-trained posture gradually loosening as exhaustion wins the argument with discipline. She does not sleep—not yet—but she allows herself to rest, her shoulder a hair's breadth from yours, the distance neither closing nor widening. The caretaker tends the fire with unhurried hands, moving between the wood-stack and the flames with the quiet competence of someone who has done this ten thousand times. No one speaks. The shelter holds you all in its warmth like a closed fist.\n\nOutside, the early-spring dark presses thick against the doorway, but it does not enter. The pass-wind carries the smell of snow-melt and stone, and from the forest beyond comes only the ordinary sounds of night—no watching, no waiting, no presence that needs to be held back. The veil has released its grip. The vigil has become something else: a threshold-crossing into rest that neither of you quite knows how to name yet.\n\nBoo settles in the shadows near the back wall, a cat-shape that reads as absence even in the firelight. It watches the threshold with its soundless attention, and you feel the familiar coldness of its loyalty—a kept thing, keeping watch while you allow yourself to be warm.\n\nThe fire crackles. Cevaine's breathing deepens. The night continues outside, and inside, for the first time in three days, there is only the simple weight of being alive and warm and not alone."
+      },
+      {
+        "player": "Put your arm around Cev and let her fall asleep against you",
+        "summary": "At dawn on the fourth day, Splarf and Cevaine find rest at the Lower-Pass Waystation—the sentinel's form releasing into sleep, the vigil finally ended, the weight of held boundaries set down for a few hours of shelter and warmth.",
+        "narration": "You shift slightly on the bench, raising your arm in a slow, deliberate motion—giving Cevaine every opportunity to move away if the form demands it. She doesn't. Instead, her exhausted frame settles into the space you've made, her shoulder finding the hollow under yours with the precision of someone used to measuring distance. Her head tilts toward your chest. The lattice-trained rigidity of her spine softens, degree by degree, as the warmth and the permission to rest finally overtake the discipline that held her upright through two days of sealed-boundary pressure.\n\nYou feel her breathing deepen, then slip toward the rhythm of sleep. Her hand—still held carefully at her side—relaxes. The sentinel who would not yield to anything has yielded to this: the simple, wordless acceptance that rest is not failure. That presence without demand is a form of holding.\n\nThe caretaker glances over, notes the moment without comment, and returns to tending the fire. Boo's absence from the room reads as deliberate—posted at the threshold, perhaps, or dissolved into the shadows near the door. The shelter holds you both in the steady warmth of its stone and flame, and the spring night continues its patient work outside."
       }
     ],
     "lastTurn": {
-      "narration": "You watch the fire breathe, flame and shadow trading place in the stone hearth. Cevaine's breathing steadies beside you, her lattice-trained posture gradually loosening as exhaustion wins the argument with discipline. She does not sleep—not yet—but she allows herself to rest, her shoulder a hair's breadth from yours, the distance neither closing nor widening. The caretaker tends the fire with unhurried hands, moving between the wood-stack and the flames with the quiet competence of someone who has done this ten thousand times. No one speaks. The shelter holds you all in its warmth like a closed fist.\n\nOutside, the early-spring dark presses thick against the doorway, but it does not enter. The pass-wind carries the smell of snow-melt and stone, and from the forest beyond comes only the ordinary sounds of night—no watching, no waiting, no presence that needs to be held back. The veil has released its grip. The vigil has become something else: a threshold-crossing into rest that neither of you quite knows how to name yet.\n\nBoo settles in the shadows near the back wall, a cat-shape that reads as absence even in the firelight. It watches the threshold with its soundless attention, and you feel the familiar coldness of its loyalty—a kept thing, keeping watch while you allow yourself to be warm.\n\nThe fire crackles. Cevaine's breathing deepens. The night continues outside, and inside, for the first time in three days, there is only the simple weight of being alive and warm and not alone.",
-      "sceneSummary": "At the Lower-Pass Waystation, vigil becomes rest. Splarf and Cevaine settle into the shelter's warmth while the caretaker tends the fire and Boo keeps watch—the sealed boundary finally released, its desperate pressure gone, leaving only the quiet work of healing and permission to simply be.",
+      "narration": "You shift slightly on the bench, raising your arm in a slow, deliberate motion—giving Cevaine every opportunity to move away if the form demands it. She doesn't. Instead, her exhausted frame settles into the space you've made, her shoulder finding the hollow under yours with the precision of someone used to measuring distance. Her head tilts toward your chest. The lattice-trained rigidity of her spine softens, degree by degree, as the warmth and the permission to rest finally overtake the discipline that held her upright through two days of sealed-boundary pressure.\n\nYou feel her breathing deepen, then slip toward the rhythm of sleep. Her hand—still held carefully at her side—relaxes. The sentinel who would not yield to anything has yielded to this: the simple, wordless acceptance that rest is not failure. That presence without demand is a form of holding.\n\nThe caretaker glances over, notes the moment without comment, and returns to tending the fire. Boo's absence from the room reads as deliberate—posted at the threshold, perhaps, or dissolved into the shadows near the door. The shelter holds you both in the steady warmth of its stone and flame, and the spring night continues its patient work outside.",
+      "sceneSummary": "At dawn on the fourth day, Splarf and Cevaine find rest at the Lower-Pass Waystation—the sentinel's form releasing into sleep, the vigil finally ended, the weight of held boundaries set down for a few hours of shelter and warmth.",
       "choices": [
         {
-          "label": "Sleep—let your own exhaustion finally claim you, knowing Boo keeps watch at the threshold.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "endure",
-            "rest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Cevaine what comes next—whether she means to stay at the waystation, or descend further downhill toward Hoss and the valley floor.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate",
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step outside and listen to the pass-wind, checking the threshold and the forest edge while Boo rests—ensure nothing has followed you downhill.",
+          "label": "Let her sleep and rest yourself—drift into your own quietness, keeping watch from beneath her weight",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "careful",
+            "sustain",
             "guard"
           ],
-          "abilityId": "numen_sense",
+          "abilityId": null,
           "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wake in the deep night and step outside to check the path below—leave Cevaine warm and resting, but scan the dark for what comes downhill",
+          "attribute": "practical",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "numen_sense",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Tend the fire alongside the caretaker—learn their name, their story, why they keep this shelter on the pass.",
+          "label": "Ask the caretaker, quietly, about the path downhill—who comes this way, what the seasons bring, whether they've seen a mending woman pass through recently",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "craft"
+            "ask",
+            "careful"
           ],
           "abilityId": "storykeeper",
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Held space for a lattice-trained sentinel to release her form and rest—choosing presence without demand over any attempt to heal or fix",
+          "tags": [
+            "mercy",
+            "patience"
+          ],
+          "weight": 1,
+          "communityId": "valley.thinning"
+        }
+      ],
       "characterDeltas": {
-        "health": 2,
-        "energy": 28,
+        "health": 0,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -348,22 +363,22 @@
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
+      "adoptSchool": {},
       "offer": {
-        "thing": "The Waystation Caretaker—a figure of indeterminate age, dark-haired, tending the fire with the calm of long solitude. They have not asked your names, have not demanded your story, and have offered warmth without question. There is something about their practice that reads familiar to your own—a discipline of presence without demand.",
-        "from": "The shelter itself, and the caretaker's own choice to be here, tending fire for travelers in the dark."
+        "thing": "The caretaker's knowledge—what they know of the path downhill, the traffic of travelers, who passes through, when",
+        "from": "the natural moment of quiet rest, and your circuit-knowledge hunger for any trace of Hoss or the valley floor ahead"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Lower-Pass Waystation interior—a stone shelter built into the rock face, warm firelight filling every corner. The central fireplace glows steady and bright. Outside, deep night presses dark and cold against the open doorway; inside, the warmth holds.",
+        "setting": "The Lower-Pass Waystation interior at dawn—stone shelter built into the rock face, central fireplace warm and steady, morning light beginning to reach through the open doorway. Spring air is cold but clear. Inside, the heat holds.",
         "npcsPresent": [
           {
             "name": "The Waystation Caretaker",
-            "state": "Tending the fire with quiet competence, moving between wood-stack and flames with unhurried grace. Not watching, not intruding—simply maintaining the warmth."
+            "state": "Tending the fire with quiet competence, moving between wood-stack and flames with unhurried grace. Aware of the moment but honoring it with silence."
           },
           {
             "name": "Cevaine",
-            "state": "Seated on the bench beside Splarf, her lattice-trained posture gradually loosening into rest. Her breathing deepens, though she does not yet sleep. Present. Warm. Beside you."
+            "state": "Asleep against Splarf's side, her lattice-trained body finally released from discipline. Breathing deep and steady. The sentinel's form at rest."
           }
         ],
         "objects": [
@@ -372,94 +387,54 @@
           "Carved shelves holding supplies—blankets, dried goods, water",
           "Water hook for filling vessels",
           "Wood-stack for the fire",
-          "The open doorway to the dark outside"
+          "The open doorway to the spring dawn outside"
         ],
         "threads": [
-          "What Cevaine will choose when morning comes—whether to stay or descend further downhill",
-          "The path to Hoss and what waits at the valley floor",
-          "The caretaker's own story and why they keep this shelter",
-          "Boo's watch at the threshold—what it observes in the dark"
+          "The path downhill—what waits, who passes, whether Hoss has come this way",
+          "How long Cevaine will rest and what she will choose when morning fully arrives",
+          "Boo's watch at the threshold—what it observes in the pre-dawn",
+          "The caretaker's own story and the shelter they maintain"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "the-waystation-caretaker",
-          "name": "The Waystation Caretaker",
-          "role": "Tender of the Lower-Pass Waystation fire",
-          "gender": "nonbinary",
-          "pronouns": "they/them",
-          "note": "Offers warmth without demand, presence without intrusion. Their practice of fire-tending reads as a discipline—unhurried, competent, rooted. They move with the calm of someone who has found their place and stays there.",
-          "learned": [
-            "They tend this fire night after night, asking nothing of travelers, offering warmth as a pure gift",
-            "Their practice suggests long solitude, but not loneliness—a chosen presence"
-          ],
-          "skillsObserved": [
-            "Fire-tending as a discipline",
-            "The ability to welcome without question or demand"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Tending the waystation fire, welcoming travelers with warmth and acceptance"
-        },
-        {
-          "op": "update",
           "npcId": "cevaine",
-          "name": "Cevaine",
-          "role": "Sentinel of the sealed veil (now released); lattice-trained order-reader",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "At the waystation, her sentinel-form finally loosens into rest. She sits beside Splarf, maintaining careful distance but present. Her breathing deepens toward sleep. The discipline that held the veil is beginning to release—not shattering, but yielding with precision, moment by moment.",
+          "note": "Descended from The Thinning's opened veil with Splarf at her side. Entered the waystation shelter and allowed her lattice-trained form to release into rest—falling asleep against Splarf's shoulder, the discipline finally yielding to exhaustion. The sentinel's form is no longer held rigid by duty; it is held gently by presence and warmth.",
           "learned": [
-            "Rest is integration, not failure—a stage the lattice permits and even honors",
-            "The form can hold warmth as well as it held refusal"
+            "Rest is not failure—it is integration, a stage the form permits",
+            "Presence without demand can be a form of holding that the lattice honors"
           ],
           "skillsObserved": [
-            "The ability to release precision without losing presence"
+            "The ability to recognize when the form can release without breaking",
+            "The capacity to yield to rest and touch, at least with this one person"
           ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the Lower-Pass Waystation, resting beside Splarf, her form yielding into warmth and sleep"
+          "relationshipDelta": 1,
+          "statusNote": "Asleep at the Lower-Pass Waystation beside Splarf, resting after two days of sealed-boundary vigil. Her form is beginning to integrate the choice to release precision without losing presence."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
-      "discovery": null,
       "codexUpdates": [],
       "generateRequest": [],
       "encounterOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 4,
-        "why": "rest at the waystation—sleep claimed you gently, the warmth and exhaustion finally winning over vigil"
+        "hoursPassed": 0.5,
+        "why": "the quiet passage of settling into rest and sleep, a moment unrushed"
       },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
+      "moveTo": {},
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Lower-Pass Waystation interior—a stone shelter built into the rock face, warm firelight filling every corner. The central fireplace glows steady and bright. Outside, deep night presses dark and cold against the open doorway; inside, the warmth holds.",
+      "setting": "The Lower-Pass Waystation interior at dawn—stone shelter built into the rock face, central fireplace warm and steady, morning light beginning to reach through the open doorway. Spring air is cold but clear. Inside, the heat holds.",
       "npcsPresent": [
         {
           "name": "The Waystation Caretaker",
-          "state": "Tending the fire with quiet competence, moving between wood-stack and flames with unhurried grace. Not watching, not int"
+          "state": "Tending the fire with quiet competence, moving between wood-stack and flames with unhurried grace. Aware of the moment b"
         },
         {
           "name": "Cevaine",
-          "state": "Seated on the bench beside Splarf, her lattice-trained posture gradually loosening into rest. Her breathing deepens, tho"
+          "state": "Asleep against Splarf's side, her lattice-trained body finally released from discipline. Breathing deep and steady. The "
         }
       ],
       "objects": [
@@ -468,16 +443,16 @@
         "Carved shelves holding supplies—blankets, dried goods, water",
         "Water hook for filling vessels",
         "Wood-stack for the fire",
-        "The open doorway to the dark outside"
+        "The open doorway to the spring dawn outside"
       ],
       "threads": [
-        "What Cevaine will choose when morning comes—whether to stay or descend further downhill",
-        "The path to Hoss and what waits at the valley floor",
-        "The caretaker's own story and why they keep this shelter",
-        "Boo's watch at the threshold—what it observes in the dark"
+        "The path downhill—what waits, who passes, whether Hoss has come this way",
+        "How long Cevaine will rest and what she will choose when morning fully arrives",
+        "Boo's watch at the threshold—what it observes in the pre-dawn",
+        "The caretaker's own story and the shelter they maintain"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
@@ -644,7 +619,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Resting deeply after three days of vigil. Wounds cleaned and bound—long seep on left shoulder, split knuckles on right hand from holding form. The sentinel duty is released; the form has yielded completely.",
         "[d3] Resting deeply after three days of sentinel vigil. Wounds cleaned and bound by Splarf—long seep on left shoulder, split knuckles on right hand from holding form. The lattice-trained discipline has released completely into genuine rest. Her form reads softer, less a structure compensating and more…",
         "[d3] Waking from deep rest, her form genuinely released from sentinel-duty. The lattice-trained discipline is reasserting, but Splarf's steady presence without demand is teaching her that yielding can be a choice, not a break. She is learning to carry her form lighter.",
         "[d3] She wakes from deep rest with her form genuinely released from sentinel-duty. The lattice-trained discipline is reasserting only softly now. She reads Splarf with directness and acceptance. She is ready to move downhill.",
@@ -653,30 +627,31 @@
         "[d3] Asked Splarf what she thinks—and answered with precision and softness: 'You are remarkably difficult to categorize. Which I find—valuable. Acceptable does not begin to encompass it.' The sentinel is learning to name what discipline kept hidden.",
         "[d4] At the waystation threshold, she names what lattice-discipline held hidden: 'You are remarkably difficult to categorize. Which I find—valuable. Acceptable does not begin to encompass it.' The form holds, but choice is present within it now.",
         "[d4] Descended from The Thinning's sealed veil and entered the waystation shelter. She chose to sit beside Splarf—maintaining careful distance, but present. Her sentinel-form is beginning to release its tension as warmth reaches her.",
-        "[d4] At the waystation, her sentinel-form finally loosens into rest. She sits beside Splarf, maintaining careful distance but present. Her breathing deepens toward sleep. The discipline that held the veil is beginning to release—not shattering, but yielding with precision, moment by moment."
+        "[d4] At the waystation, her sentinel-form finally loosens into rest. She sits beside Splarf, maintaining careful distance but present. Her breathing deepens toward sleep. The discipline that held the veil is beginning to release—not shattering, but yielding with precision, moment by moment.",
+        "[d4] Descended from The Thinning's opened veil with Splarf at her side. Entered the waystation shelter and allowed her lattice-trained form to release into rest—falling asleep against Splarf's shoulder, the discipline finally yielding to exhaustion. The sentinel's form is no longer held rigid by duty…"
       ],
       "knownFacts": [
-        "The lattice permits rest as a legitimate stage—integration, not failure",
-        "Presence without demand changes what the form can hold",
         "She is ready to move into what comes next",
         "The lattice-trained form can speak precision without cage—observation and decision held together",
         "What she names as 'valuable' is the inability to be categorized, the refusal of the expected logic",
         "She is learning to hold the form as hers, not as a barrier",
         "Rest is integration, not failure—a stage the lattice permits and even honors",
-        "The form can hold warmth as well as it held refusal"
+        "The form can hold warmth as well as it held refusal",
+        "Rest is not failure—it is integration, a stage the form permits",
+        "Presence without demand can be a form of holding that the lattice honors"
       ],
       "skillsObserved": [
-        "The willingness to be moved by presence rather than plea",
-        "The ability to hold form through blood loss and exhaustion, ",
         "The discipline to recognize when the structure of refusal is",
         "The ability to yield with precision—to release the form with",
         "The willingness to trust what she could not have predicted",
-        "The ability to release precision without losing presence"
+        "The ability to release precision without losing presence",
+        "The ability to recognize when the form can release without b",
+        "The capacity to yield to rest and touch, at least with this "
       ],
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "At the Lower-Pass Waystation, resting beside Splarf, her form yielding into warmth and sleep",
+      "statusNote": "Asleep at the Lower-Pass Waystation beside Splarf, resting after two days of sealed-boundary vigil. Her form is beginning to integrate the choice to release precision without losing presence.",
       "domains": {
         "primary": "lattice"
       },
@@ -687,7 +662,7 @@
       },
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Cevaine%2C%20Woman%2C%20Lattice-trained%20order-reader%20of%20the%20Seventh%20Measure%3B%20sentinel%20at%20the%20sealed%20veil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39649&nologo=true",
       "_portraitTier": "devoted",
-      "met": 17,
+      "met": 18,
       "bondType": "romantic",
       "bondStage": "courting",
       "deeds": [
@@ -1002,8 +977,8 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 912,
-    "lastSharedReadAt": "2026-08-07T00:45:05.156Z",
+    "lastGenCount": 913,
+    "lastSharedReadAt": "2026-08-07T01:33:00.994Z",
     "lastTickWorldDay": 38,
     "lastCanonWorldDay": 38,
     "pressureQueue": [
@@ -1086,10 +1061,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The question of what Cevaine will do next—whether the lattice truly permits rest or demands immediate return to duty",
-        "from": "Cevaine's own words, revealing that she understands the real weight of what you're asking even as she states the lattice-form answer"
-      },
-      {
         "thing": "Cevaine's question—a genuine hinge-point. She is not refusing to leave; she is asking for the logic that makes leaving lattice-true. This…",
         "from": "The vigil itself and the sentinel's need to understand before the form moves. Splarf's offer reached her, but her discipline requires…"
       },
@@ -1104,6 +1075,10 @@
       {
         "thing": "The Waystation Caretaker—a figure of indeterminate age, dark-haired, tending the fire with the calm of long solitude. They have not asked…",
         "from": "The shelter itself, and the caretaker's own choice to be here, tending fire for travelers in the dark."
+      },
+      {
+        "thing": "The caretaker's knowledge—what they know of the path downhill, the traffic of travelers, who passes through, when",
+        "from": "the natural moment of quiet rest, and your circuit-knowledge hunger for any trace of Hoss or the valley floor ahead"
       }
     ],
     "offscreenCursor": 5,
@@ -5092,24 +5067,25 @@
     }
   },
   "tendencies": {
-    "stealth": 3.484844217241844,
-    "strategic": 4.170217226067884,
-    "cautious": 12.186670399057716,
-    "cerebral": 6.366689028016941,
-    "patient": 3.7586721492553514,
-    "devotion": 1.2511220295337804,
-    "risky": 2.6480733897254085,
-    "generous": 7.110757866714955,
-    "social": 9.093617959638712,
-    "craft": 0.7847969323970975,
-    "amorous": 3.4061372049514067,
-    "leadership": 0.9506249999999999
+    "stealth": 3.3977231118107976,
+    "strategic": 4.065961795416186,
+    "cautious": 11.882003639081272,
+    "cerebral": 6.207521802316517,
+    "patient": 3.6647053455239678,
+    "devotion": 1.2198439787954358,
+    "risky": 2.581871554982273,
+    "generous": 6.932988920047081,
+    "social": 10.866277510647743,
+    "craft": 0.76517700908717,
+    "amorous": 3.3209837748276216,
+    "leadership": 0.9268593749999999
   },
   "aptitudes": [
     "stalwart",
+    "shadow",
     "naive"
   ],
-  "actionCount": 52,
+  "actionCount": 53,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -5170,8 +5146,72 @@
     }
   ],
   "nativeGrantsVersion": 1,
-  "reconcileVersion": 27,
+  "reconcileVersion": 28,
   "gallery": [
+    {
+      "kind": "ability",
+      "prompt": "Radiant Lance",
+      "url": "https://image.pollinations.ai/prompt/Radiant%20Lance%3A%20Focus%20light%20into%20a%20searing%20coherent%20beam%20%E2%80%94%20precise%2C%20silent%2C%20fast%20as%20sight.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=48556&nologo=true",
+      "caption": "Radiant Lance",
+      "worldDay": 38,
+      "at": "2026-08-07T02:36:38.144Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Wrong Moment",
+      "url": "https://image.pollinations.ai/prompt/The%20Wrong%20Moment%3A%20Strike%20or%20act%20at%20the%20precise%20moment%20when%20the%20other%20person%20cannot%20respond%20%E2%80%94%20the%20hourkeeper's%20harm%20is%20perfect%20timing%2C%20not%20force.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20hourkeeper%20tradition%3A%20aged%20brass%2C%20archive-sepia%2C%20clock-face%20cream%3B%20clock-towers%2C%20forward-running%20archives%2C%20gears%20of%20time%3B%20the%20patient%20light%20of%20a%20long-kept%20room%3B%20unbearable%20patience%2C%20time%20held%20and%20counted%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=22365&nologo=true",
+      "caption": "The Wrong Moment",
+      "worldDay": 38,
+      "at": "2026-08-07T02:35:53.182Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Wildcraft",
+      "url": "https://image.pollinations.ai/prompt/Wildcraft%3A%20The%20chaos-craft%3A%20improvisation%20as%20power%2C%20luck-riding%2C%20the%20unmaking%20of%20others'%20plans.%20The%20Churnfolk%20discipline%20of%20productive%20disorder.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20churnfolk%20tradition%3A%20clashing%20brights%2C%20mismatched%20everything%2C%20dust-gold%3B%20improvised%20gear%2C%20patched%20cloth%2C%20lucky%20junk%3B%20loose%2C%20sunlit%2C%20catch-as-catch-can%3B%20joyous%20mess%2C%20luck-riding%2C%20never%20twice%20the%20same%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=60595&nologo=true",
+      "caption": "Wildcraft",
+      "worldDay": 38,
+      "at": "2026-08-07T02:30:51.953Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Scatter",
+      "url": "https://image.pollinations.ai/prompt/Scatter%3A%20Introduce%20sharp%20disorder%20%E2%80%94%20scatter%20a%20formation%2C%20foul%20a%20mechanism%2C%20open%20a%20gap%20in%20order.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20churnfolk%20tradition%3A%20clashing%20brights%2C%20mismatched%20everything%2C%20dust-gold%3B%20improvised%20gear%2C%20patched%20cloth%2C%20lucky%20junk%3B%20loose%2C%20sunlit%2C%20catch-as-catch-can%3B%20joyous%20mess%2C%20luck-riding%2C%20never%20twice%20the%20same%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=99739&nologo=true",
+      "caption": "Scatter",
+      "worldDay": 38,
+      "at": "2026-08-07T02:13:41.471Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Pathos",
+      "url": "https://image.pollinations.ai/prompt/Pathos%3A%20The%20emotional-pole%20mastery%3A%20reading%2C%20moving%2C%20and%20sharing%20feeling%20as%20a%20real%20force.%20Not%20manipulation%20%E2%80%94%20resonance%3B%20the%20Deepfeelers'%20art.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20threnodist%20tradition%3A%20tidal%20blues%20and%20reds%2C%20tear-bright%3B%20flowing%20cloth%2C%20water%2C%20architecture%20shaped%20for%20feeling%3B%20dramatic%2C%20swelling%2C%20emotion%20made%20visible%3B%20public%20weeping%20and%20public%20joy%20%E2%80%94%20tidal%2C%20expressive%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=44844&nologo=true",
+      "caption": "Pathos",
+      "worldDay": 38,
+      "at": "2026-08-07T02:10:20.128Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Grief Strike",
+      "url": "https://image.pollinations.ai/prompt/The%20Grief%20Strike%3A%20Strike%20at%20the%20emotional%20self%20%E2%80%94%20send%20a%20true%2C%20intense%20feeling%20at%20a%20person%20in%20a%20way%20they%20cannot%20close%20off.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20threnodist%20tradition%3A%20tidal%20blues%20and%20reds%2C%20tear-bright%3B%20flowing%20cloth%2C%20water%2C%20architecture%20shaped%20for%20feeling%3B%20dramatic%2C%20swelling%2C%20emotion%20made%20visible%3B%20public%20weeping%20and%20public%20joy%20%E2%80%94%20tidal%2C%20expressive%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=41693&nologo=true",
+      "caption": "The Grief Strike",
+      "worldDay": 38,
+      "at": "2026-08-07T01:56:35.292Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Open the Thin Place",
+      "url": "https://image.pollinations.ai/prompt/Open%20the%20Thin%20Place%3A%20Where%20significance%20runs%20dense%2C%20briefly%20make%20a%20symbol%20real%20%E2%80%94%20a%20threshold%20held%20by%20meaning.%20Mid-tier%20Numenwork.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20numinous%20tradition%3A%20pale%20gold%2C%20veil-white%2C%20thinning-air%20blue%3B%20almost%20nothing%20%E2%80%94%20meaning%20without%20matter%2C%20thinning%20veils%3B%20a%20light%20with%20no%20source%2C%20the%20mystic%20rumor%3B%20immaterial%2C%20half-there%2C%20reverent%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=99684&nologo=true",
+      "caption": "Open the Thin Place",
+      "worldDay": 38,
+      "at": "2026-08-07T01:36:36.699Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Dimmed Meaning",
+      "url": "https://image.pollinations.ai/prompt/The%20Dimmed%20Meaning%3A%20Strip%20numinous%20weight%20from%20a%20working%2C%20a%20symbol%2C%20or%20a%20belief%20%E2%80%94%20when%20meaning%20departs%2C%20what%20it%20was%20holding%20falls.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20numinous%20tradition%3A%20pale%20gold%2C%20veil-white%2C%20thinning-air%20blue%3B%20almost%20nothing%20%E2%80%94%20meaning%20without%20matter%2C%20thinning%20veils%3B%20a%20light%20with%20no%20source%2C%20the%20mystic%20rumor%3B%20immaterial%2C%20half-there%2C%20reverent%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=93075&nologo=true",
+      "caption": "The Dimmed Meaning",
+      "worldDay": 38,
+      "at": "2026-08-07T01:34:20.898Z"
+    },
     {
       "kind": "moment",
       "prompt": "Firelight catches the angle of Cevaine's face as she sits beside you on the stone bench—the lattice-trained precision of her features softened by exhaustion and warmth. Outside the waystation's open d",
@@ -5434,8 +5474,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786066268657,
-  "rev": 155,
+  "updatedAt": 1786072164310,
+  "rev": 167,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5604,7 +5644,9 @@
           "primary": "numinous"
         },
         "domainsSource": "derived",
-        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20someone%20tending%20the%20waystation%20fire%E2%80%94shelter-keeper%2C%20traveler%2C%20someone%20of%20The%20Thinning%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49812&nologo=true"
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20someone%20tending%20the%20waystation%20fire%E2%80%94shelter-keeper%2C%20traveler%2C%20someone%20of%20The%20Thinning%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49812&nologo=true",
+        "nameProvisional": true,
+        "description": "someone tending the waystation fire—shelter-keeper, traveler"
       }
     },
     "location": {},
@@ -5625,7 +5667,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 58
+    "the_numinous_reach": 59
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -5649,10 +5691,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-08-06T22:00:44.715Z",
-      "lastAt": "2026-08-07T01:31:08.641Z",
+      "lastAt": "2026-08-07T03:09:24.286Z",
       "startDay": 37,
       "endDay": 38,
-      "beats": 16
+      "beats": 17
     }
   ],
   "establishedFacts": [
@@ -5707,7 +5749,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 31,
+      "applied": 32,
       "rejected": 0,
       "lastWhy": null
     }
@@ -5720,14 +5762,14 @@
     "offer": 29,
     "codexUpdates": 29,
     "imagePrompt": 23,
-    "gambitApt": 40,
+    "gambitApt": 39,
     "sceneEnded": 52,
     "characterDeltas": 41,
     "arcOps": 1,
     "factUpdates": 7,
     "placeUpdates": 14,
     "timeOps": 34,
-    "deeds": 8,
+    "deeds": 9,
     "ledgerEvents": 4,
     "questUpdates": 15,
     "npcUpdates": 45,
@@ -5774,7 +5816,7 @@
   },
   "customAbilities": {},
   "companionBonds": {
-    "hush": 5.25
+    "hush": 5.75
   },
   "teachers": {},
   "foreclosed": [
@@ -5834,6 +5876,11 @@
         "text": "Asked Cevaine what she truly thinks—and held the space for her to answer with precision rather than refusal",
         "weight": 1,
         "day": 3
+      },
+      {
+        "text": "Held space for a lattice-trained sentinel to release her form and rest—choosing presence without demand over any attempt to heal or fix",
+        "weight": 1,
+        "day": 4
       }
     ]
   },
@@ -5891,7 +5938,7 @@
   "placeEdges": {},
   "skillUses": {
     "help": 5,
-    "comfort": 4,
+    "comfort": 5,
     "sustain": 2,
     "careful": 6,
     "speak": 1,
@@ -5901,7 +5948,7 @@
     "negotiate": 1,
     "travel": 2,
     "romantic": 2,
-    "rapport": 2,
+    "rapport": 3,
     "care": 1,
     "heal": 1,
     "prepare": 1,
@@ -5913,6 +5960,42 @@
   ],
   "portraitPinned": true,
   "aptitudeEarnCount": {
-    "shadow": 1
+    "shadow": 2
+  },
+  "_suggestCache": {
+    "level": 2,
+    "picks": [
+      {
+        "abilityId": "greenlore",
+        "why": "At 7/10 progress this is the thing they said they want — field medicine and plant knowledge fills a real hole in a kit that can steady souls and sense the numinous but cannot yet treat a wound or identify what's safe to eat on the road.",
+        "fit": "aspiration"
+      },
+      {
+        "abilityId": "wayfinding",
+        "why": "Also at 7/10 progress and declared alongside Greenlore — reading trails and weather-sign pairs naturally with a cautious, patient character who already leans on knowledge crafts (Numen-Sense, Storykeeper) and who travels through diverse domains.",
+        "fit": "aspiration"
+      },
+      {
+        "abilityId": "mediators_tongue",
+        "why": "A social-9, generous-7, naive character who talks situations down and keeps peace has no formal arbitration craft yet — Mediator's Tongue gives their natural social instincts a structured mechanical expression rather than leaving them to improvise every tense moment.",
+        "fit": "gap"
+      },
+      {
+        "abilityId": "hearthbinding",
+        "why": "Their four near-zero combat crafts (Brace, Strike, Break Away, Raise the Alarm) signal they are not a fighter — they are a sustainer; Hearthbinding turns a camp stop into genuine restoration for the group, which is exactly what a generous, cautious, patient character reaches for.",
+        "fit": "synergy"
+      }
+    ],
+    "note": "Both aspirations are reachable right now with one skill point — you can only take one, so the real question is: do you need to treat injuries first (Greenlore) or find your way first (Wayfinding)? Everything else on this list is secondary to that choice."
+  },
+  "abilityImages": {
+    "the_dimmed_meaning": "https://image.pollinations.ai/prompt/The%20Dimmed%20Meaning%3A%20Strip%20numinous%20weight%20from%20a%20working%2C%20a%20symbol%2C%20or%20a%20belief%20%E2%80%94%20when%20meaning%20departs%2C%20what%20it%20was%20holding%20falls.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20numinous%20tradition%3A%20pale%20gold%2C%20veil-white%2C%20thinning-air%20blue%3B%20almost%20nothing%20%E2%80%94%20meaning%20without%20matter%2C%20thinning%20veils%3B%20a%20light%20with%20no%20source%2C%20the%20mystic%20rumor%3B%20immaterial%2C%20half-there%2C%20reverent%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=93075&nologo=true",
+    "thin_place": "https://image.pollinations.ai/prompt/Open%20the%20Thin%20Place%3A%20Where%20significance%20runs%20dense%2C%20briefly%20make%20a%20symbol%20real%20%E2%80%94%20a%20threshold%20held%20by%20meaning.%20Mid-tier%20Numenwork.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20numinous%20tradition%3A%20pale%20gold%2C%20veil-white%2C%20thinning-air%20blue%3B%20almost%20nothing%20%E2%80%94%20meaning%20without%20matter%2C%20thinning%20veils%3B%20a%20light%20with%20no%20source%2C%20the%20mystic%20rumor%3B%20immaterial%2C%20half-there%2C%20reverent%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=99684&nologo=true",
+    "the_grief_strike": "https://image.pollinations.ai/prompt/The%20Grief%20Strike%3A%20Strike%20at%20the%20emotional%20self%20%E2%80%94%20send%20a%20true%2C%20intense%20feeling%20at%20a%20person%20in%20a%20way%20they%20cannot%20close%20off.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20threnodist%20tradition%3A%20tidal%20blues%20and%20reds%2C%20tear-bright%3B%20flowing%20cloth%2C%20water%2C%20architecture%20shaped%20for%20feeling%3B%20dramatic%2C%20swelling%2C%20emotion%20made%20visible%3B%20public%20weeping%20and%20public%20joy%20%E2%80%94%20tidal%2C%20expressive%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=41693&nologo=true",
+    "pathos": "https://image.pollinations.ai/prompt/Pathos%3A%20The%20emotional-pole%20mastery%3A%20reading%2C%20moving%2C%20and%20sharing%20feeling%20as%20a%20real%20force.%20Not%20manipulation%20%E2%80%94%20resonance%3B%20the%20Deepfeelers'%20art.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20threnodist%20tradition%3A%20tidal%20blues%20and%20reds%2C%20tear-bright%3B%20flowing%20cloth%2C%20water%2C%20architecture%20shaped%20for%20feeling%3B%20dramatic%2C%20swelling%2C%20emotion%20made%20visible%3B%20public%20weeping%20and%20public%20joy%20%E2%80%94%20tidal%2C%20expressive%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=44844&nologo=true",
+    "scatter": "https://image.pollinations.ai/prompt/Scatter%3A%20Introduce%20sharp%20disorder%20%E2%80%94%20scatter%20a%20formation%2C%20foul%20a%20mechanism%2C%20open%20a%20gap%20in%20order.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20churnfolk%20tradition%3A%20clashing%20brights%2C%20mismatched%20everything%2C%20dust-gold%3B%20improvised%20gear%2C%20patched%20cloth%2C%20lucky%20junk%3B%20loose%2C%20sunlit%2C%20catch-as-catch-can%3B%20joyous%20mess%2C%20luck-riding%2C%20never%20twice%20the%20same%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=99739&nologo=true",
+    "wildcraft": "https://image.pollinations.ai/prompt/Wildcraft%3A%20The%20chaos-craft%3A%20improvisation%20as%20power%2C%20luck-riding%2C%20the%20unmaking%20of%20others'%20plans.%20The%20Churnfolk%20discipline%20of%20productive%20disorder.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20churnfolk%20tradition%3A%20clashing%20brights%2C%20mismatched%20everything%2C%20dust-gold%3B%20improvised%20gear%2C%20patched%20cloth%2C%20lucky%20junk%3B%20loose%2C%20sunlit%2C%20catch-as-catch-can%3B%20joyous%20mess%2C%20luck-riding%2C%20never%20twice%20the%20same%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=60595&nologo=true",
+    "the_wrong_moment": "https://image.pollinations.ai/prompt/The%20Wrong%20Moment%3A%20Strike%20or%20act%20at%20the%20precise%20moment%20when%20the%20other%20person%20cannot%20respond%20%E2%80%94%20the%20hourkeeper's%20harm%20is%20perfect%20timing%2C%20not%20force.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20hourkeeper%20tradition%3A%20aged%20brass%2C%20archive-sepia%2C%20clock-face%20cream%3B%20clock-towers%2C%20forward-running%20archives%2C%20gears%20of%20time%3B%20the%20patient%20light%20of%20a%20long-kept%20room%3B%20unbearable%20patience%2C%20time%20held%20and%20counted%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=22365&nologo=true",
+    "radiant_lance": "https://image.pollinations.ai/prompt/Radiant%20Lance%3A%20Focus%20light%20into%20a%20searing%20coherent%20beam%20%E2%80%94%20precise%2C%20silent%2C%20fast%20as%20sight.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=48556&nologo=true"
   }
 }

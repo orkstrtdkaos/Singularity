@@ -2915,8 +2915,8 @@
     {
      "rank": 3,
      "name": "The Long Green Death",
-     "grants": "It keeps working. Wood thickens through the hold, thorn travels, and the harm continues for as long as they are held — which, if nobody cuts them out, is until it finishes.",
-     "cannot": "⚠ IT DOES NOT STOP WHEN THE FIGHT DOES. Anything still held keeps being killed, including someone who has already yielded, and cutting them out takes time you may not spend. What you grow REMAINS, and the Ashwardens will come and look at what you left.",
+     "grants": "It keeps working. Wood thickens through the hold, thorn travels, and the harm continues for as long as they are held — which, unless you release it, is until it finishes. THE GREEN ANSWERS YOU: open the hold at will, on one of them or all of them, in the moment you decide the fight is over. Surrender is a thing you can accept.",
+     "cannot": "Releasing is a CHOICE you must actually make — it does not stop on its own, and a wielder who goes down or is driven off leaves it working. It does not know your allies from theirs, so a general release frees everyone or none. And what you grow REMAINS after the hold opens; the Ashwardens will come and look at it.",
      "functions": [
       "bind",
       "strike",
@@ -2946,7 +2946,7 @@
    },
    "intensity": {
     "conserve": "a snare at the ankles — grip only, no bite",
-    "surge": "the long green; IT DOES NOT STOP WHEN THE FIGHT DOES"
+    "surge": "the long green; IT WILL FINISH THEM UNLESS YOU OPEN THE HOLD, and that is your call to make"
    },
    "bounds": [
     {
@@ -2958,6 +2958,10 @@
      "class": "hard"
     },
     {
+     "text": "IT ANSWERS YOU — release the hold at will; it does not stop on its own",
+     "class": "soft"
+    },
+    {
      "text": "BLADE AND FIRE answer it",
      "class": "soft"
     },
@@ -2966,11 +2970,11 @@
      "class": "hard"
     },
     {
-     "text": "IT DOES NOT STOP WHEN THE FIGHT DOES",
+     "text": "what you GROW remains after the hold opens",
      "class": "cost"
     }
    ],
-   "plainly": "A fight/puzzle action that roots opponents and then kills them slowly in the grip. Rated 6 of 10 across a scope of 3 for about six hours. Limit: it needs living ground."
+   "plainly": "A fight/puzzle action that roots opponents, then kills them slowly in the grip until you release it. Rated 6 of 10 across a scope of 3. Limit: it needs living ground."
   },
   {
    "id": "the_hastened_grey",

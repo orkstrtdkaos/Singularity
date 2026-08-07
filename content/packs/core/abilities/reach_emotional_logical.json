@@ -2213,7 +2213,7 @@
    ],
    "narrationHints": "A grief-cry pitched past speech — not loud so much as TRUE, and the truth of it buckles the knees of everyone in earshot. Heard, never aimed.",
    "description": "The Threnodists' first offense: a lament released rather than thrown. It lands on everyone who can hear it, including you.",
-   "notFor": "Killing (it staggers, it does not slay); a silent kill; sparing your friends — everyone in earshot takes it, and so do you; anything that does not feel.",
+   "notFor": "A silent kill (it is heard, always); sparing your friends — everyone in earshot takes it, and so do you; the deaf; anything that does not feel.",
    "tree": [
     {
      "rank": 1,
@@ -2238,12 +2238,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "damaging"
     },
     {
      "rank": 3,
      "name": "The Threnody",
-     "grants": "The full lament — a crowd, a hall, a street stopped where it stands and made to feel what you feel. Fights end. So do speeches, executions, and processions.",
+     "grants": "The full lament — a crowd, a hall, a street stopped where it stands and made to feel what you feel. Fights end. Some of the caught do not get up; grief at full weight stops hearts, and the Threnodists know it.",
      "cannot": "You are emptied by it — what you spent, you no longer carry, and some of it does not come back. A tradition of grief-singers can answer it in kind.",
      "functions": [
       "strike",
@@ -2252,7 +2252,7 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "lethal"
     }
    ],
    "challengeTypes": [
@@ -2261,7 +2261,7 @@
    ],
    "tradition": "threnodist",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "strike",
    "operativeAxis": [
     "scope",

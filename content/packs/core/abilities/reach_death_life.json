@@ -2876,54 +2876,55 @@
    "attribute": "practical",
    "axes": {
     "death_life": 0.6,
-    "violence_peace": -0.2
+    "violence_peace": -0.3
    },
    "functions": [
-    "hinder",
-    "bind"
+    "bind",
+    "strike",
+    "hinder"
    ],
-   "narrationHints": "Root and briar and green wood come up through the ground where they are standing — not fast, exactly, but faster than a person expects a plant to do anything, and it does not let go.",
-   "description": "The Rootkin's first offense, and it refuses to be a killing craft: it holds, it slows, it takes the ground away. What happens next is yours to decide.",
-   "notFor": "Killing (the green holds, it does not slay); bare stone, deep water, or salted earth — it needs something to grow FROM; speed (a running target clears it); the fire-carrying, who simply burn through.",
+   "narrationHints": "Root and briar come up through the ground and take hold — and then keep taking. Thorn works inward, wood thickens in the grip, and green things that had all the time in the world discover they have very little.",
+   "description": "The Rootkin's first offense. It begins as a hold and becomes a killing: growth is patient right up until it is inside you.",
+   "notFor": "Bare stone, deep water, or salted earth — it needs something to grow FROM; instant work (the harm comes with time, which is the whole shape of it); fire-carriers, who burn clear; telling your allies from theirs.",
    "tree": [
     {
      "rank": 1,
      "name": "The Green Comes Up",
-     "grants": "Root and briar surge through soil or leaf-litter around a target within sight. Footing is gone, movement is halved, a charge dies where it stood. It holds until cut or burned.",
-     "cannot": "NEEDS LIVING GROUND — no stone floors, no deep water, no salted earth. A quick target may clear it. Blade and fire both answer it.",
+     "grants": "Root and briar surge up and HOLD. Footing gone, movement halved, a charge dead where it stood. No wound yet — this rank is the grip.",
+     "cannot": "NEEDS LIVING GROUND. A quick target may clear it before it closes. Blade and fire both answer it. It holds; at this rank it does not yet harm.",
      "functions": [
-      "hinder",
-      "bind"
+      "bind",
+      "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "none"
     },
     {
      "rank": 2,
-     "name": "The Held Field",
-     "grants": "Take a stretch of ground rather than a target — a path, a ford, a clearing mouth. Anything crossing is slowed and caught, and it stays green after you stop attending it.",
-     "cannot": "It does not know your allies from theirs. And you have changed a place; the Rootkin hold you responsible for what you grow and where.",
+     "name": "The Thorn Turns In",
+     "grants": "The hold closes and BITES — thorn drives inward, the grip constricts, and what is caught is opened up as it struggles. One real wound, and worse for anyone who fights the snare.",
+     "cannot": "Struggling makes it worse, which means a calm captive takes less than a panicking one — and your allies caught in it are struggling.",
      "functions": [
-      "hinder",
       "bind",
-      "strike"
+      "strike",
+      "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "damaging"
     },
     {
      "rank": 3,
-     "name": "The Grove Answers",
-     "grants": "The green rises as if it meant to — a company held, a road closed, a grove that was not there this morning and now is.",
-     "cannot": "⚠ IT IS ALIVE AND IT REMAINS. You have made a thing that will keep growing, and it will outlast the reason you made it. The Unceasing consider that a virtue; the Ashwardens will come and look at you.",
+     "name": "The Long Green Death",
+     "grants": "It keeps working. Wood thickens through the hold, thorn travels, and the harm continues for as long as they are held — which, if nobody cuts them out, is until it finishes.",
+     "cannot": "⚠ IT DOES NOT STOP WHEN THE FIGHT DOES. Anything still held keeps being killed, including someone who has already yielded, and cutting them out takes time you may not spend. What you grow REMAINS, and the Ashwardens will come and look at what you left.",
      "functions": [
-      "hinder",
       "bind",
       "strike",
+      "hinder",
       "make"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "lethal"
     }
    ],
    "challengeTypes": [
@@ -2933,31 +2934,31 @@
    "tradition": "rootkin",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
-   "shape": "hinder",
+   "shape": "bind",
    "operativeAxis": [
-    "scope",
-    "duration"
+    "duration",
+    "scope"
    ],
    "mechanic": {
-    "magnitude": 5,
+    "magnitude": 6,
     "duration": 6,
     "scope": 3
    },
    "intensity": {
-    "conserve": "a snare at the ankles — brief, local",
-    "surge": "the grove rises; IT IS ALIVE AND IT REMAINS, and will outlast your reason for it"
+    "conserve": "a snare at the ankles — grip only, no bite",
+    "surge": "the long green; IT DOES NOT STOP WHEN THE FIGHT DOES"
    },
    "bounds": [
-    {
-     "text": "IT HOLDS, IT DOES NOT SLAY",
-     "class": "hard"
-    },
     {
      "text": "NEEDS LIVING GROUND — not stone, not deep water, not salt",
      "class": "hard"
     },
     {
-     "text": "BLADE AND FIRE both answer it",
+     "text": "the harm comes WITH TIME — rank 1 holds, rank 2 bites, rank 3 keeps killing",
+     "class": "hard"
+    },
+    {
+     "text": "BLADE AND FIRE answer it",
      "class": "soft"
     },
     {
@@ -2965,11 +2966,11 @@
      "class": "hard"
     },
     {
-     "text": "what you grow REMAINS",
+     "text": "IT DOES NOT STOP WHEN THE FIGHT DOES",
      "class": "cost"
     }
    ],
-   "plainly": "A fight/puzzle action that roots opponents in place with living growth. Rated 5 of 10 across a scope of 3 for about six hours. Limit: it holds, it does not slay."
+   "plainly": "A fight/puzzle action that roots opponents and then kills them slowly in the grip. Rated 6 of 10 across a scope of 3 for about six hours. Limit: it needs living ground."
   },
   {
    "id": "the_hastened_grey",
@@ -2980,37 +2981,38 @@
    "attribute": "mental",
    "axes": {
     "death_life": -0.6,
-    "violence_peace": -0.2
+    "violence_peace": -0.3
    },
    "functions": [
     "strike",
+    "break",
     "hinder"
    ],
-   "narrationHints": "You lay a hand on the thing and move its ending closer. A blade greys and dulls, a rope parts, a green branch goes brittle, a wound stops closing. Everything was already going there. You only asked it to hurry.",
-   "description": "The Ashwardens' first offense, and it is bound by their whole discipline: it hastens what is ALREADY ending, and it will not begin an ending that was not underway.",
-   "notFor": "⛔ Hastening a PERSON'S ending — the Ashwarden law, absolute, and the craft itself will not do it; starting an ending (only ever hurrying one); anything new, whole and well-kept; working at any distance — this is a hand on the thing.",
+   "narrationHints": "Everything is already ending. You put a hand on this one and bring it forward. A blade greys and shears; a strained rope parts; a wound that was closing opens grey at the edges and does not stop; a man who was going to die in forty years does it considerably sooner.",
+   "description": "The Ashwardens' first offense, and it is the tradition doing precisely what the tradition is for. Endings are their work. This is the work applied against someone.",
+   "notFor": "Beginning an ending that was not underway — it HASTENS, always; anything new, whole and perfectly kept offers little grip; distance at first rank (this is a hand on the thing); taking it back.",
    "tree": [
     {
      "rank": 1,
      "name": "The Grey Hand",
-     "grants": "Touch a worn, damaged, or already-failing thing and bring its ending forward — a notched blade, a strained rope, a cracked shaft, a wound that was not going to close well.",
-     "cannot": "⛔ NOT ON A PERSON. TOUCH ONLY. And it needs the ending to be ALREADY UNDERWAY — a new, sound, well-kept thing offers nothing to hasten.",
+     "grants": "Touch what is already failing and bring its end forward — a notched blade shears, a strained rope parts, and a WOUND ALREADY OPEN goes grey and stops closing. On a hurt person this is a killing pace, laid on by hand.",
+     "cannot": "It HASTENS what is underway. An unhurt, unarmoured, unworn target gives you very little to pull on — this craft rewards finishing, not opening. TOUCH ONLY at this rank.",
      "functions": [
       "strike",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "damaging"
     },
     {
      "rank": 2,
      "name": "The Nearer End",
-     "grants": "Work at a pace's distance, and on the sound as well as the failing — though a sound thing costs far more and gives less. What you touch does not recover.",
-     "cannot": "The cost of taking a whole thing is real and is paid by you. And people watch a grey hand differently afterward; the Valley has stories.",
+     "grants": "Work at a pace's distance, and on the sound as well as the failing — a whole man ends sooner, though a sound thing costs far more and gives less. What you take does not recover.",
+     "cannot": "The cost of taking something whole is real and you pay it in yourself. And a grey hand is a thing the Valley has stories about; people who watched will not travel with you.",
      "functions": [
       "strike",
-      "hinder",
-      "break"
+      "break",
+      "hinder"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating"
@@ -3018,16 +3020,16 @@
     {
      "rank": 3,
      "name": "The Keeper's Due",
-     "grants": "What you set ending, ends. Gates, engines, walls, wards — the made world is full of things quietly failing, and you can call all of them due at once.",
-     "cannot": "⛔ THE LAW STILL HOLDS: NOT ON A PERSON, and an Ashwarden who bends it is hunted by their own. And the Hollow — who would end everything to end suffering — will find you interesting, which is its own problem.",
+     "grants": "You call the endings due — the failing and the sound, gates and engines and walls and men, everything within reach that was ever going to stop.",
+     "cannot": "⚠ IT DOES NOT SORT. What is due is due, and your own are inside the reach and are also going to die someday. And the Hollow — who would end everything to end suffering — will hear about this and will want to talk to you.",
      "functions": [
       "strike",
-      "hinder",
       "break",
+      "hinder",
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "lethal"
     }
    ],
    "challengeTypes": [
@@ -3039,37 +3041,41 @@
    "harmRung": "incapacitating",
    "shape": "strike",
    "operativeAxis": [
-    "precision",
-    "duration"
+    "magnitude",
+    "precision"
    ],
    "mechanic": {
-    "magnitude": 6,
+    "magnitude": 7,
     "duration": 3,
     "scope": 1
    },
    "intensity": {
-    "conserve": "a small hastening — a notch deepens, a strand parts",
-    "surge": "call it all due; THE LAW STILL HOLDS and your own will hunt you if you bend it"
+    "conserve": "a small hastening — a notch deepens, a wound sours",
+    "surge": "call it all due; IT DOES NOT SORT, and your own are inside the reach"
    },
    "bounds": [
     {
-     "text": "⛔ NOT ON A PERSON — Ashwarden law, and the craft itself refuses",
+     "text": "it HASTENS an ending; it does not BEGIN one",
      "class": "hard"
     },
     {
-     "text": "HASTENS an ending; will not BEGIN one",
+     "text": "an unhurt, well-kept target gives little grip — this craft FINISHES",
      "class": "hard"
     },
     {
-     "text": "TOUCH ONLY at first rank",
+     "text": "TOUCH ONLY at rank 1",
      "class": "hard"
     },
     {
      "text": "what you take does not recover",
      "class": "cost"
+    },
+    {
+     "text": "at rank 3 IT DOES NOT SORT",
+     "class": "cost"
     }
    ],
-   "plainly": "A fight/puzzle action that brings a failing object's ending forward. Rated 6 of 10 on one target for about three hours. Limit: never on a person."
+   "plainly": "A fight/puzzle action that brings a failing thing — or person — to its end early. Rated 7 of 10 on one target. Limit: it hastens an ending, it does not begin one."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

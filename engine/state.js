@@ -212,7 +212,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -251,7 +251,8 @@ export async function loadContent() {
     // legs. In THIS array, beside the name that receives it — the rule she wrote after `economy` was
     // destructured from one Promise.all while its loadRule sat in another.
     loadRule("quest_structure", null),
-    loadRule("martial_paths", null)
+    loadRule("martial_paths", null),
+    loadRule("sub_attribute_ladder", null)
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -294,6 +295,12 @@ export async function loadContent() {
   if (tiesRule) rules.ties = tiesRule;   // SNG-328   // SNG-323   // SNG-322: the threat ladder   // SNG-316: the charge-condition vocabulary
   if (questStructureRule) rules.questStructure = questStructureRule;   // SNG-341b
   if (martialRule) rules.martialPaths = martialRule;   // SNG-345
+  // SNG-356 — THE AUTHORED SUB-ATTRIBUTE LADDER, and it RETIRES `attributeSoftCap` into content.
+  // Erik: "specify what each point up to 20 gets you so we can better control the impact and the player
+  // can see it exactly." ⚠️ SNG-342'"'"'s lesson applies exactly here — this file was REGISTERED in the
+  // manifest a day before anything loaded it, and registration is not arrival. It is declared a live gap
+  // in rules_classification until this line exists.
+  if (ladderRule) rules.subAttributeLadder = ladderRule;
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
   // SNG-263: the craft-mechanics config rides the rules bag so battleRound reads it off a value it already

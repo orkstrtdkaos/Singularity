@@ -7,6 +7,7 @@
 //     roll, wider crit-fail band, engine-applied backlash on crit failure — but a
 //     critical success mints a permanent named technique with a standing bonus.
 
+import { applyLadderGrants } from "./ladder.js";
 import { slugify } from "./quests.js";
 import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, learnPointCost, rankExpression, forkPending } from "./skilltree.js";
 import { domainAccess, traditionOf, isFolkTradition, antipodeOf } from "./traditions.js";
@@ -209,6 +210,12 @@ export function spendSubPoint(character, sub, rules) {
   character.subAttributes[sub]++;
   character.pendingSubPoints--;
   syncParentAttributes(character);
+  // ⛔ SNG-356 — THE RANK PAYS THE MOMENT IT IS BOUGHT, not on the next login. Reconcile step 29 does
+  // the retroactive pass, but a grant that only ever arrives through a MIGRATION is a grant the player
+  // never sees land — they would spend a point, watch nothing change, and read the ladder as a lie.
+  // Both paths call the same applyLadderGrants against the same high-water mark, so they cannot disagree
+  // and cannot double-pay.
+  if (rules?.subAttributeLadder) applyLadderGrants(character, rules.subAttributeLadder);
   return true;
 }
 

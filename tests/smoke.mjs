@@ -410,8 +410,20 @@ check("subs initialize from parents", hero2.subAttributes.strength === 3 && hero
 const subChance = successChance({ character: hero2, action: { attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 0 }, location: { spectrum: {} }, rules });
 hero2.subAttributes.strength = 5;
 const subChance2 = successChance({ character: hero2, action: { attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 0 }, location: { spectrum: {} }, rules });
+// ⚠️ SNG-356 — THIS GATE NOW EXERCISES THE FALLBACK, AND ITS NAME SAID OTHERWISE. `rules` here is
+// resolution.json read straight off disk, which carries no `subAttributeLadder`, so the resolver takes the
+// retired soft-cap branch. The check stayed green through a change that moved every success chance in the
+// game — not vacuously (the arithmetic is real), but it was testing a path that no longer ships while
+// reading like the live one. Renamed to say which path it covers; the LIVE column is gated at 356 against
+// content loaded the way the app loads it.
+//
+// ⛔ THE FALLBACK IS WORTH A GATE OF ITS OWN. A missing ladder must degrade to the OLD behaviour, never
+// to zero — a resolver that silently returns nothing is the SNG-342 emergence regression, and this is
+// exactly the shape that hid it: a default that looks like an answer.
 // 3→5 crosses the soft cap (4): +20 for the 4th point, +5 for the 5th
-check("sub-attribute drives the roll (with soft cap)", subChance2 === subChance + rules.baseChance.attributeMultiplier + rules.baseChance.attributePerPointBeyond || subChance2 === rules.d100.ceilingChance);
+check("sub-attribute drives the roll — SOFT-CAP FALLBACK, used only when no ladder is loaded",
+  subChance2 === subChance + rules.baseChance.attributeMultiplier + rules.baseChance.attributePerPointBeyond || subChance2 === rules.d100.ceilingChance);
+check("…and this fixture really is on the fallback (no ladder in these rules)", !rules.subAttributeLadder);
 hero2.subAttributes.strength = 3;
 hero2.xp = 250; // enough for levels 2 and 3
 const msgs = applyLevelUps(hero2, rules);
@@ -10722,6 +10734,81 @@ await (async () => {
     check("343: the GM is told the text was cut and to restate it whole, rather than quote the fragment",
       /CUT SHORT BY A STORAGE FAULT/.test(block || "") && /restate the objective whole/.test(block || "")
       && /routes were also cut short/.test(block || ""));
+  }
+
+  // SNG-356 — THE AUTHORED SUB-ATTRIBUTE LADDER, WIRED. Erik: "specify what each point up to 20 gets you
+  // so we can better control the impact and the player can see it exactly."
+  //
+  // ⚠️ THE ROLL COLUMN SHIPPED ON THE HARNESS'S EVIDENCE, NOT ON A SAY-SO. Aevi gated it in her own file:
+  // "a flat +10 on success chance from mid-game onward is a large change and I do not know that it is
+  // right", with the failure condition named in advance — if the +10 pushes mid-game toward the 95%
+  // ceiling, lower the per-rank values rather than abandon the bend. SNG-357 measured it against Silas's
+  // real spread and zero of eight subs reach the ceiling on normal work. Erik then called it.
+  {
+    const { loadContentHeadless: lch356 } = await import("./headless_content.mjs");
+    const C356 = await lch356();
+    const { successChance } = await import("../engine/resolve.js");
+    const { ladderGrantsOwed, applyLadderGrants, ladderRoll, poolSubs } = await import("../engine/ladder.js");
+    const { spendSubPoint } = await import("../engine/progression.js");
+    const { reconcile } = await import("../engine/reconcile.js");
+    const L = C356.rules?.subAttributeLadder;
+
+    // ⛔ SNG-342'S LESSON, AND THIS FILE IS THE CASE THAT PROVED IT: it sat REGISTERED in the manifest for
+    // a day while nothing loaded it. Registration is not arrival, and a fallback is not a load.
+    check("356: the ladder REACHES the rules — registered is not loaded", !!L);
+    check("356: …and arrives whole — 20 roll ranks and 8 subs", Object.keys(L?.rollCumulative || {}).length === 20 && Object.keys(L?.subs || {}).length === 8);
+
+    // The roll column is LIVE in the resolver — the authored number, not the retired formula.
+    const at = (rank, band) => successChance({
+      character: { attributes: { social: rank }, subAttributes: { presence: rank }, alignment: {}, energy: 50 },
+      action: { attribute: "social", subAttribute: "presence", tags: [], difficulty: band }, location: null, rules: C356.rules });
+    check("356: the resolver pays the AUTHORED roll column, not the soft-cap formula",
+      at(6, "normal") === Number(L.rollCumulative["6"]) && at(9, "normal") === Number(L.rollCumulative["9"]));
+    // ⚠️ THE BEND MOVED, WHICH IS THE WHOLE POINT (SNG-354: rank 4 is the TOP of early game, the wrong
+    // place for diminishing returns). Gated as SHAPE — the bend exists and sits later than rank 4 — never
+    // as the literal value, because the per-rank numbers are Erik's dial.
+    const step = (r) => Number(L.rollCumulative[String(r)]) - Number(L.rollCumulative[String(r - 1)]);
+    check("356: early ranks pay a FLAT rate — the bend is not at rank 4 any more", step(2) === step(4));
+    check("356: …and the ladder bends later, once, downward", step(20) < step(2));
+    check("356: rank 1 is unchanged from the old formula — early game was deliberately not touched",
+      at(4, "normal") === 40);
+
+    // ⛔ PAID AGAINST A HIGH-WATER MARK. `cumulative[rank]` is the TOTAL owed for standing there, so a naive
+    // application re-adds the whole amount every pass and inflates a pool without limit.
+    const owedChar = { subAttributes: { strength: 4, reason: 7 }, maxHealth: 170, health: 170, maxEnergy: 240, energy: 240 };
+    const owed = ladderGrantsOwed(owedChar, L);
+    check("356: an unpaid character is owed its ladder grants", owed.length === 2 && owed.every(g => g.amount > 0));
+    applyLadderGrants(owedChar, L);
+    // Aevi's own §1c figures for Silas, reproduced: strength 4 → +32 health on 170; reason 7 → +53 energy on 240.
+    check("356: …and the amounts match the spec's own worked example (Silas: +32 health, +53 energy)",
+      owedChar.maxHealth === 202 && owedChar.maxEnergy === 293);
+    check("356: the CURRENT pool rises with the max — a bigger bar already half-empty reads as a loss",
+      owedChar.health === 202 && owedChar.energy === 293);
+    const snapshot = JSON.stringify(owedChar);
+    applyLadderGrants(owedChar, L);
+    check("356: a second application grants NOTHING — idempotent by high-water mark", JSON.stringify(owedChar) === snapshot);
+
+    // ⚠️ BOTH DOORS PAY, AND PAY THE SAME. A grant that only ever arrives via MIGRATION is one the player
+    // never sees land — they would spend a point, watch nothing change, and read the ladder as a lie.
+    const buyer = { subAttributes: { strength: 3, agility: 3, reason: 3, insight: 3, presence: 3, rapport: 3, craft: 3, wits: 3 },
+      attributes: {}, pendingSubPoints: 1, maxHealth: 40, health: 40, maxEnergy: 100, energy: 100, ladderPaid: { strength: 3 } };
+    spendSubPoint(buyer, "strength", C356.rules);
+    check("356: buying a rank pays IN PLAY, not only on next login", buyer.maxHealth > 40 && buyer.health === buyer.maxHealth);
+
+    // The retroactive pass, through the ctx app.js really passes — the SNG-345 lesson, applied again.
+    const old356 = { id: "x", reconcileVersion: 28, abilities: [], subAttributes: { strength: 5 }, maxHealth: 50, health: 50, maxEnergy: 100, energy: 100 };
+    reconcile(old356, "character", { content: C356, profile: {} });
+    check("356: an EXISTING save is paid retroactively, through the ctx the app really passes",
+      old356.maxHealth > 50 && old356.ladderPaid?.strength === 5);
+
+    // ⛔ RATES ARE NOT GRANTS. Four subs are kind:"rate" — a modifier READ where it applies, not a number
+    // banked into a field. Paying one into storage would be the writer-with-no-reader shape inverted.
+    check("356: only POOL subs are paid — a rate is read at its site, never banked",
+      poolSubs(L).length === 4 && poolSubs(L).every(([, d]) => d.kind === "pool")
+      && ladderGrantsOwed({ subAttributes: { agility: 9, wits: 9 } }, L).length === 0);
+
+    check("356: the roll column has ONE reader — resolver and readout cannot disagree about a rank's worth",
+      ladderRoll(L, 9) === Number(L.rollCumulative["9"]));
   }
 
   // SNG-352a — THE DERIVATION MUST BE LIVE, or this is the third repair rather than the last.

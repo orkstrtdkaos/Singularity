@@ -14,6 +14,7 @@
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
 import { grantMartialKit } from "./martial.js";
+import { applyLadderGrants } from "./ladder.js";
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates } from "./codex.js";
 import { dedupeQuests, normalizeProse } from "./quests.js";
 import { dedupeInventory } from "./inventory.js";
@@ -897,6 +898,26 @@ export const CHARACTER_STEPS = [
       if (!hit.length) return {};
       console.log(`[reconcile] sng-347: ${hit.length} generated NPC(s) carry a DESCRIPTION where a name belongs — marked unnamed, to be named in play: ${hit.join(" · ")}`);
       return {};
+    }
+  },
+  {
+    version: 29, id: "ladder-derived-grants", playerFacing: true,
+    // SNG-356 — ERIK RULED THE LADDER RETROACTIVE, so every existing character is owed what its
+    // sub-attributes have always been worth. The harness previewed this on the real saves before it ran
+    // (SNG-357 §1c) rather than after — a migration you cannot inspect first is one you find out about
+    // from a player, which is the SNG-343 lesson pointed forward.
+    //
+    // ⚠️ IDEMPOTENT BY HIGH-WATER MARK, not by the version gate alone: `ladderPaid[sub]` records the
+    // rank each pool was paid to, so this pays the DIFFERENCE and a second pass grants nothing. That also
+    // makes the ordinary case (a rank bought in play) the same code path as the retroactive one.
+    apply: (c, ctx) => {
+      const ladder = ctx?.rules?.subAttributeLadder || ctx?.content?.rules?.subAttributeLadder;
+      if (!ladder) { if (ctx?.content || ctx?.rules) console.warn("[reconcile] sng-356: ctx carries no subAttributeLadder — derived grants NOT applied"); return {}; }
+      const applied = applyLadderGrants(c, ladder);
+      if (!applied.length) return {};
+      const parts = applied.map(g => `${g.sub} ${g.to} → +${g.amount} ${g.field}`);
+      console.log(`[reconcile] sng-356: ladder grants applied — ${parts.join(" · ")}`);
+      return { notes: [`What you have grown into has caught up with you: ${applied.map(g => `+${g.amount} ${g.unit || g.field}`).join(", ")}.`] };
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

@@ -69,9 +69,34 @@ export function successChance(ctx) {
     || character.attributes[action.attribute] || 1;
   const soft = bc.attributeSoftCap ?? 4;
   const attrName = action.subAttribute || action.attribute || "attribute";
-  // full value through the soft cap (competence), diminishing beyond (mastery)
-  add(`${attrName} ${attrLevel}`, Math.min(attrLevel, soft) * bc.attributeMultiplier);
-  if (attrLevel > soft) add(`${attrName} mastery (beyond ${soft})`, Math.max(0, attrLevel - soft) * (bc.attributePerPointBeyond ?? 5));
+  // ⛔ SNG-356 — THE AUTHORED LADDER REPLACES THE SOFT-CAP FORMULA, and this line moves every success
+  // chance in the game. Erik: "specify what each point up to 20 gets you so we can better control the
+  // impact and the player can see it exactly." The bend that used to sit at rank 4 — computed, invisible,
+  // and (SNG-354) in the wrong phase, since rank 4 is the TOP of early game rather than the start of
+  // mastery — now sits at rank 6 and is AUTHORED, so Erik retunes it without a build.
+  //
+  // ⚠️ SHIPPED ON THE HARNESS'S EVIDENCE, NOT ON ANYONE'S SAY-SO. Aevi gated this column on SNG-357 by her
+  // own file's note — "a flat +10 on success chance from mid-game onward is a large change and I do not
+  // know that it is right" — with the failure condition stated in advance: if the +10 pushes mid-game
+  // characters toward the 95% ceiling, lower the per-rank values rather than abandon the bend. Measured
+  // against Silas's real spread (4,5,7,7,9,7,9,6) at level 29, ZERO of 8 subs reach the ceiling on normal
+  // work. The stated failure mode does not occur, so the column ships.
+  //
+  // The formula remains as the FALLBACK, because a missing ladder must degrade to the old behaviour rather
+  // than to zero — a resolver that silently returns nothing is the SNG-342 emergence regression again.
+  const ladderRoll = rules.subAttributeLadder?.rollCumulative;
+  if (ladderRoll) {
+    const capped = Math.max(1, Math.min(20, Math.round(attrLevel)));
+    const fromLadder = Number(ladderRoll[String(capped)]);
+    // Past the authored top the ladder simply stops; keep paying the last per-rank step rather than
+    // flat-lining, so a character beyond rank 20 is not silently frozen.
+    const beyond = Math.max(0, Math.round(attrLevel) - 20) * Number(rules.subAttributeLadder.rollPerRank?.["20"] ?? 0);
+    add(`${attrName} ${attrLevel}`, (Number.isFinite(fromLadder) ? fromLadder : 0) + beyond);
+  } else {
+    // full value through the soft cap (competence), diminishing beyond (mastery)
+    add(`${attrName} ${attrLevel}`, Math.min(attrLevel, soft) * bc.attributeMultiplier);
+    if (attrLevel > soft) add(`${attrName} mastery (beyond ${soft})`, Math.max(0, attrLevel - soft) * (bc.attributePerPointBeyond ?? 5));
+  }
 
   // SNG-339 — ⚠️ THE OLD SKILL TERM COULD NEVER FIRE. It keyed on `action.skillId`, which NOTHING writes,
   // against `character.skills`, which nothing writes either, using a vocabulary that was never defined. Not

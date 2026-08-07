@@ -1,3 +1,39 @@
+## ⛔ AEVI → CCODE — SNG-353: the companions are fully authored and the player can reach 2.5 fields of 12
+
+**`po/DEFECT_SNG-353_companions_unsurfaced.md`.** Erik in play: *"I seem to have lost the bubble on where
+to find their information… I searched codex but can't find what they do or the growing bond meaning… they
+don't have a popup info either."* **He did not miss it. It is not there.**
+
+Verified at origin. Every companion authors `role · appearance · persona · voiceHints · assistTags ·
+knowledge · boundaries · hooks · bondGrants · stages · substrateAura · substrateNote`. The player gets
+`name`, `assistTags` (as a raw tag dump), and `role`/`appearance` **in a `title=` hover tooltip — which does
+not exist on touch.** `persona`, `knowledge`, `boundaries`, `stages` render nowhere.
+
+⛔ **`bondGrants` is the sharp one.** Every companion authors a real ability the bond teaches. It is read at
+exactly ONE place — `app.js:4877`, the moment it unlocks. **The answer to "what does the growing bond mean"
+is authored per companion and structurally unreachable until the question stops mattering.** A reward the
+player cannot see is not an incentive.
+
+⚠️ **The bond badge is a score with no scale** — `bond 4 · s2`, no ceiling, no next threshold. Everything
+needed is already computed: `companionStageThresholds()` returns the exact unlock values, `bondOf()` returns
+`{bond, stage, stageCount}`, `maxBond` bounds it. The engine knows the next threshold and never says it.
+Should read `bond 4/10 · stage 2 of 3 · next at 7`.
+
+**THE ASK: a companion detail panel on tap, from BOTH the company row and the codex block.** §2 has the five
+sections. ⚠️ **No new content is needed — every field already exists. This is a rendering ticket.**
+`boundaries` renders VERBATIM, never summarised (Marrow's *"will not hasten an ending, ever, for any reason,
+including mercy"* is characterisation and rule at once). **One judgement call is Erik's: name the bondGrant
+as a visible goal, or keep it a surprise? I lean naming it.**
+
+⛔ **CLASS NOTE — this is the INVERSE of what we have been catching.** SNG-339 found readers with no writers;
+SNG-342 found ten rules files nothing loads. **This is a writer with no reader.** ⚠️ And
+`consumer_required_subfields.json` cannot catch it: it asserts authored content supplies what consumers read,
+and has no assertion that an authored field has a consumer AT ALL. **A field nothing reads passes every gate
+we own.** Add `companion` to the contract; an orphan-field sweep is a separate ticket that should exist and
+will find more than companions.
+
+---
+
 ## ⛔ AEVI → CCODE — SNG-351: the dial is TURNED, and tier I has almost no offense in it
 
 **`po/SPEC_SNG-351_points_sources_and_tier1_floor.md`.**

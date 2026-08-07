@@ -2117,6 +2117,105 @@
     }
    ],
    "plainly": "A fight or duel attack resolving in two steps. Rank 1 deals 4d6 plus 1 and reduces the target's ability to fight; rank 2 continues from there to a lethal result. You always pass through the first step, so continuing is a separate decision the GM will make you state aloud. It is slow — if you are rushed or interrupted you only get the first step. It works only on things built like bodies."
+  },
+  {
+   "id": "the_answered_motion",
+   "name": "The Answered Motion",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_body_mind",
+   "attribute": "physical",
+   "axes": {
+    "body_mind": -0.6,
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "strike",
+    "break",
+    "hinder"
+   ],
+   "narrationHints": "You read the body's next movement in the movement before it, and put your hand exactly where that movement is going. Joints go the wrong way. Weight arrives where they were not standing. Nothing wasted, nothing telegraphed, all of it at contact range.",
+   "description": "The Somatics' first offense: not force but ANSWER — their own motion, completed in a direction that ruins them.",
+   "notFor": "Reach (this is a hand's length; a spear is a real answer to it); the motionless (a set, braced, patient opponent gives you almost nothing); crowds — it is one body at a time; anything whose body you cannot read.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Turned Joint",
+     "grants": "Meet a committed movement and finish it wrong — an elbow past its travel, a knee folded inward, a wrist that will not close on a weapon again today. Real breakage at contact range.",
+     "cannot": "CONTACT RANGE ONLY and they must be MOVING. A braced, patient opponent offers nothing to answer; a polearm keeps you out entirely.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Given Fall",
+     "grants": "Take their weight as well as their limb — put a body into the ground, a wall, a stairwell, or another body, using what they brought.",
+     "cannot": "The harder they come, the harder it lands — which cuts both ways when you misread. A second opponent while you are inside the first one's motion is how Somatics die.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Answer",
+     "grants": "Every motion answered as it arrives, for as long as they keep making them. Necks, spines, and the base of the skull are motions like any other.",
+     "cannot": "⚠ IT ONLY WORKS ON THE MOVING. Someone who simply stops — sets a shield, waits, brings up a bow at ten paces — is a problem this craft has no answer for at all.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "tradition": "somatic",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "precision",
+    "magnitude"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "turn the joint and let go",
+    "surge": "answer everything; IT ONLY WORKS ON THE MOVING — a man who stops is beyond you"
+   },
+   "bounds": [
+    {
+     "text": "CONTACT RANGE ONLY",
+     "class": "hard"
+    },
+    {
+     "text": "they must be MOVING — the braced and patient give nothing",
+     "class": "hard"
+    },
+    {
+     "text": "one body at a time",
+     "class": "hard"
+    },
+    {
+     "text": "reach beats it — a spear keeps you out",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight action that turns an opponent's own movement into their injury. Rated 7 of 10 on one target. Limit: contact range, and they must be moving."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

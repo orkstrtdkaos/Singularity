@@ -88,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.57";
+const APP_VERSION = "1.9.58";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4428,8 +4428,20 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     try {
       const grown = await handleGenerateRequests(result.turn);
       if (grown.length) {
-        result.turn.narration = (result.turn.narration || "") + "\n\n" + grown.map(g =>
-          `*✦ The world grows — **${g.name}** ${g.type === "location" ? "takes shape here, and will be here when you return" : g.type === "npc" ? "is now a real presence in this place" : "begins to stir as a thread of its own"}.*`).join("\n");
+        // ⛔ SNG-347 — THE RIBBON WAS ANNOUNCING A DESCRIPTION AS A NAME. Erik's waystation NPC read
+        // "**someone tending the waystation fire—shelter-keeper, traveler** is now a real presence in this
+        // place" — bolded like an identity, because the ribbon assumed everything minted arrives named.
+        // An unnamed presence is perfectly good FICTION (someone IS tending that fire); the failure was
+        // entirely in presenting it as what it is not. A provisional name now renders as prose, unbolded,
+        // and says plainly that the name is still to come.
+        result.turn.narration = (result.turn.narration || "") + "\n\n" + grown.map(g => {
+          const what = g.type === "location" ? "takes shape here, and will be here when you return"
+            : g.type === "npc" ? "is now a real presence in this place"
+            : "begins to stir as a thread of its own";
+          return g.nameProvisional
+            ? `*✦ The world grows — ${g.description || g.name} ${what}, though you have yet to learn a name.*`
+            : `*✦ The world grows — **${g.name}** ${what}.*`;
+        }).join("\n");
         saveCharacter(character);
       }
     } catch (err) { console.warn("[generate] request handling skipped:", err?.message); }

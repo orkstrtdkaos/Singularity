@@ -16,6 +16,7 @@
 //  • the entity's authored-shape fields sit at top level (indistinguishable downstream);
 //    all generative metadata lives in a `_gen` sidecar.
 
+import { isDescriptiveNotName } from "./state.js";
 import { slugify } from "./quests.js";
 import { namesMatch, smartClamp } from "./namematch.js";
 import { affiliationOf, regionHomeTradition } from "./affiliation.js";   // SNG-185: the ONE affiliation impl
@@ -87,8 +88,19 @@ export function stubEntity(type, context = {}, schema = {}) {
   // SNG-166 §1: the literal "valley" default is gone — an unresolvable region is now NULL and
   // marked, because a wrong address is worse than a known-missing one.
   const region = loc.regionId || context.regionId || null;
-  const name = context.hint ? String(context.hint).slice(0, 60) : `a presence in ${loc.name || "the valley"}`;
-  const base = { schemaVersion: 1, id: slugify(name) || "generated", name };
+  // ⛔ SNG-347 — THE HINT WAS BEING USED AS THE NAME. A hint says WHAT TO MAKE ("a tollhand at the
+  // lower gate" — the contract's own example); it is not what the thing is CALLED. So Erik's waystation
+  // NPC was minted as "someone tending the waystation fire—shelter-keeper, traveler" and announced in bold
+  // as a name. The raw slice(0, 60) cut it mid-phrase too — at exactly 60 characters, the SNG-181/343 cut.
+  //
+  // ⚠️ THE STUB CANNOT INVENT A NAME AND MUST NOT PRETEND TO. Its own contract is "never fabricates
+  // specifics it wasn't given", and a name is precisely such a specific. So the description stays a
+  // DESCRIPTION, the entity is marked unnamed, and it gets named IN PLAY — the SNG-343 precedent: flag it
+  // to the GM and let the telling repair it, rather than fabricating canon or leaving a lie on the page.
+  const described = context.hint ? smartClamp(String(context.hint), 60) : `a presence in ${loc.name || "the valley"}`;
+  const nameProvisional = isDescriptiveNotName(described);
+  const name = described;
+  const base = { schemaVersion: 1, id: slugify(name) || "generated", name, nameProvisional, description: nameProvisional ? described : undefined };
   if (type === "npc") {
     Object.assign(base, {
       role: context.role || `someone of ${loc.name || "this place"}`,
@@ -420,6 +432,16 @@ export async function generate(type, context = {}, deps = {}) {
   // hollow anything. Everything softer is stamped and kept, because a thin-but-present record is worth
   // more than a hole in the world, and `_gen.contract` makes it findable for later enrichment (the same
   // way `_gen.needsDepth` marks a rung crossing). Generation still NEVER throws and never halts a turn.
+  // ⛔ SNG-347 — THE GUARD BELONGS AT THE MINT, NOT ONLY IN THE STUB. A description can reach the
+  // name field from EITHER door: the stub (which used the hint verbatim) or the model itself answering the
+  // request with its own restatement of it. Marking only the stub would fix the door I happened to find.
+  // Nothing is deleted — the text is real and useful, it is simply a DESCRIPTION, so it is kept as one
+  // and the person is marked unnamed until the telling names them (the SNG-343 repair-through-play choice).
+  if (type === "npc" && isDescriptiveNotName(entity.name)) {
+    entity.nameProvisional = true;
+    if (!entity.description) entity.description = entity.name;
+    console.log(`[generate] npc name is a DESCRIPTION, not a name — marked unnamed pending play: "${entity.name}"`);
+  }
   const entityId = mintId(entity.name, generatedPool);
   stampGenerated(entity, type, entityId, context);
   entity._gen.repaired = repaired;
@@ -608,7 +630,15 @@ export function livingWorldForGM(character, { locationId = null, day = null } = 
     if (t === "location") return (r.descriptionSeed || "").slice(0, 90);
     return (r.tendency || "").slice(0, 90);
   };
-  return here.slice(0, 8).map(r => `- ${r.name} (${r._gen.type}, ${r._gen.tier}, weight ${effectiveWeight(r)}): ${brief(r)}`).join("\n");
+  // ⛔ SNG-347 — AN UNNAMED PERSON MUST BE HANDED TO THE GM *AS* UNNAMED. The stub cannot invent a name and
+  // must not pretend to, so the only route to a real one is the telling: the GM has to know the name is
+  // missing, or it keeps referring to "someone tending the waystation fire" as though that were an
+  // identity — which is exactly how a description hardens into canon. SNG-343's repair-through-play,
+  // applied at birth rather than after the damage.
+  const label = (r) => r.nameProvisional
+    ? `${r.description || r.name} — ⚠️ NOT YET NAMED: refer to them by what they are doing, and NAME THEM the moment the player would learn it`
+    : r.name;
+  return here.slice(0, 8).map(r => `- ${label(r)} (${r._gen.type}, ${r._gen.tier}, weight ${effectiveWeight(r)}): ${brief(r)}`).join("\n");
 }
 
 /** Find a generated record by entityId across all types (for the codex ⭐/badge UI). */

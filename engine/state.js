@@ -69,6 +69,39 @@ export function isCoercedObjectName(name) {
  *  I learned this from the suite rather than from reasoning: the wide check deleted a legitimate SNG-216
  *  fixture that simply had no name yet. Reconcile's own law is "NEVER removes or downgrades", so the
  *  exception has to be as narrow as the damage. */
+/** ⛔ SNG-347 — A DESCRIPTION IS NOT A NAME, AND THIS IS THE THIRD PLACE IT HAD TO BE SAID.
+ *
+ *  Erik's newly-minted NPC arrived as "someone tending the waystation fire—shelter-keeper, traveler" — a
+ *  REQUEST rendered as an identity. The ribbon then announced it in bold, as a name: "**someone tending
+ *  the waystation fire** is now a real presence in this place."
+ *
+ *  ⚠️ SNG-199 already found this class on the REGISTRY path and fixed it there ("a descriptive CLAUSE is
+ *  not a name" — prettifyNpcName). The GENERATE mint never got the guard, so the same defect walked in
+ *  through the other door. Counting the doors is not finding them.
+ *
+ *  ⛔ AND prettifyNpcName WOULD MAKE THIS ONE WORSE, which is why this is a separate check and not a reuse:
+ *  its "already human-shaped" test requires a capital letter, so an all-lowercase description falls through
+ *  to the SLUG-PRETTIFIER and gets title-cased into "Someone Tending The Waystation" — which LOOKS like a
+ *  name, passes every downstream check, and is nonsense. A cosmetic pass standing where a validator belongs
+ *  does not just fail to fix the input; it launders it.
+ *
+ *  Deliberately conservative — it must never reject a legitimate epithet-name like "The Ashen Warden":
+ *    · opens with an indefinite/anonymous marker (someone · somebody · a · an)
+ *    · begins lowercase (a person's name is capitalized; a description is not)
+ *    · runs to a clause (a comma or semicolon) — SNG-199's own signal
+ *    · runs longer than five words — a name is a few words, not a sentence
+ */
+export function isDescriptiveNotName(name) {
+  const s = String(name || "").trim();
+  if (!s) return false;                                   // blank is a DIFFERENT defect (see isCoercedObjectArtefact)
+  if (/^(someone|somebody|some\s|an?\s)/i.test(s)) return true;
+  if (/^[a-z]/.test(s)) return true;
+  if (/[,;]/.test(s)) return true;
+  if (s.split(/\s+/).length > 5) return true;
+  return false;
+}
+
+
 export function isCoercedObjectArtefact(name) {
   return typeof name === "string" && /\[object\s+object\]/i.test(name);
 }

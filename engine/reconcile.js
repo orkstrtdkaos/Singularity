@@ -26,7 +26,7 @@ import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: se
 import { mintableBraidsFor, buildBraidDef, mintBraid } from "./braids.js"; // SNG-196: mint the braids a character already earned
 import { findExistingNpc, prettifyNpcName, REGISTRY_CAP } from "./npcs.js"; // SNG-199/205: registry + codex backfill
 import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
-import { isCoercedObjectArtefact } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
+import { isCoercedObjectArtefact, isDescriptiveNotName } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
 import { startingSkills } from "./inventory.js"; // SNG-339b: the training an existing character came with
 
 // ---------- character migration steps (extensible registry) ----------
@@ -874,6 +874,29 @@ export const CHARACTER_STEPS = [
       return { notes: [kit
         ? `You have always known how to defend yourself — and your form has its own answers. (${granted.length} abilities, free.)`
         : `You have always known how to defend yourself: brace, strike, break away, call for help. (${granted.length} abilities, free.)`] };
+    }
+  },
+  {
+    version: 28, id: "flag-unnamed-generated-npcs", playerFacing: false,
+    // SNG-347 — Erik has at least one of these live: "someone tending the waystation fire—shelter-keeper,
+    // traveler", minted from the generateRequest HINT and announced in bold as a name.
+    //
+    // ⛔ NOT RENAMED, MARKED. Three options existed and only one is honest: inventing a name writes canon
+    // the player never heard; deleting the NPC removes someone the fiction already met; marking them
+    // unnamed lets the telling supply the name, which is the only route to a REAL one. Same reasoning as
+    // SNG-343's severed prose — a flag to the GM beats both a fabrication and a scar.
+    apply: (c) => {
+      const hit = [];
+      for (const rec of Object.values(c.generated?.npc || {})) {
+        if (rec.nameProvisional) continue;
+        if (!isDescriptiveNotName(rec.name)) continue;
+        rec.nameProvisional = true;
+        if (!rec.description) rec.description = rec.name;
+        hit.push(rec.name);
+      }
+      if (!hit.length) return {};
+      console.log(`[reconcile] sng-347: ${hit.length} generated NPC(s) carry a DESCRIPTION where a name belongs — marked unnamed, to be named in play: ${hit.join(" · ")}`);
+      return {};
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

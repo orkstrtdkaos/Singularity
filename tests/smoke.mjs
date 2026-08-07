@@ -10714,6 +10714,64 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-347 — A DESCRIPTION IS NOT A NAME. Erik's newly-minted NPC arrived as "someone tending the
+  // waystation fire—shelter-keeper, traveler" and the ribbon announced it IN BOLD, as an identity.
+  //
+  // ⛔ THE HINT WAS THE NAME. stubEntity read `context.hint` — the generateRequest's description of WHAT TO
+  // MAKE, whose own contract example is "a tollhand at the lower gate" — and used it verbatim, cut at
+  // exactly 60 characters. ⚠️ SNG-199 ALREADY FIXED THIS CLASS on the registry path ("a descriptive CLAUSE
+  // is not a name"); the generate mint never got the guard, so it walked in the other door.
+  {
+    const { isDescriptiveNotName } = await import("../engine/state.js");
+    const { stubEntity, livingWorldForGM } = await import("../engine/generate.js");
+    const { prettifyNpcName } = await import("../engine/npcs.js");
+
+    const BAD = ["someone tending the waystation fire—shelter-keeper, traveler", "a tollhand at the lower gate", "the quiet one", "a presence in the valley"];
+    const GOOD = ["Cevaine", "The Ashen Warden", "Siol", "Mara Thren", "Warden Holt"];
+    check("347: a description in the name slot is REFUSED", BAD.every(isDescriptiveNotName), BAD.filter(n => !isDescriptiveNotName(n)).join(" · "));
+    check("347: …and a real name is not — including an epithet-name like 'The Ashen Warden'",
+      GOOD.every(n => !isDescriptiveNotName(n)), GOOD.filter(isDescriptiveNotName).join(" · "));
+
+    // ⛔ WHY THIS IS ITS OWN CHECK AND NOT A REUSE OF prettifyNpcName: that function's "already
+    // human-shaped" test requires a capital letter, so an all-lowercase description falls through to the
+    // SLUG-PRETTIFIER and is TITLE-CASED into something that LOOKS like a name and is nonsense. A cosmetic
+    // pass standing where a validator belongs does not merely fail to fix the input — it launders it.
+    const laundered = prettifyNpcName("someone tending the waystation fire");
+    check("347: the cosmetic prettifier LAUNDERS this input — which is why a validator is needed",
+      /^[A-Z]/.test(laundered) && isDescriptiveNotName("someone tending the waystation fire"));
+
+    // The stub keeps the description AS a description and marks the person unnamed. It must never invent
+    // a name: its own contract is "never fabricates specifics it wasn't given", and a name is one.
+    const stub = stubEntity("npc", { hint: "someone tending the waystation fire, shelter-keeper", location: { id: "way", name: "The Waystation" } });
+    check("347: the stub marks an unnamed person UNNAMED rather than naming them from the hint", stub.nameProvisional === true);
+    check("347: …and keeps the hint as a DESCRIPTION, so nothing is lost", !!stub.description);
+    check("347: …and never cuts it mid-word (the SNG-181/343 raw slice)", !/\w$/.test(stub.name) || stub.name.length < 60);
+    const named = stubEntity("npc", { hint: "Cevaine", location: { id: "way", name: "The Waystation" } });
+    check("347: a stub given a real name is NOT marked provisional", !named.nameProvisional);
+
+    // ⚠️ THE GM MUST BE TOLD. The stub cannot invent a name, so the only route to a real one is the
+    // telling — and a GM that is not told will keep using the description as though it were an identity,
+    // which is how it hardens into canon.
+    const ch347 = { generated: { npc: { n1: { id: "n1", name: "someone tending the waystation fire", description: "someone tending the waystation fire", nameProvisional: true, role: "shelter-keeper", homeLocation: "way", _gen: { type: "npc", tier: "fresh", weight: 1, bornDay: 1 } } } } };
+    const block = livingWorldForGM(ch347, { locationId: "way", day: 1 });
+    check("347: the GM is told the person is NOT YET NAMED, and told to name them in play",
+      !!block && /NOT YET NAMED/.test(block));
+
+    // The one already in Erik's save — marked, never renamed (inventing a name writes canon he never read).
+    const { reconcile } = await import("../engine/reconcile.js");
+    const save = { id: "s", reconcileVersion: 27, abilities: [], generated: { npc: { n2: { id: "n2", name: "someone tending the waystation fire—shelter-keeper, traveler", _gen: { type: "npc", tier: "fresh", weight: 1, bornDay: 1 } } } } };
+    reconcile(save, "character", { content: {}, profile: {} });
+    const fixed = save.generated.npc.n2;
+    check("347: an ALREADY-MINTED description is marked unnamed on login", fixed.nameProvisional === true);
+    check("347: …and is NOT renamed — inventing a name would write canon the player never heard",
+      fixed.name === "someone tending the waystation fire—shelter-keeper, traveler" && !!fixed.description);
+
+    // The ribbon must not bold a description as a name.
+    const appSrc = readFileSync(join(root, "app.js"), "utf8");
+    check("347: the world-grows ribbon renders a provisional name as PROSE, never bolded as an identity",
+      /nameProvisional[\s\S]{0,200}yet to learn a name/.test(appSrc));
+  }
+
   // SNG-346 — ERIK'S SYMMETRIC DIFFICULTY SCALE. Aevi: "the insight is that EASY BECOMES A BONUS rather
   // than the absence of a penalty" — a flat base lifts every band equally, so easy and hard stay 15 apart
   // however high you push it. Widening the spread was the actual fix, and it needs no base at all.

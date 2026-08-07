@@ -1,1255 +1,1321 @@
 {
-  "schemaVersion": 1,
-  "id": "combination_recipes",
-  "kind": "emergence",
-  "note": "Discoverable cross-domain combination recipes. Each braids TWO abilities from different domains into a third effect neither reaches alone (skill_functions.json doctrine). Extends the SNG-010 emergence-recipe engine. DISCOVERABILITY: recipes are found by USE (pairing the two abilities in a beat surfaces the braid as a discovery, logged to the codex + narrativeLog), by a rune-cast/Attention read that hints a latent braid, or by a teacher who knows it. `discovery` field says how each is found. Owning both parts is the gate (class-cost/capacity prices the breadth; this is the payoff). Authored by Aevi (PO) — a starter set; generative braids (SNG-020) extend it in-grain.",
-  "recipes": [
-    {
-      "id": "warding_peace",
-      "name": "The Warding Peace",
-      "parts": [
-        "prism_ward",
-        "stillcraft"
-      ],
-      "functions": [
-        "shield",
-        "bind"
-      ],
-      "domains": [
-        "radiant",
-        "reach_violence_peace"
-      ],
-      "effect": "A light-bound truce-field: violence cannot be RAISED within it, not merely blocked. The cause of harm is forbidden, lit and held.",
-      "cannot": "Holds only while sustained; a will already committed to violence strains it; does not stop harm from outside the field.",
-      "discovery": "use — shield + de-escalate together in one beat; or taught at the Marchward"
-    },
-    {
-      "id": "unseen_cut",
-      "name": "The Unseen Cut",
-      "parts": [
-        "the_edge",
-        "umbracraft"
-      ],
-      "functions": [
-        "strike",
-        "conceal"
-      ],
-      "domains": [
-        "reach_violence_peace",
-        "reach_dark_light"
-      ],
-      "effect": "A decisive strike from a direction that was never there — the disciplined kill delivered through concealment. Violence carried on shadow.",
-      "cannot": "Total light defeats the concealment; one strike, then you're seen; the Edge's honor-forms frown on it (a Redline reputation cost).",
-      "discovery": "use — strike from concealment; or an Umbral assassin's teaching"
-    },
-    {
-      "id": "mercy_knowing",
-      "name": "The Mercy-Knowing",
-      "parts": [
-        "quickening",
-        "palework"
-      ],
-      "functions": [
-        "heal",
-        "break"
-      ],
-      "domains": [
-        "reach_death_life",
-        "reach_death_life"
-      ],
-      "effect": "The holder of both life and death can KNOW, truly, whether a body should be pulled back or let go — and do either rightly. The Quiet-in-the-Quickwood as a skill.",
-      "cannot": "Knowing is not commanding the outcome the world allows; the most sacred and most terrible braid — it will not lie to you about which mercy is called for.",
-      "discovery": "use — hold both traditions and attend a dying thing; the braid surfaces itself. The rarest teaching, held by few.",
-      "note": "Same-domain poles (life+death) rather than two domains — the co-firing braid; the exception that proves combination is about POLES not just packs."
-    },
-    {
-      "id": "meaning_engine",
-      "name": "The Meaning-Engine",
-      "parts": [
-        "enginecraft",
-        "numenwork"
-      ],
-      "functions": [
-        "mend",
-        "reveal"
-      ],
-      "domains": [
-        "reach_mechanical_spiritual",
-        "reach_mechanical_spiritual"
-      ],
-      "effect": "A machine commanded by WHY, not just HOW — a Precursor work run by significance. The only way to truly treat with What Sleeps Under, which is both mechanism and meaning.",
-      "cannot": "Requires dense substrate; the machine still obeys its physics, only now also its meaning; What Sleeps Under may answer, and answering is its own peril.",
-      "discovery": "use at a deep Precursor site holding both; or Ledda / the Deep Warden may hint it",
-      "note": "The braid the deep arc is built around."
-    },
-    {
-      "id": "riding_order",
-      "name": "The Riding Order",
-      "parts": [
-        "wildcraft",
-        "latticework"
-      ],
-      "functions": [
-        "break",
-        "bind"
-      ],
-      "domains": [
-        "reach_chaos_order",
-        "reach_chaos_order"
-      ],
-      "effect": "Unmake a structure and re-bind its pieces mid-collapse into what you need — chaos and order in one motion. The Living-Lattice jewel as a technique.",
-      "cannot": "The window is a heartbeat; miss the re-bind and you've only made chaos; drifts both poles at once, exhausting.",
-      "discovery": "use — break and bind in the same beat; learned at the Living Lattice"
-    },
-    {
-      "id": "the_whole_act",
-      "name": "The Whole Act",
-      "parts": [
-        "soma",
-        "noesis"
-      ],
-      "functions": [
-        "move",
-        "reveal"
-      ],
-      "domains": [
-        "reach_body_mind",
-        "reach_body_mind"
-      ],
-      "effect": "Body and mind as one instrument — thought and motion stop being separate; you act faster than either could decide. The Middle Way's ideal made a skill.",
-      "cannot": "Both must be trained near-equally; a body-heavy or mind-heavy wielder gets a lesser version; the extremes (Temple, Cogitarium) cannot do it at all.",
-      "discovery": "use — hold both near-equal and act under pressure; taught at the Middle Way"
-    },
-    {
-      "id": "the_sounding",
-      "name": "Shatterlight",
-      "parts": [
-        "sonic_resonance",
-        "prism_sight"
-      ],
-      "functions": [
-        "strike",
-        "reveal"
-      ],
-      "domains": [
-        "harmonic",
-        "radiant"
-      ],
-      "effect": "Ring a place and READ what rings back — map a location's whole pole-disposition and hidden co-firings at once. Resonance as sonar for the coordinate-world.",
-      "cannot": "Loud — announces you; reveals disposition, not intent; a dead-silent (origin-flat) place returns nothing.",
-      "discovery": "use — resonate then perceive; a Heights rune-reader's trick",
-      "braidName": "Shatterlight",
-      "braidKey": "prism_sight+sonic_resonance",
-      "_renamed": {
-        "was": "The Sounding",
-        "why": "⚠️ SHATTERLIGHT WINS, and the rename lands HERE rather than on the braid table. I decided Shatterlight beats 'The Sounding' — the one case where the evocative name is the MORE accurate one, because it is the only name that says both parts are present: the splitting and the ringing. Then my own resync rule ('braid name = mechanical name') blindly flipped it back. The decision was right; the ENFORCEMENT overwrote it. Fixed by moving the winning name into the mechanical table, so the rule and the decision agree instead of fighting."
-      }
-    },
-    {
-      "id": "the_harbor_light",
-      "name": "The Harbored Flame",
-      "parts": [
-        "umbracraft",
-        "light_well"
-      ],
-      "functions": [
-        "conceal",
-        "heal"
-      ],
-      "domains": [
-        "reach_dark_light",
-        "radiant"
-      ],
-      "effect": "A hidden sanctuary of restoring light — conceal a place so well it can't be found, and fill it with healing radiance the dark would otherwise forbid. Shelter AND mending in one.",
-      "cannot": "The two poles fight — sustaining both is costly; a searcher who brings their own light can crack it.",
-      "discovery": "use — conceal + heal a hidden space; an Umbral healer's craft"
-    },
-    {
-      "id": "rooted_stand",
-      "name": "The Rooted Stand",
-      "parts": [
-        "quickening",
-        "soma"
-      ],
-      "functions": [
-        "heal",
-        "shield"
-      ],
-      "domains": [
-        "reach_death_life",
-        "reach_body_mind"
-      ],
-      "effect": "Life poured through a trained body — stand unbroken, healing as fast as you're hurt, rooted like the Quickwood itself. The warrior-warden's braid.",
-      "cannot": "The overgrowth risk of Quickening plus the body's true limit — push too far and you grow WRONG; energy-hungry.",
-      "discovery": "use — heal and endure together; a Flesh-Temple / Quickwood crossing"
-    },
-    {
-      "id": "true_word",
-      "name": "The True Word",
-      "parts": [
-        "numenwork",
-        "storykeeper"
-      ],
-      "functions": [
-        "reveal",
-        "bind"
-      ],
-      "domains": [
-        "reach_mechanical_spiritual",
-        "valley_craft"
-      ],
-      "effect": "Attend a truth so fully and tell it so well that it BINDS — a story that, once spoken, cannot be unbelieved because it is simply true and simply told. The counter to the Cathedral of Convincing.",
-      "cannot": "Only works on the actually-true; a beautiful lie breaks it; the Stillhold's buried truths resist being said.",
-      "discovery": "use — reveal by attention + tell by story; the Wend keepers and the Numen both hold pieces"
-    },
-    {
-      "id": "perfect_form",
-      "name": "The Perfect Form",
-      "parts": [
-        "the_edge",
-        "latticework"
-      ],
-      "functions": [
-        "strike",
-        "bind"
-      ],
-      "domains": [
-        "reach_violence_peace",
-        "reach_chaos_order"
-      ],
-      "effect": "A fight conducted like a proof — every strike lawful, every opening foreseen; the Marcher's duel as living structure.",
-      "cannot": "Wildcraft unravels it; a truly chaotic foe breaks the proof.",
-      "discovery": "taught at the Redline; or use — strike + bind in the forms"
-    },
-    {
-      "id": "unraveling_blow",
-      "name": "The Unraveling Blow",
-      "parts": [
-        "wildcraft",
-        "strike_basic"
-      ],
-      "functions": [
-        "strike",
-        "break"
-      ],
-      "domains": [
-        "reach_chaos_order",
-        "baseline"
-      ],
-      "effect": "A strike that lands where the plan broke — damage scales with the disorder you made first.",
-      "cannot": "Against the truly formless there is no plan to break.",
-      "discovery": "use — break a plan, then strike into it; Churn-taught"
-    },
-    {
-      "id": "immovable_calm",
-      "name": "The Immovable Calm",
-      "parts": [
-        "soma",
-        "stillcraft"
-      ],
-      "functions": [
-        "shield",
-        "bind"
-      ],
-      "domains": [
-        "reach_body_mind",
-        "reach_violence_peace"
-      ],
-      "effect": "A guard that de-escalates — attacks are absorbed and somehow the fight is over; the Temple Guardian's signature.",
-      "cannot": "Cannot pursue; the guard ends fights, doesn't win wars.",
-      "discovery": "taught at the Flesh-Temple; or use — brace + de-escalate together"
-    },
-    {
-      "id": "foregone_conclusion",
-      "name": "The Foregone Conclusion",
-      "parts": [
-        "noesis",
-        "latticework"
-      ],
-      "functions": [
-        "reveal",
-        "bind"
-      ],
-      "domains": [
-        "reach_body_mind",
-        "reach_chaos_order"
-      ],
-      "effect": "Out-model an opponent so completely their attack fails before it starts — the War-Thinker's checkmate.",
-      "cannot": "The model is only as good as its inputs; wild luck defeats clean prediction.",
-      "discovery": "Cogitarium-taught; or use — model then bind"
-    },
-    {
-      "id": "grasping_green",
-      "name": "The Grasping Green",
-      "parts": [
-        "root_hold",
-        "quickening"
-      ],
-      "functions": [
-        "bind",
-        "heal"
-      ],
-      "domains": [
-        "ent_form",
-        "reach_death_life"
-      ],
-      "effect": "Roots bind the foe while living growth mends you mid-fight — attrition the green always wins. The Thorn-Warden's (and the Ent's) signature.",
-      "cannot": "Needs earth; fire changes the equation entirely.",
-      "discovery": "Deepwood Walkers teach it; or use — root-hold + heal in one fight"
-    },
-    {
-      "id": "judging_beam",
-      "name": "The Judging Beam",
-      "parts": [
-        "radiance",
-        "kindle"
-      ],
-      "functions": [
-        "strike",
-        "reveal"
-      ],
-      "domains": [
-        "reach_dark_light",
-        "reach_dark_light"
-      ],
-      "effect": "A strike that reveals as it burns — illusions die first, then the target's cover. The Blaze-Lance signature.",
-      "cannot": "What is truly as it appears takes only the burn.",
-      "discovery": "Plateau-taught; or use — reveal + strike as one beam"
-    },
-    {
-      "id": "quiet_end",
-      "name": "The Quiet End",
-      "parts": [
-        "palework",
-        "stillcraft"
-      ],
-      "functions": [
-        "break",
-        "bind"
-      ],
-      "domains": [
-        "reach_death_life",
-        "reach_violence_peace"
-      ],
-      "effect": "A strike that concludes — against the dying, the raging, the unnatural, it simply finishes what was already ending. The Pale Reaper's mercy.",
-      "cannot": "Cannot end what is whole and healthy — it concludes, never murders.",
-      "discovery": "Ashwarden-taught, rarely; or use — ease + still in violence"
-    },
-    {
-      "id": "the_hidden_road",
-      "name": "The Hidden Road",
-      "parts": [
-        "shadowstep",
-        "false_trail"
-      ],
-      "functions": [
-        "move",
-        "conceal"
-      ],
-      "domains": [
-        "umbral"
-      ],
-      "effect": "You step the dark from one place to another while a convincing trail walks somewhere else entirely. Pursuit follows the trail; you were never on it.",
-      "cannot": "The decoy trail must end somewhere plausible. A pursuer who reaches its end and finds nothing knows exactly what you did.",
-      "discovery": "use — shadowstep away in the same beat you lay a false trail; or taught in the Underlight",
-      "combinationTier": "within-tradition"
-    },
-    {
-      "id": "the_deep_quiet",
-      "name": "The Deep Quiet",
-      "parts": [
-        "stillcraft",
-        "the_held_breath"
-      ],
-      "functions": [
-        "bind",
-        "shield"
-      ],
-      "domains": [
-        "stillhold"
-      ],
-      "effect": "A silence so complete that violence loses its footing inside it — nobody can find the moment to begin.",
-      "cannot": "The instant the quiet breaks, everything it was holding arrives at once, and all of it at you.",
-      "discovery": "use — hold the breath while binding a room; or taught at the Stillhold",
-      "combinationTier": "within-tradition"
-    },
-    {
-      "id": "the_whole_body",
-      "name": "The Whole Body",
-      "parts": [
-        "soma",
-        "perfect_motion"
-      ],
-      "functions": [
-        "move",
-        "shield"
-      ],
-      "domains": [
-        "somatic"
-      ],
-      "effect": "Body and motion become one instrument — you move through a fight, a fall, a crowd as though the world had agreed to make room.",
-      "cannot": "It is still a body. It can still be outnumbered, and it still has to land.",
-      "discovery": "use — perfect motion inside a somatic exertion; or trained at the Flesh-Temples",
-      "combinationTier": "within-tradition"
-    },
-    {
-      "id": "the_counted_end",
-      "name": "Pale Reckoning",
-      "parts": [
-        "palework",
-        "deathsense"
-      ],
-      "functions": [
-        "reveal",
-        "break"
-      ],
-      "domains": [
-        "ashwarden"
-      ],
-      "effect": "You see an ending's exact hour, and you can call it in early. ⚠️ **THE UTILITY: you are not overcoming a thing's life, only moving it to an hour already owed — so it costs a fraction of killing outright and cannot be resisted by strength.** Against anything already dying, wounded, rotten or failing it is the cheapest ending in the game. Against something whole it does nothing at all. **The Ashwarden mercy is the same act pointed at a person: no sooner, no crueller, no waste.**",
-      "cannot": "⛔ **IT CANNOT BRING AN ENDING THAT WAS NOT ALREADY COMING** — against anything whole and healthy it simply fails and the cost is spent. Used to hasten what should have lived, it marks the wielder permanently and visibly.",
-      "discovery": "use — read a death, then tend it in the same beat; or taught in the Hollow March",
-      "combinationTier": "within-tradition",
-      "braidName": "Pale Reckoning",
-      "braidKey": "deathsense+palework",
-      "_renamed": {
-        "was": "The Counted End",
-        "why": "⚠️ 'The Counted End' sounded pointless — Erik: 'no sooner, no crueller… what's it doing then? what's the utility?' My Amendment 3 failure: I wrote what the craft IS and never what it is FOR. PALE RECKONING names both parts (palework + the death-read) and the act — a reckoning is calling in what is already owed. ⚠️ And it avoids 'The Owed Hour', which I nearly used and which collides in the ear with my own `The Borrowed Hour`."
-      }
-    },
-    {
-      "id": "the_lattice_engine",
-      "name": "The Lattice-Engine",
-      "parts": [
-        "latticework",
-        "enginecraft"
-      ],
-      "functions": [
-        "bind",
-        "mend"
-      ],
-      "domains": [
-        "lattice",
-        "enginewright"
-      ],
-      "effect": "Structure and mechanism braided: a system that not only runs but CANNOT run wrong — it corrects itself toward its design.",
-      "cannot": "A self-correcting system corrects toward the design it was given. If the design is wrong, it will pursue that wrongness perfectly and forever.",
-      "discovery": "use — bind a structure while mending its mechanism; taught wherever the Gearlands meet the Grand Lattice",
-      "combinationTier": "kin-civilization"
-    },
-    {
-      "id": "the_sung_lattice",
-      "name": "The Sung Lattice",
-      "parts": [
-        "sonic_resonance",
-        "latticework"
-      ],
-      "functions": [
-        "bind",
-        "break"
-      ],
-      "domains": [
-        "harmonic",
-        "lattice"
-      ],
-      "effect": "Order given a voice: a structure sung into or out of true. The Harmonics' folk-craft reaching up toward what the Lattice-Cities do at scale.",
-      "cannot": "The Valley's sung version is small. Against a true Lattice working, it is a folk song against a cathedral.",
-      "discovery": "use — resonate against a bound structure; or shown by any Lattice-trained visitor to the Heights",
-      "combinationTier": "kin-civilization"
-    },
-    {
-      "id": "the_grown_ward",
-      "name": "The Grown Ward",
-      "parts": [
-        "quickening",
-        "boundary_stone"
-      ],
-      "functions": [
-        "ward",
-        "heal"
-      ],
-      "domains": [
-        "rootkin",
-        "valley_craft"
-      ],
-      "effect": "A boundary that is ALIVE — it grows into place, roots, and thickens over years. The Valley's oldest walls were made this way, and they are still growing.",
-      "cannot": "It takes time to become anything. Planted today, it wards almost nothing; the Rootkin plant for grandchildren.",
-      "discovery": "use — quicken a set boundary; or learned at Thornwake Glade",
-      "combinationTier": "kin-civilization"
-    },
-    {
-      "id": "the_tended_end",
-      "name": "The Tended End",
-      "parts": [
-        "palework",
-        "greenlore"
-      ],
-      "functions": [
-        "heal",
-        "break"
-      ],
-      "domains": [
-        "ashwarden",
-        "valley_craft"
-      ],
-      "effect": "Decay guided rather than merely allowed — a thing rots the right way, into the right soil, and feeds what comes next.",
-      "cannot": "It is a slow craft, and it will not be hurried for your grief. Some things you want ended are ended usefully only over years.",
-      "discovery": "use — pale-work something with a green hand; or taught where the Palelands meet the Quickwood",
-      "combinationTier": "kin-civilization"
-    },
-    {
-      "id": "the_read_engine",
-      "name": "The Read Engine",
-      "parts": [
-        "mech_sense",
-        "noesis"
-      ],
-      "functions": [
-        "reveal"
-      ],
-      "domains": [
-        "enginewright",
-        "cogitant"
-      ],
-      "effect": "Machine-sense and mind-craft together: you do not merely read what a mechanism does — you reconstruct the MIND that designed it, and think its next thought.",
-      "cannot": "Reconstructing a designer is not knowing them. The Cogitants warn that you are, in the end, reading yourself.",
-      "discovery": "use — read a mechanism while holding it in a memory-palace; or in the Cogitarium's engine-halls",
-      "combinationTier": "kin-civilization"
-    },
-    {
-      "id": "the_singing_dark",
-      "name": "The Singing Dark",
-      "parts": [
-        "sonic_resonance",
-        "darksight"
-      ],
-      "functions": [
-        "reveal",
-        "move"
-      ],
-      "domains": [
-        "harmonic",
-        "umbral"
-      ],
-      "effect": "See by sound where there is no light at all — the black is mapped by echo, and it is MORE legible than sight would make it.",
-      "cannot": "A silent dark defeats it entirely. And the sound you make to see with, others can hear.",
-      "discovery": "use — resonate in true darkness; a common Umbral trade-craft picked up by Harmonic travelers",
-      "combinationTier": "kin-civilization"
-    },
-    {
-      "id": "the_burning_truth",
-      "name": "The Burning Truth",
-      "parts": [
-        "radiance",
-        "verity"
-      ],
-      "functions": [
-        "reveal",
-        "strike"
-      ],
-      "domains": [
-        "blazeborn",
-        "verist"
-      ],
-      "effect": "Revelation as a weapon: a truth spoken and LIT at once, that cannot be looked away from and cannot be denied by anyone present.",
-      "cannot": "It burns what it lands on, including bystanders, including you. Both peoples who make it consider it a last resort; both use it more than they admit.",
-      "discovery": "use — speak a true thing while kindling revelation; taught nowhere willingly",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_kind_lie",
-      "name": "The Kind Lie",
-      "parts": [
-        "falsecraft",
-        "pathos"
-      ],
-      "functions": [
-        "conceal",
-        "heal"
-      ],
-      "domains": [
-        "veilwright",
-        "threnodist"
-      ],
-      "effect": "A falsehood built entirely out of care — it holds someone up who would not survive the true thing today, and it holds only until they can.",
-      "cannot": "It is still a lie, and it has a shelf life. When it fails — and it fails — the fall is longer for the height you gave them.",
-      "discovery": "use — conceal a truth while tending the feeling under it; the Veilwrights teach it as an act of mercy and the Verists call that the greatest lie of all",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_cold_shadow",
-      "name": "The Cold Shadow",
-      "parts": [
-        "umbracraft",
-        "logos"
-      ],
-      "functions": [
-        "conceal",
-        "bind"
-      ],
-      "domains": [
-        "umbral",
-        "syllogist"
-      ],
-      "effect": "Reasoning that hides itself: you build an argument, a plan, a case that is airtight and that nobody can find the shape of until it closes.",
-      "cannot": "The argument still has to be sound. A hidden bad argument is simply a bad argument nobody caught yet — until they do.",
-      "discovery": "use — conceal a chain of reasoning as you build it; a Cogitarium technique the Umbrals perfected",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_stopped_hour",
-      "name": "The Stopped Hour",
-      "parts": [
-        "the_fixed_point",
-        "death_ward"
-      ],
-      "functions": [
-        "ward",
-        "bind"
-      ],
-      "domains": [
-        "lattice",
-        "ashwarden"
-      ],
-      "effect": "You become the fixed point a death cannot get past — not turning the hour aside but REFUSING it, and the refusal holds because you do not move.",
-      "cannot": "You must not move. Not to eat, not to strike, not to save a second person. The hour waits exactly as long as you do.",
-      "discovery": "use — anchor yourself while warding a death; there is no school that teaches this and several that forbid it",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_wild_green",
-      "name": "The Wild Green",
-      "parts": [
-        "wildcraft",
-        "greenlore"
-      ],
-      "functions": [
-        "heal",
-        "break"
-      ],
-      "domains": [
-        "churnfolk",
-        "valley_craft"
-      ],
-      "effect": "Growth let entirely off its leash — a wound closes wrong and strong, a wall goes green and comes apart, a field becomes a jungle in a season.",
-      "cannot": "You cannot aim it and you cannot call it back. The Churnfolk think that is the point and the Valleyfolk think that is the problem.",
-      "discovery": "use — quicken something without binding what it becomes; the Churn teaches it by accident, constantly",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_shrouded_wound",
-      "name": "The Shrouded Wound",
-      "parts": [
-        "shroud",
-        "staunch"
-      ],
-      "functions": [
-        "conceal",
-        "heal"
-      ],
-      "domains": [
-        "umbral",
-        "rootkin"
-      ],
-      "effect": "Hold a mortal wound closed AND hide that you are hurt at all — you walk out of the room, and nobody knows to follow.",
-      "cannot": "You are still holding a mortal wound closed. The shroud buys you distance, not time, and the moment you let either go, both fail.",
-      "discovery": "use — staunch a wound while shrouding yourself in the same beat",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_measured_ruin",
-      "name": "The Measured Ruin",
-      "parts": [
-        "wither",
-        "order_sense"
-      ],
-      "functions": [
-        "break",
-        "reveal"
-      ],
-      "domains": [
-        "ashwarden",
-        "lattice"
-      ],
-      "effect": "Decay applied with a designer's precision — this beam and not that one, this hinge, this word in the contract. The building comes down exactly where you meant.",
-      "cannot": "It requires you to be RIGHT about the structure. A measured ruin against a misread design brings down something you needed.",
-      "discovery": "use — read a structure's order, then wither its load-bearing piece",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_open_mind",
-      "name": "The Open Mind",
-      "parts": [
-        "thin_place",
-        "memory_palace"
-      ],
-      "functions": [
-        "reveal",
-        "ward"
-      ],
-      "domains": [
-        "numinous",
-        "cogitant"
-      ],
-      "effect": "You open a thin place INSIDE a memory-palace — a room in your own mind where the numinous can be met, held, and walked away from safely.",
-      "cannot": "Safely is doing a great deal of work in that sentence. What you invite into your own mind has an address there now.",
-      "discovery": "use — open a thin place while standing in the palace; the Numinous permit this only to their own, and the Cogitants do it anyway",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_harbored_truth",
-      "name": "The Harbored Truth",
-      "parts": [
-        "the_harbor",
-        "verity"
-      ],
-      "functions": [
-        "conceal",
-        "reveal"
-      ],
-      "domains": [
-        "umbral",
-        "verist"
-      ],
-      "effect": "Keep a true thing hidden and INTACT — unspoken, unweakened, unrotted — until the hour it can be spoken and land with its whole weight.",
-      "cannot": "The truth keeps; the person waiting does not. Harboring a truth someone needed today in order to deploy it beautifully next year is a betrayal wearing patience.",
-      "discovery": "use — harbor something and hold it true in one beat; the Verists debate endlessly whether this counts as honesty",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_bright_blade",
-      "name": "The Bright Blade",
-      "parts": [
-        "kindle",
-        "the_edge"
-      ],
-      "functions": [
-        "strike",
-        "reveal"
-      ],
-      "domains": [
-        "blazeborn",
-        "marcher"
-      ],
-      "effect": "A struck light that is also a struck blade — the blow lands and REVEALS, and what it reveals is often why the blow was necessary.",
-      "cannot": "Everyone sees what it reveals, including things you would rather not have shown, including about yourself.",
-      "discovery": "use — kindle in the same motion as an edge-strike; common in the Redline's border wars",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_still_engine",
-      "name": "The Still Engine",
-      "parts": [
-        "stillcraft",
-        "command_engine"
-      ],
-      "functions": [
-        "bind",
-        "mend"
-      ],
-      "domains": [
-        "stillhold",
-        "enginewright"
-      ],
-      "effect": "Command a mechanism to STOP and hold it stopped — a mill, a gate, a war-engine, a lock — bound in a peace it cannot argue with.",
-      "cannot": "Machines do not resent being stopped, but their owners do. And a stopped engine is still an engine; someone will start it again.",
-      "discovery": "use — bind an engine you have commanded; the Stillhold's quietest and least-loved export",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_borrowed_hour",
-      "name": "The Borrowed Hour",
-      "parts": [
-        "second_wind",
-        "death_ward"
-      ],
-      "functions": [
-        "heal",
-        "ward"
-      ],
-      "domains": [
-        "somatic",
-        "ashwarden"
-      ],
-      "effect": "Refuse your own ending AND keep moving through it — a body that should be down is up, finishing what it came to do.",
-      "cannot": "The hour is BORROWED. When you set it down, it arrives complete and all at once, and it does not negotiate. Somatics who do this twice do not do it a third time.",
-      "discovery": "use — take a second wind while warding your own death; no tradition teaches it and every tradition knows someone who did it",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_named_chaos",
-      "name": "The Named Chaos",
-      "parts": [
-        "truename_order",
-        "chaos_sense"
-      ],
-      "functions": [
-        "bind",
-        "reveal"
-      ],
-      "domains": [
-        "lattice",
-        "churnfolk"
-      ],
-      "effect": "Name the order inside a chaos — not imposing structure but FINDING the one that was already there, and setting the thing into it.",
-      "cannot": "There is not always one there. The Lattice's oldest error is naming an order onto a chaos that had none, and the chaos always eventually says so.",
-      "discovery": "use — sense a chaos, then name its order in the same beat; the one craft both peoples claim to have invented",
-      "combinationTier": "cross-pole",
-      "axis": "chaos_order",
-      "harmRung": "incapacitating",
-      "cultCondemns": "The Grand Lattice's inner ring calls it a defect tolerated. Those who ride the Churn until nothing holds call it a cage with a nice view. **It is the only order anyone has ever been able to live inside.**",
-      "note": "RECLASSIFIED 2026-07-12: Lattice [order] and Churnfolk [chaos] are ANTIPODES on the ring. This was mislabelled cross-axis. It is a BRAID — order that BREATHES."
-    },
-    {
-      "id": "the_long_memory",
-      "name": "The Long Memory",
-      "parts": [
-        "echo_memory",
-        "storykeeper"
-      ],
-      "functions": [
-        "reveal",
-        "bind"
-      ],
-      "domains": [
-        "harmonic",
-        "valley_craft"
-      ],
-      "effect": "A place's echo and a people's story braided into one telling — you recover not just what happened here but what it MEANT to those it happened to.",
-      "cannot": "Meaning is not fact. What the story remembers and what the echo records will sometimes disagree, and you must choose which to carry.",
-      "discovery": "use — read a place's echo while keeping its story; the Valley's finest folk-craft and it knows it",
-      "combinationTier": "kin-civilization"
-    },
-    {
-      "id": "the_lit_lattice",
-      "name": "The Lit Lattice",
-      "parts": [
-        "glimmer_script",
-        "latticework"
-      ],
-      "functions": [
-        "ward",
-        "bind"
-      ],
-      "domains": [
-        "radiant_folk",
-        "lattice"
-      ],
-      "effect": "Written light bound into structure — a ward that is also a LAW: it does not merely block, it states the rule it is enforcing, and everyone can read it.",
-      "cannot": "A stated rule can be argued with, lawyered, and found a gap in. A silent ward cannot. The Lattice considers the legibility worth it; the Umbrals find it hilarious.",
-      "discovery": "use — bind a glimmer-script into a structure; standard at any Lattice border",
-      "combinationTier": "kin-civilization"
-    },
-    {
-      "id": "the_unmade_seal",
-      "name": "The Unmade Seal",
-      "parts": [
-        "unmake_seal",
-        "scatter"
-      ],
-      "functions": [
-        "break"
-      ],
-      "domains": [
-        "precursor",
-        "churnfolk"
-      ],
-      "effect": "A Precursor seal not picked but SCATTERED — its coherence unmade, so the lock stops being a lock rather than being opened.",
-      "cannot": "What the seal was holding closed is now simply open, and nobody planned for that, including you. The Precursors sealed things for reasons.",
-      "discovery": "use — scatter a seal you have addressed; the Churnfolk's favorite crime",
-      "combinationTier": "cross-axis"
-    },
-    {
-      "id": "the_beast_read",
-      "name": "The Beast-Read",
-      "parts": [
-        "beastfriend",
-        "body_read"
-      ],
-      "functions": [
-        "reveal",
-        "bind"
-      ],
-      "domains": [
-        "valley_craft",
-        "somatic"
-      ],
-      "effect": "Read an animal as a body rather than a mystery — its fear, its intent, the half-second before it bolts or bites — and answer it in kind.",
-      "cannot": "An animal read is not an animal tamed. Knowing exactly why it is about to bite you is not the same as it not biting you.",
-      "discovery": "use — body-read a creature you are befriending",
-      "combinationTier": "kin-civilization"
-    },
-    {
-      "id": "the_called_back",
-      "name": "The Called-Back",
-      "parts": [
-        "palework",
-        "quickening"
-      ],
-      "functions": [
-        "heal",
-        "reveal",
-        "bind"
-      ],
-      "domains": [
-        "ashwarden",
-        "rootkin"
-      ],
-      "combinationTier": "cross-pole",
-      "effect": "You call a thing back across the line it had already crossed. Not healing — RETURNING. The Ashwardens tend endings and the Rootkin tend growth, and they are antipodes with a working border and an exhausted mutual respect; to hold BOTH is to say *this ending was wrong, and I will carry the cost of unmaking it.* What comes back is alive. Whether it is the same is a question you will be answering for the rest of your life.",
-      "cannot": "It does not come back UNCHANGED — it comes back as something that has been dead, and it will always have been dead. And it is YOURS now, permanently, in the way a promise is yours. The Rootkin consider this the near edge of their own taboo; the Ashwardens consider it a theft from the only honest thing there is. Neither people will teach it. **You cannot learn this. You can only DO it — and then discover what you did.**",
-      "discovery": "use — palework and quickening held in the same act, at a moment when an ending is genuinely WRONG and you refuse it anyway. There is no teacher. There is no tome. **This is the cross-pole braid on the death↔life axis: the ONLY sanctioned road to your own antipode, and the hardest thing in the world to hold.**",
-      "axis": "death_life",
-      "harmRung": "none"
-    },
-    {
-      "id": "the_wardens_blow",
-      "name": "The Warden's Blow",
-      "parts": [
-        "the_edge",
-        "stillcraft"
-      ],
-      "functions": [
-        "strike",
-        "bind",
-        "ward"
-      ],
-      "domains": [
-        "marcher",
-        "stillhold"
-      ],
-      "axis": "violence_peace",
-      "combinationTier": "cross-pole",
-      "harmRung": "lethal",
-      "effect": "You strike ONCE — decisively, completely, and in a way that makes every further strike unnecessary. The fight does not continue. It does not resume tomorrow. **The violence is spent, entire, in a single act, so that peace can hold behind it.** It is the most terrible mercy in the world.",
-      "cannot": "You must actually END it. A Warden's Blow that leaves the thing standing is simply a murder attempt, and everyone will treat it as one. And you carry it — the Stillhold's priests will not bless it, will not absolve it, and will not pretend they do not know why you did it.",
-      "cultCondemns": "The Silent (peace-cult) call this the greatest possible betrayal: peace bought with blood is not peace. The Redline's deepest cut calls it cowardice — a single blow to avoid the honest work of war. **They are both wrong, and the Stillhold's people are alive because someone did it.**",
-      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
-    },
-    {
-      "id": "the_truer_story",
-      "name": "The Truer Story",
-      "parts": [
-        "falsecraft",
-        "verity"
-      ],
-      "functions": [
-        "conceal",
-        "reveal",
-        "heal"
-      ],
-      "domains": [
-        "veilwright",
-        "verist"
-      ],
-      "axis": "falsehood_truth",
-      "combinationTier": "cross-pole",
-      "harmRung": "none",
-      "effect": "A story that is **false in every fact and true in the only way that matters** — and it lands as truth, because it IS one. Not a lie that comforts. A shape that holds what the facts could not carry.",
-      "cannot": "It must be TRUE in the way it claims to be. A Truer Story that is merely a kind lie collapses the moment it is tested, and takes the teller's credibility with it forever. And a Verist who knows what you did will say so, out loud, at the worst possible moment.",
-      "cultCondemns": "The Flensing (truth-cult) call it the most dangerous thing in the world. The Last Mask (falsehood-cult) call it a failure of nerve — why stop at true? **It has saved more people than the truth has.**",
-      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
-    },
-    {
-      "id": "the_fallen_grace",
-      "name": "The Fallen Grace",
-      "parts": [
-        "descent",
-        "ascent"
-      ],
-      "functions": [
-        "heal",
-        "bind",
-        "reveal"
-      ],
-      "domains": [
-        "abyssal",
-        "seraphic"
-      ],
-      "axis": "demonic_angelic",
-      "combinationTier": "cross-pole",
-      "harmRung": "incapacitating",
-      "effect": "Mercy that has **felt the hunger** — and forgives anyway. Judgment that knows exactly what it is condemning, because it wanted the same thing. **It binds where clean judgment only breaks**, because the one being judged can feel that you understand.",
-      "cannot": "You must actually have wanted it. A Fallen Grace offered by someone who never felt the pull is condescension, and it is heard as condescension, and it does nothing.",
-      "cultCondemns": "The Unfallen (angelic-cult) call it corruption at the root. The Devouring (demonic-cult) call it weakness dressed as virtue. **It is the only judgment anyone has ever accepted.**",
-      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
-    },
-    {
-      "id": "the_unified_act",
-      "name": "The Unified Act",
-      "parts": [
-        "soma",
-        "noesis"
-      ],
-      "functions": [
-        "move",
-        "strike",
-        "reveal"
-      ],
-      "domains": [
-        "somatic",
-        "cogitant"
-      ],
-      "axis": "body_mind",
-      "combinationTier": "cross-pole",
-      "harmRung": "damaging",
-      "effect": "Knowing and doing collapse into one motion. **There is no gap between the thought and the hand** — no tell, no wind-up, no moment where a reader could see it coming, because there is no 'coming'. It simply has happened.",
-      "cannot": "It is one act. You cannot think your way through a second one while performing the first; the union is total and it is brief. And a body that has done this cannot immediately do it again.",
-      "cultCondemns": "The Sculpted (body-cult) say the mind contaminates the body. The Discarnate (mind-cult) say the body contaminates the mind. **Both peoples' finest are, quietly, doing this.**",
-      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
-    },
-    {
-      "id": "the_load_bearing_word",
-      "name": "The Load-Bearing Word",
-      "parts": [
-        "thingcraft",
-        "formcraft"
-      ],
-      "functions": [
-        "shield",
-        "bind",
-        "mend"
-      ],
-      "domains": [
-        "mason",
-        "figurist"
-      ],
-      "axis": "concrete_abstract",
-      "combinationTier": "cross-pole",
-      "harmRung": "incapacitating",
-      "effect": "A symbol you can **stand on**. Meaning made structural — a promise that holds weight, a name that stops a wall falling, an argument you can shelter under in the rain. **The abstract, made to bear load.**",
-      "cannot": "It must be a meaning that is TRUE and a structure that is SOUND. Either half failing brings the whole thing down, and it brings it down on whoever was sheltering under it.",
-      "cultCondemns": "The Leaden (concrete-cult) deny it can exist. The Untethered (abstract-cult) find it a vulgar waste of a good idea. **The Quiet House at the Crossing is built on one.**",
-      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
-    },
-    {
-      "id": "the_kept_appointment",
-      "name": "The Kept Appointment",
-      "parts": [
-        "spanwork",
-        "hourcraft"
-      ],
-      "functions": [
-        "move",
-        "ward",
-        "reveal"
-      ],
-      "domains": [
-        "horizon",
-        "hourkeeper"
-      ],
-      "axis": "space_time",
-      "combinationTier": "cross-pole",
-      "harmRung": "incapacitating",
-      "effect": "To be in the **right place at the right moment** — which is a far harder thing than being able to do either. You arrive exactly when arriving matters, and not one breath before or after.",
-      "cannot": "You must know WHICH moment. The braid gets you there; it does not tell you where 'there' is. Arrive perfectly at the wrong appointment and you have wasted the rarest thing in the world.",
-      "cultCondemns": "The Unlanded (space-cult) never arrive at all. The Stopped (time-cult) never leave. **Neither has ever kept an appointment.**",
-      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
-    },
-    {
-      "id": "the_cleared_ground",
-      "name": "The Cleared Ground",
-      "parts": [
-        "ruinwork",
-        "makecraft"
-      ],
-      "functions": [
-        "break",
-        "mend",
-        "bind"
-      ],
-      "domains": [
-        "unmaker",
-        "wright"
-      ],
-      "axis": "destruction_creation",
-      "combinationTier": "cross-pole",
-      "harmRung": "damaging",
-      "effect": "The ending that **is** a founding. You unmake a thing so completely and so well that the ground it stood on is *ready* — and what you build there afterward stands on the ending as a foundation, not a scar.",
-      "cannot": "It requires you to be RIGHT that the thing should end, and to actually build. A Cleared Ground with nothing raised on it is just a ruin with pretensions, and the Unmakers will tell you so.",
-      "cultCondemns": "The Scouring (destruction-cult) clear and never build. The Ceaseless (creation-cult) build and never clear. **Every city worth living in was made this way.**",
-      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
-    },
-    {
-      "id": "the_harbored_flame_braid",
-      "name": "The Harbored Flame",
-      "parts": [
-        "umbracraft",
-        "radiance"
-      ],
-      "functions": [
-        "conceal",
-        "heal",
-        "reveal"
-      ],
-      "domains": [
-        "umbral",
-        "blazeborn"
-      ],
-      "axis": "dark_light",
-      "combinationTier": "cross-pole",
-      "harmRung": "incapacitating",
-      "effect": "A light you carry HIDDEN — warmth and revelation that the dark cannot put out and the Blaze cannot burn away, because it belongs to neither. **You can show one person one true thing in a place where showing anything would kill you both.**",
-      "cannot": "It is ONE light, for ONE moment. It will not illuminate a room and it will not warm a camp. And carrying it means the Unlit want it out and the Blaze wants it BIGGER, and both will find you.",
-      "cultCondemns": "The Unlit would put it out — it is a light, and lights must go. The Blaze would grow it until it consumed you — a light that is hidden is a light that is ASHAMED. **Neither can conceive of a small, sheltered, sufficient flame.**",
-      "discovery": "use — held together at a moment when neither the dark nor the light alone could have saved it."
-    },
-    {
-      "id": "the_meaning_engine_braid",
-      "name": "The Meaning-Engine",
-      "parts": [
-        "enginecraft",
-        "numenwork"
-      ],
-      "functions": [
-        "mend",
-        "reveal",
-        "bind"
-      ],
-      "domains": [
-        "enginewright",
-        "numinous"
-      ],
-      "axis": "mechanical_spiritual",
-      "combinationTier": "cross-pole",
-      "harmRung": "incapacitating",
-      "effect": "A mechanism that **MEANS**. The Enginewrights build it and it runs; the Numinous make it matter; and the thing that results does work in the world that neither craft could do alone — a machine that is also a prayer, and functions as both.",
-      "cannot": "It must actually MEAN something true. A Meaning-Engine built around a lie runs perfectly and produces nothing, and the failure is silent, and you will not notice for years.",
-      "cultCondemns": "The Great Engine's tenders say meaning is an inefficiency to be optimized out. The Unbodied say a mechanism is a cage for a meaning. **Halvex Coil is what happens when only the first half is believed.**",
-      "discovery": "use — a mechanism commanded and a thin place held open in the same act."
-    },
-    {
-      "id": "the_turning_word_braid",
-      "name": "The Turning Word",
-      "parts": [
-        "pathos",
-        "logos"
-      ],
-      "functions": [
-        "bind",
-        "reveal",
-        "heal"
-      ],
-      "domains": [
-        "threnodist",
-        "syllogist"
-      ],
-      "axis": "emotional_logical",
-      "combinationTier": "cross-pole",
-      "harmRung": "incapacitating",
-      "effect": "The argument that also **heals**. Reason alone cannot turn a heart; feeling alone cannot show it why. Held together, you can say the thing that is both TRUE and BEARABLE — and a person can actually change their mind, which is the rarest event in the world.",
-      "cannot": "It must be both. A Turning Word that is warm and false is manipulation; one that is true and cold is just a Verist being cruel with extra steps. Get either half wrong and you have made an enemy who is also, now, correct about you.",
-      "cultCondemns": "The Raw say reason is a wall built against feeling. The Bloodless say feeling is noise that corrupts a valid proof. **Neither has ever changed anyone's mind about anything.**",
-      "discovery": "use — a true argument made in a moment where the other person could not have borne it plainly."
-    },
-    {
-      "id": "the_double_register",
-      "name": "The Fault Reading",
-      "parts": [
-        "deathsense",
-        "order_sense"
-      ],
-      "functions": [
-        "reveal",
-        "foresee",
-        "track"
-      ],
-      "domains": [
-        "ashwarden",
-        "lattice"
-      ],
-      "combinationTier": "cross-axis",
-      "harmRung": "none",
-      "effect": "You read a thing's STRUCTURE and its ENDING at once — where it bears load, and where it is already dying. **The two readings do not want to share a channel**, so you get a map with two layers slightly out of register. ⚠️ **THE MISALIGNMENT IS THE POINT AND THE USE: where the layers disagree, you have found the fault** — the seam carrying weight it can no longer carry. Neither reading alone finds it, and it tells you exactly where a bridge, a wall, an argument or a body gives way first.",
-      "cannot": "⛔ **IT NEVER RESOLVES CLEANLY.** Stop trying to hold the two apart and you get noise; stop trying to hold them together and you get noise. **You must simply let both be present and accept the double vision.** It costs more than either reading alone, and it will always be rough.",
-      "discovery": "use — deathsense and order-sense held open in the same act, on a thing that is both STRUCTURED and DYING. **Discovered in play by Silas Weir at the rune-binding, 2026-07-12** — he stopped fighting the friction and let the two readings sit out of register, and the runes landed where the spear already had an opinion about what it was.",
-      "authoredFrom": "⛔ EMERGENT — this recipe did not exist. It was created by a player co-activating two abilities the game had no combination for. The GM narrated it perfectly and the engine minted nothing. **Authored retroactively so the discovery is real.**",
-      "braidName": "The Fault Reading",
-      "braidKey": "deathsense+order_sense",
-      "_renamed": {
-        "was": "The Double Register",
-        "why": "⚠️ 'The Double Register' named the METHOD and nothing else — Erik: 'could mean a lot of doubles; needs a hint of what braided and what it's for.' A FAULT is both a structural failure line (order-sense) and a thing going wrong (death-sense), so the name carries both parts AND the use."
-      }
-    }
-  ],
-  "discoverability": {
-    "byUse": "Pairing the two parts in a single beat surfaces the braid as a DISCOVERY — logged to codex + narrativeLog, thereafter a known technique. This is the primary path: players FIND combinations by trying things, and the world remembers they found them.",
-    "byReading": "A rune-cast or True Attention on a scene/self can hint a LATENT braid available to the wielder ('these two of yours want to be one') — discovery via the read.",
-    "byTeaching": "Masters know braids; a teacher (named in each recipe's discovery) can grant one directly, at a price or a bond.",
-    "generative": "SNG-020 can author a NEW braid in-grain when a player creatively pairs two owned abilities no authored recipe covers — validated, persisted, added to the discoverable set. The recipe list GROWS through play.",
-    "engineTie": "Recipes carry `parts` (the two ability ids), `functions`, `domains`, `discovery`. The engine: on a two-ability beat, check for a matching recipe (authored or generate one); gate on owning both; surface + persist the discovery. Extends emergence-recipes (SNG-010). Flagged to SNG-026."
+ "schemaVersion": 1,
+ "id": "combination_recipes",
+ "kind": "emergence",
+ "note": "Discoverable cross-domain combination recipes. Each braids TWO abilities from different domains into a third effect neither reaches alone (skill_functions.json doctrine). Extends the SNG-010 emergence-recipe engine. DISCOVERABILITY: recipes are found by USE (pairing the two abilities in a beat surfaces the braid as a discovery, logged to the codex + narrativeLog), by a rune-cast/Attention read that hints a latent braid, or by a teacher who knows it. `discovery` field says how each is found. Owning both parts is the gate (class-cost/capacity prices the breadth; this is the payoff). Authored by Aevi (PO) — a starter set; generative braids (SNG-020) extend it in-grain.",
+ "recipes": [
+  {
+   "id": "warding_peace",
+   "name": "The Warding Peace",
+   "parts": [
+    "prism_ward",
+    "stillcraft"
+   ],
+   "functions": [
+    "shield",
+    "bind"
+   ],
+   "domains": [
+    "radiant",
+    "reach_violence_peace"
+   ],
+   "effect": "A light-bound truce-field: violence cannot be RAISED within it, not merely blocked. The cause of harm is forbidden, lit and held.",
+   "cannot": "Holds only while sustained; a will already committed to violence strains it; does not stop harm from outside the field.",
+   "discovery": "use — shield + de-escalate together in one beat; or taught at the Marchward"
   },
-  "combinationTiers": {
-    "within-tradition": "Two crafts of the SAME people. The most learnable — their own masters teach these.",
-    "kin-civilization": "Two peoples who share a secondary disposition lean and therefore a border (world_framing: adjacency = kinship). Learnable where their lands meet.",
-    "cross-axis": "Two peoples from entirely different axes. Rare, powerful, strange — usually discovered by USE, in a moment where someone needed both at once. Few are taught anywhere.",
-    "cross-pole": "The two poles of a SINGLE axis — the braids that belong to neither people and require standing in both (harbored_flame, meaning_engine, the_turning_word). The hardest and the most meaningful: to hold an axis whole rather than choose an end of it."
+  {
+   "id": "unseen_cut",
+   "name": "The Unseen Cut",
+   "parts": [
+    "the_edge",
+    "umbracraft"
+   ],
+   "functions": [
+    "strike",
+    "conceal"
+   ],
+   "domains": [
+    "reach_violence_peace",
+    "reach_dark_light"
+   ],
+   "effect": "A decisive strike from a direction that was never there — the disciplined kill delivered through concealment. Violence carried on shadow.",
+   "cannot": "Total light defeats the concealment; one strike, then you're seen; the Edge's honor-forms frown on it (a Redline reputation cost).",
+   "discovery": "use — strike from concealment; or an Umbral assassin's teaching"
   },
-  "crossPoleNote": "The cross-pole braids are the ONLY sanctioned road to your own antipode — the one thing the domain-access model forbids by every ordinary means. Four now exist, one per built axis pair: the_harbored_flame (dark↔light) · the_meaning_engine (mechanical↔spiritual) · the_turning_word (emotional↔logical) · **the_called_back (death↔life — added 2026-07-12 because Erik's necromancer RAISED A RAVEN and the braid he had already played did not exist).** To carry a braid is to hold an axis WHOLE rather than choose an end of it. It is the rarest and most meaningful thing a character can do, and no people will teach it.",
-  "theTwelveBraids": {
-    "principle": "ONE braid per axis. Twelve axes, twelve braids. To carry one is to hold an axis WHOLE rather than choose an end of it — and it is the ONLY sanctioned road to your own antipode, which the domain-access model closes to you forever by every ordinary means.",
-    "cultsCondemnAllOfThem": "⛔ THE CULT OF EACH PURE POLE CALLS ITS AXIS'S BRAID AN ABOMINATION — and both cults of an axis condemn the SAME braid, for opposite reasons. The living civilizations quietly permit them. **That disagreement IS the difference between a people and a cult.**",
-    "count": "12 of 12",
-    "authored": [
-      "The Named Chaos",
-      "The Called-Back",
-      "The Warden's Blow",
-      "The Truer Story",
-      "The Fallen Grace",
-      "The Unified Act",
-      "The Load-Bearing Word",
-      "The Kept Appointment",
-      "The Cleared Ground",
-      "The Harbored Flame",
-      "The Meaning-Engine",
-      "The Turning Word"
-    ]
+  {
+   "id": "mercy_knowing",
+   "name": "The Mercy-Knowing",
+   "parts": [
+    "quickening",
+    "palework"
+   ],
+   "functions": [
+    "heal",
+    "break"
+   ],
+   "domains": [
+    "reach_death_life",
+    "reach_death_life"
+   ],
+   "effect": "The holder of both life and death can KNOW, truly, whether a body should be pulled back or let go — and do either rightly. The Quiet-in-the-Quickwood as a skill.",
+   "cannot": "Knowing is not commanding the outcome the world allows; the most sacred and most terrible braid — it will not lie to you about which mercy is called for.",
+   "discovery": "use — hold both traditions and attend a dying thing; the braid surfaces itself. The rarest teaching, held by few.",
+   "note": "Same-domain poles (life+death) rather than two domains — the co-firing braid; the exception that proves combination is about POLES not just packs."
   },
-  "canonPairing": "⛔ SNG-344: THE PAIR IS CANON — this file and world/braid_recipes.json are NOT competitors and neither supersedes the other. Zero ids in common, and they key differently (parts:[a,b] here vs braidKey 'a+b' there). This file is the MECHANICAL authority; world/braid_recipes.json is the NAMING authority. One NAMES a braid, the other RESOLVES it. Do not merge, do not delete, do not 'reconcile' by dropping either — the join is an authored crosswalk (Aevi, SNG-344), not an engine merge. ⚠️ THREE OF THE SEVEN NAMED BRAIDS ALREADY HAVE A MECHANICAL RECIPE HERE UNDER A DIFFERENT NAME: Undying Ledger = the_double_register, Shatterlight = the_sounding, The Hollowing Sight = the_counted_end. Those are naming COLLISIONS to resolve, not blanks to fill — one pairing must not surface two names to the player.",
-  "_pairing": "⚠️ SNG-344. THE PAIR IS CANON, NOT EITHER FILE. This table says what a combination DOES; `world/braid_recipes.json` NAMES it. Entries with a `braidName` are linked; the rest are mechanics whose braid has not been named yet, and naming them is authoring rather than merging.",
-  "_stillToName": {
-    "_note": "⚠️ THE 4 NAMED BRAIDS WITH NO MECHANICS — the other half of the crosswalk, and the harder half: these need an `effect` and a `cannot` authored, not a name chosen.",
-    "pending": [
-      {
-        "braidKey": "order_sense+palework",
-        "name": "Ashen Meridian",
-        "parts": [
-          "order_sense",
-          "palework"
-        ]
-      },
-      {
-        "braidKey": "the-attended-end+the_shadow_work",
-        "name": "Marrow's Wings",
-        "parts": [
-          "the-attended-end",
-          "the_shadow_work"
-        ]
-      },
-      {
-        "braidKey": "boundary_stone+the_shielding_word",
-        "name": "You Shall Not Pass",
-        "parts": [
-          "boundary_stone",
-          "the_shielding_word"
-        ]
-      },
-      {
-        "braidKey": "deathsense+the-attended-end",
-        "name": "The Received Ending",
-        "parts": [
-          "deathsense",
-          "the-attended-end"
-        ]
-      }
-    ]
+  {
+   "id": "meaning_engine",
+   "name": "The Meaning-Engine",
+   "parts": [
+    "enginecraft",
+    "numenwork"
+   ],
+   "functions": [
+    "mend",
+    "reveal"
+   ],
+   "domains": [
+    "reach_mechanical_spiritual",
+    "reach_mechanical_spiritual"
+   ],
+   "effect": "A machine commanded by WHY, not just HOW — a Precursor work run by significance. The only way to truly treat with What Sleeps Under, which is both mechanism and meaning.",
+   "cannot": "Requires dense substrate; the machine still obeys its physics, only now also its meaning; What Sleeps Under may answer, and answering is its own peril.",
+   "discovery": "use at a deep Precursor site holding both; or Ledda / the Deep Warden may hint it",
+   "note": "The braid the deep arc is built around."
   },
-  "_duplicateNames": {
-    "_note": "⚠️ FOUND BY MY OWN UNIQUENESS ASSERTION WHILE RENAMING, AND NOT MINE: two names each appear on two different recipes. A player shown either would have no way to tell which combination they hold.",
-    "duplicates": [
-      "The Harbored Flame",
-      "The Meaning-Engine"
-    ],
-    "_forErik": "which of each pair keeps the name is a content call — flagged rather than silently resolved."
+  {
+   "id": "riding_order",
+   "name": "The Riding Order",
+   "parts": [
+    "wildcraft",
+    "latticework"
+   ],
+   "functions": [
+    "break",
+    "bind"
+   ],
+   "domains": [
+    "reach_chaos_order",
+    "reach_chaos_order"
+   ],
+   "effect": "Unmake a structure and re-bind its pieces mid-collapse into what you need — chaos and order in one motion. The Living-Lattice jewel as a technique.",
+   "cannot": "The window is a heartbeat; miss the re-bind and you've only made chaos; drifts both poles at once, exhausting.",
+   "discovery": "use — break and bind in the same beat; learned at the Living Lattice"
+  },
+  {
+   "id": "the_whole_act",
+   "name": "The Whole Act",
+   "parts": [
+    "soma",
+    "noesis"
+   ],
+   "functions": [
+    "move",
+    "reveal"
+   ],
+   "domains": [
+    "reach_body_mind",
+    "reach_body_mind"
+   ],
+   "effect": "Body and mind as one instrument — thought and motion stop being separate; you act faster than either could decide. The Middle Way's ideal made a skill.",
+   "cannot": "Both must be trained near-equally; a body-heavy or mind-heavy wielder gets a lesser version; the extremes (Temple, Cogitarium) cannot do it at all.",
+   "discovery": "use — hold both near-equal and act under pressure; taught at the Middle Way"
+  },
+  {
+   "id": "the_sounding",
+   "name": "Shatterlight",
+   "parts": [
+    "sonic_resonance",
+    "prism_sight"
+   ],
+   "functions": [
+    "strike",
+    "reveal"
+   ],
+   "domains": [
+    "harmonic",
+    "radiant"
+   ],
+   "effect": "Ring a place and READ what rings back — map a location's whole pole-disposition and hidden co-firings at once. Resonance as sonar for the coordinate-world.",
+   "cannot": "Loud — announces you; reveals disposition, not intent; a dead-silent (origin-flat) place returns nothing.",
+   "discovery": "use — resonate then perceive; a Heights rune-reader's trick",
+   "braidName": "Shatterlight",
+   "braidKey": "prism_sight+sonic_resonance",
+   "_renamed": {
+    "was": "The Sounding",
+    "why": "⚠️ SHATTERLIGHT WINS, and the rename lands HERE rather than on the braid table. I decided Shatterlight beats 'The Sounding' — the one case where the evocative name is the MORE accurate one, because it is the only name that says both parts are present: the splitting and the ringing. Then my own resync rule ('braid name = mechanical name') blindly flipped it back. The decision was right; the ENFORCEMENT overwrote it. Fixed by moving the winning name into the mechanical table, so the rule and the decision agree instead of fighting."
+   }
+  },
+  {
+   "id": "the_harbor_light",
+   "name": "The Harbored Flame",
+   "parts": [
+    "umbracraft",
+    "light_well"
+   ],
+   "functions": [
+    "conceal",
+    "heal"
+   ],
+   "domains": [
+    "reach_dark_light",
+    "radiant"
+   ],
+   "effect": "A hidden sanctuary of restoring light — conceal a place so well it can't be found, and fill it with healing radiance the dark would otherwise forbid. Shelter AND mending in one.",
+   "cannot": "The two poles fight — sustaining both is costly; a searcher who brings their own light can crack it.",
+   "discovery": "use — conceal + heal a hidden space; an Umbral healer's craft"
+  },
+  {
+   "id": "rooted_stand",
+   "name": "The Rooted Stand",
+   "parts": [
+    "quickening",
+    "soma"
+   ],
+   "functions": [
+    "heal",
+    "shield"
+   ],
+   "domains": [
+    "reach_death_life",
+    "reach_body_mind"
+   ],
+   "effect": "Life poured through a trained body — stand unbroken, healing as fast as you're hurt, rooted like the Quickwood itself. The warrior-warden's braid.",
+   "cannot": "The overgrowth risk of Quickening plus the body's true limit — push too far and you grow WRONG; energy-hungry.",
+   "discovery": "use — heal and endure together; a Flesh-Temple / Quickwood crossing"
+  },
+  {
+   "id": "true_word",
+   "name": "The True Word",
+   "parts": [
+    "numenwork",
+    "storykeeper"
+   ],
+   "functions": [
+    "reveal",
+    "bind"
+   ],
+   "domains": [
+    "reach_mechanical_spiritual",
+    "valley_craft"
+   ],
+   "effect": "Attend a truth so fully and tell it so well that it BINDS — a story that, once spoken, cannot be unbelieved because it is simply true and simply told. The counter to the Cathedral of Convincing.",
+   "cannot": "Only works on the actually-true; a beautiful lie breaks it; the Stillhold's buried truths resist being said.",
+   "discovery": "use — reveal by attention + tell by story; the Wend keepers and the Numen both hold pieces"
+  },
+  {
+   "id": "perfect_form",
+   "name": "The Perfect Form",
+   "parts": [
+    "the_edge",
+    "latticework"
+   ],
+   "functions": [
+    "strike",
+    "bind"
+   ],
+   "domains": [
+    "reach_violence_peace",
+    "reach_chaos_order"
+   ],
+   "effect": "A fight conducted like a proof — every strike lawful, every opening foreseen; the Marcher's duel as living structure.",
+   "cannot": "Wildcraft unravels it; a truly chaotic foe breaks the proof.",
+   "discovery": "taught at the Redline; or use — strike + bind in the forms"
+  },
+  {
+   "id": "unraveling_blow",
+   "name": "The Unraveling Blow",
+   "parts": [
+    "wildcraft",
+    "strike_basic"
+   ],
+   "functions": [
+    "strike",
+    "break"
+   ],
+   "domains": [
+    "reach_chaos_order",
+    "baseline"
+   ],
+   "effect": "A strike that lands where the plan broke — damage scales with the disorder you made first.",
+   "cannot": "Against the truly formless there is no plan to break.",
+   "discovery": "use — break a plan, then strike into it; Churn-taught"
+  },
+  {
+   "id": "immovable_calm",
+   "name": "The Immovable Calm",
+   "parts": [
+    "soma",
+    "stillcraft"
+   ],
+   "functions": [
+    "shield",
+    "bind"
+   ],
+   "domains": [
+    "reach_body_mind",
+    "reach_violence_peace"
+   ],
+   "effect": "A guard that de-escalates — attacks are absorbed and somehow the fight is over; the Temple Guardian's signature.",
+   "cannot": "Cannot pursue; the guard ends fights, doesn't win wars.",
+   "discovery": "taught at the Flesh-Temple; or use — brace + de-escalate together"
+  },
+  {
+   "id": "foregone_conclusion",
+   "name": "The Foregone Conclusion",
+   "parts": [
+    "noesis",
+    "latticework"
+   ],
+   "functions": [
+    "reveal",
+    "bind"
+   ],
+   "domains": [
+    "reach_body_mind",
+    "reach_chaos_order"
+   ],
+   "effect": "Out-model an opponent so completely their attack fails before it starts — the War-Thinker's checkmate.",
+   "cannot": "The model is only as good as its inputs; wild luck defeats clean prediction.",
+   "discovery": "Cogitarium-taught; or use — model then bind"
+  },
+  {
+   "id": "grasping_green",
+   "name": "The Grasping Green",
+   "parts": [
+    "root_hold",
+    "quickening"
+   ],
+   "functions": [
+    "bind",
+    "heal"
+   ],
+   "domains": [
+    "ent_form",
+    "reach_death_life"
+   ],
+   "effect": "Roots bind the foe while living growth mends you mid-fight — attrition the green always wins. The Thorn-Warden's (and the Ent's) signature.",
+   "cannot": "Needs earth; fire changes the equation entirely.",
+   "discovery": "Deepwood Walkers teach it; or use — root-hold + heal in one fight"
+  },
+  {
+   "id": "judging_beam",
+   "name": "The Judging Beam",
+   "parts": [
+    "radiance",
+    "kindle"
+   ],
+   "functions": [
+    "strike",
+    "reveal"
+   ],
+   "domains": [
+    "reach_dark_light",
+    "reach_dark_light"
+   ],
+   "effect": "A strike that reveals as it burns — illusions die first, then the target's cover. The Blaze-Lance signature.",
+   "cannot": "What is truly as it appears takes only the burn.",
+   "discovery": "Plateau-taught; or use — reveal + strike as one beam"
+  },
+  {
+   "id": "quiet_end",
+   "name": "The Quiet End",
+   "parts": [
+    "palework",
+    "stillcraft"
+   ],
+   "functions": [
+    "break",
+    "bind"
+   ],
+   "domains": [
+    "reach_death_life",
+    "reach_violence_peace"
+   ],
+   "effect": "A strike that concludes — against the dying, the raging, the unnatural, it simply finishes what was already ending. The Pale Reaper's mercy.",
+   "cannot": "Cannot end what is whole and healthy — it concludes, never murders.",
+   "discovery": "Ashwarden-taught, rarely; or use — ease + still in violence"
+  },
+  {
+   "id": "the_hidden_road",
+   "name": "The Hidden Road",
+   "parts": [
+    "shadowstep",
+    "false_trail"
+   ],
+   "functions": [
+    "move",
+    "conceal"
+   ],
+   "domains": [
+    "umbral"
+   ],
+   "effect": "You step the dark from one place to another while a convincing trail walks somewhere else entirely. Pursuit follows the trail; you were never on it.",
+   "cannot": "The decoy trail must end somewhere plausible. A pursuer who reaches its end and finds nothing knows exactly what you did.",
+   "discovery": "use — shadowstep away in the same beat you lay a false trail; or taught in the Underlight",
+   "combinationTier": "within-tradition"
+  },
+  {
+   "id": "the_deep_quiet",
+   "name": "The Deep Quiet",
+   "parts": [
+    "stillcraft",
+    "the_held_breath"
+   ],
+   "functions": [
+    "bind",
+    "shield"
+   ],
+   "domains": [
+    "stillhold"
+   ],
+   "effect": "A silence so complete that violence loses its footing inside it — nobody can find the moment to begin.",
+   "cannot": "The instant the quiet breaks, everything it was holding arrives at once, and all of it at you.",
+   "discovery": "use — hold the breath while binding a room; or taught at the Stillhold",
+   "combinationTier": "within-tradition"
+  },
+  {
+   "id": "the_whole_body",
+   "name": "The Whole Body",
+   "parts": [
+    "soma",
+    "perfect_motion"
+   ],
+   "functions": [
+    "move",
+    "shield"
+   ],
+   "domains": [
+    "somatic"
+   ],
+   "effect": "Body and motion become one instrument — you move through a fight, a fall, a crowd as though the world had agreed to make room.",
+   "cannot": "It is still a body. It can still be outnumbered, and it still has to land.",
+   "discovery": "use — perfect motion inside a somatic exertion; or trained at the Flesh-Temples",
+   "combinationTier": "within-tradition"
+  },
+  {
+   "id": "the_counted_end",
+   "name": "Pale Reckoning",
+   "parts": [
+    "palework",
+    "deathsense"
+   ],
+   "functions": [
+    "reveal",
+    "break"
+   ],
+   "domains": [
+    "ashwarden"
+   ],
+   "effect": "You see an ending's exact hour, and you can call it in early. ⚠️ **THE UTILITY: you are not overcoming a thing's life, only moving it to an hour already owed — so it costs a fraction of killing outright and cannot be resisted by strength.** Against anything already dying, wounded, rotten or failing it is the cheapest ending in the game. Against something whole it does nothing at all. **The Ashwarden mercy is the same act pointed at a person: no sooner, no crueller, no waste.**",
+   "cannot": "⛔ **IT CANNOT BRING AN ENDING THAT WAS NOT ALREADY COMING** — against anything whole and healthy it simply fails and the cost is spent. Used to hasten what should have lived, it marks the wielder permanently and visibly.",
+   "discovery": "use — read a death, then tend it in the same beat; or taught in the Hollow March",
+   "combinationTier": "within-tradition",
+   "braidName": "Pale Reckoning",
+   "braidKey": "deathsense+palework",
+   "_renamed": {
+    "was": "The Counted End",
+    "why": "⚠️ 'The Counted End' sounded pointless — Erik: 'no sooner, no crueller… what's it doing then? what's the utility?' My Amendment 3 failure: I wrote what the craft IS and never what it is FOR. PALE RECKONING names both parts (palework + the death-read) and the act — a reckoning is calling in what is already owed. ⚠️ And it avoids 'The Owed Hour', which I nearly used and which collides in the ear with my own `The Borrowed Hour`."
+   }
+  },
+  {
+   "id": "the_lattice_engine",
+   "name": "The Lattice-Engine",
+   "parts": [
+    "latticework",
+    "enginecraft"
+   ],
+   "functions": [
+    "bind",
+    "mend"
+   ],
+   "domains": [
+    "lattice",
+    "enginewright"
+   ],
+   "effect": "Structure and mechanism braided: a system that not only runs but CANNOT run wrong — it corrects itself toward its design.",
+   "cannot": "A self-correcting system corrects toward the design it was given. If the design is wrong, it will pursue that wrongness perfectly and forever.",
+   "discovery": "use — bind a structure while mending its mechanism; taught wherever the Gearlands meet the Grand Lattice",
+   "combinationTier": "kin-civilization"
+  },
+  {
+   "id": "the_sung_lattice",
+   "name": "The Sung Lattice",
+   "parts": [
+    "sonic_resonance",
+    "latticework"
+   ],
+   "functions": [
+    "bind",
+    "break"
+   ],
+   "domains": [
+    "harmonic",
+    "lattice"
+   ],
+   "effect": "Order given a voice: a structure sung into or out of true. The Harmonics' folk-craft reaching up toward what the Lattice-Cities do at scale.",
+   "cannot": "The Valley's sung version is small. Against a true Lattice working, it is a folk song against a cathedral.",
+   "discovery": "use — resonate against a bound structure; or shown by any Lattice-trained visitor to the Heights",
+   "combinationTier": "kin-civilization"
+  },
+  {
+   "id": "the_grown_ward",
+   "name": "The Grown Ward",
+   "parts": [
+    "quickening",
+    "boundary_stone"
+   ],
+   "functions": [
+    "ward",
+    "heal"
+   ],
+   "domains": [
+    "rootkin",
+    "valley_craft"
+   ],
+   "effect": "A boundary that is ALIVE — it grows into place, roots, and thickens over years. The Valley's oldest walls were made this way, and they are still growing.",
+   "cannot": "It takes time to become anything. Planted today, it wards almost nothing; the Rootkin plant for grandchildren.",
+   "discovery": "use — quicken a set boundary; or learned at Thornwake Glade",
+   "combinationTier": "kin-civilization"
+  },
+  {
+   "id": "the_tended_end",
+   "name": "The Tended End",
+   "parts": [
+    "palework",
+    "greenlore"
+   ],
+   "functions": [
+    "heal",
+    "break"
+   ],
+   "domains": [
+    "ashwarden",
+    "valley_craft"
+   ],
+   "effect": "Decay guided rather than merely allowed — a thing rots the right way, into the right soil, and feeds what comes next.",
+   "cannot": "It is a slow craft, and it will not be hurried for your grief. Some things you want ended are ended usefully only over years.",
+   "discovery": "use — pale-work something with a green hand; or taught where the Palelands meet the Quickwood",
+   "combinationTier": "kin-civilization"
+  },
+  {
+   "id": "the_read_engine",
+   "name": "The Read Engine",
+   "parts": [
+    "mech_sense",
+    "noesis"
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "domains": [
+    "enginewright",
+    "cogitant"
+   ],
+   "effect": "Machine-sense and mind-craft together: you do not merely read what a mechanism does — you reconstruct the MIND that designed it, and think its next thought.",
+   "cannot": "Reconstructing a designer is not knowing them. The Cogitants warn that you are, in the end, reading yourself.",
+   "discovery": "use — read a mechanism while holding it in a memory-palace; or in the Cogitarium's engine-halls",
+   "combinationTier": "kin-civilization"
+  },
+  {
+   "id": "the_singing_dark",
+   "name": "The Singing Dark",
+   "parts": [
+    "sonic_resonance",
+    "darksight"
+   ],
+   "functions": [
+    "reveal",
+    "move"
+   ],
+   "domains": [
+    "harmonic",
+    "umbral"
+   ],
+   "effect": "See by sound where there is no light at all — the black is mapped by echo, and it is MORE legible than sight would make it.",
+   "cannot": "A silent dark defeats it entirely. And the sound you make to see with, others can hear.",
+   "discovery": "use — resonate in true darkness; a common Umbral trade-craft picked up by Harmonic travelers",
+   "combinationTier": "kin-civilization"
+  },
+  {
+   "id": "the_burning_truth",
+   "name": "The Burning Truth",
+   "parts": [
+    "radiance",
+    "verity"
+   ],
+   "functions": [
+    "reveal",
+    "strike"
+   ],
+   "domains": [
+    "blazeborn",
+    "verist"
+   ],
+   "effect": "Revelation as a weapon: a truth spoken and LIT at once, that cannot be looked away from and cannot be denied by anyone present.",
+   "cannot": "It burns what it lands on, including bystanders, including you. Both peoples who make it consider it a last resort; both use it more than they admit.",
+   "discovery": "use — speak a true thing while kindling revelation; taught nowhere willingly",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_kind_lie",
+   "name": "The Kind Lie",
+   "parts": [
+    "falsecraft",
+    "pathos"
+   ],
+   "functions": [
+    "conceal",
+    "heal"
+   ],
+   "domains": [
+    "veilwright",
+    "threnodist"
+   ],
+   "effect": "A falsehood built entirely out of care — it holds someone up who would not survive the true thing today, and it holds only until they can.",
+   "cannot": "It is still a lie, and it has a shelf life. When it fails — and it fails — the fall is longer for the height you gave them.",
+   "discovery": "use — conceal a truth while tending the feeling under it; the Veilwrights teach it as an act of mercy and the Verists call that the greatest lie of all",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_cold_shadow",
+   "name": "The Cold Shadow",
+   "parts": [
+    "umbracraft",
+    "logos"
+   ],
+   "functions": [
+    "conceal",
+    "bind"
+   ],
+   "domains": [
+    "umbral",
+    "syllogist"
+   ],
+   "effect": "Reasoning that hides itself: you build an argument, a plan, a case that is airtight and that nobody can find the shape of until it closes.",
+   "cannot": "The argument still has to be sound. A hidden bad argument is simply a bad argument nobody caught yet — until they do.",
+   "discovery": "use — conceal a chain of reasoning as you build it; a Cogitarium technique the Umbrals perfected",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_stopped_hour",
+   "name": "The Stopped Hour",
+   "parts": [
+    "the_fixed_point",
+    "death_ward"
+   ],
+   "functions": [
+    "ward",
+    "bind"
+   ],
+   "domains": [
+    "lattice",
+    "ashwarden"
+   ],
+   "effect": "You become the fixed point a death cannot get past — not turning the hour aside but REFUSING it, and the refusal holds because you do not move.",
+   "cannot": "You must not move. Not to eat, not to strike, not to save a second person. The hour waits exactly as long as you do.",
+   "discovery": "use — anchor yourself while warding a death; there is no school that teaches this and several that forbid it",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_wild_green",
+   "name": "The Wild Green",
+   "parts": [
+    "wildcraft",
+    "greenlore"
+   ],
+   "functions": [
+    "heal",
+    "break"
+   ],
+   "domains": [
+    "churnfolk",
+    "valley_craft"
+   ],
+   "effect": "Growth let entirely off its leash — a wound closes wrong and strong, a wall goes green and comes apart, a field becomes a jungle in a season.",
+   "cannot": "You cannot aim it and you cannot call it back. The Churnfolk think that is the point and the Valleyfolk think that is the problem.",
+   "discovery": "use — quicken something without binding what it becomes; the Churn teaches it by accident, constantly",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_shrouded_wound",
+   "name": "The Shrouded Wound",
+   "parts": [
+    "shroud",
+    "staunch"
+   ],
+   "functions": [
+    "conceal",
+    "heal"
+   ],
+   "domains": [
+    "umbral",
+    "rootkin"
+   ],
+   "effect": "Hold a mortal wound closed AND hide that you are hurt at all — you walk out of the room, and nobody knows to follow.",
+   "cannot": "You are still holding a mortal wound closed. The shroud buys you distance, not time, and the moment you let either go, both fail.",
+   "discovery": "use — staunch a wound while shrouding yourself in the same beat",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_measured_ruin",
+   "name": "The Measured Ruin",
+   "parts": [
+    "wither",
+    "order_sense"
+   ],
+   "functions": [
+    "break",
+    "reveal"
+   ],
+   "domains": [
+    "ashwarden",
+    "lattice"
+   ],
+   "effect": "Decay applied with a designer's precision — this beam and not that one, this hinge, this word in the contract. The building comes down exactly where you meant.",
+   "cannot": "It requires you to be RIGHT about the structure. A measured ruin against a misread design brings down something you needed.",
+   "discovery": "use — read a structure's order, then wither its load-bearing piece",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_open_mind",
+   "name": "The Open Mind",
+   "parts": [
+    "thin_place",
+    "memory_palace"
+   ],
+   "functions": [
+    "reveal",
+    "ward"
+   ],
+   "domains": [
+    "numinous",
+    "cogitant"
+   ],
+   "effect": "You open a thin place INSIDE a memory-palace — a room in your own mind where the numinous can be met, held, and walked away from safely.",
+   "cannot": "Safely is doing a great deal of work in that sentence. What you invite into your own mind has an address there now.",
+   "discovery": "use — open a thin place while standing in the palace; the Numinous permit this only to their own, and the Cogitants do it anyway",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_harbored_truth",
+   "name": "The Harbored Truth",
+   "parts": [
+    "the_harbor",
+    "verity"
+   ],
+   "functions": [
+    "conceal",
+    "reveal"
+   ],
+   "domains": [
+    "umbral",
+    "verist"
+   ],
+   "effect": "Keep a true thing hidden and INTACT — unspoken, unweakened, unrotted — until the hour it can be spoken and land with its whole weight.",
+   "cannot": "The truth keeps; the person waiting does not. Harboring a truth someone needed today in order to deploy it beautifully next year is a betrayal wearing patience.",
+   "discovery": "use — harbor something and hold it true in one beat; the Verists debate endlessly whether this counts as honesty",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_bright_blade",
+   "name": "The Bright Blade",
+   "parts": [
+    "kindle",
+    "the_edge"
+   ],
+   "functions": [
+    "strike",
+    "reveal"
+   ],
+   "domains": [
+    "blazeborn",
+    "marcher"
+   ],
+   "effect": "A struck light that is also a struck blade — the blow lands and REVEALS, and what it reveals is often why the blow was necessary.",
+   "cannot": "Everyone sees what it reveals, including things you would rather not have shown, including about yourself.",
+   "discovery": "use — kindle in the same motion as an edge-strike; common in the Redline's border wars",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_still_engine",
+   "name": "The Still Engine",
+   "parts": [
+    "stillcraft",
+    "command_engine"
+   ],
+   "functions": [
+    "bind",
+    "mend"
+   ],
+   "domains": [
+    "stillhold",
+    "enginewright"
+   ],
+   "effect": "Command a mechanism to STOP and hold it stopped — a mill, a gate, a war-engine, a lock — bound in a peace it cannot argue with.",
+   "cannot": "Machines do not resent being stopped, but their owners do. And a stopped engine is still an engine; someone will start it again.",
+   "discovery": "use — bind an engine you have commanded; the Stillhold's quietest and least-loved export",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_borrowed_hour",
+   "name": "The Borrowed Hour",
+   "parts": [
+    "second_wind",
+    "death_ward"
+   ],
+   "functions": [
+    "heal",
+    "ward"
+   ],
+   "domains": [
+    "somatic",
+    "ashwarden"
+   ],
+   "effect": "Refuse your own ending AND keep moving through it — a body that should be down is up, finishing what it came to do.",
+   "cannot": "The hour is BORROWED. When you set it down, it arrives complete and all at once, and it does not negotiate. Somatics who do this twice do not do it a third time.",
+   "discovery": "use — take a second wind while warding your own death; no tradition teaches it and every tradition knows someone who did it",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_named_chaos",
+   "name": "The Named Chaos",
+   "parts": [
+    "truename_order",
+    "chaos_sense"
+   ],
+   "functions": [
+    "bind",
+    "reveal"
+   ],
+   "domains": [
+    "lattice",
+    "churnfolk"
+   ],
+   "effect": "Name the order inside a chaos — not imposing structure but FINDING the one that was already there, and setting the thing into it.",
+   "cannot": "There is not always one there. The Lattice's oldest error is naming an order onto a chaos that had none, and the chaos always eventually says so.",
+   "discovery": "use — sense a chaos, then name its order in the same beat; the one craft both peoples claim to have invented",
+   "combinationTier": "cross-pole",
+   "axis": "chaos_order",
+   "harmRung": "incapacitating",
+   "cultCondemns": "The Grand Lattice's inner ring calls it a defect tolerated. Those who ride the Churn until nothing holds call it a cage with a nice view. **It is the only order anyone has ever been able to live inside.**",
+   "note": "RECLASSIFIED 2026-07-12: Lattice [order] and Churnfolk [chaos] are ANTIPODES on the ring. This was mislabelled cross-axis. It is a BRAID — order that BREATHES."
+  },
+  {
+   "id": "the_long_memory",
+   "name": "The Long Memory",
+   "parts": [
+    "echo_memory",
+    "storykeeper"
+   ],
+   "functions": [
+    "reveal",
+    "bind"
+   ],
+   "domains": [
+    "harmonic",
+    "valley_craft"
+   ],
+   "effect": "A place's echo and a people's story braided into one telling — you recover not just what happened here but what it MEANT to those it happened to.",
+   "cannot": "Meaning is not fact. What the story remembers and what the echo records will sometimes disagree, and you must choose which to carry.",
+   "discovery": "use — read a place's echo while keeping its story; the Valley's finest folk-craft and it knows it",
+   "combinationTier": "kin-civilization"
+  },
+  {
+   "id": "the_lit_lattice",
+   "name": "The Lit Lattice",
+   "parts": [
+    "glimmer_script",
+    "latticework"
+   ],
+   "functions": [
+    "ward",
+    "bind"
+   ],
+   "domains": [
+    "radiant_folk",
+    "lattice"
+   ],
+   "effect": "Written light bound into structure — a ward that is also a LAW: it does not merely block, it states the rule it is enforcing, and everyone can read it.",
+   "cannot": "A stated rule can be argued with, lawyered, and found a gap in. A silent ward cannot. The Lattice considers the legibility worth it; the Umbrals find it hilarious.",
+   "discovery": "use — bind a glimmer-script into a structure; standard at any Lattice border",
+   "combinationTier": "kin-civilization"
+  },
+  {
+   "id": "the_unmade_seal",
+   "name": "The Unmade Seal",
+   "parts": [
+    "unmake_seal",
+    "scatter"
+   ],
+   "functions": [
+    "break"
+   ],
+   "domains": [
+    "precursor",
+    "churnfolk"
+   ],
+   "effect": "A Precursor seal not picked but SCATTERED — its coherence unmade, so the lock stops being a lock rather than being opened.",
+   "cannot": "What the seal was holding closed is now simply open, and nobody planned for that, including you. The Precursors sealed things for reasons.",
+   "discovery": "use — scatter a seal you have addressed; the Churnfolk's favorite crime",
+   "combinationTier": "cross-axis"
+  },
+  {
+   "id": "the_beast_read",
+   "name": "The Beast-Read",
+   "parts": [
+    "beastfriend",
+    "body_read"
+   ],
+   "functions": [
+    "reveal",
+    "bind"
+   ],
+   "domains": [
+    "valley_craft",
+    "somatic"
+   ],
+   "effect": "Read an animal as a body rather than a mystery — its fear, its intent, the half-second before it bolts or bites — and answer it in kind.",
+   "cannot": "An animal read is not an animal tamed. Knowing exactly why it is about to bite you is not the same as it not biting you.",
+   "discovery": "use — body-read a creature you are befriending",
+   "combinationTier": "kin-civilization"
+  },
+  {
+   "id": "the_called_back",
+   "name": "The Called-Back",
+   "parts": [
+    "palework",
+    "quickening"
+   ],
+   "functions": [
+    "heal",
+    "reveal",
+    "bind"
+   ],
+   "domains": [
+    "ashwarden",
+    "rootkin"
+   ],
+   "combinationTier": "cross-pole",
+   "effect": "You call a thing back across the line it had already crossed. Not healing — RETURNING. The Ashwardens tend endings and the Rootkin tend growth, and they are antipodes with a working border and an exhausted mutual respect; to hold BOTH is to say *this ending was wrong, and I will carry the cost of unmaking it.* What comes back is alive. Whether it is the same is a question you will be answering for the rest of your life.",
+   "cannot": "It does not come back UNCHANGED — it comes back as something that has been dead, and it will always have been dead. And it is YOURS now, permanently, in the way a promise is yours. The Rootkin consider this the near edge of their own taboo; the Ashwardens consider it a theft from the only honest thing there is. Neither people will teach it. **You cannot learn this. You can only DO it — and then discover what you did.**",
+   "discovery": "use — palework and quickening held in the same act, at a moment when an ending is genuinely WRONG and you refuse it anyway. There is no teacher. There is no tome. **This is the cross-pole braid on the death↔life axis: the ONLY sanctioned road to your own antipode, and the hardest thing in the world to hold.**",
+   "axis": "death_life",
+   "harmRung": "none"
+  },
+  {
+   "id": "the_wardens_blow",
+   "name": "The Warden's Blow",
+   "parts": [
+    "the_edge",
+    "stillcraft"
+   ],
+   "functions": [
+    "strike",
+    "bind",
+    "ward"
+   ],
+   "domains": [
+    "marcher",
+    "stillhold"
+   ],
+   "axis": "violence_peace",
+   "combinationTier": "cross-pole",
+   "harmRung": "lethal",
+   "effect": "You strike ONCE — decisively, completely, and in a way that makes every further strike unnecessary. The fight does not continue. It does not resume tomorrow. **The violence is spent, entire, in a single act, so that peace can hold behind it.** It is the most terrible mercy in the world.",
+   "cannot": "You must actually END it. A Warden's Blow that leaves the thing standing is simply a murder attempt, and everyone will treat it as one. And you carry it — the Stillhold's priests will not bless it, will not absolve it, and will not pretend they do not know why you did it.",
+   "cultCondemns": "The Silent (peace-cult) call this the greatest possible betrayal: peace bought with blood is not peace. The Redline's deepest cut calls it cowardice — a single blow to avoid the honest work of war. **They are both wrong, and the Stillhold's people are alive because someone did it.**",
+   "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+  },
+  {
+   "id": "the_truer_story",
+   "name": "The Truer Story",
+   "parts": [
+    "falsecraft",
+    "verity"
+   ],
+   "functions": [
+    "conceal",
+    "reveal",
+    "heal"
+   ],
+   "domains": [
+    "veilwright",
+    "verist"
+   ],
+   "axis": "falsehood_truth",
+   "combinationTier": "cross-pole",
+   "harmRung": "none",
+   "effect": "A story that is **false in every fact and true in the only way that matters** — and it lands as truth, because it IS one. Not a lie that comforts. A shape that holds what the facts could not carry.",
+   "cannot": "It must be TRUE in the way it claims to be. A Truer Story that is merely a kind lie collapses the moment it is tested, and takes the teller's credibility with it forever. And a Verist who knows what you did will say so, out loud, at the worst possible moment.",
+   "cultCondemns": "The Flensing (truth-cult) call it the most dangerous thing in the world. The Last Mask (falsehood-cult) call it a failure of nerve — why stop at true? **It has saved more people than the truth has.**",
+   "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+  },
+  {
+   "id": "the_fallen_grace",
+   "name": "The Fallen Grace",
+   "parts": [
+    "descent",
+    "ascent"
+   ],
+   "functions": [
+    "heal",
+    "bind",
+    "reveal"
+   ],
+   "domains": [
+    "abyssal",
+    "seraphic"
+   ],
+   "axis": "demonic_angelic",
+   "combinationTier": "cross-pole",
+   "harmRung": "incapacitating",
+   "effect": "Mercy that has **felt the hunger** — and forgives anyway. Judgment that knows exactly what it is condemning, because it wanted the same thing. **It binds where clean judgment only breaks**, because the one being judged can feel that you understand.",
+   "cannot": "You must actually have wanted it. A Fallen Grace offered by someone who never felt the pull is condescension, and it is heard as condescension, and it does nothing.",
+   "cultCondemns": "The Unfallen (angelic-cult) call it corruption at the root. The Devouring (demonic-cult) call it weakness dressed as virtue. **It is the only judgment anyone has ever accepted.**",
+   "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+  },
+  {
+   "id": "the_unified_act",
+   "name": "The Unified Act",
+   "parts": [
+    "soma",
+    "noesis"
+   ],
+   "functions": [
+    "move",
+    "strike",
+    "reveal"
+   ],
+   "domains": [
+    "somatic",
+    "cogitant"
+   ],
+   "axis": "body_mind",
+   "combinationTier": "cross-pole",
+   "harmRung": "damaging",
+   "effect": "Knowing and doing collapse into one motion. **There is no gap between the thought and the hand** — no tell, no wind-up, no moment where a reader could see it coming, because there is no 'coming'. It simply has happened.",
+   "cannot": "It is one act. You cannot think your way through a second one while performing the first; the union is total and it is brief. And a body that has done this cannot immediately do it again.",
+   "cultCondemns": "The Sculpted (body-cult) say the mind contaminates the body. The Discarnate (mind-cult) say the body contaminates the mind. **Both peoples' finest are, quietly, doing this.**",
+   "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+  },
+  {
+   "id": "the_load_bearing_word",
+   "name": "The Load-Bearing Word",
+   "parts": [
+    "thingcraft",
+    "formcraft"
+   ],
+   "functions": [
+    "shield",
+    "bind",
+    "mend"
+   ],
+   "domains": [
+    "mason",
+    "figurist"
+   ],
+   "axis": "concrete_abstract",
+   "combinationTier": "cross-pole",
+   "harmRung": "incapacitating",
+   "effect": "A symbol you can **stand on**. Meaning made structural — a promise that holds weight, a name that stops a wall falling, an argument you can shelter under in the rain. **The abstract, made to bear load.**",
+   "cannot": "It must be a meaning that is TRUE and a structure that is SOUND. Either half failing brings the whole thing down, and it brings it down on whoever was sheltering under it.",
+   "cultCondemns": "The Leaden (concrete-cult) deny it can exist. The Untethered (abstract-cult) find it a vulgar waste of a good idea. **The Quiet House at the Crossing is built on one.**",
+   "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+  },
+  {
+   "id": "the_kept_appointment",
+   "name": "The Kept Appointment",
+   "parts": [
+    "spanwork",
+    "hourcraft"
+   ],
+   "functions": [
+    "move",
+    "ward",
+    "reveal"
+   ],
+   "domains": [
+    "horizon",
+    "hourkeeper"
+   ],
+   "axis": "space_time",
+   "combinationTier": "cross-pole",
+   "harmRung": "incapacitating",
+   "effect": "To be in the **right place at the right moment** — which is a far harder thing than being able to do either. You arrive exactly when arriving matters, and not one breath before or after.",
+   "cannot": "You must know WHICH moment. The braid gets you there; it does not tell you where 'there' is. Arrive perfectly at the wrong appointment and you have wasted the rarest thing in the world.",
+   "cultCondemns": "The Unlanded (space-cult) never arrive at all. The Stopped (time-cult) never leave. **Neither has ever kept an appointment.**",
+   "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+  },
+  {
+   "id": "the_cleared_ground",
+   "name": "The Cleared Ground",
+   "parts": [
+    "ruinwork",
+    "makecraft"
+   ],
+   "functions": [
+    "break",
+    "mend",
+    "bind"
+   ],
+   "domains": [
+    "unmaker",
+    "wright"
+   ],
+   "axis": "destruction_creation",
+   "combinationTier": "cross-pole",
+   "harmRung": "damaging",
+   "effect": "The ending that **is** a founding. You unmake a thing so completely and so well that the ground it stood on is *ready* — and what you build there afterward stands on the ending as a foundation, not a scar.",
+   "cannot": "It requires you to be RIGHT that the thing should end, and to actually build. A Cleared Ground with nothing raised on it is just a ruin with pretensions, and the Unmakers will tell you so.",
+   "cultCondemns": "The Scouring (destruction-cult) clear and never build. The Ceaseless (creation-cult) build and never clear. **Every city worth living in was made this way.**",
+   "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+  },
+  {
+   "id": "the_harbored_flame_braid",
+   "name": "The Harbored Flame",
+   "parts": [
+    "umbracraft",
+    "radiance"
+   ],
+   "functions": [
+    "conceal",
+    "heal",
+    "reveal"
+   ],
+   "domains": [
+    "umbral",
+    "blazeborn"
+   ],
+   "axis": "dark_light",
+   "combinationTier": "cross-pole",
+   "harmRung": "incapacitating",
+   "effect": "A light you carry HIDDEN — warmth and revelation that the dark cannot put out and the Blaze cannot burn away, because it belongs to neither. **You can show one person one true thing in a place where showing anything would kill you both.**",
+   "cannot": "It is ONE light, for ONE moment. It will not illuminate a room and it will not warm a camp. And carrying it means the Unlit want it out and the Blaze wants it BIGGER, and both will find you.",
+   "cultCondemns": "The Unlit would put it out — it is a light, and lights must go. The Blaze would grow it until it consumed you — a light that is hidden is a light that is ASHAMED. **Neither can conceive of a small, sheltered, sufficient flame.**",
+   "discovery": "use — held together at a moment when neither the dark nor the light alone could have saved it."
+  },
+  {
+   "id": "the_meaning_engine_braid",
+   "name": "The Meaning-Engine",
+   "parts": [
+    "enginecraft",
+    "numenwork"
+   ],
+   "functions": [
+    "mend",
+    "reveal",
+    "bind"
+   ],
+   "domains": [
+    "enginewright",
+    "numinous"
+   ],
+   "axis": "mechanical_spiritual",
+   "combinationTier": "cross-pole",
+   "harmRung": "incapacitating",
+   "effect": "A mechanism that **MEANS**. The Enginewrights build it and it runs; the Numinous make it matter; and the thing that results does work in the world that neither craft could do alone — a machine that is also a prayer, and functions as both.",
+   "cannot": "It must actually MEAN something true. A Meaning-Engine built around a lie runs perfectly and produces nothing, and the failure is silent, and you will not notice for years.",
+   "cultCondemns": "The Great Engine's tenders say meaning is an inefficiency to be optimized out. The Unbodied say a mechanism is a cage for a meaning. **Halvex Coil is what happens when only the first half is believed.**",
+   "discovery": "use — a mechanism commanded and a thin place held open in the same act."
+  },
+  {
+   "id": "the_turning_word_braid",
+   "name": "The Turning Word",
+   "parts": [
+    "pathos",
+    "logos"
+   ],
+   "functions": [
+    "bind",
+    "reveal",
+    "heal"
+   ],
+   "domains": [
+    "threnodist",
+    "syllogist"
+   ],
+   "axis": "emotional_logical",
+   "combinationTier": "cross-pole",
+   "harmRung": "incapacitating",
+   "effect": "The argument that also **heals**. Reason alone cannot turn a heart; feeling alone cannot show it why. Held together, you can say the thing that is both TRUE and BEARABLE — and a person can actually change their mind, which is the rarest event in the world.",
+   "cannot": "It must be both. A Turning Word that is warm and false is manipulation; one that is true and cold is just a Verist being cruel with extra steps. Get either half wrong and you have made an enemy who is also, now, correct about you.",
+   "cultCondemns": "The Raw say reason is a wall built against feeling. The Bloodless say feeling is noise that corrupts a valid proof. **Neither has ever changed anyone's mind about anything.**",
+   "discovery": "use — a true argument made in a moment where the other person could not have borne it plainly."
+  },
+  {
+   "id": "the_double_register",
+   "name": "The Fault Reading",
+   "parts": [
+    "deathsense",
+    "order_sense"
+   ],
+   "functions": [
+    "reveal",
+    "foresee",
+    "track"
+   ],
+   "domains": [
+    "ashwarden",
+    "lattice"
+   ],
+   "combinationTier": "cross-axis",
+   "harmRung": "none",
+   "effect": "You read a thing's STRUCTURE and its ENDING at once — where it bears load, and where it is already dying. **The two readings do not want to share a channel**, so you get a map with two layers slightly out of register. ⚠️ **THE MISALIGNMENT IS THE POINT AND THE USE: where the layers disagree, you have found the fault** — the seam carrying weight it can no longer carry. Neither reading alone finds it, and it tells you exactly where a bridge, a wall, an argument or a body gives way first.",
+   "cannot": "⛔ **IT NEVER RESOLVES CLEANLY.** Stop trying to hold the two apart and you get noise; stop trying to hold them together and you get noise. **You must simply let both be present and accept the double vision.** It costs more than either reading alone, and it will always be rough.",
+   "discovery": "use — deathsense and order-sense held open in the same act, on a thing that is both STRUCTURED and DYING. **Discovered in play by Silas Weir at the rune-binding, 2026-07-12** — he stopped fighting the friction and let the two readings sit out of register, and the runes landed where the spear already had an opinion about what it was.",
+   "authoredFrom": "⛔ EMERGENT — this recipe did not exist. It was created by a player co-activating two abilities the game had no combination for. The GM narrated it perfectly and the engine minted nothing. **Authored retroactively so the discovery is real.**",
+   "braidName": "The Fault Reading",
+   "braidKey": "deathsense+order_sense",
+   "_renamed": {
+    "was": "The Double Register",
+    "why": "⚠️ 'The Double Register' named the METHOD and nothing else — Erik: 'could mean a lot of doubles; needs a hint of what braided and what it's for.' A FAULT is both a structural failure line (order-sense) and a thing going wrong (death-sense), so the name carries both parts AND the use."
+   }
+  },
+  {
+   "id": "ashen_meridian",
+   "name": "Ashen Meridian",
+   "parts": [
+    "order_sense",
+    "palework"
+   ],
+   "functions": [
+    "reveal",
+    "foresee",
+    "hinder",
+    "strike"
+   ],
+   "domains": [
+    "lattice",
+    "ashwarden"
+   ],
+   "braidName": "Ashen Meridian",
+   "combinationTier": "cross-domain",
+   "harmRung": "incapacitating",
+   "effect": "An ending has an ORDER, and this reads it — the sequence in which a thing comes apart, part by part, in the sequence it will actually go. A body, a truce, a wall, a company. You see which thing fails first and what follows from it, so you can put a hand on the one link that matters: brace it and buy time nobody thought was there, or break it and bring the whole sequence forward at once.",
+   "cannot": "It reads an ending ALREADY UNDERWAY — it cannot begin one, and a sound, whole, well-kept thing has no meridian to read. A genuinely chaotic collapse (a Churn-touched failure, a panic, an accident) has no order in it and returns nothing. And knowing the sequence is not standing in it: the link you brace still has to be braced by hand.",
+   "cultCondemns": "The Grand Lattice's inner ring would map every ending in advance and call the map a kindness. The Hollow would read the sequence only to shorten it. Neither can hold that the point of seeing the order is to be able to choose.",
+   "discovery": "use — read a structure's order and tend an ending in the same beat; or taught where an Ashwarden and a Lattice-reader work the same failure"
+  },
+  {
+   "id": "marrows_wings",
+   "name": "Marrow's Wings",
+   "parts": [
+    "the-attended-end",
+    "the_shadow_work"
+   ],
+   "functions": [
+    "conceal",
+    "travel",
+    "reveal",
+    "make"
+   ],
+   "domains": [
+    "ashwarden",
+    "umbral"
+   ],
+   "braidName": "Marrow's Wings",
+   "combinationTier": "cross-domain",
+   "harmRung": "none",
+   "effect": "Endings cast a shadow before them, and shadow can be worked. Shape it into passage: a dark road that runs to whatever is concluding within your reach, and go by it, unseen and faster than the news. You arrive where something is ending — a death, a siege, a bargain, a road washing out — before anyone who was sent to tell you.",
+   "cannot": "It only goes to ENDINGS. A place with nothing concluding in it offers no destination, so this is not travel, it is attendance. One passenger — yourself. The shadow hides you from watchers, never from the thing doing the ending. And arriving early is not arriving in time: you get there while it is happening, which is the whole point and is frequently unbearable.",
+   "cultCondemns": "The Unlit would use the road and never arrive, since arriving means seeing. The Hollow would go only to hasten what they found. Marrow goes and stays and does neither, which is the craft.",
+   "discovery": "use — travel by shadow toward a thing you knew was ending; or given, once, by a carrion bird who has decided about you"
+  },
+  {
+   "id": "you_shall_not_pass",
+   "name": "You Shall Not Pass",
+   "parts": [
+    "boundary_stone",
+    "the_shielding_word"
+   ],
+   "functions": [
+    "ward",
+    "bind",
+    "shield",
+    "resist"
+   ],
+   "domains": [
+    "valley_craft",
+    "seraphic"
+   ],
+   "braidName": "You Shall Not Pass",
+   "combinationTier": "cross-domain",
+   "harmRung": "none",
+   "effect": "A threshold ward that is not SET but SPOKEN, and bound to the one speaking. Stand in the gap — a doorway, a bridge, a stair, a gate — and say the refusal, and the line holds against far more than a boundary stone was ever meant to stop. Not a wall: a refusal, made structural, for exactly as long as you are willing to stand there and mean it.",
+   "cannot": "YOU MUST BE THERE AND STAY THERE. Step aside, fall, or stop meaning it and the line is gone — this is not a ward you set and leave. It holds a LINE, never an area, and nothing already past you is affected. And it inherits the Seraphic bound honestly: it will not hold against what deserves to land, so a person warding their own reckoning finds the line simply is not there.",
+   "cultCondemns": "The Unfallen would speak it over a whole people and call the ones outside impure. The valley's own would rather set a stone and go inside. Both are refusing the actual cost, which is standing in the gap yourself.",
+   "discovery": "use — hold a threshold and ward a person in the same beat, with no way back; or taught at a Marchward that lost one"
+  },
+  {
+   "id": "the_received_ending",
+   "name": "The Received Ending",
+   "parts": [
+    "deathsense",
+    "the-attended-end"
+   ],
+   "functions": [
+    "reveal",
+    "foresee",
+    "restore"
+   ],
+   "domains": [
+    "ashwarden",
+    "ashwarden"
+   ],
+   "braidName": "The Received Ending",
+   "combinationTier": "same-domain",
+   "harmRung": "none",
+   "effect": "Not reading an ending — RECEIVING it. The whole shape of what is concluding: what it was, what it did, what it needed and did not get, and what it is trying to hand over. An ending received is an ending attended, and that is not a metaphor: the dying give things to those who are actually there for it — a name, a location, a debt, a truth held back for forty years — and they give it to the one who received the whole of it rather than the one who happened to be standing nearby.",
+   "cannot": "It cannot prevent, delay, or soften anything — this is the Ashwarden discipline at its purest and its hardest. You must be PRESENT; there is no receiving at distance and no receiving after. And it is not free: what you receive, you carry. A wielder who attends many endings is changed by it, and the Ashwardens do not pretend otherwise or call that a flaw.",
+   "cultCondemns": "The Hollow would receive an ending in order to justify making more. Those who cannot bear it look away and call that respect. Both leave the dying unattended, which is the only thing the craft exists to prevent.",
+   "discovery": "use — sense a death underway and attend it to its finish without turning away; or given by Marrow, who has been present at more endings than anything you have met"
   }
+ ],
+ "discoverability": {
+  "byUse": "Pairing the two parts in a single beat surfaces the braid as a DISCOVERY — logged to codex + narrativeLog, thereafter a known technique. This is the primary path: players FIND combinations by trying things, and the world remembers they found them.",
+  "byReading": "A rune-cast or True Attention on a scene/self can hint a LATENT braid available to the wielder ('these two of yours want to be one') — discovery via the read.",
+  "byTeaching": "Masters know braids; a teacher (named in each recipe's discovery) can grant one directly, at a price or a bond.",
+  "generative": "SNG-020 can author a NEW braid in-grain when a player creatively pairs two owned abilities no authored recipe covers — validated, persisted, added to the discoverable set. The recipe list GROWS through play.",
+  "engineTie": "Recipes carry `parts` (the two ability ids), `functions`, `domains`, `discovery`. The engine: on a two-ability beat, check for a matching recipe (authored or generate one); gate on owning both; surface + persist the discovery. Extends emergence-recipes (SNG-010). Flagged to SNG-026."
+ },
+ "combinationTiers": {
+  "within-tradition": "Two crafts of the SAME people. The most learnable — their own masters teach these.",
+  "kin-civilization": "Two peoples who share a secondary disposition lean and therefore a border (world_framing: adjacency = kinship). Learnable where their lands meet.",
+  "cross-axis": "Two peoples from entirely different axes. Rare, powerful, strange — usually discovered by USE, in a moment where someone needed both at once. Few are taught anywhere.",
+  "cross-pole": "The two poles of a SINGLE axis — the braids that belong to neither people and require standing in both (harbored_flame, meaning_engine, the_turning_word). The hardest and the most meaningful: to hold an axis whole rather than choose an end of it."
+ },
+ "crossPoleNote": "The cross-pole braids are the ONLY sanctioned road to your own antipode — the one thing the domain-access model forbids by every ordinary means. Four now exist, one per built axis pair: the_harbored_flame (dark↔light) · the_meaning_engine (mechanical↔spiritual) · the_turning_word (emotional↔logical) · **the_called_back (death↔life — added 2026-07-12 because Erik's necromancer RAISED A RAVEN and the braid he had already played did not exist).** To carry a braid is to hold an axis WHOLE rather than choose an end of it. It is the rarest and most meaningful thing a character can do, and no people will teach it.",
+ "theTwelveBraids": {
+  "principle": "ONE braid per axis. Twelve axes, twelve braids. To carry one is to hold an axis WHOLE rather than choose an end of it — and it is the ONLY sanctioned road to your own antipode, which the domain-access model closes to you forever by every ordinary means.",
+  "cultsCondemnAllOfThem": "⛔ THE CULT OF EACH PURE POLE CALLS ITS AXIS'S BRAID AN ABOMINATION — and both cults of an axis condemn the SAME braid, for opposite reasons. The living civilizations quietly permit them. **That disagreement IS the difference between a people and a cult.**",
+  "count": "12 of 12",
+  "authored": [
+   "The Named Chaos",
+   "The Called-Back",
+   "The Warden's Blow",
+   "The Truer Story",
+   "The Fallen Grace",
+   "The Unified Act",
+   "The Load-Bearing Word",
+   "The Kept Appointment",
+   "The Cleared Ground",
+   "The Harbored Flame",
+   "The Meaning-Engine",
+   "The Turning Word"
+  ]
+ },
+ "canonPairing": "⛔ SNG-344: THE PAIR IS CANON — this file and world/braid_recipes.json are NOT competitors and neither supersedes the other. Zero ids in common, and they key differently (parts:[a,b] here vs braidKey 'a+b' there). This file is the MECHANICAL authority; world/braid_recipes.json is the NAMING authority. One NAMES a braid, the other RESOLVES it. Do not merge, do not delete, do not 'reconcile' by dropping either — the join is an authored crosswalk (Aevi, SNG-344), not an engine merge. ⚠️ THREE OF THE SEVEN NAMED BRAIDS ALREADY HAVE A MECHANICAL RECIPE HERE UNDER A DIFFERENT NAME: Undying Ledger = the_double_register, Shatterlight = the_sounding, The Hollowing Sight = the_counted_end. Those are naming COLLISIONS to resolve, not blanks to fill — one pairing must not surface two names to the player.",
+ "_pairing": "⚠️ SNG-344. THE PAIR IS CANON, NOT EITHER FILE. This table says what a combination DOES; `world/braid_recipes.json` NAMES it. Entries with a `braidName` are linked; the rest are mechanics whose braid has not been named yet, and naming them is authoring rather than merging.",
+ "_stillToName": {
+  "_note": "⛔ CLOSED 2026-08-07. All four are authored into `recipes` above with effect + cannot. The crosswalk is complete: every named braid in world/braid_recipes.json now resolves to a mechanical recipe here. ⚠️ `the-attended-end` is NOT in the ability catalog — it is Marrow's `bondGrants`, reachable only through the companion bond (see SNG-353). Two of these four braid a COMPANION-TAUGHT craft with a tradition craft, which is the first time that has happened and is worth knowing before anyone assumes every braid parent is catalog-resident.",
+  "pending": []
+ },
+ "_duplicateNames": {
+  "_note": "⚠️ FOUND BY MY OWN UNIQUENESS ASSERTION WHILE RENAMING, AND NOT MINE: two names each appear on two different recipes. A player shown either would have no way to tell which combination they hold.",
+  "duplicates": [
+   "The Harbored Flame",
+   "The Meaning-Engine"
+  ],
+  "_forErik": "which of each pair keeps the name is a content call — flagged rather than silently resolved."
+ }
 }

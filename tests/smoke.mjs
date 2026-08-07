@@ -415,7 +415,14 @@ check("sub-attribute drives the roll (with soft cap)", subChance2 === subChance 
 hero2.subAttributes.strength = 3;
 hero2.xp = 250; // enough for levels 2 and 3
 const msgs = applyLevelUps(hero2, rules);
-check("multi-level-up banks growth", hero2.level === 3 && hero2.pendingSubPoints === 2 && hero2.skillPoints === 2 && msgs.length === 2);
+// ⛔ SNG-351 — THESE THREE GATES PINNED A DIAL, AND THE DIAL MOVED. Aevi took skillPointPerLevel 1→2
+// on Erik's ratification (craft affordability 40%→80% of the breadth cap), and three gates went red on a
+// CORRECT change because they asserted the literal 2 rather than "two levels' worth". That is the exact
+// Report-vs-Gate failure this suite has already made twice (marcher > stillhold * 5, DEED_WEIGHTS === 3):
+// tuning is Erik's, so a gate may assert the SHAPE of a rule and never its VALUE. Derived from the rules
+// file now — these stay green through the next retune and still fail if banking itself breaks.
+const SPL = rules.leveling.skillPointPerLevel, SUBPL = rules.leveling.subPointPerLevel;
+check("multi-level-up banks growth", hero2.level === 3 && hero2.pendingSubPoints === 2 * SUBPL && hero2.skillPoints === 2 * SPL && msgs.length === 2);
 check("spend sub point works and syncs parent", spendSubPoint(hero2, "agility", rules) && hero2.subAttributes.agility === 4 && hero2.attributes.physical === 4);
 check("cannot spend into unknown sub", !spendSubPoint(hero2, "luck", rules));
 const abilityCatalog = {};
@@ -427,7 +434,10 @@ const ru = rankUpAbility(hero2, "sonic_resonance", rules);
 check("rank up at level 3", ru.ok && ru.newRank === 2);
 check("rank 3 gated to level 5", rankUpAbility(hero2, "sonic_resonance", rules).ok === false);
 check("harmonic cannot learn radiant arts", learnAbility(hero2, "light_bending", abilityCatalog, rules).why === "wrong tradition");
-check("learning own tradition works", learnAbility(hero2, "echo_sense", abilityCatalog, rules).ok && hero2.abilities.length === 2 && hero2.skillPoints === 0);
+// The BEHAVIOUR is "learning spends its cost", not "leaves you at zero" — what is left depends on the dial.
+const spBefore = hero2.skillPoints;
+const learned = learnAbility(hero2, "echo_sense", abilityCatalog, rules);
+check("learning own tradition works", learned.ok && hero2.abilities.length === 2 && hero2.skillPoints === spBefore - learned.cost);
 const law = abilitiesForGM(hero2, abilityCatalog);
 check("ability law carries rank grants and limits", law.includes("Standing Wave") && law.includes("CANNOT") && law.includes("NOT FOR"));
 
@@ -605,7 +615,7 @@ check("meditation scales with attunement", medGain === 20);
 // --- v0.9.0: retro grants, energy efficiency, trivial actions ---
 const { retroLevelGrants, effectiveEnergyCost } = await import("../engine/progression.js");
 const veteran = { level: 3, pendingSubPoints: 0, skillPoints: 0 };
-check("retro grant pays owed levels once", retroLevelGrants(veteran, rules) && veteran.pendingSubPoints === 2 && veteran.skillPoints === 2 && !retroLevelGrants(veteran, rules));
+check("retro grant pays owed levels once", retroLevelGrants(veteran, rules) && veteran.pendingSubPoints === 2 * rules.leveling.subPointPerLevel && veteran.skillPoints === 2 * rules.leveling.skillPointPerLevel && !retroLevelGrants(veteran, rules));
 const freshChar = { level: 1, grantsVersion: 1, pendingSubPoints: 2, skillPoints: 0 };
 retroLevelGrants(freshChar, rules);
 check("flagged characters get nothing extra", freshChar.pendingSubPoints === 2 && freshChar.skillPoints === 0);

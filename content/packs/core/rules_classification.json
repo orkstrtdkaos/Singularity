@@ -16,11 +16,13 @@
     "contest_design": "Spec for contest mechanics.",
     "social_mechanic_spec": "Spec for social mechanics.",
     "combat_mechanic_spec": "Spec for combat mechanics.",
-    "tooling_spec": "Spec for build/test tooling."
+    "tooling_spec": "Spec for build/test tooling.",
+    "progression_rules": "Level/rank progression tables the engine reads (the sub-attribute ladder)."
   },
   "runtime_unwired": {
     "_note": "Operational content with no consumer. These are REAL GAPS, not decisions. Listed so they are visible rather than silent; each needs a consumer that WANTS it (Aevi: 'a file wired without a consumer is the same failure with more steps'), so none is wired here.",
-    "combination_recipes": "⛔ SNG-344 RESOLVED — 'which is canon' had no answer as asked: NEITHER, because they are not duplicates. THE PAIR IS CANON. world/braid_recipes.json (7, loaded) is the NAMING authority: order_sense+palework → 'Ashen Meridian', with no mechanics at all. This file (56, dark) is the MECHANICAL authority: effect, cannot, functions, domains, discovery. One names, the other resolves — so the live system can tell a player their braid is called Shatterlight and cannot tell them what it does. Stays unwired only until Aevi's crosswalk lands; the join is authored content, not an engine merge."
+    "combination_recipes": "⛔ SNG-344 RESOLVED — 'which is canon' had no answer as asked: NEITHER, because they are not duplicates. THE PAIR IS CANON. world/braid_recipes.json (7, loaded) is the NAMING authority: order_sense+palework → 'Ashen Meridian', with no mechanics at all. This file (56, dark) is the MECHANICAL authority: effect, cannot, functions, domains, discovery. One names, the other resolves — so the live system can tell a player their braid is called Shatterlight and cannot tell them what it does. Stays unwired only until Aevi's crosswalk lands; the join is authored content, not an engine merge.",
+    "sub_attribute_ladder": "SNG-356, QUEUED NOT FORGOTTEN. Authored + registered by Aevi 2026-08-07 (8 subs x 20 ranks, per-rank + cumulative, milestones, phase map); it retires attributeSoftCap into content. Nothing loads it yet — this is item 4 of po/WORK_ORDER_ccode_2026-08-07.md, deliberately behind the SNG-357 harness, because the ladder's  column is +0 at rank 4 and +10 from rank 6 and ships on the harness's evidence rather than anyone's say-so. Declared here so the gap stays LOUD every run instead of going quiet while it waits."
   },
   "reference_pending_build": {
     "_note": "Design specs for work not yet built. Each carries a buildImplication section — the author's own statement that code should follow. Unloaded is CORRECT today; the debt is the unbuilt feature, not the missing wiring.",

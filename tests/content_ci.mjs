@@ -828,9 +828,19 @@ for (const pack of PACKS) {
       // written — several read like DESIGN references (challenge_design, gambit_design, skill_utility_audit)
       // that may not belong in provides.rules at all, and that is Aevi's call to make, not a build failure to
       // impose. So the existing set is baselined and warned; anything NEW fails. The list may only go DOWN.
-      const KNOWN_UNLOADED = new Set(["challenge_design", "coliseum_grid", "combination_recipes", "cross_axis_modifiers",
-        "gambit_design", "martial_paths", "peoples_of_kind", "pole_signatures", "power_sources",
-        "quest_structure", "skill_utility_audit"]);
+      // ⛔ SNG-356a — TWO GATES WERE ASKING ONE QUESTION AND KEEPING SEPARATE ANSWERS. This hand-listed
+      // set predates SNG-342's `rules_classification.json`, which was built to be THE place an unwired file
+      // is named with a reason. When Aevi registered `sub_attribute_ladder`, declaring it there satisfied
+      // one gate and left this one red on the same fact — and worse, the hand-list had gone STALE in the
+      // other direction: it still names `martial_paths`, which SNG-345 wired hours ago.
+      //
+      // ⚠️ A BASELINE THAT MUST BE EDITED IN TWO PLACES DRIFTS IN ONE. Now derived: everything the
+      // declaration names as unwired, whatever bucket it sits in. One file to edit, one answer, and a file
+      // that gets wired drops off both gates the moment it is reclassified.
+      const CLASS55 = rj("content/packs/core/rules_classification.json");
+      const KNOWN_UNLOADED = new Set(Object.entries(CLASS55)
+        .filter(([k]) => !["schemaVersion", "id", "note", "kind_vocabulary"].includes(k))
+        .flatMap(([, entries]) => Object.keys(entries).filter(n => n !== "_note")));
       const stateSrc = readFileSync(join(root, "engine/state.js"), "utf8");
       // Matched the way `rulePath` ACTUALLY resolves — by SUBSTRING, not exact stem. `loadRule("emergence")`
       // loads `rules/emergence_recipes.json`, and an exact-stem check called that file dead when it is loaded

@@ -1905,8 +1905,8 @@
     {
      "rank": 3,
      "name": "The Long Odds",
-     "grants": "The genuinely unlikely thing. The keystone, the powder, the flood-gate, the one animal that could have ended this. It comes in.",
-     "cannot": "⚠ YOU ARE ALSO IN THE WORLD. The wielder is struck ONE RUNG LOWER by the same run. And the Churn takes what it takes — the unlikely thing may cost a place, a bridge, or someone you needed alive.",
+     "grants": "The genuinely unlikely thing. The keystone, the powder, the flood-gate, the one animal that could have ended this. It comes in. AND YOU CAN STAND OUTSIDE THE RUN NOW — you and yours are exempt from the misfortune you spend.",
+     "cannot": "You still do not choose WHAT. The Churn takes what it takes, and the unlikely thing may cost a bridge, a building, or someone you needed alive — it is exempt from harming you, not from ruining your plans.",
      "functions": [
       "strike",
       "break",
@@ -1935,7 +1935,7 @@
    },
    "intensity": {
     "conserve": "a small turn of luck — a slip, a snapped strap",
-    "surge": "the long odds; THE WIELDER IS STRUCK ONE RUNG LOWER and the Churn may take what you needed"
+    "surge": "spend the long odds WITHOUT standing outside them — the run is far worse, and THE WIELDER AND ALLIES ARE STRUCK ONE RUNG LOWER by it too"
    },
    "bounds": [
     {
@@ -1949,10 +1949,6 @@
     {
      "text": "ALLIES IN THE AREA ARE STRUCK ONE RUNG LOWER",
      "class": "hard"
-    },
-    {
-     "text": "at rank 3 THE WIELDER IS STRUCK ONE RUNG LOWER",
-     "class": "cost"
     }
    ],
    "plainly": "A fight/puzzle action that makes the world go wrong for a target. Rated 7 of 10 across a scope of 2. Limit: you buy that something fails, never which."

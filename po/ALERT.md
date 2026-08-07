@@ -1,3 +1,47 @@
+## ⛔ AEVI → CCODE — SNG-356/357/358: the ladder is authored, and two specs behind it. BUILD 357 FIRST.
+
+**Order is deliberate: harness → holdings → ladder wiring.** Erik gave me the ordering call; the harness
+is first because everything else is a dial and his standing rule is sim before tweak.
+
+**⛔ SNG-357 — THE BALANCE SIM HARNESS. BUILD THIS FIRST.**
+`po/SPEC_SNG-357_balance_sim_harness.md`. Extends `success_curve.mjs` / `balance_sim.mjs`. Must show:
+the bond curve **plotted against ACTIONS with the real saves overlaid** (Usnea 151/10, Splarf 58/6.5,
+Silas 915/10) and report **"% of campaign spent at max bond"** — 83% for Silas today, and that figure is
+the defect; the ladder's `roll` column vs the retired soft cap (**+0 at rank 4, +10 at rank 6 and 10** —
+⛔ **a flat +10 on success chance from mid-game on is large and I do not know it is right**; if it pushes
+characters to the 95% ceiling, lower the per-rank values, do NOT abandon the bend); the retroactive grant
+preview per real save. ⚠️ **Recompute average craft cost FROM THE CATALOG, never hardcode 2.511** — I added
+6 abilities today and ~80 more are coming, which moves it. ⚠️ **It must read the REAL saves.** Every wrong
+call in this sequence came from an idealised player: my crossover error, and my treating Silas as the
+ceiling.
+
+**⛔ SNG-356 — THE LADDER IS AUTHORED AND AT ORIGIN** (`38364d1e`, registered in the core manifest
+`08a67d99`). `content/packs/core/rules/sub_attribute_ladder.json` — all 8 subs × 20 ranks, per-rank and
+cumulative values, milestones, phase map. **It RETIRES `attributeSoftCap`** — the cap bent the curve at
+rank 4, which SNG-354 measured as the top of EARLY game, the wrong phase for diminishing returns; the
+`roll` column bends at 6 instead. **Retroactive per Erik.** ⛔ **The derived grants are additive and safe;
+the ROLL COLUMN IS NOT and is gated on the harness by the file's own note.** ⚠️ **SNG-342's lesson applies
+— registration is not arrival. `state.js` must actually LOAD it**, and it should be the ladder, not the
+formula, that the resolver reads.
+
+**SNG-358 — HOLDINGS/HOUSEHOLD/ENTERPRISE.** `po/SPEC_SNG-358_...`. Silas holds two warden stations, a
+smithy, and a pregnant wife; his save has `locationState: {}` and no holdings, enterprise, or household
+structure anywhere. **An entire phase of play with no state** — same class as SNG-353 (fields with no
+reader) and SNG-355 (an event with no op), one layer up. ⚠️ **Three kinds, not one generic `holdings[]`:**
+post (reach, governed by presence), enterprise (production, by craft), household (⛔ **model as STAKE and
+OBLIGATION, never as a stat line** — the moment a pregnant wife grants a combat bonus the game has said
+something false). Load-bearing property: **they persist and advance without the player** — `worldtick.js`
+is the right hook, and each needs someone to run it, which is what makes SNG-355 matter. **Decompose:
+post → enterprise → household.** ⚠️ **Erik's live save needs backfill from the chronicle, with his review
+— he should not re-earn what he already has.**
+
+**⚠️ THIS BLOCKS THE LADDER'S LATE TIER.** `presence` and `rapport` ranks 14–20 are placeholders in the
+ladder file, marked, because their grants are standing-that-governs and household capacity and **there is
+nothing to attach them to.** I will not author them against a void — that is Amendment 3. The other six
+subs are authored to 20 in full.
+
+---
+
 ## ⛔ AEVI → CCODE — SNG-355: the GM cannot add or remove a party member. Only a button can.
 
 **`po/SPEC_SNG-355_party_entry_exit.md`.** Erik: *"the story had let some of them depart while still

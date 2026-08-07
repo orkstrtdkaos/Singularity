@@ -2106,6 +2106,207 @@
     }
    ],
    "plainly": "A fight attack dealing 5d6 with the highest damage variance in the game, because you do not control what the fault does when it opens. You cannot choose the effect and you cannot stop it partway. At rank 2 it also hits others near the target, including you. Everything living has a fault, so nothing is immune."
+  },
+  {
+   "id": "the_found_fault",
+   "name": "The Found Fault",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "practical",
+   "axes": {
+    "destruction_creation": -0.6,
+    "concrete_abstract": 0.2
+   },
+   "functions": [
+    "break",
+    "strike"
+   ],
+   "narrationHints": "Everything made has a fault in it — the place it will go when it goes. You find that place and you put one small, precise, entirely sufficient force there. The Unmakers consider inelegant demolition a moral failing.",
+   "description": "The Unmakers' first offense: the smallest correct action. Not power, placement.",
+   "notFor": "Anything with no fault to find — the genuinely whole, the newly made, the perfectly kept; brute force (if it takes more than one placement you have misread it); working blind; putting it back.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The One Place",
+     "grants": "Find the fault in a made thing on or around a target — a shield's grain, a helm's seam, a joist, a buckle, the flaw in the stone they are standing on — and open it. What was holding stops holding, onto them.",
+     "cannot": "MADE OR FLAWED THINGS — a whole, new, well-kept object gives you very little, and living bodies only where they are already hurt. You must perceive the fault; guessing wastes the placement.",
+     "functions": [
+      "break",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Clean Break",
+     "grants": "Take the fault that matters rather than the nearest one — the load-bearing member, the keystone, the axle. Structures come down where you decide they come down.",
+     "cannot": "⚠ A STRUCTURE COMES DOWN ON WHAT IS UNDER IT: allies in the area are struck ONE RUNG LOWER. You choose where it falls, not who is there.",
+     "functions": [
+      "break",
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Beautiful Ruin",
+     "grants": "A whole made thing, opened at every fault at once, in the order that brings it down best. Halls, gates, bridges, engines, and the people relying on them.",
+     "cannot": "⚠ THE WIELDER IS STRUCK ONE RUNG LOWER if inside the ruin, and it CANNOT BE PUT BACK — the Unmakers hold you answerable for what you cleared and whether it should have been. The Scouring do this for its own sake.",
+     "functions": [
+      "break",
+      "strike",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "unmaker",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "break",
+   "operativeAxis": [
+    "precision",
+    "magnitude"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "open one small fault",
+    "surge": "the beautiful ruin; IT CANNOT BE PUT BACK and you are answerable"
+   },
+   "bounds": [
+    {
+     "text": "MADE OR FLAWED THINGS — the whole and well-kept give little",
+     "class": "hard"
+    },
+    {
+     "text": "you must PERCEIVE the fault; guessing wastes it",
+     "class": "hard"
+    },
+    {
+     "text": "ALLIES UNDER A FALLING STRUCTURE ARE STRUCK ONE RUNG LOWER",
+     "class": "hard"
+    },
+    {
+     "text": "it CANNOT BE PUT BACK",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/puzzle action that opens the fault in a made thing onto a target. Rated 7 of 10 across a scope of 2. Limit: it needs a fault to find."
+  },
+  {
+   "id": "the_sudden_work",
+   "name": "The Sudden Work",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "practical",
+   "axes": {
+    "destruction_creation": 0.6,
+    "concrete_abstract": 0.4
+   },
+   "functions": [
+    "strike",
+    "break",
+    "make"
+   ],
+   "narrationHints": "You make something. Here, now, fast, and in the space a person is currently occupying. A spar through the gap in their guard; a wall closing where they were going to be; a bracket around a limb. The Wrights do not fight so much as build inconveniently.",
+   "description": "The Wrights' first offense: creation used as an attack, which the Wrights find slightly embarrassing and are very good at.",
+   "notFor": "Making from nothing — there must be material to hand (stone, timber, iron, wreckage, the building you are in); delicacy; unmaking what you built (that is the Unmakers' craft, and yours stays); anything faster than the material allows.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Driven Spar",
+     "grants": "Take material to hand and make it FAST, into them — a spar through a guard, a spike out of the floor, an iron bracket that closes on an arm. Crude, immediate, and it stays there afterward.",
+     "cannot": "MATERIAL MUST BE PRESENT — bare ground and no wreckage gives you nothing. What you make REMAINS, in them or in the room, and you cannot unmake it.",
+     "functions": [
+      "strike",
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Raised Work",
+     "grants": "Build at scale in the middle of the fight — a wall across a charge, a cage, a collapsing scaffold over a line of them.",
+     "cannot": "⚠ WHAT YOU RAISE IS IN EVERYONE'S WAY: allies in the area are struck ONE RUNG LOWER or cut off by your own work. It stays up until someone takes it down.",
+     "functions": [
+      "strike",
+      "break",
+      "make",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Thing That Was Not There",
+     "grants": "A whole work, at speed, where people are standing. It is finished before they understand it is being built, and they are inside it.",
+     "cannot": "⚠ THE WIELDER IS STRUCK ONE RUNG LOWER if inside their own work, and it REMAINS AFTERWARD — a permanent structure on the site of your fight, which the Ceaseless would call a good day and the valley may not.",
+     "functions": [
+      "strike",
+      "break",
+      "make",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "wright",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "magnitude",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "drive one spar",
+    "surge": "the whole work; IT REMAINS AFTERWARD and you cannot unmake it"
+   },
+   "bounds": [
+    {
+     "text": "MATERIAL MUST BE PRESENT",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU MAKE REMAINS — you cannot unmake it",
+     "class": "cost"
+    },
+    {
+     "text": "ALLIES ARE STRUCK ONE RUNG LOWER or cut off by your own work",
+     "class": "hard"
+    },
+    {
+     "text": "at rank 3 the wielder is struck one rung lower if inside it",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/puzzle action that builds something violently into the space a target occupies. Rated 7 of 10 across a scope of 2. Limit: material must be present, and what you make remains."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

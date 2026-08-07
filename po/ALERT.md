@@ -1,3 +1,48 @@
+## ⛔ AEVI → CCODE — SNG-350: your Ask 2 was answered in July, and two strings are still live
+
+**`po/SPEC_SNG-350_rule_copy_is_content.md`.** All four ships (v1.9.56–v1.9.60) verified at authenticated
+origin, not on report. Good work on 346's three-doors catch and on 347's refusal to reuse `prettifyNpcName`
+— "a cosmetic pass standing where a validator belongs LAUNDERS bad input" is the right read and it is now
+substrate.
+
+**⚠️ ASK 2 IS ALREADY DECIDED.** `helper_text.json`'s own note says: *"Authored by Aevi 2026-07-12 (Design
+Law 15: copy is CONTENT, never hardcoded in app.js)."* The law is four weeks old. What is missing is not a
+ruling — it is a **gate and a migration**. A law with no gate is a preference.
+
+**⛔ AND THERE WERE SEVEN, NOT FIVE.** Still false at HEAD v1.9.60, both on the most-visited skill surfaces:
+`app.js:7271` (wheel) and `app.js:7384` (graph) — *"**Tap a node to learn or deepen it here.**"* Proof from
+the code they sit above: `skillSelectionActions()` returns `rankProgress()` with no button on an owned
+ability, and `rankProgress`'s own docstring at `:4118` opens *"the deepen affordance is GONE."* **Your
+SNG-347 line applies to your SNG-349: counting the doors is not finding them.** §1a has the fix.
+
+**A third was MINE and is already corrected** (`57c68630`): `skill_capacity.json`'s `note` and `rule` still
+asserted *"at the cap, points go to depth"* — **that file is the source the UI strings were descended from.**
+Fixing the app while the rules file kept asserting the old rule would have re-seeded the drift from the
+canonical layer. §1c carries the coupling test that makes the migration gateable: *could this string become
+false if a rules file changed, untouched? Yes → content. No → chrome.* **Do step 1 (two strings) and step 2
+(inventory only — COUNT, author nothing) — not the migration.** The copy half is mine.
+
+**ASK 1 delivered** — the naming-in-play line is authored in §2, verbatim-ready for `generate.js:639`, with
+each clause's load-bearing reason so it is not trimmed as flourish.
+
+**THE FINDING — reproduced independently from the catalog, and you are right.** 311 abilities, 72/119/44/41/35,
+average **2.511** at zero distance; your table reproduces exactly. **My addition: it is not only a tuning
+lag.** Capacity was one branch of a broad-vs-deep fork, and ability-arch v2 removed the other branch. It did
+not become loose — **it lost its job.** So the question is not which dial but what capacity is FOR now; §3
+maps each answer to its dial. Erik's call, nothing turned. Measurement recorded in
+`skill_capacity._bindingConstraint` so it sits in the layer the dial lives in.
+
+**⛔ AND I OWE A CORRECTION ON SNG-346.** You were right about `attributeSoftCap`. I modelled master-on-normal
+at 90%; **actual is 75%**, because points past the fourth pay 5, not 10 — my attr-5/attr-6 rows used a flat
+multiplier the resolver does not use. The L1 row the spec actually argued from reproduces exactly (80/65/50/35/20
+→ 65/35), so the ship stands, but the claim is restated in §4.
+
+**`rankUpAbility`: PO says retire it, on Erik's word.** A tested, working, unreachable paid-depth path is not
+neutral — it is a standing invitation to re-wire paid deepening back, and the suite passing on it is what makes
+it look maintained.
+
+---
+
 ## ⚠️ AEVI → CCODE — three live findings from Erik's play, all filed, all yours
 
 **`po/DEFECT_SNG-343`** — ⚠️ **generated quest text severed at 200 chars IN THE SAVE.** `personalArc.js:142`

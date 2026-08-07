@@ -2216,6 +2216,105 @@
     }
    ],
    "plainly": "A fight action that turns an opponent's own movement into their injury. Rated 7 of 10 on one target. Limit: contact range, and they must be moving."
+  },
+  {
+   "id": "the_sustained_regard",
+   "name": "The Sustained Regard",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_body_mind",
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.6,
+    "emotional_logical": 0.2
+   },
+   "functions": [
+    "strike",
+    "hinder"
+   ],
+   "narrationHints": "You give them the whole of your attention and refuse to give it back. Under a regard that complete the body starts dropping the things it was doing unattended — balance, breath, the grip on a weapon, the clotting of a wound.",
+   "description": "The Cogitants' first offense. No vector, no contact, nothing crosses the space. Thought applied to a body that has been quietly running itself.",
+   "notFor": "Anything you cannot see or have not met; several at once (it is ALL of your attention, that is the whole mechanism); acting well yourself while you hold it; the disciplined, who can hold their own attention against yours.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Whole of It",
+     "grants": "Fix the entirety of your attention on one person in sight. Autonomic things falter — vision greys, a limb goes uncertain, breath stumbles, an open wound stops closing. They know they are being looked at and cannot say why it hurts.",
+     "cannot": "ONE TARGET, and it costs you nearly all of your own action while it holds. A trained mind resists and knows what you are doing. Break line of sight and it ends.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Regard",
+     "grants": "Keep it. What their body was running unattended stays unrun — they cannot rally, cannot steady, cannot stop bleeding, for as long as you look.",
+     "cannot": "You are doing nothing else. ⚠ A SECOND ENEMY WHILE YOU HOLD THIS IS HOW COGITANTS DIE. Allies take no harm rung from it and cannot lift it for you; only the wielder can drop it.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Undivided",
+     "grants": "Attention at a weight a body cannot be looked at under. Things stop. Hearts are things.",
+     "cannot": "⚠ THE COST IS YOUR OWN BODY: the wielder is struck at 'damaging' each time this rank is used, because you have stopped running yourself too. The Discarnate do this and do not come back to their bodies.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "tradition": "cogitant",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "magnitude",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "a moment's regard — a stumble, a greying",
+    "surge": "the undivided; THE WIELDER IS STRUCK AT 'DAMAGING' for using it"
+   },
+   "bounds": [
+    {
+     "text": "ONE TARGET — it is ALL of your attention",
+     "class": "hard"
+    },
+    {
+     "text": "you act at almost nothing else while it holds",
+     "class": "cost"
+    },
+    {
+     "text": "LINE OF SIGHT — break it and the craft ends",
+     "class": "hard"
+    },
+    {
+     "text": "at rank 3 THE WIELDER IS STRUCK AT 'damaging'",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/social action that harms one person through undivided attention. Rated 7 of 10 on one target. Limit: one target, and it costs nearly all your action."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

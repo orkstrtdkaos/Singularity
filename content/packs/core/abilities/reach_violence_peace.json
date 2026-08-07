@@ -2268,7 +2268,7 @@
      "rank": 1,
      "name": "The Lid Lifted",
      "grants": "Take the held tension in a room — the grudge, the fear, the swallowed rage, your own — and put it into one target at once. It hits like a beam coming down: ribs, breath, and whatever they were about to say.",
-     "cannot": "IT MUST ALREADY BE THERE. A genuinely peaceful room gives you nothing. You cannot meter it — what was held is what arrives.",
+     "cannot": "IT MUST ALREADY BE THERE — the GM must be able to POINT AT SOMETHING SPECIFIC being held back in this scene: a grudge named, a fear shown, an order obeyed under protest, a hostility swallowed. If nothing can be pointed at, the craft does nothing. You cannot meter it — what was held is what arrives.",
      "functions": [
       "strike",
       "hinder"
@@ -2293,7 +2293,7 @@
      "rank": 3,
      "name": "The Hold Breaks",
      "grants": "Everything the place was keeping down comes up at once, into whoever you name. A century of enforced quiet has weight and it arrives all together.",
-     "cannot": "⚠ THE PEACE IS SPENT. The room, the hall, the town — whatever was being held is now loose in it, and it does not go back. You have won a fight by ending a peace, and the Silent will come to see who did it.",
+     "cannot": "⚠ THE PEACE IS SPENT: whatever the GM pointed at is now LOOSE and acts — the grudge is taken, the fear breaks, the order is refused — and this craft cannot be used in this place again until something new is being held back. You have won a fight by ending a peace, and the Silent will come to see who did it.",
      "functions": [
       "strike",
       "hinder",
@@ -2327,7 +2327,7 @@
    },
    "bounds": [
     {
-     "text": "IT MUST ALREADY BE THERE — a truly calm room gives nothing",
+     "text": "IT MUST ALREADY BE THERE — the GM must be able to POINT AT a specific thing held back in this scene, or it does nothing",
      "class": "hard"
     },
     {
@@ -2335,7 +2335,7 @@
      "class": "hard"
     },
     {
-     "text": "the peace you spend DOES NOT COME BACK",
+     "text": "what was held is now LOOSE and acts; the craft cannot fire again here until something new is held back",
      "class": "cost"
     }
    ],

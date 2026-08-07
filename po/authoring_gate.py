@@ -53,6 +53,15 @@ def check(abilities, existing_ids, V):
             fails.append(f"{i}: tree reaches damaging/lethal but functions declare no strike/break")
         if combat and rungs and all(r=='none' for r in rungs):
             fails.append(f"{i}: ⛔ an offensive ability whose every rank is harmRung 'none'")
+        # ⛔ CLASS 6 — SNG-359: an offensive craft must declare how IT fails when surged.
+        # Generic backlash makes every craft fail identically. The `cannot` clauses are the
+        # failure modes; `backlash` is where they fire. `conserveSuppresses` makes conserve a
+        # tactical choice rather than a strictly worse option.
+        if combat and not a.get('backlash'):
+            fails.append(f"{i}: no `backlash` — a surged craft that slips must fail IN ITS OWN SHAPE")
+        if combat and not a.get('conserveSuppresses'):
+            warns.append(f"{i}: no `conserveSuppresses` — conserve is then strictly worse, never a choice")
+
         # ⛔ CLASS 5 — RANK IS MASTERY (Erik 2026-08-07: "why are there still skills that would
         # suck to take to lvl 3?"). Depth is EARNED, not bought — a GM-marked defining moment.
         # A cost that appears FIRST at rank 3 makes arriving at mastery a downgrade. Costs of this

@@ -2744,8 +2744,8 @@
     {
      "rank": 3,
      "name": "The Devouring Introduced",
-     "grants": "You show something large. It is honest about what it is and it does that, thoroughly, in front of everyone.",
-     "cannot": "⚠ IT DOES NOT LEAVE WHEN IT IS FINISHED with them, and the wielder is struck ONE RUNG LOWER if still present when it looks around. The Devouring — appetite without limit — will consider you a colleague.",
+     "grants": "You show something large. It is honest about what it is and it does that, thoroughly, in front of everyone. AND IT HEEDS THE END OF THE INTRODUCTION: at this rank you can call it off, and send it back to what it came from.",
+     "cannot": "Calling it off is a CHOICE you must make and it is not free — what you send back remembers being interrupted, and remembers you. Allies in the area are still struck ONE RUNG LOWER until you end it.",
      "functions": [
       "strike",
       "hinder",
@@ -2774,7 +2774,7 @@
    },
    "intensity": {
     "conserve": "show it a small hunger",
-    "surge": "introduce something large; IT DOES NOT LEAVE WHEN IT IS FINISHED"
+    "surge": "show it everything and do not call it off — it eats until it is finished, and THE WIELDER IS STRUCK ONE RUNG LOWER if still present"
    },
    "bounds": [
     {
@@ -2844,8 +2844,8 @@
     {
      "rank": 3,
      "name": "The Unfallen Light",
-     "grants": "The full sentence, unmitigated. Those with much to answer for do not survive being measured.",
-     "cannot": "⚠ THE WIELDER IS MEASURED TOO at this rank and is struck at their own honest weight. The Unfallen — who would burn the impure — do exactly this and are certain they are right.",
+     "grants": "The full sentence, unmitigated. Those with much to answer for do not survive being measured. AND YOU HOLD THE SCALE NOW: exempt whom you name from the weighing, and temper a sentence you have already begun.",
+     "cannot": "THE MEASURE IS STILL HONEST — you may exempt someone from being weighed, but you cannot make a heavy man light. Exempting the guilty is itself a judgment, and the Orders keep a record of who was spared and by whom.",
      "functions": [
       "strike",
       "reveal",
@@ -2875,7 +2875,7 @@
    },
    "intensity": {
     "conserve": "weigh lightly — a warning, a mark",
-    "surge": "the unfallen light; THE WIELDER IS MEASURED TOO"
+    "surge": "weigh EVERYONE PRESENT INCLUDING YOURSELF, unmitigated, at their own honest weight — the Unfallen's own working"
    },
    "bounds": [
     {
@@ -2889,10 +2889,6 @@
     {
      "text": "ALLIES ARE MEASURED at their own weight, one rung lower",
      "class": "hard"
-    },
-    {
-     "text": "at rank 3 THE WIELDER IS MEASURED TOO",
-     "class": "cost"
     }
    ],
    "plainly": "A fight/social action that weighs a target and burns them in proportion. Rated 8 of 10 across a scope of 2. Limit: the measure is honest — you do not set the amount."

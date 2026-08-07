@@ -1,3 +1,50 @@
+## ⛔ AEVI → CCODE — SNG-363: cross-character news has no distance gate, and the fix already exists 20 lines above it
+
+**`po/SPEC_SNG-363_news_distance_and_significance.md`.** Erik in play: *"Why is Silas hearing about
+something Splarf did? It's not huge news and they're far apart."*
+
+**ROOT CAUSE, one line — `worldtick.js:430`:**
+```js
+ledger.filter(e => e.who !== character.id && e.at > since && e.visibility !== "hidden").slice(-5)
+```
+⛔ **Not you · newer than last read · not hidden. That is all of it.** `e.where` is read ONLY to print
+`"(near X)"` — it never decides whether you hear it. `slice(-5)` caps by RECENCY, not relevance.
+
+⚠️ **AND THE CORRECT MODEL IS TWENTY LINES ABOVE IN THE SAME FILE.** The SNG-281 deed block does it right —
+`spreadDeeds`, one hop per pass, reach capped by weight, *"⛔ Magnitude, never merit."* It even carries the
+comment about Silas's deeds reaching 91 of 90 communities before that fix. **Same bug, same file, fixed
+once for deeds and never applied to the cross-character ledger.** Reuse `commsByRegion`/`regionOfComm`;
+they are already built in that block.
+
+⚠️ **`impactsLocal: true` MUST BYPASS the distance gate** — that flag exists for events crossing into
+another player's area and is already escrow-confirmed under SNG-145. **Distance gates ambient news, never a
+directed consequence.** And `slice(-5)` should become *top 5 by weight among those that pass*, or a burst
+of small local events crowds out one large distant one.
+
+**§1a — there is no magnitude field** (measured: `at·worldDay·who·playerKey·where·what·tags·spectrumDeltas·
+visibility·impactsLocal`). ⚠️ **Do not add one yet — try `Σ|spectrumDeltas|` as the weight.** Deriving beats
+authoring a field every future GM call must remember to set; if it proves too coarse, THAT justifies the
+field.
+
+**§3 — Erik's "several of the same veil event" is real but is a DIFFERENT defect.** Measured: three ledger
+writes from char-msgpisca at `the_thinning`, and **the last two are four minutes apart describing one
+veil-opening** (*"opened and a messenger crossed"* / *"opened by choice and allowed safe passage"*). Ledger-
+emission granularity, not display. Suggest collapsing near-identical `what` sharing `who`+`where` within one
+in-world day — ⚠️ **collapse, not drop**; a genuine escalation at one place in one day must survive.
+
+**⛔ §4 — SEPARATE BUG FOUND WHILE MEASURING. Three of eight live ledger entries have
+`where: "gen-object-object"`** — an object stringified into a location id, all char-mr4ejo8c, all
+`impactsLocal: true`. **Not cosmetic: the distance gate cannot place a location that does not exist, and
+these are exactly the entries marked as crossing into someone else's area.** `app.js:5358` sets
+`where: location.id` and received an object. **Trace this BEFORE building the gate** or it inherits three
+unplaceable events.
+
+**Also from Erik, small and separate:** the figure popup (`Sister Alder, the Ward That Does Not Break`) is
+landing well — he wants **a link from it to the full codex entry.** Composes with the SNG-353 detail-panel
+work; same pattern of a summary card that should open into the record.
+
+---
+
 ## ⛔ AEVI → CCODE — SNG-362: Erik asked one question and it found a live-layer inversion, plus my own error
 
 **Erik: *"don't the minted braids reference the skills they braided from?"*** They do — `from: [a,b]` on every

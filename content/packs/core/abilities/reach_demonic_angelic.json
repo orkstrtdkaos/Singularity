@@ -2508,6 +2508,7 @@
     "violence_peace": -0.2
    },
    "functions": [
+    "strike",
     "hinder",
     "command"
    ],
@@ -2525,34 +2526,34 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "none"
     },
     {
      "rank": 2,
      "name": "The Weight of It",
-     "grants": "Hold the moment rather than buying a breath — those who credit the name will not act against you while you hold it, and some will obey a small instruction.",
+     "grants": "Hold the moment rather than buying a breath — those who credit the name will not act against you while you hold it, and some will obey a small instruction. And you can spend the name AGAINST a believer: name them faithless in front of the others and the belief turns on them — they are struck by their own people, or by what the name means to them, and it leaves marks.",
      "cannot": "Holding it is exhausting and visible. Each instruction spends belief; ask for something the name would not ask for and you spend it all at once.",
      "functions": [
+      "strike",
       "hinder",
-      "command",
-      "bind"
+      "command"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "damaging"
     },
     {
      "rank": 3,
      "name": "The Name in Full",
-     "grants": "The name at its full height in front of a crowd that carries it. A charge stops. A judgment is reversed. A hall kneels.",
+     "grants": "The name at its full height in front of a crowd that carries it. A charge stops. A judgment is reversed. A hall kneels — or turns on whoever you named, and a crowd that believes you will kill for the name without being asked twice.",
      "cannot": "You are now what they knelt to and the valley will hold you to it. The cult that believes the NAME rather than you will defend it harder than you do — and they will notice first when you fall short.",
      "functions": [
+      "strike",
       "hinder",
       "command",
-      "bind",
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "lethal"
     }
    ],
    "challengeTypes": [
@@ -2561,7 +2562,7 @@
    ],
    "tradition": "god_named",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
+   "harmRung": "lethal",
    "shape": "hinder",
    "operativeAxis": [
     "scope",

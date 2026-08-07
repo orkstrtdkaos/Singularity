@@ -88,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.65";
+const APP_VERSION = "1.9.66";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4535,6 +4535,15 @@ function showCompanionPanel(companionId) {
   const grantAt = CONTENT.rules?.companions?.tiers?.grantAt ?? 6;
   const dn = character.companionNames?.[c.id] || c.name;
   const has = (id) => (character.abilities || []).some(a => a.abilityId === id);
+  // ⚠️ NO COMPANION AUTHORS AN IMAGE — all nine have `image: undefined`. They go through the same
+  // ensureImage path an NPC does, seeded on the companion id so the face is STABLE across openings rather
+  // than a new stranger each time. Art mode off / no key simply yields nothing; the panel still reads.
+  let portrait = "";
+  try {
+    const url = ensureImage({ id: `companion-${c.id}`, name: dn, role: c.role, appearance: c.appearance, look: c.appearance },
+      "npc", { ratingLevel: viewerRatingLevel(), seedKey: `companion-${c.id}`, isMinor: false });
+    if (url) portrait = `<img class="comp-portrait" src="${esc(url)}" alt="${esc(dn)}" loading="lazy" style="width:100%; max-height:220px; object-fit:cover; border-radius:6px; margin-bottom:8px">`;
+  } catch { /* a portrait is never worth breaking the panel for */ }
 
   // §1 — THE BOND READS AS PROGRESS, NOT A SCORE. Every number here was already computed and never said.
   const nextIdx = thresholds.findIndex(t => b.bond < t);
@@ -4575,10 +4584,20 @@ function showCompanionPanel(companionId) {
 
   const pop = document.createElement("div");
   pop.id = "help-pop"; pop.className = "help-overlay";
-  pop.innerHTML = `<div class="help-card comp-card" role="dialog" aria-label="${esc(dn)}">
-    <h3>${esc(dn)}${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""}</h3>
-    <div class="hint comp-role">${esc(c.role || "")}</div>
-
+  // ⛔ THE CARD MUST SCROLL. A companion's full record — appearance, persona, knowledge, boundaries, three
+  // stages, the gift — is TALLER THAN A PHONE, and the overlay had no bound: Erik got the panel and could
+  // not read the end of it. The content was right and unreachable, which is the same failure as the data
+  // being missing, one layer out.
+  //
+  // ⚠️ The HEADER stays put while the body scrolls, so the name and the bond — the two things you opened
+  // this for — never scroll away from you.
+  pop.innerHTML = `<div class="help-card comp-card" role="dialog" aria-label="${esc(dn)}" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
+    <div style="flex:0 0 auto">
+      <h3 style="margin-bottom:2px">${esc(dn)}${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""}</h3>
+      <div class="hint comp-role">${esc(c.role || "")}</div>
+    </div>
+    <div class="comp-scroll" style="flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; margin:8px 0">
+    ${portrait}
     <div class="comp-bond">
       <div class="comp-bond-line"><strong>bond ${b.bond}/${maxBond}</strong> · stage ${b.stage} of ${b.stageCount}${nextAt != null ? ` · next at ${nextAt}` : " · deepest"}</div>
       <div class="comp-bond-bar"><span style="width:${Math.max(2, Math.min(100, b.bond / maxBond * 100))}%"></span></div>
@@ -4596,8 +4615,8 @@ function showCompanionPanel(companionId) {
     ${stageRows ? `<div class="comp-sec"><span class="sys-label">The bond, stage by stage</span>${stageRows}</div>` : ""}
     ${giftBlock}
     ${c.substrateNote ? `<div class="hint comp-sec">${esc(c.substrateNote)}</div>` : ""}
-
-    <button class="btn" id="comp-close">Close</button>
+    </div>
+    <button class="btn" id="comp-close" style="flex:0 0 auto">Close</button>
   </div>`;
   document.body.appendChild(pop);
   const close = () => pop.remove();
@@ -7681,6 +7700,25 @@ function renderLevelUp(status = "") {
     return { a, ab, atMax, now, next };
   });
 
+  // ⚠️ DECLARED BEFORE ITS FIRST USE — THE LEVEL-UP SCREEN CRASHED ON THIS. `buyableAll` calls
+  // learnState, and learnState was declared BELOW it as a `const`, so the temporal dead zone threw
+  // ReferenceError and renderLevelUp died before painting: to Erik the Level Up button simply did
+  // nothing. `const` arrow functions do not hoist like `function` declarations do, and the linter
+  // and the suite both stayed silent because NOTHING LOADS app.js — the same blind spot that shipped
+  // the formerCompany ReferenceError an hour ago.
+  // ⛔ SNG-348 — ONE FUNCTION ANSWERS "CAN I GET THIS?", because the FILTER and the ROW must never
+  // disagree. This was computed inline inside learnRow; a filter that recomputed it would be a second
+  // opinion on the same question, and the two would drift the first time either changed — the shape that
+  // put six copies of the cost calculation in this codebase before learnPointCost collapsed them.
+  const learnState = ab => {
+    const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
+    const dv = domainVerdict(ab);
+    const ripe = aspirationRipe(character, ab.id, rules);
+    const cost = learnPointCost(ab, character, CONTENT.skillCapacity, dv);
+    const tooPoor = !ripe && sp < cost;
+    const capBlock = cap && ab.powerSystem !== "learned";
+    return { gate, dv, ripe, cost, tooPoor, capBlock, blocked: !gate.ok || capBlock || tooPoor };
+  };
   // LEARN: everything the domain gate opens that you don't yet know (SNG-094 gate)
   const learnable = Object.values(CONTENT.abilities).filter(ab => {
     if (character.abilities.some(a => a.abilityId === ab.id)) return false;
@@ -7701,19 +7739,6 @@ function renderLevelUp(status = "") {
   // raw level+domain `learnable` — so no suggestion (heuristic or model) can ever offer a standing-locked craft.
   const reachableNow = learnable.filter(ab => canLearnAbility(character, ab.id, fullCatalog(), rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex }).ok);
 
-  // ⛔ SNG-348 — ONE FUNCTION ANSWERS "CAN I GET THIS?", because the FILTER and the ROW must never
-  // disagree. This was computed inline inside learnRow; a filter that recomputed it would be a second
-  // opinion on the same question, and the two would drift the first time either changed — the shape that
-  // put six copies of the cost calculation in this codebase before learnPointCost collapsed them.
-  const learnState = ab => {
-    const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
-    const dv = domainVerdict(ab);
-    const ripe = aspirationRipe(character, ab.id, rules);
-    const cost = learnPointCost(ab, character, CONTENT.skillCapacity, dv);
-    const tooPoor = !ripe && sp < cost;
-    const capBlock = cap && ab.powerSystem !== "learned";
-    return { gate, dv, ripe, cost, tooPoor, capBlock, blocked: !gate.ok || capBlock || tooPoor };
-  };
   const learnRow = ab => {
     const { gate, dv, ripe, cost, capBlock, blocked } = learnState(ab);
     const r1 = ab.tree?.find(t => t.rank === 1);
@@ -8119,6 +8144,17 @@ function renderCharacterScreen() {
     if (tpl) { acceptBranch(character, tpl); saveCharacter(character); }
     renderCharacterScreen();
   };
+  // ⛔ THE CODEX ROW SAID "tap" AND NOTHING HAPPENED. I bound [data-companion] in the SIDEBAR render only,
+  // and the character screen has its own bind pass — so the codex block, which is exactly where Erik went
+  // looking, rendered a tap affordance with no handler behind it. A control that advertises an action it
+  // cannot perform is worse than no control: it tells the player the feature is broken rather than absent.
+  //
+  // ⚠️ TWO RENDERERS, TWO BIND PASSES, ONE MARKUP CONVENTION — the same shape as the five company.js
+  // readers. Bound here from the same attribute so a third surface only has to emit the attribute.
+  for (const el of app.querySelectorAll("[data-companion]")) {
+    el.onclick = () => showCompanionPanel(el.dataset.companion);
+    el.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showCompanionPanel(el.dataset.companion); } };
+  }
   const luBtn2 = document.getElementById("cs-levelup"); if (luBtn2) luBtn2.onclick = () => renderLevelUp();
   const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => { wheelLearnMode = false; renderSkillWheel(); }; // SNG-218 §3: full kit view (owned crafts shown)
   const repBtn = document.getElementById("cs-repair"); if (repBtn) repBtn.onclick = () => renderRepairScreen();

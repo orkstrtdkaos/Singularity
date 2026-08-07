@@ -10743,6 +10743,34 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-360 — SIX MERGE DECISIONS DUMPED ON THE PLAYER, AND THE REASON THERE WERE SIX.
+  //
+  // Erik: "the user can't make all these calls and WHY are there so many to begin with!! these need an
+  // allocation upstream i think." He is right on both counts, and the second is the real bug.
+  {
+    const codexSrc = readFileSync(join(root, "engine/codex.js"), "utf8");
+    const gmSrc360 = readFileSync(join(root, "engine/gm.js"), "utf8");
+    const { codexForGM } = await import("../engine/codex.js");
+
+    // ⛔ THE GM WAS ASKED FOR AN ID IT WAS NEVER SHOWN. The op contract says `topic (stable kebab id)`,
+    // and codexForGM emitted the LABEL only — so the model could not reuse an existing topic even in
+    // principle, and did the only thing available: invent a fresh headline every beat. Three topics grew
+    // for one Veil, and the player was handed the reconciliation.
+    const ch360 = { codex: { topics: { "the-veil": { id: "the-veil", label: "The Veil", kind: "mystery", facts: ["it tires"], links: [], updatedDay: 5 } } } };
+    const block = codexForGM(ch360, {});
+    check("360: the GM is shown each topic's ID, not just its label — it cannot reuse what it never sees",
+      !!block && block.includes("[the-veil]"));
+    check("360: …and is told a topic is a SUBJECT that accumulates facts, not a per-beat headline",
+      /A CODEX TOPIC IS A SUBJECT THAT ACCUMULATES FACTS, NOT A HEADLINE/.test(gmSrc360));
+    check("360: …with the real failure named concretely, so the instruction teaches by example",
+      /Veil as Boundary-Agent/.test(gmSrc360));
+
+    // The downstream judge already existed and its docstring already promised the right thing —
+    // "unsure → the ONLY thing that reaches the player". The queue is the symptom; keep the promise honest.
+    check("360: the judge's contract still says only an UNSURE pair reaches the player",
+      /unsure[\s\S]{0,80}ONLY thing that reaches the player/.test(codexSrc));
+  }
+
   // SNG-353 — THE COMPANIONS WERE FULLY AUTHORED AND ALMOST ENTIRELY INVISIBLE. Erik, in play: "I searched
   // codex but can't find what they do or the growing bond meaning… they don't have a popup info either."
   //

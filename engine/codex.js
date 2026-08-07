@@ -398,8 +398,16 @@ export function codexForGM(character, { locationId = null, questTitles = [], pla
     return { t, score };
   }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);
   const pick = scored.length ? scored.map(x => x.t) : topics.slice(-4); // fallback: newest few
+  // ⛔ SNG-360 — THE ID WAS NEVER SHOWN. This emitted the LABEL only, while the op contract asks the GM for
+  // a "topic (stable kebab id)". It was asked to reuse an identifier it was never given, and did the only
+  // thing it could: invent a fresh one every beat. Erik's codex grew "The Veil's Tiring Hold", "The Veil's
+  // Breaking Choice" and "Veil as Boundary-Agent" — three topics, one Veil — and then asked HIM to
+  // reconcile them, six pairs at a time.
+  //
+  // ⚠️ THE MERGE QUEUE WAS NEVER THE BUG. It is the symptom of an allocation that never happened, and no
+  // amount of judging pairs downstream repairs a writer that mints a new subject per sentence.
   return pick.map(t =>
-    `- ${t.label} (${t.kind}): ${t.facts.slice(-3).join(" | ") || "known of, little learned"}` +
+    `- [${t.id}] ${t.label} (${t.kind}): ${t.facts.slice(-3).join(" | ") || "known of, little learned"}` +
     (t.links.length ? ` [linked: ${t.links.join(", ")}]` : "")
   ).join("\n");
 }

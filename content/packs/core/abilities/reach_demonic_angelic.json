@@ -2696,6 +2696,206 @@
     }
    ],
    "plainly": "A social/fight action that costs an opponent something they agreed to pay. Rated 5 of 10 on one target for about eight hours. Limit: refusal ends it — there is no forcing this."
+  },
+  {
+   "id": "the_offered_mouth",
+   "name": "The Offered Mouth",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.6,
+    "death_life": -0.2
+   },
+   "functions": [
+    "strike",
+    "hinder"
+   ],
+   "narrationHints": "You show something its appetite and where to put it. The Choir does not summon and does not command — it introduces, and appetite does the rest, and appetite is honest in a way very little else is.",
+   "description": "The Abyssal Choir's first offense: harm by acquaintance. What eats was always going to eat; you told it where.",
+   "notFor": "Command (you introduce, you do not direct — and it will keep eating after); anything with no appetite to show it; a clean end (what is eaten is eaten); doing this without being noticed by what you introduced.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Introduction",
+     "grants": "Show a nearby hunger a target — a beast, a thing in the water, something in the walls, a person's own worst want. It goes and it takes, and what it takes does not grow back.",
+     "cannot": "IT IS NOT COMMANDED. Once shown, it eats on its own judgement and stops when it is done, not when you are. There must be an appetite present to show.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Shown Table",
+     "grants": "Show it more, or show several at once. A place with hungry things in it becomes a place a person cannot cross.",
+     "cannot": "⚠ APPETITE DOES NOT SORT: allies in the area are struck ONE RUNG LOWER, and once fed, what you showed remembers who does the showing.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Devouring Introduced",
+     "grants": "You show something large. It is honest about what it is and it does that, thoroughly, in front of everyone.",
+     "cannot": "⚠ IT DOES NOT LEAVE WHEN IT IS FINISHED with them, and the wielder is struck ONE RUNG LOWER if still present when it looks around. The Devouring — appetite without limit — will consider you a colleague.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind",
+      "summon"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "magnitude",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "show it a small hunger",
+    "surge": "introduce something large; IT DOES NOT LEAVE WHEN IT IS FINISHED"
+   },
+   "bounds": [
+    {
+     "text": "IT IS NOT COMMANDED — you introduce, appetite decides",
+     "class": "hard"
+    },
+    {
+     "text": "an appetite must be PRESENT to show",
+     "class": "hard"
+    },
+    {
+     "text": "ALLIES IN THE AREA ARE STRUCK ONE RUNG LOWER",
+     "class": "hard"
+    },
+    {
+     "text": "what you fed remembers who does the showing",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight action that introduces a hunger to a target and lets it feed. Rated 8 of 10 across a scope of 2. Limit: it is not commanded — appetite decides."
+  },
+  {
+   "id": "the_measured_sentence",
+   "name": "The Measured Sentence",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": 0.6,
+    "falsehood_truth": 0.3
+   },
+   "functions": [
+    "strike",
+    "reveal",
+    "hinder"
+   ],
+   "narrationHints": "The light weighs first and burns second. It is not wrath — the Orders are quite clear that it is not wrath — it is a measure taken and a sentence carried out in the same motion, from above, and the measure is accurate.",
+   "description": "The Seraphic Orders' first offense: judgment as a physical event. What is found wanting is burned in proportion to the finding.",
+   "notFor": "Mercy without measure (mercy is a SENTENCE here, it must be chosen aloud); the innocent — it will not burn what the measure clears, and it measures honestly whatever you wanted; hiding who did it; anything you have not actually judged.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Weighing Light",
+     "grants": "Judge one person in sight and let the sentence fall. Light comes down; what is found wanting burns, in proportion. ⚠ THE MEASURE IS HONEST — a target with little to answer for takes little, whatever you intended.",
+     "cannot": "IT MEASURES, THEN BURNS — you do not set the amount. A genuinely clean target takes nearly nothing and everyone watching sees that happen. You must actually pass judgment; a false one measures YOU.",
+     "functions": [
+      "strike",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Sentence Read",
+     "grants": "Judge a group. Each is measured separately and each takes their own weight — which is the Orders' entire point and is also horrible to watch.",
+     "cannot": "⚠ IT MEASURES ALLIES IN THE AREA TOO, at their own honest weight, one rung lower. There is no exempting your own from a judgment.",
+     "functions": [
+      "strike",
+      "reveal",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Unfallen Light",
+     "grants": "The full sentence, unmitigated. Those with much to answer for do not survive being measured.",
+     "cannot": "⚠ THE WIELDER IS MEASURED TOO at this rank and is struck at their own honest weight. The Unfallen — who would burn the impure — do exactly this and are certain they are right.",
+     "functions": [
+      "strike",
+      "reveal",
+      "hinder",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "magnitude",
+    "precision"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "weigh lightly — a warning, a mark",
+    "surge": "the unfallen light; THE WIELDER IS MEASURED TOO"
+   },
+   "bounds": [
+    {
+     "text": "THE MEASURE IS HONEST — you do not set the amount",
+     "class": "hard"
+    },
+    {
+     "text": "a clean target takes nearly nothing, publicly",
+     "class": "hard"
+    },
+    {
+     "text": "ALLIES ARE MEASURED at their own weight, one rung lower",
+     "class": "hard"
+    },
+    {
+     "text": "at rank 3 THE WIELDER IS MEASURED TOO",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/social action that weighs a target and burns them in proportion. Rated 8 of 10 across a scope of 2. Limit: the measure is honest — you do not set the amount."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

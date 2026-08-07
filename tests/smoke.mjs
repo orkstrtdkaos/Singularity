@@ -10714,6 +10714,58 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-349 — Erik: "but skill points aren't used to deepen a craft anymore." Correct, and FIVE separate
+  // strings said otherwise, including one I had just written.
+  //
+  // ⛔ THE WORST OF THEM FIRED EXACTLY WHEN THE PLAYER ASKS WHAT THEIR POINTS ARE FOR: at capacity, the
+  // screen said "new points now deepen what you know." At capacity you cannot LEARN (that is what capacity
+  // means) and you cannot BUY depth (it is earned) — so the one moment the message matters, it named the
+  // only thing points cannot do. What is actually true: they BANK, because the cap rises +1 per level.
+  {
+    const appSrc349 = readFileSync(join(root, "app.js"), "utf8");
+    const treeSrc349 = readFileSync(join(root, "engine/skilltree.js"), "utf8");
+    const progSrc349 = readFileSync(join(root, "engine/progression.js"), "utf8");
+
+    // ⚠️ GATED ON THE CLAIM, NOT ON THE WORDING. "deepen" is a fine word — the crafts DO deepen. What must
+    // never return is the claim that POINTS do it. So the pattern is points-near-deepen, not "deepen".
+    const claimsPointsDeepen = /points?\s+(?:now\s+)?deepen|deepen\s+(?:owned\s+)?(?:skills?|crafts?)\s*(?:with|using|by\s+spending)|spend.{0,20}(?:to\s+)?deepen/i;
+    const offenders = [];
+    for (const [file, src] of [["app.js", appSrc349], ["engine/skilltree.js", treeSrc349]]) {
+      for (const line of src.split(/\r?\n/)) {
+        if (line.trim().startsWith("//") || line.trim().startsWith("*")) continue;   // commentary may DESCRIBE the old rule
+        if (claimsPointsDeepen.test(line)) offenders.push(`${file}: ${line.trim().slice(0, 90)}`);
+      }
+    }
+    for (const o of offenders) console.log(`      claims points deepen a craft: ${o}`);
+    check("349: no player-facing string claims skill points DEEPEN a craft — depth is earned by use",
+      offenders.length === 0, offenders.join(" · "));
+
+    // The true statement has to actually be present, or "no lie" is satisfied by saying nothing at all.
+    check("349: …and the at-capacity message says what IS true — the points BANK until the next level",
+      /bank/i.test(appSrc349) && /at capacity/i.test(appSrc349));
+
+    // ⛔ AND THE DEAD PRICE IS GONE. `rankRows` computed a rankCost and a `canRank` reading `sp >= rankCost`
+    // — a purchase that has not existed since ability-arch v2, rendered nowhere, and a standing invitation
+    // to re-wire a paid deepen. A calculation that describes a rule is not evidence the rule exists.
+    // ⚠️ COMMENT-AWARE, like the check above — my own explanatory comment NAMES the dead expression
+    // it removed, and a whole-file regex flagged it. A gate that cannot tell code from commentary about
+    // code will punish the person who documented the fix.
+    const LF349 = String.fromCharCode(10);   // no escape survives this file's tooling intact
+    const codeOnly349 = appSrc349.split(LF349).filter(l => {
+      const t = l.trim();
+      return !(t.startsWith("//") || t.startsWith("*") || t.startsWith("/*"));
+    }).join(LF349);
+    check("349: the level-up screen no longer PRICES a rank it cannot sell",
+      !/const rankCost = learnPointCost/.test(codeOnly349) && !/sp >= rankCost/.test(codeOnly349));
+
+    // ⚠️ THE ONE LIVE SINK. If a second one ever appears, this goes red and someone has to say so out loud.
+    const sinks = (progSrc349.match(/character\.skillPoints = \(character\.skillPoints \|\| 0\) - |character\.skillPoints -= /g) || []).length;
+    check("349: skill points still have exactly the sinks we think they have (learn, and the untriggered rank path)",
+      sinks === 2, `${sinks} decrement sites in progression.js`);
+    check("349: …and LEARNING is the only one the app can reach — nothing in app.js calls rankUpAbility",
+      !/\brankUpAbility\s*\(/.test(appSrc349));
+  }
+
   // SNG-348 — Erik: "it seems like the costs have risen… even my tertiary or primary seem to have most
   // costing 2 skill points… can we add a filter for buyable so I can see what I can get."
   //

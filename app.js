@@ -88,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.59";
+const APP_VERSION = "1.9.60";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7516,10 +7516,14 @@ function wireSkillGraphViewport() {
 
 // ---------- character & inventory screens (SNG-007) ----------
 
-/** SNG-094: the Level-Up window — one place to spend skill points. DEEPEN a craft you know (rank up)
- *  or LEARN a new one (domain-gated, explained), with the SNG-084 helper text woven in. Stays open so
- *  a player with several points spends them in a row. Replaces hunting the sidebar's scattered ▲ + the
- *  collapsed "Learn" groups. */
+/** SNG-094: the Level-Up window. Skill points BUY BREADTH — a new craft, domain-gated and explained.
+ *  Stays open so a player with several points spends them in a row.
+ *
+ *  ⚠️ SNG-349 — THIS DOCSTRING SAID "DEEPEN a craft you know (rank up) OR learn a new one" LONG AFTER THAT
+ *  STOPPED BEING TRUE. Depth is EARNED under ability-arch v2: rank 2 lands automatically once a craft has
+ *  been used enough, rank 3 is a defining moment the GM marks. Neither costs a point, and this screen has
+ *  had no button for either in a long time. The DEEPEN section here is a READOUT — what you hold, how close
+ *  the next rank is — not a shop. A stale docstring is the version of the rule a future reader believes. */
 function renderLevelUp(status = "") {
   const rules = CONTENT.rules;
   const sp = character.skillPoints || 0;
@@ -7527,16 +7531,18 @@ function renderLevelUp(status = "") {
   const maxRank = rules.leveling?.maxAbilityRank ?? 3;
 
   // DEEPEN: owned abilities, showing what a rank costs / grants / why it's blocked
+  // ⛔ SNG-349 (Erik: "skill points aren't used to deepen a craft anymore") — THE PRICE OF A RANK WAS STILL
+  // BEING COMPUTED HERE, AND `canRank` STILL READ `sp >= rankCost`, describing a purchase that no longer
+  // exists: depth is EARNED (rank 2 lands automatically on practice, rank 3 is a GM-marked defining
+  // moment), and this screen has had no buy button for either since ability-arch v2. Neither field was
+  // rendered — dead arithmetic that reads like a live rule, and the standing invitation to re-wire a paid
+  // deepen "back". A field that describes behaviour is not evidence the behaviour exists; the same is true
+  // of a calculation.
   const rankRows = character.abilities.map(a => ({ a, ab: fullCatalog()[a.abilityId] })).filter(x => x.ab).map(({ a, ab }) => {
-    const rankCost = learnPointCost(ab, character, CONTENT.skillCapacity, domainVerdict(ab));
-    const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
     const atMax = a.level >= maxRank;
-    const levelOk = character.level >= (nextReq ?? 1);
-    const practiced = practiceRankReady(character, a.abilityId, rules) && !atMax && levelOk;
-    const canRank = !atMax && levelOk && (sp >= rankCost || practiced);
     const now = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab.tree?.find(t => t.rank === a.level);
     const next = ab.tree?.find(t => t.rank === a.level + 1);
-    return { a, ab, rankCost, atMax, levelOk, practiced, canRank, now, next };
+    return { a, ab, atMax, now, next };
   });
 
   // LEARN: everything the domain gate opens that you don't yet know (SNG-094 gate)
@@ -7580,7 +7586,7 @@ function renderLevelUp(status = "") {
       <div><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">L${ab.levelReq || 1}${band}${cost > 1 ? ` · ${cost} pts` : ""}${ripe ? " · practiced (free)" : ""}</span></div>
       <div class="hint">${esc((r1 ? r1.grants : ab.description) || "").slice(0, 130)}</div>
       ${blocked
-        ? `<span class="hint">🔒 ${!gate.ok ? esc(gate.why) : capBlock ? "at capacity — deepen instead" : "need " + cost + " point" + (cost > 1 ? "s" : "")}</span>`
+        ? `<span class="hint">🔒 ${!gate.ok ? esc(gate.why) : capBlock ? "at capacity — this waits until your next level widens it" : "need " + cost + " point" + (cost > 1 ? "s" : "")}</span>`
         : `<button class="btn" data-lvllearn="${esc(ab.id)}">Learn${ripe ? " (free)" : ` (${cost} pt${cost > 1 ? "s" : ""})`}</button>`}
     </div>`;
   };
@@ -7642,7 +7648,7 @@ function renderLevelUp(status = "") {
     </div>
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Learn a new craft ${infoDot("circle.domains")} <span class="hint" style="text-transform:none">— broaden into your domains</span></h3>
-      ${cap ? `<div class="hint" style="margin-bottom:6px">You're at capacity — new points now deepen what you know. ${infoDot("lock.capacity")}</div>` : ""}
+      ${cap ? `<div class="hint" style="margin-bottom:6px">You're at capacity — your points <strong>bank</strong> until your next level widens it. Depth comes from <em>using</em> a craft, never from points. ${infoDot("lock.capacity")}</div>` : ""}
       ${/* SNG-218 §3 (Erik): the WHEEL is the browse surface — every craft in its place, suggested picks lit,
           owned crafts hidden, standing-locked ones dimmed as "later". Its detail panel shows what each rank
           grants. The tradition LIST is now a collapsed plain-text fallback, not the default (Erik: don't want
@@ -7654,12 +7660,12 @@ function renderLevelUp(status = "") {
         <button class="btn ${learnBuyableOnly ? "" : "secondary"}" id="lvl-buyable" style="flex:0 0 auto">
           ${learnBuyableOnly ? "✓ " : ""}Only what I can afford <span class="cost">(${buyableAll.length} of ${learnable.length})</span>
         </button>
-        <span class="hint">${sp} point${sp === 1 ? "" : "s"} to spend${buyableAll.length === 0 && learnable.length > 0 ? " — nothing in reach yet; play on, or deepen a craft you already hold" : ""}</span>
+        <span class="hint">${sp} point${sp === 1 ? "" : "s"} to spend${buyableAll.length === 0 && learnable.length > 0 ? " — nothing in reach yet; they bank until you level, and the crafts you hold deepen by being used" : ""}</span>
       </div>
       <button class="btn" id="lvl-wheel" style="width:100%; margin-bottom:10px">✦ Browse crafts on the wheel${wheelRecommended.size ? " — your suggested picks are lit ✨" : ""} →</button>
       ${Object.keys(byTrad).length
         ? `<details class="learn-list-fallback"><summary class="hint">Or browse as a plain list ↴</summary><div style="margin-top:6px">${Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(k => `<details class="learn-group"><summary>${esc(traditionLabel(k))} <span class="cost">(${byTrad[k].length})</span></summary>${byTrad[k].sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1)).map(learnRow).join("")}</details>`).join("")}</div></details>`
-        : "<div class='insight'>nothing new to learn at this level — deepen a craft, or play on to reach the next tier</div>"}
+        : "<div class='insight'>nothing new to learn at this level — play on; the crafts you hold deepen as you use them</div>"}
     </div>
 
     <button class="btn secondary" id="lvl-back">Done</button>
@@ -10592,7 +10598,7 @@ function renderPlay(turn, opts = {}) {
           // over-tier picks (secondary>III, tertiary>II, kin-capstones) simply aren't shown.
           return domainVerdict(ab).allowed;
         });
-        const capLine = `<div class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${cap ? " — at capacity; points now deepen owned skills" : ""}${cap ? " " + infoDot("lock.capacity") : ""}</div>`;
+        const capLine = `<div class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${cap ? " — at capacity; points bank until your next level" : ""}${cap ? " " + infoDot("lock.capacity") : ""}</div>`;
         if (!learnable.length) return capLine;
         // SNG-059: group the learn list by TRADITION (the people)
         const byClass = {};

@@ -117,7 +117,7 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
       forks: !!fork, forkAt: fork?.atRank || null,
       forkChosen: chosen?.name || null, forkLocked: lockedPath?.name || null,
       locked: locked || foreclosed, foreclosed,
-      lockText: foreclosed ? "foreclosed — you chose the other end of this axis; only a braid crosses" : !learnGate.ok ? learnGate.why : (cap ? "at skill capacity — deepen owned skills" : ""),
+      lockText: foreclosed ? "foreclosed — you chose the other end of this axis; only a braid crosses" : !learnGate.ok ? learnGate.why : (cap ? "at skill capacity — this waits until your next level widens it" : ""),
       // ability-arch v2 + SNG-101: the display states, DERIVED from the flags above (no new computation).
       state: isOwned ? `OWNED_${Math.min(3, rank || 1)}` : foreclosed ? "FORECLOSED" : locked ? "LOCKED" : "AVAILABLE"
     };

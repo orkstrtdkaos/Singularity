@@ -10714,6 +10714,68 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-348 — Erik: "it seems like the costs have risen… even my tertiary or primary seem to have most
+  // costing 2 skill points… can we add a filter for buyable so I can see what I can get."
+  //
+  // ⚠️ THE COST IS NOT A BUG, AND THE GATE RECORDS THAT so the question stays answered. cost = tierPrice ×
+  // distance, and tierPrice is the ability's OWN levelReq (SNG-260 §D — Erik: "a Tier-II costs 2, a
+  // Tier-III costs 3. Power costs more."). So a Tier-II costs 2 IN YOUR PRIMARY DOMAIN, at zero distance —
+  // nothing to do with the cross-class multiplier. Tier-II is simply the modal tier in the catalog.
+  {
+    const { loadContentHeadless: lch348 } = await import("./headless_content.mjs");
+    const C348 = await lch348();
+    const { learnPointCost, skillGraphModel } = await import("../engine/skilltree.js");
+    const cap348 = C348.skillCapacity;
+    const inDomain = { penalty: 1, allowed: true, band: "home" };
+    const t1 = Object.values(C348.abilities).find(a => (a.levelReq || 1) === 1 && a.powerSystem !== "baseline");
+    const t2 = Object.values(C348.abilities).find(a => (a.levelReq || 1) === 2);
+    const who = { domains: { primary: "harmonic" }, skillPoints: 1, abilities: [], level: 9 };
+
+    check("348: at ZERO domain distance a Tier-I costs 1 — the floor is not the complaint",
+      learnPointCost(t1, who, cap348, inDomain) === 1);
+    check("348: …and a Tier-II costs 2 IN YOUR OWN DOMAIN — tier is the price, not cross-class distance",
+      learnPointCost(t2, who, cap348, inDomain) === 2);
+
+    // ⛔ THE FILTER MUST READ THE SAME NUMBER THE PURCHASE CHARGES. A filter that computes its own price is
+    // a second opinion on one question, and the two drift the first time either moves — the exact shape
+    // that put SIX copies of this calculation in the codebase before learnPointCost collapsed them.
+    const model = skillGraphModel(C348.abilities, C348.emergence, who, {
+      attributeGates: C348.attributeGates, skillCapacity: cap348, branchForks: C348.branchForks,
+      preds: { verdictFor: () => inDomain },
+    });
+    const node2 = model.nodes.find(n => n.id === t2.id);
+    check("348: the node model carries the SAME cost the purchase charges — never a second opinion",
+      node2.cost === learnPointCost(t2, who, cap348, inDomain));
+
+    // ⚠️ AVAILABLE ≠ BUYABLE, WHICH IS THE WHOLE REQUEST. A node can pass every gate and still be out of
+    // reach on price, and the wheel showed Erik exactly that: a field of open crafts he could not buy.
+    const openButUnaffordable = model.nodes.filter(n => !n.owned && !n.locked && !n.affordable);
+    check("348: a craft can be OPEN and still not BUYABLE — the two are different questions",
+      openButUnaffordable.length > 0 && openButUnaffordable.every(n => n.buyable === false));
+    check("348: buyable ⊆ affordable, always", model.nodes.filter(n => n.buyable).every(n => n.affordable));
+    check("348: …and buyable never includes a LOCKED craft", model.nodes.filter(n => n.buyable).every(n => !n.locked && !n.foreclosed));
+
+    // With more points, strictly more becomes buyable — the filter tracks the purse rather than a snapshot.
+    const rich = { ...who, skillPoints: 99 };
+    const richModel = skillGraphModel(C348.abilities, C348.emergence, rich, {
+      attributeGates: C348.attributeGates, skillCapacity: cap348, branchForks: C348.branchForks,
+      preds: { verdictFor: () => inDomain },
+    });
+    const poorCount = model.nodes.filter(n => n.buyable).length;
+    const richCount = richModel.nodes.filter(n => n.buyable).length;
+    check("348: more points ⇒ strictly more buyable — affordability tracks the purse", richCount > poorCount,
+      `${poorCount} at 1 point vs ${richCount} at 99`);
+
+    // The UI: one function answers "can I get this?", and the count shows BEFORE the toggle is used.
+    const appSrc348 = readFileSync(join(root, "app.js"), "utf8");
+    check("348: the filter and the row ask ONE function, so they cannot disagree",
+      /const learnState = ab =>/.test(appSrc348) && /learnable\.filter\(ab => !learnState\(ab\)\.blocked\)/.test(appSrc348));
+    check("348: the chip shows the count BEFORE you toggle it — 'N of M' answers the question without a click",
+      /buyableAll\.length\} of \$\{learnable\.length\}/.test(appSrc348));
+    check("348: …and says something useful when the answer is ZERO, rather than showing an empty list",
+      /nothing in reach yet/.test(appSrc348));
+  }
+
   // SNG-347 — A DESCRIPTION IS NOT A NAME. Erik's newly-minted NPC arrived as "someone tending the
   // waystation fire—shelter-keeper, traveler" and the ribbon announced it IN BOLD, as an identity.
   //

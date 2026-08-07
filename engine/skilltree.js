@@ -98,8 +98,18 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
     // SNG-101: a foreclosed antipode's NATIVE nodes read FORECLOSED ("you chose otherwise" — distinct from
     // LOCKED's "not yet"). Owned ground is kept (foreclosure is directional), and braids are never foreclosed.
     const foreclosed = !isOwned && ab.nativeOrCombination !== "combination" && (character?.foreclosed || []).includes(ab.tradition);
+    // ⛔ SNG-348 — THE MODEL KNEW WHETHER A NODE WAS OPEN AND NOT WHETHER IT WAS BUYABLE, and those are
+    // different questions. `AVAILABLE` means the gates are met and you are under capacity — it says nothing
+    // about the price, so the wheel showed Erik a field of open crafts he could not afford. Cost now rides
+    // on the node, from `learnPointCost` — THE SAME FUNCTION THE PURCHASE CHARGES, never a second opinion,
+    // because a filter that computes its own price will eventually disagree with the button.
+    const cost = isOwned ? 0 : learnPointCost(ab, character, skillCapacity, preds.verdictFor ? preds.verdictFor(ab) : null);
+    const affordable = isOwned || (character.skillPoints || 0) >= cost;
     return {
       id: ab.id, name: ab.name, cls: ab.tradition || ab.powerSystem, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1,
+      cost, affordable,
+      // BUYABLE = open AND affordable. Erik: "add a filter for buyable so I can see what I can get."
+      buyable: !isOwned && !locked && !foreclosed && affordable,
       owned: isOwned, rank,
       ripe: preds.isRipe ? !!preds.isRipe(ab.id) : false,
       aspired: preds.isAspired ? !!preds.isAspired(ab.id) : false,

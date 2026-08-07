@@ -88,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.58";
+const APP_VERSION = "1.9.59";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -409,6 +409,7 @@ function showVitalDetail(el) {
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
 let FN_INDEX = { families: [], verbToFamily: {}, byFamily: {} }; // SNG-124: function-family index (built at load)
 let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter on the skill wheel
+let learnBuyableOnly = false;  // SNG-348 (Erik): show only crafts the current skill points actually reach
 let wheelSelTrad = null; // SNG-202B §2: the tradition clicked to highlight its crafts/braids across the wheel
 let wheelRecommended = new Set(); // SNG-218 §3: the level-up suggestion's picks, lit ON the wheel (browse + highlight)
 let wheelReturnTo = null; // SNG-218 §3: when the wheel is opened FROM level-up, its Back returns there
@@ -7545,21 +7546,34 @@ function renderLevelUp(status = "") {
     if (req === null || character.level < req) return false;
     return domainVerdict(ab).allowed;
   });
+  // SNG-348 (Erik): "can we add a filter for buyable so I can see what I can get" — the list showed every
+  // craft his DOMAINS opened, which is a different question from what his POINTS reach. With tier pricing
+  // (SNG-260 §D) only 23% of the catalog costs 1 point even at zero domain distance, so the gap between
+  // "allowed" and "affordable" is most of the list.
+  const buyableAll = learnable.filter(ab => !learnState(ab).blocked);
+  const shown = learnBuyableOnly ? buyableAll : learnable;
   const byTrad = {};
-  for (const ab of learnable) { const k = abilityTradition(ab) || ab.powerSystem || "folk"; (byTrad[k] = byTrad[k] || []).push(ab); }
+  for (const ab of shown) { const k = abilityTradition(ab) || ab.powerSystem || "folk"; (byTrad[k] = byTrad[k] || []).push(ab); }
   // SNG-218 §1/§2: the REACHABLE-NOW set — `learnable` filtered through the ONE gate (adds standing, capacity,
   // affordability). BOTH the suggestion (heuristic fallback + the LLM pick) and the render read this, never the
   // raw level+domain `learnable` — so no suggestion (heuristic or model) can ever offer a standing-locked craft.
   const reachableNow = learnable.filter(ab => canLearnAbility(character, ab.id, fullCatalog(), rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex }).ok);
 
-  const learnRow = ab => {
+  // ⛔ SNG-348 — ONE FUNCTION ANSWERS "CAN I GET THIS?", because the FILTER and the ROW must never
+  // disagree. This was computed inline inside learnRow; a filter that recomputed it would be a second
+  // opinion on the same question, and the two would drift the first time either changed — the shape that
+  // put six copies of the cost calculation in this codebase before learnPointCost collapsed them.
+  const learnState = ab => {
     const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
     const dv = domainVerdict(ab);
     const ripe = aspirationRipe(character, ab.id, rules);
     const cost = learnPointCost(ab, character, CONTENT.skillCapacity, dv);
     const tooPoor = !ripe && sp < cost;
     const capBlock = cap && ab.powerSystem !== "learned";
-    const blocked = !gate.ok || capBlock || tooPoor;
+    return { gate, dv, ripe, cost, tooPoor, capBlock, blocked: !gate.ok || capBlock || tooPoor };
+  };
+  const learnRow = ab => {
+    const { gate, dv, ripe, cost, capBlock, blocked } = learnState(ab);
     const r1 = ab.tree?.find(t => t.rank === 1);
     const band = dv.band === "far" ? " · far" : dv.band === "adjacent" ? " · kin" : dv.band === "accord" ? " · open" : "";
     return `<div class="cs-ability ${blocked ? "locked" : ""}">
@@ -7633,6 +7647,15 @@ function renderLevelUp(status = "") {
           owned crafts hidden, standing-locked ones dimmed as "later". Its detail panel shows what each rank
           grants. The tradition LIST is now a collapsed plain-text fallback, not the default (Erik: don't want
           to dig through a list). */""}
+      ${/* SNG-348 (Erik): "add a filter for buyable so I can see what I can get." The count is on the chip
+           BEFORE you toggle it, because the useful fact is usually the number itself — "3 of 47" answers
+           the question without a click, and answers it even when the answer is zero. */""}
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap">
+        <button class="btn ${learnBuyableOnly ? "" : "secondary"}" id="lvl-buyable" style="flex:0 0 auto">
+          ${learnBuyableOnly ? "✓ " : ""}Only what I can afford <span class="cost">(${buyableAll.length} of ${learnable.length})</span>
+        </button>
+        <span class="hint">${sp} point${sp === 1 ? "" : "s"} to spend${buyableAll.length === 0 && learnable.length > 0 ? " — nothing in reach yet; play on, or deepen a craft you already hold" : ""}</span>
+      </div>
       <button class="btn" id="lvl-wheel" style="width:100%; margin-bottom:10px">✦ Browse crafts on the wheel${wheelRecommended.size ? " — your suggested picks are lit ✨" : ""} →</button>
       ${Object.keys(byTrad).length
         ? `<details class="learn-list-fallback"><summary class="hint">Or browse as a plain list ↴</summary><div style="margin-top:6px">${Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(k => `<details class="learn-group"><summary>${esc(traditionLabel(k))} <span class="cost">(${byTrad[k].length})</span></summary>${byTrad[k].sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1)).map(learnRow).join("")}</details>`).join("")}</div></details>`
@@ -7654,6 +7677,8 @@ function renderLevelUp(status = "") {
   bindLearn();
   document.getElementById("lvl-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
   // SNG-218 §3: open the wheel as the browse+highlight surface; its Back returns here (wheelReturnTo).
+  const lvlBuyable = document.getElementById("lvl-buyable");
+  if (lvlBuyable) lvlBuyable.onclick = () => { learnBuyableOnly = !learnBuyableOnly; renderLevelUp(); };
   const lvlWheel = document.getElementById("lvl-wheel"); if (lvlWheel) lvlWheel.onclick = () => { wheelReturnTo = "levelup"; wheelLearnMode = true; renderSkillWheel(); }; // SNG-218 §3: learn-browse — hide owned crafts
 
   // SNG-218 §2: upgrade the instant heuristic to a GENUINELY-REASONED suggestion (async, non-blocking). Reads

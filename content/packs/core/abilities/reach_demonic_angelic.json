@@ -2595,7 +2595,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/fight action that halts those who credit your name. Rated 5 of 10 across a scope of 3 for about two hours. Limit: it works only on those who believe the name."
+   "plainly": "A social/fight action that halts those who credit your name. Rated 5 of 10 across a scope of 3 for about two hours. Limit: it works only on those who believe the name.",
+   "backlash": "The name fails in front of everyone who was holding it. The belief does not just fail to work — it breaks, and the cult that believed the NAME comes looking for who wore it badly.",
+   "conserveSuppresses": "invoke quietly, to one person — a failure costs you only that one"
   },
   {
    "id": "the_struck_term",
@@ -2695,7 +2697,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/fight action that costs an opponent something they agreed to pay. Rated 5 of 10 on one target for about eight hours. Limit: refusal ends it — there is no forcing this."
+   "plainly": "A social/fight action that costs an opponent something they agreed to pay. Rated 5 of 10 on one target for about eight hours. Limit: refusal ends it — there is no forcing this.",
+   "backlash": "You cannot deliver what you named. The term rebounds by the Bargainers' own rule: you owe what you promised, to them, and the foothills will hold you to it.",
+   "conserveSuppresses": "small terms — a broken small term is a debt, not a ruin"
   },
   {
    "id": "the_offered_mouth",
@@ -2794,7 +2798,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight action that introduces a hunger to a target and lets it feed. Rated 8 of 10 across a scope of 2. Limit: it is not commanded — appetite decides."
+   "plainly": "A fight action that introduces a hunger to a target and lets it feed. Rated 8 of 10 across a scope of 2. Limit: it is not commanded — appetite decides.",
+   "backlash": "It looks at the person who showed it. You are the nearest appetite it has been introduced to, and it does not distinguish host from meal.",
+   "conserveSuppresses": "show it a small hunger — small hungers finish and go"
   },
   {
    "id": "the_measured_sentence",
@@ -2891,7 +2897,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/social action that weighs a target and burns them in proportion. Rated 8 of 10 across a scope of 2. Limit: the measure is honest — you do not set the amount."
+   "plainly": "A fight/social action that weighs a target and burns them in proportion. Rated 8 of 10 across a scope of 2. Limit: the measure is honest — you do not set the amount.",
+   "backlash": "The judgment was false and the light knows. The sentence falls on the one who passed it, at their own honest weight.",
+   "conserveSuppresses": "weigh lightly — a false light mark costs standing, not skin"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

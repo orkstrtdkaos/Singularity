@@ -161,20 +161,32 @@ now**, and each answer implies a different dial:
 | a real ceiling every character meets | points must approach it | **(a) skillPointPerLevel** |
 | nothing any more | retire the "at capacity" messaging rather than tune toward it | copy-only |
 
-**My recommendation, held loosely, and it is (a) with a caveat:**
+**⛔ CORRECTION 2026-08-07, SAME DAY, FOUND BY PLOTTING IT — MY "CROSSOVER" CLAIM WAS FALSE.**
 
-At `skillPointPerLevel: 2` the two constraints **cross over near level 16** — points bind early
-(poor, choosing carefully), capacity binds late (rich, must choose *which*). That crossover is the
-healthiest shape available here, because it gives the two systems distinct jobs across the arc
-instead of one permanently shadowing the other. Measured:
+I wrote that at `skillPointPerLevel: 2` the two constraints "cross over near level 16." **They never cross.**
+Affordable crafts are `(2 + s·L) / 2.511` and the cap is `L + 1` — both LINEAR in level, so their ratio
+converges to `s / 2.511` and holds there forever. At s=2 that is 80%: closer, never crossing. I read my own
+table, saw 13 beside a cap of 17, and called it a crossover because it was the shape my recommendation
+needed. **The arithmetic was on the page and I described what I was arguing for instead of what it said.**
+Leaving the claim here struck through rather than deleted, per standing practice.
 
-| lvl | points (1/lvl) | points (2/lvl) | cap | afford @1 | afford @2 |
-|---|---|---|---|---|---|
-| 3 | 5 | 8 | 4 | 1 | 3 |
-| 8 | 10 | 18 | 9 | 3 | 7 |
-| 12 | 14 | 26 | 13 | 5 | 10 |
-| 16 | 18 | 34 | 17 | 7 | **13** |
-| 20 | 22 | 42 | 21 | 8 | **16** |
+**THE CORRECTED FINDING, which is stronger and simpler than what it replaces:**
+
+> **Points bind if and only if `skillPointPerLevel` < average craft cost (2.511).**
+> One number against one number. Level does not enter it. At s=1 a character reaches **40% of their
+> permitted breadth at every level, permanently** — this is not a curve that resolves with growth.
+
+| s | ratio | what a player experiences |
+|---|---|---|
+| 1 (today) | 40% | points bind forever; "at capacity" is a state a paying character never occupies |
+| 2 | 80% | points still bind, but capacity comes into view and the message stops being fiction |
+| 2.5 | ~100% | parity — **avoid**: both ceilings exhaust together, so the player never learns which one stopped them |
+| 3 | 119% | capacity binds from level 2; points stop mattering almost at once — a different game, not a tuned one |
+
+**Revised recommendation, held loosely:** if the goal is for capacity to mean anything to a paying
+character, s must move toward 2 — not because it crosses, but because 40% is not a tuned scarcity, it is a
+system shadowing another by 60% since ability-arch v2 removed the depth branch. If the goal is scarcity,
+s=1 is correct and the "at capacity" copy should be demoted to an edge case (§1c work, not a dial).
 
 ⚠️ **I do not recommend (b), flattening the tier ladder.** `tierPrice {1,2,3,4,5}` is not an
 inherited accident — it is Erik's stated dial, quoted in the file: *"a Tier-II costs 2, a Tier-III

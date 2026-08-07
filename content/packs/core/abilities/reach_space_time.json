@@ -2350,8 +2350,8 @@
     {
      "rank": 3,
      "name": "The Closed Span",
-     "grants": "Fold enough distance into a person that there is no room left in them for the distance they are made of.",
-     "cannot": "⚠ THE WIELDER IS STRUCK ONE RUNG LOWER — you are holding a fold and standing next to it. The Unlanded, who never arrive anywhere, end up this way by degrees.",
+     "grants": "Fold enough distance into a person that there is no room left in them for the distance they are made of. AND YOU HAVE THE FOLD NOW: hold it clear of yourself and your own, and set exactly where the span closes.",
+     "cannot": "A closed span cannot be reopened — what you fold out of someone does not come back. Warded ground still refuses you, and the March keeps such wards precisely because of this rank. The Unlanded, who never arrive anywhere, end up this way by degrees.",
      "functions": [
       "strike",
       "break",
@@ -2379,7 +2379,7 @@
    },
    "intensity": {
     "conserve": "a hand's fold — a wrenched joint",
-    "surge": "close the span; THE WIELDER IS STRUCK ONE RUNG LOWER"
+    "surge": "fold without holding it clear — reach further and take more, and THE WIELDER AND ALLIES ARE STRUCK ONE RUNG LOWER"
    },
    "bounds": [
     {
@@ -2393,10 +2393,6 @@
     {
      "text": "FOLDED GROUND TAKES ALLIES TOO, one rung lower",
      "class": "hard"
-    },
-    {
-     "text": "at rank 3 the wielder is struck one rung lower",
-     "class": "cost"
     }
    ],
    "plainly": "A fight action that folds distance into a target's body. Rated 7 of 10 across a scope of 2. Limit: short range, and you must see the whole of what you fold."
@@ -2448,8 +2444,8 @@
     {
      "rank": 3,
      "name": "The Whole Duration",
-     "grants": "Take all of it at once. What was going to be a life happens now, in front of you, quickly.",
-     "cannot": "⚠ THE WIELDER IS STRUCK ONE RUNG LOWER — you are standing inside the levy and you also have time in you. The Stopped, who will not let a moment pass, began by doing this too often.",
+     "grants": "Take all of it at once. What was going to be a life happens now, in front of you, quickly. AND THE LEVY PASSES YOU BY: you and yours are no longer inside the toll you call.",
+     "cannot": "What is spent still cannot be returned, ever, including if you were wrong about who deserved it. The Stopped, who will not let a moment pass, began by doing this too often and too well.",
      "functions": [
       "strike",
       "hinder",
@@ -2478,7 +2474,7 @@
    },
    "intensity": {
     "conserve": "a small levy — a strap perishes, a wound sours",
-    "surge": "the whole duration; THE WIELDER IS STRUCK ONE RUNG LOWER"
+    "surge": "levy the whole place without exempting anyone — everything present pays, and THE WIELDER AND ALLIES ARE STRUCK ONE RUNG LOWER"
    },
    "bounds": [
     {
@@ -2492,10 +2488,6 @@
     {
      "text": "ALLIES ARE STRUCK ONE RUNG LOWER by the toll",
      "class": "hard"
-    },
-    {
-     "text": "at rank 3 the wielder is struck one rung lower",
-     "class": "cost"
     }
    ],
    "plainly": "A fight/puzzle action that spends the time out of a target or their gear. Rated 7 of 10 across a scope of 2. Limit: one thing at a time, and what is spent cannot be returned."

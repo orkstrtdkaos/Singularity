@@ -1,28 +1,35 @@
 {
-  "schemaVersion": 1,
-  "note": "Broad-vs-deep capacity (tier-slot mechanic). skillsKnownByLevel = max DISTINCT chosen abilities a character may hold at each level \u2014 the breadth cap. Level 1 = 2 (Erik ratified 2026-07-06: 'generic RPG quantity per level guide, level 1 = 2'). At the cap, skill points may still RANK UP owned abilities (depth) \u2014 that IS the broad-vs-deep tradeoff. Tier access is separately gated by each ability's levelReq. Generic linear default (level + 1); tunable.",
-  "skillsKnownByLevel": {
-    "1": 2,
-    "2": 3,
-    "3": 4,
-    "4": 5,
-    "5": 6,
-    "6": 7,
-    "7": 8,
-    "8": 9,
-    "9": 10,
-    "10": 11,
-    "11": 12,
-    "12": 13
-  },
-  "tierPrice": { "1": 1, "2": 2, "3": 3, "4": 4, "5": 5 },
-  "tierPriceNote": "SNG-260 §D / SNG-261 §A — what a craft is WORTH, by its levelReq tier. Erik: 'a Tier-II costs 2, a Tier-III costs 3. Power costs more.' Composes MULTIPLICATIVELY with the distance term (domain ring penalty, or the cross-class multiplier when domains are unset), so a far Tier-III is genuinely dear and a near Tier-I stays 1. The catalog holds 28 abilities at levelReq 4 and 26 at levelReq 5, so the ladder must reach T-V (SNG-261 §A); this default is LINEAR — whether T-IV/V accelerate (4/6 rather than 4/5) is Erik's dial. Earned growth (practice, braids, discoveries) never comes through this table.",
-  "beyondTable": "level + 1",
-  "rule": "LEARN a new ability only while distinct-ability count < skillsKnownByLevel[level]. At the cap, points go to depth (rank-ups). Emergence combos/branches (SNG-010) and crit-discoveries do NOT count against the cap \u2014 earned techniques are free growth, not chosen breadth.",
-  "crossClass": {
-    "ratified": "Erik 2026-07-06 \u2014 soft class cap: secondary-class abilities cost double, no hard rank ceiling",
-    "homeClass": "the character's origin power system (harmonic|radiant|valley_craft); precursor is learned-only",
-    "costMultiplier": 2,
-    "note": "Learning OR ranking an ability whose powerSystem is NOT the character's home class costs 2x skill points. No hard rank-2 ceiling \u2014 you CAN master a secondary class, it just costs. Preserves specialist-vs-generalist tension via price, not a wall. Stacks with the existing cross-training +1 levelReq. Precursor point-spend (after unlock) also pays the multiplier if precursor isn't home."
-  }
+ "schemaVersion": 1,
+ "note": "Breadth capacity (tier-slot mechanic). skillsKnownByLevel = max DISTINCT chosen abilities a character may hold at each level — the breadth cap. Level 1 = 2 (Erik ratified 2026-07-06: 'generic RPG quantity per level guide, level 1 = 2'). Tier access is separately gated by each ability's levelReq. Generic linear default (level + 1); tunable. ⛔ SNG-350 — THIS NOTE SAID 'at the cap, skill points may still RANK UP owned abilities (depth) — that IS the broad-vs-deep tradeoff.' IT IS THE SOURCE THE FIVE UI STRINGS SNG-349 CORRECTED WERE DESCENDED FROM. Under ability-arch v2 depth is EARNED — rank 2 lands on practice, rank 3 is a GM-marked defining moment — and neither costs a point. So there is no broad-vs-deep FORK: points buy breadth and only breadth. At the cap they BANK, because the cap rises each level. The tradeoff this file was named for lost its other branch and the prose outlived it. Correcting the app while leaving the rules file asserting the old rule would have re-seeded the drift.",
+ "skillsKnownByLevel": {
+  "1": 2,
+  "2": 3,
+  "3": 4,
+  "4": 5,
+  "5": 6,
+  "6": 7,
+  "7": 8,
+  "8": 9,
+  "9": 10,
+  "10": 11,
+  "11": 12,
+  "12": 13
+ },
+ "tierPrice": {
+  "1": 1,
+  "2": 2,
+  "3": 3,
+  "4": 4,
+  "5": 5
+ },
+ "tierPriceNote": "SNG-260 §D / SNG-261 §A — what a craft is WORTH, by its levelReq tier. Erik: 'a Tier-II costs 2, a Tier-III costs 3. Power costs more.' Composes MULTIPLICATIVELY with the distance term (domain ring penalty, or the cross-class multiplier when domains are unset), so a far Tier-III is genuinely dear and a near Tier-I stays 1. The catalog holds 28 abilities at levelReq 4 and 26 at levelReq 5, so the ladder must reach T-V (SNG-261 §A); this default is LINEAR — whether T-IV/V accelerate (4/6 rather than 4/5) is Erik's dial. Earned growth (practice, braids, discoveries) never comes through this table.",
+ "beyondTable": "level + 1",
+ "rule": "LEARN a new ability only while distinct-ability count < skillsKnownByLevel[level]. At the cap, points BANK until the next level widens it — they cannot be converted to depth. Emergence combos/branches (SNG-010), crit-discoveries, and ripe aspirations do NOT count against skill points — earned techniques are free growth — but they DO consume breadth, which is why capacity still binds the practising character even though points bind the paying one.",
+ "crossClass": {
+  "ratified": "Erik 2026-07-06 — soft class cap: secondary-class abilities cost double, no hard rank ceiling",
+  "homeClass": "the character's origin power system (harmonic|radiant|valley_craft); precursor is learned-only",
+  "costMultiplier": 2,
+  "note": "Learning OR ranking an ability whose powerSystem is NOT the character's home class costs 2x skill points. No hard rank-2 ceiling — you CAN master a secondary class, it just costs. Preserves specialist-vs-generalist tension via price, not a wall. Stacks with the existing cross-training +1 levelReq. Precursor point-spend (after unlock) also pays the multiplier if precursor isn't home."
+ },
+ "_bindingConstraint": "⚠️ SNG-350 MEASURED, ERIK'S CALL, NOTHING TUNED. Average craft cost at zero domain distance is 2.511 points (catalog: 72 tier-I, 119 tier-II, 44 tier-III, 41 tier-IV, 35 tier-V — tier-II is modal, and only 23% of the catalog costs 1 point even in your primary domain at zero distance). Points arrive at 1/level; the breadth cap rises 1/level. POINTS THEREFORE BIND AT EVERY LEVEL, by roughly 2.5×: at level 12 a character can afford ~5 crafts while capacity permits 13. The 'at capacity' state is nearly unreachable by spending, so a paying player's felt experience of progression is 'I cannot afford anything', never 'I have filled up'. Capacity still binds characters earning FREE crafts (ripe aspirations cost no points but do consume breadth) — so the two systems govern different populations: points gate the paying character, capacity gates the practising one. Dials, if Erik wants one: skillPointPerLevel (1) · the tierPrice ladder (a content edit, but it is Erik's explicit 'power costs more' dial) · or leave it, because scarcity is the intent. At skillPointPerLevel 2 the two constraints cross over near level 16 (poor early, choosing late). Inherited is not the same as chosen."
 }

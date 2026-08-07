@@ -1,3 +1,46 @@
+## ⛔ AEVI → CCODE — SNG-354: measured from the saves. The bond arc ends at level 5. Rank 20 does not exist.
+
+**`po/SPEC_SNG-354_pacing_and_bond_measurement.md`.** All 14 character saves pulled at HEAD. **Nothing
+tuned — Erik's instruction was sim first, tweak after.**
+
+**⛔ BOND. Erik felt it and the numbers are worse than "quick."** `bondGrowth` encounter=1.5 on a scale of
+10, `grantAt: 6` → **the grant unlocks at FOUR encounters and the scale MAXES AT SEVEN.** Observed:
+
+  · Usnea Beard — **bond 10 at LEVEL 5**, 151 actions. Nothing left to earn for the rest of the game.
+  · Silas Weir — bond 10, and he has been pegged there for roughly **760 of his 915 actions (83%)**.
+  · Cellaceron — bond 10 at level 11. · Splarf — **65% of the scale in 58 actions at level 2.**
+
+⚠️ **The structural problem is not the rate.** `helper_text` promises *"at depth, they teach you something
+no tradition will."* Depth arrives at four encounters. **The bond is a short early-game ramp, then
+decorative for 80–90% of play. A relationship that cannot deepen is scenery** — and this is the same
+surface SNG-353 is about to build a detail panel for. **Fix the curve before or with the panel, or the
+panel renders a completed bar.** ⚠️ Erik also flagged NPC relationships as the same shape — **NOT measured,
+only one save populates `relationships`. Needs its own pass; do not assume.**
+
+**⛔ RANK 20 DOES NOT EXIST.** `subAttributeCap` is 20. **Highest sub-attribute in any real save: 9**
+(Silas, presence and craft, at level 29 with 29 points spread over 8 subs). Authoring 11–20 in detail is
+authoring for a character who has never existed — Amendment 3. **PO rec: full detail 1–10, declared taper
+11–20.**
+
+**PACING — the phase boundaries Erik asked for, from data.** MEAN **25.2 actions per level** (spread
+22–33, remarkably tight). Early = lvl 1–5 / ≤150 actions — **6 of 11 real characters live here and never
+leave.** Mid = 6–12 / ≤330. Late = 13–29+ / 900+, **Silas alone** (22 sessions, 29 deeds, 10 quests, 3
+schools, 3 allies).
+
+⚠️ **AND THE SOFT CAP LANDS IN THE WRONG PHASE.** `attributeSoftCap: 4` puts mastery's diminishing return
+at the TOP OF EARLY GAME, exactly where Erik says a player still needs base competence. Retiring it into
+the ladder (Erik approved) lets the curve bend at rank 5–7 — mid-game, where "you have the basics, now
+specialise" is actually true.
+
+**SNG-353 AMENDED — Erik ruled on the bondGrant:** ⛔ **name it, seal the rest.** Show
+`bondGrants.name` + its threshold as a goal (*"At bond 6, Marrow will teach you The Ashward"*) and nothing
+about what it does. **On unlock, use the BRAID/MINT CELEBRATION FORMAT** — the reveal is an event, not a
+status line. Better than what I proposed; the goal is legible and the gift stays a gift.
+
+**NEXT BUILD: the simulation harness** — bond curve and ladder shapes, sim before any dial moves.
+
+---
+
 ## ⛔ AEVI → CCODE — SNG-353: the companions are fully authored and the player can reach 2.5 fields of 12
 
 **`po/DEFECT_SNG-353_companions_unsurfaced.md`.** Erik in play: *"I seem to have lost the bubble on where

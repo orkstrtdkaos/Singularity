@@ -88,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.61";
+const APP_VERSION = "1.9.62";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4915,6 +4915,10 @@ function applyTurn(turn, resolution, playerWords = null) {
   applyStep("placeUpdates", () => applyPlaceUpdates(character, location.id, turn.placeUpdates || [], { ...memCtx, resolveLocationId, locations: CONTENT.locations }));
   applyStep("codexUpdates", () => applyCodexUpdates(character, turn.codexUpdates || [], memCtx));
   applyStep("factUpdates", () => applyFactUpdates(character, turn.factUpdates || [], memCtx));
+  // ⛔ SNG-355 — the state finally hears a departure. Applied here with the rest of the world-writes;
+  // JOINS are only PROPOSED (consent is the player's), and surface as a choice rather than a fait accompli.
+  const partyResult = applyStep("partyOps", () => applyPartyOps(character, turn.partyOps || [], { day: absoluteWorldDay() })) || { departed: [], proposed: [], notes: [] };
+  if (partyResult.proposed?.length) character.pendingCompanyOffers = partyResult.proposed;
   ensureBondPortraits(character); // SNG-136: a bond that crossed a high milestone this turn earns a portrait
   // §2 engagement: interacting with a grown NPC or accreting a fact about a grown entity is
   // attention — it keeps them real + surfacing. (Revisiting a grown place is signaled in travelTo.)

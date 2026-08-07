@@ -920,6 +920,31 @@ export const CHARACTER_STEPS = [
       return { notes: [`What you have grown into has caught up with you: ${applied.map(g => `+${g.amount} ${g.unit || g.field}`).join(", ")}.`] };
     }
   },
+  {
+    version: 30, id: "restore-generated-teacher-roles", playerFacing: true,
+    // SNG-355 §1c — ERIK'S SAVE NEEDS THIS AND CANNOT HEAL ITSELF. `recruit()` read `teaches` from the
+    // AUTHORED catalog only, so a GENERATED NPC returned {} and the teacher role was dropped at the moment
+    // of joining. He calls Veth-Ondra his teacher; his save says `teaches: null`.
+    //
+    // ⚠️ THE CURRICULUM MACHINERY WAS REAL AND REACHED NOTHING — curriculumFor, teachersForGM and
+    // teacherOfferReady all read a field nothing ever populated for the people who actually travel with
+    // you. Fixing recruit() stops the loss going forward; only this restores what was already lost.
+    apply: (c) => {
+      const reg = c.npcRegistry || {};
+      const fixed = [];
+      for (const m of c.company || []) {
+        if (m.teaches || m.leftDay) continue;
+        const t = reg[m.npcId]?.teaches;
+        if (!t) continue;
+        m.teaches = t;
+        if (!m.roles.includes("trainer")) m.roles.push("trainer");
+        fixed.push(`${reg[m.npcId]?.name || m.npcId} (${t})`);
+      }
+      if (!fixed.length) return {};
+      console.log(`[reconcile] sng-355: restored ${fixed.length} teacher role(s) lost at recruit: ${fixed.join(", ")}`);
+      return { notes: [`You remember who taught you: ${fixed.join(", ")}.`] };
+    }
+  },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];

@@ -37,13 +37,48 @@ export function offeredRoles(npcCatalog = {}) {
 
 /** Recruit a known NPC into the company with one or more roles (they STACK). `partner` is refused here
  *  (bond-derived only). Returns the company entry. */
+/** ⛔ SNG-355 — THE ONE PLACE "WHO IS WITH ME" IS ANSWERED. Departure stopped being deletion (a member
+ *  who travelled with you for twenty days and left should be REMEMBERED as having left, not erased), which
+ *  means `character.company` now holds history as well as present. Aevi named the consequence as the one
+ *  real regression risk in the ticket: "companyRoster() must then filter on active membership, or every
+ *  past ally comes back as a current one."
+ *
+ *  ⚠️ FIVE CALL SITES READ THIS ARRAY — the roster, the trainer set, the liaison map, the teacher
+ *  block, and standing's drip. Filtering at each would be five chances to forget; a SIXTH reader added
+ *  later would be a certainty. So every one goes through here, and a former member cannot leak into a
+ *  present-tense answer by omission. */
+export function activeCompany(character) {
+  return (character?.company || []).filter(m => m && !m.leftDay);
+}
+
+/** Those who travelled with you and no longer do — history, kept. This is what makes "the road may cross
+ *  again" (already in the copy) a statement the system can act on: rejoining reads the old record rather
+ *  than minting a stranger. */
+export function formerCompany(character) {
+  return (character?.company || []).filter(m => m && m.leftDay);
+}
+
 export function recruit(character, npcId, { roles = ["ally"], teaches = null, liaisonFor = null, day = null } = {}) {
   ensureCompany(character);
   const clean = [...new Set(roles.map(String).filter(r => COMPANY_ROLES.includes(r) && r !== "partner"))];
   let entry = character.company.find(m => m.npcId === npcId);
   if (!entry) { entry = { npcId, roles: [], teaches: null, liaisonFor: null, joinedDay: day }; character.company.push(entry); }
+  // ⚠️ REJOINING READS THE OLD RECORD. The departure is cleared but `joinedDay` and any prior roles
+  // stand, so someone who walks back into the party is the person you knew, not a stranger with their name.
+  if (entry.leftDay) { entry.rejoinedDay = day; delete entry.leftDay; delete entry.departedWhy; }
   entry.roles = [...new Set([...entry.roles, ...clean])];
-  if (teaches) entry.teaches = teaches;
+  // ⛔ SNG-355 §1c — THE FALLBACK LIVES HERE, NOT AT THE CALL SITE, because there are now two callers
+  // (the button and the GM op) and a fallback written at one of them is a fallback the other lacks.
+  //
+  // The caller reads `teaches` from CONTENT.npcs — the AUTHORED catalog — so a GENERATED NPC returns {}
+  // and the teacher role is silently dropped at the moment of joining. Erik calls Veth-Ondra his teacher;
+  // his save says `teaches: null` and `character.teachers` is `{}`. ⚠️ THE CURRICULUM MACHINERY IS REAL
+  // AND REACHES NOTHING: curriculumFor, teachersForGM and teacherOfferReady all read a field nothing ever
+  // populated for the people who actually travel with you. Generated NPCs live in the character's own
+  // registry, so that is the second place to look.
+  const fromRegistry = character?.npcRegistry?.[npcId]?.teaches || null;
+  if (teaches || fromRegistry) entry.teaches = teaches || fromRegistry;
+  if (!teaches && fromRegistry) entry.roles = [...new Set([...entry.roles, "trainer"])];
   if (liaisonFor) entry.liaisonFor = liaisonFor;
   return entry;
 }
@@ -51,11 +86,17 @@ export function recruit(character, npcId, { roles = ["ally"], teaches = null, li
 /** Leave the company — remove the membership and, with it, its benefits (the teacher gate closes for
  *  high tiers not yet taken; a liaison's speed ends). Already-learned crafts stay (Law 14). Returns true
  *  if a member was removed. */
-export function partCompany(character, npcId) {
+export function partCompany(character, npcId, { day = null, why = null } = {}) {
   ensureCompany(character);
-  const before = character.company.length;
-  character.company = character.company.filter(m => m.npcId !== npcId);
-  return character.company.length < before;
+  // ⛔ SNG-355 — DEPARTURE IS A STATUS, NOT A DELETE. This was `filter(m => m.npcId !== npcId)`: the
+  // history went with them. Erik: "the story had let some of them depart while still remaining in my
+  // party." The state could not hear a departure, and when it finally did, it erased the person instead of
+  // recording that they left. Both halves are the same missing idea — that leaving is an EVENT.
+  const entry = (character.company || []).find(m => m.npcId === npcId && !m.leftDay);
+  if (!entry) return false;
+  entry.leftDay = day ?? entry.leftDay ?? null;
+  entry.departedWhy = why || entry.departedWhy || null;
+  return true;
 }
 
 /** The unified NPC-company roster: each recruited member with its roles + benefits, PLUS partner-adjacent
@@ -66,7 +107,7 @@ export function companyRoster(character, { rules = null } = {}) {
   const reg = character?.npcRegistry || {};
   const byId = {};
   const mk = (id, n) => ({ npcId: id, name: n.name || id, roles: [], teaches: null, liaisonFor: null, bond: Number(n.relationship) || 0, band: relationshipBand(Number(n.relationship) || 0), bondType: n.bondType || null, recruited: false });
-  for (const m of character.company) {
+  for (const m of activeCompany(character)) {
     const n = reg[m.npcId] || {};
     const e = byId[m.npcId] = mk(m.npcId, n);
     e.roles = [...m.roles]; e.teaches = m.teaches || null; e.liaisonFor = m.liaisonFor || null; e.recruited = true;
@@ -84,7 +125,7 @@ export function companyRoster(character, { rules = null } = {}) {
 export function trainerFor(character) {
   ensureCompany(character);
   const set = new Set();
-  for (const m of character.company) if (m.roles.includes("trainer") && m.teaches) set.add(m.teaches);
+  for (const m of activeCompany(character)) if (m.roles.includes("trainer") && m.teaches) set.add(m.teaches);
   return set;
 }
 
@@ -92,7 +133,7 @@ export function trainerFor(character) {
 export function liaisonFactions(character, { multiplier = LIAISON_MULT } = {}) {
   ensureCompany(character);
   const out = {};
-  for (const m of character.company) if (m.roles.includes("liaison") && m.liaisonFor) out[m.liaisonFor] = multiplier;
+  for (const m of activeCompany(character)) if (m.roles.includes("liaison") && m.liaisonFor) out[m.liaisonFor] = multiplier;
   return out;
 }
 
@@ -187,7 +228,7 @@ export function teachersForGM(character, { catalog = {}, traditionIndex = null, 
   for (const [tid, t] of Object.entries(character?.teachers || {})) {
     if (t && t.met && t.willing) consider(tid, npcs[t.npcId]?.name || "Your teacher", t.npcId);
   }
-  for (const m of character.company) {
+  for (const m of activeCompany(character)) {
     if (m.roles.includes("trainer") && m.teaches) consider(m.teaches, npcs[m.npcId]?.name || "A trainer with you", m.npcId);
   }
   return lines.length ? lines.join("\n") : "";
@@ -217,4 +258,41 @@ export function teacherOfferReady(character, { catalog = {}, traditionIndex = nu
     }
   }
   return null;
+}
+
+/** ⛔ SNG-355 §1a — THE GM CAN FINALLY SAY IT. `recruit()` and `partCompany()` both worked and were
+ *  called from exactly two places, both `btn.onclick` behind a `confirm()`. So the entity that NARRATES the
+ *  story — the one that says "Calvar clasps your arm and turns back toward the March" — had no mechanism
+ *  to record that it happened. Erik: "the story had let some of them depart while still remaining in my
+ *  party." This is not a new story capability; it is letting the state hear one already being spoken.
+ *
+ *  ⚠️ ENTRY NEEDS CONSENT, EXIT DOES NOT, AND THE ASYMMETRY IS DELIBERATE. Joining is a commitment the
+ *  player assents to, so a GM-proposed join returns a PENDING offer the button path confirms. Leaving is
+ *  the story's to decide — Aevi: "a departure that requires the player's permission is not a departure."
+ *
+ *  Returns { departed:[], proposed:[], notes:[] }. Departures are applied; joins are only proposed. */
+export function applyPartyOps(character, ops = [], { day = null, registry = null } = {}) {
+  ensureCompany(character);
+  const out = { departed: [], proposed: [], notes: [] };
+  const reg = registry || character?.npcRegistry || {};
+  const nameOf = (id) => reg[id]?.name || id;
+  for (const raw of Array.isArray(ops) ? ops : []) {
+    const op = String(raw?.op || "").toLowerCase();
+    const npcId = String(raw?.npcId || raw?.id || "").trim();
+    if (!npcId) continue;
+    if (op === "depart") {
+      // ⚠️ ONLY SOMEONE ACTUALLY WITH YOU CAN LEAVE. Without this a GM can "depart" a stranger and mint
+      // a departure record for a person who was never in the party — history invented rather than kept.
+      const active = activeCompany(character).some(m => m.npcId === npcId);
+      if (!active) continue;
+      if (partCompany(character, npcId, { day, why: raw?.why || null })) {
+        out.departed.push({ npcId, why: raw?.why || null });
+        out.notes.push(`${nameOf(npcId)} is no longer travelling with you${raw?.why ? ` — ${raw.why}` : ""}.`);
+      }
+    } else if (op === "join") {
+      if (activeCompany(character).some(m => m.npcId === npcId)) continue;   // already with you
+      out.proposed.push({ npcId, name: nameOf(npcId), roles: Array.isArray(raw?.roles) ? raw.roles : ["ally"], why: raw?.why || null });
+    }
+  }
+  return out;
 }

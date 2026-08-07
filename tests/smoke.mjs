@@ -18,7 +18,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/p
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, worldArcsForGM, effectiveEpicStatus, applyEpicArcPush, resolveEpicClash, applyEpicClashOutcome } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
-import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES } from "../engine/company.js";
+import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES, activeCompany, formerCompany, applyPartyOps } from "../engine/company.js";
 import { standingWithPeople } from "../engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, companyStandingRates, applyStandingOps, standingFor, standingRoster, dripScale, DRIP, CREATION_SEEDS } from "../engine/standing.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
@@ -2765,8 +2765,15 @@ await (async () => {
     offeredRoles({ teaches: "somatic", liaisonFor: "somatic" }).sort().join() === ["ally", "liaison", "trainer"].sort().join() && offeredRoles({}).join() === "ally");
 
   // part ways removes the membership + its benefits (already-learned stays — Law 14, not tested here)
-  partCompany(ch, "sorel");
-  check("SNG-126: partCompany removes the member and its benefits (trainerFor/liaison now empty)", !ch.company.some(m => m.npcId === "sorel") && !trainerFor(ch).has("somatic"));
+  partCompany(ch, "sorel", { day: 34, why: "called back to the March" });
+  // ⛔ SNG-355 CHANGED WHAT THIS GATE IS ABOUT. It asserted that partCompany REMOVES the member — correct
+// then, and the exact behaviour Erik's bug came from: departure was deletion, so twenty days of travelling
+// together were erased rather than remembered. The requirement now has two halves, and BOTH matter: the
+// benefits must stop, AND the record must survive.
+check("SNG-126/355: parting stops the benefits (trainerFor/liaison empty) AND KEEPS the record",
+  trainerFor(ch).size === 0 && Object.keys(liaisonFactions(ch)).length === 0
+  && activeCompany(ch).length === 0 && formerCompany(ch).length === 1
+  && formerCompany(ch)[0].leftDay != null);
 
   // the master_taro reference content declares the fields the engine reads
   const taro = JSON.parse(readFileSync(join(root, "content/packs/valley/npcs/master_taro.json"), "utf8"));
@@ -10736,6 +10743,66 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-355 — THE GM COULD NOT ADD OR REMOVE A PARTY MEMBER. ONLY A BUTTON COULD.
+  //
+  // Erik: "the story had let some of them depart while still remaining in my party." recruit() and
+  // partCompany() both worked and were called from exactly two places, both btn.onclick behind a confirm().
+  // The entity that NARRATES the story had no mechanism to record that it happened.
+  {
+    const { activeCompany, formerCompany, applyPartyOps, recruit, partCompany, trainerFor } = await import("../engine/company.js");
+    const { reconcile } = await import("../engine/reconcile.js");
+
+    // ⛔ DEPARTURE IS A STATUS, NOT A DELETE. It was `filter(m => m.npcId !== npcId)` — so someone who
+    // travelled with you for twenty days and left was ERASED rather than remembered.
+    const ch = { npcRegistry: { calvar: { name: "Calvar" } }, company: [] };
+    recruit(ch, "calvar", { roles: ["ally", "trainer"], teaches: "somatic", day: 18 });
+    partCompany(ch, "calvar", { day: 34, why: "turned back toward the March" });
+    check("355: a departure KEEPS the record — history, not absence",
+      formerCompany(ch).length === 1 && formerCompany(ch)[0].leftDay === 34 && formerCompany(ch)[0].departedWhy);
+    check("355: …and joinedDay survives it, so 'travelled with you, days 18–34' is answerable",
+      formerCompany(ch)[0].joinedDay === 18);
+
+    // ⚠️ THE ONE REAL REGRESSION RISK AEVI NAMED: five call sites read character.company, and a former
+    // member leaking into ANY present-tense answer is the whole bug in a new place.
+    check("355: a departed member is not in the active company", activeCompany(ch).length === 0);
+    check("355: …and their benefits stop the day they leave", trainerFor(ch).size === 0);
+
+    // Rejoining reads the old record — what makes "the road may cross again" actionable.
+    recruit(ch, "calvar", { roles: ["ally"], day: 50 });
+    check("355: rejoining restores the PERSON, not a stranger with their name",
+      activeCompany(ch).length === 1 && activeCompany(ch)[0].joinedDay === 18 && activeCompany(ch)[0].rejoinedDay === 50 && !activeCompany(ch)[0].leftDay);
+
+    // ⛔ ENTRY NEEDS CONSENT, EXIT DOES NOT — asymmetric on purpose. Aevi: "a departure that requires the
+    // player's permission is not a departure."
+    const ch2 = { npcRegistry: { pell: { name: "Pell" }, siol: { name: "Siol" } }, company: [{ npcId: "pell", roles: ["ally"], joinedDay: 17 }] };
+    const r = applyPartyOps(ch2, [{ op: "depart", npcId: "pell", why: "called home" }, { op: "join", npcId: "siol" }], { day: 40 });
+    check("355: a GM DEPART applies immediately — the story's to decide", r.departed.length === 1 && activeCompany(ch2).every(m => m.npcId !== "pell"));
+    check("355: a GM JOIN only PROPOSES — the player assents to a commitment", r.proposed.length === 1 && !activeCompany(ch2).some(m => m.npcId === "siol"));
+    // ⚠️ Without this, a GM can "depart" a stranger and mint a departure record for someone who was never
+    // in the party — history invented rather than kept.
+    const before = ch2.company.length;
+    applyPartyOps(ch2, [{ op: "depart", npcId: "nobody" }], { day: 41 });
+    check("355: only someone ACTUALLY with you can depart — no invented history", ch2.company.length === before);
+
+    // §1c — the teacher role, lost at recruit for every generated NPC.
+    const gen = { npcRegistry: { "veth-ondra": { name: "Veth-Ondra", teaches: "threnodist" } }, company: [] };
+    recruit(gen, "veth-ondra", { roles: ["ally"], teaches: null, day: 19 });
+    check("355: a GENERATED npc keeps its teacher role at recruit (the authored catalog has no entry)",
+      gen.company[0].teaches === "threnodist" && gen.company[0].roles.includes("trainer"));
+    // …and the save that already lost it is repaired, through the ctx app.js really passes.
+    const erik = { id: "e", reconcileVersion: 29, abilities: [], npcRegistry: { "veth-ondra": { name: "Veth-Ondra", teaches: "threnodist" } },
+      company: [{ npcId: "veth-ondra", roles: ["ally"], teaches: null, joinedDay: 19 }] };
+    reconcile(erik, "character", { content: {}, profile: {} });
+    check("355: an EXISTING save gets the lost teacher role back on login",
+      erik.company[0].teaches === "threnodist" && erik.company[0].roles.includes("trainer"));
+
+    // The op is only real if all three doors know it — contract, handler, vocab (seam_op_vocab_triples).
+    const gmSrc355 = readFileSync(join(root, "engine/gm.js"), "utf8");
+    const appSrc355 = readFileSync(join(root, "app.js"), "utf8");
+    check("355: partyOps exists in the contract, the vocab, AND the apply path",
+      /"partyOps":/.test(gmSrc355) && /SALVAGEABLE_OPS = \["partyOps"/.test(gmSrc355) && /applyStep\("partyOps"/.test(appSrc355));
+  }
+
   // SNG-356 — THE AUTHORED SUB-ATTRIBUTE LADDER, WIRED. Erik: "specify what each point up to 20 gets you
   // so we can better control the impact and the player can see it exactly."
   //
@@ -10779,11 +10846,17 @@ await (async () => {
     const owed = ladderGrantsOwed(owedChar, L);
     check("356: an unpaid character is owed its ladder grants", owed.length === 2 && owed.every(g => g.amount > 0));
     applyLadderGrants(owedChar, L);
-    // Aevi's own §1c figures for Silas, reproduced: strength 4 → +32 health on 170; reason 7 → +53 energy on 240.
-    check("356: …and the amounts match the spec's own worked example (Silas: +32 health, +53 energy)",
-      owedChar.maxHealth === 202 && owedChar.maxEnergy === 293);
+    // ⛔ I PINNED THE SPEC'S WORKED EXAMPLE (202/293) AND AEVI RETUNED THE LADDER WITHIN THE HOUR — ranks
+    // 1-2 now grant nothing, "caught by the SNG-357 harness", which is the harness doing exactly its job.
+    // These two went red on a CORRECT content change, in the same commit whose message said "gated as
+    // SHAPE, never value". Third occurrence of the same mistake in this suite. The BEHAVIOUR is that the
+    // pools rise by what the ladder says they rise by — so that is what is asserted, read from the content.
+    const expectHealth = 170 + Number(L.subs.strength.cumulative["4"]);
+    const expectEnergy = 240 + Number(L.subs.reason.cumulative["7"]);
+    check("356: …and the amounts are exactly what the AUTHORED ladder says they are",
+      owedChar.maxHealth === expectHealth && owedChar.maxEnergy === expectEnergy);
     check("356: the CURRENT pool rises with the max — a bigger bar already half-empty reads as a loss",
-      owedChar.health === 202 && owedChar.energy === 293);
+      owedChar.health === expectHealth && owedChar.energy === expectEnergy);
     const snapshot = JSON.stringify(owedChar);
     applyLadderGrants(owedChar, L);
     check("356: a second application grants NOTHING — idempotent by high-water mark", JSON.stringify(owedChar) === snapshot);

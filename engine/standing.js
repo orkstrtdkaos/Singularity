@@ -19,6 +19,7 @@
 //
 // Pure. No I/O, no clock read — the caller passes `days`. Fully testable.
 
+import { activeCompany } from "./company.js";
 import { standingWith, standingWithPeople } from "./reputation.js";
 import { antipodeOf } from "./traditions.js";
 
@@ -97,7 +98,8 @@ export function seedStandingAtCreation(character, { traditionIndex = null, rules
 export function companyStandingRates(character, { focusedPeople = [] } = {}) {
   const rates = {};
   const bump = (tid, amount) => { if (tid) rates[tid] = (rates[tid] || 0) + amount; };
-  for (const m of character?.company || []) {
+  // SNG-355: the FIFTH reader — a departed ally must stop drip-feeding standing the day they leave.
+  for (const m of activeCompany(character)) {
     if (m.teaches) bump(m.teaches, DRIP.base);
     if (m.liaisonFor) bump(m.liaisonFor, DRIP.base * DRIP.liaison);
   }

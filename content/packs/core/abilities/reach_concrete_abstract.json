@@ -2199,6 +2199,203 @@
     }
    ],
    "plainly": "A travel and explore action. Stone arrives under each foot as you need it, so you climb or cross open air at ordinary pace — a cliff, a wall, a gorge. It answers a vertical or a gap rather than a distance, so a leg that is merely long stays long. Rank 1 carries one person and their load. Rank 2 raises it broad and steady enough for a whole party and their pack animals. At rank 3 you may leave it standing, putting a permanent crossing on the map that anyone can use, including whoever you were avoiding."
+  },
+  {
+   "id": "the_cutting_figure",
+   "name": "The Cutting Figure",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.6,
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "strike",
+    "break"
+   ],
+   "narrationHints": "You hold a shape in mind and make the world honour it. An angle that should not exist opens across them; a line is drawn and the things on either side of it are no longer joined. No blade, no heat — a geometry, applied.",
+   "description": "The Figurists' first offense: pattern imposed on matter, and matter losing the argument.",
+   "notFor": "Anything you cannot hold clearly in mind — a muddled figure cuts nothing, or cuts wrong; the Masons, who are trained precisely against this; working past sight; kindness — a drawn line does not care what it is drawn across.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Drawn Line",
+     "grants": "Impose a simple figure — a line, an angle, an arc — across a target within sight. What it crosses is parted: mail, hide, timber, limb. Clean edges, no blade present.",
+     "cannot": "You must hold the figure CLEANLY. Distraction makes it cut short, cut wrong, or cut across your own line of sight. Masons resist it and know they are doing so.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Compound Figure",
+     "grants": "Several lines at once, or one held open so it keeps parting what moves through — a doorway that divides what enters it.",
+     "cannot": "Compound figures are harder to hold and a lapse leaves them half-drawn and unpredictable. A held figure does not know your allies.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Impossible Solid",
+     "grants": "A figure that should not resolve in three dimensions, resolved anyway, around them. What is inside it is reorganised according to the figure.",
+     "cannot": "⚠ THE FIGURE IS TRUER THAN THEY ARE and it does not distinguish among its contents. And the Untethered — who forgot bodies suffer — do exactly this and call it elegant; doing it well puts you in their company whether you like it or not.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "precision",
+    "magnitude"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a short line — a cut, not a parting",
+    "surge": "the impossible solid; IT DOES NOT DISTINGUISH AMONG ITS CONTENTS"
+   },
+   "bounds": [
+    {
+     "text": "you must hold the figure CLEANLY — a muddled one cuts wrong",
+     "class": "hard"
+    },
+    {
+     "text": "MASONS resist it and know they are doing it",
+     "class": "hard"
+    },
+    {
+     "text": "line of sight required",
+     "class": "hard"
+    },
+    {
+     "text": "a held figure does not know your allies",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight/puzzle action that parts matter along an imposed geometry. Rated 7 of 10 across a scope of 2. Limit: you must hold the figure cleanly."
+  },
+  {
+   "id": "the_plain_weight",
+   "name": "The Plain Weight",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": 0.6,
+    "violence_peace": -0.3
+   },
+   "functions": [
+    "strike",
+    "break"
+   ],
+   "narrationHints": "No figure, no argument, no craft you could call subtle. You give a thing its true weight and let it be where it is going. Stone remembers it is stone. A wall remembers it is heavy. The floor was always underneath.",
+   "description": "The Masons' first offense, and it is the tradition's whole position stated as violence: only what can be touched is real, and what is real has mass.",
+   "notFor": "Anything that isn't there (this craft has no purchase on the abstract, the spiritual, or the merely likely); finesse; working where there is nothing to give weight to; being unnoticed — it is loud and everyone knows what happened.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The True Weight",
+     "grants": "Give something present its full and honest weight and send it — a stone, a beam, a pack, a shield, the ground under them. Blunt, total, and exactly as complicated as being hit by masonry.",
+     "cannot": "SOMETHING MUST BE THERE. An empty road offers nothing. It is slow enough to be seen coming by anyone watching for it, and it is very loud.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Settled Fact",
+     "grants": "Take the structure rather than the piece — a lintel, a stair, a cart, a section of wall. What was holding is now falling, and it falls honestly.",
+     "cannot": "You have taken part of a building down and buildings are used by people who are not in your fight. Masons are held to account by other Masons for exactly this.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Leaden Word",
+     "grants": "Everything nearby remembers its weight at once. Roofs, walls, armour, the load a man is carrying, the man.",
+     "cannot": "⚠ YOU ARE STANDING IN THE SAME PLACE AND YOU ALSO HAVE WEIGHT. The Leaden — who reduced the real to only the touchable — regard this as the truest thing a person can do, which should worry you.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "tradition": "mason",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "magnitude",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "one stone, honestly thrown",
+    "surge": "the leaden word; YOU ARE STANDING IN THE SAME PLACE AND YOU ALSO HAVE WEIGHT"
+   },
+   "bounds": [
+    {
+     "text": "SOMETHING MUST BE THERE — no purchase on the abstract",
+     "class": "hard"
+    },
+    {
+     "text": "it is SLOW and LOUD and can be seen coming",
+     "class": "soft"
+    },
+    {
+     "text": "buildings are used by people not in your fight",
+     "class": "cost"
+    },
+    {
+     "text": "you have weight too",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight action that gives present matter its true weight and sends it. Rated 8 of 10 across a scope of 2. Limit: something must actually be there."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

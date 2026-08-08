@@ -32,6 +32,7 @@
 // a key gm.js consumes that no row provides can never land — that is the exact
 // failure §23 exists to stop (challengeTypes: 45 values, read by nothing).
 
+import { holdingsForGM } from "./holdings.js";
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
 import { buildRegionView, newsForGM, worldArcsForGM } from "./worldtick.js";
 import { inventoryForGM } from "./inventory.js";
@@ -173,6 +174,11 @@ export const GM_CONTEXT = [
   { key: "sceneState", builder: "app scene state", carries: ["who/what is present now"],
     reachedBy: "always", spec: "§11", views: ["turn", "ask", "gambit"],
     build: (env) => env.sceneState },
+  // SNG-358: what the character HOLDS — a narrator that does not know about the post cannot write the
+  // messenger from it. The block is the reader that stops holdings.js being a writer with no reader.
+  { key: "holdingsDetail", builder: "holdings.holdingsForGM", carries: ["holdings", "steward", "condition"],
+    reachedBy: "always", spec: "SNG-358", views: ["turn", "ask"],
+    build: (env) => holdingsForGM(env.character) },
   { key: "abilityLawDetail", builder: "progression.abilitiesForGM", carries: ["abilities", "ranks", "energy", "harmRung"],
     reachedBy: "always", spec: "§7", views: ["turn", "ask", "gambit"],
     build: (env) => abilitiesForGM(env.character, env.app.fullCatalog(), env.CONTENT.branchForks, env.CONTENT.rules) },

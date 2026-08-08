@@ -13,6 +13,8 @@
 import { callClaudeJSON } from "./claude.js";
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
+import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
+import { advanceHolding, holdingNews, unstewardedHoldings } from "./holdings.js";   // SNG-358: holdings ride the same world-gated pass
 import { spreadDeeds } from "./reputation.js";
 import { titleFor } from "./titles.js";   // SNG-287: a name from the material, not from a menu   // SNG-281: news travels, and that is a promotion source
 import { applyCodexUpdates } from "./codex.js";
@@ -299,6 +301,44 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
   return { news, moved: 0 };
 }
 
+
+/** SNG-358 — HOLDINGS ADVANCE ON THEIR OWN PASS, and putting them anywhere else was a bug I made and
+ *  caught within the hour: my first cut sat them INSIDE `advanceDelegatedWork`, behind its `!due.length`
+ *  early return — so a holding only moved if an ASSIGNMENT happened to be due at the same moment.
+ *
+ *  ⛔ THAT IS THE EXACT SHAPE OF SNG-366, REINTRODUCED ONE FUNCTION OVER: a thing that should turn on its
+ *  own clock, sitting behind an unrelated gate, silent and green. A holding with no delegated work beside
+ *  it would have frozen forever.
+ *
+ *  ⚠️ Aevi's framing was right about the HOOK even where it was wrong about the record: "holdings are not
+ *  a new subsystem so much as a new thing for an existing one to advance." Same world-time cadence as
+ *  delegated work — a player-advanced clock is gameable — and the same four outcomes, so the narrator
+ *  answers one question rather than two.
+ */
+export function advanceHoldings({ character, now = Date.now() }) {
+  const news = [];
+  // ⛔ A DEPARTED STEWARD LEAVES THE POST UNKEPT, and this is the line that makes SNG-355 cost something.
+  // Departure stopped being a deletion there precisely so it could be OBSERVED here: a castellan who turns
+  // back toward the March does not silently keep running your station from the road.
+  for (const h of unstewardedHoldings(character, activeCompany(character).map(m => m.npcId))) {
+    news.push(`${h.name || h.id} has lost its keeper.`);
+    h.steward = null;
+  }
+  let moved = 0;
+  const count = worldCount(now);
+  for (const h of character?.holdings || []) {
+    if (count - (h.lastMovedWorldCount ?? 0) < ASSIGN_INTERVAL_HOURS) continue;
+    const before = h.condition;
+    // ⚠️ AN UNKEPT HOLDING DRIFTS. That is what makes it a claim on your attention rather than scenery,
+    // and what makes a steward's departure (SNG-355) cost something.
+    advanceHolding(h, h.steward ? "stall" : "problem", count);
+    const line = holdingNews(h, before);
+    if (line) news.push(line);
+    moved++;
+  }
+  return { news, moved };
+}
+
 export async function runWorldTick({ character, content, currentDay, advanceAssignments = aiAssignmentAdvancement, rng = Math.random }) {
   if (!character.worldState) character.worldState = initWorldState(currentDay);
   const ws = character.worldState;
@@ -306,8 +346,10 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // SNG-366: the delegated-work pass runs on WORLD time and must not sit behind the character-day gate —
   // that early return is what Silas has been parked on for 915 actions. Only THIS block is lifted.
   const delegated = await advanceDelegatedWork({ character, content, advanceAssignments, currentDay });
-  if (elapsed <= 0) return { ticked: delegated.moved > 0, news: delegated.news };
-  const news = [...delegated.news];
+  const holdings358 = advanceHoldings({ character });
+
+  if (elapsed <= 0) return { ticked: delegated.moved + holdings358.moved > 0, news: [...delegated.news, ...holdings358.news] };
+  const news = [...delegated.news, ...holdings358.news];
   const clampDrift = v => Math.max(-0.5, Math.min(0.5, v));
 
   // 1. event advancement — and SNG-191 §4.2: a crisis RESPONDS to the delegated work. Ignoring a

@@ -46,6 +46,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
+import { addHolding, holdingsForGM } from "./engine/holdings.js";   // SNG-358
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -88,7 +89,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.72";
+const APP_VERSION = "1.9.73";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5103,6 +5104,19 @@ function applyTurn(turn, resolution, playerWords = null) {
   applyStep("factUpdates", () => applyFactUpdates(character, turn.factUpdates || [], memCtx));
   // ⛔ SNG-355 — the state finally hears a departure. Applied here with the rest of the world-writes;
   // JOINS are only PROPOSED (consent is the player's), and surface as a choice rather than a fait accompli.
+  // ⛔ SNG-358 — THE ENGINE WAS BUILT AND UNREACHABLE. `testOnlyExports` caught it: holdings.js exported a
+  // whole model whose only caller was a test, which is precisely the writer-with-no-reader shape SNG-353
+  // and SNG-342 were about. The ratchet found my own instance of the bug I spent the day fixing.
+  applyStep("holdingOps", () => {
+    for (const op of (turn.holdingOps || []).slice(0, 4)) {
+      const kind = String(op?.op || "").toLowerCase();
+      const id = String(op?.id || "").trim();
+      if (!id) continue;
+      if (kind === "claim") addHolding(character, { id, kind: op.kind || "post", name: op.name, locationId: op.locationId || location.id, steward: op.steward || null, obligation: op.obligation || null, day: absoluteWorldDay() });
+      else if (kind === "steward") { const h = (character.holdings || []).find(x => x.id === id); if (h) h.steward = op.steward || null; }
+      else if (kind === "release") character.holdings = (character.holdings || []).filter(x => x.id !== id);
+    }
+  });
   const partyResult = applyStep("partyOps", () => applyPartyOps(character, turn.partyOps || [], { day: absoluteWorldDay() })) || { departed: [], proposed: [], notes: [] };
   if (partyResult.proposed?.length) character.pendingCompanyOffers = partyResult.proposed;
   ensureBondPortraits(character); // SNG-136: a bond that crossed a high milestone this turn earns a portrait

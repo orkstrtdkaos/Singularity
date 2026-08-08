@@ -10749,6 +10749,64 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-358 — POST. Erik: "He has 2 warden stations and a pregnant wife and a smithy… you have fortresses,
+  // party members, businesses, etc at mid to late game." Built to the shape Aevi accepted from my review.
+  {
+    const { loadContentHeadless: lch358 } = await import("./headless_content.mjs");
+    const C358 = await lch358();
+    const { addHolding, advanceHolding, holdingNews, unstewardedHoldings, holdingsForGM, HOLDING_KINDS, CONDITIONS } = await import("../engine/holdings.js");
+    const { runWorldTick } = await import("../engine/worldtick.js");
+    const { worldCount } = await import("../engine/worldtime.js");
+
+    // ⛔ A CONDITION THAT MOVES BOTH WAYS, NOT A COUNTER TO A TERMINUS — the whole reason a holding could
+    // not simply be an assignment. `advanceAssignment` is monotonic with a terminal `done`, which would
+    // have retired a post at the moment its steward succeeded.
+    const h = addHolding({}, { id: "p", name: "Raven's Home", kind: "post", steward: "cassiel" });
+    advanceHolding(h, "problem", 1); const dipped = h.condition;
+    advanceHolding(h, "progress", 2);
+    check("358: a holding's condition moves BOTH ways — it recovers, it does not complete",
+      CONDITIONS.indexOf(h.condition) > CONDITIONS.indexOf(dipped) && h.condition !== "done");
+    check("358: …and it never acquires a terminal state", !("progress" in h) && CONDITIONS.includes(h.condition));
+
+    // ⚠️ ONE STEP PER PASS. My first formula double-penalised an unkept holding — "holding" straight past
+    // "strained" to "failing" in one tick. A decline the player cannot see coming is a rug-pull, and the
+    // point of four rungs is that it SLIDES.
+    const un = addHolding({}, { id: "f", name: "The Forge", kind: "enterprise", steward: null });
+    const seq = [];
+    for (let i = 0; i < 3; i++) { advanceHolding(un, "problem", i); seq.push(un.condition); }
+    check("358: an UNKEPT holding slides one rung per pass, never two", seq[0] === "strained" && seq[1] === "failing");
+    // ⛔ …and it can never THRIVE, because nobody is there to make it. This is what makes a holding a claim
+    // on your attention rather than scenery.
+    const un2 = addHolding({}, { id: "g", kind: "enterprise", steward: null });
+    for (let i = 0; i < 5; i++) advanceHolding(un2, "progress", i);
+    check("358: …and cannot climb past 'holding' while it has no keeper", un2.condition === "holding");
+
+    // ⛔ HOUSEHOLD IS NOT A KIND, BY DESIGN. Aevi: "stake and obligation, never a stat line." Putting it in
+    // this table is the first step toward it acquiring `condition: thriving` — the sentence about a family
+    // the game must never say.
+    check("358: `household` is not a holding kind, and cannot be added as one",
+      !HOLDING_KINDS.includes("household") && addHolding({}, { id: "h", kind: "household" }) === null);
+
+    // A departed steward leaves the post behind — expressible only because SNG-355 made departure a status.
+    check("358: a holding whose keeper has left is reported as unkept",
+      unstewardedHoldings({ holdings: [h] }, []).length === 1 && unstewardedHoldings({ holdings: [h] }, ["cassiel"]).length === 0);
+    check("358: the GM is told what you hold, who keeps it, and how it fares",
+      /Raven's Home \(post, .*kept by cassiel\)/.test(holdingsForGM({ holdings: [h] }) || ""));
+
+    // ⛔ HOLDINGS TURN ON THEIR OWN PASS. My first cut sat them INSIDE advanceDelegatedWork, behind its
+    // `!due.length` early return — so a holding only moved if an ASSIGNMENT happened to be due at the same
+    // moment. That is SNG-366's exact shape reintroduced one function over: a thing that should turn on its
+    // own clock, sitting behind an unrelated gate, silent and green.
+    const ch = { worldState: { lastTickDay: 14, eventStages: {}, spectrumDrift: {}, assignments: {} }, clock: { day: 14 }, npcRegistry: {}, holdings: [] };
+    addHolding(ch, { id: "x", name: "The Forge", kind: "enterprise", steward: null });
+    ch.holdings[0].lastMovedWorldCount = worldCount() - 100;
+    const r = await runWorldTick({ character: ch, content: C358, currentDay: 14, advanceAssignments: async () => ({ advancements: [] }) });
+    check("358: a holding advances with NO delegated work due and the character clock unmoved",
+      r.ticked === true && ch.holdings[0].condition !== "holding");
+    check("358: …and only a CHANGE of condition is news — a holding that goes on holding is not an event",
+      holdingNews({ condition: "holding", name: "X" }, "holding") === null);
+  }
+
   // SNG-367 — 33 OF 34 PORTRAITS LED WITH THE LITERAL "a person", which is why every figure rendered as
   // the same woman. ⛔ THE CAUSE IS A FALLBACK THAT NEVER RETURNS FALSY: `formOf()` returns "a person"
   // when form/lineage/appearance are absent, and it sat THIRD in the chain — so `description`, `role` and
@@ -10829,8 +10887,14 @@ await (async () => {
     // ⚠️ ONLY THIS BLOCK WAS LIFTED. Repointing the whole tick at world time would change events, drift and
     // deed-spread all at once, on no evidence — the opposite of sim-before-tweak.
     const tickSrc = readFileSync(join(root, "engine/worldtick.js"), "utf8");
-    check("366: only the assignment pass was lifted above the early return — the rest keeps character cadence",
-      /const elapsed = currentDay[\s\S]{0,400}advanceDelegatedWork\(/.test(tickSrc) && /if \(elapsed <= 0\) return \{ ticked: delegated\.moved > 0/.test(tickSrc));
+    // ⚠️ ASSERTS THE INVARIANT, NOT THE LINE. This pinned the exact text of the early-return, and SNG-358
+    // legitimately changed it when holdings joined the world-time passes. What must stay true is the
+    // SHAPE: world-gated work runs ABOVE the character-day gate, and the gate still exists so events,
+    // drift and deed-spread keep their own cadence.
+    check("366: only the world-time passes were lifted above the early return — the rest keeps character cadence",
+      /advanceDelegatedWork\([\s\S]{0,300}if \(elapsed <= 0\) return/.test(tickSrc)
+      && /if \(elapsed <= 0\) return \{ ticked:/.test(tickSrc)
+      && /for \(const \{ eventId, stage \}/.test(tickSrc));
     // ⚠️ And it reports what MOVED, not what was worth SAYING — a quiet `progress` prints no line by design,
     // and inferring "nothing happened" from "no news" is the same error as reading absence as evidence.
     check("366: the tick reports what MOVED, never inferring it from whether there was news",
@@ -11142,7 +11206,10 @@ await (async () => {
     const gmSrc355 = readFileSync(join(root, "engine/gm.js"), "utf8");
     const appSrc355 = readFileSync(join(root, "app.js"), "utf8");
     check("355: partyOps exists in the contract, the vocab, AND the apply path",
-      /"partyOps":/.test(gmSrc355) && /SALVAGEABLE_OPS = \["partyOps"/.test(gmSrc355) && /applyStep\("partyOps"/.test(appSrc355));
+      // ⚠️ MEMBERSHIP, NOT POSITION. This pinned partyOps to being FIRST in SALVAGEABLE_OPS, so adding
+      // holdingOps ahead of it went red on a change that has nothing to do with the requirement. The rule
+      // is that the op exists in all three places, not where it happens to sit in a list.
+      /"partyOps":/.test(gmSrc355) && /SALVAGEABLE_OPS = \[[^\]]*"partyOps"/.test(gmSrc355) && /applyStep\("partyOps"/.test(appSrc355));
   }
 
   // SNG-356 — THE AUTHORED SUB-ATTRIBUTE LADDER, WIRED. Erik: "specify what each point up to 20 gets you

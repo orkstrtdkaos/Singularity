@@ -595,7 +595,38 @@ const schoolGround = (() => {
   return { unmapped: all.filter(x => !understood.has(x.extension)), total: all.length };
 })();
 
+// ⛔ SNG-380 — THE SOURCE VOCABULARY LIVES IN CONTENT AND ITS READERS HARD-CODE IT, WHICH IS HOW A
+// CONTENT REBASE SWITCHED OFF A MECHANIC. `SOURCE_BAND` in substrate.js is keyed on the retired list
+// (material/natural/inherent/lattice/wild); SNG-378 moved every school onto
+// precursor/nanite/wild/metaphysical/body/veil. `bandForSchool` documents that an unmodelled source "falls
+// back to the tradition band rather than going neutral" — a correct safety net for ONE unmapped source,
+// and a total no-op when it catches the whole vocabulary at once. Nothing errored; no gate went red.
+//
+// ⚠️ TWO NUMBERS ON PURPOSE: the CAUSE (sources with no band) and the BLAST RADIUS (schools whose
+// band silently falls back to their tradition's). The cause is five values Erik has to author; the radius
+// is what it costs while they are unauthored, and it is SNG-193b's entire premise — "two practitioners
+// of one tradition with different schools get OPPOSITE best-grounds" — being false again.
+const sourceBands = (() => {
+  const sub = read("engine/substrate.js");
+  const table = sub.slice(sub.indexOf("const SOURCE_BAND = {"), sub.indexOf("};", sub.indexOf("const SOURCE_BAND = {")));
+  const modelled = new Set([...table.matchAll(/^\s*([a-z_]+):/gm)].map(m => m[1]));
+  let schools = null;
+  try { schools = JSON.parse(read("content/packs/core/rules/schools.json")); } catch { return { unmodelled: [], fallingBack: 0, augmented: 0 }; }
+  const trads = Object.entries(schools.traditionSchools || {});
+  const authored = new Set();
+  for (const [, t] of trads) { if (t.root) authored.add(t.root); for (const sc of t.schools || []) if (sc.extension) authored.add(sc.extension); }
+  const augmented = trads.flatMap(([, t]) => (t.schools || []).filter(sc => sc.extension));
+  return {
+    unmodelled: [...authored].filter(a => !modelled.has(a)).sort(),
+    // A school whose extension has no band resolves at its tradition's band — the seam does nothing.
+    fallingBack: augmented.filter(sc => !modelled.has(sc.extension)).length,
+    augmented: augmented.length,
+  };
+})();
+
 const measured = {
+  sourcesWithNoBand: sourceBands.unmodelled.length,
+  schoolsBandFallingBack: sourceBands.fallingBack,
   schoolsWithNoGroundLine: schoolGround.unmapped.length,
   testOnlyExports: testOnlyExports.length,
   abilitiesMissingHarmRung: missingHarm.length,
@@ -619,7 +650,11 @@ if (process.env.UPDATE_WIRING_BASELINE === "1" || !existsSync(baselinePath)) {
 }
 const baseline = JSON.parse(readFileSync(baselinePath, "utf8"));
 for (const [k, v] of Object.entries(measured)) {
-  const why = k === "schoolsWithNoGroundLine"
+  const why = k === "sourcesWithNoBand"
+    ? `an authored power source that SOURCE_BAND (substrate.js) does not model, so every school reaching with it resolves at its tradition's band and the school seam does nothing: ${sourceBands.unmodelled.join(", ")}. ⛔ The band is AUTHORED tuning — do not close this by renaming an old key onto a new source, because precursor is not lattice.`
+    : k === "schoolsBandFallingBack"
+      ? `the blast radius of the above: ${sourceBands.fallingBack} of ${sourceBands.augmented} augmented schools now resolve at their tradition's band, so SNG-193b's premise — two schools of one tradition getting OPPOSITE best-grounds — is false for them`
+      : k === "schoolsWithNoGroundLine"
     ? `a school whose \`extension\` the substrate reader does not understand, so the GM is told "its own ground" — which says nothing. ${schoolGround.unmapped.length} of ${schoolGround.total} schools, by source: ${Object.entries(schoolGround.unmapped.reduce((a, x) => (a[x.extension] = (a[x.extension] || 0) + 1, a), {})).sort((a, b) => b[1] - a[1]).map(([k2, v2]) => `${v2} ${k2}`).join(", ")}`
     : k === "abilitiesCombatClaimedNotTaught"
     ? `regressed — a new ability claims combat its grants never teach (147c rule: if it can fight, a rank grants says HOW)`

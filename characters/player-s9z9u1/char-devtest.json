@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 67,
+  "xp": 70,
   "attributes": {
     "physical": 6,
     "mental": 8,
@@ -79,7 +79,7 @@
   "maxHealth": 62,
   "health": 42,
   "maxEnergy": 152,
-  "energy": 25,
+  "energy": 20,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -237,16 +237,21 @@
         "player": "Tell me what my body is doing in response to yours.. i've never done this before.  And tell me what to do next and why.",
         "summary": "In the glade, Lira teaches Loki that presence matters more than knowledge, and that a body speaks its own truth before craft or thought can reach it.",
         "narration": "You lean back on the moss, and Lira's weight settles over you—her thighs bracketing yours, her hands braced on either side of your ribs. The evening air is warm against your skin where you are not touching.\n\n\"I've never done this before,\" you say, and the admission lands between you both like something that matters. \"Tell me what my body is doing. What you're seeing.\"\n\nShe goes still for a moment—not pulling away, but reading you the way she read the stranger's injury. Her eyes move across your chest, your face, the way your breath is already uneven beneath her. \"You're trembling,\" she says, her voice low and sure. \"Not from cold. Your pulse is high—here—\" and she lowers one hand to your collarbone, feeling the rush beneath the skin. \"And you're waiting. Uncertain. That's not wrong; that's honest.\"\n\nShe shifts her weight, and the new angle brings her body closer to yours. \"What you're feeling right now—that readiness, that edge—that's your body telling you it wants this. It knows before your mind catches up.\" Her hips move slightly, deliberately, and you feel the shape of her want pressing against your own. \"What comes next is simple: you let me move, and you feel where that takes you. You don't have to know. You just have to stay present—like you are now.\"\n\nShe leans down, her breath warming your neck, and her hand finds yours on the moss. \"Ready?\""
+      },
+      {
+        "player": "Tell her you thinks so, but to talk you through everything... what do you feel down there as she's moving, why does it feel wet?  What are you supposed to do to make her feel good?",
+        "summary": "In a secluded glade, Lira teaches Loki that intimacy is presence and mutual attentiveness—answering questions plainly, guiding touch, and building trust through simple clarity.",
+        "narration": "She stills over you, her breathing evening as she reads your question—not rejection, but a pause. Her hands rest warm on your ribs.\n\n\"You feel me,\" she says simply, and lowers herself a fraction, deliberate. The warmth of her is unmistakable now, the wetness you asked about—you understand it is her want made plain, made real. \"That's the answer to your first question. And it tells you the second: I'm ready.\"\n\nShe guides your hand down, her fingers curling around yours, placing your palm against the inside of her thigh. \"Feel how warm it is here. That's me. And when you're inside me—\" she hesitates, not lost but choosing words carefully, \"—move slow. Watch my face. If I tighten around you, that's good. If I guide your pace, follow that. Your job isn't to know. Your job is to pay attention. To stay here, with me.\" She draws a breath. \"And Loki—it's not about making me feel good the way you might imagine it. It's about us both feeling each other. You'll know it when it's right because you'll feel me respond. That's enough.\"\n\nHer hips shift, a small, intentional settling. The stream runs beside you both. The amber light is almost gone now, the canopy darkening toward true dusk. She is waiting—not tense, but present, her eyes on yours, her hands steady on your shoulders."
       }
     ],
     "lastTurn": {
-      "narration": "You lean back on the moss, and Lira's weight settles over you—her thighs bracketing yours, her hands braced on either side of your ribs. The evening air is warm against your skin where you are not touching.\n\n\"I've never done this before,\" you say, and the admission lands between you both like something that matters. \"Tell me what my body is doing. What you're seeing.\"\n\nShe goes still for a moment—not pulling away, but reading you the way she read the stranger's injury. Her eyes move across your chest, your face, the way your breath is already uneven beneath her. \"You're trembling,\" she says, her voice low and sure. \"Not from cold. Your pulse is high—here—\" and she lowers one hand to your collarbone, feeling the rush beneath the skin. \"And you're waiting. Uncertain. That's not wrong; that's honest.\"\n\nShe shifts her weight, and the new angle brings her body closer to yours. \"What you're feeling right now—that readiness, that edge—that's your body telling you it wants this. It knows before your mind catches up.\" Her hips move slightly, deliberately, and you feel the shape of her want pressing against your own. \"What comes next is simple: you let me move, and you feel where that takes you. You don't have to know. You just have to stay present—like you are now.\"\n\nShe leans down, her breath warming your neck, and her hand finds yours on the moss. \"Ready?\"",
-      "sceneSummary": "In the glade, Lira teaches Loki that presence matters more than knowledge, and that a body speaks its own truth before craft or thought can reach it.",
+      "narration": "She stills over you, her breathing evening as she reads your question—not rejection, but a pause. Her hands rest warm on your ribs.\n\n\"You feel me,\" she says simply, and lowers herself a fraction, deliberate. The warmth of her is unmistakable now, the wetness you asked about—you understand it is her want made plain, made real. \"That's the answer to your first question. And it tells you the second: I'm ready.\"\n\nShe guides your hand down, her fingers curling around yours, placing your palm against the inside of her thigh. \"Feel how warm it is here. That's me. And when you're inside me—\" she hesitates, not lost but choosing words carefully, \"—move slow. Watch my face. If I tighten around you, that's good. If I guide your pace, follow that. Your job isn't to know. Your job is to pay attention. To stay here, with me.\" She draws a breath. \"And Loki—it's not about making me feel good the way you might imagine it. It's about us both feeling each other. You'll know it when it's right because you'll feel me respond. That's enough.\"\n\nHer hips shift, a small, intentional settling. The stream runs beside you both. The amber light is almost gone now, the canopy darkening toward true dusk. She is waiting—not tense, but present, her eyes on yours, her hands steady on your shoulders.",
+      "sceneSummary": "In a secluded glade, Lira teaches Loki that intimacy is presence and mutual attentiveness—answering questions plainly, guiding touch, and building trust through simple clarity.",
       "choices": [
         {
-          "label": "Let her lead—stay present, feel what unfolds between you",
+          "label": "Follow what she's shown you—move slowly, watch for her response, stay present with her",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
@@ -255,12 +260,14 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask her what she wants you to do with your hands",
+          "label": "Ask her one more thing before you move—something you're still uncertain about",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": "very easy",
           "opposedDifficulty": null,
@@ -269,21 +276,25 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Mirror what she's doing—move with her, match her rhythm",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Pause—tell her you want to feel this without the uncertainty, just the two of you together",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
             "romantic"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
@@ -303,37 +314,42 @@
       "offer": {},
       "stageOps": [],
       "scene": {
-        "setting": "A secluded glade in the wood behind the orchard—birch and hawthorn with tight buds, the stream running with melt-water. The light is now deep amber, fading toward dusk; the long spring evening is giving way to early night. The village remains entirely gone. Only the stream, the wind in high branches, the moss beneath you, and Lira's presence above you.",
+        "setting": "A secluded glade in the wood behind the orchard—birch and hawthorn with tight buds catching the last amber light, now fading toward dusk and early night. The narrow melt-water stream runs soft and constant. The air is warm where you are skin-to-skin, cool where it touches exposed flesh. The village remains invisible, distant, unreal.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Straddling Loki on the moss, her translucent cloth discarded nearby, her hands steady and her gaze unbroken—present, teaching, unhurried"
+            "state": "Straddling Loki, her hands on his shoulders, her gaze steady and present, speaking plainly about desire and attention"
           }
         ],
         "objects": [
-          "The moss-soft ground, warm from the day's heat beneath you",
+          "The moss-soft ground, warm from the day's heat beneath you both",
           "Lira's translucent cloth, pooled on the moss nearby",
           "Loki's tunic and laces, scattered on the ground",
-          "The narrow stream, running with melt-water, its soft sound a constant presence",
-          "Young birch and hawthorn trees, buds tight, catching the last amber light",
-          "The deepening amber light, fading toward dusk through the canopy"
+          "The narrow stream, running with melt-water, its soft sound constant and grounding",
+          "Young birch and hawthorn trees, buds tight, the canopy darkening as true dusk approaches",
+          "The last amber light, fading through the high branches"
         ],
         "threads": [
-          "What will Loki choose to do next—follow her lead, ask, or take the moment further?",
-          "Will Lira continue to teach, or will the moment shift into something else?"
+          "Will Loki follow Lira's teaching and move forward—present, attentive, unhurried?",
+          "What comes after—how does this moment land for both of them when it's done?"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "lira",
-          "note": "In the glade, Lira is present and teaching—she reads Loki's body and emotions with the same skill she brings to healing. She speaks plainly about want and presence. She guides rather than leads, and waits for Loki to arrive at each moment.",
+          "note": "In the glade, she teaches Loki that intimacy requires presence over craft, attention over assumption—answering his questions plainly, guiding his touch with specificity, and building trust through direct speech about desire and sensation.",
           "learned": [
-            "She reads the body as clearly as any patient—pulse, tremor, breath—and speaks what she sees",
-            "She teaches through directness and invitation, not through craft or performance",
-            "She values Loki's honesty about inexperience and uses it as a thread to deepen the moment"
+            "She speaks plainly about her body and her want, without shame or obscuring",
+            "Her intimacy is built entirely on mutual presence and explicit guidance",
+            "She honors his inexperience by teaching him to read her responses rather than follow a prescribed form"
           ],
-          "relationshipDelta": 1
+          "skillsObserved": [
+            "Deliberate presence in intimate contact",
+            "Clear instruction in consent and attentiveness",
+            "Reading a partner's uncertainty and meeting it with certainty"
+          ],
+          "relationshipDelta": 2
         }
       ],
       "factUpdates": [],
@@ -346,15 +362,12 @@
       "newEncounter": {},
       "unlockPrecursor": {},
       "unlockSubstrate": {},
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "the intimacy unfolds in real time, moving from the earlier moment into early dusk"
-      },
+      "timeOps": {},
       "moveTo": {},
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": {},
-      "imagePrompt": "In amber dusk, two bodies on warm moss by a melt-water stream—a woman straddling a man, her translucent cloth discarded, her hands on his ribs, her eyes steady and teaching. Birch and hawthorn frame them. The moment is specific, unhurried, utterly present.",
+      "imagePrompt": "Two figures on moss in gathering dusk, her body poised above his, hands steady, eyes meeting—the stream beside them, birch branches dark against a fading amber sky, the space between them charged and unhurried.",
       "newAbility": {},
       "gambitOps": {},
       "gambitApt": false,
@@ -363,35 +376,36 @@
       "offerPromotion": {},
       "offerAcquisition": {},
       "offerIntent": {},
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/Two%20figures%20on%20moss%20in%20gathering%20dusk%2C%20her%20body%20poised%20above%20his%2C%20hands%20steady%2C%20eyes%20meeting%E2%80%94the%20stream%20beside%20them%2C%20birch%20branches%20dark%20against%20a%20fading%20amber%20sky%2C%20the%20space%20between%20them%20charged%20and%20unhurried.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=30850&nologo=true"
     },
     "sceneState": {
-      "setting": "A secluded glade in the wood behind the orchard—birch and hawthorn with tight buds, the stream running with melt-water. The light is now deep amber, fading toward dusk; the long spring evening is giving way to early night. The village remains entirely gone. Only the stream, the wind in high branches, the moss beneath you, and Lira's presence above you.",
+      "setting": "A secluded glade in the wood behind the orchard—birch and hawthorn with tight buds catching the last amber light, now fading toward dusk and early night. The narrow melt-water stream runs soft and constant. The air is warm where you are skin-to-skin, cool where it touches exposed flesh. The village remains invisible, distant, unreal.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Straddling Loki on the moss, her translucent cloth discarded nearby, her hands steady and her gaze unbroken—present, tea"
+          "state": "Straddling Loki, her hands on his shoulders, her gaze steady and present, speaking plainly about desire and attention"
         }
       ],
       "objects": [
-        "The moss-soft ground, warm from the day's heat beneath you",
+        "The moss-soft ground, warm from the day's heat beneath you both",
         "Lira's translucent cloth, pooled on the moss nearby",
         "Loki's tunic and laces, scattered on the ground",
-        "The narrow stream, running with melt-water, its soft sound a constant presence",
-        "Young birch and hawthorn trees, buds tight, catching the last amber light",
-        "The deepening amber light, fading toward dusk through the canopy"
+        "The narrow stream, running with melt-water, its soft sound constant and groundin",
+        "Young birch and hawthorn trees, buds tight, the canopy darkening as true dusk ap",
+        "The last amber light, fading through the high branches"
       ],
       "threads": [
-        "What will Loki choose to do next—follow her lead, ask, or take the moment further?",
-        "Will Lira continue to teach, or will the moment shift into something else?"
+        "Will Loki follow Lira's teaching and move forward—present, attentive, unhurried?",
+        "What comes after—how does this moment land for both of them when it's done?"
       ]
     },
-    "beats": 8
+    "beats": 9
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 20,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [],
@@ -581,9 +595,9 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 3,
-    "lastGenCount": 938,
-    "lastSharedReadAt": "2026-08-08T02:35:06.010Z",
+    "turnsSinceOffer": 4,
+    "lastGenCount": 939,
+    "lastSharedReadAt": "2026-08-08T03:06:56.723Z",
     "lastTickWorldDay": 39,
     "lastCanonWorldDay": 39,
     "pressureQueue": [],
@@ -2852,18 +2866,20 @@
     }
   },
   "tendencies": {
-    "physical": 0.7763296208564376,
-    "risky": 1.6128873122329674,
-    "social": 2.76275619165039,
-    "amorous": 9.34767654296875,
-    "generous": 0.9268593749999999
+    "physical": 0.7569213803350267,
+    "risky": 1.5725651294271432,
+    "social": 3.6936872868591304,
+    "amorous": 11.113984629394531,
+    "generous": 0.9036878906249999
   },
-  "aptitudes": [],
-  "actionCount": 11,
+  "aptitudes": [
+    "charmer"
+  ],
+  "actionCount": 12,
   "grantsVersion": 1,
   "reconcileVersion": 30,
-  "updatedAt": 1786158296343,
-  "rev": 146,
+  "updatedAt": 1786158499642,
+  "rev": 152,
   "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
@@ -2989,7 +3005,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 28
+    "valley": 29
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -3013,10 +3029,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-08-08T02:36:57.078Z",
-      "lastAt": "2026-08-08T03:04:56.339Z",
+      "lastAt": "2026-08-08T03:08:19.634Z",
       "startDay": 39,
       "endDay": 39,
-      "beats": 8
+      "beats": 9
     }
   ],
   "establishedFacts": [
@@ -3046,7 +3062,7 @@
     "scene": 22,
     "stateOps": 1,
     "characterDeltas": 14,
-    "timeOps": 13,
+    "timeOps": 12,
     "sceneEnded": 9,
     "encounterOps": 4,
     "npcUpdates": 11,
@@ -3175,6 +3191,14 @@
   "gallery": [
     {
       "kind": "moment",
+      "prompt": "Two figures on moss in gathering dusk, her body poised above his, hands steady, eyes meeting—the stream beside them, birch branches dark against a fading amber sky, the space between them charged and ",
+      "url": "https://image.pollinations.ai/prompt/Two%20figures%20on%20moss%20in%20gathering%20dusk%2C%20her%20body%20poised%20above%20his%2C%20hands%20steady%2C%20eyes%20meeting%E2%80%94the%20stream%20beside%20them%2C%20birch%20branches%20dark%20against%20a%20fading%20amber%20sky%2C%20the%20space%20between%20them%20charged%20and%20unhurried.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=30850&nologo=true",
+      "caption": "In a secluded glade, Lira teaches Loki that intimacy is presence and mutual attentiveness—",
+      "worldDay": 39,
+      "at": "2026-08-08T03:08:19.642Z"
+    },
+    {
+      "kind": "moment",
       "prompt": "A woman and a battered man sit on moss by a narrow stream in a wood of tight-budded birch, spring light filtering through branches, the glade utterly still and away from all voices.",
       "url": "https://image.pollinations.ai/prompt/A%20woman%20and%20a%20battered%20man%20sit%20on%20moss%20by%20a%20narrow%20stream%20in%20a%20wood%20of%20tight-budded%20birch%2C%20spring%20light%20filtering%20through%20branches%2C%20the%20glade%20utterly%20still%20and%20away%20from%20all%20voices.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=24416&nologo=true",
       "caption": "Loki and Lira retreat to a secluded glade in the wood to speak, away from the gate and its",
@@ -3202,17 +3226,19 @@
   "skillUses": {
     "travel": 1,
     "ask": 1,
-    "rapport": 3,
-    "romantic": 6,
-    "flirt": 4,
+    "rapport": 4,
+    "romantic": 7,
+    "flirt": 5,
     "honest": 1,
     "help": 1
   },
-  "aptitudeEarnCount": {},
+  "aptitudeEarnCount": {
+    "charmer": 1
+  },
   "_opLedger": {
     "offer": {
       "applied": 5,
-      "rejected": 2,
+      "rejected": 3,
       "lastWhy": "rejected-shape"
     }
   }

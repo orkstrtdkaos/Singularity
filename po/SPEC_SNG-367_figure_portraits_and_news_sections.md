@@ -97,4 +97,7 @@ first, then section.
 
 ## §5 — OUT OF SCOPE
 
-- Regenerating existing portraits — ⚠️ Erik's call whether already-minted figures re-mint or keep their faces.
+- ⛔ **ERIK RULED 2026-08-07: NO BULK REGENERATION. Per-figure re-render only.** New figures get the
+  repaired prompt; already-minted ones keep their faces until the player chooses otherwise, one at a time.
+  ⚠️ **A face seen in play is canon to the player** — silently swapping every portrait to fix a prompt bug
+  rewrites twenty sessions of memory. The player decides which faces were load-bearing.

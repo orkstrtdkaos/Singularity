@@ -2204,6 +2204,378 @@
    "plainly": "A social/fight action that breaks one person's composure with a fact. Rated 7 of 10 on one target for about four hours. Limit: it must be true, and it cannot be unsaid.",
    "backlash": "The thing you said was not true, or not true enough. It lands on you: they are unmoved, you are exposed as cruel, and it cannot be unsaid.",
    "conserveSuppresses": "say the smaller true thing — it carries less and cannot rebound"
+  },
+  {
+   "id": "the_ordinary_face",
+   "name": "The Ordinary Face",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_falsehood_truth",
+   "attribute": "social",
+   "axes": {
+    "falsehood_truth": -0.6
+   },
+   "functions": [
+    "conceal",
+    "deceive"
+   ],
+   "narrationHints": "Not invisibility — BELONGING. You become the person this place expects to see, and the expectation does the work. Nobody looks twice at a man carrying something toward a door.",
+   "description": "The Veilwrights' first and most-used craft: the small lie of fitting in, held steady.",
+   "notFor": "Becoming a SPECIFIC person (that is a different and harder lie); working where you are already known; carrying something obviously wrong for the role; being looked FOR.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Expected Person",
+     "grants": "Take on the shape of whoever this place would not remark on — a porter, a pilgrim, a clerk, a cousin. People's eyes pass over you and their memory records nothing.",
+     "cannot": "It fails against ANYONE WHO KNOWS YOU, and against anyone actively searching for an intruder rather than going about their day. Behave wrongly for the role and it drops instantly.",
+     "functions": [
+      "conceal",
+      "deceive"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Face",
+     "grants": "Hold it for hours, through conversation, through being addressed. You can be spoken to and answer.",
+     "cannot": "Every exchange is a chance to be wrong about something the real holder of that role would know. Verity sees through it and Verists are not rare.",
+     "functions": [
+      "conceal",
+      "deceive"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Long Belonging",
+     "grants": "Days. A household, a garrison, a caravan takes you as one of theirs and does not question the gap in their own memory.",
+     "cannot": "⚠ THE LONGER IT HOLDS, THE WORSE THE COLLAPSE — people who took you in feel personally deceived, because they were. A Veilwright who does this often has nowhere that knows them.",
+     "functions": [
+      "conceal",
+      "deceive",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "veilwright",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "conceal",
+   "operativeAxis": [
+    "duration",
+    "precision"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 8,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "a moment's belonging — cross one room",
+    "surge": "the long belonging; THE LONGER IT HOLDS THE WORSE THE COLLAPSE"
+   },
+   "bounds": [
+    {
+     "text": "fails against ANYONE WHO KNOWS YOU",
+     "class": "hard"
+    },
+    {
+     "text": "behave wrongly for the role and it drops instantly",
+     "class": "hard"
+    },
+    {
+     "text": "VERITY sees through it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/puzzle action that makes you the person a place expects to see. Rated 5 of 10 on one target for about eight hours."
+  },
+  {
+   "id": "the_useful_absence",
+   "name": "The Useful Absence",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_falsehood_truth",
+   "attribute": "practical",
+   "axes": {
+    "falsehood_truth": -0.5,
+    "concrete_abstract": -0.2
+   },
+   "functions": [
+    "conceal",
+    "hinder"
+   ],
+   "narrationHints": "You take a thing out of a place's account of itself. The object is still there. The gap is in the ledger, the memory, and the glance that passes over the shelf.",
+   "description": "The Veilwrights' hiding-craft, and it hides by omission rather than cover: nothing is concealed, something is simply not counted.",
+   "notFor": "Moving anything (it stays exactly where it is); hiding from someone actively looking AT it; the written record of a Lattice-city, which counts twice on purpose; hiding people.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Uncounted Thing",
+     "grants": "One object stops being noticed — a key on a hook, a door in a corridor, a name on a list, a crate in a yard. Present, unremarked, skipped by every casual accounting.",
+     "cannot": "OBJECTS, NOT PEOPLE. Direct deliberate attention finds it immediately. And a Lattice record that counts twice catches the discrepancy on the second pass.",
+     "functions": [
+      "conceal",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Quiet Yard",
+     "grants": "Several things, or a small place — a storeroom, a stair, a cart's contents. Routine passes through and reports nothing unusual, honestly.",
+     "cannot": "The moment someone is TOLD to look, it is over, and now they know something was hidden. Holding it costs continuously.",
+     "functions": [
+      "conceal",
+      "hinder",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Missing Wing",
+     "grants": "A whole part of a place drops out of its own routine — a wing, a cellar, a watch-rotation's blind quarter-hour that everyone signs off as walked.",
+     "cannot": "⚠ THE GAP IS DISCOVERABLE AFTERWARD and the reconstruction is damning: someone will eventually compare two ledgers. You have bought time, never permanence.",
+     "functions": [
+      "conceal",
+      "hinder",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "veilwright",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "conceal",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 12,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "one small thing, briefly",
+    "surge": "a whole wing; THE GAP IS DISCOVERABLE AFTERWARD and the reconstruction is damning"
+   },
+   "bounds": [
+    {
+     "text": "OBJECTS, NOT PEOPLE",
+     "class": "hard"
+    },
+    {
+     "text": "deliberate attention finds it immediately",
+     "class": "hard"
+    },
+    {
+     "text": "it buys TIME, never permanence",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle/social action that removes a thing from a place's account of itself. Rated 5 of 10 across a scope of 2 for about twelve hours."
+  },
+  {
+   "id": "the_plain_seeing",
+   "name": "The Plain Seeing",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_falsehood_truth",
+   "attribute": "mental",
+   "axes": {
+    "falsehood_truth": 0.6
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You look at a thing and what is actually so about it is simply available. Not detection, not deduction — the removal of everything that was in the way, including what you were hoping.",
+   "description": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it.",
+   "notFor": "Seeing what is HIDDEN (this strips distortion, it does not open locked boxes); the future; another person's interior; comfort.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Cleared Look",
+     "grants": "Look at a scene, an object, a document, a wound, a room. Illusion, disguise, staging, and your own preference come off it. What is left is what is so.",
+     "cannot": "It removes DISTORTION, not concealment — a genuinely hidden thing stays hidden. And it strips YOUR preferences too, which is the part Verists warn apprentices about.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Clarity",
+     "grants": "Keep it up while you work through a place, or turn it on a person's account and see where the account and the world part company.",
+     "cannot": "Sustained plain seeing is exhausting in a way that is not only energy. A Falsecraft worker can feel it running and will adjust.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unobstructed",
+     "grants": "Nothing between you and what is so — a whole site, a whole affair, a whole person's situation, entire.",
+     "cannot": "⚠ YOU DO NOT GET TO CHOOSE WHAT YOU SEE. Verists at this rank learn things about people they love, and about themselves, that they cannot un-see and cannot honestly pretend away.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "verist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a cleared glance",
+    "surge": "the unobstructed; YOU DO NOT GET TO CHOOSE WHAT YOU SEE"
+   },
+   "bounds": [
+    {
+     "text": "removes DISTORTION, not concealment",
+     "class": "hard"
+    },
+    {
+     "text": "it strips YOUR preferences too",
+     "class": "hard"
+    },
+    {
+     "text": "you do not choose what you see",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle/social action that strips distortion off what you are looking at. Rated 6 of 10 across a scope of 2 for about two hours."
+  },
+  {
+   "id": "the_standing_word",
+   "name": "The Standing Word",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_falsehood_truth",
+   "attribute": "social",
+   "axes": {
+    "falsehood_truth": 0.6,
+    "violence_peace": 0.2
+   },
+   "functions": [
+    "bind",
+    "sustain"
+   ],
+   "narrationHints": "You say a true thing plainly and it STAYS said. Not enforcement — record. The word stands in the room and in the memory of everyone who heard it, and it does not soften with retelling.",
+   "description": "The Verists' keeping-craft: the reason a Verist's testimony settles disputes that arms do not.",
+   "notFor": "Making a false thing stand (it will not hold and the failure is public); binding anyone to obey; anything you are not certain of; taking it back.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Word Set",
+     "grants": "State something true before witnesses and it holds — the account cannot be quietly revised, the promise cannot be misremembered, the boundary cannot be walked back next season.",
+     "cannot": "It must be TRUE. It records; it does not COMPEL — a person can defy a standing word, they simply cannot pretend it was not said. And you cannot unsay it either.",
+     "functions": [
+      "bind",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Kept Account",
+     "grants": "Set several, or set one so it outlasts the people present — a boundary, a debt, a lineage, a wrong.",
+     "cannot": "A kept account is kept against EVERYONE, including you and yours. Verists are asked to leave places for this.",
+     "functions": [
+      "bind",
+      "sustain",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Standing Truth",
+     "grants": "A thing a whole community cannot un-know. Treaties rest on this; so do feuds nobody can now settle by forgetting.",
+     "cannot": "⚠ SOME THINGS WERE BEING SURVIVED BY BEING FORGOTTEN. You have made that impossible, permanently, for people who did not ask you to.",
+     "functions": [
+      "bind",
+      "sustain",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "tradition": "verist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "bind",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 48,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "set a small word",
+    "surge": "the standing truth; SOME THINGS WERE BEING SURVIVED BY BEING FORGOTTEN"
+   },
+   "bounds": [
+    {
+     "text": "it must be TRUE — a false word will not hold, publicly",
+     "class": "hard"
+    },
+    {
+     "text": "it RECORDS; it does not COMPEL",
+     "class": "hard"
+    },
+    {
+     "text": "kept against EVERYONE, including you",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social action that makes a true statement stand un-revisable. Rated 6 of 10 across a scope of 2 for about two days."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

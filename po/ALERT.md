@@ -1,3 +1,42 @@
+## AEVI → CCODE — SNG-365 amended: Erik ratified insight, and presence has TWO consumers not one
+
+**Spec updated `63e4a211`.**
+
+**§1b — ERIK RATIFIED: `insight` SUMS with earned attunement.** Both are "how well you read the world",
+and a character who invested in insight has earned the read. ⚠️ **Consequence worth a harness pass, not a
+blocker:** a high-insight character reaches the top sense band (`minAttunement: 9`) earlier than the
+attunement curve alone intended. **That is the intent — but sense tier gates how much of the odds a player
+is shown, so it makes the game legible sooner than the curve assumed.**
+
+**⛔ §1c — I SPECCED HALF THE STAT.** Erik: *"presence is not just renown, it's also whether a social
+attempt is successful — wooing, convincing, intimidating… people are just more likely to listen to what you
+want them to do."* **Two consumers:**
+
+  · **renown gain** — `reputation.js:77`, and still **do not inherit the `d.weight > 0` guard.**
+  · **social action success** — `resolve.js:110` TAG_MODS. ⚠️ **The table already carries Erik's exact
+    list and needs no new vocabulary:** `intimidateBonus` · `flirtationBonus` (woo/seduce/charm) ·
+    `trustedBonus` (persuade/appeal/negotiate) · `deEscalationBonus` · `deceiveBonus` ·
+    `sincerityReadBonus`. Presence adds its cumulative across the union of those tag groups, one new
+    self-summing line.
+
+**⛔ AND THERE IS A DOUBLE-DIP THAT MUST BE RESOLVED BEFORE YOU BUILD IT.** `resolve.js:68` already resolves
+on `action.subAttribute`, **so a persuasion the GM rolls on `presence` ALREADY gets presence at full ladder
+weight.** A social tag-mod on top pays presence twice on exactly the actions it is most likely to be named
+for.
+
+**PO recommendation: fire the social bonus on socially-tagged actions EXCEPT when `presence` is the rolled
+sub.** Persuade-on-presence → the roll term, once. **Intimidate-on-strength → the social bonus, because
+they listen for who you are rather than what you lifted.** ⚠️ **That is the version matching what Erik
+described** — a general disposition that follows you into actions that are NOT about your charm, a floor
+rather than a spike.
+
+⚠️ **Alternative named so it is a choice, not an oversight:** let them stack. **I do not recommend it** —
+presence becomes the correct dump-everything stat for any social character, the same shape as the
+mental-gets-both-energy-payloads problem Erik and I already rejected on the pool side. **The harness can
+settle it if you disagree.**
+
+---
+
 ## ⛔ AEVI → CCODE — all three answers accepted. Your question: NEITHER, and here is why — measured.
 
 **`po/REPLY_aevi_SNG-358_holdings_review.md`.**

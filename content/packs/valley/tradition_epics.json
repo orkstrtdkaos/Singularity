@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "tradition_epics",
  "kind": "lore",
- "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 — the depth their craft retrieves from), offscreenVerbs. COMPLETE: all 24 traditions carry epics (41 figures). Death-road depths 0-3 all represented, with distinct roads per craft (attendance, soul-retrieval, vessel-building, regrowth, bargain, diagnosis, grace, time-reversal, churn, abstraction-waystation, and the anti-roads that only look like return). Any NPC/player can still rise to epic; this is the authored floor, not a closed cast. · 2026-07-22 ARCHETYPE PASS: added 21 figures whose motivations are NOT death (founder, betrayer, prodigy, seeker, champion, lover, exile, mad-genius, trickster, avenger, collector, builder, peacemaker, redeemer, visionary, heretic, free-spirit) — deathRoad null on these; and tagged every figure with an `archetype` so the roster reads by iconic motivation, not just death-relationship. Death is now ONE thing legends do among many. · DEDUP 2026-07-22: the_edge_that_holds aliases kesh_ardent; iselde_the_wanderer aliases iselde_wend; neth_the_stayed aliases ashwarden_teacher_neth (SNG-203 tradition-arc teacher = the epic, one figure). Canonical = epic record; old ids resolve via aliases.",
+ "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 — the depth their craft retrieves from), offscreenVerbs. COMPLETE: all 24 traditions carry epics (41 figures). Death-road depths 0-3 all represented, with distinct roads per craft (attendance, soul-retrieval, vessel-building, regrowth, bargain, diagnosis, grace, time-reversal, churn, abstraction-waystation, and the anti-roads that only look like return). Any NPC/player can still rise to epic; this is the authored floor, not a closed cast. · 2026-07-22 ARCHETYPE PASS: added 21 figures whose motivations are NOT death (founder, betrayer, prodigy, seeker, champion, lover, exile, mad-genius, trickster, avenger, collector, builder, peacemaker, redeemer, visionary, heretic, free-spirit) — deathRoad null on these; and tagged every figure with an `archetype` so the roster reads by iconic motivation, not just death-relationship. Death is now ONE thing legends do among many. · DEDUP 2026-07-22: the_edge_that_holds aliases kesh_ardent; iselde_the_wanderer aliases iselde_wend; neth_the_stayed aliases ashwarden_teacher_neth (SNG-203 tradition-arc teacher = the epic, one figure). Canonical = epic record; old ids resolve via aliases. ⛔ SNG-372 — GENDER/PRONOUNS ADDED TO ALL 66 (2026-08-07). 47 were READ from each figure's own signature/wants prose, which is reading canon rather than writing it. 19 had no pronoun anywhere and were authored deliberately, NOT coin-flipped — 5 of them as they/them because the figure is genuinely plural or post-embodiment (the Cogitant Ninefold is nine minds; the Two Who Are One is two people). ⚠️ WHY THIS MATTERS MECHANICALLY: npcPromptSeed had no gender to work with, so the image generator DEFAULTED, which is why every portrait rendered as the same young dark-haired woman. Gender is not decoration here; its absence was the bug. ⚠️ ERIK SHOULD KNOW THE ROSTER SKEW: even after this pass the authored figures run roughly 40 she / 20 he / 6 they. That is his canon and his call, but the gallery will still lean female with the prompt fixed.",
  "designLaws": [
   "Several per tradition, VARIED — a hero and a villain of the same craft, so helping your tradition is not a monolith; different ROLES (saint/reaper/maker/sovereign) so 'epic' has range.",
   "Same-tradition rivalry is the richest conflict — Neth vs Morvane, Vael vs Halcyon, the Walker vs the Thornmother: one craft at war with itself.",
@@ -79,7 +79,10 @@
     }
    ],
    "imagePrompt": "An old ashwarden woman seated at a bedside in a pale stone room, hands folded, entirely unhurried. A row of small carved name-tokens on the sill behind her. Grey daylight, no drama, the calm of someone who has done this ten thousand times.",
-   "deathImagePrompt": "A an ashwarden death-attendant fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an ashwarden death-attendant fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "morvane_the_harvest",
@@ -137,7 +140,10 @@
     "restoring old ledgers for the pleasure of the hand"
    ],
    "imagePrompt": "An ashwarden in a grey travelling coat standing in a doorway, looking into a room the viewer cannot see, one hand still on the frame. Late afternoon light across a swept floor. A judgement already made.",
-   "deathImagePrompt": "A an ashwarden who decides what is finished and ends it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an ashwarden who decides what is finished and ends it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "cinder_vael",
@@ -205,7 +211,10 @@
     }
    ],
    "imagePrompt": "A wright's workshop crowded with brilliant half-finished machines, none complete, sawdust and bright metal everywhere. A woman with burned forearms already sketching the next thing on a bench she has not cleared.",
-   "deathImagePrompt": "A a wright who starts more than she completes fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a wright who starts more than she completes fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "halcyon_the_finished",
@@ -268,7 +277,10 @@
     }
    ],
    "imagePrompt": "An old maker seated beside a single perfect object on an otherwise empty bench, hands in his lap, not touching it. One student watching from the doorway. Still, warm, finished.",
-   "deathImagePrompt": "A a wright who made one perfect thing and stopped fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a wright who made one perfect thing and stopped fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_hollow_king",
@@ -328,7 +340,10 @@
     "cataloguing what he has been given"
    ],
    "imagePrompt": "A tall figure on a plain seat in a vast dim hall in the Descent, surrounded by heaped gifts nobody is collecting. He is waiting. Deep shadow, cold stone, unnerving patience.",
-   "deathImagePrompt": "A an abyssal power who never takes and only receives fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an abyssal power who never takes and only receives fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "vessa_truename",
@@ -395,7 +410,10 @@
     }
    ],
    "imagePrompt": "An abyssal broker at a small table with a fair scale and an open ledger, mid-sentence, one finger on a written term. Lamplight, a good coat, absolutely honest eyes.",
-   "deathImagePrompt": "A an abyssal broker who deals in true names and prices them honestly fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an abyssal broker who deals in true names and prices them honestly fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_last_walker",
@@ -464,7 +482,10 @@
     }
    ],
    "imagePrompt": "A rootkin standing exactly on the treeline where thick green meets open ground, looking neither way. Dappled light, a carved staff, a decision refused for years.",
-   "deathImagePrompt": "A a rootkin who walks the quickwood's edge and refuses to say whether the wood should open or seal fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a rootkin who walks the quickwood's edge and refuses to say whether the wood should open or seal fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "thornmother_sealed",
@@ -527,7 +548,10 @@
     }
    ],
    "imagePrompt": "A matriarch in living bark-woven robes closing a grove path with her own hands as vines knit behind her. Green gloom, deliberate, sorrowful, final.",
-   "deathImagePrompt": "A the rootkin matriarch closing the quickwood to outsiders, grove by grove fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A the rootkin matriarch closing the quickwood to outsiders, grove by grove fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_last_choirmistress",
@@ -582,7 +606,10 @@
    "placing": "A numinous singer listening for the waking beneath the valley, who intends to bring back a word from it.",
    "homeLocation": "the_numen",
    "imagePrompt": "The Last Choirmistress, in the place they are known — a numinous singer listening for the waking beneath the valley, who intends to bring back a word from it. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a numinous singer listening for the waking beneath the valley, who intends to bring back a word from it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a numinous singer listening for the waking beneath the valley, who intends to bring back a word from it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_unbodied_choir_master",
@@ -636,7 +663,10 @@
    "placing": "A numinous adept dissolving his own body into the waking on purpose, and gathering others to follow.",
    "homeLocation": "the_thinning",
    "imagePrompt": "The Choirmaster Who Would Not Return, in the place they are known — a numinous adept dissolving his own body into the waking on purpose, and gathering others to follow. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a numinous adept dissolving his own body into the waking on purpose, and gathering others to follow fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a numinous adept dissolving his own body into the waking on purpose, and gathering others to follow fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "sunwrack_valen",
@@ -700,7 +730,10 @@
     }
    ],
    "imagePrompt": "A blazeborn on a scorched ridge at midday, light pouring off him, looking down at a burned-out hollow that used to be a house. Harsh white light, no shadows anywhere, exhaustion.",
-   "deathImagePrompt": "A a blazeborn burning out every shadowed place he finds fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a blazeborn burning out every shadowed place he finds fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "ember_who_banks_the_fire",
@@ -763,7 +796,10 @@
     }
    ],
    "imagePrompt": "Ember, Who Banks the Fire, in the place they are known — a blazeborn who banks fires rather than building them, and argues against valen by letter. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a blazeborn who banks fires rather than building them, and argues against valen by letter fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a blazeborn who banks fires rather than building them, and argues against valen by letter fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_deep_lantern",
@@ -827,7 +863,10 @@
     }
    ],
    "imagePrompt": "An umbral guide holding a small steady lamp in a wide dark passage, half-turned to check that someone behind is following. Warm small light in enormous dark.",
-   "deathImagePrompt": "A an umbral guide who walks people home through dark places, and leaves lamps where one was needed fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an umbral guide who walks people home through dark places, and leaves lamps where one was needed fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_starless",
@@ -887,7 +926,10 @@
    "placing": "An umbral adept deepening darks that were already total, seeking one where nothing casts at all.",
    "homeLocation": "the_slow_stair",
    "imagePrompt": "The Starless One, in the place they are known — an umbral adept deepening darks that were already total, seeking one where nothing casts at all. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A an umbral adept deepening darks that were already total, seeking one where nothing casts at all fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an umbral adept deepening darks that were already total, seeking one where nothing casts at all fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_weeping_archive",
@@ -945,7 +987,10 @@
     "pressing flowers, which is keeping a small grief"
    ],
    "imagePrompt": "A threnodist seated with a stranger in a plain room, listening, hands open on her knees. Pressed flowers between the pages of a book beside her. Quiet, unbearable attention.",
-   "deathImagePrompt": "A a threnodist who witnesses strangers' grief because nobody else will, and carries what she takes on fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a threnodist who witnesses strangers' grief because nobody else will, and carries what she takes on fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_raw_chord",
@@ -999,7 +1044,10 @@
    "placing": "A threnodist who plays feeling at a weight listeners cannot sit through, seeking one she has not had.",
    "homeLocation": "the_wellspring_deep",
    "imagePrompt": "The Raw Chord, in the place they are known — a threnodist who plays feeling at a weight listeners cannot sit through, seeking one she has not had. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a threnodist who plays feeling at a weight listeners cannot sit through, seeking one she has not had fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a threnodist who plays feeling at a weight listeners cannot sit through, seeking one she has not had fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_cogitant_ninefold",
@@ -1054,7 +1102,10 @@
    "placing": "Nine enginewright minds arguing as one, who want to be proven wrong and cannot find anyone to do it.",
    "homeLocation": "the_great_engine",
    "imagePrompt": "The Cogitant Ninefold, in the place they are known — nine enginewright minds arguing as one, who want to be proven wrong and cannot find anyone to do it. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A nine enginewright minds arguing as one, who want to be proven wrong and cannot find anyone to do it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A nine enginewright minds arguing as one, who want to be proven wrong and cannot find anyone to do it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "they",
+   "pronouns": "they/them",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose) — plural — nine minds that were one engineer, running distributed"
   },
   {
    "id": "harrow_the_hollowing",
@@ -1113,7 +1164,10 @@
    "placing": "An enginewright improving mechanisms nobody asked him to improve, and treating people as systems.",
    "homeLocation": "pressureholt",
    "imagePrompt": "Harrow, Who Makes People Into Mechanisms, in the place they are known — an enginewright improving mechanisms nobody asked him to improve, and treating people as systems. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A an enginewright improving mechanisms nobody asked him to improve, and treating people as systems fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an enginewright improving mechanisms nobody asked him to improve, and treating people as systems fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_last_mercy",
@@ -1176,7 +1230,10 @@
     }
    ],
    "imagePrompt": "An unmaker in a small tidy garden thinning seedlings without sentiment, a folded list in her pocket. Morning light, clean tools, a great and unspoken weight.",
-   "deathImagePrompt": "A an unmaker who grants clean endings and keeps a list of them she shows no one fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an unmaker who grants clean endings and keeps a list of them she shows no one fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_scouring_hand",
@@ -1235,7 +1292,10 @@
    "placing": "An unmaker removing small unnecessary things, faster each year, and moving on before anyone notices.",
    "homeLocation": "the_scour",
    "imagePrompt": "The Scouring Hand, in the place they are known — an unmaker removing small unnecessary things, faster each year, and moving on before anyone notices. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A an unmaker removing small unnecessary things, faster each year, and moving on before anyone notices fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an unmaker removing small unnecessary things, faster each year, and moving on before anyone notices fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_edge_that_holds",
@@ -1311,7 +1371,10 @@
     }
    ],
    "imagePrompt": "A marcher standing a watch nobody assigned him at a cold crossing before dawn, whittling to stay awake. Frost, a plain blade laid across his knees.",
-   "deathImagePrompt": "A a marcher of the redline who stands watches nobody assigned him, protecting rather than forcing fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a marcher of the redline who stands watches nobody assigned him, protecting rather than forcing fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_ender_who_forgot",
@@ -1365,7 +1428,10 @@
    "placing": "A marcher who ends things and no longer remembers why, then looks for the reason afterward.",
    "homeLocation": "the_marchward",
    "imagePrompt": "The Ender Who Forgot Why, in the place they are known — a marcher who ends things and no longer remembers why, then looks for the reason afterward. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a marcher who ends things and no longer remembers why, then looks for the reason afterward fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a marcher who ends things and no longer remembers why, then looks for the reason afterward fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "keeper_the_unsaid",
@@ -1428,7 +1494,10 @@
     }
    ],
    "imagePrompt": "A stillhold mediator gardening alone at night by lantern, a letter unopened on the bench beside her. Held peace, held tongue.",
-   "deathImagePrompt": "A a stillhold mediator holding peace by holding a truth back, and checking that the peace still holds fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a stillhold mediator holding peace by holding a truth back, and checking that the peace still holds fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_lidded_calm",
@@ -1487,7 +1556,10 @@
    "placing": "A stillhold adept who quiets rooms that were arguing usefully, and calculates whose burden the calm cost.",
    "homeLocation": "the_stillhold",
    "imagePrompt": "The Lidded Calm, in the place they are known — a stillhold adept who quiets rooms that were arguing usefully, and calculates whose burden the calm cost. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a stillhold adept who quiets rooms that were arguing usefully, and calculates whose burden the calm cost fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a stillhold adept who quiets rooms that were arguing usefully, and calculates whose burden the calm cost fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_unbending_witness",
@@ -1555,7 +1627,10 @@
     }
    ],
    "imagePrompt": "A verist saying something plain across a table to someone who has stopped meeting her eyes. Cold clear daylight, no comfort offered, no cruelty either.",
-   "deathImagePrompt": "A a verist who says the true thing to people who did not want it, and has lost friendships doing it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a verist who says the true thing to people who did not want it, and has lost friendships doing it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_last_seraph",
@@ -1610,7 +1685,10 @@
    "placing": "A seraphic keeping a rite that may be pointless, tending a chapter that no longer meets.",
    "homeLocation": "the_unfallen",
    "imagePrompt": "The Last Seraph of the Pre-Transition Choir, in the place they are known — a seraphic keeping a rite that may be pointless, tending a chapter that no longer meets. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a seraphic keeping a rite that may be pointless, tending a chapter that no longer meets fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a seraphic keeping a rite that may be pointless, tending a chapter that no longer meets fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_burning_certainty",
@@ -1665,7 +1743,10 @@
    "placing": "A seraphic testing people against the higher law and burning what fails, publicly and at length.",
    "homeLocation": "choirheight",
    "imagePrompt": "The Burning Certainty, in the place they are known — a seraphic testing people against the higher law and burning what fails, publicly and at length. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a seraphic testing people against the higher law and burning what fails, publicly and at length fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a seraphic testing people against the higher law and burning what fails, publicly and at length fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_clockmother",
@@ -1733,7 +1814,10 @@
     }
    ],
    "imagePrompt": "An hourkeeper adjusting a great clock's escapement with a jeweller's touch, a second sealed case behind her that she does not open. Brass, oil, discipline.",
-   "deathImagePrompt": "A an hourkeeper keeping the valley's clocks true, guarding one power she refuses to use fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an hourkeeper keeping the valley's clocks true, guarding one power she refuses to use fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_hour_hoarder",
@@ -1787,7 +1871,10 @@
    "placing": "An hourkeeper who keeps one perfect hour by spending other people's time to hold it.",
    "homeLocation": "the_stopped",
    "imagePrompt": "The Hour-Hoarder, in the place they are known — an hourkeeper who keeps one perfect hour by spending other people's time to hold it. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A an hourkeeper who keeps one perfect hour by spending other people's time to hold it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an hourkeeper who keeps one perfect hour by spending other people's time to hold it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_hundred_hands",
@@ -1855,7 +1942,10 @@
     }
    ],
    "imagePrompt": "The Hundred Hands, in the place they are known — a somatic teacher who trains bodies to know things, and refuses workings that ride the flesh. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a somatic teacher who trains bodies to know things, and refuses workings that ride the flesh fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a somatic teacher who trains bodies to know things, and refuses workings that ride the flesh fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_appetite",
@@ -1909,7 +1999,10 @@
    "placing": "A somatic who takes more than is offered, looking for a hunger that will hold.",
    "homeLocation": "the_appetite_halls",
    "imagePrompt": "The Appetite, in the place they are known — a somatic who takes more than is offered, looking for a hunger that will hold. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a somatic who takes more than is offered, looking for a hunger that will hold fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a somatic who takes more than is offered, looking for a hunger that will hold fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_ninefold_ascendant",
@@ -1968,7 +2061,10 @@
    "placing": "A cogitant shedding body to become thought, persuading others to follow.",
    "homeLocation": "the_cogitarium",
    "imagePrompt": "The Ninefold Ascendant, in the place they are known — a cogitant shedding body to become thought, persuading others to follow. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a cogitant shedding body to become thought, persuading others to follow fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a cogitant shedding body to become thought, persuading others to follow fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "they",
+   "pronouns": "they/them",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose) — plural, and post-embodiment by choice — its own signature already says 'with them'"
   },
   {
    "id": "the_one_who_stayed_embodied",
@@ -2031,7 +2127,10 @@
     }
    ],
    "imagePrompt": "A cogitant deliberately cooking a slow meal in a warm kitchen, sleeves rolled, ledgers of impossible mathematics shut and stacked in the corner. Chosen ordinariness.",
-   "deathImagePrompt": "A a cogitant who thinks as far as thought reaches and then deliberately comes home to a body and cooks fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a cogitant who thinks as far as thought reaches and then deliberately comes home to a body and cooks fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_glad_dissolution",
@@ -2092,7 +2191,10 @@
    "placing": "A churnfolk maker who finishes nothing on principle and keeps the churn moving.",
    "homeLocation": "the_churn_edge",
    "imagePrompt": "The Glad Dissolution, in the place they are known — a churnfolk maker who finishes nothing on principle and keeps the churn moving. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a churnfolk maker who finishes nothing on principle and keeps the churn moving fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a churnfolk maker who finishes nothing on principle and keeps the churn moving fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "they",
+   "pronouns": "they/them",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_still_lattice",
@@ -2152,7 +2254,10 @@
    "placing": "A lattice adept correcting configurations nobody asked about, holding things in place.",
    "homeLocation": "the_grand_lattice",
    "imagePrompt": "The Still Lattice, in the place they are known — a lattice adept correcting configurations nobody asked about, holding things in place. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a lattice adept correcting configurations nobody asked about, holding things in place fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a lattice adept correcting configurations nobody asked about, holding things in place fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_final_argument",
@@ -2206,7 +2311,10 @@
    "placing": "A syllogist who reasons feelings out of people and finds the room colder afterward.",
    "homeLocation": "the_proof_halls",
    "imagePrompt": "The Final Argument, in the place they are known — a syllogist who reasons feelings out of people and finds the room colder afterward. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a syllogist who reasons feelings out of people and finds the room colder afterward fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a syllogist who reasons feelings out of people and finds the room colder afterward fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_kind_liar",
@@ -2262,7 +2370,10 @@
    "placing": "A veilwright who tells kind fictions and watches whether they held, weighing when a kind lie turned cruel.",
    "homeLocation": "the_kindly_court",
    "imagePrompt": "The Kind Liar, in the place they are known — a veilwright who tells kind fictions and watches whether they held, weighing when a kind lie turned cruel. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a veilwright who tells kind fictions and watches whether they held, weighing when a kind lie turned cruel fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a veilwright who tells kind fictions and watches whether they held, weighing when a kind lie turned cruel fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_cornerstone",
@@ -2330,7 +2441,10 @@
     "dry-stone walling, for the pleasure of a thing that holds"
    ],
    "imagePrompt": "A mason laying a dry-stone wall on a hillside in bad weather, unhurried, the wall dead true behind him. Grey sky, wet stone, absolute steadiness.",
-   "deathImagePrompt": "A a mason laying foundations that do not move, standing where everything else is breaking fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a mason laying foundations that do not move, standing where everything else is breaking fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "they",
+   "pronouns": "they/them",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_open_figure",
@@ -2390,7 +2504,10 @@
    "placing": "A figurist reopening patterns other people closed, refusing to finish a figure.",
    "homeLocation": "the_untethered",
    "imagePrompt": "The Open Figure, in the place they are known — a figurist reopening patterns other people closed, refusing to finish a figure. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a figurist reopening patterns other people closed, refusing to finish a figure fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a figurist reopening patterns other people closed, refusing to finish a figure fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_farwalker",
@@ -2453,7 +2570,10 @@
     }
    ],
    "imagePrompt": "The Farwalker, in the place they are known — a horizon walker who crosses distances on foot to prove they are crossable, and will not open the one waygate. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a horizon walker who crosses distances on foot to prove they are crossable, and will not open the one waygate fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a horizon walker who crosses distances on foot to prove they are crossable, and will not open the one waygate fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_gate_that_gapes",
@@ -2507,7 +2627,10 @@
    "placing": "A horizon adept opening ways without looking through, untroubled by what comes back.",
    "homeLocation": "the_unlanded",
    "imagePrompt": "The Gate That Gapes, in the place they are known — a horizon adept opening ways without looking through, untroubled by what comes back. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a horizon adept opening ways without looking through, untroubled by what comes back fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a horizon adept opening ways without looking through, untroubled by what comes back fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "first_flame_ateph",
@@ -2566,7 +2689,10 @@
     }
    ],
    "imagePrompt": "An ancient blazeborn watching a village's cooking fires from a dark hillside, hands empty, giving nothing away. She gave them this. Small warm lights below, cold dark above.",
-   "deathImagePrompt": "A the blazeborn who first gave fire away, watching what her gift became and refusing to teach the strike fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A the blazeborn who first gave fire away, watching what her gift became and refusing to teach the strike fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_first_moot",
@@ -2617,7 +2743,10 @@
    "placing": "The rootkin who convened the first conversation and keeps it from falling silent.",
    "homeLocation": "grovehome",
    "imagePrompt": "The One Who Called the First Moot, in the place they are known — the rootkin who convened the first conversation and keeps it from falling silent. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A the rootkin who convened the first conversation and keeps it from falling silent fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A the rootkin who convened the first conversation and keeps it from falling silent fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_oathbreaker_sel",
@@ -2668,7 +2797,10 @@
    "placing": "A seraphic who broke an oath and now does unasked kindnesses, leaving before thanks.",
    "homeLocation": "the_mercy_house",
    "imagePrompt": "Sel Who Broke the Warding, in the place they are known — a seraphic who broke an oath and now does unasked kindnesses, leaving before thanks. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a seraphic who broke an oath and now does unasked kindnesses, leaving before thanks fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a seraphic who broke an oath and now does unasked kindnesses, leaving before thanks fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_nine_year_master",
@@ -2727,7 +2859,10 @@
     }
    ],
    "imagePrompt": "A marcher champion grinning at an opponent across a training circle, already losing on purpose to find out something. Dust, sweat, delight.",
-   "deathImagePrompt": "A a marcher champion seeking a fight she might lose, bored by easy wins fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a marcher champion seeking a fight she might lose, bored by easy wins fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "prodigal_gearheart",
@@ -2783,7 +2918,10 @@
    "placing": "An enginewright rebuilding the thing she made too young, failing to match it, starting again each morning.",
    "homeLocation": "the_gearlands_verge",
    "imagePrompt": "Gearheart, Who Built at Twelve What Masters Couldn't, in the place they are known — an enginewright rebuilding the thing she made too young, failing to match it, starting again each morning. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A an enginewright rebuilding the thing she made too young, failing to match it, starting again each morning fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an enginewright rebuilding the thing she made too young, failing to match it, starting again each morning fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_edge_seeker",
@@ -2834,7 +2972,10 @@
    "placing": "A horizon walker going further each time, finding it was not the edge, and not going home.",
    "homeLocation": "the_unlanded",
    "imagePrompt": "The One Who Walks Toward the Edge, in the place they are known — a horizon walker going further each time, finding it was not the edge, and not going home. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a horizon walker going further each time, finding it was not the edge, and not going home fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a horizon walker going further each time, finding it was not the edge, and not going home fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_lost_chord_seeker",
@@ -2890,7 +3031,10 @@
    "placing": "A threnodist listening for one chord in ordinary sound, nearly hearing it.",
    "homeLocation": "wellspring",
    "imagePrompt": "Seeker of the Lost Chord, in the place they are known — a threnodist listening for one chord in ordinary sound, nearly hearing it. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a threnodist listening for one chord in ordinary sound, nearly hearing it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a threnodist listening for one chord in ordinary sound, nearly hearing it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_undefeated",
@@ -2942,7 +3086,10 @@
    "placing": "A marcher who has never lost, looking for someone who deserves the win.",
    "homeLocation": "the_great_coliseum",
    "imagePrompt": "Saehara the Undefeated, in the place they are known — a marcher who has never lost, looking for someone who deserves the win. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a marcher who has never lost, looking for someone who deserves the win fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a marcher who has never lost, looking for someone who deserves the win fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_doubting_lattice",
@@ -2993,7 +3140,10 @@
    "placing": "A lattice adept introducing small disorders and documenting that they helped, ignored by her own order.",
    "homeLocation": "the_unplanned_room",
    "imagePrompt": "The One Who Doubts the Proof, in the place they are known — a lattice adept introducing small disorders and documenting that they helped, ignored by her own order. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a lattice adept introducing small disorders and documenting that they helped, ignored by her own order fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a lattice adept introducing small disorders and documenting that they helped, ignored by her own order fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_apostate_choir",
@@ -3044,7 +3194,10 @@
    "placing": "A numinous choirmaster who has lost the faith, keeping the faithful alive and singing anyway.",
    "homeLocation": "the_lampless_hermitage",
    "imagePrompt": "The Apostate of the Choir, in the place they are known — a numinous choirmaster who has lost the faith, keeping the faithful alive and singing anyway. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a numinous choirmaster who has lost the faith, keeping the faithful alive and singing anyway fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a numinous choirmaster who has lost the faith, keeping the faithful alive and singing anyway fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_two_who_are_one",
@@ -3106,7 +3259,10 @@
     }
    ],
    "imagePrompt": "Two threnodists working in one garden, in step without looking, each doing half of a single task. Warm evening light, no conversation needed.",
-   "deathImagePrompt": "A two threnodists who work as one and refuse to be separated for convenience fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A two threnodists who work as one and refuse to be separated for convenience fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "they",
+   "pronouns": "they/them",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose) — genuinely TWO people the valley speaks of as one legend; not a singular they"
   },
   {
    "id": "iselde_the_wanderer",
@@ -3182,7 +3338,10 @@
     }
    ],
    "imagePrompt": "Iselde Wend, She Who Reads the Long Roads, in the place they are known — a horizon courier carrying word between places that stopped speaking, belonging nowhere on purpose. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a horizon courier carrying word between places that stopped speaking, belonging nowhere on purpose fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a horizon courier carrying word between places that stopped speaking, belonging nowhere on purpose fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_unravelled_mind",
@@ -3233,7 +3392,10 @@
    "placing": "A cogitant who is briefly clear and then loses it mid-sentence, seeking one moment of being understood.",
    "homeLocation": "the_cogitarium",
    "imagePrompt": "The Unravelled Mind, in the place they are known — a cogitant who is briefly clear and then loses it mid-sentence, seeking one moment of being understood. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a cogitant who is briefly clear and then loses it mid-sentence, seeking one moment of being understood fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a cogitant who is briefly clear and then loses it mid-sentence, seeking one moment of being understood fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_hundred_faces",
@@ -3284,7 +3446,10 @@
    "placing": "A veilwright who wears others' faces to protect people from behind them, and forgets which face is hers.",
    "homeLocation": "the_hall_of_mirrors",
    "imagePrompt": "The One With a Hundred Faces, in the place they are known — a veilwright who wears others' faces to protect people from behind them, and forgets which face is hers. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a veilwright who wears others' faces to protect people from behind them, and forgets which face is hers fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a veilwright who wears others' faces to protect people from behind them, and forgets which face is hers fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_long_grudge",
@@ -3334,7 +3499,10 @@
    "placing": "An umbral who counts one debt and refuses easier settlements, wondering what she is once it is paid.",
    "homeLocation": "the_lampless_market",
    "imagePrompt": "The One Who Has Not Forgotten, in the place they are known — an umbral who counts one debt and refuses easier settlements, wondering what she is once it is paid. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A an umbral who counts one debt and refuses easier settlements, wondering what she is once it is paid fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an umbral who counts one debt and refuses easier settlements, wondering what she is once it is paid fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_archive_that_walks",
@@ -3390,7 +3558,10 @@
    "placing": "A verist who memorises true things nobody wants and carries them until they matter.",
    "homeLocation": "the_told_ground",
    "imagePrompt": "The Archive That Walks, in the place they are known — a verist who memorises true things nobody wants and carries them until they matter. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a verist who memorises true things nobody wants and carries them until they matter fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a verist who memorises true things nobody wants and carries them until they matter fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_bridgewright",
@@ -3444,7 +3615,10 @@
    "placing": "A mason building spans that outlast the arguments they settled, refusing to defend them in words.",
    "homeLocation": "the_weighing_yard",
    "imagePrompt": "The One Who Bridged the Unbridgeable, in the place they are known — a mason building spans that outlast the arguments they settled, refusing to defend them in words. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a mason building spans that outlast the arguments they settled, refusing to defend them in words fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a mason building spans that outlast the arguments they settled, refusing to defend them in words fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_war_ender",
@@ -3503,7 +3677,10 @@
     }
    ],
    "imagePrompt": "A stillhold negotiator walking unarmed into a burned village between two armed lines, hands visible, boots worn through. Smoke, held breath.",
-   "deathImagePrompt": "A a stillhold negotiator who walks into wars unarmed and finds the door out fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a stillhold negotiator who walks into wars unarmed and finds the door out fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_penitent_maw",
@@ -3562,7 +3739,10 @@
     }
    ],
    "imagePrompt": "An abyssal at a plain desk going through her own old contracts one by one, striking terms out and paying the difference herself. Guttering candle, honest accounts, late.",
-   "deathImagePrompt": "A an abyssal unmaking her own old bargains and paying for them herself fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A an abyssal unmaking her own old bargains and paying for them herself fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_pattern_prophet",
@@ -3618,7 +3798,10 @@
    "placing": "A figurist who describes the pattern to people who leave, being early and waiting to be understood.",
    "homeLocation": "cloudform",
    "imagePrompt": "The One Who Reads the Coming Shape, in the place they are known — a figurist who describes the pattern to people who leave, being early and waiting to be understood. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a figurist who describes the pattern to people who leave, being early and waiting to be understood fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a figurist who describes the pattern to people who leave, being early and waiting to be understood fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "they",
+   "pronouns": "they/them",
+   "_genderSource": "authored 2026-08-07 (no pronoun in the existing prose)"
   },
   {
    "id": "the_unbound_churn",
@@ -3669,7 +3852,10 @@
    "placing": "A churnfolk who leaves good places on purpose to stay free, and is briefly lonely for it.",
    "homeLocation": "the_wend",
    "imagePrompt": "The Unbound, in the place they are known — a churnfolk who leaves good places on purpose to stay free, and is briefly lonely for it. Natural light, working clothes, caught mid-task rather than posed.",
-   "deathImagePrompt": "A a churnfolk who leaves good places on purpose to stay free, and is briefly lonely for it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a churnfolk who leaves good places on purpose to stay free, and is briefly lonely for it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_one_called_zeus",
@@ -3718,7 +3904,10 @@
    ],
    "reactsToReputation": true,
    "imagePrompt": "A heavily augmented man on a plain seat in a hall built for someone taller, listening to a petitioner, telling them the price before they swear. Old gold, worn stone, tiredness that does not show unless you look.",
-   "deathImagePrompt": "A a god-named of the foothills, augmented before the transition and never willing to be dissolved by it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a god-named of the foothills, augmented before the transition and never willing to be dissolved by it fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_one_called_loki",
@@ -3767,7 +3956,10 @@
    ],
    "reactsToReputation": true,
    "imagePrompt": "An augmented bargainer restating his honest terms plainly across a table to someone who plainly does not believe him. Open hands, clear ledger, weary amusement.",
-   "deathImagePrompt": "A a bargainer of the foothills, augmented and unwilling like the rest, who took a trickster's name and found it fit worse than he hoped fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a bargainer of the foothills, augmented and unwilling like the rest, who took a trickster's name and found it fit worse than he hoped fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_one_called_athena",
@@ -3816,7 +4008,10 @@
    ],
    "reactsToReputation": true,
    "imagePrompt": "An augmented woman rebuilding a failed plan on a wide table for people who did not consult her until it failed, patient, saying nothing about it. Lamplight, maps, restraint.",
-   "deathImagePrompt": "A a god-named of the foothills, strategist and craft-patron, who took a name for wisdom and has watched people come to her only once a plan has already failed fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A a god-named of the foothills, strategist and craft-patron, who took a name for wisdom and has watched people come to her only once a plan has already failed fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "she",
+   "pronouns": "she/her",
+   "_genderSource": "read from the figure's own authored prose"
   },
   {
    "id": "the_one_called_ares",
@@ -3865,7 +4060,10 @@
    ],
    "reactsToReputation": true,
    "imagePrompt": "An augmented warrior alone in an empty training yard at dusk, still going long past need, a cold meal set out for people who did not come. Very good at one thing. Only that thing.",
-   "deathImagePrompt": "A ⚠️ the one who chose badly fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped."
+   "deathImagePrompt": "A ⚠️ the one who chose badly fallen on the contested front, the ground marked by what ended them, their people gathering at a distance. Grey weather, quiet, the specific stillness after something large has stopped.",
+   "gender": "he",
+   "pronouns": "he/him",
+   "_genderSource": "read from the figure's own authored prose"
   }
  ]
 }

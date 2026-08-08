@@ -2955,6 +2955,194 @@
     }
    ],
    "plainly": "A puzzle action that reads a lightless place by everything except sight. Rated 5 of 10 across a scope of 3 for about three hours."
+  },
+  {
+   "id": "the_kept_fire",
+   "name": "The Kept Fire",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_dark_light",
+   "attribute": "practical",
+   "axes": {
+    "dark_light": 0.6
+   },
+   "functions": [
+    "sustain",
+    "make"
+   ],
+   "narrationHints": "Fire that stays where you put it and does what you said. Not conjured — kept: it burns on less, in wet, in wind, and it does not spread past the line you drew.",
+   "description": "The Blazeborn's first craft, and the unromantic one. Anyone can start a fire; keeping one is the trade.",
+   "notFor": "Fire from nothing (a source must exist, however small); burning what will not burn; making it hotter — this is CONTROL, not power; keeping a fire you cannot see.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Fire Held",
+     "grants": "Take an existing flame — a coal, a spark, a lamp — and it burns on almost nothing, through rain and wind, for hours, and it DOES NOT SPREAD past a line you name aloud when you set it.",
+     "cannot": "A SOURCE MUST EXIST. It does not burn hotter and it will not take hold on what genuinely will not burn. Lose sight of it for long and it becomes an ordinary fire again, with ordinary appetites.",
+     "functions": [
+      "sustain",
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Several Fires",
+     "grants": "A camp's worth, a forge, a signal-chain along a ridge, a controlled burn with an edge you drew — all held at once, all obedient to their lines.",
+     "cannot": "Each one is attention, and a Blazeborn holding six fires is doing nothing else. A line you drew badly is a line the fire will honour exactly.",
+     "functions": [
+      "sustain",
+      "make",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Long Burning",
+     "grants": "A fire kept for days — a beacon through a siege, a forge through a working, a burn that clears exactly what you meant and stops at the boundary.",
+     "cannot": "⚠ WHEN YOU LET GO IT IS JUST FIRE, in whatever state you left it, and it has been building for days. Blazeborn are taught to put a long burning DOWN, not to walk away from one.",
+     "functions": [
+      "sustain",
+      "make",
+      "ward"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "blazeborn",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "sustain",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 24,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "hold one small flame",
+    "surge": "the long burning; WHEN YOU LET GO IT IS JUST FIRE, and it has been building for days"
+   },
+   "bounds": [
+    {
+     "text": "A SOURCE MUST EXIST — it is control, not creation",
+     "class": "hard"
+    },
+    {
+     "text": "it does NOT burn hotter",
+     "class": "hard"
+    },
+    {
+     "text": "it honours the line you drew EXACTLY, including a bad one",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that keeps a fire burning where you put it and nowhere else. Rated 5 of 10 across a scope of 2 for about a day."
+  },
+  {
+   "id": "the_read_burn",
+   "name": "The Read Burn",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_dark_light",
+   "attribute": "practical",
+   "axes": {
+    "dark_light": 0.5,
+    "concrete_abstract": 0.2
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You look at heat and it tells you. What burned here, how hot, how long ago, and — looking forward — where this fire goes next and how fast.",
+   "description": "The Blazeborn's seeing-craft. Half of fire-work is knowing what a fire is about to do.",
+   "notFor": "Reading anything cold or long-cold (days, not seasons); who set it or why; anything that did not involve heat.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Heat Read",
+     "grants": "Read a burned place or a live fire and the craft NAMES it: what it started in, roughly how hot, how long ago it began — or, on a live one, where it goes next, how fast, and which way is survivable.",
+     "cannot": "HEAT ONLY, and recent — a season-old burn is cold and silent. It says nothing about who or why. On a live fire it reads the NEXT few minutes, not the hour.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Burn",
+     "grants": "A fire's entire behaviour across a site, or a burned building read room by room — origin, path, and the spots that were fed on purpose.",
+     "cannot": "Reading a live fire at this depth means being close to it for longer than is sensible.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Fire's Whole Course",
+     "grants": "A wildfire, a burning quarter, a forge-city — where it goes over hours, what it takes, and the one line that holds it.",
+     "cannot": "⚠ KNOWING THE LINE IS NOT HOLDING IT, and you will very often be the person who knows exactly which village is not savable.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "FIGHT"
+   ],
+   "tradition": "blazeborn",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 2,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "read the near heat",
+    "surge": "the whole course; YOU WILL KNOW EXACTLY WHICH VILLAGE IS NOT SAVABLE"
+   },
+   "bounds": [
+    {
+     "text": "HEAT ONLY, and recent — a season-old burn is silent",
+     "class": "hard"
+    },
+    {
+     "text": "nothing about who set it or why",
+     "class": "hard"
+    },
+    {
+     "text": "on a live fire it reads MINUTES, not hours",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/fight action that reads what burned here and where a live fire goes next. Rated 5 of 10 across a scope of 3 for about two hours."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

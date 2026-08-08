@@ -2396,6 +2396,195 @@
    "plainly": "A fight action that gives present matter its true weight and sends it. Rated 8 of 10 across a scope of 2. Limit: something must actually be there.",
    "backlash": "It falls where it was going to fall, which is not where you set it. Structure comes down on the wielder and whoever is nearest.",
    "conserveSuppresses": "one stone, honestly thrown — it goes where you threw it"
+  },
+  {
+   "id": "the_true_figure",
+   "name": "The True Figure",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.5
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You see the shape a thing is actually making — the pattern under the mess, the geometry a crowd is unknowingly standing in, the figure a set of events describes. Once seen, it cannot be unseen.",
+   "description": "The Figurists' first craft: pattern read rather than imposed.",
+   "notFor": "Patterns that are not there (the craft returns nothing rather than obliging you); reading intent or meaning; anything genuinely random.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shape Under It",
+     "grants": "Look at a scene, a set of records, a route, a crowd, a wound-pattern, and see the figure it makes — the repeat, the symmetry, the gap where a piece is missing.",
+     "cannot": "It shows the SHAPE, never the reason. And a genuinely chaotic thing has no figure — it returns nothing, which Figurists insist is a real answer.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Continued Line",
+     "grants": "Extend the figure — where the pattern goes next, what the missing piece must be, where the sixth one will be found.",
+     "cannot": "The extension is only as sound as the figure, and a partial pattern extends confidently and wrongly. Say which you have.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Figure",
+     "grants": "The complete shape of a large thing — a campaign, a season of disappearances, a city's flow, a tradition's drift.",
+     "cannot": "⚠ A LARGE FIGURE IS HARD TO STOP SEEING. Figurists at this rank read pattern into things that have none, and the craft cannot tell them apart from inside.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read the near shape",
+    "surge": "the whole figure; IT IS HARD TO STOP SEEING, and the craft cannot tell you when there is none"
+   },
+   "bounds": [
+    {
+     "text": "shows the SHAPE, never the reason",
+     "class": "hard"
+    },
+    {
+     "text": "a genuinely chaotic thing returns NOTHING",
+     "class": "hard"
+    },
+    {
+     "text": "a partial pattern extends confidently and wrongly",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A puzzle/social action that reads the pattern a thing is making. Rated 5 of 10 across a scope of 2 for about six hours."
+  },
+  {
+   "id": "the_standing_figure",
+   "name": "The Standing Figure",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.6
+   },
+   "functions": [
+    "make",
+    "ward",
+    "bind"
+   ],
+   "narrationHints": "You hold a figure in a place and the place keeps it. A drawn order that persists — a ward-line, a true corner, a boundary that is geometrically rather than legally so.",
+   "description": "The Figurists' making-craft: pattern imposed and left standing, which is what a Figurist means by building.",
+   "notFor": "Making matter (the figure orders what is there, it does not add); anything you cannot hold cleanly in mind while you set it; figures on living things.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Set Figure",
+     "grants": "Impose a lasting figure on a place — a threshold that turns what crosses it wrong, a true line a structure can be built to, a mark that holds its meaning.",
+     "cannot": "It ORDERS, it does not create. It must be set on something — ground, wall, floor. Masons can read it and, being Masons, will have opinions.",
+     "functions": [
+      "make",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Order",
+     "grants": "Larger, or compound — a room made regular, a route made unambiguous, a ward that turns a specific kind of thing.",
+     "cannot": "A compound figure has more places to lapse, and a lapsed figure is not neutral: it holds a WRONG order until corrected.",
+     "functions": [
+      "make",
+      "ward",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Governing Figure",
+     "grants": "A figure a whole site obeys. Water runs where it says, sound carries where it says, things do not cross where it says.",
+     "cannot": "⚠ THE PLACE NOW HAS YOUR SHAPE IN IT and it will outlast your reason for setting it. The Untethered do this to whole valleys and call it improvement.",
+     "functions": [
+      "make",
+      "ward",
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "FIGHT"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "make",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 72,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "set a small figure",
+    "surge": "a governing figure; THE PLACE NOW HAS YOUR SHAPE IN IT and it outlasts your reason"
+   },
+   "bounds": [
+    {
+     "text": "it ORDERS what is there; it does not create",
+     "class": "hard"
+    },
+    {
+     "text": "must be set on something — ground, wall, floor",
+     "class": "hard"
+    },
+    {
+     "text": "a LAPSED figure holds a wrong order until corrected",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle/fight action that sets a lasting geometric order on a place. Rated 6 of 10 across a scope of 2 for about three days."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

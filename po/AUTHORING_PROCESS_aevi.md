@@ -156,3 +156,43 @@ constraint and the failure were the same thought and I was only writing half of 
 scaled and tier-costed. **The prose `intensity.conserve/surge` I had been authoring for weeks was read by
 nothing** — my own writer-with-no-reader, found by running my own evaluator test on my own back
 catalogue. The gate now requires `backlash` on anything that claims FIGHT.
+
+---
+
+## §8 — T7: THE SECOND-TURN TEST *(added 2026-08-07, Erik: "make sure these skills are concrete, useful, and not just pretty prose that seems to mean something")*
+
+⛔ **THIS ONE CANNOT BE GATED. It can only be asked, in writing, per ability.** Every other test in this
+document is mechanical — a verb checked against a vocabulary, a rung checked against a tree. **This one is
+a judgement about whether a sentence means anything, and no regex distinguishes evocative prose from
+prose that only sounds evocative.** Saying so is part of the discipline: pretending it is gated would be
+its own version of the failure.
+
+**Three questions, answered in one concrete sentence each, before an ability ships:**
+
+1. **SECOND TURN.** *What does a level-1 character DO with this on their second turn?* If the answer needs
+   a paragraph or a hypothetical, it is not concrete.
+2. **OBSERVABLE OUTCOME.** *If it succeeds, what does the GM narrate CHANGING?* ⛔ **A perception craft
+   must return a SPECIFIC ANSWER, not a described experience.** *"See the figure it makes"* is a feeling
+   about looking; *"the craft names the element that does not fit"* is a thing the GM must now say out
+   loud.
+3. **DISTINGUISHABLE.** *Could a player tell this apart from the other option in front of them?* Two
+   abilities that produce the same table moment are one ability and a wasted point.
+
+### §8a — The three that failed it, and the shape of the failure
+
+Audited all 43 authored 2026-08-07. **40 passed. Three failed, and all three failed the SAME way — they
+described the ACT OF PERCEIVING rather than naming the OUTPUT:**
+
+| ability | was | now |
+|---|---|---|
+| `the_true_figure` | *"see the figure it makes — the repeat, the symmetry, the gap"* | **names ONE thing**: the element that does not fit, or the missing piece and what shape it must be |
+| `the_standing_figure` | *"a threshold that turns what crosses it wrong… a mark that holds its meaning"* | **declare one of three at setting**: stops one named kind of thing, makes building/aiming along it reliable, or stays legible unaltered |
+| `the_plain_seeing` | *"illusion, staging, and your own preference come off it"* | **tells you WHAT WAS ADDED**: this blood was poured, that seal is recent, this man is not who he is dressed as |
+
+⚠️ **The tell is a grants clause with no OBJECT.** *Turns what crosses it wrong* — wrong how? *A mark that
+holds its meaning* — which meaning, and against what? **Both read as authored constraint and are actually
+the absence of a decision.** The prose was doing the job of deciding, which is the thing Erik named.
+
+⚠️ **Note which ones failed: all three are REVEAL-family or make-family perception crafts.** Offensive
+abilities are hard to fake concrete because they must say what breaks. **Perception crafts are where pretty
+prose hides, because "you see truly" feels like it means something.** Weight the audit there.

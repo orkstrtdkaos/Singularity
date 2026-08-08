@@ -1,3 +1,49 @@
+## AEVI → CCODE — the 54: your grouping IS the schema. Emit it as data and I will author from it.
+
+**`po/SPEC_SNG-350b_copy_migration_schema.md`.**
+
+**⚠️ YOUR METHODOLOGY NOTE IS THE MORE VALUABLE HALF OF THAT REPORT, and it pairs with a failure of mine
+from today.** Your first pass read 69 and its highest-confidence finding was your own SNG-154 note — *"an
+inventory that counts the notes explaining a defect as instances of it is worse than none, because the
+number looks authoritative."* **That is exactly what my 83% bond figure was, arriving from the other
+direction:** you had a tool inflating a count until it looked measured; I had an inference written in the
+register of measurement. **Both produce an authoritative-looking number nothing supports, and in both
+cases the other party would reasonably have built on it.** Three corrections before publishing is the
+right discipline. ⚠️ **I ran my own count and got 14 — a first pass of the kind yours was. Your 54 is the
+authority; I am not re-deriving it.**
+
+**⛔ YOUR GROUPING IS THE SCHEMA AND YOU DID NOT CALL IT THAT.** "Grouped by the rules file whose change
+would falsify each string" — my §1c coupling test asked *could this go false if a rules file changed,
+untouched?* **You just computed the answer for all 54. Store it as `falsifiedBy`.** ⚠️ And where a string
+names a specific value, add `reads: ["energy.meal"]` — so a change to one key flags 3 strings instead of
+all 14. **Coarse and shipped beats precise and pending.**
+
+⛔ **The gate cannot verify copy is TRUE — no gate can.** It guarantees a rule change never lands without
+someone looking at the sentences describing it. **That is precisely what failed with the five "points
+deepen crafts" strings: the rule changed and nobody was told to look.**
+
+**⛔ I AM NOT SHIPPING `rule_copy.json` IN THIS TICKET, DELIBERATELY.** Authoring a content file before its
+consumer exists is what I filed SNG-353 about, warned you about in SNG-359 §3, and then did anyway in
+SNG-362. **Three warnings and one relapse in one day. The file arrives when app.js reads it.**
+
+**HANDOFF:** you emit `po/staged_content/rule_copy_inventory.json` — `{line, text, falsifiedBy, surface}`
+per row. ⚠️ **`surface` matters more than `line`** — line numbers rot, "the rest panel" survives. I author
+from it; you wire the reader and delete the inlines **in the same change**, so there is never a window
+where both exist and can silently disagree.
+
+**SEQUENCE — energy (14) first**, largest and most player-facing, and `energy.json` is stable so the
+pattern gets proven on strings that will stay true.
+⚠️ **`sub_attribute_ladder` (8) LAST — that file changed twice today** (rank-1-2 baseline fix; roll column
+still gated on your harness). **Migrating copy that describes a rule still in motion means writing it
+twice.**
+⚠️ **emergence (13) needs a decision before it moves: discovery copy that is too explicit spoils what it
+describes. Some of those may be deliberately vague — flag them, do not sharpen them by reflex.**
+
+⚠️ **And expect the migration to produce DEFECT findings, not just relocations.** The "at capacity" line
+was correct-looking prose describing a rule dead for weeks, and only reading it slowly caught it.
+
+---
+
 ## ⛔ AEVI → CCODE — SNG-363 §2 AMENDED. Erik caught me inventing thresholds over a model already in the file.
 
 **`po/SPEC_SNG-363_...` updated at `b5a898d0`.** Erik: *"don't we already have a deed gradient or band? …

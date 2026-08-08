@@ -3659,7 +3659,17 @@ await (async () => {
 
   // gm.js contract — rule 16B + the TOOLKIT scene block + the ctx destructure shipped
   const gmSrc142 = readFileSync(join(root, "engine/gm.js"), "utf8");
-  check("SNG-142: rule 16B (offer the toolkit, lightly) is in the GM contract with the ≤1/never-on-clear-intent discipline", /16B\. OFFER THE TOOLKIT — LIGHTLY[\s\S]{0,600}NEVER when the player already stated a clear intent/.test(gmSrc142));
+  // ⚠️ SCOPED TO THE RULE, NOT TO 600 CHARACTERS. This pinned the distance between the rule's heading and
+  // its discipline clause inside the GM contract — the one file Aevi rewrites most, and a paragraph added
+  // anywhere between them would have turned it red with the rule fully intact. The invariant is that the
+  // discipline lives INSIDE rule 16B, so the window is the rule: from its heading to the next numbered one.
+  check("SNG-142: rule 16B (offer the toolkit, lightly) is in the GM contract with the ≤1/never-on-clear-intent discipline", (() => {
+    const at = gmSrc142.indexOf("16B. OFFER THE TOOLKIT — LIGHTLY");
+    if (at < 0) return false;
+    const rest = gmSrc142.slice(at + 10);
+    const next = rest.search(/(?:^|\n)\s*\d+[A-Z]?\.\s+[A-Z]/);
+    return /NEVER when the player already stated a clear intent/.test(rest.slice(0, next > 0 ? next : undefined));
+  })());
   check("SNG-142: rule 16B forbids committing another player's party character (agency guard)", /never commit another player's PARTY character/i.test(gmSrc142));
   check("SNG-142: the TOOLKIT scene block is rendered (toolkitDetail), guarded + destructured", /if \(toolkitDetail\) scene\.push\(/.test(gmSrc142) && /anomalyDetail,[\s\w,]*toolkitDetail[,\s\w]* \} = ctx/.test(gmSrc142));
 })();
@@ -5169,13 +5179,40 @@ await (async () => {
 // --- CCODE-07: a bookkeeping throw can never swallow a turn the player already waited for (Law 5) ---
 {
   const appSrc155 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
-  // The structural guarantee: applyTurn is CALLED inside a try, and the catch preserves the beat.
-  const guarded = /applyTurn\(result\.turn, resolution, playerWords\)[\s\S]{0,1400}?\} catch \(err\) \{/.test(appSrc155) && /try \{[\s\S]{0,400}?applyTurn\(result\.turn, resolution, playerWords\)/.test(appSrc155);
-  check("CCODE-07: applyTurn is wrapped so a throw cannot discard the rendered narration", guarded);
+  // ⛔ THE WINDOW IS THE try/catch, NOT 1400 CHARACTERS. These three gates pinned how far the `applyTurn`
+  // call sits from its own `catch` — and `applyTurn` is the function that GROWS every time a new op ships.
+  // Any spec that adds one pushes the catch further away and turns all three red with the guarantee fully
+  // intact. So the block is found by matching braces: the `try` that contains the call, through the end of
+  // its `catch`. The invariant is CONTAINMENT — the call is inside the try, the recovery is inside the
+  // catch — and containment does not have a length.
+  const tryBlock155 = (() => {
+    const call = appSrc155.indexOf("applyTurn(result.turn, resolution, playerWords)");
+    if (call < 0) return "";
+    const open = appSrc155.lastIndexOf("try {", call);
+    if (open < 0) return "";
+    let depth = 0, i = open + 4;
+    for (; i < appSrc155.length; i++) {
+      const ch = appSrc155[i];
+      if (ch === "{") depth++;
+      else if (ch === "}") {
+        depth--;
+        if (depth === 0) {
+          // the try's body closed — carry on through an attached catch/finally, then stop
+          const after = appSrc155.slice(i + 1, i + 40);
+          if (/^\s*(catch|finally)\b/.test(after)) { depth = 0; continue; }
+          break;
+        }
+      }
+    }
+    return appSrc155.slice(open, i + 1);
+  })();
+  check("CCODE-07: applyTurn is wrapped so a throw cannot discard the rendered narration",
+    tryBlock155.includes("applyTurn(result.turn, resolution, playerWords)") && /\}\s*catch \(err\) \{/.test(tryBlock155));
   check("CCODE-07: the catch persists activeScene.lastTurn so continuity survives a partial apply",
-    /_applyFailed = true/.test(appSrc155) && /catch \(err\)[\s\S]{0,1100}?character\.activeScene = \{ locationId: character\.currentLocationId, turns: sceneTurns, lastTurn: result\.turn/.test(appSrc155));
+    /_applyFailed = true/.test(tryBlock155)
+    && /character\.activeScene = \{ locationId: character\.currentLocationId, turns: sceneTurns, lastTurn: result\.turn/.test(tryBlock155.slice(tryBlock155.indexOf("catch (err)"))));
   check("CCODE-07: a partial apply sets opLossPending so the GM restates the lost ops next turn (SNG-009 contract)",
-    /catch \(err\)[\s\S]{0,1000}?character\.opLossPending = true/.test(appSrc155));
+    /character\.opLossPending = true/.test(tryBlock155.slice(tryBlock155.indexOf("catch (err)"))));
   check("CCODE-07: the player is TOLD the bookkeeping lagged — never a silent partial", /part of this turn's bookkeeping didn't land/.test(appSrc155));
   check("CCODE-07: the failure travels with the feedback report", /ctx\.turnApplyError = character\._turnApplyError/.test(appSrc155));
   // The specific trigger found in Erik's save class: a currentLocationId that resolves to nothing.
@@ -12686,7 +12723,12 @@ await (async () => {
   {
     const appG = readFileSync(join(root, "app.js"), "utf8");
     const start = appG.indexOf("Set a person's gender");
-    const block = start < 0 ? "" : appG.slice(start, start + 2400);
+    // ⚠️ BOUNDED BY THE BLOCK, NOT BY 2400 CHARACTERS. I wrote this gate with a fixed slice an hour after
+    // writing three separate comments about gates that pin a position instead of a truth — the same habit
+    // reappearing inside the fix for it. The repair screen is a run of `cs-block` sections, so the block
+    // ENDS where the next one begins; adding a paragraph here must not turn this red.
+    const end = appG.indexOf(`<div class="cs-block"`, start);
+    const block = start < 0 ? "" : appG.slice(start, end > start ? end : undefined);
     check("370: the gender repair list is not capped — a cap on a repair tool is a repair you cannot perform",
       start > 0 && !/npcRegistry\)\.slice\(0,\s*\d+\)/.test(block));
     check("370: …and the people with NO gender are listed first, because they are who the control is for",

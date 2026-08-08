@@ -1893,7 +1893,7 @@
      "rank": 2,
      "name": "The Run of Bad",
      "grants": "Spend it wider — a squad, a caravan, a line. Several small catastrophes at once, none of them traceable to you.",
-     "cannot": "⚠ THE CHURN DOES NOT SORT: allies in the same area are struck ONE RUNG LOWER by the same run of luck. And nobody believes it was luck twice.",
+     "cannot": "⚠ THE CHURN DOES NOT SORT: anyone else in the same area is struck ONE RUNG LOWER by the same run of luck. And nobody believes it was luck twice.",
      "functions": [
       "strike",
       "break",
@@ -1905,7 +1905,7 @@
     {
      "rank": 3,
      "name": "The Long Odds",
-     "grants": "The genuinely unlikely thing. The keystone, the powder, the flood-gate, the one animal that could have ended this. It comes in. AND YOU CAN STAND OUTSIDE THE RUN NOW — you and yours are exempt from the misfortune you spend.",
+     "grants": "The genuinely unlikely thing. The keystone, the powder, the flood-gate, the one animal that could have ended this. It comes in. AND YOU CAN STAND OUTSIDE THE RUN NOW — you and anyone you name are exempt from the misfortune you spend.",
      "cannot": "You still do not choose WHAT. The Churn takes what it takes, and the unlikely thing may cost a bridge, a building, or someone you needed alive — it is exempt from harming you, not from ruining your plans.",
      "functions": [
       "strike",
@@ -1935,7 +1935,7 @@
    },
    "intensity": {
     "conserve": "a small turn of luck — a slip, a snapped strap",
-    "surge": "spend the long odds WITHOUT standing outside them — the run is far worse, and THE WIELDER AND ALLIES ARE STRUCK ONE RUNG LOWER by it too"
+    "surge": "spend the long odds WITHOUT standing outside them — the run is far worse, and THE WIELDER AND ANYONE ELSE PRESENT ARE STRUCK ONE RUNG LOWER by it too"
    },
    "bounds": [
     {
@@ -1947,7 +1947,7 @@
      "class": "hard"
     },
     {
-     "text": "ALLIES IN THE AREA ARE STRUCK ONE RUNG LOWER",
+     "text": "ANYONE ELSE IN THE AREA IS STRUCK ONE RUNG LOWER",
      "class": "hard"
     }
    ],

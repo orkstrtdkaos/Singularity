@@ -56,10 +56,25 @@ success.**
 whether the co-activation ledger genuinely cannot express a triple, or whether that was simply never
 needed.** If the ledger is the real constraint, say so and it becomes the ticket instead.
 
-**§2b — `braidTier` must take n parents.** ⛔ **This is the design question, not a refactor:** is a 3-part
-braid the tier of its highest parent, or does arity itself raise the tier? ⚠️ **PO view: arity should
-raise it** — braiding three crafts is a harder thing than braiding two, and a triple that costs the same
-as a pair makes pairs pointless. **But that is a balance call and it is Erik's; the harness can sim it.**
+**§2b — `braidTier` must take n parents. ⛔ ERIK RATIFIED 2026-08-07: THE TIER TENDS HIGHER FOR A THREE-BRAID.**
+
+⚠️ **"Tends higher" is not "+1 per component", and the difference is the whole implementation.** Arity
+should be an INPUT to the tier calculation, not an override of it — a triple of three tier-I crafts is
+still a modest thing; a triple that reaches across three domains at rank 3 is not. **Arity leans on the
+result; it does not dictate it.**
+
+**Suggested shape, Erik's numbers to set:** keep the existing parent-derived tier as the base and let each
+component past the second contribute a fraction of a rung, rounding up only when the base was already
+close. ⛔ **A flat +1 per part would make a four-braid of trivial crafts out-tier a hard pair, which is
+precisely the merit-over-magnitude error we have rejected elsewhere.**
+
+⚠️ **And the reason arity should count at all is Erik's own design constraint on the content side:** a real
+triple is one where **no two of the three would produce it alone.** If that holds, the triple genuinely IS
+a harder thing and the tier follows the difficulty rather than the component count. **If a triple does not
+meet that bar it should not out-tier a pair — and arguably should not exist.**
+
+**Sim it:** the SNG-357 harness can run the tier distribution across the catalogue once triples are
+authored, and a triple landing at the same tier as its best pair is the signal the weighting is too light.
 
 **§2c — cost.** `braidBaseCost` is *"priciest parent + a share of the cheaper"* — **explicitly binary.**
 Needs an n-part form. Suggest priciest + a share of each remaining, descending. **Erik's numbers.**

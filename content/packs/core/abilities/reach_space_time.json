@@ -2495,6 +2495,195 @@
    "plainly": "A fight/puzzle action that spends the time out of a target or their gear. Rated 7 of 10 across a scope of 2. Limit: one thing at a time, and what is spent cannot be returned.",
    "backlash": "The levy lands on the levier. Years you meant for them are taken out of you, and what is spent cannot be returned.",
    "conserveSuppresses": "a small levy — what you spend, you can afford"
+  },
+  {
+   "id": "the_kept_count",
+   "name": "The Kept Count",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_space_time",
+   "attribute": "mental",
+   "axes": {
+    "space_time": 0.6
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You know how long. Not a guess — a count. How long the food lasts, how long before they arrive, how long this fever runs, how long you have been standing here thinking it was a moment.",
+   "description": "The Hourkeepers' first craft and the reason valleys keep one. Everyone else estimates.",
+   "notFor": "Reading WHAT will happen (only how long until it does); events with no clock in them (a decision, an ambush that has not been set); making anything last longer.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Count Read",
+     "grants": "Name a thing already running and the craft gives you the SPECIFIC REMAINING TIME: the stores last eleven days; the tide turns in two hours; the fever breaks tonight or not at all; that column is four hours out at their pace.",
+     "cannot": "It reads what is ALREADY RUNNING. A thing not yet begun has no count. It gives DURATION, never outcome — the fever breaking tonight does not mean breaking well.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Several Counts",
+     "grants": "Hold many at once — a siege's stores, water, sickness, relief, and the weather — and know which runs out first and by how far.",
+     "cannot": "Holding counts is tiring in a specific dull way, and Hourkeepers describe the world as a set of expiries whether or not anyone asked.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Reckoning of Hours",
+     "grants": "Everything running in a place, ordered by when it ends. Campaigns and harvests are planned on one Hourkeeper's afternoon.",
+     "cannot": "⚠ YOU WILL SEE YOUR OWN COUNTS IN THE SAME PASS, and the people you love have counts too. Hourkeepers are not morbid by temperament; they are morbid by information.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "hourkeeper",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read one count",
+    "surge": "the whole reckoning; YOU WILL SEE YOUR OWN COUNTS IN THE SAME PASS"
+   },
+   "bounds": [
+    {
+     "text": "reads what is ALREADY RUNNING — an unbegun thing has no count",
+     "class": "hard"
+    },
+    {
+     "text": "gives DURATION, never outcome",
+     "class": "hard"
+    },
+    {
+     "text": "decisions and unset ambushes have no clock",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that gives the specific remaining time on anything already running. Rated 5 of 10 across a scope of 2 for about six hours."
+  },
+  {
+   "id": "the_stretched_hour",
+   "name": "The Stretched Hour",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_space_time",
+   "attribute": "mental",
+   "axes": {
+    "space_time": 0.6,
+    "death_life": 0.2
+   },
+   "functions": [
+    "sustain",
+    "ward"
+   ],
+   "narrationHints": "You give a thing more time than it has. The lamp burns an hour longer on the same oil; the poultice holds through the night; the food does not turn; the dying man gets until morning. Time added, not conjured — and taken from somewhere.",
+   "description": "The Hourkeepers' giving-craft, and the one they are begged for. It is the exact inverse of the Spent Hour and costs the same in the other direction.",
+   "notFor": "Adding time to what has none left (a dead thing, a burnt-out lamp); stopping anything; adding time free — ⛔ IT COMES OUT OF THE WIELDER; healing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Hour Given",
+     "grants": "Give one thing more duration than it has: a lamp, a ration, a poultice, a truce, a failing person's night. ⚠ NAME HOW MUCH — the craft is exact, and roughly doubles what remained.",
+     "cannot": "⛔ THE TIME IS YOURS. The wielder ages the difference — real hours off a real life, small at this rank and permanent. It cannot add to what has nothing left.",
+     "functions": [
+      "sustain",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Hours",
+     "grants": "Several things, or one thing considerably — a siege's water through an extra week, a wound held from turning until a healer arrives.",
+     "cannot": "The cost scales and it is still yours. Hourkeepers who do this often are visibly older than their years and do not discuss it.",
+     "functions": [
+      "sustain",
+      "ward",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Long Gift",
+     "grants": "Time enough to change an outcome — a season's stores made to reach spring, a person kept until the thing that saves them arrives.",
+     "cannot": "⚠ YOU ARE SPENDING YEARS, PLAINLY AND KNOWINGLY. The Stopped began by giving too much away and then refused to let any moment pass at all. Every Hourkeeper is told this story early.",
+     "functions": [
+      "sustain",
+      "ward",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "hourkeeper",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "sustain",
+   "operativeAxis": [
+    "duration",
+    "magnitude"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 24,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "give a little — the cost is small",
+    "surge": "the long gift; YOU ARE SPENDING YEARS, PLAINLY AND KNOWINGLY"
+   },
+   "bounds": [
+    {
+     "text": "⛔ THE TIME COMES OUT OF THE WIELDER, permanently",
+     "class": "cost"
+    },
+    {
+     "text": "cannot add to what has nothing left",
+     "class": "hard"
+    },
+    {
+     "text": "you must NAME how much you are giving",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that gives something more duration, paid out of your own life. Rated 6 of 10 on one target for about a day."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

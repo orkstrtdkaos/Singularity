@@ -2342,6 +2342,199 @@
    "plainly": "A fight/social action that releases a place's held tension into one target. Rated 7 of 10 on one target. Limit: the tension must already be there.",
    "backlash": "The pressure comes out sideways. What was being held is loose and it goes where it wants — a riot rather than a strike, and you are standing in the middle of it.",
    "conserveSuppresses": "lift a corner — what comes up is small enough to stay pointed"
+  },
+  {
+   "id": "the_held_line",
+   "name": "The Held Line",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_violence_peace",
+   "attribute": "physical",
+   "axes": {
+    "violence_peace": -0.4
+   },
+   "functions": [
+    "ward",
+    "shield",
+    "sustain"
+   ],
+   "narrationHints": "You stand where the line is and it holds because you are standing there. Not a wall — a decision, made with your body, that others can put their shoulders against.",
+   "description": "The Marchers' first craft and the reason the March exists: a line is people, and people hold when someone visibly will not move.",
+   "notFor": "Holding alone against overwhelming force (it steadies people, it does not multiply them); attacking; holding a line you do not believe in — the craft reads the difference.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Set Stance",
+     "grants": "Take a position and hold it. Those beside you steady; a wavering line stops wavering; a retreat becomes an orderly one. You are much harder to move than your size explains.",
+     "cannot": "It steadies PEOPLE. Alone it is only good footing. And a line you do not believe in does not hold — Marchers have tested this and stopped arguing about it.",
+     "functions": [
+      "ward",
+      "shield",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Hold",
+     "grants": "Hold through a sustained press — hours, a night, repeated pushes. Those with you recover between as if they had rested more than they did.",
+     "cannot": "You do not get that recovery. Holding is a debt you pay afterward, and Marchers are stiff and old before their time.",
+     "functions": [
+      "ward",
+      "shield",
+      "sustain",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Line That Held",
+     "grants": "The one everyone talks about afterward. A gate, a bridge, a pass, held past when it should have gone.",
+     "cannot": "⚠ THE COST IS PAID IN FULL AT THE TIME. This rank is not survived by everyone who reaches it, and the March's honours are mostly posthumous. They think that is fine and say so.",
+     "functions": [
+      "ward",
+      "shield",
+      "sustain",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "ward",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "hold the near ground",
+    "surge": "the line that held; THE COST IS PAID IN FULL AT THE TIME"
+   },
+   "bounds": [
+    {
+     "text": "it steadies PEOPLE — alone it is only good footing",
+     "class": "hard"
+    },
+    {
+     "text": "a line you do not BELIEVE IN does not hold",
+     "class": "hard"
+    },
+    {
+     "text": "holding is a debt you pay afterward",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/social action that holds a position and steadies everyone on it. Rated 6 of 10 across a scope of 2 for about eight hours."
+  },
+  {
+   "id": "the_read_field",
+   "name": "The Read Field",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_violence_peace",
+   "attribute": "practical",
+   "axes": {
+    "violence_peace": -0.3,
+    "chaos_order": 0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "You look at ground and see the fight it will produce — where a charge must funnel, where a line will break first, which approach a sensible enemy takes and which a frightened one does.",
+   "description": "The Marchers' seeing-craft. The March holds because it chose the ground before anyone arrived.",
+   "notFor": "Reading people's intentions (this reads GROUND); anything indoors and small; a fight already joined — read it before, not during.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Ground Read",
+     "grants": "Look at terrain and know its fight: chokepoints, dead angles, where footing fails, which line is holdable with what you have.",
+     "cannot": "It reads GROUND, not enemies. Numbers, morale and surprise are yours to find elsewhere. And it needs open enough country — a stairwell is not a field.",
+     "functions": [
+      "foresee",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Chosen Ground",
+     "grants": "Read several approaches and pick — where to meet them, where to be found, where to make them come to you.",
+     "cannot": "Choosing ground means committing to it, and an enemy who declines the ground you chose has taken the first exchange without a blow.",
+     "functions": [
+      "foresee",
+      "reveal",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Field",
+     "grants": "A region's fight read at once — passes, fords, the three farms that will burn, the one road that decides it.",
+     "cannot": "⚠ YOU WILL SEE WHICH PLACES CANNOT BE HELD, and which people are in them. The March's hardest work is not fighting; it is choosing what to leave.",
+     "functions": [
+      "foresee",
+      "reveal",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "marcher",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "foresee",
+   "operativeAxis": [
+    "scope",
+    "precision"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 12,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "read the near ground",
+    "surge": "the whole field; YOU WILL SEE WHICH PLACES CANNOT BE HELD, and who is in them"
+   },
+   "bounds": [
+    {
+     "text": "reads GROUND, not enemies",
+     "class": "hard"
+    },
+    {
+     "text": "needs open enough country",
+     "class": "hard"
+    },
+    {
+     "text": "an enemy who declines your chosen ground wins the first exchange",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A fight/puzzle action that reads the fight a piece of ground will produce. Rated 5 of 10 across a scope of 3 for about twelve hours."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

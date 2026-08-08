@@ -2900,6 +2900,384 @@
    "plainly": "A fight/social action that weighs a target and burns them in proportion. Rated 8 of 10 across a scope of 2. Limit: the measure is honest — you do not set the amount.",
    "backlash": "The judgment was false and the light knows. The sentence falls on the one who passed it, at their own honest weight.",
    "conserveSuppresses": "weigh lightly — a false light mark costs standing, not skin"
+  },
+  {
+   "id": "the_sheltering_name",
+   "name": "The Sheltering Name",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": 0.5,
+    "violence_peace": 0.3
+   },
+   "functions": [
+    "ward",
+    "shield"
+   ],
+   "narrationHints": "You put the name over someone else. Whatever the name is worth here, it is worth it for THEM now — and a person under a name that people credit is a person most of them will not touch.",
+   "description": "The God-Named's keeping-craft, and the one that justifies the borrowing. A name you only ever use for yourself is a costume.",
+   "notFor": "Protecting from anything that does not care about the name — beasts, weather, disease, the foreign, the checked; sheltering yourself; a name you have publicly failed with here.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Name Laid Over",
+     "grants": "Name a person as under your name's protection, aloud, in front of people. Those who credit it will not move against them — and often will not let others.",
+     "cannot": "Works only where the name is BELIEVED. It shelters from PEOPLE, not from the world. And it costs the name: shelter someone the crowd thinks unworthy and the name is thinner afterward.",
+     "functions": [
+      "ward",
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Kept Household",
+     "grants": "Extend it to several, or to a place — a house, a wagon, a sickroom. It holds while you are away, on the strength of having been said.",
+     "cannot": "The wider it goes the thinner it is, and you are answerable for everyone under it. Someone sheltering under your name who does something ugly does it in your name.",
+     "functions": [
+      "ward",
+      "shield",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Sanctuary Declared",
+     "grants": "A place placed under the name entirely. Armed men stop at the threshold and argue with each other about it rather than crossing.",
+     "cannot": "⚠ YOU MUST BE ABLE TO STAND THERE AND MEAN IT. A declared sanctuary that fails is not merely a failure — it is the public unmaking of the name, and everyone inside it was relying on you.",
+     "functions": [
+      "ward",
+      "shield",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "tradition": "god_named",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "ward",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 24,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "name one person, quietly",
+    "surge": "declare sanctuary; A DECLARED SANCTUARY THAT FAILS PUBLICLY UNMAKES THE NAME"
+   },
+   "bounds": [
+    {
+     "text": "works only where the name is BELIEVED",
+     "class": "hard"
+    },
+    {
+     "text": "shelters from PEOPLE, not from the world",
+     "class": "hard"
+    },
+    {
+     "text": "you are ANSWERABLE for everyone under it",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/fight action that places your name's protection over someone else. Rated 5 of 10 across a scope of 2 for about a day."
+  },
+  {
+   "id": "the_borrowed_certainty",
+   "name": "The Borrowed Certainty",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": 0.4,
+    "emotional_logical": -0.3
+   },
+   "functions": [
+    "empower",
+    "sustain"
+   ],
+   "narrationHints": "You speak as the name and people find they can do the thing. Not courage given — permission. Most people are waiting to be told it is allowed by someone entitled to say so.",
+   "description": "The God-Named's lifting-craft. The borrowed authority pointed at a frightened room rather than at an enemy.",
+   "notFor": "Granting skill they do not have; anyone who has checked the name; making the thing actually safe; using it twice on people who did it and it went badly.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Word Given",
+     "grants": "Tell people, as the name, that they can do this. A line holds that was breaking; a crew goes back into the water; someone says the thing they have not been able to say.",
+     "cannot": "They must CREDIT the name, and it grants PERMISSION, not ability — a frightened man who cannot swim still cannot swim. If it goes badly they will remember who told them.",
+     "functions": [
+      "empower",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Steady Company",
+     "grants": "Hold it over a group through a long hard stretch — a march, a siege watch, a night of triage.",
+     "cannot": "Holding it means being seen to be certain the entire time, including when you are not. That is the private cost and it does not show.",
+     "functions": [
+      "empower",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Named Cause",
+     "grants": "A community acts as one because the name says it is right. Harvests are saved this way, and so are stupid wars begun.",
+     "cannot": "⚠ THE NAME IS BORROWED AND THE CONSEQUENCE IS YOURS. What a whole people does on your word is on your account, and the God-Named have a long institutional memory of the ones who got this wrong.",
+     "functions": [
+      "empower",
+      "sustain",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "tradition": "god_named",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "empower",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 12,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "tell one person",
+    "surge": "the named cause; WHAT A PEOPLE DOES ON YOUR WORD IS ON YOUR ACCOUNT"
+   },
+   "bounds": [
+    {
+     "text": "they must CREDIT the name",
+     "class": "hard"
+    },
+    {
+     "text": "grants PERMISSION, not ability",
+     "class": "hard"
+    },
+    {
+     "text": "if it goes badly they remember who told them",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social action that lets people act because the name says they may. Rated 5 of 10 across a scope of 3 for about twelve hours."
+  },
+  {
+   "id": "the_read_want",
+   "name": "The Read Want",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.4,
+    "falsehood_truth": 0.3
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You see what someone actually wants, which is reliably not what they are asking for. The Bargainers' whole trade rests on this and they will tell you so without embarrassment.",
+   "description": "The Bargainers' first craft: read the want before naming the price, because a price against the wrong want is an insult.",
+   "notFor": "Reading anything but WANT (not plans, not lies, not history); people who genuinely want nothing; using it without their knowing you can — Bargainers announce it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Want Under It",
+     "grants": "Look at a person in conversation and see the want beneath the request — the man asking for money who wants to be taken seriously, the one asking for justice who wants an apology.",
+     "cannot": "It reads WANT and nothing else. The self-deceived read as they believe themselves, which is often the useful thing anyway. Someone who wants nothing gives you nothing.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Table Read",
+     "grants": "Read a room of them, or read one deeply enough to see which want they would trade the others for.",
+     "cannot": "Knowing the want does not tell you what it is WORTH to them, and the two are different numbers. A wrong guess at price after a right read of want is the classic Bargainer failure.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Appetite",
+     "grants": "A person's wants entire and in order, including the ones they have never said out loud and the one they would be ruined by getting.",
+     "cannot": "⚠ YOU NOW KNOW SOMETHING ABOUT THEM THEY DO NOT KNOW, and the Bargainers' own rule is that you name what you read before you trade on it. Trading on an unannounced read is the thing that gets a Bargainer refused at every table in the foothills.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "bargainers",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 3,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "read the surface want",
+    "surge": "the whole appetite; NAME WHAT YOU READ BEFORE YOU TRADE ON IT"
+   },
+   "bounds": [
+    {
+     "text": "reads WANT and nothing else",
+     "class": "hard"
+    },
+    {
+     "text": "the self-deceived read as they BELIEVE themselves",
+     "class": "soft"
+    },
+    {
+     "text": "knowing the want does not tell you the PRICE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/puzzle action that reads what someone actually wants. Rated 6 of 10 on one target for about three hours."
+  },
+  {
+   "id": "the_honest_price",
+   "name": "The Honest Price",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.5,
+    "falsehood_truth": 0.4
+   },
+   "functions": [
+    "make",
+    "bind",
+    "empower"
+   ],
+   "narrationHints": "You name what a thing will truly cost — to you, to them, to whoever is not in the room — and having named it, you can deliver it exactly. No trick is the trick. The Bargainers are trusted in the foothills because they are.",
+   "description": "The Bargainers' making-craft, and the reason anyone sits at their table twice.",
+   "notFor": "Naming a price you cannot deliver; softening a price to close a deal (that is the one unforgivable thing); pricing what is not yours; forcing agreement.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Price Named",
+     "grants": "State the full cost of a thing aloud, including the parts everyone was politely not mentioning. Deals close that were stuck, or die honestly instead of curdling for a season.",
+     "cannot": "It must be THE TRUE PRICE. Understate it to close and the craft fails publicly and permanently for you. It does not make anyone AGREE — it makes agreement possible.",
+     "functions": [
+      "make",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Kept Terms",
+     "grants": "Structure a real exchange between parties who do not trust each other, and hold it — both sides can verify the terms are what was said.",
+     "cannot": "You are now a party to it, and a broken term is broken against you as well. Bargainers spend real years repairing this.",
+     "functions": [
+      "make",
+      "bind",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Standing Table",
+     "grants": "A place where terms can be made at all — a neutral table between feuding houses, a market where a stranger's word is worth something.",
+     "cannot": "⚠ THE TABLE IS ONLY WORTH WHAT YOU ARE. It rests entirely on your record; one softened price in your history and the whole thing is furniture. The foothills remember.",
+     "functions": [
+      "make",
+      "bind",
+      "empower",
+      "ward"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "bargainers",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "make",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 48,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "price one small thing",
+    "surge": "the standing table; IT IS ONLY WORTH WHAT YOU ARE"
+   },
+   "bounds": [
+    {
+     "text": "it must be THE TRUE PRICE — understating it fails publicly and permanently",
+     "class": "hard"
+    },
+    {
+     "text": "it makes agreement POSSIBLE; it does not compel it",
+     "class": "hard"
+    },
+    {
+     "text": "you become a party to what you structure",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/puzzle action that names a thing's true cost so a deal can be made. Rated 5 of 10 across a scope of 2 for about two days."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

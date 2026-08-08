@@ -2295,7 +2295,9 @@
    ],
    "plainly": "A fight/puzzle action that parts matter along an imposed geometry. Rated 7 of 10 across a scope of 2. Limit: you must hold the figure cleanly.",
    "backlash": "The figure resolves half-drawn and cuts where you are, not where they are. A lapsed figure does not fail; it lands wrong.",
-   "conserveSuppresses": "a short line, fully held — a lapse simply fails to cut"
+   "conserveSuppresses": "a short line, fully held — a lapse simply fails to cut",
+   "backlashRung": "damaging",
+   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung."
   },
   {
    "id": "the_plain_weight",
@@ -2395,7 +2397,9 @@
    ],
    "plainly": "A fight action that gives present matter its true weight and sends it. Rated 8 of 10 across a scope of 2. Limit: something must actually be there.",
    "backlash": "It falls where it was going to fall, which is not where you set it. Structure comes down on the wielder and whoever is nearest.",
-   "conserveSuppresses": "one stone, honestly thrown — it goes where you threw it"
+   "conserveSuppresses": "one stone, honestly thrown — it goes where you threw it",
+   "backlashRung": "incapacitating",
+   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung."
   },
   {
    "id": "the_true_figure",

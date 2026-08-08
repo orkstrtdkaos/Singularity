@@ -2768,6 +2768,193 @@
     }
    ],
    "plainly": "A travel, stealth and chase action. You descend and glide through shadow, silently and fast — down and across only, never up, so you have to climb before you can use it, and lit ground or open daylight close it completely. At rank 2 you can cross whole valleys by night unseen. It is the only travel in the game that generates no road encounters and no arrival notice, which cuts both ways: nobody sees you go, so nobody knows you came either."
+  },
+  {
+   "id": "the_carried_dark",
+   "name": "The Carried Dark",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_dark_light",
+   "attribute": "practical",
+   "axes": {
+    "dark_light": -0.6
+   },
+   "functions": [
+    "conceal",
+    "move"
+   ],
+   "narrationHints": "You bring the dark with you rather than finding it. A pocket of unlight that travels at your pace, and inside it you are simply not available to be seen.",
+   "description": "The Umbrals' first craft. Not hiding IN shadow — carrying one.",
+   "notFor": "Silence (dark does not muffle; a noisy Umbral is a found Umbral); concealing from touch, scent, or a beast that hunts by either; anything in full direct sun.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Pocket of Unlight",
+     "grants": "Draw dark around yourself and move in it. Sight slides off you. You can cross a lit room slowly, or a dim one at pace.",
+     "cannot": "IT IS ONLY SIGHT. You make the same noise, leave the same tracks, smell the same. Direct strong sun thins it to nothing. And moving fast tears it.",
+     "functions": [
+      "conceal",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Shared Dark",
+     "grants": "Extend it to others moving with you, or hold it while doing something with your hands.",
+     "cannot": "Everyone inside must move as you move; one person hurrying breaks it for all of them. Umbrals practise this together for months.",
+     "functions": [
+      "conceal",
+      "move",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Travelling Night",
+     "grants": "A moving dark large enough for a column, or deep enough that even a Radiant's kindled light does not reach into it.",
+     "cannot": "⚠ YOU ARE ALSO INSIDE IT, and Umbral sight is not universal — the people you are carrying are blind. A travelling night full of people who cannot see is its own emergency.",
+     "functions": [
+      "conceal",
+      "move",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "conceal",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a hand's dark — cross one space",
+    "surge": "the travelling night; THE PEOPLE YOU ARE CARRYING ARE BLIND"
+   },
+   "bounds": [
+    {
+     "text": "IT IS ONLY SIGHT — sound, tracks and scent are unchanged",
+     "class": "hard"
+    },
+    {
+     "text": "direct strong sun thins it to nothing",
+     "class": "hard"
+    },
+    {
+     "text": "moving fast TEARS it",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A puzzle/social action that carries a pocket of unlight with you. Rated 5 of 10 across a scope of 2 for about four hours."
+  },
+  {
+   "id": "the_felt_room",
+   "name": "The Felt Room",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_dark_light",
+   "attribute": "mental",
+   "axes": {
+    "dark_light": -0.5
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "In the lightless deeps you learn a place by everything except seeing — air movement, the way sound returns, the temperature of stone, the tiny wrongness of a room that has someone standing in it.",
+   "description": "The Umbrals' seeing-craft, which is not seeing. It works best exactly where every other perception craft fails.",
+   "notFor": "Colour, writing, faces, or anything that requires light to mean something; working in loud places; reading intent.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Read Dark",
+     "grants": "Know a lightless space entire — its shape, its exits, its drop-offs, and whether something living is in it and roughly where. Better in the dark than most people manage lit.",
+     "cannot": "⚠ IT IS WORSE IN LIGHT, not better — a lit room is full of noise for this craft. It cannot read colour, writing, or a face. Loud places flood it.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Sense",
+     "grants": "Keep it up while moving, or read a whole complex — passages, water, the wrongness of a collapsed section before you reach it.",
+     "cannot": "Sustained, it crowds out ordinary attention; Umbrals doing this walk into things that are obvious to everyone else.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Deep",
+     "grants": "An entire underplace known at once, and the things moving in it known as they move.",
+     "cannot": "⚠ YOU WILL FEEL THINGS DOWN THERE YOU CANNOT IDENTIFY, and the craft gives you their position and nothing else. The Unlit stopped coming up after doing this too often.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "move"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE"
+   ],
+   "tradition": "umbral",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "scope",
+    "precision"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 3,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "read the near dark",
+    "surge": "the whole deep; YOU WILL FEEL THINGS YOU CANNOT IDENTIFY"
+   },
+   "bounds": [
+    {
+     "text": "WORSE IN LIGHT — a lit room is noise to it",
+     "class": "hard"
+    },
+    {
+     "text": "no colour, no writing, no faces",
+     "class": "hard"
+    },
+    {
+     "text": "loud places flood it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle action that reads a lightless place by everything except sight. Rated 5 of 10 across a scope of 3 for about three hours."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

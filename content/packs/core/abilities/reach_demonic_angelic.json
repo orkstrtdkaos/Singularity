@@ -3278,6 +3278,387 @@
     }
    ],
    "plainly": "A social/puzzle action that names a thing's true cost so a deal can be made. Rated 5 of 10 across a scope of 2 for about two days."
+  },
+  {
+   "id": "the_weighed_word",
+   "name": "The Weighed Word",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": 0.6,
+    "falsehood_truth": 0.4
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You ask, and the light answers for them. Not mind-reading — WEIGHING. A person under it can refuse to speak, and their silence is itself weighed, and everyone sees the scale move.",
+   "description": "The Seraphic Orders' first craft, and the reason their testimony is accepted where nobody's word is.",
+   "notFor": "Compelling an answer (silence is permitted, and is itself an answer); reading thoughts; weighing what someone sincerely believes but is wrong about — it reads HONESTY, never accuracy; using it on someone who has not been told it is running.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Question Weighed",
+     "grants": "Ask a question aloud with the light on it, and everyone present — you included — SEES whether the answer given was honest. Not what is true: whether they believe it.",
+     "cannot": "It reads HONESTY, NOT ACCURACY. A sincere fool weighs clean. Silence is allowed and reads as silence. ⚠ And the Orders require you to announce it before asking — an unannounced weighing is the thing that gets an Order-bearer stripped.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Weighed Room",
+     "grants": "Several people, or a matter run through to the end — a dispute, an accusation, a claim of ownership, with each answer weighed in front of everyone.",
+     "cannot": "You have made a public record and it cuts both ways: the person you were defending is weighed too, on every question.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Assize",
+     "grants": "A whole matter weighed — a killing, a fraud, a betrayal — with every party answering under the light and the community watching the scale.",
+     "cannot": "⚠ IT WILL FIND SOMETHING NOBODY WAS LOOKING FOR. An assize that begins as a theft ends as a marriage undone, and the Orders hold you responsible for having opened it.",
+     "functions": [
+      "reveal",
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 3,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "weigh one question",
+    "surge": "the assize; IT WILL FIND SOMETHING NOBODY WAS LOOKING FOR"
+   },
+   "bounds": [
+    {
+     "text": "reads HONESTY, never ACCURACY — a sincere fool weighs clean",
+     "class": "hard"
+    },
+    {
+     "text": "silence is PERMITTED and reads as silence",
+     "class": "hard"
+    },
+    {
+     "text": "you must ANNOUNCE it before asking",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/puzzle action that shows publicly whether an answer was honest. Rated 6 of 10 across a scope of 2 for about three hours."
+  },
+  {
+   "id": "the_shielding_light",
+   "name": "The Shielding Light",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": 0.5,
+    "violence_peace": 0.4
+   },
+   "functions": [
+    "shield",
+    "ward",
+    "resist"
+   ],
+   "narrationHints": "Light between a person and what is coming for them. Not a wall — a place harm will not go, held by someone standing in it and willing to take what it turns aside.",
+   "description": "The Seraphic Orders' interposing-craft. The Order-bearer is the shield; the light is only where they put it.",
+   "notFor": "Shielding yourself; stopping what is already landed; holding it while doing anything else; protecting someone the light will not cover — ⛔ it will not shield a person from a consequence they have earned.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Light Interposed",
+     "grants": "Put the light between one person and one source of harm. Blows, fire, falling stone and hostile workings turn aside from them while you hold it.",
+     "cannot": "⛔ NOT YOURSELF — the craft interposes for ANOTHER, always. You can do nothing else while it holds. And it turns harm aside; it does not undo what already landed.",
+     "functions": [
+      "shield",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Ground",
+     "grants": "Several people, or one held through a sustained assault — a doorway, a wounded line, a family in a burning house.",
+     "cannot": "The wider it goes the thinner, and ⚠ WHAT IT TURNS ASIDE GOES SOMEWHERE — usually into you, and the Orders consider that the correct destination.",
+     "functions": [
+      "shield",
+      "ward",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Standing Light",
+     "grants": "A place harm does not enter while an Order-bearer stands in it. Sieges have broken on one of these.",
+     "cannot": "⚠ IT ENDS WHEN YOU DO. Everyone behind it is relying on a single person remaining upright, and the Unfallen would tell you that is the proper shape of faith. The Orders' honours, like the March's, are mostly posthumous.",
+     "functions": [
+      "shield",
+      "ward",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "tradition": "seraphic",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "shield",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "interpose briefly for one",
+    "surge": "the standing light; IT ENDS WHEN YOU DO"
+   },
+   "bounds": [
+    {
+     "text": "⛔ NOT YOURSELF — it interposes for ANOTHER",
+     "class": "hard"
+    },
+    {
+     "text": "you can do nothing else while it holds",
+     "class": "cost"
+    },
+    {
+     "text": "WHAT IT TURNS ASIDE GOES SOMEWHERE — usually into you",
+     "class": "cost"
+    },
+    {
+     "text": "it will not shield a person from a consequence they have earned",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight/social action that turns harm aside from someone else while you hold it. Rated 6 of 10 across a scope of 2 for about four hours."
+  },
+  {
+   "id": "the_read_hunger",
+   "name": "The Read Hunger",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": -0.6
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "Everything that eats has a shape to its eating. You read it — what this thing wants, how badly, what it will cross to get it, and what it will not.",
+   "description": "The Abyssal Choir's first craft, and the reason they survive down there. You do not negotiate with an appetite you have not read.",
+   "notFor": "Reading thought, plan, or loyalty (only APPETITE); the genuinely sated; changing anything; anything with no want at all — a machine, a corpse, a Stopped thing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shape of Its Eating",
+     "grants": "Read one creature, person, or thing-that-wants and the craft NAMES it: what it hungers for, how strongly, what it will risk, and the one thing it will not do even hungry.",
+     "cannot": "APPETITE ONLY — it tells you nothing about plans, loyalties or what it knows. The truly sated read as empty and are the most dangerous thing in the room for exactly that reason.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Fed and the Starving",
+     "grants": "Read a group or a place — which of them is hungriest, which is nearly full, and where in a warren the eating happens.",
+     "cannot": "Reading a room of appetites is nauseating and it lingers. And knowing what a thing wants is not knowing you can supply it.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Great Appetite",
+     "grants": "Something large — a deep thing, a host, a place's whole hunger — read entire, including the want under the want.",
+     "cannot": "⚠ IT NOTICES BEING READ AT THIS DEPTH. You have introduced yourself, and the Devouring find being understood almost as satisfying as being fed.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 3,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read one appetite",
+    "surge": "the great appetite; IT NOTICES BEING READ AT THIS DEPTH"
+   },
+   "bounds": [
+    {
+     "text": "APPETITE ONLY — no plans, loyalties or knowledge",
+     "class": "hard"
+    },
+    {
+     "text": "the truly SATED read as empty",
+     "class": "hard"
+    },
+    {
+     "text": "knowing the want is not being able to supply it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that names what a thing hungers for and what it will risk. Rated 5 of 10 across a scope of 2 for about three hours."
+  },
+  {
+   "id": "the_offered_lesser",
+   "name": "The Offered Lesser",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.5,
+    "violence_peace": 0.3
+   },
+   "functions": [
+    "ward",
+    "bind"
+   ],
+   "narrationHints": "You give a hunger something smaller to eat. Not banishment, not command — SUBSTITUTION, and it is the most useful thing the Choir knows, because a fed thing goes away.",
+   "description": "The Abyssal Choir's turning-craft. Everything down there wants something; almost nothing insists on wanting THIS.",
+   "notFor": "Refusing to pay (something is eaten, always, and you choose what); substituting a person without their consent — ⛔ the Choir's one hard law; anything whose want is specific to this target; getting the offering back.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Lesser Given",
+     "grants": "Offer a hunger a substitute it will accept — livestock, a stored thing, blood freely given, a name, a memory. It takes that instead and disengages.",
+     "cannot": "SOMETHING IS EATEN. The offering is gone and it must be genuinely wanted — a token it does not want insults it and makes things worse. ⛔ Never a person who has not agreed.",
+     "functions": [
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Offering",
+     "grants": "Set a substitution that keeps — a place regularly fed, so what lives near it does not take what you care about.",
+     "cannot": "⚠ A STANDING OFFERING IS A RELATIONSHIP, and it grows. What you feed gets larger and its want gets more specific over time.",
+     "functions": [
+      "ward",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Turned Appetite",
+     "grants": "Redirect a large hunger entirely — off a village, off a road, off a person it had fixed on.",
+     "cannot": "⚠ IT GOES SOMEWHERE. You have not reduced the eating; you have moved it, and the Choir requires you to know where and say so. Turning a thing onto a place you have not warned is the other unforgivable one.",
+     "functions": [
+      "ward",
+      "bind",
+      "move"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "ward",
+   "operativeAxis": [
+    "magnitude",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a small offering, a short turning",
+    "surge": "turn a great appetite; IT GOES SOMEWHERE, and you must know where and say so"
+   },
+   "bounds": [
+    {
+     "text": "SOMETHING IS EATEN — the offering is genuinely gone",
+     "class": "cost"
+    },
+    {
+     "text": "⛔ never a person who has not agreed",
+     "class": "hard"
+    },
+    {
+     "text": "the substitute must be GENUINELY WANTED",
+     "class": "hard"
+    },
+    {
+     "text": "a standing offering GROWS",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/fight action that feeds a hunger something smaller so it disengages. Rated 6 of 10 across a scope of 2 for about eight hours."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

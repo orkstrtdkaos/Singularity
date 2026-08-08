@@ -2597,7 +2597,9 @@
    ],
    "plainly": "A social/fight action that halts those who credit your name. Rated 5 of 10 across a scope of 3 for about two hours. Limit: it works only on those who believe the name.",
    "backlash": "The name fails in front of everyone who was holding it. The belief does not just fail to work — it breaks, and the cult that believed the NAME comes looking for who wore it badly.",
-   "conserveSuppresses": "invoke quietly, to one person — a failure costs you only that one"
+   "conserveSuppresses": "invoke quietly, to one person — a failure costs you only that one",
+   "backlashRungNone": "the failure BREAKS THE NAME and sets a cult looking for you. A future consequence, not a present wound.",
+   "_backlashRungNote": "SNG-359: DELIBERATELY NO RUNG — declared, not omitted. the failure BREAKS THE NAME and sets a cult looking for you. A future consequence, not a present wound. ⚠️ A gate should assert this list is DECLARED rather than empty, the same way runtime_unwired works."
   },
   {
    "id": "the_struck_term",
@@ -2699,7 +2701,9 @@
    ],
    "plainly": "A social/fight action that costs an opponent something they agreed to pay. Rated 5 of 10 on one target for about eight hours. Limit: refusal ends it — there is no forcing this.",
    "backlash": "You cannot deliver what you named. The term rebounds by the Bargainers' own rule: you owe what you promised, to them, and the foothills will hold you to it.",
-   "conserveSuppresses": "small terms — a broken small term is a debt, not a ruin"
+   "conserveSuppresses": "small terms — a broken small term is a debt, not a ruin",
+   "backlashRungNone": "the failure is a DEBT — you owe what you promised, by the Bargainers' own rule. Enforced socially, not physically.",
+   "_backlashRungNote": "SNG-359: DELIBERATELY NO RUNG — declared, not omitted. the failure is a DEBT — you owe what you promised, by the Bargainers' own rule. Enforced socially, not physically. ⚠️ A gate should assert this list is DECLARED rather than empty, the same way runtime_unwired works."
   },
   {
    "id": "the_offered_mouth",

@@ -2976,7 +2976,9 @@
    ],
    "plainly": "A fight/puzzle action that roots opponents, then kills them slowly in the grip until you release it. Rated 6 of 10 across a scope of 3. Limit: it needs living ground.",
    "backlash": "The green takes YOU as readily as them — the wielder is held at the surged rung, and a held wielder cannot release the hold on anyone.",
-   "conserveSuppresses": "the snare stays at bind only — no bite, on anyone, including you"
+   "conserveSuppresses": "the snare stays at bind only — no bite, on anyone, including you",
+   "backlashRung": "damaging",
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
   },
   {
    "id": "the_hastened_grey",
@@ -3083,7 +3085,9 @@
    ],
    "plainly": "A fight/puzzle action that brings a failing thing — or person — to its end early. Rated 7 of 10 on one target. Limit: it hastens an ending, it does not begin one.",
    "backlash": "The grey turns on the nearest failing thing, which is you: every wound and worn strap you carry comes due at once.",
-   "conserveSuppresses": "a small hastening — the grey stays where your hand is"
+   "conserveSuppresses": "a small hastening — the grey stays where your hand is",
+   "backlashRung": "damaging",
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
   },
   {
    "id": "the_kept_vigil",

@@ -2585,6 +2585,195 @@
     }
    ],
    "plainly": "A puzzle/fight action that sets a lasting geometric order on a place. Rated 6 of 10 across a scope of 2 for about three days."
+  },
+  {
+   "id": "the_sound_read",
+   "name": "The Sound Read",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "practical",
+   "axes": {
+    "concrete_abstract": 0.6
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You put a hand on a made thing and it tells you the truth about itself. Not a feeling about the stone — an answer: this member is bearing, that one is decorative, and the whole thing comes down from HERE.",
+   "description": "The Masons' first craft, and the one they are actually hired for. Everything else they do rests on being right about this.",
+   "notFor": "Anything unmade (living wood, a hillside, weather); reading who built it or why; anything you cannot reach and touch; a thing already collapsed.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Hand On It",
+     "grants": "Touch a structure, a vehicle, a raft, a scaffold, and the craft NAMES the load path and the first failure: which member carries, which is ornament, what gives way first and roughly under what. A specific piece, pointed at.",
+     "cannot": "TOUCH, and made things only. It tells you what fails FIRST, not when — a bridge can be told it is doomed and still stand a decade. It says nothing about who built it or why.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Fabric",
+     "grants": "Read a building or a span entire — every load path, every member carrying more than it was cut for, the order the failures come in.",
+     "cannot": "It takes real time and you must reach every part you read. And a full reading of a place people live in is frequently unwelcome news you are now obliged to deliver.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Standing Truth of It",
+     "grants": "A site: walls, wells, foundations, the ground under them. Masons are called before sieges and after floods for exactly this.",
+     "cannot": "⚠ YOU WILL BE BELIEVED OR YOU WILL BE IGNORED, and both are worse than you expect. A Mason who condemns a hall is answerable to everyone who used it, and one who clears it is answerable if they were wrong.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "mason",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read one member",
+    "surge": "read the whole site; YOU WILL BE BELIEVED OR IGNORED, and both are worse than you expect"
+   },
+   "bounds": [
+    {
+     "text": "TOUCH, and MADE THINGS ONLY",
+     "class": "hard"
+    },
+    {
+     "text": "names what fails FIRST, never WHEN",
+     "class": "hard"
+    },
+    {
+     "text": "says nothing about who built it or why",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that names a structure's load path and first failure. Rated 5 of 10 across a scope of 2 for about four hours."
+  },
+  {
+   "id": "the_set_stone",
+   "name": "The Set Stone",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "practical",
+   "axes": {
+    "concrete_abstract": 0.6,
+    "chaos_order": 0.3
+   },
+   "functions": [
+    "bind",
+    "ward",
+    "make"
+   ],
+   "narrationHints": "You set a thing where it is and it STAYS. A stone, a beam, a door, a cart — placed with intent, it now takes far more than ordinary force to shift, and it will not drift, sag, settle or be quietly moved.",
+   "description": "The Masons' holding-craft. Half of building is making a thing stay where you put it.",
+   "notFor": "Making the thing stronger (a set rotten beam is a rotten beam that will not move); setting anything alive; setting what you cannot lift or lever into place first; anything already falling.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Placed Thing",
+     "grants": "Set one object you have positioned. It resists being moved, levered, or shifted by anything short of deliberate concerted effort — and you know the instant it is being worked at.",
+     "cannot": "It holds POSITION, not integrity — a set thing still breaks, rots, and burns normally. You must have PLACED it. And a determined crew with tools gets it eventually; this buys time and warning.",
+     "functions": [
+      "bind",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Kept Course",
+     "grants": "Set several, or set a working assembly — a door in its frame, a wheel on its axle, a raft's lashings — so the whole thing holds true under use.",
+     "cannot": "The more you hold, the more thinly. And a set assembly cannot be adjusted by anyone, including you, without unsetting it first.",
+     "functions": [
+      "bind",
+      "ward",
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unmoved Work",
+     "grants": "A structure that does not settle, shift, or subside — a wall on bad ground, a span over a moving river, a gate that will not be forced.",
+     "cannot": "⚠ THE GROUND STILL MOVES; you have only refused to move WITH it. A set structure on failing ground does not sag — it stands until it does not, and there is no warning creak. Masons argue about whether that is a virtue.",
+     "functions": [
+      "bind",
+      "ward",
+      "make"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "FIGHT"
+   ],
+   "tradition": "mason",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "bind",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 72,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "set one thing",
+    "surge": "the unmoved work; IT STANDS UNTIL IT DOES NOT, and there is no warning creak"
+   },
+   "bounds": [
+    {
+     "text": "holds POSITION, not integrity — it still breaks, rots and burns",
+     "class": "hard"
+    },
+    {
+     "text": "you must have PLACED it",
+     "class": "hard"
+    },
+    {
+     "text": "a determined crew with tools gets it eventually",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A puzzle/fight action that fixes a placed object so it cannot be shifted. Rated 6 of 10 across a scope of 2 for about three days."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

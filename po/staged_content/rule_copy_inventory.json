@@ -1,0 +1,328 @@
+{
+  "note": "SNG-350 step 3 — RULE-COUPLED COPY IN app.js, INVENTORIED. Aevi authors `promoteTo` and the replacement text; CCode wires the reader and deletes the inline IN THE SAME CHANGE. Nothing here has been rewritten or moved.",
+  "test": "Could this string become FALSE if a value in content/packs/core/rules/*.json changed, without the string itself being touched?",
+  "order": "energy.json first (Aevi); sub_attribute_ladder.json LAST — it changed twice on 2026-08-07 and copy authored against a moving rule is copy authored twice.",
+  "caveat": "A HEURISTIC. It flags a string that names a rule concept AND makes a claim; a claim verb in chrome still lands here. `confidence` is the tier, not a verdict — only a reader settles the borderline ones.",
+  "countCorrection": "⚠️ THE HEADLINE NUMBER CAME DOWN FROM 56 WHEN THIS WAS EMITTED, and the reason is a defect in my extractor, not a change in the code. The template-literal pattern matched from the CLOSING backtick of one literal to the OPENING backtick of the next, so live source was counted as copy — the first row of the first emit read `); if (held && !evolutionBudget(held, wd, character)`. Fragments carrying tokens player copy never contains (=>, &&, ===, .join(, ?? and a mid-expression opener) are now rejected. The scope is still far larger than the seven Aevi expected; it is 30 rather than 56, and the earlier figure should not be quoted.",
+  "generatedFrom": "node tests/copy_coupling.mjs --emit",
+  "counts": {
+    "total": 30,
+    "high": 0,
+    "medium": 30,
+    "byRulesFile": {
+      "resolution.json": 3,
+      "sub_attribute_ladder.json": 2,
+      "standing.json": 3,
+      "energy.json": 5,
+      "emergence": 8,
+      "leveling": 3,
+      "companions.json": 3,
+      "skill_capacity.json": 4,
+      "martial_paths.json": 1
+    }
+  },
+  "strings": [
+    {
+      "surface": "FIGHT_LEXICON",
+      "line": 9906,
+      "text": "Read them first — it costs the craft's energy, but it is NOT a free hit for them any more. Skip it to conserve.",
+      "falsifiedBy": [
+        "energy.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderSettings",
+      "line": 1820,
+      "text": ">Story: +1h per beat, +3h travel, +8h rest. Real: in-game time keeps flowing between sessions — the world will feel like it moved without you.</div></div> <div class=",
+      "falsifiedBy": [
+        "energy.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "SB_STEPS",
+      "line": 10039,
+      "text": "Read them first — it costs the craft's energy, but it is NOT a free hit for them any more. Skip it to conserve.",
+      "falsifiedBy": [
+        "energy.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "skillBattlePanel",
+      "line": 10329,
+      "text": ">🕯 <strong>You are spent</strong> — your crafts will not answer until you find energy. <span class=",
+      "falsifiedBy": [
+        "energy.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "skillBattlePanel",
+      "line": 10329,
+      "text": ">Steel and wit still work (a plain strike, a raised guard). This is the moment to <strong>Yield</strong> by choice, or use something that restores you — the fight no longer ends itself here.</span></div>` :",
+      "falsifiedBy": [
+        "energy.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "libGreatCircle",
+      "line": 9228,
+      "text": ">Twelve axes of the world, each a tension between two peoples — and every craft sits directly across the ring from its antithesis. Kin stand beside kin; the far pole of what you are is closed to you, reachable only by the great braids.</p> <h3 class=",
+      "falsifiedBy": [
+        "emergence"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderCreate",
+      "line": 3924,
+      "text": "><strong>⛔ ${esc(traditionLabel(antiP))} is closed to you forever</strong> — the far pole of what you are. Only a cross-pole braid, taught by no one, ever crosses it.</div>` :",
+      "falsifiedBy": [
+        "emergence"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderCreate",
+      "line": 4070,
+      "text": ">The far pole of what you are is closed to you — only the great braids cross it. Is that who you are? You may adjust.</p> <div class=",
+      "falsifiedBy": [
+        "emergence"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderSkillWheel",
+      "line": 7518,
+      "text": ">Precursor crafts aren't taught or bought. <strong>A door opens only when the fiction earns it</strong> — walking the Old Roads, a precursor-touched teacher, a discovery in play. There's no button; keep playing toward it, and one day it may open.</div>` : sel.precursorUnlocked ? `<div class=",
+      "falsifiedBy": [
+        "emergence"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderSkillWheel",
+      "line": 7518,
+      "text": "t taught or bought. <strong>A door opens only when the fiction earns it</strong> — walking the Old Roads, a precursor-touched teacher, a discovery in play. There",
+      "falsifiedBy": [
+        "emergence"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderSkillWheel",
+      "line": 7518,
+      "text": "<div class=\"precursor-seal-note\">Precursor crafts aren't taught or bought. <strong>A door opens only when the fiction earns it</strong> — walking the Old Roads, a precursor-touched teacher, a discovery in play. There's no button; keep playing toward it, and one day it may open.</div>",
+      "falsifiedBy": [
+        "emergence"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "skillBattlePanel",
+      "line": 10335,
+      "text": "<strong class=\"sb-braid-note\">⋈ braided — both crafts, both effects, both costs.</strong>",
+      "falsifiedBy": [
+        "emergence"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderLevelUp",
+      "line": 7887,
+      "text": "}</strong> — points <strong>learn new crafts</strong> (breadth). <strong>Depth is earned through use</strong>, not bought. <span class=",
+      "falsifiedBy": [
+        "skill_capacity.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderLevelUp",
+      "line": 7924,
+      "text": ">You're at capacity — your points <strong>bank</strong> until your next level widens it. Depth comes from <em>using</em> a craft, never from points. ${infoDot(",
+      "falsifiedBy": [
+        "skill_capacity.json",
+        "leveling"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderSkillWheel",
+      "line": 7504,
+      "text": "? `costs more — ${sel.penalty}× skill points, ${Math.max(2, sel.penalty)} steps out` :",
+      "falsifiedBy": [
+        "skill_capacity.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderSkillWheel",
+      "line": 7533,
+      "text": "what you have to spend, and how much breadth you are using",
+      "falsifiedBy": [
+        "skill_capacity.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "DEV_DIALS",
+      "line": 813,
+      "text": "CCODE-77 — how a craft's own duration becomes ROUNDS STANDING. Before this every verb stood a flat 2 regardless of tier; lower this if low-tier wards now feel too brief",
+      "falsifiedBy": [
+        "standing.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "FOG_RUNG",
+      "line": 9945,
+      "text": "their FULL roll math — every modifier, itemised",
+      "falsifiedBy": [
+        "resolution.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "refreshStickyBack",
+      "line": 163,
+      "text": "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll.",
+      "falsifiedBy": [
+        "resolution.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderCharacterScreen",
+      "line": 8179,
+      "text": ">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` :",
+      "falsifiedBy": [
+        "leveling"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderPlay",
+      "line": 10866,
+      "text": "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll.",
+      "falsifiedBy": [
+        "resolution.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderPlay",
+      "line": 11155,
+      "text": ">Every stage is behind you — what it was all for is yours to decide. This is permanent.</div> <div class=",
+      "falsifiedBy": [
+        "companions.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "renderSkillWheel",
+      "line": 7480,
+      "text": "· later — deepen your standing to open it",
+      "falsifiedBy": [
+        "standing.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "runGM",
+      "line": 4254,
+      "text": "This touches the Precursor — glimpsed, never explained.",
+      "falsifiedBy": [
+        "leveling"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "showBraidMoment",
+      "line": 4715,
+      "text": ")} — what the bond was always for` : isDiscovery ?",
+      "falsifiedBy": [
+        "companions.json",
+        "emergence"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "showCompanionPanel",
+      "line": 4649,
+      "text": ">What the bond will teach you</span> <div>At bond ${grantAt}, ${esc(dn)} will teach you <strong>${esc(g.name)}</strong>.</div> <div class=",
+      "falsifiedBy": [
+        "companions.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "traitReadout",
+      "line": 8085,
+      "text": "Cosmetic — your form leads how the portrait is rendered. It carries NO mechanical effect: the game reads your attributes, crafts, and standing, never your appearance.",
+      "falsifiedBy": [
+        "standing.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "SB_DOES",
+      "line": 10370,
+      "text": "braces YOU — you weather it instead of trading",
+      "falsifiedBy": [
+        "martial_paths.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "DEV_DIALS",
+      "line": 798,
+      "text": "scaling: per attribute point",
+      "falsifiedBy": [
+        "sub_attribute_ladder.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    },
+    {
+      "surface": "DEV_DIALS",
+      "line": 804,
+      "text": "what RANK a ward/shield layer sits at — a craft must out-penetrate it to go through",
+      "falsifiedBy": [
+        "sub_attribute_ladder.json"
+      ],
+      "confidence": "medium",
+      "promoteTo": null
+    }
+  ]
+}

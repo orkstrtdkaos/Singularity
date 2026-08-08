@@ -2337,7 +2337,7 @@
      "rank": 2,
      "name": "The Gathered Ground",
      "grants": "Fold the ground instead — pull a line of them into the same few feet, or put a wall where their charge already is.",
-     "cannot": "⚠ FOLDED GROUND TAKES ALLIES TOO, one rung lower — space does not check colours. It unfolds when you stop, and things that were folded come back wrong.",
+     "cannot": "⚠ FOLDED GROUND TAKES ANYONE ELSE STANDING ON IT TOO, one rung lower — space does not check colours. It unfolds when you stop, and things that were folded come back wrong.",
      "functions": [
       "strike",
       "break",
@@ -2350,7 +2350,7 @@
     {
      "rank": 3,
      "name": "The Closed Span",
-     "grants": "Fold enough distance into a person that there is no room left in them for the distance they are made of. AND YOU HAVE THE FOLD NOW: hold it clear of yourself and your own, and set exactly where the span closes.",
+     "grants": "Fold enough distance into a person that there is no room left in them for the distance they are made of. AND YOU HAVE THE FOLD NOW: hold it clear of yourself and anyone you name, and set exactly where the span closes.",
      "cannot": "A closed span cannot be reopened — what you fold out of someone does not come back. Warded ground still refuses you, and the March keeps such wards precisely because of this rank. The Unlanded, who never arrive anywhere, end up this way by degrees.",
      "functions": [
       "strike",
@@ -2379,7 +2379,7 @@
    },
    "intensity": {
     "conserve": "a hand's fold — a wrenched joint",
-    "surge": "fold without holding it clear — reach further and take more, and THE WIELDER AND ALLIES ARE STRUCK ONE RUNG LOWER"
+    "surge": "fold without holding it clear — reach further and take more, and THE WIELDER AND ANYONE ELSE PRESENT ARE STRUCK ONE RUNG LOWER"
    },
    "bounds": [
     {
@@ -2391,7 +2391,7 @@
      "class": "hard"
     },
     {
-     "text": "FOLDED GROUND TAKES ALLIES TOO, one rung lower",
+     "text": "FOLDED GROUND TAKES ANYONE ELSE STANDING ON IT TOO, one rung lower",
      "class": "hard"
     }
    ],
@@ -2434,7 +2434,7 @@
      "rank": 2,
      "name": "The Long Toll",
      "grants": "Levy continuously — they age, their gear fails piece by piece, and their wounds keep arriving older than they are.",
-     "cannot": "⚠ THE HOUR DOES NOT SORT: allies in the area are struck ONE RUNG LOWER by the same toll, and their gear ages with everyone else's.",
+     "cannot": "⚠ THE HOUR DOES NOT SORT: anyone else in the area is struck ONE RUNG LOWER by the same toll, and their gear ages with everyone else's.",
      "functions": [
       "strike",
       "hinder",
@@ -2446,7 +2446,7 @@
     {
      "rank": 3,
      "name": "The Whole Duration",
-     "grants": "Take all of it at once. What was going to be a life happens now, in front of you, quickly. AND THE LEVY PASSES YOU BY: you and yours are no longer inside the toll you call.",
+     "grants": "Take all of it at once. What was going to be a life happens now, in front of you, quickly. AND THE LEVY PASSES YOU BY: you and anyone you name are no longer inside the toll you call.",
      "cannot": "What is spent still cannot be returned, ever, including if you were wrong about who deserved it. The Stopped, who will not let a moment pass, began by doing this too often and too well.",
      "functions": [
       "strike",
@@ -2476,7 +2476,7 @@
    },
    "intensity": {
     "conserve": "a small levy — a strap perishes, a wound sours",
-    "surge": "levy the whole place without exempting anyone — everything present pays, and THE WIELDER AND ALLIES ARE STRUCK ONE RUNG LOWER"
+    "surge": "levy the whole place without exempting anyone — everything present pays, and THE WIELDER AND ANYONE ELSE PRESENT ARE STRUCK ONE RUNG LOWER"
    },
    "bounds": [
     {
@@ -2488,7 +2488,7 @@
      "class": "cost"
     },
     {
-     "text": "ALLIES ARE STRUCK ONE RUNG LOWER by the toll",
+     "text": "EVERYONE ELSE PRESENT IS STRUCK ONE RUNG LOWER by the toll",
      "class": "hard"
     }
    ],

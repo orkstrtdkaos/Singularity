@@ -45,28 +45,65 @@ not know and would rather ask than guess.
 `senseTiers` gates on `minAttunement` (0/2/5/9). **Add the ladder's `insight` cumulative to the attunement
 term the tier lookup reads** — so insight buys tier bands without touching attunement itself.
 
-⚠️ **Check the interaction: attunement is earned in play AND now granted by a sub.** If they simply sum, a
-high-insight character skips earned attunement entirely. **My view: they should sum, because both are
-"how well you read the world" — but that is a design call, not an implementation detail, so it goes to
-Erik rather than being decided in the wiring.**
+⛔ **ERIK RATIFIED 2026-08-07: THEY SUM.** Attunement earned in play and attunement granted by `insight`
+add together — both are "how well you read the world", and a character who invested in insight has
+genuinely earned the read. ⚠️ **Consequence to watch: a high-insight character reaches the top sense band
+(`minAttunement: 9`) earlier than the attunement curve alone intended.** That is the intent, not a defect —
+but it is worth one harness pass, since sense tier gates how much of the odds a player is shown and
+reaching the top band early makes the game more legible sooner.
 
-### §1c — `presence` → renown and reputation gain · `engine/reputation.js:77`
+### §1c — `presence` → TWO consumers · ⛔ AMENDED BY ERIK 2026-08-07
+
+Erik: *"presence is not just renown, it's also whether a social attempt is successful — wooing,
+convincing, intimidating etc… people are just more likely to listen to what you want them to do."*
+
+**He is right and I specced half the stat.** Presence has two consumers, not one.
+
+#### §1c-i — renown and reputation gain · `engine/reputation.js:77`
 
 ```js
-if (d.weight > 0 && aptitudeMods.reputationGainBonus) { d._bonusApplied = aptitudeMods.reputationGainBonus;
+if (d.weight > 0 && aptitudeMods.reputationGainBonus) { d._bonusApplied = ...
 ```
 
-⛔ **Note the `d.weight > 0` guard: the existing bonus applies ONLY to positive deeds.** The ladder grants
-*"% renown and reputation gain"* — **and renown is not merit-signed.** Directive SNG-280: a massacre and a
-rescue of the same magnitude travel equally far.
+⛔ **Do NOT inherit the `d.weight > 0` guard.** The existing aptitude applies only to positive deeds.
+**Renown is not merit-signed (SNG-280)** — a high-presence villain should become notorious faster.
+Presence inside that guard becomes a goodness stat, which it is not.
 
-⚠️ **So presence should widen BOTH directions — a high-presence villain becomes notorious faster.**
-Applying it inside the `weight > 0` guard would make presence a goodness stat, which is not what it is.
-**Flag it; do not silently inherit the guard.**
+#### §1c-ii — social action success · `engine/resolve.js:110` TAG_MODS
 
-⚠️ **And this composes directly with SNG-363 §2b** — renown tier widens news reach, so presence
-compounds: faster renown gain → higher tier → wider spread. **That may be exactly right, or it may be a
-runaway. Worth one harness pass before it ships.**
+⚠️ **The table already contains Erik's exact list** and needs no new vocabulary:
+
+`intimidateBonus` (threaten/intimidate/coerce/menace) · `flirtationBonus` (romantic/flirt/woo/seduce/charm)
+· `trustedBonus` (persuade/ask/request/appeal/plead/negotiate) · `deEscalationBonus`
+(comfort/calm/deescalate/soothe) · `deceiveBonus` · `sincerityReadBonus`
+
+**Presence adds its ladder cumulative across the union of those tag groups** — one new self-summing line,
+same shape as the aptitude mods beside it.
+
+#### §1c-iii — ⛔ THE DOUBLE-DIP, and it must be resolved before this is built
+
+`resolve.js:68` already resolves the roll on `action.subAttribute` when the GM names one. **So a
+persuasion the GM rolls on `presence` ALREADY gets presence at full ladder weight.** Adding a social
+tag-mod on top would pay presence twice on exactly the actions it is most likely to be named for.
+
+**PO RECOMMENDATION: the social bonus fires on socially-tagged actions EXCEPT when `presence` is itself
+the rolled sub.** Then:
+
+| the action | what presence contributes |
+|---|---|
+| persuade, rolled on `presence` | the roll term. Once. |
+| intimidate, rolled on `strength` | the social bonus — **they listen because of who you are, not what you lifted** |
+| a craft check with no social tag | nothing |
+
+⚠️ **This is the version that matches what Erik described.** *"People are just more likely to listen to
+what you want them to do"* is a **general disposition that follows you into actions that are not about
+your charm** — not a multiplier on your best social move. The suppression is what makes it a floor rather
+than a spike.
+
+**Alternative, named so it is a choice and not an oversight:** let them stack, making presence dominant in
+social play. ⚠️ **I do not recommend it** — it would make presence the correct dump-everything stat for any
+socially-inclined character, which is the same shape as the mental-gets-both-energy-payloads problem Erik
+and I already rejected on the pool side. **But it is a balance call and the harness can settle it.**
 
 ### §1d — `wits` → crit and the novel penalty · `engine/resolve.js:267` and `:299`
 

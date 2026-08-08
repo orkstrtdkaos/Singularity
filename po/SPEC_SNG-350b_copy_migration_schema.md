@@ -95,9 +95,12 @@ rank-1-2 baseline fix, and the roll column still gated on the harness). **Migrat
 rule still in motion means writing it twice.** The ladder's strings stay inline and stale until the roll
 column is ratified.
 
-**Emergence (13) needs a decision before it moves** — emergence copy describes discovery, and discovery
-copy that is too explicit spoils the thing it describes. ⚠️ **Some of those 13 may be deliberately vague
-and should NOT be made precise by the migration.** Flag them; do not sharpen them by reflex.
+**Emergence (13) — ⛔ ERIK RULED 2026-08-07: KEEP THEM VAGUE, and use the migration to PROTECT that.**
+Copy that explains discovery mechanics tells the player what to fish for, which converts discovery into a
+checklist. **Move them into the pack like the rest — but carry `deliberatelyVague: true` on each.** The
+drift-gate still flags them when the underlying rule changes, and a future editor is told plainly not to
+sharpen them. ⚠️ **The migration becomes the thing that DEFENDS the vagueness rather than the thing that
+erodes it** — which is the opposite of what a copy-cleanup pass normally does, and is the point.
 
 ---
 

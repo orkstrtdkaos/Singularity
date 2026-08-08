@@ -10743,6 +10743,31 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-364 — Erik: "All of these NPCs need portraits. and the portrait needs to pop up from the new
+  // tabs… just like when they fight or get killed."
+  //
+  // ⚠️ THE FIGURES A PLAYER MEETS ONLY IN A WORLD-TICK DIGEST ARE THE ONES WHO MOST NEED A FACE, because
+  // they are never in a scene. Valen Sunwrack, the Thornmother, the Clockmother — the tick writes about
+  // them constantly and they were a name and a sentence. The portrait machinery already existed; it was
+  // simply never pointed at them.
+  {
+    const appSrc364 = readFileSync(join(root, "app.js"), "utf8");
+    const whoisSrc = readFileSync(join(root, "engine/whois.js"), "utf8");
+    const card = appSrc364.slice(appSrc364.indexOf("function showWhoIs"), appSrc364.indexOf("function showWhoIs") + 2600);
+
+    check("364: the who-is card renders a portrait for a FIGURE", /whoPortrait/.test(card) && /kind === "figure"/.test(card));
+    // ⛔ SEEDED ON THE ID, NOT THE LABEL. These people acquire titles in play — "Valen Sunwrack, Who Left No
+    // Shadow Standing" — and a face keyed to the displayed name would change the moment the world renamed
+    // them, which quietly says this is a different person.
+    check("364: …seeded on the stable id so the same figure keeps the same face",
+      /seedKey: `whois-\$\{seed\}`/.test(card) && /known\.codexId \|\| known\.id \|\| known\.label/.test(card));
+    check("364: …and whoIs returns that id, so the seed survives a rename", /kind: "figure", id, lines/.test(whoisSrc));
+    // A card taller than the phone is the SNG-353 lesson, one screen over.
+    check("364: …and the card scrolls, with the portrait and the text in the same scroll region",
+      /overflow-y:auto[\s\S]{0,120}whoPortrait[\s\S]{0,200}help-short/.test(card));
+    check("364: a portrait failure never breaks the card", /catch \{ \/\* a face is never worth breaking the card for \*\//.test(card));
+  }
+
   // SNG-350 — TWO LIVE STRINGS, AND THE INVENTORY BEHIND THEM.
   //
   // Both skill-wheel screens said "Tap a node to learn or deepen it here" while the function beneath them

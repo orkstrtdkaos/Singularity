@@ -88,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.68";
+const APP_VERSION = "1.9.69";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -255,10 +255,29 @@ function showWhoIs(known) {
   document.getElementById("help-pop")?.remove();
   const pop = document.createElement("div");
   pop.id = "help-pop"; pop.className = "help-overlay";
-  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="${esc(known.label)}">
-    <div class="whois-head">${esc(known.label)} <span class="hint">· ${esc(known.kind)}</span></div>
-    <div class="help-short">${known.lines.map(l => `<div class="whois-line">${esc(l)}</div>`).join("")}</div>
-    <div class="help-foot">
+  // ⛔ SNG-364 (Erik) — "all of these NPCs need portraits, and the portrait needs to pop up from the new
+  // tabs… just like when they fight or get killed." These world figures are the ones the tick keeps writing
+  // about — Valen Sunwrack, the Thornmother, the Clockmother — and they were a NAME AND A SENTENCE. The
+  // portrait machinery already existed and simply was not pointed at them: a figure you only meet in a
+  // world-tick digest is exactly the one who most needs a face, because you never see them in a scene.
+  //
+  // ⚠️ SEEDED ON THE STABLE ID, so the same figure has the SAME face every time they surface — a portrait
+  // that re-rolls is worse than none, because it quietly says this is a different person.
+  let whoPortrait = "";
+  try {
+    if (known.kind === "figure" || known.kind === "person" || known.kind === "npc") {
+      const seed = known.codexId || known.id || known.label;
+      const url = ensureImage({ id: `whois-${seed}`, name: known.label, role: known.lines?.[0] || "", appearance: known.lines?.[0] || "" },
+        "npc", { ratingLevel: viewerRatingLevel(), seedKey: `whois-${seed}`, isMinor: false });
+      if (url) whoPortrait = `<img class="whois-portrait" src="${esc(url)}" alt="${esc(known.label)}" loading="lazy" style="width:100%; max-height:240px; object-fit:cover; border-radius:6px; margin-bottom:8px">`;
+    }
+  } catch { /* a face is never worth breaking the card for */ }
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="${esc(known.label)}" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
+    <div class="whois-head" style="flex:0 0 auto">${esc(known.label)} <span class="hint">· ${esc(known.kind)}</span></div>
+    <div style="flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch">${whoPortrait}
+      <div class="help-short">${known.lines.map(l => `<div class="whois-line">${esc(l)}</div>`).join("")}</div>
+    </div>
+    <div class="help-foot" style="flex:0 0 auto">
       ${known.codexId ? `<button class="btn secondary" id="whois-codex">📖 Read the codex page</button>` : ""}
       <button class="btn" id="help-close">Got it</button>
     </div></div>`;

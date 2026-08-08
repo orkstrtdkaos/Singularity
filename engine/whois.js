@@ -87,7 +87,10 @@ export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster 
     else if (st === "wounded") lines.push("Wounded, and out of it for now.");
     // A person you have MET has a codex page; a name you have only heard may not.
     const codexId = character?.codex?.topics?.[id] ? id : null;
-    return lines.length ? { label: fig.name, kind: "figure", lines, codexId } : null;
+    // SNG-364: the ID rides along so a portrait can be seeded on the FIGURE rather than on their current
+    // name — these people acquire titles in play ("Valen Sunwrack, Who Left No Shadow Standing"), and a face
+    // keyed to the label would change the moment the world renamed them.
+    return lines.length ? { label: fig.name, kind: "figure", id, lines, codexId } : null;
   }
 
   const topic = character?.codex?.topics?.[id];

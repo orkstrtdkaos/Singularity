@@ -157,6 +157,16 @@ const LEDGER = [
     note: "The store used to `slice(-40)`, silently dropping the OLDEST CANON THE GM EVER ESTABLISHED — so a long game could contradict itself about its own early events with nothing to report it. Third instance of the same shape this session, after `knownPlaces` and the gallery: a cap on a LOG is housekeeping, a cap on WHAT IS TRUE is amnesia. The cost was real (facts are rendered every turn) but belonged to the VIEW. ⚠️ THE VIEW NAMES WHAT IT LEFT OUT — a silently-windowed view reads exactly like a complete one, which is how a GM comes to believe the ledger is short. ⛔ KIN NEVER AGE OUT, and nothing new is tracked to achieve it: `bondType` already carried `family`, so the tie was recorded all along and simply meant nothing to anything. It now marks the person unevictable from the Dunbar circle AND pins a fact — and it NEVER invents how they are kin, because naming someone's mother when the fiction only said 'family' would be the engine writing canon.",
   },
   {
+    id: "SNG-364", ask: "(Erik) all of these NPCs need portraits, and the portrait needs to pop up from the new tabs… just like when they fight or get killed",
+    how: "showWhoIs renders a portrait through the same ensureImage path an NPC uses, seeded on the figure's id",
+    gates: ["364: the who-is card renders a portrait for a FIGURE",
+            "364: …seeded on the stable id so the same figure keeps the same face",
+            "364: …and whoIs returns that id, so the seed survives a rename",
+            "364: …and the card scrolls, with the portrait and the text in the same scroll region",
+            "364: a portrait failure never breaks the card"],
+    note: "⚠️ THE FIGURES A PLAYER MEETS ONLY IN A WORLD-TICK DIGEST ARE THE ONES WHO MOST NEED A FACE, precisely because they are never in a scene — Valen Sunwrack, the Thornmother, the Clockmother. The tick writes about them constantly and they were a name and a sentence. The portrait machinery already existed (SNG-299 made the names tappable; ensureImage draws NPCs); it was simply never pointed at them, which is the SNG-353 shape again — authored capability with no surface. ⛔ SEEDED ON THE ID, NOT THE LABEL. These people ACQUIRE TITLES IN PLAY — \"Valen Sunwrack, Who Left No Shadow Standing\" — and a face keyed to the displayed name would change the moment the world renamed them, which quietly tells the player this is a different person. `whoIs` now returns the figure id for exactly that reason. ⚠️ And the card scrolls, with the portrait and the text in ONE scroll region — the same lesson as the companion panel an hour earlier, where the content was right and unreachable below the fold.",
+  },
+  {
     id: "SNG-350", ask: "(Aevi) fix the two live strings, then INVENTORY ONLY — count every app.js string that fails the coupling test. Count it, author nothing.",
     how: "both wheel screens corrected; tests/copy_coupling.mjs counts rule-coupled copy, grouped by the rules file that would falsify it",
     gates: ["350: no screen still offers to DEEPEN a craft by tapping — depth is earned by use",

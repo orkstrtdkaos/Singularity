@@ -80,3 +80,20 @@ export function ladderRoll(ladder, rank) {
   const beyond = Math.max(0, r - 20) * Number(ladder.rollPerRank?.["20"] ?? 0);
   return base + beyond;
 }
+
+/** SNG-365 — THE RATE SUBS. Four of the eight are `kind: "rate"`, and a rate is READ where it applies
+ *  rather than banked into a field — banking one would be the writer-with-no-reader bug inverted.
+ *
+ *  ⛔ ONE READER, FOUR SITES. Each rate has its own consumer (a defence term, a crit dial, attunement,
+ *  renown), and they must all consult the ladder the SAME way or the four drift into four opinions about
+ *  what a rank is worth. This is the one function they share.
+ *
+ *  Returns 0 when the ladder is absent, which is the right degradation: a missing table means no bonus,
+ *  never a broken roll. */
+export function rateValue(ladder, character, sub) {
+  const def = ladder?.subs?.[sub];
+  if (!def || def.kind !== "rate") return 0;
+  const rank = Math.max(0, Math.min(20, Math.round(Number(character?.subAttributes?.[sub] || 0))));
+  if (!rank) return 0;
+  return Number(def.cumulative?.[String(rank)] ?? 0);
+}

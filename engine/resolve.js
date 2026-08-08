@@ -3,6 +3,8 @@
 
 /** Cosine-ish alignment between two spectrum vectors (sparse maps of axis -> [-1,1]).
  *  Returns [-1, 1]: how much the character's fingerprint agrees with the action's demands. */
+import { rateValue } from "./ladder.js";   // SNG-365: one reader for the rate subs
+
 export function spectrumAlignment(a = {}, b = {}) {
   const axes = new Set([...Object.keys(a), ...Object.keys(b)]);
   let dot = 0, magA = 0, magB = 0;
@@ -132,6 +134,23 @@ export function successChance(ctx) {
   // edge only where it applies (shadow helps when you sneak, not when you speak). No consumer, no lie.
   {
     const am = aptitudeMods, tg = action.tags || [], hasTag = (...ts) => ts.some(t => tg.includes(t));
+    // ⛔ SNG-365 — THE RATE SUBS, READ WHERE THEY APPLY. `agility` proves the pattern: it governs
+    // defence, and defence is already a named term here, so the rank is added at the SAME site the
+    // aptitude fires rather than banked into a field nothing reads (SNG-356 left these deliberately
+    // unwired for exactly that reason).
+    const ladder365 = rules.subAttributeLadder;
+    if (ladder365 && hasTag("defend", "guard", "block", "brace", "careful")) {
+      const agi = rateValue(ladder365, character, "agility");
+      if (agi) add("agility (defence)", agi);
+    }
+    // ⚠️ PRESENCE HAS TWO CONSUMERS, NOT ONE — Erik ratified. Renown is the other (reputation.js);
+    // this is the social half. ⛔ AND THE ANTI-DOUBLE-DIP IS HIS RULING: the social bonus fires EXCEPT
+    // when `presence` is the sub actually being rolled, because there the ladder is ALREADY paying through
+    // the roll column. Without this a presence-rolled social action would be paid twice for one rank.
+    if (ladder365 && action.attribute === "social" && action.subAttribute !== "presence") {
+      const pre = rateValue(ladder365, character, "presence");
+      if (pre) add("presence (bearing)", Math.round(pre / 4));
+    }
     const TAG_MODS = [
       ["defenseBonus", ["defend", "guard", "block", "brace", "careful"], "defense"],
       ["stealthBonus", ["scout", "sneak", "hide", "stealth"], "stealth"],
@@ -288,6 +307,13 @@ export function critProfile(ctx) {
   if (cs) addS(cs.n ? `${cs.n}` : "this craft", cs.v);
   if (cf) addF(cf.n ? `${cf.n}` : "this craft", cf.v);
 
+  // ⛔ SNG-365 — `wits` GOVERNS CRIT, and this is where crit is decided. Its authored unit is
+  // "% critical success, and offsets the novel-action penalty" — the first half is an addend here; the
+  // second is a MILESTONE effect and deliberately does not live in this sum (see below).
+  {
+    const w = rateValue(ctx.rules?.subAttributeLadder, ctx.character, "wits");
+    if (w) addS("wits", w);
+  }
   // The existing aptitude keys keep their meaning, so no authored aptitude is orphaned by this change.
   addS("aptitude", aptitudeMods.critSuccessBonus || 0);
   addF("aptitude", aptitudeMods.critFailPenalty || 0);

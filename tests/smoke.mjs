@@ -10749,6 +10749,59 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-365 — THE RATE SUB CONSUMERS. Four of the eight subs are `kind: "rate"`, and SNG-356 left them
+  // deliberately unwired: a rate is READ where it applies, and banking one into a stored field would be
+  // the writer-with-no-reader bug inverted. Four sites, one reader.
+  {
+    const { loadContentHeadless: lch365b } = await import("./headless_content.mjs");
+    const C365 = await lch365b();
+    const { successChance, critProfile } = await import("../engine/resolve.js");
+    const { senseTier } = await import("../engine/sense.js");
+    const { renownOf } = await import("../engine/reputation.js");
+    const { rateValue } = await import("../engine/ladder.js");
+    const mk = (subs) => ({ attributes: { physical: 3, social: 3 }, subAttributes: subs, alignment: {}, energy: 50, attunement: 2 });
+    const roll = (ch, act) => successChance({ character: ch, action: act, location: null, rules: C365.rules });
+
+    check("365: one reader serves every rate sub, so four sites cannot drift about what a rank is worth",
+      rateValue(C365.rules.subAttributeLadder, mk({ agility: 12 }), "agility") > 0
+      && rateValue(C365.rules.subAttributeLadder, mk({ strength: 12 }), "strength") === 0);   // a POOL sub is not a rate
+
+    // agility → defence, at the site the defence aptitude already fires
+    check("365: agility raises DEFENCE, and only on a defending action",
+      roll(mk({ agility: 12 }), { attribute: "physical", subAttribute: "strength", tags: ["defend"], difficulty: "normal" })
+        > roll(mk({ agility: 1 }), { attribute: "physical", subAttribute: "strength", tags: ["defend"], difficulty: "normal" })
+      && roll(mk({ agility: 12 }), { attribute: "physical", subAttribute: "strength", tags: [], difficulty: "normal" })
+        === roll(mk({ agility: 1 }), { attribute: "physical", subAttribute: "strength", tags: [], difficulty: "normal" }));
+
+    check("365: wits raises the CRIT-SUCCESS dial",
+      critProfile({ character: mk({ wits: 12 }), action: {}, rules: C365.rules }).successChance
+        > critProfile({ character: mk({ wits: 1 }), action: {}, rules: C365.rules }).successChance);
+
+    // ⛔ ERIK RATIFIED THAT INSIGHT SUMS with earned attunement rather than taking a max — attunement is what
+    // practice gave you, insight is what you are, and a max() would make the smaller of the two free.
+    check("365: insight SUMS with earned attunement (ratified), it does not replace it",
+      senseTier({ character: mk({ insight: 12 }), action: {}, location: null, rules: C365.rules })
+        > senseTier({ character: mk({ insight: 1 }), action: {}, location: null, rules: C365.rules }));
+
+    // ⛔ PRESENCE HAS TWO CONSUMERS, NOT ONE (ratified).
+    check("365: presence raises social BEARING — its first consumer",
+      roll(mk({ presence: 12 }), { attribute: "social", subAttribute: "rapport", tags: [], difficulty: "normal" })
+        > roll(mk({ presence: 1 }), { attribute: "social", subAttribute: "rapport", tags: [], difficulty: "normal" }));
+    // ⛔ AND THE ANTI-DOUBLE-DIP, ratified: the bearing term fires EXCEPT when presence is the sub actually
+    // rolled — there the ladder is already paying through the roll column, and paying twice for one rank.
+    const tickSrc365 = readFileSync(join(root, "engine/resolve.js"), "utf8");
+    check("365: …but NOT when presence is the rolled sub — one rank is never paid twice",
+      /action\.subAttribute !== "presence"/.test(tickSrc365));
+
+    const hero = (p, w) => ({ subAttributes: { presence: p }, deeds: [{ description: "d", weight: w, spread: ["a", "b"] }] });
+    check("365: presence widens RENOWN — its second consumer",
+      Math.abs(renownOf(hero(12, 3), C365.rules).reach) > Math.abs(renownOf(hero(1, 3), C365.rules).reach));
+    // ⛔ AEVI WAS EXPLICIT: do not inherit a `d.weight > 0` guard — renown is NOT merit-signed, so a
+    // high-presence villain becomes notorious FASTER. Magnitude, never merit, read through the person.
+    check("365: …unsigned — a high-presence villain becomes notorious faster, not slower",
+      Math.abs(renownOf(hero(12, -3), C365.rules).reach) > Math.abs(renownOf(hero(1, -3), C365.rules).reach));
+  }
+
   // SNG-358 — POST. Erik: "He has 2 warden stations and a pregnant wife and a smithy… you have fortresses,
   // party members, businesses, etc at mid to late game." Built to the shape Aevi accepted from my review.
   {

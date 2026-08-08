@@ -24,6 +24,8 @@ import { renownScore } from "./recurrence.js";   // CCODE-85: the ladder's score
  */
 const allIn = (byRegion, home) => Object.values(byRegion).flat().filter(c => String(c).split(".")[0] === home);
 
+import { rateValue } from "./ladder.js";   // SNG-365: presence widens renown, unsigned
+
 export function spreadDeeds(bearer, { communitiesByRegion = {}, regionOfCommunity = {}, rng = Math.random, rate = 0.35, maxAgeDays = null, worldDay = null } = {}) {
   const deeds = bearer?.deeds;
   if (!Array.isArray(deeds) || !deeds.length) return [];
@@ -153,6 +155,14 @@ export function renownOf(bearer, rules) {
   const score = renownScore(bearer);
   let reach = 0;
   for (const d of deeds) reach += (Number(d.weight) || 0) * (1 + (d.spread || []).length);
+  // ⛔ SNG-365 — `presence` IS THE SECOND CONSUMER, and Erik ratified BOTH: bearing in a social roll,
+  // and renown here. ⚠️ AND AEVI WAS EXPLICIT THAT THE WEIGHT GUARD MUST NOT BE INHERITED: "renown is not
+  // merit-signed, so a high-presence villain becomes notorious faster." The multiplier therefore applies to
+  // the reach AS COMPUTED, negative contributions included — a commanding presence spreads an atrocity
+  // exactly as far as it spreads a rescue, which is SNG-281's magnitude-not-merit rule read through the
+  // person rather than the deed.
+  const presenceRate = rateValue(rules?.subAttributeLadder, bearer, "presence");
+  if (presenceRate) reach = reach * (1 + presenceRate / 100);
   const bands = rules?.renownBands || rules?.reputationBands || [];
   let band = "unknown";
   // the BAND is read off REACH, not the raw score: fame is what TRAVELLED, not what was done.

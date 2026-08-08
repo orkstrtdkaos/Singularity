@@ -8,8 +8,14 @@ import { characterPower, threatBand } from "./threat.js"; // CCODE-52: the band 
 /** Determine the character's sense tier for this action.
  *  Attunement grows with level/ability use; matching the local spectrum sharpens the read;
  *  the Strategist aptitude grants +1 tier on planned actions. */
+import { rateValue } from "./ladder.js";   // SNG-365
+
 export function senseTier({ character, action, location, rules, aptitudeMods = {} }) {
   let att = character.attunement || 0;
+  // ⛔ SNG-365 — `insight` SUMS WITH EARNED ATTUNEMENT. Erik ratified the addition rather than a max:
+  // attunement is what practice gave you and insight is what you are, and a character who has both should
+  // read a room better than one with either. A max() would have made the smaller of the two free.
+  att += rateValue(rules?.subAttributeLadder, character, "insight");
   // Reading a place whose energies match your own fingerprint is easier
   if (spectrumAlignment(character.alignment, location?.spectrum) > 0.3) att += 1;
   if (action?.planned && aptitudeMods.senseTierBonus) att += aptitudeMods.senseTierBonus * 3;

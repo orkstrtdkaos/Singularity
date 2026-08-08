@@ -3084,6 +3084,194 @@
    "plainly": "A fight/puzzle action that brings a failing thing — or person — to its end early. Rated 7 of 10 on one target. Limit: it hastens an ending, it does not begin one.",
    "backlash": "The grey turns on the nearest failing thing, which is you: every wound and worn strap you carry comes due at once.",
    "conserveSuppresses": "a small hastening — the grey stays where your hand is"
+  },
+  {
+   "id": "the_kept_vigil",
+   "name": "The Kept Vigil",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_death_life",
+   "attribute": "mental",
+   "axes": {
+    "death_life": -0.5
+   },
+   "functions": [
+    "sustain",
+    "ward"
+   ],
+   "narrationHints": "You hold a thing at the edge it is already standing on. Not healing, not repair — HOLDING. The rope does not part, the wound does not turn, the truce does not break, for exactly as long as you attend it and no longer.",
+   "description": "The Ashwardens' keeping-craft, and the mirror of their hastening one. They tend endings, which means they also know precisely how to postpone one.",
+   "notFor": "Reversing anything (what is ending still ends when you stop); attending two things at once; healing; anything not already at its edge.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Held Edge",
+     "grants": "Hold one failing thing where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve. It does not get worse.",
+     "cannot": "It HOLDS, it does not mend. The moment you stop attending, it resumes exactly where it was. ONE THING, and you can do almost nothing else while you hold it.",
+     "functions": [
+      "sustain",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Watch",
+     "grants": "Hold through a night, or hold something large — a breach, a flooding hull, a fever. Enough time for someone else to arrive with the actual answer.",
+     "cannot": "You are spent afterward in a way sleep does not entirely fix. And you have bought TIME, which is only worth what someone does with it.",
+     "functions": [
+      "sustain",
+      "ward",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unfinished Ending",
+     "grants": "Hold something that should already be over — a person past saving, a structure past standing — for as long as you can bear to.",
+     "cannot": "⚠ THIS IS THE CRAFT ASHWARDENS ARGUE ABOUT. Holding an ending open is not mercy by default; sometimes it is only refusal, and the thing held knows the difference. The Hollow think it obscene.",
+     "functions": [
+      "sustain",
+      "ward",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "sustain",
+   "operativeAxis": [
+    "duration",
+    "magnitude"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 12,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "hold a moment longer",
+    "surge": "hold the unfinished ending; SOMETIMES IT IS ONLY REFUSAL, and the thing held knows"
+   },
+   "bounds": [
+    {
+     "text": "it HOLDS, it does not mend",
+     "class": "hard"
+    },
+    {
+     "text": "ONE THING, and you can do little else",
+     "class": "hard"
+    },
+    {
+     "text": "when you stop, it resumes exactly where it was",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that holds a failing thing at its edge. Rated 5 of 10 on one target for about twelve hours."
+  },
+  {
+   "id": "the_true_account",
+   "name": "The True Account",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_death_life",
+   "attribute": "mental",
+   "axes": {
+    "death_life": -0.4,
+    "falsehood_truth": 0.4
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You read what a thing has left. Not a feeling — a reckoning: what is wearing, how fast, and what it will fail from. Ashwardens are asked to look at bridges as often as at people.",
+   "description": "The Ashwardens' seeing-craft. Everything is ending; the craft is knowing the schedule.",
+   "notFor": "The healthy and new (nothing is wearing yet worth reading); causing anything; being wrong gently — the account is what it is; reading how something will be REPAIRED.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Reckoning",
+     "grants": "Look at a person, structure, or working and know what is failing in it, roughly how long it has, and what it will go from.",
+     "cannot": "It reads DECLINE, not danger — a healthy man about to be murdered reads as healthy. And you must SAY it plainly; an Ashwarden who softens a reckoning has stopped practising.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Ledger of a Place",
+     "grants": "Read a whole site — which beams, which wells, which people. Ashwardens are hired for exactly this and it is unglamorous, essential work.",
+     "cannot": "Knowing does not fix, and a place told its true account frequently blames the one who read it. Prepare for that or do not take the work.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Reckoning",
+     "grants": "Everything ending in reach, ordered by when. Communities have been evacuated on this and communities have refused to be.",
+     "cannot": "⚠ YOU WILL READ PEOPLE YOU LOVE IN THE SAME PASS, and the craft does not let you skip them. This is why Ashwardens are quiet, and it is not temperament.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "ashwarden",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read one thing",
+    "surge": "the whole reckoning; YOU WILL READ PEOPLE YOU LOVE IN THE SAME PASS"
+   },
+   "bounds": [
+    {
+     "text": "reads DECLINE, not danger",
+     "class": "hard"
+    },
+    {
+     "text": "you must SAY it plainly — softening it is not practising",
+     "class": "hard"
+    },
+    {
+     "text": "knowing does not fix",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that reads what a thing has left and what it will fail from. Rated 5 of 10 across a scope of 2 for about four hours."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

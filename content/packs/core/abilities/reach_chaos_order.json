@@ -2053,6 +2053,390 @@
    "plainly": "A fight/puzzle action that places harm where a predictable opponent is going. Rated 7 of 10 on one target. Limit: it requires observation and fails on the unpredictable.",
    "backlash": "You solved the wrong man. Every consequence you placed is now placed where you are going, and they were watching you do it.",
    "conserveSuppresses": "close one line — a misread costs you the line, nothing more"
+  },
+  {
+   "id": "the_loose_thread",
+   "name": "The Loose Thread",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_chaos_order",
+   "attribute": "practical",
+   "axes": {
+    "chaos_order": -0.6
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You look at an arrangement and see where it is NOT nailed down — the assumption nobody checked, the guard who leaves early, the door that only looks locked. Order always leaves a thread.",
+   "description": "The Churnfolk's first craft, and the reason the Lattice hates them. Every system has a place it is only pretending.",
+   "notFor": "Anything genuinely well-made (a sound arrangement returns nothing, and Churnfolk say so cheerfully); pulling the thread — this finds it; reading people; anything not ARRANGED by someone.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Thread Found",
+     "grants": "Look at a plan, a guard rotation, a lock-up, a ritual, a contract, and the craft NAMES ONE LOOSE THING: the specific assumption, gap, habit or shortcut that the whole arrangement is quietly resting on.",
+     "cannot": "It finds ONE and it must EXIST — a genuinely sound arrangement gives nothing, and the craft says nothing rather than inventing. It finds the thread; pulling it is a separate problem entirely.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Several Threads",
+     "grants": "Take a whole arrangement apart in the looking — every loose place, ordered by how much comes away if you pull.",
+     "cannot": "The more you look the more you are seen looking. And knowing four ways in does not give you four ways out.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Fraying Whole",
+     "grants": "A system entire — a fortress's routine, a market's settlement, a house's whole security — read down to where it actually rests.",
+     "cannot": "⚠ YOU CANNOT UN-SEE HOW LITTLE HOLDS ANYTHING TOGETHER. Churnfolk at this rank find it hard to take institutions seriously, which is a social problem and occasionally a fatal one.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "churnfolk",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "find the nearest thread",
+    "surge": "the fraying whole; YOU CANNOT UN-SEE HOW LITTLE HOLDS ANYTHING TOGETHER"
+   },
+   "bounds": [
+    {
+     "text": "finds ONE loose thing, and it must EXIST",
+     "class": "hard"
+    },
+    {
+     "text": "a sound arrangement returns NOTHING",
+     "class": "hard"
+    },
+    {
+     "text": "finds the thread; PULLING it is a separate problem",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that names the one loose assumption an arrangement rests on. Rated 5 of 10 across a scope of 2 for about six hours."
+  },
+  {
+   "id": "the_way_out",
+   "name": "The Way Out",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_chaos_order",
+   "attribute": "practical",
+   "axes": {
+    "chaos_order": -0.5,
+    "space_time": -0.2
+   },
+   "functions": [
+    "move",
+    "reveal",
+    "conceal"
+   ],
+   "narrationHints": "There is always something. A drain, a distraction, a cart going the right way, a man who owes you, a moment when everyone looks left. You do not create it — you FIND it, and it is always there, and Churnfolk will not explain why.",
+   "description": "The Churnfolk's escaping-craft. The Lattice calls it luck; the Churnfolk call it looking.",
+   "notFor": "Guaranteeing anyone else gets out; a way out that is safe or dignified; anywhere genuinely sealed with nothing living in it; using it twice in the same place.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Out Found",
+     "grants": "In any situation with people, movement or clutter in it, the craft NAMES A SPECIFIC EXIT available in the next minute or two — and it is undignified, costs you something, and works.",
+     "cannot": "It needs a place with SOMETHING GOING ON. A sealed empty stone room gives you nothing. ⚠ It gets YOU out; anyone else is your problem and usually your cost. It works ONCE per place — the second time they are watching for it.",
+     "functions": [
+      "move",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Out For Us",
+     "grants": "Find one that a small group can take together, or one that leaves no trail worth following.",
+     "cannot": "The more people, the worse and slower the out. And someone always has to be last.",
+     "functions": [
+      "move",
+      "reveal",
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Impossible Out",
+     "grants": "The one nobody believed existed — off a besieged wall, out of a sealed hold, away from a thing that does not lose people.",
+     "cannot": "⚠ THE PRICE IS NAMED BY THE SITUATION, NOT BY YOU, and at this rank it is real: something is left behind, and the craft does not let you choose what.",
+     "functions": [
+      "move",
+      "reveal",
+      "conceal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "FIGHT"
+   ],
+   "tradition": "churnfolk",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "move",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a small out, cheaply bought",
+    "surge": "the impossible out; THE PRICE IS NAMED BY THE SITUATION, NOT BY YOU"
+   },
+   "bounds": [
+    {
+     "text": "needs a place with SOMETHING GOING ON",
+     "class": "hard"
+    },
+    {
+     "text": "it gets YOU out; others are your cost",
+     "class": "hard"
+    },
+    {
+     "text": "ONCE per place — the second time they watch for it",
+     "class": "hard"
+    },
+    {
+     "text": "it is always undignified",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A puzzle/fight action that names a specific escape available in the next minute. Rated 6 of 10 across a scope of 2."
+  },
+  {
+   "id": "the_ordered_record",
+   "name": "The Ordered Record",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_chaos_order",
+   "attribute": "mental",
+   "axes": {
+    "chaos_order": 0.6
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You hold an order in mind completely and notice, instantly, anything out of it. A name not on the roll, a stone recently moved, a coin in the wrong purse, a man where he should not be.",
+   "description": "The Lattice-Cities' first craft, and the one their whole administration runs on.",
+   "notFor": "Establishing WHY something is out of place; anything you have not first taken the order OF; disordered environments (a market crowd, a battlefield) — there is no order to depart from.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Departure Named",
+     "grants": "Take the order of a thing — a room, a roll, a ledger, a rotation, a shelf — then the craft NAMES WHAT HAS CHANGED, precisely: this entry is new, that item is missing, he was not here yesterday.",
+     "cannot": "YOU MUST TAKE THE ORDER FIRST — this compares against a reading you made, so a place you have never ordered gives nothing. It names the DEPARTURE, never the reason.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Order",
+     "grants": "Hold several orders at once and keep them current — a household, a garrison's rotation, a merchant's stock — and notice departures as they happen rather than on inspection.",
+     "cannot": "Holding orders is constant low attention and Lattice-folk are famously poor company while doing it. An order you took carelessly gives careless answers.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The City's Order",
+     "grants": "A whole institution held: who is where, what moved, which of ten thousand small things is not as it was.",
+     "cannot": "⚠ THIS IS HOW THE INNER RING BEGINS. Perfect record-keeping about people is a short walk from deciding where people belong, and the Grand Lattice will find you and be delighted.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "lattice",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 24,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "order one small thing",
+    "surge": "the city's order; THIS IS HOW THE INNER RING BEGINS"
+   },
+   "bounds": [
+    {
+     "text": "YOU MUST TAKE THE ORDER FIRST",
+     "class": "hard"
+    },
+    {
+     "text": "names the DEPARTURE, never the reason",
+     "class": "hard"
+    },
+    {
+     "text": "a disordered place has no order to depart from",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that names exactly what has changed against an order you took. Rated 5 of 10 across a scope of 2 for about a day."
+  },
+  {
+   "id": "the_working_order",
+   "name": "The Working Order",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_chaos_order",
+   "attribute": "mental",
+   "axes": {
+    "chaos_order": 0.6,
+    "concrete_abstract": -0.2
+   },
+   "functions": [
+    "make",
+    "bind",
+    "empower"
+   ],
+   "narrationHints": "You put an arrangement into a mess and the mess keeps it. Not command — STRUCTURE: who does what, in what sequence, and the sequence holds after you stop watching because everyone can see their place in it.",
+   "description": "The Lattice-Cities' building-craft. Their genuine gift, and the one people forget when they only think about the Inner Ring.",
+   "notFor": "Making anyone WILLING (an unwilling crew works the order badly and stops when you leave); ordering people who cannot see one another; a task with no sequence to it; ordering a fight in progress.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Arrangement Set",
+     "grants": "Take a disordered effort — a bucket-line, a triage, a load-out, a search, a market queue — and set an order that roughly doubles what it accomplishes. It HOLDS after you stop directing it.",
+     "cannot": "They must be WILLING and able to see the shape. It orders WORK, not combat. And an order set on bad information is followed faithfully off a cliff.",
+     "functions": [
+      "make",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Arrangement",
+     "grants": "A rotation, a supply chain, a watch — something that runs for weeks without you and stays true.",
+     "cannot": "It becomes THEIRS, and a standing arrangement resists being changed, including by you. Lattice-folk find this appropriate.",
+     "functions": [
+      "make",
+      "bind",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Ordered Body",
+     "grants": "An institution: a garrison, a guild, a relief effort at scale, running well because of a shape you put in it.",
+     "cannot": "⚠ AN ORDER OUTLIVES ITS REASON. What you build to survive a winter will still be running in ten years, and the people inside it will not remember there was a winter.",
+     "functions": [
+      "make",
+      "bind",
+      "empower",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "lattice",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "make",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 72,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "order one small effort",
+    "surge": "the ordered body; AN ORDER OUTLIVES ITS REASON"
+   },
+   "bounds": [
+    {
+     "text": "they must be WILLING and able to see the shape",
+     "class": "hard"
+    },
+    {
+     "text": "orders WORK, not combat",
+     "class": "hard"
+    },
+    {
+     "text": "an order set on bad information is followed faithfully off a cliff",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/puzzle action that structures a disordered effort so it holds without you. Rated 6 of 10 across a scope of 3 for about three days."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

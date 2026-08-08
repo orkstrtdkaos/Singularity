@@ -3717,7 +3717,22 @@ await (async () => {
 
   // raw-source: the GM contract + schema + OOC routing shipped
   const gmSrc = readFileSync(join(root, "engine/gm.js"), "utf8");
-  check("SNG-143: the npcUpdates op captures gender + pronouns, and rule 14 records them on meet", /"npcUpdates":[\s\S]{0,400}"gender":[\s\S]{0,200}"pronouns":/.test(gmSrc) && /RECORD their "gender"\/"pronouns"/.test(gmSrc));
+  // ⛔ THIS WENT RED ON AEVI'S SNG-379 AND NOTHING WAS BROKEN — the opposite, the rule got STRONGER. She
+  // split contract 14, and gender now has its own imperative in 14B ("on 'meet', gender/pronouns ARE
+  // REQUIRED"). The gate was pinned to her old sentence, `RECORD their "gender"/"pronouns"`, so improving
+  // the contract failed the test that exists to protect it. ⚠️ A GATE MUST NOT PIN AN AUTHOR'S PROSE: the
+  // truth is that the SCHEMA carries both fields and the CONTRACT demands them on meet, and neither of
+  // those is a wording. Matched on the field names and on the two words that carry the obligation.
+  check("SNG-143: the npcUpdates op captures gender + pronouns, and the contract demands them on meet", (() => {
+    const at = gmSrc.indexOf('"npcUpdates":');
+    if (at < 0) return false;
+    const schema = gmSrc.slice(at, gmSrc.indexOf("]", at) + 1);
+    const schemaHasBoth = /"gender":/.test(schema) && /"pronouns":/.test(schema);
+    // The obligation, wherever it lives and however it is phrased: "meet" + gender + a MUST-flavoured word.
+    const demandsIt = gmSrc.split(/(?=\d+[A-Z]?\. )/).some(rule =>
+      /\bmeet\b/.test(rule) && /gender/i.test(rule) && /\b(MUST|REQUIRED)\b/.test(rule));
+    return schemaHasBoth && demandsIt;
+  })());
   check("SNG-143: correctNpcGender is in the stateOps repair vocabulary", /correctNpcGender \(a known person shown as the wrong sex\/gender/.test(gmSrc));
   check("SNG-143 (P2): the OOC channel routes an item EVOLUTION to in-play itemUpdates, not the sheet editor", /DISTINGUISH A CREATION-REPAIR FROM AN ITEM GROWING IN PLAY/.test(gmSrc) && /Route the second to play, never to the editor/.test(gmSrc) && /DO NOT send them to the Repair panel/.test(gmSrc));
   const schema143 = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
@@ -6643,7 +6658,17 @@ await (async () => {
 
   // §3.6 — the GM knows the school, not just the tradition.
   const gmDetail = sb.schoolsDetailForGM({ domains: { primary: "cogitant" }, schools: { cogitant: "cog_instrumented" } }, schools);
-  check("193b §3.6: the GM school block names the current school + its best-ground", /Instrumented/.test(gmDetail) && /DENSE/.test(gmDetail));
+  const sb193Cur = (schools.traditionSchools.cogitant.schools || []).find(s => s.id === "cog_instrumented");
+  // ⛔ THIS PINNED A CONTENT VALUE AND WENT RED ON SNG-378. It asserted the literal word "DENSE", which came
+  // from `bestGround` — a field Aevi's source rebase REPLACED with `extension`. Not one school of the 74
+  // carries a ground any more. The gate named a value; the invariant is that the block tells the GM WHICH
+  // school and WHAT IT REACHES WITH, and neither of those is a particular word.
+  // ⚠️ The ground line itself is now measured by the `schoolsWithNoGroundLine` ratchet instead — 44 of 74
+  // schools currently degrade to "its own ground", which is a content gap and is counted as one.
+  check("193b §3.6: the GM school block names the current school and what it reaches WITH",
+    new RegExp(sb193Cur.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(gmDetail)
+    && gmDetail.includes(sb193Cur.id)
+    && (sb193Cur.extension ? gmDetail.includes(sb193Cur.extension) : /pure/.test(gmDetail)));
   check("193b §3.6: it lists sibling schools as adoptSchool targets", /cog_unaided|cog_reaching/.test(gmDetail));
   check("193b §3.6: schoolsDetail is a registered GM key + a rendered block", /key: "schoolsDetail"/.test(regSrc193) && /THE CHARACTER'S SCHOOLS/.test(gmSrc193));
 

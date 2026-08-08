@@ -570,7 +570,33 @@ if (process.env.SHOW_UNREAD_RULE_CONSTANTS === "1") {
   console.log(`note  ${unreadRuleConstants.length} unread resolution.json constant(s):\n      ${unreadRuleConstants.join("\n      ")}`);
 }
 
+// ⛔ SNG-380 — A READER THAT SPEAKS THE RETIRED VOCABULARY. `schoolsDetailForGM` maps a school's
+// `extension` to the ground it favours through a hard-coded chain in substrate.js — material, inherent,
+// lattice, wild, natural — and SNG-378 rebased every school onto the ratified source list: metaphysical,
+// precursor, body, nanite, veil, wild. Only `wild` and `pure` survive the change, so the rest fall through
+// to the default string "its own ground", which tells the narrator NOTHING.
+//
+// ⚠️ THIS IS THE ANSWER TO AEVI'S OWN WORK-ORDER ITEM — "check extension has a consumer FIRST".
+// The consumer EXISTS. It simply no longer understands 5 of the 7 values she authors. That is a harder
+// defect to see than a missing consumer, because every gate stays green and the line still renders.
+//
+// ⚠️ A RATCHET, NOT A HARD GATE, AND DELIBERATELY SO: the ground a source favours is AUTHORED
+// content — a statement about how the world works — and inventing five of them to turn a light green
+// would be me writing canon. It counts, it may only go DOWN, and the numbers are hers to close.
+const schoolGround = (() => {
+  const understood = new Set([null, "", "material", "inherent", "lattice", "wild", "natural"]);
+  const sub = read("engine/substrate.js");
+  // Read the vocabulary the CODE understands out of the code itself, so this cannot drift from what it maps.
+  const chain = sub.slice(sub.indexOf("const ground = ext =>"), sub.indexOf("const lines = []"));
+  for (const m of chain.matchAll(/ext === "([a-z_]+)"/g)) understood.add(m[1]);
+  let schools = null;
+  try { schools = JSON.parse(read("content/packs/core/rules/schools.json")); } catch { return { unmapped: [], total: 0 }; }
+  const all = Object.entries(schools.traditionSchools || {}).flatMap(([tid, t]) => (t.schools || []).map(x => ({ tid, ...x })));
+  return { unmapped: all.filter(x => !understood.has(x.extension)), total: all.length };
+})();
+
 const measured = {
+  schoolsWithNoGroundLine: schoolGround.unmapped.length,
   testOnlyExports: testOnlyExports.length,
   abilitiesMissingHarmRung: missingHarm.length,
   abilitiesInvalidHarmRung: badHarm.length,
@@ -593,7 +619,9 @@ if (process.env.UPDATE_WIRING_BASELINE === "1" || !existsSync(baselinePath)) {
 }
 const baseline = JSON.parse(readFileSync(baselinePath, "utf8"));
 for (const [k, v] of Object.entries(measured)) {
-  const why = k === "abilitiesCombatClaimedNotTaught"
+  const why = k === "schoolsWithNoGroundLine"
+    ? `a school whose \`extension\` the substrate reader does not understand, so the GM is told "its own ground" — which says nothing. ${schoolGround.unmapped.length} of ${schoolGround.total} schools, by source: ${Object.entries(schoolGround.unmapped.reduce((a, x) => (a[x.extension] = (a[x.extension] || 0) + 1, a), {})).sort((a, b) => b[1] - a[1]).map(([k2, v2]) => `${v2} ${k2}`).join(", ")}`
+    : k === "abilitiesCombatClaimedNotTaught"
     ? `regressed — a new ability claims combat its grants never teach (147c rule: if it can fight, a rank grants says HOW)`
     : k === "rawProseCaps"
       ? `a new fixed-length cap on model prose — use smartClamp, or mark the line // prose-cap-ok if it is genuinely an identifier:\n      ${rawProseCaps.slice(0, 6).join(", ")}`

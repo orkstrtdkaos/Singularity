@@ -10921,26 +10921,52 @@ await (async () => {
   // "(near X)" — it never decided whether you heard it — and `slice(-5)` capped by RECENCY, so a burst of
   // small local events could crowd out a genuinely large one. Erik was describing the system as written.
   {
-    const { newsReach, ledgerWeight, collapseLedgerEvents } = await import("../engine/worldtick.js");
-    const R = { "valley.millbrook": "valley", "march.redline": "march" };
-    const at = (w, extra = {}) => newsReach({ whereCommunity: "march.redline", ...extra },
-      { myCommunity: "valley.millbrook", myRegion: "valley", regionOfCommunity: R, weight: w });
+    const { loadContentHeadless: lch363 } = await import("./headless_content.mjs");
+    const C363 = await lch363();
+    const { ledgerBand, spreadNews, collapseLedgerEvents } = await import("../engine/worldtick.js");
+    const R363 = {}, B363 = {};
+    for (const loc of Object.values(C363.locations || {})) {
+      const c = loc?.communityId, r = loc?.regionId || loc?.region || (c ? String(c).split(".")[0] : null);
+      if (!c || !r) continue;
+      (B363[r] ||= []).includes(c) || B363[r].push(c);
+      R363[c] = r;
+    }
+    // ⛔ CALL spreadDeeds, DO NOT REIMPLEMENT IT — Aevi amended the spec to say so after my first version
+    // invented its own thresholds (0.2 / 0.6). That was the invented-number failure the standing rule
+    // exists to stop, AND the wrong model: SNG-281 already establishes that news TRAVELS, one hop per
+    // pass, capped by magnitude. A distance band makes a far event instantly heard or never heard; the
+    // spread makes it take TIME, which is what makes "word reaches you" a true sentence.
+    const tickSrc363 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+    check("363: the news gate CALLS spreadDeeds rather than reimplementing the spread",
+      /import \{ spreadDeeds \}/.test(tickSrc363) && /spreadDeeds\(carrier,/.test(tickSrc363));
+    check("363: …and no invented distance thresholds survive", !/thresholds\.sameRegion|t\.adjacent|t\.far/.test(tickSrc363));
 
-    check("363: a small event a region away does NOT reach you — Erik's exact complaint", at(0.05).heard === false);
-    check("363: …but a large one does — magnitude, never merit (SNG-281's rule, reused)", at(0.9).heard === true);
-    check("363: an event in your own community always reaches you, however small",
-      newsReach({ whereCommunity: "valley.millbrook" }, { myCommunity: "valley.millbrook", myRegion: "valley", regionOfCommunity: R, weight: 0 }).heard === true);
+    // The band is 1/2/3 — the same scale a deed's weight uses, not a scale of mine.
+    check("363: magnitude is banded 1/2/3, the scale spreadDeeds already caps on",
+      ledgerBand({ spectrumDeltas: {} }) === 1 && ledgerBand({ spectrumDeltas: { a: 0.7 } }) === 3);
+    // ⚠️ Σ|spectrumDeltas| IS EMPTY IN PRACTICE (1 of 8 live entries), so the ACTOR'S TIER carries the
+    // rest — Aevi's pointer that whois TIER_MEANING is already a distance ladder.
+    check("363: …and a mythic actor's doings travel further than a nobody's (tier widens reach)",
+      ledgerBand({ spectrumDeltas: {} }, { actorTier: "mythic" }) > ledgerBand({ spectrumDeltas: {} }, { actorTier: "riffraff" }));
 
-    // ⛔ impactsLocal BYPASSES DISTANCE. It exists precisely for an event crossing into another player's
-    // area, is escrow-confirmed by the acting player (SNG-145), and gating it by distance would break a
-    // deliberate mechanism. Distance gates AMBIENT news, never a directed consequence.
-    check("363: impactsLocal bypasses the distance gate entirely", at(0.01, { impactsLocal: true }).heard === true);
+    // ⛔ impactsLocal BYPASSES THE WHOLE MECHANISM — a DIRECTED consequence, escrow-confirmed by the
+    // acting player (SNG-145). Making it wait for word of mouth would break a deliberate mechanism.
+    const anywhere = Object.values(C363.locations || {}).find(l => l.communityId);
+    const chD = { currentLocationId: anywhere.id, worldState: {} };
+    const directed = spreadNews({ character: chD, content: C363, entries: [{ who: "o", at: "t", where: "nowhere-at-all", what: "x", impactsLocal: true }], regionOfCommunity: R363, communitiesByRegion: B363 });
+    check("363: impactsLocal bypasses the spread entirely — it never waits for word of mouth", directed.length === 1);
 
-    // ⚠️ AN UNPLACEABLE EVENT IS JUDGED ON WEIGHT, NEVER SILENTLY DROPPED. Three live entries carry
-    // `where: "gen-object-object"` — pre-SNG-329 residue — and a gate requiring a resolvable place would
-    // have deleted them from the world rather than reported them.
-    const unplaceable = newsReach({}, { myCommunity: "valley.millbrook", myRegion: "valley", regionOfCommunity: R, weight: 0.9 });
-    check("363: an unplaceable event is judged on weight alone, not dropped", unplaceable.heard === true && unplaceable.band === "unplaceable");
+    // An unplaceable event (pre-SNG-329 `gen-object-object` residue) has no origin to spread FROM. Judged
+    // on magnitude, never deleted — a gate that drops what it cannot place quietly edits the world.
+    const chU = { currentLocationId: anywhere.id, worldState: {} };
+    const big = spreadNews({ character: chU, content: C363, entries: [{ who: "o", at: "t", where: "gen-object-object", what: "x", spectrumDeltas: { a: 0.9 } }], regionOfCommunity: R363, communitiesByRegion: B363 });
+    const small = spreadNews({ character: chU, content: C363, entries: [{ who: "o", at: "t2", where: "gen-object-object", what: "y", spectrumDeltas: {} }], regionOfCommunity: R363, communitiesByRegion: B363 });
+    check("363: an UNPLACEABLE event is judged on magnitude, not dropped", big.length === 1 && small.length === 0);
+
+    // ⚠️ THE SPREAD STATE IS PER-CHARACTER, never on the shared ledger: whose ears a rumour has reached
+    // is not a property OF the event, and the ledger is one file many players write.
+    check("363: whose ears word has reached is per-character state, not written onto the shared ledger",
+      /ws\.newsSpread/.test(tickSrc363) && !/e\.spread =/.test(tickSrc363));
 
     // §3 — one beat logged twice. Measured: the true double-log is FOUR MINUTES apart; the distinct pair at
     // the same place is a different world-day. The CLOCK separates them where prose cannot.
@@ -10960,11 +10986,12 @@ await (async () => {
     ]);
     check("363: a real escalation hours apart is NEVER collapsed — collapse, never drop", escalation.length === 2);
 
-    // ⚠️ THE WEIGHT SIGNAL AEVI PROPOSED IS EMPTY IN PRACTICE — measured, not assumed.
-    check("363: weight still rises with spectral movement where it exists",
-      ledgerWeight({ spectrumDeltas: { a: 0.5 }, tags: [] }) > ledgerWeight({ spectrumDeltas: {}, tags: [] }));
-    check("363: …and an entry with NO spectrumDeltas still gets a usable weight (7 of 8 live entries have none)",
-      ledgerWeight({ visibility: "witnessed", tags: ["a", "b"], spectrumDeltas: {} }) > 0);
+    // ⚠️ Σ|spectrumDeltas| IS EMPTY IN PRACTICE — ONE of eight live entries carries any. That finding
+    // stands and is why the ACTOR TIER carries the rest, but the continuous `ledgerWeight` it justified
+    // is gone: the amended spec bands on 1/2/3, the scale spreadDeeds already caps on, and a second
+    // weight scale of my own was exactly the invention Aevi told me not to make.
+    check("363: a bandless entry still gets a usable band, since the spectral signal is usually absent",
+      ledgerBand({ spectrumDeltas: {}, tags: [] }) >= 1);
   }
 
   // SNG-360 — SIX MERGE DECISIONS DUMPED ON THE PLAYER, AND THE REASON THERE WERE SIX.

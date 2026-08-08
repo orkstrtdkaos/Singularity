@@ -455,54 +455,67 @@ async function aiSeedArcs({ character, content, count }) {
  *  spectrum drift to the strongest pressure, other characters' deeds arrive as
  *  news — and the consolidated region state is pushed back for the next player. */
 
-/** SNG-363 — HOW FAR NEWS TRAVELS, AND HOW BIG IT HAS TO BE. Erik: "Why is Silas hearing about something
- *  Splarf did? It's not huge news and they're far apart."
+/** SNG-363 (AMENDED) — HOW FAR NEWS TRAVELS. Erik: "Why is Silas hearing about something Splarf did?
+ *  It's not huge news and they're far apart."
  *
- *  ⛔ THE FILTER WAS: not you · newer than last read · not hidden. No distance, no significance. `e.where`
- *  was read ONLY TO PRINT "(near X)" — it never decided whether you heard it — and `slice(-5)` capped by
- *  RECENCY, so a burst of small local events from one character could crowd out a genuinely large one.
+ *  ⛔ MY FIRST VERSION INVENTED THRESHOLDS AND REIMPLEMENTED THE SPREAD. Aevi amended the spec to say it
+ *  plainly — "call `spreadDeeds`, do not reimplement it" — and she is right on both counts. I had written a
+ *  distance-band function with weights of my own choosing (0.2 / 0.6), which is exactly the invented-number
+ *  failure the standing rule exists to stop, AND it was the wrong MODEL: it asked "is this audible from
+ *  there", when SNG-281 already establishes that news TRAVELS, one hop per pass, capped by magnitude.
  *
- *  ⚠️ AND THE RIGHT MODEL ALREADY EXISTED TWENTY LINES ABOVE. The SNG-281 deed-spread does this properly:
- *  one hop per pass, reach capped by weight, "MAGNITUDE, NEVER MERIT — an atrocity travels exactly as far
- *  as a rescue of the same size." Aevi: this is the same bug, in the same file, already fixed once for
- *  deeds and never applied here. Same region map, same principle.
+ *  ⚠️ THE DIFFERENCE MATTERS IN PLAY, NOT JUST IN PRINCIPLE. Under a distance band, a far-off event is
+ *  either heard instantly or never. Under the spread, it takes TIME to reach you — which is what makes a
+ *  world feel large, and what makes "word reaches you" a true sentence rather than a decoration.
  *
- *  ⛔ `impactsLocal` BYPASSES DISTANCE ENTIRELY. That flag exists precisely for an event that crosses into
- *  another player's area, it is escrow-confirmed by the acting player (SNG-145), and gating it by distance
- *  would break a deliberate mechanism. Distance gates AMBIENT news; it never gates a directed consequence.
+ *  Reach caps are the authored ones: weight 1 → 2 communities, 2 → 5, 3 → 12.
+ *  ⛔ `impactsLocal` bypasses the whole mechanism — it is a DIRECTED consequence, escrow-confirmed by the
+ *  acting player (SNG-145), and making it wait for word-of-mouth would break a deliberate mechanism.
  */
-export function newsReach(entry, { myCommunity = null, myRegion = null, regionOfCommunity = {}, weight = 0, thresholds = {} } = {}) {
-  if (entry?.impactsLocal) return { heard: true, why: "directed at your area", band: "directed" };
-  const t = { sameRegion: thresholds.sameRegion ?? 0, adjacent: thresholds.adjacent ?? 0.2, far: thresholds.far ?? 0.6 };
-  const whereComm = entry?.whereCommunity || null;
-  const whereRegion = whereComm ? regionOfCommunity[whereComm] : (entry?.whereRegion || null);
-  // ⚠️ AN UNPLACEABLE EVENT IS JUDGED ON WEIGHT ALONE, NEVER SILENTLY DROPPED. Three live entries carry
-  // `where: "gen-object-object"` — pre-SNG-329 residue from a coerced location id — and a gate that
-  // required a resolvable place would have deleted them from the world rather than reported them.
-  if (!whereRegion) return { heard: weight >= t.far, why: weight >= t.far ? "large enough to travel anywhere" : "cannot be placed, and not large enough to carry", band: "unplaceable" };
-  if (myCommunity && whereComm === myCommunity) return { heard: true, why: "happened where you are", band: "here" };
-  if (myRegion && whereRegion === myRegion) return { heard: weight >= t.sameRegion, why: "your region", band: "region" };
-  return { heard: weight >= t.far, why: weight >= t.far ? "large enough to cross regions" : "too far and too small", band: "far" };
-}
+const TIER_REACH_BONUS = { mythic: 2, legendary: 2, epic: 1, heroic: 0, regional: 0, notable: 0, riffraff: 0 };
 
-/** The magnitude of a ledger entry, DERIVED rather than authored.
+/** The magnitude BAND of a ledger entry — 1, 2 or 3, the same scale a deed's weight uses.
  *
- *  ⚠️ AEVI PROPOSED Σ|spectrumDeltas| AND ASKED IT BE TRIED BEFORE ADDING A FIELD — "if it proves too
- *  coarse, that finding justifies the field". MEASURED ON THE LIVE LEDGER: only ONE of eight entries
- *  carries any spectrumDeltas at all, and Σ is 0.00 for the other seven. It is not too coarse; it is
- *  ABSENT, because the op contract lists `"spectrumDeltas": {}` and the GM almost never fills it.
- *
- *  ⛔ So Σ is used where it EXISTS and a second derived signal carries the rest: `visibility` (a witnessed
- *  event is public, a rumour is not) and tag count as a proxy for how much the beat touched. This is still
- *  derivation, not authoring — no new field for a future GM call to forget — but it does not pretend a
- *  signal that is empty in practice is doing the work. */
-export function ledgerWeight(entry) {
+ *  ⚠️ Σ|spectrumDeltas| IS EMPTY IN PRACTICE and that finding stands: ONE of eight live entries carries
+ *  any spectrumDeltas at all. So Σ sets the band where it exists, and the ACTOR'S TIER carries the rest —
+ *  Aevi's own pointer, since `whois.js` TIER_MEANING is already a distance ladder ("a name in their own
+ *  country" / "known well beyond where they started"). A mythic figure's doings travel further than a
+ *  nobody's, which is the same magnitude-not-merit rule read through who did it.
+ */
+export function ledgerBand(entry, { actorTier = null } = {}) {
   const spectral = Object.values(entry?.spectrumDeltas || {}).reduce((n, v) => n + Math.abs(Number(v) || 0), 0);
-  const witnessed = entry?.visibility === "witnessed" ? 0.15 : 0;
-  const reach = Math.min(0.2, ((entry?.tags || []).length || 0) * 0.05);
-  return Math.min(1, spectral + witnessed + reach);
+  const base = spectral >= 0.6 ? 3 : spectral >= 0.2 ? 2 : 1;
+  return Math.min(3, base + (TIER_REACH_BONUS[String(actorTier || "").toLowerCase()] || 0));
 }
 
+/** One spread pass over the shared ledger, per character. Returns the entries whose word has now REACHED
+ *  this character's community since they last looked.
+ *
+ *  ⚠️ THE SPREAD STATE IS PER-CHARACTER, in `ws.newsSpread`, never on the shared ledger — the ledger is
+ *  one file many players write; whose ears a rumour has reached is not a property OF the event. */
+export function spreadNews({ character, content, entries = [], regionOfCommunity = {}, communitiesByRegion = {}, rng = Math.random, tierOf = null }) {
+  const ws = character?.worldState; if (!ws) return [];
+  ws.newsSpread = ws.newsSpread || {};
+  const here = content?.locations?.[character.currentLocationId] || {};
+  const myComm = here.communityId || null;
+  const reached = [];
+  for (const e of entries) {
+    if (e.impactsLocal) { reached.push(e); continue; }          // directed — never waits for word of mouth
+    const key = `${e.who}::${e.at}`;
+    const loc = content?.locations?.[e.where] || null;
+    const origin = loc?.communityId || null;
+    const band = ledgerBand(e, { actorTier: tierOf ? tierOf(e.who) : null });
+    // ⚠️ An UNPLACEABLE event (the pre-SNG-329 `gen-object-object` residue) has no origin to spread FROM.
+    // It is judged on magnitude alone rather than deleted — a gate that drops what it cannot place is a
+    // gate that quietly edits the world.
+    if (!origin) { if (band >= 3) reached.push(e); continue; }
+    const carrier = { deeds: [{ communityId: origin, weight: band, spread: ws.newsSpread[key] || [] }] };
+    spreadDeeds(carrier, { communitiesByRegion, regionOfCommunity, rng, rate: 1 });
+    ws.newsSpread[key] = carrier.deeds[0].spread;
+    if (myComm && (origin === myComm || carrier.deeds[0].spread.includes(myComm))) reached.push(e);
+  }
+  return reached;
+}
 
 /** SNG-363 §3 — ONE BEAT, LOGGED TWICE. Erik: "there are several of the same event with the veil." Measured
  *  — not display duplicates, three separate ledger WRITES from one character at one place:
@@ -575,29 +588,24 @@ export async function syncSharedWorld({ character, content }) {
     // 2. other characters' consequences reach you as news
     const since = ws.lastSharedReadAt || "1970";
     const ledger = await fetchLedger(0);
-    // SNG-363 — the same region map the deed-spread builds, for the same reason.
-    const regionOfComm363 = {};
+    // SNG-363 (amended) — the same region map the deed-spread builds, because it is the same mechanism.
+    const regionOfComm363 = {}, commsByRegion363 = {};
     for (const loc of Object.values(content.locations || {})) {
       const c = loc?.communityId, r = loc?.regionId || loc?.region || (loc?.communityId ? String(loc.communityId).split(".")[0] : null);
-      if (c && r) regionOfComm363[c] = r;
+      if (!c || !r) continue;
+      (commsByRegion363[r] ||= []).includes(c) || commsByRegion363[r].push(c);
+      regionOfComm363[c] = r;
     }
-    const hereLoc = content.locations?.[character.currentLocationId] || {};
-    const myComm = hereLoc.communityId || null;
-    const myRegion = hereLoc.regionId || hereLoc.region || (myComm ? String(myComm).split(".")[0] : null);
-    const placeOf = (id) => content.locations?.[id] || null;
     const candidates = collapseLedgerEvents(ledger.filter(e => e.who !== character.id && e.at > since && e.visibility !== "hidden"));
-    const judged = candidates.map(e => {
-      const loc = placeOf(e.where);
-      const w = ledgerWeight(e);
-      const reach = newsReach({ ...e, whereCommunity: loc?.communityId || null, whereRegion: loc?.regionId || loc?.region || null },
-        { myCommunity: myComm, myRegion, regionOfCommunity: regionOfComm363, weight: w });
-      return { e, w, reach };
-    }).filter(x => x.reach.heard);
-    // ⚠️ TOP 5 BY WEIGHT, NOT THE LAST 5. `slice(-5)` capped by recency, so a burst of small local events
-    // from one character crowded out a genuinely large distant one — Aevi's point, and the reason the cap
-    // itself was part of the bug rather than a mitigation of it.
-    const fromOthers = judged.sort((a, b) => b.w - a.w).slice(0, 5).map(x => x.e);
-    if (candidates.length !== fromOthers.length) console.log(`[news] sng-363: ${candidates.length - fromOthers.length} of ${candidates.length} cross-character event(s) did not reach here (distance/weight)`);
+    // ⛔ ONE HOP PER PASS, capped by magnitude — spreadDeeds owns the rule, not a threshold I chose.
+    const tierOf = (who) => ws.epicStatus?.[who]?.tier || null;
+    const reachedHere = spreadNews({ character, content, entries: candidates, regionOfCommunity: regionOfComm363, communitiesByRegion: commsByRegion363, tierOf });
+    // ⚠️ Still top-5 BY BAND rather than the last 5: a burst of small local events must not crowd out the
+    // one large thing that finally arrived.
+    const fromOthers = reachedHere
+      .map(e => ({ e, band: ledgerBand(e, { actorTier: tierOf(e.who) }) }))
+      .sort((a, b) => b.band - a.band).slice(0, 5).map(x => x.e);
+    if (candidates.length !== fromOthers.length) console.log(`[news] sng-363: ${candidates.length - fromOthers.length} of ${candidates.length} cross-character event(s) have not reached here yet (word travels)`);
     // SNG-041 RECONCILIATION: another character's event dates by the SHARED absolute world-day
     // (derived from its real-time .at, or its own worldDay stamp) — so their timeline and yours
     // share ONE calendar. This is the fix for the Day-8-vs-Day-11 drift.

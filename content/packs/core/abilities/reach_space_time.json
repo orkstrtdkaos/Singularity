@@ -2684,6 +2684,195 @@
     }
    ],
    "plainly": "A puzzle/social action that gives something more duration, paid out of your own life. Rated 6 of 10 on one target for about a day."
+  },
+  {
+   "id": "the_known_way",
+   "name": "The Known Way",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_space_time",
+   "attribute": "practical",
+   "axes": {
+    "space_time": -0.6
+   },
+   "functions": [
+    "travel",
+    "reveal"
+   ],
+   "narrationHints": "You know the road you have never walked. Not a map — a WAY: which fork, which ford, where the going is bad, and how long it truly takes rather than how long they told you.",
+   "description": "The Horizon-Walkers' first craft. The March's roads are held by people who have never been lost.",
+   "notFor": "Knowing what is ON the road (bandits, weather, a bridge down since yesterday); anywhere with no way through; anywhere indoors; shortcuts that do not exist.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Way Known",
+     "grants": "Name a destination and the craft GIVES YOU THE ROUTE: the forks, the fords, where footing fails, the true travel time, and whether it is passable at all for what you are carrying.",
+     "cannot": "It reads the GROUND, not the traffic — it will not tell you the bridge fell yesterday or who is waiting at the ford. And if there is genuinely no way through, it says so, which people dislike.",
+     "functions": [
+      "travel",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Better Way",
+     "grants": "Compare several, or find the way that suits what you have — the route a cart can take, the one that avoids a valley, the one a wounded party can survive.",
+     "cannot": "It optimises for what you NAME. Ask for fast and get fast; the craft will not warn you that fast was the wrong ask.",
+     "functions": [
+      "travel",
+      "reveal",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Country",
+     "grants": "A region's ways entire — every route between everywhere, and which of them a season or a flood has just closed.",
+     "cannot": "⚠ YOU NOW KNOW THE WAYS INTO PLACES YOU CARE ABOUT, and so does anyone who can make you say them. Horizon-Walkers are taken for this and the March knows it.",
+     "functions": [
+      "travel",
+      "reveal",
+      "move"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "horizon",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "travel",
+   "operativeAxis": [
+    "scope",
+    "precision"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 12,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "read the near route",
+    "surge": "the whole country; YOU NOW KNOW THE WAYS INTO PLACES YOU CARE ABOUT"
+   },
+   "bounds": [
+    {
+     "text": "reads GROUND, not traffic — not the fallen bridge, not who waits",
+     "class": "hard"
+    },
+    {
+     "text": "it optimises for what you NAME",
+     "class": "soft"
+    },
+    {
+     "text": "if there is no way through, it says so",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that gives you a route you have never walked, with true travel time. Rated 5 of 10 across a scope of 3 for about twelve hours."
+  },
+  {
+   "id": "the_shortened_road",
+   "name": "The Shortened Road",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_space_time",
+   "attribute": "physical",
+   "axes": {
+    "space_time": -0.6
+   },
+   "functions": [
+    "travel",
+    "move",
+    "sustain"
+   ],
+   "narrationHints": "The distance is what it is; you simply spend less of yourselves crossing it. Ground goes under faster than legs explain, and everyone arrives with something left.",
+   "description": "The Horizon-Walkers' carrying-craft. Not folding space — spending it more cheaply.",
+   "notFor": "Instant arrival (this is TRAVEL, not translocation); crossing what has no way across; carrying anyone who will not keep up; using it to flee something faster than you.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Ground Given",
+     "grants": "A journey takes roughly HALF the time and costs the party far less — you arrive rested where you would have arrived spent. Works for you and those walking with you.",
+     "cannot": "It shortens the CROSSING, never the distance — you still pass everything in between, including whoever is on the road. Everyone must keep pace; a straggler ends it for themselves.",
+     "functions": [
+      "travel",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long March",
+     "grants": "Hold it across days, or across a larger company — a caravan, a relief column, a household moving.",
+     "cannot": "Sustained, the cost lands on you rather than them, and it lands afterward. Horizon-Walkers arrive with the party and then sleep for a day.",
+     "functions": [
+      "travel",
+      "move",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Road Made Short",
+     "grants": "A journey that could not be made in time, made in time. Relief arrives before the fall; word arrives before the decision.",
+     "cannot": "⚠ YOU ARE THE ROAD AND YOU ARE SPENT WHEN IT ENDS. Arrive at the crisis you crossed a country for, and you will be the least capable person there. The Unlanded solved this by never arriving.",
+     "functions": [
+      "travel",
+      "move",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "horizon",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "travel",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 48,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "shorten a short leg",
+    "surge": "the road made short; YOU ARE SPENT WHEN IT ENDS and will be the least capable person there"
+   },
+   "bounds": [
+    {
+     "text": "shortens the CROSSING, never the distance — you pass everything between",
+     "class": "hard"
+    },
+    {
+     "text": "everyone must KEEP PACE",
+     "class": "hard"
+    },
+    {
+     "text": "the cost lands on the wielder, afterward",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle/social action that halves a journey's time and cost for the whole party. Rated 6 of 10 across a scope of 3 for about two days."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

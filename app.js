@@ -89,7 +89,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.75";
+const APP_VERSION = "1.9.76";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -274,7 +274,7 @@ function showWhoIs(known) {
       // appearance if one exists, the figure's PEOPLE if not (SNG-367's layer, which reached the NPC path
       // and not this one), and the role as what they DO rather than as what they look like.
       const aesW = known.tradition ? (CONTENT.traditionVisualAesthetics?.[known.tradition] || null) : null;
-      const url = ensureImage({ id: `whois-${seed}`, name: known.label, role: known.role || "", appearance: known.appearance || "" },
+      const url = ensureImage({ id: `whois-${seed}`, name: known.label, role: known.role || "", appearance: known.appearance || "", gender: known.gender || undefined },
         "npc", { ratingLevel: viewerRatingLevel(), seedKey: `whois-${seed}`, isMinor: false, promptOpts: { aesthetic: aesW } });
       if (url) whoPortrait = `<img class="whois-portrait" src="${esc(url)}" alt="${esc(known.label)}" loading="lazy" style="width:100%; max-height:240px; object-fit:cover; border-radius:6px; margin-bottom:8px">`;
     }

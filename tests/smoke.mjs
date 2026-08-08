@@ -10935,12 +10935,34 @@ await (async () => {
     // the NPC path and left this one.
     const whoisSrc = readFileSync(join(root, "engine/whois.js"), "utf8");
     check("367b: whoIs hands the portrait a BODY and a PEOPLE, not the tier line",
-      /tradition: fig\.tradition/.test(whoisSrc) && /appearance: fig\.appearance/.test(whoisSrc));
+      // ⚠️ ASSERTS THE REQUIREMENT, NOT THE EXPRESSION. This pinned `appearance: fig.appearance`, and
+      // 367c legitimately improved the chain to prefer the AUTHORED imagePrompt. What must hold is that a
+      // body and a people reach the portrait — not the order of a fallback.
+      /tradition: fig\.tradition/.test(whoisSrc) && /appearance: fig\./.test(whoisSrc));
     check("367b: …and the card no longer seeds the image from lines[0]",
       !/appearance: known\.lines\?\.\[0\]/.test(appSrc367));
     // ⚠️ AND THE AESTHETIC MUST RIDE INSIDE promptOpts — my first fix passed it as a top-level option, where
     // assembleImagePrompt never sees it. A parameter in the wrong bag is indistinguishable from no
     // parameter at all, and the card would have looked fixed while rendering exactly as before.
+    // ⛔ SNG-367c — ALL 70 AUTHORED FIGURES CARRY AN `imagePrompt` WRITTEN FOR EXACTLY THIS, and the card
+    // read none of them. "A rootkin standing exactly on the treeline where thick green meets open ground,
+    // looking neither way. Dappled light, a carved staff, a decision refused for years." That is a
+    // portrait. The tier line it was using is a sentence about fame.
+    const { loadContentHeadless: lch367c } = await import("./headless_content.mjs");
+    const C367c = await lch367c();
+    const roster367 = C367c.legends?.roster || [];
+    check("367c: every authored world figure carries an imagePrompt — the portrait was always there",
+      roster367.length > 0 && roster367.every(f => f.imagePrompt));
+    check("367c: …and whoIs now hands it to the portrait, ahead of anything derived",
+      /appearance: fig\.imagePrompt \|\| fig\.appearance/.test(whoisSrc));
+
+    // ⚠️ GENDER IS STATED EXPLICITLY SO THE GENERATOR CANNOT DEFAULT — SNG-143's own reason (the
+    // Pell-rendered-male fix). The seed has always had the line; the whois card never supplied a value.
+    const { npcPromptSeed: seed367 } = await import("../engine/art.js");
+    check("367c: a gender, when known, reaches the portrait seed",
+      /a woman/.test(seed367({ id: "x", name: "N", role: "r", appearance: "a figure", gender: "a woman" }, {}, {})));
+    check("367c: …and the card passes it through", /gender: known\.gender \|\| undefined/.test(appSrc367));
+
     check("367b: …and the people layer rides inside promptOpts, where assembleImagePrompt can read it",
       /seedKey: `whois-\$\{seed\}`, isMinor: false, promptOpts: \{ aesthetic: aesW \}/.test(appSrc367));
 

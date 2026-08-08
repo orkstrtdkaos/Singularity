@@ -97,7 +97,18 @@ export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster 
     // The tradition rides along too, so the SNG-367 people layer can reach this card — it reached the
     // NPC portrait path and not this one, which is two doors again.
     return lines.length ? { label: fig.name, kind: "figure", id, lines, codexId,
-      tradition: fig.tradition || null, appearance: fig.appearance || fig.form || null, role: fig.role || null } : null;
+      // ⛔ SNG-367c — ALL 70 AUTHORED FIGURES CARRY AN `imagePrompt`, WRITTEN FOR EXACTLY THIS, and the
+      // card was ignoring every one of them. "A rootkin standing exactly on the treeline where thick green
+      // meets open ground, looking neither way. Dappled light, a carved staff, a decision refused for
+      // years." That is a portrait; the tier line I was using is a sentence about fame. Third instance
+      // today of authored content with no reader.
+      tradition: fig.tradition || null, role: fig.role || null,
+      appearance: fig.imagePrompt || fig.appearance || fig.form || null,
+      // ⚠️ GENDER RIDES WHEN IT IS AUTHORED. `npcPromptSeed` already states it explicitly so the
+      // generator cannot default (SNG-143, the Pell-rendered-male fix) — it was simply never given one
+      // here. ZERO of the 70 carry the field today, which is a content gap and reported as one; the wiring
+      // is here so the moment any figure is given a gender, their portrait stops being a coin toss.
+      gender: fig.gender || fig.pronouns || null } : null;
   }
 
   const topic = character?.codex?.topics?.[id];

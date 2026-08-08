@@ -2397,7 +2397,9 @@
    ],
    "plainly": "A fight action that folds distance into a target's body. Rated 7 of 10 across a scope of 2. Limit: short range, and you must see the whole of what you fold.",
    "backlash": "The fold closes on the wrong side. The distance you took out of them comes out of you, and a closed span does not reopen.",
-   "conserveSuppresses": "a hand's fold — a slip wrenches, it does not close"
+   "conserveSuppresses": "a hand's fold — a slip wrenches, it does not close",
+   "backlashRung": "damaging",
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
   },
   {
    "id": "the_spent_hour",
@@ -2494,7 +2496,9 @@
    ],
    "plainly": "A fight/puzzle action that spends the time out of a target or their gear. Rated 7 of 10 across a scope of 2. Limit: one thing at a time, and what is spent cannot be returned.",
    "backlash": "The levy lands on the levier. Years you meant for them are taken out of you, and what is spent cannot be returned.",
-   "conserveSuppresses": "a small levy — what you spend, you can afford"
+   "conserveSuppresses": "a small levy — what you spend, you can afford",
+   "backlashRung": "damaging",
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
   },
   {
    "id": "the_kept_count",

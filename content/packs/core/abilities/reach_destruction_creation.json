@@ -2494,6 +2494,190 @@
     }
    ],
    "plainly": "A puzzle/social action that opens a deliberately-closed thing without damaging it. Rated 6 of 10 on one target."
+  },
+  {
+   "id": "the_quick_work",
+   "name": "The Quick Work",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "practical",
+   "axes": {
+    "destruction_creation": 0.6
+   },
+   "functions": [
+    "make"
+   ],
+   "narrationHints": "You build the thing now, out of what is here, and it works. Not conjuring — building, at a speed that looks like cheating to anyone who has ever built anything.",
+   "description": "The Wrights' first craft. A day's carpentry in a quarter of an hour, and it holds.",
+   "notFor": "Building from nothing (material must be present and sufficient); fine or precise work (this is rough and it shows); anything requiring materials this place does not have; building fast AND well.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Thing Made",
+     "grants": "From materials at hand, build one working functional object in about a quarter-hour: a ladder, a raft, a sledge, a splint, a door, a winch, a shelter that keeps rain off. It WORKS and it is ugly.",
+     "cannot": "MATERIAL MUST BE PRESENT AND SUFFICIENT — you cannot make a raft out of gravel. It is ROUGH: it works, it is not fine, and anyone who knows the trade can see it was rushed. No mechanisms of any subtlety.",
+     "functions": [
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Larger Build",
+     "grants": "A span, a palisade section, a cart, a hoist — hours instead of days, with a crew doing what you tell them.",
+     "cannot": "You need the crew and you need the stock. And a Quick Work at this size is visibly a Quick Work: it will be pointed at later by whoever maintains it.",
+     "functions": [
+      "make",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Built Answer",
+     "grants": "The thing the situation actually needs, built inside the situation — a bridge while the water rises, a barricade while they come, a machine nobody in the valley has seen.",
+     "cannot": "⚠ IT IS STILL ROUGH, AND NOW IT IS LOAD-BEARING. A Quick Work that a place comes to rely on is a Wright's characteristic disaster: built in an afternoon, trusted for a decade, and nobody remembers it was meant to be temporary.",
+     "functions": [
+      "make",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "wright",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "make",
+   "operativeAxis": [
+    "scope",
+    "magnitude"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 2,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "one small thing, made well",
+    "surge": "the built answer; IT IS STILL ROUGH AND NOW IT IS LOAD-BEARING"
+   },
+   "bounds": [
+    {
+     "text": "MATERIAL MUST BE PRESENT AND SUFFICIENT",
+     "class": "hard"
+    },
+    {
+     "text": "ROUGH — it works, it is not fine, and it shows",
+     "class": "hard"
+    },
+    {
+     "text": "no mechanisms of any subtlety",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that builds a working object fast from materials at hand. Rated 5 of 10 across a scope of 2."
+  },
+  {
+   "id": "the_held_repair",
+   "name": "The Held Repair",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "practical",
+   "axes": {
+    "destruction_creation": 0.5
+   },
+   "functions": [
+    "mend",
+    "sustain"
+   ],
+   "narrationHints": "The broken thing works again — for a while. You have not fixed it. You have persuaded it to keep going, and it knows, and it will stop.",
+   "description": "The Wrights' field-craft: get it moving, get it home, fix it properly there.",
+   "notFor": "Actually repairing anything (this is borrowed time and the borrowing is the point); anything alive; a thing broken past function — it must still be MOSTLY there; hiding that it is a stopgap.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Thing Persuaded",
+     "grants": "A broken made thing functions again for about a day — a cracked axle, a split shaft, a torn bellows, a failed hinge. It carries what it carried before. ⚠ NAME THE HOUR IT WILL FAIL; the craft tells you and you must say it.",
+     "cannot": "It is NOT REPAIRED. When it goes, it goes without warning and usually worse than it broke the first time. It must still be mostly present — a shattered thing is not mostly there.",
+     "functions": [
+      "mend",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Persuasion",
+     "grants": "Several things, or one thing for several days — a caravan's wheels across a season's bad road, a mill through the harvest.",
+     "cannot": "Every extension makes the eventual failure worse, and you are accumulating a list of things that will all fail near the same time.",
+     "functions": [
+      "mend",
+      "sustain",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Kept Machine",
+     "grants": "Something large and badly broken kept in service — a mill, a lock-gate, a pump — while the real repair is impossible or unaffordable.",
+     "cannot": "⚠ PEOPLE WILL STOP TREATING IT AS BROKEN. That is the danger: a kept machine becomes a working machine in everyone's mind except yours, and you are the only one who knows the hour.",
+     "functions": [
+      "mend",
+      "sustain",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "wright",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "mend",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 24,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "persuade one thing, briefly",
+    "surge": "the kept machine; PEOPLE WILL STOP TREATING IT AS BROKEN"
+   },
+   "bounds": [
+    {
+     "text": "NOT REPAIRED — borrowed time, and it fails without warning",
+     "class": "hard"
+    },
+    {
+     "text": "the thing must still be MOSTLY THERE",
+     "class": "hard"
+    },
+    {
+     "text": "you must NAME the hour it will fail",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that makes a broken thing work again temporarily. Rated 5 of 10 across a scope of 2 for about a day."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

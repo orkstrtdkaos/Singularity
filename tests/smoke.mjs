@@ -12679,6 +12679,22 @@ await (async () => {
       "appearance" in card && "gender" in card && "role" in card);
   }
 
+  // ══ SNG-370 — THE GENDER REPAIR CONTROL REACHES EVERY PERSON. ⛔ It read `.slice(0, 30)` in registry
+  // order and Silas knows 34 people, so four could not be reached by the tool that exists to fix them —
+  // and they were the most RECENTLY met, i.e. the ones just seen rendered wrong. Measured: 35 of the 110
+  // people across the live saves carry neither gender nor pronouns, so their portrait gender is a guess.
+  {
+    const appG = readFileSync(join(root, "app.js"), "utf8");
+    const start = appG.indexOf("Set a person's gender");
+    const block = start < 0 ? "" : appG.slice(start, start + 2400);
+    check("370: the gender repair list is not capped — a cap on a repair tool is a repair you cannot perform",
+      start > 0 && !/npcRegistry\)\.slice\(0,\s*\d+\)/.test(block));
+    check("370: …and the people with NO gender are listed first, because they are who the control is for",
+      /const unset = all\.filter\(n => !n\.gender && !n\.pronouns\)/.test(block) && /\[\.\.\.unset,/.test(block));
+    check("370: …and the screen SAYS how many are unrecorded rather than leaving it to be noticed",
+      /have no gender recorded/.test(block));
+  }
+
   // The DOM pass: text nodes only, every match, and never inside an existing control.
   check("272/299: names are linked by walking TEXT NODES, never by rewriting rendered HTML",
     /createTreeWalker\(root, NodeFilter\.SHOW_TEXT/.test(appW2) && /SKIP\.has\(el\.tagName\)/.test(appW2));

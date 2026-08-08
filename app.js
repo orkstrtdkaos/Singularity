@@ -89,7 +89,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.80";
+const APP_VERSION = "1.9.81";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8520,9 +8520,24 @@ function renderRepairScreen(note = "") {
 
     ${Object.keys(character.npcRegistry || {}).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Set a person's gender <span class="hint" style="text-transform:none">— the game rendered someone wrong? fix it here</span></h3>
       <p class="hint" style="margin-bottom:8px">Gender is explicit data now — the portrait and narration read it. Type a value to set or correct it; leave blank to keep. Free and inclusive (woman, man, nonbinary, …). A corrected portrait re-mints with the right gender.</p>
-      ${Object.values(character.npcRegistry).slice(0, 30).map(n => `
-        <div class="cs-attr"><span class="cs-attr-name" style="width:auto; flex:1">${esc(n.name || n.id)} <span class="hint">${esc(n.gender || "— unset —")}</span></span>
-          <input data-npcgender="${esc(n.id)}" placeholder="woman / man / …" value="" style="max-width:160px"></div>`).join("")}
+      ${(() => {
+        // ⛔ SNG-370 — A CAP ON A REPAIR TOOL IS A REPAIR YOU CANNOT PERFORM. This read `.slice(0, 30)` in
+        // registry order and Silas knows 34 people, so four of them could not be reached by the control
+        // that exists to fix them, with nothing on screen saying so. The dropped four were the most
+        // RECENTLY met — i.e. exactly the people a player has just seen rendered wrong. A cap on a log is
+        // housekeeping; this was the codex `slice(-40)` lesson wearing a different hat.
+        //
+        // ⚠️ ORDERED BY WHO NEEDS IT. 35 of the 110 people across the live saves carry neither gender nor
+        // pronouns, so their portrait gender is a coin toss — SNG-143, the Pell-rendered-male fix, from the
+        // other end. Those go first; the already-set ones follow, because correcting a wrong value matters.
+        const all = Object.values(character.npcRegistry);
+        const unset = all.filter(n => !n.gender && !n.pronouns);
+        const head = unset.length
+          ? `<p class="hint" style="margin-bottom:6px">⚠️ ${unset.length} of ${all.length} have no gender recorded — those are listed first, and their portraits are guessing.</p>` : "";
+        return head + [...unset, ...all.filter(n => n.gender || n.pronouns)].map(n => `
+        <div class="cs-attr"><span class="cs-attr-name" style="width:auto; flex:1">${esc(n.name || n.id)} <span class="hint">${esc(n.gender || n.pronouns || "— unset —")}</span></span>
+          <input data-npcgender="${esc(n.id)}" placeholder="woman / man / …" value="" style="max-width:160px"></div>`).join("");
+      })()}
     </div>` : ""}
 
     <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap">

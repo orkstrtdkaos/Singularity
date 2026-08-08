@@ -77,7 +77,7 @@
   },
   "attunement": 3,
   "maxHealth": 62,
-  "health": 24,
+  "health": 32,
   "maxEnergy": 152,
   "energy": 53,
   "inventory": [
@@ -202,39 +202,26 @@
         "player": "Walk with Lira to a secluded glade in the wood to talk.",
         "summary": "Loki and Lira retreat to a secluded glade in the wood to speak, away from the gate and its witnesses.",
         "narration": "You rise from the gate post, the stranger's shadow falling away as you step past him into the lane. Ossivyn is already setting down his book, but you catch Lira's eye before anyone can speak — a tilt of the head toward the wood path that climbs behind the orchard. She reads it. She moves.\n\nThe two of you walk in silence at first, your shoulder aching in a way that promises deeper bruising by morning. The spring mud gives way to harder ground as the path rises, and the noise of the village — the well-bell, a child's shout, the keeper's careful footsteps — falls behind. The wood here is young birch and hawthorn, their buds still tight, the air still holding the raw smell of snowmelt. Lira walks a pace ahead, not hurrying. When the trees close enough that the orchard is truly gone, she stops at a place where a stream runs narrow and the ground is open enough to sit. She settles on a moss-soft stone and waits.\n\nYou lower yourself beside her, and the quiet of the glade — genuinely quiet, no Stillness Field, just the absence of people — settles over both of you like a held breath."
+      },
+      {
+        "player": "Lira is wearing translucent fine cloth that allow the light through to highlight her full figure.  Ask her to dance her healing dance for you.",
+        "summary": "In a secluded glade behind the orchard, Lira performs her healing dance for Loki — a graceful, light-bending motion that eases the deep injury from the stranger's counter-blow. The dance is real power, held in her body and the translucent cloth she wears. When it ends, she is ready to speak what she has been holding.",
+        "narration": "You settle onto the moss-soft stone by the stream, your shoulder still singing with pain. The light through the birch canopy finds Lira where she stands at the glade's far edge, the translucent cloth she wears catching the late afternoon — the weave fine enough that the spring light moves through it, gathering around the shape of her. She is waiting, you realize. Not for permission. For the ask.\n\n\"Dance for me,\" you say. It is not a question. \"The healing dance. I need to know what you can do.\"\n\nShe does not answer in words. She steps into the clearer ground where the stream-light and the canopy-light meet, and begins. The motion is nothing like the brutal economy of the stranger's press — it is all curve and reaching, her hands tracing patterns in the air as though the light itself is something she can gather and remake. The cloth catches each movement, translucent and alive around her, and the rhythm of it — not quite music, not quite silence — settles into your chest like something that was always meant to be there.\n\nWhere the cloth moves, the light bends slightly. Where her hands pass, the air seems to remember being whole. Your shoulder's sharp edge begins to soften, the ache beneath it settling into something your body can carry. It is not painless — but the pain becomes something that will heal, rather than something breaking you. When she stops, stepping back to stillness, you can feel the difference already. The bruise will still come dark by morning. But the deep injury does not.\n\nShe stands breathing quietly, the cloth settling around her, and looks at you across the stream. \"Now you know what I carry,\" she says. \"Now we talk about why I brought you here.\""
       }
     ],
     "lastTurn": {
-      "narration": "You rise from the gate post, the stranger's shadow falling away as you step past him into the lane. Ossivyn is already setting down his book, but you catch Lira's eye before anyone can speak — a tilt of the head toward the wood path that climbs behind the orchard. She reads it. She moves.\n\nThe two of you walk in silence at first, your shoulder aching in a way that promises deeper bruising by morning. The spring mud gives way to harder ground as the path rises, and the noise of the village — the well-bell, a child's shout, the keeper's careful footsteps — falls behind. The wood here is young birch and hawthorn, their buds still tight, the air still holding the raw smell of snowmelt. Lira walks a pace ahead, not hurrying. When the trees close enough that the orchard is truly gone, she stops at a place where a stream runs narrow and the ground is open enough to sit. She settles on a moss-soft stone and waits.\n\nYou lower yourself beside her, and the quiet of the glade — genuinely quiet, no Stillness Field, just the absence of people — settles over both of you like a held breath.",
-      "sceneSummary": "Loki and Lira retreat to a secluded glade in the wood to speak, away from the gate and its witnesses.",
+      "narration": "You settle onto the moss-soft stone by the stream, your shoulder still singing with pain. The light through the birch canopy finds Lira where she stands at the glade's far edge, the translucent cloth she wears catching the late afternoon — the weave fine enough that the spring light moves through it, gathering around the shape of her. She is waiting, you realize. Not for permission. For the ask.\n\n\"Dance for me,\" you say. It is not a question. \"The healing dance. I need to know what you can do.\"\n\nShe does not answer in words. She steps into the clearer ground where the stream-light and the canopy-light meet, and begins. The motion is nothing like the brutal economy of the stranger's press — it is all curve and reaching, her hands tracing patterns in the air as though the light itself is something she can gather and remake. The cloth catches each movement, translucent and alive around her, and the rhythm of it — not quite music, not quite silence — settles into your chest like something that was always meant to be there.\n\nWhere the cloth moves, the light bends slightly. Where her hands pass, the air seems to remember being whole. Your shoulder's sharp edge begins to soften, the ache beneath it settling into something your body can carry. It is not painless — but the pain becomes something that will heal, rather than something breaking you. When she stops, stepping back to stillness, you can feel the difference already. The bruise will still come dark by morning. But the deep injury does not.\n\nShe stands breathing quietly, the cloth settling around her, and looks at you across the stream. \"Now you know what I carry,\" she says. \"Now we talk about why I brought you here.\"",
+      "sceneSummary": "In a secluded glade behind the orchard, Lira performs her healing dance for Loki — a graceful, light-bending motion that eases the deep injury from the stranger's counter-blow. The dance is real power, held in her body and the translucent cloth she wears. When it ends, she is ready to speak what she has been holding.",
       "choices": [
         {
-          "label": "Tell Lira what you know — that someone paid for the false charge, and that the stranger knew exactly where to find you.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "confide",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Lira directly: who sent that man? What does she know that you don't?",
+          "label": "Ask her directly: Who paid for the false charge? How did the stranger know where to find you?",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "demand",
-            "confrontation"
+            "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -243,16 +230,14 @@
           "emergenceId": null
         },
         {
-          "label": "Say nothing yet. Watch Lira — use Prism Sight to read the heat-traces on her hands, her face. What does her body say before her words?",
+          "label": "Watch her closely before you speak — read what she is not saying, in the pause and the cloth's settling.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "careful",
-            "craft"
+            "study"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
@@ -261,26 +246,25 @@
           "emergenceId": null
         },
         {
-          "label": "Wait. Let her speak first — she brought you here for a reason.",
+          "label": "Tell her what you know: Veln is dead. The stranger was waiting. Someone wanted you both separated, and wanted Veln silent.",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "presence",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "listen",
-            "patient"
+            "threaten"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": -8,
+        "health": 8,
         "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
@@ -293,28 +277,29 @@
       "arcOps": [],
       "adoptSchool": {},
       "offer": {
-        "thing": "Lira herself — a person who moves with you willingly, and whose knowledge of who sent the stranger is something you do not yet hold",
-        "from": "your own action: choosing not to stay and be questioned at the gate, but to walk away with someone who knows more than she has said"
+        "thing": "Lira's true capability — a healing craft bound to light and motion, held in the translucent cloth she wears",
+        "from": "Lira's own choice to reveal it, the intimacy of the glade and the player's asking, the moment when trust becomes necessary"
       },
       "stageOps": [],
       "scene": {
-        "setting": "A secluded glade in the wood behind the orchard — early spring, birch and hawthorn with tight buds, a narrow stream running through soft moss-ground. Late afternoon light filtering through branches. The village noise is gone.",
+        "setting": "A secluded glade in the wood behind the orchard — early spring, birch and hawthorn with tight buds, a narrow stream running through soft moss-ground. Late afternoon light filtering through branches, now burnished and warm as it sinks. The village noise is gone.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Sitting on a moss-soft stone by the stream, waiting — she has brought you here, and she is ready to speak or be spoken to"
+            "state": "Standing in the cleared space where light and stream meet, breathing quietly after the dance, cloth settling, watching Loki with something that looks like readiness"
           }
         ],
         "objects": [
-          "A moss-soft stone suitable for sitting",
+          "A moss-soft stone suitable for sitting — Loki is seated on it",
           "The narrow stream, running with melt-water",
-          "Young birch and hawthorn trees, buds tight"
+          "Young birch and hawthorn trees, buds tight",
+          "Lira's fine translucent cloth, now still around her shoulders and form"
         ],
         "threads": [
           "Who paid for the false charge at the gate?",
-          "How did the stranger know exactly where to find you?",
-          "What does Lira know that she has not yet told you?",
-          "Why did she move you away from the orchard to speak?"
+          "How did the stranger know exactly where to find Loki?",
+          "Why did Lira move Loki away from the orchard to speak, and what is she about to say?",
+          "What is the nature of Lira's healing gift, and where does it come from?"
         ]
       },
       "npcUpdates": [
@@ -322,29 +307,40 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "role": "Companion",
+          "role": "A figure of mystery and power in the village — carries a healing craft through light and motion",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Guided Loki away from the gate into the wood without being asked. Chose this glade for privacy. Knows more than she has said about the stranger and the charge.",
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At Loki's side in the glade, waiting"
+          "note": "Performed her healing dance for Loki in the secluded glade — the motion was graceful, light-bending, and deeply restorative. She wears fine translucent cloth that catches and moves with the light. After the dance, she is ready to speak what she has been holding.",
+          "learned": [
+            "She carries a real healing craft — not Harmonic, not Radiant, something that moves between them",
+            "The healing works through motion and light; the translucent cloth is part of the technique, not decoration",
+            "She brought Loki to the glade specifically to show this, which means trust or desperation or both"
+          ],
+          "skillsObserved": [
+            "Performed a complex healing dance with precision and grace",
+            "Moved the light itself, bending it without craft-use as Loki understands it"
+          ],
+          "relationshipDelta": 1,
+          "statusNote": "Active, present in the glade, ready to speak"
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [
+      "placeUpdates": [],
+      "discovery": {},
+      "codexUpdates": [
         {
-          "note": "A secluded glade in the wood behind the orchard now serves as a meeting place",
-          "subPlace": {
-            "name": "The Glade by the Stream",
-            "parent": "Millbrook",
-            "note": "A quiet place with moss-soft ground, birch and hawthorn, a narrow melt-water stream — accessible from the orchard path",
-            "visited": true
-          }
+          "topic": "lira-the-healer",
+          "label": "Lira's Healing Craft",
+          "kind": "person",
+          "entityId": "lira",
+          "fact": "She carries a healing gift that works through graceful motion and light-bending, bound into or worn through fine translucent cloth. The motion is not recognized Harmonic or Radiant craft, but something that moves between or outside both traditions. It is real, visible, and potent.",
+          "links": [
+            "harmonic",
+            "radiant_folk",
+            "valley_craft"
+          ]
         }
       ],
-      "discovery": {},
-      "codexUpdates": [],
       "partyOps": [],
       "generateRequest": [],
       "encounterOps": [],
@@ -353,16 +349,13 @@
       "unlockSubstrate": {},
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "Walking from the orchard to the secluded glade — a short walk, less than an hour"
+        "why": "the walk to the glade and the healing dance, a quiet beat of time"
       },
-      "moveTo": {
-        "location": "The Glade by the Stream",
-        "why": "Walked with Lira from the orchard into the wood to speak in private"
-      },
+      "moveTo": {},
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": {},
-      "imagePrompt": "A woman and a battered man sit on moss by a narrow stream in a wood of tight-budded birch, spring light filtering through branches, the glade utterly still and away from all voices.",
+      "imagePrompt": "Lira in translucent cloth, moving through late afternoon light in a glade of birch and hawthorn, her form luminous as she traces healing patterns in the air — the light itself bending around her motion, the stream behind her catching gold",
       "newAbility": {},
       "gambitOps": {},
       "gambitApt": false,
@@ -371,30 +364,30 @@
       "offerPromotion": {},
       "offerAcquisition": {},
       "offerIntent": {},
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/A%20woman%20and%20a%20battered%20man%20sit%20on%20moss%20by%20a%20narrow%20stream%20in%20a%20wood%20of%20tight-budded%20birch%2C%20spring%20light%20filtering%20through%20branches%2C%20the%20glade%20utterly%20still%20and%20away%20from%20all%20voices.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=24416&nologo=true"
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A secluded glade in the wood behind the orchard — early spring, birch and hawthorn with tight buds, a narrow stream running through soft moss-ground. Late afternoon light filtering through branches. The village noise is gone.",
+      "setting": "A secluded glade in the wood behind the orchard — early spring, birch and hawthorn with tight buds, a narrow stream running through soft moss-ground. Late afternoon light filtering through branches, now burnished and warm as it sinks. The village noise is gone.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Sitting on a moss-soft stone by the stream, waiting — she has brought you here, and she is ready to speak or be spoken t"
+          "state": "Standing in the cleared space where light and stream meet, breathing quietly after the dance, cloth settling, watching L"
         }
       ],
       "objects": [
-        "A moss-soft stone suitable for sitting",
+        "A moss-soft stone suitable for sitting — Loki is seated on it",
         "The narrow stream, running with melt-water",
-        "Young birch and hawthorn trees, buds tight"
+        "Young birch and hawthorn trees, buds tight",
+        "Lira's fine translucent cloth, now still around her shoulders and form"
       ],
       "threads": [
         "Who paid for the false charge at the gate?",
-        "How did the stranger know exactly where to find you?",
-        "What does Lira know that she has not yet told you?",
-        "Why did she move you away from the orchard to speak?"
+        "How did the stranger know exactly where to find Loki?",
+        "Why did Lira move Loki away from the orchard to speak, and what is she about to say?",
+        "What is the nature of Lira's healing gift, and where does it come from?"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
@@ -2738,6 +2731,10 @@
       {
         "thing": "Lira herself — a person who moves with you willingly, and whose knowledge of who sent the stranger is something you do not yet hold",
         "from": "your own action: choosing not to stay and be questioned at the gate, but to walk away with someone who knows more than she has said"
+      },
+      {
+        "thing": "Lira's true capability — a healing craft bound to light and motion, held in the translucent cloth she wears",
+        "from": "Lira's own choice to reveal it, the intimacy of the glade and the player's asking, the moment when trust becomes necessary"
       }
     ]
   },
@@ -2815,19 +2812,37 @@
         "createdDay": 1,
         "entityId": "thornmother-sealed",
         "updatedDay": 1
+      },
+      "lira": {
+        "id": "lira",
+        "label": "Lira's Healing Craft",
+        "kind": "person",
+        "facts": [
+          "[d1] She carries a healing gift that works through graceful motion and light-bending, bound into or worn through fine translucent cloth. The motion is not recognized Harmonic or Radiant craft, but something that moves between or outside both traditions. It is real, visible, and potent."
+        ],
+        "links": [
+          "harmonic",
+          "radiant-folk",
+          "valley-craft"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "lira",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "physical": 0.9268593749999999,
-    "risky": 1.9256250000000001
+    "physical": 0.9036878906249999,
+    "risky": 1.877484375,
+    "social": 1
   },
   "aptitudes": [],
-  "actionCount": 4,
+  "actionCount": 5,
   "grantsVersion": 1,
   "reconcileVersion": 30,
-  "updatedAt": 1786156617085,
-  "rev": 137,
+  "updatedAt": 1786156872222,
+  "rev": 138,
   "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
@@ -2953,7 +2968,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 21
+    "valley": 22
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -2977,10 +2992,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-08-08T02:36:57.078Z",
-      "lastAt": "2026-08-08T02:36:57.078Z",
+      "lastAt": "2026-08-08T02:41:12.218Z",
       "startDay": 39,
       "endDay": 39,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -3005,23 +3020,24 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 15,
-    "choices": 15,
-    "scene": 15,
+    "sceneSummary": 16,
+    "choices": 16,
+    "scene": 16,
     "stateOps": 1,
-    "characterDeltas": 8,
-    "timeOps": 7,
-    "sceneEnded": 2,
+    "characterDeltas": 9,
+    "timeOps": 8,
+    "sceneEnded": 3,
     "encounterOps": 4,
-    "npcUpdates": 4,
+    "npcUpdates": 5,
     "generateRequest": 1,
-    "offer": 1,
+    "offer": 2,
     "placeUpdates": 1,
     "moveTo": 1,
-    "imagePrompt": 1,
-    "gambitApt": 1
+    "imagePrompt": 2,
+    "gambitApt": 2,
+    "codexUpdates": 1
   },
-  "_opTurns": 15,
+  "_opTurns": 16,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -3162,12 +3178,14 @@
   "companyCapacity": 12,
   "equipmentBonusCap": 8,
   "skillUses": {
-    "travel": 1
+    "travel": 1,
+    "ask": 1,
+    "rapport": 1
   },
   "aptitudeEarnCount": {},
   "_opLedger": {
     "offer": {
-      "applied": 1,
+      "applied": 2,
       "rejected": 0,
       "lastWhy": null
     }

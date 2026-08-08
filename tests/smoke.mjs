@@ -12639,6 +12639,46 @@ await (async () => {
     return idx[0].name.length > idx[idx.length - 1].name.length;
   })());
 
+  // ══ SNG-369 — THE PEOPLE YOU HAVE MET. ⛔ Erik, in play: Sorel underlined and Teva not, in one sentence.
+  // Sorel is linked because she happened to earn a CODEX TOPIC — not because she is registered — and this
+  // index never read `npcRegistry` at all. Measured across the live saves: 53 of 110 people the players
+  // have met were clickable. ⚠️ And `showWhoIs` has handled `kind === "npc"` for the portrait since
+  // SNG-367: the door was built, the corridor to it was not. Registration is not arrival.
+  {
+    const npcs369 = [
+      { id: "cassiel-ord", name: "Cassiel Ord", role: "Keeper of the warden post", description: "A lean man in a grey coat." },
+      { id: "morning-shepherd", name: "Shepherd", role: "Smallholder shepherd, trade track south" },
+      { id: "cookhouse-boy", name: "Boy (name unknown)", role: "Sweeping the cookhouse" },
+      { id: "veth", name: "Veth (Stillwater) Ondra", role: "Former warden, traveling companion" },
+      { id: "sorel", name: "Sorel", role: "Spice-broker, Edge District contact" },
+    ];
+    const idx369 = W.knownIndex({ npcs: npcs369 });
+    const has = (n) => idx369.some(e => e.name === n && e.kind === "npc");
+    check("369: a person you have MET is linkable from the registry, with no codex page required", has("Cassiel Ord") && has("Sorel"));
+    // ⛔ A NAME THAT MERELY RESTATES WHAT THEY DO IS NOT A NAME. The guard is deliberately narrow: only a
+    // ONE-WORD name that appears inside its own role can put a who-is button on ordinary prose.
+    check("369: a one-word placeholder named for its own role is NOT linked — no button on ordinary prose", !has("Shepherd"));
+    check("369: …and a parenthetical that SAYS the name is unknown is not linked either", !has("Boy (name unknown)"));
+    // ⚠️ AND THE GUARD MUST NOT EAT A REAL PERSON. My first cut rejected every parenthetical and dropped
+    // "Veth (Stillwater) Ondra" — an aka — alongside the placeholder.
+    check("369: …but a real person with an aka survives the parenthetical rule", has("Veth (Stillwater) Ondra"));
+    // ⚠️ ONE ENTRY PER NAME, RICHEST SOURCE FIRST. The same person legitimately appears in two sources, and
+    // two entries made the linker's earliest-then-longest tie-break arbitrary.
+    const dupe = W.knownIndex({ roster: [{ id: "fig", name: "Sorel" }], npcs: npcs369 });
+    check("369: a name in two sources yields ONE entry, and the richer source wins",
+      dupe.filter(e => e.name === "Sorel").length === 1 && dupe.find(e => e.name === "Sorel").kind === "figure");
+    const card = W.whoIs("cassiel-ord", "npc", { ws: {}, content: {}, character: { npcRegistry: Object.fromEntries(npcs369.map(n => [n.id, n])) }, roster: [] });
+    check("369: whoIs answers for someone you have met — role and description, not 'the world knows nothing'",
+      card && card.kind === "npc" && card.lines.length >= 2 && /Keeper of the warden post/.test(card.lines[0]));
+    // ⚠️ NEVER SILENT FOR SOMEONE STANDING IN THE ROOM: a registered person with nothing authored still
+    // gets an honest line, because the card exists to say you know them.
+    const bare = W.whoIs("x", "npc", { ws: {}, content: {}, character: { npcRegistry: { x: { id: "x", name: "Teva" } } }, roster: [] });
+    check("369: …and a registered person with NOTHING recorded still gets a card, not a null",
+      bare && bare.kind === "npc" && bare.lines.length === 1);
+    check("369: the card carries what a PORTRAIT needs — the npc branch of showWhoIs was built and unreached",
+      "appearance" in card && "gender" in card && "role" in card);
+  }
+
   // The DOM pass: text nodes only, every match, and never inside an existing control.
   check("272/299: names are linked by walking TEXT NODES, never by rewriting rendered HTML",
     /createTreeWalker\(root, NodeFilter\.SHOW_TEXT/.test(appW2) && /SKIP\.has\(el\.tagName\)/.test(appW2));

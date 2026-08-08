@@ -1,3 +1,5 @@
+import { isDescriptiveNotName } from "./state.js";
+
 // engine/whois.js — SNG-299: who or what is that, and where do I read more?
 //
 // Erik: *"all of these new titles and terms and npcs need to have clickable popups describing who and what
@@ -29,10 +31,17 @@ const TIER_MEANING = {
 
 /** Build the lookup index once per render: every name the world can answer for → its id and kind.
  *  Longest names first, so "Neth, Who Has Buried More Than She Has Known" wins over "Neth". */
-export function knownIndex({ roster = [], arcs = [], codexTopics = {}, titles = {} } = {}) {
+export function knownIndex({ roster = [], arcs = [], codexTopics = {}, titles = {}, npcs = [] } = {}) {
   const entries = [];
+  // ⚠️ DEDUPED BY NAME, FIRST SOURCE WINS. The same person legitimately appears in more than one
+  // source — a roster figure who also has a codex page, a met NPC who earned one — and two entries with
+  // one name made the linker's earliest-then-longest tie-break arbitrary. The order of the pushes below is
+  // therefore the PRECEDENCE: the richest answer first.
+  const taken = new Set();
   const push = (name, id, kind) => {
     if (!name || typeof name !== "string" || name.length < 3) return;
+    if (taken.has(name)) return;
+    taken.add(name);
     entries.push({ name, id, kind });
   };
   for (const f of roster) { push(f.name, f.id, "figure"); }
@@ -40,6 +49,46 @@ export function knownIndex({ roster = [], arcs = [], codexTopics = {}, titles = 
   for (const t of Object.values(codexTopics)) push(t.label, t.entityId || t.id, "codex");
   // A TITLE is a thing you can ask about too — "Whom The Cogitants Named" is not self-explanatory.
   for (const [figureId, t] of Object.entries(titles)) if (t?.title) push(t.title, figureId, "title");
+  // ⛔ SNG-369 — THE PEOPLE YOU HAVE ACTUALLY MET WERE THE ONE SOURCE THIS DID NOT READ. Erik, in
+  // play: Sorel underlined and Teva not, in the same sentence. Sorel is linked because she happened to earn
+  // a CODEX TOPIC — not because she is in the registry, which this index never consulted. Measured across
+  // the live saves: 51 of 110 people the players have met cannot be clicked, 27 of Silas's 34 alone.
+  //
+  // ⚠️ AND THE CARD WAS ALREADY BUILT FOR THEM. `showWhoIs` has handled `kind === "npc"` for the
+  // portrait since SNG-367 — the door existed, the corridor to it did not. Registration is not arrival.
+  //
+  // ⚠️ A DESCRIPTIVE PLACEHOLDER IS NOT A NAME. The registry holds "Boy (name unknown)", "Road Traveler",
+  // "Shepherd" — SNG-347's own class, arrived at from the other side. The hazard is NARROW and worth
+  // stating exactly, because I nearly built a classifier for it and a classifier would have been wrong in
+  // both directions: Silas knows a placeholder called "Shepherd" AND a real person called Gweth Callow
+  // whose role is "Shepherd of the South March".
+  //
+  // ⛔ THE ONLY LINK THAT CAN LAND ON ORDINARY PROSE IS A SINGLE COMMON WORD. A multi-word label —
+  // "Cookhouse Woman", "Archive Guardian" — matches only when the narration writes that exact phrase, and
+  // when it does, it MEANS that person. So the guard is deliberately two narrow rules rather than a
+  // judgement about what reads like a name:
+  //   · a parenthetical is an explicit statement that the name is unknown ("Boy (name unknown)")
+  //   · a ONE-WORD name that also appears inside its own role or description is what they DO, not who they
+  //     are — "Shepherd" against "Smallholder shepherd, trade track south" — while "Sorel", "Leth" and
+  //     "Fendt" appear nowhere in their own roles and are kept.
+  // ⚠️ RESIDUAL RISK, NAMED: a one-word placeholder whose role does not repeat it will still be linked.
+  // That is a wrong button on a word, not a wrong fact, and it is the failure I would rather have than
+  // silently dropping a real person because a heuristic disliked their name.
+  for (const n of npcs) {
+    const nm = n?.name;
+    if (!nm || isDescriptiveNotName(nm)) continue;
+    // ⚠️ AND THE PARENTHETICAL RULE HAD TO NARROW TOO, because my first cut dropped "Veth (Stillwater)
+    // Ondra" — a real person with an aka — alongside "Boy (name unknown)". Only a parenthetical that SAYS
+    // the name is unknown is a placeholder. (An aka-form label will rarely match prose verbatim, so the
+    // link mostly will not fire; that costs nothing, whereas dropping a real person costs a face.)
+    if (/\((?:[^)]*\b(?:unknown|no name|unnamed)\b[^)]*)\)/i.test(nm)) continue;
+    if (!/\s/.test(nm)) {
+      if (nm.length < 4) continue;                   // a bare short word matches too much ordinary prose
+      const self = `${n.role || ""} ${n.description || ""}`.toLowerCase();
+      if (self.includes(nm.toLowerCase())) continue; // they are named for what they do — that is not a name
+    }
+    push(nm, n.id, "npc");
+  }
   for (const rung of Object.keys(TIER_MEANING)) push(rung, rung, "tier");
   entries.sort((a, b) => b.name.length - a.name.length);
   return entries;
@@ -115,6 +164,23 @@ export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster 
   if (topic) {
     const facts = (topic.facts || []).slice(-2).map(f => String(f).replace(/^\[[^\]]*\]\s*/, ""));
     return facts.length ? { label: topic.label || id, kind: topic.kind || "codex", lines: facts, codexId: id } : null;
+  }
+
+  // ⛔ SNG-369 — AND THE ANSWER FOR SOMEONE YOU HAVE MET. Checked AFTER the codex branch on purpose:
+  // a person with a codex page has a richer, player-earned answer, and the registry is the floor beneath it.
+  const met = character?.npcRegistry?.[id];
+  if (met && met.name) {
+    const lines = [];
+    if (met.role) lines.push(String(met.role));
+    if (met.description) lines.push(String(met.description));
+    if (met.statusNote) lines.push(String(met.statusNote));
+    if (met.lastSeenDay != null) lines.push(`Last seen on day ${met.lastSeenDay}.`);
+    // ⚠️ NEVER "the world knows nothing" FOR SOMEONE STANDING IN THE ROOM. A registered person with
+    // no authored detail still gets an honest line — the card exists to say you know them.
+    if (!lines.length) lines.push("Someone you have met. Nothing more is recorded yet.");
+    return { label: met.name, kind: "npc", id, lines, codexId: character?.codex?.topics?.[id] ? id : null,
+      role: met.role || null, appearance: met.appearance || met.imagePrompt || met.form || null,
+      gender: met.gender || met.pronouns || null, tradition: met.tradition || null };
   }
 
   const t = Object.entries(ws.figureTitles || {}).find(([fid]) => fid === id);

@@ -89,7 +89,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.79";
+const APP_VERSION = "1.9.80";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -314,6 +314,10 @@ function linkifyKnown(root) {
     index = knownIndex({
       roster: worldRoster(ws, CONTENT), arcs: CONTENT.greaterArcs || [],
       codexTopics: character.codex?.topics || {}, titles: ws.figureTitles || {},
+      // ⛔ SNG-369 — THE PEOPLE YOU HAVE MET. Erik saw Sorel underlined and Teva not, in one sentence:
+      // Sorel earned a CODEX TOPIC and Teva did not, and the registry — the actual record of who you know
+      // — was never a source here at all. 51 of the 110 people across the live saves were unclickable.
+      npcs: Object.entries(character.npcRegistry || {}).map(([id, n]) => ({ ...n, id })),
     });
   } catch { return; }
   if (!index.length) return;

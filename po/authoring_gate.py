@@ -44,7 +44,14 @@ def check(abilities, existing_ids, V):
         fns=set(a.get('functions',[]))
         rungs=[t.get('harmRung') for t in a.get('tree',[])]
         wounds=any(r in ('damaging','lethal') for r in rungs)
-        combat='FIGHT' in (a.get('challengeTypes') or []) or 'DUEL' in (a.get('challengeTypes') or [])
+        # ⛔ SNG-371: challengeTypes does NOT imply offence — a WARD legitimately fights without harming.
+        # Same defect CCode fixed in wiring_audit's claimsCombat (77ec1475); my gate had it too, firing on
+        # the tag instead of the authored harm vocabulary. Offensive = declares a HARM verb OR reaches a rung.
+        _tags=a.get('challengeTypes') or []
+        combat=bool(fns & HARM) or any(r in ('damaging','incapacitating','lethal') for r in rungs)
+        _defensive=bool(fns & {'ward','shield','resist'}) and not combat
+        if ('FIGHT' in _tags or 'DUEL' in _tags) and not combat and not _defensive:
+            warns.append(f"{i}: claims FIGHT/DUEL, no harm verb and not ward/shield/resist — check it belongs in a fight")
         if combat and not (fns & HARM):
             fails.append(f"{i}: challengeTypes claims FIGHT but declares no HARM verb")
         if combat and (fns & HARM) and not (fns & WOUNDING) and not wounds:

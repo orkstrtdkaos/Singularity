@@ -49,7 +49,11 @@ def check(abilities, existing_ids, V):
         # the tag instead of the authored harm vocabulary. Offensive = declares a HARM verb OR reaches a rung.
         _tags=a.get('challengeTypes') or []
         combat=bool(fns & HARM) or any(r in ('damaging','incapacitating','lethal') for r in rungs)
-        _defensive=bool(fns & {'ward','shield','resist'}) and not combat
+        # verbs that legitimately operate IN a fight without harming: warding, reading, sustaining,
+        # repositioning. Narrower than this and the check flags good content (the_read_field reads
+        # GROUND for a fight and harms nothing); wider and it flags nothing at all.
+        _support={'ward','shield','resist','foresee','reveal','sustain','empower','move','heal','mend','restore'}
+        _defensive=bool(fns & _support) and not combat
         if ('FIGHT' in _tags or 'DUEL' in _tags) and not combat and not _defensive:
             warns.append(f"{i}: claims FIGHT/DUEL, no harm verb and not ward/shield/resist — check it belongs in a fight")
         if combat and not (fns & HARM):

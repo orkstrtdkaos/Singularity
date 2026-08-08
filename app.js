@@ -37,7 +37,7 @@ import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode,
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
-import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds } from "./engine/companions.js";
+import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove } from "./engine/companions.js";
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
 import * as DeathModel from "./engine/death.js";
@@ -3043,7 +3043,7 @@ function endEncounter(outcome) {
   const t = encXp[enc.def.type] || encXp.default || {};
   const xpMap = { opponent_fell: t.winXp, opponent_yielded: t.winXp, fled: t.fleeXp, yielded: t.yieldXp, completed: t.completeXp, abandoned: t.abandonXp, solved: t.solveXp, walked_away: t.walkAwayXp, incapacitated: 0 };
   character.xp += Math.max(0, xpMap[outcome] ?? 0);
-  for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules);
+  for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules, c.stages, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }); // SNG-361: the log. ⚠️ c.stages passed for consistency ONLY — this site DISCARDS the events, and a bond that crosses grantAt during an encounter is recovered by backfill.js, not by this line.
   character.activeEncounter = null;
   movesOpen = false; // SNG-252b §2a: reset to COLLAPSED, so the next encounter opens clean
   if (outcome === "incapacitated") {
@@ -4610,6 +4610,21 @@ function showCompanionPanel(companionId) {
     ? `They help when you ${tags.length === 1 ? tags[0] : tags.slice(0, -1).join(", ") + " or " + tags[tags.length - 1]}.`
     : "";
 
+  // ⛔ SNG-361 — THE LOG GETS A READER IN PLAY, NOT ONLY IN THE HARNESS. The `testOnlyExports` ratchet
+  // caught `shareAtOrAbove` as an export nothing but a test could reach, which is the exact class this
+  // whole session has been closing: a measurement built for a tuning question, wired to nobody the player
+  // ever meets. So the founded figure shows here, in the one place a player is already asking "how far
+  // have we come together."
+  // ⚠️ IT PRINTS ONLY WHEN FOUNDED. A save that predates the log shows NOTHING rather than a bound dressed
+  // as a fact — the same rule the harness follows, and the reason the ticket exists.
+  let historyLine = "";
+  try {
+    const share = shareAtOrAbove(character, c.id, maxBond);
+    if (share?.reached && share.share > 0.01) {
+      historyLine = `<p class="hint comp-history">You have stood at their side at full trust since your ${share.reachedAtAction}th act — ${Math.round(share.share * 100)}% of the way you have come.</p>`;
+    }
+  } catch { /* a history line is never worth breaking the panel for */ }
+
   const stageRows = (c.stages || []).map((st, i) => {
     const at = i === 0 ? 0 : thresholds[i - 1];
     const reached = b.stage >= st.stage;
@@ -4661,6 +4676,7 @@ function showCompanionPanel(companionId) {
 
     ${(c.knowledge || []).length ? `<div class="comp-sec"><span class="sys-label">What they know</span><ul>${list(c.knowledge)}</ul></div>` : ""}
     ${assistLine ? `<div class="comp-sec"><span class="sys-label">How they help</span><div>${assistLine}</div></div>` : ""}
+    ${historyLine}
 
     ${c.boundaries ? `<div class="comp-sec comp-boundaries"><span class="sys-label">What they will not do</span>
       <div>${esc(c.boundaries)}</div></div>` : ""}
@@ -5067,11 +5083,11 @@ function applyTurn(turn, resolution, playerWords = null) {
     for (const c of comps) {
       const unlocked = [];
       if ((turn.deeds || []).length) {
-        unlocked.push(...growBond(character, c.id, "deed", CONTENT.rules, c.stages).events);
+        unlocked.push(...growBond(character, c.id, "deed", CONTENT.rules, c.stages, { worldDay: wdNow }).events);
         // SNG-200B §2c: a companion present for a deed REMEMBERS it — its shared history with the character.
         for (const deed of turn.deeds) noteCompanionWitnessed(character, c.id, { ...deed, day: dayNow });
       }
-      if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules, c.stages).events);
+      if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules, c.stages, { worldDay: wdNow }).events);
       if (unlocked.includes("grant") && c.bondGrants) {
         const def = sanitizeNewAbility(c.bondGrants, { verbVocab: genContractDeps().vocabs["function_vocabulary.verbs"] }); // SNG-250 §3: born with real families
         if (def && !character.abilities.some(a => a.abilityId === def.id)) {

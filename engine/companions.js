@@ -19,6 +19,17 @@ export function partnerAdjacentNpcs(character, rules = null) {
  *  intent tags (capped). Data-driven from rules.baseChance. */
 export function ensureBonds(character) {
   character.companionBonds = character.companionBonds || {};
+  // ⛔ SNG-361 — THE HONEST MARK ON A SAVE THAT PREDATES THE LOG. Silas has bond 10 with three
+  // companions and no record of how or when he got there, and there is no reconstruction that would not be
+  // a guess wearing a number's clothes. So the save is STAMPED rather than backfilled:
+  //   bondLogFrom: null  → this character's bond history is UNKNOWABLE; every derived figure is a bound.
+  //   bondLogFrom: <n>   → logging began at action n; figures after it are founded.
+  // ⚠️ A character with existing bonds gets `null` even though logging starts now, because the part
+  // that matters — how long they have been at 10 — is exactly the part that was never written down.
+  if (character.bondLogFrom === undefined) {
+    const hadBonds = Object.values(character.companionBonds).some(v => Number(v) !== 0);
+    character.bondLogFrom = hadBonds ? null : (Number.isFinite(character.actionCount) ? character.actionCount : 0);
+  }
   return character;
 }
 
@@ -109,12 +120,30 @@ export function companionMemoryForGM(character, companionId) {
 
 /** Grow a bond through shared life: deeds witnessed, assists used, encounters
  *  weathered. GM has NO op for this — engine-owned entirely. Returns events. */
-export function growBond(character, companionId, kind, rules, stages = null) {
+export function growBond(character, companionId, kind, rules, stages = null, opts = {}) {
   ensureBonds(character);
   const g = rules?.companions?.bondGrowth?.[kind] ?? 0;
   const before = character.companionBonds[companionId] ?? 0;
   const after = Math.max(-10, Math.min(10, Math.round((before + g) * 100) / 100));
   character.companionBonds[companionId] = after;
+  // ⛔ SNG-361 — THE APPEND-ONLY BOND LOG. `companionBonds` is a SCALAR: {marrow: 10}. No history, no
+  // timestamps, no per-source counter. Encounters (+1.5, the dominant source) and assists (+0.25) mutated
+  // it and vanished, so the question "what fraction of the campaign was spent at max bond" had no
+  // answerable form — and both of us answered it anyway. Aevi's 83% was inferred and labelled measured;
+  // my rebuild on deed timestamps got ≥30%, founded but a LOWER BOUND on an unmeasurable, because deeds
+  // are the slowest of the three sources and the only one that leaves a trace.
+  //
+  // ⚠️ `actionCount` IS THE LOAD-BEARING FIELD (her words, and she is right): it is the unit the
+  // harness plots against and the unit Erik feels. Day alone cannot answer "what fraction of the campaign."
+  //
+  // ⚠️ ONE LOG FOR ONE MEASUREMENT. Explicitly not event-sourcing character state — this exists
+  // because a single figure was declared load-bearing and turned out unreadable. If the same gap appears
+  // for standing or aptitudes that is its own finding, not a licence to generalise from here.
+  if (g) {
+    character.bondLog = Array.isArray(character.bondLog) ? character.bondLog : [];
+    character.bondLog.push({ companionId, kind, delta: Math.round(g * 100) / 100,
+      day: character.clock?.day ?? null, worldDay: opts.worldDay ?? null, actionCount: character.actionCount ?? null });
+  }
   const t = rules?.companions?.tiers || {};
   const events = [];
   if (before < (t.grantAt ?? 6) && after >= (t.grantAt ?? 6)) events.push("grant");
@@ -185,4 +214,50 @@ export function activeCompanions(character, companionCatalog = {}) {
     const dn = names[id] || (typeof entry === "object" ? entry.displayName : null);
     return dn ? { ...base, name: dn, canonicalName: base.name } : base;
   }).filter(Boolean);
+}
+
+/** SNG-361 — IS THIS CHARACTER'S BOND HISTORY FOUNDED, OR A BOUND?
+ *
+ *  ⛔ EXISTING SAVES CANNOT BE BACKFILLED AND MUST NOT BE FAKED. A character who played before the log
+ *  existed has a real bond and no record of how it got there; reconstructing one would produce exactly the
+ *  kind of authoritative-looking inference this ticket exists to correct. So the harness is told which it
+ *  is holding, and reports them differently.
+ *
+ *  Returns { founded, events, firstActionCount } — `founded: false` means every figure derived from this
+ *  character is a LOWER BOUND, and should be printed as one. */
+export function bondLogStatus(character) {
+  const log = Array.isArray(character?.bondLog) ? character.bondLog : null;
+  // ⚠️ A LOG THAT STARTED MID-CAMPAIGN IS NOT A FOUNDED HISTORY. `bondLogFrom === null` means this
+  // character was already bonded when logging began, so entries exist but the interval that answers the
+  // question does not. Having SOME data is the most dangerous version of having none.
+  //
+  // ⛔ AND THE STAMP IS NOT THE ONLY EVIDENCE — the first version of this trusted `bondLogFrom` alone and
+  // reported Silas, who sits at bond 10 with three companions, as "no bond has ever grown". The stamp is
+  // written by `ensureBonds` at load; a save read cold off disk has never been through it. So the bond
+  // values themselves are the second witness: BONDED WITH NO LOG means the history is gone, whatever the
+  // stamp says. A diagnostic that mislabels its own worst case is worse than no diagnostic.
+  const bonded = Object.values(character?.companionBonds || {}).some(v => Number(v) !== 0);
+  if (character?.bondLogFrom === null || (bonded && !log?.length)) {
+    return { founded: false, events: log?.length || 0, firstActionCount: null, why: "bonded before the log existed — history unrecoverable" };
+  }
+  if (!log || !log.length) return { founded: false, events: 0, firstActionCount: null, why: "no bond has ever grown" };
+  const first = log.find(e => Number.isFinite(e?.actionCount));
+  return { founded: true, events: log.length, firstActionCount: first ? first.actionCount : null };
+}
+
+/** The share of the campaign spent at or above a bond level — the figure SNG-354 asserted and could not
+ *  source. ⚠️ Returns null rather than a number when the log cannot answer, which is the whole point:
+ *  a metric that cannot be measured must say so instead of producing something plausible. */
+export function shareAtOrAbove(character, companionId, level, { actionCount = null } = {}) {
+  const st = bondLogStatus(character);
+  const total = Number.isFinite(actionCount) ? actionCount : character?.actionCount;
+  if (!st.founded || !Number.isFinite(total) || total <= 0) return null;
+  let running = 0, reachedAt = null;
+  for (const e of character.bondLog) {
+    if (e.companionId !== companionId) continue;
+    running += Number(e.delta) || 0;
+    if (running >= level && reachedAt === null) reachedAt = Number.isFinite(e.actionCount) ? e.actionCount : null;
+  }
+  if (reachedAt === null) return { reached: false, share: 0, reachedAtAction: null };
+  return { reached: true, reachedAtAction: reachedAt, share: Math.max(0, (total - reachedAt) / total) };
 }

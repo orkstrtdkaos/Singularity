@@ -7162,6 +7162,48 @@ await (async () => {
   const ev2 = co.growBond(gc2, "bristle", "encounter", rules, bristle.stages).events; // 7.5 -> 9, crosses stage-2 (8)
   check("200 §1: crossing stage 2 still emits both stage:2 and the legacy stage2 alias", ev2.includes("stage:2") && ev2.includes("stage2"));
 
+  // ══ SNG-361 — THE BOND EVENT LOG. ⛔ Encounters (+1.5, the fastest source) and assists (+0.25) mutated a
+  // SCALAR and vanished, so "what share of the campaign was spent at max bond" had no answerable form —
+  // and it got answered twice anyway, once at 83% (no source) and once at 0% (circular). These gates assert
+  // the SHAPE of the record, never its values: bond dials stay Erik's and Aevi's.
+  {
+    const lc = { companionBonds: {}, clock: { day: 3 }, actionCount: 0 };
+    co.ensureBonds(lc);
+    check("361: a FRESH character stamps bondLogFrom to its action count — its history is founded from birth", lc.bondLogFrom === 0);
+    const legacy = { companionBonds: { marrow: 10 }, actionCount: 915 };
+    co.ensureBonds(legacy);
+    check("361: a save that ALREADY has bonds stamps bondLogFrom = null — never backfilled, never faked", legacy.bondLogFrom === null);
+
+    const seq = [["encounter", 10], ["deed", 40], ["encounter", 260], ["deed", 400]];
+    for (const [kind, ac] of seq) { lc.actionCount = ac; co.growBond(lc, "marrow", kind, rules, marrow.stages, { worldDay: 7 }); }
+    lc.actionCount = 500;
+    check("361: every bond growth appends one entry — the log is the record, not a summary", lc.bondLog.length === 4);
+    const e0 = lc.bondLog[0];
+    check("361: an entry carries companionId, kind, delta, day, worldDay and actionCount",
+      e0.companionId === "marrow" && e0.kind === "encounter" && typeof e0.delta === "number" && e0.worldDay === 7 && e0.actionCount === 10);
+    // ⚠️ actionCount IS THE LOAD-BEARING FIELD (Aevi). Day alone cannot answer "what fraction of the
+    // campaign" — a character can sit on one in-game day for hundreds of actions, and Silas did.
+    check("361: actionCount advances across the log — the unit the question is asked in",
+      lc.bondLog.map(e => e.actionCount).every((v, i, a) => i === 0 || v >= a[i - 1]) && lc.bondLog[3].actionCount === 400);
+
+    const st = co.bondLogStatus(lc);
+    check("361: a character logged from the start reports FOUNDED", st.founded === true && st.events === 4);
+    check("361: a character bonded before the log reports NOT founded, with a reason",
+      co.bondLogStatus(legacy).founded === false && /log/.test(co.bondLogStatus(legacy).why || ""));
+    // ⛔ THE POINT OF THE WHOLE TICKET: an unanswerable question returns null, not a plausible number.
+    check("361: shareAtOrAbove returns NULL for an unfounded save — no bound wearing a fact's clothes",
+      co.shareAtOrAbove(legacy, "marrow", 10) === null);
+    const sh = co.shareAtOrAbove(lc, "marrow", 3);
+    check("361: a founded save yields a real share, anchored to the action the level was reached",
+      sh && sh.reached === true && Number.isFinite(sh.reachedAtAction) && sh.share > 0 && sh.share <= 1);
+    check("361: a level never reached reports reached:false and 0 — not null, which means UNKNOWABLE",
+      co.shareAtOrAbove(lc, "marrow", 99)?.reached === false);
+    // ⚠️ A save read cold off disk has never been through ensureBonds, so the STAMP alone is not enough —
+    // the bond values are the second witness. My first version called Silas "no bond has ever grown".
+    check("361: an unstamped save that is nonetheless bonded is still reported as unfounded",
+      co.bondLogStatus({ companionBonds: { marrow: 10 } }).founded === false);
+  }
+
   // §4 — the codex payload: a person node with the stage prose, and NEVER the GM-eyes-only hook.
   const cx = co.companionCodexUpdate(marrow, { stage: 3 });
   check("200 §4: a companion's codex node is a person node carrying the stage prose", cx.kind === "person" && cx.label === "Marrow" && /The One Who Stays/.test(cx.fact) && cx.entityId === "companion-marrow");
@@ -11239,7 +11281,15 @@ await (async () => {
     // character through the authoring tooling. `includes` cannot be mangled, and the question is simply
     // whether the panel reads the field at all.
     const panelStart = appSrc353.indexOf("function showCompanionPanel");
-    const panelSrc = panelStart < 0 ? "" : appSrc353.slice(panelStart, panelStart + 6000);
+    // ⛔ THE WINDOW IS THE FUNCTION, NOT A CHARACTER COUNT. This read `slice(panelStart, +6000)`, and
+    // adding fourteen lines near the top of the panel pushed `c.persona`, `c.knowledge` and `c.boundaries`
+    // out the far end — three gates went red on code that still rendered every one of them. That is the
+    // FIFTH gate of mine to fail on a pinned position rather than a broken truth (a fixed count of
+    // traditions, a fixed skillPointPerLevel, a fixed index in SALVAGEABLE_OPS, a fixed slice). ⚠️ A GATE
+    // MAY ASSERT THE SHAPE OF A RULE, NEVER AN INCIDENTAL MEASUREMENT OF IT — a red light that means "the
+    // file grew" teaches everyone to distrust red lights.
+    const nextFn = appSrc353.indexOf("\nfunction ", panelStart + 1);
+    const panelSrc = panelStart < 0 ? "" : appSrc353.slice(panelStart, nextFn > panelStart ? nextFn : undefined);
     check("353: the panel function exists at all", panelStart > 0);
     // ⚠️ UNROLLED ON PURPOSE. These were a loop with a TEMPLATE-LITERAL name, and the ledger's 272 guard
     // scans SOURCE for `check("…")` literals — so a gate whose name is constructed at runtime can be

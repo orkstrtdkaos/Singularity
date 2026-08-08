@@ -165,6 +165,41 @@ if (unexplained.length) {
   console.log("       a bound, and a tuning decision made on it is a decision made on a bound.");
 }
 
+// ═══ SNG-361 — THE SAME FIGURE, READ FROM THE LOG INSTEAD OF INFERRED ═══
+//
+// ⛔ EVERYTHING ABOVE IS A BOUND, AND SAYS SO. This block is the founded version, and it will read
+// EMPTY until characters play with the log in place — that emptiness is correct and must stay visible.
+// The alternative, backfilling the log from deeds, would produce exactly the confident-and-wrong number
+// this ticket exists to retire (Aevi's 83% had no source; my first 0% was circular).
+//
+// ⚠️ THE PROGRESS BAR IS PART OF THE REPORT. "0 of 4 founded" is the honest state of the
+// measurement today, and printing it every run is what stops a bound quietly becoming the number of record.
+const { bondLogStatus, shareAtOrAbove } = await import("../engine/companions.js");
+console.log("");
+console.log("  ── SNG-361 — FOUNDED FIGURES (from the bond log, not inferred) ──");
+const founded = [], bounded = [];
+for (const s2 of PLAYED) {
+  const st = bondLogStatus(s2);
+  const bonds = Object.entries(s2.companionBonds || {}).sort((x, y) => y[1] - x[1]);
+  (st.founded ? founded : bounded).push({ name: s2.name, st, who: bonds[0]?.[0] || null, save: s2 });
+}
+console.log(`     ${founded.length} of ${PLAYED.length} played character(s) have a founded bond history.`);
+if (!founded.length) {
+  console.log("     ⚠️ NO FOUNDED FIGURE EXISTS YET — the log ships now, so it fills from the next session on.");
+  console.log("        Until it does, the % above is a LOWER BOUND and the bond dials should not be tuned on it.");
+  for (const b of bounded) console.log(`        ${b.name.slice(0, 22).padEnd(24)} ${b.st.why || "—"}`);
+} else {
+  console.log("");
+  console.log("    character            companion      events   at max from   % of campaign at max");
+  for (const f of founded) {
+    const r = f.who ? shareAtOrAbove(f.save, f.who, SCALE) : null;
+    const at = r?.reached ? `action ${r.reachedAtAction}` : "never reached";
+    const pc = r?.reached ? `${(r.share * 100).toFixed(0)}%` : "0%";
+    console.log(`    ${f.name.slice(0, 19).padEnd(21)}${String(f.who).slice(0, 12).padEnd(14)}${String(f.st.events).padStart(6)}   ${at.padStart(13)}   ${pc.padStart(18)}`);
+  }
+  if (bounded.length) console.log(`\n    ⚠️ ${bounded.length} character(s) still bounded — do NOT average them together with the above.`);
+}
+
 // The proposed curve, under whatever dials were passed — so a change can be tried before it is made.
 console.log("\n  PROPOSED CURVE (current dials, or your overrides): encounters needed to reach each landmark");
 const need = (target) => Math.ceil(target / GROW.encounter);

@@ -90,7 +90,14 @@ export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster 
     // SNG-364: the ID rides along so a portrait can be seeded on the FIGURE rather than on their current
     // name — these people acquire titles in play ("Valen Sunwrack, Who Left No Shadow Standing"), and a face
     // keyed to the label would change the moment the world renamed them.
-    return lines.length ? { label: fig.name, kind: "figure", id, lines, codexId } : null;
+    // ⛔ SNG-367b — A PORTRAIT NEEDS A BODY AND A PEOPLE, NOT A TIER LINE. `showWhoIs` was seeding the
+    // image from `lines[0]`, which is the TIER meaning ("heroic — a name in their own country"): a
+    // statement about renown with nothing in it about a face. So every figure was drawn from a sentence
+    // describing FAME, which is why they all came back as the same person however famous they were.
+    // The tradition rides along too, so the SNG-367 people layer can reach this card — it reached the
+    // NPC portrait path and not this one, which is two doors again.
+    return lines.length ? { label: fig.name, kind: "figure", id, lines, codexId,
+      tradition: fig.tradition || null, appearance: fig.appearance || fig.form || null, role: fig.role || null } : null;
   }
 
   const topic = character?.codex?.topics?.[id];

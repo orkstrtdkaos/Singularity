@@ -89,7 +89,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.74";
+const APP_VERSION = "1.9.75";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -268,8 +268,14 @@ function showWhoIs(known) {
   try {
     if (known.kind === "figure" || known.kind === "person" || known.kind === "npc") {
       const seed = known.codexId || known.id || known.label;
-      const url = ensureImage({ id: `whois-${seed}`, name: known.label, role: known.lines?.[0] || "", appearance: known.lines?.[0] || "" },
-        "npc", { ratingLevel: viewerRatingLevel(), seedKey: `whois-${seed}`, isMinor: false });
+      // ⛔ NOT `lines[0]` — THAT IS THE TIER LINE. It reads "heroic — a name in their own country": a
+      // statement about RENOWN with nothing in it about a face, so every figure was drawn from a sentence
+      // about fame and came back as the same person. Feed the portrait what a portrait needs: an authored
+      // appearance if one exists, the figure's PEOPLE if not (SNG-367's layer, which reached the NPC path
+      // and not this one), and the role as what they DO rather than as what they look like.
+      const aesW = known.tradition ? (CONTENT.traditionVisualAesthetics?.[known.tradition] || null) : null;
+      const url = ensureImage({ id: `whois-${seed}`, name: known.label, role: known.role || "", appearance: known.appearance || "" },
+        "npc", { ratingLevel: viewerRatingLevel(), seedKey: `whois-${seed}`, isMinor: false, promptOpts: { aesthetic: aesW } });
       if (url) whoPortrait = `<img class="whois-portrait" src="${esc(url)}" alt="${esc(known.label)}" loading="lazy" style="width:100%; max-height:240px; object-fit:cover; border-radius:6px; margin-bottom:8px">`;
     }
   } catch { /* a face is never worth breaking the card for */ }
@@ -944,6 +950,17 @@ function ensureTestCharacter() {
   character = c;
   saveCharacter(character);
   return character;
+}
+
+/** SNG-359 — the AUTHORED backlash consequence for whatever craft just slipped. Returns null when none
+ *  of the crafts involved authors one, which is correct: the generic instruction still stands behind it,
+ *  and inventing a specific consequence for a craft nobody described would be the engine writing canon. */
+function backlashLineFor(abilityIds = []) {
+  for (const id of abilityIds || []) {
+    const ab = fullCatalog()[id];
+    if (ab?.backlash) return { id, name: ab.name, text: smartClamp(String(ab.backlash), 300) };
+  }
+  return null;
 }
 
 /** SNG-367 — an NPC's people, resolved to their tradition's authored LOOK. The `people` layer was
@@ -5927,6 +5944,12 @@ async function onChoice(choice) {
       resolution.discoveryAbilities = abilityIds;
     } else if (resolution.degree === "crit_failure") {
       resolution.backlash = applyBacklash(character, CONTENT.rules);
+      // ⛔ SNG-359 §2a — THE AUTHORED LINE, NOT A NUMBER AND A SHRUG. The GM was handed
+      // "BACKLASH (engine-applied): -4 health, -10 energy — narrate the cost" and a generic list of
+      // suggestions (resonance-burn, light-scald, a nosebleed), while Aevi's 23 authored backlash
+      // descriptions reached nothing. "The green takes YOU as readily as them" is a specific, in-craft
+      // consequence; the generic list is what you write when you do not know which craft slipped.
+      resolution.backlashText = backlashLineFor(abilityIds);
     }
   }
   // SNG-015: a Surge that slips can bite — pay by the ability's Tier
@@ -5934,6 +5957,16 @@ async function onChoice(choice) {
     const surgedAb = fullCatalog()[choice.abilityId] || fullCatalog()[(choice.comboAbilities || [])[0]];
     resolution.backlash = applySurgeBacklash(character, surgedAb, CONTENT.intensity);
     resolution.surgeBacklash = true;
+    // ⚠️ BOTH BACKLASH DOORS CARRY THE AUTHORED LINE. There are two — a crit-failure and a SURGE that
+    // slips — and wiring only the one I found first would have left half the backlashes in the game still
+    // narrated from the generic list, which is the "counting the doors is not finding them" lesson again.
+    resolution.backlashText = backlashLineFor([surgedAb?.id].filter(Boolean));
+  }
+  // SNG-359 — CONSERVE holds the craft back, and what that means is AUTHORED per craft. Handed to the
+  // narrator whether or not anything backlashed, because it describes the whole use, not a failure.
+  if (usesAbility && intensity === "conserve") {
+    const heldAb = fullCatalog()[choice.abilityId] || fullCatalog()[(choice.comboAbilities || [])[0]];
+    if (heldAb?.conserveSuppresses) resolution.conserveNote = smartClamp(String(heldAb.conserveSuppresses), 300);
   }
   character.energy = applyEnergyCost(character, (choice.abilityId || (choice.comboAbilities || []).length > 1) ? energyCost : undefined, CONTENT.rules);
   // SNG-010: practice ledger — the single counting site

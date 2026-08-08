@@ -355,7 +355,18 @@ ${abilityGrantDetail}`);
   } else if (resolution) {
     let block = `## RESOLUTION (already rolled by the engine — narrate this outcome)\nAction: ${resolution.action.label}\nResult: ${resolution.degree} (rolled ${resolution.roll} vs ${resolution.chance})`;
     if (resolution.action.novel) block += `\nNOVEL USE${resolution.action.comboAbilities?.length ? ` — combining: ${resolution.action.comboAbilities.join(" + ")}` : ""}${resolution.action.noveltyHint ? ` (${resolution.action.noveltyHint})` : ""} — see rule 16.`;
-    if (resolution.backlash) block += `\nBACKLASH (engine-applied): ${resolution.backlash.health} health, ${resolution.backlash.energy} energy — narrate the cost.`;
+    // ⚠️ SNG-359 §2a — THE AUTHORED CONSEQUENCE LEADS. The number tells the narrator HOW MUCH; the authored
+    // line tells it WHAT HAPPENED, and only the craft's author knows that. Aevi wrote 23 of these and none
+    // reached the prompt, so every backlash in the game was narrated from a generic list of suggestions
+    // (resonance-burn, light-scald, a nosebleed) — which is what you write when you don't know which craft
+    // slipped. The numbers stay, because they are engine truth; they stop being the whole brief.
+    if (resolution.backlash) block += `\nBACKLASH (engine-applied): ${resolution.backlash.health} health, ${resolution.backlash.energy} energy — narrate the cost.`
+      + (resolution.backlashText ? `\n⛔ WHAT THE BACKLASH OF ${String(resolution.backlashText.name).toUpperCase()} IS, authored — narrate THIS, not a generic burn: ${resolution.backlashText.text}` : "");
+    // SNG-359 — a CONSERVE-intensity use holds the craft back, and what that MEANS is authored per craft.
+    // ⛔ IT IS PROSE, SO IT GOES TO THE NARRATOR RATHER THAN INTO CODE. "the snare stays at bind only — no
+    // bite, on anyone, including you" is a statement about fiction; an engine clamp would have to guess
+    // which mechanical term it clamps, and would be wrong for most of the twenty-three.
+    if (resolution.conserveNote) block += `\n⚠️ CONSERVED — this use is held back, and for this craft that means: ${resolution.conserveNote}`;
     if (resolution.discoveryEligible) block += `\nDISCOVERY-ELIGIBLE: narrate the breakthrough and return the "discovery" field naming the new technique.`;
     if (resolution.usedDiscovery) block += `\nUsing discovered technique: ${resolution.usedDiscovery} — earned skill, narrate with confidence.`;
     // CCODE-76: the craft authored what ITS critical looks like. This block is a WHITELIST — a field added to

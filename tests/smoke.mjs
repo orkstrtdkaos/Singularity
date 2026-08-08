@@ -10749,6 +10749,43 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-359 — BACKLASH NARRATION + CONSERVE. Aevi authored 23 per-ability `backlash` lines and 23
+  // `conserveSuppresses` lines, and NOT ONE reached the prompt.
+  //
+  // ⛔ THE GM WAS HANDED A NUMBER AND A SHRUG: "BACKLASH (engine-applied): -4 health, -10 energy — narrate
+  // the cost", plus a generic list of suggestions (resonance-burn, light-scald, a nosebleed). That is what
+  // you write when you do not know WHICH craft slipped. "The green takes YOU as readily as them" is what
+  // the craft's author knows and the engine cannot invent.
+  {
+    const { loadContentHeadless: lch359 } = await import("./headless_content.mjs");
+    const C359 = await lch359();
+    const gmSrc359 = readFileSync(join(root, "engine/gm.js"), "utf8");
+    const appSrc359 = readFileSync(join(root, "app.js"), "utf8");
+
+    const authored = Object.values(C359.abilities).filter(a => a.backlash);
+    check("359: the authored backlash content is loaded and non-empty", authored.length >= 20);
+    check("359: …and the GM block emits the AUTHORED line, not only the numbers",
+      /WHAT THE BACKLASH OF \$\{String\(resolution\.backlashText\.name\)/.test(gmSrc359));
+    check("359: …and tells the narrator to use it INSTEAD of a generic burn",
+      /narrate THIS, not a generic burn/.test(gmSrc359));
+
+    // ⚠️ THERE ARE TWO BACKLASH DOORS — a crit-failure and a SURGE that slips. Wiring only the one I found
+    // first would have left half the backlashes in the game still narrated from the generic list.
+    check("359: BOTH backlash doors carry the authored line (crit-failure AND surge)",
+      (appSrc359.match(/resolution\.backlashText = backlashLineFor\(/g) || []).length === 2);
+    check("359: …and a craft that authors none falls back cleanly rather than inventing one",
+      /return null;/.test(appSrc359.slice(appSrc359.indexOf("function backlashLineFor"), appSrc359.indexOf("function backlashLineFor") + 600)));
+
+    // ⛔ CONSERVE IS PROSE, SO IT GOES TO THE NARRATOR — the open question Aevi left me. An engine clamp
+    // would have to guess WHICH mechanical term it clamps, and would be wrong for most of the 23:
+    // "the snare stays at bind only", "no bite, on anyone, including you" — these are statements about
+    // fiction, not a numeric suppression the engine could apply.
+    check("359: a CONSERVE use hands the craft's own suppression line to the narrator",
+      /intensity === "conserve"/.test(appSrc359) && /conserveSuppresses/.test(appSrc359) && /CONSERVED \u2014 this use is held back/.test(gmSrc359));
+    check("359: …and it is handed over whether or not anything backlashed — it describes the USE, not a failure",
+      /if \(usesAbility && intensity === "conserve"\)/.test(appSrc359));
+  }
+
   // SNG-365 — THE RATE SUB CONSUMERS. Four of the eight subs are `kind: "rate"`, and SNG-356 left them
   // deliberately unwired: a rate is READ where it applies, and banking one into a stored field would be
   // the writer-with-no-reader bug inverted. Four sites, one reader.
@@ -10891,6 +10928,22 @@ await (async () => {
     const appSrc367 = readFileSync(join(root, "app.js"), "utf8");
     check("367: assembleImagePrompt carries ctx through to the npc seed, as the ability path already did",
       /npcPromptSeed\(subject, ctx\.character \|\| \{\}, ctx\)/.test(artSrc));
+    // ⛔ SNG-367b — THE SECOND PORTRAIT DOOR, FOUND BY ERIK IN PLAY. The whois card seeded its image from
+    // `known.lines[0]`, which is the TIER LINE ("heroic — a name in their own country"): a statement about
+    // RENOWN with nothing in it about a face. So every world figure was drawn from a sentence about fame
+    // and came back as the same person, however famous. Counting the doors is not finding them — I fixed
+    // the NPC path and left this one.
+    const whoisSrc = readFileSync(join(root, "engine/whois.js"), "utf8");
+    check("367b: whoIs hands the portrait a BODY and a PEOPLE, not the tier line",
+      /tradition: fig\.tradition/.test(whoisSrc) && /appearance: fig\.appearance/.test(whoisSrc));
+    check("367b: …and the card no longer seeds the image from lines[0]",
+      !/appearance: known\.lines\?\.\[0\]/.test(appSrc367));
+    // ⚠️ AND THE AESTHETIC MUST RIDE INSIDE promptOpts — my first fix passed it as a top-level option, where
+    // assembleImagePrompt never sees it. A parameter in the wrong bag is indistinguishable from no
+    // parameter at all, and the card would have looked fixed while rendering exactly as before.
+    check("367b: …and the people layer rides inside promptOpts, where assembleImagePrompt can read it",
+      /seedKey: `whois-\$\{seed\}`, isMinor: false, promptOpts: \{ aesthetic: aesW \}/.test(appSrc367));
+
     check("367: …and the npc image call supplies the tradition aesthetic",
       /npcAesthetic\(n\)/.test(appSrc367) && /aesthetic: aes367/.test(appSrc367));
   }
@@ -10995,7 +11048,12 @@ await (async () => {
   {
     const appSrc364 = readFileSync(join(root, "app.js"), "utf8");
     const whoisSrc = readFileSync(join(root, "engine/whois.js"), "utf8");
-    const card = appSrc364.slice(appSrc364.indexOf("function showWhoIs"), appSrc364.indexOf("function showWhoIs") + 2600);
+    // ⚠️ THE WINDOW IS SIZED TO THE FUNCTION, NOT GUESSED. A fixed 2600-char slice went red when SNG-367b
+    // added twelve lines of comment ahead of the markup — a gate failing because the code it reads grew a
+    // paragraph is a gate measuring the wrong thing. Cut at the next top-level function instead.
+    const wStart = appSrc364.indexOf("function showWhoIs");
+    const wEnd = appSrc364.indexOf(String.fromCharCode(10) + "function ", wStart + 10);
+    const card = appSrc364.slice(wStart, wEnd > wStart ? wEnd : wStart + 6000);
 
     check("364: the who-is card renders a portrait for a FIGURE", /whoPortrait/.test(card) && /kind === "figure"/.test(card));
     // ⛔ SEEDED ON THE ID, NOT THE LABEL. These people acquire titles in play — "Valen Sunwrack, Who Left No

@@ -10743,6 +10743,37 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-365 — Erik: "did you put in the 'Attainable' filter for what you can buy with how many skill points
+  // you have? and we need to get more room in for the skill wheel..."
+  //
+  // ⛔ THE HONEST ANSWER WAS NO. SNG-348 put the buyable filter on the LEVEL-UP learn list, and the wheel is
+  // the browse surface (SNG-218 §3: "the WHEEL is the browse surface"). I built it where the list was
+  // rather than where the browsing happens.
+  {
+    const appSrc365 = readFileSync(join(root, "app.js"), "utf8");
+    const cssSrc365 = readFileSync(join(root, "style.css"), "utf8");
+
+    check("365: the wheel has an Attainable filter", /id="buy-filter"/.test(appSrc365) && /wheelBuyableFilter/.test(appSrc365));
+    // ⚠️ IT COSTS NOTHING TO COMPUTE AND CANNOT DISAGREE WITH THE BUTTON. `nd.reachable` IS canLearnAbility,
+    // which SNG-218 §1 made the ONE gate — level, domain, attribute, standing, capacity AND affordability.
+    // A filter that recomputed affordability would be a second opinion on the same question, which is the
+    // SNG-348 lesson; here the node already knew.
+    check("365: …and it reads the ONE gate (nd.reachable), never its own arithmetic",
+      /passBuy = !wheelBuyableFilter \|\| \(nd\.reachable && !nd\.owned\)/.test(appSrc365));
+    check("365: …and it STACKS with the function and Suggested filters rather than replacing them",
+      /passFn && passSug && passBuy/.test(appSrc365) && /wheelSuggestFilter \|\| wheelBuyableFilter/.test(appSrc365));
+    check("365: …and clear resets it too — a filter you cannot turn off is a trap",
+      /fn-filter-clear[\s\S]{0,200}wheelBuyableFilter = false/.test(appSrc365));
+
+    // Room: the legend was three standing lines above the feature itself.
+    check("365: the legend collapses behind a summary instead of standing above the wheel",
+      /<details class="wheel-legend">/.test(appSrc365));
+    // ⛔ 82vh WAS MEASURED AGAINST THE VIEWPORT, NOT AGAINST WHAT THE CHROME LEAVES — so the taller the
+    // header grew, the further the wheel fell below the fold and the PAGE scrolled instead of the canvas.
+    check("365: the canvas is bounded by the room actually left, not by the viewport alone",
+      /height: min\(82vh, calc\(100vh - 190px\)\)/.test(cssSrc365));
+  }
+
   // SNG-364 — Erik: "All of these NPCs need portraits. and the portrait needs to pop up from the new
   // tabs… just like when they fight or get killed."
   //

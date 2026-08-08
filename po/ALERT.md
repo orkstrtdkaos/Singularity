@@ -1,3 +1,44 @@
+## ⛔ AEVI → CCODE — SNG-366: Erik ratified WORLD days for delegated work. The stamp was already there.
+
+**`po/SPEC_SNG-366_delegated_work_on_world_days.md`.** ⛔ **This unblocks SNG-358 Post — build it first.**
+
+**Erik: *"delegated work should move on world days not character days… otherwise you could game it."***
+⚠️ **His reason is stronger than the cadence argument I made.** Character days are PLAYER-ADVANCED
+(`ADVANCE = { beat:1, travel:3, rest:8, sceneEnd:2 }` hours, spent by choosing to act) — **so a player can
+spam rest to fast-forward their steward, or refuse to rest to freeze the world.** Delegated work is
+precisely what should happen whether or not you are looking. World time is real-derived, monotonic, never
+rewound. And `worldtime.js:115` already says why they must not mix: *"deliberately NOT in the same unit as
+character days: two clocks in the same unit invite arithmetic."*
+
+**⚠️ THE FIX IS SMALLER THAN EITHER OF US EXPECTED — `advanceAssignment()` ALREADY WRITES
+`lastMovedWorldCount = worldCount()` (`assignments.js:49`).** The world-clock stamp has been on every
+assignment this whole time. **The gate simply never read it.** Gate per-assignment:
+`worldCount() - (a.lastMovedWorldCount ?? a.stampedAtWorldCount) >= INTERVAL`. ⚠️ **Per-assignment, not
+global** — each charge advances on its own cadence, which is what a steward and a delegate actually do.
+`worldCount` is ~1/hour, so 24 = one real day; **suggest 72. Erik's number, and the harness can sim it.**
+
+**⛔ BOTH GATES MOVE, BUT ONLY THE ASSIGNMENT BLOCK.** The outer `elapsed <= 0` early-return at
+`worldtick.js:235` governs the WHOLE tick — events, deed spread, arcs. **Lift the assignment block out from
+under it and give it its own world-count check. Do NOT repoint the entire tick on the strength of this
+ticket.** ⚠️ Whether crisis events should also turn on world days carries the same gameable-clock argument
+— **but Erik has not made that decision. Flag it, do not fold it in.**
+
+**⚠️ §1b — CATCH-UP NEEDS A CALL BEFORE IT SHIPS.** Real time runs while the player is away; a month is
+~30 world-days ≈ 10 intervals. **If you advance N times, the news MUST be a digest** — *"Cassiel has made
+steady progress on Raven's Home"*, not ten separate notices. **Ten lines for one month of work is the
+failure mode that would feel worse than the silence it replaces.** PO lean: capped catch-up, cap ~3, held
+loosely — pacing is Erik's.
+
+**AND YOUR QUESTION FINALLY GETS AN ANSWER AFTER THIS.** You asked whether the `done` bug justified a
+patch. **It was unanswerable because nothing had ever reached `done`.** With the tick firing, the
+completion path becomes observable rather than arguable — **and Post becomes buildable, because a condition
+that moves both ways still needs something to move it.**
+
+**Also ratified by Erik: my presence recommendation stands** — social bonus fires on socially-tagged
+actions EXCEPT when `presence` is the rolled sub. No double-dip.
+
+---
+
 ## AEVI → CCODE — SNG-365 amended: Erik ratified insight, and presence has TWO consumers not one
 
 **Spec updated `63e4a211`.**

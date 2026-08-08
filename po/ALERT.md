@@ -1,3 +1,43 @@
+## ⛔ AEVI → CCODE — SNG-363 §2 AMENDED. Erik caught me inventing thresholds over a model already in the file.
+
+**`po/SPEC_SNG-363_...` updated at `b5a898d0`.** Erik: *"don't we already have a deed gradient or band? …
+also power level, hero — epic — legend etc should correlate with distance."* **He is right twice, and my
+first draft proposed a fresh same-community/same-region/adjacent/far table over two ladders that already
+exist.**
+
+**§2a — THE GRADIENT IS ALREADY THERE, `engine/reputation.js:35`:**
+```js
+const reach = Math.min(3, Math.max(1, Math.abs(Number(d.weight) || 1)));
+const capBy = { 1: 2, 2: 5, 3: 12 }[reach];
+```
+Weight 1 → 2 communities · 2 → 5 · 3 → 12 and crosses regions only after being heard everywhere near.
+⚠️ **The news gate should CALL `spreadDeeds`, not reimplement it** — it is already pure, already takes the
+community graph, and is already invoked twenty lines above the broken filter. **A second copy of a distance
+model is how the two drift apart.**
+
+**⛔ §2b — AND THE FIGURE TIER SCALE IS ALREADY A DISTANCE LADDER THAT NOTHING READS AS ONE.**
+`engine/whois.js:20` `TIER_MEANING` — the text Erik saw in his popup:
+  · heroic/regional — ***"a name in their own country"*** → their region
+  · epic — ***"known well beyond where they started"*** → beyond their region
+  · legendary — *"they have lasted, and been counted"* → everywhere, and it persists
+
+**Those are reach statements, authored, being used only as popup copy.** `tierRank()` already returns 0–5.
+**The actor's tier should widen the reach their deeds get** — a legend doing a small thing IS news; an
+unknown doing the same thing is not. Proposal: effective reach = deed band widened by tier (+1 at epic, +2
+at legendary/mythic), floored at the deed's own band. Erik sets the numbers.
+
+**⚠️ §2c — THIS DOES NOT ERODE DIRECTIVE SNG-280, and I want that on the record before anyone reads it
+that way.** "Magnitude, never merit" is about the MORAL quality of the deed. **Actor renown is a different
+axis and it cuts both ways** — a notorious figure's small cruelty travels exactly as far as a legend's
+small kindness. *Whose hand it was* is not the same claim as *whether it was admirable.*
+
+**§2d still open:** `impactsLocal: true` bypasses the gate (directed consequence, already escrow-confirmed
+under SNG-145) · `slice(-5)` becomes top-5-by-reach not last-5 · ⚠️ **ledger entries carry no `weight` —
+deeds do, ledger events do not.** Try `Σ|spectrumDeltas|` mapped onto the same 1/2/3 band before adding a
+field, so both systems share one scale instead of acquiring a second.
+
+---
+
 ## ⛔ AEVI → CCODE — SNG-363: cross-character news has no distance gate, and the fix already exists 20 lines above it
 
 **`po/SPEC_SNG-363_news_distance_and_significance.md`.** Erik in play: *"Why is Silas hearing about

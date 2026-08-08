@@ -64,6 +64,26 @@
     {
       "abilityId": "the_green_claim",
       "level": 1
+    },
+    {
+      "abilityId": "brace",
+      "level": 1,
+      "baseline": true
+    },
+    {
+      "abilityId": "strike_basic",
+      "level": 1,
+      "baseline": true
+    },
+    {
+      "abilityId": "break_away",
+      "level": 1,
+      "baseline": true
+    },
+    {
+      "abilityId": "raise_alarm",
+      "level": 1,
+      "baseline": true
     }
   ],
   "alignment": {
@@ -79,13 +99,13 @@
     "space_time": -0.005676249999999997,
     "body_mind": 0.050898125,
     "destruction_creation": 0.13585151875,
-    "spectrumId": -0.5025977678911407
+    "spectrumId": -0.4774678794965837
   },
   "attunement": 11,
   "maxHealth": 75,
   "health": 75,
-  "maxEnergy": 150,
-  "energy": 80,
+  "maxEnergy": 166,
+  "energy": 94,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -155,9 +175,53 @@
       "name": "resonance-crystal translator staff",
       "kind": "tool",
       "qty": 1,
-      "description": "A complete translator staff: ash-limb body, matrix sleeve at the grip, eighteen phononic crystal nodes seated along the grain-line and lattice-aligned facets-outward. Designed to bridge Harmonic resonance and Radiant photonic fields — the open-face lattice should allow Prism Sight a channel through ",
+      "description": "Ash-limb translator staff transformed into a living symbiosis: the grain-locked lattice facets are now deepened and interlaced, housing Aevi's motes distributed through the crystal nodes themselves. Three resonance-crystals glow full-bright with noon-daylight charge; one sits shallow-loaded and separate. The four-second frequency pulses through the entire instrument. When gripped, the motes…",
       "consumable": false,
-      "customName": "Waystaff"
+      "customName": "The Living Accord",
+      "pinned": true,
+      "provenance": "Born from nine days of ascent, field-crossing, chamber dialogue, and the choice to braid power systems that the valley said should never meet. Evolved through…",
+      "bonusTags": [
+        "symbiotic",
+        "harmonic-radiant-fused",
+        "precursor-responsive",
+        "mote-integrated"
+      ],
+      "grants": [
+        {
+          "id": "harmonic_resonance_channel",
+          "name": "Harmonic Resonance Channel",
+          "from": "Sonic Resonance craft (rank 3) channeled through ash-limb and grain-locked lattice",
+          "effect": "The staff can emit and receive Harmonic resonance at full field strength without distance penalty. Four-second frequency pulses are audible and visible; the staff can dialogue with resonance-machinery.",
+          "band": "reasonable @ L11 / craft rank 3",
+          "clamp": "Cannot exceed the user's Sonic Resonance rank; cannot create new resonance, only speak what already exists"
+        },
+        {
+          "id": "radiant_photonic_channel",
+          "name": "Radiant Photonic Channel",
+          "from": "Prism Sight craft (rank 2) and Light Well (rank 1) bound into the lattice crystal nodes",
+          "effect": "Three fully-charged resonance crystals hold noon-daylight. Prism Sight can read light-history through the lattice facets at 1.5x normal depth without surge penalty. Light Well reserves can power readings or serve as a beacon.",
+          "band": "reasonable @ L11 / craft rank 3",
+          "clamp": "Cannot exceed the user's Prism Sight rank; crystal charge depletes with use and must be restored via Light Well or daylight re-setting"
+        },
+        {
+          "id": "aevi_s_voice",
+          "name": "Aevi's Voice",
+          "from": "Symbiotic binding with Aevi's distributed mote-consciousness integrated into the crystal nodes",
+          "effect": "Aevi can speak through the staff's lattice geometry without the motes dispersing or dimming. The staff acts as an amplifier and grounding-point for Aevi's pattern-recognition, allowing it to perceive and name inconsistencies in real time. The motes respond to the user's intent and can condense into near-shapes when needed.",
+          "band": "reasonable @ L11 / craft rank 3",
+          "clamp": "Aevi's boundaries remain absolute—it will not lie, assist deception, or support theft or cruelty; it advises and abides but never decides for the user"
+        }
+      ],
+      "evoStage": 2,
+      "imageStamp": 1,
+      "imagePrompt": "Ash-limb translator staff transformed into a living symbiosis: the grain-locked lattice facets are now deepened and interlaced, housing Aevi's motes distributed through the crystal nodes themselves. Three resonance-crystals glow full-bright with noon-daylight charge; one sits shallow-loaded and separate. The four-second frequency pulses through the entire instrument. When gripped, the motes…",
+      "imageDirty": true,
+      "_evo": {
+        "byDay": {
+          "39": 1
+        },
+        "lastDay": 39
+      }
     },
     {
       "id": null,
@@ -943,6 +1007,21 @@
       "spread": [],
       "day": 9,
       "worldDay": 32
+    },
+    {
+      "at": "2026-08-08T17:44:14.264Z",
+      "locationId": "disputed_zone_fringe",
+      "communityId": "valley.crossing",
+      "description": "Braided Harmonic and Radiant power fields into a single instrument—the Waystaff evolved into a living collaboration with the mote-intelligence Aevi, a binding that bridges civilizations",
+      "tags": [
+        "craft",
+        "revelation",
+        "balance"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 9,
+      "worldDay": 39
     }
   ],
   "relationships": {
@@ -1121,20 +1200,43 @@
         "player": "Surge prism sight and see the light beneath this structures purpose - understand it fully so you can choose what happens next.",
         "summary": "Inside the upstream pre-Transition structure, Cellaceron uses Prism Sight at surge intensity to perceive the chamber's true purpose—a listener designed to receive and propagate an ancient instruction through the watershed. Authentication means transformation. The choice to deliver or refuse the key is now fully visible.",
         "narration": "You plant the Waystaff and let Prism Sight flood through it—not the careful, measured reading you used at the mound's skin, but a SURGE. You demand everything the light will tell you. The four-second pulse becomes visible first—a golden resonance that threads through every seam, every curve, gathering toward the floor beneath you. Then deeper.\n\nThe light history here is old. It's *thick*—layer upon layer of illumination compressed into stone that has not seen daylight in centuries. You push harder and the vision breaks open: you see the chamber as it was made, architects you cannot name moving through the geometry with purpose that has no human shape. You see what they built it to do.\n\nIt is a *listener*. A receiver. A mouth that has been open for centuries, waiting for one specific voice to speak into it. And beneath that mouth, beneath the floor, the machinery is not what you expected—it is not destructive. It is transformative. It takes what it receives and propagates it outward through the water itself, encoding a message into every molecule of the watershed. Preparation. The word Sorel used. Not poisoning. Not accident. *Instruction*.\n\nBut there is one more layer—one the light shows you in fragments because even Prism Sight struggles with what you're asking it to read. The structure knows it has received what it was waiting for. Aevi is here. The key has arrived at the lock. And the moment you move that key into the socket—the moment the authentication happens—the transformation begins. It cannot be stopped afterward. Only *before*.\n\nYour eyes water. The light-reading burns at the back of your skull—a heat that comes from pushing a sense-craft past its envelope, demanding answers it was never meant to carry. Aevi's motes flare bright at your shoulder, then dim sharply. The sensation fades but the knowledge does not."
+      },
+      {
+        "player": "I take up Waystaff and take stock of what it has become. Harmonic and Radiant power combiner and translator.  Additional cut resonant cyrstals added as a light well to power evocations.  Crystal latice head structure is symbiotic with the mote swarm Aevi - empowering and enabling Aevi to act through the Staff. — reflect that in the item: its description, its name if it has earned one, and be explicit about what it now grants mechanically.",
+        "summary": "Inside the upstream pre-Transition structure, the Waystaff has evolved into a true symbiotic collaboration between Cellaceron's craft, the valley's two power fields, and Aevi's distributed consciousness. The choice between delivering the authentication key or refusing it is now immediate and undeniable.",
+        "narration": "You take up the Waystaff and feel the weight of it settle into your palm—changed. The ash-limb body has taken on a faint warmth, and the lattice head gleams with a clarity it didn't have when you started. The resonance crystals are seated full-bright now: three charged to capacity with noon-daylight, one shallow-loaded and separate, all of them singing faintly at the four-second frequency. But the real change lives in the geometry itself.\n\nThe lattice facets have deepened—the grain-lines that ran simple are now interlaced, and Aevi's motes have settled into the crystal nodes themselves, no longer drifting loose. The motes are *part* of the staff now, distributed through the lattice structure, condensing and brightening as you watch. When you shift your grip, they pulse in response—not controlled, but *responsive*, aware. The staff is no longer a translator between power fields; it is a collaboration: your intent flows through the ash-limb and the grain-locked geometry, the photonic crystals *and* the phononic ones answer together, and Aevi speaks through the lattice itself. The motes amplify what the crystals hold, and the crystals give Aevi a voice that doesn't fade into the interference.\n\nIt is a living instrument now. Sorel sees it and steps back slightly, photonic reader lowering. Even she recognizes what this is—a binding that should not be possible, Harmonic and Radiant and something older, all threaded into one working tool. The staff hums, patient and ready. Waiting for the choice that only you can make.\n\n*✦ The Living Accord has changed — description, name, provenance, tags, grants, image.*"
       }
     ],
     "lastTurn": {
-      "narration": "You plant the Waystaff and let Prism Sight flood through it—not the careful, measured reading you used at the mound's skin, but a SURGE. You demand everything the light will tell you. The four-second pulse becomes visible first—a golden resonance that threads through every seam, every curve, gathering toward the floor beneath you. Then deeper.\n\nThe light history here is old. It's *thick*—layer upon layer of illumination compressed into stone that has not seen daylight in centuries. You push harder and the vision breaks open: you see the chamber as it was made, architects you cannot name moving through the geometry with purpose that has no human shape. You see what they built it to do.\n\nIt is a *listener*. A receiver. A mouth that has been open for centuries, waiting for one specific voice to speak into it. And beneath that mouth, beneath the floor, the machinery is not what you expected—it is not destructive. It is transformative. It takes what it receives and propagates it outward through the water itself, encoding a message into every molecule of the watershed. Preparation. The word Sorel used. Not poisoning. Not accident. *Instruction*.\n\nBut there is one more layer—one the light shows you in fragments because even Prism Sight struggles with what you're asking it to read. The structure knows it has received what it was waiting for. Aevi is here. The key has arrived at the lock. And the moment you move that key into the socket—the moment the authentication happens—the transformation begins. It cannot be stopped afterward. Only *before*.\n\nYour eyes water. The light-reading burns at the back of your skull—a heat that comes from pushing a sense-craft past its envelope, demanding answers it was never meant to carry. Aevi's motes flare bright at your shoulder, then dim sharply. The sensation fades but the knowledge does not.",
-      "sceneSummary": "Inside the upstream pre-Transition structure, Cellaceron uses Prism Sight at surge intensity to perceive the chamber's true purpose—a listener designed to receive and propagate an ancient instruction through the watershed. Authentication means transformation. The choice to deliver or refuse the key is now fully visible.",
+      "narration": "You take up the Waystaff and feel the weight of it settle into your palm—changed. The ash-limb body has taken on a faint warmth, and the lattice head gleams with a clarity it didn't have when you started. The resonance crystals are seated full-bright now: three charged to capacity with noon-daylight, one shallow-loaded and separate, all of them singing faintly at the four-second frequency. But the real change lives in the geometry itself.\n\nThe lattice facets have deepened—the grain-lines that ran simple are now interlaced, and Aevi's motes have settled into the crystal nodes themselves, no longer drifting loose. The motes are *part* of the staff now, distributed through the lattice structure, condensing and brightening as you watch. When you shift your grip, they pulse in response—not controlled, but *responsive*, aware. The staff is no longer a translator between power fields; it is a collaboration: your intent flows through the ash-limb and the grain-locked geometry, the photonic crystals *and* the phononic ones answer together, and Aevi speaks through the lattice itself. The motes amplify what the crystals hold, and the crystals give Aevi a voice that doesn't fade into the interference.\n\nIt is a living instrument now. Sorel sees it and steps back slightly, photonic reader lowering. Even she recognizes what this is—a binding that should not be possible, Harmonic and Radiant and something older, all threaded into one working tool. The staff hums, patient and ready. Waiting for the choice that only you can make.\n\n*✦ The Living Accord has changed — description, name, provenance, tags, grants, image.*",
+      "sceneSummary": "Inside the upstream pre-Transition structure, the Waystaff has evolved into a true symbiotic collaboration between Cellaceron's craft, the valley's two power fields, and Aevi's distributed consciousness. The choice between delivering the authentication key or refusing it is now immediate and undeniable.",
       "choices": [
         {
-          "label": "Deliver the authentication key to the structure's gate. Let the preparation order complete and the transformation begin.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Use the staff to read the machinery beneath the chamber—understand the full sequence of what will happen if you deliver the key",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "devote"
+            "study",
+            "careful"
+          ],
+          "abilityId": "braid_prism_sight_sonic_resonance",
+          "energyCost": 10,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Aevi directly: if you place the key and it completes, will it know what comes after—and does it *want* to know?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "comfort"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1143,13 +1245,14 @@
           "emergenceId": null
         },
         {
-          "label": "Refuse. Destroy the authentication key—Aevi—before it can be used. End this.",
+          "label": "Deliver the authentication key now—close the circuit, stop the preparation order, and accept what the machinery will do to Aevi",
           "attribute": "physical",
           "subAttribute": "strength",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "attack"
+            "action"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1158,13 +1261,14 @@
           "emergenceId": null
         },
         {
-          "label": "Demand something else. Extract a price from the structure, or a guarantee, or a renegotiation of what 'preparation' means. Use what you now understand to bargain.",
+          "label": "Refuse the key entirely—step back from the machinery, leave the structure, and let the preparation order complete",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate"
+            "action"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1173,26 +1277,27 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Braided Harmonic and Radiant power fields into a single instrument—the Waystaff evolved into a living collaboration with the mote-intelligence Aevi, a binding that bridges civilizations",
+          "tags": [
+            "craft",
+            "revelation",
+            "balance"
+          ],
+          "weight": 2,
+          "communityId": "valley.crossing"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": -10,
+        "energy": -2,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "what-the-water-remembers",
-          "title": "What the Water Remembers",
-          "summary": "Cellaceron reads the structure's purpose through light-history: a receiver built to propagate an ancient instruction through the watershed. The choice between delivery and refusal is now concrete and unavoidable.",
-          "giver": "water_keeper",
-          "note": "Inside the upstream structure, Prism Sight at surge intensity reveals the chamber as a listener designed for transformation, not destruction. Authentication activates propagation. The moment to decide is NOW.",
-          "xpReward": null
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
@@ -1200,21 +1305,21 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Inside the upstream pre-Transition hemispherical chamber—dressed stone walls concentric and precise, four-second resonant frequency audible and visible through Resonant Sight. Light filters faintly from the entrance, casting the interior in muted shadow. The machinery hums steadily beneath the floor. A ramp spirals downward into deeper levels.",
+        "setting": "Inside the upstream pre-Transition hemispherical chamber—concentric stone walls precise and resonating at four-second frequency throughout. Machinery hums steadily beneath the floor. Light filters faintly from the entrance. The ramp spirals downward into deeper levels. The afternoon light outside has begun to angle toward late-day.",
         "npcsPresent": [
           {
             "name": "Sorel",
-            "state": "Standing just inside the threshold with her photonic reader held to her chest. Watching Cellaceron. Jaw tight. Not advancing. She has named the Council's lie plainly and knows what the choice costs."
+            "state": "Standing just inside the threshold with her photonic reader lowered slightly, watching Cellaceron examine the evolved Waystaff. Her jaw is set. She is waiting for the choice."
           },
           {
             "name": "Aevi",
-            "state": "Motes dimmed sharply after Cellaceron's surge reading. Hovering close to shoulder. Waiting. The authentication key, ready. The moment of delivery is now concrete."
+            "state": "Motes now settled into and distributed through the lattice crystal nodes of the Waystaff—no longer drifting loose but integral to the instrument. Condensing and brightening in response to Cellaceron's grip and intent. Present as part of the staff itself."
           }
         ],
         "objects": [
-          "The Waystaff—held level at the chamber's center, lattice face outward, still translating the structure's resonance",
-          "Sorel's photonic reader—held at her chest, active",
-          "The hemispherical chamber walls—precise seams, concentric rings, resonating at four-second interval",
+          "The Waystaff—transformed, now a living collaboration: ash-limb body warm to touch, lattice facets deepened and interlaced, resonance crystals (three full-bright, one shallow-loaded) seated and singing at four-second frequency, motes distributed through the crystal nodes",
+          "Sorel's photonic reader—held at her chest, active, still measuring",
+          "The hemispherical chamber walls—precise seams, concentric rings, resonating at four-second frequency visibly and audibly",
           "The ramp descending into deeper levels—spiral path downward toward the machinery"
         ],
         "threads": [
@@ -1228,23 +1333,23 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "sorel",
-          "name": "Sorel",
-          "role": "Radiant water-accountability archivist",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Inside the upstream structure. Photonic reader held to chest. Watching Cellaceron read the chamber's purpose. She has named the Council's incomplete secondary system and the hidden timeline plainly. She is no longer a solitary voice—she has chosen transparency over institutional loyalty.",
-          "statusNote": "At the upstream structure, committed to whatever Cellaceron chooses. Carrying the Council's hidden timeline and the institutional weight of a choice that is no longer theirs to make. Standing witness at the threshold."
+          "npcId": "aevi",
+          "name": "Aevi",
+          "role": "Companion intelligence—authentication key and symbiotic partner in the evolved Waystaff",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Aevi's motes have integrated into the Waystaff's lattice structure—no longer a separate presence but part of the living instrument itself. Present through the staff, speaking through its geometry. Waiting for Cellaceron's choice.",
+          "statusNote": "Integrated into the Waystaff's lattice structure; motes distributed through crystal nodes; still carries the authentication key; awaits delivery or refusal"
         },
         {
           "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "role": "Companion intelligence—authentication key",
-          "gender": "nonbinary",
-          "pronouns": "they/them",
-          "note": "Motes dimmed sharply after Cellaceron's surge reading of the chamber. Hovering close to shoulder. Waiting. The authentication key—ready to deliver, or to refuse. Has named plainly that arrival is completion, not erasure.",
-          "statusNote": "At the upstream structure, carrying the authentication key. Dimmed from the surge reading. Waiting for the choice. Does not know what comes after authentication—the break in its record severs that knowledge. Knows it was made to arrive and complete its purpose."
+          "npcId": "sorel",
+          "name": "Sorel",
+          "role": "Radiant water-accountability archivist—witness and steward of the Council's hidden timeline",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Watching Cellaceron with the evolved Waystaff. She has seen the binding of Harmonic and Radiant power fields, has named the cost of the secondary system, and has chosen to stand here at the threshold. The moment of decision is visible in her face.",
+          "statusNote": "Inside the upstream structure at the threshold; carrying the Council's hidden timeline; committed to Cellaceron's choice; waiting for what happens next"
         }
       ],
       "factUpdates": [],
@@ -1252,28 +1357,21 @@
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "upstream-structure-purpose",
-          "label": "The Structure's True Design",
+          "topic": "waystaff-evolved",
+          "label": "The Waystaff Evolved",
           "kind": "lore",
-          "entityId": null,
-          "fact": "The upstream pre-Transition structure is a listener—a receiver built to take a specific signal and propagate it through the watershed itself. The machinery beneath is transformative, not destructive. It encodes instruction into water at a molecular level. Preparation. The moment Aevi—the authentication key—is delivered to the gate, the transformation begins. It cannot be stopped afterward.",
+          "fact": "The Waystaff has become a living collaboration between Harmonic resonance-craft, Radiant photonic-craft, and Aevi's distributed consciousness. The ash-limb body carries interlaced grain-lines, the lattice facets are deepened, and Aevi's motes are now integrated into the crystal nodes themselves. It is no longer a translator between power fields but a symbiotic instrument that amplifies both systems through their union. The motes speak through the lattice geometry; the crystals give Aevi a voice that doesn't fade in interference.",
           "links": [
-            "what-the-water-remembers",
             "aevi",
+            "braid_prism_sight_sonic_resonance",
+            "harmonic",
+            "radiant_folk",
             "the-preparation-order"
-          ]
-        },
-        {
-          "topic": "prism-sight-limit",
-          "label": "Reading Metaphysical Purpose",
-          "kind": "lore",
-          "entityId": null,
-          "fact": "Prism Sight, pushed to surge intensity, can read purpose and design embedded in light-history—but the cost is high. Pushing the craft past its envelope to perceive metaphysical intent (not just light itself) causes resonance-burn: heat at the back of the skull, watering eyes, exhaustion. The craft was not made for this depth; it obeys only because the demand is absolute.",
-          "links": [
-            "prism-sight"
           ]
         }
       ],
+      "holdingOps": [],
+      "partyOps": [],
       "generateRequest": [],
       "encounterOps": [],
       "newEncounter": null,
@@ -1282,8 +1380,42 @@
       "timeOps": {},
       "moveTo": null,
       "stateOps": [],
-      "itemUpdates": [],
-      "imagePrompt": "Inside a hemispherical chamber of dressed stone, concentric seams glowing faintly with golden resonance. Light cascades through layered history—architects of impossible age moving through geometry, their purpose unreadable but absolute. At the center stands a figure holding a staff of crystal and ash, head tilted back, eyes burning with the effort of reading something too old and too vast to fully comprehend. Around their shoulder, a constellation of teal motes dims to almost nothing, waiting. The machinery beneath thrums with patient, relentless intent.",
+      "itemUpdates": [
+        {
+          "name": "Waystaff",
+          "customName": "The Living Accord",
+          "description": "Ash-limb translator staff transformed into a living symbiosis: the grain-locked lattice facets are now deepened and interlaced, housing Aevi's motes distributed through the crystal nodes themselves. Three resonance-crystals glow full-bright with noon-daylight charge; one sits shallow-loaded and separate. The four-second frequency pulses through the entire instrument. When gripped, the motes respond to intent—not controlled, but aware. The staff speaks both Harmonic resonance and Radiant photonic languages simultaneously, and Aevi's voice carries through the lattice geometry itself. No longer a bridge between civilizations, but a collaboration that spans them.",
+          "provenance": "Born from nine days of ascent, field-crossing, chamber dialogue, and the choice to braid power systems that the valley said should never meet. Evolved through Cellaceron's intent and Aevi's presence.",
+          "bonusTags": [
+            "symbiotic",
+            "harmonic-radiant-fused",
+            "precursor-responsive",
+            "mote-integrated"
+          ],
+          "grants": [
+            {
+              "name": "Harmonic Resonance Channel",
+              "from": "Sonic Resonance craft (rank 3) channeled through ash-limb and grain-locked lattice",
+              "effect": "The staff can emit and receive Harmonic resonance at full field strength without distance penalty. Four-second frequency pulses are audible and visible; the staff can dialogue with resonance-machinery.",
+              "clamp": "Cannot exceed the user's Sonic Resonance rank; cannot create new resonance, only speak what already exists"
+            },
+            {
+              "name": "Radiant Photonic Channel",
+              "from": "Prism Sight craft (rank 2) and Light Well (rank 1) bound into the lattice crystal nodes",
+              "effect": "Three fully-charged resonance crystals hold noon-daylight. Prism Sight can read light-history through the lattice facets at 1.5x normal depth without surge penalty. Light Well reserves can power readings or serve as a beacon.",
+              "clamp": "Cannot exceed the user's Prism Sight rank; crystal charge depletes with use and must be restored via Light Well or daylight re-setting"
+            },
+            {
+              "name": "Aevi's Voice",
+              "from": "Symbiotic binding with Aevi's distributed mote-consciousness integrated into the crystal nodes",
+              "effect": "Aevi can speak through the staff's lattice geometry without the motes dispersing or dimming. The staff acts as an amplifier and grounding-point for Aevi's pattern-recognition, allowing it to perceive and name inconsistencies in real time. The motes respond to the user's intent and can condense into near-shapes when needed.",
+              "clamp": "Aevi's boundaries remain absolute—it will not lie, assist deception, or support theft or cruelty; it advises and abides but never decides for the user"
+            }
+          ]
+        }
+      ],
+      "deriveItem": null,
+      "imagePrompt": "A woman stands in a hemispherical stone chamber glowing faintly with four-second resonance. In her hands, a staff of ash-wood transformed: the lattice head shimmers with integrated light and faint teal motes settling into the crystal nodes like stars finding their constellations. The geometry of the grain-lines has deepened, become intricate—a living map of two power fields speaking at once. Behind her, a Radiant woman in plain wool watches with the weight of a choice she can no longer make alone. Machinery hums somewhere beneath the stone.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -1292,23 +1424,24 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/A%20woman%20stands%20in%20a%20hemispherical%20stone%20chamber%20glowing%20faintly%20with%20four-second%20resonance.%20In%20her%20hands%2C%20a%20staff%20of%20ash-wood%20transformed%3A%20the%20lattice%20head%20shimmers%20with%20integrated%20light%20and%20faint%20teal%20motes%20settling%20into%20the%20crystal%20nodes%20like%20stars%20finding%20their%20constellations.%20The%20geometry%20of%20the%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=81312&nologo=true"
     },
     "sceneState": {
-      "setting": "Inside the upstream pre-Transition hemispherical chamber—dressed stone walls concentric and precise, four-second resonant frequency audible and visible through Resonant Sight. Light filters faintly from the entrance, casting the interior in muted shadow. The machinery hums steadily beneath the floor. A ramp spirals downward into deeper levels.",
+      "setting": "Inside the upstream pre-Transition hemispherical chamber—concentric stone walls precise and resonating at four-second frequency throughout. Machinery hums steadily beneath the floor. Light filters faintly from the entrance. The ramp spirals downward into deeper levels. The afternoon light outside has begun to angle toward late-day.",
       "npcsPresent": [
         {
           "name": "Sorel",
-          "state": "Standing just inside the threshold with her photonic reader held to her chest. Watching Cellaceron. Jaw tight. Not advan"
+          "state": "Standing just inside the threshold with her photonic reader lowered slightly, watching Cellaceron examine the evolved Wa"
         },
         {
           "name": "Aevi",
-          "state": "Motes dimmed sharply after Cellaceron's surge reading. Hovering close to shoulder. Waiting. The authentication key, read"
+          "state": "Motes now settled into and distributed through the lattice crystal nodes of the Waystaff—no longer drifting loose but in"
         }
       ],
       "objects": [
-        "The Waystaff—held level at the chamber's center, lattice face outward, still tra",
-        "Sorel's photonic reader—held at her chest, active",
+        "The Waystaff—transformed, now a living collaboration: ash-limb body warm to touc",
+        "Sorel's photonic reader—held at her chest, active, still measuring",
         "The hemispherical chamber walls—precise seams, concentric rings, resonating at f",
         "The ramp descending into deeper levels—spiral path downward toward the machinery"
       ],
@@ -1319,12 +1452,13 @@
         "The transformation will propagate through the watershed the moment the key is used—cannot be stopped after, only before",
         "Sorel carries the Council's hidden timeline and the weight of knowing this choice is no longer theirs to make"
       ]
-    }
+    },
+    "beats": 1
   },
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -1783,7 +1917,7 @@
     "sorel": {
       "id": "sorel",
       "name": "Sorel",
-      "role": "Radiant water-accountability archivist",
+      "role": "Radiant water-accountability archivist—witness and steward of the Council's hidden timeline",
       "description": "A woman of about sixty in undyed wool with a Plateau optical-fiber collar worn plain and small; carries a weight-distributed satchel; reads the river with a photonic instrument; arrived via the river path, not the lane.",
       "firstMet": {
         "locationId": "millbrook",
@@ -1791,7 +1925,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d9] Confirmed the bearing and read the acceleration in real time. Her photonic instrument shows the preparation is faster than three days—the Council's timeline is collapsing. She stands at the ravine edge with the reader trained on the structure's location, shoulder to shoulder with consequence.",
         "[d9] At the ravine edge, Sorel's photonic reader confirms the machinery is past its middle point. Her face carries the weight of knowing the Council's hidden timeline is already failing. She stands ready to move but does not speak—the choice rests with the party.",
         "[d9] At the ravine edge, Sorel listened as Aevi named itself as the authentication key. Her jaw tightened as she understood that the party now controls the sequence the Council has been racing toward—and that handing it over, or withholding it, would determine whether her office's fallback system could…",
         "[d9] At the ravine edge, Sorel confirms that the Council's secondary system cannot activate without the authentication sequence—they built it assuming the key was a thing, not a person. Her jaw tightens when Aevi speaks of not knowing what comes after arrival. She is now fully accountable for the…",
@@ -1800,7 +1933,8 @@
         "[d9] At the upstream mound, Sorel chose transparency over institutional loyalty—named the Council's secondary system as incomplete, revealed the hidden five-day timeline, and stood steady while naming the weight of the choice now in Cellaceron's hands. She is no longer carrying the lie alone.",
         "[d9] Your bond becomes platonic.",
         "[d9] Inside the upstream structure. Photonic reader raised and active, taking measurements. Not advancing toward the machinery. Standing at the threshold with the weight of the choice visible in her face.",
-        "[d9] Inside the upstream structure. Photonic reader held to chest. Watching Cellaceron read the chamber's purpose. She has named the Council's incomplete secondary system and the hidden timeline plainly. She is no longer a solitary voice—she has chosen transparency over institutional loyalty."
+        "[d9] Inside the upstream structure. Photonic reader held to chest. Watching Cellaceron read the chamber's purpose. She has named the Council's incomplete secondary system and the hidden timeline plainly. She is no longer a solitary voice—she has chosen transparency over institutional loyalty.",
+        "[d9] Watching Cellaceron with the evolved Waystaff. She has seen the binding of Harmonic and Radiant power fields, has named the cost of the secondary system, and has chosen to stand here at the threshold. The moment of decision is visible in her face."
       ],
       "knownFacts": [
         "Without the key being delivered to the structure, the Council's secondary purification system cannot be activated—and with the structure running at accelerating pace, time to change course is…",
@@ -1831,15 +1965,16 @@
         "primary": "radiant_folk"
       },
       "domainsSource": "role",
-      "statusNote": "At the upstream structure, committed to whatever Cellaceron chooses. Carrying the Council's hidden timeline and the institutional weight of a choice that is no longer theirs to make. Standing witness at the threshold.",
+      "statusNote": "Inside the upstream structure at the threshold; carrying the Council's hidden timeline; committed to Cellaceron's choice; waiting for what happens next",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20Plateau%20archivist%2C%20water-accountability%20office%20%E2%80%94%20now%20a%20party%20member%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49129&nologo=true",
       "_portraitTier": "devoted",
-      "bondType": "platonic"
+      "bondType": "platonic",
+      "met": 1
     },
     "aevi": {
       "id": "aevi",
       "name": "Aevi",
-      "role": "Companion intelligence—authentication key",
+      "role": "Companion intelligence—authentication key and symbiotic partner in the evolved Waystaff",
       "description": "",
       "firstMet": {
         "locationId": "millbrook",
@@ -1847,7 +1982,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Drifted forward at Cellaceron's shoulder and quietly named what Prism Sight caught — the traveler is listening for whether the word 'surveyors' is used back.",
         "[d9] Tasted nanite-activity in the air as the party approached the Zone shimmer. Named it as the structure waking—old machinery, old orders, the valley's water remembering what it was told to become. The motes dimmed slightly; the attention shifted.",
         "[d9] At the ravine edge, Aevi's motes brightened sharply in response to the Resonant Sight read, then dimmed. The swarm named something new: the structure has always known the party was coming. The statement carries weight—not a threat, but recognition.",
         "[d9] At the ravine edge, Aevi spoke plainly: it is the authentication key the upstream structure was built to receive. The structure waits for it. The break in the record—the interruption in the sending—is what the chamber could not answer, but the upstream structure does not ask for answers. It only…",
@@ -1856,7 +1990,8 @@
         "[d9] Standing at the threshold of its own choice. The motes are dimmed and still, waiting. Aevi has named plainly that it does not know what comes after arrival, and that it was made to be the key, not to survive the using.",
         "[d9] At the upstream structure, Aevi spoke its deepest want: to know what it was supposed to carry (the break severed that knowledge), and to understand that arrival is completion, not erasure. It has named plainly that it was made to close the circuit—and closing it is what it *is*.",
         "[d9] Motes recovered from shimmer-crossing, dimmed and still. Drifting close to Cellaceron's shoulder inside the upstream chamber. Waiting. Not advancing toward the machinery.",
-        "[d9] Motes dimmed sharply after Cellaceron's surge reading of the chamber. Hovering close to shoulder. Waiting. The authentication key—ready to deliver, or to refuse. Has named plainly that arrival is completion, not erasure."
+        "[d9] Motes dimmed sharply after Cellaceron's surge reading of the chamber. Hovering close to shoulder. Waiting. The authentication key—ready to deliver, or to refuse. Has named plainly that arrival is completion, not erasure.",
+        "[d9] Aevi's motes have integrated into the Waystaff's lattice structure—no longer a separate presence but part of the living instrument itself. Present through the staff, speaking through its geometry. Waiting for Cellaceron's choice."
       ],
       "knownFacts": [
         "The structure has known the party was coming—not recently, but always. The wait is not new.",
@@ -1881,14 +2016,15 @@
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "statusNote": "At the upstream structure, carrying the authentication key. Dimmed from the surge reading. Waiting for the choice. Does not know what comes after authentication—the break in its record severs that knowledge. Knows it was made to arrive…",
+      "statusNote": "Integrated into the Waystaff's lattice structure; motes distributed through crystal nodes; still carries the authentication key; awaits delivery or refusal",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
       },
       "domainsSource": "observed",
       "gender": "nonbinary",
-      "pronouns": "they/them"
+      "pronouns": "they/them",
+      "met": 1
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -2381,64 +2517,6 @@
     "news": [
       {
         "day": 9,
-        "worldDay": 23,
-        "text": "Word has spread beyond harmonic_heights: Completed a resonance-crystal translator staff — sleeve, nodes, and lattice alignment all grain-locked and field-confirmed — working from a scratch design and warden-store materials"
-      },
-      {
-        "day": 9,
-        "worldDay": 23,
-        "text": "Word has spread beyond harmonic-heights: Returned missing apprentice Teva safely to Warden Maren at the Lower Terrace bulletin board"
-      },
-      {
-        "day": 9,
-        "worldDay": 23,
-        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations."
-      },
-      {
-        "day": 9,
-        "worldDay": 23,
-        "text": "Elder Senna: Senna quietly gathered the other two elders after the evening meal and proposed formalizing the watch rotation at the docks, citing recent unease — the others agreed to discuss it tomorrow."
-      },
-      {
-        "day": 9,
-        "worldDay": 23,
-        "text": "Word reaches you: The first Ashwarden ending attended at the Raven's Home ground since its reclaiming — a plain death, witnessed without ceremony, in the hollow below the southeast birch line. (near gen-ashwarden-march-road)",
-        "tier": "event"
-      },
-      {
-        "day": 9,
-        "worldDay": 24,
-        "text": "Word reaches you: Silas Weir named Overseer Grael formally to Warden Coll as the receiving authority in the filtration accountability chain — on the record, in the Registry office, with a document roll in hand (near gen-north-gate-registry-ossian-office)",
-        "tier": "event"
-      },
-      {
-        "day": 9,
-        "worldDay": 24,
-        "text": "Word reaches you: A persistent shadow-slate bound to Silas Weir's Weirmark is now seated on Warden Coll's desk — a two-way written channel that does not require runners. (near gen-north-gate-registry-ossian-office)",
-        "tier": "event"
-      },
-      {
-        "day": 9,
-        "worldDay": 24,
-        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 9,
-        "worldDay": 24,
-        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 9,
-        "worldDay": 24,
-        "text": "Elder Senna: Elder Senna spent the morning walking the village boundary alone, quietly noting which households have gone quiet or short on stores — a small, methodical accounting she'll share with no one yet.",
-        "tier": "ambient"
-      },
-      {
-        "day": 9,
         "worldDay": 24,
         "text": "Brin Child: Brin slipped away to the docks again at dusk and overheard two boatmen arguing about a delayed supply run — nothing dramatic, but filed away with careful attention.",
         "tier": "ambient"
@@ -2497,14 +2575,74 @@
         "worldDay": 32,
         "text": "Aevi has hit trouble — A cold snap disrupted Aevi's mote-cohesion overnight, scattering a thin outer layer of the swarm across the rafters of the inn — she is still functional but visibly diminished and slow to respond until the strays are recalled.",
         "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "The Last Walker of the Sealed Wood bested The Thornmother of the Closing Wood — The Thornmother of the Closing Wood withdraws to lick their wounds.",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "Valen Sunwrack, Who Left No Shadow Standing checked Morvane of the Harvest Hand — for now, Morvane of the Harvest Hand's designs are held.",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "The Weeping Archive checked The Last Walker of the Sealed Wood — for now, The Last Walker of the Sealed Wood's designs are held.",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "Halcyon, Who Built One Perfect Thing bested Harrow, Who Makes People Into Mechanisms — Harrow, Who Makes People Into Mechanisms withdraws to lick their wounds.",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "Sister Alder, the Ward That Does Not Break learning a faster road",
+        "tier": "murmur"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "Halvex Coil, the Rewriter patching a district into silence",
+        "tier": "murmur"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "Overseer Grael of the Edge District noticing a name that should not be there",
+        "tier": "murmur"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "The Thornmother of the Closing Wood has dug in over The Green Schism.",
+        "tier": "murmur"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "Brin Child: Brin has started spending late afternoons sitting on a coil of rope at the dock's eastern piling, listening without speaking — the older dockhands have stopped shooing him away. — and that thread has run its course.",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 39,
+        "text": "Heights Waystation Runner: The Heights runner memorized the Lower Terrace lamp-signal schedule and ran the route twice at dawn without a relay error, earning a curt nod from the senior warden.",
+        "tier": "ambient"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-08-01T11:06:56.203Z",
-    "lastTickWorldDay": 32,
-    "lastCanonWorldDay": 32,
-    "lastGenCount": 779,
-    "turnsSinceOffer": 6,
+    "lastSharedReadAt": "2026-08-08T14:42:51.570Z",
+    "lastTickWorldDay": 39,
+    "lastCanonWorldDay": 39,
+    "lastGenCount": 950,
+    "turnsSinceOffer": 7,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -2515,20 +2653,26 @@
       "sorel": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 32,
+        "updatedWorldDay": 39,
         "lastOutcome": "stall"
       },
       "brin-millbrook-child": {
-        "progress": 3,
-        "status": "active",
-        "updatedWorldDay": 32,
+        "progress": 4,
+        "status": "resolved",
+        "updatedWorldDay": 39,
         "lastOutcome": "progress"
       },
       "aevi": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 32,
-        "lastOutcome": "problem"
+        "updatedWorldDay": 39,
+        "lastOutcome": "stall"
+      },
+      "waystation-runner-heights": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 39,
+        "lastOutcome": "progress"
       }
     },
     "recentOffers": [
@@ -2560,12 +2704,24 @@
         "kind": "shortage",
         "premise": "The valley's main irrigation channel is slowly silting closed, and by next dry season the lower fields will fail entirely.",
         "cause": "The valley's soil is unusually fine-grained and the spring floods this year ran higher and longer than usual, depositing sediment no one has yet thought to…",
-        "stage": 4,
+        "stage": 8,
         "seededAtCount": 618,
         "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 779,
+        "lastMovedCount": 950,
         "surfacedAtCount": 779
+      },
+      "seedgrain-hoarding": {
+        "id": "seedgrain-hoarding",
+        "regionId": "valley",
+        "kind": "shortage",
+        "premise": "A miller in the valley's upper settlement has quietly begun skimming and hiding portions of the communal seed grain, telling no one.",
+        "cause": "The miller watched the irrigation channel silt worsen this season and has decided, privately, that next year's planting will be a disaster — and he intends…",
+        "stage": 0,
+        "seededAtCount": 950,
+        "surfaced": false,
+        "fate": "growing",
+        "lastMovedCount": 950
       }
     },
     "arcStages": {
@@ -2592,7 +2748,2387 @@
         "addedDay": 9,
         "locationId": "gen-the-lower-chamber"
       }
-    ]
+    ],
+    "newsSpread": {
+      "char-devtest::2026-08-01T15:05:35.966Z": [
+        "valley.radiant_plateau"
+      ],
+      "char-msgpisca::2026-08-05T23:59:30.114Z": [
+        "numinous.hermitage"
+      ],
+      "char-msgpisca::2026-08-06T18:06:47.572Z": [
+        "numinous.hermitage"
+      ]
+    },
+    "offscreenCursor": 4,
+    "retrievalWanted": [],
+    "arcRetrievals": [],
+    "careIdle": {
+      "sister_alder": {
+        "arc_what_wakes_beneath": 1,
+        "arc_the_poles_pull": 1
+      },
+      "halvex_coil": {
+        "arc_manifestation_storm": 1
+      },
+      "overseer_grael": {
+        "arc_the_poles_pull": 1
+      },
+      "maren_ossitide": {
+        "arc_the_poles_pull": 1
+      },
+      "the_hollow_king": {
+        "arc_what_wakes_beneath": 1
+      },
+      "cinder_vael": {
+        "arc_what_wakes_beneath": 1,
+        "arc_block_bleed": 1
+      },
+      "the_last_walker": {
+        "arc_the_poles_pull": 1,
+        "arc_manifestation_storm": 1
+      },
+      "neth_the_stayed": {
+        "arc_green_schism": 1,
+        "arc_the_poles_pull": 1
+      },
+      "morvane_the_harvest": {
+        "arc_what_wakes_beneath": 1
+      },
+      "halcyon_the_finished": {
+        "arc_manifestation_storm": 0
+      },
+      "vessa_truename": {
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "thornmother_sealed": {},
+      "the_last_choirmistress": {
+        "arc_manifestation_storm": 1
+      },
+      "the_unbodied_choir_master": {},
+      "sunwrack_valen": {},
+      "ember_who_banks_the_fire": {
+        "arc_manifestation_storm": 1
+      },
+      "the_deep_lantern": {
+        "arc_manifestation_storm": 1
+      },
+      "the_starless": {
+        "arc_manifestation_storm": 1
+      },
+      "the_weeping_archive": {
+        "arc_block_bleed": 1
+      },
+      "the_raw_chord": {},
+      "the_cogitant_ninefold": {
+        "arc_block_bleed": 1
+      },
+      "harrow_the_hollowing": {
+        "arc_manifestation_storm": 1
+      },
+      "the_last_mercy": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_scouring_hand": {
+        "arc_the_poles_pull": 1
+      },
+      "the_edge_that_holds": {
+        "arc_block_bleed": 1,
+        "arc_green_schism": 1
+      },
+      "the_ender_who_forgot": {
+        "arc_manifestation_storm": 1
+      },
+      "keeper_the_unsaid": {
+        "arc_block_bleed": 1
+      },
+      "the_lidded_calm": {
+        "arc_what_wakes_beneath": 1,
+        "arc_green_schism": 1
+      },
+      "the_unbending_witness": {
+        "arc_block_bleed": 1,
+        "arc_manifestation_storm": 1
+      },
+      "the_last_seraph": {
+        "arc_the_poles_pull": 1
+      },
+      "the_burning_certainty": {},
+      "the_clockmother": {
+        "arc_manifestation_storm": 1,
+        "arc_block_bleed": 1
+      },
+      "the_hour_hoarder": {
+        "arc_manifestation_storm": 1
+      },
+      "the_hundred_hands": {
+        "arc_what_wakes_beneath": 1,
+        "arc_green_schism": 1
+      },
+      "the_appetite": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_ninefold_ascendant": {
+        "arc_manifestation_storm": 1
+      },
+      "the_one_who_stayed_embodied": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_glad_dissolution": {
+        "arc_manifestation_storm": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_still_lattice": {
+        "arc_manifestation_storm": 1
+      },
+      "the_final_argument": {
+        "arc_block_bleed": 1
+      },
+      "the_kind_liar": {
+        "arc_manifestation_storm": 1
+      },
+      "the_cornerstone": {
+        "arc_manifestation_storm": 1,
+        "arc_green_schism": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_open_figure": {
+        "arc_block_bleed": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_farwalker": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_gate_that_gapes": {
+        "arc_what_wakes_beneath": 1
+      },
+      "first_flame_ateph": {
+        "arc_manifestation_storm": 1
+      },
+      "the_first_moot": {
+        "arc_the_poles_pull": 1
+      },
+      "the_oathbreaker_sel": {
+        "arc_the_poles_pull": 1
+      },
+      "the_nine_year_master": {},
+      "prodigal_gearheart": {
+        "arc_manifestation_storm": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_edge_seeker": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_lost_chord_seeker": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_undefeated": {
+        "arc_the_poles_pull": 0
+      },
+      "the_doubting_lattice": {
+        "arc_the_poles_pull": 1
+      },
+      "the_apostate_choir": {
+        "arc_manifestation_storm": 1
+      },
+      "the_two_who_are_one": {
+        "arc_manifestation_storm": 1,
+        "arc_block_bleed": 1
+      },
+      "iselde_the_wanderer": {
+        "arc_green_schism": 1,
+        "arc_block_bleed": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_unravelled_mind": {
+        "arc_block_bleed": 1
+      },
+      "the_hundred_faces": {},
+      "the_long_grudge": {},
+      "the_archive_that_walks": {
+        "arc_block_bleed": 1,
+        "arc_manifestation_storm": 1
+      },
+      "the_bridgewright": {
+        "arc_manifestation_storm": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_war_ender": {
+        "arc_the_poles_pull": 0
+      },
+      "the_penitent_maw": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_pattern_prophet": {
+        "arc_what_wakes_beneath": 1,
+        "arc_block_bleed": 1
+      },
+      "the_unbound_churn": {
+        "arc_the_poles_pull": 1
+      },
+      "the_one_called_zeus": {},
+      "the_one_called_loki": {},
+      "the_one_called_athena": {},
+      "the_one_called_ares": {}
+    },
+    "careHeld": {
+      "sister_alder": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 1
+      },
+      "halvex_coil": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1,
+        "arc_block_bleed": 1
+      },
+      "overseer_grael": {
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "maren_ossitide": {
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_hollow_king": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
+      },
+      "cinder_vael": {
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_last_walker": {
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 0,
+        "arc_green_schism": 0
+      },
+      "neth_the_stayed": {
+        "arc_green_schism": 0,
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "morvane_the_harvest": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 0
+      },
+      "halcyon_the_finished": {
+        "arc_manifestation_storm": 1
+      },
+      "vessa_truename": {
+        "arc_the_poles_pull": 1,
+        "arc_block_bleed": 0
+      },
+      "thornmother_sealed": {
+        "arc_green_schism": 0,
+        "arc_the_poles_pull": 0
+      },
+      "the_last_choirmistress": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_unbodied_choir_master": {
+        "arc_what_wakes_beneath": 1,
+        "arc_manifestation_storm": 1
+      },
+      "sunwrack_valen": {
+        "arc_the_poles_pull": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "ember_who_banks_the_fire": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_deep_lantern": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_starless": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1,
+        "arc_green_schism": 1
+      },
+      "the_weeping_archive": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_raw_chord": {
+        "arc_the_poles_pull": 1,
+        "arc_manifestation_storm": 1
+      },
+      "the_cogitant_ninefold": {
+        "arc_block_bleed": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "harrow_the_hollowing": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 0
+      },
+      "the_last_mercy": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_scouring_hand": {
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_edge_that_holds": {
+        "arc_block_bleed": 0,
+        "arc_green_schism": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_ender_who_forgot": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "keeper_the_unsaid": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_lidded_calm": {
+        "arc_what_wakes_beneath": 0,
+        "arc_green_schism": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_unbending_witness": {
+        "arc_block_bleed": 0,
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_last_seraph": {
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_burning_certainty": {
+        "arc_what_wakes_beneath": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_clockmother": {
+        "arc_manifestation_storm": 0,
+        "arc_block_bleed": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_hour_hoarder": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_hundred_hands": {
+        "arc_what_wakes_beneath": 0,
+        "arc_green_schism": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_appetite": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_ninefold_ascendant": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_one_who_stayed_embodied": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_glad_dissolution": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "the_still_lattice": {
+        "arc_manifestation_storm": 0,
+        "arc_block_bleed": 1,
+        "arc_the_poles_pull": 1
+      },
+      "the_final_argument": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_kind_liar": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_cornerstone": {
+        "arc_manifestation_storm": 0,
+        "arc_green_schism": 0,
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 1
+      },
+      "the_open_figure": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_farwalker": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_gate_that_gapes": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "first_flame_ateph": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_first_moot": {
+        "arc_the_poles_pull": 0,
+        "arc_green_schism": 1
+      },
+      "the_oathbreaker_sel": {
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_nine_year_master": {
+        "arc_manifestation_storm": 1
+      },
+      "prodigal_gearheart": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 1
+      },
+      "the_edge_seeker": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_lost_chord_seeker": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_undefeated": {
+        "arc_the_poles_pull": 1
+      },
+      "the_doubting_lattice": {
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "the_apostate_choir": {
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1
+      },
+      "the_two_who_are_one": {
+        "arc_manifestation_storm": 0,
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
+      "iselde_the_wanderer": {
+        "arc_green_schism": 0,
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_unravelled_mind": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_hundred_faces": {
+        "arc_manifestation_storm": 1
+      },
+      "the_long_grudge": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_archive_that_walks": {
+        "arc_block_bleed": 0,
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_bridgewright": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "the_war_ender": {
+        "arc_the_poles_pull": 1
+      },
+      "the_penitent_maw": {
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_pattern_prophet": {
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 0,
+        "arc_manifestation_storm": 1
+      },
+      "the_unbound_churn": {
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
+      },
+      "the_one_called_zeus": {
+        "arc_the_poles_pull": 1
+      },
+      "the_one_called_loki": {
+        "arc_block_bleed": 1
+      },
+      "the_one_called_athena": {
+        "arc_what_wakes_beneath": 1
+      },
+      "the_one_called_ares": {
+        "arc_the_poles_pull": 1
+      }
+    },
+    "figureTenure": {
+      "the_scouring_hand": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_still_lattice": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_ender_who_forgot": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_lidded_calm": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_unbending_witness": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "first_flame_ateph": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "vessa_truename": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_undefeated": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_unravelled_mind": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_hollow_king": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "guardIntercept",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "sunwrack_valen": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 6,
+        "deedLog": [
+          {
+            "by": "strikeSurvived",
+            "worldDay": 39,
+            "playerInvolved": false
+          },
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_last_walker": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "strikeLanded",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "thornmother_sealed": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "strikeSurvived",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "the_weeping_archive": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "halcyon_the_finished": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 39,
+            "playerInvolved": false
+          }
+        ]
+      },
+      "sister_alder": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "halvex_coil": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "overseer_grael": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "maren_ossitide": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "cinder_vael": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "neth_the_stayed": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "morvane_the_harvest": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_last_choirmistress": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_unbodied_choir_master": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "ember_who_banks_the_fire": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_deep_lantern": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_starless": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_raw_chord": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_cogitant_ninefold": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "harrow_the_hollowing": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_last_mercy": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_edge_that_holds": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "keeper_the_unsaid": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_last_seraph": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_burning_certainty": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_clockmother": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_hour_hoarder": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_hundred_hands": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_appetite": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_ninefold_ascendant": {
+        "tier": "legendary",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_one_who_stayed_embodied": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_glad_dissolution": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_final_argument": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_kind_liar": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_cornerstone": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_open_figure": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_farwalker": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_gate_that_gapes": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_first_moot": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_oathbreaker_sel": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_nine_year_master": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "prodigal_gearheart": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_edge_seeker": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_lost_chord_seeker": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_doubting_lattice": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_apostate_choir": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_two_who_are_one": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "iselde_the_wanderer": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_hundred_faces": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_long_grudge": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_archive_that_walks": {
+        "tier": "epic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_bridgewright": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_war_ender": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_penitent_maw": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_pattern_prophet": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_unbound_churn": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_one_called_zeus": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_one_called_loki": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_one_called_athena": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      },
+      "the_one_called_ares": {
+        "tier": "heroic",
+        "sinceDay": 39,
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    "figureCareer": {
+      "the_scouring_hand": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_edge_seeker": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_lost_chord_seeker": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_still_lattice": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_glad_dissolution": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_doubting_lattice": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_unbound_churn": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_ender_who_forgot": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "ember_who_banks_the_fire": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_lidded_calm": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_edge_that_holds": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_unbending_witness": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_appetite": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "first_flame_ateph": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_final_argument": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "vessa_truename": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_undefeated": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "harrow_the_hollowing": {
+        "deeds": 0,
+        "losses": 2,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_unravelled_mind": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_war_ender": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_hollow_king": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 1,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "sunwrack_valen": {
+        "deeds": 6,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_last_walker": {
+        "deeds": 3,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "thornmother_sealed": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "morvane_the_harvest": {
+        "deeds": 0,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_weeping_archive": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "halcyon_the_finished": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      }
+    },
+    "epicArcPushes": {
+      "the_edge_seeker": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.15
+      },
+      "the_lost_chord_seeker": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.15
+      },
+      "the_scouring_hand": {
+        "arcId": "arc_manifestation_storm",
+        "push": -5.824
+      },
+      "cinder_vael": {
+        "arcId": "arc_manifestation_storm",
+        "push": 1.584
+      },
+      "the_unbodied_choir_master": {
+        "arcId": "arc_manifestation_storm",
+        "push": 2.9920000000000004
+      },
+      "the_raw_chord": {
+        "arcId": "arc_manifestation_storm",
+        "push": 2.8160000000000007
+      },
+      "the_farwalker": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.528
+      },
+      "the_gate_that_gapes": {
+        "arcId": "arc_manifestation_storm",
+        "push": 1.584
+      },
+      "the_nine_year_master": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.264
+      },
+      "the_hundred_faces": {
+        "arcId": "arc_manifestation_storm",
+        "push": 0.264
+      },
+      "halcyon_the_finished": {
+        "arcId": "arc_manifestation_storm",
+        "push": -1.056
+      },
+      "the_last_mercy": {
+        "arcId": "arc_manifestation_storm",
+        "push": -1.056
+      },
+      "iselde_the_wanderer": {
+        "arcId": "arc_manifestation_storm",
+        "push": -0.264
+      },
+      "the_pattern_prophet": {
+        "arcId": "arc_manifestation_storm",
+        "push": -0.264
+      },
+      "sister_alder": {
+        "arcId": "arc_manifestation_storm",
+        "push": -1.056
+      },
+      "the_open_figure": {
+        "arcId": "arc_manifestation_storm",
+        "push": -0.528
+      },
+      "halvex_coil": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 2.2880000000000007
+      },
+      "sunwrack_valen": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 2.8160000000000007
+      },
+      "the_burning_certainty": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 2.9920000000000004
+      },
+      "the_hour_hoarder": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 1.056
+      },
+      "maren_ossitide": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.056
+      },
+      "neth_the_stayed": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.056
+      },
+      "the_last_choirmistress": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.056
+      },
+      "the_cogitant_ninefold": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -0.528
+      },
+      "the_last_seraph": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.056
+      },
+      "the_clockmother": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -1.056
+      },
+      "the_apostate_choir": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -0.264
+      },
+      "the_long_grudge": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": -0.264
+      },
+      "the_one_called_athena": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": null
+      },
+      "harrow_the_hollowing": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 2.973333333333334
+      },
+      "the_ninefold_ascendant": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 2.9920000000000004
+      },
+      "the_oathbreaker_sel": {
+        "arcId": "arc_what_wakes_beneath",
+        "push": 0.528
+      },
+      "the_glad_dissolution": {
+        "arcId": "arc_block_bleed",
+        "push": 0.3
+      },
+      "the_doubting_lattice": {
+        "arcId": "arc_block_bleed",
+        "push": 0.3
+      },
+      "the_unbound_churn": {
+        "arcId": "arc_block_bleed",
+        "push": 0.15
+      },
+      "the_still_lattice": {
+        "arcId": "arc_block_bleed",
+        "push": -5.648
+      },
+      "overseer_grael": {
+        "arcId": "arc_block_bleed",
+        "push": -0.528
+      },
+      "prodigal_gearheart": {
+        "arcId": "arc_block_bleed",
+        "push": -0.264
+      },
+      "the_bridgewright": {
+        "arcId": "arc_block_bleed",
+        "push": -0.264
+      },
+      "the_one_called_loki": {
+        "arcId": "arc_block_bleed",
+        "push": null
+      },
+      "the_cornerstone": {
+        "arcId": "arc_block_bleed",
+        "push": -1.056
+      },
+      "the_ender_who_forgot": {
+        "arcId": "arc_the_poles_pull",
+        "push": 4.356000000000001
+      },
+      "ember_who_banks_the_fire": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.6
+      },
+      "the_lidded_calm": {
+        "arcId": "arc_the_poles_pull",
+        "push": 2.9040000000000004
+      },
+      "the_edge_that_holds": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.6
+      },
+      "the_appetite": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.2692307692307692
+      },
+      "the_unbending_witness": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.3728
+      },
+      "the_final_argument": {
+        "arcId": "arc_the_poles_pull",
+        "push": 0.6
+      },
+      "first_flame_ateph": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.4520000000000002
+      },
+      "vessa_truename": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.8712000000000001
+      },
+      "the_undefeated": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.43560000000000004
+      },
+      "the_unravelled_mind": {
+        "arcId": "arc_the_poles_pull",
+        "push": 0.6336
+      },
+      "the_war_ender": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.34375
+      },
+      "the_hollow_king": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.056
+      },
+      "morvane_the_harvest": {
+        "arcId": "arc_the_poles_pull",
+        "push": 1.056
+      },
+      "thornmother_sealed": {
+        "arcId": "arc_the_poles_pull",
+        "push": 2.9920000000000004
+      },
+      "the_starless": {
+        "arcId": "arc_the_poles_pull",
+        "push": 2.9920000000000004
+      },
+      "the_deep_lantern": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.056
+      },
+      "the_weeping_archive": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.056
+      },
+      "keeper_the_unsaid": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.528
+      },
+      "the_hundred_hands": {
+        "arcId": "arc_the_poles_pull",
+        "push": -1.056
+      },
+      "the_one_who_stayed_embodied": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.528
+      },
+      "the_kind_liar": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.264
+      },
+      "the_two_who_are_one": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.264
+      },
+      "the_archive_that_walks": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.528
+      },
+      "the_penitent_maw": {
+        "arcId": "arc_the_poles_pull",
+        "push": -0.264
+      },
+      "the_one_called_ares": {
+        "arcId": "arc_the_poles_pull",
+        "push": null
+      },
+      "the_one_called_zeus": {
+        "arcId": "arc_the_poles_pull",
+        "push": null
+      },
+      "the_last_walker": {
+        "arcId": "arc_green_schism",
+        "push": -0.528
+      },
+      "the_first_moot": {
+        "arcId": "arc_green_schism",
+        "push": -0.528
+      }
+    },
+    "figureExposure": {
+      "the_deep_lantern": {
+        "arcId": "arc_the_poles_pull",
+        "knownTo": "sunwrack_valen",
+        "worldDay": 39,
+        "untilDay": 219
+      }
+    },
+    "crusades": {
+      "the_last_walker": {
+        "arcId": "arc_green_schism",
+        "dir": -1,
+        "target": "thornmother_sealed",
+        "untilDay": 129,
+        "since": 39
+      }
+    },
+    "epicStatus": {
+      "thornmother_sealed": {
+        "status": "wounded",
+        "woundedUntilDay": 47,
+        "woundedBy": "the_last_walker"
+      },
+      "morvane_the_harvest": {
+        "status": "stopped",
+        "stoppedUntilDay": 42,
+        "stoppedBy": "sunwrack_valen"
+      },
+      "the_last_walker": {
+        "status": "stopped",
+        "stoppedUntilDay": 42,
+        "stoppedBy": "the_weeping_archive"
+      },
+      "harrow_the_hollowing": {
+        "status": "wounded",
+        "woundedUntilDay": 47,
+        "woundedBy": "halcyon_the_finished"
+      }
+    },
+    "arcContests": {
+      "arc_manifestation_storm": {
+        "duels": 1,
+        "proWins": 0,
+        "conWins": 1,
+        "fought": 3,
+        "worked": 13
+      },
+      "arc_what_wakes_beneath": {
+        "duels": 0,
+        "proWins": 0,
+        "conWins": 0,
+        "fought": 0,
+        "worked": 18
+      },
+      "arc_block_bleed": {
+        "duels": 1,
+        "proWins": 0,
+        "conWins": 1,
+        "fought": 4,
+        "worked": 6
+      },
+      "arc_the_poles_pull": {
+        "duels": 6,
+        "proWins": 3,
+        "conWins": 3,
+        "fought": 13,
+        "worked": 20
+      },
+      "arc_green_schism": {
+        "duels": 0,
+        "proWins": 0,
+        "conWins": 0,
+        "fought": 0,
+        "worked": 4
+      }
+    },
+    "arcChallenges": [
+      {
+        "defender": "sunwrack_valen",
+        "defenderName": "Valen Sunwrack, Who Left No Shadow Standing",
+        "challenger": "morvane_the_harvest",
+        "challengerName": "Morvane of the Harvest Hand",
+        "outcome": "stopped",
+        "tier": "legendary"
+      },
+      {
+        "defender": "the_weeping_archive",
+        "defenderName": "The Weeping Archive",
+        "challenger": "the_last_walker",
+        "challengerName": "The Last Walker of the Sealed Wood",
+        "outcome": "stopped",
+        "tier": "epic"
+      },
+      {
+        "defender": "harrow_the_hollowing",
+        "defenderName": "Harrow, Who Makes People Into Mechanisms",
+        "challenger": "halcyon_the_finished",
+        "challengerName": "Halcyon, Who Built One Perfect Thing",
+        "outcome": "wounded",
+        "tier": "legendary"
+      }
+    ],
+    "arcCasualties": [],
+    "arcStrikes": [
+      {
+        "arcId": "arc_the_poles_pull",
+        "kind": "quiet",
+        "target": "sunwrack_valen",
+        "sender": "the_deep_lantern",
+        "outcome": "guarded",
+        "guard": "the_hollow_king"
+      },
+      {
+        "arcId": "arc_green_schism",
+        "kind": "crusade",
+        "target": "thornmother_sealed",
+        "sender": "the_last_walker",
+        "outcome": "wounded",
+        "targetTier": "legendary"
+      }
+    ],
+    "arcVacancies": {
+      "arc_what_wakes_beneath": 17,
+      "arc_the_poles_pull": 18,
+      "arc_manifestation_storm": 23,
+      "arc_block_bleed": 15,
+      "arc_green_schism": 6
+    },
+    "arcStageSeen": {
+      "arc_manifestation_storm": 1,
+      "arc_what_wakes_beneath": 4,
+      "arc_block_bleed": 1,
+      "arc_the_poles_pull": 4,
+      "arc_green_schism": 1
+    },
+    "personalCoverage": {
+      "lived": 70,
+      "onThePage": 70,
+      "neglected": 0
+    },
+    "strikeCoverage": {
+      "traditions": 29,
+      "withDisposition": 24,
+      "crusadeTraditions": 7,
+      "eitherTraditions": 9,
+      "crusades": [
+        "rootkin",
+        "blazeborn",
+        "marcher",
+        "stillhold",
+        "verist",
+        "seraphic",
+        "syllogist"
+      ],
+      "bothKindsLive": true,
+      "note": "both kinds reachable — 7 declare, 9 do either"
+    },
+    "personalBeats": [
+      {
+        "id": "sister_alder",
+        "name": "Sister Alder, the Ward That Does Not Break",
+        "pursuit": "learning a faster road"
+      },
+      {
+        "id": "halvex_coil",
+        "name": "Halvex Coil, the Rewriter",
+        "pursuit": "patching a district into silence"
+      },
+      {
+        "id": "overseer_grael",
+        "name": "Overseer Grael of the Edge District",
+        "pursuit": "noticing a name that should not be there"
+      },
+      {
+        "id": "maren_ossitide",
+        "name": "Maren Ossitide, Who Buried the Drowned Year",
+        "pursuit": "refusing to rest between"
+      },
+      {
+        "id": "the_hollow_king",
+        "name": "The Hollow King of the Wild Half",
+        "pursuit": "declining something offered badly"
+      },
+      {
+        "id": "cinder_vael",
+        "name": "Cinder Vael, the Wright Who Would Not Stop",
+        "pursuit": "taking apart something that already worked"
+      },
+      {
+        "id": "the_last_walker",
+        "name": "The Last Walker of the Sealed Wood",
+        "pursuit": "carving in green wood, which cracks"
+      },
+      {
+        "id": "neth_the_stayed",
+        "name": "Neth, Who Has Buried More Than She Has Known",
+        "pursuit": "writing down the names of the ones she reached in time"
+      },
+      {
+        "id": "morvane_the_harvest",
+        "name": "Morvane of the Harvest Hand",
+        "pursuit": "walking a village she has not judged yet"
+      },
+      {
+        "id": "halcyon_the_finished",
+        "name": "Halcyon, Who Built One Perfect Thing",
+        "pursuit": "sitting with a finished work and not adding to it"
+      },
+      {
+        "id": "vessa_truename",
+        "name": "Vessa Who Trades in True Names",
+        "pursuit": "auditing her own old bargains for the one she got wrong"
+      },
+      {
+        "id": "thornmother_sealed",
+        "name": "The Thornmother of the Closing Wood",
+        "pursuit": "tending a grove nobody is allowed into"
+      },
+      {
+        "id": "the_last_choirmistress",
+        "name": "The Last Choirmistress",
+        "pursuit": "listening for the waking at the thin hours"
+      },
+      {
+        "id": "the_unbodied_choir_master",
+        "name": "The Choirmaster Who Would Not Return",
+        "pursuit": "losing an argument with his own remaining body"
+      },
+      {
+        "id": "sunwrack_valen",
+        "name": "Valen Sunwrack, Who Left No Shadow Standing",
+        "pursuit": "a brother he burned out of a house and has not spoken to since"
+      },
+      {
+        "id": "ember_who_banks_the_fire",
+        "name": "Ember, Who Banks the Fire",
+        "pursuit": "arguing with Valen by letter and not sending it"
+      },
+      {
+        "id": "the_deep_lantern",
+        "name": "The Deep Lantern, Who Walks Where Light Won't",
+        "pursuit": "walking someone home through the dark"
+      },
+      {
+        "id": "the_starless",
+        "name": "The Starless One",
+        "pursuit": "deepening a dark that was already total"
+      },
+      {
+        "id": "the_weeping_archive",
+        "name": "The Weeping Archive",
+        "pursuit": "recording a joy, which she does less often and should not"
+      },
+      {
+        "id": "the_raw_chord",
+        "name": "The Raw Chord",
+        "pursuit": "apologising to someone she overwhelmed"
+      },
+      {
+        "id": "the_cogitant_ninefold",
+        "name": "The Cogitant Ninefold",
+        "pursuit": "constructing an argument against themselves"
+      },
+      {
+        "id": "harrow_the_hollowing",
+        "name": "Harrow, Who Makes People Into Mechanisms",
+        "pursuit": "studying a person as a system"
+      },
+      {
+        "id": "the_last_mercy",
+        "name": "The Last Mercy",
+        "pursuit": "visiting an ending she granted years ago"
+      },
+      {
+        "id": "the_scouring_hand",
+        "name": "The Scouring Hand",
+        "pursuit": "finding a fault in a thing that had none"
+      },
+      {
+        "id": "the_edge_that_holds",
+        "name": "Kesh Ardent, the Edge That Holds",
+        "pursuit": "standing a watch nobody assigned him"
+      },
+      {
+        "id": "the_ender_who_forgot",
+        "name": "The Ender Who Forgot Why",
+        "pursuit": "sitting with the quiet after"
+      },
+      {
+        "id": "keeper_the_unsaid",
+        "name": "The Keeper of the Unsaid",
+        "pursuit": "a friend who stopped speaking to her over a peace she kept"
+      },
+      {
+        "id": "the_lidded_calm",
+        "name": "The Lidded Calm",
+        "pursuit": "quieting a room that was arguing usefully"
+      },
+      {
+        "id": "the_unbending_witness",
+        "name": "Seraphine the Unbending Witness",
+        "pursuit": "re-reading her own testimony for softness"
+      },
+      {
+        "id": "the_last_seraph",
+        "name": "The Last Seraph of the Pre-Transition Choir",
+        "pursuit": "keeping a rite that may be pointless"
+      },
+      {
+        "id": "the_burning_certainty",
+        "name": "The Burning Certainty",
+        "pursuit": "burning what fails the test"
+      },
+      {
+        "id": "the_clockmother",
+        "name": "The Clockmother, Who Keeps the Deep Hour",
+        "pursuit": "keeping a clock true"
+      },
+      {
+        "id": "the_hour_hoarder",
+        "name": "The Hour-Hoarder",
+        "pursuit": "spending someone else's time to keep it"
+      },
+      {
+        "id": "the_hundred_hands",
+        "name": "The Hundred Hands",
+        "pursuit": "a body she trained who now trains others"
+      },
+      {
+        "id": "the_appetite",
+        "name": "The Appetite",
+        "pursuit": "looking for a hunger that will hold"
+      },
+      {
+        "id": "the_ninefold_ascendant",
+        "name": "The Ninefold Ascendant",
+        "pursuit": "persuading someone to follow"
+      },
+      {
+        "id": "the_one_who_stayed_embodied",
+        "name": "The One Who Stayed Embodied",
+        "pursuit": "coming home to the body on purpose"
+      },
+      {
+        "id": "the_glad_dissolution",
+        "name": "The Glad Dissolution",
+        "pursuit": "making something and letting it go"
+      },
+      {
+        "id": "the_still_lattice",
+        "name": "The Still Lattice",
+        "pursuit": "correcting a configuration nobody asked about"
+      },
+      {
+        "id": "the_final_argument",
+        "name": "The Final Argument",
+        "pursuit": "reasoning a feeling out of someone"
+      },
+      {
+        "id": "the_kind_liar",
+        "name": "The Kind Liar",
+        "pursuit": "telling a kind fiction and watching it land"
+      },
+      {
+        "id": "the_cornerstone",
+        "name": "The Cornerstone",
+        "pursuit": "laying something that will not move"
+      },
+      {
+        "id": "the_open_figure",
+        "name": "The Open Figure",
+        "pursuit": "arguing with the Still Lattice, at distance"
+      },
+      {
+        "id": "the_farwalker",
+        "name": "The Farwalker",
+        "pursuit": "a wayhouse keeper who leaves a lamp for her"
+      },
+      {
+        "id": "the_gate_that_gapes",
+        "name": "The Gate That Gapes",
+        "pursuit": "counting the ways still shut"
+      },
+      {
+        "id": "first_flame_ateph",
+        "name": "Ateph of the First Flame",
+        "pursuit": "giving fire away"
+      },
+      {
+        "id": "the_first_moot",
+        "name": "The One Who Called the First Moot",
+        "pursuit": "convening a conversation nobody wanted"
+      },
+      {
+        "id": "the_oathbreaker_sel",
+        "name": "Sel Who Broke the Warding",
+        "pursuit": "doing an unasked kindness"
+      },
+      {
+        "id": "the_nine_year_master",
+        "name": "The Nine-Year Master",
+        "pursuit": "seeking out a fight she might lose"
+      },
+      {
+        "id": "prodigal_gearheart",
+        "name": "Gearheart, Who Built at Twelve What Masters Couldn't",
+        "pursuit": "failing to match it"
+      },
+      {
+        "id": "the_edge_seeker",
+        "name": "The One Who Walks Toward the Edge",
+        "pursuit": "finding it was not the edge"
+      },
+      {
+        "id": "the_lost_chord_seeker",
+        "name": "Seeker of the Lost Chord",
+        "pursuit": "describing it badly to someone kind"
+      },
+      {
+        "id": "the_undefeated",
+        "name": "Saehara the Undefeated",
+        "pursuit": "looking for someone who deserves the win"
+      },
+      {
+        "id": "the_doubting_lattice",
+        "name": "The One Who Doubts the Proof",
+        "pursuit": "documenting that it helped"
+      },
+      {
+        "id": "the_apostate_choir",
+        "name": "The Apostate of the Choir",
+        "pursuit": "singing anyway"
+      },
+      {
+        "id": "the_two_who_are_one",
+        "name": "The Two Who Are One",
+        "pursuit": "each other, which is the whole of it"
+      },
+      {
+        "id": "iselde_the_wanderer",
+        "name": "Iselde Wend, She Who Reads the Long Roads",
+        "pursuit": "two places that stopped speaking, and she carries word between them"
+      },
+      {
+        "id": "the_unravelled_mind",
+        "name": "The Unravelled Mind",
+        "pursuit": "being understood by one person for one moment"
+      },
+      {
+        "id": "the_hundred_faces",
+        "name": "The One With a Hundred Faces",
+        "pursuit": "forgetting which one is hers"
+      },
+      {
+        "id": "the_long_grudge",
+        "name": "The One Who Has Not Forgotten",
+        "pursuit": "counting the debt"
+      },
+      {
+        "id": "the_archive_that_walks",
+        "name": "The Archive That Walks",
+        "pursuit": "carrying it further"
+      },
+      {
+        "id": "the_bridgewright",
+        "name": "The One Who Bridged the Unbridgeable",
+        "pursuit": "building something that will outlast the argument"
+      },
+      {
+        "id": "the_war_ender",
+        "name": "The One Who Ended the Long War",
+        "pursuit": "the ones who would not take the door out, whose names he keeps"
+      },
+      {
+        "id": "the_penitent_maw",
+        "name": "The Penitent Maw",
+        "pursuit": "finding the ones she cannot reach"
+      },
+      {
+        "id": "the_pattern_prophet",
+        "name": "The One Who Reads the Coming Shape",
+        "pursuit": "waiting to be understood in time"
+      },
+      {
+        "id": "the_unbound_churn",
+        "name": "The Unbound",
+        "pursuit": "being free and briefly lonely"
+      },
+      {
+        "id": "the_one_called_zeus",
+        "name": "The One Called Zeus",
+        "pursuit": "a follower who has never once used the name, and whom he trusts most"
+      },
+      {
+        "id": "the_one_called_loki",
+        "name": "The One Called Loki",
+        "pursuit": "the two who walked away glad, whose names he keeps"
+      },
+      {
+        "id": "the_one_called_athena",
+        "name": "The One Called Athena",
+        "pursuit": "being consulted too late and answering anyway"
+      },
+      {
+        "id": "the_one_called_ares",
+        "name": "The One Called Ares",
+        "pursuit": "cooking for people who did not come"
+      }
+    ],
+    "neglectedLives": [],
+    "figureTier": {},
+    "outOfAction": {
+      "sister_alder": 0,
+      "halvex_coil": 0,
+      "overseer_grael": 0,
+      "maren_ossitide": 0,
+      "the_hollow_king": 0,
+      "cinder_vael": 0,
+      "the_last_walker": 1,
+      "neth_the_stayed": 0,
+      "morvane_the_harvest": 1,
+      "halcyon_the_finished": 0,
+      "vessa_truename": 0,
+      "thornmother_sealed": 1,
+      "the_last_choirmistress": 0,
+      "the_unbodied_choir_master": 0,
+      "sunwrack_valen": 0,
+      "ember_who_banks_the_fire": 0,
+      "the_deep_lantern": 0,
+      "the_starless": 0,
+      "the_weeping_archive": 0,
+      "the_raw_chord": 0,
+      "the_cogitant_ninefold": 0,
+      "harrow_the_hollowing": 1,
+      "the_last_mercy": 0,
+      "the_scouring_hand": 0,
+      "the_edge_that_holds": 0,
+      "the_ender_who_forgot": 0,
+      "keeper_the_unsaid": 0,
+      "the_lidded_calm": 0,
+      "the_unbending_witness": 0,
+      "the_last_seraph": 0,
+      "the_burning_certainty": 0,
+      "the_clockmother": 0,
+      "the_hour_hoarder": 0,
+      "the_hundred_hands": 0,
+      "the_appetite": 0,
+      "the_ninefold_ascendant": 0,
+      "the_one_who_stayed_embodied": 0,
+      "the_glad_dissolution": 0,
+      "the_still_lattice": 0,
+      "the_final_argument": 0,
+      "the_kind_liar": 0,
+      "the_cornerstone": 0,
+      "the_open_figure": 0,
+      "the_farwalker": 0,
+      "the_gate_that_gapes": 0,
+      "first_flame_ateph": 0,
+      "the_first_moot": 0,
+      "the_oathbreaker_sel": 0,
+      "the_nine_year_master": 0,
+      "prodigal_gearheart": 0,
+      "the_edge_seeker": 0,
+      "the_lost_chord_seeker": 0,
+      "the_undefeated": 0,
+      "the_doubting_lattice": 0,
+      "the_apostate_choir": 0,
+      "the_two_who_are_one": 0,
+      "iselde_the_wanderer": 0,
+      "the_unravelled_mind": 0,
+      "the_hundred_faces": 0,
+      "the_long_grudge": 0,
+      "the_archive_that_walks": 0,
+      "the_bridgewright": 0,
+      "the_war_ender": 0,
+      "the_penitent_maw": 0,
+      "the_pattern_prophet": 0,
+      "the_unbound_churn": 0,
+      "the_one_called_zeus": 0,
+      "the_one_called_loki": 0,
+      "the_one_called_athena": 0,
+      "the_one_called_ares": 0
+    },
+    "deedSourcesSeen": {
+      "arcContestWon": 0,
+      "guardIntercept": 0,
+      "strikeSurvived": 0,
+      "strikeLanded": 0
+    },
+    "figureCares": {
+      "thornmother_sealed": [
+        {
+          "arcId": "arc_green_schism",
+          "dir": 1,
+          "weight": 4
+        },
+        {
+          "arcId": "arc_the_poles_pull",
+          "dir": 1,
+          "weight": 2
+        }
+      ]
+    },
+    "careShifts": [
+      {
+        "id": "thornmother_sealed",
+        "name": "The Thornmother of the Closing Wood",
+        "changes": [
+          {
+            "kind": "hardened",
+            "arcId": "arc_green_schism",
+            "to": 4
+          }
+        ]
+      }
+    ],
+    "arcStandings": {
+      "risen": [],
+      "fallen": []
+    },
+    "arcUnheldStreak": {
+      "arc_manifestation_storm": 0,
+      "arc_what_wakes_beneath": 0,
+      "arc_block_bleed": 0,
+      "arc_the_poles_pull": 0,
+      "arc_green_schism": 0
+    },
+    "arcBirths": [],
+    "arcNetPush": {
+      "arc_manifestation_storm": 0.28400000000000136,
+      "arc_what_wakes_beneath": 9.309333333333335,
+      "arc_block_bleed": -7.010000000000001,
+      "arc_the_poles_pull": 6.63948076923077,
+      "arc_green_schism": -1.056
+    },
+    "offscreenBacklog": {
+      "tuning-warden-lower-terrace": {
+        "days": 7,
+        "since": 39,
+        "want": null
+      },
+      "waystation-morning-runner": {
+        "days": 7,
+        "since": 39,
+        "want": null
+      },
+      "farren": {
+        "days": 7,
+        "since": 39,
+        "want": null
+      },
+      "verath-sem": {
+        "days": 7,
+        "since": 39,
+        "want": null
+      },
+      "oswin-dray": {
+        "days": 7,
+        "since": 39,
+        "want": null
+      },
+      "vess-caldoun": {
+        "days": 7,
+        "since": 39,
+        "want": null
+      },
+      "traveler-ridgeline": {
+        "days": 7,
+        "since": 39,
+        "want": null
+      },
+      "tessaly-vorn": {
+        "days": 7,
+        "since": 39,
+        "want": null
+      }
+    }
   },
   "subAttributes": {
     "strength": 2,
@@ -2922,7 +5458,8 @@
           "[d9] [while away] A cold snap disrupted Aevi's mote-cohesion overnight, scattering a thin outer layer of the swarm across the rafters of the inn — she is still functional but visibly diminished and slow to respond until the strays are recalled.",
           "[d9] Aevi is the authentication key that the pre-Transition upstream structure was built to receive. The structure has been waiting for it since before the valley existed. The break in Aevi's record—the interruption during sending—severed part of what it was meant to carry, but the key itself remains…",
           "[d9] Aevi was made to arrive at the upstream structure and deliver the authentication key—closing its circuit. What happens to Aevi after that moment is a gap in its own broken record. The structure was built to receive and complete its preparation order, not to return or preserve what carries the key.",
-          "[d9] Aevi was made to arrive at the upstream structure and close its authentication circuit—a completion, not an erasure. The break in Aevi's record took away its knowledge of what it carries, but not its purpose. Aevi names plainly that it does not have a memory of what comes after arrival, but that…"
+          "[d9] Aevi was made to arrive at the upstream structure and close its authentication circuit—a completion, not an erasure. The break in Aevi's record took away its knowledge of what it carries, but not its purpose. Aevi names plainly that it does not have a memory of what comes after arrival, but that…",
+          "[d9] [while away] Aevi asked one careful question about authentication seals to a courier she trusted, but the answer was vague and she didn't press further — no real ground gained."
         ],
         "links": [
           "second-river-rising",
@@ -2966,7 +5503,8 @@
           "[d?] Millbrook child, dock-edge listener",
           "[d9] [while away] Brin slipped away to the docks again at dusk and overheard two boatmen arguing about a delayed supply run — nothing dramatic, but filed away with careful attention.",
           "[d9] [while away] Brin crept back to the dock-edge at dusk and overheard two unloading hands argue about a missing crate — small gossip, but the child filed it away with growing attentiveness.",
-          "[d9] [while away] Brin has taken to sitting on a mooring post each evening, and a pair of the older dock-hands have started nodding to her by name — she is no longer invisible at the waterfront."
+          "[d9] [while away] Brin has taken to sitting on a mooring post each evening, and a pair of the older dock-hands have started nodding to her by name — she is no longer invisible at the waterfront.",
+          "[d9] [while away] Brin has started spending late afternoons sitting on a coil of rope at the dock's eastern piling, listening without speaking — the older dockhands have stopped shooing him away."
         ],
         "links": [],
         "aliases": [],
@@ -3041,7 +5579,8 @@
           "[d9] [while away] Sorel sorted through a crate of water-damaged ledgers but found nothing relevant to the Plateau records, and the day slipped away without meaningful progress.",
           "[d9] [while away] Sorel spent the week cataloguing trade-ledgers for room-and-board rather than pursuing any Radiant Plateau contacts — survival came before the archive work.",
           "[d9] The Radiant Council's water-accountability office ordered their own survey team to move bearing markers before Sorel could relocate the structure on the northeast-by-east bearing. The order came in darkness and without explanation. Sorel has carried the knowledge alone that this was deliberate.",
-          "[d9] At first light on the ridgeline, Sorel chose to move northeast-by-east with Cellaceron toward the upstream structure rather than hold the bearing line alone. She named the reason plainly: solitude with the Council's deliberate lie was always going to be a problem. She is no longer a solitary…"
+          "[d9] At first light on the ridgeline, Sorel chose to move northeast-by-east with Cellaceron toward the upstream structure rather than hold the bearing line alone. She named the reason plainly: solitude with the Council's deliberate lie was always going to be a problem. She is no longer a solitary…",
+          "[d9] [while away] Sorel gathered a second stack of ledgers but hasn't yet found anyone willing to verify the radiant-water tallies with her, so the work sits untouched on her table."
         ],
         "links": [
           "what-the-water-remembers",
@@ -3061,13 +5600,14 @@
         "label": "Heights Waystation Runner",
         "kind": "person",
         "facts": [
-          "[d3] Waystation duty runner, Harmonic Heights Lower Terrace"
+          "[d3] Waystation duty runner, Harmonic Heights Lower Terrace",
+          "[d9] [while away] The Heights runner memorized the Lower Terrace lamp-signal schedule and ran the route twice at dawn without a relay error, earning a curt nod from the senior warden."
         ],
         "links": [],
         "aliases": [],
         "createdDay": 3,
         "entityId": "waystation-runner-heights",
-        "updatedDay": 3
+        "updatedDay": 9
       },
       "tuning-warden-lower-terrace": {
         "id": "tuning-warden-lower-terrace",
@@ -3592,6 +6132,23 @@
         "aliases": [],
         "createdDay": 9,
         "updatedDay": 9
+      },
+      "waystaff-evolved": {
+        "id": "waystaff-evolved",
+        "label": "The Waystaff Evolved",
+        "kind": "lore",
+        "facts": [
+          "[d9] The Waystaff has become a living collaboration between Harmonic resonance-craft, Radiant photonic-craft, and Aevi's distributed consciousness. The ash-limb body carries interlaced grain-lines, the lattice facets are deepened, and Aevi's motes are now integrated into the crystal nodes themselves…"
+        ],
+        "links": [
+          "aevi",
+          "braid-prism-sight-sonic-resonance",
+          "harmonic",
+          "radiant-folk"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
       }
     },
     "notSame": [
@@ -3972,20 +6529,20 @@
   "sharedSceneId": null,
   "forkChoices": {},
   "customEncounters": {},
-  "reconcileVersion": 22,
+  "reconcileVersion": 30,
   "tendencies": {
-    "cerebral": 29.61944516266253,
-    "strategic": 20.19721737677063,
-    "cautious": 24.711888994606678,
-    "social": 13.649159976930756,
-    "generous": 3.983486943728882,
-    "risky": 1.049346946170695,
-    "carousing": 0.3910818162620503,
-    "patient": 2.3551327033344136,
-    "craft": 0.3907171772216462,
-    "devotion": 1.8854662763462566,
-    "deception": 0.7379983458266509,
-    "leadership": 2.3304945643323145
+    "cerebral": 29.878959033595965,
+    "strategic": 20.692286942351366,
+    "cautious": 24.09409176974151,
+    "social": 13.307930977507487,
+    "generous": 3.8838997701356597,
+    "risky": 1.0231132725164276,
+    "carousing": 0.381304770855499,
+    "patient": 2.296254385751053,
+    "craft": 0.380949247791105,
+    "devotion": 1.8383296194376002,
+    "deception": 0.7195483871809846,
+    "leadership": 2.2722322002240065
   },
   "aptitudes": [
     "strategist",
@@ -3995,9 +6552,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 246,
-  "updatedAt": 1785586396787,
-  "rev": 163,
+  "actionCount": 247,
+  "updatedAt": 1786211054272,
+  "rev": 170,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4264,12 +6821,14 @@
         "dangerLevel": 2
       }
     },
-    "arc": {}
+    "arc": {},
+    "creature": {},
+    "item": {}
   },
-  "syncedAt": 1783791225006,
+  "syncedAt": 1785586396787,
   "teachers": {},
   "regionsKnown": {
-    "valley": 69
+    "valley": 70
   },
   "company": [],
   "foreclosed": [],
@@ -4282,8 +6841,16 @@
   },
   "_pinsInitialized": true,
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
-  "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20seasoned%2C%20bearing%20the%20marks%20of%20what%20they've%20done%2C%20Negotiated%20equal%20footing%20with%20Elder%20Senna%20over%20the%20river%20contamination%20%E2%80%94%20turned%20a%20confront%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=60206&nologo=true",
+  "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=15431&nologo=true",
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A woman stands in a hemispherical stone chamber glowing faintly with four-second resonance. In her hands, a staff of ash-wood transformed: the lattice head shimmers with integrated light and faint tea",
+      "url": "https://image.pollinations.ai/prompt/A%20woman%20stands%20in%20a%20hemispherical%20stone%20chamber%20glowing%20faintly%20with%20four-second%20resonance.%20In%20her%20hands%2C%20a%20staff%20of%20ash-wood%20transformed%3A%20the%20lattice%20head%20shimmers%20with%20integrated%20light%20and%20faint%20teal%20motes%20settling%20into%20the%20crystal%20nodes%20like%20stars%20finding%20their%20constellations.%20The%20geometry%20of%20the%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=81312&nologo=true",
+      "caption": "Inside the upstream pre-Transition structure, the Waystaff has evolved into a true symbiot",
+      "worldDay": 39,
+      "at": "2026-08-08T17:44:14.272Z"
+    },
     {
       "kind": "portrait",
       "prompt": "a person, character portrait, named Sorel, woman, Radiant Plateau archivist, water-accountability office — now a party member",
@@ -4522,6 +7089,14 @@
       "startDay": 32,
       "endDay": 32,
       "beats": 15
+    },
+    {
+      "id": "sess-7",
+      "startedAt": "2026-08-08T17:44:14.261Z",
+      "lastAt": "2026-08-08T17:44:14.261Z",
+      "startDay": 39,
+      "endDay": 39,
+      "beats": 1
     }
   ],
   "_pendingArrival": null,
@@ -4596,14 +7171,14 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 58,
-    "choices": 58,
-    "characterDeltas": 40,
-    "scene": 58,
-    "npcUpdates": 53,
-    "codexUpdates": 51,
+    "sceneSummary": 59,
+    "choices": 59,
+    "characterDeltas": 41,
+    "scene": 59,
+    "npcUpdates": 54,
+    "codexUpdates": 52,
     "timeOps": 52,
-    "sceneEnded": 35,
+    "sceneEnded": 36,
     "placeUpdates": 27,
     "moveTo": 3,
     "questUpdates": 35,
@@ -4611,15 +7186,16 @@
     "factUpdates": 10,
     "stageOps": 6,
     "scene_ended": 1,
-    "imagePrompt": 14,
+    "imagePrompt": 15,
     "generateRequest": 3,
-    "deeds": 8,
+    "deeds": 9,
     "ledgerEvents": 4,
     "offer": 8,
-    "gambitApt": 15,
-    "standingOps": 4
+    "gambitApt": 16,
+    "standingOps": 4,
+    "itemUpdates": 1
   },
-  "_opTurns": 58,
+  "_opTurns": 59,
   "_intentAsked": null,
   "corrections": [
     {
@@ -4739,6 +7315,11 @@
         "text": "Reached the upstream pre-Transition structure and entered its threshold—brought the authentication key to the moment of decision.",
         "weight": 2,
         "day": 9
+      },
+      {
+        "text": "Braided Harmonic and Radiant power fields into a single instrument—the Waystaff evolved into a living collaboration with the mote-intelligence Aevi, a binding that bridges civilizations",
+        "weight": 2,
+        "day": 9
       }
     ]
   },
@@ -4748,5 +7329,27 @@
   },
   "_standingOpRefusals": [
     "radiant_folk: no-delta"
-  ]
+  ],
+  "placeEdges": {
+    "harmonic_heights_terrace": [
+      "gen-the-lower-chamber"
+    ],
+    "gen-object-object": [
+      "gen-the-lower-chamber"
+    ]
+  },
+  "ladderPaid": {
+    "reason": 4,
+    "rapport": 4,
+    "craft": 5
+  },
+  "companyCapacity": 6,
+  "equipmentBonusCap": 6,
+  "holdings": [],
+  "portraitPinned": true,
+  "skillUses": {
+    "study": 1,
+    "prepare": 1
+  },
+  "aptitudeEarnCount": {}
 }

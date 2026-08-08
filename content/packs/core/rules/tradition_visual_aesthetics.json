@@ -3,7 +3,7 @@
  "id": "tradition_visual_aesthetics",
  "kind": "content",
  "note": "SNG-223: per-tradition visual-prompt guidance so a craft's generated image READS as its tradition (Ashwarden crafts look Ashwarden, Wright crafts look Wright). Built ON TOP of each tradition's canon `aesthetic` field in traditions.json (never replacing it) - this translates that prose aesthetic into image-generator language: palette, materials, light, mood. CCode's ensureImage('ability') prompt (SNG-223) prepends the craft's tradition block here to the craft's own authored description. Aevi-authored 2026-07-22.",
- "usage": "For a craft of tradition T: image_prompt = <craft.description> + ', in the visual style of ' + traditions[T].{palette, materials, light, mood}. The craft's OWN description is the subject; this is the STYLE wrapper so the whole tradition coheres.",
+ "usage": "For a craft of tradition T: image_prompt = <craft.description> + ', in the visual style of ' + traditions[T].{palette, materials, light, mood}. The craft's OWN description is the subject; this is the STYLE wrapper so the whole tradition coheres. ⛔ SNG-367 — FOR A PERSON of tradition T: the `people` field is the SUBJECT guidance (build, bearing, dress, what they carry, what the craft has done to the body) and palette/light/mood are the STYLE wrapper. ⚠️ WITHOUT `people`, npcPromptSeed falls through formOf() to the literal string 'a person' — measured: 33 of 34 NPCs in Silas Weir's registry have no `appearance`, so every one of them was being drawn from 'a person, character portrait, named X'. That is why every figure rendered as the same young dark-haired woman. ⚠️ AND `people` DESCRIBES A HUMAN OF THE TRADITION — it is a style layer, never a species claim. A non-human figure must carry its own `form`, which wins over this; an Ent of the Rootkin is an Ent first.",
  "traditions": {
   "umbral": {
    "name": "The Umbrals",
@@ -14,7 +14,8 @@
    "palette": "near-black, cold indigo, faint bioluminescent teal",
    "materials": "wet stone, unlit passages, soft cloth",
    "light": "no light source — form implied by touch, edges felt not lit",
-   "mood": "soft-footed, sensed-in-the-dark, quiet"
+   "mood": "soft-footed, sensed-in-the-dark, quiet",
+   "people": "pale from lightlessness, eyes adapted and over-large, moves without sound. Dark soft cloth, no metal, nothing that catches light. Touches walls and doorframes as they pass."
   },
   "blazeborn": {
    "name": "The Blazeborn",
@@ -36,7 +37,8 @@
    "palette": "deep green, bark-brown, sap-amber",
    "materials": "living wood, moss, grown-not-built forms",
    "light": "green-filtered canopy light, slow and warm",
-   "mood": "patient, enormous, growing"
+   "mood": "patient, enormous, growing",
+   "people": "green under the nails, seeds and burrs on the cloth. Weathered, strong, patient. Hair grown long and left. Barefoot as often as not."
   },
   "ashwarden": {
    "name": "The Ashwardens",
@@ -47,7 +49,8 @@
    "palette": "greys, bone-white, faded charcoal, a single quiet ember",
    "materials": "ash, grave-stone, worn iron, chalk",
    "light": "low, level, the grey light of a still morning",
-   "mood": "the mercy of stopping — solemn, tender, kept"
+   "mood": "the mercy of stopping — solemn, tender, kept",
+   "people": "grey, plainly dressed, unhurried. Hands calm and clean. Older than they look or younger than they act. Carries a keeper's tools; wears no ornament."
   },
   "marcher": {
    "name": "The Marchers",
@@ -69,7 +72,8 @@
    "palette": "white-on-white, palest grey, no accent",
    "materials": "smooth plaster, unbroken walls, empty rooms",
    "light": "even, sourceless, a quiet that has forgotten its reason",
-   "mood": "unbroken peace, almost eerie in its calm"
+   "mood": "unbroken peace, almost eerie in its calm",
+   "people": "very still. Plain, symmetrical dress. Face composed to the point of unreadability. Nothing carried, nothing fidgeting."
   },
   "somatic": {
    "name": "The Somatics",
@@ -80,7 +84,8 @@
    "palette": "warm skin-tones, sweat-sheen, earth",
    "materials": "breath, sinew, bare movement, no tools",
    "light": "warm side-light modelling muscle and motion",
-   "mood": "the body as the only instrument — kinetic, present"
+   "mood": "the body as the only instrument — kinetic, present",
+   "people": "visible economy of movement — nothing wasted, weight always centred. Practical dress, sleeves bound. Old joint injuries."
   },
   "cogitant": {
    "name": "The Cogitants",
@@ -91,7 +96,8 @@
    "palette": "cool slate, parchment, ink-blue",
    "materials": "thin frames, vast implied interiors, memory-palaces",
    "light": "dim, inward, the glow of thought not sun",
-   "mood": "still body, immense interior — thought as force"
+   "mood": "still body, immense interior — thought as force",
+   "people": "unkempt in the way of someone who forgot. Ink, notes, hair unattended. Eyes intensely present or entirely absent. Thin."
   },
   "churnfolk": {
    "name": "The Churnfolk",
@@ -102,7 +108,8 @@
    "palette": "clashing brights, mismatched everything, dust-gold",
    "materials": "improvised gear, patched cloth, lucky junk",
    "light": "loose, sunlit, catch-as-catch-can",
-   "mood": "joyous mess, luck-riding, never twice the same"
+   "mood": "joyous mess, luck-riding, never twice the same",
+   "people": "mismatched, patched, cheerful. Charms, dice, lucky things. Weathered and quick. Something about them is always slightly wrong and never the same thing twice."
   },
   "lattice": {
    "name": "The Lattice-Cities",
@@ -113,7 +120,8 @@
    "palette": "cold white, glass-blue, precise grid-lines",
    "materials": "arcology glass, seamless alloy, no accident",
    "light": "flat perfect illumination, no unplanned shadow",
-   "mood": "total prediction, the binding of possibility"
+   "mood": "total prediction, the binding of possibility",
+   "people": "exactly dressed, everything squared. Carries a record. Reads a room in order, left to right. Nothing improvised."
   },
   "enginewright": {
    "name": "The Enginewrights",
@@ -124,7 +132,8 @@
    "palette": "oil-dark, brass, pressure-gauge red",
    "materials": "gear-teeth, pistons, Precursor mechanisms",
    "light": "forge-glow and gauge-light, systems all the way down",
-   "mood": "technical, dense, mechanical to the core"
+   "mood": "technical, dense, mechanical to the core",
+   "people": "burn-marks, oil, tools worn where the hand falls. Goggles pushed up. Squints at mechanisms rather than at people."
   },
   "numinous": {
    "name": "The Numinous",
@@ -135,7 +144,8 @@
    "palette": "pale gold, veil-white, thinning-air blue",
    "materials": "almost nothing — meaning without matter, thinning veils",
    "light": "a light with no source, the mystic rumor",
-   "mood": "immaterial, half-there, reverent"
+   "mood": "immaterial, half-there, reverent",
+   "people": "eyes that focus slightly past you. Thin, often underfed — attending the veil costs. Wears charms, thresholds, small warding things. Stands near doorways."
   },
   "threnodist": {
    "name": "The Threnodists",
@@ -146,7 +156,8 @@
    "palette": "tidal blues and reds, tear-bright",
    "materials": "flowing cloth, water, architecture shaped for feeling",
    "light": "dramatic, swelling, emotion made visible",
-   "mood": "public weeping and public joy — tidal, expressive"
+   "mood": "public weeping and public joy — tidal, expressive",
+   "people": "marked by grief kept rather than resolved — dark cloth, mourning tokens worn long past custom. A carrying voice even in silence."
   },
   "syllogist": {
    "name": "The Syllogists",
@@ -157,7 +168,8 @@
    "palette": "clean white, single ink-black line, cold blue",
    "materials": "argument-as-architecture, clean geometry",
    "light": "even and clear, the cold pleasure of a proof",
-   "mood": "precise, bloodless, satisfying"
+   "mood": "precise, bloodless, satisfying",
+   "people": "clean, spare, attentive. Listens with the whole face. Carries the wrong book for the occasion. Interrupts precisely."
   },
   "veilwright": {
    "name": "The Veilwrights",
@@ -168,7 +180,8 @@
    "palette": "mirror-silver, shifting hues, nothing fixed",
    "materials": "mirrors, masks, surfaces that aren't where they seem",
    "light": "reflected and doubled — you can't trust the source",
-   "mood": "beautiful, untrustworthy, nothing quite where it appears"
+   "mood": "beautiful, untrustworthy, nothing quite where it appears",
+   "people": "pleasant, forgettable, well-dressed for wherever they are. Nothing distinctive, deliberately. You would not describe them the same way twice."
   },
   "verist": {
    "name": "The Verists",
@@ -179,7 +192,8 @@
    "palette": "raw stone-grey, no ornament, honest brown",
    "materials": "unadorned stone, plain wood, nothing decorative",
    "light": "flat honest daylight, no flattering angle",
-   "mood": "a truth that doesn't care whether you can bear it"
+   "mood": "a truth that doesn't care whether you can bear it",
+   "people": "plain to the point of severity. Direct eye contact. No ornament, no softening. Looks like someone about to say the thing."
   },
   "abyssal": {
    "name": "The Abyssal Choir",
@@ -190,7 +204,8 @@
    "palette": "deep red, char-black, ember-orange",
    "materials": "horned architecture, bargain-marks, appetite made stone",
    "light": "low red glow from below, honest about hunger",
-   "mood": "frank appetite, bargains, an honesty the pious lack"
+   "mood": "frank appetite, bargains, an honesty the pious lack",
+   "people": "hollow-cheeked, appetite showing. Dark wet-looking cloth. Too still, then too fast. Something behind the eyes is listening."
   },
   "seraphic": {
    "name": "The Seraphic Orders",
@@ -201,7 +216,8 @@
    "palette": "gold, white, tier-on-tier brightness",
    "materials": "tiered spires, choral height, mercy-from-above",
    "light": "radiant from above, unbearable choral certainty",
-   "mood": "administered mercy, height, certainty"
+   "mood": "administered mercy, height, certainty",
+   "people": "upright, ordered, unornamented. Clean lines and clean cloth. Regards people as though weighing them, because they are."
   },
   "mason": {
    "name": "The Masons of the Given",
@@ -212,7 +228,8 @@
    "palette": "grey stone, ledger-brown, weighted earth",
    "materials": "cut stone, weight, ledgers, the measured and provable",
    "light": "solid daylight on heavy things",
-   "mood": "suspicious of anything unweighable — grounded, dense"
+   "mood": "suspicious of anything unweighable — grounded, dense",
+   "people": "heavy through the shoulders, stone-dust in the creases. Blunt hands. Plain, durable, unfashionable. Stands like a thing that will not move."
   },
   "figurist": {
    "name": "The Figurists",
@@ -223,7 +240,8 @@
    "palette": "impossible color-shifts, non-Euclidean tint",
    "materials": "impossible geometry, buildings that are arguments",
    "light": "light that bends wrong, a place resisting the map",
-   "mood": "abstract, disorienting, unmappable"
+   "mood": "abstract, disorienting, unmappable",
+   "people": "precise, spare, slightly abstracted. Geometric ornament worn without warmth. Draws in the air while thinking."
   },
   "horizon": {
    "name": "The Horizon-Walkers",
@@ -234,7 +252,8 @@
    "palette": "road-dust, open-sky blue, tent-canvas",
    "materials": "tents, roads, distance itself as home",
    "light": "wide horizon light, always-moving",
-   "mood": "no fixed anything — distance as home"
+   "mood": "no fixed anything — distance as home",
+   "people": "road-worn, sun-marked, travelling light. Boots better than the rest of the outfit. Never quite settled in a chair."
   },
   "hourkeeper": {
    "name": "The Hourkeepers",
@@ -245,7 +264,8 @@
    "palette": "aged brass, archive-sepia, clock-face cream",
    "materials": "clock-towers, forward-running archives, gears of time",
    "light": "the patient light of a long-kept room",
-   "mood": "unbearable patience, time held and counted"
+   "mood": "unbearable patience, time held and counted",
+   "people": "aged unevenly — young hands, old eyes, or the reverse. Carries a count. Unhurried past the point of comfort."
   },
   "unmaker": {
    "name": "The Unmakers",
@@ -256,7 +276,8 @@
    "palette": "dust-grey, controlled-rubble, clean break-line",
    "materials": "beautiful demolition, ordered ruin, the cleared space",
    "light": "light entering a thing just opened",
-   "mood": "an ethic of clearing — ruin made beautiful and deliberate"
+   "mood": "an ethic of clearing — ruin made beautiful and deliberate",
+   "people": "neat, minimal, watchful. Carries very little and each thing exact. Looks at structures rather than people. Nothing decorative anywhere."
   },
   "wright": {
    "name": "The Wrights of the New",
@@ -267,7 +288,33 @@
    "palette": "scaffold-timber, fresh-cut stone, work-lamp amber",
    "materials": "scaffolds forever, half-built cathedrals, tools mid-use",
    "light": "work-light on the unfinished, the joy and waste of it",
-   "mood": "never finished, and that's the point — becoming"
+   "mood": "never finished, and that's the point — becoming",
+   "people": "covered in the work — sawdust, mortar, half-finished things in the pockets. Sleeves shoved up. Building something even while talking."
+  },
+  "bargainers": {
+   "name": "The Bargainers",
+   "craft": "Termcraft",
+   "axis": "demonic_angelic",
+   "pole": "demonic",
+   "canonAesthetic": "tables, ledgers, terms named aloud and kept exactly; a gift that costs precisely what was said",
+   "palette": "tallow-yellow, oxblood, worn brass, ink-black",
+   "materials": "ledger paper, wax seals, split tally-sticks, a plain table",
+   "light": "a single lamp between two parties, everything outside the circle of it unlit",
+   "mood": "unhurried, exact, courteous — the calm of someone who has already named the price",
+   "people": "plainly and neatly dressed, nothing ostentatious — ostentation is a claim you have not yet earned. Hands are the focus: open, empty, offered. Carries a tally-stick, a folded ledger, or nothing at all. Composed, attentive, unembarrassed. Never predatory — a Bargainer who LOOKS like a trap is a bad Bargainer."
+  },
+  "god_named": {
+   "name": "The God-Named",
+   "craft": "Namebearing",
+   "axis": "demonic_angelic",
+   "pole": "angelic",
+   "canonAesthetic": "a borrowed name worn openly; authority that is entirely real and entirely unverifiable",
+   "palette": "bleached linen, old gold leaf, dust-white, deep shadowed umber",
+   "materials": "worn vestments, a carried sigil, sun-faded cloth, stone thresholds",
+   "light": "high and behind — the face partly shadowed by the light it claims to carry",
+   "mood": "upright, weathered, certain in a way that has cost something",
+   "people": "bears the name visibly — a sigil, a stole, a brand, a stance. Often tired underneath the bearing. The name is grander than the person and that gap SHOWS: fine device, plain body; great title, mended hem. Never radiant of themselves — the light is borrowed and the borrowing is the point."
   }
- }
+ },
+ "_missingClosed": "SNG-367: bargainers and god_named authored 2026-08-07; all 26 traditions now covered."
 }

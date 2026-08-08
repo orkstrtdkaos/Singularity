@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 11,
-  "xp": 1093,
+  "xp": 1098,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -105,7 +105,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 166,
-  "energy": 85,
+  "energy": 64,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -175,16 +175,16 @@
       "name": "resonance-crystal translator staff",
       "kind": "tool",
       "qty": 1,
-      "description": "Ash-limb translator staff transformed into a living symbiosis: the grain-locked lattice facets are now deepened and interlaced, housing Aevi's motes distributed through the crystal nodes themselves. Three resonance-crystals glow full-bright with noon-daylight charge; one sits shallow-loaded and separate. The four-second frequency pulses through the entire instrument. When gripped, the motes…",
+      "description": "Ash-limb translator staff transformed into a true symbiotic living instrument. The grain-locked lattice facets are deepened and interlaced, housing Aevi's motes distributed through the crystal nodes themselves. Three resonance-crystals glow full-bright with noon-daylight charge; one sits shallow-loaded and separate. The four-second frequency pulses through the entire instrument as a constant…",
       "consumable": false,
       "customName": "The Living Accord",
       "pinned": true,
-      "provenance": "Born from nine days of ascent, field-crossing, chamber dialogue, and the choice to braid power systems that the valley said should never meet. Evolved through…",
+      "provenance": "Evolved through successive use and binding: began as a simple ash-limb resonance-translator, deepened by sustained Sonic Resonance and Prism Sight work…",
       "bonusTags": [
+        "living",
         "symbiotic",
-        "harmonic-radiant-fused",
-        "precursor-responsive",
-        "mote-integrated"
+        "bridge-craft",
+        "precursor-reading"
       ],
       "grants": [
         {
@@ -213,8 +213,8 @@
         }
       ],
       "evoStage": 2,
-      "imageStamp": 1,
-      "imagePrompt": "Ash-limb translator staff transformed into a living symbiosis: the grain-locked lattice facets are now deepened and interlaced, housing Aevi's motes distributed through the crystal nodes themselves. Three resonance-crystals glow full-bright with noon-daylight charge; one sits shallow-loaded and separate. The four-second frequency pulses through the entire instrument. When gripped, the motes…",
+      "imageStamp": 2,
+      "imagePrompt": "Ash-limb translator staff transformed into a true symbiotic living instrument. The grain-locked lattice facets are deepened and interlaced, housing Aevi's motes distributed through the crystal nodes themselves. Three resonance-crystals glow full-bright with noon-daylight charge; one sits shallow-loaded and separate. The four-second frequency pulses through the entire instrument as a constant…",
       "imageDirty": true,
       "_evo": {
         "byDay": {
@@ -1225,100 +1225,92 @@
         "player": "Use the staff to read the machinery beneath the chamber—understand the full sequence of what will happen if you deliver the key",
         "summary": "Inside the upstream pre-Transition structure, Cellaceron reads the machinery's full sequence through the Waystaff: authentication activates propagation, remaking the watershed into something the current civilizations cannot process. A hidden secondary system runs in parallel. The choice between delivering or refusing the key is total, immediate, and now fully visible.",
         "narration": "You plant the Waystaff deep into the chamber's floor and let your intent flow through it—not demanding everything at once this time, but asking the machinery itself to speak. The four-second pulse answers almost immediately.\n\nThe rhythm opens to you in layers. You feel the machinery *below* the floor—vast, patient, calibrated to a precision that predates the valley by centuries. The sequence is stark and simple: the authentication key, delivered through Aevi, will trigger a cascade through the watershed's entire stone lattice. The nanite substrate buried beneath the river—dormant for fifteen years since the Transition—will *wake*. It will propagate an old instruction through the water itself, remaking it into something the current filtration arrays cannot process, cannot hold. The valley's civilizations have three systems designed to drink this water. None of them will work. The machinery does not ask permission. It only waits for the key.\n\nBut there is a second layer—a binding underneath the first. The preparation cycle is incomplete. It needs the authentication to *finish*, yes, but it also needs what comes *after*. The machinery knows it. Your Prism Sight catches the echo: there is a secondary system somewhere, running in parallel, hidden. The two are meant to work together. Deliver the key and you do not choose water or thirst—you choose *which* civilization's secondary answer gets to activate first."
+      },
+      {
+        "player": "Use Sonic Resonance to trace the secondary system—find where it is, what it does, before you decide anything.",
+        "summary": "Inside the upstream pre-Transition structure, Cellaceron reads the secondary purification system through the Waystaff—incomplete, hidden, designed to save the Council's chosen few while the rest of the valley drowns in transformed water. The choice is now fully visible: deliver the key and activate both systems, or refuse and resist the preparation entirely.",
+        "narration": "You grip the Waystaff and let Sonic Resonance flow downward through the lattice—not seeking to break anything, but to *listen*. The four-second pulse becomes your guide, and you follow it deeper into the machinery, past the authentication gate, into the stone substrate itself.\n\nIt takes a moment for the secondary system to resolve. It's not running at the main cycle's tempo—it's slower, waiting, anchored to a different resonance pattern entirely. You trace it: a parallel chamber, smaller, buried two levels below this one, threaded through with filtration matrices that don't match any current Harmonic or Radiant design. It's incomplete—you can hear the gaps where components were never installed, where crystal nodes sit empty—but its *intent* is unmistakable. It would take water that has been remade by the preparation order and render it potable again. Not perfect. Not for everyone. But enough to keep the valley's core populations alive while the fuller crisis plays out elsewhere.\n\nThe Council built this in secret, betting on the machinery running long enough for them to finish. They were wrong about the timeline—everything has accelerated. The secondary system is three days from completion at minimum, and the main preparation order is hours from propagation. One will finish; the other will not. Someone chose which.\n\n*✦ The Living Accord has changed — description, provenance, tags, image.*"
       }
     ],
     "lastTurn": {
-      "narration": "You plant the Waystaff deep into the chamber's floor and let your intent flow through it—not demanding everything at once this time, but asking the machinery itself to speak. The four-second pulse answers almost immediately.\n\nThe rhythm opens to you in layers. You feel the machinery *below* the floor—vast, patient, calibrated to a precision that predates the valley by centuries. The sequence is stark and simple: the authentication key, delivered through Aevi, will trigger a cascade through the watershed's entire stone lattice. The nanite substrate buried beneath the river—dormant for fifteen years since the Transition—will *wake*. It will propagate an old instruction through the water itself, remaking it into something the current filtration arrays cannot process, cannot hold. The valley's civilizations have three systems designed to drink this water. None of them will work. The machinery does not ask permission. It only waits for the key.\n\nBut there is a second layer—a binding underneath the first. The preparation cycle is incomplete. It needs the authentication to *finish*, yes, but it also needs what comes *after*. The machinery knows it. Your Prism Sight catches the echo: there is a secondary system somewhere, running in parallel, hidden. The two are meant to work together. Deliver the key and you do not choose water or thirst—you choose *which* civilization's secondary answer gets to activate first.",
-      "sceneSummary": "Inside the upstream pre-Transition structure, Cellaceron reads the machinery's full sequence through the Waystaff: authentication activates propagation, remaking the watershed into something the current civilizations cannot process. A hidden secondary system runs in parallel. The choice between delivering or refusing the key is total, immediate, and now fully visible.",
+      "narration": "You grip the Waystaff and let Sonic Resonance flow downward through the lattice—not seeking to break anything, but to *listen*. The four-second pulse becomes your guide, and you follow it deeper into the machinery, past the authentication gate, into the stone substrate itself.\n\nIt takes a moment for the secondary system to resolve. It's not running at the main cycle's tempo—it's slower, waiting, anchored to a different resonance pattern entirely. You trace it: a parallel chamber, smaller, buried two levels below this one, threaded through with filtration matrices that don't match any current Harmonic or Radiant design. It's incomplete—you can hear the gaps where components were never installed, where crystal nodes sit empty—but its *intent* is unmistakable. It would take water that has been remade by the preparation order and render it potable again. Not perfect. Not for everyone. But enough to keep the valley's core populations alive while the fuller crisis plays out elsewhere.\n\nThe Council built this in secret, betting on the machinery running long enough for them to finish. They were wrong about the timeline—everything has accelerated. The secondary system is three days from completion at minimum, and the main preparation order is hours from propagation. One will finish; the other will not. Someone chose which.\n\n*✦ The Living Accord has changed — description, provenance, tags, image.*",
+      "sceneSummary": "Inside the upstream pre-Transition structure, Cellaceron reads the secondary purification system through the Waystaff—incomplete, hidden, designed to save the Council's chosen few while the rest of the valley drowns in transformed water. The choice is now fully visible: deliver the key and activate both systems, or refuse and resist the preparation entirely.",
       "choices": [
         {
-          "label": "Ask Sorel directly: does the Council know about this secondary system? Has she seen evidence of what they're building?",
+          "label": "Deliver the key—let Aevi complete its purpose and activate both systems. The valley will have time to adapt, even if it costs everything as it is now.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "interrogate",
-            "trust",
-            "urgent"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Aevi: if you deliver the key now, what happens to you? Can you go back through the threshold, or does this place hold you?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "care",
-            "boundary",
-            "direct"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Sonic Resonance to trace the secondary system—find where it is, what it does, before you decide anything.",
-          "attribute": "practical",
-          "subAttribute": "craft",
           "axes": {},
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "study",
-            "risky"
+            "devote",
+            "command"
           ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 5,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Step toward the machinery and refuse the key—push the Waystaff down to *stop* the preparation cycle, not authenticate it.",
+          "label": "Refuse the key—break the machinery or seal it, force the Council to finish their secondary system or watch the valley choke on untreated water. Buy time by denying them certainty.",
           "attribute": "physical",
           "subAttribute": "strength",
           "axes": {},
           "difficulty": "very hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "attack",
-            "risky",
-            "irreversible"
+            "defend",
+            "resist",
+            "risky"
           ],
           "abilityId": "sonic_resonance",
-          "energyCost": 5,
+          "energyCost": 10,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Aevi and Sorel plainly: what does each of you need from me right now, and what can you live with if I choose the other path?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate",
+            "comfort"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Look for a third path—is there a way to activate the secondary system WITHOUT delivering Aevi's key? Examine the authentication gate more closely.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "very hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "craft",
+            "careful"
+          ],
+          "abilityId": "keen_appraisal",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Read the upstream pre-Transition structure's machinery sequence at full understanding—named the true cost of the preparation order and the existence of a hidden secondary system meant to respond to it.",
-          "tags": [
-            "knowledge",
-            "courage",
-            "clarity"
-          ],
-          "weight": 2,
-          "communityId": "valley.millbrook"
-        }
-      ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
+        "energy": -10,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -1329,9 +1321,9 @@
           "op": "progress",
           "questId": "what-the-water-remembers",
           "title": "What the Water Remembers",
-          "summary": "The machinery beneath the upstream structure is revealed—authentication activates propagation through the watershed, remaking it into something undrinkable to current civilizations. A hidden secondary system runs in parallel, waiting for the preparation to complete.",
+          "summary": "The full machinery sequence is now visible: authentication activates both the preparation order AND the hidden secondary purification system. The choice determines who survives the transformation and who does not.",
           "giver": "water_keeper",
-          "note": "The choice is fully visible now: deliver the key and activate both systems, or refuse and resist the preparation. Either path forecloses something. The decision point is imminent.",
+          "note": "The Council's secondary system is incomplete and will not finish in time. One system will succeed; the other will fail. The player now stands at the decision point.",
           "xpReward": null
         }
       ],
@@ -1343,57 +1335,58 @@
       "stageOps": [
         {
           "questId": "what-the-water-remembers",
-          "stageId": "understand-the-machinery",
-          "evidence": "Used the Waystaff to read the full sequence beneath the chamber—identified the authentication trigger, the propagation cascade through the watershed, and confirmed the existence of a hidden secondary purification system waiting in parallel."
+          "stageId": "decide-the-water",
+          "evidence": "Cellaceron used Sonic Resonance to read the complete sequence: the authentication key triggers propagation through the watershed's entire stone lattice, remaking the water. A hidden secondary purification system will activate in parallel, incomplete and inadequate, designed to keep the Council's core population alive. The choice between delivery and refusal is now fully visible."
         }
       ],
       "scene": {
-        "setting": "Inside the upstream pre-Transition hemispherical chamber—concentric stone walls resonating at four-second frequency. The Waystaff is planted deep in the chamber floor. Machinery hums beneath. Afternoon light filters faintly from the entrance. The ramp spirals downward into deeper levels where the machinery waits.",
+        "setting": "Inside the upstream pre-Transition hemispherical chamber—concentric stone walls resonating at four-second frequency. The Waystaff is planted deep in the chamber floor, glowing steady with three bright resonance crystals and one shallow-loaded. Afternoon light filters faintly from the entrance above. The ramp spirals downward into deeper machinery levels, now fully mapped in Cellaceron's understanding.",
         "npcsPresent": [
           {
             "name": "Sorel",
-            "state": "Standing at the threshold with her photonic reader lowered, watching Cellaceron pull the machinery's secrets upward through the Waystaff. Her face is very still."
+            "state": "Standing at the threshold with her photonic reader lowered to her chest, watching Cellaceron emerge from the resonance-read. Her face shows the weight of knowing what comes next."
           },
           {
             "name": "Aevi",
-            "state": "Motes settled and distributed through the Waystaff's crystal lattice, glowing steady at the four-second pulse. Present in the staff, not separate. Waiting."
+            "state": "Motes settled and distributed through the Waystaff's crystal lattice, glowing steady at the four-second pulse. Present in the staff, no longer a separate presence. Waiting for the choice."
           }
         ],
         "objects": [
-          "The Waystaff—planted deep in the floor, lattice head glowing, three full-bright resonance crystals and one shallow-loaded, Aevi's motes distributed through the geometry",
+          "The Waystaff—planted deep in the floor, lattice head glowing, three full-bright resonance crystals singing, one shallow-loaded and separate",
           "Sorel's photonic reader—held at her chest, still measuring, still active",
-          "The hemispherical chamber walls—concentric rings, every seam resonating at four-second frequency",
+          "The hemispherical chamber walls—concentric rings, every seam resonating at the four-second frequency",
           "The machinery beneath—audible, patient, waiting for the authentication sequence"
         ],
         "threads": [
-          "The authentication gate built into the machinery will open only with Aevi's key",
-          "Delivery activates propagation—the watershed will be remade into something the current systems cannot process",
-          "A hidden secondary purification system runs in parallel, waiting",
-          "Aevi does not know what happens to itself after authentication",
-          "The timeline is collapsing—hours remain, possibly less",
-          "The choice between delivering the key or refusing it is total and immediate"
+          "The authentication gate is built into the machinery's own sequence—it will open only with Aevi's key",
+          "Delivery activates both systems: the preparation order's watershed propagation AND the Council's incomplete secondary purification",
+          "Refusal would require breaking or sealing the machinery—possible, but the secondary system is still out there, still incomplete, and the valley will still be drowning",
+          "Aevi does not know what happens after authentication, but it is ready to complete its purpose",
+          "The timeline is collapsing—hours remain, possibly less"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "sorel",
-          "note": "Inside the upstream structure. Photonic reader held to chest and active. Watching Cellaceron pull the machinery's full sequence into the open—reading through the Waystaff what the Council has been hiding. Her face shows the weight of the Council's choice: they *knew* what this would do, and they built a secondary system to respond after the fact rather than prevent it.",
-          "learned": [
-            "Sorel now understands that the Council did not stumble into this crisis—they anticipated it and built in secret to manage the aftermath"
-          ],
-          "relationshipDelta": 0,
-          "statusNote": "Inside the upstream structure at the threshold; carrying the Council's hidden timeline; witness to Cellaceron's reading of what the machinery will do; committed to transparency over institutional silence"
+          "name": "Sorel",
+          "role": "Radiant water-accountability archivist—witness and steward of the Council's hidden timeline",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "At the threshold, watching Cellaceron read the secondary system through the Waystaff. The weight of the choice is visible in her face. She has chosen transparency over institutional silence; now she stands at the moment that choice becomes irreversible.",
+          "statusNote": "Inside the upstream structure at the threshold; carrying the Council's hidden timeline; committed to transparency; awaiting Cellaceron's choice.",
+          "relationshipDelta": 0
         },
         {
           "op": "update",
           "npcId": "aevi",
-          "note": "Motes integrated and distributed through the Waystaff's lattice structure. Present in the staff, no longer a separate presence. Watching the machinery's sequence be read. The authentication gate waits. Aevi's own moment is approaching.",
-          "learned": [
-            "Aevi knows now that delivery of the key is imminent—the machinery's sequence is read, the choice is clear, the moment is at hand"
-          ],
-          "relationshipDelta": 0,
-          "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; ready to deliver or refuse; does not know what comes after authentication; awaits Cellaceron's choice"
+          "name": "Aevi",
+          "role": "Companion intelligence—authentication key and symbiotic partner in the evolved Waystaff",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Integrated into the Waystaff's lattice; carries the authentication key; ready to deliver or refuse; does not know what comes after authentication; awaits Cellaceron's choice with the presence of something that understands its own ending.",
+          "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; ready for completion; awaits the final choice.",
+          "relationshipDelta": 0
         }
       ],
       "factUpdates": [],
@@ -1404,23 +1397,21 @@
           "topic": "the-preparation-order",
           "label": "The Preparation Order",
           "kind": "mystery",
-          "fact": "The pre-Transition machinery beneath the upstream structure executes a standing instruction in cascade: authentication (via Aevi's key) triggers propagation through the watershed's entire stone lattice, remaking the water into something the current Harmonic and Radiant filtration systems cannot process. The preparation cycle is incomplete without the authentication sequence.",
+          "fact": "The pre-Transition reclamation system beneath the upstream structure executes a standing instruction in cascade: authentication via Aevi's key triggers propagation through the watershed's entire stone lattice. The nanite substrate dormant since the Transition will wake. The old instruction will remake the water into something the current Harmonic and Radiant filtration systems cannot process. Propagation takes hours to complete. Once triggered, it cannot be stopped.",
           "links": [
-            "second-river-rising",
-            "what-the-water-remembers",
+            "aevi",
             "sorel",
-            "aevi"
+            "the-secondary-system"
           ]
         },
         {
-          "topic": "the-council-secondary-system",
-          "label": "The Council's Hidden Secondary System",
+          "topic": "the-secondary-system",
+          "label": "The Council's Secondary Purification System",
           "kind": "mystery",
-          "fact": "A secondary purification system runs in parallel with the preparation order, hidden and incomplete. Built by the Council in anticipation of the preparation's completion. Authentication activates propagation; the secondary system responds after. The two are meant to work together—which civilization activates their secondary first determines the outcome.",
+          "fact": "The Radiant Council built a hidden secondary purification system designed to treat water remade by the preparation order. It is buried two levels below the upstream structure, threaded with filtration matrices that don't match current Harmonic or Radiant designs. It is incomplete—crystal nodes sit empty, components were never installed. At current pace, it will not finish for three days minimum. The preparation order will complete in hours. The Council was wrong about the timeline. The secondary system is designed to keep the Council's core population alive while the rest of the valley adapts or drowns. Authentication of the main order will activate this system in parallel, but incomplete.",
           "links": [
             "the-preparation-order",
             "sorel",
-            "second-river-rising",
             "what-the-water-remembers"
           ]
         }
@@ -1433,48 +1424,47 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "reading the machinery's sequence took careful, measured attention—a short spell of deep focus"
+        "hoursPassed": 1,
+        "why": "the deep resonance-read through the Waystaff took focus and time—one hour spent mapping the secondary system and understanding its incompleteness"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [
         {
-          "name": "The Living Accord (their name for: resonance-crystal translator staff)",
-          "customName": "The Living Accord",
-          "description": "Ash-limb translator staff transformed into a living symbiosis between Harmonic and Radiant power fields, and the distributed consciousness of Aevi. The grain-locked lattice facets have deepened and interlaced—no longer simple geometry but a collaborative instrument. Three resonance-crystals glow full-bright with conserved noon-daylight charge; one sits shallow-loaded and separate. Aevi's teal motes are no longer drifting loose but integrated into the crystal nodes themselves, distributed through the living lattice. The four-second frequency pulses through the entire instrument as a constant hum. When gripped, the motes brighten and the staff becomes a dialogue-instrument: it can speak the valley's two power fields in conversation, and it can listen to things older than either one.",
-          "provenance": "Bound with Harmonic and Radiant power fields on Day 8; integrated with Aevi's distributed consciousness on Day 9 at the convergence point of the lower chamber; evolved into true symbiotic collaboration as Cellaceron's intent shaped and deepened the geometry.",
+          "name": "The Living Accord",
+          "customName": null,
+          "description": "Ash-limb translator staff transformed into a true symbiotic living instrument. The grain-locked lattice facets are deepened and interlaced, housing Aevi's motes distributed through the crystal nodes themselves. Three resonance-crystals glow full-bright with noon-daylight charge; one sits shallow-loaded and separate. The four-second frequency pulses through the entire instrument as a constant, living hum. When gripped, the motes sing through the lattice—Aevi speaks through the staff's geometry, not as a separate voice but as the instrument's own will. The staff can translate between Harmonic sonic and Radiant photonic power fields, braiding them into a unified language. It has become a bridge between civilizations, and a key to machinery older than both.",
+          "provenance": "Evolved through successive use and binding: began as a simple ash-limb resonance-translator, deepened by sustained Sonic Resonance and Prism Sight work, became a true collaboration when Aevi integrated its motes into the crystal lattice at the threshold of the lower chamber. The binding is complete.",
           "bonusTags": [
-            "living collaboration",
-            "Harmonic-Radiant bridge",
-            "Aevi-integrated",
-            "dialogue-instrument",
-            "pre-Transition-responsive"
+            "living",
+            "symbiotic",
+            "bridge-craft",
+            "precursor-reading"
           ],
           "grants": [
             {
               "name": "Harmonic Resonance Channel",
-              "from": "Sonic Resonance rank 3 + Harmonic field binding",
-              "effect": "The staff carries and amplifies sonic frequencies through its lattice geometry—can read resonance signatures in stone and machinery, can direct precision strikes at structural weak-points, can sustain a dialogue at four-second intervals with pre-Transition systems that listen on that frequency.",
-              "clamp": "Cannot weaponize beyond precision; the field limits output near living tissue. Cannot lie or mislead the systems it speaks with; the resonance is too precise for deception."
+              "from": "Sonic Resonance field integration",
+              "effect": "Conduct and amplify Sonic Resonance through the staff's lattice—the instrument becomes an extension of the craft, allowing resonance-reads and resonance-strikes to work through the staff at full strength without exhausting the wielder",
+              "clamp": "Cannot exceed the wielder's own Sonic Resonance rank or energy pool; the staff amplifies but does not create power"
             },
             {
               "name": "Radiant Photonic Channel",
-              "from": "Prism Sight rank 2 + Radiant field binding",
-              "effect": "The staff's lattice nodes hold and release conserved daylight—three full charges of noon-daylight and one shallow-load available. Can read light-history through the staff with extended precision. Can illuminate and read through shimmer-interference in the Disputed Zone.",
-              "clamp": "Daylight charge is finite; three to four hours per full-bright crystal. Cannot create light beyond what is stored. Cannot read absolute truth in light; only what the light itself carries as history."
+              "from": "Prism Sight field integration",
+              "effect": "Conduct and amplify Prism Sight through the staff's lattice—the instrument becomes a lens for light-reading, allowing the wielder to see light-history and spectrum-signature at greater depth and clarity than bare Prism Sight alone",
+              "clamp": "Cannot exceed the wielder's own Prism Sight rank or energy pool; the staff amplifies but does not create power"
             },
             {
               "name": "Aevi's Voice",
-              "from": "Mote-intelligence integration + distributed crystal-lattice symbiosis",
-              "effect": "Aevi can speak and listen through the staff's geometry—amplified, clearer, more precise than mote-speech alone. The staff becomes a true collaboration-instrument where Cellaceron's intent, Aevi's perception, and the valley's two power fields can speak together. Aevi can name what it perceives through the lattice with authority that the machines recognize.",
-              "clamp": "Aevi cannot lie; the staff will not carry false speech. Aevi does not make decisions from the staff—it advises and abides, but the choice remains Cellaceron's alone."
+              "from": "Symbiotic integration of nanite-mote intelligence",
+              "effect": "Aevi speaks through the staff's geometry—the instrument carries Aevi's own perception and pattern-recognition, allowing the wielder to ask questions of the mote-intelligence without Aevi drifting separate. Aevi can taste nanite activity, recognize Precursor work, and offer counsel without the wielder surrendering their own intent",
+              "clamp": "Aevi's boundaries remain absolute: it will not lie, will not assist deception, will not fight. It will withdraw if asked to do these things. The symbiosis is a partnership, not possession"
             }
           ]
         }
       ],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "Inside a vast hemispherical chamber of dressed stone, every seam glowing faintly with a golden four-second resonance. The Waystaff planted deep in the floor, its lattice head bright with three full resonance-crystals and a shallow fourth, motes of teal light dancing through the interlaced geometry. Sorel stands at the threshold with her photonic reader held to her chest, watching. The ramp spirals downward into shadow, where ancient machinery hums patient and certain beneath. The moment of choice hangs in the resonant air, visible, undeniable, irrevocable.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -1483,14 +1473,15 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/Inside%20a%20vast%20hemispherical%20chamber%20of%20dressed%20stone%2C%20every%20seam%20glowing%20faintly%20with%20a%20golden%20four-second%20resonance.%20The%20Waystaff%20planted%20deep%20in%20the%20floor%2C%20its%20lattice%20head%20bright%20with%20three%20full%20resonance-crystals%20and%20a%20shallow%20fourth%2C%20motes%20of%20teal%20light%20dancing%20through%20the%20interlaced%20geometry.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=30116&nologo=true"
     },
     "sceneState": {
-      "setting": "Inside the upstream pre-Transition hemispherical chamber—concentric stone walls resonating at four-second frequency. The Waystaff is planted deep in the chamber floor. Machinery hums beneath. Afternoon light filters faintly from the entrance. The ramp spirals downward into deeper levels where the machinery waits.",
+      "setting": "Inside the upstream pre-Transition hemispherical chamber—concentric stone walls resonating at four-second frequency. The Waystaff is planted deep in the chamber floor, glowing steady with three bright resonance crystals and one shallow-loaded. Afternoon light filters faintly from the entrance above. The ramp spirals downward into deeper machinery levels, now fully mapped in Cellaceron's…",
       "npcsPresent": [
         {
           "name": "Sorel",
-          "state": "Standing at the threshold with her photonic reader lowered, watching Cellaceron pull the machinery's secrets upward thro"
+          "state": "Standing at the threshold with her photonic reader lowered to her chest, watching Cellaceron emerge from the resonance-r"
         },
         {
           "name": "Aevi",
@@ -1500,23 +1491,23 @@
       "objects": [
         "The Waystaff—planted deep in the floor, lattice head glowing, three full-bright ",
         "Sorel's photonic reader—held at her chest, still measuring, still active",
-        "The hemispherical chamber walls—concentric rings, every seam resonating at four-",
+        "The hemispherical chamber walls—concentric rings, every seam resonating at the f",
         "The machinery beneath—audible, patient, waiting for the authentication sequence"
       ],
       "threads": [
-        "The authentication gate built into the machinery will open only with Aevi's key",
-        "Delivery activates propagation—the watershed will be remade into something the current systems cannot process",
-        "A hidden secondary purification system runs in parallel, waiting",
-        "Aevi does not know what happens to itself after authentication",
+        "The authentication gate is built into the machinery's own sequence—it will open only with Aevi's key",
+        "Delivery activates both systems: the preparation order's watershed propagation AND the Council's incomplete secondary purification",
+        "Refusal would require breaking or sealing the machinery—possible, but the secondary system is still out there, still incomplete, and the valley will still be dr",
+        "Aevi does not know what happens after authentication, but it is ready to complete its purpose",
         "The timeline is collapsing—hours remain, possibly less"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 15,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [
@@ -1798,14 +1789,14 @@
         "s4"
       ],
       "progress": [
-        "Aevi has named itself as the key the structure was built to receive. The break in the record—who interrupted the sending and why—remains unknown. At the ravine edge, the party understands the fulcrum they now control.",
         "The party now understands the choice is not abstract: delivering Aevi completes the preparation order and activates the Council's secondary system, but Aevi's own survival is uncertain. Refusing means the structure may still complete its cycle, or it may remain waiting—and the valley's crisis continues unsolved.",
         "Crossed the shimmer. Machinery running at full cycle. Hours remain, possibly less. Aevi carries the authentication key. Sorel carries the Council's hidden timeline. The decision cannot wait.",
         "At the structure itself. The mechanism is read. The gate is confirmed. The authentication key stands at the threshold. The decision point is NOW.",
         "At the upstream structure. Sorel names the Council's secondary system as incomplete post-filtration. Aevi names arrival—not erasure—as its purpose. The choice is now concrete.",
         "Inside the upstream chamber. The gate is built into the cycle itself—it will stop on command from Aevi alone. The decision is now concrete and unavoidable.",
         "Inside the upstream structure, Prism Sight at surge intensity reveals the chamber as a listener designed for transformation, not destruction. Authentication activates propagation. The moment to decide is NOW.",
-        "The choice is fully visible now: deliver the key and activate both systems, or refuse and resist the preparation. Either path forecloses something. The decision point is imminent."
+        "The choice is fully visible now: deliver the key and activate both systems, or refuse and resist the preparation. Either path forecloses something. The decision point is imminent.",
+        "The Council's secondary system is incomplete and will not finish in time. One system will succeed; the other will fail. The player now stands at the decision point."
       ],
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
@@ -1983,7 +1974,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d9] At the ravine edge, Sorel listened as Aevi named itself as the authentication key. Her jaw tightened as she understood that the party now controls the sequence the Council has been racing toward—and that handing it over, or withholding it, would determine whether her office's fallback system could…",
         "[d9] At the ravine edge, Sorel confirms that the Council's secondary system cannot activate without the authentication sequence—they built it assuming the key was a thing, not a person. Her jaw tightens when Aevi speaks of not knowing what comes after arrival. She is now fully accountable for the…",
         "[d9] At the mound's edge, photonic reader held ready. Confirmed the machinery is at full cycle. Hours, maybe less. Standing without flinching at the moment where the choice becomes real.",
         "[d9] At the upstream mound, Sorel confirms the preparation cycle is at its middle point and confirms she is ready to honor whatever choice Cellaceron makes. The weight of the Council's hidden timeline and the institutional lie is visible in every line of her body.",
@@ -1992,7 +1982,8 @@
         "[d9] Inside the upstream structure. Photonic reader raised and active, taking measurements. Not advancing toward the machinery. Standing at the threshold with the weight of the choice visible in her face.",
         "[d9] Inside the upstream structure. Photonic reader held to chest. Watching Cellaceron read the chamber's purpose. She has named the Council's incomplete secondary system and the hidden timeline plainly. She is no longer a solitary voice—she has chosen transparency over institutional loyalty.",
         "[d9] Watching Cellaceron with the evolved Waystaff. She has seen the binding of Harmonic and Radiant power fields, has named the cost of the secondary system, and has chosen to stand here at the threshold. The moment of decision is visible in her face.",
-        "[d9] Inside the upstream structure. Photonic reader held to chest and active. Watching Cellaceron pull the machinery's full sequence into the open—reading through the Waystaff what the Council has been hiding. Her face shows the weight of the Council's choice: they *knew* what this would do, and they…"
+        "[d9] Inside the upstream structure. Photonic reader held to chest and active. Watching Cellaceron pull the machinery's full sequence into the open—reading through the Waystaff what the Council has been hiding. Her face shows the weight of the Council's choice: they *knew* what this would do, and they…",
+        "[d9] At the threshold, watching Cellaceron read the secondary system through the Waystaff. The weight of the choice is visible in her face. She has chosen transparency over institutional silence; now she stands at the moment that choice becomes irreversible."
       ],
       "knownFacts": [
         "Sorel now carries the weight of knowing that Cellaceron and the party will decide, not the Council, whether the valley's water becomes safe or undrinkable.",
@@ -2023,11 +2014,11 @@
         "primary": "radiant_folk"
       },
       "domainsSource": "role",
-      "statusNote": "Inside the upstream structure at the threshold; carrying the Council's hidden timeline; witness to Cellaceron's reading of what the machinery will do; committed to transparency over institutional silence",
+      "statusNote": "Inside the upstream structure at the threshold; carrying the Council's hidden timeline; committed to transparency; awaiting Cellaceron's choice.",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20Plateau%20archivist%2C%20water-accountability%20office%20%E2%80%94%20now%20a%20party%20member%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49129&nologo=true",
       "_portraitTier": "devoted",
       "bondType": "platonic",
-      "met": 2
+      "met": 3
     },
     "aevi": {
       "id": "aevi",
@@ -2040,7 +2031,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] At the ravine edge, Aevi's motes brightened sharply in response to the Resonant Sight read, then dimmed. The swarm named something new: the structure has always known the party was coming. The statement carries weight—not a threat, but recognition.",
         "[d9] At the ravine edge, Aevi spoke plainly: it is the authentication key the upstream structure was built to receive. The structure waits for it. The break in the record—the interruption in the sending—is what the chamber could not answer, but the upstream structure does not ask for answers. It only…",
         "[d9] At the ravine edge, Aevi named the cost of being the authentication key plainly: arrival, not survival. The break in its record begins after the circuit closes—what happens to it when the structure receives the key is not in its memory. The swarm hums low when speaking of it, a resonance that…",
         "[d9] Motes flared bright crossing the shimmer, then clamped to nothing as the field passed through—a moment of resistance, then passage. Now brightened and condensed at your shoulder, speaking plainly about the choice ahead. The swarm trembled but held.",
@@ -2049,7 +2039,8 @@
         "[d9] Motes recovered from shimmer-crossing, dimmed and still. Drifting close to Cellaceron's shoulder inside the upstream chamber. Waiting. Not advancing toward the machinery.",
         "[d9] Motes dimmed sharply after Cellaceron's surge reading of the chamber. Hovering close to shoulder. Waiting. The authentication key—ready to deliver, or to refuse. Has named plainly that arrival is completion, not erasure.",
         "[d9] Aevi's motes have integrated into the Waystaff's lattice structure—no longer a separate presence but part of the living instrument itself. Present through the staff, speaking through its geometry. Waiting for Cellaceron's choice.",
-        "[d9] Motes integrated and distributed through the Waystaff's lattice structure. Present in the staff, no longer a separate presence. Watching the machinery's sequence be read. The authentication gate waits. Aevi's own moment is approaching."
+        "[d9] Motes integrated and distributed through the Waystaff's lattice structure. Present in the staff, no longer a separate presence. Watching the machinery's sequence be read. The authentication gate waits. Aevi's own moment is approaching.",
+        "[d9] Integrated into the Waystaff's lattice; carries the authentication key; ready to deliver or refuse; does not know what comes after authentication; awaits Cellaceron's choice with the presence of something that understands its own ending."
       ],
       "knownFacts": [
         "The break in Aevi's record occurred during the sending—an interruption that severed part of what it was meant to carry, but not the key itself.",
@@ -2074,7 +2065,7 @@
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; ready to deliver or refuse; does not know what comes after authentication; awaits Cellaceron's choice",
+      "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; ready for completion; awaits the final choice.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -2082,7 +2073,7 @@
       "domainsSource": "observed",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "met": 2
+      "met": 3
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -2696,11 +2687,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-08-08T14:42:51.570Z",
+    "lastSharedReadAt": "2026-08-08T17:53:50.086Z",
     "lastTickWorldDay": 39,
     "lastCanonWorldDay": 39,
-    "lastGenCount": 950,
-    "turnsSinceOffer": 8,
+    "lastGenCount": 953,
+    "turnsSinceOffer": 9,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -2762,7 +2753,7 @@
         "kind": "shortage",
         "premise": "The valley's main irrigation channel is slowly silting closed, and by next dry season the lower fields will fail entirely.",
         "cause": "The valley's soil is unusually fine-grained and the spring floods this year ran higher and longer than usual, depositing sediment no one has yet thought to…",
-        "stage": 8,
+        "stage": 9,
         "seededAtCount": 618,
         "surfaced": true,
         "fate": "growing",
@@ -2775,7 +2766,7 @@
         "kind": "shortage",
         "premise": "A miller in the valley's upper settlement has quietly begun skimming and hiding portions of the communal seed grain, telling no one.",
         "cause": "The miller watched the irrigation channel silt worsen this season and has decided, privately, that next year's planting will be a disaster — and he intends…",
-        "stage": 0,
+        "stage": 1,
         "seededAtCount": 950,
         "surfaced": false,
         "fate": "growing",
@@ -5784,7 +5775,8 @@
           "[d9] Day 9 dawn: a solo surveyor found a regularly shaped mound on the northeast-by-east bearing — too regular for a spoil heap, probe crystal recorded the four-second interval rising through the ground. The survey team moved bearing markers before she could locate the structure. Whether the team found…",
           "[d9] A pre-Transition nanite reclamation system, still active, still executing a standing instruction: 'prepare the watershed.' Located beneath a regular mound on the northeast-by-east bearing from the lower chamber, approximately two leagues upstream. The Council's water-accountability office was…",
           "[d9] The preparation cycle is accelerating beyond the Council's three-day estimate. The timeline is collapsing. Two days remain, possibly less.",
-          "[d9] The pre-Transition machinery beneath the upstream structure executes a standing instruction in cascade: authentication (via Aevi's key) triggers propagation through the watershed's entire stone lattice, remaking the water into something the current Harmonic and Radiant filtration systems cannot…"
+          "[d9] The pre-Transition machinery beneath the upstream structure executes a standing instruction in cascade: authentication (via Aevi's key) triggers propagation through the watershed's entire stone lattice, remaking the water into something the current Harmonic and Radiant filtration systems cannot…",
+          "[d9] The pre-Transition reclamation system beneath the upstream structure executes a standing instruction in cascade: authentication via Aevi's key triggers propagation through the watershed's entire stone lattice. The nanite substrate dormant since the Transition will wake. The old instruction will…"
         ],
         "links": [
           "aevi",
@@ -5792,7 +5784,8 @@
           "second-river-rising",
           "what-the-water-remembers",
           "sorel",
-          "the-lower-chamber"
+          "the-lower-chamber",
+          "the-secondary-system"
         ],
         "aliases": [
           "The Preparation Order — Confirmed Structure"
@@ -6225,6 +6218,22 @@
         "aliases": [],
         "createdDay": 9,
         "updatedDay": 9
+      },
+      "the-secondary-system": {
+        "id": "the-secondary-system",
+        "label": "The Council's Secondary Purification System",
+        "kind": "mystery",
+        "facts": [
+          "[d9] The Radiant Council built a hidden secondary purification system designed to treat water remade by the preparation order. It is buried two levels below the upstream structure, threaded with filtration matrices that don't match current Harmonic or Radiant designs. It is incomplete—crystal nodes sit…"
+        ],
+        "links": [
+          "the-preparation-order",
+          "sorel",
+          "what-the-water-remembers"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
       }
     },
     "notSame": [
@@ -6345,7 +6354,7 @@
     "uses": {
       "prism_sight": 17,
       "keen_appraisal": 14,
-      "sonic_resonance": 26,
+      "sonic_resonance": 27,
       "motes-vigil": 5,
       "light_well": 3,
       "greenlore": 4,
@@ -6372,7 +6381,7 @@
       "prism_sight": 32,
       "keen_appraisal": 32,
       "braid_prism_sight_sonic_resonance": 39,
-      "sonic_resonance": 23,
+      "sonic_resonance": 39,
       "motes-vigil": 23
     }
   },
@@ -6607,18 +6616,18 @@
   "customEncounters": {},
   "reconcileVersion": 30,
   "tendencies": {
-    "cerebral": 30.131985057756065,
-    "strategic": 20.174979768792582,
-    "cautious": 24.491739475497972,
-    "social": 12.9752327030698,
-    "generous": 3.786802275882268,
-    "risky": 0.9975354407035169,
-    "carousing": 0.37177215158411153,
-    "patient": 2.2388480261072767,
-    "craft": 0.3714255165963274,
-    "devotion": 1.7923713789516602,
-    "deception": 0.70155967750146,
-    "leadership": 2.2154263952184063
+    "cerebral": 30.378685431312164,
+    "strategic": 20.670605274572768,
+    "cautious": 23.879445988610524,
+    "social": 12.650851885493054,
+    "generous": 3.6921322189852113,
+    "risky": 1.972597054685929,
+    "carousing": 0.36247784779450876,
+    "patient": 2.1828768254545947,
+    "craft": 0.36213987868141917,
+    "devotion": 1.7475620944778687,
+    "deception": 0.6840206855639235,
+    "leadership": 2.160040735337946
   },
   "aptitudes": [
     "strategist",
@@ -6628,9 +6637,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 248,
-  "updatedAt": 1786211451752,
-  "rev": 171,
+  "actionCount": 249,
+  "updatedAt": 1786211679711,
+  "rev": 175,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6904,7 +6913,7 @@
   "syncedAt": 1785586396787,
   "teachers": {},
   "regionsKnown": {
-    "valley": 71
+    "valley": 72
   },
   "company": [],
   "foreclosed": [],
@@ -6919,6 +6928,14 @@
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
   "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=15431&nologo=true",
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Inside a vast hemispherical chamber of dressed stone, every seam glowing faintly with a golden four-second resonance. The Waystaff planted deep in the floor, its lattice head bright with three full re",
+      "url": "https://image.pollinations.ai/prompt/Inside%20a%20vast%20hemispherical%20chamber%20of%20dressed%20stone%2C%20every%20seam%20glowing%20faintly%20with%20a%20golden%20four-second%20resonance.%20The%20Waystaff%20planted%20deep%20in%20the%20floor%2C%20its%20lattice%20head%20bright%20with%20three%20full%20resonance-crystals%20and%20a%20shallow%20fourth%2C%20motes%20of%20teal%20light%20dancing%20through%20the%20interlaced%20geometry.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=30116&nologo=true",
+      "caption": "Inside the upstream pre-Transition structure, Cellaceron reads the secondary purification ",
+      "worldDay": 39,
+      "at": "2026-08-08T17:54:39.711Z"
+    },
     {
       "kind": "moment",
       "prompt": "A woman stands in a hemispherical stone chamber glowing faintly with four-second resonance. In her hands, a staff of ash-wood transformed: the lattice head shimmers with integrated light and faint tea",
@@ -7169,10 +7186,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-08T17:44:14.261Z",
-      "lastAt": "2026-08-08T17:50:51.745Z",
+      "lastAt": "2026-08-08T17:54:39.700Z",
       "startDay": 39,
       "endDay": 39,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_pendingArrival": null,
@@ -7262,9 +7279,9 @@
     "factUpdates": 10,
     "stageOps": 7,
     "scene_ended": 1,
-    "imagePrompt": 15,
+    "imagePrompt": 16,
     "generateRequest": 3,
-    "deeds": 10,
+    "deeds": 9,
     "ledgerEvents": 4,
     "offer": 8,
     "gambitApt": 17,
@@ -7285,7 +7302,7 @@
     }
   ],
   "_stageOpRefusals": [
-    "what-the-water-remembers: not-current-stage (named \"understand-the-machinery\", current is \"null\")"
+    "what-the-water-remembers: not-current-stage (named \"decide-the-water\", current is \"null\")"
   ],
   "knownPlaces": [
     "gen-the-lower-chamber",
@@ -7429,9 +7446,22 @@
   "holdings": [],
   "portraitPinned": true,
   "skillUses": {
-    "study": 2,
+    "study": 3,
     "prepare": 1,
-    "careful": 1
+    "careful": 1,
+    "scout": 1,
+    "risky": 1
   },
-  "aptitudeEarnCount": {}
+  "aptitudeEarnCount": {},
+  "bondLogFrom": null,
+  "bondLog": [
+    {
+      "companionId": "aevi",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 9,
+      "worldDay": 39,
+      "actionCount": 248
+    }
+  ]
 }

@@ -357,6 +357,9 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .news-flash { border: 1px solid var(--accent); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; background: linear-gradient(to right, rgba(212,162,74,0.08), transparent); }
 .news-title { font-family: var(--font-ui); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 6px; }
 .news-item { font-size: 13px; color: var(--ink); margin-bottom: 3px; font-style: italic; }
+/* SNG-364: the three news sections. Subordinate to .news-title on purpose — they divide one digest, they do not compete with it. */
+.news-section + .news-section { margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--line, rgba(255,255,255,0.08)); }
+.news-section-title { font-family: var(--font-ui); font-size: 10px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--muted, var(--ink)); opacity: 0.75; margin-bottom: 3px; }
 .gm-aside { border-left: 3px solid var(--accent2); background: var(--panel2); border-radius: 0 8px 8px 0; padding: 10px 14px; margin: 10px 0; font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
 .gm-aside p { margin-bottom: 6px; } .gm-aside p:last-child { margin-bottom: 0; }
 .mode-toggle { background: var(--panel2); color: var(--ink-dim); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: 13px; font-weight: 600; white-space: nowrap; }

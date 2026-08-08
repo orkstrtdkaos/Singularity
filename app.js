@@ -61,7 +61,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster } from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -89,7 +89,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.78";
+const APP_VERSION = "1.9.79";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11156,7 +11156,23 @@ function renderPlay(turn, opts = {}) {
         <div class="dec-roads">${roads}</div>${more}</div>`;
     })()}<div class="transcript">`;
   if (opts.newsFlash?.length) {
-    main += `<div class="news-flash"><div class="news-title">While you were away…</div>${opts.newsFlash.map(n => `<div class="news-item">◈ ${esc(n.text)}</div>`).join("")}</div>`;
+    // ⛔ SNG-364 — THREE SECTIONS, THREE EXISTING SOURCES (Erik). The digest was one undifferentiated list,
+    // so "your steward finished the forge" sat between a distant arc and a stranger's deed reading exactly
+    // like both. The sections do not add information; they say WHOSE consequence each line is, which is the
+    // only thing a player needs to decide what to act on.
+    //
+    // ⚠️ AN EMPTY SECTION IS OMITTED, NEVER SHOWN EMPTY. Erik's own warning about sectioning too early was
+    // that it "shows an empty middle and a flooded third" — a heading over nothing is how a player learns
+    // the heading means nothing. And a digest with only one populated section renders as it always did, with
+    // no headings at all, because three labels over four lines is furniture.
+    const bySection = new Map(NEWS_SECTIONS.map(s => [s.id, []]));
+    for (const n of opts.newsFlash) (bySection.get(n.section) || bySection.get("world")).push(n);
+    const populated = NEWS_SECTIONS.filter(s => bySection.get(s.id).length);
+    const items = (list) => list.map(n => `<div class="news-item">◈ ${esc(n.text)}</div>`).join("");
+    const body = populated.length > 1
+      ? populated.map(s => `<div class="news-section"><div class="news-section-title">${esc(s.title)}</div>${items(bySection.get(s.id))}</div>`).join("")
+      : items(opts.newsFlash);
+    main += `<div class="news-flash"><div class="news-title">While you were away…</div>${body}</div>`;
   }
   if (opts.playerBeat) {
     // SNG-181: render what the player TYPED, in full — not the compact action label. `label` is a

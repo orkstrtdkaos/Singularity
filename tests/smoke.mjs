@@ -11049,10 +11049,10 @@ await (async () => {
     const many = mk(nc - 100, 4);
     const r2 = await runWorldTick({ character: many, content: C366, currentDay: 14, advanceAssignments: adv });
     check("366: a catch-up of several charges reports as ONE digest, not a wall of notices",
-      r2.news.length === 1 && /charges moved/.test(r2.news[0]));
+      r2.news.length === 1 && /charges moved/.test(r2.news[0].text) && r2.news[0].section === "yours");
     const one = mk(nc - 100, 1);
     const r3 = await runWorldTick({ character: one, content: C366, currentDay: 14, advanceAssignments: adv });
-    check("366: …while a single charge still gets its own full line", r3.news.length === 1 && /has finished/.test(r3.news[0]));
+    check("366: …while a single charge still gets its own full line", r3.news.length === 1 && /has finished/.test(r3.news[0].text) && r3.news[0].section === "yours");
 
     // ⚠️ ONLY THIS BLOCK WAS LIFTED. Repointing the whole tick at world time would change events, drift and
     // deed-spread all at once, on no evidence — the opposite of sim-before-tweak.
@@ -11061,14 +11061,58 @@ await (async () => {
     // legitimately changed it when holdings joined the world-time passes. What must stay true is the
     // SHAPE: world-gated work runs ABOVE the character-day gate, and the gate still exists so events,
     // drift and deed-spread keep their own cadence.
+    // ⚠️ …AND NOT THE DISTANCE EITHER. The `{0,300}` window above was a pinned measurement wearing an
+    // invariant's clothes: four lines of SNG-368 commentary between the call and the gate pushed them apart
+    // and turned it red without anything moving. ORDER is the invariant — the call comes BEFORE the gate.
     check("366: only the world-time passes were lifted above the early return — the rest keeps character cadence",
-      /advanceDelegatedWork\([\s\S]{0,300}if \(elapsed <= 0\) return/.test(tickSrc)
-      && /if \(elapsed <= 0\) return \{ ticked:/.test(tickSrc)
-      && /for \(const \{ eventId, stage \}/.test(tickSrc));
+      (() => { const body = tickSrc.slice(tickSrc.indexOf("export async function runWorldTick"));
+        const call = body.indexOf("await advanceDelegatedWork("), gate = body.indexOf("if (elapsed <= 0) return { ticked:");
+        return call > -1 && gate > call && /for \(const \{ eventId, stage \}/.test(body.slice(gate)); })());
     // ⚠️ And it reports what MOVED, not what was worth SAYING — a quiet `progress` prints no line by design,
     // and inferring "nothing happened" from "no news" is the same error as reading absence as evidence.
+    // ⚠️ MATCHED ON `moved: moved.length` ALONE, not the whole return literal. Pinning the exact line went
+    // red the moment SNG-364 mapped the news array to add a section — a gate describing the shape of a
+    // count should not care what its sibling field looks like.
     check("366: the tick reports what MOVED, never inferring it from whether there was news",
-      /return \{ news, moved: moved\.length \}/.test(tickSrc));
+      /moved: moved\.length/.test(tickSrc) && !/moved: news\.length/.test(tickSrc));
+  }
+
+  // ══ SNG-368 — THE THREE NEWS SECTIONS (Erik). Three sections, three EXISTING sources; nothing new is
+  // generated. ⛔ It was blocked on SNG-366 and SNG-363 and Erik named the failure in advance: "sectioning
+  // first shows an empty middle and a flooded third" — `yours` came from delegated work that had never
+  // advanced for anyone in play, and `elsewhere` from cross-character events with no distance gate.
+  {
+    const wt364 = await import("../engine/worldtick.js");
+    check("368: there are exactly three sections, and they are named in content order, not invented per call",
+      Array.isArray(wt364.NEWS_SECTIONS) && wt364.NEWS_SECTIONS.length === 3
+      && wt364.NEWS_SECTIONS.map(s => s.id).join(",") === "world,yours,elsewhere"
+      && wt364.NEWS_SECTIONS.every(s => typeof s.title === "string" && s.title.length > 4));
+    // ⛔ THE SECTION IS ASSIGNED AT THE SOURCE. A classifier reading prose would file "Cassiel has finished
+    // the rebuild" under whichever heading its keywords matched today and drift the first time anyone
+    // rewrote the line. The pass that produced the news already knows which of the three it is.
+    check("368: a source-tagged entry keeps its section",
+      wt364.stampNews({ text: "word from far off", section: "elsewhere" }, { day: 1 }).section === "elsewhere");
+    check("368: an UNTAGGED entry falls to `world` — the section that is never empty, not a new orphan heading",
+      wt364.stampNews("something stirs", { day: 1 }).section === "world");
+    check("368: an entry claiming a section that does not exist is corrected, not trusted",
+      wt364.stampNews({ text: "x", section: "sidebar" }, { day: 1 }).section === "world");
+    check("368: stamping preserves what the digest already carried — text, day, worldDay, tier, impactsLocal",
+      (() => { const r = wt364.stampNews({ text: "near thing", worldDay: 41, tier: "ambient", impactsLocal: true }, { day: 7, worldDay: 9 });
+        return r.text === "near thing" && r.day === 7 && r.worldDay === 41 && r.tier === "ambient" && r.impactsLocal === true; })());
+    // ⚠️ THE THREE PASSES EACH TAG THEIR OWN, and this is the check that the wiring exists rather than the
+    // vocabulary alone — a section vocabulary nothing routes into is the writer-with-no-reader shape.
+    const tick364 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+    check("368: delegated work and holdings are tagged `yours` at the source",
+      (tick364.match(/section: "yours"/g) || []).length >= 3);
+    check("368: the deed spread and cross-character events are tagged `elsewhere`",
+      (tick364.match(/section: "elsewhere"/g) || []).length >= 2);
+    // ⚠️ AN EMPTY SECTION IS OMITTED AND A LONE SECTION SHOWS NO HEADINGS AT ALL — Erik's exact warning,
+    // gated so it cannot regress into three labels over four lines.
+    const app364 = readFileSync(join(root, "app.js"), "utf8");
+    check("368: the renderer drops empty sections rather than printing a heading over nothing",
+      /populated\s*=\s*NEWS_SECTIONS\.filter\(s => bySection\.get\(s\.id\)\.length\)/.test(app364));
+    check("368: …and a digest with only ONE populated section renders exactly as it did before, unheaded",
+      /populated\.length > 1/.test(app364));
   }
 
   // SNG-365 — Erik: "did you put in the 'Attainable' filter for what you can buy with how many skill points

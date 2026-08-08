@@ -296,9 +296,9 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
     if (statusUpdates.length) applyNpcUpdates(character, statusUpdates, { day: currentDay });
     // ⚠️ RETURN WHAT MOVED, NOT WHAT WAS WORTH SAYING. Inferring "did anything happen" from "was there
     // news" reads a QUIET SUCCESS as nothing happening — a plain `progress` prints no line by design.
-    return { news, moved: moved.length };
+    return { news: news.map(t => ({ text: t, section: "yours" })), moved: moved.length };
   } catch (err) { console.warn("[worldtick] assignment advancement skipped:", err.message); }
-  return { news, moved: 0 };
+  return { news: news.map(t => ({ text: t, section: "yours" })), moved: 0 };
 }
 
 
@@ -315,6 +315,38 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
  *  delegated work — a player-advanced clock is gameable — and the same four outcomes, so the narrator
  *  answers one question rather than two.
  */
+/** SNG-364 — THE THREE SECTIONS. Erik: three sections, three existing sources. Nothing new is
+ *  generated here; the digest simply stops being an undifferentiated list of everything that happened.
+ *
+ *  ⛔ SECTIONING WAS BLOCKED ON SNG-366 AND SNG-363, AND ERIK SAID WHY IN ADVANCE: "sectioning first
+ *  shows an empty middle and a flooded third." He was exactly right about the mechanism — `yours` came
+ *  from delegated work, which had never advanced for any character in play, and `elsewhere` came from
+ *  cross-character events with no distance gate. A heading over nothing teaches a player the section is
+ *  decoration; a heading over forty lines teaches them to skip it. Both land now, so it can be built.
+ *
+ *  ⚠️ THE SECTION IS ASSIGNED AT THE SOURCE, never inferred from the text. A classifier reading
+ *  prose would put "Cassiel has finished the rebuild" under whichever heading its keywords matched today,
+ *  and would drift silently the first time anyone rewrote a line. The pass that produced the news knows
+ *  which of the three it is; nothing downstream has to guess. */
+export const NEWS_SECTIONS = [
+  { id: "world",     title: "The world turning" },
+  { id: "yours",     title: "Your work while you were elsewhere" },
+  { id: "elsewhere", title: "Word from elsewhere" },
+];
+const SECTION_IDS = new Set(NEWS_SECTIONS.map(s => s.id));
+
+/** Normalise one raw news entry — string or object — into a stamped record. ⚠️ `world` is the
+ *  fallback because it is the section that is never empty: an unrouted line lands where the player is
+ *  already reading rather than under a heading that exists for one orphan. */
+export function stampNews(n, { day = null, worldDay = null, section = "world", clamp = 600 } = {}) {
+  const text = typeof n === "string" ? n : String(n?.text ?? "");
+  const sec = typeof n === "object" && n && SECTION_IDS.has(n.section) ? n.section : section;
+  const rec = { day, worldDay: (typeof n === "object" && n && n.worldDay != null) ? n.worldDay : worldDay,
+    text: smartClamp(text, clamp), tier: (typeof n === "object" && n && n.tier) || "event", section: sec };
+  if (typeof n === "object" && n && n.impactsLocal) rec.impactsLocal = true;
+  return rec;
+}
+
 export function advanceHoldings({ character, now = Date.now() }) {
   const news = [];
   // ⛔ A DEPARTED STEWARD LEAVES THE POST UNKEPT, and this is the line that makes SNG-355 cost something.
@@ -336,7 +368,7 @@ export function advanceHoldings({ character, now = Date.now() }) {
     if (line) news.push(line);
     moved++;
   }
-  return { news, moved };
+  return { news: news.map(t => ({ text: t, section: "yours" })), moved };
 }
 
 export async function runWorldTick({ character, content, currentDay, advanceAssignments = aiAssignmentAdvancement, rng = Math.random }) {
@@ -348,7 +380,12 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   const delegated = await advanceDelegatedWork({ character, content, advanceAssignments, currentDay });
   const holdings358 = advanceHoldings({ character });
 
-  if (elapsed <= 0) return { ticked: delegated.moved + holdings358.moved > 0, news: [...delegated.news, ...holdings358.news] };
+  // ⚠️ SNG-368: the RETURN is stamped too, on BOTH paths. The early return handed back raw entries
+  // while the normal path handed back stamped ones, so a caller reading `.news[0].section` got a section on
+  // one path and `undefined` on the other — a difference that only shows up for a player whose character
+  // clock has not moved, which is precisely the state SNG-366 found every live save parked in.
+  if (elapsed <= 0) return { ticked: delegated.moved + holdings358.moved > 0,
+    news: [...delegated.news, ...holdings358.news].map(n => stampNews(n, { day: currentDay, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() })) };
   const news = [...delegated.news, ...holdings358.news];
   const clampDrift = v => Math.max(-0.5, Math.min(0.5, v));
 
@@ -415,7 +452,7 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
       communitiesByRegion: commsByRegion, regionOfCommunity: regionOfComm, rng, rate: 1,
     });
     for (const h of hops) {
-      news.push(`Word has spread beyond its own valley, as far as ${String(h.to).split(".").pop()}: ${h.description}`);
+      news.push({ text: `Word has spread beyond its own valley, as far as ${String(h.to).split(".").pop()}: ${h.description}`, section: "elsewhere" });
     }
   }
   // 3. → the delegated-work pass now runs on WORLD time, ABOVE this early-return (see advanceDelegatedWork).
@@ -424,11 +461,12 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   if (news.length) {
     // SNG-041: stamp the absolute world-day (shared calendar) alongside the local journey-day.
     const wd = absoluteWorldDay();
-    const stamped = news.map(n => ({ day: currentDay, worldDay: wd, text: n, tier: "event" })); // SNG-211: delegated-work outcomes are real, not ambient
+    const stamped = news.map(n => stampNews(n, { day: currentDay, worldDay: wd })); // SNG-211: delegated-work outcomes are real, not ambient · SNG-364: the source assigns the section
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+    return { ticked: true, news: stamped };
   }
-  return { ticked: true, news };
+  return { ticked: true, news: [] };
 }
 
 /** SNG-191 §7 — THE GENERATION TURN. The world has its own agenda, and it runs on the world COUNT, not
@@ -473,7 +511,7 @@ export async function runGenerationTurn({ character, content, now = Date.now(), 
   }
 
   if (news.length) {
-    const stamped = news.map(t => ({ day: ws.lastTickDay ?? null, worldDay: absoluteWorldDay(now), text: smartClamp(t, 400), tier: "event" })); // SNG-211: an arc surfacing/resolving is a real event
+    const stamped = news.map(t => stampNews(t, { day: ws.lastTickDay ?? null, worldDay: absoluteWorldDay(now), section: "world", clamp: 400 })); // SNG-211: an arc surfacing/resolving is a real event
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
@@ -653,6 +691,7 @@ export async function syncSharedWorld({ character, content }) {
     // share ONE calendar. This is the fix for the Day-8-vs-Day-11 drift.
     for (const e of fromOthers) news.push({
       text: `${e.impactsLocal ? "This reaches your area — " : "Word reaches you: "}${e.what}${e.where ? ` (near ${e.where.replace(/_/g, " ")})` : ""}`,
+      section: "elsewhere",   // ⚠️ another character's deed, arriving by the SNG-363 distance gate — not your valley turning
       worldDay: e.worldDay ?? worldDayAt(e.at),
       impactsLocal: !!e.impactsLocal // SNG-041: a boundary-crossing distant event (far-world → local frame)
     });
@@ -706,7 +745,7 @@ export async function syncSharedWorld({ character, content }) {
   if (news.length) {
     // each item carries its OWN absolute world-day (a cross-character event keeps the date it
     // actually happened; a local merge stamps now) — so the shared calendar stays coherent.
-    const stamped = news.map(n => ({ day: ws.lastTickDay, worldDay: n.worldDay ?? absoluteWorldDay(), text: smartClamp(n.text, 600), tier: n.tier || "event", ...(n.impactsLocal ? { impactsLocal: true } : {}) })); // SNG-211: a cross-character arc move is a real event
+    const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay: absoluteWorldDay(), section: "world" })); // SNG-211: a cross-character arc move is a real event · SNG-364: sectioned at the source
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }

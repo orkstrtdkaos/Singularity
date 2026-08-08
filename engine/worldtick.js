@@ -229,12 +229,85 @@ export function effectiveLocation(location, worldState) {
 
 /** Run the tick if days have passed. Mutates character.worldState (and deeds/npcs).
  *  evolveNpcs is injectable for tests; defaults to the AI pass. Never throws. */
+
+/** SNG-366 — DELEGATED WORK MOVES ON WORLD DAYS. Erik ratified: character days are PLAYER-ADVANCED and
+ *  therefore gameable — spam rest to fast-forward your steward, or refuse to rest to freeze the world.
+ *
+ *  ⛔ THE FIX IS SMALLER THAN ANYONE THOUGHT, AND AEVI FOUND WHY: `advanceAssignment()` has ALWAYS written
+ *  `lastMovedWorldCount = worldCount()`. The stamp was there from the start; THE GATE NEVER READ IT. It
+ *  gated on `elapsed >= 3` in character days, sitting under an `elapsed <= 0` early return that Silas has
+ *  been parked on for 915 actions (clock day 14, lastTickDay 14). Three charges, zero advances, ever.
+ *
+ *  ⚠️ GATED PER-ASSIGNMENT, NOT PER-TICK. Each charge carries its own last-moved stamp, so one delegated
+ *  last week and one delegated an hour ago do not advance together just because the tick happened to run.
+ *
+ *  ⚠️ SNG-191 §4 THE INVERSION still governs what this pass DOES: the world TURNS, it does not narrate.
+ *  An outcome lands on STATE (progress/stall/problem/done); news is DERIVED from what moved and only when
+ *  it bears on the work; personal colour rides on the person's statusNote, never a news slot.
+ *
+ *  ⚠️ AND ONLY THIS BLOCK IS LIFTED. The rest of the tick — events, drift, deed-spread — keeps its
+ *  character-day cadence deliberately: repointing the whole tick at world time would change every one of
+ *  those at once, on no evidence, which is the opposite of sim-before-tweak.
+ */
+const ASSIGN_INTERVAL_HOURS = 72;   // ~3 world days — the old semantic, on the clock that cannot be gamed
+
+export async function advanceDelegatedWork({ character, content, advanceAssignments, currentDay, now = Date.now() }) {
+  const ws = character?.worldState;
+  if (!ws || !advanceAssignments) return { news: [], moved: 0 };
+  const count = worldCount(now);
+  const due = Object.values(ws.assignments || {})
+    .filter(a => a.status !== "done")
+    // ⛔ A MISSING STAMP MEANS "WE DO NOT KNOW", NOT "NEVER MOVE AGAIN". Defaulting to `count` made an
+    // unstamped charge permanently un-due — a silent freeze, and precisely the shape this ticket exists
+    // to remove. Falls back to the creation stamp, then to 0, which makes an unknown charge due NOW.
+    .filter(a => count - (a.lastMovedWorldCount ?? a.stampedAtWorldCount ?? 0) >= ASSIGN_INTERVAL_HOURS);
+  if (!due.length) return { news: [], moved: 0 };
+
+  const news = [];
+  try {
+    const elapsedWorldDays = Math.floor((count - Math.min(...due.map(a => a.lastMovedWorldCount ?? a.stampedAtWorldCount ?? 0))) / 24);
+    const result = await advanceAssignments({ character, content, assignments: due.slice(0, 6), elapsed: elapsedWorldDays, currentDay });
+    const statusUpdates = [];
+    const moved = [];
+    for (const adv of (result?.advancements || []).slice(0, 6)) {
+      const a = ws.assignments[adv?.assignmentId];
+      if (!a) continue;
+      advanceAssignment(a, adv.outcome, count);
+      moved.push({ a, outcome: adv.outcome, note: adv.note });
+      if (adv.note && a.npcId) statusUpdates.push({ op: "update", npcId: a.npcId, statusNote: smartClamp(adv.note, 200) });
+    }
+    // ⛔ CATCH-UP NEEDS A DIGEST, AND AEVI IS RIGHT THAT IT MATTERS: a month away is ~10 intervals, and ten
+    // separate progress notices would feel WORSE than the silence they replace — a wall of small news is
+    // how a player learns to skip the news. One line when several moved; the full line when one did.
+    const notable = moved.filter(m => m.outcome === "problem" || m.outcome === "done");
+    if (moved.length > 2) {
+      const parts = [];
+      if (notable.some(m => m.outcome === "done")) parts.push(`${notable.filter(m => m.outcome === "done").map(m => m.a.npcName).join(", ")} finished`);
+      if (notable.some(m => m.outcome === "problem")) parts.push(`${notable.filter(m => m.outcome === "problem").map(m => m.a.npcName).join(", ")} ran into trouble`);
+      news.push(`Word catches up on the work you set in motion: ${moved.length} charges moved${parts.length ? ` — ${parts.join("; ")}` : ""}.`);
+    } else {
+      for (const m of moved) {
+        if (m.outcome === "problem") news.push(`${m.a.npcName} has hit trouble with ${m.a.charge}${m.note ? ` — ${smartClamp(m.note, 200)}` : ""}.`);
+        else if (m.outcome === "done") news.push(`${m.a.npcName} has finished ${m.a.charge}.`);
+      }
+    }
+    if (statusUpdates.length) applyNpcUpdates(character, statusUpdates, { day: currentDay });
+    // ⚠️ RETURN WHAT MOVED, NOT WHAT WAS WORTH SAYING. Inferring "did anything happen" from "was there
+    // news" reads a QUIET SUCCESS as nothing happening — a plain `progress` prints no line by design.
+    return { news, moved: moved.length };
+  } catch (err) { console.warn("[worldtick] assignment advancement skipped:", err.message); }
+  return { news, moved: 0 };
+}
+
 export async function runWorldTick({ character, content, currentDay, advanceAssignments = aiAssignmentAdvancement, rng = Math.random }) {
   if (!character.worldState) character.worldState = initWorldState(currentDay);
   const ws = character.worldState;
   const elapsed = currentDay - (ws.lastTickDay ?? currentDay);
-  if (elapsed <= 0) return { ticked: false, news: [] };
-  const news = [];
+  // SNG-366: the delegated-work pass runs on WORLD time and must not sit behind the character-day gate —
+  // that early return is what Silas has been parked on for 915 actions. Only THIS block is lifted.
+  const delegated = await advanceDelegatedWork({ character, content, advanceAssignments, currentDay });
+  if (elapsed <= 0) return { ticked: delegated.moved > 0, news: delegated.news };
+  const news = [...delegated.news];
   const clampDrift = v => Math.max(-0.5, Math.min(0.5, v));
 
   // 1. event advancement — and SNG-191 §4.2: a crisis RESPONDS to the delegated work. Ignoring a
@@ -303,27 +376,7 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
       news.push(`Word has spread beyond its own valley, as far as ${String(h.to).split(".").pop()}: ${h.description}`);
     }
   }
-  // 3. SNG-191 §4 THE INVERSION — the world TURNS, it does not narrate. Advance the DELEGATED work
-  //    (progress / stall / problem / done); never imagine what a worker was FEELING. News is DERIVED
-  //    from what MOVED and only when it bears on the work (§4.3/§4.4); personal colour rides on the
-  //    person's statusNote, not the news (§4.5). No assignments → no pass, and an empty news block is a
-  //    legitimate result. UNGUARDRAILED (§4b): a problem may be real, a success real — not softened.
-  const active = Object.values(ws.assignments || {}).filter(a => a.status !== "done");
-  if (elapsed >= 3 && active.length && advanceAssignments) {
-    try {
-      const result = await advanceAssignments({ character, content, assignments: active.slice(0, 6), elapsed, currentDay });
-      const statusUpdates = [];
-      for (const adv of (result?.advancements || []).slice(0, 6)) {
-        const a = ws.assignments[adv?.assignmentId];
-        if (!a) continue;
-        advanceAssignment(a, adv.outcome, worldCount());
-        if (adv.outcome === "problem") news.push(`${a.npcName} has hit trouble with ${a.charge}${adv.note ? ` — ${smartClamp(adv.note, 200)}` : ""}.`);
-        else if (adv.outcome === "done") news.push(`${a.npcName} has finished ${a.charge}.`);
-        if (adv.note && a.npcId) statusUpdates.push({ op: "update", npcId: a.npcId, statusNote: smartClamp(adv.note, 200) });
-      }
-      if (statusUpdates.length) applyNpcUpdates(character, statusUpdates, { day: currentDay });
-    } catch (err) { console.warn("[worldtick] assignment advancement skipped:", err.message); }
-  }
+  // 3. → the delegated-work pass now runs on WORLD time, ABOVE this early-return (see advanceDelegatedWork).
 
   ws.lastTickDay = currentDay;
   if (news.length) {

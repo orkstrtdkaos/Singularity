@@ -8011,7 +8011,13 @@ await (async () => {
   // SNG-223 Q4: the per-tradition VISUAL block (palette/materials/light/mood) rides the prompt when loaded,
   // so a people's crafts share a concrete look — and falls back to the bare tradition name when absent.
   const aesDoc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/tradition_visual_aesthetics.json"), "utf8"));
-  check("223 Q4: the aesthetics doc is loaded content (core/rules) with all 24 traditions", Object.keys(aesDoc.traditions).length === 24 && !!aesDoc.traditions.ashwarden?.palette);
+  // ⛔ THIS GATE PINNED A CONTENT COUNT AND AEVI GREW THE CONTENT. It asserted `=== 24`; SNG-367 authored
+  // the people layer for 26. Fourth time this session a gate has gone red on correct authoring — tuning
+  // and content volume are hers, so a gate may assert the SHAPE and never the size. Now: it must not
+  // SHRINK, and every entry must carry the fields the renderer reads.
+  check("223 Q4: the aesthetics doc is loaded content (core/rules), covering the traditions it names",
+    Object.keys(aesDoc.traditions).length >= 24 && !!aesDoc.traditions.ashwarden?.palette
+    && Object.values(aesDoc.traditions).every(t => t && t.palette));
   const manC = JSON.parse(readFileSync(join(root, "content/packs/core/manifest.json"), "utf8"));
   check("223 Q4: the manifest WHITELISTS it (STRICT core/rules dir)", (manC.provides.rules || []).includes("rules/tradition_visual_aesthetics.json"));
   const aes = aesDoc.traditions.ashwarden;
@@ -10741,6 +10747,59 @@ await (async () => {
     check("343: the GM is told the text was cut and to restate it whole, rather than quote the fragment",
       /CUT SHORT BY A STORAGE FAULT/.test(block || "") && /restate the objective whole/.test(block || "")
       && /routes were also cut short/.test(block || ""));
+  }
+
+  // SNG-366 — DELEGATED WORK MOVES ON WORLD DAYS. Erik ratified: character days are PLAYER-ADVANCED and
+  // therefore gameable — spam rest to fast-forward your steward, or refuse to rest to freeze the world.
+  //
+  // ⛔ AEVI FOUND WHY THE FIX IS TINY: `advanceAssignment()` has ALWAYS written `lastMovedWorldCount =
+  // worldCount()`. The stamp was there from the start; THE GATE NEVER READ IT. It gated on `elapsed >= 3`
+  // character days, under an `elapsed <= 0` early return Silas has been parked on for 915 actions.
+  {
+    const { loadContentHeadless: lch366 } = await import("./headless_content.mjs");
+    const C366 = await lch366();
+    const { runWorldTick, advanceDelegatedWork } = await import("../engine/worldtick.js");
+    const { worldCount } = await import("../engine/worldtime.js");
+    const nc = worldCount();
+    const mk = (lastMoved, n = 1) => {
+      const a = {};
+      for (let i = 0; i < n; i++) a["x" + i] = { id: "x" + i, npcId: "n" + i, npcName: "Steward " + i, charge: "charge " + i, status: "working", progress: 0, stampedAtWorldCount: lastMoved, lastMovedWorldCount: lastMoved };
+      return { worldState: { lastTickDay: 14, eventStages: {}, spectrumDrift: {}, assignments: a }, clock: { day: 14 }, npcRegistry: {} };
+    };
+    const adv = async ({ assignments }) => ({ advancements: assignments.map((a, i) => ({ assignmentId: a.id, outcome: i === 0 ? "done" : i === 1 ? "problem" : "progress", note: "moved" })) });
+
+    // ⛔ SILAS'S EXACT LIVE STATE: clock day 14, lastTickDay 14 → elapsed 0 → the early return. Work must
+    // advance anyway, because the world does not wait for the player to sleep.
+    const stale = mk(nc - 100);
+    const r = await runWorldTick({ character: stale, content: C366, currentDay: 14, advanceAssignments: adv });
+    check("366: delegated work advances even when the CHARACTER clock has not moved",
+      stale.worldState.assignments.x0.progress > 0 && r.ticked === true);
+
+    // ⚠️ GATED PER-ASSIGNMENT, so one delegated an hour ago does not ride along with one delegated last week.
+    const fresh = mk(nc);
+    await runWorldTick({ character: fresh, content: C366, currentDay: 14, advanceAssignments: adv });
+    check("366: …and a charge delegated moments ago does NOT advance — the gate is per-assignment",
+      fresh.worldState.assignments.x0.progress === 0);
+
+    // ⛔ CATCH-UP GETS A DIGEST. Aevi: a month away is ~10 intervals, and ten separate progress notices
+    // would feel WORSE than the silence they replace — a wall of small news is how a player learns to skip it.
+    const many = mk(nc - 100, 4);
+    const r2 = await runWorldTick({ character: many, content: C366, currentDay: 14, advanceAssignments: adv });
+    check("366: a catch-up of several charges reports as ONE digest, not a wall of notices",
+      r2.news.length === 1 && /charges moved/.test(r2.news[0]));
+    const one = mk(nc - 100, 1);
+    const r3 = await runWorldTick({ character: one, content: C366, currentDay: 14, advanceAssignments: adv });
+    check("366: …while a single charge still gets its own full line", r3.news.length === 1 && /has finished/.test(r3.news[0]));
+
+    // ⚠️ ONLY THIS BLOCK WAS LIFTED. Repointing the whole tick at world time would change events, drift and
+    // deed-spread all at once, on no evidence — the opposite of sim-before-tweak.
+    const tickSrc = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+    check("366: only the assignment pass was lifted above the early return — the rest keeps character cadence",
+      /const elapsed = currentDay[\s\S]{0,400}advanceDelegatedWork\(/.test(tickSrc) && /if \(elapsed <= 0\) return \{ ticked: delegated\.moved > 0/.test(tickSrc));
+    // ⚠️ And it reports what MOVED, not what was worth SAYING — a quiet `progress` prints no line by design,
+    // and inferring "nothing happened" from "no news" is the same error as reading absence as evidence.
+    check("366: the tick reports what MOVED, never inferring it from whether there was news",
+      /return \{ news, moved: moved\.length \}/.test(tickSrc));
   }
 
   // SNG-365 — Erik: "did you put in the 'Attainable' filter for what you can buy with how many skill points

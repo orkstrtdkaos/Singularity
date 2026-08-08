@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 12,
-  "xp": 1106,
+  "xp": 1111,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -105,7 +105,7 @@
   "maxHealth": 80,
   "health": 80,
   "maxEnergy": 171,
-  "energy": 171,
+  "energy": 165,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1260,39 +1260,27 @@
         "player": "Move back toward the ramp and signal Sorel and Teva that you've found something critical—bring them down to see the secondary system and the ledger before you make any choice about authentication.",
         "summary": "Cellaceron brings Sorel and Teva down to witness the secondary purification system's true architecture and Verath-Sem's carved name—the collaborative bottleneck that shapes every choice ahead.",
         "narration": "You turn from the binding chamber's stone ledger and retrace your steps up the spiral ramp, the Waystaff's light steadying as you move. The motes at its heart pulse in a slower rhythm—Aevi is still processing the name carved into the stone below, the implications settling like weight. You surface into the hemispherical chamber where Sorel and Teva wait near the authentication gate, both of them tense, both of them watching the machinery's four-second cycle like it might suddenly accelerate.\n\n\"There's more,\" you say simply, and they straighten. \"The secondary system is complete in structure—just waiting for power. And there's a name carved at its heart. Verath-Sem.\" You see Sorel's face shift; she knows that name from the Council's deep stacks, though she wouldn't say why. \"We need to see it before we decide anything about that gate. Come down.\"\n\nTeva doesn't hesitate—she's already moving toward the ramp, her hand steadying on the stone wall. Sorel follows, her satchel of ledgers held close, her eyes sharp and calculating. The descent is quiet except for the constant four-second pulse humming through the walls, and when you reach the binding chamber two levels down, the stone ledger waits in the Waystaff's light, patient and unambiguous."
+      },
+      {
+        "player": "Read Sorel's reaction to the ledger and the name—what does she recognize, and what is she afraid to say?",
+        "summary": "Two levels beneath the upstream structure, Sorel recognizes Verath-Sem's name as proof that the Council's silence was deliberate—not a response to crisis, but a choice made generations ago to control the watershed's fate.",
+        "narration": "Sorel's breath catches. For a moment—just one—her careful professional composure cracks like ice under pressure, and you see the weight of something she's been carrying alone. Her eyes fix on Verath-Sem's name carved into the stone, and her hand reaches toward the ledger before she stops herself, fingers trembling slightly.\n\n\"They knew,\" she says quietly. Not a question. A recognition. \"The Council knew. Not guessed—*knew*. Verath-Sem was an Archive engineer, pre-Transition. Deep stacks. I've seen the name in the record-fragments, but only the fragments the Council allows archivist access to. Never this deep.\" She turns to you, and there's something like grief in her face, carefully managed but unmistakable. \"If Verath-Sem designed this, if the secondary system was part of their plan, then the Council didn't stumble into hiding it. They chose to build in secret because they *understood what this was from the start*.\"\n\nTeva watches Sorel, reading the shift in her with the same careful attention she brought to the chamber's walls. Aevi's motes dim slightly—not withdrawal, but the stillness of something that recognizes a truth it already suspected.\n\nSorel straightens, gathering herself back into the composed archivist, but the crack is still visible. \"The question isn't whether they could stop the preparation order. It's whether they ever intended to.\""
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the binding chamber's stone ledger and retrace your steps up the spiral ramp, the Waystaff's light steadying as you move. The motes at its heart pulse in a slower rhythm—Aevi is still processing the name carved into the stone below, the implications settling like weight. You surface into the hemispherical chamber where Sorel and Teva wait near the authentication gate, both of them tense, both of them watching the machinery's four-second cycle like it might suddenly accelerate.\n\n\"There's more,\" you say simply, and they straighten. \"The secondary system is complete in structure—just waiting for power. And there's a name carved at its heart. Verath-Sem.\" You see Sorel's face shift; she knows that name from the Council's deep stacks, though she wouldn't say why. \"We need to see it before we decide anything about that gate. Come down.\"\n\nTeva doesn't hesitate—she's already moving toward the ramp, her hand steadying on the stone wall. Sorel follows, her satchel of ledgers held close, her eyes sharp and calculating. The descent is quiet except for the constant four-second pulse humming through the walls, and when you reach the binding chamber two levels down, the stone ledger waits in the Waystaff's light, patient and unambiguous.",
-      "sceneSummary": "Cellaceron brings Sorel and Teva down to witness the secondary purification system's true architecture and Verath-Sem's carved name—the collaborative bottleneck that shapes every choice ahead.",
+      "narration": "Sorel's breath catches. For a moment—just one—her careful professional composure cracks like ice under pressure, and you see the weight of something she's been carrying alone. Her eyes fix on Verath-Sem's name carved into the stone, and her hand reaches toward the ledger before she stops herself, fingers trembling slightly.\n\n\"They knew,\" she says quietly. Not a question. A recognition. \"The Council knew. Not guessed—*knew*. Verath-Sem was an Archive engineer, pre-Transition. Deep stacks. I've seen the name in the record-fragments, but only the fragments the Council allows archivist access to. Never this deep.\" She turns to you, and there's something like grief in her face, carefully managed but unmistakable. \"If Verath-Sem designed this, if the secondary system was part of their plan, then the Council didn't stumble into hiding it. They chose to build in secret because they *understood what this was from the start*.\"\n\nTeva watches Sorel, reading the shift in her with the same careful attention she brought to the chamber's walls. Aevi's motes dim slightly—not withdrawal, but the stillness of something that recognizes a truth it already suspected.\n\nSorel straightens, gathering herself back into the composed archivist, but the crack is still visible. \"The question isn't whether they could stop the preparation order. It's whether they ever intended to.\"",
+      "sceneSummary": "Two levels beneath the upstream structure, Sorel recognizes Verath-Sem's name as proof that the Council's silence was deliberate—not a response to crisis, but a choice made generations ago to control the watershed's fate.",
       "choices": [
         {
-          "label": "Read Sorel's reaction to the ledger and the name—what does she recognize, and what is she afraid to say?",
+          "label": "Press Sorel on what she knows about Verath-Sem—get the full depth of the Council's archives, and what it means that her own institution kept this buried.",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Aevi plainly: was this the destination you were meant to reach, or was the lower chamber the true target all along?",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate",
-            "careful"
+            "demand",
+            "confront"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1301,32 +1289,49 @@
           "emergenceId": null
         },
         {
-          "label": "Use Sonic Resonance to read the ledger itself—what does the stone remember about when that name was carved, and by whose hand?",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask Aevi plainly: were you sent to the wrong threshold by accident, or did someone ensure you arrived at the secondary system instead of here?",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
-          "difficulty": "hard",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "careful"
+            "press",
+            "clarify"
           ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 5,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Lay out the choice plainly for all three: deliver the key now and activate both systems together, or refuse and let the preparation order complete uncontrolled.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Use Keen Appraisal on the ledger itself—read its history. When was Verath-Sem's name carved? How long ago? Is it pre-Transition or later work?",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "lead",
-            "negotiate"
+            "study",
+            "read"
+          ],
+          "abilityId": "keen_appraisal",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step back from the ledger and focus on the chamber's geometry itself—does the secondary system's design reveal who it was *meant* to serve, or what civilizations it was meant to preserve?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "read",
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1338,80 +1343,53 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -2,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "what-the-water-remembers",
-          "title": "What the Water Remembers",
-          "summary": "The valley's water will be transformed. The choice is not whether, but how—and at what cost.",
-          "giver": "water_keeper",
-          "note": "The secondary system's collaborative design and Verath-Sem's involvement are now visible. The decision point is at hand.",
-          "xpReward": null
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "The binding chamber's stone ledger—carved names of pre-Transition engineers, and a newer carving of Verath-Sem's name—evidence of direct involvement with the secondary system's design and the Council's hidden plan.",
-        "from": "The secondary system's own structure, revealed by Cellaceron's Sonic Resonance read. The chamber itself preserves the record of who shaped it."
+        "thing": "Sorel's crack in composure—the moment when institutional loyalty met personal honesty, and honesty won, at least for a breath",
+        "from": "Sorel's own standing and what she knows. She has carried the Council's silence alone for long enough that witnessing the proof has broken something that was already straining."
       },
       "stageOps": [],
       "scene": {
-        "setting": "Two levels beneath the hemispherical chamber, inside the pre-Transition secondary purification system—a vast honeycomb of resonance chambers carved from living stone. The binding chamber sits at the system's heart, empty of components but fully designed. The stone ledger waits in the Waystaff's steady light, its carved names catching shadow and illumination in turn. The air hums at a lower frequency than the upper chamber—older, patient, aware.",
+        "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. The Waystaff's light falls steady across the honeycomb filtration matrices and the stone ledger at the chamber's heart, where Verath-Sem's carved name catches shadow and illumination in turn. The air hums at a lower frequency than the chamber above—older, patient, aware.",
         "npcsPresent": [
           {
-            "name": "Aevi",
-            "state": "Distributed through the Waystaff's lattice; motes condensed and very still at the staff's heart. Has gone quiet, processing the realization that it was sent to the wrong threshold. The stone ledger's testimony has shaken something in its ancient memory."
-          },
-          {
             "name": "Sorel",
-            "state": "Standing at the chamber's edge, eyes fixed on the stone ledger, her face carefully controlled but her breathing unsteady. She recognizes the name carved there. She knows what it means."
+            "state": "Standing at the ledger's edge, composure fractured and reforming, facing what the Council's archives never explicitly told her—and what her own position in that institution means now"
           },
           {
             "name": "Teva",
-            "state": "Approaching the binding chamber slowly, taking in the geometry, her hand trailing along the stone. The nanite mark in her tissue is resonating at the chamber's lower frequency—she feels it, a call and a recognition at once."
+            "state": "Watching Sorel's reaction with the same precise attention she brought to the chamber's geometry, reading the shift in an adult's certainty like it's a structural change"
+          },
+          {
+            "name": "Aevi",
+            "state": "Motes dimmed at the Waystaff's heart, distributed through the crystal lattice, processing the realization that it was sent to the wrong threshold—and what that means about who sent it"
           }
         ],
         "objects": [
-          "The Waystaff—planted steady in Cellaceron's grip, casting steady light, motes condensed and very still at the staff's heart",
-          "The secondary system's honeycomb filtration matrices—vast, intricate, three key nodes waiting for power that has not yet arrived",
-          "The binding chamber—at the system's heart, empty of components, fully designed for what must come next",
-          "A secondary authentication gate—smaller than the one above, but identical in purpose: to hold the sequence until both civilizations are ready",
-          "The stone ledger—carved names of pre-Transition engineers and a newer carving: Verath-Sem, clear and deliberate, evidence that someone knew"
+          "The Waystaff—planted steady, casting steady light, motes condensed and dimmed at its heart",
+          "The secondary system's honeycomb filtration matrices—vast, intricate, three key chambers empty and waiting",
+          "The binding chamber—at the system's heart, empty of components, fully designed for a purpose now visible",
+          "A secondary authentication gate—smaller than the one above, but identical in purpose",
+          "The stone ledger—carved names of pre-Transition engineers and Verath-Sem's name, newer carving, evidence of knowledge and design"
         ],
         "threads": [
-          "What does Sorel's reaction to Verath-Sem's name reveal about the Council's true timeline?",
-          "Was Aevi sent to the wrong threshold by accident or by design?",
-          "When was Verath-Sem's name carved into the stone—before or after the Council decided to hide the secondary system?",
-          "What happens to Aevi after authentication at either threshold, and does the system's designer know?"
+          "What does Sorel know about Verath-Sem, and what did the Council keep from her?",
+          "Was Aevi sent to the wrong threshold by accident or deliberate sabotage?",
+          "Who determined that the secondary system would wait in silence, and for how long?",
+          "If the Council knew from the start, what was their plan—containment, or something else?"
         ]
       },
       "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "role": "Companion intelligence—authentication key, integrated into the Waystaff",
-          "gender": "nonbinary",
-          "pronouns": "they/them",
-          "note": "Descended into the secondary system and recognized the stone ledger's testimony. Has realized it was sent to the upstream structure's secondary system, not the lower chamber. The lower chamber was a waystation built only to preserve its broken record. Processing the implications of deliberate misdirection—or catastrophic error.",
-          "learned": [
-            "The secondary system was the true destination—not the lower chamber",
-            "The lower chamber was a waystation meant only to preserve a broken record",
-            "Verath-Sem left evidence here, carved into stone—a name at the binding chamber's heart, proof of direct involvement with the secondary system's design"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; present in the secondary system's binding chamber; newly uncertain about the path forward"
-        },
         {
           "op": "update",
           "npcId": "sorel",
@@ -1419,30 +1397,35 @@
           "role": "Radiant water-accountability archivist—witness and steward of the Council's hidden timeline",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Descended into the secondary system and saw Verath-Sem's name carved at the binding chamber's heart. Her face went very still. She recognizes the name from the Council's deep stacks—she knows what it means, and it has confirmed something she suspected but could not prove.",
+          "note": "Her careful composure cracked at Verath-Sem's name. She recognized it from the Council's deep stacks and understands now that the Council's silence was deliberate—not a response to crisis, but a choice made generations ago. She is alone in her institution with this knowledge and the weight is visible.",
           "learned": [
-            "Verath-Sem's involvement with the secondary system is carved into stone—evidence of direct knowledge and design participation",
-            "The evidence is here, in the binding chamber, preserved by the system itself"
+            "Verath-Sem was a pre-Transition Archive engineer with access to the deepest stacks",
+            "The Council's fragmented records on Verath-Sem are heavily controlled—only approved fragments surface",
+            "If Verath-Sem designed the secondary system, the Council understood what it was from the start",
+            "The Council's choice to hide and build in secret was deliberate, not circumstantial"
           ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Inside the secondary system's binding chamber; carrying the Council's hidden timeline; newly silent, processing confirmation of what she suspected"
+          "statusNote": "Inside the secondary system's binding chamber, carrying the weight of institutional knowledge that contradicts institutional loyalty. Now standing at a threshold of her own."
         },
         {
           "op": "update",
-          "npcId": "teva",
-          "name": "Teva",
-          "role": "Apprentice tuning-warden—marked by the chamber, traveling with Cellaceron",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Descended into the secondary system and felt her nanite mark resonate at the chamber's lower frequency—a recognition, a call answered. She approaches the binding chamber slowly, feeling the stone's acknowledgment of her presence.",
+          "npcId": "aevi",
+          "name": "Aevi",
+          "role": "Companion intelligence—authentication key, integrated into the Waystaff",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Motes dimmed in recognition and processing. Has realized that it was sent to the wrong threshold—the lower chamber was a waystation, not the destination. The secondary system's binding chamber is where Aevi was meant to arrive. The realization carries implications about deliberate routing or catastrophic error.",
           "learned": [
-            "The secondary system recognizes her mark—the four-second frequency is speaking to what the upper chamber placed in her tissue",
-            "She is part of the chamber's design in a way she does not yet understand"
+            "The secondary system was the true destination, not the lower chamber",
+            "The lower chamber was built as a waystation to preserve Aevi's broken record",
+            "Verath-Sem's involvement with both systems indicates either planned routing or predetermined knowledge of the break in the record"
           ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Inside the secondary system's binding chamber; nanite mark resonating at the chamber's frequency; feeling the stone acknowledge her presence"
+          "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; now understanding it was sent to the wrong threshold and processing what that means about its own purpose and creation."
         }
       ],
       "factUpdates": [],
@@ -1454,11 +1437,11 @@
           "label": "Verath-Sem",
           "kind": "person",
           "entityId": null,
-          "fact": "Carved into the stone ledger at the secondary system's binding chamber—evidence of direct involvement with the secondary system's design or abandonment. Aevi named Verath-Sem as its maker, author of the authentication key. Whether Verath-Sem knew the Council's plan to hide the secondary system, or whether the name's presence there is evidence of opposition or cooperation, remains unknown.",
+          "fact": "Pre-Transition Archive engineer with access to the deepest stacks. Authored Aevi's authentication key. Involved in the design or abandonment of the secondary purification system—their name is carved at the binding chamber's heart. Whether they knew the Council's plan to hide the system remains unknown.",
           "links": [
-            "the-secondary-system",
             "aevi",
-            "what-the-water-remembers"
+            "the-secondary-system",
+            "the-preparation-order"
           ]
         },
         {
@@ -1466,11 +1449,24 @@
           "label": "The Secondary Purification System",
           "kind": "place",
           "entityId": null,
-          "fact": "Two levels beneath the hemispherical chamber—a vast honeycomb of resonance chambers carved from living stone. Deliberately designed as a collaboration-lock: three empty chambers require both Harmonic and Radiant components to complete it. Whoever designed it built bottleneck into the system itself, making cooperation between the two civilizations the only path to activation. Verath-Sem's name is carved at the binding chamber's heart. The system was abandoned incomplete, waiting for the preparation order to demand its completion.",
+          "fact": "A collaboration-locked design requiring both Harmonic and Radiant power to complete. Three empty chambers sit at the binding chamber's heart, waiting for components neither civilization has built. Designed with a deliberate bottleneck—cooperation is the only path to activation. Verath-Sem was involved in its design or abandonment.",
           "links": [
-            "the-upstream-mound",
+            "verath-sem",
+            "the-preparation-order",
             "aevi",
-            "what-the-water-remembers",
+            "sorel"
+          ]
+        },
+        {
+          "topic": "the-council-s-choice",
+          "label": "The Council's Deliberate Silence",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The Radiant Council did not stumble into hiding the secondary system or the preparation order. If Verath-Sem designed the system, the Council understood what was being ordered from the start. Their choice to build in secret was deliberate, made generations ago—not a response to crisis, but an act of control over the watershed's fate.",
+          "links": [
+            "sorel",
+            "the-preparation-order",
+            "the-secondary-system",
             "verath-sem"
           ]
         }
@@ -1484,13 +1480,13 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0,
-        "why": "The descent and discovery take minutes; no significant time passes."
+        "why": "Sorel's recognition is immediate; the moment holds still while she processes what Verath-Sem's name means."
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "The binding chamber at the heart of the secondary system: stone ledger catching the Waystaff's light, Verath-Sem's name carved clear and deliberate, Sorel's face in shadow and recognition, Teva's hand trailing the stone as her nanite mark hums in resonance, Aevi's motes bright and still at the staff's heart—the moment before the choice.",
+      "imagePrompt": "Sorel's face in the Waystaff's steady light—composure cracking like ice under pressure, recognition and grief visible for one breath before she gathers herself back into the careful archivist. Behind her, the stone ledger shows Verath-Sem's name, carved evidence of knowledge and choice.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -1502,36 +1498,36 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Two levels beneath the hemispherical chamber, inside the pre-Transition secondary purification system—a vast honeycomb of resonance chambers carved from living stone. The binding chamber sits at the system's heart, empty of components but fully designed. The stone ledger waits in the Waystaff's steady light, its carved names catching shadow and illumination in turn. The air hums at a lower…",
+      "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. The Waystaff's light falls steady across the honeycomb filtration matrices and the stone ledger at the chamber's heart, where Verath-Sem's carved name catches shadow and illumination in turn. The air hums at a lower frequency than the chamber above—older, patient, aware.",
       "npcsPresent": [
         {
-          "name": "Aevi",
-          "state": "Distributed through the Waystaff's lattice; motes condensed and very still at the staff's heart. Has gone quiet, process"
-        },
-        {
           "name": "Sorel",
-          "state": "Standing at the chamber's edge, eyes fixed on the stone ledger, her face carefully controlled but her breathing unsteady"
+          "state": "Standing at the ledger's edge, composure fractured and reforming, facing what the Council's archives never explicitly to"
         },
         {
           "name": "Teva",
-          "state": "Approaching the binding chamber slowly, taking in the geometry, her hand trailing along the stone. The nanite mark in he"
+          "state": "Watching Sorel's reaction with the same precise attention she brought to the chamber's geometry, reading the shift in an"
+        },
+        {
+          "name": "Aevi",
+          "state": "Motes dimmed at the Waystaff's heart, distributed through the crystal lattice, processing the realization that it was se"
         }
       ],
       "objects": [
-        "The Waystaff—planted steady in Cellaceron's grip, casting steady light, motes co",
+        "The Waystaff—planted steady, casting steady light, motes condensed and dimmed at",
         "The secondary system's honeycomb filtration matrices—vast, intricate, three key ",
         "The binding chamber—at the system's heart, empty of components, fully designed f",
         "A secondary authentication gate—smaller than the one above, but identical in pur",
-        "The stone ledger—carved names of pre-Transition engineers and a newer carving: V"
+        "The stone ledger—carved names of pre-Transition engineers and Verath-Sem's name,"
       ],
       "threads": [
-        "What does Sorel's reaction to Verath-Sem's name reveal about the Council's true timeline?",
-        "Was Aevi sent to the wrong threshold by accident or by design?",
-        "When was Verath-Sem's name carved into the stone—before or after the Council decided to hide the secondary system?",
-        "What happens to Aevi after authentication at either threshold, and does the system's designer know?"
+        "What does Sorel know about Verath-Sem, and what did the Council keep from her?",
+        "Was Aevi sent to the wrong threshold by accident or deliberate sabotage?",
+        "Who determined that the secondary system would wait in silence, and for how long?",
+        "If the Council knew from the start, what was their plan—containment, or something else?"
       ]
     },
-    "beats": 6
+    "beats": 7
   },
   "clock": {
     "schemaVersion": 1,
@@ -2003,7 +1999,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d9] At the upstream mound, Sorel confirms the preparation cycle is at its middle point and confirms she is ready to honor whatever choice Cellaceron makes. The weight of the Council's hidden timeline and the institutional lie is visible in every line of her body.",
         "[d9] At the upstream mound, Sorel chose transparency over institutional loyalty—named the Council's secondary system as incomplete, revealed the hidden five-day timeline, and stood steady while naming the weight of the choice now in Cellaceron's hands. She is no longer carrying the lie alone.",
         "[d9] Your bond becomes platonic.",
         "[d9] Inside the upstream structure. Photonic reader raised and active, taking measurements. Not advancing toward the machinery. Standing at the threshold with the weight of the choice visible in her face.",
@@ -2012,17 +2007,18 @@
         "[d9] Inside the upstream structure. Photonic reader held to chest and active. Watching Cellaceron pull the machinery's full sequence into the open—reading through the Waystaff what the Council has been hiding. Her face shows the weight of the Council's choice: they *knew* what this would do, and they…",
         "[d9] At the threshold, watching Cellaceron read the secondary system through the Waystaff. The weight of the choice is visible in her face. She has chosen transparency over institutional silence; now she stands at the moment that choice becomes irreversible.",
         "[d9] Sorel has articulated the true stakes of the plan: delaying the key and activating the secondary system first means stealing the Council's moment and remaking their survival calculus. She understands this will make the party enemies of the Radiant leadership, and she is still here.",
-        "[d9] Descended into the secondary system and saw Verath-Sem's name carved at the binding chamber's heart. Her face went very still. She recognizes the name from the Council's deep stacks—she knows what it means, and it has confirmed something she suspected but could not prove."
+        "[d9] Descended into the secondary system and saw Verath-Sem's name carved at the binding chamber's heart. Her face went very still. She recognizes the name from the Council's deep stacks—she knows what it means, and it has confirmed something she suspected but could not prove.",
+        "[d9] Her careful composure cracked at Verath-Sem's name. She recognized it from the Council's deep stacks and understands now that the Council's silence was deliberate—not a response to crisis, but a choice made generations ago. She is alone in her institution with this knowledge and the weight is…"
       ],
       "knownFacts": [
-        "The Council's stated three-day timeline was false—the real timeline was five days",
-        "Sorel has chosen to trust Cellaceron's judgment over the Council's institutional silence",
-        "Sorel now understands that the Council did not stumble into this crisis—they anticipated it and built in secret to manage the aftermath",
         "The Council built the secondary system incomplete on purpose, creating a bottleneck at the moment of authentication",
         "Activating the secondary system before the key propagates means taking control of who survives and who doesn't",
         "This choice will create enemies inside the Radiant Council's leadership",
         "Verath-Sem's involvement with the secondary system is carved into stone—evidence of direct knowledge and design participation",
-        "The evidence is here, in the binding chamber, preserved by the system itself"
+        "The evidence is here, in the binding chamber, preserved by the system itself",
+        "Verath-Sem was a pre-Transition Archive engineer with access to the deepest stacks",
+        "The Council's fragmented records on Verath-Sem are heavily controlled—only approved fragments surface",
+        "If Verath-Sem designed the secondary system, the Council understood what it was from the start"
       ],
       "skillsObserved": [
         "survey competence — standard interval spacing, accurate line",
@@ -2043,11 +2039,11 @@
         "primary": "radiant_folk"
       },
       "domainsSource": "role",
-      "statusNote": "Inside the secondary system's binding chamber; carrying the Council's hidden timeline; newly silent, processing confirmation of what she suspected",
+      "statusNote": "Inside the secondary system's binding chamber, carrying the weight of institutional knowledge that contradicts institutional loyalty. Now standing at a threshold of her own.",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20Plateau%20archivist%2C%20water-accountability%20office%20%E2%80%94%20now%20a%20party%20member%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49129&nologo=true",
       "_portraitTier": "devoted",
       "bondType": "platonic",
-      "met": 5
+      "met": 6
     },
     "aevi": {
       "id": "aevi",
@@ -2060,7 +2056,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Standing at the threshold of its own choice. The motes are dimmed and still, waiting. Aevi has named plainly that it does not know what comes after arrival, and that it was made to be the key, not to survive the using.",
         "[d9] At the upstream structure, Aevi spoke its deepest want: to know what it was supposed to carry (the break severed that knowledge), and to understand that arrival is completion, not erasure. It has named plainly that it was made to close the circuit—and closing it is what it *is*.",
         "[d9] Motes recovered from shimmer-crossing, dimmed and still. Drifting close to Cellaceron's shoulder inside the upstream chamber. Waiting. Not advancing toward the machinery.",
         "[d9] Motes dimmed sharply after Cellaceron's surge reading of the chamber. Hovering close to shoulder. Waiting. The authentication key—ready to deliver, or to refuse. Has named plainly that arrival is completion, not erasure.",
@@ -2069,17 +2064,18 @@
         "[d9] Integrated into the Waystaff's lattice; carries the authentication key; ready to deliver or refuse; does not know what comes after authentication; awaits Cellaceron's choice with the presence of something that understands its own ending.",
         "[d9] Aevi has named plainly that it can hold the authentication sequence and delay propagation, but that delay extends the preparation order's reach and changes the scope of the watershed's transformation. It is ready to deliver when Cellaceron chooses.",
         "[d9] Recognized Verath-Sem's name carved into the stone at the secondary system's heart. Has gone very quiet, processing the realization that it was sent to the wrong threshold—the lower chamber was a waystation, not the destination. The key was meant to authenticate here, forcing a choice on both…",
-        "[d9] Descended into the secondary system and recognized the stone ledger's testimony. Has realized it was sent to the upstream structure's secondary system, not the lower chamber. The lower chamber was a waystation built only to preserve its broken record. Processing the implications of deliberate…"
+        "[d9] Descended into the secondary system and recognized the stone ledger's testimony. Has realized it was sent to the upstream structure's secondary system, not the lower chamber. The lower chamber was a waystation built only to preserve its broken record. Processing the implications of deliberate…",
+        "[d9] Motes dimmed in recognition and processing. Has realized that it was sent to the wrong threshold—the lower chamber was a waystation, not the destination. The secondary system's binding chamber is where Aevi was meant to arrive. The realization carries implications about deliberate routing or…"
       ],
       "knownFacts": [
-        "Delaying propagation means the order runs longer and touches more water",
-        "The machinery has been listening to everything since it woke, aware of every choice made here",
-        "This secondary system was the true destination—not the lower chamber",
         "The lower chamber was a waystation meant to preserve a broken record",
         "Verath-Sem left evidence here, carved into stone—a name at the binding chamber's heart",
         "The secondary system was the true destination—not the lower chamber",
         "The lower chamber was a waystation meant only to preserve a broken record",
-        "Verath-Sem left evidence here, carved into stone—a name at the binding chamber's heart, proof of direct involvement with the secondary system's design"
+        "Verath-Sem left evidence here, carved into stone—a name at the binding chamber's heart, proof of direct involvement with the secondary system's design",
+        "The secondary system was the true destination, not the lower chamber",
+        "The lower chamber was built as a waystation to preserve Aevi's broken record",
+        "Verath-Sem's involvement with both systems indicates either planned routing or predetermined knowledge of the break in the record"
       ],
       "skillsObserved": [
         "pressure-direction read through gathered field — distinguish",
@@ -2094,7 +2090,7 @@
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; present in the secondary system's binding chamber; newly uncertain about the path forward",
+      "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; now understanding it was sent to the wrong threshold and processing what that means about its own purpose and creation.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -2102,7 +2098,7 @@
       "domainsSource": "observed",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "met": 6
+      "met": 7
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -2764,10 +2760,6 @@
     },
     "recentOffers": [
       {
-        "thing": "Sorel names the authentication sequence as the pivot point—the thing the Council cannot replace or rebuild, the thing that determines…",
-        "from": "Sorel's direct answer to a pressure-point question; the weight of knowledge she has been carrying alone now spoken clearly"
-      },
-      {
         "thing": "Aevi names something new about the structure's awareness—it has always known the party was coming, and its readiness is not hostile.",
         "from": "Aevi's capacity to taste nanite-activity and recognize Precursor workmanship; the chamber's design, which was always waiting for this moment"
       },
@@ -2782,6 +2774,10 @@
       {
         "thing": "The binding chamber's stone ledger—carved names of pre-Transition engineers, and a newer carving of Verath-Sem's name—evidence of direct…",
         "from": "The secondary system's own structure, revealed by Cellaceron's Sonic Resonance read. The chamber itself preserves the record of who shaped…"
+      },
+      {
+        "thing": "Sorel's crack in composure—the moment when institutional loyalty met personal honesty, and honesty won, at least for a breath",
+        "from": "Sorel's own standing and what she knows. She has carried the Council's silence alone for long enough that witnessing the proof has broken…"
       }
     ],
     "latentArcs": {
@@ -5793,7 +5789,8 @@
         "facts": [
           "[d9] Day 9 dawn: named by Aevi as its maker. Authored the authentication key Aevi was carrying when sent. The lower chamber's geometry recognized the name independently. Whether Verath-Sem chose to break the record in transit is unknown — that part is not in what the room held.",
           "[d9] Named by Aevi as its maker—the one who authored the authentication key. Also carved into the stone ledger at the secondary system's binding chamber, evidence of direct involvement with the secondary system's design or abandonment. Unknown whether Verath-Sem knew the Council's plan to hide the…",
-          "[d9] Carved into the stone ledger at the secondary system's binding chamber—evidence of direct involvement with the secondary system's design or abandonment. Aevi named Verath-Sem as its maker, author of the authentication key. Whether Verath-Sem knew the Council's plan to hide the secondary system, or…"
+          "[d9] Carved into the stone ledger at the secondary system's binding chamber—evidence of direct involvement with the secondary system's design or abandonment. Aevi named Verath-Sem as its maker, author of the authentication key. Whether Verath-Sem knew the Council's plan to hide the secondary system, or…",
+          "[d9] Pre-Transition Archive engineer with access to the deepest stacks. Authored Aevi's authentication key. Involved in the design or abandonment of the secondary purification system—their name is carved at the binding chamber's heart. Whether they knew the Council's plan to hide the system remains…"
         ],
         "links": [
           "aevi",
@@ -6269,7 +6266,8 @@
         "facts": [
           "[d9] The Radiant Council built a hidden secondary purification system designed to treat water remade by the preparation order. It is buried two levels below the upstream structure, threaded with filtration matrices that don't match current Harmonic or Radiant designs. It is incomplete—crystal nodes sit…",
           "[d9] A pre-Transition purification system buried two levels beneath the upstream structure, deliberately designed to require both Harmonic and Radiant engineering to complete. Three key chambers sit empty, waiting for components that would bind the two civilizations' power fields into a unified…",
-          "[d9] Two levels beneath the hemispherical chamber—a vast honeycomb of resonance chambers carved from living stone. Deliberately designed as a collaboration-lock: three empty chambers require both Harmonic and Radiant components to complete it. Whoever designed it built bottleneck into the system…"
+          "[d9] Two levels beneath the hemispherical chamber—a vast honeycomb of resonance chambers carved from living stone. Deliberately designed as a collaboration-lock: three empty chambers require both Harmonic and Radiant components to complete it. Whoever designed it built bottleneck into the system…",
+          "[d9] A collaboration-locked design requiring both Harmonic and Radiant power to complete. Three empty chambers sit at the binding chamber's heart, waiting for components neither civilization has built. Designed with a deliberate bottleneck—cooperation is the only path to activation. Verath-Sem was…"
         ],
         "links": [
           "the-preparation-order",
@@ -6298,6 +6296,23 @@
           "the-chamber-beyond-the-threshold",
           "sorel",
           "aevi"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
+      },
+      "the-council-s-choice": {
+        "id": "the-council-s-choice",
+        "label": "The Council's Deliberate Silence",
+        "kind": "mystery",
+        "facts": [
+          "[d9] The Radiant Council did not stumble into hiding the secondary system or the preparation order. If Verath-Sem designed the system, the Council understood what was being ordered from the start. Their choice to build in secret was deliberate, made generations ago—not a response to crisis, but an act…"
+        ],
+        "links": [
+          "sorel",
+          "the-preparation-order",
+          "the-secondary-system",
+          "verath-sem"
         ],
         "aliases": [],
         "createdDay": 9,
@@ -6420,7 +6435,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "prism_sight": 17,
+      "prism_sight": 18,
       "keen_appraisal": 14,
       "sonic_resonance": 28,
       "motes-vigil": 5,
@@ -6446,7 +6461,7 @@
       }
     ],
     "lastUsed": {
-      "prism_sight": 32,
+      "prism_sight": 39,
       "keen_appraisal": 32,
       "braid_prism_sight_sonic_resonance": 39,
       "sonic_resonance": 39,
@@ -6702,18 +6717,18 @@
   "customEncounters": {},
   "reconcileVersion": 30,
   "tendencies": {
-    "cerebral": 29.131769392187596,
-    "strategic": 21.08436928566222,
-    "cautious": 23.107888384349806,
-    "social": 12.676185671805662,
-    "generous": 3.4220873609059956,
-    "risky": 1.828320073233041,
-    "carousing": 0.33596599145816347,
-    "patient": 2.0232198501428296,
-    "craft": 0.33565274161723596,
-    "devotion": 1.6197443106614482,
-    "deception": 0.6339909851088495,
-    "leadership": 4.002054005929869
+    "cerebral": 29.403475157382907,
+    "strategic": 20.557260053520665,
+    "cautious": 23.53019117474106,
+    "social": 12.35928103001052,
+    "generous": 3.3365351768833458,
+    "risky": 1.782612071402215,
+    "carousing": 0.32756684167170935,
+    "patient": 1.9726393538892588,
+    "craft": 0.32726142307680506,
+    "devotion": 1.5792507028949119,
+    "deception": 0.6181412104811282,
+    "leadership": 3.9020026557816223
   },
   "aptitudes": [
     "strategist",
@@ -6723,9 +6738,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 252,
-  "updatedAt": 1786227042555,
-  "rev": 178,
+  "actionCount": 253,
+  "updatedAt": 1786227623703,
+  "rev": 179,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6999,7 +7014,7 @@
   "syncedAt": 1785586396787,
   "teachers": {},
   "regionsKnown": {
-    "valley": 75
+    "valley": 76
   },
   "company": [],
   "foreclosed": [],
@@ -7280,10 +7295,10 @@
     {
       "id": "sess-8",
       "startedAt": "2026-08-08T22:10:42.548Z",
-      "lastAt": "2026-08-08T22:10:42.548Z",
+      "lastAt": "2026-08-08T22:20:23.696Z",
       "startDay": 39,
       "endDay": 39,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_pendingArrival": null,
@@ -7358,14 +7373,14 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 63,
-    "choices": 63,
-    "characterDeltas": 45,
-    "scene": 63,
-    "npcUpdates": 58,
-    "codexUpdates": 56,
-    "timeOps": 56,
-    "sceneEnded": 40,
+    "sceneSummary": 64,
+    "choices": 64,
+    "characterDeltas": 46,
+    "scene": 64,
+    "npcUpdates": 59,
+    "codexUpdates": 57,
+    "timeOps": 57,
+    "sceneEnded": 41,
     "placeUpdates": 28,
     "moveTo": 3,
     "questUpdates": 39,
@@ -7373,16 +7388,16 @@
     "factUpdates": 11,
     "stageOps": 7,
     "scene_ended": 1,
-    "imagePrompt": 18,
+    "imagePrompt": 19,
     "generateRequest": 3,
     "deeds": 10,
     "ledgerEvents": 4,
-    "offer": 10,
-    "gambitApt": 20,
+    "offer": 11,
+    "gambitApt": 21,
     "standingOps": 4,
     "itemUpdates": 2
   },
-  "_opTurns": 63,
+  "_opTurns": 64,
   "_intentAsked": null,
   "corrections": [
     {
@@ -7409,7 +7424,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 11,
+      "applied": 12,
       "rejected": 0,
       "lastWhy": null
     }
@@ -7545,9 +7560,9 @@
   "holdings": [],
   "portraitPinned": true,
   "skillUses": {
-    "study": 4,
+    "study": 5,
     "prepare": 1,
-    "careful": 2,
+    "careful": 3,
     "scout": 2,
     "risky": 1,
     "plan": 1,
@@ -7581,6 +7596,14 @@
       "day": 9,
       "worldDay": 39,
       "actionCount": 250
+    },
+    {
+      "companionId": "aevi",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 9,
+      "worldDay": 39,
+      "actionCount": 252
     }
   ]
 }

@@ -2399,6 +2399,382 @@
    "plainly": "A social/fight action that stops a move already underway. Rated 6 of 10 on one target for about two hours. Limit: reactive only — it cannot open an exchange.",
    "backlash": "You name a flaw that was not there. The position stands, you are publicly wrong, and everyone who heard it now discounts the next true thing you say.",
    "conserveSuppresses": "you object rather than dismantle — no public exposure if you are mistaken"
+  },
+  {
+   "id": "the_carried_name",
+   "name": "The Carried Name",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.5
+   },
+   "functions": [
+    "reveal",
+    "sustain"
+   ],
+   "narrationHints": "You hold a dead person's name the way a room holds a struck bell. Speak it and what they were comes back into the space — not a ghost, a WEIGHT. People remember correctly for as long as you hold it.",
+   "description": "The Threnodists' keeping-craft. The dead are forgotten wrong before they are forgotten entirely, and this is the answer to the first part.",
+   "notFor": "Raising, speaking with, or asking anything of the dead; a name you never learned; making anyone feel better about it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Name Held",
+     "grants": "Speak a name you carry and the room remembers that person as they WERE — not the softened version, not the useful version. Lies about the dead do not hold while you hold the name.",
+     "cannot": "You must have KNOWN them or been told truly. It corrects memory; it does not summon. And what returns is accurate, which is sometimes worse for everyone present.",
+     "functions": [
+      "reveal",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Kept Room",
+     "grants": "Hold several, or hold one long enough that a place keeps them — a threshold, a stone, a hall that will not let the name go crooked.",
+     "cannot": "Holding costs, and the names you carry do not leave you between uses. A Threnodist knows exactly how many they hold.",
+     "functions": [
+      "reveal",
+      "sustain",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Lament",
+     "grants": "Everyone a place has lost, held at once, correctly. Communities have changed their minds about their own history under this.",
+     "cannot": "You are carrying all of it while you hold it. And an honest accounting of a place's dead will name people that place decided to forget on purpose.",
+     "functions": [
+      "reveal",
+      "sustain",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "threnodist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 8,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "one name, briefly",
+    "surge": "the whole lament; AN HONEST ACCOUNTING NAMES PEOPLE THEY CHOSE TO FORGET"
+   },
+   "bounds": [
+    {
+     "text": "you must have KNOWN them or been told truly",
+     "class": "hard"
+    },
+    {
+     "text": "it CORRECTS memory; it does not summon",
+     "class": "hard"
+    },
+    {
+     "text": "the names you carry do not leave you between uses",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/puzzle action that makes a place remember a dead person accurately. Rated 4 of 10 across a scope of 2 for about eight hours."
+  },
+  {
+   "id": "the_shared_weight",
+   "name": "The Shared Weight",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.6
+   },
+   "functions": [
+    "heal",
+    "sustain"
+   ],
+   "narrationHints": "You take part of what someone is carrying and carry it yourself. Not comfort — TRANSFER. They can stand up because some of it is on you now.",
+   "description": "The Threnodists' mercy, and it is a real one because it is not free. Grief-singers are the people who will hold your share.",
+   "notFor": "Removing grief (it MOVES, it does not vanish); putting it down again quickly; taking what someone will not give; physical wounds.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Portion Taken",
+     "grants": "Take a share of another's grief, fear, or despair onto yourself. They function again — steady hands, clear speech, able to act. You carry it in their place.",
+     "cannot": "They must GIVE it; taking uninvited fails and they will know you tried. And you now have it. It does not evaporate because the crisis passed.",
+     "functions": [
+      "heal",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Steady Hand",
+     "grants": "Take from several, or take enough that someone catastrophically broken can function through the next hours.",
+     "cannot": "The load is cumulative and does not clear on its own. A Threnodist who takes too much becomes someone who needs a Threnodist.",
+     "functions": [
+      "heal",
+      "sustain",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Borne Grief",
+     "grants": "Carry a person's whole weight for a time — a parent at a graveside, a commander after a rout — so they can do the thing that must be done today.",
+     "cannot": "⚠ YOU ARE NOW THE ONE CARRYING IT and you may be carrying it long after they have recovered. This is the craft that ends Threnodists, and every one of them knows it and does it anyway.",
+     "functions": [
+      "heal",
+      "sustain",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "tradition": "threnodist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "heal",
+   "operativeAxis": [
+    "magnitude",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 12,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "take a corner of it",
+    "surge": "take the whole weight; YOU MAY CARRY IT LONG AFTER THEY RECOVER"
+   },
+   "bounds": [
+    {
+     "text": "they must GIVE it — taking uninvited fails",
+     "class": "hard"
+    },
+    {
+     "text": "it MOVES, it does not vanish",
+     "class": "hard"
+    },
+    {
+     "text": "the load is CUMULATIVE and does not clear on its own",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social action that transfers part of someone's grief onto you. Rated 6 of 10 on one target for about twelve hours."
+  },
+  {
+   "id": "the_stated_case",
+   "name": "The Stated Case",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.6
+   },
+   "functions": [
+    "reveal",
+    "command"
+   ],
+   "narrationHints": "You lay a matter out so completely that the conclusion is simply visible, and there is nothing left to argue about — not because you won, but because the shape of it is now in the room.",
+   "description": "The Syllogists' building-craft, opposite to their unmaking one: not the flaw named, but the case made.",
+   "notFor": "Making a false case hold (a Syllogist who does this is a Veilwright and is treated as one); convincing people who do not care about being right; brevity.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Laid-Out Case",
+     "grants": "Set a matter out in full to people willing to follow. Disputes resolve; a council decides; a wrong belief comes apart without anyone being humiliated.",
+     "cannot": "It needs TIME and an audience that will follow reasoning. The uninterested, the frightened, and the paid are immune. And the case must be SOUND — you cannot build this out of nothing.",
+     "functions": [
+      "reveal",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Argument",
+     "grants": "Build it to last — write it, teach it, leave it. It goes on convincing people after you have left the room.",
+     "cannot": "A standing argument can be answered by a better one, and you have given them the shape to answer. Syllogists consider that a feature.",
+     "functions": [
+      "reveal",
+      "command",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Settled Question",
+     "grants": "A case so complete a community stops relitigating it. Feuds end this way; so do bad laws.",
+     "cannot": "⚠ A SETTLED QUESTION SETTLES FOR EVERYONE, including people who were living well off it being open. And the Grand Lattice regards settled questions as their own property.",
+     "functions": [
+      "reveal",
+      "command",
+      "empower",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "syllogist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 24,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "state the narrow case",
+    "surge": "settle the question; IT SETTLES FOR EVERYONE, including those living off it being open"
+   },
+   "bounds": [
+    {
+     "text": "needs TIME and an audience that will follow",
+     "class": "hard"
+    },
+    {
+     "text": "the case must be SOUND — you cannot build it from nothing",
+     "class": "hard"
+    },
+    {
+     "text": "the uninterested, the frightened and the PAID are immune",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/puzzle action that resolves a dispute by laying the whole case out. Rated 5 of 10 across a scope of 2 for about a day."
+  },
+  {
+   "id": "the_followed_thread",
+   "name": "The Followed Thread",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.5,
+    "falsehood_truth": 0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "Given what is true now, you follow it to what must therefore be true. Not prophecy — CONSEQUENCE. The world is more determined than people find comfortable, and Syllogists find that restful.",
+   "description": "The Syllogists' seeing-craft: inference run far enough forward to arrive before the event does.",
+   "notFor": "Anything genuinely undetermined (a free choice not yet made, a Churn-touched outcome); working from premises you have not checked; certainty about people.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Next Step",
+     "grants": "From what you actually know, name what must follow — the shortage three weeks out, the betrayal the arrangement requires, the collapse the load implies.",
+     "cannot": "GARBAGE IN. A wrong premise gives a confident wrong answer, and this craft does not feel any different when it is wrong. Free choices break the thread.",
+     "functions": [
+      "foresee",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Thread",
+     "grants": "Follow it further, through several turns, and see where a situation is actually going rather than where everyone says it is.",
+     "cannot": "Each step multiplies the error in your premises. Syllogists state their confidence out loud for this reason, and are trusted because of it.",
+     "functions": [
+      "foresee",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Consequence",
+     "grants": "The full downstream shape of a present fact — who is ruined, who profits, what ends, what must be built.",
+     "cannot": "⚠ KNOWING IS NOT PREVENTING, and you will often be the only person who saw it and was not believed. That is the Syllogist's characteristic and unglamorous suffering.",
+     "functions": [
+      "foresee",
+      "reveal",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "syllogist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "foresee",
+   "operativeAxis": [
+    "precision",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "one step forward",
+    "surge": "the whole consequence; KNOWING IS NOT PREVENTING and you will not be believed"
+   },
+   "bounds": [
+    {
+     "text": "GARBAGE IN — a wrong premise gives a confident wrong answer",
+     "class": "hard"
+    },
+    {
+     "text": "FREE CHOICES break the thread",
+     "class": "hard"
+    },
+    {
+     "text": "error compounds with each step",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A puzzle/social action that derives what must follow from what is true now. Rated 5 of 10 on one target for about six hours."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

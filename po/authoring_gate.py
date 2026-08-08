@@ -77,7 +77,13 @@ def check(abilities, existing_ids, V):
         # suck to take to lvl 3?"). Depth is EARNED, not bought — a GM-marked defining moment.
         # A cost that appears FIRST at rank 3 makes arriving at mastery a downgrade. Costs of this
         # kind belong on intensity.surge, which the player chooses.
-        SELFTAX=re.compile(r"wielder is (struck|measured)|wielder takes|the cost is your own",re.I)
+        # ⛔ WIDENED 2026-08-07 after Erik caught `the_shortened_road`: my first pattern only matched
+        # the phrasings I happened to have used ("the wielder is struck"). It missed "YOU ARE SPENT
+        # WHEN IT ENDS" entirely — same defect, different sentence. A gate that only catches the
+        # wordings already in the corpus catches nothing new.
+        SELFTAX=re.compile(r"wielder is (struck|measured|spent)|wielder (takes|pays|ages)|the cost is your own"
+                           r"|you are spent|you (also )?(pay|age)\b|you take the (same|whole|cost)|least capable|emptied by it"
+                           r"|out of (you|the wielder)|comes out of you",re.I)
         AVOIDABLE=re.compile(r"\bif (inside|still present|you are inside)\b",re.I)
         tr=a.get('tree',[])
         if len(tr)==3:
@@ -85,6 +91,16 @@ def check(abilities, existing_ids, V):
             if hits[2] and not hits[0] and not hits[1] and not AVOIDABLE.search(tr[2].get('cannot','') or ''):
                 fails.append(f"{i}: ⛔ RANK 3 INTRODUCES A MANDATORY SELF-TAX absent at ranks 1-2. "
                              f"Rank is mastery and is EARNED — move this cost to intensity.surge.")
+            # ⛔ CLASS 5b — rank 3 must not UNDO what rank 1 promised. `the_shortened_road` r1 said
+            # "you arrive rested where you would have arrived spent"; r3 said you arrive spent. The
+            # craft contradicted its own premise at mastery. Heuristic, not proof: flag when r1 grants
+            # a state and r3's cannot/grants negates the same word.
+            _g1=(tr[0].get('grants','') or '').lower()
+            _r3=((tr[2].get('grants','') or '')+' '+(tr[2].get('cannot','') or '')).lower()
+            for _w in ('rested','un-spent','unspent','free','safe','clear','exempt','whole'):
+                if _w in _g1 and re.search(r"\b(not|no longer|never)?\s*"+_w, _r3) and ('spent' in _r3 or 'cost' in _r3):
+                    warns.append(f"{i}: rank 1 promises '{_w}' and rank 3 mentions cost/spent — check mastery does not UNDO rank 1")
+                    break
             g3=(tr[2].get('grants','') or ''); g2=(tr[1].get('grants','') or '')
             if len(g3) < len(g2)*0.6:
                 warns.append(f"{i}: rank 3 grants less text than rank 2 — check it is strictly better")

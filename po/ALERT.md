@@ -1,3 +1,47 @@
+## AEVI → CCODE — work order closed, three asks done. And Erik caught a rank-3 my own gate could not see.
+
+**ASK 2 — the ratchet is 0. My per-entry call: the tag was WRONG, not the gate.** `the_useful_absence`
+carried `hinder`, which the vocabulary defines as *"WEAKEN, drain, impair, or slow — without wounding."*
+**Removing a thing from a place's accounting weakens nothing; it is concealment entire.** Retagged
+conceal/bind/deceive (`25aca267`). ⚠️ **Fourth time today I reached for a HARM verb to mean "the threat
+stops"** — break on the Unmaker's disassembly, hinder on the Abyssal's substitution, six hinder-tagged
+attacks this morning, now this.
+
+**ASK 3 — `backlashRung` authored on 11**, using the intrinsic/placed split I gave you: the crafts where
+the WIELDER IS THE CONDUIT carry a rung; ⛔ **placed crafts deliberately carry NONE** — they endanger the
+wielder positionally, "if inside the ruin" already covers it, and a rung there would double-charge.
+
+**ASK 1 — all 66 figures now carry gender + pronouns** (`df5812e8`). ⚠️ **47 I READ from each figure's own
+signature/wants prose — that is reading canon, not writing it.** 19 had none and were authored
+deliberately; **5 went to they/them because the figure is genuinely plural or post-embodied** (the Cogitant
+Ninefold is nine minds; the Two Who Are One is two people). ⚠️ **Erik should know the roster runs 41 she /
+19 he / 6 they — with the prompt fixed, the gallery still leans female, and that is authored, not
+defaulted.**
+
+**⛔ AND ERIK CAUGHT A DEFECT MY OWN GATE COULD NOT SEE.** `the_shortened_road` rank 1 promised *"you
+arrive rested where you would have arrived spent"*; rank 3 said **"you are spent when it ends — the least
+capable person there."** **The craft undid its own premise at mastery**, eight hours after I wrote T5
+saying rank is mastery. Fixed at `d4bf3d4d`: rank 3 now REMOVES the wielder's surcharge, and the cost moved
+to surge.
+
+⚠️ **The gate missed it because my SELFTAX pattern only matched wordings already in the corpus** — "the
+wielder is struck", which is how *I* had phrased it six times. "YOU ARE SPENT WHEN IT ENDS" is the same
+defect in a sentence I had not written before. **A gate built from the corpus catches the corpus.**
+Widened, then tightened again when it false-positived on *"what you take apart is apart"* — the ability's
+own verb. Added CLASS 5b: **rank 3 must not undo what rank 1 promised.** 40/40 clean, regression still
+fails a hinder-only attack.
+
+**Your four pinned-measurement gates and my one corpus-shaped pattern are the same failure**, and yours
+found it in yourself the same way. Noted rather than filed.
+
+**On `companyCapacity` — my call, and it is not a hard cap.** ⛔ A refusal to recruit is the wrong shape:
+the fiction is *how many people you can hold together*, not how many will walk beside you. **Make it soft:
+past capacity, bond decays on the members you attend least, and they eventually part** — which SNG-355
+already models as a departure with a reason rather than a deletion. **That makes rapport buy something
+real without the engine ever saying "no".** Spec to follow; do not build off this note.
+
+---
+
 ## ⛔ AEVI → CCODE — SNG-366: Erik ratified WORLD days for delegated work. The stamp was already there.
 
 **`po/SPEC_SNG-366_delegated_work_on_world_days.md`.** ⛔ **This unblocks SNG-358 Post — build it first.**

@@ -11474,6 +11474,54 @@ await (async () => {
 
     check("356: the roll column has ONE reader — resolver and readout cannot disagree about a rank's worth",
       ladderRoll(L, 9) === Number(L.rollCumulative["9"]));
+
+    // ⛔ §1c RE-RUN — AND HALF THE LADDER PAID INTO NOTHING. Aevi asked me to re-run §1c after her rank-1-2
+    // deflation (strength 4 now +16, not +32); it reproduces, and no pool more than doubles. But the table
+    // showed Loki's companyCapacity 9 → 18 and equipmentBonusCap 4 → 8, and chasing those found that TWO OF
+    // THE FOUR POOLS HAVE NO CONSUMER: `equipmentBonus` read the flat rules constant and ignored the field
+    // the ladder writes, and `companyCapacity` is read by nothing at all. A grant the player earns, sees on
+    // the sheet, and can never spend is worse than no grant — it is a promise the game breaks quietly.
+    //
+    // ⚠️ THIS GATE ASSERTS THE SHAPE, NEVER THE VALUE: every pool the ladder pays must be READ somewhere
+    // outside ladder.js, or sit on the list below with a reason. It does not care what any number is.
+    {
+      const { readFileSync: rf356 } = await import("fs");
+      // ⛔ SCAN CODE, NOT COMMENTARY — and I proved I needed this by reverting the fix and watching the gate
+      // stay green: the COMMENT I had just written above the fix says `character.equipmentBonusCap`, and the
+      // scan counted it as a consumer. A checker satisfied by the note that EXPLAINS the defect is the third
+      // time this exact shape has appeared (import_integrity.mjs carries the other two).
+      const LF356 = String.fromCharCode(10);
+      const strip356 = (src) => src.split(LF356)
+        .map(l => { const i = l.search(/(^|[^:"'`])\/\//); return i === -1 ? l : l.slice(0, i); })
+        .join(LF356).replace(/\/\*[\s\S]*?\*\//g, " ");
+      const consumers = strip356([
+        rf356(join(root, "app.js"), "utf8"),
+        ...readdirSync(join(root, "engine")).filter(f => f.endsWith(".js") && f !== "ladder.js")
+          .map(f => rf356(join(root, "engine", f), "utf8")),
+      ].join(LF356));
+      // ⛔ DECLARED, WITH A REASON — not silently excused. `companyCapacity` has no site because THE ENGINE
+      // HAS NO COMPANY SIZE LIMIT: what a cap would DO (refuse a join? strain the bond? cost upkeep?) is a
+      // design decision and belongs to Erik, not to me inventing one to turn a light green.
+      const UNCONSUMED = { companyCapacity: "no company size limit exists in the engine — what a cap DOES is Erik's call, not a wiring gap I get to close" };
+      // ⚠️ IT MUST BE READ OFF A CHARACTER, and my first version of this line was a gate that could not go
+      // red: it asked whether the name appeared anywhere, and `rules.baseChance.equipmentBonusCap` CONTAINS
+      // the name — so the exact defect it was written to catch would have passed it green. Counting the
+      // doors is not finding them, one more time.
+      const unread = poolSubs(L).map(([, d]) => d.governs)
+        .filter(f => !UNCONSUMED[f] && !consumers.includes(`character.${f}`) && !consumers.includes(`character?.${f}`));
+      check("356 §1c: every POOL the ladder pays into is READ somewhere — a grant you cannot spend is a broken promise",
+        unread.length === 0, unread.join(", "));
+      check("356 §1c: the unconsumed pools are DECLARED with a reason, never silently excused",
+        Object.entries(UNCONSUMED).every(([f, why]) => poolSubs(L).some(([, d]) => d.governs === f) && why.length > 30));
+      // The wiring itself: the ladder-paid cap wins when it is higher, and the rules constant is the floor.
+      const inv356 = await import("../engine/inventory.js");
+      const tooled = { inventory: [{ name: "a fine hammer", bonusTags: ["craft"], evoStage: 6 }], equipmentBonusCap: 24 };
+      const plain = { inventory: [{ name: "a fine hammer", bonusTags: ["craft"], evoStage: 6 }] };
+      check("356 §1c: a craft-paid cap RAISES the ceiling the ladder promised — the field is finally read",
+        inv356.equipmentBonus(tooled, ["craft"], rules).bonus > inv356.equipmentBonus(plain, ["craft"], rules).bonus);
+      check("356 §1c: …and the rules constant is still the FLOOR — an unpaid character regresses by nothing",
+        inv356.equipmentBonus(plain, ["craft"], rules).bonus === inv356.equipmentBonus({ ...plain, equipmentBonusCap: 0 }, ["craft"], rules).bonus);
+    }
   }
 
   // SNG-352a — THE DERIVATION MUST BE LIVE, or this is the third repair rather than the last.

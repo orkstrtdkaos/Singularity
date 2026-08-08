@@ -416,7 +416,14 @@ export function skillBonus(character, actionTags = [], rules = {}) {
 
 export function equipmentBonus(character, actionTags = [], rules) {
   const per = rules.baseChance.equipmentBonus ?? 5;
-  const cap = rules.baseChance.equipmentBonusCap ?? 10;
+  // ⛔ SNG-356 §1c — THE LADDER PAID INTO A FIELD NOTHING READ. `sub_attribute_ladder.json` authors
+  // craft → `equipmentBonusCap`, and `applyLadderGrants` has been writing `character.equipmentBonusCap`
+  // faithfully — while this line read the flat rules constant and ignored it. Every rank of craft bought a
+  // cap no roll would ever consult: Silas at craft 9 is owed 11 and was capped at 10.
+  // ⚠️ THE VALUES ARE STILL AUTHORED. The ladder's numbers stay Erik's and Aevi's, untouched; this only
+  // makes the reader read the field the author writes. The rules constant remains the floor, so nothing
+  // regresses for a character the ladder has not paid.
+  const cap = Math.max(Number(rules.baseChance.equipmentBonusCap ?? 10), Number(character?.equipmentBonusCap || 0));
   const topN = Math.max(1, rules.baseChance.equipmentBonusTopN ?? 1);
   const contributors = [];
   for (const item of character.inventory || []) {

@@ -141,11 +141,145 @@
     "In a secluded glade behind the orchard, Loki and Lira make love for the first time—moving slowly, with presence and explicit care, learning each other's bodies and what consent actually means when two people are genuinely attentive to one another."
   ],
   "currentLocationId": "millbrook",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "player": null,
+        "summary": "In the glade after intimacy, Loki holds the knowledge that Veln Ashpause's death is becoming a story in the valley—and Lira senses the weight of unfinished things.",
+        "narration": "Night has settled over Millbrook, and you are still in the glade behind the orchard—the one Lira knows, where moss holds the shape of your bodies and the stream speaks only to itself. The birch and hawthorn stand dark around you, their branches still bare enough to let starlight fall through. The air is cool, carrying that particular spring smell of melt and awakening earth.\n\nLira rests beside you, her breathing even, one arm across your ribs. There is no awkwardness here—just the quiet presence of two people who have learned something true about each other. But your mind, even now, carries the weight of what you left unfinished. Veln's relieved face. The wrongness of it. The fact that two travelers now carry that wrongness down the roads, and soon four, and soon it becomes a story.\n\nThe glade is still. The world beyond it—Millbrook, the valley, the question of what killed the man who knew something—waits. You can feel the pull of it, even here in the dark with Lira's warmth beside you.\n\nShe stirs slightly, perhaps sensing the shift in you. 'Where did you go?' she asks, not opening her eyes. Her hand moves to find yours."
+      }
+    ],
+    "lastTurn": {
+      "narration": "Night has settled over Millbrook, and you are still in the glade behind the orchard—the one Lira knows, where moss holds the shape of your bodies and the stream speaks only to itself. The birch and hawthorn stand dark around you, their branches still bare enough to let starlight fall through. The air is cool, carrying that particular spring smell of melt and awakening earth.\n\nLira rests beside you, her breathing even, one arm across your ribs. There is no awkwardness here—just the quiet presence of two people who have learned something true about each other. But your mind, even now, carries the weight of what you left unfinished. Veln's relieved face. The wrongness of it. The fact that two travelers now carry that wrongness down the roads, and soon four, and soon it becomes a story.\n\nThe glade is still. The world beyond it—Millbrook, the valley, the question of what killed the man who knew something—waits. You can feel the pull of it, even here in the dark with Lira's warmth beside you.\n\nShe stirs slightly, perhaps sensing the shift in you. 'Where did you go?' she asks, not opening her eyes. Her hand moves to find yours.",
+      "sceneSummary": "In the glade after intimacy, Loki holds the knowledge that Veln Ashpause's death is becoming a story in the valley—and Lira senses the weight of unfinished things.",
+      "choices": [
+        {
+          "label": "Tell Lira plainly what you're carrying—Veln, the wrongness, the rumor spreading—and ask what she thinks.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "confide",
+            "seek counsel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Stay here a while longer. Hold her, and listen to what the glade offers—the stream, the night, anything your senses might tell you about this place.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "attune"
+          ],
+          "abilityId": "echo_sense",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Rise carefully and step to the stream's edge. The night is clear enough to see by—use it to think, away from her warmth, until you know what you need to do next.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "separate",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": {},
+      "offer": {
+        "thing": "Lira asks a question that cuts to the heart: 'Where did you go?'—she senses you have left the glade even though you are still lying beside her.",
+        "from": "her consent-centered presence and attentiveness to who you actually are, not who she assumes you to be"
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "A secluded glade in the wood behind Millbrook's orchard, early spring night. Moss-soft ground, birch and hawthorn, a narrow melt-water stream catching starlight. Dark but not lightless.",
+        "npcsPresent": [
+          {
+            "name": "Lira",
+            "state": "Resting beside Loki, arm across their ribs, eyes closed, breathing even. Present and attentive."
+          }
+        ],
+        "objects": [
+          "Bedroll (yours, laid on the moss)",
+          "The stream, narrow and cold, carrying melt-water from the heights"
+        ],
+        "threads": [
+          "Veln Ashpause's death is becoming a story—how will you answer the wrongness of his relieved face?",
+          "Lira is present and asks directly: where have you gone?"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "lira",
+          "note": "In the glade, she and Loki move slowly together, learning each other's bodies with explicit consent and presence. Afterward, she rests beside them, and senses they have gone somewhere in their mind—she asks directly: 'Where did you go?'",
+          "learned": [
+            "Her craft and her presence are not separate things—she teaches through guided touch and direct asking.",
+            "She reads people with attentiveness, not intrusion—she notices when Loki has left the moment, even lying beside her."
+          ],
+          "statusNote": "In the glade with Loki, present and attentive."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": {},
+      "codexUpdates": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": {},
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
+      "timeOps": {},
+      "moveTo": {},
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "A secluded glade in the wood behind Millbrook's orchard, early spring night. Moss-soft ground, birch and hawthorn, a narrow melt-water stream catching starlight. Dark but not lightless.",
+      "npcsPresent": [
+        {
+          "name": "Lira",
+          "state": "Resting beside Loki, arm across their ribs, eyes closed, breathing even. Present and attentive."
+        }
+      ],
+      "objects": [
+        "Bedroll (yours, laid on the moss)",
+        "The stream, narrow and cold, carrying melt-water from the heights"
+      ],
+      "threads": [
+        "Veln Ashpause's death is becoming a story—how will you answer the wrongness of his relieved face?",
+        "Lira is present and asks directly: where have you gone?"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
-    "day": 1,
-    "hour": 23,
+    "day": 2,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [],
@@ -335,9 +469,9 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 0,
     "lastGenCount": 939,
-    "lastSharedReadAt": "2026-08-08T03:12:07.687Z",
+    "lastSharedReadAt": "2026-08-08T03:38:53.036Z",
     "lastTickWorldDay": 39,
     "lastCanonWorldDay": 39,
     "pressureQueue": [],
@@ -2484,10 +2618,6 @@
     "arcBirths": [],
     "recentOffers": [
       {
-        "thing": "Lira herself — a person who moves with you willingly, and whose knowledge of who sent the stranger is something you do not yet hold",
-        "from": "your own action: choosing not to stay and be questioned at the gate, but to walk away with someone who knows more than she has said"
-      },
-      {
         "thing": "Lira's true capability — a healing craft bound to light and motion, held in the translucent cloth she wears",
         "from": "Lira's own choice to reveal it, the intimacy of the glade and the player's asking, the moment when trust becomes necessary"
       },
@@ -2502,8 +2632,13 @@
       {
         "thing": "Lira's explicit teaching—what she wants, how she likes to be touched, her insistence on presence over craft",
         "from": "Her character: a woman who values consent, specificity, and being fully known rather than read"
+      },
+      {
+        "thing": "Lira asks a question that cuts to the heart: 'Where did you go?'—she senses you have left the glade even though you are still lying beside…",
+        "from": "her consent-centered presence and attentiveness to who you actually are, not who she assumes you to be"
       }
-    ]
+    ],
+    "newsSpread": {}
   },
   "bio": null,
   "subAttributes": {
@@ -2618,8 +2753,8 @@
   "actionCount": 14,
   "grantsVersion": 1,
   "reconcileVersion": 30,
-  "updatedAt": 1786160011206,
-  "rev": 163,
+  "updatedAt": 1786160350779,
+  "rev": 166,
   "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
@@ -2745,7 +2880,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 34
+    "valley": 35
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -2769,10 +2904,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-08-08T02:36:57.078Z",
-      "lastAt": "2026-08-08T03:33:31.204Z",
+      "lastAt": "2026-08-08T03:39:10.777Z",
       "startDay": 39,
       "endDay": 39,
-      "beats": 14
+      "beats": 15
     }
   ],
   "establishedFacts": [
@@ -2801,19 +2936,18 @@
     "choices": 27,
     "scene": 27,
     "stateOps": 1,
-    "characterDeltas": 19,
-    "timeOps": 15,
+    "characterDeltas": 18,
+    "timeOps": 14,
     "sceneEnded": 14,
     "encounterOps": 4,
     "npcUpdates": 16,
     "generateRequest": 1,
-    "offer": 5,
+    "offer": 6,
     "placeUpdates": 1,
     "moveTo": 1,
-    "imagePrompt": 11,
-    "gambitApt": 11,
-    "codexUpdates": 5,
-    "_engineClosedScene": 1
+    "imagePrompt": 10,
+    "gambitApt": 10,
+    "codexUpdates": 5
   },
   "_opTurns": 27,
   "practice": {
@@ -2986,7 +3120,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 5,
+      "applied": 6,
       "rejected": 5,
       "lastWhy": "rejected-shape"
     }

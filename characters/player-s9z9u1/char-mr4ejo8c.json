@@ -5,8 +5,8 @@
   "name": "Cellaceron",
   "origin": "valley",
   "background": "craftsman",
-  "level": 11,
-  "xp": 1098,
+  "level": 12,
+  "xp": 1106,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -101,11 +101,11 @@
     "destruction_creation": 0.13585151875,
     "spectrumId": -0.4535944855217545
   },
-  "attunement": 11,
-  "maxHealth": 75,
-  "health": 75,
-  "maxEnergy": 166,
-  "energy": 64,
+  "attunement": 12,
+  "maxHealth": 80,
+  "health": 80,
+  "maxEnergy": 171,
+  "energy": 171,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1037,6 +1037,21 @@
       "spread": [],
       "day": 9,
       "worldDay": 39
+    },
+    {
+      "at": "2026-08-08T18:08:32.126Z",
+      "locationId": "disputed_zone_fringe",
+      "communityId": "valley.millbrook",
+      "description": "Descended into a pre-Transition secondary purification system and recovered knowledge of its true architecture—a collaboration-locked design requiring both civilizations to complete.",
+      "tags": [
+        "revelation",
+        "scholarship",
+        "courage"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 9,
+      "worldDay": 39
     }
   ],
   "relationships": {
@@ -1235,68 +1250,19 @@
         "player": "Discuss the plan with Aevi, Teva, and Sorel... you're going to ask Aevi to deliver the key but shift the purpose to a delayed activation. That will give time for the secondary system to be activated. Also, once Aevi delivers the key, it should be possible to fully understand the purpose, and at that point we can tweak the preparation instructions if needed.",
         "summary": "Inside the upstream pre-Transition structure, Cellaceron plans a delayed key delivery with Aevi, Teva, and Sorel—buying time to activate the Council's hidden secondary system before the preparation order propagates fully. The choice is now tactical, not moral: not whether to act, but what price each path costs.",
         "narration": "You lower yourself beside the Waystaff, breathing steady, and speak first to Aevi—quiet and direct. \"I need you to deliver the key. But not yet. Not the way it's set to arrive.\" The motes brighten slightly at the staff's heart, condensing into a near-shape that turns toward you. \"Can you hold the sequence? Slow the propagation down—give us time to activate the secondary system first, then authenticate?\"\n\nAevi hums a low, steady tone through the lattice. \"I can speak delay into the gate. The machinery will listen to me—it was built to. But slowing propagation means the order runs longer, touching more water, reaching further before it finishes. The scope grows.\" A pause. \"What you're asking is not whether the key arrives. It's *when* it arrives, and what the valley looks like while we wait.\"\n\nTeva, still at the threshold, shifts forward. Her hand moves to the place where the nanite mark sits beneath her ribs. \"The chamber checked me the whole time. Every four seconds. If the machinery is listening to Aevi like that—\" She stops, working through it. \"—then it's been listening to *everything* since it woke up. It knows you're here. It knows what you're choosing.\" There's no fear in her voice, just careful precision. \"Delaying the key means the preparation runs hotter. The secondary system has to be faster than the order itself.\"\n\nSorel's photonic reader drops to her side. She's been silent, watching the machinery's hum through the chamber walls. Now she meets your eyes. \"The Council built incomplete on purpose. They wanted a bottleneck—one moment where someone with access decides who survives. If you delay the key and activate the secondary system first, you're not breaking their plan. You're stealing their moment.\" Her voice is steady, almost clinical. \"That's strategically sound. It's also going to make us enemies the moment this ends.\"\n\nYou feel the weight of it settle. The machinery hums beneath the Waystaff, patient and vast. Aevi waits for your word. The secondary system sits incomplete in the stone below, ready to be found and finished. The window—measured in hours now, maybe less—is still open. But the shape of what comes after is sharper, colder, more real."
+      },
+      {
+        "player": "Use the Waystaff to descend into the secondary system immediately—map its full configuration and identify exactly what's needed to complete it before you activate the key.",
+        "summary": "Cellaceron descends into the pre-Transition secondary purification system and discovers its true nature: a collaboration-locked design requiring both Harmonic and Radiant power, completed only if the two civilizations work together. Aevi recognizes Verath-Sem's name carved at its heart and realizes it was sent to the wrong threshold. The bottleneck was deliberate.",
+        "narration": "You grip the Waystaff and descend.\n\nThe ramp spirals deeper than you anticipated—the four-second pulse becomes a thread you follow downward through the stone. Aevi's motes brighten at the staff's heart, casting steady light on walls that show no seams, no joints, no sign of ever having been assembled. These walls *grew*. You realize it as you pass through them: this is pre-Transition work, shaped by forces the valley's current civilizations don't possess.\n\nTwo levels below the hemispherical chamber, the secondary system resolves.\n\nIt is *incomplete*, yes—but not damaged. It was built to wait. The filtration matrices form a precise honeycomb of resonance chambers, each one tuned to a frequency that sits *between* Harmonic and Radiant power bands. Not borrowed from either civilization—something older, something that predates the division. The stone itself hums with the geometry. You move through it slowly, letting the Waystaff's light touch each surface, and Aevi's distributed presence reads the configuration as you go.\n\nThe gaps are deliberate. Three key chambers sit empty—waiting for components that were never installed. You can feel where they *should* be: nodes for photonic amplifiers (Radiant work), resonance nodes for harmonic steering (Harmonic work), and at the center, a binding chamber where both fields would meet and resolve into a single, unified current. Someone designed this system to require cooperation between the two civilizations. Someone built a bottleneck that could only be completed if Harmonic and Radiant *worked together*.\n\nBut there's more. At the secondary system's heart, you find a secondary *authentication gate*—smaller than the one above, but identical in purpose. And beside it, a ledger carved into the stone itself. You read the names with Prism Sight, following the light-history of hands that touched this stone: the names of the engineers who built this place, and beneath them, a single newer name carved in a hand that shakes: *Verath-Sem*.\n\nAevi goes very quiet. \"This is where I was sent,\" the motes whisper. \"This is where the key was meant to arrive *first*. The lower chamber—it was not the destination. It was a *waystation*. I was broken in transit, and I arrived at the wrong threshold.\"\n\n*You feel it settle into you — a new steadiness. (Level 12: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You lower yourself beside the Waystaff, breathing steady, and speak first to Aevi—quiet and direct. \"I need you to deliver the key. But not yet. Not the way it's set to arrive.\" The motes brighten slightly at the staff's heart, condensing into a near-shape that turns toward you. \"Can you hold the sequence? Slow the propagation down—give us time to activate the secondary system first, then authenticate?\"\n\nAevi hums a low, steady tone through the lattice. \"I can speak delay into the gate. The machinery will listen to me—it was built to. But slowing propagation means the order runs longer, touching more water, reaching further before it finishes. The scope grows.\" A pause. \"What you're asking is not whether the key arrives. It's *when* it arrives, and what the valley looks like while we wait.\"\n\nTeva, still at the threshold, shifts forward. Her hand moves to the place where the nanite mark sits beneath her ribs. \"The chamber checked me the whole time. Every four seconds. If the machinery is listening to Aevi like that—\" She stops, working through it. \"—then it's been listening to *everything* since it woke up. It knows you're here. It knows what you're choosing.\" There's no fear in her voice, just careful precision. \"Delaying the key means the preparation runs hotter. The secondary system has to be faster than the order itself.\"\n\nSorel's photonic reader drops to her side. She's been silent, watching the machinery's hum through the chamber walls. Now she meets your eyes. \"The Council built incomplete on purpose. They wanted a bottleneck—one moment where someone with access decides who survives. If you delay the key and activate the secondary system first, you're not breaking their plan. You're stealing their moment.\" Her voice is steady, almost clinical. \"That's strategically sound. It's also going to make us enemies the moment this ends.\"\n\nYou feel the weight of it settle. The machinery hums beneath the Waystaff, patient and vast. Aevi waits for your word. The secondary system sits incomplete in the stone below, ready to be found and finished. The window—measured in hours now, maybe less—is still open. But the shape of what comes after is sharper, colder, more real.",
-      "sceneSummary": "Inside the upstream pre-Transition structure, Cellaceron plans a delayed key delivery with Aevi, Teva, and Sorel—buying time to activate the Council's hidden secondary system before the preparation order propagates fully. The choice is now tactical, not moral: not whether to act, but what price each path costs.",
+      "narration": "You grip the Waystaff and descend.\n\nThe ramp spirals deeper than you anticipated—the four-second pulse becomes a thread you follow downward through the stone. Aevi's motes brighten at the staff's heart, casting steady light on walls that show no seams, no joints, no sign of ever having been assembled. These walls *grew*. You realize it as you pass through them: this is pre-Transition work, shaped by forces the valley's current civilizations don't possess.\n\nTwo levels below the hemispherical chamber, the secondary system resolves.\n\nIt is *incomplete*, yes—but not damaged. It was built to wait. The filtration matrices form a precise honeycomb of resonance chambers, each one tuned to a frequency that sits *between* Harmonic and Radiant power bands. Not borrowed from either civilization—something older, something that predates the division. The stone itself hums with the geometry. You move through it slowly, letting the Waystaff's light touch each surface, and Aevi's distributed presence reads the configuration as you go.\n\nThe gaps are deliberate. Three key chambers sit empty—waiting for components that were never installed. You can feel where they *should* be: nodes for photonic amplifiers (Radiant work), resonance nodes for harmonic steering (Harmonic work), and at the center, a binding chamber where both fields would meet and resolve into a single, unified current. Someone designed this system to require cooperation between the two civilizations. Someone built a bottleneck that could only be completed if Harmonic and Radiant *worked together*.\n\nBut there's more. At the secondary system's heart, you find a secondary *authentication gate*—smaller than the one above, but identical in purpose. And beside it, a ledger carved into the stone itself. You read the names with Prism Sight, following the light-history of hands that touched this stone: the names of the engineers who built this place, and beneath them, a single newer name carved in a hand that shakes: *Verath-Sem*.\n\nAevi goes very quiet. \"This is where I was sent,\" the motes whisper. \"This is where the key was meant to arrive *first*. The lower chamber—it was not the destination. It was a *waystation*. I was broken in transit, and I arrived at the wrong threshold.\"\n\n*You feel it settle into you — a new steadiness. (Level 12: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Cellaceron descends into the pre-Transition secondary purification system and discovers its true nature: a collaboration-locked design requiring both Harmonic and Radiant power, completed only if the two civilizations work together. Aevi recognizes Verath-Sem's name carved at its heart and realizes it was sent to the wrong threshold. The bottleneck was deliberate.",
       "choices": [
         {
-          "label": "Send Aevi to deliver the key now—but carry a message to the machinery about the delay. Ask it to wait for your signal before the propagation spreads.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "command",
-            "risky",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use the Waystaff to descend into the secondary system immediately—map its full configuration and identify exactly what's needed to complete it before you activate the key.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "very hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "scout",
-            "careful"
-          ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 5,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Hold Aevi and the key here while you and Teva climb out to reach the surface—contact the Millbrook elders and the Harmonic wardens directly. Bring them in before the machinery moves again.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "very hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "lead",
-            "rally",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Sorel to hold the secondary system's location and specifications—you'll take Aevi to authenticate immediately, then come back with the full machinery reading to complete the installation. Trust her to guard the knowledge.",
+          "label": "Speak plainly with Aevi about what this means—the key was meant to authenticate BOTH systems, and the Council was meant to complete the secondary one with Harmonic help. Ask Aevi if it's willing to authenticate here instead of above, forcing a choice on both civilizations.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
@@ -1304,9 +1270,56 @@
           "opposedDifficulty": null,
           "intentTags": [
             "negotiate",
-            "delegate",
-            "trust"
+            "plan"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read the stone ledger more carefully with Prism Sight—trace back *when* Verath-Sem carved that name, what happened before it, and what that hand knew about the Council's decision to hide the secondary system.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "reveal"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Move back toward the ramp and signal Sorel and Teva that you've found something critical—bring them down to see the secondary system and the ledger before you make any choice about authentication.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "lead",
+            "rally"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Freetext: Do something else.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
@@ -1314,10 +1327,21 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Descended into a pre-Transition secondary purification system and recovered knowledge of its true architecture—a collaboration-locked design requiring both civilizations to complete.",
+          "tags": [
+            "revelation",
+            "scholarship",
+            "courage"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -2,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -1328,46 +1352,41 @@
           "op": "progress",
           "questId": "what-the-water-remembers",
           "title": "What the Water Remembers",
-          "summary": "Cellaceron now understands the full machinery sequence and has devised a tactical plan: delay the key's propagation while activating the secondary system first, stealing the Council's bottleneck moment and remaking their survival calculus.",
+          "summary": "The secondary system is fully mapped—it requires both Harmonic and Radiant power to complete. Aevi's authentication key was meant to be delivered HERE, not above. The threshold split may have been deliberate or catastrophic.",
           "giver": "water_keeper",
-          "note": "The plan is set. The choice is now about timing and who bears witness.",
-          "xpReward": null
+          "note": "Cellaceron has discovered the secondary system's true structure and purpose. The choice now includes understanding what authentication at THIS threshold would demand of both civilizations.",
+          "xpReward": 0
         }
       ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
+      "adoptSchool": {},
+      "offer": {
+        "thing": "Verath-Sem's name carved into the stone—evidence that the secondary system's designer knew the Council's plan.",
+        "from": "The pre-Transition machinery itself, which honors those who shaped it; a clue embedded in the structure's own memory"
+      },
       "stageOps": [],
       "scene": {
-        "setting": "Inside the upstream pre-Transition hemispherical chamber—concentric stone walls resonating at four-second frequency, afternoon light filtering faintly from the entrance far above. The Waystaff is planted deep in the chamber floor, glowing steady. The ramp spirals downward into deeper machinery levels.",
+        "setting": "Two levels beneath the hemispherical chamber, inside the pre-Transition secondary purification system—a vast honeycomb of resonance chambers carved from living stone, tuned to frequencies between Harmonic and Radiant power bands. The Waystaff's light illuminates a network of incomplete systems and a stone ledger at the binding chamber's heart. Afternoon light does not reach here; the staff's glow is the only illumination.",
         "npcsPresent": [
           {
-            "name": "Sorel",
-            "state": "Standing at the threshold with her photonic reader lowered, watching the plan take shape. Her expression is steady, analytical, already calculating the Council's response."
-          },
-          {
-            "name": "Teva",
-            "state": "At the threshold, hand to her ribs where the nanite mark sits. Focused, precise, thinking through the machinery's perspective and what delay means to the preparation order's spread."
-          },
-          {
             "name": "Aevi",
-            "state": "Distributed through the Waystaff's lattice, motes condensed into a near-shape at the staff's heart. Present in the instrument, awaiting Cellaceron's word. Ready to deliver or to hold."
+            "state": "Distributed through the Waystaff's lattice, motes condensed and very still at the staff's heart. Has gone quiet after recognizing Verath-Sem's name—processing the revelation that it was sent to the wrong threshold."
           }
         ],
         "objects": [
-          "The Waystaff—planted deep in the floor, lattice head glowing, three full-bright resonance crystals and one shallow-loaded, four-second pulse steady",
-          "Sorel's photonic reader—held at her side, still measuring the chamber's light-history",
-          "The hemispherical chamber walls—concentric rings, every seam resonating at the four-second frequency",
-          "The machinery beneath—audible, patient, listening, waiting for the authentication sequence"
+          "The Waystaff—planted steady in Cellaceron's grip, casting steady light, motes condensed at its heart",
+          "The secondary system's honeycomb filtration matrices—vast, intricate, three key chambers sitting visibly empty",
+          "The binding chamber—at the system's heart, empty of components",
+          "A secondary authentication gate—smaller than the one above, but identical in purpose",
+          "The stone ledger—carved names of pre-Transition engineers and a newer, shaking hand that carved Verath-Sem's name"
         ],
         "threads": [
-          "Aevi is ready to deliver the key, but the timing is open to negotiation",
-          "The secondary system is incomplete but located—waiting to be activated",
-          "Hours remain before the preparation order completes its full propagation",
-          "The Council's hidden agenda is now visible: they built a bottleneck, not a salvation system",
-          "Four people now stand at the decision point: Cellaceron, Aevi, Teva, and Sorel"
+          "What does Verath-Sem's name carved here mean—did the designer know the Council's plan?",
+          "When was that name carved—before or after the secondary system was abandoned incomplete?",
+          "Will Aevi choose to authenticate here instead of above, forcing both civilizations to act together?",
+          "What happens to Aevi after authentication at either threshold?"
         ]
       },
       "npcUpdates": [
@@ -1376,55 +1395,83 @@
           "npcId": "aevi",
           "name": "Aevi",
           "role": "Companion intelligence—authentication key, integrated into the Waystaff",
-          "note": "Aevi has named plainly that it can hold the authentication sequence and delay propagation, but that delay extends the preparation order's reach and changes the scope of the watershed's transformation. It is ready to deliver when Cellaceron chooses.",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Recognized Verath-Sem's name carved into the stone at the secondary system's heart. Has gone very quiet, processing the realization that it was sent to the wrong threshold—the lower chamber was a waystation, not the destination. The key was meant to authenticate here, forcing a choice on both civilizations.",
           "learned": [
-            "Aevi can speak delay into the gate—the machinery was built to listen to it",
-            "Delaying propagation means the order runs longer and touches more water",
-            "The machinery has been listening to everything since it woke, aware of every choice made here"
+            "This secondary system was the true destination—not the lower chamber",
+            "The lower chamber was a waystation meant to preserve a broken record",
+            "Verath-Sem left evidence here, carved into stone—a name at the binding chamber's heart"
           ],
-          "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; ready to deliver or hold on Cellaceron's word; awaits the final choice"
-        },
-        {
-          "op": "update",
-          "npcId": "sorel",
-          "name": "Sorel",
-          "role": "Radiant water-accountability archivist—witness and steward of the Council's hidden timeline",
-          "note": "Sorel has articulated the true stakes of the plan: delaying the key and activating the secondary system first means stealing the Council's moment and remaking their survival calculus. She understands this will make the party enemies of the Radiant leadership, and she is still here.",
-          "learned": [
-            "The Council built the secondary system incomplete on purpose, creating a bottleneck at the moment of authentication",
-            "Activating the secondary system before the key propagates means taking control of who survives and who doesn't",
-            "This choice will create enemies inside the Radiant Council's leadership"
-          ],
-          "statusNote": "Inside the upstream structure at the threshold; carrying the Council's hidden timeline; committed to transparency; present at the moment of decision"
-        },
-        {
-          "op": "update",
-          "npcId": "teva-anselvar",
-          "name": "Teva",
-          "role": "Apprentice acoustic geometry specialist, traveling with Cellaceron",
-          "note": "Teva has named plainly that the machinery has been listening the whole time, aware of every presence and choice. She has recognized that delaying the key means the secondary system must be faster than the preparation order itself—she is thinking in operational terms about the mechanics of the crisis.",
-          "learned": [
-            "The chamber and the machinery are in constant awareness—they have been listening the whole time",
-            "The nanite mark in Teva's tissue is part of that awareness—she is a living sensor to the machinery's state",
-            "Delaying propagation means the secondary system has to be faster and more complete than the preparation order's spread"
-          ],
-          "statusNote": "At the threshold inside the upstream structure; present and engaged in the planning; the nanite mark in her tissue still holds the chamber's four-second frequency"
+          "relationshipDelta": 0,
+          "statusNote": "Integrated into the Waystaff's lattice; present in the secondary system's binding chamber; processing the implications of being sent to the wrong threshold; ready to speak on authentication but newly uncertain about the path forward"
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The secondary purification system was deliberately designed as a collaboration-lock—three empty chambers require both Harmonic and Radiant components to complete it. Whoever designed it built bottleneck into the system itself, making cooperation between the two civilizations the only path to completion.",
+          "subjectId": null
+        },
+        {
+          "op": "add",
+          "text": "Verath-Sem's name is carved into the stone at the secondary system's binding chamber—evidence that the system's designer knew about the secondary system and may have known about the Council's plan to hide it.",
+          "subjectId": null
+        },
+        {
+          "op": "add",
+          "text": "Aevi was meant to be sent to the secondary system's authentication gate, not the lower chamber. The lower chamber was a waystation built to preserve Aevi's broken record. The threshold-split may have been deliberate sabotage or catastrophic error.",
+          "subjectId": null
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Secondary purification system mapped and confirmed—vast honeycomb of resonance chambers carved from living stone, incomplete but deliberately designed to wait. Stone ledger at binding chamber's heart bears names of pre-Transition engineers and a newer carving of Verath-Sem's name.",
+          "subPlace": {
+            "name": "The Secondary System's Binding Chamber",
+            "parent": "Disputed Zone—Fringe / Upstream Pre-Transition Structure",
+            "note": "Two levels beneath the hemispherical chamber—a convergence point where both Harmonic and Radiant power would need to meet. Empty of components but fully designed, with a secondary authentication gate and a stone ledger bearing Verath-Sem's name.",
+            "visited": true
+          }
+        }
+      ],
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "what-the-water-remembers",
-          "label": "What the Water Remembers",
-          "kind": "event",
-          "fact": "The Council's secondary purification system is incomplete and cannot be activated without the main authentication gate closing first. Cellaceron has devised a plan to delay the key's propagation, activate the secondary system ahead of the preparation order, and steal the Council's bottleneck moment—remaking who survives the watershed transformation.",
+          "topic": "the-secondary-system",
+          "label": "The Council's Hidden Secondary System",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "A pre-Transition purification system buried two levels beneath the upstream structure, deliberately designed to require both Harmonic and Radiant engineering to complete. Three key chambers sit empty, waiting for components that would bind the two civilizations' power fields into a unified current. The system was built as a collaboration-lock—cooperation was the only path forward. The design predates the Council's decision to hide it.",
           "links": [
-            "second-river-rising",
-            "the-chamber-beyond-the-threshold",
-            "sorel",
-            "aevi"
+            "what-the-water-remembers",
+            "verath-sem",
+            "the-preparation-order"
+          ]
+        },
+        {
+          "topic": "verath-sem",
+          "label": "Verath-Sem",
+          "kind": "person",
+          "entityId": null,
+          "fact": "Named by Aevi as its maker—the one who authored the authentication key. Also carved into the stone ledger at the secondary system's binding chamber, evidence of direct involvement with the secondary system's design or abandonment. Unknown whether Verath-Sem knew the Council's plan to hide the secondary system, or whether the carving is a warning, a signature, or something else.",
+          "links": [
+            "aevi",
+            "the-secondary-system",
+            "the-preparation-order"
+          ]
+        },
+        {
+          "topic": "the-preparation-order",
+          "label": "The Preparation Order",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "A pre-Transition standing instruction that will transform the valley's watershed through nanite propagation. Authentication via Aevi's key will trigger cascade through the entire stone lattice, waking dormant nanite substrate and remaking the water. The secondary system exists to filter and process the transformed water—but it requires both Harmonic and Radiant completion. The preparation order was never meant to be a unilateral Council action.",
+          "links": [
+            "aevi",
+            "the-secondary-system",
+            "what-the-water-remembers",
+            "sorel"
           ]
         }
       ],
@@ -1436,54 +1483,52 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "routine planning conversation in the chamber"
+        "hoursPassed": 1,
+        "why": "descent and mapping of the secondary system"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "Deep underground, stone walls carved with honeycomb precision glow in the steady light of the Waystaff. The Waystaff's crystal lattice pulses at four-second intervals, casting moving shadows across a vast binding chamber at the system's heart. Three empty chambers yawn open, waiting. Behind them, a ledger is carved into living stone—rows of pre-Transition names in clean script, and below them, a newer carving in a shaking hand: Verath-Sem. Aevi's motes have condensed at the staff's heart, very still.",
+      "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the upstream pre-Transition hemispherical chamber—concentric stone walls resonating at four-second frequency, afternoon light filtering faintly from the entrance far above. The Waystaff is planted deep in the chamber floor, glowing steady. The ramp spirals downward into deeper machinery levels.",
+      "setting": "Two levels beneath the hemispherical chamber, inside the pre-Transition secondary purification system—a vast honeycomb of resonance chambers carved from living stone, tuned to frequencies between Harmonic and Radiant power bands. The Waystaff's light illuminates a network of incomplete systems and a stone ledger at the binding chamber's heart. Afternoon light does not reach here; the staff's…",
       "npcsPresent": [
         {
-          "name": "Sorel",
-          "state": "Standing at the threshold with her photonic reader lowered, watching the plan take shape. Her expression is steady, anal"
-        },
-        {
-          "name": "Teva",
-          "state": "At the threshold, hand to her ribs where the nanite mark sits. Focused, precise, thinking through the machinery's perspe"
-        },
-        {
           "name": "Aevi",
-          "state": "Distributed through the Waystaff's lattice, motes condensed into a near-shape at the staff's heart. Present in the instr"
+          "state": "Distributed through the Waystaff's lattice, motes condensed and very still at the staff's heart. Has gone quiet after re"
         }
       ],
       "objects": [
-        "The Waystaff—planted deep in the floor, lattice head glowing, three full-bright ",
-        "Sorel's photonic reader—held at her side, still measuring the chamber's light-hi",
-        "The hemispherical chamber walls—concentric rings, every seam resonating at the f",
-        "The machinery beneath—audible, patient, listening, waiting for the authenticatio"
+        "The Waystaff—planted steady in Cellaceron's grip, casting steady light, motes co",
+        "The secondary system's honeycomb filtration matrices—vast, intricate, three key ",
+        "The binding chamber—at the system's heart, empty of components",
+        "A secondary authentication gate—smaller than the one above, but identical in pur",
+        "The stone ledger—carved names of pre-Transition engineers and a newer, shaking h"
       ],
       "threads": [
-        "Aevi is ready to deliver the key, but the timing is open to negotiation",
-        "The secondary system is incomplete but located—waiting to be activated",
-        "Hours remain before the preparation order completes its full propagation",
-        "The Council's hidden agenda is now visible: they built a bottleneck, not a salvation system",
-        "Four people now stand at the decision point: Cellaceron, Aevi, Teva, and Sorel"
+        "What does Verath-Sem's name carved here mean—did the designer know the Council's plan?",
+        "When was that name carved—before or after the secondary system was abandoned incomplete?",
+        "Will Aevi choose to authenticate here instead of above, forcing both civilizations to act together?",
+        "What happens to Aevi after authentication at either threshold?"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [
@@ -1765,14 +1810,14 @@
         "s4"
       ],
       "progress": [
-        "Crossed the shimmer. Machinery running at full cycle. Hours remain, possibly less. Aevi carries the authentication key. Sorel carries the Council's hidden timeline. The decision cannot wait.",
         "At the structure itself. The mechanism is read. The gate is confirmed. The authentication key stands at the threshold. The decision point is NOW.",
         "At the upstream structure. Sorel names the Council's secondary system as incomplete post-filtration. Aevi names arrival—not erasure—as its purpose. The choice is now concrete.",
         "Inside the upstream chamber. The gate is built into the cycle itself—it will stop on command from Aevi alone. The decision is now concrete and unavoidable.",
         "Inside the upstream structure, Prism Sight at surge intensity reveals the chamber as a listener designed for transformation, not destruction. Authentication activates propagation. The moment to decide is NOW.",
         "The choice is fully visible now: deliver the key and activate both systems, or refuse and resist the preparation. Either path forecloses something. The decision point is imminent.",
         "The Council's secondary system is incomplete and will not finish in time. One system will succeed; the other will fail. The player now stands at the decision point.",
-        "The plan is set. The choice is now about timing and who bears witness."
+        "The plan is set. The choice is now about timing and who bears witness.",
+        "Cellaceron has discovered the secondary system's true structure and purpose. The choice now includes understanding what authentication at THIS threshold would demand of both civilizations."
       ],
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
@@ -2007,7 +2052,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] At the ravine edge, Aevi named the cost of being the authentication key plainly: arrival, not survival. The break in its record begins after the circuit closes—what happens to it when the structure receives the key is not in its memory. The swarm hums low when speaking of it, a resonance that…",
         "[d9] Motes flared bright crossing the shimmer, then clamped to nothing as the field passed through—a moment of resistance, then passage. Now brightened and condensed at your shoulder, speaking plainly about the choice ahead. The swarm trembled but held.",
         "[d9] Standing at the threshold of its own choice. The motes are dimmed and still, waiting. Aevi has named plainly that it does not know what comes after arrival, and that it was made to be the key, not to survive the using.",
         "[d9] At the upstream structure, Aevi spoke its deepest want: to know what it was supposed to carry (the break severed that knowledge), and to understand that arrival is completion, not erasure. It has named plainly that it was made to close the circuit—and closing it is what it *is*.",
@@ -2016,17 +2060,18 @@
         "[d9] Aevi's motes have integrated into the Waystaff's lattice structure—no longer a separate presence but part of the living instrument itself. Present through the staff, speaking through its geometry. Waiting for Cellaceron's choice.",
         "[d9] Motes integrated and distributed through the Waystaff's lattice structure. Present in the staff, no longer a separate presence. Watching the machinery's sequence be read. The authentication gate waits. Aevi's own moment is approaching.",
         "[d9] Integrated into the Waystaff's lattice; carries the authentication key; ready to deliver or refuse; does not know what comes after authentication; awaits Cellaceron's choice with the presence of something that understands its own ending.",
-        "[d9] Aevi has named plainly that it can hold the authentication sequence and delay propagation, but that delay extends the preparation order's reach and changes the scope of the watershed's transformation. It is ready to deliver when Cellaceron chooses."
+        "[d9] Aevi has named plainly that it can hold the authentication sequence and delay propagation, but that delay extends the preparation order's reach and changes the scope of the watershed's transformation. It is ready to deliver when Cellaceron chooses.",
+        "[d9] Recognized Verath-Sem's name carved into the stone at the secondary system's heart. Has gone very quiet, processing the realization that it was sent to the wrong threshold—the lower chamber was a waystation, not the destination. The key was meant to authenticate here, forcing a choice on both…"
       ],
       "knownFacts": [
-        "Aevi does not have a memory of what comes after the structure receives it.",
-        "Aevi wants to arrive and complete its purpose, even knowing that completion may be the end of its continued existence",
-        "Aevi does not experience delivery as erasure—it experiences it as a completion of its nature",
         "The break in Aevi's record took away its knowledge of what it carries, but not its purpose",
         "Aevi knows now that delivery of the key is imminent—the machinery's sequence is read, the choice is clear, the moment is at hand",
         "Aevi can speak delay into the gate—the machinery was built to listen to it",
         "Delaying propagation means the order runs longer and touches more water",
-        "The machinery has been listening to everything since it woke, aware of every choice made here"
+        "The machinery has been listening to everything since it woke, aware of every choice made here",
+        "This secondary system was the true destination—not the lower chamber",
+        "The lower chamber was a waystation meant to preserve a broken record",
+        "Verath-Sem left evidence here, carved into stone—a name at the binding chamber's heart"
       ],
       "skillsObserved": [
         "pressure-direction read through gathered field — distinguish",
@@ -2041,7 +2086,7 @@
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; ready to deliver or hold on Cellaceron's word; awaits the final choice",
+      "statusNote": "Integrated into the Waystaff's lattice; present in the secondary system's binding chamber; processing the implications of being sent to the wrong threshold; ready to speak on authentication but newly uncertain about the path forward",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -2049,7 +2094,7 @@
       "domainsSource": "observed",
       "gender": "nonbinary",
       "pronouns": "they/them",
-      "met": 4
+      "met": 5
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -2497,7 +2542,8 @@
       "visits": 2,
       "notes": [
         "[d9] The upstream mound confirmed: hemispherical dressed-stone structure with four-second resonant interval throughout its geometry. Machinery running at full preparation cycle. Authentication gate built into the cycle itself—will stop on command from the key.",
-        "[d9] Interior mapped: hemispherical chamber with concentric stone walls, all seams resonating at four-second frequency. Entrance at base, ramp spiraling downward to deeper machinery level. Chamber designed as a precise receiving mechanism for a specific signal."
+        "[d9] Interior mapped: hemispherical chamber with concentric stone walls, all seams resonating at four-second frequency. Entrance at base, ramp spiraling downward to deeper machinery level. Chamber designed as a precise receiving mechanism for a specific signal.",
+        "[d9] Secondary purification system mapped and confirmed—vast honeycomb of resonance chambers carved from living stone, incomplete but deliberately designed to wait. Stone ledger at binding chamber's heart bears names of pre-Transition engineers and a newer carving of Verath-Sem's name."
       ],
       "flags": {},
       "subPlaces": {
@@ -2514,6 +2560,14 @@
           "day": 9,
           "visited": true,
           "note": "Interior of the pre-Transition structure: concentric walls, four-second resonance throughout, ramp spiraling into deeper machinery levels."
+        },
+        "the-secondary-system-s-binding-chamber": {
+          "name": "The Secondary System's Binding Chamber",
+          "parentId": "disputed_zone_fringe",
+          "day": 9,
+          "visited": true,
+          "note": "Two levels beneath the hemispherical chamber—a convergence point where both Harmonic and Radiant power would need to meet. Empty of components but fully designed, with a secondary authentication…",
+          "parentUnresolved": "Disputed Zone—Fringe / Upstream Pre-Transition Structure"
         }
       },
       "lastVisit": 9,
@@ -2667,7 +2721,7 @@
     "lastTickWorldDay": 39,
     "lastCanonWorldDay": 39,
     "lastGenCount": 953,
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 0,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -2702,10 +2756,6 @@
     },
     "recentOffers": [
       {
-        "thing": "Sorel — the Radiant archivist, now a party member and full witness",
-        "from": "Cellaceron's direct naming of the choice and the stakes; Sorel's own assessment that solitude was always going to be a problem"
-      },
-      {
         "thing": "Sorel's knowledge of the Council's secondary system — where it's being built, whether it's complete, whether the materials or plans travel…",
         "from": "Sorel's need to move from holding a dangerous secret alone to being part of a group that already knows more than she does — she chose you…"
       },
@@ -2720,6 +2770,10 @@
       {
         "thing": "Aevi's plain naming of the stakes—it is the key, its use completes the preparation, and the break in the record remains unknown.",
         "from": "The chamber's own confirmation at the convergence point, now brought to full voice at the ravine edge where choice becomes immediate."
+      },
+      {
+        "thing": "Verath-Sem's name carved into the stone—evidence that the secondary system's designer knew the Council's plan.",
+        "from": "The pre-Transition machinery itself, which honors those who shaped it; a clue embedded in the structure's own memory"
       }
     ],
     "latentArcs": {
@@ -5165,8 +5219,8 @@
     "craft": 5,
     "wits": 5
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 1,
+  "pendingSubPoints": 1,
+  "skillPoints": 3,
   "discoveries": [
     {
       "key": "prism_sight+sonic_resonance:resonant-sight",
@@ -5729,13 +5783,15 @@
         "label": "Verath-Sem",
         "kind": "person",
         "facts": [
-          "[d9] Day 9 dawn: named by Aevi as its maker. Authored the authentication key Aevi was carrying when sent. The lower chamber's geometry recognized the name independently. Whether Verath-Sem chose to break the record in transit is unknown — that part is not in what the room held."
+          "[d9] Day 9 dawn: named by Aevi as its maker. Authored the authentication key Aevi was carrying when sent. The lower chamber's geometry recognized the name independently. Whether Verath-Sem chose to break the record in transit is unknown — that part is not in what the room held.",
+          "[d9] Named by Aevi as its maker—the one who authored the authentication key. Also carved into the stone ledger at the secondary system's binding chamber, evidence of direct involvement with the secondary system's design or abandonment. Unknown whether Verath-Sem knew the Council's plan to hide the…"
         ],
         "links": [
           "aevi",
           "the-lower-chamber",
           "the-preparation-order",
-          "second-river-rising"
+          "second-river-rising",
+          "the-secondary-system"
         ],
         "aliases": [],
         "createdDay": 9,
@@ -5752,7 +5808,8 @@
           "[d9] A pre-Transition nanite reclamation system, still active, still executing a standing instruction: 'prepare the watershed.' Located beneath a regular mound on the northeast-by-east bearing from the lower chamber, approximately two leagues upstream. The Council's water-accountability office was…",
           "[d9] The preparation cycle is accelerating beyond the Council's three-day estimate. The timeline is collapsing. Two days remain, possibly less.",
           "[d9] The pre-Transition machinery beneath the upstream structure executes a standing instruction in cascade: authentication (via Aevi's key) triggers propagation through the watershed's entire stone lattice, remaking the water into something the current Harmonic and Radiant filtration systems cannot…",
-          "[d9] The pre-Transition reclamation system beneath the upstream structure executes a standing instruction in cascade: authentication via Aevi's key triggers propagation through the watershed's entire stone lattice. The nanite substrate dormant since the Transition will wake. The old instruction will…"
+          "[d9] The pre-Transition reclamation system beneath the upstream structure executes a standing instruction in cascade: authentication via Aevi's key triggers propagation through the watershed's entire stone lattice. The nanite substrate dormant since the Transition will wake. The old instruction will…",
+          "[d9] A pre-Transition standing instruction that will transform the valley's watershed through nanite propagation. Authentication via Aevi's key will trigger cascade through the entire stone lattice, waking dormant nanite substrate and remaking the water. The secondary system exists to filter and…"
         ],
         "links": [
           "aevi",
@@ -6200,14 +6257,18 @@
         "label": "The Council's Secondary Purification System",
         "kind": "mystery",
         "facts": [
-          "[d9] The Radiant Council built a hidden secondary purification system designed to treat water remade by the preparation order. It is buried two levels below the upstream structure, threaded with filtration matrices that don't match current Harmonic or Radiant designs. It is incomplete—crystal nodes sit…"
+          "[d9] The Radiant Council built a hidden secondary purification system designed to treat water remade by the preparation order. It is buried two levels below the upstream structure, threaded with filtration matrices that don't match current Harmonic or Radiant designs. It is incomplete—crystal nodes sit…",
+          "[d9] A pre-Transition purification system buried two levels beneath the upstream structure, deliberately designed to require both Harmonic and Radiant engineering to complete. Three key chambers sit empty, waiting for components that would bind the two civilizations' power fields into a unified…"
         ],
         "links": [
           "the-preparation-order",
           "sorel",
-          "what-the-water-remembers"
+          "what-the-water-remembers",
+          "verath-sem"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Council's Hidden Secondary System"
+        ],
         "createdDay": 9,
         "updatedDay": 9
       },
@@ -6347,7 +6408,7 @@
     "uses": {
       "prism_sight": 17,
       "keen_appraisal": 14,
-      "sonic_resonance": 27,
+      "sonic_resonance": 28,
       "motes-vigil": 5,
       "light_well": 3,
       "greenlore": 4,
@@ -6602,6 +6663,24 @@
       "text": "The party has crossed the shimmer into the Disputed Zone and stands at the upstream pre-Transition structure. The machinery is running at full preparation cycle. Hours remain before the order completes. The choice between delivering the authentication key (Aevi) or refusing it is now immediate and…",
       "day": 9,
       "subjectId": "what-the-water-remembers"
+    },
+    {
+      "id": "f38",
+      "text": "The secondary purification system was deliberately designed as a collaboration-lock—three empty chambers require both Harmonic and Radiant components to complete it. Whoever designed it built bottleneck into the system itself, making cooperation between the two civilizations the only path to…",
+      "day": 9,
+      "subjectId": null
+    },
+    {
+      "id": "f39",
+      "text": "Verath-Sem's name is carved into the stone at the secondary system's binding chamber—evidence that the system's designer knew about the secondary system and may have known about the Council's plan to hide it.",
+      "day": 9,
+      "subjectId": null
+    },
+    {
+      "id": "f40",
+      "text": "Aevi was meant to be sent to the secondary system's authentication gate, not the lower chamber. The lower chamber was a waystation built to preserve Aevi's broken record. The threshold-split may have been deliberate sabotage or catastrophic error.",
+      "day": 9,
+      "subjectId": null
     }
   ],
   "sharedSceneId": null,
@@ -6609,18 +6688,18 @@
   "customEncounters": {},
   "reconcileVersion": 30,
   "tendencies": {
-    "cerebral": 29.619218295529357,
-    "strategic": 21.15384014270845,
-    "cautious": 23.28245983889526,
-    "social": 13.334580588355728,
-    "generous": 3.599828913510581,
-    "risky": 1.9232821283187809,
-    "carousing": 0.35341590159964603,
-    "patient": 2.1283049048182296,
-    "craft": 0.35308638171438367,
-    "devotion": 1.703873042115922,
-    "deception": 0.6669201684248254,
-    "leadership": 2.1060397169544975
+    "cerebral": 29.878737838141124,
+    "strategic": 21.62499413914074,
+    "cautious": 23.700398342922878,
+    "social": 13.001216073646834,
+    "generous": 3.509833190672816,
+    "risky": 1.8752000751108113,
+    "carousing": 0.34458050405965485,
+    "patient": 2.075097282197774,
+    "craft": 0.34425922217152405,
+    "devotion": 1.661276216063024,
+    "deception": 0.6502471642142047,
+    "leadership": 2.053388724030635
   },
   "aptitudes": [
     "strategist",
@@ -6630,9 +6709,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 250,
-  "updatedAt": 1786212275919,
-  "rev": 176,
+  "actionCount": 251,
+  "updatedAt": 1786212512131,
+  "rev": 177,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6906,7 +6985,7 @@
   "syncedAt": 1785586396787,
   "teachers": {},
   "regionsKnown": {
-    "valley": 73
+    "valley": 74
   },
   "company": [],
   "foreclosed": [],
@@ -7179,10 +7258,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-08T17:44:14.261Z",
-      "lastAt": "2026-08-08T18:04:35.915Z",
+      "lastAt": "2026-08-08T18:08:32.125Z",
       "startDay": 39,
       "endDay": 39,
-      "beats": 4
+      "beats": 5
     }
   ],
   "_pendingArrival": null,
@@ -7257,31 +7336,31 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 61,
-    "choices": 61,
-    "characterDeltas": 43,
-    "scene": 61,
-    "npcUpdates": 56,
-    "codexUpdates": 54,
-    "timeOps": 54,
-    "sceneEnded": 38,
-    "placeUpdates": 27,
+    "sceneSummary": 62,
+    "choices": 62,
+    "characterDeltas": 44,
+    "scene": 62,
+    "npcUpdates": 57,
+    "codexUpdates": 55,
+    "timeOps": 55,
+    "sceneEnded": 39,
+    "placeUpdates": 28,
     "moveTo": 3,
-    "questUpdates": 37,
+    "questUpdates": 38,
     "stateOps": 1,
-    "factUpdates": 10,
+    "factUpdates": 11,
     "stageOps": 7,
     "scene_ended": 1,
-    "imagePrompt": 16,
+    "imagePrompt": 17,
     "generateRequest": 3,
-    "deeds": 9,
+    "deeds": 10,
     "ledgerEvents": 4,
-    "offer": 8,
-    "gambitApt": 18,
+    "offer": 9,
+    "gambitApt": 19,
     "standingOps": 4,
     "itemUpdates": 2
   },
-  "_opTurns": 61,
+  "_opTurns": 62,
   "_intentAsked": null,
   "corrections": [
     {
@@ -7308,7 +7387,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 9,
+      "applied": 10,
       "rejected": 0,
       "lastWhy": null
     }
@@ -7411,6 +7490,11 @@
         "text": "Read the upstream pre-Transition structure's machinery sequence at full understanding—named the true cost of the preparation order and the existence of a hidden secondary system meant to respond to…",
         "weight": 2,
         "day": 9
+      },
+      {
+        "text": "Descended into a pre-Transition secondary purification system and recovered knowledge of its true architecture—a collaboration-locked design requiring both civilizations to complete.",
+        "weight": 2,
+        "day": 9
       }
     ]
   },
@@ -7439,10 +7523,10 @@
   "holdings": [],
   "portraitPinned": true,
   "skillUses": {
-    "study": 3,
+    "study": 4,
     "prepare": 1,
-    "careful": 1,
-    "scout": 1,
+    "careful": 2,
+    "scout": 2,
     "risky": 1,
     "plan": 1,
     "negotiate": 1
@@ -7457,6 +7541,22 @@
       "day": 9,
       "worldDay": 39,
       "actionCount": 248
+    },
+    {
+      "companionId": "aevi",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 9,
+      "worldDay": 39,
+      "actionCount": 250
+    },
+    {
+      "companionId": "aevi",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 9,
+      "worldDay": 39,
+      "actionCount": 250
     }
   ]
 }

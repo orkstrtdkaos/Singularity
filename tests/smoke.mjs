@@ -10743,6 +10743,27 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-350 — TWO LIVE STRINGS, AND THE INVENTORY BEHIND THEM.
+  //
+  // Both skill-wheel screens said "Tap a node to learn or deepen it here" while the function beneath them
+  // documents the deepen affordance as gone (SNG-349). The game was lying on two screens.
+  {
+    const appSrc350 = readFileSync(join(root, "app.js"), "utf8");
+    check("350: no screen still offers to DEEPEN a craft by tapping — depth is earned by use",
+      !/learn or deepen it here/.test(appSrc350));
+    check("350: …and both replacements say where depth actually comes from",
+      (appSrc350.match(/depth is earned by USE, never bought/g) || []).length === 2);
+
+    // ⚠️ THE INVENTORY IS A REPORT, NOT A GATE, AND THAT IS AEVI'S CALL: "Count it, author nothing. The
+    // copy half is mine." A gate here would make ME the arbiter of what counts as content, which is
+    // precisely the half she reserved. What IS gated is that the tool exists and stays honest about being
+    // a heuristic — a scope, not a work order.
+    const invSrc = readFileSync(join(root, "tests/copy_coupling.mjs"), "utf8");
+    check("350: the coupling inventory exists and applies AEVI'S test, not a tone judgement",
+      /Could this string become FALSE if a value or rule/.test(invSrc));
+    check("350: …and states plainly that it authors nothing", /Count it, author nothing/.test(invSrc));
+  }
+
   // SNG-363 — CROSS-CHARACTER NEWS HAD NO DISTANCE AND NO SIGNIFICANCE GATE. Erik: "Why is Silas hearing
   // about something Splarf did? It's not huge news and they're far apart."
   //

@@ -2400,7 +2400,9 @@
    ],
    "plainly": "A social/fight action that stops a move already underway. Rated 6 of 10 on one target for about two hours. Limit: reactive only — it cannot open an exchange.",
    "backlash": "You name a flaw that was not there. The position stands, you are publicly wrong, and everyone who heard it now discounts the next true thing you say.",
-   "conserveSuppresses": "you object rather than dismantle — no public exposure if you are mistaken"
+   "conserveSuppresses": "you object rather than dismantle — no public exposure if you are mistaken",
+   "backlashRungNone": "the failure is REPUTATIONAL — you are publicly wrong and discounted. No body is touched.",
+   "_backlashRungNote": "SNG-359: DELIBERATELY NO RUNG — declared, not omitted. the failure is REPUTATIONAL — you are publicly wrong and discounted. No body is touched. ⚠️ A gate should assert this list is DECLARED rather than empty, the same way runtime_unwired works."
   },
   {
    "id": "the_carried_name",

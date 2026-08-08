@@ -21,6 +21,17 @@ import { fileURLToPath } from "url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const app = readFileSync(join(root, "app.js"), "utf8");
 
+// ⛔ THE CALL TEST MUST READ CODE, NOT COMMENTARY. This file had no comment stripping at all, so a symbol
+// merely NAMED in a comment — "`formOf()` never returns falsy" — was reported as an unimported call.
+// The tool built to catch silent breakage was itself flagging the note that EXPLAINS a breakage, which is
+// the copy-inventory mistake a second time. Line comments, trailing comments, and block comments all go.
+const LF = String.fromCharCode(10);   // no escape in this file survives the tooling intact
+const code = app.split(LF)
+  .filter(l => { const t = l.trim(); return !(t.startsWith("//") || t.startsWith("*") || t.startsWith("/*")); })
+  .map(l => { const i = l.search(/(^|[^:"'`])\/\//); return i === -1 ? l : l.slice(0, i); })
+  .join(LF)
+  .replace(/\/\*[\s\S]*?\*\//g, " ");
+
 let failures = 0;
 const check = (name, ok, detail = "") => {
   console.log(`${ok ? "ok  " : "FAIL"}  ${name}${ok || !detail ? "" : " — " + detail}`);
@@ -58,7 +69,11 @@ for (const f of readdirSync(join(root, "engine")).filter(x => x.endsWith(".js"))
     if (allImported.has(sym) || declaredLocally.has(sym)) continue;
     // Called as a bare function, not as `something.sym(` — a property access is a different symbol.
     const called = new RegExp("(^|[^.\\w$])" + escapeRe(sym) + "\\s*\\(", "m");
-    if (called.test(app)) problems.push(`${mod}.js :: ${sym}`);
+    // ⛔ TEST THE STRIPPED SOURCE, NOT THE RAW FILE. This built `code` with comments removed and then
+    // tested `app` — so a symbol merely NAMED in a comment ("`formOf()` never returns falsy") was reported
+    // as an unimported call. A checker that flags the note explaining a defect is the copy-inventory
+    // mistake again, inside the tool built to catch this very class.
+    if (called.test(code)) problems.push(`${mod}.js :: ${sym}`);
   }
 }
 

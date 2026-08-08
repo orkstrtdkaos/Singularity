@@ -88,7 +88,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.71";
+const APP_VERSION = "1.9.72";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -943,6 +943,17 @@ function ensureTestCharacter() {
   character = c;
   saveCharacter(character);
   return character;
+}
+
+/** SNG-367 — an NPC's people, resolved to their tradition's authored LOOK. The `people` layer was
+ *  authored for 26 traditions and had no reader; this is the reader. Returns null when the person has no
+ *  affiliation, which is correct — a stranger with no people should not borrow one's face. */
+function npcAesthetic(npc) {
+  // ⚠️ `people` IS THE FIELD AFFILIATION ACTUALLY WRITES (affiliationOf → {people, peopleSource}), and
+  // reading only `traditionId` would have made this resolver correct-looking and empty — the same shape
+  // as the bug it is fixing. Every spelling the two paths use is accepted.
+  const trad = npc?.traditionId || npc?.tradition || npc?.people || npc?.affiliation?.traditionId || null;
+  return trad ? (CONTENT.traditionVisualAesthetics?.[trad] || null) : null;
 }
 
 /** DEV: seed a GROWN (generated) entity into the active character so the codex Keep/nominate flow
@@ -2398,7 +2409,11 @@ function ensureBondPortraits(c) {
     const tier = npcPortraitTier(n);
     if (!tier || n._portraitTier === tier) continue;  // not a milestone, or already portrayed at this tier
     try {
-      const url = ensureImage(n, "npc", { ratingLevel: viewerRatingLevel(), seedKey: `${n.id}-${tier}`, force: true, promptOpts: { character: c } });
+      // ⛔ SNG-367: the PEOPLE layer reaches the portrait. 33 of 34 NPCs led with the literal "a person"
+    // because `formOf()` never returns falsy — so every figure was drawn from the same two words and
+    // rendered as the same face. An authored form still wins; this only fills the silence behind it.
+    const aes367 = npcAesthetic(n);
+    const url = ensureImage(n, "npc", { ratingLevel: viewerRatingLevel(), seedKey: `${n.id}-${tier}`, force: true, promptOpts: { character: c, aesthetic: aes367 } });
       if (url) { // no empty tile — only record when the mint actually resolved
         n._portraitTier = tier; n.image = url;
         addGalleryImage(c, { kind: "portrait", prompt: npcPromptSeed(n, c), url, caption: `${n.name} — ${relationshipLabel(n)}`, worldDay: absoluteWorldDay() });

@@ -10749,6 +10749,41 @@ await (async () => {
       && /routes were also cut short/.test(block || ""));
   }
 
+  // SNG-367 — 33 OF 34 PORTRAITS LED WITH THE LITERAL "a person", which is why every figure rendered as
+  // the same woman. ⛔ THE CAUSE IS A FALLBACK THAT NEVER RETURNS FALSY: `formOf()` returns "a person"
+  // when form/lineage/appearance are absent, and it sat THIRD in the chain — so `description`, `role` and
+  // `name` were unreachable for anyone without an authored form, which is almost everyone.
+  {
+    const { npcPromptSeed } = await import("../engine/art.js");
+    const aes = { people: "grey, plainly dressed, unhurried. Hands calm and clean." };
+
+    check("367: an NPC with only a role no longer leads with 'a person'",
+      !npcPromptSeed({ name: "Aldric", role: "Smokehouse operator" }, {}).startsWith("a person,"));
+    check("367: …the people layer leads when nothing about the body is authored",
+      npcPromptSeed({ name: "Aldric", role: "Smokehouse operator" }, {}, { aesthetic: aes }).startsWith("grey, plainly dressed"));
+
+    // ⛔ AEVI'S RULE, AND IT IS THE LOAD-BEARING ONE: "an authored form must win over the tradition layer —
+    // that is what stops an Ent rendering human."
+    const ent = npcPromptSeed({ name: "Barkfoot", form: "a towering treefolk of bark and heartwood", role: "warden" }, {}, { aesthetic: aes });
+    check("367: an AUTHORED form wins over the people layer — this is what stops an Ent rendering human",
+      ent.startsWith("a towering treefolk"));
+    // ⚠️ …and the people layer is not discarded, it changes job: subject → register. An Ent of the
+    // ashwardens is still an Ent, rendered grey and unhurried.
+    check("367: …and the people layer survives as REGISTER rather than being dropped",
+      /of a people who read as: grey, plainly dressed/.test(ent));
+
+    check("367: a person with no people does not borrow one's face",
+      !/of a people who read as/.test(npcPromptSeed({ name: "X", form: "a tall woman" }, {}, {})));
+
+    // The ctx must actually reach the seed — the parameter existing is not the same as a caller passing it.
+    const artSrc = readFileSync(join(root, "engine/art.js"), "utf8");
+    const appSrc367 = readFileSync(join(root, "app.js"), "utf8");
+    check("367: assembleImagePrompt carries ctx through to the npc seed, as the ability path already did",
+      /npcPromptSeed\(subject, ctx\.character \|\| \{\}, ctx\)/.test(artSrc));
+    check("367: …and the npc image call supplies the tradition aesthetic",
+      /npcAesthetic\(n\)/.test(appSrc367) && /aesthetic: aes367/.test(appSrc367));
+  }
+
   // SNG-366 — DELEGATED WORK MOVES ON WORLD DAYS. Erik ratified: character days are PLAYER-ADVANCED and
   // therefore gameable — spam rest to fast-forward your steward, or refuse to rest to freeze the world.
   //

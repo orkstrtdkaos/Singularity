@@ -204,14 +204,30 @@ export function characterPromptSeed(character = {}, opts = {}) {
 /** SNG-136 P2: the portrait seed for an NPC who has crossed a bond milestone — built from their form/
  *  description + role + their relationship TO the player (a devoted partner, a sworn ally). Rating-lensed
  *  + minor-safe downstream (ensureImage runs the floors). Pure. */
-export function npcPromptSeed(npc = {}, character = {}) {
-  const lead = String(npc.appearance || npc.form || formOf(npc) || npc.description || npc.role || npc.name || "a person").slice(0, 200);
+export function npcPromptSeed(npc = {}, character = {}, ctx = {}) {
+  // ⛔ SNG-367 — 33 OF 34 PORTRAITS LED WITH THE LITERAL "a person", AND THE CAUSE IS A FALLBACK THAT
+  // NEVER RETURNS FALSY. `formOf()` returns "a person" when form/lineage/appearance are absent, and it sat
+  // THIRD in this chain — so `description`, `role` and `name` were unreachable for anyone without an
+  // authored form, which is almost everyone. Every figure rendered from the same two words, which is why
+  // every figure rendered as the same woman.
+  //
+  // ⚠️ AND THE ORDER IS THE RULE, NOT A PREFERENCE. Aevi: "an authored form must win over the tradition
+  // layer — that is what stops an Ent rendering human." So: what the author WROTE about this body first;
+  // then what their PEOPLE look like (SNG-367's new `people` layer, authored for 26 traditions); then what
+  // they DO; and only if all of that is empty, the anonymous default.
+  const authored = npc.appearance || npc.form || npc.lineage || null;   // what someone wrote about THIS body
+  const people = !authored && ctx.aesthetic?.people ? String(ctx.aesthetic.people) : null;
+  const doing = npc.description || npc.role || null;
+  const lead = String(authored || people || doing || npc.name || "a person").slice(0, 200);
   const bits = [`${lead}, character portrait`];
   if (npc.name) bits.push(`named ${npc.name}`);
   if (npc.gender || npc.pronouns) bits.push(String(npc.gender || npc.pronouns).slice(0, 40)); // SNG-143: state gender explicitly so the generator can't default (the Pell-rendered-male fix)
   if (npc.role) bits.push(String(npc.role).slice(0, 100));
   const label = [npc.bondStage, npc.bondType].filter(Boolean).join(" ").trim();
   if (label) bits.push(`${label} to ${character.name || "the traveler"}`);
+  // ⚠️ When a form IS authored, the people layer does not vanish — it stops being the SUBJECT and
+  // becomes the register. An Ent of the ashwardens is still an Ent, rendered grey and unhurried.
+  if (authored && ctx.aesthetic?.people) bits.push(`of a people who read as: ${String(ctx.aesthetic.people).slice(0, 160)}`);
   if (npc.voiceHints) bits.push(String(npc.voiceHints).slice(0, 100));
   return bits.join(", ");
 }
@@ -219,7 +235,7 @@ export function npcPromptSeed(npc = {}, character = {}) {
 /** Assemble the raw (pre-floors) descriptive prompt for a subject of a given kind. Pure. */
 export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
   if (kind === "character") return characterPromptSeed(subject, ctx);
-  if (kind === "npc") return npcPromptSeed(subject, ctx.character || {}); // SNG-136: richer seed w/ bond-to-player
+  if (kind === "npc") return npcPromptSeed(subject, ctx.character || {}, ctx); // SNG-136 richer seed; SNG-367 carries ctx.aesthetic through, the way the ability path already does
   if (kind === "location") return `${subject.name || "a place"}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
   // SNG-251 §2b: an evolved item may carry an authored `imagePrompt` naming what the story put ON it (the
   // seated rune-threads, the maker's mark); it wins over the plain description so the re-mint SHOWS the

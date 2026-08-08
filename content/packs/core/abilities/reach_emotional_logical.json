@@ -2213,13 +2213,13 @@
    ],
    "narrationHints": "A grief-cry pitched past speech — not loud so much as TRUE, and the truth of it buckles the knees of everyone in earshot. Heard, never aimed.",
    "description": "The Threnodists' first offense: a lament released rather than thrown. It lands on everyone who can hear it, including you.",
-   "notFor": "A silent kill (it is heard, always); sparing your friends — ALLIES IN EARSHOT ARE STRUCK ONE RUNG LOWER, and the wielder takes 'damaging' at rank 3; the deaf; anything that does not feel.",
+   "notFor": "A silent kill (it is heard, always); sparing your friends — ANYONE ELSE IN EARSHOT IS STRUCK ONE RUNG LOWER, and the wielder takes 'damaging' at rank 3; the deaf; anything that does not feel.",
    "tree": [
     {
      "rank": 1,
      "name": "The Cry Let Go",
      "grants": "Release a grief you actually hold as sound. Everyone in earshot who can feel is staggered — weapons lowered, a charge broken, a pursuit stalled for a breath. It works through walls and in the dark.",
-     "cannot": "It is UNAIMED — ALLIES IN EARSHOT ARE STRUCK ONE RUNG LOWER, and the wielder takes the same one rung lower. The deaf are untouched. It needs a grief you truly carry; a performed one makes noise and nothing else.",
+     "cannot": "It is UNAIMED — ANYONE ELSE IN EARSHOT IS STRUCK ONE RUNG LOWER, and the wielder takes the same one rung lower. The deaf are untouched. It needs a grief you truly carry; a performed one makes noise and nothing else.",
      "functions": [
       "strike",
       "hinder"
@@ -2278,7 +2278,7 @@
    },
    "bounds": [
     {
-     "text": "UNAIMED — allies and the wielder are struck ONE RUNG LOWER",
+     "text": "UNAIMED — anyone else present, and the wielder, are struck ONE RUNG LOWER",
      "class": "hard"
     },
     {

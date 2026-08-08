@@ -40,28 +40,70 @@ justifies the field; assuming it will is how we get another value nothing sets c
 
 ---
 
-## §2 — WHAT TO BUILD
+## §2 — WHAT TO BUILD — ⛔ AMENDED BY ERIK: THE BANDS ALREADY EXIST. DO NOT INVENT THRESHOLDS.
 
-**Gate on distance, using the region model already in the file.** The deed block builds
-`commsByRegion`/`regionOfComm` from `content.locations` — reuse it. Proposal, and the numbers are Erik's to
-set:
+My first draft proposed a fresh same-community / same-region / adjacent / far table. **Erik: *"don't we
+already have a deed gradient or band? … also power level, hero — epic — legend etc should correlate with
+distance and deed type."*** He is right on both counts, and I specced new numbers over a model that was
+already sitting in the file.
 
-| distance | what reaches you |
-|---|---|
-| same community | everything witnessed |
-| same region | above a low weight |
-| adjacent region | above a high weight, delayed by `NEWS_TRAVEL_DAYS` |
-| far | only the largest, if at all |
+### §2a — Deed weight → reach is ALREADY the distance model (`engine/reputation.js:35`)
 
-⚠️ **`impactsLocal: true` must bypass the distance gate** — that flag exists precisely for an event that
-crosses into another player's area, it is already escrow-confirmed by the acting player (SNG-145), and
-gating it by distance would break a deliberate mechanism. **Distance gates ambient news, never a directed
-consequence.**
+```js
+const reach = Math.min(3, Math.max(1, Math.abs(Number(d.weight) || 1)));
+const capBy = { 1: 2, 2: 5, 3: 12 }[reach];
+```
 
-⚠️ **`slice(-5)` should become "top 5 by weight among those that pass", not "last 5".** Otherwise a burst
-of small local events from one character crowds out a genuinely large distant one.
+| weight | reaches | in words |
+|---|---|---|
+| 1 | 2 communities | stays where it was seen |
+| 2 | 5 communities | regional |
+| 3 | 12 communities | crosses regions — and only after it is heard everywhere near |
 
----
+**That is the gradient. Use it verbatim for cross-character news.** `spreadDeeds` is already pure, already
+takes the community graph, and is already called twenty lines above the broken filter. ⚠️ **The news gate
+should call the same function, not a parallel implementation of the same idea** — a second copy of a
+distance model is how the two drift apart.
+
+### §2b — ⛔ THE FIGURE TIER SCALE IS ALREADY A DISTANCE LADDER, AND NOTHING READS IT AS ONE
+
+`engine/whois.js:20` — `TIER_MEANING`, the text Erik saw in the popup:
+
+| tier | rank | the authored definition | the distance it is already stating |
+|---|---|---|---|
+| riffraff | 0 | *not yet anybody* | nowhere |
+| notable | 1 | *someone is beginning to say their name* | one settlement |
+| heroic / regional | 2 | ***a name in their own country*** | **their region** |
+| epic | 3 | ***known well beyond where they started*** | **beyond their region** |
+| legendary | 4 | *they have lasted, and been counted* | everywhere, and it persists |
+| mythic | 5 | *the world has a story about them* | everywhere, forever |
+
+⚠️ **These are not flavour strings. "A name in their own country" and "known well beyond where they
+started" are reach statements, authored, in the file, being used only as popup text.** `tierRank()`
+already returns 0–5. **The actor's tier should widen the reach their deeds get** — a legend doing a small
+thing IS news, and an unknown doing the same thing is not.
+
+**Proposal (Erik's numbers to set):** effective reach = deed weight band, widened by `tierRank(actor)` —
+e.g. `+1 band at epic, +2 at legendary/mythic`, floored at the deed's own band. Riffraff and notable
+widen nothing.
+
+### §2c — ⚠️ THIS DOES NOT VIOLATE DIRECTIVE SNG-280
+
+SNG-280 reads *"Magnitude, never merit — a massacre and a rescue of the same magnitude are heard about
+equally far."* **Merit is the MORAL quality of the deed. Actor renown is a different axis entirely**, and
+it cuts both ways: a notorious figure's small cruelty travels exactly as far as a legend's small kindness.
+**Whose hand it was is not the same claim as whether it was admirable.** Worth stating plainly so this is
+not read as an erosion of the directive.
+
+### §2d — What still needs building
+
+- **`impactsLocal: true` bypasses the gate entirely** — that flag is a directed consequence, already
+  escrow-confirmed under SNG-145. Distance gates ambient news, never a directed one.
+- **`slice(-5)` → top 5 by reach among those that pass**, not the last 5, or a burst of small local events
+  crowds out one large distant one.
+- ⚠️ **Ledger entries carry no `weight`** (measured field set in §1a) — deeds do, ledger events do not.
+  **Try `Σ|spectrumDeltas|` mapped onto the same 1/2/3 band** before adding a field, so the two systems
+  share one scale rather than acquiring a second one.
 
 ## §3 — THE "SEVERAL OF THE SAME VEIL EVENT" — a different defect, and it is real
 

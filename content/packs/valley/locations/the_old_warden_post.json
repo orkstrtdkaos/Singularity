@@ -2,10 +2,16 @@
  "schemaVersion": 1,
  "id": "the_old_warden_post",
  "name": "Raven's Home (the Old Warden Post)",
- "regionId": "valley",
+ "regionId": "the_palelands",
  "communityId": "ashwarden",
- "aliases": ["Stillwater's Trouble", "Raven's Home", "stillwaters_trouble_site"],
- "supersedes": ["gen-stillwater-s-trouble"],
+ "aliases": [
+  "Stillwater's Trouble",
+  "Raven's Home",
+  "stillwaters_trouble_site"
+ ],
+ "supersedes": [
+  "gen-stillwater-s-trouble"
+ ],
  "spectrum": {
   "death_life": -0.2,
   "dark_light": -0.3,
@@ -72,5 +78,6 @@
   "depth": 0
  },
  "worldPosNote": "Two miles NW of Cairnhold (colat 76, lon 74) along the Ashwarden March road's left branch; the road waypost (marker-stone fork ~1/4 mile N of the waygate) is a SEPARATE place.",
- "description": "The old Warden Post sits on a shoulder of ground that has been holding weather off Stillwater for longer than anyone has kept records for. Three rooms and a stair, all of them wrong for what they were built for and most of them right for something else. The long room faces east and takes morning light through arrow-slits that were never meant to let anything in; the hearth-wall is thick enough to hold heat for a day.\n\nThe rooms have been named by the people who claimed them. **Pell's forge** is built into the long room's chimney-wall — a flue that has drawn for two hundred years, the stone already sound. **Veth's laboratory** is up the stair, a room with a shuttered window and a floor that slopes very slightly toward the outer wall: a fault in a barracks and a virtue anywhere something might spill, and cold in the mornings, which is useful. **Cassiel's keeper's ground** is not in the Post at all — it is the bare south terrace where the wall gives out and the light stays longest, chosen before it was needed, because choosing it after is just a burial. **Huginn's Rook** is the corner tower, or what is left of it: open to the sky on one side, three walls and a floor and a view of every approach from the road to the treeline — the only part of the Post built to watch rather than to withstand.\n\nAnd below, down the back slope where the hill folds in on itself, is **the Maker's hollow** — the thin ground that gives Stillwater's Trouble its name. Not drained thin, not the deliberate quiet of ground that gave itself up; the other kind, the kind that never had anything to give, ordinary country the old works simply never reached. Silas placed a ward on the road waypost to signal the post reactivated, then arrived here and claimed it — the post, its buildings, and the hollow — and the company has begun to weave the boundary that will hold it."
+ "description": "The old Warden Post sits on a shoulder of ground that has been holding weather off Stillwater for longer than anyone has kept records for. Three rooms and a stair, all of them wrong for what they were built for and most of them right for something else. The long room faces east and takes morning light through arrow-slits that were never meant to let anything in; the hearth-wall is thick enough to hold heat for a day.\n\nThe rooms have been named by the people who claimed them. **Pell's forge** is built into the long room's chimney-wall — a flue that has drawn for two hundred years, the stone already sound. **Veth's laboratory** is up the stair, a room with a shuttered window and a floor that slopes very slightly toward the outer wall: a fault in a barracks and a virtue anywhere something might spill, and cold in the mornings, which is useful. **Cassiel's keeper's ground** is not in the Post at all — it is the bare south terrace where the wall gives out and the light stays longest, chosen before it was needed, because choosing it after is just a burial. **Huginn's Rook** is the corner tower, or what is left of it: open to the sky on one side, three walls and a floor and a view of every approach from the road to the treeline — the only part of the Post built to watch rather than to withstand.\n\nAnd below, down the back slope where the hill folds in on itself, is **the Maker's hollow** — the thin ground that gives Stillwater's Trouble its name. Not drained thin, not the deliberate quiet of ground that gave itself up; the other kind, the kind that never had anything to give, ordinary country the old works simply never reached. Silas placed a ward on the road waypost to signal the post reactivated, then arrived here and claimed it — the post, its buildings, and the hollow — and the company has begun to weave the boundary that will hold it.",
+ "_fix": "⛔ SNG-383: regionId was `valley` while its own worldPosNote reads 'Two miles NW of Cairnhold (colat 76, lon 74) along the Ashwarden March' — and its position (colat 73, lon 71) is exactly there, ~67 walking days from the nearest other valley location. ⚠️ THE POSITION WAS RIGHT AND THE REGION WAS WRONG: Raven's Home sits in the Palelands, on the Ashwarden march, which is why an Ashwarden post is there at all. Corrected to the_palelands. ⚠️ NOTE FOR ERIK: this is Silas Weir's post — the one he has charged Cassiel Ord with reconstructing — so its region assignment is live content, not scenery."
 }

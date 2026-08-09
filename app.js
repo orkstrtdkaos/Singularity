@@ -32,9 +32,9 @@ import { wieldBonusFor, usableCombatItems, normalizeInventory, fromCatalog, addI
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
+import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
+import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove } from "./engine/companions.js";
@@ -89,7 +89,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.87";
+const APP_VERSION = "1.9.88";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -475,6 +475,10 @@ let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed sl
 let sharedCreaturePool = [];
 let sceneArtCount = 0;   // SNG-035: moment-art mints this scene (clamp ~1/scene)
 let mapShowKG = false;   // SNG-046: knowledge-overlay toggle on the world map
+// ⛔ SNG-386: TWO FIELDS, TWO TOGGLES. Erik: "two fields, two colours, independently togglable — a
+// Precursor vault and a wild bloom must not render the same." One switch showing "power" would merge two
+// geographies into an average true of neither.
+let mapField = null;     // null | "substrate" | "nanite"
 let mapShowSub = false;  // SNG-082b: sub-place satellites toggle (off by default — the clean look)
 let _lightboxWired = false; // SNG-053: one-time lightbox click delegation (referenced by boot)
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
@@ -7031,8 +7035,29 @@ function renderMap(selectedId = null) {
       : `<circle cx="${cx}" cy="${cy}" r="46" class="${cls}" fill="${esc(pal.base || "#2a2f28")}" stroke="${esc(pal.edge || "#333")}"><title>${esc(rg.name)}</title></circle>`;
     return `${body}<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle" class="map-region-label" fill="${esc(pal.accent || "#8a8")}">${esc(rg.name)}</text>`;
   }).join("");
+  // ⛔ SNG-386 — THE FIELD, DRAWN FROM THE RESOLVED VALUES. The spec said to draw each SOURCE as a
+  // radial gradient at its authored `radius`. Measured first, and that would have been a beautiful lie: a
+  // source's `radiusWorld` (what mechanics use) and its `radius` (legacy map units) select completely
+  // different neighbourhoods — 1 location by angle against 8-20 by map radius, agreeing for 1 of 43.
+  // `map.x/y` is an authored layout, not a projection of `worldPos`.
+  // ⚠️ So each LOCATION paints its own true value and they sum: an interpolation between known-true
+  // points rather than a claim about how far power reaches. The values are the mechanic, the smoothing is
+  // presentation, and only the first is being asserted — the caption on screen says so too.
+  const fieldLayer = (() => {
+    if (!mapField) return "";
+    const nanite = mapField === "nanite";
+    const blobs = fieldBlobs(locs, pos, {
+      valueOf: (l) => nanite ? (naniteAt(l, CONTENT.substrateModel)?.v ?? null)
+                             : (typeof l.substrateDensity === "number" ? l.substrateDensity : null),
+    });
+    if (!blobs.length) return "";
+    const hue = nanite ? "134,192,108" : "212,162,74";   // the bloom green against the lattice gold
+    const defs = blobs.map((b, i) => `<radialGradient id="fb${i}"><stop offset="0%" stop-color="rgba(${hue},${fieldAlpha(b.v).toFixed(3)})"/><stop offset="100%" stop-color="rgba(${hue},0)"/></radialGradient>`).join("");
+    const discs = blobs.map((b, i) => `<circle cx="${b.x.toFixed(1)}" cy="${b.y.toFixed(1)}" r="${b.r.toFixed(1)}" fill="url(#fb${i})"/>`).join("");
+    return `<defs>${defs}</defs><g class="map-field">${discs}</g>`;
+  })();
   const svg = `<svg id="skill-svg" viewBox="0 0 800 440" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
-    <g class="map-terrain">${terrain}</g>
+    <g class="map-terrain">${terrain}</g>${fieldLayer}
     <text x="20" y="30" class="map-title">THE VALLEY OF ECHOES</text>
     <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · Water Crisis stage ${stage}${mapShowKG ? " · showing what you know" : ""}</text>
     ${edges.map(([a, b]) => { const A = pos[a], B = pos[b]; const spine = a === "the_axis_gate" || b === "the_axis_gate" || a === "the_crossing" || b === "the_crossing";
@@ -7147,6 +7172,9 @@ function renderMap(selectedId = null) {
     ${mapTierBar()}
     <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle" title="People you've met (solid) and threads you've only heard of (dimmed diamonds) — where they live">${mapShowKG ? "✓ " : ""}Show what you know</button>
       <button class="opt ${mapShowSub ? "selected" : ""}" id="map-sub-toggle" title="The places WITHIN each location (satellites around each node)" style="margin-left:6px">${mapShowSub ? "✓ " : ""}Show sub-places</button>
+      <button class="opt ${mapField === "substrate" ? "selected" : ""}" id="map-field-lat" title="The lattice field — where the Precursors built, pooled and drained by 43 authored sources" style="margin-left:6px">${mapField === "substrate" ? "✓ " : ""}⛰ Lattice field</button>
+      <button class="opt ${mapField === "nanite" ? "selected" : ""}" id="map-field-nan" title="The nanite field — a SECOND geography: where the tech was deployed before the Transition, and what became of it" style="margin-left:6px">${mapField === "nanite" ? "✓ " : ""}✵ Nanite field</button>
+      ${mapField ? `<span class="hint" style="margin-left:8px">colour = strength at each place; the wash between them is interpolation, not a claim about reach</span>` : ""}
       ${mapShowKG && !kg.length ? `<span class="hint" style="margin-left:8px">You haven't met anyone or heard a rumour yet — the world is still a rumour. Play on.</span>` : mapShowKG ? `<span class="hint" style="margin-left:8px">◆ dimmed = heard of · ● solid = met</span>` : ""}</div>
     <div class="graph-wrap" id="graph-wrap">
       <div class="graph-zoom-ctl">
@@ -7167,6 +7195,12 @@ function renderMap(selectedId = null) {
   if (meBtn) meBtn.onclick = () => { const p = pos[here]; if (!p) return; const k = 2.2; graphViews[graphSurface] = { k, tx: 400 - p.x * k, ty: 220 - p.y * k };
     const vp = document.querySelector("#skill-svg .graph-vp"); if (vp) vp.setAttribute("transform", `translate(${graphViews[graphSurface].tx} ${graphViews[graphSurface].ty}) scale(${k})`); };
   document.getElementById("map-kg-toggle").onclick = () => { mapShowKG = !mapShowKG; renderMap(selectedId); };
+  // ⚠️ EACH TOGGLE TURNS THE OTHER OFF. The two fields are different geographies and stacking them
+  // would blend two colours into a third that means nothing — the merge Erik explicitly ruled out.
+  for (const [id, key] of [["map-field-lat", "substrate"], ["map-field-nan", "nanite"]]) {
+    const b = document.getElementById(id);
+    if (b) b.onclick = () => { mapField = mapField === key ? null : key; renderMap(selectedId); };
+  }
   document.getElementById("map-sub-toggle").onclick = () => { mapShowSub = !mapShowSub; renderMap(selectedId); };
   for (const g of app.querySelectorAll("[data-kgtopic]")) g.onclick = () => renderCodexScreen("", g.dataset.kgtopic);
   for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);

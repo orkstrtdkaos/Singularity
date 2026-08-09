@@ -6871,6 +6871,58 @@ await (async () => {
       /ground-nanite/.test(app385) && /g\.nanite/.test(app385));
   }
 
+  // ══ SNG-386 — RENDER THE FIELD, NOT THE DOTS. Erik: "can it show colors with density that
+  // represents the power source? so the density of the color becomes more transparent the further from
+  // the source?"
+  //
+  // ⛔ THE SPEC'S OWN METHOD WOULD HAVE DRAWN A BEAUTIFUL LIE, and measuring first is the only reason
+  // it did not ship: §5 said to draw each SOURCE as a radial gradient at its authored `radius`. But a
+  // source's `radiusWorld` (radians on the sphere, what the mechanics use) and its `radius` (legacy map
+  // units) select COMPLETELY DIFFERENT neighbourhoods — by angle a typical source reaches 1 location, by
+  // map radius 8 to 20, and only 1 of 43 agreed. `map.x/y` is an authored layout, not a projection of
+  // `worldPos`, so a circle sized in sphere-radians cannot be drawn in map units without asserting
+  // something false about where power reaches.
+  {
+    const wm386 = await import("../engine/worldmap.js");
+    const { loadContentHeadless: lch386 } = await import("./headless_content.mjs");
+    const C386 = await lch386();
+    const sb386 = sb;
+    const locs386 = Object.values(C386.locations);
+    const pos386 = wm386.autoMapPositions(locs386);
+    const lat = wm386.fieldBlobs(locs386, pos386, { valueOf: l => (typeof l.substrateDensity === "number" ? l.substrateDensity : null) });
+    const nan = wm386.fieldBlobs(locs386, pos386, { valueOf: l => sb386.naniteAt(l, C386.substrateModel)?.v ?? null });
+    check("386: the field is built from the RESOLVED per-location values, so every placed location contributes",
+      lat.length > 100 && nan.length > 100 && lat.every(b => b.x != null && b.y != null && b.r > 0));
+    // ⚠️ NULL IS UNSURVEYED AND DRAWS NOTHING. Painting a 0 where there is no reading would render
+    // "no power here" over a place nobody has measured.
+    check("386: a location with no reading on this field draws NOTHING, rather than a zero",
+      wm386.fieldBlobs([{ id: "x" }], { x: { x: 10, y: 10 } }, { valueOf: () => null }).length === 0);
+    // ⚠️ THE SPREAD IS DERIVED FROM THE LAYOUT, not hand-picked — a radius chosen to look right on
+    // this map is wrong on the next one. Median nearest-neighbour spacing is what makes blobs meet.
+    const tight = wm386.fieldBlobs([{ id: "a" }, { id: "b" }], { a: { x: 0, y: 0 }, b: { x: 10, y: 0 } }, { valueOf: () => 1 });
+    const wide = wm386.fieldBlobs([{ id: "a" }, { id: "b" }], { a: { x: 0, y: 0 }, b: { x: 200, y: 0 } }, { valueOf: () => 1 });
+    check("386: the falloff radius scales with how far apart the places actually are",
+      tight[0].r < wide[0].r && tight[0].r > 0);
+    // ⛔ THE TWO FIELDS MUST DRAW DIFFERENTLY, which is the whole ask.
+    const heart386 = C386.locations.the_heartroot;
+    const latV = heart386.substrateDensity, nanV = sb386.naniteAt(heart386, C386.substrateModel).v;
+    check("386: the two fields disagree where it matters — the Heartroot is faint on one and strong on the other",
+      wm386.fieldAlpha(latV) < 0.05 && wm386.fieldAlpha(nanV) > 0.3);
+    check("386: alpha is bounded so a saturated plateau stays readable rather than becoming a slab",
+      wm386.fieldAlpha(1) <= 0.55 && wm386.fieldAlpha(5) === wm386.fieldAlpha(1));
+    // Wired, and the two toggles are exclusive — stacking them blends two geographies into a third
+    // colour that is true of neither, which Erik ruled out in the ask itself.
+    const app386 = readFileSync(join(root, "app.js"), "utf8");
+    check("386: both fields are togglable and EXCLUSIVE — never stacked into an average of two geographies",
+      /mapField = mapField === key \? null : key/.test(app386) && /map-field-lat/.test(app386) && /map-field-nan/.test(app386));
+    check("386: …and the layer is actually rendered into the svg, under the terrain",
+      /\$\{fieldLayer\}/.test(app386) && /class="map-field"/.test(app386));
+    // ⚠️ THE SCREEN SAYS WHAT IS ASSERTED. The values are the mechanic; the wash between them is
+    // interpolation, and a picture that does not say so is a claim nobody agreed to.
+    check("386: the caption tells the player the wash is interpolation, not a claim about reach",
+      /interpolation, not a claim about reach/.test(app386));
+  }
+
   // ══ SNG-382 — THE TRADITION SOURCE MIX GETS A READER. Aevi's work-order item 3 asked me to derive
   // the 26 weighted mixes before she authored them; she had already authored all 26, on the ratified
   // vocabulary, with Erik's reasons. ⛔ THE GAP WAS THE OTHER END: `power_sources.json` was REGISTERED AND

@@ -384,3 +384,57 @@ export function walkingDays(a, b, opts = {}) {
   const d = geodesic(a, b, opts);
   return d == null ? null : d * (300 / Math.PI);
 }
+
+/* ═══ SNG-386 — RENDER THE FIELD, NOT THE DOTS. Erik: "can it show colors with density that represents
+ * the power source? so the density of the color becomes more transparent the further from the source?"
+ *
+ * ⛔ THE SPEC SAID TO DRAW EACH SOURCE AS A RADIAL GRADIENT AT ITS AUTHORED `radius`, AND THAT WOULD HAVE
+ * BEEN A BEAUTIFUL LIE. Measured: a source's `radiusWorld` (radians on the sphere, what the mechanics use)
+ * and its `radius` (legacy map units) select COMPLETELY DIFFERENT neighbourhoods — by angle a typical
+ * source reaches 1 location, by map radius 8 to 20. Only 1 of 43 sources agreed between the two.
+ * `map.x/y` is an authored 2D layout, NOT a projection of `worldPos`, so a circle sized in sphere-radians
+ * cannot be drawn in map units without asserting something false about where power reaches.
+ *
+ * ⚠️ SO THE FIELD IS DRAWN FROM THE RESOLVED VALUES, WHICH ARE EXACT. Every location already carries the
+ * true field value at its own point (`resolveSubstrateField` computed it, and the nanite field resolves per
+ * region). Each dot contributes a soft radial falloff and they sum — an interpolation BETWEEN known-true
+ * points rather than a claim about radii. The values are the mechanic; the smoothing is presentation, and
+ * that distinction is the whole reason this is honest.
+ *
+ * ⚠️ AND IT ONLY WORKS BECAUSE THE MAP LAYOUT IS SPATIALLY COHERENT WITH THE FIELD — checked, not assumed:
+ * mean |density difference| climbs monotonically with map distance (0.199 within 40 units, 0.367 beyond
+ * 400). Had the layout been unrelated to the field, an interpolation would have rendered noise and I would
+ * have had to say the map cannot show this yet.
+ */
+
+/** One drawable blob per location that has a value on this field. Pure — returns geometry and alpha, never
+ *  markup, so the renderer owns the palette and this stays testable.
+ *
+ *  `spread` is the falloff radius in MAP UNITS, defaulted from the typical spacing between locations so the
+ *  blobs overlap into a field instead of reading as 118 separate discs. */
+export function fieldBlobs(locations, pos, { valueOf, spread = null, min = 0.02 } = {}) {
+  const pts = [];
+  for (const l of locations || []) {
+    const P = pos?.[l.id];
+    if (!P) continue;
+    const v = valueOf ? valueOf(l) : null;
+    if (typeof v !== "number" || !Number.isFinite(v)) continue;   // ⚠️ null is UNSURVEYED — draw nothing
+    pts.push({ id: l.id, x: P.x, y: P.y, v });
+  }
+  if (!pts.length) return [];
+  // ⚠️ SPREAD IS DERIVED FROM THE LAYOUT, not chosen: the median nearest-neighbour distance is what makes
+  // adjacent blobs just touch. A hand-picked radius looks right on this map and wrong on the next one.
+  let r = spread;
+  if (r == null) {
+    const nn = pts.map(a => Math.min(...pts.filter(b => b !== a).map(b => Math.hypot(a.x - b.x, a.y - b.y))));
+    nn.sort((a, b) => a - b);
+    r = (nn[Math.floor(nn.length / 2)] || 60) * 1.9;
+  }
+  return pts.filter(p => Math.abs(p.v) >= min).map(p => ({ ...p, r }));
+}
+
+/** The alpha a blob should paint at its centre — the value, clamped, with a ceiling so a saturated plateau
+ *  stays readable rather than becoming a solid slab. */
+export function fieldAlpha(v, { max = 0.55 } = {}) {
+  return Math.max(0, Math.min(max, Math.abs(Number(v) || 0) * max));
+}

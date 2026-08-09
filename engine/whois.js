@@ -121,7 +121,22 @@ export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster 
     const title = ws.figureTitles?.[id]?.title || null;
     if (title) lines.push(`Called ${title}.`);
     if (rung) lines.push(TIER_MEANING[rung] || rung);
-    if (fig.tradition) lines.push(`Of the ${fig.tradition}.`);
+    // ⛔ SNG-383 — A RAW SLUG IS NOT A SENTENCE. Erik's card read "Of the
+    // precursor_nanite_cold_noesis." — an id printed as prose. All 66 AUTHORED figures carry a real
+    // tradition id, so this only bites GENERATED ones, whose `tradition` is free text the model wrote.
+    // ⚠️ LOOK IT UP FIRST, HUMANISE ONLY AS A FALLBACK. A real tradition has an authored NAME
+    // ("The Umbrals") and that is what a player should read; a generated composite gets its underscores
+    // opened out rather than being dropped, because it still says something true about the figure.
+    if (fig.tradition) {
+      const known = (content.traditions?.traditions || []).find(t => t.traditionId === fig.tradition)
+        || (content.traditions?.folkTraditions || []).find(t => (t.traditionId || t.id) === fig.tradition);
+      // ⚠️ THE AUTHORED NAMES ALREADY CARRY THE ARTICLE — "The Umbrals" — so the sentence supplied a
+      // second one and read "Of the The Umbrals." Strip it here rather than re-authoring 26 names, because
+      // the article belongs to the name in every other place it is printed.
+      const raw = known?.name || String(fig.tradition).replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
+      const label = raw.replace(/^the\s+/i, "");
+      if (label) lines.push(`Of the ${label}.`);
+    }
     if (fig.role) lines.push(String(fig.role));
     if (fig.signature) lines.push(String(fig.signature));
     else if (fig.wants) lines.push(`Wants: ${fig.wants}`);
@@ -131,7 +146,20 @@ export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster 
       const names = cares.map(c => (content.greaterArcs || []).find(a => a.id === c.arcId)?.name || c.arcId);
       lines.push(`Currently caught up in: ${names.join(", ")}.`);
     }
-    const st = ws.epicStatus?.[id]?.status;
+    // ⛔ SNG-383 — THE RETURN GETS ITS FIRST READER. `resolveRetrieval` has written
+    // `returnedFromDeath = { day, changed }` since SNG-209 §4 and NOTHING has ever read it — not this
+    // card, not the GM block, not a single line of app.js. The most dramatic thing that can happen to a
+    // figure, someone going into the dark after them and bringing them back CHANGED, was recorded once and
+    // never spoken again. Erik met it as one news line: "a cool thing... someone came back to life."
+    //
+    // ⚠️ IT LEADS THE STATUS LINES, because it is the most important currently-true fact about them
+    // and `status` alone is back to "active" — indistinguishable from someone who never died.
+    const epic = ws.epicStatus?.[id] || {};
+    const st = epic.status;
+    if (epic.returnedFromDeath) {
+      const r = epic.returnedFromDeath;
+      lines.push(`Died, and was brought back${r.day != null ? ` on day ${r.day}` : ""}${r.changed ? ` — ${r.changed}` : " — changed, but back"}.`);
+    }
     if (st === "dead") lines.push("Dead — though the roads back are not all closed.");
     else if (st === "wounded") lines.push("Wounded, and out of it for now.");
     // A person you have MET has a codex page; a name you have only heard may not.

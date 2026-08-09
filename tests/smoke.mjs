@@ -6749,6 +6749,53 @@ await (async () => {
       /groundHere\(location, CONTENT\.substrateModel\)/.test(appG381) && /\$\{groundRow\(selAb\)\}/.test(appG381));
   }
 
+  // ══ SNG-383 — THE FIGURE CARD, AND THE RETURN THAT NOTHING SPOKE. Erik, on a live card: "some
+  // cleanup on the UI for you — and a cool thing... someone came back to life."
+  //
+  // ⛔ `returnedFromDeath` HAD NO READER. `resolveRetrieval` has written { day, changed } since
+  // SNG-209 §4 and nothing read it — not the who-is card, not the world tab, not the GM. On a return the
+  // status goes back to "active", which is INDISTINGUISHABLE from someone who never died. The most
+  // dramatic thing the world can do happened once in a news flash and was never referred to again.
+  {
+    const W383 = await import("../engine/whois.js");
+    const tabMod = await import("../engine/worldtab.js");
+    const wtMod = await import("../engine/worldtick.js");
+    const tr383 = rjc193("content/packs/core/rules/traditions.json");
+    const content383 = { traditions: tr383, greaterArcs: [] };
+    const roster383 = [
+      { id: "gen1", name: "Halvex Coil, the Rewriter", tradition: "precursor_nanite_cold_noesis", role: "Maker / Wright" },
+      { id: "umb1", name: "A Real One", tradition: "umbral", role: "Depthwalker" },
+    ];
+    const ws383 = { figureTier: { gen1: "legendary" },
+      epicStatus: { gen1: { status: "active", returnedFromDeath: { day: 961, changed: "came back changed" } } } };
+    const cardGen = W383.whoIs("gen1", "figure", { ws: ws383, content: content383, character: {}, roster: roster383 });
+    const cardReal = W383.whoIs("umb1", "figure", { ws: ws383, content: content383, character: {}, roster: roster383 });
+    // ⚠️ A RAW SLUG IS NOT A SENTENCE. The live card read "Of the precursor_nanite_cold_noesis."
+    // All 66 AUTHORED figures resolve, so this only bites GENERATED ones, whose tradition is free text.
+    check("383: a real tradition renders its AUTHORED NAME, not its id",
+      cardReal.lines.some(l => /Of the Umbrals\./.test(l)));
+    check("383: …and the name's own article is not doubled — 'Of the The Umbrals' was the first attempt",
+      !cardReal.lines.some(l => /the The /i.test(l)));
+    check("383: a generated figure's free-text tradition is humanised, never printed as a slug",
+      cardGen.lines.some(l => /Of the precursor nanite cold noesis\./.test(l))
+      && !cardGen.lines.some(l => l.includes("_")));
+    // ⛔ THE RETURN IS SPOKEN, on the card and on the world tab.
+    check("383: the who-is card SAYS they were brought back, and what it cost them",
+      cardGen.lines.some(l => /brought back/.test(l) && /came back changed/.test(l)));
+    check("383: a figure who never died says nothing about returning",
+      !cardReal.lines.some(l => /brought back/.test(l)));
+    const foot383 = wtMod.worldPeopleFooter({ worldState: ws383 }, {});
+    check("383: the world tab's footer carries the returned, read off epicStatus not the per-pass list",
+      Array.isArray(foot383.returned) && foot383.returned.length === 1 && foot383.returned[0].day === 961);
+    const html383 = tabMod.worldTabHtml({ arcs: [], foot: foot383, effects: [], name: "X", tabBar: () => "", esc: (x) => String(x) });
+    // ⚠️ RENDERED, not merely computed. My first pass defined the block and failed to insert it —
+    // the variable existed, nothing printed it, which is the exact class this gate family exists for.
+    check("383: …and the tab actually RENDERS it — a computed block nothing prints is the whole bug family",
+      /Back from the dark/.test(html383) && /brought back/.test(html383));
+    check("383: a world with no returns renders no block at all, rather than an empty heading",
+      !/Back from the dark/.test(tabMod.worldTabHtml({ arcs: [], foot: wtMod.worldPeopleFooter({ worldState: {} }, {}), effects: [], name: "X", tabBar: () => "", esc: (x) => String(x) })));
+  }
+
   // ══ SNG-382 — THE TRADITION SOURCE MIX GETS A READER. Aevi's work-order item 3 asked me to derive
   // the 26 weighted mixes before she authored them; she had already authored all 26, on the ratified
   // vocabulary, with Erik's reasons. ⛔ THE GAP WAS THE OTHER END: `power_sources.json` was REGISTERED AND

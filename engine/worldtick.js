@@ -188,6 +188,17 @@ export function worldPeopleFooter(character, content = {}) {
     neglected: (ws.neglectedLives || []).map(n => ({ id: n.id, name: n.name || nameOf(n.id) })),
     living: (ws.personalBeats || []).map(b => ({ id: b.id, name: b.name || nameOf(b.id), pursuit: b.pursuit })),
     wanted: (ws.retrievalWanted || []).map(w => ({ dead: w.deadName || nameOf(w.deadId), by: w.byName || nameOf(w.byId), depth: w.depth, waiting: !!w.waiting })),
+    // ⛔ SNG-383 — THE SYMMETRIC HALF OF `wanted`, AND THE FIRST READER `returnedFromDeath` HAS EVER
+    // HAD. `resolveRetrieval` has written it since SNG-209 §4 — { day, changed } — and nothing has read
+    // it: not the who-is card, not the GM, not this tab. `wanted` says who is being gone after; there was
+    // no line anywhere for who CAME BACK, so the most dramatic thing the world can do happened once in a
+    // news flash and was never referred to again. Erik met it exactly that way.
+    //
+    // ⚠️ IT MUST BE READ OFF `epicStatus`, NOT OFF `arcRetrievals`. The retrieval list is rewritten
+    // every pass, so it can only ever say "this tick"; the stamp on the figure is the permanent fact.
+    returned: Object.entries(ws.epicStatus || {})
+      .filter(([, st]) => st?.returnedFromDeath)
+      .map(([id, st]) => ({ id, name: nameOf(id), day: st.returnedFromDeath.day ?? null, changed: st.returnedFromDeath.changed || null })),
     coverage: ws.personalCoverage || null,
   };
 }

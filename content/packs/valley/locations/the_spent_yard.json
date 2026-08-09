@@ -33,11 +33,11 @@
   "destruction": 0.3
  },
  "substrateSource": {
-  "kind": "pool",
-  "delta": 0.2,
+  "kind": "sink",
+  "delta": -0.14,
   "radius": 90,
-  "reason": "The Archive was sealed before the Transition and never opened to it. What is inside is still what was inside.",
   "radiusWorld": 0.054,
+  "reason": "⛔ The name is literal. Structured nanite spent into purpose scatters, and this is where the foothills' scattering settles — thick with WILD and thin of order. Churnfolk work it; a Vested crossing it feels the difference in twenty paces.",
   "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
  },
  "axisVector": [

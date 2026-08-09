@@ -250,10 +250,12 @@
   "valley_craft": {
    "primary": "body",
    "mix": {
-    "body": 1.0
+    "body": 0.75,
+    "precursor": 0.2,
+    "nanite": 0.05
    },
    "density": null,
-   "why": "⛔ NOT A TRADITION — the universal folk crafts, open to everyone, and ~13 of a level-1 character's ~17 options. Unaugmented body work entire: appraisal, a hunter's strike, a boundary stone, a beast befriended. ⚠️ It DECLINES every source, and that is the point: `body` carries the FLOOR, so valley craft is never starved anywhere and never spectacular anywhere. `density: null` because it does not sit in terrain at all — it is what a person can do with hands and years, and the ground has no opinion about it."
+   "why": "⛔ CORRECTED BY ERIK 2026-08-08. I first authored this as `body 1.0 — it declines every source`, which ROMANTICISED it. Reading the fifteen crafts, FOUR are not body work: `old_roads` follows PRECURSOR TRACES by name; `boundary_stone` sets a ward that LASTS WITHOUT YOU, which technique alone does not do; `hearthbinding` restores 'BEYOND WHAT REST ALONE GIVES', in its own words; `beastfriend` carries `summon`. ⚠️ ERIK'S POINT IS GEOGRAPHIC AND IT IS THE STRONGER ARGUMENT: Millbrook sits in a valley that also holds harmonic_heights_terrace, radiant_plateau_edge, echo_river_crossing, and the SUNKEN CHOIR — a +0.26 pool, 'a pre-Transition sonic work, flooded and intact.' Valleyfolk do not live in a clean room. They live on top of old works and next door to two craft families, and folk craft is exactly the kind of thing that picks up what is lying around. ⛔ THE CHARACTER OF THE PRECURSOR SHARE IS THAT NOBODY KNOWS IT IS ONE: a valleyfolk does not know the old road is Precursor infrastructure. They know the old road is safe, and that a boundary stone holds, and that their grandmother said so. ⚠️ IT KEEPS THE FLOOR — body-dominant, so valley craft is still never starved anywhere. That part was right."
   },
   "harmonic": {
    "primary": "precursor",
@@ -292,5 +294,6 @@
   "note": "Empty by design. A tradition-level default plus explicit deviations is far less content than 285 authored fields, and a deviation is the interesting fact. Add here only where an ability genuinely departs from its tradition's mix."
  },
  "_rebase": "SNG-378: lattice→precursor · natural→body · inherent→metaphysical · material→body. ⛔ Anything keying on the string 'lattice', 'natural', 'inherent' or 'material' is now keying on nothing — that is how the school band table died silently. Bands live in the_substrate.json → sourceBands.",
- "_fiveFamilies": "SNG-381: valley_craft · harmonic · radiant_folk · precursor · cross_pole_braid are NOT TRADITIONS — none appears in traditions.json. They are craft FAMILIES and categories that abilities declare in their `tradition` field, so they fall through `abilityTradition(ab) || ab.powerSystem` into this lookup and found nothing. 53 crafts were invisible to both tables. ⚠️ They carry `density: null` because a craft family has no homeland — unlike a people, which does."
+ "_fiveFamilies": "SNG-381: valley_craft · harmonic · radiant_folk · precursor · cross_pole_braid are NOT TRADITIONS — none appears in traditions.json. They are craft FAMILIES and categories that abilities declare in their `tradition` field, so they fall through `abilityTradition(ab) || ab.powerSystem` into this lookup and found nothing. 53 crafts were invisible to both tables. ⚠️ They carry `density: null` because a craft family has no homeland — unlike a people, which does.",
+ "_valleyCraftGap": "⚠️ SNG-381 AUTHORING GAP, found while correcting the above: valley_craft has NO folk-harmonic and NO folk-radiant craft, and the valley contains harmonic_heights_terrace, radiant_plateau_edge, echo_river_crossing and the sunken_choir. Two craft families next door for generations and the folk tradition borrowed nothing from either. ⛔ That is a hole, not a design: a valley kid who grew up by the Choir should have a plain, unschooled way of using sound, the way `old_roads` is a plain unschooled way of using Precursor work."
 }

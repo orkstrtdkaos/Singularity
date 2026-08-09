@@ -1,1795 +1,1985 @@
 {
-  "schemaVersion": 1,
-  "powerSystem": "valley_craft",
-  "civilization": "valley",
-  "abilities": [
+ "schemaVersion": 1,
+ "powerSystem": "valley_craft",
+ "civilization": "valley",
+ "abilities": [
+  {
+   "id": "wayfinding",
+   "name": "Wayfinding",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "concrete_abstract": -0.4,
+    "instinct_analysis": 0.2
+   },
+   "attribute": "practical",
+   "effectTags": [
+    "track",
+    "navigate",
+    "terrain"
+   ],
+   "narrationHints": "Reading ground, growth, and weather-sign like text. Broken stems, pressed moss, the age of a print.",
+   "description": "Read trails, weather-sign, and country to track, navigate, and estimate what passed and when.",
+   "notFor": "Tracking through running water or across bare rock without a check; reading intent (only movement); urban crowds.",
+   "tree": [
     {
-      "id": "wayfinding",
-      "name": "Wayfinding",
-      "levelReq": 1,
-      "energyCost": 4,
-      "axes": {
-        "concrete_abstract": -0.4,
-        "instinct_analysis": 0.2
-      },
-      "attribute": "practical",
-      "effectTags": [
-        "track",
-        "navigate",
-        "terrain"
-      ],
-      "narrationHints": "Reading ground, growth, and weather-sign like text. Broken stems, pressed moss, the age of a print.",
-      "description": "Read trails, weather-sign, and country to track, navigate, and estimate what passed and when.",
-      "notFor": "Tracking through running water or across bare rock without a check; reading intent (only movement); urban crowds.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Trail Sense",
-          "grants": "Follow a clear trail up to a day old; judge party size and burden; find water and shelter in known country.",
-          "cannot": "Trails older than a day; deliberate anti-tracking beats you without a check.",
-          "functions": [
-            "reveal",
-            "track"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Cold Trail",
-          "grants": "Follow trails days old; read a campsite's story (numbers, mood, hurry); shortcut known routes — travel time -1h on familiar ground.",
-          "cannot": "No effect in true wilderness whiteout; can't track flyers or swimmers.",
-          "functions": [
-            "reveal",
-            "track",
-            "travel"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Country Speaks",
-          "grants": "One look at open country reveals routes, hazards, and anything recently unusual; anticipate where quarry is HEADED, not just where it went.",
-          "cannot": "Prediction fails against quarry that knows you're tracking; not mind-reading — a feint can still fool you.",
-          "functions": [
-            "reveal",
-            "track",
-            "travel",
-            "foresee"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "foresee",
-        "reveal",
-        "track",
-        "travel"
-      ],
-      "challengeTypes": [
-        "EXPLORE",
-        "INVESTIGATE"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "powerSystem": "valley_craft",
-      "shape": "setup",
-      "operativeAxis": [
-        "tracking",
-        "timeReach",
-        "travelSpeed"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 1,
-        "timeReach": 24,
-        "note": "r1's own number: 'a clear trail UP TO A DAY OLD'"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "timeReach+travelSpeed",
-          "delta": "trails DAYS old; read a campsite's story (numbers, mood, hurry); TRAVEL TIME -1H on familiar routes",
-          "from": "r2 grants — its own stated number"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: one look at open country reveals routes, hazards and anything recently unusual; ANTICIPATE WHERE QUARRY IS HEADED",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a quick read of the ground — half the reach, and it costs no time",
-        "surge": "double the read; PREDICTION FAILS AGAINST QUARRY THAT KNOWS YOU ARE TRACKING"
-      },
-      "bounds": [
-        {
-          "text": "trails OLDER THAN A DAY at r1; deliberate anti-tracking beats you",
-          "class": "soft"
-        },
-        {
-          "text": "NO EFFECT IN TRUE WHITEOUT; cannot track flyers",
-          "class": "hard"
-        },
-        {
-          "text": "PREDICTION FAILS AGAINST QUARRY THAT KNOWS YOU ARE TRACKING",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 extends timeReach+travelSpeed; rank 3 adds to special. Limit: nO Effect IN True Whiteout; cannot track flyers.",
-      "upkeep": {
-        "trailAgeHoursMax": 24,
-        "byRank": {
-          "1": 24,
-          "2": 72,
-          "3": 168
-        }
-      }
+     "rank": 1,
+     "name": "Trail Sense",
+     "grants": "Follow a clear trail up to a day old; judge party size and burden; find water and shelter in known country.",
+     "cannot": "Trails older than a day; deliberate anti-tracking beats you without a check.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
-      "id": "greenlore",
-      "name": "Greenlore",
-      "levelReq": 1,
-      "energyCost": 5,
-      "axes": {
-        "mechanical_spiritual": 0.1,
-        "concrete_abstract": -0.3
-      },
-      "attribute": "mental",
-      "effectTags": [
-        "heal",
-        "plants",
-        "remedy"
-      ],
-      "narrationHints": "Hedge-medicine with dirt under its nails. Poultices, bitter teas, knowing which mushroom forgives and which doesn't.",
-      "description": "Field medicine and plant knowledge: remedies, poultices, antidotes, and what's safe to eat.",
-      "notFor": "Surgery or broken bones beyond splinting; instant effects (remedies take time); anything without materials to hand.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Hedge Remedy",
-          "grants": "Forage safe food and common medicinals; brew a poultice or tea that restores small health over a rest; identify common poisons.",
-          "cannot": "Can't treat serious wounds or strong toxins; needs local plants and an hour.",
-          "functions": [
-            "reveal",
-            "heal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Deep Pharmacopeia",
-          "grants": "Counter most natural poisons and sickness; remedies now also restore energy; read a person's ailment from face, breath, and gait.",
-          "cannot": "Precursor-touched afflictions resist; can't stockpile — preparations spoil in days.",
-          "functions": [
-            "reveal",
-            "heal",
-            "sustain"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Old Recipes",
-          "grants": "Brews that verge on legend: a night's sleep in an hour, clarity through exhaustion, one dose that stabilizes the dying. Recognize Precursor-altered growth. And the hand that knows all of this knows it BOTH WAYS — a draught that dulls, slows, sickens, or drops a person where they stand, prepared as carefully as any remedy.",
-          "cannot": "It has to be taken, which means it has to be given — this is patient, deliberate work and never a thing done in a fight. Valley folk hang people for it. And every herbalist good enough to do it is the first person suspected when someone falls ill, which is why most of them never learn this rank at all.",
-          "functions": [
-            "reveal",
-            "heal",
-            "sustain",
-            "hinder"
-          ],
-          "gains": "broaden",
-          "harmRung": "incapacitating"
-        }
-      ],
-      "functions": [
-        "heal",
-        "hinder",
-        "reveal",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "SURVIVE"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "incapacitating",
-      "powerSystem": "valley_craft",
-      "shape": "healing",
-      "operativeAxis": [
-        "healing",
-        "remedy"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 1,
-          "d": 4
-        },
-        "plus": 1,
-        "note": "incapacitating rung (it also poisons). A FOURTEENTH THEORY OF MEDICINE — HERBAL: small, reliable, over a rest."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "remedy",
-          "delta": "counter MOST NATURAL poisons and sickness; remedies now ALSO RESTORE ENERGY; read an ailment from face and breath",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: brews verging on legend — A NIGHT'S SLEEP IN AN HOUR, clarity through exhaustion, ONE DOSE THAT STABILIZES THE DYING",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a simple tea — half the restoration, brewed in half the time",
-        "surge": "double the potency; IT CANNOT BE STOCKPILED — preparation is the craft"
-      },
-      "bounds": [
-        {
-          "text": "cannot treat SERIOUS WOUNDS or strong toxins; needs LOCAL PLANTS",
-          "class": "hard"
-        },
-        {
-          "text": "PRECURSOR-TOUCHED AFFLICTIONS RESIST",
-          "class": "hard"
-        },
-        {
-          "text": "cannot stockpile — preparation is the craft",
-          "class": "soft"
-        },
-        {
-          "text": "IT HAS TO BE TAKEN, WHICH MEANS IT HAS TO BE GIVEN",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A survive action that restores health. It rolls 1d4+1 Ranks: rank 2 deepens remedy; rank 3 adds to special. Limit: cannot treat Serious Wounds or strong toxins; needs Local Plants."
+     "rank": 2,
+     "name": "Cold Trail",
+     "grants": "Follow trails days old; read a campsite's story (numbers, mood, hurry); shortcut known routes — travel time -1h on familiar ground.",
+     "cannot": "No effect in true wilderness whiteout; can't track flyers or swimmers.",
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
-      "id": "mediators_tongue",
-      "name": "Mediator's Tongue",
-      "levelReq": 1,
-      "energyCost": 5,
-      "axes": {
-        "individual_collective": 0.4,
-        "tradition_innovation": -0.2
-      },
-      "attribute": "social",
-      "effectTags": [
-        "calm",
-        "negotiate",
-        "truth"
-      ],
-      "narrationHints": "The voice that lowers a room's temperature. Naming each side's real stake out loud until the knives feel silly.",
-      "description": "De-escalate, arbitrate, and find the shape of a deal both sides can live with.",
-      "notFor": "Deception (this craft is spent honestly or it stops working); commanding crowds; anyone with nothing left to lose.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Cool the Room",
-          "grants": "Halt a brewing fight long enough for words; read what each party actually wants beneath what they're saying.",
-          "cannot": "Doesn't work mid-violence; can't make anyone accept — only opens the door.",
-          "functions": [
-            "reveal",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Fair Measure",
-          "grants": "Broker deals that hold — agreements you mediate gain weight in the community ledger; call out a lie in negotiation and be believed.",
-          "cannot": "Can't broker what one side truly can't give; your reputation is collateral on every deal.",
-          "functions": [
-            "reveal",
-            "bind",
-            "command"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Binding Word",
-          "grants": "Arbitrate feuds of long standing; your settlements carry near-law in communities that know you; once per season, one hostile audience becomes neutral.",
-          "cannot": "Fails against zealotry; a settlement you break yourself burns this ability's trust to rank 1 until amends.",
-          "functions": [
-            "reveal",
-            "bind",
-            "command"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "bind",
-        "command",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "SOCIAL"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "powerSystem": "valley_craft",
-      "shape": "bolster",
-      "operativeAxis": [
-        "deescalation",
-        "authority"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 4,
-        "note": "SOCIAL. The folk-shadow of stillhold's stillcraft, and the lore says so explicitly."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "authority",
-          "delta": "broker deals THAT HOLD — agreements you mediate GAIN WEIGHT IN THE COMMUNITY LEDGER; call out a lie in negotiation",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: arbitrate FEUDS OF LONG STANDING; your settlements carry NEAR-LAW in communities that know you; ONCE PER SEASON, one hard case",
-          "from": "r3 grants — its own stated rate"
-        }
-      ],
-      "intensity": {
-        "conserve": "cool it a little — half the effect, and nobody owes you",
-        "surge": "double it; A SETTLEMENT YOU BREAK YOURSELF BURNS THE CRAFT"
-      },
-      "bounds": [
-        {
-          "text": "DOESN'T WORK MID-VIOLENCE — once blows land the door is shut; it opens a route to agreement rather than producing one: the target still has to be persuaded normally afterward, which takes a further scene",
-          "class": "soft"
-        },
-        {
-          "text": "cannot broker WHAT ONE SIDE TRULY CANNOT GIVE",
-          "class": "hard"
-        },
-        {
-          "text": "FAILS AGAINST ZEALOTRY",
-          "class": "hard"
-        },
-        {
-          "text": "A SETTLEMENT YOU BREAK YOURSELF BURNS THE CRAFT",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A social action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: cannot broker What One Side Truly Cannot Give."
-    },
-    {
-      "id": "tinkers_hand",
-      "name": "Tinker's Hand",
-      "levelReq": 1,
-      "energyCost": 5,
-      "axes": {
-        "mechanical_spiritual": -0.5,
-        "tradition_innovation": 0.3
-      },
-      "attribute": "practical",
-      "effectTags": [
-        "repair",
-        "craft",
-        "jury_rig"
-      ],
-      "narrationHints": "Wire, wax, patience, and disrespect for the word 'broken.' Fixes that shouldn't hold but do.",
-      "description": "Repair, improvise, and jury-rig — coaxing function from broken things with whatever's on hand.",
-      "notFor": "Fine artisanship (it works, it isn't pretty); Precursor internals without study; making something from truly nothing.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Field Fix",
-          "grants": "Repair common tools, gear, and mechanisms with scrounged parts; improvise a simple tool on the spot; judge what broke something.",
-          "cannot": "Fixes are temporary under hard use; no locks, no Precursor work.",
-          "functions": [
-            "mend",
-            "make"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Coaxing Function",
-          "grants": "Open common locks and mechanisms; repairs now hold permanently; build compound devices (pulley rigs, traps, stills) from salvage.",
-          "cannot": "Precursor mechanisms still resist; complex builds take a day and materials.",
-          "functions": [
-            "mend",
-            "make",
-            "open"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Speaker to Machines",
-          "grants": "Diagnose ANY mechanism by touch and sound, Precursor included; once per day, coax one dead device to run one more time; your builds count as quality goods.",
-          "cannot": "Coaxed devices die again after; understanding Precursor function is not understanding purpose.",
-          "functions": [
-            "mend",
-            "make",
-            "open",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "make",
-        "mend",
-        "open",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "PUZZLE",
-        "SURVIVE"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "powerSystem": "valley_craft",
-      "shape": "healing",
-      "operativeAxis": [
-        "repair",
-        "access"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 1,
-          "d": 4
-        },
-        "plus": 1,
-        "note": "mends the MADE. The folk-shadow of enginewright's mend_device."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "access",
-          "delta": "OPEN common locks and mechanisms; repairs now HOLD PERMANENTLY; build compound devices from scrap",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: diagnose ANY mechanism by touch and sound, PRECURSOR INCLUDED; ONCE PER DAY coax one dead device to run ONE MORE TIME",
-          "from": "r3 grants — its own stated rate"
-        }
-      ],
-      "intensity": {
-        "conserve": "a quick fix — half the durability, done now",
-        "surge": "double the work; COAXED DEVICES DIE AGAIN AFTER"
-      },
-      "bounds": [
-        {
-          "text": "fixes are TEMPORARY UNDER HARD USE at r1",
-          "class": "soft"
-        },
-        {
-          "text": "PRECURSOR MECHANISMS STILL RESIST",
-          "class": "hard"
-        },
-        {
-          "text": "COAXED DEVICES DIE AGAIN AFTER — and understanding Precursor FUNCTION is not understanding its PURPOSE",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A puzzle/survive action that restores health. It rolls 1d4+1 Ranks: rank 2 extends access; rank 3 adds to special. Limit: precursor Mechanisms Still Resist."
-    },
-    {
-      "id": "beastfriend",
-      "name": "Beastfriend",
-      "levelReq": 1,
-      "energyCost": 6,
-      "axes": {
-        "instinct_analysis": -0.5,
-        "individual_collective": 0.2
-      },
-      "attribute": "social",
-      "effectTags": [
-        "animals",
-        "calm",
-        "bond"
-      ],
-      "narrationHints": "Stillness animals trust. Reading ears and hackles like weather; being read back and found harmless.",
-      "description": "Calm, read, and work with animals — from skittish livestock to wary wild things.",
-      "notFor": "Commanding animals against their nature; Precursor-altered creatures without a check; anything mid-frenzy.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Gentle Presence",
-          "grants": "Calm domestic animals; read a beast's mood and recent past; wild animals don't flee your approach.",
-          "cannot": "No commands — only trust; predators stay dangerous.",
-          "functions": [
-            "reveal",
-            "command"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Working Trust",
-          "grants": "Ask simple tasks of animals that know you (carry, guard, find); a companion beast may take you on; sense what nearby animals sense.",
-          "cannot": "Companion is a partner, not a tool — mistreat it and it's gone; borrowed senses are impressions, not sight.",
-          "functions": [
-            "reveal",
-            "command",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Old Accord",
-          "grants": "Parley meaningfully with any natural creature; Precursor-touched beasts recognize you as neutral. And in wild country you may call for aid and something answers — it places itself between you and what threatens you, and it will strike to wound: a large animal in earnest breaks bone and tears, and none of that is yours to moderate once it has begun.",
-          "cannot": "You ASK — always. Nothing here is compelled, and a creature that answers is risking its own life for you, may be hurt or killed doing it, and remembers. Ask too often, or for the wrong thing, and the wild country stops answering.",
-          "functions": [
-            "reveal",
-            "command",
-            "bind",
-            "summon",
-            "strike"
-          ],
-          "gains": "broaden",
-          "harmRung": "damaging"
-        }
-      ],
-      "functions": [
-        "bind",
-        "command",
-        "reveal",
-        "strike",
-        "summon"
-      ],
-      "challengeTypes": [
-        "SOCIAL",
-        "EXPLORE",
-        "STEALTH"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "damaging",
-      "powerSystem": "valley_craft",
-      "shape": "bolster",
-      "operativeAxis": [
-        "rapport",
-        "targets"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 6,
-        "targets": 1,
-        "note": "damaging rung (a companion beast can fight). SOCIAL."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "ask simple tasks of animals that know you; A COMPANION BEAST MAY TAKE YOU ON; sense what nearby animals sense",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: parley meaningfully with ANY natural creature; PRECURSOR-TOUCHED BEASTS RECOGNIZE YOU AS NEUTRAL",
-          "from": "r3 grants — a SEVENTH precursor hook"
-        }
-      ],
-      "intensity": {
-        "conserve": "settle the animals — half the rapport, and it asks nothing of them",
-        "surge": "double it; YOU ASK — ALWAYS. Nothing here is compelled."
-      },
-      "bounds": [
-        {
-          "text": "NO COMMANDS — ONLY TRUST; predators stay dangerous",
-          "class": "hard"
-        },
-        {
-          "text": "a companion is A PARTNER, NOT A TOOL — mistreat it and it is gone",
-          "class": "hard"
-        },
-        {
-          "text": "ASKING IS THE CRAFT — it is what beasts answer readily; compelling a beast instead of asking costs double energy, is resisted at advantage, and that animal will never be asked successfully again",
-          "class": "soft"
-        }
-      ],
-      "plainly": "A social/explore/stealth action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: nO Commands — Only Trust; predators stay dangerous."
-    },
-    {
-      "id": "stonewise",
-      "name": "Stonewise",
-      "levelReq": 1,
-      "energyCost": 5,
-      "axes": {
-        "concrete_abstract": -0.5,
-        "tradition_innovation": -0.2
-      },
-      "attribute": "mental",
-      "effectTags": [
-        "structure",
-        "terrain",
-        "climb"
-      ],
-      "narrationHints": "Reading load paths and old repairs in a wall like a mason's diary. Knowing which ledge holds and which lies.",
-      "description": "Read stone, structure, and ground: what holds, what's about to fail, what was built and why.",
-      "notFor": "X-ray sight (reads surfaces and stresses, not hidden rooms directly); metallurgy; speed — a proper read takes minutes.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Sound Footing",
-          "grants": "Judge whether floor, bridge, ledge, or wall will hold; find the safe climbing line; spot recent structural disturbance.",
-          "cannot": "Deliberately disguised work needs a check; no read through cladding.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Mason's Eye",
-          "grants": "Date construction and read its story (repairs, sieges, haste); detect voids by resonance tap; find the weak point that brings a structure down — or the brace that saves it. Named to a crew with hammers, that point breaks a wall in one session, and whatever is standing under it comes down with it.",
-          "cannot": "Void detection gives presence, not layout; Precursor materials read as 'wrong' without detail.",
-          "functions": [
-            "reveal",
-            "mend",
-            "break"
-          ],
-          "gains": "broaden",
-          "harmRung": "damaging"
-        },
-        {
-          "rank": 3,
-          "name": "Bones of the World",
-          "grants": "Read geology like architecture: predict collapse, slide, or sinkhole; navigate caves by stone-sense; Precursor construction yields its structural logic (not its purpose).",
-          "cannot": "Prediction is hours-scale, not weeks; living rock keeps some secrets — margin of error the GM holds.",
-          "functions": [
-            "reveal",
-            "mend",
-            "break",
-            "foresee"
-          ],
-          "gains": "broaden",
-          "harmRung": "damaging"
-        }
-      ],
-      "functions": [
-        "break",
-        "foresee",
-        "mend",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "EXPLORE",
-        "PUZZLE"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "damaging",
-      "powerSystem": "valley_craft",
-      "shape": "setup",
-      "operativeAxis": [
-        "structuralRead",
-        "foresight"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 1,
-        "note": "damaging rung (it finds the weak point). The folk-shadow of mason's stone_read."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "structuralRead",
-          "delta": "DATE construction and read its story; DETECT VOIDS BY RESONANCE TAP; find the weak point",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "foresight",
-          "delta": "read GEOLOGY like architecture — predict collapse, slide, or sinkhole; navigate caves by stone-sense; PRECURSOR CONSTRUCTION reads partially",
-          "from": "r3 grants — an EIGHTH precursor hook"
-        }
-      ],
-      "intensity": {
-        "conserve": "a look at the stone — half the certainty, and instant",
-        "surge": "double the read; PREDICTION IS HOURS-SCALE, NOT WEEKS"
-      },
-      "bounds": [
-        {
-          "text": "deliberately DISGUISED WORK needs a check",
-          "class": "soft"
-        },
-        {
-          "text": "VOID DETECTION GIVES PRESENCE, NOT LAYOUT",
-          "class": "hard"
-        },
-        {
-          "text": "PRECURSOR MATERIAL reads only partially",
-          "class": "hard"
-        },
-        {
-          "text": "PREDICTION IS HOURS-SCALE, NOT WEEKS — living rock keeps some secrets",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A explore/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens structuralRead; rank 3 extends foresight. Limit: void Detection Gives Presence, Not Layout."
-    },
-    {
-      "id": "rivercraft",
-      "name": "Rivercraft",
-      "levelReq": 1,
-      "energyCost": 5,
-      "axes": {
-        "instinct_analysis": -0.2,
-        "concrete_abstract": -0.3
-      },
-      "attribute": "practical",
-      "effectTags": [
-        "water",
-        "weather",
-        "boats"
-      ],
-      "narrationHints": "The river as a moody neighbor you've known for years. Reading current-braid and sky together.",
-      "description": "Boats, currents, crossings, and weather-sense — the water-roads of the valley and what moves on them.",
-      "notFor": "Open sea; fighting the water (it's about not fighting); breathing underwater.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "River Legs",
-          "grants": "Handle small craft in rough water; find the safe ford; read tomorrow's weather from sky and water; swim strongly burdened.",
-          "cannot": "Rapids beyond class of your craft still say no; weather-sense is a day out, not a week.",
-          "functions": [
-            "move",
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Current's Confidant",
-          "grants": "Run water others portage; read what the river carries and where from (debris, silt, bodies of news); night navigation by sound of water alone.",
-          "cannot": "The gray water reads as silence — a gap, not a message; can't read still water's depths.",
-          "functions": [
-            "move",
-            "reveal",
-            "travel"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Watershed Mind",
-          "grants": "Hold the whole watershed in your head: predict flood and drought weeks out, trace ANY sample to its source reach, know where something dumped upstream comes ashore.",
-          "cannot": "Tracing needs a sample in hand; the watershed's Precursor plumbing appears in the model only as anomalies.",
-          "functions": [
-            "move",
-            "reveal",
-            "travel",
-            "foresee"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "foresee",
-        "move",
-        "reveal",
-        "travel"
-      ],
-      "challengeTypes": [
-        "EXPLORE",
-        "CHASE",
-        "SURVIVE"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "powerSystem": "valley_craft",
-      "shape": "reposition",
-      "operativeAxis": [
-        "watercraft",
-        "foresight",
-        "range"
-      ],
-      "mechanic": {
-        "range": 10,
-        "push": 0,
-        "magnitude": 3,
-        "duration": 4
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "watercraft",
-          "delta": "RUN WATER OTHERS PORTAGE; read WHAT THE RIVER CARRIES and where from; night navigation",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: hold THE WHOLE WATERSHED in your head — predict flood and drought WEEKS OUT, trace ANY sample to its source reach",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "read the water — half the certainty, and it costs nothing",
-        "surge": "double it; THE GRAY WATER READS AS SILENCE — a gap, not a message"
-      },
-      "bounds": [
-        {
-          "text": "rapids BEYOND YOUR CRAFT'S CLASS still say no",
-          "class": "hard"
-        },
-        {
-          "text": "THE GRAY WATER READS AS SILENCE — a gap, not a message",
-          "class": "hard"
-        },
-        {
-          "text": "tracing NEEDS A SAMPLE IN HAND",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A explore/chase/survive action that moves you or someone else. Its strength is rated 3 out of 10, and lasts for about 4 hours. Range is 10. Ranks: rank 2 deepens watercraft; rank 3 adds to special. Limit: rapids Beyond Your Craft'S Class still say no."
-    },
-    {
-      "id": "quiet_step",
-      "name": "Quiet Step",
-      "levelReq": 1,
-      "energyCost": 6,
-      "axes": {
-        "individual_collective": -0.4,
-        "instinct_analysis": -0.2
-      },
-      "attribute": "physical",
-      "effectTags": [
-        "stealth",
-        "scout",
-        "evade"
-      ],
-      "narrationHints": "Moving like a held breath. Not invisibility — just never being where the eye lands.",
-      "description": "Move unseen and unheard; scout, shadow, and slip away.",
-      "notFor": "Open ground in daylight against alert watchers; staying hidden while acting loudly; groups — this craft is solitary.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Soft Ground",
-          "grants": "Move silently over natural terrain; use shadow and cover to pass casual watch; shadow a person through a town unnoticed.",
-          "cannot": "Alert sentries and open ground beat you without a check; armor noise is armor noise.",
-          "functions": [
-            "conceal",
-            "move"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Unremarked",
-          "grants": "Pass alert watchers with cover; read a guard pattern in minutes and thread it; leave a pursuit behind in any broken country.",
-          "cannot": "Animals still smell you; can't vanish from someone already watching you.",
-          "functions": [
-            "conceal",
-            "move"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Unseen Errand",
-          "grants": "Enter and leave watched places as if the watch blinked; move a small party quietly using your reads; once per day, break line-of-sight and be simply gone.",
-          "cannot": "'Gone' means escaped, not teleported — the GM places you plausibly; Precursor sensors don't blink.",
-          "functions": [
-            "conceal",
-            "move"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "conceal",
-        "move"
-      ],
-      "challengeTypes": [
-        "STEALTH",
-        "CHASE"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "powerSystem": "valley_craft",
-      "shape": "reposition",
-      "operativeAxis": [
-        "stealth",
-        "targets"
-      ],
-      "mechanic": {
-        "range": 6,
-        "push": 0,
-        "magnitude": 3,
-        "duration": 4,
-        "targets": 1,
-        "note": "PHYSICAL. The folk-shadow of umbral's shadowstep, at a human scale."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "stealth",
-          "delta": "pass ALERT WATCHERS with cover; READ A GUARD PATTERN in minutes and thread it; leave a pursuit behind in broken country",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "extend",
-          "axis": "targets",
-          "delta": "enter and leave watched places AS IF THE WATCH BLINKED; MOVE A SMALL PARTY quietly; ONCE PER DAY break a pursuit clean",
-          "from": "r3 grants — its own stated rate"
-        }
-      ],
-      "intensity": {
-        "conserve": "move quietly — half the concealment, and you can move at speed",
-        "surge": "double it; 'GONE' MEANS ESCAPED, NOT TELEPORTED"
-      },
-      "bounds": [
-        {
-          "text": "ALERT SENTRIES AND OPEN GROUND beat you without a check",
-          "class": "soft"
-        },
-        {
-          "text": "ANIMALS STILL SMELL YOU",
-          "class": "hard"
-        },
-        {
-          "text": "cannot vanish from SOMEONE ALREADY WATCHING",
-          "class": "hard"
-        },
-        {
-          "text": "'GONE' MEANS ESCAPED, NOT TELEPORTED — the GM places you plausibly",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A stealth/chase action that moves you or someone else. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 6. Ranks: rank 2 deepens stealth; rank 3 extends targets. Limit: animals Still Smell You."
-    },
-    {
-      "id": "storykeeper",
-      "name": "Storykeeper",
-      "levelReq": 1,
-      "energyCost": 4,
-      "axes": {
-        "tradition_innovation": -0.5,
-        "concrete_abstract": 0.3
-      },
-      "attribute": "mental",
-      "effectTags": [
-        "lore",
-        "memory",
-        "perform"
-      ],
-      "narrationHints": "The one who holds the valley's memory out loud. A story for every stone, and the discipline to keep them straight.",
-      "description": "Hold, recall, and deploy the valley's stories — living memory as a working tool.",
-      "notFor": "Reading (this is oral craft); knowing what nobody ever told anyone; lying — a storykeeper's coin is accuracy.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Long Memory",
-          "grants": "Recall any story you've heard verbatim; know the common lore of any valley place or family; earn welcome in a strange hall by performing.",
-          "cannot": "Recall is of what you've HEARD — gaps are gaps; welcome isn't trust.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Threads Between",
-          "grants": "Cross-reference stories to surface what they jointly imply (codex synergy: +insight when a known topic is in play); notice when a live account contradicts the record; a told story can steady a shaken group.",
-          "cannot": "Implication isn't proof; steadying works once per group per trouble.",
-          "functions": [
-            "reveal",
-            "track"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Keeper of the Deep Stock",
-          "grants": "Access the old stratum — pre-crisis stories most keepers lost; recognize when events are RHYMING with an old story and read the pattern forward; your tellings enter the community record with weight.",
-          "cannot": "The old stratum is fragmentary and the GM holds its gaps; pattern-rhyme is probabilistic, never prophecy.",
-          "functions": [
-            "reveal",
-            "track",
-            "foresee"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "foresee",
-        "reveal",
-        "track"
-      ],
-      "challengeTypes": [
-        "INVESTIGATE",
-        "SOCIAL"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "powerSystem": "valley_craft",
-      "shape": "setup",
-      "operativeAxis": [
-        "recall",
-        "implication"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 1
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "implication",
-          "delta": "CROSS-REFERENCE stories to surface WHAT THEY JOINTLY IMPLY (+insight when a known topic is in play)",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: access THE OLD STRATUM — pre-crisis stories most keepers lost; recognize when events are RHYMING WITH AN OLD STORY",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "recall what you heard — half the cross-reference, and it costs nothing",
-        "surge": "double it; IMPLICATION ISN'T PROOF"
-      },
-      "bounds": [
-        {
-          "text": "recall is of WHAT YOU HAVE HEARD — gaps are gaps",
-          "class": "hard"
-        },
-        {
-          "text": "IMPLICATION ISN'T PROOF",
-          "class": "hard"
-        },
-        {
-          "text": "the old stratum is FRAGMENTARY and the GM holds its gaps",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens implication; rank 3 adds to special. Limit: recall is of What You Have Heard — gaps are gaps."
-    },
-    {
-      "id": "hearthbinding",
-      "name": "Hearthbinding",
-      "levelReq": 1,
-      "energyCost": 5,
-      "axes": {
-        "individual_collective": 0.5,
-        "mechanical_spiritual": 0.2
-      },
-      "attribute": "social",
-      "effectTags": [
-        "camp",
-        "morale",
-        "recover"
-      ],
-      "narrationHints": "Making anywhere briefly home. The fire built right, the food that tastes like safety, watches that let people actually sleep.",
-      "description": "Turn a stop into a hearth: camps, meals, and watch-order that restore a group beyond what rest alone gives.",
-      "notFor": "Solo benefit (this craft is for groups); combat; hurry — a hearth takes an evening.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Good Camp",
-          "grants": "Camps you make restore +2 extra health and energy to everyone overnight; cook a real meal from thin supplies; a night's watch order that actually works.",
-          "cannot": "Needs an evening and minimal materials; no benefit in a hostile active scene.",
-          "functions": [
-            "sustain",
-            "heal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Table Peace",
-          "grants": "Meals you host suspend quarrels at the fire — hostile parties will eat together; overnight recovery also clears one minor condition; travelers remember your camps and owe small warmth.",
-          "cannot": "Peace lasts as long as the meal plus the night; deep feuds are suspended, not settled.",
-          "functions": [
-            "sustain",
-            "heal",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Standing Hearth",
-          "grants": "A camp you keep three nights becomes a named place (enters place memory); companions and party bond faster at your fire (bond-relevant deeds count +1 weight); once per journey, a full night at your hearth restores as a rest at home.",
-          "cannot": "Named places persist but so does their reputation — what happens there is remembered; the once-per-journey rest can't raise the incapacitated.",
-          "functions": [
-            "sustain",
-            "heal",
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "bind",
-        "heal",
-        "sustain"
-      ],
-      "challengeTypes": [
-        "SURVIVE"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "powerSystem": "valley_craft",
-      "shape": "bolster",
-      "operativeAxis": [
-        "restoration",
-        "targets",
-        "persistence"
-      ],
-      "mechanic": {
-        "magnitude": 2,
-        "duration": 8,
-        "targets": 6,
-        "note": "⚠️ THE CATALOG'S MOST MECHANICALLY EXPLICIT CRAFT: '+2 extra health and energy to everyone overnight' — stated as a number, in the source, at r1."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "restoration",
-          "delta": "meals you host SUSPEND QUARRELS at the fire — hostile parties WILL EAT TOGETHER; overnight recovery also clears one minor condition",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "persistence",
-          "delta": "SPECIAL: a camp you keep THREE NIGHTS BECOMES A NAMED PLACE (enters place memory); companions and party BOND FASTER at your fire",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a decent camp — half the restoration, and it asks little",
-        "surge": "double it; PEACE LASTS AS LONG AS THE MEAL PLUS THE NIGHT"
-      },
-      "bounds": [
-        {
-          "text": "needs AN EVENING AND MINIMAL MATERIALS; no benefit in a hostile place",
-          "class": "hard"
-        },
-        {
-          "text": "PEACE LASTS AS LONG AS THE MEAL PLUS THE NIGHT — deep feuds are not solved by dinner",
-          "class": "hard"
-        },
-        {
-          "text": "NAMED PLACES PERSIST BUT SO DOES THEIR REPUTATION",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A survive action that strengthens someone. Its strength is rated 2 out of 10 It affects 6 targets, and lasts for about 8 hours Ranks: rank 2 deepens restoration; rank 3 adds to persistence. Limit: needs AN Evening And Minimal Materials; no benefit in a hostile place.",
-      "upkeep": {
-        "prepHoursByRank": {
-          "1": 0,
-          "2": 8,
-          "3": 72
-        },
-        "accrual": "gate",
-        "prepCondition": "same camp, consecutive nights",
-        "attended": true,
-        "interruptible": true,
-        "onInterrupt": "the count restarts",
-        "note": "GATE: you kept the camp that night or you did not. And it is the one where interruption RESTARTS rather than pauses, because a named place is made by continuity."
-      }
-    },
-    {
-      "id": "keen_appraisal",
-      "name": "Keen Appraisal",
-      "levelReq": 1,
-      "energyCost": 4,
-      "axes": {
-        "concrete_abstract": -0.2,
-        "instinct_analysis": 0.4
-      },
-      "attribute": "mental",
-      "effectTags": [
-        "observe",
-        "value",
-        "detail"
-      ],
-      "narrationHints": "The glance that inventories a room. Worth, wear, provenance, and the one thing that doesn't belong.",
-      "description": "See what's actually there: value, provenance, condition, and the detail everyone else missed.",
-      "notFor": "Speed-reading people's intent (objects and scenes, not minds); magic-sense; appraising the truly unique without comparables.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "True Worth",
-          "grants": "Price goods accurately at a glance; spot forgery, shoddy work, and hidden damage; notice the one detail out of place in a scene.",
-          "cannot": "Exotic and Precursor items read as 'beyond scale'; the detail is noticed, not explained.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Provenance",
-          "grants": "Read an object's history from wear (who used it, how, how long); estimate any collection's worth in minutes; spot a concealed item on a person by how they carry.",
-          "cannot": "History is inference — deliberate aging can fool a first read; carrying-reads need line of sight.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Nothing Hidden",
-          "grants": "One sweep of a room yields its full inventory including the concealed (GM names what's findable); appraise the priceless by structural logic; your valuation is accepted as expert in any market.",
-          "cannot": "The sweep is once per location per visit; some Precursor concealment is beyond craft.",
-          "functions": [
-            "reveal"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "reveal"
-      ],
-      "challengeTypes": [
-        "INVESTIGATE",
-        "SOCIAL"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "powerSystem": "valley_craft",
-      "shape": "setup",
-      "operativeAxis": [
-        "appraisal",
-        "perceptionDepth"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "duration": 1
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "perceptionDepth",
-          "delta": "read an object's HISTORY FROM WEAR — who used it, how, how long; estimate a collection's worth in minutes",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: ONE SWEEP OF A ROOM yields its FULL INVENTORY INCLUDING THE CONCEALED (once per location per visit)",
-          "from": "r3 grants — its own stated rate"
-        }
-      ],
-      "intensity": {
-        "conserve": "a glance at the goods — half the depth, instant",
-        "surge": "double it; EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'"
-      },
-      "bounds": [
-        {
-          "text": "EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'",
-          "class": "hard"
-        },
-        {
-          "text": "HISTORY IS INFERENCE — deliberate aging can fool a first read",
-          "class": "soft"
-        },
-        {
-          "text": "the sweep is ONCE PER LOCATION PER VISIT",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: exotic And Precursor Items Read AS 'Beyond Scale'."
-    },
-    {
-      "id": "old_roads",
-      "name": "Old Roads",
-      "levelReq": 2,
-      "energyCost": 7,
-      "axes": {
-        "tradition_innovation": -0.3,
-        "mechanical_spiritual": 0.3,
-        "concrete_abstract": 0.2
-      },
-      "attribute": "mental",
-      "effectTags": [
-        "precursor",
-        "salvage",
-        "sense"
-      ],
-      "narrationHints": "A feel for where the old world's bones run. Straight lines under crooked fields; doors that were never doors.",
-      "description": "Sense, follow, and safely approach Precursor traces — the old roads under the valley's skin.",
-      "notFor": "Understanding Precursor PURPOSE (only presence and pattern); activating anything; safety guarantees — this craft finds the door, not what's behind it.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Straight Feeling",
-          "grants": "Sense Precursor material and workings nearby (direction and rough distance); recognize safe salvage from live remnant; follow a buried alignment across country.",
-          "cannot": "Sense, not sight — no detail; depth beyond a few meters muddies the read.",
-          "functions": [
-            "reveal",
-            "track"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "Reading the Bones",
-          "grants": "Map a site's Precursor layout by walking it; judge whether a remnant is dormant, cycling, or waking; salvage from the edge of live systems without triggering them.",
-          "cannot": "Judgment is craft, not certainty — 'waking' can lie; nothing here opens what's sealed.",
-          "functions": [
-            "reveal",
-            "track",
-            "travel"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Where They Walked",
-          "grants": "The deep net reveals itself: perceive the valley's whole Precursor lattice from any node; sense when the lattice CHANGES state anywhere on it; approach places that repel others.",
-          "cannot": "The lattice's purpose stays dark — pattern without meaning; state-changes arrive as feeling, not fact; some doors notice being noticed.",
-          "functions": [
-            "reveal",
-            "track",
-            "travel"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "functions": [
-        "reveal",
-        "track",
-        "travel"
-      ],
-      "challengeTypes": [
-        "EXPLORE",
-        "INVESTIGATE"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "powerSystem": "valley_craft",
-      "shape": "setup",
-      "operativeAxis": [
-        "precursorSense",
-        "range"
-      ],
-      "mechanic": {
-        "magnitude": 4,
-        "duration": 2,
-        "range": 30,
-        "note": "⚠️ THE NINTH AND MOST IMPORTANT PRECURSOR HOOK IN THE CATALOG — and it belongs to ORDINARY VALLEY FOLK."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "precursorSense",
-          "delta": "MAP A SITE'S PRECURSOR LAYOUT by walking it; judge whether a remnant is DORMANT, CYCLING, OR WAKING; salvage safely",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: THE DEEP NET REVEALS ITSELF — perceive the valley's WHOLE PRECURSOR LATTICE from any node, and SENSE WHEN THE LATTICE CHANGES",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a sense of the old work — half the range, and it costs nothing",
-        "surge": "double the reach; THE LATTICE'S PURPOSE STAYS DARK — pattern without meaning"
-      },
-      "bounds": [
-        {
-          "text": "SENSE, NOT SIGHT — no detail; depth beyond a few meters muddies",
-          "class": "hard"
-        },
-        {
-          "text": "JUDGMENT IS CRAFT, NOT CERTAINTY — 'waking' CAN LIE",
-          "class": "hard"
-        },
-        {
-          "text": "THE LATTICE'S PURPOSE STAYS DARK — pattern without meaning",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 4 out of 10, and lasts for about 2 hours. Range is 30. Ranks: rank 2 deepens precursorSense; rank 3 adds to special. Limit: sense, Not Sight — no detail; depth beyond a few meters muddies."
-    },
-    {
-      "id": "blend_in",
-      "name": "Blend In",
-      "levelReq": 1,
-      "energyCost": 3,
-      "attribute": "social",
-      "axes": {
-        "dark_light": -0.2,
-        "chaos_order": -0.1
-      },
-      "functions": [
-        "conceal",
-        "deceive"
-      ],
-      "narrationHints": "You become the least memorable person in the room.",
-      "description": "Pass unnoticed in a crowd or settlement — look like you belong, be forgotten.",
-      "notFor": "Hiding from someone actively hunting you by name; physical invisibility.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Blend In",
-          "grants": "Move through populated places without drawing notice or memory.",
-          "cannot": "A searcher who knows your face and is looking defeats it.",
-          "functions": [
-            "conceal"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "One of Them",
-          "grants": "Not merely unnoticed — READ as belonging. The guard nods you through; the crowd makes room.",
-          "cannot": "Belonging is a performance you must keep performing. One wrong word and you were always a stranger.",
-          "functions": [
-            "conceal",
-            "deceive"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "Nobody At All",
-          "grants": "You are the person nobody afterward can quite describe — present, unremarkable, entirely forgettable.",
-          "cannot": "Being forgettable means being forgotten. Valleyfolk who lean on this find it hard to be known when they want to be.",
-          "functions": [
-            "conceal",
-            "deceive"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "powerSystem": "valley_craft",
-      "gated": "learned",
-      "challengeTypes": [
-        "STEALTH",
-        "SOCIAL"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "guard",
-      "operativeAxis": [
-        "concealment",
-        "duration"
-      ],
-      "mechanic": {
-        "magnitude": 3,
-        "soak": 0,
-        "soakRank": 0,
-        "duration": 8,
-        "note": "A NINETEENTH DEFENSIVE LOGIC — UNREMARKED: soak 0, and it is not stealth (quiet_step) or concealment (the_harbor) or misdirection (the_false_target). It is BEING UNWORTH NOTICING. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family."
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "concealment",
-          "delta": "not merely unnoticed — READ AS BELONGING. The guard nods you through; THE CROWD MAKES ROOM.",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: you are THE PERSON NOBODY AFTERWARD CAN QUITE DESCRIBE — present, unremarkable, entirely forgettable",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "keep your head down — half the effect, and you can drop it instantly",
-        "surge": "double it; BEING FORGETTABLE MEANS BEING FORGOTTEN"
-      },
-      "bounds": [
-        {
-          "text": "A SEARCHER WHO KNOWS YOUR FACE AND IS LOOKING defeats it",
-          "class": "hard"
-        },
-        {
-          "text": "BELONGING IS A PERFORMANCE YOU MUST KEEP PERFORMING — one wrong detail ends it",
-          "class": "soft"
-        },
-        {
-          "text": "BEING FORGETTABLE MEANS BEING FORGOTTEN — Valleyfolk who lean on this lose things",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A stealth/social action that reduces incoming harm. Its strength is rated 3 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 8 hours Ranks: rank 2 deepens concealment; rank 3 adds to special. Limit: a Searcher Who Knows Your Face And IS Looking defeats it."
-    },
-    {
-      "id": "boundary_stone",
-      "name": "Boundary-Stone",
-      "levelReq": 2,
-      "energyCost": 4,
-      "attribute": "practical",
-      "axes": {
-        "chaos_order": 0.2
-      },
-      "functions": [
-        "bind",
-        "ward"
-      ],
-      "narrationHints": "A marked stone set, and what it forbids stays out.",
-      "description": "Set a simple lasting ward at a threshold — keeps small beasts, weather, or casual trespass out of a camp or home.",
-      "notFor": "Stopping a determined intruder; grand wards.",
-      "powerSystem": "valley_craft",
-      "gated": "learned",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Boundary-Stone",
-          "grants": "Ward a camp or dwelling against animals, weather, and casual intrusion.",
-          "cannot": "A determined person walks through it; it deters, not stops.",
-          "functions": [
-            "ward"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 2,
-          "name": "The Kept Boundary",
-          "grants": "Set a boundary that holds — a threshold, a claim, a line that things notice and respect.",
-          "cannot": "A boundary is a claim, and claims are contested. It holds against what respects it.",
-          "functions": [
-            "ward",
-            "bind"
-          ],
-          "gains": "broaden",
-          "harmRung": "none"
-        },
-        {
-          "rank": 3,
-          "name": "The Old Boundary",
-          "grants": "Set a boundary that has the weight of the old ones — it feels ANCIENT, and even things that do not respect you respect that.",
-          "cannot": "The old boundaries were set by people who paid for them. Yours borrows that credit; the Valley remembers who actually paid.",
-          "functions": [
-            "ward",
-            "bind"
-          ],
-          "gains": "deepen",
-          "harmRung": "none"
-        }
-      ],
-      "challengeTypes": [
-        "SURVIVE",
-        "EXPLORE"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "none",
-      "shape": "guard",
-      "operativeAxis": [
-        "ward",
-        "duration",
-        "autonomy"
-      ],
-      "mechanic": {
-        "magnitude": 4,
-        "soak": 3,
-        "soakRank": 1,
-        "duration": 168,
-        "note": "A folk ward. Note soakRank 1 and the bound: 'A DETERMINED PERSON WALKS THROUGH IT; it DETERS, not stops.'"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "ward",
-          "delta": "set a boundary THAT HOLDS — a threshold, A CLAIM, a line that things NOTICE AND RESPECT",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "autonomy",
-          "delta": "SPECIAL: a boundary with THE WEIGHT OF THE OLD ONES — it FEELS ANCIENT, and even things that do not respect YOU respect IT",
-          "from": "r3 grants — an ELEVENTH autonomy-increment craft"
-        }
-      ],
-      "intensity": {
-        "conserve": "a simple ward — half the deterrence, and it costs nothing to keep",
-        "surge": "double it; A BOUNDARY IS A CLAIM, AND CLAIMS ARE CONTESTED"
-      },
-      "bounds": [
-        {
-          "text": "A DETERMINED PERSON WALKS THROUGH IT — it DETERS, not stops",
-          "class": "hard"
-        },
-        {
-          "text": "A BOUNDARY IS A CLAIM, AND CLAIMS ARE CONTESTED",
-          "class": "hard"
-        },
-        {
-          "text": "THE OLD BOUNDARIES WERE SET BY PEOPLE WHO PAID FOR THEM",
-          "class": "cost"
-        }
-      ],
-      "plainly": "A survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 1 armour), and lasts for about 7 days Ranks: rank 2 deepens ward; rank 3 adds to autonomy. Limit: a Determined Person Walks Through IT — it Deters, not stops."
-    },
-    {
-      "id": "hunters_strike",
-      "name": "Hunter's Strike",
-      "levelReq": 1,
-      "energyCost": 4,
-      "attribute": "physical",
-      "axes": {
-        "violence_peace": -0.2
-      },
-      "functions": [
-        "strike"
-      ],
-      "narrationHints": "The practiced killing blow of someone who feeds a family by it.",
-      "description": "A trained practical strike — spear, sling, axe, bow — honest damage from a working hunter.",
-      "notFor": "Formal martial technique (the Edge); many foes.",
-      "powerSystem": "valley_craft",
-      "gated": "learned",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Hunter's Strike",
-          "grants": "Strike effectively with common weapons; land a killing blow on beast or foe.",
-          "cannot": "No warrior's forms; one target, honest force.",
-          "harmRung": "lethal",
-          "functions": [
-            "strike"
-          ],
-          "gains": "broaden"
-        },
-        {
-          "rank": 2,
-          "name": "The Clean Kill",
-          "grants": "Strike where a thing actually ends — quickly, without waste, without suffering you did not need.",
-          "cannot": "Clean is a discipline, not a mercy. The animal is still dead, and you still did it.",
-          "harmRung": "lethal",
-          "functions": [
-            "strike"
-          ],
-          "gains": "deepen"
-        },
-        {
-          "rank": 3,
-          "name": "The Strike That Feeds",
-          "grants": "Nothing is wasted — the strike, the taking, the use. The old Valley ethic made into a single motion.",
-          "cannot": "It is a hunter's craft, not a soldier's. Turned on people it is exactly as ugly as it sounds.",
-          "harmRung": "lethal",
-          "functions": [
-            "strike"
-          ],
-          "gains": "deepen"
-        }
-      ],
-      "challengeTypes": [
-        "FIGHT"
-      ],
-      "tradition": "valley_craft",
-      "nativeOrCombination": "native",
-      "harmRung": "lethal",
-      "shape": "damage",
-      "operativeAxis": [
-        "damage",
-        "precision"
-      ],
-      "mechanic": {
-        "dice": {
-          "n": 1,
-          "d": 6
-        },
-        "plus": 0,
-        "marginFloorPer": 0.02,
-        "note": "⚠️ THE T-I DAMAGE BASELINE. lethal rung, PHYSICAL, one target, honest force. This is the craft Erik's original benchmark was about: 'a T-I strike at max should be able to kill a T-I beast.'"
-      },
-      "rankDeltas": [
-        {
-          "rank": 2,
-          "kind": "deepen",
-          "axis": "precision",
-          "delta": "STRIKE WHERE A THING ACTUALLY ENDS — quickly, without waste, WITHOUT SUFFERING YOU DID NOT NEED",
-          "from": "r2 grants"
-        },
-        {
-          "rank": 3,
-          "kind": "add",
-          "axis": "special",
-          "delta": "SPECIAL: NOTHING IS WASTED — the strike, the taking, the use. 'The old Valley ethic made into a single motion.'",
-          "from": "r3 grants"
-        }
-      ],
-      "intensity": {
-        "conserve": "a measured strike — half the force, and the animal is not ruined",
-        "surge": "double it; CLEAN IS A DISCIPLINE, NOT A MERCY — the animal is still dead"
-      },
-      "bounds": [
-        {
-          "text": "NO WARRIOR'S FORMS — one target, honest force",
-          "class": "hard"
-        },
-        {
-          "text": "CLEAN IS A DISCIPLINE, NOT A MERCY — the animal is still dead",
-          "class": "hard"
-        },
-        {
-          "text": "it is built for animals: against a person it works at normal effect but the deed is recorded as a killing, not a hunt, and your standing changes accordingly",
-          "class": "hard"
-        }
-      ],
-      "plainly": "A fight action that deals damage. It rolls 1d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: nO Warrior'S Forms — one target, honest force."
+     "rank": 3,
+     "name": "Country Speaks",
+     "grants": "One look at open country reveals routes, hazards, and anything recently unusual; anticipate where quarry is HEADED, not just where it went.",
+     "cannot": "Prediction fails against quarry that knows you're tracking; not mind-reading — a feint can still fool you.",
+     "functions": [
+      "reveal",
+      "track",
+      "travel",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     }
-  ],
-  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+   ],
+   "functions": [
+    "foresee",
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "challengeTypes": [
+    "EXPLORE",
+    "INVESTIGATE"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "setup",
+   "operativeAxis": [
+    "tracking",
+    "timeReach",
+    "travelSpeed"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "timeReach": 24,
+    "note": "r1's own number: 'a clear trail UP TO A DAY OLD'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "timeReach+travelSpeed",
+     "delta": "trails DAYS old; read a campsite's story (numbers, mood, hurry); TRAVEL TIME -1H on familiar routes",
+     "from": "r2 grants — its own stated number"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: one look at open country reveals routes, hazards and anything recently unusual; ANTICIPATE WHERE QUARRY IS HEADED",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick read of the ground — half the reach, and it costs no time",
+    "surge": "double the read; PREDICTION FAILS AGAINST QUARRY THAT KNOWS YOU ARE TRACKING"
+   },
+   "bounds": [
+    {
+     "text": "trails OLDER THAN A DAY at r1; deliberate anti-tracking beats you",
+     "class": "soft"
+    },
+    {
+     "text": "NO EFFECT IN TRUE WHITEOUT; cannot track flyers",
+     "class": "hard"
+    },
+    {
+     "text": "PREDICTION FAILS AGAINST QUARRY THAT KNOWS YOU ARE TRACKING",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 extends timeReach+travelSpeed; rank 3 adds to special. Limit: nO Effect IN True Whiteout; cannot track flyers.",
+   "upkeep": {
+    "trailAgeHoursMax": 24,
+    "byRank": {
+     "1": 24,
+     "2": 72,
+     "3": 168
+    }
+   }
+  },
+  {
+   "id": "greenlore",
+   "name": "Greenlore",
+   "levelReq": 1,
+   "energyCost": 5,
+   "axes": {
+    "mechanical_spiritual": 0.1,
+    "concrete_abstract": -0.3
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "heal",
+    "plants",
+    "remedy"
+   ],
+   "narrationHints": "Hedge-medicine with dirt under its nails. Poultices, bitter teas, knowing which mushroom forgives and which doesn't.",
+   "description": "Field medicine and plant knowledge: remedies, poultices, antidotes, and what's safe to eat.",
+   "notFor": "Surgery or broken bones beyond splinting; instant effects (remedies take time); anything without materials to hand.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Hedge Remedy",
+     "grants": "Forage safe food and common medicinals; brew a poultice or tea that restores small health over a rest; identify common poisons.",
+     "cannot": "Can't treat serious wounds or strong toxins; needs local plants and an hour.",
+     "functions": [
+      "reveal",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Deep Pharmacopeia",
+     "grants": "Counter most natural poisons and sickness; remedies now also restore energy; read a person's ailment from face, breath, and gait.",
+     "cannot": "Precursor-touched afflictions resist; can't stockpile — preparations spoil in days.",
+     "functions": [
+      "reveal",
+      "heal",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Old Recipes",
+     "grants": "Brews that verge on legend: a night's sleep in an hour, clarity through exhaustion, one dose that stabilizes the dying. Recognize Precursor-altered growth. And the hand that knows all of this knows it BOTH WAYS — a draught that dulls, slows, sickens, or drops a person where they stand, prepared as carefully as any remedy.",
+     "cannot": "It has to be taken, which means it has to be given — this is patient, deliberate work and never a thing done in a fight. Valley folk hang people for it. And every herbalist good enough to do it is the first person suspected when someone falls ill, which is why most of them never learn this rank at all.",
+     "functions": [
+      "reveal",
+      "heal",
+      "sustain",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "functions": [
+    "heal",
+    "hinder",
+    "reveal",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "SURVIVE"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "powerSystem": "valley_craft",
+   "shape": "healing",
+   "operativeAxis": [
+    "healing",
+    "remedy"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 4
+    },
+    "plus": 1,
+    "note": "incapacitating rung (it also poisons). A FOURTEENTH THEORY OF MEDICINE — HERBAL: small, reliable, over a rest."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "remedy",
+     "delta": "counter MOST NATURAL poisons and sickness; remedies now ALSO RESTORE ENERGY; read an ailment from face and breath",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: brews verging on legend — A NIGHT'S SLEEP IN AN HOUR, clarity through exhaustion, ONE DOSE THAT STABILIZES THE DYING",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a simple tea — half the restoration, brewed in half the time",
+    "surge": "double the potency; IT CANNOT BE STOCKPILED — preparation is the craft"
+   },
+   "bounds": [
+    {
+     "text": "cannot treat SERIOUS WOUNDS or strong toxins; needs LOCAL PLANTS",
+     "class": "hard"
+    },
+    {
+     "text": "PRECURSOR-TOUCHED AFFLICTIONS RESIST",
+     "class": "hard"
+    },
+    {
+     "text": "cannot stockpile — preparation is the craft",
+     "class": "soft"
+    },
+    {
+     "text": "IT HAS TO BE TAKEN, WHICH MEANS IT HAS TO BE GIVEN",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A survive action that restores health. It rolls 1d4+1 Ranks: rank 2 deepens remedy; rank 3 adds to special. Limit: cannot treat Serious Wounds or strong toxins; needs Local Plants."
+  },
+  {
+   "id": "mediators_tongue",
+   "name": "Mediator's Tongue",
+   "levelReq": 1,
+   "energyCost": 5,
+   "axes": {
+    "individual_collective": 0.4,
+    "tradition_innovation": -0.2
+   },
+   "attribute": "social",
+   "effectTags": [
+    "calm",
+    "negotiate",
+    "truth"
+   ],
+   "narrationHints": "The voice that lowers a room's temperature. Naming each side's real stake out loud until the knives feel silly.",
+   "description": "De-escalate, arbitrate, and find the shape of a deal both sides can live with.",
+   "notFor": "Deception (this craft is spent honestly or it stops working); commanding crowds; anyone with nothing left to lose.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Cool the Room",
+     "grants": "Halt a brewing fight long enough for words; read what each party actually wants beneath what they're saying.",
+     "cannot": "Doesn't work mid-violence; can't make anyone accept — only opens the door.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Fair Measure",
+     "grants": "Broker deals that hold — agreements you mediate gain weight in the community ledger; call out a lie in negotiation and be believed.",
+     "cannot": "Can't broker what one side truly can't give; your reputation is collateral on every deal.",
+     "functions": [
+      "reveal",
+      "bind",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Binding Word",
+     "grants": "Arbitrate feuds of long standing; your settlements carry near-law in communities that know you; once per season, one hostile audience becomes neutral.",
+     "cannot": "Fails against zealotry; a settlement you break yourself burns this ability's trust to rank 1 until amends.",
+     "functions": [
+      "reveal",
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "bolster",
+   "operativeAxis": [
+    "deescalation",
+    "authority"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 4,
+    "note": "SOCIAL. The folk-shadow of stillhold's stillcraft, and the lore says so explicitly."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "authority",
+     "delta": "broker deals THAT HOLD — agreements you mediate GAIN WEIGHT IN THE COMMUNITY LEDGER; call out a lie in negotiation",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: arbitrate FEUDS OF LONG STANDING; your settlements carry NEAR-LAW in communities that know you; ONCE PER SEASON, one hard case",
+     "from": "r3 grants — its own stated rate"
+    }
+   ],
+   "intensity": {
+    "conserve": "cool it a little — half the effect, and nobody owes you",
+    "surge": "double it; A SETTLEMENT YOU BREAK YOURSELF BURNS THE CRAFT"
+   },
+   "bounds": [
+    {
+     "text": "DOESN'T WORK MID-VIOLENCE — once blows land the door is shut; it opens a route to agreement rather than producing one: the target still has to be persuaded normally afterward, which takes a further scene",
+     "class": "soft"
+    },
+    {
+     "text": "cannot broker WHAT ONE SIDE TRULY CANNOT GIVE",
+     "class": "hard"
+    },
+    {
+     "text": "FAILS AGAINST ZEALOTRY",
+     "class": "hard"
+    },
+    {
+     "text": "A SETTLEMENT YOU BREAK YOURSELF BURNS THE CRAFT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: cannot broker What One Side Truly Cannot Give."
+  },
+  {
+   "id": "tinkers_hand",
+   "name": "Tinker's Hand",
+   "levelReq": 1,
+   "energyCost": 5,
+   "axes": {
+    "mechanical_spiritual": -0.5,
+    "tradition_innovation": 0.3
+   },
+   "attribute": "practical",
+   "effectTags": [
+    "repair",
+    "craft",
+    "jury_rig"
+   ],
+   "narrationHints": "Wire, wax, patience, and disrespect for the word 'broken.' Fixes that shouldn't hold but do.",
+   "description": "Repair, improvise, and jury-rig — coaxing function from broken things with whatever's on hand.",
+   "notFor": "Fine artisanship (it works, it isn't pretty); Precursor internals without study; making something from truly nothing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Field Fix",
+     "grants": "Repair common tools, gear, and mechanisms with scrounged parts; improvise a simple tool on the spot; judge what broke something.",
+     "cannot": "Fixes are temporary under hard use; no locks, no Precursor work.",
+     "functions": [
+      "mend",
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Coaxing Function",
+     "grants": "Open common locks and mechanisms; repairs now hold permanently; build compound devices (pulley rigs, traps, stills) from salvage.",
+     "cannot": "Precursor mechanisms still resist; complex builds take a day and materials.",
+     "functions": [
+      "mend",
+      "make",
+      "open"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Speaker to Machines",
+     "grants": "Diagnose ANY mechanism by touch and sound, Precursor included; once per day, coax one dead device to run one more time; your builds count as quality goods.",
+     "cannot": "Coaxed devices die again after; understanding Precursor function is not understanding purpose.",
+     "functions": [
+      "mend",
+      "make",
+      "open",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "make",
+    "mend",
+    "open",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SURVIVE"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "healing",
+   "operativeAxis": [
+    "repair",
+    "access"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 4
+    },
+    "plus": 1,
+    "note": "mends the MADE. The folk-shadow of enginewright's mend_device."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "access",
+     "delta": "OPEN common locks and mechanisms; repairs now HOLD PERMANENTLY; build compound devices from scrap",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: diagnose ANY mechanism by touch and sound, PRECURSOR INCLUDED; ONCE PER DAY coax one dead device to run ONE MORE TIME",
+     "from": "r3 grants — its own stated rate"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick fix — half the durability, done now",
+    "surge": "double the work; COAXED DEVICES DIE AGAIN AFTER"
+   },
+   "bounds": [
+    {
+     "text": "fixes are TEMPORARY UNDER HARD USE at r1",
+     "class": "soft"
+    },
+    {
+     "text": "PRECURSOR MECHANISMS STILL RESIST",
+     "class": "hard"
+    },
+    {
+     "text": "COAXED DEVICES DIE AGAIN AFTER — and understanding Precursor FUNCTION is not understanding its PURPOSE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/survive action that restores health. It rolls 1d4+1 Ranks: rank 2 extends access; rank 3 adds to special. Limit: precursor Mechanisms Still Resist."
+  },
+  {
+   "id": "beastfriend",
+   "name": "Beastfriend",
+   "levelReq": 1,
+   "energyCost": 6,
+   "axes": {
+    "instinct_analysis": -0.5,
+    "individual_collective": 0.2
+   },
+   "attribute": "social",
+   "effectTags": [
+    "animals",
+    "calm",
+    "bond"
+   ],
+   "narrationHints": "Stillness animals trust. Reading ears and hackles like weather; being read back and found harmless.",
+   "description": "Calm, read, and work with animals — from skittish livestock to wary wild things.",
+   "notFor": "Commanding animals against their nature; Precursor-altered creatures without a check; anything mid-frenzy.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Gentle Presence",
+     "grants": "Calm domestic animals; read a beast's mood and recent past; wild animals don't flee your approach.",
+     "cannot": "No commands — only trust; predators stay dangerous.",
+     "functions": [
+      "reveal",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Working Trust",
+     "grants": "Ask simple tasks of animals that know you (carry, guard, find); a companion beast may take you on; sense what nearby animals sense.",
+     "cannot": "Companion is a partner, not a tool — mistreat it and it's gone; borrowed senses are impressions, not sight.",
+     "functions": [
+      "reveal",
+      "command",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Old Accord",
+     "grants": "Parley meaningfully with any natural creature; Precursor-touched beasts recognize you as neutral. And in wild country you may call for aid and something answers — it places itself between you and what threatens you, and it will strike to wound: a large animal in earnest breaks bone and tears, and none of that is yours to moderate once it has begun.",
+     "cannot": "You ASK — always. Nothing here is compelled, and a creature that answers is risking its own life for you, may be hurt or killed doing it, and remembers. Ask too often, or for the wrong thing, and the wild country stops answering.",
+     "functions": [
+      "reveal",
+      "command",
+      "bind",
+      "summon",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    }
+   ],
+   "functions": [
+    "bind",
+    "command",
+    "reveal",
+    "strike",
+    "summon"
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "EXPLORE",
+    "STEALTH"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "powerSystem": "valley_craft",
+   "shape": "bolster",
+   "operativeAxis": [
+    "rapport",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 6,
+    "targets": 1,
+    "note": "damaging rung (a companion beast can fight). SOCIAL."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "ask simple tasks of animals that know you; A COMPANION BEAST MAY TAKE YOU ON; sense what nearby animals sense",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: parley meaningfully with ANY natural creature; PRECURSOR-TOUCHED BEASTS RECOGNIZE YOU AS NEUTRAL",
+     "from": "r3 grants — a SEVENTH precursor hook"
+    }
+   ],
+   "intensity": {
+    "conserve": "settle the animals — half the rapport, and it asks nothing of them",
+    "surge": "double it; YOU ASK — ALWAYS. Nothing here is compelled."
+   },
+   "bounds": [
+    {
+     "text": "NO COMMANDS — ONLY TRUST; predators stay dangerous",
+     "class": "hard"
+    },
+    {
+     "text": "a companion is A PARTNER, NOT A TOOL — mistreat it and it is gone",
+     "class": "hard"
+    },
+    {
+     "text": "ASKING IS THE CRAFT — it is what beasts answer readily; compelling a beast instead of asking costs double energy, is resisted at advantage, and that animal will never be asked successfully again",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A social/explore/stealth action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: nO Commands — Only Trust; predators stay dangerous."
+  },
+  {
+   "id": "stonewise",
+   "name": "Stonewise",
+   "levelReq": 1,
+   "energyCost": 5,
+   "axes": {
+    "concrete_abstract": -0.5,
+    "tradition_innovation": -0.2
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "structure",
+    "terrain",
+    "climb"
+   ],
+   "narrationHints": "Reading load paths and old repairs in a wall like a mason's diary. Knowing which ledge holds and which lies.",
+   "description": "Read stone, structure, and ground: what holds, what's about to fail, what was built and why.",
+   "notFor": "X-ray sight (reads surfaces and stresses, not hidden rooms directly); metallurgy; speed — a proper read takes minutes.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Sound Footing",
+     "grants": "Judge whether floor, bridge, ledge, or wall will hold; find the safe climbing line; spot recent structural disturbance.",
+     "cannot": "Deliberately disguised work needs a check; no read through cladding.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Mason's Eye",
+     "grants": "Date construction and read its story (repairs, sieges, haste); detect voids by resonance tap; find the weak point that brings a structure down — or the brace that saves it. Named to a crew with hammers, that point breaks a wall in one session, and whatever is standing under it comes down with it.",
+     "cannot": "Void detection gives presence, not layout; Precursor materials read as 'wrong' without detail.",
+     "functions": [
+      "reveal",
+      "mend",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 3,
+     "name": "Bones of the World",
+     "grants": "Read geology like architecture: predict collapse, slide, or sinkhole; navigate caves by stone-sense; Precursor construction yields its structural logic (not its purpose).",
+     "cannot": "Prediction is hours-scale, not weeks; living rock keeps some secrets — margin of error the GM holds.",
+     "functions": [
+      "reveal",
+      "mend",
+      "break",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    }
+   ],
+   "functions": [
+    "break",
+    "foresee",
+    "mend",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "EXPLORE",
+    "PUZZLE"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "powerSystem": "valley_craft",
+   "shape": "setup",
+   "operativeAxis": [
+    "structuralRead",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "damaging rung (it finds the weak point). The folk-shadow of mason's stone_read."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "structuralRead",
+     "delta": "DATE construction and read its story; DETECT VOIDS BY RESONANCE TAP; find the weak point",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "foresight",
+     "delta": "read GEOLOGY like architecture — predict collapse, slide, or sinkhole; navigate caves by stone-sense; PRECURSOR CONSTRUCTION reads partially",
+     "from": "r3 grants — an EIGHTH precursor hook"
+    }
+   ],
+   "intensity": {
+    "conserve": "a look at the stone — half the certainty, and instant",
+    "surge": "double the read; PREDICTION IS HOURS-SCALE, NOT WEEKS"
+   },
+   "bounds": [
+    {
+     "text": "deliberately DISGUISED WORK needs a check",
+     "class": "soft"
+    },
+    {
+     "text": "VOID DETECTION GIVES PRESENCE, NOT LAYOUT",
+     "class": "hard"
+    },
+    {
+     "text": "PRECURSOR MATERIAL reads only partially",
+     "class": "hard"
+    },
+    {
+     "text": "PREDICTION IS HOURS-SCALE, NOT WEEKS — living rock keeps some secrets",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A explore/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens structuralRead; rank 3 extends foresight. Limit: void Detection Gives Presence, Not Layout."
+  },
+  {
+   "id": "rivercraft",
+   "name": "Rivercraft",
+   "levelReq": 1,
+   "energyCost": 5,
+   "axes": {
+    "instinct_analysis": -0.2,
+    "concrete_abstract": -0.3
+   },
+   "attribute": "practical",
+   "effectTags": [
+    "water",
+    "weather",
+    "boats"
+   ],
+   "narrationHints": "The river as a moody neighbor you've known for years. Reading current-braid and sky together.",
+   "description": "Boats, currents, crossings, and weather-sense — the water-roads of the valley and what moves on them.",
+   "notFor": "Open sea; fighting the water (it's about not fighting); breathing underwater.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "River Legs",
+     "grants": "Handle small craft in rough water; find the safe ford; read tomorrow's weather from sky and water; swim strongly burdened.",
+     "cannot": "Rapids beyond class of your craft still say no; weather-sense is a day out, not a week.",
+     "functions": [
+      "move",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Current's Confidant",
+     "grants": "Run water others portage; read what the river carries and where from (debris, silt, bodies of news); night navigation by sound of water alone.",
+     "cannot": "The gray water reads as silence — a gap, not a message; can't read still water's depths.",
+     "functions": [
+      "move",
+      "reveal",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Watershed Mind",
+     "grants": "Hold the whole watershed in your head: predict flood and drought weeks out, trace ANY sample to its source reach, know where something dumped upstream comes ashore.",
+     "cannot": "Tracing needs a sample in hand; the watershed's Precursor plumbing appears in the model only as anomalies.",
+     "functions": [
+      "move",
+      "reveal",
+      "travel",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "foresee",
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "challengeTypes": [
+    "EXPLORE",
+    "CHASE",
+    "SURVIVE"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "reposition",
+   "operativeAxis": [
+    "watercraft",
+    "foresight",
+    "range"
+   ],
+   "mechanic": {
+    "range": 10,
+    "push": 0,
+    "magnitude": 3,
+    "duration": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "watercraft",
+     "delta": "RUN WATER OTHERS PORTAGE; read WHAT THE RIVER CARRIES and where from; night navigation",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: hold THE WHOLE WATERSHED in your head — predict flood and drought WEEKS OUT, trace ANY sample to its source reach",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "read the water — half the certainty, and it costs nothing",
+    "surge": "double it; THE GRAY WATER READS AS SILENCE — a gap, not a message"
+   },
+   "bounds": [
+    {
+     "text": "rapids BEYOND YOUR CRAFT'S CLASS still say no",
+     "class": "hard"
+    },
+    {
+     "text": "THE GRAY WATER READS AS SILENCE — a gap, not a message",
+     "class": "hard"
+    },
+    {
+     "text": "tracing NEEDS A SAMPLE IN HAND",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A explore/chase/survive action that moves you or someone else. Its strength is rated 3 out of 10, and lasts for about 4 hours. Range is 10. Ranks: rank 2 deepens watercraft; rank 3 adds to special. Limit: rapids Beyond Your Craft'S Class still say no."
+  },
+  {
+   "id": "quiet_step",
+   "name": "Quiet Step",
+   "levelReq": 1,
+   "energyCost": 6,
+   "axes": {
+    "individual_collective": -0.4,
+    "instinct_analysis": -0.2
+   },
+   "attribute": "physical",
+   "effectTags": [
+    "stealth",
+    "scout",
+    "evade"
+   ],
+   "narrationHints": "Moving like a held breath. Not invisibility — just never being where the eye lands.",
+   "description": "Move unseen and unheard; scout, shadow, and slip away.",
+   "notFor": "Open ground in daylight against alert watchers; staying hidden while acting loudly; groups — this craft is solitary.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Soft Ground",
+     "grants": "Move silently over natural terrain; use shadow and cover to pass casual watch; shadow a person through a town unnoticed.",
+     "cannot": "Alert sentries and open ground beat you without a check; armor noise is armor noise.",
+     "functions": [
+      "conceal",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Unremarked",
+     "grants": "Pass alert watchers with cover; read a guard pattern in minutes and thread it; leave a pursuit behind in any broken country.",
+     "cannot": "Animals still smell you; can't vanish from someone already watching you.",
+     "functions": [
+      "conceal",
+      "move"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unseen Errand",
+     "grants": "Enter and leave watched places as if the watch blinked; move a small party quietly using your reads; once per day, break line-of-sight and be simply gone.",
+     "cannot": "'Gone' means escaped, not teleported — the GM places you plausibly; Precursor sensors don't blink.",
+     "functions": [
+      "conceal",
+      "move"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "conceal",
+    "move"
+   ],
+   "challengeTypes": [
+    "STEALTH",
+    "CHASE"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "reposition",
+   "operativeAxis": [
+    "stealth",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 6,
+    "push": 0,
+    "magnitude": 3,
+    "duration": 4,
+    "targets": 1,
+    "note": "PHYSICAL. The folk-shadow of umbral's shadowstep, at a human scale."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "stealth",
+     "delta": "pass ALERT WATCHERS with cover; READ A GUARD PATTERN in minutes and thread it; leave a pursuit behind in broken country",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "enter and leave watched places AS IF THE WATCH BLINKED; MOVE A SMALL PARTY quietly; ONCE PER DAY break a pursuit clean",
+     "from": "r3 grants — its own stated rate"
+    }
+   ],
+   "intensity": {
+    "conserve": "move quietly — half the concealment, and you can move at speed",
+    "surge": "double it; 'GONE' MEANS ESCAPED, NOT TELEPORTED"
+   },
+   "bounds": [
+    {
+     "text": "ALERT SENTRIES AND OPEN GROUND beat you without a check",
+     "class": "soft"
+    },
+    {
+     "text": "ANIMALS STILL SMELL YOU",
+     "class": "hard"
+    },
+    {
+     "text": "cannot vanish from SOMEONE ALREADY WATCHING",
+     "class": "hard"
+    },
+    {
+     "text": "'GONE' MEANS ESCAPED, NOT TELEPORTED — the GM places you plausibly",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A stealth/chase action that moves you or someone else. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 6. Ranks: rank 2 deepens stealth; rank 3 extends targets. Limit: animals Still Smell You."
+  },
+  {
+   "id": "storykeeper",
+   "name": "Storykeeper",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "tradition_innovation": -0.5,
+    "concrete_abstract": 0.3
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "lore",
+    "memory",
+    "perform"
+   ],
+   "narrationHints": "The one who holds the valley's memory out loud. A story for every stone, and the discipline to keep them straight.",
+   "description": "Hold, recall, and deploy the valley's stories — living memory as a working tool.",
+   "notFor": "Reading (this is oral craft); knowing what nobody ever told anyone; lying — a storykeeper's coin is accuracy.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Long Memory",
+     "grants": "Recall any story you've heard verbatim; know the common lore of any valley place or family; earn welcome in a strange hall by performing.",
+     "cannot": "Recall is of what you've HEARD — gaps are gaps; welcome isn't trust.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Threads Between",
+     "grants": "Cross-reference stories to surface what they jointly imply (codex synergy: +insight when a known topic is in play); notice when a live account contradicts the record; a told story can steady a shaken group.",
+     "cannot": "Implication isn't proof; steadying works once per group per trouble.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Keeper of the Deep Stock",
+     "grants": "Access the old stratum — pre-crisis stories most keepers lost; recognize when events are RHYMING with an old story and read the pattern forward; your tellings enter the community record with weight.",
+     "cannot": "The old stratum is fragmentary and the GM holds its gaps; pattern-rhyme is probabilistic, never prophecy.",
+     "functions": [
+      "reveal",
+      "track",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "foresee",
+    "reveal",
+    "track"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "setup",
+   "operativeAxis": [
+    "recall",
+    "implication"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "implication",
+     "delta": "CROSS-REFERENCE stories to surface WHAT THEY JOINTLY IMPLY (+insight when a known topic is in play)",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: access THE OLD STRATUM — pre-crisis stories most keepers lost; recognize when events are RHYMING WITH AN OLD STORY",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "recall what you heard — half the cross-reference, and it costs nothing",
+    "surge": "double it; IMPLICATION ISN'T PROOF"
+   },
+   "bounds": [
+    {
+     "text": "recall is of WHAT YOU HAVE HEARD — gaps are gaps",
+     "class": "hard"
+    },
+    {
+     "text": "IMPLICATION ISN'T PROOF",
+     "class": "hard"
+    },
+    {
+     "text": "the old stratum is FRAGMENTARY and the GM holds its gaps",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens implication; rank 3 adds to special. Limit: recall is of What You Have Heard — gaps are gaps."
+  },
+  {
+   "id": "hearthbinding",
+   "name": "Hearthbinding",
+   "levelReq": 1,
+   "energyCost": 5,
+   "axes": {
+    "individual_collective": 0.5,
+    "mechanical_spiritual": 0.2
+   },
+   "attribute": "social",
+   "effectTags": [
+    "camp",
+    "morale",
+    "recover"
+   ],
+   "narrationHints": "Making anywhere briefly home. The fire built right, the food that tastes like safety, watches that let people actually sleep.",
+   "description": "Turn a stop into a hearth: camps, meals, and watch-order that restore a group beyond what rest alone gives.",
+   "notFor": "Solo benefit (this craft is for groups); combat; hurry — a hearth takes an evening.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Good Camp",
+     "grants": "Camps you make restore +2 extra health and energy to everyone overnight; cook a real meal from thin supplies; a night's watch order that actually works.",
+     "cannot": "Needs an evening and minimal materials; no benefit in a hostile active scene.",
+     "functions": [
+      "sustain",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Table Peace",
+     "grants": "Meals you host suspend quarrels at the fire — hostile parties will eat together; overnight recovery also clears one minor condition; travelers remember your camps and owe small warmth.",
+     "cannot": "Peace lasts as long as the meal plus the night; deep feuds are suspended, not settled.",
+     "functions": [
+      "sustain",
+      "heal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Standing Hearth",
+     "grants": "A camp you keep three nights becomes a named place (enters place memory); companions and party bond faster at your fire (bond-relevant deeds count +1 weight); once per journey, a full night at your hearth restores as a rest at home.",
+     "cannot": "Named places persist but so does their reputation — what happens there is remembered; the once-per-journey rest can't raise the incapacitated.",
+     "functions": [
+      "sustain",
+      "heal",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "bind",
+    "heal",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "SURVIVE"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "bolster",
+   "operativeAxis": [
+    "restoration",
+    "targets",
+    "persistence"
+   ],
+   "mechanic": {
+    "magnitude": 2,
+    "duration": 8,
+    "targets": 6,
+    "note": "⚠️ THE CATALOG'S MOST MECHANICALLY EXPLICIT CRAFT: '+2 extra health and energy to everyone overnight' — stated as a number, in the source, at r1."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "restoration",
+     "delta": "meals you host SUSPEND QUARRELS at the fire — hostile parties WILL EAT TOGETHER; overnight recovery also clears one minor condition",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "SPECIAL: a camp you keep THREE NIGHTS BECOMES A NAMED PLACE (enters place memory); companions and party BOND FASTER at your fire",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a decent camp — half the restoration, and it asks little",
+    "surge": "double it; PEACE LASTS AS LONG AS THE MEAL PLUS THE NIGHT"
+   },
+   "bounds": [
+    {
+     "text": "needs AN EVENING AND MINIMAL MATERIALS; no benefit in a hostile place",
+     "class": "hard"
+    },
+    {
+     "text": "PEACE LASTS AS LONG AS THE MEAL PLUS THE NIGHT — deep feuds are not solved by dinner",
+     "class": "hard"
+    },
+    {
+     "text": "NAMED PLACES PERSIST BUT SO DOES THEIR REPUTATION",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A survive action that strengthens someone. Its strength is rated 2 out of 10 It affects 6 targets, and lasts for about 8 hours Ranks: rank 2 deepens restoration; rank 3 adds to persistence. Limit: needs AN Evening And Minimal Materials; no benefit in a hostile place.",
+   "upkeep": {
+    "prepHoursByRank": {
+     "1": 0,
+     "2": 8,
+     "3": 72
+    },
+    "accrual": "gate",
+    "prepCondition": "same camp, consecutive nights",
+    "attended": true,
+    "interruptible": true,
+    "onInterrupt": "the count restarts",
+    "note": "GATE: you kept the camp that night or you did not. And it is the one where interruption RESTARTS rather than pauses, because a named place is made by continuity."
+   }
+  },
+  {
+   "id": "keen_appraisal",
+   "name": "Keen Appraisal",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "concrete_abstract": -0.2,
+    "instinct_analysis": 0.4
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "observe",
+    "value",
+    "detail"
+   ],
+   "narrationHints": "The glance that inventories a room. Worth, wear, provenance, and the one thing that doesn't belong.",
+   "description": "See what's actually there: value, provenance, condition, and the detail everyone else missed.",
+   "notFor": "Speed-reading people's intent (objects and scenes, not minds); magic-sense; appraising the truly unique without comparables.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "True Worth",
+     "grants": "Price goods accurately at a glance; spot forgery, shoddy work, and hidden damage; notice the one detail out of place in a scene.",
+     "cannot": "Exotic and Precursor items read as 'beyond scale'; the detail is noticed, not explained.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Provenance",
+     "grants": "Read an object's history from wear (who used it, how, how long); estimate any collection's worth in minutes; spot a concealed item on a person by how they carry.",
+     "cannot": "History is inference — deliberate aging can fool a first read; carrying-reads need line of sight.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Nothing Hidden",
+     "grants": "One sweep of a room yields its full inventory including the concealed (GM names what's findable); appraise the priceless by structural logic; your valuation is accepted as expert in any market.",
+     "cannot": "The sweep is once per location per visit; some Precursor concealment is beyond craft.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "setup",
+   "operativeAxis": [
+    "appraisal",
+    "perceptionDepth"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read an object's HISTORY FROM WEAR — who used it, how, how long; estimate a collection's worth in minutes",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: ONE SWEEP OF A ROOM yields its FULL INVENTORY INCLUDING THE CONCEALED (once per location per visit)",
+     "from": "r3 grants — its own stated rate"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the goods — half the depth, instant",
+    "surge": "double it; EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'"
+   },
+   "bounds": [
+    {
+     "text": "EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'",
+     "class": "hard"
+    },
+    {
+     "text": "HISTORY IS INFERENCE — deliberate aging can fool a first read",
+     "class": "soft"
+    },
+    {
+     "text": "the sweep is ONCE PER LOCATION PER VISIT",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: exotic And Precursor Items Read AS 'Beyond Scale'."
+  },
+  {
+   "id": "old_roads",
+   "name": "Old Roads",
+   "levelReq": 2,
+   "energyCost": 7,
+   "axes": {
+    "tradition_innovation": -0.3,
+    "mechanical_spiritual": 0.3,
+    "concrete_abstract": 0.2
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "precursor",
+    "salvage",
+    "sense"
+   ],
+   "narrationHints": "A feel for where the old world's bones run. Straight lines under crooked fields; doors that were never doors.",
+   "description": "Sense, follow, and safely approach Precursor traces — the old roads under the valley's skin.",
+   "notFor": "Understanding Precursor PURPOSE (only presence and pattern); activating anything; safety guarantees — this craft finds the door, not what's behind it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Straight Feeling",
+     "grants": "Sense Precursor material and workings nearby (direction and rough distance); recognize safe salvage from live remnant; follow a buried alignment across country.",
+     "cannot": "Sense, not sight — no detail; depth beyond a few meters muddies the read.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Reading the Bones",
+     "grants": "Map a site's Precursor layout by walking it; judge whether a remnant is dormant, cycling, or waking; salvage from the edge of live systems without triggering them.",
+     "cannot": "Judgment is craft, not certainty — 'waking' can lie; nothing here opens what's sealed.",
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Where They Walked",
+     "grants": "The deep net reveals itself: perceive the valley's whole Precursor lattice from any node; sense when the lattice CHANGES state anywhere on it; approach places that repel others.",
+     "cannot": "The lattice's purpose stays dark — pattern without meaning; state-changes arrive as feeling, not fact; some doors notice being noticed.",
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "challengeTypes": [
+    "EXPLORE",
+    "INVESTIGATE"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "setup",
+   "operativeAxis": [
+    "precursorSense",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 2,
+    "range": 30,
+    "note": "⚠️ THE NINTH AND MOST IMPORTANT PRECURSOR HOOK IN THE CATALOG — and it belongs to ORDINARY VALLEY FOLK."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precursorSense",
+     "delta": "MAP A SITE'S PRECURSOR LAYOUT by walking it; judge whether a remnant is DORMANT, CYCLING, OR WAKING; salvage safely",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE DEEP NET REVEALS ITSELF — perceive the valley's WHOLE PRECURSOR LATTICE from any node, and SENSE WHEN THE LATTICE CHANGES",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a sense of the old work — half the range, and it costs nothing",
+    "surge": "double the reach; THE LATTICE'S PURPOSE STAYS DARK — pattern without meaning"
+   },
+   "bounds": [
+    {
+     "text": "SENSE, NOT SIGHT — no detail; depth beyond a few meters muddies",
+     "class": "hard"
+    },
+    {
+     "text": "JUDGMENT IS CRAFT, NOT CERTAINTY — 'waking' CAN LIE",
+     "class": "hard"
+    },
+    {
+     "text": "THE LATTICE'S PURPOSE STAYS DARK — pattern without meaning",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 4 out of 10, and lasts for about 2 hours. Range is 30. Ranks: rank 2 deepens precursorSense; rank 3 adds to special. Limit: sense, Not Sight — no detail; depth beyond a few meters muddies."
+  },
+  {
+   "id": "blend_in",
+   "name": "Blend In",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "social",
+   "axes": {
+    "dark_light": -0.2,
+    "chaos_order": -0.1
+   },
+   "functions": [
+    "conceal",
+    "deceive"
+   ],
+   "narrationHints": "You become the least memorable person in the room.",
+   "description": "Pass unnoticed in a crowd or settlement — look like you belong, be forgotten.",
+   "notFor": "Hiding from someone actively hunting you by name; physical invisibility.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Blend In",
+     "grants": "Move through populated places without drawing notice or memory.",
+     "cannot": "A searcher who knows your face and is looking defeats it.",
+     "functions": [
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "One of Them",
+     "grants": "Not merely unnoticed — READ as belonging. The guard nods you through; the crowd makes room.",
+     "cannot": "Belonging is a performance you must keep performing. One wrong word and you were always a stranger.",
+     "functions": [
+      "conceal",
+      "deceive"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Nobody At All",
+     "grants": "You are the person nobody afterward can quite describe — present, unremarkable, entirely forgettable.",
+     "cannot": "Being forgettable means being forgotten. Valleyfolk who lean on this find it hard to be known when they want to be.",
+     "functions": [
+      "conceal",
+      "deceive"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "valley_craft",
+   "gated": "learned",
+   "challengeTypes": [
+    "STEALTH",
+    "SOCIAL"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "guard",
+   "operativeAxis": [
+    "concealment",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "soak": 0,
+    "soakRank": 0,
+    "duration": 8,
+    "note": "A NINETEENTH DEFENSIVE LOGIC — UNREMARKED: soak 0, and it is not stealth (quiet_step) or concealment (the_harbor) or misdirection (the_false_target). It is BEING UNWORTH NOTICING. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "concealment",
+     "delta": "not merely unnoticed — READ AS BELONGING. The guard nods you through; THE CROWD MAKES ROOM.",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: you are THE PERSON NOBODY AFTERWARD CAN QUITE DESCRIBE — present, unremarkable, entirely forgettable",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep your head down — half the effect, and you can drop it instantly",
+    "surge": "double it; BEING FORGETTABLE MEANS BEING FORGOTTEN"
+   },
+   "bounds": [
+    {
+     "text": "A SEARCHER WHO KNOWS YOUR FACE AND IS LOOKING defeats it",
+     "class": "hard"
+    },
+    {
+     "text": "BELONGING IS A PERFORMANCE YOU MUST KEEP PERFORMING — one wrong detail ends it",
+     "class": "soft"
+    },
+    {
+     "text": "BEING FORGETTABLE MEANS BEING FORGOTTEN — Valleyfolk who lean on this lose things",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A stealth/social action that reduces incoming harm. Its strength is rated 3 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 8 hours Ranks: rank 2 deepens concealment; rank 3 adds to special. Limit: a Searcher Who Knows Your Face And IS Looking defeats it."
+  },
+  {
+   "id": "boundary_stone",
+   "name": "Boundary-Stone",
+   "levelReq": 2,
+   "energyCost": 4,
+   "attribute": "practical",
+   "axes": {
+    "chaos_order": 0.2
+   },
+   "functions": [
+    "bind",
+    "ward"
+   ],
+   "narrationHints": "A marked stone set, and what it forbids stays out.",
+   "description": "Set a simple lasting ward at a threshold — keeps small beasts, weather, or casual trespass out of a camp or home.",
+   "notFor": "Stopping a determined intruder; grand wards.",
+   "powerSystem": "valley_craft",
+   "gated": "learned",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Boundary-Stone",
+     "grants": "Ward a camp or dwelling against animals, weather, and casual intrusion.",
+     "cannot": "A determined person walks through it; it deters, not stops.",
+     "functions": [
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Kept Boundary",
+     "grants": "Set a boundary that holds — a threshold, a claim, a line that things notice and respect.",
+     "cannot": "A boundary is a claim, and claims are contested. It holds against what respects it.",
+     "functions": [
+      "ward",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Old Boundary",
+     "grants": "Set a boundary that has the weight of the old ones — it feels ANCIENT, and even things that do not respect you respect that.",
+     "cannot": "The old boundaries were set by people who paid for them. Yours borrows that credit; the Valley remembers who actually paid.",
+     "functions": [
+      "ward",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "EXPLORE"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "guard",
+   "operativeAxis": [
+    "ward",
+    "duration",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 3,
+    "soakRank": 1,
+    "duration": 168,
+    "note": "A folk ward. Note soakRank 1 and the bound: 'A DETERMINED PERSON WALKS THROUGH IT; it DETERS, not stops.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "ward",
+     "delta": "set a boundary THAT HOLDS — a threshold, A CLAIM, a line that things NOTICE AND RESPECT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "SPECIAL: a boundary with THE WEIGHT OF THE OLD ONES — it FEELS ANCIENT, and even things that do not respect YOU respect IT",
+     "from": "r3 grants — an ELEVENTH autonomy-increment craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "a simple ward — half the deterrence, and it costs nothing to keep",
+    "surge": "double it; A BOUNDARY IS A CLAIM, AND CLAIMS ARE CONTESTED"
+   },
+   "bounds": [
+    {
+     "text": "A DETERMINED PERSON WALKS THROUGH IT — it DETERS, not stops",
+     "class": "hard"
+    },
+    {
+     "text": "A BOUNDARY IS A CLAIM, AND CLAIMS ARE CONTESTED",
+     "class": "hard"
+    },
+    {
+     "text": "THE OLD BOUNDARIES WERE SET BY PEOPLE WHO PAID FOR THEM",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 1 armour), and lasts for about 7 days Ranks: rank 2 deepens ward; rank 3 adds to autonomy. Limit: a Determined Person Walks Through IT — it Deters, not stops."
+  },
+  {
+   "id": "hunters_strike",
+   "name": "Hunter's Strike",
+   "levelReq": 1,
+   "energyCost": 4,
+   "attribute": "physical",
+   "axes": {
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "strike"
+   ],
+   "narrationHints": "The practiced killing blow of someone who feeds a family by it.",
+   "description": "A trained practical strike — spear, sling, axe, bow — honest damage from a working hunter.",
+   "notFor": "Formal martial technique (the Edge); many foes.",
+   "powerSystem": "valley_craft",
+   "gated": "learned",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Hunter's Strike",
+     "grants": "Strike effectively with common weapons; land a killing blow on beast or foe.",
+     "cannot": "No warrior's forms; one target, honest force.",
+     "harmRung": "lethal",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "The Clean Kill",
+     "grants": "Strike where a thing actually ends — quickly, without waste, without suffering you did not need.",
+     "cannot": "Clean is a discipline, not a mercy. The animal is still dead, and you still did it.",
+     "harmRung": "lethal",
+     "functions": [
+      "strike"
+     ],
+     "gains": "deepen"
+    },
+    {
+     "rank": 3,
+     "name": "The Strike That Feeds",
+     "grants": "Nothing is wasted — the strike, the taking, the use. The old Valley ethic made into a single motion.",
+     "cannot": "It is a hunter's craft, not a soldier's. Turned on people it is exactly as ugly as it sounds.",
+     "harmRung": "lethal",
+     "functions": [
+      "strike"
+     ],
+     "gains": "deepen"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "lethal",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.02,
+    "note": "⚠️ THE T-I DAMAGE BASELINE. lethal rung, PHYSICAL, one target, honest force. This is the craft Erik's original benchmark was about: 'a T-I strike at max should be able to kill a T-I beast.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "STRIKE WHERE A THING ACTUALLY ENDS — quickly, without waste, WITHOUT SUFFERING YOU DID NOT NEED",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NOTHING IS WASTED — the strike, the taking, the use. 'The old Valley ethic made into a single motion.'",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a measured strike — half the force, and the animal is not ruined",
+    "surge": "double it; CLEAN IS A DISCIPLINE, NOT A MERCY — the animal is still dead"
+   },
+   "bounds": [
+    {
+     "text": "NO WARRIOR'S FORMS — one target, honest force",
+     "class": "hard"
+    },
+    {
+     "text": "CLEAN IS A DISCIPLINE, NOT A MERCY — the animal is still dead",
+     "class": "hard"
+    },
+    {
+     "text": "it is built for animals: against a person it works at normal effect but the deed is recorded as a killing, not a hunt, and your standing changes accordingly",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight action that deals damage. It rolls 1d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: nO Warrior'S Forms — one target, honest force."
+  },
+  {
+   "id": "carrying_call",
+   "name": "The Carrying Call",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "valley_craft",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.2
+   },
+   "functions": [
+    "reveal",
+    "command",
+    "travel"
+   ],
+   "narrationHints": "Not Harmonic craft — the folk version, learned by living downstream of it. A call pitched to carry: over water, around a bend, through a mill's noise. Every valley child can do a little of this and nobody calls it a craft.",
+   "description": "The valley's borrowed sound-work. Generations beside the Choir and the echo-crossings, and what came of it is a way of shouting that works.",
+   "notFor": "Anything a Harmonic would recognise as craft — no barriers, no shattering, no woven overtones; carrying a message nobody is listening for; working where there is nothing to carry along (open flat ground kills it).",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Call That Carries",
+     "grants": "Pitch a call so it travels — up a valley, across a lake, through a working mill — and arrives understandable to someone a mile off who knows the call. ⚠️ Also READS one back: you can tell distance and rough direction from an answering call.",
+     "cannot": "IT NEEDS SOMETHING TO CARRY ALONG — water, a valley wall, a still evening. Open flat ground eats it. And it is a CALL: anyone in between hears it too, including whoever you were avoiding.",
+     "functions": [
+      "reveal",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Worked Line",
+     "grants": "Set a chain of calls along a route — a mill-line, a river run, a ridge — so word travels the valley faster than a rider.",
+     "cannot": "You need people at the stations who know the calls, which means the calls are known, which means they can be read by anyone who learned them. Valley call-lines have been used against the valley before.",
+     "functions": [
+      "reveal",
+      "travel",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Valley Hears",
+     "grants": "A call the entire settled valley picks up and passes — flood, fire, a column on the road. It has been used four times in living memory and everyone knows all four.",
+     "cannot": "⚠️ IT CANNOT BE UNSAID AND IT CANNOT BE QUIET. You have told everyone, including the thing you are calling about. A false raising costs a family its standing for a generation.",
+     "functions": [
+      "reveal",
+      "travel",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "scope",
+    "precision"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 1,
+    "scope": 3
+   },
+   "intensity": {
+    "conserve": "a call to the next farm",
+    "surge": "raise the whole valley; IT CANNOT BE UNSAID AND A FALSE RAISING COSTS A FAMILY ITS STANDING"
+   },
+   "bounds": [
+    {
+     "text": "NEEDS SOMETHING TO CARRY ALONG — open flat ground eats it",
+     "class": "hard"
+    },
+    {
+     "text": "anyone in between hears it, including whoever you were avoiding",
+     "class": "hard"
+    },
+    {
+     "text": "not Harmonic craft — no barriers, no shattering",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that sends and reads a call across the valley. Rated 4 of 10 across a scope of 3."
+  },
+  {
+   "id": "glasswork",
+   "name": "Glasswork",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "valley_craft",
+   "attribute": "practical",
+   "axes": {
+    "dark_light": 0.2
+   },
+   "functions": [
+    "make",
+    "reveal",
+    "conceal"
+   ],
+   "narrationHints": "Not Radiant craft — the folk version. Valley glass, valley mirrors, valley lamps: catching light, throwing it where you need it, and knowing by eye what a piece of glass will do before you cut it.",
+   "description": "What a people learn from living under the plateau edge. No coherent beams, no mirage — a lens, a signal, a lamp that gets light down a mineshaft.",
+   "notFor": "Anything a Radiant would call craft — no bending light around a body, no searing beam, no spectra-sight; making light where there is none; working in true dark.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Caught Light",
+     "grants": "Work glass and mirror to put light where it does not reach — down a shaft, around a corner, into a wound you are trying to close — or throw a signal flash to a ridge in daylight. ⚠️ And you can READ a piece of glass by eye: what it will do, where it will fail, whether it was ground or found.",
+     "cannot": "THERE MUST BE LIGHT TO CATCH. This makes none. In true dark it is a bag of glass. And a signal flash is seen by everyone with a line of sight to the ridge.",
+     "functions": [
+      "make",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Set Piece",
+     "grants": "Build a standing arrangement — a lamp-run that lights a whole works, a mirror-line that watches a road, a lens that starts a fire from noon sun.",
+     "cannot": "It is FIXED where you built it and it takes hours. Weather, dust and a curious child all defeat it.",
+     "functions": [
+      "make",
+      "reveal",
+      "conceal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Valley Glass",
+     "grants": "The good work: a lens that shows you what is on the far ridge, a mirror-chain that carries a signal the length of the settled valley, a lamp that burns a night on a thumb of oil.",
+     "cannot": "⚠️ YOU ARE NOW WORTH ROBBING. Valley glass of this quality is the most portable wealth a farming family will ever hold, and everyone who has seen it knows where it lives.",
+     "functions": [
+      "make",
+      "reveal",
+      "conceal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "make",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 12,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a hand mirror, a single catch",
+    "surge": "the valley glass; YOU ARE NOW WORTH ROBBING"
+   },
+   "bounds": [
+    {
+     "text": "THERE MUST BE LIGHT TO CATCH — it makes none",
+     "class": "hard"
+    },
+    {
+     "text": "not Radiant craft — no beams, no bending, no spectra",
+     "class": "hard"
+    },
+    {
+     "text": "a signal flash is seen by everyone with line of sight",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that catches and directs existing light with worked glass. Rated 4 of 10 across a scope of 2 for about twelve hours."
+  }
+ ],
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

@@ -1,0 +1,1887 @@
+{
+  "note": "SNG-383 §2 — DERIVED from the connection graph, not authored. Aevi reviews and corrects; CCode applies. Nothing here has been written into content.",
+  "method": "hub = highest IN-REGION degree (not total, not outward — the Axis Gate case). gate = not the hub, >=3 outward, and outward > 2x in-region. parent = in-region neighbour with highest in-region degree, ties toward the hub. tier = region for the hub, settlement if it has dependents, site if it is a leaf.",
+  "openQuestion": "§4 says the World view draws 'tier: region hubs AND gates'. A gate is currently emitted as tier settlement/site with role: gate. If gates should render at world scale, gate may need to be a TIER rather than a role — that is a rendering decision and it is yours.",
+  "counts": {
+    "site": 87,
+    "region": 26,
+    "settlement": 5
+  },
+  "reviewCount": 27,
+  "locations": [
+    {
+      "id": "dw_the_thinedge",
+      "name": "The Thin Edge",
+      "region": "manifest_domain",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 3,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "dw_the_burnscar",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "dw_the_burnscar",
+      "name": "The Burnscar",
+      "region": "manifest_domain",
+      "tier": "site",
+      "parentId": "dw_the_thinedge",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "dw_the_moot",
+      "name": "The Standing Moot",
+      "region": "manifest_domain",
+      "tier": "site",
+      "parentId": "dw_the_thinedge",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "ent_deepwood",
+      "name": "The Deepwood",
+      "region": "manifest_domain",
+      "tier": "site",
+      "parentId": "the_quickwood_eaves",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_blocklands",
+      "name": "The Blocklands",
+      "region": "manifest_domain",
+      "tier": "site",
+      "parentId": "tumbledown_market",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "glasshome",
+      "name": "Glasshome",
+      "region": "radiant_wastes",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 0,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_blaze",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_blaze",
+      "name": "The Blaze",
+      "region": "radiant_wastes",
+      "tier": "site",
+      "parentId": "glasshome",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_lensward",
+      "name": "The Lensward",
+      "region": "radiant_wastes",
+      "tier": "site",
+      "parentId": "glasshome",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_marchward",
+      "name": "The Marchward",
+      "region": "riven_marches",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_redline",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_redline",
+      "name": "The Redline",
+      "region": "riven_marches",
+      "tier": "site",
+      "parentId": "the_marchward",
+      "role": "gate",
+      "evidence": {
+        "inRegion": 1,
+        "outward": 3,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "derived-rule"
+    },
+    {
+      "id": "the_stillhold",
+      "name": "The Stillhold",
+      "region": "riven_marches",
+      "tier": "site",
+      "parentId": "the_marchward",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_middle_way",
+      "name": "The Middle Way",
+      "region": "somatic_reaches",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 1,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_cogitarium",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_cogitarium",
+      "name": "The Cogitarium",
+      "region": "somatic_reaches",
+      "tier": "site",
+      "parentId": "the_middle_way",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_flesh_temple",
+      "name": "The High Temple of the Body",
+      "region": "somatic_reaches",
+      "tier": "site",
+      "parentId": "the_middle_way",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "choirheight",
+      "name": "Choir-Height",
+      "region": "the_ascent",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_mercy_house",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_mercy_house",
+      "name": "The Mercy-House",
+      "region": "the_ascent",
+      "tier": "site",
+      "parentId": "choirheight",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_unfallen",
+      "name": "The Unfallen",
+      "region": "the_ascent",
+      "tier": "site",
+      "parentId": "choirheight",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_crossing",
+      "name": "The Crossing",
+      "region": "the_center",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 4,
+        "outward": 12,
+        "children": 4
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_hundred_markets",
+        "inRegion": 3
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_axis_gate",
+      "name": "The Axis Gate",
+      "region": "the_center",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": "gate",
+      "evidence": {
+        "inRegion": 2,
+        "outward": 23,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "derived-rule"
+    },
+    {
+      "id": "the_great_coliseum",
+      "name": "The Great Coliseum",
+      "region": "the_center",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_hundred_markets",
+      "name": "The Hundred Markets",
+      "region": "the_center",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_quiet_house",
+      "name": "The Quiet House",
+      "region": "the_center",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_bargain_gate",
+      "name": "The Bargain Gate",
+      "region": "the_descent",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 1,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_maw",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_appetite_halls",
+      "name": "The Appetite-Halls",
+      "region": "the_descent",
+      "tier": "site",
+      "parentId": "the_bargain_gate",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_maw",
+      "name": "The Maw",
+      "region": "the_descent",
+      "tier": "site",
+      "parentId": "the_bargain_gate",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "wellspring",
+      "name": "Wellspring",
+      "region": "the_feeling_coast",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 1,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_grief_house",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_grief_house",
+      "name": "The Grief-House",
+      "region": "the_feeling_coast",
+      "tier": "site",
+      "parentId": "wellspring",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_wellspring_deep",
+      "name": "The Wellspring Deep",
+      "region": "the_feeling_coast",
+      "tier": "site",
+      "parentId": "wellspring",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "cairn_and_scour",
+      "name": "Cairn-and-Scour",
+      "region": "the_foothills",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "dusklow",
+        "inRegion": 0
+      },
+      "confidence": "REVIEW — hub TIED on in-region degree, broken alphabetically"
+    },
+    {
+      "id": "dusklow",
+      "name": "Dusklow",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "gearsflat",
+      "name": "Gearsflat",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "greenforge",
+      "name": "Greenforge",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_heartroot",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "greenmarch",
+      "name": "Greenmarch",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "greyhearth",
+      "name": "Greyhearth",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "hardline",
+      "name": "Hardline",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "kindlerow",
+      "name": "Kindlerow",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "longshore",
+      "name": "Longshore",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "plainstead",
+      "name": "Plainstead",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "stair_hollow",
+      "name": "Stair Hollow",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_drawn_hour",
+      "name": "The Drawn Hour",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_slow_hour",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_grindstone",
+      "name": "The Grindstone",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_redline",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_held_yard",
+      "name": "The Held Yard",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_cogitarium",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_kept_shrine",
+      "name": "The Kept Shrine",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_slow_hour",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_low_market",
+      "name": "The Low Market",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_measured_engine",
+      "name": "The Measured Engine",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_long_span",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_second_reading",
+      "name": "The Second Reading",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_axiom",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_spent_yard",
+      "name": "The Spent Yard",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_scour",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "the_worn_yard",
+      "name": "The Worn Yard",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "thinwater",
+      "name": "Thinwater",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "waystone",
+      "name": "Waystone",
+      "region": "the_foothills",
+      "tier": "site",
+      "parentId": "the_long_span",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "pressureholt",
+      "name": "Pressureholt",
+      "region": "the_gearlands",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 0,
+        "children": 3
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_gearlands_verge",
+        "inRegion": 2
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_gearlands_verge",
+      "name": "The Gearlands Verge",
+      "region": "the_gearlands",
+      "tier": "site",
+      "parentId": "pressureholt",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_great_engine",
+      "name": "The Great Engine",
+      "region": "the_gearlands",
+      "tier": "site",
+      "parentId": "pressureholt",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_service_ways",
+      "name": "The Service Ways",
+      "region": "the_gearlands",
+      "tier": "site",
+      "parentId": "pressureholt",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "bedrock",
+      "name": "Bedrock",
+      "region": "the_given_land",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_leaden_deep",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_leaden_deep",
+      "name": "The Leaden Deep",
+      "region": "the_given_land",
+      "tier": "site",
+      "parentId": "bedrock",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_weighing_yard",
+      "name": "The Weighing Yard",
+      "region": "the_given_land",
+      "tier": "site",
+      "parentId": "bedrock",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_slow_hour",
+      "name": "The Slow Hour",
+      "region": "the_kept_reach",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 3,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_forward_archive",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_forward_archive",
+      "name": "The Forward Archive",
+      "region": "the_kept_reach",
+      "tier": "site",
+      "parentId": "the_slow_hour",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_stopped",
+      "name": "The Stopped",
+      "region": "the_kept_reach",
+      "tier": "site",
+      "parentId": "the_slow_hour",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "tier_seven",
+      "name": "Tier Seven",
+      "region": "the_lattice_cities",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 1,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_grand_lattice",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_grand_lattice",
+      "name": "The Grand Lattice",
+      "region": "the_lattice_cities",
+      "tier": "site",
+      "parentId": "tier_seven",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_unplanned_room",
+      "name": "The Unplanned Room",
+      "region": "the_lattice_cities",
+      "tier": "site",
+      "parentId": "tier_seven",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_forge_eternal",
+      "name": "The Forge-Eternal",
+      "region": "the_making",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_ceaseless",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_ceaseless",
+      "name": "The Ceaseless",
+      "region": "the_making",
+      "tier": "site",
+      "parentId": "the_forge_eternal",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_half_cathedral",
+      "name": "The Half-Cathedral",
+      "region": "the_making",
+      "tier": "site",
+      "parentId": "the_forge_eternal",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_thinning",
+      "name": "The Thinning",
+      "region": "the_numinous_reach",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 1,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_numen",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_lampless_hermitage",
+      "name": "The Lampless Hermitage",
+      "region": "the_numinous_reach",
+      "tier": "site",
+      "parentId": "the_thinning",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_numen",
+      "name": "The Numen",
+      "region": "the_numinous_reach",
+      "tier": "site",
+      "parentId": "the_thinning",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_long_span",
+      "name": "The Long Span",
+      "region": "the_open_reach",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 3,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_wayhouse",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_unlanded",
+      "name": "The Unlanded",
+      "region": "the_open_reach",
+      "tier": "site",
+      "parentId": "the_long_span",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_wayhouse",
+      "name": "The Wayhouse",
+      "region": "the_open_reach",
+      "tier": "site",
+      "parentId": "the_long_span",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "cairnhold",
+      "name": "Cairnhold",
+      "region": "the_palelands",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_quiet_ground",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_long_grey",
+      "name": "The Long Grey",
+      "region": "the_palelands",
+      "tier": "site",
+      "parentId": "cairnhold",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_quiet_ground",
+      "name": "The Quiet Ground",
+      "region": "the_palelands",
+      "tier": "site",
+      "parentId": "cairnhold",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "cloudform",
+      "name": "Cloudform",
+      "region": "the_pattern_reach",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_figure_works",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_figure_works",
+      "name": "The Figure-Works",
+      "region": "the_pattern_reach",
+      "tier": "site",
+      "parentId": "cloudform",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_untethered",
+      "name": "The Untethered",
+      "region": "the_pattern_reach",
+      "tier": "site",
+      "parentId": "cloudform",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_heartroot",
+      "name": "The Heartroot",
+      "region": "the_quickwood",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 2,
+        "children": 3
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_greenward",
+        "inRegion": 3
+      },
+      "confidence": "REVIEW — hub TIED on in-region degree, broken alphabetically"
+    },
+    {
+      "id": "grovehome",
+      "name": "Grovehome",
+      "region": "the_quickwood",
+      "tier": "settlement",
+      "parentId": "the_heartroot",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 0,
+        "children": 1
+      },
+      "crossRegion": false,
+      "confidence": "medium"
+    },
+    {
+      "id": "the_greenward",
+      "name": "The Greenward",
+      "region": "the_quickwood",
+      "tier": "settlement",
+      "parentId": "the_heartroot",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 1,
+        "children": 1
+      },
+      "crossRegion": false,
+      "confidence": "medium"
+    },
+    {
+      "id": "the_hollowing",
+      "name": "The Hollowing",
+      "region": "the_quickwood",
+      "tier": "site",
+      "parentId": "the_greenward",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_quickwood_eaves",
+      "name": "The Quickwood Eaves",
+      "region": "the_quickwood",
+      "tier": "site",
+      "parentId": "grovehome",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_slow_orchard",
+      "name": "The Slow Orchard",
+      "region": "the_quickwood",
+      "tier": "site",
+      "parentId": "the_heartroot",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_axiom",
+      "name": "The Axiom",
+      "region": "the_reasoned_hold",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_bloodless_hold",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_bloodless_hold",
+      "name": "The Bloodless Hold",
+      "region": "the_reasoned_hold",
+      "tier": "site",
+      "parentId": "the_axiom",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_proof_halls",
+      "name": "The Proof-Halls",
+      "region": "the_reasoned_hold",
+      "tier": "site",
+      "parentId": "the_axiom",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_unblinking_stone",
+      "name": "The Unblinking Stone",
+      "region": "the_stark_reach",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_flensing",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_flensing",
+      "name": "The Flensing",
+      "region": "the_stark_reach",
+      "tier": "site",
+      "parentId": "the_unblinking_stone",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_told_ground",
+      "name": "The Told Ground",
+      "region": "the_stark_reach",
+      "tier": "site",
+      "parentId": "the_unblinking_stone",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_scour",
+      "name": "The Scour",
+      "region": "the_unmade",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 4,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_clearing_ground",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_clearing_ground",
+      "name": "The Clearing Ground",
+      "region": "the_unmade",
+      "tier": "site",
+      "parentId": "the_scour",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_scouring",
+      "name": "The Scouring",
+      "region": "the_unmade",
+      "tier": "site",
+      "parentId": "the_scour",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_hall_of_mirrors",
+      "name": "The Hall of Mirrors",
+      "region": "the_veiled_reach",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 1,
+        "children": 2
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_kindly_court",
+        "inRegion": 1
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_kindly_court",
+      "name": "The Kindly Court",
+      "region": "the_veiled_reach",
+      "tier": "site",
+      "parentId": "the_hall_of_mirrors",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_last_mask",
+      "name": "The Last Mask",
+      "region": "the_veiled_reach",
+      "tier": "site",
+      "parentId": "the_hall_of_mirrors",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_underlight",
+      "name": "The Underlight",
+      "region": "umbral_depths",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 1,
+        "children": 3
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_slow_stair",
+        "inRegion": 2
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "the_harborward",
+      "name": "The Harborward",
+      "region": "umbral_depths",
+      "tier": "settlement",
+      "parentId": "the_underlight",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 0,
+        "children": 1
+      },
+      "crossRegion": false,
+      "confidence": "medium"
+    },
+    {
+      "id": "the_lampless_market",
+      "name": "The Lampless Market",
+      "region": "umbral_depths",
+      "tier": "site",
+      "parentId": "the_underlight",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_slow_stair",
+      "name": "The Slow Stair",
+      "region": "umbral_depths",
+      "tier": "site",
+      "parentId": "the_underlight",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_unlit_deep",
+      "name": "The Unlit Deep",
+      "region": "umbral_depths",
+      "tier": "site",
+      "parentId": "the_harborward",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_churn_edge",
+      "name": "The Churn Edge",
+      "region": "unspooling",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 4,
+        "outward": 1,
+        "children": 4
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "the_wend",
+        "inRegion": 4
+      },
+      "confidence": "REVIEW — hub TIED on in-region degree, broken alphabetically"
+    },
+    {
+      "id": "spindrift_hollow",
+      "name": "Spindrift Hollow",
+      "region": "unspooling",
+      "tier": "site",
+      "parentId": "the_churn_edge",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_gralloch",
+      "name": "The Gralloch",
+      "region": "unspooling",
+      "tier": "site",
+      "parentId": "the_churn_edge",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_wend",
+      "name": "The Wend",
+      "region": "unspooling",
+      "tier": "site",
+      "parentId": "the_churn_edge",
+      "role": null,
+      "evidence": {
+        "inRegion": 4,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "tumbledown_market",
+      "name": "Tumbledown",
+      "region": "unspooling",
+      "tier": "site",
+      "parentId": "the_churn_edge",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "disputed_zone_fringe",
+      "name": "The Disputed Zone — Fringe",
+      "region": "valley",
+      "tier": "region",
+      "parentId": null,
+      "role": null,
+      "evidence": {
+        "inRegion": 6,
+        "outward": 0,
+        "children": 6
+      },
+      "crossRegion": false,
+      "runnerUp": {
+        "id": "echo_river_crossing",
+        "inRegion": 5
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "archive_hollow",
+      "name": "Archive Hollow",
+      "region": "valley",
+      "tier": "site",
+      "parentId": "echo_river_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 1,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "echo_river_crossing",
+      "name": "Echo River Crossing",
+      "region": "valley",
+      "tier": "settlement",
+      "parentId": "disputed_zone_fringe",
+      "role": null,
+      "evidence": {
+        "inRegion": 5,
+        "outward": 1,
+        "children": 3
+      },
+      "crossRegion": false,
+      "confidence": "medium"
+    },
+    {
+      "id": "greywater_stilts",
+      "name": "The Greywater Stilts",
+      "region": "valley",
+      "tier": "site",
+      "parentId": "disputed_zone_fringe",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "harmonic_heights_terrace",
+      "name": "Harmonic Heights — Lower Terrace",
+      "region": "valley",
+      "tier": "site",
+      "parentId": "disputed_zone_fringe",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "kestrels_roost",
+      "name": "Kestrel's Roost",
+      "region": "valley",
+      "tier": "settlement",
+      "parentId": "disputed_zone_fringe",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 1,
+        "children": 1
+      },
+      "crossRegion": false,
+      "confidence": "medium"
+    },
+    {
+      "id": "millbrook",
+      "name": "Millbrook",
+      "region": "valley",
+      "tier": "site",
+      "parentId": "echo_river_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 5,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "old_switchback",
+      "name": "The Old Switchback",
+      "region": "valley",
+      "tier": "site",
+      "parentId": "kestrels_roost",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "radiant_plateau_edge",
+      "name": "Radiant Plateau — Edge District",
+      "region": "valley",
+      "tier": "site",
+      "parentId": "disputed_zone_fringe",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "sunken_choir",
+      "name": "The Sunken Choir",
+      "region": "valley",
+      "tier": "site",
+      "parentId": "echo_river_crossing",
+      "role": null,
+      "evidence": {
+        "inRegion": 3,
+        "outward": 0,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    },
+    {
+      "id": "the_old_warden_post",
+      "name": "Raven's Home (the Old Warden Post)",
+      "region": "valley",
+      "tier": "site",
+      "parentId": "cairnhold",
+      "role": null,
+      "evidence": {
+        "inRegion": 0,
+        "outward": 1,
+        "children": 0
+      },
+      "crossRegion": true,
+      "confidence": "REVIEW — no in-region link; parent is the strongest OUTWARD neighbour"
+    },
+    {
+      "id": "thornwake_glade",
+      "name": "Thornwake Glade",
+      "region": "valley",
+      "tier": "site",
+      "parentId": "disputed_zone_fringe",
+      "role": null,
+      "evidence": {
+        "inRegion": 2,
+        "outward": 2,
+        "children": 0
+      },
+      "crossRegion": false,
+      "confidence": "high"
+    }
+  ]
+}

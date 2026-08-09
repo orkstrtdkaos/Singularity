@@ -204,7 +204,10 @@ export function buildWorld(canon) {
 /** Serialise in the exact schema engine/worldglobe.js already reads. */
 export function serialise(built, canon) {
   const b64 = (u8) => Buffer.from(u8).toString("base64");
-  const genHash = createHash("sha256").update(readFileSync(join(root, "scripts/world/terrain.mjs"))).digest("hex").slice(0, 16);
+  // ⚠️ NORMALISED BEFORE HASHING — the determinism gate's first red was this hash catching ITSELF:
+  // git's autocrlf rewrites the generator's line endings on checkout, so hashing raw working-copy bytes
+  // made the provenance stamp machine-dependent. Same code, different sha, "drift" with no drift.
+  const genHash = createHash("sha256").update(readFileSync(join(root, "scripts/world/terrain.mjs"), "utf8").split(String.fromCharCode(13)).join("")).digest("hex").slice(0, 16);
   const gpHash = createHash("sha256").update(JSON.stringify(canon.gp)).digest("hex").slice(0, 16);
   const meta = {};
   const oldMeta = existsSync(join(root, "content/packs/core/world/terrain.json"))

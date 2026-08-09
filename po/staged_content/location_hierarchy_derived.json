@@ -4,9 +4,12 @@
  "openQuestion": "§4 says the World view draws 'tier: region hubs AND gates'. A gate is currently emitted as tier settlement/site with role: gate. If gates should render at world scale, gate may need to be a TIER rather than a role — that is a rendering decision and it is yours.",
  "counts": {
   "region": 25,
-  "settlement": 6,
+  "settlement": 28,
   "site": 65,
-  "waypoint": 22
+  "roles": {
+   "gate": 2,
+   "waypoint": 22
+  }
  },
  "reviewCount": 27,
  "locations": [
@@ -467,7 +470,7 @@
    "id": "cairn_and_scour",
    "name": "Cairn-and-Scour",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -480,18 +483,18 @@
     "id": "dusklow",
     "inRegion": 0
    },
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_quiet_ground",
     "the_scour"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "dusklow",
    "name": "Dusklow",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -500,18 +503,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_underlight"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "gearsflat",
    "name": "Gearsflat",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -520,18 +523,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_great_engine"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "greenforge",
    "name": "Greenforge",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -540,18 +543,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_heartroot",
     "the_forge_eternal"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "greenmarch",
    "name": "Greenmarch",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -560,18 +563,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_heartroot"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "greyhearth",
    "name": "Greyhearth",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -580,18 +583,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_quiet_ground"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "hardline",
    "name": "Hardline",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -600,18 +603,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_redline"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "kindlerow",
    "name": "Kindlerow",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -620,18 +623,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_blaze"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "longshore",
    "name": "Longshore",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -640,18 +643,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_long_span"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "plainstead",
    "name": "Plainstead",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -660,18 +663,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_unblinking_stone"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "stair_hollow",
    "name": "Stair Hollow",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -680,18 +683,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "choirheight"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "the_drawn_hour",
    "name": "The Drawn Hour",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -700,18 +703,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "cloudform",
     "the_slow_hour"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "the_grindstone",
    "name": "The Grindstone",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -720,18 +723,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_redline",
     "the_flesh_temple"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "the_held_yard",
    "name": "The Held Yard",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -740,18 +743,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_stillhold",
     "the_cogitarium"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "the_kept_shrine",
    "name": "The Kept Shrine",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -760,18 +763,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_numen",
     "the_slow_hour"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "the_low_market",
    "name": "The Low Market",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -780,18 +783,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_maw"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "the_measured_engine",
    "name": "The Measured Engine",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -800,18 +803,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_great_engine",
     "the_long_span"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "the_second_reading",
    "name": "The Second Reading",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -820,18 +823,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_blaze",
     "the_axiom"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "the_spent_yard",
    "name": "The Spent Yard",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -840,18 +843,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_churn_edge",
     "the_scour"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "the_worn_yard",
    "name": "The Worn Yard",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -860,18 +863,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_scour"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "thinwater",
    "name": "Thinwater",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -880,18 +883,18 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "the_crossing",
     "the_numen"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "waystone",
    "name": "Waystone",
    "region": "the_foothills",
-   "tier": "waypoint",
+   "tier": "settlement",
    "parentId": null,
    "role": "waypoint",
    "evidence": {
@@ -900,12 +903,12 @@
     "children": 0
    },
    "crossRegion": false,
-   "confidence": "AEVI — corrected",
+   "confidence": "AEVI — corrected again (Erik)",
    "spans": [
     "bedrock",
     "the_long_span"
    ],
-   "aeviNote": "Not a site of anything. The foothills are the WAYSTATION NETWORK: each sits at the midpoint of a named route, and its own worldPosNote says which. Hanging it off its strongest connection is what made 20 of your 24 cross-region rows — the derivation was looking for a parent where the answer is a SPAN."
+   "aeviNote": "⛔ ERIK 2026-08-08: 'they are also major settlements — why do you list them distinctly?' He is right and I made the exact error I had just corrected in yours, one step later. I told you `gate` must be a ROLE because the Axis Gate is a site AND the world's door, and those are different facts — then made `waypoint` a TIER, which forces the same false choice. ⚠️ TIER IS SIZE (region/settlement/site). ROLE IS FUNCTION (gate, waypoint). These are SETTLEMENTS — Greyhearth is 'a town that buries the whole valley', Longshore is 'the waygate town', Greenforge is a working forge with an economy — that HAPPEN to sit at the midpoint of a named route. Both facts are true and neither displaces the other. `spans` says where it sits; `tier` says what it is."
   },
   {
    "id": "pressureholt",
@@ -2004,9 +2007,10 @@
  "aeviReview": {
   "date": "2026-08-08",
   "reviewedAt": "f1c90c62",
-  "summary": "27 flagged, all answered. ⛔ 20 of your 24 cross-region rows were ONE finding: the foothills are the waystation network, not sites of anything. Every one names its own span in its worldPosNote and all 22 parse cleanly — so they become `tier: waypoint` with `spans: [a,b]` and NO parent. ⚠️ Your fallback was not wrong; it was answering a question the data does not ask.",
+  "summary": "27 flagged, all answered. ⛔ 20 of your 24 cross-region rows were ONE finding: the foothills are the waystation network. Every one names its own span in its worldPosNote and all 22 parse cleanly. ⚠️ CORRECTED AGAIN BY ERIK: they are `tier: settlement` with `role: waypoint`, not a waypoint TIER. TIER IS SIZE, ROLE IS FUNCTION — the same rule I gave you for `gate` and then broke myself one paragraph later. They are real towns that happen to sit at midpoints; parentId stays null because a waypoint belongs to a ROUTE, not to a hub.",
   "newTier": "`waypoint` — a location defined by the route it sits on rather than the place it belongs to. parentId null, spans [start,end]. ⚠️ It is why the foothills span 277 walking days and why that is correct.",
   "openReturned": "`gate` stays a ROLE. World view draws tier:region PLUS role:gate — a render rule, not a taxonomy change.",
-  "reRun": "the_old_warden_post and the_hollowing both changed region AFTER your run (4189e260, f1c90c62). Re-derive those two."
+  "reRun": "the_old_warden_post and the_hollowing both changed region AFTER your run (4189e260, f1c90c62). Re-derive those two.",
+  "tierVsRole": "⛔ THE RULE, stated once so neither of us breaks it again: TIER answers HOW BIG AND WHAT CONTAINS IT — region, settlement, site. ROLE answers WHAT IT DOES — gate, waypoint. A place can carry one tier and any number of roles. ⚠️ Anything that forces a choice between two true facts about a place is a tier that should have been a role."
  }
 }

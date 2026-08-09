@@ -36,11 +36,16 @@ people who declined to inherit an argument.**
    ancient, still obeying instructions nobody living gave it. Strong where the lattice is dense.
 2. **Nanite** — ⚠️ **separate from the lattice.** Machinery, deployed before the Transition, still
    running to its old specification. It goes where its makers put it and where people carry it, so it
-   answers to *condition and supply*, not to ground.
+   answers to *condition and supply*, not to ground. ⛔ **It is the one source with NO best-ground at
+   all** — a nanite craft works the same on a mountain and in a lattice-dense hollow, and fails instead
+   when the works are unmaintained or the supply is cut.
 3. **Wild nanite** — the tangled, untended field of the Wild Half. It works, and it does not work the
    same way twice.
-4. **Metaphysical** — mind reaching past matter, opened by the Transition. It asks nothing of the ground
-   and everything of the practitioner.
+4. **Metaphysical** — mind reaching past matter, opened by the Transition. ⚠️ **It wants THIN ground:**
+   a mind reaching past matter is interfered with by a dense lattice, not helped by it. It asks little of
+   the place and everything of the practitioner. *(Corrected 2026-08-08: an earlier draft said it asks
+   nothing of the ground, which contradicted the ratified school ruling — the Reaching Mind wants thin
+   ground and the Instrumented wants dense, and that opposition is the whole point of schools.)*
 5. **Body and technique** — trained flesh, breath, hand, and years. It asks nothing of anything.
    ⚠️ **Thin ground is quiet ground: natural craft is at its best where the lattice is at its worst.**
 

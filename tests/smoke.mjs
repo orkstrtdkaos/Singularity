@@ -6041,18 +6041,35 @@ await (async () => {
   const bodyOf = (fn) => { const a = src.indexOf("function " + fn); const b = src.indexOf("\nfunction ", a + 10); return src.slice(a, b < 0 ? a + 9000 : b); };
 
   // §1a — two of the three tiers had a bare <svg> and so could never pan or zoom.
-  for (const [fn, label] of [["renderMapWorld", "world"], ["renderMapLocation", "location"], ["renderMap(selectedId", "region"]]) {
+  // ⚠️ SNG-390 CHANGED THE MECHANISM FOR ONE TIER, NOT THE TRUTH. The world tier is a GLOBE now, not
+  // an SVG, so it has no `graph-vp` and does not call `wireSkillGraphViewport` — it spins and zooms on its
+  // own canvas. The invariant SNG-168 protects is that EVERY MAP TIER IS NAVIGABLE; asserting the SVG
+  // mechanism was how that truth happened to be spelled when all three tiers were SVG.
+  // ⛔ THE WORLD TIER IS STILL ASSERTED, just against what it actually is — dropping the gate because my
+  // change broke it would be exactly the move this suite exists to prevent.
+  for (const [fn, label] of [["renderMapLocation", "location"], ["renderMap(selectedId", "region"]]) {
     const body = bodyOf(fn);
     check(`168: the ${label} tier has a viewport group`, /class="graph-vp"/.test(body));
     check(`168: the ${label} tier wires pan/zoom`, /wireSkillGraphViewport\(\)/.test(body));
+  }
+  {
+    const globe = bodyOf("wireWorldGlobe");
+    check("168/390: the world tier is navigable — the globe spins and zooms in place of the SVG viewport",
+      /onmousedown/.test(globe) && /onwheel/.test(globe) && /view\.yaw/.test(globe) && /view\.r =/.test(globe));
+    check("168/390: …and the world tier still drills into a region, which the card grid also did",
+      /mapTier = "region"/.test(globe) && /renderMap\(\)/.test(globe));
   }
 
   // §1.3 — the leak. One module-level graphView served map, wheel AND graph.
   check("168: viewport state is keyed per surface, not one shared variable",
     /let graphViews = \{\}/.test(src) && !/\blet graphView\b/.test(src));
   const surfaces = [...src.matchAll(/setGraphSurface\("(\w+)"\)/g)].map(m => m[1]);
+  // ⚠️ FOUR, NOT FIVE, SINCE SNG-390: the world tier left the shared SVG viewport for its own canvas,
+  // so it no longer declares a surface. The invariant is that every surface USING the shared viewport names
+  // itself — the count is a consequence of that, not the point.
   check("168: every pan/zoom surface declares which one it is",
-    new Set(surfaces).size === 5 && ["world", "location", "map", "wheel", "graph"].every(x => surfaces.includes(x)));
+    new Set(surfaces).size === 4 && ["location", "map", "wheel", "graph"].every(x => surfaces.includes(x))
+    && !surfaces.includes("world"));
 
   // The null-guard is what made one wiring safe to call from five places.
   check("168: the tier-only zoom controls are null-guarded, so the wiring cannot throw elsewhere",
@@ -6945,7 +6962,7 @@ await (async () => {
       /interpolation, not a claim about reach/.test(app386));
   }
 
-  // ══ SNG-390 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 ⚑ to mean "this
+  // ══ SNG-391 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 ⚑ to mean "this
   // one is mechanical". ⛔ THE MARKER HAD NO READER — nothing could tell a milestone that DOES something
   // from one that only says something, so an unbuilt promise read exactly like a built one, and two were.
   {
@@ -6965,21 +6982,21 @@ await (async () => {
         if (eff.blocked) blocked.push(`${sub}:${rank}`);
       }
     }
-    check("390: every ⚑ milestone is transcribed into a structured effect — the marker has a reader now",
+    check("391: every ⚑ milestone is transcribed into a structured effect — the marker has a reader now",
       flagged.length > 0 && flagged.every(k => transcribed.includes(k)), `${flagged.length} flagged, ${transcribed.length} transcribed`);
-    check("390: …and an effect the engine cannot honour carries a WRITTEN reason, never silence",
+    check("391: …and an effect the engine cannot honour carries a WRITTEN reason, never silence",
       blocked.length > 0 && Object.values(lad390.subs).flatMap(d => Object.values(d.milestoneEffects || {}))
         .filter(e => e.blocked).every(e => String(e.blocked).length > 40));
-    check("390: no ⚑ milestone is transcribed as `unclassified` — that value exists to fail loudly",
+    check("391: no ⚑ milestone is transcribed as `unclassified` — that value exists to fail loudly",
       !Object.values(lad390.subs).some(d => Object.values(d.milestoneEffects || {}).some(e => e.kind === "unclassified")));
 
     // ⚠️ THE HIGHEST REACHED WINS, NOT THE SUM. `harmRung 1` at agility 7 and `harmRung 2` at 14 are
     // absolute readings of one effect — "a second rung" — so adding them would silently give a rank-14
     // character three rungs and double the milestone they just earned.
-    check("390: milestones are ABSOLUTE, not cumulative — rank 14 grants two rungs, not three",
+    check("391: milestones are ABSOLUTE, not cumulative — rank 14 grants two rungs, not three",
       L390.harmRungDrop(lad390, at({ agility: 7 })) === 1 && L390.harmRungDrop(lad390, at({ agility: 14 })) === 2);
-    check("390: …and a rank below the milestone grants nothing", L390.harmRungDrop(lad390, at({ agility: 6 })) === 0);
-    check("390: a blocked effect never appears in the LIVE map — a caller cannot act on an unbuilt promise",
+    check("391: …and a rank below the milestone grants nothing", L390.harmRungDrop(lad390, at({ agility: 6 })) === 0);
+    check("391: a blocked effect never appears in the LIVE map — a caller cannot act on an unbuilt promise",
       !("novelPenalty" in L390.milestoneEffects(lad390, at({ wits: 20 })).live)
       && L390.milestoneEffects(lad390, at({ wits: 20 })).blocked.some(b => b.kind === "novelPenalty"));
 
@@ -6988,33 +7005,87 @@ await (async () => {
     const runs = (subs, companions) => { const t = {};
       for (let i = 0; i < 600; i++) { const o = inc390.incapacitationOutcome({ character: at(subs), aggressor: { kind: "assassin" }, companions, rules: rules390, rng: Math.random }); t[o.outcome] = (t[o.outcome] || 0) + 1; }
       return t; };
-    check("390: agility 7 softens the blow — an assassin's table stops producing `slain`",
+    check("391: agility 7 softens the blow — an assassin's table stops producing `slain`",
       (runs({ agility: 3 }, [{ name: "M" }]).slain || 0) > 0 && (runs({ agility: 7 }, [{ name: "M" }]).slain || 0) === 0);
     // ⚠️ AND IT NEVER SOFTENS INTO A RESCUE BY NOBODY. `revived` is already zeroed when no companion
     // is able; dropping INTO it would narrate someone who is not there, which is worse than the harsher
     // outcome it replaced.
-    check("390: …but softening stops at `spared` when you are alone — nobody revives you but somebody",
+    check("391: …but softening stops at `spared` when you are alone — nobody revives you but somebody",
       !(runs({ agility: 14 }, []).revived));
-    check("390: the roll and the softening are BOTH reported — a mercy the player is not told about cannot be learned",
+    check("391: the roll and the softening are BOTH reported — a mercy the player is not told about cannot be learned",
       (() => { const o = inc390.incapacitationOutcome({ character: at({ agility: 14 }), aggressor: { kind: "assassin" }, companions: [{ name: "M" }], rules: rules390, rng: () => 0.99 });
         return "rolledOutcome" in o && "softenedBy" in o; })());
 
     // ⛔ THE COMPANY CAP, AND IT IS ON THE DOOR PEOPLE ACTUALLY USE.
-    check("390: rapport names the places at your side — 1, then 2 at rank 4, 3 at 7, 4 at 10",
+    check("391: rapport names the places at your side — 1, then 2 at rank 4, 3 at 7, 4 at 10",
       [1, 2, 3, 4].every((n, i) => L390.companyPlaces(lad390, at({ rapport: [1, 4, 7, 10][i] })) === n));
     const full = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
-    check("390: a join past capacity is REFUSED, and refused where joins really happen (recruit, not the dead op)",
+    check("391: a join past capacity is REFUSED, and refused where joins really happen (recruit, not the dead op)",
       co390.recruit(full, "b", { day: 2, ladder: lad390 }) === null);
     // ⚠️ NEVER RETROACTIVE. A save whose rapport no longer covers its company keeps everyone.
     const over = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "b", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
-    check("390: an over-capacity save loses NOBODY — the cap refuses a new join, it never ejects",
+    check("391: an over-capacity save loses NOBODY — the cap refuses a new join, it never ejects",
       co390.activeCompany(over).length === 2);
     // ⚠️ A REJOIN IS NOT A NEW PLACE — someone walking back in is returning to a seat, not taking one.
     const left = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "gone", roles: ["ally"], joinedDay: 1, leftDay: 5 }], npcRegistry: {} };
-    check("390: …and someone who left can come back even at capacity",
+    check("391: …and someone who left can come back even at capacity",
       !!co390.recruit(left, "gone", { day: 9, ladder: lad390 }));
-    check("390: with no ladder passed the cap does not apply — every existing caller keeps working",
+    check("391: with no ladder passed the cap does not apply — every existing caller keeps working",
       !!co390.recruit({ subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} }, "b", { day: 2 }));
+  }
+
+  // ══ SNG-390 — THE WORLD AS A GLOBE. Erik: the 3D map takes the place of the card table.
+  // ⛔ THE TERRAIN IS BAKED OUTPUT WITH NO GENERATOR — the delivered prototype is 809KB of which 792KB
+  // is the raster and 16.2KB is a viewer, containing no noise, simplex, erosion or any other generation
+  // vocabulary. Aevi's own §1 says shipping the raster alone is the failure; it is labelled as such in the
+  // asset and in po/REPLY_ccode_SNG-390 rather than passed off as derived.
+  {
+    const WG = await import("../engine/worldglobe.js");
+    const doc = rjc193("content/packs/core/world/terrain.json");
+    const t = WG.decodeTerrain(doc);
+    check("390: the terrain asset decodes — four channels, two grids, 118 locations",
+      !!t && t.w === 480 && t.h === 240 && t.ew === 720 && t.eh === 360 && Object.keys(t.locations).length === 118);
+    check("390: …and it says in the file that it is baked output with no generator",
+      /no generator|cannot be re-derived/i.test(String(doc.note)));
+    // ⚠️ PROJECTION AND ITS INVERSE ARE TESTED AGAINST EACH OTHER, not eyeballed on screen — a globe
+    // that is subtly wrong looks fine and puts every pin in the wrong place.
+    const view = { yaw: 37, pitch: 12, r: 300, cx: 400, cy: 300 };
+    const worst = [[0, 0], [45, 30], [-120, -60], [100, 75], [-30, -15]].reduce((m, p) => {
+      const s2 = WG.project(p[0], p[1], view); if (!s2) return m;
+      const u = WG.unproject(s2.x, s2.y, view);
+      return Math.max(m, Math.abs(u.lon - p[0]), Math.abs(u.lat - p[1]));
+    }, 0);
+    check("390: project and unproject are exact inverses — a globe that is subtly wrong looks fine", worst < 1e-9);
+    check("390: the far side is culled, and a click outside the disc resolves to nothing",
+      WG.project(180, 0, { yaw: 0, r: 1 }) === null && WG.unproject(9e3, 9e3, view) === null);
+    // ⛔ READ-ONLY BY CONSTRUCTION: position is INJECTED, so the globe cannot become a second source of it.
+    const pins = WG.visiblePins(t, view, () => ({ longitude: 10, colatitude: 80 }));
+    check("390: the globe never reads a position itself — worldPosOf is injected, so it cannot become a second source",
+      pins.length > 0 && WG.visiblePins(t, view, () => null).length === 0);
+    // ⚠️ AND IT DOES NOT RESTATE THE RULES. The prototype hard-codes BANDS and a 0.6 crowd floor; this
+    // takes the engine's own bandFactor, so the map and a craft's verdict cannot disagree.
+    const sub390 = sb, sd390 = substrateModel;
+    const band = sd390.sourceBands.sources.precursor.band;
+    const viaMap = WG.groundFactorAt(t, 20, 10, band, sub390.bandFactor);
+    const dens = WG.sampleAt(t, 20, 10).density;
+    check("390: 'whose ground' uses the ENGINE's band arithmetic, not a copy of it",
+      viaMap !== null && Math.abs(viaMap - sub390.bandFactor(band, dens)) < 1e-12);
+    const wgSrc = readFileSync(join(root, "engine/worldglobe.js"), "utf8");
+    check("390: …and no band table is restated in the viewer — the map.x/y failure class, refused",
+      !/BANDS\s*=/.test(wgSrc) && !/crowdFloor/.test(wgSrc));
+    // The app half: lazy, and it degrades with a sentence rather than a black box.
+    const app390 = readFileSync(join(root, "app.js"), "utf8");
+    // ⚠️ MY FIRST FORM OF THIS GATE FAILED ON ITS OWN DEFINITION LINE — it looked for `loadTerrain()`
+    // anywhere before `wireWorldGlobe`, and `async function loadTerrain()` is exactly that. The truth is
+    // narrower: the terrain PATH appears in one place, and that place is not the boot loader.
+    check("390: the 617KB terrain loads LAZILY — not on every boot for a screen opened occasionally",
+      /async function loadTerrain/.test(app390)
+      && (app390.match(/world\/terrain\.json/g) || []).length === 1
+      && !/terrain\.json/.test(readFileSync(join(root, "engine/state.js"), "utf8")));
+    check("390: a missing asset says so and leaves region navigation working, rather than a black box",
+      /could not be read/.test(app390) && /Region navigation still works/.test(app390));
+    check("390: no CDN — the app still fetches nothing off any network",
+      !/cdnjs|unpkg|jsdelivr|https?:\/\/[^"']*\.js/.test(readFileSync(join(root, "index.html"), "utf8")));
   }
 
   // ══ SNG-382 — THE TRADITION SOURCE MIX GETS A READER. Aevi's work-order item 3 asked me to derive

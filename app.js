@@ -32,8 +32,9 @@ import { wieldBonusFor, usableCombatItems, normalizeInventory, fromCatalog, addI
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
+import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
@@ -90,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.90";
+const APP_VERSION = "1.9.91";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6941,14 +6942,148 @@ function renderMapWorld() {
     <h2>World Map</h2>
     <p class="hint" style="margin-bottom:8px">${nodes.length} regions${nodes.reduce((n, r) => n + r.gates.length, 0) ? ` · ${nodes.reduce((n, r) => n + r.gates.length, 0)} waygates` : ""}. The scale where the question is <em>which Reach am I in</em>.</p>
     ${mapTierBar()}
-    <div class="graph-wrap"><svg id="skill-svg" viewBox="0 0 800 ${Math.max(220, rows * ch + 30)}" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">${cells}</g></svg></div>
+    <div class="globe-wrap">
+      <canvas id="world-globe" width="700" height="540" aria-label="The world. Drag to spin, scroll to zoom, click a place to enter its region."></canvas>
+      <div class="globe-ctl">
+        ${[["topo", "topographic"], ["biome", "land"], ["lattice", "⛰ lattice"], ["nanite", "✵ nanite"], ["ground", "whose ground"]]
+          .map(([k, label]) => `<button class="opt globe-layer${k === "topo" ? " selected" : ""}" data-globelayer="${k}">${esc(label)}</button>`).join("")}
+        <select id="globe-source" class="globe-source" title="Whose ground — read from the LIVE band table, so the map agrees with what a craft actually rolls">
+          ${["precursor", "wild", "metaphysical", "veil", "nanite", "body"].map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join("")}
+        </select>
+      </div>
+      <div class="hint" id="globe-read">Drag to spin · scroll to zoom · click a place to enter its region.</div>
+    </div>
     ${arcPanel}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
   for (const g of app.querySelectorAll("[data-mapregion]")) g.onclick = () => { mapTier = "region"; mapFocus = g.dataset.mapregion; renderMap(); };
-  setGraphSurface("world"); wireSkillGraphViewport();   // SNG-168: the world tier can pan and zoom now
+  wireWorldGlobe();
   wireMapTierBar();
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+// ⛔ SNG-390 — THE GLOBE. Erik: the 3D world map takes the place of the card table. The tier bar, the
+// region drill-down and the arcs panel all stay; what the globe replaces is the five-column grid of
+// region cards, which said "which Reach am I in" without ever showing the world.
+let _terrainDoc = null, _terrain = null, _terrainFailed = false;
+
+/** ⚠️ LAZY, AND DELIBERATELY SO. The terrain asset is 617KB. Fetching it at boot would slow every start
+ *  for a screen a player opens occasionally; fetching it on first open costs one pause, once. */
+async function loadTerrain() {
+  if (_terrain || _terrainFailed) return _terrain;
+  try {
+    _terrainDoc = await fetchJSON("content/packs/core/world/terrain.json");
+    _terrain = decodeTerrain(_terrainDoc);
+  } catch { _terrainFailed = true; }
+  return _terrain;
+}
+
+function wireWorldGlobe() {
+  const cv = document.getElementById("world-globe");
+  if (!cv) return;
+  const readout = document.getElementById("globe-read");
+  const ctx = cv.getContext("2d", { willReadFrequently: true });
+  const view = { yaw: 20, pitch: 14, r: Math.min(cv.width, cv.height) * 0.44, cx: cv.width / 2, cy: cv.height / 2 };
+  let layer = "topo", source = "precursor", dragging = false, lastX = 0, lastY = 0, pins = [];
+
+  const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;
+  const worldPosOf = (id) => CONTENT.locations?.[id]?.worldPos || null;
+
+  // ⚠️ HALF RESOLUTION WHILE DRAGGING. A 700px globe is ~150k pixels and each one costs an unproject plus
+  // five array reads; at full res that stutters under the mouse. Coarse while it moves, sharp when it stops
+  // — the standard trade, and the sharpening on release is what makes it feel solid rather than cheap.
+  function paint(coarse) {
+    if (!_terrain) return;
+    const step = coarse ? 2 : 1;
+    const img = ctx.createImageData(cv.width, cv.height);
+    const D = img.data, band = bandFor();
+    for (let y = 0; y < cv.height; y += step) {
+      for (let x = 0; x < cv.width; x += step) {
+        const g = unproject(x + 0.5, y + 0.5, view);
+        let r = 4, gr = 4, b = 10;                                  // the void behind the world
+        if (g) { const c = colorAt(_terrain, g.lon, g.lat, { layer, band, bandFn: bandFactor }); r = c[0]; gr = c[1]; b = c[2]; }
+        for (let dy = 0; dy < step && y + dy < cv.height; dy++) {
+          for (let dx = 0; dx < step && x + dx < cv.width; dx++) {
+            const o = ((y + dy) * cv.width + (x + dx)) * 4;
+            D[o] = r; D[o + 1] = gr; D[o + 2] = b; D[o + 3] = 255;
+          }
+        }
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    // pins on top, near-last so they sit over the far side
+    pins = visiblePins(_terrain, view, worldPosOf);
+    const here = character.currentLocationId;
+    for (const p of pins) {
+      const isHere = p.id === here;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, isHere ? 5 : (p.waygate ? 3.5 : 2.4), 0, Math.PI * 2);
+      ctx.fillStyle = isHere ? "#e8c14a" : p.waygate ? "#8fd0e8" : "rgba(232,230,221,0.75)";
+      ctx.fill();
+      if (isHere) { ctx.strokeStyle = "#e8c14a"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(p.x, p.y, 9, 0, Math.PI * 2); ctx.stroke(); }
+    }
+  }
+
+  const nearest = (mx, my) => {
+    let best = null, bd = 14 * 14;
+    for (const p of pins) { const d = (p.x - mx) ** 2 + (p.y - my) ** 2; if (d < bd) { bd = d; best = p; } }
+    return best;
+  };
+
+  cv.onmousedown = (e) => { dragging = true; lastX = e.offsetX; lastY = e.offsetY; };
+  window.addEventListener("mouseup", () => { if (dragging) { dragging = false; paint(false); } });
+  cv.onmousemove = (e) => {
+    if (dragging) {
+      view.yaw -= (e.offsetX - lastX) * 0.35;
+      view.pitch = Math.max(-85, Math.min(85, view.pitch + (e.offsetY - lastY) * 0.35));
+      lastX = e.offsetX; lastY = e.offsetY;
+      paint(true);
+      return;
+    }
+    const p = nearest(e.offsetX, e.offsetY);
+    cv.style.cursor = p ? "pointer" : "grab";
+    if (!readout) return;
+    if (p) {
+      // ⚠️ THE READOUT SAYS WHAT THE TERRAIN SAYS, not what a location file says — the two are different
+      // sources and blending them would hide a disagreement rather than surface it.
+      const wp = worldPosOf(p.id);
+      const s = wp ? sampleAt(_terrain, wp.longitude, 90 - wp.colatitude) : null;
+      readout.textContent = `${p.name}${p.waygate ? " ◈ waygate" : ""}${s ? ` — ${s.biome || "unmapped"}, ${s.type === 0 ? "water" : "elev " + s.elevation}` : ""}`;
+    } else readout.textContent = "Drag to spin · scroll to zoom · click a place to enter its region.";
+  };
+  cv.onclick = (e) => {
+    const p = nearest(e.offsetX, e.offsetY);
+    if (!p) return;
+    // ⚠️ THE DRILL-DOWN IS THE ONE THE CARDS ALREADY HAD. The globe replaces the grid, not the navigation.
+    const rid = CONTENT.locations?.[p.id]?.regionId || CONTENT.locations?.[p.id]?.region || p.region;
+    if (rid) { mapTier = "region"; mapFocus = rid; renderMap(); }
+  };
+  cv.onwheel = (e) => {
+    e.preventDefault();
+    view.r = Math.max(120, Math.min(Math.min(cv.width, cv.height) * 1.6, view.r * (e.deltaY > 0 ? 0.9 : 1.11)));
+    paint(true); clearTimeout(cv._z); cv._z = setTimeout(() => paint(false), 140);
+  };
+  for (const b of app.querySelectorAll("[data-globelayer]")) b.onclick = () => {
+    layer = b.dataset.globelayer;
+    for (const o of app.querySelectorAll("[data-globelayer]")) o.classList.toggle("selected", o === b);
+    paint(false);
+  };
+  const sel = document.getElementById("globe-source");
+  if (sel) sel.onchange = () => { source = sel.value; if (layer === "ground") paint(false); };
+
+  ctx.fillStyle = "#0a0a12"; ctx.fillRect(0, 0, cv.width, cv.height);
+  ctx.fillStyle = "#8d8b81"; ctx.font = "13px ui-sans-serif, system-ui, sans-serif"; ctx.textAlign = "center";
+  ctx.fillText("reading the world…", cv.width / 2, cv.height / 2);
+  loadTerrain().then((t) => {
+    if (!t) {
+      // ⛔ A MISSING ASSET MUST NOT LEAVE A BLACK BOX. Say what happened and what still works.
+      ctx.fillStyle = "#0a0a12"; ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.fillStyle = "#c46"; ctx.fillText("The world map could not be read.", cv.width / 2, cv.height / 2 - 8);
+      ctx.fillStyle = "#8d8b81"; ctx.fillText("Region navigation still works from the tier bar above.", cv.width / 2, cv.height / 2 + 14);
+      return;
+    }
+    paint(false);
+  });
 }
 
 /** LOCATION tier — the interior. THE TIER THAT DID NOT EXIST. Sub-places and any place promoted

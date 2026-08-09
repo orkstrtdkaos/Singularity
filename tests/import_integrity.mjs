@@ -76,11 +76,18 @@ for (const f of readdirSync(join(root, "engine")).filter(x => x.endsWith(".js"))
     if (allImported.has(sym) || declaredLocally.has(sym)) continue;
     // Called as a bare function, not as `something.sym(` — a property access is a different symbol.
     const called = new RegExp("(^|[^.\\w$])" + escapeRe(sym) + "\\s*\\(", "m");
+    // ⛔ SNG-390 — THE SECOND BLIND SPOT IN THIS GUARD, FOUND THE SAME WAY AS THE FIRST: by shipping
+    // straight through it. It only ever looked for `sym(` — a CALL — so a symbol passed as a VALUE was
+    // invisible. `bandFactor` went in as `{ bandFn: bandFactor }`, unimported, and this file reported all
+    // clear; it would have been a ReferenceError the moment anyone opened the "whose ground" layer.
+    // ⚠️ A REFERENCE IS AS BINDING AS A CALL, so both forms are checked: `sym(`, and a bare `sym` that is
+    // not a property access and is followed by a comma, bracket or line end.
+    const passed = new RegExp("(^|[^.\\w$])" + escapeRe(sym) + "\\s*(?=[,)\\]}]|$)", "m");
     // ⛔ TEST THE STRIPPED SOURCE, NOT THE RAW FILE. This built `code` with comments removed and then
     // tested `app` — so a symbol merely NAMED in a comment ("`formOf()` never returns falsy") was reported
     // as an unimported call. A checker that flags the note explaining a defect is the copy-inventory
     // mistake again, inside the tool built to catch this very class.
-    if (called.test(code)) problems.push(`${mod}.js :: ${sym}`);
+    if (called.test(code) || passed.test(code)) problems.push(`${mod}.js :: ${sym}`);
   }
 }
 

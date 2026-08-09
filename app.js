@@ -89,7 +89,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.85";
+const APP_VERSION = "1.9.86";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11083,7 +11083,12 @@ function renderPlay(turn, opts = {}) {
         ? `<span class="ground-bastion ground-${esc(g.bastion.kind)}" title="${esc(g.bastion.reason || "")}">${g.bastion.kind === "pool" ? "▲" : "▼"} ${esc(g.bastion.kind)}</span>` : "";
       const why = `The substrate here — ${g.density.toFixed(2)} of full. Your crafts read this: a school that wants dense ground is starved in the thin, and one that wants thin is crowded in the dense.`
         + (g.bastion?.reason ? ` — ${g.bastion.reason}` : "");
-      return `<span class="ground-tag ground-${esc(g.word.replace(/[^a-z]/g, ""))}" title="${esc(why)}">⛰ ${esc(g.word)} ground${aura}</span>`;
+      // ⚠️ THE SECOND FIELD IS SHOWN AS ITS OWN CHIP, never merged into the first. They are different
+      // geographies — one says where the Precursors built, the other where the tech was left and what
+      // became of it — and averaging them into one "power here" number would erase the whole point.
+      const nan = g.nanite
+        ? `<span class="ground-nanite ground-nan-${esc(String(g.nanite.state || "unknown"))}" title="${esc(`Nanite here — ${g.nanite.state || "unsurveyed"}, ${g.nanite.v.toFixed(2)} of full. A SECOND geography: not where the Precursors built, but where the tech was deployed and what became of it.${g.nanite.why ? " " + g.nanite.why : ""}`)}">✵ ${esc(String(g.nanite.state || "unsurveyed"))} nanite</span>` : "";
+      return `<span class="ground-tag ground-${esc(g.word.replace(/[^a-z]/g, ""))}" title="${esc(why)}">⛰ ${esc(g.word)} ground${aura}</span>${nan}`;
     })()}<span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span></div>
     ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
       let status = "";

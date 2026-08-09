@@ -6796,6 +6796,54 @@ await (async () => {
       !/Back from the dark/.test(tabMod.worldTabHtml({ arcs: [], foot: wtMod.worldPeopleFooter({ worldState: {} }, {}), effects: [], name: "X", tabBar: () => "", esc: (x) => String(x) })));
   }
 
+  // ══ SNG-385 — THE NANITE FIELD GETS A RESOLVER. Aevi authored it for 26 regions and flagged the
+  // gap herself: "NO CONSUMER YET. Authored ahead of a reader DELIBERATELY — `substrateDensity` has a
+  // resolver and this does not. Until then this is documentation, and I am saying so rather than letting
+  // it look wired." ⛔ A SECOND GEOGRAPHY, NOT A SECOND OPINION ABOUT THE FIRST: the Heartroot is
+  // lattice 0.02 and nanite `wild` 0.75, and a Precursor vault must not render like a bloom.
+  {
+    const { loadContentHeadless: lch385 } = await import("./headless_content.mjs");
+    const C385 = await lch385();
+    const sd385 = substrateModel, sch385 = schools, sb385 = sb;
+    // ⚠️ EVERY location resolves, because the field is authored per REGION rather than as point
+    // sources — inventing radii for it would be designing a geography she deliberately shaped otherwise.
+    const readings = Object.values(C385.locations).map(l => sb385.naniteAt(l, sd385));
+    check("385: every location gets a nanite reading — the field is authored per region and now resolves",
+      readings.length > 100 && readings.every(r => r && typeof r.v === "number" && r.state));
+    // ⛔ THE TWO FIELDS DISAGREE, WHICH IS THE ENTIRE POINT.
+    const heart = C385.locations.the_heartroot;
+    check("385: the two geographies are INDEPENDENT — dead-thin lattice over a wild nanite bloom",
+      !!heart && heart.substrateDensity < 0.1 && sb385.naniteAt(heart, sd385).v > 0.5);
+    // ⚠️ NULL IS "UNSURVEYED", NOT ZERO. Scoring a craft as starved in a region with no entry would
+    // be inventing an absence.
+    check("385: an unsurveyed region reads NULL, never 0 — absence of data is not absence of nanite",
+      sb385.naniteAt({ regionId: "no_such_region" }, sd385) === null);
+    check("385: a per-location override wins over its region, as substrateDensity's does",
+      sb385.naniteAt({ regionId: "the_gearlands", naniteDensity: 0.11 }, sd385).v === 0.11);
+    // ⛔ THE SOURCE ANSWERS TO ITS OWN AXIS — declared in content, not listed in code.
+    check("385: `nanite` answers to the nanite field and everything else to the substrate",
+      sb385.fieldOfSource("nanite", sd385) === "nanite" && sb385.fieldOfSource("precursor", sd385) === "substrate");
+    check("385: …and the value a craft is scored against follows that declaration",
+      sb385.fieldValueFor("nanite", heart, sd385) > 0.5 && sb385.fieldValueFor("precursor", heart, sd385) < 0.1);
+    // ⚠️ UNSCORED IS NOT UNAFFECTED. No band is authored for the nanite axis yet, so the card names
+    // the country rather than claiming the field does not touch the craft — the second is a claim about
+    // the world, the first is a statement about what we know.
+    const gnAb = Object.values(C385.abilities).find(a => a.tradition === "god_named");
+    const gnCard = gnAb && sb385.groundCardFor(gnAb, { domains: { primary: "god_named" }, schools: { god_named: "gn_vested" } },
+      { schools: sch385, substrate: sd385, location: heart });
+    check("385: a nanite craft is UNSCORED but sited — 'in wild nanite country', not 'unaffected by the ground'",
+      !!gnCard && gnCard.field === "nanite" && /nanite country/.test(gnCard.verdict));
+    // ⛔ THE BAND IS STILL UNAUTHORED AND THAT IS DELIBERATE. Aevi's note pins the SHAPE ("a nanite craft
+    // at clear 0.05 should be starved the way a precursor craft is starved at density 0.05") and not the
+    // centre or width, which are Erik's dial. This gate exists so nobody quietly invents one.
+    check("385: the nanite band is still NULL — the shape is stated, the number is Erik's and unauthored",
+      sd385.sourceBands.sources.nanite.band === null);
+    // And the banner carries both fields as separate chips.
+    const app385 = readFileSync(join(root, "app.js"), "utf8");
+    check("385: the banner shows the nanite field as its OWN chip, never merged into the ground word",
+      /ground-nanite/.test(app385) && /g\.nanite/.test(app385));
+  }
+
   // ══ SNG-382 — THE TRADITION SOURCE MIX GETS A READER. Aevi's work-order item 3 asked me to derive
   // the 26 weighted mixes before she authored them; she had already authored all 26, on the ratified
   // vocabulary, with Erik's reasons. ⛔ THE GAP WAS THE OTHER END: `power_sources.json` was REGISTERED AND

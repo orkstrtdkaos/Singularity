@@ -426,7 +426,11 @@ export function craftSource(ability, character, schoolsData, powerSources = null
 export function groundCardFor(ability, character, { schools, substrate, location, powerSources = null } = {}) {
   const cs = craftSource(ability, character, schools, powerSources);
   if (!cs) return null;
-  const density = location ? locationDensity(location, substrate) : null;
+  // ⛔ SNG-385 — THE CARD READS THE SOURCE'S OWN FIELD. A nanite craft scored against lattice density
+  // is being marked on the wrong exam: the Heartroot is lattice 0.02 and nanite `wild` 0.75, and a card
+  // that calls a nanite craft starved there is simply wrong about the world.
+  const density = location ? fieldValueFor(cs.source, location, substrate) : null;
+  const nan = fieldOfSource(cs.source, substrate) === "nanite" ? naniteAt(location, substrate) : null;
   const because = sourceGround(cs.source, substrate);
   // A source with no band (body, nanite) does not care about the ground, and saying "strong here" about it
   // would be inventing a relationship the content explicitly denies.
@@ -437,7 +441,11 @@ export function groundCardFor(ability, character, { schools, substrate, location
     : (substrate?.sourceBands?.sources?.[cs.source]?.band || null);
   const banded = !!band;
   if (density === null || !banded) {
-    return { source: cs.source, school: cs.school, via: cs.via, density, because, verdict: "unaffected by the ground",
+    // ⚠️ A NANITE CRAFT IS NOT "UNAFFECTED BY THE GROUND" — it is unSCORED, because no band is
+    // authored for its axis yet. Saying the field does not touch it would be a statement about the world;
+    // naming the country it is standing in is a statement about what we know.
+    return { source: cs.source, school: cs.school, via: cs.via, density, because, field: fieldOfSource(cs.source, substrate), nanite: nan,
+             verdict: nan ? `in ${nan.state} nanite country` : "unaffected by the ground",
              strength: 4, percent: null, chancePenalty: 0, energyMult: 1, off: false, grounded: false };
   }
   const v = cs.school
@@ -454,7 +462,7 @@ export function groundCardFor(ability, character, { schools, substrate, location
     : v.side === "starved" ? "starved here — the ground is too thin"
     : v.side === "crowded" ? "crowded here — the ground is too loud"
     : "unaffected by the ground";
-  return { source: cs.source, school: cs.school, via: cs.via, density, because, verdict: word,
+  return { source: cs.source, school: cs.school, via: cs.via, density, because, field: fieldOfSource(cs.source, substrate), nanite: nan, verdict: word,
     strength: Math.max(0, Math.min(4, Math.round(v.factor * 4))), percent: v.percent,
     chancePenalty: v.chancePenalty, energyMult: v.energyMult, off: v.off, grounded: true };
 }
@@ -479,5 +487,58 @@ export function groundHere(location, substrateData) {
   // Reported, not coerced — guessing a delta for it would be inventing a bastion.
   const bastion = (src && typeof src === "object" && src.kind)
     ? { kind: src.kind, delta: src.delta ?? null, reason: src.reason || null } : null;
-  return { density, word, bastion };
+  // ⛔ SNG-385 — THE SECOND FIELD RIDES ALONG. Erik: "two fields, two colours — a Precursor vault
+  // and a wild bloom must not render the same." The Heartroot is lattice 0.02 and nanite `wild` 0.75; a
+  // banner that shows only the first says "dead ground" about a place that is blooming.
+  return { density, word, bastion, nanite: naniteAt(location, substrateData) };
+}
+
+/* ═══ SNG-385 — THE NANITE FIELD. Aevi authored it for all 26 regions and flagged it herself:
+ * "⚠️ NO CONSUMER YET. Authored ahead of a reader DELIBERATELY and flagged: `substrateDensity` has a
+ * resolver and this does not. Until then this is documentation, and I am saying so rather than letting it
+ * look wired."
+ *
+ * ⛔ IT IS A SECOND GEOGRAPHY, NOT A SECOND OPINION ABOUT THE FIRST. Erik: ground nanite in "what the
+ * PRE-TRANSITION HUMANS WERE DOING THERE." The lattice map says where the Precursors built; this one says
+ * where the tech was deployed and what became of it — still cycled (`ordered`), abandoned and bloomed
+ * (`wild`), or absent (`clear`, and there are two ways to be clear). A Precursor vault and a wild bloom
+ * must not render the same, which is exactly why they cannot share a field.
+ *
+ * ⚠️ AUTHORED PER REGION, NOT AS POINT SOURCES. `substrateSource` is 43 pools and sinks with radii
+ * on the sphere; this is 26 regional values. Inventing radii for it would be me designing a geography she
+ * deliberately shaped differently — so the resolver reads the region, and honours a per-location override
+ * if one is ever authored, which is the same courtesy `locationDensity` pays `substrateDensity`.
+ */
+
+/** The nanite reading where this location stands: { v, state, why } — or null when nothing is authored
+ *  for its region. ⚠️ NULL IS "WE DO NOT KNOW", NOT ZERO: a region with no entry is unsurveyed, and
+ *  scoring a craft as starved there would be inventing an absence. */
+export function naniteAt(location, substrateData) {
+  if (!location) return null;
+  // A per-location override wins, exactly as an authored `substrateDensity` does.
+  if (typeof location.naniteDensity === "number") {
+    return { v: location.naniteDensity, state: location.naniteState || null, why: null, source: "location" };
+  }
+  const region = location.regionId || location.region;
+  const e = substrateData?.naniteField?.byRegion?.[region];
+  if (!e || typeof e.v !== "number") return null;
+  return { v: e.v, state: e.state || null, why: e.why || null, source: "region" };
+}
+
+/** Which FIELD does a source answer to? ⛔ THE WHOLE POINT OF SNG-385: `nanite` has no band against
+ *  lattice density and never should have — it answers to the nanite field. Read from content so the
+ *  answer is authored rather than a list in code, defaulting to the substrate for everything else. */
+export function fieldOfSource(source, substrateData) {
+  return substrateData?.sourceBands?.sources?.[source]?.field || "substrate";
+}
+
+/** The value a craft with this source is scored against, at this location — the ONE place that decides
+ *  which geography applies. Returns null when the relevant field has nothing to say here. */
+export function fieldValueFor(source, location, substrateData) {
+  if (fieldOfSource(source, substrateData) === "nanite") {
+    const n = naniteAt(location, substrateData);
+    return n ? n.v : null;
+  }
+  const d = locationDensity(location, substrateData);
+  return typeof d === "number" ? d : null;
 }

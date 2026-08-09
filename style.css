@@ -1290,3 +1290,10 @@ img[data-lightbox] { cursor: zoom-in; }
 .ground-row-off .ground-pips, .ground-row-off .ground-verdict { color: var(--bad, #c46) ; }
 .ground-row-neutral { opacity: 0.65; }
 .ground-because { font-style: italic; }
+
+/* SNG-385 — the nanite chip. A SECOND field, so it gets its own colour rather than shading the first:
+   ordered is kept and cycling, wild is a bloom nobody tends, clear is absence. */
+.ground-nanite { font-family: var(--font-ui); font-size: 11px; letter-spacing: 1px; margin-left: 8px; padding: 1px 6px; border-radius: 999px; border: 1px solid currentColor; opacity: 0.85; }
+.ground-nan-ordered { color: var(--accent2, #7fb8d4); }
+.ground-nan-wild { color: var(--good, #86c06c); }
+.ground-nan-clear { color: var(--muted, #8a8a8a); }

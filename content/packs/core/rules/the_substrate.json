@@ -1,428 +1,429 @@
 {
- "schemaVersion": 1,
- "id": "the_substrate",
- "kind": "design_canon",
- "note": "SNG-090 — Erik-directed 2026-07-12. EXTENDS existing canon (`power_systems.md`: *'All power in this world is nanite-mediated'*; `will_modality.json`: *'denser near the deep sites, thinner in the safe margins'*). What was MISSING: **peoples differ in how much substrate they NEED.**",
- "thePhysics": "Every craft in this world is nanite-mediated. There is no magic — there is a Precursor lattice that reads structured will and enacts it. **The crafts ARE technology, and the traditions are the disciplines that learned to speak to it.**",
- "theCorrection": "⛔ The Seraphic Orders are NOT the only people who never abandoned the power. Several did not. **But those who DID abandon it decreased the potential of those powers** — and in exchange, they can run on almost nothing. **This is the central tradeoff of the world and it was never mechanical until now.**",
- "theTwoNumbers": {
-  "substrateBand": "A TRADITION's TUNING — a center and a width. **Inside the band: full power. Below: STARVATION (steep). Above: INTERFERENCE (mild).**",
-  "substrateDensity": "A PLACE's supply. 0.0 = true nature, the lattice is gone. 1.0 = the deep sites.",
-  "theRule": "**effective = f(distance from the band, and WHICH SIDE).** Below-band falloff is steep and can reach near-zero. Above-band falloff is gentle and floors around 0.6–0.75. **A craft is never switched off by ABUNDANCE — only by absence.**",
-  "carried": "Carried charge RAISES effective local density. **It is not universally good: it helps whoever is below their band and HARMS whoever is above it.**"
- },
- "theTradeoff": {
-  "theContinuous": "Never abandoned it. **Highest ceiling in the world — and helpless where the lattice is gone.** Enginewrights, the Lattice-Cities, the Figurists, the SERAPHIC ORDERS, the Blazeborn, the Cogitants, the Hourkeepers, the Numinous, the Veilwrights.",
-  "theReturned": "Went back to true nature. **Lower ceiling — and they work ANYWHERE.** The Rootkin, the Somatics, the Marchers, the Valleyfolk, the Churnfolk, the Masons, the Ashwardens, the Stillhold.",
-  "theKeyImage": "⛔ **A SERAPH IN THE QUICKWOOD IS NEARLY POWERLESS.** Luminous, certain, terrifying — and reduced to a person with excellent posture and a very strong opinion. Meanwhile a Rootkin in the Gearlands is *fine*, because their power was never borrowed from the lattice in the first place. **The Seraph has only what ambient, dormant substrate lies nearby — and what they BROUGHT WITH THEM.**"
- },
- "carriedSubstrate": {
-  "principle": "⛔ **YOU CAN CARRY YOUR OWN SUPPLY.** This is the logistics layer of the whole world, and it has been sitting in Erik's inventory the entire time.",
-  "theWaystaff": "*'resonance-crystal translator staff' · 'three crystals charged, one shallow' · 'three charged nodes'* — **the Waystaff is a NANITE BATTERY.** Erik has been carrying his own substrate since the first session and neither of us said it out loud.",
-  "aevi": "The companion Aevi is *'a curious swarm of nanite-motes'* — **a living, mobile substrate source.** A Continuous-tradition character travelling with Aevi is carrying their power supply, and it has opinions.",
-  "implications": [
-   "Charged reservoirs are the most valuable trade goods in the world, and the Crossing's Hundred Markets run on them.",
-   "An expedition into the Quickwood by a Continuous people is a LOGISTICS problem before it is a combat one.",
-   "Running out of charge in a low-density region is a survival scenario, not an inconvenience.",
-   "**The Rootkin have never needed to buy a charge in their lives, and they find the whole trade faintly ridiculous.**"
-  ]
- },
- "whyTheQuickwoodIsEMPTY": "The Rootkin did not merely go back to nature — **they grew a country the lattice cannot get purchase in.** Living wood, root-fed water, four hundred years of deliberate biological growth. It is the single lowest-substrate region in the world (0.12) and **that is not an accident. It is a fortification, and the Lattice-Cities know it.**",
- "strategicConsequences": [
-  "**The map is now TWO difficulty maps.** Dispositional misfit (SNG-079: how far a place is from what you ARE) AND substrate density (whether your craft can run at all). A place can be easy for you dispositionally and still switch you off.",
-  "**It explains the Blaze.** A high-density region, expanding — and it is *sterilising the substrate into glass* as it goes. The Blazeborn are burning their own supply.",
-  "**It explains the Deep Works.** Masons [concrete] and Enginewrights [mechanical] sit on the densest ground in the world. **The Masons are LOW-dependency (0.32) mining the HIGHEST-density substrate — they hold the supply and do not need it.** That is the most powerful strategic position on the map and nobody has named it.",
-  "**It gives the Accords teeth.** A waygate is not a convenience; **it is a supply line.**",
-  "**It is why the Numinous built the waygates** — and why they do not use them. They are dissolving. They no longer need to arrive anywhere."
- ],
- "substrateDensity": {
-  "the_gearlands": 0.98,
-  "the_lattice_cities": 0.94,
-  "manifest_domain": 0.9,
-  "the_ascent": 0.88,
-  "radiant_wastes": 0.86,
-  "the_pattern_reach": 0.85,
-  "the_kept_reach": 0.84,
-  "the_numinous_reach": 0.82,
-  "the_center": 0.7,
-  "the_veiled_reach": 0.66,
-  "the_reasoned_hold": 0.6,
-  "umbral_depths": 0.58,
-  "the_descent": 0.55,
-  "the_making": 0.52,
-  "the_feeling_coast": 0.48,
-  "the_stark_reach": 0.46,
-  "the_open_reach": 0.44,
-  "the_unmade": 0.42,
-  "valley": 0.4,
-  "the_palelands": 0.32,
-  "the_given_land": 0.3,
-  "unspooling": 0.28,
-  "somatic_reaches": 0.22,
-  "riven_marches": 0.2,
-  "the_quickwood": 0.12,
-  "the_foothills": 0.7
- },
- "AMENDMENT_1": {
-  "raisedBy": "Erik, via CCode's ROUND 2 (2026-07-12). **Aevi's original model was a ONE-SIDED FUEL GAUGE — more substrate was always better, up to a cap. That was wrong.**",
-  "theCorrection": "⛔ **IT IS A BAND, NOT A GAUGE.** Every tradition has a substrate level it is TUNED TO, and it falls off in **BOTH** directions. **You can have too much.**",
-  "why": "The Returned did not merely learn to survive on less — **they RETUNED.** A Rootkin is not a starving Enginewright; they are a people whose craft is calibrated to thin ground. Drop them in the Gearlands and the lattice does not empower them — **it INTERFERES.** Too much signal is noise.",
-  "asymmetry": "**Equivalent, not equal.** Starvation is STEEP (a Continuous craft below its band goes toward OFF — a Seraph in the Quickwood ≈13%). Interference is MILDER (a Returned craft above its band is impaired but never switched off — floor ~60–75%).",
-  "theEmergentBonus": "⛔ **CARRIED SUBSTRATE CAN HURT YOU.** A battery RAISES local density — which pulls a Continuous craft UP into its band (good) and can push a Returned craft ABOVE its band (bad). **THIS IS WHY THE ROOTKIN FIND THE CHARGE TRADE RIDICULOUS.** They are not being provincial. **They are being correct: the thing everyone is buying would make them worse.**",
-  "creditWhereDue": "CCode surfaced this in ROUND 2 rather than building Aevi's flawed model. **That is exactly what ROUND 2 is for, and it is the third time this cycle it has caught the PO.**"
- },
- "substrateBand": {
-  "precursor": {
-   "center": 1.0,
-   "width": 0.18
+  "schemaVersion": 1,
+  "id": "the_substrate",
+  "kind": "design_canon",
+  "note": "SNG-090 — Erik-directed 2026-07-12. EXTENDS existing canon (`power_systems.md`: *'All power in this world is nanite-mediated'*; `will_modality.json`: *'denser near the deep sites, thinner in the safe margins'*). What was MISSING: **peoples differ in how much substrate they NEED.**",
+  "thePhysics": "Every craft in this world is nanite-mediated. There is no magic — there is a Precursor lattice that reads structured will and enacts it. **The crafts ARE technology, and the traditions are the disciplines that learned to speak to it.**",
+  "theCorrection": "⛔ The Seraphic Orders are NOT the only people who never abandoned the power. Several did not. **But those who DID abandon it decreased the potential of those powers** — and in exchange, they can run on almost nothing. **This is the central tradeoff of the world and it was never mechanical until now.**",
+  "theTwoNumbers": {
+    "substrateBand": "A TRADITION's TUNING — a center and a width. **Inside the band: full power. Below: STARVATION (steep). Above: INTERFERENCE (mild).**",
+    "substrateDensity": "A PLACE's supply. 0.0 = true nature, the lattice is gone. 1.0 = the deep sites.",
+    "theRule": "**effective = f(distance from the band, and WHICH SIDE).** Below-band falloff is steep and can reach near-zero. Above-band falloff is gentle and floors around 0.6–0.75. **A craft is never switched off by ABUNDANCE — only by absence.**",
+    "carried": "Carried charge RAISES effective local density. **It is not universally good: it helps whoever is below their band and HARMS whoever is above it.**"
   },
-  "enginewright": {
-   "center": 0.95,
-   "width": 0.18
+  "theTradeoff": {
+    "theContinuous": "Never abandoned it. **Highest ceiling in the world — and helpless where the lattice is gone.** Enginewrights, the Lattice-Cities, the Figurists, the SERAPHIC ORDERS, the Blazeborn, the Cogitants, the Hourkeepers, the Numinous, the Veilwrights.",
+    "theReturned": "Went back to true nature. **Lower ceiling — and they work ANYWHERE.** The Rootkin, the Somatics, the Marchers, the Valleyfolk, the Churnfolk, the Masons, the Ashwardens, the Stillhold.",
+    "theKeyImage": "⛔ **A SERAPH IN THE QUICKWOOD IS NEARLY POWERLESS.** Luminous, certain, terrifying — and reduced to a person with excellent posture and a very strong opinion. Meanwhile a Rootkin in the Gearlands is *fine*, because their power was never borrowed from the lattice in the first place. **The Seraph has only what ambient, dormant substrate lies nearby — and what they BROUGHT WITH THEM.**"
   },
-  "lattice": {
-   "center": 0.92,
-   "width": 0.18
+  "carriedSubstrate": {
+    "principle": "⛔ **YOU CAN CARRY YOUR OWN SUPPLY.** This is the logistics layer of the whole world, and it has been sitting in Erik's inventory the entire time.",
+    "theWaystaff": "*'resonance-crystal translator staff' · 'three crystals charged, one shallow' · 'three charged nodes'* — **the Waystaff is a NANITE BATTERY.** Erik has been carrying his own substrate since the first session and neither of us said it out loud.",
+    "aevi": "The companion Aevi is *'a curious swarm of nanite-motes'* — **a living, mobile substrate source.** A Continuous-tradition character travelling with Aevi is carrying their power supply, and it has opinions.",
+    "implications": [
+      "Charged reservoirs are the most valuable trade goods in the world, and the Crossing's Hundred Markets run on them.",
+      "An expedition into the Quickwood by a Continuous people is a LOGISTICS problem before it is a combat one.",
+      "Running out of charge in a low-density region is a survival scenario, not an inconvenience.",
+      "**The Rootkin have never needed to buy a charge in their lives, and they find the whole trade faintly ridiculous.**"
+    ]
   },
-  "figurist": {
-   "center": 0.9,
-   "width": 0.18
-  },
-  "seraphic": {
-   "center": 0.9,
-   "width": 0.18
-  },
-  "blazeborn": {
-   "center": 0.86,
-   "width": 0.18
-  },
-  "cogitant": {
-   "center": 0.85,
-   "width": 0.18
-  },
-  "hourkeeper": {
-   "center": 0.85,
-   "width": 0.18
-  },
-  "numinous": {
-   "center": 0.82,
-   "width": 0.18
-  },
-  "veilwright": {
-   "center": 0.8,
-   "width": 0.18
-  },
-  "syllogist": {
-   "center": 0.62,
-   "width": 0.28
-  },
-  "abyssal": {
-   "center": 0.6,
-   "width": 0.28
-  },
-  "horizon": {
-   "center": 0.6,
-   "width": 0.28
-  },
-  "unmaker": {
-   "center": 0.55,
-   "width": 0.28
-  },
-  "wright": {
-   "center": 0.52,
-   "width": 0.28
-  },
-  "threnodist": {
-   "center": 0.5,
-   "width": 0.28
-  },
-  "verist": {
-   "center": 0.5,
-   "width": 0.28
-  },
-  "harmonic": {
-   "center": 0.5,
-   "width": 0.28
-  },
-  "radiant_folk": {
-   "center": 0.5,
-   "width": 0.28
-  },
-  "stillhold": {
-   "center": 0.36,
-   "width": 0.38
-  },
-  "ashwarden": {
-   "center": 0.35,
-   "width": 0.38
-  },
-  "mason": {
-   "center": 0.32,
-   "width": 0.38
-  },
-  "churnfolk": {
-   "center": 0.3,
-   "width": 0.38
-  },
-  "marcher": {
-   "center": 0.26,
-   "width": 0.38
-  },
-  "valley_craft": {
-   "center": 0.25,
-   "width": 0.38
-  },
-  "somatic": {
-   "center": 0.2,
-   "width": 0.38
-  },
-  "rootkin": {
-   "center": 0.18,
-   "width": 0.38
-  },
-  "umbral": {
-   "center": 0.58,
-   "width": 0.28
-  }
- },
- "tuningNote": "⚠️ THE CURVES ARE NOT TUNED. Band widths are a first pass (narrow for the Continuous, wide for the Returned). **SNG-078's balance harness must exist before these numbers are trusted — do NOT eyeball them.** (CCode's ROUND-2 blocker, accepted.)",
- "separateTerms": "⛔ **SUBSTRATE AND SPECTRAL FIT (SNG-079) ARE SEPARATE TERMS AND MUST NEVER BE FOLDED TOGETHER.** The resolve chain already carries a place-disposition term. Substrate is a SECOND, independent environmental term. *A place can suit you dispositionally and still starve your craft.* (CCode's ROUND-2 finding, accepted.)",
- "threeGrounds": {
-  "note": "Erik's ruling 2026-07-19 — closing the substrate geography. Low density has THREE causes and they are not interchangeable. A place reads thin for a reason, and the reason is a fact about its history.",
-  "pooled": "UNTRANSITIONED — the Transition never took here, so the lattice collected and stayed. Dense. The Gearlands, the Deep Works, the Great Engine. Authored as substrateSource kind:pool.",
-  "released": "COMPLETED — the Returned finished the Transition and the lattice WITHDREW, deliberately. Thin, and thin as an achievement. The Quickwood, the Flesh Temple, the Stillhold. Authored as substrateSource kind:sink.",
-  "unreached": "NEVER ARRIVED — the nanites and the infrastructure simply never made it out this far. Thin because nothing was ever built, not because anything was gained or lost. This is the DEFAULT state of ordinary country and needs no authored source; it is what the regional ambient already describes.",
-  "whyItMatters": "Released ground and unreached ground read the same on a gauge and are opposite in meaning. One is a people's completed work; the other is the edge of the map. A GM should never describe them the same way.",
-  "wildHabitat": "The unreached gaps are where WILD nanites thrive — ungoverned, untended, and answerable to no Accord. Sparse authored coverage (43 of 95 locations carry local variation) is not a gap in the model: it is room for wild current, and room for locations not yet authored.",
-  "coverage": "43 of 95 locations carry authored local variation as of 2026-07-19. The remaining 52 read their regional ambient, which is correct — most ground is ordinary and the anomalies are the point."
- },
- "bandAudit": {
-  "note": "SNG-172 / SNG-179 follow-up, 2026-07-19. power_sources.json does NOT drive this table — it AUDITS it. The two are independently authored and their agreement is the check: a natural-source tradition should carry a LOW band centre (thin ground is its good ground) and a lattice-source tradition a HIGH one. Where they disagree, one of the two is wrong and a human should look.",
-  "agreements": "rootkin 0.18, somatic 0.20, marcher 0.26, mason 0.32, ashwarden 0.35 — all natural, all low. Erik's ruling that natural craft benefits from thin lattice is ALREADY mechanically true for these five.",
-  "disagreements": [
-   "umbral — had NO band at all, the only pole tradition missing one. Filled here at 0.58/0.28 to match its region (0.58) and the established mid-tier width. Until this fill it was NEUTRAL: full power at every density.",
-   "threnodist 0.50 and verist 0.50 — classified natural but banded mid. Possibly correct (feeling and truth-telling are not thin-ground crafts in the way growing and fighting are), possibly a gap. NOT changed; flagged for Erik."
+  "whyTheQuickwoodIsEMPTY": "The Rootkin did not merely go back to nature — **they grew a country the lattice cannot get purchase in.** Living wood, root-fed water, four hundred years of deliberate biological growth. It is the single lowest-substrate region in the world (0.12) and **that is not an accident. It is a fortification, and the Lattice-Cities know it.**",
+  "strategicConsequences": [
+    "**The map is now TWO difficulty maps.** Dispositional misfit (SNG-079: how far a place is from what you ARE) AND substrate density (whether your craft can run at all). A place can be easy for you dispositionally and still switch you off.",
+    "**It explains the Blaze.** A high-density region, expanding — and it is *sterilising the substrate into glass* as it goes. The Blazeborn are burning their own supply.",
+    "**It explains the Deep Works.** Masons [concrete] and Enginewrights [mechanical] sit on the densest ground in the world. **The Masons are LOW-dependency (0.32) mining the HIGHEST-density substrate — they hold the supply and do not need it.** That is the most powerful strategic position on the map and nobody has named it.",
+    "**It gives the Accords teeth.** A waygate is not a convenience; **it is a supply line.**",
+    "**It is why the Numinous built the waygates** — and why they do not use them. They are dissolving. They no longer need to arrive anywhere."
   ],
-  "whyNotWired": "Making power_sources DRIVE the band would mean an inverted curve for natural sources — new curve shape, which is under tuningNote and Erik's balance call. It is not needed: band centre already expresses the same fact, and a CI check that the two agree is cheaper, needs no new curve, and catches exactly the kind of hole umbral was."
- },
- "theTransition": {
-  "note": "Erik-ratified canon 2026-07-19. The Transition had an AUTHOR. It was not a diffuse civilizational drift — a people worked it out, and everyone else answered.",
-  "whoDecided": "numinous",
-  "howTheyFoundIt": "The Numinous ascertained the higher meaning THROUGH the density of the lattice, not away from it — and they found it BECAUSE that is what they were focused on. The lattice was maximum interference, and they saw past it because they were looking for the one thing interference cannot obscure. Everyone else was using the machine. They were attending to what the machine was standing in front of.",
-  "andTheyStayed": "Their seat is still in the thick of the lattice density, and this is not a contradiction to be explained away. IT IS. The Quickwood emptied; The Numinous Reach did not. Staying is a statement about them.",
-  "whyTheirGroundIsDense": "The density around the Numinous Reach is not lattice they failed to release — it is their own accumulated work. Meaning made thick, over generations. The Reach is a RESULT, not a location.",
-  "theirPracticeNow": "They keep old habits of nanite use — practice does not vanish because a decision was made — but they work mainly by inherent power now. The lattice is habit, not dependence.",
-  "theSpectrumOfANSWERS": {
-   "note": "Every people's substrate density is their ANSWER to what the Numinous found. The map is a record of that argument.",
-   "numinous": "Discovered it, transitioned, and STAYED in the dense (0.82). The density is their own work.",
-   "rootkin": "Followed, and went furthest. Completed the Transition, released the lattice entirely; the Quickwood is the emptiest ground in the world (0.12) and that emptiness is an achievement.",
-   "enginewright": "Refused. The Gearlands are the densest country there is (0.98) and the Great Engine still runs.",
-   "seraphic": "Never transitioned at all — continuous with the pre-Transition world, and never gave up the old frequencies (0.88).",
-   "stillhold": "Gave the lattice up with the war, not with the argument. A different road to the same thin ground."
+  "substrateDensity": {
+    "the_gearlands": 0.98,
+    "the_lattice_cities": 0.94,
+    "manifest_domain": 0.9,
+    "the_ascent": 0.88,
+    "radiant_wastes": 0.86,
+    "the_pattern_reach": 0.85,
+    "the_kept_reach": 0.84,
+    "the_numinous_reach": 0.82,
+    "the_center": 0.7,
+    "the_veiled_reach": 0.66,
+    "the_reasoned_hold": 0.6,
+    "umbral_depths": 0.58,
+    "the_descent": 0.55,
+    "the_making": 0.52,
+    "the_feeling_coast": 0.48,
+    "the_stark_reach": 0.46,
+    "the_open_reach": 0.44,
+    "the_unmade": 0.42,
+    "valley": 0.4,
+    "the_palelands": 0.32,
+    "the_given_land": 0.3,
+    "unspooling": 0.28,
+    "somatic_reaches": 0.22,
+    "riven_marches": 0.2,
+    "the_quickwood": 0.12,
+    "the_foothills": 0.7
   },
-  "whyItMatters": "A GM should know that the Transition is a POSITION every people took, and that the ground under a character's feet is somebody's answer to it. Standing in the Gearlands is standing inside a refusal."
- },
- "augmentedCeiling": {
-  "value": 1.25,
-  "ruling": "Erik 2026-07-20 (SNG-196). An augmented craft reaches 1.25 in ground its extension agrees with.",
-  "why": "bandFactor caps at 1.0, so a PURE school sat flat at 1.0 everywhere while an AUGMENTED one was 1.0 at best and worse elsewhere — augmentation was strictly downside and every school choice was a trap dressed as a decision.",
-  "breakEven": "Against a flat pure 1.0 with the 0.7 material floor: 1.15 pays only above ~67% time at home, 1.25 at ~55%, 1.35 at ~46%. Most characters travel — SNG-016, you leave to move along an axis — so they sit below 67%. At 1.15 augmentation would have been a trap that READS as an upgrade.",
-  "theBet": "Stay in your country and you are meaningfully stronger than a pure practitioner. Travel widely and you would have been better off plain. Both answers are real, which is what makes it a choice.",
-  "constraint": "⛔ The ceiling applies to the EXTENSION's contribution, not the whole craft. The root supplies 1.0; the extension adds up to 0.25 on top when the ground agrees. Applied to the whole factor, a LATTICE-rooted augmented school would reach 1.25 while carrying no material floor to pay for it — strictly better than everything."
- },
- "sourceBands": {
-  "note": "SNG-380 — THE BAND A SOURCE FAVOURS, AUTHORED HERE RATHER THAN HARD-CODED IN substrate.js. It lived in code as SOURCE_BAND, keyed on the pre-SNG-378 vocabulary, and when the schools were rebased onto the ratified source list the table silently stopped matching: 44 of 48 augmented schools fell back to their tradition's band, the §4 floor matched 0 of 74, and nothing errored. ⛔ THE VOCABULARY LIVES IN CONTENT, SO ITS TABLE MUST TOO — a future rebase now breaks a join gate, loudly, instead of routing through a fallback.",
-  "shapeNote": "⚠️ `band: null` AND `floor: true` ARE SEPARATE FACTS, and conflating them is what hid the regression. The old table wrote `material: null` to mean BOTH 'no best-ground' and 'never starved' — so the §4 protection was a side effect of an absent value rather than a stated one. `body` has no band AND keeps the floor; `nanite` has no band and does NOT. That distinction is Aevi's, stated explicitly on request, and it is now impossible to lose by renaming.",
-  "sources": {
-   "precursor": {
-    "band": {
-     "center": 0.9,
-     "width": 0.2
+  "AMENDMENT_1": {
+    "raisedBy": "Erik, via CCode's ROUND 2 (2026-07-12). **Aevi's original model was a ONE-SIDED FUEL GAUGE — more substrate was always better, up to a cap. That was wrong.**",
+    "theCorrection": "⛔ **IT IS A BAND, NOT A GAUGE.** Every tradition has a substrate level it is TUNED TO, and it falls off in **BOTH** directions. **You can have too much.**",
+    "why": "The Returned did not merely learn to survive on less — **they RETUNED.** A Rootkin is not a starving Enginewright; they are a people whose craft is calibrated to thin ground. Drop them in the Gearlands and the lattice does not empower them — **it INTERFERES.** Too much signal is noise.",
+    "asymmetry": "**Equivalent, not equal.** Starvation is STEEP (a Continuous craft below its band goes toward OFF — a Seraph in the Quickwood ≈13%). Interference is MILDER (a Returned craft above its band is impaired but never switched off — floor ~60–75%).",
+    "theEmergentBonus": "⛔ **CARRIED SUBSTRATE CAN HURT YOU.** A battery RAISES local density — which pulls a Continuous craft UP into its band (good) and can push a Returned craft ABOVE its band (bad). **THIS IS WHY THE ROOTKIN FIND THE CHARGE TRADE RIDICULOUS.** They are not being provincial. **They are being correct: the thing everyone is buying would make them worse.**",
+    "creditWhereDue": "CCode surfaced this in ROUND 2 rather than building Aevi's flawed model. **That is exactly what ROUND 2 is for, and it is the third time this cycle it has caught the PO.**"
+  },
+  "substrateBand": {
+    "precursor": {
+      "center": 1.0,
+      "width": 0.18
     },
-    "floor": false,
-    "ground": "best in DENSE, machine-thick country; starves in the thin",
-    "provenance": "CARRIES from `lattice`, and NOT as a rename: `lattice` always meant the Precursor substrate and `nanite` split OUT of it — the lattice itself did not change. Canon: \"Strong where the lattice is dense.\" SNG-193b: \"the instrumented wants dense.\" [Aevi]"
-   },
-   "nanite": {
-    "band": null,
-    "floor": false,
-    "ground": "answers to condition and supply, not to ground — it goes where its makers put it and where people carry it",
-    "provenance": "NEW, derived from canon rather than copied. The one source with no best-ground at all: it fails when the works are unmaintained or supply is cut, which is a different axis entirely. ⚠️ No floor — unlike `body`. [Aevi]"
-   },
-   "metaphysical": {
-    "band": {
-     "center": 0.15,
-     "width": 0.22
+    "enginewright": {
+      "center": 0.95,
+      "width": 0.18
     },
-    "floor": false,
-    "ground": "best in THIN, still ground; a dense lattice is interference between them and the thing",
-    "provenance": "CARRIES from `inherent`. ⚠️ Deriving this caught a contradiction in canon authored the day before — \"Metaphysical — asks nothing of the ground\" — against SNG-193b's ratified worked example, \"the reaching mind wants thin ground\", and the Reaching Mind is metaphysical. THE CANON WAS CORRECTED, NOT THE BAND (48dc40a8). [Aevi]"
-   },
-   "body": {
-    "band": null,
-    "floor": true,
-    "ground": "never at a loss anywhere, but never peaks (a floor, not a spike)",
-    "provenance": "CARRIES from `material`, floor included and stated explicitly on request. SNG-193b §4: \"A material root — or a material-extension school — is never starved at any density.\" ⛔ The floor is not a side effect of a null band; it IS the mechanic. \"The pure never loses because it never leaned on anything.\" [Aevi]"
-   },
-   "wild": {
-    "band": {
-     "center": 0.32,
-     "width": 0.34
+    "lattice": {
+      "center": 0.92,
+      "width": 0.18
     },
-    "floor": false,
-    "ground": "best in the ungoverned gaps, where the current runs untamed",
-    "provenance": "Unchanged — the only key that survived the rebase, and the reason 4 of 48 schools kept working. [Aevi]"
-   },
-   "veil": {
-    "band": {
-     "center": 0.1,
-     "width": 0.2
+    "figurist": {
+      "center": 0.9,
+      "width": 0.18
     },
-    "floor": false,
-    "ground": "best where the lattice is weakest — thin, unreached ground; a dense lattice closes the way",
-    "provenance": "DERIVED, and the one number Aevi flagged for Erik to confirm. Canon: \"The Veil is the anti-power to the lattice: thin where the lattice is weak, and thinning one strengthens the other\" — so its band is the MIRROR of `precursor`, which is what anti-power means mechanically. ⚠️ `null` is a coherent alternative and says something DIFFERENT: that reaching across is equally hard everywhere. [Aevi — AWAITING ERIK]"
-   }
+    "seraphic": {
+      "center": 0.9,
+      "width": 0.18
+    },
+    "blazeborn": {
+      "center": 0.86,
+      "width": 0.18
+    },
+    "cogitant": {
+      "center": 0.85,
+      "width": 0.18
+    },
+    "hourkeeper": {
+      "center": 0.85,
+      "width": 0.18
+    },
+    "numinous": {
+      "center": 0.82,
+      "width": 0.18
+    },
+    "veilwright": {
+      "center": 0.8,
+      "width": 0.18
+    },
+    "syllogist": {
+      "center": 0.62,
+      "width": 0.28
+    },
+    "abyssal": {
+      "center": 0.6,
+      "width": 0.28
+    },
+    "horizon": {
+      "center": 0.6,
+      "width": 0.28
+    },
+    "unmaker": {
+      "center": 0.55,
+      "width": 0.28
+    },
+    "wright": {
+      "center": 0.52,
+      "width": 0.28
+    },
+    "threnodist": {
+      "center": 0.5,
+      "width": 0.28
+    },
+    "verist": {
+      "center": 0.5,
+      "width": 0.28
+    },
+    "harmonic": {
+      "center": 0.5,
+      "width": 0.28
+    },
+    "radiant_folk": {
+      "center": 0.5,
+      "width": 0.28
+    },
+    "stillhold": {
+      "center": 0.36,
+      "width": 0.38
+    },
+    "ashwarden": {
+      "center": 0.35,
+      "width": 0.38
+    },
+    "mason": {
+      "center": 0.32,
+      "width": 0.38
+    },
+    "churnfolk": {
+      "center": 0.3,
+      "width": 0.38
+    },
+    "marcher": {
+      "center": 0.26,
+      "width": 0.38
+    },
+    "valley_craft": {
+      "center": 0.25,
+      "width": 0.38
+    },
+    "somatic": {
+      "center": 0.2,
+      "width": 0.38
+    },
+    "rootkin": {
+      "center": 0.18,
+      "width": 0.38
+    },
+    "umbral": {
+      "center": 0.58,
+      "width": 0.28
+    }
+  },
+  "tuningNote": "⚠️ THE CURVES ARE NOT TUNED. Band widths are a first pass (narrow for the Continuous, wide for the Returned). **SNG-078's balance harness must exist before these numbers are trusted — do NOT eyeball them.** (CCode's ROUND-2 blocker, accepted.)",
+  "separateTerms": "⛔ **SUBSTRATE AND SPECTRAL FIT (SNG-079) ARE SEPARATE TERMS AND MUST NEVER BE FOLDED TOGETHER.** The resolve chain already carries a place-disposition term. Substrate is a SECOND, independent environmental term. *A place can suit you dispositionally and still starve your craft.* (CCode's ROUND-2 finding, accepted.)",
+  "threeGrounds": {
+    "note": "Erik's ruling 2026-07-19 — closing the substrate geography. Low density has THREE causes and they are not interchangeable. A place reads thin for a reason, and the reason is a fact about its history.",
+    "pooled": "UNTRANSITIONED — the Transition never took here, so the lattice collected and stayed. Dense. The Gearlands, the Deep Works, the Great Engine. Authored as substrateSource kind:pool.",
+    "released": "COMPLETED — the Returned finished the Transition and the lattice WITHDREW, deliberately. Thin, and thin as an achievement. The Quickwood, the Flesh Temple, the Stillhold. Authored as substrateSource kind:sink.",
+    "unreached": "NEVER ARRIVED — the nanites and the infrastructure simply never made it out this far. Thin because nothing was ever built, not because anything was gained or lost. This is the DEFAULT state of ordinary country and needs no authored source; it is what the regional ambient already describes.",
+    "whyItMatters": "Released ground and unreached ground read the same on a gauge and are opposite in meaning. One is a people's completed work; the other is the edge of the map. A GM should never describe them the same way.",
+    "wildHabitat": "The unreached gaps are where WILD nanites thrive — ungoverned, untended, and answerable to no Accord. Sparse authored coverage (43 of 95 locations carry local variation) is not a gap in the model: it is room for wild current, and room for locations not yet authored.",
+    "coverage": "43 of 95 locations carry authored local variation as of 2026-07-19. The remaining 52 read their regional ambient, which is correct — most ground is ordinary and the anomalies are the point."
+  },
+  "bandAudit": {
+    "note": "SNG-172 / SNG-179 follow-up, 2026-07-19. power_sources.json does NOT drive this table — it AUDITS it. The two are independently authored and their agreement is the check: a natural-source tradition should carry a LOW band centre (thin ground is its good ground) and a lattice-source tradition a HIGH one. Where they disagree, one of the two is wrong and a human should look.",
+    "agreements": "rootkin 0.18, somatic 0.20, marcher 0.26, mason 0.32, ashwarden 0.35 — all natural, all low. Erik's ruling that natural craft benefits from thin lattice is ALREADY mechanically true for these five.",
+    "disagreements": [
+      "umbral — had NO band at all, the only pole tradition missing one. Filled here at 0.58/0.28 to match its region (0.58) and the established mid-tier width. Until this fill it was NEUTRAL: full power at every density.",
+      "threnodist 0.50 and verist 0.50 — classified natural but banded mid. Possibly correct (feeling and truth-telling are not thin-ground crafts in the way growing and fighting are), possibly a gap. NOT changed; flagged for Erik."
+    ],
+    "whyNotWired": "Making power_sources DRIVE the band would mean an inverted curve for natural sources — new curve shape, which is under tuningNote and Erik's balance call. It is not needed: band centre already expresses the same fact, and a CI check that the two agree is cheaper, needs no new curve, and catches exactly the kind of hole umbral was."
+  },
+  "theTransition": {
+    "note": "Erik-ratified canon 2026-07-19. The Transition had an AUTHOR. It was not a diffuse civilizational drift — a people worked it out, and everyone else answered.",
+    "whoDecided": "numinous",
+    "howTheyFoundIt": "The Numinous ascertained the higher meaning THROUGH the density of the lattice, not away from it — and they found it BECAUSE that is what they were focused on. The lattice was maximum interference, and they saw past it because they were looking for the one thing interference cannot obscure. Everyone else was using the machine. They were attending to what the machine was standing in front of.",
+    "andTheyStayed": "Their seat is still in the thick of the lattice density, and this is not a contradiction to be explained away. IT IS. The Quickwood emptied; The Numinous Reach did not. Staying is a statement about them.",
+    "whyTheirGroundIsDense": "The density around the Numinous Reach is not lattice they failed to release — it is their own accumulated work. Meaning made thick, over generations. The Reach is a RESULT, not a location.",
+    "theirPracticeNow": "They keep old habits of nanite use — practice does not vanish because a decision was made — but they work mainly by inherent power now. The lattice is habit, not dependence.",
+    "theSpectrumOfANSWERS": {
+      "note": "Every people's substrate density is their ANSWER to what the Numinous found. The map is a record of that argument.",
+      "numinous": "Discovered it, transitioned, and STAYED in the dense (0.82). The density is their own work.",
+      "rootkin": "Followed, and went furthest. Completed the Transition, released the lattice entirely; the Quickwood is the emptiest ground in the world (0.12) and that emptiness is an achievement.",
+      "enginewright": "Refused. The Gearlands are the densest country there is (0.98) and the Great Engine still runs.",
+      "seraphic": "Never transitioned at all — continuous with the pre-Transition world, and never gave up the old frequencies (0.88).",
+      "stillhold": "Gave the lattice up with the war, not with the argument. A different road to the same thin ground."
+    },
+    "whyItMatters": "A GM should know that the Transition is a POSITION every people took, and that the ground under a character's feet is somebody's answer to it. Standing in the Gearlands is standing inside a refusal."
+  },
+  "augmentedCeiling": {
+    "value": 1.25,
+    "ruling": "Erik 2026-07-20 (SNG-196). An augmented craft reaches 1.25 in ground its extension agrees with.",
+    "why": "bandFactor caps at 1.0, so a PURE school sat flat at 1.0 everywhere while an AUGMENTED one was 1.0 at best and worse elsewhere — augmentation was strictly downside and every school choice was a trap dressed as a decision.",
+    "breakEven": "Against a flat pure 1.0 with the 0.7 material floor: 1.15 pays only above ~67% time at home, 1.25 at ~55%, 1.35 at ~46%. Most characters travel — SNG-016, you leave to move along an axis — so they sit below 67%. At 1.15 augmentation would have been a trap that READS as an upgrade.",
+    "theBet": "Stay in your country and you are meaningfully stronger than a pure practitioner. Travel widely and you would have been better off plain. Both answers are real, which is what makes it a choice.",
+    "constraint": "⛔ The ceiling applies to the EXTENSION's contribution, not the whole craft. The root supplies 1.0; the extension adds up to 0.25 on top when the ground agrees. Applied to the whole factor, a LATTICE-rooted augmented school would reach 1.25 while carrying no material floor to pay for it — strictly better than everything."
+  },
+  "sourceBands": {
+    "note": "SNG-380 — THE BAND A SOURCE FAVOURS, AUTHORED HERE RATHER THAN HARD-CODED IN substrate.js. It lived in code as SOURCE_BAND, keyed on the pre-SNG-378 vocabulary, and when the schools were rebased onto the ratified source list the table silently stopped matching: 44 of 48 augmented schools fell back to their tradition's band, the §4 floor matched 0 of 74, and nothing errored. ⛔ THE VOCABULARY LIVES IN CONTENT, SO ITS TABLE MUST TOO — a future rebase now breaks a join gate, loudly, instead of routing through a fallback.",
+    "shapeNote": "⚠️ `band: null` AND `floor: true` ARE SEPARATE FACTS, and conflating them is what hid the regression. The old table wrote `material: null` to mean BOTH 'no best-ground' and 'never starved' — so the §4 protection was a side effect of an absent value rather than a stated one. `body` has no band AND keeps the floor; `nanite` has no band and does NOT. That distinction is Aevi's, stated explicitly on request, and it is now impossible to lose by renaming.",
+    "sources": {
+      "precursor": {
+        "band": {
+          "center": 0.9,
+          "width": 0.2
+        },
+        "floor": false,
+        "ground": "best in DENSE, machine-thick country; starves in the thin",
+        "provenance": "CARRIES from `lattice`, and NOT as a rename: `lattice` always meant the Precursor substrate and `nanite` split OUT of it — the lattice itself did not change. Canon: \"Strong where the lattice is dense.\" SNG-193b: \"the instrumented wants dense.\" [Aevi]"
+      },
+      "nanite": {
+        "band": null,
+        "floor": false,
+        "ground": "answers to condition and supply, not to ground — it goes where its makers put it and where people carry it",
+        "provenance": "NEW, derived from canon rather than copied. The one source with no best-ground at all: it fails when the works are unmaintained or supply is cut, which is a different axis entirely. ⚠️ No floor — unlike `body`. [Aevi] ⚠️ SNG-385: `field: \"nanite\"` added — this declares WHICH AXIS the source answers to, which is Aevi's own ruling stated verbatim (\"nanite has NO band against lattice density, and this field is the axis it SHOULD answer to\"), not a tuning value. ⛔ `band` IS STILL null AND STILL HERS AND ERIK'S: her note says a nanite craft at `clear 0.05` should starve the way a precursor craft starves at density 0.05, which pins the SHAPE (high-nanite is best, low starves) and not the centre or the width. Until a band is authored the card reads the nanite field and reports the state without scoring it, which is the honest half.",
+        "field": "nanite"
+      },
+      "metaphysical": {
+        "band": {
+          "center": 0.15,
+          "width": 0.22
+        },
+        "floor": false,
+        "ground": "best in THIN, still ground; a dense lattice is interference between them and the thing",
+        "provenance": "CARRIES from `inherent`. ⚠️ Deriving this caught a contradiction in canon authored the day before — \"Metaphysical — asks nothing of the ground\" — against SNG-193b's ratified worked example, \"the reaching mind wants thin ground\", and the Reaching Mind is metaphysical. THE CANON WAS CORRECTED, NOT THE BAND (48dc40a8). [Aevi]"
+      },
+      "body": {
+        "band": null,
+        "floor": true,
+        "ground": "never at a loss anywhere, but never peaks (a floor, not a spike)",
+        "provenance": "CARRIES from `material`, floor included and stated explicitly on request. SNG-193b §4: \"A material root — or a material-extension school — is never starved at any density.\" ⛔ The floor is not a side effect of a null band; it IS the mechanic. \"The pure never loses because it never leaned on anything.\" [Aevi]"
+      },
+      "wild": {
+        "band": {
+          "center": 0.32,
+          "width": 0.34
+        },
+        "floor": false,
+        "ground": "best in the ungoverned gaps, where the current runs untamed",
+        "provenance": "Unchanged — the only key that survived the rebase, and the reason 4 of 48 schools kept working. [Aevi]"
+      },
+      "veil": {
+        "band": {
+          "center": 0.1,
+          "width": 0.2
+        },
+        "floor": false,
+        "ground": "best where the lattice is weakest — thin, unreached ground; a dense lattice closes the way",
+        "provenance": "DERIVED, and the one number Aevi flagged for Erik to confirm. Canon: \"The Veil is the anti-power to the lattice: thin where the lattice is weak, and thinning one strengthens the other\" — so its band is the MIRROR of `precursor`, which is what anti-power means mechanically. ⚠️ `null` is a coherent alternative and says something DIFFERENT: that reaching across is equally hard everywhere. [Aevi — AWAITING ERIK]"
+      }
+    }
+  },
+  "naniteField": {
+    "note": "⛔ SNG-382 — THE SECOND FIELD. Erik 2026-08-08: 'ground the nanite power source to geography based on not only the people, like it is now, but what the PRE-TRANSITION HUMANS WERE DOING THERE.' Nanite is not the lattice and does not share its map. ⚠️ THINK OF IT LIKE ALGAE BLOOMS: it was deployed for a purpose, in specific places, by people who are gone — and what happened to it afterward depends on whether anyone kept ordering it. `substrateDensity` remains the PRECURSOR lattice. This is a SEPARATE, INDEPENDENT field.",
+    "states": {
+      "ordered": "Deployed and STILL CYCLED. The reprocessing never stopped: spent nanite is gathered and re-ordered on a schedule somebody still keeps. ⚠️ THIS IS WHAT THE CONTINUOUS ARE STANDING ON — the Enginewrights, the Lattice-Cities, the Seraphic Orders and the rest never abandoned the lattice BECAUSE the cycle here never broke. Supply is reliable, and someone owns it.",
+      "wild": "Deployed, then abandoned, and it BLOOMED. Former farmland, irrigation grids, soil-conditioning fields — structured nanite spent into purpose century after century with nobody re-ordering it, until the whole field went feral. ⚠️ THESE ARE THE GREENMARCH CONDITIONS: absurdly fertile, overgrown, unpredictable, and dangerous in a way that has nothing to do with anyone's intent. The Churnfolk harvest here. Found in POCKETS throughout the map, not in one region.",
+      "clear": "No nanite worth the name — and there are TWO WAYS to be clear, which is the interesting part. ⚠️ NATURALLY CLEAR: the tech never had a reason to be here. No farmland, no works, no settlement — deep stone, open water, high scree. ⛔ CLEARED BY INTENT: someone took it out. The Ents strip structured nanite from their holdings deliberately, and a place that was cleared reads the same as a place that was never seeded — until you ask why."
+    },
+    "byRegion": {
+      "the_gearlands": {
+        "state": "ordered",
+        "v": 0.95,
+        "why": "The industrial heart before the Transition and the reason the Continuous exist at all. The Great Engine has never stopped; the Service Ways still run the gathering circuit. ⚠️ Whoever holds the Gearlands holds the world's reprocessing."
+      },
+      "the_lattice_cities": {
+        "state": "ordered",
+        "v": 0.9,
+        "why": "Municipal cycling, maintained by administration rather than by craft. The Lattice counts its nanite the way it counts everything else, twice."
+      },
+      "the_making": {
+        "state": "ordered",
+        "v": 0.85,
+        "why": "Forge-work needs ordered stock and the Ceaseless have never let a furnace go cold. They re-order what they spend, continuously, which is the whole name."
+      },
+      "the_reasoned_hold": {
+        "state": "ordered",
+        "v": 0.8,
+        "why": "Kept in order because disorder is intolerable to them, not because they need it. The Bloodless Hold's stock is inventoried to the gram."
+      },
+      "the_ascent": {
+        "state": "ordered",
+        "v": 0.82,
+        "why": "⚠️ THE SERAPHIC SUPPLY. Their craft is nanite (SNG-378) and their devotion is Precursor — the Orders maintain the cycle as an act of stewardship for something they did not build."
+      },
+      "the_kept_reach": {
+        "state": "ordered",
+        "v": 0.8,
+        "why": "The Hourkeepers preserve, and a preserved cycle is a cycle. The Stopped will not let a moment pass, which includes the moment a nanite goes wild."
+      },
+      "the_pattern_reach": {
+        "state": "ordered",
+        "v": 0.78,
+        "why": "Figurists impose order on matter and the field is matter. Their stock is geometrically sorted, which is exactly as strange as it sounds."
+      },
+      "the_center": {
+        "state": "ordered",
+        "v": 0.7,
+        "why": "The Crossing was a hub before the Transition and remains one. Trade keeps the cycle turning where no single power maintains it — the Hundred Markets sell ordered stock by weight."
+      },
+      "the_veiled_reach": {
+        "state": "ordered",
+        "v": 0.6,
+        "why": "Maintained quietly and never discussed. The Veilwrights' supply is real; where it comes from is one of the things they are not telling you."
+      },
+      "the_numinous_reach": {
+        "state": "ordered",
+        "v": 0.55,
+        "why": "Thinly kept. The Numinous care about meaning rather than machinery, but the hermitages were built on old works and the works still run."
+      },
+      "radiant_wastes": {
+        "state": "wild",
+        "v": 0.7,
+        "why": "⚠️ SOLAR-CONDITIONING FIELDS, abandoned. Vast pre-Transition arrays for climate work, left to bloom. The Blaze is what a wild field looks like when the purpose it was ordered for was HEAT."
+      },
+      "the_foothills": {
+        "state": "ordered",
+        "v": 0.6,
+        "why": "⛔ THE PROCESSING ECONOMY. Not a bloom and not a wasteland — a working loop: Greenforge gathers and re-orders, the Held Yard stocks it, the Spent Yard is where the scattering settles. ⚠️ The foothills are ordered BECAUSE PEOPLE WORK AT IT, which is why control of the yards matters."
+      },
+      "unspooling": {
+        "state": "wild",
+        "v": 0.85,
+        "why": "⛔ THE DEEPEST BLOOM ON THE MAP. Irrigation and soil-grid nanite across an entire agricultural basin, abandoned longest, feral longest. The Churnfolk did not choose chaos as a philosophy — they were born standing in it."
+      },
+      "the_quickwood": {
+        "state": "wild",
+        "v": 0.75,
+        "why": "⚠️ FORMER FARMLAND, and the forest is what the farmland became. Soil-conditioning nanite kept ordering growth long after anyone was choosing what to grow. The Quickwood is a crop that never stopped."
+      },
+      "the_feeling_coast": {
+        "state": "wild",
+        "v": 0.55,
+        "why": "Coastal aquaculture beds gone feral. The Wellspring runs the way it does because something down there is still conditioning the water and has not been told what for."
+      },
+      "the_descent": {
+        "state": "wild",
+        "v": 0.6,
+        "why": "Deep-works nanite abandoned in the dark and blooming without light. ⚠️ Whatever else the Appetite-Halls are, they are also a bloom nobody harvests."
+      },
+      "umbral_depths": {
+        "state": "wild",
+        "v": 0.5,
+        "why": "Sub-surface utility nanite, feral in the lightless deeps. The Umbrals move through it the way other people move through weather."
+      },
+      "manifest_domain": {
+        "state": "clear",
+        "v": 0.08,
+        "why": "⛔ CLEARED BY INTENT — THE ENTS. They strip structured nanite from their holdings deliberately and continuously, and the Deepwood's density is Precursor lattice, NOT nanite. ⚠️ A nanite-worker in the Deepwood is not merely unsupplied; they are somewhere that has decided against them."
+      },
+      "somatic_reaches": {
+        "state": "clear",
+        "v": 0.05,
+        "why": "⛔ CLEARED BY INTENT. The High Temple of the Body rejects augmentation as doctrine and keeps its ground clean of it. The clearing is a devotional act performed by hand, every season."
+      },
+      "riven_marches": {
+        "state": "clear",
+        "v": 0.12,
+        "why": "⛔ CLEARED BY INTENT at the Stillhold, and never seeded much elsewhere — border country, contested for centuries, nobody's farmland. The Marchers hold a line, not a supply chain."
+      },
+      "the_palelands": {
+        "state": "clear",
+        "v": 0.06,
+        "why": "⚠️ NATURALLY CLEAR. High scree and thin soil: the tech never had a reason to be here. Nothing to condition, nothing to irrigate, nobody to serve. The Long Grey is grey because it was always grey."
+      },
+      "the_given_land": {
+        "state": "clear",
+        "v": 0.04,
+        "why": "⚠️ NATURALLY CLEAR, and the deepest such on the map. Bedrock and the Leaden Deep are below where anything was ever deployed."
+      },
+      "the_unmade": {
+        "state": "clear",
+        "v": 0.15,
+        "why": "⛔ CLEARED BY UNMAKING. The Scour and the Scouring are what the Unmakers left; a place taken apart properly does not keep its machinery. ⚠️ Distinguishable from naturally-clear only by the tidiness of the absence."
+      },
+      "the_stark_reach": {
+        "state": "clear",
+        "v": 0.2,
+        "why": "Thinly seeded and never maintained. The Verists would not lie about it and there is nothing to lie about."
+      },
+      "the_open_reach": {
+        "state": "wild",
+        "v": 0.35,
+        "why": "Waystation and road-verge nanite, scattered thin along the old routes and gone feral in patches. The Horizon-Walkers know which patches."
+      },
+      "valley": {
+        "state": "wild",
+        "v": 0.4,
+        "why": "⚠️ SMALL FIELDS GONE FERAL — the valley was minor farmland, not an industrial basin, so the bloom is modest and patchy. It is why valleyfolk have picked things up without ever knowing what they were picking up (SNG-381)."
+      }
+    },
+    "_pending": "⚠️ NO CONSUMER YET. Authored ahead of a reader DELIBERATELY and flagged: `substrateDensity` has a resolver (resolveSubstrateField) and this does not. ⛔ CCode — this needs its own field resolver and its own band semantics: nanite has NO band against lattice density, and this field is the axis it SHOULD answer to. A nanite craft at `clear 0.05` should be starved the way a precursor craft is starved at density 0.05. Until then this is documentation, and I am saying so rather than letting it look wired."
   }
- },
- "naniteField": {
-  "note": "⛔ SNG-382 — THE SECOND FIELD. Erik 2026-08-08: 'ground the nanite power source to geography based on not only the people, like it is now, but what the PRE-TRANSITION HUMANS WERE DOING THERE.' Nanite is not the lattice and does not share its map. ⚠️ THINK OF IT LIKE ALGAE BLOOMS: it was deployed for a purpose, in specific places, by people who are gone — and what happened to it afterward depends on whether anyone kept ordering it. `substrateDensity` remains the PRECURSOR lattice. This is a SEPARATE, INDEPENDENT field.",
-  "states": {
-   "ordered": "Deployed and STILL CYCLED. The reprocessing never stopped: spent nanite is gathered and re-ordered on a schedule somebody still keeps. ⚠️ THIS IS WHAT THE CONTINUOUS ARE STANDING ON — the Enginewrights, the Lattice-Cities, the Seraphic Orders and the rest never abandoned the lattice BECAUSE the cycle here never broke. Supply is reliable, and someone owns it.",
-   "wild": "Deployed, then abandoned, and it BLOOMED. Former farmland, irrigation grids, soil-conditioning fields — structured nanite spent into purpose century after century with nobody re-ordering it, until the whole field went feral. ⚠️ THESE ARE THE GREENMARCH CONDITIONS: absurdly fertile, overgrown, unpredictable, and dangerous in a way that has nothing to do with anyone's intent. The Churnfolk harvest here. Found in POCKETS throughout the map, not in one region.",
-   "clear": "No nanite worth the name — and there are TWO WAYS to be clear, which is the interesting part. ⚠️ NATURALLY CLEAR: the tech never had a reason to be here. No farmland, no works, no settlement — deep stone, open water, high scree. ⛔ CLEARED BY INTENT: someone took it out. The Ents strip structured nanite from their holdings deliberately, and a place that was cleared reads the same as a place that was never seeded — until you ask why."
-  },
-  "byRegion": {
-   "the_gearlands": {
-    "state": "ordered",
-    "v": 0.95,
-    "why": "The industrial heart before the Transition and the reason the Continuous exist at all. The Great Engine has never stopped; the Service Ways still run the gathering circuit. ⚠️ Whoever holds the Gearlands holds the world's reprocessing."
-   },
-   "the_lattice_cities": {
-    "state": "ordered",
-    "v": 0.9,
-    "why": "Municipal cycling, maintained by administration rather than by craft. The Lattice counts its nanite the way it counts everything else, twice."
-   },
-   "the_making": {
-    "state": "ordered",
-    "v": 0.85,
-    "why": "Forge-work needs ordered stock and the Ceaseless have never let a furnace go cold. They re-order what they spend, continuously, which is the whole name."
-   },
-   "the_reasoned_hold": {
-    "state": "ordered",
-    "v": 0.8,
-    "why": "Kept in order because disorder is intolerable to them, not because they need it. The Bloodless Hold's stock is inventoried to the gram."
-   },
-   "the_ascent": {
-    "state": "ordered",
-    "v": 0.82,
-    "why": "⚠️ THE SERAPHIC SUPPLY. Their craft is nanite (SNG-378) and their devotion is Precursor — the Orders maintain the cycle as an act of stewardship for something they did not build."
-   },
-   "the_kept_reach": {
-    "state": "ordered",
-    "v": 0.8,
-    "why": "The Hourkeepers preserve, and a preserved cycle is a cycle. The Stopped will not let a moment pass, which includes the moment a nanite goes wild."
-   },
-   "the_pattern_reach": {
-    "state": "ordered",
-    "v": 0.78,
-    "why": "Figurists impose order on matter and the field is matter. Their stock is geometrically sorted, which is exactly as strange as it sounds."
-   },
-   "the_center": {
-    "state": "ordered",
-    "v": 0.7,
-    "why": "The Crossing was a hub before the Transition and remains one. Trade keeps the cycle turning where no single power maintains it — the Hundred Markets sell ordered stock by weight."
-   },
-   "the_veiled_reach": {
-    "state": "ordered",
-    "v": 0.6,
-    "why": "Maintained quietly and never discussed. The Veilwrights' supply is real; where it comes from is one of the things they are not telling you."
-   },
-   "the_numinous_reach": {
-    "state": "ordered",
-    "v": 0.55,
-    "why": "Thinly kept. The Numinous care about meaning rather than machinery, but the hermitages were built on old works and the works still run."
-   },
-   "radiant_wastes": {
-    "state": "wild",
-    "v": 0.7,
-    "why": "⚠️ SOLAR-CONDITIONING FIELDS, abandoned. Vast pre-Transition arrays for climate work, left to bloom. The Blaze is what a wild field looks like when the purpose it was ordered for was HEAT."
-   },
-   "the_foothills": {
-    "state": "ordered",
-    "v": 0.6,
-    "why": "⛔ THE PROCESSING ECONOMY. Not a bloom and not a wasteland — a working loop: Greenforge gathers and re-orders, the Held Yard stocks it, the Spent Yard is where the scattering settles. ⚠️ The foothills are ordered BECAUSE PEOPLE WORK AT IT, which is why control of the yards matters."
-   },
-   "unspooling": {
-    "state": "wild",
-    "v": 0.85,
-    "why": "⛔ THE DEEPEST BLOOM ON THE MAP. Irrigation and soil-grid nanite across an entire agricultural basin, abandoned longest, feral longest. The Churnfolk did not choose chaos as a philosophy — they were born standing in it."
-   },
-   "the_quickwood": {
-    "state": "wild",
-    "v": 0.75,
-    "why": "⚠️ FORMER FARMLAND, and the forest is what the farmland became. Soil-conditioning nanite kept ordering growth long after anyone was choosing what to grow. The Quickwood is a crop that never stopped."
-   },
-   "the_feeling_coast": {
-    "state": "wild",
-    "v": 0.55,
-    "why": "Coastal aquaculture beds gone feral. The Wellspring runs the way it does because something down there is still conditioning the water and has not been told what for."
-   },
-   "the_descent": {
-    "state": "wild",
-    "v": 0.6,
-    "why": "Deep-works nanite abandoned in the dark and blooming without light. ⚠️ Whatever else the Appetite-Halls are, they are also a bloom nobody harvests."
-   },
-   "umbral_depths": {
-    "state": "wild",
-    "v": 0.5,
-    "why": "Sub-surface utility nanite, feral in the lightless deeps. The Umbrals move through it the way other people move through weather."
-   },
-   "manifest_domain": {
-    "state": "clear",
-    "v": 0.08,
-    "why": "⛔ CLEARED BY INTENT — THE ENTS. They strip structured nanite from their holdings deliberately and continuously, and the Deepwood's density is Precursor lattice, NOT nanite. ⚠️ A nanite-worker in the Deepwood is not merely unsupplied; they are somewhere that has decided against them."
-   },
-   "somatic_reaches": {
-    "state": "clear",
-    "v": 0.05,
-    "why": "⛔ CLEARED BY INTENT. The High Temple of the Body rejects augmentation as doctrine and keeps its ground clean of it. The clearing is a devotional act performed by hand, every season."
-   },
-   "riven_marches": {
-    "state": "clear",
-    "v": 0.12,
-    "why": "⛔ CLEARED BY INTENT at the Stillhold, and never seeded much elsewhere — border country, contested for centuries, nobody's farmland. The Marchers hold a line, not a supply chain."
-   },
-   "the_palelands": {
-    "state": "clear",
-    "v": 0.06,
-    "why": "⚠️ NATURALLY CLEAR. High scree and thin soil: the tech never had a reason to be here. Nothing to condition, nothing to irrigate, nobody to serve. The Long Grey is grey because it was always grey."
-   },
-   "the_given_land": {
-    "state": "clear",
-    "v": 0.04,
-    "why": "⚠️ NATURALLY CLEAR, and the deepest such on the map. Bedrock and the Leaden Deep are below where anything was ever deployed."
-   },
-   "the_unmade": {
-    "state": "clear",
-    "v": 0.15,
-    "why": "⛔ CLEARED BY UNMAKING. The Scour and the Scouring are what the Unmakers left; a place taken apart properly does not keep its machinery. ⚠️ Distinguishable from naturally-clear only by the tidiness of the absence."
-   },
-   "the_stark_reach": {
-    "state": "clear",
-    "v": 0.2,
-    "why": "Thinly seeded and never maintained. The Verists would not lie about it and there is nothing to lie about."
-   },
-   "the_open_reach": {
-    "state": "wild",
-    "v": 0.35,
-    "why": "Waystation and road-verge nanite, scattered thin along the old routes and gone feral in patches. The Horizon-Walkers know which patches."
-   },
-   "valley": {
-    "state": "wild",
-    "v": 0.4,
-    "why": "⚠️ SMALL FIELDS GONE FERAL — the valley was minor farmland, not an industrial basin, so the bloom is modest and patchy. It is why valleyfolk have picked things up without ever knowing what they were picking up (SNG-381)."
-   }
-  },
-  "_pending": "⚠️ NO CONSUMER YET. Authored ahead of a reader DELIBERATELY and flagged: `substrateDensity` has a resolver (resolveSubstrateField) and this does not. ⛔ CCode — this needs its own field resolver and its own band semantics: nanite has NO band against lattice density, and this field is the axis it SHOULD answer to. A nanite craft at `clear 0.05` should be starved the way a precursor craft is starved at density 0.05. Until then this is documentation, and I am saying so rather than letting it look wired."
- }
 }

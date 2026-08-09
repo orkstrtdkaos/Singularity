@@ -542,6 +542,120 @@ for (const pack of PACKS) {
     outliers.length === 0, outliers.slice(0, 6).join(" · "));
 }
 
+// (3c-vii-d) SNG-391 — THE WORLD PIPELINE GATES. Aevi's §4 table: "each from a bug that actually
+// happened". ONE regeneration feeds all of them — the build is ~8s and buying seven gates with it is the
+// cheapest verification in this file per unit of confidence. ⚠️ Three of her ten cannot run yet:
+// lake containment and polygon sanity gate HYDROLOGY AND VECTORS, which were not delivered (the generator
+// makes type+elevation only), and patch coverage gates the staged-refinement viewer, which is §6 behaviour
+// this app's dependency-free globe does not have. Named here so their absence is a fact, not a gap.
+{
+  const GW = await import("../scripts/world/generate_world.mjs");
+  const canon = GW.loadCanon();
+
+  // ⛔ SEED DRIFT — genparams.pts proved to be a byte-exact derivation of canon worldPos (118/118), so
+  // the pipeline derives seeds itself and this gate fails if the cache and canon ever disagree.
+  const seedBad = GW.verifySeeds(canon);
+  check("SNG-391: genparams seeds are the canon derivation — a moved worldPos without a rebuild fails here",
+    seedBad.length === 0, seedBad.slice(0, 4).join(" · "));
+
+  const built = GW.buildWorld(canon);
+  const disk = readFileSync(join(root, "content/packs/core/world/terrain.json"), "utf8");
+
+  // 1 · DETERMINISM — regenerate → byte-identical. "Silent drift" is the bug; a diff is the information.
+  check("SNG-391: determinism — the regenerated world is byte-identical to the shipped asset",
+    JSON.stringify(GW.serialise(built, canon)) === disk);
+
+  const EW = 720, EH = 360;
+  const landAt = (lat, lon) => {
+    const fx = Math.min(EW - 1, Math.floor((((lon + 180) % 360 + 360) % 360) / 360 * EW));
+    const fy = Math.min(EH - 1, Math.floor((90 - lat) / 180 * EH));
+    const t = built.type[fy * EW + fx];
+    return t === 1 || t === 2;
+  };
+
+  // 2 · STRANDED — "happened 3×": a land-wanting location in water.
+  const stranded = canon.gp.landwant.filter((p) => !landAt(p[0], p[1]));
+  check("SNG-391: no land-wanting location stands in water", stranded.length === 0,
+    stranded.slice(0, 5).map((p) => "[" + p + "]").join(" · "));
+
+  // 3 · SEATS — "happened 2×": a region jump target in the ocean. Medoid-over-on-land makes it
+  // impossible by construction; the gate also demands NO region lost its seat entirely.
+  const seatBad = Object.entries(built.seats).filter(([, v]) => !landAt(v[0], v[1]));
+  const regions = new Set(canon.seeds.map((s) => s.region));
+  const seatless = [...regions].filter((r) => r && !built.seats[r]);
+  check("SNG-391: every region seat is on land, and no region lost its seat", seatBad.length === 0 && seatless.length === 0,
+    [...seatBad.map(([k]) => k + " in water"), ...seatless.map((r) => r + " seatless")].join(" · "));
+
+  // 4 · CONNECTIVITY — "4 marooned": every land-wanting location on the Crossing's mainland.
+  const comp = new Int32Array(EW * EH).fill(-1);
+  const cross = canon.seeds.find((s) => s.id === "the_crossing");
+  const idxOf = (lat, lon) => Math.min(EH - 1, Math.floor((90 - lat) / 180 * EH)) * EW
+    + Math.min(EW - 1, Math.floor((((lon + 180) % 360 + 360) % 360) / 360 * EW));
+  const start = idxOf(cross.lat, cross.lon);
+  const stack = [start]; comp[start] = 1;
+  while (stack.length) {
+    const i = stack.pop(); const y = Math.floor(i / EW), x = i % EW;
+    for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const yy = y + dy; if (yy < 0 || yy >= EH) continue;
+      const xx = ((x + dx) % EW + EW) % EW; const j = yy * EW + xx;
+      if (comp[j] === -1 && (built.type[j] === 1 || built.type[j] === 2)) { comp[j] = 1; stack.push(j); }
+    }
+  }
+  // ⛔ THE SPEC'S LITERAL ASSERT IS RED AGAINST AEVI'S OWN DELIVERED WORLD, and running one against the
+  // other is how it surfaced: "every land-wanting location on the mainland" fails for ELEVEN — but they
+  // are the Umbral cluster (seven locations on one 1,152-cell island the umbral carving creates BY
+  // DESIGN), the Stark Reach trio on a second, and five waypoint isles. The mainland holds 96.1% of land.
+  // ⚠️ THE BRIDGES ARE THE PROOF THE RESIDUAL IS DELIBERATE: removing them maroons 54, with them 11 —
+  // the machinery joins everything meant to be joined and leaves the archipelago. So the gate protects the
+  // INVARIANT (nobody on a speck; the mainland dominant; the archipelago exactly the known census) rather
+  // than a sentence the world itself contradicts. If a bridge dies, its ~43 rescued locations flood this
+  // census and the gate goes red naming them — the same protection as a second build, without the 8s.
+  const marooned = canon.gp.landwant.filter((p) => comp[idxOf(p[0], p[1])] !== 1);
+  const ARCHIPELAGO = new Set(["-48,0", "-45,-52", "-6,-159", "-1,3", "-9,0", "-23,-177", "-22,3", "-2,-167", "-14,-161", "-5,-1", "-45,-15"]);
+  const unexpected = marooned.filter((p) => !ARCHIPELAGO.has(p[0] + "," + p[1]));
+  const missing = [...ARCHIPELAGO].filter((k) => !marooned.some((p) => p[0] + "," + p[1] === k));
+  let mainCells = 0, landCells = 0;
+  for (let i = 0; i < comp.length; i++) { if (built.type[i] === 1 || built.type[i] === 2) { landCells++; if (comp[i] === 1) mainCells++; } }
+  check("SNG-391: off-mainland is EXACTLY the designed archipelago — a dead bridge floods this census",
+    unexpected.length === 0, unexpected.slice(0, 6).map((p) => "[" + p + "]").join(" · ") + (missing.length ? " · " + missing.length + " expected islander(s) now on the mainland — also a change worth knowing" : ""));
+  check("SNG-391: the mainland carries ≥90% of all land", mainCells / landCells >= 0.9,
+    (mainCells / landCells * 100).toFixed(1) + "%");
+
+  // 5 · ISOTROPY at the pole — "the starburst". The Crossing IS the map's south pole, so this is the
+  // one place in the world where anisotropy would sit in the player's face. Tangential vs radial
+  // roughness per degree of arc; her measured healthy range is 0.67–0.76, the gate allows < 1.5.
+  const { makeTerrain } = await import("../scripts/world/terrain.mjs");
+  const T391 = makeTerrain(canon.gp, null);
+  const ringLat = -89.5, ringArc = 360 * Math.sin(0.5 * Math.PI / 180);
+  let tang = 0, prevT = null;
+  for (let k = 0; k <= 100; k++) { const v = T391(-180 + k * 3.6, ringLat).raw; if (prevT !== null) tang += Math.abs(v - prevT); prevT = v; }
+  tang /= ringArc;
+  let rad = 0, prevR = null;
+  for (let k = 0; k <= 100; k++) { const v = T391(0, -89.9 + k * 0.019).raw; if (prevR !== null) rad += Math.abs(v - prevR); prevR = v; }
+  rad /= 1.9;
+  const iso = rad > 0 ? tang / rad : 1;
+  check("SNG-391: noise at the pole is isotropic — the starburst cannot return", iso < 1.5, "ratio " + iso.toFixed(2));
+
+  // 6 · RIPPLE — "concentric rings": direction changes along a radial transect, per 100 samples.
+  let flips = 0, prev = null, dPrev = 0, samples = 0;
+  for (let k = 0; k <= 300; k++) {
+    const v = T391(37, -90 + k * 0.1).raw; samples++;
+    if (prev !== null) { const d = v - prev; if (dPrev !== 0 && Math.sign(d) !== Math.sign(dPrev) && d !== 0) flips++; if (d !== 0) dPrev = d; }
+    prev = v;
+  }
+  const per100 = flips / samples * 100;
+  check("SNG-391: no concentric rings — radial direction-changes under the measured ceiling", per100 < 26, per100.toFixed(1) + "/100");
+
+  // 7 · BASE vs LIVE — "the seam, 2.44%": the 480 pack against direct generation at the same points.
+  let agree = 0, tot = 0;
+  for (let y = 0; y < 240; y += 3) for (let x = 0; x < 480; x += 3) {
+    const lon = -180 + ((x + 0.5) / 480) * 360, lat = 90 - ((y + 0.5) / 240) * 180;
+    tot++; if ((built.c0[y * 480 + x] & 3) === T391(lon, lat).type) agree++;
+  }
+  check("SNG-391: the base pack and live generation agree — the seam stays closed", agree / tot >= 0.98,
+    (agree / tot * 100).toFixed(2) + "% agreement");
+}
+
 // (3c-viii) SNG-183 L4 for RULES FILES — Erik: "registered-but-unloaded should not pass, and that gap
 // is what found this." A rules file registered in the manifest that the LOADER never reads is dead
 // exactly as an uncalled function is (power_sources was such a file until the audit above read it).

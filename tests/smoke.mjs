@@ -6962,7 +6962,7 @@ await (async () => {
       /interpolation, not a claim about reach/.test(app386));
   }
 
-  // ══ SNG-391 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 ⚑ to mean "this
+  // ══ SNG-392 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 ⚑ to mean "this
   // one is mechanical". ⛔ THE MARKER HAD NO READER — nothing could tell a milestone that DOES something
   // from one that only says something, so an unbuilt promise read exactly like a built one, and two were.
   {
@@ -6982,21 +6982,21 @@ await (async () => {
         if (eff.blocked) blocked.push(`${sub}:${rank}`);
       }
     }
-    check("391: every ⚑ milestone is transcribed into a structured effect — the marker has a reader now",
+    check("392: every ⚑ milestone is transcribed into a structured effect — the marker has a reader now",
       flagged.length > 0 && flagged.every(k => transcribed.includes(k)), `${flagged.length} flagged, ${transcribed.length} transcribed`);
-    check("391: …and an effect the engine cannot honour carries a WRITTEN reason, never silence",
+    check("392: …and an effect the engine cannot honour carries a WRITTEN reason, never silence",
       blocked.length > 0 && Object.values(lad390.subs).flatMap(d => Object.values(d.milestoneEffects || {}))
         .filter(e => e.blocked).every(e => String(e.blocked).length > 40));
-    check("391: no ⚑ milestone is transcribed as `unclassified` — that value exists to fail loudly",
+    check("392: no ⚑ milestone is transcribed as `unclassified` — that value exists to fail loudly",
       !Object.values(lad390.subs).some(d => Object.values(d.milestoneEffects || {}).some(e => e.kind === "unclassified")));
 
     // ⚠️ THE HIGHEST REACHED WINS, NOT THE SUM. `harmRung 1` at agility 7 and `harmRung 2` at 14 are
     // absolute readings of one effect — "a second rung" — so adding them would silently give a rank-14
     // character three rungs and double the milestone they just earned.
-    check("391: milestones are ABSOLUTE, not cumulative — rank 14 grants two rungs, not three",
+    check("392: milestones are ABSOLUTE, not cumulative — rank 14 grants two rungs, not three",
       L390.harmRungDrop(lad390, at({ agility: 7 })) === 1 && L390.harmRungDrop(lad390, at({ agility: 14 })) === 2);
-    check("391: …and a rank below the milestone grants nothing", L390.harmRungDrop(lad390, at({ agility: 6 })) === 0);
-    check("391: a blocked effect never appears in the LIVE map — a caller cannot act on an unbuilt promise",
+    check("392: …and a rank below the milestone grants nothing", L390.harmRungDrop(lad390, at({ agility: 6 })) === 0);
+    check("392: a blocked effect never appears in the LIVE map — a caller cannot act on an unbuilt promise",
       !("novelPenalty" in L390.milestoneEffects(lad390, at({ wits: 20 })).live)
       && L390.milestoneEffects(lad390, at({ wits: 20 })).blocked.some(b => b.kind === "novelPenalty"));
 
@@ -7005,32 +7005,32 @@ await (async () => {
     const runs = (subs, companions) => { const t = {};
       for (let i = 0; i < 600; i++) { const o = inc390.incapacitationOutcome({ character: at(subs), aggressor: { kind: "assassin" }, companions, rules: rules390, rng: Math.random }); t[o.outcome] = (t[o.outcome] || 0) + 1; }
       return t; };
-    check("391: agility 7 softens the blow — an assassin's table stops producing `slain`",
+    check("392: agility 7 softens the blow — an assassin's table stops producing `slain`",
       (runs({ agility: 3 }, [{ name: "M" }]).slain || 0) > 0 && (runs({ agility: 7 }, [{ name: "M" }]).slain || 0) === 0);
     // ⚠️ AND IT NEVER SOFTENS INTO A RESCUE BY NOBODY. `revived` is already zeroed when no companion
     // is able; dropping INTO it would narrate someone who is not there, which is worse than the harsher
     // outcome it replaced.
-    check("391: …but softening stops at `spared` when you are alone — nobody revives you but somebody",
+    check("392: …but softening stops at `spared` when you are alone — nobody revives you but somebody",
       !(runs({ agility: 14 }, []).revived));
-    check("391: the roll and the softening are BOTH reported — a mercy the player is not told about cannot be learned",
+    check("392: the roll and the softening are BOTH reported — a mercy the player is not told about cannot be learned",
       (() => { const o = inc390.incapacitationOutcome({ character: at({ agility: 14 }), aggressor: { kind: "assassin" }, companions: [{ name: "M" }], rules: rules390, rng: () => 0.99 });
         return "rolledOutcome" in o && "softenedBy" in o; })());
 
     // ⛔ THE COMPANY CAP, AND IT IS ON THE DOOR PEOPLE ACTUALLY USE.
-    check("391: rapport names the places at your side — 1, then 2 at rank 4, 3 at 7, 4 at 10",
+    check("392: rapport names the places at your side — 1, then 2 at rank 4, 3 at 7, 4 at 10",
       [1, 2, 3, 4].every((n, i) => L390.companyPlaces(lad390, at({ rapport: [1, 4, 7, 10][i] })) === n));
     const full = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
-    check("391: a join past capacity is REFUSED, and refused where joins really happen (recruit, not the dead op)",
+    check("392: a join past capacity is REFUSED, and refused where joins really happen (recruit, not the dead op)",
       co390.recruit(full, "b", { day: 2, ladder: lad390 }) === null);
     // ⚠️ NEVER RETROACTIVE. A save whose rapport no longer covers its company keeps everyone.
     const over = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "b", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
-    check("391: an over-capacity save loses NOBODY — the cap refuses a new join, it never ejects",
+    check("392: an over-capacity save loses NOBODY — the cap refuses a new join, it never ejects",
       co390.activeCompany(over).length === 2);
     // ⚠️ A REJOIN IS NOT A NEW PLACE — someone walking back in is returning to a seat, not taking one.
     const left = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "gone", roles: ["ally"], joinedDay: 1, leftDay: 5 }], npcRegistry: {} };
-    check("391: …and someone who left can come back even at capacity",
+    check("392: …and someone who left can come back even at capacity",
       !!co390.recruit(left, "gone", { day: 9, ladder: lad390 }));
-    check("391: with no ladder passed the cap does not apply — every existing caller keeps working",
+    check("392: with no ladder passed the cap does not apply — every existing caller keeps working",
       !!co390.recruit({ subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} }, "b", { day: 2 }));
   }
 
@@ -7045,8 +7045,12 @@ await (async () => {
     const t = WG.decodeTerrain(doc);
     check("390: the terrain asset decodes — four channels, two grids, 118 locations",
       !!t && t.w === 480 && t.h === 240 && t.ew === 720 && t.eh === 360 && Object.keys(t.locations).length === 118);
-    check("390: …and it says in the file that it is baked output with no generator",
-      /no generator|cannot be re-derived/i.test(String(doc.note)));
+    // ⚠️ THIS GATE FLIPPED WITH THE FACT, WHICH IS WHAT A GATE ON A LABEL SHOULD DO. It used to
+    // assert the asset admitted to being baked output with no generator; SNG-391 delivered the generator
+    // and the pipeline, so the asset now asserts the opposite — provenance, hashes, and "do not edit,
+    // rebuild". A file that still claimed to be underivable would be the stale label, not the honest one.
+    check("390: the asset now declares its PROVENANCE — pipeline, generator hash, and do-not-edit",
+      /REGENERABLE/i.test(String(doc.note)) && !!doc.generatedBy?.generatorSha && !!doc.generatedBy?.pipeline);
     // ⚠️ PROJECTION AND ITS INVERSE ARE TESTED AGAINST EACH OTHER, not eyeballed on screen — a globe
     // that is subtly wrong looks fine and puts every pin in the wrong place.
     const view = { yaw: 37, pitch: 12, r: 300, cx: 400, cy: 300 };

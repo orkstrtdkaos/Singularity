@@ -112,5 +112,10 @@ function makeTerrain(GP, view){
   return {type:0, raw:Math.max(known,unk)};
  };
 }
+// ⛔ SNG-391 INTEGRATION FIX: this file is .mjs, so Node loads it as ESM — where 'module' is undefined
+// and the guard below silently exports NOTHING. The generator as delivered could not be imported under
+// its own extension; the guard hid the failure instead of raising it. The CJS line stays for any
+// non-module consumer; the export statement is what makes the file loadable as what it is named.
 if(typeof module!=='undefined') module.exports={makeTerrain};
+export { makeTerrain };
 

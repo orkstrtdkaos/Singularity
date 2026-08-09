@@ -54,7 +54,7 @@ export function sampleAt(t, lon, lat) {
   if (!t) return null;
   const i = cellIdx(t, lon, lat), c0 = t.c0[i];
   return {
-    type: c0 & 3,                 // 0 water · 1 land · 2 volcanic · 3 built
+    type: c0 & 3,                 // 0 water · 1 land · 2 volcanic · 3 UNEXPLORED (SNG-391 corrected: I guessed "built" from the viewer tint; the generator says unexplored)
     nanite: (c0 >> 2) & 3,        // 0 clear · 1 ordered · 2 wild
     biome: t.biomes[t.c1[i]] || null,
     density: t.c2[i] / 63,        // the lattice field, 0..1

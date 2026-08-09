@@ -57,11 +57,67 @@ rooms of the same hold read identically.** Local wells and sinks give a place in
 local scale that distinction is cheap to author and immediately legible: *cross the courtyard and your
 craft changes.*
 
-⚠️ **Design guardrail I want on the record before I author 65 of these: a local frame must not be able to
-overturn its world ground.** A Seraphic in the Quickwood may find a room that is merely bad instead of
-hopeless. **They must not find a room that is good** — that would make the world map decorative, and
-`theKeyImage` is canon: *a Seraph in the Quickwood is nearly powerless.* **Local range should be a
-fraction of the world range, and I would author it as ±0.15 unless Erik prefers otherwise.**
+⛔ **MY GUARDRAIL WAS WRONG AND ERIK OVERRULED IT. I had written that a local frame must never overturn
+its world ground.** Erik: *"the local frame can very much overturn its world ground — that's how different
+traditions INVADE and can be effective in an antipole. It takes planning and resources: carried
+sinks/pools, high-tier crafts. But being local means the opposite to your craft can be brought to bear as
+well, so the element of surprise is key."*
+
+⚠️ **I was protecting a canon line by making the world static.** `theKeyImage` says *a Seraph in the
+Quickwood is nearly powerless* — **and that is a Seraph who ARRIVED UNPREPARED.** A Seraph who arrives with
+carried charge, a high-tier craft and a plan is a different proposition, **and that difference is a story
+rather than a bug.** A ground that cannot be contested is scenery.
+
+### §2a — ⛔ THE MODEL: GROUND IS CONTESTED, AND MOST OF IT ALREADY EXISTS
+
+**Three layers, and two are already built:**
+
+| layer | state | what it does |
+|---|---|---|
+| **carried** | ✅ **LIVE** — `carriedSubstrate`, negatives count, clamped ±1 | an expedition kit. Six charged items authored (SNG-381): keystone shard +0.09, far token +0.08, quiet stone −0.05 |
+| **built** | ⛔ **MISSING** | a shrine, a ward, a reclamation works — **a source somebody MADE** |
+| **authored** | ✅ live | the 43 world sources |
+
+⚠️ **The carried layer already supports an invasion and nobody has noticed.** A party carrying five
+keystone shards moves their ground **+0.45** — enough to take a Seraphic from starved to working in
+mid-density country. **The kit exists; what is missing is the ability to plant a flag.**
+
+### §2b — ⛔ THE BUILT SOURCE, AND IT IS ERIK'S SHRINE
+
+> *"what if the Seraphs invade, win some battles and create a shrine outpost that powers nanite
+> reclamation and has a REGIONAL effect? That should be possible. But the power and range depend on the
+> items and their crafted skill."*
+
+**A built source is a `substrateSource` a faction MADE**, and it should live on a HOLDING (SNG-358) rather
+than as a free-floating field edit. ⚠️ **That convergence is the whole design and I did not see it until
+Erik said "outpost":**
+
+- **A holding already has a condition that moves both ways** — failing · strained · holding · thriving.
+  ⛔ **So a shrine's substrate output IS its condition.** A thriving Seraphic shrine projects; a failing one
+  projects nothing; an abandoned one decays back to the world value.
+- **A holding already needs a steward and advances on WORLD days** (SNG-366). **So a planted source
+  requires occupation to persist** — which is exactly what taking ground means.
+- **Magnitude and radius scale with investment**, per Erik: the tier of the craft that made it, the charged
+  items consumed into it, and how long it has been maintained.
+
+**⚠️ AND THE COUNTER IS THE SAME MECHANIC, which is what makes it a game.** Erik: *"the opposite to your
+craft can be brought to bear as well."* A Rootkin expedition carrying quiet stones and Ent-cleared wards
+walks into a Seraphic shrine's radius and **suppresses it**. ⛔ **`carriedSubstrateSources` already returns
+an itemised receipt naming the cause — so a defender can be told WHY their ground moved**, and the design
+note on that function says exactly why that matters: *"the difference between a mechanic and the cruellest
+possible bug."*
+
+⚠️ **Surprise falls out of this without a stealth system.** A built source is visible on the map; a carried
+kit is not. **You can see a shrine coming for a season. You cannot see five keystone shards in a pack**
+— which is precisely Erik's *"the element of surprise is key most times."*
+
+### §2c — NO RANGE CAP
+
+**I proposed ±0.15 and Erik declined it.** ⛔ **A built source's reach should be earned, not bounded:** a
+hasty ward is local and brief, a maintained shrine is regional and lasting, and the difference is what was
+spent. ⚠️ **The natural ceiling is the authored world sources — 43 of them at +0.10 to +0.26 — so a
+faction that out-builds those has genuinely changed the world**, and that should be rare, expensive, and
+possible.
 
 **Mine to author. CCode: `localMap {x, y}` plus `localSources[]` on sites — same shape as
 `substrateSource`, resolved within the frame only.**

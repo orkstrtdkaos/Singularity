@@ -244,10 +244,13 @@
         "provenance": "CARRIES from `lattice`, and NOT as a rename: `lattice` always meant the Precursor substrate and `nanite` split OUT of it — the lattice itself did not change. Canon: \"Strong where the lattice is dense.\" SNG-193b: \"the instrumented wants dense.\" [Aevi]"
       },
       "nanite": {
-        "band": null,
+        "band": {
+          "center": 0.9,
+          "width": 0.2
+        },
         "floor": false,
-        "ground": "answers to condition and supply, not to ground — it goes where its makers put it and where people carry it",
-        "provenance": "NEW, derived from canon rather than copied. The one source with no best-ground at all: it fails when the works are unmaintained or supply is cut, which is a different axis entirely. ⚠️ No floor — unlike `body`. [Aevi] ⚠️ SNG-385: `field: \"nanite\"` added — this declares WHICH AXIS the source answers to, which is Aevi's own ruling stated verbatim (\"nanite has NO band against lattice density, and this field is the axis it SHOULD answer to\"), not a tuning value. ⛔ `band` IS STILL null AND STILL HERS AND ERIK'S: her note says a nanite craft at `clear 0.05` should starve the way a precursor craft starves at density 0.05, which pins the SHAPE (high-nanite is best, low starves) and not the centre or the width. Until a band is authored the card reads the nanite field and reports the state without scoring it, which is the honest half.",
+        "ground": "best where the nanite is thick and kept — ordered stock or a deep bloom; it starves where the ground is clear",
+        "provenance": "⛔ RATIFIED BY ERIK 2026-08-09: \"the nanite precursor mirror seems to make sense.\" The band MIRRORS `precursor` {0.90, 0.20} — but on the NANITE AXIS, not the lattice one, which is the whole distinction. Aevi's SNG-382 note pinned the shape and not the number: \"a nanite craft at `clear 0.05` should be starved the way a precursor craft is starved at density 0.05.\" That sentence says high-is-best and low-starves; Erik supplied the centre and width by ratifying the mirror. ⚠️ MIRRORING IS NOT MERGING. `field: \"nanite\"` still routes this source to its own geography: the Heartroot is lattice 0.02 and nanite `wild` 0.75, so a nanite craft is STRONG there and a precursor craft is starved, at the same spot on the map. Same curve, different world. ⚠️ NO FLOOR — unchanged and deliberate: nanite answers to condition and supply, and unlike `body` it has no never-starved guarantee.",
         "field": "nanite"
       },
       "metaphysical": {

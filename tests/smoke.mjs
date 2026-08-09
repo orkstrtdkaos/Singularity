@@ -6831,13 +6831,40 @@ await (async () => {
     const gnAb = Object.values(C385.abilities).find(a => a.tradition === "god_named");
     const gnCard = gnAb && sb385.groundCardFor(gnAb, { domains: { primary: "god_named" }, schools: { god_named: "gn_vested" } },
       { schools: sch385, substrate: sd385, location: heart });
-    check("385: a nanite craft is UNSCORED but sited — 'in wild nanite country', not 'unaffected by the ground'",
-      !!gnCard && gnCard.field === "nanite" && /nanite country/.test(gnCard.verdict));
-    // ⛔ THE BAND IS STILL UNAUTHORED AND THAT IS DELIBERATE. Aevi's note pins the SHAPE ("a nanite craft
-    // at clear 0.05 should be starved the way a precursor craft is starved at density 0.05") and not the
-    // centre or width, which are Erik's dial. This gate exists so nobody quietly invents one.
-    check("385: the nanite band is still NULL — the shape is stated, the number is Erik's and unauthored",
-      sd385.sourceBands.sources.nanite.band === null);
+    // ⚠️ THIS GATE WENT RED ON THE RATIFICATION AND WAS RIGHT TO. It asserted the craft was UNSCORED
+    // — true while the band was unauthored, false the moment Erik supplied one. The invariant underneath
+    // never changed: the craft is judged on the NANITE field, whether or not there is a band to judge it
+    // with. So it asserts that, and now also that the score answers to the bloom rather than to the lattice.
+    check("385: a nanite craft is scored on the NANITE field — strong over a bloom the lattice map calls dead",
+      !!gnCard && gnCard.field === "nanite" && gnCard.grounded === true && gnCard.percent === 100
+      && heart.substrateDensity < 0.1);
+    // ⚠️ THIS GATE CHANGED BECAUSE THE DECISION DID, NOT BECAUSE IT WAS INCONVENIENT. It asserted
+    // `band === null` while the number was unauthored, which was correct then. Erik ratified the mirror on
+    // 2026-08-09 — "the nanite precursor mirror seems to make sense" — so the band exists now and the
+    // gate asserts the SHAPE he ratified rather than the digits, which stay his to turn.
+    const nanBand = sd385.sourceBands.sources.nanite.band;
+    check("385: the nanite band is authored, and high-nanite is best — the shape Erik ratified, not the digits",
+      !!nanBand && nanBand.center > 0.5 && nanBand.width > 0);
+    check("385: …and it stays on the NANITE axis — mirroring precursor's curve is not merging with its map",
+      sb385.fieldOfSource("nanite", sd385) === "nanite");
+    // ⛔ AEVI'S STATED EQUIVALENCE, GATED AS A RELATION RATHER THAN AS NUMBERS: "a nanite craft at
+    // `clear 0.05` should be starved the way a precursor craft is starved at density 0.05."
+    // ⚠️ THE REFERENCE CRAFT MUST BE FLOORLESS, and picking the wrong one is how I first misread
+    // this: a cogitant precursor school bottoms at 70% because cogitant ROOTS IN BODY, which carries the
+    // §4 never-starved floor. Ashwarden roots in metaphysical, so its precursor school genuinely starves —
+    // and against that one the two curves agree exactly.
+    const ashPre = (sch385.traditionSchools.ashwarden.schools || []).find(x => x.extension === "precursor");
+    const sameCurve = [0.05, 0.4, 0.75].every(v => {
+      const pre = sb385.substrateVerdict({ tradition: "ashwarden", school: ashPre, root: sch385.traditionSchools.ashwarden.root, density: v, data: sd385 });
+      const nan = sb385.substrateVerdict({ tradition: "god_named", school: { extension: "nanite" }, root: "nanite", density: v, data: sd385 });
+      return pre.percent === nan.percent;
+    });
+    check("385: a nanite craft starves on ITS axis exactly as a floorless precursor craft does on the substrate",
+      sameCurve);
+    // ⚠️ AND NO FLOOR, deliberately: unlike `body`, nanite answers to condition and supply and has no
+    // never-starved guarantee — which is what lets it fall to 5% where a body-rooted craft stops at 70%.
+    check("385: nanite carries NO floor — it can genuinely fail, which body cannot",
+      sb385.sourceHasFloor("nanite", sd385) === false && sb385.sourceHasFloor("body", sd385) === true);
     // And the banner carries both fields as separate chips.
     const app385 = readFileSync(join(root, "app.js"), "utf8");
     check("385: the banner shows the nanite field as its OWN chip, never merged into the ground word",
@@ -6926,8 +6953,16 @@ await (async () => {
     // vanished silently when `material` became `body`. These two assert the distinction is expressible.
     check("380: a source can have NO band and STILL carry the floor — body says both, and they are separate facts",
       subMod.bandForSchool("x", { extension: "body" }, sd380) === null && subMod.sourceHasFloor("body", sd380) === true);
-    check("380: …and a source can have no band and NO floor — nanite, which answers to supply, not ground",
-      subMod.bandForSchool("x", { extension: "nanite" }, sd380) === null && subMod.sourceHasFloor("nanite", sd380) === false);
+    // ⚠️ REWRITTEN WHEN NANITE GAINED A BAND (SNG-385). This used nanite as the live example of
+    // band-null-plus-no-floor, and after Erik ratified the mirror NO authored source exhibits that pair any
+    // more. The invariant was never about nanite: it is that `band` and `floor` are INDEPENDENT facts, and
+    // the old `material: null` conflated them into one. So it tests the READER's capability against a
+    // synthetic source — a content example can disappear, the capability must not.
+    const synthSrc = { sourceBands: { sources: { s_nofloor: { band: null, floor: false }, s_floor: { band: null, floor: true } } } };
+    check("380: …and band and floor are INDEPENDENT — no band with no floor, and no band WITH one",
+      subMod.bandForSchool("x", { extension: "s_nofloor" }, synthSrc) === null
+      && subMod.sourceHasFloor("s_nofloor", synthSrc) === false
+      && subMod.sourceHasFloor("s_floor", synthSrc) === true);
     // The premise SNG-193b was built on, asserted as a RELATION rather than as two numbers.
     const cog = sch380.traditionSchools.cogitant.schools;
     const inst = cog.find(x => x.id === "cog_instrumented"), reach = cog.find(x => x.id === "cog_reaching");

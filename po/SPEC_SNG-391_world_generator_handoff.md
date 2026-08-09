@@ -48,9 +48,10 @@ are sites of the Crossing, naming. **What you take:** making the derived layers 
    identical** across six windows. ⚠️ **The longitude pad must divide by `cos(lat)`** or the cull eats real
    contributors near a pole; that bug cost 3% accuracy and was invisible except at the poles.
 
-### §2c — Tuned constants (swept, not guessed)
-`thr = 1.30 + 0.18·noise` · northern taper exponent `1.3` × **`2.2`** · continentality `× 0.62` ·
-polar noise scale `F3 = 57.2957795` · **absolute elevation range `RLO = 0.0915`, `RHI = 1.9265`**.
+### §2c — Tuned constants (swept at FULL 720×360 — a coarse sweep is what produced rev 1)
+⛔ **`thr` was 1.30 in rev 1 and floods the world to 32.6% land, marooning 11 locations. It is 0.85.**
+`thr = 0.85 + 0.18·noise` · northern taper exponent `1.3` × **`2.2`** · continentality `× 0.62` ·
+polar noise scale `F3 = 57.2957795` · **absolute elevation range `RLO = 0.0980`, `RHI = 2.0010`** (rev 2).
 ⚠️ **`RLO`/`RHI` are GLOBAL and must be recomputed whenever the generator changes.** Normalising
 elevation to the *visible* range made lowlands render white when nothing higher was on screen.
 
@@ -64,7 +65,7 @@ Terrain changes ⇒ **all of this** must regenerate, in order:
 2. **`RLO`/`RHI`** — 2nd and 98.5th percentile of land `raw`
 3. **`B_ELEV`** — normalise `raw` by `RLO`/`RHI`
 4. **`B_BIOM` / `B_DENS` / `B_NAN`** — from authored `biome.byRegion`, `substrateSource`, `naniteField`
-5. **HYDROLOGY** — smooth DEM (4 passes) → fill pits → D8 flow → rivers (top 1.5% accumulation) →
+5. **HYDROLOGY** — smooth DEM (⛔ **3 passes** — this said 4; the code does 3 and the code is right, CCode caught it) → fill pits → D8 flow → rivers (top 1.5% accumulation) →
    lakes (30 strongest endorheic sinks) → marsh → **authored water at the 12 evidence-backed locations** →
    push shorelines back from Archive Hollow, Cairn-and-Scour, Millbrook (the Sunken Choir stays submerged)
 6. **VECTORS** — Moore boundary trace → smooth → Douglas–Peucker → **reject compactness > 12**

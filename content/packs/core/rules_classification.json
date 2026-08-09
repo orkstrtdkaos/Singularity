@@ -37,10 +37,12 @@
   },
   "wired_elsewhere": {
     "_note": "Registered, not fetched by the loader, but genuinely consumed — the consumer is a CI check rather than engine code. Not orphans.",
-    "power_sources": "Read by tests/content_ci.mjs (3c-vii), which cross-checks power classification against substrate band centres. The audit IS its consumer.",
     "resolution": "Fetched via rulePath(\"resolution\") + fetchJSON rather than loadRule — a real load through a different door.",
     "emergence_recipes": "Fetched as loadRule(\"emergence\") — the file name and the rule name differ, which is exactly how the SNG-331 resolver regression hid.",
     "martial_paths": "SNG-345: WIRED. engine/martial.js reads baselineDefense + formKits; loaded via loadRule(\"martial_paths\") into rules.martialPaths, projected into the ability catalog, granted at creation and by reconcile step 27. Was a REAL GAP for a month with its own engineNote naming the implementation.",
     "sub_attribute_ladder": "SNG-356: WIRED. loadRule(\"sub_attribute_ladder\") -> rules.subAttributeLadder; resolve.js pays the authored rollCumulative column in place of the retired attributeSoftCap formula; engine/ladder.js pays the pool grants against a high-water mark, from BOTH doors (spendSubPoint in play, reconcile step 29 retroactively). Shipped on SNG-357 harness evidence per Aevi gating the roll column on it."
+  },
+  "_moved": {
+    "power_sources": "SNG-382 — promoted out of `wired_elsewhere` on 2026-08-08. It was honestly classified while its only consumer was a CI audit, and that was true when written. SNG-172 §4 has since been executed: 26 weighted source mixes authored with Erik's reasons. A file that describes how power works cannot reach only a test, so it is now fetched by `loadRule(\"power_sources\")` and read by `craftSource()` as the fallback for a craft whose tradition the character has no school in. ⚠️ IT ANSWERS FOR NOTHING YET — the five school-less traditions (harmonic, radiant_folk, valley_craft, precursor, cross_pole_braid, 53 crafts) have no mix either. The reader ships first so the content can land without code."
   }
 }

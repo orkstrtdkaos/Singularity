@@ -6749,6 +6749,58 @@ await (async () => {
       /groundHere\(location, CONTENT\.substrateModel\)/.test(appG381) && /\$\{groundRow\(selAb\)\}/.test(appG381));
   }
 
+  // ══ SNG-382 — THE TRADITION SOURCE MIX GETS A READER. Aevi's work-order item 3 asked me to derive
+  // the 26 weighted mixes before she authored them; she had already authored all 26, on the ratified
+  // vocabulary, with Erik's reasons. ⛔ THE GAP WAS THE OTHER END: `power_sources.json` was REGISTERED AND
+  // NEVER FETCHED — no `loadRule`, no engine reader, consumed only by a CI audit. 26 statements about how
+  // power works, reaching nothing a player could meet.
+  //
+  // ⚠️ WIRING IT BUYS ZERO COVERAGE TODAY AND SHIPS ANYWAY. The five traditions with no schools —
+  // harmonic, radiant_folk, valley_craft, precursor, cross_pole_braid, 53 of 374 crafts — have no mix
+  // either, so nothing new answers. The reader goes first so the content can land without code, which is
+  // Aevi's own rule from the other side: she said do not author a field ahead of its card.
+  {
+    // ⚠️ THE BLOCK OWNS ITS HANDLES. Three times today I wrote a new gate block referring to consts
+    // declared inside a NEIGHBOURING block and hit a ReferenceError — block scope is not file scope, and a
+    // crashed suite is worse than a red one because `grep "^FAIL"` reports zero.
+    const { loadContentHeadless: lch382 } = await import("./headless_content.mjs");
+    const C382 = await lch382();
+    const subMod382 = sb, sd382 = substrateModel, sch382 = schools;
+    const ps382 = rjc193("content/packs/core/rules/power_sources.json");
+    check("382: the source mixes are LOADED, not merely registered — a loadRule call, not a CI-only read",
+      /loadRule\("power_sources"/.test(stateSrc193) && /powerSources: powerSourcesDoc/.test(stateSrc193));
+    check("382: every tradition that has schools also has an authored mix — the two tables agree",
+      Object.keys(sch382.traditionSchools).every(t => ps382.byTradition?.[t]?.primary));
+    // ⚠️ `combination` IS DELIBERATE, NOT DRIFT, and I checked before saying so: all four traditions
+    // that carry it have genuinely balanced mixes (0.5/0.5, 0.6/0.4). It means "no single source dominates"
+    // and is orthogonal to the ratified source LIST, so it correctly has no band.
+    const RATIFIED = new Set(["precursor", "nanite", "wild", "metaphysical", "body", "veil"]);
+    const combo = Object.entries(ps382.byTradition).filter(([, c]) => c.primary === "combination");
+    check("382: a `combination` primary is only used where the mix really is balanced — not as a shrug",
+      combo.length > 0 && combo.every(([, c]) => Math.max(...Object.values(c.mix || { x: 1 })) <= 0.6));
+    check("382: every mix WEIGHT names a ratified source, whatever the primary says",
+      Object.values(ps382.byTradition).every(c => Object.keys(c.mix || {}).every(k => RATIFIED.has(k))));
+    // The reader itself — proved by driving it, not by reading the source.
+    const abFolk = Object.values(C382.abilities).find(a => a.tradition && !sch382.traditionSchools[a.tradition]);
+    check("382: a craft whose tradition has NO school yields nothing without a mix — honest, not defaulted",
+      !!abFolk && subMod382.craftSource(abFolk, {}, sch382) === null);
+    const synth = { byTradition: { [abFolk.tradition]: { primary: "precursor", mix: { precursor: 1 }, why: "driven, for the proof" } } };
+    const viaTrad = subMod382.craftSource(abFolk, {}, sch382, synth);
+    check("382: …and the tradition mix answers for it once authored, marked `via: tradition`",
+      viaTrad?.source === "precursor" && viaTrad.via === "tradition" && viaTrad.school === null);
+    // ⚠️ A MIX SOURCE IS SCORED ON THE SOURCE'S OWN BAND, since there is no school object to read.
+    const cD = subMod382.groundCardFor(abFolk, {}, { schools: sch382, substrate: sd382, location: { substrateDensity: 0.95 }, powerSources: synth });
+    const cT = subMod382.groundCardFor(abFolk, {}, { schools: sch382, substrate: sd382, location: { substrateDensity: 0.05 }, powerSources: synth });
+    check("382: a mix-sourced craft still reads the ground — dense and thin give different answers",
+      cD.strength > cT.strength && cD.via === "tradition");
+    // ⛔ SNG-172'S OWN PRE-REGISTERED FALSIFICATION TEST, run rather than quoted: it was written BEFORE
+    // the pass so it could falsify it — "if the pass produces a lattice-dominant Rootkin, the pass is
+    // wrong, not the world." Rootkin comes out body 1.0. The pass survives its own check.
+    const rk = ps382.byTradition.rootkin;
+    check("382: SNG-172's falsification test PASSES — Rootkin is not precursor-dominant",
+      !!rk && rk.primary !== "precursor" && (rk.mix?.precursor || 0) < 0.5);
+  }
+
   // ══ SNG-380 — THE JOIN GATE. ⛔ THE VOCABULARY LIVES IN CONTENT AND ITS TABLE NOW DOES TOO, so
   // the thing worth gating is that the two CONTENT files agree — not what any number is. Aevi's own ask:
   // "a gate that asserts SHAPE, not values: every extension present in schools.json has a key in the band

@@ -399,11 +399,23 @@ export function applySubstrateField(locations = {}, data = {}) {
 /** The source a craft reaches with FOR THIS CHARACTER — derived from the school they practise in the
  *  craft's tradition, never a field on the ability. Null when the craft has no tradition (9 of 383) or the
  *  character does not practise it: an honest "we do not know" rather than a default that looks like one. */
-export function craftSource(ability, character, schoolsData) {
+export function craftSource(ability, character, schoolsData, powerSources = null) {
   const tid = ability?.tradition;
   if (!tid) return null;
   const school = schoolForTradition(character, tid, schoolsData);
-  return school ? { traditionId: tid, school, source: school.extension } : null;
+  if (school) return { traditionId: tid, school, source: school.extension, via: "school" };
+  // ⛔ SNG-382 — THE TRADITION MIX IS THE FALLBACK, AND WIRING IT IS WHAT GAVE IT A READER. Aevi
+  // authored 26 weighted mixes with Erik's reasons into `power_sources.json`; the file was registered,
+  // never fetched by the loader, and read by nothing but a CI audit. Five traditions — harmonic,
+  // radiant_folk, valley_craft, precursor, cross_pole_braid — have no schools at all, so 53 of 374 crafts
+  // could show no ground card whatever. The mix answers for exactly those.
+  //
+  // ⚠️ `via` IS RETURNED SO THE CARD CAN SAY WHICH IT IS. A school is what THIS practitioner reaches
+  // with; a tradition mix is what the craft TYPICALLY leans on. Those are different claims and a card that
+  // presented them identically would be overstating the second.
+  const mix = powerSources?.byTradition?.[tid];
+  if (mix?.primary) return { traditionId: tid, school: null, source: mix.primary, mix: mix.mix || null, via: "tradition" };
+  return null;
 }
 
 /** ⚠️ ONE LINE, AND THE ORDER OF IT IS THE POINT. Returns the pieces rather than a formatted string
@@ -411,27 +423,38 @@ export function craftSource(ability, character, schoolsData) {
  *
  *  `strength` is 0–4 pips for scanning; `verdict` is the word; `because` is the authored ground line.
  *  Returns null when the source is unknown — a card that cannot answer must not render a confident row. */
-export function groundCardFor(ability, character, { schools, substrate, location } = {}) {
-  const cs = craftSource(ability, character, schools);
+export function groundCardFor(ability, character, { schools, substrate, location, powerSources = null } = {}) {
+  const cs = craftSource(ability, character, schools, powerSources);
   if (!cs) return null;
   const density = location ? locationDensity(location, substrate) : null;
   const because = sourceGround(cs.source, substrate);
   // A source with no band (body, nanite) does not care about the ground, and saying "strong here" about it
   // would be inventing a relationship the content explicitly denies.
-  const banded = !!bandForSchool(cs.traditionId, cs.school, substrate);
+  // ⚠️ A TRADITION-MIX SOURCE HAS NO SCHOOL OBJECT, so the band comes from the SOURCE directly.
+  // `combination` is a deliberate authored value meaning "no single source dominates" — it is not on the
+  // ratified source list and has no band, which is correct rather than missing.
+  const band = cs.school ? bandForSchool(cs.traditionId, cs.school, substrate)
+    : (substrate?.sourceBands?.sources?.[cs.source]?.band || null);
+  const banded = !!band;
   if (density === null || !banded) {
-    return { source: cs.source, school: cs.school, density, because, verdict: "unaffected by the ground",
+    return { source: cs.source, school: cs.school, via: cs.via, density, because, verdict: "unaffected by the ground",
              strength: 4, percent: null, chancePenalty: 0, energyMult: 1, off: false, grounded: false };
   }
-  const v = substrateVerdict({ tradition: cs.traditionId, school: cs.school,
-    root: schools?.traditionSchools?.[cs.traditionId]?.root, density, data: substrate });
+  const v = cs.school
+    ? substrateVerdict({ tradition: cs.traditionId, school: cs.school,
+        root: schools?.traditionSchools?.[cs.traditionId]?.root, density, data: substrate })
+    // No school to read: score the SOURCE's own band directly, which is what the mix names.
+    : (() => { const eff = bandFactor(band, density);
+        return { factor: eff, side: eff >= 1 ? "full" : density < band.center ? "starved" : "crowded",
+                 percent: Math.round(eff * 100), chancePenalty: Math.round((1 - eff) * 30),
+                 energyMult: 1 + 0.5 * (1 - eff), off: eff < 0.2 }; })();
   const word = v.off ? "will not answer here"
     : v.side === "full" ? "at full strength here"
     : v.side === "floored" ? "holding at its floor here"
     : v.side === "starved" ? "starved here — the ground is too thin"
     : v.side === "crowded" ? "crowded here — the ground is too loud"
     : "unaffected by the ground";
-  return { source: cs.source, school: cs.school, density, because, verdict: word,
+  return { source: cs.source, school: cs.school, via: cs.via, density, because, verdict: word,
     strength: Math.max(0, Math.min(4, Math.round(v.factor * 4))), percent: v.percent,
     chancePenalty: v.chancePenalty, energyMult: v.energyMult, off: v.off, grounded: true };
 }

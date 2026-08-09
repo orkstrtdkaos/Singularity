@@ -444,7 +444,7 @@ export async function loadContent() {
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
   const [region, substrate, greaterArcs, genNpc, genLoc, genArc, genCreature, originsDoc, backgroundsDoc, regionsDoc,
-         accords, helpDoc, substrateModel, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc] = await Promise.all([
+         accords, helpDoc, substrateModel, powerSourcesDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
     fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
@@ -458,6 +458,7 @@ export async function loadContent() {
     loadRule("the_accords", null),                                                                 // SNG-089 the Accords
     loadRule("helper_text", { entries: [] }),                                                      // SNG-084 in-context help
     loadRule("the_substrate", null),                                                               // SNG-090 the substrate model
+    loadRule("power_sources", null),                                                               // SNG-382: 26 authored source mixes, registered since SNG-172 and never fetched
     fetchJSON("content/packs/valley/prologue.json").catch(() => null),                             // SNG-062 the Prologue → form on a miss
     // SNG-042 anchors + the tradition-epics roster (SNG-208 content: 62 epics, 2–3 per tradition, all 24).
     // Merged into ONE roster, deduped by id (the comprehensive epics win the 3 overlaps) so they plug into the
@@ -557,7 +558,7 @@ export async function loadContent() {
     console.log(`[rules] martial: ${merged}/${Object.keys(derived).length} baseline+form abilities merged into the catalog`);
   }
 
-  const content = { craftMechanics, spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
+  const content = { craftMechanics, spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

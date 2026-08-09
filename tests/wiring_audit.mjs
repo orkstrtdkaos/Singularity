@@ -584,11 +584,14 @@ if (process.env.SHOW_UNREAD_RULE_CONSTANTS === "1") {
 // content — a statement about how the world works — and inventing five of them to turn a light green
 // would be me writing canon. It counts, it may only go DOWN, and the numbers are hers to close.
 const schoolGround = (() => {
-  const understood = new Set([null, "", "material", "inherent", "lattice", "wild", "natural"]);
-  const sub = read("engine/substrate.js");
-  // Read the vocabulary the CODE understands out of the code itself, so this cannot drift from what it maps.
-  const chain = sub.slice(sub.indexOf("const ground = ext =>"), sub.indexOf("const lines = []"));
-  for (const m of chain.matchAll(/ext === "([a-z_]+)"/g)) understood.add(m[1]);
+  // ⚠️ ALSO REPOINTED AT CONTENT (see sourceBands below). This read the hard-coded prose chain out
+  // of substrate.js, which no longer exists — the ground lines are authored per source now, so the
+  // question "does this school get a real ground line" is answered by the same content join.
+  const understood = new Set([null, ""]);
+  try {
+    const subj = JSON.parse(read("content/packs/core/rules/the_substrate.json"));
+    for (const [k, v] of Object.entries(subj?.sourceBands?.sources || {})) if (v?.ground) understood.add(k);
+  } catch { /* unreadable — count them all, which is the honest reading */ }
   let schools = null;
   try { schools = JSON.parse(read("content/packs/core/rules/schools.json")); } catch { return { unmapped: [], total: 0 }; }
   const all = Object.entries(schools.traditionSchools || {}).flatMap(([tid, t]) => (t.schools || []).map(x => ({ tid, ...x })));
@@ -606,10 +609,17 @@ const schoolGround = (() => {
 // band silently falls back to their tradition's). The cause is five values Erik has to author; the radius
 // is what it costs while they are unauthored, and it is SNG-193b's entire premise — "two practitioners
 // of one tradition with different schools get OPPOSITE best-grounds" — being false again.
+// ⚠️ AND THE RATCHET ITSELF HAD TO MOVE. Its first form read `SOURCE_BAND` out of substrate.js as
+// TEXT — so the moment the table went into content, where it belongs, the measurement reported every
+// source unmodelled and the numbers went UP through a fix. A ratchet that reads an IMPLEMENTATION measures
+// where the answer currently lives; this one has to ask the question the join actually poses, which is
+// whether two CONTENT files agree. It reads the authored table now, and it will survive the next move too.
 const sourceBands = (() => {
-  const sub = read("engine/substrate.js");
-  const table = sub.slice(sub.indexOf("const SOURCE_BAND = {"), sub.indexOf("};", sub.indexOf("const SOURCE_BAND = {")));
-  const modelled = new Set([...table.matchAll(/^\s*([a-z_]+):/gm)].map(m => m[1]));
+  let modelled = new Set();
+  try {
+    const sub = JSON.parse(read("content/packs/core/rules/the_substrate.json"));
+    modelled = new Set(Object.keys(sub?.sourceBands?.sources || {}));
+  } catch { /* unreadable — every source counts as unmodelled, which is the honest reading */ }
   let schools = null;
   try { schools = JSON.parse(read("content/packs/core/rules/schools.json")); } catch { return { unmodelled: [], fallingBack: 0, augmented: 0 }; }
   const trads = Object.entries(schools.traditionSchools || {});

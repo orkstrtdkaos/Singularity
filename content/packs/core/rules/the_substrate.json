@@ -229,5 +229,59 @@
     "breakEven": "Against a flat pure 1.0 with the 0.7 material floor: 1.15 pays only above ~67% time at home, 1.25 at ~55%, 1.35 at ~46%. Most characters travel — SNG-016, you leave to move along an axis — so they sit below 67%. At 1.15 augmentation would have been a trap that READS as an upgrade.",
     "theBet": "Stay in your country and you are meaningfully stronger than a pure practitioner. Travel widely and you would have been better off plain. Both answers are real, which is what makes it a choice.",
     "constraint": "⛔ The ceiling applies to the EXTENSION's contribution, not the whole craft. The root supplies 1.0; the extension adds up to 0.25 on top when the ground agrees. Applied to the whole factor, a LATTICE-rooted augmented school would reach 1.25 while carrying no material floor to pay for it — strictly better than everything."
+  },
+  "sourceBands": {
+    "note": "SNG-380 — THE BAND A SOURCE FAVOURS, AUTHORED HERE RATHER THAN HARD-CODED IN substrate.js. It lived in code as SOURCE_BAND, keyed on the pre-SNG-378 vocabulary, and when the schools were rebased onto the ratified source list the table silently stopped matching: 44 of 48 augmented schools fell back to their tradition's band, the §4 floor matched 0 of 74, and nothing errored. ⛔ THE VOCABULARY LIVES IN CONTENT, SO ITS TABLE MUST TOO — a future rebase now breaks a join gate, loudly, instead of routing through a fallback.",
+    "shapeNote": "⚠️ `band: null` AND `floor: true` ARE SEPARATE FACTS, and conflating them is what hid the regression. The old table wrote `material: null` to mean BOTH 'no best-ground' and 'never starved' — so the §4 protection was a side effect of an absent value rather than a stated one. `body` has no band AND keeps the floor; `nanite` has no band and does NOT. That distinction is Aevi's, stated explicitly on request, and it is now impossible to lose by renaming.",
+    "sources": {
+      "precursor": {
+        "band": {
+          "center": 0.9,
+          "width": 0.2
+        },
+        "floor": false,
+        "ground": "best in DENSE, machine-thick country; starves in the thin",
+        "provenance": "CARRIES from `lattice`, and NOT as a rename: `lattice` always meant the Precursor substrate and `nanite` split OUT of it — the lattice itself did not change. Canon: \"Strong where the lattice is dense.\" SNG-193b: \"the instrumented wants dense.\" [Aevi]"
+      },
+      "nanite": {
+        "band": null,
+        "floor": false,
+        "ground": "answers to condition and supply, not to ground — it goes where its makers put it and where people carry it",
+        "provenance": "NEW, derived from canon rather than copied. The one source with no best-ground at all: it fails when the works are unmaintained or supply is cut, which is a different axis entirely. ⚠️ No floor — unlike `body`. [Aevi]"
+      },
+      "metaphysical": {
+        "band": {
+          "center": 0.15,
+          "width": 0.22
+        },
+        "floor": false,
+        "ground": "best in THIN, still ground; a dense lattice is interference between them and the thing",
+        "provenance": "CARRIES from `inherent`. ⚠️ Deriving this caught a contradiction in canon authored the day before — \"Metaphysical — asks nothing of the ground\" — against SNG-193b's ratified worked example, \"the reaching mind wants thin ground\", and the Reaching Mind is metaphysical. THE CANON WAS CORRECTED, NOT THE BAND (48dc40a8). [Aevi]"
+      },
+      "body": {
+        "band": null,
+        "floor": true,
+        "ground": "never at a loss anywhere, but never peaks (a floor, not a spike)",
+        "provenance": "CARRIES from `material`, floor included and stated explicitly on request. SNG-193b §4: \"A material root — or a material-extension school — is never starved at any density.\" ⛔ The floor is not a side effect of a null band; it IS the mechanic. \"The pure never loses because it never leaned on anything.\" [Aevi]"
+      },
+      "wild": {
+        "band": {
+          "center": 0.32,
+          "width": 0.34
+        },
+        "floor": false,
+        "ground": "best in the ungoverned gaps, where the current runs untamed",
+        "provenance": "Unchanged — the only key that survived the rebase, and the reason 4 of 48 schools kept working. [Aevi]"
+      },
+      "veil": {
+        "band": {
+          "center": 0.1,
+          "width": 0.2
+        },
+        "floor": false,
+        "ground": "best where the lattice is weakest — thin, unreached ground; a dense lattice closes the way",
+        "provenance": "DERIVED, and the one number Aevi flagged for Erik to confirm. Canon: \"The Veil is the anti-power to the lattice: thin where the lattice is weak, and thinning one strengthens the other\" — so its band is the MIRROR of `precursor`, which is what anti-power means mechanically. ⚠️ `null` is a coherent alternative and says something DIFFERENT: that reaching across is equally hard everywhere. [Aevi — AWAITING ERIK]"
+      }
+    }
   }
 }

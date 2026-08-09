@@ -390,7 +390,7 @@ export const GM_CONTEXT = [
     build: (env) => seasonalDetailForGM(env.time?.season) },
   { key: "schoolsDetail", builder: "substrate.schoolsDetailForGM (SNG-193b §3.6)", carries: ["the character's SCHOOL per practised domain — what each craft is joined to, and its best-ground"],
     reachedBy: "always when schools.json is loaded and the character practises a domain", spec: "§3.6", views: ["turn"],
-    build: (env) => schoolsDetailForGM(env.character, env.CONTENT.schools) },
+    build: (env) => schoolsDetailForGM(env.character, env.CONTENT.schools, env.CONTENT.substrateModel) },
   { key: "sharedCanonDetail", builder: "app.sharedCanonForGM", carries: ["other players' promoted canon"],
     reachedBy: "always (rating-lensed)", spec: "§18", views: ["turn"],
     build: (env) => env.app.sharedCanonForGM() },

@@ -39,13 +39,36 @@ export const SUBSTRATE_TUNING = {
 // (the machine running); wild thrives in the ungoverned gaps (widest band). Centres track SNG-172's
 // source classification and are AUDITED against the per-tradition bands, never fight them (existing
 // saves without a school keep the tradition's authored band — see schoolForTradition's fallback).
-const SOURCE_BAND = {
-  material: null,                            // a FLOOR — never starved, no band ("the pure never loses")
-  natural:  { center: 0.20, width: 0.24 },   // thin ground is BEST (naturals 0.18–0.36)
-  inherent: { center: 0.15, width: 0.22 },   // thin is a clear signal; dense is interference
-  lattice:  { center: 0.90, width: 0.20 },   // dense helps until it interferes (lattice 0.58–0.98)
-  wild:     { center: 0.32, width: 0.34 },   // ungoverned; thrives in the unreached gaps, widest band
+// ⛔ SNG-380 — THIS TABLE MOVED INTO CONTENT, and the move IS the fix. It lived here as a literal
+// keyed on the pre-SNG-378 vocabulary (material/natural/inherent/lattice/wild). When Aevi rebased every
+// school onto the ratified source list the keys stopped matching, and because `bandForSchool` falls back
+// to the tradition band for an unmodelled source — a correct safety net for ONE source — the whole
+// vocabulary going missing at once became a silent no-op: 44 of 48 augmented schools inert, the §4 floor
+// matching 0 of 74, no error, no red gate, every line still rendering.
+//
+// ⚠️ THE VOCABULARY LIVES IN CONTENT, SO ITS TABLE MUST TOO. It is now
+// `the_substrate.json → sourceBands.sources`, and a join gate asserts every extension in schools.json has
+// a key there — SHAPE, never values. A future rebase breaks loudly instead of routing through a fallback.
+//
+// ⚠️ AND `band: null` IS NO LONGER OVERLOADED. The old `material: null` meant BOTH "no best-ground"
+// and "never starved", so the §4 protection was a side effect of an absent value rather than a stated
+// one — which is exactly how it vanished in a rename. `floor` is now its own boolean: `body` has no band
+// AND keeps the floor; `nanite` has no band and does NOT.
+const sourceEntry = (source, substrateData) => {
+  if (source === null || source === undefined) return null;
+  return substrateData?.sourceBands?.sources?.[source] || null;
 };
+
+/** Does reaching with this source carry the §4 never-starved floor? Read from content, never inferred
+ *  from a null band — that inference is what lost the mechanic in the first place. */
+export function sourceHasFloor(source, substrateData) {
+  return sourceEntry(source, substrateData)?.floor === true;
+}
+
+/** The authored line describing the ground a source favours — the GM-facing half. */
+export function sourceGround(source, substrateData) {
+  return sourceEntry(source, substrateData)?.ground || null;
+}
 
 /** A tradition's band {center, width}, or null for the untuned (folk/learned) — substrate-neutral. */
 export function bandFor(tradition, data) { // registry:internal
@@ -76,8 +99,12 @@ export function schoolForTradition(character, traditionId, schoolsData) { // reg
  *  falls back to the tradition band rather than going neutral. */
 export function bandForSchool(traditionId, school, substrateData) { // registry:internal
   const ext = school ? school.extension : undefined;
-  if (ext !== undefined && ext !== null && Object.prototype.hasOwnProperty.call(SOURCE_BAND, ext)) return SOURCE_BAND[ext];
-  return bandFor(traditionId, substrateData); // pure school, no school, or an extension we don't model
+  const entry = sourceEntry(ext, substrateData);
+  // ⚠️ AN AUTHORED SOURCE WITH `band: null` IS AN ANSWER, NOT AN ABSENCE. `body` and `nanite` say
+  // "no best-ground" deliberately, and returning null here is that answer — distinct from falling through
+  // to the tradition band, which means "we do not model this source" and is now a gated condition.
+  if (entry) return entry.band || null;
+  return bandFor(traditionId, substrateData); // pure school, no school, or a source the table does not model
 }
 
 /** SNG-192 §6b: the density window where a WHOLE build works — the INTERSECTION of its traditions'
@@ -141,15 +168,20 @@ export function setCharacterSchool(character, traditionId, schoolId, schoolsData
  *  THIS school does it (not generically by tradition) and knows what a teacher of that people would open.
  *  Lists the tradition's other school ids so a story-earned adoptSchool has valid targets. null when
  *  nothing is loaded or practised. */
-export function schoolsDetailForGM(character, schoolsData) { // registry:internal
+/** ⚠️ SNG-380 ADDED `substrateData`, and the edit that added it had to reach the CALLER too. The
+ *  ground line now comes from the authored table, and this function had never been handed it — writing
+ *  the read without threading the argument would have been a ReferenceError in the GM context builder,
+ *  which is the one place a throw costs the player their whole turn. Optional, so a caller without the
+ *  table degrades to the pure-school line rather than breaking. */
+export function schoolsDetailForGM(character, schoolsData, substrateData = null) { // registry:internal
   const domains = character?.domains;
   if (!domains || !schoolsData?.traditionSchools) return null;
-  const ground = ext => ext === null || ext === "material" ? "never at a loss anywhere, but never peaks (a floor, not a spike)"
-    : ext === "inherent" ? "best in THIN, still ground; a dense lattice is interference between them and the thing"
-    : ext === "lattice" ? "best in DENSE, machine-thick country; starves in the thin"
-    : ext === "wild" ? "best in the ungoverned gaps, where the current runs untamed"
-    : ext === "natural" ? "best in thin, living ground; improved by a little lattice, never needing it"
-    : "its own ground";
+  // ⚠️ THE GROUND LINE IS AUTHORED TOO. This was a hard-coded chain on the retired vocabulary, so
+  // 44 of 74 schools degraded to the string "its own ground" — a sentence that tells the narrator nothing
+  // while looking like an answer. A pure school (no extension) leans on nothing new and says so.
+  const ground = ext => (ext === null || ext === undefined)
+    ? "leaning on nothing new — the tradition's own ground"
+    : (sourceGround(ext, substrateData) || "its own ground");
   const lines = [];
   for (const tid of [domains.primary, domains.secondary, domains.tertiary]) {
     if (!tid) continue;
@@ -195,7 +227,10 @@ export function substrateVerdict({ tradition, school = null, root = null, densit
   // §4: the FLOOR is the root's. A material ROOT — or a material-EXTENSION school — is never STARVED: the
   // augmented craft degrades TOWARD its pure form (materialFloor), never to zero. The floor bites only on
   // the starved side; interference from ABUNDANCE still applies. "The material school is the one that travels."
-  const hasFloor = root === "material" || school?.extension === "material";
+  // ⛔ THE FLOOR IS READ, NOT INFERRED. This was `root === "material" || school?.extension === "material"`
+  // and matched 0 of 74 schools the moment `material` became `body` — a mechanical protection that
+  // vanished in a rename with nothing to report it.
+  const hasFloor = sourceHasFloor(root, data) || sourceHasFloor(school?.extension, data);
   if (hasFloor && side === "starved" && factor < tuning.materialFloor) { factor = tuning.materialFloor; side = "floored"; }
   return {
     factor,

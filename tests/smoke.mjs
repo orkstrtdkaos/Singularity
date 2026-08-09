@@ -6613,20 +6613,34 @@ await (async () => {
   check("193b: an unknown tradition resolves to null, never throws", sb.schoolForTradition({}, "no_such_people", schools) === null);
 
   // §3.3 — THE FEATURE: two schools of ONE tradition, OPPOSITE best-grounds.
-  const reaching = { extension: "inherent" }, instrumented = { extension: "lattice" }, materialSchool = { extension: "material" };
-  check("193b §3.3: an inherent-extension school bands LOW (thin ground is best)", sb.bandForSchool("cogitant", reaching, substrateModel).center < 0.3);
+  //
+  // ⛔ THESE FIXTURES WERE HAND-WRITTEN IN THE RETIRED VOCABULARY AND THAT IS WHY THE SUITE STAYED GREEN
+  // THROUGH SNG-378. They read `{ extension: "inherent" }`, `{ extension: "lattice" }`, `{ extension:
+  // "material" }` and were matched against a table hard-coded with those same keys — a CLOSED LOOP
+  // between a fixture and a constant, agreeing perfectly with each other while agreeing with nothing in
+  // `schools.json`. The content moved to precursor/metaphysical/body and not one of these five noticed.
+  //
+  // ⚠️ SO THEY ARE DRAWN FROM THE CONTENT NOW, BY ID. A gate about how the world behaves must be
+  // built out of the world; a fixture invented in the shape the code expects can only ever confirm that the
+  // code matches itself. Same lesson as the emergence regression — a default that looks like an answer.
+  const schoolOf = (tid, id) => (schools.traditionSchools[tid].schools || []).find(x => x.id === id);
+  const rootOf = (tid) => schools.traditionSchools[tid].root;
+  const reaching = schoolOf("cogitant", "cog_reaching");            // metaphysical — thin ground
+  const instrumented = schoolOf("cogitant", "cog_instrumented");    // precursor    — dense ground
+  const materialSchool = schoolOf("ashwarden", "ash_gravehanded");  // body         — the floor, on a metaphysical root
+  check("193b §3.3: a metaphysical-extension school bands LOW (thin ground is best)", sb.bandForSchool("cogitant", reaching, substrateModel).center < 0.3);
   check("193b §3.3: a lattice-extension school bands HIGH (dense ground is best)", sb.bandForSchool("cogitant", instrumented, substrateModel).center > 0.7);
   const vReachThin = sb.substrateVerdict({ tradition: "cogitant", school: reaching, root: "material", density: 0.12, data: substrateModel });
-  const vInstrThin = sb.substrateVerdict({ tradition: "cogitant", school: instrumented, root: "material", density: 0.12, data: substrateModel });
-  const vReachDense = sb.substrateVerdict({ tradition: "cogitant", school: reaching, root: "material", density: 0.9, data: substrateModel });
-  const vInstrDense = sb.substrateVerdict({ tradition: "cogitant", school: instrumented, root: "material", density: 0.9, data: substrateModel });
+  const vInstrThin = sb.substrateVerdict({ tradition: "cogitant", school: instrumented, root: rootOf("cogitant"), density: 0.12, data: substrateModel });
+  const vReachDense = sb.substrateVerdict({ tradition: "cogitant", school: reaching, root: rootOf("cogitant"), density: 0.9, data: substrateModel });
+  const vInstrDense = sb.substrateVerdict({ tradition: "cogitant", school: instrumented, root: rootOf("cogitant"), density: 0.9, data: substrateModel });
   check("193b §3.3: in THIN ground the reaching mind is FULL and the instrumented is impaired", vReachThin.factor === 1 && vInstrThin.factor < 1);
   check("193b §3.3: in DENSE ground the instrumented is FULL and the reaching mind is impaired (OPPOSITE best-grounds)", vInstrDense.factor === 1 && vReachDense.factor < 1);
 
   // §4 — the FLOOR is the root's. A material root never STARVES (degrades toward its pure form).
-  check("193b §4: a material-root lattice craft in thin ground is FLOORED, never off", vInstrThin.side === "floored" && vInstrThin.factor >= 0.7 && !vInstrThin.off);
-  check("193b §4: a material-EXTENSION school carries the floor on an inherent root (the school that travels)", sb.substrateVerdict({ tradition: "ashwarden", school: materialSchool, root: "inherent", density: 0.02, data: substrateModel }).factor === 1);
-  check("193b §4: an inherent-root LATTICE school has no floor and DOES starve in dead-thin ground", sb.substrateVerdict({ tradition: "ashwarden", school: instrumented, root: "inherent", density: 0.02, data: substrateModel }).factor < 0.7);
+  check("193b §4: a BODY-root precursor craft in thin ground is FLOORED, never off", vInstrThin.side === "floored" && vInstrThin.factor >= 0.7 && !vInstrThin.off);
+  check("193b §4: a BODY-EXTENSION school carries the floor on a metaphysical root (the school that travels)", sb.substrateVerdict({ tradition: "ashwarden", school: materialSchool, root: rootOf("ashwarden"), density: 0.02, data: substrateModel }).factor === 1);
+  check("193b §4: a METAPHYSICAL-root precursor school has no floor and DOES starve in dead-thin ground", sb.substrateVerdict({ tradition: "ashwarden", school: instrumented, root: rootOf("ashwarden"), density: 0.02, data: substrateModel }).factor < 0.7);
   check("193b: a pure school keeps the tradition's authored band (no drift for existing saves)", JSON.stringify(sb.bandForSchool("cogitant", pure, substrateModel)) === JSON.stringify(sb.bandFor("cogitant", substrateModel)));
 
   // §2 / §3.5 — CI GATE: every schoolAffinity resolves to a school of the ability's own tradition.
@@ -6665,6 +6679,52 @@ await (async () => {
   // school and WHAT IT REACHES WITH, and neither of those is a particular word.
   // ⚠️ The ground line itself is now measured by the `schoolsWithNoGroundLine` ratchet instead — 44 of 74
   // schools currently degrade to "its own ground", which is a content gap and is counted as one.
+  // ══ SNG-380 — THE JOIN GATE. ⛔ THE VOCABULARY LIVES IN CONTENT AND ITS TABLE NOW DOES TOO, so
+  // the thing worth gating is that the two CONTENT files agree — not what any number is. Aevi's own ask:
+  // "a gate that asserts SHAPE, not values: every extension present in schools.json has a key in the band
+  // table. Today that would have gone red the moment I shipped the rebase."
+  //
+  // ⚠️ THIS IS THE GATE THAT WOULD HAVE CAUGHT SNG-378 ON THE DAY. Every existing gate stayed green
+  // through a rebase that made 44 of 48 augmented schools resolve at the wrong band, because each one
+  // tested a function in isolation and the join between two files belonged to neither.
+  {
+    const subMod = sb;                     // the same module the 193b block already imported
+    const sd380 = substrateModel;          // read from disk above — the CONTENT, not a fixture
+    const sch380 = schools;
+    // ⚠️ THE GATE READS THE CONTENT DIRECTLY rather than through an engine helper. My first cut
+    // exported `modelledSources()` for this and the testOnlyExports ratchet caught it immediately — an
+    // export nothing in play can reach, invented to serve a test. The gate is ABOUT two content files
+    // agreeing, so it should ask the files.
+    const modelled = new Set(Object.keys(sd380?.sourceBands?.sources || {}));
+    const authored = new Set();
+    for (const [, t] of Object.entries(sch380?.traditionSchools || {})) {
+      if (t.root) authored.add(t.root);
+      for (const x of t.schools || []) if (x.extension) authored.add(x.extension);
+    }
+    const missing = [...authored].filter(a => !modelled.has(a));
+    check("380: every source the schools reach WITH has a band entry — the join between two content files",
+      missing.length === 0, `unmodelled: ${missing.join(", ")}`);
+    // ⛔ THE FLOOR IS A STATED FACT, NOT AN ABSENT VALUE. The old table wrote `material: null` to mean
+    // both "no best-ground" and "never starved", so the §4 protection was a side effect — and it
+    // vanished silently when `material` became `body`. These two assert the distinction is expressible.
+    check("380: a source can have NO band and STILL carry the floor — body says both, and they are separate facts",
+      subMod.bandForSchool("x", { extension: "body" }, sd380) === null && subMod.sourceHasFloor("body", sd380) === true);
+    check("380: …and a source can have no band and NO floor — nanite, which answers to supply, not ground",
+      subMod.bandForSchool("x", { extension: "nanite" }, sd380) === null && subMod.sourceHasFloor("nanite", sd380) === false);
+    // The premise SNG-193b was built on, asserted as a RELATION rather than as two numbers.
+    const cog = sch380.traditionSchools.cogitant.schools;
+    const inst = cog.find(x => x.id === "cog_instrumented"), reach = cog.find(x => x.id === "cog_reaching");
+    const bi = subMod.bandForSchool("cogitant", inst, sd380), br = subMod.bandForSchool("cogitant", reach, sd380);
+    check("380: two schools of ONE tradition get OPPOSITE grounds again — SNG-193b's premise, restored",
+      !!bi && !!br && bi.center > br.center);
+    // ⚠️ AND AN UNMODELLED SOURCE MUST STILL FALL BACK SAFELY. The fallback was never wrong; it was
+    // only ever wrong that nothing NOTICED it firing. It stays, and the gate above is what notices.
+    check("380: an unmodelled source still falls back to the tradition band rather than going neutral",
+      JSON.stringify(subMod.bandForSchool("cogitant", { extension: "no_such_source" }, sd380)) === JSON.stringify(subMod.bandFor("cogitant", sd380)));
+    check("380: every modelled source carries an authored ground line — no school renders \"its own ground\"",
+      [...modelled].every(m => typeof subMod.sourceGround(m, sd380) === "string" && subMod.sourceGround(m, sd380).length > 10));
+  }
+
   check("193b §3.6: the GM school block names the current school and what it reaches WITH",
     new RegExp(sb193Cur.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(gmDetail)
     && gmDetail.includes(sb193Cur.id)

@@ -316,8 +316,28 @@ check("duplicate place notes dedupe", traveler3.placeMemory.millbrook.notes.leng
 
 // --- world tick ---
 const wcEvent = JSON.parse(readFileSync(join(root, "content/packs/valley/events/water_crisis.json"), "utf8"));
-const locFiles = ["millbrook", "harmonic_heights_terrace", "radiant_plateau_edge"].map(id =>
-  JSON.parse(readFileSync(join(root, `content/packs/valley/locations/${id}.json`), "utf8")));
+// ⛔ DERIVED, NOT HARD-CODED, AND SNG-387 IS WHY. This named three location ids that HAPPENED to share
+// a region when it was written. Aevi's Echo Vale split moved two of them into a new region, leaving
+// `millbrook` alone in `valley` — so the deed's first hop had nowhere in-region to go and the gate below
+// failed for a reason that had nothing to do with the behaviour it tests. THE ENGINE WAS RIGHT: against
+// real content the same deed spreads to `valley.kestrels_roost`, in-region, exactly as the model says.
+//
+// ⚠️ A FIXTURE THAT ASSUMES A CONTENT FACT MUST READ IT, NOT RESTATE IT — the same lesson the 193b
+// school fixtures taught: a test built out of invented data can only confirm that the code matches itself.
+// So it picks a region that really has three or more communities today, whatever the map looks like.
+const locFiles = (() => {
+  const all = readdirSync(join(root, "content/packs/valley/locations")).filter(f => f.endsWith(".json"))
+    .map(f => JSON.parse(readFileSync(join(root, `content/packs/valley/locations/${f}`), "utf8")))
+    .flatMap(d => (d.locations ? Object.values(d.locations) : [d])).filter(l => l && l.id && l.communityId);
+  const byRegion = {};
+  for (const l of all) (byRegion[l.regionId || l.region] ||= []).push(l);
+  const region = Object.values(byRegion).find(m => new Set(m.map(l => l.communityId)).size >= 3);
+  return region ? region.slice(0, 4) : all.slice(0, 3);
+})();
+// The deed starts in whichever community this region's first member belongs to, so the "own region"
+// assertion below is about the MODEL rather than about one village's name surviving a reorganisation.
+const deedHome = locFiles[0].communityId;
+const deedRegionPrefix = String(deedHome).split(".")[0];
 const tickContent = {
   region: { activeEvents: [{ eventId: "water_crisis", stage: 1 }] },
   events: { water_crisis: wcEvent },
@@ -325,7 +345,7 @@ const tickContent = {
 };
 const wanderer = {
   name: "Kaelen", worldState: initWorldState(1), npcRegistry: {},
-  deeds: [{ description: "Pulled two children from the flooded channel", tags: ["child-rescuer"], weight: 3, communityId: "valley.millbrook", day: 1, spread: [] }]
+  deeds: [{ description: "Pulled two children from the flooded channel", tags: ["child-rescuer"], weight: 3, communityId: deedHome, day: 1, spread: [] }]
 };
 await runWorldTick({ character: wanderer, content: tickContent, currentDay: 1, evolveNpcs: null });
 check("same-day tick is a no-op", wanderer.worldState.news.length === 0);
@@ -337,7 +357,9 @@ check("stage shift drifts the spectrum", wanderer.worldState.spectrumDrift.death
 // so the test now asserts the model rather than a snapshot of the outcome: it moves, it moves LOCALLY first,
 // and it never lands twice in the same place.
 check("a big deed starts travelling (one hop per pass, not everywhere at once)", wanderer.deeds[0].spread.length === 1);
-check("…and the first hop is somewhere in its OWN region", /^valley\./.test(wanderer.deeds[0].spread[0] || ""));
+check("…and the first hop is somewhere in its OWN region",
+  String(wanderer.deeds[0].spread[0] || "").startsWith(deedRegionPrefix + "."),
+  `deed from ${deedHome} hopped to ${wanderer.deeds[0].spread[0]}`);
 check("news generated for both", wanderer.worldState.news.length === 2);
 const unseen = takeUnseenNews(wanderer);
 check("unseen news delivered once", unseen.length === 2 && takeUnseenNews(wanderer).length === 0);

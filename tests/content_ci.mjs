@@ -601,23 +601,18 @@ for (const pack of PACKS) {
       if (comp[j] === -1 && (built.type[j] === 1 || built.type[j] === 2)) { comp[j] = 1; stack.push(j); }
     }
   }
-  // ⛔ THE SPEC'S LITERAL ASSERT IS RED AGAINST AEVI'S OWN DELIVERED WORLD, and running one against the
-  // other is how it surfaced: "every land-wanting location on the mainland" fails for ELEVEN — but they
-  // are the Umbral cluster (seven locations on one 1,152-cell island the umbral carving creates BY
-  // DESIGN), the Stark Reach trio on a second, and five waypoint isles. The mainland holds 96.1% of land.
-  // ⚠️ THE BRIDGES ARE THE PROOF THE RESIDUAL IS DELIBERATE: removing them maroons 54, with them 11 —
-  // the machinery joins everything meant to be joined and leaves the archipelago. So the gate protects the
-  // INVARIANT (nobody on a speck; the mainland dominant; the archipelago exactly the known census) rather
-  // than a sentence the world itself contradicts. If a bridge dies, its ~43 rescued locations flood this
-  // census and the gate goes red naming them — the same protection as a second build, without the 8s.
+  // ⚠️ REV 2 EMPTIED THE CENSUS, AND THE HISTORY IS THE LESSON. Rev 1 shipped `thr 1.30`, my census
+  // found 11 marooned, and Aevi's reply confirmed the world I measured was one she had already corrected
+  // locally and not re-shipped — her own §1 failure mode, inside the handoff about it. At `thr 0.85` the
+  // Umbral cluster reconnects (the carving cuts inlets, not an archipelago; the flood drowned the isthmus)
+  // and 104 of 104 land-wanting locations stand on ONE mainland. The census FORM stays — Aevi: "census-
+  // not-sentence beats the binary in the spec" — with an empty expected set: anyone appearing here is
+  // marooned by a REGRESSION, and a dead bridge floods this list with ~43 names at once.
   const marooned = canon.gp.landwant.filter((p) => comp[idxOf(p[0], p[1])] !== 1);
-  const ARCHIPELAGO = new Set(["-48,0", "-45,-52", "-6,-159", "-1,3", "-9,0", "-23,-177", "-22,3", "-2,-167", "-14,-161", "-5,-1", "-45,-15"]);
-  const unexpected = marooned.filter((p) => !ARCHIPELAGO.has(p[0] + "," + p[1]));
-  const missing = [...ARCHIPELAGO].filter((k) => !marooned.some((p) => p[0] + "," + p[1] === k));
+  check("SNG-391: off-mainland is EXACTLY the designed archipelago — a dead bridge floods this census",
+    marooned.length === 0, marooned.slice(0, 8).map((p) => "[" + p + "]").join(" · "));
   let mainCells = 0, landCells = 0;
   for (let i = 0; i < comp.length; i++) { if (built.type[i] === 1 || built.type[i] === 2) { landCells++; if (comp[i] === 1) mainCells++; } }
-  check("SNG-391: off-mainland is EXACTLY the designed archipelago — a dead bridge floods this census",
-    unexpected.length === 0, unexpected.slice(0, 6).map((p) => "[" + p + "]").join(" · ") + (missing.length ? " · " + missing.length + " expected islander(s) now on the mainland — also a change worth knowing" : ""));
   check("SNG-391: the mainland carries ≥90% of all land", mainCells / landCells >= 0.9,
     (mainCells / landCells * 100).toFixed(1) + "%");
 
@@ -654,6 +649,31 @@ for (const pack of PACKS) {
   }
   check("SNG-391: the base pack and live generation agree — the seam stays closed", agree / tot >= 0.98,
     (agree / tot * 100).toFixed(2) + "% agreement");
+
+  // ⛔ THE TWO GATES HYDROLOGY FEEDS, runnable now that rebuild.py's §3 steps 4–6 are ported.
+  // LAKE CONTAINMENT — "4 settlements underwater": only the Sunken Choir, authored as a flooded
+  // amphitheatre, may stand inside a lake. Read from the packed c0 water bits, i.e. the shipped truth.
+  const inLake = [];
+  for (const s2 of canon.seeds) {
+    const cx = Math.min(479, Math.floor((((s2.lon + 180) % 360 + 360) % 360) / 360 * 480));
+    const cy = Math.min(239, Math.floor((90 - s2.lat) / 180 * 240));
+    if (((built.c0[cy * 480 + cx] >> 4) & 3) === 2 && s2.id !== "sunken_choir") inLake.push(s2.id);
+  }
+  check("SNG-391: no settlement stands in a lake but the Sunken Choir, which is authored as flooded",
+    inLake.length === 0, inLake.join(" · "));
+  // POLYGON SANITY — "13 slashed marshes": every emitted outline closed and compact. buildv filters at
+  // 12; the gate re-verifies the EMITTED vectors so a filter regression cannot pass silently.
+  const compactOf = (q) => {
+    let per = 0, A = 0;
+    for (let k = 0; k < q.length; k++) { const a = q[(k - 1 + q.length) % q.length], b = q[k];
+      per += Math.hypot(b[0] - a[0], b[1] - a[1]); A += a[1] * b[0] - b[1] * a[0]; }
+    return per * per / Math.max(1e-6, Math.abs(A) / 2) / (4 * Math.PI);
+  };
+  const badPoly = [...(built.hydrology.lakes || []), ...(built.hydrology.marsh || [])]
+    .map(compactOf).filter((c) => c > 12);
+  check("SNG-391: every lake and marsh outline is closed and compact — no slashed polygons",
+    badPoly.length === 0, badPoly.length + " over compactness 12");
+  console.log(`note  SNG-391: hydrology — ${built.hydrology.rivers.length} rivers, ${built.hydrology.lakes.length} lakes, ${built.hydrology.marsh.length} marshes; authored water ${built.authoredWaterPresent ? "APPLIED" : "⚠️ ABSENT (waterauth.json not yet in the repo — derived hydrology only)"}`);
 }
 
 // (3c-viii) SNG-183 L4 for RULES FILES — Erik: "registered-but-unloaded should not pass, and that gap

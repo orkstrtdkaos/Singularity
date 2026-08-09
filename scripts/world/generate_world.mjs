@@ -28,6 +28,7 @@ import { createHash } from "crypto";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { makeTerrain } from "./terrain.mjs";
+import { buildHydrology } from "./hydrology.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const rj = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -52,7 +53,12 @@ export function loadCanon() {
       lat: wp.colatitude - 90, lon: norm(wp.longitude) });
   }
   seeds.sort((a, b) => a.id.localeCompare(b.id));   // deterministic order, independent of file layout
-  return { locs, seeds, substrate: rj("content/packs/core/rules/the_substrate.json"), gp: rj("content/packs/core/world/genparams.json") };
+  // ⚠️ WATERAUTH IS CANON AND IS NOT IN THE REPO YET — rebuild.py read it from Aevi's sandbox. The
+  // pipeline runs without it (derived hydrology only) and says so; when the file lands, the authored digs
+  // and kinds apply on the next rebuild with no code change.
+  let waterAuth = null;
+  try { waterAuth = rj("content/packs/core/world/waterauth.json"); } catch { /* not yet shipped */ }
+  return { locs, seeds, waterAuth, substrate: rj("content/packs/core/rules/the_substrate.json"), gp: rj("content/packs/core/world/genparams.json") };
 }
 
 /** ⛔ THE SEED GATE. genparams.pts must be exactly the canon derivation — a genparams edited by hand while
@@ -99,78 +105,75 @@ export function buildWorld(canon) {
     if (type[i] === 0 && elev[i] >= 128) elev[i] = 127;   // water never reads as land elevation
   }
 
-  // 4 — region assignment: nearest seed on the sphere. DERIVED-BY-RULE (see the header).
-  const sv = canon.seeds.map((s) => ({ ...s,
-    x: Math.cos(s.lat * R) * Math.cos(s.lon * R), y: Math.cos(s.lat * R) * Math.sin(s.lon * R), z: Math.sin(s.lat * R) }));
-  const nearestSeed = (lon, lat) => {
-    const x = Math.cos(lat * R) * Math.cos(lon * R), y = Math.cos(lat * R) * Math.sin(lon * R), z = Math.sin(lat * R);
-    let best = null, bd = -2;
-    for (const s of sv) { const d = s.x * x + s.y * y + s.z * z; if (d > bd) { bd = d; best = s; } }
-    return best;
-  };
-
+  // 4 — biome / nanite / density, PORTED FROM rebuild.py (a7692575) rather than my earlier voronoi:
+  // an inverse-distance-weighted VOTE, w = 1/((d²+6)^1.6), over all 118 seeds — softer than voronoi at
+  // region boundaries, which is where my nearest-seed rule lost ~20% of her nanite channel. Each seed
+  // votes its own biome (byLocation override, else its region's `natural` state) and its region.
+  // ⚠️ HER NANITE TABLE MAPS clear→3; THIS PIPELINE KEEPS clear→0 — the shipped decode and the
+  // banner already read 0 as clear, both render grey, and one vocabulary is better than two.
   const NAN_STATE = { clear: 0, ordered: 1, wild: 2 };
   const nanByRegion = canon.substrate.naniteField?.byRegion || {};
   const biomeByRegion = canon.substrate.biome?.byRegion || {};
   const biomeByLocation = canon.substrate.biome?.byLocation || {};
   const densByRegion = canon.substrate.substrateDensity || {};
-
-  // density sources: authored substrateSource per location, gaussian delta·exp(−(d/r)²), compact at 2.5r
+  const voters = canon.seeds.map((s2) => ({
+    lat: s2.lat, lon: s2.lon, region: s2.region,
+    biome: (typeof biomeByLocation[s2.id] === "string" ? biomeByLocation[s2.id] : null)
+      || biomeByRegion[s2.region]?.natural || "plain",
+  }));
   const sources = [];
   for (const l of Object.values(canon.locs)) {
     const src = l.substrateSource;
     if (!src || typeof src !== "object" || !Number.isFinite(src.delta) || !l.worldPos) continue;
-    const lat = l.worldPos.colatitude - 90, lon = norm(l.worldPos.longitude);
-    sources.push({ lat, lon, delta: src.delta, rDeg: (src.radiusWorld || 0.06) * 180 / Math.PI,
-      x: Math.cos(lat * R) * Math.cos(lon * R), y: Math.cos(lat * R) * Math.sin(lon * R), z: Math.sin(lat * R) });
+    sources.push({ lat: l.worldPos.colatitude - 90, lon: norm(l.worldPos.longitude),
+      delta: src.delta, rw: src.radiusWorld || 0.05 });
   }
-  const gcDeg = (a, x, y, z) => Math.acos(Math.max(-1, Math.min(1, a.x * x + a.y * y + a.z * z))) * 180 / Math.PI;
+  const p85 = landRaw[Math.floor(landRaw.length * 0.85)];      // her mountain threshold — 85th, not my 93rd
 
-  // biome vocabulary is built from what the rules actually produce, in first-use order
+  // 5–6 — HYDROLOGY on the fine grid, before the pack, because it ADJUSTS elevation (authored digs,
+  // smoothing, pit fill) and c3 must ship the adjusted DEM exactly as rebuild.py wrote B_ELEV back.
+  const seedPos = {}; for (const s2 of canon.seeds) seedPos[s2.id] = { lat: s2.lat, lon: s2.lon };
+  const hyd = buildHydrology({ type, elev, W: EW, H: EH, seedPos, waterAuth: canon.waterAuth });
+  for (let i = 0; i < elev.length; i++) elev[i] = Math.max(0, Math.min(255, Math.round(hyd.E[i])));
+
   const blist = []; const bIdx = (name) => { let i = blist.indexOf(name); if (i < 0) { blist.push(name); i = blist.length - 1; } return i; };
-  const p93 = landRaw[Math.floor(landRaw.length * 0.93)];
-
   const c0 = new Uint8Array(W * H), c1 = new Uint8Array(W * H), c2 = new Uint8Array(W * H);
-  const fineAt = (x, y) => {                                     // 8 — the pack samples the FINE grid (nearest)
+  const fineAt = (x, y) => {
     const lon = -180 + ((x + 0.5) / W) * 360, lat = 90 - ((y + 0.5) / H) * 180;
     const fx = Math.min(EW - 1, Math.floor(((lon + 180) / 360) * EW));
     const fy = Math.min(EH - 1, Math.floor(((90 - lat) / 180) * EH));
     return { i: fy * EW + fx, lon, lat };
   };
-  const waterNear = (fx, fy) => {                                // coast = land within one coarse cell of water
-    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-      const yy = fy + dy, xx = ((fx + dx) % EW + EW) % EW;
-      if (yy >= 0 && yy < EH && type[yy * EW + xx] === 0) return true;
-    }
-    return false;
-  };
   for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
     const { i, lon, lat } = fineAt(x, y);
     const ty = type[i];
-    const seed = nearestSeed(lon, lat);
-    const region = seed ? seed.region : null;
-    // nanite: the region's authored state; water and unexplored carry clear
-    const nan = ty === 1 || ty === 2 ? (NAN_STATE[nanByRegion[region]?.state] ?? 0) : 0;
-    c0[y * W + x] = (ty & 3) | (nan << 2);
-    // biome: terrain conditions first, then the authored natural state, then the per-location override
+    // her weighted vote, her flat-lat metric kept for fidelity at this granularity
+    let bw = {}, rw2 = {};
+    if (ty === 1 || ty === 2) {
+      const cl = Math.cos(lat * R);
+      for (const v of voters) {
+        let dl = Math.abs(lon - v.lon); if (dl > 180) dl = 360 - dl;
+        const d2 = (lat - v.lat) ** 2 + (dl * cl) ** 2;
+        const w = 1 / Math.pow(d2 + 6, 1.6);
+        bw[v.biome] = (bw[v.biome] || 0) + w; rw2[v.region] = (rw2[v.region] || 0) + w;
+      }
+    }
+    const region = (ty === 1 || ty === 2) ? Object.keys(rw2).reduce((a, b) => (rw2[a] >= rw2[b] ? a : b)) : null;
+    const nan = region ? (NAN_STATE[nanByRegion[region]?.state] ?? 0) : 0;
+    const wa = hyd.WA[i] & 3;                                   // ⚠️ NEW: water kind rides c0 bits 4-5, as rebuild.py packs it
+    c0[y * W + x] = (ty & 3) | (nan << 2) | (wa << 4);
     let biome = "sea";
     if (ty === 3) biome = "unexplored";
     else if (ty === 2) biome = "volcanic";
-    else if (ty === 1) {
-      const over = biomeByLocation[seed?.id];
-      biome = (over && typeof over === "string" ? over : null)
-        || (raw[i] >= p93 ? "mountain" : null)
-        || (waterNear(i % EW, Math.floor(i / EW)) ? "coast" : null)
-        || biomeByRegion[region]?.natural || "plain";
-    }
+    else if (ty === 1) biome = raw[i] >= p85 ? "mountain" : Object.keys(bw).reduce((a, b) => (bw[a] >= bw[b] ? a : b));
     c1[y * W + x] = bIdx(biome);
-    // density: region baseline + source gaussians, clamped 0..1, packed 0..63
-    let d = Number(densByRegion[region]) || 0.4;
+    let d = region ? (Number(densByRegion[region]) || 0.5) : 0;
     if (ty === 1 || ty === 2) {
-      const px = Math.cos(lat * R) * Math.cos(lon * R), py = Math.cos(lat * R) * Math.sin(lon * R), pz = Math.sin(lat * R);
-      for (const s of sources) {
-        const dd = gcDeg(s, px, py, pz);
-        if (dd < s.rDeg * 2.5) d += s.delta * Math.exp(-Math.pow(dd / s.rDeg, 2));
+      const cl = Math.cos(lat * R);
+      for (const s2 of sources) {
+        let dl = Math.abs(lon - s2.lon); if (dl > 180) dl = 360 - dl;
+        const dist = Math.hypot(lat - s2.lat, dl * cl) / 57.3;   // her radians conversion, kept
+        if (dist < s2.rw * 2.5) d += s2.delta * Math.exp(-Math.pow(dist / s2.rw, 2));
       }
     }
     c2[y * W + x] = Math.max(0, Math.min(63, Math.round(Math.max(0, Math.min(1, d)) * 63)));
@@ -183,8 +186,11 @@ export function buildWorld(canon) {
     const fy = Math.min(EH - 1, Math.floor(((90 - s.lat) / 180) * EH));
     const t = type[fy * EW + fx]; return t === 1 || t === 2;
   };
+  // seats carry their own unit vectors — the voronoi table they used to share left with the vote port
+  const sv2 = canon.seeds.map((s2) => ({ ...s2,
+    x: Math.cos(s2.lat * R) * Math.cos(s2.lon * R), y: Math.cos(s2.lat * R) * Math.sin(s2.lon * R), z: Math.sin(s2.lat * R) }));
   const byRegion = {};
-  for (const s of sv) (byRegion[s.region] ||= []).push(s);
+  for (const s of sv2) (byRegion[s.region] ||= []).push(s);
   const seats = {};
   for (const [region, members] of Object.entries(byRegion)) {
     const on = members.filter(landAtSeed);
@@ -198,7 +204,7 @@ export function buildWorld(canon) {
     seats[region] = [best.lat, best.lon, best.id];
   }
 
-  return { type, raw, elev, c0, c1, c2, blist, seats, RLO, RHI, seeds: canon.seeds };
+  return { type, raw, elev, c0, c1, c2, blist, seats, RLO, RHI, seeds: canon.seeds, hydrology: hyd.hydrology, authoredWaterPresent: hyd.authoredWaterPresent };
 }
 
 /** Serialise in the exact schema engine/worldglobe.js already reads. */
@@ -222,7 +228,7 @@ export function serialise(built, canon) {
     encoding: {
       grid: { w: W, h: H, note: "equirectangular; row 0 is lat +90, column 0 is lon -180. MAP FRAME: lat = colatitude - 90 (the Crossing is the south pole)." },
       elevationGrid: { w: EW, h: EH },
-      c0: "bits 0-1 = surface type (0 water, 1 land, 2 volcanic, 3 UNEXPLORED); bits 2-3 = nanite state (0 clear, 1 ordered, 2 wild)",
+      c0: "bits 0-1 = surface type (0 water, 1 land, 2 volcanic, 3 UNEXPLORED); bits 2-3 = nanite state (0 clear, 1 ordered, 2 wild); bits 4-5 = water kind (0 none, 1 river, 2 lake, 3 marsh) — rebuild.py's packing, rev 2",
       c1: "index into biomes[]",
       c2: "lattice density 0-63 (divide by 63)",
       c3: "elevation 0-254 at 720x360; 128 is sea level; water packs 0-127 by the same normalisation",
@@ -231,6 +237,8 @@ export function serialise(built, canon) {
     features: existsSync(join(root, "content/packs/core/world/terrain.json")) ? (rj("content/packs/core/world/terrain.json").features || {}) : {},
     locations: meta,
     seats: built.seats,
+    hydrology: built.hydrology,
+    authoredWater: built.authoredWaterPresent ? "applied" : "⚠️ ABSENT — content/packs/core/world/waterauth.json has not shipped; derived hydrology only. The authored digs and kinds apply on the next rebuild once the canon lands.",
     points: built.seeds.map((s) => [s.id, s.region, s.lat, s.lon, "land"]),
     layers: { c0: b64(built.c0), c1: b64(built.c1), c2: b64(built.c2), c3: b64(built.elev) },
   };

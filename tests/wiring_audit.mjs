@@ -110,6 +110,21 @@ const specAbilities = specSrc.match(/(\d+) abilities \/ \d+ traditions/);
 check(`SYSTEM_SPEC header certifies the real engine-module count (${engineCount})`,
   specModules && Number(specModules[1]) === engineCount,
   `header says ${specModules?.[1] ?? "?"}, HEAD has ${engineCount}`);
+// ⛔ THE TRADITION COUNT DRIFTED SILENTLY BECAUSE NOTHING CHECKED IT. The header's whole purpose is
+// machine-gated freshness — "the 38/137-era drift must not recur silently" — and it has been certifying
+// 24 traditions since Aevi authored the 25th and 26th. The ability count was gated and caught within a day;
+// the number beside it was not gated and was wrong for weeks. A certification is only as good as its
+// narrowest claim, so the claim it makes is now the claim it checks.
+const traditionCounts = (() => {
+  try {
+    const t = JSON.parse(read("content/packs/core/rules/traditions.json"));
+    return { core: (t.traditions || []).length, folk: (t.folkTraditions || []).length };
+  } catch { return { core: null, folk: null }; }
+})();
+const specTraditions = specSrc.match(/\d+ abilities \/ (\d+) traditions \(\+(\d+) folk\)/);
+check(`SYSTEM_SPEC header certifies the real tradition count (${traditionCounts.core} +${traditionCounts.folk} folk)`,
+  !!specTraditions && Number(specTraditions[1]) === traditionCounts.core && Number(specTraditions[2]) === traditionCounts.folk,
+  `header says ${specTraditions?.[1] ?? "?"} +${specTraditions?.[2] ?? "?"} folk, HEAD has ${traditionCounts.core} +${traditionCounts.folk}`);
 check(`SYSTEM_SPEC header certifies the real ability count (${abilityCount})`,
   specAbilities && Number(specAbilities[1]) === abilityCount,
   `header says ${specAbilities?.[1] ?? "?"}, HEAD has ${abilityCount}`);

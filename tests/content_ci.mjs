@@ -385,6 +385,101 @@ for (const pack of PACKS) {
   }
 }
 
+// (3c-vii-b) SNG-384 — THE POWER-SOURCE MAP, VALIDATED WHILE IT IS BEING AUTHORED. Erik and Aevi are
+// laying out the world map of power sources right now; the field went from 26 sources to 44 in a day.
+// This is their feedback loop, not a verdict on their work — every constant below is DERIVED FROM THEIR
+// OWN CONTENT rather than chosen by me.
+//
+// ⛔ THE FAILURE MODE IS DOCUMENTED IN THE CONTENT ITSELF, in every entry's `radiusNote`: "Larger radii
+// blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the
+// field flat — the failure CCode measured and reverted." A flat field is the one outcome that looks fine
+// per-entry and is worthless in aggregate, so it is checked in aggregate.
+{
+  let locs = [];
+  try { locs = readdirSync(join(root, "content/packs/valley/locations")).filter(f => f.endsWith(".json")).map(f => rj(`content/packs/valley/locations/${f}`)); } catch { }
+  const flat = [];
+  for (const d of locs) for (const l of (d.locations ? Object.values(d.locations) : [d])) if (l && typeof l === "object") flat.push(l);
+  const withSrc = flat.filter(l => l.substrateSource != null);
+  const objs = withSrc.filter(l => typeof l.substrateSource === "object");
+
+  // ⚠️ SHAPE FIRST, AND THE BARE-STRING CASE IS REAL: `the_old_warden_post` authors
+  // `substrateSource: "thin-unreached"`. `groundHere` ignores it rather than coercing (guessing a delta
+  // would be inventing a bastion), so it is a source that silently is not one. Ratcheted, not failed — it
+  // predates this check and is Aevi's to convert or remove.
+  const malformed = withSrc.filter(l => typeof l.substrateSource !== "object").map(l => l.id || l.name);
+  // ⚠️ CONSTANT, DOUBLE-QUOTED NAMES. All four of these shipped as template literals and the 272
+  // guard reported every one as MISSING — it scans for check("…") literals, so a name built at runtime
+  // cannot be found and reads exactly like a deleted gate. This is the second day running I have done
+  // it, and there is a comment in smoke.mjs three lines above that guard saying not to. The numbers
+  // belong in the DETAIL argument, where they are useful and cannot break a lookup.
+  check("SNG-384: a substrateSource is an OBJECT, not a bare string",
+    malformed.length <= 1, `${malformed.length} malformed: ${malformed.join(", ")} — ignored by the resolver, so it is a bastion that is not one`);
+
+  const bad = [];
+  for (const l of objs) {
+    const s2 = l.substrateSource, who = l.id || l.name;
+    if (!["pool", "sink"].includes(s2.kind)) bad.push(`${who}: kind "${s2.kind}"`);
+    else if (s2.kind === "pool" && !(s2.delta > 0)) bad.push(`${who}: pool with delta ${s2.delta}`);
+    else if (s2.kind === "sink" && !(s2.delta < 0)) bad.push(`${who}: sink with delta ${s2.delta}`);
+    if (typeof s2.radiusWorld !== "number" || !(s2.radiusWorld > 0)) bad.push(`${who}: no usable radiusWorld`);
+    if (!s2.reason) bad.push(`${who}: no reason — the reason is what the player is shown`);
+    if (!l.worldPos) bad.push(`${who}: no worldPos, so the source cannot be placed at all`);
+  }
+  check("SNG-384: every authored source is well-formed — kind, sign, radius, reason, a place to stand",
+    bad.length === 0, bad.slice(0, 8).join(" · "));
+
+  // ⛔ `radius` IS LEGACY MAP UNITS AND `radiusWorld` IS WHAT MECHANICS READ — the content says so in
+  // every entry. Editing one and not the other leaves the mechanic silently on the stale number, which is
+  // the quietest possible way to author a source that does not do what its author thinks.
+  // ⚠️ THE RATIO IS DERIVED, NOT DECREED: all 43 existing sources agree at exactly 0.0006.
+  const pairs = objs.filter(l => typeof l.substrateSource.radius === "number");
+  const drift = pairs.filter(l => Math.abs(l.substrateSource.radiusWorld - l.substrateSource.radius * 0.0006) > 1e-6)
+    .map(l => `${l.id || l.name} (radius ${l.substrateSource.radius} → expected ${(l.substrateSource.radius * 0.0006).toFixed(4)}, has ${l.substrateSource.radiusWorld})`);
+  check("SNG-384: radius and radiusWorld agree — editing one and not the other leaves mechanics on the stale number",
+    drift.length === 0, drift.slice(0, 6).join(" · "));
+
+  // ⚠️ A CATASTROPHE GUARD, NOT A TUNING PIN. The documented failure is the field going FLAT (~55%
+  // everywhere). Today's spread is sd 0.275 across 118 locations; the floor is set well below that so it
+  // catches the collapse and never argues with ordinary authoring.
+  // ⛔ THE FIRST VERSION OF THIS GUARD COULD NOT FIRE, AND I ONLY FOUND OUT BY TRYING TO MAKE IT.
+  // It measured the standard deviation of resolved DENSITY and asserted the field had not gone flat. But
+  // density is dominated by the region baseline and a source is a perturbation on top: inflating every
+  // radius TWENTYFOLD moved sd from 0.275 to 0.255, so the check passed through the exact catastrophe it
+  // was written for. A gate that survives its own failure mode is decoration.
+  //
+  // ⚠️ THE DOCUMENTED FAILURE IS THAT A SOURCE STOPS BEING LOCAL — "larger radii blanket a whole
+  // region (a source at ~55% strength everywhere inside it)". So measure THAT, per source, on the sphere:
+  // what share of placed locations falls inside each source's own radius. Today the widest covers 3%.
+  // Inflating radii walks it 3% → 9% → 14% → 22% → 100%, so a 25% ceiling has eight-fold headroom
+  // for ordinary authoring and still catches a blanket — and it NAMES the source, which an aggregate
+  // number never could.
+  let coverage = [];
+  try {
+    const wm = await import("../engine/worldmap.js");
+    const placed = flat.filter(l => wm.worldVector(l));
+    const ang = (a, b) => {
+      const va = wm.worldVector(a), vb = wm.worldVector(b);
+      return Math.acos(Math.max(-1, Math.min(1, va.x * vb.x + va.y * vb.y + va.z * vb.z)));
+    };
+    if (placed.length > 20) {
+      coverage = objs.filter(l => wm.worldVector(l)).map(sv => {
+        const r = sv.substrateSource.radiusWorld;
+        const n = placed.filter(l => ang(sv, l) <= r).length;
+        return { id: sv.id || sv.name, pct: n / placed.length, n };
+      }).sort((a, b) => b.pct - a.pct);
+    }
+  } catch (e) { console.log(`note  SNG-384: coverage check skipped (${e.message})`); }
+  if (coverage.length) {
+    const blankets = coverage.filter(c => c.pct > 0.25);
+    check("SNG-384: no source BLANKETS the world",
+      blankets.length === 0,
+      // the widest coverage rides in the detail so the NAME stays a stable identifier
+      (blankets.length ? "" : `widest covers ${(coverage[0].pct * 100).toFixed(0)}% of placed locations`) +
+      `${blankets.map(b => `${b.id} reaches ${(b.pct * 100).toFixed(0)}%`).join(" · ")} — a source that touches most of the world is a baseline, not a bastion, and renormalization cancels it flat`);
+  }
+  console.log(`note  SNG-384: ${objs.length} authored source(s) — ${objs.filter(l => l.substrateSource.kind === "pool").length} pools, ${objs.filter(l => l.substrateSource.kind === "sink").length} sinks`);
+}
+
 // (3c-viii) SNG-183 L4 for RULES FILES — Erik: "registered-but-unloaded should not pass, and that gap
 // is what found this." A rules file registered in the manifest that the LOADER never reads is dead
 // exactly as an uncalled function is (power_sources was such a file until the audit above read it).

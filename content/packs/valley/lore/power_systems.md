@@ -38,7 +38,30 @@ people who declined to inherit an argument.**
    running to its old specification. It goes where its makers put it and where people carry it, so it
    answers to *condition and supply*, not to ground. ⛔ **It is the one source with NO best-ground at
    all** — a nanite craft works the same on a mountain and in a lattice-dense hollow, and fails instead
-   when the works are unmaintained or the supply is cut.
+   when the supply runs short.
+
+### ⛔ NANITE DOES NOT DEPLETE. IT GOES WILD.
+
+**This is the most misunderstood thing about the world, and it is an economy rather than a fuel gauge.**
+
+Structured nanite is not spent like oil. **It is SPENT INTO PURPOSE** — a working takes ordered machinery
+and uses it up in the sense that a river is used up turning a wheel: the water is still there, it is
+simply downstream and no longer doing what you asked. **What was structured becomes wild**, loose in the
+field, doing what it will.
+
+- **Seraphic and Abyssal craft, the fae, and everything the valley calls magic** are structured nanite
+  spent into purpose. ⚠️ **The "magic" of this world is machinery being asked, and answering, and
+  scattering.**
+- **Wild nanite is what structured nanite becomes.** The Wild Half is not a separate substance. **It is
+  the downstream.**
+- ⚠️ **Some have learned to harness the wild directly**, taking it as it is rather than ordering it first.
+  That is the Churnfolk's whole position and the Unsettled schools' bet.
+- ⛔ **AND IT RUNS BOTH WAYS: wild nanite can be collected and PROCESSED BACK into structured nanite.**
+  That is an industry, a reason to hold ground, and a reason to fight over a spent yard.
+
+**So a nanite user is never simply running out. They are somewhere on a loop** — ordered, spent, scattered,
+gathered, re-ordered — **and their real question is not "how much is left" but "who controls the
+processing."**
 3. **Wild nanite** — the tangled, untended field of the Wild Half. It works, and it does not work the
    same way twice.
 4. **Metaphysical** — mind reaching past matter, opened by the Transition. ⚠️ **It wants THIN ground:**

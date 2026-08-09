@@ -435,5 +435,182 @@
   },
   "_pending": "⚠️ NO CONSUMER YET. Authored ahead of a reader DELIBERATELY and flagged: `substrateDensity` has a resolver (resolveSubstrateField) and this does not. ⛔ CCode — this needs its own field resolver and its own band semantics: nanite has NO band against lattice density, and this field is the axis it SHOULD answer to. A nanite craft at `clear 0.05` should be starved the way a precursor craft is starved at density 0.05. Until then this is documentation, and I am saying so rather than letting it look wired."
  },
- "_echoValeNote": "SNG-387: `the_echo_vale` added at density 0.46 — slightly above the valley's 0.40 because it lies between two craft-family civilisations whose works are maintained, and well below the rim domains. ⚠️ The valley's own 0.40 is unchanged: removing these six does not move the belt that remains."
+ "_echoValeNote": "SNG-387: `the_echo_vale` added at density 0.46 — slightly above the valley's 0.40 because it lies between two craft-family civilisations whose works are maintained, and well below the rim domains. ⚠️ The valley's own 0.40 is unchanged: removing these six does not move the belt that remains.",
+ "biome": {
+  "note": "⛔ SNG-388 — REGION BIOME, TWO LAYERS (Erik 2026-08-08): 'the world was left to evolve for millions of years — so NATURAL — but in the later centuries the nanite tech and discovery and use of precursor tech make TERRAFORMING more commonplace.' So every region carries a `natural` landform and a `worked` layer saying what was done to it. ⚠️ THE NANITE FIELD IS ALREADY A TERRAFORMING RECORD and these agree by construction: `wild` nanite = terraformed_runaway (works abandoned and still running), `ordered` = terraformed_heavy/light (still maintained), `clear` = untouched or terraformed_reverted (never worked, or worked and undone). ⛔ AND ERIK'S RULING 3 HOLDS: position is authored, not derived from disposition — so a coastline owes nothing to the great circle and may cut across any number of disposition quarters.",
+  "workedStates": {
+   "untouched": "Never worked. The land is what it always was.",
+   "terraformed_light": "Built on, not reshaped.",
+   "terraformed_roadside": "Infrastructure rather than landscape — wells, verges, holding-yards.",
+   "terraformed_heavy": "Levelled, drained, cut. Maintained. Nothing is where it originally was.",
+   "terraformed_ancient": "Shaped in the deep past by hands nobody can name, and still holding that shape.",
+   "terraformed_runaway": "⛔ Worked, abandoned, and STILL RUNNING. The landscape IS the failure.",
+   "terraformed_reverted": "Worked once and deliberately undone. Reads as natural until you ask why it is so clean."
+  },
+  "_renderNote": "⚠️ `the_foothills` carries `natural: varies` DELIBERATELY. It is the waypoint network, not a territory — 22 towns at road-midpoints across every longitude. ⛔ A region fill would draw a biome that does not exist. Render each foothill town from its NEIGHBOURS' biome.",
+  "byRegion": {
+   "the_center": {
+    "natural": "plain",
+    "naturalNote": "The old floodplain of three converging rivers — flat, fertile, and the natural place for roads to meet before anyone decided it should be.",
+    "worked": "terraformed_ancient",
+    "workedNote": "Levelled and drained in the deep past. The Crossing sits on ground that was made flat for it, and nobody alive knows by whom."
+   },
+   "valley": {
+    "natural": "river_valley",
+    "naturalNote": "A broad river valley between low shoulders — pasture, orchard, and the water that made it. The Echo runs out of it eastward.",
+    "worked": "terraformed_light",
+    "workedNote": "Small soil-conditioning works, minor and long abandoned. Farmland that has been quietly over-fertile for two hundred years and does not ask why."
+   },
+   "the_echo_vale": {
+    "natural": "upland_vale",
+    "naturalNote": "A high vale between two escarpments, the Harmonic Heights on one shoulder and the Radiant Plateau on the other, with the Echo River cut deep between them and marsh where it slows.",
+    "worked": "terraformed_heavy",
+    "workedNote": "⚠️ TERRACED BY TWO CIVILISATIONS AND NEITHER FINISHED. The Heights cut sonic terraces into the west face; the Plateau grew crystal on the east. The valley floor between them was never claimed, which is why anyone who wanted out from under both cities went there."
+   },
+   "the_foothills": {
+    "natural": "varies",
+    "naturalNote": "⛔ NOT A CONTIGUOUS BIOME AND IT MUST NOT BE DRAWN AS ONE. The foothills are the waypoint network — 22 towns scattered across every longitude at midpoints of roads. Each sits in whatever country its road crosses. Render each from its NEIGHBOURS, never as a region fill.",
+    "worked": "terraformed_roadside",
+    "workedNote": "Verge-works, wells and holding-yards laid along the roads. Terraforming as infrastructure rather than as landscape."
+   },
+   "the_quickwood": {
+    "natural": "forest",
+    "naturalNote": "Old-growth closed canopy, dense to the point of dark, with almost no undergrowth because nothing gets light.",
+    "worked": "terraformed_runaway",
+    "workedNote": "⛔ THE FOREST IS THE TERRAFORMING. Soil-conditioning nanite kept ordering growth for centuries after anyone chose what to grow. A crop that never stopped — and the Rootkin did not plant it, they moved into it."
+   },
+   "manifest_domain": {
+    "natural": "forest",
+    "naturalNote": "Ancient wood on deep loam, older than the Quickwood and grown rather than made. Wide-spaced giants, real undergrowth, actual seasons.",
+    "worked": "terraformed_reverted",
+    "workedNote": "⛔ CLEARED BY INTENT. The Ents strip structured nanite continuously, so this is the one great forest that is genuinely natural — and it is natural because it is maintained that way, which the Ents find funny."
+   },
+   "the_feeling_coast": {
+    "natural": "coast",
+    "naturalNote": "A drowned coastline of inlets and sea-cliffs; the Wellspring rises where fresh water meets salt.",
+    "worked": "terraformed_runaway",
+    "workedNote": "Aquaculture beds gone feral. Something down there is still conditioning the water and has not been told what for."
+   },
+   "umbral_depths": {
+    "natural": "coast_karst",
+    "naturalNote": "A limestone coast riddled through — sea-caves at the waterline and a cave system running down past where light has any meaning.",
+    "worked": "terraformed_ancient",
+    "workedNote": "Sub-surface utility works, feral in the dark. The Umbrals did not dig the deeps; they inherited them."
+   },
+   "radiant_wastes": {
+    "natural": "desert",
+    "naturalNote": "Hardpan and glass-flat, scoured, with the sun on it all day and nothing to break the wind.",
+    "worked": "terraformed_runaway",
+    "workedNote": "⚠️ THE WASTE IS THE TERRAFORMING FAILING. Vast solar-conditioning arrays for climate work, abandoned and still running. The Blaze is what an abandoned array does to the ground under it."
+   },
+   "the_palelands": {
+    "natural": "scree",
+    "naturalNote": "High thin country — scree slopes, poor soil, a grey that is stone rather than ash. Cold, open, and quiet.",
+    "worked": "untouched",
+    "workedNote": "⚠️ NATURALLY CLEAR. Nothing to condition, nothing to irrigate, nobody to serve. The tech never had a reason to be here and the land is exactly what it always was."
+   },
+   "the_gearlands": {
+    "natural": "industrial_plain",
+    "naturalNote": "Flat country under permanent haze, cut by canals and rail-cuts, with the Great Engine's stacks visible from a day out.",
+    "worked": "terraformed_heavy",
+    "workedNote": "⛔ THE MOST WORKED GROUND IN THE WORLD. Levelled, drained, cut and re-cut for industry across centuries, and still maintained. Nothing here is where it originally was."
+   },
+   "the_lattice_cities": {
+    "natural": "built_plain",
+    "naturalNote": "City on city — the ground has not been visible for generations. What passes for landscape is roofline.",
+    "worked": "terraformed_heavy",
+    "workedNote": "Municipal terraforming: drainage, foundation, water, all administered and all recorded twice."
+   },
+   "the_ascent": {
+    "natural": "mountain",
+    "naturalNote": "Real mountain — high, cold, and steep enough that the roads are stairs.",
+    "worked": "terraformed_light",
+    "workedNote": "Terraced for the Orders' holdings and no further. The Seraphs kept the mountain a mountain on purpose."
+   },
+   "the_descent": {
+    "natural": "cavern",
+    "naturalNote": "Sink country: collapse-holes, gorges, and the ways down. Broken ground before it is anything else.",
+    "worked": "terraformed_runaway",
+    "workedNote": "Deep-works nanite abandoned in the dark and blooming without light. Whatever else the Appetite-Halls are, they are also a bloom nobody harvests."
+   },
+   "the_numinous_reach": {
+    "natural": "highland_heath",
+    "naturalNote": "Open high moor under enormous sky — thin soil, standing stones, and weather that arrives without warning.",
+    "worked": "terraformed_light",
+    "workedNote": "Barely worked. The hermitages were built on old works and the works still run, which the Numinous regard as the ground's business and not theirs."
+   },
+   "the_kept_reach": {
+    "natural": "plain",
+    "naturalNote": "Level, tidy, unremarkable country. Hedgerows in the same places they were a century ago.",
+    "worked": "terraformed_ancient",
+    "workedNote": "⚠️ PRESERVED RATHER THAN SHAPED. The Hourkeepers do not terraform; they refuse to let terrain change. The tidiness is the craft."
+   },
+   "the_pattern_reach": {
+    "natural": "plateau",
+    "naturalNote": "A high tableland with regular jointing in the rock — the landscape looks designed and is not, which the Figurists find significant.",
+    "worked": "untouched",
+    "workedNote": "No recorded works."
+   },
+   "the_reasoned_hold": {
+    "natural": "plain",
+    "naturalNote": "Enclosed farmland behind walls, laid out in rectangles because someone decided rectangles.",
+    "worked": "terraformed_heavy",
+    "workedNote": "Surveyed, drained and squared. The Bloodless Hold's fields are inventoried to the furrow."
+   },
+   "the_making": {
+    "natural": "volcanic",
+    "naturalNote": "Black rock, geothermal vents, and heat that comes up through the boot. The Forge-Eternal burns because the ground was already burning.",
+    "worked": "terraformed_light",
+    "workedNote": "The Ceaseless build ON it and do not reshape it — the heat is the point and it was here first."
+   },
+   "the_unmade": {
+    "natural": "badlands",
+    "naturalNote": "Ground taken apart: quarry-cuts, spoil, and the tidy absence where something used to stand.",
+    "worked": "terraformed_reverted",
+    "workedNote": "⛔ CLEARED BY UNMAKING. Distinguishable from never-built only by the neatness of the absence."
+   },
+   "the_stark_reach": {
+    "natural": "steppe",
+    "naturalNote": "Open grass to the horizon with nothing to hide behind, which the Verists chose deliberately.",
+    "worked": "untouched",
+    "workedNote": "Thinly seeded, never maintained. There is nothing here to lie about."
+   },
+   "the_veiled_reach": {
+    "natural": "wetland_maze",
+    "naturalNote": "Reedbeds and braided channels where the same route is never quite the same twice.",
+    "worked": "terraformed_light",
+    "workedNote": "Quietly maintained and never discussed. The Veilwrights' works are real; where they are is one of the things they are not telling you."
+   },
+   "somatic_reaches": {
+    "natural": "mountain_valley",
+    "naturalNote": "Steep sheltered valleys with good water and hard walking — country that makes bodies.",
+    "worked": "terraformed_reverted",
+    "workedNote": "⛔ CLEARED BY INTENT. The High Temple rejects augmentation as doctrine and clears its ground by hand every season."
+   },
+   "riven_marches": {
+    "natural": "broken_hills",
+    "naturalNote": "Contested hill country, cut by ravines, with old fieldworks on every ridge.",
+    "worked": "untouched",
+    "workedNote": "Border country for centuries. Nobody's farmland, so nobody's works — the Marchers hold a line, not a supply chain."
+   },
+   "unspooling": {
+    "natural": "fen",
+    "naturalNote": "A vast wet basin gone rank — reed, standing water, and ground that is not reliably ground.",
+    "worked": "terraformed_runaway",
+    "workedNote": "⛔ THE DEEPEST BLOOM ON THE MAP. Irrigation and soil-grid nanite across an entire agricultural basin, abandoned longest. The Churnfolk did not choose chaos; they were born standing in it."
+   },
+   "the_open_reach": {
+    "natural": "savanna",
+    "naturalNote": "Wide dry grassland with scattered trees and long sightlines. Road country.",
+    "worked": "terraformed_roadside",
+    "workedNote": "Waystation wells and verge-works, scattered thin along the old routes and gone feral in patches. The Horizon-Walkers know which patches."
+   },
+   "the_given_land": {
+    "natural": "deep_stone",
+    "naturalNote": "⚠️ NOT A SURFACE BIOME. Bedrock and the Leaden Deep sit below where anything was ever deployed — the surface above is unremarkable and the region's character is entirely underground.",
+    "worked": "untouched",
+    "workedNote": "Naturally clear, and the deepest such on the map."
+   }
+  }
+ }
 }

@@ -114,7 +114,15 @@ about it, and they do not love the Abyssals.**
 - **Harmonic (sonic)** — resonance, echo-perception, standing-wave barriers, calming or shattering tones.
 - **Radiant (photonic)** — light-bending, spectra-sight, coherent beams, mirage and revelation.
 
-## The wider world (rumored, distant)
+## The unexplored north
 
-Beyond the mountains, five great civilizations shape whole climates with their own systems. To valley
-folk these are traveler's tales. The mountain pass just made them real.
+⛔ **AMENDED 2026-08-09 (Erik). The previous line read "beyond the mountains, five great civilizations
+shape whole climates with their own systems" — written when the Valley was the whole game, and the number
+was a Valley-scale guess about a world that has since been mapped.**
+
+North of the known coast the world frays out into open water, and beyond it there is land nobody on this
+map has walked: **landmasses and island chains, unnamed, uncounted.** ⚠️ **Not "five civilizations" — an
+unknown quantity of unknown things.** What is out there is a question the world has not answered, and the
+honest position is that nobody here knows.
+
+The coast is ragged, the crossing is long, and the waygate network does not reach across it.

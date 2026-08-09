@@ -458,8 +458,8 @@
    "valley": {
     "natural": "river_valley",
     "naturalNote": "A broad river valley between low shoulders — pasture, orchard, and the water that made it. The Echo runs out of it eastward.",
-    "worked": "terraformed_light",
-    "workedNote": "Small soil-conditioning works, minor and long abandoned. Farmland that has been quietly over-fertile for two hundred years and does not ask why."
+    "worked": "terraformed_runaway",
+    "workedNote": "Small soil-conditioning works, abandoned and STILL RUNNING — which is why the farmland has been quietly over-fertile for two hundred years and nobody asks why. ⚠️ A mild runaway, not a Quickwood: the valley was minor farmland, so what went feral went feral gently."
    },
    "the_echo_vale": {
     "natural": "upland_vale",
@@ -494,8 +494,8 @@
    "umbral_depths": {
     "natural": "coast_karst",
     "naturalNote": "A limestone coast riddled through — sea-caves at the waterline and a cave system running down past where light has any meaning.",
-    "worked": "terraformed_ancient",
-    "workedNote": "Sub-surface utility works, feral in the dark. The Umbrals did not dig the deeps; they inherited them."
+    "worked": "terraformed_runaway",
+    "workedNote": "Sub-surface utility works, abandoned and feral in the dark. ⚠️ The Umbrals did not dig the deeps — the karst is genuinely natural — but everything RUNNING down there is a works nobody maintains."
    },
    "radiant_wastes": {
     "natural": "desert",
@@ -548,8 +548,8 @@
    "the_pattern_reach": {
     "natural": "plateau",
     "naturalNote": "A high tableland with regular jointing in the rock — the landscape looks designed and is not, which the Figurists find significant.",
-    "worked": "untouched",
-    "workedNote": "No recorded works."
+    "worked": "terraformed_light",
+    "workedNote": "⚠️ THE FIGURISTS ORDER THE FIELD, NOT THE LAND. Their nanite stock is geometrically sorted and maintained; the plateau itself they leave entirely alone, because its jointing is already patterned and they consider improving on it a category error."
    },
    "the_reasoned_hold": {
     "natural": "plain",
@@ -611,6 +611,7 @@
     "worked": "untouched",
     "workedNote": "Naturally clear, and the deepest such on the map."
    }
-  }
+  },
+  "_crossCheck": "⛔ Biome and naniteField must agree: wild -> terraformed_runaway or _roadside; ordered -> terraformed_heavy/light/ancient/roadside; clear -> untouched or terraformed_reverted. ⚠️ THREE DISAGREED ON FIRST AUTHORING and all three were my error, caught by cross-check rather than by reading: valley and umbral_depths were marked worked-but-stable while their nanite says FERAL, and the_pattern_reach was marked untouched while its nanite is maintained. A gate should assert this pairing."
  }
 }

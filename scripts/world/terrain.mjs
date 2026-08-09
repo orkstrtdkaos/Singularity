@@ -1,11 +1,24 @@
 // scripts/world/terrain.mjs — THE WORLD GENERATOR (SNG-391)
 // Pure and deterministic: same params in, same world out, no RNG.
+//
+// ⛔ REVISION 2 (2026-08-09). Revision 1 shipped with `thr = 1.30`, which floods the world to
+// 32.6% land and maroons ELEVEN locations off the mainland. CCode measured exactly that and was
+// right. I had already corrected it locally to 0.85 and did not re-ship — which is SNG-391 §1's
+// own failure mode, committed by me, after writing the spec about it.
+//   thr 1.30 -> 32.6% land, 23 masses, 96.1% mainland, 11 off-mainland
+//   thr 0.85 -> 41.7% land, 15 masses, 100%  mainland,  0 off-mainland
+//
 // ⛔ Three fixes are load-bearing; see po/SPEC_SNG-391 §2b before changing anything:
 //   1. great-circle distance (chord form) — the flat approximation starbursts at the poles
 //   2. 3D noise on the sphere — lon/lat noise is anisotropic near a pole, unfixably
 //   3. view culling with a cos(lat) longitude pad — 4.5x faster, verified identical
-// Tuned constants (swept, not guessed): thr 1.30, taper 2.2, cont 0.62, F3 57.2957795
-// Absolute elevation range for normalisation: RLO 0.0915  RHI 1.9265 — RECOMPUTE on any change.
+//
+// Tuned constants (swept at FULL 720x360 resolution — a coarse sweep is what produced rev 1):
+//   thr 0.85 · taper 2.2 · cont 0.62 · F3 57.2957795
+// Absolute elevation range, recomputed for this revision: RLO 0.0980  RHI 2.0010
+// RECOMPUTE both on any generator change; they are the 2nd and 98.5th percentiles of land raw.
+
+export function makeTerrainESM(GP, view){ return makeTerrain(GP, view); }
 // Terrain generator with VIEW CULLING — only the parameters that can affect the current
 // window are considered, which is what makes a regional zoom affordable.
 function makeTerrain(GP, view){
@@ -94,7 +107,7 @@ function makeTerrain(GP, view){
   s+=cont*0.62;
   s-=Math.pow(Math.max(0,(lat-4)/56),1.3)*2.2;
   s+=g+b2;
-  const thr=1.30+0.18*n3(V,4,0.09,0);
+  const thr=0.85+0.18*n3(V,4,0.09,0);
   const known=s-thr;
   let un=0;
   for(let i=0;i<north.length;i++){const n=north[i];const dl=dlon(lon,n[1]);
@@ -112,10 +125,7 @@ function makeTerrain(GP, view){
   return {type:0, raw:Math.max(known,unk)};
  };
 }
-// ⛔ SNG-391 INTEGRATION FIX: this file is .mjs, so Node loads it as ESM — where 'module' is undefined
-// and the guard below silently exports NOTHING. The generator as delivered could not be imported under
-// its own extension; the guard hid the failure instead of raising it. The CJS line stays for any
-// non-module consumer; the export statement is what makes the file loadable as what it is named.
-if(typeof module!=='undefined') module.exports={makeTerrain};
-export { makeTerrain };
 
+
+export { makeTerrain };
+export default { makeTerrain };

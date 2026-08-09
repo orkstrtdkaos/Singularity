@@ -612,6 +612,281 @@
     "workedNote": "Naturally clear, and the deepest such on the map."
    }
   },
-  "_crossCheck": "⛔ Biome and naniteField must agree: wild -> terraformed_runaway or _roadside; ordered -> terraformed_heavy/light/ancient/roadside; clear -> untouched or terraformed_reverted. ⚠️ THREE DISAGREED ON FIRST AUTHORING and all three were my error, caught by cross-check rather than by reading: valley and umbral_depths were marked worked-but-stable while their nanite says FERAL, and the_pattern_reach was marked untouched while its nanite is maintained. A gate should assert this pairing."
+  "_crossCheck": "⛔ Biome and naniteField must agree: wild -> terraformed_runaway or _roadside; ordered -> terraformed_heavy/light/ancient/roadside; clear -> untouched or terraformed_reverted. ⚠️ THREE DISAGREED ON FIRST AUTHORING and all three were my error, caught by cross-check rather than by reading: valley and umbral_depths were marked worked-but-stable while their nanite says FERAL, and the_pattern_reach was marked untouched while its nanite is maintained. A gate should assert this pairing.",
+  "byLocation": {
+   "_note": "⛔ SNG-388 §2 (Erik: 'author the geography around the foothills'). The foothills carry `natural: varies` at region level because they are the waypoint network, not a territory. ⚠️ BUT EACH ONE'S LAND IS DERIVABLE, NOT INVENTED: every foothill town names its own span in its worldPosNote, and a midpoint between two regions sits in the TRANSITION between their two landforms. Kindlerow spans the_center -> radiant_wastes, so it is plain going to desert. Authored from that, one per town — these are BOUNDARY biomes and that is why the foothills feel like a different kind of place.",
+   "biomes": {
+    "cairn_and_scour": {
+     "natural": "scree_badland",
+     "naturalNote": "Where the grey scree runs out into quarried spoil. Two crews share a yard because two countries share a boundary here.",
+     "between": [
+      "scree",
+      "badlands"
+     ],
+     "spans": [
+      "the_quiet_ground",
+      "the_scour"
+     ]
+    },
+    "dusklow": {
+     "natural": "karst_verge",
+     "naturalNote": "The plain breaks into sink-holes and the first of the cave-mouths. The lit edge of the dark, exactly as its name says.",
+     "between": [
+      "plain",
+      "coast_karst"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_underlight"
+     ]
+    },
+    "gearsflat": {
+     "natural": "industrial_verge",
+     "naturalNote": "Flat ground going to haze and cinder as the Gearlands begin. Salvage in rows because the land is flat enough to lay it out.",
+     "between": [
+      "plain",
+      "industrial_plain"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_great_engine"
+     ]
+    },
+    "greenforge": {
+     "natural": "forest_scald",
+     "naturalNote": "Timber on one side, black rock and vents on the other. Growers and makers work the same wood because this is where the wood stops.",
+     "between": [
+      "forest",
+      "volcanic"
+     ],
+     "spans": [
+      "the_heartroot",
+      "the_forge_eternal"
+     ]
+    },
+    "greenmarch": {
+     "natural": "wood_edge",
+     "naturalNote": "Open ground meeting closed canopy — the literal edge of the Quickwood, and the last place you can see the sky.",
+     "between": [
+      "plain",
+      "forest"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_heartroot"
+     ]
+    },
+    "greyhearth": {
+     "natural": "plain_to_scree",
+     "naturalNote": "Good ground thinning toward stone. The burying trades settled where the digging is still possible and the country beyond is not.",
+     "between": [
+      "plain",
+      "scree"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_quiet_ground"
+     ]
+    },
+    "hardline": {
+     "natural": "hill_verge",
+     "naturalNote": "Where the plain crumples into the first ravines. Drill-yards on flat ground with broken country in sight, deliberately.",
+     "between": [
+      "plain",
+      "broken_hills"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_redline"
+     ]
+    },
+    "kindlerow": {
+     "natural": "scrub_verge",
+     "naturalNote": "Dry scrub going to hardpan. The forges are here because the fuel is here and the desert is not yet.",
+     "between": [
+      "plain",
+      "desert"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_blaze"
+     ]
+    },
+    "longshore": {
+     "natural": "grass_verge",
+     "naturalNote": "Long grass and the first scattered trees. Road country, wide enough to see who is coming.",
+     "between": [
+      "plain",
+      "savanna"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_long_span"
+     ]
+    },
+    "plainstead": {
+     "natural": "open_plain",
+     "naturalNote": "Level and treeless, sightlines to the horizon. Arbitration happens where nobody can be flanked.",
+     "between": [
+      "plain",
+      "steppe"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_unblinking_stone"
+     ]
+    },
+    "stair_hollow": {
+     "natural": "mountain_foot",
+     "naturalNote": "The plain running up against real rock. Every road out of here is stairs before long.",
+     "between": [
+      "plain",
+      "mountain"
+     ],
+     "spans": [
+      "the_crossing",
+      "choirheight"
+     ]
+    },
+    "the_drawn_hour": {
+     "natural": "plateau_edge",
+     "naturalNote": "Jointed rock giving way to hedgerow and level field. Pattern-readers and hour-keepers meet where the pattern stops.",
+     "between": [
+      "plateau",
+      "plain"
+     ],
+     "spans": [
+      "cloudform",
+      "the_slow_hour"
+     ]
+    },
+    "the_grindstone": {
+     "natural": "ravine_mouth",
+     "naturalNote": "A gorge opening into sheltered valley. The wheel runs on water that has come a long way down.",
+     "between": [
+      "broken_hills",
+      "mountain_valley"
+     ],
+     "spans": [
+      "the_redline",
+      "the_flesh_temple"
+     ]
+    },
+    "the_held_yard": {
+     "natural": "upland_bench",
+     "naturalNote": "A flat shelf between broken hills and steep valley — the only ground for miles wide enough to stack a season's stock.",
+     "between": [
+      "broken_hills",
+      "mountain_valley"
+     ],
+     "spans": [
+      "the_stillhold",
+      "the_cogitarium"
+     ]
+    },
+    "the_kept_shrine": {
+     "natural": "moor_edge",
+     "naturalNote": "Open heath dropping to tidy field. Standing stones on one side, hedgerows on the other, and a shrine attended without a missed day.",
+     "between": [
+      "highland_heath",
+      "plain"
+     ],
+     "spans": [
+      "the_numen",
+      "the_slow_hour"
+     ]
+    },
+    "the_low_market": {
+     "natural": "sink_mouth",
+     "naturalNote": "The plain ends at a hole. The market is above; the ways down begin at the far wall.",
+     "between": [
+      "plain",
+      "cavern"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_maw"
+     ]
+    },
+    "the_measured_engine": {
+     "natural": "haze_grass",
+     "naturalNote": "Industrial haze thinning into savanna. An engine kept running where the smoke has somewhere to go.",
+     "between": [
+      "industrial_plain",
+      "savanna"
+     ],
+     "spans": [
+      "the_great_engine",
+      "the_long_span"
+     ]
+    },
+    "the_second_reading": {
+     "natural": "desert_margin",
+     "naturalNote": "Hardpan giving way to walled field. The last shade before the Wastes and the first record-house after them.",
+     "between": [
+      "desert",
+      "plain"
+     ],
+     "spans": [
+      "the_blaze",
+      "the_axiom"
+     ]
+    },
+    "the_spent_yard": {
+     "natural": "fen_spoil",
+     "naturalNote": "Wet ground and quarried ground meeting badly. Standing water in the cuts, and the scattering settles in it.",
+     "between": [
+      "fen",
+      "badlands"
+     ],
+     "spans": [
+      "the_churn_edge",
+      "the_scour"
+     ]
+    },
+    "the_worn_yard": {
+     "natural": "plain_spoil",
+     "naturalNote": "Old workings on level ground, mostly gathered out. The plain is still plain; it is just full of holes.",
+     "between": [
+      "plain",
+      "badlands"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_scour"
+     ]
+    },
+    "thinwater": {
+     "natural": "heath_verge",
+     "naturalNote": "The plain rising to open moor. The water runs thin here and so does everything else.",
+     "between": [
+      "plain",
+      "highland_heath"
+     ],
+     "spans": [
+      "the_crossing",
+      "the_numen"
+     ]
+    },
+    "waystone": {
+     "natural": "stone_grass",
+     "naturalNote": "Thin grass over shallow bedrock, with the Precursor marker standing where it has always stood.",
+     "between": [
+      "deep_stone",
+      "savanna"
+     ],
+     "spans": [
+      "bedrock",
+      "the_long_span"
+     ]
+    }
+   }
+  },
+  "_betweenCountry": {
+   "note": "⛔ SNG-388 §3 (Erik: 'somehow fill in what the spaces in between look like'). ⚠️ THE REGIONS ARE WHERE PEOPLE ARE, NOT WHERE LAND IS. Every point on the surface has terrain; 27 authored regions cover the settled fraction and the rest of the hemisphere is unpeopled country. ⛔ IT MUST BE RENDERED AS INTERPOLATION, NEVER AS A CLAIM — the same rule CCode set for the substrate field: smooth between known-true points and caption it as smoothing. A coastline drawn where nobody authored one is a beautiful lie.",
+   "rule": "Between-country takes the weighted blend of the nearest authored biomes by GEODESIC distance. Where the blend is weak — far from everything — it reads as `wilds`: unpeopled, unnamed, and not claimed by any region.",
+   "wilds": "The unpeopled country between the settled reaches. Nobody's land, no roads, no names on it. ⚠️ IT IS NOT EMPTY — it is simply unauthored, and anything placed there later inherits the blend it sits in.",
+   "theEdge": "⛔ THE RIM IS COLATITUDE 90 AND THE WORLD ENDS THERE (Erik 2026-08-08). We are mapping ONE HEMISPHERE. The southern half is UNKNOWN — deliberately unauthored, open to author later. ⚠️ It is NOT ocean and NOT void; it is the part of the world nobody on this map has been to. `depth` runs DOWN from here (worldmap.js: 'southern latitude in effect'), which is the only southward travel the world currently has."
+  }
  }
 }

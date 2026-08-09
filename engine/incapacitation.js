@@ -41,6 +41,14 @@ export const INCAP_OUTCOMES = ["revived", "spared", "left_for_dead", "slain"];
 /** Fallbacks, used only when `rules.incapacitation` is unauthored. ⚠️ EVERY AGGRESSOR CAN KILL — Erik: "we
  *  should also just make sure all the encounters could get you killed". There is no zero in the `slain`
  *  column; what differs is how likely, and why. */
+// ⚠️ SNG-390: the rung ORDER, lifted out of the comment below it was written in. It was accurate and
+// unreadable — a severity ladder that only a person could see is exactly the shape the ⚑ marker had.
+// ⚠️ THE ONE IMPORT IN THIS FILE, and it is safe: ladder.js imports NOTHING, so the injection dance
+// that keeps death.js at arm's length is not needed here. A direct import is honest about the dependency.
+import { harmRungDrop } from "./ladder.js";
+
+export const HARM_RUNGS = ["revived", "spared", "left_for_dead", "slain"];   // lightest → harshest
+
 const DEFAULT_WEIGHTS = {
   // who put you down          revived  spared  left_for_dead  slain
   beast:      { revived: 2, spared: 0, left_for_dead: 6, slain: 2 },   // it mauls you and moves on
@@ -112,7 +120,22 @@ export function incapacitationOutcome({
   if (able.length) weights.revived = (weights.revived || 0) * (Number(cfg.companionReviveMult) || 1);
   else weights.revived = 0;                       // nobody to do it — not a smaller chance, none
 
-  const outcome = pick(weights, rng) || "left_for_dead";
+  const rolled = pick(weights, rng) || "left_for_dead";
+  // ⛔ SNG-390 — THE HARM RUNG, which the ladder has promised since it shipped and nothing delivered.
+  // agility 7: "a blow that would incapacitate lands one rung lighter." agility 14: "a second rung. What
+  // kills others wounds you." The outcomes ARE the rungs, and their order is authored in the weight table
+  // above: revived ← spared ← left_for_dead ← slain, lightest to harshest.
+  //
+  // ⚠️ `revived` IS NOT REACHABLE WITHOUT SOMEONE TO DO IT. The weights already zero it when nobody
+  // is able; softening INTO it would narrate a rescue by nobody, which is worse than the harsher outcome
+  // it replaced. So the drop stops at `spared` when the character is alone.
+  const drop = harmRungDrop(rules?.subAttributeLadder, character);
+  let outcome = rolled;
+  if (drop > 0) {
+    const floorIdx = able.length ? 0 : HARM_RUNGS.indexOf("spared");
+    const at = HARM_RUNGS.indexOf(rolled);
+    if (at > floorIdx) outcome = HARM_RUNGS[Math.max(floorIdx, at - drop)];
+  }
   const inv = Array.isArray(character.inventory) ? character.inventory : [];
   const takeN = outcome === "left_for_dead" || outcome === "slain"
     ? Math.floor(inv.length * (Number(cfg.gearTakenFraction) || 0)) : 0;
@@ -122,6 +145,10 @@ export function incapacitationOutcome({
 
   return {
     outcome, kind,
+    // ⚠️ WHAT THE ROLL SAID AND WHAT YOUR TRAINING MADE OF IT, both reported: a softened blow the
+    // player is not told about is a mechanic they cannot learn, and the ladder sold them this rank.
+    rolledOutcome: rolled,
+    softenedBy: outcome !== rolled ? drop : 0,
     slain: outcome === "slain",
     daysDown: outcome === "slain" ? null : (cfg.daysDown?.[outcome] ?? 1),
     gearTaken,

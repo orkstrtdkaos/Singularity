@@ -97,3 +97,49 @@ export function rateValue(ladder, character, sub) {
   if (!rank) return 0;
   return Number(def.cumulative?.[String(rank)] ?? 0);
 }
+
+/* ═══ SNG-390 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 of them ⚑ to
+ * mean "this one is mechanical, not flavour". ⛔ THE MARKER HAD NO READER — nothing in the engine could
+ * tell a milestone that DOES something from one that only says something, so a promise with no
+ * implementation read exactly like a promise with one. Two of them turned out to be exactly that.
+ *
+ * ⚠️ THE EFFECTS ARE TRANSCRIBED, NOT INVENTED. `milestoneEffects` in the content states what each
+ * ⚑ line already said in prose; this reads that structure. Nothing new is promised here, and where a
+ * milestone names something the engine does not have, the entry carries `blocked` and a reason rather
+ * than being dropped — an unbuilt promise that is written down is a decision waiting to be made, and one
+ * that is deleted is a lie the player already read.
+ */
+
+/** Every milestone effect this character has REACHED, by kind. Blocked entries are excluded from the live
+ *  map and returned separately, so a caller can never accidentally act on an unbuilt promise. */
+export function milestoneEffects(ladder, character) {
+  const live = {}, blocked = [];
+  for (const [sub, def] of Object.entries(ladder?.subs || {})) {
+    const rank = Math.max(0, Math.min(20, Math.round(Number(character?.subAttributes?.[sub] || 0))));
+    for (const [at, eff] of Object.entries(def?.milestoneEffects || {})) {
+      if (rank < Number(at)) continue;                 // not reached
+      if (eff?.blocked) { blocked.push({ sub, at: Number(at), ...eff }); continue; }
+      // ⚠️ THE HIGHEST REACHED WINS, not the sum. `harmRung 1` at agility 7 and `harmRung 2` at 14 are
+      // ABSOLUTE readings of the same effect — "a second rung" — so adding them would give a rank-14
+      // character three rungs and quietly double the milestone they just earned.
+      const prev = live[eff.kind];
+      if (!prev || Number(at) > prev.at) live[eff.kind] = { sub, at: Number(at), ...eff };
+    }
+  }
+  return { live, blocked };
+}
+
+/** How many places at your side your rapport has earned. ⚠️ The BASE is 1 and it is authored, not
+ *  assumed: rapport rank 1 reads "Someone will travel with you." The ⚑ milestones then name the second,
+ *  third and fourth explicitly, so the cap is read rather than computed from a curve. */
+export function companyPlaces(ladder, character) {
+  const e = milestoneEffects(ladder, character).live.companyCapacity;
+  return e && Number.isFinite(e.places) ? e.places : 1;
+}
+
+/** ⛔ HOW MANY RUNGS LIGHTER A BLOW LANDS. agility 7: "a blow that would incapacitate lands one rung
+ *  lighter." agility 14: "a second rung. What kills others wounds you." */
+export function harmRungDrop(ladder, character) {
+  const e = milestoneEffects(ladder, character).live.harmRung;
+  return e && Number.isFinite(e.rungs) ? e.rungs : 0;
+}

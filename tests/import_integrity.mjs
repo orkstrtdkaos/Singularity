@@ -64,7 +64,14 @@ for (const f of readdirSync(join(root, "engine")).filter(x => x.endsWith(".js"))
   const mod = f.replace(/\.js$/, "");
   const src = readFileSync(join(root, "engine", f), "utf8");
   const exported = [...src.matchAll(/export\s+(?:async\s+)?(?:function|const|class)\s+([A-Za-z_$][\w$]*)/g)].map(m => m[1]);
-  if (!app.includes(`./engine/${mod}.js`)) continue;    // app.js does not reference this module at all
+  // ⛔ SNG-390 — THIS SKIP WAS THE GUARD'S OWN BLIND SPOT, and it hid exactly the bug this file
+  // exists to catch. It read "app.js does not reference this module at all, so nothing to check" — but
+  // the FIRST symbol used from a NEW module is precisely the case with no import line yet, which is a
+  // ReferenceError at runtime and invisible here. `companyPlaces` shipped exactly that way: called in
+  // app.js, imported nowhere, and this checker reported all clear.
+  // ⚠️ So an unreferenced module is still SCANNED. The cost is a wider net over symbol names that
+  // might collide with a local; that is what `declaredLocally` and the global import set already handle.
+
   for (const sym of exported) {
     if (allImported.has(sym) || declaredLocally.has(sym)) continue;
     // Called as a bare function, not as `something.sym(` — a property access is a different symbol.

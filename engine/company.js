@@ -9,6 +9,7 @@
 // registry NPCs, each `{ npcId, roles[], teaches, liaisonFor, joinedDay }`.
 
 import { relationshipBand, isPartnerAdjacent } from "./npcs.js";
+import { companyPlaces } from "./ladder.js";
 
 export const COMPANY_ROLES = ["companion", "trainer", "liaison", "partner", "ally"];
 const RECRUIT_BANDS = ["devoted", "ally"]; // a bond this strong is willing to travel with you (relationshipBand)
@@ -58,8 +59,26 @@ export function formerCompany(character) {
   return (character?.company || []).filter(m => m && m.leftDay);
 }
 
-export function recruit(character, npcId, { roles = ["ally"], teaches = null, liaisonFor = null, day = null } = {}) {
+/** ⛔ SNG-390 — THE CAPACITY CHECK LIVES HERE, and the comment thirty lines down is why: "the fallback
+ *  lives here, not at the call site, because there are now two callers and a fallback written at one of
+ *  them is a fallback the other lacks." I put this in `applyPartyOps` first, which was the wrong door —
+ *  measured, `recruit()` has exactly ONE caller (the button) and the GM's `join` op writes
+ *  `pendingCompanyOffers`, which NOTHING READS. A cap on the path nobody travels is not a cap.
+ *
+ *  ⚠️ REFUSES A NEW JOIN, NEVER EJECTS. A save whose rapport no longer covers its company keeps
+ *  everyone: removing someone a player has travelled with, to satisfy a rule introduced afterwards, is the
+ *  cruellest reading of a cap. Returns null on refusal so the caller can say why.
+ *
+ *  ⚠️ AND A REJOIN IS NOT A NEW PLACE — someone walking back into a party they already belong to is
+ *  not taking a seat, they are returning to one. */
+export function recruit(character, npcId, { roles = ["ally"], teaches = null, liaisonFor = null, day = null, ladder = null } = {}) {
   ensureCompany(character);
+  if (ladder) {
+    const existing = character.company.find(m => m.npcId === npcId);
+    const rejoining = !!(existing && existing.leftDay);
+    const isNew = !existing || rejoining;
+    if (isNew && !rejoining && activeCompany(character).length >= companyPlaces(ladder, character)) return null;
+  }
   const clean = [...new Set(roles.map(String).filter(r => COMPANY_ROLES.includes(r) && r !== "partner"))];
   let entry = character.company.find(m => m.npcId === npcId);
   if (!entry) { entry = { npcId, roles: [], teaches: null, liaisonFor: null, joinedDay: day }; character.company.push(entry); }
@@ -271,7 +290,16 @@ export function teacherOfferReady(character, { catalog = {}, traditionIndex = nu
  *  the story's to decide — Aevi: "a departure that requires the player's permission is not a departure."
  *
  *  Returns { departed:[], proposed:[], notes:[] }. Departures are applied; joins are only proposed. */
-export function applyPartyOps(character, ops = [], { day = null, registry = null } = {}) {
+/** ⛔ SNG-390 — HOW MANY PLACES ARE AT YOUR SIDE, and the ladder has said so since it shipped:
+ *  rapport 1 "Someone will travel with you", 4 "⚑ COMPANY: a second place at your side", 7 a third,
+ *  10 a fourth. Nothing enforced it, so `companyCapacity` was a pool the ladder PAID INTO and no reader
+ *  ever spent — the same finding as SNG-380 §1c, one field over.
+ *
+ *  ⚠️ ENFORCED ON JOIN, NEVER RETROACTIVELY. An existing save with more companions than its rapport
+ *  now allows keeps every one of them: ejecting someone a player has travelled with to satisfy a rule
+ *  introduced after the fact is the cruellest possible reading of a cap. It only ever refuses a NEW one,
+ *  and it says why — an unexplained refusal is indistinguishable from a bug. */
+export function applyPartyOps(character, ops = [], { day = null, registry = null, ladder = null } = {}) {
   ensureCompany(character);
   const out = { departed: [], proposed: [], notes: [] };
   const reg = registry || character?.npcRegistry || {};
@@ -291,6 +319,14 @@ export function applyPartyOps(character, ops = [], { day = null, registry = null
       }
     } else if (op === "join") {
       if (activeCompany(character).some(m => m.npcId === npcId)) continue;   // already with you
+      // ⚠️ THE CAP COUNTS PROPOSALS TOO. Two joins in one turn against one free place would both pass
+      // a check against the CURRENT roster and put the player one over without either op being wrong.
+      const places = ladder ? companyPlaces(ladder, character) : Infinity;
+      if (activeCompany(character).length + out.proposed.length >= places) {
+        out.notes.push(`${nameOf(npcId)} would travel with you, but you can keep ${places} at your side${places === 1 ? "" : " at once"} — rapport is what widens that.`);
+        out.refused = [...(out.refused || []), { npcId, name: nameOf(npcId), why: "company is full", places }];
+        continue;
+      }
       out.proposed.push({ npcId, name: nameOf(npcId), roles: Array.isArray(raw?.roles) ? raw.roles : ["ally"], why: raw?.why || null });
     }
   }

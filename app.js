@@ -37,6 +37,7 @@ import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode,
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
+import { companyPlaces } from "./engine/ladder.js";   // SNG-390: how many places rapport has earned
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove } from "./engine/companions.js";
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
@@ -89,7 +90,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.89";
+const APP_VERSION = "1.9.90";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5197,7 +5198,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       else if (kind === "release") character.holdings = (character.holdings || []).filter(x => x.id !== id);
     }
   });
-  const partyResult = applyStep("partyOps", () => applyPartyOps(character, turn.partyOps || [], { day: absoluteWorldDay() })) || { departed: [], proposed: [], notes: [] };
+  const partyResult = applyStep("partyOps", () => applyPartyOps(character, turn.partyOps || [], { day: absoluteWorldDay(), ladder: CONTENT.rules.subAttributeLadder })) || { departed: [], proposed: [], notes: [] };
   if (partyResult.proposed?.length) character.pendingCompanyOffers = partyResult.proposed;
   ensureBondPortraits(character); // SNG-136: a bond that crossed a high milestone this turn earns a portrait
   // §2 engagement: interacting with a grown NPC or accreting a fact about a grown entity is
@@ -11546,7 +11547,13 @@ function renderPlay(turn, opts = {}) {
   for (const btn of app.querySelectorAll("[data-recruit]")) btn.onclick = () => {
     const id = btn.dataset.recruit; const cat = CONTENT.npcs[id] || {}; const nm = character.npcRegistry?.[id]?.name || cat.name || "They";
     if (!confirm(`Ask ${nm} to travel with you?`)) return;
-    recruit(character, id, { roles: offeredRoles(cat), teaches: cat.teaches || null, liaisonFor: cat.liaisonFor || null, day: absoluteWorldDay() });
+    // ⚠️ SNG-390: the ladder decides how many places are at your side. A refusal returns null and is
+    // SAID, not swallowed — a button that silently does nothing is indistinguishable from a broken one.
+    const joined = recruit(character, id, { roles: offeredRoles(cat), teaches: cat.teaches || null, liaisonFor: cat.liaisonFor || null, day: absoluteWorldDay(), ladder: CONTENT.rules.subAttributeLadder });
+    if (!joined) {
+      renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} would come, but you can keep ${companyPlaces(CONTENT.rules.subAttributeLadder, character)} at your side. Rapport is what widens that.` });
+      return;
+    }
     saveCharacter(character);
     renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} joins your company${cat.teaches ? ` — they can teach you the ${traditionLabel(cat.teaches)} craft` : ""}${cat.liaisonFor ? `, and speak for you among their people` : ""}.` });
   };

@@ -357,16 +357,28 @@ for (const pack of PACKS) {
     for (const [t, c] of Object.entries(byT)) {
       const b = bands[t];
       const primary = c && c.primary;
-      // Every pole tradition must HAVE a band — the umbral hole was "no band → neutral everywhere".
-      if (!b || typeof b.center !== "number") { if (primary && primary !== "combination") noBand.push(t); continue; }
+      // ⛔ A STATED `density: null` IS AN ANSWER, NOT A HOLE — and reading it as one is the SAME trap as
+      // `material: null` in SOURCE_BAND, one level up. The umbral case this gate was written for had NO
+      // entry at all: nobody had decided, so it was neutral everywhere by omission. `god_named` and
+      // `bargainers` DECLARE `density: null` with Erik's reason attached — "their own people carry a store
+      // of nanites, so a bearer is strongest among them: power that travels with a POPULATION rather than
+      // sitting in terrain." That is a fact about the world, deliberately authored, and a tradition that
+      // does not sit in terrain must not be failed for having no terrain band.
+      // ⚠️ THE REASON IS REQUIRED. `density: null` with no `why` is still an omission wearing an
+      // answer's clothes, and that is exactly what this gate exists to catch.
+      const declinesTerrain = c && c.density === null && typeof c.why === "string" && c.why.length > 20;
+      if (!b || typeof b.center !== "number") {
+        if (primary && primary !== "combination" && !declinesTerrain) noBand.push(t);
+        continue;
+      }
       if (KNOWN_DISAGREE.has(t)) continue;
       // natural works in thin ground (low centre); lattice needs dense (high centre). wild/combination
       // are mixed sources and deliberately unconstrained.
       if (primary === "natural" && b.center > 0.45) wrongSide.push(`${t} natural but centre ${b.center}`);
       if (primary === "lattice" && b.center < 0.55) wrongSide.push(`${t} lattice but centre ${b.center}`);
     }
-    check("every power-classified tradition has a substrate band (no umbral-shaped hole)", noBand.length === 0,
-      `${noBand.length} classified but band-less — neutral at every density: ${noBand.join(", ")}`);
+    check("every power-classified tradition has a substrate band, or DECLARES it has none and why", noBand.length === 0,
+      `${noBand.length} classified but band-less with no stated reason — neutral at every density by omission: ${noBand.join(", ")}`);
     check("power classification and band centre agree (natural low, lattice high)", wrongSide.length === 0,
       `${wrongSide.length} disagree beyond the known threnodist/verist pair: ${wrongSide.join(" · ")}`);
     if (KNOWN_DISAGREE.size) console.log(`note  SNG-172: ${[...KNOWN_DISAGREE].join(", ")} are natural-classified but banded 0.50 — flagged, not changed (Erik's call)`);

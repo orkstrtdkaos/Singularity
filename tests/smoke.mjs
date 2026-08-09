@@ -6735,8 +6735,14 @@ await (async () => {
     // ⚠️ ONE LOCATION AUTHORS substrateSource AS A BARE STRING. Reported by the gate, not coerced:
     // guessing a delta for it would be inventing a bastion.
     const malformed = Object.values(C381.locations).filter(l => l.substrateSource && typeof l.substrateSource !== "object");
-    check(`381: a malformed substrateSource is IGNORED, never coerced into a bastion (${malformed.length} in content)`,
-      malformed.every(l => subMod381.groundHere(l, sd381)?.bastion === null));
+    // ⚠️ A CONSTANT NAME, NOT A TEMPLATE. I wrote this one with the count interpolated into the title
+    // and the 272 guard went red at once: it scans SOURCE for check("…") literals, so a name built at
+    // runtime can be claimed by a ledger requirement and never found — which reads exactly like a
+    // DELETED gate. There is a comment in this same file warning about this, written when the last
+    // person did it. The count belongs in the failure detail, where it helps and cannot break a lookup.
+    check("381: a malformed substrateSource is IGNORED, never coerced into a bastion",
+      malformed.every(l => subMod381.groundHere(l, sd381)?.bastion === null),
+      `${malformed.length} malformed in content`);
     // Both surfaces are actually wired — registration is not arrival.
     const appG381 = readFileSync(join(root, "app.js"), "utf8");
     check("381: the location banner renders the ground, and the craft card renders the row",

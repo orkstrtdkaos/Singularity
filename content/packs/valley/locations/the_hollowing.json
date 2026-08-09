@@ -35,7 +35,7 @@
   "the_greenward",
   "cairnhold"
  ],
- "descriptionSeed": "Where the Quickwood stops and the grey begins. This is the Ashwardens' edge — the near-march of the Palelands — and it is not a wasteland. It is TENDED. Things end here, correctly and on time, and the Ashwardens walk it with the same care the Rootkin walk their orchard. The two peoples are antipodes and they have a working border and a mutual, exhausted respect, and each thinks the other is making a category error about the nature of existence.",
+ "descriptionSeed": "The Ashwardens' edge — the near-march of the Palelands, where the grey country runs out toward a green nobody here has walked to. They keep the endings on this side of the world and send them nowhere. The road to the Greenward takes most of a year and every Warden has met someone who made it.",
  "loreRefs": [
   "the_twelve_reaches",
   "traditions",
@@ -76,5 +76,5 @@
   "depth": 0
  },
  "worldPosNote": "The seam between drained wood and tended ground. A border, so inward of both poles it lies between. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
- "_fix": "⛔ SNG-383: regionId was `the_quickwood`; its POSITION was correct and its REGION was wrong — the same shape as Raven's Home. Every other field already said Palelands: communityId `ashwarden.hollowing`; descriptionSeed 'the Ashwardens' edge — THE NEAR-MARCH OF THE PALELANDS'; spectrum death_life -0.6; tags ashwarden/death/grey. ⚠️ AND THE GEOMETRY AGREES: 13.8 walking days to Cairnhold, 27.9 to the Quiet Ground, 32.1 to the Long Grey — against 226 to the Greenward and 264.8 to the Heartroot, its supposed regionmates. It was 264 days from its own region's pole. ⛔ WHY IT COULD NOT BE 'BETWEEN' THEM: longitude on this sphere encodes DISPOSITION, not adjacency (SNG-180). The Quickwood is the life pole at lon ~255 and the Palelands the grey at lon ~74 — EXACT ANTIPODES. Two antipodal dispositions cannot share a physical border, so a place that is 'where the Quickwood stops and the grey begins' has to sit on ONE side and look across. It sits on the grey side, tending the seam, which is exactly what an Ashwarden march is. ⚠️ The 226-day road to the Greenward stays: it is the long march between antipodal peoples who keep a working border and a mutual, exhausted respect. That road IS the relationship."
+ "_fix": "⛔ SNG-393 (Erik: 'you authored it you fix it'). The old seed read 'Where the Quickwood stops and the grey begins', which made this a BORDER BETWEEN two regions — and it cannot be one. Longitude on this sphere encodes DISPOSITION: the Quickwood is the life pole at ~255 and the Palelands the grey at ~74, EXACT ANTIPODES. ⚠️ TWO ANTIPODAL DISPOSITIONS HAVE NO SHARED BORDER. A place cannot stand where they meet because they do not meet. ⛔ RESOLVED: the Hollowing stands on the GREY SIDE and looks across. It is a march, not a seam — the Ashwardens' outermost hold, facing a country 226 walking days away that they know only by report. That distance is not a defect; it IS the relationship. The ambiguity was mine and this removes it rather than hedging it."
 }

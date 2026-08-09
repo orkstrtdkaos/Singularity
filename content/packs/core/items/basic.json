@@ -167,7 +167,7 @@
    "id": "pretransition_cell",
    "name": "Pre-Transition Cell",
    "kind": "tool",
-   "description": "A sealed grey canister the length of a forearm, stamped with a maker's mark nobody can read and a fill-line that still shows three-quarters. Machinery, not magic. It was made to be used up.",
+   "description": "A sealed grey canister the length of a forearm, stamped with a maker's mark nobody can read. Ordered nanite, held in reserve. The fill-line still shows three-quarters — but the line measures how much is still STRUCTURED, not how much is still there.",
    "bonusTags": [
     "craft",
     "repair",
@@ -175,7 +175,7 @@
    ],
    "consumable": false,
    "substrateCharge": 0.07,
-   "substrateNote": "⛔ NANITE charge, and it is the one source that travels: a cell works exactly as well on a bare mountain as in a lattice hollow, because it answers to CONDITION AND SUPPLY, not to ground. ⚠️ It DEPLETES, and nobody left knows how to refill one. What the God-Named carry, and why their people are stronger together than apart.",
+   "substrateNote": "⛔ NANITE charge, and the one source that TRAVELS: a cell works as well on a bare mountain as in a lattice hollow, because nanite answers to supply, not to ground. ⚠️ IT DOES NOT DEPLETE — it goes WILD. What you spend is spent into purpose and scatters into the field around you, still there and no longer yours. ⛔ So a used cell leaves a WAKE: the ground where a nanite-worker has been working hard is wilder than it was, which is good for a Churnfolk and bad for the next Vested to pass through. A cell can be refilled — by processing wild nanite back to structure, which is an industry, and someone controls it.",
    "worth": "valuable",
    "goods": "trade_good"
   },
@@ -199,15 +199,16 @@
    "id": "quiet_stone",
    "name": "Quiet Stone",
    "kind": "tool",
-   "description": "A river-smoothed stone that has been held so often it has a thumb-hollow. There is nothing in it. That is the point.",
+   "description": "A river-smoothed stone with a thumb-hollow worn into it by long holding. Held, it makes the ground around you quieter than it is. Not empty — QUIETING.",
    "bonusTags": [
     "focus",
     "meditate",
-    "discipline"
+    "discipline",
+    "counter-lattice"
    ],
    "consumable": false,
-   "substrateCharge": 0,
-   "substrateNote": "⛔ NO CHARGE, DELIBERATELY — and it is still worth carrying. A Quiet Stone is a focus for METAPHYSICAL work, which wants thin ground and treats a dense lattice as apparatus in the way. ⚠️ It holds no power and cannot be drained, so nothing can be taken from the person carrying it. The Reaching Mind's answer to the Keystone Shard: where a shard brings the ground with you, a stone helps you stop listening to it.",
+   "substrateCharge": -0.05,
+   "substrateNote": "⛔ NEGATIVE charge, ON PURPOSE — it OFFSETS the ground rather than adding to it. Metaphysical craft wants thin ground and treats a dense lattice as apparatus standing in the way, so a Quiet Stone does not carry power: it carries QUIET, thinning what is around the holder by roughly the width of a room. ⚠️ THE EXACT INVERSE OF THE KEYSTONE SHARD — a shard brings dense ground with you; a stone takes it away. ⛔ AND IT IS RUDE TO CARRY UNANNOUNCED: standing next to a lattice-worker with one in your pocket is standing in their light. It also cannot be drained, because there is nothing in it to take.",
    "worth": "common",
    "goods": "raw_material"
   },

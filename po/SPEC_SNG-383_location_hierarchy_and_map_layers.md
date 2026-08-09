@@ -110,3 +110,68 @@ same.**
 3. **Field rendering (§5)** — needs 2 to be worth doing.
 4. **Scale-filtered views (§4)** — needs 1.
 5. **`localMap` coordinates for sites** — mine, after 1 lands.
+
+
+---
+
+## §7 — ⛔ CORRECTION: THE "QUESTIONABLE LONG ROADS" WERE MOSTLY CORRECT AND I WAS WRONG
+
+I flagged 32 edges over 100 walking days as *"either a data error or a route with nothing on it."*
+**15 of them are not gate-to-gate, and I called them suspect. They are almost all deliberate.**
+
+⚠️ **The foothills locations carry their own authoring notes and the notes explain everything:**
+
+> *"THE LITERAL MIDPOINT between the Crossing and the_blaze, taking the short way round on longitude."*
+> *"THE MIDPOINT BETWEEN the_heartroot AND the_forge_eternal. An outpost sits where two domains meet in
+> balance."*
+
+⛔ **THE FOOTHILLS ARE NOT A PLACE. THEY ARE A CATEGORY: the waystations between everywhere.** Every one
+sits either halfway along a road out of the Crossing or on a boundary between two domains. **Kindlerow is
+at colatitude 45 on a road from colatitude 0 to colatitude 90 — it is the exact halfway point, so a
+150-day road from it to the Blaze is not a defect, it is arithmetic.**
+
+⚠️ **And that is why my "region coherence" measurement was measuring the wrong thing.** The foothills span
+277 walking days BY CONSTRUCTION. A distributed waystation network is supposed to be distributed.
+**Region ≠ contiguous territory in this world, and I assumed it did.**
+
+### §7a — Two real defects, found by looking properly. Both fixed.
+
+**1. `the_gralloch` self-loop.** It listed itself as a connection — a 0-day road from a place to itself.
+Removed (`5406ac06`). ⚠️ **Nothing rejected it, so `connections` needs a validity gate: no self-reference,
+and every target must resolve.**
+
+**2. ⛔ Raven's Home was in the wrong region, and its own note said so.** `regionId: valley`, while
+`worldPosNote` reads *"Two miles NW of Cairnhold (colat 76, lon 74) along the Ashwarden March"* — and its
+position is exactly there, **67 walking days from the nearest other valley location.** **The position was
+right and the region was wrong.** Corrected to `the_palelands` (`4189e260`), which also explains why an
+*Ashwarden* post is there at all.
+⚠️ **This is Silas Weir's post — the one Cassiel Ord is charged with reconstructing — so it is live
+content, not scenery.**
+
+### §7b — ONE STILL OPEN, and it is Erik's, not mine to guess
+
+**`the_hollowing` is a Quickwood member at longitude 68. The other five Quickwood locations sit at
+254–260.** It is on the far side of the world from its own region. Its note reads *"the seam between
+drained wood and tended ground. A border."*
+
+⛔ **Either the region is wrong or the position is — and unlike Raven's Home, the note does not settle
+it.** A "seam between drained wood and tended ground" could be a Quickwood border misplaced, or a place
+genuinely near the Scour that was filed under the wrong region. **Erik's call.**
+
+### §7c — The lesson, since it cost a wrong claim
+
+⚠️ **I measured geometry and declared defects without reading the `worldPosNote` on any of them** — a
+field authored specifically to explain why each position is what it is. **The explanation was attached to
+the data the whole time.** Same shape as the `imagePrompt` I walked past twice: a field written to answer
+exactly the question I was asking, unread.
+
+## §8 — THE NANITE FIELD HAS NO POINT SOURCES
+
+`naniteField` (SNG-382) is authored **per region**, 26 entries. The lattice has **48 point sources** with
+radius and falloff. ⚠️ **So the map can only render nanite as a wash over a whole region**, while Erik's
+own framing is that it *spreads and focuses* — a bloom has a centre.
+
+**Authoring job (mine): `naniteSource` on individual locations**, same shape as `substrateSource` —
+`{kind: bloom|works|cleared, delta, radiusWorld, reason}`. **The Spent Yard and Greenforge should be
+points, not a regional average.** ⛔ **Needs its own resolver first (SNG-382 `_pending`) — I am not
+authoring 40 more point sources into a field nothing reads.**

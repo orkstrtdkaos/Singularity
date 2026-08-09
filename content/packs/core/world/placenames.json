@@ -1,0 +1,149 @@
+{
+ "_note": "⛔ SNG-393. Named in an OLDER REGISTER at Erik's ruling — the settlement names are plain and functional (the Spent Yard, Thinwater, the Long Grey) because people named the places they work. ⚠️ SEAS AND RANGES ARE NOT WORKED. They were named before anyone was doing anything here, and the names weathered instead of being replaced. Archaic compounds, weathered vowels, no grandeur — the difference between a name a foreman gives a yard and a name that outlived the language it came from.",
+ "_derived": "Every feature below was DETECTED from the terrain, not invented: seas are connected water over 300 cells; ranges are connected land above the 93rd elevation percentile, split range-vs-massif by extent ratio. The names are authored; the features are measured.",
+ "seas": [
+  {
+   "id": "the_ythmere",
+   "name": "The Ythmere",
+   "cells": 126857,
+   "lat": 7.8,
+   "lon": -134.8,
+   "why": "The world ocean. ⛔ 'Yth' is the oldest surviving element in any name on this map and nobody can say what it meant — the Lattice-cities' own records begin already using it. What is left is the -mere: water. A word for the sea that has forgotten half of itself."
+  },
+  {
+   "id": "the_hollowmere",
+   "name": "The Hollowmere",
+   "cells": 14867,
+   "lat": -64.2,
+   "lon": -40.8,
+   "why": "The great inland water below the Center, reaching toward Greenmarch. Named for what it is not: a hollow that filled. ⚠️ Valleyfolk still say 'gone to the Hollowmere' for a thing that will not come back."
+  },
+  {
+   "id": "stairwater",
+   "name": "Stairwater",
+   "cells": 1616,
+   "lat": -32.8,
+   "lon": -69.2,
+   "why": "The water under Stair Hollow, stepped in shelves down its western side. A plain name gone old — it was 'the stair water' and the space closed."
+  },
+  {
+   "id": "the_wendmere",
+   "name": "The Wendmere",
+   "cells": 1177,
+   "lat": -37.8,
+   "lon": 55.2,
+   "why": "Where the Wend's ground gives out. The Churnfolk name it for the turning, not the water."
+  }
+ ],
+ "ranges": [
+  {
+   "id": "the_gramarch",
+   "name": "The Gramarch",
+   "cells": 3473,
+   "kind": "massif",
+   "lat": -10.8,
+   "lon": 100.2,
+   "why": "The great massif above the Somatic reaches, over the Cogitarium's shoulder. ⛔ 'Gram' is grief and 'march' is a border in a language nobody here speaks any more — so the Somatics translate it as 'the hard walking' and are not wrong."
+  },
+  {
+   "id": "the_hourstones",
+   "name": "The Hourstones",
+   "cells": 1019,
+   "kind": "massif",
+   "lat": -8.8,
+   "lon": -53.2,
+   "why": "The high ground the Hourkeepers built the Drawn Hour and the Slow Hour beneath. They did not name it; it was named, and they kept the name, which is what they do with everything."
+  },
+  {
+   "id": "the_kindlespine",
+   "name": "The Kindlespine",
+   "cells": 773,
+   "kind": "range",
+   "lat": -44.2,
+   "lon": -115.8,
+   "why": "The long ridge running past Kindlerow toward the Disputed Zone. Forge-country: the range gave the town its fuel and its name and then took the name back."
+  },
+  {
+   "id": "the_drownspine",
+   "name": "The Drownspine",
+   "cells": 721,
+   "kind": "range",
+   "lat": -50.8,
+   "lon": -147.2,
+   "why": "The ridge above the Sunken Choir. ⚠️ Named after the flood, not before — the only range on the map whose name records an event, and the event is the drowning it failed to prevent."
+  },
+  {
+   "id": "the_rootwall",
+   "name": "The Rootwall",
+   "cells": 547,
+   "kind": "range",
+   "lat": 13.2,
+   "lon": -82.8,
+   "why": "The northern range walling the Blocklands from the Slow Orchard. The Rootkin call it a wall and mean it kindly."
+  },
+  {
+   "id": "the_heartcrag",
+   "name": "The Heartcrag",
+   "cells": 352,
+   "kind": "massif",
+   "lat": 7.2,
+   "lon": -98.8,
+   "why": "The high stone at the Heartroot's shoulder, where the life pole's ground turns to rock and stops."
+  },
+  {
+   "id": "the_wornheight",
+   "name": "The Wornheight",
+   "cells": 288,
+   "kind": "massif",
+   "lat": -55.8,
+   "lon": 25.2,
+   "why": "Above the Worn Yard and Greyhearth. Worn is the older word and the yard took it from the hill."
+  },
+  {
+   "id": "the_marchhead",
+   "name": "The Marchhead",
+   "cells": 258,
+   "kind": "massif",
+   "lat": -41.8,
+   "lon": 119.2,
+   "why": "The high ground between the Middle Way and the Marchward — a border's head, held by nobody, which is why both name it."
+  },
+  {
+   "id": "the_grallochstone",
+   "name": "The Grallochstone",
+   "cells": 229,
+   "kind": "massif",
+   "lat": -23.8,
+   "lon": 37.8,
+   "why": "The one thing in Unspooling that has not moved. ⚠️ The Churnfolk find that funny and visit it."
+  },
+  {
+   "id": "the_underhorn",
+   "name": "The Underhorn",
+   "cells": 166,
+   "kind": "massif",
+   "lat": -22.2,
+   "lon": 2.8,
+   "why": "Above the Slow Stair and the Lampless Market — the last high stone before the ways go down. You see it, then you do not see anything for a long while."
+  },
+  {
+   "id": "the_figurehorn",
+   "name": "The Figurehorn",
+   "cells": 110,
+   "kind": "massif",
+   "lat": -21.8,
+   "lon": -60.2,
+   "why": "A jointed peak above the Figure-Works, regular enough that the Figurists claim it and honest enough that it was there first."
+  },
+  {
+   "id": "the_lesser_horn",
+   "name": "The Lesser Horn",
+   "cells": 61,
+   "kind": "massif",
+   "lat": -28.8,
+   "lon": -67.2,
+   "why": "The smaller of the two above the Figure-Works. ⚠️ Named by comparison, which is the plainest thing on this list and the only one that sounds like the settlements do."
+  }
+ ],
+ "_pending": "⚠️ FENS AND RIVERS ARE NOT NAMED. Fens are small and shift between rebuilds — they should be named only where one is stable and a location sits on it. ⛔ RIVERS ARE DERIVED FROM FLOW and change when the terrain does; naming them before the drainage is stable would name water that moves."
+}

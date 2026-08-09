@@ -480,6 +480,68 @@ for (const pack of PACKS) {
   console.log(`note  SNG-384: ${objs.length} authored source(s) — ${objs.filter(l => l.substrateSource.kind === "pool").length} pools, ${objs.filter(l => l.substrateSource.kind === "sink").length} sinks`);
 }
 
+// (3c-vii-c) SNG-387 §1a — `worldPos` IS THE SOLE POSITIONING AUTHORITY, AND `map.x/y` IS A RENDER
+// LAYOUT. Aevi: "a RENDER LAYOUT, never a geography. Nothing may read it for position, distance, bearing,
+// adjacency or containment." ⚠️ DEMOTED, NOT DELETED — she reversed her own call after measuring:
+// the schematic predicts the substrate field BETTER than the projection does (0.228 against 0.130), so it
+// stays as the base for the SNG-386 wash while saying nothing true about where anywhere is.
+{
+  let locs387 = [];
+  try {
+    locs387 = readdirSync(join(root, "content/packs/valley/locations")).filter(f => f.endsWith(".json"))
+      .map(f => rj(`content/packs/valley/locations/${f}`))
+      .flatMap(d => (d.locations ? Object.values(d.locations) : [d])).filter(l => l && l.id);
+  } catch { }
+
+  // ⛔ ONE CONSUMER ONLY. `autoMapPositions` turns the layout into screen coordinates; anything else
+  // reading `map.x` is treating a schematic as a map of the world, which is the whole defect.
+  const readers = [];
+  for (const f of [...readdirSync(join(root, "engine")).filter(x => x.endsWith(".js")).map(x => `engine/${x}`), "app.js"]) {
+    if (f === "engine/worldmap.js") continue;                       // the renderer's own layout function
+    const src = readFileSync(join(root, f), "utf8");   // content_ci has no read() helper; rj() is JSON-only
+    const code = src.split(String.fromCharCode(10))
+      .map(l => { const i = l.search(/(^|[^:"'`])\/\//); return i === -1 ? l : l.slice(0, i); }).join(String.fromCharCode(10));
+    // ⚠️ MINTING A LAYOUT POSITION FOR A NEW PLACE IS NOT READING ONE FOR GEOGRAPHY. app.js assigns
+    // `map` to generated locations so they can be drawn; that is renderer work wearing app.js's clothes.
+    if (/map\.[xy]/.test(code) && !/coordForGenerated|existingMaps|existing\[/.test(code)) readers.push(f);
+  }
+  check("SNG-387: `map.x/y` is read only by the renderer — worldPos is the sole positioning authority",
+    readers.length === 0, `${readers.join(", ")} read the render layout for position`);
+
+  // ⛔ THE COHERENCE GATE, AND ITS FIRST TWO FORMS COULD NOT DISCRIMINATE. Aevi asked for map-space
+  // nearest-neighbour rank order to agree with geodesic rank order; measured, mean overlap is 0.257 with
+  // 20 locations at ZERO, because the schematic is a schematic — that gate fires on everything.
+  // ⚠️ AND ABSOLUTE DISTANCE-TO-REGION FIRES ON EXACTLY THE CASE SHE SAID NOT TO: the ten worst are
+  // all `the_foothills`, the waypoint ring that spans all longitudes BY DESIGN.
+  // ✅ What discriminates is being an OUTLIER WITHIN YOUR OWN REGION — median distance to your peers over
+  // your region's own median. Scale-free, so a spread ring is judged against its own spread. Today: median
+  // 1.00, 90th percentile 1.57, max 2.37 (`the_slow_stair`). The Hollowing, the case that prompted all of
+  // this, sits at 1.27 now that the split has landed.
+  const outliers = (() => {
+    const placed = locs387.filter(l => l.worldPos && Number.isFinite(l.worldPos.colatitude) && Number.isFinite(l.worldPos.longitude));
+    const vec = (l) => {
+      const th = l.worldPos.colatitude * Math.PI / 180, ph = l.worldPos.longitude * Math.PI / 180;
+      return { x: Math.sin(th) * Math.cos(ph), y: Math.sin(th) * Math.sin(ph), z: Math.cos(th) };
+    };
+    const geo = (a, b) => { const A = vec(a), B = vec(b); return Math.acos(Math.max(-1, Math.min(1, A.x * B.x + A.y * B.y + A.z * B.z))); };
+    const byR = {};
+    for (const l of placed) (byR[l.regionId || l.region] ||= []).push(l);
+    const bad = [];
+    for (const m of Object.values(byR)) {
+      if (m.length < 4) continue;                                   // too few peers for "typical" to mean anything
+      const medOf = (l) => { const d = m.filter(x => x !== l).map(x => geo(l, x)).sort((a, b) => a - b); return d[Math.floor(d.length / 2)]; };
+      const meds = m.map(l => ({ id: l.id, v: medOf(l) }));
+      const vs = meds.map(x => x.v).sort((a, b) => a - b);
+      const regionMed = vs[Math.floor(vs.length / 2)];
+      if (!(regionMed > 0)) continue;
+      for (const x of meds) if (x.v / regionMed > 3) bad.push(`${x.id} sits ${(x.v / regionMed).toFixed(1)}x its region's typical spread`);
+    }
+    return bad;
+  })();
+  check("SNG-387: no location is stranded far from its own region — the Hollowing case, gated",
+    outliers.length === 0, outliers.slice(0, 6).join(" · "));
+}
+
 // (3c-viii) SNG-183 L4 for RULES FILES — Erik: "registered-but-unloaded should not pass, and that gap
 // is what found this." A rules file registered in the manifest that the LOADER never reads is dead
 // exactly as an uncalled function is (power_sources was such a file until the audit above read it).

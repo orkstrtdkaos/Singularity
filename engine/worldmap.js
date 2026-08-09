@@ -21,6 +21,12 @@ export function autoMapPositions(locations, { width = 800, height = 440, margin 
   const out = {};
   const need = [];
   for (const l of locations || []) {
+    // ⛔ SNG-387 §1a — `map.x/y` IS A RENDER LAYOUT, NEVER A GEOGRAPHY. Nothing may read it for
+    // position, distance, bearing, adjacency or containment; `worldPos` is the sole positioning authority
+    // and a gate in content_ci enforces that this file is its only consumer.
+    // ⚠️ DEMOTED, NOT DELETED, and Aevi reversed her own call to say so: the schematic predicts the
+    // substrate field BETTER than the projection does (correlation 0.228 against 0.130), so it earns its
+    // place as the base for the SNG-386 field wash even though it says nothing true about where anywhere is.
     if (l.map && Number.isFinite(l.map.x) && Number.isFinite(l.map.y)) out[l.id] = { x: l.map.x, y: l.map.y };
     else need.push(l);
   }
@@ -437,4 +443,31 @@ export function fieldBlobs(locations, pos, { valueOf, spread = null, min = 0.02 
  *  stays readable rather than becoming a solid slab. */
 export function fieldAlpha(v, { max = 0.55 } = {}) {
   return Math.max(0, Math.min(max, Math.abs(Number(v) || 0) * max));
+}
+
+/** ⛔ SNG-387 §1a — THE COHERENCE GATE, which is the fix for what the demotion was trying to prevent.
+ *  The Hollowing sat 264 walking days from its own region and the schematic made it look fine.
+ *
+ *  ⚠️ IT COMPARES RANK ORDERS, NOT DISTANCES. The schematic is not a projection and never will be, so
+ *  requiring agreement on distance would fail everywhere and teach everyone to ignore it. What must hold is
+ *  weaker and sufficient: a place's nearest neighbours ON SCREEN should overlap its nearest neighbours IN
+ *  THE WORLD. That is loose enough not to fire on the waypoint ring and tight enough to catch a location
+ *  laid out in the wrong half of the world.
+ *
+ *  Returns one row per location: { id, overlap } — the share of its k geodesic-nearest that are also among
+ *  its k screen-nearest. Pure; the caller decides the threshold. */
+export function layoutCoherence(locations, pos, { k = 6 } = {}) {
+  const placed = (locations || []).filter(l => l && l.id && pos?.[l.id] && worldVector(l));
+  const geo = (a, b) => {
+    const va = worldVector(a), vb = worldVector(b);
+    return Math.acos(Math.max(-1, Math.min(1, va.x * vb.x + va.y * vb.y + va.z * vb.z)));
+  };
+  const nearestBy = (target, metric) => placed.filter(l => l !== target)
+    .map(l => ({ id: l.id, d: metric(target, l) })).sort((a, b) => a.d - b.d).slice(0, k).map(x => x.id);
+  return placed.map(t => {
+    const byWorld = new Set(nearestBy(t, geo));
+    const byScreen = nearestBy(t, (a, b) => Math.hypot(pos[a.id].x - pos[b.id].x, pos[a.id].y - pos[b.id].y));
+    const hit = byScreen.filter(id => byWorld.has(id)).length;
+    return { id: t.id, overlap: byWorld.size ? hit / byWorld.size : 1 };
+  });
 }

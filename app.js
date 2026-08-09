@@ -32,7 +32,7 @@ import { wieldBonusFor, usableCombatItems, normalizeInventory, fromCatalog, addI
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
+import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -89,7 +89,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.82";
+const APP_VERSION = "1.9.83";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2280,6 +2280,40 @@ function learnLevelReq(ability) {
 /** A stable color for a tradition/class id — known power-systems keep their authored color; a
  *  tradition (people) gets a deterministic hue so each civilization reads consistently. SNG-059. */
 const KNOWN_CLASSES = new Set(["harmonic", "radiant", "valley_craft", "precursor", "learned", "discovery", "baseline"]);
+/** ⛔ SNG-381 — THE GROUND ROW ON A CRAFT CARD. Erik asked for two things and the ORDER of them is
+ *  the design: "a better way to show what each skill depends on for success", then "we need to see how
+ *  well it performs on the CURRENT ground."
+ *
+ *  ⚠️ SO THE LINE LEADS WITH THE VERDICT HERE AND GIVES THE DEPENDENCY AS THE REASON. A card that
+ *  lists what a craft depends on is a spec sheet; the question a player standing somewhere actually has is
+ *  "will this work". Aevi's four dependencies — source, what it resolves on, the rank band, what must be
+ *  present — are all true and none of them is the first thing to say.
+ *
+ *  ⚠️ PIPS BEFORE PERCENTAGES. Four pips are scannable down a list of thirty crafts; "70%, −20
+ *  chance, +18% energy" is the detail behind them and rides in the tooltip, not the line.
+ *
+ *  ⚠️ AND IT RENDERS NOTHING RATHER THAN A DEFAULT. `groundCardFor` returns null when the craft has
+ *  no tradition (9 of 383) or the character does not practise it — a row that cannot answer must not
+ *  print a confident one. */
+function groundRow(ability) {
+  if (!ability) return "";
+  try {
+    const g = groundCardFor(ability, character, {
+      schools: CONTENT.schools, substrate: CONTENT.substrateModel, location: hereNow(),
+    });
+    if (!g) return "";
+    const pips = "◉".repeat(g.strength) + "◎".repeat(4 - g.strength);
+    const detail = g.grounded && g.percent !== null
+      ? `${g.percent}% of its full strength here` + (g.chancePenalty ? ` · −${g.chancePenalty} to the roll` : "")
+        + (g.energyMult > 1 ? ` · +${Math.round((g.energyMult - 1) * 100)}% energy` : "")
+      : "the ground does not touch this one";
+    const cls = !g.grounded ? "neutral" : g.off ? "off" : g.strength >= 4 ? "full" : g.strength <= 1 ? "starved" : "part";
+    return `<div class="ground-row ground-row-${cls}" title="${esc(detail + (g.because ? " — " + g.because : ""))}">`
+      + `<span class="ground-pips">${pips}</span> <span class="ground-verdict">${esc(g.verdict)}</span>`
+      + (g.because ? ` <span class="hint ground-because">· ${esc(g.because)}</span>` : "") + `</div>`;
+  } catch { return ""; }   // a readout is never worth breaking the card for
+}
+
 function traditionColor(id) {
   if (KNOWN_CLASSES.has(id)) return classColor(id);
   let h = 0; for (const ch of String(id || "")) h = (h * 31 + ch.charCodeAt(0)) % 360;
@@ -7514,6 +7548,7 @@ function renderSkillWheel(selectedId = null, status = "") {
       ${sel.owned ? `<span class="rep-band trusted">owned</span>` : sealedSel ? `<span class="rep-band" style="border-color:var(--accent);color:var(--accent)">✦ sealed</span>` : ""}</div>
     ${selImg ? `<img class="craft-detail-art" src="${esc(selImg)}" alt="${esc(sel.name)}" data-lightbox="${esc(selImg)}">` : ""}
     <div class="hint">${sealedSel ? "✦ a precursor craft of the substrate — outside the poles" : esc(gateLine)}${!sealedSel && sel.effCost != null ? ` · ⚡${sel.effCost} energy${selAb?.energyCost && sel.effCost !== selAb.energyCost ? ` (base ${selAb.energyCost})` : ""}` : ""}</div>
+    ${groundRow(selAb)}
     ${(selAb?.functions || []).length ? `<div style="margin:4px 0">${functionChips(selAb)}</div>` : ""}
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
     ${selAb?.notFor ? `<div class="hint"><em>cannot: ${esc(selAb.notFor)}</em></div>` : ""}
@@ -11028,7 +11063,23 @@ function renderPlay(turn, opts = {}) {
   const encKindNow = (() => { const e = activeEnc(); return e ? encounterKind(e.def) : null; })();
   let main = `<div class="play${activeEnc()?.state?.mode === "skill_battle" ? " play-in-fight" : ""}${encKindNow ? ` enc-kind-${encKindNow}` : ""}">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
-    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}<span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span></div>
+    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}${(() => {
+      // ⛔ SNG-381 — THE GROUND YOU ARE STANDING ON. Erik: "the current ground's power sources should
+      // be viewable in the location banner. Remember there are bastions of power with auras."
+      //
+      // ⚠️ THE BASTIONS WERE ALREADY AUTHORED AND ENTIRELY INVISIBLE — 26 locations carry a
+      // `substrateSource` pool or sink with a radius and a REASON ("the machines here never stopped"), and
+      // state.js resolves that field onto all 118 locations at load. The density has decided every craft's
+      // strength since SNG-090; the player has never been shown the number or the cause. This is the one
+      // place they are already looking to learn where they are.
+      const g = groundHere(location, CONTENT.substrateModel);
+      if (!g) return "";
+      const aura = g.bastion
+        ? `<span class="ground-bastion ground-${esc(g.bastion.kind)}" title="${esc(g.bastion.reason || "")}">${g.bastion.kind === "pool" ? "▲" : "▼"} ${esc(g.bastion.kind)}</span>` : "";
+      const why = `The substrate here — ${g.density.toFixed(2)} of full. Your crafts read this: a school that wants dense ground is starved in the thin, and one that wants thin is crowded in the dense.`
+        + (g.bastion?.reason ? ` — ${g.bastion.reason}` : "");
+      return `<span class="ground-tag ground-${esc(g.word.replace(/[^a-z]/g, ""))}" title="${esc(why)}">⛰ ${esc(g.word)} ground${aura}</span>`;
+    })()}<span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span></div>
     ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
       let status = "";
       if (d.type === "duel") {

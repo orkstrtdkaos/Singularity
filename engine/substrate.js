@@ -379,3 +379,82 @@ export function applySubstrateField(locations = {}, data = {}) {
   }
   return n;
 }
+
+/* ═══ SNG-381 — THE GROUND CARD. Erik: "we need a better way to show what each skill depends on
+ * for success" — and then, on seeing the shape: "with the cards that tell what the best ground is, we
+ * need to see how well it performs on the CURRENT ground."
+ *
+ * ⛔ THAT SECOND SENTENCE IS THE WHOLE DESIGN. A card listing a craft's dependencies is a spec sheet;
+ * the question a player actually has, standing somewhere, is "will this work HERE". So the line LEADS with
+ * the verdict here and gives the dependency as the REASON — not the other way round.
+ *
+ * ⚠️ AND IT NEEDED NO NEW AUTHORED FIELD, which is the answer to Aevi's "spec the card before the
+ * field". She feared authoring a weighted source mix nobody could see. The chain already exists end to end:
+ *     ability.tradition → character.schools[tradition] → school.extension → sourceBands.sources[ext]
+ * 374 of 383 abilities carry a tradition and all 26 traditions have schools, so a craft's source is
+ * DERIVED from what the character actually practises rather than restated per ability. Her own instruction
+ * on the classification pass — "derive first, hand me the residue" — applies here first.
+ */
+
+/** The source a craft reaches with FOR THIS CHARACTER — derived from the school they practise in the
+ *  craft's tradition, never a field on the ability. Null when the craft has no tradition (9 of 383) or the
+ *  character does not practise it: an honest "we do not know" rather than a default that looks like one. */
+export function craftSource(ability, character, schoolsData) {
+  const tid = ability?.tradition;
+  if (!tid) return null;
+  const school = schoolForTradition(character, tid, schoolsData);
+  return school ? { traditionId: tid, school, source: school.extension } : null;
+}
+
+/** ⚠️ ONE LINE, AND THE ORDER OF IT IS THE POINT. Returns the pieces rather than a formatted string
+ *  so the wheel, the level-up list and the GM block cannot drift about what a craft is worth here.
+ *
+ *  `strength` is 0–4 pips for scanning; `verdict` is the word; `because` is the authored ground line.
+ *  Returns null when the source is unknown — a card that cannot answer must not render a confident row. */
+export function groundCardFor(ability, character, { schools, substrate, location } = {}) {
+  const cs = craftSource(ability, character, schools);
+  if (!cs) return null;
+  const density = location ? locationDensity(location, substrate) : null;
+  const because = sourceGround(cs.source, substrate);
+  // A source with no band (body, nanite) does not care about the ground, and saying "strong here" about it
+  // would be inventing a relationship the content explicitly denies.
+  const banded = !!bandForSchool(cs.traditionId, cs.school, substrate);
+  if (density === null || !banded) {
+    return { source: cs.source, school: cs.school, density, because, verdict: "unaffected by the ground",
+             strength: 4, percent: null, chancePenalty: 0, energyMult: 1, off: false, grounded: false };
+  }
+  const v = substrateVerdict({ tradition: cs.traditionId, school: cs.school,
+    root: schools?.traditionSchools?.[cs.traditionId]?.root, density, data: substrate });
+  const word = v.off ? "will not answer here"
+    : v.side === "full" ? "at full strength here"
+    : v.side === "floored" ? "holding at its floor here"
+    : v.side === "starved" ? "starved here — the ground is too thin"
+    : v.side === "crowded" ? "crowded here — the ground is too loud"
+    : "unaffected by the ground";
+  return { source: cs.source, school: cs.school, density, because, verdict: word,
+    strength: Math.max(0, Math.min(4, Math.round(v.factor * 4))), percent: v.percent,
+    chancePenalty: v.chancePenalty, energyMult: v.energyMult, off: v.off, grounded: true };
+}
+
+/** ⛔ SNG-381 — THE GROUND UNDER YOUR FEET, FOR THE LOCATION BANNER. Erik: "the current ground's power
+ *  sources should be viewable in the location banner. Remember there are bastions of power with auras."
+ *
+ *  ⚠️ THE BASTIONS WERE ALREADY THERE AND FULLY AUTHORED — 26 locations carry a `substrateSource`
+ *  pool or sink with a radius on the sphere and a reason, and state.js resolves that field onto all 118
+ *  locations. Nothing needed inventing; the player simply could not see any of it. A banner is the one
+ *  place they are already looking to learn where they are.
+ *
+ *  Returns { density, word, bastion } — `bastion` non-null only AT an authored source, and it carries the
+ *  authored reason, because "dense here" is trivia and "the machines here never stopped" is the world. */
+export function groundHere(location, substrateData) {
+  if (!location) return null;
+  const density = locationDensity(location, substrateData);
+  if (typeof density !== "number") return null;
+  const word = density >= 0.75 ? "dense" : density >= 0.45 ? "middling" : density >= 0.2 ? "thin" : "dead-thin";
+  const src = location.substrateSource;
+  // ⚠️ ONE LOCATION AUTHORS THIS AS A BARE STRING ("thin-unreached") RATHER THAN THE OBJECT SHAPE.
+  // Reported, not coerced — guessing a delta for it would be inventing a bastion.
+  const bastion = (src && typeof src === "object" && src.kind)
+    ? { kind: src.kind, delta: src.delta ?? null, reason: src.reason || null } : null;
+  return { density, word, bastion };
+}

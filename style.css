@@ -1269,3 +1269,24 @@ img[data-lightbox] { cursor: zoom-in; }
 .whois:hover, .whois:focus { color: var(--accent); }
 .whois-head { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
 .whois-line { margin: 4px 0; }
+
+/* SNG-381 — the ground in the location banner. Subordinate to the place name: it is a condition of the
+   world, not a headline. The bastion chip is the only part that earns colour, because it is the only
+   part that is unusual — 26 of 118 places. */
+.ground-tag { font-family: var(--font-ui); font-size: 11px; letter-spacing: 1px; text-transform: none; opacity: 0.8; margin-left: 10px; }
+.ground-dense { color: var(--accent, #d4a24a); }
+.ground-deadthin, .ground-thin { color: var(--muted, #8a8a8a); }
+.ground-bastion { margin-left: 6px; padding: 1px 6px; border-radius: 999px; font-size: 10px; letter-spacing: 0.5px; border: 1px solid currentColor; }
+.ground-pool { color: var(--accent, #d4a24a); }
+.ground-sink { color: var(--muted, #8a8a8a); }
+
+/* SNG-381 — the ground row on a craft card. The pips carry the reading; the reason is subordinate,
+   because a player scanning thirty crafts needs the verdict first and the explanation only if they stop. */
+.ground-row { font-family: var(--font-ui); font-size: 12px; margin: 4px 0; display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
+.ground-pips { letter-spacing: 1px; }
+.ground-verdict { font-weight: 600; }
+.ground-row-full .ground-pips, .ground-row-full .ground-verdict { color: var(--accent, #d4a24a); }
+.ground-row-starved .ground-pips, .ground-row-starved .ground-verdict,
+.ground-row-off .ground-pips, .ground-row-off .ground-verdict { color: var(--bad, #c46) ; }
+.ground-row-neutral { opacity: 0.65; }
+.ground-because { font-style: italic; }

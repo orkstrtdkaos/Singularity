@@ -6679,6 +6679,70 @@ await (async () => {
   // school and WHAT IT REACHES WITH, and neither of those is a particular word.
   // ⚠️ The ground line itself is now measured by the `schoolsWithNoGroundLine` ratchet instead — 44 of 74
   // schools currently degrade to "its own ground", which is a content gap and is counted as one.
+  // ══ SNG-381 — THE GROUND CARD. Erik: "a better way to show what each skill depends on for
+  // success" — then, on seeing the shape: "we need to see how well it performs on the CURRENT ground",
+  // and "the current ground's power sources should be viewable in the location banner. Remember there are
+  // bastions of power with auras."
+  //
+  // ⛔ IT NEEDED NO NEW AUTHORED FIELD, which is the answer to Aevi's "spec the card before the field".
+  // The chain existed end to end: ability.tradition → the school the character practises → its
+  // extension → the band table. And the bastions were already authored — 26 locations with a pool or
+  // sink, a radius and a reason — resolved onto all 118 locations and shown to nobody.
+  {
+    // ⚠️ LOADED, NOT FIXTURED. These gates are about the CONTENT agreeing with itself — the same
+    // lesson the 193b fixtures taught an hour ago — so they read the real abilities and locations.
+    const { loadContentHeadless: lch381 } = await import("./headless_content.mjs");
+    const C381 = await lch381();
+    const chCog = { domains: { primary: "cogitant" }, schools: { cogitant: "cog_instrumented" } };
+    const abCog = Object.values(C381.abilities).find(a => a.tradition === "cogitant");
+    const subMod381 = sb, sd381 = substrateModel, sch381 = schools;   // the block's own handles, read from disk above
+    const opts = { schools: sch381, substrate: sd381 };
+    // ⚠️ DERIVED, NOT RESTATED. A craft's source comes from what the character PRACTISES, so two
+    // characters of different schools read the same craft differently — which is the whole point.
+    const srcInstr = subMod381.craftSource(abCog, chCog, sch381);
+    const srcReach = subMod381.craftSource(abCog, { domains: { primary: "cogitant" }, schools: { cogitant: "cog_reaching" } }, sch381);
+    check("381: a craft's source is DERIVED from the school the character practises, not a field on the ability",
+      srcInstr?.source === "precursor" && srcReach?.source === "metaphysical");
+    check("381: a craft with no tradition yields NO card — a row that cannot answer must not print one",
+      subMod381.craftSource({ id: "x" }, chCog, sch381) === null
+      && subMod381.groundCardFor({ id: "x" }, chCog, opts) === null);
+    // The verdict HERE, which is the half Erik added and the half that decides the line's ORDER.
+    const dense = { substrateDensity: 0.95 }, thin = { substrateDensity: 0.05 };
+    const cDense = subMod381.groundCardFor(abCog, chCog, { ...opts, location: dense });
+    const cThin = subMod381.groundCardFor(abCog, chCog, { ...opts, location: thin });
+    check("381: the same craft reads DIFFERENTLY on dense and thin ground — the card answers 'will this work HERE'",
+      cDense.strength > cThin.strength && cDense.percent > cThin.percent);
+    check("381: …and it carries the AUTHORED reason, not a computed one — the same line the GM is given",
+      cDense.because === subMod381.sourceGround("precursor", sd381) && cDense.because.length > 10);
+    // ⚠️ A SOURCE THAT DOES NOT CARE ABOUT GROUND MUST NOT BE SCORED AGAINST IT. `body` and `nanite`
+    // have no band on purpose; calling one "starved" would invent a relationship the content denies.
+    const chBody = { domains: { primary: "ashwarden" }, schools: { ashwarden: "ash_gravehanded" } };
+    const abAsh = Object.values(C381.abilities).find(a => a.tradition === "ashwarden");
+    const cBody = abAsh ? subMod381.groundCardFor(abAsh, chBody, { ...opts, location: thin }) : null;
+    check("381: a source with no band reads as unaffected, never as starved — body does not care about ground",
+      !cBody || (cBody.grounded === false && cBody.strength === 4));
+
+    // ── the banner half — the bastions that were authored and invisible
+    const bastions = Object.values(C381.locations).filter(l => l.substrateSource && typeof l.substrateSource === "object");
+    check("381: the authored bastions are still there and still resolve — pools and sinks with a reason",
+      bastions.length >= 20 && bastions.every(l => l.substrateSource.kind && typeof l.substrateSource.delta === "number"));
+    const gPool = subMod381.groundHere(bastions.find(l => l.substrateSource.kind === "pool"), sd381);
+    const gPlain = subMod381.groundHere({ substrateDensity: 0.4 }, sd381);
+    check("381: groundHere names a bastion AT one, and names none where there is none",
+      gPool?.bastion?.kind === "pool" && !!gPool.bastion.reason && gPlain?.bastion === null);
+    check("381: …and it always says what the ground IS, bastion or not — that is the banner's job",
+      typeof gPool?.word === "string" && typeof gPlain?.word === "string" && gPlain.word !== gPool.word);
+    // ⚠️ ONE LOCATION AUTHORS substrateSource AS A BARE STRING. Reported by the gate, not coerced:
+    // guessing a delta for it would be inventing a bastion.
+    const malformed = Object.values(C381.locations).filter(l => l.substrateSource && typeof l.substrateSource !== "object");
+    check(`381: a malformed substrateSource is IGNORED, never coerced into a bastion (${malformed.length} in content)`,
+      malformed.every(l => subMod381.groundHere(l, sd381)?.bastion === null));
+    // Both surfaces are actually wired — registration is not arrival.
+    const appG381 = readFileSync(join(root, "app.js"), "utf8");
+    check("381: the location banner renders the ground, and the craft card renders the row",
+      /groundHere\(location, CONTENT\.substrateModel\)/.test(appG381) && /\$\{groundRow\(selAb\)\}/.test(appG381));
+  }
+
   // ══ SNG-380 — THE JOIN GATE. ⛔ THE VOCABULARY LIVES IN CONTENT AND ITS TABLE NOW DOES TOO, so
   // the thing worth gating is that the two CONTENT files agree — not what any number is. Aevi's own ask:
   // "a gate that asserts SHAPE, not values: every extension present in schools.json has a key in the band

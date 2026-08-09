@@ -246,10 +246,51 @@
    },
    "density": null,
    "why": "A table, a ledger, and terms named exactly — almost entirely unaugmented craft. The PRECURSOR share is the Bound Ledger, terms written into something that does not forget. The VEIL share is Far Terms, which nobody advertises."
+  },
+  "valley_craft": {
+   "primary": "body",
+   "mix": {
+    "body": 1.0
+   },
+   "density": null,
+   "why": "⛔ NOT A TRADITION — the universal folk crafts, open to everyone, and ~13 of a level-1 character's ~17 options. Unaugmented body work entire: appraisal, a hunter's strike, a boundary stone, a beast befriended. ⚠️ It DECLINES every source, and that is the point: `body` carries the FLOOR, so valley craft is never starved anywhere and never spectacular anywhere. `density: null` because it does not sit in terrain at all — it is what a person can do with hands and years, and the ground has no opinion about it."
+  },
+  "harmonic": {
+   "primary": "precursor",
+   "mix": {
+    "precursor": 0.7,
+    "body": 0.3
+   },
+   "density": null,
+   "why": "⛔ NOT A TRADITION — one of the two LOCAL CRAFT FAMILIES the valley grew for itself, available across peoples. Resonance, echo-perception, standing-wave barriers. ⚠️ The lattice share is explicit in the content: the Resonance Lantern's own note says 'singing is a DRAW ON THE LATTICE and the crystal stays warm.' The body share is real too — a voice, a hand on stone, a held note. `density: null` because a craft FAMILY has no homeland; the practitioner's own ground decides."
+  },
+  "radiant_folk": {
+   "primary": "precursor",
+   "mix": {
+    "precursor": 0.7,
+    "body": 0.3
+   },
+   "density": null,
+   "why": "⛔ NOT A TRADITION — the other local craft family. Light-bending, spectra-sight, coherent beams, mirage. ⚠️ The Prism Chip is authored as a 'Radiant photonic crystal' holding a charge, and the Blazeborn — the tradition nearest this family — sit at precursor 0.9. Sun-coaxing and light-wells are the body share: patience and a vessel. `density: null`, same reason as harmonic."
+  },
+  "precursor": {
+   "primary": "precursor",
+   "mix": {
+    "precursor": 1.0
+   },
+   "density": null,
+   "why": "⛔ NOT A TRADITION AND NOT A PEOPLE — the six crafts that address the lattice DIRECTLY: latticespeak, address_sense, wake_the_line, unmake_seal. ⚠️ Trivially precursor 1.0, and it is the only entry where the source and the label are the same word. `density: null` because these are learned-only and gated by contact, never by where you stand — though in practice they are useless where there is no lattice to address, which the band already says."
+  },
+  "cross_pole_braid": {
+   "primary": "combination",
+   "mix": {},
+   "density": null,
+   "why": "⛔ DECLINES A PRIMARY, DELIBERATELY, AND THE EMPTY MIX IS THE ANSWER. Three braid-crafts that exist ONLY as a joining of two poles — harbored_flame (concealment + radiance), meaning_engine (significance + mechanism), the_turning_word. ⚠️ A braid's source is WHATEVER ITS PARENTS BRING, and it differs per braid and per practitioner, so a single primary here would be a lie about every one of them. `combination` with an EMPTY mix says 'resolve from the components', which is SNG-172 invariant 3 — scaled by mix, never rounded to a dominant. ⛔ CCode: if the resolver needs a value rather than an absence, it should read the BRAID'S PARENTS, not this row."
   }
  },
  "perAbilityOverrides": {
   "note": "Empty by design. A tradition-level default plus explicit deviations is far less content than 285 authored fields, and a deviation is the interesting fact. Add here only where an ability genuinely departs from its tradition's mix."
  },
- "_rebase": "SNG-378: lattice→precursor · natural→body · inherent→metaphysical · material→body. ⛔ Anything keying on the string 'lattice', 'natural', 'inherent' or 'material' is now keying on nothing — that is how the school band table died silently. Bands live in the_substrate.json → sourceBands."
+ "_rebase": "SNG-378: lattice→precursor · natural→body · inherent→metaphysical · material→body. ⛔ Anything keying on the string 'lattice', 'natural', 'inherent' or 'material' is now keying on nothing — that is how the school band table died silently. Bands live in the_substrate.json → sourceBands.",
+ "_fiveFamilies": "SNG-381: valley_craft · harmonic · radiant_folk · precursor · cross_pole_braid are NOT TRADITIONS — none appears in traditions.json. They are craft FAMILIES and categories that abilities declare in their `tradition` field, so they fall through `abilityTradition(ab) || ab.powerSystem` into this lookup and found nothing. 53 crafts were invisible to both tables. ⚠️ They carry `density: null` because a craft family has no homeland — unlike a people, which does."
 }

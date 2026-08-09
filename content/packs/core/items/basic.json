@@ -1,151 +1,248 @@
 {
-  "schemaVersion": 1,
-  "items": [
-    {
-      "id": "travelers_pack",
-      "name": "Traveler's Pack",
-      "kind": "tool",
-      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
-      "bonusTags": [
-        "retreat",
-        "careful"
-      ],
-      "consumable": false,
-      "worth": "useful",
-      "goods": "raw_material"
-    },
-    {
-      "id": "waterskin",
-      "name": "Waterskin",
-      "kind": "consumable",
-      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
-      "effects": {
-        "energy": 10
-      },
-      "consumable": true,
-      "bonusTags": [
-        "weather",
-        "travel",
-        "survival"
-      ],
-      "worth": "trivial",
-      "goods": "living_stock"
-    },
-    {
-      "id": "belt_knife",
-      "name": "Belt Knife",
-      "kind": "weapon",
-      "description": "A plain working blade — more tool than weapon, but it has been both.",
-      "bonusTags": [
-        "attack",
-        "force"
-      ],
-      "consumable": false,
-      "worth": "valuable",
-      "goods": "arms"
-    },
-    {
-      "id": "hemp_rope",
-      "name": "Hemp Rope (30 ft)",
-      "kind": "tool",
-      "description": "Tarred hemp, knotted every arm's length. The difference between a fall and a climb.",
-      "bonusTags": [
-        "climb"
-      ],
-      "consumable": false,
-      "worth": "useful",
-      "goods": "raw_material"
-    },
-    {
-      "id": "resonance_lantern",
-      "name": "Resonance Lantern",
-      "kind": "tool",
-      "description": "Harmonic-made: a phononic crystal that glows when it sings. Light without flame, and it hums louder near active nanite fields.",
-      "bonusTags": [
-        "investigate",
-        "scout",
-        "substrate-gathering"
-      ],
-      "consumable": false,
-      "substrateCharge": 0.04,
-      "substrateNote": "A phononic crystal that glows when it sings; singing is a draw on the lattice and the crystal stays warm.",
-      "worth": "useful",
-      "goods": "raw_material"
-    },
-    {
-      "id": "medics_satchel",
-      "name": "Medic's Satchel",
-      "kind": "tool",
-      "description": "Herb rolls, boiled linen, needle and gut. Valley medicine — patient, practical, proven.",
-      "bonusTags": [
-        "heal",
-        "help"
-      ],
-      "consumable": false,
-      "worth": "useful",
-      "goods": "raw_material"
-    },
-    {
-      "id": "healing_draught",
-      "name": "Healing Draught",
-      "kind": "consumable",
-      "description": "Bitter green tincture from the terrace gardens. Knits small wounds and dulls big ones.",
-      "effects": {
-        "health": 8
-      },
-      "consumable": true,
-      "bonusTags": [
-        "heal",
-        "remedy",
-        "grip"
-      ],
-      "worth": "useful",
-      "goods": "medicines"
-    },
-    {
-      "id": "dried_rations",
-      "name": "Dried Rations",
-      "kind": "consumable",
-      "description": "Fish, fruit leather, hard bread. Two days if you're honest with yourself, three if you're not.",
-      "effects": {
-        "energy": 15
-      },
-      "consumable": true,
-      "bonusTags": [
-        "travel",
-        "survival",
-        "weather"
-      ],
-      "worth": "trivial",
-      "goods": "living_stock"
-    },
-    {
-      "id": "prism_chip",
-      "name": "Prism Chip",
-      "kind": "tool",
-      "description": "A thumb-sized shard of Radiant photonic crystal. Splits any light into telltale spectra — a poor man's Prism Sight.",
-      "bonusTags": [
-        "investigate",
-        "analyze",
-        "substrate-gathering"
-      ],
-      "consumable": false,
-      "substrateCharge": 0.05,
-      "substrateNote": "Radiant photonic crystal. A small shard holds a small charge.",
-      "worth": "useful",
-      "goods": "raw_material"
-    },
-    {
-      "id": "trade_tokens",
-      "name": "Trade Tokens",
-      "kind": "misc",
-      "description": "Stamped ceramic rounds honored in Millbrook and grudgingly beyond. The valley's compromise with currency.",
-      "bonusTags": [
-        "negotiate"
-      ],
-      "consumable": false,
-      "worth": "trivial",
-      "goods": "raw_material"
-    }
-  ]
+ "schemaVersion": 1,
+ "items": [
+  {
+   "id": "travelers_pack",
+   "name": "Traveler's Pack",
+   "kind": "tool",
+   "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+   "bonusTags": [
+    "retreat",
+    "careful"
+   ],
+   "consumable": false,
+   "worth": "useful",
+   "goods": "raw_material"
+  },
+  {
+   "id": "waterskin",
+   "name": "Waterskin",
+   "kind": "consumable",
+   "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+   "effects": {
+    "energy": 10
+   },
+   "consumable": true,
+   "bonusTags": [
+    "weather",
+    "travel",
+    "survival"
+   ],
+   "worth": "trivial",
+   "goods": "living_stock"
+  },
+  {
+   "id": "belt_knife",
+   "name": "Belt Knife",
+   "kind": "weapon",
+   "description": "A plain working blade — more tool than weapon, but it has been both.",
+   "bonusTags": [
+    "attack",
+    "force"
+   ],
+   "consumable": false,
+   "worth": "valuable",
+   "goods": "arms"
+  },
+  {
+   "id": "hemp_rope",
+   "name": "Hemp Rope (30 ft)",
+   "kind": "tool",
+   "description": "Tarred hemp, knotted every arm's length. The difference between a fall and a climb.",
+   "bonusTags": [
+    "climb"
+   ],
+   "consumable": false,
+   "worth": "useful",
+   "goods": "raw_material"
+  },
+  {
+   "id": "resonance_lantern",
+   "name": "Resonance Lantern",
+   "kind": "tool",
+   "description": "Harmonic-made: a phononic crystal that glows when it sings. Light without flame, and it hums louder near active nanite fields.",
+   "bonusTags": [
+    "investigate",
+    "scout",
+    "substrate-gathering"
+   ],
+   "consumable": false,
+   "substrateCharge": 0.04,
+   "substrateNote": "A phononic crystal that glows when it sings; singing is a draw on the lattice and the crystal stays warm.",
+   "worth": "useful",
+   "goods": "raw_material"
+  },
+  {
+   "id": "medics_satchel",
+   "name": "Medic's Satchel",
+   "kind": "tool",
+   "description": "Herb rolls, boiled linen, needle and gut. Valley medicine — patient, practical, proven.",
+   "bonusTags": [
+    "heal",
+    "help"
+   ],
+   "consumable": false,
+   "worth": "useful",
+   "goods": "raw_material"
+  },
+  {
+   "id": "healing_draught",
+   "name": "Healing Draught",
+   "kind": "consumable",
+   "description": "Bitter green tincture from the terrace gardens. Knits small wounds and dulls big ones.",
+   "effects": {
+    "health": 8
+   },
+   "consumable": true,
+   "bonusTags": [
+    "heal",
+    "remedy",
+    "grip"
+   ],
+   "worth": "useful",
+   "goods": "medicines"
+  },
+  {
+   "id": "dried_rations",
+   "name": "Dried Rations",
+   "kind": "consumable",
+   "description": "Fish, fruit leather, hard bread. Two days if you're honest with yourself, three if you're not.",
+   "effects": {
+    "energy": 15
+   },
+   "consumable": true,
+   "bonusTags": [
+    "travel",
+    "survival",
+    "weather"
+   ],
+   "worth": "trivial",
+   "goods": "living_stock"
+  },
+  {
+   "id": "prism_chip",
+   "name": "Prism Chip",
+   "kind": "tool",
+   "description": "A thumb-sized shard of Radiant photonic crystal. Splits any light into telltale spectra — a poor man's Prism Sight.",
+   "bonusTags": [
+    "investigate",
+    "analyze",
+    "substrate-gathering"
+   ],
+   "consumable": false,
+   "substrateCharge": 0.05,
+   "substrateNote": "Radiant photonic crystal. A small shard holds a small charge.",
+   "worth": "useful",
+   "goods": "raw_material"
+  },
+  {
+   "id": "trade_tokens",
+   "name": "Trade Tokens",
+   "kind": "misc",
+   "description": "Stamped ceramic rounds honored in Millbrook and grudgingly beyond. The valley's compromise with currency.",
+   "bonusTags": [
+    "negotiate"
+   ],
+   "consumable": false,
+   "worth": "trivial",
+   "goods": "raw_material"
+  },
+  {
+   "id": "keystone_shard",
+   "name": "Keystone Shard",
+   "kind": "relic",
+   "description": "A palm-sized wedge of Precursor keystone, warm on the flat and cold on the broken edge. It answers structured intent the way the lattice does, because it is a piece of it.",
+   "bonusTags": [
+    "investigate",
+    "precursor",
+    "substrate-gathering"
+   ],
+   "consumable": false,
+   "substrateCharge": 0.09,
+   "substrateNote": "⛔ PRECURSOR charge. It carries dense ground WITH you — a lattice-worker holding one is less starved in thin country, and only for as long as the shard lasts. ⚠️ It does nothing for a Reaching Mind, who wants the ground quiet; carrying one is interference to them. Cannot be recharged by anyone living.",
+   "worth": "valuable",
+   "goods": "relic"
+  },
+  {
+   "id": "pretransition_cell",
+   "name": "Pre-Transition Cell",
+   "kind": "tool",
+   "description": "A sealed grey canister the length of a forearm, stamped with a maker's mark nobody can read and a fill-line that still shows three-quarters. Machinery, not magic. It was made to be used up.",
+   "bonusTags": [
+    "craft",
+    "repair",
+    "nanite"
+   ],
+   "consumable": false,
+   "substrateCharge": 0.07,
+   "substrateNote": "⛔ NANITE charge, and it is the one source that travels: a cell works exactly as well on a bare mountain as in a lattice hollow, because it answers to CONDITION AND SUPPLY, not to ground. ⚠️ It DEPLETES, and nobody left knows how to refill one. What the God-Named carry, and why their people are stronger together than apart.",
+   "worth": "valuable",
+   "goods": "trade_good"
+  },
+  {
+   "id": "snarl_bead",
+   "name": "Snarl Bead",
+   "kind": "relic",
+   "description": "A knot of something that was once ordered, fused into a bead the colour of oil on water. It is never quite the same temperature twice and it is never quite still.",
+   "bonusTags": [
+    "improvise",
+    "wild",
+    "substrate-gathering"
+   ],
+   "consumable": false,
+   "substrateCharge": 0.06,
+   "substrateNote": "⚠️ WILD charge — ungoverned nanite, bound into a bead by someone brave or careless. It widens BOTH crit bands for whoever carries it: your best results get better and your worst get worse, and you do not choose which arrives. ⛔ The Churnfolk sell these cheerfully and will not take one back.",
+   "worth": "useful",
+   "goods": "raw_material"
+  },
+  {
+   "id": "quiet_stone",
+   "name": "Quiet Stone",
+   "kind": "tool",
+   "description": "A river-smoothed stone that has been held so often it has a thumb-hollow. There is nothing in it. That is the point.",
+   "bonusTags": [
+    "focus",
+    "meditate",
+    "discipline"
+   ],
+   "consumable": false,
+   "substrateCharge": 0,
+   "substrateNote": "⛔ NO CHARGE, DELIBERATELY — and it is still worth carrying. A Quiet Stone is a focus for METAPHYSICAL work, which wants thin ground and treats a dense lattice as apparatus in the way. ⚠️ It holds no power and cannot be drained, so nothing can be taken from the person carrying it. The Reaching Mind's answer to the Keystone Shard: where a shard brings the ground with you, a stone helps you stop listening to it.",
+   "worth": "common",
+   "goods": "raw_material"
+  },
+  {
+   "id": "the_far_token",
+   "name": "The Far Token",
+   "kind": "relic",
+   "description": "A coin-weight of something that is not metal, marked on one face and blank on the other, and the blank face is the one that is hard to look at. It is cold in a way that does not warm to the hand.",
+   "bonusTags": [
+    "veil",
+    "bargain",
+    "precursor"
+   ],
+   "consumable": false,
+   "substrateCharge": 0.08,
+   "substrateNote": "⛔ VEIL charge — a thing from the far side of a defensive work, and it is powered by an ABSENCE. It thins the membrane around whoever carries it: good ground for the Beyond-Facing and for Far Terms, ⚠️ and quietly bad for anyone lattice-dependent standing nearby. ⛔ IT WORKS BOTH WAYS. Something knows where the token is, and a token that has been carried a long time is a token that has been noticed. The Bargainers price these honestly and most of them will not hold one overnight.",
+   "worth": "valuable",
+   "goods": "relic"
+  },
+  {
+   "id": "warden_ash",
+   "name": "Warden's Ash",
+   "kind": "consumable",
+   "description": "A twist of grey powder in waxed paper — the residue of something an Ashwarden attended all the way to its end, kept because an ending witnessed properly leaves something behind.",
+   "bonusTags": [
+    "ward",
+    "attend",
+    "death"
+   ],
+   "consumable": true,
+   "substrateCharge": 0.03,
+   "substrateNote": "⚠️ Scattered over a body or a threshold, it makes an ending HARDER TO INTERFERE WITH — a pattern less easily archived by the lattice, less easily pulled across by what waits beyond. ⛔ It does not preserve anyone and it does not bring anyone back. It buys a natural ending its natural path, which the Ashwardens hold is the whole of the work. Used up in one scattering.",
+   "worth": "useful",
+   "goods": "raw_material"
+  }
+ ],
+ "_carriedPowerNote": "SNG-381: items that carry a POWER SOURCE, one per ratified source. ⛔ The source is stated in `substrateNote` PROSE rather than a `chargeSource` field, deliberately — the note reaches play today and a new field would have no reader (SNG-380). ⚠️ When substrate.js can take a typed charge, promote these notes to `chargeSource` and the prose stays as flavour. ⚠️ NOTE `quiet_stone` carries charge 0 ON PURPOSE: metaphysical craft is the source that wants LESS, and an item expressing that is more interesting than one more battery."
 }

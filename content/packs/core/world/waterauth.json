@@ -1,0 +1,82 @@
+{
+ "_note": "⛔ SNG-391. AUTHORED water — which locations bear inland water, and WHY, read from each description. This replaced a REGEX over prose that had a 10-of-18 false-positive rate: it matched 'the Lattice-folk are WELL-served', 'a very WELL-kept ledger', the place name 'the Crossing', and — worst — two NEGATIONS: 'NO river-plot reaches here' and 'NOTHING here is about the river'. ⚠️ DO NOT REINTRODUCE PROSE REGEX. A regex over prose finds words, not facts.",
+ "_use": "The pipeline digs a shallow basin at each `authored` location before flow routing, then places the stated water kind. `dropped` records what the regex wrongly matched and must NOT be re-added.",
+ "_submerged": "⛔ `sunken_choir` is the ONLY location authored as standing IN water — 'a pre-Transition amphitheatre, flooded'. Every other water-bearing settlement stands on the SHORE; the pipeline pushes the shoreline back from them. The lake-containment gate asserts exactly this.",
+ "shorelinePushback": [
+  "archive_hollow",
+  "cairn_and_scour",
+  "millbrook",
+  "the_quiet_ground",
+  "the_wellspring_deep",
+  "wellspring",
+  "echo_river_crossing",
+  "greywater_stilts",
+  "waystone",
+  "thinwater",
+  "the_hollowing"
+ ],
+ "authored": {
+  "echo_river_crossing": {
+   "kind": "river",
+   "why": "the old stone-and-cable bridge where the Echo River narrows"
+  },
+  "millbrook": {
+   "kind": "river",
+   "why": "a RIVERSIDE farming village; water wheels turn along the Echo River"
+  },
+  "archive_hollow": {
+   "kind": "river",
+   "why": "a collapsed limestone sink UPSTREAM of the crossing, opened by spring floods"
+  },
+  "sunken_choir": {
+   "kind": "lake",
+   "why": "a pre-Transition amphitheatre, flooded — the name is the fact"
+  },
+  "greywater_stilts": {
+   "kind": "marsh",
+   "why": "a town built ON STILTS over the southern marsh"
+  },
+  "the_quiet_ground": {
+   "kind": "lake",
+   "why": "still grey water, wide windows — the water is what the dying look at"
+  },
+  "waystone": {
+   "kind": "river",
+   "why": "bridge-builders and road-walkers; THE MASONS BUILD THE CROSSING — a bridge needs a river"
+  },
+  "the_hollowing": {
+   "kind": "marsh",
+   "why": "the seam between drained wood and tended ground"
+  },
+  "thinwater": {
+   "kind": "river",
+   "why": "the water runs thin here and so does everything else"
+  },
+  "the_wellspring_deep": {
+   "kind": "lake",
+   "why": "where fresh water meets salt"
+  },
+  "wellspring": {
+   "kind": "river",
+   "why": "the Wellspring rises here"
+  },
+  "the_greywater": {
+   "kind": "marsh",
+   "why": ""
+  }
+ },
+ "dropped": {
+  "tier_seven": "'the Lattice-folk are WELL-SERVED' — an adverb, not a well",
+  "cairn_and_scour": "'a very WELL-kept ledger'",
+  "the_scour": "'ending a thing WELL is a craft'",
+  "greyhearth": "'the CROSSING's dead' — the place name, not a ford",
+  "the_axis_gate": "'twelve roads leave the CROSSING' — the place name",
+  "the_crossing": "'every axis CROSSES here' — it is a road crossing, not a river one",
+  "the_low_market": "'near enough the CROSSING to be respectable'",
+  "thornwake_glade": "⛔ NEGATED: 'NO river-plot reaches here'",
+  "kestrels_roost": "⛔ NEGATED: 'nothing here is about the river'",
+  "the_harborward": "a sea harbour — already coastal, needs no inland water",
+  "the_unlit_deep": "'past the harbor' — sea, and it is a cavern",
+  "the_maw": "a cavern"
+ }
+}

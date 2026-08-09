@@ -91,6 +91,34 @@ for (const f of readdirSync(join(root, "engine")).filter(x => x.endsWith(".js"))
   }
 }
 
+// ⛔ SNG-391 — THE THIRD BLIND SPOT, AND THE WORST OF THE THREE: a symbol that is not exported by
+// ANY module cannot appear in an export list, so the scan above never considers it — yet app.js can
+// still call it and die. `fetchJSON` is a PRIVATE helper inside engine/state.js; `loadTerrain` called it
+// as if it were global, every open of the world map threw, and my own catch dressed the ReferenceError
+// as the polite "could not be read" fallback. Erik reported "doesn't load"; the console knew why and the
+// screen did not. ⚠️ A fallback that catches its own author's crash is the one failure mode of
+// graceful degradation, and only a guard that knows the PRIVATE names can see through it.
+const privateEngine = new Set();
+for (const f of readdirSync(join(root, "engine")).filter((x) => x.endsWith(".js"))) {
+  const src = readFileSync(join(root, "engine", f), "utf8");
+  const exported = new Set([...src.matchAll(/export\s+(?:async\s+)?(?:function|const|class)\s+([A-Za-z_$][\w$]*)/g)].map((m) => m[1]));
+  // ⚠️ the m-flag ^ instead of an alternation with a newline — this file's header warns that no escape
+  // survives the authoring tooling, and the previous form of this line proved it again (a \n became a
+  // literal line break inside the regex and the whole harness failed to parse).
+  for (const m of src.matchAll(/^\s*(?:async\s+)?function\s+([A-Za-z_$][\w$]*)/gm)) {
+    if (!exported.has(m[1])) privateEngine.add(m[1]);
+  }
+}
+const phantoms = [];
+for (const sym of privateEngine) {
+  if (allImported.has(sym) || declaredLocally.has(sym)) continue;
+  const called = new RegExp("(^|[^.\\w$])" + escapeRe(sym) + "\\s*\\(", "m");
+  if (called.test(code)) phantoms.push(sym);
+}
+check(`353b: app.js never calls a PRIVATE engine helper as if it were global (${phantoms.length ? phantoms.join(", ") : "none"})`,
+  phantoms.length === 0,
+  phantoms.map((s2) => `${s2} exists only inside an engine module and is not exported — ReferenceError at the call site`).join(" · "));
+
 for (const p of problems) console.log(`      called in app.js but NOT imported: ${p}`);
 check(`353b: every engine symbol app.js CALLS is imported (${problems.length ? problems.length + " missing" : "none missing"})`,
   problems.length === 0, problems.join(" · "));

@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.93";
+const APP_VERSION = "1.9.94";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6972,7 +6972,15 @@ let _terrainDoc = null, _terrain = null, _terrainFailed = false;
 async function loadTerrain() {
   if (_terrain || _terrainFailed) return _terrain;
   try {
-    _terrainDoc = await fetchJSON("content/packs/core/world/terrain.json");
+    // ⛔ THIS LINE SHIPPED AS `fetchJSON(...)` — a function that exists only as a PRIVATE helper
+    // inside engine/state.js and was never exported. ReferenceError on every open of the world map, from
+    // v1.9.91 on — and MY OWN graceful-degradation catch swallowed it into the polite "could not be
+    // read" message, so the crash wore the fallback's clothes. Erik reported "doesn't load"; the console
+    // knew why and the screen did not. Plain fetch(), which is what the private helper wraps anyway,
+    // with the app version as a cache-bust so a rebuilt world is never served stale.
+    const res = await fetch("content/packs/core/world/terrain.json?v=" + APP_VERSION);
+    if (!res.ok) throw new Error("terrain " + res.status);
+    _terrainDoc = await res.json();
     _terrain = decodeTerrain(_terrainDoc);
   } catch { _terrainFailed = true; }
   return _terrain;

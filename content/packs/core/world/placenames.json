@@ -183,11 +183,11 @@
   },
   {
    "id": "the_choirwater",
-   "name": "The Choirwater",
+   "name": "The Drowned Reach",
    "nearHead": "sunken_choir",
    "nearMouth": "the_lensward",
    "span": "13.1°",
-   "why": "Rises at the Sunken Choir and runs toward the Lensward. ⚠️ It is the water that did the drowning and nobody has renamed it.",
+   "why": "⛔ RENAMED. My Choirwater was absorbed as a tributary of the 110° main stem — CCode's census refused to bind it and was right to. ⚠️ THE FICTION SAYS WHAT HAPPENED: the flood took the water and the name went with it. This is the main stem's lower reach, below the Sunken Choir, and it is named for the drowning rather than for the singers.",
    "head": [
     -49.75,
     -155.25
@@ -321,13 +321,13 @@
  "fens": [
   {
    "id": "the_millfen",
-   "name": "The Millfen",
+   "name": "The Milljaw",
    "near": "millbrook",
    "extent": "24.2°",
-   "why": "⛔ THE LARGEST WETLAND IN THE WORLD, and Millbrook stands at its edge rather than in it. The valley's over-fertile ground going soft — abandoned soil-conditioning nanite doing to water what it did to the fields.",
+   "why": "⛔ RENAMED AND RESITED. I authored a single 24.2° wetland; this terrain produces TWO disjoint fens whose combined centroid lands 1.35° from my address — CCode measured it. The great fen was never one thing. ⚠️ THE FICTION KEEPS THE FACT AND DROPS THE SIZE: the Milljaw is the southern fen, the one Millbrook actually has to walk around. 'Jaw' because the road bends for it.",
    "centroid": [
-    -66.98,
-    -98.42
+    -73.5,
+    -89.8
    ],
    "extentDeg": 24.2
   },
@@ -348,7 +348,7 @@
    "name": "The Marchfen",
    "near": "greenmarch",
    "extent": "17.0°",
-   "why": "Below Greenmarch at the Quickwood's edge — the last soft ground before the canopy closes.",
+   "why": "⛔ RESTORED. My authored address survived; CCode's write-back had collapsed it onto the Stairfen's polygon and I blamed my own data for it. ⚠️ The wetland complex between here and Stair Hollow genuinely broke up — this name now leans on its town, which is the honest state and is pinned in the census.",
    "centroid": [
     -38.75,
     -48.56
@@ -408,10 +408,10 @@
    "name": "The Terrace Fen",
    "near": "harmonic_heights_terrace",
    "extent": "9.7°",
-   "why": "Where the Harmonic Heights' lowest terrace meets standing water. The sonic civilisation's drainage, which they do not discuss.",
+   "why": "⛔ MY COLLISION, corrected. I authored this with the Stiltfen's exact centroid — two names on one point, 4.7° of real separation between their anchors. ⚠️ The Terrace Fen is the Harmonic Heights' own drainage under its lowest terrace; the Stiltfen is the southern marsh Greywater stands on. Different water, different people, one address by my error.",
    "centroid": [
-    -74.84,
-    130.36
+    -74.13,
+    55.0
    ],
    "extentDeg": 9.7
   },
@@ -432,12 +432,24 @@
    "name": "The Stairfen",
    "near": "stair_hollow",
    "extent": "7.9°",
-   "why": "Below Stair Hollow, where the steps run out into ground that will not hold one.",
+   "why": "⛔ RESTORED, 10° from the Marchfen and never the same place. Below Stair Hollow, where the steps run out into ground that will not hold one. ⚠️ Rebinds via its town because its fen is gone.",
    "centroid": [
     -43.73,
     -75.51
    ],
    "extentDeg": 7.9
+  },
+  {
+   "id": "the_upper_mire",
+   "name": "The Upper Mire",
+   "near": "disputed_zone_fringe",
+   "centroid": [
+    -56.0,
+    -102.3
+   ],
+   "extentDeg": 4.8,
+   "why": "⛔ The northern fragment of what I wrongly named as one wetland. Millbrook knows the Milljaw and does not go here. ⚠️ The two were never connected; I authored the connecting marsh and the terrain declined to make it."
   }
- ]
+ ],
+ "_censusNote": "⛔ Names that cannot bind are NOT failures. Seven refused to bind at 3° and each one was the world reporting that the feature I named is gone or was never one thing. ⚠️ Widening the tolerance would have bound all seven to the wrong water and I would never have known. The Millfen is the clearest case: a 24.2° wetland I invented, two 4.5° fens the terrain actually makes."
 }

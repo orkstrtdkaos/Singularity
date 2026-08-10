@@ -20,7 +20,8 @@
      "to": "sunken_choir",
      "bearing": -96
     }
-   ]
+   ],
+   "relief": 0.015
   },
   "_reading": "Its own seed names them and nobody made them places: 'Water wheels turn along the Echo River; terraced gardens climb the lower slopes. THE VILLAGE WELL AND THE RIVER DOCK ARE THE TWO CENTRES of daily life.' ⛔ Two centres is a LAYOUT INSTRUCTION and it has been sitting in the prose.",
   "radiusMetres": 420,
@@ -121,7 +122,8 @@
      "to": "disputed_zone_fringe",
      "bearing": 90
     }
-   ]
+   ],
+   "relief": 0.017
   },
   "_dataFlag": "⛔ ITS NEAREST TRACED RIVER IS 3.83° AWAY — about 425 km — AND ITS ENTIRE IDENTITY IS A BRIDGE OVER THE ECHO. `waterauth.json` authors a river here and the built hydrology does not carry one to it. ⚠️ I am placing the bridge on the fiction, not on the measurement, and flagging the gap rather than quietly bending the layout around bad data. SNG-403b.",
   "radiusMetres": 300,
@@ -202,7 +204,8 @@
      "to": "the_quiet_ground",
      "bearing": 30
     }
-   ]
+   ],
+   "relief": 0.104
   },
   "_reading": "'A town that buries for every road that meets here — the Crossing's dead and the Palelands' both.' ⛔ A BURYING TOWN'S LAYOUT IS ITS TRAFFIC: the dead arrive by road and go uphill.",
   "radiusMetres": 380,
@@ -272,7 +275,8 @@
      "to": "the_held_yard",
      "bearing": -60
     }
-   ]
+   ],
+   "relief": 0.567
   },
   "_verticalFinding": "⛔ THIS ONE BREAKS THE HORIZONTAL FRAME AND IT SHOULD. Its two promoted places are an ENTRANCE HALL and a THIRD TERRACE — the same footprint at different heights. ⚠️ AN INTERIOR NEEDS A VERTICAL AXIS. `localMap` needs an optional `level`: 0 ground, positive up, negative below. Without it the Cogitarium's two rooms land on top of each other and the map says they are the same place.",
   "radiusMetres": 160,
@@ -560,5 +564,6 @@
    }
   ]
  },
- "_basisNote": "⛔ SNG-404 §2 asked CCode to tune the relief threshold against these eight layouts. ⚠️ MY OWN DATA COULD NOT ANSWER IT AND I HAD TO FIX THE DATA FIRST. I recorded intent in PROSE (`why`) and nothing machine-readable, so 'did this site use the uphill gradient?' could only be guessed by comparing bearings — and that guess is wrong: Greywater's skiff landing sits at bearing 85 against a noise-uphill of 90, so it READS as uphill-placed when it was placed on the ROAD. ⛔ AT RELIEF 0.002 THE UPHILL BEARING IS NOISE, AND NOISE COINCIDES WITH THINGS. `basis` now states which gradient decided each placement: river | uphill | anti-uphill | road | anti-road | between | prose | tradition | inferred. THE THRESHOLD IS TUNABLE FROM THIS FIELD, not from bearing arithmetic."
+ "_basisNote": "⛔ SNG-404 §2 asked CCode to tune the relief threshold against these eight layouts. ⚠️ MY OWN DATA COULD NOT ANSWER IT AND I HAD TO FIX THE DATA FIRST. I recorded intent in PROSE (`why`) and nothing machine-readable, so 'did this site use the uphill gradient?' could only be guessed by comparing bearings — and that guess is wrong: Greywater's skiff landing sits at bearing 85 against a noise-uphill of 90, so it READS as uphill-placed when it was placed on the ROAD. ⛔ AT RELIEF 0.002 THE UPHILL BEARING IS NOISE, AND NOISE COINCIDES WITH THINGS. `basis` now states which gradient decided each placement: river | uphill | anti-uphill | road | anti-road | between | prose | tradition | inferred. THE THRESHOLD IS TUNABLE FROM THIS FIELD, not from bearing arithmetic.",
+ "_thresholdFinding": "⛔ CCODE ASKED ME TO TUNE THE 0.05 RELIEF THRESHOLD AGAINST THESE EIGHT. I did, and THERE IS NO SUCH THRESHOLD — the classes overlap:\n   uphill USED at relief: 0.015, 0.017, 0.104, 0.541, 0.567\n   uphill NOT used at:    0.002, 0.018, 0.053\n⛔ MILLBROOK USED UPHILL AT 0.015 AND THE FIGURE-WORKS DID NOT AT 0.053 — three times the relief and no uphill placement. ⚠️ RELIEF ALONE DOES NOT DECIDE, AND MY OWN PRECEDENCE ORDER WAS BACKWARDS.\nThe reason is in the prose: Millbrook's seed says 'terraced gardens CLIMB THE LOWER SLOPES', so the terraces go uphill however slight the slope. The Figure-Works seed says nothing about ground at all.\n⛔ CORRECTED ORDER: PROSE FIRST, GRADIENT SECOND. When a location's own text names a slope, a shore or a water, that is a DIRECT INSTRUCTION and it wins regardless of what the terrain measures. The relief threshold only decides in the ABSENCE of prose — and on three samples (0.002 no, 0.018 no, 0.053 no, 0.541 yes) all I can honestly say is that it sits somewhere between 0.053 and 0.541. ⚠️ THAT IS A WIDE BRACKET AND I WILL NOT NARROW IT ON THREE POINTS."
 }

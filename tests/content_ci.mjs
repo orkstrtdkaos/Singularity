@@ -882,6 +882,58 @@ for (const pack of PACKS) {
     check("SNG-396: the Made Gate is captured — a player-built waygate is a world event sitting in a save, and the census holds it",
       gp396.places.some((p) => p.id === "gen-the-made-gate" && p.visits >= 1));
   }
+  // ══ SNG-409 §1 — NANITE AND DENSITY RESOLVE AS YOU ZOOM.
+  // Aevi: "Type, nanite and biome are baked at 480 × 240 — roughly ten cells across the screen at a 5°
+  // view. ⛔ The map is a picture that gets bigger, not a world that resolves." Terrain needed a
+  // generator because it is a noise field; these two did not — they are a weighted vote over region
+  // seeds, a closed form the browser can evaluate anywhere. The asset ships the vote's INPUTS (~7KB).
+  {
+    const WGF = await import("../engine/worldglobe.js");
+    const tF = WGF.decodeTerrain(rj("content/packs/core/world/terrain.json"));
+    check("SNG-409 §1: the vote's inputs ship with the asset — voters, regions and sources, not a finer bake",
+      !!tF.fields && tF.fields.voters.length > 100 && Object.keys(tF.fields.nanByRegion).length > 20
+      && tF.fields.sources.length > 20);
+
+    // ⛔ HER LOAD-BEARING CONSTRAINT: "whatever produces the detail must agree with the baked layers, or
+    // the base and the detail draw different worlds. I hit that as a visible seam and measured it at
+    // 2.44% disagreement." ⚠️ Evaluating the SAME expression over the SAME numbers cannot disagree —
+    // but "cannot" is a claim about code, and code changes, so it is measured at the cell centres where
+    // the bake is authoritative.
+    let nOk = 0, nTot = 0, dErr = 0, dMax = 0, dTot = 0;
+    for (let y = 3; y < tF.h; y += 17) for (let x = 3; x < tF.w; x += 13) {
+      const lon = -180 + ((x + 0.5) / tF.w) * 360, lat = 90 - ((y + 0.5) / tF.h) * 180;
+      const baked = WGF.sampleAt(tF, lon, lat);
+      if (baked.type === 0 || baked.type === 3) continue;
+      const r = WGF.regionVoteAt(tF, lon, lat);
+      nTot++; if (WGF.naniteAt(tF, lon, lat, r) === baked.nanite) nOk++;
+      const e = Math.abs(WGF.densityAt(tF, lon, lat, r) - baked.density);
+      dErr += e; dMax = Math.max(dMax, e); dTot++;
+    }
+    check("SNG-409 §1: the evaluated nanite AGREES with the bake at every cell centre — no seam to measure",
+      nTot > 100 && nOk === nTot, `${nOk} of ${nTot}`);
+    // ⚠️ the bake stores density in 6 bits, so its own step is 1/63 ≈ 0.0159: agreeing to better than
+    // half a step is agreement to the precision the baked layer can express at all.
+    check("SNG-409 §1: …and the evaluated density agrees to finer than the bake's own quantisation step",
+      dTot > 100 && (dErr / dTot) < (1 / 63) / 2 && dMax < (1 / 63),
+      `mean ${(dErr / dTot).toFixed(4)}, max ${dMax.toFixed(4)}, bake step ${(1 / 63).toFixed(4)}`);
+
+    // ⛔ AND IT ACTUALLY RESOLVES — her acceptance test is that a close view reveals what a wide one could
+    // not contain. Measured across 4° through the strongest authored source: the bake can express TWO
+    // values over that ground, the evaluation expresses hundreds.
+    const src = tF.fields.sources.slice().sort((a, b) => Math.abs(b[2]) - Math.abs(a[2]))[0];
+    const baked = new Set(), evaled = new Set();
+    for (let i = 0; i < 600; i++) {
+      const lon = src[1] - 2 + 4 * (i / 599), lat = src[0];
+      const b = WGF.sampleAt(tF, lon, lat);
+      if (b.type === 0) continue;
+      baked.add(b.density.toFixed(4));
+      evaled.add(WGF.densityAt(tF, lon, lat).toFixed(4));
+    }
+    check("SNG-409 §1: …and it RESOLVES — the same ground carries far more tone evaluated than baked",
+      evaled.size > baked.size * 10,
+      `${baked.size} baked values vs ${evaled.size} evaluated across 4° through the strongest source`);
+  }
+
   // ══ SNG-409 §4 — A POLE NEVER READS AS A TOWN.
   // Aevi: "`tier` is SIZE, `role` is FUNCTION, `kind` is SHAPE… a waygate and a village are both
   // `tier: settlement`; they should never share an icon." And the reason it is not decoration:

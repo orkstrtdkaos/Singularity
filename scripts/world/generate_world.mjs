@@ -259,7 +259,21 @@ export function buildWorld(canon) {
     for (const r of [...placeNames.rivers, ...placeNames.fens]) if (r.score > 1) console.log(`  name drift: ${r.name} sits ${r.score}° from its authored address (via ${r.via})`);
     for (const u of placeNames.unresolved) console.log(`  ⚠️ UNRESOLVED NAME: ${u.name} — ${u.reason} (its feature genuinely restructured; do not widen the threshold to hide it)`);
   }
-  return { type, raw, elev, c0, c1, c2, blist, seats, RLO, RHI, seeds: canon.seeds, hydrology: hyd.hydrology, authoredWaterPresent: hyd.authoredWaterPresent, placeNames };
+  // ⛔ SNG-409 §1 — THE VOTE'S INPUTS SHIP WITH THE ASSET so nanite and density can resolve at any zoom.
+  // They were baked at 480×240 like everything else, which is ~10 cells across a 5° view; but unlike the
+  // terrain they are not noise fields — they are a WEIGHTED VOTE over region seeds, which is a closed
+  // form the browser can evaluate anywhere. ⚠️ Shipping the INPUTS rather than a finer bake is what makes
+  // Aevi's constraint hold by construction: the client cannot disagree with the bake because it runs the
+  // same expression over the same numbers, so there is no seam to measure.
+  const fields = {
+    note: "the region vote's inputs — evaluate, do not interpolate. w = 1/((d²+6)^1.6) over voters; nanite is the winning region's state, density its base plus the authored sources.",
+    voters: voters.map((v) => [Math.round(v.lat * 1000) / 1000, Math.round(v.lon * 1000) / 1000, v.region]),
+    nanByRegion: Object.fromEntries(Object.keys(nanByRegion).map((r) => [r, NAN_STATE[nanByRegion[r]?.state] ?? 0])),
+    densByRegion: Object.fromEntries(Object.entries(densByRegion).map(([r, d]) => [r, Number(d) || 0.5])),
+    sources: sources.map((s2) => [Math.round(s2.lat * 1000) / 1000, Math.round(s2.lon * 1000) / 1000,
+      Math.round(s2.delta * 1000) / 1000, Math.round(s2.rw * 10000) / 10000]),
+  };
+  return { type, raw, elev, c0, c1, c2, blist, seats, RLO, RHI, seeds: canon.seeds, hydrology: hyd.hydrology, authoredWaterPresent: hyd.authoredWaterPresent, placeNames, fields };
 }
 
 /** Serialise in the exact schema engine/worldglobe.js already reads. */
@@ -307,6 +321,7 @@ export function serialise(built, canon) {
     locations: meta,
     seats: built.seats,
     hydrology: built.hydrology,
+    fields: built.fields,
     placeNames: built.placeNames,
     authoredWater: built.authoredWaterPresent ? "applied" : "⚠️ ABSENT — content/packs/core/world/waterauth.json has not shipped; derived hydrology only. The authored digs and kinds apply on the next rebuild once the canon lands.",
     points: built.seeds.map((s) => [s.id, s.region, s.lat, s.lon, "land"]),

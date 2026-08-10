@@ -57,7 +57,7 @@ export function decodeTerrain(doc) {
     // across SNG-391/393/394 — and `grep hydrology engine/worldglobe.js app.js` returned ZERO. The
     // normalisation constants ride too, because a detail patch must reproduce the SAME hypsometry as the
     // baked raster or the two draw different worlds at the seam.
-    hydrology: doc.hydrology || null, placeNames: doc.placeNames || null,
+    hydrology: doc.hydrology || null, placeNames: doc.placeNames || null, fields: doc.fields || null,
     RLO: doc.generatedBy?.RLO ?? null, RHI: doc.generatedBy?.RHI ?? null,
   };
 }
@@ -365,13 +365,21 @@ export function colorAt(t, lon, lat, opts) {
   const sh = o.fine ? hillshadeFine(t, lon, lat, o.fine) : hillshade(t, lon, lat);
   const tone = (elevExact - 128) / 126;
   let c;
+  // ⚠️ WHEN THE VIEW IS CLOSE ENOUGH TO WARRANT DETAIL, THESE TWO ARE EVALUATED RATHER THAN SAMPLED.
+  // One region vote serves both, so a point costs one pass over 118 voters instead of two.
+  const voteRegion = o.fine && t.fields ? regionVoteAt(t, lon, lat) : null;
+  const dens = voteRegion ? densityAt(t, lon, lat, voteRegion) : s.density;
+  const nan = voteRegion ? naniteAt(t, lon, lat, voteRegion) : s.nanite;
   if (layer === "lattice") {
-    c = s.type === 3 ? [54, 52, 70] : [36 + s.density * 200, 30 + s.density * 160, 24 + s.density * 40];
+    c = s.type === 3 ? [54, 52, 70] : [36 + dens * 200, 30 + dens * 160, 24 + dens * 40];
   } else if (layer === "nanite") {
-    c = s.type === 3 ? [62, 58, 80] : (s.nanite === 1 ? [55, 138, 221] : s.nanite === 2 ? [99, 153, 34] : [74, 74, 68]);
+    c = s.type === 3 ? [62, 58, 80] : (nan === 1 ? [55, 138, 221] : nan === 2 ? [99, 153, 34] : [74, 74, 68]);
   } else if (layer === "ground") {
     if (s.type === 3) return [54, 52, 70];
-    const f = groundFactorAt(t, lon, lat, o.band, o.bandFn);
+    // ⚠️ the ground layer asks the ENGINE's band arithmetic (SNG-390) — it is handed the resolved
+    // density rather than the cell's, so "whose ground" sharpens with the zoom like everything else.
+    const bandFn = o.bandFn;
+    const f = (o.band && bandFn) ? bandFn(o.band, dens) : groundFactorAt(t, lon, lat, o.band, bandFn);
     c = HEAT[Math.max(0, Math.min(7, Math.floor((f == null ? 1 : f) * 8)))];
   } else {
     c = hyp(tone);
@@ -427,6 +435,68 @@ export function contourStepFor(span) {
   if (span > 14) return 4;
   if (span > 6) return 8;
   return 16;
+}
+
+/** ⛔ SNG-409 §1 — NANITE AND DENSITY RESOLVE BY EVALUATION, NOT BY A FINER BAKE.
+ *  Aevi: "Type, nanite and biome are baked at 480 × 240 — roughly ten cells across the screen at a 5°
+ *  view. The map is a picture that gets bigger, not a world that resolves."
+ *
+ *  ⚠️ Terrain needed a generator because it is a noise field. These two do not: they are a WEIGHTED VOTE
+ *  over region seeds, `w = 1/((d² + 6)^1.6)`, which is a closed form that can be evaluated anywhere. So
+ *  the asset ships the vote's INPUTS (118 voters, 27 regions, 43 sources — about 7KB) and this runs the
+ *  same expression the pipeline ran.
+ *
+ *  ⛔ THAT IS ALSO HOW HER CONSTRAINT IS SATISFIED — "whatever produces the detail must agree with the
+ *  baked layers, or the base and the detail draw different worlds; I measured it at 2.44% disagreement."
+ *  A client that re-derives from the same numbers with the same expression cannot disagree with the
+ *  bake: there is no seam to measure, rather than a small one to tolerate. The gate checks it anyway,
+ *  because "cannot disagree" is a claim about code and code changes. */
+export function regionVoteAt(t, lon, lat) {
+  const f = t && t.fields;
+  if (!f || !f.voters) return null;
+  const R2 = Math.PI / 180;
+  const cl = Math.cos(lat * R2);
+  const w = {};
+  let best = null, bestW = -1;
+  for (let i = 0; i < f.voters.length; i++) {
+    const v = f.voters[i];
+    let dl = Math.abs(lon - v[1]); if (dl > 180) dl = 360 - dl;
+    const d2 = (lat - v[0]) ** 2 + (dl * cl) ** 2;
+    const ww = 1 / Math.pow(d2 + 6, 1.6);
+    const r = v[2];
+    const acc = (w[r] = (w[r] || 0) + ww);
+    // ⚠️ the pipeline takes the max by a reduce over the accumulated map, which resolves ties toward the
+    // first key inserted; tracking the running max reproduces that without materialising the key order.
+    if (acc > bestW) { bestW = acc; best = r; }
+  }
+  return best;
+}
+
+/** The lattice density at a point — the winning region's base, plus every authored source that reaches. */
+export function densityAt(t, lon, lat, region) {
+  const f = t && t.fields;
+  if (!f) return null;
+  const r = region === undefined ? regionVoteAt(t, lon, lat) : region;
+  if (!r) return 0;
+  let d = Number(f.densByRegion[r]) || 0.5;
+  const cl = Math.cos(lat * Math.PI / 180);
+  for (let i = 0; i < f.sources.length; i++) {
+    const s2 = f.sources[i];
+    let dl = Math.abs(lon - s2[1]); if (dl > 180) dl = 360 - dl;
+    // ⚠️ her radians conversion, kept verbatim — 57.3 rather than 180/π, because reproducing the bake
+    // means reproducing its arithmetic and not improving it.
+    const dist = Math.hypot(lat - s2[0], dl * cl) / 57.3;
+    if (dist < s2[3] * 2.5) d += s2[2] * Math.exp(-Math.pow(dist / s2[3], 2));
+  }
+  return Math.max(0, Math.min(1, d));
+}
+
+/** The nanite state at a point — 0 clear · 1 ordered · 2 wild, from the winning region. */
+export function naniteAt(t, lon, lat, region) {
+  const f = t && t.fields;
+  if (!f) return null;
+  const r = region === undefined ? regionVoteAt(t, lon, lat) : region;
+  return r ? (f.nanByRegion[r] ?? 0) : 0;
 }
 
 /** ⛔ WHAT A PLACE IS, IN ONE WORD, FOR THE MAP TO DRAW. Erik: "I'd like actual icons for the various

@@ -145,5 +145,159 @@
    "why": "The smaller of the two above the Figure-Works. ⚠️ Named by comparison, which is the plainest thing on this list and the only one that sounds like the settlements do."
   }
  ],
- "_pending": "⚠️ FENS AND RIVERS ARE NOT NAMED. Fens are small and shift between rebuilds — they should be named only where one is stable and a location sits on it. ⛔ RIVERS ARE DERIVED FROM FLOW and change when the terrain does; naming them before the drainage is stable would name water that moves."
+ "_anchoring": "⛔ RIVERS AND FENS ARE ANCHORED TO LOCATIONS, NOT TO GEOMETRY. I flagged that naming them was risky because both derive from flow and shift when terrain regenerates. Erik ruled name them, and this is how that holds: each name binds to `nearHead` / `nearMouth` / `near` — STABLE location ids — not to a traced path. ⚠️ THE PIPELINE RE-ATTACHES A NAME TO WHATEVER FEATURE IS NEAREST ITS ANCHOR AFTER A REBUILD. The Echo still runs past Millbrook even when its exact course moves. A name bound to coordinates would be lost; a name bound to a place is not.",
+ "rivers": [
+  {
+   "id": "the_echo",
+   "name": "The Echo",
+   "nearHead": "the_hundred_markets",
+   "nearMouth": "kestrels_roost",
+   "span": "91.5°",
+   "why": "⛔ THE GREAT RIVER. It rises near the Hundred Markets and runs most of the way round the world before it ends near Kestrel's Roost. Echo River Crossing is named for it; Millbrook's wheels turn on it. ⚠️ It is the only named thing on the map that touches nearly every disposition, and it is water, which the Numinous consider significant and the Enginewrights consider a shipping lane."
+  },
+  {
+   "id": "the_greenwater",
+   "name": "The Greenwater",
+   "nearHead": "greenforge",
+   "nearMouth": "the_forge_eternal",
+   "span": "14.3°",
+   "why": "Runs from Greenforge down toward the Forge-Eternal. Green going into black — the growers' water arriving where the makers use it, which is most of the foothills economy in one river."
+  },
+  {
+   "id": "the_choirwater",
+   "name": "The Choirwater",
+   "nearHead": "sunken_choir",
+   "nearMouth": "the_lensward",
+   "span": "13.1°",
+   "why": "Rises at the Sunken Choir and runs toward the Lensward. ⚠️ It is the water that did the drowning and nobody has renamed it."
+  },
+  {
+   "id": "the_axewater",
+   "name": "The Axewater",
+   "nearHead": "the_crossing",
+   "nearMouth": "the_axis_gate",
+   "span": "13.0°",
+   "why": "⛔ THE FIRST WATER. It rises within four degrees of the Crossing — the closest any river comes to the pole — and runs out past the Axis Gate. 'Axe' is the axis worn down by saying."
+  },
+  {
+   "id": "the_middlerun",
+   "name": "The Middle Run",
+   "nearHead": "the_middle_way",
+   "nearMouth": "bedrock",
+   "span": "12.5°",
+   "why": "The Somatics' water, from the Middle Way toward the Given Land. They swim it as training and consider that the whole of its purpose."
+  },
+  {
+   "id": "the_switchwater",
+   "name": "The Switchwater",
+   "nearHead": "old_switchback",
+   "nearMouth": "radiant_plateau_edge",
+   "span": "12.0°",
+   "why": "Comes down the Old Switchback's mountain, the road and the river using the same cut. The road is older by name and younger by fact."
+  },
+  {
+   "id": "the_kindlerun",
+   "name": "The Kindle Run",
+   "nearHead": "kindlerow",
+   "nearMouth": "plainstead",
+   "span": "12.0°",
+   "why": "From the forge-country down to Plainstead's flat. Kindlerow quenches in it and Plainstead drinks downstream, which they have argued about for two hundred years."
+  },
+  {
+   "id": "the_burnwater",
+   "name": "The Burnwater",
+   "nearHead": "dw_the_burnscar",
+   "nearMouth": "ent_deepwood",
+   "span": "11.5°",
+   "why": "Off the Burnscar into the Deepwood. ⚠️ The Ents let it in, which is not nothing."
+  },
+  {
+   "id": "the_longshorewater",
+   "name": "The Longshore Water",
+   "nearHead": "longshore",
+   "nearMouth": "gearsflat",
+   "span": "10.4°",
+   "why": "Longshore to Gearsflat — the waygate town's river, running to the salvage yards. Bridge-wrights at one end and people who take bridges apart at the other."
+  },
+  {
+   "id": "the_greenwardwater",
+   "name": "The Greenward Water",
+   "nearHead": "the_greenward",
+   "nearMouth": "the_forge_eternal",
+   "span": "10.0°",
+   "why": "Out of the Quickwood's edge toward the Making. Rootkin water reaching maker country."
+  }
+ ],
+ "fens": [
+  {
+   "id": "the_millfen",
+   "name": "The Millfen",
+   "near": "millbrook",
+   "extent": "24.2°",
+   "why": "⛔ THE LARGEST WETLAND IN THE WORLD, and Millbrook stands at its edge rather than in it. The valley's over-fertile ground going soft — abandoned soil-conditioning nanite doing to water what it did to the fields."
+  },
+  {
+   "id": "the_burnfen",
+   "name": "The Burnfen",
+   "near": "dw_the_burnscar",
+   "extent": "18.6°",
+   "why": "Where the Burnscar's runoff pools. Wet ground on a scar, which the Ents find instructive."
+  },
+  {
+   "id": "the_greenmarch_fen",
+   "name": "The Marchfen",
+   "near": "greenmarch",
+   "extent": "17.0°",
+   "why": "Below Greenmarch at the Quickwood's edge — the last soft ground before the canopy closes."
+  },
+  {
+   "id": "the_echofen",
+   "name": "The Echofen",
+   "near": "echo_river_crossing",
+   "extent": "16.5°",
+   "why": "Where the Echo slows before the crossing. ⚠️ The bridge exists because the fen made fording impossible, which is the whole reason the town is there."
+  },
+  {
+   "id": "the_quietfen",
+   "name": "The Quiet Fen",
+   "near": "the_quiet_house",
+   "extent": "12.6°",
+   "why": "Beside the Quiet House. Nobody raises a hand here either, for a different reason."
+  },
+  {
+   "id": "the_gatefen",
+   "name": "The Gatefen",
+   "near": "the_axis_gate",
+   "extent": "10.7°",
+   "why": "Around the Axis Gate's approaches. Twelve roads leave the Crossing and several of them are wet for the first week."
+  },
+  {
+   "id": "the_stiltfen",
+   "name": "The Stiltfen",
+   "near": "greywater_stilts",
+   "extent": "10.1°",
+   "why": "⛔ THE SOUTHERN MARSH. Greywater Stilts stands ON it — the town is built on poles because this is what the ground does here."
+  },
+  {
+   "id": "the_terracefen",
+   "name": "The Terrace Fen",
+   "near": "harmonic_heights_terrace",
+   "extent": "9.7°",
+   "why": "Where the Harmonic Heights' lowest terrace meets standing water. The sonic civilisation's drainage, which they do not discuss."
+  },
+  {
+   "id": "the_plateaufen",
+   "name": "The Plateau Fen",
+   "near": "radiant_plateau_edge",
+   "extent": "9.1°",
+   "why": "At the Radiant Plateau's foot. Light above and wet below, which the Radiants consider a complete description of the world."
+  },
+  {
+   "id": "the_stairfen",
+   "name": "The Stairfen",
+   "near": "stair_hollow",
+   "extent": "7.9°",
+   "why": "Below Stair Hollow, where the steps run out into ground that will not hold one."
+  }
+ ]
 }

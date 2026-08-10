@@ -145,7 +145,7 @@
    "why": "The smaller of the two above the Figure-Works. ⚠️ Named by comparison, which is the plainest thing on this list and the only one that sounds like the settlements do."
   }
  ],
- "_anchoring": "⛔ RIVERS AND FENS ARE ANCHORED TO LOCATIONS, NOT TO GEOMETRY. I flagged that naming them was risky because both derive from flow and shift when terrain regenerates. Erik ruled name them, and this is how that holds: each name binds to `nearHead` / `nearMouth` / `near` — STABLE location ids — not to a traced path. ⚠️ THE PIPELINE RE-ATTACHES A NAME TO WHATEVER FEATURE IS NEAREST ITS ANCHOR AFTER A REBUILD. The Echo still runs past Millbrook even when its exact course moves. A name bound to coordinates would be lost; a name bound to a place is not.",
+ "_anchoring": "⛔ NAMES CARRY A POLAR SIGNATURE, not a town anchor. Erik's call, and measured: a river's (colatitude, longitude) head-and-mouth pair drifts a MEDIAN 0.50° across a terrain rebuild, while the distance from a river to its nearest town is a median 5.3°. ⚠️ THE SIGNATURE IS AN ORDER OF MAGNITUDE MORE PRECISE THAN THE THING I WAS GOING TO ANCHOR TO. Match tolerance is ~3°, not 45, and self-match is exact with the runner-up 8-60° away — 0 of 12 ambiguous, against 4 of 10 for nearest-town matching. ⚠️ `nearHead` / `nearMouth` / `near` are KEPT as human-readable labels and as a fallback if a signature fails to resolve; they are no longer the matching key. ⛔ Colatitude and longitude ARE the world's polar frame, centred on the Crossing — the signature is the feature's own address, which is why it is stable.",
  "rivers": [
   {
    "id": "the_echo",
@@ -153,7 +153,16 @@
    "nearHead": "the_hundred_markets",
    "nearMouth": "kestrels_roost",
    "span": "91.5°",
-   "why": "⛔ THE GREAT RIVER. It rises near the Hundred Markets and runs most of the way round the world before it ends near Kestrel's Roost. Echo River Crossing is named for it; Millbrook's wheels turn on it. ⚠️ It is the only named thing on the map that touches nearly every disposition, and it is water, which the Numinous consider significant and the Enginewrights consider a shipping lane."
+   "why": "⛔ THE GREAT RIVER. It rises near the Hundred Markets and runs most of the way round the world before it ends near Kestrel's Roost. Echo River Crossing is named for it; Millbrook's wheels turn on it. ⚠️ It is the only named thing on the map that touches nearly every disposition, and it is water, which the Numinous consider significant and the Enginewrights consider a shipping lane.",
+   "head": [
+    -75.25,
+    -172.75
+   ],
+   "mouth": [
+    -75.25,
+    173.75
+   ],
+   "lengthDeg": 91.3
   },
   {
    "id": "the_greenwater",
@@ -161,7 +170,16 @@
    "nearHead": "greenforge",
    "nearMouth": "the_forge_eternal",
    "span": "14.3°",
-   "why": "Runs from Greenforge down toward the Forge-Eternal. Green going into black — the growers' water arriving where the makers use it, which is most of the foothills economy in one river."
+   "why": "Runs from Greenforge down toward the Forge-Eternal. Green going into black — the growers' water arriving where the makers use it, which is most of the foothills economy in one river.",
+   "head": [
+    -5.75,
+    -108.25
+   ],
+   "mouth": [
+    -11.75,
+    -115.25
+   ],
+   "lengthDeg": 9.3
   },
   {
    "id": "the_choirwater",
@@ -169,7 +187,16 @@
    "nearHead": "sunken_choir",
    "nearMouth": "the_lensward",
    "span": "13.1°",
-   "why": "Rises at the Sunken Choir and runs toward the Lensward. ⚠️ It is the water that did the drowning and nobody has renamed it."
+   "why": "Rises at the Sunken Choir and runs toward the Lensward. ⚠️ It is the water that did the drowning and nobody has renamed it.",
+   "head": [
+    -49.75,
+    -155.25
+   ],
+   "mouth": [
+    -38.25,
+    -153.75
+   ],
+   "lengthDeg": 13.0
   },
   {
    "id": "the_axewater",
@@ -177,7 +204,16 @@
    "nearHead": "the_crossing",
    "nearMouth": "the_axis_gate",
    "span": "13.0°",
-   "why": "⛔ THE FIRST WATER. It rises within four degrees of the Crossing — the closest any river comes to the pole — and runs out past the Axis Gate. 'Axe' is the axis worn down by saying."
+   "why": "⛔ THE FIRST WATER. It rises within four degrees of the Crossing — the closest any river comes to the pole — and runs out past the Axis Gate. 'Axe' is the axis worn down by saying.",
+   "head": [
+    -86.25,
+    -5.75
+   ],
+   "mouth": [
+    -74.25,
+    -27.75
+   ],
+   "lengthDeg": 13.0
   },
   {
    "id": "the_middlerun",
@@ -185,7 +221,16 @@
    "nearHead": "the_middle_way",
    "nearMouth": "bedrock",
    "span": "12.5°",
-   "why": "The Somatics' water, from the Middle Way toward the Given Land. They swim it as training and consider that the whole of its purpose."
+   "why": "The Somatics' water, from the Middle Way toward the Given Land. They swim it as training and consider that the whole of its purpose.",
+   "head": [
+    -30.75,
+    102.75
+   ],
+   "mouth": [
+    -25.25,
+    113.75
+   ],
+   "lengthDeg": 12.5
   },
   {
    "id": "the_switchwater",
@@ -193,7 +238,16 @@
    "nearHead": "old_switchback",
    "nearMouth": "radiant_plateau_edge",
    "span": "12.0°",
-   "why": "Comes down the Old Switchback's mountain, the road and the river using the same cut. The road is older by name and younger by fact."
+   "why": "Comes down the Old Switchback's mountain, the road and the river using the same cut. The road is older by name and younger by fact.",
+   "head": [
+    -63.75,
+    66.75
+   ],
+   "mouth": [
+    -73.75,
+    54.75
+   ],
+   "lengthDeg": 12.1
   },
   {
    "id": "the_kindlerun",
@@ -201,7 +255,16 @@
    "nearHead": "kindlerow",
    "nearMouth": "plainstead",
    "span": "12.0°",
-   "why": "From the forge-country down to Plainstead's flat. Kindlerow quenches in it and Plainstead drinks downstream, which they have argued about for two hundred years."
+   "why": "From the forge-country down to Plainstead's flat. Kindlerow quenches in it and Plainstead drinks downstream, which they have argued about for two hundred years.",
+   "head": [
+    -55.25,
+    -97.25
+   ],
+   "mouth": [
+    -48.25,
+    -111.25
+   ],
+   "lengthDeg": 12.1
   },
   {
    "id": "the_burnwater",
@@ -209,7 +272,16 @@
    "nearHead": "dw_the_burnscar",
    "nearMouth": "ent_deepwood",
    "span": "11.5°",
-   "why": "Off the Burnscar into the Deepwood. ⚠️ The Ents let it in, which is not nothing."
+   "why": "Off the Burnscar into the Deepwood. ⚠️ The Ents let it in, which is not nothing.",
+   "head": [
+    -9.75,
+    -92.75
+   ],
+   "mouth": [
+    -15.25,
+    -83.25
+   ],
+   "lengthDeg": 11.5
   },
   {
    "id": "the_longshorewater",
@@ -217,7 +289,16 @@
    "nearHead": "longshore",
    "nearMouth": "gearsflat",
    "span": "10.4°",
-   "why": "Longshore to Gearsflat — the waygate town's river, running to the salvage yards. Bridge-wrights at one end and people who take bridges apart at the other."
+   "why": "Longshore to Gearsflat — the waygate town's river, running to the salvage yards. Bridge-wrights at one end and people who take bridges apart at the other.",
+   "head": [
+    -57.75,
+    75.25
+   ],
+   "mouth": [
+    -50.75,
+    87.25
+   ],
+   "lengthDeg": 10.3
   },
   {
    "id": "the_greenwardwater",
@@ -225,7 +306,16 @@
    "nearHead": "the_greenward",
    "nearMouth": "the_forge_eternal",
    "span": "10.0°",
-   "why": "Out of the Quickwood's edge toward the Making. Rootkin water reaching maker country."
+   "why": "Out of the Quickwood's edge toward the Making. Rootkin water reaching maker country.",
+   "head": [
+    -10.25,
+    -114.25
+   ],
+   "mouth": [
+    -21.25,
+    -123.75
+   ],
+   "lengthDeg": 14.4
   }
  ],
  "fens": [
@@ -234,70 +324,120 @@
    "name": "The Millfen",
    "near": "millbrook",
    "extent": "24.2°",
-   "why": "⛔ THE LARGEST WETLAND IN THE WORLD, and Millbrook stands at its edge rather than in it. The valley's over-fertile ground going soft — abandoned soil-conditioning nanite doing to water what it did to the fields."
+   "why": "⛔ THE LARGEST WETLAND IN THE WORLD, and Millbrook stands at its edge rather than in it. The valley's over-fertile ground going soft — abandoned soil-conditioning nanite doing to water what it did to the fields.",
+   "centroid": [
+    -66.98,
+    -98.42
+   ],
+   "extentDeg": 24.2
   },
   {
    "id": "the_burnfen",
    "name": "The Burnfen",
    "near": "dw_the_burnscar",
    "extent": "18.6°",
-   "why": "Where the Burnscar's runoff pools. Wet ground on a scar, which the Ents find instructive."
+   "why": "Where the Burnscar's runoff pools. Wet ground on a scar, which the Ents find instructive.",
+   "centroid": [
+    -8.12,
+    -80.59
+   ],
+   "extentDeg": 18.6
   },
   {
    "id": "the_greenmarch_fen",
    "name": "The Marchfen",
    "near": "greenmarch",
    "extent": "17.0°",
-   "why": "Below Greenmarch at the Quickwood's edge — the last soft ground before the canopy closes."
+   "why": "Below Greenmarch at the Quickwood's edge — the last soft ground before the canopy closes.",
+   "centroid": [
+    -38.75,
+    -48.56
+   ],
+   "extentDeg": 17.0
   },
   {
    "id": "the_echofen",
    "name": "The Echofen",
    "near": "echo_river_crossing",
    "extent": "16.5°",
-   "why": "Where the Echo slows before the crossing. ⚠️ The bridge exists because the fen made fording impossible, which is the whole reason the town is there."
+   "why": "Where the Echo slows before the crossing. ⚠️ The bridge exists because the fen made fording impossible, which is the whole reason the town is there.",
+   "centroid": [
+    -51.36,
+    97.96
+   ],
+   "extentDeg": 16.5
   },
   {
    "id": "the_quietfen",
    "name": "The Quiet Fen",
    "near": "the_quiet_house",
    "extent": "12.6°",
-   "why": "Beside the Quiet House. Nobody raises a hand here either, for a different reason."
+   "why": "Beside the Quiet House. Nobody raises a hand here either, for a different reason.",
+   "centroid": [
+    -75.8,
+    -53.38
+   ],
+   "extentDeg": 12.6
   },
   {
    "id": "the_gatefen",
    "name": "The Gatefen",
    "near": "the_axis_gate",
    "extent": "10.7°",
-   "why": "Around the Axis Gate's approaches. Twelve roads leave the Crossing and several of them are wet for the first week."
+   "why": "Around the Axis Gate's approaches. Twelve roads leave the Crossing and several of them are wet for the first week.",
+   "centroid": [
+    -74.69,
+    -9.82
+   ],
+   "extentDeg": 10.7
   },
   {
    "id": "the_stiltfen",
    "name": "The Stiltfen",
    "near": "greywater_stilts",
    "extent": "10.1°",
-   "why": "⛔ THE SOUTHERN MARSH. Greywater Stilts stands ON it — the town is built on poles because this is what the ground does here."
+   "why": "⛔ THE SOUTHERN MARSH. Greywater Stilts stands ON it — the town is built on poles because this is what the ground does here.",
+   "centroid": [
+    -74.61,
+    132.42
+   ],
+   "extentDeg": 9.7
   },
   {
    "id": "the_terracefen",
    "name": "The Terrace Fen",
    "near": "harmonic_heights_terrace",
    "extent": "9.7°",
-   "why": "Where the Harmonic Heights' lowest terrace meets standing water. The sonic civilisation's drainage, which they do not discuss."
+   "why": "Where the Harmonic Heights' lowest terrace meets standing water. The sonic civilisation's drainage, which they do not discuss.",
+   "centroid": [
+    -74.61,
+    132.42
+   ],
+   "extentDeg": 9.7
   },
   {
    "id": "the_plateaufen",
    "name": "The Plateau Fen",
    "near": "radiant_plateau_edge",
    "extent": "9.1°",
-   "why": "At the Radiant Plateau's foot. Light above and wet below, which the Radiants consider a complete description of the world."
+   "why": "At the Radiant Plateau's foot. Light above and wet below, which the Radiants consider a complete description of the world.",
+   "centroid": [
+    -72.9,
+    59.09
+   ],
+   "extentDeg": 9.1
   },
   {
    "id": "the_stairfen",
    "name": "The Stairfen",
    "near": "stair_hollow",
    "extent": "7.9°",
-   "why": "Below Stair Hollow, where the steps run out into ground that will not hold one."
+   "why": "Below Stair Hollow, where the steps run out into ground that will not hold one.",
+   "centroid": [
+    -43.73,
+    -75.51
+   ],
+   "extentDeg": 7.9
   }
  ]
 }

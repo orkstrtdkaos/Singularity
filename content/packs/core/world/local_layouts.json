@@ -280,5 +280,246 @@
    }
   ]
  },
- "_generalisation": "⛔ FOUR LAYOUTS, FOUR DIFFERENT SHAPES, AND THE RULES ARE THE SAME THREE GRADIENTS. Millbrook: two centres named in its own prose, water trades riverward, terraces uphill, fields on the flat. Echo River Crossing: the bridge IS the centre and everything is which end you are on. Greyhearth: a burying town's plan is its traffic — dead arrive by road, go uphill. The Cogitarium: ⚠️ VERTICAL, and it broke the frame usefully. ⛔ NOTHING HERE WAS INVENTED FREELY: every placement cites either a measured bearing or a sentence already in the location's own seed. That is the constraint the engine must inherit — a generated layout that cannot cite a gradient or a line of prose is decoration."
+ "_generalisation": "⛔ EIGHT LAYOUTS, 38 SITES, AND THE RULE SET GREW BY MEASURING RATHER THAN BY GUESSING. The four Valley towns gave: water trades riverward, terraces uphill, fields on the flat, markets on the roads. The four contrast towns broke that usefully — ⚠️ GREYWATER (relief 0.002) proved UPHILL IS NOISE ON FLAT GROUND; ⚠️ KINDLEROW (relief 0.541, no water within 9°) is the mirror, and its cistern EXISTS BECAUSE THE TERRAIN FORCED IT; ⛔ THE SERVICE WAYS broke the horizontal frame entirely — a tunnel network has depth, not a radius; ⚠️ THE FIGURE WORKS had NO strong gradient at all, and there the TRADITION carried the layout. ⛔ THAT IS THE ENGINE'S PRECEDENCE ORDER: strong gradient first, tradition aesthetic second, and never free invention.",
+ "greywater_stilts": {
+  "_measured": {
+   "riverBearing": -7,
+   "riverDistanceDeg": 6.94,
+   "marshDistanceDeg": 0.37,
+   "uphillBearing": 90,
+   "relief": 0.002,
+   "roadsOut": [
+    {
+     "to": "millbrook",
+     "bearing": 85
+    },
+    {
+     "to": "echo_river_crossing",
+     "bearing": 83
+    }
+   ]
+  },
+  "_ruleFinding": "⛔ RELIEF 0.002 — DEAD FLAT. 'Uphill' is a MEANINGLESS AXIS here and the engine must not use it: bearing 90 is noise, not a slope. ⚠️ THE ORGANISING AXIS IS THE WATER — the marsh is 0.37° away and the town stands ON it. New rule: WHEN RELIEF < ~0.05, DROP THE UPHILL GRADIENT AND ORGANISE ON WATER AND ROADS. Millbrook's terraces exist because Millbrook has a slope; here there is nothing to climb.",
+  "radiusMetres": 340,
+  "sites": [
+   {
+    "id": "stilts_main_platform",
+    "name": "The Main Platform",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "why": "⛔ A stilt town has no ground, so its centre is a BUILT thing. The largest platform is the square."
+   },
+   {
+    "id": "stilts_ropewalks",
+    "name": "The Rope-Walks",
+    "localMap": {
+     "bearing": 45,
+     "metres": 150
+    },
+    "why": "'Rope-walks lace between platforms.' ⚠️ NOT A PLACE SO MUCH AS THE STREETS — laced between, so placed between the platforms rather than at a point."
+   },
+   {
+    "id": "stilts_skiff_landing",
+    "name": "The Skiff Landing",
+    "localMap": {
+     "bearing": 85,
+     "metres": 220
+    },
+    "why": "⛔ On the ROAD bearing, not the water bearing — in a marsh town the skiffs ARE the road, so the landing faces where travellers come from."
+   },
+   {
+    "id": "stilts_deep_platforms",
+    "name": "The Deep Platforms",
+    "localMap": {
+     "bearing": -95,
+     "metres": 280
+    },
+    "why": "⚠️ 'Whoever else needed somewhere the aligned powers don't reach' — furthest from the roads, which is the whole reason those people are there."
+   },
+   {
+    "id": "stilts_pole_yard",
+    "name": "The Pole Yard",
+    "localMap": {
+     "bearing": 150,
+     "metres": 190
+    },
+    "why": "⛔ A stilt town's only real industry is REPLACING ITS OWN LEGS. Nobody wrote this down; the town's existence requires it."
+   }
+  ]
+ },
+ "kindlerow": {
+  "_measured": {
+   "riverBearing": 0,
+   "riverDistanceDeg": 9.0,
+   "uphillBearing": 330,
+   "relief": 0.541,
+   "roadsOut": [
+    {
+     "to": "the_crossing",
+     "bearing": 125
+    },
+    {
+     "to": "the_blaze",
+     "bearing": -55
+    }
+   ]
+  },
+  "_ruleFinding": "⚠️ RELIEF 0.541 — the STEEPEST of the eight, and no water within 9°. ⛔ THE MIRROR OF GREYWATER: here uphill is the dominant axis and water is unusable. The Kindlespine runs behind the town (SNG-393). A forge town with no river gets its water from the hill, which is a fact the layout should state.",
+  "radiusMetres": 300,
+  "sites": [
+   {
+    "id": "kindlerow_row",
+    "name": "The Row",
+    "localMap": {
+     "bearing": 125,
+     "metres": 0
+    },
+    "why": "⛔ The town is a ROW and the name says so — forges strung along the Crossing road, not clustered round a square."
+   },
+   {
+    "id": "kindlerow_assay_house",
+    "name": "The Assay House",
+    "localMap": {
+     "bearing": 125,
+     "metres": 170
+    },
+    "why": "'Tells you honestly what your metal is worth.' ⚠️ At the road end where metal ARRIVES — you are assayed before you are sold to."
+   },
+   {
+    "id": "kindlerow_lamp_makers",
+    "name": "The Lamp-Makers' Sheds",
+    "localMap": {
+     "bearing": -55,
+     "metres": 160
+    },
+    "why": "⛔ On the road to the Blaze. Lamps go where the light doctrine is, and Kindlerow sells to them without joining them."
+   },
+   {
+    "id": "kindlerow_charcoal_slope",
+    "name": "The Charcoal Slope",
+    "localMap": {
+     "bearing": 330,
+     "metres": 250
+    },
+    "why": "⛔ Uphill on the measured bearing — fuel comes down to a forge, never up."
+   },
+   {
+    "id": "kindlerow_catch_cistern",
+    "name": "The Catch-Cistern",
+    "localMap": {
+     "bearing": 345,
+     "metres": 190
+    },
+    "why": "⚠️ NO RIVER WITHIN 9°, AND A FORGE MUST QUENCH. Uphill catchment is the only honest answer; the terrain forced this one into existence."
+   }
+  ]
+ },
+ "the_service_ways": {
+  "_measured": {
+   "uphillBearing": 285,
+   "relief": 0.018,
+   "riverDistanceDeg": 6.73,
+   "roadsOut": [
+    {
+     "to": "pressureholt",
+     "bearing": 117
+    },
+    {
+     "to": "the_axis_gate",
+     "bearing": -118
+    }
+   ]
+  },
+  "_ruleFinding": "⛔ THIS ONE BREAKS THE HORIZONTAL FRAME ENTIRELY. 'Precursor tunnels… THEY RUN UNDER EVERYTHING — under the Gearlands, under the Valley, under places the Wrights have not admitted to.' ⚠️ A TUNNEL NETWORK IS NOT A TOWN WITH A CENTRE. Its extent is measured in DAYS, not metres, and its axis is DEPTH. This is the second vertical case after the Cogitarium and it is a stronger one: `localMap.level` is not optional, and for places like this `radiusMetres` is the wrong unit.",
+  "radiusMetres": null,
+  "extentNote": "unbounded — the seed says it is not fully mapped after four centuries",
+  "sites": [
+   {
+    "id": "sw_pressureholt_stair",
+    "name": "The Pressureholt Stair",
+    "localMap": {
+     "bearing": 117,
+     "metres": 200,
+     "level": -1
+    },
+    "why": "⛔ The way in from above, on the Pressureholt road bearing. Level −1: you go DOWN to enter."
+   },
+   {
+    "id": "sw_mapped_reach",
+    "name": "The Mapped Reach",
+    "localMap": {
+     "bearing": -118,
+     "metres": 600,
+     "level": -2
+    },
+    "why": "'Mapped for four centuries.' ⚠️ The part they will show you, running toward the Axis Gate."
+   },
+   {
+    "id": "sw_unadmitted",
+    "name": "The Unadmitted Ways",
+    "localMap": {
+     "bearing": 200,
+     "metres": 1400,
+     "level": -4
+    },
+    "why": "⛔ 'Under places the Wrights have not admitted to.' Deep, far, and deliberately vague — ⚠️ the position is a CLAIM ABOUT SECRECY, and metres here are a shrug rather than a measurement."
+   }
+  ]
+ },
+ "the_figure_works": {
+  "_measured": {
+   "riverBearing": -124,
+   "riverDistanceDeg": 6.83,
+   "uphillBearing": 165,
+   "relief": 0.053,
+   "roadsOut": [
+    {
+     "to": "cloudform",
+     "bearing": 26
+    }
+   ]
+  },
+  "_ruleFinding": "⚠️ ONE ROAD OUT, middling relief, no water. ⛔ WHEN THE GRADIENTS ARE ALL WEAK THE TRADITION HAS TO CARRY THE LAYOUT — and for the Figurists that is legible: they are geometric, so the town is laid out ON a figure. This is the case where the engine should fall back to the TRADITION'S AESTHETIC rather than inventing terrain reasons.",
+  "radiusMetres": 260,
+  "sites": [
+   {
+    "id": "figure_works_hall",
+    "name": "The Working Hall",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "why": "'Where symbols are made that ACT.' The centre of the figure, because a figure has one."
+   },
+   {
+    "id": "figure_works_proving",
+    "name": "The Proving Yard",
+    "localMap": {
+     "bearing": 120,
+     "metres": 180
+    },
+    "why": "⛔ 'The meanings do exactly what they mean, which is not always what was wanted.' A yard at a THIRD of the circle — you test a made meaning away from where you made it."
+   },
+   {
+    "id": "figure_works_containment",
+    "name": "The Containment Figures",
+    "localMap": {
+     "bearing": 240,
+     "metres": 180
+    },
+    "why": "⛔ The other third. 'The entire history of this people's disasters' — this is where the disasters are kept, and its position completes the triangle."
+   },
+   {
+    "id": "figure_works_gate",
+    "name": "The Cloudform Gate",
+    "localMap": {
+     "bearing": 26,
+     "metres": 210
+    },
+    "why": "The single road out. ⚠️ One road means one gate, and its bearing is not a choice."
+   }
+  ]
+ }
 }

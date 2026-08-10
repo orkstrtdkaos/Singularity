@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.105";
+const APP_VERSION = "1.9.106";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7018,7 +7018,15 @@ function wireWorldGlobe() {
   // ⚠️ So the window is SNAPPED to a tile grid at three fixed zoom tiers. Panning inside a tile is free;
   // leaving it costs one build; coming back is free again because the tile is still in the cache. The
   // tiers are coarse (each 4× the ground of the next) so a zoom gesture crosses at most two of them.
-  const FINE_TIERS = [48, 16, 5];              // degrees of ground per tile, coarsest first
+  // ⛔ RESOLUTION AND REUSE PULL AGAINST EACH OTHER, AND THE FIRST ATTEMPT PICKED REUSE. Big tiles cache
+  // beautifully and starve the picture: a 16° tile padded to 32°, sampled at the affordable ~150², is
+  // 0.21° a sample — THIRTY screen pixels at a 5° view, which is the "detail drops completely and you
+  // just end up with blocks" Erik hit at depth. The arithmetic is unforgiving: what we can afford in a
+  // frame budget is ~22,000 generator calls, so the window has to be about the size of the VIEW for the
+  // samples to land a few pixels apart.
+  // ⚠️ So the window is view-sized and the CACHE KEY is what gets snapped: quantise the zoom to powers of
+  // two and the centre to a third of a view. Small pans and re-zooms hit the cache; a real move builds
+  // one patch. That keeps the cache Erik asked for without paying for it in blur.
   const FINE_CACHE_MAX = 12;                   // ~12 patches × (buffer² × 9 bytes) — a few MB, bounded
   const _fineCache = new Map();                // key → patch, insertion-ordered so the oldest evicts first
   const FINE_SPAN = 60;                                        // below this the raster starts to show
@@ -7041,21 +7049,25 @@ function wireWorldGlobe() {
     if (!_fineGen) { loadFineGenerator(); return null; }
     const c = unproject(view.cx, view.cy, view);
     if (!c) return null;
-    // the tier whose tile comfortably covers what is on screen; the smallest that still fits wins
-    const need = span * 1.5;
-    const tier = FINE_TIERS.find((d) => d >= need) ?? FINE_TIERS[FINE_TIERS.length - 1];
-    // ⚠️ SNAP IN GROUND UNITS, NOT DEGREES. Meridians converge, so a tile that is `tier` degrees tall
-    // must be `tier / cos(lat)` degrees wide to cover the same ground — the same correction the buffer
-    // aspect needed, one level up. Without it the tiles near the Crossing would be slivers.
+    // ⛔ THE LEVEL MUST ROUND UP, OR THE WINDOW FAILS TO COVER THE VIEW. `round` let the quantised span
+    // land BELOW the real one — a 10.7° view got an 8° level and an 11.2° window, so the frame edges fell
+    // outside the patch, declined to the bake, and came back as a staircase around the border. That was
+    // the "certain zoom levels glitch" band: not a bad patch, a patch that stopped short.
+    // ⚠️ QUARTER-OCTAVES, not octaves. Doubling steps mean the window can be twice the view at the
+    // bottom of a step, and every wasted degree is resolution taken out of the picture; a 1.19× ladder
+    // keeps the window within 1.4–1.67× the view at every zoom while still giving the cache discrete
+    // levels to hit — four per octave instead of one.
+    const level = Math.ceil(Math.log2(Math.max(0.05, span)) * 4) / 4;
+    const levelSpan = Math.pow(2, level);
+    const half = levelSpan * 0.7;
     const conv = Math.max(0.12, Math.cos(c.lat * Math.PI / 180));
-    const tileLat = tier, tileLon = tier / conv;
-    const jy = Math.floor((c.lat + 90) / tileLat), jx = Math.floor((c.lon + 180) / tileLon);
-    // one tile of PADDING on every side, so panning within the tile never reaches an edge that has no
-    // data — and so a contributor just outside the frame still shapes the ground inside it.
-    const la0 = Math.max(-90, jy * tileLat - 90 - tileLat * 0.5), la1 = Math.min(90, (jy + 1) * tileLat - 90 + tileLat * 0.5);
-    const lo0 = jx * tileLon - 180 - tileLon * 0.5, lo1 = (jx + 1) * tileLon - 180 + tileLon * 0.5;
-    const win = { la0, la1, lo0, lo1 };
-    const key = `${tier}|${jy}|${jx}`;
+    // snap the CENTRE (in ground units, since meridians converge) so a small pan reuses the same patch
+    const snapLat = levelSpan / 3, snapLon = snapLat / conv;
+    const cLat = Math.round(c.lat / snapLat) * snapLat, cLon = Math.round(c.lon / snapLon) * snapLon;
+    const la0 = Math.max(-90, cLat - half), la1 = Math.min(90, cLat + half);
+    const halfLon = Math.min(180, half / conv);
+    const win = { la0, la1, lo0: cLon - halfLon, lo1: cLon + halfLon };
+    const key = `${level}|${cLat.toFixed(3)}|${cLon.toFixed(3)}`;
     let patch = _fineCache.get(key);
     if (!patch) {
       // ⛔ BUDGETED, NOT PER-PIXEL — calling the generator for every screen pixel cost ELEVEN SECONDS a
@@ -7192,8 +7204,18 @@ function wireWorldGlobe() {
   window.addEventListener("mouseup", () => { if (dragging) { dragging = false; paint(false); } });
   cv.onmousemove = (e) => {
     if (dragging) {
-      view.yaw += (e.offsetX - lastX) * 0.35;                  // the surface follows the hand — drag right, world goes right
-      view.pitch = Math.max(-85, Math.min(85, view.pitch + (e.offsetY - lastY) * 0.35));
+      // ⛔ DRAG THE SURFACE, NOT THE ANGLE. A fixed 0.35° per pixel is only ever right at one zoom and
+      // one latitude. Zoomed in to r≈1900 it moves the world TWELVE TIMES too fast, so the ground flies
+      // out from under the cursor and reads as inverted — which is what Erik saw the second time, on a
+      // sign that had already been corrected and was right.
+      // ⚠️ The projection gives the exact conversion: a point sits at x = cos(lat)·sin(lon+yaw)·r, so
+      // ∂x/∂yaw = r·cos(lat) near the view centre and a pixel of drag is (dx / (r·cos(lat))) radians.
+      // Latitude matters as much as zoom: near the Crossing cos(lat) is small, so the same pixel is a
+      // much larger turn — the pole is exactly where the old constant felt worst.
+      const DEG = 180 / Math.PI;
+      const cLat = Math.max(0.15, Math.cos(view.pitch * Math.PI / 180));
+      view.yaw += ((e.offsetX - lastX) / view.r) * DEG / cLat;
+      view.pitch = Math.max(-89, Math.min(89, view.pitch + ((e.offsetY - lastY) / view.r) * DEG));
       lastX = e.offsetX; lastY = e.offsetY;
       paint(true);
       return;

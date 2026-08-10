@@ -7264,6 +7264,25 @@ await (async () => {
       stepped > 50 && smooth > stepped * 0.9,
       `${smooth} of ${stepped} within-cell probes move under the smooth read`);
 
+    // ⛔ SNG-405 — A PATCH DECLINES OUTSIDE ITS WINDOW; IT DOES NOT CLAMP. Every read was pinned into
+    // range with Math.min/Math.max, so a point beyond the patch returned its EDGE sample — the area
+    // outside the tile got painted with whatever sat on its border, in tile-shaped rectangles. That is
+    // not the raster showing through: it is the detail path confidently drawing ground it never sampled.
+    const winC = { la0: -60, la1: -50, lo0: -80, lo1: -70 };
+    const patchC = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, winC), winC, { budgetMs: 60 });
+    check("405: a detail patch DECLINES beyond its own window instead of smearing its edge across the map",
+      patchC(-75, -55) !== null && patchC(-120, -55) === null && patchC(-75, -20) === null);
+
+    // ⚠️ AND THE WINDOW MUST COVER THE VIEW. Quantising the span with `round` let the level land BELOW
+    // the real span — a 10.7° view got an 8° level and an 11.2° window — so the frame edges fell outside
+    // the patch and came back as a staircase around the border: the zoom band that "glitched".
+    const covers = [40, 20, 10.7, 10, 5, 2.4, 1, 0.4].every((sp) => {
+      const lvl = Math.ceil(Math.log2(Math.max(0.05, sp)) * 4) / 4;
+      return Math.pow(2, lvl) * 1.4 >= sp;
+    });
+    check("405: …and every zoom level's window COVERS its view — the level rounds up, never short",
+      covers);
+
     // ⛔ SNG-403 — THE CONTOUR INTERVAL FOLLOWS THE ZOOM, and without it the layer was nearly mute where
     // it matters most: twelve bands across the world's 126-unit range is ~10 units a band, so a regional
     // view crossed TWO lines. Measured on the live canvas after the level-set fix: 284 contour pixels in

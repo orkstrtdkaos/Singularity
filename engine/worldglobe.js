@@ -225,12 +225,21 @@ export function makeFinePatch(t, gen, win, opts) {
   // and reading the crossing gives a shoreline finer than the samples that produced it.
   // ⚠️ The land SUBTYPE (plain / volcanic / unexplored) still comes from the nearest sample: those are
   // region-scale facts, and interpolating a category rather than a field would invent ground.
+  // ⛔ OUTSIDE THE WINDOW IT DECLINES — IT DOES NOT CLAMP. Every read was pinned into range with
+  // Math.min/Math.max, so a point beyond the patch returned the EDGE sample: the whole area outside the
+  // tile got painted with whatever happened to sit on its border, in tile-shaped rectangles. That is the
+  // blockiness Erik photographed, and it is not the raster showing through — it is the detail path
+  // confidently drawing ground that was never sampled. ⚠️ Returning null lets the caller fall back to the
+  // bake, which is the honest answer for ground this patch does not cover.
+  const inside = (lon, lat) => lat >= win.la0 && lat <= win.la1 && lon >= win.lo0 && lon <= win.lo1;
   const sampler = (lon, lat) => {
+    if (!inside(lon, lat)) return null;
     const r = at(raw, lon, lat);
     const near = nearestType(lon, lat);
     const type = r > 0 ? (near === 0 ? 1 : near) : 0;
     return { type, raw: r, elevDelta: at(del, lon, lat) };
   };
+  sampler.covers = inside;
   sampler.bufferN = Math.min(nw, nh);       // reported so a gate can see the budget was honoured
   sampler.bufferW = nw; sampler.bufferH = nh;
   // ⚠️ the honest measure of whether this is worth doing at all: ground degrees per sample against the
@@ -253,7 +262,7 @@ export function hillshadeFine(t, lon, lat, fine) {
   const d = 0.06;
   // ⚠️ the gradient is taken on the COMBINED surface — baked cell plus sub-cell delta — so relief and
   // colour are lit by the same ground. Shading a different surface than the one drawn is its own seam.
-  const at = (lo, la) => elevSmooth(t, lo, la) + (fine(lo, la).elevDelta || 0);
+  const at = (lo, la) => { const f = fine(lo, la); return elevSmooth(t, lo, la) + (f ? f.elevDelta || 0 : 0); };
   const ex = (at(lon + d, lat) - at(lon - d, lat)) / 255;
   const ey = (at(lon, Math.min(90, lat + d)) - at(lon, Math.max(-90, lat - d))) / 255;
   return Math.max(0.55, Math.min(1.45, 1 + (ex * 2.2 - ey * 2.2)));
@@ -301,6 +310,7 @@ export function colorAt(t, lon, lat, opts) {
   // hands in the generator windowed to the visible patch, and COASTLINE + RELIEF come per-pixel instead of
   // per 0.75° cell. Biome and nanite keep coming from the raster: they are region-scale fields that read
   // smooth at any zoom, and re-deriving them here would mean shipping the whole region vote to the browser.
+  // a patch that does not cover this point returns null, and the bake answers instead — see `inside`
   const fine = o.fine ? o.fine(lon, lat) : null;
   // ⚠️ UNROUNDED, AND SMOOTHLY READ. `elevation` stays an integer for anything that reports a height;
   // `elevExact` is the continuous field the SHADING uses, because a contour is a level set and a level
@@ -310,8 +320,18 @@ export function colorAt(t, lon, lat, opts) {
     ? { ...base, type: fine.type, elevation: Math.round(elevExact) }
     : base;
   if (s.type === 0) {
-    const dep = (128 - s.elevation) / 128;
-    return [10 + (1 - dep) * 22, 26 + (1 - dep) * 34, 48 + (1 - dep) * 40];
+    // ⛔ THE SEA GETS CONTOURS TOO. Erik: "it would be nice to show the topo going underwater as well,
+    // that gives the water areas some interesting contour and we can use that for narration." The
+    // elevation field runs 0..127 under water by the same normalisation, so the identical level-set rule
+    // applies — there was simply never a band test on this branch. ⚠️ Shelf and deep now read differently,
+    // which is a fact a narrator can use: a shallow crossing is not an abyss.
+    const dep = (128 - elevExact) / 128;                       // 0 at the shore, 1 at the deepest
+    let w = [10 + (1 - dep) * 22, 26 + (1 - dep) * 34, 48 + (1 - dep) * 40];
+    const bands = 12 * (o.contourStep || 1);
+    const tw = 1 - dep;                                        // rises toward the shore, same sense as land
+    const bn = Math.floor(tw * bands);
+    if (Math.abs(tw * bands - bn - 0.5) < 0.055 * (o.contourStep || 1)) w = [w[0] * 1.35 + 6, w[1] * 1.3 + 8, w[2] * 1.22 + 10];
+    return w;
   }
   // ⚠️ AND THE HILLSHADE FOLLOWS THE SAME SOURCE. Shading off the coarse grid under a per-pixel
   // coastline puts 0.75° blocks of light on a crisp shore — worse than either alone.

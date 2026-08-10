@@ -1,64 +1,64 @@
 {
-  "schemaVersion": 1,
-  "id": "the_grief_house",
-  "name": "The Grief-House",
-  "regionId": "the_feeling_coast",
-  "communityId": "threnodist.griefhouse",
-  "axisVector": [
-    -0.6,
-    0,
-    0,
-    0.3,
-    0,
-    0,
-    0,
-    0,
-    -0.3,
-    0,
-    0,
-    0
-  ],
-  "spectrum": {
-    "emotional_logical": -0.6,
-    "death_life": -0.3,
-    "violence_peace": 0.3
-  },
-  "tags": [
-    "threnodist",
-    "emotional",
-    "sacred",
-    "refuge",
-    "death"
-  ],
-  "connections": [
-    "wellspring"
-  ],
-  "descriptionSeed": "Where the Threnodists take grief seriously enough to give it a building. You bring your dead, or your loss, or the thing you cannot carry, and people who do not know you sit with it beside you for as long as it takes. It is free. It has never turned anyone away. It is, quietly, the single kindest institution in the world.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "Grief-keepers who are unshockable; strangers sitting with your worst thing; an Ashwarden who has come to learn, and is learning.",
-  "dangerLevel": 1,
-  "questSeeds": [
-    "Someone has been coming to the Grief-House every day for eleven years and will not say who for",
-    "A grief brought here is not the griever's own, and they stole it, and grief can be stolen"
-  ],
-  "map": {
-    "x": 250,
-    "y": 100
-  },
-  "poleIntensity": {
-    "emotional": 0.6,
-    "death": 0.3,
-    "peace": 0.3
-  },
-  "worldPos": {
-    "colatitude": 88,
-    "longitude": 348,
-    "depth": 0
-  },
-  "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_feeling_coast bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "wellspring"
+ "schemaVersion": 1,
+ "id": "the_grief_house",
+ "name": "The Grief-House",
+ "regionId": "the_feeling_coast",
+ "communityId": "threnodist.griefhouse",
+ "axisVector": [
+  -0.6,
+  0,
+  0,
+  0.3,
+  0,
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  0,
+  0
+ ],
+ "spectrum": {
+  "emotional_logical": -0.6,
+  "death_life": -0.3,
+  "violence_peace": 0.3
+ },
+ "tags": [
+  "threnodist",
+  "emotional",
+  "sacred",
+  "refuge",
+  "death"
+ ],
+ "connections": [
+  "wellspring"
+ ],
+ "descriptionSeed": "Where the Threnodists take grief seriously enough to give it a building. You bring your dead, or your loss, or the thing you cannot carry, and people who do not know you sit with it beside you for as long as it takes. It is free. It has never turned anyone away. It is, quietly, the single kindest institution in the world.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "Grief-keepers who are unshockable; strangers sitting with your worst thing; an Ashwarden who has come to learn, and is learning.",
+ "dangerLevel": 1,
+ "questSeeds": [
+  "Someone has been coming to the Grief-House every day for eleven years and will not say who for",
+  "A grief brought here is not the griever's own, and they stole it, and grief can be stolen"
+ ],
+ "map": {
+  "x": 250,
+  "y": 100
+ },
+ "poleIntensity": {
+  "emotional": 0.6,
+  "death": 0.3,
+  "peace": 0.3
+ },
+ "worldPos": {
+  "colatitude": 85.4,
+  "longitude": 350.4,
+  "depth": 0
+ },
+ "worldPosNote": "⛔ SNG-407: moved 3.54° (6 walking days) onto the nearest coast the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 88, longitude 348.",
+ "tier": "settlement",
+ "parentId": "wellspring"
 }

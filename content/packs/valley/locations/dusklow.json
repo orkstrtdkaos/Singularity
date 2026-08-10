@@ -1,72 +1,75 @@
 {
- "schemaVersion": 1,
- "id": "dusklow",
- "name": "Dusklow",
- "regionId": "the_foothills",
- "communityId": "dusklow",
- "spectrum": {
-  "dark_light": -0.4,
-  "falsehood_truth": -0.2
- },
- "tags": [
-  "settlement",
-  "foothill",
-  "market"
- ],
- "connections": [
-  "the_crossing",
-  "the_underlight"
- ],
- "descriptionSeed": "Dusklow — the lit edge of the dark: guides, discreet trades, and people who keep confidences professionally. You hire a guide here to go down, and you come back here to be told what you saw. Nobody in Dusklow repeats anything.",
- "loreRefs": [],
- "npcsPresent": [],
- "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
- "dangerLevel": 1,
- "image": "content/packs/valley/assets/dusklow.jpg",
- "questSeeds": [],
- "map": {
-  "x": 200,
-  "y": 315
- },
- "encounterSeeds": [],
- "poleIntensity": {
-  "dark": 0.4,
-  "falsehood": 0.2
- },
- "substrateSource": {
-  "kind": "sink",
-  "delta": -0.06,
-  "radius": 90,
-  "radiusWorld": 0.054,
-  "reason": "Umbral-worked and deliberately kept low — a settlement that decided long ago it preferred the quiet, and thins what pools there on purpose.",
-  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
- },
- "axisVector": [
-  0,
-  -0.2,
-  0,
-  0,
-  0,
-  0,
-  0,
-  -0.4,
-  0,
-  0,
-  0,
-  0
- ],
- "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
- "worldPos": {
-  "colatitude": 42,
-  "longitude": 360,
-  "depth": 0
- },
- "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_underlight, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
- "foothillOf": [
-  "umbral",
-  "veilwright",
-  "threnodist"
- ],
- "betweenCrossingAnd": "the_underlight",
- "startingLocation": true
+  "schemaVersion": 1,
+  "id": "dusklow",
+  "name": "Dusklow",
+  "regionId": "the_foothills",
+  "communityId": "dusklow",
+  "spectrum": {
+    "dark_light": -0.4,
+    "falsehood_truth": -0.2
+  },
+  "tags": [
+    "settlement",
+    "foothill",
+    "market"
+  ],
+  "connections": [
+    "the_crossing",
+    "the_underlight"
+  ],
+  "descriptionSeed": "Dusklow — the lit edge of the dark: guides, discreet trades, and people who keep confidences professionally. You hire a guide here to go down, and you come back here to be told what you saw. Nobody in Dusklow repeats anything.",
+  "loreRefs": [],
+  "npcsPresent": [],
+  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
+  "dangerLevel": 1,
+  "image": "content/packs/valley/assets/dusklow.jpg",
+  "questSeeds": [],
+  "map": {
+    "x": 200,
+    "y": 315
+  },
+  "encounterSeeds": [],
+  "poleIntensity": {
+    "dark": 0.4,
+    "falsehood": 0.2
+  },
+  "substrateSource": {
+    "kind": "sink",
+    "delta": -0.06,
+    "radius": 90,
+    "radiusWorld": 0.054,
+    "reason": "Umbral-worked and deliberately kept low — a settlement that decided long ago it preferred the quiet, and thins what pools there on purpose.",
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+  },
+  "axisVector": [
+    0,
+    -0.2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -0.4,
+    0,
+    0,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
+  "worldPos": {
+    "colatitude": 42,
+    "longitude": 360,
+    "depth": 0
+  },
+  "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_underlight, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
+  "foothillOf": [
+    "umbral",
+    "veilwright",
+    "threnodist"
+  ],
+  "betweenCrossingAnd": "the_underlight",
+  "startingLocation": true,
+  "tier": "settlement",
+  "parentId": null,
+  "role": "waypoint"
 }

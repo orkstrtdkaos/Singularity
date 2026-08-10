@@ -1,80 +1,82 @@
 {
- "schemaVersion": 1,
- "id": "echo_river_crossing",
- "name": "Echo River Crossing",
- "regionId": "the_echo_vale",
- "communityId": "echo_vale.millbrook",
- "spectrum": {
-  "space_time": -0.3,
-  "death_life": -0.2,
-  "dark_light": -0.2,
-  "chaos_order": -0.2
- },
- "tags": [
-  "river",
-  "bridge",
-  "travel",
-  "contamination-visible"
- ],
- "connections": [
-  "millbrook",
-  "disputed_zone_fringe",
-  "archive_hollow",
-  "greywater_stilts",
-  "the_axis_gate",
-  "sunken_choir"
- ],
- "descriptionSeed": "The old stone-and-cable bridge where the Echo River narrows between granite shoulders. Upstream the water sheets gray-green over the rocks — the contamination is unmistakable here, worse every week. Fisher shacks stand empty. The bridge is the only crossing for miles, so everyone passes through: Harmonic traders, Radiant surveyors, valley farmers, and lately, strangers no one recognizes. The old bridge-stone at the crossing is a waygate, and the least ceremonious one in the world — carters queue behind it, and the ferrymen charge the same either way.",
- "loreRefs": [
-  "valley_primer"
- ],
- "npcsPresent": [],
- "encounterFlavor": "Travelers with rumors, contamination survey teams from both Heights and Plateau blaming each other, desperate fishers, and things washed downstream that shouldn't exist.",
- "image": "content/packs/valley/assets/echo_river_crossing.jpg",
- "questSeeds": [
-  "Both civilizations' survey teams are collecting samples and hiding results from each other; getting honest data means winning one side's trust — or stealing both",
-  "The empty fisher shacks aren't all empty: someone upstream-sick is hiding there, afraid of being quarantined away from family",
-  "A trader's barge snagged something in the shallows that isn't stone and isn't wood, and the crew won't touch it twice",
-  "Toll-takers who never used to be here now charge crossing fees in Radiant scrip — someone is testing how much authority a uniform buys"
- ],
- "map": {
-  "x": 340,
-  "y": 195
- },
- "encounterSeeds": [
-  {
-   "encounterId": "rockslide_crossing",
-   "hint": "The granite shoulder above the path has been shedding — a slide could cut the crossing"
-  }
- ],
- "poleIntensity": {
-  "space": 0.3,
-  "death": 0.2,
-  "dark": 0.2,
-  "chaos": 0.2
- },
- "waygate": true,
- "waygateTier": 1,
- "axisVector": [
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  -0.2,
-  -0.2,
-  -0.2,
-  -0.3,
-  0.0,
-  0.0
- ],
- "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
- "worldPos": {
-  "colatitude": 28.0,
-  "longitude": 88.0,
-  "depth": 0
- },
- "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
- "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'"
+  "schemaVersion": 1,
+  "id": "echo_river_crossing",
+  "name": "Echo River Crossing",
+  "regionId": "the_echo_vale",
+  "communityId": "echo_vale.millbrook",
+  "spectrum": {
+    "space_time": -0.3,
+    "death_life": -0.2,
+    "dark_light": -0.2,
+    "chaos_order": -0.2
+  },
+  "tags": [
+    "river",
+    "bridge",
+    "travel",
+    "contamination-visible"
+  ],
+  "connections": [
+    "millbrook",
+    "disputed_zone_fringe",
+    "archive_hollow",
+    "greywater_stilts",
+    "the_axis_gate",
+    "sunken_choir"
+  ],
+  "descriptionSeed": "The old stone-and-cable bridge where the Echo River narrows between granite shoulders. Upstream the water sheets gray-green over the rocks — the contamination is unmistakable here, worse every week. Fisher shacks stand empty. The bridge is the only crossing for miles, so everyone passes through: Harmonic traders, Radiant surveyors, valley farmers, and lately, strangers no one recognizes. The old bridge-stone at the crossing is a waygate, and the least ceremonious one in the world — carters queue behind it, and the ferrymen charge the same either way.",
+  "loreRefs": [
+    "valley_primer"
+  ],
+  "npcsPresent": [],
+  "encounterFlavor": "Travelers with rumors, contamination survey teams from both Heights and Plateau blaming each other, desperate fishers, and things washed downstream that shouldn't exist.",
+  "image": "content/packs/valley/assets/echo_river_crossing.jpg",
+  "questSeeds": [
+    "Both civilizations' survey teams are collecting samples and hiding results from each other; getting honest data means winning one side's trust — or stealing both",
+    "The empty fisher shacks aren't all empty: someone upstream-sick is hiding there, afraid of being quarantined away from family",
+    "A trader's barge snagged something in the shallows that isn't stone and isn't wood, and the crew won't touch it twice",
+    "Toll-takers who never used to be here now charge crossing fees in Radiant scrip — someone is testing how much authority a uniform buys"
+  ],
+  "map": {
+    "x": 340,
+    "y": 195
+  },
+  "encounterSeeds": [
+    {
+      "encounterId": "rockslide_crossing",
+      "hint": "The granite shoulder above the path has been shedding — a slide could cut the crossing"
+    }
+  ],
+  "poleIntensity": {
+    "space": 0.3,
+    "death": 0.2,
+    "dark": 0.2,
+    "chaos": 0.2
+  },
+  "waygate": true,
+  "waygateTier": 1,
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    -0.2,
+    -0.2,
+    -0.3,
+    0.0,
+    0.0
+  ],
+  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "worldPos": {
+    "colatitude": 28.0,
+    "longitude": 88.0,
+    "depth": 0
+  },
+  "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+  "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'",
+  "tier": "settlement",
+  "parentId": "disputed_zone_fringe"
 }

@@ -427,13 +427,17 @@ export function craftSource(ability, character, schoolsData, powerSources = null
  *
  *  `strength` is 0–4 pips for scanning; `verdict` is the word; `because` is the authored ground line.
  *  Returns null when the source is unknown — a card that cannot answer must not render a confident row. */
-export function groundCardFor(ability, character, { schools, substrate, location, powerSources = null } = {}) {
+export function groundCardFor(ability, character, { schools, substrate, location, powerSources = null, locations = null } = {}) {
   const cs = craftSource(ability, character, schools, powerSources);
   if (!cs) return null;
   // ⛔ SNG-385 — THE CARD READS THE SOURCE'S OWN FIELD. A nanite craft scored against lattice density
   // is being marked on the wrong exam: the Heartroot is lattice 0.02 and nanite `wild` 0.75, and a card
   // that calls a nanite craft starved there is simply wrong about the world.
-  const density = location ? fieldValueFor(cs.source, location, substrate) : null;
+  // ⚠️ SNG-392: at a SITE, the LOCAL FRAME adjusts the value the card scores against — this is the
+  // seam where an invasion becomes visible, and the receipt rides along so the card can say WHY.
+  const sited = location ? fieldValueAtSite(cs.source, location, substrate, locations) : { value: null, local: null };
+  const density = sited.value;
+  const localGround = sited.local;
   const nan = fieldOfSource(cs.source, substrate) === "nanite" ? naniteAt(location, substrate) : null;
   const because = sourceGround(cs.source, substrate);
   // A source with no band (body, nanite) does not care about the ground, and saying "strong here" about it
@@ -466,7 +470,7 @@ export function groundCardFor(ability, character, { schools, substrate, location
     : v.side === "starved" ? "starved here — the ground is too thin"
     : v.side === "crowded" ? "crowded here — the ground is too loud"
     : "unaffected by the ground";
-  return { source: cs.source, school: cs.school, via: cs.via, density, because, field: fieldOfSource(cs.source, substrate), nanite: nan, verdict: word,
+  return { source: cs.source, school: cs.school, via: cs.via, density, because, field: fieldOfSource(cs.source, substrate), nanite: nan, localGround, verdict: word,
     strength: Math.max(0, Math.min(4, Math.round(v.factor * 4))), percent: v.percent,
     chancePenalty: v.chancePenalty, energyMult: v.energyMult, off: v.off, grounded: true };
 }
@@ -545,4 +549,64 @@ export function fieldValueFor(source, location, substrateData) {
   }
   const d = locationDensity(location, substrateData);
   return typeof d === "number" ? d : null;
+}
+
+/* ═══ SNG-392 §1 — THE LOCAL FRAME. The schema that unblocks Aevi's 65 sites, and the resolver
+ * that makes it a mechanic instead of a spreadsheet the day she authors it.
+ *
+ *   localMap:     { x, y }                                    — the site's place in its settlement's floor
+ *                                                               plan. A LOCAL frame, a projection of nothing.
+ *   localSources: [ { kind: "pool"|"sink", delta, radiusLocal, reason, field?: "substrate"|"nanite" } ]
+ *
+ * ⛔ ERIK'S RULING GOVERNS THE MAGNITUDE: LOCAL GROUND CAN OVERTURN WORLD GROUND. Aevi proposed ±0.15
+ * and he declined — "that's how different traditions INVADE and can be effective in an antipole. It takes
+ * planning and resources." NO CAP lives here; the sum clamps to the axis's own [0,1] and nothing else.
+ * The counter is the same mechanic pointed the other way.
+ *
+ * ⚠️ PER-AXIS, BECAUSE SNG-387 §2 SAID SO IN ADVANCE: "the Ent-embassy ward is not generic
+ * thinness — it is nanite-clear and lattice-neutral." A local source may name its `field`; it defaults to
+ * the substrate. Cross the courtyard and your craft changes — differently per craft.
+ *
+ * ⚠️ WITHIN THE FRAME ONLY. A settlement's wells and sinks reach its own sites and nothing beyond —
+ * they do not participate in the world field, and a source in one settlement never leaks into another. */
+
+/** The local field at one site: the summed reach of every localSource in its settlement's frame — its
+ *  own and its siblings' — with an itemised receipt naming each contributor. Pure.
+ *  ⚠️ THE RECEIPT IS NOT DECORATION: carriedSubstrateSources set the precedent, and its own design
+ *  note says why — a defender whose ground moved must be told WHY, "the difference between a mechanic and
+ *  the cruellest possible bug." */
+export function localFieldAt(siteId, locations) {
+  const site = locations?.[siteId];
+  if (!site || !site.localMap || !Number.isFinite(site.localMap.x) || !Number.isFinite(site.localMap.y)) return null;
+  const parentId = site.parentId;
+  if (!parentId) return null;
+  const out = { substrate: 0, nanite: 0, receipt: [] };
+  for (const l of Object.values(locations)) {
+    if (l.parentId !== parentId && l.id !== parentId) continue;          // the frame: the settlement and its sites
+    if (!Array.isArray(l.localSources) || !l.localMap) continue;
+    const dx = site.localMap.x - l.localMap.x, dy = site.localMap.y - l.localMap.y;
+    const dist = Math.hypot(dx, dy);
+    for (const src of l.localSources) {
+      const r = Number(src.radiusLocal);
+      if (!Number.isFinite(src.delta) || !(r > 0)) continue;
+      if (dist >= r * 2.5) continue;                                     // compact support, as the world field
+      const v = src.delta * Math.exp(-Math.pow(dist / r, 2));
+      const field = src.field === "nanite" ? "nanite" : "substrate";
+      out[field] += v;
+      out.receipt.push({ at: l.id, field, kind: src.kind || (src.delta >= 0 ? "pool" : "sink"),
+        contribution: Math.round(v * 1000) / 1000, reason: src.reason || null });
+    }
+  }
+  return out.receipt.length ? out : null;
+}
+
+/** The value a craft is scored against at a SITE: the world field plus the local frame, clamped to the
+ *  axis — the one place local and world ground meet, so an invasion and its counter both read here. */
+export function fieldValueAtSite(source, location, substrateData, locations) {
+  const base = fieldValueFor(source, location, substrateData);
+  if (base === null) return { value: null, local: null };
+  const local = location?.id && locations ? localFieldAt(location.id, locations) : null;
+  if (!local) return { value: base, local: null };
+  const axis = fieldOfSource(source, substrateData) === "nanite" ? "nanite" : "substrate";
+  return { value: Math.max(0, Math.min(1, base + local[axis])), local };
 }

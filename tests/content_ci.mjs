@@ -715,6 +715,40 @@ for (const pack of PACKS) {
   check("SNG-393: a signature moved 10° lands UNRESOLVED — never quietly bound to the nearest water",
     res2.placeNames.unresolved.some((u) => u.id === target.id));
 
+    // ── SNG-392 §1 — THE HIERARCHY IS APPLIED AND THE LOCAL SCHEMA IS ARMED ──
+  // Aevi corrected the staged derivation (091dad1a); I applied it to content — late, and the lateness was
+  // mine: her corrections sat staged for a day while §1 said the schema was "the only thing blocking ME".
+  {
+    const allLocs = Object.values(canon.locs);
+    const tiers = allLocs.reduce((a, l) => (a[l.tier] = (a[l.tier] || 0) + 1, a), {});
+    check("SNG-392: the applied hierarchy matches Aevi's corrected census — 25 regions, 28 settlements, 65 sites",
+      tiers.region === 25 && tiers.settlement === 28 && tiers.site === 65, JSON.stringify(tiers));
+    const ids = new Set(allLocs.map((l) => l.id));
+    const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
+    check("SNG-392: every parentId resolves and every site HAS a parent",
+      badParent.length === 0 && allLocs.filter((l) => l.tier === "site" && !l.parentId).length === 0,
+      badParent.map((l) => l.id).join(" · "));
+    check("SNG-392: roles stay in the ratified vocabulary — gate and waypoint, nothing invented",
+      allLocs.every((l) => !l.role || ["gate", "waypoint"].includes(l.role)));
+    // ⚠️ THE LOCAL SCHEMA, VALIDATED THE DAY SHE AUTHORS IT — armed now, vacuous until then, exactly
+    // like the SNG-384 source validator was for the bastions. Erik's no-cap ruling means NO magnitude
+    // check lives here: kind/sign coherence, a positive radius, and a REASON are the whole contract.
+    const badLocal = [];
+    for (const l of allLocs) {
+      if (l.localMap && (l.tier !== "site" || !Number.isFinite(l.localMap.x) || !Number.isFinite(l.localMap.y)))
+        badLocal.push(l.id + ": localMap malformed or on a non-site");
+      for (const src of l.localSources || []) {
+        if (!["pool", "sink"].includes(src.kind)) badLocal.push(l.id + ": kind " + src.kind);
+        else if (src.kind === "pool" && !(src.delta > 0)) badLocal.push(l.id + ": pool with delta " + src.delta);
+        else if (src.kind === "sink" && !(src.delta < 0)) badLocal.push(l.id + ": sink with delta " + src.delta);
+        if (!(Number(src.radiusLocal) > 0)) badLocal.push(l.id + ": no radiusLocal");
+        if (!src.reason) badLocal.push(l.id + ": no reason — the receipt is what a defender is shown");
+        if (src.field && !["substrate", "nanite"].includes(src.field)) badLocal.push(l.id + ": field " + src.field);
+      }
+    }
+    check("SNG-392: every authored local source is well-formed — kind, sign, radius, reason, a known axis",
+      badLocal.length === 0, badLocal.slice(0, 6).join(" · "));
+  }
   console.log(`note  SNG-391: hydrology — ${built.hydrology.rivers.length} rivers, ${built.hydrology.lakes.length} lakes, ${built.hydrology.marsh.length} marshes; authored water ${built.authoredWaterPresent ? "APPLIED" : "⚠️ ABSENT (waterauth.json not yet in the repo — derived hydrology only)"}`);
 }
 

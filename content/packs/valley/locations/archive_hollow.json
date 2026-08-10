@@ -1,86 +1,88 @@
 {
- "schemaVersion": 1,
- "id": "archive_hollow",
- "name": "Archive Hollow",
- "regionId": "valley",
- "communityId": "valley.millbrook",
- "spectrum": {
-  "concrete_abstract": 0.6,
-  "dark_light": -0.4,
-  "space_time": 0.3,
-  "falsehood_truth": 0.4,
-  "mechanical_spiritual": -0.3
- },
- "tags": [
-  "ruin",
-  "archive",
-  "pre-transition",
-  "restricted"
- ],
- "connections": [
-  "echo_river_crossing"
- ],
- "descriptionSeed": "A collapsed limestone sink upstream of the crossing, where spring floods exposed a pre-Transition vault: the Lost Archive. Sealed stacks of crystalline storage descend into the dark — fifteen years of the valley agreeing not to talk about what humanity chose to walk away from, all suddenly legible again. The Archive Guardian keeps the entrance, by whose authority nobody can quite say. The air inside tastes like ozone and old arguments.",
- "loreRefs": [
-  "valley_primer",
-  "precursors"
- ],
- "npcsPresent": [
-  "archive_guardian"
- ],
- "encounterFlavor": "The Guardian's tests and evasions, sealed doors keyed to forgotten protocols, fragments of pre-Transition records, factions' agents nosing around, and the uncomfortable sense of being catalogued by something in the deep stacks.",
- "dangerLevel": 2,
- "image": "content/packs/valley/assets/archive_hollow.jpg",
- "questSeeds": [
-  "The Archive Guardian will trade access for help drafting a preservation framework the three factions could actually ratify",
-  "Faction agents keep probing the Hollow at night; the Guardian needs discreet watchers — and knows more about each agent than they'd like",
-  "A sealed stack keyed to pre-Transition protocols might open for the right resonance or the right light — or the right pair working together",
-  "Requests from the lowest level are getting more specific: names now. The latest request names someone the character has met."
- ],
- "map": {
-  "x": 225,
-  "y": 105
- },
- "encounterSeeds": [
-  {
-   "encounterId": "precursor_mechanism",
-   "hint": "A sealed stack door in the second gallery hums below hearing — the Guardian permits attempts"
-  }
- ],
- "poleIntensity": {
-  "abstract": 0.6,
-  "dark": 0.4,
-  "time": 0.3,
-  "truth": 0.4,
-  "mechanical": 0.3
- },
- "substrateSource": {
-  "kind": "pool",
-  "delta": 0.2,
-  "radius": 90,
-  "radiusWorld": 0.054,
-  "reason": "The Archive was sealed before the Transition and never opened to it. What is inside is still what was inside — the one genuinely dense place in the foothills, and the reason the rest of them are here.",
-  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
- },
- "axisVector": [
-  0.0,
-  0.4,
-  0.0,
-  0.0,
-  0.6,
-  -0.3,
-  0.0,
-  -0.4,
-  0.0,
-  0.3,
-  0.0,
-  0.0
- ],
- "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
- "worldPos": {
-  "colatitude": 22.0,
-  "longitude": 196.0,
-  "depth": -1
- },
- "worldPosNote": "Sealed before the Transition and never opened to it. Valley, cut into rock. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)"
+  "schemaVersion": 1,
+  "id": "archive_hollow",
+  "name": "Archive Hollow",
+  "regionId": "valley",
+  "communityId": "valley.millbrook",
+  "spectrum": {
+    "concrete_abstract": 0.6,
+    "dark_light": -0.4,
+    "space_time": 0.3,
+    "falsehood_truth": 0.4,
+    "mechanical_spiritual": -0.3
+  },
+  "tags": [
+    "ruin",
+    "archive",
+    "pre-transition",
+    "restricted"
+  ],
+  "connections": [
+    "echo_river_crossing"
+  ],
+  "descriptionSeed": "A collapsed limestone sink upstream of the crossing, where spring floods exposed a pre-Transition vault: the Lost Archive. Sealed stacks of crystalline storage descend into the dark — fifteen years of the valley agreeing not to talk about what humanity chose to walk away from, all suddenly legible again. The Archive Guardian keeps the entrance, by whose authority nobody can quite say. The air inside tastes like ozone and old arguments.",
+  "loreRefs": [
+    "valley_primer",
+    "precursors"
+  ],
+  "npcsPresent": [
+    "archive_guardian"
+  ],
+  "encounterFlavor": "The Guardian's tests and evasions, sealed doors keyed to forgotten protocols, fragments of pre-Transition records, factions' agents nosing around, and the uncomfortable sense of being catalogued by something in the deep stacks.",
+  "dangerLevel": 2,
+  "image": "content/packs/valley/assets/archive_hollow.jpg",
+  "questSeeds": [
+    "The Archive Guardian will trade access for help drafting a preservation framework the three factions could actually ratify",
+    "Faction agents keep probing the Hollow at night; the Guardian needs discreet watchers — and knows more about each agent than they'd like",
+    "A sealed stack keyed to pre-Transition protocols might open for the right resonance or the right light — or the right pair working together",
+    "Requests from the lowest level are getting more specific: names now. The latest request names someone the character has met."
+  ],
+  "map": {
+    "x": 225,
+    "y": 105
+  },
+  "encounterSeeds": [
+    {
+      "encounterId": "precursor_mechanism",
+      "hint": "A sealed stack door in the second gallery hums below hearing — the Guardian permits attempts"
+    }
+  ],
+  "poleIntensity": {
+    "abstract": 0.6,
+    "dark": 0.4,
+    "time": 0.3,
+    "truth": 0.4,
+    "mechanical": 0.3
+  },
+  "substrateSource": {
+    "kind": "pool",
+    "delta": 0.2,
+    "radius": 90,
+    "radiusWorld": 0.054,
+    "reason": "The Archive was sealed before the Transition and never opened to it. What is inside is still what was inside — the one genuinely dense place in the foothills, and the reason the rest of them are here.",
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+  },
+  "axisVector": [
+    0.0,
+    0.4,
+    0.0,
+    0.0,
+    0.6,
+    -0.3,
+    0.0,
+    -0.4,
+    0.0,
+    0.3,
+    0.0,
+    0.0
+  ],
+  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "worldPos": {
+    "colatitude": 22.0,
+    "longitude": 196.0,
+    "depth": -1
+  },
+  "worldPosNote": "Sealed before the Transition and never opened to it. Valley, cut into rock. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+  "tier": "site",
+  "parentId": "echo_river_crossing"
 }

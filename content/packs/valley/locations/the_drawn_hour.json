@@ -1,72 +1,75 @@
 {
- "schemaVersion": 1,
- "id": "the_drawn_hour",
- "name": "The Drawn Hour",
- "regionId": "the_foothills",
- "communityId": "the_drawn_hour",
- "spectrum": {
-  "concrete_abstract": 0.3,
-  "space_time": -0.3
- },
- "tags": [
-  "outpost",
-  "settlement"
- ],
- "connections": [
-  "cloudform",
-  "the_slow_hour"
- ],
- "descriptionSeed": "The Drawn Hour — an outpost where pattern-readers and hour-keepers compare notes on what repeats. A figurist sees the shape of a thing; an hourkeeper sees how often. Between them they can usually say when it will happen again.",
- "loreRefs": [],
- "npcsPresent": [],
- "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
- "dangerLevel": 1,
- "image": "content/packs/valley/assets/the_drawn_hour.jpg",
- "questSeeds": [],
- "map": {
-  "x": 318,
-  "y": 165
- },
- "encounterSeeds": [],
- "poleIntensity": {
-  "abstract": 0.3,
-  "time": 0.3
- },
- "substrateSource": {
-  "kind": "pool",
-  "delta": 0.1,
-  "radius": 90,
-  "radiusWorld": 0.054,
-  "reason": "An Hourkeeper levy-post: time taken off things and never returned has to be taken SOMEWHERE, and it has been taken here for decades.",
-  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
- },
- "axisVector": [
-  0,
-  0,
-  0,
-  0,
-  0.3,
-  0,
-  0,
-  0,
-  0,
-  -0.3,
-  0,
-  0
- ],
- "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ Exactly two non-zero components — the signature of a two-domain balance.",
- "worldPos": {
-  "colatitude": 83,
-  "longitude": 308,
-  "depth": 0
- },
- "worldPosNote": "⚠️ THE MIDPOINT BETWEEN cloudform AND the_slow_hour.",
- "outpostOf": [
-  "figurist",
-  "hourkeeper"
- ],
- "betweenPoles": [
-  "cloudform",
-  "the_slow_hour"
- ]
+  "schemaVersion": 1,
+  "id": "the_drawn_hour",
+  "name": "The Drawn Hour",
+  "regionId": "the_foothills",
+  "communityId": "the_drawn_hour",
+  "spectrum": {
+    "concrete_abstract": 0.3,
+    "space_time": -0.3
+  },
+  "tags": [
+    "outpost",
+    "settlement"
+  ],
+  "connections": [
+    "cloudform",
+    "the_slow_hour"
+  ],
+  "descriptionSeed": "The Drawn Hour — an outpost where pattern-readers and hour-keepers compare notes on what repeats. A figurist sees the shape of a thing; an hourkeeper sees how often. Between them they can usually say when it will happen again.",
+  "loreRefs": [],
+  "npcsPresent": [],
+  "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
+  "dangerLevel": 1,
+  "image": "content/packs/valley/assets/the_drawn_hour.jpg",
+  "questSeeds": [],
+  "map": {
+    "x": 318,
+    "y": 165
+  },
+  "encounterSeeds": [],
+  "poleIntensity": {
+    "abstract": 0.3,
+    "time": 0.3
+  },
+  "substrateSource": {
+    "kind": "pool",
+    "delta": 0.1,
+    "radius": 90,
+    "radiusWorld": 0.054,
+    "reason": "An Hourkeeper levy-post: time taken off things and never returned has to be taken SOMEWHERE, and it has been taken here for decades.",
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+  },
+  "axisVector": [
+    0,
+    0,
+    0,
+    0,
+    0.3,
+    0,
+    0,
+    0,
+    0,
+    -0.3,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ Exactly two non-zero components — the signature of a two-domain balance.",
+  "worldPos": {
+    "colatitude": 83,
+    "longitude": 308,
+    "depth": 0
+  },
+  "worldPosNote": "⚠️ THE MIDPOINT BETWEEN cloudform AND the_slow_hour.",
+  "outpostOf": [
+    "figurist",
+    "hourkeeper"
+  ],
+  "betweenPoles": [
+    "cloudform",
+    "the_slow_hour"
+  ],
+  "tier": "settlement",
+  "parentId": null,
+  "role": "waypoint"
 }

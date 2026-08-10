@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.95";
+const APP_VERSION = "1.9.96";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2305,7 +2305,7 @@ function groundRow(ability) {
   if (!ability) return "";
   try {
     const g = groundCardFor(ability, character, {
-      schools: CONTENT.schools, substrate: CONTENT.substrateModel, location: hereNow(),
+      schools: CONTENT.schools, substrate: CONTENT.substrateModel, location: hereNow(), locations: CONTENT.locations,
       // ⚠️ SNG-382: the tradition mix, for a craft whose tradition the character has no school in.
       // It answers for nothing TODAY — the five school-less traditions have no mix either — and that is
       // the point of wiring it first: the reader exists, so the 53 crafts light up the moment Aevi

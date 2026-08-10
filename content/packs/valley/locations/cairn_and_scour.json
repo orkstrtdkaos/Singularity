@@ -1,72 +1,75 @@
 {
- "schemaVersion": 1,
- "id": "cairn_and_scour",
- "name": "Cairn-and-Scour",
- "regionId": "the_foothills",
- "communityId": "cairn_and_scour",
- "spectrum": {
-  "death_life": -0.3,
-  "destruction_creation": -0.3
- },
- "tags": [
-  "outpost",
-  "settlement"
- ],
- "connections": [
-  "the_quiet_ground",
-  "the_scour"
- ],
- "descriptionSeed": "Cairn-and-Scour — an outpost where the burying trade and the demolition trade share a yard. Two crews who both end things and argue about which of them does it more honestly. Four buildings and a very well-kept ledger.",
- "loreRefs": [],
- "npcsPresent": [],
- "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
- "dangerLevel": 1,
- "image": "content/packs/valley/assets/cairn_and_scour.jpg",
- "questSeeds": [],
- "map": {
-  "x": 630,
-  "y": 390
- },
- "encounterSeeds": [],
- "poleIntensity": {
-  "death": 0.3,
-  "destruction": 0.3
- },
- "substrateSource": {
-  "kind": "pool",
-  "delta": 0.1,
-  "radius": 90,
-  "radiusWorld": 0.054,
-  "reason": "The cairns are older than the scour and the scour keeps uncovering them. Precursor work, exposed and re-buried by weather on a cycle nobody controls.",
-  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
- },
- "axisVector": [
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  -0.3,
-  0,
-  0,
-  -0.3
- ],
- "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ An outpost balances EXACTLY TWO domains, so exactly two components are non-zero and both are modest — the signature that distinguishes an outpost from a foothill.",
- "worldPos": {
-  "colatitude": 82,
-  "longitude": 70,
-  "depth": 0
- },
- "worldPosNote": "⚠️ THE MIDPOINT BETWEEN the_quiet_ground AND the_scour. An outpost sits where two domains meet in balance, so its position is the average of the two it balances — not a step out from the centre, which is what a foothill is.",
- "outpostOf": [
-  "ashwarden",
-  "unmaker"
- ],
- "betweenPoles": [
-  "the_quiet_ground",
-  "the_scour"
- ]
+  "schemaVersion": 1,
+  "id": "cairn_and_scour",
+  "name": "Cairn-and-Scour",
+  "regionId": "the_foothills",
+  "communityId": "cairn_and_scour",
+  "spectrum": {
+    "death_life": -0.3,
+    "destruction_creation": -0.3
+  },
+  "tags": [
+    "outpost",
+    "settlement"
+  ],
+  "connections": [
+    "the_quiet_ground",
+    "the_scour"
+  ],
+  "descriptionSeed": "Cairn-and-Scour — an outpost where the burying trade and the demolition trade share a yard. Two crews who both end things and argue about which of them does it more honestly. Four buildings and a very well-kept ledger.",
+  "loreRefs": [],
+  "npcsPresent": [],
+  "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
+  "dangerLevel": 1,
+  "image": "content/packs/valley/assets/cairn_and_scour.jpg",
+  "questSeeds": [],
+  "map": {
+    "x": 630,
+    "y": 390
+  },
+  "encounterSeeds": [],
+  "poleIntensity": {
+    "death": 0.3,
+    "destruction": 0.3
+  },
+  "substrateSource": {
+    "kind": "pool",
+    "delta": 0.1,
+    "radius": 90,
+    "radiusWorld": 0.054,
+    "reason": "The cairns are older than the scour and the scour keeps uncovering them. Precursor work, exposed and re-buried by weather on a cycle nobody controls.",
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+  },
+  "axisVector": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -0.3,
+    0,
+    0,
+    -0.3
+  ],
+  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ An outpost balances EXACTLY TWO domains, so exactly two components are non-zero and both are modest — the signature that distinguishes an outpost from a foothill.",
+  "worldPos": {
+    "colatitude": 82,
+    "longitude": 70,
+    "depth": 0
+  },
+  "worldPosNote": "⚠️ THE MIDPOINT BETWEEN the_quiet_ground AND the_scour. An outpost sits where two domains meet in balance, so its position is the average of the two it balances — not a step out from the centre, which is what a foothill is.",
+  "outpostOf": [
+    "ashwarden",
+    "unmaker"
+  ],
+  "betweenPoles": [
+    "the_quiet_ground",
+    "the_scour"
+  ],
+  "tier": "settlement",
+  "parentId": null,
+  "role": "waypoint"
 }

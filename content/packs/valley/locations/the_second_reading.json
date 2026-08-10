@@ -1,72 +1,75 @@
 {
- "schemaVersion": 1,
- "id": "the_second_reading",
- "name": "The Second Reading",
- "regionId": "the_foothills",
- "communityId": "the_second_reading",
- "spectrum": {
-  "dark_light": 0.3,
-  "emotional_logical": 0.3
- },
- "tags": [
-  "outpost",
-  "settlement"
- ],
- "connections": [
-  "the_blaze",
-  "the_axiom"
- ],
- "descriptionSeed": "The Second Reading — an outpost where assayers and proof-makers check each other's work. A blazeborn shows you what a thing is; a syllogist shows you whether the showing was sound. They keep separate records and compare them once a season.",
- "loreRefs": [],
- "npcsPresent": [],
- "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
- "dangerLevel": 1,
- "image": "content/packs/valley/assets/the_second_reading.jpg",
- "questSeeds": [],
- "map": {
-  "x": 440,
-  "y": 250
- },
- "encounterSeeds": [],
- "poleIntensity": {
-  "light": 0.3,
-  "logical": 0.3
- },
- "substrateSource": {
-  "kind": "pool",
-  "delta": 0.1,
-  "radius": 90,
-  "radiusWorld": 0.054,
-  "reason": "A Lattice-Cities outpost that keeps a duplicate ledger of the foothills, because the Lattice counts twice on purpose. Two records held in one place hold the ground with them.",
-  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
- },
- "axisVector": [
-  0.3,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0.3,
-  0,
-  0,
-  0,
-  0
- ],
- "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ An outpost balances EXACTLY TWO domains, so exactly two components are non-zero and both are modest — the signature that distinguishes an outpost from a foothill.",
- "worldPos": {
-  "colatitude": 86,
-  "longitude": 176,
-  "depth": 0
- },
- "worldPosNote": "⚠️ THE MIDPOINT BETWEEN the_blaze AND the_axiom. An outpost sits where two domains meet in balance, so its position is the average of the two it balances — not a step out from the centre, which is what a foothill is.",
- "outpostOf": [
-  "blazeborn",
-  "syllogist"
- ],
- "betweenPoles": [
-  "the_blaze",
-  "the_axiom"
- ]
+  "schemaVersion": 1,
+  "id": "the_second_reading",
+  "name": "The Second Reading",
+  "regionId": "the_foothills",
+  "communityId": "the_second_reading",
+  "spectrum": {
+    "dark_light": 0.3,
+    "emotional_logical": 0.3
+  },
+  "tags": [
+    "outpost",
+    "settlement"
+  ],
+  "connections": [
+    "the_blaze",
+    "the_axiom"
+  ],
+  "descriptionSeed": "The Second Reading — an outpost where assayers and proof-makers check each other's work. A blazeborn shows you what a thing is; a syllogist shows you whether the showing was sound. They keep separate records and compare them once a season.",
+  "loreRefs": [],
+  "npcsPresent": [],
+  "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
+  "dangerLevel": 1,
+  "image": "content/packs/valley/assets/the_second_reading.jpg",
+  "questSeeds": [],
+  "map": {
+    "x": 440,
+    "y": 250
+  },
+  "encounterSeeds": [],
+  "poleIntensity": {
+    "light": 0.3,
+    "logical": 0.3
+  },
+  "substrateSource": {
+    "kind": "pool",
+    "delta": 0.1,
+    "radius": 90,
+    "radiusWorld": 0.054,
+    "reason": "A Lattice-Cities outpost that keeps a duplicate ledger of the foothills, because the Lattice counts twice on purpose. Two records held in one place hold the ground with them.",
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+  },
+  "axisVector": [
+    0.3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0.3,
+    0,
+    0,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ An outpost balances EXACTLY TWO domains, so exactly two components are non-zero and both are modest — the signature that distinguishes an outpost from a foothill.",
+  "worldPos": {
+    "colatitude": 86,
+    "longitude": 176,
+    "depth": 0
+  },
+  "worldPosNote": "⚠️ THE MIDPOINT BETWEEN the_blaze AND the_axiom. An outpost sits where two domains meet in balance, so its position is the average of the two it balances — not a step out from the centre, which is what a foothill is.",
+  "outpostOf": [
+    "blazeborn",
+    "syllogist"
+  ],
+  "betweenPoles": [
+    "the_blaze",
+    "the_axiom"
+  ],
+  "tier": "settlement",
+  "parentId": null,
+  "role": "waypoint"
 }

@@ -1,80 +1,82 @@
 {
- "schemaVersion": 1,
- "id": "the_hollowing",
- "name": "The Hollowing",
- "regionId": "the_palelands",
- "communityId": "ashwarden.hollowing",
- "axisVector": [
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.2,
-  0.0,
-  -0.6,
-  0.0,
-  0.0,
-  -0.3
- ],
- "spectrum": {
-  "death_life": -0.6,
-  "destruction_creation": -0.3,
-  "chaos_order": 0.2
- },
- "tags": [
-  "ashwarden",
-  "death",
-  "border",
-  "grey",
-  "liminal",
-  "dangerous"
- ],
- "connections": [
-  "the_greenward",
-  "cairnhold"
- ],
- "descriptionSeed": "The Ashwardens' edge — the near-march of the Palelands, where the grey country runs out toward a green nobody here has walked to. They keep the endings on this side of the world and send them nowhere. The road to the Greenward takes most of a year and every Warden has met someone who made it.",
- "loreRefs": [
-  "the_twelve_reaches",
-  "traditions",
-  "world_framing"
- ],
- "encounterFlavor": "Ashwardens who are unhurried and kind and completely at peace with your mortality; things ending on schedule; something that is NOT ending on schedule, and that is the problem.",
- "dangerLevel": 3,
- "questSeeds": [
-  "Something in the Hollowing is refusing to end, and the Ashwardens want help, and the Rootkin are pretending not to be delighted",
-  "A Rootkin has crossed into the Hollowing to save something, and that is, by treaty, a very serious act"
- ],
- "map": {
-  "x": 570,
-  "y": 330
- },
- "poleIntensity": {
-  "death": 0.6,
-  "destruction": 0.3,
-  "order": 0.2
- },
- "encounterSeeds": [
-  {
-   "encounterId": "precursor_seal_probe",
-   "hint": "A precursor seal stands intact at the grey border, and its purpose-shadow reads PRISON"
-  }
- ],
- "substrateSource": {
-  "kind": "pool",
-  "delta": 0.1,
-  "radius": 80,
-  "reason": "The grey border holds a thin persistent charge — the seam between a drained wood and a tended one is not empty, it is under tension.",
-  "radiusWorld": 0.048,
-  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
- },
- "worldPos": {
-  "colatitude": 70.0,
-  "longitude": 68.0,
-  "depth": 0
- },
- "worldPosNote": "The seam between drained wood and tended ground. A border, so inward of both poles it lies between. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
- "_fix": "⛔ SNG-393 (Erik: 'you authored it you fix it'). The old seed read 'Where the Quickwood stops and the grey begins', which made this a BORDER BETWEEN two regions — and it cannot be one. Longitude on this sphere encodes DISPOSITION: the Quickwood is the life pole at ~255 and the Palelands the grey at ~74, EXACT ANTIPODES. ⚠️ TWO ANTIPODAL DISPOSITIONS HAVE NO SHARED BORDER. A place cannot stand where they meet because they do not meet. ⛔ RESOLVED: the Hollowing stands on the GREY SIDE and looks across. It is a march, not a seam — the Ashwardens' outermost hold, facing a country 226 walking days away that they know only by report. That distance is not a defect; it IS the relationship. The ambiguity was mine and this removes it rather than hedging it."
+  "schemaVersion": 1,
+  "id": "the_hollowing",
+  "name": "The Hollowing",
+  "regionId": "the_palelands",
+  "communityId": "ashwarden.hollowing",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    -0.6,
+    0.0,
+    0.0,
+    -0.3
+  ],
+  "spectrum": {
+    "death_life": -0.6,
+    "destruction_creation": -0.3,
+    "chaos_order": 0.2
+  },
+  "tags": [
+    "ashwarden",
+    "death",
+    "border",
+    "grey",
+    "liminal",
+    "dangerous"
+  ],
+  "connections": [
+    "the_greenward",
+    "cairnhold"
+  ],
+  "descriptionSeed": "The Ashwardens' edge — the near-march of the Palelands, where the grey country runs out toward a green nobody here has walked to. They keep the endings on this side of the world and send them nowhere. The road to the Greenward takes most of a year and every Warden has met someone who made it.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Ashwardens who are unhurried and kind and completely at peace with your mortality; things ending on schedule; something that is NOT ending on schedule, and that is the problem.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "Something in the Hollowing is refusing to end, and the Ashwardens want help, and the Rootkin are pretending not to be delighted",
+    "A Rootkin has crossed into the Hollowing to save something, and that is, by treaty, a very serious act"
+  ],
+  "map": {
+    "x": 570,
+    "y": 330
+  },
+  "poleIntensity": {
+    "death": 0.6,
+    "destruction": 0.3,
+    "order": 0.2
+  },
+  "encounterSeeds": [
+    {
+      "encounterId": "precursor_seal_probe",
+      "hint": "A precursor seal stands intact at the grey border, and its purpose-shadow reads PRISON"
+    }
+  ],
+  "substrateSource": {
+    "kind": "pool",
+    "delta": 0.1,
+    "radius": 80,
+    "reason": "The grey border holds a thin persistent charge — the seam between a drained wood and a tended one is not empty, it is under tension.",
+    "radiusWorld": 0.048,
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+  },
+  "worldPos": {
+    "colatitude": 70.0,
+    "longitude": 68.0,
+    "depth": 0
+  },
+  "worldPosNote": "The seam between drained wood and tended ground. A border, so inward of both poles it lies between. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+  "_fix": "⛔ SNG-393 (Erik: 'you authored it you fix it'). The old seed read 'Where the Quickwood stops and the grey begins', which made this a BORDER BETWEEN two regions — and it cannot be one. Longitude on this sphere encodes DISPOSITION: the Quickwood is the life pole at ~255 and the Palelands the grey at ~74, EXACT ANTIPODES. ⚠️ TWO ANTIPODAL DISPOSITIONS HAVE NO SHARED BORDER. A place cannot stand where they meet because they do not meet. ⛔ RESOLVED: the Hollowing stands on the GREY SIDE and looks across. It is a march, not a seam — the Ashwardens' outermost hold, facing a country 226 walking days away that they know only by report. That distance is not a defect; it IS the relationship. The ambiguity was mine and this removes it rather than hedging it.",
+  "tier": "site",
+  "parentId": "the_greenward"
 }

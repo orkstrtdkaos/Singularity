@@ -1,66 +1,69 @@
 {
- "schemaVersion": 1,
- "id": "the_low_market",
- "name": "The Low Market",
- "regionId": "the_foothills",
- "communityId": "the_low_market",
- "spectrum": {
-  "demonic_angelic": -0.35,
-  "falsehood_truth": -0.25,
-  "order_chaos": -0.2
- },
- "tags": [
-  "settlement",
-  "foothill",
-  "market"
- ],
- "connections": [
-  "the_crossing",
-  "the_maw"
- ],
- "descriptionSeed": "The Low Market — the honest end of the Descent's trade: bargains with the terms written down. Not far enough down to be the Maw, not near enough the Crossing to be respectable. Everything is for sale and the price is on it.",
- "loreRefs": [],
- "npcsPresent": [],
- "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
- "dangerLevel": 1,
- "image": "content/packs/valley/assets/the_low_market.jpg",
- "questSeeds": [],
- "map": {
-  "x": 348,
-  "y": 400
- },
- "encounterSeeds": [],
- "poleIntensity": {
-  "demonic": 0.35,
-  "falsehood": 0.25,
-  "chaos": 0.2
- },
- "axisVector": [
-  0,
-  -0.25,
-  -0.35,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0
- ],
- "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
- "worldPos": {
-  "colatitude": 45,
-  "longitude": 15,
-  "depth": -2
- },
- "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_maw, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
- "foothillOf": [
-  "abyssal",
-  "veilwright",
-  "churnfolk"
- ],
- "betweenCrossingAnd": "the_maw",
- "startingLocation": true
+  "schemaVersion": 1,
+  "id": "the_low_market",
+  "name": "The Low Market",
+  "regionId": "the_foothills",
+  "communityId": "the_low_market",
+  "spectrum": {
+    "demonic_angelic": -0.35,
+    "falsehood_truth": -0.25,
+    "order_chaos": -0.2
+  },
+  "tags": [
+    "settlement",
+    "foothill",
+    "market"
+  ],
+  "connections": [
+    "the_crossing",
+    "the_maw"
+  ],
+  "descriptionSeed": "The Low Market — the honest end of the Descent's trade: bargains with the terms written down. Not far enough down to be the Maw, not near enough the Crossing to be respectable. Everything is for sale and the price is on it.",
+  "loreRefs": [],
+  "npcsPresent": [],
+  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
+  "dangerLevel": 1,
+  "image": "content/packs/valley/assets/the_low_market.jpg",
+  "questSeeds": [],
+  "map": {
+    "x": 348,
+    "y": 400
+  },
+  "encounterSeeds": [],
+  "poleIntensity": {
+    "demonic": 0.35,
+    "falsehood": 0.25,
+    "chaos": 0.2
+  },
+  "axisVector": [
+    0,
+    -0.25,
+    -0.35,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
+  "worldPos": {
+    "colatitude": 45,
+    "longitude": 15,
+    "depth": -2
+  },
+  "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_maw, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
+  "foothillOf": [
+    "abyssal",
+    "veilwright",
+    "churnfolk"
+  ],
+  "betweenCrossingAnd": "the_maw",
+  "startingLocation": true,
+  "tier": "settlement",
+  "parentId": null,
+  "role": "waypoint"
 }

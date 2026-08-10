@@ -1,74 +1,76 @@
 {
- "schemaVersion": 1,
- "id": "harmonic_heights_terrace",
- "name": "Harmonic Heights — Lower Terrace",
- "regionId": "the_echo_vale",
- "communityId": "echo_vale.harmonic_heights",
- "spectrum": {
-  "mechanical_spiritual": 0.5,
-  "chaos_order": 0.5,
-  "emotional_logical": -0.3,
-  "violence_peace": 0.4,
-  "concrete_abstract": 0.2
- },
- "tags": [
-  "city",
-  "sonic",
-  "terraced",
-  "power-center-proximity"
- ],
- "connections": [
-  "millbrook",
-  "disputed_zone_fringe",
-  "sunken_choir"
- ],
- "descriptionSeed": "The lowest terrace of the Harmonic Heights, where the sonic civilization meets the valley floor. Buildings grown from phononic crystal hum at frequencies you feel in your teeth. Wind chimes the size of trees tune the weather. Everything resonates — the streets carry footstep-echoes upward like reports, and privacy is a discipline, not a given. The Resonance Halls above are visible as terraces of impossible acoustics climbing into cloud.",
- "loreRefs": [
-  "valley_primer",
-  "power_systems"
- ],
- "npcsPresent": [
-  "elder_resonance"
- ],
- "encounterFlavor": "Acoustic apprentices practicing badly, tuning-wardens adjusting the city's chord, debates conducted in overlapping harmonic argument, deep suspicion of Radiant visitors.",
- "image": "content/packs/valley/assets/harmonic_heights_terrace.jpg",
- "questSeeds": [
-  "Elder Resonance's own survey data contradicts the public accusations against the Radiant filtration arrays — an aide wants it leaked, carefully",
-  "A tuning-warden's apprentice has gone missing in the Disputed Zone chasing a frequency she claimed only she could hear",
-  "The sealed Resonance Halls need a rare reagent from the valley floor; couriers keep coming back empty and won't say why",
-  "Young Harmonic hotheads plan a 'demonstration' at the Radiant arrays that will look exactly like sabotage"
- ],
- "map": {
-  "x": 645,
-  "y": 225
- },
- "poleIntensity": {
-  "spiritual": 0.5,
-  "order": 0.5,
-  "emotional": 0.3,
-  "peace": 0.4,
-  "abstract": 0.2
- },
- "axisVector": [
-  -0.3,
-  0.0,
-  0.0,
-  0.4,
-  0.2,
-  0.5,
-  0.5,
-  0.0,
-  0.0,
-  0.0,
-  0.0,
-  0.0
- ],
- "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
- "worldPos": {
-  "colatitude": 18.0,
-  "longitude": 107.0,
-  "depth": 0
- },
- "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
- "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'"
+  "schemaVersion": 1,
+  "id": "harmonic_heights_terrace",
+  "name": "Harmonic Heights — Lower Terrace",
+  "regionId": "the_echo_vale",
+  "communityId": "echo_vale.harmonic_heights",
+  "spectrum": {
+    "mechanical_spiritual": 0.5,
+    "chaos_order": 0.5,
+    "emotional_logical": -0.3,
+    "violence_peace": 0.4,
+    "concrete_abstract": 0.2
+  },
+  "tags": [
+    "city",
+    "sonic",
+    "terraced",
+    "power-center-proximity"
+  ],
+  "connections": [
+    "millbrook",
+    "disputed_zone_fringe",
+    "sunken_choir"
+  ],
+  "descriptionSeed": "The lowest terrace of the Harmonic Heights, where the sonic civilization meets the valley floor. Buildings grown from phononic crystal hum at frequencies you feel in your teeth. Wind chimes the size of trees tune the weather. Everything resonates — the streets carry footstep-echoes upward like reports, and privacy is a discipline, not a given. The Resonance Halls above are visible as terraces of impossible acoustics climbing into cloud.",
+  "loreRefs": [
+    "valley_primer",
+    "power_systems"
+  ],
+  "npcsPresent": [
+    "elder_resonance"
+  ],
+  "encounterFlavor": "Acoustic apprentices practicing badly, tuning-wardens adjusting the city's chord, debates conducted in overlapping harmonic argument, deep suspicion of Radiant visitors.",
+  "image": "content/packs/valley/assets/harmonic_heights_terrace.jpg",
+  "questSeeds": [
+    "Elder Resonance's own survey data contradicts the public accusations against the Radiant filtration arrays — an aide wants it leaked, carefully",
+    "A tuning-warden's apprentice has gone missing in the Disputed Zone chasing a frequency she claimed only she could hear",
+    "The sealed Resonance Halls need a rare reagent from the valley floor; couriers keep coming back empty and won't say why",
+    "Young Harmonic hotheads plan a 'demonstration' at the Radiant arrays that will look exactly like sabotage"
+  ],
+  "map": {
+    "x": 645,
+    "y": 225
+  },
+  "poleIntensity": {
+    "spiritual": 0.5,
+    "order": 0.5,
+    "emotional": 0.3,
+    "peace": 0.4,
+    "abstract": 0.2
+  },
+  "axisVector": [
+    -0.3,
+    0.0,
+    0.0,
+    0.4,
+    0.2,
+    0.5,
+    0.5,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "worldPos": {
+    "colatitude": 18.0,
+    "longitude": 107.0,
+    "depth": 0
+  },
+  "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+  "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'",
+  "tier": "site",
+  "parentId": "disputed_zone_fringe"
 }

@@ -6962,7 +6962,7 @@ await (async () => {
       /interpolation, not a claim about reach/.test(app386));
   }
 
-  // ══ SNG-392 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 ⚑ to mean "this
+  // ══ SNG-394 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 ⚑ to mean "this
   // one is mechanical". ⛔ THE MARKER HAD NO READER — nothing could tell a milestone that DOES something
   // from one that only says something, so an unbuilt promise read exactly like a built one, and two were.
   {
@@ -6982,21 +6982,21 @@ await (async () => {
         if (eff.blocked) blocked.push(`${sub}:${rank}`);
       }
     }
-    check("392: every ⚑ milestone is transcribed into a structured effect — the marker has a reader now",
+    check("394: every ⚑ milestone is transcribed into a structured effect — the marker has a reader now",
       flagged.length > 0 && flagged.every(k => transcribed.includes(k)), `${flagged.length} flagged, ${transcribed.length} transcribed`);
-    check("392: …and an effect the engine cannot honour carries a WRITTEN reason, never silence",
+    check("394: …and an effect the engine cannot honour carries a WRITTEN reason, never silence",
       blocked.length > 0 && Object.values(lad390.subs).flatMap(d => Object.values(d.milestoneEffects || {}))
         .filter(e => e.blocked).every(e => String(e.blocked).length > 40));
-    check("392: no ⚑ milestone is transcribed as `unclassified` — that value exists to fail loudly",
+    check("394: no ⚑ milestone is transcribed as `unclassified` — that value exists to fail loudly",
       !Object.values(lad390.subs).some(d => Object.values(d.milestoneEffects || {}).some(e => e.kind === "unclassified")));
 
     // ⚠️ THE HIGHEST REACHED WINS, NOT THE SUM. `harmRung 1` at agility 7 and `harmRung 2` at 14 are
     // absolute readings of one effect — "a second rung" — so adding them would silently give a rank-14
     // character three rungs and double the milestone they just earned.
-    check("392: milestones are ABSOLUTE, not cumulative — rank 14 grants two rungs, not three",
+    check("394: milestones are ABSOLUTE, not cumulative — rank 14 grants two rungs, not three",
       L390.harmRungDrop(lad390, at({ agility: 7 })) === 1 && L390.harmRungDrop(lad390, at({ agility: 14 })) === 2);
-    check("392: …and a rank below the milestone grants nothing", L390.harmRungDrop(lad390, at({ agility: 6 })) === 0);
-    check("392: a blocked effect never appears in the LIVE map — a caller cannot act on an unbuilt promise",
+    check("394: …and a rank below the milestone grants nothing", L390.harmRungDrop(lad390, at({ agility: 6 })) === 0);
+    check("394: a blocked effect never appears in the LIVE map — a caller cannot act on an unbuilt promise",
       !("novelPenalty" in L390.milestoneEffects(lad390, at({ wits: 20 })).live)
       && L390.milestoneEffects(lad390, at({ wits: 20 })).blocked.some(b => b.kind === "novelPenalty"));
 
@@ -7005,32 +7005,32 @@ await (async () => {
     const runs = (subs, companions) => { const t = {};
       for (let i = 0; i < 600; i++) { const o = inc390.incapacitationOutcome({ character: at(subs), aggressor: { kind: "assassin" }, companions, rules: rules390, rng: Math.random }); t[o.outcome] = (t[o.outcome] || 0) + 1; }
       return t; };
-    check("392: agility 7 softens the blow — an assassin's table stops producing `slain`",
+    check("394: agility 7 softens the blow — an assassin's table stops producing `slain`",
       (runs({ agility: 3 }, [{ name: "M" }]).slain || 0) > 0 && (runs({ agility: 7 }, [{ name: "M" }]).slain || 0) === 0);
     // ⚠️ AND IT NEVER SOFTENS INTO A RESCUE BY NOBODY. `revived` is already zeroed when no companion
     // is able; dropping INTO it would narrate someone who is not there, which is worse than the harsher
     // outcome it replaced.
-    check("392: …but softening stops at `spared` when you are alone — nobody revives you but somebody",
+    check("394: …but softening stops at `spared` when you are alone — nobody revives you but somebody",
       !(runs({ agility: 14 }, []).revived));
-    check("392: the roll and the softening are BOTH reported — a mercy the player is not told about cannot be learned",
+    check("394: the roll and the softening are BOTH reported — a mercy the player is not told about cannot be learned",
       (() => { const o = inc390.incapacitationOutcome({ character: at({ agility: 14 }), aggressor: { kind: "assassin" }, companions: [{ name: "M" }], rules: rules390, rng: () => 0.99 });
         return "rolledOutcome" in o && "softenedBy" in o; })());
 
     // ⛔ THE COMPANY CAP, AND IT IS ON THE DOOR PEOPLE ACTUALLY USE.
-    check("392: rapport names the places at your side — 1, then 2 at rank 4, 3 at 7, 4 at 10",
+    check("394: rapport names the places at your side — 1, then 2 at rank 4, 3 at 7, 4 at 10",
       [1, 2, 3, 4].every((n, i) => L390.companyPlaces(lad390, at({ rapport: [1, 4, 7, 10][i] })) === n));
     const full = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
-    check("392: a join past capacity is REFUSED, and refused where joins really happen (recruit, not the dead op)",
+    check("394: a join past capacity is REFUSED, and refused where joins really happen (recruit, not the dead op)",
       co390.recruit(full, "b", { day: 2, ladder: lad390 }) === null);
     // ⚠️ NEVER RETROACTIVE. A save whose rapport no longer covers its company keeps everyone.
     const over = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "b", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
-    check("392: an over-capacity save loses NOBODY — the cap refuses a new join, it never ejects",
+    check("394: an over-capacity save loses NOBODY — the cap refuses a new join, it never ejects",
       co390.activeCompany(over).length === 2);
     // ⚠️ A REJOIN IS NOT A NEW PLACE — someone walking back in is returning to a seat, not taking one.
     const left = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "gone", roles: ["ally"], joinedDay: 1, leftDay: 5 }], npcRegistry: {} };
-    check("392: …and someone who left can come back even at capacity",
+    check("394: …and someone who left can come back even at capacity",
       !!co390.recruit(left, "gone", { day: 9, ladder: lad390 }));
-    check("392: with no ladder passed the cap does not apply — every existing caller keeps working",
+    check("394: with no ladder passed the cap does not apply — every existing caller keeps working",
       !!co390.recruit({ subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} }, "b", { day: 2 }));
   }
 
@@ -7090,6 +7090,61 @@ await (async () => {
       /could not be read/.test(app390) && /Region navigation still works/.test(app390));
     check("390: no CDN — the app still fetches nothing off any network",
       !/cdnjs|unpkg|jsdelivr|https?:\/\/[^"']*\.js/.test(readFileSync(join(root, "index.html"), "utf8")));
+  }
+
+  // ══ SNG-392 §1 — THE LOCAL FRAME. Erik's ruling is the whole shape: "local ground CAN overturn
+  // world ground — that's how different traditions INVADE and can be effective in an antipole."
+  {
+    const sub392 = sb;
+    const L = {
+      hold: { id: "hold", tier: "settlement", parentId: null, localMap: { x: 0, y: 0 } },
+      shrine: { id: "shrine", tier: "site", parentId: "hold", localMap: { x: 0, y: 0 },
+        localSources: [{ kind: "pool", delta: 0.85, radiusLocal: 3, reason: "a made Seraphic shrine" }] },
+      ward: { id: "ward", tier: "site", parentId: "hold", localMap: { x: 8, y: 0 },
+        localSources: [{ kind: "sink", delta: -0.6, radiusLocal: 2, reason: "the Ent-embassy ward", field: "nanite" }] },
+      court: { id: "court", tier: "site", parentId: "hold", localMap: { x: 2, y: 0 } },
+      far: { id: "far", tier: "site", parentId: "elsewhere", localMap: { x: 0, y: 0 } },
+    };
+    // ⛔ NO CAP — Aevi proposed ±0.15 and Erik declined it. World 0.05 + a made shrine = working ground.
+    const sd392 = { sourceBands: { sources: { precursor: { band: { center: 0.9, width: 0.2 } } } } };
+    const inv = sub392.fieldValueAtSite("precursor", { id: "shrine", substrateDensity: 0.05 }, sd392, L);
+    check("392: local ground OVERTURNS world ground — the invasion Erik ruled for, uncapped",
+      inv.value > 0.85 && inv.local.receipt.length === 1);
+    check("392: …and the sum still clamps to the AXIS — the one bound that is physics, not policy",
+      sub392.fieldValueAtSite("precursor", { id: "shrine", substrateDensity: 0.9 }, sd392, L).value <= 1);
+    check("392: the frame is the settlement — a source reaches its siblings and falls off across the courtyard",
+      (() => { const a = sub392.localFieldAt("shrine", L).substrate, b = sub392.localFieldAt("court", L).substrate;
+        return a > b && b > 0.3; })());
+    check("392: …and NOTHING leaks between settlements — another hold's wells are another hold's",
+      sub392.localFieldAt("far", L) === null);
+    // ⚠️ PER-AXIS, per SNG-387 §2's own example: the Ent-embassy ward is nanite-clear and
+    // lattice-neutral. One ward, two different answers, depending on what your craft reaches with.
+    const w = sub392.localFieldAt("ward", L);
+    check("392: a source names its AXIS — the ward drains nanite and leaves the lattice untouched",
+      w.nanite < -0.5 && Math.abs(w.substrate) < 0.01);
+    check("392: the receipt names every contributor and its reason — a defender is told WHY their ground moved",
+      w.receipt.every((r) => r.at && r.reason && Number.isFinite(r.contribution)));
+    check("392: a site with no localMap resolves to null — unauthored is unanswered, never zeroed",
+      sub392.localFieldAt("hold_x", L) === null && sub392.localFieldAt("court", { court: { id: "court", tier: "site", parentId: "hold" } }) === null);
+  }
+
+  // ── SNG-389 RULING, THE RED OBSERVED — Aevi's §4 asked for exactly this: assert wild's crowded
+  // side before and after. Before (slope 0.75): worst crowded factor 0.74, the floor unreachable. After
+  // (slope 1.6, width 0.20): abundance genuinely costs. Asserted as SHAPE — wild HAS a crowded side now.
+  {
+    const wBand = substrateModel.sourceBands.sources.wild.band;
+    let worst = 1;
+    for (let v = wBand.center + wBand.width; v <= 1.0001; v += 0.01) worst = Math.min(worst, sb.bandFactor(wBand, v));
+    // ⚠️ MY FIRST FORM OF THIS ASSERTED worst < 0.6 AND THE TRUTH IS worst === 0.6: with the slope at
+    // 1.6 the tail would fall to 0.23, and the crowdFloor — unreachable before the ruling, worst 0.74 —
+    // now BINDS. That inverts SNG-389 exactly: the floor stopped being decoration and became the working
+    // bound, so crowding costs up to 40% by design and starvation stays the killer. The shape to assert is
+    // that the floor binds, not a number below it that no tuning produces.
+    check("389: the ruling BITES — the crowd floor BINDS now, where before it was unreachable",
+      Math.abs(worst - sb.SUBSTRATE_TUNING.crowdFloor) < 1e-9 && sb.SUBSTRATE_TUNING.crowdFloor < 0.74,
+      "worst " + worst.toFixed(2));
+    check("389: …and wild is a middle-ground source now, not most of the world — width narrowed as ruled",
+      wBand.width <= 0.2);
   }
 
   // ══ SNG-382 — THE TRADITION SOURCE MIX GETS A READER. Aevi's work-order item 3 asked me to derive

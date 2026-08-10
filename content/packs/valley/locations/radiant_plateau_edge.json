@@ -1,74 +1,76 @@
 {
- "schemaVersion": 1,
- "id": "radiant_plateau_edge",
- "name": "Radiant Plateau — Edge District",
- "regionId": "the_echo_vale",
- "communityId": "echo_vale.radiant_plateau",
- "spectrum": {
-  "dark_light": 0.6,
-  "falsehood_truth": 0.3,
-  "concrete_abstract": 0.4,
-  "mechanical_spiritual": 0.3,
-  "violence_peace": 0.3
- },
- "tags": [
-  "city",
-  "photonic",
-  "plateau",
-  "power-center-proximity"
- ],
- "connections": [
-  "millbrook",
-  "disputed_zone_fringe",
-  "kestrels_roost"
- ],
- "descriptionSeed": "The rim of the Radiant Plateau, where photonic-crystal towers catch and braid the sunlight into working beams. Streets are paved with light-guides; at dusk the whole district glows from below like standing on a slow aurora. The Radiant people prize clarity and revelation — but their light-bending arts mean what you see here is always, deliberately, a choice someone made.",
- "loreRefs": [
-  "valley_primer",
-  "power_systems"
- ],
- "npcsPresent": [
-  "high_luminary"
- ],
- "encounterFlavor": "Optics-weavers at work, mirror-court politics, filtration array engineers under pressure about the river, apprentices dueling with harmless beams, quiet distrust of Harmonic visitors.",
- "image": "content/packs/valley/assets/radiant_plateau_edge.jpg",
- "questSeeds": [
-  "High Luminary Sera needs someone outside her hierarchy to quietly verify which filtration engineer falsified the purity reports — and why",
-  "An optics-weaver sells 'memory glass' that replays what light once touched; her latest piece replays something from the night the contamination began",
-  "Radiant surveyors mapped a grid of lights in the Disputed Zone at night, then had their charts confiscated by their own council",
-  "A Millbrook farmhand accused of stealing a prism-array is being held in the Edge District; the evidence is too neat"
- ],
- "map": {
-  "x": 150,
-  "y": 305
- },
- "poleIntensity": {
-  "light": 0.6,
-  "truth": 0.3,
-  "abstract": 0.4,
-  "spiritual": 0.3,
-  "peace": 0.3
- },
- "axisVector": [
-  0.0,
-  0.3,
-  0.0,
-  0.3,
-  0.4,
-  0.3,
-  0.0,
-  0.6,
-  0.0,
-  0.0,
-  0.0,
-  0.0
- ],
- "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
- "worldPos": {
-  "colatitude": 25.0,
-  "longitude": 49.0,
-  "depth": 0
- },
- "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
- "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'"
+  "schemaVersion": 1,
+  "id": "radiant_plateau_edge",
+  "name": "Radiant Plateau — Edge District",
+  "regionId": "the_echo_vale",
+  "communityId": "echo_vale.radiant_plateau",
+  "spectrum": {
+    "dark_light": 0.6,
+    "falsehood_truth": 0.3,
+    "concrete_abstract": 0.4,
+    "mechanical_spiritual": 0.3,
+    "violence_peace": 0.3
+  },
+  "tags": [
+    "city",
+    "photonic",
+    "plateau",
+    "power-center-proximity"
+  ],
+  "connections": [
+    "millbrook",
+    "disputed_zone_fringe",
+    "kestrels_roost"
+  ],
+  "descriptionSeed": "The rim of the Radiant Plateau, where photonic-crystal towers catch and braid the sunlight into working beams. Streets are paved with light-guides; at dusk the whole district glows from below like standing on a slow aurora. The Radiant people prize clarity and revelation — but their light-bending arts mean what you see here is always, deliberately, a choice someone made.",
+  "loreRefs": [
+    "valley_primer",
+    "power_systems"
+  ],
+  "npcsPresent": [
+    "high_luminary"
+  ],
+  "encounterFlavor": "Optics-weavers at work, mirror-court politics, filtration array engineers under pressure about the river, apprentices dueling with harmless beams, quiet distrust of Harmonic visitors.",
+  "image": "content/packs/valley/assets/radiant_plateau_edge.jpg",
+  "questSeeds": [
+    "High Luminary Sera needs someone outside her hierarchy to quietly verify which filtration engineer falsified the purity reports — and why",
+    "An optics-weaver sells 'memory glass' that replays what light once touched; her latest piece replays something from the night the contamination began",
+    "Radiant surveyors mapped a grid of lights in the Disputed Zone at night, then had their charts confiscated by their own council",
+    "A Millbrook farmhand accused of stealing a prism-array is being held in the Edge District; the evidence is too neat"
+  ],
+  "map": {
+    "x": 150,
+    "y": 305
+  },
+  "poleIntensity": {
+    "light": 0.6,
+    "truth": 0.3,
+    "abstract": 0.4,
+    "spiritual": 0.3,
+    "peace": 0.3
+  },
+  "axisVector": [
+    0.0,
+    0.3,
+    0.0,
+    0.3,
+    0.4,
+    0.3,
+    0.0,
+    0.6,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "worldPos": {
+    "colatitude": 25.0,
+    "longitude": 49.0,
+    "depth": 0
+  },
+  "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+  "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'",
+  "tier": "site",
+  "parentId": "disputed_zone_fringe"
 }

@@ -1,72 +1,75 @@
 {
- "schemaVersion": 1,
- "id": "gearsflat",
- "name": "Gearsflat",
- "regionId": "the_foothills",
- "communityId": "gearsflat",
- "spectrum": {
-  "mechanical_spiritual": -0.4,
-  "order_chaos": 0.25
- },
- "tags": [
-  "settlement",
-  "foothill",
-  "market"
- ],
- "connections": [
-  "the_crossing",
-  "the_great_engine"
- ],
- "descriptionSeed": "Gearsflat — workshops, salvage yards, and the people who know which old thing is safe to switch on. The Gearlands builds cathedrals of mechanism; Gearsflat fixes your pump and sells you a part that fits.",
- "loreRefs": [],
- "npcsPresent": [],
- "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
- "dangerLevel": 1,
- "image": "content/packs/valley/assets/gearsflat.jpg",
- "questSeeds": [],
- "map": {
-  "x": 390,
-  "y": 192
- },
- "encounterSeeds": [],
- "poleIntensity": {
-  "mechanical": 0.4,
-  "order": 0.25
- },
- "substrateSource": {
-  "kind": "pool",
-  "delta": 0.13,
-  "radius": 90,
-  "radiusWorld": 0.054,
-  "reason": "Salvage laid out in rows across the flat — ordered machinery still holding its structure, waiting to be sorted. Dense in patches, and the patches move as the yard is worked.",
-  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
- },
- "axisVector": [
-  0,
-  0,
-  0,
-  0,
-  0,
-  -0.4,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0
- ],
- "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
- "worldPos": {
-  "colatitude": 44,
-  "longitude": 75,
-  "depth": -2
- },
- "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_great_engine, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
- "foothillOf": [
-  "enginewright",
-  "lattice",
-  "precursor"
- ],
- "betweenCrossingAnd": "the_great_engine",
- "startingLocation": true
+  "schemaVersion": 1,
+  "id": "gearsflat",
+  "name": "Gearsflat",
+  "regionId": "the_foothills",
+  "communityId": "gearsflat",
+  "spectrum": {
+    "mechanical_spiritual": -0.4,
+    "order_chaos": 0.25
+  },
+  "tags": [
+    "settlement",
+    "foothill",
+    "market"
+  ],
+  "connections": [
+    "the_crossing",
+    "the_great_engine"
+  ],
+  "descriptionSeed": "Gearsflat — workshops, salvage yards, and the people who know which old thing is safe to switch on. The Gearlands builds cathedrals of mechanism; Gearsflat fixes your pump and sells you a part that fits.",
+  "loreRefs": [],
+  "npcsPresent": [],
+  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
+  "dangerLevel": 1,
+  "image": "content/packs/valley/assets/gearsflat.jpg",
+  "questSeeds": [],
+  "map": {
+    "x": 390,
+    "y": 192
+  },
+  "encounterSeeds": [],
+  "poleIntensity": {
+    "mechanical": 0.4,
+    "order": 0.25
+  },
+  "substrateSource": {
+    "kind": "pool",
+    "delta": 0.13,
+    "radius": 90,
+    "radiusWorld": 0.054,
+    "reason": "Salvage laid out in rows across the flat — ordered machinery still holding its structure, waiting to be sorted. Dense in patches, and the patches move as the yard is worked.",
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+  },
+  "axisVector": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    -0.4,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
+  "worldPos": {
+    "colatitude": 44,
+    "longitude": 75,
+    "depth": -2
+  },
+  "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_great_engine, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
+  "foothillOf": [
+    "enginewright",
+    "lattice",
+    "precursor"
+  ],
+  "betweenCrossingAnd": "the_great_engine",
+  "startingLocation": true,
+  "tier": "settlement",
+  "parentId": null,
+  "role": "waypoint"
 }

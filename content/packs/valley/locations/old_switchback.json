@@ -1,71 +1,73 @@
 {
- "schemaVersion": 1,
- "id": "old_switchback",
- "name": "The Old Switchback",
- "regionId": "the_echo_vale",
- "communityId": "echo_vale.old_switchback",
- "spectrum": {
-  "chaos_order": -0.3,
-  "space_time": 0.2,
-  "concrete_abstract": -0.3,
-  "violence_peace": -0.2
- },
- "tags": [
-  "trail",
-  "mountain",
-  "travel",
-  "exposed",
-  "waystation"
- ],
- "connections": [
-  "kestrels_roost",
-  "thornwake_glade"
- ],
- "descriptionSeed": "The old road up toward the high pass — a series of stone-cut switchbacks clinging to the mountainside, older than the transition and repaired a hundred times since. A single ruined waystation marks the halfway point, roof half-gone, hearth still usable. Travelers between the Roost, the wilds, and the country beyond all thread this trail, which makes it a place of chance meetings and chance troubles: weather, footing, and whoever else is on the road.",
- "loreRefs": [
-  "valley_primer"
- ],
- "npcsPresent": [
-  "greta_waystation"
- ],
- "encounterFlavor": "The exposed road — a sudden squall, a rockfall, a stranger sheltering at the waystation who may be company or trouble, a view that stops you cold, the pass ahead deciding whether to let anyone through.",
- "dangerLevel": 2,
- "image": "content/packs/valley/assets/old_switchback.jpg",
- "questSeeds": [
-  "Greta keeps the halfway waystation alone and has for years; she's seen everyone who's crossed and remembers what they carried — her memory is a resource and, to the wrong person, a threat",
-  "Something has been taking travelers' packs on the upper switchback — not bandits, something that leaves the food and takes the strange objects",
-  "A caravan is stranded by a slide and will miss the pass before snow unless the trail is cleared or another way found"
- ],
- "map": {
-  "x": 680,
-  "y": 210
- },
- "poleIntensity": {
-  "chaos": 0.3,
-  "time": 0.2,
-  "concrete": 0.3,
-  "violence": 0.2
- },
- "axisVector": [
-  0.0,
-  0.0,
-  0.0,
-  -0.2,
-  -0.3,
-  0.0,
-  -0.3,
-  0.0,
-  0.0,
-  0.2,
-  0.0,
-  0.0
- ],
- "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
- "worldPos": {
-  "colatitude": 25.0,
-  "longitude": 76.0,
-  "depth": 0
- },
- "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
- "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'"
+  "schemaVersion": 1,
+  "id": "old_switchback",
+  "name": "The Old Switchback",
+  "regionId": "the_echo_vale",
+  "communityId": "echo_vale.old_switchback",
+  "spectrum": {
+    "chaos_order": -0.3,
+    "space_time": 0.2,
+    "concrete_abstract": -0.3,
+    "violence_peace": -0.2
+  },
+  "tags": [
+    "trail",
+    "mountain",
+    "travel",
+    "exposed",
+    "waystation"
+  ],
+  "connections": [
+    "kestrels_roost",
+    "thornwake_glade"
+  ],
+  "descriptionSeed": "The old road up toward the high pass — a series of stone-cut switchbacks clinging to the mountainside, older than the transition and repaired a hundred times since. A single ruined waystation marks the halfway point, roof half-gone, hearth still usable. Travelers between the Roost, the wilds, and the country beyond all thread this trail, which makes it a place of chance meetings and chance troubles: weather, footing, and whoever else is on the road.",
+  "loreRefs": [
+    "valley_primer"
+  ],
+  "npcsPresent": [
+    "greta_waystation"
+  ],
+  "encounterFlavor": "The exposed road — a sudden squall, a rockfall, a stranger sheltering at the waystation who may be company or trouble, a view that stops you cold, the pass ahead deciding whether to let anyone through.",
+  "dangerLevel": 2,
+  "image": "content/packs/valley/assets/old_switchback.jpg",
+  "questSeeds": [
+    "Greta keeps the halfway waystation alone and has for years; she's seen everyone who's crossed and remembers what they carried — her memory is a resource and, to the wrong person, a threat",
+    "Something has been taking travelers' packs on the upper switchback — not bandits, something that leaves the food and takes the strange objects",
+    "A caravan is stranded by a slide and will miss the pass before snow unless the trail is cleared or another way found"
+  ],
+  "map": {
+    "x": 680,
+    "y": 210
+  },
+  "poleIntensity": {
+    "chaos": 0.3,
+    "time": 0.2,
+    "concrete": 0.3,
+    "violence": 0.2
+  },
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    -0.3,
+    0.0,
+    -0.3,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0
+  ],
+  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "worldPos": {
+    "colatitude": 25.0,
+    "longitude": 76.0,
+    "depth": 0
+  },
+  "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+  "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'",
+  "tier": "site",
+  "parentId": "kestrels_roost"
 }

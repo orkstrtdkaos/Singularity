@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFineSampler } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.103";
+const APP_VERSION = "1.9.104";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7010,7 +7010,7 @@ function wireWorldGlobe() {
   // the SAME generator that baked the raster is evaluated per pixel over the visible window instead.
   // ⚠️ LAZY AND OPTIONAL: fetched on the first close zoom, never on boot, and if either fetch fails the
   // globe simply keeps drawing from the raster — detail is an enhancement, not a dependency.
-  let _fineGen = null, _fineLoading = false, _fineFailed = false;
+  let _fineGen = null, _fineLoading = false, _fineFailed = false, _finePatch = null, _finePatchKey = "";
   const FINE_SPAN = 60;                                        // below this the raster starts to show
   async function loadFineGenerator() {
     if (_fineGen || _fineLoading || _fineFailed) return;
@@ -7038,10 +7038,20 @@ function wireWorldGlobe() {
     // ⚠️ the cull window is PADDED past the visible disc: a gaussian contributor just outside the frame
     // still shapes ground inside it, and clipping to exactly what is on screen makes the coast crawl as
     // you drag. Aevi's own cull comment makes the same point about meridian convergence.
-    const f = _fineGen.make(_fineGen.gp, { la0, la1, lo0: c.lon - halfLon, lo1: c.lon + halfLon });
-    // ⚠️ wrapped so the generator ADDS sub-cell shape to the baked (hydrology-aware) elevation rather
-    // than replacing it — see makeFineSampler: at a cell centre the correction is zero, so there is no seam.
-    return makeFineSampler(_terrain, f);
+    const win = { la0, la1, lo0: c.lon - halfLon, lo1: c.lon + halfLon };
+    // ⛔ BUDGETED, NOT PER-PIXEL. Calling the generator for every screen pixel cost ELEVEN SECONDS a
+    // repaint and read to Erik as a crash. makeFinePatch samples it onto a buffer sized from a measured
+    // per-call cost, so the work is bounded and a slow machine loses detail instead of the thread.
+    // ⚠️ Rebuilt when the WINDOW changes, not every paint — a pan or zoom invalidates it, a re-render
+    // of the same view does not.
+    const key = [win.la0, win.la1, win.lo0, win.lo1].map((v) => v.toFixed(3)).join("|");
+    if (!_finePatch || _finePatchKey !== key) {
+      // the cull itself costs real work, so building the windowed generator lives inside the guard too
+      _finePatch = makeFinePatch(_terrain, _fineGen.make(_fineGen.gp, win), win, { budgetMs: 140 });
+      _finePatchKey = key;
+    }
+    // ⚠️ decline rather than degrade — see worthIt: a patch coarser than the bake is slower AND blockier
+    return _finePatch.worthIt ? _finePatch : null;
   }
 
   const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;
@@ -7143,8 +7153,11 @@ function wireWorldGlobe() {
   cv.onwheel = (e) => {
     e.preventDefault();
     // ⚠️ THE CAP MOVED BECAUSE THE FLOOR MOVED. 1.6× stopped at a ~48° span, which was as far as the
-    // raster could be pushed before it read as blocks; with the generator drawing per pixel there is no
-    // resolution limit, so the ceiling is now what the eye and the CPU want rather than what the bake had.
+    // raster could be pushed before it read as blocks; the generator has no resolution limit, so the
+    // ceiling is now what the eye wants rather than what the bake could hold.
+    // ⚠️ AND THE GESTURE STAYS CHEAP: coarse while the wheel turns, sharp 140ms after it stops — so the
+    // detail patch is built once per SETTLED view, never once per wheel tick, which is what lets its
+    // budget be generous without the zoom feeling heavy.
     view.r = Math.max(120, Math.min(Math.min(cv.width, cv.height) * 12, view.r * (e.deltaY > 0 ? 0.9 : 1.11)));
     paint(true); clearTimeout(cv._z); cv._z = setTimeout(() => paint(false), 140);
   };

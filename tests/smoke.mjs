@@ -7182,7 +7182,75 @@ await (async () => {
     // generator returns the surface before any of that, and they differ by a median of 1 but a p99 of 28
     // out of a 126-unit range, worst exactly where water was dug. So the fine sampler ADDS sub-cell shape
     // to the baked value instead of replacing it: at a cell CENTRE the correction is zero by construction.
-    const sampler402 = WG2.makeFineSampler(t402, fWhole);
+    // ⚠️ THE EXACT REFERENCE IS COMPUTED HERE, NOT EXPORTED. I first shipped a `makeFineSampler` export
+    // "for the tests" and the testOnlyExports ratchet caught it within the minute — an export reachable
+    // only from a test passes CI and cannot fire in play, which is the class this whole session keeps
+    // finding. The reference is three lines of arithmetic; a test needing one is not a reason to widen
+    // the engine's surface.
+    const exactDelta402 = (lon, lat) => {
+      const i = Math.min(t402.eh - 1, Math.floor((90 - lat) / 180 * t402.eh)) * t402.ew
+        + Math.min(t402.ew - 1, Math.floor((((lon + 180) % 360 + 360) % 360) / 360 * t402.ew));
+      const cj = Math.floor(i / t402.ew), ck = i % t402.ew;
+      const anchor = WG2.elevFromRawExact(t402, fWhole(-180 + ((ck + 0.5) / t402.ew) * 360, 90 - ((cj + 0.5) / t402.eh) * 180).raw);
+      return WG2.elevFromRawExact(t402, fWhole(lon, lat).raw) - anchor;
+    };
+    const sampler402 = (lon, lat) => ({ type: fWhole(lon, lat).type, elevDelta: exactDelta402(lon, lat) });
+    // ⛔ THE BUDGET GATE, AND IT EXISTS BECAUSE I SHIPPED THE CRASH. The first form called the generator
+    // per screen pixel plus four hillshade taps: 378,000 pixels × 5 × 6µs = ELEVEN SECONDS of blocked main
+    // thread per repaint, which Erik reported as "zooming seems to crash it". ⚠️ My own check had missed
+    // it — I waited 2500ms and screenshotted a HALF-PAINTED canvas, then read the painted half as proof.
+    // A patch is bounded work now: measure the real per-call cost, size the buffer to a millisecond
+    // budget, interpolate per pixel. A slower machine gets less detail, never a frozen tab.
+    const winB = { la0: -80, la1: -60, lo0: -110, lo1: -80 };
+    const tBuild0 = Date.now();
+    const patch402 = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, winB), winB, { budgetMs: 70 });
+    const buildMs = Date.now() - tBuild0;
+    check("402: the detail patch is BUDGETED work, not per-pixel — the eleven-second repaint cannot come back",
+      patch402.bufferW >= 32 && patch402.bufferH >= 32 && buildMs < 1500,
+      `buffer ${patch402.bufferW}×${patch402.bufferH} built in ${buildMs}ms at ${patch402.perCallUs.toFixed(1)}µs/call`);
+    // ⛔ THE BUFFER TRACKS THE WINDOW'S GROUND SHAPE. A square buffer over a window padded by 1/cos(lat)
+    // — 24° of latitude against SEVENTY-ONE of longitude near the Crossing — sampled COARSER than the
+    // raster it replaced, so the "detail" path drew a blockier world more slowly and nothing reported it.
+    const polarWin = { la0: -82, la1: -58, lo0: -130, lo1: -60 };
+    const polarPatch = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, polarWin), polarWin, { budgetMs: 140 });
+    check("402: …and it samples EQUAL GROUND in both directions — a square buffer near the pole was coarser than the bake",
+      Math.abs(polarPatch.degPerSampleLon - polarPatch.degPerSampleLat) < 0.05 * polarPatch.degPerSampleLat,
+      `lon ${polarPatch.degPerSampleLon.toFixed(3)}°/sample vs lat ${polarPatch.degPerSampleLat.toFixed(3)}°`);
+    // ⛔ THE SHORELINE IS FINER THAN THE BUFFER THAT DREW IT. Nearest-neighbour type snapped land/sea to
+    // the sample grid and left a staircase however smooth the elevation was — the artifact Erik saw on the
+    // second look. sign(raw) is the coast (100.000% against the generator over 20,000 samples), so the
+    // interpolated field crosses zero exactly where the shore runs. Assert the crossing is genuinely
+    // sub-sample: walk a short line across a coast and count the transitions the buffer alone could not see.
+    const coastWin = { la0: -60, la1: -40, lo0: -80, lo1: -50 };
+    const coastPatch = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, coastWin), coastWin, { budgetMs: 140 });
+    const stepLon = (coastWin.lo1 - coastWin.lo0) / coastPatch.bufferW;
+    // ⚠️ A COAST IS A ONE-DIMENSIONAL FEATURE, so the honest count is small: of 4,000 probes most sit
+    // deep inland or in open sea and only a handful straddle a shore. The claim is not "many" — it is
+    // that ANY exist, because a nearest-neighbour sampler gives exactly ZERO by construction: two points
+    // in one cell share one sample. That contrast is the whole proof, so it is asserted rather than a
+    // threshold I would otherwise be picking to fit the number I got.
+    let subSample = 0, sameCellPairs = 0;
+    for (let la = -59; la < -41; la += 0.37) {
+      for (let lo = -79; lo < -51; lo += stepLon) {
+        const a2 = lo + stepLon * 0.28, b2 = lo + stepLon * 0.62;   // both inside one cell
+        sameCellPairs++;
+        if (coastPatch(a2, la).type !== coastPatch(b2, la).type) subSample++;
+      }
+    }
+    check("402: the SHORELINE is finer than the buffer — land/sea resolves inside a sample cell, not on its grid",
+      subSample > 0 && sameCellPairs > 1000,
+      `${subSample} within-cell coast transitions across ${sameCellPairs} same-cell pairs (nearest-neighbour would give 0)`);
+
+    // ⚠️ and it declines when it cannot beat the raster, instead of drawing something worse
+    const hugeWin = { la0: -89, la1: 89, lo0: -180, lo1: 180 };
+    const hugePatch = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, hugeWin), hugeWin, { budgetMs: 20 });
+    check("402: …and a patch that cannot beat the bake DECLINES rather than drawing a coarser world",
+      hugePatch.worthIt === false && patch402.worthIt === true);
+    // ⚠️ and it must still agree with the exact sampler it approximates, or speed bought a different world
+    const exactVsPatch = [[-95, -70], [-100, -65], [-90, -75]].every(([lo, la]) =>
+      patch402(lo, la).type === sampler402(lo, la).type);
+    check("402: …and the budgeted patch draws the same land as the exact sampler it stands in for",
+      exactVsPatch);
     const centres = [];
     for (let j = 40; j < 300; j += 47) for (let k = 60; k < 700; k += 113) {
       centres.push([-180 + ((k + 0.5) / t402.ew) * 360, 90 - ((j + 0.5) / t402.eh) * 180]);

@@ -127,32 +127,125 @@ const hyp = (v) => {
 /** ⛔ THE ONE PLACE THE MAP TOUCHES THE RULES, and it borrows them rather than restating them. `bandFn` is
  *  the engine's own `bandFactor` and `band` comes from `sourceBands`, so "whose ground" on the map and a
  *  craft's verdict in play are the same arithmetic — turning a dial moves both or neither. */
-/** ⛔ DETAIL INJECTION, BECAUSE THE BAKED DEM KNOWS THINGS THE GENERATOR CANNOT. The shipped elevation
- *  is the HYDROLOGICALLY ADJUSTED surface — authored digs, three smoothing passes, pit fill — written back
- *  after buildHydrology; the generator returns the surface BEFORE any of that. Measured, the two differ by
- *  a median of 1 but a p99 of 28 and a max of 90 out of a 126-unit land range, and the big disagreements
- *  sit exactly where water was dug — which is where a reader looks.
+/** ⛔ DETAIL INJECTION ON A BUDGETED PATCH — AND THE BUDGET IS THE WHOLE LESSON. My first version called
+ *  the generator once per screen pixel, plus four more for the hillshade gradient: 378,000 pixels × 5 calls
+ *  × 6µs = ELEVEN SECONDS of blocking work per repaint. Erik's report was "zooming seems to crash it,"
+ *  and it was not a crash — it was the main thread gone for eleven seconds, which is worse than a crash
+ *  because nothing says so. ⚠️ My own verification missed it: I waited 2500ms, screenshotted a
+ *  HALF-PAINTED canvas, and read the painted half as success.
  *
- *  ⚠️ So the generator does not REPLACE the elevation, it ADDS what the grid was too coarse to hold:
- *  the baked cell value stays the truth, and only the generator's variation WITHIN that cell rides on top.
- *  At a cell centre the correction is zero by construction, so base and patch cannot drift apart — the
- *  seam rebuild.py's header records as a real past failure is closed by arithmetic rather than by luck.
- *  The per-cell anchor is memoised: at regional zoom hundreds of pixels share one cell. */
-export function makeFineSampler(t, gen) {
-  const anchors = new Map();
-  return (lon, lat) => {
-    const g = gen(lon, lat);
-    const i = elevIdx(t, lon, lat);
-    let a = anchors.get(i);
-    if (a === undefined) {
-      const j = Math.floor(i / t.ew), k = i % t.ew;
-      const clat = 90 - ((j + 0.5) / t.eh) * 180, clon = -180 + ((k + 0.5) / t.ew) * 360;
-      a = elevFromRawExact(t, gen(clon, clat).raw);
-      anchors.set(i, a);
+ *  The fix is Aevi's prototype's shape, which I had read and not understood: sample the generator onto a
+ *  small BUFFER over the visible window, then interpolate that buffer per pixel. The buffer is sized from
+ *  a MEASURED per-call cost against a millisecond budget, so a slower machine gets a smaller buffer rather
+ *  than a frozen tab — detail degrades, responsiveness does not.
+ *
+ *  ⚠️ Resolution still IMPROVES with zoom: the buffer spans the visible window, so as the window narrows
+ *  the same samples cover less ground. At a 13° view a 128² buffer is ~5× finer than the 0.75° bake; at 3°
+ *  it is ~20× finer.
+ *
+ *  ⚠️ THE SEAM PROPERTY SURVIVES THE REWRITE, which is why it is worth stating twice: the per-cell anchor
+ *  is taken from THIS BUFFER by the same interpolant, so at a baked cell centre the correction is exactly
+ *  zero and base and patch cannot drift apart. */
+export function makeFinePatch(t, gen, win, opts) {
+  const o = opts || {};
+  const now = () => (typeof performance !== "undefined" ? performance.now() : Date.now());
+  // ⚠️ CALIBRATE WARM, OR THE BUDGET THROWS AWAY THE DETAIL IT WAS SIZED TO BUY. Measured cold, the
+  // first calls run interpreted and read 37.5µs against a warm 6µs — six times pessimistic, which pinned
+  // the buffer to its 48² floor and gave a regional view no finer than the bake it was replacing. A
+  // performance guard that silently disables the feature it is guarding is worse than none: it looks
+  // like it works. Discard a warmup batch, then time.
+  for (let i = 0; i < 48; i++) gen(win.lo0 + (i % 13) * 0.07, win.la0 + (i % 11) * 0.05);
+  const t0 = now();
+  let probes = 0;
+  for (let i = 0; i < 192; i++) { gen(win.lo0 + (i % 29) * 0.03, win.la0 + (i % 23) * 0.04); probes++; }
+  const perCallUs = Math.max(0.4, (now() - t0) * 1000 / probes);
+  const budgetCalls = Math.max(2304, Math.min(200000, ((o.budgetMs ?? 70) * 1000) / perCallUs));
+
+  // ⛔ THE BUFFER MUST MATCH THE WINDOW'S GROUND SHAPE, NOT BE SQUARE — and a square one silently made
+  // the whole feature WORSE THAN THE BAKE at high latitude. Meridians converge, so a window padded by
+  // half/cos(lat) spans 24° of latitude and SEVENTY-ONE of longitude near the Crossing; 73² samples over
+  // that is 0.98° per sample east-west against the raster's 0.75°. The detail path was drawing a coarser
+  // world than the one it replaced, and the picture looked blocky in exactly the way the fix promised to
+  // cure. ⚠️ Allocate for EQUAL GROUND RESOLUTION in both directions: aspect from the window's true
+  // extent on the sphere, not from its extent in degrees.
+  const midLat = (win.la0 + win.la1) / 2;
+  const conv = Math.max(0.12, Math.cos(midLat * Math.PI / 180));
+  const groundLon = Math.max(1e-6, (win.lo1 - win.lo0) * conv), groundLat = Math.max(1e-6, win.la1 - win.la0);
+  const nw = Math.max(32, Math.min(512, Math.round(Math.sqrt(budgetCalls * groundLon / groundLat))));
+  const nh = Math.max(32, Math.min(512, Math.round(budgetCalls / nw)));
+
+  const dLon = (win.lo1 - win.lo0) / (nw - 1), dLat = (win.la1 - win.la0) / (nh - 1);
+  const raw = new Float32Array(nw * nh), typ = new Uint8Array(nw * nh), del = new Float32Array(nw * nh);
+  for (let j = 0; j < nh; j++) {
+    const lat = win.la0 + j * dLat;
+    for (let i = 0; i < nw; i++) {
+      const g = gen(win.lo0 + i * dLon, lat);
+      raw[j * nw + i] = g.raw; typ[j * nw + i] = g.type;
     }
-    const delta = elevFromRawExact(t, g.raw) - a;
-    return { type: g.type, raw: g.raw, elevDelta: delta };
+  }
+  // bilinear read of the raw field, in window space
+  const at = (arr, lon, lat) => {
+    const fx = Math.max(0, Math.min(nw - 1, (lon - win.lo0) / dLon));
+    const fy = Math.max(0, Math.min(nh - 1, (lat - win.la0) / dLat));
+    const x0 = Math.floor(fx), y0 = Math.floor(fy);
+    const x1 = Math.min(nw - 1, x0 + 1), y1 = Math.min(nh - 1, y0 + 1);
+    const tx = fx - x0, ty = fy - y0;
+    const a = arr[y0 * nw + x0], b = arr[y0 * nw + x1], c = arr[y1 * nw + x0], d = arr[y1 * nw + x1];
+    return (a * (1 - tx) + b * tx) * (1 - ty) + (c * (1 - tx) + d * tx) * ty;
   };
+  const nearestType = (lon, lat) => {
+    const x = Math.round(Math.max(0, Math.min(nw - 1, (lon - win.lo0) / dLon)));
+    const y = Math.round(Math.max(0, Math.min(nh - 1, (lat - win.la0) / dLat)));
+    return typ[y * nw + x];
+  };
+  // second pass: turn raw into a DELTA against the baked cell the sample falls in, so the per-pixel read
+  // is one interpolation with no map lookup and no further generator calls.
+  const anchors = new Map();
+  for (let j = 0; j < nh; j++) {
+    const lat = win.la0 + j * dLat;
+    for (let i = 0; i < nw; i++) {
+      const lon = win.lo0 + i * dLon;
+      const ci = elevIdx(t, lon, lat);
+      let a = anchors.get(ci);
+      if (a === undefined) {
+        const cj = Math.floor(ci / t.ew), ck = ci % t.ew;
+        a = elevFromRawExact(t, at(raw, -180 + ((ck + 0.5) / t.ew) * 360, 90 - ((cj + 0.5) / t.eh) * 180));
+        anchors.set(ci, a);
+      }
+      del[j * nw + i] = elevFromRawExact(t, raw[j * nw + i]) - a;
+    }
+  }
+  // ⛔ THE COASTLINE COMES FROM THE INTERPOLATED FIELD, NOT FROM THE NEAREST SAMPLE — this is the whole
+  // visual difference and it costs nothing. Nearest-neighbour type snaps land/sea to the buffer grid, so
+  // a 0.32° buffer draws a 14-screen-pixel staircase no matter how smooth the elevation underneath is;
+  // Erik's second look at the "fixed" zoom was still stepped for exactly this reason.
+  // ⚠️ `sign(raw)` IS the shoreline, verified against the generator over 20,000 samples at 100.000%:
+  // land returns log1p(known*3)*0.30 + relief*1.5 which is strictly positive, water returns
+  // max(known, unk) which is not. So the bilinear raw field crosses zero exactly where the coast runs,
+  // and reading the crossing gives a shoreline finer than the samples that produced it.
+  // ⚠️ The land SUBTYPE (plain / volcanic / unexplored) still comes from the nearest sample: those are
+  // region-scale facts, and interpolating a category rather than a field would invent ground.
+  const sampler = (lon, lat) => {
+    const r = at(raw, lon, lat);
+    const near = nearestType(lon, lat);
+    const type = r > 0 ? (near === 0 ? 1 : near) : 0;
+    return { type, raw: r, elevDelta: at(del, lon, lat) };
+  };
+  sampler.bufferN = Math.min(nw, nh);       // reported so a gate can see the budget was honoured
+  sampler.bufferW = nw; sampler.bufferH = nh;
+  // ⚠️ the honest measure of whether this is worth doing at all: ground degrees per sample against the
+  // 0.75° bake. Below 1.0 the patch is FINER than the raster; above it, it is not worth drawing.
+  sampler.degPerSampleLon = (win.lo1 - win.lo0) / nw * conv;
+  sampler.degPerSampleLat = (win.la1 - win.la0) / nh;
+  // ⛔ AND IT REFUSES TO DRAW A WORSE WORLD THAN THE ONE IT REPLACES. The square-buffer bug shipped a
+  // patch sampling 0.98° east-west against the raster's 0.75° — slower AND blockier, and nothing said so
+  // because "detail is on" was never checked against "detail is finer". `worthIt` is that check, and the
+  // caller drops back to the bake when it is false: a feature that cannot help should decline, not
+  // degrade. The bake's own cell is 360/480 = 0.75°.
+  const bakeDeg = 360 / t.w;
+  sampler.worthIt = Math.max(sampler.degPerSampleLon, sampler.degPerSampleLat) < bakeDeg * 0.9;
+  sampler.perCallUs = perCallUs;
+  return sampler;
 }
 
 /** Hillshade from the generator rather than the elevation grid — same two-tap gradient, finer steps. */

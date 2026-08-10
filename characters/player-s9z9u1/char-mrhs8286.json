@@ -202,7 +202,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.023815840511569635,
+    "spectrumId": -0.022625048485991152,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -2047,22 +2047,26 @@
         "player": "Ask Veth what a warden would do here—what is the post for, if the network is already complete",
         "summary": "The relay network's pattern is complete and known—mill gate hub, midrow wayhouse dormant, east-side well warded, ridge sentinel ready. Veth names what remains: a warden's watch, not a network's completion.",
         "narration": "You turn to Veth where she stands at the ridge's high point, reading the terrain with a warden's eye. The question comes plain: what is the post for, if the network is already complete?\n\nShe doesn't answer immediately. Her gaze sweeps the sight-lines—south across the mill gate's geometry, east into the valley proper, west toward the Pale March horizon. Her hand stays flat against the ancient standing-stone, the way Pell's stayed against the relay node a moment ago.\n\n'A post watches,' she says finally. 'A network listens. They are not the same work.' She turns to face you directly, and there's something in her expression—not quite satisfaction, but recognition. 'The relay carries the message. The warden decides what the message means. Who holds the ridge holds the answer to whether the basin stands or breaks. The network is complete. But it has no eyes until someone stands here and keeps them open.'\n\nHuginn shifts on the standing-stone, his weight settling. He is not attending an ending here—but he is attending something. A vigil not yet begun. Pell nods once, as if Veth has answered something she was already calculating."
+      },
+      {
+        "player": "we'll need to establish a Warden post and find someone we trust to hold it.  Ask Veth and Pell if anyone comes to mind?",
+        "summary": "At the ridge node, Silas asks Veth and Pell for trusted candidates to hold a new warden post. Both name Cassiel Ord — the former march-warden now keeping Stillwater's Trouble, steady and true.",
+        "narration": "You turn from the relay node's geometry to Veth and Pell, standing together on the high ridge where the sight-lines hold steady. The question lands plain: who would stay here, watching what needs to be watched?\n\nVeth's expression doesn't shift, but her hand comes away from the standing-stone. 'Cassiel,' she says. One word, measured. 'He has the ground-sense for it. Eleven years holding Stillwater's threshold — he knows what a post requires. And he is looking for something to tend that will not close.' She pauses, then adds quieter: 'He would not leave his place lightly. But this is not asking him to leave it. This is asking him to hold two watches at once.'\n\nPell's quieter, but certain. She's been reading the ridge's geometry through ironsense while Veth spoke. 'Cassiel, or Fendt,' she says. 'Fendt's already inside the work — knows the numbers, knows why the network matters. But Cassiel's the one with the warden's patience. This post is not about knowing; it's about *staying*.' She glances at Veth, and there's a conversation in that glance that settles something. 'Cassiel holds. That's what he does.'\n\nHuginn shifts on the standing-stone, a single croak that sounds like agreement, though with Marrow that could mean anything."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Veth where she stands at the ridge's high point, reading the terrain with a warden's eye. The question comes plain: what is the post for, if the network is already complete?\n\nShe doesn't answer immediately. Her gaze sweeps the sight-lines—south across the mill gate's geometry, east into the valley proper, west toward the Pale March horizon. Her hand stays flat against the ancient standing-stone, the way Pell's stayed against the relay node a moment ago.\n\n'A post watches,' she says finally. 'A network listens. They are not the same work.' She turns to face you directly, and there's something in her expression—not quite satisfaction, but recognition. 'The relay carries the message. The warden decides what the message means. Who holds the ridge holds the answer to whether the basin stands or breaks. The network is complete. But it has no eyes until someone stands here and keeps them open.'\n\nHuginn shifts on the standing-stone, his weight settling. He is not attending an ending here—but he is attending something. A vigil not yet begun. Pell nods once, as if Veth has answered something she was already calculating.",
-      "sceneSummary": "The relay network's pattern is complete and known—mill gate hub, midrow wayhouse dormant, east-side well warded, ridge sentinel ready. Veth names what remains: a warden's watch, not a network's completion.",
+      "narration": "You turn from the relay node's geometry to Veth and Pell, standing together on the high ridge where the sight-lines hold steady. The question lands plain: who would stay here, watching what needs to be watched?\n\nVeth's expression doesn't shift, but her hand comes away from the standing-stone. 'Cassiel,' she says. One word, measured. 'He has the ground-sense for it. Eleven years holding Stillwater's threshold — he knows what a post requires. And he is looking for something to tend that will not close.' She pauses, then adds quieter: 'He would not leave his place lightly. But this is not asking him to leave it. This is asking him to hold two watches at once.'\n\nPell's quieter, but certain. She's been reading the ridge's geometry through ironsense while Veth spoke. 'Cassiel, or Fendt,' she says. 'Fendt's already inside the work — knows the numbers, knows why the network matters. But Cassiel's the one with the warden's patience. This post is not about knowing; it's about *staying*.' She glances at Veth, and there's a conversation in that glance that settles something. 'Cassiel holds. That's what he does.'\n\nHuginn shifts on the standing-stone, a single croak that sounds like agreement, though with Marrow that could mean anything.",
+      "sceneSummary": "At the ridge node, Silas asks Veth and Pell for trusted candidates to hold a new warden post. Both name Cassiel Ord — the former march-warden now keeping Stillwater's Trouble, steady and true.",
       "choices": [
         {
-          "label": "Claim the ridge post aloud in the ashwarden way—name the watch as held, the way you named the left-branch hollow",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Send word back to Millbrook — ask Cassiel directly if he will hold the ridge watch alongside Stillwater's",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "lead",
-            "command"
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2071,79 +2075,85 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Veth to hold this post—name her as warden, the way Cassiel holds Stillwater's Trouble",
+          "label": "Ask Veth plainly — could a warden hold two posts at once without one suffering for the other",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "insight",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "delegate",
-            "trust"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Read what the ridge post was built to do—use Order-Sense to read the structure's *purpose*, not just its placement",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Stay here a while longer — use Order-Sense to map what the post's actual infrastructure would need to be (building, water, sightlines, storage)",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "read"
+            "plan"
           ],
           "abilityId": "order_sense",
-          "energyCost": 3,
+          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Huginn plainly what it knows about the post—the bird has been here before, or knows what comes",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Head back down the ridge toward Millbrook — the light's starting to turn, and the conversation with Cassiel should happen face-to-face",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "ask"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
+      "adoptSchool": null,
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "High ridge overlooking the whole watershed valley—moorland, early-spring growth, overcast sky. The ancient standing-stone where Huginn perches. Sight-lines run long in every direction: south to the mill gate hub and creek-run, east across the valley, west toward the Pale March horizon.",
+        "setting": "High ridge overlooking the whole watershed valley—moorland, early-spring growth, overcast sky. The ancient standing-stone where Huginn perches. Sight-lines run long in every direction: south to the mill gate hub and creek-run, east across the valley, west toward the Pale March horizon. The relay node seated in the earth beneath, warded and ready.",
         "npcsPresent": [
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Standing at the ridge's high point, hand flat against the ancient standing-stone, gaze sweeping the sight-lines—reading the terrain with a warden's eye"
+            "state": "Standing at the ridge's high point, hand away from the standing-stone now, her attention fully on Silas and Pell—assessing what comes next."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Present, attending the exchange between Silas and Veth with quiet assessment"
+            "state": "Reading the ridge's geometry through ironsense, quiet but certain, having already named Cassiel as the one with warden's patience."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the weathered standing-stone, weight settling, eye fixed on the relay node's geometry—attending what comes next"
+            "state": "Perched on the weathered standing-stone, settled and attending. Croaked once when Cassiel was named—agreement, or Marrow's own commentary."
           }
         ],
         "objects": [
@@ -2153,9 +2163,9 @@
           "Early-spring moorland grass, sparse and hardy"
         ],
         "threads": [
-          "The ridge post's purpose—what a warden here would actually do",
-          "Whether Silas will claim the watch or delegate it",
-          "What Huginn knows about this place"
+          "Whether Cassiel will accept the ridge watch alongside Stillwater's",
+          "What the post's actual infrastructure would need",
+          "How long the party stays at the ridge before heading back down"
         ]
       },
       "npcUpdates": [
@@ -2163,14 +2173,34 @@
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "role": "Former Ashwarden warden, traveling companion",
+          "role": "Former Ashwarden warden, teaching companion",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "At the ridge sentinel, named the difference between a network's listening and a post's watching—a warden decides what the message means. Offered the answer plainly and without ceremony.",
+          "note": "Named Cassiel Ord as the only candidate for the ridge post—'He has the ground-sense for it. Eleven years holding Stillwater's threshold.' Spoke plainly about the warden's work being about staying, not knowing.",
           "learned": [
-            "A post watches what a network only listens to—the warden's work is reading meaning, not carrying signal"
+            "Cassiel Ord is the one who holds—that is what defines him.",
+            "A post watches; a network listens. They are not the same work."
           ],
-          "relationshipDelta": 0
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the ridge, reading the warden's work plainly"
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "role": "Village blacksmith, traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Named Cassiel as the warden-choice while reading the ridge's ironsense geometry. Quiet certainty: 'Cassiel holds. That's what he does.' Exchanged a knowing glance with Veth.",
+          "learned": [
+            "The ridge watch requires patience and staying, not expertise."
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the ridge with ironsense open, reading the geometry while the plan took shape"
         }
       ],
       "factUpdates": [],
@@ -2184,29 +2214,33 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {},
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "A brief planning conversation at the ridge"
+      },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
       "imagePrompt": null,
-      "sceneEnded": false,
-      "gambitApt": false
+      "gambitApt": false,
+      "gambitOps": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "High ridge overlooking the whole watershed valley—moorland, early-spring growth, overcast sky. The ancient standing-stone where Huginn perches. Sight-lines run long in every direction: south to the mill gate hub and creek-run, east across the valley, west toward the Pale March horizon.",
+      "setting": "High ridge overlooking the whole watershed valley—moorland, early-spring growth, overcast sky. The ancient standing-stone where Huginn perches. Sight-lines run long in every direction: south to the mill gate hub and creek-run, east across the valley, west toward the Pale March horizon. The relay node seated in the earth beneath, warded and ready.",
       "npcsPresent": [
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Standing at the ridge's high point, hand flat against the ancient standing-stone, gaze sweeping the sight-lines—reading "
+          "state": "Standing at the ridge's high point, hand away from the standing-stone now, her attention fully on Silas and Pell—assessi"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Present, attending the exchange between Silas and Veth with quiet assessment"
+          "state": "Reading the ridge's geometry through ironsense, quiet but certain, having already named Cassiel as the one with warden's"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the weathered standing-stone, weight settling, eye fixed on the relay node's geometry—attending what comes ne"
+          "state": "Perched on the weathered standing-stone, settled and attending. Croaked once when Cassiel was named—agreement, or Marrow"
         }
       ],
       "objects": [
@@ -2216,12 +2250,12 @@
         "Early-spring moorland grass, sparse and hardy"
       ],
       "threads": [
-        "The ridge post's purpose—what a warden here would actually do",
-        "Whether Silas will claim the watch or delegate it",
-        "What Huginn knows about this place"
+        "Whether Cassiel will accept the ridge watch alongside Stillwater's",
+        "What the post's actual infrastructure would need",
+        "How long the party stays at the ridge before heading back down"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
@@ -3651,7 +3685,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Fell into step at Silas's left shoulder for the walk to the gate. No words needed.",
         "[d14] Has Memory in both hands and is reading the warpling's stutter-pattern through ironsense — steady, not waiting to be told.",
         "[d14] Held Memory steady through the warpling's lunge; wiped the butt-end clean after the strike without being asked.",
         "[d14] Fell into step without a word at Silas's signal — handed Memory back and walked with him to the east well.",
@@ -3660,17 +3693,18 @@
         "[d14] Confirmed the wayhouse node through ironsense from inside the room — 'same read,' unprompted.",
         "[d14] Read the mill gate as an active relay node through ironsense contact — confirmed its weight and named it properly into place. Stands ready to move north or stay as needed.",
         "[d14] Reading the mill gate's weight through ironsense contact — confirmed it as active, not dormant, presently carrying load. Quiet assessment.",
-        "[d14] Hand flat against the relay node's stone, ironsense still open. Her quiet satisfaction reads as confirmation—the pattern she was searching for is now complete."
+        "[d14] Hand flat against the relay node's stone, ironsense still open. Her quiet satisfaction reads as confirmation—the pattern she was searching for is now complete.",
+        "[d14] Named Cassiel as the warden-choice while reading the ridge's ironsense geometry. Quiet certainty: 'Cassiel holds. That's what he does.' Exchanged a knowing glance with Veth."
       ],
       "knownFacts": [
-        "The burn-mark at the reclamation bowl's northwest edge is bright-heat, not forge-heat — recent enough to sit in the frost layer, not beneath it.",
         "A Blazeborn traveler of middle years was logged at the main Hub gate four days ago, destination the Left Branch. He has not returned.",
         "The midrow wayhouse carries an ironsense trace — old and quiet, but present",
         "The midrow wayhouse node reads dormant and old through ironsense — consistent with Order-Sense findings.",
         "The mill gate's ironsense signature is active and dormant — a relay node held in waiting",
         "The mill gate is the oldest point in the Crossing's layout — everything else was built around it",
         "The mill gate carries active load — it is speaking, not resting, and Pell can read the weight of it through iron contact",
-        "The ridge node matches her ironsense read perfectly"
+        "The ridge node matches her ironsense read perfectly",
+        "The ridge watch requires patience and staying, not expertise."
       ],
       "skillsObserved": [
         "ironsense read of a pre-Transition working at range — confir",
@@ -3681,7 +3715,7 @@
         "sustained ironsense reading across open terrain"
       ],
       "status": "active",
-      "statusNote": "Active, present, ironsense still open to the network",
+      "statusNote": "At the ridge with ironsense open, reading the geometry while the plan took shape",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -3700,7 +3734,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 3
+      "met": 4
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -4354,7 +4388,7 @@
     "veth-ondra": {
       "id": "veth-ondra",
       "name": "Veth (Stillwater) Ondra",
-      "role": "Former Ashwarden warden, traveling companion",
+      "role": "Former Ashwarden warden, teaching companion",
       "description": "A still, direct woman — held a south-facing warden post on the Ashwarden March for eleven years before the post was dissolved. Chose the Hub over the March's center. The stall is cover; the teaching kit is the door.",
       "firstMet": {
         "locationId": "gen-waygate",
@@ -4362,7 +4396,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Named the limits of what was done plainly — the instruction given, the holding uncertain. Teaching through observation, not intervention.",
         "[d14] Named two likely node-sites from the Working Model's shape — the east-side shallow-draw well and the north gate registry. Ordered her knowledge rather than reached for it.",
         "[d14] Walked to the well at Silas's right — waiting on what he reads before adding her own knowledge.",
         "[d14] Read the completed ward's weight without ceremony — attention without comment.",
@@ -4371,17 +4404,18 @@
         "[d14] At the mill gate, reading the structure with a warden's eye — assessing the post and its placement. Quiet, present, waiting on Silas's next move.",
         "[d14] At the mill gate, assessing the keeper's lodge and the structure with a warden's eye. Her readiness suggests she sees something the gate holds.",
         "[d14] At the ridge node—reading the terrain with warden's discipline, assessing sight-lines and defensible ground. Her attention suggests the post itself is not merely complete; it is waiting for something.",
-        "[d14] At the ridge sentinel, named the difference between a network's listening and a post's watching—a warden decides what the message means. Offered the answer plainly and without ceremony."
+        "[d14] At the ridge sentinel, named the difference between a network's listening and a post's watching—a warden decides what the message means. Offered the answer plainly and without ceremony.",
+        "[d14] Named Cassiel Ord as the only candidate for the ridge post—'He has the ground-sense for it. Eleven years holding Stillwater's threshold.' Spoke plainly about the warden's work being about staying, not knowing."
       ],
       "knownFacts": [
-        "The east-side well on the market row sits on old ground consistent with the relay network's foundation pattern",
-        "The north gate registry sits on the oldest foundation in the Crossing — the most likely location for a network node designed to watch the whole basin",
         "Relay nodes follow the oldest roads and foot-traffic routes, not new ones",
         "The midrow wayhouse predates the market — a rest station, three hundred years of waiting traffic",
         "The mill gate sits at the watershed road's mouth — every load from the Zone passed under it",
         "The mill gate is a critical point in the relay network — both a node and a hub for the watershed's spine",
         "The ridge sentinel was built to watch—her reading is certain on this",
-        "A post watches what a network only listens to—the warden's work is reading meaning, not carrying signal"
+        "A post watches what a network only listens to—the warden's work is reading meaning, not carrying signal",
+        "Cassiel Ord is the one who holds—that is what defines him.",
+        "A post watches; a network listens. They are not the same work."
       ],
       "skillsObserved": [
         "precise naming of categorical difference between known craft",
@@ -4394,7 +4428,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Active, present, reading the ridge with her full focus",
+      "statusNote": "At the ridge, reading the warden's work plainly",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -4410,7 +4444,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "role",
-      "met": 4
+      "met": 5
     },
     "cassiel-ord": {
       "id": "cassiel-ord",
@@ -5949,7 +5983,7 @@
     "lastTickWorldDay": 41,
     "lastCanonWorldDay": 41,
     "lastGenCount": 999,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Deni going still at the waypost name — the plain, real moment of a name landing on someone who did not expect to be remembered",
@@ -12071,22 +12105,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.257794545037918,
-    "cerebral": 21.65822752085747,
-    "social": 7.305091707263631,
-    "generous": 2.9753777476575083,
-    "cautious": 11.188677636346684,
-    "physical": 0.9818831058767172,
-    "risky": 0.2355077803015323,
-    "ruthless": 0.5126018935055477,
-    "carousing": 0.08334265305369094,
-    "amorous": 0.306367154050726,
-    "patient": 0.18564926219100264,
-    "stealth": 0.000017914975631135368,
-    "devotion": 0.7320650530883287,
-    "craft": 0.6357624143644967,
-    "leadership": 1.2764515684572668,
-    "deception": 0.085792183805479
+    "strategic": 18.80134968141197,
+    "cerebral": 21.116771832836033,
+    "social": 8.12246441458204,
+    "generous": 2.9009933039660707,
+    "cautious": 10.908960695438017,
+    "physical": 0.9573360282297992,
+    "risky": 0.22962008579399398,
+    "ruthless": 0.499786846167909,
+    "carousing": 0.08125908672734866,
+    "amorous": 0.29870797519945785,
+    "patient": 0.18100803063622756,
+    "stealth": 0.000017467101240356983,
+    "devotion": 0.7137634267611205,
+    "craft": 0.6198683540053842,
+    "leadership": 1.244540279245835,
+    "deception": 0.08364737921034202
   },
   "aptitudes": [
     "strategist",
@@ -12095,7 +12129,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 919,
+  "actionCount": 920,
   "grantsVersion": 1,
   "reconcileVersion": 30,
   "gallery": [
@@ -12525,8 +12559,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786378532767,
-  "rev": 1648,
+  "updatedAt": 1786379034992,
+  "rev": 1649,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16450,7 +16484,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 125
+    "the_center": 126
   },
   "foreclosed": [
     "rootkin",
@@ -16676,10 +16710,10 @@
     {
       "id": "sess-23",
       "startedAt": "2026-08-10T16:02:34.576Z",
-      "lastAt": "2026-08-10T16:15:32.765Z",
+      "lastAt": "2026-08-10T16:23:54.989Z",
       "startDay": 41,
       "endDay": 41,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -17028,17 +17062,17 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 291,
-    "choices": 290,
-    "characterDeltas": 126,
-    "scene": 291,
-    "npcUpdates": 260,
+    "sceneSummary": 292,
+    "choices": 291,
+    "characterDeltas": 127,
+    "scene": 292,
+    "npcUpdates": 261,
     "factUpdates": 23,
     "placeUpdates": 58,
     "codexUpdates": 184,
-    "timeOps": 280,
+    "timeOps": 281,
     "imagePrompt": 8,
-    "sceneEnded": 71,
+    "sceneEnded": 72,
     "itemUpdates": 6,
     "questUpdates": 41,
     "offer": 30,
@@ -17055,9 +17089,9 @@
     "_applyFailedOp": 7,
     "newEncounter": 1,
     "encounterOps": 1,
-    "gambitApt": 5
+    "gambitApt": 6
   },
-  "_opTurns": 291,
+  "_opTurns": 292,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -17360,7 +17394,9 @@
     "study": 1,
     "scout": 1,
     "lead": 1,
-    "ask": 1
+    "ask": 1,
+    "plan": 1,
+    "negotiate": 1
   },
   "aptitudeEarnCount": {},
   "bondLog": [

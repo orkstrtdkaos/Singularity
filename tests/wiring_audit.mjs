@@ -546,6 +546,52 @@ check("unauthored-rules-key guard can fail (a key read from the bag that no pack
 if (process.env.SHOW_UNAUTHORED_RULES_KEYS === "1" && unauthoredRulesKeys.length) {
   console.log(`note  ${unauthoredRulesKeys.length} unauthored rules key(s) read from the bag:\n      ${unauthoredRulesKeys.join("\n      ")}`);
 }
+// ---------- 3e. AUTHORED IMAGE PROMPTS WITH NO READER (SNG-399/399b) ----------
+// ⛔ AEVI ASKED FOR A GENERAL GATE INSTEAD OF A THIRD POINT FIX, AND SHE COUNTED THE INSTANCES:
+// SNG-367 (the NPC path), SNG-399 (the whois path), SNG-399b (the death path) — "three in one day. The
+// portrait machinery keeps being built one path at a time and the authored prompts keep being left
+// behind." Every one was the same shape: an authored field, a working image pipeline, and nothing
+// joining them. `deathImagePrompt` sat on all 66 epic figures while `grep deathImagePrompt app.js`
+// returned nothing.
+//
+// ⚠️ THE FIELD NAME IS THE CONTRACT. Anything an author names `*ImagePrompt` is a picture they wrote
+// and expect to see; if no module mentions that field, the picture cannot reach a player no matter how
+// good the prompt is. This finds the field NAMES across content and asks whether engine/ or app.js says
+// them anywhere — a deliberately loose test, because a name that appears nowhere is unambiguous and a
+// name that appears is the author's cue to check the path rather than a claim that it is wired right.
+const unreadImagePrompts = (() => {
+  // ⛔ STRIP COMMENTS FIRST, AND I LEARNED THIS BY RED-PROOFING THIS VERY GATE: with the wiring torn
+  // out the gate stayed GREEN, because the comment I had just written above the fix says the words
+  // `deathImagePrompt`. A checker satisfied by the note EXPLAINING a bug is import_integrity's own
+  // documented blind spot — "the call test must read CODE, not commentary" — arriving a third time in
+  // a file that warns about it. Only executable text counts as a reader.
+  const strip = (src) => src.split(String.fromCharCode(10))
+    .map((l) => { const i = l.search(/(^|[^:"'`])\/\//); return i === -1 ? l : l.slice(0, i); })
+    .join(String.fromCharCode(10))
+    .replace(/\/\*[\s\S]*?\*\//g, " ");
+  const consumers = strip(engineSrc) + String.fromCharCode(10) + strip(appSrc);
+  const found = new Map();                                       // field name → an example owner
+  const walk = (node, owner) => {
+    if (!node || typeof node !== "object") return;
+    if (Array.isArray(node)) { for (const v of node) walk(v, owner); return; }
+    for (const [k, v] of Object.entries(node)) {
+      if (/ImagePrompt$/.test(k) && typeof v === "string" && v.trim() && !found.has(k)) found.set(k, owner);
+      walk(v, node.id || node.name || owner);
+    }
+  };
+  const scan = (dir) => {
+    for (const f of readdirSync(join(root, dir), { withFileTypes: true })) {
+      if (f.isDirectory()) scan(dir + "/" + f.name);
+      else if (f.name.endsWith(".json")) { try { walk(JSON.parse(read(dir + "/" + f.name)), f.name); } catch { /* not our parse gate */ } }
+    }
+  };
+  try { scan("content"); } catch { /* no content tree */ }
+  return [...found.entries()].filter(([k]) => !consumers.includes(k)).map(([k, owner]) => `${k} (e.g. ${owner})`);
+})();
+check(`authored image prompts have a reader (${unreadImagePrompts.length ? unreadImagePrompts.join(", ") : "all wired"})`,
+  unreadImagePrompts.length === 0,
+  "an authored *ImagePrompt no module mentions — the picture cannot reach a player: " + unreadImagePrompts.join(", "));
+
 const unreadRuleConstants = (() => {
   const consumers = engineSrc + "\n" + appSrc;
   const out = [];

@@ -185,7 +185,14 @@ export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster 
       // generator cannot default (SNG-143, the Pell-rendered-male fix) — it was simply never given one
       // here. ZERO of the 70 carry the field today, which is a content gap and reported as one; the wiring
       // is here so the moment any figure is given a gender, their portrait stops being a coin toss.
-      gender: fig.gender || fig.pronouns || null } : null;
+      gender: fig.gender || fig.pronouns || null,
+      // ⛔ SNG-399b — THE DEATH HAS ITS OWN AUTHORED PICTURE AND NOTHING WAS READING IT. All 66 figures
+      // carry a `deathImagePrompt`; `grep deathImagePrompt app.js` returned nothing. The death machinery
+      // was complete — status, deathRoad, SNG-209's retrievable-death depth — and reached for a state and
+      // never for an image. ⚠️ It rides as a SEPARATE field rather than replacing `appearance`, so the
+      // card can show the life or the end without one overwriting the other's cached mint.
+      dead: st === "dead",
+      deathAppearance: fig.deathImagePrompt || null } : null;
   }
 
   const topic = character?.codex?.topics?.[id];

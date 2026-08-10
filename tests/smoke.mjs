@@ -7147,6 +7147,48 @@ await (async () => {
       nearFaceAt(14) <= total394 / 2, `pitch +14 showed ${nearFaceAt(14)} of ${total394}`);
   }
 
+  // ══ SNG-399 / 399b — THE AUTHORED PICTURE REACHES THE PLAYER. Aevi counted three instances in one
+  // day of an authored prompt with a working pipeline and nothing joining them (SNG-367 the NPC path,
+  // 399 the whois path, 399b the death path) and asked for a general gate instead of a third point fix.
+  // That gate lives in wiring_audit; these are the behavioural halves.
+  {
+    const WI = await import("../engine/whois.js");
+    const ART = await import("../engine/art.js");
+    const epics399 = JSON.parse(readFileSync(join(root, "content/packs/valley/tradition_epics.json"), "utf8"));
+    const roster399 = Array.isArray(epics399) ? epics399
+      : (epics399.figures || epics399.epics || Object.values(epics399).find((v) => Array.isArray(v)));
+    const withPrompt = roster399.filter((f) => f.imagePrompt);
+    // ⚠️ HER §1 GATE, AND IT IS GREEN RATHER THAN "RED ON ALL 66": SNG-367c already routed imagePrompt
+    // into the whois record's `appearance`, so the line she flagged reads a field that is populated.
+    // Gated anyway — it is the assertion she wanted and nothing was holding it.
+    const reaching = withPrompt.filter((f) => {
+      const k = WI.whoIs(f.id, "figure", { roster: roster399, ws: {}, content: {}, character: {} });
+      if (!k) return false;
+      const seed = ART.npcPromptSeed({ name: k.label, role: k.role || "", appearance: k.appearance || "" }, {}, {});
+      const word = String(f.imagePrompt).split(/[ ,.]+/).find((w) => w.length > 5) || "";
+      return word && seed.includes(word);
+    });
+    check("399: every figure with an authored imagePrompt is DRAWN from it — the portrait is not name-and-role guesswork",
+      withPrompt.length > 0 && reaching.length === withPrompt.length,
+      `${reaching.length} of ${withPrompt.length} reach the prompt`);
+    // ⛔ 399b — the death is its own authored picture, and it was reaching nobody.
+    const fig399 = roster399.find((f) => f.deathImagePrompt);
+    const liveK = WI.whoIs(fig399.id, "figure", { roster: roster399, ws: {}, content: {}, character: {} });
+    const deadK = WI.whoIs(fig399.id, "figure", { roster: roster399, ws: { epicStatus: { [fig399.id]: { status: "dead" } } }, content: {}, character: {} });
+    check("399b: a DEAD figure's card carries the authored death prompt, and a living one does not claim to be dead",
+      deadK.dead === true && liveK.dead === false && deadK.deathAppearance === fig399.deathImagePrompt);
+    const seedFor = (k) => ART.npcPromptSeed({ name: k.label, role: k.role || "",
+      appearance: (k.dead && k.deathAppearance) ? k.deathAppearance : k.appearance }, {}, {});
+    check("399b: …and the two draw DIFFERENT pictures — the end is not the life with a caption",
+      seedFor(deadK) !== seedFor(liveK) && seedFor(deadK).includes(String(fig399.deathImagePrompt).slice(0, 20)));
+    // ⚠️ SEPARATE SEEDS: minting the death must not overwrite the face they had while alive.
+    const app399 = readFileSync(join(root, "app.js"), "utf8");
+    check("399b: the death is seeded separately — minting an end never overwrites the living portrait",
+      /whois-death-\$\{seed\}/.test(app399));
+    check("399 §2: the portrait keeps the crown — object-position holds the face above centre instead of cropping heads",
+      /object-fit:\s*cover;\s*object-position:\s*center 18%/.test(app399));
+  }
+
   // ══ CCODE-91 — THE RATCHET BASELINE IS AUTHORED CONTENT, NOT DERIVED OUTPUT. Found by running the
   // blessed re-baseline command (UPDATE_WIRING_BASELINE=1) and reading what it wrote: it rebuilt the
   // file from the counters it measures, deleting four `_`-prefixed notes — the REASONING behind the
@@ -11732,8 +11774,11 @@ await (async () => {
       /a woman/.test(seed367({ id: "x", name: "N", role: "r", appearance: "a figure", gender: "a woman" }, {}, {})));
     check("367c: …and the card passes it through", /gender: known\.gender \|\| undefined/.test(appSrc367));
 
+    // ⚠️ ASSERT THE PROPERTY, NOT THE SPELLING. This pinned the literal argument list, so SNG-399b's
+    // life-or-death seed choice broke a gate about the AESTHETIC riding through — a gate failing for a
+    // reason unrelated to what it protects. What matters is that promptOpts carries the aesthetic.
     check("367b: …and the people layer rides inside promptOpts, where assembleImagePrompt can read it",
-      /seedKey: `whois-\$\{seed\}`, isMinor: false, promptOpts: \{ aesthetic: aesW \}/.test(appSrc367));
+      /isMinor: false, promptOpts: \{ aesthetic: aesW \}/.test(appSrc367));
 
     check("367: …and the npc image call supplies the tradition aesthetic",
       /npcAesthetic\(n\)/.test(appSrc367) && /aesthetic: aes367/.test(appSrc367));
@@ -11894,8 +11939,10 @@ await (async () => {
     // ⛔ SEEDED ON THE ID, NOT THE LABEL. These people acquire titles in play — "Valen Sunwrack, Who Left No
     // Shadow Standing" — and a face keyed to the displayed name would change the moment the world renamed
     // them, which quietly says this is a different person.
+    // ⚠️ the seed is chosen between a living and a death key now (SNG-399b); BOTH are built from the
+    // stable id, which is the property this gate exists to hold.
     check("364: …seeded on the stable id so the same figure keeps the same face",
-      /seedKey: `whois-\$\{seed\}`/.test(card) && /known\.codexId \|\| known\.id \|\| known\.label/.test(card));
+      /seedKey: artSeed/.test(card) && /`whois-\$\{seed\}`/.test(card) && /known\.codexId \|\| known\.id \|\| known\.label/.test(card));
     check("364: …and whoIs returns that id, so the seed survives a rename", /kind: "figure", id, lines/.test(whoisSrc));
     // A card taller than the phone is the SNG-353 lesson, one screen over.
     check("364: …and the card scrolls, with the portrait and the text in the same scroll region",
@@ -12695,9 +12742,20 @@ await (async () => {
   // accusing the ledger of claiming something imaginary, when the gate was real and green one file over.
   // ⛔ Kept as a WHITELIST of two named files, not a directory sweep: "every .mjs in tests/" would let a
   // requirement point at a scratch harness and call itself verified.
+  // ⚠️ AND SNG-399b MAKES IT THREE, for the reason SNG-342 made it two: the general "an authored
+  // *ImagePrompt with no reader" guard lives in wiring_audit — the right home for the
+  // writer-with-no-reader family — and a requirement citing it was reported MISSING while the gate sat
+  // green one file over. Still a whitelist of NAMED files, never a directory sweep.
+  // ⚠️ wiring_audit builds some check names as TEMPLATE literals (a count rides in the text), so the
+  // name is matched up to the first interpolation — enough for the ledger's substring citation.
   const ciSrc = readFileSync(join(root, "tests/content_ci.mjs"), "utf8");
-  const present = [...(mySrc + ciSrc).matchAll(/check\("((?:[^"\\]|\\.)*)"/g)].map(m => m[1]);
-  const missing = claimed.filter(c => !present.includes(c));
+  const waSrc = readFileSync(join(root, "tests/wiring_audit.mjs"), "utf8");
+  const present = [
+    ...[...(mySrc + ciSrc).matchAll(/check\("((?:[^"\\]|\\.)*)"/g)].map(m => m[1]),
+    ...[...waSrc.matchAll(/check\(`([^`$]*)/g)].map(m => m[1].trim()),
+    ...[...waSrc.matchAll(/check\("((?:[^"\\]|\\.)*)"/g)].map(m => m[1]),
+  ];
+  const missing = claimed.filter(c => !present.some(p => p === c || p.startsWith(c)));
   const own = present.filter(c => c.startsWith("272/"));
   const orphans = own.filter(c => !claimed.includes(c));
   const unclaimed = present.filter(c => !claimed.includes(c));

@@ -202,7 +202,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.022625048485991152,
+    "spectrumId": -0.021493796061691592,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -218,7 +218,7 @@
   "maxHealth": 186,
   "health": 186,
   "maxEnergy": 277,
-  "energy": 249,
+  "energy": 246,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1943,6 +1943,21 @@
       "spread": [],
       "day": 14,
       "worldDay": 28
+    },
+    {
+      "at": "2026-08-10T16:28:08.628Z",
+      "locationId": "the_crossing",
+      "communityId": "valley.millbrook",
+      "description": "Dispatched Fendt to hold a warden post at the ridge—giving a man carrying a witness-weight the chance to tend something that will outlast him.",
+      "tags": [
+        "mercy",
+        "trust",
+        "building"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 14,
+      "worldDay": 41
     }
   ],
   "relationships": {},
@@ -2052,161 +2067,213 @@
         "player": "we'll need to establish a Warden post and find someone we trust to hold it.  Ask Veth and Pell if anyone comes to mind?",
         "summary": "At the ridge node, Silas asks Veth and Pell for trusted candidates to hold a new warden post. Both name Cassiel Ord — the former march-warden now keeping Stillwater's Trouble, steady and true.",
         "narration": "You turn from the relay node's geometry to Veth and Pell, standing together on the high ridge where the sight-lines hold steady. The question lands plain: who would stay here, watching what needs to be watched?\n\nVeth's expression doesn't shift, but her hand comes away from the standing-stone. 'Cassiel,' she says. One word, measured. 'He has the ground-sense for it. Eleven years holding Stillwater's threshold — he knows what a post requires. And he is looking for something to tend that will not close.' She pauses, then adds quieter: 'He would not leave his place lightly. But this is not asking him to leave it. This is asking him to hold two watches at once.'\n\nPell's quieter, but certain. She's been reading the ridge's geometry through ironsense while Veth spoke. 'Cassiel, or Fendt,' she says. 'Fendt's already inside the work — knows the numbers, knows why the network matters. But Cassiel's the one with the warden's patience. This post is not about knowing; it's about *staying*.' She glances at Veth, and there's a conversation in that glance that settles something. 'Cassiel holds. That's what he does.'\n\nHuginn shifts on the standing-stone, a single croak that sounds like agreement, though with Marrow that could mean anything."
+      },
+      {
+        "player": "Agree with Veth that Cassiel would make a great warden here, but you need him at Stillwater's Trouble.  Agree with Pell that Fendt is an excellent choice and it will give him a chance to get beyond his recent bad experience.  Take out the shadow tablet and write to Mara Wells to have Fendt and a crew report to this location and begin a modest warden post construction... named - [Ask Pell for a name]",
+        "summary": "The ridge relay node is confirmed as the network's sentinel—Silas names Fendt as the warden to tend it and dispatches word to Mara Wells to begin construction of the Threshold Post.",
+        "narration": "You nod at Veth's assessment—Cassiel's steady ground-sense is exactly what Stillwater's threshold requires, and pulling him north would hollow what you've already built there. But Pell's suggestion lands cleaner: Fendt. The filtration engineer who arrived with nothing but his own competence and a weight he's been carrying alone.\n\n'Fendt,' you say aloud, testing the fit. 'He knows water systems down to their bones. He reads structure the way Pell reads iron. And he came to us carrying something that needed witnessing—he's earned the right to tend something that matters.'\n\nPell's eyes shift—a small acknowledgment. She's quiet for a breath, then: 'What do you call it? The post.'\n\nYou stand at the ridge's high point, looking out across the watershed's geometry—the mill gate's hub to the south, the wells and relays spreading east and south like a root system, the Pale March a grey line on the western horizon. The standing-stone behind you holds Huginn's weight. The relay node beneath your feet is patient and ready.\n\n'The Threshold Post,' you say. 'It's where the network learns to watch. Where listening becomes standing.'\n\nYou pull the shadow-tablet from your pack, settle it against your palm, and write plainly to Mara Wells: *Fendt to the ridge node, north of the mill gate. Build a modest warden post—shelter, a small workshop, sight-lines clear. Call it the Threshold Post. Fendt knows what a post requires; the network will tell him the rest. Send crew and materials when ready.*\n\nThe words appear and clear in the instant—the private link to Mara's shadow-slate behind her counter at the supply store, two days' walk south. She will read it at her next quiet moment. The network of water and watch, expanding quietly northward.\n\n*✦ The charge is set — the work goes on while you are away, and you'll hear how it fared when you return.*"
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the relay node's geometry to Veth and Pell, standing together on the high ridge where the sight-lines hold steady. The question lands plain: who would stay here, watching what needs to be watched?\n\nVeth's expression doesn't shift, but her hand comes away from the standing-stone. 'Cassiel,' she says. One word, measured. 'He has the ground-sense for it. Eleven years holding Stillwater's threshold — he knows what a post requires. And he is looking for something to tend that will not close.' She pauses, then adds quieter: 'He would not leave his place lightly. But this is not asking him to leave it. This is asking him to hold two watches at once.'\n\nPell's quieter, but certain. She's been reading the ridge's geometry through ironsense while Veth spoke. 'Cassiel, or Fendt,' she says. 'Fendt's already inside the work — knows the numbers, knows why the network matters. But Cassiel's the one with the warden's patience. This post is not about knowing; it's about *staying*.' She glances at Veth, and there's a conversation in that glance that settles something. 'Cassiel holds. That's what he does.'\n\nHuginn shifts on the standing-stone, a single croak that sounds like agreement, though with Marrow that could mean anything.",
-      "sceneSummary": "At the ridge node, Silas asks Veth and Pell for trusted candidates to hold a new warden post. Both name Cassiel Ord — the former march-warden now keeping Stillwater's Trouble, steady and true.",
+      "narration": "You nod at Veth's assessment—Cassiel's steady ground-sense is exactly what Stillwater's threshold requires, and pulling him north would hollow what you've already built there. But Pell's suggestion lands cleaner: Fendt. The filtration engineer who arrived with nothing but his own competence and a weight he's been carrying alone.\n\n'Fendt,' you say aloud, testing the fit. 'He knows water systems down to their bones. He reads structure the way Pell reads iron. And he came to us carrying something that needed witnessing—he's earned the right to tend something that matters.'\n\nPell's eyes shift—a small acknowledgment. She's quiet for a breath, then: 'What do you call it? The post.'\n\nYou stand at the ridge's high point, looking out across the watershed's geometry—the mill gate's hub to the south, the wells and relays spreading east and south like a root system, the Pale March a grey line on the western horizon. The standing-stone behind you holds Huginn's weight. The relay node beneath your feet is patient and ready.\n\n'The Threshold Post,' you say. 'It's where the network learns to watch. Where listening becomes standing.'\n\nYou pull the shadow-tablet from your pack, settle it against your palm, and write plainly to Mara Wells: *Fendt to the ridge node, north of the mill gate. Build a modest warden post—shelter, a small workshop, sight-lines clear. Call it the Threshold Post. Fendt knows what a post requires; the network will tell him the rest. Send crew and materials when ready.*\n\nThe words appear and clear in the instant—the private link to Mara's shadow-slate behind her counter at the supply store, two days' walk south. She will read it at her next quiet moment. The network of water and watch, expanding quietly northward.\n\n*✦ The charge is set — the work goes on while you are away, and you'll hear how it fared when you return.*",
+      "sceneSummary": "The ridge relay node is confirmed as the network's sentinel—Silas names Fendt as the warden to tend it and dispatches word to Mara Wells to begin construction of the Threshold Post.",
       "choices": [
         {
-          "label": "Send word back to Millbrook — ask Cassiel directly if he will hold the ridge watch alongside Stillwater's",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Veth plainly — could a warden hold two posts at once without one suffering for the other",
+          "label": "Ask Veth how long a warden post typically takes to establish—what is the real timeline before Fendt can hold the threshold alone?",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Stay here a while longer — use Order-Sense to map what the post's actual infrastructure would need to be (building, water, sightlines, storage)",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Take order-sense deeper into the ridge's geometry—see if there are other relay nodes or threads the network hasn't yet named.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "plan"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "order_sense"
         },
         {
-          "label": "Head back down the ridge toward Millbrook — the light's starting to turn, and the conversation with Cassiel should happen face-to-face",
+          "label": "Head down from the ridge toward the Pale March horizon—scout whether the network extends westward or if the March itself holds relay infrastructure.",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {},
+          "difficulty": "hard",
+          "intentTags": [
+            "scout",
+            "travel"
+          ]
+        },
+        {
+          "label": "Descend the ridge and return to Millbrook to oversee the first materials staging for the Threshold Post—the network's northern anchor needs to hold before winter.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
           "difficulty": "easy",
-          "opposedDifficulty": null,
           "intentTags": [
             "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Dispatched Fendt to hold a warden post at the ridge—giving a man carrying a witness-weight the chance to tend something that will outlast him.",
+          "tags": [
+            "mercy",
+            "trust",
+            "building"
+          ],
+          "weight": 1,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -3
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
-      "delegateOps": [],
+      "delegateOps": [
+        {
+          "npcId": "fendt",
+          "charge": "warden of the Threshold Post at the ridge node—hold the network's sentinel watch and tend the site's modest infrastructure",
+          "targetEventId": "the-water-crisis"
+        }
+      ],
       "arcOps": [],
       "adoptSchool": null,
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "High ridge overlooking the whole watershed valley—moorland, early-spring growth, overcast sky. The ancient standing-stone where Huginn perches. Sight-lines run long in every direction: south to the mill gate hub and creek-run, east across the valley, west toward the Pale March horizon. The relay node seated in the earth beneath, warded and ready.",
+        "setting": "High moorland ridge overlooking the entire watershed valley—late afternoon, overcast sky breaking to clearer light in the west. Ancient standing-stone, weathered smooth, relay node seated in earth below. Sight-lines run clear south to mill gate, east across valley, west toward Pale March.",
         "npcsPresent": [
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Standing at the ridge's high point, hand away from the standing-stone now, her attention fully on Silas and Pell—assessing what comes next."
+            "state": "Standing at the ridge's high point, hand away from the standing-stone now, her attention fully on Silas and Pell—assessing the decision plainly, the warden's work of judgment already underway"
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Reading the ridge's geometry through ironsense, quiet but certain, having already named Cassiel as the one with warden's patience."
+            "state": "Quiet, certain, having named Fendt as the warden candidate—her ironsense still open to the ridge's geometry, ready to move when Silas names the post"
           },
           {
             "name": "Huginn",
-            "state": "Perched on the weathered standing-stone, settled and attending. Croaked once when Cassiel was named—agreement, or Marrow's own commentary."
+            "state": "Perched on the standing-stone, settled and attending, watching the whole watershed below. A single croaked agreement when Cassiel was named; now silent and patient"
           }
         ],
         "objects": [
           "Ancient standing-stone, weathered smooth",
-          "The relay node—seated in the earth, ready but warded",
-          "Three sight-lines running south, east, and west",
-          "Early-spring moorland grass, sparse and hardy"
+          "Relay node seated in earth beneath",
+          "Shadow-tablet, now returned to pack",
+          "Early-spring moorland grass, sparse and hardy",
+          "Sight-lines running clear in three directions"
         ],
         "threads": [
-          "Whether Cassiel will accept the ridge watch alongside Stillwater's",
-          "What the post's actual infrastructure would need",
-          "How long the party stays at the ridge before heading back down"
+          "The Threshold Post will need materials, crew, and time before Fendt can hold it alone",
+          "The network's full extent remains unmapped—other nodes or threads may exist west or further north",
+          "The party's next move: deeper reconnaissance, descent to Millbrook, or westward scout toward the Pale March"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "role": "Former Ashwarden warden, teaching companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Named Cassiel Ord as the only candidate for the ridge post—'He has the ground-sense for it. Eleven years holding Stillwater's threshold.' Spoke plainly about the warden's work being about staying, not knowing.",
+          "npcId": "fendt",
+          "note": "Named as the warden candidate for the Threshold Post at the ridge node—given the chance to tend something that matters, beyond his recent weight. Shadow-message dispatched to Mara Wells ordering his assignment and post construction.",
           "learned": [
-            "Cassiel Ord is the one who holds—that is what defines him.",
-            "A post watches; a network listens. They are not the same work."
+            "Fendt is being placed as warden of a new post—trusted with holding a network's sentinel watch",
+            "The Threshold Post will be built north of the mill gate at the ridge relay node"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the ridge, reading the warden's work plainly"
+          "relationshipDelta": 1,
+          "statusNote": "Assigned as warden of the Threshold Post—awaiting materials and crew dispatch from Millbrook"
         },
         {
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Named Cassiel as the warden-choice while reading the ridge's ironsense geometry. Quiet certainty: 'Cassiel holds. That's what he does.' Exchanged a knowing glance with Veth.",
+          "note": "Named Fendt plainly as the warden for the ridge post—her judgment solid and her ironsense reading the geometry confident. Asked for the post's name; Silas gave it, and she received it without ceremony.",
+          "statusNote": "At the ridge with Silas and Veth, ironsense still open to the relay network's geometry"
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "note": "Accepted Silas's reasoning about Cassiel remaining at Stillwater's Trouble—agreed plainly that Fendt holds the ground-sense for the warden post. Her attention now on the post's establishment timeline and infrastructure.",
+          "statusNote": "At the ridge, assessing the warden's work ahead—reading what the post will require"
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "note": "Shadow-message received at the supply store counter—Fendt and crew ordered to the ridge node to begin construction of the Threshold Post. The network's northern anchor is now Mara's responsibility to stage.",
           "learned": [
-            "The ridge watch requires patience and staying, not expertise."
+            "Fendt is being assigned as warden of the Threshold Post—a new post at the ridge relay node",
+            "Mara Wells now holds the dispatch coordination for the post's construction crew and materials"
           ],
-          "skillsObserved": [],
           "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the ridge with ironsense open, reading the geometry while the plan took shape"
+          "statusNote": "At Millbrook, receipt of shadow-message ordering Fendt's assignment and post construction"
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The Threshold Post is now established as a new warden post at the ridge relay node—Fendt named as warden, crew and materials dispatched from Millbrook to begin construction. The ridge sentinel is no longer merely a network node; it is now a standing watch.",
+          "subjectId": "fendt"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The ridge relay node is now established as the Threshold Post—a warden post named and staffed (pending arrival of crew). The site is ready for construction. The relay node remains warded and active beneath.",
+          "flag": {
+            "post_named": "threshold-post",
+            "warden_assigned": "fendt",
+            "construction_status": "pending-crew"
+          },
+          "subPlace": {
+            "name": "Threshold Post (Ridge Sentinel)",
+            "parent": "The Crossing",
+            "note": "Warden post at the high moorland ridge overlooking the watershed—relay node site, sight-lines commanding south, east, and west. Fendt named as warden; crew dispatched from Millbrook.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "place",
+          "entityId": "millbrook",
+          "fact": "Mara Wells now coordinates dispatch of Fendt and construction crew to the Threshold Post at the ridge node—the network's expansion northward runs through her hands.",
+          "links": [
+            "fendt",
+            "mara-wells",
+            "the-water-crisis"
+          ]
+        },
+        {
+          "topic": "fendt",
+          "label": "Fendt",
+          "kind": "person",
+          "entityId": "fendt",
+          "fact": "Named as warden of the Threshold Post at the ridge relay node—given charge of the network's sentinel watch and the modest infrastructure that will surround it. A chance to tend something that outlasts the weight he carried.",
+          "links": [
+            "the-threshold-post",
+            "the-water-crisis",
+            "millbrook"
+          ]
+        },
+        {
+          "topic": "the-threshold-post",
+          "label": "The Threshold Post",
+          "kind": "place",
+          "fact": "A new warden post at the ridge relay node, north of the mill gate. Fendt is warden. The post will hold the network's sentinel watch and stand as the northern anchor of the watershed's relay infrastructure. Modest in scale; profound in purpose.",
+          "links": [
+            "fendt",
+            "the-water-crisis",
+            "millbrook",
+            "the-crossing"
+          ]
+        }
+      ],
       "holdingOps": [],
       "partyOps": [],
       "generateRequest": [],
@@ -2215,20 +2282,26 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "A brief planning conversation at the ridge"
+        "hoursPassed": 1,
+        "why": "the shadow-message written and sent, the post named and warden assigned, the decision witnessed"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
-      "gambitApt": false,
+      "imagePrompt": "High moorland ridge at late afternoon, overcast light breaking westward—Silas stands at the standing-stone with shadow-tablet in hand, Pell and Veth flanking him, Huginn perched and attending. The watershed spreads below: mill gate geometry, relay nodes scattered like seeds, the grey-blue line of the Pale March distant. A warden's post takes shape in plain air.",
+      "newAbility": null,
       "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "High ridge overlooking the whole watershed valley—moorland, early-spring growth, overcast sky. The ancient standing-stone where Huginn perches. Sight-lines run long in every direction: south to the mill gate hub and creek-run, east across the valley, west toward the Pale March horizon. The relay node seated in the earth beneath, warded and ready.",
+      "setting": "High moorland ridge overlooking the entire watershed valley—late afternoon, overcast sky breaking to clearer light in the west. Ancient standing-stone, weathered smooth, relay node seated in earth below. Sight-lines run clear south to mill gate, east across valley, west toward Pale March.",
       "npcsPresent": [
         {
           "name": "Veth (Stillwater) Ondra",
@@ -2236,31 +2309,32 @@
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Reading the ridge's geometry through ironsense, quiet but certain, having already named Cassiel as the one with warden's"
+          "state": "Quiet, certain, having named Fendt as the warden candidate—her ironsense still open to the ridge's geometry, ready to mo"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the weathered standing-stone, settled and attending. Croaked once when Cassiel was named—agreement, or Marrow"
+          "state": "Perched on the standing-stone, settled and attending, watching the whole watershed below. A single croaked agreement whe"
         }
       ],
       "objects": [
         "Ancient standing-stone, weathered smooth",
-        "The relay node—seated in the earth, ready but warded",
-        "Three sight-lines running south, east, and west",
-        "Early-spring moorland grass, sparse and hardy"
+        "Relay node seated in earth beneath",
+        "Shadow-tablet, now returned to pack",
+        "Early-spring moorland grass, sparse and hardy",
+        "Sight-lines running clear in three directions"
       ],
       "threads": [
-        "Whether Cassiel will accept the ridge watch alongside Stillwater's",
-        "What the post's actual infrastructure would need",
-        "How long the party stays at the ridge before heading back down"
+        "The Threshold Post will need materials, crew, and time before Fendt can hold it alone",
+        "The network's full extent remains unmapped—other nodes or threads may exist west or further north",
+        "The party's next move: deeper reconnaissance, descent to Millbrook, or westward scout toward the Pale March"
       ]
     },
-    "beats": 6
+    "beats": 7
   },
   "clock": {
     "schemaVersion": 1,
     "day": 14,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [
@@ -3685,7 +3759,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Has Memory in both hands and is reading the warpling's stutter-pattern through ironsense — steady, not waiting to be told.",
         "[d14] Held Memory steady through the warpling's lunge; wiped the butt-end clean after the strike without being asked.",
         "[d14] Fell into step without a word at Silas's signal — handed Memory back and walked with him to the east well.",
         "[d14] Watched the Boundary-Stone ward seat into the well cap and named it clean without ceremony.",
@@ -3694,7 +3767,8 @@
         "[d14] Read the mill gate as an active relay node through ironsense contact — confirmed its weight and named it properly into place. Stands ready to move north or stay as needed.",
         "[d14] Reading the mill gate's weight through ironsense contact — confirmed it as active, not dormant, presently carrying load. Quiet assessment.",
         "[d14] Hand flat against the relay node's stone, ironsense still open. Her quiet satisfaction reads as confirmation—the pattern she was searching for is now complete.",
-        "[d14] Named Cassiel as the warden-choice while reading the ridge's ironsense geometry. Quiet certainty: 'Cassiel holds. That's what he does.' Exchanged a knowing glance with Veth."
+        "[d14] Named Cassiel as the warden-choice while reading the ridge's ironsense geometry. Quiet certainty: 'Cassiel holds. That's what he does.' Exchanged a knowing glance with Veth.",
+        "[d14] Named Fendt plainly as the warden for the ridge post—her judgment solid and her ironsense reading the geometry confident. Asked for the post's name; Silas gave it, and she received it without ceremony."
       ],
       "knownFacts": [
         "A Blazeborn traveler of middle years was logged at the main Hub gate four days ago, destination the Left Branch. He has not returned.",
@@ -3715,7 +3789,7 @@
         "sustained ironsense reading across open terrain"
       ],
       "status": "active",
-      "statusNote": "At the ridge with ironsense open, reading the geometry while the plan took shape",
+      "statusNote": "At the ridge with Silas and Veth, ironsense still open to the relay network's geometry",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -3734,7 +3808,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 4
+      "met": 5
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -3747,7 +3821,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d13] Received Crane as Silas's named delegate — short nod, no ceremony. Reported east-bend status, committee timing, and creek readings without being asked. Closed the ledger on 'You find the source. We'll be here.'",
         "[d13] Received the four-stage filtration cascade from Crane's spoken account, wrote it out herself, corrected two numbers, and staged materials for the day after tomorrow. Named the Radiant factor's four-day-ago visit (looked, wrote, left nothing) and the Harmonic's formal note (monitoring, no person or…",
         "[d13] Named Crane's records-case and Gweth Callow's unspoken fury as the two levers that might move the Radiant or Harmonic to real action.",
         "[d13] Took Silas's instruction without argument — wrote the note for Gweth Callow herself and set it with the morning errands. Her read of Gweth as the human lever that can move smallholders is now in play.",
@@ -3756,17 +3829,18 @@
         "[d14] Present at dawn planning session — ledger closed, full attention given. Said she wondered when this conversation was coming.",
         "[d14] Named by Silas as the Millbrook anchor — told plainly she stays, holds Crane and Dara steady, and sends word if the committee moves early.",
         "[d14] Received a shadow-sheet linked privately to Silas's own — placed behind the counter between the salt block and the receipt tin.",
-        "[d14] Received the shadow-sheet message — the work is done, the wells will clear first, the watershed will follow."
+        "[d14] Received the shadow-sheet message — the work is done, the wells will clear first, the watershed will follow.",
+        "[d14] Shadow-message received at the supply store counter—Fendt and crew ordered to the ridge node to begin construction of the Threshold Post. The network's northern anchor is now Mara's responsibility to stage."
       ],
       "knownFacts": [
-        "A Radiant factor visited Millbrook four days ago — examined the creek, asked about boiling, wrote in a small book, left nothing and offered nothing.",
-        "The Harmonic sent a formal written note — 'monitoring the situation with care' — no representative, no aid.",
         "The four-stage filtration cascade: settle, cloth, limestone bed, boil — materials staged within two days, Crane directing.",
         "Gweth Callow watches the March Road and its flocks with long attention — when she stands up at a gathering, smallholders who have never cared about politics start caring; she has not stood up yet",
         "Gweth Callow needs the full truth, not a softened version, to act effectively — and Mara has committed to delivering it before morning",
         "Silas has read the design and assigned her to hold the Millbrook thread while the party enters the Zone.",
         "The shadow-sheet carries plain text only — no voice, no drawings. Writing appears on Silas's end immediately. Cleared by a slow palm-pass. The link is private between Mara and Silas alone.",
-        "The reclamation work is complete — wells will clear in a week or two, watershed will follow after."
+        "The reclamation work is complete — wells will clear in a week or two, watershed will follow after.",
+        "Fendt is being assigned as warden of the Threshold Post—a new post at the ridge relay node",
+        "Mara Wells now holds the dispatch coordination for the post's construction crew and materials"
       ],
       "skillsObserved": [
         "proactive expedition resupply from personal stock without pr",
@@ -3777,15 +3851,16 @@
         "reading a political situation plainly and naming it without "
       ],
       "status": "active",
-      "statusNote": "In her store at dawn — has received the shadow-sheet update confirming the Zone work is done.",
+      "statusNote": "At Millbrook, receipt of shadow-message ordering Fendt's assignment and post construction",
       "lastSeen": {
-        "locationId": "gen-disputed-zone-left-branch-entrance",
+        "locationId": "the_crossing",
         "day": 14
       },
       "gender": "woman",
       "pronouns": "she/her",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Mara%20Wells%2C%20woman%2C%20Village%20supply%20store%20operator%2C%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8967&nologo=true",
-      "_portraitTier": "devoted"
+      "_portraitTier": "devoted",
+      "met": 1
     },
     "corvin": {
       "id": "corvin",
@@ -3940,9 +4015,8 @@
         "locationId": "radiant_plateau_edge",
         "day": 3
       },
-      "relationship": 8,
+      "relationship": 9,
       "history": [
-        "[d3] Heard Pell name her father as a filtration engineer who left the Plateau after the Transition — someone who would know the distinctive hand. Went still in a new way. Asked if she w",
         "[d3] Reproduced the margin notation from a seven-year-old notebook entry — confirmed Pell's identification without prompting. Named the departure and the calibration files as connected ",
         "[d3] Recalibrated on hearing Pell's half-knowledge — noted that her father did not lie to her, only shaped what he said. Gone still in a new way: adjusting the weight of what Pell repre",
         "[d3] Silas read his ending aloud — six weeks, one path. The accuracy registered. He is holding the confirmation of his own timeline without flinching.",
@@ -3951,17 +4025,18 @@
         "[d5] Received Aldric's informal vouch — something loosened around his jaw. First sign of ease since arriving in Millbrook.",
         "[d5] Named to the fellowship by Silas — his testimony placed alongside all others. The long breath out. Something settled.",
         "[d5] Standing near the well — gave a short, deliberate nod at departure. A man who has decided something and is at peace with it.",
-        "[d13] Pip Cotter has named him at the Hub message board as a man who knows his trade — his standing is quietly spreading beyond Millbrook."
+        "[d13] Pip Cotter has named him at the Hub message board as a man who knows his trade — his standing is quietly spreading beyond Millbrook.",
+        "[d14] Named as the warden candidate for the Threshold Post at the ridge node—given the chance to tend something that matters, beyond his recent weight. Shadow-message dispatched to Mara Wells ordering his assignment and post construction."
       ],
       "knownFacts": [
-        "Pell has decided on his rescue as the immediate priority — the six-week window is the working clock",
-        "She will not press for her father beyond what the work opens",
         "Will carry the second copy in the traveling case lining as a failsafe",
         "Has agreed to walk to Millbrook and present the starfruit to Mara Wells as the token of introduction",
         "Named Grael explicitly in the written testimony with the receipt date of the preliminary concern notice",
         "Aldric has extended an informal vouch for Fendt's place in the village work thread",
         "He is formally part of the Fell Pell fellowship — named, not merely tolerated",
-        "Named at the Hub message post by Pip Cotter as a filtration man worth asking after — the Fell Pell fellowship beginning to carry weight beyond the village."
+        "Named at the Hub message post by Pip Cotter as a filtration man worth asking after — the Fell Pell fellowship beginning to carry weight beyond the village.",
+        "Fendt is being placed as warden of a new post—trusted with holding a network's sentinel watch",
+        "The Threshold Post will be built north of the mill gate at the ridge relay node"
       ],
       "skillsObserved": [
         "recognizing the connection between two separate threads unde",
@@ -3972,17 +4047,18 @@
         "disciplined disclosure under pressure — three minutes of tes"
       ],
       "status": "active",
-      "statusNote": "At Millbrook, at the Fell Pell — his name now circulating at the Hub level through Pip's notice.",
+      "statusNote": "Assigned as warden of the Threshold Post—awaiting materials and crew dispatch from Millbrook",
       "lastSeen": {
         "locationId": "the_crossing",
-        "day": 13
+        "day": 14
       },
       "gender": "Man",
       "pronouns": "he/him",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Fendt%2C%20Man%2C%20Filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11563&nologo=true",
       "_portraitTier": "devoted",
       "questState": "restored",
-      "questNote": "permanently in your debt, and not entirely grateful about it"
+      "questNote": "permanently in your debt, and not entirely grateful about it",
+      "met": 1
     },
     "road-traveler": {
       "id": "road-traveler",
@@ -5568,7 +5644,6 @@
     "the_crossing": {
       "visits": 3,
       "notes": [
-        "[d12] The deep drawer beneath the work counter held Silas's father's Waymarker and sealed letter for years — both now retrieved and on the table. The drawer is open.",
         "[d12] The Waymarker is now seated to Stillwater's Trouble — the tool carries the post's address and can locate it from a distance.",
         "[d13] Party approaching on the cairn-line road from the north, day 13 morning — Huginn has marked a patient ending somewhere along the line south of Cairnhold.",
         "[d13] A message from Mara Wells's relay arrived at the Hub message-runner post — pinned to the board with her chalk seal, unopened as of this scene.",
@@ -5579,7 +5654,8 @@
         "[d14] East-side draw-well is now sealed with a Boundary-Stone ward at the cap — the mark is seated into the stone. The open relay-node channel beneath is warded against uninvited passage, though the channel remains oriented south-by-southwest toward the left-branch hollow.",
         "[d14] The mill gate is confirmed as a relay network node — dormant but geometrically placed and connected south to the Sheaf and Bowl stall node and north toward the ridge point. It gathers the watershed's spine routes and stands as the oldest point in the Crossing's layout.",
         "[d14] The mill gate is confirmed as an *active* relay hub — not dormant like the wayhouse, but presently channeling signal north, south, and inward in a branched pattern. The keeper's lodge sits beside it, closed and occupied.",
-        "[d14] The ridge node is located at high elevation, commanding sight-lines south, east, and west—a warden's sentinel point overlooking the entire watershed basin"
+        "[d14] The ridge node is located at high elevation, commanding sight-lines south, east, and west—a warden's sentinel point overlooking the entire watershed basin",
+        "[d14] The ridge relay node is now established as the Threshold Post—a warden post named and staffed (pending arrival of crew). The site is ready for construction. The relay node remains warded and active beneath."
       ],
       "flags": {
         "waymarker_seated": "stillwaters-trouble",
@@ -5589,7 +5665,9 @@
         "node_active": true,
         "keeper_silent": true,
         "node_type": "active_ready",
-        "network_role": "sentinel"
+        "network_role": "sentinel",
+        "post_named": "threshold-post",
+        "warden_assigned": "fendt"
       },
       "lastVisit": 14,
       "vectorsKnown": [],
@@ -5639,6 +5717,13 @@
           "day": 14,
           "visited": true,
           "note": "High moorland overlooking the watershed—relay node seated in the earth, warded and ready but unmarked. Ancient standing-stone nearby."
+        },
+        "threshold-post-ridge-sentinel": {
+          "name": "Threshold Post (Ridge Sentinel)",
+          "parentId": "the_crossing",
+          "day": 14,
+          "visited": true,
+          "note": "Warden post at the high moorland ridge overlooking the watershed—relay node site, sight-lines commanding south, east, and west. Fendt named as warden; crew dispatched from Millbrook."
         }
       }
     },
@@ -5983,7 +6068,7 @@
     "lastTickWorldDay": 41,
     "lastCanonWorldDay": 41,
     "lastGenCount": 999,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Deni going still at the waypost name — the plain, real moment of a name landing on someone who did not expect to be remembered",
@@ -6119,6 +6204,17 @@
         "status": "working",
         "stampedAtWorldCount": 593,
         "lastMovedWorldCount": 999
+      },
+      "fendt::warden-of-the-threshold-post-at-the-ridg": {
+        "id": "fendt::warden-of-the-threshold-post-at-the-ridg",
+        "npcId": "fendt",
+        "npcName": "Fendt",
+        "charge": "warden of the Threshold Post at the ridge node—hold the network's sentinel watch and tend the site's modest…",
+        "targetEventId": null,
+        "progress": 0,
+        "status": "working",
+        "stampedAtWorldCount": 1000,
+        "lastMovedWorldCount": 1000
       }
     },
     "wakes": [
@@ -10719,7 +10815,6 @@
         "label": "Millbrook",
         "kind": "event",
         "facts": [
-          "[d1] Order-Sense read on World-day 14 pre-dawn: bull moved northwest overnight — unhurried, skirting river smell, favoring dry scrub. Destination confirmed as scrub oak ridge a quarter-mile north. Three in",
           "[d1] Bull boar taken on the scrub oak ridge, World-day 14 morning. Palework channel through the Deathbound Runic Spear's runes seized at the kill moment — energy reflected back rather than passing through.",
           "[d1] On the scrub oak ridge in full morning light, the death-register in the blade went flat — full sun washed the shadow-anchors and the moment after a kill will not hold what the moment of a kill holds. ",
           "[d1] The Deathbound Runic Spear's blade came out of the bull dry and clean — no blood on the rune-channels despite the depth of the wound. The binding closed rather than passed the Palework channel: a refu",
@@ -10742,17 +10837,18 @@
           "[d13] Mara Wells wrote out the four-stage filtration cascade from Crane's spoken account, corrected two numbers, and confirmed materials can be staged within two days. Crane will direct the build. The construction thread is now live and in Mara's hands.",
           "[d13] The Crossing mill-gate keeper's last four days of readings have been worse, not better — and he chose not to write it down. The rate is accelerating and the keeper knows it.",
           "[d14] A Boundary-Stone ward now seats at the south threshold — a marked staging point on the road to the Disputed Zone, warded against weather, animals, and casual intrusion.",
-          "[d14] The mill gate is an active relay hub — not a dormant node like the wayhouse, but presently channeling signal north, south, and inward through a branched network. The keeper's lodge beside it remains closed and occupied, holding silence about the water."
+          "[d14] The mill gate is an active relay hub — not a dormant node like the wayhouse, but presently channeling signal north, south, and inward through a branched network. The keeper's lodge beside it remains closed and occupied, holding silence about the water.",
+          "[d14] Mara Wells now coordinates dispatch of Fendt and construction crew to the Threshold Post at the ridge node—the network's expansion northward runs through her hands."
         ],
         "links": [
-          "dara-holt",
           "mara-wells",
           "edvar-crane",
           "the-water-crisis",
           "find-the-engineer",
           "what-the-water-remembers",
           "the-second-thread",
-          "the-crossing"
+          "the-crossing",
+          "fendt"
         ],
         "aliases": [
           "Millbrook Smokehouse — Structure",
@@ -11515,17 +11611,18 @@
           "[d3] The Attended End reads his ending: six weeks, one path. Exile via administrative machinery — Grael does not need to move again. One window remains: the paper formally lodged outside the Radiant hierar",
           "[d3] Agreed to walk to Millbrook with the dried starfruit as introduction to Mara Wells. Wrote and surrendered a full page of testimony — dates, band designations, nine-day gap, Grael named with the prelim",
           "[d5] Aldric extended an informal vouch for Fendt at the Fell Pell gathering — named him as someone who arrived with Silas Weir's name and offered to speak for him to Mara's thread. First foundation of stan",
-          "[d3] Filtration engineer, Edge District"
+          "[d3] Filtration engineer, Edge District",
+          "[d14] Named as warden of the Threshold Post at the ridge relay node—given charge of the network's sentinel watch and the modest infrastructure that will surround it. A chance to tend something that outlasts the weight he carried."
         ],
         "links": [
-          "the-water-crisis",
-          "leth-archive-complaint",
           "edge-district-huginn-building",
           "overseer-grael",
           "mara-wells",
           "aldric",
           "millbrook",
-          "the-edge-district-ledger"
+          "the-edge-district-ledger",
+          "the-threshold-post",
+          "the-water-crisis"
         ],
         "aliases": [
           "Fendt — Filtration Engineer",
@@ -11534,7 +11631,7 @@
         ],
         "createdDay": 3,
         "entityId": "fendt",
-        "updatedDay": 3
+        "updatedDay": 14
       },
       "overseer-grael": {
         "id": "overseer-grael",
@@ -12105,22 +12202,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.80134968141197,
-    "cerebral": 21.116771832836033,
-    "social": 8.12246441458204,
-    "generous": 2.9009933039660707,
-    "cautious": 10.908960695438017,
-    "physical": 0.9573360282297992,
-    "risky": 0.22962008579399398,
-    "ruthless": 0.499786846167909,
-    "carousing": 0.08125908672734866,
-    "amorous": 0.29870797519945785,
-    "patient": 0.18100803063622756,
-    "stealth": 0.000017467101240356983,
-    "devotion": 0.7137634267611205,
-    "craft": 0.6198683540053842,
-    "leadership": 1.244540279245835,
-    "deception": 0.08364737921034202
+    "strategic": 20.331315939376672,
+    "cerebral": 20.588852537015132,
+    "social": 8.91940280421749,
+    "generous": 2.828468471366919,
+    "cautious": 10.636236678052066,
+    "physical": 0.9334026275240542,
+    "risky": 0.22387958364914412,
+    "ruthless": 0.4872921750137113,
+    "carousing": 0.07922760955916494,
+    "amorous": 0.29124027581947143,
+    "patient": 0.17648282987032188,
+    "stealth": 0.00001703042370934806,
+    "devotion": 0.6959193410920924,
+    "craft": 0.6043716451552495,
+    "leadership": 1.2134267722646892,
+    "deception": 0.08155619473008346
   },
   "aptitudes": [
     "strategist",
@@ -12129,7 +12226,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 920,
+  "actionCount": 921,
   "grantsVersion": 1,
   "reconcileVersion": 30,
   "gallery": [
@@ -12559,8 +12656,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786379034992,
-  "rev": 1649,
+  "updatedAt": 1786379288635,
+  "rev": 1650,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15706,6 +15803,12 @@
       "text": "Memory now carries a unified shadow-form binding — both the physical and shadow spears are one working, answerable through a single rune-thread and Huginn's ending-sense. The shadow-twin is no longer separate; it is part of Memory's whole. Calling it costs nothing more than naming it aloud.",
       "day": 14,
       "subjectId": null
+    },
+    {
+      "id": "fendt",
+      "text": "The Threshold Post is now established as a new warden post at the ridge relay node—Fendt named as warden, crew and materials dispatched from Millbrook to begin construction. The ridge sentinel is no longer merely a network node; it is now a standing watch.",
+      "day": 14,
+      "subjectId": "fendt"
     }
   ],
   "practice": {
@@ -16484,7 +16587,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 126
+    "the_center": 127
   },
   "foreclosed": [
     "rootkin",
@@ -16710,10 +16813,10 @@
     {
       "id": "sess-23",
       "startedAt": "2026-08-10T16:02:34.576Z",
-      "lastAt": "2026-08-10T16:23:54.989Z",
+      "lastAt": "2026-08-10T16:28:08.628Z",
       "startDay": 41,
       "endDay": 41,
-      "beats": 5
+      "beats": 6
     }
   ],
   "company": [
@@ -17062,23 +17165,23 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 292,
-    "choices": 291,
-    "characterDeltas": 127,
-    "scene": 292,
-    "npcUpdates": 261,
-    "factUpdates": 23,
-    "placeUpdates": 58,
-    "codexUpdates": 184,
-    "timeOps": 281,
-    "imagePrompt": 8,
-    "sceneEnded": 72,
+    "sceneSummary": 293,
+    "choices": 292,
+    "characterDeltas": 128,
+    "scene": 293,
+    "npcUpdates": 262,
+    "factUpdates": 24,
+    "placeUpdates": 59,
+    "codexUpdates": 185,
+    "timeOps": 282,
+    "imagePrompt": 9,
+    "sceneEnded": 73,
     "itemUpdates": 6,
     "questUpdates": 41,
     "offer": 30,
     "moveTo": 17,
-    "delegateOps": 3,
-    "deeds": 8,
+    "delegateOps": 4,
+    "deeds": 9,
     "standingOps": 1,
     "ledgerEvents": 8,
     "discovery": 4,
@@ -17089,9 +17192,9 @@
     "_applyFailedOp": 7,
     "newEncounter": 1,
     "encounterOps": 1,
-    "gambitApt": 6
+    "gambitApt": 7
   },
-  "_opTurns": 292,
+  "_opTurns": 293,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -17104,7 +17207,7 @@
       "lastWhy": "rejected-shape"
     },
     "delegateOps": {
-      "applied": 3,
+      "applied": 4,
       "rejected": 0,
       "lastWhy": null
     }
@@ -17239,6 +17342,11 @@
       {
         "text": "Addressed the market row crowd after a Zone-creature emerged from beneath a stall — named the source, confirmed the reclamation work complete, and the water timeline plainly.",
         "weight": 2,
+        "day": 14
+      },
+      {
+        "text": "Dispatched Fendt to hold a warden post at the ridge—giving a man carrying a witness-weight the chance to tend something that will outlast him.",
+        "weight": 1,
         "day": 14
       }
     ]
@@ -17395,8 +17503,9 @@
     "scout": 1,
     "lead": 1,
     "ask": 1,
-    "plan": 1,
-    "negotiate": 1
+    "plan": 2,
+    "negotiate": 2,
+    "prepare": 1
   },
   "aptitudeEarnCount": {},
   "bondLog": [
@@ -17407,6 +17516,14 @@
       "day": 14,
       "worldDay": 41,
       "actionCount": 917
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 14,
+      "worldDay": 41,
+      "actionCount": 920
     }
   ]
 }

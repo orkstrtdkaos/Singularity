@@ -1,69 +1,69 @@
 {
-  "schemaVersion": 1,
-  "id": "the_slow_stair",
-  "name": "The Slow Stair",
-  "regionId": "umbral_depths",
-  "communityId": "umbral.stair",
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    -0.3,
-    0,
-    -0.2,
-    -0.2,
-    0
-  ],
-  "spectrum": {
-    "dark_light": -0.3,
-    "space_time": -0.2,
-    "body_mind": -0.2
-  },
-  "tags": [
-    "umbral",
-    "liminal",
-    "travel",
-    "road",
-    "threshold"
-  ],
-  "connections": [
-    "the_underlight",
-    "the_lampless_market",
-    "the_axis_gate"
-  ],
-  "descriptionSeed": "The long way up and out — days of ascending stair, and the dark thinning by degrees, and the first grey suggestion of a world that uses eyes. Umbrals coming up go blind for a week at the top and consider it a reasonable toll. Surface folk coming down go blind immediately and consider it a catastrophe. Halfway there is a landing where both kinds of people sit and wait to adjust, and it is the most honest room in the world. The Slow Stair's waygate sits at the true threshold, where the last of the light gives out. It is the network's most-used gate that nobody outside the Depths can find without being shown.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "world_framing"
-  ],
-  "encounterFlavor": "Half-blind travelers in both directions; a landing-keeper who has seen everyone's first moment; smugglers who use the stair precisely because it is slow.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "Someone went up the stair and came back down changed, and will not say what they saw at the top",
-    "The stair is being watched, from above, by someone who does not want it used"
-  ],
-  "map": {
-    "x": 90,
-    "y": 300
-  },
-  "poleIntensity": {
-    "dark": 0.3,
-    "space": 0.2,
-    "body": 0.2
-  },
-  "waygate": true,
-  "waygateTier": 3,
-  "worldPos": {
-    "colatitude": 68,
-    "longitude": 3,
-    "depth": 0
-  },
-  "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_underlight"
+ "schemaVersion": 1,
+ "id": "the_slow_stair",
+ "name": "The Slow Stair",
+ "regionId": "umbral_depths",
+ "communityId": "umbral.stair",
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  -0.2,
+  -0.2,
+  0
+ ],
+ "spectrum": {
+  "dark_light": -0.3,
+  "space_time": -0.2,
+  "body_mind": -0.2
+ },
+ "tags": [
+  "umbral",
+  "liminal",
+  "travel",
+  "road",
+  "threshold"
+ ],
+ "connections": [
+  "the_underlight",
+  "the_lampless_market",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "The long way up and out — days of ascending stair, and the dark thinning by degrees, and the first grey suggestion of a world that uses eyes. Umbrals coming up go blind for a week at the top and consider it a reasonable toll. Surface folk coming down go blind immediately and consider it a catastrophe. Halfway there is a landing where both kinds of people sit and wait to adjust, and it is the most honest room in the world. The Slow Stair's waygate sits at the true threshold, where the last of the light gives out. It is the network's most-used gate that nobody outside the Depths can find without being shown.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "world_framing"
+ ],
+ "encounterFlavor": "Half-blind travelers in both directions; a landing-keeper who has seen everyone's first moment; smugglers who use the stair precisely because it is slow.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "Someone went up the stair and came back down changed, and will not say what they saw at the top",
+  "The stair is being watched, from above, by someone who does not want it used"
+ ],
+ "map": {
+  "x": 90,
+  "y": 300
+ },
+ "poleIntensity": {
+  "dark": 0.3,
+  "space": 0.2,
+  "body": 0.2
+ },
+ "waygate": true,
+ "waygateTier": 3,
+ "worldPos": {
+  "colatitude": 67.8,
+  "longitude": 0,
+  "depth": 0
+ },
+ "worldPosNote": "⛔ SNG-407: moved 2.79° (5 walking days) onto the nearest coast the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 68, longitude 3.",
+ "tier": "settlement",
+ "parentId": "the_underlight"
 }

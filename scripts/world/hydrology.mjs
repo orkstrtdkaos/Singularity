@@ -215,22 +215,44 @@ export function buildHydrology({ type, elev, W, H, seedPos, waterAuth }) {
     return out;
   };
   const lakes = buildv(2, 4, 0.03, 150), marsh = buildv(3, 6, 0.05, 150);
-  // river polylines: downhill chains within river cells
+  // river polylines — MAIN STEMS FIRST, TRACED FROM EACH MOUTH UP THE LARGEST ACCUMULATION.
+  // ⛔ THE FIRST FORM OF THIS WAS ITERATION-ORDER-DEPENDENT and it broke SNG-393 outright: chains grew
+  // from whichever head the Set happened to yield first, and a tributary processed early STOLE the main
+  // stem — the Echo (91° of river) decomposed with its head on a 2.6° stub, so no polar signature
+  // could ever match it. Aevi's Python had the same truncation and her signatures survived only because
+  // the same interpreter re-ran the same arbitrary order. Tracing mouth→source along MAX ACCUMULATION
+  // (ties to the lower index) is order-free by construction: the main stem is a property of the flow
+  // field, not of who asked first.
   const riv = new Set(); for (let k = 0; k < W * H; k++) if (WA[k] === 1) riv.add(k);
-  const dn = new Map();
+  const upsOf = new Map();
   for (const k of riv) {
-    const j = Math.floor(k / W), i = k % W; let best = null, bv = E[k];
-    for (const [dj, di] of NB) { const jj = j + dj; if (jj < 0 || jj >= H) continue;
-      const m = K(jj, i + di); if (riv.has(m) && E[m] < bv) { bv = E[m]; best = m; } }
-    if (best !== null) dn.set(k, best);
+    const j2 = Math.floor(k / W), i2 = k % W; let best = null, bv = E[k];
+    for (const [dj, di] of NB) { const jj = j2 + dj; if (jj < 0 || jj >= H) continue;
+      const m = K(jj, i2 + di); if (riv.has(m) && E[m] < bv) { bv = E[m]; best = m; } }
+    if (best !== null) { if (!upsOf.has(best)) upsOf.set(best, []); upsOf.get(best).push(k); }
   }
-  const hasUp = new Set(dn.values());
-  const paths = [], used = new Set();
-  for (const h of riv) {
-    if (hasUp.has(h)) continue;
-    const p = [h]; let cur = h;
-    while (dn.has(cur) && !used.has(dn.get(cur))) { used.add(cur); cur = dn.get(cur); p.push(cur); if (p.length > 400) break; }
-    if (p.length >= 3) paths.push(p.map(ll));
+  const isMouth = (k) => { const j2 = Math.floor(k / W), i2 = k % W;
+    for (const [dj, di] of NB) { const jj = j2 + dj; if (jj < 0 || jj >= H) continue;
+      const m = K(jj, i2 + di); if (riv.has(m) && E[m] < E[k]) return false; } return true; };
+  const mouths = [...riv].filter(isMouth).sort((a, b) => acc[b] - acc[a] || a - b);
+  const consumed = new Set(), paths = [];
+  const traceUp = (start) => {
+    const p = [start]; consumed.add(start); let cur = start;
+    for (;;) {
+      const ups = (upsOf.get(cur) || []).filter((u) => !consumed.has(u));
+      if (!ups.length) break;
+      ups.sort((a, b) => acc[b] - acc[a] || a - b);            // the largest catchment IS the river
+      cur = ups[0]; consumed.add(cur); p.push(cur);
+      if (p.length > 800) break;
+    }
+    return p;
+  };
+  for (const m of mouths) { const p = traceUp(m); if (p.length >= 3) paths.push(p.reverse().map(ll)); }
+  // tributaries: whatever remains, traced from its own local mouths, deterministically
+  const rest = [...riv].filter((k) => !consumed.has(k)).sort((a, b) => acc[b] - acc[a] || a - b);
+  for (const k of rest) {
+    if (consumed.has(k)) continue;
+    const p = traceUp(k); if (p.length >= 3) paths.push(p.reverse().map(ll));
   }
   const smOpen = (p) => {
     if (p.length < 3) return p;

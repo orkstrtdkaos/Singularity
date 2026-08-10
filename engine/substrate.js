@@ -23,7 +23,11 @@ import { geodesic } from "./worldmap.js";   // SNG-180: the substrate field meas
 export const SUBSTRATE_TUNING = {
   starveExp: 1.15,      // below-band falloff steepness (Seraph@Quickwood → ≈13%)
   starveFloor: 0.0,     // a starved craft can reach ~0
-  crowdSlope: 0.75,     // above-band falloff rate
+  // ⛔ ERIK'S RULING (7e15eb9f, 2026-08-09): BOTH of SNG-389's options — crowdSlope raised AND wild
+  // narrowed. The measurement that moved it: at 0.75 the crowded tail could never reach the floor
+  // (wild bottomed at 0.74 with the floor at 0.6), so "make abundance hurt" was arithmetic that
+  // could not fire. At 1.6, wild's worst crowded factor is 0.46 — abundance genuinely costs.
+  crowdSlope: 1.6,      // above-band falloff rate — RULED, was 0.75
   crowdFloor: 0.6,      // interference never drops a craft below this
   maxChancePenalty: 65, // factor 0 → −65 to success chance (drives to the d100 floor)
   energyK: 0.6,         // thin/crowded substrate strains: energy × (1 + energyK·(1−factor))

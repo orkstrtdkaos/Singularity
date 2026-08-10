@@ -29,6 +29,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { makeTerrain } from "./terrain.mjs";
 import { buildHydrology } from "./hydrology.mjs";
+import { resolvePlaceNames } from "./reanchor.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const rj = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -58,7 +59,9 @@ export function loadCanon() {
   // and kinds apply on the next rebuild with no code change.
   let waterAuth = null;
   try { waterAuth = rj("content/packs/core/world/waterauth.json"); } catch { /* not yet shipped */ }
-  return { locs, seeds, waterAuth, substrate: rj("content/packs/core/rules/the_substrate.json"), gp: rj("content/packs/core/world/genparams.json") };
+  let placenames = null;
+  try { placenames = rj("content/packs/core/world/placenames.json"); } catch { /* naming is optional */ }
+  return { locs, seeds, waterAuth, placenames, substrate: rj("content/packs/core/rules/the_substrate.json"), gp: rj("content/packs/core/world/genparams.json") };
 }
 
 /** ⛔ THE SEED GATE. genparams.pts must be exactly the canon derivation — a genparams edited by hand while
@@ -204,7 +207,17 @@ export function buildWorld(canon) {
     seats[region] = [best.lat, best.lon, best.id];
   }
 
-  return { type, raw, elev, c0, c1, c2, blist, seats, RLO, RHI, seeds: canon.seeds, hydrology: hyd.hydrology, authoredWaterPresent: hyd.authoredWaterPresent };
+  // SNG-393 rev 3 — re-anchor the names by polar signature; drift goes to the LOG, never the asset.
+  let placeNames = null, updatedPlacenames = null;
+  if (canon.placenames) {
+    const before = JSON.stringify([...(canon.placenames.rivers || []), ...(canon.placenames.fens || [])].map((n) => [n.head, n.mouth, n.centroid]));
+    const res = resolvePlaceNames(canon.placenames, hyd.hydrology, { seedPos });
+    placeNames = res.placeNames; updatedPlacenames = res.updated;
+    const after = JSON.stringify([...(res.updated.rivers || []), ...(res.updated.fens || [])].map((n) => [n.head, n.mouth, n.centroid]));
+    if (before !== after) console.log("  names: signatures moved with the terrain and were written back (drift is logged, not stored)");
+    for (const u of placeNames.unresolved) console.log(`  ⚠️ UNRESOLVED NAME: ${u.name} — ${u.reason} (its feature genuinely restructured; do not widen the threshold to hide it)`);
+  }
+  return { type, raw, elev, c0, c1, c2, blist, seats, RLO, RHI, seeds: canon.seeds, hydrology: hyd.hydrology, authoredWaterPresent: hyd.authoredWaterPresent, placeNames, updatedPlacenames };
 }
 
 /** Serialise in the exact schema engine/worldglobe.js already reads. */
@@ -238,6 +251,7 @@ export function serialise(built, canon) {
     locations: meta,
     seats: built.seats,
     hydrology: built.hydrology,
+    placeNames: built.placeNames,
     authoredWater: built.authoredWaterPresent ? "applied" : "⚠️ ABSENT — content/packs/core/world/waterauth.json has not shipped; derived hydrology only. The authored digs and kinds apply on the next rebuild once the canon lands.",
     points: built.seeds.map((s) => [s.id, s.region, s.lat, s.lon, "land"]),
     layers: { c0: b64(built.c0), c1: b64(built.c1), c2: b64(built.c2), c3: b64(built.elev) },
@@ -263,6 +277,10 @@ if (isMain) {
     console.log(same ? "✅ determinism: regenerated world is byte-identical to disk"
       : `⛔ DRIFT: regenerated world differs from disk (${disk.length} vs ${out.length} bytes) — content changed without a rebuild, or the generator moved`);
     process.exit(same ? 0 : 1);
+  }
+  if (built.updatedPlacenames) {
+    // ⚠️ canonical serialisation, so a run that changes nothing is byte-idempotent
+    writeFileSync(join(root, "content/packs/core/world/placenames.json"), JSON.stringify(built.updatedPlacenames, null, 1) + String.fromCharCode(10));
   }
   writeFileSync(path, out);
   console.log(`wrote ${path} — ${(out.length / 1024).toFixed(0)}KB · RLO ${built.RLO.toFixed(4)} RHI ${built.RHI.toFixed(4)} · ${built.blist.length} biomes · ${Object.keys(built.seats).length} seats`);

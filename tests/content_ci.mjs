@@ -673,6 +673,48 @@ for (const pack of PACKS) {
     .map(compactOf).filter((c) => c > 12);
   check("SNG-391: every lake and marsh outline is closed and compact — no slashed polygons",
     badPoly.length === 0, badPoly.length + " over compactness 12");
+    // ⚠️ GRAFTED INTO THE SNG-391 BLOCK, deliberately: these gates need `canon` and `built`, and this
+  // is the FOURTH time a new gate block reached for a neighbour's block-scoped consts. Sharing the one
+  // regeneration is also the cheap thing — a second buildWorld in CI would double the world's cost.
+// (3c-vii-e) SNG-393 rev 3 — NAMES SURVIVE A REBUILD BY POLAR SIGNATURE. Erik's key, Aevi's
+// measurement: signature drift median 0.50° across a rebuild against 5.3° town-anchor distance —
+// "precision beats stability when the drift is smaller than the error you are trying to avoid."
+
+  const RA = await import("../scripts/world/reanchor.mjs");
+  const pnDisk = rj("content/packs/core/world/placenames.json");
+  const seedPos393 = {}; for (const s2 of canon.seeds) seedPos393[s2.id] = { lat: s2.lat, lon: s2.lon };
+  const res = RA.resolvePlaceNames(pnDisk, built.hydrology, { seedPos: seedPos393 });
+
+  // ⛔ THE CENSUS, NOT A PASS/FAIL: seven names cannot bind in the ORDER-FREE decomposition, and the
+  // diagnosis says why — the Choirwater's best town-match is the 110° main stem at 46.3° with margin
+  // 0.2°, i.e. her stream was absorbed as a tributary. Binding on numbers like that is the exact thing
+  // the spec forbids: "a river named for Millbrook quietly attaching to another water is worse than an
+  // unnamed river." The seven are Aevi's to re-anchor or rename; a name leaving this list is her fix
+  // landing, and a name JOINING it is a regression this gate reports by name.
+  const KNOWN_UNRESOLVED = new Set(["the_greenwater", "the_choirwater", "the_axewater", "the_middlerun",
+    "the_burnwater", "the_millfen", "the_quietfen"]);
+  const unexpected = res.placeNames.unresolved.filter((u) => !KNOWN_UNRESOLVED.has(u.id));
+  check("SNG-393: every name binds by signature, or sits in the KNOWN census with its diagnosis",
+    unexpected.length === 0, unexpected.map((u) => u.name + " (" + u.reason + ")").join(" · "));
+  check("SNG-393: the load-bearing names resolve — the Echo, the Stiltfen, the Echofen",
+    ["the_echo"].every((id) => res.placeNames.rivers.some((r) => r.id === id && r.resolved))
+    && ["the_stiltfen", "the_echofen"].every((id) => res.placeNames.fens.some((f) => f.id === id && f.resolved)));
+  // ⚠️ AT THE FIXED POINT EVERYTHING RESOLVES BY SIGNATURE — the town fallback was the bootstrap,
+  // and a name still leaning on it after write-back means the write-back is broken.
+  check("SNG-393: after the bootstrap, no name still leans on the town fallback",
+    [...res.placeNames.rivers, ...res.placeNames.fens].every((r) => r.via === "signature"));
+  check("SNG-393: every signature match is unambiguous — margin ≥ 2° against the runner-up",
+    [...res.placeNames.rivers, ...res.placeNames.fens].every((r) => r.margin >= 2));
+  // ⛔ PROVE THE GATE CAN GO RED: shift one resolved river's address 10° and it must land unresolved,
+  // not quietly bind to the nearest water — the acceptance threshold genuinely rejects.
+  const perturbed = JSON.parse(JSON.stringify(pnDisk));
+  const target = perturbed.rivers.find((r) => res.placeNames.rivers.some((x) => x.id === r.id));
+  target.head = [target.head[0] + 10, target.head[1]]; target.mouth = [target.mouth[0] + 10, target.mouth[1]];
+  delete target.nearHead; delete target.nearMouth;             // and no town to rescue it
+  const res2 = RA.resolvePlaceNames(perturbed, built.hydrology, { seedPos: seedPos393 });
+  check("SNG-393: a signature moved 10° lands UNRESOLVED — never quietly bound to the nearest water",
+    res2.placeNames.unresolved.some((u) => u.id === target.id));
+
   console.log(`note  SNG-391: hydrology — ${built.hydrology.rivers.length} rivers, ${built.hydrology.lakes.length} lakes, ${built.hydrology.marsh.length} marshes; authored water ${built.authoredWaterPresent ? "APPLIED" : "⚠️ ABSENT (waterauth.json not yet in the repo — derived hydrology only)"}`);
 }
 

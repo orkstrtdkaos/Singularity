@@ -1,0 +1,620 @@
+{
+ "_note": "⛔ SNG-406. `kind` — the PICTORIAL vocabulary, for icons. Authored, not derived. ⚠️ I BUILT THE DERIVATION FIRST AND IT WAS ROUGHLY HALF WRONG on name-matched rows: Waystone read as 'underplace' from 'ways' when it is a BRIDGE-BUILDERS' TOWN; the FORward Archive read as a fort from 'ward'; the Harborward read as a fort when it is a HARBOUR; Millbrook read as 'works' from 'mill' when it is a farming village. ⛔ SAME FAILURE AS THE WATER-WORD REGEX. Every row below was read.",
+ "_distinctFromTier": "⚠️ `tier` is SIZE, `role` is FUNCTION, `kind` is SHAPE — what it looks like from outside. A waygate and a village are both `tier: settlement`; they should never share an icon.",
+ "_vocabulary": {
+  "waygate": "a made arch that opens elsewhere — the world's only fast travel",
+  "gate": "a threshold in a wall or a border, walked not stepped through",
+  "city": "walls and many roofs",
+  "town": "a working settlement, roofs and a road",
+  "village": "smaller than a town; fields visible from the last house",
+  "fen_town": "built on water — stilts, platforms, boats for streets",
+  "hold": "a defended place; drill-yards, walls, people who train",
+  "march": "an edge held, facing outward",
+  "tower": "one tall thing",
+  "towers": "many tall things — a skyline",
+  "eyrie": "high and wedged; reached by climbing",
+  "skyhold": "floating, or so high it may as well be",
+  "underplace": "below ground — cavern, tunnel, chamber, stair",
+  "bridge": "a crossing, and the town that keeps it",
+  "road": "a way between, with places on it",
+  "street": "a way inside a settlement",
+  "harbour": "where water meets the land and things are landed",
+  "works": "where a trade is done — forge, yard, salvage, demolition",
+  "market": "where things change hands",
+  "shop": "one seller, one roof",
+  "inn": "beds and a fire",
+  "hall": "one important room, and the building round it",
+  "archive": "kept records",
+  "temple": "a body of practice with a roof",
+  "cathedral": "a temple still being built",
+  "shrine": "small, attended, sacred",
+  "hermitage": "where people go to be alone on purpose",
+  "arena": "a ring people watch",
+  "grove": "living, tended, green",
+  "terrace": "a cut level on a slope",
+  "ruin": "what is left",
+  "waste": "open, ended ground",
+  "pole": "⛔ a POLE — a pure extremity of an axis, not a settlement. Draw these differently.",
+  "strange": "⚠️ the rules are not steady here",
+  "region": "a whole region, not a place you stand in"
+ },
+ "_poleWarning": "⛔ 12 locations are `pole` — pure extremities like the Blaze, the Scouring, the Numen. THEY ARE NOT TOWNS and an icon that says 'settlement' would lie about the most dangerous places in the world. ⚠️ They want their own mark.",
+ "kinds": {
+  "archive_hollow": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "bedrock": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "cairn_and_scour": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "cairnhold": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "choirheight": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "cloudform": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "disputed_zone_fringe": {
+   "kind": "region",
+   "from": "tier"
+  },
+  "dusklow": {
+   "kind": "town",
+   "from": "authored"
+  },
+  "dw_the_burnscar": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "dw_the_moot": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "dw_the_thinedge": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "echo_river_crossing": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "ent_deepwood": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "gearsflat": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "gen-ashwarden-march-road": {
+   "kind": "road",
+   "from": "authored"
+  },
+  "gen-cogitarium-entrance-hall": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "gen-cogitarium-third-terrace": {
+   "kind": "terrace",
+   "from": "authored"
+  },
+  "gen-disputed-zone-far-side": {
+   "kind": "ruin",
+   "from": "authored"
+  },
+  "gen-disputed-zone-left-branch-entrance": {
+   "kind": "gate",
+   "from": "authored"
+  },
+  "gen-hub-north-gate-district-street": {
+   "kind": "street",
+   "from": "authored"
+  },
+  "gen-mara-wells-store": {
+   "kind": "shop",
+   "from": "authored"
+  },
+  "gen-north-gate-registry-ossian-office": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "gen-quickwood-margin": {
+   "kind": "grove",
+   "from": "authored"
+  },
+  "gen-stillwater-s-trouble": {
+   "kind": "ruin",
+   "from": "authored"
+  },
+  "gen-the-ent-grove": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "gen-the-lower-chamber": {
+   "kind": "underplace",
+   "from": "authored"
+  },
+  "gen-the-made-gate": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "gen-the-passage-below-the-unlit-deep": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "gen-watershed-road": {
+   "kind": "road",
+   "from": "authored"
+  },
+  "gen-waygate": {
+   "kind": "waygate",
+   "from": "authored"
+  },
+  "glasshome": {
+   "kind": "region",
+   "from": "tier"
+  },
+  "greenforge": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "greenmarch": {
+   "kind": "market",
+   "from": "authored"
+  },
+  "greyhearth": {
+   "kind": "town",
+   "from": "authored"
+  },
+  "greywater_stilts": {
+   "kind": "fen_town",
+   "from": "authored"
+  },
+  "grovehome": {
+   "kind": "grove",
+   "from": "authored"
+  },
+  "hardline": {
+   "kind": "hold",
+   "from": "authored"
+  },
+  "harmonic_heights_terrace": {
+   "kind": "terrace",
+   "from": "authored"
+  },
+  "kestrels_roost": {
+   "kind": "eyrie",
+   "from": "authored"
+  },
+  "kindlerow": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "longshore": {
+   "kind": "town",
+   "from": "authored"
+  },
+  "millbrook": {
+   "kind": "village",
+   "from": "authored"
+  },
+  "old_switchback": {
+   "kind": "road",
+   "from": "authored"
+  },
+  "plainstead": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "pressureholt": {
+   "kind": "region",
+   "from": "tier"
+  },
+  "radiant_plateau_edge": {
+   "kind": "towers",
+   "from": "authored"
+  },
+  "spindrift_hollow": {
+   "kind": "strange",
+   "from": "authored"
+  },
+  "stair_hollow": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "sunken_choir": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "the_appetite_halls": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "the_axiom": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_axis_gate": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_bargain_gate": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_blaze": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_blocklands": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "the_bloodless_hold": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_ceaseless": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_churn_edge": {
+   "kind": "strange",
+   "from": "authored"
+  },
+  "the_clearing_ground": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "the_cogitarium": {
+   "kind": "skyhold",
+   "from": "authored"
+  },
+  "the_crossing": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_drawn_hour": {
+   "kind": "shrine",
+   "from": "authored"
+  },
+  "the_figure_works": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "the_flensing": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_flesh_temple": {
+   "kind": "temple",
+   "from": "authored"
+  },
+  "the_forge_eternal": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_forward_archive": {
+   "kind": "archive",
+   "from": "authored"
+  },
+  "the_gearlands_verge": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_gralloch": {
+   "kind": "region",
+   "from": "tier"
+  },
+  "the_grand_lattice": {
+   "kind": "city",
+   "from": "authored"
+  },
+  "the_great_coliseum": {
+   "kind": "arena",
+   "from": "authored"
+  },
+  "the_great_engine": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "the_greenward": {
+   "kind": "grove",
+   "from": "authored"
+  },
+  "the_grief_house": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "the_grindstone": {
+   "kind": "hold",
+   "from": "authored"
+  },
+  "the_half_cathedral": {
+   "kind": "cathedral",
+   "from": "authored"
+  },
+  "the_hall_of_mirrors": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_harborward": {
+   "kind": "harbour",
+   "from": "authored"
+  },
+  "the_heartroot": {
+   "kind": "region",
+   "from": "tier"
+  },
+  "the_held_yard": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "the_hollowing": {
+   "kind": "march",
+   "from": "authored"
+  },
+  "the_hundred_markets": {
+   "kind": "market",
+   "from": "authored"
+  },
+  "the_kept_shrine": {
+   "kind": "shrine",
+   "from": "authored"
+  },
+  "the_kindly_court": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "the_lampless_hermitage": {
+   "kind": "hermitage",
+   "from": "authored"
+  },
+  "the_lampless_market": {
+   "kind": "market",
+   "from": "authored"
+  },
+  "the_last_mask": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_leaden_deep": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "the_lensward": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_long_grey": {
+   "kind": "waste",
+   "from": "authored"
+  },
+  "the_long_span": {
+   "kind": "region",
+   "from": "tier"
+  },
+  "the-low-lamp-inn": {
+   "kind": "inn",
+   "from": "authored"
+  },
+  "the_low_market": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "the_marchward": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_maw": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "the_measured_engine": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "the_mercy_house": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "the_middle_way": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_numen": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_old_warden_post": {
+   "kind": "hold",
+   "from": "authored"
+  },
+  "the_proof_halls": {
+   "kind": "archive",
+   "from": "authored"
+  },
+  "the_quickwood_eaves": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_quiet_ground": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "the_quiet_house": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "the_redline": {
+   "kind": "hold",
+   "from": "authored"
+  },
+  "the_scour": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_scouring": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_second_reading": {
+   "kind": "hall",
+   "from": "authored"
+  },
+  "the_service_ways": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "the_slow_hour": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_slow_orchard": {
+   "kind": "grove",
+   "from": "authored"
+  },
+  "the_slow_stair": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_spent_yard": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "the_stillhold": {
+   "kind": "city",
+   "from": "authored"
+  },
+  "the_stopped": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_thinning": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_told_ground": {
+   "kind": "waste",
+   "from": "authored"
+  },
+  "the_unblinking_stone": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_underlight": {
+   "kind": "region",
+   "from": "tier"
+  },
+  "the_unfallen": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_unlanded": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_unlit_deep": {
+   "kind": "underplace",
+   "from": "depth<0"
+  },
+  "the_unplanned_room": {
+   "kind": "strange",
+   "from": "authored"
+  },
+  "the_untethered": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_wayhouse": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_weighing_yard": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "the_wellspring_deep": {
+   "kind": "pole",
+   "from": "authored"
+  },
+  "the_wend": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "the_worn_yard": {
+   "kind": "works",
+   "from": "authored"
+  },
+  "thinwater": {
+   "kind": "shrine",
+   "from": "authored"
+  },
+  "thornwake_glade": {
+   "kind": "grove",
+   "from": "authored"
+  },
+  "tier_seven": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  },
+  "tumbledown_market": {
+   "kind": "market",
+   "from": "authored"
+  },
+  "waystone": {
+   "kind": "bridge",
+   "from": "authored"
+  },
+  "wellspring": {
+   "kind": "waygate",
+   "from": "waygate:true"
+  }
+ },
+ "_counts": {
+  "underplace": 17,
+  "waygate": 28,
+  "works": 8,
+  "region": 7,
+  "town": 3,
+  "road": 3,
+  "hall": 12,
+  "terrace": 2,
+  "ruin": 2,
+  "gate": 1,
+  "street": 1,
+  "shop": 1,
+  "grove": 5,
+  "market": 4,
+  "fen_town": 1,
+  "hold": 4,
+  "eyrie": 1,
+  "village": 1,
+  "towers": 1,
+  "strange": 3,
+  "pole": 12,
+  "skyhold": 1,
+  "shrine": 3,
+  "temple": 1,
+  "archive": 2,
+  "city": 2,
+  "arena": 1,
+  "cathedral": 1,
+  "harbour": 1,
+  "march": 1,
+  "hermitage": 1,
+  "waste": 2,
+  "inn": 1,
+  "bridge": 1
+ }
+}

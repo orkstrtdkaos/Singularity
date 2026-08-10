@@ -835,6 +835,23 @@ for (const pack of PACKS) {
     }).map((l) => l.id).sort();
     check("SNG-398: no site sits beyond ONE DAY of its parent — the census is EMPTY now that the ratification landed",
       farSites.length === 0, farSites.join(" · "));
+    // ⛔ SNG-409 §6 — AN INHERITED POSITION IS A CACHED POSITION, AND CANON MOVES. SNG-407 relocated
+    // eleven locations; four promoted rooms had copied their parent's coordinates at promotion time and
+    // stayed behind when the parent left, which the distance gate above caught as two stranded sites.
+    // ⚠️ Aevi's §6 says it in general terms — "anything caching a distance is stale" — and a room's
+    // position is exactly that. This holds the invariant directly so the next move heals by rebuild
+    // rather than by someone noticing.
+    const strandedRooms = allLocs.filter((l) => {
+      if (!l.worldPosInherited || !l.worldPos) return false;
+      let anc = l.parentId, hops = 0;
+      while (anc && canon.locs[anc]?.worldPosInherited && hops++ < 4) anc = canon.locs[anc].parentId;
+      const p = canon.locs[anc];
+      if (!p?.worldPos) return false;
+      return Math.abs(p.worldPos.colatitude - l.worldPos.colatitude) > 1e-9
+        || Math.abs(p.worldPos.longitude - l.worldPos.longitude) > 1e-9;
+    }).map((l) => l.id);
+    check("SNG-409 §6: every inherited position still MATCHES its parent — a room does not stay behind when its building moves",
+      strandedRooms.length === 0, strandedRooms.join(" · "));
     // ⛔ THE RED IS PROVED BY CONSTRUCTION, AND MY FIRST FORM OF IT WAS A DESIGN ERROR WORTH KEEPING
     // ON THE RECORD: I asserted `farSites.length === 65` — today's broken data — as the proof the gate
     // could fire. That inverts the moment the data is FIXED: Aevi's ratification would have turned my

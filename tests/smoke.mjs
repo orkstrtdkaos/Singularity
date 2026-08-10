@@ -7116,7 +7116,8 @@ await (async () => {
       const l = JSON.parse(readFileSync(join(locDir394, f), "utf8")); locs394[l.id] = l;
     }
     const wpos394 = (id) => locs394[id]?.worldPos
-      ? { longitude: locs394[id].worldPos.longitude, colatitude: locs394[id].worldPos.colatitude } : null;
+      ? { longitude: locs394[id].worldPos.longitude, colatitude: locs394[id].worldPos.colatitude,
+          depth: locs394[id].worldPos.depth || 0 } : null;
     const waterCensus = (posOf) => {
       const wet = new Set(), seen = new Set();
       for (const yaw of [0, 120, 240]) {
@@ -7124,7 +7125,14 @@ await (async () => {
         for (const pin of WG.visiblePins(t, v394, posOf)) {
           seen.add(pin.id);
           const u = WG.unproject(pin.x, pin.y, v394);
-          if (WG.sampleAt(t, u.lon, u.lat).type === 0) wet.add(pin.id);
+          // ⛔ AN UNDERPLACE MAY HAVE SEA ABOVE IT — and the first version of this gate would have called
+          // that a bug. SNG-407 moved the Unlit Deep and it came up "standing on water"; it carries
+          // depth −5, `location_kinds` calls it an `underplace`, and waterauth says in as many words
+          // "'past the harbor' — sea, and it is a cavern." ⚠️ So the rule is about the SURFACE: a place
+          // at or above ground must stand on ground, and a place below it is under whatever is up there.
+          // Encoding that beats listing the name, because the next cavern gets it for free.
+          const belowGround = (posOf(pin.id) || {}).depth < 0;
+          if (!belowGround && WG.sampleAt(t, u.lon, u.lat).type === 0) wet.add(pin.id);
         }
       }
       return { wet, seen };
@@ -7207,7 +7215,7 @@ await (async () => {
     // budget, interpolate per pixel. A slower machine gets less detail, never a frozen tab.
     const winB = { la0: -80, la1: -60, lo0: -110, lo1: -80 };
     const tBuild0 = Date.now();
-    const patch402 = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, winB), winB, { budgetMs: 70 });
+    const patch402 = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, winB), { lat: -70, lon: -95 }, 10, { budgetMs: 70 });
     const buildMs = Date.now() - tBuild0;
     check("402: the detail patch is BUDGETED work, not per-pixel — the eleven-second repaint cannot come back",
       patch402.bufferW >= 32 && patch402.bufferH >= 32 && buildMs < 1500,
@@ -7215,19 +7223,42 @@ await (async () => {
     // ⛔ THE BUFFER TRACKS THE WINDOW'S GROUND SHAPE. A square buffer over a window padded by 1/cos(lat)
     // — 24° of latitude against SEVENTY-ONE of longitude near the Crossing — sampled COARSER than the
     // raster it replaced, so the "detail" path drew a blockier world more slowly and nothing reported it.
-    const polarWin = { la0: -82, la1: -58, lo0: -130, lo1: -60 };
-    const polarPatch = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, polarWin), polarWin, { budgetMs: 140 });
-    check("402: …and it samples EQUAL GROUND in both directions — a square buffer near the pole was coarser than the bake",
-      Math.abs(polarPatch.degPerSampleLon - polarPatch.degPerSampleLat) < 0.05 * polarPatch.degPerSampleLat,
-      `lon ${polarPatch.degPerSampleLon.toFixed(3)}°/sample vs lat ${polarPatch.degPerSampleLat.toFixed(3)}°`);
+    // ⛔ SNG-409 §2 — THE CROSSING IS AT LATITUDE −90 EXACTLY and a lat/lon window cannot cover it: the
+    // half-width divides by cos(lat), which is zero there, and capping it leaves most of the ring around
+    // the pole outside the patch. MEASURED BEFORE THE REWRITE: at a 4° view centred on the Crossing only
+    // 12.5% of visible ground had any detail. A tangent frame has no pole and no special case.
+    const poleWin = { la0: -90, la1: -80, lo0: -180, lo1: 180 };
+    const polePatch = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, poleWin), { lat: -90, lon: 0 }, 5.6, { budgetMs: 140 });
+    let covered = 0, probes = 0;
+    for (let r = 0.1; r <= 4; r += 0.2) for (let b = 0; b < 360; b += 10) {
+      probes++; if (polePatch(((b + 180) % 360) - 180, -90 + r) !== null) covered++;
+    }
+    check("409 §2: the Crossing is ordinary ground — a patch centred on the pole covers ALL of it, not a wedge",
+      covered === probes, `${(100 * covered / probes).toFixed(1)}% covered (was 12.5% with a lat/lon window)`);
+    // ⚠️ HER ACCEPTANCE TEST, RUN AS SHE SPECIFIED IT: sample rings around the Crossing; variation should
+    // run outward about as fast as it runs around. She treated an angular/radial ratio above ~1.5 as streaked.
+    const ringAt = (r, b) => { const s2 = polePatch(((b + 180) % 360) - 180, -90 + r); return s2 ? s2.raw : null; };
+    let ang = 0, an = 0, rad = 0, rn = 0;
+    const RAD = [0.5, 1, 1.5, 2, 2.5, 3], ST = 72;
+    for (const r of RAD) { let prev = null, first = null;
+      for (let i = 0; i < ST; i++) { const v = ringAt(r, (i / ST) * 360); if (v == null) continue;
+        if (prev != null) { ang += Math.abs(v - prev); an++; } if (first == null) first = v; prev = v; }
+      if (prev != null && first != null) { ang += Math.abs(first - prev); an++; } }
+    for (let b = 0; b < 360; b += 5) { let prev = null;
+      for (let k = 0; k <= ST; k++) { const v = ringAt(RAD[0] + (RAD[5] - RAD[0]) * (k / ST), b);
+        if (v == null) continue; if (prev != null) { rad += Math.abs(v - prev); rn++; } prev = v; } }
+    const meanR = RAD.reduce((a, b) => a + b, 0) / RAD.length;
+    const ratio = ((ang / an) / ((2 * Math.PI * meanR) / ST)) / Math.max(1e-9, (rad / rn) / ((RAD[5] - RAD[0]) / ST));
+    check("409 §2: …and it does not STREAK — variation runs outward about as fast as it runs around",
+      ratio < 1.5, `angular/radial ratio ${ratio.toFixed(2)} (Aevi's threshold 1.5)`);
     // ⛔ THE SHORELINE IS FINER THAN THE BUFFER THAT DREW IT. Nearest-neighbour type snapped land/sea to
     // the sample grid and left a staircase however smooth the elevation was — the artifact Erik saw on the
     // second look. sign(raw) is the coast (100.000% against the generator over 20,000 samples), so the
     // interpolated field crosses zero exactly where the shore runs. Assert the crossing is genuinely
     // sub-sample: walk a short line across a coast and count the transitions the buffer alone could not see.
     const coastWin = { la0: -60, la1: -40, lo0: -80, lo1: -50 };
-    const coastPatch = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, coastWin), coastWin, { budgetMs: 140 });
-    const stepLon = (coastWin.lo1 - coastWin.lo0) / coastPatch.bufferW;
+    const coastPatch = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, coastWin), { lat: -50, lon: -65 }, 10, { budgetMs: 140 });
+    const stepLon = coastPatch.degPerSampleLon;
     // ⚠️ A COAST IS A ONE-DIMENSIONAL FEATURE, so the honest count is small: of 4,000 probes most sit
     // deep inland or in open sea and only a handful straddle a shore. The claim is not "many" — it is
     // that ANY exist, because a nearest-neighbour sampler gives exactly ZERO by construction: two points
@@ -7237,8 +7268,12 @@ await (async () => {
     for (let la = -59; la < -41; la += 0.37) {
       for (let lo = -79; lo < -51; lo += stepLon) {
         const a2 = lo + stepLon * 0.28, b2 = lo + stepLon * 0.62;   // both inside one cell
+        // ⚠️ the patch is a tangent DISC, so a rectangular scan runs off its edge and gets the decline
+        // that SNG-405 put there on purpose — skip those rather than treat "no data" as a transition.
+        const pa = coastPatch(a2, la), pb = coastPatch(b2, la);
+        if (!pa || !pb) continue;
         sameCellPairs++;
-        if (coastPatch(a2, la).type !== coastPatch(b2, la).type) subSample++;
+        if (pa.type !== pb.type) subSample++;
       }
     }
     check("402: the SHORELINE is finer than the buffer — land/sea resolves inside a sample cell, not on its grid",
@@ -7282,7 +7317,7 @@ await (async () => {
     // outside the tile got painted with whatever sat on its border, in tile-shaped rectangles. That is
     // not the raster showing through: it is the detail path confidently drawing ground it never sampled.
     const winC = { la0: -60, la1: -50, lo0: -80, lo1: -70 };
-    const patchC = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, winC), winC, { budgetMs: 60 });
+    const patchC = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, winC), { lat: -55, lon: -75 }, 5, { budgetMs: 60 });
     check("405: a detail patch DECLINES beyond its own window instead of smearing its edge across the map",
       patchC(-75, -55) !== null && patchC(-120, -55) === null && patchC(-75, -20) === null);
 
@@ -7320,7 +7355,7 @@ await (async () => {
 
     // ⚠️ and it declines when it cannot beat the raster, instead of drawing something worse
     const hugeWin = { la0: -89, la1: 89, lo0: -180, lo1: 180 };
-    const hugePatch = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, hugeWin), hugeWin, { budgetMs: 20 });
+    const hugePatch = WG2.makeFinePatch(t402, TG.makeTerrain(gp402, hugeWin), { lat: 0, lon: 0 }, 89, { budgetMs: 20 });
     check("402: …and a patch that cannot beat the bake DECLINES rather than drawing a coarser world",
       hugePatch.worthIt === false && patch402.worthIt === true);
     // ⚠️ and it must still agree with the exact sampler it approximates, or speed bought a different world

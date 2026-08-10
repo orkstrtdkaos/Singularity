@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.109";
+const APP_VERSION = "1.9.110";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7050,33 +7050,35 @@ function wireWorldGlobe() {
     const c = unproject(view.cx, view.cy, view);
     if (!c) return null;
     // ⛔ THE LEVEL MUST ROUND UP, OR THE WINDOW FAILS TO COVER THE VIEW. `round` let the quantised span
-    // land BELOW the real one — a 10.7° view got an 8° level and an 11.2° window, so the frame edges fell
-    // outside the patch, declined to the bake, and came back as a staircase around the border. That was
-    // the "certain zoom levels glitch" band: not a bad patch, a patch that stopped short.
-    // ⚠️ QUARTER-OCTAVES, not octaves. Doubling steps mean the window can be twice the view at the
-    // bottom of a step, and every wasted degree is resolution taken out of the picture; a 1.19× ladder
-    // keeps the window within 1.4–1.67× the view at every zoom while still giving the cache discrete
-    // levels to hit — four per octave instead of one.
+    // land BELOW the real one, so the frame edges fell outside the patch and came back as a staircase.
+    // ⚠️ QUARTER-OCTAVES, not octaves: a doubling ladder can leave the patch twice the view at the
+    // bottom of a step, and every wasted degree is resolution taken out of the picture.
     const level = Math.ceil(Math.log2(Math.max(0.05, span)) * 4) / 4;
     const levelSpan = Math.pow(2, level);
     const half = levelSpan * 0.7;
-    const conv = Math.max(0.12, Math.cos(c.lat * Math.PI / 180));
-    // snap the CENTRE (in ground units, since meridians converge) so a small pan reuses the same patch
-    const snapLat = levelSpan / 3, snapLon = snapLat / conv;
-    const cLat = Math.round(c.lat / snapLat) * snapLat, cLon = Math.round(c.lon / snapLon) * snapLon;
-    const la0 = Math.max(-90, cLat - half), la1 = Math.min(90, cLat + half);
-    const halfLon = Math.min(180, half / conv);
-    const win = { la0, la1, lo0: cLon - halfLon, lo1: cLon + halfLon };
-    const key = `${level}|${cLat.toFixed(3)}|${cLon.toFixed(3)}`;
+    // ⛔ THE PATCH IS A TANGENT DISC NOW, so there is no cos(lat) term and no pole case: snap the
+    // CENTRE on the sphere and the patch is square in ground units wherever it lands. That is what makes
+    // the Crossing — latitude −90 exactly — ordinary ground rather than a special case.
+    const snap = levelSpan / 3;
+    const cLat = Math.round(c.lat / snap) * snap;
+    const conv = Math.max(0.05, Math.cos(cLat * Math.PI / 180));
+    // longitude still snaps in GROUND units so a pan reuses the same patch; at the pole the meridians
+    // converge to nothing, so there the centre longitude simply stops mattering and is pinned.
+    const snapLon = Math.abs(cLat) > 88 ? 360 : snap / conv;
+    const cLon = Math.abs(cLat) > 88 ? 0 : Math.round(c.lon / snapLon) * snapLon;
+    const key = level + "|" + cLat.toFixed(3) + "|" + cLon.toFixed(3);
     let patch = _fineCache.get(key);
     if (!patch) {
-      // ⛔ BUDGETED, NOT PER-PIXEL — calling the generator for every screen pixel cost ELEVEN SECONDS a
-      // repaint and read as a crash. The cull itself costs real work, so it lives inside the guard too.
-      patch = makeFinePatch(_terrain, _fineGen.make(_fineGen.gp, win), win, { budgetMs: 140 });
+      // the cull window still has to be a lat/lon box for the generator, so it is derived from the disc
+      // and padded — near a pole that means every longitude, which is correct rather than capped.
+      const wLa0 = Math.max(-90, cLat - half * 1.5), wLa1 = Math.min(90, cLat + half * 1.5);
+      const polar = Math.abs(cLat) + half * 1.5 >= 89.5;
+      const wLon = polar ? 180 : Math.min(180, (half * 1.5) / conv);
+      const win = { la0: wLa0, la1: wLa1, lo0: cLon - wLon, lo1: cLon + wLon };
+      patch = makeFinePatch(_terrain, _fineGen.make(_fineGen.gp, win), { lat: cLat, lon: cLon }, half, { budgetMs: 140 });
       _fineCache.set(key, patch);
       if (_fineCache.size > FINE_CACHE_MAX) _fineCache.delete(_fineCache.keys().next().value);
     }
-    // ⚠️ decline rather than degrade — see worthIt: a patch coarser than the bake is slower AND blockier
     return patch.worthIt ? patch : null;
   }
 

@@ -146,114 +146,141 @@ const hyp = (v) => {
  *  ⚠️ THE SEAM PROPERTY SURVIVES THE REWRITE, which is why it is worth stating twice: the per-cell anchor
  *  is taken from THIS BUFFER by the same interpolant, so at a baked cell centre the correction is exactly
  *  zero and base and patch cannot drift apart. */
-export function makeFinePatch(t, gen, win, opts) {
+/** ⛔ THE PATCH IS PARAMETERISED IN A TANGENT FRAME, NOT IN LATITUDE AND LONGITUDE — and the Crossing is
+ *  why. It sits at latitude −90 EXACTLY, where a full 360° of longitude spans zero distance, so a lat/lon
+ *  window is not merely awkward there, it is the wrong shape: the half-width has to be divided by
+ *  cos(lat), which at the pole is a division by zero, and capping it leaves most of the ring around the
+ *  pole outside the window. ⚠️ MEASURED BEFORE REWRITING: at a 4° view centred on the Crossing only
+ *  12.5% of the visible ground had any detail at all — the other 87.5% fell back to the 480×240 bake.
+ *  Aevi predicted exactly this from her prototype ("a wedge of bare globe from capping longitude span")
+ *  and she was right; her other predicted failure, the radial starburst, is the same cause seen from the
+ *  other side — equirectangular rows collapse to nothing at the pole and smear what they do carry.
+ *
+ *  ⚠️ A TANGENT FRAME HAS NO SPECIAL CASE AND NO POLE. Sample (east, north) offsets in degrees of ARC
+ *  from the patch centre and rotate them onto the sphere; the sampling is uniform on the ground at every
+ *  latitude, which also retires the cos(lat) aspect correction the buffer used to need. The basis is
+ *  built from a helper axis chosen to be non-parallel to the centre, which is the one line that keeps it
+ *  degenerate-free AT the pole rather than merely near it.
+ *
+ *  ⚠️ The seam property is unchanged and still the load-bearing constraint (Aevi measured her own seam at
+ *  2.44% disagreement): the per-cell anchor is taken from THIS buffer by the same interpolant, so at a
+ *  baked cell centre the correction is exactly zero and base and detail cannot draw different worlds. */
+export function makeFinePatch(t, gen, centre, halfDeg, opts) {
   const o = opts || {};
   const now = () => (typeof performance !== "undefined" ? performance.now() : Date.now());
-  // ⚠️ CALIBRATE WARM, OR THE BUDGET THROWS AWAY THE DETAIL IT WAS SIZED TO BUY. Measured cold, the
-  // first calls run interpreted and read 37.5µs against a warm 6µs — six times pessimistic, which pinned
-  // the buffer to its 48² floor and gave a regional view no finer than the bake it was replacing. A
-  // performance guard that silently disables the feature it is guarding is worse than none: it looks
-  // like it works. Discard a warmup batch, then time.
-  for (let i = 0; i < 48; i++) gen(win.lo0 + (i % 13) * 0.07, win.la0 + (i % 11) * 0.05);
+  const lat0 = centre.lat * Math.PI / 180, lon0 = centre.lon * Math.PI / 180;
+
+  // orthonormal basis at the patch centre
+  const up = [Math.cos(lat0) * Math.cos(lon0), Math.cos(lat0) * Math.sin(lon0), Math.sin(lat0)];
+  // ⚠️ the helper must not be parallel to `up`, or the cross product vanishes — which is precisely the
+  // degeneracy that makes every lat/lon scheme fail at a pole. Swapping the helper near the poles costs
+  // one comparison and removes the special case entirely.
+  const helper = Math.abs(up[2]) > 0.9 ? [1, 0, 0] : [0, 0, 1];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const unit = (v) => { const m = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / m, v[1] / m, v[2] / m]; };
+  const east = unit(cross(helper, up));
+  const north = cross(up, east);
+
+  /** (east, north) offsets in DEGREES OF ARC → [lon, lat] in degrees */
+  const frameToLonLat = (e, n) => {
+    const d = Math.hypot(e, n) * Math.PI / 180;
+    if (d < 1e-12) return [centre.lon, centre.lat];
+    const ce = (e / (Math.hypot(e, n) || 1)), cn = (n / (Math.hypot(e, n) || 1));
+    const sd = Math.sin(d), cd = Math.cos(d);
+    const v = [up[0] * cd + (east[0] * ce + north[0] * cn) * sd,
+               up[1] * cd + (east[1] * ce + north[1] * cn) * sd,
+               up[2] * cd + (east[2] * ce + north[2] * cn) * sd];
+    return [Math.atan2(v[1], v[0]) * 180 / Math.PI, Math.asin(Math.max(-1, Math.min(1, v[2]))) * 180 / Math.PI];
+  };
+  /** [lon, lat] → (east, north) offsets in degrees, or null when it falls outside the patch */
+  const lonLatToFrame = (lon, lat) => {
+    const la = lat * Math.PI / 180, lo = lon * Math.PI / 180;
+    const v = [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)];
+    const dot = Math.max(-1, Math.min(1, v[0] * up[0] + v[1] * up[1] + v[2] * up[2]));
+    const d = Math.acos(dot) * 180 / Math.PI;
+    if (d > halfDeg * 1.45) return null;                       // far outside — cheap reject before the rest
+    const tx = [v[0] - up[0] * dot, v[1] - up[1] * dot, v[2] - up[2] * dot];
+    const m = Math.hypot(tx[0], tx[1], tx[2]);
+    if (m < 1e-12) return [0, 0];
+    const te = (tx[0] * east[0] + tx[1] * east[1] + tx[2] * east[2]) / m;
+    const tn = (tx[0] * north[0] + tx[1] * north[1] + tx[2] * north[2]) / m;
+    return [te * d, tn * d];
+  };
+
+  // calibrate warm — measured cold, the first calls run interpreted and read six times pessimistic,
+  // which pins the buffer to its floor and silently disables the detail it was sized to buy.
+  for (let i = 0; i < 48; i++) { const [lo, la] = frameToLonLat((i % 7) * 0.01, (i % 5) * 0.01); gen(lo, la); }
   const t0 = now();
   let probes = 0;
-  for (let i = 0; i < 192; i++) { gen(win.lo0 + (i % 29) * 0.03, win.la0 + (i % 23) * 0.04); probes++; }
+  for (let i = 0; i < 192; i++) { const [lo, la] = frameToLonLat((i % 29) * 0.003, (i % 23) * 0.004); gen(lo, la); probes++; }
   const perCallUs = Math.max(0.4, (now() - t0) * 1000 / probes);
-  const budgetCalls = Math.max(2304, Math.min(200000, ((o.budgetMs ?? 70) * 1000) / perCallUs));
+  // ⚠️ SQUARE BY CONSTRUCTION. In a tangent frame both axes are already degrees of ground, so the aspect
+  // correction the lat/lon buffer needed — and got wrong near the pole — simply does not arise.
+  const n = Math.max(32, Math.min(384, Math.round(Math.sqrt(((o.budgetMs ?? 70) * 1000) / perCallUs))));
 
-  // ⛔ THE BUFFER MUST MATCH THE WINDOW'S GROUND SHAPE, NOT BE SQUARE — and a square one silently made
-  // the whole feature WORSE THAN THE BAKE at high latitude. Meridians converge, so a window padded by
-  // half/cos(lat) spans 24° of latitude and SEVENTY-ONE of longitude near the Crossing; 73² samples over
-  // that is 0.98° per sample east-west against the raster's 0.75°. The detail path was drawing a coarser
-  // world than the one it replaced, and the picture looked blocky in exactly the way the fix promised to
-  // cure. ⚠️ Allocate for EQUAL GROUND RESOLUTION in both directions: aspect from the window's true
-  // extent on the sphere, not from its extent in degrees.
-  const midLat = (win.la0 + win.la1) / 2;
-  const conv = Math.max(0.12, Math.cos(midLat * Math.PI / 180));
-  const groundLon = Math.max(1e-6, (win.lo1 - win.lo0) * conv), groundLat = Math.max(1e-6, win.la1 - win.la0);
-  const nw = Math.max(32, Math.min(512, Math.round(Math.sqrt(budgetCalls * groundLon / groundLat))));
-  const nh = Math.max(32, Math.min(512, Math.round(budgetCalls / nw)));
-
-  const dLon = (win.lo1 - win.lo0) / (nw - 1), dLat = (win.la1 - win.la0) / (nh - 1);
-  const raw = new Float32Array(nw * nh), typ = new Uint8Array(nw * nh), del = new Float32Array(nw * nh);
-  for (let j = 0; j < nh; j++) {
-    const lat = win.la0 + j * dLat;
-    for (let i = 0; i < nw; i++) {
-      const g = gen(win.lo0 + i * dLon, lat);
-      raw[j * nw + i] = g.raw; typ[j * nw + i] = g.type;
+  const step = (2 * halfDeg) / (n - 1);
+  const raw = new Float32Array(n * n), typ = new Uint8Array(n * n), del = new Float32Array(n * n);
+  for (let j = 0; j < n; j++) {
+    const nOff = -halfDeg + j * step;
+    for (let i = 0; i < n; i++) {
+      const [lo, la] = frameToLonLat(-halfDeg + i * step, nOff);
+      const g = gen(lo, la);
+      raw[j * n + i] = g.raw; typ[j * n + i] = g.type;
     }
   }
-  // bilinear read of the raw field, in window space
-  const at = (arr, lon, lat) => {
-    const fx = Math.max(0, Math.min(nw - 1, (lon - win.lo0) / dLon));
-    const fy = Math.max(0, Math.min(nh - 1, (lat - win.la0) / dLat));
+  const at = (arr, e, nn) => {
+    const fx = Math.max(0, Math.min(n - 1, (e + halfDeg) / step));
+    const fy = Math.max(0, Math.min(n - 1, (nn + halfDeg) / step));
     const x0 = Math.floor(fx), y0 = Math.floor(fy);
-    const x1 = Math.min(nw - 1, x0 + 1), y1 = Math.min(nh - 1, y0 + 1);
+    const x1 = Math.min(n - 1, x0 + 1), y1 = Math.min(n - 1, y0 + 1);
     const tx = fx - x0, ty = fy - y0;
-    const a = arr[y0 * nw + x0], b = arr[y0 * nw + x1], c = arr[y1 * nw + x0], d = arr[y1 * nw + x1];
+    const a = arr[y0 * n + x0], b = arr[y0 * n + x1], c = arr[y1 * n + x0], d = arr[y1 * n + x1];
     return (a * (1 - tx) + b * tx) * (1 - ty) + (c * (1 - tx) + d * tx) * ty;
   };
-  const nearestType = (lon, lat) => {
-    const x = Math.round(Math.max(0, Math.min(nw - 1, (lon - win.lo0) / dLon)));
-    const y = Math.round(Math.max(0, Math.min(nh - 1, (lat - win.la0) / dLat)));
-    return typ[y * nw + x];
+  const nearestType = (e, nn) => {
+    const x = Math.round(Math.max(0, Math.min(n - 1, (e + halfDeg) / step)));
+    const y = Math.round(Math.max(0, Math.min(n - 1, (nn + halfDeg) / step)));
+    return typ[y * n + x];
   };
-  // second pass: turn raw into a DELTA against the baked cell the sample falls in, so the per-pixel read
-  // is one interpolation with no map lookup and no further generator calls.
+
+  // second pass: raw → a DELTA against the baked cell it falls in, so the per-pixel read is one
+  // interpolation with no map lookup and no further generator calls.
   const anchors = new Map();
-  for (let j = 0; j < nh; j++) {
-    const lat = win.la0 + j * dLat;
-    for (let i = 0; i < nw; i++) {
-      const lon = win.lo0 + i * dLon;
-      const ci = elevIdx(t, lon, lat);
+  for (let j = 0; j < n; j++) {
+    const nOff = -halfDeg + j * step;
+    for (let i = 0; i < n; i++) {
+      const e = -halfDeg + i * step;
+      const [lo, la] = frameToLonLat(e, nOff);
+      const ci = elevIdx(t, lo, la);
       let a = anchors.get(ci);
       if (a === undefined) {
         const cj = Math.floor(ci / t.ew), ck = ci % t.ew;
-        a = elevFromRawExact(t, at(raw, -180 + ((ck + 0.5) / t.ew) * 360, 90 - ((cj + 0.5) / t.eh) * 180));
+        const cLon = -180 + ((ck + 0.5) / t.ew) * 360, cLat = 90 - ((cj + 0.5) / t.eh) * 180;
+        const f = lonLatToFrame(cLon, cLat);
+        a = f ? elevFromRawExact(t, at(raw, f[0], f[1])) : elevFromRawExact(t, raw[j * n + i]);
         anchors.set(ci, a);
       }
-      del[j * nw + i] = elevFromRawExact(t, raw[j * nw + i]) - a;
+      del[j * n + i] = elevFromRawExact(t, raw[j * n + i]) - a;
     }
   }
-  // ⛔ THE COASTLINE COMES FROM THE INTERPOLATED FIELD, NOT FROM THE NEAREST SAMPLE — this is the whole
-  // visual difference and it costs nothing. Nearest-neighbour type snaps land/sea to the buffer grid, so
-  // a 0.32° buffer draws a 14-screen-pixel staircase no matter how smooth the elevation underneath is;
-  // Erik's second look at the "fixed" zoom was still stepped for exactly this reason.
-  // ⚠️ `sign(raw)` IS the shoreline, verified against the generator over 20,000 samples at 100.000%:
-  // land returns log1p(known*3)*0.30 + relief*1.5 which is strictly positive, water returns
-  // max(known, unk) which is not. So the bilinear raw field crosses zero exactly where the coast runs,
-  // and reading the crossing gives a shoreline finer than the samples that produced it.
-  // ⚠️ The land SUBTYPE (plain / volcanic / unexplored) still comes from the nearest sample: those are
-  // region-scale facts, and interpolating a category rather than a field would invent ground.
-  // ⛔ OUTSIDE THE WINDOW IT DECLINES — IT DOES NOT CLAMP. Every read was pinned into range with
-  // Math.min/Math.max, so a point beyond the patch returned the EDGE sample: the whole area outside the
-  // tile got painted with whatever happened to sit on its border, in tile-shaped rectangles. That is the
-  // blockiness Erik photographed, and it is not the raster showing through — it is the detail path
-  // confidently drawing ground that was never sampled. ⚠️ Returning null lets the caller fall back to the
-  // bake, which is the honest answer for ground this patch does not cover.
-  const inside = (lon, lat) => lat >= win.la0 && lat <= win.la1 && lon >= win.lo0 && lon <= win.lo1;
+
   const sampler = (lon, lat) => {
-    if (!inside(lon, lat)) return null;
-    const r = at(raw, lon, lat);
-    const near = nearestType(lon, lat);
-    const type = r > 0 ? (near === 0 ? 1 : near) : 0;
-    return { type, raw: r, elevDelta: at(del, lon, lat) };
+    const f = lonLatToFrame(lon, lat);
+    // ⛔ DECLINES rather than clamps: a point beyond the patch returned its EDGE sample once, which
+    // painted everything outside the patch with whatever sat on its border, in patch-shaped rectangles.
+    if (!f || Math.abs(f[0]) > halfDeg || Math.abs(f[1]) > halfDeg) return null;
+    const r = at(raw, f[0], f[1]);
+    const near = nearestType(f[0], f[1]);
+    return { type: r > 0 ? (near === 0 ? 1 : near) : 0, raw: r, elevDelta: at(del, f[0], f[1]) };
   };
-  sampler.covers = inside;
-  sampler.bufferN = Math.min(nw, nh);       // reported so a gate can see the budget was honoured
-  sampler.bufferW = nw; sampler.bufferH = nh;
-  // ⚠️ the honest measure of whether this is worth doing at all: ground degrees per sample against the
-  // 0.75° bake. Below 1.0 the patch is FINER than the raster; above it, it is not worth drawing.
-  sampler.degPerSampleLon = (win.lo1 - win.lo0) / nw * conv;
-  sampler.degPerSampleLat = (win.la1 - win.la0) / nh;
-  // ⛔ AND IT REFUSES TO DRAW A WORSE WORLD THAN THE ONE IT REPLACES. The square-buffer bug shipped a
-  // patch sampling 0.98° east-west against the raster's 0.75° — slower AND blockier, and nothing said so
-  // because "detail is on" was never checked against "detail is finer". `worthIt` is that check, and the
-  // caller drops back to the bake when it is false: a feature that cannot help should decline, not
-  // degrade. The bake's own cell is 360/480 = 0.75°.
-  const bakeDeg = 360 / t.w;
-  sampler.worthIt = Math.max(sampler.degPerSampleLon, sampler.degPerSampleLat) < bakeDeg * 0.9;
+  sampler.bufferN = n;
+  sampler.bufferW = n; sampler.bufferH = n;
   sampler.perCallUs = perCallUs;
+  sampler.degPerSampleLon = step;
+  sampler.degPerSampleLat = step;
+  // the bake's own cell is 360/480 = 0.75°; below that this is worth drawing, above it is not
+  sampler.worthIt = step < (360 / t.w) * 0.9;
+  sampler.covers = (lon, lat) => sampler(lon, lat) !== null;
   return sampler;
 }
 

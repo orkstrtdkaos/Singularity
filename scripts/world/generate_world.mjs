@@ -74,14 +74,43 @@ export function loadCanon() {
 
 /** ⛔ THE SEED GATE. genparams.pts must be exactly the canon derivation — a genparams edited by hand while
  *  worldPos moved is the §1 desync in its purest form, and it fails HERE rather than rendering wrong. */
+/** ⛔ THIS GATE ENCODED A MODEL ERIK HAS SINCE OVERTURNED, AND KEEPING IT WOULD HAVE INVERTED HIS RULING.
+ *  It asserted that `genparams.pts` EQUALS the canon worldPos derivation — i.e. that positions define the
+ *  land. SNG-407 then moved eleven locations onto real coast and river, and Erik ruled: **the land is
+ *  ground truth, so positions serve the terrain and travel follows position.**
+ *
+ *  ⚠️ Under that ruling the equality is not merely unnecessary, it is HARMFUL: `pts` is the generator's
+ *  input, so syncing it to the moved positions would RESHAPE THE COAST those locations were just snapped
+ *  onto. The land would chase the towns that were placed to sit on it. Aevi measured the same mechanism
+ *  from the other side in SNG-405 — "the pts sigma making continent wherever locations cluster."
+ *
+ *  ⛔ So `pts` is FROZEN AUTHORED INPUT and position drift is expected. The build was already correct:
+ *  `makeTerrain(canon.gp)` draws the land from pts, while the biome/density/nanite votes and the region
+ *  medoids read current worldPos. Only this check was still arguing.
+ *
+ *  ⚠️ What replaces it is a CENSUS, not silence. Drift is legitimate but it should never be invisible: a
+ *  location that has wandered far from the ground that was generated around it is a thing to look at, and
+ *  a MASS move would show up here as a changed count rather than as a surprise in the picture. */
+export function seedDrift(canon) {
+  const pts = canon.gp.pts.map((p) => [p[0], norm(p[1])]);
+  const rows = [];
+  for (const s of canon.seeds) {
+    let best = Infinity;
+    for (const q of pts) {
+      const d = Math.hypot(s.lat - q[0], ((norm(s.lon) - q[1] + 540) % 360 - 180) * Math.cos(s.lat * R));
+      if (d < best) best = d;
+    }
+    if (best > 0.001) rows.push({ id: s.id, movedDeg: Math.round(best * 100) / 100 });
+  }
+  rows.sort((a, b) => b.movedDeg - a.movedDeg);
+  return { moved: rows, ptsCount: canon.gp.pts.length, seedCount: canon.seeds.length };
+}
+
+/** The one thing still worth FAILING on: the generator's own input must not change size underneath the
+ *  asset. A pts list that gained or lost points is a different world, not a moved town. */
 export function verifySeeds(canon) {
   const bad = [];
-  const have = new Set(canon.gp.pts.map((p) => p[0].toFixed(4) + "," + p[1].toFixed(4)));
-  for (const s of canon.seeds) {
-    const key = s.lat.toFixed(4) + "," + norm(s.lon).toFixed(4);
-    if (!have.has(key)) bad.push(`${s.id} — canon seed [${s.lat},${s.lon}] missing from genparams.pts`);
-  }
-  if (canon.gp.pts.length !== canon.seeds.length) bad.push(`count: genparams ${canon.gp.pts.length} vs canon ${canon.seeds.length}`);
+  if (canon.gp.pts.length !== 118) bad.push(`genparams.pts is ${canon.gp.pts.length}, not the authored 118 — the LAND changed, which is not a position move`);
   return bad;
 }
 
@@ -281,6 +310,11 @@ export function serialise(built, canon) {
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1].replace(/\\/g, "/").replace(/^([a-z]):/i, (m) => m.toUpperCase()) ? true : process.argv[1]?.endsWith("generate_world.mjs");
 if (isMain) {
   const canon = loadCanon();
+  // ⚠️ the drift census prints on every build — legitimate under Erik's ruling, never invisible
+  const drift = seedDrift(canon);
+  if (drift.moved.length) console.log(`  seed drift: ${drift.moved.length} location(s) have moved off the ground generated around them — ` +
+    drift.moved.slice(0, 5).map((r) => r.id + ' ' + r.movedDeg + '°').join(', ') + (drift.moved.length > 5 ? ', …' : '') +
+    ' (land is ground truth: positions serve the terrain — Erik, SNG-407)');
   const seedBad = verifySeeds(canon);
   if (seedBad.length) {
     console.error("⛔ SEED DRIFT — genparams.pts no longer matches canon worldPos:");

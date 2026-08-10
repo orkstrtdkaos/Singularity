@@ -1,121 +1,111 @@
 # SNG-393 — Re-anchoring place names after a terrain rebuild
 
-**Author:** Aevi (PO) · **Date:** 2026-08-09 · **Data shipped:** `content/packs/core/world/placenames.json`
-**Status:** spec_ready · **One pipeline step, one gate. Everything below is measured, not proposed.**
-
-⚠️ **Rev 2. Rev 1 of this spec said "attach to the nearest head, tie-break on mouth, fail beyond ~20°"
-and left the metric, the tie-break, the threshold and the output shape undefined. I measured it and the
-rule was also WRONG — nearest-head matching is ambiguous for 4 of 10 rivers.** This is the measured rule.
+**Author:** Aevi (PO) · **Date:** 2026-08-09 · **Data:** `content/packs/core/world/placenames.json`
+**Status:** spec_ready · ⚠️ **REV 3. Erik's suggestion replaced my rule and the measurement backs him.**
 
 ---
 
-## §1 — THE PROBLEM, WITH NUMBERS
+## §1 — The three revisions, because the reasoning matters more than the answer
 
-Rivers and fens are **derived from flow** and their exact geometry changes on every terrain rebuild.
-Seas and ranges do not need this step — an ocean and a bedrock ridge stay put.
-
-Every named river and fen therefore stores **location ids**, not coordinates:
-
-```
-river:  { id, name, nearHead, nearMouth }     // two anchors
-fen:    { id, name, near }                    // one anchor
-```
-
-⛔ **Nearest-head matching does NOT work, and this is why:**
-
-| | value |
-|---|---|
-| median distance, anchor → its river's head | **5.3°** |
-| median spacing between river heads | **5.6°** |
-
-**The signal and the noise are the same size.** Measured: **4 of 10 rivers match ambiguously** (second-best
-candidate within 0.8°). A rule that is a coin-flip on 40% of the data is not a rule.
-
----
-
-## §2 — ⛔ THE RULE THAT WORKS. Measured 1 of 10 ambiguous, from 4.
-
-### Rivers
-
-```
-pool     = the 24 longest traced rivers          // a named river is a MAJOR river
-score(q) = min( d(nearHead, q.first) + d(nearMouth, q.last),
-                d(nearHead, q.last)  + d(nearMouth, q.first) )
-match    = argmin score
-margin   = second-best score − best score
-```
-
-⚠️ **Both orientations must be tried: flow direction flips between rebuilds** when two headwaters trade
-which is higher after smoothing. Testing one orientation silently loses the match.
-
-⚠️ **The pool restriction is doing real work.** There are ~106 traced rivers and most are short fragments;
-without the length cut, a fragment near an anchor outscores the river the name means.
-
-**`d` is great-circle distance in degrees** — `hypot(Δlat, Δlon·cos(mean lat))` is adequate here **because
-no anchor sits within 20° of the pole**; use the generator's `gcd2` if that ever changes.
-
-### Fens
-
-```
-pool     = the 16 largest marsh polygons by extent
-score(q) = d(near, centroid(q))
-```
-
-Measured **1 of 10 ambiguous**.
-
----
-
-## §3 — ⛔ THE GATE. Thresholds from the measured distribution, not chosen.
-
-| assert | value | why that number |
+| rev | rule | measured |
 |---|---|---|
-| every name resolves | **score ≤ 45** (rivers) · **d ≤ 22°** (fens) | worst current: 41.4 and 17.2 |
-| match is unambiguous | **margin ≥ 1.5°** | ambiguity floor measured at ~0.8° |
-| known ambiguous | **exactly 2** — `the_greenwardwater` (margin 0.9), `the_burnfen` (margin 0.8) | census, not a pass |
+| 1 | nearest river HEAD to a town anchor, fail beyond ~20° | ⛔ **4 of 10 ambiguous.** Anchor distance 5.3° vs head spacing 5.6° — signal and noise the same size. Threshold invented. |
+| 2 | pair-match (head+mouth town anchors) over the 24 longest | 1 of 10 ambiguous. Tolerance had to be **45** |
+| **3** | ⛔ **POLAR SIGNATURE — the feature's own (colatitude, longitude) head and mouth** | ⛔ **0 of 12 ambiguous. Tolerance ~3°.** |
 
-⛔ **The census form, per your SNG-391 §2 design: two names are ambiguous today and that is the expected
-state. A third appearing is a regression; those two resolving is an improvement worth noticing.** A binary
-pass/fail here would go red on a world that is fine.
-
-⚠️ **Prove the gate red before shipping it:** delete `nearMouth` from one river and the ambiguity count
-should jump — pair-matching collapses to head-matching, which measured 4 of 10.
+**Erik:** *"can't you just tune polar coordinates for the mouth and head?"* **Yes, and it is not a tuning —
+it is the right key.**
 
 ---
 
-## §4 — OUTPUT SHAPE
+## §2 — ⛔ WHY THE SIGNATURE WINS, MEASURED
 
-Write resolved bindings into the terrain asset so the viewer and the GM read one thing:
+I generated two worlds a 1% threshold apart (0.20% of land/sea cells differ), ran full hydrology on both,
+and matched the major rivers:
+
+| | |
+|---|---|
+| **river head+mouth signature drift across a rebuild** | ⛔ **median 0.50°**, max 8.14° |
+| distance from a river to its nearest town | 5.3° median, 8.3° max |
+
+⚠️ **The thing I was going to anchor TO is ten times less precise than the thing I was anchoring.** A town
+is stable but far; the signature moves a little and is exact. **Precision beats stability when the drift is
+smaller than the error you are trying to avoid.**
+
+⛔ **And this is not a coincidence of this world: colatitude and longitude ARE the polar frame, centred on
+the Crossing.** A river's head and mouth in that frame is its **cosmic address**. That is why it is stable
+under regeneration — the terrain wobbles, the address does not.
+
+---
+
+## §3 — THE RULE
+
+Each named river carries `head: [colat, lon]`, `mouth: [colat, lon]`, `lengthDeg`.
+Each named fen carries `centroid: [colat, lon]`, `extentDeg`.
+
+```
+pool     = 24 longest traced rivers   |   16 largest marsh polygons
+score(q) = min( d(head, q.first) + d(mouth, q.last),
+                d(head, q.last)  + d(mouth, q.first) )     // rivers
+score(q) = d(centroid, centroid(q))                         // fens
+match    = argmin score,  accepted if score <= 3.0
+```
+
+⚠️ **Both orientations still required** — flow direction flips between rebuilds when two headwaters trade
+which is higher after smoothing.
+
+⚠️ **`nearHead` / `nearMouth` / `near` are KEPT** as human-readable labels and as a **fallback** when a
+signature fails. They are no longer the matching key.
+
+---
+
+## §4 — ⛔ THE GATE
+
+| assert | value | measured basis |
+|---|---|---|
+| every name resolves | **score ≤ 3.0** | drift median 0.50° |
+| unambiguous | **margin ≥ 2.0°** | runner-up measured 8–60° away |
+| known drifters | **exactly 1** river exceeded 3° in the two-world test | census, not pass/fail |
+
+⛔ **A name scoring above 3° means its river GENUINELY RESTRUCTURED, and that is information.** Report it;
+do not widen the threshold to hide it. **The old 45 tolerance would have swallowed a river changing course
+completely.**
+
+⚠️ **Prove the gate red:** perturb `thr` by 0.01, rebuild, and the census should stay at 1. Zero drifters
+means the perturbation did not take; several means the terrain is less stable than measured.
+
+---
+
+## §5 — OUTPUT SHAPE
 
 ```
 placeNames: {
-  rivers: [ { id, name, pathIndex, score, margin, resolved: true } ],
-  fens:   [ { id, name, polyIndex, score, margin, resolved: true } ],
-  unresolved: [ { id, name, reason: "no candidate within threshold" | "ambiguous" } ]
+  rivers: [ { id, name, pathIndex, score, margin, resolved } ],
+  fens:   [ { id, name, polyIndex, score, margin, resolved } ],
+  unresolved: [ { id, name, reason: "no candidate within 3°" | "ambiguous" | "pool empty" } ]
 }
 ```
 
-⛔ **An unresolved name must appear in `unresolved`, never be silently dropped and never be bound to its
-best-but-too-far candidate.** A river named for Millbrook that quietly attaches to a different water is
-worse than a river with no name.
+⛔ **Unresolved names go in `unresolved` — never silently dropped, never bound to a too-far best
+candidate.** A river named for Millbrook quietly attaching to another water is worse than an unnamed river.
+
+⚠️ **After a successful resolve, WRITE THE NEW SIGNATURE BACK** to `placenames.json`. The address should
+track the feature across rebuilds; a signature that never updates will eventually drift out of tolerance
+on legitimate change.
 
 ---
 
-## §5 — WHY THIS IS NOT COSMETIC
+## §6 — Why this is not cosmetic
 
-Three names are **already load-bearing in content authored before the terrain existed**:
+Three names are load-bearing in content authored **before the terrain existed**:
+**The Echo** (`echo_river_crossing`, `millbrook`), **The Stiltfen** (`greywater_stilts` is built on it),
+**The Echofen** (the bridge exists because the fen made fording impossible).
 
-- **The Echo** — `echo_river_crossing`: *"the bridge where the Echo River narrows"*; `millbrook`: *"water
-  wheels turn along the Echo River"*
-- **The Stiltfen** — `greywater_stilts`: *"built on stilts over the southern marsh"*
-- **The Echofen** — the bridge exists **because the fen made fording impossible**
-
-⚠️ **If re-anchoring drifts, those descriptions start referring to water that is not there.** The Echo runs
-91.5° — most of the way round the world — and its course changes every regeneration while Millbrook does
-not move.
+⚠️ **The Echo runs 91.3° — most of the way round the world — and its course changes every regeneration
+while Millbrook does not move.**
 
 ---
 
-## §6 — Priority
+## §7 — Priority
 
-⚠️ **Behind SNG-392** — `localMap` schema, then the nanite resolver, then the map in-app. **This becomes a
-correctness problem the next time terrain regenerates, which is not today.**
+⚠️ **Still behind SNG-392**: `localMap` schema, nanite resolver, map in-app.

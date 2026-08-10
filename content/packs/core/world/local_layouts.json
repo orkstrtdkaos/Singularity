@@ -1,0 +1,102 @@
+{
+ "_note": "⛔ SNG-403. LOCAL LAYOUTS. Erik: 'the docks in millbrook on the river, the smithy, the fields.' ⚠️ THE TERRAIN GENERATOR HAS NOTHING AT THIS SCALE — its finest feature is ~0.3° ≈ 33 km and a village spans ~0.01° ≈ 1 km. So a local map is NOT a further zoom of the world raster; it is a NEW layer. ⛔ BUT IT IS NOT INVENTED EITHER: the world layer supplies the DIRECTIONS, and everything here is placed against them. That is the pattern the detailing engine should learn.",
+ "_frame": "`localMap: {bearing, metres}` from the settlement centre. Bearing 0 = toward the pole (up-map), 90 = east. ⚠️ METRES, not degrees — a village is 400-800 m across and degrees at that scale are unreadable. The engine converts: dLat = metres·cos(bearing)/111320, dLon = metres·sin(bearing)/(111320·cos(lat)).",
+ "_derivation": "⛔ THE THREE GRADIENTS THE WORLD ALREADY KNOWS, measured at each settlement: (1) RIVER BEARING and distance — from the traced hydrology; (2) UPHILL BEARING — sample the generator's raw elevation around the point; (3) ROAD BEARINGS — from connections' worldPos. ⚠️ Water trades go riverward. Terraces and orchards go uphill. Fields take the flat. Gates and markets sit on the road bearings. Everything else fills the middle.",
+ "millbrook": {
+  "_measured": {
+   "riverBearing": 156,
+   "riverDistanceDeg": 0.27,
+   "uphillBearing": 210,
+   "roadsOut": [
+    {
+     "to": "echo_river_crossing",
+     "bearing": -88
+    },
+    {
+     "to": "radiant_plateau_edge",
+     "bearing": 91
+    },
+    {
+     "to": "sunken_choir",
+     "bearing": -96
+    }
+   ]
+  },
+  "_reading": "Its own seed names them and nobody made them places: 'Water wheels turn along the Echo River; terraced gardens climb the lower slopes. THE VILLAGE WELL AND THE RIVER DOCK ARE THE TWO CENTRES of daily life.' ⛔ Two centres is a LAYOUT INSTRUCTION and it has been sitting in the prose.",
+  "radiusMetres": 420,
+  "sites": [
+   {
+    "id": "millbrook_well",
+    "name": "The Village Well",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "why": "⛔ One of the two centres the seed names. It IS the centre — bearing and distance zero."
+   },
+   {
+    "id": "millbrook_dock",
+    "name": "The River Dock",
+    "localMap": {
+     "bearing": 156,
+     "metres": 300
+    },
+    "why": "⛔ The other centre. ON THE RIVER BEARING — the one placement the world layer dictates outright."
+   },
+   {
+    "id": "millbrook_wheels",
+    "name": "The Water Wheels",
+    "localMap": {
+     "bearing": 168,
+     "metres": 360
+    },
+    "why": "Downstream of the dock on the same water. ⚠️ Wheels go below the landing so the boats are not fighting the race."
+   },
+   {
+    "id": "millbrook_terraces",
+    "name": "The Terraced Gardens",
+    "localMap": {
+     "bearing": 210,
+     "metres": 260
+    },
+    "why": "⛔ 'Climb the lower slopes' — placed on the MEASURED UPHILL BEARING, not a guess."
+   },
+   {
+    "id": "millbrook_fields",
+    "name": "The Irrigation Fields",
+    "localMap": {
+     "bearing": 30,
+     "metres": 380
+    },
+    "why": "⚠️ The flat: opposite the uphill, and off the river so the ditches can run TO them. The encounterFlavor is farmers arguing about irrigation shares — this is what they are arguing over."
+   },
+   {
+    "id": "millbrook_smithy",
+    "name": "The Smithy",
+    "localMap": {
+     "bearing": -88,
+     "metres": 180
+    },
+    "why": "On the road out to Echo River Crossing. ⚠️ A smith sits where the carts already stop, and near enough the water to quench."
+   },
+   {
+    "id": "gen-mara-wells-store",
+    "name": "Mara Wells' Store",
+    "localMap": {
+     "bearing": -70,
+     "metres": 120
+    },
+    "why": "⛔ ALREADY A PLACE, promoted from play, and sitting at Millbrook's EXACT coordinates — CCode's 'a room's position is a duplicate' finding, live. Now it stands between the well and the road, which is where a village store stands."
+   },
+   {
+    "id": "millbrook_commons",
+    "name": "The Commons",
+    "localMap": {
+     "bearing": 120,
+     "metres": 140
+    },
+    "why": "Between the well and the dock — the ground people cross going from one centre to the other, which is what a commons IS."
+   }
+  ]
+ }
+}

@@ -882,6 +882,74 @@ for (const pack of PACKS) {
     check("SNG-396: the Made Gate is captured — a player-built waygate is a world event sitting in a save, and the census holds it",
       gp396.places.some((p) => p.id === "gen-the-made-gate" && p.visits >= 1));
   }
+  // ══ SNG-404 §2 step 2 — THE PROSE STEP, AS A BUILDER AND NOT A REGEX.
+  // Aevi: "A BUILDER STEP, NOT A REGEX — the water-word audit stands as the warning: a regex over prose
+  // finds words, not facts." So the module never reads prose: it assembles a question, and the model's
+  // answer is stripped of geometry before it lands. The model proposes WHAT and WHY; the measurements
+  // decide WHERE, which means a hallucinated bearing has nowhere to enter.
+  {
+    const LB = await import("../engine/localbuilder.mjs");
+    const LD404 = await import("../engine/localdetail.mjs");
+    const TG404b = await import("../scripts/world/terrain.mjs");
+    const layouts404 = rj("content/packs/core/world/local_layouts.json");
+    const fT = TG404b.makeTerrain(canon.gp, null);
+    const ids = Object.keys(layouts404).filter((k) => !k.startsWith("_"));
+
+    // ⛔ THE PROMPT CARRIES MEASURED FACTS, NOT INSTRUCTIONS — and it must never ask for a bearing,
+    // because a model asked for one will give one and it will be invented.
+    const mb = canon.locs.millbrook;
+    const g = LD404.measureGradients(mb, { locations: canon.locs, hydrology: built.hydrology, terrainFn: fT });
+    const prompt = LB.buildLayoutPrompt(mb, { gradients: g });
+    check("SNG-404 §2: the prompt states the MEASURED ground and forbids the model to invent geometry",
+      /measures around it/i.test(prompt) && /Do NOT give bearings/i.test(prompt)
+      && prompt.includes(String(g.uphillBearing)) && LD404.SITE_BASES.every((b) => prompt.includes(b)));
+
+    // ⛔ REPLAYED THROUGH HER OWN CORPUS, PER BASIS. Feeding her authored `basis` values back through the
+    // placer, every basis that names a UNIQUE DIRECTION reproduces her hand-authored bearing exactly —
+    // and every basis needing a REFERENT misses, because her data records which road only in the `why`
+    // prose. ⚠️ That is a data-shape finding, not a bug: `road` is 14 of her 33 placements.
+    const byBasis = {};
+    for (const id of ids) {
+      const loc = canon.locs[id]; if (!loc) continue;
+      const gg = LD404.measureGradients(loc, { locations: canon.locs, hydrology: built.hydrology, terrainFn: fT });
+      const res = LB.placeProposal({ radiusMetres: layouts404[id].radiusMetres || 420, sites: layouts404[id].sites }, loc, gg);
+      for (const st of res.sites) {
+        const hers = (layouts404[id].sites || []).find((x) => x.id === st.id || x.name === st.name);
+        if (!hers?.localMap) continue;
+        const d = Math.abs(((hers.localMap.bearing - st.localMap.bearing + 540) % 360) - 180);
+        (byBasis[st.basis] = byBasis[st.basis] || []).push(d);
+      }
+    }
+    const medOf = (b) => { const a = (byBasis[b] || []).slice().sort((x, y) => x - y); return a.length ? a[Math.floor(a.length / 2)] : null; };
+    const selfPlacing = ["uphill", "prose", "inferred", "anti-uphill"];
+    check("SNG-404 §2: the placer reproduces Aevi's hand-authored bearings for every basis the GROUND alone decides",
+      selfPlacing.every((b) => medOf(b) !== null && medOf(b) <= 2),
+      selfPlacing.map((b) => `${b} ${medOf(b)}°`).join(", "));
+    // ⚠️ AND THE CONVERSE IS ASSERTED, because it is the finding: a referent-needing basis CANNOT be
+    // placed from the corpus as it stands. If this ever passes, `toward` has been authored and the
+    // reproduction gate above should grow to cover `road` too.
+    check("SNG-404 §2: …and a referent-needing basis CANNOT be reproduced without one — the corpus records `which road` only in prose",
+      medOf("road") !== null && medOf("road") > 20,
+      `road median ${medOf("road")}° across ${(byBasis.road || []).length} placements`);
+
+    // ⛔ A REFERENT, WHEN GIVEN, IS OBEYED — which is what makes the authoring ask worth making.
+    const roads = { river: null, uphill: null, roads: [{ to: "a", bearing: -88 }, { to: "b", bearing: 91 }, { to: "c", bearing: 12 }] };
+    const named = LD404.placeSite({ basis: "road", toward: "c" }, roads, {});
+    const guessed = LD404.placeSite({ basis: "road" }, roads, {});
+    check("SNG-404 §2: a `toward` referent is obeyed, and its absence is REPORTED as a guess rather than hidden",
+      named.bearing === 12 && /road to c/.test(named.why) && /is a guess/.test(guessed.why));
+
+    // ⚠️ HER §4, ENFORCED END-TO-END: a proposal the ground cannot support is DROPPED with a reason,
+    // never shipped as decoration. The Kindlerow case, driven through the whole builder path.
+    const dry = LD404.measureGradients(canon.locs.kindlerow, { locations: canon.locs, hydrology: built.hydrology, terrainFn: fT });
+    const out = LB.placeProposal({ sites: [{ id: "x", name: "A Dock", basis: "river", why: "invented" },
+      { id: "y", name: "The Forge", basis: "uphill", why: "the slope" }] }, canon.locs.kindlerow, dry);
+    check("SNG-404 §2: a proposal the ground cannot support is DROPPED with a reason — no dock in a town with no river",
+      out.sites.length === 1 && out.dropped.length === 1 && /river/.test(out.dropped[0].reason));
+    check("SNG-404 §2: …and everything that DOES ship carries both reasons — what the text argued and what the geometry did",
+      out.sites.every((st) => st.why && st.placedBecause));
+  }
+
   // ══ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA.
   // "No location in this world has a boundary — all 135 are points, including the 25 marked
   // `tier: region`. A contested territory currently looks like a village."

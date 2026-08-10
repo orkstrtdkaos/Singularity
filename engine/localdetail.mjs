@@ -189,9 +189,19 @@ export function placeSite(site, gradients, opts = {}) {
       why: "on the measured uphill bearing (" + gradients.uphill.bearing + "°, relief " + gradients.uphill.relief + ")" };
   }
   if (need === "road") {
-    const road = gradients.roads[index % Math.max(1, gradients.roads.length)];
+    // ⛔ A ROAD BASIS NEEDS TO KNOW *WHICH* ROAD, and measuring the corpus is what proved it: replaying
+    // Aevi's own 38 placements through this placer, every basis that names a unique direction reproduced
+    // her bearing exactly (uphill 0°, prose 0°, anti-uphill 0°, river 11°) and every basis needing a
+    // REFERENT missed — road 58° median across FOURTEEN placements, the most common basis in the corpus.
+    // ⚠️ Her data records which road only in the `why` prose ("On the Crossing road"), and reading that
+    // back with a pattern is the regex-over-prose she forbade. So the referent is a FIELD: `toward`.
+    // Without one this falls back to cycling, which is a guess and is marked as one in the reason.
+    const named = site && site.toward ? gradients.roads.find((r) => r.to === site.toward) : null;
+    const road = named || gradients.roads[index % Math.max(1, gradients.roads.length)];
     if (!road) return null;
-    return { bearing: road.bearing, metres: far, why: "on the road to " + road.to + " (bearing " + road.bearing + "°)" };
+    return { bearing: road.bearing, metres: far,
+      why: named ? "on the road to " + road.to + " (bearing " + road.bearing + "°)"
+        : "on a road out (" + road.to + ", bearing " + road.bearing + "°) — ⚠️ no `toward` given, so WHICH road is a guess" };
   }
   if (need === "anti-road") {
     // ⚠️ AWAY FROM EVERY ROAD, not merely "somewhere else" — the Deep Platforms are placed by what they
@@ -219,8 +229,12 @@ export function placeSite(site, gradients, opts = {}) {
     // ⚠️ ON THE WALK BETWEEN TWO PLACES — the Singers' Hall sits between the hearth and the burying
     // grounds because that is the route people take. Needs the two it is between; there is no such thing
     // as "between" in the abstract.
-    if (!between || between.length < 2) return null;
-    const [a, b2] = between;
+    // ⚠️ same shape as `road`: "between" is meaningless without saying between WHAT. An explicit pair
+    // wins; the last two placed is a fallback and says so.
+    const pair = (site && Array.isArray(site.betweenPlaced) && site.betweenPlaced.length >= 2)
+      ? site.betweenPlaced : between;
+    if (!pair || pair.length < 2) return null;
+    const [a, b2] = pair;
     const mid = norm180(a.bearing + norm180(b2.bearing - a.bearing) / 2);
     return { bearing: Math.round(mid), metres: Math.round((a.metres + b2.metres) / 2),
       why: "on the walk between two placed sites (" + a.bearing + "° and " + b2.bearing + "°)" };

@@ -34,7 +34,8 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor } from "./engine/worldglobe.js";
+import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
@@ -91,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.110";
+const APP_VERSION = "1.9.111";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7177,12 +7178,22 @@ function wireWorldGlobe() {
       if (st.fill) { ctx.fillStyle = st.fill; ctx.fill(); }
       if (st.stroke) { ctx.strokeStyle = st.stroke; ctx.lineWidth = st.shape === "ring" ? 1.4 : 1; ctx.stroke(); }
     };
+    // ⛔ SNG-409 §4 — A PLACE IS DRAWN AS WHAT IT IS. `kind` is authored canon for all 135 (SNG-406) and
+    // had no reader; twelve of them are POLES, and Aevi's warning is the whole point of doing this:
+    // "an icon that says 'settlement' would lie about the most dangerous places in the world."
+    // ⚠️ Glyphs cost more pixels than dots, so they arrive when there is room for them — below a 70°
+    // span. Zoomed out to the whole world the map stays dots, which is legible; a hundred and thirty-five
+    // little buildings at hemisphere scale is a texture, not information.
+    const glyphSpan = spanDeg(view, Math.min(cv.width, cv.height));
+    const useGlyphs = glyphSpan <= 70;
     for (const p of pins) {
       const isHere = p.id === here;
       // ⚠️ a site is an INTERIOR — drawing all fourteen at world scale is clutter for places you cannot
       // see from orbit, so they appear once the view is regional. Everything else always draws.
-      if (p.kind === "site" && spanDeg(view, Math.min(cv.width, cv.height)) > 40) continue;
-      drawMarker(p.x, p.y, MARKER_STYLE[p.kind] || MARKER_STYLE.settlement);
+      if (p.kind === "site" && glyphSpan > 40) continue;
+      const glyph = useGlyphs ? glyphFor(p) : null;
+      if (glyph) drawGlyph(ctx, glyph, p.x, p.y - 1, isHere ? 7.5 : 6, {});
+      else drawMarker(p.x, p.y, MARKER_STYLE[p.kind] || MARKER_STYLE.settlement);
       const crowd = occupied.get(p.id);
       if (crowd && crowd.length) {
         // travellers stand BESIDE the place, not on it, so a marker never hides the ground it names

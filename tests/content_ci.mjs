@@ -882,6 +882,93 @@ for (const pack of PACKS) {
     check("SNG-396: the Made Gate is captured — a player-built waygate is a world event sitting in a save, and the census holds it",
       gp396.places.some((p) => p.id === "gen-the-made-gate" && p.visits >= 1));
   }
+  // ══ SNG-409 §4 — A POLE NEVER READS AS A TOWN.
+  // Aevi: "`tier` is SIZE, `role` is FUNCTION, `kind` is SHAPE… a waygate and a village are both
+  // `tier: settlement`; they should never share an icon." And the reason it is not decoration:
+  // "⛔ Twelve locations are `pole` — the Blaze, the Scouring, the Numen, the Unfallen. They are pure
+  // extremities of an axis, not settlements, and a settlement icon would LIE about the most dangerous
+  // places in the world."
+  {
+    const MI = await import("../engine/mapicons.mjs");
+    const kindDoc = rj("content/packs/core/world/location_kinds.json");
+    const kindRows = kindDoc.kinds || kindDoc;
+    const authored = [...new Set(Object.entries(kindRows).filter(([id]) => !id.startsWith("_"))
+      .map(([, v]) => (typeof v === "string" ? v : v && v.kind)).filter(Boolean))];
+
+    // ⛔ EXHAUSTIVE, NOT DEFAULTED. A kind with no glyph must FAIL rather than fall through to a dot —
+    // a silent default is exactly how a pole ends up looking like a village.
+    const unmapped = authored.filter((k) => !MI.KIND_GLYPH[k]);
+    check("SNG-409 §4: every authored kind has a glyph — an unmapped kind fails rather than drawing as a dot",
+      unmapped.length === 0 && authored.length >= 30, "no glyph for: " + unmapped.join(", "));
+
+    // ⚠️ SHE OFFERED TO COLLAPSE THE VOCABULARY IF IT WAS TOO FINE TO DRAW. It should NOT be collapsed —
+    // it feeds narration as well as the map — so 34 authored kinds map onto fewer drawable glyphs and
+    // the MAPPING is the thing that is written down. This holds that shape: a real reduction, without
+    // the source losing distinctions the prose still wants.
+    check("SNG-409 §4: …and the 34 kinds reduce to a drawable set without collapsing the authored vocabulary",
+      MI.ALL_GLYPHS.length < authored.length && MI.ALL_GLYPHS.length >= 12,
+      `${authored.length} kinds → ${MI.ALL_GLYPHS.length} glyphs`);
+
+    // ⛔ THE PRECEDENCE, WHICH IS NOT ALPHABETICAL: pole outranks everything, and a waygate outranks the
+    // tier it sits on because stepping through it is what changes a player's route.
+    check("SNG-409 §4: a POLE is never drawn as a settlement — even one flagged as a waygate",
+      MI.glyphFor({ k: "pole" }) === "pole" && MI.glyphFor({ k: "pole", wg: 1 }) === "pole");
+    check("SNG-409 §4: …and a waygate outranks whatever it was cut into",
+      MI.glyphFor({ k: "city", wg: 1 }) === "waygate" && MI.glyphFor({ k: "city" }) === "city");
+
+    // ⛔ HER ACCEPTANCE TEST, MEASURED ON PIXELS: "done when a waygate, a village, an underplace and a
+    // pole are distinguishable at a glance." Distinguishable is not a matter of opinion — render each
+    // to a small offscreen grid and require the silhouettes to differ substantially from one another.
+    const SZ = 22;
+    const raster = (glyph) => {
+      const cells = new Uint8Array(SZ * SZ);
+      // a minimal 2D-context stand-in: every path op rasterises to the cells it touches, which is all a
+      // silhouette comparison needs and keeps this dependency-free in node.
+      let cx = 0, cy = 0;
+      const mark = (x, y) => {
+        const gx = Math.round(x), gy = Math.round(y);
+        if (gx >= 0 && gy >= 0 && gx < SZ && gy < SZ) cells[gy * SZ + gx] = 1;
+      };
+      const line = (x0, y0, x1, y1) => {
+        const n = Math.max(2, Math.ceil(Math.hypot(x1 - x0, y1 - y0) * 2));
+        for (let i = 0; i <= n; i++) mark(x0 + (x1 - x0) * (i / n), y0 + (y1 - y0) * (i / n));
+      };
+      const ctx = {
+        save() {}, restore() {}, beginPath() { }, closePath() { }, fill() { }, stroke() { },
+        moveTo(x, y) { cx = x; cy = y; }, lineTo(x, y) { line(cx, cy, x, y); cx = x; cy = y; },
+        arc(x, y, r, a0, a1) { for (let a = a0; a <= a1 + 0.05; a += 0.15) mark(x + Math.cos(a) * r, y + Math.sin(a) * r); cx = x; cy = y; },
+        ellipse(x, y, rx, ry) { for (let a = 0; a < Math.PI * 2; a += 0.15) mark(x + Math.cos(a) * rx, y + Math.sin(a) * ry); },
+        quadraticCurveTo(qx, qy, x, y) { line(cx, cy, x, y); cx = x; cy = y; },
+        rect(x, y, w, h) { line(x, y, x + w, y); line(x + w, y, x + w, y + h); line(x + w, y + h, x, y + h); line(x, y + h, x, y); },
+        set lineWidth(v) {}, set strokeStyle(v) {}, set fillStyle(v) {}, set globalAlpha(v) {},
+        set lineJoin(v) {}, set lineCap(v) {}, set font(v) {}, set textAlign(v) {},
+      };
+      MI.drawGlyph(ctx, glyph, SZ / 2, SZ / 2, 7, {});
+      return cells;
+    };
+    const four = ["waygate", "village", "cave", "pole"];
+    const grids = four.map(raster);
+    let worstSimilarity = 0, worstPair = "";
+    for (let i = 0; i < grids.length; i++) for (let j = i + 1; j < grids.length; j++) {
+      let same = 0, union = 0;
+      for (let c = 0; c < SZ * SZ; c++) {
+        if (grids[i][c] || grids[j][c]) union++;
+        if (grids[i][c] && grids[j][c]) same++;
+      }
+      const sim = union ? same / union : 1;
+      if (sim > worstSimilarity) { worstSimilarity = sim; worstPair = four[i] + "/" + four[j]; }
+    }
+    check("SNG-409 §4: a waygate, a village, an underplace and a pole are DISTINGUISHABLE — measured on the drawn pixels",
+      grids.every((g) => g.some((v) => v)) && worstSimilarity < 0.45,
+      `most-similar pair ${worstPair} overlaps ${(100 * worstSimilarity).toFixed(0)}%`);
+
+    // and every glyph must actually put ink down — an unimplemented case that silently draws nothing
+    // is the same failure as an unmapped kind, one layer along
+    const blank = MI.ALL_GLYPHS.filter((g) => !raster(g).some((v) => v));
+    check("SNG-409 §4: …and every glyph in the set actually draws something",
+      blank.length === 0, "blank: " + blank.join(", "));
+  }
+
   // ══ SNG-404 — THE LOCAL DETAILING ENGINE, MEASURED AGAINST THE EIGHT AUTHORED LAYOUTS.
   // Aevi built a corpus specifically to be argued with — four Valley towns that agreed on a rule set and
   // four contrast towns chosen to break it, which they did in four different ways. These gates hold the

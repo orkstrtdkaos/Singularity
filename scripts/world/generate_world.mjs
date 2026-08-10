@@ -69,7 +69,12 @@ export function loadCanon() {
   try { waterAuth = rj("content/packs/core/world/waterauth.json"); } catch { /* not yet shipped */ }
   let placenames = null;
   try { placenames = rj("content/packs/core/world/placenames.json"); } catch { /* naming is optional */ }
-  return { locs, seeds, waterAuth, placenames, substrate: rj("content/packs/core/rules/the_substrate.json"), gp: rj("content/packs/core/world/genparams.json") };
+  // ⚠️ KIND IS AUTHORED CANON (SNG-406, all 135) and rides into the asset so the map can draw a pole
+  // differently from a village. It is read, never derived — Aevi read every row by hand precisely
+  // because deriving it from names was ~50% wrong.
+  let kinds = null;
+  try { kinds = rj("content/packs/core/world/location_kinds.json"); } catch { /* kinds are optional */ }
+  return { locs, seeds, waterAuth, placenames, kinds, substrate: rj("content/packs/core/rules/the_substrate.json"), gp: rj("content/packs/core/world/genparams.json") };
 }
 
 /** ⛔ THE SEED GATE. genparams.pts must be exactly the canon derivation — a genparams edited by hand while
@@ -278,8 +283,10 @@ export function serialise(built, canon) {
   for (const l of Object.values(canon.locs)) {
     const wp = l.worldPos;
     if (!wp || !Number.isFinite(wp.colatitude) || !Number.isFinite(wp.longitude)) continue;
+    const kRow = (canon.kinds?.kinds || canon.kinds || {})[l.id];
     meta[l.id] = { n: l.name || l.id, r: l.regionId || l.region || null,
-      wg: (l.waygate || oldMeta[l.id]?.wg) ? 1 : 0, t: l.tier || null, ro: l.role || null };
+      wg: (l.waygate || oldMeta[l.id]?.wg) ? 1 : 0, t: l.tier || null, ro: l.role || null,
+      k: (typeof kRow === "string" ? kRow : kRow?.kind) || null };
   }
   return {
     schemaVersion: 2,

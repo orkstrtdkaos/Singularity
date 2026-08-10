@@ -508,7 +508,7 @@ export function visiblePins(t, view, worldPosOf) {
       // ⚠️ KIND IS READ, NEVER DERIVED. tier and role are canon (SNG-396/398 ratified them) and the
       // pipeline stamps them into the asset; a viewer that inferred "this looks like a hold" would be
       // the second-source-of-truth mistake that worldPos is already gated against.
-      tier: m.t || null, role: m.ro || null, kind: markerKind(m),
+      tier: m.t || null, role: m.ro || null, kind: markerKind(m), placeKind: m.k || null,
       x: p.x, y: p.y, z: p.z });
   }
   return out.sort((a, b) => a.z - b.z);

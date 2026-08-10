@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.116";
+const APP_VERSION = "1.9.117";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7114,6 +7114,22 @@ function wireWorldGlobe() {
   };
   readTravellers();
 
+  // ⚠️ WHICH REGION IS UNDER THE CURSOR — the seats are the region medoids the pipeline already
+  // computes, so this asks the world rather than the location graph, which SNG-409 §5 showed disagrees.
+  const regionNearest = (lon, lat) => {
+    const seats = _terrain?.seats || {};
+    let best = null, bd = Infinity;
+    for (const rid of Object.keys(seats)) {
+      const s2 = seats[rid];
+      const R2 = Math.PI / 180;
+      const d = Math.acos(Math.max(-1, Math.min(1,
+        Math.sin(lat * R2) * Math.sin(s2[0] * R2) +
+        Math.cos(lat * R2) * Math.cos(s2[0] * R2) * Math.cos((lon - s2[1]) * R2))));
+      if (d < bd) { bd = d; best = rid; }
+    }
+    return best;
+  };
+
   const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;
   const worldPosOf = (id) => CONTENT.locations?.[id]?.worldPos || null;
 
@@ -7358,7 +7374,26 @@ function wireWorldGlobe() {
     // ⚠️ AND THE GESTURE STAYS CHEAP: coarse while the wheel turns, sharp 140ms after it stops — so the
     // detail patch is built once per SETTLED view, never once per wheel tick, which is what lets its
     // budget be generous without the zoom feeling heavy.
-    view.r = Math.max(120, Math.min(Math.min(cv.width, cv.height) * 12, view.r * (e.deltaY > 0 ? 0.9 : 1.11)));
+    const next = view.r * (e.deltaY > 0 ? 0.9 : 1.11);
+    const px = Math.min(cv.width, cv.height);
+    // ⛔ THE WORLD TIER BOTTOMS OUT WHERE IT STOPS SAYING ANYTHING (SNG-414). Zooming past the floor
+    // does not zoom — it HANDS OFF to the region, which is authored and therefore has something to say
+    // at that scale. ⚠️ Measured, not chosen: below ~0.25° of ground the generator produces no new
+    // structure, which lands the floor at a ~10° span. Everything below it was magnification.
+    if (next > floorRadius(px)) {
+      const c = unproject(view.cx, view.cy, view);
+      const rid = c ? regionNearest(c.lon, c.lat) : null;
+      if (rid) {
+        // ⚠️ say WHY the globe stopped, or the handoff reads as the map giving up
+        // ⚠️ say WHY the globe stopped, or the handoff reads as the map giving up. ⛔ AND SAY IT THROUGH
+        // A SURFACE THAT EXISTS: my first version called an `announce()` that does not exist in this
+        // file, inside a try/catch — a silent no-op, which is the failure class this suite keeps
+        // catching. The readout is the element the globe already talks through.
+        if (readout) readout.textContent = `The world map ends near ${WORLD_TIER_FLOOR_DEG}° — below it the ground is drawn, not generated. Entering ${CONTENT.locations?.[rid]?.name || rid}.`;
+        mapTier = "region"; mapFocus = rid; renderMap(); return;
+      }
+    }
+    view.r = Math.max(120, Math.min(floorRadius(px), next));
     paint(true); clearTimeout(cv._z); cv._z = setTimeout(() => paint(false), 140);
   };
   for (const b of app.querySelectorAll("[data-globelayer]")) b.onclick = () => {

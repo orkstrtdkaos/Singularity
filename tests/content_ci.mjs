@@ -1091,24 +1091,25 @@ for (const pack of PACKS) {
     const TGp = await import("../scripts/world/terrain.mjs");
     const probe = WGF.makeFinePatch(tF, TGp.makeTerrain(canon.gp, { la0: -80, la1: -60, lo0: -110, lo1: -80 }),
       { lat: -70, lon: -95 }, 8, { budgetMs: 60 });
-    // ⚠️ WARM BEFORE TIMING, for the reason the patch calibration already learned: the first calls run
-    // interpreted and read several times pessimistic.
-    const timeLayer = (layer) => {
-      for (let i = 0; i < 1500; i++) WGF.colorAt(tF, -95 + (i % 80) * 0.002, -70 + (i % 37) * 0.002, { layer, fine: probe, contourStep: 8 });
-      const t0 = Date.now();
-      for (let i = 0; i < 4000; i++) WGF.colorAt(tF, -95 + (i % 80) * 0.002, -70 + (i % 37) * 0.002,
-        { layer, fine: probe, contourStep: 8 });
-      return (Date.now() - t0) * 1000 / 4000;
-    };
-    const topoUs = timeLayer("topo"), naniteUs = timeLayer("nanite");
-    // ⛔ THE GATE IS THE SHAPE; THE SECONDS ARE A REPORT. A wall-clock assertion inside a full suite
-    // measures the machine and the JIT as much as the code — it read 0.96s standalone and 1.32s in the
-    // suite, and a gate that fails on a busy laptop teaches people to ignore it. What is INVARIANT is
-    // that the default layer must not pay for a field it never reads, and that is asserted as a ratio.
-    check("SNG-413: the topographic layer does NOT pay for the region vote — it reads neither density nor nanite",
-      topoUs < naniteUs * 1.35, `topo ${topoUs.toFixed(2)}µs vs nanite ${naniteUs.toFixed(2)}µs a pixel`);
-    console.log(`note  SNG-413: a full 700×540 paint costs ~${(topoUs * 378000 / 1e6).toFixed(2)}s topographic, ` +
-      `~${(naniteUs * 378000 / 1e6).toFixed(2)}s nanite on this machine (was 3.67s before the fields moved onto the patch)`);
+    // ⛔ THE INVARIANT IS ZERO CALLS, NOT A FASTER CLOCK — and my first two attempts at this gate both
+    // measured time, which was wrong twice over. An absolute bound failed under suite load while passing
+    // standalone (0.96s vs 1.32s); a ratio between two NEARLY EQUAL quantities then flipped on noise,
+    // reporting topo at 2.50µs against nanite at 1.75µs because whichever runs first pays the JIT.
+    // ⚠️ What actually broke the map was structural: the topographic layer CALLING a 118-voter pass it
+    // never reads. So count the calls. Exact, instant, and the same answer on every machine.
+    let fieldCalls = 0;
+    const counting = (lon, lat) => probe(lon, lat);
+    counting.fieldsAt = (lon, lat) => { fieldCalls++; return probe.fieldsAt(lon, lat); };
+    for (let i = 0; i < 500; i++) WGF.colorAt(tF, -95 + (i % 80) * 0.002, -70 + (i % 37) * 0.002,
+      { layer: "topo", fine: counting, contourStep: 8 });
+    const topoCalls = fieldCalls;
+    fieldCalls = 0;
+    for (let i = 0; i < 500; i++) WGF.colorAt(tF, -95 + (i % 80) * 0.002, -70 + (i % 37) * 0.002,
+      { layer: "nanite", fine: counting, contourStep: 8 });
+    const naniteCalls = fieldCalls;
+    check("SNG-413: the topographic layer never even ASKS for the region vote — it reads neither density nor nanite",
+      topoCalls === 0 && naniteCalls > 400,
+      `topo asked ${topoCalls} times, nanite ${naniteCalls} times, over 500 pixels each`);
 
     check("SNG-409 §1: …and it RESOLVES — the same ground carries far more tone evaluated than baked",
       evaled.size > baked.size * 10,

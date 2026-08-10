@@ -32,6 +32,25 @@
  *  This is the camera fix, and `worldPos` never moved. */
 export const DEFAULT_VIEW = { yaw: 20, pitch: -52 };
 
+/** ⛔ WHERE THE WORLD TIER ENDS, AND IT IS MEASURED RATHER THAN CHOSEN. Total variation of the terrain
+ *  field per degree of ground, as the sampling scale shrinks: refining 2°→1° gives ×2.09 more structure
+ *  and 1°→0.5° gives ×1.27 — then it goes FLAT (×1.10, ×0.87, ×1.09, ×1.06). Below roughly a quarter
+ *  of a degree of ground the generator has no features left, so everything finer is magnification.
+ *
+ *  ⚠️ On a 700px canvas a view of span S shows a 0.25° feature at 0.25×700/S pixels; it reaches ~20px —
+ *  an obvious shape rather than a texture — at S ≈ 9°. So the globe carries genuine information down to
+ *  about a 10° span and NOTHING below it, which is why every performance fix below that boundary only
+ *  ever moved the cost around: the work was never buying information.
+ *
+ *  ⛔ Past this the map hands off to the REGION tier, which is authored. Erik: "somewhere around that
+ *  point we start to lose meaningful information, so we should switch to the regional map." */
+export const WORLD_TIER_FLOOR_DEG = 10;
+
+/** The camera radius at which the world tier bottoms out, for a given canvas. */
+export function floorRadius(canvasPx) {
+  return (canvasPx / 2) / Math.sin((WORLD_TIER_FLOOR_DEG / 2) * Math.PI / 180);
+}
+
 /** Base64 → bytes, without Buffer, so this runs in the browser and in a test alike. */
 function b64(s) {
   if (typeof atob === "function") {

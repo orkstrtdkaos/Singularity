@@ -1,0 +1,35 @@
+{
+ "_note": "⛔ SNG-408. AREAS. Erik: 'the disputed zone needs to be drawn on the map — it's an area. It has sublocations within it.' ⚠️ NO LOCATION IN CANON HAS A BOUNDARY FIELD — all 135 are points, including the 25 marked `tier: region`. This is the first area in the world.",
+ "_shapes": "`lens` — the interference band between two powers: everywhere both fields are comparable. `hull` — the buffered extent of named members. `disc` — a centre and a radius. ⚠️ A LENS IS DERIVED, NOT DRAWN: give it two foci and a tolerance and it follows the powers if they ever move. That is the difference between an area and a polygon somebody typed.",
+ "disputed_zone": {
+  "name": "The Disputed Zone",
+  "kind": "lens",
+  "drawAs": "hazard",
+  "foci": [
+   {
+    "id": "harmonic_heights_terrace",
+    "lat": -72,
+    "lon": 107
+   },
+   {
+    "id": "radiant_plateau_edge",
+    "lat": -65,
+    "lon": 49
+   }
+  ],
+  "separationDeg": 22.4,
+  "midpoint": {
+   "lat": -68.5,
+   "lon": 78.0
+  },
+  "asymmetryTolerance": 0.35,
+  "definition": "⛔ DERIVED FROM ITS OWN TEXT: 'the band of broken country WHERE HARMONIC AND RADIANT POWER FIELDS INTERFERE.' A point is in the zone when both powers are comparably distant — |d_harmonic − d_radiant| / separation < 0.35 — and neither is more than 1.1× the separation away. ⚠️ THE FICTION IS THE FORMULA. Sound bends light here because both reach equally.",
+  "membersInBand": [
+   "the_great_coliseum",
+   "old_switchback",
+   "echo_river_crossing"
+  ],
+  "⛔ finding": "THE FRINGE'S OWN PIN IS 67.7° — ABOUT 113 WALKING DAYS — FROM THE MIDPOINT OF THE TWO POWERS IT IS NAMED FOR. ⚠️ THIS PREDATES MY SNG-407 MOVE: it was 67.7° away before I touched it, so a 4.75° snap did not cause it. A place called 'the Disputed Zone Fringe' is standing four months' walk from the dispute. ⛔ ERIK'S CALL: relocate the fringe into the band, or accept that the name refers to a dispute it is not near.",
+  "⚠️ parentage": "Of the 8 locations parented to the fringe, only ECHO RIVER CROSSING is in the band. The others span 288° OF LONGITUDE — the entire world. That is the SNG-398 parenting artifact again: topology grouped them, geography never did. THE GREAT COLISEUM and OLD SWITCHBACK are in the band and are NOT parented to it."
+ }
+}

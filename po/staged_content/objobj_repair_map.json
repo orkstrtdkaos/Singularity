@@ -1,0 +1,124 @@
+{
+ "_note": "⛔ SNG-397 REPAIR MAP. `gen-object-object` is FOUR different places collapsed into one id across 6 characters and 35 references. ⚠️ PROVENANCE IS MARKED PER ROW: `erik` rows are ground truth from the person who played them; `inferred` rows are read from the save's own notes and need confirming.",
+ "_rule": "⛔ MAP PER CHARACTER AND PER FIELD. The same string means a different place in different files. A global find-and-replace is the one operation that must not happen.",
+ "entries": [
+  {
+   "file": "characters/player-s9z9u1/char-mrhs8286.json",
+   "path": "activeScene.locationId",
+   "from": "gen-object-object",
+   "to": "the_crossing",
+   "source": "erik",
+   "why": "Erik: 'Silas is supposed to be at the Crossroads right now.' currentLocationId already reads the_crossing; the scene did not follow."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-mrhs8286.json",
+   "path": "npcRegistry.pell.lastSeen.locationId",
+   "from": "gen-object-object",
+   "to": "millbrook",
+   "source": "erik",
+   "why": "Erik: 'Pell was met in Millbrook.'"
+  },
+  {
+   "file": "characters/player-s9z9u1/char-mrhs8286.json",
+   "path": "npcRegistry.veth-ondra.lastSeen.locationId",
+   "from": "gen-object-object",
+   "to": "millbrook",
+   "source": "inferred",
+   "why": "⚠️ Same day 14 as Pell, same file. INFERRED from co-occurrence, not stated. Confirm."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-mrhs8286.json",
+   "path": "placeMemory.gen-object-object",
+   "from": "gen-object-object",
+   "to": "gen-watershed-road",
+   "source": "inferred",
+   "why": "⚠️ The memory's own subPlace says 'a dormant pre-Transition relay node ON THE WATERSHED ROAD — the relay chain runs south to THE MILL GATE and north toward the ridge.' Mill gate reads as Millbrook, which matches Erik's Pell placement. ⛔ This is a REAL PLACE that needs a real id, not a redirect."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-mrhs8286.json",
+   "path": "placeMemory.*.subPlaces.midrow-wayhouse.parentId",
+   "from": "gen-object-object",
+   "to": "gen-watershed-road",
+   "source": "inferred",
+   "why": "⛔ The corruption propagated one level down. Also clear `parentUnresolved: valley`."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-msgpisca.json",
+   "path": "placeMemory.gen-object-object",
+   "from": "gen-object-object",
+   "to": "the_thinning",
+   "source": "erik",
+   "why": "Erik: 'Splarf is in the Thinned Place or near it.' ⛔ MY EARLIER PROPOSAL OF A SEPARATE 'gen-the-sealed-veil' WAS WRONG — the sealed veil is a feature of the Thinning, not a place beside it."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-msgpisca.json",
+   "path": "deeds[].locationId",
+   "from": "gen-object-object",
+   "to": "the_thinning",
+   "source": "erik",
+   "why": "Same place. ⚠️ 1 deed at worldDay 37; deeds drive spread and must survive the migration."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-msgpisca.json",
+   "path": "npcRegistry.cevaine.firstMet.locationId",
+   "from": "gen-object-object",
+   "to": "the_thinning",
+   "source": "erik",
+   "why": "Erik: 'Cevaine at the waygate near the Thinned Place.' ⛔ VERIFIED: the_thinning IS a waygate, tier 2 — the nearest other is the Slow Hour at 22.3 days. The waygate near the Thinned Place IS the Thinned Place."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-msgpisca.json",
+   "path": "generated.npc.cevaine-of-the-seventh-measure._gen.provenance.locationId",
+   "from": "gen-object-object",
+   "to": "the_thinning",
+   "source": "erik",
+   "why": "Same meeting."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-mr4ejo8c.json",
+   "path": "deeds[].locationId  (×6, worldDay 32)",
+   "from": "gen-object-object",
+   "to": "gen-disputed-zone-far-side",
+   "source": "inferred",
+   "why": "⚠️ Erik did not rule on this one. The note reads 'the party has crossed into this side of the Disputed Zone… hemispherical stone mound with precise geometry', and Cellaceron's currentLocationId is disputed_zone_fringe. ⛔ SIX DEEDS — the largest single block in the repair."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-mr4ejo8c.json",
+   "path": "placeMemory / codex.topics",
+   "from": "gen-object-object",
+   "to": "gen-disputed-zone-far-side",
+   "source": "inferred",
+   "why": "Same place."
+  },
+  {
+   "file": "characters/player-s9z9u1/char-mr4ejo8c.json",
+   "path": "generated.location.gen-the-lower-chamber.connections",
+   "from": "gen-object-object",
+   "to": "gen-disputed-zone-far-side",
+   "source": "inferred",
+   "why": "⚠️ The Lower Chamber connects to it — so the Chamber is under the Disputed Zone's far side."
+  },
+  {
+   "file": "ALL — worldState.news (×3, 5 characters)",
+   "path": "worldState.news[].locationId",
+   "from": "gen-object-object",
+   "to": "PER-CHARACTER",
+   "source": "unresolved",
+   "why": "⛔ News is copied across characters, so the same entry sits in files where it means different places. ⚠️ MAP FROM THE NEWS TEXT, not from the file it landed in — and if the text does not say, leave it and report it."
+  }
+ ],
+ "newPlaces": [
+  {
+   "id": "gen-watershed-road",
+   "name": "The Watershed Road",
+   "parentHint": "between millbrook and the ridge",
+   "why": "⛔ Carries a Precursor relay chain a player FOUND IN PLAY. Belongs in canon with the Made Gate."
+  },
+  {
+   "id": "gen-disputed-zone-far-side",
+   "name": "The Far Side",
+   "parentHint": "disputed_zone_fringe",
+   "why": "Past the shimmer. Hemispherical stone mound, active pre-Transition structure."
+  }
+ ]
+}

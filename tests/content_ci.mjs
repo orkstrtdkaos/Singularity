@@ -691,8 +691,11 @@ for (const pack of PACKS) {
   // the spec forbids: "a river named for Millbrook quietly attaching to another water is worse than an
   // unnamed river." The seven are Aevi's to re-anchor or rename; a name leaving this list is her fix
   // landing, and a name JOINING it is a regression this gate reports by name.
+  // ⚠️ Aevi's f4aec367 shrank this census the designed way: the Millfen became the Milljaw and binds
+  // its southern fragment by signature; the Upper Mire names the northern one. The Choirwater was
+  // RENAMED (the Drowned Reach) but not re-anchored, so it stays here until she sites it.
   const KNOWN_UNRESOLVED = new Set(["the_greenwater", "the_choirwater", "the_axewater", "the_middlerun",
-    "the_burnwater", "the_millfen", "the_quietfen"]);
+    "the_burnwater", "the_quietfen"]);
   const unexpected = res.placeNames.unresolved.filter((u) => !KNOWN_UNRESOLVED.has(u.id));
   check("SNG-393: every name binds by signature, or sits in the KNOWN census with its diagnosis",
     unexpected.length === 0, unexpected.map((u) => u.name + " (" + u.reason + ")").join(" · "));
@@ -737,7 +740,10 @@ for (const pack of PACKS) {
   const riverCollide = collisions(res.placeNames.rivers, "pathIndex");
   check("SNG-394: no two river names bind to one pathIndex — a shared stem is two lost places, not one found",
     riverCollide.length === 0, riverCollide.join(" · "));
-  const KNOWN_FEN_COLLISIONS = ["The Marchfen + The Stairfen", "The Stiltfen + The Terrace Fen"];
+  // ⚠️ f4aec367 cleared the Stiltfen pair — and MINTED a new one: the Terrace Fen was re-sited to the
+  // byte-identical centroid of the Plateau Fen ([-74.13, 55]), the same copy-paste class as the pair it
+  // fixed. Reported in po/REPLY_ccode_SNG-394b_census.md; pinned here so it cannot silently multiply.
+  const KNOWN_FEN_COLLISIONS = ["The Marchfen + The Stairfen", "The Plateau Fen + The Terrace Fen"];
   const fenCollide = collisions(res.placeNames.fens, "polyIndex");
   check("SNG-394: fen collisions match the KNOWN census exactly — both names reported, neither dropped, Aevi decides",
     JSON.stringify(fenCollide) === JSON.stringify(KNOWN_FEN_COLLISIONS),

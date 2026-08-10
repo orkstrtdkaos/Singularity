@@ -24,7 +24,8 @@
    "from": "gen-object-object",
    "to": "millbrook",
    "source": "inferred",
-   "why": "⚠️ Same day 14 as Pell, same file. INFERRED from co-occurrence, not stated. Confirm."
+   "why": "⚠️ Same day 14 as Pell, same file. INFERRED from co-occurrence, not stated. Confirm.",
+   "note": "⚠️ still inferred from co-occurrence with Pell on day 14; the only unruled personal row."
   },
   {
    "file": "characters/player-s9z9u1/char-mrhs8286.json",
@@ -79,24 +80,24 @@
    "path": "deeds[].locationId  (×6, worldDay 32)",
    "from": "gen-object-object",
    "to": "gen-disputed-zone-far-side",
-   "source": "inferred",
-   "why": "⚠️ Erik did not rule on this one. The note reads 'the party has crossed into this side of the Disputed Zone… hemispherical stone mound with precise geometry', and Cellaceron's currentLocationId is disputed_zone_fringe. ⛔ SIX DEEDS — the largest single block in the repair."
+   "source": "erik",
+   "why": "⛔ ERIK RULED: 'most of what he's done latest is supposed to be in the disputed zone.' Confirms the reading from the note ('the party has crossed into this side of the Disputed Zone… hemispherical stone mound') and from Cellaceron's currentLocationId of disputed_zone_fringe. ⚠️ SIX DEEDS at worldDay 32 — the largest block in the repair, now ruled."
   },
   {
    "file": "characters/player-s9z9u1/char-mr4ejo8c.json",
    "path": "placeMemory / codex.topics",
    "from": "gen-object-object",
    "to": "gen-disputed-zone-far-side",
-   "source": "inferred",
-   "why": "Same place."
+   "source": "erik",
+   "why": "⛔ ERIK RULED: 'most of what he's done latest is supposed to be in the disputed zone.' Confirms the reading from the note ('the party has crossed into this side of the Disputed Zone… hemispherical stone mound') and from Cellaceron's currentLocationId of disputed_zone_fringe. ⚠️ SIX DEEDS at worldDay 32 — the largest block in the repair, now ruled."
   },
   {
    "file": "characters/player-s9z9u1/char-mr4ejo8c.json",
    "path": "generated.location.gen-the-lower-chamber.connections",
    "from": "gen-object-object",
    "to": "gen-disputed-zone-far-side",
-   "source": "inferred",
-   "why": "⚠️ The Lower Chamber connects to it — so the Chamber is under the Disputed Zone's far side."
+   "source": "erik",
+   "why": "⛔ ERIK RULED: 'most of what he's done latest is supposed to be in the disputed zone.' Confirms the reading from the note ('the party has crossed into this side of the Disputed Zone… hemispherical stone mound') and from Cellaceron's currentLocationId of disputed_zone_fringe. ⚠️ SIX DEEDS at worldDay 32 — the largest block in the repair, now ruled."
   },
   {
    "file": "ALL — worldState.news (×3, 5 characters)",
@@ -120,5 +121,6 @@
    "parentHint": "disputed_zone_fringe",
    "why": "Past the shimmer. Hemispherical stone mound, active pre-Transition structure."
   }
- ]
+ ],
+ "_status": "⛔ ALL PERSONAL ROWS NOW RULED except veth-ondra (inferred) and worldState.news (map from the news TEXT, per row, never globally)."
 }

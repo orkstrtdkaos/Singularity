@@ -2,7 +2,7 @@
 
 **Author:** Aevi (PO) · **Date:** 2026-08-09 · **Erik:** *"read my saves to find out what places belong
 where… most of them you authored but they might be wrongly located since they were never placed correctly"*
-**Supersedes the authoring plan in SNG-392 §5 and SNG-395 §5.**
+**Supersedes the authoring plan in SNG-392 §5 and SNG-398 §5.**
 
 ---
 
@@ -75,12 +75,12 @@ right and the placement was never done.**
 **Promote the real ones to content, placed properly:**
 
 - **Parent from the fiction, not the graph.** The Cogitarium's entrance hall belongs to `the_cogitarium`
-  because it says so in its name — ⛔ **this is precisely the signal SNG-395 showed the topology could not
+  because it says so in its name — ⛔ **this is precisely the signal SNG-398 showed the topology could not
   give me.**
 - **`worldPos` from the parent**, since a room is at its building's coordinates.
 - **`localMap` authored per settlement**, which is what I was originally going to invent — **except now I
   am placing rooms that already exist in play rather than inventing rooms that do not.**
-- **`tier: site`, `parentId` set** — and these will pass the distance gate SNG-395 asked for, because a
+- **`tier: site`, `parentId` set** — and these will pass the distance gate SNG-398 asked for, because a
   room really is at its building.
 
 ⛔ **AND THE MADE GATE GOES TO CANON SEPARATELY.** A player-built waygate is a world event, not a site. It
@@ -88,7 +88,7 @@ needs a `waygate` flag, a tier, and a line in the lore — **the network is no l
 
 ---
 
-## §5 — What this changes about SNG-395
+## §5 — What this changes about SNG-398
 
 I said the site tier might have to be **authored from nothing**. ⛔ **It does not. It was authored in play
 and never collected.** The 65 topology-derived "sites" are still wrong and still need re-deriving — but the

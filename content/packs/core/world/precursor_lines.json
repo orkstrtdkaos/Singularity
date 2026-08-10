@@ -1,0 +1,306 @@
+{
+ "_note": "⛔ SNG-410. THE PRECURSOR LINE NETWORK. CCode: 'the precursor lines have no data in our asset — that's the one real authoring ask.' ⚠️ REGENERATED FROM CURRENT CANON, NOT SHIPPED FROM MY SANDBOX. My prototype file held 49 spans built before SNG-407 moved 11 locations; shipping it would have wired the network to where places used to be. ⛔ Reading a stale sandbox copy of a derived layer is how the Millfen happened.",
+ "_derivation": "Nodes are the substrateSource POOLS only — 33 of 44. A SINK is where the lattice DRAINS, not where a line runs; the Umbrals keep Dusklow low deliberately, and running a relay to it would contradict the reason it is a sink. Spans are a minimum spanning tree over the pools plus the 8 shortest non-tree links under 14°, because a network built to survive has redundancy and a bare tree does not.",
+ "_whatItMeans": "⛔ THESE LINES ARE DORMANT. Measured: waygates are only 1.1× closer to substrate sources than chance, and 2 of 26 sit within 3° of one. THE THREE NETWORKS ARE INDEPENDENT — Precursors laid these, someone else built the gates, and people walk neither. ⚠️ That is why `wake_the_line` exists as a craft: you only rouse a road nobody has been using. And it is why `gen-watershed-road` is canon — a player found a live relay chain 'south to the mill gate and north toward the ridge', which is one of these spans still carrying.",
+ "_rendering": "Straight great-circle arcs, drawn BELOW the surface radius — they run under the ground, not on it. ⚠️ They should be revealed by the `old_roads` craft, not shown by default: 'sense, follow, and safely approach Precursor traces.'",
+ "nodes": [
+  {
+   "id": "archive_hollow",
+   "lat": -68,
+   "lon": -164
+  },
+  {
+   "id": "cairn_and_scour",
+   "lat": -8,
+   "lon": 70
+  },
+  {
+   "id": "ent_deepwood",
+   "lat": -16,
+   "lon": -98
+  },
+  {
+   "id": "gearsflat",
+   "lat": -46,
+   "lon": 75
+  },
+  {
+   "id": "greenforge",
+   "lat": -5,
+   "lon": -114
+  },
+  {
+   "id": "greyhearth",
+   "lat": -47,
+   "lon": 36
+  },
+  {
+   "id": "kindlerow",
+   "lat": -45,
+   "lon": -90
+  },
+  {
+   "id": "sunken_choir",
+   "lat": -68.25,
+   "lon": -163.75
+  },
+  {
+   "id": "the_axis_gate",
+   "lat": -82,
+   "lon": 0
+  },
+  {
+   "id": "the_blaze",
+   "lat": 0,
+   "lon": -180
+  },
+  {
+   "id": "the_bloodless_hold",
+   "lat": -5,
+   "lon": 162
+  },
+  {
+   "id": "the_ceaseless",
+   "lat": -6,
+   "lon": -122
+  },
+  {
+   "id": "the_drawn_hour",
+   "lat": -7,
+   "lon": -52
+  },
+  {
+   "id": "the_grand_lattice",
+   "lat": -4,
+   "lon": -130
+  },
+  {
+   "id": "the_great_engine",
+   "lat": -1,
+   "lon": 150
+  },
+  {
+   "id": "the_held_yard",
+   "lat": -8,
+   "lon": 92
+  },
+  {
+   "id": "the_hollowing",
+   "lat": -20,
+   "lon": 68
+  },
+  {
+   "id": "the_kept_shrine",
+   "lat": -6,
+   "lon": -39
+  },
+  {
+   "id": "the_last_mask",
+   "lat": -3,
+   "lon": 11
+  },
+  {
+   "id": "the_maw",
+   "lat": 0,
+   "lon": 30
+  },
+  {
+   "id": "the_measured_engine",
+   "lat": -10,
+   "lon": 143
+  },
+  {
+   "id": "the_numen",
+   "lat": 0,
+   "lon": -30
+  },
+  {
+   "id": "the_second_reading",
+   "lat": -4,
+   "lon": 176
+  },
+  {
+   "id": "the_service_ways",
+   "lat": -4,
+   "lon": 146
+  },
+  {
+   "id": "the_stopped",
+   "lat": -3,
+   "lon": -45
+  },
+  {
+   "id": "the_unfallen",
+   "lat": -6,
+   "lon": -147
+  },
+  {
+   "id": "the_unlit_deep",
+   "lat": 1,
+   "lon": 0
+  },
+  {
+   "id": "the_untethered",
+   "lat": -3,
+   "lon": -61
+  },
+  {
+   "id": "waystone",
+   "lat": -14,
+   "lon": 126
+  }
+ ],
+ "spans": [
+  {
+   "a": "archive_hollow",
+   "b": "sunken_choir",
+   "deg": 0.27
+  },
+  {
+   "a": "sunken_choir",
+   "b": "the_axis_gate",
+   "deg": 44.23
+  },
+  {
+   "a": "the_axis_gate",
+   "b": "greyhearth",
+   "deg": 38.28
+  },
+  {
+   "a": "greyhearth",
+   "b": "gearsflat",
+   "deg": 26.86
+  },
+  {
+   "a": "gearsflat",
+   "b": "the_hollowing",
+   "deg": 26.65
+  },
+  {
+   "a": "the_hollowing",
+   "b": "cairn_and_scour",
+   "deg": 12.16
+  },
+  {
+   "a": "cairn_and_scour",
+   "b": "the_held_yard",
+   "deg": 21.79
+  },
+  {
+   "a": "the_held_yard",
+   "b": "waystone",
+   "deg": 33.91
+  },
+  {
+   "a": "waystone",
+   "b": "the_measured_engine",
+   "deg": 17.1
+  },
+  {
+   "a": "the_measured_engine",
+   "b": "the_service_ways",
+   "deg": 6.7
+  },
+  {
+   "a": "the_service_ways",
+   "b": "the_great_engine",
+   "deg": 5.0
+  },
+  {
+   "a": "the_great_engine",
+   "b": "the_bloodless_hold",
+   "deg": 12.63
+  },
+  {
+   "a": "the_bloodless_hold",
+   "b": "the_second_reading",
+   "deg": 13.99
+  },
+  {
+   "a": "the_second_reading",
+   "b": "the_blaze",
+   "deg": 5.66
+  },
+  {
+   "a": "the_blaze",
+   "b": "the_unfallen",
+   "deg": 33.5
+  },
+  {
+   "a": "the_unfallen",
+   "b": "the_grand_lattice",
+   "deg": 17.05
+  },
+  {
+   "a": "the_grand_lattice",
+   "b": "the_ceaseless",
+   "deg": 8.22
+  },
+  {
+   "a": "the_ceaseless",
+   "b": "greenforge",
+   "deg": 8.03
+  },
+  {
+   "a": "greenforge",
+   "b": "ent_deepwood",
+   "deg": 19.2
+  },
+  {
+   "a": "ent_deepwood",
+   "b": "kindlerow",
+   "deg": 29.81
+  },
+  {
+   "a": "ent_deepwood",
+   "b": "the_untethered",
+   "deg": 38.74
+  },
+  {
+   "a": "the_untethered",
+   "b": "the_drawn_hour",
+   "deg": 9.82
+  },
+  {
+   "a": "the_drawn_hour",
+   "b": "the_stopped",
+   "deg": 8.04
+  },
+  {
+   "a": "the_stopped",
+   "b": "the_kept_shrine",
+   "deg": 6.69
+  },
+  {
+   "a": "the_kept_shrine",
+   "b": "the_numen",
+   "deg": 10.81
+  },
+  {
+   "a": "the_numen",
+   "b": "the_unlit_deep",
+   "deg": 30.02
+  },
+  {
+   "a": "the_unlit_deep",
+   "b": "the_last_mask",
+   "deg": 11.7
+  },
+  {
+   "a": "the_last_mask",
+   "b": "the_maw",
+   "deg": 19.23
+  },
+  {
+   "a": "the_great_engine",
+   "b": "the_measured_engine",
+   "deg": 11.38
+  },
+  {
+   "a": "the_drawn_hour",
+   "b": "the_kept_shrine",
+   "deg": 12.96
+  }
+ ],
+ "_independenceMeasured": "⛔ RE-MEASURED ON THIS NETWORK, not carried over: waygates sit a median 6.32° from a precursor span against 2.72° for chance — a ratio of 0.43×, and 6 of 27 within 3°. ⚠️ THE NETWORKS REMAIN INDEPENDENT AFTER THE REBUILD. The claim was worth re-checking rather than quoting, because the locations moved underneath it."
+}

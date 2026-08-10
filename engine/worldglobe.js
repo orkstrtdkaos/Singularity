@@ -264,14 +264,60 @@ export function makeFinePatch(t, gen, centre, halfDeg, opts) {
     }
   }
 
+  // ⛔ THE SLOW FIELDS RIDE THE PATCH, ON A COARSER SUB-GRID. The region vote is a pass over 118 voters
+  // — 8.2µs a pixel — and running it per screen pixel took a full paint from 0.25s to 3.7s. It is also
+  // the smoothest thing on the map: a region boundary is hundreds of kilometres wide, so sampling it at
+  // a quarter of the terrain resolution loses nothing an eye could find.
+  // ⚠️ Built lazily. The topographic layer never asks for these, and paying for them on the default view
+  // is exactly the waste that caused the regression in the first place.
+  const FS = Math.max(8, Math.round(n / 4));                   // field sub-grid, a quarter the linear rate
+  let fReg = null, fDen = null;
+  const buildFields = () => {
+    fReg = new Array(FS * FS); fDen = new Float32Array(FS * FS);
+    const fstep = (2 * halfDeg) / (FS - 1);
+    for (let j = 0; j < FS; j++) for (let i = 0; i < FS; i++) {
+      const [lo, la] = frameToLonLat(-halfDeg + i * fstep, -halfDeg + j * fstep);
+      const r2 = regionVoteAt(t, lo, la);
+      fReg[j * FS + i] = r2;
+      fDen[j * FS + i] = densityAt(t, lo, la, r2);
+    }
+  };
+  const fieldAt = (e, nn) => {
+    if (!fReg) buildFields();
+    const fstep = (2 * halfDeg) / (FS - 1);
+    const x = Math.round(Math.max(0, Math.min(FS - 1, (e + halfDeg) / fstep)));
+    const y = Math.round(Math.max(0, Math.min(FS - 1, (nn + halfDeg) / fstep)));
+    return { region: fReg[y * FS + x], density: fDen[y * FS + x] };
+  };
+
+  // ⚠️ ONE-ENTRY MEMO ON THE FRAME TRANSFORM. A field layer asks the sampler for terrain and then asks
+  // `fieldsAt` for the region, with the SAME point — two acos+atan2 transforms per pixel for one
+  // location. The call order makes a single-slot cache hit every time, which is the cheapest possible
+  // fix and needs no coordination between the two callers.
+  let memoLon = NaN, memoLat = NaN, memoF = null;
+  const frameOf = (lon, lat) => {
+    if (lon === memoLon && lat === memoLat) return memoF;
+    memoLon = lon; memoLat = lat; memoF = lonLatToFrame(lon, lat);
+    return memoF;
+  };
   const sampler = (lon, lat) => {
-    const f = lonLatToFrame(lon, lat);
+    const f = frameOf(lon, lat);
     // ⛔ DECLINES rather than clamps: a point beyond the patch returned its EDGE sample once, which
     // painted everything outside the patch with whatever sat on its border, in patch-shaped rectangles.
     if (!f || Math.abs(f[0]) > halfDeg || Math.abs(f[1]) > halfDeg) return null;
     const r = at(raw, f[0], f[1]);
     const near = nearestType(f[0], f[1]);
+    // ⚠️ A PLAIN OBJECT, DELIBERATELY. My first attempt hung a getter here so the sub-grid would build
+    // lazily — and defining an ACCESSOR on a per-pixel object costs more than the work it defers: the
+    // topographic layer, which never reads the field at all, went from 0.80µs to 4.35µs a pixel. The
+    // laziness is real but it belongs on the SAMPLER, not on every pixel it returns.
     return { type: r > 0 ? (near === 0 ? 1 : near) : 0, raw: r, elevDelta: at(del, f[0], f[1]) };
+  };
+  /** the slow fields, asked for by name — only the layers that read them ever call this */
+  sampler.fieldsAt = (lon, lat) => {
+    const f = frameOf(lon, lat);
+    if (!f || Math.abs(f[0]) > halfDeg || Math.abs(f[1]) > halfDeg) return null;
+    return fieldAt(f[0], f[1]);
   };
   sampler.bufferN = n;
   sampler.bufferW = n; sampler.bufferH = n;
@@ -357,7 +403,7 @@ export function colorAt(t, lon, lat, opts) {
     const bands = 12 * (o.contourStep || 1);
     const tw = 1 - dep;                                        // rises toward the shore, same sense as land
     const bn = Math.floor(tw * bands);
-    if (Math.abs(tw * bands - bn - 0.5) < 0.055 * (o.contourStep || 1)) w = [w[0] * 1.35 + 6, w[1] * 1.3 + 8, w[2] * 1.22 + 10];
+    if (Math.abs(tw * bands - bn - 0.5) < 0.055) w = [w[0] * 1.35 + 6, w[1] * 1.3 + 8, w[2] * 1.22 + 10];
     return w;
   }
   // ⚠️ AND THE HILLSHADE FOLLOWS THE SAME SOURCE. Shading off the coarse grid under a per-pixel
@@ -365,11 +411,22 @@ export function colorAt(t, lon, lat, opts) {
   const sh = o.fine ? hillshadeFine(t, lon, lat, o.fine) : hillshade(t, lon, lat);
   const tone = (elevExact - 128) / 126;
   let c;
-  // ⚠️ WHEN THE VIEW IS CLOSE ENOUGH TO WARRANT DETAIL, THESE TWO ARE EVALUATED RATHER THAN SAMPLED.
-  // One region vote serves both, so a point costs one pass over 118 voters instead of two.
-  const voteRegion = o.fine && t.fields ? regionVoteAt(t, lon, lat) : null;
-  const dens = voteRegion ? densityAt(t, lon, lat, voteRegion) : s.density;
-  const nan = voteRegion ? naniteAt(t, lon, lat, voteRegion) : s.nanite;
+  // ⛔ ONLY THE LAYERS THAT USE IT PAY FOR IT — and getting this wrong cost a 15× slowdown on the
+  // DEFAULT layer. The region vote is a pass over 118 voters, 8.2µs a pixel; I ran it whenever a detail
+  // patch was active, including on the topographic layer, which reads neither density nor nanite. A
+  // 700×540 paint went from 0.25s to 3.67s for work whose result was discarded.
+  // ⚠️ This is the same mistake as the eleven-second repaint, one field along: per-pixel work over a
+  // large set, added without asking what a pixel actually needs.
+  // ⛔ ONLY THE LAYERS THAT USE IT PAY FOR IT, AND THEY READ IT OFF THE PATCH RATHER THAN VOTING PER
+  // PIXEL. Getting this wrong cost a 15× slowdown on the DEFAULT layer: the vote is 8.2µs a pixel and I
+  // ran it whenever a patch was active, including on topographic, which reads neither density nor
+  // nanite — a 700×540 paint went from 0.25s to 3.67s for work whose result was thrown away.
+  // ⚠️ Same mistake as the eleven-second repaint, one field along: per-pixel work over a large set,
+  // added without asking what a pixel actually needs.
+  const needsVote = fine && t.fields && o.fine.fieldsAt && (layer === "lattice" || layer === "nanite" || layer === "ground");
+  const pf = needsVote ? o.fine.fieldsAt(lon, lat) : null;
+  const dens = pf ? pf.density : s.density;
+  const nan = pf ? (t.fields.nanByRegion[pf.region] ?? 0) : s.nanite;
   if (layer === "lattice") {
     c = s.type === 3 ? [54, 52, 70] : [36 + dens * 200, 30 + dens * 160, 24 + dens * 40];
   } else if (layer === "nanite") {
@@ -389,9 +446,16 @@ export function colorAt(t, lon, lat, opts) {
     // where relief matters most. Measured after the level-set fix: 284 contour pixels in a full frame.
     // ⚠️ Doubling steps rather than a smooth ramp, so lines APPEAR between zoom levels instead of
     // sliding across the ground — a contour that drifts as you zoom is reporting the camera, not the land.
+    // ⛔ THE THRESHOLD IS A FRACTION OF THE BAND SPACING AND MUST NOT SCALE WITH THE STEP. Mine did,
+    // and the arithmetic is unforgiving: at step 8 the test inked 88% of every band and at step 16 it
+    // inked ALL of it — the "contours" Erik saw destroyed were not drawn wrongly, they were drawn
+    // EVERYWHERE, so the map became its own contour and the residue read as noise.
+    // ⚠️ Constant is also the RIGHT scaling, not merely the safe one: screen line width goes as
+    // threshold × zoom / bands, and `bands` already tracks the zoom through contourStep — so a constant
+    // threshold holds the line at a steady width, while scaling it multiplied the growth twice.
     const bands = 12 * (o.contourStep || 1);
     const bandN = Math.floor(tone * bands);
-    if (Math.abs(tone * bands - bandN - 0.5) < 0.055 * (o.contourStep || 1)) c = [c[0] * 0.72, c[1] * 0.72, c[2] * 0.72];
+    if (Math.abs(tone * bands - bandN - 0.5) < 0.055) c = [c[0] * 0.72, c[1] * 0.72, c[2] * 0.72];
     if (s.type === 3) c = [c[0] * 0.55 + 31.5, c[1] * 0.55 + 29.7, c[2] * 0.55 + 42.3];
     if (s.type === 2) c = [c[0] * 0.5 + 65, c[1] * 0.5 + 31, c[2] * 0.5 + 22];
   }

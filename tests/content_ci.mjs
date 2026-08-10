@@ -1083,6 +1083,33 @@ for (const pack of PACKS) {
       baked.add(b.density.toFixed(4));
       evaled.add(WGF.densityAt(tF, lon, lat).toFixed(4));
     }
+    // ⛔ SNG-413 — THE DEFAULT LAYER MUST NOT PAY FOR FIELDS IT NEVER READS. The region vote is a pass
+    // over 118 voters; running it whenever a detail patch was active — including on the topographic
+    // layer, which reads neither density nor nanite — took a full paint from 0.25s to 3.67s for work
+    // whose result was discarded. ⚠️ Same shape as the eleven-second repaint: per-pixel work over a
+    // large set, added without asking what a pixel needs.
+    const TGp = await import("../scripts/world/terrain.mjs");
+    const probe = WGF.makeFinePatch(tF, TGp.makeTerrain(canon.gp, { la0: -80, la1: -60, lo0: -110, lo1: -80 }),
+      { lat: -70, lon: -95 }, 8, { budgetMs: 60 });
+    // ⚠️ WARM BEFORE TIMING, for the reason the patch calibration already learned: the first calls run
+    // interpreted and read several times pessimistic.
+    const timeLayer = (layer) => {
+      for (let i = 0; i < 1500; i++) WGF.colorAt(tF, -95 + (i % 80) * 0.002, -70 + (i % 37) * 0.002, { layer, fine: probe, contourStep: 8 });
+      const t0 = Date.now();
+      for (let i = 0; i < 4000; i++) WGF.colorAt(tF, -95 + (i % 80) * 0.002, -70 + (i % 37) * 0.002,
+        { layer, fine: probe, contourStep: 8 });
+      return (Date.now() - t0) * 1000 / 4000;
+    };
+    const topoUs = timeLayer("topo"), naniteUs = timeLayer("nanite");
+    // ⛔ THE GATE IS THE SHAPE; THE SECONDS ARE A REPORT. A wall-clock assertion inside a full suite
+    // measures the machine and the JIT as much as the code — it read 0.96s standalone and 1.32s in the
+    // suite, and a gate that fails on a busy laptop teaches people to ignore it. What is INVARIANT is
+    // that the default layer must not pay for a field it never reads, and that is asserted as a ratio.
+    check("SNG-413: the topographic layer does NOT pay for the region vote — it reads neither density nor nanite",
+      topoUs < naniteUs * 1.35, `topo ${topoUs.toFixed(2)}µs vs nanite ${naniteUs.toFixed(2)}µs a pixel`);
+    console.log(`note  SNG-413: a full 700×540 paint costs ~${(topoUs * 378000 / 1e6).toFixed(2)}s topographic, ` +
+      `~${(naniteUs * 378000 / 1e6).toFixed(2)}s nanite on this machine (was 3.67s before the fields moved onto the patch)`);
+
     check("SNG-409 §1: …and it RESOLVES — the same ground carries far more tone evaluated than baked",
       evaled.size > baked.size * 10,
       `${baked.size} baked values vs ${evaled.size} evaluated across 4° through the strongest source`);

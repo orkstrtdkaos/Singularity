@@ -7338,6 +7338,27 @@ await (async () => {
     // ⚠️ POWERS OF TWO ONLY, so lines APPEAR between levels instead of sliding across the ground: a
     // contour that drifts as you zoom is reporting the camera rather than the land.
     const steps403 = [180, 45, 20, 10, 3].map((sp) => WG2.contourStepFor(sp));
+    // ⛔ SNG-413 — THE CONTOUR THRESHOLD MUST NOT SCALE WITH THE INTERVAL, and the arithmetic is what
+    // proves it rather than the picture. The test inks a band when |tone·bands − n − 0.5| < threshold,
+    // and band edges sit 1.0 apart in those units — so the inked FRACTION is 2×threshold. Mine scaled the
+    // threshold by the step: 0.11 of a band at step 1, but 0.88 at step 8 and MORE THAN ALL of it at 16.
+    // The contours Erik saw "continuously destroyed" were not drawn wrongly, they were drawn EVERYWHERE.
+    // ⚠️ Constant is also the CORRECT scaling, not just the safe one: screen line width goes as
+    // threshold × zoom / bands, and `bands` already tracks zoom through contourStep — so scaling the
+    // threshold too multiplied the growth twice over.
+    const inkedFraction = (step) => 2 * 0.055;                 // the shipped rule: threshold is constant
+    const wouldHaveBeen = (step) => 2 * 0.055 * step;          // the rule that shipped broken
+    check("413: the contour ink stays a THIN fraction of every band at every interval",
+      [1, 2, 4, 8, 16].every((st) => inkedFraction(st) < 0.2),
+      [1, 2, 4, 8, 16].map((st) => st + ":" + (100 * inkedFraction(st)).toFixed(0) + "%").join(" "));
+    check("413: …and the scaled threshold that shipped WOULD have flooded the map — the red, kept",
+      wouldHaveBeen(8) > 0.5 && wouldHaveBeen(16) >= 1,
+      `step 8 would ink ${(100 * wouldHaveBeen(8)).toFixed(0)}%, step 16 ${(100 * wouldHaveBeen(16)).toFixed(0)}%`);
+    // and the shipped source must actually carry the constant, not the product
+    const wgSrc413 = readFileSync(join(root, "engine/worldglobe.js"), "utf8");
+    check("413: …and the viewer uses the constant, never the interval-scaled threshold",
+      !/0\.055\s*\*\s*\(o\.contourStep/.test(wgSrc413) && /<\s*0\.055\)/.test(wgSrc413));
+
     check("403: the contour interval FOLLOWS the zoom — a regional map carries regional relief",
       steps403[0] === 1 && steps403.every((v, i) => i === 0 || v >= steps403[i - 1])
       && steps403.every((v) => Number.isInteger(Math.log2(v))) && steps403[4] > steps403[0],

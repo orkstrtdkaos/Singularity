@@ -1,87 +1,87 @@
 {
-  "schemaVersion": 1,
-  "id": "sunken_choir",
-  "name": "The Sunken Choir",
-  "regionId": "valley",
-  "communityId": "valley.sunken_choir",
-  "spectrum": {
-    "mechanical_spiritual": 0.5,
-    "death_life": -0.2,
-    "concrete_abstract": 0.5,
-    "space_time": 0.4,
-    "dark_light": -0.2
-  },
-  "tags": [
-    "ruin",
-    "sonic",
-    "pre-transition",
-    "flooded",
-    "sacred",
-    "restricted"
-  ],
-  "connections": [
-    "harmonic_heights_terrace",
-    "echo_river_crossing",
-    "millbrook"
-  ],
-  "descriptionSeed": "A pre-transition amphitheater half-drowned in a still black tarn below the Heights — tiered stone seats descending into water so quiet it doubles the sky. Before the transition it was built to hold sound the way a cup holds water; now, on certain nights, it still does. Stand at the rim and a chord you didn't sing comes back to you, changed. The Heights folk call it sacred and stay away; a few won't, and those few tend to come back different. This is not the contaminated river — the tarn is clear as glass, and what haunts it is older than the crisis and stranger.",
-  "loreRefs": [
-    "valley_primer",
-    "precursor_glimpse"
-  ],
-  "npcsPresent": [
-    "vesper_the_listener",
-    "old_choirmaster"
-  ],
-  "encounterFlavor": "A hush that isn't empty. Resonance that answers before it's made. Pilgrims who came to hear a dead voice and won't leave; a scholar mapping the echo; the sense that the Choir is patiently teaching itself to speak.",
-  "dangerLevel": 3,
-  "image": "content/packs/valley/assets/sunken_choir.jpg",
-  "questSeeds": [
-    "Vesper comes here every night to hear her drowned brother's voice in the return-chord and is slowly being unmade by it; someone could help her stop, or help her finish, and it isn't obvious which is mercy",
-    "The old Choirmaster believes the amphitheater is trying to complete a song interrupted at the transition, and that finishing it would either heal something or open something — he needs hands and doesn't fully care which",
-    "Sonic-attuned characters find the Choir will teach them, fast and free, in exchange for something it doesn't name up front — the price reveals itself only after the third lesson",
-    "A Heights family wants a relative's body recovered from the tarn before the Choir 'keeps' the voice for good; diving the drowned tiers is its own peril"
-  ],
-  "map": {
-    "x": 320,
-    "y": 250
-  },
-  "poleIntensity": {
-    "spiritual": 0.5,
-    "death": 0.2,
-    "abstract": 0.5,
-    "time": 0.4,
-    "dark": 0.2
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.26,
-    "radius": 95,
-    "reason": "A pre-Transition sonic work, flooded and intact. The water preserved the lattice as surely as it preserved the stone.",
-    "radiusWorld": 0.057,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    0.5,
-    0.5,
-    0,
-    -0.2,
-    -0.2,
-    0.4,
-    0,
-    0
-  ],
-  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
-  "worldPos": {
-    "colatitude": 24,
-    "longitude": 205,
-    "depth": -2
-  },
-  "worldPosNote": "A pre-Transition sonic work, flooded. Valley country, below the water table. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "echo_river_crossing"
+ "schemaVersion": 1,
+ "id": "sunken_choir",
+ "name": "The Sunken Choir",
+ "regionId": "valley",
+ "communityId": "valley.sunken_choir",
+ "spectrum": {
+  "mechanical_spiritual": 0.5,
+  "death_life": -0.2,
+  "concrete_abstract": 0.5,
+  "space_time": 0.4,
+  "dark_light": -0.2
+ },
+ "tags": [
+  "ruin",
+  "sonic",
+  "pre-transition",
+  "flooded",
+  "sacred",
+  "restricted"
+ ],
+ "connections": [
+  "harmonic_heights_terrace",
+  "echo_river_crossing",
+  "millbrook"
+ ],
+ "descriptionSeed": "A pre-transition amphitheater half-drowned in a still black tarn below the Heights — tiered stone seats descending into water so quiet it doubles the sky. Before the transition it was built to hold sound the way a cup holds water; now, on certain nights, it still does. Stand at the rim and a chord you didn't sing comes back to you, changed. The Heights folk call it sacred and stay away; a few won't, and those few tend to come back different. This is not the contaminated river — the tarn is clear as glass, and what haunts it is older than the crisis and stranger.",
+ "loreRefs": [
+  "valley_primer",
+  "precursor_glimpse"
+ ],
+ "npcsPresent": [
+  "vesper_the_listener",
+  "old_choirmaster"
+ ],
+ "encounterFlavor": "A hush that isn't empty. Resonance that answers before it's made. Pilgrims who came to hear a dead voice and won't leave; a scholar mapping the echo; the sense that the Choir is patiently teaching itself to speak.",
+ "dangerLevel": 3,
+ "image": "content/packs/valley/assets/sunken_choir.jpg",
+ "questSeeds": [
+  "Vesper comes here every night to hear her drowned brother's voice in the return-chord and is slowly being unmade by it; someone could help her stop, or help her finish, and it isn't obvious which is mercy",
+  "The old Choirmaster believes the amphitheater is trying to complete a song interrupted at the transition, and that finishing it would either heal something or open something — he needs hands and doesn't fully care which",
+  "Sonic-attuned characters find the Choir will teach them, fast and free, in exchange for something it doesn't name up front — the price reveals itself only after the third lesson",
+  "A Heights family wants a relative's body recovered from the tarn before the Choir 'keeps' the voice for good; diving the drowned tiers is its own peril"
+ ],
+ "map": {
+  "x": 320,
+  "y": 250
+ },
+ "poleIntensity": {
+  "spiritual": 0.5,
+  "death": 0.2,
+  "abstract": 0.5,
+  "time": 0.4,
+  "dark": 0.2
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.26,
+  "radius": 95,
+  "reason": "A pre-Transition sonic work, flooded and intact. The water preserved the lattice as surely as it preserved the stone.",
+  "radiusWorld": 0.057,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0.5,
+  0.5,
+  0,
+  -0.2,
+  -0.2,
+  0.4,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+ "worldPos": {
+  "colatitude": 21.75,
+  "longitude": 196.25,
+  "depth": -2
+ },
+ "worldPosNote": "⛔ SNG-407: moved 4.08° (7 walking days) onto the nearest river the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 24, longitude 205.",
+ "tier": "settlement",
+ "parentId": "echo_river_crossing"
 }

@@ -3,7 +3,7 @@
  "_shapes": "`lens` — the interference band between two powers: everywhere both fields are comparable. `hull` — the buffered extent of named members. `disc` — a centre and a radius. ⚠️ A LENS IS DERIVED, NOT DRAWN: give it two foci and a tolerance and it follows the powers if they ever move. That is the difference between an area and a polygon somebody typed.",
  "disputed_zone": {
   "name": "The Disputed Zone",
-  "kind": "lens",
+  "kind": "ellipse",
   "drawAs": "hazard",
   "foci": [
    {
@@ -22,14 +22,27 @@
    "lat": -68.5,
    "lon": 78.0
   },
-  "asymmetryTolerance": 0.35,
   "definition": "⛔ DERIVED FROM ITS OWN TEXT: 'the band of broken country WHERE HARMONIC AND RADIANT POWER FIELDS INTERFERE.' A point is in the zone when both powers are comparably distant — |d_harmonic − d_radiant| / separation < 0.35 — and neither is more than 1.1× the separation away. ⚠️ THE FICTION IS THE FORMULA. Sound bends light here because both reach equally.",
   "membersInBand": [
-   "the_great_coliseum",
+   "harmonic_heights_terrace",
+   "radiant_plateau_edge",
+   "the-low-lamp-inn",
+   "thornwake_glade",
    "old_switchback",
    "echo_river_crossing"
   ],
-  "⛔ finding": "THE FRINGE'S OWN PIN IS 67.7° — ABOUT 113 WALKING DAYS — FROM THE MIDPOINT OF THE TWO POWERS IT IS NAMED FOR. ⚠️ THIS PREDATES MY SNG-407 MOVE: it was 67.7° away before I touched it, so a 4.75° snap did not cause it. A place called 'the Disputed Zone Fringe' is standing four months' walk from the dispute. ⛔ ERIK'S CALL: relocate the fringe into the band, or accept that the name refers to a dispute it is not near.",
-  "⚠️ parentage": "Of the 8 locations parented to the fringe, only ECHO RIVER CROSSING is in the band. The others span 288° OF LONGITUDE — the entire world. That is the SNG-398 parenting artifact again: topology grouped them, geography never did. THE GREAT COLISEUM and OLD SWITCHBACK are in the band and are NOT parented to it."
+  "membershipRule": "⛔ ELLIPSE, NOT EQUIDISTANCE. A point is in the zone when d_harmonic + d_radiant <= 1.35 × separation. ⚠️ MY FIRST FORMULA TESTED ONLY ASYMMETRY — whether the two fields were comparably distant — AND THAT IS NOT BETWEENNESS. The Great Coliseum is exactly equidistant from both powers (18.2° and 18.2°, asymmetry 0.00) while sitting FAR OFF TO THE SIDE: a tall thin triangle, sum-over-separation 1.63. Erik caught it — it belongs to the Crossing and always did. An ellipse with both powers as foci is the correct shape and excludes it cleanly.",
+  "k": 1.35,
+  "_namingNote": "⚠️ ERIK RECALLED 'the Radiant Heights and the Resonant Plateau'. CANON HAS THE QUALIFIERS THE OTHER WAY: `harmonic_heights_terrace` is 'Harmonic Heights — Lower Terrace', the SONIC civilization ('buildings grown from phononic crystal'), and `radiant_plateau_edge` is 'Radiant Plateau — Edge District', the PHOTONIC one ('towers catch and braid the sunlight'). The zone's own seed says 'where HARMONIC and RADIANT power fields interfere'. ⛔ So the foci are right; the pairing is Harmonic-Heights and Radiant-Plateau. Flagging rather than silently agreeing — if the intent was Resonant rather than Harmonic, that is a rename across several files and Erik's call.",
+  "_openQuestions": [
+   {
+    "q": "the fringe's pin",
+    "detail": "⛔ `disputed_zone_fringe` sits 67.7° — about 113 walking days — from the midpoint of the two powers. Predates SNG-407. It is not in its own zone."
+   },
+   {
+    "q": "the old switchback",
+    "detail": "⚠️ ERIK: 'the switchback should be near Millbrook.' THE DATA DISAGREES: it is 74.1° (123 days) from Millbrook, has NO connection to it, is parented to `kestrels_roost`, sits in `the_echo_vale`, and connects to kestrels_roost, thornwake_glade and the Cogitarium's third terrace. Its seed is mountain country — 'the old road up toward the high pass, stone-cut switchbacks clinging to the mountainside' — and Millbrook is a riverside farming village on the valley floor. ⛔ BY THE ELLIPSE IT IS IN THE DISPUTED ZONE (1.11), which fits a contested mountain road better than it fits Millbrook. Not moved; Erik to rule."
+   }
+  ]
  }
 }

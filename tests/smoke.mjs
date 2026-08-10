@@ -7090,6 +7090,42 @@ await (async () => {
       /could not be read/.test(app390) && /Region navigation still works/.test(app390));
     check("390: no CDN — the app still fetches nothing off any network",
       !/cdnjs|unpkg|jsdelivr|https?:\/\/[^"']*\.js/.test(readFileSync(join(root, "index.html"), "utf8")));
+
+    // ⛔ SNG-394b — THE PIN FRAME AGREES WITH THE TERRAIN, proved through the viewer's OWN path.
+    // The globe shipped with `90 - colatitude` in visiblePins while the raster used the map frame
+    // (lat = colatitude - 90; the Crossing IS the south pole): every pin mirrored into the empty
+    // northern ocean, and the block above never noticed because no gate ever pushed a REAL location
+    // through the conversion. Erik saw it in one glance. So: every real location, projected by
+    // visiblePins, unprojected off its own screen point, sampled on the terrain — the water census
+    // must be EMPTY (measured: 0 of 118, even the flooded Sunken Choir reads its lake shore at pack
+    // resolution), and the mirrored injection — the bug, replayed — must FLOOD.
+    const locDir394 = join(root, "content/packs/valley/locations");
+    const locs394 = {};
+    for (const f of readdirSync(locDir394).filter((x) => x.endsWith(".json"))) {
+      const l = JSON.parse(readFileSync(join(locDir394, f), "utf8")); locs394[l.id] = l;
+    }
+    const wpos394 = (id) => locs394[id]?.worldPos
+      ? { longitude: locs394[id].worldPos.longitude, colatitude: locs394[id].worldPos.colatitude } : null;
+    const waterCensus = (posOf) => {
+      const wet = new Set(), seen = new Set();
+      for (const yaw of [0, 120, 240]) {
+        const v394 = { yaw, pitch: 0, r: 100, cx: 0, cy: 0 };
+        for (const pin of WG.visiblePins(t, v394, posOf)) {
+          seen.add(pin.id);
+          const u = WG.unproject(pin.x, pin.y, v394);
+          if (WG.sampleAt(t, u.lon, u.lat).type === 0) wet.add(pin.id);
+        }
+      }
+      return { wet, seen };
+    };
+    const cen394 = waterCensus(wpos394);
+    check("394b: every pin stands on its own terrain — the water census is EMPTY across all 118, via the viewer's own conversion",
+      cen394.seen.size === 118 && cen394.wet.size === 0, [...cen394.wet].sort().join(", "));
+    const flood394 = waterCensus((id) => { const w = wpos394(id); return w ? { longitude: w.longitude, colatitude: 180 - w.colatitude } : null; });
+    check("394b: …and the MIRRORED frame — the shipped bug, replayed — floods the census, so the gate is known to fire",
+      flood394.wet.size > 50, `mirrored water pins: ${flood394.wet.size}`);
+    check("394b: the wrong-sign conversion never comes back — no `90 - <x>.colatitude` in the viewer or the app",
+      !/90\s*-\s*\w+\.colatitude/.test(wgSrc) && !/90\s*-\s*\w+\.colatitude/.test(app390));
   }
 
   // ══ SNG-392 §1 — THE LOCAL FRAME. Erik's ruling is the whole shape: "local ground CAN overturn

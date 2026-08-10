@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.97";
+const APP_VERSION = "1.9.98";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6991,7 +6991,9 @@ function wireWorldGlobe() {
   if (!cv) return;
   const readout = document.getElementById("globe-read");
   const ctx = cv.getContext("2d", { willReadFrequently: true });
-  const view = { yaw: 20, pitch: 14, r: Math.min(cv.width, cv.height) * 0.44, cx: cv.width / 2, cy: cv.height / 2 };
+  // pitch faces the SOUTHERN hemisphere by default — the Crossing is the south pole and every location
+  // lives at lat ≤ 0, so opening on the north showed a hemisphere of ocean with no pins on it.
+  const view = { yaw: 20, pitch: -52, r: Math.min(cv.width, cv.height) * 0.44, cx: cv.width / 2, cy: cv.height / 2 };
   let layer = "topo", source = "precursor", dragging = false, lastX = 0, lastY = 0, pins = [];
 
   const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;
@@ -7042,7 +7044,7 @@ function wireWorldGlobe() {
   window.addEventListener("mouseup", () => { if (dragging) { dragging = false; paint(false); } });
   cv.onmousemove = (e) => {
     if (dragging) {
-      view.yaw -= (e.offsetX - lastX) * 0.35;
+      view.yaw += (e.offsetX - lastX) * 0.35;                  // the surface follows the hand — drag right, world goes right
       view.pitch = Math.max(-85, Math.min(85, view.pitch + (e.offsetY - lastY) * 0.35));
       lastX = e.offsetX; lastY = e.offsetY;
       paint(true);
@@ -7055,7 +7057,7 @@ function wireWorldGlobe() {
       // ⚠️ THE READOUT SAYS WHAT THE TERRAIN SAYS, not what a location file says — the two are different
       // sources and blending them would hide a disagreement rather than surface it.
       const wp = worldPosOf(p.id);
-      const s = wp ? sampleAt(_terrain, wp.longitude, 90 - wp.colatitude) : null;
+      const s = wp ? sampleAt(_terrain, wp.longitude, wp.colatitude - 90) : null;   // map frame: colat - 90
       readout.textContent = `${p.name}${p.waygate ? " ◈ waygate" : ""}${s ? ` — ${s.biome || "unmapped"}, ${s.type === 0 ? "water" : "elev " + s.elevation}` : ""}`;
     } else readout.textContent = "Drag to spin · scroll to zoom · click a place to enter its region.";
   };

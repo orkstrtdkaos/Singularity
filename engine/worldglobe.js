@@ -156,7 +156,10 @@ export function visiblePins(t, view, worldPosOf) {
     const m = t.locations[id];
     const wp = worldPosOf ? worldPosOf(id) : null;
     if (!wp || !Number.isFinite(wp.longitude) || !Number.isFinite(wp.colatitude)) continue;
-    const p = project(wp.longitude, 90 - wp.colatitude, view);
+    // ⛔ MAP FRAME: lat = colatitude - 90 — the Crossing IS the south pole. The first form of this
+    // line used 90 - colatitude and mirrored every pin into the empty northern ocean while the terrain
+    // stayed put; Erik read it off the screen in one glance. Same frame as the asset and the pipeline.
+    const p = project(wp.longitude, wp.colatitude - 90, view);
     if (p) out.push({ id, name: m.n || id, region: m.r || null, waygate: !!m.wg, x: p.x, y: p.y, z: p.z });
   }
   return out.sort((a, b) => a.z - b.z);

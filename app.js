@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.113";
+const APP_VERSION = "1.9.114";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7014,7 +7014,15 @@ function wireWorldGlobe() {
   let _fineGen = null, _fineLoading = false, _fineFailed = false;
   // ⚠️ the precursor network is a small authored file (29 nodes, 30 spans) — fetched once, and only
   // ever drawn for a character who can sense it.
-  let _precursorLines = null;
+  let _precursorLines = null, _areas = null, _zoneMembers = null;
+  fetch("content/packs/core/world/areas.json?v=" + APP_VERSION)
+    .then((r) => r.json()).then((d) => {
+      _areas = d;
+      // computed once when the areas land — the membership rule is geometry, not a per-frame question
+      _zoneMembers = d.disputed_zone ? areaMembers(d.disputed_zone, CONTENT.locations) : [];
+      paint(false);
+    })
+    .catch(() => { /* areas are an enhancement */ });
   fetch("content/packs/core/world/precursor_lines.json?v=" + APP_VERSION)
     .then((r) => r.json()).then((d) => { _precursorLines = d; paint(false); })
     .catch(() => { /* the lines are an enhancement; roads and gates still draw */ });
@@ -7121,6 +7129,9 @@ function wireWorldGlobe() {
     // for the raster path and the same trade applies harder here.
     const span = spanDeg(view, Math.min(cv.width, cv.height));
     const fine = coarse ? null : fineFor(span);
+    // one closure per paint rather than a lookup per pixel; null when no areas are loaded
+    const zone = _areas && _areas.disputed_zone;
+    const _areaField = zone ? (lo, la) => areaFieldAt(zone, lo, la) : null;
     // ⚠️ a regional view earns a finer contour interval — see contourStepFor: the rule lives in the
     // viewer so the map and any gate that checks it read the same one.
     const contourStep = contourStepFor(span);
@@ -7128,7 +7139,17 @@ function wireWorldGlobe() {
       for (let x = 0; x < cv.width; x += step) {
         const g = unproject(x + 0.5, y + 0.5, view);
         let r = 4, gr = 4, b = 10;                                  // the void behind the world
-        if (g) { const c = colorAt(_terrain, g.lon, g.lat, { layer, band, bandFn: bandFactor, fine, contourStep }); r = c[0]; gr = c[1]; b = c[2]; }
+        if (g) {
+          const c = colorAt(_terrain, g.lon, g.lat, { layer, band, bandFn: bandFactor, fine, contourStep });
+          r = c[0]; gr = c[1]; b = c[2];
+          // ⛔ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA, AND HAS NO CLEAN EDGE. Drawing it as a
+          // per-pixel tint rather than an outline is what satisfies "the fiction says shimmer-vortices
+          // WANDER": the band fades out through its own field, so there is no boundary to point at.
+          if (_areaField) {
+            const f2 = _areaField(g.lon, g.lat);
+            if (f2 > 0) { const m = 0.30 * f2; r = r * (1 - m) + 176 * m; gr = gr * (1 - m) + 96 * m; b = b * (1 - m) + 152 * m; }
+          }
+        }
         for (let dy = 0; dy < step && y + dy < cv.height; dy++) {
           for (let dx = 0; dx < step && x + dx < cv.width; dx++) {
             const o = ((y + dy) * cv.width + (x + dx)) * 4;
@@ -7275,7 +7296,13 @@ function wireWorldGlobe() {
       // sources and blending them would hide a disagreement rather than surface it.
       const wp = worldPosOf(p.id);
       const s = wp ? sampleAt(_terrain, wp.longitude, wp.colatitude - 90) : null;   // map frame: colat - 90
-      readout.textContent = `${p.name}${p.waygate ? " ◈ waygate" : ""}${s ? ` — ${s.biome || "unmapped"}, ${s.type === 0 ? "water" : "elev " + s.elevation}` : ""}`;
+      // ⛔ SNG-409 §5 — THE BAND IS A FACT ABOUT A PLACE, so a place inside it says so. Membership is
+      // COMPUTED (her constraint), which is exactly why it is worth showing: the graph says the Fringe
+      // has eight children and the geometry disagrees, and a player hovering a place should be told
+      // what the GROUND says rather than what the parent link claims.
+      const zoneNow = _areas && _areas.disputed_zone;
+      const inZone = zoneNow && _zoneMembers && _zoneMembers.includes(p.id);
+      readout.textContent = `${p.name}${p.waygate ? " ◈ waygate" : ""}${s ? ` — ${s.biome || "unmapped"}, ${s.type === 0 ? "water" : "elev " + s.elevation}` : ""}${inZone ? ` · in ${zoneNow.name}` : ""}`;
     } else readout.textContent = "Drag to spin · scroll to zoom · click a place to enter its region.";
   };
   // ⛔ A CLICK FLIES THE CAMERA; IT DOES NOT LEAVE THE MAP. Erik: "clicking a dot right now jumps you to

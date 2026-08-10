@@ -882,6 +882,41 @@ for (const pack of PACKS) {
     check("SNG-396: the Made Gate is captured — a player-built waygate is a world event sitting in a save, and the census holds it",
       gp396.places.some((p) => p.id === "gen-the-made-gate" && p.visits >= 1));
   }
+  // ══ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA.
+  // "No location in this world has a boundary — all 135 are points, including the 25 marked
+  // `tier: region`. A contested territory currently looks like a village."
+  {
+    const WGA = await import("../engine/worldglobe.js");
+    const zone = rj("content/packs/core/world/areas.json").disputed_zone;
+
+    // ⛔ HER LOAD-BEARING CONSTRAINT: "membership must be COMPUTED, not read from `parentId`."
+    const computed = WGA.areaMembers(zone, canon.locs);
+    const byGraph = Object.values(canon.locs).filter((l) => l.parentId === "disputed_zone_fringe").map((l) => l.id).sort();
+    const graphOnly = byGraph.filter((id) => !computed.includes(id));
+    const bandOnly = computed.filter((id) => !byGraph.includes(id));
+    check("SNG-409 §5: zone membership is COMPUTED — the graph and the band are genuinely different sets",
+      computed.length > 3 && (graphOnly.length > 0 || bandOnly.length > 0),
+      `in the graph but not the band: ${graphOnly.join(", ") || "none"}; in the band but not the graph: ${bandOnly.join(", ") || "none"}`);
+
+    // ⛔ HER OWN CORRECTION, HELD AS A GATE: "ELLIPSE, NOT EQUIDISTANCE. My first formula tested only
+    // whether the two fields were comparably distant, AND THAT IS NOT BETWEENNESS. The Great Coliseum is
+    // exactly equidistant from both powers" — and sits far off to the side. The equidistance test admits
+    // it; the ellipse must not.
+    const col = canon.locs.the_great_coliseum;
+    check("SNG-409 §5: the ellipse rejects the equidistant-but-distant case — equidistance is not betweenness",
+      !!col && WGA.areaFieldAt(zone, col.worldPos.longitude, col.worldPos.colatitude - 90) === 0);
+
+    // ⚠️ AND IT IS A BAND, NOT A POLYGON. Her acceptance: "done when the zone reads as a band with NO
+    // CLEAN EDGE — the fiction says shimmer-vortices wander." A field with intermediate values has no
+    // boundary to point at; an outline would assert a precision the world denies.
+    const along = [];
+    for (let i = 0; i <= 20; i++) along.push(WGA.areaFieldAt(zone, 78 + i * 2.2, -68.5));
+    const soft = new Set(along.filter((v) => v > 0.02 && v < 0.98)).size;
+    check("SNG-409 §5: …and it fades rather than ending — a band with no clean edge, as the fiction asks",
+      soft >= 5 && along[0] > 0.9 && along[along.length - 1] === 0,
+      `${soft} intermediate values across the transect`);
+  }
+
   // ══ SNG-409 §3 — THE THREE NETWORKS ARE VISIBLY INDEPENDENT.
   // Aevi: "This is not decoration — it is a measured argument. Waygates are only 1.1× closer to
   // substrate sources than chance. ⛔ Precursors laid the lines, someone else built the gates, and

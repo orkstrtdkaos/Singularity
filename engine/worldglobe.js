@@ -529,6 +529,52 @@ export const MARKER_STYLE = {
   here:       { shape: "here",    r: 5.0, fill: "#e8c14a", stroke: "#e8c14a", label: "you are here" },
 };
 
+/** ⛔ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA. "No location in this world has a boundary — all
+ *  135 are points, including the 25 marked `tier: region`. A contested territory currently looks like a
+ *  village."
+ *
+ *  ⛔ THE FICTION IS THE FORMULA, and it is hers: the Disputed Zone is "the band of broken country where
+ *  harmonic and radiant power fields interfere", which makes it an ELLIPSE about the two powers —
+ *  `d_a + d_b ≤ k × separation`. ⚠️ She had already corrected her own first attempt, and the correction
+ *  is worth keeping in view: equidistance is NOT betweenness. The Great Coliseum is exactly equidistant
+ *  from both powers and sits far off to the side; an asymmetry test admitted it and an ellipse does not.
+ *
+ *  ⚠️ RETURNS A FIELD, NOT A POLYGON. Her acceptance is "the zone reads as a band with NO CLEAN EDGE —
+ *  the fiction says shimmer-vortices wander", so this gives an insideness from 1 at the foci to 0 past
+ *  the boundary and the caller tints by it. A drawn outline would assert a precision the world denies. */
+export function areaFieldAt(area, lon, lat) {
+  if (!area?.foci || area.foci.length < 2) return 0;
+  const R2 = Math.PI / 180;
+  const gc = (a, b) => Math.acos(Math.max(-1, Math.min(1,
+    Math.sin(a[0] * R2) * Math.sin(b[0] * R2) +
+    Math.cos(a[0] * R2) * Math.cos(b[0] * R2) * Math.cos((a[1] - b[1]) * R2)))) / R2;
+  const p = [lat, lon];
+  const dA = gc(p, [area.foci[0].lat, area.foci[0].lon]);
+  const dB = gc(p, [area.foci[1].lat, area.foci[1].lon]);
+  const sep = area.separationDeg || gc([area.foci[0].lat, area.foci[0].lon], [area.foci[1].lat, area.foci[1].lon]);
+  const k = area.k || 1.35;
+  const sum = dA + dB;
+  const bound = k * sep;
+  if (sum >= bound) return 0;
+  // ⚠️ soft toward the rim: 1 along the line between the powers, falling to 0 at the boundary, so the
+  // band has no edge to point at — which is the whole of her acceptance test.
+  const t = (bound - sum) / Math.max(1e-9, bound - sep);
+  return Math.max(0, Math.min(1, t));
+}
+
+/** ⛔ MEMBERSHIP IS COMPUTED, NEVER READ FROM `parentId` — her one load-bearing constraint, and she gave
+ *  the measurement that forces it: "only 1 of the Fringe's 8 children is actually in the band; the other
+ *  7 span 288° of longitude. The graph is wrong by measurement." */
+export function areaMembers(area, locations) {
+  const out = [];
+  for (const id of Object.keys(locations || {})) {
+    const l = locations[id];
+    if (!l?.worldPos) continue;
+    if (areaFieldAt(area, l.worldPos.longitude, l.worldPos.colatitude - 90) > 0) out.push(id);
+  }
+  return out.sort();
+}
+
 /** ⛔ SNG-409 §3 — THE THREE NETWORKS, AND THEIR INDEPENDENCE IS THE POINT. Aevi: "Precursors laid the
  *  lines, someone else built the gates, and people walk neither. That is why `wake_the_line` exists as a
  *  craft — you only rouse a road nobody has been using. The map is the only place a player can see it."

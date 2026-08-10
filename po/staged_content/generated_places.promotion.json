@@ -1,0 +1,139 @@
+{
+ "_note": "⛔ SNG-396 PROMOTION LIST. 17 generated places extracted from play. ⚠️ PARENT COMES FROM THE FICTION, NOT THE GRAPH — that is the signal SNG-398 proved topology could not give me.",
+ "promote": [
+  {
+   "id": "gen-cogitarium-entrance-hall",
+   "name": "Cogitarium Entrance Hall",
+   "parentId": "the_cogitarium",
+   "tier": "site",
+   "regionFix": "somatic_reaches (was correct); its sibling said valley",
+   "why": "⛔ Its NAME says whose it is. Two rooms of one building were filed in regions on opposite sides of the world."
+  },
+  {
+   "id": "gen-cogitarium-third-terrace",
+   "name": "Cogitarium Third Terrace",
+   "parentId": "the_cogitarium",
+   "tier": "site",
+   "regionFix": "valley -> somatic_reaches",
+   "why": "Same building as the entrance hall."
+  },
+  {
+   "id": "the-low-lamp-inn",
+   "name": "The Low Lamp Inn",
+   "parentId": "radiant_plateau_edge",
+   "tier": "site",
+   "why": "⚠️ Already carried its parent — the only one that did. 'Tucked into the lower tier of the Edge District.'"
+  },
+  {
+   "id": "gen-the-ent-grove",
+   "name": "The Ent Grove",
+   "parentId": "ent_deepwood",
+   "tier": "site",
+   "regionFix": "valley -> manifest_domain",
+   "why": "⛔ The Ents are in manifest_domain. 'Seven or eight old trees forming a rough ring, mossy dry ground inside regardless of season.'"
+  },
+  {
+   "id": "gen-quickwood-margin",
+   "name": "Quickwood Margin",
+   "parentId": "the_heartroot",
+   "tier": "site",
+   "why": "Observed in placeEdges under the_heartroot — the one parent the graph got right."
+  },
+  {
+   "id": "gen-the-passage-below-the-unlit-deep",
+   "name": "The Passage Below the Unlit Deep",
+   "parentId": "the_unlit_deep",
+   "tier": "site",
+   "why": "Named for its parent."
+  },
+  {
+   "id": "gen-north-gate-registry-ossian-office",
+   "name": "North Gate Registry — Ossian's Office",
+   "parentId": "the_crossing",
+   "tier": "site",
+   "why": "⚠️ Its sibling gen-hub-north-gate-district-street is the street outside it; both are Crossing interior."
+  },
+  {
+   "id": "gen-hub-north-gate-district-street",
+   "name": "North Gate District Street",
+   "parentId": "the_crossing",
+   "tier": "site",
+   "why": "The Hub's own street. ⛔ 'gen-center' is the same district and should MERGE into this one."
+  },
+  {
+   "id": "gen-mara-wells-store",
+   "name": "Mara Wells' Store",
+   "parentId": "millbrook",
+   "tier": "site",
+   "why": "⚠️ A named shopkeeper's store — village scale, and Millbrook is the village in play."
+  },
+  {
+   "id": "gen-ashwarden-march-road",
+   "name": "The Ashwarden March Road",
+   "parentId": "cairnhold",
+   "tier": "site",
+   "why": "⛔ The march road out of the Palelands. Raven's Home sits on it; Erik placed Raven's Home at Cairnhold."
+  },
+  {
+   "id": "gen-stillwater-s-trouble",
+   "name": "Stillwater's Trouble",
+   "parentId": "gen-ashwarden-march-road",
+   "tier": "site",
+   "why": "Already carried this parent. ⚠️ A site of a site — the schema must allow depth 2."
+  },
+  {
+   "id": "gen-waygate",
+   "name": "The March Waygate",
+   "parentId": "gen-ashwarden-march-road",
+   "tier": "site",
+   "why": "Already carried this parent. ⚠️ NOT the Made Gate — a separate record."
+  },
+  {
+   "id": "gen-disputed-zone-left-branch-entrance",
+   "name": "Disputed Zone — Left Branch Entrance",
+   "parentId": "disputed_zone_fringe",
+   "tier": "site",
+   "why": "Named for its parent."
+  },
+  {
+   "id": "gen-the-lower-chamber",
+   "name": "The Lower Chamber",
+   "parentId": "gen-disputed-zone-far-side",
+   "tier": "site",
+   "why": "⛔ Connects to the Far Side; it sits beneath it. Depends on the SNG-397 repair landing first."
+  }
+ ],
+ "canonNotSites": [
+  {
+   "id": "gen-the-made-gate",
+   "name": "The Made Gate",
+   "ruling": "⛔ WORLD EVENT, NOT A SITE",
+   "why": "The 27th waygate and the FIRST BUILT — 'cut at the Crossing by a wright who tends endings'. Needs waygate:true, a tier, a lore line, and a place in the network. ⚠️ SNG-148 established the gates as INHERITED infrastructure. A player has broken that and the canon does not know."
+  },
+  {
+   "id": "gen-watershed-road",
+   "name": "The Watershed Road",
+   "ruling": "CANON — Precursor infrastructure found in play",
+   "why": "Carries a dormant relay chain 'south to the mill gate and north toward the ridge'. From the SNG-397 repair."
+  },
+  {
+   "id": "gen-disputed-zone-far-side",
+   "name": "The Far Side",
+   "ruling": "CANON — from the SNG-397 repair",
+   "why": "Past the shimmer. Hemispherical stone mound, active pre-Transition structure. Erik ruled Cellaceron's six deeds here."
+  }
+ ],
+ "merge": [
+  {
+   "from": "gen-center",
+   "into": "gen-hub-north-gate-district-street",
+   "why": "⚠️ 'First arrival at the Hub plaza — seven arches, the Coliseum visible to the north.' Same district, two ids."
+  }
+ ],
+ "doNotPromote": [
+  {
+   "id": "gen-object-object",
+   "why": "⛔ SNG-329 residue. Handled by the SNG-397 repair map — the memories are real, the identity is not."
+  }
+ ]
+}

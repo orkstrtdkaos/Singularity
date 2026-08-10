@@ -98,5 +98,187 @@
     "why": "Between the well and the dock — the ground people cross going from one centre to the other, which is what a commons IS."
    }
   ]
- }
+ },
+ "echo_river_crossing": {
+  "_measured": {
+   "riverBearing": -124,
+   "riverDistanceDeg": 3.83,
+   "uphillBearing": 75,
+   "roadsOut": [
+    {
+     "to": "millbrook",
+     "bearing": 92
+    },
+    {
+     "to": "disputed_zone_fringe",
+     "bearing": 90
+    }
+   ]
+  },
+  "_dataFlag": "⛔ ITS NEAREST TRACED RIVER IS 3.83° AWAY — about 425 km — AND ITS ENTIRE IDENTITY IS A BRIDGE OVER THE ECHO. `waterauth.json` authors a river here and the built hydrology does not carry one to it. ⚠️ I am placing the bridge on the fiction, not on the measurement, and flagging the gap rather than quietly bending the layout around bad data. SNG-403b.",
+  "radiusMetres": 300,
+  "sites": [
+   {
+    "id": "erc_bridge",
+    "name": "The Stone-and-Cable Bridge",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "why": "⛔ The town IS the bridge. Centre by definition; everything else is which END you are on."
+   },
+   {
+    "id": "erc_waygate_stone",
+    "name": "The Old Bridge-Stone",
+    "localMap": {
+     "bearing": 10,
+     "metres": 40
+    },
+    "why": "'The old bridge-stone at the crossing is a waygate, and the least ceremonious one in the world — carters queue behind it.' ⚠️ A QUEUE IS A PLACEMENT: it sits at the bridge mouth, not off to one side."
+   },
+   {
+    "id": "erc_carters_queue",
+    "name": "The Carters' Queue",
+    "localMap": {
+     "bearing": 92,
+     "metres": 150
+    },
+    "why": "⛔ On the Millbrook road bearing — the queue forms along the road people arrive by."
+   },
+   {
+    "id": "erc_fisher_shacks",
+    "name": "The Empty Fisher Shacks",
+    "localMap": {
+     "bearing": -124,
+     "metres": 220
+    },
+    "why": "⚠️ 'Fisher shacks stand empty' — riverward and UPSTREAM, where the contamination is worst. They are empty for a reason and the position says why."
+   },
+   {
+    "id": "erc_granite_shoulders",
+    "name": "The Granite Shoulders",
+    "localMap": {
+     "bearing": 75,
+     "metres": 190
+    },
+    "why": "On the measured uphill — 'where the river narrows between granite shoulders'."
+   },
+   {
+    "id": "erc_survey_camp",
+    "name": "The Survey Camp",
+    "localMap": {
+     "bearing": 116,
+     "metres": 230
+    },
+    "why": "⚠️ Contamination teams from Heights and Plateau, camped apart from the town and from each other."
+   }
+  ]
+ },
+ "greyhearth": {
+  "_measured": {
+   "riverBearing": 23,
+   "riverDistanceDeg": 2.57,
+   "uphillBearing": 135,
+   "roadsOut": [
+    {
+     "to": "the_crossing",
+     "bearing": -150
+    },
+    {
+     "to": "the_quiet_ground",
+     "bearing": 30
+    }
+   ]
+  },
+  "_reading": "'A town that buries for every road that meets here — the Crossing's dead and the Palelands' both.' ⛔ A BURYING TOWN'S LAYOUT IS ITS TRAFFIC: the dead arrive by road and go uphill.",
+  "radiusMetres": 380,
+  "sites": [
+   {
+    "id": "greyhearth_receiving",
+    "name": "The Receiving Yard",
+    "localMap": {
+     "bearing": -150,
+     "metres": 200
+    },
+    "why": "⛔ On the Crossing road. The dead arrive from where the roads meet, so the yard faces that way."
+   },
+   {
+    "id": "greyhearth_grounds",
+    "name": "The Burying Grounds",
+    "localMap": {
+     "bearing": 135,
+     "metres": 320
+    },
+    "why": "⛔ UPHILL, on the measured bearing — drainage. Every real burying ground sits above its town."
+   },
+   {
+    "id": "greyhearth_hearth",
+    "name": "The Grey Hearth",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "why": "The town's name and its centre — the fire that gives the trades their work."
+   },
+   {
+    "id": "greyhearth_singers",
+    "name": "The Singers' Hall",
+    "localMap": {
+     "bearing": 60,
+     "metres": 150
+    },
+    "why": "'Everyone here has sung over one.' ⚠️ Between the hearth and the grounds — on the walk."
+   },
+   {
+    "id": "greyhearth_quiet_road",
+    "name": "The Quiet Road",
+    "localMap": {
+     "bearing": 30,
+     "metres": 260
+    },
+    "why": "⛔ On the bearing to the Quiet Ground, which is where the dying go BEFORE. The two towns are one process."
+   }
+  ]
+ },
+ "the_cogitarium": {
+  "_measured": {
+   "uphillBearing": 30,
+   "riverDistanceDeg": 12.3,
+   "roadsOut": [
+    {
+     "to": "the_middle_way",
+     "bearing": 167
+    },
+    {
+     "to": "the_held_yard",
+     "bearing": -60
+    }
+   ]
+  },
+  "_verticalFinding": "⛔ THIS ONE BREAKS THE HORIZONTAL FRAME AND IT SHOULD. Its two promoted places are an ENTRANCE HALL and a THIRD TERRACE — the same footprint at different heights. ⚠️ AN INTERIOR NEEDS A VERTICAL AXIS. `localMap` needs an optional `level`: 0 ground, positive up, negative below. Without it the Cogitarium's two rooms land on top of each other and the map says they are the same place.",
+  "radiusMetres": 160,
+  "sites": [
+   {
+    "id": "gen-cogitarium-entrance-hall",
+    "name": "Cogitarium Entrance Hall",
+    "localMap": {
+     "bearing": 167,
+     "metres": 90,
+     "level": 0
+    },
+    "why": "⛔ On the Middle Way road bearing — an entrance faces the road people arrive by. Ground level."
+   },
+   {
+    "id": "gen-cogitarium-third-terrace",
+    "name": "Cogitarium Third Terrace",
+    "localMap": {
+     "bearing": 30,
+     "metres": 60,
+     "level": 3
+    },
+    "why": "⛔ LEVEL 3 — it is the THIRD terrace and the name says so. Uphill side, because a terrace climbs the slope it is cut into."
+   }
+  ]
+ },
+ "_generalisation": "⛔ FOUR LAYOUTS, FOUR DIFFERENT SHAPES, AND THE RULES ARE THE SAME THREE GRADIENTS. Millbrook: two centres named in its own prose, water trades riverward, terraces uphill, fields on the flat. Echo River Crossing: the bridge IS the centre and everything is which end you are on. Greyhearth: a burying town's plan is its traffic — dead arrive by road, go uphill. The Cogitarium: ⚠️ VERTICAL, and it broke the frame usefully. ⛔ NOTHING HERE WAS INVENTED FREELY: every placement cites either a measured bearing or a sentence already in the location's own seed. That is the constraint the engine must inherit — a generated layout that cannot cite a gradient or a line of prose is decoration."
 }

@@ -6962,7 +6962,7 @@ await (async () => {
       /interpolation, not a claim about reach/.test(app386));
   }
 
-  // ══ SNG-394 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 ⚑ to mean "this
+  // ══ SNG-395 — MILESTONE EFFECTS. The ladder authors 56 milestones and marks 16 ⚑ to mean "this
   // one is mechanical". ⛔ THE MARKER HAD NO READER — nothing could tell a milestone that DOES something
   // from one that only says something, so an unbuilt promise read exactly like a built one, and two were.
   {
@@ -6982,21 +6982,21 @@ await (async () => {
         if (eff.blocked) blocked.push(`${sub}:${rank}`);
       }
     }
-    check("394: every ⚑ milestone is transcribed into a structured effect — the marker has a reader now",
+    check("395: every ⚑ milestone is transcribed into a structured effect — the marker has a reader now",
       flagged.length > 0 && flagged.every(k => transcribed.includes(k)), `${flagged.length} flagged, ${transcribed.length} transcribed`);
-    check("394: …and an effect the engine cannot honour carries a WRITTEN reason, never silence",
+    check("395: …and an effect the engine cannot honour carries a WRITTEN reason, never silence",
       blocked.length > 0 && Object.values(lad390.subs).flatMap(d => Object.values(d.milestoneEffects || {}))
         .filter(e => e.blocked).every(e => String(e.blocked).length > 40));
-    check("394: no ⚑ milestone is transcribed as `unclassified` — that value exists to fail loudly",
+    check("395: no ⚑ milestone is transcribed as `unclassified` — that value exists to fail loudly",
       !Object.values(lad390.subs).some(d => Object.values(d.milestoneEffects || {}).some(e => e.kind === "unclassified")));
 
     // ⚠️ THE HIGHEST REACHED WINS, NOT THE SUM. `harmRung 1` at agility 7 and `harmRung 2` at 14 are
     // absolute readings of one effect — "a second rung" — so adding them would silently give a rank-14
     // character three rungs and double the milestone they just earned.
-    check("394: milestones are ABSOLUTE, not cumulative — rank 14 grants two rungs, not three",
+    check("395: milestones are ABSOLUTE, not cumulative — rank 14 grants two rungs, not three",
       L390.harmRungDrop(lad390, at({ agility: 7 })) === 1 && L390.harmRungDrop(lad390, at({ agility: 14 })) === 2);
-    check("394: …and a rank below the milestone grants nothing", L390.harmRungDrop(lad390, at({ agility: 6 })) === 0);
-    check("394: a blocked effect never appears in the LIVE map — a caller cannot act on an unbuilt promise",
+    check("395: …and a rank below the milestone grants nothing", L390.harmRungDrop(lad390, at({ agility: 6 })) === 0);
+    check("395: a blocked effect never appears in the LIVE map — a caller cannot act on an unbuilt promise",
       !("novelPenalty" in L390.milestoneEffects(lad390, at({ wits: 20 })).live)
       && L390.milestoneEffects(lad390, at({ wits: 20 })).blocked.some(b => b.kind === "novelPenalty"));
 
@@ -7005,32 +7005,32 @@ await (async () => {
     const runs = (subs, companions) => { const t = {};
       for (let i = 0; i < 600; i++) { const o = inc390.incapacitationOutcome({ character: at(subs), aggressor: { kind: "assassin" }, companions, rules: rules390, rng: Math.random }); t[o.outcome] = (t[o.outcome] || 0) + 1; }
       return t; };
-    check("394: agility 7 softens the blow — an assassin's table stops producing `slain`",
+    check("395: agility 7 softens the blow — an assassin's table stops producing `slain`",
       (runs({ agility: 3 }, [{ name: "M" }]).slain || 0) > 0 && (runs({ agility: 7 }, [{ name: "M" }]).slain || 0) === 0);
     // ⚠️ AND IT NEVER SOFTENS INTO A RESCUE BY NOBODY. `revived` is already zeroed when no companion
     // is able; dropping INTO it would narrate someone who is not there, which is worse than the harsher
     // outcome it replaced.
-    check("394: …but softening stops at `spared` when you are alone — nobody revives you but somebody",
+    check("395: …but softening stops at `spared` when you are alone — nobody revives you but somebody",
       !(runs({ agility: 14 }, []).revived));
-    check("394: the roll and the softening are BOTH reported — a mercy the player is not told about cannot be learned",
+    check("395: the roll and the softening are BOTH reported — a mercy the player is not told about cannot be learned",
       (() => { const o = inc390.incapacitationOutcome({ character: at({ agility: 14 }), aggressor: { kind: "assassin" }, companions: [{ name: "M" }], rules: rules390, rng: () => 0.99 });
         return "rolledOutcome" in o && "softenedBy" in o; })());
 
     // ⛔ THE COMPANY CAP, AND IT IS ON THE DOOR PEOPLE ACTUALLY USE.
-    check("394: rapport names the places at your side — 1, then 2 at rank 4, 3 at 7, 4 at 10",
+    check("395: rapport names the places at your side — 1, then 2 at rank 4, 3 at 7, 4 at 10",
       [1, 2, 3, 4].every((n, i) => L390.companyPlaces(lad390, at({ rapport: [1, 4, 7, 10][i] })) === n));
     const full = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
-    check("394: a join past capacity is REFUSED, and refused where joins really happen (recruit, not the dead op)",
+    check("395: a join past capacity is REFUSED, and refused where joins really happen (recruit, not the dead op)",
       co390.recruit(full, "b", { day: 2, ladder: lad390 }) === null);
     // ⚠️ NEVER RETROACTIVE. A save whose rapport no longer covers its company keeps everyone.
     const over = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "b", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} };
-    check("394: an over-capacity save loses NOBODY — the cap refuses a new join, it never ejects",
+    check("395: an over-capacity save loses NOBODY — the cap refuses a new join, it never ejects",
       co390.activeCompany(over).length === 2);
     // ⚠️ A REJOIN IS NOT A NEW PLACE — someone walking back in is returning to a seat, not taking one.
     const left = { subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }, { npcId: "gone", roles: ["ally"], joinedDay: 1, leftDay: 5 }], npcRegistry: {} };
-    check("394: …and someone who left can come back even at capacity",
+    check("395: …and someone who left can come back even at capacity",
       !!co390.recruit(left, "gone", { day: 9, ladder: lad390 }));
-    check("394: with no ladder passed the cap does not apply — every existing caller keeps working",
+    check("395: with no ladder passed the cap does not apply — every existing caller keeps working",
       !!co390.recruit({ subAttributes: { rapport: 1 }, company: [{ npcId: "a", roles: ["ally"], joinedDay: 1 }], npcRegistry: {} }, "b", { day: 2 }));
   }
 

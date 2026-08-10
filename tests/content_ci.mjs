@@ -699,10 +699,18 @@ for (const pack of PACKS) {
   check("SNG-393: the load-bearing names resolve — the Echo, the Stiltfen, the Echofen",
     ["the_echo"].every((id) => res.placeNames.rivers.some((r) => r.id === id && r.resolved))
     && ["the_stiltfen", "the_echofen"].every((id) => res.placeNames.fens.some((f) => f.id === id && f.resolved)));
-  // ⚠️ AT THE FIXED POINT EVERYTHING RESOLVES BY SIGNATURE — the town fallback was the bootstrap,
-  // and a name still leaning on it after write-back means the write-back is broken.
-  check("SNG-393: after the bootstrap, no name still leans on the town fallback",
-    [...res.placeNames.rivers, ...res.placeNames.fens].every((r) => r.via === "signature"));
+  // ⚠️ THE FALLBACK CENSUS — this was a binary ("no name leans on the fallback") and the binary was
+  // TRUE FOR A ROTTEN REASON: it held only while the write-back kept overwriting authored addresses
+  // with exact machine copies. SNG-394 withdrew the write-back and restored the two authored centroids
+  // it had destroyed, and this gate went red the same minute — correctly. The Marchfen and the Stairfen
+  // are authored ~10° from any surviving polygon (their wetland complex broke up) and rebind only
+  // through their towns; that is a standing condition Aevi's renames will clear, and this census holds
+  // the list so a THIRD name sliding onto the fallback is reported by name, not absorbed.
+  const KNOWN_FALLBACK = new Set(["the_greenmarch_fen", "the_stairfen"]);
+  const onFallback = [...res.placeNames.rivers, ...res.placeNames.fens].filter((r) => r.via !== "signature");
+  const unexpectedFb = onFallback.filter((r) => !KNOWN_FALLBACK.has(r.id));
+  check("SNG-393: no name leans on the town fallback beyond the KNOWN census (Marchfen, Stairfen — merged complex, renames pending)",
+    unexpectedFb.length === 0, unexpectedFb.map((r) => r.name + " via " + r.via).join(" · "));
   check("SNG-393: every signature match is unambiguous — margin ≥ 2° against the runner-up",
     [...res.placeNames.rivers, ...res.placeNames.fens].every((r) => r.margin >= 2));
   // ⛔ PROVE THE GATE CAN GO RED: shift one resolved river's address 10° and it must land unresolved,
@@ -714,6 +722,36 @@ for (const pack of PACKS) {
   const res2 = RA.resolvePlaceNames(perturbed, built.hydrology, { seedPos: seedPos393 });
   check("SNG-393: a signature moved 10° lands UNRESOLVED — never quietly bound to the nearest water",
     res2.placeNames.unresolved.some((u) => u.id === target.id));
+
+  // ── SNG-394 §1 — ONE NAME PER FEATURE. Neither of us gated this and the shipped asset carried
+  // 8 fen bindings on 6 polygons. The collision census reports BOTH names — "silently dropping one
+  // loses a place" — and never picks a winner: two names on one polygon is either a merged feature
+  // (Aevi renames) or a pool defect (mine). Provenance mattered here: the Stiltfen + Terrace Fen pair
+  // was authored identical in her own 0c040d85; the Marchfen + Stairfen pair was DISTINCT authored
+  // ~10° apart and my write-back collapsed them — one collision hers, one manufactured by the machine.
+  const collisions = (rows, key) => {
+    const by = new Map();
+    for (const r of rows) { if (!by.has(r[key])) by.set(r[key], []); by.get(r[key]).push(r.name); }
+    return [...by.values()].filter((g) => g.length > 1).map((g) => g.sort().join(" + ")).sort();
+  };
+  const riverCollide = collisions(res.placeNames.rivers, "pathIndex");
+  check("SNG-394: no two river names bind to one pathIndex — a shared stem is two lost places, not one found",
+    riverCollide.length === 0, riverCollide.join(" · "));
+  const KNOWN_FEN_COLLISIONS = ["The Marchfen + The Stairfen", "The Stiltfen + The Terrace Fen"];
+  const fenCollide = collisions(res.placeNames.fens, "polyIndex");
+  check("SNG-394: fen collisions match the KNOWN census exactly — both names reported, neither dropped, Aevi decides",
+    JSON.stringify(fenCollide) === JSON.stringify(KNOWN_FEN_COLLISIONS),
+    "expected [" + KNOWN_FEN_COLLISIONS.join(" | ") + "] got [" + fenCollide.join(" | ") + "]");
+  // ⛔ THE RED, OBSERVED IN-SUITE: give two rivers one address and the detector must see one feature
+  // wearing two names. The river side passes today, which is exactly when to prove it can fail.
+  const twin = JSON.parse(JSON.stringify(pnDisk));
+  const [ra, rb] = twin.rivers.filter((r) => res.placeNames.rivers.some((x) => x.id === r.id && x.via === "signature"));
+  rb.head = [...ra.head]; rb.mouth = [...ra.mouth];
+  const resTwin = RA.resolvePlaceNames(twin, built.hydrology, { seedPos: seedPos393 });
+  const twinCollide = collisions(resTwin.placeNames.rivers, "pathIndex");
+  check("SNG-394: …and the detector FIRES — two rivers given one address surface as a named pair",
+    twinCollide.length === 1 && twinCollide[0].includes(ra.name) && twinCollide[0].includes(rb.name),
+    "got [" + twinCollide.join(" | ") + "]");
 
     // ── SNG-392 §1 — THE HIERARCHY IS APPLIED AND THE LOCAL SCHEMA IS ARMED ──
   // Aevi corrected the staged derivation (091dad1a); I applied it to content — late, and the lateness was

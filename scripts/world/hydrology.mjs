@@ -219,8 +219,10 @@ export function buildHydrology({ type, elev, W, H, seedPos, waterAuth }) {
   // ⛔ THE FIRST FORM OF THIS WAS ITERATION-ORDER-DEPENDENT and it broke SNG-393 outright: chains grew
   // from whichever head the Set happened to yield first, and a tributary processed early STOLE the main
   // stem — the Echo (91° of river) decomposed with its head on a 2.6° stub, so no polar signature
-  // could ever match it. Aevi's Python had the same truncation and her signatures survived only because
-  // the same interpreter re-ran the same arbitrary order. Tracing mouth→source along MAX ACCUMULATION
+  // could ever match it. Aevi's Python had the same truncation, and her correction to MY diagnosis makes
+  // it worse: int-set iteration is NOT hash-seed-randomised (she ran seeds 0/1/42, byte-identical) — it is
+  // set LAYOUT, which shifts with contents and resize history, so two worlds differing by 0.2% of cells
+  // reorder with no seed involved and nothing to blame. Tracing mouth→source along MAX ACCUMULATION
   // (ties to the lower index) is order-free by construction: the main stem is a property of the flow
   // field, not of who asked first.
   const riv = new Set(); for (let k = 0; k < W * H; k++) if (WA[k] === 1) riv.add(k);

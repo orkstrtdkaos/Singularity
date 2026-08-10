@@ -6,11 +6,16 @@
 // tolerance 3° instead of 45°. "Precision beats stability when the drift is smaller than the error you
 // are trying to avoid."
 //
-// ⛔ DRIFT IS HISTORY, NOT STATE — the one design decision determinism forces. The build matches names
-// with the OLD signatures, writes the NEW signatures back to placenames.json, and emits the asset's
-// placeNames from the UPDATED addresses. How far each feature moved is printed to the build log and
-// stored nowhere: a drift number in the asset would be derivable only from the pre-build inputs, and
-// `--check` — which sees the post-build inputs — could never be byte-identical again.
+// ⛔ DRIFT IS HISTORY, NOT STATE — and Aevi's withdrawal (89a035ea) finished the thought: her own §5
+// clause "write the new signature back after a successful resolve" was the same offence one file over,
+// history in the INPUT. Worse than history, it was DESTRUCTION: the one build that ran with write-back
+// live collapsed the Marchfen and the Stairfen — two distinct authored addresses ~10° apart — onto one
+// polygon's centroid, byte-identical, her authoring recoverable only from git (0c040d85). So: the
+// resolver READS canon and never writes it. The authored address stays authored; the asset row's score
+// IS the real drift, visible on every build instead of reset to zero by a machine overwriting canon.
+// The cost is honest too: drift accumulates from the committed address across successive terrain
+// revisions, and a name that walks past 3° lands in the census for Aevi — detach-and-report, never
+// track-and-hide.
 
 const dDeg = (a, b) => {
   const R = Math.PI / 180;
@@ -21,10 +26,9 @@ const pathLen = (p) => { let s = 0; for (let i = 1; i < p.length; i++) s += dDeg
 const polyCentroid = (q) => [q.reduce((s, p) => s + p[0], 0) / q.length, q.reduce((s, p) => s + p[1], 0) / q.length];
 const r2 = (x) => Math.round(x * 100) / 100;
 
-/** Match every named river and fen against the freshly built hydrology.
- *  Returns { placeNames, updated } — `updated` is the placenames doc with new signatures written in,
- *  which the caller persists. ⚠️ Both river orientations are always scored: flow direction flips between
- *  rebuilds when two headwaters trade which is higher after smoothing. */
+/** Match every named river and fen against the freshly built hydrology. Read-only on `placenames`.
+ *  ⚠️ Both river orientations are always scored: flow direction flips between rebuilds when two
+ *  headwaters trade which is higher after smoothing. */
 /** ⚠️ THE FALLBACK IS THE BOOTSTRAP, and the first live run needed it for all ten rivers. Aevi's
  *  signatures were measured against HER decomposition of the flow field; the port's is order-free and
  *  genuinely different (her Echo stem 91.3°, this one 110.8° — same water, different tributary cuts).
@@ -33,7 +37,6 @@ const r2 = (x) => Math.round(x * 100) / 100;
  *  NEEDED), write the true signature back, and every later run resolves at ≤3° with the towns idle. */
 export function resolvePlaceNames(placenames, hydrology, { accept = 3.0, margin = 2.0, seedPos = null } = {}) {
   const out = { rivers: [], fens: [], unresolved: [] };
-  const updated = JSON.parse(JSON.stringify(placenames));
 
   // pool: the 24 longest traced rivers, index-stable against hydrology.rivers.
   // ⚠️ THE FALLBACK SEARCHES WIDER — every river of 4° or more — because pool size is not a
@@ -49,7 +52,7 @@ export function resolvePlaceNames(placenames, hydrology, { accept = 3.0, margin 
   const allRivers = (hydrology.rivers || []).map((p, i) => ({ i, p, len: pathLen(p) })).filter((c) => c.len >= 4);
   const riverPool = allRivers;
   const fallbackRiverPool = allRivers;
-  for (const nm of updated.rivers || []) {
+  for (const nm of placenames.rivers || []) {
     if (!Array.isArray(nm.head) || !Array.isArray(nm.mouth)) { out.unresolved.push({ id: nm.id, name: nm.name, reason: "no signature" }); continue; }
     if (!riverPool.length) { out.unresolved.push({ id: nm.id, name: nm.name, reason: "pool empty" }); continue; }
     const scored = riverPool.map((c) => {
@@ -84,15 +87,12 @@ export function resolvePlaceNames(placenames, hydrology, { accept = 3.0, margin 
         continue;
       }
     }
-    // ⚠️ WRITE THE NEW ADDRESS BACK, oriented as matched — a signature that never updates drifts out of
-    // tolerance on legitimate change (Aevi's §5).
-    const best2 = chosen, path = chosen.c.p;
-    const head = best2.flipped ? path[path.length - 1] : path[0];
-    const mouth = best2.flipped ? path[0] : path[path.length - 1];
-    nm.head = [r2(head[0]), r2(head[1])]; nm.mouth = [r2(mouth[0]), r2(mouth[1])]; nm.lengthDeg = r2(best2.c.len);
-    // the asset's row is computed from the UPDATED address, so it is stable on the very next --check
-    out.rivers.push({ id: nm.id, name: nm.name, pathIndex: best2.c.i,
-      score: r2(dDeg(nm.head, head) + dDeg(nm.mouth, mouth)), margin: r2(via === "fallback" ? 99 : mrg), resolved: true, via });
+    // the row's score is the AUTHORED address against the bound feature — real drift, in signature
+    // units even when the towns did the choosing, so one column never silently changes meaning.
+    const path = chosen.c.p, first = path[0], last = path[path.length - 1];
+    const sigScore = Math.min(dDeg(nm.head, first) + dDeg(nm.mouth, last), dDeg(nm.head, last) + dDeg(nm.mouth, first));
+    out.rivers.push({ id: nm.id, name: nm.name, pathIndex: chosen.c.i,
+      score: r2(sigScore), margin: r2(via === "fallback" ? 99 : mrg), resolved: true, via });
   }
 
   // pool: the 16 largest marsh polygons by shoelace area
@@ -100,7 +100,7 @@ export function resolvePlaceNames(placenames, hydrology, { accept = 3.0, margin 
   const allFens = (hydrology.marsh || []).map((q, i) => ({ i, q, area: area(q), c: polyCentroid(q) }));
   const fenPool = allFens;                                      // same principle as the rivers — no pool cap
   const fallbackFenPool = allFens;
-  for (const nm of updated.fens || []) {
+  for (const nm of placenames.fens || []) {
     if (!Array.isArray(nm.centroid)) { out.unresolved.push({ id: nm.id, name: nm.name, reason: "no signature" }); continue; }
     if (!fenPool.length) { out.unresolved.push({ id: nm.id, name: nm.name, reason: "pool empty" }); continue; }
     const scored = fenPool.map((c) => ({ c, score: dDeg(nm.centroid, c.c) })).sort((a, b) => a.score - b.score);
@@ -120,9 +120,8 @@ export function resolvePlaceNames(placenames, hydrology, { accept = 3.0, margin 
         continue;
       }
     }
-    nm.centroid = [r2(chosenF.c.c[0]), r2(chosenF.c.c[1])];
     out.fens.push({ id: nm.id, name: nm.name, polyIndex: chosenF.c.i,
       score: r2(dDeg(nm.centroid, chosenF.c.c)), margin: r2(viaF === "fallback" ? 99 : mrg), resolved: true, via: viaF });
   }
-  return { placeNames: out, updated };
+  return { placeNames: out };
 }

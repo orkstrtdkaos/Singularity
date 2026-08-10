@@ -208,16 +208,16 @@ export function buildWorld(canon) {
   }
 
   // SNG-393 rev 3 — re-anchor the names by polar signature; drift goes to the LOG, never the asset.
-  let placeNames = null, updatedPlacenames = null;
+  let placeNames = null;
   if (canon.placenames) {
-    const before = JSON.stringify([...(canon.placenames.rivers || []), ...(canon.placenames.fens || [])].map((n) => [n.head, n.mouth, n.centroid]));
+    // ⛔ read-only on canon — the write-back clause is WITHDRAWN (Aevi, 89a035ea). Drift is the row's
+    // score in the asset; unresolved names go to the log and the census, never silently dropped.
     const res = resolvePlaceNames(canon.placenames, hyd.hydrology, { seedPos });
-    placeNames = res.placeNames; updatedPlacenames = res.updated;
-    const after = JSON.stringify([...(res.updated.rivers || []), ...(res.updated.fens || [])].map((n) => [n.head, n.mouth, n.centroid]));
-    if (before !== after) console.log("  names: signatures moved with the terrain and were written back (drift is logged, not stored)");
+    placeNames = res.placeNames;
+    for (const r of [...placeNames.rivers, ...placeNames.fens]) if (r.score > 1) console.log(`  name drift: ${r.name} sits ${r.score}° from its authored address (via ${r.via})`);
     for (const u of placeNames.unresolved) console.log(`  ⚠️ UNRESOLVED NAME: ${u.name} — ${u.reason} (its feature genuinely restructured; do not widen the threshold to hide it)`);
   }
-  return { type, raw, elev, c0, c1, c2, blist, seats, RLO, RHI, seeds: canon.seeds, hydrology: hyd.hydrology, authoredWaterPresent: hyd.authoredWaterPresent, placeNames, updatedPlacenames };
+  return { type, raw, elev, c0, c1, c2, blist, seats, RLO, RHI, seeds: canon.seeds, hydrology: hyd.hydrology, authoredWaterPresent: hyd.authoredWaterPresent, placeNames };
 }
 
 /** Serialise in the exact schema engine/worldglobe.js already reads. */
@@ -277,10 +277,6 @@ if (isMain) {
     console.log(same ? "✅ determinism: regenerated world is byte-identical to disk"
       : `⛔ DRIFT: regenerated world differs from disk (${disk.length} vs ${out.length} bytes) — content changed without a rebuild, or the generator moved`);
     process.exit(same ? 0 : 1);
-  }
-  if (built.updatedPlacenames) {
-    // ⚠️ canonical serialisation, so a run that changes nothing is byte-idempotent
-    writeFileSync(join(root, "content/packs/core/world/placenames.json"), JSON.stringify(built.updatedPlacenames, null, 1) + String.fromCharCode(10));
   }
   writeFileSync(path, out);
   console.log(`wrote ${path} — ${(out.length / 1024).toFixed(0)}KB · RLO ${built.RLO.toFixed(4)} RHI ${built.RHI.toFixed(4)} · ${built.blist.length} biomes · ${Object.keys(built.seats).length} seats`);

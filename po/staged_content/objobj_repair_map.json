@@ -14,17 +14,17 @@
    "file": "characters/player-s9z9u1/char-mrhs8286.json",
    "path": "npcRegistry.pell.lastSeen.locationId",
    "from": "gen-object-object",
-   "to": "millbrook",
-   "source": "erik",
-   "why": "Erik: 'Pell was met in Millbrook.'"
+   "to": "gen-watershed-road",
+   "source": "corrected",
+   "why": "⛔ I MISAPPLIED ERIK'S RULING. He said 'Pell was met in Millbrook' — that is `firstMet`, which ALREADY reads `millbrook`, day 1, and was never corrupt. I mapped it onto `lastSeen`. ⚠️ Pell's own day-14 history places her AT THE RELAY NODE with Silas: 'read the message at Silas's shoulder', 'walk back to the gate, check Logana', 'a Blazeborn doesn't come to the Zone by accident'. lastSeen day 14 is the watershed road."
   },
   {
    "file": "characters/player-s9z9u1/char-mrhs8286.json",
    "path": "npcRegistry.veth-ondra.lastSeen.locationId",
    "from": "gen-object-object",
-   "to": "millbrook",
-   "source": "inferred",
-   "why": "⚠️ Same day 14 as Pell, same file. INFERRED from co-occurrence, not stated. Confirm.",
+   "to": "gen-watershed-road",
+   "source": "evidence",
+   "why": "⛔ RESOLVED FROM HER OWN HISTORY, not from co-occurrence. Day 14: 'Named the node's silence plainly — the upstream pressure is gone' and 'the node beneath the stall is not the only one — has knowledge of the relay network's scope'. ⚠️ THE RELAY NODE IS THE WATERSHED ROAD. She is standing on the thing the place is named for.",
    "note": "⚠️ still inferred from co-occurrence with Pell on day 14; the only unruled personal row."
   },
   {
@@ -103,9 +103,9 @@
    "file": "ALL — worldState.news (×3, 5 characters)",
    "path": "worldState.news[].locationId",
    "from": "gen-object-object",
-   "to": "PER-CHARACTER",
-   "source": "unresolved",
-   "why": "⛔ News is copied across characters, so the same entry sits in files where it means different places. ⚠️ MAP FROM THE NEWS TEXT, not from the file it landed in — and if the text does not say, leave it and report it."
+   "to": "gen-disputed-zone-far-side",
+   "source": "evidence",
+   "why": "⛔ RESOLVED FROM THE NEWS TEXT, as specced. All three read on 'the upstream pre-Transition structure' and 'Cellaceron's party moving northeast-by-east into the D[isputed Zone]' — the same structure Erik ruled Cellaceron's six deeds to. ⚠️ NOT the watershed road: these are world events about the Zone, and they landed in Silas's file only because news is copied across characters."
   }
  ],
  "newPlaces": [
@@ -122,5 +122,5 @@
    "why": "Past the shimmer. Hemispherical stone mound, active pre-Transition structure."
   }
  ],
- "_status": "⛔ ALL PERSONAL ROWS NOW RULED except veth-ondra (inferred) and worldState.news (map from the news TEXT, per row, never globally)."
+ "_status": "⛔ MAP COMPLETE. Every row ruled or evidenced; no inference left. ⚠️ ONE CORRECTION SINCE THE LAST REVISION: pell.lastSeen was going to be written as `millbrook` on a misreading of Erik's ruling — his 'met in Millbrook' is `firstMet`, which was already correct and uncorrupted. CCode's refusal to write saves off a partial map is what kept that out of a player's file."
 }

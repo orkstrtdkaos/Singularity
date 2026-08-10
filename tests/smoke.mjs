@@ -7051,8 +7051,11 @@ await (async () => {
     const WG = await import("../engine/worldglobe.js");
     const doc = rjc193("content/packs/core/world/terrain.json");
     const t = WG.decodeTerrain(doc);
-    check("390: the terrain asset decodes — four channels, two grids, 118 locations",
-      !!t && t.w === 480 && t.h === 240 && t.ew === 720 && t.eh === 360 && Object.keys(t.locations).length === 118);
+    // ⚠️ 118 → 135: SNG-396 promoted the play-authored sites, and SNG-402 made the asset's location list
+    // cover every PLACED location rather than only the terrain SEEDS — conflating those two had silently
+    // dropped fourteen rooms off the map while the terrain was right to exclude them from its vote.
+    check("390: the terrain asset decodes — four channels, two grids, every placed location",
+      !!t && t.w === 480 && t.h === 240 && t.ew === 720 && t.eh === 360 && Object.keys(t.locations).length === 135);
     // ⚠️ THIS GATE FLIPPED WITH THE FACT, WHICH IS WHAT A GATE ON A LABEL SHOULD DO. It used to
     // assert the asset admitted to being baked output with no generator; SNG-391 delivered the generator
     // and the pipeline, so the asset now asserts the opposite — provenance, hashes, and "do not edit,
@@ -7127,8 +7130,9 @@ await (async () => {
       return { wet, seen };
     };
     const cen394 = waterCensus(wpos394);
-    check("394b: every pin stands on its own terrain — the water census is EMPTY across all 118, via the viewer's own conversion",
-      cen394.seen.size === 118 && cen394.wet.size === 0, [...cen394.wet].sort().join(", "));
+    check("394b: every pin stands on its own terrain — the water census is EMPTY across all of them, via the viewer's own conversion",
+      cen394.seen.size === 135 && cen394.wet.size === 0,
+      `${cen394.seen.size} seen; wet: ${[...cen394.wet].sort().join(", ") || "none"}`);
     const flood394 = waterCensus((id) => { const w = wpos394(id); return w ? { longitude: w.longitude, colatitude: 180 - w.colatitude } : null; });
     check("394b: …and the MIRRORED frame — the shipped bug, replayed — floods the census, so the gate is known to fire",
       flood394.wet.size > 50, `mirrored water pins: ${flood394.wet.size}`);
@@ -7240,6 +7244,47 @@ await (async () => {
     check("402: the SHORELINE is finer than the buffer — land/sea resolves inside a sample cell, not on its grid",
       subSample > 0 && sameCellPairs > 1000,
       `${subSample} within-cell coast transitions across ${sameCellPairs} same-cell pairs (nearest-neighbour would give 0)`);
+
+    // ⛔ SNG-403 — THE CONTOURS ARE A LEVEL SET, SO THE FIELD UNDER THEM MUST BE CONTINUOUS. Erik: "the
+    // topo lines are scrambled now." `elevOf` returns the NEAREST 0.5° cell — a staircase ~14 screen
+    // pixels wide at regional zoom — and the topographic layer draws a contour wherever tone lands within
+    // 0.055 of a band edge. Testing a thin band against a staircase lights WHOLE RECTANGULAR CELLS, which
+    // is exactly the grid of blobs in his screenshot. A contour cannot be drawn from a quantised field at
+    // any resolution; bilinear reading is what makes the isoline exist.
+    let stepped = 0, smooth = 0;
+    for (let i = 0; i < 400; i++) {
+      const lon = -70 + i * 0.013, lat = -55 + i * 0.011;
+      if (WG2.elevOf(t402, lon, lat) === WG2.elevOf(t402, lon + 0.004, lat)) {
+        // same baked cell: the nearest read cannot move, the smooth read must be able to
+        stepped++;
+        if (WG2.elevSmooth(t402, lon, lat) !== WG2.elevSmooth(t402, lon + 0.004, lat)) smooth++;
+      }
+    }
+    check("403: the elevation the CONTOURS read is continuous — a level set of a staircase is a grid of rectangles",
+      stepped > 50 && smooth > stepped * 0.9,
+      `${smooth} of ${stepped} within-cell probes move under the smooth read`);
+
+    // ⛔ SNG-403 — THE CONTOUR INTERVAL FOLLOWS THE ZOOM, and without it the layer was nearly mute where
+    // it matters most: twelve bands across the world's 126-unit range is ~10 units a band, so a regional
+    // view crossed TWO lines. Measured on the live canvas after the level-set fix: 284 contour pixels in
+    // a whole frame; with the interval stepping, 4,928 — and still thin (longest horizontal run 2px).
+    // ⚠️ POWERS OF TWO ONLY, so lines APPEAR between levels instead of sliding across the ground: a
+    // contour that drifts as you zoom is reporting the camera rather than the land.
+    const steps403 = [180, 45, 20, 10, 3].map((sp) => WG2.contourStepFor(sp));
+    check("403: the contour interval FOLLOWS the zoom — a regional map carries regional relief",
+      steps403[0] === 1 && steps403.every((v, i) => i === 0 || v >= steps403[i - 1])
+      && steps403.every((v) => Number.isInteger(Math.log2(v))) && steps403[4] > steps403[0],
+      steps403.join(" → "));
+
+    // ⛔ SNG-403 — KIND IS READ FROM CANON, NOT GUESSED. Every marker the map draws must resolve to a
+    // style, and a gate outranks the tier it sits on because what you DO there is step through it.
+    const kinds403 = new Set(Object.values(t402.locations).map((m) => WG2.markerKind(m)));
+    check("403: every place resolves to a marker kind that has a style — no location draws as nothing",
+      kinds403.size >= 4 && [...kinds403].every((k) => !!WG2.MARKER_STYLE[k]),
+      [...kinds403].join(", "));
+    check("403: …and a waygate is drawn as a GATE whatever tier it sits on — the network is the fact that changes your route",
+      WG2.markerKind({ t: "region", wg: 1 }) === "gate" && WG2.markerKind({ t: "settlement", ro: "gate" }) === "gate"
+      && WG2.markerKind({ t: "site" }) === "site" && WG2.markerKind({ t: "region" }) === "region");
 
     // ⚠️ and it declines when it cannot beat the raster, instead of drawing something worse
     const hugeWin = { la0: -89, la1: 89, lo0: -180, lo1: 180 };

@@ -239,7 +239,19 @@ export function serialise(built, canon) {
   const meta = {};
   const oldMeta = existsSync(join(root, "content/packs/core/world/terrain.json"))
     ? (rj("content/packs/core/world/terrain.json").locations || {}) : {};
-  for (const s of built.seeds) meta[s.id] = { n: s.name, r: s.region, wg: oldMeta[s.id]?.wg ? 1 : 0 };
+  // ⚠️ TIER AND ROLE RIDE THE ASSET so the map can draw a hold differently from a room differently from
+  // a gate. They are CANON (SNG-396/398 ratified them) and the viewer must not re-derive them — it reads
+  // what the pipeline stamped, the same rule that keeps worldPos the sole authority on position.
+  // ⛔ THE MAP'S LOCATION LIST IS NOT THE TERRAIN'S SEED LIST, and conflating them silently deleted
+  // fourteen places from the map. Seeds exclude `worldPosInherited` because a room must not cast a
+  // second biome vote at its building's point (SNG-402) — but a room is still somewhere a player
+  // STANDS, and it still needs a pin. Iterate every placed location, not the seeds.
+  for (const l of Object.values(canon.locs)) {
+    const wp = l.worldPos;
+    if (!wp || !Number.isFinite(wp.colatitude) || !Number.isFinite(wp.longitude)) continue;
+    meta[l.id] = { n: l.name || l.id, r: l.regionId || l.region || null,
+      wg: (l.waygate || oldMeta[l.id]?.wg) ? 1 : 0, t: l.tier || null, ro: l.role || null };
+  }
   return {
     schemaVersion: 2,
     id: "terrain",

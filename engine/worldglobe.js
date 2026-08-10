@@ -253,10 +253,7 @@ export function hillshadeFine(t, lon, lat, fine) {
   const d = 0.06;
   // ⚠️ the gradient is taken on the COMBINED surface — baked cell plus sub-cell delta — so relief and
   // colour are lit by the same ground. Shading a different surface than the one drawn is its own seam.
-  const at = (lo, la) => {
-    const f = fine(lo, la);
-    return elevOf(t, lo, la) + (f.elevDelta || 0);
-  };
+  const at = (lo, la) => elevSmooth(t, lo, la) + (fine(lo, la).elevDelta || 0);
   const ex = (at(lon + d, lat) - at(lon - d, lat)) / 255;
   const ey = (at(lon, Math.min(90, lat + d)) - at(lon, Math.max(-90, lat - d))) / 255;
   return Math.max(0.55, Math.min(1.45, 1 + (ex * 2.2 - ey * 2.2)));
@@ -264,6 +261,28 @@ export function hillshadeFine(t, lon, lat, fine) {
 
 /** the baked elevation at a point — the low-frequency truth the fine delta rides on */
 export function elevOf(t, lon, lat) { return t.c3[elevIdx(t, lon, lat)]; }
+
+/** ⛔ THE ELEVATION FIELD, READ SMOOTHLY — AND THIS IS WHAT SCRAMBLED THE CONTOURS. `elevOf` returns the
+ *  NEAREST 0.5° cell, which is a step function about fourteen screen pixels wide at regional zoom. The
+ *  topographic layer draws a contour wherever `tone` lands within 0.055 of a band edge, and testing a
+ *  thin band against a STAIRCASE means an entire rectangular cell either satisfies it or does not — so
+ *  the contours came out as rectangular blobs following the grid instead of lines following the land.
+ *  ⚠️ A contour is an isoline of a CONTINUOUS field; it cannot be drawn from a quantised one at any
+ *  resolution. Bilinear interpolation is what makes the level set exist at all.
+ *  ⚠️ Interpolating ACROSS a shoreline pulls coastal land toward the water's value, which crowds the
+ *  low bands near the coast — that is how a real hypsometric map behaves and is left alone. */
+export function elevSmooth(t, lon, lat) {
+  const fy = Math.max(0, Math.min(t.eh - 1, (90 - lat) / 180 * t.eh - 0.5));
+  const lo = ((lon + 180) % 360 + 360) % 360;
+  const fx = lo / 360 * t.ew - 0.5;
+  const y0 = Math.floor(fy), x0 = Math.floor(fx);
+  const ty = fy - y0, tx = fx - x0;
+  const yA = Math.max(0, Math.min(t.eh - 1, y0)), yB = Math.max(0, Math.min(t.eh - 1, y0 + 1));
+  const xA = ((x0 % t.ew) + t.ew) % t.ew, xB = ((x0 + 1) % t.ew + t.ew) % t.ew;
+  const a = t.c3[yA * t.ew + xA], b = t.c3[yA * t.ew + xB];
+  const c = t.c3[yB * t.ew + xA], d = t.c3[yB * t.ew + xB];
+  return (a * (1 - tx) + b * tx) * (1 - ty) + (c * (1 - tx) + d * tx) * ty;
+}
 
 export function groundFactorAt(t, lon, lat, band, bandFn) {
   const s = sampleAt(t, lon, lat);
@@ -283,10 +302,12 @@ export function colorAt(t, lon, lat, opts) {
   // per 0.75° cell. Biome and nanite keep coming from the raster: they are region-scale fields that read
   // smooth at any zoom, and re-deriving them here would mean shipping the whole region vote to the browser.
   const fine = o.fine ? o.fine(lon, lat) : null;
+  // ⚠️ UNROUNDED, AND SMOOTHLY READ. `elevation` stays an integer for anything that reports a height;
+  // `elevExact` is the continuous field the SHADING uses, because a contour is a level set and a level
+  // set of a rounded staircase is a grid of rectangles — which is precisely what shipped.
+  const elevExact = Math.max(0, Math.min(254, elevSmooth(t, lon, lat) + (fine ? fine.elevDelta || 0 : 0)));
   const s = fine
-    ? { ...base, type: fine.type,
-        // the baked value carries the hydrology; the generator carries the sub-cell shape
-        elevation: Math.max(0, Math.min(254, Math.round(base.elevation + (fine.elevDelta || 0)))) }
+    ? { ...base, type: fine.type, elevation: Math.round(elevExact) }
     : base;
   if (s.type === 0) {
     const dep = (128 - s.elevation) / 128;
@@ -295,7 +316,7 @@ export function colorAt(t, lon, lat, opts) {
   // ⚠️ AND THE HILLSHADE FOLLOWS THE SAME SOURCE. Shading off the coarse grid under a per-pixel
   // coastline puts 0.75° blocks of light on a crisp shore — worse than either alone.
   const sh = o.fine ? hillshadeFine(t, lon, lat, o.fine) : hillshade(t, lon, lat);
-  const tone = (s.elevation - 128) / 126;
+  const tone = (elevExact - 128) / 126;
   let c;
   if (layer === "lattice") {
     c = s.type === 3 ? [54, 52, 70] : [36 + s.density * 200, 30 + s.density * 160, 24 + s.density * 40];
@@ -307,8 +328,15 @@ export function colorAt(t, lon, lat, opts) {
     c = HEAT[Math.max(0, Math.min(7, Math.floor((f == null ? 1 : f) * 8)))];
   } else {
     c = hyp(tone);
-    const bandN = Math.floor(tone * 12);                       // twelve contour bands, as the prototype read
-    if (Math.abs(tone * 12 - bandN - 0.5) < 0.055) c = [c[0] * 0.72, c[1] * 0.72, c[2] * 0.72];
+    // ⛔ CONTOUR INTERVAL FOLLOWS THE ZOOM, which is what a topographic map has always done. Twelve
+    // bands across the world's whole 126-unit range means each band is ~10 units; a regional view spans
+    // maybe twenty, so it crossed TWO lines and the layer had almost nothing to say at exactly the zoom
+    // where relief matters most. Measured after the level-set fix: 284 contour pixels in a full frame.
+    // ⚠️ Doubling steps rather than a smooth ramp, so lines APPEAR between zoom levels instead of
+    // sliding across the ground — a contour that drifts as you zoom is reporting the camera, not the land.
+    const bands = 12 * (o.contourStep || 1);
+    const bandN = Math.floor(tone * bands);
+    if (Math.abs(tone * bands - bandN - 0.5) < 0.055 * (o.contourStep || 1)) c = [c[0] * 0.72, c[1] * 0.72, c[2] * 0.72];
     if (s.type === 3) c = [c[0] * 0.55 + 31.5, c[1] * 0.55 + 29.7, c[2] * 0.55 + 42.3];
     if (s.type === 2) c = [c[0] * 0.5 + 65, c[1] * 0.5 + 31, c[2] * 0.5 + 22];
   }
@@ -342,6 +370,44 @@ export function unproject(px, py, view) {
   const lon = Math.atan2(x, z0) * 180 / Math.PI - yaw;
   return { lon: ((lon + 180) % 360 + 360) % 360 - 180, lat };
 }
+
+/** The contour interval multiplier for a given view span — 1 at world scale, doubling as the view
+ *  narrows so a regional map carries regional relief. Powers of two only: lines appear BETWEEN levels
+ *  rather than sliding, so a contour always means the same height at a given zoom. */
+export function contourStepFor(span) {
+  if (span > 60) return 1;
+  if (span > 30) return 2;
+  if (span > 14) return 4;
+  if (span > 6) return 8;
+  return 16;
+}
+
+/** ⛔ WHAT A PLACE IS, IN ONE WORD, FOR THE MAP TO DRAW. Erik: "I'd like actual icons for the various
+ *  types of things on the map." The order matters: a GATE is a gate before it is a settlement, because
+ *  what you do there is step through it — the network is the fact that changes your route. A waygate
+ *  that is also a region seat is still drawn as a gate for the same reason.
+ *  ⚠️ `site` is the tier SNG-396 repopulated from play — rooms and yards inside a settlement, which is
+ *  why they are drawn smallest and last: they are the interior, not the landmark. */
+export function markerKind(m) {
+  if (!m) return "settlement";
+  if (m.ro === "gate" || m.wg) return "gate";
+  if (m.t === "region") return "region";
+  if (m.t === "site") return "site";
+  if (m.ro === "waypoint") return "waypoint";
+  return "settlement";
+}
+
+/** The drawing recipe per kind — shape, radius, fill, stroke. Pure data, so the canvas code is a switch
+ *  over geometry and the LOOK lives in one place that a designer can read. */
+export const MARKER_STYLE = {
+  gate:       { shape: "diamond", r: 4.2, fill: "#8fd0e8", stroke: "#dff2fb", label: "waygate" },
+  region:     { shape: "ring",    r: 5.0, fill: "rgba(232,214,160,0.30)", stroke: "#e8d6a0", label: "region seat" },
+  settlement: { shape: "dot",     r: 2.8, fill: "rgba(240,238,228,0.88)", stroke: null, label: "settlement" },
+  waypoint:   { shape: "dot",     r: 2.0, fill: "rgba(214,206,178,0.66)", stroke: null, label: "waypoint" },
+  site:       { shape: "square",  r: 2.2, fill: "rgba(198,214,196,0.80)", stroke: null, label: "site" },
+  player:     { shape: "pip",     r: 4.4, fill: "#d98a5a", stroke: "#f6d8bf", label: "another traveller" },
+  here:       { shape: "here",    r: 5.0, fill: "#e8c14a", stroke: "#e8c14a", label: "you are here" },
+};
 
 /** ⛔ VECTOR HYDROLOGY — THE REASON A CLOSE ZOOM READS AS COUNTRY INSTEAD OF PIXELS. Water rides the
  *  raster as two bits per 0.75° cell, which at close range is a staircase; the same water exists in the
@@ -391,7 +457,12 @@ export function visiblePins(t, view, worldPosOf) {
     // line used 90 - colatitude and mirrored every pin into the empty northern ocean while the terrain
     // stayed put; Erik read it off the screen in one glance. Same frame as the asset and the pipeline.
     const p = project(wp.longitude, wp.colatitude - 90, view);
-    if (p) out.push({ id, name: m.n || id, region: m.r || null, waygate: !!m.wg, x: p.x, y: p.y, z: p.z });
+    if (p) out.push({ id, name: m.n || id, region: m.r || null, waygate: !!m.wg,
+      // ⚠️ KIND IS READ, NEVER DERIVED. tier and role are canon (SNG-396/398 ratified them) and the
+      // pipeline stamps them into the asset; a viewer that inferred "this looks like a hold" would be
+      // the second-source-of-truth mistake that worldPos is already gated against.
+      tier: m.t || null, role: m.ro || null, kind: markerKind(m),
+      x: p.x, y: p.y, z: p.z });
   }
   return out.sort((a, b) => a.z - b.z);
 }

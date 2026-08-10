@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.104";
+const APP_VERSION = "1.9.105";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7010,7 +7010,17 @@ function wireWorldGlobe() {
   // the SAME generator that baked the raster is evaluated per pixel over the visible window instead.
   // ⚠️ LAZY AND OPTIONAL: fetched on the first close zoom, never on boot, and if either fetch fails the
   // globe simply keeps drawing from the raster — detail is an enhancement, not a dependency.
-  let _fineGen = null, _fineLoading = false, _fineFailed = false, _finePatch = null, _finePatchKey = "";
+  let _fineGen = null, _fineLoading = false, _fineFailed = false;
+  // ⛔ THREE CACHED LEVELS INSTEAD OF ONE GENERATED WINDOW — Erik: "can't you have 3 levels of detail
+  // that all get cached instead of generated? wouldn't that improve performance?" Yes, and the reason is
+  // that the old key was the exact window, so ANY movement — one wheel notch, a few pixels of drag —
+  // produced a new key and rebuilt the patch from scratch. Nothing was ever reused.
+  // ⚠️ So the window is SNAPPED to a tile grid at three fixed zoom tiers. Panning inside a tile is free;
+  // leaving it costs one build; coming back is free again because the tile is still in the cache. The
+  // tiers are coarse (each 4× the ground of the next) so a zoom gesture crosses at most two of them.
+  const FINE_TIERS = [48, 16, 5];              // degrees of ground per tile, coarsest first
+  const FINE_CACHE_MAX = 12;                   // ~12 patches × (buffer² × 9 bytes) — a few MB, bounded
+  const _fineCache = new Map();                // key → patch, insertion-ordered so the oldest evicts first
   const FINE_SPAN = 60;                                        // below this the raster starts to show
   async function loadFineGenerator() {
     if (_fineGen || _fineLoading || _fineFailed) return;
@@ -7031,28 +7041,49 @@ function wireWorldGlobe() {
     if (!_fineGen) { loadFineGenerator(); return null; }
     const c = unproject(view.cx, view.cy, view);
     if (!c) return null;
-    const half = Math.min(80, span * 0.75);
+    // the tier whose tile comfortably covers what is on screen; the smallest that still fits wins
+    const need = span * 1.5;
+    const tier = FINE_TIERS.find((d) => d >= need) ?? FINE_TIERS[FINE_TIERS.length - 1];
+    // ⚠️ SNAP IN GROUND UNITS, NOT DEGREES. Meridians converge, so a tile that is `tier` degrees tall
+    // must be `tier / cos(lat)` degrees wide to cover the same ground — the same correction the buffer
+    // aspect needed, one level up. Without it the tiles near the Crossing would be slivers.
     const conv = Math.max(0.12, Math.cos(c.lat * Math.PI / 180));
-    const la0 = Math.max(-90, c.lat - half), la1 = Math.min(90, c.lat + half);
-    const halfLon = Math.min(180, half / conv);
-    // ⚠️ the cull window is PADDED past the visible disc: a gaussian contributor just outside the frame
-    // still shapes ground inside it, and clipping to exactly what is on screen makes the coast crawl as
-    // you drag. Aevi's own cull comment makes the same point about meridian convergence.
-    const win = { la0, la1, lo0: c.lon - halfLon, lo1: c.lon + halfLon };
-    // ⛔ BUDGETED, NOT PER-PIXEL. Calling the generator for every screen pixel cost ELEVEN SECONDS a
-    // repaint and read to Erik as a crash. makeFinePatch samples it onto a buffer sized from a measured
-    // per-call cost, so the work is bounded and a slow machine loses detail instead of the thread.
-    // ⚠️ Rebuilt when the WINDOW changes, not every paint — a pan or zoom invalidates it, a re-render
-    // of the same view does not.
-    const key = [win.la0, win.la1, win.lo0, win.lo1].map((v) => v.toFixed(3)).join("|");
-    if (!_finePatch || _finePatchKey !== key) {
-      // the cull itself costs real work, so building the windowed generator lives inside the guard too
-      _finePatch = makeFinePatch(_terrain, _fineGen.make(_fineGen.gp, win), win, { budgetMs: 140 });
-      _finePatchKey = key;
+    const tileLat = tier, tileLon = tier / conv;
+    const jy = Math.floor((c.lat + 90) / tileLat), jx = Math.floor((c.lon + 180) / tileLon);
+    // one tile of PADDING on every side, so panning within the tile never reaches an edge that has no
+    // data — and so a contributor just outside the frame still shapes the ground inside it.
+    const la0 = Math.max(-90, jy * tileLat - 90 - tileLat * 0.5), la1 = Math.min(90, (jy + 1) * tileLat - 90 + tileLat * 0.5);
+    const lo0 = jx * tileLon - 180 - tileLon * 0.5, lo1 = (jx + 1) * tileLon - 180 + tileLon * 0.5;
+    const win = { la0, la1, lo0, lo1 };
+    const key = `${tier}|${jy}|${jx}`;
+    let patch = _fineCache.get(key);
+    if (!patch) {
+      // ⛔ BUDGETED, NOT PER-PIXEL — calling the generator for every screen pixel cost ELEVEN SECONDS a
+      // repaint and read as a crash. The cull itself costs real work, so it lives inside the guard too.
+      patch = makeFinePatch(_terrain, _fineGen.make(_fineGen.gp, win), win, { budgetMs: 140 });
+      _fineCache.set(key, patch);
+      if (_fineCache.size > FINE_CACHE_MAX) _fineCache.delete(_fineCache.keys().next().value);
     }
     // ⚠️ decline rather than degrade — see worthIt: a patch coarser than the bake is slower AND blockier
-    return _finePatch.worthIt ? _finePatch : null;
+    return patch.worthIt ? patch : null;
   }
+
+  // ⛔ WHERE EVERY PLAYER IS. Erik: "I'd like actual icons for the various types of things on the map —
+  // including where every Player is." The character index lists them; their position is their own
+  // currentLocationId resolved through canon, so the map shows travellers rather than a second
+  // authority on where anyone stands. ⚠️ Read ONCE per open, not per paint — loadCharacter parses a
+  // whole save, and doing that 60 times a second inside a render loop is how a map becomes a stutter.
+  let _travellers = [];
+  const readTravellers = () => {
+    try {
+      _travellers = listCharacters()
+        .filter((e) => e.id !== character.id)
+        .map((e) => { try { return loadCharacter(e.id); } catch { return null; } })
+        .filter((c2) => c2 && c2.currentLocationId && CONTENT.locations?.[c2.currentLocationId])
+        .map((c2) => ({ id: c2.id, name: c2.name, locationId: c2.currentLocationId }));
+    } catch { _travellers = []; }
+  };
+  readTravellers();
 
   const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;
   const worldPosOf = (id) => CONTENT.locations?.[id]?.worldPos || null;
@@ -7069,11 +7100,14 @@ function wireWorldGlobe() {
     // for the raster path and the same trade applies harder here.
     const span = spanDeg(view, Math.min(cv.width, cv.height));
     const fine = coarse ? null : fineFor(span);
+    // ⚠️ a regional view earns a finer contour interval — see contourStepFor: the rule lives in the
+    // viewer so the map and any gate that checks it read the same one.
+    const contourStep = contourStepFor(span);
     for (let y = 0; y < cv.height; y += step) {
       for (let x = 0; x < cv.width; x += step) {
         const g = unproject(x + 0.5, y + 0.5, view);
         let r = 4, gr = 4, b = 10;                                  // the void behind the world
-        if (g) { const c = colorAt(_terrain, g.lon, g.lat, { layer, band, bandFn: bandFactor, fine }); r = c[0]; gr = c[1]; b = c[2]; }
+        if (g) { const c = colorAt(_terrain, g.lon, g.lat, { layer, band, bandFn: bandFactor, fine, contourStep }); r = c[0]; gr = c[1]; b = c[2]; }
         for (let dy = 0; dy < step && y + dy < cv.height; dy++) {
           for (let dx = 0; dx < step && x + dx < cv.width; dx++) {
             const o = ((y + dy) * cv.width + (x + dx)) * 4;
@@ -7106,12 +7140,44 @@ function wireWorldGlobe() {
     // pins on top, near-last so they sit over the far side
     pins = visiblePins(_terrain, view, worldPosOf);
     const here = character.currentLocationId;
+    // ⚠️ one marker per PLACE, drawn by what the place IS — the shapes come from MARKER_STYLE so the
+    // look lives in one table rather than smeared through a render loop.
+    const occupied = new Map();                                  // locationId → travellers standing there
+    for (const tr of _travellers) {
+      if (!occupied.has(tr.locationId)) occupied.set(tr.locationId, []);
+      occupied.get(tr.locationId).push(tr);
+    }
+    const drawMarker = (x, y, st) => {
+      ctx.beginPath();
+      if (st.shape === "diamond") {
+        ctx.moveTo(x, y - st.r); ctx.lineTo(x + st.r, y); ctx.lineTo(x, y + st.r); ctx.lineTo(x - st.r, y); ctx.closePath();
+      } else if (st.shape === "square") {
+        ctx.rect(x - st.r, y - st.r, st.r * 2, st.r * 2);
+      } else if (st.shape === "pip") {
+        // a traveller reads as a standing figure: a narrow upright teardrop, not another dot
+        ctx.moveTo(x, y - st.r); ctx.lineTo(x + st.r * 0.62, y + st.r * 0.5);
+        ctx.lineTo(x, y + st.r * 0.28); ctx.lineTo(x - st.r * 0.62, y + st.r * 0.5); ctx.closePath();
+      } else {
+        ctx.arc(x, y, st.r, 0, Math.PI * 2);
+      }
+      if (st.fill) { ctx.fillStyle = st.fill; ctx.fill(); }
+      if (st.stroke) { ctx.strokeStyle = st.stroke; ctx.lineWidth = st.shape === "ring" ? 1.4 : 1; ctx.stroke(); }
+    };
     for (const p of pins) {
       const isHere = p.id === here;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, isHere ? 5 : (p.waygate ? 3.5 : 2.4), 0, Math.PI * 2);
-      ctx.fillStyle = isHere ? "#e8c14a" : p.waygate ? "#8fd0e8" : "rgba(232,230,221,0.75)";
-      ctx.fill();
+      // ⚠️ a site is an INTERIOR — drawing all fourteen at world scale is clutter for places you cannot
+      // see from orbit, so they appear once the view is regional. Everything else always draws.
+      if (p.kind === "site" && spanDeg(view, Math.min(cv.width, cv.height)) > 40) continue;
+      drawMarker(p.x, p.y, MARKER_STYLE[p.kind] || MARKER_STYLE.settlement);
+      const crowd = occupied.get(p.id);
+      if (crowd && crowd.length) {
+        // travellers stand BESIDE the place, not on it, so a marker never hides the ground it names
+        drawMarker(p.x + 6, p.y - 5, MARKER_STYLE.player);
+        if (crowd.length > 1) {
+          ctx.fillStyle = "#f6d8bf"; ctx.font = "600 9px system-ui, sans-serif"; ctx.textAlign = "left";
+          ctx.fillText(String(crowd.length), p.x + 10, p.y - 6);
+        }
+      }
       if (isHere) { ctx.strokeStyle = "#e8c14a"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(p.x, p.y, 9, 0, Math.PI * 2); ctx.stroke(); }
     }
   }

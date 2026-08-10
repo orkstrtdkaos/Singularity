@@ -882,6 +882,57 @@ for (const pack of PACKS) {
     check("SNG-396: the Made Gate is captured — a player-built waygate is a world event sitting in a save, and the census holds it",
       gp396.places.some((p) => p.id === "gen-the-made-gate" && p.visits >= 1));
   }
+  // ══ SNG-409 §3 — THE THREE NETWORKS ARE VISIBLY INDEPENDENT.
+  // Aevi: "This is not decoration — it is a measured argument. Waygates are only 1.1× closer to
+  // substrate sources than chance. ⛔ Precursors laid the lines, someone else built the gates, and
+  // people walk neither. That is why `wake_the_line` exists as a craft — you only rouse a road nobody
+  // has been using. The map is the only place a player can see it."
+  {
+    const WGN = await import("../engine/worldglobe.js");
+    const tN = WGN.decodeTerrain(rj("content/packs/core/world/terrain.json"));
+    const pre = rj("content/packs/core/world/precursor_lines.json");
+    const view = { yaw: 20, pitch: -52, r: 900, cx: 350, cy: 270 };
+
+    // ⛔ THE CRAFT IS THE GATE. `old_roads` is "sense, follow, and safely approach Precursor traces";
+    // a player without it must see roads and gates and NO lines, which is the fiction rather than a
+    // rendering preference.
+    const without = WGN.networkPaths(tN, view, { locations: canon.locs, precursor: pre, showPrecursor: false });
+    const withIt = WGN.networkPaths(tN, view, { locations: canon.locs, precursor: pre, showPrecursor: true });
+    check("SNG-409 §3: the buried lines are visible ONLY to a character who can sense them — old_roads is the gate",
+      without.precursor.length === 0 && withIt.precursor.length > 5,
+      `${without.precursor.length} without the craft, ${withIt.precursor.length} with it`);
+    check("SNG-409 §3: …and the roads draw for everyone, derived from the graph a player actually walks",
+      without.roads.length > 50 && without.roads.every((r) => r.length > 1));
+
+    // ⚠️ HER RENDERING NOTE IS A FACT ABOUT THE WORLD, NOT A STYLE: the spans run UNDER the ground, so
+    // they project at a radius inside the sphere and the limb occludes them sooner than the surface.
+    const flat = { yaw: 0, pitch: 0, r: 300, cx: 0, cy: 0 };
+    const onSurface = WGN.project(10, 10, flat), buried = WGN.project(10, 10, flat, 0.985);
+    check("SNG-409 §3: …and a precursor span runs BELOW the surface, not painted on it",
+      Math.hypot(buried.x, buried.y) < Math.hypot(onSurface.x, onSurface.y));
+
+    // ⛔ THE INDEPENDENCE ITSELF, RE-MEASURED HERE RATHER THAN QUOTED. She caught her own first null as
+    // biased — a network BUILT FROM locations guarantees locations sit near it — so the honest question
+    // is whether the GATES sit closer to the lines than the general run of places does. They do not.
+    const nodes = pre.nodes.map((n) => [n.lat, n.lon]);
+    const nearestSpanDeg = (lat, lon) => {
+      let best = Infinity;
+      for (const n of nodes) {
+        const d = Math.acos(Math.max(-1, Math.min(1,
+          Math.sin(lat * Math.PI / 180) * Math.sin(n[0] * Math.PI / 180) +
+          Math.cos(lat * Math.PI / 180) * Math.cos(n[0] * Math.PI / 180) * Math.cos((lon - n[1]) * Math.PI / 180)))) * 180 / Math.PI;
+        if (d < best) best = d;
+      }
+      return best;
+    };
+    const med = (xs) => { const a = xs.slice().sort((x, y) => x - y); return a[Math.floor(a.length / 2)]; };
+    const placed = Object.values(canon.locs).filter((l) => l.worldPos && !l.worldPosInherited);
+    const gateD = med(placed.filter((l) => l.waygate).map((l) => nearestSpanDeg(l.worldPos.colatitude - 90, l.worldPos.longitude)));
+    const allD = med(placed.map((l) => nearestSpanDeg(l.worldPos.colatitude - 90, l.worldPos.longitude)));
+    check("SNG-409 §3: the networks really are INDEPENDENT — the gates sit no closer to the buried lines than places in general",
+      gateD >= allD, `waygates median ${gateD.toFixed(2)}° vs all locations ${allD.toFixed(2)}°`);
+  }
+
   // ══ SNG-409 §1 — NANITE AND DENSITY RESOLVE AS YOU ZOOM.
   // Aevi: "Type, nanite and biome are baked at 480 × 240 — roughly ten cells across the screen at a 5°
   // view. ⛔ The map is a picture that gets bigger, not a world that resolves." Terrain needed a

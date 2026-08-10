@@ -400,9 +400,12 @@ export function colorAt(t, lon, lat, opts) {
 
 /** Sphere → screen, orthographic. Null when the point is on the far side. ⚠️ Pure, and the exact inverse
  *  of `unproject` — the two are tested against each other rather than eyeballed on screen. */
-export function project(lon, lat, view) {
+export function project(lon, lat, view, radius) {
   const v = view || {};
-  const yaw = v.yaw || 0, pitch = v.pitch || 0, r = v.r == null ? 1 : v.r, cx = v.cx || 0, cy = v.cy || 0;
+  // ⚠️ `radius` is a multiplier on the sphere, not the camera: 1 is the surface, below 1 is UNDER it.
+  // The precursor spans use it so the horizon occludes them earlier than the ground above them.
+  const rad = radius == null ? 1 : radius;
+  const yaw = v.yaw || 0, pitch = v.pitch || 0, r = (v.r == null ? 1 : v.r) * rad, cx = v.cx || 0, cy = v.cy || 0;
   const la = lat * Math.PI / 180, lo = (lon + yaw) * Math.PI / 180, p = pitch * Math.PI / 180;
   const x = Math.cos(la) * Math.sin(lo);
   const y0 = Math.sin(la), z0 = Math.cos(la) * Math.cos(lo);
@@ -525,6 +528,84 @@ export const MARKER_STYLE = {
   player:     { shape: "pip",     r: 4.4, fill: "#d98a5a", stroke: "#f6d8bf", label: "another traveller" },
   here:       { shape: "here",    r: 5.0, fill: "#e8c14a", stroke: "#e8c14a", label: "you are here" },
 };
+
+/** ⛔ SNG-409 §3 — THE THREE NETWORKS, AND THEIR INDEPENDENCE IS THE POINT. Aevi: "Precursors laid the
+ *  lines, someone else built the gates, and people walk neither. That is why `wake_the_line` exists as a
+ *  craft — you only rouse a road nobody has been using. The map is the only place a player can see it."
+ *  She measured it: waygates sit a median 6.32° from the nearest precursor span, against 2.15° for a
+ *  random location — and she flagged her own first null as biased, since a network BUILT FROM locations
+ *  guarantees locations sit near it.
+ *
+ *  ⚠️ ROADS ARE DERIVED, NOT AUTHORED — a road is a `connections` edge between two placed locations, so
+ *  it costs no payload and cannot fall out of sync with the graph a player actually walks.
+ *
+ *  ⛔ PRECURSOR SPANS RUN UNDER THE GROUND, which is her rendering note and not a style choice: they are
+ *  drawn at a radius INSIDE the sphere, so the horizon occludes them earlier than the surface and they
+ *  read as buried. ⚠️ And they are not shown by default — `old_roads` is the craft that senses them, so
+ *  a player without it sees roads and gates and no lines, which is exactly the fiction.
+ *
+ *  Great-circle arcs, subdivided, because a straight screen line between two far points is not the path
+ *  the world takes and would cross the limb wrongly. */
+export function networkPaths(t, view, { locations, precursor, showPrecursor = false, canvasPx = 700 } = {}) {
+  const arc = (a, b, radius, steps) => {
+    // spherical interpolation between two [lat, lon] points, projected per step
+    const R2 = Math.PI / 180;
+    const v = (p) => [Math.cos(p[0] * R2) * Math.cos(p[1] * R2), Math.cos(p[0] * R2) * Math.sin(p[1] * R2), Math.sin(p[0] * R2)];
+    const A = v(a), B = v(b);
+    const dot = Math.max(-1, Math.min(1, A[0] * B[0] + A[1] * B[1] + A[2] * B[2]));
+    const om = Math.acos(dot);
+    const n = Math.max(2, Math.min(64, steps || Math.ceil((om * 180 / Math.PI) / 2) + 2));
+    const runs = []; let run = [];
+    for (let i = 0; i <= n; i++) {
+      const f = i / n;
+      let x, y, z;
+      if (om < 1e-9) { x = A[0]; y = A[1]; z = A[2]; }
+      else {
+        const s1 = Math.sin((1 - f) * om) / Math.sin(om), s2 = Math.sin(f * om) / Math.sin(om);
+        x = A[0] * s1 + B[0] * s2; y = A[1] * s1 + B[1] * s2; z = A[2] * s1 + B[2] * s2;
+      }
+      const lat = Math.asin(Math.max(-1, Math.min(1, z))) * 180 / Math.PI;
+      const lon = Math.atan2(y, x) * 180 / Math.PI;
+      const pr = project(lon, lat, view, radius);
+      if (!pr) { if (run.length > 1) runs.push(run); run = []; continue; }
+      run.push([pr.x, pr.y]);
+    }
+    if (run.length > 1) runs.push(run);
+    return runs;
+  };
+
+  const span = spanDeg(view, canvasPx);
+  const out = { roads: [], precursor: [], fade: Math.min(1, Math.max(0, (90 - span) / 30)) };
+  if (out.fade <= 0) return out;
+
+  // roads — every connection edge, drawn once per pair
+  const seen = new Set();
+  for (const id of Object.keys(locations || {})) {
+    const l = locations[id];
+    if (!l?.worldPos) continue;
+    for (const other of l.connections || []) {
+      const key = id < other ? id + "|" + other : other + "|" + id;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const o2 = locations[other];
+      if (!o2?.worldPos) continue;
+      for (const run of arc([l.worldPos.colatitude - 90, l.worldPos.longitude],
+                            [o2.worldPos.colatitude - 90, o2.worldPos.longitude], 1.0)) out.roads.push(run);
+    }
+  }
+
+  if (showPrecursor && precursor?.spans) {
+    const byId = {};
+    for (const n of precursor.nodes || []) byId[n.id] = n;
+    for (const sp of precursor.spans) {
+      const a = byId[sp.a], b = byId[sp.b];
+      if (!a || !b) continue;
+      // ⚠️ 0.985 — inside the sphere, so the limb hides them sooner than the surface: buried, not painted on
+      for (const run of arc([a.lat, a.lon], [b.lat, b.lon], 0.985)) out.precursor.push(run);
+    }
+  }
+  return out;
+}
 
 /** ⛔ VECTOR HYDROLOGY — THE REASON A CLOSE ZOOM READS AS COUNTRY INSTEAD OF PIXELS. Water rides the
  *  raster as two bits per 0.75° cell, which at close range is a staircase; the same water exists in the

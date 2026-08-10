@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.112";
+const APP_VERSION = "1.9.113";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7012,6 +7012,12 @@ function wireWorldGlobe() {
   // ⚠️ LAZY AND OPTIONAL: fetched on the first close zoom, never on boot, and if either fetch fails the
   // globe simply keeps drawing from the raster — detail is an enhancement, not a dependency.
   let _fineGen = null, _fineLoading = false, _fineFailed = false;
+  // ⚠️ the precursor network is a small authored file (29 nodes, 30 spans) — fetched once, and only
+  // ever drawn for a character who can sense it.
+  let _precursorLines = null;
+  fetch("content/packs/core/world/precursor_lines.json?v=" + APP_VERSION)
+    .then((r) => r.json()).then((d) => { _precursorLines = d; paint(false); })
+    .catch(() => { /* the lines are an enhancement; roads and gates still draw */ });
   // ⛔ THREE CACHED LEVELS INSTEAD OF ONE GENERATED WINDOW — Erik: "can't you have 3 levels of detail
   // that all get cached instead of generated? wouldn't that improve performance?" Yes, and the reason is
   // that the old key was the exact window, so ANY movement — one wheel notch, a few pixels of drag —
@@ -7135,6 +7141,34 @@ function wireWorldGlobe() {
     // ⛔ THE WATER I BUILT AND NEVER DREW. 113 rivers, 17 lakes and 38 marshes have shipped in the asset
     // since SNG-391 — traced, gated, re-anchored by polar signature across SNG-393/394 — and no reader
     // existed. As vectors they stay clean at any zoom where the raster is a staircase.
+    // ⛔ SNG-409 §3 — THE THREE NETWORKS, AND THEIR INDEPENDENCE IS THE ARGUMENT. Roads are derived from
+    // the connection graph a player actually walks; the gates draw as their own glyph; and the precursor
+    // spans are visible only to a character carrying `old_roads`, which is the craft that senses them.
+    // ⚠️ A player without the craft sees roads and gates and NO lines — which is the fiction exactly:
+    // "Precursors laid the lines, someone else built the gates, and people walk neither."
+    const hasOldRoads = (character.abilities || []).some((a) => a.abilityId === "old_roads");
+    const net = networkPaths(_terrain, view, { locations: CONTENT.locations, precursor: _precursorLines,
+      showPrecursor: hasOldRoads, canvasPx: Math.min(cv.width, cv.height) });
+    if (net.fade > 0) {
+      ctx.save();
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
+      // buried first, so the roads above them draw over
+      ctx.globalAlpha = 0.5 * net.fade; ctx.strokeStyle = "#7a6ab8"; ctx.lineWidth = 1.1;
+      ctx.setLineDash([4, 5]);
+      for (const run of net.precursor) {
+        ctx.beginPath(); ctx.moveTo(run[0][0], run[0][1]);
+        for (let i = 1; i < run.length; i++) ctx.lineTo(run[i][0], run[i][1]);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 0.42 * net.fade; ctx.strokeStyle = "#c9b48a"; ctx.lineWidth = 0.9;
+      for (const run of net.roads) {
+        ctx.beginPath(); ctx.moveTo(run[0][0], run[0][1]);
+        for (let i = 1; i < run.length; i++) ctx.lineTo(run[i][0], run[i][1]);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
     const hyd = hydrologyPaths(_terrain, view, Math.min(cv.width, cv.height));
     if (hyd.fade > 0 && layer === "topo") {
       const stroke = (runs, color, width, close) => {

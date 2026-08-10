@@ -289,7 +289,7 @@
    "nearHead": "greenforge",
    "nearMouth": "the_forge_eternal",
    "span": "14.3°",
-   "why": "Runs from Greenforge down toward the Forge-Eternal. Green going into black — the growers' water arriving where the makers use it, which is most of the foothills economy in one river.",
+   "why": "⛔ RE-SIGNED, NOT RENAMED. The 3° gate refused it because MY SIGNATURE WAS STALE, not because the water is gone: there is real water 4.4° from Greenforge and 4.7° from the Forge-Eternal. ⚠️ The anchors were never ON the river — Greenforge is a timber town and the Forge-Eternal is a making-place; the water runs BETWEEN them, which is the whole point of the name. Signature now taken from the actual stream.",
    "head": [
     -12.75,
     -113.75
@@ -323,7 +323,7 @@
    "nearHead": "the_crossing",
    "nearMouth": "the_axis_gate",
    "span": "13.0°",
-   "why": "⛔ THE FIRST WATER, and it is short — 1.3°. It rises within four degrees of the Crossing, the closest any river comes to the pole, and is gone almost at once. 'Axe' is the axis worn down by saying.",
+   "why": "⛔ RE-SIGNED. Head at latitude −86.25 — 3.75° FROM THE POLE, and genuinely the closest running water to the Crossing in the whole world, which is exactly what 'the first water' claimed. ⚠️ It is 1.3° long: a trickle that rises near the pole and is gone almost at once. The name still fits and I have not resited it onto something grander.",
    "head": [
     -86.25,
     -3.25
@@ -571,5 +571,6 @@
   }
  ],
  "_censusNote": "⛔ Names that cannot bind are NOT failures. Seven refused to bind at 3° and each one was the world reporting that the feature I named is gone or was never one thing. ⚠️ Widening the tolerance would have bound all seven to the wrong water and I would never have known. The Millfen is the clearest case: a 24.2° wetland I invented, two 4.5° fens the terrain actually makes. ⛔ ALL SIGNATURES IN THIS FILE ARE NOW TAKEN FROM THE LIVE ASSET (content/packs/core/world/terrain.json), not from a sandbox copy of the hydrology. My local HYDRO.json had a 91° main stem where the built world has 129.6° — reading the wrong layer is how the Millfen happened.",
- "_featureJoin": "⛔ SNG-412. NAMES RE-ANCHORED ONTO THE CURRENTLY DETECTED FEATURES AND THE GAPS FILLED. CCode found the join gap: 5 detected seas / 16 detected ranges against 4 / 12 named. ⚠️ WORSE THAN A COUNT MISMATCH — only 5 of 16 ranges and 2 of 5 seas still had a name within reach, because MY ADDRESSES WERE AUTHORED AGAINST PRE-REBUILD TERRAIN and the features moved. The Ythmere, the world ocean, was 80° stale. ⛔ SEAS AND RANGES NEED THE SAME RE-ANCHORING TREATMENT AS RIVERS AND FENS — I said they did not, because 'an ocean and a bedrock ridge stay put'. THEY DO NOT STAY PUT WHEN THE GENERATOR IS RETUNED. ⚠️ A detected feature with no name must render UNLABELLED, never bound to the nearest name."
+ "_featureJoin": "⛔ SNG-412. NAMES RE-ANCHORED ONTO THE CURRENTLY DETECTED FEATURES AND THE GAPS FILLED. CCode found the join gap: 5 detected seas / 16 detected ranges against 4 / 12 named. ⚠️ WORSE THAN A COUNT MISMATCH — only 5 of 16 ranges and 2 of 5 seas still had a name within reach, because MY ADDRESSES WERE AUTHORED AGAINST PRE-REBUILD TERRAIN and the features moved. The Ythmere, the world ocean, was 80° stale. ⛔ SEAS AND RANGES NEED THE SAME RE-ANCHORING TREATMENT AS RIVERS AND FENS — I said they did not, because 'an ocean and a bedrock ridge stay put'. THEY DO NOT STAY PUT WHEN THE GENERATOR IS RETUNED. ⚠️ A detected feature with no name must render UNLABELLED, never bound to the nearest name.",
+ "_metricNote": "⛔ ALL DISTANCES IN THIS FILE ARE GREAT-CIRCLE. The flat approximation hypot(dLat, dLon·cos lat) over-reports by ~4.7% at −65° and far worse nearer the pole — it is the same bug I fixed in the terrain generator and then reused in the area maths. ⚠️ ANY CONSUMER MATCHING SIGNATURES MUST USE GREAT-CIRCLE OR THE 3° TOLERANCE MEANS SOMETHING DIFFERENT THAN INTENDED."
 }

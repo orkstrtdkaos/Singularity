@@ -17,7 +17,7 @@
     "lon": 49
    }
   ],
-  "separationDeg": 22.4,
+  "separationDeg": 21.38,
   "midpoint": {
    "lat": -68.5,
    "lon": 78.0
@@ -29,21 +29,23 @@
    "the-low-lamp-inn",
    "thornwake_glade",
    "old_switchback",
+   "greywater_stilts",
    "echo_river_crossing"
   ],
-  "membershipRule": "⛔ ELLIPSE, NOT EQUIDISTANCE. A point is in the zone when d_harmonic + d_radiant <= 1.35 × separation. ⚠️ MY FIRST FORMULA TESTED ONLY ASYMMETRY — whether the two fields were comparably distant — AND THAT IS NOT BETWEENNESS. The Great Coliseum is exactly equidistant from both powers (18.2° and 18.2°, asymmetry 0.00) while sitting FAR OFF TO THE SIDE: a tall thin triangle, sum-over-separation 1.63. Erik caught it — it belongs to the Crossing and always did. An ellipse with both powers as foci is the correct shape and excludes it cleanly.",
-  "k": 1.35,
+  "membershipRule": "⛔ ELLIPSE, GREAT-CIRCLE METRIC. In the zone when d_harmonic + d_radiant <= 1.45 × separation (21.38°), i.e. sum <= 31.0°.\n⚠️ TWO CORRECTIONS, BOTH MINE:\n(1) MY FIRST FORMULA TESTED EQUIDISTANCE, WHICH IS NOT BETWEENNESS. The Great Coliseum is exactly 18.2° from each power while sitting far off to the side. Erik caught it; an ellipse excludes it (k needed 1.620).\n(2) ⛔ I THEN COMPUTED THE ELLIPSE WITH THE FLAT APPROXIMATION — hypot(dLat, dLon·cos lat) — WHICH OVER-REPORTS BY 4.7% AT THESE LATITUDES. That is the same bug I found and fixed in the terrain generator, and then used anyway here. CCode measured greywater_stilts at 29.5 against my bound of 30.2; his distance was great-circle and correct, my bound was flat, SO THE COMPARISON MIXED METRICS AND NEITHER OF US WAS RIGHT. Consistent great-circle gives separation 21.38 (not 22.38) and greywater 29.53.\n⛔ k RE-TUNED TO THE FICTION, NOT TO A ROUND NUMBER: Greywater is 'people who wanted out from under BOTH cities — whoever needed somewhere the aligned powers don't reach', which IS a disputed-zone people; Echo River Crossing hosts contamination teams from Heights AND Plateau. Both must be in. They need k>=1.389, and THE NEXT PLACE OUT IS AT 1.620 — a clean gap, so 1.45 sits in the middle of it and is not a knife-edge.",
+  "k": 1.45,
   "_namingNote": "⚠️ ERIK RECALLED 'the Radiant Heights and the Resonant Plateau'. CANON HAS THE QUALIFIERS THE OTHER WAY: `harmonic_heights_terrace` is 'Harmonic Heights — Lower Terrace', the SONIC civilization ('buildings grown from phononic crystal'), and `radiant_plateau_edge` is 'Radiant Plateau — Edge District', the PHOTONIC one ('towers catch and braid the sunlight'). The zone's own seed says 'where HARMONIC and RADIANT power fields interfere'. ⛔ So the foci are right; the pairing is Harmonic-Heights and Radiant-Plateau. Flagging rather than silently agreeing — if the intent was Resonant rather than Harmonic, that is a rename across several files and Erik's call.",
   "_openQuestions": [
    {
     "q": "the fringe's pin",
-    "detail": "⛔ `disputed_zone_fringe` sits 67.7° — about 113 walking days — from the midpoint of the two powers. Predates SNG-407. It is not in its own zone."
+    "detail": "⛔ `disputed_zone_fringe` sits 67.7° from the midpoint of the two powers — it is not in its own zone. ⚠️ UPDATED COUNT: 4 of its 8 children are in the band under the corrected metric (was reported as 1 — that number was measured before SNG-396 promotion added two children and before SNG-407 moved 11 locations). THE CONSTRAINT IS UNCHANGED AND STILL LOAD-BEARING: graph and band are different sets. Two locations in the band — the Low Lamp Inn and the Old Switchback — are NOT children of the fringe at all."
    },
    {
     "q": "the old switchback",
     "resolved": "⛔ RESOLVED BY MEASUREMENT, under the standing ruling. Erik: 'it's supposed to be within a few days walking — Silas and Pell walked there — a way out of the Valley.' ⚠️ THE TERRAIN CANNOT SUPPORT BOTH: Millbrook sits in country that is FLAT FOR 20 DAYS IN EVERY DIRECTION — nothing rises above it past 1°, the nearest real high ground is 22 days off, and the nearest mountain belt is 31 days away. THERE IS NO PASS WITHIN A FEW DAYS OF MILLBROOK. ⛔ BUT THE SWITCHBACK IS ALREADY WELL PLACED FOR EVERYTHING ELSE HE SAID: relief span 0.175 against Millbrook's 0.03 — real mountain country, matching its own seed ('stone-cut switchbacks clinging to the mountainside'); it reaches TWO REGIONS, the Echo Vale and the Foothills, so it genuinely IS a way out; and by the corrected ellipse it sits INSIDE the Disputed Zone at 1.11. ⚠️ A CONTESTED MOUNTAIN ROAD BETWEEN TWO POWERS IS A BETTER FIT THAN A LANE OUTSIDE A FARMING VILLAGE. Keeping it where it is. The 'few days from Millbrook' memory is recorded and not honoured."
    }
-  ]
+  ],
+  "metric": "great-circle"
  },
  "_standingRuling": "⛔ ERIK, 2026-08-10: 'I'm more interested in finding good fits for WHAT we've created now that we have world geography, than trying to match what I experienced in a game where nothing was anchored yet.' ⚠️ STANDING PRECEDENCE: WORLD GEOGRAPHY OUTRANKS UNANCHORED PLAY MEMORY. Play happened before the terrain existed, so a remembered distance is a remembered FEELING, not a measurement. Where the two conflict, fit the geography and record what the memory said. ⛔ THIS DOES NOT DEMOTE PLAY-AUTHORED CONTENT — the Made Gate, the Watershed Road and the Far Side are canon because of what happened in them. It demotes only remembered POSITIONS."
 }

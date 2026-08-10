@@ -865,6 +865,88 @@ for (const pack of PACKS) {
     check("SNG-396: the Made Gate is captured — a player-built waygate is a world event sitting in a save, and the census holds it",
       gp396.places.some((p) => p.id === "gen-the-made-gate" && p.visits >= 1));
   }
+  // ══ SNG-404 — THE LOCAL DETAILING ENGINE, MEASURED AGAINST THE EIGHT AUTHORED LAYOUTS.
+  // Aevi built a corpus specifically to be argued with — four Valley towns that agreed on a rule set and
+  // four contrast towns chosen to break it, which they did in four different ways. These gates hold the
+  // engine to HER measurements, because an engine that cannot reproduce the corpus it was derived from
+  // is not a generalisation of it.
+  {
+    const LD = await import("../engine/localdetail.mjs");
+    const TG404 = await import("../scripts/world/terrain.mjs");
+    const layouts = rj("content/packs/core/world/local_layouts.json");
+    const fT404 = TG404.makeTerrain(canon.gp, null);
+    const ids404 = Object.keys(layouts).filter((k) => !k.startsWith("_"));
+
+    // ⛔ THE HANDSHAKE. Her `_measured` blocks were taken against the same world; if my numbers drift
+    // from hers, every placement built on them is drifting too and nobody would see it.
+    const drift = [];
+    for (const id of ids404) {
+      const loc = canon.locs[id]; if (!loc) { drift.push(id + ": not in content"); continue; }
+      const hers = layouts[id]._measured || {};
+      const mine = LD.measureGradients(loc, { locations: canon.locs, hydrology: built.hydrology, terrainFn: fT404 });
+      if (hers.riverDistanceDeg != null && Math.abs(hers.riverDistanceDeg - mine.riverDistanceDeg) > 0.02)
+        drift.push(`${id}: river ${hers.riverDistanceDeg} vs ${mine.riverDistanceDeg}`);
+      // ⚠️ compared MODULO 360 — she writes 0..360 and this module writes -180..180, so her 210 and my
+      // -150 are the same direction. Comparing the numerals would fail on a difference of notation.
+      if (hers.uphillBearing != null) {
+        const d = Math.abs(((hers.uphillBearing - mine.uphillBearing + 540) % 360) - 180);
+        if (d > 2) drift.push(`${id}: uphill ${hers.uphillBearing} vs ${mine.uphillBearing}`);
+      }
+    }
+    check("SNG-404: the engine reproduces Aevi's own measurements across all eight authored layouts",
+      drift.length === 0, drift.join(" · "));
+
+    // ⛔ THE THRESHOLD SEPARATES HER CORPUS — asserted as SHAPE, never as the value. Erik and Aevi own
+    // the number; what a gate may hold is that whatever it is, Greywater's flat ground stays out and
+    // every town she DID place on a measured slope stays in.
+    const reliefOf = {};
+    for (const id of ids404) {
+      const loc = canon.locs[id]; if (!loc) continue;
+      reliefOf[id] = LD.measureGradients(loc, { locations: canon.locs, hydrology: built.hydrology, terrainFn: fT404 }).relief;
+    }
+    const usedUphill = ["millbrook", "echo_river_crossing", "greyhearth", "kindlerow", "the_cogitarium"];
+    const flatGround = ["greywater_stilts"];
+    check("SNG-404: the relief cut keeps the flat town OUT and every town she placed on a slope IN",
+      flatGround.every((id) => reliefOf[id] < LD.RELIEF_USABLE)
+      && usedUphill.every((id) => reliefOf[id] >= LD.RELIEF_USABLE),
+      `cut ${LD.RELIEF_USABLE}; ` + Object.entries(reliefOf).map(([k, v]) => k + " " + v).join(", "));
+
+    // ⛔ HER §4: A PLACEMENT THAT CANNOT CITE ITS SOURCE IS DECORATION. Never a bare position.
+    const frame404 = { river: { bearing: 156, distanceDeg: 0.27 }, uphill: { bearing: 210, relief: 0.041 },
+      roads: [{ to: "a", bearing: -88 }, { to: "b", bearing: 91 }] };
+    const placed = LD.SITE_NEEDS.map((need) => LD.placeSite({ need }, frame404, { radiusMetres: 420 }));
+    check("SNG-404: every placement the engine emits CITES its source — a bearing with no reason is decoration",
+      placed.every((r) => r === null || (typeof r.why === "string" && r.why.length > 10)));
+
+    // ⛔ AND IT REFUSES TO INVENT. The Kindlerow case is the whole argument: no water within 9°, and its
+    // forge dug a cistern rather than pretend to a river. A generator that answers "water" on a dry
+    // frame would have produced a dock in a town whose fiction is that it has none.
+    const dry = { river: null, uphill: null, roads: [{ to: "x", bearing: 10 }] };
+    check("SNG-404: …and on ground that has no river and no slope it returns NOTHING rather than a plausible lie",
+      LD.placeSite({ need: "water" }, dry, {}) === null && LD.placeSite({ need: "height" }, dry, {}) === null);
+
+    // ⚠️ THE FIGURE WORKS IS THE INDEPENDENT CHECK: she authored it at 0 / 120 / 240 because a figure has
+    // points, not because the ground said anything. The engine reaches the same three bearings from the
+    // tradition branch alone, which is the corpus validating the generalisation rather than me asserting it.
+    const fig = [0, 1, 2].map((i) => LD.placeSite({ need: null }, dry, { traditionFigure: { name: "Figurist", points: 3 }, index: i }).bearing);
+    const authored = (layouts.the_figure_works.sites || []).map((x) => x.localMap.bearing);
+    check("SNG-404: the tradition branch reproduces the Figure Works' authored layout — 0/120/240 from the figure alone",
+      fig.every((b) => authored.some((a) => Math.abs(((a - b + 540) % 360) - 180) < 1)),
+      `engine ${fig.join("/")} vs authored ${authored.join("/")}`);
+
+    // metres are the unit her schema specifies, so the conversion is worth holding exactly
+    const wp404 = { colatitude: 24, longitude: -155, depth: 0 };
+    const east = LD.localToWorld(wp404, { bearing: 90, metres: 300 });
+    const km = LD.degBetween([wp404.colatitude - 90, wp404.longitude], [east.colatitude - 90, east.longitude]) * 111.32;
+    check("SNG-404: 300 metres on a bearing lands 300 metres away — the local frame converts in METRES, as specced",
+      Math.abs(km - 0.3) < 0.01, `${km.toFixed(3)} km`);
+    // ⚠️ LEVEL IS THE SERVICE WAYS' WHOLE POINT: the Cogitarium's two rooms share a footprint and only
+    // depth tells them apart, so it must survive the conversion rather than be flattened into it.
+    const down = LD.localToWorld(wp404, { bearing: 0, metres: 200, level: -4 });
+    check("SNG-404: …and `level` survives the conversion — two rooms of one building are not the same place",
+      down.depth === -4);
+  }
+
   console.log(`note  SNG-391: hydrology — ${built.hydrology.rivers.length} rivers, ${built.hydrology.lakes.length} lakes, ${built.hydrology.marsh.length} marshes; authored water ${built.authoredWaterPresent ? "APPLIED" : "⚠️ ABSENT (waterauth.json not yet in the repo — derived hydrology only)"}`);
 }
 

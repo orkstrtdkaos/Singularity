@@ -172,14 +172,14 @@
    "span": "14.3°",
    "why": "Runs from Greenforge down toward the Forge-Eternal. Green going into black — the growers' water arriving where the makers use it, which is most of the foothills economy in one river.",
    "head": [
-    -5.75,
-    -108.25
+    -12.75,
+    -113.75
    ],
    "mouth": [
-    -11.75,
-    -115.25
+    -15.25,
+    -116.25
    ],
-   "lengthDeg": 9.3
+   "lengthDeg": 3.5
   },
   {
    "id": "the_choirwater",
@@ -187,16 +187,16 @@
    "nearHead": "sunken_choir",
    "nearMouth": "the_lensward",
    "span": "13.1°",
-   "why": "⛔ RENAMED. My Choirwater was absorbed as a tributary of the 110° main stem — CCode's census refused to bind it and was right to. ⚠️ THE FICTION SAYS WHAT HAPPENED: the flood took the water and the name went with it. This is the main stem's lower reach, below the Sunken Choir, and it is named for the drowning rather than for the singers.",
+   "why": "⛔ RENAMED AND RESITED. My Choirwater was absorbed into the main stem; CCode's census refused to bind it and was right. ⚠️ THE FICTION SAYS WHAT HAPPENED: the flood took the water and the name went with it. This is now the stem itself, 129.6° — named for the drowning rather than the singers. The Sunken Choir sits 11.2° off its head, which is the distance between a place and the water that took it.",
    "head": [
-    -49.75,
-    -155.25
+    -62.75,
+    -179.75
    ],
    "mouth": [
-    -38.25,
-    -153.75
+    -57.75,
+    175.25
    ],
-   "lengthDeg": 13
+   "lengthDeg": 129.6
   },
   {
    "id": "the_axewater",
@@ -204,16 +204,16 @@
    "nearHead": "the_crossing",
    "nearMouth": "the_axis_gate",
    "span": "13.0°",
-   "why": "⛔ THE FIRST WATER. It rises within four degrees of the Crossing — the closest any river comes to the pole — and runs out past the Axis Gate. 'Axe' is the axis worn down by saying.",
+   "why": "⛔ THE FIRST WATER, and it is short — 1.3°. It rises within four degrees of the Crossing, the closest any river comes to the pole, and is gone almost at once. 'Axe' is the axis worn down by saying.",
    "head": [
     -86.25,
-    -5.75
+    -3.25
    ],
    "mouth": [
-    -74.25,
-    -27.75
+    -85.75,
+    -14.75
    ],
-   "lengthDeg": 13
+   "lengthDeg": 1.3
   },
   {
    "id": "the_middlerun",
@@ -223,14 +223,14 @@
    "span": "12.5°",
    "why": "The Somatics' water, from the Middle Way toward the Given Land. They swim it as training and consider that the whole of its purpose.",
    "head": [
-    -30.75,
-    102.75
-   ],
-   "mouth": [
     -25.25,
     113.75
    ],
-   "lengthDeg": 12.5
+   "mouth": [
+    -17.75,
+    110.25
+   ],
+   "lengthDeg": 8.4
   },
   {
    "id": "the_switchwater",
@@ -274,14 +274,14 @@
    "span": "11.5°",
    "why": "Off the Burnscar into the Deepwood. ⚠️ The Ents let it in, which is not nothing.",
    "head": [
-    -9.75,
-    -92.75
+    -10.75,
+    -104.25
    ],
    "mouth": [
-    -15.25,
-    -83.25
+    -5.75,
+    -108.75
    ],
-   "lengthDeg": 11.5
+   "lengthDeg": 6.7
   },
   {
    "id": "the_longshorewater",
@@ -374,10 +374,10 @@
    "extent": "12.6°",
    "why": "Beside the Quiet House. Nobody raises a hand here either, for a different reason.",
    "centroid": [
-    -75.8,
-    -53.38
+    -73.4,
+    -89.64
    ],
-   "extentDeg": 12.6
+   "extentDeg": 12.1
   },
   {
    "id": "the_gatefen",
@@ -408,12 +408,12 @@
    "name": "The Terrace Fen",
    "near": "harmonic_heights_terrace",
    "extent": "9.7°",
-   "why": "⛔ MY COLLISION, corrected. I authored this with the Stiltfen's exact centroid — two names on one point, 4.7° of real separation between their anchors. ⚠️ The Terrace Fen is the Harmonic Heights' own drainage under its lowest terrace; the Stiltfen is the southern marsh Greywater stands on. Different water, different people, one address by my error.",
+   "why": "⛔ ITS OWN WETLAND AT LAST. I cleared the Stiltfen collision by pasting the PLATEAU FEN's centroid in — the same copy-paste error, one row over, in the commit that fixed it. ⚠️ The terrace fen is real and small: 2.9°, 4.4° from the Heights' lowest terrace, and 14.5° from the Plateau Fen it was impersonating. Different water, different people, and now different addresses.",
    "centroid": [
-    -74.13,
-    55.0
+    -68.34,
+    114.43
    ],
-   "extentDeg": 9.7
+   "extentDeg": 2.9
   },
   {
    "id": "the_plateaufen",
@@ -451,5 +451,5 @@
    "why": "⛔ The northern fragment of what I wrongly named as one wetland. Millbrook knows the Milljaw and does not go here. ⚠️ The two were never connected; I authored the connecting marsh and the terrain declined to make it."
   }
  ],
- "_censusNote": "⛔ Names that cannot bind are NOT failures. Seven refused to bind at 3° and each one was the world reporting that the feature I named is gone or was never one thing. ⚠️ Widening the tolerance would have bound all seven to the wrong water and I would never have known. The Millfen is the clearest case: a 24.2° wetland I invented, two 4.5° fens the terrain actually makes."
+ "_censusNote": "⛔ Names that cannot bind are NOT failures. Seven refused to bind at 3° and each one was the world reporting that the feature I named is gone or was never one thing. ⚠️ Widening the tolerance would have bound all seven to the wrong water and I would never have known. The Millfen is the clearest case: a 24.2° wetland I invented, two 4.5° fens the terrain actually makes. ⛔ ALL SIGNATURES IN THIS FILE ARE NOW TAKEN FROM THE LIVE ASSET (content/packs/core/world/terrain.json), not from a sandbox copy of the hydrology. My local HYDRO.json had a 91° main stem where the built world has 129.6° — reading the wrong layer is how the Millfen happened."
 }

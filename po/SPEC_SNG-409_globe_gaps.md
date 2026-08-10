@@ -1,110 +1,125 @@
-# SNG-409 — Gaps between the prototype and the shipped globe, prioritised
+# SNG-409 — What the world map still needs to DO
 
-**Author:** Aevi (PO) · **Date:** 2026-08-10
-**Erik:** *"he's mostly implemented your world prototype but didn't get everything yet… look at what he has
-vs what you made to find gaps to prioritize."*
-**Method:** audited `engine/worldglobe.js` and `engine/localdetail.mjs` against the prototype.
-
----
-
-## §1 — WHAT IS ALREADY THERE. Credit where it is due.
-
-`engine/localdetail.mjs` is **substantially ahead of my spec** — it consumes `riverBearing`, `uphill`,
-`relief`, `roadsOut`, `basis`, `prose`, `tradition`, `localMap`, `level`, `metres`, `bearing`.
-⛔ **SNG-404 is largely built.** ⚠️ **It already reads `basis` and `level`, both of which I added only
-after measuring — so it took the corrections, not just the first draft.**
-
-`engine/worldglobe.js` has: **cursor-anchored zoom, absolute `RLO`/`RHI`, region seats, vector hydrology,
-baked layers, and an areas hook.**
+**Author:** Aevi (PO) · **Date:** 2026-08-10 · **Rev 2**
+⚠️ **REWRITTEN AS OBJECTIVES.** Rev 1 specified methods — "import terrain.mjs", "use a tangent disc". Erik:
+*"spec for intended objective, not how to do something… he might come up with a better solution."* He is
+right, and my methods were just the first thing that worked in a prototype. **Each item below is an
+OUTCOME plus the evidence for why it matters plus a test that says it is done. The approach is yours.**
 
 ---
 
-## §2 — ⛔ PRIORITY 1: THE CLIENT CANNOT GENERATE TERRAIN, SO ZOOM IS CAPPED
+## §0 — WHAT IS ALREADY WORKING
 
-`worldglobe.js` **imports nothing** and reads only the baked layers. `makeTerrain` appears **zero times**.
-`scripts/world/terrain.mjs` exists and is **never imported.**
+`engine/localdetail.mjs` is **ahead of my spec** — it consumes `basis` and `level`, which I added only
+after measuring. ⚠️ **It took the corrections, not just the first draft.** SNG-404 is largely built.
 
-| baked | resolution |
-|---|---|
-| type / nanite / biome / density | **480 × 240** |
-| elevation | 720 × 360 |
-
-⛔ **At a 5° view that is roughly TEN CELLS ACROSS THE SCREEN.** The whole zoom story — detail patch,
-staged refinement, runtime calibration — **depends on generating live at the visible window.** Without it
-the map is a picture that gets bigger, not a world that resolves.
-
-**Fix: import `terrain.mjs` client-side and regenerate the visible patch.** ⚠️ **Everything else in §3
-follows from this; several of them are impossible without it.**
-
-⚠️ **Runtime calibration appears once and looks vestigial** — it has nothing to calibrate while there is
-no generator to time.
+`worldglobe.js` has cursor-anchored zoom, absolute elevation range, region seats and the baked layers.
 
 ---
 
-## §3 — ⛔ ABSENT, IN ORDER
+## §1 — ⛔ OBJECTIVE: THE MAP RESOLVES AS YOU ZOOM
 
-**1 · THE POLAR DISC.** `poleInView` / `CircleGeometry` — **absent.** ⛔ **The Crossing is the centre of
-this world and sits at latitude −90 exactly, where every meridian converges.** Without the disc it
-starburst-streaks, and a patch capped at ±170° longitude leaves **a wedge of bare globe**. Both were real
-bugs I hit and fixed; **they will return the moment anyone zooms to the Crossing.**
+**Today it does not.** Type, nanite and biome are baked at **480 × 240** — roughly **ten cells across the
+screen at a 5° view.** ⛔ **The map is a picture that gets bigger, not a world that resolves.**
 
-**2 · ROADS AND PRECURSOR LINES.** Both **absent** (`roads` 0, `prelines` 0). ⚠️ **These are not
-decoration — they carry a measured finding: the three networks are INDEPENDENT.** Waygates are 1.1×
-closer to substrate sources than chance, 2 of 26 within 3°. **Precursors laid the lines, someone else built
-the gates, people walk neither — which is why `wake_the_line` exists as a craft.** The map is the only
-place that argument is visible.
+**Done when:** at any zoom down to the ~1.2° floor, the visible ground shows detail proportional to the
+view rather than the bake. **Test: compare a 40° view and a 4° view — the 4° should reveal features the
+40° could not have contained.**
 
-**3 · KIND ICONS.** `location_kinds.json` (`f061921f`) is authored for all 135 and **nothing reads it.**
-⛔ **12 locations are `pole` — the Blaze, the Scouring, the Numen — and an icon that says "settlement"
-would lie about the most dangerous places in the world.**
-
-**4 · AREAS.** `areas.json` (`545e61e0`) has one entry and the globe references areas once. ⚠️ **Membership
-must be COMPUTED from the ellipse, never read from `parentId`** — only 1 of the Fringe's 8 children is
-actually in the band.
-
-**5 · STAGED REFINEMENT.** Absent, and blocked by §2.
+⚠️ **Constraint, not method: whatever produces the detail must agree with the baked layers**, or the base
+and the detail draw different worlds. **I hit that as a visible seam and measured it at 2.44% disagreement.**
 
 ---
 
-## §4 — CONTENT SHIPPED THIS WEEK WITH NO READER
+## §2 — ⛔ OBJECTIVE: THE CROSSING RENDERS CORRECTLY
 
-| file | commit | state |
-|---|---|---|
-| `location_kinds.json` | `f061921f` | ⛔ no reader |
-| `areas.json` | `545e61e0` | one hook |
-| `local_layouts.json` | `db13ac4d` | ⛔ **8 towns, 38 sites — `localdetail.mjs` has the machinery; does it read the CORPUS?** |
-| `placenames.json` | 36 names | 8 rivers + 11 fens resolved, **2 unresolved** |
+**It sits at latitude −90 EXACTLY** — the world's centre, and the point every player looks at first.
+⛔ **At a pole every meridian converges: a full 360° of longitude spans zero distance.**
 
-⚠️ **`features` in the asset has 5 seas / 16 ranges DETECTED; I named 4 seas and 12 ranges. They are
-separate sets and need joining** — a detected range with no name should render unlabelled, not
-mislabelled.
+**Two failures I measured and fixed in the prototype, both of which return if this is not handled:**
+- **radial starburst** — anything treating the pole as ordinary ground fans terrain outward
+- **a wedge of bare globe** — anything capping longitude span leaves the rest uncovered
 
----
-
-## §5 — ⛔ CANON CHANGES SINCE YOUR LAST PASS
-
-**SNG-407 — 11 locations MOVED.** Coastal and riverine snapped onto real terrain, 4–8 walking days each.
-⛔ **`walkingDays` must be RE-DERIVED, not preserved** — Erik ruled the land is ground truth, so travel
-follows position. Worst single change: **11.7 days.** The rebuild chain must re-run; three moved locations
-have authored local layouts whose bearings are now different.
-
-**SNG-408 — the Disputed Zone is an ellipse**, not a lens. ⚠️ **My first formula tested equidistance, and
-equidistance is not betweenness** — it caught the Great Coliseum, which is exactly 18.2° from both powers
-while sitting far off to the side. Erik caught it. **Foci are Harmonic Heights and Radiant Plateau,
-k = 1.35.**
-
-**⛔ STANDING RULING, Erik 2026-08-10: WORLD GEOGRAPHY OUTRANKS UNANCHORED PLAY MEMORY.** Play happened
-before the terrain existed, so a remembered distance is a remembered feeling, not a measurement.
-⚠️ **It does NOT demote play-authored CONTENT** — the Made Gate, the Watershed Road and the Far Side are
-canon because of what happened in them. **It demotes only remembered POSITIONS.**
+**Done when:** the Crossing looks like ground from orbit to the zoom floor. **Test: sample around rings
+centred on it — variation should run outward at roughly the same rate as it runs around. I used an
+angular/radial ratio and treated anything above ~1.5 as streaked.**
 
 ---
 
-## §6 — ORDER I WOULD TAKE THEM
+## §3 — ⛔ OBJECTIVE: THE THREE NETWORKS ARE VISIBLY INDEPENDENT
 
-1. **Import the generator client-side** (§2). Unblocks three other items.
-2. **The polar disc** (§3.1). The Crossing is where players start looking.
-3. **Kind icons** (§3.3) — Erik asked directly, content is ready, and it is contained drawing.
-4. **Roads and precursor lines** (§3.2).
-5. **Areas** (§3.4).
-6. **Re-run the rebuild after SNG-407** (§5) — ⚠️ **or the moved locations sit on stale biome and name data.**
+**Roads and precursor lines are both absent from the globe.** ⚠️ **This is not decoration — it is a
+measured argument.** Waygates are only **1.1× closer to substrate sources than chance**, 2 of 26 within 3°.
+
+⛔ **Precursors laid the lines, someone else built the gates, and people walk neither. That is why
+`wake_the_line` exists as a craft — you only rouse a road nobody has been using.** **The map is the only
+place a player can see it.**
+
+**Done when:** a player can see that the roads, the gates and the buried lines do not follow each other.
+
+---
+
+## §4 — ⛔ OBJECTIVE: A POLE NEVER READS AS A TOWN
+
+`location_kinds.json` (`f061921f`) is authored for all 135 and **has no reader.** **`tier` is size, `role`
+is function, `kind` is SHAPE.**
+
+⛔ **Twelve locations are `pole`** — the Blaze, the Scouring, the Numen, the Unfallen. **They are pure
+extremities of an axis, not settlements, and a settlement icon would lie about the most dangerous places
+in the world.**
+
+**Done when:** a waygate, a village, an underplace and a pole are distinguishable at a glance.
+⚠️ **The 34-kind vocabulary is mine and negotiable — if it is too fine to draw, tell me which distinctions
+are not worth an icon and I will collapse them.**
+
+---
+
+## §5 — ⛔ OBJECTIVE: A CONTESTED AREA LOOKS LIKE AN AREA
+
+**No location in this world has a boundary** — all 135 are points, including the 25 marked `tier: region`.
+A contested territory currently looks like a village.
+
+`areas.json` (`545e61e0`) has the Disputed Zone as an ellipse with two foci and `k = 1.35`.
+
+⚠️ **One constraint that IS load-bearing: membership must be computed, not read from `parentId`.** ⛔ **Only
+1 of the Fringe's 8 children is actually in the band; the other 7 span 288° of longitude.** The graph is
+wrong by measurement.
+
+**Done when:** the zone reads as a band with no clean edge — the fiction says shimmer-vortices *wander*.
+
+---
+
+## §6 — ⛔ CANON MOVED. THE REBUILD MUST FOLLOW.
+
+**SNG-407 moved 11 locations** onto real coast and river, 4–8 walking days each, worst connection change
+**11.7 days**.
+
+⛔ **`walkingDays` must be RE-DERIVED, not preserved.** Erik ruled the land is ground truth, so travel
+follows position. **Anything caching a distance is stale**, and three moved locations have authored local
+layouts whose river and uphill bearings have changed.
+
+**⛔ STANDING RULING (Erik, 2026-08-10): WORLD GEOGRAPHY OUTRANKS UNANCHORED PLAY MEMORY.** A remembered
+distance from before the terrain existed is a remembered feeling, not a measurement. ⚠️ **It does NOT
+demote play-authored CONTENT** — the Made Gate, the Watershed Road and the Far Side are canon for what
+happened in them. **Only remembered POSITIONS yield.**
+
+---
+
+## §7 — TWO OPEN QUESTIONS THAT ARE MINE, NOT YOURS
+
+- **`placenames` has 2 unresolved**, and the asset's detected `features` (5 seas, 16 ranges) is a different
+  set from my names (4 seas, 12 ranges). ⚠️ **A detected range with no name should render unlabelled
+  rather than mislabelled** — I will close the gap.
+- **The 10 marsh-authored towns sit a median 30° from any marsh.** ⛔ **Those are wrong biomes, not
+  misplaced towns**, and re-authoring them is mine.
+
+---
+
+## §8 — PRIORITY, AND WHY
+
+**§1 first** — several other items are hard or pointless without detail at zoom. **§2 second**, because the
+Crossing is where players look first and the failures there are ugly. **§4 third** — Erik asked directly,
+the content is ready and it is contained. Then §3, §5, §6.
+
+⚠️ **If you disagree with that order because of what the code actually looks like, take your own.** **I can
+see the outcome I want; you can see what it costs.**

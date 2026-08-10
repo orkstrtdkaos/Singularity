@@ -665,13 +665,30 @@ const measured = {
 };
 
 const baselinePath = join(root, "tests", "wiring_baseline.json");
+// ⛔ THE RE-BASELINE MERGES; IT DOES NOT REWRITE. The first form built a fresh object from `measured`
+// alone, so running the blessed command — the one this file's own header tells you to run — DESTROYED
+// two things it never measured:
+//   1. every `_`-prefixed note, which is where the REASONING lives: why unreadRuleConstants went
+//      11 → 26 (the scanner got more accurate, not the code worse), why sourcesWithNoBand must not be
+//      closed by renaming a retired key onto a new source, why `// registry:internal` is a lever on a
+//      ratchet. A number with its argument deleted is an invitation to re-litigate it wrongly.
+//   2. `modulesMissingFromSpecMap`, which THIS FILE DOES NOT OWN — scripts/engine_map.mjs reads it
+//      from the same baseline. Deleting it failed nothing: engine_map guards with
+//      `typeof bar === "number"`, so the ratchet SILENTLY CEASED TO EXIST and the suite stayed green
+//      with one fewer guard than it had. A reader that fails OPEN plus a writer that truncates is a
+//      guard removable by accident, by the documented command.
+// ⚠️ Same class as the placename write-back withdrawn for Aevi the same day: a machine overwriting
+// authored content with derived output, the loss invisible because the file still parsed.
 if (process.env.UPDATE_WIRING_BASELINE === "1" || !existsSync(baselinePath)) {
-  writeFileSync(baselinePath, JSON.stringify({
+  const prior = existsSync(baselinePath) ? JSON.parse(readFileSync(baselinePath, "utf8")) : {};
+  const merged = {
+    ...prior,                                                    // notes and other harnesses' keys survive
     note: "SNG-147d ratchet — known-offender counts may only DECREASE. Re-baseline deliberately with UPDATE_WIRING_BASELINE=1 after a content improvement; never hand-edit upward.",
     updatedAt: new Date().toISOString().slice(0, 10),
-    ...measured
-  }, null, 2) + "\n");
-  console.log(`ok    ratchet baseline ${existsSync(baselinePath) ? "written" : "created"}: ${JSON.stringify(measured)}`);
+    ...measured,                                                 // only what this file MEASURES is refreshed
+  };
+  writeFileSync(baselinePath, JSON.stringify(merged, null, 2) + "\n");
+  console.log(`ok    ratchet baseline ${Object.keys(prior).length ? "merged" : "created"}: ${JSON.stringify(measured)}`);
 }
 const baseline = JSON.parse(readFileSync(baselinePath, "utf8"));
 for (const [k, v] of Object.entries(measured)) {

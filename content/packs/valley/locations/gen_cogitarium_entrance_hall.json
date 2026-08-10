@@ -1,0 +1,58 @@
+{
+  "id": "gen-cogitarium-entrance-hall",
+  "name": "Cogitarium Entrance Hall",
+  "regionId": "somatic_reaches",
+  "descriptionSeed": "A place the road led to — Cogitarium Entrance Hall. The fiction brought you here before the map knew its name.",
+  "tags": [
+    "transitional"
+  ],
+  "connections": [
+    "the_cogitarium"
+  ],
+  "_gen": true,
+  "_mintedAs": "transit",
+  "map": {
+    "x": 120,
+    "y": 480
+  },
+  "schemaVersion": 1,
+  "communityId": "somatic.cogitarium",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {
+    "mind": 0.85,
+    "abstract": 0.5,
+    "dark": 0.3
+  },
+  "spectrum": {
+    "body_mind": 0.85,
+    "concrete_abstract": 0.5,
+    "dark_light": -0.3
+  },
+  "axisVector": [
+    0,
+    0,
+    0,
+    0,
+    0.5,
+    0,
+    0,
+    -0.3,
+    0,
+    0,
+    0.85,
+    0
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "tier": "site",
+  "parentId": "the_cogitarium",
+  "worldPos": {
+    "colatitude": 78,
+    "longitude": 99,
+    "depth": 0
+  },
+  "worldPosNote": "inherited from the_cogitarium — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. ⛔ Its NAME says whose it is. Two rooms of one building were filed in regions on opposite sides of the world."
+}

@@ -5,21 +5,21 @@
   "regionId": "the_reasoned_hold",
   "communityId": "syllogist.bloodless",
   "axisVector": [
-    1.0,
-    0.0,
-    0.0,
+    1,
+    0,
+    0,
     -0.2,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     0.4,
-    0.0
+    0
   ],
   "spectrum": {
-    "emotional_logical": 1.0,
+    "emotional_logical": 1,
     "body_mind": 0.4,
     "violence_peace": -0.2
   },
@@ -50,7 +50,7 @@
     "y": 120
   },
   "poleIntensity": {
-    "logical": 1.0,
+    "logical": 1,
     "mind": 0.4,
     "violence": 0.2
   },
@@ -63,11 +63,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 85.0,
-    "longitude": 162.0,
+    "colatitude": 85,
+    "longitude": 162,
     "depth": 0
   },
   "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_reasoned_hold bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "the_axiom"
 }

@@ -1,0 +1,82 @@
+{
+  "id": "gen-mara-wells-store",
+  "name": "Mara Wells' Store",
+  "regionId": "valley",
+  "descriptionSeed": "A place the road led to — Mara Wells Store. The fiction brought you here before the map knew its name.",
+  "tags": [
+    "transitional"
+  ],
+  "connections": [
+    "millbrook"
+  ],
+  "_mintedAs": "transit",
+  "dangerLevel": 1,
+  "_gen": {
+    "type": "location",
+    "tier": "fresh",
+    "engagementScore": 2,
+    "birthWeight": 1,
+    "rating": null,
+    "attentionHistory": [
+      {
+        "kind": "revisit",
+        "day": 14
+      }
+    ],
+    "createdDay": 14,
+    "provenance": {
+      "locationId": "millbrook",
+      "day": null,
+      "hint": "transit"
+    },
+    "lastAttentionDay": 14
+  },
+  "map": {
+    "x": 400,
+    "y": 320
+  },
+  "schemaVersion": 1,
+  "communityId": "valley.millbrook",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {
+    "peace": 0.6,
+    "order": 0.3,
+    "life": 0.4,
+    "spiritual": 0.2,
+    "concrete": 0.5
+  },
+  "spectrum": {
+    "violence_peace": 0.6,
+    "chaos_order": 0.3,
+    "death_life": 0.4,
+    "mechanical_spiritual": 0.2,
+    "concrete_abstract": -0.5
+  },
+  "axisVector": [
+    0,
+    0,
+    0,
+    0.6,
+    -0.5,
+    0.2,
+    0.3,
+    0,
+    0.4,
+    0,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "tier": "site",
+  "parentId": "millbrook",
+  "worldPos": {
+    "colatitude": 26,
+    "longitude": 248,
+    "depth": 0
+  },
+  "worldPosNote": "inherited from millbrook — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. ⚠️ A named shopkeeper's store — village scale, and Millbrook is the village in play."
+}

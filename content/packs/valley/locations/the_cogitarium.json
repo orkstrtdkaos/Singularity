@@ -23,7 +23,8 @@
   ],
   "connections": [
     "the_middle_way",
-    "the_held_yard"
+    "the_held_yard",
+    "gen-cogitarium-entrance-hall"
   ],
   "descriptionSeed": "Floating thought-halls where the Cogitants have nearly left their bodies behind for pure mind — and are dying of it. What rides with the mind-pole here is ABSTRACT and a growing DARK: brilliance shading into a cold that forgets warmth, forgets the body, forgets the world thought was ever meant to serve. The most intelligent place in the world, quietly starving to death because it has decided the body is beneath it. Chilling, and pitiable, and a warning.",
   "loreRefs": [
@@ -50,26 +51,26 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
     0.5,
-    0.0,
-    0.0,
+    0,
+    0,
     -0.3,
-    0.0,
-    0.0,
+    0,
+    0,
     0.85,
-    0.0
+    0
   ],
   "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
   "worldPos": {
-    "colatitude": 78.0,
-    "longitude": 99.0,
+    "colatitude": 78,
+    "longitude": 99,
     "depth": 0
   },
   "worldPosNote": "Ordinary ground within somatic_reaches, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "the_middle_way"
 }

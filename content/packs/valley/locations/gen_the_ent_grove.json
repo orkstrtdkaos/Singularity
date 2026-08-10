@@ -1,0 +1,73 @@
+{
+  "id": "gen-the-ent-grove",
+  "name": "The Ent Grove",
+  "regionId": "manifest_domain",
+  "descriptionSeed": "A place the road led to — The Ent Grove. The fiction brought you here before the map knew its name.",
+  "tags": [
+    "transitional"
+  ],
+  "connections": [
+    "gen-waygate"
+  ],
+  "_gen": {
+    "entityId": "gen-the-ent-grove",
+    "type": "location",
+    "birthWeight": 1,
+    "engagementScore": 0,
+    "tier": "fresh",
+    "rating": null,
+    "attentionHistory": [],
+    "createdDay": null,
+    "provenance": {
+      "healed": "sng-216-backfill"
+    }
+  },
+  "_mintedAs": "transit",
+  "map": {
+    "x": 40,
+    "y": 300
+  },
+  "dangerLevel": 2,
+  "schemaVersion": 1,
+  "communityId": "domain.deepwood",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {
+    "life": 0.7,
+    "spiritual": 0.5,
+    "peace": 0.4,
+    "time": 0.4
+  },
+  "spectrum": {
+    "death_life": 0.7,
+    "mechanical_spiritual": 0.5,
+    "violence_peace": 0.4,
+    "space_time": 0.4
+  },
+  "axisVector": [
+    0,
+    0,
+    0,
+    0.4,
+    0,
+    0.5,
+    0,
+    0,
+    0.7,
+    0.4,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "tier": "site",
+  "parentId": "ent_deepwood",
+  "worldPos": {
+    "colatitude": 74,
+    "longitude": 262,
+    "depth": -2
+  },
+  "worldPosNote": "inherited from ent_deepwood — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. ⛔ The Ents are in manifest_domain. 'Seven or eight old trees forming a rough ring, mossy dry ground inside regardless of season.'"
+}

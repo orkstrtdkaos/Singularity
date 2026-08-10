@@ -332,7 +332,15 @@ const locFiles = (() => {
   const byRegion = {};
   for (const l of all) (byRegion[l.regionId || l.region] ||= []).push(l);
   const region = Object.values(byRegion).find(m => new Set(m.map(l => l.communityId)).size >= 3);
-  return region ? region.slice(0, 4) : all.slice(0, 3);
+  // ⛔ THE SLICE MUST KEEP THE PROPERTY THE SEARCH JUST CHECKED. This validated that a region has three
+  // or more COMMUNITIES and then took its first four LOCATIONS — which is only the same thing by luck,
+  // and the luck ran out when SNG-396 added rooms that share their building's communityId and sort
+  // early by filename: the first four members of `valley` collapsed to two communities, the deed had
+  // nowhere new to hop, and a test about the spread MODEL failed because of an alphabetical accident.
+  // ⚠️ One location per distinct community, so "it keeps travelling" always has somewhere to travel to.
+  if (!region) return all.slice(0, 3);
+  const seen = new Set();
+  return region.filter(l => !seen.has(l.communityId) && seen.add(l.communityId)).slice(0, 4);
 })();
 // The deed starts in whichever community this region's first member belongs to, so the "own region"
 // assertion below is about the MODEL rather than about one village's name surviving a reorganisation.
@@ -7126,6 +7134,39 @@ await (async () => {
       flood394.wet.size > 50, `mirrored water pins: ${flood394.wet.size}`);
     check("394b: the wrong-sign conversion never comes back — no `90 - <x>.colatitude` in the viewer or the app",
       !/90\s*-\s*\w+\.colatitude/.test(wgSrc) && !/90\s*-\s*\w+\.colatitude/.test(app390));
+    // ⚠️ AND THE OPENING FRAMING IS GATED ON SHAPE, NOT ON −52. Erik owns the dial; what he must never
+    // get back is a map that opens on the empty hemisphere. The world is Crossing-polar, so every place
+    // sits at lat ≤ 0 and a northward default stares at ocean — measured, the shipped pitch +14 put 52 of
+    // 118 on the near face, the fixed default puts 80. Assert the MAJORITY, and prove the red with the
+    // shipped bug itself: the old framing must fail the same predicate this one passes.
+    const nearFaceAt = (pitch) => WG.visiblePins(t, { yaw: 20, pitch, r: 300, cx: 400, cy: 300 }, wpos394).length;
+    const total394 = Object.keys(t.locations).length;
+    check("394b: the map OPENS on the inhabited hemisphere — a majority of places are on the near face at DEFAULT_VIEW",
+      nearFaceAt(WG.DEFAULT_VIEW.pitch) > total394 / 2, `${nearFaceAt(WG.DEFAULT_VIEW.pitch)} of ${total394}`);
+    check("394b: …and the SHIPPED framing fails that same test — the red is the bug Erik photographed",
+      nearFaceAt(14) <= total394 / 2, `pitch +14 showed ${nearFaceAt(14)} of ${total394}`);
+  }
+
+  // ══ CCODE-91 — THE RATCHET BASELINE IS AUTHORED CONTENT, NOT DERIVED OUTPUT. Found by running the
+  // blessed re-baseline command (UPDATE_WIRING_BASELINE=1) and reading what it wrote: it rebuilt the
+  // file from the counters it measures, deleting four `_`-prefixed notes — the REASONING behind the
+  // numbers — and `modulesMissingFromSpecMap`, a key it does not own. scripts/engine_map.mjs reads
+  // that key and guarded it with `typeof bar === "number"`, so the ratchet SILENTLY CEASED TO EXIST
+  // and npm test stayed green with one fewer guard. ⛔ A writer that truncates plus a reader that
+  // fails open is a guard removable by accident, using the documented command. Both fixed; this gate
+  // watches the FILE, because that is where the damage lands whatever caused it.
+  {
+    const bl = JSON.parse(readFileSync(join(root, "tests/wiring_baseline.json"), "utf8"));
+    const notes = Object.keys(bl).filter((k) => k.startsWith("_"));
+    check("CCODE-91: the ratchet baseline keeps its REASONING — its authored notes survive a re-baseline",
+      notes.length >= 4, `notes present: ${notes.join(", ") || "NONE — a re-baseline ate them"}`);
+    check("CCODE-91: …and the key another harness depends on survives too — engine_map's ratchet cannot be deleted by wiring_audit's writer",
+      typeof bl.modulesMissingFromSpecMap === "number");
+    // ⚠️ the reader half, asserted on source because its red is a MISSING file key: engine_map must
+    // fail when the bar is absent instead of skipping the ratchet without a word.
+    const emSrc = readFileSync(join(root, "scripts/engine_map.mjs"), "utf8");
+    check("CCODE-91: a vanished ratchet SHOUTS — engine_map fails on a missing baseline instead of silently skipping",
+      /typeof bar !== "number"/.test(emSrc) && /NO BASELINE/.test(emSrc));
   }
 
   // ══ SNG-392 §1 — THE LOCAL FRAME. Erik's ruling is the whole shape: "local ground CAN overturn

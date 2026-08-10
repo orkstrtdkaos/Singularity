@@ -5,17 +5,17 @@
   "regionId": "the_palelands",
   "communityId": "ashwarden.hollowing",
   "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     0.2,
-    0.0,
+    0,
     -0.6,
-    0.0,
-    0.0,
+    0,
+    0,
     -0.3
   ],
   "spectrum": {
@@ -71,12 +71,12 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 70.0,
-    "longitude": 68.0,
+    "colatitude": 70,
+    "longitude": 68,
     "depth": 0
   },
   "worldPosNote": "The seam between drained wood and tended ground. A border, so inward of both poles it lies between. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
   "_fix": "⛔ SNG-393 (Erik: 'you authored it you fix it'). The old seed read 'Where the Quickwood stops and the grey begins', which made this a BORDER BETWEEN two regions — and it cannot be one. Longitude on this sphere encodes DISPOSITION: the Quickwood is the life pole at ~255 and the Palelands the grey at ~74, EXACT ANTIPODES. ⚠️ TWO ANTIPODAL DISPOSITIONS HAVE NO SHARED BORDER. A place cannot stand where they meet because they do not meet. ⛔ RESOLVED: the Hollowing stands on the GREY SIDE and looks across. It is a march, not a seam — the Ashwardens' outermost hold, facing a country 226 walking days away that they know only by report. That distance is not a defect; it IS the relationship. The ambiguity was mine and this removes it rather than hedging it.",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "the_greenward"
 }

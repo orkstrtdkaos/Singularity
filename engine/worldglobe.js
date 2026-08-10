@@ -20,6 +20,18 @@
 // that names it. The moment Erik picks one of SNG-389's options the map would keep telling the old story.
 // `groundFactorAt` takes the engine's own `bandFactor` and the live band instead.
 
+/** ⛔ THE FRAMING THE MAP OPENS ON, and it lives here because the viewer owns it and because a
+ *  DUPLICATED default is a lie waiting to happen — app.js reads this, and so does the gate that
+ *  asserts the opening view faces the inhabited hemisphere.
+ *
+ *  ⚠️ NEGATIVE PITCH IS NOT A TASTE CHOICE. The Crossing is the SOUTH pole of the map frame
+ *  (lat = colatitude − 90), so every placed location in this world sits at lat ≤ 0. Opening at
+ *  pitch +14 aimed the camera at a hemisphere of empty ocean — Erik's screenshot is exactly that,
+ *  an unpopulated north with the land shoved onto the bottom limb. He offered to re-pole the
+ *  Crossing northward to fix it; that is data surgery on gated canon to solve a camera problem.
+ *  This is the camera fix, and `worldPos` never moved. */
+export const DEFAULT_VIEW = { yaw: 20, pitch: -52 };
+
 /** Base64 → bytes, without Buffer, so this runs in the browser and in a test alike. */
 function b64(s) {
   if (typeof atob === "function") {

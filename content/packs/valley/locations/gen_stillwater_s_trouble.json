@@ -1,0 +1,80 @@
+{
+  "id": "gen-stillwater-s-trouble",
+  "name": "Stillwater's Trouble",
+  "regionId": "the_palelands",
+  "parentId": "gen-ashwarden-march-road",
+  "_promotedFromSubPlace": true,
+  "descriptionSeed": "A place the road led to — Stillwater'S Trouble. The fiction brought you here before the map knew its name.",
+  "tags": [
+    "transitional"
+  ],
+  "connections": [
+    "gen-ashwarden-march-road"
+  ],
+  "_gen": {
+    "entityId": "gen-stillwater-s-trouble",
+    "type": "location",
+    "birthWeight": 1,
+    "engagementScore": 2,
+    "tier": "fresh",
+    "rating": null,
+    "attentionHistory": [
+      {
+        "kind": "revisit",
+        "day": 13
+      }
+    ],
+    "createdDay": null,
+    "provenance": {
+      "healed": "sng-216-backfill"
+    },
+    "lastAttentionDay": 13
+  },
+  "_mintedAs": "transit",
+  "map": {
+    "x": 640,
+    "y": 360
+  },
+  "supersededBy": "the_old_warden_post",
+  "dangerLevel": 2,
+  "schemaVersion": 1,
+  "communityId": "ashwarden.cairnhold",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {
+    "death": 0.7,
+    "truth": 0.5,
+    "peace": 0.4
+  },
+  "spectrum": {
+    "death_life": -0.7,
+    "violence_peace": 0.4,
+    "falsehood_truth": 0.5,
+    "emotional_logical": -0.2
+  },
+  "axisVector": [
+    -0.2,
+    0.5,
+    0,
+    0.4,
+    0,
+    0,
+    0,
+    0,
+    -0.7,
+    0,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "tier": "site",
+  "worldPos": {
+    "colatitude": 76,
+    "longitude": 74,
+    "depth": 0
+  },
+  "worldPosNote": "inherited from gen-ashwarden-march-road — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. Already carried this parent. ⚠️ A site of a site — the schema must allow depth 2."
+}

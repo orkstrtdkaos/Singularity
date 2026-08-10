@@ -5,21 +5,21 @@
   "regionId": "umbral_depths",
   "communityId": "umbral.unlit",
   "axisVector": [
-    0.0,
+    0,
     -0.3,
     -0.3,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    -1.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0
+    0,
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    0
   ],
   "spectrum": {
-    "dark_light": -1.0,
+    "dark_light": -1,
     "demonic_angelic": -0.3,
     "falsehood_truth": -0.3
   },
@@ -32,7 +32,8 @@
     "sacred"
   ],
   "connections": [
-    "the_harborward"
+    "the_harborward",
+    "gen-the-passage-below-the-unlit-deep"
   ],
   "descriptionSeed": "Past the city, past the harbor, the dark stops being a home and becomes a doctrine. The Unlit live here — the cult of the pure pole — and they would put out every light in the world, beginning with the ones people love. The Umbrals do not disown them, exactly. They simply do not go, and they do not talk about it, and they get very quiet if you ask. A civilization can live near a pole. Only a cult can live AT one.",
   "loreRefs": [
@@ -51,7 +52,7 @@
     "y": 430
   },
   "poleIntensity": {
-    "dark": 1.0,
+    "dark": 1,
     "demonic": 0.3,
     "falsehood": 0.3
   },
@@ -64,11 +65,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 88.0,
-    "longitude": 0.0,
+    "colatitude": 88,
+    "longitude": 0,
     "depth": -5
   },
   "worldPosNote": "Past where light is a memory. The deepest authored place. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "the_harborward"
 }

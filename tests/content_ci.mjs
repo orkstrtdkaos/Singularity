@@ -518,7 +518,16 @@ for (const pack of PACKS) {
   // 1.00, 90th percentile 1.57, max 2.37 (`the_slow_stair`). The Hollowing, the case that prompted all of
   // this, sits at 1.27 now that the split has landed.
   const outliers = (() => {
-    const placed = locs387.filter(l => l.worldPos && Number.isFinite(l.worldPos.colatitude) && Number.isFinite(l.worldPos.longitude));
+    // ⛔ AN INHERITED POSITION IS NOT AN INDEPENDENT SAMPLE. SNG-396 promoted 17 places play authored,
+    // each at its parent's exact coordinates because a room is at its building. Counting them here put
+    // distance-0 pairs into the spread statistic, dragged every region median DOWN, and pushed FOUR
+    // untouched locations — archive_hollow, kestrels_roost, sunken_choir, the_slow_stair — over the 3×
+    // line without any of them moving. ⚠️ Measured both ways before believing it: with the duplicates,
+    // four outliers; without, zero. The ruler moved, not the places. Same insight as the terrain seed
+    // rule one file over — a co-located record adds no observation, and averaging it in is how a
+    // statistic quietly stops describing the thing it is named for.
+    const placed = locs387.filter(l => l.worldPos && Number.isFinite(l.worldPos.colatitude) && Number.isFinite(l.worldPos.longitude)
+      && !l.worldPosInherited);
     const vec = (l) => {
       const th = l.worldPos.colatitude * Math.PI / 180, ph = l.worldPos.longitude * Math.PI / 180;
       return { x: Math.sin(th) * Math.cos(ph), y: Math.sin(th) * Math.sin(ph), z: Math.cos(th) };
@@ -694,8 +703,7 @@ for (const pack of PACKS) {
   // ⚠️ Aevi's f4aec367 shrank this census the designed way: the Millfen became the Milljaw and binds
   // its southern fragment by signature; the Upper Mire names the northern one. The Choirwater was
   // RENAMED (the Drowned Reach) but not re-anchored, so it stays here until she sites it.
-  const KNOWN_UNRESOLVED = new Set(["the_greenwater", "the_choirwater", "the_axewater", "the_middlerun",
-    "the_burnwater", "the_quietfen"]);
+  const KNOWN_UNRESOLVED = new Set(["the_greenwater", "the_axewater"]);
   const unexpected = res.placeNames.unresolved.filter((u) => !KNOWN_UNRESOLVED.has(u.id));
   check("SNG-393: every name binds by signature, or sits in the KNOWN census with its diagnosis",
     unexpected.length === 0, unexpected.map((u) => u.name + " (" + u.reason + ")").join(" · "));
@@ -738,12 +746,25 @@ for (const pack of PACKS) {
     return [...by.values()].filter((g) => g.length > 1).map((g) => g.sort().join(" + ")).sort();
   };
   const riverCollide = collisions(res.placeNames.rivers, "pathIndex");
-  check("SNG-394: no two river names bind to one pathIndex — a shared stem is two lost places, not one found",
-    riverCollide.length === 0, riverCollide.join(" · "));
+  // ⛔ THE RIVER COLLISION IS NOT A DATA ERROR — IT IS FICTION THE SCHEMA CANNOT HOLD, and that is a
+  // better finding than a bug. Aevi resited the Drowned Reach (née Choirwater) onto "the 129.6° main
+  // stem" because the flood took that water; the 129.6° main stem IS the Echo. Two names on one river
+  // is exactly right when one of them names a REACH — the lower stretch of a river is a place with its
+  // own name in every real geography — and `placeNames` has no way to say so: one name, one pathIndex,
+  // whole river. ⚠️ So the census pins it rather than forcing a winner, and the missing concept is
+  // reported to her (po/REPLY_ccode_SNG-396_398_applied.md §3) instead of being papered over by
+  // renaming a river nobody wanted renamed.
+  const KNOWN_RIVER_COLLISIONS = ["The Drowned Reach + The Echo"];
+  check("SNG-394: river names collide only where a REACH shares its river — the known census, both names kept",
+    JSON.stringify(riverCollide) === JSON.stringify(KNOWN_RIVER_COLLISIONS),
+    "expected [" + KNOWN_RIVER_COLLISIONS.join(" | ") + "] got [" + riverCollide.join(" | ") + "]");
   // ⚠️ f4aec367 cleared the Stiltfen pair — and MINTED a new one: the Terrace Fen was re-sited to the
   // byte-identical centroid of the Plateau Fen ([-74.13, 55]), the same copy-paste class as the pair it
   // fixed. Reported in po/REPLY_ccode_SNG-394b_census.md; pinned here so it cannot silently multiply.
-  const KNOWN_FEN_COLLISIONS = ["The Marchfen + The Stairfen", "The Plateau Fen + The Terrace Fen"];
+  // ⚠️ THE CENSUS TRACKS HER WORK, WHICH IS THE POINT OF A CENSUS: her resite cleared the Terrace/
+  // Plateau pair she minted last round and moved the Quiet Fen onto the Milljaw's polygon, so the list
+  // turns over rather than shrinking monotonically. Marchfen + Stairfen persist pending her split call.
+  const KNOWN_FEN_COLLISIONS = ["The Marchfen + The Stairfen", "The Milljaw + The Quiet Fen"];
   const fenCollide = collisions(res.placeNames.fens, "polyIndex");
   check("SNG-394: fen collisions match the KNOWN census exactly — both names reported, neither dropped, Aevi decides",
     JSON.stringify(fenCollide) === JSON.stringify(KNOWN_FEN_COLLISIONS),
@@ -765,8 +786,12 @@ for (const pack of PACKS) {
   {
     const allLocs = Object.values(canon.locs);
     const tiers = allLocs.reduce((a, l) => (a[l.tier] = (a[l.tier] || 0) + 1, a), {});
-    check("SNG-392: the applied hierarchy matches Aevi's corrected census — 25 regions, 28 settlements, 65 sites",
-      tiers.region === 25 && tiers.settlement === 28 && tiers.site === 65, JSON.stringify(tiers));
+    // ⚠️ THE CENSUS MOVED BECAUSE THE WORLD DID, AND THAT IS THE GATE WORKING. SNG-398 retiered all
+    // 65 topology-derived "sites" to settlement (they were satellites, not rooms) and SNG-396 repopulated
+    // the tier with 14 places PLAY authored — real interiors with fiction-derived parents. 25/28/65
+    // became 25/96/14, and every number here is a ratified decision rather than a measurement of drift.
+    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 96 settlements, 14 authored-in-play sites",
+      tiers.region === 25 && tiers.settlement === 96 && tiers.site === 14, JSON.stringify(tiers));
     const ids = new Set(allLocs.map((l) => l.id));
     const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
     check("SNG-392: every parentId resolves and every site HAS a parent",
@@ -808,14 +833,19 @@ for (const pack of PACKS) {
       const d = p ? wd398(l, p) : null;
       return d == null || d > SITE_MAX_DAYS_398;
     }).map((l) => l.id).sort();
-    const KNOWN_FAR_SITES = new Set(allLocs.filter((l) => l.tier === "site").map((l) => l.id));
-    const unexpectedFar = farSites.filter((id) => !KNOWN_FAR_SITES.has(id));
-    check("SNG-398: no site sits beyond ONE DAY of its parent except the KNOWN census — 65 of 65 today; the ratification empties it",
-      unexpectedFar.length === 0 && farSites.length === KNOWN_FAR_SITES.size,
-      unexpectedFar.join(" · ") || `census shrank to ${farSites.length} without the KNOWN set updating`);
-    // the red, observed: with an empty census this gate names all 65 — the correct first observation
-    check("SNG-398: …and with the census emptied the gate FIRES on all 65 — red observed, as the spec demanded",
-      farSites.length === 65);
+    check("SNG-398: no site sits beyond ONE DAY of its parent — the census is EMPTY now that the ratification landed",
+      farSites.length === 0, farSites.join(" · "));
+    // ⛔ THE RED IS PROVED BY CONSTRUCTION, AND MY FIRST FORM OF IT WAS A DESIGN ERROR WORTH KEEPING
+    // ON THE RECORD: I asserted `farSites.length === 65` — today's broken data — as the proof the gate
+    // could fire. That inverts the moment the data is FIXED: Aevi's ratification would have turned my
+    // red-proof red for the crime of succeeding. A gate must never depend on the defect it guards
+    // against persisting. So: build a site whose parent is a hemisphere away and require the detector
+    // to name it, which holds whatever the content does.
+    const farProbe = { id: "probe", tier: "site", parentId: "probe-parent",
+      worldPos: { colatitude: 10, longitude: 0, depth: 0 } };
+    const farParent = { id: "probe-parent", worldPos: { colatitude: 170, longitude: 180, depth: 0 } };
+    check("SNG-398: …and the detector FIRES on a planted far site — red observed by construction, not by leaving the bug in place",
+      wd398(farProbe, farParent) > 1);
 
     // ── SNG-396 — PLAY OUTRAN CONTENT AND CONTENT MUST NOT FORGET. The saves hold generated
     // places with real memory notes; a visited-more-than-once place absent from content is a

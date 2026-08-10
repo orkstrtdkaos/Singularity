@@ -20,7 +20,8 @@
   "connections": [
     "millbrook",
     "disputed_zone_fringe",
-    "kestrels_roost"
+    "kestrels_roost",
+    "the-low-lamp-inn"
   ],
   "descriptionSeed": "The rim of the Radiant Plateau, where photonic-crystal towers catch and braid the sunlight into working beams. Streets are paved with light-guides; at dusk the whole district glows from below like standing on a slow aurora. The Radiant people prize clarity and revelation — but their light-bending arts mean what you see here is always, deliberately, a choice someone made.",
   "loreRefs": [
@@ -50,27 +51,27 @@
     "peace": 0.3
   },
   "axisVector": [
-    0.0,
+    0,
     0.3,
-    0.0,
+    0,
     0.3,
     0.4,
     0.3,
-    0.0,
+    0,
     0.6,
-    0.0,
-    0.0,
-    0.0,
-    0.0
+    0,
+    0,
+    0,
+    0
   ],
   "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
   "worldPos": {
-    "colatitude": 25.0,
-    "longitude": 49.0,
+    "colatitude": 25,
+    "longitude": 49,
     "depth": 0
   },
   "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
   "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "disputed_zone_fringe"
 }

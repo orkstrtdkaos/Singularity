@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.100";
+const APP_VERSION = "1.9.101";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6991,9 +6991,9 @@ function wireWorldGlobe() {
   if (!cv) return;
   const readout = document.getElementById("globe-read");
   const ctx = cv.getContext("2d", { willReadFrequently: true });
-  // pitch faces the SOUTHERN hemisphere by default — the Crossing is the south pole and every location
-  // lives at lat ≤ 0, so opening on the north showed a hemisphere of ocean with no pins on it.
-  const view = { yaw: 20, pitch: -52, r: Math.min(cv.width, cv.height) * 0.44, cx: cv.width / 2, cy: cv.height / 2 };
+  // ⚠️ the opening framing is the VIEWER's, not a number retyped here — see DEFAULT_VIEW's note:
+  // it faces the inhabited southern hemisphere, and a gate holds it there.
+  const view = { ...DEFAULT_VIEW, r: Math.min(cv.width, cv.height) * 0.44, cx: cv.width / 2, cy: cv.height / 2 };
   let layer = "topo", source = "precursor", dragging = false, lastX = 0, lastY = 0, pins = [];
 
   const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;

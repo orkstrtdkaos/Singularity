@@ -6,17 +6,17 @@
   "communityId": "ashwarden.long_grey",
   "axisVector": [
     0.3,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     -0.4,
     -0.95,
-    0.0,
-    0.0,
-    0.0
+    0,
+    0,
+    0
   ],
   "spectrum": {
     "death_life": -0.95,
@@ -65,11 +65,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 88.0,
-    "longitude": 75.0,
+    "colatitude": 88,
+    "longitude": 75,
     "depth": 0
   },
   "worldPosNote": "Out past the tending. The death pole's far edge. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "cairnhold"
 }

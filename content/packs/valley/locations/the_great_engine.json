@@ -6,20 +6,20 @@
   "communityId": "enginewright.engine",
   "axisVector": [
     0.5,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    -1.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    0,
     0.4,
-    0.0
+    0
   ],
   "spectrum": {
-    "mechanical_spiritual": -1.0,
+    "mechanical_spiritual": -1,
     "body_mind": 0.4,
     "emotional_logical": 0.5
   },
@@ -53,7 +53,7 @@
     "y": 95
   },
   "poleIntensity": {
-    "mechanical": 1.0,
+    "mechanical": 1,
     "mind": 0.4,
     "logical": 0.5
   },
@@ -66,11 +66,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 89.0,
-    "longitude": 150.0,
+    "colatitude": 89,
+    "longitude": 150,
     "depth": -3
   },
   "worldPosNote": "Deep works. The densest site in the world sits at the Gearlands' equator and well below the surface. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "pressureholt"
 }

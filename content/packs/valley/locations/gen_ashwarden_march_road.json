@@ -1,0 +1,79 @@
+{
+  "id": "gen-ashwarden-march-road",
+  "name": "The Ashwarden March Road",
+  "regionId": "the_palelands",
+  "descriptionSeed": "A place the road led to — Ashwarden March Road. The fiction brought you here before the map knew its name.",
+  "tags": [
+    "transitional"
+  ],
+  "connections": [
+    "gen-waygate",
+    "gen-stillwater-s-trouble"
+  ],
+  "_gen": {
+    "entityId": "gen-ashwarden-march-road",
+    "type": "location",
+    "birthWeight": 1,
+    "engagementScore": 2,
+    "tier": "fresh",
+    "rating": null,
+    "attentionHistory": [
+      {
+        "kind": "revisit",
+        "day": 13
+      }
+    ],
+    "createdDay": null,
+    "provenance": {
+      "healed": "sng-216-backfill"
+    },
+    "lastAttentionDay": 13
+  },
+  "_mintedAs": "transit",
+  "map": {
+    "x": 640,
+    "y": 360
+  },
+  "dangerLevel": 2,
+  "schemaVersion": 1,
+  "communityId": "ashwarden.cairnhold",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {
+    "death": 0.7,
+    "truth": 0.5,
+    "peace": 0.4
+  },
+  "spectrum": {
+    "death_life": -0.7,
+    "violence_peace": 0.4,
+    "falsehood_truth": 0.5,
+    "emotional_logical": -0.2
+  },
+  "axisVector": [
+    -0.2,
+    0.5,
+    0,
+    0.4,
+    0,
+    0,
+    0,
+    0,
+    -0.7,
+    0,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "tier": "site",
+  "parentId": "cairnhold",
+  "worldPos": {
+    "colatitude": 76,
+    "longitude": 74,
+    "depth": 0
+  },
+  "worldPosNote": "inherited from cairnhold — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. ⛔ The march road out of the Palelands. Raven's Home sits on it; Erik placed Raven's Home at Cairnhold."
+}

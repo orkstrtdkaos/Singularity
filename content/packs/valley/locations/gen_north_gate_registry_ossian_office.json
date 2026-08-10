@@ -1,0 +1,76 @@
+{
+  "id": "gen-north-gate-registry-ossian-office",
+  "name": "North Gate Registry — Ossian's Office",
+  "regionId": "the_center",
+  "descriptionSeed": "A place the road led to — North Gate Registry Ossian Office. The fiction brought you here before the map knew its name.",
+  "tags": [
+    "transitional"
+  ],
+  "connections": [
+    "the_crossing",
+    "gen-hub-north-gate-district-street"
+  ],
+  "_mintedAs": "transit",
+  "_gen": {
+    "type": "location",
+    "tier": "established",
+    "engagementScore": 4,
+    "birthWeight": 1,
+    "rating": null,
+    "attentionHistory": [
+      {
+        "kind": "revisit",
+        "day": 13
+      },
+      {
+        "kind": "revisit",
+        "day": 13
+      }
+    ],
+    "createdDay": 13,
+    "provenance": {
+      "locationId": "the_crossing",
+      "day": null,
+      "hint": "transit"
+    },
+    "lastAttentionDay": 13,
+    "needsDepth": "established"
+  },
+  "map": {
+    "x": 340,
+    "y": 290
+  },
+  "dangerLevel": 2,
+  "schemaVersion": 1,
+  "communityId": "center.crossing",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {},
+  "spectrum": {},
+  "axisVector": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "tier": "site",
+  "parentId": "the_crossing",
+  "worldPos": {
+    "colatitude": 0,
+    "longitude": 0,
+    "depth": 0
+  },
+  "worldPosNote": "inherited from the_crossing — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. ⚠️ Its sibling gen-hub-north-gate-district-street is the street outside it; both are Crossing interior."
+}

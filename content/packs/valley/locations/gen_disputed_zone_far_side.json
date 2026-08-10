@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "gen-disputed-zone-far-side",
+  "name": "The Far Side",
+  "regionId": "valley",
+  "communityId": "valley.disputed_zone_fringe",
+  "tags": [
+    "authored-in-play"
+  ],
+  "connections": [
+    "disputed_zone_fringe"
+  ],
+  "descriptionSeed": "Past the shimmer. Hemispherical stone mound, active pre-Transition structure. Erik ruled Cellaceron's six deeds here.",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {
+    "chaos": 0.6,
+    "violence": 0.4,
+    "space": 0.4,
+    "spiritual": 0.4,
+    "demonic": 0.2
+  },
+  "spectrum": {
+    "chaos_order": -0.6,
+    "violence_peace": -0.4,
+    "dark_light": 0,
+    "space_time": -0.4,
+    "mechanical_spiritual": 0.4,
+    "demonic_angelic": -0.2
+  },
+  "axisVector": [
+    0,
+    0,
+    -0.2,
+    -0.4,
+    0,
+    0.4,
+    -0.6,
+    0,
+    0,
+    -0.4,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "map": {
+    "x": 490,
+    "y": 115
+  },
+  "tier": "settlement",
+  "parentId": "disputed_zone_fringe",
+  "worldPos": {
+    "colatitude": 28,
+    "longitude": 239,
+    "depth": 0
+  },
+  "worldPosNote": "inherited from disputed_zone_fringe — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. Past the shimmer. Hemispherical stone mound, active pre-Transition structure. Erik ruled Cellaceron's six deeds here."
+}

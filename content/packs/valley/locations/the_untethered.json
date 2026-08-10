@@ -6,20 +6,20 @@
   "communityId": "figurist.untethered",
   "axisVector": [
     0.3,
-    0.0,
-    0.0,
-    0.0,
-    1.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
     0.5,
-    0.0
+    0
   ],
   "spectrum": {
-    "concrete_abstract": 1.0,
+    "concrete_abstract": 1,
     "body_mind": 0.5,
     "emotional_logical": 0.3
   },
@@ -50,7 +50,7 @@
     "y": 190
   },
   "poleIntensity": {
-    "abstract": 1.0,
+    "abstract": 1,
     "mind": 0.5,
     "logical": 0.3
   },
@@ -63,11 +63,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 87.0,
-    "longitude": 299.0,
+    "colatitude": 87,
+    "longitude": 299,
     "depth": 0
   },
   "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_pattern_reach bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "cloudform"
 }

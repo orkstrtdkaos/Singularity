@@ -50,6 +50,14 @@ export function loadCanon() {
   for (const l of Object.values(locs)) {
     const wp = l.worldPos;
     if (!wp || !Number.isFinite(wp.colatitude) || !Number.isFinite(wp.longitude)) continue;
+    // ⛔ AN INHERITED POSITION IS NOT A SEED. SNG-396 promoted 17 places play authored, and a room
+    // sits at its building's coordinates — so seeding on them would put a SECOND vote at a point that
+    // already has one, quietly doubling that building's pull on the biome/density/nanite fields and
+    // moving terrain that no one authored. The Cogitarium would have voted three times for having two
+    // rooms. `worldPosInherited` is written by the promotion, so the rule is machine-readable rather
+    // than a guess from a prose note — and the seed census gate holds the count at the places that
+    // genuinely OCCUPY ground.
+    if (l.worldPosInherited) continue;
     seeds.push({ id: l.id, region: l.regionId || l.region || null, name: l.name || l.id,
       lat: wp.colatitude - 90, lon: norm(wp.longitude) });
   }

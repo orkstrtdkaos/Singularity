@@ -1,0 +1,83 @@
+{
+  "id": "gen-disputed-zone-left-branch-entrance",
+  "name": "Disputed Zone — Left Branch Entrance",
+  "regionId": "valley",
+  "descriptionSeed": "A place the road led to — Disputed Zone — Left Branch Entrance. The fiction brought you here before the map knew its name.",
+  "tags": [
+    "transitional"
+  ],
+  "connections": [
+    "millbrook"
+  ],
+  "_mintedAs": "transit",
+  "dangerLevel": 1,
+  "_gen": {
+    "type": "location",
+    "tier": "fresh",
+    "engagementScore": 2,
+    "birthWeight": 1,
+    "rating": null,
+    "attentionHistory": [
+      {
+        "kind": "revisit",
+        "day": 14
+      }
+    ],
+    "createdDay": 14,
+    "provenance": {
+      "locationId": "millbrook",
+      "day": null,
+      "hint": "transit"
+    },
+    "lastAttentionDay": 14
+  },
+  "map": {
+    "x": 490,
+    "y": 115
+  },
+  "schemaVersion": 1,
+  "communityId": "valley.disputed_zone_fringe",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {
+    "chaos": 0.6,
+    "violence": 0.4,
+    "space": 0.4,
+    "spiritual": 0.4,
+    "demonic": 0.2
+  },
+  "spectrum": {
+    "chaos_order": -0.6,
+    "violence_peace": -0.4,
+    "dark_light": 0,
+    "space_time": -0.4,
+    "mechanical_spiritual": 0.4,
+    "demonic_angelic": -0.2
+  },
+  "axisVector": [
+    0,
+    0,
+    -0.2,
+    -0.4,
+    0,
+    0.4,
+    -0.6,
+    0,
+    0,
+    -0.4,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "tier": "site",
+  "parentId": "disputed_zone_fringe",
+  "worldPos": {
+    "colatitude": 28,
+    "longitude": 239,
+    "depth": 0
+  },
+  "worldPosNote": "inherited from disputed_zone_fringe — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. Named for its parent."
+}

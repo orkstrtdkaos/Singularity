@@ -5,21 +5,21 @@
   "regionId": "the_making",
   "communityId": "wright.ceaseless",
   "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     -0.5,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
     -0.2,
-    1.0
+    1
   ],
   "spectrum": {
-    "destruction_creation": 1.0,
+    "destruction_creation": 1,
     "chaos_order": -0.5,
     "body_mind": -0.2
   },
@@ -50,7 +50,7 @@
     "y": 385
   },
   "poleIntensity": {
-    "creation": 1.0,
+    "creation": 1,
     "chaos": 0.5,
     "body": 0.2
   },
@@ -63,11 +63,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 84.0,
-    "longitude": 238.0,
+    "colatitude": 84,
+    "longitude": 238,
     "depth": 0
   },
   "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_making bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "the_forge_eternal"
 }

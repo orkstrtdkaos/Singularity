@@ -6,20 +6,20 @@
   "communityId": "lattice.grand",
   "axisVector": [
     0.4,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    1.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
     0.3,
-    0.0
+    0
   ],
   "spectrum": {
-    "chaos_order": 1.0,
+    "chaos_order": 1,
     "body_mind": 0.3,
     "emotional_logical": 0.4
   },
@@ -51,7 +51,7 @@
     "y": 150
   },
   "poleIntensity": {
-    "order": 1.0,
+    "order": 1,
     "mind": 0.3,
     "logical": 0.4
   },
@@ -64,11 +64,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 86.0,
-    "longitude": 230.0,
+    "colatitude": 86,
+    "longitude": 230,
     "depth": 0
   },
   "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_lattice_cities bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "tier_seven"
 }

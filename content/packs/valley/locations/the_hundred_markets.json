@@ -5,18 +5,18 @@
   "regionId": "the_center",
   "communityId": "center.markets",
   "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     -0.1,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0
+    0,
+    0,
+    0,
+    0,
+    0
   ],
   "spectrum": {
     "chaos_order": -0.1
@@ -54,11 +54,11 @@
     "chaos": 0.1
   },
   "worldPos": {
-    "colatitude": 9.0,
-    "longitude": 200.0,
+    "colatitude": 9,
+    "longitude": 200,
     "depth": 0
   },
   "worldPosNote": "The hub's trade ring. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "the_crossing"
 }

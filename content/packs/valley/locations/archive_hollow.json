@@ -63,26 +63,26 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "axisVector": [
-    0.0,
+    0,
     0.4,
-    0.0,
-    0.0,
+    0,
+    0,
     0.6,
     -0.3,
-    0.0,
+    0,
     -0.4,
-    0.0,
+    0,
     0.3,
-    0.0,
-    0.0
+    0,
+    0
   ],
   "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
   "worldPos": {
-    "colatitude": 22.0,
-    "longitude": 196.0,
+    "colatitude": 22,
+    "longitude": 196,
     "depth": -1
   },
   "worldPosNote": "Sealed before the Transition and never opened to it. Valley, cut into rock. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "echo_river_crossing"
 }

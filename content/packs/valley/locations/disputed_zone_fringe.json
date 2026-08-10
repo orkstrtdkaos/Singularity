@@ -7,7 +7,7 @@
   "spectrum": {
     "chaos_order": -0.6,
     "violence_peace": -0.4,
-    "dark_light": 0.0,
+    "dark_light": 0,
     "space_time": -0.4,
     "mechanical_spiritual": 0.4,
     "demonic_angelic": -0.2
@@ -24,7 +24,9 @@
     "radiant_plateau_edge",
     "thornwake_glade",
     "kestrels_roost",
-    "greywater_stilts"
+    "greywater_stilts",
+    "gen-disputed-zone-far-side",
+    "the-low-lamp-inn"
   ],
   "descriptionSeed": "The band of broken country where Harmonic and Radiant power fields interfere. Sound bends light here; light carries sound. Standing waves make pockets where time runs syrup-slow, and shimmer-vortices wander like dust devils made of noise and glare. Neither civilization claims it — officially. Both send people into it. Things live here that adapted to the interference, and things were left here during the Great Transition that never got collected.",
   "loreRefs": [
@@ -60,23 +62,23 @@
     "demonic": 0.2
   },
   "axisVector": [
-    0.0,
-    0.0,
+    0,
+    0,
     -0.2,
     -0.4,
-    0.0,
+    0,
     0.4,
     -0.6,
-    0.0,
-    0.0,
+    0,
+    0,
     -0.4,
-    0.0,
-    0.0
+    0,
+    0
   ],
   "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
   "worldPos": {
-    "colatitude": 28.0,
-    "longitude": 239.0,
+    "colatitude": 28,
+    "longitude": 239,
     "depth": 0
   },
   "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",

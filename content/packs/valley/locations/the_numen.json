@@ -5,21 +5,21 @@
   "regionId": "the_numinous_reach",
   "communityId": "numinous.numen",
   "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
     0.6,
-    1.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    1,
+    0,
+    0,
+    0,
+    0,
     0.5,
-    0.0
+    0
   ],
   "spectrum": {
-    "mechanical_spiritual": 1.0,
+    "mechanical_spiritual": 1,
     "body_mind": 0.5,
     "concrete_abstract": 0.6
   },
@@ -52,7 +52,7 @@
     "y": 70
   },
   "poleIntensity": {
-    "spiritual": 1.0,
+    "spiritual": 1,
     "mind": 0.5,
     "abstract": 0.6
   },
@@ -65,11 +65,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 90.0,
-    "longitude": 330.0,
+    "colatitude": 90,
+    "longitude": 330,
     "depth": 0
   },
   "worldPosNote": "The oldest continuously-attended site. Equator, exactly on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "the_thinning"
 }

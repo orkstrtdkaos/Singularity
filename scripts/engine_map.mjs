@@ -178,6 +178,17 @@ if (process.argv.includes("--check")) {
   const unspecced = engineFiles.filter(f => !specRows.has(f));
   let baseline = {}; try { baseline = JSON.parse(read("tests/wiring_baseline.json")); } catch { }
   const bar = baseline.modulesMissingFromSpecMap;
+  // ⛔ A RATCHET THAT CAN VANISH IS NOT A RATCHET. This guard read `typeof bar === "number"` and did
+  // NOTHING otherwise — no fail, no warning, no line at all. wiring_audit's re-baseline writer (a
+  // different harness, same file) rebuilt the baseline from only the keys IT measures, dropped this
+  // one, and the ratchet silently ceased to exist while the suite stayed green. Failing open on a
+  // missing bar meant the DOCUMENTED re-baseline command could disarm this guard by accident. The
+  // writer merges now; this shouts if the key goes missing again, so both halves of the mistake have
+  // to recur AND the second one is audible.
+  if (typeof bar !== "number") {
+    fail++;
+    console.log(`  FAIL  ratchet: modulesMissingFromSpecMap has NO BASELINE — a ratchet that disappears is worse than a red one (measured ${unspecced.length}); restore the key in tests/wiring_baseline.json`);
+  }
   if (typeof bar === "number") {
     if (unspecced.length > bar) {
       fail++;

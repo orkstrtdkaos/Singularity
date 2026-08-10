@@ -35,6 +35,12 @@ export function extractGeneratedPlaces() {
           artifact: id === "gen-object-object" ? "id minted from a stringified object — pre-SNG-329 residue (engine/state.js:27); real memories, defective identity" : null,
         });
         if (rec) {
+          // ⚠️ KEEP THE WHOLE RECORD. My first pass carried a hand-picked subset and the promotion
+          // built content from it — dropping spectrum, poleIntensity, encounterFlavor, questSeeds and
+          // map, every one of them REQUIRED by the location schema and every one already authored by
+          // the generator that made the place. The summary fields below stay for Aevi's review; the
+          // full record is what content is built from, so promotion is a MOVE, never a re-authoring.
+          row.record = row.record || rec;
           row.name = row.name || rec.name || null;
           row.descriptionSeed = row.descriptionSeed || rec.descriptionSeed || null;
           row.regionId = row.regionId || rec.regionId || null;

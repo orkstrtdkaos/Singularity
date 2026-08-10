@@ -20,7 +20,8 @@
   "connections": [
     "millbrook",
     "disputed_zone_fringe",
-    "sunken_choir"
+    "sunken_choir",
+    "gen-the-lower-chamber"
   ],
   "descriptionSeed": "The lowest terrace of the Harmonic Heights, where the sonic civilization meets the valley floor. Buildings grown from phononic crystal hum at frequencies you feel in your teeth. Wind chimes the size of trees tune the weather. Everything resonates — the streets carry footstep-echoes upward like reports, and privacy is a discipline, not a given. The Resonance Halls above are visible as terraces of impossible acoustics climbing into cloud.",
   "loreRefs": [
@@ -51,26 +52,26 @@
   },
   "axisVector": [
     -0.3,
-    0.0,
-    0.0,
+    0,
+    0,
     0.4,
     0.2,
     0.5,
     0.5,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0
+    0,
+    0,
+    0,
+    0,
+    0
   ],
   "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
   "worldPos": {
-    "colatitude": 18.0,
-    "longitude": 107.0,
+    "colatitude": 18,
+    "longitude": 107,
     "depth": 0
   },
   "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
   "_regionSplit": "⛔ SNG-387: was `valley`. The valley spanned 90 WALKING DAYS — 30% of the way round the world — with a 53° longitude gap splitting it cleanly in two. ⚠️ These six say what they are in their own descriptions: 'where the sonic civilization meets the valley floor', 'the rim of the Radiant Plateau', 'built on stilts by people who wanted out from under BOTH CITIES'. This is not the Valley. It is the country BETWEEN the two craft-family civilisations, and being between them is its whole identity. Erik: 'the Valley is not the whole world.'",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "disputed_zone_fringe"
 }

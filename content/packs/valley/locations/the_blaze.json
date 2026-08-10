@@ -5,21 +5,21 @@
   "regionId": "radiant_wastes",
   "communityId": "blazeborn.blaze",
   "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    1.0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
     -0.4,
-    0.0,
-    0.0,
+    0,
+    0,
     -0.4
   ],
   "spectrum": {
-    "dark_light": 1.0,
+    "dark_light": 1,
     "death_life": -0.4,
     "destruction_creation": -0.4
   },
@@ -53,7 +53,7 @@
     "y": 360
   },
   "poleIntensity": {
-    "light": 1.0,
+    "light": 1,
     "death": 0.4,
     "destruction": 0.4
   },
@@ -66,11 +66,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 90.0,
-    "longitude": 180.0,
+    "colatitude": 90,
+    "longitude": 180,
     "depth": 0
   },
   "worldPosNote": "Burns on lattice. The Radiant locus sits at the equator. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "glasshome"
 }

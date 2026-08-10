@@ -62,7 +62,54 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-waygate",
+    "name": "Waygate",
+    "regionId": "valley",
+    "parentId": "gen-ashwarden-march-road",
+    "_promotedFromSubPlace": true,
+    "descriptionSeed": "A place the road led to — Waygate. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "millbrook",
+     "gen-center",
+     "gen-the-ent-grove",
+     "gen-ashwarden-march-road"
+    ],
+    "_gen": {
+     "entityId": "gen-waygate",
+     "type": "location",
+     "birthWeight": 1,
+     "engagementScore": 4,
+     "tier": "established",
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 13
+      },
+      {
+       "kind": "revisit",
+       "day": 13
+      }
+     ],
+     "createdDay": null,
+     "provenance": {
+      "healed": "sng-216-backfill"
+     },
+     "lastAttentionDay": 13,
+     "needsDepth": "established"
+    },
+    "_mintedAs": "transit",
+    "map": {
+     "x": 409.5058087856015,
+     "y": 397.4185998280231
+    },
+    "dangerLevel": 2
+   }
   },
   {
    "id": "gen-ashwarden-march-road",
@@ -96,7 +143,45 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-ashwarden-march-road",
+    "name": "Ashwarden March Road",
+    "regionId": "valley",
+    "descriptionSeed": "A place the road led to — Ashwarden March Road. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "gen-waygate",
+     "gen-stillwater-s-trouble"
+    ],
+    "_gen": {
+     "entityId": "gen-ashwarden-march-road",
+     "type": "location",
+     "birthWeight": 1,
+     "engagementScore": 2,
+     "tier": "fresh",
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 13
+      }
+     ],
+     "createdDay": null,
+     "provenance": {
+      "healed": "sng-216-backfill"
+     },
+     "lastAttentionDay": 13
+    },
+    "_mintedAs": "transit",
+    "map": {
+     "x": 336.03134186125055,
+     "y": 342.0516176980347
+    },
+    "dangerLevel": 2
+   }
   },
   {
    "id": "gen-north-gate-registry-ossian-office",
@@ -122,7 +207,51 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-north-gate-registry-ossian-office",
+    "name": "North Gate Registry Ossian Office",
+    "regionId": "the_center",
+    "descriptionSeed": "A place the road led to — North Gate Registry Ossian Office. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "the_crossing",
+     "gen-hub-north-gate-district-street"
+    ],
+    "_mintedAs": "transit",
+    "_gen": {
+     "type": "location",
+     "tier": "established",
+     "engagementScore": 4,
+     "birthWeight": 1,
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 13
+      },
+      {
+       "kind": "revisit",
+       "day": 13
+      }
+     ],
+     "createdDay": 13,
+     "provenance": {
+      "locationId": "the_crossing",
+      "day": null,
+      "hint": "transit"
+     },
+     "lastAttentionDay": 13,
+     "needsDepth": "established"
+    },
+    "map": {
+     "x": 284.42733036328025,
+     "y": 347.5471840270921
+    },
+    "dangerLevel": 2
+   }
   },
   {
    "id": "gen-stillwater-s-trouble",
@@ -142,7 +271,47 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-stillwater-s-trouble",
+    "name": "Stillwater'S Trouble",
+    "regionId": "valley",
+    "parentId": "gen-ashwarden-march-road",
+    "_promotedFromSubPlace": true,
+    "descriptionSeed": "A place the road led to — Stillwater'S Trouble. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "gen-ashwarden-march-road"
+    ],
+    "_gen": {
+     "entityId": "gen-stillwater-s-trouble",
+     "type": "location",
+     "birthWeight": 1,
+     "engagementScore": 2,
+     "tier": "fresh",
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 13
+      }
+     ],
+     "createdDay": null,
+     "provenance": {
+      "healed": "sng-216-backfill"
+     },
+     "lastAttentionDay": 13
+    },
+    "_mintedAs": "transit",
+    "map": {
+     "x": 297.8908972987956,
+     "y": 384.4108727502462
+    },
+    "supersededBy": "the_old_warden_post",
+    "dangerLevel": 2
+   }
   },
   {
    "id": "gen-center",
@@ -164,7 +333,38 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-center",
+    "name": "Center",
+    "regionId": "valley",
+    "descriptionSeed": "A place the road led to — Center. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "gen-waygate"
+    ],
+    "_gen": {
+     "entityId": "gen-center",
+     "type": "location",
+     "birthWeight": 1,
+     "engagementScore": 0,
+     "tier": "fresh",
+     "rating": null,
+     "attentionHistory": [],
+     "createdDay": null,
+     "provenance": {
+      "healed": "sng-216-backfill"
+     }
+    },
+    "_mintedAs": "transit",
+    "map": {
+     "x": 483.2482839825773,
+     "y": 379.03253576244833
+    },
+    "dangerLevel": 2
+   }
   },
   {
    "id": "gen-cogitarium-entrance-hall",
@@ -184,7 +384,25 @@
    "seenBy": [
     "player-7bxzzd/char-mrmvlglu"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-cogitarium-entrance-hall",
+    "name": "Cogitarium Entrance Hall",
+    "regionId": "somatic_reaches",
+    "descriptionSeed": "A place the road led to — Cogitarium Entrance Hall. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "the_cogitarium"
+    ],
+    "_gen": true,
+    "_mintedAs": "transit",
+    "map": {
+     "x": 99.60283566954209,
+     "y": 400
+    }
+   }
   },
   {
    "id": "gen-cogitarium-third-terrace",
@@ -204,7 +422,25 @@
    "seenBy": [
     "player-7bxzzd/char-mrmvlglu"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-cogitarium-third-terrace",
+    "name": "Cogitarium Third Terrace",
+    "regionId": "valley",
+    "descriptionSeed": "A place the road led to — Cogitarium Third Terrace. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "old_switchback"
+    ],
+    "_gen": true,
+    "_mintedAs": "transit",
+    "map": {
+     "x": 605.6573248931513,
+     "y": 168.79118227906136
+    }
+   }
   },
   {
    "id": "gen-disputed-zone-left-branch-entrance",
@@ -237,7 +473,45 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-disputed-zone-left-branch-entrance",
+    "name": "Disputed Zone — Left Branch Entrance",
+    "regionId": "valley",
+    "descriptionSeed": "A place the road led to — Disputed Zone — Left Branch Entrance. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "millbrook"
+    ],
+    "_mintedAs": "transit",
+    "dangerLevel": 1,
+    "_gen": {
+     "type": "location",
+     "tier": "fresh",
+     "engagementScore": 2,
+     "birthWeight": 1,
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 14
+      }
+     ],
+     "createdDay": 14,
+     "provenance": {
+      "locationId": "millbrook",
+      "day": null,
+      "hint": "transit"
+     },
+     "lastAttentionDay": 14
+    },
+    "map": {
+     "x": 367.88101210770685,
+     "y": 388.87939181478544
+    }
+   }
   },
   {
    "id": "gen-hub-north-gate-district-street",
@@ -259,7 +533,45 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-hub-north-gate-district-street",
+    "name": "Hub — North Gate District Street",
+    "regionId": "the_center",
+    "descriptionSeed": "A place the road led to — Hub — North Gate District Street. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "gen-north-gate-registry-ossian-office"
+    ],
+    "_mintedAs": "transit",
+    "_gen": {
+     "type": "location",
+     "tier": "fresh",
+     "engagementScore": 2,
+     "birthWeight": 1,
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 13
+      }
+     ],
+     "createdDay": 13,
+     "provenance": {
+      "locationId": "gen-north-gate-registry-ossian-office",
+      "day": null,
+      "hint": "transit"
+     },
+     "lastAttentionDay": 13
+    },
+    "map": {
+     "x": 235.28658607124052,
+     "y": 327.6930345760488
+    },
+    "dangerLevel": 2
+   }
   },
   {
    "id": "gen-mara-wells-store",
@@ -279,7 +591,45 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-mara-wells-store",
+    "name": "Mara Wells Store",
+    "regionId": "valley",
+    "descriptionSeed": "A place the road led to — Mara Wells Store. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "millbrook"
+    ],
+    "_mintedAs": "transit",
+    "dangerLevel": 1,
+    "_gen": {
+     "type": "location",
+     "tier": "fresh",
+     "engagementScore": 2,
+     "birthWeight": 1,
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 14
+      }
+     ],
+     "createdDay": 14,
+     "provenance": {
+      "locationId": "millbrook",
+      "day": null,
+      "hint": "transit"
+     },
+     "lastAttentionDay": 14
+    },
+    "map": {
+     "x": 405.75227902134543,
+     "y": 254.2511499259448
+    }
+   }
   },
   {
    "id": "gen-quickwood-margin",
@@ -301,7 +651,45 @@
    "seenBy": [
     "player-7fah99/char-mrmvjtwp"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-quickwood-margin",
+    "name": "Quickwood Margin",
+    "regionId": "the_quickwood",
+    "descriptionSeed": "A place the road led to — Quickwood Margin. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "the_heartroot"
+    ],
+    "_mintedAs": "transit",
+    "dangerLevel": 1,
+    "_gen": {
+     "type": "location",
+     "tier": "fresh",
+     "engagementScore": 2,
+     "birthWeight": 1,
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 2
+      }
+     ],
+     "createdDay": 2,
+     "provenance": {
+      "locationId": "the_heartroot",
+      "day": null,
+      "hint": "transit"
+     },
+     "lastAttentionDay": 2
+    },
+    "map": {
+     "x": 546.3878406783227,
+     "y": 157.5
+    }
+   }
   },
   {
    "id": "gen-the-ent-grove",
@@ -332,7 +720,38 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-the-ent-grove",
+    "name": "The Ent Grove",
+    "regionId": "valley",
+    "descriptionSeed": "A place the road led to — The Ent Grove. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "gen-waygate"
+    ],
+    "_gen": {
+     "entityId": "gen-the-ent-grove",
+     "type": "location",
+     "birthWeight": 1,
+     "engagementScore": 0,
+     "tier": "fresh",
+     "rating": null,
+     "attentionHistory": [],
+     "createdDay": null,
+     "provenance": {
+      "healed": "sng-216-backfill"
+     }
+    },
+    "_mintedAs": "transit",
+    "map": {
+     "x": 439.5117053691912,
+     "y": 333.07074694842095
+    },
+    "dangerLevel": 2
+   }
   },
   {
    "id": "gen-the-made-gate",
@@ -353,7 +772,48 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-the-made-gate",
+    "name": "The Made Gate",
+    "regionId": "the_center",
+    "descriptionSeed": "The first waygate MADE rather than reached-for — cut at the Crossing by a wright who tends endings, standing where the fold once was. Proof that a gate can be made, not only reached.",
+    "tags": [
+     "waygate",
+     "made"
+    ],
+    "waygate": true,
+    "waygateTier": 2,
+    "connections": [
+     "the_crossing"
+    ],
+    "waygateDefaultTo": "the_crossing",
+    "dangerLevel": 2,
+    "_gen": {
+     "type": "location",
+     "tier": "fresh",
+     "engagementScore": 2,
+     "birthWeight": 1,
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 14
+      }
+     ],
+     "createdDay": 14,
+     "provenance": {
+      "hint": "made-waygate",
+      "questMade": true
+     },
+     "lastAttentionDay": 14
+    },
+    "_mintedAs": "made_waygate",
+    "map": {
+     "x": 272.37251111495743,
+     "y": 297.10793550220046
+    }
+   }
   },
   {
    "id": "gen-the-passage-below-the-unlit-deep",
@@ -373,7 +833,45 @@
    "seenBy": [
     "player-s9z9u1/char-mrum8y4d"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-the-passage-below-the-unlit-deep",
+    "name": "The Passage Below The Unlit Deep",
+    "regionId": "umbral_depths",
+    "descriptionSeed": "A place the road led to — The Passage Below The Unlit Deep. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "the_unlit_deep"
+    ],
+    "_mintedAs": "transit",
+    "dangerLevel": 4,
+    "_gen": {
+     "type": "location",
+     "tier": "fresh",
+     "engagementScore": 2,
+     "birthWeight": 1,
+     "rating": null,
+     "attentionHistory": [
+      {
+       "kind": "revisit",
+       "day": 1
+      }
+     ],
+     "createdDay": 1,
+     "provenance": {
+      "locationId": "the_unlit_deep",
+      "day": null,
+      "hint": "transit"
+     },
+     "lastAttentionDay": 1
+    },
+    "map": {
+     "x": 96.11510228365859,
+     "y": 400
+    }
+   }
   },
   {
    "id": "the-low-lamp-inn",
@@ -411,7 +909,106 @@
    "seenBy": [
     "player-s9z9u1/char-mrhs8286"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "schemaVersion": 1,
+    "id": "the-low-lamp-inn",
+    "name": "The Low Lamp Inn",
+    "regionId": "valley",
+    "communityId": "valley.radiant_plateau_edge",
+    "spectrum": {
+     "chaos_order": 0.2,
+     "violence_peace": 0.7,
+     "dark_light": 0.8,
+     "mechanical_spiritual": 0.4,
+     "falsehood_truth": 0.3,
+     "concrete_abstract": 0.5
+    },
+    "tags": [
+     "inn",
+     "lodging",
+     "edge-district",
+     "no-questions",
+     "light-guide",
+     "returnable",
+     "warm",
+     "early-spring"
+    ],
+    "connections": [
+     "radiant_plateau_edge",
+     "disputed_zone_fringe"
+    ],
+    "descriptionSeed": "Tucked into the lower tier of the Edge District where the light-guide streets run closest to the valley floor, the Low Lamp sits over a junction conduit — the glow rises through pale stone floors and fills the common room from below, warm and directionless as afternoon through cloud. The building is two storeys of dressed sandstone with deep-set windows fitted with diffusion panels so the light inside is never harsh. The beds are thick-mattressed, the bath-room fed by a cistern the owner keeps properly heated, and the linens smell of cedar oil. Maret Doss, who runs it, is a compact woman of sixty-odd years whose conversational range does not include your name, your business, where you've come from, or where you're going. She does ask whether you'd prefer the bath before or after supper, because the water pressure is better before the evening crowd. She has been here since before the last treaty renegotiation and expects to be here after the next. The common room is quiet enough to think in, which is unusual for the Edge District and not accidental.",
+    "loreRefs": [
+     "valley_primer",
+     "power_systems",
+     "radiant_plateau_culture"
+    ],
+    "npcsPresent": [
+     "maret_doss"
+    ],
+    "encounterFlavor": "A common room lit gold-from-below where two or three guests eat separately and don't introduce themselves; early-spring rain ticking against diffusion panels; the smell of cedar, hot water, and whatever Maret is cooking that isn't your concern unless you'd like a bowl. Occasionally a figure comes in from the cold, exchanges a look with Maret, goes upstairs, and is not there in the morning.",
+    "dangerLevel": 0,
+    "questSeeds": [
+     "A guest in the corner room has been here eleven nights and hasn't come down today — Maret won't say how she knows something is wrong, only that she'd like it handled quietly and without the District wardens",
+     "The light-guide conduit under the inn has been cycling strangely at the third hour of the night, waking guests with a pulse of light brighter than it should be — someone with knowledge of Radiant infrastructure could trace it, if they were careful about who found out they were looking",
+     "A sealed letter was left with Maret for a guest who checked in under a name that matches someone Silas or Pell have reason to recognize — Maret will not confirm or deny the guest exists, but she hasn't burned the letter",
+     "Maret's cedar oil supplier hasn't come up from the valley floor in three weeks; she mentions this once, flatly, and doesn't mention it again — but the route he travels crosses ground that has been quietly problematic"
+    ],
+    "poleIntensity": {
+     "peace": 0.7,
+     "light": 0.8,
+     "order": 0.2,
+     "spiritual": 0.4,
+     "abstract": 0.5
+    },
+    "reconcileVersion": 2,
+    "_gen": {
+     "entityId": "the-low-lamp-inn",
+     "type": "location",
+     "birthWeight": 11,
+     "engagementScore": 8,
+     "tier": "nominated",
+     "rating": "R+",
+     "provenance": {
+      "playerKey": "player-s9z9u1",
+      "characterId": "char-mrhs8286",
+      "locationId": "radiant_plateau_edge",
+      "day": 3,
+      "worldDay": null,
+      "hint": "a modest but genuinely comfortable inn in the Edge District of the Radiant Plateau — warm, lit from below by the light-g",
+      "why": "Silas and Pell need a named, returnable inn in the Edge District to spend the night — it will be a place they may return"
+     },
+     "attentionHistory": [
+      {
+       "kind": "fact",
+       "day": 3
+      },
+      {
+       "kind": "revisit",
+       "day": 3
+      },
+      {
+       "kind": "fact",
+       "day": 4
+      },
+      {
+       "kind": "keep",
+       "day": 5
+      }
+     ],
+     "createdDay": 3,
+     "repaired": false,
+     "stubbed": false,
+     "romanceEligible": true,
+     "lastAttentionDay": 5,
+     "promotedWorldDay": 18,
+     "canonTier": "variant"
+    },
+    "image": "https://image.pollinations.ai/prompt/The%20Low%20Lamp%20Inn%3A%20Tucked%20into%20the%20lower%20tier%20of%20the%20Edge%20District%20where%20the%20light-guide%20streets%20run%20closest%20to%20the%20valley%20floor%2C%20the%20Low%20Lamp%20sits%20over%20a%20junction%20conduit%20%E2%80%94%20the%20glow%20rises%20through%20pale%20stone%20floors%20and%20fills%20the%20common%20room%20from%20below%2C%20warm%20and%20directionless%20as%20afternoon%20through%20cloud.%20The%20building%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=64375&nologo=true",
+    "parentId": "radiant_plateau_edge",
+    "_promotedFromSubPlace": true
+   }
   },
   {
    "id": "gen-the-lower-chamber",
@@ -438,7 +1035,39 @@
    "seenBy": [
     "player-s9z9u1/char-mr4ejo8c"
    ],
-   "artifact": null
+   "artifact": null,
+   "record": {
+    "id": "gen-the-lower-chamber",
+    "name": "The Lower Chamber",
+    "regionId": "valley",
+    "descriptionSeed": "A place the road led to — The Lower Chamber. The fiction brought you here before the map knew its name.",
+    "tags": [
+     "transitional"
+    ],
+    "connections": [
+     "harmonic_heights_terrace",
+     "gen-object-object"
+    ],
+    "_gen": {
+     "entityId": "gen-the-lower-chamber",
+     "type": "location",
+     "birthWeight": 1,
+     "engagementScore": 0,
+     "tier": "fresh",
+     "rating": null,
+     "attentionHistory": [],
+     "createdDay": null,
+     "provenance": {
+      "healed": "sng-216-backfill"
+     }
+    },
+    "_mintedAs": "transit",
+    "map": {
+     "x": 642.5221357341223,
+     "y": 154.0432512816442
+    },
+    "dangerLevel": 2
+   }
   }
  ]
 }

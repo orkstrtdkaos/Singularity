@@ -1,0 +1,74 @@
+{
+  "id": "gen-the-made-gate",
+  "name": "The Made Gate",
+  "regionId": "the_center",
+  "descriptionSeed": "The first waygate MADE rather than reached-for — cut at the Crossing by a wright who tends endings, standing where the fold once was. Proof that a gate can be made, not only reached.",
+  "tags": [
+    "waygate",
+    "made"
+  ],
+  "waygate": true,
+  "waygateTier": 2,
+  "connections": [
+    "the_crossing"
+  ],
+  "waygateDefaultTo": "the_crossing",
+  "dangerLevel": 2,
+  "_gen": {
+    "type": "location",
+    "tier": "fresh",
+    "engagementScore": 2,
+    "birthWeight": 1,
+    "rating": null,
+    "attentionHistory": [
+      {
+        "kind": "revisit",
+        "day": 14
+      }
+    ],
+    "createdDay": 14,
+    "provenance": {
+      "hint": "made-waygate",
+      "questMade": true
+    },
+    "lastAttentionDay": 14
+  },
+  "_mintedAs": "made_waygate",
+  "map": {
+    "x": 340,
+    "y": 290
+  },
+  "schemaVersion": 1,
+  "communityId": "center.crossing",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {},
+  "spectrum": {},
+  "axisVector": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "role": "gate",
+  "tier": "settlement",
+  "parentId": "the_crossing",
+  "worldPos": {
+    "colatitude": 0,
+    "longitude": 0,
+    "depth": 0
+  },
+  "worldPosNote": "inherited from the_crossing — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. The 27th waygate and the FIRST BUILT — 'cut at the Crossing by a wright who tends endings'. Needs waygate:true, a tier, a lore line, and a place in the network. ⚠️ SNG-148 established the gates as INHERITED infrastructure. A player has broken that and the canon does not know. ⛔ SNG-148 established the waygate network as INHERITED infrastructure; this is the first gate BUILT, cut at the Crossing by a wright who tends endings. A player broke that premise and the canon now records it."
+}

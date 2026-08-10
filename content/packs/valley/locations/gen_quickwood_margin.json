@@ -1,0 +1,78 @@
+{
+  "id": "gen-quickwood-margin",
+  "name": "Quickwood Margin",
+  "regionId": "the_quickwood",
+  "descriptionSeed": "A place the road led to — Quickwood Margin. The fiction brought you here before the map knew its name.",
+  "tags": [
+    "transitional"
+  ],
+  "connections": [
+    "the_heartroot"
+  ],
+  "_mintedAs": "transit",
+  "dangerLevel": 1,
+  "_gen": {
+    "type": "location",
+    "tier": "fresh",
+    "engagementScore": 2,
+    "birthWeight": 1,
+    "rating": null,
+    "attentionHistory": [
+      {
+        "kind": "revisit",
+        "day": 2
+      }
+    ],
+    "createdDay": 2,
+    "provenance": {
+      "locationId": "the_heartroot",
+      "day": null,
+      "hint": "transit"
+    },
+    "lastAttentionDay": 2
+  },
+  "map": {
+    "x": 620,
+    "y": 200
+  },
+  "schemaVersion": 1,
+  "communityId": "rootkin.heartroot",
+  "loreRefs": [],
+  "encounterFlavor": "",
+  "questSeeds": [],
+  "poleIntensity": {
+    "life": 0.8,
+    "creation": 0.4,
+    "chaos": 0.1
+  },
+  "spectrum": {
+    "death_life": 0.8,
+    "destruction_creation": 0.4,
+    "chaos_order": -0.1
+  },
+  "axisVector": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -0.1,
+    0,
+    0.8,
+    0,
+    0,
+    0.4
+  ],
+  "axisVectorNote": "Derived from the authored spectrum against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+  "tier": "site",
+  "parentId": "the_heartroot",
+  "worldPos": {
+    "colatitude": 90,
+    "longitude": 255,
+    "depth": 0
+  },
+  "worldPosNote": "inherited from the_heartroot — SNG-396: a room is at its building's coordinates",
+  "worldPosInherited": true,
+  "provenance": "SNG-396 — authored in play, promoted from the saves. Observed in placeEdges under the_heartroot — the one parent the graph got right."
+}

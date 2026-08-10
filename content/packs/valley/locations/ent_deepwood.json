@@ -57,26 +57,26 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "axisVector": [
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
     0.4,
-    0.0,
+    0,
     0.5,
-    0.0,
-    0.0,
+    0,
+    0,
     0.7,
     0.4,
-    0.0,
-    0.0
+    0,
+    0
   ],
   "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
   "worldPos": {
-    "colatitude": 74.0,
-    "longitude": 262.0,
+    "colatitude": 74,
+    "longitude": 262,
     "depth": -2
   },
   "worldPosNote": "The Deepwood is a POCKET-REALITY — slow time, its own hours. The whole manifest domain sits one layer off the surface plane rather than beside the Quickwood on it. This is why Ent country can share a bearing with life-country and still be somewhere else. (SNG-180: authored position — WHERE it sits, independent of axisVector.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "the_quickwood_eaves"
 }

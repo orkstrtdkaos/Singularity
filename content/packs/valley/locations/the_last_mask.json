@@ -5,21 +5,21 @@
   "regionId": "the_veiled_reach",
   "communityId": "veilwright.lastmask",
   "axisVector": [
-    0.0,
-    -1.0,
-    0.0,
-    0.0,
+    0,
+    -1,
+    0,
+    0,
     0.4,
-    0.0,
-    0.0,
+    0,
+    0,
     -0.3,
-    0.0,
-    0.0,
-    0.0,
-    0.0
+    0,
+    0,
+    0,
+    0
   ],
   "spectrum": {
-    "falsehood_truth": -1.0,
+    "falsehood_truth": -1,
     "dark_light": -0.3,
     "concrete_abstract": 0.4
   },
@@ -50,7 +50,7 @@
     "y": 205
   },
   "poleIntensity": {
-    "falsehood": 1.0,
+    "falsehood": 1,
     "dark": 0.3,
     "abstract": 0.4
   },
@@ -63,11 +63,11 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 87.0,
-    "longitude": 11.0,
+    "colatitude": 87,
+    "longitude": 11,
     "depth": 0
   },
   "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_veiled_reach bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "site",
+  "tier": "settlement",
   "parentId": "the_hall_of_mirrors"
 }

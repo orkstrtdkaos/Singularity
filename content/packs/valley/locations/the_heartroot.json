@@ -5,17 +5,17 @@
   "regionId": "the_quickwood",
   "communityId": "rootkin.heartroot",
   "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     -0.1,
-    0.0,
+    0,
     0.8,
-    0.0,
-    0.0,
+    0,
+    0,
     0.4
   ],
   "spectrum": {
@@ -36,7 +36,8 @@
     "the_slow_orchard",
     "the_greenward",
     "greenmarch",
-    "greenforge"
+    "greenforge",
+    "gen-quickwood-margin"
   ],
   "descriptionSeed": "A city that was GROWN. Not built from wood — grown, over four hundred years, and still growing, and the Rootkin who planted its first hall are alive and consider it a promising start. The halls widen a finger's breadth a year. The doors are living wood and know you after the third visit. Everything here is on a timescale that makes visitors feel like weather — brief, loud, and not really the point. It is the least anxious place in the world and it will drive you slowly out of your mind.",
   "loreRefs": [
@@ -69,8 +70,8 @@
     "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
-    "colatitude": 90.0,
-    "longitude": 255.0,
+    "colatitude": 90,
+    "longitude": 255,
     "depth": 0
   },
   "worldPosNote": "Where the Rootkin finished the Transition. The life pole itself. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",

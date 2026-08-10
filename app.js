@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFineSampler } from "./engine/worldglobe.js";   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.102";
+const APP_VERSION = "1.9.103";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7002,6 +7002,47 @@ function wireWorldGlobe() {
   // it faces the inhabited southern hemisphere, and a gate holds it there.
   const view = { ...DEFAULT_VIEW, r: Math.min(cv.width, cv.height) * 0.44, cx: cv.width / 2, cy: cv.height / 2 };
   let layer = "topo", source = "precursor", dragging = false, lastX = 0, lastY = 0, pins = [];
+  // ⛔ SNG-402 — THE GENERATOR IS THE DETAIL, AND IT HAS BEEN IN THE REPO UNUSED SINCE SNG-391.
+  // scripts/world/terrain.mjs says so in its own header: "Terrain generator with VIEW CULLING — only the
+  // parameters that can affect the current window are considered, which is what makes a regional zoom
+  // affordable." The globe never called it; it sampled the 480×240 bake, where one cell is ~11 screen
+  // pixels at maximum zoom — the staircase coastlines Erik photographed. Zoom in past the threshold and
+  // the SAME generator that baked the raster is evaluated per pixel over the visible window instead.
+  // ⚠️ LAZY AND OPTIONAL: fetched on the first close zoom, never on boot, and if either fetch fails the
+  // globe simply keeps drawing from the raster — detail is an enhancement, not a dependency.
+  let _fineGen = null, _fineLoading = false, _fineFailed = false;
+  const FINE_SPAN = 60;                                        // below this the raster starts to show
+  async function loadFineGenerator() {
+    if (_fineGen || _fineLoading || _fineFailed) return;
+    _fineLoading = true;
+    try {
+      const [mod, gp] = await Promise.all([
+        import("./scripts/world/terrain.mjs"),
+        fetch("content/packs/core/world/genparams.json?v=" + APP_VERSION).then((r) => r.json()),
+      ]);
+      _fineGen = { make: mod.makeTerrain || mod.makeTerrainESM, gp };
+      paint(false);
+    } catch { _fineFailed = true; }                            // stay on the raster, silently and correctly
+    finally { _fineLoading = false; }
+  }
+  // The windowed sampler for the CURRENT view, rebuilt per paint because the window is the view.
+  function fineFor(span) {
+    if (span > FINE_SPAN) return null;
+    if (!_fineGen) { loadFineGenerator(); return null; }
+    const c = unproject(view.cx, view.cy, view);
+    if (!c) return null;
+    const half = Math.min(80, span * 0.75);
+    const conv = Math.max(0.12, Math.cos(c.lat * Math.PI / 180));
+    const la0 = Math.max(-90, c.lat - half), la1 = Math.min(90, c.lat + half);
+    const halfLon = Math.min(180, half / conv);
+    // ⚠️ the cull window is PADDED past the visible disc: a gaussian contributor just outside the frame
+    // still shapes ground inside it, and clipping to exactly what is on screen makes the coast crawl as
+    // you drag. Aevi's own cull comment makes the same point about meridian convergence.
+    const f = _fineGen.make(_fineGen.gp, { la0, la1, lo0: c.lon - halfLon, lo1: c.lon + halfLon });
+    // ⚠️ wrapped so the generator ADDS sub-cell shape to the baked (hydrology-aware) elevation rather
+    // than replacing it — see makeFineSampler: at a cell centre the correction is zero, so there is no seam.
+    return makeFineSampler(_terrain, f);
+  }
 
   const bandFor = () => CONTENT.substrateModel?.sourceBands?.sources?.[source]?.band || null;
   const worldPosOf = (id) => CONTENT.locations?.[id]?.worldPos || null;
@@ -7014,11 +7055,15 @@ function wireWorldGlobe() {
     const step = coarse ? 2 : 1;
     const img = ctx.createImageData(cv.width, cv.height);
     const D = img.data, band = bandFor();
+    // ⚠️ NO GENERATOR WHILE DRAGGING. It is a real per-pixel cost; coarse-while-moving already exists
+    // for the raster path and the same trade applies harder here.
+    const span = spanDeg(view, Math.min(cv.width, cv.height));
+    const fine = coarse ? null : fineFor(span);
     for (let y = 0; y < cv.height; y += step) {
       for (let x = 0; x < cv.width; x += step) {
         const g = unproject(x + 0.5, y + 0.5, view);
         let r = 4, gr = 4, b = 10;                                  // the void behind the world
-        if (g) { const c = colorAt(_terrain, g.lon, g.lat, { layer, band, bandFn: bandFactor }); r = c[0]; gr = c[1]; b = c[2]; }
+        if (g) { const c = colorAt(_terrain, g.lon, g.lat, { layer, band, bandFn: bandFactor, fine }); r = c[0]; gr = c[1]; b = c[2]; }
         for (let dy = 0; dy < step && y + dy < cv.height; dy++) {
           for (let dx = 0; dx < step && x + dx < cv.width; dx++) {
             const o = ((y + dy) * cv.width + (x + dx)) * 4;
@@ -7028,6 +7073,26 @@ function wireWorldGlobe() {
       }
     }
     ctx.putImageData(img, 0, 0);
+    // ⛔ THE WATER I BUILT AND NEVER DREW. 113 rivers, 17 lakes and 38 marshes have shipped in the asset
+    // since SNG-391 — traced, gated, re-anchored by polar signature across SNG-393/394 — and no reader
+    // existed. As vectors they stay clean at any zoom where the raster is a staircase.
+    const hyd = hydrologyPaths(_terrain, view, Math.min(cv.width, cv.height));
+    if (hyd.fade > 0 && layer === "topo") {
+      const stroke = (runs, color, width, close) => {
+        ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineJoin = "round"; ctx.lineCap = "round";
+        for (const run of runs) {
+          ctx.beginPath(); ctx.moveTo(run[0][0], run[0][1]);
+          for (let i = 1; i < run.length; i++) ctx.lineTo(run[i][0], run[i][1]);
+          if (close) { ctx.closePath(); ctx.fill(); }
+          ctx.stroke();
+        }
+      };
+      ctx.save();
+      ctx.globalAlpha = 0.5 * hyd.fade; ctx.fillStyle = "#3f6b52"; stroke(hyd.marsh, "#4b7a5e", 0.8, true);
+      ctx.globalAlpha = 0.9 * hyd.fade; ctx.fillStyle = "#22557f"; stroke(hyd.lakes, "#4d8ab8", 1.2, true);
+      ctx.globalAlpha = 0.9 * hyd.fade; stroke(hyd.rivers, "#3f86bd", hyd.riverWidth, false);
+      ctx.restore();
+    }
     // pins on top, near-last so they sit over the far side
     pins = visiblePins(_terrain, view, worldPosOf);
     const here = character.currentLocationId;
@@ -7077,7 +7142,10 @@ function wireWorldGlobe() {
   };
   cv.onwheel = (e) => {
     e.preventDefault();
-    view.r = Math.max(120, Math.min(Math.min(cv.width, cv.height) * 1.6, view.r * (e.deltaY > 0 ? 0.9 : 1.11)));
+    // ⚠️ THE CAP MOVED BECAUSE THE FLOOR MOVED. 1.6× stopped at a ~48° span, which was as far as the
+    // raster could be pushed before it read as blocks; with the generator drawing per pixel there is no
+    // resolution limit, so the ceiling is now what the eye and the CPU want rather than what the bake had.
+    view.r = Math.max(120, Math.min(Math.min(cv.width, cv.height) * 12, view.r * (e.deltaY > 0 ? 0.9 : 1.11)));
     paint(true); clearTimeout(cv._z); cv._z = setTimeout(() => paint(false), 140);
   };
   for (const b of app.querySelectorAll("[data-globelayer]")) b.onclick = () => {

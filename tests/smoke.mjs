@@ -7147,6 +7147,85 @@ await (async () => {
       nearFaceAt(14) <= total394 / 2, `pitch +14 showed ${nearFaceAt(14)} of ${total394}`);
   }
 
+  // ══ SNG-402 — THE ZOOM RENDERS THE GENERATOR, AND THE WATER I BUILT FINALLY DRAWS.
+  // Erik, comparing Aevi's prototype: "it has more capability than what you've built so far… one thing
+  // is that the zoom would render more detail." Both halves were already in the repo with no reader:
+  // scripts/world/terrain.mjs has said "VIEW CULLING — what makes a regional zoom affordable" since
+  // SNG-391 and the globe never called it, and the asset's 113 rivers / 17 lakes / 38 marshes returned
+  // ZERO hits for `grep hydrology engine/worldglobe.js app.js`.
+  {
+    const WG2 = await import("../engine/worldglobe.js");
+    const TG = await import("../scripts/world/terrain.mjs");
+    const doc402 = rjc193("content/packs/core/world/terrain.json");
+    const t402 = WG2.decodeTerrain(doc402);
+    const gp402 = rjc193("content/packs/core/world/genparams.json");
+
+    check("402: the asset's vector hydrology and place names REACH the viewer — the writer-with-no-reader closed",
+      !!t402.hydrology && t402.hydrology.rivers.length > 50 && !!t402.placeNames
+      && t402.RLO != null && t402.RHI != null);
+
+    // ⛔ THE SEAM IS THE RISK, and it is a failure that already happened once: rebuild.py's own header
+    // lists "the base globe and the detail patch drawing different worlds (a visible seam)" among the
+    // regressions that forced the pipeline to exist. Base and patch must be the SAME world.
+    const fWhole = TG.makeTerrain(gp402, null);
+    let agree = 0, n = 0;
+    for (let i = 0; i < 3000; i++) {
+      const lon = -180 + (i * 37.13) % 360, lat = -89 + (i * 17.77) % 178;
+      const g = fWhole(lon, lat), r = WG2.sampleAt(t402, lon, lat);
+      n++; if ((g.type !== 0) === (r.type !== 0)) agree++;
+    }
+    check("402: the detail patch and the baked raster are the SAME WORLD — no seam at the zoom threshold",
+      agree / n > 0.97, `land/sea agreement ${(100 * agree / n).toFixed(2)}% over ${n} samples`);
+
+    // ⛔ AND THE ELEVATION SEAM IS CLOSED BY ARITHMETIC, NOT BY LUCK — this gate failed first and was
+    // right to. The shipped DEM is HYDROLOGICALLY ADJUSTED (authored digs, smoothing, pit fill); the
+    // generator returns the surface before any of that, and they differ by a median of 1 but a p99 of 28
+    // out of a 126-unit range, worst exactly where water was dug. So the fine sampler ADDS sub-cell shape
+    // to the baked value instead of replacing it: at a cell CENTRE the correction is zero by construction.
+    const sampler402 = WG2.makeFineSampler(t402, fWhole);
+    const centres = [];
+    for (let j = 40; j < 300; j += 47) for (let k = 60; k < 700; k += 113) {
+      centres.push([-180 + ((k + 0.5) / t402.ew) * 360, 90 - ((j + 0.5) / t402.eh) * 180]);
+    }
+    const worstCentre = centres.reduce((m, [lo, la]) => Math.max(m, Math.abs(sampler402(lo, la).elevDelta)), 0);
+    check("402: …and at a cell CENTRE the patch adds nothing — the elevation seam cannot open",
+      worstCentre === 0, `worst |delta| at a cell centre: ${worstCentre}`);
+    // ⚠️ BUT IT MUST STILL ADD SOMETHING BETWEEN CENTRES, or the whole exercise is an expensive no-op —
+    // and this half caught a real defect on its first run: the delta was differenced from two ALREADY
+    // ROUNDED elevations, so sub-unit relief quantised to zero and vanished silently. Measured on LAND
+    // (ocean clamps to the same value by construction and would have hidden it again): median 0.62 units
+    // of sub-cell relief, p95 8.2, max 54.9 out of a 126-unit land range — mountains the grid could not hold.
+    const landDeltas = [];
+    for (let i = 0; i < 1500; i++) {
+      const lon = -180 + (i * 37.13) % 360, lat = -89 + (i * 17.77) % 178;
+      if (fWhole(lon, lat).type === 0) continue;
+      landDeltas.push(Math.abs(sampler402(lon + 0.21, lat + 0.19).elevDelta));
+    }
+    const withRelief = landDeltas.filter((x) => x > 0.5).length / Math.max(1, landDeltas.length);
+    check("402: …while BETWEEN centres it genuinely adds relief the grid was too coarse to hold",
+      landDeltas.length > 200 && withRelief > 0.3 && Math.max(...landDeltas) > 10,
+      `${(100 * withRelief).toFixed(1)}% of land points carry sub-cell relief, max ${Math.max(...landDeltas).toFixed(1)}`);
+
+    // the point of the whole exercise: detail BELOW one raster cell (0.75°)
+    const win = { la0: -80, la1: -60, lo0: -110, lo1: -80 };
+    const fWin = TG.makeTerrain(gp402, win);
+    const a = fWin(-95, -70), b = fWin(-95.02, -70.02);
+    check("402: the windowed generator resolves BELOW a raster cell — 0.02° apart is two different places",
+      a.raw !== b.raw);
+
+    // the LOD control variable, and the fade Aevi measured
+    const wide = { yaw: 0, pitch: -52, r: 300, cx: 350, cy: 270 };
+    const close = { yaw: 0, pitch: -52, r: 1600, cx: 350, cy: 270 };
+    check("402: span drives the level of detail — a hemisphere reads 180°, a regional view reads under 30°",
+      WG2.spanDeg(wide, 700) > 170 && WG2.spanDeg(close, 700) < 30);
+    check("402: water fades IN as the view narrows and is absent when the whole world is on screen",
+      WG2.hydrologyPaths(t402, wide, 700).fade === 0 && WG2.hydrologyPaths(t402, close, 700).fade > 0.9);
+    // ⚠️ and it must actually PROJECT — polylines that resolve to nothing are a silent no-op
+    const hp = WG2.hydrologyPaths(t402, close, 700);
+    check("402: …and the traced water projects to real screen runs, not an empty overlay",
+      hp.rivers.length > 10 && hp.rivers.every((run) => run.length > 1) && hp.riverWidth > 1);
+  }
+
   // ══ SNG-399 / 399b — THE AUTHORED PICTURE REACHES THE PLAYER. Aevi counted three instances in one
   // day of an authored prompt with a working pipeline and nothing joining them (SNG-367 the NPC path,
   // 399 the whois path, 399b the death path) and asked for a general gate instead of a third point fix.

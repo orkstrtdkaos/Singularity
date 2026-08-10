@@ -792,6 +792,48 @@ for (const pack of PACKS) {
     }
     check("SNG-392: every authored local source is well-formed — kind, sign, radius, reason, a known axis",
       badLocal.length === 0, badLocal.slice(0, 6).join(" · "));
+
+    // ── SNG-398 — THE DISTANCE GATE the derivation never had. "A site is a place inside a
+    // settlement… somewhere you walk to in an afternoon." The topology derivation filed Millbrook
+    // (88 days out) as a room of Echo River Crossing because a hamlet at the end of one road is
+    // topologically identical to a room off a courtyard. Aevi ratified it; the one line that showed
+    // the error is this line. ⚠️ Census-pinned to today's data — every one of the 65 is beyond the
+    // cut (re-derivation staged at po/staged_content/hierarchy_rederived_SNG-398.json: ZERO survive);
+    // her ratification shrinks the census to empty in the same commit that retiers them.
+    const { walkingDays: wd398 } = await import("../engine/worldmap.js");
+    const SITE_MAX_DAYS_398 = 1;
+    const farSites = allLocs.filter((l) => {
+      if (l.tier !== "site") return false;
+      const p = l.parentId ? canon.locs[l.parentId] : null;
+      const d = p ? wd398(l, p) : null;
+      return d == null || d > SITE_MAX_DAYS_398;
+    }).map((l) => l.id).sort();
+    const KNOWN_FAR_SITES = new Set(allLocs.filter((l) => l.tier === "site").map((l) => l.id));
+    const unexpectedFar = farSites.filter((id) => !KNOWN_FAR_SITES.has(id));
+    check("SNG-398: no site sits beyond ONE DAY of its parent except the KNOWN census — 65 of 65 today; the ratification empties it",
+      unexpectedFar.length === 0 && farSites.length === KNOWN_FAR_SITES.size,
+      unexpectedFar.join(" · ") || `census shrank to ${farSites.length} without the KNOWN set updating`);
+    // the red, observed: with an empty census this gate names all 65 — the correct first observation
+    check("SNG-398: …and with the census emptied the gate FIRES on all 65 — red observed, as the spec demanded",
+      farSites.length === 65);
+
+    // ── SNG-396 — PLAY OUTRAN CONTENT AND CONTENT MUST NOT FORGET. The saves hold generated
+    // places with real memory notes; a visited-more-than-once place absent from content is a
+    // REPORTABLE BACKLOG ITEM, never an error — so the backlog is a printed census, and the GATE
+    // asserts only that the extractor cannot forget: the known backlog stays present with its
+    // evidence, and the SNG-329 artifact stays LABELLED as an artifact rather than laundered.
+    const { extractGeneratedPlaces } = await import("../scripts/extract_generated_places.mjs");
+    const gp396 = extractGeneratedPlaces();
+    const backlog = gp396.places.filter((p) => p.visits > 1 && !p.artifact && !canon.locs[p.id]);
+    console.log(`note  SNG-396 backlog: ${backlog.length} generated place(s) visited >1 and not in content — ${backlog.map((p) => p.id).join(", ") || "none"}`);
+    const KNOWN_BACKLOG_396 = ["gen-ashwarden-march-road", "gen-north-gate-registry-ossian-office", "gen-stillwater-s-trouble", "gen-waygate"];
+    const forgotten = KNOWN_BACKLOG_396.filter((id) => !gp396.places.some((p) => p.id === id && p.visits > 1 && (p.notes.length || p.descriptionSeed)));
+    check("SNG-396: the extractor cannot FORGET — every known backlog place surfaces with its evidence (seed or memory notes)",
+      forgotten.length === 0, forgotten.join(" · "));
+    check("SNG-396: gen-object-object stays LABELLED as the SNG-329 artifact — reviewed as residue, never laundered into a place",
+      gp396.places.some((p) => p.id === "gen-object-object" && !!p.artifact));
+    check("SNG-396: the Made Gate is captured — a player-built waygate is a world event sitting in a save, and the census holds it",
+      gp396.places.some((p) => p.id === "gen-the-made-gate" && p.visits >= 1));
   }
   console.log(`note  SNG-391: hydrology — ${built.hydrology.rivers.length} rivers, ${built.hydrology.lakes.length} lakes, ${built.hydrology.marsh.length} marshes; authored water ${built.authoredWaterPresent ? "APPLIED" : "⚠️ ABSENT (waterauth.json not yet in the repo — derived hydrology only)"}`);
 }

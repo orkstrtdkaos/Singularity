@@ -1,0 +1,444 @@
+{
+ "generatedBy": "scripts/extract_generated_places.mjs — SNG-396 §3.1",
+ "note": "Play authored these one room at a time and content never learned. Review, then promote the real ones placed properly (§4): parent from the FICTION, worldPos from the parent, tier: site. The Made Gate is a WORLD EVENT and goes to canon separately.",
+ "counts": {
+  "places": 17,
+  "withMemory": 16,
+  "artifacts": 1
+ },
+ "places": [
+  {
+   "id": "gen-object-object",
+   "name": null,
+   "descriptionSeed": null,
+   "regionId": null,
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [],
+   "tags": [],
+   "visits": 4,
+   "notes": [
+    "[d9] The party has crossed into this side of the Disputed Zone. The upstream pre-Transition structure is present and active, hemispherical stone mound with precise geometry, seams humming at four-second frequency. Machinery running at full preparation cycle. No sign of other presences.",
+    "[d1] The sealed veil showed responsiveness to direct contact—it hums louder when touched, and the intention behind it is legible as refusal of repeated crossing attempts from the other side"
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mr4ejo8c",
+    "player-s9z9u1/char-mrhs8286",
+    "player-s9z9u1/char-msgpisca"
+   ],
+   "artifact": "id minted from a stringified object — pre-SNG-329 residue (engine/state.js:27); real memories, defective identity"
+  },
+  {
+   "id": "gen-waygate",
+   "name": "Waygate",
+   "descriptionSeed": "A place the road led to — Waygate. The fiction brought you here before the map knew its name.",
+   "regionId": "valley",
+   "communityId": null,
+   "parentId": "gen-ashwarden-march-road",
+   "placeEdges": [
+    "millbrook",
+    "gen-center",
+    "gen-the-ent-grove",
+    "gen-ashwarden-march-road"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 3,
+   "notes": [
+    "[d6] A sealed tin of unfinished seventh-band lens-blanks retrieved from the dry hollow beneath the neighboring stall's crossbar — the hollow is now empty, the tin in Silas Weir's possession.",
+    "[d6] A contact note left in the dry hollow beneath the neighboring stall's crossbar — folded bark-paper, stone-weighted, naming Silas Weir and the Fell Pell forge in Millbrook as the finder.",
+    "[d6] Party transited through the sixth waygate — the March setting confirmed north-by-northwest by the gate-keeper. Siol held the arch's edge as they departed.",
+    "[d6] The March road runs north-by-northwest from the waygate — packed earth, foot traffic only, birch stands on both sides. First tributary ahead; marker stone at the branch, left for Raven's Home, right for the gone survey post.",
+    "[d13] A drainage cut crosses the March Road at the ward's outer margin — wrong slope for its design, water pooling rather than draining to the verge. Cold iron underneath from years of misdirected flow. Pell read it through ironsense on Day 13.",
+    "[d13] The Crossing creek runs gray-brown on arrival, Day 13 afternoon — boiling-rags at the well confirm the locals have noticed and are treating the water. The contamination from the Disputed Zone is present here.",
+    "[d13] Renna's jewelry stall is at the far end of the marketplace crescent, under a dark-green oilcloth awning — boar tusks left in commission, pickup in two days.",
+    "[d13] The party crossed the threshold into the mill's ground floor — Crane opened the door to all four, Huginn included.",
+    "[d13] The sealed stone box has been opened by Silas Weir — the oilskin packet retrieved, the box now empty. The hollow in the east wall stands open.",
+    "[d13] Community-scale filtration blueprints drafted on the mill floor flagstone by Silas Weir and Edvar Crane — chalk on stone, transferred and bound. Two sheets, annotated and complete.",
+    "[d13] The settling basin detail surfaced in shadow during the Working Model / held-place combination — not on the original sheets. Crane named it aloud. Added to blueprints before his departure.",
+    "[d13] Builder's addendum transmitted to Coll's shadow-slate — three numbered points covering settling basin placement, limestone bed failure signs, and Crane's contact at Millbrook. The addendum follows the full four-stage cascade design."
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-ashwarden-march-road",
+   "name": "Ashwarden March Road",
+   "descriptionSeed": "A place the road led to — Ashwarden March Road. The fiction brought you here before the map knew its name.",
+   "regionId": "valley",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "gen-waygate",
+    "gen-stillwater-s-trouble"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 2,
+   "notes": [
+    "[d6] Boundary-Stone seated at the post's crown on World-day 19 midday — the warden station now functions as a protected refuge. Animals, weather, and casual intrusion turned aside. The post reads as occupied.",
+    "[d6] Stillwater's Trouble reached on World-day 19 midday — a hillside bowl, dark close earth, roughly circular and below grade, grey birch stopping at its rim. A figure sits against the far limestone outcrop.",
+    "[d13] Waymarker's second layer seated into the post on this morning — the bond between Silas Weir and the post is complete. The March registered it.",
+    "[d13] Silas entered the post interior on this morning — cold hearth, Cassiel keeping the place tight, Huginn claimed the east windowsill.",
+    "[d13] Cassiel formally tasked as reconstruction lead — all five spaces named, funded, and being planned: Veth's laboratory (east wall), Silas's workshop (north corner), Huginn's Watch (east sill), Pell's forge (hearth-end), Cassiel's keeper's hut (threshold and grounds).",
+    "[d13] Main compound building settled in plan — gathering hall with kitchen joined at the back, supply store at the north end, table for ten, large hearth. Footprint approved by Cassiel on the west cleared ground.",
+    "[d13] Pell's forge flue requires widening before the anvil is brought in — exact dimensions to follow in writing from Pell. Cassiel has an asterisk beside this entry.",
+    "[d13] Ward wall perimeter named and walked — runs from post's north corner, out to west ground's edge, back to the cairn-line's first stone. Foundation measurements are Cassiel's next task. Defensive strategist promised.",
+    "[d13] First Ashwarden attendance performed in the hollow — the badger's ending witnessed on World-day 13 midday, the first death tended at this ground since the post was reclaimed.",
+    "[d13] A raised sentry — the badger's body, set by Silas Weir — now patrols the hollow's lower circuit. The warn-thread is approximate; it will find intruders but alert-back to the post is not guaranteed.",
+    "[d13] The warn-thread of the sentry is now seated into the cairn-line's first stone interval rather than directly into the badger — alert-back to the post runs as a warden's pressure through the line. Reliable enough.",
+    "[d13] Silas landed in the yard below the hollow's rim on Marrow's Wings — the first flight arrival at this site. The attended ground received the landing without resistance."
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-north-gate-registry-ossian-office",
+   "name": "North Gate Registry Ossian Office",
+   "descriptionSeed": "A place the road led to — North Gate Registry Ossian Office. The fiction brought you here before the map knew its name.",
+   "regionId": "the_center",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "the_crossing",
+    "gen-hub-north-gate-district-street"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 2,
+   "notes": [
+    "[d13] Silas arrived via Shadowstep — a shadow pool was held briefly in the corner behind the visitor's chair; the lamp guttered on landing",
+    "[d13] A shadow-architecture of the valley's water infrastructure was raised on Coll's desk from the Waymarker and The Shadow Work — the lamp guttered, the room's light compressed, and the structure held for thirty seconds before the detail at the failure points blurred. Coll leaned forward across the…",
+    "[d13] A permanent shadow-slate bound to Silas Weir's Weirmark is now seated on the surface of Coll's desk — a two-way written channel that persists after departure.",
+    "[d13] Silas Weir admitted to the annex interior on Day 13 afternoon on Warden Coll's committee authority — the Zone Remediation deep index is accessible."
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-stillwater-s-trouble",
+   "name": "Stillwater'S Trouble",
+   "descriptionSeed": "A place the road led to — Stillwater'S Trouble. The fiction brought you here before the map knew its name.",
+   "regionId": "valley",
+   "communityId": null,
+   "parentId": "gen-ashwarden-march-road",
+   "placeEdges": [
+    "gen-ashwarden-march-road"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 2,
+   "notes": [],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-center",
+   "name": "Center",
+   "descriptionSeed": "A place the road led to — Center. The fiction brought you here before the map knew its name.",
+   "regionId": "valley",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "gen-waygate"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 1,
+   "notes": [
+    "[d6] First arrival at the Hub plaza — seven arches, crescent arrangement, open to the metropolis. The Coliseum visible to the north."
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-cogitarium-entrance-hall",
+   "name": "Cogitarium Entrance Hall",
+   "descriptionSeed": "A place the road led to — Cogitarium Entrance Hall. The fiction brought you here before the map knew its name.",
+   "regionId": "somatic_reaches",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "the_cogitarium"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 1,
+   "notes": [],
+   "seenBy": [
+    "player-7bxzzd/char-mrmvlglu"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-cogitarium-third-terrace",
+   "name": "Cogitarium Third Terrace",
+   "descriptionSeed": "A place the road led to — Cogitarium Third Terrace. The fiction brought you here before the map knew its name.",
+   "regionId": "valley",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "old_switchback"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 1,
+   "notes": [],
+   "seenBy": [
+    "player-7bxzzd/char-mrmvlglu"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-disputed-zone-left-branch-entrance",
+   "name": "Disputed Zone — Left Branch Entrance",
+   "descriptionSeed": "A place the road led to — Disputed Zone — Left Branch Entrance. The fiction brought you here before the map knew its name.",
+   "regionId": "valley",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "millbrook"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 1,
+   "notes": [
+    "[d14] The hollow's warden named: it is a receiver, built for a specific transmission from the relay node. The warden has held it open fifteen years. He has named Silas as the attending presence — the watch can end.",
+    "[d14] The hollow's fifteen-year watch is complete — the warden's vigil ended, the hollow sealed with You Shall Not Pass. The ward holds the perimeter against the untended crossing. The receiving-purpose and the circuit to the relay node remain intact.",
+    "[d14] The full system — relay node, hollow receiver, and reclamation site — was mapped here using the Waymarker and the Working Model on Day 14 at dawn. The system's shape is now known and held.",
+    "[d14] The reclamation site has been located — a low ring of pale material, flush with the earth in a shallow catchment bowl south of the left-branch path. Active, not broken. Waiting for a final instruction.",
+    "[d14] The reclamation ring received its closing instruction on Day 14 at dawn — complete and stop. The matrix is winding down. The watershed will clear within one to two weeks. The ring is no longer waiting.",
+    "[d14] A radiant burn-pattern was found at the bowl's northwest edge on Day 14 at dawn — weeks old, pressed from above. Someone used a radiant craft here to examine the reclamation site and gave it nothing.",
+    "[d14] Party returned to the wolverine clearing at dawn — Logana's watch unbroken, relay node undisturbed beneath her.",
+    "[d14] The Left Branch approach warden post is now actively manned — Silas Weir has claimed the watch and accepted official Hub message delivery. The post is on the south-circuit runner's active route.",
+    "[d14] A waypost is coming — named the Whistling Woman, to be a Hub-registered staging point on the south circuit road at the left-branch approach. Not yet built; named and intended.",
+    "[d14] The made gate has been used as a functional crossing for the first time — Silas and Deni Cors stepped through cleanly from Zone-side to south road. The threshold works as built.",
+    "[d14] Deni Cors completed the first official registry entry for the Left Branch approach warden post — the post is now on the south circuit's active record, with Silas Weir as warden.",
+    "[d14] Party returned to the made gate at dawn on Day 14 — the gate stands unchanged, warded and whole, Huginn on its upper edge."
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-hub-north-gate-district-street",
+   "name": "Hub — North Gate District Street",
+   "descriptionSeed": "A place the road led to — Hub — North Gate District Street. The fiction brought you here before the map knew its name.",
+   "regionId": "the_center",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "gen-north-gate-registry-ossian-office"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 1,
+   "notes": [
+    "[d13] Arrived at the Ossian annex exterior — green copper shutter ajar, lamplight inside, archivist Ossian working within. Crane's Zone Remediation commission files are held here."
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-mara-wells-store",
+   "name": "Mara Wells Store",
+   "descriptionSeed": "A place the road led to — Mara Wells Store. The fiction brought you here before the map knew its name.",
+   "regionId": "valley",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "millbrook"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 1,
+   "notes": [],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-quickwood-margin",
+   "name": "Quickwood Margin",
+   "descriptionSeed": "A place the road led to — Quickwood Margin. The fiction brought you here before the map knew its name.",
+   "regionId": "the_quickwood",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "the_heartroot"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 1,
+   "notes": [
+    "[d2] The kept road into the Quickwood shows recent boot-tracks, adult-sized, a day old, moving northeast — someone passed through before Aelyn."
+   ],
+   "seenBy": [
+    "player-7fah99/char-mrmvjtwp"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-the-ent-grove",
+   "name": "The Ent Grove",
+   "descriptionSeed": "A place the road led to — The Ent Grove. The fiction brought you here before the map knew its name.",
+   "regionId": "valley",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "gen-waygate"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 1,
+   "notes": [
+    "[d6] The Ent grove circle: seven or eight old trees forming a rough ring, mossy dry ground inside regardless of season. Siol stops at the edge and does not enter. The Hub's buildings are visible through the treeline but the grove reads as separate from them.",
+    "[d6] The Attended End cast at the grove's edge on World-day 19 midday returns no ending from within the circle — the Ent carries nothing the craft reads as a far shore. Huginn watched without comment.",
+    "[d6] The March's warden position on the Ent: uncontacted not from hostility but because they believed the Ent was already in conversation with something else. Huginn's read on the circle: 'not yet' — not never.",
+    "[d6] Order-Sense + Wildcraft revealed the grove's grain: seven trees as one older design, no center, edges extending beyond the trees. Sustained patient presence caused the grove's attention to turn toward Silas — a fraction, unhurried, not fully awake.",
+    "[d6] Silas named himself to the Ent — Ashwarden, wright, Silas Fell Weir — and the grove's attention settled onto him. He has been noted. The approach that worked: plain self-naming in the idiom of sitting with the dying.",
+    "[d6] Palework run through Silas and the grove as a channel on World-day 19 midday — the grove accepted the craft without resistance; Quiet's ending witnessed inside the circle's attention. The channel is now established as a path the grove has used once.",
+    "[d6] After the Palework ran through Silas and the grove as a channel, the silence settled without any outward change to the circle — the Ent witnesses without marking. Veth named the prior conversation as complete: it was waiting for the right attendant.",
+    "[d6] A thin ward seats along the Ent circle's own line on World-day 19 midday — Raised Thing and Boundary-Stone braided into the grove's existing shape, the Weirmark pressed into the join with Pell's ironsense as anchor. Not large: it will not stop determined harm or weather. Casual harm aimed at the…",
+    "[d6] Siol confirmed: the Ent receives intention, not craft — the gesture of protection was what the grove registered. The only thing it can receive is the intention behind an act.",
+    "[d6] Silas bid the grove farewell with a hand on the nearest trunk — no words, no ceremony. The ward is seated. The party departed south toward the waygate."
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-the-made-gate",
+   "name": "The Made Gate",
+   "descriptionSeed": "The first waygate MADE rather than reached-for — cut at the Crossing by a wright who tends endings, standing where the fold once was. Proof that a gate can be made, not only reached.",
+   "regionId": "the_center",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "the_crossing"
+   ],
+   "tags": [
+    "waygate",
+    "made"
+   ],
+   "visits": 1,
+   "notes": [],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-the-passage-below-the-unlit-deep",
+   "name": "The Passage Below The Unlit Deep",
+   "descriptionSeed": "A place the road led to — The Passage Below The Unlit Deep. The fiction brought you here before the map knew its name.",
+   "regionId": "umbral_depths",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "the_unlit_deep"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 1,
+   "notes": [],
+   "seenBy": [
+    "player-s9z9u1/char-mrum8y4d"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "the-low-lamp-inn",
+   "name": "The Low Lamp Inn",
+   "descriptionSeed": "Tucked into the lower tier of the Edge District where the light-guide streets run closest to the valley floor, the Low Lamp sits over a junction conduit — the glow rises through pale stone floors and fills the common room from below, warm and directionless as afternoon through cloud. The building is two storeys of dressed sandstone with deep-set windows fitted with diffusion panels so the light inside is never harsh. The beds are thick-mattressed, the bath-room fed by a cistern the owner keeps properly heated, and the linens smell of cedar oil. Maret Doss, who runs it, is a compact woman of sixty-odd years whose conversational range does not include your name, your business, where you've come from, or where you're going. She does ask whether you'd prefer the bath before or after supper, because the water pressure is better before the evening crowd. She has been here since before the last treaty renegotiation and expects to be here after the next. The common room is quiet enough to think in, which is unusual for the Edge District and not accidental.",
+   "regionId": "valley",
+   "communityId": "valley.radiant_plateau_edge",
+   "parentId": "radiant_plateau_edge",
+   "placeEdges": [
+    "radiant_plateau_edge",
+    "disputed_zone_fringe"
+   ],
+   "tags": [
+    "inn",
+    "lodging",
+    "edge-district",
+    "no-questions",
+    "light-guide",
+    "returnable",
+    "warm",
+    "early-spring"
+   ],
+   "visits": 1,
+   "notes": [
+    "[d3] The tallow candle on the window sill burned out on World-day 17 evening during a long quiet sitting — the room continued in junction-conduit light alone.",
+    "[d4] The junction conduit beneath the inn pulsed once in the third hour of the night — brighter than its normal output, gone before it could be examined. Silas let it pass; it did not read as an ending.",
+    "[d4] The bath trough was filled and shared by Silas and Pell on World-day 17 morning — the cistern tap and junction conduit warmth working without trouble.",
+    "[d4] The bath trough room at the Low Lamp Inn was the site of Silas and Pell's consummation on World-day 17 midday — the water cooled around them, the steam thinned, Huginn relocated to the rafters without",
+    "[d4] Maret Doss is the innkeeper — keeps the ledger, does not ask after guests' business, knows the local roads in detail. The road to Millbrook runs wetter than it looks for the first quarter-mile after a",
+    "[d4] A watcher was stationed under the tallow-chandler's awning opposite the cooperage on World-day 18 afternoon — Calvar's departure lamp absent from window, casement latched.",
+    "[d4] The Shadow Work screen was shaped against Calvar's second-floor casement on World-day 18 afternoon — the watcher on the street face has been holding on a covered window since the party's exit.",
+    "[d4] The relay figure in the cut-lane was neutralized by The Ended Threat + Wildcraft on World-day 18 afternoon — whistle held, attention misdirected south, no alarm raised. The Shadow Work screen on the c",
+    "[d4] The relay figure in the cut-lane recovered composure and decided not to report the incident — Grael's net has a gap in its own accountability."
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mrhs8286"
+   ],
+   "artifact": null
+  },
+  {
+   "id": "gen-the-lower-chamber",
+   "name": "The Lower Chamber",
+   "descriptionSeed": "A place the road led to — The Lower Chamber. The fiction brought you here before the map knew its name.",
+   "regionId": "valley",
+   "communityId": null,
+   "parentId": null,
+   "placeEdges": [
+    "harmonic_heights_terrace",
+    "gen-object-object"
+   ],
+   "tags": [
+    "transitional"
+   ],
+   "visits": 0,
+   "notes": [
+    "[d9] Resonant Sight confirmed: the scored wall arcs are a deliberate receiving geometry, all focused on the central convergence point. Three floor heat-channels converge there. The room was built to receive one thing once.",
+    "[d9] Party has crossed the threshold and reached the convergence point — the geometric heart of the chamber. The four-second pulse is felt directly underfoot. Aevi has named the room's waiting as distinct from the presence that came through the threshold.",
+    "[d9] Day 9 dawn: the chamber completed an active read of Aevi's broken record at the convergence point — held the pieces in order and allowed Aevi to recover the maker's name and cargo shape. The room was built not only to receive but to reconstruct. This is a durable change in what is known of the…",
+    "[d9] Day 9 dawn: Aevi's account given at the convergence point — maker named as Verath-Sem, cargo named as authentication key to watershed preparation order. The chamber's purpose is now fully fulfilled. The room has nothing left to show that it was built to show.",
+    "[d9] Day 9 dawn: party departed the lower chamber and forward alcove heading northeast-by-east. The convergence point is undisturbed — Waystaff withdrawn cleanly. The chamber's purpose is fulfilled and its waiting is over."
+   ],
+   "seenBy": [
+    "player-s9z9u1/char-mr4ejo8c"
+   ],
+   "artifact": null
+  }
+ ]
+}

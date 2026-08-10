@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 29,
-  "xp": 2841,
+  "xp": 2846,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -218,7 +218,7 @@
   "maxHealth": 186,
   "health": 186,
   "maxEnergy": 277,
-  "energy": 256,
+  "energy": 254,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2032,52 +2032,23 @@
         "player": "Head to the mill gate next — complete the chain from south to north, node by node",
         "summary": "The party walks from the midrow wayhouse to the mill gate — Order-Sense and ironsense both confirm it as an active relay node, the second point in the network's southern chain. The wayhouse and mill gate form a line; the third node waits to the north.",
         "narration": "The midrow wayhouse holds its silence as you step back into the morning. Pell draws her fingers from the stone without ceremony — 'same read,' she says, which means the node is real and dormant, exactly as Order-Sense showed it. Huginn shifts on the hitching ring outside, his eye tracking the watershed road south.\n\nYou set the pace toward the mill gate — a walk of perhaps an hour on the road that runs parallel to the creek. The water moves gray and sluggish below the bank, carrying the slate-colored tint it picked up three miles upstream at the reclamation site's closed gate. Pell keeps pace at your shoulder, her ironsense still open, still reaching ahead. The morning is cold enough that your breath marks the air.\n\nThe mill gate rises gradually from the road: a timber structure, old and pragmatic, with a chain-and-weight system for holding the water back. The keeper's lodge sits beside it — a single-room cottage with a chimney that is not smoking. But the gate itself reads immediately, even from fifty paces away. Under Order-Sense, it is unmistakable: the same geometry as the wayhouse, the same nested lattice of purpose, older still, and oriented the way a proper hub-post should be — gathering roads, routes, the watershed's spine running through it. It is the oldest point in the Crossing's layout, the one everything else was built around.\n\nPell's hand goes flat against the gate's wooden frame before you reach it. She stands there a long breath, then nods. 'Mill gate,' she confirms, and her voice carries the weight of a name being seated properly into place."
+      },
+      {
+        "player": "Read the gate's full load with Order-Sense while Pell holds ironsense — see what it is actually channeling",
+        "summary": "At the mill gate, Order-Sense and ironsense confirm it as an *active* relay hub — not dormant like the wayhouse, but presently channeling signal in multiple directions. The third node awaits to the north.",
+        "narration": "You settle Order-Sense into the mill gate's geometry with the restraint of someone checking a door they've already walked through a hundred times. No push, no reaching — just opening the pattern to what it already is.\n\nThe gate answers plainly. It is not a relay node in the way the wayhouse was — not dormant and waiting. This is *active*, presently channeling. The chain-and-weight system above is mechanical, pragmatic, built to hold water back at need. But beneath that surface, the order-sense reads a secondary structure: a speaking-tube, a conduit. The gate itself is a *node*, yes — but more than that, it is a *hub*. Lines run through it. Water flows south through the open channel below the lodge. But *signal* — if you can call the faint lattice-hum a signal — runs north, south, and inward, branched like a tree's roots.\n\nPell's hand stays flat against the timber frame beside you. \"Active,\" she says quietly. \"Carrying load.\" She's reading the *weight* of it through iron — the resonance of something working, not resting. \"This one's not dormant like the wayhouse.\"\n\nHuginn shifts on the lodge roof, his eye tracking the watershed road that runs north from here — the direction the ridge lies, where the third node should be waiting. The keeper's cottage sits closed behind you, smoke not rising from the chimney despite the morning's chill. Whatever the keeper is holding silent about, they're holding it inside."
       }
     ],
     "lastTurn": {
-      "narration": "The midrow wayhouse holds its silence as you step back into the morning. Pell draws her fingers from the stone without ceremony — 'same read,' she says, which means the node is real and dormant, exactly as Order-Sense showed it. Huginn shifts on the hitching ring outside, his eye tracking the watershed road south.\n\nYou set the pace toward the mill gate — a walk of perhaps an hour on the road that runs parallel to the creek. The water moves gray and sluggish below the bank, carrying the slate-colored tint it picked up three miles upstream at the reclamation site's closed gate. Pell keeps pace at your shoulder, her ironsense still open, still reaching ahead. The morning is cold enough that your breath marks the air.\n\nThe mill gate rises gradually from the road: a timber structure, old and pragmatic, with a chain-and-weight system for holding the water back. The keeper's lodge sits beside it — a single-room cottage with a chimney that is not smoking. But the gate itself reads immediately, even from fifty paces away. Under Order-Sense, it is unmistakable: the same geometry as the wayhouse, the same nested lattice of purpose, older still, and oriented the way a proper hub-post should be — gathering roads, routes, the watershed's spine running through it. It is the oldest point in the Crossing's layout, the one everything else was built around.\n\nPell's hand goes flat against the gate's wooden frame before you reach it. She stands there a long breath, then nods. 'Mill gate,' she confirms, and her voice carries the weight of a name being seated properly into place.",
-      "sceneSummary": "The party walks from the midrow wayhouse to the mill gate — Order-Sense and ironsense both confirm it as an active relay node, the second point in the network's southern chain. The wayhouse and mill gate form a line; the third node waits to the north.",
+      "narration": "You settle Order-Sense into the mill gate's geometry with the restraint of someone checking a door they've already walked through a hundred times. No push, no reaching — just opening the pattern to what it already is.\n\nThe gate answers plainly. It is not a relay node in the way the wayhouse was — not dormant and waiting. This is *active*, presently channeling. The chain-and-weight system above is mechanical, pragmatic, built to hold water back at need. But beneath that surface, the order-sense reads a secondary structure: a speaking-tube, a conduit. The gate itself is a *node*, yes — but more than that, it is a *hub*. Lines run through it. Water flows south through the open channel below the lodge. But *signal* — if you can call the faint lattice-hum a signal — runs north, south, and inward, branched like a tree's roots.\n\nPell's hand stays flat against the timber frame beside you. \"Active,\" she says quietly. \"Carrying load.\" She's reading the *weight* of it through iron — the resonance of something working, not resting. \"This one's not dormant like the wayhouse.\"\n\nHuginn shifts on the lodge roof, his eye tracking the watershed road that runs north from here — the direction the ridge lies, where the third node should be waiting. The keeper's cottage sits closed behind you, smoke not rising from the chimney despite the morning's chill. Whatever the keeper is holding silent about, they're holding it inside.",
+      "sceneSummary": "At the mill gate, Order-Sense and ironsense confirm it as an *active* relay hub — not dormant like the wayhouse, but presently channeling signal in multiple directions. The third node awaits to the north.",
       "choices": [
         {
-          "label": "Approach the keeper's lodge and ask plainly what the gate is watching for",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read the gate's full load with Order-Sense while Pell holds ironsense — see what it is actually channeling",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Head north now — you have marked the chain (wayhouse, mill gate); find the ridge point and complete the pattern before the day advances",
+          "label": "Head north to find the ridge node — complete the pattern while the chain is plain",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
             "travel",
@@ -2085,24 +2056,55 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Wait at the gate for the keeper to emerge — see what they know about the morning's readings or the water's state",
+          "label": "Knock on the keeper's lodge door — ask plainly what the water's doing and why they're not reading it",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "presence",
           "axes": {},
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "wait",
-            "careful"
+            "confront"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use The Attended End on the keeper's silence itself — read what ending it's carrying",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "read"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Veth what a warden would do here — the post is old, the keeper is close, and she's walked this ground before",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -2120,117 +2122,94 @@
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "offer": {
-        "thing": "The mill gate keeper's lodge — occupied but not open — a door closed, no smoke, someone inside who is living with the readings but not broadcasting them",
-        "from": "The established fact that the mill-gate keeper held back their worst numbers from the official record; the fiction reaching for what that silence means in a person's morning"
-      },
+      "adoptSchool": null,
+      "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The mill gate structure — timber, old, pragmatic, chain-and-weight system for holding water back. The keeper's lodge beside it, single-room cottage, chimney not smoking. Early spring morning, gray creek below running slow, the watershed road running north and south.",
+        "setting": "The mill gate structure — timber, old, pragmatic, chain-and-weight system holding the water back. Gray creek running slow below, watershed road running north and south. The keeper's lodge — single-room cottage, door closed, chimney not smoking. Early spring midday, overcast, cold air.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Hand flat against the gate's wooden frame, ironsense open and reading the node's weight. Confirming the location with the name 'mill gate' seated into it."
+            "state": "Hand flat against the gate's timber frame, ironsense open, reading the gate's active load — steady and present"
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Standing at the gate's edge, taking in the structure and the keeper's lodge with the quiet assessment of someone reading a post."
+            "state": "Standing at the gate's edge, assessing the keeper's lodge and the closed door with a warden's eye — waiting to see what Silas does"
           },
           {
             "name": "Huginn",
-            "state": "Perched somewhere above — likely on the cottage roof or the gate's frame — watching the road in both directions."
+            "state": "Perched on the keeper's lodge roof, eye tracking the watershed road north toward the ridge"
           }
         ],
         "objects": [
           "Timber mill gate with chain-and-weight system",
-          "Keeper's lodge — single-room cottage, closed door, no smoke from chimney",
-          "Hitching post and rope for animals",
-          "The gray creek, slow-moving below the bank"
+          "Keeper's lodge — single-room cottage, closed door, no smoke",
+          "Hitching post and rope",
+          "Gray creek below the bank",
+          "Watershed road, running north and south"
         ],
         "threads": [
-          "The keeper's lodge is closed but occupied — what are they holding silent about the morning's water?",
-          "The ridge point remains unnamed — one node north, completing the pattern.",
-          "The relay network's full shape is still incomplete — three points confirmed (wayhouse, mill gate, and something high on the ridge), but the connections are not yet fully read."
+          "The keeper's lodge is closed but occupied — what are they holding silent about?",
+          "The gate is *active*, not dormant — signal running through it in multiple directions, not resting.",
+          "The ridge point remains to the north — completing the relay network's geometry.",
+          "Why is the keeper's silence being held *here*, at an active hub?"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
+          "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
           "role": "Village blacksmith, traveling companion",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Read the mill gate as an active relay node through ironsense contact — confirmed its weight and named it properly into place. Stands ready to move north or stay as needed.",
+          "note": "Reading the mill gate's weight through ironsense contact — confirmed it as active, not dormant, presently carrying load. Quiet assessment.",
           "learned": [
-            "The mill gate's ironsense signature is active and dormant — a relay node held in waiting",
-            "The mill gate is the oldest point in the Crossing's layout — everything else was built around it"
+            "The mill gate carries active load — it is speaking, not resting, and Pell can read the weight of it through iron contact"
           ],
-          "skillsObserved": [
-            "Ironsense confirmation of a dormant relay node from direct contact with the gate structure"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the mill gate, ironsense open, ready to move or wait as the scene develops"
+          "statusNote": "At the mill gate with hand on the frame, ironsense open, reading the gate's load"
         },
         {
           "op": "update",
-          "npcId": "veth",
+          "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
           "role": "Former Ashwarden warden, traveling companion",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "At the mill gate, reading the structure with a warden's eye — assessing the post and its placement. Quiet, present, waiting on Silas's next move.",
-          "learned": [
-            "The mill gate is a critical point in the relay network — both a node and a hub for the watershed's spine"
-          ],
-          "skillsObserved": [
-            "Reading a structure for its purpose and place in a system without having to be told"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the mill gate, assessment mode, present and waiting"
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Ashwarden-touched carrion bird, companion",
-          "gender": "nonbinary",
-          "pronouns": "they/them",
-          "note": "Perched above, watching both directions of the road. No alarm, no reading — the gate holds. The morning is as it should be.",
+          "note": "At the mill gate, assessing the keeper's lodge and the structure with a warden's eye. Her readiness suggests she sees something the gate holds.",
           "learned": [],
           "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Above the gate structure, watch-post taken, roads surveyed north and south"
+          "statusNote": "At the mill gate, assessing the keeper's lodge and closed door with warden's discipline — waiting on Silas"
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The mill gate is confirmed as a relay network node — dormant but geometrically placed and connected south to the Sheaf and Bowl stall node and north toward the ridge point. It gathers the watershed's spine routes and stands as the oldest point in the Crossing's layout.",
-          "flag": {},
-          "subPlace": {
-            "name": "Mill Gate",
-            "parent": "the_crossing",
-            "note": "A timber structure, old and pragmatic, with chain-and-weight system for holding water back. A relay node nested in its geometry. The keeper's lodge sits beside it — single-room cottage, closed, no smoke.",
-            "visited": true
+          "note": "The mill gate is confirmed as an *active* relay hub — not dormant like the wayhouse, but presently channeling signal north, south, and inward in a branched pattern. The keeper's lodge sits beside it, closed and occupied.",
+          "flag": {
+            "node_active": true,
+            "keeper_silent": true
           }
         }
       ],
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-relay-network",
-          "label": "The Relay Network",
-          "kind": "lore",
-          "entityId": null,
-          "fact": "The relay network follows the oldest roads and foot-traffic routes, not new ones. Three confirmed nodes form a chain: the Sheaf and Bowl stall (south), the mill gate (center), and a high point on the ridge (north). The mill gate is the oldest point in the Crossing's layout — everything else was built around it. The network gathers the watershed's spine and channels something through it.",
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "event",
+          "entityId": "millbrook",
+          "fact": "The mill gate is an active relay hub — not a dormant node like the wayhouse, but presently channeling signal north, south, and inward through a branched network. The keeper's lodge beside it remains closed and occupied, holding silence about the water.",
           "links": [
-            "the_crossing",
-            "millbrook",
-            "the-water-crisis"
+            "the-water-crisis",
+            "what-the-water-remembers",
+            "the-second-thread",
+            "the-crossing"
           ]
         }
       ],
@@ -2241,14 +2220,8 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 1,
-        "why": "The walk from the midrow wayhouse to the mill gate — roughly an hour on the road parallel to the creek."
-      },
-      "moveTo": {
-        "location": "the_crossing",
-        "why": "The party walks south from the wayhouse along the watershed road to the mill gate, which stands within the Crossing settlement's bounds."
-      },
+      "timeOps": {},
+      "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
@@ -2264,39 +2237,41 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The mill gate structure — timber, old, pragmatic, chain-and-weight system for holding water back. The keeper's lodge beside it, single-room cottage, chimney not smoking. Early spring morning, gray creek below running slow, the watershed road running north and south.",
+      "setting": "The mill gate structure — timber, old, pragmatic, chain-and-weight system holding the water back. Gray creek running slow below, watershed road running north and south. The keeper's lodge — single-room cottage, door closed, chimney not smoking. Early spring midday, overcast, cold air.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Hand flat against the gate's wooden frame, ironsense open and reading the node's weight. Confirming the location with th"
+          "state": "Hand flat against the gate's timber frame, ironsense open, reading the gate's active load — steady and present"
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Standing at the gate's edge, taking in the structure and the keeper's lodge with the quiet assessment of someone reading"
+          "state": "Standing at the gate's edge, assessing the keeper's lodge and the closed door with a warden's eye — waiting to see what "
         },
         {
           "name": "Huginn",
-          "state": "Perched somewhere above — likely on the cottage roof or the gate's frame — watching the road in both directions."
+          "state": "Perched on the keeper's lodge roof, eye tracking the watershed road north toward the ridge"
         }
       ],
       "objects": [
         "Timber mill gate with chain-and-weight system",
-        "Keeper's lodge — single-room cottage, closed door, no smoke from chimney",
-        "Hitching post and rope for animals",
-        "The gray creek, slow-moving below the bank"
+        "Keeper's lodge — single-room cottage, closed door, no smoke",
+        "Hitching post and rope",
+        "Gray creek below the bank",
+        "Watershed road, running north and south"
       ],
       "threads": [
-        "The keeper's lodge is closed but occupied — what are they holding silent about the morning's water?",
-        "The ridge point remains unnamed — one node north, completing the pattern.",
-        "The relay network's full shape is still incomplete — three points confirmed (wayhouse, mill gate, and something high on the ridge), but the connections are not "
+        "The keeper's lodge is closed but occupied — what are they holding silent about?",
+        "The gate is *active*, not dormant — signal running through it in multiple directions, not resting.",
+        "The ridge point remains to the north — completing the relay network's geometry.",
+        "Why is the keeper's silence being held *here*, at an active hub?"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
     "day": 14,
-    "hour": 12,
+    "hour": 13,
     "realAnchor": null
   },
   "companions": [
@@ -3721,7 +3696,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Read the message at Silas's shoulder and named the implication plainly — a Blazeborn doesn't come to the Zone by accident.",
         "[d14] Received the shadow-sheet from Silas with instructions to write Mara and begin the flow of workers and materials for a warden post.",
         "[d14] Fell into step at Silas's left shoulder for the walk to the gate. No words needed.",
         "[d14] Has Memory in both hands and is reading the warpling's stutter-pattern through ironsense — steady, not waiting to be told.",
@@ -3730,17 +3704,18 @@
         "[d14] Watched the Boundary-Stone ward seat into the well cap and named it clean without ceremony.",
         "[d14] Confirmed the midrow wayhouse as a likely node through ironsense from the well cap — old signal, not strong.",
         "[d14] Confirmed the wayhouse node through ironsense from inside the room — 'same read,' unprompted.",
-        "[d14] Read the mill gate as an active relay node through ironsense contact — confirmed its weight and named it properly into place. Stands ready to move north or stay as needed."
+        "[d14] Read the mill gate as an active relay node through ironsense contact — confirmed its weight and named it properly into place. Stands ready to move north or stay as needed.",
+        "[d14] Reading the mill gate's weight through ironsense contact — confirmed it as active, not dormant, presently carrying load. Quiet assessment."
       ],
       "knownFacts": [
-        "The fold reads as old and solid through ironsense — not resisting the wright's contact.",
         "The made gate holds at every angle with no seam between the original intention and Silas's close — named by ironsense as solid.",
         "The burn-mark at the reclamation bowl's northwest edge is bright-heat, not forge-heat — recent enough to sit in the frost layer, not beneath it.",
         "A Blazeborn traveler of middle years was logged at the main Hub gate four days ago, destination the Left Branch. He has not returned.",
         "The midrow wayhouse carries an ironsense trace — old and quiet, but present",
         "The midrow wayhouse node reads dormant and old through ironsense — consistent with Order-Sense findings.",
         "The mill gate's ironsense signature is active and dormant — a relay node held in waiting",
-        "The mill gate is the oldest point in the Crossing's layout — everything else was built around it"
+        "The mill gate is the oldest point in the Crossing's layout — everything else was built around it",
+        "The mill gate carries active load — it is speaking, not resting, and Pell can read the weight of it through iron contact"
       ],
       "skillsObserved": [
         "ironsense read of the fold's quality through contact-point —",
@@ -3751,7 +3726,7 @@
         "Ironsense confirmation of a dormant relay node from direct c"
       ],
       "status": "active",
-      "statusNote": "At the mill gate, ironsense open, ready to move or wait as the scene develops",
+      "statusNote": "At the mill gate with hand on the frame, ironsense open, reading the gate's load",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -3770,7 +3745,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 1
+      "met": 2
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -4432,7 +4407,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Named the node's silence plainly — the upstream pressure is gone, Logana is just holding the ground now.",
         "[d14] Named quietly, unprompted, that the node beneath the stall is not the only one — has knowledge of the relay network's scope that she has not yet spoken aloud",
         "[d14] Stepped closer as The Working Model completed — said 'You have the count.' plainly, confirming she already knows the number.",
         "[d14] Named the limits of what was done plainly — the instruction given, the holding uncertain. Teaching through observation, not intervention.",
@@ -4441,7 +4415,8 @@
         "[d14] Read the completed ward's weight without ceremony — attention without comment.",
         "[d14] Named three probable node locations from the relay network's pattern — midrow wayhouse, mill gate, and a high point on the ridge above town. Reasoning from oldest roads and speaking-distance south and east.",
         "[d14] Present at the wayhouse — standing near the doorway as the node is read.",
-        "[d14] At the mill gate, reading the structure with a warden's eye — assessing the post and its placement. Quiet, present, waiting on Silas's next move."
+        "[d14] At the mill gate, reading the structure with a warden's eye — assessing the post and its placement. Quiet, present, waiting on Silas's next move.",
+        "[d14] At the mill gate, assessing the keeper's lodge and the structure with a warden's eye. Her readiness suggests she sees something the gate holds."
       ],
       "knownFacts": [
         "Silas's Working Model read produced a spoke-and-hub picture: five to seven nodes, old foundations, 15-year interval",
@@ -4464,7 +4439,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the mill gate, assessment mode, present and waiting",
+      "statusNote": "At the mill gate, assessing the keeper's lodge and closed door with warden's discipline — waiting on Silas",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -4480,7 +4455,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "role",
-      "met": 1
+      "met": 2
     },
     "cassiel-ord": {
       "id": "cassiel-ord",
@@ -5613,13 +5588,16 @@
         "[d14] East-side draw-well confirmed as a relay network node — upstream of the Sheaf and Bowl stall spoke, channel open and oriented south-by-southwest toward the left-branch hollow.",
         "[d14] A Boundary-Stone ward is now seated at the east-side draw-well's cap — the open channel is warded against uninvited passage; the mark is in the stone.",
         "[d14] East-side draw-well is now sealed with a Boundary-Stone ward at the cap — the mark is seated into the stone. The open relay-node channel beneath is warded against uninvited passage, though the channel remains oriented south-by-southwest toward the left-branch hollow.",
-        "[d14] The mill gate is confirmed as a relay network node — dormant but geometrically placed and connected south to the Sheaf and Bowl stall node and north toward the ridge point. It gathers the watershed's spine routes and stands as the oldest point in the Crossing's layout."
+        "[d14] The mill gate is confirmed as a relay network node — dormant but geometrically placed and connected south to the Sheaf and Bowl stall node and north toward the ridge point. It gathers the watershed's spine routes and stands as the oldest point in the Crossing's layout.",
+        "[d14] The mill gate is confirmed as an *active* relay hub — not dormant like the wayhouse, but presently channeling signal north, south, and inward in a branched pattern. The keeper's lodge sits beside it, closed and occupied."
       ],
       "flags": {
         "waymarker_seated": "stillwaters-trouble",
         "east_well_warded": true,
         "node_warded": true,
-        "channel_open": true
+        "channel_open": true,
+        "node_active": true,
+        "keeper_silent": true
       },
       "lastVisit": 14,
       "vectorsKnown": [],
@@ -6006,7 +5984,7 @@
     "lastTickWorldDay": 41,
     "lastCanonWorldDay": 41,
     "lastGenCount": 999,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Huginn and Logana both angled northwest at the same moment — independently, without prompt, toward the same tree line the radiant…",
@@ -10755,7 +10733,6 @@
         "label": "Millbrook",
         "kind": "event",
         "facts": [
-          "[d1] Post-kill: bull track, scattered piglets, and Huginn's northward orientation all converge on the same corridor in the north wood — three independent signals pointing the same direction.",
           "[d1] Order-Sense read on World-day 14 pre-dawn: bull moved northwest overnight — unhurried, skirting river smell, favoring dry scrub. Destination confirmed as scrub oak ridge a quarter-mile north. Three in",
           "[d1] Bull boar taken on the scrub oak ridge, World-day 14 morning. Palework channel through the Deathbound Runic Spear's runes seized at the kill moment — energy reflected back rather than passing through.",
           "[d1] On the scrub oak ridge in full morning light, the death-register in the blade went flat — full sun washed the shadow-anchors and the moment after a kill will not hold what the moment of a kill holds. ",
@@ -10778,17 +10755,18 @@
           "[d4] you have walked here",
           "[d13] Mara Wells wrote out the four-stage filtration cascade from Crane's spoken account, corrected two numbers, and confirmed materials can be staged within two days. Crane will direct the build. The construction thread is now live and in Mara's hands.",
           "[d13] The Crossing mill-gate keeper's last four days of readings have been worse, not better — and he chose not to write it down. The rate is accelerating and the keeper knows it.",
-          "[d14] A Boundary-Stone ward now seats at the south threshold — a marked staging point on the road to the Disputed Zone, warded against weather, animals, and casual intrusion."
+          "[d14] A Boundary-Stone ward now seats at the south threshold — a marked staging point on the road to the Disputed Zone, warded against weather, animals, and casual intrusion.",
+          "[d14] The mill gate is an active relay hub — not a dormant node like the wayhouse, but presently channeling signal north, south, and inward through a branched network. The keeper's lodge beside it remains closed and occupied, holding silence about the water."
         ],
         "links": [
-          "aldric",
           "dara-holt",
           "mara-wells",
           "edvar-crane",
           "the-water-crisis",
           "find-the-engineer",
           "what-the-water-remembers",
-          "the-second-thread"
+          "the-second-thread",
+          "the-crossing"
         ],
         "aliases": [
           "Millbrook Smokehouse — Structure",
@@ -12141,22 +12119,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.646619984868703,
-    "cerebral": 22.341687508806253,
-    "social": 7.881553452770148,
-    "generous": 3.210171713111828,
-    "cautious": 11.045961137682495,
-    "physical": 1.0593657812186636,
-    "risky": 0.25409224598017616,
-    "ruthless": 0.5530524989355023,
-    "carousing": 0.08991941528744955,
-    "amorous": 0.3305432974130796,
-    "patient": 0.20029927645820342,
-    "stealth": 0.000019328687948088536,
-    "devotion": 0.7898340059281688,
-    "craft": 0.6859319024145347,
-    "leadership": 0.29826700351093377,
-    "deception": 0.09256224419748574
+    "strategic": 18.180454485246987,
+    "cerebral": 22.783145321086096,
+    "social": 7.684514616450894,
+    "generous": 3.1299174202840323,
+    "cautious": 11.769812109240432,
+    "physical": 1.032881636688197,
+    "risky": 0.24773993983067175,
+    "ruthless": 0.5392261864621147,
+    "carousing": 0.08767142990526332,
+    "amorous": 0.3222797149777526,
+    "patient": 0.19529179454674833,
+    "stealth": 0.00001884547074938632,
+    "devotion": 0.7700881557799645,
+    "craft": 0.6687836048541713,
+    "leadership": 0.2908103284231604,
+    "deception": 0.09024818809254859
   },
   "aptitudes": [
     "strategist",
@@ -12165,7 +12143,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 916,
+  "actionCount": 917,
   "grantsVersion": 1,
   "reconcileVersion": 30,
   "gallery": [
@@ -12587,8 +12565,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786377754581,
-  "rev": 1644,
+  "updatedAt": 1786377856076,
+  "rev": 1645,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15741,7 +15719,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 97,
+      "order_sense": 98,
       "palework": 31,
       "deathsense": 45,
       "shadowstep": 25,
@@ -15835,7 +15813,7 @@
     "lastUsed": {
       "deathsense": 28,
       "the-attended-end": 28,
-      "order_sense": 36,
+      "order_sense": 41,
       "boundary_stone": 28,
       "palework": 25,
       "the_shadow_work": 25,
@@ -16512,7 +16490,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 122
+    "the_center": 123
   },
   "foreclosed": [
     "rootkin",
@@ -16738,10 +16716,10 @@
     {
       "id": "sess-23",
       "startedAt": "2026-08-10T16:02:34.576Z",
-      "lastAt": "2026-08-10T16:02:34.576Z",
+      "lastAt": "2026-08-10T16:04:16.074Z",
       "startDay": 41,
       "endDay": 41,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -17090,17 +17068,17 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 288,
-    "choices": 287,
-    "characterDeltas": 125,
-    "scene": 288,
-    "npcUpdates": 257,
+    "sceneSummary": 289,
+    "choices": 288,
+    "characterDeltas": 126,
+    "scene": 289,
+    "npcUpdates": 258,
     "factUpdates": 23,
-    "placeUpdates": 56,
-    "codexUpdates": 182,
+    "placeUpdates": 57,
+    "codexUpdates": 183,
     "timeOps": 279,
     "imagePrompt": 7,
-    "sceneEnded": 68,
+    "sceneEnded": 69,
     "itemUpdates": 6,
     "questUpdates": 41,
     "offer": 29,
@@ -17117,9 +17095,9 @@
     "_applyFailedOp": 7,
     "newEncounter": 1,
     "encounterOps": 1,
-    "gambitApt": 2
+    "gambitApt": 3
   },
-  "_opTurns": 288,
+  "_opTurns": 289,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -17418,7 +17396,8 @@
   "holdings": [],
   "skillUses": {
     "travel": 1,
-    "careful": 1
+    "careful": 2,
+    "study": 1
   },
   "aptitudeEarnCount": {}
 }

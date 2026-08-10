@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 29,
-  "xp": 2880,
+  "xp": 2883,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -218,7 +218,7 @@
   "maxHealth": 186,
   "health": 186,
   "maxEnergy": 277,
-  "energy": 219,
+  "energy": 215,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2122,326 +2122,160 @@
         "player": "Use the newly mastered The Raised Thing to tap into the iron below the warden post and construct a working mine.",
         "summary": "At the ridge relay node, Silas raises a working mine from the iron beneath the Threshold Post—imperfect but functional, a new resource discovered under the warden post's ground. The lodge skeleton stands complete; the network is ready; Fendt arrives to find the sentinel point fully established.",
         "narration": "You kneel at the lodge's eastern face where the stone runs deepest, your hand flat against the timber framing. The iron is there — you can feel it in the earth's weight, a line running north-south beneath the relay node, old as the stone itself. You reach for The Raised Thing the way Veth taught you to reach — not pulling, but *asking* — and something answers.\n\nThe craft wants to BUILD, and it does. The ground settles unevenly as the first shaft opens — not a neat mine-mouth, but a working one, timber bracing rising from your intention like bones finding shape. The iron surface shows itself in the dark below, seamed and ready. For a breath, it is *perfect* — the kind of making that carries itself, that will outlast you without apology.\n\nThen it snags. The shaft wall fractures three feet down, a minor slip in the stone-reading, and the bracing catches *wrong*. Not collapsed — the craft holds the frame — but compromised. It will work. It will hold Fendt's crew if they are careful, if they understand the weakness and brace it properly. It is not the flawless thing your full skill could have made. It is a *useful* mine in a *imperfect* shape, and that is enough.\n\nVeth's hand comes to your shoulder as the earth settles. She does not speak — wardens do not waste words on near-misses — but her grip acknowledges what you just did: you reached into the earth itself and *made* something that will serve a purpose longer than any of you will stand here.\n\n*✦ The Wrights of the New: +0.99 — raised a working structure that will outlast its maker — the wright's own measure (held at the band's edge).*"
+      },
+      {
+        "player": "Walk the mine's shaft with Veth and mark where the bracing needs reinforcement before Fendt's crew arrives.",
+        "summary": "At the ridge, Silas and Veth walk the mine-shaft to assess the bracing—finding one critical stress point needing reinforcement and a second, slower fault that will need monitoring. The work is marked plainly; Fendt will arrive to find both the resources and their honest limits.",
+        "narration": "You take a lamp from Pell's pack and descend into the mine-shaft with Veth at your shoulder, the timber bracing creaking under its own weight as you move deeper. The iron seam catches the lamplight in streaks—beautiful and load-bearing, but your craft-sense reads the fracture at three feet exactly as Veth's warden's hand finds it: a hairline stress where the shaft settled unevenly when it rose. The timber brace at that point is sound but positioned wrong—it's holding the weight, but not *well*.\n\nVeth traces the line with one finger, not speaking. You mark it clearly in chalk on the timber itself: a single careful X with a notation beside it—'reinforce here, north-south load.' The mark will hold. Fendt will see it. But as you turn to climb back out, your lamp catches something else: a second, smaller fracture running perpendicular to the first, deeper in the shaft where the shadows pool. It's not urgent—not yet—but it *will* be in six months, maybe less if the spring melt brings water pressure. Veth sees your hesitation and reads it plainly.\n\n'Mark what you know,' she says, and you do—a second, lighter chalk mark: 'monitor.' It's enough. It's not perfect, but it's *honest*. The mine is functional and it is flawed, and now it is *known*."
       }
     ],
     "lastTurn": {
-      "narration": "You kneel at the lodge's eastern face where the stone runs deepest, your hand flat against the timber framing. The iron is there — you can feel it in the earth's weight, a line running north-south beneath the relay node, old as the stone itself. You reach for The Raised Thing the way Veth taught you to reach — not pulling, but *asking* — and something answers.\n\nThe craft wants to BUILD, and it does. The ground settles unevenly as the first shaft opens — not a neat mine-mouth, but a working one, timber bracing rising from your intention like bones finding shape. The iron surface shows itself in the dark below, seamed and ready. For a breath, it is *perfect* — the kind of making that carries itself, that will outlast you without apology.\n\nThen it snags. The shaft wall fractures three feet down, a minor slip in the stone-reading, and the bracing catches *wrong*. Not collapsed — the craft holds the frame — but compromised. It will work. It will hold Fendt's crew if they are careful, if they understand the weakness and brace it properly. It is not the flawless thing your full skill could have made. It is a *useful* mine in a *imperfect* shape, and that is enough.\n\nVeth's hand comes to your shoulder as the earth settles. She does not speak — wardens do not waste words on near-misses — but her grip acknowledges what you just did: you reached into the earth itself and *made* something that will serve a purpose longer than any of you will stand here.\n\n*✦ The Wrights of the New: +0.99 — raised a working structure that will outlast its maker — the wright's own measure (held at the band's edge).*",
-      "sceneSummary": "At the ridge relay node, Silas raises a working mine from the iron beneath the Threshold Post—imperfect but functional, a new resource discovered under the warden post's ground. The lodge skeleton stands complete; the network is ready; Fendt arrives to find the sentinel point fully established.",
+      "narration": "You take a lamp from Pell's pack and descend into the mine-shaft with Veth at your shoulder, the timber bracing creaking under its own weight as you move deeper. The iron seam catches the lamplight in streaks—beautiful and load-bearing, but your craft-sense reads the fracture at three feet exactly as Veth's warden's hand finds it: a hairline stress where the shaft settled unevenly when it rose. The timber brace at that point is sound but positioned wrong—it's holding the weight, but not *well*.\n\nVeth traces the line with one finger, not speaking. You mark it clearly in chalk on the timber itself: a single careful X with a notation beside it—'reinforce here, north-south load.' The mark will hold. Fendt will see it. But as you turn to climb back out, your lamp catches something else: a second, smaller fracture running perpendicular to the first, deeper in the shaft where the shadows pool. It's not urgent—not yet—but it *will* be in six months, maybe less if the spring melt brings water pressure. Veth sees your hesitation and reads it plainly.\n\n'Mark what you know,' she says, and you do—a second, lighter chalk mark: 'monitor.' It's enough. It's not perfect, but it's *honest*. The mine is functional and it is flawed, and now it is *known*.",
+      "sceneSummary": "At the ridge, Silas and Veth walk the mine-shaft to assess the bracing—finding one critical stress point needing reinforcement and a second, slower fault that will need monitoring. The work is marked plainly; Fendt will arrive to find both the resources and their honest limits.",
       "choices": [
         {
-          "label": "Check the mine's structural integrity with Pell's ironsense—she can read what iron can carry and what will fail.",
+          "label": "Climb back out and tell Pell and Huginn the post is ready to hand over to Fendt",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "lead"
+          ],
+          "abilityId": null,
+          "energyCost": null
+        },
+        {
+          "label": "Ask Veth if the marked faults trouble her—if a warden would feel safe holding this post with these limits",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
-          "opposedDifficulty": null,
+          "trivial": false,
           "intentTags": [
-            "study"
+            "ask"
           ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "energyCost": null
         },
         {
-          "label": "Walk the mine's shaft with Veth and mark where the bracing needs reinforcement before Fendt's crew arrives.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Use Order-Sense to read the mine's full structural integrity—see how deep the stress runs and whether it will hold for years or only months",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "craft"
-          ],
-          "abilityId": "the_working_model",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Write a shadow-message to Mara Wells—Fendt will need miners or at least crew who can work in confined spaces. The mine is ready but demands care.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step back and take in what you've built—the lodge, the warded threshold, the relay node, and now the mine. Ask Huginn what it reads in the ridge's ending.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
           "intentTags": [
             "study"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [
+          "abilityId": "order_sense",
+          "energyCost": 2
+        },
         {
-          "description": "Raised a working mine from living iron beneath the Threshold Post—an imperfect making that will serve generations, built to ask rather than demand.",
-          "tags": [
-            "craft",
-            "mastery",
-            "making"
+          "label": "Propose to the Mason—who offered labor at dusk—that they spend the morning reinforcing the north-south bracing before climbing out of the Zone",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "normal",
+          "intentTags": [
+            "negotiate"
           ],
-          "weight": 2,
-          "communityId": "valley.threshold-post"
+          "abilityId": null,
+          "energyCost": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -8,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -2
       },
       "ledgerEvents": [],
       "questUpdates": [],
-      "standingOps": [
-        {
-          "people": "wright",
-          "delta": 1,
-          "why": "raised a working structure that will outlast its maker — the wright's own measure"
-        }
-      ],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "A Mason appears at the lodge's edge as the mine-work settles—hand already on a timber, reading its faults plainly, offering a day's labor to shore the bracing before Fendt arrives.",
-        "from": "The ridge's own work calling those who know how to tend it — or the world answering the making with its own hands."
-      },
-      "stageOps": [],
+      "standingOps": [],
       "scene": {
-        "setting": "The ridge's high moorland at dusk—evening light sliding toward darkness, the ancient standing-stone behind, sight-lines running clear south to the mill gate, east across the valley bowl, west toward the Pale March. The lodge skeleton stands at the sight-line threshold—four timber walls, roof-joists bare, doorway open. A fresh mine-mouth now opens at the lodge's eastern face, braced and working but marked by a fracture three feet down. The spring-fed draw runs to the northeast, reliable and close.",
+        "setting": "Deep in the mine-shaft beneath the Threshold Post lodge—lamplight catching the iron seam, timber bracing visible overhead, two chalk marks now visible on the northern support: one urgent (X), one monitoring (lighter). The stone is cool and the air is still. Above, the lodge skeleton frames a patch of evening sky.",
         "npcsPresent": [
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Hand on Silas's shoulder, acknowledging the near-miss mine-work with a warden's silence. Reading the ridge's geometry with her whole attention."
-          },
-          {
-            "name": "Pell Ran Marsh",
-            "state": "Standing at the lodge's threshold, ironsense half-open to the relay node beneath—confirming the frame's weight-distribution through contact with the timber frame."
-          },
-          {
-            "name": "Huginn",
-            "state": "Perched on the standing-stone, settled and attending—the work witnessed, the post acknowledged, the evening's business held in its attention."
-          },
-          {
-            "name": "A Mason",
-            "state": "Approaching from the moorland's edge—hand already on a timber of the lodge frame, reading its faults plainly, stepping into the work without introduction or permission."
+            "state": "Standing beside Silas at the second chalk mark, reading the fault-line with her warden's eye. Silent approval of the honest marking. Hand still at the wood."
           }
         ],
         "objects": [
-          "Ancient standing-stone, weathered smooth, relay node warded beneath",
-          "Lodge skeleton—four timber walls, roof-joists bare, doorway open",
-          "Mine-mouth at lodge's eastern face—braced, functional, marked by internal fracture at three feet depth",
-          "Spring-fed draw to the northeast",
-          "Moorland grass, sparse and hardy",
-          "Shadow-tablet, cooling in pack"
+          "Lamp (lit, casting shadows)",
+          "Iron seam (visible, load-bearing)",
+          "Timber bracing (sound but stressed at one point)",
+          "Chalk marks (two: one urgent, one monitoring)",
+          "Stone walls of the shaft"
         ],
         "threads": [
-          "A Mason offering labor to shore the mine-bracing before Fendt arrives",
-          "Whether to mark the mine's weakness for Fendt's crew or reinforce it now",
-          "Fendt's arrival with crew and materials—the post ready for finishing",
-          "Whether the network's completion draws unwanted attention"
+          "Whether to reinforce the bracing now or trust Fendt to handle it",
+          "The deeper fault-line and how long it will hold",
+          "The Mason waiting above, offering labor"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "role": "Former Ashwarden warden, teaching companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": null,
-          "note": "At the ridge, witnessed Silas raise a working mine from the iron below—acknowledged the imperfect making with a warden's grip and silence. Reading the ridge geometry with full attention.",
+          "note": "In the mine-shaft, confirmed the primary stress point and witnessed Silas mark both faults plainly—the urgent and the slow. Her silence reads as approval: a warden knows the value of honest marking over false perfection.",
           "learned": [
-            "Silas can ask the earth itself to make, and it answers — the asking carries the craft beyond what force alone could do."
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the ridge sentinel, confirming the post's structural readiness and the making complete."
-        },
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": null,
-          "note": "At the ridge, standing at the lodge threshold with ironsense half-open to the relay node beneath — confirming the frame's weight-distribution and the mine's iron foundation through direct contact with timber and earth.",
-          "learned": [
-            "The lodge frame carries the mine's weight cleanly — Pell's ironsense reading confirms the timber will hold the shaft's pressure."
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the ridge sentinel, reading the post's structural truth through ironsense, confirming the making sound."
-        },
-        {
-          "op": "meet",
-          "npcId": "the-mason",
-          "name": "A Mason",
-          "role": "Traveling laborer, reader of wood and structure",
-          "gender": "nonbinary",
-          "pronouns": "they/them",
-          "description": "A figure in work-worn clothes, moving with the ease of someone who has built many things. Hand-knowledge evident in how they touch timber. Approaches without ceremony or introduction.",
-          "note": "Appeared at the ridge lodge's edge as the mine-work settled—hand already on timber, reading its faults plainly. Offers a day's labor to shore the bracing before Fendt arrives, without asking payment or credentials.",
-          "learned": [
-            "Reads structural weakness in timber the way a craftsperson does",
-            "Offers labor without asking for introduction or standing"
+            "The mine has two fault-lines: one urgent at three feet (north-south load), one slower-developing deeper in the shaft",
+            "Silas marked them both clearly and honestly—named the immediate need and the monitoring need without softening either"
           ],
           "skillsObserved": [
-            "Structural assessment of timber and load-bearing",
-            "Quick practical evaluation of what is needed"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Present at the ridge, offering skilled labor to reinforce the lodge and mine bracing."
+            "Reading stress-fault in timber bracing",
+            "Marking structural faults plainly and completely"
+          ]
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "A working iron mine now opens beneath the Threshold Post—raised by Silas Weir using The Raised Thing at novel depth, braced but marked by a structural fracture at three feet that demands careful reinforcement. The mine is functional but requires knowledge to work safely.",
-          "subjectId": "threshold-post"
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "A working iron mine now opens at the lodge's eastern face—braced, functional, marked by internal fracture at three feet depth. Iron seam runs north-south beneath the relay node.",
-          "flag": {
-            "mine_present": true,
-            "mine_condition": "imperfect_but_functional",
-            "mine_iron_seam": "north_south"
-          },
+          "note": "Mine-shaft beneath Threshold Post now marked with two chalk notations: primary stress point at three feet (north-south load — reinforce before extraction) and secondary slower-developing fault deeper in shaft (monitor — will require attention in 6+ months). Both marks are plain and honest.",
           "subPlace": {
             "name": "The Ridge Mine",
-            "parent": "threshold-post",
-            "note": "Working iron mine beneath the lodge—functional shaft with braced walls, marked by structural weakness at three feet that requires reinforcement before safe extraction.",
+            "parent": "Threshold Post (Ridge Sentinel)",
+            "note": "Working iron mine beneath lodge—functional shaft with braced walls, marked faults identified and clearly noted. Requires reinforcement at primary point before heavy extraction; secondary fault requires monitoring.",
             "visited": true
           }
         }
       ],
       "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "threshold-post",
-          "label": "The Threshold Post",
-          "kind": "place",
-          "entityId": "threshold-post",
-          "fact": "An iron mine now opens beneath the Threshold Post—raised in a single working using The Raised Thing, functional but marked by a structural fracture at three feet depth. The mine will serve the post for generations if properly maintained.",
-          "links": [
-            "fendt",
-            "veth-stillwater-ondra",
-            "pell-ran-marsh"
-          ]
-        },
-        {
-          "topic": "the-raised-thing-craft",
-          "label": "The Raised Thing",
-          "kind": "lore",
-          "fact": "Silas Weir has demonstrated The Raised Thing at mastery depth—raising a working mine from living iron, showing that the craft can ask the earth itself to make, drawing out what already exists in a form that serves. The asking carries more than force alone.",
-          "links": [
-            "silas-weir",
-            "threshold-post",
-            "wright"
-          ]
-        }
-      ],
+      "codexUpdates": [],
       "holdingOps": [],
       "partyOps": [],
       "generateRequest": [],
       "encounterOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 1,
-        "why": "The mine-work took an evening hour—the light is sliding toward dusk"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Dusk light catches the timber frame of the lodge skeleton at the ridge's high point—the mine-mouth open at its eastern face, dark iron showing beneath the earth where Silas raised it whole. Veth's hand grips his shoulder in the fading light. In the middle distance, the spring-fed draw catches the last color of the evening. A figure in work-worn clothes approaches across the moorland, one hand already reaching toward the timber bracing.",
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": {
-        "abilityId": "the_raised_thing",
-        "reasoning": "The Raised Thing was used at its complete, scene-carrying form—raising a working mine from living iron beneath the post, demonstrating the craft's ability to ask the earth itself to make. The work carries consequence, serves a purpose, and will outlast its maker. This is the mastery moment the craft has been building toward."
-      },
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/Dusk%20light%20catches%20the%20timber%20frame%20of%20the%20lodge%20skeleton%20at%20the%20ridge's%20high%20point%E2%80%94the%20mine-mouth%20open%20at%20its%20eastern%20face%2C%20dark%20iron%20showing%20beneath%20the%20earth%20where%20Silas%20raised%20it%20whole.%20Veth's%20hand%20grips%20his%20shoulder%20in%20the%20fading%20light.%20In%20the%20middle%20distance%2C%20the%20spring-fed%20draw%20catches%20the%20la%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=97333&nologo=true"
+      "imagePrompt": "A warden's hand and a wright's hand meeting at chalk-marked timber deep in stone—lamplight catching the iron seam beyond, two marks visible: one urgent X, one slower monitoring line. The moment when honest work names its own limits.",
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The ridge's high moorland at dusk—evening light sliding toward darkness, the ancient standing-stone behind, sight-lines running clear south to the mill gate, east across the valley bowl, west toward the Pale March. The lodge skeleton stands at the sight-line threshold—four timber walls, roof-joists bare, doorway open. A fresh mine-mouth now opens at the lodge's eastern face, braced and working…",
+      "setting": "Deep in the mine-shaft beneath the Threshold Post lodge—lamplight catching the iron seam, timber bracing visible overhead, two chalk marks now visible on the northern support: one urgent (X), one monitoring (lighter). The stone is cool and the air is still. Above, the lodge skeleton frames a patch of evening sky.",
       "npcsPresent": [
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Hand on Silas's shoulder, acknowledging the near-miss mine-work with a warden's silence. Reading the ridge's geometry wi"
-        },
-        {
-          "name": "Pell Ran Marsh",
-          "state": "Standing at the lodge's threshold, ironsense half-open to the relay node beneath—confirming the frame's weight-distribut"
-        },
-        {
-          "name": "Huginn",
-          "state": "Perched on the standing-stone, settled and attending—the work witnessed, the post acknowledged, the evening's business h"
-        },
-        {
-          "name": "A Mason",
-          "state": "Approaching from the moorland's edge—hand already on a timber of the lodge frame, reading its faults plainly, stepping i"
+          "state": "Standing beside Silas at the second chalk mark, reading the fault-line with her warden's eye. Silent approval of the hon"
         }
       ],
       "objects": [
-        "Ancient standing-stone, weathered smooth, relay node warded beneath",
-        "Lodge skeleton—four timber walls, roof-joists bare, doorway open",
-        "Mine-mouth at lodge's eastern face—braced, functional, marked by internal fractu",
-        "Spring-fed draw to the northeast",
-        "Moorland grass, sparse and hardy",
-        "Shadow-tablet, cooling in pack"
+        "Lamp (lit, casting shadows)",
+        "Iron seam (visible, load-bearing)",
+        "Timber bracing (sound but stressed at one point)",
+        "Chalk marks (two: one urgent, one monitoring)",
+        "Stone walls of the shaft"
       ],
       "threads": [
-        "A Mason offering labor to shore the mine-bracing before Fendt arrives",
-        "Whether to mark the mine's weakness for Fendt's crew or reinforce it now",
-        "Fendt's arrival with crew and materials—the post ready for finishing",
-        "Whether the network's completion draws unwanted attention"
+        "Whether to reinforce the bracing now or trust Fendt to handle it",
+        "The deeper fault-line and how long it will hold",
+        "The Mason waiting above, offering labor"
       ]
     },
-    "beats": 11
+    "beats": 12
   },
   "clock": {
     "schemaVersion": 1,
     "day": 14,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -5786,7 +5620,6 @@
     "the_crossing": {
       "visits": 3,
       "notes": [
-        "[d14] A pre-Transition relay node, same construction as the wolverine-clearing node, is seated in the earth beneath the Sheaf and Bowl stall's third board from the gap's left edge — still holding an open channel address after the reclamation site's close",
         "[d14] East-side draw-well confirmed as a relay network node — upstream of the Sheaf and Bowl stall spoke, channel open and oriented south-by-southwest toward the left-branch hollow.",
         "[d14] A Boundary-Stone ward is now seated at the east-side draw-well's cap — the open channel is warded against uninvited passage; the mark is in the stone.",
         "[d14] East-side draw-well is now sealed with a Boundary-Stone ward at the cap — the mark is seated into the stone. The open relay-node channel beneath is warded against uninvited passage, though the channel remains oriented south-by-southwest toward the left-branch hollow.",
@@ -5797,7 +5630,8 @@
         "[d14] Spring-fed draw identified to the northeast—the Threshold Post's water source. Will not run dry in drought.",
         "[d14] Lodge placement identified at the sight-line threshold—the post's warden station. Simple structure, positioned for watch over the watershed south and east.",
         "[d14] Lodge skeleton now stands at the sight-line threshold—four timber walls, roof-joists bare, doorway open. Structure sound and load-bearing, ready for Fendt's crew to finish.",
-        "[d14] A working iron mine now opens at the lodge's eastern face—braced, functional, marked by internal fracture at three feet depth. Iron seam runs north-south beneath the relay node."
+        "[d14] A working iron mine now opens at the lodge's eastern face—braced, functional, marked by internal fracture at three feet depth. Iron seam runs north-south beneath the relay node.",
+        "[d14] Mine-shaft beneath Threshold Post now marked with two chalk notations: primary stress point at three feet (north-south load — reinforce before extraction) and secondary slower-developing fault deeper in shaft (monitor — will require attention in 6+ months). Both marks are plain and honest."
       ],
       "flags": {
         "waymarker_seated": "stillwaters-trouble",
@@ -5896,8 +5730,8 @@
           "parentId": "the_crossing",
           "day": 14,
           "visited": true,
-          "note": "Working iron mine beneath the lodge—functional shaft with braced walls, marked by structural weakness at three feet that requires reinforcement before safe extraction.",
-          "parentUnresolved": "threshold-post"
+          "note": "Working iron mine beneath lodge—functional shaft with braced walls, marked faults identified and clearly noted. Requires reinforcement at primary point before heavy extraction; secondary fault…",
+          "parentUnresolved": "Threshold Post (Ridge Sentinel)"
         }
       }
     },
@@ -6242,7 +6076,7 @@
     "lastTickWorldDay": 41,
     "lastCanonWorldDay": 41,
     "lastGenCount": 1004,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The mill gate keeper's lodge — occupied but not open — a door closed, no smoke, someone inside who is living with the readings but not…",
@@ -12376,22 +12210,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 23.224414014885742,
-    "cerebral": 19.53275609456438,
-    "social": 8.060356305778015,
-    "generous": 2.5560527065888885,
-    "cautious": 9.611838287777127,
-    "physical": 0.843504651571045,
-    "risky": 0.20231726870189826,
-    "ruthless": 0.4403600377562091,
-    "carousing": 0.07159703136178286,
-    "amorous": 0.26319031052034125,
-    "patient": 0.1594853962570419,
-    "stealth": 0.000015390187678350735,
-    "devotion": 0.6288938813966527,
-    "craft": 2.5211633371639084,
-    "leadership": 2.0471840802557795,
-    "deception": 0.07370134558303086
+    "strategic": 22.643803664513598,
+    "cerebral": 20.04443719220027,
+    "social": 7.858847398133564,
+    "generous": 2.4921513889241664,
+    "cautious": 9.371542330582699,
+    "physical": 0.8224170352817689,
+    "risky": 0.1972593369843508,
+    "ruthless": 0.42935103681230385,
+    "carousing": 0.06980710557773828,
+    "amorous": 0.2566105527573327,
+    "patient": 0.15549826135061584,
+    "stealth": 0.000015005432986391966,
+    "devotion": 0.6131715343617363,
+    "craft": 3.4581342537348108,
+    "leadership": 1.9960044782493849,
+    "deception": 0.07185881194345509
   },
   "aptitudes": [
     "strategist",
@@ -12400,7 +12234,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 925,
+  "actionCount": 926,
   "grantsVersion": 1,
   "reconcileVersion": 30,
   "gallery": [
@@ -12838,8 +12672,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786393564900,
-  "rev": 1657,
+  "updatedAt": 1786393757998,
+  "rev": 1658,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16030,7 +15864,7 @@
       "marrow-s-wings": 3,
       "ask_the_dead": 2,
       "the_warding_mark": 3,
-      "the_working_model": 13,
+      "the_working_model": 14,
       "the-held-place": 1,
       "braid_deathsense_order_sense": 2,
       "the-declared-threshold": 2,
@@ -16117,7 +15951,7 @@
       "marrow-s-wings": 25,
       "ask_the_dead": 26,
       "the_warding_mark": 25,
-      "the_working_model": 28,
+      "the_working_model": 41,
       "the-held-place": 24,
       "the_grey_hand": 24,
       "the_ended_threat": 25,
@@ -16782,7 +16616,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 131
+    "the_center": 132
   },
   "foreclosed": [
     "rootkin",
@@ -17016,10 +16850,10 @@
     {
       "id": "sess-24",
       "startedAt": "2026-08-10T20:26:04.883Z",
-      "lastAt": "2026-08-10T20:26:04.883Z",
+      "lastAt": "2026-08-10T20:29:17.997Z",
       "startDay": 41,
       "endDay": 41,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -17375,17 +17209,17 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 296,
-    "choices": 295,
-    "characterDeltas": 131,
-    "scene": 296,
-    "npcUpdates": 265,
+    "sceneSummary": 297,
+    "choices": 296,
+    "characterDeltas": 132,
+    "scene": 297,
+    "npcUpdates": 266,
     "factUpdates": 25,
-    "placeUpdates": 61,
+    "placeUpdates": 62,
     "codexUpdates": 187,
     "timeOps": 284,
-    "imagePrompt": 10,
-    "sceneEnded": 76,
+    "imagePrompt": 11,
+    "sceneEnded": 77,
     "itemUpdates": 6,
     "questUpdates": 41,
     "offer": 32,
@@ -17405,7 +17239,7 @@
     "gambitApt": 10,
     "markDefiningMoment": 1
   },
-  "_opTurns": 296,
+  "_opTurns": 297,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -17715,7 +17549,7 @@
   "skillUses": {
     "travel": 2,
     "careful": 2,
-    "study": 1,
+    "study": 2,
     "scout": 2,
     "lead": 2,
     "ask": 1,
@@ -17723,7 +17557,7 @@
     "negotiate": 2,
     "prepare": 3,
     "investigate": 1,
-    "craft": 2
+    "craft": 3
   },
   "aptitudeEarnCount": {},
   "bondLog": [

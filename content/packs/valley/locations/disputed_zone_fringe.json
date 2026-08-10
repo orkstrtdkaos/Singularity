@@ -1,87 +1,87 @@
 {
-  "schemaVersion": 1,
-  "id": "disputed_zone_fringe",
-  "name": "The Disputed Zone — Fringe",
-  "regionId": "valley",
-  "communityId": null,
-  "spectrum": {
-    "chaos_order": -0.6,
-    "violence_peace": -0.4,
-    "dark_light": 0,
-    "space_time": -0.4,
-    "mechanical_spiritual": 0.4,
-    "demonic_angelic": -0.2
-  },
-  "tags": [
-    "wilds",
-    "interference",
-    "dangerous",
-    "no-law"
-  ],
-  "connections": [
-    "echo_river_crossing",
-    "harmonic_heights_terrace",
-    "radiant_plateau_edge",
-    "thornwake_glade",
-    "kestrels_roost",
-    "greywater_stilts",
-    "gen-disputed-zone-far-side",
-    "the-low-lamp-inn"
-  ],
-  "descriptionSeed": "The band of broken country where Harmonic and Radiant power fields interfere. Sound bends light here; light carries sound. Standing waves make pockets where time runs syrup-slow, and shimmer-vortices wander like dust devils made of noise and glare. Neither civilization claims it — officially. Both send people into it. Things live here that adapted to the interference, and things were left here during the Great Transition that never got collected.",
-  "loreRefs": [
-    "valley_primer",
-    "power_systems",
-    "precursors"
-  ],
-  "npcsPresent": [],
-  "encounterFlavor": "Interference phenomena, scavengers and smugglers, adapted fauna, half-buried pre-Transition machinery, and rarely — very rarely — something that predates humanity noticing you.",
-  "dangerLevel": 3,
-  "image": "content/packs/valley/assets/disputed_zone_fringe.jpg",
-  "questSeeds": [
-    "The survey-grid lights move in patterns — plotting them means camping in interference country for a night, which nobody has survived unchanged",
-    "Scavengers pay well for pre-Transition salvage but their broker asks oddly specific questions about anything with Precursor markings",
-    "A time-pocket has trapped a courier mid-stride for nine days; both civilizations claim jurisdiction and neither will act",
-    "Something in the Zone has started answering sonic pings with pings of its own — one tone off, like an echo learning"
-  ],
-  "map": {
-    "x": 490,
-    "y": 115
-  },
-  "encounterSeeds": [
-    {
-      "encounterId": "zone_raider_duel",
-      "hint": "Scavenger-raiders work the fringe — one may decide a traveler's pack is salvage"
-    }
-  ],
-  "poleIntensity": {
-    "chaos": 0.6,
-    "violence": 0.4,
-    "space": 0.4,
-    "spiritual": 0.4,
-    "demonic": 0.2
-  },
-  "axisVector": [
-    0,
-    0,
-    -0.2,
-    -0.4,
-    0,
-    0.4,
-    -0.6,
-    0,
-    0,
-    -0.4,
-    0,
-    0
-  ],
-  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
-  "worldPos": {
-    "colatitude": 28,
-    "longitude": 239,
-    "depth": 0
-  },
-  "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "region",
-  "parentId": null
+ "schemaVersion": 1,
+ "id": "disputed_zone_fringe",
+ "name": "The Disputed Zone — Fringe",
+ "regionId": "valley",
+ "communityId": null,
+ "spectrum": {
+  "chaos_order": -0.6,
+  "violence_peace": -0.4,
+  "dark_light": 0,
+  "space_time": -0.4,
+  "mechanical_spiritual": 0.4,
+  "demonic_angelic": -0.2
+ },
+ "tags": [
+  "wilds",
+  "interference",
+  "dangerous",
+  "no-law"
+ ],
+ "connections": [
+  "echo_river_crossing",
+  "harmonic_heights_terrace",
+  "radiant_plateau_edge",
+  "thornwake_glade",
+  "kestrels_roost",
+  "greywater_stilts",
+  "gen-disputed-zone-far-side",
+  "the-low-lamp-inn"
+ ],
+ "descriptionSeed": "The band of broken country where Harmonic and Radiant power fields interfere. Sound bends light here; light carries sound. Standing waves make pockets where time runs syrup-slow, and shimmer-vortices wander like dust devils made of noise and glare. Neither civilization claims it — officially. Both send people into it. Things live here that adapted to the interference, and things were left here during the Great Transition that never got collected.",
+ "loreRefs": [
+  "valley_primer",
+  "power_systems",
+  "precursors"
+ ],
+ "npcsPresent": [],
+ "encounterFlavor": "Interference phenomena, scavengers and smugglers, adapted fauna, half-buried pre-Transition machinery, and rarely — very rarely — something that predates humanity noticing you.",
+ "dangerLevel": 3,
+ "image": "content/packs/valley/assets/disputed_zone_fringe.jpg",
+ "questSeeds": [
+  "The survey-grid lights move in patterns — plotting them means camping in interference country for a night, which nobody has survived unchanged",
+  "Scavengers pay well for pre-Transition salvage but their broker asks oddly specific questions about anything with Precursor markings",
+  "A time-pocket has trapped a courier mid-stride for nine days; both civilizations claim jurisdiction and neither will act",
+  "Something in the Zone has started answering sonic pings with pings of its own — one tone off, like an echo learning"
+ ],
+ "map": {
+  "x": 490,
+  "y": 115
+ },
+ "encounterSeeds": [
+  {
+   "encounterId": "zone_raider_duel",
+   "hint": "Scavenger-raiders work the fringe — one may decide a traveler's pack is salvage"
+  }
+ ],
+ "poleIntensity": {
+  "chaos": 0.6,
+  "violence": 0.4,
+  "space": 0.4,
+  "spiritual": 0.4,
+  "demonic": 0.2
+ },
+ "axisVector": [
+  0,
+  0,
+  -0.2,
+  -0.4,
+  0,
+  0.4,
+  -0.6,
+  0,
+  0,
+  -0.4,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+ "worldPos": {
+  "colatitude": 25.75,
+  "longitude": 248.25,
+  "depth": 0
+ },
+ "worldPosNote": "⛔ SNG-407: moved 4.75° (8 walking days) onto the nearest river the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 28, longitude 239.",
+ "tier": "region",
+ "parentId": null
 }

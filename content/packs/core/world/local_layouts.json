@@ -32,7 +32,8 @@
      "bearing": 0,
      "metres": 0
     },
-    "why": "⛔ One of the two centres the seed names. It IS the centre — bearing and distance zero."
+    "why": "⛔ One of the two centres the seed names. It IS the centre — bearing and distance zero.",
+    "basis": "prose"
    },
    {
     "id": "millbrook_dock",
@@ -41,7 +42,8 @@
      "bearing": 156,
      "metres": 300
     },
-    "why": "⛔ The other centre. ON THE RIVER BEARING — the one placement the world layer dictates outright."
+    "why": "⛔ The other centre. ON THE RIVER BEARING — the one placement the world layer dictates outright.",
+    "basis": "river"
    },
    {
     "id": "millbrook_wheels",
@@ -50,7 +52,8 @@
      "bearing": 168,
      "metres": 360
     },
-    "why": "Downstream of the dock on the same water. ⚠️ Wheels go below the landing so the boats are not fighting the race."
+    "why": "Downstream of the dock on the same water. ⚠️ Wheels go below the landing so the boats are not fighting the race.",
+    "basis": "river"
    },
    {
     "id": "millbrook_terraces",
@@ -59,7 +62,8 @@
      "bearing": 210,
      "metres": 260
     },
-    "why": "⛔ 'Climb the lower slopes' — placed on the MEASURED UPHILL BEARING, not a guess."
+    "why": "⛔ 'Climb the lower slopes' — placed on the MEASURED UPHILL BEARING, not a guess.",
+    "basis": "uphill"
    },
    {
     "id": "millbrook_fields",
@@ -68,7 +72,8 @@
      "bearing": 30,
      "metres": 380
     },
-    "why": "⚠️ The flat: opposite the uphill, and off the river so the ditches can run TO them. The encounterFlavor is farmers arguing about irrigation shares — this is what they are arguing over."
+    "why": "⚠️ The flat: opposite the uphill, and off the river so the ditches can run TO them. The encounterFlavor is farmers arguing about irrigation shares — this is what they are arguing over.",
+    "basis": "anti-uphill"
    },
    {
     "id": "millbrook_smithy",
@@ -77,7 +82,8 @@
      "bearing": -88,
      "metres": 180
     },
-    "why": "On the road out to Echo River Crossing. ⚠️ A smith sits where the carts already stop, and near enough the water to quench."
+    "why": "On the road out to Echo River Crossing. ⚠️ A smith sits where the carts already stop, and near enough the water to quench.",
+    "basis": "road"
    },
    {
     "id": "gen-mara-wells-store",
@@ -86,7 +92,8 @@
      "bearing": -70,
      "metres": 120
     },
-    "why": "⛔ ALREADY A PLACE, promoted from play, and sitting at Millbrook's EXACT coordinates — CCode's 'a room's position is a duplicate' finding, live. Now it stands between the well and the road, which is where a village store stands."
+    "why": "⛔ ALREADY A PLACE, promoted from play, and sitting at Millbrook's EXACT coordinates — CCode's 'a room's position is a duplicate' finding, live. Now it stands between the well and the road, which is where a village store stands.",
+    "basis": "road"
    },
    {
     "id": "millbrook_commons",
@@ -95,7 +102,8 @@
      "bearing": 120,
      "metres": 140
     },
-    "why": "Between the well and the dock — the ground people cross going from one centre to the other, which is what a commons IS."
+    "why": "Between the well and the dock — the ground people cross going from one centre to the other, which is what a commons IS.",
+    "basis": "between"
    }
   ]
  },
@@ -125,7 +133,8 @@
      "bearing": 0,
      "metres": 0
     },
-    "why": "⛔ The town IS the bridge. Centre by definition; everything else is which END you are on."
+    "why": "⛔ The town IS the bridge. Centre by definition; everything else is which END you are on.",
+    "basis": "prose"
    },
    {
     "id": "erc_waygate_stone",
@@ -134,7 +143,8 @@
      "bearing": 10,
      "metres": 40
     },
-    "why": "'The old bridge-stone at the crossing is a waygate, and the least ceremonious one in the world — carters queue behind it.' ⚠️ A QUEUE IS A PLACEMENT: it sits at the bridge mouth, not off to one side."
+    "why": "'The old bridge-stone at the crossing is a waygate, and the least ceremonious one in the world — carters queue behind it.' ⚠️ A QUEUE IS A PLACEMENT: it sits at the bridge mouth, not off to one side.",
+    "basis": "prose"
    },
    {
     "id": "erc_carters_queue",
@@ -143,7 +153,8 @@
      "bearing": 92,
      "metres": 150
     },
-    "why": "⛔ On the Millbrook road bearing — the queue forms along the road people arrive by."
+    "why": "⛔ On the Millbrook road bearing — the queue forms along the road people arrive by.",
+    "basis": "road"
    },
    {
     "id": "erc_fisher_shacks",
@@ -152,7 +163,8 @@
      "bearing": -124,
      "metres": 220
     },
-    "why": "⚠️ 'Fisher shacks stand empty' — riverward and UPSTREAM, where the contamination is worst. They are empty for a reason and the position says why."
+    "why": "⚠️ 'Fisher shacks stand empty' — riverward and UPSTREAM, where the contamination is worst. They are empty for a reason and the position says why.",
+    "basis": "river"
    },
    {
     "id": "erc_granite_shoulders",
@@ -161,7 +173,8 @@
      "bearing": 75,
      "metres": 190
     },
-    "why": "On the measured uphill — 'where the river narrows between granite shoulders'."
+    "why": "On the measured uphill — 'where the river narrows between granite shoulders'.",
+    "basis": "uphill"
    },
    {
     "id": "erc_survey_camp",
@@ -170,7 +183,8 @@
      "bearing": 116,
      "metres": 230
     },
-    "why": "⚠️ Contamination teams from Heights and Plateau, camped apart from the town and from each other."
+    "why": "⚠️ Contamination teams from Heights and Plateau, camped apart from the town and from each other.",
+    "basis": "road"
    }
   ]
  },
@@ -200,7 +214,8 @@
      "bearing": -150,
      "metres": 200
     },
-    "why": "⛔ On the Crossing road. The dead arrive from where the roads meet, so the yard faces that way."
+    "why": "⛔ On the Crossing road. The dead arrive from where the roads meet, so the yard faces that way.",
+    "basis": "road"
    },
    {
     "id": "greyhearth_grounds",
@@ -209,7 +224,8 @@
      "bearing": 135,
      "metres": 320
     },
-    "why": "⛔ UPHILL, on the measured bearing — drainage. Every real burying ground sits above its town."
+    "why": "⛔ UPHILL, on the measured bearing — drainage. Every real burying ground sits above its town.",
+    "basis": "uphill"
    },
    {
     "id": "greyhearth_hearth",
@@ -218,7 +234,8 @@
      "bearing": 0,
      "metres": 0
     },
-    "why": "The town's name and its centre — the fire that gives the trades their work."
+    "why": "The town's name and its centre — the fire that gives the trades their work.",
+    "basis": "prose"
    },
    {
     "id": "greyhearth_singers",
@@ -227,7 +244,8 @@
      "bearing": 60,
      "metres": 150
     },
-    "why": "'Everyone here has sung over one.' ⚠️ Between the hearth and the grounds — on the walk."
+    "why": "'Everyone here has sung over one.' ⚠️ Between the hearth and the grounds — on the walk.",
+    "basis": "between"
    },
    {
     "id": "greyhearth_quiet_road",
@@ -236,7 +254,8 @@
      "bearing": 30,
      "metres": 260
     },
-    "why": "⛔ On the bearing to the Quiet Ground, which is where the dying go BEFORE. The two towns are one process."
+    "why": "⛔ On the bearing to the Quiet Ground, which is where the dying go BEFORE. The two towns are one process.",
+    "basis": "road"
    }
   ]
  },
@@ -266,7 +285,8 @@
      "metres": 90,
      "level": 0
     },
-    "why": "⛔ On the Middle Way road bearing — an entrance faces the road people arrive by. Ground level."
+    "why": "⛔ On the Middle Way road bearing — an entrance faces the road people arrive by. Ground level.",
+    "basis": "road"
    },
    {
     "id": "gen-cogitarium-third-terrace",
@@ -276,7 +296,8 @@
      "metres": 60,
      "level": 3
     },
-    "why": "⛔ LEVEL 3 — it is the THIRD terrace and the name says so. Uphill side, because a terrace climbs the slope it is cut into."
+    "why": "⛔ LEVEL 3 — it is the THIRD terrace and the name says so. Uphill side, because a terrace climbs the slope it is cut into.",
+    "basis": "uphill"
    }
   ]
  },
@@ -309,7 +330,8 @@
      "bearing": 0,
      "metres": 0
     },
-    "why": "⛔ A stilt town has no ground, so its centre is a BUILT thing. The largest platform is the square."
+    "why": "⛔ A stilt town has no ground, so its centre is a BUILT thing. The largest platform is the square.",
+    "basis": "prose"
    },
    {
     "id": "stilts_ropewalks",
@@ -318,7 +340,8 @@
      "bearing": 45,
      "metres": 150
     },
-    "why": "'Rope-walks lace between platforms.' ⚠️ NOT A PLACE SO MUCH AS THE STREETS — laced between, so placed between the platforms rather than at a point."
+    "why": "'Rope-walks lace between platforms.' ⚠️ NOT A PLACE SO MUCH AS THE STREETS — laced between, so placed between the platforms rather than at a point.",
+    "basis": "between"
    },
    {
     "id": "stilts_skiff_landing",
@@ -327,7 +350,8 @@
      "bearing": 85,
      "metres": 220
     },
-    "why": "⛔ On the ROAD bearing, not the water bearing — in a marsh town the skiffs ARE the road, so the landing faces where travellers come from."
+    "why": "⛔ On the ROAD bearing, not the water bearing — in a marsh town the skiffs ARE the road, so the landing faces where travellers come from.",
+    "basis": "road"
    },
    {
     "id": "stilts_deep_platforms",
@@ -336,7 +360,8 @@
      "bearing": -95,
      "metres": 280
     },
-    "why": "⚠️ 'Whoever else needed somewhere the aligned powers don't reach' — furthest from the roads, which is the whole reason those people are there."
+    "why": "⚠️ 'Whoever else needed somewhere the aligned powers don't reach' — furthest from the roads, which is the whole reason those people are there.",
+    "basis": "anti-road"
    },
    {
     "id": "stilts_pole_yard",
@@ -345,7 +370,8 @@
      "bearing": 150,
      "metres": 190
     },
-    "why": "⛔ A stilt town's only real industry is REPLACING ITS OWN LEGS. Nobody wrote this down; the town's existence requires it."
+    "why": "⛔ A stilt town's only real industry is REPLACING ITS OWN LEGS. Nobody wrote this down; the town's existence requires it.",
+    "basis": "inferred"
    }
   ]
  },
@@ -376,7 +402,8 @@
      "bearing": 125,
      "metres": 0
     },
-    "why": "⛔ The town is a ROW and the name says so — forges strung along the Crossing road, not clustered round a square."
+    "why": "⛔ The town is a ROW and the name says so — forges strung along the Crossing road, not clustered round a square.",
+    "basis": "road"
    },
    {
     "id": "kindlerow_assay_house",
@@ -385,7 +412,8 @@
      "bearing": 125,
      "metres": 170
     },
-    "why": "'Tells you honestly what your metal is worth.' ⚠️ At the road end where metal ARRIVES — you are assayed before you are sold to."
+    "why": "'Tells you honestly what your metal is worth.' ⚠️ At the road end where metal ARRIVES — you are assayed before you are sold to.",
+    "basis": "road"
    },
    {
     "id": "kindlerow_lamp_makers",
@@ -394,7 +422,8 @@
      "bearing": -55,
      "metres": 160
     },
-    "why": "⛔ On the road to the Blaze. Lamps go where the light doctrine is, and Kindlerow sells to them without joining them."
+    "why": "⛔ On the road to the Blaze. Lamps go where the light doctrine is, and Kindlerow sells to them without joining them.",
+    "basis": "road"
    },
    {
     "id": "kindlerow_charcoal_slope",
@@ -403,7 +432,8 @@
      "bearing": 330,
      "metres": 250
     },
-    "why": "⛔ Uphill on the measured bearing — fuel comes down to a forge, never up."
+    "why": "⛔ Uphill on the measured bearing — fuel comes down to a forge, never up.",
+    "basis": "uphill"
    },
    {
     "id": "kindlerow_catch_cistern",
@@ -412,7 +442,8 @@
      "bearing": 345,
      "metres": 190
     },
-    "why": "⚠️ NO RIVER WITHIN 9°, AND A FORGE MUST QUENCH. Uphill catchment is the only honest answer; the terrain forced this one into existence."
+    "why": "⚠️ NO RIVER WITHIN 9°, AND A FORGE MUST QUENCH. Uphill catchment is the only honest answer; the terrain forced this one into existence.",
+    "basis": "uphill"
    }
   ]
  },
@@ -444,7 +475,8 @@
      "metres": 200,
      "level": -1
     },
-    "why": "⛔ The way in from above, on the Pressureholt road bearing. Level −1: you go DOWN to enter."
+    "why": "⛔ The way in from above, on the Pressureholt road bearing. Level −1: you go DOWN to enter.",
+    "basis": "road"
    },
    {
     "id": "sw_mapped_reach",
@@ -454,7 +486,8 @@
      "metres": 600,
      "level": -2
     },
-    "why": "'Mapped for four centuries.' ⚠️ The part they will show you, running toward the Axis Gate."
+    "why": "'Mapped for four centuries.' ⚠️ The part they will show you, running toward the Axis Gate.",
+    "basis": "road"
    },
    {
     "id": "sw_unadmitted",
@@ -464,7 +497,8 @@
      "metres": 1400,
      "level": -4
     },
-    "why": "⛔ 'Under places the Wrights have not admitted to.' Deep, far, and deliberately vague — ⚠️ the position is a CLAIM ABOUT SECRECY, and metres here are a shrug rather than a measurement."
+    "why": "⛔ 'Under places the Wrights have not admitted to.' Deep, far, and deliberately vague — ⚠️ the position is a CLAIM ABOUT SECRECY, and metres here are a shrug rather than a measurement.",
+    "basis": "inferred"
    }
   ]
  },
@@ -491,7 +525,8 @@
      "bearing": 0,
      "metres": 0
     },
-    "why": "'Where symbols are made that ACT.' The centre of the figure, because a figure has one."
+    "why": "'Where symbols are made that ACT.' The centre of the figure, because a figure has one.",
+    "basis": "tradition"
    },
    {
     "id": "figure_works_proving",
@@ -500,7 +535,8 @@
      "bearing": 120,
      "metres": 180
     },
-    "why": "⛔ 'The meanings do exactly what they mean, which is not always what was wanted.' A yard at a THIRD of the circle — you test a made meaning away from where you made it."
+    "why": "⛔ 'The meanings do exactly what they mean, which is not always what was wanted.' A yard at a THIRD of the circle — you test a made meaning away from where you made it.",
+    "basis": "tradition"
    },
    {
     "id": "figure_works_containment",
@@ -509,7 +545,8 @@
      "bearing": 240,
      "metres": 180
     },
-    "why": "⛔ The other third. 'The entire history of this people's disasters' — this is where the disasters are kept, and its position completes the triangle."
+    "why": "⛔ The other third. 'The entire history of this people's disasters' — this is where the disasters are kept, and its position completes the triangle.",
+    "basis": "tradition"
    },
    {
     "id": "figure_works_gate",
@@ -518,8 +555,10 @@
      "bearing": 26,
      "metres": 210
     },
-    "why": "The single road out. ⚠️ One road means one gate, and its bearing is not a choice."
+    "why": "The single road out. ⚠️ One road means one gate, and its bearing is not a choice.",
+    "basis": "road"
    }
   ]
- }
+ },
+ "_basisNote": "⛔ SNG-404 §2 asked CCode to tune the relief threshold against these eight layouts. ⚠️ MY OWN DATA COULD NOT ANSWER IT AND I HAD TO FIX THE DATA FIRST. I recorded intent in PROSE (`why`) and nothing machine-readable, so 'did this site use the uphill gradient?' could only be guessed by comparing bearings — and that guess is wrong: Greywater's skiff landing sits at bearing 85 against a noise-uphill of 90, so it READS as uphill-placed when it was placed on the ROAD. ⛔ AT RELIEF 0.002 THE UPHILL BEARING IS NOISE, AND NOISE COINCIDES WITH THINGS. `basis` now states which gradient decided each placement: river | uphill | anti-uphill | road | anti-road | between | prose | tradition | inferred. THE THRESHOLD IS TUNABLE FROM THIS FIELD, not from bearing arithmetic."
 }

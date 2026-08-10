@@ -91,7 +91,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.106";
+const APP_VERSION = "1.9.107";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7231,10 +7231,48 @@ function wireWorldGlobe() {
       readout.textContent = `${p.name}${p.waygate ? " ◈ waygate" : ""}${s ? ` — ${s.biome || "unmapped"}, ${s.type === 0 ? "water" : "elev " + s.elevation}` : ""}`;
     } else readout.textContent = "Drag to spin · scroll to zoom · click a place to enter its region.";
   };
+  // ⛔ A CLICK FLIES THE CAMERA; IT DOES NOT LEAVE THE MAP. Erik: "clicking a dot right now jumps you to
+  // the old regional maps — which are no longer that useful. I would like to bring regions onto the world
+  // map." The card grid existed because the globe could not resolve a region; it can now, so the region
+  // IS a zoom level of the world rather than a different screen. ⚠️ The old drill-down stays reachable
+  // from the breadcrumb, because a list of places is still the fastest way to find one by NAME.
+  const flyTo = (lat, lon, targetSpan) => {
+    const startYaw = view.yaw, startPitch = view.pitch, startR = view.r;
+    // the r that produces the requested span — the inverse of spanDeg
+    const endR = Math.max(120, Math.min(Math.min(cv.width, cv.height) * 12,
+      (Math.min(cv.width, cv.height) / 2) / Math.sin(targetSpan / 2 * Math.PI / 180)));
+    const endYaw = -lon, endPitch = Math.max(-89, Math.min(89, lat));
+    // ⚠️ yaw takes the SHORT way round — without this a click across the meridian spins the long way
+    let dYaw = ((endYaw - startYaw + 540) % 360) - 180;
+    const t0 = (typeof performance !== "undefined" ? performance.now() : Date.now());
+    const DUR = 520;
+    const step = () => {
+      const now = (typeof performance !== "undefined" ? performance.now() : Date.now());
+      const k = Math.min(1, (now - t0) / DUR);
+      const e2 = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;      // ease in-out
+      view.yaw = startYaw + dYaw * e2;
+      view.pitch = startPitch + (endPitch - startPitch) * e2;
+      view.r = startR * Math.pow(endR / startR, e2);                        // geometric, so zoom feels even
+      paint(k < 1);
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
   cv.onclick = (e) => {
     const p = nearest(e.offsetX, e.offsetY);
     if (!p) return;
-    // ⚠️ THE DRILL-DOWN IS THE ONE THE CARDS ALREADY HAD. The globe replaces the grid, not the navigation.
+    const loc = CONTENT.locations?.[p.id];
+    const wp = loc?.worldPos;
+    if (!wp) return;
+    // a region seat frames its whole region; anywhere else frames the place and its neighbours
+    const isRegion = p.kind === "region";
+    flyTo(wp.colatitude - 90, wp.longitude, isRegion ? 26 : 8);
+    if (readout) readout.textContent = `${p.name}${isRegion ? " — the region, framed" : ""} · click again to go closer, or use the breadcrumb for the list`;
+  };
+  // ⚠️ double-click still ENTERS — the old navigation is a gesture away, not deleted
+  cv.ondblclick = (e) => {
+    const p = nearest(e.offsetX, e.offsetY);
+    if (!p) return;
     const rid = CONTENT.locations?.[p.id]?.regionId || CONTENT.locations?.[p.id]?.region || p.region;
     if (rid) { mapTier = "region"; mapFocus = rid; renderMap(); }
   };

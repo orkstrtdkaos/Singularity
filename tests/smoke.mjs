@@ -7264,6 +7264,19 @@ await (async () => {
       stepped > 50 && smooth > stepped * 0.9,
       `${smooth} of ${stepped} within-cell probes move under the smooth read`);
 
+    // ⛔ SNG-405 — A CLICK STAYS ON THE MAP. Erik: "clicking a dot right now jumps you to the old
+    // regional maps — which are no longer that useful. I would like to bring regions onto the world map."
+    // The card grid existed because the globe could not resolve a region; it can, so a region is a ZOOM
+    // LEVEL of the world rather than a separate screen. ⚠️ The old drill-down is not deleted — it moves
+    // to double-click and the breadcrumb, because a list is still the fastest way to find a place by name.
+    const appSrc405 = readFileSync(join(root, "app.js"), "utf8");
+    const clickBody = appSrc405.slice(appSrc405.indexOf("cv.onclick"), appSrc405.indexOf("cv.ondblclick"));
+    const dblBody = appSrc405.slice(appSrc405.indexOf("cv.ondblclick"), appSrc405.indexOf("cv.onwheel"));
+    check("405: a single click FRAMES the place on the globe instead of leaving for the card grid",
+      /flyTo\(/.test(clickBody) && !/renderMap\(\)/.test(clickBody));
+    check("405: …and the old drill-down survives on double-click — moved, not deleted",
+      /mapTier = "region"/.test(dblBody) && /renderMap\(\)/.test(dblBody));
+
     // ⛔ SNG-405 — A PATCH DECLINES OUTSIDE ITS WINDOW; IT DOES NOT CLAMP. Every read was pinned into
     // range with Math.min/Math.max, so a point beyond the patch returned its EDGE sample — the area
     // outside the tile got painted with whatever sat on its border, in tile-shaped rectangles. That is

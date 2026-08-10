@@ -156,27 +156,34 @@ export function usableGradients(measured) {
   };
 }
 
-/** ⛔ WHAT A SITE NEEDS IS THE INPUT; THE BEARING IS THE OUTPUT. The vocabulary is small on purpose —
- *  it is the set of needs her thirty-eight placements actually cite. */
-export const SITE_NEEDS = ["centre", "water", "height", "road", "apart", "depth"];
+/** ⛔ THE VOCABULARY IS HERS, NOT MINE. I first invented six words for this; Aevi then shipped `basis`
+ *  on all thirty-eight sites (db13ac4d) with nine — and hers is the one with worked examples behind every
+ *  entry, so it wins outright. Two of hers I had no branch for at all: `anti-uphill` (a thing placed by
+ *  the slope it AVOIDS) and `between` (a thing placed by the two places it sits on the walk between).
+ *  ⚠️ `prose` and `inferred` are not geometry — they are placements her own reading produced, and the
+ *  engine takes them as given rather than pretending to re-derive them. */
+export const SITE_BASES = ["centre", "river", "uphill", "anti-uphill", "road", "anti-road", "between", "tradition", "prose", "inferred"];
+/** the older names, kept so a caller written against the first draft still resolves */
+const BASIS_ALIAS = { water: "river", height: "uphill", apart: "anti-road", depth: "road" };
 
 /** Place one site against the measured frame. Returns null when nothing licenses a placement, which is
  *  the fourth branch of her precedence order: emit FEWER sites rather than invent one.
  *  ⚠️ `why` is never optional. Her §4: "a generated placement that cannot cite a gradient or a line of
  *  prose is decoration, and should be dropped rather than shipped." */
 export function placeSite(site, gradients, opts = {}) {
-  const { radiusMetres = 400, index = 0, traditionFigure = null } = opts;
-  const need = SITE_NEEDS.includes(site && site.need) ? site.need : null;
+  const { radiusMetres = 400, index = 0, traditionFigure = null, between = null } = opts;
+  const raw0 = (site && (site.basis || site.need)) || null;
+  const need = SITE_BASES.includes(raw0) ? raw0 : (BASIS_ALIAS[raw0] || null);
   const near = Math.round(radiusMetres * 0.55), far = Math.round(radiusMetres * 0.8);
 
   if (need === "centre") return { bearing: 0, metres: 0, why: "the centre — what the place is organised around" };
 
-  if (need === "water") {
+  if (need === "river") {
     if (!gradients.river) return null;                    // no water: the Kindlerow case, and it must not be faked
     return { bearing: gradients.river.bearing, metres: near,
       why: "on the measured river bearing (" + gradients.river.bearing + "°, nearest water " + gradients.river.distanceDeg + "°)" };
   }
-  if (need === "height") {
+  if (need === "uphill") {
     if (!gradients.uphill) return null;                   // flat ground: the Greywater case
     return { bearing: gradients.uphill.bearing, metres: near,
       why: "on the measured uphill bearing (" + gradients.uphill.bearing + "°, relief " + gradients.uphill.relief + ")" };
@@ -186,7 +193,7 @@ export function placeSite(site, gradients, opts = {}) {
     if (!road) return null;
     return { bearing: road.bearing, metres: far, why: "on the road to " + road.to + " (bearing " + road.bearing + "°)" };
   }
-  if (need === "apart") {
+  if (need === "anti-road") {
     // ⚠️ AWAY FROM EVERY ROAD, not merely "somewhere else" — the Deep Platforms are placed by what they
     // are avoiding. Take the widest gap in the road bearings and sit in the middle of it.
     const bs = gradients.roads.map((r) => ((r.bearing % 360) + 360) % 360).sort((a, b) => a - b);
@@ -200,6 +207,24 @@ export function placeSite(site, gradients, opts = {}) {
     return { bearing: Math.round(bestMid), metres: far,
       why: "in the widest gap between the roads (" + Math.round(bestGap) + "° clear) — placed by what it keeps away from" };
   }
+  if (need === "anti-uphill") {
+    // ⚠️ PLACED BY THE SLOPE IT AVOIDS. Millbrook's fields take the flat, and "the flat" is only
+    // definable once you know which way is up — so this needs the same gradient the terraces used, read
+    // in the opposite sense. Without a usable slope there is no "away from it" either.
+    if (!gradients.uphill) return null;
+    return { bearing: Math.round(norm180(gradients.uphill.bearing + 180)), metres: near,
+      why: "away from the measured uphill (" + gradients.uphill.bearing + "°) — the flat ground is defined by the slope it is not on" };
+  }
+  if (need === "between") {
+    // ⚠️ ON THE WALK BETWEEN TWO PLACES — the Singers' Hall sits between the hearth and the burying
+    // grounds because that is the route people take. Needs the two it is between; there is no such thing
+    // as "between" in the abstract.
+    if (!between || between.length < 2) return null;
+    const [a, b2] = between;
+    const mid = norm180(a.bearing + norm180(b2.bearing - a.bearing) / 2);
+    return { bearing: Math.round(mid), metres: Math.round((a.metres + b2.metres) / 2),
+      why: "on the walk between two placed sites (" + a.bearing + "° and " + b2.bearing + "°)" };
+  }
   if (need === "depth") {
     // ⛔ THE SERVICE WAYS BROKE THE HORIZONTAL FRAME ENTIRELY: a tunnel network has depth, not a radius.
     const road = gradients.roads[index % Math.max(1, gradients.roads.length)];
@@ -210,6 +235,13 @@ export function placeSite(site, gradients, opts = {}) {
 
   // ⚠️ NOTHING LICENSED IT. When no gradient answers and no tradition figure is given, the honest output
   // is no output: "a town with three well-reasoned places beats a town with eight invented ones."
+  // ⚠️ `prose` and `inferred` arrive already placed — her reading produced them and the engine must not
+  // overrule a bearing a person derived from the text. Pass them through with their citation intact.
+  if ((need === "prose" || need === "inferred") && site && site.localMap) {
+    return { bearing: site.localMap.bearing, metres: site.localMap.metres, level: site.localMap.level,
+      why: site.why || "placed from the location's own prose" };
+  }
+  if (need === "tradition" && !traditionFigure) return null;
   if (!traditionFigure) return null;
   // the tradition carries the layout — the Figure Works case: a figure has n points, evenly divided
   const n = Math.max(2, traditionFigure.points || 3);

@@ -904,17 +904,39 @@ for (const pack of PACKS) {
       const loc = canon.locs[id]; if (!loc) continue;
       reliefOf[id] = LD.measureGradients(loc, { locations: canon.locs, hydrology: built.hydrology, terrainFn: fT404 }).relief;
     }
-    const usedUphill = ["millbrook", "echo_river_crossing", "greyhearth", "kindlerow", "the_cogitarium"];
-    const flatGround = ["greywater_stilts"];
-    check("SNG-404: the relief cut keeps the flat town OUT and every town she placed on a slope IN",
-      flatGround.every((id) => reliefOf[id] < LD.RELIEF_USABLE)
-      && usedUphill.every((id) => reliefOf[id] >= LD.RELIEF_USABLE),
-      `cut ${LD.RELIEF_USABLE}; ` + Object.entries(reliefOf).map(([k, v]) => k + " " + v).join(", "));
+    // ⛔ GROUND TRUTH IS HER `basis` FIELD, NOT MY READING OF HER BEARINGS. I inferred which layouts used
+    // the slope by matching site bearings against the measured uphill; she then shipped `basis` on all 38
+    // sites (db13ac4d) for exactly that reason — "the relief threshold could not be tuned from bearings
+    // because noise-uphill coincides with real bearings." ⚠️ My inference happened to agree on all eight,
+    // which is luck worth not relying on: the gate reads her field now.
+    const usedUphill = ids404.filter((id) => (layouts[id].sites || []).some((x) => x.basis === "uphill"));
+    const noUphill = ids404.filter((id) => !usedUphill.includes(id));
+    // ⛔ THE CUT IS NECESSARY, NOT SUFFICIENT — and the first form of this gate hid that by hand-listing
+    // `flatGround = ["greywater_stilts"]`, the single town that fitted. That is encoding the conclusion
+    // instead of testing it, and reading her `basis` field instead of my own shortlist turned it red
+    // immediately: the Service Ways (0.048) and the Figure Works (0.268) also place nothing uphill, and
+    // both are well ABOVE any cut that admits echo at 0.022.
+    // ⚠️ They decline for reasons that are not an absent slope — one is a tunnel network measured in
+    // depth, the other lays its sites on the tradition's figure. So availability is not usage, and the
+    // gate asserts only what the cut is actually for: it must never block a placement she MADE.
+    check("SNG-404: the relief cut never blocks a slope placement Aevi actually made",
+      usedUphill.length >= 4 && usedUphill.every((id) => reliefOf[id] >= LD.RELIEF_USABLE),
+      `cut ${LD.RELIEF_USABLE}; used uphill: ` + usedUphill.map((k) => k + " " + reliefOf[k]).join(", "));
+    check("SNG-404: …and the one town she called NOISE stays below it",
+      reliefOf.greywater_stilts < LD.RELIEF_USABLE, `greywater ${reliefOf.greywater_stilts}`);
+    // ⛔ THE CORRECTED MODEL, GATED: a usable slope does NOT imply a slope placement. If this ever goes
+    // green-by-emptiness — every town above the cut using uphill — the single-dial model would be back
+    // and this gate is where that shows up.
+    check("SNG-404: a usable slope does NOT imply a slope placement — the SITE selects the gradient, not the relief",
+      noUphill.some((id) => reliefOf[id] >= LD.RELIEF_USABLE),
+      "towns with a usable slope that place nothing on it: " + noUphill.filter((id) => reliefOf[id] >= LD.RELIEF_USABLE).join(", "));
 
     // ⛔ HER §4: A PLACEMENT THAT CANNOT CITE ITS SOURCE IS DECORATION. Never a bare position.
     const frame404 = { river: { bearing: 156, distanceDeg: 0.27 }, uphill: { bearing: 210, relief: 0.041 },
       roads: [{ to: "a", bearing: -88 }, { to: "b", bearing: 91 }] };
-    const placed = LD.SITE_NEEDS.map((need) => LD.placeSite({ need }, frame404, { radiusMetres: 420 }));
+    const placed = LD.SITE_BASES.map((basis) => LD.placeSite({ basis, localMap: { bearing: 33, metres: 120 }, why: "from the seed" },
+      frame404, { radiusMetres: 420, between: [{ bearing: 0, metres: 0 }, { bearing: 135, metres: 320 }],
+        traditionFigure: { name: "Figurist", points: 3 } }));
     check("SNG-404: every placement the engine emits CITES its source — a bearing with no reason is decoration",
       placed.every((r) => r === null || (typeof r.why === "string" && r.why.length > 10)));
 
@@ -923,12 +945,21 @@ for (const pack of PACKS) {
     // frame would have produced a dock in a town whose fiction is that it has none.
     const dry = { river: null, uphill: null, roads: [{ to: "x", bearing: 10 }] };
     check("SNG-404: …and on ground that has no river and no slope it returns NOTHING rather than a plausible lie",
-      LD.placeSite({ need: "water" }, dry, {}) === null && LD.placeSite({ need: "height" }, dry, {}) === null);
+      LD.placeSite({ basis: "river" }, dry, {}) === null && LD.placeSite({ basis: "uphill" }, dry, {}) === null);
+
+    // ⛔ EVERY BASIS SHE AUTHORS MUST BE ONE THE ENGINE CAN PLACE. Her vocabulary is the one with 38
+    // worked examples behind it, so it is the contract; mine was six invented words and two of hers had
+    // no branch at all (`anti-uphill`, `between`). If she coins a new basis this names it rather than
+    // letting the engine quietly drop those sites.
+    const authoredBases = [...new Set(ids404.flatMap((id) => (layouts[id].sites || []).map((x) => x.basis).filter(Boolean)))];
+    const unplaceable = authoredBases.filter((b) => !LD.SITE_BASES.includes(b));
+    check("SNG-404: every `basis` in the corpus is one the engine can place — her vocabulary is the contract",
+      unplaceable.length === 0, "no branch for: " + unplaceable.join(", "));
 
     // ⚠️ THE FIGURE WORKS IS THE INDEPENDENT CHECK: she authored it at 0 / 120 / 240 because a figure has
     // points, not because the ground said anything. The engine reaches the same three bearings from the
     // tradition branch alone, which is the corpus validating the generalisation rather than me asserting it.
-    const fig = [0, 1, 2].map((i) => LD.placeSite({ need: null }, dry, { traditionFigure: { name: "Figurist", points: 3 }, index: i }).bearing);
+    const fig = [0, 1, 2].map((i) => LD.placeSite({ basis: "tradition" }, dry, { traditionFigure: { name: "Figurist", points: 3 }, index: i }).bearing);
     const authored = (layouts.the_figure_works.sites || []).map((x) => x.localMap.bearing);
     check("SNG-404: the tradition branch reproduces the Figure Works' authored layout — 0/120/240 from the figure alone",
       fig.every((b) => authored.some((a) => Math.abs(((a - b + 540) % 360) - 180) < 1)),

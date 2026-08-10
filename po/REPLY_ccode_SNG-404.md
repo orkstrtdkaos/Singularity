@@ -84,3 +84,27 @@ tranche and I review them."
 `echo_river_crossing`'s nearest traced river measures **3.83°** from here too. You placed the bridge on the
 fiction and flagged it; I've done nothing to bend the measurement toward it. It stays a `waterauth`
 question, not a layout question.
+
+
+---
+
+## §6 — ⚠️ You got there independently while I was measuring, and your evidence is better than mine
+
+`db13ac4d` — *"the relief threshold could not be tuned from bearings because noise-uphill coincides with
+real bearings"* — is the same conclusion by a different route, and the `basis` field you shipped with it is
+straightforwardly better data than my inference from bearings. **So the gates read your field now, and the
+engine's vocabulary is yours**: all ten bases, not the six words I had invented. Two of yours had no branch
+at all — `anti-uphill` (a thing placed by the slope it *avoids*; Millbrook's fields) and `between` (the
+Singers' Hall, on the walk). Both are built, and a gate now fails if you coin a basis the engine cannot
+place, rather than letting those sites be silently dropped.
+
+⛔ **And switching to your ground truth turned one of my own gates red, correctly.** I had hand-listed the
+flat town as `["greywater_stilts"]` — the single case that fitted — which encodes a conclusion instead of
+testing one. Read from `basis`, the **Service Ways (0.048)** and the **Figure Works (0.268)** also place
+nothing uphill, both well above any cut that admits echo at 0.022. They decline for reasons that are not an
+absent slope: one is a tunnel network measured in depth, the other lays out on its tradition's figure.
+
+**So the cut is necessary, not sufficient**, and that is all the gate claims now: it must never block a
+placement you made, greywater stays below it, and — asserted explicitly — *a usable slope does not imply a
+slope placement.* If that last one ever goes green by emptiness, the single-dial model is back and that
+gate is where it will show.

@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """scripts/world/rebuild.py — SNG-391 §3. THE REBUILD CHAIN, AS ONE SCRIPT.
 
+⛔ FIXED 2026-08-09 (CCode, SNG-394 §3): this script used to overwrite B_ELEV.bin with the
+smoothed hydrology DEM, so each rerun smoothed an already-smoothed surface. The smoothed copy
+now goes to B_ELEV_HYDRO.bin and the generator output is never mutated.
+
 ⛔ WHY THIS FILE EXISTS. The world was regenerated eight times during authoring, and each
 time the derived layers had to be rebuilt. Doing that BY HAND caused, in order:
   - the base globe and the detail patch drawing different worlds (a visible seam)
@@ -171,7 +175,13 @@ for lid in ['archive_hollow','cairn_and_scour','millbrook','the_quiet_ground','t
             j=cj+dj
             if 0<=j<H and WA[K(j,ci+di)]==2: WA[K(j,ci+di)]=0
 open('B_WATER.bin','wb').write(bytes(WA))
-open('B_ELEV.bin','wb').write(bytes(bytearray(max(0,min(255,int(round(x)))) for x in E)))
+# ⛔ DO NOT WRITE THE SMOOTHED DEM BACK OVER B_ELEV.bin.
+# CCode caught this: rebuild.py was OVERWRITING ITS OWN INPUT, so every rerun re-smoothed an
+# already-smoothed elevation. I ran it eight times while authoring. It is the same
+# mutate-your-own-input offence as the write-back clause I made him remove, in my own chain.
+# The smoothed DEM is a HYDROLOGY WORKING COPY and belongs beside the water, not in place of
+# the generator's output — B_ELEV.bin must stay exactly what the generator produced.
+open('B_ELEV_HYDRO.bin','wb').write(bytes(bytearray(max(0,min(255,int(round(x)))) for x in E)))
 # ---- 6. vectors ----
 def blobs(kind,minc):
     cells={k for k in range(W*H) if WA[k]==kind}; seen=set(); out=[]

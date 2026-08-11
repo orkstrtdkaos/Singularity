@@ -1,75 +1,75 @@
 {
-  "schemaVersion": 1,
-  "id": "waystone",
-  "name": "Waystone",
-  "regionId": "the_foothills",
-  "communityId": "waystone",
-  "spectrum": {
-    "concrete_abstract": -0.3,
-    "space_time": 0.3
-  },
-  "tags": [
-    "outpost",
-    "settlement"
-  ],
-  "connections": [
-    "bedrock",
-    "the_long_span"
-  ],
-  "descriptionSeed": "Waystone — an outpost where bridge-builders and road-walkers meet. The masons build the crossing and the horizon folk tell them where it is actually needed, which is why the roads out of Waystone go somewhere useful.",
-  "loreRefs": [],
-  "npcsPresent": [],
-  "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
-  "dangerLevel": 1,
-  "image": "content/packs/valley/assets/waystone.jpg",
-  "questSeeds": [],
-  "map": {
-    "x": 290,
-    "y": 385
-  },
-  "encounterSeeds": [],
-  "poleIntensity": {
-    "concrete": 0.3,
-    "space": 0.3
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.1,
-    "radius": 90,
-    "radiusWorld": 0.054,
-    "reason": "The stone is Precursor work — a marker whose purpose nobody remembers, still doing it. The settlement grew up around a thing that was already here.",
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    -0.3,
-    0,
-    0,
-    0,
-    0,
-    0.3,
-    0,
-    0
-  ],
-  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ An outpost balances EXACTLY TWO domains, so exactly two components are non-zero and both are modest — the signature that distinguishes an outpost from a foothill.",
-  "worldPos": {
-    "colatitude": 76,
-    "longitude": 126,
-    "depth": 0
-  },
-  "worldPosNote": "⚠️ THE MIDPOINT BETWEEN bedrock AND the_long_span. An outpost sits where two domains meet in balance, so its position is the average of the two it balances — not a step out from the centre, which is what a foothill is.",
-  "outpostOf": [
-    "mason",
-    "horizon"
-  ],
-  "betweenPoles": [
-    "bedrock",
-    "the_long_span"
-  ],
-  "tier": "settlement",
-  "parentId": null,
-  "role": "waypoint"
+ "schemaVersion": 1,
+ "id": "waystone",
+ "name": "Waystone",
+ "regionId": "the_given_land",
+ "communityId": "waystone",
+ "spectrum": {
+  "concrete_abstract": -0.3,
+  "space_time": 0.3
+ },
+ "tags": [
+  "outpost",
+  "settlement"
+ ],
+ "connections": [
+  "bedrock",
+  "the_long_span"
+ ],
+ "descriptionSeed": "Waystone — an outpost where bridge-builders and road-walkers meet. The masons build the crossing and the horizon folk tell them where it is actually needed, which is why the roads out of Waystone go somewhere useful.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
+ "dangerLevel": 1,
+ "image": "content/packs/valley/assets/waystone.jpg",
+ "questSeeds": [],
+ "map": {
+  "x": 290,
+  "y": 385
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "concrete": 0.3,
+  "space": 0.3
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.1,
+  "radius": 90,
+  "radiusWorld": 0.054,
+  "reason": "The stone is Precursor work — a marker whose purpose nobody remembers, still doing it. The settlement grew up around a thing that was already here.",
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  0,
+  0,
+  0,
+  0.3,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ An outpost balances EXACTLY TWO domains, so exactly two components are non-zero and both are modest — the signature that distinguishes an outpost from a foothill.",
+ "worldPos": {
+  "colatitude": 76,
+  "longitude": 126,
+  "depth": 0
+ },
+ "worldPosNote": "⚠️ THE MIDPOINT BETWEEN bedrock AND the_long_span. An outpost sits where two domains meet in balance, so its position is the average of the two it balances — not a step out from the centre, which is what a foothill is.",
+ "outpostOf": [
+  "mason",
+  "horizon"
+ ],
+ "betweenPoles": [
+  "bedrock",
+  "the_long_span"
+ ],
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint"
 }

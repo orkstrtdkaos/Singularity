@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.117";
+const APP_VERSION = "1.9.118";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6910,6 +6910,94 @@ function mapTierBar() {
   </div>`;
 }
 
+/** ⛔ SNG-414 — THE REGION MAP. A flat 2D window on one region, with the terrain generated ONCE at the
+ *  measured information floor and kept. No projection maths per pixel, which is the cost that made the
+ *  globe unusable at this scale; no payload, because 90×90 samples take ~49ms and shipping them would
+ *  cost 0.42MB to save a twentieth of a second.
+ *  ⚠️ Deterministic, so it agrees with the globe by construction — the same argument that let the
+ *  region-vote fields resolve without a seam. */
+let _regionBases = new Map();
+// ⚠️ ONE GENERATOR, SHARED BY BOTH TIERS. It was a closure-local inside the globe, which meant the
+// region map could not reach it without a second fetch of the same module and params. Hoisted rather
+// than duplicated — two copies of a deterministic generator is two chances to drift.
+let _fineGenShared = null, _fineGenLoading = false;
+function _fineGenReady() { return !!_fineGenShared; }
+async function loadWorldGenerator() {
+  if (_fineGenShared || _fineGenLoading) return _fineGenShared;
+  _fineGenLoading = true;
+  try {
+    const [mod, gp] = await Promise.all([
+      import("./scripts/world/terrain.mjs"),
+      fetch("content/packs/core/world/genparams.json?v=" + APP_VERSION).then((r) => r.json()),
+    ]);
+    _fineGenShared = { make: mod.makeTerrain || mod.makeTerrainESM, gp };
+  } catch { _fineGenShared = null; }
+  finally { _fineGenLoading = false; }
+  return _fineGenShared;
+}
+function queueRegionMap(regionId) {
+  // the base needs the generator and the terrain asset; both are lazy, so wait for them rather than
+  // racing — and if either never arrives, the list below is still a working map
+  Promise.resolve(loadWorldGenerator()).then(() => {
+    requestAnimationFrame(() => { try { paintRegionMap(regionId); } catch { /* the list still works */ } });
+  }).catch(() => { /* enhancement only */ });
+}
+function paintRegionMap(regionId) {
+  const cv = document.getElementById("region-map");
+  if (!cv || !_terrain || !_fineGenReady()) return;
+  const ext = regionExtent(regionId, CONTENT.locations);
+  if (!ext) return;
+  let base = _regionBases.get(regionId);
+  if (!base) {
+    const pad = 2;
+    base = makeRegionBase(_terrain, _fineGenShared.make(_fineGenShared.gp,
+      { la0: ext.la0 - pad, la1: ext.la1 + pad, lo0: ext.lo0 - pad, lo1: ext.lo1 + pad }), ext);
+    _regionBases.set(regionId, base);
+  }
+  const ctx = cv.getContext("2d");
+  const W = cv.width, H = cv.height;
+  const img = ctx.createImageData(W, H);
+  const D = img.data;
+  const step = contourStepFor(Math.max(ext.la1 - ext.la0, (ext.lo1 - ext.lo0) * base.conv));
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      const w = base.toWorld(x + 0.5, y + 0.5, W, H);
+      const sm = base.sample(w.lon, w.lat);
+      let c;
+      if (sm.type === 0) {
+        const dep = (128 - sm.elevation) / 128;
+        c = [10 + (1 - dep) * 22, 26 + (1 - dep) * 34, 48 + (1 - dep) * 40];
+      } else {
+        // the same hypsometric ramp and contour rule the globe uses, so the two tiers look like one world
+        c = colorAt(_terrain, w.lon, w.lat, { layer: "topo", contourStep: step,
+          fine: () => ({ type: sm.type, raw: sm.raw, elevDelta: 0 }) });
+      }
+      const o = (y * W + x) * 4;
+      D[o] = c[0]; D[o + 1] = c[1]; D[o + 2] = c[2]; D[o + 3] = 255;
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+  // the places, by their real position and their authored kind
+  const here = character.currentLocationId;
+  for (const id of Object.keys(CONTENT.locations)) {
+    const l = CONTENT.locations[id];
+    if (!l?.worldPos || (l.regionId || l.region) !== regionId) continue;
+    const p = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+    if (p.x < -20 || p.y < -20 || p.x > W + 20 || p.y > H + 20) continue;
+    const meta = _terrain.locations[id] || {};
+    const g = glyphFor({ ...meta, k: meta.k });
+    if (g) drawGlyph(ctx, g, p.x, p.y, id === here ? 9 : 7, {});
+    ctx.fillStyle = "rgba(232,230,221,0.85)";
+    ctx.font = "600 10px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(String(l.name || id).slice(0, 22), p.x, p.y + 18);
+    if (id === here) {
+      ctx.strokeStyle = "#e8c14a"; ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.arc(p.x, p.y, 13, 0, Math.PI * 2); ctx.stroke();
+    }
+  }
+}
+
 /** WORLD tier — regions as territories. Individual settlements are noise at this scale; the
  *  questions here are "which Reach is this" and "how do I cross the world" (the gates). */
 function renderMapWorld() {
@@ -7049,11 +7137,8 @@ function wireWorldGlobe() {
     if (_fineGen || _fineLoading || _fineFailed) return;
     _fineLoading = true;
     try {
-      const [mod, gp] = await Promise.all([
-        import("./scripts/world/terrain.mjs"),
-        fetch("content/packs/core/world/genparams.json?v=" + APP_VERSION).then((r) => r.json()),
-      ]);
-      _fineGen = { make: mod.makeTerrain || mod.makeTerrainESM, gp };
+      _fineGen = await loadWorldGenerator();
+      if (!_fineGen) throw new Error("generator unavailable");
       paint(false);
     } catch { _fineFailed = true; }                            // stay on the raster, silently and correctly
     finally { _fineLoading = false; }
@@ -7469,6 +7554,13 @@ function renderMap(selectedId = null) {
   if (mapTier === "world") return renderMapWorld();
   if (mapTier === "location") return renderMapLocation(mapFocus);
   const focusRegion = mapFocus || currentRegionId();
+  // ⛔ SNG-414 TIER 2 — THE REGION IS GEOGRAPHY NOW, NOT A LAYOUT. Everything below this line is the
+  // original auto-positioned diagram, which Erik called "no longer that useful" — and it was right to
+  // be: `autoMapPositions` places nodes for legibility, so the picture answers "what connects to what"
+  // and cannot answer "what is near me", which is the question this tier exists for.
+  // ⚠️ The list stays underneath on purpose. A diagram is still the fastest way to find a place by NAME,
+  // and deleting it would trade one kind of usefulness for another.
+  queueRegionMap(focusRegion);
   // CCODE-12: call the TESTED function instead of re-deriving it here. The inline filter this
   // replaces was written 90 minutes after regionTierNodes shipped with 8 passing tests, and dropped
   // the region-boundary edge filtering the real one does — so an edge leaving the region drew as if
@@ -7637,8 +7729,10 @@ function renderMap(selectedId = null) {
     <h2>${esc((CONTENT.regions || []).find(r => r.regionId === focusRegion)?.name || "Region")}</h2>
     ${/* SNG-154 stage 6: this count is now the REGION's, not the world's — and it is derived, so it
           can't drift the way the old hardcoded "92 places across 24 regions" line silently did. */""}
-    <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, ground coloured by disposition. Gold ring: you are here. <strong>Scroll to zoom, drag to pan.</strong></p>
+    <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, on real ground. Gold ring: you are here.</p>
     ${mapTierBar()}
+    <canvas id="region-map" width="800" height="420" style="width:100%;max-width:800px;border-radius:8px;display:block;margin-bottom:6px;background:#0a0c10"></canvas>
+    <p class="hint" style="margin-bottom:10px">⛰ The ground as it is — generated once at the scale where the world still has features, and kept. The diagram below shows how the places CONNECT, which the ground does not say.</p>
     <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle" title="People you've met (solid) and threads you've only heard of (dimmed diamonds) — where they live">${mapShowKG ? "✓ " : ""}Show what you know</button>
       <button class="opt ${mapShowSub ? "selected" : ""}" id="map-sub-toggle" title="The places WITHIN each location (satellites around each node)" style="margin-left:6px">${mapShowSub ? "✓ " : ""}Show sub-places</button>
       <button class="opt ${mapField === "substrate" ? "selected" : ""}" id="map-field-lat" title="The lattice field — where the Precursors built, pooled and drained by 43 authored sources" style="margin-left:6px">${mapField === "substrate" ? "✓ " : ""}⛰ Lattice field</button>

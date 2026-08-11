@@ -612,6 +612,126 @@ export const MARKER_STYLE = {
   here:       { shape: "here",    r: 5.0, fill: "#e8c14a", stroke: "#e8c14a", label: "you are here" },
 };
 
+/** ⛔ SNG-414 TIER 2 — THE REGION BASE, GENERATED ONCE AT THE INFORMATION FLOOR AND KEPT.
+ *
+ *  The plan said "bake the base", and the arithmetic changed what baking should mean. New structure
+ *  stops arriving below ~0.25° of ground, so a region only ever needs samples at that spacing — a
+ *  median region (11.2° radius) is **90 × 90 = 8,100 samples, about 49ms**. Shipping that as an asset
+ *  would cost ~0.42MB across 27 regions to save a twentieth of a second per region, once.
+ *
+ *  ⛔ SO IT IS NOT SHIPPED. It is generated on first entry and cached, which costs no payload, cannot
+ *  go stale against the world, and — because it comes from the same deterministic generator — agrees
+ *  with the globe by construction rather than by a tolerance. Aevi's constraint, satisfied the same way
+ *  the region-vote fields satisfied it.
+ *
+ *  ⚠️ FLAT, NOT SPHERICAL. This is a 2D map of one region: an equirectangular window with the longitude
+ *  axis scaled by cos(lat) so the ground is not stretched. At region scale that distortion is small and
+ *  the gain is large — no projection maths per pixel, which is the cost that made the globe slow down
+ *  here in the first place. */
+export function makeRegionBase(t, gen, extent, opts) {
+  const o = opts || {};
+  const floorDeg = o.floorDeg || 0.25;                          // the measured information floor
+  const midLat = (extent.la0 + extent.la1) / 2;
+  const conv = Math.max(0.12, Math.cos(midLat * Math.PI / 180));
+  const groundLon = (extent.lo1 - extent.lo0) * conv, groundLat = extent.la1 - extent.la0;
+  // sample at the floor, with a floor of its own so a tiny region still gets a usable grid
+  const nx = Math.max(24, Math.min(512, Math.ceil(groundLon / floorDeg)));
+  const ny = Math.max(24, Math.min(512, Math.ceil(groundLat / floorDeg)));
+  const raw = new Float32Array(nx * ny), typ = new Uint8Array(nx * ny);
+  for (let j = 0; j < ny; j++) {
+    const lat = extent.la0 + (j / (ny - 1)) * (extent.la1 - extent.la0);
+    for (let i = 0; i < nx; i++) {
+      const lon = extent.lo0 + (i / (nx - 1)) * (extent.lo1 - extent.lo0);
+      const g = gen(lon, lat);
+      raw[j * nx + i] = g.raw; typ[j * nx + i] = g.type;
+    }
+  }
+  const at = (arr, lon, lat) => {
+    const fx = Math.max(0, Math.min(nx - 1, ((lon - extent.lo0) / (extent.lo1 - extent.lo0)) * (nx - 1)));
+    const fy = Math.max(0, Math.min(ny - 1, ((lat - extent.la0) / (extent.la1 - extent.la0)) * (ny - 1)));
+    const x0 = Math.floor(fx), y0 = Math.floor(fy);
+    const x1 = Math.min(nx - 1, x0 + 1), y1 = Math.min(ny - 1, y0 + 1);
+    const tx = fx - x0, ty = fy - y0;
+    const a = arr[y0 * nx + x0], b = arr[y0 * nx + x1], c = arr[y1 * nx + x0], d = arr[y1 * nx + x1];
+    return (a * (1 - tx) + b * tx) * (1 - ty) + (c * (1 - tx) + d * tx) * ty;
+  };
+  const base = {
+    extent, nx, ny, conv,
+    /** ⚠️ sign(raw) IS the shoreline (100.000% against the generator over 20,000 samples), so the
+     *  interpolated field crosses zero exactly where the coast runs and the shore is finer than the
+     *  samples that drew it — the same trick that fixed the globe's staircase. */
+    sample(lon, lat) {
+      const r = at(raw, lon, lat);
+      const fx = Math.round(Math.max(0, Math.min(nx - 1, ((lon - extent.lo0) / (extent.lo1 - extent.lo0)) * (nx - 1))));
+      const fy = Math.round(Math.max(0, Math.min(ny - 1, ((lat - extent.la0) / (extent.la1 - extent.la0)) * (ny - 1))));
+      const near = typ[fy * nx + fx];
+      return { type: r > 0 ? (near === 0 ? 1 : near) : 0, raw: r, elevation: elevFromRaw(t, r, r > 0 ? 1 : 0) };
+    },
+    /** screen ↔ world, for a canvas showing the whole extent */
+    toScreen(lon, lat, w, h) {
+      return { x: ((lon - extent.lo0) / (extent.lo1 - extent.lo0)) * w,
+               y: (1 - (lat - extent.la0) / (extent.la1 - extent.la0)) * h };
+    },
+    toWorld(x, y, w, h) {
+      return { lon: extent.lo0 + (x / w) * (extent.lo1 - extent.lo0),
+               lat: extent.la0 + (1 - y / h) * (extent.la1 - extent.la0) };
+    },
+  };
+  base.samples = nx * ny;
+  return base;
+}
+
+/** The extent a region occupies, from its members — padded so the edge is not the frame.
+ *  ⚠️ Reads worldPos, never the graph: SNG-409 §5 measured that the parent links and the ground
+ *  disagree, and at this tier the ground is the question. */
+export function regionExtent(regionId, locations, { padFrac = 0.18 } = {}) {
+  const pts = [];
+  for (const id of Object.keys(locations || {})) {
+    const l = locations[id];
+    if (!l?.worldPos || l.worldPosInherited) continue;
+    if ((l.regionId || l.region) !== regionId) continue;
+    pts.push([l.worldPos.colatitude - 90, l.worldPos.longitude]);
+  }
+  if (!pts.length) return null;
+  let la0 = 90, la1 = -90;
+  for (const [la] of pts) { la0 = Math.min(la0, la); la1 = Math.max(la1, la); }
+  // ⛔ LONGITUDE WRAPS, AND MIN/MAX DOES NOT KNOW THAT. The Centre's members straddle the antimeridian,
+  // so a naive extent read 394° WIDE — the whole world and change, for a region 13° tall. Umbral Depths
+  // read 485°, which is not even a possible width for anything.
+  // ⚠️ The right extent is the complement of the LARGEST GAP between sorted longitudes: whatever arc the
+  // members do NOT occupy is the outside, and everything else is the region.
+  const lons = pts.map((q) => q[1]).sort((x, y) => x - y);
+  let gapAt = 0, gap = -1;
+  for (let i = 0; i < lons.length; i++) {
+    const a2 = lons[i], b2 = lons[(i + 1) % lons.length] + (i + 1 === lons.length ? 360 : 0);
+    if (b2 - a2 > gap) { gap = b2 - a2; gapAt = i; }
+  }
+  const start = lons[(gapAt + 1) % lons.length];
+  const width = 360 - gap;
+  const padLa = Math.max(0.5, (la1 - la0) * padFrac);
+  // ⚠️ padding cannot take an extent past a full turn — the Foothills already spans nearly every
+  // longitude, which is Erik's ruling that it is a continent arriving as arithmetic. 394° of longitude
+  // is not a window; it is a bug wearing one.
+  const padLo = Math.max(0, Math.min(width * padFrac, (360 - width) / 2));
+  let A0 = Math.max(-90, la0 - padLa), A1 = Math.min(90, la1 + padLa);
+  let O0 = start - padLo, O1 = start + width + padLo;
+  // ⛔ A REGION WITH ONE MEMBER HAS NO EXTENT, AND PADDING A POINT MAKES A RIBBON. Erik's Foothills split
+  // produced twelve regions of which NINE stand alone — exactly what his rule predicted — and every one
+  // came out at aspect 10: a sliver, not a map. ⚠️ So a sparse region gets a minimum window in GROUND
+  // units, square, centred on what it has. A map of one town is a map of the country around that town,
+  // which is the question this tier answers anyway.
+  const midLat2 = (A0 + A1) / 2;
+  const conv2 = Math.max(0.12, Math.cos(midLat2 * Math.PI / 180));
+  const MIN_GROUND = 6;
+  const want = Math.max(A1 - A0, (O1 - O0) * conv2, MIN_GROUND);
+  if (A1 - A0 < want) { const c = midLat2; A0 = Math.max(-90, c - want / 2); A1 = Math.min(90, c + want / 2); }
+  if ((O1 - O0) * conv2 < want) { const c = (O0 + O1) / 2, half = (want / conv2) / 2; O0 = c - half; O1 = c + half; }
+  return { la0: A0, la1: A1,
+           lo0: O0, lo1: O1, members: pts.length,
+           // flagged rather than hidden: a region this wide has no useful 2D map and wants splitting
+           global: width + 2 * padLo > 300 };
+}
+
 /** ⛔ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA. "No location in this world has a boundary — all
  *  135 are points, including the 25 marked `tier: region`. A contested territory currently looks like a
  *  village."

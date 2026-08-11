@@ -1,67 +1,67 @@
 {
-  "schemaVersion": 1,
-  "id": "longshore",
-  "name": "Longshore",
-  "regionId": "the_foothills",
-  "communityId": "longshore",
-  "spectrum": {
-    "space_time": 0.4,
-    "concrete_abstract": -0.2
-  },
-  "tags": [
-    "settlement",
-    "foothill",
-    "market"
-  ],
-  "connections": [
-    "the_crossing",
-    "the_long_span"
-  ],
-  "descriptionSeed": "Longshore — the waygate town: outfitters, bridge-wrights, and people who know how long a road really takes. Everyone here is either leaving or has just arrived, and it is the one place on any road where nobody asks where you are from.",
-  "loreRefs": [],
-  "npcsPresent": [],
-  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
-  "dangerLevel": 1,
-  "image": "content/packs/valley/assets/longshore.jpg",
-  "questSeeds": [],
-  "map": {
-    "x": 390,
-    "y": 380
-  },
-  "encounterSeeds": [],
-  "poleIntensity": {
-    "space": 0.4,
-    "concrete": 0.2
-  },
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    -0.2,
-    0,
-    0,
-    0,
-    0,
-    0.4,
-    0,
-    0
-  ],
-  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
-  "worldPos": {
-    "colatitude": 36,
-    "longitude": 68,
-    "depth": 0
-  },
-  "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_long_span, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
-  "foothillOf": [
-    "horizon",
-    "hourkeeper",
-    "mason"
-  ],
-  "betweenCrossingAnd": "the_long_span",
-  "startingLocation": true,
-  "tier": "settlement",
-  "parentId": null,
-  "role": "waypoint"
+ "schemaVersion": 1,
+ "id": "longshore",
+ "name": "Longshore",
+ "regionId": "foothill_longshore",
+ "communityId": "longshore",
+ "spectrum": {
+  "space_time": 0.4,
+  "concrete_abstract": -0.2
+ },
+ "tags": [
+  "settlement",
+  "foothill",
+  "market"
+ ],
+ "connections": [
+  "the_crossing",
+  "the_long_span"
+ ],
+ "descriptionSeed": "Longshore — the waygate town: outfitters, bridge-wrights, and people who know how long a road really takes. Everyone here is either leaving or has just arrived, and it is the one place on any road where nobody asks where you are from.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
+ "dangerLevel": 1,
+ "image": "content/packs/valley/assets/longshore.jpg",
+ "questSeeds": [],
+ "map": {
+  "x": 390,
+  "y": 380
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "space": 0.4,
+  "concrete": 0.2
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0.4,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
+ "worldPos": {
+  "colatitude": 36,
+  "longitude": 68,
+  "depth": 0
+ },
+ "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_long_span, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
+ "foothillOf": [
+  "horizon",
+  "hourkeeper",
+  "mason"
+ ],
+ "betweenCrossingAnd": "the_long_span",
+ "startingLocation": true,
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint"
 }

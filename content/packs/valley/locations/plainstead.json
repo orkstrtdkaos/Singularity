@@ -1,69 +1,69 @@
 {
-  "schemaVersion": 1,
-  "id": "plainstead",
-  "name": "Plainstead",
-  "regionId": "the_foothills",
-  "communityId": "plainstead",
-  "spectrum": {
-    "falsehood_truth": 0.4,
-    "emotional_logical": 0.3,
-    "order_chaos": 0.25
-  },
-  "tags": [
-    "settlement",
-    "foothill",
-    "market"
-  ],
-  "connections": [
-    "the_crossing",
-    "the_unblinking_stone"
-  ],
-  "descriptionSeed": "Plainstead — arbitration, assay and record: where a dispute goes when both sides want it settled and neither wants blood. Boring on purpose. The Stark Reach will strip you to the truth; Plainstead will just tell you who owns the field.",
-  "loreRefs": [],
-  "npcsPresent": [],
-  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
-  "dangerLevel": 1,
-  "image": "content/packs/valley/assets/plainstead.jpg",
-  "questSeeds": [],
-  "map": {
-    "x": 270,
-    "y": 335
-  },
-  "encounterSeeds": [],
-  "poleIntensity": {
-    "truth": 0.4,
-    "logical": 0.3,
-    "order": 0.25
-  },
-  "axisVector": [
-    0.3,
-    0.4,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
-  "worldPos": {
-    "colatitude": 38,
-    "longitude": 280,
-    "depth": 0
-  },
-  "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_unblinking_stone, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
-  "foothillOf": [
-    "verist",
-    "syllogist",
-    "lattice"
-  ],
-  "betweenCrossingAnd": "the_unblinking_stone",
-  "startingLocation": true,
-  "tier": "settlement",
-  "parentId": null,
-  "role": "waypoint"
+ "schemaVersion": 1,
+ "id": "plainstead",
+ "name": "Plainstead",
+ "regionId": "foothill_plainstead",
+ "communityId": "plainstead",
+ "spectrum": {
+  "falsehood_truth": 0.4,
+  "emotional_logical": 0.3,
+  "order_chaos": 0.25
+ },
+ "tags": [
+  "settlement",
+  "foothill",
+  "market"
+ ],
+ "connections": [
+  "the_crossing",
+  "the_unblinking_stone"
+ ],
+ "descriptionSeed": "Plainstead — arbitration, assay and record: where a dispute goes when both sides want it settled and neither wants blood. Boring on purpose. The Stark Reach will strip you to the truth; Plainstead will just tell you who owns the field.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
+ "dangerLevel": 1,
+ "image": "content/packs/valley/assets/plainstead.jpg",
+ "questSeeds": [],
+ "map": {
+  "x": 270,
+  "y": 335
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "truth": 0.4,
+  "logical": 0.3,
+  "order": 0.25
+ },
+ "axisVector": [
+  0.3,
+  0.4,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
+ "worldPos": {
+  "colatitude": 38,
+  "longitude": 280,
+  "depth": 0
+ },
+ "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_unblinking_stone, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
+ "foothillOf": [
+  "verist",
+  "syllogist",
+  "lattice"
+ ],
+ "betweenCrossingAnd": "the_unblinking_stone",
+ "startingLocation": true,
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint"
 }

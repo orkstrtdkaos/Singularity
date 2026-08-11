@@ -950,6 +950,61 @@ for (const pack of PACKS) {
       out.sites.every((st) => st.why && st.placedBecause));
   }
 
+  // ══ SNG-414 TIER 2 — EVERY REGION HAS A MAP THAT IS SHAPED LIKE A MAP.
+  // Erik: "we start to lose meaningful information, so we should switch to the regional map." That only
+  // works if a region HAS a sensible window, and three separate things had to be true for that.
+  {
+    const WGR = await import("../engine/worldglobe.js");
+    const TGR = await import("../scripts/world/terrain.mjs");
+    const tR = WGR.decodeTerrain(rj("content/packs/core/world/terrain.json"));
+    const rids = [...new Set(Object.values(canon.locs).map((l) => l.regionId || l.region).filter(Boolean))];
+    const shapes = rids.map((rid) => {
+      const e = WGR.regionExtent(rid, canon.locs);
+      if (!e) return null;
+      const conv = Math.max(0.12, Math.cos(((e.la0 + e.la1) / 2) * Math.PI / 180));
+      const gw = (e.lo1 - e.lo0) * conv, gh = e.la1 - e.la0;
+      return { rid, aspect: Math.max(gw, gh) / Math.max(0.1, Math.min(gw, gh)), width: e.lo1 - e.lo0, global: e.global };
+    }).filter(Boolean);
+
+    // ⛔ LONGITUDE WRAPS, AND MIN/MAX DOES NOT KNOW IT. The Centre's members straddle the antimeridian,
+    // which read as a 394°-wide window — and Umbral Depths as 485°, which is not a possible width for
+    // anything. The extent is the complement of the largest GAP between sorted longitudes.
+    check("SNG-414: no region extent exceeds a full turn — longitude wraps, and the window knows it",
+      shapes.every((x) => x.width <= 360.001),
+      shapes.filter((x) => x.width > 360).map((x) => x.rid + " " + x.width.toFixed(0) + "°").join(", "));
+
+    // ⛔ A ONE-MEMBER REGION HAS NO EXTENT, and Erik's Foothills rule produced NINE of them. Padding a
+    // point gave aspect 10 — a sliver, not a map — so a sparse region gets a square minimum window in
+    // GROUND units. A map of one town is a map of the country around that town.
+    check("SNG-414: every region is MAP-SHAPED — a sparse one gets a window, not a sliver",
+      shapes.every((x) => x.aspect <= 3.2),
+      shapes.filter((x) => x.aspect > 3.2).map((x) => x.rid + " " + x.aspect.toFixed(1)).join(", "));
+
+    // ⚠️ and the Foothills problem is GONE rather than relabelled
+    check("SNG-414: …and no region is still global — the 22-member Foothills has genuinely ceased to exist",
+      shapes.every((x) => !x.global) && !rids.includes("the_foothills"),
+      shapes.filter((x) => x.global).map((x) => x.rid).join(", "));
+
+    // ⛔ THE BASE AGREES WITH THE WORLD BY CONSTRUCTION — it is the same deterministic generator, so
+    // there is no seam to tolerate. This is the constraint Aevi called load-bearing, one tier down.
+    const rid0 = "the_echo_vale";
+    const ext0 = WGR.regionExtent(rid0, canon.locs);
+    const base0 = WGR.makeRegionBase(tR, TGR.makeTerrain(canon.gp,
+      { la0: ext0.la0 - 2, la1: ext0.la1 + 2, lo0: ext0.lo0 - 2, lo1: ext0.lo1 + 2 }), ext0);
+    let ok = 0, n = 0;
+    for (let i = 0; i < 1200; i++) {
+      const lo = ext0.lo0 + (ext0.lo1 - ext0.lo0) * ((i % 40) / 39);
+      const la = ext0.la0 + (ext0.la1 - ext0.la0) * (Math.floor(i / 40) / 29);
+      const a = base0.sample(lo, la), b = WGR.sampleAt(tR, lo, la);
+      n++; if ((a.type !== 0) === (b.type !== 0)) ok++;
+    }
+    check("SNG-414: the region base is the SAME WORLD as the globe — same generator, so no seam to measure",
+      n > 500 && ok / n > 0.97, `${(100 * ok / n).toFixed(2)}% land/sea agreement over ${n} samples`);
+    // ⚠️ and it samples at the information floor rather than at whatever the screen happens to be
+    check("SNG-414: …sampled at the measured information floor, so it costs a fixed and small amount",
+      base0.samples > 200 && base0.samples < 300000, `${base0.samples} samples for ${rid0}`);
+  }
+
   // ══ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA.
   // "No location in this world has a boundary — all 135 are points, including the 25 marked
   // `tier: region`. A contested territory currently looks like a village."

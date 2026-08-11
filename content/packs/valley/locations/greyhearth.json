@@ -1,77 +1,77 @@
 {
-  "schemaVersion": 1,
-  "id": "greyhearth",
-  "name": "Greyhearth",
-  "regionId": "the_foothills",
-  "communityId": "greyhearth",
-  "spectrum": {
-    "death_life": -0.35,
-    "emotional_logical": -0.25,
-    "mechanical_spiritual": 0.2
-  },
-  "tags": [
-    "settlement",
-    "foothill",
-    "market"
-  ],
-  "connections": [
-    "the_crossing",
-    "the_quiet_ground"
-  ],
-  "descriptionSeed": "Greyhearth — the burying trades, the mourning trades and the quiet ones. A town that buries for every road that meets here — the Crossing's dead and the Palelands' both — and does not find it grim: everyone here has handled a body or sung over one, which makes it the most matter-of-fact place in the Valley about the thing everyone else will not name.",
-  "loreRefs": [],
-  "npcsPresent": [],
-  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
-  "dangerLevel": 1,
-  "image": "content/packs/valley/assets/greyhearth.jpg",
-  "questSeeds": [],
-  "map": {
-    "x": 510,
-    "y": 310
-  },
-  "encounterSeeds": [],
-  "poleIntensity": {
-    "death": 0.35,
-    "emotional": 0.25,
-    "spiritual": 0.2
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.1,
-    "radius": 90,
-    "radiusWorld": 0.054,
-    "reason": "Ashwardens have attended endings on this hearth for a long time, and an ending attended properly leaves a residue. The grey in the name is not soot.",
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "axisVector": [
-    -0.25,
-    0,
-    0,
-    0,
-    0,
-    0.2,
-    0,
-    0,
-    -0.35,
-    0,
-    0,
-    0
-  ],
-  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
-  "worldPos": {
-    "colatitude": 43,
-    "longitude": 36,
-    "depth": 0
-  },
-  "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_quiet_ground, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
-  "foothillOf": [
-    "ashwarden",
-    "threnodist",
-    "numinous"
-  ],
-  "betweenCrossingAnd": "the_quiet_ground",
-  "startingLocation": true,
-  "tier": "settlement",
-  "parentId": null,
-  "role": "waypoint"
+ "schemaVersion": 1,
+ "id": "greyhearth",
+ "name": "Greyhearth",
+ "regionId": "foothill_greyhearth",
+ "communityId": "greyhearth",
+ "spectrum": {
+  "death_life": -0.35,
+  "emotional_logical": -0.25,
+  "mechanical_spiritual": 0.2
+ },
+ "tags": [
+  "settlement",
+  "foothill",
+  "market"
+ ],
+ "connections": [
+  "the_crossing",
+  "the_quiet_ground"
+ ],
+ "descriptionSeed": "Greyhearth — the burying trades, the mourning trades and the quiet ones. A town that buries for every road that meets here — the Crossing's dead and the Palelands' both — and does not find it grim: everyone here has handled a body or sung over one, which makes it the most matter-of-fact place in the Valley about the thing everyone else will not name.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
+ "dangerLevel": 1,
+ "image": "content/packs/valley/assets/greyhearth.jpg",
+ "questSeeds": [],
+ "map": {
+  "x": 510,
+  "y": 310
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "death": 0.35,
+  "emotional": 0.25,
+  "spiritual": 0.2
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.1,
+  "radius": 90,
+  "radiusWorld": 0.054,
+  "reason": "Ashwardens have attended endings on this hearth for a long time, and an ending attended properly leaves a residue. The grey in the name is not soot.",
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [
+  -0.25,
+  0,
+  0,
+  0,
+  0,
+  0.2,
+  0,
+  0,
+  -0.35,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Every component is |0.45| or less by construction: a foothill is not extreme on any axis, which is what distinguishes it from its pole capital.",
+ "worldPos": {
+  "colatitude": 43,
+  "longitude": 36,
+  "depth": 0
+ },
+ "worldPosNote": "⚠️ THE LITERAL MIDPOINT between the Crossing and the_quiet_ground, taking the short way round on longitude. The world position states the philosophy: a foothill sits half the distance out from the centre toward its pole, and the geography and the fiction say the same thing.",
+ "foothillOf": [
+  "ashwarden",
+  "threnodist",
+  "numinous"
+ ],
+ "betweenCrossingAnd": "the_quiet_ground",
+ "startingLocation": true,
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint"
 }

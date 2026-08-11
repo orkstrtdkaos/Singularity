@@ -1,75 +1,75 @@
 {
-  "schemaVersion": 1,
-  "id": "the_spent_yard",
-  "name": "The Spent Yard",
-  "regionId": "the_foothills",
-  "communityId": "the_spent_yard",
-  "spectrum": {
-    "chaos_order": -0.3,
-    "destruction_creation": -0.3
-  },
-  "tags": [
-    "outpost",
-    "settlement"
-  ],
-  "connections": [
-    "the_churn_edge",
-    "the_scour"
-  ],
-  "descriptionSeed": "The Spent Yard — an outpost where the churn and the unmaking meet: salvage, breaking, and things that were finished with somewhere else. Nothing here is new and nothing here is wasted.",
-  "loreRefs": [],
-  "npcsPresent": [],
-  "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
-  "dangerLevel": 1,
-  "image": "content/packs/valley/assets/the_spent_yard.jpg",
-  "questSeeds": [],
-  "map": {
-    "x": 510,
-    "y": 422
-  },
-  "encounterSeeds": [],
-  "poleIntensity": {
-    "chaos": 0.3,
-    "destruction": 0.3
-  },
-  "substrateSource": {
-    "kind": "sink",
-    "delta": -0.14,
-    "radius": 90,
-    "radiusWorld": 0.054,
-    "reason": "⛔ The name is literal. Structured nanite spent into purpose scatters, and this is where the foothills' scattering settles — thick with WILD and thin of order. Churnfolk work it; a Vested crossing it feels the difference in twenty paces.",
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    -0.3,
-    0,
-    0,
-    0,
-    0,
-    -0.3
-  ],
-  "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ Exactly two non-zero components — the signature of a two-domain balance.",
-  "worldPos": {
-    "colatitude": 74,
-    "longitude": 56,
-    "depth": 0
-  },
-  "worldPosNote": "⚠️ THE MIDPOINT BETWEEN the_churn_edge AND the_scour.",
-  "outpostOf": [
-    "churnfolk",
-    "unmaker"
-  ],
-  "betweenPoles": [
-    "the_churn_edge",
-    "the_scour"
-  ],
-  "tier": "settlement",
-  "parentId": null,
-  "role": "waypoint"
+ "schemaVersion": 1,
+ "id": "the_spent_yard",
+ "name": "The Spent Yard",
+ "regionId": "unspooling",
+ "communityId": "the_spent_yard",
+ "spectrum": {
+  "chaos_order": -0.3,
+  "destruction_creation": -0.3
+ },
+ "tags": [
+  "outpost",
+  "settlement"
+ ],
+ "connections": [
+  "the_churn_edge",
+  "the_scour"
+ ],
+ "descriptionSeed": "The Spent Yard — an outpost where the churn and the unmaking meet: salvage, breaking, and things that were finished with somewhere else. Nothing here is new and nothing here is wasted.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "two crews who share a yard, a road, and a long-running disagreement",
+ "dangerLevel": 1,
+ "image": "content/packs/valley/assets/the_spent_yard.jpg",
+ "questSeeds": [],
+ "map": {
+  "x": 510,
+  "y": 422
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "chaos": 0.3,
+  "destruction": 0.3
+ },
+ "substrateSource": {
+  "kind": "sink",
+  "delta": -0.14,
+  "radius": 90,
+  "radiusWorld": 0.054,
+  "reason": "⛔ The name is literal. Structured nanite spent into purpose scatters, and this is where the foothills' scattering settles — thick with WILD and thin of order. Churnfolk work it; a Vested crossing it feels the difference in twenty paces.",
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  0,
+  0,
+  0,
+  -0.3
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder. ⚠️ Exactly two non-zero components — the signature of a two-domain balance.",
+ "worldPos": {
+  "colatitude": 74,
+  "longitude": 56,
+  "depth": 0
+ },
+ "worldPosNote": "⚠️ THE MIDPOINT BETWEEN the_churn_edge AND the_scour.",
+ "outpostOf": [
+  "churnfolk",
+  "unmaker"
+ ],
+ "betweenPoles": [
+  "the_churn_edge",
+  "the_scour"
+ ],
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint"
 }

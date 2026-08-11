@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 30,
-  "xp": 2964,
+  "xp": 2969,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -202,7 +202,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.017506831228473182,
+    "spectrumId": -0.016631489667049523,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -218,7 +218,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 260,
+  "energy": 255,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2125,9 +2125,9 @@
     "Deep in the Threshold Post mine-shaft, Silas assessed the second structural fault—a slower-developing fracture that will require monitoring in months to come—and marked it plainly for Fendt's crew. The ridge sentinel is now fully assessed, armed with honest limits and clear notice of what requires attention. The warden post is ready.",
     "At the ridge Threshold Post in early morning, Silas returns from the spring-fed draw to share a meal with Pell and ask after the child she carries. Pell reports the little one is strong and steady, moving in response to the novel-depth work."
   ],
-  "currentLocationId": "gen-the-temple",
+  "currentLocationId": "radiant_plateau_edge",
   "activeScene": {
-    "locationId": "gen-the-temple",
+    "locationId": "radiant_plateau_edge",
     "turns": [
       {
         "player": null,
@@ -2138,73 +2138,79 @@
         "player": "Open the sealed Hub message and read what Ossian sent",
         "summary": "At the ridge Threshold Post in afternoon light, Silas reads Ossian's sealed message: the Radiant Reach is intensifying past the Accord's tolerance, and someone chose to hide it. The water crisis conceals a larger drift.",
         "narration": "You break the Hub seal—a small brass clasp, warm from your pack—and unfold the message. Ossian's hand is precise and steady, the ink dark enough to read even in this slanted afternoon light.\n\n*Silas. The Radiant readings from the array north of the Crossing show a drift you should know. Sera's engineer buried them five years ago. The archive holds copies—Leth will confirm their existence if you ask plainly. The Radiant leadership is choosing not to see what they measure. This is beyond the water crisis. —O.*\n\nThe message is brief and final. There is no request, no question mark. Ossian has handed you a fact and stepped back from it.\n\nPell shifts slightly beside you, her free hand finding the small of your back—not asking, just there. The temple's shadow stretches long across the moorland behind you. Huginn's head tilts as it reads the same direction the wind does, which is to say it reads the south road and whatever moves on it.\n\n*✦ The Light That Will Not Dim — Codex: the Radiant Reach is intensifying past the Accord's tolerance — and someone chose to hide it..*"
+      },
+      {
+        "player": "Take the opportunity to update Warden Coll on the status of the Water crisis and new warden stations.  Ask about the status of support requests to the other powers.",
+        "summary": "Silas sends word to Mara via shadow-sheet, then briefs Warden Coll on the water crisis's deeper truth—the engineered reclamation site and the Radiant drift. Coll reveals the support responses and prepares to file an amended petition naming pole-pull as the real issue.",
+        "narration": "You fold Ossian's message carefully and tuck it back into your pack—a thread to follow, but not today. Pell's hand finds yours as you settle, and you sit quietly for a moment, the temple's warmth at your back and the south road still waiting. When you're ready, you pull the shadow-sheet from your kit and write a brief message to Mara: *Ossian confirms drift. Radiant readings buried five years. Archive holds copies through Leth. Water crisis connected to larger pole-pull. Arriving Crossing by evening. —S.* You seal it and hand it to Huginn, who takes it without comment and launches toward the mill, the message already in transit through the Hub's relay before you can finish watching him go.\n\nAn hour later, you're standing in the Edge District's warden post—the air cool inside the stone, Warden Coll's office neat and precise, the woman herself composed behind her desk as you lay out what you know plainly. The water system's contamination wasn't accident. The reclamation site beneath the Threshold Post was engineered to close on schedule. And the Radiant array north of the Crossing has been drifting past the Accord's tolerance for five years, with measurements deliberately buried. Coll listens without interruption, her pen still in her hand, her expression steady. When you finish, she sets the pen down with deliberate care.\n\n\"The support requests were filed with the Hub Council two days ago,\" she says quietly. \"Lattice-Cities declined formally—they cited the Accord's restriction on direct intervention in a Reach's internal water management. The Verists sent a scholar to observe, which is to say they sent nothing. The Cogitants requested access to the reclamation site's technical specifications, which I refused without your consent.\" She pauses, and her eyes meet yours directly. \"The Ashwardens received the petition in silence. That's their answer.\"\n\nShe leans back slightly. \"What you've just told me changes the conversation. This isn't water anymore. This is pole-pull, and that's Accord business. I need to file an amended petition with the reason named plainly. When I do, things will move faster—and some of them will move toward you.\"\n\n*✦ The Cogitants: -1 — requested technical specifications Silas refused them access to.*"
       }
     ],
     "lastTurn": {
-      "narration": "You break the Hub seal—a small brass clasp, warm from your pack—and unfold the message. Ossian's hand is precise and steady, the ink dark enough to read even in this slanted afternoon light.\n\n*Silas. The Radiant readings from the array north of the Crossing show a drift you should know. Sera's engineer buried them five years ago. The archive holds copies—Leth will confirm their existence if you ask plainly. The Radiant leadership is choosing not to see what they measure. This is beyond the water crisis. —O.*\n\nThe message is brief and final. There is no request, no question mark. Ossian has handed you a fact and stepped back from it.\n\nPell shifts slightly beside you, her free hand finding the small of your back—not asking, just there. The temple's shadow stretches long across the moorland behind you. Huginn's head tilts as it reads the same direction the wind does, which is to say it reads the south road and whatever moves on it.\n\n*✦ The Light That Will Not Dim — Codex: the Radiant Reach is intensifying past the Accord's tolerance — and someone chose to hide it..*",
-      "sceneSummary": "At the ridge Threshold Post in afternoon light, Silas reads Ossian's sealed message: the Radiant Reach is intensifying past the Accord's tolerance, and someone chose to hide it. The water crisis conceals a larger drift.",
+      "narration": "You fold Ossian's message carefully and tuck it back into your pack—a thread to follow, but not today. Pell's hand finds yours as you settle, and you sit quietly for a moment, the temple's warmth at your back and the south road still waiting. When you're ready, you pull the shadow-sheet from your kit and write a brief message to Mara: *Ossian confirms drift. Radiant readings buried five years. Archive holds copies through Leth. Water crisis connected to larger pole-pull. Arriving Crossing by evening. —S.* You seal it and hand it to Huginn, who takes it without comment and launches toward the mill, the message already in transit through the Hub's relay before you can finish watching him go.\n\nAn hour later, you're standing in the Edge District's warden post—the air cool inside the stone, Warden Coll's office neat and precise, the woman herself composed behind her desk as you lay out what you know plainly. The water system's contamination wasn't accident. The reclamation site beneath the Threshold Post was engineered to close on schedule. And the Radiant array north of the Crossing has been drifting past the Accord's tolerance for five years, with measurements deliberately buried. Coll listens without interruption, her pen still in her hand, her expression steady. When you finish, she sets the pen down with deliberate care.\n\n\"The support requests were filed with the Hub Council two days ago,\" she says quietly. \"Lattice-Cities declined formally—they cited the Accord's restriction on direct intervention in a Reach's internal water management. The Verists sent a scholar to observe, which is to say they sent nothing. The Cogitants requested access to the reclamation site's technical specifications, which I refused without your consent.\" She pauses, and her eyes meet yours directly. \"The Ashwardens received the petition in silence. That's their answer.\"\n\nShe leans back slightly. \"What you've just told me changes the conversation. This isn't water anymore. This is pole-pull, and that's Accord business. I need to file an amended petition with the reason named plainly. When I do, things will move faster—and some of them will move toward you.\"\n\n*✦ The Cogitants: -1 — requested technical specifications Silas refused them access to.*",
+      "sceneSummary": "Silas sends word to Mara via shadow-sheet, then briefs Warden Coll on the water crisis's deeper truth—the engineered reclamation site and the Radiant drift. Coll reveals the support responses and prepares to file an amended petition naming pole-pull as the real issue.",
       "choices": [
         {
-          "label": "Ask Pell what she reads—her ironsense catches weight the eye misses, and you trust it completely.",
+          "label": "Ask Coll directly what she suspects about who reactivated the reclamation site and why.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "insight",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "ask"
+            "study",
+            "question"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Walk the message to Veth at the lodge-frame and let her read it without preamble—the warden's eye sees what needs attending.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense to read the message's shape more completely—what does the design of Ossian's words tell you about the pattern he's handing you?",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Set the message down for now and sit with Pell in the quiet—the road south is waiting, and you can read Ossian's words again when you reach the next junction.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Consent to the amended petition and ask when the Accord will likely respond—and what the response might look like.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "rest"
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Request Leth's contact information directly from Coll—you need the archive confirmation yourself, not through intermediaries.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "demand"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask whether the Cogitants' request for the reclamation site's technical specifications carries a deeper interest—what do they actually want from this?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -2223,67 +2229,79 @@
           "op": "progress",
           "questId": "the-light-that-will-not-dim",
           "title": "The Light That Will Not Dim",
-          "summary": "The Radiant Reach is intensifying past the Accord's tolerance—and someone chose to hide it.",
-          "giver": "ossian",
-          "note": "Ossian names the drift plainly: readings buried five years ago, archive copies held by Leth in the Edge District. The Radiant leadership is choosing not to see what they measure.",
-          "xpReward": 0
+          "summary": "Find who benefits from the light winning",
+          "giver": "high_luminary",
+          "note": "Warden Coll confirms the Radiant readings are buried and pole-pull is the real issue. An amended petition will name the drift plainly to the Accord. The conspiracy now has institutional weight behind it.",
+          "xpReward": null
         }
       ],
-      "standingOps": [],
+      "standingOps": [
+        {
+          "people": "lattice",
+          "delta": 0,
+          "why": "declined to intervene, citing Accord restriction"
+        },
+        {
+          "people": "verist",
+          "delta": 0,
+          "why": "sent only an observer"
+        },
+        {
+          "people": "cogitant",
+          "delta": -1,
+          "why": "requested technical specifications Silas refused them access to"
+        },
+        {
+          "people": "ashwarden",
+          "delta": 0,
+          "why": "received petition in silence"
+        }
+      ],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": null,
-      "stageOps": [
-        {
-          "questId": "the-light-that-will-not-dim",
-          "stageId": "s1",
-          "evidence": "Ossian's sealed message names the suppressed readings plainly: the Radiant array north of the Crossing shows a drift, and Sera's engineer buried them five years ago. The archive holds copies. Leth will confirm their existence."
-        }
-      ],
+      "stageOps": [],
       "scene": {
-        "setting": "The ridge Threshold Post, afternoon light. The death-warden temple stands complete behind you, stone and timber warm from the morning sun. The lodge-frame skeleton rises nearby, timber joinery in progress. The southern road is visible as a pale line cutting through the moorland.",
+        "setting": "Warden Coll's office in the Edge District warden post—stone walls, afternoon light through a high window, the space precise and cool. Coll behind her desk, Silas standing across from her with the shadow-sheet still in hand.",
         "npcsPresent": [
           {
-            "name": "Pell Ran Marsh",
-            "state": "Sitting beside Silas, one hand on her belly, steady and present—her back warm against his shoulder, listening to the pulse of the child she carries"
-          },
-          {
-            "name": "Veth Ondra",
-            "state": "At the lodge-frame with Fendt's crew, working on timber joinery—the warden's eye steady on the structure's load-bearing lines"
-          },
-          {
-            "name": "Huginn",
-            "state": "Perched on the temple roof-corner, eye on the southern road—reading the wind and the shape of what moves"
+            "name": "Warden Coll",
+            "state": "seated behind her desk, pen down, expression direct and measured—processing what Silas has just laid out and already moving toward the next step"
           }
         ],
         "objects": [
-          "The death-warden temple—stone and timber, complete",
-          "The lodge-frame—timber skeleton, roof-joists bare",
-          "The sealed deep seam—at the temple's center, now altar",
-          "Ossian's sealed Hub message—just opened, now in Silas's hand",
-          "Memory—the unified spear, answering shadow-form bound into it"
+          "Warden Coll's desk",
+          "the shadow-sheet (in Silas's hand)",
+          "Ossian's message (tucked in Silas's pack)",
+          "the office's records and filing"
         ],
         "threads": [
-          "Ossian's message naming the Radiant drift—a thread opening toward the Edge District and Leth",
-          "The lodge-frame work continuing—Veth and crew present and working",
-          "The south road waiting—the journey's next leg unstarted",
-          "Pell's quiet presence—the child steady inside her"
+          "Who reactivated the reclamation site and why?",
+          "What the Accord will do when the amended petition is filed",
+          "The Cogitants' real interest in the reclamation site specs",
+          "Leth's contact and the archived Radiant readings"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "ossian",
-          "name": "Ossian",
-          "note": "Sealed message delivered to the Threshold Post—the Radiant readings buried five years ago are now named plainly. Ossian has stepped back from the information, leaving it to Silas to choose what comes next.",
+          "npcId": "warden-coll",
+          "name": "Warden Coll",
+          "role": "Edge District Warden",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": null,
+          "note": "Received Silas's briefing on the water crisis's deeper cause—the engineered reclamation site and the Radiant drift. Confirmed that support requests have been filed; Lattice-Cities declined, Verists sent an observer only, Cogitants requested site specs (refused), Ashwardens answered with silence. Preparing to file amended petition naming pole-pull as the real issue.",
           "learned": [
-            "The Radiant array north of the Crossing shows a drift past the Accord's tolerance",
-            "Sera's engineer buried the readings five years ago deliberately",
-            "The Radiant leadership is choosing not to see what they measure",
-            "Archive copies of the readings exist and can be confirmed by Leth in the Edge District"
+            "The water crisis connects to a larger pole-pull affecting the Radiant Reach",
+            "The reclamation site was deliberately engineered with a scheduled dissolution",
+            "Someone chose to bury the Radiant array's readings for five years"
           ],
-          "statusNote": "distant, at the Hub annex—message delivered via sealed Hub tube"
+          "skillsObserved": [],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "at the Edge District warden post, processing briefing and preparing amended petition"
         }
       ],
       "factUpdates": [],
@@ -2294,12 +2312,24 @@
           "topic": "the-light-that-will-not-dim",
           "label": "The Light That Will Not Dim",
           "kind": "mystery",
-          "fact": "The Radiant Reach is intensifying past the Accord's tolerance. Five years ago, an engineer buried suppressed readings from the array north of the Crossing. Archive copies exist. The Radiant leadership is choosing not to see what they measure.",
+          "entityId": null,
+          "fact": "The Radiant Reach's drift past the Accord's tolerance is institutional—Sera's engineer buried readings five years ago deliberately. The water crisis is a symptom of a larger pole-pull. Ossian has confirmed the archive holds copies; Leth can verify.",
           "links": [
             "the-water-crisis",
-            "ossian",
-            "leth",
-            "edge-district"
+            "the-edge-district-ledger",
+            "radiant-plateau-edge"
+          ]
+        },
+        {
+          "topic": "what-the-water-remembers",
+          "label": "What the Water Remembers",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "The reclamation site beneath the Threshold Post is pre-Transition infrastructure with a final instruction buried in its logic: 'prepare the watershed.' Someone reactivated it deliberately, ordering it to close on schedule. This was not malfunction—it was directed work.",
+          "links": [
+            "the-water-crisis",
+            "the-threshold-post",
+            "veth-stillwater-ondra"
           ]
         }
       ],
@@ -2310,8 +2340,14 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {},
-      "moveTo": null,
+      "timeOps": {
+        "hoursPassed": 2.5,
+        "why": "journey from Threshold Post to Edge District, arrival and briefing with Warden Coll"
+      },
+      "moveTo": {
+        "location": "Edge District",
+        "why": "traveled from the ridge Threshold Post south to the Edge District to brief Warden Coll"
+      },
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
@@ -2327,41 +2363,32 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The ridge Threshold Post, afternoon light. The death-warden temple stands complete behind you, stone and timber warm from the morning sun. The lodge-frame skeleton rises nearby, timber joinery in progress. The southern road is visible as a pale line cutting through the moorland.",
+      "setting": "Warden Coll's office in the Edge District warden post—stone walls, afternoon light through a high window, the space precise and cool. Coll behind her desk, Silas standing across from her with the shadow-sheet still in hand.",
       "npcsPresent": [
         {
-          "name": "Pell Ran Marsh",
-          "state": "Sitting beside Silas, one hand on her belly, steady and present—her back warm against his shoulder, listening to the pul"
-        },
-        {
-          "name": "Veth Ondra",
-          "state": "At the lodge-frame with Fendt's crew, working on timber joinery—the warden's eye steady on the structure's load-bearing "
-        },
-        {
-          "name": "Huginn",
-          "state": "Perched on the temple roof-corner, eye on the southern road—reading the wind and the shape of what moves"
+          "name": "Warden Coll",
+          "state": "seated behind her desk, pen down, expression direct and measured—processing what Silas has just laid out and already mov"
         }
       ],
       "objects": [
-        "The death-warden temple—stone and timber, complete",
-        "The lodge-frame—timber skeleton, roof-joists bare",
-        "The sealed deep seam—at the temple's center, now altar",
-        "Ossian's sealed Hub message—just opened, now in Silas's hand",
-        "Memory—the unified spear, answering shadow-form bound into it"
+        "Warden Coll's desk",
+        "the shadow-sheet (in Silas's hand)",
+        "Ossian's message (tucked in Silas's pack)",
+        "the office's records and filing"
       ],
       "threads": [
-        "Ossian's message naming the Radiant drift—a thread opening toward the Edge District and Leth",
-        "The lodge-frame work continuing—Veth and crew present and working",
-        "The south road waiting—the journey's next leg unstarted",
-        "Pell's quiet presence—the child steady inside her"
+        "Who reactivated the reclamation site and why?",
+        "What the Accord will do when the amended petition is filed",
+        "The Cogitants' real interest in the reclamation site specs",
+        "Leth's contact and the archived Radiant readings"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
     "day": 15,
-    "hour": 16,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -3409,7 +3436,8 @@
       "progress": [
         "Ossian names the drift plainly: readings buried five years ago, archive copies held by Leth in the Edge District. The Radiant leadership is choosing not to see what they measure.",
         "Codex: the Radiant Reach is intensifying past the Accord's tolerance — and someone chose to hide it.",
-        "↳ Ossian's sealed message names the suppressed readings plainly: the Radiant array north of the Crossing shows a drift, and Sera's engineer buried them five years ago. The archive holds copies. Leth…"
+        "↳ Ossian's sealed message names the suppressed readings plainly: the Radiant array north of the Crossing shows a drift, and Sera's engineer buried them five years ago. The archive holds copies. Leth…",
+        "Warden Coll confirms the Radiant readings are buried and pole-pull is the real issue. An amended petition will name the drift plainly to the Accord. The conspiracy now has institutional weight behind it."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T12:58:53.302Z",
@@ -4705,15 +4733,14 @@
     "warden-coll": {
       "id": "warden-coll",
       "name": "Warden Coll",
-      "role": "Council Member, Hub Council water committee",
+      "role": "Edge District Warden",
       "description": "A council member who keeps a north-facing office, works by lamp in the afternoon, and stays until the registry flag drops — a man whose schedule is a statement.",
       "firstMet": {
         "locationId": "gen-north-gate-registry-ossian-office",
         "day": 13
       },
-      "relationship": 4,
+      "relationship": 5,
       "history": [
-        "[d13] Received the full briefing — Grael named, Post Master authority declared, resource needs stated. Asked for the document roll, a signed witness statement in Silas's hand with his Post Master mark, and a check-in protocol if Silas enters the Zone.",
         "[d13] Witnessed the shadow-architecture raised from the Waymarker and The Shadow Work — the valley's water infrastructure laid plain on his desk for thirty seconds. Said he has not seen the system's reach laid out like that in fifteen years. Committed to drafting formal aid requests to the Rootkin and…",
         "[d13] Received the signed witness statement with Post Master mark. Writing Silas's two conditions into the draft aid requests — Cogitant contact and Stillwater's Trouble offer to the Rootkin.",
         "[d13] Wrote and sealed a formal letter of introduction naming Silas's Post Master authority and the committee's standing — valid for district-governed Zone contacts. Reminded Silas the check-in protocol terms are unspoken and asked for them before he leaves.",
@@ -4722,17 +4749,18 @@
         "[d13] Watched Huginn's three-sound reading of the crisis without comment — adding data, not discomfort. The bird's verdict on the upstream clock is now in the room and in Coll's ledger-reading mind.",
         "[d13] Received Silas's thanks without ceremony and returned immediately to the draft aid requests — the work continues. The scene closed cleanly.",
         "[d13] Confirmed the shadow-slate channel live — the Weirmark appeared on his paired slate and he marked it in his ledger without ceremony.",
-        "[d13] Named Edvar Crane as a former fold-worker under the Zone Remediation commission, classified under the Accord. Directed Silas to the Ossian annex and archivist by name. Specifically asked the shadow-slate channel not be disclosed."
+        "[d13] Named Edvar Crane as a former fold-worker under the Zone Remediation commission, classified under the Accord. Directed Silas to the Ossian annex and archivist by name. Specifically asked the shadow-slate channel not be disclosed.",
+        "[d15] Received Silas's briefing on the water crisis's deeper cause—the engineered reclamation site and the Radiant drift. Confirmed that support requests have been filed; Lattice-Cities declined, Verists sent an observer only, Cogitants requested site specs (refused), Ashwardens answered with silence…"
       ],
       "knownFacts": [
-        "Check-in protocol terms still unspoken — Coll needs them before the flag drops",
-        "The shadow-slate is a written channel bound to Silas's Weirmark — carries written words in both directions without runners",
-        "Check-in protocol: weekly contact, seven days silence means act — written into the ledger",
         "Named Maren Ossitide as a legendary Ashwarden figure whose movements track toward the Zone — not summonable, finds the work she recognizes",
         "Huginn reads the crisis as something ending on its own schedule — the plans set in motion are real, but the upstream clock has not been seen yet",
         "Edvar Crane held a Wright's commission at the Crossing before the Accord — fold-worker in the disputed corridor spatial bonding work",
         "Crane's files went to the Deep Registry — Ossian annex, two streets north, green shutter",
-        "The annex archivist is named Ossian — the committee's name opens the Zone Remediation index"
+        "The annex archivist is named Ossian — the committee's name opens the Zone Remediation index",
+        "The water crisis connects to a larger pole-pull affecting the Radiant Reach",
+        "The reclamation site was deliberately engineered with a scheduled dissolution",
+        "Someone chose to bury the Radiant array's readings for five years"
       ],
       "skillsObserved": [
         "rapid threat-prioritization — moved straight to what he need",
@@ -4745,11 +4773,12 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At his desk in the registry office — draft aid requests resumed, the Crane question answered and set aside.",
+      "statusNote": "at the Edge District warden post, processing briefing and preparing amended petition",
       "lastSeen": {
-        "locationId": "gen-hub-north-gate-district-street",
-        "day": 13
-      }
+        "locationId": "gen-the-temple",
+        "day": 15
+      },
+      "met": 1
     },
     "renna": {
       "id": "renna",
@@ -5203,7 +5232,7 @@
       ]
     },
     "radiant_plateau_edge": {
-      "visits": 2,
+      "visits": 3,
       "notes": [
         "[d3] Rear of the narrow-colonnaded administrative building: a small iron-banded service door, not latched, with a cloth-wrapped bundle tied with a single cord leaning against the wall beside it. Found on W",
         "[d3] Leth named Calvar — engineer, above the cooperage on the east lane — and opened the document roll he left with her three days ago: a diagram in his own hand with the distinctive three-formation notati",
@@ -5218,7 +5247,7 @@
         "[d3] Silas and Pell took rooms at the Low Lamp Inn on World-day 17 evening — one large room with partition, one smaller at the back. Baths taken. Huginn on the rafters."
       ],
       "flags": {},
-      "lastVisit": 3,
+      "lastVisit": 15,
       "vectorsKnown": [
         "dark_light",
         "falsehood_truth",
@@ -6194,7 +6223,7 @@
     "lastTickWorldDay": 42,
     "lastCanonWorldDay": 42,
     "lastGenCount": 1029,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Veth's acknowledgment—she does not move from the threshold, but you feel the weight of her attention shift. She is *reading* what you…",
@@ -12551,22 +12580,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.218805150623762,
-    "cerebral": 19.711507926488355,
-    "social": 10.067760349078386,
-    "generous": 5.141619780219712,
-    "cautious": 8.620762544369109,
-    "physical": 0.5917688513271636,
-    "risky": 0.14193763778348,
-    "ruthless": 0.3089388460727769,
-    "carousing": 0.050229590232234306,
-    "amorous": 0.18464370937015973,
-    "patient": 1.038747898164283,
-    "stealth": 0.000010797135104310684,
-    "devotion": 0.4412065886152771,
-    "craft": 2.4882949249302015,
-    "leadership": 1.4362218031303677,
-    "deception": 0.05170589223865479
+    "strategic": 20.713335021858168,
+    "cerebral": 19.218720228326145,
+    "social": 10.816066340351426,
+    "generous": 5.01307928571422,
+    "cautious": 8.40524348075988,
+    "physical": 0.5769746300439845,
+    "risky": 0.138389196838893,
+    "ruthless": 0.30121537492095746,
+    "carousing": 0.048973850476428445,
+    "amorous": 0.18002761663590572,
+    "patient": 1.012779200710176,
+    "stealth": 0.000010527206726702916,
+    "devotion": 0.4301764238998952,
+    "craft": 2.4260875518069462,
+    "leadership": 1.4003162580521085,
+    "deception": 0.050413244932688416
   },
   "aptitudes": [
     "strategist",
@@ -12575,7 +12604,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 939,
+  "actionCount": 940,
   "grantsVersion": 1,
   "reconcileVersion": 30,
   "gallery": [
@@ -13109,8 +13138,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786483027715,
-  "rev": 1710,
+  "updatedAt": 1786483381836,
+  "rev": 1711,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -14497,7 +14526,7 @@
           "entityId": "warden-coll",
           "type": "npc",
           "birthWeight": 32,
-          "engagementScore": 10,
+          "engagementScore": 12,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -14533,13 +14562,17 @@
             {
               "kind": "fact",
               "day": 13
+            },
+            {
+              "kind": "interact",
+              "day": 15
             }
           ],
           "createdDay": 13,
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 13,
+          "lastAttentionDay": 15,
           "depthTier": "established",
           "promotedWorldDay": 24,
           "canonTier": "variant",
@@ -17105,7 +17138,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 150
+    "the_center": 151
   },
   "foreclosed": [
     "rootkin",
@@ -17364,10 +17397,10 @@
     {
       "id": "sess-27",
       "startedAt": "2026-08-11T19:25:13.129Z",
-      "lastAt": "2026-08-11T21:17:07.711Z",
+      "lastAt": "2026-08-11T21:23:01.828Z",
       "startDay": 42,
       "endDay": 42,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -17701,7 +17734,7 @@
   },
   "peopleDisposition": {
     "ashwarden": 9.99,
-    "cogitant": 2,
+    "cogitant": 1,
     "figurist": 1,
     "rootkin": -1,
     "verist": 5,
@@ -17781,6 +17814,13 @@
       "people": "ashwarden",
       "delta": 1.99,
       "text": "built a temple to the ashwarden craft at novel depth and held it with partnership"
+    },
+    {
+      "at": 42,
+      "kind": "act",
+      "people": "cogitant",
+      "delta": -1,
+      "text": "requested technical specifications Silas refused them access to"
     }
   ],
   "_pendingIntent": null,
@@ -17846,24 +17886,24 @@
     "gen-the-temple": "https://image.pollinations.ai/prompt/The%20Temple%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Temple.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=60806&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 315,
-    "choices": 314,
-    "characterDeltas": 148,
-    "scene": 315,
-    "npcUpdates": 283,
+    "sceneSummary": 316,
+    "choices": 315,
+    "characterDeltas": 149,
+    "scene": 316,
+    "npcUpdates": 284,
     "factUpdates": 27,
     "placeUpdates": 69,
-    "codexUpdates": 192,
-    "timeOps": 291,
+    "codexUpdates": 193,
+    "timeOps": 292,
     "imagePrompt": 20,
-    "sceneEnded": 95,
+    "sceneEnded": 96,
     "itemUpdates": 7,
-    "questUpdates": 42,
+    "questUpdates": 43,
     "offer": 37,
-    "moveTo": 17,
+    "moveTo": 18,
     "delegateOps": 4,
     "deeds": 12,
-    "standingOps": 3,
+    "standingOps": 4,
     "ledgerEvents": 8,
     "discovery": 5,
     "stageOps": 15,
@@ -17873,11 +17913,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 26,
+    "gambitApt": 27,
     "markDefiningMoment": 1,
     "_engineClosedScene": 2
   },
-  "_opTurns": 315,
+  "_opTurns": 316,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -18203,7 +18243,7 @@
     "scout": 4,
     "lead": 2,
     "ask": 1,
-    "plan": 5,
+    "plan": 6,
     "negotiate": 2,
     "prepare": 5,
     "investigate": 1,
@@ -18211,9 +18251,10 @@
     "help": 4,
     "discipline": 1,
     "persuade": 1,
-    "rapport": 4,
+    "rapport": 5,
     "meditate": 1,
-    "sustain": 1
+    "sustain": 1,
+    "discuss": 1
   },
   "aptitudeEarnCount": {},
   "bondLog": [
@@ -18289,5 +18330,10 @@
       "worldDay": 42,
       "actionCount": 931
     }
+  ],
+  "_standingOpRefusals": [
+    "lattice: no-delta",
+    "verist: no-delta",
+    "ashwarden: no-delta"
   ]
 }

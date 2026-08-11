@@ -967,5 +967,283 @@
     "why": "⚠️ The third road, to Unspooling — the way out that is neither side, which some people take."
    }
   ]
+ },
+ "grovehome": {
+  "_measured": {
+   "riverBearing": 37,
+   "riverDistanceDeg": 2.8,
+   "uphillBearing": 120,
+   "relief": 0.025,
+   "roadsOut": [
+    {
+     "to": "the_heartroot",
+     "bearing": 4
+    },
+    {
+     "to": "the_slow_orchard",
+     "bearing": 33
+    },
+    {
+     "to": "the_quickwood_eaves",
+     "bearing": 160
+    }
+   ]
+  },
+  "_ruleFinding": "⚠️ relief 0.025 — below the 0.08 threshold and the prose names no slope, so uphill is unused. Roads and prose carry it, as the corpus says they carry two-thirds of everything.",
+  "radiusMetres": 360,
+  "sites": [
+   {
+    "id": "grovehome_trade_ring",
+    "name": "The Trade Ring",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "basis": "prose",
+    "why": "⛔ 'The ONLY Quickwood settlement that keeps human hours, BECAUSE TRADE REQUIRES IT.' The town exists for this ring; it is the centre by function."
+   },
+   {
+    "id": "grovehome_hour_post",
+    "name": "The Hour Post",
+    "localMap": {
+     "bearing": 30,
+     "metres": 90
+    },
+    "basis": "prose",
+    "why": "⚠️ 'The Rootkin find that funny.' Somebody has to keep the human hours visible, and a people who measure in seasons would build it as a joke that works."
+   },
+   {
+    "id": "grovehome_root_gate",
+    "name": "The Root Gate",
+    "localMap": {
+     "bearing": 4,
+     "metres": 250
+    },
+    "basis": "road",
+    "toward": {
+     "road": "the_heartroot",
+     "relation": "on"
+    },
+    "why": "⛔ The way IN to the grown city. Not a wall's gate — where the tended wood begins to be a street."
+   },
+   {
+    "id": "grovehome_orchard_way",
+    "name": "The Orchard Way",
+    "localMap": {
+     "bearing": 33,
+     "metres": 270
+    },
+    "basis": "road",
+    "toward": {
+     "road": "the_slow_orchard",
+     "relation": "on"
+    },
+    "why": "To the trees that take a lifetime to fruit. ⚠️ Walked mostly by people who will not see the fruit."
+   },
+   {
+    "id": "grovehome_patience_house",
+    "name": "The Patience House",
+    "localMap": {
+     "bearing": 160,
+     "metres": 200
+    },
+    "basis": "prose",
+    "toward": {
+     "road": "the_quickwood_eaves",
+     "relation": "near"
+    },
+    "why": "⛔ 'Patient in a way that reads as either profound hospitality or a very slow trap.' Where outsiders wait, on the road out, and both readings are available to them while they do."
+   }
+  ]
+ },
+ "the_stillhold": {
+  "_measured": {
+   "riverBearing": 45,
+   "riverDistanceDeg": 3.9,
+   "uphillBearing": 225,
+   "relief": 0.007,
+   "roadsOut": [
+    {
+     "to": "the_marchward",
+     "bearing": 168
+    },
+    {
+     "to": "the_held_yard",
+     "bearing": 117
+    }
+   ]
+  },
+  "_ruleFinding": "⚠️ relief 0.007 — near-flat, so uphill is noise. ⛔ AND THAT SUITS IT: a walled city of absolute peace on ground with no feature is a place that has REMOVED its variables. The flatness is consonant with the fiction rather than incidental to it.",
+  "radiusMetres": 400,
+  "sites": [
+   {
+    "id": "stillhold_the_wall",
+    "name": "The Wall",
+    "localMap": {
+     "bearing": 0,
+     "metres": 330
+    },
+    "basis": "prose",
+    "why": "⛔ A RING, NOT A POINT — the defining structure. 'No violence in living memory, no weapons, no raised voices.' The wall is the claim and everything inside is the evidence."
+   },
+   {
+    "id": "stillhold_ordered_quarters",
+    "name": "The Ordered Quarters",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "basis": "prose",
+    "why": "'Beautiful, ordered, and subtly WRONG.' The city proper."
+   },
+   {
+    "id": "stillhold_the_unasked",
+    "name": "The Unasked Ground",
+    "localMap": {
+     "bearing": 225,
+     "metres": 210
+    },
+    "basis": "prose",
+    "why": "⛔ 'The stillness rests on something NO ONE IS SAYING.' ⚠️ Nobody wrote this place down and the city requires it: there is somewhere the unsaid thing is kept, and everyone knows not to go. Placed opposite the gate, which is where you put a thing you are not discussing."
+   },
+   {
+    "id": "stillhold_marchward_gate",
+    "name": "The Marchward Gate",
+    "localMap": {
+     "bearing": 168,
+     "metres": 330
+    },
+    "basis": "road",
+    "toward": {
+     "road": "the_marchward",
+     "relation": "on"
+    },
+    "why": "⚠️ The only road out that matters, and it goes to the town that has to live with both poles."
+   }
+  ]
+ },
+ "radiant_plateau_edge": {
+  "_measured": {
+   "riverBearing": -146,
+   "riverDistanceDeg": 2.1,
+   "uphillBearing": 0,
+   "relief": 0.029,
+   "roadsOut": [
+    {
+     "to": "millbrook",
+     "bearing": -89
+    },
+    {
+     "to": "kestrels_roost",
+     "bearing": 92
+    }
+   ]
+  },
+  "_stackNote": "⛔ `the-low-lamp-inn` sits at 0.00° from this location — it is a SITE of the Edge District and is authored below as one, not as a peer.",
+  "radiusMetres": 420,
+  "sites": [
+   {
+    "id": "rpe_light_guides",
+    "name": "The Light-Guide Streets",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "basis": "prose",
+    "why": "⛔ 'Streets are PAVED with light-guides; at dusk the whole district glows FROM BELOW.' The streets are the infrastructure — they are not lit, they are the light."
+   },
+   {
+    "id": "rpe_braiding_towers",
+    "name": "The Braiding Towers",
+    "localMap": {
+     "bearing": 0,
+     "metres": 260,
+     "level": 2
+    },
+    "basis": "prose",
+    "why": "⚠️ 'Photonic-crystal towers catch and BRAID the sunlight into working beams.' Level 2 — they must be above the streets to catch anything."
+   },
+   {
+    "id": "the-low-lamp-inn",
+    "name": "The Low Lamp Inn",
+    "localMap": {
+     "bearing": 200,
+     "metres": 180,
+     "level": -1
+    },
+    "basis": "prose",
+    "why": "⛔ ALREADY CANON FROM PLAY, and its own seed places it: 'tucked into the LOWER TIER of the Edge District where the light-guides run dim.' ⚠️ LEVEL −1 — the one place here that is deliberately below the light. That is why people drink in it."
+   },
+   {
+    "id": "rpe_dim_quarter",
+    "name": "The Dim Quarter",
+    "localMap": {
+     "bearing": 200,
+     "metres": 300,
+     "level": -1
+    },
+    "basis": "prose",
+    "why": "Where the light-guides run dim generally. ⛔ A city of light needs somewhere unlit, and it will be the lower tier every time."
+   },
+   {
+    "id": "rpe_valley_road",
+    "name": "The Valley Road",
+    "localMap": {
+     "bearing": -89,
+     "metres": 340
+    },
+    "basis": "road",
+    "toward": {
+     "road": "millbrook",
+     "relation": "on"
+    },
+    "why": "Down to the valley floor. ⚠️ The contamination teams go out this way toward the Echo."
+   }
+  ]
+ },
+ "gen-cogitarium-entrance-hall": {
+  "_measured": {
+   "riverDistanceDeg": 12.3,
+   "uphillBearing": 30,
+   "relief": 0.567,
+   "roadsOut": []
+  },
+  "_nestingCase": "⛔ THIS IS THE TEST CASE. It is `tier: site`, parent `the_cogitarium`, and it is STACKED at 0.00° with both the Cogitarium and the third terrace. It has NO connections of its own, so `roadsOut` is empty — the same shape as the Crossing.\n⚠️ SO A LOCAL LAYOUT FOR A SITE IS REALLY A LAYOUT INSIDE A BUILDING, AND ITS FRAME IS ITS PARENT'S. I have authored it at a 60 m radius with levels, and its bearings are measured FROM THE HALL, not from the Cogitarium.\n⛔ THE QUESTION FOR CCODE: does `localMap` nest, so a site's sites resolve inside the site's frame? If yes this is correct as authored. If the frame must always be the settlement, these three rooms need re-expressing from the Cogitarium's centre and the metres get larger.",
+  "radiusMetres": 60,
+  "sites": [
+   {
+    "id": "coghall_door",
+    "name": "The Door",
+    "localMap": {
+     "bearing": 167,
+     "metres": 55,
+     "level": 0
+    },
+    "basis": "prose",
+    "why": "⛔ On the Middle Way bearing — an entrance faces the road people arrive by, and this is the only thing in the hall that touches outside."
+   },
+   {
+    "id": "coghall_slate_wall",
+    "name": "The Slate Wall",
+    "localMap": {
+     "bearing": 0,
+     "metres": 25,
+     "level": 0
+    },
+    "basis": "tradition",
+    "why": "⚠️ Cogitants work in chalk. A hall where people arrive is a hall where the current problem is posted, and it faces the door."
+   },
+   {
+    "id": "coghall_stair_up",
+    "name": "The Terrace Stair",
+    "localMap": {
+     "bearing": 30,
+     "metres": 40,
+     "level": 0
+    },
+    "basis": "prose",
+    "why": "⛔ The way to the third terrace — uphill bearing, because a terrace climbs the slope it is cut into. THE ONE PLACEMENT THAT LINKS TWO SITES OF THE SAME PARENT."
+   }
+  ]
  }
 }

@@ -4,10 +4,10 @@
  "_whatIDoNotSupply": "⛔ NOT THE GROUND. CCode bakes coastline and relief from the generator, and it cannot disagree with the world because it IS the world evaluated once. I supply only what lies BELOW the information floor — the things the generator is silent about.",
  "the_echo_vale": {
   "centre": {
-   "lat": -68.45,
-   "lon": 81.78
+   "lat": -69.85,
+   "lon": 79.31
   },
-  "radiusDeg": 13.2,
+  "radiusDeg": 12.4,
   "members": 7,
   "purpose": "⛔ THE ONE LINE A NARRATOR NEEDS WHEN A PLAYER IS CROSSING IT RATHER THAN STANDING IN A TOWN: this is the ground between two civilisations that do not fight, and interfere anyway. Sound bends light here. Nothing in the Vale is neutral, and nothing in it is anyone's.",
   "ways": [
@@ -17,16 +17,16 @@
     "to": "radiant_plateau_edge",
     "waypoints": [
      {
-      "bearing": 54,
-      "km": 311
+      "bearing": 48,
+      "km": 485
      },
      {
-      "bearing": 71,
-      "km": 627
+      "bearing": 65,
+      "km": 777
      },
      {
-      "bearing": 71,
-      "km": 1019
+      "bearing": 68,
+      "km": 1166
      }
     ],
     "why": "⛔ THE ONLY ROAD THAT MATTERS HERE and it BENDS SOUTH. A straight arc would run it through the worst of the interference; the road exists because somebody found the way round. ⚠️ It is also the road the contamination teams use, so it is maintained by two powers who will not admit to cooperating."
@@ -37,8 +37,8 @@
     "to": "the-low-lamp-inn",
     "waypoints": [
      {
-      "bearing": 19,
-      "km": 177
+      "bearing": 27,
+      "km": 359
      }
     ],
     "why": "Barely a way — the Inn is in the Edge District's lower tier. ⚠️ Included because a player will ask, not because it is a journey."
@@ -49,12 +49,12 @@
     "to": "greywater_stilts",
     "waypoints": [
      {
-      "bearing": -63,
-      "km": 240
+      "bearing": -22,
+      "km": 292
      },
      {
-      "bearing": -110,
-      "km": 543
+      "bearing": -92,
+      "km": 416
      }
     ],
     "why": "⛔ FOLLOWS THE ECHO DOWNSTREAM to where the river gives up and becomes the southern marsh. The bend is the river's, not the road's."
@@ -65,12 +65,12 @@
     "to": "harmonic_heights_terrace",
     "waypoints": [
      {
-      "bearing": 119,
-      "km": 300
+      "bearing": 90,
+      "km": 357
      },
      {
-      "bearing": 164,
-      "km": 765
+      "bearing": 154,
+      "km": 654
      }
     ],
     "why": "⚠️ The way OUT of the Vale and up. Erik: 'it's supposed to be a way out of the Valley, connecting to other parts of the world.' It climbs, so it switches back — the name is the geometry."
@@ -81,8 +81,8 @@
     "id": "the_shimmer",
     "name": "The Shimmer",
     "kind": "area",
-    "bearing": 74,
-    "km": 697,
+    "bearing": 68,
+    "km": 841,
     "radiusKm": 420,
     "why": "⛔ THE INTERFERENCE ITSELF, and the thing players actually navigate by. Between the two powers, soft-edged and WANDERING — the vortices move, so this is a band and not a boundary. ⚠️ 'Past the shimmer' is already how a player described crossing it in play (Cellaceron, worldDay 32)."
    },
@@ -90,16 +90,16 @@
     "id": "granite_shoulders",
     "name": "The Granite Shoulders",
     "kind": "point",
-    "bearing": 19,
-    "km": 977,
+    "bearing": 23,
+    "km": 1157,
     "why": "Where the Echo narrows — named in Echo River Crossing's own seed. ⛔ The reason there is a bridge here and not somewhere easier."
    },
    {
     "id": "the_thinning_wood",
     "name": "The Thinning Wood",
     "kind": "area",
-    "bearing": -32,
-    "km": 998,
+    "bearing": -21,
+    "km": 1093,
     "radiusKm": 260,
     "why": "⚠️ Around Thornwake Glade — 'deep in the wilds where the interference THINS'. Its edge is where you stop hearing the light."
    },
@@ -107,16 +107,16 @@
     "id": "the_sheeting",
     "name": "The Sheeting",
     "kind": "point",
-    "bearing": 25,
-    "km": 1116,
+    "bearing": 28,
+    "km": 1299,
     "why": "⛔ Upstream of the crossing, 'where the water sheets gray-green over the rocks' — the contamination, visible. The teams camp within sight of it."
    },
    {
     "id": "the_south_marsh",
     "name": "The Southern Marsh",
     "kind": "area",
-    "bearing": -105,
-    "km": 617,
+    "bearing": -88,
+    "km": 501,
     "radiusKm": 330,
     "why": "The ground Greywater Stilts stands on poles above. ⚠️ Its edge is soft by nature — that is what a marsh edge IS."
    }
@@ -147,14 +147,14 @@
     "why": "⚠️ THE ONE HARD EDGE: the river. West of the Echo is the Valley proper, and everyone here says so."
    }
   ],
-  "_centreFix": "⛔ CENTRE RECOMPUTED as a spherical mean direction; was an ARITHMETIC MEAN of lat/lon and moved 1.95°. ⚠️ Every bearing and km in this region was re-expressed from the new centre so features stay where they were authored to be — the numbers changed, the ground did not."
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 13.2° → 12.4° (6% tighter); centre moved 1.65°. Features re-expressed, ground unchanged."
  },
  "the_center": {
   "centre": {
-   "lat": -88.45,
-   "lon": -45.69
+   "lat": -87.55,
+   "lon": -85.71
   },
-  "radiusDeg": 9.7,
+  "radiusDeg": 8.7,
   "members": 8,
   "purpose": "⛔ THE ONE PLACE IN THE WORLD THAT BELONGS TO NOBODY, and the only ground where a Blazeborn and an Umbral can stand without either being wrong. A player crossing it is crossing NEUTRAL — which is not the same as safe, and not the same as empty.",
   "_shapeFinding": "⚠️ THIS REGION IS A HUB, NOT A TERRITORY. Four of its eight members sit at the SAME bearing and distance — 158°, 487 km — because they ARE the Crossing: its street, its registry, its made gate. ⛔ A region map here is really a map of ONE PLACE AND ITS APPROACHES, and the ways matter more than the ground.",
@@ -165,12 +165,12 @@
     "to": "the_axis_gate",
     "waypoints": [
      {
-      "bearing": 39,
-      "km": 511
+      "bearing": 94,
+      "km": 614
      },
      {
-      "bearing": 42,
-      "km": 748
+      "bearing": 92,
+      "km": 852
      }
     ],
     "why": "⛔ STRAIGHT, AND IT IS THE ONLY STRAIGHT ROAD I HAVE AUTHORED. Twelve roads leave the Crossing, one per axis — a road that bends would be a road that FAVOURS, and the whole point of this ground is that it does not."
@@ -181,12 +181,12 @@
     "to": "the_great_coliseum",
     "waypoints": [
      {
-      "bearing": 57,
-      "km": 574
+      "bearing": 107,
+      "km": 712
      },
      {
-      "bearing": 65,
-      "km": 951
+      "bearing": 111,
+      "km": 1100
      }
     ],
     "why": "⚠️ Champions arrive by this road from every Reach. It bends slightly to keep off the Quiet House's approach — you do not march past a place where nobody may raise a hand."
@@ -197,12 +197,12 @@
     "to": "the_quiet_house",
     "waypoints": [
      {
-      "bearing": 12,
-      "km": 693
+      "bearing": 66,
+      "km": 716
      },
      {
-      "bearing": 7,
-      "km": 1229
+      "bearing": 55,
+      "km": 1227
      }
     ],
     "why": "⛔ Enemies walk this road in both directions and are not permitted to meet on it. Widened, sight-lined, and deliberately dull."
@@ -213,8 +213,8 @@
     "id": "the_twelve_mouths",
     "name": "The Twelve Mouths",
     "kind": "area",
-    "bearing": 37,
-    "km": 452,
+    "bearing": 94,
+    "km": 553,
     "radiusKm": 90,
     "why": "⛔ Where the roads separate. You can stand in one spot and see every axis leave — the most-described view in the world and it has never been a place until now."
    },
@@ -222,8 +222,8 @@
     "id": "the_null_ground",
     "name": "The Null Ground",
     "kind": "area",
-    "bearing": 33,
-    "km": 335,
+    "bearing": 96,
+    "km": 433,
     "radiusKm": 300,
     "why": "⚠️ The Crossing's immediate country, where every axis reads at zero. 'Every axis crosses here at nothing, and the result is NOT GREY — it is CLEAR.' ⛔ Nothing is dampened here; everything is simply equal, which people find harder."
    },
@@ -231,8 +231,8 @@
     "id": "the_made_arch",
     "name": "The Made Arch",
     "kind": "point",
-    "bearing": 138,
-    "km": 276,
+    "bearing": 164,
+    "km": 434,
     "why": "⛔ Where the Made Gate was cut — the 27th waygate and the first BUILT. A player did this. It stands at the Crossing because that is where a wright who tends endings was standing."
    }
   ],
@@ -246,14 +246,14 @@
     "why": "⚠️ Neutrality thins with distance. There is no line where the world stops being clear; there is only further from the Crossing."
    }
   ],
-  "_centreFix": "⛔ CENTRE RECOMPUTED as a spherical mean direction; was an ARITHMETIC MEAN of lat/lon and moved 3.01°. ⚠️ Every bearing and km in this region was re-expressed from the new centre so features stay where they were authored to be — the numbers changed, the ground did not."
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 9.7° → 8.7° (11% tighter); centre moved 1.61°. Features re-expressed, ground unchanged."
  },
  "the_palelands": {
   "centre": {
-   "lat": -12.39,
-   "lon": 72.91
+   "lat": -11.02,
+   "lon": 71.61
   },
-  "radiusDeg": 10.6,
+  "radiusDeg": 9.6,
   "members": 8,
   "purpose": "⛔ THE COUNTRY THAT KEEPS ENDINGS. A player crossing it is crossing TENDED GROUND — this is not a wasteland, it is maintained, and the maintenance is the point. Things end here CORRECTLY.",
   "_shapeFinding": "⚠️ A MARCH, NOT A DISC. It runs from Cairnhold outward and STOPS — the Long Grey at 1177 km is where the tending gives out. ⛔ Its far edge is defined by ABANDONMENT rather than by terrain, which no gradient in the world can supply.",
@@ -264,16 +264,16 @@
     "to": "the_hollowing",
     "waypoints": [
      {
-      "bearing": -148,
-      "km": 301
+      "bearing": -177,
+      "km": 408
      },
      {
-      "bearing": -152,
-      "km": 701
+      "bearing": -166,
+      "km": 793
      },
      {
-      "bearing": -148,
-      "km": 996
+      "bearing": -158,
+      "km": 1068
      }
     ],
     "why": "⛔ THE ASHWARDEN MARCH ROAD — already canon from play, and Raven's Home sits on it. It runs out to the edge and looks across at a green nobody here has walked to."
@@ -284,12 +284,12 @@
     "to": "the_quiet_ground",
     "waypoints": [
      {
-      "bearing": 1,
-      "km": 399
+      "bearing": 31,
+      "km": 289
      },
      {
-      "bearing": 4,
-      "km": 929
+      "bearing": 15,
+      "km": 802
      }
     ],
     "why": "⚠️ The dying travel this one and it is kept easy — short stages, water, no climbs. The road is a courtesy."
@@ -300,12 +300,12 @@
     "to": "the_long_grey",
     "waypoints": [
      {
-      "bearing": 11,
-      "km": 499
+      "bearing": 35,
+      "km": 413
      },
      {
-      "bearing": 14,
-      "km": 1176
+      "bearing": 23,
+      "km": 1077
      }
     ],
     "why": "⛔ It stops being a road before it arrives. 'Out past the last cairn the tending stops.'"
@@ -316,16 +316,16 @@
     "id": "the_last_cairn",
     "name": "The Last Cairn",
     "kind": "point",
-    "bearing": 11,
-    "km": 819,
+    "bearing": 25,
+    "km": 717,
     "why": "⛔ THE EDGE OF TENDING, and it is a marker rather than a boundary. Its own seed names it: past this, the Palelands stop being kept."
    },
    {
     "id": "the_ash_field",
     "name": "The Ash-Field",
     "kind": "area",
-    "bearing": 11,
-    "km": 1176,
+    "bearing": 20,
+    "km": 1067,
     "radiusKm": 400,
     "why": "'Ash-field with weather in it.' ⚠️ Not dead — unattended, which the Ashwardens consider worse."
    },
@@ -333,8 +333,8 @@
     "id": "the_watch_shoulder",
     "name": "The Watch Shoulder",
     "kind": "point",
-    "bearing": -158,
-    "km": 553,
+    "bearing": -174,
+    "km": 668,
     "why": "The ground the Old Warden Post stands on — 'a shoulder of ground two miles northwest'. ⛔ Two miles is a LOCAL distance in a region measured in thousands of kilometres, which is why it needs a point."
    }
   ],
@@ -356,14 +356,14 @@
     "why": "⚠️ THEY DO NOT TOUCH. Antipodal dispositions share no border — the Hollowing looks across 226 days of world at a green it will never reach. Recorded so nobody draws a line here."
    }
   ],
-  "_centreFix": "⛔ CENTRE RECOMPUTED as a spherical mean direction; was an ARITHMETIC MEAN of lat/lon and moved 0.01°. ⚠️ Every bearing and km in this region was re-expressed from the new centre so features stay where they were authored to be — the numbers changed, the ground did not."
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 10.6° → 9.6° (9% tighter); centre moved 1.87°. Features re-expressed, ground unchanged."
  },
  "umbral_depths": {
   "centre": {
-   "lat": -5.1,
-   "lon": -0.81
+   "lat": -10.6,
+   "lon": 0.6
   },
-  "radiusDeg": 17.1,
+  "radiusDeg": 11.6,
   "members": 6,
   "purpose": "⛔ A CITY IN THE DARK, and the dark is not the absence of the city — it is the material it is built in. A player crossing it is going DOWN and then along, and the only real question is how far from a lamp they are willing to be.",
   "_shapeFinding": "⛔ THE FIRST REGION THAT NEEDS THE VERTICAL AXIS AT REGION SCALE. The Slow Stair is 'the long way up and out — DAYS of ascending stair'. ⚠️ `level` exists on `localMap` for interiors; a region map needs it too, because here depth is not a detail of a building, it is the shape of the country.",
@@ -374,18 +374,18 @@
     "to": "the_slow_stair",
     "waypoints": [
      {
-      "bearing": 177,
-      "km": 900,
+      "bearing": -160,
+      "km": 306,
       "level": -3
      },
      {
-      "bearing": 177,
-      "km": 1500,
+      "bearing": -175,
+      "km": 889,
       "level": -2
      },
      {
-      "bearing": 177,
-      "km": 1900,
+      "bearing": -178,
+      "km": 1287,
       "level": 0
      }
     ],
@@ -397,13 +397,13 @@
     "to": "the_harborward",
     "waypoints": [
      {
-      "bearing": 18,
-      "km": 400,
+      "bearing": -2,
+      "km": 993,
       "level": -3
      },
      {
-      "bearing": 18,
-      "km": 717,
+      "bearing": 3,
+      "km": 1295,
       "level": -3
      }
     ],
@@ -415,8 +415,8 @@
     "to": "the_unlit_deep",
     "waypoints": [
      {
-      "bearing": 7,
-      "km": 200,
+      "bearing": -9,
+      "km": 821,
       "level": -4
      }
     ],
@@ -428,8 +428,8 @@
     "id": "the_terraces",
     "name": "The Terraces",
     "kind": "area",
-    "bearing": -46,
-    "km": 339,
+    "bearing": -25,
+    "km": 936,
     "radiusKm": 260,
     "level": -3,
     "why": "⛔ 'Not caves — ARCHITECTURE: terraces and lamplight.' The Underlight's own body, and the correction its seed insists on."
@@ -438,8 +438,8 @@
     "id": "the_lamp_line",
     "name": "The Lamp Line",
     "kind": "area",
-    "bearing": 90,
-    "km": 1101,
+    "bearing": 57,
+    "km": 1125,
     "radiusKm": 500,
     "level": -3,
     "why": "⛔ THE EDGE THAT MATTERS HERE AND IT IS NOT TERRAIN: the furthest the lamps are kept. ⚠️ Beyond it you are in the Unlit Deep whether or not you have walked there — the Lampless Market trades by touch on the near side of it, deliberately."
@@ -448,8 +448,8 @@
     "id": "the_thinning_dark",
     "name": "The Thinning Dark",
     "kind": "area",
-    "bearing": 177,
-    "km": 1700,
+    "bearing": -177,
+    "km": 1088,
     "radiusKm": 300,
     "level": -1,
     "why": "Where the Slow Stair stops being underground. ⚠️ 'Until it is only evening' — an edge you notice by your eyes adjusting, not by arriving."
@@ -473,16 +473,16 @@
     "why": "Your eyes tell you before the map does."
    }
   ],
-  "_centreFix": "⛔ CENTRE RECOMPUTED as a spherical mean direction; was an ARITHMETIC MEAN of lat/lon and moved 0.01°. ⚠️ Every bearing and km in this region was re-expressed from the new centre so features stay where they were authored to be — the numbers changed, the ground did not."
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 17.1° → 11.6° (32% tighter); centre moved 5.67°. Features re-expressed, ground unchanged."
  },
  "_shapeFindings": "⛔ FOUR REGIONS, FOUR SHAPES, AND THE FRAME BENT TWICE. ECHO VALE: a band between two powers. THE CENTER: a HUB — four of eight members share one bearing and distance because they ARE the Crossing, so the ways matter more than the ground. THE PALELANDS: a MARCH that runs out and stops, whose far edge is defined by ABANDONMENT and not by terrain. ⚠️ UMBRAL DEPTHS NEEDED `level` AT REGION SCALE — the Slow Stair changes depth ALONG its length, which no other route does. ⛔ `level` was authored for interiors; a region can be vertical too, and CCode should expect it on ways and on named ground, not only on sites. ⚠️ ALSO NEW: an edge of kind `none`. The Palelands and the Quickwood are antipodal and DO NOT TOUCH — recorded so nobody draws a border between them.",
- "_frameNote": "⛔ SNG-416. CCode found our centres disagreed and credited me with a 3D mean direction. ⚠️ I DID NOT USE ONE — I used an arithmetic mean of lat/lon, which is a different wrong answer from his bounding-box midpoint and fails in the same place: near a pole. My Centre was 3.01° from the true spherical mean, the Echo Vale 1.95°. ⛔ THIS MATTERED EXACTLY AS HE SAID: every bearing and kilometre is measured FROM the centre, so a 3° error lands every feature ~330 km out. All four regions are now on a spherical mean direction and every authored feature has been RE-EXPRESSED rather than re-authored — converted to an absolute position from the old centre, then back to bearing/km from the new one. The ground is unchanged.",
+ "_frameNote": "⛔ SNG-418. CENTRES ARE MINIMUM ENCLOSING CIRCLES. THIRD DEFINITION AND THE LAST.\n  1. arithmetic mean of lat/lon — MINE, wrong near a pole (3.01° out on the Centre)\n  2. lat/lon bounding-box midpoint — CCode's, wrong the same way\n  3. spherical mean direction — correct, but MINIMISES THE SUM of distances\n  4. ⛔ MINIMUM ENCLOSING CIRCLE — minimises the MAXIMUM, which is what a radius IS\n⚠️ CCode spotted that the valley's 24.1° radius had a tighter option at 19.9°. He was right and the true minimax is tighter still: 15.7°, THIRTY-FIVE PERCENT smaller. Umbral Depths gained 32%, the Riven Marches 21%.\n⛔ THE POINT IS RENDERING, NOT PURITY: the radius sets how much of the frame a region fills, so a 35% smaller radius is a 35% more zoomed map showing the same places. A mean direction is the right centre for asking 'where is this region'; a minimum enclosing circle is the right centre for DRAWING it.\n⚠️ Standing rule for the remaining ~22: MINIMAX, and never the arithmetic mean.",
  "valley": {
   "centre": {
-   "lat": -67.81,
-   "lon": -127.1
+   "lat": -70.87,
+   "lon": -149.69
   },
-  "radiusDeg": 24.1,
+  "radiusDeg": 15.7,
   "members": 10,
   "purpose": "⛔ WHERE PLAY LIVES — 5 of 12 characters stand here and 28 recent deeds happened here. The valley floor is ordinary ground on purpose: farms, a river, a road to somewhere worse. ⚠️ A player crossing it is crossing the part of the world that is NOT a statement, which is why the Disputed Zone at its eastern end reads as loudly as it does.",
   "ways": [
@@ -492,12 +492,12 @@
     "to": "disputed_zone_fringe",
     "waypoints": [
      {
-      "bearing": 66,
-      "km": 798
+      "bearing": 83,
+      "km": 1737
      },
      {
-      "bearing": 67,
-      "km": 796
+      "bearing": 84,
+      "km": 1734
      }
     ],
     "why": "⚠️ Barely a bend — the two are 7 km apart and the road is a lane. ⛔ THE FRINGE IS NOT WHERE THE DISPUTE IS; it is 113 walking days from the powers it names (SNG-408)."
@@ -508,16 +508,16 @@
     "to": "archive_hollow",
     "waypoints": [
      {
-      "bearing": -40,
-      "km": 900
+      "bearing": 32,
+      "km": 1198
      },
      {
-      "bearing": -80,
-      "km": 1300
+      "bearing": -13,
+      "km": 856
      },
      {
-      "bearing": -108,
-      "km": 1521
+      "bearing": -67,
+      "km": 641
      }
     ],
     "why": "⛔ FOLLOWS THE ECHO UPSTREAM and bends hard, because the river does. 'A collapsed limestone sink UPSTREAM of the crossing' — the road is the river's argument."
@@ -528,12 +528,12 @@
     "to": "kestrels_roost",
     "waypoints": [
      {
-      "bearing": -113,
-      "km": 2000
+      "bearing": -85,
+      "km": 1076
      },
      {
-      "bearing": -119,
-      "km": 2684
+      "bearing": -97,
+      "km": 1743
      }
     ],
     "why": "⚠️ Climbs the whole way. 'A shelf of stone and timber WEDGED where three trails meet' — you arrive from below, always."
@@ -544,8 +544,8 @@
     "id": "the_valley_floor",
     "name": "The Valley Floor",
     "kind": "area",
-    "bearing": 65,
-    "km": 700,
+    "bearing": 83,
+    "km": 1640,
     "radiusKm": 600,
     "why": "⛔ Flat for 20 days in every direction — measured. Millbrook's own country, and the reason there is no pass within reach of it (SNG-408)."
    },
@@ -553,24 +553,24 @@
     "id": "the_still_tarn",
     "name": "The Still Tarn",
     "kind": "point",
-    "bearing": -109,
-    "km": 1503,
+    "bearing": -69,
+    "km": 615,
     "why": "⚠️ 'A pre-transition amphitheatre HALF-DROWNED in a still black tarn.' The water that did the drowning, and the Drowned Reach runs from it."
    },
    {
     "id": "the_three_trails",
     "name": "The Three Trails",
     "kind": "point",
-    "bearing": -119,
-    "km": 2560,
+    "bearing": -97,
+    "km": 1619,
     "why": "⛔ Where they meet, below the Roost. A junction is a place even when nobody lives at it."
    },
    {
     "id": "the_shimmer_approach",
     "name": "The Shimmer Approach",
     "kind": "area",
-    "bearing": 67,
-    "km": 900,
+    "bearing": 84,
+    "km": 1838,
     "radiusKm": 300,
     "why": "⚠️ The valley's eastern end, where ordinary ground stops being ordinary. Soft — you notice before you arrive."
    }
@@ -592,14 +592,15 @@
     "kind": "hard",
     "why": "The Echo. West of it is the Valley and everyone says so (mirrors the Echo Vale's own entry)."
    }
-  ]
+  ],
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 24.1° → 15.7° (35% tighter); centre moved 8.48°. Features re-expressed, ground unchanged."
  },
  "the_numinous_reach": {
   "centre": {
-   "lat": -2.68,
-   "lon": -31.0
+   "lat": -4.03,
+   "lon": -31.51
   },
-  "radiusDeg": 7.0,
+  "radiusDeg": 6.6,
   "members": 3,
   "purpose": "⛔ THE TIGHTEST REGION IN THE WORLD — 7° radius, three places. A player crossing it is crossing ground where the veil is thin, and the danger is not that something attacks you but that YOU BECOME LESS PRESENT. ⚠️ Ten recent deeds happened here despite only one character standing in it.",
   "_shapeFinding": "⚠️ SO SMALL THAT THE REGION MAP AND THE LOCAL MAP NEARLY MEET — 318 km from centre to the pure pole. ⛔ At this scale the three-tier split is doing almost nothing, and CCode should expect regions where the middle tier is thin.",
@@ -610,12 +611,12 @@
     "to": "the_thinning",
     "waypoints": [
      {
-      "bearing": 150,
-      "km": 500
+      "bearing": 133,
+      "km": 417
      },
      {
-      "bearing": -93,
-      "km": 778
+      "bearing": -81,
+      "km": 729
      }
     ],
     "why": "⛔ It goes AROUND the Numen rather than past it. Nobody walks through a pure pole to save time."
@@ -627,7 +628,7 @@
     "waypoints": [
      {
       "bearing": 21,
-      "km": 318
+      "km": 478
      }
     ],
     "why": "⚠️ Straight and short, and almost nobody takes it. 'Those who dissolved so far there is nothing left to come back to.'"
@@ -639,7 +640,7 @@
     "name": "The Thin Air",
     "kind": "area",
     "bearing": 21,
-    "km": 250,
+    "km": 410,
     "radiusKm": 400,
     "why": "⛔ Around the Numen. Not a place so much as a CONDITION — the veil at its thinnest, and it does not have an edge so much as a gradient of how much of you is still here."
    },
@@ -647,8 +648,8 @@
     "id": "the_sitting_ground",
     "name": "The Sitting Ground",
     "kind": "area",
-    "bearing": 111,
-    "km": 714,
+    "bearing": 98,
+    "km": 731,
     "radiusKm": 200,
     "why": "'Where the Numinous train — which is to say, where they SIT, for years.' ⚠️ The most static place in the world and it is a training ground."
    }
@@ -662,14 +663,15 @@
     "kind": "gradient",
     "why": "⛔ THERE IS NO EDGE. You are more or less present; that is the only measure, and it is continuous."
    }
-  ]
+  ],
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 7.0° → 6.6° (6% tighter); centre moved 1.44°. Features re-expressed, ground unchanged."
  },
  "riven_marches": {
   "centre": {
-   "lat": -12.26,
-   "lon": 88.6
+   "lat": -16.5,
+   "lon": 91.08
   },
-  "radiusDeg": 19.8,
+  "radiusDeg": 15.5,
   "members": 3,
   "purpose": "⛔ TWO OPPOSITE ANSWERS TO VIOLENCE, 2356 km apart, with one town in between that has to live with both. A player crossing it is choosing a side by which road they take.",
   "_shapeFinding": "⚠️ A DUMBBELL, not a disc: two poles and a bridge. The Marchward at bearing 176 is almost opposite the centre from both — ⛔ IT IS NOT BETWEEN THEM GEOMETRICALLY, it is between them POLITICALLY, and the map should not pretend otherwise.",
@@ -680,12 +682,12 @@
     "to": "the_marchward",
     "waypoints": [
      {
-      "bearing": 100,
-      "km": 1600
+      "bearing": 81,
+      "km": 1324
      },
      {
-      "bearing": 176,
-      "km": 2200
+      "bearing": -177,
+      "km": 1724
      }
     ],
     "why": "⛔ The road warriors take, and it bends away from the Stillhold the whole way. 'Honed, not feral' — they know exactly where they are not going."
@@ -696,12 +698,12 @@
     "to": "the_marchward",
     "waypoints": [
      {
-      "bearing": -160,
-      "km": 1500
+      "bearing": -141,
+      "km": 1216
      },
      {
-      "bearing": 176,
-      "km": 2200
+      "bearing": -177,
+      "km": 1724
      }
     ],
     "why": "⚠️ The other approach to the same town. The two roads do not meet until the gate, which the Marchward arranged deliberately."
@@ -712,8 +714,8 @@
     "id": "the_walled_peace",
     "name": "The Walled Peace",
     "kind": "area",
-    "bearing": -29,
-    "km": 1049,
+    "bearing": -30,
+    "km": 1591,
     "radiusKm": 420,
     "why": "⛔ 'No violence in living memory, no exceptions.' The wall is the claim, and the ground inside it is the evidence."
    },
@@ -721,8 +723,8 @@
     "id": "the_honed_frontier",
     "name": "The Honed Frontier",
     "kind": "area",
-    "bearing": 17,
-    "km": 1307,
+    "bearing": 3,
+    "km": 1727,
     "radiusKm": 420,
     "why": "⚠️ Not a wasteland — a WARRIOR CULTURE'S ground, kept. The distinction matters and the map should show tended, not blasted."
    },
@@ -730,8 +732,8 @@
     "id": "the_between_road",
     "name": "The Between Road",
     "kind": "point",
-    "bearing": 176,
-    "km": 1900,
+    "bearing": -176,
+    "km": 1428,
     "why": "⛔ Where the two approaches finally converge, one gate short of the Marchward. THE ONLY PLACE IN THE MARCHES BOTH SIDES STAND ON."
    }
   ],
@@ -744,14 +746,15 @@
     "kind": "none",
     "why": "⛔ THEY DO NOT TOUCH — 2356 km apart with the Marchward between. ⚠️ Second use of `none`, and this one is political rather than dispositional: they do not share a border because NEITHER WILL ADMIT ONE."
    }
-  ]
+  ],
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 19.8° → 15.5° (21% tighter); centre moved 4.88°. Features re-expressed, ground unchanged."
  },
  "the_quickwood": {
   "centre": {
-   "lat": -10.33,
-   "lon": -104.15
+   "lat": -12.0,
+   "lon": -105.48
   },
-  "radiusDeg": 13.8,
+  "radiusDeg": 12.0,
   "members": 6,
   "purpose": "⛔ A FOREST THAT IS ALSO A CIVILISATION, and the terraforming never stopped. A player crossing it is inside something that is growing around them at a rate they can almost perceive.",
   "ways": [
@@ -761,16 +764,16 @@
     "to": "the_heartroot",
     "waypoints": [
      {
-      "bearing": -100,
-      "km": 700
+      "bearing": -83,
+      "km": 549
      },
      {
-      "bearing": -40,
-      "km": 950
+      "bearing": -27,
+      "km": 1026
      },
      {
-      "bearing": -5,
-      "km": 1152
+      "bearing": 2,
+      "km": 1334
      }
     ],
     "why": "⛔ TWO BENDS, AND THE WOOD PUT THEM THERE. You do not cut a straight road through a city that is grown — you take the way the trees left."
@@ -781,12 +784,12 @@
     "to": "the_greenward",
     "waypoints": [
      {
-      "bearing": -170,
-      "km": 1300
+      "bearing": -175,
+      "km": 1097
      },
      {
-      "bearing": -173,
-      "km": 1533
+      "bearing": -178,
+      "km": 1336
      }
     ],
     "why": "⚠️ 'The Rootkin's only concession to URGENCY.' The straightest road in the Quickwood, which is itself the statement."
@@ -797,8 +800,8 @@
     "id": "the_grown_city",
     "name": "The Grown City",
     "kind": "area",
-    "bearing": -5,
-    "km": 1152,
+    "bearing": 2,
+    "km": 1334,
     "radiusKm": 500,
     "why": "⛔ 'A city that was GROWN. Not built from wood — grown, over four hundred years.' Its edge is where the growing stops being deliberate."
    },
@@ -806,8 +809,8 @@
     "id": "the_eaves",
     "name": "The Eaves",
     "kind": "area",
-    "bearing": 174,
-    "km": 1193,
+    "bearing": 165,
+    "km": 1036,
     "radiusKm": 400,
     "why": "⚠️ 'Where the grown city thins into ordinary forest and ordinary forest thins into ordinary land.' TWO gradients in one sentence — the whole region's edge condition."
    },
@@ -815,8 +818,8 @@
     "id": "the_slow_rows",
     "name": "The Slow Rows",
     "kind": "area",
-    "bearing": 33,
-    "km": 839,
+    "bearing": 34,
+    "km": 1074,
     "radiusKm": 300,
     "why": "⛔ 'Trees that take a human lifetime to fruit, tended by people who will not see it.' An orchard is a place and this one is also an argument."
    }
@@ -838,6 +841,7 @@
     "kind": "none",
     "why": "⚠️ Antipodal. Recorded on both sides now."
    }
-  ]
+  ],
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 13.8° → 12.0° (13% tighter); centre moved 2.12°. Features re-expressed, ground unchanged."
  }
 }

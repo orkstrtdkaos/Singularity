@@ -1,81 +1,81 @@
 {
-  "schemaVersion": 1,
-  "id": "millbrook",
-  "name": "Millbrook",
-  "regionId": "valley",
-  "communityId": "valley.millbrook",
-  "spectrum": {
-    "violence_peace": 0.6,
-    "chaos_order": 0.3,
-    "death_life": 0.4,
-    "mechanical_spiritual": 0.2,
-    "concrete_abstract": -0.5
-  },
-  "tags": [
-    "village",
-    "farming",
-    "riverside",
-    "unaligned"
-  ],
-  "connections": [
-    "echo_river_crossing",
-    "harmonic_heights_terrace",
-    "radiant_plateau_edge",
-    "sunken_choir",
-    "greywater_stilts",
-    "gen-watershed-road",
-    "gen-mara-wells-store",
-    "gen-disputed-zone-left-branch-entrance",
-    "gen-waygate"
-  ],
-  "descriptionSeed": "A riverside farming village on the valley floor, home to a few hundred unaligned folk — Traditionalists, Adaptors, and a handful of Explorers living side by side. Water wheels turn along the Echo River; terraced gardens climb the lower slopes. The village well and the river dock are the two centers of daily life. Lately the water runs faintly gray-green some mornings, and everyone pretends not to notice out loud.",
-  "loreRefs": [
-    "valley_primer"
-  ],
-  "npcsPresent": [
-    "water_keeper",
-    "mountain_scout"
-  ],
-  "encounterFlavor": "Daily village life under quiet strain — farmers arguing about irrigation shares, children playing at sonic and light games they barely control, traders passing through with news.",
-  "image": "content/packs/valley/assets/millbrook.jpg",
-  "questSeeds": [
-    "Mara Wells is quietly testing newcomers for competence — running her errands leads into the contamination mystery and, eventually, the question of her successor",
-    "The irrigation-share dispute between two farming families is one bad harvest from a feud; someone level-headed could broker terms",
-    "Kit Farrow wants backing for an expedition through the new pass before winter — supplies, allies, and someone to convince the elders",
-    "A child who plays sonic games by the docks has started hearing 'a second river under the river' — nobody takes her seriously"
-  ],
-  "map": {
-    "x": 400,
-    "y": 320
-  },
-  "poleIntensity": {
-    "peace": 0.6,
-    "order": 0.3,
-    "life": 0.4,
-    "spiritual": 0.2,
-    "concrete": 0.5
-  },
-  "axisVector": [
-    0,
-    0,
-    0,
-    0.6,
-    -0.5,
-    0.2,
-    0.3,
-    0,
-    0.4,
-    0,
-    0,
-    0
-  ],
-  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
-  "worldPos": {
-    "colatitude": 26,
-    "longitude": 248,
-    "depth": 0
-  },
-  "worldPosNote": "Ordinary valley farmland, leaning life. Erik's home ground in play. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "echo_river_crossing"
+ "schemaVersion": 1,
+ "id": "millbrook",
+ "name": "Millbrook",
+ "regionId": "valley",
+ "communityId": "valley.millbrook",
+ "spectrum": {
+  "violence_peace": 0.6,
+  "chaos_order": 0.3,
+  "death_life": 0.4,
+  "mechanical_spiritual": 0.2,
+  "concrete_abstract": -0.5
+ },
+ "tags": [
+  "village",
+  "farming",
+  "riverside",
+  "unaligned"
+ ],
+ "connections": [
+  "echo_river_crossing",
+  "harmonic_heights_terrace",
+  "radiant_plateau_edge",
+  "sunken_choir",
+  "greywater_stilts",
+  "gen-watershed-road",
+  "gen-mara-wells-store",
+  "gen-disputed-zone-left-branch-entrance",
+  "gen-waygate"
+ ],
+ "descriptionSeed": "A riverside farming village on the valley floor, home to a few hundred unaligned folk — Traditionalists, Adaptors, and a handful of Explorers living side by side. Water wheels turn along the Echo River; terraced gardens climb the lower slopes. The village well and the river dock are the two centers of daily life. Lately the water runs faintly gray-green some mornings, and everyone pretends not to notice out loud.",
+ "loreRefs": [
+  "valley_primer"
+ ],
+ "npcsPresent": [
+  "water_keeper",
+  "mountain_scout"
+ ],
+ "encounterFlavor": "Daily village life under quiet strain — farmers arguing about irrigation shares, children playing at sonic and light games they barely control, traders passing through with news.",
+ "image": "content/packs/valley/assets/millbrook.jpg",
+ "questSeeds": [
+  "Mara Wells is quietly testing newcomers for competence — running her errands leads into the contamination mystery and, eventually, the question of her successor",
+  "The irrigation-share dispute between two farming families is one bad harvest from a feud; someone level-headed could broker terms",
+  "Kit Farrow wants backing for an expedition through the new pass before winter — supplies, allies, and someone to convince the elders",
+  "A child who plays sonic games by the docks has started hearing 'a second river under the river' — nobody takes her seriously"
+ ],
+ "map": {
+  "x": 400,
+  "y": 320
+ },
+ "poleIntensity": {
+  "peace": 0.6,
+  "order": 0.3,
+  "life": 0.4,
+  "spiritual": 0.2,
+  "concrete": 0.5
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0.6,
+  -0.5,
+  0.2,
+  0.3,
+  0,
+  0.4,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+ "worldPos": {
+  "colatitude": 20.31,
+  "longitude": 251.895,
+  "depth": 0
+ },
+ "worldPosNote": "⛔ SNG-427: MOVED ONTO THE ECHO. Erik: 'Millbrook is the town closest to the Echo River crossing — that's why the crossing exists.' Measured before: Millbrook was 1382 mi from the Crossing and the Crossing was 100 mi from any water. Now 148 mi downstream, 2 mi off the channel. ⛔ 'Water wheels turn ALONG the Echo River.' ON the river, 2 mi of floodplain between the well and the bank — enough for fields, close enough for a dock. AND 14 MI ABOVE THE CROSSING, which is Erik's point: the crossing exists BECAUSE the town is there. Was colatitude 26, longitude 248.",
+ "tier": "settlement",
+ "parentId": "echo_river_crossing"
 }

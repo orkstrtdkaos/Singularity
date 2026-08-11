@@ -2125,12 +2125,190 @@
     "Deep in the Threshold Post mine-shaft, Silas assessed the second structural fault—a slower-developing fracture that will require monitoring in months to come—and marked it plainly for Fendt's crew. The ridge sentinel is now fully assessed, armed with honest limits and clear notice of what requires attention. The warden post is ready.",
     "At the ridge Threshold Post in early morning, Silas returns from the spring-fed draw to share a meal with Pell and ask after the child she carries. Pell reports the little one is strong and steady, moving in response to the novel-depth work."
   ],
-  "currentLocationId": "the_crossing",
-  "activeScene": null,
+  "currentLocationId": "gen-the-temple",
+  "activeScene": {
+    "locationId": "gen-the-temple",
+    "turns": [
+      {
+        "player": null,
+        "summary": "At the ridge Threshold Post in the warm afternoon light, Silas sits with Pell as she attends to the child she carries. The work here is complete. The south road waits.",
+        "narration": "The ridge temple's stone is still warm from the morning light. You sit on the bench outside its eastern entrance—the one that faces back toward Millbrook, back toward the network—with Pell beside you on one side and Huginn perched on the temple's low roof-corner above. The early-spring sun is high enough now to make shadows short and honest. Veth emerged from the temple perhaps an hour ago, and has taken herself to the lodge-frame to work with Fendt's crew on the timber joinery—the warden's eye on the building's bones, the patience of someone who knows what a place needs to stand.\n\nPell's breathing is steady. Her hand rests on her own belly, and she is quiet in the way that means she is listening to something underneath the ordinary sounds—the weight of the child in her, the way a blacksmith listens to iron cooling.\n\nHuginn's eye is on the southern road.\n\nIt is afternoon now, the light angling west. The work here is holding. The Threshold Post rises. The mine beneath runs honest. The sealed seam sits where it was always meant to sit, its purpose fulfilled. And you are sitting in the light with your hand touching Pell's shoulder, neither of you speaking, both of you knowing that this particular quiet will not hold much longer. There are roads south. There are questions waiting. There is a Hub message sealed in your pack that you have not yet read, and Huginn's attention on that southern road is not an accident.\n\nThe moment stretches. The child in Pell's belly shifts, and Pell's expression shifts with it—a small recognition, a settling-in.\n\nWhat do you do?"
+      }
+    ],
+    "lastTurn": {
+      "narration": "The ridge temple's stone is still warm from the morning light. You sit on the bench outside its eastern entrance—the one that faces back toward Millbrook, back toward the network—with Pell beside you on one side and Huginn perched on the temple's low roof-corner above. The early-spring sun is high enough now to make shadows short and honest. Veth emerged from the temple perhaps an hour ago, and has taken herself to the lodge-frame to work with Fendt's crew on the timber joinery—the warden's eye on the building's bones, the patience of someone who knows what a place needs to stand.\n\nPell's breathing is steady. Her hand rests on her own belly, and she is quiet in the way that means she is listening to something underneath the ordinary sounds—the weight of the child in her, the way a blacksmith listens to iron cooling.\n\nHuginn's eye is on the southern road.\n\nIt is afternoon now, the light angling west. The work here is holding. The Threshold Post rises. The mine beneath runs honest. The sealed seam sits where it was always meant to sit, its purpose fulfilled. And you are sitting in the light with your hand touching Pell's shoulder, neither of you speaking, both of you knowing that this particular quiet will not hold much longer. There are roads south. There are questions waiting. There is a Hub message sealed in your pack that you have not yet read, and Huginn's attention on that southern road is not an accident.\n\nThe moment stretches. The child in Pell's belly shifts, and Pell's expression shifts with it—a small recognition, a settling-in.\n\nWhat do you do?",
+      "sceneSummary": "At the ridge Threshold Post in the warm afternoon light, Silas sits with Pell as she attends to the child she carries. The work here is complete. The south road waits.",
+      "choices": [
+        {
+          "label": "Ask Pell if she wants to rest here a day before moving on",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "trivial",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "comfort"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Open the sealed Hub message and read what Ossian sent",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "trivial",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Go down and walk the southern approach with Huginn to read what the road ahead looks like",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "travel"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stay seated and name aloud what comes next—the roads, the questions, the work that is waiting",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "trivial",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "lead"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "The ridge Threshold Post, afternoon light. The death-warden temple stands complete behind you—stone and timber, the sealed seam at its center as altar. The lodge-frame is half-built nearby, timber joinery underway. The southern road is visible as a pale line cutting through the moorland.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Sitting beside Silas, one hand on her belly, quiet and present—listening to the child she carries"
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "At the lodge-frame with Fendt's crew, working on timber joinery—the warden's eye steady on the structure"
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on the temple roof-corner, eye on the southern road"
+          }
+        ],
+        "objects": [
+          "The death-warden temple—stone and timber, complete",
+          "The lodge-frame—timber skeleton, roof-joists bare",
+          "The sealed deep seam—at the temple's center",
+          "The sealed Hub message in Silas's pack",
+          "Memory—the unified spear, answering shadow-form included"
+        ],
+        "threads": [
+          "Huginn watching the southern road—a question waiting",
+          "The sealed Hub message from Ossian—unread",
+          "The child in Pell—strong and steadying, present",
+          "The work here—complete; the next work begins soon"
+        ]
+      },
+      "npcUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {},
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The ridge Threshold Post, afternoon light. The death-warden temple stands complete behind you—stone and timber, the sealed seam at its center as altar. The lodge-frame is half-built nearby, timber joinery underway. The southern road is visible as a pale line cutting through the moorland.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Sitting beside Silas, one hand on her belly, quiet and present—listening to the child she carries"
+        },
+        {
+          "name": "Veth Ondra",
+          "state": "At the lodge-frame with Fendt's crew, working on timber joinery—the warden's eye steady on the structure"
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched on the temple roof-corner, eye on the southern road"
+        }
+      ],
+      "objects": [
+        "The death-warden temple—stone and timber, complete",
+        "The lodge-frame—timber skeleton, roof-joists bare",
+        "The sealed deep seam—at the temple's center",
+        "The sealed Hub message in Silas's pack",
+        "Memory—the unified spear, answering shadow-form included"
+      ],
+      "threads": [
+        "Huginn watching the southern road—a question waiting",
+        "The sealed Hub message from Ossian—unread",
+        "The child in Pell—strong and steadying, present",
+        "The work here—complete; the next work begins soon"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 15,
-    "hour": 11,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -5800,6 +5978,13 @@
           "parentUnresolved": "valley"
         }
       }
+    },
+    "gen-the-temple": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 15,
+      "vectorsKnown": []
     }
   },
   "worldState": {
@@ -5944,11 +6129,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-08-11T01:06:37.039Z",
+    "lastSharedReadAt": "2026-08-11T21:13:00.268Z",
     "lastTickWorldDay": 42,
     "lastCanonWorldDay": 42,
-    "lastGenCount": 1009,
-    "turnsSinceOffer": 0,
+    "lastGenCount": 1029,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Veth's acknowledgment—she does not move from the threshold, but you feel the weight of her attention shift. She is *reading* what you…",
@@ -6274,7 +6459,7 @@
         "kind": "shortage",
         "premise": "The shallow wells along the eastern edge of the Palelands are silting over one by one, and no one has yet connected the pattern.",
         "cause": "The Palelands are arid and sparsely settled, with wells dug generations ago into substrata that were never fully understood — the soil is already thin and…",
-        "stage": 11,
+        "stage": 12,
         "seededAtCount": 673,
         "surfaced": true,
         "fate": "growing",
@@ -6300,7 +6485,7 @@
         "kind": "rot",
         "premise": "A clerk in the Center's lending house has been recording phantom interest payments to mask a shortfall in the creditor's books, and the discrepancy is now large enough that an audit would unravel…",
         "cause": "The Center runs on ledger-trust; no one audits what no one doubts, and the creditor has been trusted for a generation.",
-        "stage": 8,
+        "stage": 9,
         "seededAtCount": 795,
         "surfaced": true,
         "fate": "growing",
@@ -6326,7 +6511,7 @@
         "kind": "shortage",
         "premise": "The valley's supply of wound-fever herb is quietly running out; the healer's dried stores are nearly gone and this season's growth was sparse.",
         "cause": "The valley is already a place of dense settlement and hard seasonal work — small injuries are common, and the herb has been drawn down steadily without anyone…",
-        "stage": 6,
+        "stage": 7,
         "seededAtCount": 859,
         "surfaced": true,
         "fate": "growing",
@@ -6363,7 +6548,7 @@
         "kind": "rot",
         "premise": "A courier who carries routine correspondence between the lending house and the valley has not arrived on his expected schedule for the second time, and a junior clerk has begun holding his letters…",
         "cause": "The clerk masking the phantom interest shortfall has quietly asked the courier to delay certain outbound letters, and the courier — owed a favor — has…",
-        "stage": 4,
+        "stage": 5,
         "seededAtCount": 938,
         "surfaced": true,
         "fate": "growing",
@@ -6396,6 +6581,21 @@
       }
     },
     "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_glimmerling_swarm",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A glimmerlings has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_glimmerling_swarm",
+          "name": "glimmerlings"
+        },
+        "addedDay": 15,
+        "locationId": "gen-the-temple"
+      },
       {
         "source": "npc-want",
         "kind": "npc-want",
@@ -12319,6 +12519,14 @@
   "reconcileVersion": 30,
   "gallery": [
     {
+      "kind": "location",
+      "prompt": "The Temple",
+      "url": "https://image.pollinations.ai/prompt/The%20Temple%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Temple.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=60806&nologo=true",
+      "caption": "The Temple",
+      "worldDay": 42,
+      "at": "2026-08-11T21:07:43.295Z"
+    },
+    {
       "kind": "ability",
       "prompt": "The Last Form",
       "url": "https://image.pollinations.ai/prompt/The%20Last%20Form%3A%20The%20duel%20capstone%3A%20read%20a%20single%20opponent%20so%20completely%20and%20strike%20so%20precisely%20that%20a%20formal%20fight%20ends%20in%20one%20decisive%20exchange.%20The%20Marcher's%20highest%20art%20%E2%80%94%20the%20fight%20already%20over%20when%20it%20begins.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20marcher%20tradition%3A%20steel-grey%2C%20blood-rust%2C%20weathered%20leather%3B%20honed%20blades%2C%20scarred%20armor%2C%20the%20held%20line%3B%20hard%20edge-light%2C%20a%20blade%20catching%20the%20sun%3B%20disciplined%2C%20scarred%2C%20holding%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=29546&nologo=true",
@@ -12840,8 +13048,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786482441133,
-  "rev": 1701,
+  "updatedAt": 1786482798638,
+  "rev": 1709,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15665,6 +15873,44 @@
           "x": 272.37251111495743,
           "y": 297.10793550220046
         }
+      },
+      "gen-the-temple": {
+        "id": "gen-the-temple",
+        "name": "The Temple",
+        "regionId": "the_center",
+        "descriptionSeed": "A place the road led to — The Temple. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "the_crossing"
+        ],
+        "_mintedAs": "transit",
+        "dangerLevel": 2,
+        "_gen": {
+          "type": "location",
+          "tier": "fresh",
+          "engagementScore": 2,
+          "birthWeight": 1,
+          "rating": null,
+          "attentionHistory": [
+            {
+              "kind": "revisit",
+              "day": 15
+            }
+          ],
+          "createdDay": 15,
+          "provenance": {
+            "locationId": "the_crossing",
+            "day": null,
+            "hint": "transit"
+          },
+          "lastAttentionDay": 15
+        },
+        "map": {
+          "x": 344.6039272671123,
+          "y": 355.8392273171484
+        }
       }
     },
     "arc": {
@@ -16798,7 +17044,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 148
+    "the_center": 149
   },
   "foreclosed": [
     "rootkin",
@@ -16822,7 +17068,8 @@
     "gen-hub-north-gate-district-street",
     "gen-mara-wells-store",
     "gen-disputed-zone-left-branch-entrance",
-    "gen-the-made-gate"
+    "gen-the-made-gate",
+    "gen-the-temple"
   ],
   "opLossLog": [
     {
@@ -16835,11 +17082,7 @@
     "text": "You have become the man who finished what his father couldn't — who stood at an unmapped door in the hillside and folded it open with his own hands, then sealed it with the Weirmark before the March could swallow it back into silence. That act, the first warded threshold in eleven years, made you real to the Ashwardens in a way no lineage claim could have; now Raven's Home is a working post again, and Edvar Crane, who kept his solitary watch for twenty years, keeps it no longer alone. You organized the valley's water crisis the way a man organizes grief — methodically, because falling apart costs others — putting Dara and Aldric and Calvar and Mara in one room at Pell's forge and naming who carried each thread until the problem had a shape people could actually hold. The grove circle accepted the ward you seated with Veth and Siol and Pell and Huginn, the Weirmark at the join, the Ent's own roots as the frame — something older than doctrine receiving something new without flinching. And Pell, who has seen all of it, who was at the forge and in the grove and at the gate: you come back to her the way the fold comes back to its anchor, not because she holds you in place but because she is where you most fully know what you've done and who you are doing it for.",
     "at": "2026-07-26T00:37:37.015Z"
   },
-  "_pendingArrival": {
-    "ref": "the temple",
-    "name": "The Temple",
-    "destId": null
-  },
+  "_pendingArrival": null,
   "sessions": [
     {
       "id": "sess-1",
@@ -17060,10 +17303,10 @@
     {
       "id": "sess-27",
       "startedAt": "2026-08-11T19:25:13.129Z",
-      "lastAt": "2026-08-11T21:07:21.130Z",
+      "lastAt": "2026-08-11T21:13:18.637Z",
       "startDay": 42,
       "endDay": 42,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [
@@ -17133,7 +17376,7 @@
       "schemaVersion": 1,
       "id": "re-beast_warpling_hare",
       "type": "duel",
-      "name": "Hard Ground",
+      "name": "A Warpling",
       "tier": "riffraff",
       "minDanger": 1,
       "setup": "a warpling — Was a hare. Is now too many legs and a hunger that doesn't match its size, moving in stutters the eye can't track. Fast, erratic, bites what it can't eat; travels in warped warrens.",
@@ -17141,8 +17384,10 @@
       "avoidable": true,
       "fromRandom": true,
       "flavor": "dangerous",
+      "creatureId": "warpling_hare",
+      "creatureClass": "substrate_warped_beast",
       "opponent": {
-        "name": "the aggressor",
+        "name": "a warpling",
         "health": 4,
         "threat": 22,
         "yieldAt": 1,
@@ -17536,20 +17781,21 @@
     "gen-mara-wells-store": "https://image.pollinations.ai/prompt/Mara%20Wells%20Store%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Mara%20Wells%20Store.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=13548&nologo=true",
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true",
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true",
-    "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
+    "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true",
+    "gen-the-temple": "https://image.pollinations.ai/prompt/The%20Temple%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Temple.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=60806&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 313,
-    "choices": 312,
+    "sceneSummary": 314,
+    "choices": 313,
     "characterDeltas": 147,
-    "scene": 313,
+    "scene": 314,
     "npcUpdates": 282,
     "factUpdates": 27,
     "placeUpdates": 69,
     "codexUpdates": 191,
     "timeOps": 291,
     "imagePrompt": 20,
-    "sceneEnded": 93,
+    "sceneEnded": 94,
     "itemUpdates": 7,
     "questUpdates": 41,
     "offer": 37,
@@ -17566,11 +17812,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 24,
+    "gambitApt": 25,
     "markDefiningMoment": 1,
     "_engineClosedScene": 2
   },
-  "_opTurns": 313,
+  "_opTurns": 314,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -17869,7 +18115,8 @@
     ],
     "the_crossing": [
       "gen-north-gate-registry-ossian-office",
-      "gen-the-made-gate"
+      "gen-the-made-gate",
+      "gen-the-temple"
     ],
     "gen-hub-north-gate-district-street": [
       "gen-north-gate-registry-ossian-office"

@@ -681,10 +681,21 @@ export function makeRegionBase(t, gen, extent, opts) {
   return base;
 }
 
-/** The extent a region occupies, from its members — padded so the edge is not the frame.
- *  ⚠️ Reads worldPos, never the graph: SNG-409 §5 measured that the parent links and the ground
- *  disagree, and at this tier the ground is the question. */
-export function regionExtent(regionId, locations, { padFrac = 0.18 } = {}) {
+/** ⛔ A REGION IS A CIRCLE ON A SPHERE, NOT A BOX IN LATITUDE AND LONGITUDE — and Aevi's four authored
+ *  maps are what proved it. She gives each region a `centre` and a `radiusDeg`, and in all four the
+ *  farthest member sits at EXACTLY her radius (14.0/14, 12.5/12.5, 10.6/10.6, 17.1/17.1): a spherical
+ *  bounding circle, computed properly.
+ *
+ *  ⚠️ MY BOUNDING BOX DISAGREED WITH HER BY 36° OF LONGITUDE ON THE CENTRE, and hers was right. A box
+ *  centre is the midpoint of a lat/lon rectangle, which near a pole is not the middle of anything —
+ *  the Centre sits at latitude −85.6 where a longitude midpoint is meaningless. ⛔ That mattered more
+ *  than any coverage question: every bearing and distance she authors is measured FROM the centre, so
+ *  two definitions of it would land every feature in the wrong place.
+ *
+ *  So: the circle is the frame. An authored map's centre WINS outright, because her bearings are
+ *  measured from it; a region with no map gets the same circle computed the same way. */
+export function regionExtent(regionId, locations, { padFrac = 0.18, authored = null } = {}) {
+  const R2 = Math.PI / 180;
   const pts = [];
   for (const id of Object.keys(locations || {})) {
     const l = locations[id];
@@ -692,44 +703,43 @@ export function regionExtent(regionId, locations, { padFrac = 0.18 } = {}) {
     if ((l.regionId || l.region) !== regionId) continue;
     pts.push([l.worldPos.colatitude - 90, l.worldPos.longitude]);
   }
-  if (!pts.length) return null;
-  let la0 = 90, la1 = -90;
-  for (const [la] of pts) { la0 = Math.min(la0, la); la1 = Math.max(la1, la); }
-  // ⛔ LONGITUDE WRAPS, AND MIN/MAX DOES NOT KNOW THAT. The Centre's members straddle the antimeridian,
-  // so a naive extent read 394° WIDE — the whole world and change, for a region 13° tall. Umbral Depths
-  // read 485°, which is not even a possible width for anything.
-  // ⚠️ The right extent is the complement of the LARGEST GAP between sorted longitudes: whatever arc the
-  // members do NOT occupy is the outside, and everything else is the region.
-  const lons = pts.map((q) => q[1]).sort((x, y) => x - y);
-  let gapAt = 0, gap = -1;
-  for (let i = 0; i < lons.length; i++) {
-    const a2 = lons[i], b2 = lons[(i + 1) % lons.length] + (i + 1 === lons.length ? 360 : 0);
-    if (b2 - a2 > gap) { gap = b2 - a2; gapAt = i; }
+  if (!pts.length && !authored) return null;
+
+  const gc = (a, b) => Math.acos(Math.max(-1, Math.min(1,
+    Math.sin(a[0] * R2) * Math.sin(b[0] * R2) +
+    Math.cos(a[0] * R2) * Math.cos(b[0] * R2) * Math.cos((a[1] - b[1]) * R2)))) / R2;
+
+  let centre, radiusDeg;
+  if (authored?.centre && Number.isFinite(authored.radiusDeg)) {
+    // ⛔ THE AUTHORED CENTRE WINS. Her ways and named grounds are bearings and kilometres FROM it, so
+    // recomputing one here would silently move every feature she placed.
+    centre = { lat: authored.centre.lat, lon: authored.centre.lon };
+    radiusDeg = authored.radiusDeg;
+  } else {
+    // the same circle, computed: a 3D mean direction (which has no pole problem), then the farthest member
+    let x = 0, y = 0, z = 0;
+    for (const [la, lo] of pts) {
+      x += Math.cos(la * R2) * Math.cos(lo * R2);
+      y += Math.cos(la * R2) * Math.sin(lo * R2);
+      z += Math.sin(la * R2);
+    }
+    const m = Math.hypot(x, y, z) || 1;
+    centre = { lat: Math.asin(Math.max(-1, Math.min(1, z / m))) / R2, lon: Math.atan2(y, x) / R2 };
+    radiusDeg = pts.reduce((mx, q) => Math.max(mx, gc([centre.lat, centre.lon], q)), 0);
   }
-  const start = lons[(gapAt + 1) % lons.length];
-  const width = 360 - gap;
-  const padLa = Math.max(0.5, (la1 - la0) * padFrac);
-  // ⚠️ padding cannot take an extent past a full turn — the Foothills already spans nearly every
-  // longitude, which is Erik's ruling that it is a continent arriving as arithmetic. 394° of longitude
-  // is not a window; it is a bug wearing one.
-  const padLo = Math.max(0, Math.min(width * padFrac, (360 - width) / 2));
-  let A0 = Math.max(-90, la0 - padLa), A1 = Math.min(90, la1 + padLa);
-  let O0 = start - padLo, O1 = start + width + padLo;
-  // ⛔ A REGION WITH ONE MEMBER HAS NO EXTENT, AND PADDING A POINT MAKES A RIBBON. Erik's Foothills split
-  // produced twelve regions of which NINE stand alone — exactly what his rule predicted — and every one
-  // came out at aspect 10: a sliver, not a map. ⚠️ So a sparse region gets a minimum window in GROUND
-  // units, square, centred on what it has. A map of one town is a map of the country around that town,
-  // which is the question this tier answers anyway.
-  const midLat2 = (A0 + A1) / 2;
-  const conv2 = Math.max(0.12, Math.cos(midLat2 * Math.PI / 180));
-  const MIN_GROUND = 6;
-  const want = Math.max(A1 - A0, (O1 - O0) * conv2, MIN_GROUND);
-  if (A1 - A0 < want) { const c = midLat2; A0 = Math.max(-90, c - want / 2); A1 = Math.min(90, c + want / 2); }
-  if ((O1 - O0) * conv2 < want) { const c = (O0 + O1) / 2, half = (want / conv2) / 2; O0 = c - half; O1 = c + half; }
-  return { la0: A0, la1: A1,
-           lo0: O0, lo1: O1, members: pts.length,
-           // flagged rather than hidden: a region this wide has no useful 2D map and wants splitting
-           global: width + 2 * padLo > 300 };
+  // ⚠️ a one-member region has radius 0, and Erik's Foothills split produced NINE of them. A map of one
+  // town is a map of the country around it, so a floor applies — in ground degrees, which a circle
+  // measures natively and a box never did.
+  const r = Math.max(3, radiusDeg * (1 + padFrac));
+  const conv = Math.max(0.12, Math.cos(centre.lat * R2));
+  return {
+    centre, radiusDeg: r, members: pts.length,
+    // the drawing window, derived FROM the circle so the two can never disagree
+    la0: Math.max(-90, centre.lat - r), la1: Math.min(90, centre.lat + r),
+    lo0: centre.lon - Math.min(180, r / conv), lo1: centre.lon + Math.min(180, r / conv),
+    // a circle that swallows a hemisphere has no useful 2D map and wants splitting
+    global: r > 80,
+  };
 }
 
 /** ⛔ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA. "No location in this world has a boundary — all

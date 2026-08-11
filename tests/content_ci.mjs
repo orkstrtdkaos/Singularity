@@ -973,6 +973,41 @@ for (const pack of PACKS) {
       shapes.every((x) => x.width <= 360.001),
       shapes.filter((x) => x.width > 360).map((x) => x.rid + " " + x.width.toFixed(0) + "°").join(", "));
 
+    // ⛔ THE AUTHORED CENTRE WINS, and Aevi's four maps are what forced this. Every bearing and
+    // kilometre she writes is measured FROM her centre, so a second definition of it moves every feature
+    // she placed. My lat/lon bounding box disagreed with hers by 36° of longitude on the Centre — and
+    // hers was right: a box centre is the midpoint of a rectangle, which at latitude −85.6 is not the
+    // middle of anything. ⚠️ The frame is a spherical CIRCLE now, computed the way she computed hers.
+    const maps414 = rj("content/packs/core/world/region_maps.json");
+    const authoredIds = Object.keys(maps414).filter((k) => !k.startsWith("_"));
+    const honoured = authoredIds.every((rid) => {
+      const e = WGR.regionExtent(rid, canon.locs, { authored: maps414[rid] });
+      return e && e.centre.lat === maps414[rid].centre.lat && e.centre.lon === maps414[rid].centre.lon;
+    });
+    check("SNG-414: an authored region centre is honoured EXACTLY — her bearings are measured from it",
+      authoredIds.length >= 4 && honoured);
+    // ✅ and the computed circle now agrees with her authoring in GROUND terms, which is the real test:
+    // longitude near a pole is not distance, and the old box was comparing the wrong thing.
+    const R414 = Math.PI / 180;
+    const gcd414 = (a2, b2) => Math.acos(Math.max(-1, Math.min(1,
+      Math.sin(a2[0] * R414) * Math.sin(b2[0] * R414) +
+      Math.cos(a2[0] * R414) * Math.cos(b2[0] * R414) * Math.cos((a2[1] - b2[1]) * R414)))) / R414;
+    const drift414 = authoredIds.map((rid) => {
+      const e = WGR.regionExtent(rid, canon.locs);
+      return gcd414([e.centre.lat, e.centre.lon], [maps414[rid].centre.lat, maps414[rid].centre.lon]);
+    });
+    check("SNG-414: …and the COMPUTED centre lands within a few degrees of ground of hers, for the 34 with no map",
+      drift414.every((d2) => d2 < 4),
+      drift414.map((d2, i) => authoredIds[i] + " " + d2.toFixed(2) + "°").join(", "));
+
+    // ⚠️ every way endpoint must resolve, or a road is drawn to nowhere
+    const badEnds = [];
+    for (const rid of authoredIds) for (const w of maps414[rid].ways || []) {
+      for (const end of [w.from, w.to]) if (!canon.locs[end]) badEnds.push(rid + ":" + end);
+    }
+    check("SNG-414: every authored way runs between real places — a road to nowhere is worse than no road",
+      badEnds.length === 0, badEnds.join(", "));
+
     // ⛔ A ONE-MEMBER REGION HAS NO EXTENT, and Erik's Foothills rule produced NINE of them. Padding a
     // point gave aspect 10 — a sliver, not a map — so a sparse region gets a square minimum window in
     // GROUND units. A map of one town is a map of the country around that town.

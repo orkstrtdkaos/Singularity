@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.118";
+const APP_VERSION = "1.9.119";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6917,6 +6917,13 @@ function mapTierBar() {
  *  ⚠️ Deterministic, so it agrees with the globe by construction — the same argument that let the
  *  region-vote fields resolve without a seam. */
 let _regionBases = new Map();
+// ⚠️ the authored region layer — what lies BELOW the information floor, which the generator cannot say.
+// 4 of 38 regions have one today; the other 34 draw ground and places and nothing else, which is the
+// dominant case and must look deliberate rather than broken.
+let _regionMaps = null;
+fetch("content/packs/core/world/region_maps.json?v=" + APP_VERSION)
+  .then((r) => r.json()).then((d) => { _regionMaps = d; })
+  .catch(() => { /* the ground still draws */ });
 // ⚠️ ONE GENERATOR, SHARED BY BOTH TIERS. It was a closure-local inside the globe, which meant the
 // region map could not reach it without a second fetch of the same module and params. Hoisted rather
 // than duplicated — two copies of a deterministic generator is two chances to drift.
@@ -6945,7 +6952,11 @@ function queueRegionMap(regionId) {
 function paintRegionMap(regionId) {
   const cv = document.getElementById("region-map");
   if (!cv || !_terrain || !_fineGenReady()) return;
-  const ext = regionExtent(regionId, CONTENT.locations);
+  // ⛔ THE AUTHORED CENTRE WINS WHEN THERE IS ONE. Aevi's ways and named grounds are bearings and
+  // kilometres FROM her centre, so computing a different one would silently move every feature she
+  // placed — which my lat/lon bounding box did, by 36° of longitude on the Centre.
+  const authoredMap = _regionMaps && _regionMaps[regionId];
+  const ext = regionExtent(regionId, CONTENT.locations, { authored: authoredMap });
   if (!ext) return;
   let base = _regionBases.get(regionId);
   if (!base) {
@@ -6977,6 +6988,52 @@ function paintRegionMap(regionId) {
     }
   }
   ctx.putImageData(img, 0, 0);
+
+  // ⛔ HER LAYER, OVER THE GROUND. bearing + km from the region centre — the same frame localMap uses
+  // one tier down, which is why it needed no new machinery.
+  if (authoredMap) {
+    const R2 = Math.PI / 180;
+    const fromCentre = (bearing, km) => {
+      const dLat = (km * Math.cos(bearing * R2)) / 111.32;
+      const dLon = (km * Math.sin(bearing * R2)) / (111.32 * Math.max(0.05, Math.cos(ext.centre.lat * R2)));
+      return base.toScreen(ext.centre.lon + dLon, ext.centre.lat + dLat, W, H);
+    };
+    // named ground first, underneath everything
+    for (const g of authoredMap.namedGround || []) {
+      const p = fromCentre(g.bearing, g.km);
+      if (g.kind === "area" && g.radiusKm) {
+        const edge = fromCentre(g.bearing, g.km + g.radiusKm);
+        const rpx = Math.hypot(edge.x - p.x, edge.y - p.y);
+        // ⚠️ a soft wash, not an outline — the Shimmer is a band that WANDERS, and a crisp ring would
+        // be a lie about a thing that moves. Same argument as the Disputed Zone.
+        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, Math.max(2, rpx));
+        const below = (g.level || 0) < 0;
+        grad.addColorStop(0, below ? "rgba(120,110,170,0.30)" : "rgba(196,176,120,0.26)");
+        grad.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = grad;
+        ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(2, rpx), 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.fillStyle = (g.level || 0) < 0 ? "rgba(190,180,225,0.92)" : "rgba(236,226,196,0.92)";
+      ctx.font = (g.kind === "area" ? "italic 600 11px" : "600 10px") + " system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(String(g.name || g.id) + ((g.level || 0) < 0 ? ` ▾${g.level}` : ""), p.x, p.y);
+    }
+    // the ways, with their bends — a road that bends has a reason, and a straight arc would erase it
+    ctx.save();
+    ctx.strokeStyle = "rgba(214,188,138,0.85)"; ctx.lineWidth = 1.8;
+    ctx.lineJoin = "round"; ctx.lineCap = "round";
+    for (const w of authoredMap.ways || []) {
+      const from = CONTENT.locations?.[w.from], to = CONTENT.locations?.[w.to];
+      if (!from?.worldPos || !to?.worldPos) continue;
+      const a = base.toScreen(from.worldPos.longitude, from.worldPos.colatitude - 90, W, H);
+      const b = base.toScreen(to.worldPos.longitude, to.worldPos.colatitude - 90, W, H);
+      ctx.beginPath(); ctx.moveTo(a.x, a.y);
+      for (const wp of w.waypoints || []) { const q = fromCentre(wp.bearing, wp.km); ctx.lineTo(q.x, q.y); }
+      ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
   // the places, by their real position and their authored kind
   const here = character.currentLocationId;
   for (const id of Object.keys(CONTENT.locations)) {

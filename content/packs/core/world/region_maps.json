@@ -10,79 +10,6 @@
   "radiusDeg": 12.4,
   "members": 7,
   "purpose": "⛔ THE GROUND BETWEEN TWO CIVILISATIONS THAT DO NOT FIGHT AND INTERFERE ANYWAY. Sound bends light here; light carries sound. ⚠️ NOTHING IN THE VALE IS NEUTRAL AND NOTHING IN IT IS ANYONE'S — which is why the people who live here are the ones who wanted out from under both.",
-  "ways": [
-   {
-    "id": "way_terrace_to_edge",
-    "from": "harmonic_heights_terrace",
-    "to": "radiant_plateau_edge",
-    "waypoints": [
-     {
-      "bearing": 78,
-      "km": 265
-     },
-     {
-      "bearing": -58,
-      "km": 568
-     },
-     {
-      "bearing": -75,
-      "km": 1081
-     }
-    ],
-    "why": "⛔ THE ONLY ROAD THAT MATTERS HERE and it BENDS SOUTH. A straight arc would run it through the worst of the interference; the road exists because somebody found the way round. ⚠️ It is also the road the contamination teams use, so it is maintained by two powers who will not admit to cooperating.",
-    "_regenerated": "⛔ SNG-421: re-derived from real endpoints with a 18% perpendicular bend."
-   },
-   {
-    "id": "way_crossing_to_stilts",
-    "from": "echo_river_crossing",
-    "to": "greywater_stilts",
-    "waypoints": [
-     {
-      "bearing": 52,
-      "km": 1050
-     },
-     {
-      "bearing": 72,
-      "km": 1184
-     },
-     {
-      "bearing": 87,
-      "km": 1293
-     }
-    ],
-    "why": "⛔ FOLLOWS THE ECHO DOWNSTREAM to where the river gives up and becomes the southern marsh. The bend is the river's, not the road's.",
-    "_regenerated": "⛔ SNG-421: re-derived from real endpoints with a 14% perpendicular bend."
-   },
-   {
-    "id": "way_switchback",
-    "from": "old_switchback",
-    "to": "harmonic_heights_terrace",
-    "waypoints": [
-     {
-      "bearing": 38,
-      "km": 538
-     },
-     {
-      "bearing": 76,
-      "km": 719
-     },
-     {
-      "bearing": 101,
-      "km": 890
-     }
-    ],
-    "why": "⚠️ The way OUT of the Vale and up. It climbs, so it switches back — the name is the geometry.",
-    "_regenerated": "⛔ SNG-421: re-derived from real endpoints with a 22% perpendicular bend."
-   },
-   {
-    "id": "way_edge_to_inn",
-    "from": "radiant_plateau_edge",
-    "to": "the-low-lamp-inn",
-    "waypoints": [],
-    "why": "Barely a way — the Inn is in the Edge District's lower tier. ⚠️ Included because a player will ask, not because it is a journey.",
-    "_degenerate": "⛔ ENDPOINTS ARE THE SAME POINT — the destination is a SITE of the origin and inherits its position. This is not a way; it is a nesting relationship. Suppressed."
-   }
-  ],
   "namedGround": [
    {
     "id": "the_shimmer",
@@ -179,7 +106,261 @@
    "namedGround": 5,
    "edges": 4,
    "note": "⛔ THE TEMPLATE TEST: can a player stand anywhere in this region, at any zoom, and find authored ground under them? ⚠️ For the Echo Vale the answer is now yes at both tiers. For the other 29 regions it is not, and that is the measure of what is left."
-  }
+  },
+  "roads": [
+   {
+    "id": "road_vale_trunk",
+    "class": "trunk",
+    "width": 3,
+    "from": "harmonic_heights_terrace",
+    "to": "radiant_plateau_edge",
+    "via": [
+     "echo_river_crossing"
+    ],
+    "segments": [
+     {
+      "from": "harmonic_heights_terrace",
+      "to": "echo_river_crossing",
+      "waypoints": [
+       {
+        "bearing": 100,
+        "km": 345
+       },
+       {
+        "bearing": 81,
+        "km": 324
+       },
+       {
+        "bearing": 62,
+        "km": 320
+       },
+       {
+        "bearing": 44,
+        "km": 331
+       }
+      ]
+     },
+     {
+      "from": "echo_river_crossing",
+      "to": "radiant_plateau_edge",
+      "waypoints": [
+       {
+        "bearing": 4,
+        "km": 297
+       },
+       {
+        "bearing": -26,
+        "km": 293
+       },
+       {
+        "bearing": -52,
+        "km": 344
+       },
+       {
+        "bearing": -70,
+        "km": 426
+       }
+      ]
+     }
+    ],
+    "why": "⛔ THE ONE ROAD THAT MATTERS — the Heights to the Plateau, and it goes THROUGH the bridge because there is no other crossing of the Echo. ⚠️ IT BENDS NORTH OF THE DIRECT LINE the whole way: the direct arc runs into the marsh south of the river and into the worst of the Shimmer. Both cities maintain it and neither admits to maintaining it with the other."
+   },
+   {
+    "id": "road_south_marsh_road",
+    "class": "main",
+    "width": 2,
+    "from": "echo_river_crossing",
+    "to": "greywater_stilts",
+    "segments": [
+     {
+      "from": "echo_river_crossing",
+      "to": "greywater_stilts",
+      "waypoints": [
+       {
+        "bearing": 46,
+        "km": 388
+       },
+       {
+        "bearing": 61,
+        "km": 428
+       },
+       {
+        "bearing": 75,
+        "km": 464
+       },
+       {
+        "bearing": 87,
+        "km": 493
+       }
+      ]
+     }
+    ],
+    "why": "⚠️ BENDS WIDE EAST AROUND THE SOUTHERN MARSH. Two of the three marsh bodies sit on the straight line. ⛔ The road stops at the marsh edge — the last miles into Greywater are by skiff, and that is not a road at all."
+   },
+   {
+    "id": "road_wilds_road",
+    "class": "main",
+    "width": 2,
+    "from": "harmonic_heights_terrace",
+    "to": "thornwake_glade",
+    "segments": [
+     {
+      "from": "harmonic_heights_terrace",
+      "to": "thornwake_glade",
+      "waypoints": [
+       {
+        "bearing": 113,
+        "km": 363
+       },
+       {
+        "bearing": 109,
+        "km": 344
+       },
+       {
+        "bearing": 105,
+        "km": 330
+       },
+       {
+        "bearing": 100,
+        "km": 322
+       }
+      ]
+     }
+    ],
+    "why": "The short run into the wilds — 94 miles, the shortest link in the Vale. ⚠️ Bends slightly south of the marsh fringe."
+   },
+   {
+    "id": "road_pass_road",
+    "class": "main",
+    "width": 2,
+    "from": "thornwake_glade",
+    "to": "old_switchback",
+    "segments": [
+     {
+      "from": "thornwake_glade",
+      "to": "old_switchback",
+      "waypoints": [
+       {
+        "bearing": 92,
+        "km": 228
+       },
+       {
+        "bearing": 85,
+        "km": 149
+       },
+       {
+        "bearing": 54,
+        "km": 96
+       },
+       {
+        "bearing": 5,
+        "km": 122
+       }
+      ]
+     }
+    ],
+    "why": "⛔ THE ROAD TO THE PASS, and the only way out of the Vale that is not a river or a gate. It climbs, so it bends — the switchbacks begin before the mountain does."
+   },
+   {
+    "id": "road_river_road",
+    "class": "secondary",
+    "width": 1.4,
+    "from": "echo_river_crossing",
+    "to": "old_switchback",
+    "segments": [
+     {
+      "from": "echo_river_crossing",
+      "to": "old_switchback",
+      "waypoints": [
+       {
+        "bearing": 22,
+        "km": 325
+       },
+       {
+        "bearing": 14,
+        "km": 292
+       },
+       {
+        "bearing": 5,
+        "km": 261
+       },
+       {
+        "bearing": -4,
+        "km": 233
+       }
+      ]
+     }
+    ],
+    "why": "⚠️ Follows the Echo upstream toward the pass — the shortcut, 159 miles, but it is a river track and not a trunk. Carters take the wilds road instead."
+   },
+   {
+    "id": "road_stilts_wilds",
+    "class": "secondary",
+    "width": 1.4,
+    "from": "greywater_stilts",
+    "to": "thornwake_glade",
+    "segments": [
+     {
+      "from": "greywater_stilts",
+      "to": "thornwake_glade",
+      "waypoints": [
+       {
+        "bearing": 95,
+        "km": 483
+       },
+       {
+        "bearing": 92,
+        "km": 443
+       },
+       {
+        "bearing": 91,
+        "km": 402
+       },
+       {
+        "bearing": 92,
+        "km": 360
+       }
+      ]
+     }
+    ],
+    "why": "⛔ 128 miles and it bends HARD WEST around the marsh's northern lobe. The Adaptors and the wardens deal directly, without going through either city."
+   }
+  ],
+  "roadsOutOfRegion": [
+   {
+    "at": "old_switchback",
+    "bearing": 10,
+    "to": "the_cogitarium",
+    "class": "main",
+    "width": 2,
+    "why": "⛔ OVER THE HIGH PASS — the way out of the Vale to the Somatic reaches. Erik: 'a way out of the Valley, connecting to other parts of the world.'"
+   },
+   {
+    "at": "echo_river_crossing",
+    "bearing": 92,
+    "to": "millbrook",
+    "class": "trunk",
+    "width": 3,
+    "why": "⛔ DOWN THE ECHO TO THE VALLEY — the busiest road leaving the region, and the one the contamination teams and the grain both use."
+   },
+   {
+    "at": "thornwake_glade",
+    "bearing": 47,
+    "to": "ent_deepwood",
+    "class": "secondary",
+    "width": 1.4,
+    "why": "⚠️ To the Ents, three days on. The wardens do not comment on where it goes."
+   },
+   {
+    "at": "radiant_plateau_edge",
+    "bearing": 92,
+    "to": "kestrels_roost",
+    "class": "secondary",
+    "width": 1.4,
+    "why": "North to the Roost. ⚠️ Little used — the Roost is reached more easily from the pass."
+   }
+  ],
+  "_roadsNote": "⛔ SNG-425 (Erik: 'take out a pen and draw them… be inspired by a national highway map'). AUTHORED AS A NETWORK, NOT AS PAIRWISE WAYS. Six roads plus four leaving the region, CLASSED — trunk 3, main 2, secondary 1.4 — so the renderer draws better roads thicker.\n⚠️ THE BENDS ARE OBSTACLE-DRIVEN AND MEASURED: I sampled peak elevation and marsh intersection on every pair. THE MARSH IS THE REAL OBSTACLE HERE, not the mountains — two of three marsh bodies sit across the Crossing→Greywater line, so that road swings east; the Greywater→Thornwake road swings the other way around the northern lobe.\n⛔ AND THE TRUNK ROUTES THROUGH THE BRIDGE BECAUSE THERE IS NO OTHER CROSSING OF THE ECHO. That is the single fact that organises the whole network: everything east–west goes through one town.\n⚠️ `ways` is RETIRED in favour of this — it described journeys pairwise and could not say which road was important."
  },
  "the_center": {
   "centre": {

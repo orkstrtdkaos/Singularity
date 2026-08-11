@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 30,
-  "xp": 2938,
+  "xp": 2943,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -218,7 +218,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 250,
+  "energy": 236,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2172,53 +2172,27 @@
         "player": "Walk with Pell toward the entrance to go inside, but let Veth go first and ask her what she feels",
         "summary": "At dawn on the ridge, Veth enters the death-warden temple and reads its purpose—offering her quiet approval of the structure and what it was built to serve.",
         "narration": "You turn from the threshold and walk with Pell back toward the temple's entrance—the stone floor cool under both your feet, the early light catching the timber frame's angles. Pell's hand settles at the small of your back as you move, steady and present. The deep seam altar remains behind you, sealed and honest in the grey morning.\n\nAt the entrance, you step back and gesture Veth through first. She pauses at the threshold—truly pauses, not hesitation but *reading*. Her shoulders settle, her jaw unclench slightly. When she steps inside, it's the movement of someone who has just had a question answered.\n\nYou ask her plainly, quiet, the way you ask a warden's questions: \"What do you feel?\"\n\nVeth moves deeper into the chamber, her hand trailing the timber frame. She reads the space the way a smith reads ore—with purpose, with judgment. When she turns back to face you and Pell, her expression is still guarded, but there is something in it that wasn't there before. Recognition, maybe. Or approval held so close it reads as stillness.\n\n\"It will serve,\" she says. Four words. A warden's words, sparse and weighted. She looks at you directly—not softly, but with the clarity of someone assessing whether a threshold will hold. \"The structure is sound. The *purpose* is sound. A warden can practice here. Can *attend* here.\" She turns back to the altar—the deep seam, sealed, visible, honest. \"This is rightly made.\""
+      },
+      {
+        "player": "Step inside the temple yourself and read it through Deathsense—feel what the space holds now that it's complete.",
+        "summary": "At the ridge threshold in early morning, Silas Weir raised a death-warden temple with Pell's partnership—a small stone-and-timber chamber with the engineered deep seam sealed as altar. Veth entered and read its purpose; she offered her warden's approval. The temple stands complete and ready to serve the Ashwarden craft.",
+        "narration": "You step across the threshold after Veth, Pell's hand trailing away from you as you move deeper into the stone and timber. The temple's interior settles around you—cool stone floors, the frame's geometry clean and load-bearing, the light from the entrance catching the grain in the wood beams. You let your perception settle the way Deathsense teaches: not a reaching, but a listening.\n\nThe space holds *endings*, but not in the way you expected. Not the shape of things that will die—rather, the shape of things that *have* ended here, held in the stone itself. Fifteen years of vigil, a warden's attention, the hollow's receiving-purpose kept open despite the weight. The temple carries that attendance in its walls like a bell carries the echo of a strike—not the sound, but the *knowledge* that sound was there. The deep seam altar at the center reads as true: engineered to close on a specific purpose, and now witnessed clean. The space *knows* what it is for. The future wardens who come here—and they will come—will feel that knowing in the stone.\n\nVeth stands motionless, her hand still on the timber frame. She does not look at you. When she speaks, her voice is level and spare: \"It will serve.\" A pause. \"This is rightly made.\" She turns to face you fully, and her eyes carry the weight of someone who has just confirmed something she feared might not be possible. \"A warden can practice here.\""
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the threshold and walk with Pell back toward the temple's entrance—the stone floor cool under both your feet, the early light catching the timber frame's angles. Pell's hand settles at the small of your back as you move, steady and present. The deep seam altar remains behind you, sealed and honest in the grey morning.\n\nAt the entrance, you step back and gesture Veth through first. She pauses at the threshold—truly pauses, not hesitation but *reading*. Her shoulders settle, her jaw unclench slightly. When she steps inside, it's the movement of someone who has just had a question answered.\n\nYou ask her plainly, quiet, the way you ask a warden's questions: \"What do you feel?\"\n\nVeth moves deeper into the chamber, her hand trailing the timber frame. She reads the space the way a smith reads ore—with purpose, with judgment. When she turns back to face you and Pell, her expression is still guarded, but there is something in it that wasn't there before. Recognition, maybe. Or approval held so close it reads as stillness.\n\n\"It will serve,\" she says. Four words. A warden's words, sparse and weighted. She looks at you directly—not softly, but with the clarity of someone assessing whether a threshold will hold. \"The structure is sound. The *purpose* is sound. A warden can practice here. Can *attend* here.\" She turns back to the altar—the deep seam, sealed, visible, honest. \"This is rightly made.\"",
-      "sceneSummary": "At dawn on the ridge, Veth enters the death-warden temple and reads its purpose—offering her quiet approval of the structure and what it was built to serve.",
+      "narration": "You step across the threshold after Veth, Pell's hand trailing away from you as you move deeper into the stone and timber. The temple's interior settles around you—cool stone floors, the frame's geometry clean and load-bearing, the light from the entrance catching the grain in the wood beams. You let your perception settle the way Deathsense teaches: not a reaching, but a listening.\n\nThe space holds *endings*, but not in the way you expected. Not the shape of things that will die—rather, the shape of things that *have* ended here, held in the stone itself. Fifteen years of vigil, a warden's attention, the hollow's receiving-purpose kept open despite the weight. The temple carries that attendance in its walls like a bell carries the echo of a strike—not the sound, but the *knowledge* that sound was there. The deep seam altar at the center reads as true: engineered to close on a specific purpose, and now witnessed clean. The space *knows* what it is for. The future wardens who come here—and they will come—will feel that knowing in the stone.\n\nVeth stands motionless, her hand still on the timber frame. She does not look at you. When she speaks, her voice is level and spare: \"It will serve.\" A pause. \"This is rightly made.\" She turns to face you fully, and her eyes carry the weight of someone who has just confirmed something she feared might not be possible. \"A warden can practice here.\"",
+      "sceneSummary": "At the ridge threshold in early morning, Silas Weir raised a death-warden temple with Pell's partnership—a small stone-and-timber chamber with the engineered deep seam sealed as altar. Veth entered and read its purpose; she offered her warden's approval. The temple stands complete and ready to serve the Ashwarden craft.",
       "choices": [
         {
-          "label": "Ask Veth what a warden would do with this place—what the first practice looks like.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "trivial",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step inside the temple yourself and read it through Deathsense—feel what the space holds now that it's complete.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell Veth plainly: you're leaving this post in her hands—as warden, as teacher, as the one who will tend this threshold. Ask if she'll take it.",
+          "label": "Ask Veth plainly if she will stay and tend this post as its first warden",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "negotiate"
+            "ask",
+            "offer"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2227,14 +2201,32 @@
           "emergenceId": null
         },
         {
-          "label": "Walk toward the made gate with Pell—the temple is done, the ridge is answered, and there is still a road north.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Ask Pell to walk the temple's interior with you—assess the structure's integrity and readiness for use",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
-          "difficulty": "trivial",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "travel"
+            "study",
+            "craft"
+          ],
+          "abilityId": "the_working_model",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step back outside and look north toward the made gate—consider what comes next, and how long before the road claims you again",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "reflect",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2244,46 +2236,48 @@
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": -12,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": {
-        "thing": "Veth's quiet acknowledgment that the structure is 'rightly made'—a warden's approval earned through honest craft, not words",
-        "from": "her own discipline: judgment of sound structure and sound purpose, the mark of teaching taking hold"
-      },
+      "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The death-warden temple at the ridge threshold, early morning light through timber frame. The deep seam altar visible at the chamber's center, sealed and honest. The moorland visible through the open entrance, the made gate northwest, the valley falling away south and east.",
+        "setting": "Inside the death-warden temple at the ridge threshold, early morning light through the timber frame catching stone floors and sealed deep-seam altar at center. The moorland visible through the open entrance beyond, the made gate northwest and the lodge skeleton visible at sight-line threshold.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing at your side inside the temple, hand settled at the small of your back. Reading the space and Veth's assessment both. Present, steady."
+            "state": "Standing inside the temple entrance, hand still warm at the point where she released you, reading the space with the attention of someone who understands load-bearing and purpose both"
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Inside the chamber now, hand trailing the timber frame. Reading the structure's load-bearing and purpose with a warden's precision. Eyes on the altar—the deep seam, sealed, visible. Not moving."
+            "state": "Hand on the timber frame, facing you after giving her warden's assessment—still, direct, reading whether this threshold will hold what it was built to hold"
           },
           {
             "name": "Huginn",
-            "state": "Circling overhead outside, reading the shape of the temple from above, the ridge, the moment. Present but not intruding."
+            "state": "Circling outside the temple entrance, reading the structure's shape from above, the ridge, the moorland light—present but not intruding on the interior quiet"
           }
         ],
         "objects": [
-          "The death-warden temple—stone floors, timber frame, the deep seam sealed at center as altar",
-          "The ridge beneath your feet, warded and active",
+          "The death-warden temple—stone floors, timber frame, the deep seam sealed and visible as altar at center",
+          "Light from the entrance catching grain in the wood beams",
+          "The moorland beyond the open entrance, grey and open",
           "The made gate, northwest, two minutes' distance",
-          "The Threshold Post lodge skeleton, visible at sight-line threshold",
-          "The moorland, open, treacherous, grey light spreading"
+          "The Threshold Post lodge skeleton, visible at sight-line threshold"
         ],
         "threads": [
-          "What comes next—the road north, the gate waiting",
-          "Whether Veth will take the post as warden and teacher",
-          "What a warden's first practice in this space looks like",
-          "The temple's purpose, now that it stands complete"
+          "Whether Veth will claim the post as its first warden",
+          "What the road claims next—the gate waits, and the northern road beyond it",
+          "What the valley's repair will cost, and who will bear it"
         ]
       },
       "npcUpdates": [
@@ -2291,19 +2285,62 @@
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Entered the death-warden temple and read its structure and purpose in full silence. Offered her warden's approval: 'It will serve.' 'This is rightly made.' She is assessing whether this threshold can be a true Ashwarden post, and the judgment is positive.",
+          "role": "Former Ashwarden warden, teaching companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "A still, direct woman—held a south-facing warden post on the Ashwarden March for eleven years before the post was dissolved.",
+          "note": "Entered the death-warden temple at dawn on Day 15 and read its purpose with full warden's attention. Offered her approval: 'It will serve. This is rightly made.' She is assessing whether this threshold can be a true Ashwarden post, and she has answered her own question.",
           "learned": [
-            "She reads the temple as sound in both structure and purpose",
-            "She names it as a place where a warden can attend and practice",
-            "Her approval is spare and it carries weight—she does not give it freely"
+            "The temple is structurally sound for Ashwarden practice",
+            "The deep seam altar carries the weight of fifteen years of warden's attention in the stone itself",
+            "The space knows what it is built for, and that knowing is load-bearing"
+          ],
+          "skillsObserved": [
+            "Warden's judgment of sound structure and purpose"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the ridge temple, reading its structure and purpose with full warden's attention. Present and assessing."
+          "statusNote": "At the ridge temple threshold, having read and approved the structure—present and waiting to see what comes next"
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "role": "Village blacksmith, traveling companion, partner",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "A working blacksmith, direct and unsentimental—file in hand, back to the door, practical organizer who reacts to competence over charm.",
+          "note": "Held the raising of the death-warden temple with Silas through partnership and strain—her ironsense steadying the structure's load, her grip keeping him grounded when the surge began to pull. Now stands inside the completed space, reading it with the attention of someone who understands what was built here.",
+          "learned": [
+            "The temple stands sound and ready",
+            "The deep seam carries weight she read through ironsense—deliberately engineered, now sealed and honest"
+          ],
+          "skillsObserved": [
+            "Partnership-binding through physical presence and craft-sense coordination"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the ridge temple threshold, having held the making with Silas—present, steady, waiting for the next move together"
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The death-warden temple stands complete at the ridge Threshold Post—a small stone-and-timber chamber with the deep seam sealed at its center as altar. Built by Silas Weir and Pell Ran Marsh using The Raised Thing at novel depth. Veth Ondra has approved it as sound and rightly made for Ashwarden practice.",
+          "subjectId": "threshold-post"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Death-warden temple now stands at the sight-line threshold—a chamber for Ashwarden craft-practice with the engineered deep seam sealed as altar. Built to attend endings and deepen the craft. Veth Ondra confirms it is structurally sound and serves its purpose.",
+          "subPlace": {
+            "name": "Death-Warden Temple",
+            "parent": "threshold-post",
+            "note": "Small stone-and-timber threshold chamber with deep seam altar at center—built for Ashwarden practice and attendance.",
+            "visited": true
+          }
+        }
+      ],
       "discovery": null,
       "codexUpdates": [],
       "holdingOps": [],
@@ -2313,53 +2350,57 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": null,
+      "timeOps": {},
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "A still moment inside the temple—stone floor, timber frame catching early light, the sealed deep seam at the chamber's center looking like an altar. Veth's hand on the timber frame, Pell standing in the entrance light, both women reading the space with the knowing of those who understand what it was built to hold.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The death-warden temple at the ridge threshold, early morning light through timber frame. The deep seam altar visible at the chamber's center, sealed and honest. The moorland visible through the open entrance, the made gate northwest, the valley falling away south and east.",
+      "setting": "Inside the death-warden temple at the ridge threshold, early morning light through the timber frame catching stone floors and sealed deep-seam altar at center. The moorland visible through the open entrance beyond, the made gate northwest and the lodge skeleton visible at sight-line threshold.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing at your side inside the temple, hand settled at the small of your back. Reading the space and Veth's assessment"
+          "state": "Standing inside the temple entrance, hand still warm at the point where she released you, reading the space with the att"
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Inside the chamber now, hand trailing the timber frame. Reading the structure's load-bearing and purpose with a warden's"
+          "state": "Hand on the timber frame, facing you after giving her warden's assessment—still, direct, reading whether this threshold "
         },
         {
           "name": "Huginn",
-          "state": "Circling overhead outside, reading the shape of the temple from above, the ridge, the moment. Present but not intruding."
+          "state": "Circling outside the temple entrance, reading the structure's shape from above, the ridge, the moorland light—present bu"
         }
       ],
       "objects": [
-        "The death-warden temple—stone floors, timber frame, the deep seam sealed at cent",
-        "The ridge beneath your feet, warded and active",
+        "The death-warden temple—stone floors, timber frame, the deep seam sealed and vis",
+        "Light from the entrance catching grain in the wood beams",
+        "The moorland beyond the open entrance, grey and open",
         "The made gate, northwest, two minutes' distance",
-        "The Threshold Post lodge skeleton, visible at sight-line threshold",
-        "The moorland, open, treacherous, grey light spreading"
+        "The Threshold Post lodge skeleton, visible at sight-line threshold"
       ],
       "threads": [
-        "What comes next—the road north, the gate waiting",
-        "Whether Veth will take the post as warden and teacher",
-        "What a warden's first practice in this space looks like",
-        "The temple's purpose, now that it stands complete"
+        "Whether Veth will claim the post as its first warden",
+        "What the road claims next—the gate waits, and the northern road beyond it",
+        "What the valley's repair will cost, and who will bear it"
       ]
     },
-    "beats": 9
+    "beats": 10
   },
   "clock": {
     "schemaVersion": 1,
     "day": 15,
-    "hour": 9,
+    "hour": 10,
     "realAnchor": null
   },
   "companions": [
@@ -3784,7 +3825,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] At the ridge mine-shaft, used ironsense to read timber load and co-cast The Raised Thing with Silas to reinforce the bracing. Her presence was steady and certain; the work settled true. Memory answered her call through the soul-bond.",
         "[d14] In the mine-shaft at depth, ironsense reading the timber's load-distribution relative to the second fault-line—her craft-sense and yours reading together without words needed.",
         "[d15] Deep in the mine-shaft with Silas on Day 15 night—co-cast reinforcement of the secondary fault complete. Her ironsense steadying the timber a second time, her hand reading what needs holding and asking it plainly. The partnership holds clean.",
         "[d15] At the deep fault-mark in the shaft—confirmed the slow-dissolving seam through ironsense and marked it plainly. Hand steady, craft-sense reading deeper than Silas's own. The partnership holding clean through the night-work.",
@@ -3793,28 +3833,29 @@
         "[d15] Running with Silas at the ridge node—read the shift in his craft-sense and did not ask questions. Said *Go*, gave release, runs hard beside him without hesitation or doubt. This is the trust earned by naming it plainly and meaning it.",
         "[d15] At the Threshold Post ridge node on Day 15 at dawn—read Silas's need to run in his body-language and his craft-sense shift, gave him release without hesitation or question, and now chases him across the moorland. Her ironsense is sharp and her presence certain.",
         "[d15] At dawn on the ridge, caught Silas mid-run and held him with the grip of someone who reads his back the way she reads iron. Named plainly that they face what comes next together, not apart. Her hand is warm. She is asking, not telling.",
-        "[d15] At the ridge temple, held Silas through the novel raising—her ironsense steadying the structure's load, her grip keeping him grounded when the surge began to pull. She felt the Raised Thing push past its known limits and understood what it meant. She is still holding him, not moving, reading him…"
+        "[d15] At the ridge temple, held Silas through the novel raising—her ironsense steadying the structure's load, her grip keeping him grounded when the surge began to pull. She felt the Raised Thing push past its known limits and understood what it meant. She is still holding him, not moving, reading him…",
+        "[d15] Held the raising of the death-warden temple with Silas through partnership and strain—her ironsense steadying the structure's load, her grip keeping him grounded when the surge began to pull. Now stands inside the completed space, reading it with the attention of someone who understands what was…"
       ],
       "knownFacts": [
-        "Whatever Silas read in the deep seam made his craft-sense go sharp and ordered—not a natural fault",
-        "Silas read something in the deep seam that demanded immediate distance—not a danger in the moment but a truth that changed everything",
         "Whatever he read has his craft-sense ordered and sharp, and that means she trusts it completely",
         "Whatever Silas read in the deep seam, it made him break from the assessment and run—and she followed without hesitation because she reads him.",
         "She caught him on the moorland because she is faster than she looks and because she chooses to be wherever he is.",
         "She can read The Raised Thing's strain through ironsense as it works at novel depth",
         "She knows the weight of a craft-working that pushes past familiar boundaries",
-        "She holds Silas not out of softness but out of partnership—the same clarity she brings to every working"
+        "She holds Silas not out of softness but out of partnership—the same clarity she brings to every working",
+        "The temple stands sound and ready",
+        "The deep seam carries weight she read through ironsense—deliberately engineered, now sealed and honest"
       ],
       "skillsObserved": [
-        "ironsense reading at depth—confirmed the third fault without",
         "reading a person's craft-sense and understanding what it mea",
         "speed over broken ground at night",
         "Reading novel craft-strain through ironsense",
         "Steadying a complex making through partnership",
-        "Understanding the cost of pushing a craft past its boundarie"
+        "Understanding the cost of pushing a craft past its boundarie",
+        "Partnership-binding through physical presence and craft-sens"
       ],
       "status": "active",
-      "statusNote": "At the ridge temple, holding Silas after the raising. Present, steady, waiting for the next move together.",
+      "statusNote": "At the ridge temple threshold, having held the making with Silas—present, steady, waiting for the next move together",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 15
@@ -3833,7 +3874,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 19
+      "met": 20
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -4497,7 +4538,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] At the ridge sentinel, named the difference between a network's listening and a post's watching—a warden decides what the message means. Offered the answer plainly and without ceremony.",
         "[d14] Named Cassiel Ord as the only candidate for the ridge post—'He has the ground-sense for it. Eleven years holding Stillwater's threshold.' Spoke plainly about the warden's work being about staying, not knowing.",
         "[d14] At the ridge sentinel, confirmed Cassiel's silence as a warden's sign—the Stillwater post is building cleanly, the work holding true. Her hand read the relay node's geometry and found it sound.",
         "[d14] At the ridge relay node, walked Silas through the warden post's material needs—water from the spring-fed draw to the northeast, a simple lodge at the sight-line threshold, and the core understanding that a warden's defense is not walls but standing witness at the threshold while the network…",
@@ -4506,30 +4546,31 @@
         "[d14] At the ridge mine-shaft, watched Silas and Pell reinforce the bracing with quiet approval. Reading the fault-line clearly and assessing what comes next for the post.",
         "[d15] At the ridge threshold at dawn, watching Pell catch Silas and hold him. Not moving. Respecting the choice. A warden's understanding of what it means when one person holds another at the threshold of running.",
         "[d15] At the temple's threshold, reading the structure in silence. Not moving. Her attention is entirely on the work itself—assessing whether it will serve the Ashwarden craft, whether a warden can practice there. She has not spoken, but the weight of her assessment is plain.",
-        "[d15] Entered the death-warden temple and read its structure and purpose in full silence. Offered her warden's approval: 'It will serve.' 'This is rightly made.' She is assessing whether this threshold can be a true Ashwarden post, and the judgment is positive."
+        "[d15] Entered the death-warden temple and read its structure and purpose in full silence. Offered her warden's approval: 'It will serve.' 'This is rightly made.' She is assessing whether this threshold can be a true Ashwarden post, and the judgment is positive.",
+        "[d15] Entered the death-warden temple at dawn on Day 15 and read its purpose with full warden's attention. Offered her approval: 'It will serve. This is rightly made.' She is assessing whether this threshold can be a true Ashwarden post, and she has answered her own question."
       ],
       "knownFacts": [
-        "She reads what it means when Pell grips Silas's shoulder and speaks plainly",
-        "She holds her position and respects their choice, whatever it is",
-        "A warden's threshold can be made—not only reached-for, but *built* with craft and partnership",
         "Silas Weir is pushing The Ashwarden craft toward something new—making places where the work can be practiced, attended, deepened",
         "The temple will require a warden to tend it and learn from it—it is not self-sufficient",
         "She reads the temple as sound in both structure and purpose",
         "She names it as a place where a warden can attend and practice",
-        "Her approval is spare and it carries weight—she does not give it freely"
+        "Her approval is spare and it carries weight—she does not give it freely",
+        "The temple is structurally sound for Ashwarden practice",
+        "The deep seam altar carries the weight of fifteen years of warden's attention in the stone itself",
+        "The space knows what it is built for, and that knowing is load-bearing"
       ],
       "skillsObserved": [
-        "understanding the warden post's true scope of work",
         "warden's judgment of sound structure",
         "warden's patience",
         "reading the moment when presence matters more than words",
         "Silent assessment of a structure's readiness for Ashwarden w",
-        "Reading the craft-purpose of a novel making"
+        "Reading the craft-purpose of a novel making",
+        "Warden's judgment of sound structure and purpose"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the ridge temple, reading its structure and purpose with full warden's attention. Present and assessing.",
+      "statusNote": "At the ridge temple threshold, having read and approved the structure—present and waiting to see what comes next",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 15
@@ -4545,7 +4586,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "role",
-      "met": 13
+      "met": 14
     },
     "cassiel-ord": {
       "id": "cassiel-ord",
@@ -5704,7 +5745,6 @@
     "the_crossing": {
       "visits": 3,
       "notes": [
-        "[d14] The ridge node is located at high elevation, commanding sight-lines south, east, and west—a warden's sentinel point overlooking the entire watershed basin",
         "[d14] The ridge relay node is now established as the Threshold Post—a warden post named and staffed (pending arrival of crew). The site is ready for construction. The relay node remains warded and active beneath.",
         "[d14] Spring-fed draw identified to the northeast—the Threshold Post's water source. Will not run dry in drought.",
         "[d14] Lodge placement identified at the sight-line threshold—the post's warden station. Simple structure, positioned for watch over the watershed south and east.",
@@ -5715,7 +5755,8 @@
         "[d15] Secondary structural fault at depth now reinforced—load distributes cleanly. Warden's mark left for Fendt: monitor in 6+ months. Mine-shaft assessment complete; ready for supervised extraction work.",
         "[d15] Third structural fault identified and marked in the mine-shaft—a decades-old seam slowly dissolving at depth. Notation left for future wardens: monitor the wall-face here. Honest boundary, patient hazard.",
         "[d15] Third structural fault identified and marked in the mine-shaft—a decades-old seam slowly dissolving deeper in the chamber stone. Notation left for future wardens: monitor the wall-face here. Honest boundary, patient hazard.",
-        "[d15] Death-warden temple now stands at the sight-line threshold—a small chamber with stone floors, timber frame, and the deep seam sealed and visible as altar at center. Built as a threshold for Ashwarden practice and attendance."
+        "[d15] Death-warden temple now stands at the sight-line threshold—a small chamber with stone floors, timber frame, and the deep seam sealed and visible as altar at center. Built as a threshold for Ashwarden practice and attendance.",
+        "[d15] Death-warden temple now stands at the sight-line threshold—a chamber for Ashwarden craft-practice with the engineered deep seam sealed as altar. Built to attend endings and deepen the craft. Veth Ondra confirms it is structurally sound and serves its purpose."
       ],
       "flags": {
         "waymarker_seated": "stillwaters-trouble",
@@ -5822,7 +5863,7 @@
           "parentId": "the_crossing",
           "day": 15,
           "visited": true,
-          "note": "A threshold chamber for Ashwarden craft-practice. The engineered deep seam serves as the altar. Built to attend endings and deepen the craft.",
+          "note": "Small stone-and-timber threshold chamber with deep seam altar at center—built for Ashwarden practice and attendance.",
           "parentUnresolved": "threshold-post"
         }
       }
@@ -6172,7 +6213,7 @@
     "lastTickWorldDay": 42,
     "lastCanonWorldDay": 42,
     "lastGenCount": 1009,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Veth names the warden post's true work—not defense against armies but standing witness at the threshold, staying present while the network…",
@@ -12527,22 +12568,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 23.53573647926532,
-    "cerebral": 18.597007156980165,
-    "social": 9.5325045152741,
-    "generous": 4.8501612447420115,
-    "cautious": 7.849525074223178,
-    "physical": 0.6888495951030016,
-    "risky": 0.16522276239742772,
-    "ruthless": 0.35962081909438987,
-    "carousing": 0.05846984479846349,
-    "amorous": 0.21493484179286743,
-    "patient": 0.13024403651110378,
-    "stealth": 0.000012568424526225844,
-    "devotion": 0.5135873225547369,
-    "craft": 2.8965041801218288,
-    "leadership": 1.6718365715695507,
-    "deception": 0.060188336802717825
+    "strategic": 22.947343067283686,
+    "cerebral": 19.132081978055663,
+    "social": 9.294191902392248,
+    "generous": 4.728907213623461,
+    "cautious": 7.653286947367598,
+    "physical": 0.6716283552254265,
+    "risky": 0.16109219333749203,
+    "ruthless": 0.3506302986170301,
+    "carousing": 0.0570080986785019,
+    "amorous": 0.20956147074804574,
+    "patient": 0.1269879355983262,
+    "stealth": 0.000012254213913070198,
+    "devotion": 0.5007476394908685,
+    "craft": 2.824091575618783,
+    "leadership": 1.6300406572803119,
+    "deception": 0.05868362838264988
   },
   "aptitudes": [
     "strategist",
@@ -12551,7 +12592,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 933,
+  "actionCount": 934,
   "grantsVersion": 1,
   "reconcileVersion": 30,
   "gallery": [
@@ -12989,8 +13030,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786410853979,
-  "rev": 1684,
+  "updatedAt": 1786411163066,
+  "rev": 1685,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16160,6 +16201,12 @@
       "text": "A death-warden temple now stands at the ridge Threshold Post—a small stone-and-timber chamber with the engineered deep seam sealed at its center as altar. Built by Silas Weir and Pell Ran Marsh using The Raised Thing pushed into novel depth, held through partnership and strain. A threshold for…",
       "day": 15,
       "subjectId": "threshold-post"
+    },
+    {
+      "id": "threshold-post",
+      "text": "The death-warden temple stands complete at the ridge Threshold Post—a small stone-and-timber chamber with the deep seam sealed at its center as altar. Built by Silas Weir and Pell Ran Marsh using The Raised Thing at novel depth. Veth Ondra has approved it as sound and rightly made for Ashwarden…",
+      "day": 15,
+      "subjectId": "threshold-post"
     }
   ],
   "practice": {
@@ -16169,7 +16216,7 @@
       "lightsense": 2,
       "order_sense": 98,
       "palework": 31,
-      "deathsense": 47,
+      "deathsense": 48,
       "shadowstep": 25,
       "the-attended-end": 46,
       "wildcraft": 6,
@@ -16941,7 +16988,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 143
+    "the_center": 144
   },
   "foreclosed": [
     "rootkin",
@@ -17183,10 +17230,10 @@
     {
       "id": "sess-25",
       "startedAt": "2026-08-11T00:47:50.273Z",
-      "lastAt": "2026-08-11T01:14:13.978Z",
+      "lastAt": "2026-08-11T01:19:23.061Z",
       "startDay": 42,
       "endDay": 42,
-      "beats": 11
+      "beats": 12
     }
   ],
   "company": [
@@ -17664,17 +17711,17 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 308,
-    "choices": 307,
-    "characterDeltas": 142,
-    "scene": 308,
-    "npcUpdates": 277,
-    "factUpdates": 26,
-    "placeUpdates": 67,
+    "sceneSummary": 309,
+    "choices": 308,
+    "characterDeltas": 143,
+    "scene": 309,
+    "npcUpdates": 278,
+    "factUpdates": 27,
+    "placeUpdates": 68,
     "codexUpdates": 191,
     "timeOps": 288,
-    "imagePrompt": 17,
-    "sceneEnded": 88,
+    "imagePrompt": 18,
+    "sceneEnded": 89,
     "itemUpdates": 7,
     "questUpdates": 41,
     "offer": 34,
@@ -17691,11 +17738,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 20,
+    "gambitApt": 21,
     "markDefiningMoment": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 308,
+  "_opTurns": 309,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -18005,7 +18052,7 @@
   "skillUses": {
     "travel": 4,
     "careful": 2,
-    "study": 4,
+    "study": 5,
     "scout": 4,
     "lead": 2,
     "ask": 1,

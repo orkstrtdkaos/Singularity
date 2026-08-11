@@ -4,10 +4,10 @@
  "_whatIDoNotSupply": "⛔ NOT THE GROUND. CCode bakes coastline and relief from the generator, and it cannot disagree with the world because it IS the world evaluated once. I supply only what lies BELOW the information floor — the things the generator is silent about.",
  "the_echo_vale": {
   "centre": {
-   "lat": -66.6,
-   "lon": 83.4
+   "lat": -68.45,
+   "lon": 81.78
   },
-  "radiusDeg": 14.0,
+  "radiusDeg": 13.2,
   "members": 7,
   "purpose": "⛔ THE ONE LINE A NARRATOR NEEDS WHEN A PLAYER IS CROSSING IT RATHER THAN STANDING IN A TOWN: this is the ground between two civilisations that do not fight, and interfere anyway. Sound bends light here. Nothing in the Vale is neutral, and nothing in it is anyone's.",
   "ways": [
@@ -17,16 +17,16 @@
     "to": "radiant_plateau_edge",
     "waypoints": [
      {
-      "bearing": 95,
-      "km": 180
+      "bearing": 54,
+      "km": 311
      },
      {
-      "bearing": 88,
-      "km": 520
+      "bearing": 71,
+      "km": 627
      },
      {
-      "bearing": 80,
-      "km": 900
+      "bearing": 71,
+      "km": 1019
      }
     ],
     "why": "⛔ THE ONLY ROAD THAT MATTERS HERE and it BENDS SOUTH. A straight arc would run it through the worst of the interference; the road exists because somebody found the way round. ⚠️ It is also the road the contamination teams use, so it is maintained by two powers who will not admit to cooperating."
@@ -37,8 +37,8 @@
     "to": "the-low-lamp-inn",
     "waypoints": [
      {
-      "bearing": 200,
-      "km": 40
+      "bearing": 19,
+      "km": 177
      }
     ],
     "why": "Barely a way — the Inn is in the Edge District's lower tier. ⚠️ Included because a player will ask, not because it is a journey."
@@ -49,12 +49,12 @@
     "to": "greywater_stilts",
     "waypoints": [
      {
-      "bearing": 250,
-      "km": 300
+      "bearing": -63,
+      "km": 240
      },
      {
-      "bearing": 235,
-      "km": 700
+      "bearing": -110,
+      "km": 543
      }
     ],
     "why": "⛔ FOLLOWS THE ECHO DOWNSTREAM to where the river gives up and becomes the southern marsh. The bend is the river's, not the road's."
@@ -65,12 +65,12 @@
     "to": "harmonic_heights_terrace",
     "waypoints": [
      {
-      "bearing": 150,
-      "km": 400
+      "bearing": 119,
+      "km": 300
      },
      {
-      "bearing": 170,
-      "km": 950
+      "bearing": 164,
+      "km": 765
      }
     ],
     "why": "⚠️ The way OUT of the Vale and up. Erik: 'it's supposed to be a way out of the Valley, connecting to other parts of the world.' It climbs, so it switches back — the name is the geometry."
@@ -81,8 +81,8 @@
     "id": "the_shimmer",
     "name": "The Shimmer",
     "kind": "area",
-    "bearing": 90,
-    "km": 600,
+    "bearing": 74,
+    "km": 697,
     "radiusKm": 420,
     "why": "⛔ THE INTERFERENCE ITSELF, and the thing players actually navigate by. Between the two powers, soft-edged and WANDERING — the vortices move, so this is a band and not a boundary. ⚠️ 'Past the shimmer' is already how a player described crossing it in play (Cellaceron, worldDay 32)."
    },
@@ -90,16 +90,16 @@
     "id": "granite_shoulders",
     "name": "The Granite Shoulders",
     "kind": "point",
-    "bearing": 18,
-    "km": 760,
+    "bearing": 19,
+    "km": 977,
     "why": "Where the Echo narrows — named in Echo River Crossing's own seed. ⛔ The reason there is a bridge here and not somewhere easier."
    },
    {
     "id": "the_thinning_wood",
     "name": "The Thinning Wood",
     "kind": "area",
-    "bearing": 315,
-    "km": 880,
+    "bearing": -32,
+    "km": 998,
     "radiusKm": 260,
     "why": "⚠️ Around Thornwake Glade — 'deep in the wilds where the interference THINS'. Its edge is where you stop hearing the light."
    },
@@ -108,15 +108,15 @@
     "name": "The Sheeting",
     "kind": "point",
     "bearing": 25,
-    "km": 900,
+    "km": 1116,
     "why": "⛔ Upstream of the crossing, 'where the water sheets gray-green over the rocks' — the contamination, visible. The teams camp within sight of it."
    },
    {
     "id": "the_south_marsh",
     "name": "The Southern Marsh",
     "kind": "area",
-    "bearing": 240,
-    "km": 760,
+    "bearing": -105,
+    "km": 617,
     "radiusKm": 330,
     "why": "The ground Greywater Stilts stands on poles above. ⚠️ Its edge is soft by nature — that is what a marsh edge IS."
    }
@@ -146,14 +146,15 @@
     "kind": "hard",
     "why": "⚠️ THE ONE HARD EDGE: the river. West of the Echo is the Valley proper, and everyone here says so."
    }
-  ]
+  ],
+  "_centreFix": "⛔ CENTRE RECOMPUTED as a spherical mean direction; was an ARITHMETIC MEAN of lat/lon and moved 1.95°. ⚠️ Every bearing and km in this region was re-expressed from the new centre so features stay where they were authored to be — the numbers changed, the ground did not."
  },
  "the_center": {
   "centre": {
-   "lat": -85.6,
-   "lon": -23.8
+   "lat": -88.45,
+   "lon": -45.69
   },
-  "radiusDeg": 12.5,
+  "radiusDeg": 9.7,
   "members": 8,
   "purpose": "⛔ THE ONE PLACE IN THE WORLD THAT BELONGS TO NOBODY, and the only ground where a Blazeborn and an Umbral can stand without either being wrong. A player crossing it is crossing NEUTRAL — which is not the same as safe, and not the same as empty.",
   "_shapeFinding": "⚠️ THIS REGION IS A HUB, NOT A TERRITORY. Four of its eight members sit at the SAME bearing and distance — 158°, 487 km — because they ARE the Crossing: its street, its registry, its made gate. ⛔ A region map here is really a map of ONE PLACE AND ITS APPROACHES, and the ways matter more than the ground.",
@@ -164,12 +165,12 @@
     "to": "the_axis_gate",
     "waypoints": [
      {
-      "bearing": 27,
-      "km": 180
+      "bearing": 39,
+      "km": 511
      },
      {
-      "bearing": 27,
-      "km": 420
+      "bearing": 42,
+      "km": 748
      }
     ],
     "why": "⛔ STRAIGHT, AND IT IS THE ONLY STRAIGHT ROAD I HAVE AUTHORED. Twelve roads leave the Crossing, one per axis — a road that bends would be a road that FAVOURS, and the whole point of this ground is that it does not."
@@ -180,12 +181,12 @@
     "to": "the_great_coliseum",
     "waypoints": [
      {
-      "bearing": 62,
-      "km": 300
+      "bearing": 57,
+      "km": 574
      },
      {
-      "bearing": 58,
-      "km": 690
+      "bearing": 65,
+      "km": 951
      }
     ],
     "why": "⚠️ Champions arrive by this road from every Reach. It bends slightly to keep off the Quiet House's approach — you do not march past a place where nobody may raise a hand."
@@ -196,12 +197,12 @@
     "to": "the_quiet_house",
     "waypoints": [
      {
-      "bearing": -28,
-      "km": 400
+      "bearing": 12,
+      "km": 693
      },
      {
-      "bearing": -24,
-      "km": 940
+      "bearing": 7,
+      "km": 1229
      }
     ],
     "why": "⛔ Enemies walk this road in both directions and are not permitted to meet on it. Widened, sight-lined, and deliberately dull."
@@ -212,8 +213,8 @@
     "id": "the_twelve_mouths",
     "name": "The Twelve Mouths",
     "kind": "area",
-    "bearing": 27,
-    "km": 120,
+    "bearing": 37,
+    "km": 452,
     "radiusKm": 90,
     "why": "⛔ Where the roads separate. You can stand in one spot and see every axis leave — the most-described view in the world and it has never been a place until now."
    },
@@ -221,8 +222,8 @@
     "id": "the_null_ground",
     "name": "The Null Ground",
     "kind": "area",
-    "bearing": 0,
-    "km": 0,
+    "bearing": 33,
+    "km": 335,
     "radiusKm": 300,
     "why": "⚠️ The Crossing's immediate country, where every axis reads at zero. 'Every axis crosses here at nothing, and the result is NOT GREY — it is CLEAR.' ⛔ Nothing is dampened here; everything is simply equal, which people find harder."
    },
@@ -230,8 +231,8 @@
     "id": "the_made_arch",
     "name": "The Made Arch",
     "kind": "point",
-    "bearing": 158,
-    "km": 487,
+    "bearing": 138,
+    "km": 276,
     "why": "⛔ Where the Made Gate was cut — the 27th waygate and the first BUILT. A player did this. It stands at the Crossing because that is where a wright who tends endings was standing."
    }
   ],
@@ -244,12 +245,13 @@
     "kind": "gradient",
     "why": "⚠️ Neutrality thins with distance. There is no line where the world stops being clear; there is only further from the Crossing."
    }
-  ]
+  ],
+  "_centreFix": "⛔ CENTRE RECOMPUTED as a spherical mean direction; was an ARITHMETIC MEAN of lat/lon and moved 3.01°. ⚠️ Every bearing and km in this region was re-expressed from the new centre so features stay where they were authored to be — the numbers changed, the ground did not."
  },
  "the_palelands": {
   "centre": {
-   "lat": -12.4,
-   "lon": 72.9
+   "lat": -12.39,
+   "lon": 72.91
   },
   "radiusDeg": 10.6,
   "members": 8,
@@ -263,15 +265,15 @@
     "waypoints": [
      {
       "bearing": -148,
-      "km": 300
+      "km": 301
      },
      {
       "bearing": -152,
-      "km": 700
+      "km": 701
      },
      {
       "bearing": -148,
-      "km": 995
+      "km": 996
      }
     ],
     "why": "⛔ THE ASHWARDEN MARCH ROAD — already canon from play, and Raven's Home sits on it. It runs out to the edge and looks across at a green nobody here has walked to."
@@ -283,11 +285,11 @@
     "waypoints": [
      {
       "bearing": 1,
-      "km": 400
+      "km": 399
      },
      {
       "bearing": 4,
-      "km": 930
+      "km": 929
      }
     ],
     "why": "⚠️ The dying travel this one and it is kept easy — short stages, water, no climbs. The road is a courtesy."
@@ -299,11 +301,11 @@
     "waypoints": [
      {
       "bearing": 11,
-      "km": 500
+      "km": 499
      },
      {
       "bearing": 14,
-      "km": 1177
+      "km": 1176
      }
     ],
     "why": "⛔ It stops being a road before it arrives. 'Out past the last cairn the tending stops.'"
@@ -315,7 +317,7 @@
     "name": "The Last Cairn",
     "kind": "point",
     "bearing": 11,
-    "km": 820,
+    "km": 819,
     "why": "⛔ THE EDGE OF TENDING, and it is a marker rather than a boundary. Its own seed names it: past this, the Palelands stop being kept."
    },
    {
@@ -323,7 +325,7 @@
     "name": "The Ash-Field",
     "kind": "area",
     "bearing": 11,
-    "km": 1177,
+    "km": 1176,
     "radiusKm": 400,
     "why": "'Ash-field with weather in it.' ⚠️ Not dead — unattended, which the Ashwardens consider worse."
    },
@@ -332,7 +334,7 @@
     "name": "The Watch Shoulder",
     "kind": "point",
     "bearing": -158,
-    "km": 552,
+    "km": 553,
     "why": "The ground the Old Warden Post stands on — 'a shoulder of ground two miles northwest'. ⛔ Two miles is a LOCAL distance in a region measured in thousands of kilometres, which is why it needs a point."
    }
   ],
@@ -353,12 +355,13 @@
     "kind": "none",
     "why": "⚠️ THEY DO NOT TOUCH. Antipodal dispositions share no border — the Hollowing looks across 226 days of world at a green it will never reach. Recorded so nobody draws a line here."
    }
-  ]
+  ],
+  "_centreFix": "⛔ CENTRE RECOMPUTED as a spherical mean direction; was an ARITHMETIC MEAN of lat/lon and moved 0.01°. ⚠️ Every bearing and km in this region was re-expressed from the new centre so features stay where they were authored to be — the numbers changed, the ground did not."
  },
  "umbral_depths": {
   "centre": {
    "lat": -5.1,
-   "lon": -0.8
+   "lon": -0.81
   },
   "radiusDeg": 17.1,
   "members": 6,
@@ -426,7 +429,7 @@
     "name": "The Terraces",
     "kind": "area",
     "bearing": -46,
-    "km": 340,
+    "km": 339,
     "radiusKm": 260,
     "level": -3,
     "why": "⛔ 'Not caves — ARCHITECTURE: terraces and lamplight.' The Underlight's own body, and the correction its seed insists on."
@@ -436,7 +439,7 @@
     "name": "The Lamp Line",
     "kind": "area",
     "bearing": 90,
-    "km": 1100,
+    "km": 1101,
     "radiusKm": 500,
     "level": -3,
     "why": "⛔ THE EDGE THAT MATTERS HERE AND IT IS NOT TERRAIN: the furthest the lamps are kept. ⚠️ Beyond it you are in the Unlit Deep whether or not you have walked there — the Lampless Market trades by touch on the near side of it, deliberately."
@@ -469,7 +472,9 @@
     "kind": "gradient",
     "why": "Your eyes tell you before the map does."
    }
-  ]
+  ],
+  "_centreFix": "⛔ CENTRE RECOMPUTED as a spherical mean direction; was an ARITHMETIC MEAN of lat/lon and moved 0.01°. ⚠️ Every bearing and km in this region was re-expressed from the new centre so features stay where they were authored to be — the numbers changed, the ground did not."
  },
- "_shapeFindings": "⛔ FOUR REGIONS, FOUR SHAPES, AND THE FRAME BENT TWICE. ECHO VALE: a band between two powers. THE CENTER: a HUB — four of eight members share one bearing and distance because they ARE the Crossing, so the ways matter more than the ground. THE PALELANDS: a MARCH that runs out and stops, whose far edge is defined by ABANDONMENT and not by terrain. ⚠️ UMBRAL DEPTHS NEEDED `level` AT REGION SCALE — the Slow Stair changes depth ALONG its length, which no other route does. ⛔ `level` was authored for interiors; a region can be vertical too, and CCode should expect it on ways and on named ground, not only on sites. ⚠️ ALSO NEW: an edge of kind `none`. The Palelands and the Quickwood are antipodal and DO NOT TOUCH — recorded so nobody draws a border between them."
+ "_shapeFindings": "⛔ FOUR REGIONS, FOUR SHAPES, AND THE FRAME BENT TWICE. ECHO VALE: a band between two powers. THE CENTER: a HUB — four of eight members share one bearing and distance because they ARE the Crossing, so the ways matter more than the ground. THE PALELANDS: a MARCH that runs out and stops, whose far edge is defined by ABANDONMENT and not by terrain. ⚠️ UMBRAL DEPTHS NEEDED `level` AT REGION SCALE — the Slow Stair changes depth ALONG its length, which no other route does. ⛔ `level` was authored for interiors; a region can be vertical too, and CCode should expect it on ways and on named ground, not only on sites. ⚠️ ALSO NEW: an edge of kind `none`. The Palelands and the Quickwood are antipodal and DO NOT TOUCH — recorded so nobody draws a border between them.",
+ "_frameNote": "⛔ SNG-416. CCode found our centres disagreed and credited me with a 3D mean direction. ⚠️ I DID NOT USE ONE — I used an arithmetic mean of lat/lon, which is a different wrong answer from his bounding-box midpoint and fails in the same place: near a pole. My Centre was 3.01° from the true spherical mean, the Echo Vale 1.95°. ⛔ THIS MATTERED EXACTLY AS HE SAID: every bearing and kilometre is measured FROM the centre, so a 3° error lands every feature ~330 km out. All four regions are now on a spherical mean direction and every authored feature has been RE-EXPRESSED rather than re-authored — converted to an absolute position from the old centre, then back to bearing/km from the new one. The ground is unchanged."
 }

@@ -12,68 +12,12 @@
   "purpose": "⛔ THE ONE LINE A NARRATOR NEEDS WHEN A PLAYER IS CROSSING IT RATHER THAN STANDING IN A TOWN: this is the ground between two civilisations that do not fight, and interfere anyway. Sound bends light here. Nothing in the Vale is neutral, and nothing in it is anyone's.",
   "ways": [
    {
-    "id": "way_terrace_to_edge",
-    "from": "harmonic_heights_terrace",
-    "to": "radiant_plateau_edge",
-    "waypoints": [
-     {
-      "bearing": 48,
-      "km": 485
-     },
-     {
-      "bearing": 65,
-      "km": 777
-     },
-     {
-      "bearing": 68,
-      "km": 1166
-     }
-    ],
-    "why": "⛔ THE ONLY ROAD THAT MATTERS HERE and it BENDS SOUTH. A straight arc would run it through the worst of the interference; the road exists because somebody found the way round. ⚠️ It is also the road the contamination teams use, so it is maintained by two powers who will not admit to cooperating."
-   },
-   {
     "id": "way_edge_to_inn",
     "from": "radiant_plateau_edge",
     "to": "the-low-lamp-inn",
-    "waypoints": [
-     {
-      "bearing": 27,
-      "km": 359
-     }
-    ],
-    "why": "Barely a way — the Inn is in the Edge District's lower tier. ⚠️ Included because a player will ask, not because it is a journey."
-   },
-   {
-    "id": "way_crossing_to_stilts",
-    "from": "echo_river_crossing",
-    "to": "greywater_stilts",
-    "waypoints": [
-     {
-      "bearing": -22,
-      "km": 292
-     },
-     {
-      "bearing": -92,
-      "km": 416
-     }
-    ],
-    "why": "⛔ FOLLOWS THE ECHO DOWNSTREAM to where the river gives up and becomes the southern marsh. The bend is the river's, not the road's."
-   },
-   {
-    "id": "way_switchback",
-    "from": "old_switchback",
-    "to": "harmonic_heights_terrace",
-    "waypoints": [
-     {
-      "bearing": 90,
-      "km": 357
-     },
-     {
-      "bearing": 154,
-      "km": 654
-     }
-    ],
-    "why": "⚠️ The way OUT of the Vale and up. Erik: 'it's supposed to be a way out of the Valley, connecting to other parts of the world.' It climbs, so it switches back — the name is the geometry."
+    "waypoints": [],
+    "why": "Barely a way — the Inn is in the Edge District's lower tier. ⚠️ Included because a player will ask, not because it is a journey.",
+    "_degenerate": "⛔ ENDPOINTS ARE THE SAME POINT — the destination is a SITE of the origin and inherits its position. This is not a way; it is a nesting relationship. Suppressed."
    }
   ],
   "namedGround": [
@@ -165,15 +109,20 @@
     "to": "the_axis_gate",
     "waypoints": [
      {
-      "bearing": 94,
-      "km": 614
+      "bearing": 136,
+      "km": 355
      },
      {
-      "bearing": 92,
-      "km": 852
+      "bearing": 116,
+      "km": 542
+     },
+     {
+      "bearing": 107,
+      "km": 743
      }
     ],
-    "why": "⛔ STRAIGHT, AND IT IS THE ONLY STRAIGHT ROAD I HAVE AUTHORED. Twelve roads leave the Crossing, one per axis — a road that bends would be a road that FAVOURS, and the whole point of this ground is that it does not."
+    "why": "⛔ STRAIGHT, AND IT IS THE ONLY STRAIGHT ROAD I HAVE AUTHORED. Twelve roads leave the Crossing, one per axis — a road that bends would be a road that FAVOURS, and the whole point of this ground is that it does not.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 0% perpendicular bend (none — this way is straight on purpose)."
    },
    {
     "id": "way_to_coliseum",
@@ -181,15 +130,20 @@
     "to": "the_great_coliseum",
     "waypoints": [
      {
-      "bearing": 107,
-      "km": 712
+      "bearing": 150,
+      "km": 448
      },
      {
-      "bearing": 111,
-      "km": 1100
+      "bearing": 141,
+      "km": 650
+     },
+     {
+      "bearing": 139,
+      "km": 828
      }
     ],
-    "why": "⚠️ Champions arrive by this road from every Reach. It bends slightly to keep off the Quiet House's approach — you do not march past a place where nobody may raise a hand."
+    "why": "⚠️ Champions arrive by this road from every Reach. It bends slightly to keep off the Quiet House's approach — you do not march past a place where nobody may raise a hand.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 8% perpendicular bend."
    },
    {
     "id": "way_to_quiet_house",
@@ -197,15 +151,20 @@
     "to": "the_quiet_house",
     "waypoints": [
      {
-      "bearing": 66,
-      "km": 716
+      "bearing": 48,
+      "km": 199
      },
      {
-      "bearing": 55,
-      "km": 1227
+      "bearing": 28,
+      "km": 536
+     },
+     {
+      "bearing": 23,
+      "km": 790
      }
     ],
-    "why": "⛔ Enemies walk this road in both directions and are not permitted to meet on it. Widened, sight-lined, and deliberately dull."
+    "why": "⛔ Enemies walk this road in both directions and are not permitted to meet on it. Widened, sight-lined, and deliberately dull.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 10% perpendicular bend."
    }
   ],
   "namedGround": [
@@ -264,19 +223,20 @@
     "to": "the_hollowing",
     "waypoints": [
      {
-      "bearing": -177,
-      "km": 408
+      "bearing": 169,
+      "km": 561
+     },
+     {
+      "bearing": -176,
+      "km": 740
      },
      {
       "bearing": -166,
-      "km": 793
-     },
-     {
-      "bearing": -158,
-      "km": 1068
+      "km": 918
      }
     ],
-    "why": "⛔ THE ASHWARDEN MARCH ROAD — already canon from play, and Raven's Home sits on it. It runs out to the edge and looks across at a green nobody here has walked to."
+    "why": "⛔ THE ASHWARDEN MARCH ROAD — already canon from play, and Raven's Home sits on it. It runs out to the edge and looks across at a green nobody here has walked to.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 6% perpendicular bend."
    },
    {
     "id": "way_to_quiet_ground",
@@ -284,15 +244,20 @@
     "to": "the_quiet_ground",
     "waypoints": [
      {
-      "bearing": 31,
-      "km": 289
+      "bearing": 95,
+      "km": 230
      },
      {
-      "bearing": 15,
-      "km": 802
+      "bearing": 36,
+      "km": 345
+     },
+     {
+      "bearing": 17,
+      "km": 585
      }
     ],
-    "why": "⚠️ The dying travel this one and it is kept easy — short stages, water, no climbs. The road is a courtesy."
+    "why": "⚠️ The dying travel this one and it is kept easy — short stages, water, no climbs. The road is a courtesy.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 0% perpendicular bend (none — this way is straight on purpose)."
    },
    {
     "id": "way_out_past_the_cairns",
@@ -300,15 +265,20 @@
     "to": "the_long_grey",
     "waypoints": [
      {
-      "bearing": 35,
-      "km": 413
+      "bearing": 79,
+      "km": 246
+     },
+     {
+      "bearing": 32,
+      "km": 483
      },
      {
       "bearing": 23,
-      "km": 1077
+      "km": 803
      }
     ],
-    "why": "⛔ It stops being a road before it arrives. 'Out past the last cairn the tending stops.'"
+    "why": "⛔ It stops being a road before it arrives. 'Out past the last cairn the tending stops.'",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 5% perpendicular bend."
    }
   ],
   "namedGround": [
@@ -375,22 +345,23 @@
     "to": "the_slow_stair",
     "waypoints": [
      {
-      "bearing": -160,
+      "bearing": -28,
       "km": 306,
       "level": -3
      },
      {
-      "bearing": -175,
-      "km": 889,
+      "bearing": -179,
+      "km": 299,
       "level": -2
      },
      {
-      "bearing": -178,
-      "km": 1287,
+      "bearing": -180,
+      "km": 845,
       "level": 0
      }
     ],
-    "why": "⛔ THE WAY OUT, AND IT CLIMBS THE WHOLE WAY — days of it. ⚠️ The level changes ALONG the way, which no other route in the world does. 'The dark thinning by degrees until it is only evening.'"
+    "why": "⛔ THE WAY OUT, AND IT CLIMBS THE WHOLE WAY — days of it. ⚠️ The level changes ALONG the way, which no other route in the world does. 'The dark thinning by degrees until it is only evening.'",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 10% perpendicular bend."
    },
    {
     "id": "way_city_to_harbour",
@@ -398,17 +369,22 @@
     "to": "the_harborward",
     "waypoints": [
      {
-      "bearing": -2,
-      "km": 993,
+      "bearing": -16,
+      "km": 1006,
       "level": -3
      },
      {
-      "bearing": 3,
-      "km": 1295,
+      "bearing": -8,
+      "km": 1099,
       "level": -3
+     },
+     {
+      "bearing": -1,
+      "km": 1201
      }
     ],
-    "why": "Level all the way — a working road between a city and the place it lands things. ⚠️ 'Where the Umbrals keep what the light would burn.'"
+    "why": "Level all the way — a working road between a city and the place it lands things. ⚠️ 'Where the Umbrals keep what the light would burn.'",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 0% perpendicular bend (none — this way is straight on purpose)."
    },
    {
     "id": "way_past_the_harbour",
@@ -416,12 +392,21 @@
     "to": "the_unlit_deep",
     "waypoints": [
      {
-      "bearing": -9,
-      "km": 821,
+      "bearing": 1,
+      "km": 1290,
       "level": -4
+     },
+     {
+      "bearing": 0,
+      "km": 1290
+     },
+     {
+      "bearing": -2,
+      "km": 1291
      }
     ],
-    "why": "⛔ IT GOES DOWN. 'Past the city, past the harbor, the dark stops being a home and becomes a fact.' The level drop IS the sentence."
+    "why": "⛔ IT GOES DOWN. 'Past the city, past the harbor, the dark stops being a home and becomes a fact.' The level drop IS the sentence.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 0% perpendicular bend (none — this way is straight on purpose)."
    }
   ],
   "namedGround": [
@@ -494,14 +479,19 @@
     "waypoints": [
      {
       "bearing": 83,
+      "km": 1740
+     },
+     {
+      "bearing": 83,
       "km": 1737
      },
      {
       "bearing": 84,
-      "km": 1734
+      "km": 1735
      }
     ],
-    "why": "⚠️ Barely a bend — the two are 7 km apart and the road is a lane. ⛔ THE FRINGE IS NOT WHERE THE DISPUTE IS; it is 113 walking days from the powers it names (SNG-408)."
+    "why": "⚠️ Barely a bend — the two are 7 km apart and the road is a lane. ⛔ THE FRINGE IS NOT WHERE THE DISPUTE IS; it is 113 walking days from the powers it names (SNG-408).",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 0% perpendicular bend (none — this way is straight on purpose)."
    },
    {
     "id": "way_valley_upstream",
@@ -509,19 +499,20 @@
     "to": "archive_hollow",
     "waypoints": [
      {
-      "bearing": 32,
-      "km": 1198
+      "bearing": 96,
+      "km": 1150
      },
      {
-      "bearing": -13,
-      "km": 856
+      "bearing": 106,
+      "km": 662
      },
      {
-      "bearing": -67,
-      "km": 641
+      "bearing": 55,
+      "km": 45
      }
     ],
-    "why": "⛔ FOLLOWS THE ECHO UPSTREAM and bends hard, because the river does. 'A collapsed limestone sink UPSTREAM of the crossing' — the road is the river's argument."
+    "why": "⛔ FOLLOWS THE ECHO UPSTREAM and bends hard, because the river does. 'A collapsed limestone sink UPSTREAM of the crossing' — the road is the river's argument.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 20% perpendicular bend."
    },
    {
     "id": "way_to_the_roost",
@@ -529,15 +520,20 @@
     "to": "kestrels_roost",
     "waypoints": [
      {
-      "bearing": -85,
-      "km": 1076
+      "bearing": -89,
+      "km": 855
+     },
+     {
+      "bearing": -96,
+      "km": 1137
      },
      {
       "bearing": -97,
-      "km": 1743
+      "km": 1454
      }
     ],
-    "why": "⚠️ Climbs the whole way. 'A shelf of stone and timber WEDGED where three trails meet' — you arrive from below, always."
+    "why": "⚠️ Climbs the whole way. 'A shelf of stone and timber WEDGED where three trails meet' — you arrive from below, always.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 12% perpendicular bend."
    }
   ],
   "namedGround": [
@@ -612,15 +608,20 @@
     "to": "the_thinning",
     "waypoints": [
      {
-      "bearing": 133,
-      "km": 417
+      "bearing": 141,
+      "km": 436
      },
      {
-      "bearing": -81,
-      "km": 729
+      "bearing": -161,
+      "km": 380
+     },
+     {
+      "bearing": -108,
+      "km": 487
      }
     ],
-    "why": "⛔ It goes AROUND the Numen rather than past it. Nobody walks through a pure pole to save time."
+    "why": "⛔ It goes AROUND the Numen rather than past it. Nobody walks through a pure pole to save time.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 26% perpendicular bend."
    },
    {
     "id": "way_to_the_numen",
@@ -628,11 +629,20 @@
     "to": "the_numen",
     "waypoints": [
      {
-      "bearing": 21,
-      "km": 478
+      "bearing": -66,
+      "km": 515
+     },
+     {
+      "bearing": -38,
+      "km": 377
+     },
+     {
+      "bearing": -1,
+      "km": 381
      }
     ],
-    "why": "⚠️ Straight and short, and almost nobody takes it. 'Those who dissolved so far there is nothing left to come back to.'"
+    "why": "⚠️ Straight and short, and almost nobody takes it. 'Those who dissolved so far there is nothing left to come back to.'",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 0% perpendicular bend (none — this way is straight on purpose)."
    }
   ],
   "namedGround": [
@@ -683,15 +693,20 @@
     "to": "the_marchward",
     "waypoints": [
      {
-      "bearing": 81,
-      "km": 1324
+      "bearing": -26,
+      "km": 868
      },
      {
-      "bearing": -177,
-      "km": 1724
+      "bearing": -105,
+      "km": 574
+     },
+     {
+      "bearing": -159,
+      "km": 1089
      }
     ],
-    "why": "⛔ The road warriors take, and it bends away from the Stillhold the whole way. 'Honed, not feral' — they know exactly where they are not going."
+    "why": "⛔ The road warriors take, and it bends away from the Stillhold the whole way. 'Honed, not feral' — they know exactly where they are not going.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 16% perpendicular bend."
    },
    {
     "id": "way_stillhold_to_marchward",
@@ -699,15 +714,20 @@
     "to": "the_marchward",
     "waypoints": [
      {
-      "bearing": -141,
-      "km": 1216
+      "bearing": -21,
+      "km": 633
      },
      {
-      "bearing": -177,
-      "km": 1724
+      "bearing": 163,
+      "km": 233
+     },
+     {
+      "bearing": 177,
+      "km": 1044
      }
     ],
-    "why": "⚠️ The other approach to the same town. The two roads do not meet until the gate, which the Marchward arranged deliberately."
+    "why": "⚠️ The other approach to the same town. The two roads do not meet until the gate, which the Marchward arranged deliberately.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 16% perpendicular bend."
    }
   ],
   "namedGround": [
@@ -765,19 +785,20 @@
     "to": "the_heartroot",
     "waypoints": [
      {
-      "bearing": -83,
-      "km": 549
+      "bearing": -36,
+      "km": 382
      },
      {
-      "bearing": -27,
-      "km": 1026
+      "bearing": -20,
+      "km": 746
      },
      {
-      "bearing": 2,
-      "km": 1334
+      "bearing": -7,
+      "km": 1063
      }
     ],
-    "why": "⛔ TWO BENDS, AND THE WOOD PUT THEM THERE. You do not cut a straight road through a city that is grown — you take the way the trees left."
+    "why": "⛔ TWO BENDS, AND THE WOOD PUT THEM THERE. You do not cut a straight road through a city that is grown — you take the way the trees left.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 18% perpendicular bend."
    },
    {
     "id": "way_to_the_greenward",
@@ -785,15 +806,20 @@
     "to": "the_greenward",
     "waypoints": [
      {
-      "bearing": -175,
-      "km": 1097
+      "bearing": 2,
+      "km": 588
      },
      {
       "bearing": -178,
-      "km": 1336
+      "km": 134
+     },
+     {
+      "bearing": -178,
+      "km": 801
      }
     ],
-    "why": "⚠️ 'The Rootkin's only concession to URGENCY.' The straightest road in the Quickwood, which is itself the statement."
+    "why": "⚠️ 'The Rootkin's only concession to URGENCY.' The straightest road in the Quickwood, which is itself the statement.",
+    "_regenerated": "⛔ SNG-421: waypoints RE-DERIVED from the real endpoint positions. They now interpolate A→B along the great circle with a 0% perpendicular bend (none — this way is straight on purpose)."
    }
   ],
   "namedGround": [
@@ -844,5 +870,6 @@
    }
   ],
   "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 13.8° → 12.0° (13% tighter); centre moved 2.12°. Features re-expressed, ground unchanged."
- }
+ },
+ "_waysFix": "⛔ SNG-421. CCODE MEASURED THAT NONE OF THE 22 WAYS CONNECTED THEIR ENDPOINTS — path/direct 4.85×, and no bearing sense, handedness or scale fixed it. HE ASKED WHICH OF THREE THINGS WAS TRUE. ⚠️ IT WAS OPTION 2, AND FOR A WORSE REASON THAN HE OFFERED ME.\nHe guessed the canon positions had moved under me. ⛔ THEY HAD NOT. THE LAST WAYPOINT MATCHES B IN ALMOST EVERY WAY — the chains END correctly and never START correctly. That is not drift; that is my having authored bends BY EYE from a printed table and never once checking they joined A to B. I described a road I could picture instead of a path between two known points.\n⛔ ALL 22 RE-DERIVED: each now interpolates its endpoints along the great circle, with a perpendicular bend whose SIZE AND SIGN come from the authored reason. The reasons were always real; only the geometry was invented."
 }

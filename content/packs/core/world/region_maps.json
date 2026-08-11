@@ -9,7 +9,7 @@
   },
   "radiusDeg": 12.4,
   "members": 7,
-  "purpose": "⛔ THE ONE LINE A NARRATOR NEEDS WHEN A PLAYER IS CROSSING IT RATHER THAN STANDING IN A TOWN: this is the ground between two civilisations that do not fight, and interfere anyway. Sound bends light here. Nothing in the Vale is neutral, and nothing in it is anyone's.",
+  "purpose": "⛔ THE GROUND BETWEEN TWO CIVILISATIONS THAT DO NOT FIGHT AND INTERFERE ANYWAY. Sound bends light here; light carries sound. ⚠️ NOTHING IN THE VALE IS NEUTRAL AND NOTHING IN IT IS ANYONE'S — which is why the people who live here are the ones who wanted out from under both.",
   "ways": [
    {
     "id": "way_terrace_to_edge",
@@ -91,7 +91,9 @@
     "bearing": 68,
     "km": 841,
     "radiusKm": 420,
-    "why": "⛔ THE INTERFERENCE ITSELF, and the thing players actually navigate by. Between the two powers, soft-edged and WANDERING — the vortices move, so this is a band and not a boundary. ⚠️ 'Past the shimmer' is already how a player described crossing it in play (Cellaceron, worldDay 32)."
+    "why": "⛔ THE INTERFERENCE ITSELF, and the thing players actually navigate by. Between the two powers, soft-edged and WANDERING — the vortices move, so this is a band and not a boundary. ⚠️ 'Past the shimmer' is already how a player described crossing it in play (Cellaceron, worldDay 32).",
+    "encounter": "⛔ Sound arrives before the thing that made it, or after. ⚠️ A party crossing here hears its own conversation from thirty paces off, delayed — which is unnerving the first time and useful the tenth, because it tells you the vortex is near.",
+    "craft": "Harmonic and Radiant workings both read HIGH here and both LIE. ⛔ A Blazeborn will find their light carries further than it should and bends where it should not."
    },
    {
     "id": "granite_shoulders",
@@ -99,7 +101,8 @@
     "kind": "point",
     "bearing": 23,
     "km": 1157,
-    "why": "Where the Echo narrows — named in Echo River Crossing's own seed. ⛔ The reason there is a bridge here and not somewhere easier."
+    "why": "Where the Echo narrows — named in Echo River Crossing's own seed. ⛔ The reason there is a bridge here and not somewhere easier.",
+    "encounter": "Where the Echo narrows. ⛔ The reason the bridge is here and not somewhere easier, and the reason the crossing can be held by very few people."
    },
    {
     "id": "the_thinning_wood",
@@ -108,7 +111,9 @@
     "bearing": -21,
     "km": 1093,
     "radiusKm": 260,
-    "why": "⚠️ Around Thornwake Glade — 'deep in the wilds where the interference THINS'. Its edge is where you stop hearing the light."
+    "why": "⚠️ Around Thornwake Glade — 'deep in the wilds where the interference THINS'. Its edge is where you stop hearing the light.",
+    "encounter": "⚠️ The interference thins by degrees, and the edge of the wood is where you stop hearing the light. People stop here to check instruments that have been wrong for days.",
+    "craft": "⛔ The only ground in the Vale where a measurement can be trusted. That is why the wardens are there."
    },
    {
     "id": "the_sheeting",
@@ -116,7 +121,8 @@
     "kind": "point",
     "bearing": 28,
     "km": 1299,
-    "why": "⛔ Upstream of the crossing, 'where the water sheets gray-green over the rocks' — the contamination, visible. The teams camp within sight of it."
+    "why": "⛔ Upstream of the crossing, 'where the water sheets gray-green over the rocks' — the contamination, visible. The teams camp within sight of it.",
+    "encounter": "⛔ 'The water sheets gray-green over the rocks' — the contamination, VISIBLE. ⚠️ Survey teams from both cities camp within sight of it and do not share a fire."
    },
    {
     "id": "the_south_marsh",
@@ -125,7 +131,8 @@
     "bearing": -88,
     "km": 501,
     "radiusKm": 330,
-    "why": "The ground Greywater Stilts stands on poles above. ⚠️ Its edge is soft by nature — that is what a marsh edge IS."
+    "why": "The ground Greywater Stilts stands on poles above. ⚠️ Its edge is soft by nature — that is what a marsh edge IS.",
+    "encounter": "Poles, boats, and no dry ground. ⚠️ You do not cross it — you are carried across it by somebody from Greywater, and they set the price."
    }
   ],
   "edges": [
@@ -152,9 +159,27 @@
     ],
     "kind": "hard",
     "why": "⚠️ THE ONE HARD EDGE: the river. West of the Echo is the Valley proper, and everyone here says so."
+   },
+   {
+    "between": [
+     "the_echo_vale",
+     "the_foothills"
+    ],
+    "kind": "none",
+    "why": "⚠️ Third `none`, and a THIRD KIND: the Foothills no longer exist as a region (SNG-414 split them into twelve). An edge to a thing that has been dissolved is not soft or hard — it is absent, and recorded so nobody draws a border to a ghost."
    }
   ],
-  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 13.2° → 12.4° (6% tighter); centre moved 1.65°. Features re-expressed, ground unchanged."
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 13.2° → 12.4° (6% tighter); centre moved 1.65°. Features re-expressed, ground unchanged.",
+  "_templateNote": "⛔ SNG-423. THE ECHO VALE IS THE TEMPLATE. Erik: 'get one really well made so we can use it as a template for the others.' ⚠️ WHAT 'WELL MADE' MEANS, DERIVED FROM WHAT CCODE ALREADY RENDERS RATHER THAN FROM TASTE:\n  HE BAKES: ground, roads (from connections), hydrology, precursor lines, pins with kind icons, areas.\n  ⛔ SO I MUST NOT AUTHOR ANY OF THOSE. Anything I write that duplicates a derived layer is a second source that will disagree with the first.\n  ⚠️ WHAT ONLY AUTHORING CAN SUPPLY: what the ground MEANS, what is BETWEEN the places, why a way bends, where an edge is soft, and the one line a narrator needs when a player is crossing rather than arriving. That is the whole authored layer and it is four fields: `purpose`, `ways`, `namedGround`, `edges`.\n  ⛔ COMPLETE AT BOTH TIERS: all 7 members now have local frames (SNG-422), so a player can zoom from the Vale into any town in it without falling through.",
+  "crossing": "⚠️ THE LINE A NARRATOR NEEDS WHEN A PLAYER IS BETWEEN PLACES: instruments read wrong here and everyone knows it, so nobody trusts a measurement they took alone. Two parties crossing will compare readings before they compare intentions. ⛔ THE INTERFERENCE IS NOT DANGEROUS — IT IS UNRELIABLE, and that is worse for anyone whose craft depends on knowing.",
+  "_completeness": {
+   "members": 7,
+   "withLocalFrames": 7,
+   "ways": 4,
+   "namedGround": 5,
+   "edges": 4,
+   "note": "⛔ THE TEMPLATE TEST: can a player stand anywhere in this region, at any zoom, and find authored ground under them? ⚠️ For the Echo Vale the answer is now yes at both tiers. For the other 29 regions it is not, and that is the measure of what is left."
+  }
  },
  "the_center": {
   "centre": {

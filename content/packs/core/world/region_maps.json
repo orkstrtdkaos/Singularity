@@ -1,0 +1,151 @@
+{
+ "_note": "⛔ SNG-414 §2. THE FIRST REGION MAP — the Echo Vale. CCode: 'the first one is the one that matters; it settles the shape.' I picked this because I MADE IT (SNG-382, splitting the valley), so if the shape is wrong here it is my fault twice over.",
+ "_frame": "⚠️ SAME FRAME AS `local_layouts.json`, ONE TIER UP — bearing + distance from a region centre, but in KILOMETRES rather than metres. CCode suggested that and it is right: the machinery is built and gated, and a second coordinate convention would be a second thing to get wrong.",
+ "_whatIDoNotSupply": "⛔ NOT THE GROUND. CCode bakes coastline and relief from the generator, and it cannot disagree with the world because it IS the world evaluated once. I supply only what lies BELOW the information floor — the things the generator is silent about.",
+ "the_echo_vale": {
+  "centre": {
+   "lat": -66.6,
+   "lon": 83.4
+  },
+  "radiusDeg": 14.0,
+  "members": 7,
+  "purpose": "⛔ THE ONE LINE A NARRATOR NEEDS WHEN A PLAYER IS CROSSING IT RATHER THAN STANDING IN A TOWN: this is the ground between two civilisations that do not fight, and interfere anyway. Sound bends light here. Nothing in the Vale is neutral, and nothing in it is anyone's.",
+  "ways": [
+   {
+    "id": "way_terrace_to_edge",
+    "from": "harmonic_heights_terrace",
+    "to": "radiant_plateau_edge",
+    "waypoints": [
+     {
+      "bearing": 95,
+      "km": 180
+     },
+     {
+      "bearing": 88,
+      "km": 520
+     },
+     {
+      "bearing": 80,
+      "km": 900
+     }
+    ],
+    "why": "⛔ THE ONLY ROAD THAT MATTERS HERE and it BENDS SOUTH. A straight arc would run it through the worst of the interference; the road exists because somebody found the way round. ⚠️ It is also the road the contamination teams use, so it is maintained by two powers who will not admit to cooperating."
+   },
+   {
+    "id": "way_edge_to_inn",
+    "from": "radiant_plateau_edge",
+    "to": "the-low-lamp-inn",
+    "waypoints": [
+     {
+      "bearing": 200,
+      "km": 40
+     }
+    ],
+    "why": "Barely a way — the Inn is in the Edge District's lower tier. ⚠️ Included because a player will ask, not because it is a journey."
+   },
+   {
+    "id": "way_crossing_to_stilts",
+    "from": "echo_river_crossing",
+    "to": "greywater_stilts",
+    "waypoints": [
+     {
+      "bearing": 250,
+      "km": 300
+     },
+     {
+      "bearing": 235,
+      "km": 700
+     }
+    ],
+    "why": "⛔ FOLLOWS THE ECHO DOWNSTREAM to where the river gives up and becomes the southern marsh. The bend is the river's, not the road's."
+   },
+   {
+    "id": "way_switchback",
+    "from": "old_switchback",
+    "to": "harmonic_heights_terrace",
+    "waypoints": [
+     {
+      "bearing": 150,
+      "km": 400
+     },
+     {
+      "bearing": 170,
+      "km": 950
+     }
+    ],
+    "why": "⚠️ The way OUT of the Vale and up. Erik: 'it's supposed to be a way out of the Valley, connecting to other parts of the world.' It climbs, so it switches back — the name is the geometry."
+   }
+  ],
+  "namedGround": [
+   {
+    "id": "the_shimmer",
+    "name": "The Shimmer",
+    "kind": "area",
+    "bearing": 90,
+    "km": 600,
+    "radiusKm": 420,
+    "why": "⛔ THE INTERFERENCE ITSELF, and the thing players actually navigate by. Between the two powers, soft-edged and WANDERING — the vortices move, so this is a band and not a boundary. ⚠️ 'Past the shimmer' is already how a player described crossing it in play (Cellaceron, worldDay 32)."
+   },
+   {
+    "id": "granite_shoulders",
+    "name": "The Granite Shoulders",
+    "kind": "point",
+    "bearing": 18,
+    "km": 760,
+    "why": "Where the Echo narrows — named in Echo River Crossing's own seed. ⛔ The reason there is a bridge here and not somewhere easier."
+   },
+   {
+    "id": "the_thinning_wood",
+    "name": "The Thinning Wood",
+    "kind": "area",
+    "bearing": 315,
+    "km": 880,
+    "radiusKm": 260,
+    "why": "⚠️ Around Thornwake Glade — 'deep in the wilds where the interference THINS'. Its edge is where you stop hearing the light."
+   },
+   {
+    "id": "the_sheeting",
+    "name": "The Sheeting",
+    "kind": "point",
+    "bearing": 25,
+    "km": 900,
+    "why": "⛔ Upstream of the crossing, 'where the water sheets gray-green over the rocks' — the contamination, visible. The teams camp within sight of it."
+   },
+   {
+    "id": "the_south_marsh",
+    "name": "The Southern Marsh",
+    "kind": "area",
+    "bearing": 240,
+    "km": 760,
+    "radiusKm": 330,
+    "why": "The ground Greywater Stilts stands on poles above. ⚠️ Its edge is soft by nature — that is what a marsh edge IS."
+   }
+  ],
+  "edges": [
+   {
+    "between": [
+     "the_shimmer",
+     "the_thinning_wood"
+    ],
+    "kind": "gradient",
+    "why": "⛔ NOT A LINE. The wood is named for the interference thinning — the wood IS the gradient."
+   },
+   {
+    "between": [
+     "the_south_marsh",
+     "open_vale"
+    ],
+    "kind": "gradient",
+    "why": "A marsh has no edge, it has a wetter and a drier."
+   },
+   {
+    "between": [
+     "the_echo_vale",
+     "valley"
+    ],
+    "kind": "hard",
+    "why": "⚠️ THE ONE HARD EDGE: the river. West of the Echo is the Valley proper, and everyone here says so."
+   }
+  ]
+ }
+}

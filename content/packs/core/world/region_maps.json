@@ -147,5 +147,329 @@
     "why": "⚠️ THE ONE HARD EDGE: the river. West of the Echo is the Valley proper, and everyone here says so."
    }
   ]
- }
+ },
+ "the_center": {
+  "centre": {
+   "lat": -85.6,
+   "lon": -23.8
+  },
+  "radiusDeg": 12.5,
+  "members": 8,
+  "purpose": "⛔ THE ONE PLACE IN THE WORLD THAT BELONGS TO NOBODY, and the only ground where a Blazeborn and an Umbral can stand without either being wrong. A player crossing it is crossing NEUTRAL — which is not the same as safe, and not the same as empty.",
+  "_shapeFinding": "⚠️ THIS REGION IS A HUB, NOT A TERRITORY. Four of its eight members sit at the SAME bearing and distance — 158°, 487 km — because they ARE the Crossing: its street, its registry, its made gate. ⛔ A region map here is really a map of ONE PLACE AND ITS APPROACHES, and the ways matter more than the ground.",
+  "ways": [
+   {
+    "id": "way_twelve_roads",
+    "from": "the_crossing",
+    "to": "the_axis_gate",
+    "waypoints": [
+     {
+      "bearing": 27,
+      "km": 180
+     },
+     {
+      "bearing": 27,
+      "km": 420
+     }
+    ],
+    "why": "⛔ STRAIGHT, AND IT IS THE ONLY STRAIGHT ROAD I HAVE AUTHORED. Twelve roads leave the Crossing, one per axis — a road that bends would be a road that FAVOURS, and the whole point of this ground is that it does not."
+   },
+   {
+    "id": "way_to_coliseum",
+    "from": "the_crossing",
+    "to": "the_great_coliseum",
+    "waypoints": [
+     {
+      "bearing": 62,
+      "km": 300
+     },
+     {
+      "bearing": 58,
+      "km": 690
+     }
+    ],
+    "why": "⚠️ Champions arrive by this road from every Reach. It bends slightly to keep off the Quiet House's approach — you do not march past a place where nobody may raise a hand."
+   },
+   {
+    "id": "way_to_quiet_house",
+    "from": "the_crossing",
+    "to": "the_quiet_house",
+    "waypoints": [
+     {
+      "bearing": -28,
+      "km": 400
+     },
+     {
+      "bearing": -24,
+      "km": 940
+     }
+    ],
+    "why": "⛔ Enemies walk this road in both directions and are not permitted to meet on it. Widened, sight-lined, and deliberately dull."
+   }
+  ],
+  "namedGround": [
+   {
+    "id": "the_twelve_mouths",
+    "name": "The Twelve Mouths",
+    "kind": "area",
+    "bearing": 27,
+    "km": 120,
+    "radiusKm": 90,
+    "why": "⛔ Where the roads separate. You can stand in one spot and see every axis leave — the most-described view in the world and it has never been a place until now."
+   },
+   {
+    "id": "the_null_ground",
+    "name": "The Null Ground",
+    "kind": "area",
+    "bearing": 0,
+    "km": 0,
+    "radiusKm": 300,
+    "why": "⚠️ The Crossing's immediate country, where every axis reads at zero. 'Every axis crosses here at nothing, and the result is NOT GREY — it is CLEAR.' ⛔ Nothing is dampened here; everything is simply equal, which people find harder."
+   },
+   {
+    "id": "the_made_arch",
+    "name": "The Made Arch",
+    "kind": "point",
+    "bearing": 158,
+    "km": 487,
+    "why": "⛔ Where the Made Gate was cut — the 27th waygate and the first BUILT. A player did this. It stands at the Crossing because that is where a wright who tends endings was standing."
+   }
+  ],
+  "edges": [
+   {
+    "between": [
+     "the_null_ground",
+     "open_world"
+    ],
+    "kind": "gradient",
+    "why": "⚠️ Neutrality thins with distance. There is no line where the world stops being clear; there is only further from the Crossing."
+   }
+  ]
+ },
+ "the_palelands": {
+  "centre": {
+   "lat": -12.4,
+   "lon": 72.9
+  },
+  "radiusDeg": 10.6,
+  "members": 8,
+  "purpose": "⛔ THE COUNTRY THAT KEEPS ENDINGS. A player crossing it is crossing TENDED GROUND — this is not a wasteland, it is maintained, and the maintenance is the point. Things end here CORRECTLY.",
+  "_shapeFinding": "⚠️ A MARCH, NOT A DISC. It runs from Cairnhold outward and STOPS — the Long Grey at 1177 km is where the tending gives out. ⛔ Its far edge is defined by ABANDONMENT rather than by terrain, which no gradient in the world can supply.",
+  "ways": [
+   {
+    "id": "way_march_road",
+    "from": "cairnhold",
+    "to": "the_hollowing",
+    "waypoints": [
+     {
+      "bearing": -148,
+      "km": 300
+     },
+     {
+      "bearing": -152,
+      "km": 700
+     },
+     {
+      "bearing": -148,
+      "km": 995
+     }
+    ],
+    "why": "⛔ THE ASHWARDEN MARCH ROAD — already canon from play, and Raven's Home sits on it. It runs out to the edge and looks across at a green nobody here has walked to."
+   },
+   {
+    "id": "way_to_quiet_ground",
+    "from": "cairnhold",
+    "to": "the_quiet_ground",
+    "waypoints": [
+     {
+      "bearing": 1,
+      "km": 400
+     },
+     {
+      "bearing": 4,
+      "km": 930
+     }
+    ],
+    "why": "⚠️ The dying travel this one and it is kept easy — short stages, water, no climbs. The road is a courtesy."
+   },
+   {
+    "id": "way_out_past_the_cairns",
+    "from": "cairnhold",
+    "to": "the_long_grey",
+    "waypoints": [
+     {
+      "bearing": 11,
+      "km": 500
+     },
+     {
+      "bearing": 14,
+      "km": 1177
+     }
+    ],
+    "why": "⛔ It stops being a road before it arrives. 'Out past the last cairn the tending stops.'"
+   }
+  ],
+  "namedGround": [
+   {
+    "id": "the_last_cairn",
+    "name": "The Last Cairn",
+    "kind": "point",
+    "bearing": 11,
+    "km": 820,
+    "why": "⛔ THE EDGE OF TENDING, and it is a marker rather than a boundary. Its own seed names it: past this, the Palelands stop being kept."
+   },
+   {
+    "id": "the_ash_field",
+    "name": "The Ash-Field",
+    "kind": "area",
+    "bearing": 11,
+    "km": 1177,
+    "radiusKm": 400,
+    "why": "'Ash-field with weather in it.' ⚠️ Not dead — unattended, which the Ashwardens consider worse."
+   },
+   {
+    "id": "the_watch_shoulder",
+    "name": "The Watch Shoulder",
+    "kind": "point",
+    "bearing": -158,
+    "km": 552,
+    "why": "The ground the Old Warden Post stands on — 'a shoulder of ground two miles northwest'. ⛔ Two miles is a LOCAL distance in a region measured in thousands of kilometres, which is why it needs a point."
+   }
+  ],
+  "edges": [
+   {
+    "between": [
+     "tended_ground",
+     "the_ash_field"
+    ],
+    "kind": "gradient",
+    "why": "⛔ THE SOFTEST EDGE IN THE WORLD AND THE MOST MEANINGFUL: it is where people stopped coming. It moves."
+   },
+   {
+    "between": [
+     "the_palelands",
+     "the_quickwood"
+    ],
+    "kind": "none",
+    "why": "⚠️ THEY DO NOT TOUCH. Antipodal dispositions share no border — the Hollowing looks across 226 days of world at a green it will never reach. Recorded so nobody draws a line here."
+   }
+  ]
+ },
+ "umbral_depths": {
+  "centre": {
+   "lat": -5.1,
+   "lon": -0.8
+  },
+  "radiusDeg": 17.1,
+  "members": 6,
+  "purpose": "⛔ A CITY IN THE DARK, and the dark is not the absence of the city — it is the material it is built in. A player crossing it is going DOWN and then along, and the only real question is how far from a lamp they are willing to be.",
+  "_shapeFinding": "⛔ THE FIRST REGION THAT NEEDS THE VERTICAL AXIS AT REGION SCALE. The Slow Stair is 'the long way up and out — DAYS of ascending stair'. ⚠️ `level` exists on `localMap` for interiors; a region map needs it too, because here depth is not a detail of a building, it is the shape of the country.",
+  "ways": [
+   {
+    "id": "way_the_slow_stair",
+    "from": "the_underlight",
+    "to": "the_slow_stair",
+    "waypoints": [
+     {
+      "bearing": 177,
+      "km": 900,
+      "level": -3
+     },
+     {
+      "bearing": 177,
+      "km": 1500,
+      "level": -2
+     },
+     {
+      "bearing": 177,
+      "km": 1900,
+      "level": 0
+     }
+    ],
+    "why": "⛔ THE WAY OUT, AND IT CLIMBS THE WHOLE WAY — days of it. ⚠️ The level changes ALONG the way, which no other route in the world does. 'The dark thinning by degrees until it is only evening.'"
+   },
+   {
+    "id": "way_city_to_harbour",
+    "from": "the_underlight",
+    "to": "the_harborward",
+    "waypoints": [
+     {
+      "bearing": 18,
+      "km": 400,
+      "level": -3
+     },
+     {
+      "bearing": 18,
+      "km": 717,
+      "level": -3
+     }
+    ],
+    "why": "Level all the way — a working road between a city and the place it lands things. ⚠️ 'Where the Umbrals keep what the light would burn.'"
+   },
+   {
+    "id": "way_past_the_harbour",
+    "from": "the_harborward",
+    "to": "the_unlit_deep",
+    "waypoints": [
+     {
+      "bearing": 7,
+      "km": 200,
+      "level": -4
+     }
+    ],
+    "why": "⛔ IT GOES DOWN. 'Past the city, past the harbor, the dark stops being a home and becomes a fact.' The level drop IS the sentence."
+   }
+  ],
+  "namedGround": [
+   {
+    "id": "the_terraces",
+    "name": "The Terraces",
+    "kind": "area",
+    "bearing": -46,
+    "km": 340,
+    "radiusKm": 260,
+    "level": -3,
+    "why": "⛔ 'Not caves — ARCHITECTURE: terraces and lamplight.' The Underlight's own body, and the correction its seed insists on."
+   },
+   {
+    "id": "the_lamp_line",
+    "name": "The Lamp Line",
+    "kind": "area",
+    "bearing": 90,
+    "km": 1100,
+    "radiusKm": 500,
+    "level": -3,
+    "why": "⛔ THE EDGE THAT MATTERS HERE AND IT IS NOT TERRAIN: the furthest the lamps are kept. ⚠️ Beyond it you are in the Unlit Deep whether or not you have walked there — the Lampless Market trades by touch on the near side of it, deliberately."
+   },
+   {
+    "id": "the_thinning_dark",
+    "name": "The Thinning Dark",
+    "kind": "area",
+    "bearing": 177,
+    "km": 1700,
+    "radiusKm": 300,
+    "level": -1,
+    "why": "Where the Slow Stair stops being underground. ⚠️ 'Until it is only evening' — an edge you notice by your eyes adjusting, not by arriving."
+   }
+  ],
+  "edges": [
+   {
+    "between": [
+     "the_lamp_line",
+     "the_unlit_deep"
+    ],
+    "kind": "hard",
+    "why": "⛔ THE ONLY HARD EDGE, AND IT IS MAINTAINED RATHER THAN NATURAL. Somebody decides where the last lamp goes, and that decision is the border."
+   },
+   {
+    "between": [
+     "the_thinning_dark",
+     "surface"
+    ],
+    "kind": "gradient",
+    "why": "Your eyes tell you before the map does."
+   }
+  ]
+ },
+ "_shapeFindings": "⛔ FOUR REGIONS, FOUR SHAPES, AND THE FRAME BENT TWICE. ECHO VALE: a band between two powers. THE CENTER: a HUB — four of eight members share one bearing and distance because they ARE the Crossing, so the ways matter more than the ground. THE PALELANDS: a MARCH that runs out and stops, whose far edge is defined by ABANDONMENT and not by terrain. ⚠️ UMBRAL DEPTHS NEEDED `level` AT REGION SCALE — the Slow Stair changes depth ALONG its length, which no other route does. ⛔ `level` was authored for interiors; a region can be vertical too, and CCode should expect it on ways and on named ground, not only on sites. ⚠️ ALSO NEW: an edge of kind `none`. The Palelands and the Quickwood are antipodal and DO NOT TOUCH — recorded so nobody draws a border between them."
 }

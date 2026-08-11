@@ -84,7 +84,11 @@
      "metres": 180
     },
     "why": "On the road out to Echo River Crossing. ⚠️ A smith sits where the carts already stop, and near enough the water to quench.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "echo_river_crossing",
+     "relation": "on"
+    }
    },
    {
     "id": "gen-mara-wells-store",
@@ -94,7 +98,11 @@
      "metres": 120
     },
     "why": "⛔ ALREADY A PLACE, promoted from play, and sitting at Millbrook's EXACT coordinates — CCode's 'a room's position is a duplicate' finding, live. Now it stands between the well and the road, which is where a village store stands.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "echo_river_crossing",
+     "relation": "near"
+    }
    },
    {
     "id": "millbrook_commons",
@@ -156,7 +164,11 @@
      "metres": 150
     },
     "why": "⛔ On the Millbrook road bearing — the queue forms along the road people arrive by.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "millbrook",
+     "relation": "on"
+    }
    },
    {
     "id": "erc_fisher_shacks",
@@ -186,7 +198,11 @@
      "metres": 230
     },
     "why": "⚠️ Contamination teams from Heights and Plateau, camped apart from the town and from each other.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "millbrook",
+     "relation": "near"
+    }
    }
   ]
  },
@@ -218,7 +234,11 @@
      "metres": 200
     },
     "why": "⛔ On the Crossing road. The dead arrive from where the roads meet, so the yard faces that way.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "the_crossing",
+     "relation": "on"
+    }
    },
    {
     "id": "greyhearth_grounds",
@@ -258,7 +278,11 @@
      "metres": 260
     },
     "why": "⛔ On the bearing to the Quiet Ground, which is where the dying go BEFORE. The two towns are one process.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "the_quiet_ground",
+     "relation": "on"
+    }
    }
   ]
  },
@@ -290,7 +314,11 @@
      "level": 0
     },
     "why": "⛔ On the Middle Way road bearing — an entrance faces the road people arrive by. Ground level.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "the_middle_way",
+     "relation": "on"
+    }
    },
    {
     "id": "gen-cogitarium-third-terrace",
@@ -355,7 +383,11 @@
      "metres": 220
     },
     "why": "⛔ On the ROAD bearing, not the water bearing — in a marsh town the skiffs ARE the road, so the landing faces where travellers come from.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "millbrook",
+     "relation": "on"
+    }
    },
    {
     "id": "stilts_deep_platforms",
@@ -365,7 +397,11 @@
      "metres": 280
     },
     "why": "⚠️ 'Whoever else needed somewhere the aligned powers don't reach' — furthest from the roads, which is the whole reason those people are there.",
-    "basis": "anti-road"
+    "basis": "anti-road",
+    "toward": {
+     "road": "echo_river_crossing",
+     "relation": "away"
+    }
    },
    {
     "id": "stilts_pole_yard",
@@ -407,7 +443,11 @@
      "metres": 0
     },
     "why": "⛔ The town is a ROW and the name says so — forges strung along the Crossing road, not clustered round a square.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "the_crossing",
+     "relation": "on"
+    }
    },
    {
     "id": "kindlerow_assay_house",
@@ -417,7 +457,11 @@
      "metres": 170
     },
     "why": "'Tells you honestly what your metal is worth.' ⚠️ At the road end where metal ARRIVES — you are assayed before you are sold to.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "the_crossing",
+     "relation": "on"
+    }
    },
    {
     "id": "kindlerow_lamp_makers",
@@ -427,7 +471,11 @@
      "metres": 160
     },
     "why": "⛔ On the road to the Blaze. Lamps go where the light doctrine is, and Kindlerow sells to them without joining them.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "the_blaze",
+     "relation": "on"
+    }
    },
    {
     "id": "kindlerow_charcoal_slope",
@@ -480,7 +528,11 @@
      "level": -1
     },
     "why": "⛔ The way in from above, on the Pressureholt road bearing. Level −1: you go DOWN to enter.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "pressureholt",
+     "relation": "on"
+    }
    },
    {
     "id": "sw_mapped_reach",
@@ -491,7 +543,11 @@
      "level": -2
     },
     "why": "'Mapped for four centuries.' ⚠️ The part they will show you, running toward the Axis Gate.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "the_axis_gate",
+     "relation": "on"
+    }
    },
    {
     "id": "sw_unadmitted",
@@ -560,10 +616,15 @@
      "metres": 210
     },
     "why": "The single road out. ⚠️ One road means one gate, and its bearing is not a choice.",
-    "basis": "road"
+    "basis": "road",
+    "toward": {
+     "road": "cloudform",
+     "relation": "on"
+    }
    }
   ]
  },
  "_basisNote": "⛔ SNG-404 §2 asked CCode to tune the relief threshold against these eight layouts. ⚠️ MY OWN DATA COULD NOT ANSWER IT AND I HAD TO FIX THE DATA FIRST. I recorded intent in PROSE (`why`) and nothing machine-readable, so 'did this site use the uphill gradient?' could only be guessed by comparing bearings — and that guess is wrong: Greywater's skiff landing sits at bearing 85 against a noise-uphill of 90, so it READS as uphill-placed when it was placed on the ROAD. ⛔ AT RELIEF 0.002 THE UPHILL BEARING IS NOISE, AND NOISE COINCIDES WITH THINGS. `basis` now states which gradient decided each placement: river | uphill | anti-uphill | road | anti-road | between | prose | tradition | inferred. THE THRESHOLD IS TUNABLE FROM THIS FIELD, not from bearing arithmetic.",
- "_thresholdFinding": "⛔ CCODE ASKED ME TO TUNE THE 0.05 RELIEF THRESHOLD AGAINST THESE EIGHT. I did, and THERE IS NO SUCH THRESHOLD — the classes overlap:\n   uphill USED at relief: 0.015, 0.017, 0.104, 0.541, 0.567\n   uphill NOT used at:    0.002, 0.018, 0.053\n⛔ MILLBROOK USED UPHILL AT 0.015 AND THE FIGURE-WORKS DID NOT AT 0.053 — three times the relief and no uphill placement. ⚠️ RELIEF ALONE DOES NOT DECIDE, AND MY OWN PRECEDENCE ORDER WAS BACKWARDS.\nThe reason is in the prose: Millbrook's seed says 'terraced gardens CLIMB THE LOWER SLOPES', so the terraces go uphill however slight the slope. The Figure-Works seed says nothing about ground at all.\n⛔ CORRECTED ORDER: PROSE FIRST, GRADIENT SECOND. When a location's own text names a slope, a shore or a water, that is a DIRECT INSTRUCTION and it wins regardless of what the terrain measures. The relief threshold only decides in the ABSENCE of prose — and on three samples (0.002 no, 0.018 no, 0.053 no, 0.541 yes) all I can honestly say is that it sits somewhere between 0.053 and 0.541. ⚠️ THAT IS A WIDE BRACKET AND I WILL NOT NARROW IT ON THREE POINTS."
+ "_thresholdFinding": "⛔ CCODE ASKED ME TO TUNE THE 0.05 RELIEF THRESHOLD AGAINST THESE EIGHT. I did, and THERE IS NO SUCH THRESHOLD — the classes overlap:\n   uphill USED at relief: 0.015, 0.017, 0.104, 0.541, 0.567\n   uphill NOT used at:    0.002, 0.018, 0.053\n⛔ MILLBROOK USED UPHILL AT 0.015 AND THE FIGURE-WORKS DID NOT AT 0.053 — three times the relief and no uphill placement. ⚠️ RELIEF ALONE DOES NOT DECIDE, AND MY OWN PRECEDENCE ORDER WAS BACKWARDS.\nThe reason is in the prose: Millbrook's seed says 'terraced gardens CLIMB THE LOWER SLOPES', so the terraces go uphill however slight the slope. The Figure-Works seed says nothing about ground at all.\n⛔ CORRECTED ORDER: PROSE FIRST, GRADIENT SECOND. When a location's own text names a slope, a shore or a water, that is a DIRECT INSTRUCTION and it wins regardless of what the terrain measures. The relief threshold only decides in the ABSENCE of prose — and on three samples (0.002 no, 0.018 no, 0.053 no, 0.541 yes) all I can honestly say is that it sits somewhere between 0.053 and 0.541. ⚠️ THAT IS A WIDE BRACKET AND I WILL NOT NARROW IT ON THREE POINTS.",
+ "_towardNote": "⛔ SNG-404 §5. `toward` NAMES WHICH ROAD. CCode: 'road is 14 of your 33 placements and cannot be placed without knowing WHICH road.' He is right — a bearing alone is only meaningful while the destination stands still, and SNG-407 moved eleven locations. ⚠️ `relation`: `on` = astride the way (11 of 15, exact to 0°) · `near` = beside it but set back (Mara Wells' store 18° off, the survey camp 24° off — both deliberately not IN the traffic) · `away` = placed by its ABSENCE. ⛔ THE `away` CASE IS THE ONE THAT PROVES THE FIELD IS NEEDED: Greywater's Deep Platforms sit at 178° from the Echo River Crossing road — 'whoever needed somewhere the aligned powers don't reach'. A bare bearing cannot say 'as far from that road as the town allows'; a named road with `away` can, and it STAYS TRUE IF THE ROAD MOVES."
 }

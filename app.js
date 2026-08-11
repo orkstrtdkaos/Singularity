@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.122";
+const APP_VERSION = "1.9.123";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7035,7 +7035,47 @@ function paintRegionMap(regionId) {
       ctx.textAlign = "center";
       ctx.fillText(String(g.name || g.id) + ((g.level || 0) < 0 ? ` ▾${g.level}` : ""), p.x, p.y);
     }
-    // ⛔ WAYS SUPPRESSED UNTIL THE DATA AGREES WITH ITSELF (po/REPLY_ccode_SNG-414_ways.md). Measured
+    // ⛔ ROADS COME FROM THE GRAPH, WHICH IS ALWAYS CONSISTENT. Erik: "the roads are only important in
+    // that we need some roads — they can be redrawn." A `connections` edge between two placed locations
+    // cannot disagree with itself: both ends are canon positions, so the line is always a real road
+    // between two real places, and it costs no authoring at all.
+    // ⚠️ These are STRAIGHT. A road bends for a reason and a straight arc erases the reason — but a
+    // straight road that exists beats a bent one that is somewhere else, and Aevi's bends can ride on top
+    // the moment her waypoints and the positions agree.
+    ctx.save();
+    ctx.strokeStyle = "rgba(206,182,136,0.62)"; ctx.lineWidth = 1.4;
+    ctx.lineJoin = "round"; ctx.lineCap = "round";
+    const drawn = new Set();
+    for (const id of Object.keys(CONTENT.locations || {})) {
+      const l = CONTENT.locations[id];
+      if (!l?.worldPos || (l.regionId || l.region) !== regionId) continue;
+      const a0 = base.toScreen(l.worldPos.longitude, l.worldPos.colatitude - 90, W, H);
+      for (const other of l.connections || []) {
+        const key = id < other ? id + "|" + other : other + "|" + id;
+        if (drawn.has(key)) continue;
+        drawn.add(key);
+        const o2 = CONTENT.locations[other];
+        if (!o2?.worldPos) continue;
+        // ⚠️ AN EDGE LEAVING THE REGION still draws, running off the frame — a region with no roads out
+        // reads as a cul-de-sac, which is a lie about nearly all of them.
+        // ⛔ AND IT BENDS FOR A REASON. `bendRoad` searches sideways offsets and keeps the one costing the
+        // least CLIMB, which is why real roads follow valleys — so the shape comes from the ground rather
+        // than from invention. 143 of 182 edges find a detour worth taking; 39 stay straight because none
+        // does, and a straight road on flat ground is the honest answer rather than a missing feature.
+        const route = bendRoad(_terrain, [l.worldPos.colatitude - 90, l.worldPos.longitude],
+          [o2.worldPos.colatitude - 90, o2.worldPos.longitude]);
+        const first = base.toScreen(route.points[0][1], route.points[0][0], W, H);
+        ctx.beginPath(); ctx.moveTo(first.x, first.y);
+        for (let i = 1; i < route.points.length; i++) {
+          const q = base.toScreen(route.points[i][1], route.points[i][0], W, H);
+          ctx.lineTo(q.x, q.y);
+        }
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+
+    // ⛔ HER AUTHORED WAYS STAY SUPPRESSED UNTIL THE DATA AGREES WITH ITSELF (po/REPLY_ccode_SNG-414_ways.md). Measured
     // across all 21 authored ways: the waypoint chain detours 4.8× against the direct line under the
     // localMap convention, and 4.76–5.23× under every other bearing sense, handedness and scale I tried
     // — a real road is 1.0–1.3×. The waypoints and the endpoint positions are describing different

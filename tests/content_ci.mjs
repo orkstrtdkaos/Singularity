@@ -950,6 +950,44 @@ for (const pack of PACKS) {
       out.sites.every((st) => st.why && st.placedBecause));
   }
 
+  // ══ SNG-421 — THERE ARE ROADS, AND THEY BEND FOR A REASON.
+  // Erik: "the roads are only important in that we need some roads — they can be redrawn and it sounds
+  // like they should be." Aevi's authored ways could not be drawn (their waypoints and the endpoint
+  // positions describe different geography — a 4.8× detour under every convention tried), so roads come
+  // from the CONNECTION GRAPH, which cannot disagree with itself: both ends are canon positions.
+  {
+    const WGB = await import("../engine/worldglobe.js");
+    const tB = WGB.decodeTerrain(rj("content/packs/core/world/terrain.json"));
+    let bent = 0, straight = 0, worst = 0, seen = new Set();
+    for (const id of Object.keys(canon.locs)) {
+      const l = canon.locs[id];
+      if (!l?.worldPos) continue;
+      for (const o of l.connections || []) {
+        const k = id < o ? id + "|" + o : o + "|" + id;
+        if (seen.has(k)) continue;
+        seen.add(k);
+        const p2 = canon.locs[o];
+        if (!p2?.worldPos) continue;
+        const r = WGB.bendRoad(tB, [l.worldPos.colatitude - 90, l.worldPos.longitude],
+          [p2.worldPos.colatitude - 90, p2.worldPos.longitude]);
+        if (r.bent) { bent++; worst = Math.max(worst, r.climbSaved); } else straight++;
+      }
+    }
+    check("SNG-421: every connection yields a drawable road — the graph cannot disagree with itself",
+      bent + straight > 100, `${bent + straight} roads from ${seen.size} edges`);
+    // ⛔ THE BEND IS DERIVED FROM CLIMB, NOT INVENTED. A road follows the valley, which is why the cost
+    // function is total elevation change rather than distance. Most edges find a detour worth taking.
+    check("SNG-421: most roads BEND, and the bend saves real climb — the shape comes from the ground",
+      bent > straight && worst > 50, `${bent} bend, ${straight} run straight, best saves ${Math.round(worst)} units`);
+    // ⚠️ AND A ROAD THAT CANNOT IMPROVE STAYS STRAIGHT. Bending everything would be decoration, which is
+    // the rule Aevi set for placements and applies just as well to routes.
+    check("SNG-421: …and a road with nothing to gain runs STRAIGHT — a bend with no reason is decoration",
+      straight > 0);
+    const flatPair = WGB.bendRoad(tB, [0, 0], [0, 0.01]);
+    check("SNG-421: …with the reason carried on the route, never left implicit",
+      typeof flatPair.why === "string" && flatPair.why.length > 10);
+  }
+
   // ══ SNG-414 TIER 2 — EVERY REGION HAS A MAP THAT IS SHAPED LIKE A MAP.
   // Erik: "we start to lose meaningful information, so we should switch to the regional map." That only
   // works if a region HAS a sensible window, and three separate things had to be true for that.

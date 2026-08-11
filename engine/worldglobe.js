@@ -742,6 +742,71 @@ export function regionExtent(regionId, locations, { padFrac = 0.18, authored = n
   };
 }
 
+/** ⛔ SNG-421 — A ROAD BENDS BECAUSE SOMEBODY FOUND THE WAY ROUND, so derive the bend from the ground
+ *  rather than authoring it. Erik: "the roads are only important in that we need some roads — they can
+ *  be redrawn and it sounds like they should be." Aevi's own reason for the Echo Vale's main road is
+ *  exactly this shape: *"a straight arc would run it through the worst of the interference; the road
+ *  exists because somebody found the way round."*
+ *
+ *  ⚠️ THE COST FUNCTION IS CLIMB, NOT DISTANCE. A road wants the flattest crossing, not the shortest
+ *  one — that is why real roads follow valleys and switchback up passes. Total absolute elevation change
+ *  along the path is the thing to minimise, and it produces a bend only where the ground gives a reason.
+ *
+ *  ⚠️ AND IT RETURNS THE REASON WITH THE PATH. A bend with no cited cause is decoration (Aevi's §4), so
+ *  the result carries how much climb the detour saved. If it saves nothing, the straight line is
+ *  returned and says so — the honest answer on flat ground is a straight road. */
+export function bendRoad(t, a, b, { samples = 9, offsets = 7, maxOffsetFrac = 0.28 } = {}) {
+  const R2 = Math.PI / 180;
+  const elevAt = (lat, lon) => elevSmooth(t, lon, lat);
+  const along = (f, offDeg) => {
+    // a point at fraction f along a→b, pushed sideways by offDeg (perpendicular, in ground degrees)
+    const lat = a[0] + (b[0] - a[0]) * f, lon = a[1] + (b[1] - a[1]) * f;
+    const dLat = b[0] - a[0], dLon = (b[1] - a[1]) * Math.cos(lat * R2);
+    const m = Math.hypot(dLat, dLon) || 1;
+    const pLat = -dLon / m, pLon = dLat / m;                   // unit perpendicular, ground-corrected
+    return [lat + pLat * offDeg, lon + (pLon * offDeg) / Math.max(0.12, Math.cos(lat * R2))];
+  };
+  const climbOf = (offDeg) => {
+    let climb = 0, prev = null;
+    for (let i = 0; i <= samples; i++) {
+      const f = i / samples;
+      // the deviation eases in and out — a road leaves and rejoins its endpoints, it does not start bent
+      const w = Math.sin(Math.PI * f);
+      const p = along(f, offDeg * w);
+      const e = elevAt(p[0], p[1]);
+      if (prev !== null) climb += Math.abs(e - prev);
+      prev = e;
+    }
+    return climb;
+  };
+  const sep = Math.hypot(b[0] - a[0], (b[1] - a[1]) * Math.cos(((a[0] + b[0]) / 2) * R2));
+  const maxOff = sep * maxOffsetFrac;
+  let best = { off: 0, climb: climbOf(0) };
+  const straight = best.climb;
+  for (let k = 1; k <= offsets; k++) {
+    for (const sgn of [-1, 1]) {
+      const off = (k / offsets) * maxOff * sgn;
+      const c = climbOf(off);
+      if (c < best.climb) best = { off, climb: c };
+    }
+  }
+  const pts = [];
+  for (let i = 0; i <= samples; i++) {
+    const f = i / samples;
+    pts.push(along(f, best.off * Math.sin(Math.PI * f)));
+  }
+  const saved = straight - best.climb;
+  return {
+    points: pts,
+    bent: Math.abs(best.off) > 1e-9,
+    // ⚠️ the reason, in the units the decision was made in — a bend that saved nothing is not a bend
+    why: Math.abs(best.off) > 1e-9
+      ? `bends ${best.off > 0 ? "left" : "right"} to save ${Math.round(saved)} of ${Math.round(straight)} elevation units of climb`
+      : "runs straight — no detour on this ground saves any climb",
+    climbSaved: saved, straightClimb: straight,
+  };
+}
+
 /** ⛔ SNG-409 §5 — A CONTESTED AREA LOOKS LIKE AN AREA. "No location in this world has a boundary — all
  *  135 are points, including the 25 marked `tier: region`. A contested territory currently looks like a
  *  village."

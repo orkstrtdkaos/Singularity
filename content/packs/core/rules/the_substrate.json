@@ -74,7 +74,19 @@
   "foothill_stair_hollow": 0.7,
   "foothill_the_low_market": 0.7,
   "foothill_the_worn_yard": 0.7,
-  "foothill_thinwater": 0.7
+  "foothill_thinwater": 0.7,
+  "dusklow": 0.55,
+  "gearsflat": 0.8,
+  "greenmarch": 0.45,
+  "greyhearth": 0.35,
+  "hardline": 0.6,
+  "kindlerow": 0.85,
+  "longshore": 0.7,
+  "plainstead": 0.5,
+  "stair_hollow": 0.55,
+  "the_low_market": 0.6,
+  "the_worn_yard": 0.75,
+  "thinwater": 0.4
  },
  "AMENDMENT_1": {
   "raisedBy": "Erik, via CCode's ROUND 2 (2026-07-12). **Aevi's original model was a ONE-SIDED FUEL GAUGE — more substrate was always better, up to a cap. That was wrong.**",
@@ -367,7 +379,7 @@
    "the_foothills": {
     "state": "ordered",
     "v": 0.6,
-    "why": "⛔ THE PROCESSING ECONOMY. Not a bloom and not a wasteland — a working loop: Greenforge gathers and re-orders, the Held Yard stocks it, the Spent Yard is where the scattering settles. ⚠️ The foothills are ordered BECAUSE PEOPLE WORK AT IT, which is why control of the yards matters."
+    "_retired": "⛔ RETIRED, AND ITS JUSTIFICATION LEFT WITH THE OUTPOSTS. This said 'Greenforge gathers and re-orders, the Held Yard stocks it, the Spent Yard is where the scattering settles' — ⚠️ ALL THREE ARE OUTPOSTS REASSIGNED OUT OF THE FOOTHILLS by the same split. The twelve centres would have inherited `ordered 0.6` whose stated reason no longer lived there. ⛔ THAT IS WHY THE INHERITANCE HAD TO BE RE-AUTHORED RATHER THAN LEFT FAITHFUL — CCode was right that it was my call, and the call was forced."
    },
    "unspooling": {
     "state": "wild",
@@ -503,6 +515,66 @@
     "state": "ordered",
     "v": 0.6,
     "why": "⛔ THE PROCESSING ECONOMY. Not a bloom and not a wasteland — a working loop: Greenforge gathers and re-orders, the Held Yard stocks it, the Spent Yard is where the scattering settles. ⚠️ The foothills are ordered BECAUSE PEOPLE WORK AT IT, which is why control of the yards matters."
+   },
+   "dusklow": {
+    "state": "ordered",
+    "v": 0.62,
+    "why": "⛔ 42% SEA within 3° — the only coastal foothill, and its whole trade is guiding people DOWN into the Umbral dark. The lit edge of the dark is a SHORE."
+   },
+   "gearsflat": {
+    "state": "ordered",
+    "v": 0.78,
+    "why": "⛔ raw 1.90, the highest of the twelve. Salvage laid out in rows across a flat ABOVE everything — the rows are visible from a distance, which is the point."
+   },
+   "greenmarch": {
+    "state": "wild",
+    "v": 0.5,
+    "why": "relief 0.03 — flat wood's-edge. ⚠️ WILD, not ordered: growers and foragers who will not be told which side of the Accord they are on. Nobody is tending the field here on purpose."
+   },
+   "greyhearth": {
+    "state": "clear",
+    "v": 0.4,
+    "why": "⛔ CLEAR. A burying town does not want structured nanite in its ground — things must end here CORRECTLY, and that means nothing keeps working after."
+   },
+   "hardline": {
+    "state": "ordered",
+    "v": 0.65,
+    "why": "Drill-yards and body-halls need level worked ground. ⚠️ Ordered because soldiers and stillholders both maintain it, which is the only thing they agree on."
+   },
+   "kindlerow": {
+    "state": "ordered",
+    "v": 0.72,
+    "why": "⛔ RELIEF 0.95 — the steepest of the twelve, and no water within 9°. Forge country: fuel comes down the hill and the water is caught, not drawn."
+   },
+   "longshore": {
+    "state": "ordered",
+    "v": 0.68,
+    "why": "relief 1.04, the most broken. ⚠️ The waygate town — outfitters and bridge-wrights, so the ground is worked hard around one arch."
+   },
+   "plainstead": {
+    "state": "ordered",
+    "v": 0.55,
+    "why": "⛔ RELIEF 0.00 — perfectly flat, the only such reading in the set. A plainstead, exactly as named."
+   },
+   "stair_hollow": {
+    "state": "ordered",
+    "v": 0.58,
+    "why": "relief 0.04 on a bench — a hollow with steps cut, which is why it is not simply a plain."
+   },
+   "the_low_market": {
+    "state": "ordered",
+    "v": 0.66,
+    "why": "⚠️ 12.5° from any water, the driest of the twelve. Near enough the Crossing to be respectable and far enough to be cheap."
+   },
+   "the_worn_yard": {
+    "state": "ordered",
+    "v": 0.7,
+    "why": "raw 1.63, high and broken. ⛔ Demolition and salvage — the ground is worn because they wear it, and the trade is named for the state it leaves."
+   },
+   "thinwater": {
+    "state": "wild",
+    "v": 0.45,
+    "why": "⛔ A RIVER AT 0.3° — it is ON the water, alone among the twelve. 'The water runs thin here and so does everything else.' ⚠️ WILD: thin, unmaintained, and honest about it."
    }
   },
   "_pending": "⚠️ NO CONSUMER YET. Authored ahead of a reader DELIBERATELY and flagged: `substrateDensity` has a resolver (resolveSubstrateField) and this does not. ⛔ CCode — this needs its own field resolver and its own band semantics: nanite has NO band against lattice density, and this field is the axis it SHOULD answer to. A nanite craft at `clear 0.05` should be starved the way a precursor craft is starved at density 0.05. Until then this is documentation, and I am saying so rather than letting it look wired."
@@ -541,9 +613,7 @@
    },
    "the_foothills": {
     "natural": "varies",
-    "naturalNote": "⛔ NOT A CONTIGUOUS BIOME AND IT MUST NOT BE DRAWN AS ONE. The foothills are the waypoint network — 22 towns scattered across every longitude at midpoints of roads. Each sits in whatever country its road crosses. Render each from its NEIGHBOURS, never as a region fill.",
-    "worked": "terraformed_roadside",
-    "workedNote": "Verge-works, wells and holding-yards laid along the roads. Terraforming as infrastructure rather than as landscape."
+    "_retired": "⛔ SNG-414: THE FOOTHILLS AS A REGION IS RETIRED — split into twelve. This entry said 'NOT A CONTIGUOUS BIOME, render each from its NEIGHBOURS, never as a region fill', which was the right answer for ONE network scattered across every longitude. ⚠️ TWELVE COMPACT REGIONS CAN EACH HAVE A REAL BIOME, so the workaround is obsolete and each is now authored from its own measured ground."
    },
    "the_quickwood": {
     "natural": "forest",
@@ -756,6 +826,78 @@
     "naturalNote": "⛔ NOT A CONTIGUOUS BIOME AND IT MUST NOT BE DRAWN AS ONE. The foothills are the waypoint network — 22 towns scattered across every longitude at midpoints of roads. Each sits in whatever country its road crosses. Render each from its NEIGHBOURS, never as a region fill.",
     "worked": "terraformed_roadside",
     "workedNote": "Verge-works, wells and holding-yards laid along the roads. Terraforming as infrastructure rather than as landscape."
+   },
+   "dusklow": {
+    "natural": "coast",
+    "worked": "terraformed_roadside",
+    "naturalNote": "⛔ 42% SEA within 3° — the only coastal foothill, and its whole trade is guiding people DOWN into the Umbral dark. The lit edge of the dark is a SHORE.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "gearsflat": {
+    "natural": "plateau",
+    "worked": "terraformed_roadside",
+    "naturalNote": "⛔ raw 1.90, the highest of the twelve. Salvage laid out in rows across a flat ABOVE everything — the rows are visible from a distance, which is the point.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "greenmarch": {
+    "natural": "plain",
+    "worked": "terraformed_roadside",
+    "naturalNote": "relief 0.03 — flat wood's-edge. ⚠️ WILD, not ordered: growers and foragers who will not be told which side of the Accord they are on. Nobody is tending the field here on purpose.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "greyhearth": {
+    "natural": "upland_vale",
+    "worked": "terraformed_roadside",
+    "naturalNote": "⛔ CLEAR. A burying town does not want structured nanite in its ground — things must end here CORRECTLY, and that means nothing keeps working after.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "hardline": {
+    "natural": "stone_grass",
+    "worked": "terraformed_roadside",
+    "naturalNote": "Drill-yards and body-halls need level worked ground. ⚠️ Ordered because soldiers and stillholders both maintain it, which is the only thing they agree on.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "kindlerow": {
+    "natural": "broken_hills",
+    "worked": "terraformed_roadside",
+    "naturalNote": "⛔ RELIEF 0.95 — the steepest of the twelve, and no water within 9°. Forge country: fuel comes down the hill and the water is caught, not drawn.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "longshore": {
+    "natural": "coast_karst",
+    "worked": "terraformed_roadside",
+    "naturalNote": "relief 1.04, the most broken. ⚠️ The waygate town — outfitters and bridge-wrights, so the ground is worked hard around one arch.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "plainstead": {
+    "natural": "open_plain",
+    "worked": "terraformed_roadside",
+    "naturalNote": "⛔ RELIEF 0.00 — perfectly flat, the only such reading in the set. A plainstead, exactly as named.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "stair_hollow": {
+    "natural": "upland_bench",
+    "worked": "terraformed_roadside",
+    "naturalNote": "relief 0.04 on a bench — a hollow with steps cut, which is why it is not simply a plain.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "the_low_market": {
+    "natural": "stone_grass",
+    "worked": "terraformed_roadside",
+    "naturalNote": "⚠️ 12.5° from any water, the driest of the twelve. Near enough the Crossing to be respectable and far enough to be cheap.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "the_worn_yard": {
+    "natural": "scree",
+    "worked": "terraformed_roadside",
+    "naturalNote": "raw 1.63, high and broken. ⛔ Demolition and salvage — the ground is worn because they wear it, and the trade is named for the state it leaves.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
+   },
+   "thinwater": {
+    "natural": "river_valley",
+    "worked": "terraformed_roadside",
+    "naturalNote": "⛔ A RIVER AT 0.3° — it is ON the water, alone among the twelve. 'The water runs thin here and so does everything else.' ⚠️ WILD: thin, unmaintained, and honest about it.",
+    "workedNote": "Verge-works, wells and holding-yards — the roadside craft the foothills all share, whatever else they are."
    }
   },
   "_crossCheck": "⛔ Biome and naniteField must agree: wild -> terraformed_runaway or _roadside; ordered -> terraformed_heavy/light/ancient/roadside; clear -> untouched or terraformed_reverted. ⚠️ THREE DISAGREED ON FIRST AUTHORING and all three were my error, caught by cross-check rather than by reading: valley and umbral_depths were marked worked-but-stable while their nanite says FERAL, and the_pattern_reach was marked untouched while its nanite is maintained. A gate should assert this pairing.",
@@ -1038,5 +1180,6 @@
   },
   "_metaphorWarning": "⛔ SNG-411. TWO REGIONS CARRIED METAPHORICAL BIOMES — `fen` for the Churn because it is unstable, `wetland_maze` for the Veilwrights because concealment is a maze. ⚠️ BIOME IS PHYSICAL. A themed biome sends every downstream consumer looking for water that is not there: it stranded 10 locations a median 30° from marsh, and it was MY error at authoring time, not a terrain failure. When the fiction wants a mood, that belongs in the seed, not the biome."
  },
- "_sng414": "⚠️ THE TWELVE FOOTHILL REGIONS INHERIT THE FOOTHILLS' AUTHORED FIELDS. The SNG-414 split relabels ground, it does not move it — the nanite state, density and biome the Foothills carried apply to every part of what it was. ⛔ INHERITED, NOT AUTHORED: Aevi may want to differentiate them now that they are twelve countries rather than one, and this note is here so that decision is hers to make rather than one she has to discover."
+ "_sng414": "⚠️ THE TWELVE FOOTHILL REGIONS INHERIT THE FOOTHILLS' AUTHORED FIELDS. The SNG-414 split relabels ground, it does not move it — the nanite state, density and biome the Foothills carried apply to every part of what it was. ⛔ INHERITED, NOT AUTHORED: Aevi may want to differentiate them now that they are twelve countries rather than one, and this note is here so that decision is hers to make rather than one she has to discover.",
+ "_foothillsSplitNote": "⛔ SNG-414. Twelve regions authored from MEASURED terrain plus each town's own trade. ⚠️ THREE ARE NOT `ordered`, and that is the substance of the differentiation: GREYHEARTH IS CLEAR — a burying town does not want structured nanite in its ground, because things must end correctly and that means nothing keeps working after. GREENMARCH AND THINWATER ARE WILD — growers who will not be told which side of the Accord they are on, and a place where the water runs thin and so does everything else. The other nine remain ordered because somebody is working at it, which was always the real claim."
 }

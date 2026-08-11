@@ -37,7 +37,8 @@ const CORRECTABLE_ENTITY_FIELDS = {
 };
 const NPC_STATUSES = new Set(["active", "injured", "missing", "departed", "dead"]);
 
-export function ensureCorrections(character) { if (!character.corrections) character.corrections = []; return character.corrections; } // registry:internal
+export function ensureCorrections(character) { if (!character.corrections) character.corrections = []; return character.corrections; }
+ // registry:internal
 
 function log(character, entry, ctx) {
   ensureCorrections(character);
@@ -287,6 +288,30 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         applied.push({ npcGender: op.id });
         break;
       }
+      // ⛔ SNG-426: THE ONE BLOCK LABELLED AUTHORITATIVE WAS THE ONE BLOCK WITH NO REPAIR PATH. Scene
+      // state is model-authored prose re-served every turn under a header that outranks the character
+      // sheet, and all seventeen repair ops could reach the registry, the quests, the codex, the
+      // location — and not this. So a scene wedged with a wrong setting (Erik's case: the GM staged a
+      // briefing in Warden Coll's office two regions from where Silas actually stood, and the setting
+      // went on describing that office after the header was put right) could not be fixed by any means
+      // the game had. Pronouns now self-heal against the registry (reconcileSceneIdentity); this is for
+      // everything else. Repair-not-wish: it rewrites the scene's DESCRIPTION and its open threads,
+      // never who is present, what they carry, or any earned value — and an empty setting is refused,
+      // because a scene with no anchor is worse than one with a wrong anchor.
+      case "correctSceneState": {
+        const sc = character.activeScene?.sceneState;
+        if (!sc) { refused.push({ op, reason: "there is no active scene to repair" }); break; }
+        const setting = op.setting != null ? String(op.setting).slice(0, 400).trim() : null;
+        if (op.setting != null && !setting) { refused.push({ op, reason: "a scene needs a setting — an empty anchor is worse than a wrong one" }); break; }
+        const threads = Array.isArray(op.threads) ? op.threads.slice(0, 5).map(t => String(t).slice(0, 160)).filter(Boolean) : null;
+        if (!setting && !threads) { refused.push({ op, reason: "correctSceneState needs a setting and/or threads" }); break; }
+        const from = { setting: sc.setting };
+        if (setting) sc.setting = setting;
+        if (threads) sc.threads = threads;
+        log(character, { kind: "sceneState", from, to: { setting: sc.setting }, why }, ctx);
+        applied.push({ sceneState: true });
+        break;
+      }
       // SNG-213: THE GENERAL REPAIR — fix any WRONG descriptive field on any entity. {kind, id, field, to}.
       // Closes the coverage gaps (an NPC's name/role/description/status, a place's/quest's/item's/codex's
       // text, a player field) that had no op, so a willing GM no longer finds every fix refused. Still
@@ -368,6 +393,7 @@ export function describeCorrection(a) {
   if (a.attribute) return `a mis-set ${a.attribute} was corrected (${a.from}→${a.to})`;
   if (a.merged) return `two records for one person were merged`;
   if (a.npcGender) return `a person's gender was set right`;
+  if (a.sceneState) return `the scene's own description was set right`;
   if (a.correctedField) return `${a.entity === "player" ? "your " : a.entity + "'s "}${a.field}${a.name ? ` (${a.name})` : ""} was set right`;
   if (a.registeredNpc) return `${a.name || "someone you'd met"} is now on your record of known people`;
   if (a.grantedItem) return `${a.grantedItem} was added to what you carry`;

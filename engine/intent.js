@@ -23,7 +23,8 @@
 // impactsLocal. All gates fail OPEN on missing data (a null regionId is "no
 // gate", never "a boundary").
 
-export const INTENT_KINDS = ["harm", "departure", "irreversible"]; // registry:internal
+export const INTENT_KINDS = ["harm", "departure", "irreversible"];
+ // registry:internal
 
 /** PURE. Should a harm gate fire for this declared action? Fires when any used
  *  ability's harmRung is `lethal`, the player hasn't already answered (rung
@@ -62,13 +63,42 @@ export function harmGateFor(abilityIds, catalog, askedKey, asked = {}, ownedLeve
 // SNG-188 §4: a label whose GOVERNING (leading) verb is a speech verb is DISCUSSING a journey, not
 // making it — "announce travel plans to Cairnhold" is not "travel to Cairnhold" however many places
 // it names. Anchored at the start (optionally after I/I'll/let's/we) so it reads the governing verb.
-const SPEECH_ACT = /^\s*(?:i(?:'?ll|'?m|'?d| will| am| would)?\s+(?:want to |going to |plan to |mean to |need to )?|let'?s\s+|we(?:'?ll| will)?\s+)?(announc\w*|tell\w*|say|saying|said|speak\w*|talk\w*|confid\w*|discuss\w*|propos\w*|promis\w*|mention\w*|explain\w*|suggest\w*|reassur\w*|admit\w*|confess\w*|declar\w*|inform\w*|warn\w*|ask|asking|asks|chat\w*|whisper\w*|shar\w*)\b/i;
+// SNG-425: the verb list gained the REMOTE half. It held 21 face-to-face verbs and not one verb of
+// reaching someone who is elsewhere — in a world with shadow-slates, a Hub relay, and a bird that
+// carries mail. "update Warden Coll" was not travel, not talking-about-travel, and so fell through
+// into travel by default. write · send · message · brief · report · relay · update · dispatch ·
+// notify · reply · respond · answer · pass/get word.
+const SPEECH_ACT = /^\s*(?:i(?:'?ll|'?m|'?d| will| am| would)?\s+(?:want to |going to |plan to |mean to |need to )?|let'?s\s+|we(?:'?ll| will)?\s+)?(announc\w*|tell\w*|say|saying|said|speak\w*|talk\w*|confid\w*|discuss\w*|propos\w*|promis\w*|mention\w*|explain\w*|suggest\w*|reassur\w*|admit\w*|confess\w*|declar\w*|inform\w*|warn\w*|ask|asking|asks|chat\w*|whisper\w*|shar\w*|writ\w*|send\w*|sent|messag\w*|brief\w*|report\w*|relay\w*|updat\w*|dispatch\w*|notif\w*|repl\w*|respond\w*|answer\w*)\b/i;
 
-/** PURE. Is this action label a SPEECH act about travel rather than travel itself? SNG-188 §4 — the
- *  code belt behind the parser prompt: a `travelTo` the model set on "announce/confide/discuss …
- *  travel plans" is caught here before buildTravelDirective can force a move. Reads the governing verb. */
+// SNG-425: a LIGHT-VERB WRAPPER in front of the real verb. The anchor above reads the GOVERNING verb,
+// which is right — "go to Millbrook and tell her" is travel, not speech — but Erik's line opened
+// "TAKE THE OPPORTUNITY TO update Warden Coll", so the governing verb was "take" and the anchor read a
+// wrapper instead of the act. Stripped first, repeatedly, so the anchor sees what the sentence is
+// actually about. Deliberately narrow: only phrasings that carry no meaning of their own.
+const LIGHT_PREAMBLE = /^\s*(?:i(?:'?ll|'?d|'?m| will| want to| need to)?\s+)?(?:tak(?:e|ing)\s+(?:the\s+opportunity|a\s+moment|a\s+chance|the\s+time|time)\s+to|try(?:ing)?\s+to|attempt(?:ing)?\s+to|decid(?:e|ing)\s+to|choos(?:e|ing)\s+to|opt(?:ing)?\s+to|mak(?:e|ing)\s+sure\s+to|be\s+sure\s+to|go\s+ahead\s+and|see\s+(?:if|whether)\s+(?:i|we)\s+can)\s+/i;
+
+/** PURE. Is this action label a SPEECH act rather than travel itself? SNG-188 §4 — the code belt
+ *  behind the parser prompt: a `travelTo` the model set on "announce/confide/discuss … travel plans"
+ *  is caught here before buildTravelDirective can force a move. Reads the governing verb, after
+ *  stripping any light-verb wrapper in front of it (SNG-425). */
 export function isSpeechAct(label) {
-  return SPEECH_ACT.test(String(label || "").trim());
+  let s = String(label || "").trim();
+  for (let i = 0; i < 3 && LIGHT_PREAMBLE.test(s); i++) s = s.replace(LIGHT_PREAMBLE, "").trim();
+  return SPEECH_ACT.test(s);
+}
+
+// SNG-425: the CHANNEL, named anywhere in the sentence — not anchored, because "pull the slate from my
+// kit and write to Coll" leads with neither a speech verb nor a travel verb. A named channel is
+// positive evidence that the character intends to reach someone WITHOUT going to them.
+const REMOTE_CHANNEL = /\b(?:shadow[-\s]?(?:slate|sheet|tablet)|send\s+(?:a\s+)?(?:message|word|note|letter|bird)|sends?\s+word|get\s+word\s+to|pass\s+word\s+to|writ(?:e|ing)\s+(?:to|back)|by\s+(?:bird|raven|courier|messenger)|via\s+the\s+(?:relay|hub)|through\s+the\s+relay|hub\s+relay|by\s+letter)\b/i;
+
+/** PURE. Does this action reach someone WHO IS ELSEWHERE, by a named channel? SNG-425 — the third
+ *  bucket. `isSpeechAct` covers talking to someone in the room and talking ABOUT a journey; neither
+ *  describes writing to a man two regions away. A remote contact is never travel, so it suppresses a
+ *  `travelTo` the parser set — UNLESS the same words also carry a real travel phrase ("walk to the
+ *  mill and send word to Coll" genuinely goes to the mill), which the caller checks. */
+export function isRemoteContact(text) {
+  return REMOTE_CHANNEL.test(String(text || ""));
 }
 
 // SNG-228: signals that a `travelTo` names a PERSON, not a place. TITLES that precede a name, and verbs that
@@ -130,15 +160,36 @@ export function harmTargetFor(action = {}, ctx = {}) {
   return null;
 }
 
+/** PURE. Is moving from → to a CONSEQUENTIAL move, or an ordinary step across the room?
+ *  ⛔ SNG-424 — THIS IS THE ONE DEFINITION, AND IT EXISTS BECAUSE THERE WERE TWO. `departureGateFor`
+ *  held this test inline and guarded the door where the PLAYER asks to travel; the `moveTo` applier
+ *  guarded nothing at all, so the GM could relocate a character whose action was never a journey.
+ *  Erik's turn — "update Warden Coll", a message written on a slate from a ridge two regions away —
+ *  arrived at Coll's office because the second door had no idea what the first one considered a
+ *  departure. Both doors now ask THIS function, so they cannot drift apart again.
+ *  FAILS CLOSED: an unresolvable origin or destination is the case where the engine knows LEAST about
+ *  the consequence of moving, so it counts as consequential. Consequential = crossing a region, or a
+ *  journey to a place not directly connected to where they stand. An adjacent place in the same
+ *  region is an ordinary step and is not (acceptance §2: a real departure is not a nag). */
+export function isConsequentialMove(fromId, toId, locations) {
+  if (!toId) return true;                 // no resolved destination — the engine knows least; treat as real
+  if (fromId === toId) return false;      // not a move at all
+  const here = locations?.[fromId], there = locations?.[toId];
+  const fromRegion = here?.regionId || here?.region || null;
+  const toRegion = there?.regionId || there?.region || null;
+  if (!there || !fromRegion || !toRegion) return true;      // §4.2 fail closed
+  if (fromRegion !== toRegion) return true;                 // a region crossing is always a departure
+  return !(here.connections || []).includes(toId);          // same region: a step is fine, a journey is not
+}
+
 /** PURE. Should a departure gate fire for this travel intent? SNG-188: travel is OFFERED, never
  *  imposed (§4.1, the same contract lethal encounters carry). The gate now FAILS CLOSED — an
  *  unresolvable origin or destination is the case where the engine knows LEAST about the consequence
  *  of moving, so it ASKS rather than skipping (the old fail-OPEN here is exactly why Silas was
  *  relocated: his origin, an unrecorded warden post, did not resolve). It gates any CONSEQUENTIAL
- *  move — crossing a region, or a journey to a place not directly connected to where they stand —
- *  while an adjacent step in the same region proceeds without a prompt (acceptance §2: a real
- *  departure is not a nag). Returns null only when there is no travel intent, or the move is an
- *  ordinary adjacent step. The gate runs BEFORE the GM is called. */
+ *  move (see isConsequentialMove — shared with the moveTo applier since SNG-424) while an adjacent
+ *  step in the same region proceeds without a prompt. Returns null only when there is no travel
+ *  intent, or the move is an ordinary adjacent step. The gate runs BEFORE the GM is called. */
 export function departureGateFor(travelIntent, character, locations) {
   if (!travelIntent || (!travelIntent.destId && !travelIntent.ref)) return null; // not a travel intent
   const here = locations?.[character?.currentLocationId];
@@ -162,12 +213,10 @@ export function departureGateFor(travelIntent, character, locations) {
     );
   }
 
-  // §5 same-region travel is still travel. CONSEQUENTIAL = a region crossing OR a place not directly
-  // connected to where they stand (a journey, not a step). An adjacent place in the same region is an
-  // ordinary step and does not gate — that is what keeps a genuine departure from becoming a nag.
+  // §5 same-region travel is still travel. The CONSEQUENTIAL test lives in isConsequentialMove
+  // (SNG-424) so this gate and the moveTo applier share one definition of a real departure.
   const crossing = fromRegion !== toRegion;
-  const adjacent = (here?.connections || []).includes(travelIntent.destId);
-  if (!crossing && adjacent) return null;
+  if (!isConsequentialMove(character?.currentLocationId, travelIntent.destId, locations)) return null;
 
   return ask(
     crossing

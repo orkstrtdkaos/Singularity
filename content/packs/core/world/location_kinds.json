@@ -616,5 +616,80 @@
   "waste": 2,
   "inn": 1,
   "bridge": 1
- }
+ },
+ "_regionDisplay": "⛔ SNG-426 (Erik): 'you have STAIRS as the Harmonic Heights Lower Terrace. That should be HARMONIC HEIGHTS at this region view, period, and a TOWN icon. Once clicked to go local, then you show the lower terrace and upper terrace.' ⚠️ HE IS RIGHT AND THE RULE GENERALISES: A REGION MAP NAMES PLACES; A LOCAL MAP NAMES PARTS OF A PLACE. `regionName` and `regionKind` below override `name` and `kind` AT REGION SCALE ONLY. Where absent, the location's own name and kind stand. ⛔ THE LOCAL TIER IS UNAFFECTED — the terraces are still terraces once you are inside.",
+ "regionDisplay": {
+  "harmonic_heights_terrace": {
+   "regionName": "Harmonic Heights",
+   "regionKind": "city",
+   "why": "⛔ The location IS the lowest terrace, but at 645 miles across the map should say HARMONIC HEIGHTS. The terraces are local-tier features and are already authored there."
+  },
+  "radiant_plateau_edge": {
+   "regionName": "Radiant Plateau",
+   "regionKind": "city",
+   "why": "Same rule — 'Edge District' is which part of it you arrive at, not what it is."
+  },
+  "old_switchback": {
+   "regionName": "The Switchback",
+   "regionKind": "road",
+   "why": "⚠️ Keeps `road` — it genuinely is one, and that is the honest icon at any scale."
+  },
+  "echo_river_crossing": {
+   "regionName": "Echo River Crossing",
+   "regionKind": "bridge",
+   "why": "⛔ `bridge`, not `waygate`. The waygate is the old bridge-stone AT the crossing — a local-tier feature. At region scale this is the town that keeps the only crossing of the Echo."
+  },
+  "greywater_stilts": {
+   "regionName": "Greywater",
+   "regionKind": "fen_town",
+   "why": "'Stilts' is how it is built, which the icon already says."
+  },
+  "thornwake_glade": {
+   "regionName": "Thornwake",
+   "regionKind": "grove",
+   "why": "⚠️ 'Glade' is the local feature; the place is Thornwake."
+  },
+  "the-low-lamp-inn": {
+   "suppressAtRegion": true,
+   "why": "⛔ A SITE OF RADIANT PLATEAU EDGE, sitting at 0.00° from it. Suppressed at region scale — it is a room in a district and appears on the Plateau's local map."
+  },
+  "the_cogitarium": {
+   "regionName": "The Cogitarium",
+   "regionKind": "skyhold"
+  },
+  "gen-cogitarium-entrance-hall": {
+   "suppressAtRegion": true,
+   "why": "Site of the Cogitarium."
+  },
+  "gen-cogitarium-third-terrace": {
+   "suppressAtRegion": true,
+   "why": "Site of the Cogitarium."
+  },
+  "gen-mara-wells-store": {
+   "suppressAtRegion": true,
+   "why": "Site of Millbrook."
+  },
+  "gen-watershed-road": {
+   "suppressAtRegion": true,
+   "why": "Site of Millbrook."
+  },
+  "the_great_coliseum": {
+   "regionName": "The Great Coliseum",
+   "regionKind": "arena"
+  },
+  "the_hundred_markets": {
+   "suppressAtRegion": true,
+   "why": "⚠️ A district of the Crossing."
+  },
+  "the_quiet_house": {
+   "suppressAtRegion": true,
+   "why": "A hall in the Crossing."
+  },
+  "the_axis_gate": {
+   "regionName": "The Axis Gate",
+   "regionKind": "gate",
+   "why": "⛔ Kept — it is the gate OF the Crossing but it is 12 days out, so it is a place you travel to."
+  }
+ },
+ "_suppressionRule": "⛔ GENERAL RULE, and it fixes the label collisions too: ANY location whose `parentId` is another location AND which sits within 0.5° of that parent is SUPPRESSED at region scale. ⚠️ 24 of the 37 label collisions I measured are exactly this case. The explicit list above is for the ones where the name ALSO needs changing."
 }

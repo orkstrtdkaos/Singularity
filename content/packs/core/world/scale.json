@@ -1,0 +1,21 @@
+{
+ "_note": "⛔ SNG-424. THE WORLD'S PHYSICAL SIZE, WHICH WAS NEVER IN CANON. Erik measured that my region map read ~1600 miles across and said 'that's Continent or Country size... a Region is supposed to be multi-State sized, like the US Midwest.' ⚠️ HE WAS RIGHT ABOUT THE READING AND THE TIER STRUCTURE IS FINE — I HAD RENDERED WITH EARTH'S RADIUS, 111.2 km per degree, WHICH IS 2.76× TOO LARGE.",
+ "radiusKm": 2400.0,
+ "kmPerDegree": 41.89,
+ "milesPerDegree": 26.01,
+ "walkingDaysPerDegree": 1.67,
+ "milesPerWalkingDay": 15.6,
+ "_derivation": "⛔ DERIVED FROM AUTHORED TRAVEL, not chosen. Canon fixes 1° = 1.67 walking days (about 300 days pole-to-rim across 180°). A person on foot or a wagon train makes 12–20 miles a day. Solving: 15.6 mi/day gives 1° = 41.9 km, hence a world radius of 2400 km — 0.38× Earth. ⚠️ EVERY OTHER CANDIDATE BREAKS SOMETHING: Earth-sized makes a walking day 41 miles, which is four times a wagon train; halving it again makes the world too small for 300 days of travel to mean anything.",
+ "_regionSizesAtThisScale": {
+  "the_numinous_reach": "343 mi across — Colorado",
+  "the_center": "453 mi — England N–S",
+  "the_palelands": "499 mi",
+  "umbral_depths": "603 mi — France",
+  "the_quickwood": "624 mi",
+  "the_echo_vale": "645 mi",
+  "riven_marches": "806 mi — Texas",
+  "valley": "817 mi",
+  "_verdict": "⛔ MEDIAN REGION ~620 MILES ACROSS — multi-state, exactly what Erik asked for. THE TIER STRUCTURE NEEDS NO CONTINENT LAYER; it needed a correct constant."
+ },
+ "_useThis": "⚠️ ANY RENDERER, SCALE BAR OR DISTANCE STRING MUST USE `kmPerDegree` FROM THIS FILE. ⛔ A hardcoded 111.2 is Earth and this is not Earth."
+}

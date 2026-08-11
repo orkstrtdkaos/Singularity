@@ -8,7 +8,7 @@
    "lon": 79.31
   },
   "radiusDeg": 12.4,
-  "members": 7,
+  "members": 6,
   "purpose": "⛔ THE GROUND BETWEEN TWO CIVILISATIONS THAT DO NOT FIGHT AND INTERFERE ANYWAY. Sound bends light here; light carries sound. ⚠️ NOTHING IN THE VALE IS NEUTRAL AND NOTHING IN IT IS ANYONE'S — which is why the people who live here are the ones who wanted out from under both.",
   "namedGround": [
    {
@@ -99,14 +99,6 @@
   "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 13.2° → 12.4° (6% tighter); centre moved 1.65°. Features re-expressed, ground unchanged.",
   "_templateNote": "⛔ SNG-423. THE ECHO VALE IS THE TEMPLATE. Erik: 'get one really well made so we can use it as a template for the others.' ⚠️ WHAT 'WELL MADE' MEANS, DERIVED FROM WHAT CCODE ALREADY RENDERS RATHER THAN FROM TASTE:\n  HE BAKES: ground, roads (from connections), hydrology, precursor lines, pins with kind icons, areas.\n  ⛔ SO I MUST NOT AUTHOR ANY OF THOSE. Anything I write that duplicates a derived layer is a second source that will disagree with the first.\n  ⚠️ WHAT ONLY AUTHORING CAN SUPPLY: what the ground MEANS, what is BETWEEN the places, why a way bends, where an edge is soft, and the one line a narrator needs when a player is crossing rather than arriving. That is the whole authored layer and it is four fields: `purpose`, `ways`, `namedGround`, `edges`.\n  ⛔ COMPLETE AT BOTH TIERS: all 7 members now have local frames (SNG-422), so a player can zoom from the Vale into any town in it without falling through.",
   "crossing": "⚠️ THE LINE A NARRATOR NEEDS WHEN A PLAYER IS BETWEEN PLACES: instruments read wrong here and everyone knows it, so nobody trusts a measurement they took alone. Two parties crossing will compare readings before they compare intentions. ⛔ THE INTERFERENCE IS NOT DANGEROUS — IT IS UNRELIABLE, and that is worse for anyone whose craft depends on knowing.",
-  "_completeness": {
-   "members": 7,
-   "withLocalFrames": 7,
-   "ways": 4,
-   "namedGround": 5,
-   "edges": 4,
-   "note": "⛔ THE TEMPLATE TEST: can a player stand anywhere in this region, at any zoom, and find authored ground under them? ⚠️ For the Echo Vale the answer is now yes at both tiers. For the other 29 regions it is not, and that is the measure of what is left."
-  },
   "roads": [
    {
     "id": "road_vale_trunk",
@@ -114,88 +106,53 @@
     "width": 3,
     "from": "harmonic_heights_terrace",
     "to": "radiant_plateau_edge",
-    "via": [
-     "echo_river_crossing"
-    ],
     "segments": [
      {
       "from": "harmonic_heights_terrace",
-      "to": "echo_river_crossing",
+      "to": "old_switchback",
       "waypoints": [
        {
-        "bearing": 100,
-        "km": 345
+        "bearing": 104,
+        "km": 292
        },
        {
-        "bearing": 81,
-        "km": 324
+        "bearing": 83,
+        "km": 211
        },
        {
-        "bearing": 62,
-        "km": 320
+        "bearing": 51,
+        "km": 160
        },
        {
-        "bearing": 44,
-        "km": 331
+        "bearing": 11,
+        "km": 162
        }
       ]
      },
      {
-      "from": "echo_river_crossing",
+      "from": "old_switchback",
       "to": "radiant_plateau_edge",
       "waypoints": [
        {
-        "bearing": 4,
-        "km": 297
+        "bearing": -39,
+        "km": 247
        },
        {
-        "bearing": -26,
-        "km": 293
+        "bearing": -55,
+        "km": 308
        },
        {
-        "bearing": -52,
-        "km": 344
+        "bearing": -67,
+        "km": 377
        },
        {
-        "bearing": -70,
-        "km": 426
+        "bearing": -75,
+        "km": 449
        }
       ]
      }
     ],
-    "why": "⛔ THE ONE ROAD THAT MATTERS — the Heights to the Plateau, and it goes THROUGH the bridge because there is no other crossing of the Echo. ⚠️ IT BENDS NORTH OF THE DIRECT LINE the whole way: the direct arc runs into the marsh south of the river and into the worst of the Shimmer. Both cities maintain it and neither admits to maintaining it with the other."
-   },
-   {
-    "id": "road_south_marsh_road",
-    "class": "main",
-    "width": 2,
-    "from": "echo_river_crossing",
-    "to": "greywater_stilts",
-    "segments": [
-     {
-      "from": "echo_river_crossing",
-      "to": "greywater_stilts",
-      "waypoints": [
-       {
-        "bearing": 46,
-        "km": 388
-       },
-       {
-        "bearing": 61,
-        "km": 428
-       },
-       {
-        "bearing": 75,
-        "km": 464
-       },
-       {
-        "bearing": 87,
-        "km": 493
-       }
-      ]
-     }
-    ],
-    "why": "⚠️ BENDS WIDE EAST AROUND THE SOUTHERN MARSH. Two of the three marsh bodies sit on the straight line. ⛔ The road stops at the marsh edge — the last miles into Greywater are by skiff, and that is not a road at all."
+    "why": "⛔ HEIGHTS TO PLATEAU VIA THE SWITCHBACK — the only route between the two powers, and it goes through the pass because the Shimmer sits on the direct line. Both cities maintain it and neither admits to maintaining it with the other."
    },
    {
     "id": "road_wilds_road",
@@ -227,12 +184,44 @@
       ]
      }
     ],
-    "why": "The short run into the wilds — 94 miles, the shortest link in the Vale. ⚠️ Bends slightly south of the marsh fringe."
+    "why": "94 miles, the shortest link in the Vale — the Heights' way into the wilds."
    },
    {
-    "id": "road_pass_road",
+    "id": "road_marsh_road",
     "class": "main",
     "width": 2,
+    "from": "harmonic_heights_terrace",
+    "to": "greywater_stilts",
+    "segments": [
+     {
+      "from": "harmonic_heights_terrace",
+      "to": "greywater_stilts",
+      "waypoints": [
+       {
+        "bearing": 110,
+        "km": 395
+       },
+       {
+        "bearing": 105,
+        "km": 414
+       },
+       {
+        "bearing": 101,
+        "km": 444
+       },
+       {
+        "bearing": 99,
+        "km": 480
+       }
+      ]
+     }
+    ],
+    "why": "⚠️ BENDS WIDE AROUND THE MARSH'S NORTHERN LOBE. The road ends at the marsh edge — the last miles into Greywater are by skiff, which is not a road."
+   },
+   {
+    "id": "road_warden_track",
+    "class": "secondary",
+    "width": 1.4,
     "from": "thornwake_glade",
     "to": "old_switchback",
     "segments": [
@@ -259,71 +248,7 @@
       ]
      }
     ],
-    "why": "⛔ THE ROAD TO THE PASS, and the only way out of the Vale that is not a river or a gate. It climbs, so it bends — the switchbacks begin before the mountain does."
-   },
-   {
-    "id": "road_river_road",
-    "class": "secondary",
-    "width": 1.4,
-    "from": "echo_river_crossing",
-    "to": "old_switchback",
-    "segments": [
-     {
-      "from": "echo_river_crossing",
-      "to": "old_switchback",
-      "waypoints": [
-       {
-        "bearing": 22,
-        "km": 325
-       },
-       {
-        "bearing": 14,
-        "km": 292
-       },
-       {
-        "bearing": 5,
-        "km": 261
-       },
-       {
-        "bearing": -4,
-        "km": 233
-       }
-      ]
-     }
-    ],
-    "why": "⚠️ Follows the Echo upstream toward the pass — the shortcut, 159 miles, but it is a river track and not a trunk. Carters take the wilds road instead."
-   },
-   {
-    "id": "road_stilts_wilds",
-    "class": "secondary",
-    "width": 1.4,
-    "from": "greywater_stilts",
-    "to": "thornwake_glade",
-    "segments": [
-     {
-      "from": "greywater_stilts",
-      "to": "thornwake_glade",
-      "waypoints": [
-       {
-        "bearing": 95,
-        "km": 483
-       },
-       {
-        "bearing": 92,
-        "km": 443
-       },
-       {
-        "bearing": 91,
-        "km": 402
-       },
-       {
-        "bearing": 92,
-        "km": 360
-       }
-      ]
-     }
-    ],
-    "why": "⛔ 128 miles and it bends HARD WEST around the marsh's northern lobe. The Adaptors and the wardens deal directly, without going through either city."
+    "why": "⛔ The wardens' track up to the pass. Secondary because it is a track — the trunk carries the traffic."
    }
   ],
   "roadsOutOfRegion": [
@@ -333,15 +258,7 @@
     "to": "the_cogitarium",
     "class": "main",
     "width": 2,
-    "why": "⛔ OVER THE HIGH PASS — the way out of the Vale to the Somatic reaches. Erik: 'a way out of the Valley, connecting to other parts of the world.'"
-   },
-   {
-    "at": "echo_river_crossing",
-    "bearing": 92,
-    "to": "millbrook",
-    "class": "trunk",
-    "width": 3,
-    "why": "⛔ DOWN THE ECHO TO THE VALLEY — the busiest road leaving the region, and the one the contamination teams and the grain both use."
+    "why": "⛔ OVER THE HIGH PASS — out of the Vale to the Somatic reaches."
    },
    {
     "at": "thornwake_glade",
@@ -349,7 +266,7 @@
     "to": "ent_deepwood",
     "class": "secondary",
     "width": 1.4,
-    "why": "⚠️ To the Ents, three days on. The wardens do not comment on where it goes."
+    "why": "To the Ents, three days on. The wardens do not comment on where it goes."
    },
    {
     "at": "radiant_plateau_edge",
@@ -357,10 +274,18 @@
     "to": "kestrels_roost",
     "class": "secondary",
     "width": 1.4,
-    "why": "North to the Roost. ⚠️ Little used — the Roost is reached more easily from the pass."
+    "why": "North to the Roost."
+   },
+   {
+    "at": "harmonic_heights_terrace",
+    "bearing": -100,
+    "to": "echo_river_crossing",
+    "class": "main",
+    "width": 2,
+    "why": "⛔ WEST TO THE VALLEY AND THE ECHO — 936 miles, the long haul out. The contamination teams come this way."
    }
   ],
-  "_roadsNote": "⛔ SNG-425 (Erik: 'take out a pen and draw them… be inspired by a national highway map'). AUTHORED AS A NETWORK, NOT AS PAIRWISE WAYS. Six roads plus four leaving the region, CLASSED — trunk 3, main 2, secondary 1.4 — so the renderer draws better roads thicker.\n⚠️ THE BENDS ARE OBSTACLE-DRIVEN AND MEASURED: I sampled peak elevation and marsh intersection on every pair. THE MARSH IS THE REAL OBSTACLE HERE, not the mountains — two of three marsh bodies sit across the Crossing→Greywater line, so that road swings east; the Greywater→Thornwake road swings the other way around the northern lobe.\n⛔ AND THE TRUNK ROUTES THROUGH THE BRIDGE BECAUSE THERE IS NO OTHER CROSSING OF THE ECHO. That is the single fact that organises the whole network: everything east–west goes through one town.\n⚠️ `ways` is RETIRED in favour of this — it described journeys pairwise and could not say which road was important."
+  "_roadsNote": "⛔ SNG-427 REBUILT. Erik: 'it has a Main road and a secondary road going between the same places — UGH.' He was right: `road_river_road` (Crossing→Switchback, secondary) paralleled Crossing→Thornwake→Switchback. ⚠️ ONE ROAD PER PAIR NOW, and the network is smaller because the Echo River Crossing has left the region — it is 14 miles from Millbrook and 936+ from every Vale member, so it is a VALLEY bridge. ⛔ THE VALE IS NOW PURELY THE INTERFERENCE BAND, which is what its own definition always said."
  },
  "the_center": {
   "centre": {
@@ -735,10 +660,10 @@
  "valley": {
   "centre": {
    "lat": -70.87,
-   "lon": -149.69
+   "lon": -149.68
   },
   "radiusDeg": 15.7,
-  "members": 10,
+  "members": 11,
   "purpose": "⛔ WHERE PLAY LIVES — 5 of 12 characters stand here and 28 recent deeds happened here. The valley floor is ordinary ground on purpose: farms, a river, a road to somewhere worse. ⚠️ A player crossing it is crossing the part of the world that is NOT a statement, which is why the Disputed Zone at its eastern end reads as loudly as it does.",
   "ways": [
    {
@@ -859,7 +784,8 @@
     "why": "The Echo. West of it is the Valley and everyone says so (mirrors the Echo Vale's own entry)."
    }
   ],
-  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 24.1° → 15.7° (35% tighter); centre moved 8.48°. Features re-expressed, ground unchanged."
+  "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 24.1° → 15.7° (35% tighter); centre moved 8.48°. Features re-expressed, ground unchanged.",
+  "_clusterNote": "⛔ SNG-427: GAINED THE ECHO RIVER CROSSING, and Millbrook/Archive Hollow/Waystone were placed on the real Echo. Millbrook now sits 14 MILES ABOVE THE CROSSING — Erik: 'Millbrook is the town closest to the Echo River crossing, that's why the crossing exists.'"
  },
  "the_numinous_reach": {
   "centre": {

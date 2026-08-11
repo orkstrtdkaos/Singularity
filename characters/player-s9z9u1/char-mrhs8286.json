@@ -7,8 +7,8 @@
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
-  "level": 29,
-  "xp": 2899,
+  "level": 30,
+  "xp": 2904,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -214,11 +214,11 @@
     "value": 0.053420408281249956,
     "spectrum": 0.11337499999999998
   },
-  "attunement": 29,
-  "maxHealth": 186,
-  "health": 186,
-  "maxEnergy": 277,
-  "energy": 200,
+  "attunement": 30,
+  "maxHealth": 191,
+  "health": 191,
+  "maxEnergy": 282,
+  "energy": 282,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2100,11 +2100,125 @@
     "Deep in the Threshold Post mine-shaft, Silas assessed the second structural fault—a slower-developing fracture that will require monitoring in months to come—and marked it plainly for Fendt's crew. The ridge sentinel is now fully assessed, armed with honest limits and clear notice of what requires attention. The warden post is ready."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_crossing",
+    "turns": [
+      {
+        "player": "work again with pell to brace this fault as well.",
+        "summary": "Deep in the Threshold Post mine-shaft on Day 15, Silas and Pell Ran Marsh reinforced the secondary structural fault with co-cast craft partnership—asking rather than forcing, leaving honest notice of what requires monitoring. The warden post's assessment is complete. The ridge sentinel stands ready for Fendt's crew.",
+        "narration": "You step back from the first reinforcement—the load sitting clean now, the timber's grain settled into its new shape through the bond. Pell's already moving toward the secondary fault, hand trailing across the shaft wall to read what's coming, her ironsense picking the weak line out of stone and timber both. You follow her down.\n\nThis fault runs slower, she says without turning. Longer to break. But it will break.\n\nYou set your hands where hers are, feeling the timber's resistance through your own craft-sense—Order-Sense and her ironsense reading the same problem in different languages, then speaking it together. The bond carries the understanding clean: reinforce here, not with force but with *asking*. The wood wants to hold. You just have to let it know it can.\n\nThe Raised Thing flows through both of you again, economical this time—no waste, no show. Just the precise amount of structure the timber needs to accept the load without breaking under slow time. Pell's breathing stays steady. Your hands don't shake. When it settles, the secondary fault is still there—you've marked it plain in chalk for Fendt to monitor—but it's no longer a breaking point. It's a *waiting* point.\n\nYou step back together. The mine-shaft is done.\n\n*You feel it settle into you — a new steadiness. (Level 30: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      }
+    ],
+    "lastTurn": {
+      "narration": "You step back from the first reinforcement—the load sitting clean now, the timber's grain settled into its new shape through the bond. Pell's already moving toward the secondary fault, hand trailing across the shaft wall to read what's coming, her ironsense picking the weak line out of stone and timber both. You follow her down.\n\nThis fault runs slower, she says without turning. Longer to break. But it will break.\n\nYou set your hands where hers are, feeling the timber's resistance through your own craft-sense—Order-Sense and her ironsense reading the same problem in different languages, then speaking it together. The bond carries the understanding clean: reinforce here, not with force but with *asking*. The wood wants to hold. You just have to let it know it can.\n\nThe Raised Thing flows through both of you again, economical this time—no waste, no show. Just the precise amount of structure the timber needs to accept the load without breaking under slow time. Pell's breathing stays steady. Your hands don't shake. When it settles, the secondary fault is still there—you've marked it plain in chalk for Fendt to monitor—but it's no longer a breaking point. It's a *waiting* point.\n\nYou step back together. The mine-shaft is done.\n\n*You feel it settle into you — a new steadiness. (Level 30: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Deep in the Threshold Post mine-shaft on Day 15, Silas and Pell Ran Marsh reinforced the secondary structural fault with co-cast craft partnership—asking rather than forcing, leaving honest notice of what requires monitoring. The warden post's assessment is complete. The ridge sentinel stands ready for Fendt's crew.",
+      "choices": [
+        {
+          "label": "Head back up to the surface and tell Veth and Huginn the work is finished.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "lead"
+          ]
+        },
+        {
+          "label": "Sit in the quiet mine-shaft a moment longer before climbing out—there's something in the deep that wants your attention.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "easy",
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense"
+        },
+        {
+          "label": "Ask Pell to check one more time—your Deathsense is reading something farther down the shaft that you can't quite name.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "deathsense"
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -8
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "scene": {
+        "setting": "Deep in the Threshold Post mine-shaft at the ridge relay node. Torchlight pools at the stone. The secondary fault line runs darker than the rest, marked now in chalk with a warden's patient notation: *monitor 6+ months*. The timber bracing sits solid, load distributed clean. Above, the lodge skeleton waits in starlight.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Standing beside the reinforced timber, one hand still touching the grain, reading what it settled into through ironsense. Her shoulders have dropped—the work carried weight and now it's down."
+          }
+        ],
+        "objects": [
+          "Torchlight, pooling",
+          "Reinforced timber bracing at the primary fault (marked X in chalk)",
+          "Secondary fault line, marked with patient notation and chalk",
+          "The mine-shaft's honest stone walls"
+        ],
+        "threads": [
+          "The work is finished. The choice to surface or linger remains."
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "note": "Deep in the mine-shaft with Silas on Day 15 night—co-cast reinforcement of the secondary fault complete. Her ironsense steadying the timber a second time, her hand reading what needs holding and asking it plainly. The partnership holds clean.",
+          "skillsObserved": [
+            "ironsense reading of secondary fault-line behavior and load-trajectory",
+            "sustained co-cast partnership through the soul-bond under focused work pressure"
+          ],
+          "learned": [
+            "Slower faults can be reinforced by asking rather than forcing—the timber wants to hold, it just needs permission"
+          ]
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Secondary structural fault at depth now reinforced—load distributes cleanly. Warden's mark left for Fendt: monitor in 6+ months. Mine-shaft assessment complete; ready for supervised extraction work."
+        }
+      ],
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Deep in the Threshold Post mine-shaft at the ridge relay node. Torchlight pools at the stone. The secondary fault line runs darker than the rest, marked now in chalk with a warden's patient notation: *monitor 6+ months*. The timber bracing sits solid, load distributed clean. Above, the lodge skeleton waits in starlight.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Standing beside the reinforced timber, one hand still touching the grain, reading what it settled into through ironsense"
+        }
+      ],
+      "objects": [
+        "Torchlight, pooling",
+        "Reinforced timber bracing at the primary fault (marked X in chalk)",
+        "Secondary fault line, marked with patient notation and chalk",
+        "The mine-shaft's honest stone walls"
+      ],
+      "threads": [
+        "The work is finished. The choice to surface or linger remains."
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 15,
-    "hour": 0,
+    "hour": 1,
     "realAnchor": null
   },
   "companions": [
@@ -3529,7 +3643,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Reading the mill gate's weight through ironsense contact — confirmed it as active, not dormant, presently carrying load. Quiet assessment.",
         "[d14] Hand flat against the relay node's stone, ironsense still open. Her quiet satisfaction reads as confirmation—the pattern she was searching for is now complete.",
         "[d14] Named Cassiel as the warden-choice while reading the ridge's ironsense geometry. Quiet certainty: 'Cassiel holds. That's what he does.' Exchanged a knowing glance with Veth.",
         "[d14] Named Fendt plainly as the warden for the ridge post—her judgment solid and her ironsense reading the geometry confident. Asked for the post's name; Silas gave it, and she received it without ceremony.",
@@ -3538,31 +3651,32 @@
         "[d14] At the lodge threshold with ironsense half-open to the relay node—confirming the frame's weight-distribution and the post's iron-deep stability. Quiet approval of the work.",
         "[d14] At the ridge, standing at the lodge threshold with ironsense half-open to the relay node beneath — confirming the frame's weight-distribution and the mine's iron foundation through direct contact with timber and earth.",
         "[d14] At the ridge mine-shaft, used ironsense to read timber load and co-cast The Raised Thing with Silas to reinforce the bracing. Her presence was steady and certain; the work settled true. Memory answered her call through the soul-bond.",
-        "[d14] In the mine-shaft at depth, ironsense reading the timber's load-distribution relative to the second fault-line—her craft-sense and yours reading together without words needed."
+        "[d14] In the mine-shaft at depth, ironsense reading the timber's load-distribution relative to the second fault-line—her craft-sense and yours reading together without words needed.",
+        "[d15] Deep in the mine-shaft with Silas on Day 15 night—co-cast reinforcement of the secondary fault complete. Her ironsense steadying the timber a second time, her hand reading what needs holding and asking it plainly. The partnership holds clean."
       ],
       "knownFacts": [
-        "The ridge node matches her ironsense read perfectly",
         "The ridge watch requires patience and staying, not expertise.",
         "Pell's ironsense reads the network's geometry as a living whole—the Stillwater post and the ridge sentinel singing between them",
         "The ridge's iron runs deep—foundation-strong for any structure the post requires",
         "The lodge frame carries the mine's weight cleanly — Pell's ironsense reading confirms the timber will hold the shaft's pressure.",
         "The iron in the mine-shaft runs north-south beneath the relay node",
         "Her ironsense can read timber load-distribution through craft partnership",
-        "The reinforced brace now holds without strain"
+        "The reinforced brace now holds without strain",
+        "Slower faults can be reinforced by asking rather than forcing—the timber wants to hold, it just needs permission"
       ],
       "skillsObserved": [
-        "ironsense confirmation of a relay node from interior contact",
-        "Ironsense confirmation of a dormant relay node from direct c",
         "sustained ironsense reading across open terrain",
         "ironsense confirmation of structural weight and foundation s",
         "ironsense reading of timber load-bearing",
-        "co-cast craft collaboration through the soul-bond"
+        "co-cast craft collaboration through the soul-bond",
+        "ironsense reading of secondary fault-line behavior and load-",
+        "sustained co-cast partnership through the soul-bond under fo"
       ],
       "status": "active",
       "statusNote": "At the ridge mine-shaft with Silas, assessing the deeper structural fault. Partnership holding steady.",
       "lastSeen": {
         "locationId": "the_crossing",
-        "day": 14
+        "day": 15
       },
       "bondType": "romantic",
       "bondStage": "partner",
@@ -3578,7 +3692,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 11
+      "met": 12
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -5449,7 +5563,6 @@
     "the_crossing": {
       "visits": 3,
       "notes": [
-        "[d14] A Boundary-Stone ward is now seated at the east-side draw-well's cap — the open channel is warded against uninvited passage; the mark is in the stone.",
         "[d14] East-side draw-well is now sealed with a Boundary-Stone ward at the cap — the mark is seated into the stone. The open relay-node channel beneath is warded against uninvited passage, though the channel remains oriented south-by-southwest toward the left-branch hollow.",
         "[d14] The mill gate is confirmed as a relay network node — dormant but geometrically placed and connected south to the Sheaf and Bowl stall node and north toward the ridge point. It gathers the watershed's spine routes and stands as the oldest point in the Crossing's layout.",
         "[d14] The mill gate is confirmed as an *active* relay hub — not dormant like the wayhouse, but presently channeling signal north, south, and inward in a branched pattern. The keeper's lodge sits beside it, closed and occupied.",
@@ -5460,7 +5573,8 @@
         "[d14] Lodge skeleton now stands at the sight-line threshold—four timber walls, roof-joists bare, doorway open. Structure sound and load-bearing, ready for Fendt's crew to finish.",
         "[d14] A working iron mine now opens at the lodge's eastern face—braced, functional, marked by internal fracture at three feet depth. Iron seam runs north-south beneath the relay node.",
         "[d14] Mine-shaft beneath Threshold Post now marked with two chalk notations: primary stress point at three feet (north-south load — reinforce before extraction) and secondary slower-developing fault deeper in shaft (monitor — will require attention in 6+ months). Both marks are plain and honest.",
-        "[d14] Mine-shaft bracing now reinforced at critical stress point (marked X in chalk)—the load distributes cleanly. Secondary fault marked for monitoring (lighter notation)—will require attention in 6+ months but does not block immediate use."
+        "[d14] Mine-shaft bracing now reinforced at critical stress point (marked X in chalk)—the load distributes cleanly. Secondary fault marked for monitoring (lighter notation)—will require attention in 6+ months but does not block immediate use.",
+        "[d15] Secondary structural fault at depth now reinforced—load distributes cleanly. Warden's mark left for Fendt: monitor in 6+ months. Mine-shaft assessment complete; ready for supervised extraction work."
       ],
       "flags": {
         "waymarker_seated": "stillwaters-trouble",
@@ -5905,7 +6019,7 @@
     "lastTickWorldDay": 41,
     "lastCanonWorldDay": 41,
     "lastGenCount": 1004,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The mill gate keeper's lodge — occupied but not open — a door closed, no smoke, someone inside who is living with the readings but not…",
@@ -10554,8 +10668,8 @@
     "craft": 9,
     "wits": 6
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 2,
   "discoveries": [
     {
       "key": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
@@ -12026,22 +12140,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 23.500765858578237,
-    "cerebral": 20.054743105835378,
-    "social": 7.470816807850719,
-    "generous": 3.3441014140960355,
-    "cautious": 8.908822428010177,
-    "physical": 0.7818101941647315,
-    "risky": 0.18751965722074848,
-    "ruthless": 0.40815182936969635,
-    "carousing": 0.06636037973983745,
-    "amorous": 0.24394040671493938,
-    "patient": 0.14782053469642917,
-    "stealth": 0.000014264539732688862,
-    "devotion": 0.5828961898526255,
-    "craft": 3.287388874956654,
-    "leadership": 1.8974517571358216,
-    "deception": 0.068310783103747
+    "strategic": 23.913246712113782,
+    "cerebral": 19.553374528189494,
+    "social": 7.284046387654451,
+    "generous": 4.260498878743634,
+    "cautious": 8.686101867309922,
+    "physical": 0.7622649393106132,
+    "risky": 0.18283166579022977,
+    "ruthless": 0.39794803363545395,
+    "carousing": 0.06470137024634151,
+    "amorous": 0.2378418965470659,
+    "patient": 0.14412502132901844,
+    "stealth": 0.00001390792623937164,
+    "devotion": 0.5683237851063099,
+    "craft": 3.2052041530827378,
+    "leadership": 1.850015463207426,
+    "deception": 0.06660301352615332
   },
   "aptitudes": [
     "strategist",
@@ -12050,7 +12164,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 928,
+  "actionCount": 929,
   "grantsVersion": 1,
   "reconcileVersion": 30,
   "gallery": [
@@ -12480,8 +12594,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786409358156,
-  "rev": 1663,
+  "updatedAt": 1786409867965,
+  "rev": 1664,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -15680,7 +15794,8 @@
       "hunters_strike": 1,
       "braid_order_sense_palework": 1,
       "the_open_material": 1,
-      "the_called_form": 1
+      "the_called_form": 1,
+      "brace": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -15770,7 +15885,8 @@
       "draw_down": 25,
       "braid_order_sense_palework": 26,
       "the_open_material": 28,
-      "the_called_form": 28
+      "the_called_form": 28,
+      "brace": 42
     }
   },
   "companionBonds": {
@@ -16424,7 +16540,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 134
+    "the_center": 135
   },
   "foreclosed": [
     "rootkin",
@@ -16666,10 +16782,10 @@
     {
       "id": "sess-25",
       "startedAt": "2026-08-11T00:47:50.273Z",
-      "lastAt": "2026-08-11T00:49:18.155Z",
+      "lastAt": "2026-08-11T00:57:47.961Z",
       "startDay": 42,
       "endDay": 42,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [
@@ -17025,17 +17141,17 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 299,
-    "choices": 298,
-    "characterDeltas": 134,
-    "scene": 299,
-    "npcUpdates": 268,
+    "sceneSummary": 300,
+    "choices": 299,
+    "characterDeltas": 135,
+    "scene": 300,
+    "npcUpdates": 269,
     "factUpdates": 25,
-    "placeUpdates": 63,
+    "placeUpdates": 64,
     "codexUpdates": 187,
     "timeOps": 284,
     "imagePrompt": 11,
-    "sceneEnded": 79,
+    "sceneEnded": 80,
     "itemUpdates": 7,
     "questUpdates": 41,
     "offer": 32,
@@ -17056,7 +17172,7 @@
     "markDefiningMoment": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 299,
+  "_opTurns": 300,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -17372,10 +17488,11 @@
     "ask": 1,
     "plan": 4,
     "negotiate": 2,
-    "prepare": 4,
+    "prepare": 5,
     "investigate": 1,
     "craft": 3,
-    "help": 1
+    "help": 2,
+    "discipline": 1
   },
   "aptitudeEarnCount": {},
   "bondLog": [

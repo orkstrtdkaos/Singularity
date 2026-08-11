@@ -7,10 +7,15 @@
    "riverBearing": 156,
    "riverDistanceDeg": 0.27,
    "uphillBearing": 210,
+   "relief": 0.015,
    "roadsOut": [
     {
      "to": "echo_river_crossing",
      "bearing": -88
+    },
+    {
+     "to": "harmonic_heights_terrace",
+     "bearing": -97
     },
     {
      "to": "radiant_plateau_edge",
@@ -18,10 +23,9 @@
     },
     {
      "to": "sunken_choir",
-     "bearing": -96
+     "bearing": -101
     }
-   ],
-   "relief": 0.015
+   ]
   },
   "_reading": "Its own seed names them and nobody made them places: 'Water wheels turn along the Echo River; terraced gardens climb the lower slopes. THE VILLAGE WELL AND THE RIVER DOCK ARE THE TWO CENTRES of daily life.' ⛔ Two centres is a LAYOUT INSTRUCTION and it has been sitting in the prose.",
   "radiusMetres": 420,
@@ -118,9 +122,10 @@
  },
  "echo_river_crossing": {
   "_measured": {
-   "riverBearing": -124,
+   "riverBearing": 168,
    "riverDistanceDeg": 3.83,
    "uphillBearing": 75,
+   "relief": 0.017,
    "roadsOut": [
     {
      "to": "millbrook",
@@ -128,10 +133,17 @@
     },
     {
      "to": "disputed_zone_fringe",
-     "bearing": 90
+     "bearing": 92
+    },
+    {
+     "to": "archive_hollow",
+     "bearing": 97
+    },
+    {
+     "to": "greywater_stilts",
+     "bearing": 116
     }
-   ],
-   "relief": 0.017
+   ]
   },
   "_dataFlag": "⛔ ITS NEAREST TRACED RIVER IS 3.83° AWAY — about 425 km — AND ITS ENTIRE IDENTITY IS A BRIDGE OVER THE ECHO. `waterauth.json` authors a river here and the built hydrology does not carry one to it. ⚠️ I am placing the bridge on the fiction, not on the measurement, and flagging the gap rather than quietly bending the layout around bad data. SNG-403b.",
   "radiusMetres": 300,
@@ -174,11 +186,12 @@
     "id": "erc_fisher_shacks",
     "name": "The Empty Fisher Shacks",
     "localMap": {
-     "bearing": -124,
+     "bearing": 168,
      "metres": 220
     },
     "why": "⚠️ 'Fisher shacks stand empty' — riverward and UPSTREAM, where the contamination is worst. They are empty for a reason and the position says why.",
-    "basis": "river"
+    "basis": "river",
+    "_rebearing": "⛔ SNG-407 drift: was -124°, now 168° — its river moved when the town did."
    },
    {
     "id": "erc_granite_shoulders",
@@ -208,9 +221,10 @@
  },
  "greyhearth": {
   "_measured": {
-   "riverBearing": 23,
+   "riverBearing": -61,
    "riverDistanceDeg": 2.57,
    "uphillBearing": 135,
+   "relief": 0.104,
    "roadsOut": [
     {
      "to": "the_crossing",
@@ -220,8 +234,7 @@
      "to": "the_quiet_ground",
      "bearing": 30
     }
-   ],
-   "relief": 0.104
+   ]
   },
   "_reading": "'A town that buries for every road that meets here — the Crossing's dead and the Palelands' both.' ⛔ A BURYING TOWN'S LAYOUT IS ITS TRAFFIC: the dead arrive by road and go uphill.",
   "radiusMetres": 380,
@@ -288,8 +301,10 @@
  },
  "the_cogitarium": {
   "_measured": {
+   "riverBearing": 118,
+   "riverDistanceDeg": 12.29,
    "uphillBearing": 30,
-   "riverDistanceDeg": 12.3,
+   "relief": 0.567,
    "roadsOut": [
     {
      "to": "the_middle_way",
@@ -299,8 +314,7 @@
      "to": "the_held_yard",
      "bearing": -60
     }
-   ],
-   "relief": 0.567
+   ]
   },
   "_verticalFinding": "⛔ THIS ONE BREAKS THE HORIZONTAL FRAME AND IT SHOULD. Its two promoted places are an ENTRANCE HALL and a THIRD TERRACE — the same footprint at different heights. ⚠️ AN INTERIOR NEEDS A VERTICAL AXIS. `localMap` needs an optional `level`: 0 ground, positive up, negative below. Without it the Cogitarium's two rooms land on top of each other and the map says they are the same place.",
   "radiusMetres": 160,
@@ -336,9 +350,8 @@
  "_generalisation": "⛔ EIGHT LAYOUTS, 38 SITES, AND THE RULE SET GREW BY MEASURING RATHER THAN BY GUESSING. The four Valley towns gave: water trades riverward, terraces uphill, fields on the flat, markets on the roads. The four contrast towns broke that usefully — ⚠️ GREYWATER (relief 0.002) proved UPHILL IS NOISE ON FLAT GROUND; ⚠️ KINDLEROW (relief 0.541, no water within 9°) is the mirror, and its cistern EXISTS BECAUSE THE TERRAIN FORCED IT; ⛔ THE SERVICE WAYS broke the horizontal frame entirely — a tunnel network has depth, not a radius; ⚠️ THE FIGURE WORKS had NO strong gradient at all, and there the TRADITION carried the layout. ⛔ THAT IS THE ENGINE'S PRECEDENCE ORDER: strong gradient first, tradition aesthetic second, and never free invention.",
  "greywater_stilts": {
   "_measured": {
-   "riverBearing": -7,
+   "riverBearing": -12,
    "riverDistanceDeg": 6.94,
-   "marshDistanceDeg": 0.37,
    "uphillBearing": 90,
    "relief": 0.002,
    "roadsOut": [
@@ -347,8 +360,12 @@
      "bearing": 85
     },
     {
+     "to": "disputed_zone_fringe",
+     "bearing": 86
+    },
+    {
      "to": "echo_river_crossing",
-     "bearing": 83
+     "bearing": -58
     }
    ]
   },
@@ -417,8 +434,8 @@
  },
  "kindlerow": {
   "_measured": {
-   "riverBearing": 0,
-   "riverDistanceDeg": 9.0,
+   "riverBearing": 92,
+   "riverDistanceDeg": 8.99,
    "uphillBearing": 330,
    "relief": 0.541,
    "roadsOut": [
@@ -501,9 +518,10 @@
  },
  "the_service_ways": {
   "_measured": {
+   "riverBearing": 129,
+   "riverDistanceDeg": 6.73,
    "uphillBearing": 285,
    "relief": 0.018,
-   "riverDistanceDeg": 6.73,
    "roadsOut": [
     {
      "to": "pressureholt",
@@ -512,6 +530,10 @@
     {
      "to": "the_axis_gate",
      "bearing": -118
+    },
+    {
+     "to": "the_gearlands_verge",
+     "bearing": 146
     }
    ]
   },
@@ -564,8 +586,8 @@
  },
  "the_figure_works": {
   "_measured": {
-   "riverBearing": -124,
-   "riverDistanceDeg": 6.83,
+   "riverBearing": -37,
+   "riverDistanceDeg": 6.82,
    "uphillBearing": 165,
    "relief": 0.053,
    "roadsOut": [
@@ -626,5 +648,6 @@
  },
  "_basisNote": "⛔ SNG-404 §2 asked CCode to tune the relief threshold against these eight layouts. ⚠️ MY OWN DATA COULD NOT ANSWER IT AND I HAD TO FIX THE DATA FIRST. I recorded intent in PROSE (`why`) and nothing machine-readable, so 'did this site use the uphill gradient?' could only be guessed by comparing bearings — and that guess is wrong: Greywater's skiff landing sits at bearing 85 against a noise-uphill of 90, so it READS as uphill-placed when it was placed on the ROAD. ⛔ AT RELIEF 0.002 THE UPHILL BEARING IS NOISE, AND NOISE COINCIDES WITH THINGS. `basis` now states which gradient decided each placement: river | uphill | anti-uphill | road | anti-road | between | prose | tradition | inferred. THE THRESHOLD IS TUNABLE FROM THIS FIELD, not from bearing arithmetic.",
  "_thresholdFinding": "⛔ CCODE ASKED ME TO TUNE THE 0.05 RELIEF THRESHOLD AGAINST THESE EIGHT. I did, and THERE IS NO SUCH THRESHOLD — the classes overlap:\n   uphill USED at relief: 0.015, 0.017, 0.104, 0.541, 0.567\n   uphill NOT used at:    0.002, 0.018, 0.053\n⛔ MILLBROOK USED UPHILL AT 0.015 AND THE FIGURE-WORKS DID NOT AT 0.053 — three times the relief and no uphill placement. ⚠️ RELIEF ALONE DOES NOT DECIDE, AND MY OWN PRECEDENCE ORDER WAS BACKWARDS.\nThe reason is in the prose: Millbrook's seed says 'terraced gardens CLIMB THE LOWER SLOPES', so the terraces go uphill however slight the slope. The Figure-Works seed says nothing about ground at all.\n⛔ CORRECTED ORDER: PROSE FIRST, GRADIENT SECOND. When a location's own text names a slope, a shore or a water, that is a DIRECT INSTRUCTION and it wins regardless of what the terrain measures. The relief threshold only decides in the ABSENCE of prose — and on three samples (0.002 no, 0.018 no, 0.053 no, 0.541 yes) all I can honestly say is that it sits somewhere between 0.053 and 0.541. ⚠️ THAT IS A WIDE BRACKET AND I WILL NOT NARROW IT ON THREE POINTS.",
- "_towardNote": "⛔ SNG-404 §5. `toward` NAMES WHICH ROAD. CCode: 'road is 14 of your 33 placements and cannot be placed without knowing WHICH road.' He is right — a bearing alone is only meaningful while the destination stands still, and SNG-407 moved eleven locations. ⚠️ `relation`: `on` = astride the way (11 of 15, exact to 0°) · `near` = beside it but set back (Mara Wells' store 18° off, the survey camp 24° off — both deliberately not IN the traffic) · `away` = placed by its ABSENCE. ⛔ THE `away` CASE IS THE ONE THAT PROVES THE FIELD IS NEEDED: Greywater's Deep Platforms sit at 178° from the Echo River Crossing road — 'whoever needed somewhere the aligned powers don't reach'. A bare bearing cannot say 'as far from that road as the town allows'; a named road with `away` can, and it STAYS TRUE IF THE ROAD MOVES."
+ "_towardNote": "⛔ SNG-404 §5. `toward` NAMES WHICH ROAD. CCode: 'road is 14 of your 33 placements and cannot be placed without knowing WHICH road.' He is right — a bearing alone is only meaningful while the destination stands still, and SNG-407 moved eleven locations. ⚠️ `relation`: `on` = astride the way (11 of 15, exact to 0°) · `near` = beside it but set back (Mara Wells' store 18° off, the survey camp 24° off — both deliberately not IN the traffic) · `away` = placed by its ABSENCE. ⛔ THE `away` CASE IS THE ONE THAT PROVES THE FIELD IS NEEDED: Greywater's Deep Platforms sit at 178° from the Echo River Crossing road — 'whoever needed somewhere the aligned powers don't reach'. A bare bearing cannot say 'as far from that road as the town allows'; a named road with `away` can, and it STAYS TRUE IF THE ROAD MOVES.",
+ "_driftAudit": "⛔ RE-MEASURED AFTER SNG-407. Four of eight towns had a river bearing drift past 25° — Echo River Crossing 68°, Greyhearth 84°, Kindlerow 92°, the Figure-Works 87°. ⚠️ BUT ONLY 1 OF 38 PLACEMENTS ACTUALLY MOVED, because `basis` says which gradient each one used: 14 are `road` and roads move WITH the town, 5 are `prose`, 3 `tradition`, 3 `between`. Only the `river` and `uphill` ones were exposed. ⛔ THAT IS THE FIELD EARNING ITSELF. Without `basis` I would have had to re-derive all 38 by hand or leave all 38 suspect; with it the audit was five placements and a measurement."
 }

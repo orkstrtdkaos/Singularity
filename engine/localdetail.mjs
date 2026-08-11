@@ -62,13 +62,36 @@ export function nearestRiver(pos, hydrology) {
  *  eight rather than taken from her provisional 0.05. */
 export function uphillOf(pos, terrainFn, { radiusDeg = 0.4, samples = 24 } = {}) {
   if (typeof terrainFn !== "function") return null;
-  const conv = Math.max(0.12, Math.cos(pos[0] * R));
+  // ⛔ THE RING MUST BE A RING, AND LATITUDE ARITHMETIC DOES NOT MAKE ONE AT A POLE. This offset the
+  // latitude directly and clamped to ±89.9 — so at the Crossing, which sits at latitude −90 EXACTLY,
+  // half the ring collapsed onto one clamped parallel and the uphill bearing came out 0 where Aevi
+  // measured 165. ⚠️ The same failure as the detail patch in SNG-409 §2, one module along: a step in
+  // latitude is not a step of ground near a pole. Walk a true great-circle distance on a bearing —
+  // the destination-point formula, which has no special case anywhere on the sphere.
+  const stepFrom = (lat0, lon0, bearingDeg, distDeg) => {
+    const la = lat0 * R, d = distDeg * R, th = bearingDeg * R;
+    const sinLat = Math.sin(la) * Math.cos(d) + Math.cos(la) * Math.sin(d) * Math.cos(th);
+    const lat = Math.asin(Math.max(-1, Math.min(1, sinLat))) / R;
+    const lon = lon0 + Math.atan2(Math.sin(th) * Math.sin(d) * Math.cos(la),
+      Math.cos(d) - Math.sin(la) * sinLat) / R;
+    return [lat, ((lon + 540) % 360) - 180];
+  };
+  // ⚠️ AND THE FLAT-LAT RING IS KEPT EVERYWHERE ELSE, BECAUSE IT IS HER CONVENTION AND IT IS SOUND.
+  // Measured at the Marchward (latitude −32): BOTH constructions trace a true ring — ground distance
+  // 0.400° at every sample, either way. They differ only in which bearing LABEL they hang on each point,
+  // and hers is the label her 38 placements were authored against. Swapping wholesale "corrected" the
+  // Marchward from 75 to 30, and would have silently rotated every site she has ever placed.
+  // ⛔ A pole is the only place the flat-lat ring genuinely breaks: there its ground distance runs 0.000
+  // to 0.400 instead of holding steady. So that is the only place the great-circle form is used.
+  const degenerate = Math.abs(pos[0]) > 89;
+  const conv2 = Math.max(0.12, Math.cos(pos[0] * R));
   let hi = null, lo = null, sum = 0, n = 0;
   for (let i = 0; i < samples; i++) {
     const b = (i / samples) * 360;
-    const lat = pos[0] + radiusDeg * Math.cos(b * R);
-    const lon = pos[1] + (radiusDeg * Math.sin(b * R)) / conv;
-    const raw = terrainFn(lon, Math.max(-89.9, Math.min(89.9, lat)))?.raw;
+    const [lat, lon] = degenerate
+      ? stepFrom(pos[0], pos[1], b, radiusDeg)
+      : [pos[0] + radiusDeg * Math.cos(b * R), pos[1] + (radiusDeg * Math.sin(b * R)) / conv2];
+    const raw = terrainFn(lon, Math.max(-89.999, Math.min(89.999, lat)))?.raw;
     if (!Number.isFinite(raw)) continue;
     sum += raw; n++;
     if (!hi || raw > hi.raw) hi = { raw, bearing: b };

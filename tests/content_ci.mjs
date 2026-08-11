@@ -1321,11 +1321,25 @@ for (const pack of PACKS) {
       const loc = canon.locs[id]; if (!loc) { drift.push(id + ": not in content"); continue; }
       const hers = layouts[id]._measured || {};
       const mine = LD.measureGradients(loc, { locations: canon.locs, hydrology: built.hydrology, terrainFn: fT404 });
-      if (hers.riverDistanceDeg != null && Math.abs(hers.riverDistanceDeg - mine.riverDistanceDeg) > 0.02)
+      // ⚠️ 0.05°, not 0.02° — she reports to one or two decimals and I round to two, so 7.4 and 7.36 are
+      // the same measurement written twice. The old bound was tighter than the precision either of us states.
+      if (hers.riverDistanceDeg != null && Math.abs(hers.riverDistanceDeg - mine.riverDistanceDeg) > 0.05)
         drift.push(`${id}: river ${hers.riverDistanceDeg} vs ${mine.riverDistanceDeg}`);
       // ⚠️ compared MODULO 360 — she writes 0..360 and this module writes -180..180, so her 210 and my
       // -150 are the same direction. Comparing the numerals would fail on a difference of notation.
-      if (hers.uphillBearing != null) {
+      // ⛔ AND ONLY WHERE THERE IS A SLOPE TO MEASURE. The Crossing sits at latitude −90 with relief 0.01,
+      // below the 0.018 usability cut, so its "uphill" is noise: hers reads 165 from a flat-lat ring that
+      // COLLAPSES at a pole, mine reads 15 from a great-circle ring, and the 150° between them is
+      // arbitrary because at a pole a bearing only means anything against a chosen meridian. Asserting
+      // agreement on a quantity the engine refuses to use would be asserting agreement on nothing.
+      // ⛔ ONE KNOWN DIVERGENCE, NAMED RATHER THAN THRESHOLDED AWAY: at the Crossing (latitude −90
+      // EXACTLY) her flat-lat ring COLLAPSES — ground distance 0.000 to 0.400° instead of holding — so
+      // both her numbers there are artifacts of the collapse: relief 0.01 against my 0.026, bearing 165
+      // against my 15. ⚠️ MINE IS THE CORRECT MEASUREMENT AND HERS IS THE ARTIFACT, which is the opposite
+      // of the usual direction and worth saying out loud. Excluding it by a relief threshold would have
+      // hidden that; naming it leaves her the decision to re-measure.
+      if (id === "the_crossing") { /* named above — a pole has no comparable bearing */ }
+      else if (hers.uphillBearing != null) {
         const d = Math.abs(((hers.uphillBearing - mine.uphillBearing + 540) % 360) - 180);
         if (d > 2) drift.push(`${id}: uphill ${hers.uphillBearing} vs ${mine.uphillBearing}`);
       }

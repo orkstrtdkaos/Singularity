@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.121";
+const APP_VERSION = "1.9.122";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7035,20 +7035,30 @@ function paintRegionMap(regionId) {
       ctx.textAlign = "center";
       ctx.fillText(String(g.name || g.id) + ((g.level || 0) < 0 ? ` ▾${g.level}` : ""), p.x, p.y);
     }
-    // the ways, with their bends — a road that bends has a reason, and a straight arc would erase it
-    ctx.save();
-    ctx.strokeStyle = "rgba(214,188,138,0.85)"; ctx.lineWidth = 1.8;
-    ctx.lineJoin = "round"; ctx.lineCap = "round";
-    for (const w of authoredMap.ways || []) {
-      const from = CONTENT.locations?.[w.from], to = CONTENT.locations?.[w.to];
-      if (!from?.worldPos || !to?.worldPos) continue;
-      const a = base.toScreen(from.worldPos.longitude, from.worldPos.colatitude - 90, W, H);
-      const b = base.toScreen(to.worldPos.longitude, to.worldPos.colatitude - 90, W, H);
-      ctx.beginPath(); ctx.moveTo(a.x, a.y);
-      for (const wp of w.waypoints || []) { const q = fromCentre(wp.bearing, wp.km); ctx.lineTo(q.x, q.y); }
-      ctx.lineTo(b.x, b.y); ctx.stroke();
+    // ⛔ WAYS SUPPRESSED UNTIL THE DATA AGREES WITH ITSELF (po/REPLY_ccode_SNG-414_ways.md). Measured
+    // across all 21 authored ways: the waypoint chain detours 4.8× against the direct line under the
+    // localMap convention, and 4.76–5.23× under every other bearing sense, handedness and scale I tried
+    // — a real road is 1.0–1.3×. The waypoints and the endpoint positions are describing different
+    // geography, and one endpoint pair (`radiant_plateau_edge` → `the-low-lamp-inn`) is the SAME POINT,
+    // because the Inn is an SNG-396 promotion that inherits its parent's position.
+    // ⚠️ Drawn anyway they put a tangle across the whole region. A road that is not there is worse than
+    // no road, so this waits on Aevi rather than guessing which of three readings she meant.
+    // `waysReady` is the flag she sets when the two halves agree.
+    if (authoredMap.waysReady) {
+      ctx.save();
+      ctx.strokeStyle = "rgba(214,188,138,0.85)"; ctx.lineWidth = 1.8;
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
+      for (const w of authoredMap.ways || []) {
+        const from = CONTENT.locations?.[w.from], to = CONTENT.locations?.[w.to];
+        if (!from?.worldPos || !to?.worldPos) continue;
+        const a = base.toScreen(from.worldPos.longitude, from.worldPos.colatitude - 90, W, H);
+        const b = base.toScreen(to.worldPos.longitude, to.worldPos.colatitude - 90, W, H);
+        ctx.beginPath(); ctx.moveTo(a.x, a.y);
+        for (const wp of w.waypoints || []) { const q = fromCentre(wp.bearing, wp.km); ctx.lineTo(q.x, q.y); }
+        ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+      ctx.restore();
     }
-    ctx.restore();
   }
 
   // the places, by their real position and their authored kind

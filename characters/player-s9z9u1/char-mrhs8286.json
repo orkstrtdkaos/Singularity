@@ -2137,14 +2137,19 @@
         "player": null,
         "summary": "Silas reads a third fault as deliberate, ordered work—someone engineered the seep—and breaks from the assessment to run. The chase begins at the ridge, the valley open beneath, the gate north and west.",
         "narration": "You break away mid-reach—not from Pell, but from what the stone beneath your feet is telling you. The seep isn't just water-work. It's deliberate. Ordered. The kind of slow dissolution that takes *intention*, not time alone.\n\nYou're already moving toward the shaft's mouth when Pell calls after you—not in anger, in understanding. She reads you the way she reads iron. *Go.* One word. Permission and release both.\n\nThe climb is fast—handholds you've marked, ground you know. Behind you the torch-flicker bounces off wet stone, and behind that, the sound of boots on slate. Pell follows because of course she does, because whatever you've read in that deep seep has her ironsense sharp and ready. The mine shaft spits you both out into pre-dawn gray, and the ridge opens around you—moorland, sight-lines, the valley falling away south and east.\n\nYour lungs burn. Pell's breath comes steady beside you, that unfair runner's wind that comes from blacksmith's work and long-distance road. The made gate lies north and west, a two-minute run if the ground doesn't betray you. Behind you, nothing moves yet. But the stone read something your craft-sense named plainly: *this was made to close. Someone knew how to make it close.*"
+      },
+      {
+        "player": null,
+        "summary": "The Threshold Post assessment breaks into a chase—Silas reads deliberate, ordered work in the deep seam and runs. Pell gives chase without question, boots on slate, both moving hard toward the made gate and the road north.",
+        "narration": "You break away mid-stride—not from Pell, but from what the stone beneath your feet is telling you. The seep isn't just water-work. It's deliberate. Ordered. The kind of slow dissolution that takes *intention*, not time alone.\n\nPell doesn't hesitate. She reads you the way she reads iron. *Go.* One word. Permission and release both.\n\nThe climb is fast—handholds you've marked, ground you know. Behind you the torch-flicker bounces off wet stone, and behind that, the sound of boots on slate. Pell follows because of course she does, because whatever you've read in that deep seam has her ironsense sharp and ready. The shaft's mouth opens to moorland grey and unforgiving—open ground, sight-lines clear for miles south and east. The made gate sits northwest, two minutes' running distance, a smudge of darker air against the lighter sky.\n\nYour breath comes hard. The ridge is treacherous—slate and loose shale, the kind of ground that gives without warning. Behind, Pell's breathing matches yours, stride for stride. She knows what you've read. She doesn't know yet what it means, but her body already understands that you need distance from that stone, and she will give it to you or die trying."
       }
     ],
     "lastTurn": {
-      "narration": "You break away mid-reach—not from Pell, but from what the stone beneath your feet is telling you. The seep isn't just water-work. It's deliberate. Ordered. The kind of slow dissolution that takes *intention*, not time alone.\n\nYou're already moving toward the shaft's mouth when Pell calls after you—not in anger, in understanding. She reads you the way she reads iron. *Go.* One word. Permission and release both.\n\nThe climb is fast—handholds you've marked, ground you know. Behind you the torch-flicker bounces off wet stone, and behind that, the sound of boots on slate. Pell follows because of course she does, because whatever you've read in that deep seep has her ironsense sharp and ready. The mine shaft spits you both out into pre-dawn gray, and the ridge opens around you—moorland, sight-lines, the valley falling away south and east.\n\nYour lungs burn. Pell's breath comes steady beside you, that unfair runner's wind that comes from blacksmith's work and long-distance road. The made gate lies north and west, a two-minute run if the ground doesn't betray you. Behind you, nothing moves yet. But the stone read something your craft-sense named plainly: *this was made to close. Someone knew how to make it close.*",
-      "sceneSummary": "Silas reads a third fault as deliberate, ordered work—someone engineered the seep—and breaks from the assessment to run. The chase begins at the ridge, the valley open beneath, the gate north and west.",
+      "narration": "You break away mid-stride—not from Pell, but from what the stone beneath your feet is telling you. The seep isn't just water-work. It's deliberate. Ordered. The kind of slow dissolution that takes *intention*, not time alone.\n\nPell doesn't hesitate. She reads you the way she reads iron. *Go.* One word. Permission and release both.\n\nThe climb is fast—handholds you've marked, ground you know. Behind you the torch-flicker bounces off wet stone, and behind that, the sound of boots on slate. Pell follows because of course she does, because whatever you've read in that deep seam has her ironsense sharp and ready. The shaft's mouth opens to moorland grey and unforgiving—open ground, sight-lines clear for miles south and east. The made gate sits northwest, two minutes' running distance, a smudge of darker air against the lighter sky.\n\nYour breath comes hard. The ridge is treacherous—slate and loose shale, the kind of ground that gives without warning. Behind, Pell's breathing matches yours, stride for stride. She knows what you've read. She doesn't know yet what it means, but her body already understands that you need distance from that stone, and she will give it to you or die trying.",
+      "sceneSummary": "The Threshold Post assessment breaks into a chase—Silas reads deliberate, ordered work in the deep seam and runs. Pell gives chase without question, boots on slate, both moving hard toward the made gate and the road north.",
       "choices": [
         {
-          "label": "Run straight for the made gate—call Pell to follow and get through before whatever's coming catches up",
+          "label": "Keep running—aim for the made gate and cross through to open ground beyond",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {},
@@ -2155,22 +2160,38 @@
             "flee",
             "careful"
           ],
-          "abilityId": "break_away",
+          "abilityId": null,
           "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Use Shadowstep to pull ahead—step between the moorland's shadow-pools and buy ground faster than running can",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Call back to Pell—name what you read in the stone and ask if she felt it through the iron",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "communicate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Shadowstep to put distance between yourself and the shaft—step from one shadow to the next across the moorland",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "flee",
-            "risky"
+            "craft",
+            "flee"
           ],
           "abilityId": "shadowstep",
           "energyCost": 4,
@@ -2179,36 +2200,18 @@
           "emergenceId": null
         },
         {
-          "label": "Slow down and turn to face whatever's coming—your Deathsense can read what made that seep, and you need to know before you run",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "very hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "risky",
-            "careful"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Raise the ridge's shadow into a trailing barrier—a wall of dark behind you to slow pursuit, buying Pell time to catch up",
+          "label": "Slow and turn—read the stone around you with Order-Sense to understand what's being engineered and where it goes",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "defend",
-            "guard"
+            "study",
+            "craft"
           ],
-          "abilityId": "the_shadow_work",
-          "energyCost": 3,
+          "abilityId": "order_sense",
+          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -2231,23 +2234,24 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The ridge node at pre-dawn—moorland open and unforgiving, sight-lines clear for miles south and east. Grey light, still air, the sound of boots on slate and the called gate visible northwest as a smudge of darker air against the lighter sky.",
+        "setting": "The ridge node at pre-dawn—moorland open and unforgiving, grey light and still air. The Threshold Post lodge skeleton stands at the sight-line threshold to the south. The made gate sits northwest, a smudge of darker air against lighter sky, two minutes' running distance. The ground beneath your feet is slate and loose shale—treacherous, unforgiving, offering no purchase without care.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Running hard beside Silas, breath steady, hand free and ready—reading the ground ahead and trusting the man ahead of her without hesitation or question"
+            "state": "Running hard beside Silas at speed—boots finding purchase on slate, breath steady, one hand free and ready. Her ironsense is sharp; she reads the stone as well as Silas does. She follows without question because she understands the urgency in his movement."
           }
         ],
         "objects": [
-          "The ridge node beneath your feet",
+          "The ridge node, underfoot",
           "The moorland, open and treacherous",
-          "The made gate, northwest, two minutes' running distance",
-          "The valley, falling away south and east below the ridge"
+          "The made gate, northwest—two minutes' running distance",
+          "The valley, falling away south and east below the ridge",
+          "The Threshold Post lodge skeleton, at the sight-line threshold to the south"
         ],
         "threads": [
-          "What made the deep seam—deliberate or natural, and who knew how to engineer it",
-          "What's coming up the mine shaft behind you",
-          "Whether Pell understands what you read in the stone"
+          "What you read in the deep seam—deliberate, ordered work, not natural dissolution",
+          "Where that ordered dissolution leads and what purpose it serves",
+          "Who engineered it and why they did it on a schedule that runs to completion on its own timeline"
         ]
       },
       "npcUpdates": [
@@ -2259,14 +2263,18 @@
           "gender": "woman",
           "pronouns": "she/her",
           "description": null,
-          "note": "Running with Silas at the ridge node—read the shift in his craft-sense and did not ask questions. Said *Go*, gave release, runs hard beside him without hesitation or doubt. This is the trust earned by naming it plainly and meaning it.",
+          "note": "At the Threshold Post ridge node on Day 15 at dawn—read Silas's need to run in his body-language and his craft-sense shift, gave him release without hesitation or question, and now chases him across the moorland. Her ironsense is sharp and her presence certain.",
           "learned": [
-            "Whatever Silas read in the deep seam made his craft-sense go sharp and ordered—not a natural fault"
+            "Silas read something in the deep seam that demanded immediate distance—not a danger in the moment but a truth that changed everything",
+            "Whatever he read has his craft-sense ordered and sharp, and that means she trusts it completely"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "Ironsense reading of the moorland stone at speed",
+            "Boots finding purchase on dangerous ground without hesitation"
+          ],
           "relationshipDelta": 0,
-          "status": null,
-          "statusNote": "Running hard beside Silas at the ridge node pre-dawn, her ironsense steady and her presence certain. Trusts what he has read."
+          "status": "active",
+          "statusNote": "Running at Silas's side across the ridge moorland at dawn—breath steady, craft-sense sharp, trusting him completely"
         }
       ],
       "factUpdates": [],
@@ -2278,10 +2286,15 @@
           "label": "The Water Crisis",
           "kind": "mystery",
           "entityId": null,
-          "fact": "The deep seam beneath the Threshold Post is engineered — its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
+          "fact": "The deep seam beneath the Threshold Post is engineered—its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
           "links": [
-            "the-actor-with-a-list",
+            "millbrook",
+            "the-edge-district-ledger",
+            "mara-wells",
+            "veth-stillwater-ondra",
+            "the-second-thread",
             "what-the-water-remembers",
+            "the-actor-with-a-list",
             "the-threshold-post"
           ]
         }
@@ -2290,54 +2303,64 @@
       "partyOps": [],
       "generateRequest": [],
       "encounterOps": [],
-      "newEncounter": null,
+      "newEncounter": {
+        "type": "chase",
+        "name": "The Ridge Escape",
+        "setup": "Silas breaks from the deep shaft after reading deliberate, ordered work in the seam. Pell gives chase across treacherous moorland toward the made gate. Ground and breath—no weapons, only footing, wind, and the question of distance.",
+        "lethal": false,
+        "opponent": {
+          "name": "Pell Ran Marsh (The Chase)",
+          "health": 5,
+          "threat": 0,
+          "yieldAt": null,
+          "fleeDifficulty": null,
+          "tacticTags": [
+            "relentless",
+            "grounded",
+            "reading-the-ground",
+            "steady-breath"
+          ]
+        }
+      },
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0,
-        "why": "a run from shelter to open ground"
-      },
+      "timeOps": null,
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Two figures running across grey moorland at pre-dawn, the ridge node falling away behind them, the made gate a smudge of darkness northwest against lighter sky. Pell's breath steady and her face calm. Silas's craft-sense electric. No sound but boots on stone and the wind of their own speed.",
-      "newAbility": null,
+      "imagePrompt": "Two runners crossing moorland slate at dawn—grey light, breath visible, boots finding treacherous purchase on stone. The made gate looms northwest as a darker smudge against lighter sky. Behind and beside each other, their bodies reading the dangerous ground without slowing.",
+      "sceneEnded": false,
       "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "gambitApt": false
     },
     "sceneState": {
-      "setting": "The ridge node at pre-dawn—moorland open and unforgiving, sight-lines clear for miles south and east. Grey light, still air, the sound of boots on slate and the called gate visible northwest as a smudge of darker air against the lighter sky.",
+      "setting": "The ridge node at pre-dawn—moorland open and unforgiving, grey light and still air. The Threshold Post lodge skeleton stands at the sight-line threshold to the south. The made gate sits northwest, a smudge of darker air against lighter sky, two minutes' running distance. The ground beneath your feet is slate and loose shale—treacherous, unforgiving, offering no purchase without care.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Running hard beside Silas, breath steady, hand free and ready—reading the ground ahead and trusting the man ahead of her"
+          "state": "Running hard beside Silas at speed—boots finding purchase on slate, breath steady, one hand free and ready. Her ironsens"
         }
       ],
       "objects": [
-        "The ridge node beneath your feet",
+        "The ridge node, underfoot",
         "The moorland, open and treacherous",
-        "The made gate, northwest, two minutes' running distance",
-        "The valley, falling away south and east below the ridge"
+        "The made gate, northwest—two minutes' running distance",
+        "The valley, falling away south and east below the ridge",
+        "The Threshold Post lodge skeleton, at the sight-line threshold to the south"
       ],
       "threads": [
-        "What made the deep seam—deliberate or natural, and who knew how to engineer it",
-        "What's coming up the mine shaft behind you",
-        "Whether Pell understands what you read in the stone"
+        "What you read in the deep seam—deliberate, ordered work, not natural dissolution",
+        "Where that ordered dissolution leads and what purpose it serves",
+        "Who engineered it and why they did it on a schedule that runs to completion on its own timeline"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
     "day": 15,
-    "hour": 6,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [
@@ -3762,7 +3785,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] At the ridge relay node, ironsense confirmed the ridge's iron-deep weight and foundation stability. Named the placement's structural truth—whatever is built here will not move.",
         "[d14] At the lodge threshold with ironsense half-open to the relay node—confirming the frame's weight-distribution and the post's iron-deep stability. Quiet approval of the work.",
         "[d14] At the ridge, standing at the lodge threshold with ironsense half-open to the relay node beneath — confirming the frame's weight-distribution and the mine's iron foundation through direct contact with timber and earth.",
         "[d14] At the ridge mine-shaft, used ironsense to read timber load and co-cast The Raised Thing with Silas to reinforce the bracing. Her presence was steady and certain; the work settled true. Memory answered her call through the soul-bond.",
@@ -3771,28 +3793,29 @@
         "[d15] At the deep fault-mark in the shaft—confirmed the slow-dissolving seam through ironsense and marked it plainly. Hand steady, craft-sense reading deeper than Silas's own. The partnership holding clean through the night-work.",
         "[d15] In the deep chamber of the Threshold Post mine-shaft on Day 15 late night—read the third structural fault through ironsense and marked it plainly for future wardens. Her hand steady, her craft-sense reading deeper than the light could reach. The partnership holding clean through the night-work.",
         "[d15] Chasing Silas deep into the Threshold Post mine-shaft at speed—the fight broke and the pursuit began. Her breath steady, her eyes on him, her body reading the stone as well as his does.",
-        "[d15] Running with Silas at the ridge node—read the shift in his craft-sense and did not ask questions. Said *Go*, gave release, runs hard beside him without hesitation or doubt. This is the trust earned by naming it plainly and meaning it."
+        "[d15] Running with Silas at the ridge node—read the shift in his craft-sense and did not ask questions. Said *Go*, gave release, runs hard beside him without hesitation or doubt. This is the trust earned by naming it plainly and meaning it.",
+        "[d15] At the Threshold Post ridge node on Day 15 at dawn—read Silas's need to run in his body-language and his craft-sense shift, gave him release without hesitation or question, and now chases him across the moorland. Her ironsense is sharp and her presence certain."
       ],
       "knownFacts": [
-        "Slower faults can be reinforced by asking rather than forcing—the timber wants to hold, it just needs permission",
-        "The deep seam has been slowly separating for decades—old tired, not fresh",
         "The deep seam is dissolving slowly through water-work—decades of patient dissolution, not fresh fracture.",
         "Water-seep is the load-bearing problem in the chamber below the main shaft.",
         "A mark made with patience carries more weight than one made in haste.",
         "She will chase when he runs",
         "The dark of the shaft does not slow her",
-        "Whatever Silas read in the deep seam made his craft-sense go sharp and ordered—not a natural fault"
+        "Whatever Silas read in the deep seam made his craft-sense go sharp and ordered—not a natural fault",
+        "Silas read something in the deep seam that demanded immediate distance—not a danger in the moment but a truth that changed everything",
+        "Whatever he read has his craft-sense ordered and sharp, and that means she trusts it completely"
       ],
       "skillsObserved": [
-        "ironsense reading of secondary fault-line behavior and load-",
-        "sustained co-cast partnership through the soul-bond under fo",
         "ironsense reading of decades-old fault-formation",
         "confirmed deep-seam moisture-path through ironsense at depth",
         "Ground-reading at speed",
-        "Sustained pursuit"
+        "Sustained pursuit",
+        "Ironsense reading of the moorland stone at speed",
+        "Boots finding purchase on dangerous ground without hesitatio"
       ],
       "status": "active",
-      "statusNote": "Running hard beside Silas at the ridge node pre-dawn, her ironsense steady and her presence certain. Trusts what he has read.",
+      "statusNote": "Running at Silas's side across the ridge moorland at dawn—breath steady, craft-sense sharp, trusting him completely",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 15
@@ -3811,7 +3834,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 16
+      "met": 17
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -6142,7 +6165,7 @@
     "lastTickWorldDay": 42,
     "lastCanonWorldDay": 42,
     "lastGenCount": 1009,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "The mill gate keeper's lodge — occupied but not open — a door closed, no smoke, someone inside who is living with the readings but not…",
@@ -11431,7 +11454,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d13] Millbrook's intake ran gray-green four of six mornings by day 13 — the discoloration is now a reliable pattern at the village level, not an anomaly. Mara has reduced draw volume accordingly.",
           "[d13] Dara Holt's relay confirms a third sleeve junction at the east-bend intake is showing the same iron-oxide seep as the others — repair materials staged in sequence by Dara, Calvar walking the line.",
           "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
           "[d13] Warden Coll confirmed: the committee can move on a named authority and a signed witness account without a full council vote. He asked for the document roll, a signed statement naming Grael, and a check-in protocol before Silas enters the Zone. Formal aid requests to the Rootkin and Cogitants are…",
@@ -11454,7 +11476,8 @@
           "[d14] The reclamation site has a fourth connection: a buried substrate-thread running southwest toward the lower watershed, seeding downstream wells with clean water for fifteen years. When the site closes, the feeding stops. The wells hold what they have, but the thread goes quiet.",
           "[d14] The reclamation site's closing instruction was amended on Day 14 at dawn — complete the task, push clean water through the substrate-thread to the lower wells, then stop. Both the watershed and the downstream wells will clear. The substrate-thread goes quiet when the site closes, but the wells…",
           "[d14] Mara Wells informed via shadow-sheet on Day 14 at dawn — the work is complete, the downstream wells will clear first, the watershed will follow on its own schedule.",
-          "[d15] The deep seam beneath the Threshold Post is engineered — its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule."
+          "[d15] The deep seam beneath the Threshold Post is engineered — its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
+          "[d15] The deep seam beneath the Threshold Post is engineered—its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule."
         ],
         "links": [
           "millbrook",
@@ -12959,8 +12982,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786410511302,
-  "rev": 1677,
+  "updatedAt": 1786410566499,
+  "rev": 1680,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16905,7 +16928,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 139
+    "the_center": 141
   },
   "foreclosed": [
     "rootkin",
@@ -17147,10 +17170,10 @@
     {
       "id": "sess-25",
       "startedAt": "2026-08-11T00:47:50.273Z",
-      "lastAt": "2026-08-11T01:08:31.301Z",
+      "lastAt": "2026-08-11T01:09:26.499Z",
       "startDay": 42,
       "endDay": 42,
-      "beats": 7
+      "beats": 8
     }
   ],
   "company": [
@@ -17386,6 +17409,35 @@
         "fightDefId": "chase-re-harm-pell-ran-marsh-0",
         "opponentName": "Pell Ran Marsh"
       }
+    },
+    "chase-chase-chase-re-harm-pell-ran-marsh-0": {
+      "schemaVersion": 1,
+      "id": "chase-chase-chase-re-harm-pell-ran-marsh-0",
+      "type": "duel",
+      "flavor": "chase",
+      "name": "The Chase — Pell Ran Marsh",
+      "setup": "You break off — Pell Ran Marsh gives chase across the broken country. Lose them, or be run down.",
+      "fromRandom": true,
+      "lethal": false,
+      "danger": 2,
+      "opponent": {
+        "name": "Pell Ran Marsh",
+        "health": 5,
+        "threat": 24,
+        "yieldAt": 0,
+        "fleeDifficulty": 15,
+        "spectrum": {
+          "violence_peace": -0.3,
+          "chaos_order": -0.3
+        },
+        "tacticTags": [],
+        "notes": "Runs you down for what breaking off cost them — gives up when the ground and their wind run out."
+      },
+      "_chainedFrom": {
+        "kind": "fight",
+        "fightDefId": "chase-chase-re-harm-pell-ran-marsh-0",
+        "opponentName": "Pell Ran Marsh"
+      }
     }
   },
   "_intentAsked": {
@@ -17592,17 +17644,17 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 304,
-    "choices": 303,
-    "characterDeltas": 139,
-    "scene": 304,
-    "npcUpdates": 273,
+    "sceneSummary": 305,
+    "choices": 304,
+    "characterDeltas": 140,
+    "scene": 305,
+    "npcUpdates": 274,
     "factUpdates": 25,
     "placeUpdates": 66,
-    "codexUpdates": 189,
+    "codexUpdates": 190,
     "timeOps": 287,
-    "imagePrompt": 14,
-    "sceneEnded": 84,
+    "imagePrompt": 15,
+    "sceneEnded": 85,
     "itemUpdates": 7,
     "questUpdates": 41,
     "offer": 32,
@@ -17617,13 +17669,13 @@
     "inventoryAdd": 2,
     "scene_ended": 2,
     "_applyFailedOp": 7,
-    "newEncounter": 2,
+    "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 16,
+    "gambitApt": 17,
     "markDefiningMoment": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 304,
+  "_opTurns": 305,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -17860,85 +17912,7 @@
   "_pendingLedger": [],
   "locationState": {},
   "_applyFailures": null,
-  "activeEncounter": {
-    "defId": "chase-chase-re-harm-pell-ran-marsh-0",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "chase-chase-re-harm-pell-ran-marsh-0",
-      "type": "duel",
-      "status": "active",
-      "round": 1,
-      "log": [],
-      "opponentHealth": 5,
-      "tactic": null,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "Pell Ran Marsh",
-        "attributes": {
-          "practical": 2,
-          "physical": 2,
-          "mental": 2,
-          "social": 2
-        },
-        "energy": 69,
-        "maxEnergy": 69,
-        "tacticTags": [],
-        "skills": [
-          {
-            "function": "move",
-            "name": "closes the gap",
-            "tier": 1,
-            "attribute": "physical"
-          },
-          {
-            "function": "track",
-            "name": "cuts off your line",
-            "tier": 1,
-            "attribute": "practical"
-          },
-          {
-            "function": "move",
-            "name": "gains ground",
-            "tier": 1,
-            "attribute": "physical"
-          },
-          {
-            "function": "foresee",
-            "name": "anticipates your turn",
-            "tier": 1,
-            "attribute": "mental"
-          }
-        ],
-        "health": 5,
-        "soak": 0,
-        "soakLayers": [],
-        "synthesized": true
-      },
-      "momentum": 0,
-      "opponentEnergy": 69,
-      "_morphedFrom": {
-        "kind": "fight",
-        "note": "you broke from Pell Ran Marsh — now it is ground, not blades"
-      },
-      "turn": {
-        "phase": "sense",
-        "sel": {
-          "sense": [],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": 0,
-        "bonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
-      }
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 42,
     "lastBeat": "witness_power"

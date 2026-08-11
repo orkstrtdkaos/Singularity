@@ -986,6 +986,44 @@ for (const pack of PACKS) {
     const flatPair = WGB.bendRoad(tB, [0, 0], [0, 0.01]);
     check("SNG-421: …with the reason carried on the route, never left implicit",
       typeof flatPair.why === "string" && flatPair.why.length > 10);
+
+    // ⛔ SNG-422 — A NETWORK, NOT A LIST OF EDGES. Erik: "they take the road to the next town or
+    // crossroads then choose the next leg — you would have two nearly parallel roads usually." Where a
+    // journey passes through another town, the direct line is that same journey drawn a second time.
+    const net = WGB.roadNetwork(canon.locs, { k: 1.1 });
+    const adj = {};
+    for (const e of net.roads) { (adj[e.a] = adj[e.a] || []).push(e.b); (adj[e.b] = adj[e.b] || []).push(e.a); }
+    const walk = (s2, t2) => {
+      const q = [s2], v = new Set([s2]);
+      while (q.length) { const x = q.pop(); if (x === t2) return true;
+        for (const y of adj[x] || []) if (!v.has(y)) { v.add(y); q.push(y); } }
+      return false;
+    };
+    // ⛔ FOLDING MUST NOT STRAND ANYTHING, and my first version did exactly that — it folded a journey
+    // onto a town that merely SAT on the line, whether or not a road reached it, leaving 111 of 114
+    // folded journeys unwalkable and 47 places cut off the network. The through-town must be a place you
+    // can actually drive to, and both its legs must survive the fold.
+    const stranded = net.folded.filter((e) => !walk(e.a, e.b));
+    check("SNG-422: folding a journey onto its legs never strands it — the through-town must be reachable",
+      stranded.length === 0, stranded.slice(0, 4).map((e) => e.a + "→" + e.b).join(", "));
+    const isolated = Object.keys(net.positions).filter((id) => !adj[id] && (canon.locs[id].connections || []).length);
+    check("SNG-422: …and no place is cut off the road network by the fold",
+      isolated.length === 0, isolated.slice(0, 5).join(", "));
+
+    // ⛔ SNG-423 — A ROAD THAT LEAVES RUNS OFF THE EDGE. Measured on the Echo Vale: 3 roads inside the
+    // region against 20 leaving it, so drawing the leavers whole put twenty long lines across a frame
+    // holding three real roads — in near-parallel bundles, because many head for the same far country.
+    const extE = WGB.regionExtent("the_echo_vale", canon.locs);
+    const far = canon.locs.the_crossing;
+    const inside = canon.locs.echo_river_crossing;
+    if (far?.worldPos && inside?.worldPos) {
+      const clip = WGB.clipToFrame(
+        { lon: inside.worldPos.longitude, lat: inside.worldPos.colatitude - 90 },
+        { lon: far.worldPos.longitude, lat: far.worldPos.colatitude - 90 }, extE);
+      check("SNG-423: a road leaving the region is CLIPPED at the frame, not drawn across the map",
+        clip.clipped && clip.end.lat >= extE.la0 - 0.01 && clip.end.lat <= extE.la1 + 0.01,
+        `t=${clip.t.toFixed(2)}`);
+    }
   }
 
   // ══ SNG-414 TIER 2 — EVERY REGION HAS A MAP THAT IS SHAPED LIKE A MAP.

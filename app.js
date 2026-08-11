@@ -34,7 +34,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
-import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad } from "./engine/worldglobe.js";
+import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.123";
+const APP_VERSION = "1.9.124";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7045,6 +7045,11 @@ function paintRegionMap(regionId) {
     ctx.save();
     ctx.strokeStyle = "rgba(206,182,136,0.62)"; ctx.lineWidth = 1.4;
     ctx.lineJoin = "round"; ctx.lineCap = "round";
+    // ⚠️ the network folds journeys that go through another town onto their legs, so a triangle does not
+    // draw its third side alongside the other two (SNG-422)
+    const net = roadNetwork(CONTENT.locations, { k: 1.1 });
+    const isRoad = new Set(net.roads.map((e) => (e.a < e.b ? e.a + "|" + e.b : e.b + "|" + e.a)));
+    const exits = [];
     const drawn = new Set();
     for (const id of Object.keys(CONTENT.locations || {})) {
       const l = CONTENT.locations[id];
@@ -7054,6 +7059,7 @@ function paintRegionMap(regionId) {
         const key = id < other ? id + "|" + other : other + "|" + id;
         if (drawn.has(key)) continue;
         drawn.add(key);
+        if (!isRoad.has(key)) continue;                        // this journey is carried by its legs
         const o2 = CONTENT.locations[other];
         if (!o2?.worldPos) continue;
         // ⚠️ AN EDGE LEAVING THE REGION still draws, running off the frame — a region with no roads out
@@ -7062,8 +7068,13 @@ function paintRegionMap(regionId) {
         // least CLIMB, which is why real roads follow valleys — so the shape comes from the ground rather
         // than from invention. 143 of 182 edges find a detour worth taking; 39 stay straight because none
         // does, and a straight road on flat ground is the honest answer rather than a missing feature.
+        // ⛔ A ROAD THAT LEAVES RUNS TO THE FRAME AND STOPS. Measured on this very region: 3 roads
+        // inside it, 20 leaving — drawing the leavers whole streaked twenty long lines across a map with
+        // three real roads on it, in near-parallel bundles because many head for the same far country.
+        const clip = clipToFrame({ lon: l.worldPos.longitude, lat: l.worldPos.colatitude - 90 },
+          { lon: o2.worldPos.longitude, lat: o2.worldPos.colatitude - 90 }, ext);
         const route = bendRoad(_terrain, [l.worldPos.colatitude - 90, l.worldPos.longitude],
-          [o2.worldPos.colatitude - 90, o2.worldPos.longitude]);
+          [clip.end.lat, clip.end.lon]);
         const first = base.toScreen(route.points[0][1], route.points[0][0], W, H);
         ctx.beginPath(); ctx.moveTo(first.x, first.y);
         for (let i = 1; i < route.points.length; i++) {
@@ -7071,7 +7082,20 @@ function paintRegionMap(regionId) {
           ctx.lineTo(q.x, q.y);
         }
         ctx.stroke();
+        // ⚠️ and it says where it is going, which is the only true thing about its far end on this map
+        if (clip.clipped) exits.push({ at: base.toScreen(clip.end.lon, clip.end.lat, W, H),
+          name: o2.name || other });
       }
+    }
+    ctx.restore();
+    // the destinations, lettered at the frame — a road atlas exits its roads and names them
+    ctx.save();
+    ctx.fillStyle = "rgba(226,214,180,0.9)";
+    ctx.font = "600 9px system-ui, sans-serif";
+    for (const ex of exits) {
+      ctx.textAlign = ex.at.x > W * 0.72 ? "right" : ex.at.x < W * 0.28 ? "left" : "center";
+      const dx = ex.at.x > W * 0.72 ? -4 : ex.at.x < W * 0.28 ? 4 : 0;
+      ctx.fillText("→ " + String(ex.name).slice(0, 20), ex.at.x + dx, Math.max(10, Math.min(H - 4, ex.at.y - 3)));
     }
     ctx.restore();
 

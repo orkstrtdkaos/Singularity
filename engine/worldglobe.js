@@ -742,6 +742,101 @@ export function regionExtent(regionId, locations, { padFrac = 0.18, authored = n
   };
 }
 
+/** ⛔ SNG-423 — A ROAD THAT LEAVES THE REGION RUNS OFF THE EDGE; IT DOES NOT CROSS THE MAP TO GET THERE.
+ *  Measured on the Echo Vale: **3 roads inside the region and 20 leaving it.** Drawing each leaver all
+ *  the way to its far endpoint streaked twenty long lines across a frame that contains three real roads,
+ *  and because many of them leave toward the same distant country they arrived as near-parallel bundles
+ *  — which is exactly what Erik saw: *"you would have two nearly parallel roads usually."*
+ *
+ *  ⚠️ A REGIONAL MAP EXITS ITS ROADS AT THE FRAME, the way every paper road atlas does: the road goes to
+ *  the edge, and a label says where it is going. That is more informative than the full line, not less —
+ *  the full line's far end was never on this map anyway, and its direction was the only true thing about it.
+ *
+ *  Returns the clipped end point plus the exit side, so the caller can letter it. */
+export function clipToFrame(from, to, extent) {
+  // parametric clip of the segment from→to against the extent rectangle, in lon/lat space
+  const dLon = to.lon - from.lon, dLat = to.lat - from.lat;
+  let tMax = 1;
+  const slab = (p, q) => { // p + t*q inside [lo, hi]
+    if (Math.abs(q.d) < 1e-12) return;
+    const t1 = (q.lo - p) / q.d, t2 = (q.hi - p) / q.d;
+    const enter = Math.min(t1, t2), exit = Math.max(t1, t2);
+    if (exit < tMax) tMax = Math.max(0, exit);
+    if (enter > 0) tMax = Math.min(tMax, Math.max(0, enter));
+  };
+  slab(from.lon, { d: dLon, lo: extent.lo0, hi: extent.lo1 });
+  slab(from.lat, { d: dLat, lo: extent.la0, hi: extent.la1 });
+  const t = Math.max(0, Math.min(1, tMax));
+  const end = { lon: from.lon + dLon * t, lat: from.lat + dLat * t };
+  return { end, clipped: t < 0.999, t };
+}
+
+/** ⛔ SNG-422 — A ROAD NETWORK IS NOT A LIST OF EDGES, and drawing it as one produced exactly the
+ *  artefact Erik named: *"you're drawing roads just by connecting places, but you need to think about
+ *  people travelling. They take the road to the next town or crossroads then choose the next leg. You
+ *  would have two nearly parallel roads usually."*
+ *
+ *  ⚠️ MEASURED: at a detour tolerance of only 1.05×, **114 of 182 connection edges are redundant** —
+ *  there is another place on the way, so a traveller goes through it and the direct line is a second
+ *  road running alongside the first two. 68 edges are real roads; the rest are the same journeys drawn
+ *  twice.
+ *
+ *  ⛔ THIS DISCARDS NO CONNECTION. The graph stays canon for travel; what changes is that a connection is
+ *  DRAWN as the legs that realise it. A→C is on the map — as A→B followed by B→C — which is how someone
+ *  walking it would describe the route anyway.
+ *
+ *  ⚠️ And the through-place must be genuinely on the way: `k` is how much longer the two legs may be than
+ *  the direct line before the direct line earns its own road. */
+export function roadNetwork(locations, { k = 1.08 } = {}) {
+  const R2 = Math.PI / 180;
+  const gc = (a, b) => Math.acos(Math.max(-1, Math.min(1,
+    Math.sin(a[0] * R2) * Math.sin(b[0] * R2) +
+    Math.cos(a[0] * R2) * Math.cos(b[0] * R2) * Math.cos((a[1] - b[1]) * R2)))) / R2;
+  const P = {};
+  for (const id of Object.keys(locations || {})) {
+    const l = locations[id];
+    if (l?.worldPos) P[id] = [l.worldPos.colatitude - 90, l.worldPos.longitude];
+  }
+  const ids = Object.keys(P);
+  const edges = [], seen = new Set();
+  for (const id of ids) {
+    for (const o of locations[id].connections || []) {
+      if (!P[o]) continue;
+      const key = id < o ? id + "|" + o : o + "|" + id;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      edges.push({ a: id, b: o, d: gc(P[id], P[o]) });
+    }
+  }
+  // ⚠️ LONGEST FIRST. A long edge is the one most likely to have a town on the way, and testing it
+  // against everything else first means the short legs it decomposes into survive to carry it.
+  edges.sort((x, y) => y.d - x.d);
+  // ⛔ THE THROUGH-TOWN MUST BE SOMEWHERE YOU CAN ACTUALLY DRIVE TO, and my first version forgot to check.
+  // It folded A→C via any place that merely SAT on the line — so it folded journeys onto legs that do not
+  // exist as roads: 111 of 114 folded edges became unwalkable and 47 places were cut off the network
+  // entirely. ⚠️ "They take the road to the next town" only holds if there IS a road to that town.
+  const nbr = {};
+  for (const e of edges) { (nbr[e.a] = nbr[e.a] || new Set()).add(e.b); (nbr[e.b] = nbr[e.b] || new Set()).add(e.a); }
+  const kept = [], dropped = [];
+  const live = new Set(edges.map((e) => (e.a < e.b ? e.a + "|" + e.b : e.b + "|" + e.a)));
+  const has = (x, y) => live.has(x < y ? x + "|" + y : y + "|" + x);
+  for (const e of edges) {
+    let via = null;
+    // only a shared neighbour can carry the journey — both legs must be roads that survive
+    for (const m of (nbr[e.a] || [])) {
+      if (m === e.b || !nbr[e.b]?.has(m)) continue;
+      if (gc(P[e.a], P[m]) + gc(P[m], P[e.b]) <= k * e.d && has(e.a, m) && has(m, e.b)) { via = m; break; }
+    }
+    if (via) {
+      dropped.push({ ...e, via });
+      // ⚠️ the edge stops being a candidate carrier the moment it is folded, or two edges can fold onto
+      // each other and both disappear — the pair that takes a journey must still be on the map
+      live.delete(e.a < e.b ? e.a + "|" + e.b : e.b + "|" + e.a);
+    } else kept.push(e);
+  }
+  return { roads: kept, folded: dropped, positions: P };
+}
+
 /** ⛔ SNG-421 — A ROAD BENDS BECAUSE SOMEBODY FOUND THE WAY ROUND, so derive the bend from the ground
  *  rather than authoring it. Erik: "the roads are only important in that we need some roads — they can
  *  be redrawn and it sounds like they should be." Aevi's own reason for the Echo Vale's main road is

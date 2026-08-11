@@ -4,31 +4,89 @@
  "_derivation": "⛔ THE THREE GRADIENTS THE WORLD ALREADY KNOWS, measured at each settlement: (1) RIVER BEARING and distance — from the traced hydrology; (2) UPHILL BEARING — sample the generator's raw elevation around the point; (3) ROAD BEARINGS — from connections' worldPos. ⚠️ Water trades go riverward. Terraces and orchards go uphill. Fields take the flat. Gates and markets sit on the road bearings. Everything else fills the middle.",
  "millbrook": {
   "_measured": {
-   "riverBearing": 156,
-   "riverDistanceDeg": 0.27,
-   "uphillBearing": 210,
-   "relief": 0.015,
+   "riverBearing": -134,
+   "riverDistanceMi": 2.2,
+   "riverFlowBearing": 162,
+   "uphillBearing": 300,
+   "relief": 0.062,
    "roadsOut": [
     {
      "to": "echo_river_crossing",
-     "bearing": -88
+     "bearing": 174,
+     "mi": 14
     },
     {
-     "to": "harmonic_heights_terrace",
-     "bearing": -97
+     "to": "gen-disputed-zone-left-branch-entrance",
+     "bearing": -13,
+     "mi": 146
     },
     {
-     "to": "radiant_plateau_edge",
-     "bearing": 91
-    },
-    {
-     "to": "sunken_choir",
-     "bearing": -101
+     "to": "gen-watershed-road",
+     "bearing": -13,
+     "mi": 153
     }
    ]
   },
-  "_reading": "Its own seed names them and nobody made them places: 'Water wheels turn along the Echo River; terraced gardens climb the lower slopes. THE VILLAGE WELL AND THE RIVER DOCK ARE THE TWO CENTRES of daily life.' ⛔ Two centres is a LAYOUT INSTRUCTION and it has been sitting in the prose.",
-  "radiusMetres": 420,
+  "_rebuiltNote": "⛔ SNG-427 REBUILT. Erik: 'you have the Well IN the river.' He was right — the well sat at 0,0 while the river ran 11 miles away, so the dock at 300 m reached water it could not reach. ⚠️ MILLBROOK IS NOW 2.2 MILES FROM THE ECHO, 14 MILES ABOVE THE CROSSING. The layout is rebuilt on the measured channel: river at −134°, flowing 162°, uphill at 300°.",
+  "radiusMetres": 900,
+  "_frameNote": "⚠️ 900 m — the village and its near fields. The river bank is inside the frame at 2.2 mi? No: 3540 m. THE BANK IS OUTSIDE THE VILLAGE FRAME and is reached by the mill lane.",
+  "extent": [
+   {
+    "id": "mb_river",
+    "name": "The Echo",
+    "kind": "water",
+    "bearing": -134,
+    "fromMetres": 3200,
+    "widthMetres": 260,
+    "flowBearing": 162,
+    "why": "⛔ 2.2 MILES OFF — outside the village proper. The town is on the terrace above the floodplain, which is why it has survived spring floods."
+   },
+   {
+    "id": "mb_floodplain",
+    "name": "The Wet Meadows",
+    "kind": "field",
+    "bearing": -134,
+    "fromMetres": 1400,
+    "radiusMetres": 1500,
+    "why": "⚠️ Between the village and the bank. Hay and grazing — flooded most springs, which is why nobody builds there."
+   },
+   {
+    "id": "mb_open_fields",
+    "name": "The Open Fields",
+    "kind": "field",
+    "bearing": 30,
+    "fromMetres": 520,
+    "radiusMetres": 600,
+    "why": "⛔ The grain ground, on the flat away from the river. The encounterFlavor is farmers arguing about irrigation shares — these are what they argue over."
+   },
+   {
+    "id": "mb_terraces",
+    "name": "The Terraced Gardens",
+    "kind": "field",
+    "bearing": 300,
+    "fromMetres": 420,
+    "radiusMetres": 420,
+    "why": "'Terraced gardens climb the lower slopes' — on the measured uphill at 300°, relief 0.062."
+   },
+   {
+    "id": "mb_coppice",
+    "name": "The Coppice",
+    "kind": "wood",
+    "bearing": 250,
+    "fromMetres": 600,
+    "radiusMetres": 320,
+    "why": "⚠️ NOBODY WROTE THIS DOWN AND THE VILLAGE REQUIRES IT: water wheels need timber and repair, and a farming village coppices rather than fells. Upslope of the terraces, downwind of the houses."
+   },
+   {
+    "id": "mb_built",
+    "name": "The Village",
+    "kind": "built",
+    "bearing": 0,
+    "fromMetres": 0,
+    "radiusMetres": 230,
+    "why": "⛔ THE BUILT GROUND — a few hundred people, so about 230 m across. Everything else on this map is what they work."
+   }
+  ],
   "sites": [
    {
     "id": "millbrook_well",
@@ -37,86 +95,87 @@
      "bearing": 0,
      "metres": 0
     },
-    "why": "⛔ One of the two centres the seed names. It IS the centre — bearing and distance zero.",
-    "basis": "prose"
+    "basis": "prose",
+    "why": "⛔ ONE OF THE TWO CENTRES the seed names — and it is a WELL, dug because the river is two miles off. That is why the village has one."
    },
    {
-    "id": "millbrook_dock",
-    "name": "The River Dock",
+    "id": "millbrook_green",
+    "name": "The Green",
+    "kind": "open",
     "localMap": {
-     "bearing": 156,
-     "metres": 300
+     "bearing": 80,
+     "metres": 90
     },
-    "why": "⛔ The other centre. ON THE RIVER BEARING — the one placement the world layer dictates outright.",
-    "basis": "river"
-   },
-   {
-    "id": "millbrook_wheels",
-    "name": "The Water Wheels",
-    "localMap": {
-     "bearing": 168,
-     "metres": 360
-    },
-    "why": "Downstream of the dock on the same water. ⚠️ Wheels go below the landing so the boats are not fighting the race.",
-    "basis": "river"
-   },
-   {
-    "id": "millbrook_terraces",
-    "name": "The Terraced Gardens",
-    "localMap": {
-     "bearing": 210,
-     "metres": 260
-    },
-    "why": "⛔ 'Climb the lower slopes' — placed on the MEASURED UPHILL BEARING, not a guess.",
-    "basis": "uphill"
-   },
-   {
-    "id": "millbrook_fields",
-    "name": "The Irrigation Fields",
-    "localMap": {
-     "bearing": 30,
-     "metres": 380
-    },
-    "why": "⚠️ The flat: opposite the uphill, and off the river so the ditches can run TO them. The encounterFlavor is farmers arguing about irrigation shares — this is what they are arguing over.",
-    "basis": "anti-uphill"
+    "basis": "prose",
+    "why": "⚠️ Beside the well. Where the irrigation-share arguments actually happen."
    },
    {
     "id": "millbrook_smithy",
     "name": "The Smithy",
     "localMap": {
-     "bearing": -88,
-     "metres": 180
+     "bearing": 174,
+     "metres": 150
     },
-    "why": "On the road out to Echo River Crossing. ⚠️ A smith sits where the carts already stop, and near enough the water to quench.",
     "basis": "road",
     "toward": {
      "road": "echo_river_crossing",
      "relation": "on"
-    }
+    },
+    "why": "On the Crossing road at the edge of the built ground — a smith sits where the carts stop, and downwind."
    },
    {
     "id": "gen-mara-wells-store",
     "name": "Mara Wells' Store",
     "localMap": {
-     "bearing": -70,
-     "metres": 120
+     "bearing": -13,
+     "metres": 110
     },
-    "why": "⛔ ALREADY A PLACE, promoted from play, and sitting at Millbrook's EXACT coordinates — CCode's 'a room's position is a duplicate' finding, live. Now it stands between the well and the road, which is where a village store stands.",
     "basis": "road",
     "toward": {
-     "road": "echo_river_crossing",
-     "relation": "near"
-    }
+     "road": "gen-watershed-road",
+     "relation": "on"
+    },
+    "why": "⛔ Promoted from play. On the north road, between the well and the way out."
    },
    {
-    "id": "millbrook_commons",
-    "name": "The Commons",
+    "id": "millbrook_mill_lane",
+    "name": "The Mill Lane",
     "localMap": {
-     "bearing": 120,
-     "metres": 140
+     "bearing": -134,
+     "metres": 210
     },
-    "why": "Between the well and the dock — the ground people cross going from one centre to the other, which is what a commons IS.",
-    "basis": "between"
+    "basis": "river",
+    "why": "⛔ THE LANE TO THE WATER. The village is not on the river; this is how it reaches it, and it runs 2 miles to the wheels."
+   },
+   {
+    "id": "millbrook_wheels",
+    "name": "The Water Wheels",
+    "localMap": {
+     "bearing": -134,
+     "metres": 3400
+    },
+    "basis": "river",
+    "why": "⛔ ON THE BANK, 2.1 MILES OUT — not in the village. 'Water wheels turn ALONG the Echo River.' ⚠️ The mills are a walk from the houses, which is normal and which the old layout got wrong by putting the river through the square."
+   },
+   {
+    "id": "millbrook_landing",
+    "name": "The Landing",
+    "localMap": {
+     "bearing": -140,
+     "metres": 3500
+    },
+    "basis": "river",
+    "why": "⚠️ Just downstream of the wheels so boats are not fighting the race. The seed's 'river dock' — and it is at the river, not at the well."
+   },
+   {
+    "id": "millbrook_ford",
+    "name": "The Old Ford",
+    "localMap": {
+     "bearing": -120,
+     "metres": 3300
+    },
+    "basis": "river",
+    "why": "⛔ NOBODY WROTE THIS DOWN AND THE GEOGRAPHY REQUIRES IT: 14 miles above the Crossing, someone crossed here before the bridge existed. It is why the bridge was built downstream, where the banks are granite."
    }
   ]
  },

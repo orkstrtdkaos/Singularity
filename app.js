@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.119";
+const APP_VERSION = "1.9.120";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6943,11 +6943,28 @@ async function loadWorldGenerator() {
   return _fineGenShared;
 }
 function queueRegionMap(regionId) {
-  // the base needs the generator and the terrain asset; both are lazy, so wait for them rather than
-  // racing — and if either never arrives, the list below is still a working map
-  Promise.resolve(loadWorldGenerator()).then(() => {
-    requestAnimationFrame(() => { try { paintRegionMap(regionId); } catch { /* the list still works */ } });
-  }).catch(() => { /* enhancement only */ });
+  // ⛔ THE REGION TIER MUST LOAD ITS OWN TERRAIN. `loadTerrain()` was called only by the WORLD tier, so
+  // opening a region directly — which is what the map does by default — left `_terrain` null and the
+  // painter bailed on its first guard, drawing a blank canvas with no error anywhere.
+  // ⚠️ Found by LOOKING at it. Every gate passed, because they call the render pieces directly and none
+  // of them asks who loaded what: a dependency acquired by a SIBLING screen is not a dependency this
+  // screen has, and no unit test can see the difference.
+  // ⚠️ AND IT WAITS FOR THE CANVAS TO EXIST. `renderMap` returns a STRING that the caller inserts, so
+  // this fires BEFORE the element is in the document — one requestAnimationFrame was not enough, the
+  // painter kept returning at `!cv`, and a blank canvas survived a green suite twice because of it.
+  const tryPaint = (left) => {
+    if (document.getElementById("region-map")) {
+      // ⚠️ A CATCH THAT HIDES ITS REASON IS THE BUG I KEEP FINDING IN OTHER PEOPLE'S CODE. The diagram
+      // below genuinely is a working fallback, so this must not throw — but it must SAY why it fell back.
+      try { paintRegionMap(regionId); }
+      catch (err) { console.warn("[region-map] could not draw — falling back to the diagram:", err); }
+      return;
+    }
+    if (left > 0) requestAnimationFrame(() => tryPaint(left - 1));
+  };
+  Promise.all([loadWorldGenerator(), loadTerrain()])
+    .then(() => tryPaint(60))
+    .catch(() => { /* enhancement only — the connection diagram below is still a working map */ });
 }
 function paintRegionMap(regionId) {
   const cv = document.getElementById("region-map");

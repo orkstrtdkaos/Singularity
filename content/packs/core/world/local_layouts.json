@@ -1245,5 +1245,184 @@
     "why": "⛔ The way to the third terrace — uphill bearing, because a terrace climbs the slope it is cut into. THE ONE PLACEMENT THAT LINKS TWO SITES OF THE SAME PARENT."
    }
   ]
+ },
+ "old_switchback": {
+  "_measured": {
+   "riverBearing": 115,
+   "riverDistanceDeg": 5.1,
+   "uphillBearing": 345,
+   "relief": 0.01,
+   "roadsOut": [
+    {
+     "to": "kestrels_roost",
+     "bearing": 93
+    },
+    {
+     "to": "thornwake_glade",
+     "bearing": 111
+    },
+    {
+     "to": "gen-cogitarium-third-terrace",
+     "bearing": 10
+    }
+   ]
+  },
+  "_ruleFinding": "⛔ RELIEF 0.01 AND IT IS A MOUNTAIN ROAD. Second case after the Harmonic terrace where the world layer measures the ground the feature MEETS rather than the feature: switchbacks are cut into a face whose scale is below the generator's floor. ⚠️ PROSE CARRIES IT ENTIRELY — 'stone-cut switchbacks CLINGING TO THE MOUNTAINSIDE', 'up toward the HIGH PASS'.",
+  "radiusMetres": 700,
+  "_frameNote": "⚠️ THE LARGEST LOCAL FRAME IN THE CORPUS (700 m) because this is not a town — it is a ROAD, and a road's local map is linear.",
+  "sites": [
+   {
+    "id": "switchback_waystation",
+    "name": "The Ruined Waystation",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0,
+     "level": 0
+    },
+    "basis": "prose",
+    "why": "⛔ 'A single ruined waystation marks THE HALFWAY POINT, roof half-gone, HEARTH STILL USABLE.' The centre by the seed's own arithmetic — and the hearth is why anyone stops."
+   },
+   {
+    "id": "switchback_lower_bend",
+    "name": "The Lower Bend",
+    "localMap": {
+     "bearing": 111,
+     "metres": 420,
+     "level": -1
+    },
+    "basis": "road",
+    "toward": {
+     "road": "thornwake_glade",
+     "relation": "on"
+    },
+    "why": "⛔ LEVEL −1. You come up from the wilds; the first hairpin is below the waystation and out of sight of it."
+   },
+   {
+    "id": "switchback_upper_bend",
+    "name": "The Upper Bend",
+    "localMap": {
+     "bearing": 345,
+     "metres": 400,
+     "level": 1
+    },
+    "basis": "uphill",
+    "why": "⚠️ Above the waystation on the measured uphill. From here you can see whether anyone is at the hearth before you commit to arriving."
+   },
+   {
+    "id": "switchback_the_pass",
+    "name": "The High Pass",
+    "localMap": {
+     "bearing": 10,
+     "metres": 650,
+     "level": 2
+    },
+    "basis": "road",
+    "toward": {
+     "road": "gen-cogitarium-third-terrace",
+     "relation": "on"
+    },
+    "why": "⛔ THE TOP, AND THE WAY OUT OF THE VALE. Erik: 'a way out of the Valley, connecting to other parts of the world.' Level 2 — everything else here is below it."
+   },
+   {
+    "id": "switchback_roost_fork",
+    "name": "The Roost Fork",
+    "localMap": {
+     "bearing": 93,
+     "metres": 300,
+     "level": 0
+    },
+    "basis": "road",
+    "toward": {
+     "road": "kestrels_roost",
+     "relation": "on"
+    },
+    "why": "⚠️ Where the Roost trail leaves the switchback. 'Travelers between the Roost, the wilds, and the pass' — three ways, and this is where two of them part."
+   }
+  ]
+ },
+ "thornwake_glade": {
+  "_measured": {
+   "riverBearing": -51,
+   "riverDistanceDeg": 5.4,
+   "marshDistanceDeg": 4.9,
+   "uphillBearing": 15,
+   "relief": 0.011,
+   "roadsOut": [
+    {
+     "to": "disputed_zone_fringe",
+     "bearing": 85
+    },
+    {
+     "to": "old_switchback",
+     "bearing": -66
+    },
+    {
+     "to": "ent_deepwood",
+     "bearing": 47
+    }
+   ]
+  },
+  "_ruleFinding": "⚠️ relief 0.011, no usable gradient, no water within 5°. ⛔ PROSE CARRIES ALL OF IT — and the prose is unusually specific about ARRANGEMENT, which is the layout instruction.",
+  "radiusMetres": 320,
+  "sites": [
+   {
+    "id": "thornwake_arranged_clearing",
+    "name": "The Arranged Clearing",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "basis": "prose",
+    "why": "⛔ 'CLEARINGS THAT SEEM ARRANGED.' The central one, and the word is 'seem' — nobody will say by whom."
+   },
+   {
+    "id": "thornwake_deliberate_trees",
+    "name": "The Deliberate Trees",
+    "localMap": {
+     "bearing": 15,
+     "metres": 170
+    },
+    "basis": "prose",
+    "why": "⚠️ 'Old trees grown STRANGE AND DELIBERATE.' Placed uphill because that is where you notice the arrangement — you look up the slope and the spacing is wrong."
+   },
+   {
+    "id": "thornwake_warden_edge",
+    "name": "The Warden Edge",
+    "localMap": {
+     "bearing": 85,
+     "metres": 260
+    },
+    "basis": "road",
+    "toward": {
+     "road": "disputed_zone_fringe",
+     "relation": "on"
+    },
+    "why": "⛔ 'The few who live AT ITS EDGE call themselves wardens and won't say more.' At the edge, on the road in — they meet you before you are inside."
+   },
+   {
+    "id": "thornwake_watching_ground",
+    "name": "The Watching Ground",
+    "localMap": {
+     "bearing": 200,
+     "metres": 190
+    },
+    "basis": "prose",
+    "why": "⚠️ 'Animals that watch TOO KNOWINGLY.' Away from every road — the part of the grove nobody has a reason to cross, which is where you notice being watched."
+   },
+   {
+    "id": "thornwake_deepwood_path",
+    "name": "The Deepwood Path",
+    "localMap": {
+     "bearing": 47,
+     "metres": 250
+    },
+    "basis": "road",
+    "toward": {
+     "road": "ent_deepwood",
+     "relation": "on"
+    },
+    "why": "⛔ Toward the Ents. 'Something tends this place' — and the Ents are three days that way, which the wardens do not comment on either."
+   }
+  ]
  }
 }

@@ -649,5 +649,323 @@
  "_basisNote": "⛔ SNG-404 §2 asked CCode to tune the relief threshold against these eight layouts. ⚠️ MY OWN DATA COULD NOT ANSWER IT AND I HAD TO FIX THE DATA FIRST. I recorded intent in PROSE (`why`) and nothing machine-readable, so 'did this site use the uphill gradient?' could only be guessed by comparing bearings — and that guess is wrong: Greywater's skiff landing sits at bearing 85 against a noise-uphill of 90, so it READS as uphill-placed when it was placed on the ROAD. ⛔ AT RELIEF 0.002 THE UPHILL BEARING IS NOISE, AND NOISE COINCIDES WITH THINGS. `basis` now states which gradient decided each placement: river | uphill | anti-uphill | road | anti-road | between | prose | tradition | inferred. THE THRESHOLD IS TUNABLE FROM THIS FIELD, not from bearing arithmetic.",
  "_thresholdFinding": "⛔ CCODE ASKED ME TO TUNE THE 0.05 RELIEF THRESHOLD AGAINST THESE EIGHT. I did, and THERE IS NO SUCH THRESHOLD — the classes overlap:\n   uphill USED at relief: 0.015, 0.017, 0.104, 0.541, 0.567\n   uphill NOT used at:    0.002, 0.018, 0.053\n⛔ MILLBROOK USED UPHILL AT 0.015 AND THE FIGURE-WORKS DID NOT AT 0.053 — three times the relief and no uphill placement. ⚠️ RELIEF ALONE DOES NOT DECIDE, AND MY OWN PRECEDENCE ORDER WAS BACKWARDS.\nThe reason is in the prose: Millbrook's seed says 'terraced gardens CLIMB THE LOWER SLOPES', so the terraces go uphill however slight the slope. The Figure-Works seed says nothing about ground at all.\n⛔ CORRECTED ORDER: PROSE FIRST, GRADIENT SECOND. When a location's own text names a slope, a shore or a water, that is a DIRECT INSTRUCTION and it wins regardless of what the terrain measures. The relief threshold only decides in the ABSENCE of prose — and on three samples (0.002 no, 0.018 no, 0.053 no, 0.541 yes) all I can honestly say is that it sits somewhere between 0.053 and 0.541. ⚠️ THAT IS A WIDE BRACKET AND I WILL NOT NARROW IT ON THREE POINTS.",
  "_towardNote": "⛔ SNG-404 §5. `toward` NAMES WHICH ROAD. CCode: 'road is 14 of your 33 placements and cannot be placed without knowing WHICH road.' He is right — a bearing alone is only meaningful while the destination stands still, and SNG-407 moved eleven locations. ⚠️ `relation`: `on` = astride the way (11 of 15, exact to 0°) · `near` = beside it but set back (Mara Wells' store 18° off, the survey camp 24° off — both deliberately not IN the traffic) · `away` = placed by its ABSENCE. ⛔ THE `away` CASE IS THE ONE THAT PROVES THE FIELD IS NEEDED: Greywater's Deep Platforms sit at 178° from the Echo River Crossing road — 'whoever needed somewhere the aligned powers don't reach'. A bare bearing cannot say 'as far from that road as the town allows'; a named road with `away` can, and it STAYS TRUE IF THE ROAD MOVES.",
- "_driftAudit": "⛔ RE-MEASURED AFTER SNG-407. Four of eight towns had a river bearing drift past 25° — Echo River Crossing 68°, Greyhearth 84°, Kindlerow 92°, the Figure-Works 87°. ⚠️ BUT ONLY 1 OF 38 PLACEMENTS ACTUALLY MOVED, because `basis` says which gradient each one used: 14 are `road` and roads move WITH the town, 5 are `prose`, 3 `tradition`, 3 `between`. Only the `river` and `uphill` ones were exposed. ⛔ THAT IS THE FIELD EARNING ITSELF. Without `basis` I would have had to re-derive all 38 by hand or leave all 38 suspect; with it the audit was five placements and a measurement."
+ "_driftAudit": "⛔ RE-MEASURED AFTER SNG-407. Four of eight towns had a river bearing drift past 25° — Echo River Crossing 68°, Greyhearth 84°, Kindlerow 92°, the Figure-Works 87°. ⚠️ BUT ONLY 1 OF 38 PLACEMENTS ACTUALLY MOVED, because `basis` says which gradient each one used: 14 are `road` and roads move WITH the town, 5 are `prose`, 3 `tradition`, 3 `between`. Only the `river` and `uphill` ones were exposed. ⛔ THAT IS THE FIELD EARNING ITSELF. Without `basis` I would have had to re-derive all 38 by hand or leave all 38 suspect; with it the audit was five placements and a measurement.",
+ "harmonic_heights_terrace": {
+  "_measured": {
+   "riverBearing": -126,
+   "riverDistanceDeg": 7.4,
+   "uphillBearing": 45,
+   "relief": 0.001,
+   "roadsOut": [
+    {
+     "to": "millbrook",
+     "bearing": 80
+    },
+    {
+     "to": "disputed_zone_fringe",
+     "bearing": 80
+    },
+    {
+     "to": "sunken_choir",
+     "bearing": 82
+    }
+   ]
+  },
+  "_ruleFinding": "⛔ RELIEF 0.001 — the flattest reading in the corpus, flatter than Greywater. ⚠️ AND YET IT IS A TERRACE, on a Heights. The world layer is measuring the VALLEY FLOOR the terrace meets; the terrace itself is below the generator's floor. ⛔ THIS IS THE CASE WHERE PROSE MUST OUTRANK GRADIENT OUTRIGHT: 'the lowest terrace… where the sonic civilization MEETS THE VALLEY FLOOR' says the slope direction, and no measurement here can.",
+  "radiusMetres": 380,
+  "sites": [
+   {
+    "id": "hht_chime_line",
+    "name": "The Chime Line",
+    "localMap": {
+     "bearing": 225,
+     "metres": 300,
+     "level": 1
+    },
+    "basis": "prose",
+    "why": "⛔ 'Wind chimes THE SIZE OF TREES tune the weather.' Upslope from the terrace edge, level 1 — they must be above what they are tuning."
+   },
+   {
+    "id": "hht_crystal_row",
+    "name": "The Grown Row",
+    "localMap": {
+     "bearing": 270,
+     "metres": 150,
+     "level": 0
+    },
+    "basis": "prose",
+    "why": "'Buildings GROWN from phononic crystal hum at frequencies you feel in your teeth.' The terrace proper."
+   },
+   {
+    "id": "hht_terrace_edge",
+    "name": "The Terrace Edge",
+    "localMap": {
+     "bearing": 80,
+     "metres": 260,
+     "level": 0
+    },
+    "basis": "prose",
+    "toward": {
+     "road": "millbrook",
+     "relation": "on"
+    },
+    "why": "⛔ WHERE IT MEETS THE VALLEY FLOOR — the seed's own words, and the roads all leave on this bearing because down is where everyone else is."
+   },
+   {
+    "id": "hht_quiet_room",
+    "name": "The Quiet Room",
+    "localMap": {
+     "bearing": 180,
+     "metres": 210,
+     "level": 0
+    },
+    "basis": "prose",
+    "why": "⚠️ 'Everything resonates.' A civilisation of sound needs ONE ROOM THAT DOES NOT, and someone will have built it. Nobody wrote this down; the place requires it."
+   },
+   {
+    "id": "hht_survey_billet",
+    "name": "The Survey Billet",
+    "localMap": {
+     "bearing": 82,
+     "metres": 330,
+     "level": 0
+    },
+    "basis": "road",
+    "toward": {
+     "road": "sunken_choir",
+     "relation": "near"
+    },
+    "why": "The contamination teams stage from here — set back off the road, and pointedly not sharing quarters with the Plateau's people."
+   }
+  ]
+ },
+ "the_thinning": {
+  "_measured": {
+   "riverBearing": -10,
+   "riverDistanceDeg": 4.3,
+   "uphillBearing": 330,
+   "relief": 0.05,
+   "roadsOut": [
+    {
+     "to": "the_lampless_hermitage",
+     "bearing": 99
+    },
+    {
+     "to": "the_numen",
+     "bearing": 69
+    },
+    {
+     "to": "the_axis_gate",
+     "bearing": 154
+    }
+   ]
+  },
+  "_ruleFinding": "⚠️ RELIEF 0.05 sits exactly ON the bracket I could not narrow (0.053–0.541). ⛔ AND IT DOES NOT MATTER HERE, because the prose overrides anyway: 'buildings are PROVISIONAL — the Numinous find permanent architecture a slightly embarrassing attachment.' A town that does not commit to buildings does not commit to a slope either.",
+  "radiusMetres": 300,
+  "sites": [
+   {
+    "id": "thinning_waygate",
+    "name": "The Thin Arch",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "basis": "prose",
+    "why": "⛔ THE THINNING IS ITSELF A TIER-2 WAYGATE — the arch is the one permanent thing, and it is the centre because everything else moves around it."
+   },
+   {
+    "id": "thinning_provisional_ring",
+    "name": "The Provisional Ring",
+    "localMap": {
+     "bearing": 200,
+     "metres": 160
+    },
+    "basis": "prose",
+    "why": "⚠️ 'Buildings here are PROVISIONAL.' Not a district — a ring of things that will be somewhere else next season. Its position is an average, honestly."
+   },
+   {
+    "id": "thinning_pole_road",
+    "name": "The Pole Road",
+    "localMap": {
+     "bearing": 69,
+     "metres": 240
+    },
+    "basis": "road",
+    "toward": {
+     "road": "the_numen",
+     "relation": "on"
+    },
+    "why": "⛔ The road to the pure pole, and almost nobody takes it. 318 km to a place with nothing left to come back to."
+   },
+   {
+    "id": "thinning_sitting_stones",
+    "name": "The Sitting Stones",
+    "localMap": {
+     "bearing": 99,
+     "metres": 190
+    },
+    "basis": "road",
+    "toward": {
+     "road": "the_lampless_hermitage",
+     "relation": "on"
+    },
+    "why": "On the hermitage road. ⚠️ People stop here on the way to sitting for years, and some of them do not go on."
+   }
+  ]
+ },
+ "the_crossing": {
+  "_measured": {
+   "riverBearing": 0,
+   "riverDistanceDeg": 3.6,
+   "uphillBearing": 165,
+   "relief": 0.01,
+   "roadsOut": [],
+   "_roadNote": "⛔ `roadsOut` IS EMPTY ON PURPOSE. Every connection the Crossing has is one of its own SITES, at identical coordinates, so the computed bearings all read 0° — CCode's 'a room's position is a duplicate, not an observation', arriving in the road maths. ⚠️ THE TWELVE ROADS ARE FICTION, NOT GRAPH: 'twelve roads leave the Crossing, one per axis.' They are placed at 30° intervals below."
+  },
+  "radiusMetres": 520,
+  "sites": [
+   {
+    "id": "crossing_null_stone",
+    "name": "The Null Stone",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "basis": "prose",
+    "why": "⛔ 'Every axis crosses here at nothing.' The exact centre, and the only place in the world where every axis reads zero."
+   },
+   {
+    "id": "crossing_twelve_mouths",
+    "name": "The Twelve Mouths",
+    "localMap": {
+     "bearing": 0,
+     "metres": 300
+    },
+    "basis": "prose",
+    "why": "⚠️ Where the roads separate — a ring at 300 m, not a point. You can stand at the Null Stone and see every axis leave."
+   },
+   {
+    "id": "crossing_common_table",
+    "name": "The Common Table",
+    "localMap": {
+     "bearing": 30,
+     "metres": 140
+    },
+    "basis": "prose",
+    "why": "⛔ 'An Umbral and a Blazeborn drink at the same table because NEITHER HAS THE STANDING TO MAKE THE OTHER LEAVE.' The most important furniture in the world."
+   },
+   {
+    "id": "crossing_made_arch",
+    "name": "The Made Arch",
+    "localMap": {
+     "bearing": 150,
+     "metres": 220
+    },
+    "basis": "prose",
+    "why": "⛔ WHERE THE MADE GATE WAS CUT — the 27th waygate and the first BUILT, by an Ashwarden. A PLAYER did this, and it stands here because that is where a wright who tends endings was standing."
+   },
+   {
+    "id": "crossing_north_gate",
+    "name": "The North Gate District",
+    "localMap": {
+     "bearing": 0,
+     "metres": 420
+    },
+    "basis": "prose",
+    "why": "Its street and its registry are already canon from play (SNG-396). ⚠️ Named for the road it sits on, which is how districts get named."
+   }
+  ]
+ },
+ "the_marchward": {
+  "_measured": {
+   "riverBearing": -176,
+   "riverDistanceDeg": 13.8,
+   "uphillBearing": 75,
+   "relief": 0.346,
+   "roadsOut": [
+    {
+     "to": "the_redline",
+     "bearing": 3
+    },
+    {
+     "to": "the_stillhold",
+     "bearing": -10
+    },
+    {
+     "to": "the_gralloch",
+     "bearing": -76
+    },
+    {
+     "to": "the_axis_gate",
+     "bearing": -123
+    }
+   ]
+  },
+  "_ruleFinding": "⛔ RELIEF 0.346 — real ground, and the second-steepest town in the corpus after Kindlerow. ⚠️ BUT THE LAYOUT IS POLITICAL, NOT TOPOGRAPHIC: the Redline road (3°) and the Stillhold road (−10°) arrive only 13° apart, so the town's whole problem is that BOTH SIDES COME IN THE SAME GATE.",
+  "radiusMetres": 400,
+  "sites": [
+   {
+    "id": "marchward_the_gate",
+    "name": "The Shared Gate",
+    "localMap": {
+     "bearing": -4,
+     "metres": 280
+    },
+    "basis": "road",
+    "toward": {
+     "road": "the_redline",
+     "relation": "on"
+    },
+    "why": "⛔ THE TWO ROADS CONVERGE 13° APART AND MEET HERE. One gate, both sides, deliberately — 'a place that touches both extremes learns to speak plainly or die.'"
+   },
+   {
+    "id": "marchward_plain_hall",
+    "name": "The Plain Hall",
+    "localMap": {
+     "bearing": 0,
+     "metres": 0
+    },
+    "basis": "prose",
+    "why": "⚠️ 'TRUTH runs high.' Where the speaking-plainly is done, and where both sides are heard in the same room."
+   },
+   {
+    "id": "marchward_outfitters",
+    "name": "The Outfitters",
+    "localMap": {
+     "bearing": -123,
+     "metres": 230
+    },
+    "basis": "road",
+    "toward": {
+     "road": "the_axis_gate",
+     "relation": "on"
+    },
+    "why": "⛔ 'The natural base for exploring the Marches.' On the road OUT, because that is who buys."
+   },
+   {
+    "id": "marchward_upper_watch",
+    "name": "The Upper Watch",
+    "localMap": {
+     "bearing": 75,
+     "metres": 310
+    },
+    "basis": "uphill",
+    "why": "⛔ Uphill on the measured bearing — relief 0.346 gives them a real height, and a town between two poles watches both roads at once."
+   },
+   {
+    "id": "marchward_churn_road",
+    "name": "The Churn Road",
+    "localMap": {
+     "bearing": -76,
+     "metres": 250
+    },
+    "basis": "road",
+    "toward": {
+     "road": "the_gralloch",
+     "relation": "on"
+    },
+    "why": "⚠️ The third road, to Unspooling — the way out that is neither side, which some people take."
+   }
+  ]
+ }
 }

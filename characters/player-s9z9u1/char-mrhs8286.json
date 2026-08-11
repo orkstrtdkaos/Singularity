@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 30,
-  "xp": 2954,
+  "xp": 2959,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -218,7 +218,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 282,
+  "energy": 265,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2182,22 +2182,27 @@
         "player": "Invite Veth and Huginn to practice attending with you now... sit with the ending in the seam for a while and let the name of the place sink deep.",
         "summary": "On the ridge at dawn, Silas, Veth, and Huginn sat together in the death-warden temple—attending the sealed deep seam in silence, letting the warden's work settle into the stone. The threshold holds.",
         "narration": "You settle onto the stone floor beside the sealed deep seam, your back against the timber frame, and speak quietly to Veth and Huginn without ceremony. 'Sit with me. Let's attend together.' It is not a request shaped as one.\n\nVeth understands immediately. She moves to the opposite side of the altar and sits, her spine straight, her breathing already settling into the practiced rhythm of a warden's centering. Huginn descends from the entrance's edge, landing on a timber cross-brace above the seam with a soft scrape of talon on wood. The three of you hold still.\n\nYou let Deathsense settle—not reaching, not reading ahead, but listening to what the stone itself holds. Fifteen years of vigil. An ending that was attended cleanly. The deep seam sealed and honest, its purpose made visible. The name the place carries—*Threshold Post*, sentinel watch, the warden's gate between the watershed's life and the ending of its sickness—begins to live in the silence.\n\nVeth's presence mirrors yours, steady and clear. Huginn's stillness is absolute; the bird's dry regard settles into the stone like a third voice. Minutes pass. The light shifts slightly through the entrance. When you finally open your eyes, the three of you have not moved, and the temple's purpose has soaked deeper—not into you, but into the place itself, confirmed by three wardens' attendance. The seam is no longer merely sealed. It is witnessed."
+      },
+      {
+        "player": "Use The Kept Breath to check your own reserves—you pushed hard in the raising and the meditation both. Name what you need.",
+        "summary": "At the ridge Threshold Post at dawn on Day 15, Silas Weir and Pell Ran Marsh raised a death-warden temple around the engineered deep seam—a threshold for Ashwarden practice. Veth entered and approved its making. The three Ashwardens sat together in meditation, attending the sealed seam's endings. Now, spent from the novel-depth work, Silas reads his own reserves and names what he needs: rest and food, before the road calls again.",
+        "narration": "You turn your attention inward—the way The Kept Breath teaches, a simple accounting of the body's ledger. Your breath slows. You are not depleted, but you are *spent*—the novel-depth raising took its toll, and the meditation held you at the edge of that threshold. Your legs feel heavy. Your hands, when you look at them, are steady enough, but there is a tremble underneath that will pass with food and rest.\n\nYou name it plainly, the way a warden names an ending: 'I need rest. Not long. An hour's quiet, and something to eat.'\n\nPell hears you from where she waits at the entrance—not inside the inner work, but present on the threshold. She nods once, a gesture that says *already holding it*. Veth does not move from her seat across the seam, but her breathing deepens slightly, giving you the space to step back without breaking the temple's centered quiet. Huginn shifts on its cross-brace, talons scratching wood—a sound like approval, or acknowledgment."
       }
     ],
     "lastTurn": {
-      "narration": "You settle onto the stone floor beside the sealed deep seam, your back against the timber frame, and speak quietly to Veth and Huginn without ceremony. 'Sit with me. Let's attend together.' It is not a request shaped as one.\n\nVeth understands immediately. She moves to the opposite side of the altar and sits, her spine straight, her breathing already settling into the practiced rhythm of a warden's centering. Huginn descends from the entrance's edge, landing on a timber cross-brace above the seam with a soft scrape of talon on wood. The three of you hold still.\n\nYou let Deathsense settle—not reaching, not reading ahead, but listening to what the stone itself holds. Fifteen years of vigil. An ending that was attended cleanly. The deep seam sealed and honest, its purpose made visible. The name the place carries—*Threshold Post*, sentinel watch, the warden's gate between the watershed's life and the ending of its sickness—begins to live in the silence.\n\nVeth's presence mirrors yours, steady and clear. Huginn's stillness is absolute; the bird's dry regard settles into the stone like a third voice. Minutes pass. The light shifts slightly through the entrance. When you finally open your eyes, the three of you have not moved, and the temple's purpose has soaked deeper—not into you, but into the place itself, confirmed by three wardens' attendance. The seam is no longer merely sealed. It is witnessed.",
-      "sceneSummary": "On the ridge at dawn, Silas, Veth, and Huginn sat together in the death-warden temple—attending the sealed deep seam in silence, letting the warden's work settle into the stone. The threshold holds.",
+      "narration": "You turn your attention inward—the way The Kept Breath teaches, a simple accounting of the body's ledger. Your breath slows. You are not depleted, but you are *spent*—the novel-depth raising took its toll, and the meditation held you at the edge of that threshold. Your legs feel heavy. Your hands, when you look at them, are steady enough, but there is a tremble underneath that will pass with food and rest.\n\nYou name it plainly, the way a warden names an ending: 'I need rest. Not long. An hour's quiet, and something to eat.'\n\nPell hears you from where she waits at the entrance—not inside the inner work, but present on the threshold. She nods once, a gesture that says *already holding it*. Veth does not move from her seat across the seam, but her breathing deepens slightly, giving you the space to step back without breaking the temple's centered quiet. Huginn shifts on its cross-brace, talons scratching wood—a sound like approval, or acknowledgment.",
+      "sceneSummary": "At the ridge Threshold Post at dawn on Day 15, Silas Weir and Pell Ran Marsh raised a death-warden temple around the engineered deep seam—a threshold for Ashwarden practice. Veth entered and approved its making. The three Ashwardens sat together in meditation, attending the sealed seam's endings. Now, spent from the novel-depth work, Silas reads his own reserves and names what he needs: rest and food, before the road calls again.",
       "choices": [
         {
-          "label": "Step back out into the moorland with Pell and speak about what the temple is becoming.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Step outside and eat from the trail parcels—Aldric's preserved fish and the hard bread. Sit in the early light and let the moorland air clear your head.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "trivial",
           "opposedDifficulty": null,
           "intentTags": [
-            "talk",
-            "comfort"
+            "careful",
+            "sustain"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2206,15 +2211,16 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Veth plainly: what would a true Ashwarden post require that this one does not yet have?",
-          "attribute": "social",
+          "label": "Walk down to the spring-fed draw alone—let the water steady you, refill the waterskins, sit by the source and feel the ridge's offering.",
+          "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
+            "careful",
             "study",
-            "ask"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2223,36 +2229,36 @@
           "emergenceId": null
         },
         {
-          "label": "Use The Kept Breath to check your own reserves—you pushed hard in the raising and the meditation both. Name what you need.",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Call Pell out of the temple and ask her to sit with you—not in the temple's center, but outside on the stone threshold. Let her ground you the way she does, her presence steadier than any meditation.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "trivial",
           "opposedDifficulty": null,
           "intentTags": [
-            "sustain",
-            "careful"
-          ],
-          "abilityId": "the_kept_breath",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Head north toward the made gate—the road is calling and the day is already moving. The temple is done; it is time to go.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "move"
+            "comfortable",
+            "romantic"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Huginn plainly what it sees coming—the bird reads endings. After the meditation, after the work, after the seam was sealed: what does the valley look like from its vantage?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "wary"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -2260,7 +2266,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 35,
+        "energy": -15,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -2272,64 +2278,70 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Veth's quiet readiness to teach you what a true post requires—the standards of the craft, not just the structure",
-        "from": "Veth's own want: to see Silas become a TRUE Ashwarden, right in his judgment, sound in his discipline"
+        "thing": "Siol, unseen for nine days, arrives at the ridge Threshold Post—not by the made gate path, but by the moorland approach. She moves with the ease of someone who has walked the Pale March and knows its corridors. She sees the temple and stops, reading its weight.",
+        "from": "The world's own agenda (SNG-080): Siol has been waiting to witness whether Silas Weir's work would resolve rightly. She recognizes the shape of what he is doing—the Palework-through-grove, the novel-depth making, the threshold held by partnership—and has come to see whether he did it true. She will not say why she came, but her arrival is not accident."
       },
       "stageOps": [],
       "scene": {
-        "setting": "Inside the death-warden temple at the ridge threshold, early morning light falling through the timber frame onto stone floors. The sealed deep seam altar at center. The moorland visible through the open entrance beyond.",
+        "setting": "At the threshold of the death-warden temple on the ridge, early morning light falling through the timber frame. The sealed deep seam altar visible in the chamber's center. The moorland visible through the entrance; the spring-fed draw lies northeast of the high point.",
         "npcsPresent": [
           {
+            "name": "Pell Ran Marsh",
+            "state": "Waiting at the temple entrance—not inside the inner work, but present and steady on the threshold. One hand resting on the timber frame. Her attention on Silas, reading his state the way she reads iron."
+          },
+          {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Seated opposite the seam on the stone floor, back straight, breathing in a warden's rhythm—present and centered in the meditation"
+            "state": "Seated across from the deep seam altar on the stone floor. Spine straight, breathing in warden's rhythm. Still in the meditation's center, giving Silas the space to step back from the inner work without breaking the temple's quiet."
           },
           {
             "name": "Huginn",
-            "state": "Perched on a timber cross-brace above the altar, still and dry-eyed, holding the third presence in the silence"
+            "state": "Perched on a timber cross-brace above the altar. Still and dry-eyed, talons gripping the wood. Holding the third presence in the silence—the crow's own attendance on the ends the seam carries."
           },
           {
-            "name": "Pell Ran Marsh",
-            "state": "Waiting at or near the temple entrance—not inside the inner work, but present, steady, on the threshold"
+            "name": "Siol",
+            "state": "Arrived at the moorland approach to the ridge—moving toward the temple, having read its weight. Present but not yet entered."
           }
         ],
         "objects": [
           "The sealed deep seam altar at the temple's center",
           "Stone floors",
-          "Timber frame catching early light",
+          "Timber frame structure",
+          "Cross-braces overhead",
           "The entrance to the moorland beyond",
-          "Cross-braces and structure overhead"
+          "The spring-fed draw to the northeast"
         ],
         "threads": [
-          "Whether the temple will serve as a true Ashwarden post—what it still needs to become that fully",
-          "The road north waits—the made gate, the relay circuit, the larger work calling",
+          "Siol's unexpected arrival—what brings her to the ridge, why now, what she means to witness",
+          "The road north still waits—the relay circuit, the larger work calling",
           "What Veth will teach next about the Ashwarden discipline"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "veth-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "role": "Former Ashwarden warden, teaching companion",
+          "op": "meet",
+          "npcId": "siol",
+          "name": "Siol",
+          "role": "Traveler and warden of the Pale March",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Sat in meditation with Silas and Huginn at the sealed seam—a three-warden attendance. Her presence confirmed the temple's readiness and her willingness to teach its discipline. She is watching to see what Silas will ask next.",
+          "description": "A tall Elven woman of apparent forty years, long pale coat, hair braided with a dark cord. The stillness of deep attention. She moves with the ease of one who has walked the March's corridors and knows their shape.",
+          "note": "Arrived at the ridge Threshold Post on the moorland approach—reading the death-warden temple's weight. She has been waiting nine days to witness whether Silas Weir's work would resolve rightly, and came to see whether he did it true.",
           "learned": [
-            "She sat the temple's meditation as a warden, confirming it as a place where the craft can live",
-            "She is ready to speak plainly about what a true post requires"
+            "She recognizes the shape of novel-depth making and partnership-held thresholds",
+            "She has been following Silas's work from a distance, waiting for this moment",
+            "She comes to witness, not to intervene"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "Reading the weight and purpose of a structure at a glance",
+            "Moving unseen across the moorland"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Inside the death-warden temple at the ridge threshold, having just completed a three-warden meditative attendance at the sealed seam"
+          "statusNote": "Arrived at the ridge; present and watching"
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The death-warden temple's purpose is now confirmed and witnessed by three Ashwarden presences—a meditation held, a seam attended, the name of the place settling into the stone. It is no longer merely a structure; it is a threshold that knows what it is for."
-        }
-      ],
+      "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [],
       "holdingOps": [],
@@ -2341,47 +2353,57 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "meditation and centering in the early morning stillness"
+        "why": "A meditation and the accounting of rest needed—half an hour held in the temple's quiet"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Three figures in stillness around a sealed stone seam in a small timber-framed chamber: a woman warden with her spine straight and breath steady, a man kneeling or seated at his own center, and a grey-black corvid perched on a cross-brace above them all—early light catching the edges of stone and wood, silence made visible. The ending held in the seam, witnessed and honored.",
+      "imagePrompt": "A tall Elven woman in a pale coat stands at the moorland approach to a small stone-and-timber temple built into the ridge. Early spring light. Behind her, the moors stretch toward the distant hollow. She is still, watching, waiting to see if what was made was made true.",
       "gambitOps": null,
       "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the death-warden temple at the ridge threshold, early morning light falling through the timber frame onto stone floors. The sealed deep seam altar at center. The moorland visible through the open entrance beyond.",
+      "setting": "At the threshold of the death-warden temple on the ridge, early morning light falling through the timber frame. The sealed deep seam altar visible in the chamber's center. The moorland visible through the entrance; the spring-fed draw lies northeast of the high point.",
       "npcsPresent": [
         {
+          "name": "Pell Ran Marsh",
+          "state": "Waiting at the temple entrance—not inside the inner work, but present and steady on the threshold. One hand resting on t"
+        },
+        {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Seated opposite the seam on the stone floor, back straight, breathing in a warden's rhythm—present and centered in the m"
+          "state": "Seated across from the deep seam altar on the stone floor. Spine straight, breathing in warden's rhythm. Still in the me"
         },
         {
           "name": "Huginn",
-          "state": "Perched on a timber cross-brace above the altar, still and dry-eyed, holding the third presence in the silence"
+          "state": "Perched on a timber cross-brace above the altar. Still and dry-eyed, talons gripping the wood. Holding the third presenc"
         },
         {
-          "name": "Pell Ran Marsh",
-          "state": "Waiting at or near the temple entrance—not inside the inner work, but present, steady, on the threshold"
+          "name": "Siol",
+          "state": "Arrived at the moorland approach to the ridge—moving toward the temple, having read its weight. Present but not yet ente"
         }
       ],
       "objects": [
         "The sealed deep seam altar at the temple's center",
         "Stone floors",
-        "Timber frame catching early light",
+        "Timber frame structure",
+        "Cross-braces overhead",
         "The entrance to the moorland beyond",
-        "Cross-braces and structure overhead"
+        "The spring-fed draw to the northeast"
       ],
       "threads": [
-        "Whether the temple will serve as a true Ashwarden post—what it still needs to become that fully",
-        "The road north waits—the made gate, the relay circuit, the larger work calling",
+        "Siol's unexpected arrival—what brings her to the ridge, why now, what she means to witness",
+        "The road north still waits—the relay circuit, the larger work calling",
         "What Veth will teach next about the Ashwarden discipline"
       ]
     },
-    "beats": 11
+    "beats": 12
   },
   "clock": {
     "schemaVersion": 1,
@@ -4378,7 +4400,7 @@
     "siol": {
       "id": "siol",
       "name": "Siol",
-      "role": "Elven traveler, Hub plaza",
+      "role": "Traveler and warden of the Pale March",
       "description": "A tall Elven woman of perhaps forty apparent years, long pale coat, hair braided with a dark cord — the stillness of attention held very quiet, not indifference.",
       "firstMet": {
         "locationId": "gen-waygate",
@@ -4386,7 +4408,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d6] Remained still and unspeaking through the attunement — this is a wait she recognizes.",
         "[d6] Said nothing — she has been on this side of this moment before and knows what it is.",
         "[d6] Watching with the expression of someone who has been on this side of this moment before and did not expect to be here again so soon.",
         "[d6] Did not fill the silence. Turned a fraction at Veth's revision but did not contradict it.",
@@ -4395,34 +4416,40 @@
         "[d6] Held the edge without entering — but turned fully, coat open, and brought her sustained regard to bear in a way the grove felt. Contributed from outside the circle. The circle went quieter when she did.",
         "[d6] Named plainly what the grove's receiving the ward meant: the Ent received the intention of protection, not the craft — the gesture, not the mechanism. That is the only thing it can receive. Also confirmed she has seen something like the Palework channel from this side before.",
         "[d6] Walked the party from the Ent circle back to the waygate threshold. Named the March setting as north-by-northwest through the gate sequence, and noted the dead post at Raven's Home — eleven years without a warden. Her part complete; she stopped at the threshold the way she stopped at the Ent's edge.",
-        "[d6] Walked the party to the sixth arch and held her position at the edge as they transited — her part complete, no ceremony, sustained regard as farewell."
+        "[d6] Walked the party to the sixth arch and held her position at the edge as they transited — her part complete, no ceremony, sustained regard as farewell.",
+        "[d15] Arrived at the ridge Threshold Post on the moorland approach—reading the death-warden temple's weight. She has been waiting nine days to witness whether Silas Weir's work would resolve rightly, and came to see whether he did it true."
       ],
       "knownFacts": [
-        "The Palework-through-grove channel is something she has seen the shape of before, or something close to it",
-        "Did not fill the silence after the Palework — has been on this side before and knows what it requires.",
-        "Siol's quality of attention has weight the grove registers — she does not need to enter to be present.",
         "The Ent receives intention, not craft — the gesture of protection was what landed, not the ward's mechanics",
         "Siol has seen something like a Palework channel from the outside before, or close enough that the shape was familiar",
         "The Pale March gate setting is north-by-northwest — the gate-keeper will know it",
         "Raven's Home has not had a warden in eleven years — named as fact, not warning",
-        "Named plainly what the grove's receiving the ward meant: the Ent received the intention of the gift, not the craft — the gesture, not the mechanism."
+        "Named plainly what the grove's receiving the ward meant: the Ent received the intention of the gift, not the craft — the gesture, not the mechanism.",
+        "She recognizes the shape of novel-depth making and partnership-held thresholds",
+        "She has been following Silas's work from a distance, waiting for this moment",
+        "She comes to witness, not to intervene"
       ],
       "skillsObserved": [
-        "plain directional knowledge of the waygate network",
-        "reading two strangers' practical needs and sequencing a morn",
         "precise practical briefing on an institution's rules without",
         "plain comparative assessment of two fighters' methods withou",
         "accurate qualification of a living entity's nature without o",
-        "sustained regard of a quality that affects a living entity's"
+        "sustained regard of a quality that affects a living entity's",
+        "Reading the weight and purpose of a structure at a glance",
+        "Moving unseen across the moorland"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Remained at the Hub waygate threshold as the party transited — her involvement complete.",
+      "statusNote": "Arrived at the ridge; present and watching",
       "lastSeen": {
-        "locationId": "gen-waygate",
-        "day": 6
-      }
+        "locationId": "the_crossing",
+        "day": 15
+      },
+      "domains": {
+        "primary": "ashwarden"
+      },
+      "domainsSource": "derived",
+      "met": 1
     },
     "orvil": {
       "id": "orvil",
@@ -6202,10 +6229,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "A Mason steps up to the partially-built lodge as the walls settle—puts one hand on a timber and tells you exactly what it is, what it is…",
-        "from": "The stirring of the world—someone walking the roads has noticed a new post going up and wants to know what it means. A grace, not a threat."
-      },
-      {
         "thing": "A Mason appears at the lodge's edge as the mine-work settles—hand already on a timber, reading its faults plainly, offering a day's labor…",
         "from": "The ridge's own work calling those who know how to tend it — or the world answering the making with its own hands."
       },
@@ -6220,6 +6243,10 @@
       {
         "thing": "Veth's quiet readiness to teach you what a true post requires—the standards of the craft, not just the structure",
         "from": "Veth's own want: to see Silas become a TRUE Ashwarden, right in his judgment, sound in his discipline"
+      },
+      {
+        "thing": "Siol, unseen for nine days, arrives at the ridge Threshold Post—not by the made gate path, but by the moorland approach. She moves with…",
+        "from": "The world's own agenda (SNG-080): Siol has been waiting to witness whether Silas Weir's work would resolve rightly. She recognizes the…"
       }
     ],
     "wantProgress": {
@@ -12541,22 +12568,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.373659490601593,
-    "cerebral": 19.65377992860427,
-    "social": 10.061837104832442,
-    "generous": 4.610684533282874,
-    "cautious": 7.461954773683408,
-    "physical": 0.6548376463447908,
-    "risky": 0.15706488850405473,
-    "ruthless": 0.34186454115160436,
-    "carousing": 0.055582896211539355,
-    "amorous": 0.20432243397934458,
-    "patient": 0.12381323720836804,
-    "stealth": 0.000011947858565243442,
-    "devotion": 0.4882289485035968,
-    "craft": 2.7534892862283136,
-    "leadership": 1.5892896408483042,
-    "deception": 0.05721653767308363
+    "strategic": 21.814318003336552,
+    "cerebral": 19.162435430389163,
+    "social": 9.810291177211631,
+    "generous": 4.495417419950802,
+    "cautious": 8.275405904341323,
+    "physical": 0.638466705186171,
+    "risky": 0.15313826629145336,
+    "ruthless": 0.33331792762281426,
+    "carousing": 0.05419332380625087,
+    "amorous": 0.19921437312986096,
+    "patient": 1.120717906278159,
+    "stealth": 0.000011649162101112355,
+    "devotion": 0.4760232247910069,
+    "craft": 2.6846520540726058,
+    "leadership": 1.5495573998270966,
+    "deception": 0.055786124231256534
   },
   "aptitudes": [
     "strategist",
@@ -12565,7 +12592,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 935,
+  "actionCount": 936,
   "grantsVersion": 1,
   "reconcileVersion": 30,
   "gallery": [
@@ -13003,8 +13030,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1786411462568,
-  "rev": 1686,
+  "updatedAt": 1786449535069,
+  "rev": 1687,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -16202,7 +16229,7 @@
       "the_grey_hand": 2,
       "the_shielding_word": 3,
       "boundary_stone": 9,
-      "the_kept_breath": 2,
+      "the_kept_breath": 3,
       "light_borne": 3,
       "marrow-s-wings": 3,
       "ask_the_dead": 2,
@@ -16287,7 +16314,7 @@
       "boundary_stone": 28,
       "palework": 25,
       "the_shadow_work": 25,
-      "the_kept_breath": 22,
+      "the_kept_breath": 42,
       "the_raised_thing": 42,
       "light_borne": 25,
       "shadowstep": 27,
@@ -16961,7 +16988,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 145
+    "the_center": 146
   },
   "foreclosed": [
     "rootkin",
@@ -17207,6 +17234,14 @@
       "startDay": 42,
       "endDay": 42,
       "beats": 13
+    },
+    {
+      "id": "sess-26",
+      "startedAt": "2026-08-11T11:58:55.066Z",
+      "lastAt": "2026-08-11T11:58:55.066Z",
+      "startDay": 42,
+      "endDay": 42,
+      "beats": 1
     }
   ],
   "company": [
@@ -17684,20 +17719,20 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 310,
-    "choices": 309,
-    "characterDeltas": 144,
-    "scene": 310,
-    "npcUpdates": 279,
+    "sceneSummary": 311,
+    "choices": 310,
+    "characterDeltas": 145,
+    "scene": 311,
+    "npcUpdates": 280,
     "factUpdates": 27,
     "placeUpdates": 69,
     "codexUpdates": 191,
-    "timeOps": 289,
-    "imagePrompt": 19,
-    "sceneEnded": 90,
+    "timeOps": 290,
+    "imagePrompt": 20,
+    "sceneEnded": 91,
     "itemUpdates": 7,
     "questUpdates": 41,
-    "offer": 35,
+    "offer": 36,
     "moveTo": 17,
     "delegateOps": 4,
     "deeds": 12,
@@ -17711,11 +17746,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 22,
+    "gambitApt": 23,
     "markDefiningMoment": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 310,
+  "_opTurns": 311,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -17723,7 +17758,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 38,
+      "applied": 39,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -18024,7 +18059,7 @@
   "holdings": [],
   "skillUses": {
     "travel": 4,
-    "careful": 2,
+    "careful": 3,
     "study": 5,
     "scout": 4,
     "lead": 2,
@@ -18038,7 +18073,8 @@
     "discipline": 1,
     "persuade": 1,
     "rapport": 3,
-    "meditate": 1
+    "meditate": 1,
+    "sustain": 1
   },
   "aptitudeEarnCount": {},
   "bondLog": [

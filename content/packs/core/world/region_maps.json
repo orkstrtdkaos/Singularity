@@ -12,6 +12,69 @@
   "purpose": "⛔ THE ONE LINE A NARRATOR NEEDS WHEN A PLAYER IS CROSSING IT RATHER THAN STANDING IN A TOWN: this is the ground between two civilisations that do not fight, and interfere anyway. Sound bends light here. Nothing in the Vale is neutral, and nothing in it is anyone's.",
   "ways": [
    {
+    "id": "way_terrace_to_edge",
+    "from": "harmonic_heights_terrace",
+    "to": "radiant_plateau_edge",
+    "waypoints": [
+     {
+      "bearing": 78,
+      "km": 265
+     },
+     {
+      "bearing": -58,
+      "km": 568
+     },
+     {
+      "bearing": -75,
+      "km": 1081
+     }
+    ],
+    "why": "⛔ THE ONLY ROAD THAT MATTERS HERE and it BENDS SOUTH. A straight arc would run it through the worst of the interference; the road exists because somebody found the way round. ⚠️ It is also the road the contamination teams use, so it is maintained by two powers who will not admit to cooperating.",
+    "_regenerated": "⛔ SNG-421: re-derived from real endpoints with a 18% perpendicular bend."
+   },
+   {
+    "id": "way_crossing_to_stilts",
+    "from": "echo_river_crossing",
+    "to": "greywater_stilts",
+    "waypoints": [
+     {
+      "bearing": 52,
+      "km": 1050
+     },
+     {
+      "bearing": 72,
+      "km": 1184
+     },
+     {
+      "bearing": 87,
+      "km": 1293
+     }
+    ],
+    "why": "⛔ FOLLOWS THE ECHO DOWNSTREAM to where the river gives up and becomes the southern marsh. The bend is the river's, not the road's.",
+    "_regenerated": "⛔ SNG-421: re-derived from real endpoints with a 14% perpendicular bend."
+   },
+   {
+    "id": "way_switchback",
+    "from": "old_switchback",
+    "to": "harmonic_heights_terrace",
+    "waypoints": [
+     {
+      "bearing": 38,
+      "km": 538
+     },
+     {
+      "bearing": 76,
+      "km": 719
+     },
+     {
+      "bearing": 101,
+      "km": 890
+     }
+    ],
+    "why": "⚠️ The way OUT of the Vale and up. It climbs, so it switches back — the name is the geometry.",
+    "_regenerated": "⛔ SNG-421: re-derived from real endpoints with a 22% perpendicular bend."
+   },
+   {
     "id": "way_edge_to_inn",
     "from": "radiant_plateau_edge",
     "to": "the-low-lamp-inn",
@@ -871,5 +934,5 @@
   ],
   "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 13.8° → 12.0° (13% tighter); centre moved 2.12°. Features re-expressed, ground unchanged."
  },
- "_waysFix": "⛔ SNG-421. CCODE MEASURED THAT NONE OF THE 22 WAYS CONNECTED THEIR ENDPOINTS — path/direct 4.85×, and no bearing sense, handedness or scale fixed it. HE ASKED WHICH OF THREE THINGS WAS TRUE. ⚠️ IT WAS OPTION 2, AND FOR A WORSE REASON THAN HE OFFERED ME.\nHe guessed the canon positions had moved under me. ⛔ THEY HAD NOT. THE LAST WAYPOINT MATCHES B IN ALMOST EVERY WAY — the chains END correctly and never START correctly. That is not drift; that is my having authored bends BY EYE from a printed table and never once checking they joined A to B. I described a road I could picture instead of a path between two known points.\n⛔ ALL 22 RE-DERIVED: each now interpolates its endpoints along the great circle, with a perpendicular bend whose SIZE AND SIGN come from the authored reason. The reasons were always real; only the geometry was invented."
+ "_waysFix": "⛔ SNG-421. CCODE MEASURED THAT NONE OF THE 22 WAYS CONNECTED THEIR ENDPOINTS — path/direct 4.85×, and no bearing sense, handedness or scale fixed it. HE ASKED WHICH OF THREE THINGS WAS TRUE. ⚠️ IT WAS OPTION 2, AND FOR A WORSE REASON THAN HE OFFERED ME.\nHe guessed the canon positions had moved under me. ⛔ THEY HAD NOT. THE LAST WAYPOINT MATCHES B IN ALMOST EVERY WAY — the chains END correctly and never START correctly. That is not drift; that is my having authored bends BY EYE from a printed table and never once checking they joined A to B. I described a road I could picture instead of a path between two known points.\n⛔ ALL 22 RE-DERIVED: each now interpolates its endpoints along the great circle, with a perpendicular bend whose SIZE AND SIGN come from the authored reason. The reasons were always real; only the geometry was invented.\n⛔ AND I DROPPED THREE WAYS WHILE FIXING THEM. My rewrite built a `keep` list that only collected the SKIPPED branches, so the Echo Vale — the region with the most ways — was left holding only the degenerate one. ⚠️ CAUGHT BY RUNNING CCODE'S OWN DETOUR TEST AFTERWARDS AND COUNTING 18 WHERE THERE SHOULD HAVE BEEN 21. Restored. A fix that silently deletes content is worse than the bug it fixes, and the only reason this did not ship is that I verified against his measurement instead of my own."
 }

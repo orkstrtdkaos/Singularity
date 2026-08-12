@@ -7450,10 +7450,15 @@ await (async () => {
       const k = WI.whoIs(f.id, "figure", { roster: roster399, ws: {}, content: {}, character: {} });
       if (!k) return false;
       const seed = ART.npcPromptSeed({ name: k.label, role: k.role || "", appearance: k.appearance || "" }, {}, {});
-      const word = String(f.imagePrompt).split(/[ ,.]+/).find((w) => w.length > 5) || "";
+      // ⚠️ RE-AIMED (CCODE-173). This demanded the `imagePrompt` specifically, and CCODE-173 deliberately
+      // reversed the preference: `imagePrompt` is a SCENE and a portrait wants the static `appearance`
+      // (Aevi, SNG-400b §2). The PROPERTY this gate exists for — a portrait is drawn from an AUTHORED
+      // description and never from name-and-role guesswork — is unchanged and is what it now checks.
+      const authored = f.appearance || f.imagePrompt;
+      const word = String(authored).split(/[ ,.:;]+/).find((w) => w.length > 5) || "";
       return word && seed.includes(word);
     });
-    check("399: every figure with an authored imagePrompt is DRAWN from it — the portrait is not name-and-role guesswork",
+    check("399/173: every figure's portrait is DRAWN from an authored description — never name-and-role guesswork",
       withPrompt.length > 0 && reaching.length === withPrompt.length,
       `${reaching.length} of ${withPrompt.length} reach the prompt`);
     // ⛔ 399b — the death is its own authored picture, and it was reaching nobody.
@@ -12052,8 +12057,10 @@ await (async () => {
     const roster367 = C367c.legends?.roster || [];
     check("367c: every authored world figure carries an imagePrompt — the portrait was always there",
       roster367.length > 0 && roster367.every(f => f.imagePrompt));
-    check("367c: …and whoIs now hands it to the portrait, ahead of anything derived",
-      /appearance: fig\.imagePrompt \|\| fig\.appearance/.test(whoisSrc));
+    // ⚠️ RE-AIMED (CCODE-173): the property is that an AUTHORED description outranks anything derived
+    // (`form`, the name, the tier line). Which authored field leads changed; that it leads did not.
+    check("367c/173: …and whoIs hands an AUTHORED description to the portrait, ahead of anything derived",
+      /appearance: fig\.(?:appearance|imagePrompt) \|\| fig\.(?:imagePrompt|appearance) \|\| fig\.form/.test(whoisSrc));
 
     // ⚠️ GENDER IS STATED EXPLICITLY SO THE GENERATOR CANNOT DEFAULT — SNG-143's own reason (the
     // Pell-rendered-male fix). The seed has always had the line; the whois card never supplied a value.
@@ -14290,6 +14297,56 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-173: a portrait is drawn from what someone LOOKS LIKE ----
+// Erik: "I can't make the re-gen image look like the same person… it's almost like we're missing a field
+// that describes the person's appearance?" The field exists — it was not being read, and the two paths were
+// not even reading the same one. Measured on Cinder Vael: the card drew from `imagePrompt` (a SCENE — "a
+// wright's workshop crowded with half-finished machines…") while the re-roll drew from `appearance` (the
+// LOOK — "scorched leather apron, forearms scarred…"). Two sentences about two different things, so Draw
+// again was never redrawing the same description.
+// ⚠️ AEVI SAID THIS IN SNG-400b §2 AND MY SIDE NEVER DID ITS HALF: "`imagePrompt` is a SCENE and cannot be
+// reused as 'what this person looks like' in a different scene."
+{
+  const { figureArtRecord: far173 } = await import("../engine/whois.js");
+  const { assembleImagePrompt: asm173, setArtMode: sam173 } = await import("../engine/art.js");
+  const was173 = localStorage.getItem("singularity.artMode"); sam173("generate");
+  const epics173 = JSON.parse(readFileSync(join(root, "content/packs/valley/tradition_epics.json"), "utf8")).epics;
+
+  // ⛔ THE PROPERTY ERIK ASKED FOR, AS A CENSUS: the card and the re-roll must describe the same person.
+  const mismatched = epics173.filter(f => {
+    const rec = far173(f);
+    return asm173("npc", { ...rec, id: `whois-${f.id}` }, {}) !== asm173("npc", rec, {});
+  });
+  check(`CCODE-173: all ${epics173.length} figures build ONE prompt for the card and the re-roll`,
+    epics173.length === 66 && mismatched.length === 0, () => mismatched.slice(0, 3).map(f => f.name).join("; "));
+
+  const cinder = epics173.find(f => /Cinder Vael/.test(f.name));
+  check("CCODE-173: the LOOK leads, not the scene", far173(cinder).appearance === cinder.appearance && far173(cinder).appearance !== cinder.imagePrompt);
+  check("CCODE-173: …and a figure with no authored look still gets a picture from the scene rather than nothing",
+    far173({ id: "x", name: "X", imagePrompt: "a scene" }).appearance === "a scene" && far173({ id: "y", name: "Y" }).appearance === "");
+  check("CCODE-173: the DEAD are drawn from their authored death, which IS a scene on purpose (SNG-399b)",
+    far173(cinder, { dead: true }).appearance === cinder.deathImagePrompt);
+  check("CCODE-173: gender and role ride, so the portrait is not a coin toss", far173(cinder).gender === "she" && far173(cinder).role === "Maker");
+  check("CCODE-173: nothing in, nothing out", far173(null) === null);
+
+  // ⚠️ THE SCENE WAS BEING CUT ANYWAY — the prompt seed clamps its lead, so the workshop sentence arrived as
+  // a fragment ("on a bench she has ,") which a generator draws as detail. The look fits; check it survives.
+  const built173 = asm173("npc", far173(cinder), {});
+  check("CCODE-173: the description reaches the prompt whole, not severed mid-sentence",
+    built173.includes("unslept, mid-task even now") && !built173.includes("…"));
+
+  const whoSrc173 = readFileSync(join(root, "engine/whois.js"), "utf8");
+  check("CCODE-173: whoIs hands the card the look first", /appearance: fig\.appearance \|\| fig\.imagePrompt \|\| fig\.form \|\| null,/.test(whoSrc173));
+  const appSrc173 = readFileSync(join(root, "app.js"), "utf8");
+  // ⚠️ ASSERT THE USE. My first version checked the record was BUILT — so putting the old hand-rolled object
+  // back into the ensureImage call left the gate green with the bug fully restored. Fourth time today.
+  check("CCODE-173: the card and the regen path ask the SAME builder (two records was the bug)",
+    /const artRec = figureArtRecord\(rosterFig, \{ dead: !!known\.dead \}\)/.test(appSrc173)
+    && /ensureImage\(\{ \.\.\.artRec, id: artSeed \}/.test(appSrc173)
+    && /find: id => figureArtRecord\(rosterFigureOf\(id\), \{ dead: \/\^whois-death-\/\.test\(String\(id\)\) \}\)/.test(appSrc173));
+  if (was173) localStorage.setItem("singularity.artMode", was173);
+}
+
 // ---- CCODE-172: the lightbox tells you what you are looking at, and the arrows stay on it ----
 // Erik, on a 70-tile gallery: "can you make it so i can see all the fields — also, I'd like to be able to
 // see the prompt that generated the image. And when I click an image that has re-generated more versions…
@@ -14681,7 +14738,7 @@ await (async () => {
   check("CCODE-163: `figure` is a real regen kind — found, current, and keepable", (() => {
     const tbl = src163.slice(src163.indexOf("const REGEN_KINDS = {"), src163.indexOf("// SNG-401 §1, Aevi's constraint"));
     const blk = tbl.slice(tbl.indexOf("figure: {"), tbl.indexOf("figure: {") + 600);
-    return /find: id => rosterFigureOf\(id\)/.test(blk) && /current: id => character\?\.figureImages/.test(blk) && /keep: \(id, url\) =>/.test(blk);
+    return /find: id => figureArtRecord\(rosterFigureOf\(id\)/.test(blk) && /current: id => character\?\.figureImages/.test(blk) && /keep: \(id, url\) =>/.test(blk);
   })());
   check("CCODE-163: a figure's seed maps back to the person, alive or dead", /replace\(\/\^whois-\(\?:death-\)\?\/, ""\)/.test(src163));
   // ⛔ the card re-mints from a stable seed on every open, so a chosen picture MUST outrank the mint

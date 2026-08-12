@@ -63,7 +63,7 @@ import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./en
 import { canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
-import { knownIndex, whoIs } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
+import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.136";
+const APP_VERSION = "1.9.137";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -295,7 +295,13 @@ function showWhoIs(known) {
       // every time it opens, so without this the chosen one would be drawn away again on the next open —
       // and surviving is the entire point of Keep.
       const chosen = character?.figureImages?.[artSeed] || null;
-      const url = chosen || ensureImage({ id: artSeed, name: known.label, role: known.role || "", appearance: dyingArt || known.appearance || "", gender: known.gender || undefined },
+      // ⛔ CCODE-173: ONE RECORD, so the card and the Draw-again button describe the same person. This built
+      // its own synthetic object while the re-roll used the roster figure — two records, two fields, two
+      // people. `figureArtRecord` is now the only description either of them draws from.
+      const rosterFig = rosterFigureOf(artSeed);
+      const artRec = figureArtRecord(rosterFig, { dead: !!known.dead })
+        || { id: artSeed, name: known.label, role: known.role || "", gender: known.gender || undefined, appearance: dyingArt || known.appearance || "" };
+      const url = chosen || ensureImage({ ...artRec, id: artSeed },
         "npc", { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false, promptOpts: { aesthetic: aesW, keeps: keepsForSubject("figure", artSeed) } });
       // ⛔ Erik: "the popups that read the codex entry don't have an image popup at all." Correct — this img
       // carried no `data-lightbox`, so of the nine places a picture appears this was the one that could not
@@ -839,7 +845,8 @@ const REGEN_KINDS = {
   figure: {
     needsId: true,
     label: id => rosterFigureOf(id)?.name || "this figure",
-    find: id => rosterFigureOf(id),
+    // CCODE-173: the SAME record the card drew from — a re-roll must be the same description, new seed.
+    find: id => figureArtRecord(rosterFigureOf(id), { dead: /^whois-death-/.test(String(id)) }),
     current: id => character?.figureImages?.[id] || null,
     keep: (id, url) => { character.figureImages = character.figureImages || {}; character.figureImages[id] = url; return true; },
     promptOpts: rec => ({ aesthetic: rec?.tradition ? (CONTENT.traditionVisualAesthetics?.[rec.tradition] || null) : null })

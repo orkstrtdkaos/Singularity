@@ -180,7 +180,10 @@ export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster 
       // years." That is a portrait; the tier line I was using is a sentence about fame. Third instance
       // today of authored content with no reader.
       tradition: fig.tradition || null, role: fig.role || null,
-      appearance: fig.imagePrompt || fig.appearance || fig.form || null,
+      // ⛔ CCODE-173: THE LOOK, NOT THE SCENE. This read `imagePrompt` first — a SCENE Aevi wrote for a
+      // different purpose — so every figure's portrait was drawn from a description of a place they happen
+      // to be in, and no two mints agreed on the person. Her `appearance` is the static look and leads now.
+      appearance: fig.appearance || fig.imagePrompt || fig.form || null,
       // ⚠️ GENDER RIDES WHEN IT IS AUTHORED. `npcPromptSeed` already states it explicitly so the
       // generator cannot default (SNG-143, the Pell-rendered-male fix) — it was simply never given one
       // here. ZERO of the 70 carry the field today, which is a content gap and reported as one; the wiring
@@ -234,3 +237,42 @@ const describeSlots = (slots = {}) => {
 };
 
 export { TIER_MEANING };
+
+// ---------- CCODE-173: A PORTRAIT IS DRAWN FROM WHAT SOMEONE LOOKS LIKE ----------
+// ⛔ ERIK DIAGNOSED THIS HIMSELF: "I can't make the re-gen image look like the same person… it's almost
+// like we're missing a field that describes the person's appearance?" The field exists. It was not being
+// read, and the two paths were not even reading the SAME one — measured on Cinder Vael:
+//
+//   the card drew from  `imagePrompt`: "A wright's workshop crowded with brilliant half-finished machines,
+//                                       none complete… A woman with burned forearms already sketching…"
+//   the re-roll drew from `appearance`: "scorched leather apron, forearms scarred by their own work,
+//                                        tools they never put down; unslept, mid-task even now"
+//
+// Two different sentences about two different things, so "Draw again" was never redrawing the same
+// description — it was drawing a different person and behaving exactly as told.
+//
+// ⚠️ AEVI SAID THIS IN SNG-400b §2 AND I DID NOT DO MY HALF. Her words: "`appearance` — the static look,
+// which did not exist. ⚠️ `imagePrompt` is a SCENE and cannot be reused as 'what this person looks like'
+// in a different scene… the field mismatch is half-closed from my end, and YOUR SIDE STILL NEEDS TO
+// PREFER imagePrompt WHERE A SCENE IS WANTED." A portrait is not a scene. It wants the look.
+//
+// ⚠️ AND THE SCENE WAS BEING TRUNCATED ANYWAY — the prompt seed clamps its lead, so the workshop sentence
+// arrived cut at "on a bench she has ," which is a fragment the generator draws as detail.
+
+/** CCODE-173. The ONE record a figure's picture is drawn from, wherever it is being drawn. Both the card
+ *  and the re-roll pass this, so a re-roll is the same description with a new seed — which is the entire
+ *  promise of the button. `dead` swaps in the authored death scene (SNG-399b), which IS a scene on purpose. */
+export function figureArtRecord(fig, { dead = false } = {}) {
+  if (!fig) return null;
+  return {
+    id: fig.id || null,
+    name: fig.name || "someone",
+    role: fig.role || "",
+    tradition: fig.tradition || null,
+    gender: fig.gender || fig.pronouns || null,
+    // the LOOK leads; the scene is a fallback for a figure nobody has described yet, never the preference
+    appearance: dead
+      ? (fig.deathImagePrompt || fig.appearance || fig.imagePrompt || "")
+      : (fig.appearance || fig.imagePrompt || fig.form || "")
+  };
+}

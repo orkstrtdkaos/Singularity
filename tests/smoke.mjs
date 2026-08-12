@@ -66,9 +66,14 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rules = JSON.parse(readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8"));
 
 let failures = 0;
-function check(name, cond) {
+// ⚠️ THE THIRD ARGUMENT WAS BEING THROWN AWAY. Call sites pass a failure DETAIL — "deed from
+// valley.millbrook hopped to X" — written by whoever expected to need it, and the harness ignored it,
+// so an intermittent gate printed nothing but its own name and had to be re-derived by hand. A
+// diagnostic that is written and never rendered is the same writer-with-no-reader shape as anywhere
+// else; it is just cheaper to fix here. Printed on FAILURE only, so a green run stays scannable.
+function check(name, cond, detail = null) {
   console.log(`${cond ? "PASS" : "FAIL"}  ${name}`);
-  if (!cond) failures++;
+  if (!cond) { failures++; if (detail) console.log(`        ↳ ${typeof detail === "function" ? detail() : detail}`); }
 }
 
 // --- spectrum math ---
@@ -14263,6 +14268,40 @@ await (async () => {
   check("400b × 401: the battle is re-rollable AND re-describable — the first real builder behind Rebuild", /battle: \{[\s\S]{0,200}character\.battleImages\[key\]\.url = url/.test(appSrc400));
   const artSrc400 = readFileSync(join(root, "engine/art.js"), "utf8");
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
+}
+
+// ---- CCODE-162: ONE COMMUNITY, ONE SPELLING (within a region) ----
+// ⛔ FOUND BY AN INTERMITTENT GATE, WHICH IS THE WORST WAY TO FIND ANYTHING. "…and the first hop is
+// somewhere in its OWN region" failed roughly two runs in three, and only after teaching `check` to print
+// the detail its call site had always passed did the cause show: the deed hopped to `echo_vale.millbrook`
+// while it started from `valley.millbrook`. ONE community, two spellings — the tail of SNG-427, where the
+// regionId was repointed to `valley` and the communityId kept the old prefix.
+//
+// ⚠️ THE RULE IS NARROW ON PURPOSE. `center.gate` (The Axis Gate) and `abyssal.gate` (The Bargain Gate) are
+// genuinely two places that share a leaf name in different regions — that is prefixes doing their job, and
+// a cruder "no leaf twice" rule would fail on correct data. The real invariant: WITHIN ONE REGION, a
+// community leaf resolves to exactly one full id.
+{
+  const dir162 = join(root, "content/packs/valley/locations");
+  const groups = new Map();
+  for (const f of readdirSync(dir162).filter(x => x.endsWith(".json"))) {
+    const l = JSON.parse(readFileSync(join(dir162, f), "utf8"));
+    if (!l.communityId) continue;
+    const key = `${l.regionId || l.region || "?"}::${String(l.communityId).split(".").pop()}`;
+    (groups.get(key) || groups.set(key, new Set()).get(key)).add(l.communityId);
+  }
+  const split = [...groups.entries()].filter(([, s]) => s.size > 1);
+  check("CCODE-162: no community is spelled two ways inside one region (it splits the place in half)",
+    split.length === 0, () => split.map(([k, s]) => `${k} → ${[...s].join(" | ")}`).join("; "));
+  // the fix itself, pinned: the Crossing follows the region it was moved to
+  const xing = JSON.parse(readFileSync(join(dir162, "echo_river_crossing.json"), "utf8"));
+  check("CCODE-162: the Crossing's community follows its region (Aevi moved it to valley; the id now agrees)",
+    xing.regionId === "valley" && xing.communityId === "valley.millbrook",
+    `regionId=${xing.regionId} communityId=${xing.communityId}`);
+  // ⚠️ and the harness change that made this findable at all
+  const smokeSrc162 = readFileSync(join(root, "tests/smoke.mjs"), "utf8");
+  check("CCODE-162: check() renders the failure detail its call sites pass (a written diagnostic with no reader)",
+    /function check\(name, cond, detail = null\)/.test(smokeSrc162) && /if \(detail\) console\.log/.test(smokeSrc162));
 }
 
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to

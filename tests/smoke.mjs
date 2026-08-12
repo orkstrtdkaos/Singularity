@@ -14297,6 +14297,52 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-174: the floors were corrupting their own safety tail ----
+// Erik, reading a prompt in the details panel: "What's all this stuff getting injected into my image
+// prompt?" — the ceiling tone and safety tail appended TWICE, and the first copy mangled:
+//   "…tasteful, non-explicit, no , original character not a real person… no signature,
+//     dark, intense, cinematic, mature dramatic tone, tasteful, non-explicit, no nudity…"
+// ⛔ THE WORD "nudity" WAS EATEN OUT OF THE SAFETY TAIL BY THE SAFETY SCRUB. A stored prompt is an
+// ALREADY-SANITISED prompt, so re-running the floors ran SEXUAL_MARKERS across the tail this function had
+// itself written. The guard degraded itself a little more every time a picture was redrawn.
+{
+  const { sanitizeImagePrompt: san174, bareImagePrompt: bare174, likenessClause: lc174, IMAGE_STYLE: STY174, setArtMode: sam174 } = await import("../engine/art.js");
+  const was174 = localStorage.getItem("singularity.artMode"); sam174("generate");
+  const raw174 = "someone tending the waystation fire—shelter-keeper, traveler";
+  const once = san174(raw174, { ratingLevel: 4 });
+
+  check("CCODE-174 THE RULE: the floors are IDEMPOTENT — twice is the same as once", san174(once, { ratingLevel: 4 }) === once);
+  check("CCODE-174: …and so is three times, four times, forever", san174(san174(san174(once, { ratingLevel: 4 }), { ratingLevel: 4 }), { ratingLevel: 4 }) === once);
+  check("CCODE-174: the safety tail survives its own scrub intact (this is the bug)", /no nudity/.test(once) && !/no ,/.test(once) && (once.match(/no signature/g) || []).length === 1);
+  check("CCODE-174: the ceiling tone appears exactly once", (once.match(/mature dramatic tone/g) || []).length === 1);
+
+  // ⚠️ ERIK'S ACTUAL CORRUPTED STRING, recovered — an already-damaged prompt must heal, not stay damaged
+  const broken174 = "someone tending the waystation fire—shelter-keeper, traveler, dark, intense, cinematic, mature dramatic tone, tasteful, non-explicit, no , original character not a real person, no copyrighted characters, no text, no watermark, no signature, dark, intense, cinematic, mature dramatic tone, tasteful, non-explicit, no nudity, original character not a real person, no copyrighted characters, no text, no watermark, no signature";
+  check("CCODE-174: the string Erik pasted strips back to its description", bare174(broken174) === raw174, bare174(broken174));
+  check("CCODE-174: …and re-sanitising it gives a clean single pass", san174(broken174, { ratingLevel: 4 }) === once);
+
+  // the floors still DO their job — idempotency must not have softened them
+  check("CCODE-174: the floors still scrub the prompt itself", !/erotic|nude study/.test(san174("an erotic nude study of a woman", { ratingLevel: 4 })));
+  check("CCODE-174: minor-protection still absolute at any ceiling", /child, age-appropriate/.test(san174("a person", { ratingLevel: 4, isMinor: true })));
+  check("CCODE-174: the ceiling still shapes the tone", /family-friendly/.test(san174("a person", { ratingLevel: 0 })) && !/family-friendly/.test(san174("a person", { ratingLevel: 4 })));
+
+  // ⛔ AND THE LIKENESS VOTE WAS COUNTING THE BOILERPLATE. Every kept prompt ends with the same tail, and
+  // the vote ranks by AGREEMENT — so the unanimous winners would have been "tasteful", "non-explicit",
+  // "no nudity", and the actual face would have been pushed out by the floors.
+  const keeps174 = [{ url: "a", prompt: san174("silver hair, sharp cheekbones, grey wool cloak", { ratingLevel: 2 }) },
+                    { url: "b", prompt: san174("pale eyes, silver hair, grey wool cloak", { ratingLevel: 2 }) }];
+  const clause174 = lc174(keeps174);
+  check("CCODE-174: the likeness vote counts the DESCRIPTION, never the safety boilerplate",
+    clause174.startsWith("silver hair, grey wool cloak") && !/tasteful|non-explicit|no nudity|no gore/.test(clause174), clause174);
+
+  // the panel showed a prompt that was not the whole prompt
+  const src174 = readFileSync(join(root, "app.js"), "utf8");
+  check("CCODE-174: the details panel shows the house style too — it is part of every prompt and was invisible",
+    /…and the house style, added to every image/.test(src174) && /esc\(IMAGE_STYLE\)/.test(src174));
+  check("CCODE-174: the style is a named export rather than a hidden constant", typeof STY174 === "string" && STY174.length > 20);
+  if (was174) localStorage.setItem("singularity.artMode", was174);
+}
+
 // ---- CCODE-173: a portrait is drawn from what someone LOOKS LIKE ----
 // Erik: "I can't make the re-gen image look like the same person… it's almost like we're missing a field
 // that describes the person's appearance?" The field exists — it was not being read, and the two paths were

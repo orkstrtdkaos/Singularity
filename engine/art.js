@@ -14,7 +14,11 @@
 
 import { RATING_LEVEL } from "./playerprofile.js";
 
-const STYLE = "digital painting, atmospheric concept art, muted earth tones with teal and gold accents, painterly, no text, no watermark";
+// ⚠️ CCODE-174: EXPORTED, because it is part of every prompt and was invisible. It is appended at URL-build
+// time, AFTER the prompt that gets stored — so the details panel was showing the player a prompt that was
+// not the whole prompt. "Let me see the prompt that generated the image" has to mean all of it.
+export const IMAGE_STYLE = "digital painting, atmospheric concept art, muted earth tones with teal and gold accents, painterly, no text, no watermark";
+const STYLE = IMAGE_STYLE;
 
 export const ART_MODES = ["off", "static", "generate"];
 
@@ -106,6 +110,29 @@ const CEILING_TONE = [
   "dark, intense, cinematic, mature dramatic tone"                     // 4 R+
 ];
 const SAFETY_TAIL = "tasteful, non-explicit, no nudity, original character not a real person, no copyrighted characters, no text, no watermark, no signature";
+const MINOR_TONE = "child, age-appropriate, wholesome, fully clothed, non-sexual, innocent";
+
+// CCODE-174: everything the floors can APPEND, so a later pass can take its own output back off before
+// working. ⚠️ The tail is matched from its stable head to its stable end rather than by exact string,
+// because a prompt that has already been double-sanitised carries a CORRUPTED copy ("no ," where "no
+// nudity" was) and that copy has to come off too or it stays in the picture's description forever.
+const SAFETY_TAIL_RE = /,?\s*tasteful,\s*non-explicit,[\s\S]*?no signature/gi;
+const escRe174 = t => String(t).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const TONE_RE = new RegExp(",?\\s*(?:" + [...CEILING_TONE, MINOR_TONE].map(escRe174).join("|") + ")", "gi");
+
+/** PURE. A prompt with the floors' own appended tone + safety tail removed — the DESCRIPTION, as written.
+ *  Used to make `sanitizeImagePrompt` idempotent, and to keep the likeness vote counting what a picture
+ *  actually shows instead of the boilerplate every prompt ends with. */
+export function bareImagePrompt(prompt) {
+  let p = String(prompt || "");
+  for (let i = 0; i < 4; i++) {
+    const before = p;
+    p = p.replace(SAFETY_TAIL_RE, "").replace(TONE_RE, "");
+    p = p.replace(/\s*,(\s*,)+/g, ",").replace(/\s{2,}/g, " ").replace(/^[\s,]+|[\s,]+$/g, "").trim();
+    if (p === before) break;
+  }
+  return p;
+}
 
 /** Does this subject read as a minor? A record-level flag (isMinor / _gen.romanceEligible===false)
  *  or a child descriptor. Conservative — an image only goes child-safe when it clearly should. */
@@ -124,7 +151,18 @@ export function isMinorSubject(subject = {}) {
  *  child-safe (sexual/romantic/graphic-violence terms removed, wholesome tone imposed) at ANY
  *  ceiling — minor-protection is a hard scrub, never a softening. Pure. */
 export function sanitizeImagePrompt(prompt, { ratingLevel = 2, isMinor = false } = {}) {
-  let p = String(prompt || "");
+  // ⛔ CCODE-174 — THE FLOORS MUST BE IDEMPOTENT, AND THEY WERE NOT. Erik, reading a prompt in the new
+  // details panel, found the ceiling tone and the safety tail appended TWICE — and the first copy mangled:
+  //
+  //   "…tasteful, non-explicit, no , original character not a real person, … no signature,
+  //     dark, intense, cinematic, mature dramatic tone, tasteful, non-explicit, no nudity, …"
+  //
+  // ⚠️ THE WORD "nudity" WAS EATEN OUT OF THE SAFETY TAIL BY THE SAFETY SCRUB. A stored prompt is an
+  // ALREADY-SANITISED prompt, so re-running the floors over it ran SEXUAL_MARKERS across the tail this
+  // function had itself written, turning "no nudity" into "no ". A second pass was corrupting the very
+  // instruction it exists to add — the guard degrading itself each time a picture was redrawn.
+  // Stripping its own previous output first makes running it twice identical to running it once.
+  let p = bareImagePrompt(prompt);
   // always-prohibited regardless of ceiling
   p = p.replace(SEXUAL_MARKERS, " ");
   // above-ceiling scrubs
@@ -135,7 +173,7 @@ export function sanitizeImagePrompt(prompt, { ratingLevel = 2, isMinor = false }
   }
   p = p.replace(/\s{2,}/g, " ").trim();
   const level = Math.max(0, Math.min(4, isMinor ? Math.min(ratingLevel, RATING_LEVEL["PG"]) : ratingLevel));
-  const tone = isMinor ? "child, age-appropriate, wholesome, fully clothed, non-sexual, innocent" : CEILING_TONE[level];
+  const tone = isMinor ? MINOR_TONE : CEILING_TONE[level];
   return [p, tone, SAFETY_TAIL].filter(Boolean).join(", ");
 }
 
@@ -323,7 +361,12 @@ export function likenessClause(keeps = [], cap = LIKENESS_CAP) {
   const votes = new Map(), order = new Map();
   keeps.forEach((k, ki) => {
     const seen = new Set();
-    String(k?.prompt || "").split(/\s*,\s*/).map(s => s.trim()).filter(s => s.length > 2).forEach((c, ci) => {
+    // ⛔ CCODE-174: VOTE ON THE DESCRIPTION, NOT THE BOILERPLATE. A stored keep is a SANITISED prompt, so
+    // every one of them ends with the same ceiling tone and safety tail — and this counts by AGREEMENT, so
+    // the unanimous winners would have been "tasteful", "non-explicit", "no nudity" and the actual likeness
+    // would have been pushed out by the very clauses every prompt shares. The vote would have measured the
+    // floors instead of the face.
+    bareImagePrompt(k?.prompt || "").split(/\s*,\s*/).map(s => s.trim()).filter(s => s.length > 2).forEach((c, ci) => {
       const key = c.toLowerCase();
       if (seen.has(key)) return;            // one prompt is one vote, however often it repeats itself
       seen.add(key);

@@ -7468,8 +7468,11 @@ await (async () => {
       seedFor(deadK) !== seedFor(liveK) && seedFor(deadK).includes(String(fig399.deathImagePrompt).slice(0, 20)));
     // ⚠️ SEPARATE SEEDS: minting the death must not overwrite the face they had while alive.
     const app399 = readFileSync(join(root, "app.js"), "utf8");
+    // ⚠️ RE-AIMED (CCODE-171). Pinned the literal `whois-death-${seed}` and broke when the seed became the
+    // canonical person id. The PROPERTY it protects — a death is seeded on its own prefix so minting an end
+    // never overwrites the living face — is untouched, and is what it now asserts.
     check("399b: the death is seeded separately — minting an end never overwrites the living portrait",
-      /whois-death-\$\{seed\}/.test(app399));
+      /dyingArt \? `whois-death-\$\{[\w]+\}` : `whois-\$\{[\w]+\}`/.test(app399));
     check("399 §2: the portrait keeps the crown — object-position holds the face above centre instead of cropping heads",
       /object-fit:\s*cover;\s*object-position:\s*center 18%/.test(app399));
   }
@@ -12230,8 +12233,11 @@ await (async () => {
     // them, which quietly says this is a different person.
     // ⚠️ the seed is chosen between a living and a death key now (SNG-399b); BOTH are built from the
     // stable id, which is the property this gate exists to hold.
+    // ⚠️ RE-AIMED (CCODE-171). It pinned `whois-${seed}` and the raw `codexId || id || label` fallback. The
+    // property is that the seed is STABLE and derived from an id rather than a display name — which is now
+    // MORE true, not less: it resolves to the canonical person first and keeps the old chain as fallback.
     check("364: …seeded on the stable id so the same figure keeps the same face",
-      /seedKey: artSeed/.test(card) && /`whois-\$\{seed\}`/.test(card) && /known\.codexId \|\| known\.id \|\| known\.label/.test(card));
+      /seedKey: artSeed/.test(card) && /canonicalPersonId\(character, \{ entityId: known\.codexId \|\| known\.id/.test(card) && /known\.codexId \|\| known\.id \|\| known\.label/.test(card));
     check("364: …and whoIs returns that id, so the seed survives a rename", /kind: "figure", id, lines/.test(whoisSrc));
     // A card taller than the phone is the SNG-353 lesson, one screen over.
     check("364: …and the card scrolls, with the portrait and the text in the same scroll region",
@@ -14280,6 +14286,68 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-171: one person, one identity, one face ----
+// Erik: "there are still too many duplicate NPCs and People and Scenes… how can we make sure that the NPC
+// image and name actually point to the same name and image set? Cevaine AND Cevaine of the 7th Order."
+// ⛔ MEASURED FIRST: registry duplicates are RARE (one across every save). The duplication he sees is a
+// person recorded in THREE id namespaces — registry id, codex topic id, authored content id — with the
+// image seed taken from whichever surface he opened. Mara Wells is `mara-wells` to the portrait and
+// `water-keeper` to the card: one woman, two faces, two sets of kept looks.
+{
+  const { canonicalPersonId, bareName, personArtSeed } = await import("../engine/npcs.js");
+
+  // THE NAME INSIDE A LABEL — a codex label is a name plus what they are
+  const bares = { "Leth — Edge District Archivist": "Leth", "Dara Holt, the Ditch-Mother": "Dara Holt",
+    "Overseer Grael": "Grael", "Cevaine of the Seventh Measure": "Cevaine",
+    "Neth, Who Has Buried More Than She Has Known": "Neth" };
+  for (const [label, want] of Object.entries(bares))
+    check(`CCODE-171: "${label}" is ${want}`, bareName(label) === want, bareName(label));
+
+  // ⛔ AND THE GUARD THAT MAKES IT SAFE. A POSSESSIVE is a relation, never an epithet — `namesMatch` would
+  // fold these together, which is why this deliberately is not namesMatch. Erik has just been bitten by a
+  // wrong merge; over-folding a person costs far more than leaving two apart.
+  check("CCODE-171: a possessive is a DIFFERENT person — Grael's Runner is not Grael", bareName("Grael's Runner — File Removal Witness") === "Grael's Runner");
+  check("CCODE-171: …nor is Mara's errand-runner Mara", bareName("Pip Cotter, Mara's Errand-Runner") === "Pip Cotter");
+  // ⚠️ THE GUARD, TESTED ON WHAT IT ACTUALLY PROTECTS. My first version mutated it away and nothing went
+  // red, because the cases I had chosen carried a possessive OR an "of the", never both. A real alias from
+  // Splarf's save carries both — and it names a THING Cevaine did, not Cevaine.
+  check("CCODE-171: a possessive survives the epithet strip — \"Cevaine's Reading of the Veil-Breach\" is not a person's by-name",
+    bareName("Cevaine's Reading of the Veil-Breach") === "Cevaine's Reading of the Veil-Breach", bareName("Cevaine's Reading of the Veil-Breach"));
+
+  const reg171 = { npcRegistry: {
+    cevaine: { id: "cevaine", name: "Cevaine" },
+    grael: { id: "grael", name: "Grael" },
+    leth: { id: "leth", name: "Leth", aliases: [] }
+  } };
+  check("CCODE-171 ERIK'S CASE: 'Cevaine of the Seventh Measure' resolves to Cevaine", canonicalPersonId(reg171, { label: "Cevaine of the Seventh Measure" }) === "cevaine");
+  check("CCODE-171: a title does not make a second person", canonicalPersonId(reg171, { label: "Overseer Grael" }) === "grael");
+  check("CCODE-171: a role-suffix does not either", canonicalPersonId(reg171, { label: "Leth — Edge District Archivist" }) === "leth");
+  check("CCODE-171 THE REFUSAL: Grael's Runner stays their own person", canonicalPersonId(reg171, { label: "Grael's Runner — File Removal Witness" }) === null);
+  check("CCODE-171: someone the registry has never heard of stays separate", canonicalPersonId(reg171, { label: "A Passing Stranger" }) === null);
+  check("CCODE-171: an explicit link beats any name reasoning", canonicalPersonId(reg171, { npcId: "grael", label: "Cevaine" }) === "grael");
+  check("CCODE-171: and a seed exists even for someone unknown (never a crash, never a shared 'undefined' face)",
+    personArtSeed(reg171, { label: "A Passing Stranger" }).startsWith("whois-") && personArtSeed(reg171, { label: "Cevaine of the Seventh Measure" }) === "whois-cevaine");
+
+  // ⚠️ THE REAL SAVES ARE THE FIXTURE — the report, asserted against what he actually plays
+  for (const f of ["char-mrhs8286", "char-msgpisca"]) {
+    const c = JSON.parse(readFileSync(join(root, `characters/player-s9z9u1/${f}.json`), "utf8"));
+    const people = Object.values(c.codex?.topics || {}).filter(t => t.kind === "person");
+    const split = people.filter(t => { const id = canonicalPersonId(c, { entityId: t.entityId || t.id, label: t.label }); return id && `whois-${t.entityId || t.id}` !== `whois-${id}`; });
+    check(`CCODE-171: ${c.name}'s card and portrait now agree on every linked person`, people.length > 0 && split.every(t => !!canonicalPersonId(c, { entityId: t.entityId || t.id, label: t.label })),
+      () => split.map(t => t.label).join("; "));
+  }
+  const src171 = readFileSync(join(root, "app.js"), "utf8");
+  // ⚠️ ASSERT THE USE, NOT THE PRESENCE. My first version checked that the resolver was CALLED — so cutting
+  // its result out of the seed left the gate green while the bug came straight back.
+  check("CCODE-171: the whois card seeds on the canonical identity, not the topic id",
+    /const canonId = canonicalPersonId\(character, \{ entityId: known\.codexId \|\| known\.id, label: known\.label \}\);/.test(src171)
+    && /const seedKey171 = canonId \|\| seed;/.test(src171)
+    && /`whois-death-\$\{seedKey171\}` : `whois-\$\{seedKey171\}`/.test(src171));
+  check("CCODE-171: and the codex page asks the same question, through the same helper",
+    /personArtSeed\(character, \{ entityId: open\.entityId \|\| open\.id, topicId: open\.id, label: open\.label \}\)/.test(src171)
+    && /export function personArtSeed/.test(readFileSync(join(root, "engine/npcs.js"), "utf8")));
+}
+
 // ---- CCODE-169: EVERY PICTURE THE PLAYER SEES CAN BE OPENED ----
 // ⛔ ERIK ASKED THE RIGHT QUESTION: "have you run the audits lately and would they catch these?" The answer
 // to the second half is NO, and the reason is worth writing down. The audits verify that MODULES talk to
@@ -14527,7 +14595,10 @@ await (async () => {
   const src165 = readFileSync(join(root, "app.js"), "utf8");
   const codexFn = src165.slice(src165.indexOf("function codexTopImage"));
   check("CCODE-165: the codex topic page renders its subject at the top", /\$\{codexTopImage\(open\)\}/.test(src165));
-  check("CCODE-165: it uses the SAME seed as the popup, so it is the same person and not a second one", /const artSeed = `whois-\$\{seed\}`;/.test(codexFn));
+  // ⚠️ RE-AIMED (CCODE-171): both surfaces now build the seed through ONE helper rather than each spelling
+  // `whois-${seed}` for itself — which is a stronger form of the same property, so the gate asserts THAT.
+  check("CCODE-165: it uses the SAME seed builder as the popup, so it is the same person and not a second one",
+    /personArtSeed\(character, \{ entityId: open\.entityId \|\| open\.id, topicId: open\.id, label: open\.label \}\)/.test(codexFn));
   check("CCODE-165: it opens into the lightbox with the same controls", /class="codex-top-art"[^`]*data-lightbox="figure"[^`]*data-regen-kind="figure"/.test(src165));
   check("CCODE-165: only entries that HAVE a subject get a face (an event or a mystery is not a person)", /CODEX_PICTURABLE = new Set\(\["person", "place"\]\)/.test(src165));
   check("CCODE-165: a kept look wins on the codex page too", /const chosen = character\?\.figureImages\?\.\[artSeed\] \|\| null;/.test(codexFn) && /const url = chosen \|\|/.test(codexFn));

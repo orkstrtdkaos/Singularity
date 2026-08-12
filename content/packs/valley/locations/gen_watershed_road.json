@@ -50,11 +50,12 @@
   "tier": "settlement",
   "parentId": "millbrook",
   "worldPos": {
-    "colatitude": 26,
-    "longitude": 248,
+    "colatitude": 20.31,
+    "longitude": 251.895,
     "depth": 0
   },
   "worldPosNote": "inherited from millbrook — SNG-396: a room is at its building's coordinates",
   "worldPosInherited": true,
-  "provenance": "SNG-396 — authored in play, promoted from the saves. Carries a dormant relay chain 'south to the mill gate and north toward the ridge'. From the SNG-397 repair."
+  "provenance": "SNG-396 — authored in play, promoted from the saves. Carries a dormant relay chain 'south to the mill gate and north toward the ridge'. From the SNG-397 repair.",
+  "_inheritNote": "⛔ CCODE-170 (CCode): re-derived after SNG-427 moved millbrook onto the real Echo. `worldPosInherited: true` is a CONTRACT — this place has no position of its own, it is AT its parent — so this is arithmetic, not a placement decision. It was at {\"colatitude\": 26, \"longitude\": 248, \"depth\": 0} while its parent had moved. Same class as SNG-409 §6: an inherited position is a CACHED position, and a cache that outlives its source is just a wrong number."
 }

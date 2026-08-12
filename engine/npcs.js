@@ -666,3 +666,65 @@ export function npcReactionsForGM(character, { npcs = {}, locationId = null, sce
   }
   return out.slice(0, limit);
 }
+
+// ---------- CCODE-171: ONE PERSON, ONE IDENTITY, ONE FACE ----------
+// ⛔ ERIK: "there are still too many duplicate NPCs and People and Scenes… how can we make sure that the
+// NPC image and name actually point to the same name and image set? Cevaine AND Cevaine of the 7th Order."
+//
+// MEASURED before answering: on his own save, FIVE people wear two faces. Not because the merge machinery
+// failed — registry duplicates are rare, one across every save — but because a person is recorded in THREE
+// id namespaces and the image seed is taken from whichever one you happened to open:
+//   · the registry npc id      `mara-wells`      → the portrait path
+//   · the codex topic id       `water-keeper`    → the whois/codex card
+//   · the authored content id                    → the roster
+// Same woman, two seeds, two faces, and a look kept on one never reaches the other.
+//
+// ⚠️ IT MUST NOT OVER-MERGE, AND THAT IS THE HARD HALF. `namesMatch` folds "Grael's Runner" into "Grael" —
+// a person and their errand-runner are not one person, and Erik has just been bitten by exactly this class
+// when a merge put Cevaine-the-person inside Cevaine-the-lore. So this resolves by LINK first and by NAME
+// only on equality after stripping a role-suffix and a title. Anything short of that stays separate.
+
+const PERSON_TITLES = /^(?:overseer|warden|keeper|high|luminary|elder|master|mistress|lord|lady|ser|sir|captain|clerk|guard|scout|reverend|dame|councillor|magistrate|archivist|marshal|adept|champion|tender|maker|broker|mediator|the)\s+/i;
+
+/** PURE-ish. The BARE name inside a codex label: "Leth — Edge District Archivist" → "Leth",
+ *  "Dara Holt, the Ditch-Mother" → "Dara Holt", "Overseer Grael" → "Grael". A codex label is a name plus
+ *  what they are; the identity is the name. */
+export function bareName(label) {
+  let s = String(label || "").split(/\s+[—–]\s+/)[0].split(/,\s+/)[0].trim();
+  for (let i = 0; i < 2 && PERSON_TITLES.test(s); i++) s = s.replace(PERSON_TITLES, "").trim();
+  // ⛔ THE EPITHET, WHICH IS ERIK'S OWN EXAMPLE: "Cevaine of the Seventh Measure" is Cevaine. A person's
+  // by-name is part of what people CALL them, not part of who they are.
+  // ⚠️ AND THE GUARD THAT MAKES IT SAFE: a POSSESSIVE is a relation to someone else, never an epithet of
+  // them. "Grael's Runner" is a different man from Grael, and `namesMatch` — which would otherwise be the
+  // obvious tool here — folds them together. That is why this is not namesMatch. Erik has just been bitten
+  // by a wrong merge; the cost of over-folding a person is far higher than the cost of leaving two.
+  if (!/['’]s\b/.test(s)) s = s.replace(/\s+of\s+(?:the\s+)?\S.*$/i, "").trim();
+  return s;
+}
+
+/** CCODE-171. The ONE id that means this person, resolved from whatever handle you are holding.
+ *  Order is confidence order: an explicit registry id, then a link, then an EXACT name after stripping the
+ *  role and title. ⛔ Never a fuzzy match — see the note above; "Grael's Runner" must stay a different man.
+ *  Returns a registry npc id, or null when this is not someone the player knows. */
+export function canonicalPersonId(character, { npcId = null, entityId = null, label = null } = {}) {
+  const reg = character?.npcRegistry || {};
+  if (npcId && reg[npcId]) return npcId;
+  if (entityId && reg[entityId]) return entityId;
+  const want = normName(bareName(label));
+  if (!want || want.length < 3) return null;
+  // an exact name (or alias) match, after the label's role-suffix and title are removed
+  for (const [id, n] of Object.entries(reg)) {
+    if (!n?.name) continue;
+    if (normName(bareName(n.name)) === want) return id;
+    if ((n.aliases || []).some(a => normName(bareName(a)) === want)) return id;
+  }
+  return null;
+}
+
+/** CCODE-171. The image seed for a person, wherever they are being drawn. ⚠️ THIS IS THE WHOLE FIX: every
+ *  surface asks the same question and gets the same answer, so the card, the portrait and a kept look all
+ *  land on one face. Falls back to the caller's own handle for someone the registry does not know. */
+export function personArtSeed(character, handles = {}) {
+  const id = canonicalPersonId(character, handles);
+  return `whois-${id || handles.entityId || handles.npcId || handles.topicId || normName(handles.label) || "someone"}`;
+}

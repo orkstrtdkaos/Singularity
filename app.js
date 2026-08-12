@@ -60,7 +60,7 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
+import { canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.134";
+const APP_VERSION = "1.9.135";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -284,7 +284,13 @@ function showWhoIs(known) {
       // records the death. ⚠️ SEEDED SEPARATELY (`whois-death-`), so the end is its own stable image and
       // minting it never overwrites the face they had while alive — both remain reachable.
       const dyingArt = known.dead && known.deathAppearance ? String(known.deathAppearance) : null;
-      const artSeed = dyingArt ? `whois-death-${seed}` : `whois-${seed}`;
+      // ⛔ CCODE-171: ONE PERSON, ONE SEED. This read the codex TOPIC id, while the portrait path reads the
+      // REGISTRY id — so Mara Wells was `water-keeper` here and `mara-wells` there, and the same woman had
+      // two faces and two sets of kept looks. Five people on Erik's own save. Resolved to one identity now;
+      // someone the registry does not know keeps their own seed, which is what stops it over-merging.
+      const canonId = canonicalPersonId(character, { entityId: known.codexId || known.id, label: known.label });
+      const seedKey171 = canonId || seed;
+      const artSeed = dyingArt ? `whois-death-${seedKey171}` : `whois-${seedKey171}`;
       // ⛔ SNG-401 (Erik, testing): A PICTURE THE PLAYER CHOSE WINS. This card re-mints from a stable seed
       // every time it opens, so without this the chosen one would be drawn away again on the next open —
       // and surviving is the entire point of Keep.
@@ -785,8 +791,9 @@ const CODEX_PICTURABLE = new Set(["person", "place"]);
 function codexTopImage(open) {
   if (!open || !imagesEnabled() || !CODEX_PICTURABLE.has(open.kind)) return "";
   try {
-    const seed = open.entityId || open.id || open.label;
-    const artSeed = `whois-${seed}`;
+    // CCODE-171: the same identity the popup resolves, so the page and the card are one person.
+    // CCODE-171: ONE helper builds the seed, so the page cannot drift from the card by being written twice.
+    const artSeed = personArtSeed(character, { entityId: open.entityId || open.id, topicId: open.id, label: open.label });
     const chosen = character?.figureImages?.[artSeed] || null;
     const fig = rosterFigureOf(artSeed);
     const isPlace = open.kind === "place";

@@ -520,7 +520,21 @@ img[data-lightbox] { cursor: zoom-in; }
   border: none; background: var(--panel); color: var(--ink); font-size: 13px; cursor: pointer; white-space: nowrap;
   box-shadow: 0 2px 10px rgba(0,0,0,.35); }
 .lightbox-save:disabled { opacity: .7; cursor: default; }
-@media (max-width: 640px) { .lightbox-nav.prev { left: 4px; } .lightbox-nav.next { right: 4px; } }
+/* SNG-401 — draw again / keep. Bottom edge, away from ✕ and ⤓ Save at the top: pressing one of these
+   spends a real generation or replaces a face, so neither may sit where a hand reaches for chrome.
+   "Keep" is the affirmative and is the only one tinted — it is the press that actually changes something. */
+.lightbox-regen, .lightbox-rebuild, .lightbox-keep { position: absolute; bottom: -14px; height: 32px; padding: 0 14px;
+  border-radius: 16px; border: none; font-size: 13px; cursor: pointer; white-space: nowrap; box-shadow: 0 2px 10px rgba(0,0,0,.35); }
+.lightbox-regen { left: -12px; background: var(--panel); color: var(--ink); }
+.lightbox-rebuild { left: 122px; background: var(--panel); color: var(--ink); }
+.lightbox-keep { right: -12px; background: var(--accent, #3c7d6e); color: #fff; font-weight: 600; }
+.lightbox-regen:disabled, .lightbox-rebuild:disabled, .lightbox-keep:disabled { opacity: .7; cursor: default; }
+@media (max-width: 640px) {
+  .lightbox-nav.prev { left: 4px; } .lightbox-nav.next { right: 4px; }
+  /* the three stack rather than overlap on a narrow screen — a Keep hidden under a Draw is a lost choice */
+  .lightbox-regen, .lightbox-rebuild, .lightbox-keep { bottom: -12px; font-size: 12px; padding: 0 10px; height: 30px; }
+  .lightbox-regen { left: 2px; } .lightbox-rebuild { left: 108px; } .lightbox-keep { right: 2px; }
+}
 /* SNG-059 creation v2: the great circle domain picker */
 .great-circle { width: 100%; max-height: 60vh; display: block; }
 .gc-ring { fill: none; stroke: var(--border); stroke-width: 1.5; }

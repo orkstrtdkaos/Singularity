@@ -155,7 +155,8 @@ const IMG_SIZES = {
  *  renders non-human, instead of the literal "character portrait" prefix biasing the model to a
  *  plain human. Explicit form/lineage/appearance wins; otherwise a neutral human default (human is
  *  a stated value, never the unspoken assumption). */
-export function formOf(subject = {}) { // registry:internal
+export function formOf(subject = {}) {
+ // registry:internal
   const explicit = subject.form || subject.lineage || subject.appearance;
   if (explicit) return String(explicit).slice(0, 220);
   return "a person";
@@ -289,6 +290,65 @@ export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, see
   return url;
 }
 
+// ---------- SNG-401: draw it again ----------
+
+/** ⛔ SNG-401 §3 — THIS DOES NOT TOUCH THE RECORD, AND THAT IS THE WHOLE DESIGN. Aevi: "a regenerate that
+ *  silently replaces a face the player had grown used to is worse than no button. The player asked for
+ *  another try, not for the old one to be deleted." So this is the twin of `ensureImage` with the
+ *  mutation removed: same prompt assembly, same FLOORS, a DIFFERENT seed — and it hands the result back
+ *  for the player to look at beside the old one. Nothing is kept until `acceptImage` is called.
+ *
+ *  §2: this is the RE-ROLL — same prompt, new seed, "draw this again". It is not the rebuild (re-run a
+ *  BUILDER for a new prompt), because a portrait has no builder: its prompt is assembled deterministically
+ *  from the person's own record, so re-running it returns the same words. Kinds that DO have a builder can
+ *  pass a fresh `promptOpts` and get the other button.
+ *
+ *  §4: the rating ceiling and minor-protection run here exactly as they do on a first mint. ⛔ A re-roll is
+ *  not a way around the floors — it goes through the same one, which is why the sanitize call is inline
+ *  rather than inherited from wherever the first image came from.
+ *  Returns {url, seedKey, prompt} or null when art is off. Pure. */
+export function regenerateImage(record, kind, { ratingLevel = 2, isMinor = null, seedKey = null, promptOpts = {}, attempt = 1, promptOverride = null } = {}) {
+  if (!imagesEnabled()) return null;
+  // §2 REBUILD, and the no-record case in one field. `promptOverride` is a prompt that did NOT come from
+  // assembling this record: either the player re-describing it ("describe this differently" — the rebuild),
+  // or a gallery tile whose subject has no live record to re-read (a moment, a creature). Absent it, the
+  // prompt is RE-ASSEMBLED rather than reused, so an item that has evolved or a person who has been renamed
+  // redraws from what is true now instead of from what was true when the first picture was made.
+  if (!record && !promptOverride) return null;
+  record = record || {};
+  const base = String(seedKey || record.imageSeedKey || record.id || record.name || kind);
+  // a distinct key per attempt — seedFrom is deterministic, so the SAME key would redraw the same face
+  // and the button would look broken while behaving correctly.
+  const nextKey = `${base.replace(/#r\d+$/, "")}#r${Math.max(1, attempt | 0)}`;
+  const minor = isMinor == null ? isMinorSubject(record) : !!isMinor;
+  const raw = promptOverride ? String(promptOverride).slice(0, 400) : assembleImagePrompt(kind, record, promptOpts);
+  const safe = sanitizeImagePrompt(raw, { ratingLevel, isMinor: minor });
+  return { url: imageURLFor(kind, safe, nextKey), seedKey: nextKey, prompt: safe };
+}
+
+/** SNG-401 §2: may this image be REBUILT (re-described), or only re-rolled? Aevi's rule — "an authored
+ *  portrait has no builder; it has a prompt I wrote, and rebuilding it would mean discarding my
+ *  authoring." An authored image is a path or URL that content shipped; a generated one came from the
+ *  provider. So the discriminator is simply where the picture came from. Pure. */
+export function isGeneratedImage(url) {
+  return /image\.pollinations\.ai/i.test(String(url || ""));
+}
+
+/** SNG-401 §3: the player looked at both and chose one. NOW it becomes the subject's image, and the seed
+ *  that produced it is remembered so the face stays stable from here on.
+ *  ⚠️ It also PINS. The bond-milestone portrait pass re-mints with a new seed at every new tier, so
+ *  without a pin a face the player deliberately chose would be silently replaced the next time the
+ *  relationship deepened — the exact complaint this feature exists to answer. `character.portraitPinned`
+ *  already establishes the rule for the player's own portrait; this is the same rule for everyone else.
+ *  Returns true when it took. */
+export function acceptImage(record, chosen = {}, { field = "image", pin = true } = {}) {
+  if (!record || !chosen.url) return false;
+  record[field] = chosen.url;
+  if (chosen.seedKey) record.imageSeedKey = chosen.seedKey;
+  if (pin) record.imagePinned = true;
+  return true;
+}
+
 // ---------- SNG-035: the character gallery / Saga ----------
 
 // SNG-332 — ⛔ NO CAP. Erik: "I want to remove the cap on images too — I don't want good ones dropping into
@@ -376,11 +436,16 @@ export function capGallery(gallery, cap = GALLERY_CAP, keepUrl = null) {
 
 /** Add an image to the character's gallery (dedup by url, newest-first, capped). Pure-ish
  *  (mutates the character). Returns the gallery. */
-export function addGalleryImage(character, { kind, prompt = "", url, caption = "", worldDay = null }) {
+/** SNG-401 §1: `subjectKind`/`subjectId` are the PROVENANCE — WHAT this picture is of. Aevi's obstacle:
+ *  "by the time an image is on screen the app has forgotten what produced it: no kind, no prompt, no seed,
+ *  no subject. A regenerate button on that data can only re-fetch the same URL." A gallery tile knew its
+ *  own `kind` ("portrait") but never WHOSE, so nothing downstream could redraw the person. Optional and
+ *  additive — an entry without it behaves exactly as before, and the caller falls back to the caption. */
+export function addGalleryImage(character, { kind, prompt = "", url, caption = "", worldDay = null, subjectKind = null, subjectId = null }) {
   ensureGallery(character);
   if (!url) return character.gallery;
   if (character.gallery.some(g => g.url === url)) return character.gallery;
-  character.gallery.unshift({ kind, prompt: String(prompt).slice(0, 200), url, caption: String(caption).slice(0, 120), worldDay, at: nowStamp() });
+  character.gallery.unshift({ kind, prompt: String(prompt).slice(0, 200), url, caption: String(caption).slice(0, 120), worldDay, at: nowStamp(), ...(subjectId ? { subjectKind: subjectKind || kind, subjectId: String(subjectId).slice(0, 60) } : {}) });
   character.gallery = capGallery(character.gallery, GALLERY_CAP, character.portrait); // CCODE-31: smart eviction — never the portrait, transient first
   return character.gallery;
 }

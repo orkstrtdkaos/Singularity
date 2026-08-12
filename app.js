@@ -33,7 +33,7 @@ import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive }
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js";
+import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, regenerateImage, acceptImage, isGeneratedImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.126";
+const APP_VERSION = "1.9.127";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -711,6 +711,139 @@ async function downloadImage(url, caption = "", kind = "image") {
   return true;
 }
 
+// ---------- SNG-401: regenerate an image, from the lightbox ----------
+// Aevi's obstacle, verbatim: "by the time an image is on screen the app has forgotten what produced it:
+// no kind, no prompt, no seed, no subject. A regenerate button on that data can only re-fetch the same
+// URL." These three functions are the memory — a lightbox item may carry `regen: {kind, subjectId, label}`,
+// and everything else follows from being able to find the record again.
+//
+// ⛔ ONE TABLE, NOT SEVEN BRANCHES. Each kind differs in exactly two ways — where its record is READ from
+// (to re-assemble the prompt) and where an accepted image is KEPT — so those are the two functions. Some
+// kinds have no record at all (a moment, a creature study): they live only as a gallery tile, so their
+// prompt comes from the tile and "keeping" one means keeping the tile. `find` returning null is not an
+// error; it means prompt-only.
+//
+// ⚠️ The player's own portrait ALSO has a richer flow on the Character screen (a one-off scene override, a
+// partner in frame). That is deliberately kept — it does things this cannot — and the two agree: the
+// override dialog there IS the rebuild, and it is the same dialog reached from here.
+const REGEN_KINDS = {
+  npc: {
+    label: n => n?.name || "this person",
+    find: id => character?.npcRegistry?.[id] || null,
+    keep: (id, url, seedKey) => { const n = character.npcRegistry?.[id]; return n ? acceptImage(n, { url, seedKey }) : false; },
+    promptOpts: rec => ({ character, aesthetic: npcAesthetic(rec) })
+  },
+  character: {
+    label: () => character?.name || "your portrait",
+    find: () => character || null,
+    keep: (id, url, seedKey) => { const ok = acceptImage(character, { url, seedKey }, { field: "portrait" }); if (ok) character.portraitPinned = true; return ok; }
+  },
+  location: {
+    label: id => CONTENT.locations?.[id]?.name || "this place",
+    find: id => CONTENT.locations?.[id] || null,
+    keep: (id, url) => { character.locationImages = character.locationImages || {}; character.locationImages[id] = url; return true; }
+  },
+  item: {
+    label: id => findItem(character, id)?.name || "this item",
+    find: id => findItem(character, id) || null,
+    keep: (id, url) => { const it = findItem(character, id); if (!it) return false; it.image = url; it.imageDirty = false; return true; }
+  },
+  ability: {
+    label: id => fullCatalog()[id]?.name || character?.customAbilities?.[id]?.name || "this craft",
+    find: id => fullCatalog()[id] || character?.customAbilities?.[id] || null,
+    keep: (id, url) => { character.abilityImages = character.abilityImages || {}; character.abilityImages[id] = url; return true; }
+  },
+  // No record behind these — the gallery tile IS the record, so keeping one is keeping the tile.
+  moment: { label: () => "this moment", find: () => null, keep: () => true },
+  beast: { label: () => "this creature", find: () => null, keep: () => true }
+};
+
+// SNG-401 §1, Aevi's constraint: "DO NOT stuff the prompt into an attribute — prompts are long and some
+// are spoiler-bearing; keep a lookup keyed by seedKey." A moment's prompt is the GM's own words about a
+// beat the player may not have seen resolve; it does not belong in the DOM. Keyed by url, which is the
+// one identifier a rendered image always has.
+const _regenPrompts = new Map();
+function notePromptFor(url, prompt) { if (url && prompt) _regenPrompts.set(String(url), String(prompt).slice(0, 400)); }
+
+/** Resolve a lightbox item's provenance back to the LIVE record it depicts, plus its kind's handlers.
+ *  A null record is legitimate (prompt-only kinds); a null SPEC is not — that means no button, never a guess. */
+function regenSubject(regen) {
+  if (!regen || !character) return null;
+  const spec = REGEN_KINDS[regen.kind];
+  if (!spec) return null;
+  return { spec, record: spec.find(regen.subjectId) };
+}
+
+/** SNG-401 §1: what does this gallery tile depict? Tiles minted from here on carry subjectKind/subjectId
+ *  outright. Older ones cannot — they predate provenance — so a PORTRAIT tile falls back to its caption,
+ *  which ensureBondPortraits writes as "Name — relationship". ⛔ The fallback is EXACT, not fuzzy: the
+ *  name must equal a registered person's. A near-miss would put a Draw-again button on someone's face
+ *  that redraws somebody else, which is worse than having no button on either. */
+function galleryRegenFor(g) {
+  if (!g || !character) return null;
+  const mk = (kind, subjectId) => REGEN_KINDS[kind]
+    ? { kind, subjectId, label: REGEN_KINDS[kind].label(subjectId), prompt: g.prompt || null, galleryKind: g.kind }
+    : null;
+  // 1. the tile says so outright (everything minted since provenance existed)
+  if (g.subjectKind && g.subjectId) return mk(g.subjectKind, g.subjectId);
+  // 2. a PORTRAIT tile predating provenance: its caption is "Name — relationship". ⛔ The match is EXACT,
+  //    never fuzzy — a near-miss would put a Draw-again button on one person's face that redraws another.
+  if (g.kind === "portrait") {
+    const nm = String(g.caption || "").split("—")[0].trim().toLowerCase();
+    if (!nm) return null;
+    if (nm === String(character.name || "").toLowerCase()) return mk("character", character.id);
+    const hit = Object.values(character.npcRegistry || {}).find(n => n?.name && n.name.toLowerCase() === nm);
+    if (hit) return mk("npc", hit.id);
+    return null;
+  }
+  // 3. a tile with no subject and no record — a moment, a scene, a creature study. Its own stored prompt
+  //    is enough to draw from, and the gallery is where a kept one lands, so it is fully regenerable.
+  if (g.prompt) return mk(REGEN_KINDS[g.kind] ? g.kind : "moment", null);
+  return null;
+}
+
+/** SNG-401 §2/§3: draw it again. `describe` carries the REBUILD's new words; without it this is the
+ *  re-roll — same description, new seed. Returns a NEW lightbox item; the caller appends it, and the
+ *  picture the player already had is untouched and still one arrow away. */
+function regenLightboxItem(it, attempt, describe = null) {
+  const sub = regenSubject(it.regen);
+  if (!sub) return null;
+  const { spec, record } = sub;
+  // prompt-only kinds (and a subject that has since gone) fall back to the prompt the tile carried
+  const stored = it.regen.prompt || _regenPrompts.get(String(it.url)) || it.prompt || null;
+  if (!record && !describe && !stored) return null;
+  const out = regenerateImage(record, it.regen.kind, {
+    ratingLevel: viewerRatingLevel(),            // §4: the ceiling applies to a re-roll exactly as to a first mint
+    seedKey: it.regen.seedKey || record?.imageSeedKey || it.regen.subjectId || null,
+    promptOpts: spec.promptOpts ? spec.promptOpts(record) : {},
+    promptOverride: describe || (record ? null : stored),
+    attempt
+  });
+  if (!out) return null;
+  return {
+    url: out.url, caption: it.caption, prompt: out.prompt, seedKey: out.seedKey,
+    regen: { ...it.regen, prompt: out.prompt }, isDraw: true, rebuilt: !!describe
+  };
+}
+
+/** SNG-401 §3 "on accept": THIS is the only place a picture is replaced, and only because the player
+ *  said so. Every kind lands through its own `keep` — the record for the ones that have one, the gallery
+ *  for the ones that don't. */
+function keepLightboxItem(it) {
+  const sub = regenSubject(it.regen);
+  if (!sub || !it.url) return false;
+  const { spec } = sub;
+  if (!spec.keep(it.regen.subjectId, it.url, it.seedKey)) return false;
+  addGalleryImage(character, {
+    kind: it.regen.galleryKind || it.regen.kind, prompt: it.prompt || "", url: it.url,
+    caption: it.caption || "", worldDay: absoluteWorldDay(),
+    subjectKind: it.regen.kind, subjectId: it.regen.subjectId
+  });
+  notePromptFor(it.url, it.prompt);
+  saveCharacter(character);
+  return true;
+}
+
 function openLightbox(items, start = 0) {
   const list = (items || []).filter(it => it && it.url);
   if (!list.length) return;
@@ -723,16 +856,85 @@ function openLightbox(items, start = 0) {
     else if (list.length > 1 && e.key === "ArrowLeft") { i = (i - 1 + list.length) % list.length; render(); }
     else if (list.length > 1 && e.key === "ArrowRight") { i = (i + 1) % list.length; render(); }
   };
+  // SNG-401 §3: attempts made in THIS lightbox. The old image is never overwritten — a new draw is
+  // APPENDED to the list the arrows already walk, so the player can go back to the one they preferred
+  // and simply close. Nothing is kept unless they say Keep.
+  let attempts = 0;
   const render = () => {
     const it = list[i];
+    // §2: only an item that arrived with provenance can be redrawn, and only while generation is on.
+    const canRegen = !!(it.regen && it.regen.kind && imagesEnabled());
+    // §2 — TWO BUTTONS, BECAUSE THEY ARE DIFFERENT ACTS. Re-roll is "draw this again"; rebuild is
+    // "describe this differently". ⛔ Aevi's reason this matters: if the COMPOSITION is wrong — wrong
+    // power, wrong place, two figures reading as one — a re-roll gives you the same wrong composition
+    // with a different grain. Only a rebuild fixes it. And rebuild is hidden on an AUTHORED image,
+    // because re-describing one would throw away the prompt she wrote by hand.
+    const canRebuild = canRegen && isGeneratedImage(it.url);
+    // §3: "Keep" appears only on a draw the player made — never on the image they already had, where it
+    // would be a no-op button inviting a pointless write.
+    const isNewDraw = !!it.regen && !!it.isDraw;
     el.innerHTML = `<div class="lightbox-inner">
-      <img src="${esc(it.url)}" alt="${esc(it.caption || "")}">
-      ${it.caption ? `<div class="lightbox-cap">${esc(it.caption)}${list.length > 1 ? ` · ${i + 1}/${list.length}` : ""}</div>` : ""}
+      <img src="${esc(it.url)}" alt="${esc(it.caption || "")}" data-lbimg>
+      ${it.caption ? `<div class="lightbox-cap">${esc(it.caption)}${list.length > 1 ? ` · ${i + 1}/${list.length}` : ""}${isNewDraw ? " · a new draw — not kept yet" : ""}</div>` : ""}
       ${list.length > 1 ? `<button class="lightbox-nav prev" data-lbprev>‹</button><button class="lightbox-nav next" data-lbnext>›</button>` : ""}
       <button class="lightbox-close" data-lbclose>✕</button>
       <button class="lightbox-save" data-lbsave title="Save this image to your device — it stays yours even if the link expires">⤓ Save</button>
+      ${canRegen ? `<button class="lightbox-regen" data-lbregen title="Draw ${esc(it.regen.label || "this")} again — same description, a new hand. The one you have now is kept beside it; nothing is replaced unless you choose it.">↻ Draw again</button>` : ""}
+      ${canRebuild ? `<button class="lightbox-rebuild" data-lbrebuild title="Describe ${esc(it.regen.label || "this")} differently — for when the picture is not merely unlucky but wrong (wrong place, wrong look, the wrong thing happening)">✎ Describe differently</button>` : ""}
+      ${isNewDraw ? `<button class="lightbox-keep" data-lbkeep title="Make this the picture for ${esc(it.regen.label || "this")} from now on">✓ Keep this one</button>` : ""}
     </div>`;
     el.querySelector("[data-lbclose]").onclick = close;
+    // §4: name the failure. A dead draw that just sits blank reads as "the button doesn't work".
+    const shownImg = el.querySelector("[data-lbimg]");
+    if (shownImg) shownImg.onerror = () => {
+      const cap = el.querySelector(".lightbox-cap");
+      if (cap) cap.textContent = `${it.caption || ""} · this one didn't come through — try Draw again`;
+    };
+    const regenBtn = el.querySelector("[data-lbregen]");
+    if (regenBtn) regenBtn.onclick = async (ev) => {
+      ev.stopPropagation();
+      regenBtn.disabled = true; regenBtn.textContent = "…drawing";
+      try {
+        const drawn = regenLightboxItem(it, ++attempts);
+        if (!drawn) throw new Error("nothing to draw from");
+        list.push(drawn);        // ⛔ APPEND — §3. Never an in-place overwrite of the current entry.
+        i = list.length - 1;
+        render();
+      } catch (err) {
+        console.warn("[art] regenerate failed", err);
+        regenBtn.textContent = "✕ couldn't draw";
+        regenBtn.title = "Could not build a new image for this — the record it came from may no longer be here.";
+        setTimeout(() => { regenBtn.disabled = false; regenBtn.textContent = "↻ Draw again"; }, 2500);
+      }
+    };
+    // §2 the REBUILD. New words, then the same append-don't-replace path — a rebuild is no more
+    // destructive than a re-roll, and is equally discardable by arrowing back.
+    const rebuildBtn = el.querySelector("[data-lbrebuild]");
+    if (rebuildBtn) rebuildBtn.onclick = (ev) => {
+      ev.stopPropagation();
+      const said = prompt(`Describe ${it.regen.label || "this"} as it should look.\n\n(This draws a new picture from your words. Nothing is replaced — it appears beside the one you have, and you choose.)`, "");
+      if (said === null || !said.trim()) return;
+      rebuildBtn.disabled = true; rebuildBtn.textContent = "…drawing";
+      try {
+        const drawn = regenLightboxItem(it, ++attempts, said.trim());
+        if (!drawn) throw new Error("nothing to draw from");
+        list.push(drawn);
+        i = list.length - 1;
+        render();
+      } catch (err) {
+        console.warn("[art] rebuild failed", err);
+        rebuildBtn.textContent = "✕ couldn't draw";
+        setTimeout(() => { rebuildBtn.disabled = false; rebuildBtn.textContent = "✎ Describe differently"; }, 2500);
+      }
+    };
+    const keepBtn = el.querySelector("[data-lbkeep]");
+    if (keepBtn) keepBtn.onclick = (ev) => {
+      ev.stopPropagation();
+      keepBtn.disabled = true;
+      const ok = keepLightboxItem(it);
+      keepBtn.textContent = ok ? "✓ kept" : "✕ couldn't keep";
+      if (ok) { it.isDraw = false; setTimeout(render, 900); }
+    };
     // SNG-335 — ⚠️ SAVE IT WHERE NO LINK CAN EXPIRE. Erik: "add an option to save an image locally — that
     // would preserve it even if the url vanishes."
     //
@@ -779,9 +981,18 @@ function wireLightbox() {
     const img = e.target.closest && e.target.closest("img[data-lightbox]");
     if (!img) return;
     if (img.dataset.lbgroup === "gallery" && character?.gallery?.length) {
-      openLightbox(character.gallery.map(g => ({ url: g.url, caption: g.caption })), Number(img.dataset.lbindex) || 0);
+      // SNG-401 §1: carry each tile's provenance into the lightbox, so a portrait can be redrawn there.
+      openLightbox(character.gallery.map(g => ({ url: g.url, caption: g.caption, prompt: g.prompt, regen: galleryRegenFor(g) })), Number(img.dataset.lbindex) || 0);
     } else {
-      openLightbox([{ url: img.getAttribute("src"), caption: img.getAttribute("alt") }]);
+      // SNG-401 §1: Aevi's own routing — `data-lightbox` is a string attribute on the img, so the
+      // provenance rides there (data-regen-kind / data-regen-subject) without changing eight signatures.
+      // ⛔ The PROMPT never rides an attribute; it comes from the url-keyed lookup.
+      const url = img.getAttribute("src");
+      const kind = img.dataset.regenKind || null;
+      const regen = kind && REGEN_KINDS[kind]
+        ? { kind, subjectId: img.dataset.regenSubject || null, label: REGEN_KINDS[kind].label(img.dataset.regenSubject), prompt: _regenPrompts.get(String(url)) || null }
+        : null;
+      openLightbox([{ url, caption: img.getAttribute("alt"), regen }]);
     }
   });
 }
@@ -2495,6 +2706,11 @@ function ensureBondPortraits(c) {
   for (const n of Object.values(c.npcRegistry || {})) {
     const tier = npcPortraitTier(n);
     if (!tier || n._portraitTier === tier) continue;  // not a milestone, or already portrayed at this tier
+    // ⛔ SNG-401 §3: a face the PLAYER chose is not re-drawn behind their back. This pass force-mints at
+    // every new tier, so without the pin, keeping a portrait would buy you exactly one bond milestone
+    // before the game overrode you — which is the complaint the feature exists to answer. Same rule
+    // `portraitPinned` already gives the player's own portrait.
+    if (n.imagePinned) { n._portraitTier = tier; continue; }
     try {
       // ⛔ SNG-367: the PEOPLE layer reaches the portrait. 33 of 34 NPCs led with the literal "a person"
     // because `formOf()` never returns falsy — so every figure was drawn from the same two words and
@@ -2503,7 +2719,8 @@ function ensureBondPortraits(c) {
     const url = ensureImage(n, "npc", { ratingLevel: viewerRatingLevel(), seedKey: `${n.id}-${tier}`, force: true, promptOpts: { character: c, aesthetic: aes367 } });
       if (url) { // no empty tile — only record when the mint actually resolved
         n._portraitTier = tier; n.image = url;
-        addGalleryImage(c, { kind: "portrait", prompt: npcPromptSeed(n, c), url, caption: `${n.name} — ${relationshipLabel(n)}`, worldDay: absoluteWorldDay() });
+        // SNG-401 §1: the tile remembers WHOSE face it is, so the lightbox can redraw the right person.
+        addGalleryImage(c, { kind: "portrait", prompt: npcPromptSeed(n, c), url, caption: `${n.name} — ${relationshipLabel(n)}`, worldDay: absoluteWorldDay(), subjectKind: "npc", subjectId: n.id });
       }
     } catch { /* a milestone portrait is a grace, never a blocker */ }
   }
@@ -4578,6 +4795,9 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
       if (url) {
         result.turn.momentArt = url;
         sceneArtCount++;
+        // SNG-401 §1: a moment has no record to re-read, so its prompt IS its provenance — held in the
+        // url-keyed lookup rather than a DOM attribute, because it is the GM's own words about a beat.
+        notePromptFor(url, moment.prompt);
         addGalleryImage(character, { kind: "moment", prompt: moment.prompt, url, caption: (result.turn.sceneSummary || "").slice(0, 90), worldDay: absoluteWorldDay() });
         saveCharacter(character);
       }
@@ -4799,7 +5019,7 @@ function showBraidMoment(def) {
   };
   pop.innerHTML = `<div class="help-card braid-moment" role="dialog" aria-label="${isDiscovery ? "A technique discovered" : isRecognition ? "A braid recognised" : "A braid forms"}">
     <div class="braid-moment-kicker">✦ ${kicker} ✦</div>
-    ${def.image ? `<img class="braid-moment-art" src="${esc(def.image)}" alt="${esc(def.name)}" data-lightbox="${esc(def.image)}">` : ""}
+    ${def.image ? `<img class="braid-moment-art" src="${esc(def.image)}" alt="${esc(def.name)}" data-lightbox="${esc(def.image)}" data-regen-kind="ability" data-regen-subject="${esc(def.id)}">` : ""}
     <div class="braid-moment-parents"><strong>${parents}</strong></div>
     <div class="braid-moment-arrow">${arrow}</div>
     <h2 class="braid-moment-name" id="braid-name">${esc(def.name)}</h2>
@@ -7892,7 +8112,7 @@ function renderMap(selectedId = null) {
         ${(() => { const s = l.communityId ? standingWith(character, l.communityId, CONTENT.rules) : null; return s?.score ? `<span class="rep-band ${s.band}" title="Your standing here — ${s.band} (${s.score})">${esc(s.band)}</span>` : ""; })()}
       </div>
       ${(() => { const ppl = knownPeopleAt(character, l.id, { locations: CONTENT.locations, npcs: CONTENT.npcs }); return ppl.length ? `<div class="loc-people"><span class="hint">You know here: </span>${ppl.map(p => `<span class="known-here">${esc(p.name)} <span class="cost">${esc(p.label)}</span></span>`).join(", ")}</div>` : ""; })()}
-      ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" loading="lazy" onerror="this.style.display='none'">` : ""}
+      ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" data-regen-kind="location" data-regen-subject="${esc(l.id)}" loading="lazy" onerror="this.style.display='none'">` : ""}
       ${visited
         ? `<p class="map-details-desc">${esc(l.descriptionSeed)}</p>${/* SNG-076: authored descriptionSeed renders IN FULL */""}
            ${(() => { const vs = vectorSummary(character, l.id, l, CONTENT.spectrums, CONTENT.rules); return vs ? `<div class="place-vectors">${esc(vs)}</div>` : ""; })()}
@@ -8363,7 +8583,7 @@ function renderSkillWheel(selectedId = null, status = "") {
     <div class="map-details-head"><h3>${esc(sel.name)}</h3>
       <span class="rep-band" style="border-color:${traditionColor(sel.cls)};color:${traditionColor(sel.cls)}">${esc(traditionLabel(sel.cls))} · Tier ${sel.tier}</span>
       ${sel.owned ? `<span class="rep-band trusted">owned</span>` : sealedSel ? `<span class="rep-band" style="border-color:var(--accent);color:var(--accent)">✦ sealed</span>` : ""}</div>
-    ${selImg ? `<img class="craft-detail-art" src="${esc(selImg)}" alt="${esc(sel.name)}" data-lightbox="${esc(selImg)}">` : ""}
+    ${selImg ? `<img class="craft-detail-art" src="${esc(selImg)}" alt="${esc(sel.name)}" data-lightbox="${esc(selImg)}" data-regen-kind="ability" data-regen-subject="${esc(sel.id)}">` : ""}
     <div class="hint">${sealedSel ? "✦ a precursor craft of the substrate — outside the poles" : esc(gateLine)}${!sealedSel && sel.effCost != null ? ` · ⚡${sel.effCost} energy${selAb?.energyCost && sel.effCost !== selAb.energyCost ? ` (base ${selAb.energyCost})` : ""}` : ""}</div>
     ${groundRow(selAb)}
     ${(selAb?.functions || []).length ? `<div style="margin:4px 0">${functionChips(selAb)}</div>` : ""}
@@ -8979,7 +9199,7 @@ function renderCharacterScreen() {
   const galleryCount = (character.gallery || []).length;
   chrome(`<div class="screen" style="max-width:760px">
     <div class="cs-header">
-      ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" onerror="this.style.display='none'">` : ""}
+      ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" data-regen-kind="character" onerror="this.style.display='none'">` : ""}
       <div class="cs-header-text">
         <h2 style="margin:0">${esc(character.name)}</h2>
         <div class="hint"><span class="trait-tap" data-trait="origin:${esc(character.origin)}" title="tap: lore + mechanics">${esc(character.origin)}</span> · <span class="trait-tap" data-trait="background:${esc(character.background)}" title="tap: lore + mechanics">${esc(character.background)}</span> · level ${character.level} — ${character.xp}/${xpNeed} xp ${infoDot("growth.level")}${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
@@ -9775,7 +9995,7 @@ function renderChronicle() {
   chrome(`<div class="screen" style="max-width:680px">
     <h2>${esc(character.name)}</h2>
     ${characterTabBar("chronicle")}
-    ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" onerror="this.style.display='none'">` : ""}
+    ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" data-regen-kind="character" onerror="this.style.display='none'">` : ""}
     <h3 style="margin-top:6px">${esc(character.name)}${character.level ? ` · level ${character.level}` : ""}</h3>
     ${character._chronicleError ? `<div class="hint">${esc(character._chronicleError)}</div>` : ""}
     <section><h3>The story so far</h3>
@@ -10619,7 +10839,7 @@ function itemCard(it, { open = false, toggleAttr = "data-item-toggle", showPin =
   return `<div class="item-card ${open ? "open" : ""}">
     <button class="item-name" ${toggleAttr}="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>${showPin ? `<button class="item-pin ${it.pinned ? "on" : ""}" data-item-pin="${esc(it.name)}" title="${it.pinned ? "Pinned to the sidebar — tap to unpin" : "Pin to the sidebar for quick access"}">${it.pinned ? "📌" : "📍"}</button>` : ""}
     ${open ? `<div class="item-detail">
-      ${img ? `<img class="item-img" data-lightbox="item" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
+      ${img ? `<img class="item-img" data-lightbox="item" data-regen-kind="item" data-regen-subject="${esc(it.name)}" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
       <div class="item-desc">${esc(it.description || it.kind)}</div>
       ${it.provenance ? `<div class="item-prov">${esc(it.provenance)}</div>` : ""}
       ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
@@ -11850,7 +12070,10 @@ function renderPlay(turn, opts = {}) {
       // Per-person controls: the GM is supposed to emit revealName/nameExtend when the fiction
       // learns a name, and it intermittently doesn't — leaving "Broad Opportunist" beside the same
       // person's real name. Only the player knows they are the same, so give the player the verbs.
-      const peopleCtl = (p) => p.id ? ` <button class="npc-ctl" data-setname="${esc(p.id)}" title="Set or extend this person's name (e.g. Pell → Pell Ran Marsh)">✎</button><button class="npc-ctl" data-mergenpc="${esc(p.id)}" title="This is the same person as someone else you know — merge them">⇊</button>` : "";
+      // SNG-401 §5: the direct way in. A portrait otherwise only appears as a gallery tile, so a player who
+      // thinks "that isn't what she looks like" has to go hunting for it. The ↻ shows ONLY when this person
+      // actually has a picture to be unhappy with.
+      const peopleCtl = (p) => p.id ? ` <button class="npc-ctl" data-setname="${esc(p.id)}" title="Set or extend this person's name (e.g. Pell → Pell Ran Marsh)">✎</button><button class="npc-ctl" data-mergenpc="${esc(p.id)}" title="This is the same person as someone else you know — merge them">⇊</button>${imagesEnabled() && character.npcRegistry?.[p.id]?.image ? `<button class="npc-ctl" data-repic="${esc(p.id)}" title="Look at ${esc(p.name)}'s picture — and draw it again if it isn't them">↻</button>` : ""}` : "";
       const row = (p, extra = "") => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}${extra}</span>${peopleCtl(p)}</div>`;
       const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span>${peopleCtl(p)}</div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereRest.length ? hereRest.map(p => row(p)).join("") : (partners.length ? "" : `<span class="insight">no one you know is here right now</span>`)}`;
       return `<details class="sidebar-sec" data-sec="whoshere"${sectionOpen("whoshere", true) ? " open" : ""}><summary><span class="sec-title">${esc(location.name)} — who's here</span>${rep ? ` <span class="sec-sum">· ${rep.band}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;
@@ -12148,7 +12371,7 @@ function renderPlay(turn, opts = {}) {
     // SNG-252b §2b: the ribbon may already have claimed this beat — when an encounter is live the SCENE
     // leads the ribbon. Rendered here only when it did not, so the prose appears exactly once.
     if (!beatPlacedInRibbon) main += beatHtml;
-    if (turn.momentArt) main += `<div class="moment-art"><img src="${esc(turn.momentArt)}" alt="${esc(turn.sceneSummary || "a moment")}" data-lightbox="moment" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`; // SNG-035/053
+    if (turn.momentArt) main += `<div class="moment-art"><img src="${esc(turn.momentArt)}" alt="${esc(turn.sceneSummary || "a moment")}" data-lightbox="moment" data-regen-kind="moment" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`; // SNG-035/053
     // SNG-168 §2: post THIS turn to the family feed — the value is the CHOOSING (a moment you loved), never
     // automatic. Only when family-sync is on (a shared feed needs the shared repo). Not canon — a scrapbook post.
     if (syncEnabled() && turn.narration) main += `<div class="turn-post"><button class="opt" id="post-to-feed" title="Share this moment with the family — it appears in their feed, lensed to their rating. Not canon: it never changes anyone's game.">📮 Post to feed</button></div>`;
@@ -12372,6 +12595,14 @@ function renderPlay(turn, opts = {}) {
     const cur = character.npcRegistry?.[b.dataset.setname]?.name || "";
     const nn = prompt(`Their full name?\n\n(You can extend it — "Pell" → "Pell Ran Marsh". The old name is kept as an alias so the GM still recognises it.)`, cur);
     if (nn && setNpcName(character, b.dataset.setname, nn, readClock(character.clock).day)) { saveCharacter(character); renderPlay(character.activeScene?.lastTurn || null, {}); }
+  };
+  // SNG-401 §5: open this person's picture, with Draw again live on it. The lightbox is the whole UI —
+  // this control only has to know WHO, which is exactly the provenance the spec said was missing.
+  for (const b of app.querySelectorAll("[data-repic]")) b.onclick = (e) => {
+    e.stopPropagation();
+    const n = character.npcRegistry?.[b.dataset.repic];
+    if (!n?.image) return;
+    openLightbox([{ url: n.image, caption: `${n.name} — ${relationshipLabel(n)}`, regen: { kind: "npc", subjectId: n.id, label: n.name } }]);
   };
   // CCODE-05: "this is the same person as…" — the merge only the PLAYER can make. Auto-merge matches
   // on NAME, so it can never know "Broad Opportunist" and "Bren Thalle" are one man; nothing in the

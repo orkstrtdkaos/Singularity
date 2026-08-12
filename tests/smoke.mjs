@@ -14074,6 +14074,111 @@ await (async () => {
   check("427: all three names are recognised as a remote channel (SNG-425 agrees with the ruling)", /shadow\[-\\s\]\?\(\?:slate\|sheet\|tablet\)/.test(intentSrc427));
 }
 
+// ---- SNG-401: draw an NPC's picture again, WITHOUT destroying the one they have ----
+// Aevi's spec, and §3 is the load-bearing rule: "a regenerate that silently replaces a face the player
+// had grown used to is worse than no button. The player asked for another try, not for the old one to
+// be deleted."
+{
+  const { regenerateImage, acceptImage, isGeneratedImage, setArtMode, addGalleryImage: addG401 } = await import("../engine/art.js");
+  const artWas = localStorage.getItem("singularity.artMode");
+  setArtMode("generate");
+  const pell = () => ({ id: "pell", name: "Pell Ran Marsh", description: "a village blacksmith, file in hand", image: "ORIGINAL", relationship: 10 });
+
+  // §3 — THE RULE. The record must be untouched by a draw.
+  const p1 = pell();
+  const drawn = regenerateImage(p1, "npc", { ratingLevel: 2, attempt: 1 });
+  check("401 §3 THE RULE: a draw does NOT touch the record (the old face survives)", p1.image === "ORIGINAL" && !p1.imagePinned && !p1.imageSeedKey);
+  check("401: …and it returns a real, different picture to look at beside it", !!drawn?.url && drawn.url !== "ORIGINAL" && /image\.pollinations/.test(drawn.url));
+
+  // §2 — a re-roll is the SAME prompt with a NEW seed. Same seed would redraw the same face.
+  const d2 = regenerateImage(pell(), "npc", { ratingLevel: 2, attempt: 2 });
+  check("401 §2: same prompt, DIFFERENT seed — two attempts are two pictures", drawn.prompt === d2.prompt && drawn.url !== d2.url && drawn.seedKey !== d2.seedKey);
+  check("401: attempt keys do not compound across re-rolls (r1 → r2, never r1#r2)", /#r2$/.test(d2.seedKey) && !/#r\d+#r/.test(regenerateImage({ ...pell(), imageSeedKey: drawn.seedKey }, "npc", { attempt: 3 }).seedKey));
+
+  // §4 — THE FLOORS. A re-roll is not a way around the content ceiling, and minor-safety is absolute.
+  const kid = { id: "wren", name: "Wren", description: "a child of the mill", isMinor: true };
+  const kidDraw = regenerateImage(kid, "npc", { ratingLevel: 4, attempt: 1 });
+  check("401 §4: minor-safety runs on a re-roll exactly as on a first mint", /child-safe|wholesome|no sexual/i.test(decodeURIComponent(kidDraw.url)));
+  const gLow = regenerateImage(pell(), "npc", { ratingLevel: 0, attempt: 1 });
+  const gHigh = regenerateImage(pell(), "npc", { ratingLevel: 4, attempt: 1 });
+  check("401 §4: the viewer's ceiling still shapes the prompt (a re-roll cannot climb it)", decodeURIComponent(gLow.url).includes("family-friendly") && !decodeURIComponent(gHigh.url).includes("family-friendly"));
+
+  // §3 "on accept" — NOW it lands, and the seed is remembered so the face stays stable.
+  const p3 = pell();
+  const ok = acceptImage(p3, { url: drawn.url, seedKey: drawn.seedKey });
+  check("401 §3 on accept: the chosen picture becomes theirs and its seed is kept", ok && p3.image === drawn.url && p3.imageSeedKey === drawn.seedKey);
+  check("401: accepting PINS — a chosen face is not re-drawn behind the player's back", p3.imagePinned === true);
+  check("401: accept refuses an empty pick rather than blanking the record", acceptImage(p3, {}) === false && p3.image === drawn.url);
+
+  // the pin has to be READ, or it is decoration. This is the bond-milestone pass's own guard.
+  const appSrc401 = readFileSync(join(root, "app.js"), "utf8");
+  check("401: the bond-portrait pass HONOURS the pin (else keeping buys you one milestone)", /if \(n\.imagePinned\) \{ n\._portraitTier = tier; continue; \}/.test(appSrc401));
+
+  // §1 — provenance. Without it a button "can only re-fetch the same URL".
+  const c401 = { gallery: [] };
+  addG401(c401, { kind: "portrait", url: "u1", caption: "Pell Ran Marsh — devoted", subjectKind: "npc", subjectId: "pell" });
+  addG401(c401, { kind: "moment", url: "u2", caption: "a moment" });
+  const tileOf = u => c401.gallery.find(g => g.url === u);
+  check("401 §1: a gallery tile now records WHOSE face it is", tileOf("u1").subjectId === "pell" && tileOf("u1").subjectKind === "npc");
+  check("401 §1: a tile with no subject gains no empty fields (additive — old entries still work)", !("subjectId" in tileOf("u2")) && !("subjectKind" in tileOf("u2")));
+  check("401 §1: the prompt is NOT stuffed into a DOM attribute (Aevi: they are long and spoiler-bearing)", !/data-regen-prompt/.test(appSrc401));
+  check("401 §1: the lightbox carries provenance per item and the gallery path supplies it", /regen: galleryRegenFor\(g\)/.test(appSrc401) && /function galleryRegenFor/.test(appSrc401));
+  check("401: the caption fallback for pre-provenance tiles is EXACT, never fuzzy (a near-miss redraws the wrong person)", /n\.name\.toLowerCase\(\) === nm/.test(appSrc401));
+
+  // §1 ACROSS THE WHOLE SURFACE — Aevi counted eight call sites, "all pass the same two fields".
+  for (const [site, re] of [
+    ["location banner", /data-lightbox="location" data-regen-kind="location" data-regen-subject=/],
+    ["craft art", /data-lightbox="\$\{esc\(selImg\)\}" data-regen-kind="ability" data-regen-subject=/],
+    ["braid moment", /class="braid-moment-art"[^`]*data-regen-kind="ability"/],
+    ["item examine", /data-lightbox="item" data-regen-kind="item" data-regen-subject=/],
+    ["moment art", /data-lightbox="moment" data-regen-kind="moment"/],
+    ["character portrait", /data-lightbox="portrait" data-regen-kind="character"/]
+  ]) check(`401 §1: the ${site} carries its provenance`, re.test(appSrc401));
+  check("401 §1: the delegated handler reads the provenance off the img (no eight signatures changed)", /img\.dataset\.regenKind/.test(appSrc401) && /img\.dataset\.regenSubject/.test(appSrc401));
+  check("401 §1: the FEED image is deliberately NOT regenerable — it is someone else's moment", /data-lightbox="feed"(?![^>]*data-regen-kind)/.test(appSrc401));
+
+  // §2 THE SECOND BUTTON. Aevi: a re-roll on a wrong COMPOSITION returns the same wrong composition.
+  check("401 §2: there is a REBUILD as well as a re-roll, and it takes new words", /data-lbrebuild/.test(appSrc401) && /Describe .* differently/.test(appSrc401) && /regenLightboxItem\(it, \+\+attempts, said\.trim\(\)\)/.test(appSrc401));
+  check("401 §2: rebuild is hidden on an AUTHORED image (re-describing would discard the authoring)", /const canRebuild = canRegen && isGeneratedImage\(it\.url\)/.test(appSrc401));
+  check("401 §2: an authored path is told from a generated one by where it came from", isGeneratedImage("https://image.pollinations.ai/prompt/x") && !isGeneratedImage("content/packs/valley/assets/thornmother.png") && !isGeneratedImage(""));
+  const rebuilt = regenerateImage(pell(), "npc", { ratingLevel: 2, attempt: 1, promptOverride: "a grey-haired smith at an anvil, soot on her forearms" });
+  check("401 §2: a rebuild draws from the NEW words, not the record's own description", decodeURIComponent(rebuilt.url).includes("soot on her forearms") && !decodeURIComponent(rebuilt.url).includes("file in hand"));
+  check("401 §2: …and the floors still run on the player's own words", decodeURIComponent(regenerateImage(pell(), "npc", { ratingLevel: 0, attempt: 1, promptOverride: "an erotic nude portrait" }).url).match(/erotic|nude/) === null);
+  check("401 §2: a rebuild with no record at all still draws (a moment has no record, only words)", !!regenerateImage(null, "moment", { promptOverride: "the seam sealed at dawn" })?.url);
+  check("401: nothing to draw from is refused rather than guessed", regenerateImage(null, "moment", {}) === null);
+
+  // the kind table — one place that knows where each subject is read from and kept
+  check("401: every regenerable kind declares BOTH how to find it and where a kept image lands", /const REGEN_KINDS = \{/.test(appSrc401)
+    && ["npc", "character", "location", "item", "ability", "moment", "beast"].every(k => new RegExp(`\\b${k}: \\{`).test(appSrc401.slice(appSrc401.indexOf("const REGEN_KINDS")))) );
+  check("401: an UNKNOWN kind yields no button rather than a guess", /const spec = REGEN_KINDS\[regen\.kind\];\s*\n\s*if \(!spec\) return null;/.test(appSrc401));
+  check("401: a record-less kind is legitimate, not an error (the gallery tile IS its record)", /A null record is legitimate/.test(appSrc401));
+
+  // §3 in the UI — append, never replace. This is the line that would undo the whole spec.
+  check("401 §3: a new draw is APPENDED to the lightbox list, never written over the current item", /list\.push\(drawn\);/.test(appSrc401) && !/list\[i\] = drawn/.test(appSrc401));
+  check("401 §3: Keep shows only on a draw the player made, not on the picture they already had", /const isNewDraw = !!it\.regen && !!it\.isDraw;/.test(appSrc401));
+  check("401 §4: the button is disabled in flight, shows work, and NAMES a failure", /regenBtn\.disabled = true; regenBtn\.textContent = "…drawing"/.test(appSrc401) && /couldn't draw/.test(appSrc401) && /didn't come through/.test(appSrc401));
+  check("401 §5: there is a direct way in from the people list, only when a picture exists", /data-repic=/.test(appSrc401) && /\?\.\[p\.id\]\?\.image \?/.test(appSrc401));
+  check("401: art OFF means no draw at all (generation is the on-switch, honoured here too)", (() => { setArtMode("off"); const r = regenerateImage(pell(), "npc", {}); setArtMode("generate"); return r === null; })());
+
+  // ⛔ FOUND WHILE MUTATING SNG-401 — A PRE-EXISTING HOLE, NOT A NEW ONE. Deleting the FLOORS call from
+  // `ensureImage` — the path every FIRST image in the game takes — left all ~3400 checks green. The rating
+  // ceiling and minor-protection on the primary image path were entirely ungated; only the re-roll I had
+  // just written was covered. A safety floor nobody tests is a safety floor that can be removed by accident.
+  {
+    const kidRec = { id: "wren2", name: "Wren", role: "a child of the mill", isMinor: true };
+    ensureImage(kidRec, "npc", { ratingLevel: 4 });
+    check("035/401: ensureImage runs the FLOORS — minor-protection on a first mint", /child-safe|wholesome/i.test(decodeURIComponent(kidRec.image || "")));
+    const adultG = { id: "a1", name: "Roth", role: "a soldier, blood on his hands" };
+    ensureImage(adultG, "npc", { ratingLevel: 0 });
+    check("035/401: ensureImage runs the FLOORS — the viewer's ceiling on a first mint", (() => { const u = decodeURIComponent(adultG.image || ""); return u.includes("family-friendly") && !/\bblood\b/.test(u); })());
+    const tail = { id: "t1", name: "Anyone", role: "a traveller" };
+    ensureImage(tail, "npc", { ratingLevel: 2 });
+    check("035/401: …and the absolute safety tail rides every first mint", /non-explicit/.test(decodeURIComponent(tail.image || "")));
+  }
+  check("401: the prompt lookup is keyed off the DOM, not stored in it", /const _regenPrompts = new Map\(\)/.test(appSrc401) && /notePromptFor\(url, moment\.prompt\)/.test(appSrc401));
+  if (artWas) localStorage.setItem("singularity.artMode", artWas);
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

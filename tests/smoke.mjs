@@ -14280,6 +14280,59 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-168: an item in a kind nobody listed is counted and never shown ----
+// Erik: "I don't see my shadow tablet in my inventory" — with the header reading 27 and twenty-six tiles on
+// screen. The bag rendered from a hard-coded five-kind whitelist while content ships SEVEN, so every
+// `focus`, `relic` and `armor` item in the game was invisible. My tablet was the one that made it visible.
+{
+  const { ITEM_KINDS, itemKindsIn, itemKindLabel, addItem: addI168 } = await import("../engine/inventory.js");
+
+  // ⛔ THE CLASS, NOT THE INSTANCE: every shipped item must fall in a kind the bag can render.
+  const shipped = [];
+  const walk168 = (d) => { for (const f of readdirSync(d, { withFileTypes: true })) {
+    const pth = join(d, f.name);
+    if (f.isDirectory()) walk168(pth);
+    else if (f.name.endsWith(".json")) { try { const j = JSON.parse(readFileSync(pth, "utf8"));
+      const arr = Array.isArray(j) ? j : (j.items || []);
+      if (Array.isArray(arr)) for (const a of arr) if (a && a.name && a.kind && (a.worth || a.bonusTags || a.consumable !== undefined)) shipped.push(a);
+    } catch { /* not an item pack */ } } } };
+  walk168(join(root, "content/packs"));
+  const orphan = shipped.filter(i => !ITEM_KINDS.includes(i.kind));
+  check(`CCODE-168: all ${shipped.length} shipped items fall in a kind the bag can render`, shipped.length > 20 && orphan.length === 0,
+    () => [...new Set(orphan.map(i => `${i.kind} (${i.name})`))].join("; "));
+  check("CCODE-168: the kinds that were invisible are in the vocabulary", ["focus", "relic", "armor"].every(k => ITEM_KINDS.includes(k)));
+
+  // ⛔ A CENSUS, NOT A WHITELIST — a kind nobody thought of is still the player's item
+  const bag = [{ name: "a", kind: "weapon" }, { name: "b", kind: "focus" }, { name: "c", kind: "wholly-new-kind" }];
+  const ks = itemKindsIn(bag);
+  check("CCODE-168: an UNKNOWN kind still gets a section rather than vanishing", ks.includes("wholly-new-kind"));
+  check("CCODE-168: …and the known kinds keep their display order in front of it", ks.indexOf("weapon") < ks.indexOf("focus") && ks.indexOf("focus") < ks.indexOf("wholly-new-kind"));
+  check("CCODE-168: EVERY item in a bag is accounted for by some section (the header count and the tiles agree)", (() => {
+    const shown = itemKindsIn(bag).reduce((n, k) => n + bag.filter(i => i.kind === k).length, 0);
+    return shown === bag.length;
+  })());
+  check("CCODE-168: headings are words — not 'focuss' or 'armors'", itemKindLabel("focus") === "focus items" && itemKindLabel("armor") === "armour" && itemKindLabel("weapon") === "weapons");
+
+  // the OTHER copy of the same whitelist: a GM-conferred focus was silently flattened to misc
+  const ch168 = { inventory: [] };
+  addI168(ch168, { name: "A Prism Lens", kind: "focus", description: "a lens" }, {});
+  check("CCODE-168: a GM-conferred item KEEPS its kind (the second copy of the whitelist flattened it to misc)",
+    ch168.inventory[0].kind === "focus");
+  addI168(ch168, { name: "A Nonsense", kind: "not-a-kind" }, {});
+  check("CCODE-168: …while a genuinely bogus kind still clamps to misc", ch168.inventory.find(i => i.name === "A Nonsense").kind === "misc");
+
+  const src168 = readFileSync(join(root, "app.js"), "utf8");
+  check("CCODE-168: the bag renders from the census and there is no second whitelist left", /const kinds = itemKindsIn\(character\.inventory \|\| \[\]\);/.test(src168)
+    && !/\["weapon", "tool", "consumable", "quest", "misc"\]/.test(src168));
+  check("CCODE-168: an item with NO kind at all is still shown", /const kindless = inv\.filter\(i => !i\?\.kind\);/.test(src168) && /\$\{grid\}\$\{extra\}/.test(src168));
+
+  // Erik's own bag, with the reclaim applied — the report, asserted
+  const silas168 = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
+  const withTablet = [...(silas168.inventory || []), { id: "shadow_tablet", name: "Shadow Tablet", kind: "focus" }];
+  const rendered = itemKindsIn(withTablet).reduce((n, k) => n + withTablet.filter(i => i.kind === k).length, 0);
+  check("CCODE-168: Silas's bag WITH the tablet renders every item it counts", rendered === withTablet.length, `${rendered}/${withTablet.length}`);
+}
+
 // ---- CCODE-167: a merge the player made by hand had no way back, and the dialog SAID so ----
 // Erik: "I accidentally merged Cevaine the person with Cevaine Lore in the codex... :(" — and he was right
 // to think it was gone, because the confirm box told him "This can't be undone." ⛔ IT WAS NEVER TRUE.

@@ -11,6 +11,26 @@
 import { namesMatch, resolveByName, smartClamp } from "./namematch.js"; // SNG-152
 import { grantSummary } from "./earnedpower.js"; // SNG-251 §2c: the item's mechanical sheet, one line
 
+// ⛔ CCODE-168: THE ONE ITEM-KIND VOCABULARY, because there were two copies of a five-entry whitelist and
+// content ships SEVEN kinds. Every `focus`, `relic` and `armor` item in the game — 11 of the 37 shipped —
+// was counted in the bag and rendered nowhere, and a GM-conferred one was silently flattened to "misc".
+// Erik found it the only way it can be found: "I don't see my shadow tablet in my inventory", with the
+// header saying 27 and twenty-six tiles on screen.
+// ⚠️ ORDER IS DISPLAY ORDER. Anything not listed still renders — see `itemKindsIn` — because a whitelist
+// that silently swallows what it does not recognise is what caused this.
+export const ITEM_KINDS = ["weapon", "armor", "tool", "focus", "consumable", "quest", "relic", "trinket", "misc"];
+
+/** The kinds actually present in a bag, in display order, with unlisted ones kept rather than dropped.
+ *  ⛔ A CENSUS, NOT A WHITELIST: an item whose kind nobody thought of is still the player's item. */
+export function itemKindsIn(inventory = []) {
+  const present = [...new Set(inventory.map(i => i?.kind).filter(Boolean))];
+  return [...ITEM_KINDS.filter(k => present.includes(k)), ...present.filter(k => !ITEM_KINDS.includes(k))];
+}
+
+/** The plural heading for a kind — "focuss" and "armors" are not words. */
+const KIND_PLURAL = { focus: "focus items", armor: "armour", armour: "armour", misc: "misc", relic: "relics", trinket: "trinkets" };
+export function itemKindLabel(kind) { return KIND_PLURAL[kind] || `${kind}s`; }
+
 /** Find the existing stack an incoming item belongs to (id → name/custom/alias → fuzzy). */
 export function resolveInventoryItem(character, incoming, catalog = {}) {
   const inv = character.inventory || [];
@@ -131,7 +151,7 @@ export function addItem(character, incoming, catalog = {}, opts = {}) {
     item = {
       id: catalog[incoming.id] ? incoming.id : null,
       name: String(incoming.name || "curious object").slice(0, 60),
-      kind: ["weapon", "tool", "consumable", "quest", "misc"].includes(incoming.kind) ? incoming.kind : "misc",
+      kind: ITEM_KINDS.includes(incoming.kind) ? incoming.kind : "misc",   // CCODE-168: the shared vocabulary, so a GM-conferred focus/relic/armour is not flattened
       qty: Math.max(1, Math.min(10, incoming.qty | 0 || 1)),
       description: incoming.description ? smartClamp(String(incoming.description), 400) : undefined, // SNG-152
       effects: clampEffects(incoming.effects),

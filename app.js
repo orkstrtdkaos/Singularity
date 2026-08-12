@@ -29,7 +29,7 @@ import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, merg
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
-import { wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
+import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.132";
+const APP_VERSION = "1.9.133";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9870,7 +9870,7 @@ function renderRepairScreen(note = "") {
 }
 
 // SNG-215 §B: a physical KIND-icon per item so the bag reads at a glance (a bag of objects, not a list).
-const ITEM_KIND_ICON = { weapon: "⚔", tool: "⚒", consumable: "🧪", quest: "📜", relic: "◈", trinket: "◈", armor: "🛡", armour: "🛡", misc: "◌" };
+const ITEM_KIND_ICON = { weapon: "⚔", tool: "⚒", consumable: "🧪", quest: "📜", relic: "◈", trinket: "◈", armor: "🛡", armour: "🛡", focus: "◉", misc: "◌" };
 const itemKindIcon = it => ITEM_KIND_ICON[it?.kind] || "◌";
 
 // SNG-215 §B: the inventory is a BAG — a grid of tiny kind-icon tiles you scan, each opening a DETAIL POPUP
@@ -9878,22 +9878,26 @@ const itemKindIcon = it => ITEM_KIND_ICON[it?.kind] || "◌";
 // actions). Icons in the grid (fast, no quota); the image generates only for the item you actually open
 // (Erik's call). Reuses itemCard (image + mechanics + actions) inside the modal, and the ONE shared binding.
 function renderInventoryScreen(openName = null) {
-  const kinds = ["weapon", "tool", "consumable", "quest", "misc"];
+  const kinds = itemKindsIn(character.inventory || []);   // CCODE-168: what is IN the bag, not what a list remembered
   const inv = character.inventory || [];
   const openIt = openName ? inv.find(i => i.name === openName) : null;
   const tile = it => `<button class="bag-tile${it.pinned ? " pinned" : ""}${openName === it.name ? " sel" : ""}" data-inv="${esc(it.name)}" title="${esc(displayName(it))}">
     <span class="bag-icon">${itemKindIcon(it)}</span>
     <span class="bag-name">${esc(displayName(it))}${it.qty > 1 ? ` ×${it.qty}` : ""}</span>
     ${it.equipped ? `<span class="bag-flag" title="equipped">▸</span>` : ""}${it.pinned ? `<span class="bag-flag" title="pinned">📌</span>` : ""}</button>`;
-  const grid = kinds.filter(k => inv.some(i => i.kind === k)).map(k =>
-    `<div class="bag-section"><h3 class="codex-title bag-kind">${k}s</h3><div class="bag-grid">${
+  const grid = kinds.map(k =>
+    `<div class="bag-section"><h3 class="codex-title bag-kind">${esc(itemKindLabel(k))}</h3><div class="bag-grid">${
       inv.filter(i => i.kind === k).sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)).map(tile).join("")}</div></div>`).join("")
     || "<div class='insight'>empty-handed</div>";
+  // ⚠️ AN ITEM WITH NO KIND AT ALL still belongs to the player. Without this it would be counted in the
+  // header and shown nowhere — the exact failure this ticket is about, one step further down.
+  const kindless = inv.filter(i => !i?.kind);
+  const extra = kindless.length ? `<div class="bag-section"><h3 class="codex-title bag-kind">other</h3><div class="bag-grid">${kindless.map(tile).join("")}</div></div>` : "";
   // growth (SNG-215 §B): a story item that GREW shows the stage it reached, so earned power is visible.
   const growth = openIt && (openIt.evoStageName || openIt.evoStage) ? `<div class="item-growth">✦ grown to <em>${esc(openIt.evoStageName || ("stage " + openIt.evoStage))}</em>${openIt.evoStage ? ` (stage ${esc(String(openIt.evoStage))})` : ""}</div>` : "";
   chrome(`<div class="screen" style="max-width:680px">
     <h2>Inventory — ${esc(character.name)} <span class="cost">(${inv.length})</span></h2>
-    ${grid}
+    ${grid}${extra}
     <button class="btn secondary" id="inv-back" style="margin-top:10px">Back</button>
   </div>
   ${openIt ? `<div class="item-detail-modal" id="item-modal"><div class="item-detail-sheet">

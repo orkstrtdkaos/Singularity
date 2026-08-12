@@ -1329,3 +1329,19 @@ img[data-lightbox] { cursor: zoom-in; }
   border-radius: 6px; margin: 6px 0 10px; cursor: zoom-in; display: block; }
 /* CCODE-167 — the way back from a merge, beside the receipt that says what happened. */
 .codex-undo-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+
+/* CCODE-172 — the picture's own record, revealed on demand. Scrolls rather than pushing the image
+   off-screen: the point is comparing the words to the picture, so both have to stay visible. */
+.lightbox-meta-btn { position: absolute; top: -12px; left: 96px; height: 34px; padding: 0 12px; border-radius: 17px;
+  border: none; background: var(--panel); color: var(--ink); font-size: 13px; cursor: pointer; white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35); }
+.lightbox-meta-btn.on { box-shadow: inset 0 0 0 2px var(--accent, #3c7d6e), 0 2px 10px rgba(0,0,0,.35); }
+.lightbox-meta { max-width: 92vw; max-height: 30vh; overflow-y: auto; margin-top: 8px; padding: 10px 12px;
+  background: rgba(0,0,0,.55); border-radius: 8px; font-family: var(--font-ui); font-size: 12px; color: #ddd; text-align: left; }
+.lb-fields { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: 0 0 8px; }
+.lb-fields dt { color: #8fb3aa; }
+.lb-fields dd { margin: 0; word-break: break-all; }
+.lb-prompt-h { color: #8fb3aa; margin-bottom: 2px; }
+.lb-prompt { user-select: text; white-space: pre-wrap; line-height: 1.45; }
+.lb-ring { margin-left: 8px; font-size: 11px; border: 1px solid currentColor; border-radius: 10px; padding: 0 6px; opacity: .8; }
+@media (max-width: 640px) { .lightbox-meta-btn { left: 78px; font-size: 12px; padding: 0 9px; } }

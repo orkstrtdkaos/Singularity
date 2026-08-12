@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.135";
+const APP_VERSION = "1.9.136";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1001,7 +1001,10 @@ function regenLightboxItem(it, attempt, describe = null) {
   if (!out) return null;
   return {
     url: out.url, caption: it.caption, prompt: out.prompt, seedKey: out.seedKey,
-    regen: { ...it.regen, prompt: out.prompt }, isDraw: true, rebuilt: !!describe
+    regen: { ...it.regen, prompt: out.prompt }, isDraw: true, rebuilt: !!describe,
+    // CCODE-172: what this was drawn FROM — the root a version-run groups on, so versions of a subject-less
+    // picture (a beast, a moment) still walk together.
+    versionOf: it.versionOf || it.url, meta: it.meta
   };
 }
 
@@ -1037,13 +1040,40 @@ function openLightbox(items, start = 0) {
   const list = (items || []).filter(it => it && it.url);
   if (!list.length) return;
   let i = Math.max(0, Math.min(start, list.length - 1));
+  let showMeta = false;            // CCODE-172: the fields + the prompt, revealed on demand
   const el = document.createElement("div");
   el.className = "lightbox";
+  // ⛔ CCODE-172 — THE ARROWS WALK VERSIONS OF THIS SUBJECT, NOT THE WHOLE GALLERY. Erik: "when I click an
+  // image that has re-generated more versions… I'd like to only go through the versions of the subject
+  // image; right now it runs through all images." My §3 fix appended a new draw to "the list the arrows
+  // already walk" — which is correct for a one-image lightbox and wrong for a seventy-tile gallery, where
+  // the new version landed at index 70 and comparing it to the original meant arrowing past sixty-eight
+  // other pictures. Comparing two versions is the ENTIRE point of not destroying the old one.
+  // The run is the set of entries sharing this subject; with no subject, or only one, it is the gallery.
+  // ⚠️ BY ORIGIN **AND** BY SUBJECT. Grouping on subjectId alone would have missed Erik's own case — the
+  // warpling is a `beast`, which has no subject record at all, so its versions would have stayed scattered
+  // through seventy tiles. Every draw remembers what it was drawn FROM, so a chain of versions shares one
+  // root whether or not the thing in the picture is someone the game knows by name.
+  const rootOf = (x) => x?.versionOf || x?.url;
+  const runOf = (idx) => {
+    const cur = list[idx]; if (!cur) return null;
+    const root = rootOf(cur), sub = cur.regen?.subjectId || null;
+    const run = list.map((x, n) => (rootOf(x) === root || (sub && x?.regen?.subjectId === sub)) ? n : -1).filter(n => n >= 0);
+    return run.length > 1 ? run : null;
+  };
+  const step = (dir) => {
+    const run = runOf(i);
+    const ring = run || list.map((_, n) => n);
+    const at = ring.indexOf(i);
+    i = ring[(at + dir + ring.length) % ring.length];
+    render();
+  };
   const close = () => { el.remove(); document.removeEventListener("keydown", onKey); };
   const onKey = (e) => {
     if (e.key === "Escape") close();
-    else if (list.length > 1 && e.key === "ArrowLeft") { i = (i - 1 + list.length) % list.length; render(); }
-    else if (list.length > 1 && e.key === "ArrowRight") { i = (i + 1) % list.length; render(); }
+    else if (e.key === "i" || e.key === "I") { showMeta = !showMeta; render(); }
+    else if (list.length > 1 && e.key === "ArrowLeft") step(-1);
+    else if (list.length > 1 && e.key === "ArrowRight") step(1);
   };
   // SNG-401 §3: attempts made in THIS lightbox. The old image is never overwritten — a new draw is
   // APPENDED to the list the arrows already walk, so the player can go back to the one they preferred
@@ -1082,10 +1112,37 @@ function openLightbox(items, start = 0) {
     const isNewDraw = !!it.regen && !!it.isDraw;
     el.innerHTML = `<div class="lightbox-inner">
       <img src="${esc(it.url)}" alt="${esc(it.caption || "")}" data-lbimg>
-      ${it.caption ? `<div class="lightbox-cap">${esc(it.caption)}${list.length > 1 ? ` · ${i + 1}/${list.length}` : ""}${isNewDraw ? " · a new draw" : ""}${isCurrent ? " · the one in use" : ""}${myKeeps.length ? ` · ${myKeeps.length} kept look${myKeeps.length === 1 ? "" : "s"} guiding them` : ""}</div>` : ""}
+      ${(() => {
+        // CCODE-172: the counter says WHICH RING the arrows are on, so the mode is never a guess.
+        const run = runOf(i);
+        const pos = run ? `version ${run.indexOf(i) + 1} of ${run.length}` : (list.length > 1 ? `${i + 1}/${list.length}` : "");
+        const wider = run && list.length > 1 ? ` · ${i + 1}/${list.length} in the gallery` : "";
+        const bits = [it.caption, pos && `${pos}${wider}`, isNewDraw && "a new draw", isCurrent && "the one in use",
+          myKeeps.length && `${myKeeps.length} kept look${myKeeps.length === 1 ? "" : "s"} guiding them`].filter(Boolean);
+        return bits.length ? `<div class="lightbox-cap">${bits.map(esc).join(" · ")}${run ? `<span class="lb-ring" title="The arrows are walking this subject's versions. Nothing else is in the way.">⇄ versions</span>` : ""}</div>` : "";
+      })()}
+      ${/* ⛔ CCODE-172 (Erik): "can you make it so i can see all the fields — also, I'd like to be able to see
+            the prompt that generated the image." Every field the entry carries, and the prompt itself.
+            ⚠️ REVEALED ON DEMAND, not always-on: Aevi's §1 note that prompts "are long and some are
+            spoiler-bearing" was about not putting them in DOM attributes, and it is still a fair reason not
+            to shout a moment's prompt across an open gallery. Behind one press, and selectable when it is
+            open, because the whole use of seeing a prompt is being able to take it. */""}
+      ${showMeta ? `<div class="lightbox-meta">${(() => {
+        const m = it.meta || {};
+        const rows = [
+          ["caption", it.caption], ["kind", m.kind || it.regen?.galleryKind], ["subject", it.regen ? `${it.regen.kind}${it.regen.subjectId ? ` · ${it.regen.subjectId}` : " · (no subject)"}` : "—"],
+          ["world-day", m.worldDay], ["recorded", m.at], ["seed", it.seedKey || m.subjectId],
+          ["kept looks", myKeeps.length || 0], ["source", isGeneratedImage(it.url) ? "generated" : "authored"], ["url", it.url]
+        ].filter(([, v]) => v !== undefined && v !== null && v !== "");
+        const prompt = it.prompt || it.regen?.prompt || _regenPrompts.get(String(it.url)) || null;
+        return `<dl class="lb-fields">${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(String(v))}</dd>`).join("")}</dl>
+          <div class="lb-prompt-h">prompt</div>
+          <div class="lb-prompt">${prompt ? esc(String(prompt)) : "<em>not recorded for this image — only pictures minted since the app started keeping prompts carry one</em>"}</div>`;
+      })()}</div>` : ""}
       ${list.length > 1 ? `<button class="lightbox-nav prev" data-lbprev>‹</button><button class="lightbox-nav next" data-lbnext>›</button>` : ""}
       <button class="lightbox-close" data-lbclose>✕</button>
       <button class="lightbox-save" data-lbsave title="Save this image to your device — it stays yours even if the link expires">⤓ Save</button>
+      <button class="lightbox-meta-btn${showMeta ? " on" : ""}" data-lbmeta title="Everything recorded about this picture, including the prompt that made it (or press i)">ⓘ ${showMeta ? "Hide" : "Details"}</button>
       ${canRegen ? `<button class="lightbox-regen" data-lbregen title="Draw ${esc(it.regen.label || "this")} again — same description, a new hand. The one you have now is kept beside it; nothing is replaced unless you choose it.">↻ Draw again</button>` : ""}
       ${canRebuild ? `<button class="lightbox-rebuild" data-lbrebuild title="Describe ${esc(it.regen.label || "this")} differently — for when the picture is not merely unlucky but wrong (wrong place, wrong look, the wrong thing happening)">✎ Describe differently</button>` : ""}
       ${canKeep ? `<button class="lightbox-keep${isKept ? " kept" : ""}" data-lbkeep title="${isKept ? "Stop using this one as a guide to what they look like" : `Keep this look for ${esc(it.regen.label || "them")} — future pictures of them will be drawn toward it. Keep as many as you like; what they agree on counts most.`}">${isKept ? "★ kept — remove" : "☆ Keep this look"}</button>` : ""}
@@ -1104,8 +1161,10 @@ function openLightbox(items, start = 0) {
       try {
         const drawn = regenLightboxItem(it, ++attempts);
         if (!drawn) throw new Error("nothing to draw from");
-        list.push(drawn);        // ⛔ APPEND — §3. Never an in-place overwrite of the current entry.
-        i = list.length - 1;
+        // CCODE-172: inserted NEXT TO the picture it was drawn from, not at the end of the gallery — the
+        // point of keeping the old one is being able to flick between them.
+        list.splice(i + 1, 0, drawn);
+        i = i + 1;
         render();
       } catch (err) {
         console.warn("[art] regenerate failed", err);
@@ -1125,8 +1184,8 @@ function openLightbox(items, start = 0) {
       try {
         const drawn = regenLightboxItem(it, ++attempts, said.trim());
         if (!drawn) throw new Error("nothing to draw from");
-        list.push(drawn);
-        i = list.length - 1;
+        list.splice(i + 1, 0, drawn);
+        i = i + 1;
         render();
       } catch (err) {
         console.warn("[art] rebuild failed", err);
@@ -1169,8 +1228,9 @@ function openLightbox(items, start = 0) {
       }
       setTimeout(() => { saveBtn.disabled = false; saveBtn.textContent = "⤓ Save"; }, 2500);
     };
-    const prev = el.querySelector("[data-lbprev]"); if (prev) prev.onclick = (e) => { e.stopPropagation(); i = (i - 1 + list.length) % list.length; render(); };
-    const next = el.querySelector("[data-lbnext]"); if (next) next.onclick = (e) => { e.stopPropagation(); i = (i + 1) % list.length; render(); };
+    const prev = el.querySelector("[data-lbprev]"); if (prev) prev.onclick = (e) => { e.stopPropagation(); step(-1); };
+    const next = el.querySelector("[data-lbnext]"); if (next) next.onclick = (e) => { e.stopPropagation(); step(1); };
+    const metaBtn = el.querySelector("[data-lbmeta]"); if (metaBtn) metaBtn.onclick = (e) => { e.stopPropagation(); showMeta = !showMeta; render(); };
   };
   el.onclick = (e) => { if (e.target === el || e.target.classList.contains("lightbox-inner")) close(); };
   document.addEventListener("keydown", onKey);
@@ -1189,7 +1249,7 @@ function wireLightbox() {
     if (!img) return;
     if (img.dataset.lbgroup === "gallery" && character?.gallery?.length) {
       // SNG-401 §1: carry each tile's provenance into the lightbox, so a portrait can be redrawn there.
-      openLightbox(character.gallery.map(g => ({ url: g.url, caption: g.caption, prompt: g.prompt, regen: galleryRegenFor(g) })), Number(img.dataset.lbindex) || 0);
+      openLightbox(character.gallery.map(g => ({ url: g.url, caption: g.caption, prompt: g.prompt, regen: galleryRegenFor(g), meta: g })), Number(img.dataset.lbindex) || 0);
     } else {
       // SNG-401 §1: Aevi's own routing — `data-lightbox` is a string attribute on the img, so the
       // provenance rides there (data-regen-kind / data-regen-subject) without changing eight signatures.

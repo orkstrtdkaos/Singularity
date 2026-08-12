@@ -14175,7 +14175,11 @@ await (async () => {
   check("401: a record-less kind is legitimate, not an error (the gallery tile IS its record)", /A null record is legitimate/.test(appSrc401));
 
   // §3 in the UI — append, never replace. This is the line that would undo the whole spec.
-  check("401 §3: a new draw is APPENDED to the lightbox list, never written over the current item", /list\.push\(drawn\);/.test(appSrc401) && !/list\[i\] = drawn/.test(appSrc401));
+  // ⚠️ RE-AIMED (CCODE-172). It pinned `list.push`, and a draw is now INSERTED beside its source instead of
+  // at the end — a better answer to the same requirement. The property is unchanged and is what it asserts:
+  // the old picture is never overwritten, only added to.
+  check("401 §3/172: a new draw is ADDED to the list, never written over the current item",
+    /list\.splice\(i \+ 1, 0, drawn\);/.test(appSrc401) && !/list\[i\] = drawn/.test(appSrc401));
   check("401 §3: Keep shows only on a draw the player made, not on the picture they already had", /const isNewDraw = !!it\.regen && !!it\.isDraw;/.test(appSrc401));
   check("401 §4: the button is disabled in flight, shows work, and NAMES a failure", /regenBtn\.disabled = true; regenBtn\.textContent = "…drawing"/.test(appSrc401) && /couldn't draw/.test(appSrc401) && /didn't come through/.test(appSrc401));
   check("401 §5: there is a direct way in from the people list, only when a picture exists", /data-repic=/.test(appSrc401) && /\?\.\[p\.id\]\?\.image \?/.test(appSrc401));
@@ -14284,6 +14288,64 @@ await (async () => {
   check("400b × 401: the battle is re-rollable AND re-describable — the first real builder behind Rebuild", /battle: \{[\s\S]{0,200}character\.battleImages\[key\]\.url = url/.test(appSrc400));
   const artSrc400 = readFileSync(join(root, "engine/art.js"), "utf8");
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
+}
+
+// ---- CCODE-172: the lightbox tells you what you are looking at, and the arrows stay on it ----
+// Erik, on a 70-tile gallery: "can you make it so i can see all the fields — also, I'd like to be able to
+// see the prompt that generated the image. And when I click an image that has re-generated more versions…
+// I'd like to only go through the versions of the subject image; right now it runs through all images."
+{
+  const src172 = readFileSync(join(root, "app.js"), "utf8");
+
+  // ⛔ THE NAVIGATION BUG WAS MINE. SNG-401 §3 said to append a draw to "the list the arrows already walk",
+  // and I did — which is right for a one-image lightbox and wrong for a gallery, where the new version
+  // landed at index 70 and comparing it against the original meant arrowing past sixty-eight other
+  // pictures. Comparing the two IS the point of not destroying the old one.
+  const rootOf = (x) => x?.versionOf || x?.url;
+  const runOf = (list, i) => {
+    const c = list[i]; if (!c) return null;
+    const r = rootOf(c), sub = c.regen?.subjectId || null;
+    const run = list.map((x, n) => (rootOf(x) === r || (sub && x?.regen?.subjectId === sub)) ? n : -1).filter(n => n >= 0);
+    return run.length > 1 ? run : null;
+  };
+  // Erik's exact shape: a beast at tile 20 of 70, then two draws from it
+  const g172 = Array.from({ length: 70 }, (_, n) => ({ url: `u${n}`, regen: { kind: "moment", subjectId: null } }));
+  g172[19] = { url: "warpling", caption: "warpling", regen: { kind: "beast", subjectId: null } };
+  check("CCODE-172: one picture with no versions still browses the whole gallery", runOf(g172, 19) === null);
+  g172.splice(20, 0, { url: "w2", versionOf: "warpling", regen: g172[19].regen });
+  g172.splice(21, 0, { url: "w3", versionOf: "warpling", regen: g172[19].regen });
+  const ring = runOf(g172, 19);
+  check("CCODE-172 THE FIX: once drawn, the run is just those versions", JSON.stringify(ring) === JSON.stringify([19, 20, 21]));
+  check("CCODE-172: stepping wraps WITHIN the run and never escapes into the gallery", (() => {
+    let i = 20; const stp = d => { const at = ring.indexOf(i); i = ring[(at + d + ring.length) % ring.length]; };
+    stp(1); const a = g172[i].url; stp(1); const b = g172[i].url; stp(-1); const c = g172[i].url;
+    return a === "w3" && b === "warpling" && c === "w3";
+  })());
+  // ⚠️ grouping on subjectId ALONE would have missed his own case — a beast has no subject record
+  check("CCODE-172: a SUBJECT-less picture still groups its versions (the warpling has no subject at all)",
+    runOf(g172, 20) !== null && g172[20].regen.subjectId === null);
+  // …and two gallery tiles of the same PERSON group even without a shared origin
+  const people = [{ url: "p1", regen: { kind: "npc", subjectId: "cevaine" } }, { url: "x", regen: { kind: "moment", subjectId: null } },
+                  { url: "p2", regen: { kind: "npc", subjectId: "cevaine" } }];
+  check("CCODE-172: two separate portraits of one person are one run", JSON.stringify(runOf(people, 0)) === JSON.stringify([0, 2]));
+
+  check("CCODE-172: the app groups by origin AND subject", /const rootOf = \(x\) => x\?\.versionOf \|\| x\?\.url;/.test(src172)
+    && /rootOf\(x\) === root \|\| \(sub && x\?\.regen\?\.subjectId === sub\)/.test(src172));
+  check("CCODE-172: a draw records what it was drawn FROM", /versionOf: it\.versionOf \|\| it\.url/.test(src172));
+  check("CCODE-172: a draw is inserted BESIDE its source, not at the end of the gallery",
+    /list\.splice\(i \+ 1, 0, drawn\);/.test(src172) && !/list\.push\(drawn\)/.test(src172));
+  check("CCODE-172: both the keys and the arrow buttons use ONE stepper (they cannot disagree)",
+    (src172.match(/step\(-1\)/g) || []).length >= 2 && (src172.match(/step\(1\)/g) || []).length >= 2);
+  check("CCODE-172: the caption says which ring the arrows are on", /version \$\{run\.indexOf\(i\) \+ 1\} of \$\{run\.length\}/.test(src172) && /in the gallery/.test(src172));
+
+  // the fields + the prompt
+  check("CCODE-172: every field the entry carries is shown", /class="lb-fields"/.test(src172)
+    && ["caption", "kind", "subject", "world-day", "recorded", "seed", "kept looks", "source", "url"].every(k => src172.includes(`"${k}"`)));
+  check("CCODE-172: the PROMPT is shown, and selectable so it can be taken", /class="lb-prompt"/.test(src172) && /user-select: text/.test(readFileSync(join(root, "style.css"), "utf8")));
+  check("CCODE-172: …and it says so plainly when an older picture has no prompt on record", /not recorded for this image/.test(src172));
+  check("CCODE-172: revealed on demand, not always-on (Aevi: prompts are long and some are spoiler-bearing)",
+    /showMeta \? `<div class="lightbox-meta">/.test(src172) && /let showMeta = false;/.test(src172));
+  check("CCODE-172: the gallery hands the whole entry through, so there ARE fields to show", /regen: galleryRegenFor\(g\), meta: g/.test(src172));
 }
 
 // ---- CCODE-171: one person, one identity, one face ----
@@ -14634,7 +14696,8 @@ await (async () => {
   check("CCODE-163/164/166: Keep is offered on any picture WITH A SUBJECT, new draw or not", /const canKeep = !!it\.regen\?\.subjectId && !!spec\?\.keep;/.test(src163));
   check("CCODE-163/164: …and never where there is no subject to attach a look to (the '✕ couldn't keep' Erik hit)",
     /needsId: true/.test(src163) && /REGEN_KINDS\[k\] && !REGEN_KINDS\[k\]\.needsId \? k : "moment"/.test(src163));
-  check("CCODE-163: the caption says WHICH picture is the one in use, so 'use this one' has a reference point", /isCurrent \? " · the one in use" : ""/.test(src163));
+  check("CCODE-163/172: the caption says WHICH picture is the one in use, so 'use this one' has a reference point",
+    /isCurrent && "the one in use"/.test(src163));
   check("CCODE-163: every regenerable kind can say what its current picture is", (() => {
     const tbl = src163.slice(src163.indexOf("const REGEN_KINDS = {"), src163.indexOf("// SNG-401 §1, Aevi's constraint"));
     // the record-backed kinds must all answer `current`; the prompt-only ones (moment/beast/battle/death) need not

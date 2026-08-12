@@ -14270,6 +14270,46 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-163: the two gaps Erik found by testing SNG-401 ----
+// (1) "I don't see where I can select a portrait as Canon."  (2) "the popups that read the codex entry
+// don't have an image popup at all."  Both were mine: I gated Keep too narrowly, and I counted eight
+// lightbox call sites when there are nine.
+{
+  const src163 = readFileSync(join(root, "app.js"), "utf8");
+
+  // (2) THE NINTH SURFACE — the whois/codex card's portrait could not even be opened.
+  check("CCODE-163: the codex/whois portrait opens the lightbox and carries its provenance",
+    /class="whois-portrait"[^`]*data-lightbox="figure"[^`]*data-regen-kind="figure"[^`]*data-regen-subject=/.test(src163));
+  check("CCODE-163: `figure` is a real regen kind — found, current, and keepable", (() => {
+    const tbl = src163.slice(src163.indexOf("const REGEN_KINDS = {"), src163.indexOf("// SNG-401 §1, Aevi's constraint"));
+    const blk = tbl.slice(tbl.indexOf("figure: {"), tbl.indexOf("figure: {") + 600);
+    return /find: id => rosterFigureOf\(id\)/.test(blk) && /current: id => character\?\.figureImages/.test(blk) && /keep: \(id, url\) =>/.test(blk);
+  })());
+  check("CCODE-163: a figure's seed maps back to the person, alive or dead", /replace\(\/\^whois-\(\?:death-\)\?\/, ""\)/.test(src163));
+  // ⛔ the card re-mints from a stable seed on every open, so a chosen picture MUST outrank the mint
+  check("CCODE-163: a picture the player chose beats the re-mint (else Keep is undone on the next open)",
+    /const chosen = character\?\.figureImages\?\.\[artSeed\] \|\| null;/.test(src163) && /const url = chosen \|\| ensureImage\(/.test(src163));
+
+  // (1) SELECT AN EXISTING PICTURE AS THE ONE — Keep was reachable only from a fresh draw
+  check("CCODE-163: Keep is offered on ANY picture with provenance, not only on a new draw", /const canKeep = !!it\.regen && !!spec\?\.keep && !isCurrent;/.test(src163));
+  check("CCODE-163: …and never on the one already in use (that button would do nothing)", /const isCurrent = !!currentUrl && currentUrl === it\.url;/.test(src163) && /canKeep \? `<button class="lightbox-keep"/.test(src163));
+  check("CCODE-163: the caption says WHICH picture is the one in use, so 'use this one' has a reference point", /isCurrent \? " · the one in use" : ""/.test(src163));
+  check("CCODE-163: every regenerable kind can say what its current picture is", (() => {
+    const tbl = src163.slice(src163.indexOf("const REGEN_KINDS = {"), src163.indexOf("// SNG-401 §1, Aevi's constraint"));
+    // the record-backed kinds must all answer `current`; the prompt-only ones (moment/beast/battle/death) need not
+    return ["npc", "character", "figure", "location", "item", "ability"].every(k => {
+      const blk = tbl.slice(tbl.indexOf(`${k}: {`), tbl.indexOf(`${k}: {`) + 700);
+      return /current:/.test(blk);
+    });
+  })());
+  // the lightbox must sit ABOVE the card it was opened from, or the picture opens invisibly
+  const css163 = readFileSync(join(root, "style.css"), "utf8");
+  check("CCODE-163: the lightbox outranks the whois overlay it opens from", (() => {
+    const z = (re) => Number((css163.match(re) || [])[1] || 0);
+    return z(/\.lightbox \{[^}]*z-index:\s*(\d+)/) > z(/\.help-overlay \{[^}]*z-index:\s*(\d+)/);
+  })());
+}
+
 // ---- CCODE-162: ONE COMMUNITY, ONE SPELLING (within a region) ----
 // ⛔ FOUND BY AN INTERMITTENT GATE, WHICH IS THE WORST WAY TO FIND ANYTHING. "…and the first hop is
 // somewhere in its OWN region" failed roughly two runs in three, and only after teaching `check` to print

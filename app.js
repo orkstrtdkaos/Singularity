@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.128";
+const APP_VERSION = "1.9.129";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -285,9 +285,17 @@ function showWhoIs(known) {
       // minting it never overwrites the face they had while alive — both remain reachable.
       const dyingArt = known.dead && known.deathAppearance ? String(known.deathAppearance) : null;
       const artSeed = dyingArt ? `whois-death-${seed}` : `whois-${seed}`;
-      const url = ensureImage({ id: artSeed, name: known.label, role: known.role || "", appearance: dyingArt || known.appearance || "", gender: known.gender || undefined },
+      // ⛔ SNG-401 (Erik, testing): A PICTURE THE PLAYER CHOSE WINS. This card re-mints from a stable seed
+      // every time it opens, so without this the chosen one would be drawn away again on the next open —
+      // and surviving is the entire point of Keep.
+      const chosen = character?.figureImages?.[artSeed] || null;
+      const url = chosen || ensureImage({ id: artSeed, name: known.label, role: known.role || "", appearance: dyingArt || known.appearance || "", gender: known.gender || undefined },
         "npc", { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false, promptOpts: { aesthetic: aesW } });
-      if (url) whoPortrait = `<img class="whois-portrait" src="${esc(url)}" alt="${esc(known.label)}" loading="lazy" style="width:100%; max-height:240px; object-fit:cover; object-position:center 18%; border-radius:6px; margin-bottom:8px">`;
+      // ⛔ Erik: "the popups that read the codex entry don't have an image popup at all." Correct — this img
+      // carried no `data-lightbox`, so of the nine places a picture appears this was the one that could not
+      // be opened. It is also the one that needs it most: a world figure is someone you only ever meet in a
+      // tick digest, so this card is their entire presence.
+      if (url) whoPortrait = `<img class="whois-portrait" src="${esc(url)}" alt="${esc(known.label)}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(artSeed)}" loading="lazy" title="Open it — and draw them again if this is not them" style="width:100%; max-height:240px; object-fit:cover; object-position:center 18%; border-radius:6px; margin-bottom:8px; cursor:zoom-in">`;
     }
   } catch { /* a face is never worth breaking the card for */ }
   pop.innerHTML = `<div class="help-card" role="dialog" aria-label="${esc(known.label)}" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
@@ -767,31 +775,55 @@ function battleImageFor(item) {
 // ⚠️ The player's own portrait ALSO has a richer flow on the Character screen (a one-off scene override, a
 // partner in frame). That is deliberately kept — it does things this cannot — and the two agree: the
 // override dialog there IS the rebuild, and it is the same dialog reached from here.
+/** SNG-401 §1: a whois portrait is seeded `whois-<figureId>` (or `whois-death-<figureId>` once the world
+ *  records their death), and that seed is the only handle the card has. Map it back to the person. */
+function rosterFigureOf(seed) {
+  const id = String(seed || "").replace(/^whois-(?:death-)?/, "");
+  return (worldRoster(character?.worldState || {}, CONTENT) || []).find(f => f.id === id) || null;
+}
+
 const REGEN_KINDS = {
   npc: {
     label: n => n?.name || "this person",
     find: id => character?.npcRegistry?.[id] || null,
+    current: id => character?.npcRegistry?.[id]?.image || null,
     keep: (id, url, seedKey) => { const n = character.npcRegistry?.[id]; return n ? acceptImage(n, { url, seedKey }) : false; },
     promptOpts: rec => ({ character, aesthetic: npcAesthetic(rec) })
   },
   character: {
     label: () => character?.name || "your portrait",
     find: () => character || null,
+    current: () => character?.portrait || null,
     keep: (id, url, seedKey) => { const ok = acceptImage(character, { url, seedKey }, { field: "portrait" }); if (ok) character.portraitPinned = true; return ok; }
+  },
+  // ⛔ THE NINTH SURFACE. Erik: "the popups that read the codex entry don't have an image popup at all."
+  // He is right, and it is the one that most needed it — a world FIGURE is someone you only ever meet in a
+  // tick digest, so that card IS their whole presence. Its portrait carried no `data-lightbox` at all, so
+  // it could not be opened, let alone redrawn. ⚠️ Its image is minted fresh from a stable seed rather than
+  // stored on a record, so a CHOSEN one needs somewhere to live: `figureImages`, keyed by that same seed.
+  figure: {
+    label: id => rosterFigureOf(id)?.name || "this figure",
+    find: id => rosterFigureOf(id),
+    current: id => character?.figureImages?.[id] || null,
+    keep: (id, url) => { character.figureImages = character.figureImages || {}; character.figureImages[id] = url; return true; },
+    promptOpts: rec => ({ aesthetic: rec?.tradition ? (CONTENT.traditionVisualAesthetics?.[rec.tradition] || null) : null })
   },
   location: {
     label: id => CONTENT.locations?.[id]?.name || "this place",
     find: id => CONTENT.locations?.[id] || null,
+    current: id => character?.locationImages?.[id] || null,
     keep: (id, url) => { character.locationImages = character.locationImages || {}; character.locationImages[id] = url; return true; }
   },
   item: {
     label: id => findItem(character, id)?.name || "this item",
     find: id => findItem(character, id) || null,
+    current: id => findItem(character, id)?.image || null,
     keep: (id, url) => { const it = findItem(character, id); if (!it) return false; it.image = url; it.imageDirty = false; return true; }
   },
   ability: {
     label: id => fullCatalog()[id]?.name || character?.customAbilities?.[id]?.name || "this craft",
     find: id => fullCatalog()[id] || character?.customAbilities?.[id] || null,
+    current: id => character?.abilityImages?.[id] || null,
     keep: (id, url) => { character.abilityImages = character.abilityImages || {}; character.abilityImages[id] = url; return true; }
   },
   // No record behind these — the gallery tile IS the record, so keeping one is keeping the tile.
@@ -923,18 +955,27 @@ function openLightbox(items, start = 0) {
     // with a different grain. Only a rebuild fixes it. And rebuild is hidden on an AUTHORED image,
     // because re-describing one would throw away the prompt she wrote by hand.
     const canRebuild = canRegen && isGeneratedImage(it.url);
-    // §3: "Keep" appears only on a draw the player made — never on the image they already had, where it
-    // would be a no-op button inviting a pointless write.
+    // ⛔ ERIK, AFTER TESTING: "I don't see where I can select a portrait as Canon." He was right and my rule
+    // was too narrow. I showed Keep ONLY on a fresh draw — reasoning that offering it on the picture you
+    // already have is a no-op button. But that is not the only other case: a gallery holds several real
+    // portraits of the same person (one per bond milestone), and choosing between THOSE is exactly the
+    // "make this the one" he went looking for. A draw is not the only way to arrive at a picture you want.
+    // So: Keep shows on any image with provenance that is NOT already the current one — which still
+    // excludes the no-op, and now includes every picture they already own.
+    const spec = it.regen ? REGEN_KINDS[it.regen.kind] : null;
+    const currentUrl = spec?.current ? spec.current(it.regen.subjectId) : null;
+    const isCurrent = !!currentUrl && currentUrl === it.url;
+    const canKeep = !!it.regen && !!spec?.keep && !isCurrent;
     const isNewDraw = !!it.regen && !!it.isDraw;
     el.innerHTML = `<div class="lightbox-inner">
       <img src="${esc(it.url)}" alt="${esc(it.caption || "")}" data-lbimg>
-      ${it.caption ? `<div class="lightbox-cap">${esc(it.caption)}${list.length > 1 ? ` · ${i + 1}/${list.length}` : ""}${isNewDraw ? " · a new draw — not kept yet" : ""}</div>` : ""}
+      ${it.caption ? `<div class="lightbox-cap">${esc(it.caption)}${list.length > 1 ? ` · ${i + 1}/${list.length}` : ""}${isNewDraw ? " · a new draw — not kept yet" : isCurrent ? " · the one in use" : ""}</div>` : ""}
       ${list.length > 1 ? `<button class="lightbox-nav prev" data-lbprev>‹</button><button class="lightbox-nav next" data-lbnext>›</button>` : ""}
       <button class="lightbox-close" data-lbclose>✕</button>
       <button class="lightbox-save" data-lbsave title="Save this image to your device — it stays yours even if the link expires">⤓ Save</button>
       ${canRegen ? `<button class="lightbox-regen" data-lbregen title="Draw ${esc(it.regen.label || "this")} again — same description, a new hand. The one you have now is kept beside it; nothing is replaced unless you choose it.">↻ Draw again</button>` : ""}
       ${canRebuild ? `<button class="lightbox-rebuild" data-lbrebuild title="Describe ${esc(it.regen.label || "this")} differently — for when the picture is not merely unlucky but wrong (wrong place, wrong look, the wrong thing happening)">✎ Describe differently</button>` : ""}
-      ${isNewDraw ? `<button class="lightbox-keep" data-lbkeep title="Make this the picture for ${esc(it.regen.label || "this")} from now on">✓ Keep this one</button>` : ""}
+      ${canKeep ? `<button class="lightbox-keep" data-lbkeep title="Make this the picture for ${esc(it.regen.label || "this")} from now on — the others stay in your gallery">✓ ${isNewDraw ? "Keep this one" : "Use this one"}</button>` : ""}
     </div>`;
     el.querySelector("[data-lbclose]").onclick = close;
     // §4: name the failure. A dead draw that just sits blank reads as "the button doesn't work".

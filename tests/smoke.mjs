@@ -14280,6 +14280,48 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-169: EVERY PICTURE THE PLAYER SEES CAN BE OPENED ----
+// ⛔ ERIK ASKED THE RIGHT QUESTION: "have you run the audits lately and would they catch these?" The answer
+// to the second half is NO, and the reason is worth writing down. The audits verify that MODULES talk to
+// each other — exports, imports, call sites. All three bugs he found were INSIDE a module:
+//   · the codex portrait had no `data-lightbox`      → an HTML attribute; no audit reads DOM
+//   · the merge-undo button never rendered            → `undoLastMerge` WAS imported and called, so every
+//                                                       wiring check reads it as fully wired
+//   · the item-kind whitelist                         → a data literal, not an export
+// Module granularity cannot see a conditional, an attribute, or a table key. That is the gap, and this is
+// the first check aimed at it: a CENSUS of image surfaces, because "I count the writers and never count
+// the readers" is exactly how the ninth surface stayed shut.
+{
+  const appSrc169 = readFileSync(join(root, "app.js"), "utf8");
+  // ⚠️ STRIP COMMENTS FIRST. My own note above — "found by counting <img> tags" — was picked up as a bare
+  // image surface with no lightbox and failed the gate. That is the FOURTH time this session a checker has
+  // matched the prose EXPLAINING the thing rather than the thing (wiring_audit documents the same trap and
+  // I walked into it anyway). A census of markup must read markup.
+  const markup169 = appSrc169.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+  const tags = [...markup169.matchAll(/<img\s[^>]*>/g)].map(m => m[0]);
+  // the lightbox's OWN img is the one that must not be openable — it is already open.
+  const surfaces = tags.filter(t => !/data-lbimg/.test(t));
+  const shut = surfaces.filter(t => !/data-lightbox/.test(t));
+  check(`CCODE-169: all ${surfaces.length} image surfaces open (a picture you cannot look at is a picture you cannot fix)`,
+    surfaces.length >= 10 && shut.length === 0,
+    () => shut.map(t => t.replace(/\s+/g, " ").slice(0, 90)).join(" || "));
+
+  // ⚠️ AND A FACE MUST BE REDRAWABLE, not merely viewable. A quest illustration or a scene banner has no
+  // subject record to redraw against, so view-only is the honest answer there; a PERSON is different.
+  const faces = surfaces.filter(t => /class="(?:whois-portrait|comp-portrait|cs-portrait|codex-top-art)"/.test(t));
+  const faceless = faces.filter(t => !/data-regen-kind/.test(t));
+  check(`CCODE-169: all ${faces.length} PORTRAIT surfaces carry regen provenance (a face you cannot redraw is the whole complaint)`,
+    faces.length >= 4 && faceless.length === 0,
+    () => faceless.map(t => t.replace(/\s+/g, " ").slice(0, 90)).join(" || "));
+
+  // the tenth surface, found by counting rather than by Erik hitting it
+  check("CCODE-169: the COMPANION portrait — found by census, not by report", /class="comp-portrait"[^>]*data-regen-kind="figure"/.test(appSrc169));
+  // the companion's panel re-mints on every open, so a kept look has to outrank the mint there too
+  const compBlock = appSrc169.slice(appSrc169.indexOf("const artSeed = `companion-"), appSrc169.indexOf("const artSeed = `companion-") + 700);
+  check("CCODE-169: a companion's kept look survives the re-mint, like every other person's",
+    /const chosen = character\?\.figureImages/.test(compBlock) && /const url = chosen \|\| ensureImage/.test(compBlock));
+}
+
 // ---- CCODE-168: an item in a kind nobody listed is counted and never shown ----
 // Erik: "I don't see my shadow tablet in my inventory" — with the header reading 27 and twenty-six tiles on
 // screen. The bag rendered from a hard-coded five-kind whitelist while content ships SEVEN, so every

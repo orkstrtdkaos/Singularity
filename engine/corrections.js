@@ -301,9 +301,9 @@ export function applyStateOps(character, ops = [], ctx = {}) {
       case "correctSceneState": {
         const sc = character.activeScene?.sceneState;
         if (!sc) { refused.push({ op, reason: "there is no active scene to repair" }); break; }
-        const setting = op.setting != null ? String(op.setting).slice(0, 400).trim() : null;
+        const setting = op.setting != null ? smartClamp(String(op.setting), 400).trim() : null;   // SNG-152: a scene anchor is READ by the player
         if (op.setting != null && !setting) { refused.push({ op, reason: "a scene needs a setting — an empty anchor is worse than a wrong one" }); break; }
-        const threads = Array.isArray(op.threads) ? op.threads.slice(0, 5).map(t => String(t).slice(0, 160)).filter(Boolean) : null;
+        const threads = Array.isArray(op.threads) ? op.threads.slice(0, 5).map(t => smartClamp(String(t), 160)).filter(Boolean) : null;
         if (!setting && !threads) { refused.push({ op, reason: "correctSceneState needs a setting and/or threads" }); break; }
         const from = { setting: sc.setting };
         if (setting) sc.setting = setting;

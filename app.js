@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.133";
+const APP_VERSION = "1.9.134";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -880,7 +880,7 @@ const REGEN_KINDS = {
 // beat the player may not have seen resolve; it does not belong in the DOM. Keyed by url, which is the
 // one identifier a rendered image always has.
 const _regenPrompts = new Map();
-function notePromptFor(url, prompt) { if (url && prompt) _regenPrompts.set(String(url), String(prompt).slice(0, 400)); }
+function notePromptFor(url, prompt) { if (url && prompt) _regenPrompts.set(String(url), String(prompt).slice(0, 400)); } // prose-cap-ok: an image PROMPT held for regeneration, never rendered
 
 // CCODE-164: WHAT THE PLAYER HAS KEPT, per subject. Erik: "a highly weighted vote… if I like two images I
 // should be able to keep both, or as many as I want, to help drive the look and feel of the person toward
@@ -5082,9 +5082,14 @@ function showCompanionPanel(companionId) {
   // than a new stranger each time. Art mode off / no key simply yields nothing; the panel still reads.
   let portrait = "";
   try {
-    const url = ensureImage({ id: `companion-${c.id}`, name: dn, role: c.role, appearance: c.appearance, look: c.appearance },
-      "npc", { ratingLevel: viewerRatingLevel(), seedKey: `companion-${c.id}`, isMinor: false });
-    if (url) portrait = `<img class="comp-portrait" src="${esc(url)}" alt="${esc(dn)}" loading="lazy" style="width:100%; max-height:220px; object-fit:cover; border-radius:6px; margin-bottom:8px">`;
+    // ⛔ CCODE-169: A COMPANION'S FACE IS A PERSON'S FACE. This was the TENTH image surface and carried no
+    // `data-lightbox` — the identical gap Erik reported on the codex card, still open one panel over, and
+    // found by counting <img> tags rather than by waiting for him to hit it.
+    const artSeed = `companion-${c.id}`;
+    const chosen = character?.figureImages?.[artSeed] || null;
+    const url = chosen || ensureImage({ id: artSeed, name: dn, role: c.role, appearance: c.appearance, look: c.appearance },
+      "npc", { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false, promptOpts: { keeps: keepsForSubject("figure", artSeed) } });
+    if (url) portrait = `<img class="comp-portrait" src="${esc(url)}" alt="${esc(dn)}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(artSeed)}" loading="lazy" title="Open it — draw again, or keep this look" style="width:100%; max-height:220px; object-fit:cover; border-radius:6px; margin-bottom:8px; cursor:zoom-in">`;
   } catch { /* a portrait is never worth breaking the panel for */ }
 
   // §1 — THE BOND READS AS PROGRESS, NOT A SCORE. Every number here was already computed and never said.
@@ -10017,7 +10022,7 @@ function renderStructuredQuestDetail(q) {
     // SNG-238 §3b: stage art for REACHED beats only (current + done) — generate-on-reach, never batch the future.
     const stageImg = (current || done) && imagesEnabled() ? ensureQuestArt(s.imagePrompt, `quest-${q.id}-stage-${s.id}`) : null;
     return `<div class="quest-stage ${done ? "done" : current ? "current" : ""}">
-      ${current && stageImg ? `<img class="quest-stage-img" src="${esc(stageImg)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
+      ${current && stageImg ? `<img class="quest-stage-img" data-lightbox="quest" src="${esc(stageImg)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
       <div class="quest-stage-obj">${done ? "✓ " : current ? "▶ " : "○ "}${esc(s.objective)}</div>
       <div class="hint">${esc(s.condition)}</div>
       ${done && s.change ? `<div class="codex-fact" style="margin-top:4px">${esc(s.change)}</div>` : ""}
@@ -10027,7 +10032,7 @@ function renderStructuredQuestDetail(q) {
   const questImg = imagesEnabled() ? ensureQuestArt(q.image, `quest-${q.id}`) : null;
   chrome(`<div class="screen" style="max-width:720px">
     <div class="codex-kind">${esc(q.status)}${q.tier ? " · " + esc(q.tier) : ""}${q.axis ? " · " + esc(String(q.axis).replace(/_/g, " ↔ ")) : ""}</div>
-    ${questImg ? `<img class="quest-img" src="${esc(questImg)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
+    ${questImg ? `<img class="quest-img" data-lightbox="quest" src="${esc(questImg)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
     <h2 style="margin-top:4px">${esc(q.title)}</h2>
     <p class="map-details-desc">${mdProse(q.premise)}</p>
     <div class="quest-stakes"><span class="quest-stakes-label">What's at stake</span> ${mdProse(q.stakes)}</div>
@@ -10043,7 +10048,7 @@ function renderStructuredQuestDetail(q) {
     ${atDecision ? `<h3 class="codex-title" style="font-size:15px;margin-top:16px">Resolve — decide what the truth is for</h3>
       <div class="hint" style="margin-bottom:8px">Every stage is behind you. Every ending is a real ending — what you choose changes the world durably, and you'll be able to go back and see it.</div>
       ${q.outcomes.map(o => { const oimg = imagesEnabled() ? ensureQuestArt(o.imagePrompt, `quest-${q.id}-out-${o.id}`) : null; return `<button class="opt quest-outcome-btn" data-outcome="${esc(o.id)}" style="display:block;width:100%;text-align:left;margin:4px 0">
-        ${oimg ? `<img class="quest-outcome-img" src="${esc(oimg)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}<strong>${esc(o.name)}</strong><div class="hint" style="text-transform:none">${esc(o.summary)}</div></button>`; }).join("")}`
+        ${oimg ? `<img class="quest-outcome-img" data-lightbox="quest" src="${esc(oimg)}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}<strong>${esc(o.name)}</strong><div class="hint" style="text-transform:none">${esc(o.summary)}</div></button>`; }).join("")}`
     : !resolved ? `<div class="hint" style="margin-top:16px">This isn't finished yet. Play it — the stages close as you actually do them, and the endings appear when you reach the decision.</div>`
     : `<h3 class="codex-title" style="font-size:15px;margin-top:16px">What you did</h3>
       ${((q.outcomes.find(o => o.id === q.outcomeId)?.narration) || (q.outcomes.find(o => o.id === q.outcomeId)?.consequences) || []).map(c => `<div class="codex-fact">${esc(c)}</div>`).join("")}`}
@@ -12322,7 +12327,7 @@ function renderPlay(turn, opts = {}) {
   // rule — one source of truth for "what kind of thing is this", so the colour can never contradict the mechanics.
   const encKindNow = (() => { const e = activeEnc(); return e ? encounterKind(e.def) : null; })();
   let main = `<div class="play${activeEnc()?.state?.mode === "skill_battle" ? " play-in-fight" : ""}${encKindNow ? ` enc-kind-${encKindNow}` : ""}">
-    ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
+    ${banner ? `<img class="scene-banner" data-lightbox="scene" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
     <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}${(() => {
       // ⛔ SNG-381 — THE GROUND YOU ARE STANDING ON. Erik: "the current ground's power sources should
       // be viewable in the location banner. Remember there are bastions of power with auras."

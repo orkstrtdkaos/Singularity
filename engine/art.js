@@ -369,7 +369,7 @@ export function toggleKeep(store, key, { url, prompt, seedKey, at = null } = {})
   const rec = store[key] || (store[key] = { keeps: [] });
   const i = rec.keeps.findIndex(k => k.url === url);
   if (i >= 0) { rec.keeps.splice(i, 1); return { keeps: rec.keeps, kept: false }; }
-  rec.keeps.push({ url, prompt: String(prompt || "").slice(0, 400), seedKey: seedKey || null, at });
+  rec.keeps.push({ url, prompt: String(prompt || "").slice(0, 400), seedKey: seedKey || null, at }); // prose-cap-ok: a stored image PROMPT, never displayed prose
   if (rec.keeps.length > LIKENESS_KEEP_CAP) rec.keeps.shift();
   return { keeps: rec.keeps, kept: true };
 }
@@ -405,7 +405,7 @@ export function regenerateImage(record, kind, { ratingLevel = 2, isMinor = null,
   // and the button would look broken while behaving correctly.
   const nextKey = `${base.replace(/#r\d+$/, "")}#r${Math.max(1, attempt | 0)}`;
   const minor = isMinor == null ? isMinorSubject(record) : !!isMinor;
-  const raw = promptOverride ? String(promptOverride).slice(0, 400) : assembleImagePrompt(kind, record, promptOpts);
+  const raw = promptOverride ? String(promptOverride).slice(0, 400) : assembleImagePrompt(kind, record, promptOpts); // prose-cap-ok: an image PROMPT (matches the sibling caps above)
   // CCODE-164: a RE-ROLL of a face they have kept stays that face — new seed, same likeness. ⚠️ NOT applied
   // to a REBUILD: "describe it differently" is the player overriding the look on purpose, and folding the
   // old votes back in would silently refuse the instruction.

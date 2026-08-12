@@ -14020,6 +14020,60 @@ await (async () => {
   check("426: it refuses when there is no active scene to repair", applyStateOps({ corrections: [] }, [{ op: "correctSceneState", setting: "somewhere" }], {}).refused.length === 1);
 }
 
+// ---- SNG-427: the Shadow Tablet is a real object, under all the names people say for it ----
+// Erik's ruling: the object is the Shadow Tablet; "shadow sheet" and "shadow slate" are alternates for
+// the same thing. It was made in play and never emitted, so it lived as prose in two NPC records under
+// two different names — and the intent parser, handed the inventory as the character's affordances,
+// could not see the one thing that made "write to Coll" possible.
+{
+  const { reclaimEstablishedItems, resolveInventoryItem, normalizeInventory: norm427, fromCatalog: fc427 } = await import("../engine/inventory.js");
+  const pack427 = JSON.parse(readFileSync(join(root, "content/packs/valley/items/shadow_tablet.json"), "utf8"));
+  const cat427 = Object.fromEntries(pack427.items.map(i => [i.id, i]));
+  const tablet = cat427.shadow_tablet;
+  check("427: the object is authored, canonically named, and carries Erik's alternates", tablet.name === "Shadow Tablet" && ["Shadow Sheet", "Shadow Slate"].every(a => (tablet.aliases || []).includes(a)));
+  check("427: it is registered in the pack manifest (an unlisted file is not content)", JSON.parse(readFileSync(join(root, "content/packs/valley/manifest.json"), "utf8")).provides.items.includes("items/shadow_tablet.json"));
+
+  // THE BUG: authored aliases were dropped on the way into inventory — a writer with no reader.
+  check("427 THE BUG: fromCatalog carries authored aliases through to the instance", (fc427(tablet).aliases || []).includes("Shadow Slate"));
+  check("427: an item with no aliases gains no empty field (the shape stays clean)", !("aliases" in fc427({ id: "x", name: "Rock", kind: "misc" })));
+
+  // the whole point of the alternates: a later mention under another name must not fork a second item
+  const holder = { inventory: [fc427(tablet)] };
+  check("427: every name Erik allows collapses onto the ONE object", ["shadow sheet", "Shadow Slate", "shadow-sheet", "my shadow tablet"].every(s => resolveInventoryItem(holder, s, cat427)?.id === "shadow_tablet"));
+  check("427: a save holding an ALTERNATE as a bare string re-links to the real item", (() => { const d = { inventory: ["Shadow Slate"] }; norm427(d, cat427); return d.inventory[0].id === "shadow_tablet" && d.inventory[0].kind === "focus"; })());
+
+  // the reclaim — trace-gated, and proved against Silas's ACTUAL save, not a fixture
+  const silas = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
+  check("427: the defect is real in the live save (else this gate proves nothing)", !(silas.inventory || []).some(i => /shadow/i.test(i.name || "")) && JSON.stringify(silas.npcRegistry).toLowerCase().includes("shadow-slate"));
+  const got = reclaimEstablishedItems(silas, cat427);
+  check("427 THE FIX: the trace in his own record gives the tablet back", got.length === 1 && got[0].id === "shadow_tablet" && !!got[0].trace);
+  const held = (silas.inventory || []).find(i => i.id === "shadow_tablet");
+  check("427: and it arrives WHOLE — catalog kind, description and aliases, not a hollow stub", held && held.kind === "focus" && !!held.description && (held.aliases || []).includes("Shadow Sheet"));
+  check("427: idempotent — a second pass grants nothing", reclaimEstablishedItems(silas, cat427).length === 0);
+  // ⚠️ the already-held check ALSO makes a second pass empty, so it masks the version flag entirely. The
+  // case only the flag can answer: the player DROPS the thing. Without the flag it comes back on every
+  // load — an item you threw away returning forever, which is the engine overruling the player.
+  check("427: an item the player DROPPED stays dropped (only the version flag can hold this)", (() => {
+    const dropped = { ...silas, inventory: (silas.inventory || []).filter(i => i.id !== "shadow_tablet") };
+    return reclaimEstablishedItems(dropped, cat427).length === 0;
+  })());
+  // ⚠️ REPAIR, NOT WISH: no trace in the record, no item. This is the line that keeps the pass honest.
+  check("427: a character whose story never had one gets NOTHING", reclaimEstablishedItems({ inventory: [], chronicle: ["walked to the mill"], npcRegistry: {} }, cat427).length === 0);
+  check("427: an item with no establishedBy block is never reclaimed by this pass", reclaimEstablishedItems({ inventory: [], chronicle: ["I carry a marcher blade everywhere"], npcRegistry: {} }, { marcher_blade: { id: "marcher_blade", name: "Marcher's Blade" } }).length === 0);
+  // ⚠️ it must NOT ride the XP backfill's version — that would re-credit experience to every character
+  const invSrc427 = readFileSync(join(root, "engine/inventory.js"), "utf8");
+  // the invariant is about the XP backfill's version, not about the word appearing in a comment —
+  // my first assertion failed on my own explanatory note, which is a checker being wrong, not the code.
+  const bfSrc427 = readFileSync(join(root, "engine/backfill.js"), "utf8");
+  check("427: the reclaim has its OWN version flag, and the XP backfill's is untouched (a repair must not ride a wish's version number)",
+    /ITEM_RECLAIM_VERSION/.test(invSrc427) && /itemReclaimVersion/.test(invSrc427)
+    && /export const BACKFILL_VERSION = 1;/.test(bfSrc427) && !/reclaimEstablishedItems/.test(bfSrc427));
+  const appSrc427 = readFileSync(join(root, "app.js"), "utf8");
+  check("427: it runs on load and SAYS SO (a silent grant is indistinguishable from a bug)", /reclaimEstablishedItems\(c, CONTENT\.items\)/.test(appSrc427) && /the story gave you this and the ledger missed it/.test(appSrc427));
+  const intentSrc427 = readFileSync(join(root, "engine/intent.js"), "utf8");
+  check("427: all three names are recognised as a remote channel (SNG-425 agrees with the ruling)", /shadow\[-\\s\]\?\(\?:slate\|sheet\|tablet\)/.test(intentSrc427));
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

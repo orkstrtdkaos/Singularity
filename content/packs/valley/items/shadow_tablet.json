@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "valley_shadow_tablet",
+  "kind": "items",
+  "note": "SNG-427 — Erik's ruling: the object is the SHADOW TABLET. 'Shadow sheet' and 'shadow slate' are alternates people actually say, not different things, so they are aliases on the one item. It was made in play (Silas Weir, day 13, the Edge District) and the engine never wrote it down — it lived only as prose inside two NPC records, under two different names, which is why the intent parser could not see the one affordance the turn depended on. `establishedBy` is the trace that lets a save reclaim it: the fiction's own record must show it, or nothing is granted.",
+  "items": [
+    {
+      "id": "shadow_tablet",
+      "name": "Shadow Tablet",
+      "aliases": ["Shadow Sheet", "Shadow Slate", "shadow-sheet", "shadow-slate", "shadow tablet"],
+      "kind": "focus",
+      "description": "A thin dark plane, cool as slate and lighter than it looks, that holds a shadow the way paper holds ink. Tablets are made in pairs: what one hand writes, the other's face carries, however far apart they stand. The writing surfaces at the far end at its own pace and fades when it has been read. It carries words and nothing else — no voice, no sight, no passage. Whoever holds the other tablet can read you, so a pair is only ever as private as the person you gave it to.",
+      "bonusTags": ["message", "shadow", "distance", "careful"],
+      "consumable": false,
+      "worth": "valuable",
+      "goods": "worked_light",
+      "establishedBy": {
+        "trace": ["shadow tablet", "shadow-tablet", "shadow sheet", "shadow-sheet", "shadow slate", "shadow-slate"],
+        "why": "made in play and used to carry messages, but never emitted as an item — the record shows it in hand"
+      }
+    }
+  ]
+}

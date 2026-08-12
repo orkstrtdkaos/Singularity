@@ -28,7 +28,7 @@ import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, merg
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
-import { wieldBonusFor, usableCombatItems, normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js";
+import { wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // SNG-427: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
@@ -92,7 +92,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.125";
+const APP_VERSION = "1.9.126";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2107,6 +2107,16 @@ function migrate(c) {
     console.warn(`[migrate] trimmed scene history ${before} → ${SCENE_TURN_CAP} turns (CCODE-02 storage bound)`);
   }
   normalizeInventory(c, CONTENT.items);
+  // SNG-427: give back the items the STORY conferred that the engine never wrote down — trace-gated
+  // against this character's own record, once per reclaim version. Say so plainly: an item appearing in
+  // the pack without a word is indistinguishable from a bug, and this is a repair the player should see.
+  {
+    const reclaimed = reclaimEstablishedItems(c, CONTENT.items);
+    if (reclaimed.length) {
+      c._correctionAside = [c._correctionAside, `Set right: ${reclaimed.map(r => r.name).join(", ")} — the story gave you this and the ledger missed it.`].filter(Boolean).join(" ");
+      console.warn(`[reclaim] restored ${reclaimed.length} established item(s):`, reclaimed.map(r => `${r.name} (trace: "${r.trace}")`).join(", "));
+    }
+  }
   if (!c.clock) c.clock = newClock();
   if (!c.companions) c.companions = [];
   if (!c.quests) c.quests = [];

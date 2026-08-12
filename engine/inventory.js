@@ -35,10 +35,17 @@ function recordItemAlias(it, name) {
 }
 
 /** Normalize a character's inventory in place: strings → item objects,
- *  known names re-linked to the catalog so they regain effects/bonuses. */
+ *  known names re-linked to the catalog so they regain effects/bonuses.
+ *  SNG-427: the re-link also consults each catalog item's AUTHORED ALIASES. A world object people say
+ *  more than one way ("shadow tablet" / "shadow sheet" / "shadow slate" — Erik's ruling: one object,
+ *  three names) was only re-linkable under its canonical name, so a save holding an alternate kept a
+ *  bare `{kind:"misc"}` stub with no description, no tags, and no way to know what it was. */
 export function normalizeInventory(character, catalog = {}) {
   const byName = {};
-  for (const it of Object.values(catalog)) byName[it.name.toLowerCase()] = it;
+  for (const it of Object.values(catalog)) {
+    byName[it.name.toLowerCase()] = it;
+    for (const a of it.aliases || []) if (!byName[String(a).toLowerCase()]) byName[String(a).toLowerCase()] = it;
+  }
   character.inventory = (character.inventory || []).map(entry => {
     if (typeof entry !== "string") return entry;
     const cat = byName[entry.toLowerCase()];
@@ -55,9 +62,56 @@ export function normalizeInventory(character, catalog = {}) {
   return character;
 }
 
+/** SNG-427: `aliases` rides through. The instance shape has ALWAYS carried aliases and the resolver has
+ *  always read them (recordItemAlias writes drifted GM phrasings there) — but this destructure dropped
+ *  the AUTHORED ones on the way in, so a content alias was a writer with no reader: you could name three
+ *  ways to say a thing and the game would understand exactly one of them. */
 export function fromCatalog(catItem, qty = 1) {
-  const { id, name, kind, description, effects, bonusTags, consumable, image } = catItem;
-  return { id, name, kind, qty, description, effects, bonusTags, consumable, image };
+  const { id, name, kind, description, effects, bonusTags, consumable, image, aliases } = catItem;
+  return { id, name, kind, qty, description, effects, bonusTags, consumable, image, ...(aliases?.length ? { aliases: [...aliases] } : {}) };
+}
+
+// SNG-427: bump when a NEW item gains an `establishedBy` block, so existing saves get one more pass.
+// ⚠️ Deliberately its OWN flag rather than a BACKFILL_VERSION bump: runBackfill re-credits XP from the
+// activity spine, so raising ITS version to reclaim an item would hand every character in the game a
+// second helping of experience. A repair must not ride a wish's version number.
+export const ITEM_RECLAIM_VERSION = 1;
+
+/** ⛔ SNG-427 — AN ITEM THE FICTION CONFERRED THAT THE ENGINE NEVER WROTE DOWN. Silas made a Shadow
+ *  Tablet in play, gave its pair to Warden Coll, and carried it for two days of story — and it was never
+ *  in his inventory. It lived as prose inside two NPC records, under two different names. So when he
+ *  typed "update Warden Coll", the intent parser (which is handed the inventory as the character's
+ *  affordances) saw no way to reach a man two regions off, and the turn became a journey.
+ *  This gives it back — TRACE-GATED, the same standard grantStoryItem is held to: the item is authored
+ *  in content with an `establishedBy.trace`, and a character receives it ONLY if their OWN durable
+ *  record shows it. No trace, no grant; that is what keeps a repair from becoming a wish. Idempotent by
+ *  its own version flag. Story items only — never effects, never power. Returns what it claimed. */
+export function reclaimEstablishedItems(character, catalog = {}) {
+  if (!character || (character.itemReclaimVersion || 0) >= ITEM_RECLAIM_VERSION) return [];
+  const reg = Object.values(character.npcRegistry || {});
+  const record = [
+    ...(character.chronicle || []).map(c => typeof c === "string" ? c : (c?.text || c?.summary || "")),
+    ...reg.flatMap(n => [...(n.history || []), ...(n.knownFacts || []), n.statusNote || ""]),
+    ...(character.establishedFacts || []).map(f => f?.text || ""),
+    ...Object.values(character.codex?.topics || {}).flatMap(t => [t?.label, ...(t?.facts || []).map(f => f?.text || f)]),
+    ...Object.values(character.placeMemory || {}).flatMap(p => (p?.changes || []).map(c => c?.text || c))
+  ].join(" \n ").toLowerCase();
+  const claimed = [];
+  for (const cat of Object.values(catalog || {})) {
+    const traces = cat?.establishedBy?.trace;
+    if (!Array.isArray(traces) || !traces.length) continue;
+    if (resolveInventoryItem(character, cat, catalog)) continue;          // they already hold it
+    const hit = traces.find(t => String(t).length > 3 && record.includes(String(t).toLowerCase()));
+    if (!hit) continue;                                                    // no trace — never granted
+    // ⚠️ Hand addItem the catalog ID, not an object. The object branch builds a fresh item and only
+    // consults the catalog to decide whether to KEEP the id — so `{id, name}` arrives as a "misc" stub
+    // with no description, no tags and no aliases, a hollow copy of an item the game already has whole.
+    // The string branch goes through fromCatalog and gets the real thing.
+    addItem(character, cat.id, catalog);
+    claimed.push({ id: cat.id, name: cat.name, trace: hit });
+  }
+  character.itemReclaimVersion = ITEM_RECLAIM_VERSION;
+  return claimed;
 }
 
 /** Add an item — from catalog id, plain name, or a GM-proposed object (clamped).

@@ -127,3 +127,52 @@ shadow-slate, the shadow-sheet, or the shadow-tablet? Erik has called it all thr
 and Silas's copy should share whatever it is.
 
 Everything else ships.
+
+---
+
+# §7 — ADDENDUM (v1.9.126): the Shadow Tablet is an object now
+
+**Erik's ruling:** the thing is the **Shadow Tablet**. *Shadow sheet* and *shadow slate* are alternates
+people actually say — **one object, three names**, not three things.
+
+✅ **Authored** at `content/packs/valley/items/shadow_tablet.json`, registered in the valley manifest.
+Paired tablets; what one hand writes the other's face carries; words only — no voice, no sight, no
+passage; and *"a pair is only ever as private as the person you gave it to."*
+
+⛔ **Authoring the alternates was not enough, and this is the part worth reading.** The instance shape
+has always carried `aliases`, and the resolver has always read them — but `fromCatalog` **dropped the
+authored ones on the way in.** So a content alias was a writer with no reader: Aevi could name three
+ways to say a thing and the game would understand exactly one. Fixed, plus the bare-string re-link now
+consults aliases, so a save already holding "Shadow Slate" heals into the real item.
+
+✅ **All four spellings now collapse onto one stack** instead of forking a second item the next time
+the GM says "sheet".
+
+## The reclaim — repair, not wish
+
+Silas's save had 26 items and none of them the tablet. It is back, **trace-gated**: the item declares
+`establishedBy.trace`, and a character receives it ONLY if their **own durable record** shows it. His
+hit on `"shadow-sheet"` in Coll's history. A character whose story never had one gets nothing, and I
+gated that line specifically — it is what keeps the pass from becoming a grant machine.
+
+⚠️ **It has its OWN version flag, deliberately.** Reclaiming it via a `BACKFILL_VERSION` bump would
+have re-run the XP catch-up and handed **every character in the game a second helping of experience.**
+A repair must not ride a wish's version number, and the gate pins the backfill's version at 1.
+
+## Three gates proved nothing until I mutated them
+
+| what masked it | the fix |
+|---|---|
+| idempotence — the already-held check made a second pass empty anyway | test the case only the flag answers: **an item the player DROPPED must stay dropped** |
+| the region-crossing clause (§5) — destination had no roads | give it a road, so only the crossing clause can catch it |
+| the empty-anchor guard (§5) — the guard behind it absorbed the case | pass threads, so the first guard is actually exercised |
+
+**Defence in depth hides gates.** Three times now, a second correct guard has kept a test green while
+the clause under test was gone. It is the friendliest possible failure mode and the most dangerous:
+every one of those gates read as proof and was decoration.
+
+## §8 — WHAT AEVI MIGHT WANT TO LOOK AT
+
+`establishedBy` is now a content lever, not an engine one. **If another object was made in play and
+never written down, it is one authored block and a version bump — no engine change.** Worth a sweep of
+the chronicle for others; the tablet will not be the only one.

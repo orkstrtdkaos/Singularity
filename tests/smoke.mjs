@@ -13911,7 +13911,7 @@ await (async () => {
     dShapes.length === 1 && dShapes[0].names === 2 && dShapes[0].entries === 2);
 }
 
-// ---- SNG-424: a GM-initiated relocation the player never asked for is OFFERED, not imposed ----
+// ---- CCODE-158: a GM-initiated relocation the player never asked for is OFFERED, not imposed ----
 // Erik's turn: "Take the opportunity to update Warden Coll on the status of the Water crisis." He was at
 // the ridge; the beat put him in Coll's office two regions away. departureGateFor guards the door where
 // the PLAYER asks to travel, BEFORE the GM is called. The moveTo applier is the other door and it had no
@@ -13926,101 +13926,101 @@ await (async () => {
     mill:  { id: "mill",  name: "Mill Gate",      regionId: "foothills", connections: ["ridge"] },
     edge:  { id: "edge",  name: "Edge District",  regionId: "radiant",   connections: ["ridge"] }
   };
-  check("424: a region crossing is a consequential move EVEN WHEN a road connects the two", isConsequentialMove("ridge", "edge", locs424) === true);
-  check("424: an adjacent step in the same region is NOT (a departure gate that nags is not a gate)", isConsequentialMove("ridge", "mill", locs424) === false);
-  check("424: a same-region place you are NOT connected to is a journey, not a step", isConsequentialMove("ridge", "orchard", { ...locs424, orchard: { id: "orchard", regionId: "foothills", connections: [] } }) === true);
-  check("424: an unresolvable destination FAILS CLOSED (the engine knows least, so it counts as real)", isConsequentialMove("ridge", "nowhere", locs424) === true && isConsequentialMove("ridge", null, locs424) === true);
-  check("424: standing still is not a move", isConsequentialMove("ridge", "ridge", locs424) === false);
+  check("CCODE-158: a region crossing is a consequential move EVEN WHEN a road connects the two", isConsequentialMove("ridge", "edge", locs424) === true);
+  check("CCODE-158: an adjacent step in the same region is NOT (a departure gate that nags is not a gate)", isConsequentialMove("ridge", "mill", locs424) === false);
+  check("CCODE-158: a same-region place you are NOT connected to is a journey, not a step", isConsequentialMove("ridge", "orchard", { ...locs424, orchard: { id: "orchard", regionId: "foothills", connections: [] } }) === true);
+  check("CCODE-158: an unresolvable destination FAILS CLOSED (the engine knows least, so it counts as real)", isConsequentialMove("ridge", "nowhere", locs424) === true && isConsequentialMove("ridge", null, locs424) === true);
+  check("CCODE-158: standing still is not a move", isConsequentialMove("ridge", "ridge", locs424) === false);
 
   // the applier's actual decision, composed exactly as app.js composes it
   const unearned = (askedToTravel, dest, subParent = null, wgRoute = null) =>
     !!dest && dest !== "ridge" && !askedToTravel && !subParent && !wgRoute && isConsequentialMove("ridge", dest, locs424);
-  check("424 THE BUG: no travel intent + a region-crossing moveTo is REFUSED (Erik's exact shape)", unearned(false, "edge") === true);
-  check("424: the SAME move is allowed when the player actually asked to travel", unearned(true, "edge") === false);
-  check("424: an ordinary adjacent step is never refused", unearned(false, "mill") === false);
-  check("424: a sub-place and a waygate transit are never refused (they are not relocations)", unearned(false, "edge", "ridge") === false && unearned(false, "edge", null, { destId: "edge" }) === false);
+  check("CCODE-158 THE BUG: no travel intent + a region-crossing moveTo is REFUSED (Erik's exact shape)", unearned(false, "edge") === true);
+  check("CCODE-158: the SAME move is allowed when the player actually asked to travel", unearned(true, "edge") === false);
+  check("CCODE-158: an ordinary adjacent step is never refused", unearned(false, "mill") === false);
+  check("CCODE-158: a sub-place and a waygate transit are never refused (they are not relocations)", unearned(false, "edge", "ridge") === false && unearned(false, "edge", null, { destId: "edge" }) === false);
   // ⚠️ RED BY CONSTRUCTION: before the fix the applier had NO whether-check at all, i.e. its effective
   // predicate was "never refuse". Pin that the gate distinguishes the two — a gate that passes under the
   // old behaviour is not a gate.
-  const oldApplierPredicate = () => false; // what app.js effectively asked before SNG-424
-  check("424: the gate goes RED under the pre-fix behaviour (no whether-check → never refused)", oldApplierPredicate() !== unearned(false, "edge"));
+  const oldApplierPredicate = () => false; // what app.js effectively asked before CCODE-158
+  check("CCODE-158: the gate goes RED under the pre-fix behaviour (no whether-check → never refused)", oldApplierPredicate() !== unearned(false, "edge"));
 
   // the departure gate still agrees with the shared predicate (one definition, two doors)
   const ch424 = { currentLocationId: "ridge" };
-  check("424: both doors share ONE definition — the gate fires on the crossing and not on the step",
+  check("CCODE-158: both doors share ONE definition — the gate fires on the crossing and not on the step",
     !!departureGateFor({ destId: "edge", name: "Edge District" }, ch424, locs424) && departureGateFor({ destId: "mill", name: "Mill Gate" }, ch424, locs424) === null);
 
   const appSrc424 = readFileSync(join(root, "app.js"), "utf8");
-  check("424: the moveTo applier actually consults it, with all four clauses", /const unearnedMove =[\s\S]{0,320}!askedToTravel[\s\S]{0,200}!subParentId[\s\S]{0,60}!wgRoute[\s\S]{0,80}isConsequentialMove/.test(appSrc424));
-  check("424: a refused move OFFERS the road (_pendingArrival) instead of stranding the player", /refusedMove = true/.test(appSrc424) && /_pendingArrival = \{ ref: moveRef/.test(appSrc424) && /else if \(!refusedMove\)/.test(appSrc424));
-  check("424: the refusal is logged as an op outcome, so it is visible and not silent", /logOpOutcome\("moveTo", "refused-unearned"\)/.test(appSrc424));
-  check("424: the correction aside APPENDS — an aside that can be overwritten vanishes at random", /character\._correctionAside = \[character\._correctionAside, "Set right: "/.test(appSrc424));
+  check("CCODE-158: the moveTo applier actually consults it, with all four clauses", /const unearnedMove =[\s\S]{0,320}!askedToTravel[\s\S]{0,200}!subParentId[\s\S]{0,60}!wgRoute[\s\S]{0,80}isConsequentialMove/.test(appSrc424));
+  check("CCODE-158: a refused move OFFERS the road (_pendingArrival) instead of stranding the player", /refusedMove = true/.test(appSrc424) && /_pendingArrival = \{ ref: moveRef/.test(appSrc424) && /else if \(!refusedMove\)/.test(appSrc424));
+  check("CCODE-158: the refusal is logged as an op outcome, so it is visible and not silent", /logOpOutcome\("moveTo", "refused-unearned"\)/.test(appSrc424));
+  check("CCODE-158: the correction aside APPENDS — an aside that can be overwritten vanishes at random", /character\._correctionAside = \[character\._correctionAside, "Set right: "/.test(appSrc424));
   const gmSrc424 = readFileSync(join(root, "engine/gm.js"), "utf8");
-  check("424: the moveTo contract forbids relocating a character whose action did not move them", /THE FICTION MAY NOT MOVE THEM UNLESS THEIR ACTION DID/.test(gmSrc424) && /that is a MESSAGE, not a journey/.test(gmSrc424));
+  check("CCODE-158: the moveTo contract forbids relocating a character whose action did not move them", /THE FICTION MAY NOT MOVE THEM UNLESS THEIR ACTION DID/.test(gmSrc424) && /that is a MESSAGE, not a journey/.test(gmSrc424));
 }
 
-// ---- SNG-425: reaching someone who is ELSEWHERE is not travel (the third bucket) ----
+// ---- CCODE-159: reaching someone who is ELSEWHERE is not travel (the third bucket) ----
 {
   const { isSpeechAct, isRemoteContact } = await import("../engine/intent.js");
   const ERIK = "Take the opportunity to update Warden Coll on the status of the Water crisis and new warden stations.";
-  check("425 THE BUG: a light-verb wrapper no longer hides the governing verb", isSpeechAct(ERIK) === true);
+  check("CCODE-159 THE BUG: a light-verb wrapper no longer hides the governing verb", isSpeechAct(ERIK) === true);
   // ⚠️ RED BY CONSTRUCTION — the pre-fix belt, rebuilt here, on the same sentence. It read "Take" as the
   // governing verb and had no remote verbs at all, so it returned false and the turn became travel.
   const OLD_SPEECH = /^\s*(?:i(?:'?ll|'?m|'?d| will| am| would)?\s+(?:want to |going to |plan to |mean to |need to )?|let'?s\s+|we(?:'?ll| will)?\s+)?(announc\w*|tell\w*|say|saying|said|speak\w*|talk\w*|confid\w*|discuss\w*|propos\w*|promis\w*|mention\w*|explain\w*|suggest\w*|reassur\w*|admit\w*|confess\w*|declar\w*|inform\w*|warn\w*|ask|asking|asks|chat\w*|whisper\w*|shar\w*)\b/i;
-  check("425: the gate goes RED on the pre-fix belt (it read \"Take\" and missed \"update\" entirely)", OLD_SPEECH.test(ERIK.trim()) === false);
-  check("425: the remote half of the verb list is present", ["write to Coll", "send word to Mara", "brief the council", "report what I found", "relay the news"].every(s => isSpeechAct(s) === true));
-  check("425: a real departure is STILL a departure (the anchor was right, only blind)", ["head to the edge district", "travel to Millbrook", "walk to the mill and write to Coll"].every(s => isSpeechAct(s) === false));
-  check("425: the governing verb still wins — going somewhere and talking there is going", isSpeechAct("go to Millbrook and tell Pell the news") === false);
-  check("425: a named CHANNEL is remote contact", ["write to Coll on my shadow tablet", "send word to Mara by bird", "put it on the shadow-slate", "get word to Fendt via the relay"].every(s => isRemoteContact(s) === true));
-  check("425: ordinary travel is not remote contact", ["walk to the mill", "head south at dawn", "take the road to Cairnhold"].every(s => isRemoteContact(s) === false));
+  check("CCODE-159: the gate goes RED on the pre-fix belt (it read \"Take\" and missed \"update\" entirely)", OLD_SPEECH.test(ERIK.trim()) === false);
+  check("CCODE-159: the remote half of the verb list is present", ["write to Coll", "send word to Mara", "brief the council", "report what I found", "relay the news"].every(s => isSpeechAct(s) === true));
+  check("CCODE-159: a real departure is STILL a departure (the anchor was right, only blind)", ["head to the edge district", "travel to Millbrook", "walk to the mill and write to Coll"].every(s => isSpeechAct(s) === false));
+  check("CCODE-159: the governing verb still wins — going somewhere and talking there is going", isSpeechAct("go to Millbrook and tell Pell the news") === false);
+  check("CCODE-159: a named CHANNEL is remote contact", ["write to Coll on my shadow tablet", "send word to Mara by bird", "put it on the shadow-slate", "get word to Fendt via the relay"].every(s => isRemoteContact(s) === true));
+  check("CCODE-159: ordinary travel is not remote contact", ["walk to the mill", "head south at dawn", "take the road to Cairnhold"].every(s => isRemoteContact(s) === false));
   const appSrc425 = readFileSync(join(root, "app.js"), "utf8");
-  check("425: travelIntentOf suppresses a travelTo on a remote contact — unless real travel is also named", /isRemoteContact\(contactText\) && !TRAVEL_PHRASE\.test\(contactText\)/.test(appSrc425));
+  check("CCODE-159: travelIntentOf suppresses a travelTo on a remote contact — unless real travel is also named", /isRemoteContact\(contactText\) && !TRAVEL_PHRASE\.test\(contactText\)/.test(appSrc425));
   const gmSrc425 = readFileSync(join(root, "engine/gm.js"), "utf8");
-  check("425: the intent parser is TOLD the third case exists (a slate is not a road)", /REACHING SOMEONE WHO IS ELSEWHERE IS NOT TRAVEL/.test(gmSrc425) && /shadow-slates/.test(gmSrc425) && /light wrapper in front of the real verb/.test(gmSrc425));
+  check("CCODE-159: the intent parser is TOLD the third case exists (a slate is not a road)", /REACHING SOMEONE WHO IS ELSEWHERE IS NOT TRAVEL/.test(gmSrc425) && /shadow-slates/.test(gmSrc425) && /light wrapper in front of the real verb/.test(gmSrc425));
 }
 
-// ---- SNG-426: scene state is authoritative about the SITUATION, never about WHO SOMEONE IS ----
+// ---- CCODE-160: scene state is authoritative about the SITUATION, never about WHO SOMEONE IS ----
 {
   const { reconcileSceneIdentity, sceneIdentityNote, sanitizeScene: sc426 } = await import("../engine/gm.js");
   const ERIK_SETTING = "Warden Coll's office in the Edge District warden post—stone walls, afternoon light through a high window. Coll behind her desk, Silas standing across from her with the shadow-sheet still in hand.";
   const reg426 = { coll: { id: "coll", name: "Warden Coll", gender: "man", pronouns: "he/him" } };
-  check("426: the defect is real and present in the input (else this gate proves nothing)", /\bher desk\b/.test(ERIK_SETTING) && /across from her\b/.test(ERIK_SETTING));
+  check("CCODE-160: the defect is real and present in the input (else this gate proves nothing)", /\bher desk\b/.test(ERIK_SETTING) && /across from her\b/.test(ERIK_SETTING));
   const r426 = reconcileSceneIdentity({ setting: ERIK_SETTING, npcsPresent: [{ name: "Warden Coll", state: "seated behind her desk, pen down" }], objects: [], threads: [] }, reg426);
-  check("426 THE BUG: the possessive is repaired against the record — 'her desk' → 'his desk'", /\bhis desk\b/.test(r426.scene.setting) && !/\bher desk\b/.test(r426.scene.setting));
-  check("426: the OBJECT form is repaired differently — 'across from her with' → 'from him with'", /across from him with\b/.test(r426.scene.setting));
-  check("426: the fix reaches every prose field, not just the setting", /\bhis desk\b/.test(r426.scene.npcsPresent[0].state));
-  check("426: it REPORTS what it repaired (a silent repair is an invisible bug)", r426.repaired.length >= 2 && r426.repaired.every(x => x.name === "Warden Coll"));
+  check("CCODE-160 THE BUG: the possessive is repaired against the record — 'her desk' → 'his desk'", /\bhis desk\b/.test(r426.scene.setting) && !/\bher desk\b/.test(r426.scene.setting));
+  check("CCODE-160: the OBJECT form is repaired differently — 'across from her with' → 'from him with'", /across from him with\b/.test(r426.scene.setting));
+  check("CCODE-160: the fix reaches every prose field, not just the setting", /\bhis desk\b/.test(r426.scene.npcsPresent[0].state));
+  check("CCODE-160: it REPORTS what it repaired (a silent repair is an invisible bug)", r426.repaired.length >= 2 && r426.repaired.every(x => x.name === "Warden Coll"));
   // ⚠️ RED BY CONSTRUCTION: with the identity record absent, there is nothing to reconcile against and
   // the wrong pronoun survives — which is exactly the state the game shipped in.
-  check("426: the gate goes RED with no record to reconcile against (the pre-fix state)", /\bher desk\b/.test(reconcileSceneIdentity({ setting: ERIK_SETTING, npcsPresent: [], objects: [], threads: [] }, {}).scene.setting));
-  check("426: an UNKNOWN pronoun is left alone — it repairs against a record, it does not guess", /\bher desk\b/.test(reconcileSceneIdentity({ setting: ERIK_SETTING, npcsPresent: [], objects: [], threads: [] }, { coll: { name: "Warden Coll" } }).scene.setting));
+  check("CCODE-160: the gate goes RED with no record to reconcile against (the pre-fix state)", /\bher desk\b/.test(reconcileSceneIdentity({ setting: ERIK_SETTING, npcsPresent: [], objects: [], threads: [] }, {}).scene.setting));
+  check("CCODE-160: an UNKNOWN pronoun is left alone — it repairs against a record, it does not guess", /\bher desk\b/.test(reconcileSceneIdentity({ setting: ERIK_SETTING, npcsPresent: [], objects: [], threads: [] }, { coll: { name: "Warden Coll" } }).scene.setting));
   // conservative by construction: two registered people in one sentence cannot be disambiguated
   const amb = reconcileSceneIdentity({ setting: "Coll behind her desk, Pell at the door with her hand on the frame.", npcsPresent: [], objects: [], threads: [] },
     { coll: { name: "Warden Coll", pronouns: "he/him" }, pell: { name: "Pell Ran Marsh", pronouns: "she/her" } });
-  check("426: it DECLINES an ambiguous string rather than guessing which 'her' is whose", amb.scene.setting.includes("Coll behind her desk") && amb.repaired.length === 0);
-  check("426: a they/them person is never rewritten (no mangled verb agreement)", reconcileSceneIdentity({ setting: "Ash behind her desk.", npcsPresent: [], objects: [], threads: [] }, { ash: { name: "Ash", pronouns: "they/them" } }).repaired.length === 0);
-  check("426: the note carries the record's own pronouns INTO the authoritative block", /Warden Coll is man, he\/him/.test(sceneIdentityNote({ npcsPresent: [{ name: "Warden Coll" }] }, reg426)));
-  check("426: reconcile survives a sanitizeScene round-trip and garbage input", reconcileSceneIdentity(sc426({ setting: ERIK_SETTING }), reg426).repaired.length >= 1 && reconcileSceneIdentity(null, reg426).scene === null);
+  check("CCODE-160: it DECLINES an ambiguous string rather than guessing which 'her' is whose", amb.scene.setting.includes("Coll behind her desk") && amb.repaired.length === 0);
+  check("CCODE-160: a they/them person is never rewritten (no mangled verb agreement)", reconcileSceneIdentity({ setting: "Ash behind her desk.", npcsPresent: [], objects: [], threads: [] }, { ash: { name: "Ash", pronouns: "they/them" } }).repaired.length === 0);
+  check("CCODE-160: the note carries the record's own pronouns INTO the authoritative block", /Warden Coll is man, he\/him/.test(sceneIdentityNote({ npcsPresent: [{ name: "Warden Coll" }] }, reg426)));
+  check("CCODE-160: reconcile survives a sanitizeScene round-trip and garbage input", reconcileSceneIdentity(sc426({ setting: ERIK_SETTING }), reg426).repaired.length >= 1 && reconcileSceneIdentity(null, reg426).scene === null);
   const gmSrc426 = readFileSync(join(root, "engine/gm.js"), "utf8");
-  check("426: the block no longer claims authority over identity, and says the record wins", /AUTHORITATIVE about the SITUATION/.test(gmSrc426) && /NOT authoritative about WHO ANYONE IS/.test(gmSrc426) && /the record is right and this text is a slip/.test(gmSrc426));
-  check("426: the render path reconciles before serving (heals a save already wedged)", /reconcileSceneIdentity\(sceneState, character\?\.npcRegistry/.test(gmSrc426));
+  check("CCODE-160: the block no longer claims authority over identity, and says the record wins", /AUTHORITATIVE about the SITUATION/.test(gmSrc426) && /NOT authoritative about WHO ANYONE IS/.test(gmSrc426) && /the record is right and this text is a slip/.test(gmSrc426));
+  check("CCODE-160: the render path reconciles before serving (heals a save already wedged)", /reconcileSceneIdentity\(sceneState, character\?\.npcRegistry/.test(gmSrc426));
   const appSrc426 = readFileSync(join(root, "app.js"), "utf8");
-  check("426: and the WRITE path reconciles too, so the save stops carrying the error", /const rec = reconcileSceneIdentity\(sceneClean, character\.npcRegistry/.test(appSrc426));
+  check("CCODE-160: and the WRITE path reconciles too, so the save stops carrying the error", /const rec = reconcileSceneIdentity\(sceneClean, character\.npcRegistry/.test(appSrc426));
   const corrSrc426 = readFileSync(join(root, "engine/corrections.js"), "utf8");
-  check("426: the one authoritative block finally has a repair op", /case "correctSceneState"/.test(corrSrc426));
+  check("CCODE-160: the one authoritative block finally has a repair op", /case "correctSceneState"/.test(corrSrc426));
   const cs = { activeScene: { sceneState: { setting: "Warden Coll's office.", threads: ["x"] } }, corrections: [] };
   const rr = applyStateOps(cs, [{ op: "correctSceneState", setting: "The ridge Threshold Post, afternoon.", why: "he never left the ridge" }], {});
-  check("426: correctSceneState rewrites the anchor and logs it", rr.applied.length === 1 && cs.activeScene.sceneState.setting === "The ridge Threshold Post, afternoon." && cs.corrections.some(x => x.kind === "sceneState"));
+  check("CCODE-160: correctSceneState rewrites the anchor and logs it", rr.applied.length === 1 && cs.activeScene.sceneState.setting === "The ridge Threshold Post, afternoon." && cs.corrections.some(x => x.kind === "sceneState"));
   // ⚠️ the empty-anchor guard must be tested WITH threads present, or the "needs setting and/or threads"
   // guard behind it absorbs the case and the first guard is never actually exercised (it did, at first).
-  check("426: it refuses an empty anchor and a no-op ask (a scene with no anchor is worse than a wrong one)",
+  check("CCODE-160: it refuses an empty anchor and a no-op ask (a scene with no anchor is worse than a wrong one)",
     applyStateOps(cs, [{ op: "correctSceneState", setting: "   ", threads: ["still open"] }], {}).refused.length === 1
     && applyStateOps(cs, [{ op: "correctSceneState", setting: "   " }], {}).refused.length === 1
     && applyStateOps(cs, [{ op: "correctSceneState" }], {}).refused.length === 1);
-  check("426: it refuses when there is no active scene to repair", applyStateOps({ corrections: [] }, [{ op: "correctSceneState", setting: "somewhere" }], {}).refused.length === 1);
+  check("CCODE-160: it refuses when there is no active scene to repair", applyStateOps({ corrections: [] }, [{ op: "correctSceneState", setting: "somewhere" }], {}).refused.length === 1);
 }
 
-// ---- SNG-427: the Shadow Tablet is a real object, under all the names people say for it ----
+// ---- CCODE-161: the Shadow Tablet is a real object, under all the names people say for it ----
 // Erik's ruling: the object is the Shadow Tablet; "shadow sheet" and "shadow slate" are alternates for
 // the same thing. It was made in play and never emitted, so it lived as prose in two NPC records under
 // two different names — and the intent parser, handed the inventory as the character's affordances,
@@ -14030,48 +14030,48 @@ await (async () => {
   const pack427 = JSON.parse(readFileSync(join(root, "content/packs/valley/items/shadow_tablet.json"), "utf8"));
   const cat427 = Object.fromEntries(pack427.items.map(i => [i.id, i]));
   const tablet = cat427.shadow_tablet;
-  check("427: the object is authored, canonically named, and carries Erik's alternates", tablet.name === "Shadow Tablet" && ["Shadow Sheet", "Shadow Slate"].every(a => (tablet.aliases || []).includes(a)));
-  check("427: it is registered in the pack manifest (an unlisted file is not content)", JSON.parse(readFileSync(join(root, "content/packs/valley/manifest.json"), "utf8")).provides.items.includes("items/shadow_tablet.json"));
+  check("CCODE-161: the object is authored, canonically named, and carries Erik's alternates", tablet.name === "Shadow Tablet" && ["Shadow Sheet", "Shadow Slate"].every(a => (tablet.aliases || []).includes(a)));
+  check("CCODE-161: it is registered in the pack manifest (an unlisted file is not content)", JSON.parse(readFileSync(join(root, "content/packs/valley/manifest.json"), "utf8")).provides.items.includes("items/shadow_tablet.json"));
 
   // THE BUG: authored aliases were dropped on the way into inventory — a writer with no reader.
-  check("427 THE BUG: fromCatalog carries authored aliases through to the instance", (fc427(tablet).aliases || []).includes("Shadow Slate"));
-  check("427: an item with no aliases gains no empty field (the shape stays clean)", !("aliases" in fc427({ id: "x", name: "Rock", kind: "misc" })));
+  check("CCODE-161 THE BUG: fromCatalog carries authored aliases through to the instance", (fc427(tablet).aliases || []).includes("Shadow Slate"));
+  check("CCODE-161: an item with no aliases gains no empty field (the shape stays clean)", !("aliases" in fc427({ id: "x", name: "Rock", kind: "misc" })));
 
   // the whole point of the alternates: a later mention under another name must not fork a second item
   const holder = { inventory: [fc427(tablet)] };
-  check("427: every name Erik allows collapses onto the ONE object", ["shadow sheet", "Shadow Slate", "shadow-sheet", "my shadow tablet"].every(s => resolveInventoryItem(holder, s, cat427)?.id === "shadow_tablet"));
-  check("427: a save holding an ALTERNATE as a bare string re-links to the real item", (() => { const d = { inventory: ["Shadow Slate"] }; norm427(d, cat427); return d.inventory[0].id === "shadow_tablet" && d.inventory[0].kind === "focus"; })());
+  check("CCODE-161: every name Erik allows collapses onto the ONE object", ["shadow sheet", "Shadow Slate", "shadow-sheet", "my shadow tablet"].every(s => resolveInventoryItem(holder, s, cat427)?.id === "shadow_tablet"));
+  check("CCODE-161: a save holding an ALTERNATE as a bare string re-links to the real item", (() => { const d = { inventory: ["Shadow Slate"] }; norm427(d, cat427); return d.inventory[0].id === "shadow_tablet" && d.inventory[0].kind === "focus"; })());
 
   // the reclaim — trace-gated, and proved against Silas's ACTUAL save, not a fixture
   const silas = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
-  check("427: the defect is real in the live save (else this gate proves nothing)", !(silas.inventory || []).some(i => /shadow/i.test(i.name || "")) && JSON.stringify(silas.npcRegistry).toLowerCase().includes("shadow-slate"));
+  check("CCODE-161: the defect is real in the live save (else this gate proves nothing)", !(silas.inventory || []).some(i => /shadow/i.test(i.name || "")) && JSON.stringify(silas.npcRegistry).toLowerCase().includes("shadow-slate"));
   const got = reclaimEstablishedItems(silas, cat427);
-  check("427 THE FIX: the trace in his own record gives the tablet back", got.length === 1 && got[0].id === "shadow_tablet" && !!got[0].trace);
+  check("CCODE-161 THE FIX: the trace in his own record gives the tablet back", got.length === 1 && got[0].id === "shadow_tablet" && !!got[0].trace);
   const held = (silas.inventory || []).find(i => i.id === "shadow_tablet");
-  check("427: and it arrives WHOLE — catalog kind, description and aliases, not a hollow stub", held && held.kind === "focus" && !!held.description && (held.aliases || []).includes("Shadow Sheet"));
-  check("427: idempotent — a second pass grants nothing", reclaimEstablishedItems(silas, cat427).length === 0);
+  check("CCODE-161: and it arrives WHOLE — catalog kind, description and aliases, not a hollow stub", held && held.kind === "focus" && !!held.description && (held.aliases || []).includes("Shadow Sheet"));
+  check("CCODE-161: idempotent — a second pass grants nothing", reclaimEstablishedItems(silas, cat427).length === 0);
   // ⚠️ the already-held check ALSO makes a second pass empty, so it masks the version flag entirely. The
   // case only the flag can answer: the player DROPS the thing. Without the flag it comes back on every
   // load — an item you threw away returning forever, which is the engine overruling the player.
-  check("427: an item the player DROPPED stays dropped (only the version flag can hold this)", (() => {
+  check("CCODE-161: an item the player DROPPED stays dropped (only the version flag can hold this)", (() => {
     const dropped = { ...silas, inventory: (silas.inventory || []).filter(i => i.id !== "shadow_tablet") };
     return reclaimEstablishedItems(dropped, cat427).length === 0;
   })());
   // ⚠️ REPAIR, NOT WISH: no trace in the record, no item. This is the line that keeps the pass honest.
-  check("427: a character whose story never had one gets NOTHING", reclaimEstablishedItems({ inventory: [], chronicle: ["walked to the mill"], npcRegistry: {} }, cat427).length === 0);
-  check("427: an item with no establishedBy block is never reclaimed by this pass", reclaimEstablishedItems({ inventory: [], chronicle: ["I carry a marcher blade everywhere"], npcRegistry: {} }, { marcher_blade: { id: "marcher_blade", name: "Marcher's Blade" } }).length === 0);
+  check("CCODE-161: a character whose story never had one gets NOTHING", reclaimEstablishedItems({ inventory: [], chronicle: ["walked to the mill"], npcRegistry: {} }, cat427).length === 0);
+  check("CCODE-161: an item with no establishedBy block is never reclaimed by this pass", reclaimEstablishedItems({ inventory: [], chronicle: ["I carry a marcher blade everywhere"], npcRegistry: {} }, { marcher_blade: { id: "marcher_blade", name: "Marcher's Blade" } }).length === 0);
   // ⚠️ it must NOT ride the XP backfill's version — that would re-credit experience to every character
   const invSrc427 = readFileSync(join(root, "engine/inventory.js"), "utf8");
   // the invariant is about the XP backfill's version, not about the word appearing in a comment —
   // my first assertion failed on my own explanatory note, which is a checker being wrong, not the code.
   const bfSrc427 = readFileSync(join(root, "engine/backfill.js"), "utf8");
-  check("427: the reclaim has its OWN version flag, and the XP backfill's is untouched (a repair must not ride a wish's version number)",
+  check("CCODE-161: the reclaim has its OWN version flag, and the XP backfill's is untouched (a repair must not ride a wish's version number)",
     /ITEM_RECLAIM_VERSION/.test(invSrc427) && /itemReclaimVersion/.test(invSrc427)
     && /export const BACKFILL_VERSION = 1;/.test(bfSrc427) && !/reclaimEstablishedItems/.test(bfSrc427));
   const appSrc427 = readFileSync(join(root, "app.js"), "utf8");
-  check("427: it runs on load and SAYS SO (a silent grant is indistinguishable from a bug)", /reclaimEstablishedItems\(c, CONTENT\.items\)/.test(appSrc427) && /the story gave you this and the ledger missed it/.test(appSrc427));
+  check("CCODE-161: it runs on load and SAYS SO (a silent grant is indistinguishable from a bug)", /reclaimEstablishedItems\(c, CONTENT\.items\)/.test(appSrc427) && /the story gave you this and the ledger missed it/.test(appSrc427));
   const intentSrc427 = readFileSync(join(root, "engine/intent.js"), "utf8");
-  check("427: all three names are recognised as a remote channel (SNG-425 agrees with the ruling)", /shadow\[-\\s\]\?\(\?:slate\|sheet\|tablet\)/.test(intentSrc427));
+  check("CCODE-161: all three names are recognised as a remote channel (CCODE-159 agrees with the ruling)", /shadow\[-\\s\]\?\(\?:slate\|sheet\|tablet\)/.test(intentSrc427));
 }
 
 // ---- SNG-401: draw an NPC's picture again, WITHOUT destroying the one they have ----

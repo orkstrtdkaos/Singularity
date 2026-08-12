@@ -282,7 +282,7 @@ ${standingDetail}`);
 
   // ---- TIER 3: immediate scene — what's set, present, and carried right now ----
   if (sceneState) {
-    // SNG-426: reconcile the prose to the identity record BEFORE it is served under a header that
+    // CCODE-160: reconcile the prose to the identity record BEFORE it is served under a header that
     // outranks the sheet — and carry the pronouns INSIDE the block, so the near instruction and the
     // distant one agree instead of competing. Heals a save already wedged with the wrong pronoun.
     const { scene: sceneFixed } = reconcileSceneIdentity(sceneState, character?.npcRegistry || {});
@@ -626,7 +626,7 @@ export function sanitizeScene(scene) {
   };
 }
 
-// SNG-426: the two pronoun families this can safely rewrite. they/them is deliberately ABSENT as a
+// CCODE-160: the two pronoun families this can safely rewrite. they/them is deliberately ABSENT as a
 // TARGET — converting "she is" to "they is" mangles the verb, and a mangled sentence is worse than an
 // annotated one, so a they/them person is carried by the annotation alone (see sceneIdentityNote).
 const PRONOUN_FAMILY = { "she/her": "fem", "he/him": "masc" };
@@ -656,7 +656,7 @@ function swapPronouns(text, from) {
   return out;
 }
 
-/** PURE. ⛔ SNG-426 — SCENE STATE IS AUTHORITATIVE ABOUT THE SITUATION, NEVER ABOUT WHO SOMEONE IS.
+/** PURE. ⛔ CCODE-160 — SCENE STATE IS AUTHORITATIVE ABOUT THE SITUATION, NEVER ABOUT WHO SOMEONE IS.
  *  The scene block is model-authored prose that the next prompt re-serves under a header reading
  *  "AUTHORITATIVE — do not contradict", and it sits LATER in the prompt than KNOWN PEOPLE. So a
  *  one-off slip is promoted ABOVE the sheet that contradicts it and then re-served every turn:
@@ -714,7 +714,7 @@ export function reconcileSceneIdentity(scene, npcRegistry = {}) {
   return { scene: next, repaired };
 }
 
-/** PURE. The pronoun annotation the scene block carries (SNG-426): the identity fact travels INSIDE
+/** PURE. The pronoun annotation the scene block carries (CCODE-160): the identity fact travels INSIDE
  *  the authoritative block, not only far above it in KNOWN PEOPLE, so the model never has to reconcile
  *  a near instruction against a distant one. Covers the people reconcileSceneIdentity declined to
  *  rewrite as well as the ones it fixed. */

@@ -288,7 +288,7 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         applied.push({ npcGender: op.id });
         break;
       }
-      // ⛔ SNG-426: THE ONE BLOCK LABELLED AUTHORITATIVE WAS THE ONE BLOCK WITH NO REPAIR PATH. Scene
+      // ⛔ CCODE-160: THE ONE BLOCK LABELLED AUTHORITATIVE WAS THE ONE BLOCK WITH NO REPAIR PATH. Scene
       // state is model-authored prose re-served every turn under a header that outranks the character
       // sheet, and all seventeen repair ops could reach the registry, the quests, the codex, the
       // location — and not this. So a scene wedged with a wrong setting (Erik's case: the GM staged a

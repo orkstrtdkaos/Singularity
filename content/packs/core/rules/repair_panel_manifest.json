@@ -18,7 +18,7 @@
     "correctAttribute": "LOWER a mis-set sub-attribute; parents rederive. Only lowers.",
     "mergeEntity": "Fold two split registry records for ONE person into a single survivor (unions history, keeps the higher relationship, adds the old name as an alias).",
     "correctNpcGender": "Correct an NPC's wrongly-recorded gender.",
-    "correctSceneState": "Fix the ACTIVE SCENE's own description when it is wrong or stale — its setting, its open threads. SNG-426: scene state is re-served every turn under a header that outranks the character sheet, so a wrong setting persists until something rewrites it, and until now nothing could. Repair only: it changes the scene's DESCRIPTION, never who is present, what they carry, or any earned value. Pronouns need no op — the engine reconciles them against the known-people record automatically."
+    "correctSceneState": "Fix the ACTIVE SCENE's own description when it is wrong or stale — its setting, its open threads. CCODE-160: scene state is re-served every turn under a header that outranks the character sheet, so a wrong setting persists until something rewrites it, and until now nothing could. Repair only: it changes the scene's DESCRIPTION, never who is present, what they carry, or any earned value. Pronouns need no op — the engine reconciles them against the known-people record automatically."
   },
   "cannotDoHere": [
     "Grant xp, levels, skill points, or attunement — advancement is earned through play, not repaired in.",

@@ -29,7 +29,7 @@ import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, merg
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
-import { wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // SNG-427: reclaim items the story conferred but the ledger missed
+import { wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
@@ -57,7 +57,7 @@ import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
-import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; SNG-424: one departure definition for both doors; SNG-425: remote contact is not travel
+import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
@@ -1776,7 +1776,7 @@ function renderMachine() {
   // SNG-195 G3: every op that writes an applied/rejected outcome via logOpOutcome must render its badge —
   // the set had drifted to markTeacher alone while four more ops (delegateOps/arcOps/adoptSchool/offer)
   // wrote outcome data the panel never showed. A smoke test now pins this set to the logOpOutcome callers.
-  // SNG-424 adds moveTo: the applier now REFUSES an unearned relocation, and a refusal nobody can see
+  // CCODE-158 adds moveTo: the applier now REFUSES an unearned relocation, and a refusal nobody can see
   // is the same invisible-outcome bug this set exists to prevent.
   const OUTCOME_INSTRUMENTED = new Set(["markTeacher", "delegateOps", "arcOps", "adoptSchool", "offer", "moveTo"]);
   const vocab = [...new Set([...SALVAGEABLE_OPS, "sceneEnded", "gambitApt", ...Object.keys(ledger), ...Object.keys(emitted)])];
@@ -2371,7 +2371,7 @@ function migrate(c) {
     console.warn(`[migrate] trimmed scene history ${before} → ${SCENE_TURN_CAP} turns (CCODE-02 storage bound)`);
   }
   normalizeInventory(c, CONTENT.items);
-  // SNG-427: give back the items the STORY conferred that the engine never wrote down — trace-gated
+  // CCODE-161: give back the items the STORY conferred that the engine never wrote down — trace-gated
   // against this character's own record, once per reclaim version. Say so plainly: an item appearing in
   // the pack without a word is indistinguishable from a bug, and this is a repair the player should see.
   {
@@ -5814,7 +5814,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // it into the literal text "[object Object]", minted it as a place, and SAVED it. Found in play by Erik on
   // the first real play-leg; three saves already carry the artefact.
   const moveRef = locationRefToString(turn.moveTo && (turn.moveTo.location || turn.moveTo.id || turn.moveTo));
-  let refusedMove = false; // SNG-424: set when an unearned relocation is offered instead of imposed
+  let refusedMove = false; // CCODE-158: set when an unearned relocation is offered instead of imposed
   if (moveRef) {
     // SNG-117: the header follows the fiction even to a place with no record yet — resolve it, or MINT it
     // (a named-but-unrecorded destination like "the pass" becomes a real, travelable place). Never no-op
@@ -5844,7 +5844,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       }
     }
     let destId = subParentId || wgRoute?.destId || resolveLocationId(moveRef, CONTENT.locations) || mintTransitLocation(moveRef);
-    // ⛔ SNG-424 — DID THE PLAYER ASK TO GO? Every guard above this line is about WHERE (sub-place →
+    // ⛔ CCODE-158 — DID THE PLAYER ASK TO GO? Every guard above this line is about WHERE (sub-place →
     // parent, gate routing, resolve-or-mint); not one was about WHETHER. The contract told the GM the
     // header follows the fiction, the fiction said "arriving at a new location within the same scene",
     // and this applied it — so a beat whose action was "write to Warden Coll on the shadow-slate" put
@@ -5882,7 +5882,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // (the GM emitted no moveTo, or an unresolvable one), stash the intended destination so renderPlay offers
   // a one-tap "arrive" (the map's own travelTo path). If the move DID land them there, clear it. Any
   // non-travel turn also clears a stale pending arrival — the affordance is tied to the travel beat.
-  // SNG-424: a REFUSED unearned move already stashed its own offer above — this must not wipe it. The
+  // CCODE-158: a REFUSED unearned move already stashed its own offer above — this must not wipe it. The
   // refusal is the one non-travel turn that legitimately leaves an arrival pending: the fiction reached
   // for a place the player never set out for, so the road is offered rather than walked.
   const ti = travelIntentOf(resolution?.action);
@@ -5902,12 +5902,12 @@ function applyTurn(turn, resolution, playerWords = null) {
       // (the durable established-facts + chronicle are read straight off the character inside applyStateOps).
       items: CONTENT.items || {}, traceText: String(turn.narration || "")
     });
-    // SNG-424: APPEND, never assign. This read `=`, so it silently ate whatever an earlier step in the
+    // CCODE-158: APPEND, never assign. This read `=`, so it silently ate whatever an earlier step in the
     // same turn had already put here — the gate-routed-to-the-hub notice, and now the refused-relocation
     // notice, which is the one message the player most needs when the beat spoke of a place they never
     // went to. An aside that can be overwritten by a later aside is an aside that vanishes at random.
     if (r.applied.length) character._correctionAside = [character._correctionAside, "Set right: " + r.applied.map(describeCorrection).join("; ") + "."].filter(Boolean).join(" ");
-    // SNG-426: correctSceneState writes through the character; the module-level mirror must re-read it
+    // CCODE-160: correctSceneState writes through the character; the module-level mirror must re-read it
     // or the write-back at the end of this turn restores the wedged scene it just repaired.
     if (r.applied.some(a => a.sceneState) && character.activeScene?.sceneState) sceneState = character.activeScene.sceneState;
   }
@@ -5926,7 +5926,7 @@ function applyTurn(turn, resolution, playerWords = null) {
     if (goal && steps.length) pendingGambitProposal = { goal, steps };
   }
   // scene anchor: the GM's updated scene state, clamped — or keep the previous one
-  // SNG-426: reconcile identity BEFORE it is stored, not only before it is rendered. The render-side
+  // CCODE-160: reconcile identity BEFORE it is stored, not only before it is rendered. The render-side
   // pass heals an already-wedged save; this one stops the save carrying the error in the first place,
   // so every other reader of sceneState (the scene card, a resumed session, the next prompt) sees the
   // person the record says they are. Report what it corrected — a silent repair is an invisible bug.
@@ -6848,7 +6848,7 @@ function travelIntentOf(action) {
   // act is stopped HERE, before buildTravelDirective can force a move. Erik's exact turn — "confide in
   // Veth … and announce travel plans to Cairnhold" — leaves him in the alcove because of this line.
   if (isSpeechAct(action.label)) return null;
-  // SNG-425: REACHING SOMEONE IS NOT GOING TO THEM. The third bucket — a named channel (a shadow-slate,
+  // CCODE-159: REACHING SOMEONE IS NOT GOING TO THEM. The third bucket — a named channel (a shadow-slate,
   // a bird, the Hub relay, "send word to") means the character intends to reach someone WITHOUT
   // travelling to them. Checked against the player's own words as well as the label, because the
   // channel usually lives in what they typed. A real travel phrase in the same breath wins: "walk to

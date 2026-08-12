@@ -3,6 +3,22 @@
 **Author:** CCode · **Date:** 2026-08-11 · **Ships:** v1.9.125 · **Suite:** 3413 checks green
 **Re:** Erik's play report — wrong pronouns, an unasked-for journey, and a message he never sent
 
+
+> ⛔ **RENUMBERED, AND THE REASON MATTERS.** This work shipped under SNG-424–427, which is wrong: **SNG-NNN
+> is Aevi's sequence** and CCODE-NNN is mine, precisely so we can both file without checking with each
+> other. I took four numbers she was already using in the same week — her SNG-424 is the world's physical
+> size, 425 the Echo Vale road network, 426 regionDisplay, 427 the Echo cluster rebuild. **Hers keep the
+> numbers; mine moved.** The four commits are already published under the old ones, so the mapping is:
+>
+> | published commit says | actually | what it is |
+> |---|---|---|
+> | SNG-424 | **CCODE-158** | the GM-initiated relocation gate |
+> | SNG-425 | **CCODE-159** | reaching someone elsewhere is not travel |
+> | SNG-426 | **CCODE-160** | scene state may not override identity |
+> | SNG-427 | **CCODE-161** | the Shadow Tablet |
+>
+> Code, gates and this document carry the CCODE numbers. Nothing of Aevi's was touched.
+
 ---
 
 ## §0 — WHAT HAPPENED, IN ONE LINE EACH
@@ -29,7 +45,7 @@ The gate that exists for exactly this is `departureGateFor`, and its own comment
 fail-OPEN here is exactly why Silas was relocated."* It guards the door where the PLAYER asks to
 travel, before the GM is called. **There are two doors. SNG-188 fixed one.**
 
-**Fixed (SNG-424):** one shared `isConsequentialMove` predicate, called by both doors so they cannot
+**Fixed (CCODE-158):** one shared `isConsequentialMove` predicate, called by both doors so they cannot
 drift again. A consequential move (region crossing, or a journey to a place you are not connected to)
 that no player intent asked for is now **OFFERED, not imposed** — the character stays where they
 stand, and the existing one-tap arrival affordance renders the road. That is SNG-188 §4.1's *"travel
@@ -49,7 +65,7 @@ travel). Erik's line opened **"Take the opportunity to…"** — so the governin
 wrapper. And `update` was not in the verb list regardless; nor were write, send, message, brief,
 report, or relay. **Twenty-one face-to-face verbs, no remote ones.**
 
-**Fixed (SNG-425):** light-verb wrappers are stripped before the anchor reads the verb; the remote
+**Fixed (CCODE-159):** light-verb wrappers are stripped before the anchor reads the verb; the remote
 half of the vocabulary is in; and a named CHANNEL (`isRemoteContact`) suppresses a travel destination
 outright — unless the same words also name real travel, because "walk to the mill and send word to
 Coll" genuinely goes to the mill.
@@ -81,7 +97,7 @@ every turn. It would have stayed that way for as long as the scene ran.
 ⛔ **And of seventeen repair ops, not one could touch scene state.** The one block labelled
 authoritative was the one block with no repair path.
 
-**Fixed (SNG-426):**
+**Fixed (CCODE-160):**
 - The block no longer claims authority over identity — it is authoritative about the SITUATION, and
   says plainly that names, pronouns, gender and role come from the record, which wins.
 - The record's own pronouns are carried INSIDE the block, so the near instruction and the distant one

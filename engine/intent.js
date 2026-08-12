@@ -63,14 +63,14 @@ export function harmGateFor(abilityIds, catalog, askedKey, asked = {}, ownedLeve
 // SNG-188 §4: a label whose GOVERNING (leading) verb is a speech verb is DISCUSSING a journey, not
 // making it — "announce travel plans to Cairnhold" is not "travel to Cairnhold" however many places
 // it names. Anchored at the start (optionally after I/I'll/let's/we) so it reads the governing verb.
-// SNG-425: the verb list gained the REMOTE half. It held 21 face-to-face verbs and not one verb of
+// CCODE-159: the verb list gained the REMOTE half. It held 21 face-to-face verbs and not one verb of
 // reaching someone who is elsewhere — in a world with shadow-slates, a Hub relay, and a bird that
 // carries mail. "update Warden Coll" was not travel, not talking-about-travel, and so fell through
 // into travel by default. write · send · message · brief · report · relay · update · dispatch ·
 // notify · reply · respond · answer · pass/get word.
 const SPEECH_ACT = /^\s*(?:i(?:'?ll|'?m|'?d| will| am| would)?\s+(?:want to |going to |plan to |mean to |need to )?|let'?s\s+|we(?:'?ll| will)?\s+)?(announc\w*|tell\w*|say|saying|said|speak\w*|talk\w*|confid\w*|discuss\w*|propos\w*|promis\w*|mention\w*|explain\w*|suggest\w*|reassur\w*|admit\w*|confess\w*|declar\w*|inform\w*|warn\w*|ask|asking|asks|chat\w*|whisper\w*|shar\w*|writ\w*|send\w*|sent|messag\w*|brief\w*|report\w*|relay\w*|updat\w*|dispatch\w*|notif\w*|repl\w*|respond\w*|answer\w*)\b/i;
 
-// SNG-425: a LIGHT-VERB WRAPPER in front of the real verb. The anchor above reads the GOVERNING verb,
+// CCODE-159: a LIGHT-VERB WRAPPER in front of the real verb. The anchor above reads the GOVERNING verb,
 // which is right — "go to Millbrook and tell her" is travel, not speech — but Erik's line opened
 // "TAKE THE OPPORTUNITY TO update Warden Coll", so the governing verb was "take" and the anchor read a
 // wrapper instead of the act. Stripped first, repeatedly, so the anchor sees what the sentence is
@@ -80,19 +80,19 @@ const LIGHT_PREAMBLE = /^\s*(?:i(?:'?ll|'?d|'?m| will| want to| need to)?\s+)?(?
 /** PURE. Is this action label a SPEECH act rather than travel itself? SNG-188 §4 — the code belt
  *  behind the parser prompt: a `travelTo` the model set on "announce/confide/discuss … travel plans"
  *  is caught here before buildTravelDirective can force a move. Reads the governing verb, after
- *  stripping any light-verb wrapper in front of it (SNG-425). */
+ *  stripping any light-verb wrapper in front of it (CCODE-159). */
 export function isSpeechAct(label) {
   let s = String(label || "").trim();
   for (let i = 0; i < 3 && LIGHT_PREAMBLE.test(s); i++) s = s.replace(LIGHT_PREAMBLE, "").trim();
   return SPEECH_ACT.test(s);
 }
 
-// SNG-425: the CHANNEL, named anywhere in the sentence — not anchored, because "pull the slate from my
+// CCODE-159: the CHANNEL, named anywhere in the sentence — not anchored, because "pull the slate from my
 // kit and write to Coll" leads with neither a speech verb nor a travel verb. A named channel is
 // positive evidence that the character intends to reach someone WITHOUT going to them.
 const REMOTE_CHANNEL = /\b(?:shadow[-\s]?(?:slate|sheet|tablet)|send\s+(?:a\s+)?(?:message|word|note|letter|bird)|sends?\s+word|get\s+word\s+to|pass\s+word\s+to|writ(?:e|ing)\s+(?:to|back)|by\s+(?:bird|raven|courier|messenger)|via\s+the\s+(?:relay|hub)|through\s+the\s+relay|hub\s+relay|by\s+letter)\b/i;
 
-/** PURE. Does this action reach someone WHO IS ELSEWHERE, by a named channel? SNG-425 — the third
+/** PURE. Does this action reach someone WHO IS ELSEWHERE, by a named channel? CCODE-159 — the third
  *  bucket. `isSpeechAct` covers talking to someone in the room and talking ABOUT a journey; neither
  *  describes writing to a man two regions away. A remote contact is never travel, so it suppresses a
  *  `travelTo` the parser set — UNLESS the same words also carry a real travel phrase ("walk to the
@@ -161,7 +161,7 @@ export function harmTargetFor(action = {}, ctx = {}) {
 }
 
 /** PURE. Is moving from → to a CONSEQUENTIAL move, or an ordinary step across the room?
- *  ⛔ SNG-424 — THIS IS THE ONE DEFINITION, AND IT EXISTS BECAUSE THERE WERE TWO. `departureGateFor`
+ *  ⛔ CCODE-158 — THIS IS THE ONE DEFINITION, AND IT EXISTS BECAUSE THERE WERE TWO. `departureGateFor`
  *  held this test inline and guarded the door where the PLAYER asks to travel; the `moveTo` applier
  *  guarded nothing at all, so the GM could relocate a character whose action was never a journey.
  *  Erik's turn — "update Warden Coll", a message written on a slate from a ridge two regions away —
@@ -187,7 +187,7 @@ export function isConsequentialMove(fromId, toId, locations) {
  *  unresolvable origin or destination is the case where the engine knows LEAST about the consequence
  *  of moving, so it ASKS rather than skipping (the old fail-OPEN here is exactly why Silas was
  *  relocated: his origin, an unrecorded warden post, did not resolve). It gates any CONSEQUENTIAL
- *  move (see isConsequentialMove — shared with the moveTo applier since SNG-424) while an adjacent
+ *  move (see isConsequentialMove — shared with the moveTo applier since CCODE-158) while an adjacent
  *  step in the same region proceeds without a prompt. Returns null only when there is no travel
  *  intent, or the move is an ordinary adjacent step. The gate runs BEFORE the GM is called. */
 export function departureGateFor(travelIntent, character, locations) {
@@ -214,7 +214,7 @@ export function departureGateFor(travelIntent, character, locations) {
   }
 
   // §5 same-region travel is still travel. The CONSEQUENTIAL test lives in isConsequentialMove
-  // (SNG-424) so this gate and the moveTo applier share one definition of a real departure.
+  // (CCODE-158) so this gate and the moveTo applier share one definition of a real departure.
   const crossing = fromRegion !== toRegion;
   if (!isConsequentialMove(character?.currentLocationId, travelIntent.destId, locations)) return null;
 

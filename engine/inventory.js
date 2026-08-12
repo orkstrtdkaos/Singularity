@@ -36,7 +36,7 @@ function recordItemAlias(it, name) {
 
 /** Normalize a character's inventory in place: strings → item objects,
  *  known names re-linked to the catalog so they regain effects/bonuses.
- *  SNG-427: the re-link also consults each catalog item's AUTHORED ALIASES. A world object people say
+ *  CCODE-161: the re-link also consults each catalog item's AUTHORED ALIASES. A world object people say
  *  more than one way ("shadow tablet" / "shadow sheet" / "shadow slate" — Erik's ruling: one object,
  *  three names) was only re-linkable under its canonical name, so a save holding an alternate kept a
  *  bare `{kind:"misc"}` stub with no description, no tags, and no way to know what it was. */
@@ -62,7 +62,7 @@ export function normalizeInventory(character, catalog = {}) {
   return character;
 }
 
-/** SNG-427: `aliases` rides through. The instance shape has ALWAYS carried aliases and the resolver has
+/** CCODE-161: `aliases` rides through. The instance shape has ALWAYS carried aliases and the resolver has
  *  always read them (recordItemAlias writes drifted GM phrasings there) — but this destructure dropped
  *  the AUTHORED ones on the way in, so a content alias was a writer with no reader: you could name three
  *  ways to say a thing and the game would understand exactly one of them. */
@@ -71,13 +71,13 @@ export function fromCatalog(catItem, qty = 1) {
   return { id, name, kind, qty, description, effects, bonusTags, consumable, image, ...(aliases?.length ? { aliases: [...aliases] } : {}) };
 }
 
-// SNG-427: bump when a NEW item gains an `establishedBy` block, so existing saves get one more pass.
+// CCODE-161: bump when a NEW item gains an `establishedBy` block, so existing saves get one more pass.
 // ⚠️ Deliberately its OWN flag rather than a BACKFILL_VERSION bump: runBackfill re-credits XP from the
 // activity spine, so raising ITS version to reclaim an item would hand every character in the game a
 // second helping of experience. A repair must not ride a wish's version number.
 export const ITEM_RECLAIM_VERSION = 1;
 
-/** ⛔ SNG-427 — AN ITEM THE FICTION CONFERRED THAT THE ENGINE NEVER WROTE DOWN. Silas made a Shadow
+/** ⛔ CCODE-161 — AN ITEM THE FICTION CONFERRED THAT THE ENGINE NEVER WROTE DOWN. Silas made a Shadow
  *  Tablet in play, gave its pair to Warden Coll, and carried it for two days of story — and it was never
  *  in his inventory. It lived as prose inside two NPC records, under two different names. So when he
  *  typed "update Warden Coll", the intent parser (which is handed the inventory as the character's

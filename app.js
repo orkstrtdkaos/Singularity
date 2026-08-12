@@ -12,7 +12,7 @@ import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, tou
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL, aptitudeStandingLine } from "./engine/playerprofile.js";
 import { gmTurn, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, reconcileSceneIdentity, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
 import { buildBattlePrompt, battleKey } from "./engine/battleprompt.js"; // SNG-400b: the battle image is a prompt BUILD, not a string join
-import { namesToAvoid } from "./engine/namematch.js";
+import { namesToAvoid, namesMatch } from "./engine/namematch.js"; // CCODE-166: the codebase already knew how to match a fuller name to a known one
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.130";
+const APP_VERSION = "1.9.131";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -929,15 +929,39 @@ function galleryRegenFor(g) {
   //    further; the live gallery holds ELEVEN tiles of kind "npc" from the born-with-image path and NOT ONE
   //    of kind "portrait". The fallback I wrote for old tiles matched none of the old tiles.
   if (g.kind === "portrait" || g.kind === "npc") {
-    const nm = String(g.caption || "").split("—")[0].trim().toLowerCase();
+    const nm = String(g.caption || "").split("—")[0].trim();
     if (!nm) return null;
-    if (nm === String(character.name || "").toLowerCase()) return mk("character", character.id);
-    const hit = Object.values(character.npcRegistry || {}).find(n => n?.name && n.name.toLowerCase() === nm);
+    if (namesMatch(character.name, nm)) return mk("character", character.id);
+    // ⛔ CCODE-166: I HAND-ROLLED AN EXACT COMPARISON AND THE PROJECT ALREADY HAD THE RIGHT ONE. Splarf's
+    // gallery holds a tile captioned "Cevaine of the Seventh Measure" while the registry says "Cevaine" —
+    // a fuller name containing the known one, which is SNG-111's case and exactly what `namesMatch` was
+    // written for. Lowercase equality failed it, so a real portrait of a known person offered no controls.
+    // ⚠️ It stays conservative where it must: "someone tending the waystation fire" still matches nobody,
+    // because namesMatch needs a substantial whole-word hit and not a vague overlap.
+    const hit = Object.values(character.npcRegistry || {}).find(n => n?.name && namesMatch(n.name, nm));
     if (hit) return mk("npc", hit.id);
-    return null;
+    // an UNNAMED person still has a real picture and a real prompt — it can be redrawn, it just has no
+    // record to attach a look to, and `canKeep` refuses the vote rather than pretending to cast one.
+    return g.prompt ? mk("moment", null) : null;
   }
   // 3. a tile with no subject and no record — a moment, a scene, a creature study. Its own stored prompt
   //    is enough to draw from, and the gallery is where a kept one lands, so it is fully regenerable.
+  // ⚠️ CCODE-166: A CRAFT AND A PLACE HAVE NAMES TOO. Splarf's gallery is mostly `ability` tiles captioned
+  //    with the craft's own name ("Radiant Lance", "Pathos") and `location` tiles captioned with the
+  //    place's — all of them resolvable exactly the way a person's is. Without this they were drawable but
+  //    not keepable, which is most of a gallery unable to say "this is what it looks like".
+  if (g.kind === "ability" || g.kind === "discovery") {
+    const nm = String(g.caption || "").split("—")[0].trim();
+    const cat = fullCatalog();
+    const id = nm && (Object.keys(cat).find(k => cat[k]?.name && namesMatch(cat[k].name, nm))
+      || Object.keys(character.customAbilities || {}).find(k => character.customAbilities[k]?.name && namesMatch(character.customAbilities[k].name, nm)));
+    if (id) return mk("ability", id);
+  }
+  if (g.kind === "location") {
+    const nm = String(g.caption || "").split("—")[0].trim();
+    const id = nm && Object.keys(CONTENT.locations || {}).find(k => CONTENT.locations[k]?.name && namesMatch(CONTENT.locations[k].name, nm));
+    if (id) return mk("location", id);
+  }
   // ⛔ THE "✕ couldn't keep" ERIK HIT. This passed the tile's own kind straight through, so an `ability` or
   //    `npc` tile with no subjectId became a RECORD-BACKED kind holding a NULL id — and its `keep` looked
   //    the record up, found nothing, and returned false on click. A kind that needs an id and has none is
@@ -1043,7 +1067,11 @@ function openLightbox(items, start = 0) {
     // different statements, and the second is the one that steers future renders.
     const myKeeps = it.regen ? keepsFor(it.regen) : [];
     const isKept = myKeeps.some(k => k.url === it.url);
-    const canKeep = !!it.regen && !!spec?.keep && !(spec.needsId && !it.regen.subjectId);
+    // ⛔ CCODE-166: A VOTE NEEDS SOMETHING TO VOTE ON. This allowed Keep on any prompt-only tile, where the
+    // likeness key is null — so the button would report "kept" and record nothing. Keeping a look is a
+    // statement about a SUBJECT; a one-off moment has none, and offering it there is a lie that looks
+    // like a feature.
+    const canKeep = !!it.regen?.subjectId && !!spec?.keep;
     const isNewDraw = !!it.regen && !!it.isDraw;
     el.innerHTML = `<div class="lightbox-inner">
       <img src="${esc(it.url)}" alt="${esc(it.caption || "")}" data-lbimg>

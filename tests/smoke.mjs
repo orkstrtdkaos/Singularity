@@ -14132,7 +14132,13 @@ await (async () => {
   check("401 §1: a tile with no subject gains no empty fields (additive — old entries still work)", !("subjectId" in tileOf("u2")) && !("subjectKind" in tileOf("u2")));
   check("401 §1: the prompt is NOT stuffed into a DOM attribute (Aevi: they are long and spoiler-bearing)", !/data-regen-prompt/.test(appSrc401));
   check("401 §1: the lightbox carries provenance per item and the gallery path supplies it", /regen: galleryRegenFor\(g\)/.test(appSrc401) && /function galleryRegenFor/.test(appSrc401));
-  check("401: the caption fallback for pre-provenance tiles is EXACT, never fuzzy (a near-miss redraws the wrong person)", /n\.name\.toLowerCase\(\) === nm/.test(appSrc401));
+  // ⚠️ CORRECTED BY CCODE-166. I gated "EXACT, never fuzzy" — and exact was WRONG: it failed on "Cevaine of
+  // the Seventh Measure" against a registry that says "Cevaine", so a real portrait of a known person had
+  // no controls. What this gate was actually protecting is that a near-miss must never redraw the wrong
+  // person, and that survives `namesMatch`, which needs a substantial whole-word hit. Aimed at the
+  // property now instead of at one implementation of it.
+  check("401/166: the caption fallback is CONSERVATIVE — a fuller name resolves, a vague description does not",
+    /namesMatch\(n\.name, nm\)/.test(appSrc401));
 
   // §1 ACROSS THE WHOLE SURFACE — Aevi counted eight call sites, "all pass the same two fields".
   for (const [site, re] of [
@@ -14274,6 +14280,50 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-166: the tiles with no buttons at all ----
+// Erik: "new buttons are now missing from #11/22 and 19/22 in Splarf's gallery." Two causes, both mine.
+{
+  const { namesMatch: nm166 } = await import("../engine/namematch.js");
+  const src166 = readFileSync(join(root, "app.js"), "utf8");
+
+  // ⛔ (a) I HAND-ROLLED AN EXACT COMPARISON WHERE THE PROJECT ALREADY HAD THE RIGHT ONE. Splarf's gallery
+  // captions a tile "Cevaine of the Seventh Measure" while his registry says "Cevaine" — SNG-111's case,
+  // and precisely what `namesMatch` exists for. Lowercase equality failed it, so a real portrait of a known
+  // person offered no controls at all.
+  check("CCODE-166: a fuller caption resolves to the known person (Cevaine of the Seventh Measure → Cevaine)",
+    nm166("Cevaine", "Cevaine of the Seventh Measure") === true);
+  check("CCODE-166: …and it stays conservative — a DESCRIPTION still matches nobody",
+    nm166("The Waystation Caretaker", "someone tending the waystation fire") === false && nm166("Cevaine", "someone tending the waystation fire") === false);
+  check("CCODE-166: the resolver uses that helper rather than a fresh one", /namesMatch\(n\.name, nm\)/.test(src166) && /namesMatch\(character\.name, nm\)/.test(src166));
+
+  // (b) an UNNAMED person's picture is still a picture — drawable, just not a subject to vote on
+  check("CCODE-166: an unnamed subject's tile still draws instead of going dead", /return g\.prompt \? mk\("moment", null\) : null;/.test(src166));
+
+  // ⛔ AND A VOTE NEEDS SOMETHING TO VOTE ON. Keep on a prompt-only tile has a null likeness key, so it
+  // would have reported success and recorded nothing.
+  check("CCODE-166: Keep requires a subject — a vote that attaches to nothing is a lie that looks like a feature",
+    /const canKeep = !!it\.regen\?\.subjectId && !!spec\?\.keep;/.test(src166));
+
+  // crafts and places have names too — most of a gallery was drawable but not keepable
+  check("CCODE-166: a craft tile resolves by its own name, so its look can be kept", /if \(g\.kind === "ability" \|\| g\.kind === "discovery"\) \{/.test(src166) && /namesMatch\(cat\[k\]\.name, nm\)/.test(src166));
+  check("CCODE-166: a place tile does too", /if \(g\.kind === "location"\) \{/.test(src166) && /namesMatch\(CONTENT\.locations\[k\]\.name, nm\)/.test(src166));
+
+  // ⚠️ THE REAL SAVE IS THE FIXTURE. Every tile with a url must offer SOMETHING; this is the report Erik
+  // filed, asserted against the gallery he filed it about.
+  const splarf = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-msgpisca.json"), "utf8"));
+  const tiles = (splarf.gallery || []).filter(g => g && g.url);
+  const dead = tiles.filter(g => !g.prompt && !(g.subjectKind && g.subjectId));
+  check(`CCODE-166: every one of Splarf's ${tiles.length} tiles has something to draw from`, tiles.length > 0 && dead.length === 0,
+    () => dead.map(g => `${g.kind}: ${g.caption}`).join("; "));
+  const named = tiles.filter(g => g.kind === "npc" || g.kind === "portrait");
+  const resolved = named.filter(g => {
+    const n = String(g.caption || "").split("—")[0].trim();
+    return nm166(splarf.name, n) || Object.values(splarf.npcRegistry || {}).some(x => x?.name && nm166(x.name, n));
+  });
+  check("CCODE-166: the people-tiles that name a known person now resolve to them", named.length > 0 && resolved.length >= named.length - 1,
+    () => `${resolved.length}/${named.length} resolved`);
+}
+
 // ---- CCODE-164/165: Keep is a VOTE on the likeness, and the codex leads with its subject's face ----
 // Erik, redefining the feature after playing: "the keep button should be a highly weighted vote — I like
 // the way one image came out so I want to keep that look as the person in any future renderings. If I like
@@ -14360,7 +14410,7 @@ await (async () => {
   // was correct to hide it on the picture already in use — a no-op button. Now it means "this is what they
   // look like", which is a DIFFERENT statement from "this is the one shown", and is perfectly sensible to
   // cast on the current picture. What must still never appear is a Keep with nothing to attach to.
-  check("CCODE-163/164: Keep is offered on any picture with a subject, new draw or not", /const canKeep = !!it\.regen && !!spec\?\.keep && !\(spec\.needsId && !it\.regen\.subjectId\);/.test(src163));
+  check("CCODE-163/164/166: Keep is offered on any picture WITH A SUBJECT, new draw or not", /const canKeep = !!it\.regen\?\.subjectId && !!spec\?\.keep;/.test(src163));
   check("CCODE-163/164: …and never where there is no subject to attach a look to (the '✕ couldn't keep' Erik hit)",
     /needsId: true/.test(src163) && /REGEN_KINDS\[k\] && !REGEN_KINDS\[k\]\.needsId \? k : "moment"/.test(src163));
   check("CCODE-163: the caption says WHICH picture is the one in use, so 'use this one' has a reference point", /isCurrent \? " · the one in use" : ""/.test(src163));

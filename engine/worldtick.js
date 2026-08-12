@@ -346,6 +346,8 @@ export const NEWS_SECTIONS = [
 ];
 const SECTION_IDS = new Set(NEWS_SECTIONS.map(s => s.id));
 
+const NEWS_FACTS = ["kind", "victimId", "killerId", "abilityId", "locationId", "regionId", "arcId"]; // SNG-400 §1
+
 /** Normalise one raw news entry — string or object — into a stamped record. ⚠️ `world` is the
  *  fallback because it is the section that is never empty: an unrouted line lands where the player is
  *  already reading rather than under a heading that exists for one orphan. */
@@ -355,7 +357,22 @@ export function stampNews(n, { day = null, worldDay = null, section = "world", c
   const rec = { day, worldDay: (typeof n === "object" && n && n.worldDay != null) ? n.worldDay : worldDay,
     text: smartClamp(text, clamp), tier: (typeof n === "object" && n && n.tier) || "event", section: sec };
   if (typeof n === "object" && n && n.impactsLocal) rec.impactsLocal = true;
+  // ⛔ SNG-400 §1 — THE FACTS WERE LOST HERE. Aevi, on a real death from a live save: "No victimId. No
+  // killerId. No locationId. A sentence, and a tier. The engine knew all three when it wrote that
+  // sentence and kept none of them." Every news line in the game funnels through this builder, and it
+  // kept five fields and dropped everything else — so structuring the death sites upstream would have
+  // achieved exactly nothing on its own. Carried only when PRESENT: every existing caller is untouched.
+  if (typeof n === "object" && n) for (const f of NEWS_FACTS) if (n[f] != null) rec[f] = n[f];
   return rec;
+}
+
+/** SNG-400 §1: one shaping for a clash line, used by all three sites that emit them. A line arrives as a
+ *  bare string (the ordinary outcomes) or as an object carrying who/whom (a death); both land as a proper
+ *  news item, and a death keeps its ids. ⚠️ Without this each site wrapped `{ text: line }` — which turns
+ *  an object INTO the string "[object Object]" the instant one is passed through it. */
+export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = null } = {}) {
+  const base = typeof line === "string" ? { text: line } : { ...line };
+  return { ...base, worldDay, tier: "event", ...(arcId ? { arcId } : {}), ...(regionId ? { regionId } : {}) };
 }
 
 export function advanceHoldings({ character, now = Date.now() }) {
@@ -1453,7 +1470,9 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
     event = { kind: "epic_death", figureId: loser.id, killerId: winner.id, worldDay, propagates: true,
       text: `A legend has fallen: ${winner.name} has killed ${loser.name}. The world is one great figure lighter, and ${winner.name} the more feared for it.` };
     codex = { entityId: loser.id, label: loser.name, kind: "person", fact: `[fell offscreen] Killed by ${winner.name}. Their unfinished work is loose in the world — and they are freshly in the death state, still within reach of the roads back, for now.` };
-    news.push(event.text);
+    // SNG-400 §1: the ids ride the news line, not just the propagated event — this is the item the
+    // player will click, and a sentence cannot be clicked back into a battle.
+    news.push({ text: event.text, kind: "death", victimId: loser.id, killerId: winner.id, worldDay });
   } else if (finalKind === "wounded") {
     st.status = "wounded"; st.woundedUntilDay = worldDay + 8; st.woundedBy = winner.id;
     news.push(`${winner.name} bested ${loser.name} — ${loser.name} withdraws to lick their wounds.`);
@@ -2383,7 +2402,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
             if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
               casualties.push({ arcId, winner: wf.id, loser: e.f.id, kind: outcome.finalKind,
                 winnerTier: wf.tier ?? wf.legend?.tier ?? null, loserTier: e.f.tier ?? e.f.legend?.tier ?? null });
-              for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
+              for (const line of (outcome.news || [])) news.push(clashNewsItem(line, { worldDay: currentWorldDay, arcId }));
             }
             budget--;
           }
@@ -2510,7 +2529,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           // route in the system: a campaign of strikes can turn an arc you never once contested.
           (removedDefender[arcId] ||= new Set()).add(sender.f.id);
           if (outcome.finalKind !== "killed") creditDeed(ws, mark.f.id, "strikeSurvived", { worldDay: currentWorldDay });
-          for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
+          for (const line of (outcome.news || [])) news.push(clashNewsItem(line, { worldDay: currentWorldDay, arcId }));
         }
       }
 
@@ -2555,7 +2574,11 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           career(ws, won.id).wins++;
           career(ws, won.id === challenger.id ? f.id : challenger.id).losses++;
         }
-        for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
+        // ⚠️ NO arcId HERE, AND THAT IS THE POINT — see the note above: a challenge is NOT part of an arc,
+        // it happens because somebody is worth beating. Stamping one on would place a battle on a front it
+        // was never fought over: exactly the kind of plausible-looking wrong fact this ticket exists to
+        // stop the news carrying, and the picture would then be drawn in the wrong country.
+        for (const line of (outcome.news || [])) news.push(clashNewsItem(line, { worldDay: currentWorldDay }));
       }
     }
     ws.arcChallenges = challenges;

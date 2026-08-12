@@ -1311,3 +1311,14 @@ img[data-lightbox] { cursor: zoom-in; }
 .ground-nan-ordered { color: var(--accent2, #7fb8d4); }
 .ground-nan-wild { color: var(--good, #86c06c); }
 .ground-nan-clear { color: var(--muted, #8a8a8a); }
+
+/* SNG-400 — a death you can open. The line stays prose; the cue is what says there is something behind
+   it. A whole news item as a button would make every death look like a control, so only the openable
+   ones get the affordance and it reads as an invitation rather than chrome. */
+.news-item.news-death { padding: 0; }
+.news-item.news-death .news-open { display: block; width: 100%; text-align: left; background: none; border: none;
+  font: inherit; color: inherit; cursor: pointer; padding: 2px 0; }
+.news-item.news-death .news-open:hover .news-open-cue,
+.news-item.news-death .news-open:focus-visible .news-open-cue { opacity: 1; }
+.news-open-cue { font-family: var(--font-ui); font-size: 11px; opacity: .65; white-space: nowrap;
+  border: 1px solid currentColor; border-radius: 10px; padding: 0 6px; margin-left: 4px; }

@@ -147,7 +147,11 @@ const IMG_SIZES = {
   location:  { width: 1024, height: 320 },
   item:      { width: 400, height: 400 },
   moment:    { width: 1024, height: 512 },
-  beast:     { width: 640, height: 512 } // CCODE-31: a creature study — wider than a portrait, a thing that comes AT you
+  beast:     { width: 640, height: 512 }, // CCODE-31: a creature study — wider than a portrait, a thing that comes AT you
+  // SNG-400b: a battle holds TWO figures and the ground between them, so it is the widest frame in the
+  // game. A portrait crop of a fight shows one shoulder and no fight.
+  battle:    { width: 1024, height: 512 },
+  death:     { width: 768, height: 512 }  // §4 fallback: one figure, one ending — narrower, and it should be
 };
 
 /** SNG-053: the physical FORM of a subject — its species/lineage/embodiment, in words. This LEADS

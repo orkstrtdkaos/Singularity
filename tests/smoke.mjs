@@ -14179,6 +14179,92 @@ await (async () => {
   if (artWas) localStorage.setItem("singularity.artMode", artWas);
 }
 
+// ---- SNG-400/400b: the death news carries its facts, and the battle image is BUILT ----
+{
+  const { buildBattlePrompt, battleKey, figureLook, powerPhrase } = await import("../engine/battleprompt.js");
+  const { stampNews, clashNewsItem } = await import("../engine/worldtick.js");
+
+  // §1 THE BLOCKER. Aevi: "No victimId. No killerId. No locationId. A sentence, and a tier."
+  const flat = stampNews("Word reaches you: Veln Ashpause was killed.", { worldDay: 32 });
+  check("400 §1: an ordinary line is unchanged (additive — every existing caller untouched)", flat.text.length > 0 && !("victimId" in flat) && !("kind" in flat));
+  const rich = stampNews({ text: "A legend has fallen.", kind: "death", victimId: "neth_the_stayed", killerId: "morvane_the_harvest", arcId: "arc_what_wakes_beneath" }, { worldDay: 32 });
+  check("400 §1 THE FIX: the facts survive the news builder that used to drop them", rich.kind === "death" && rich.victimId === "neth_the_stayed" && rich.killerId === "morvane_the_harvest" && rich.arcId === "arc_what_wakes_beneath" && rich.worldDay === 32);
+  check("400 §1: clashNewsItem carries a string line AND an object line (an object wrapped as {text} becomes '[object Object]')",
+    clashNewsItem("X bested Y", { worldDay: 3 }).text === "X bested Y"
+    && clashNewsItem({ text: "fell", kind: "death", victimId: "v" }, { worldDay: 3, arcId: "a1" }).victimId === "v"
+    && !/\[object Object\]/.test(String(clashNewsItem({ text: "fell", victimId: "v" }, {}).text)));
+  const wtSrc400 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  check("400 §1: the death is emitted WITH its ids at the source, not just in the propagated event", /news\.push\(\{ text: event\.text, kind: "death", victimId: loser\.id, killerId: winner\.id/.test(wtSrc400));
+  check("400 §1: every clash site emits through the one shaping", (wtSrc400.match(/news\.push\(clashNewsItem\(line,/g) || []).length === 3);
+  check("400: a CHALLENGE carries no arcId — it is deliberately not part of an arc", /a challenge is NOT part of an arc[\s\S]{0,400}clashNewsItem\(line, \{ worldDay: currentWorldDay \}\)/.test(wtSrc400));
+
+  // §3 THE BUILD — real figures from the shipped roster, not fixtures
+  const epics400 = JSON.parse(readFileSync(join(root, "content/packs/valley/tradition_epics.json"), "utf8")).epics;
+  const neth = epics400.find(f => f.id === "neth_the_stayed");
+  const morvane = epics400.find(f => f.id === "morvane_the_harvest");
+  check("400b: the roster carries the builder's INPUTS on all 66 (appearance + fightingStyle)", epics400.length === 66 && epics400.every(f => f.appearance && f.fightingStyle));
+  check("400b: …and they had no reader before this (the writer-with-no-reader Aevi flagged)", !!neth && !!morvane);
+  const built = buildBattlePrompt({ victim: morvane, killer: neth, place: "the braided confluence", depth: 0 });
+
+  // ⛔ THE POINT OF THE WHOLE TICKET: a list with a conjunction in it is not a picture.
+  check("400b §1 THE FAILURE IT REPLACES: the output is NOT the two presences joined by 'AGAINST'", !/\bAGAINST\b/i.test(built.prompt));
+  check("400b §3: the POWER leads — it is the subject of the image, not decoration", built.prompt.toLowerCase().indexOf(String(neth.fightingStyle).slice(0, 12).toLowerCase()) === 0);
+  check("400b: both figures are IN it, and in one relation rather than two descriptions", /standing over/.test(built.prompt) && /falling/.test(built.prompt) && built.prompt.includes("braided confluence"));
+  check("400b §3: SHORT is the requirement — a long prompt averages into a generic picture", built.prompt.length <= 340);
+  check("400b: it is a battle, sized as one", built.kind === "battle");
+
+  // ⛔ §2a — THE FAILURE THAT KEEPS COMING BACK, AND THE CENSUS THAT CATCHES IT. Aevi's first version made
+  // "the two people most likely to kill each other render as one person fighting a mirror." My first
+  // version did it again by stripping the role, and my second still mirrored 2 of 5 rival pairs. This is a
+  // census, not a sentence: every killer distinct, and EVERY authored rival pair distinct in both directions.
+  const shots = epics400.map(f => buildBattlePrompt({ victim: morvane, killer: f, place: "x" }).prompt);
+  check("400b §2a: all 66 killers give 66 different pictures", new Set(shots).size === 66);
+  const rivalPairs = epics400.filter(f => (f.rivals || []).length)
+    .map(f => [f, epics400.find(x => x.id === f.rivals[0])]).filter(([, r]) => r);
+  const mirrored = rivalPairs.filter(([a, b]) => buildBattlePrompt({ victim: b, killer: a }).prompt === buildBattlePrompt({ victim: a, killer: b }).prompt);
+  check(`400b §2a: not one of ${rivalPairs.length} authored rival pairs renders as a mirror`, rivalPairs.length >= 50 && mirrored.length === 0);
+  check("400b §2a: it individuates from the ONE field that is 66/66 distinct (Aevi's own answer)", (() => {
+    const stripped = epics400.map(f => buildBattlePrompt({ victim: morvane, killer: { ...f, offscreenVerbs: [], personalVerbs: [] }, place: "x" }).prompt);
+    return new Set(stripped).size < 66;   // remove it and the collisions come straight back
+  })());
+  check("400b: a prompt never ends on a dangling fragment (a truncated clause is drawn as detail)", shots.every(s => !s.includes("…")) && Math.max(...shots.map(s => s.length)) <= 400);
+  check("400b: the ABILITY, when there is one, outranks the fighting style — the power actually used",
+    powerPhrase({ name: "The Cut Thread", shape: "a single severing motion", effectTags: ["sever"], description: "ends without wounding" }, neth).startsWith("The Cut Thread"));
+  check("400b: with no ability it falls back to the killer's authored style, never to nothing", powerPhrase(null, neth).length > 5 && powerPhrase(null, {}) === "a killing blow");
+  check("400b: a figure reduces to a LOOK and a MOTION, not a biography", (() => { const l = figureLook(neth); return l.look.length <= 160 && l.motion.length <= 70 && l.name === neth.name; })());
+  // ⚠️ ITS OWN GATE, because it is no longer load-bearing for DISTINCTNESS and would otherwise be
+  // droppable in silence. Once the per-person verb landed, removing the role stopped collapsing anything
+  // — but "master ashwarden" vs "reaper ashwarden" is real information about what the picture shows, and
+  // a thing that is only valuable and not load-bearing is exactly the thing a refactor deletes.
+  check("400b: the role + tradition survive the trim (a master and a reaper are different pictures)", (() => {
+    const a = figureLook(neth).look, b = figureLook(morvane).look;
+    return /master/.test(a) && /ashwarden/.test(a) && /reaper/.test(b) && a !== b;
+  })());
+  check("400b: figureLook survives a null figure rather than throwing mid-build", (() => { try { return figureLook(null).name === "someone"; } catch { return false; } })());
+
+  // §4 THE FALLBACK — "there is no illness in this game"; the real fallback is a death with no named killer
+  const lone = buildBattlePrompt({ victim: neth, killer: null, place: "the ridge", depth: 2 });
+  check("400b §4: no killer → ONE figure, and it prefers the authored deathImagePrompt", lone.kind === "death" && lone.prompt.includes(String(neth.deathImagePrompt).slice(0, 25)));
+  check("400b §4: …and it invents no opponent", !/standing over|falling/.test(lone.prompt));
+  check("400b: how deep the ending ran changes the picture", buildBattlePrompt({ victim: morvane, killer: neth, depth: 0 }).prompt !== buildBattlePrompt({ victim: morvane, killer: neth, depth: 2 }).prompt);
+
+  // §3 CACHING — "a re-rolling battle quietly says it was a different fight"
+  const k1 = battleKey({ victimId: "a", killerId: "b", abilityId: null, worldDay: 32 });
+  check("400b §3: the cache key is victim|killer|ability|worldDay", k1 === "a|b|-|32" && battleKey({}) === "?|-|-|?");
+  check("400b: the same fight keys the same forever; a different day is a different fight", k1 === battleKey({ victimId: "a", killerId: "b", worldDay: 32 }) && k1 !== battleKey({ victimId: "a", killerId: "b", worldDay: 33 }));
+
+  // the reader — Aevi: "without ids there is nothing to click"
+  const appSrc400 = readFileSync(join(root, "app.js"), "utf8");
+  check("400 §3.2: a death news item is CLICKABLE and opens the battle", /data-battlenews=/.test(appSrc400) && /function battleImageFor/.test(appSrc400));
+  check("400 §3.2: …only when it is genuinely openable (a control that opens nothing is worse than prose)", /const canSee = \(n\) => n\?\.kind === "death" && n\.victimId && imagesEnabled\(\)/.test(appSrc400) && /\.some\(f => f\.id === n\.victimId\)/.test(appSrc400));
+  check("400b: the cache key IS the image seed, so stability is a property of the build", /imageURLFor\(built\.kind, safe, key\)/.test(appSrc400));
+  check("400b: the mint runs the FLOORS like every other image", /sanitizeImagePrompt\(built\.prompt, \{ ratingLevel: viewerRatingLevel\(\), isMinor: isMinorSubject\(victim\) \}\)/.test(appSrc400));
+  check("400b: an unknown figure yields no picture rather than a guessed one", /if \(!victim\) return null;/.test(appSrc400));
+  check("400b × 401: the battle is re-rollable AND re-describable — the first real builder behind Rebuild", /battle: \{[\s\S]{0,200}character\.battleImages\[key\]\.url = url/.test(appSrc400));
+  const artSrc400 = readFileSync(join(root, "engine/art.js"), "utf8");
+  check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
+}
+
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.

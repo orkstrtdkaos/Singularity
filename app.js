@@ -11,6 +11,7 @@ import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standi
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL, aptitudeStandingLine } from "./engine/playerprofile.js";
 import { gmTurn, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, reconcileSceneIdentity, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
+import { buildBattlePrompt, battleKey } from "./engine/battleprompt.js"; // SNG-400b: the battle image is a prompt BUILD, not a string join
 import { namesToAvoid } from "./engine/namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
@@ -33,7 +34,7 @@ import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive }
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, regenerateImage, acceptImage, isGeneratedImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, regenerateImage, acceptImage, isGeneratedImage, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -92,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.127";
+const APP_VERSION = "1.9.128";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -711,6 +712,46 @@ async function downloadImage(url, caption = "", kind = "image") {
   return true;
 }
 
+// ---------- SNG-400/400b: the battle that killed them ----------
+// Erik: "I want the news of their death to have an image of the battle that killed them… if one NPC and
+// another battle — I click it and see the two battling."
+//
+// ⚠️ THE ORDER THIS HAD TO BE BUILT IN IS THE WHOLE STORY. Aevi: "the builder cannot run on a sentence.
+// Structure the news first; everything above is inert until then." The ids now ride the news item
+// (worldtick's stampNews + clashNewsItem), so there is finally something to click.
+
+/** SNG-400b: mint (once) the image for a death the world recorded. The prompt is BUILT — see
+ *  engine/battleprompt.js — and the cache key IS the seed, so the same fight is the same picture forever:
+ *  "a re-rolling battle quietly says it was a different fight."
+ *  Returns { url, prompt, key, kind } or null when there is nothing honest to draw. */
+function battleImageFor(item) {
+  if (!item || item.kind !== "death" || !item.victimId || !imagesEnabled()) return null;
+  const roster = worldRoster(character.worldState || {}, CONTENT) || [];
+  const victim = roster.find(f => f.id === item.victimId);
+  if (!victim) return null;                                    // an unknown figure is not a guessable one
+  const killer = item.killerId ? roster.find(f => f.id === item.killerId) || null : null;
+  const ability = item.abilityId ? fullCatalog()[item.abilityId] || null : null;
+  const key = battleKey({ victimId: item.victimId, killerId: item.killerId, abilityId: item.abilityId, worldDay: item.worldDay });
+  character.battleImages = character.battleImages || {};
+  const cached = character.battleImages[key];
+  if (cached?.url) return { ...cached, key };
+  // the place: an offscreen clash happens on an ARC, not at a location — the honest "where" is its region.
+  const place = item.locationId ? (CONTENT.locations?.[item.locationId]?.name || "")
+    : String(item.regionId || item.arcId || "").replace(/^arc_/, "").replace(/_/g, " ");
+  const depth = character.worldState?.epicStatus?.[item.victimId]?.deathRoad?.depth ?? 0;
+  const built = buildBattlePrompt({ victim, killer, ability, place, depth });
+  const safe = sanitizeImagePrompt(built.prompt, { ratingLevel: viewerRatingLevel(), isMinor: isMinorSubject(victim) });
+  const url = imageURLFor(built.kind, safe, key);              // §3: the cache key IS the seed
+  const rec = { url, prompt: safe, kind: built.kind };
+  character.battleImages[key] = rec;
+  notePromptFor(url, safe);                                    // SNG-401: so it can be redrawn and re-described
+  addGalleryImage(character, { kind: built.kind, prompt: safe, url, worldDay: item.worldDay,
+    caption: killer ? `${victim.name} — killed by ${killer.name}` : `${victim.name} — the end`,
+    subjectKind: built.kind, subjectId: key });
+  saveCharacter(character);
+  return { ...rec, key };
+}
+
 // ---------- SNG-401: regenerate an image, from the lightbox ----------
 // Aevi's obstacle, verbatim: "by the time an image is on screen the app has forgotten what produced it:
 // no kind, no prompt, no seed, no subject. A regenerate button on that data can only re-fetch the same
@@ -755,7 +796,19 @@ const REGEN_KINDS = {
   },
   // No record behind these — the gallery tile IS the record, so keeping one is keeping the tile.
   moment: { label: () => "this moment", find: () => null, keep: () => true },
-  beast: { label: () => "this creature", find: () => null, keep: () => true }
+  beast: { label: () => "this creature", find: () => null, keep: () => true },
+  // SNG-400b × SNG-401: a battle is prompt-only ON PURPOSE. Its prompt was BUILT once, deterministically,
+  // so re-assembling it would return the same words — the re-roll varies the seed against the stored
+  // prompt, and the REBUILD ("describe it differently") is the door that actually fixes a wrong
+  // composition. ⚠️ It is the first place in the game where Aevi's §2 distinction has a real build behind it.
+  battle: {
+    label: () => "this battle", find: () => null,
+    keep: (key, url) => { if (key && character.battleImages?.[key]) character.battleImages[key].url = url; return true; }
+  },
+  death: {
+    label: () => "this ending", find: () => null,
+    keep: (key, url) => { if (key && character.battleImages?.[key]) character.battleImages[key].url = url; return true; }
+  }
 };
 
 // SNG-401 §1, Aevi's constraint: "DO NOT stuff the prompt into an attribute — prompts are long and some
@@ -12283,7 +12336,15 @@ function renderPlay(turn, opts = {}) {
     const bySection = new Map(NEWS_SECTIONS.map(s => [s.id, []]));
     for (const n of opts.newsFlash) (bySection.get(n.section) || bySection.get("world")).push(n);
     const populated = NEWS_SECTIONS.filter(s => bySection.get(s.id).length);
-    const items = (list) => list.map(n => `<div class="news-item">◈ ${esc(n.text)}</div>`).join("");
+    // SNG-400 §3.2: a DEATH is the one news line with something behind it. Aevi's blocker was that the
+    // item was a sentence and a tier — "there is nothing to click". It now carries who fell and to whom,
+    // so it gets an affordance. ⚠️ Only when it is genuinely openable: a victim the roster knows and
+    // generation on. A control that opens nothing is worse than a line of prose.
+    const canSee = (n) => n?.kind === "death" && n.victimId && imagesEnabled()
+      && (worldRoster(character.worldState || {}, CONTENT) || []).some(f => f.id === n.victimId);
+    const items = (list) => list.map(n => canSee(n)
+      ? `<div class="news-item news-death"><button class="news-open" data-battlenews="${attrJson({ kind: "death", victimId: n.victimId, killerId: n.killerId || null, abilityId: n.abilityId || null, locationId: n.locationId || null, regionId: n.regionId || null, arcId: n.arcId || null, worldDay: n.worldDay ?? null })}" title="${n.killerId ? "See the fight that ended them" : "See how it ended"}">◈ ${esc(n.text)} <span class="news-open-cue">${n.killerId ? "⚔ see the battle" : "☠ see the end"}</span></button></div>`
+      : `<div class="news-item">◈ ${esc(n.text)}</div>`).join("");
     const body = populated.length > 1
       ? populated.map(s => `<div class="news-section"><div class="news-section-title">${esc(s.title)}</div>${items(bySection.get(s.id))}</div>`).join("")
       : items(opts.newsFlash);
@@ -12595,6 +12656,22 @@ function renderPlay(turn, opts = {}) {
     const cur = character.npcRegistry?.[b.dataset.setname]?.name || "";
     const nn = prompt(`Their full name?\n\n(You can extend it — "Pell" → "Pell Ran Marsh". The old name is kept as an alias so the GM still recognises it.)`, cur);
     if (nn && setNpcName(character, b.dataset.setname, nn, readClock(character.clock).day)) { saveCharacter(character); renderPlay(character.activeScene?.lastTurn || null, {}); }
+  };
+  // SNG-400 §3.2: click the death, see the battle. Mints once, then opens it in the lightbox with the
+  // SNG-401 controls live — so a composition the build got wrong is the player's to re-describe.
+  for (const b of app.querySelectorAll("[data-battlenews]")) b.onclick = (e) => {
+    e.stopPropagation();
+    let item; try { item = JSON.parse(b.dataset.battlenews); } catch { return; }
+    const img = battleImageFor(item);
+    if (!img) { b.title = "There is no picture for this one — the figure is not on the roster."; return; }
+    const roster = worldRoster(character.worldState || {}, CONTENT) || [];
+    const victim = roster.find(f => f.id === item.victimId);
+    const killer = item.killerId ? roster.find(f => f.id === item.killerId) : null;
+    openLightbox([{
+      url: img.url, prompt: img.prompt,
+      caption: killer ? `${victim?.name || "someone"} — killed by ${killer.name}` : `${victim?.name || "someone"} — the end`,
+      regen: { kind: img.kind, subjectId: img.key, label: killer ? "this battle" : "this ending", prompt: img.prompt }
+    }]);
   };
   // SNG-401 §5: open this person's picture, with Draw again live on it. The lightbox is the whole UI —
   // this control only has to know WHO, which is exactly the provenance the spec said was missing.

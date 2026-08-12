@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.131";
+const APP_VERSION = "1.9.132";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10637,7 +10637,10 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
       })()}
       ${/* SNG-153: a RECEIPT of what the codex did on its own — with a one-tap undo, because
             auto-merge is only safe while it stays reversible (Erik's condition). */""}
-      ${character._codexDigest && !q ? `<div class="codex-digest insight" style="margin-bottom:8px">${esc(character._codexDigest)}${(character.codex?.mergeUndo || []).length ? ` <button class="opt codex-sug-btn dim" id="codex-undo">Undo the last merge</button>` : ""}</div>` : ""}
+      ${/* CCODE-167: the undo is gated on HAVING SOMETHING TO UNDO, not on the auto-merge receipt existing.
+            A merge the player made by hand recorded a receipt and offered no button, which is the whole of
+            Erik's "I accidentally merged Cevaine the person with Cevaine Lore… :(". */""}
+      ${!q && ((character.codex?.mergeUndo || []).length || character._codexDigest) ? `<div class="codex-digest insight" style="margin-bottom:8px">${esc(character._codexDigest || "")}${(character.codex?.mergeUndo || []).length ? `<div class="codex-undo-row">${(character.codex.mergeUndo || []).slice(-3).reverse().map((u, i) => `<button class="opt codex-sug-btn dim" data-codexundo="${(character.codex.mergeUndo.length - 1) - i}" title="Put &quot;${esc(u.source?.label || "it")}&quot; back as its own entry — its facts and links return with it">↩ Un-merge ${esc(u.source?.label || "the last one")}</button>`).join("")}</div>` : ""}</div>` : ""}
       ${suggestions.length ? `<div class="codex-suggestions"><div class="codex-group-title">These look like the same thing — your call</div>
         ${suggestions.map((s, i) => `<div class="codex-sug-row"><span class="codex-sug-pair">«${esc(s.a)}» ↔ «${esc(s.b)}»</span>
           <button class="opt codex-sug-btn" data-sugmerge="${i}">Merge</button>
@@ -10693,19 +10696,31 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
   for (const b of app.querySelectorAll("[data-mergetarget]")) b.onclick = () => {
     const target = character.codex.topics[b.dataset.mergetarget];
     if (!target || !open) return;
-    if (!confirm(`Fold "${open.label}" into "${target.label}"? Its facts and links move there, and "${open.label}" becomes one of its names. This can't be undone.`)) return;
+    // ⛔ CCODE-167: THIS DIALOG SAID "This can't be undone." IT WAS NEVER TRUE. `mergeInto` has recorded an
+    // undo receipt since SNG-153 — its own line reads "the player's own merge is undoable too" — and the
+    // copy told the player the opposite while the button that would undo it was rendered only next to the
+    // AUTO-merge digest, so a hand-made merge left no way back. Erik merged Cevaine-the-person into
+    // Cevaine-the-lore and believed he had lost it. The capability was there the whole time; two lines of
+    // interface hid it and one line of copy denied it.
+    if (!confirm(`Fold "${open.label}" into "${target.label}"? Its facts and links move there, and "${open.label}" becomes one of its names.
+
+You can undo this — the Codex keeps a receipt.`)) return;
+    const foldedLabel = open.label;
     mergeInto(character, open.id, target.id);
     mergeCodexTopics(character); // the new alias may cascade more duplicates together
+    // the receipt IS the affordance: it names what happened and carries the way back
+    character._codexDigest = `Folded "${foldedLabel}" into "${target.label}".`;
     saveCharacter(character);
     renderCodexScreen(query, target.id);
   };
-  const undoBtn = document.getElementById("codex-undo");
-  if (undoBtn) undoBtn.onclick = () => {
-    const r = undoLastMerge(character);
+  // CCODE-167: by INDEX — an accidental merge is not always the most recent thing you did, and
+  // `undoLastMerge` has always taken one. Newest three offered; each puts its own topic back.
+  for (const b of app.querySelectorAll("[data-codexundo]")) b.onclick = () => {
+    const r = undoLastMerge(character, Number(b.dataset.codexundo));
     if (!r) return;
-    character._codexDigest = `Put back — "${r.restored}" is its own entry again.`;
+    character._codexDigest = `Put back — "${r.restored}" is its own entry again, out of "${r.into}".`;
     saveCharacter(character);
-    renderCodexScreen(query);
+    renderCodexScreen(query, null);
   };
   for (const b of app.querySelectorAll("[data-sugmerge]")) b.onclick = () => {
     const s = suggestions[parseInt(b.dataset.sugmerge)];

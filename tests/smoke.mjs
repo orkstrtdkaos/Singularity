@@ -14280,6 +14280,61 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-167: a merge the player made by hand had no way back, and the dialog SAID so ----
+// Erik: "I accidentally merged Cevaine the person with Cevaine Lore in the codex... :(" — and he was right
+// to think it was gone, because the confirm box told him "This can't be undone." ⛔ IT WAS NEVER TRUE.
+// mergeInto has written an undo receipt since SNG-153 (its own line: "the player's own merge is undoable
+// too") — but the undo button rendered only beside the AUTO-merge digest, so a hand-made merge recorded a
+// receipt nobody could reach. A capability, a UI that hid it, and copy that denied it.
+{
+  const { mergeInto: mi167, undoLastMerge: undo167, ensureCodex: ec167 } = await import("../engine/codex.js");
+  const mk167 = () => { const c = { codex: { topics: {
+    person: { id: "person", label: "Cevaine of the Seventh Measure", kind: "person", facts: ["[d3] she held the veil"], links: ["thinning"], aliases: ["Cevaine"], entityId: "cevaine" },
+    lore: { id: "lore", label: "Cevaine", kind: "lore", facts: ["[d4] the practice as witness"], links: [], aliases: [] },
+    thinning: { id: "thinning", label: "The Thinning", kind: "place", facts: [], links: ["person"], aliases: [] }
+  } } }; ec167(c); return c; };
+
+  const c167 = mk167();
+  mi167(c167, "person", "lore");
+  check("CCODE-167: a hand-made merge WRITES a receipt (it always did)", (c167.codex.mergeUndo || []).length === 1);
+  check("CCODE-167: …and the merge really happened", !c167.codex.topics.person && c167.codex.topics.lore.facts.length === 2);
+  const r167 = undo167(c167);
+  check("CCODE-167 THE FIX: Erik's exact merge comes back", r167?.restored === "Cevaine of the Seventh Measure" && !!c167.codex.topics.person);
+  check("CCODE-167: the person returns WHOLE — facts, links, aliases, entityId", (() => {
+    const p = c167.codex.topics.person;
+    return p.facts[0] === "[d3] she held the veil" && p.links[0] === "thinning" && p.aliases[0] === "Cevaine" && p.entityId === "cevaine";
+  })());
+  check("CCODE-167: and the entry it was folded into is rewound, not left holding both", (() => {
+    const l = c167.codex.topics.lore;
+    return l.facts.length === 1 && l.aliases.length === 0;
+  })());
+  check("CCODE-167: a third topic's link back to it is repaired too (an un-merge that strands links is half an un-merge)",
+    c167.codex.topics.thinning.links[0] === "person");
+  check("CCODE-167: undoing consumes its receipt — a second press cannot double-restore", (c167.codex.mergeUndo || []).length === 0 && undo167(c167) === null);
+
+  // BY INDEX — an accidental merge is not always the last thing you did
+  const c2 = mk167();
+  c2.codex.topics.other = { id: "other", label: "A Road", kind: "place", facts: [], links: [], aliases: [] };
+  mi167(c2, "person", "lore");
+  mi167(c2, "other", "thinning");
+  check("CCODE-167: an OLDER merge is still reachable by index", undo167(c2, 0)?.restored === "Cevaine of the Seventh Measure" && !!c2.codex.topics.person && !c2.codex.topics.other);
+
+  const src167 = readFileSync(join(root, "app.js"), "utf8");
+  // ⚠️ SCOPED TO THE MERGE DIALOG. My first version asserted the phrase was absent from the WHOLE FILE and
+  // failed on two innocent hits: the character-DELETE confirm, where "this can't be undone" is true and
+  // must stay, and my own comment quoting the old copy. A checker satisfied — or broken — by the note
+  // explaining a bug is import_integrity's documented blind spot, arriving yet again.
+  const mergeConfirm167 = (src167.match(/if \(!confirm\(`Fold [^`]*`\)\) return;/) || [""])[0];
+  check("CCODE-167: the MERGE dialog no longer claims the merge is permanent",
+    !!mergeConfirm167 && !/can't be undone/.test(mergeConfirm167) && /You can undo this/.test(mergeConfirm167), mergeConfirm167.slice(0, 120));
+  check("CCODE-167: …while the character-DELETE dialog still says so, because there it is TRUE",
+    /Delete <strong>\$\{esc\(c\?\.name \|\| "this character"\)\}<\/strong>\? This can't be undone/.test(src167));
+  check("CCODE-167: the undo is offered whenever there is something to undo, not only after an auto-merge",
+    /\(character\.codex\?\.mergeUndo \|\| \[\]\)\.length \|\| character\._codexDigest/.test(src167));
+  check("CCODE-167: a hand-made merge leaves a receipt saying what it did", /character\._codexDigest = `Folded "\$\{foldedLabel\}" into/.test(src167));
+  check("CCODE-167: the button carries an INDEX, so it can reach past the newest merge", /data-codexundo="/.test(src167) && /undoLastMerge\(character, Number\(b\.dataset\.codexundo\)\)/.test(src167));
+}
+
 // ---- CCODE-166: the tiles with no buttons at all ----
 // Erik: "new buttons are now missing from #11/22 and 19/22 in Splarf's gallery." Two causes, both mine.
 {

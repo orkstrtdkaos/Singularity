@@ -288,10 +288,90 @@ export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, see
   if (!imagesEnabled()) return record[key] || null;
   const minor = isMinor == null ? isMinorSubject(record) : !!isMinor;
   const raw = assembleImagePrompt(kind, record, promptOpts); // SNG-110: one-off override / companion / provenance
-  const safe = sanitizeImagePrompt(raw, { ratingLevel, isMinor: minor }); // THE FLOORS run AFTER every addition
-  const url = imageURLFor(kind, safe, seedKey || record.id || record.name || raw);
+  // CCODE-164: what the player has KEPT leads the prompt, and their most recent kept seed anchors the mint.
+  // The floors still run after, so a liked look can never carry something past the ceiling.
+  const looked = withLikeness(raw, promptOpts.keeps || []);
+  const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor }); // THE FLOORS run AFTER every addition
+  const url = imageURLFor(kind, safe, seedKey || likenessSeed(promptOpts.keeps || []) || record.id || record.name || raw);
   record[key] = url;
   return url;
+}
+
+// ---------- CCODE-164: KEEP IS A VOTE ON THE LIKENESS, NOT A REPLACEMENT ----------
+// ⛔ ERIK REDEFINED THIS AFTER PLAYING, AND HIS VERSION IS BETTER THAN THE SPEC'S. Aevi's §3 said "on
+// accept: the chosen image becomes the subject's image" — a swap. He asked for something else:
+//
+//   "the keep button should be a highly weighted vote — basically I like the way one image came out so I
+//    want to keep that look as the person in any future renderings. If I like two images I should be able
+//    to keep both, or as many as I want, to help drive the look and feel of the person toward the prompt
+//    that made those images."
+//
+// So a keep is EVIDENCE, and it accumulates. Which makes the mechanism obvious: the prompts that produced
+// the kept pictures are the description he actually likes, and **the terms those prompts SHARE are the
+// signal** — a term in two kept prompts is twice-endorsed, a term in one may be the part he tolerated.
+// That is a vote in the literal sense, so it is counted like one.
+//
+// ⚠️ It steers EVERY future rendering of that subject, not just their portrait — which is the difference
+// between "this is their picture" and "this is what they look like".
+
+const LIKENESS_CAP = 240;      // the clause is an addition to a prompt that is already budgeted
+const LIKENESS_KEEP_CAP = 8;   // more than a handful stops being a preference and becomes an average
+
+/** PURE. The voted likeness clause: clauses ranked by HOW MANY kept prompts contain them, ties broken by
+ *  first appearance so a single keep still reads in its own order. Returns "" when nothing is kept. */
+export function likenessClause(keeps = [], cap = LIKENESS_CAP) {
+  const votes = new Map(), order = new Map();
+  keeps.forEach((k, ki) => {
+    const seen = new Set();
+    String(k?.prompt || "").split(/\s*,\s*/).map(s => s.trim()).filter(s => s.length > 2).forEach((c, ci) => {
+      const key = c.toLowerCase();
+      if (seen.has(key)) return;            // one prompt is one vote, however often it repeats itself
+      seen.add(key);
+      votes.set(key, (votes.get(key) || 0) + 1);
+      if (!order.has(key)) order.set(key, ki * 1000 + ci);
+    });
+  });
+  const ranked = [...votes.entries()]
+    .sort((a, b) => b[1] - a[1] || order.get(a[0]) - order.get(b[0]))
+    .map(([c]) => c);
+  const out = [];
+  for (const c of ranked) {
+    const next = out.length ? `${out.join(", ")}, ${c}` : c;
+    if (next.length > cap) break;
+    out.push(c);
+  }
+  return out.join(", ");
+}
+
+/** PURE. Fold the voted likeness into a freshly-assembled prompt. ⚠️ It LEADS, because a diffusion prompt
+ *  weights its opening most heavily and the whole point is that this is what the person looks like — the
+ *  scene-specific half follows. Returns the prompt unchanged when nothing is kept. */
+export function withLikeness(prompt, keeps = []) {
+  const look = likenessClause(keeps);
+  return look ? `${look}, ${prompt}` : String(prompt || "");
+}
+
+/** The kept SEED that carries the most votes — the strongest consistency lever a diffusion model has, and
+ *  free. Used for a fresh mint of a subject that already has a liked look; a re-roll deliberately varies
+ *  it (that is what re-rolling IS), so this never fights the Draw-again button. */
+export function likenessSeed(keeps = []) {
+  // ⚠️ The MOST RECENT KEEP THAT HAS ONE, not simply the most recent. A keep made from a gallery tile that
+  // predates provenance carries no seed, and giving up on it would throw away the seeds of every earlier
+  // keep — the newest vote silently disabling the anchor is not what "keep this look" means.
+  for (let i = keeps.length - 1; i >= 0; i--) if (keeps[i]?.seedKey) return keeps[i].seedKey;
+  return null;
+}
+
+/** Toggle a keep. Returns { keeps, kept } — `kept` is the state AFTER, so a caller can label its button.
+ *  Deduped by url, capped, and REMOVING is the same button: a vote you can't withdraw is a trap. */
+export function toggleKeep(store, key, { url, prompt, seedKey, at = null } = {}) {
+  if (!store || !key || !url) return { keeps: [], kept: false };
+  const rec = store[key] || (store[key] = { keeps: [] });
+  const i = rec.keeps.findIndex(k => k.url === url);
+  if (i >= 0) { rec.keeps.splice(i, 1); return { keeps: rec.keeps, kept: false }; }
+  rec.keeps.push({ url, prompt: String(prompt || "").slice(0, 400), seedKey: seedKey || null, at });
+  if (rec.keeps.length > LIKENESS_KEEP_CAP) rec.keeps.shift();
+  return { keeps: rec.keeps, kept: true };
 }
 
 // ---------- SNG-401: draw it again ----------
@@ -326,7 +406,11 @@ export function regenerateImage(record, kind, { ratingLevel = 2, isMinor = null,
   const nextKey = `${base.replace(/#r\d+$/, "")}#r${Math.max(1, attempt | 0)}`;
   const minor = isMinor == null ? isMinorSubject(record) : !!isMinor;
   const raw = promptOverride ? String(promptOverride).slice(0, 400) : assembleImagePrompt(kind, record, promptOpts);
-  const safe = sanitizeImagePrompt(raw, { ratingLevel, isMinor: minor });
+  // CCODE-164: a RE-ROLL of a face they have kept stays that face — new seed, same likeness. ⚠️ NOT applied
+  // to a REBUILD: "describe it differently" is the player overriding the look on purpose, and folding the
+  // old votes back in would silently refuse the instruction.
+  const looked = promptOverride ? raw : withLikeness(raw, promptOpts.keeps || []);
+  const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor });
   return { url: imageURLFor(kind, safe, nextKey), seedKey: nextKey, prompt: safe };
 }
 

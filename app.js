@@ -34,7 +34,7 @@ import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive }
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, regenerateImage, acceptImage, isGeneratedImage, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.129";
+const APP_VERSION = "1.9.130";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -290,7 +290,7 @@ function showWhoIs(known) {
       // and surviving is the entire point of Keep.
       const chosen = character?.figureImages?.[artSeed] || null;
       const url = chosen || ensureImage({ id: artSeed, name: known.label, role: known.role || "", appearance: dyingArt || known.appearance || "", gender: known.gender || undefined },
-        "npc", { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false, promptOpts: { aesthetic: aesW } });
+        "npc", { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false, promptOpts: { aesthetic: aesW, keeps: keepsForSubject("figure", artSeed) } });
       // ⛔ Erik: "the popups that read the codex entry don't have an image popup at all." Correct — this img
       // carried no `data-lightbox`, so of the nine places a picture appears this was the one that could not
       // be opened. It is also the one that needs it most: a world figure is someone you only ever meet in a
@@ -775,6 +775,32 @@ function battleImageFor(item) {
 // ⚠️ The player's own portrait ALSO has a richer flow on the Character screen (a one-off scene override, a
 // partner in frame). That is deliberately kept — it does things this cannot — and the two agree: the
 // override dialog there IS the rebuild, and it is the same dialog reached from here.
+/** ⛔ CCODE-165 (Erik): "The codex also needs to have an image of the subject at the top. This could/should
+ *  be the same one the popup uses." SAME SEED, deliberately — the popup and the page are two views of ONE
+ *  subject, and two different faces would say they were two people. A kept look wins here exactly as it
+ *  does there, and it opens into the lightbox carrying the same controls.
+ *  ⚠️ People and places only: a codex entry for an EVENT or a MYSTERY has no subject to draw, and a
+ *  picture invented for one would be the game asserting a fact it does not have. */
+const CODEX_PICTURABLE = new Set(["person", "place"]);
+function codexTopImage(open) {
+  if (!open || !imagesEnabled() || !CODEX_PICTURABLE.has(open.kind)) return "";
+  try {
+    const seed = open.entityId || open.id || open.label;
+    const artSeed = `whois-${seed}`;
+    const chosen = character?.figureImages?.[artSeed] || null;
+    const fig = rosterFigureOf(artSeed);
+    const isPlace = open.kind === "place";
+    const url = chosen || ensureImage(
+      { id: artSeed, name: open.label, role: fig?.role || "", appearance: fig?.imagePrompt || fig?.appearance || "", gender: fig?.gender || undefined,
+        descriptionSeed: isPlace ? (open.facts || [])[0] || open.label : undefined },
+      isPlace ? "location" : "npc",
+      { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false,
+        promptOpts: { aesthetic: fig?.tradition ? (CONTENT.traditionVisualAesthetics?.[fig.tradition] || null) : null, keeps: keepsForSubject("figure", artSeed) } });
+    if (!url) return "";
+    return `<img class="codex-top-art" src="${esc(url)}" alt="${esc(open.label)}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(artSeed)}" loading="lazy" title="Open it — draw again, or keep this look">`;
+  } catch { return ""; }   // a face is never worth breaking the page for
+}
+
 /** SNG-401 §1: a whois portrait is seeded `whois-<figureId>` (or `whois-death-<figureId>` once the world
  *  records their death), and that seed is the only handle the card has. Map it back to the person. */
 function rosterFigureOf(seed) {
@@ -784,6 +810,7 @@ function rosterFigureOf(seed) {
 
 const REGEN_KINDS = {
   npc: {
+    needsId: true,
     label: n => n?.name || "this person",
     find: id => character?.npcRegistry?.[id] || null,
     current: id => character?.npcRegistry?.[id]?.image || null,
@@ -791,6 +818,7 @@ const REGEN_KINDS = {
     promptOpts: rec => ({ character, aesthetic: npcAesthetic(rec) })
   },
   character: {
+    needsId: true,
     label: () => character?.name || "your portrait",
     find: () => character || null,
     current: () => character?.portrait || null,
@@ -802,6 +830,7 @@ const REGEN_KINDS = {
   // it could not be opened, let alone redrawn. ⚠️ Its image is minted fresh from a stable seed rather than
   // stored on a record, so a CHOSEN one needs somewhere to live: `figureImages`, keyed by that same seed.
   figure: {
+    needsId: true,
     label: id => rosterFigureOf(id)?.name || "this figure",
     find: id => rosterFigureOf(id),
     current: id => character?.figureImages?.[id] || null,
@@ -809,18 +838,21 @@ const REGEN_KINDS = {
     promptOpts: rec => ({ aesthetic: rec?.tradition ? (CONTENT.traditionVisualAesthetics?.[rec.tradition] || null) : null })
   },
   location: {
+    needsId: true,
     label: id => CONTENT.locations?.[id]?.name || "this place",
     find: id => CONTENT.locations?.[id] || null,
     current: id => character?.locationImages?.[id] || null,
     keep: (id, url) => { character.locationImages = character.locationImages || {}; character.locationImages[id] = url; return true; }
   },
   item: {
+    needsId: true,
     label: id => findItem(character, id)?.name || "this item",
     find: id => findItem(character, id) || null,
     current: id => findItem(character, id)?.image || null,
     keep: (id, url) => { const it = findItem(character, id); if (!it) return false; it.image = url; it.imageDirty = false; return true; }
   },
   ability: {
+    needsId: true,
     label: id => fullCatalog()[id]?.name || character?.customAbilities?.[id]?.name || "this craft",
     find: id => fullCatalog()[id] || character?.customAbilities?.[id] || null,
     current: id => character?.abilityImages?.[id] || null,
@@ -850,6 +882,26 @@ const REGEN_KINDS = {
 const _regenPrompts = new Map();
 function notePromptFor(url, prompt) { if (url && prompt) _regenPrompts.set(String(url), String(prompt).slice(0, 400)); }
 
+// CCODE-164: WHAT THE PLAYER HAS KEPT, per subject. Erik: "a highly weighted vote… if I like two images I
+// should be able to keep both, or as many as I want, to help drive the look and feel of the person toward
+// the prompt that made those images." So this is a LIST, not a slot, and it steers every future rendering
+// of that subject rather than only their portrait. Keyed `kind:subjectId` so a person, a figure and the
+// player each have their own; a tile with no record keys on its own url, which still lets a one-off be
+// kept without inventing a subject for it.
+function likenessKey(regen) {
+  if (!regen) return null;
+  return regen.subjectId ? `${regen.kind}:${regen.subjectId}` : null;
+}
+function keepsFor(regen) {
+  const k = likenessKey(regen);
+  return k ? (character?.likeness?.[k]?.keeps || []) : [];
+}
+/** The keeps for a record the ART layer is about to draw — so ensureImage/regenerateImage anywhere in the
+ *  app pick up the player's votes without every call site having to remember. */
+function keepsForSubject(kind, subjectId) {
+  return subjectId ? (character?.likeness?.[`${kind}:${subjectId}`]?.keeps || []) : [];
+}
+
 /** Resolve a lightbox item's provenance back to the LIVE record it depicts, plus its kind's handlers.
  *  A null record is legitimate (prompt-only kinds); a null SPEC is not — that means no button, never a guess. */
 function regenSubject(regen) {
@@ -871,9 +923,12 @@ function galleryRegenFor(g) {
     : null;
   // 1. the tile says so outright (everything minted since provenance existed)
   if (g.subjectKind && g.subjectId) return mk(g.subjectKind, g.subjectId);
-  // 2. a PORTRAIT tile predating provenance: its caption is "Name — relationship". ⛔ The match is EXACT,
+  // 2. a person's tile predating provenance: its caption is "Name — relationship". ⛔ The match is EXACT,
   //    never fuzzy — a near-miss would put a Draw-again button on one person's face that redraws another.
-  if (g.kind === "portrait") {
+  // ⚠️ "npc" AS WELL AS "portrait". I keyed this on the kind ensureBondPortraits writes and checked no
+  //    further; the live gallery holds ELEVEN tiles of kind "npc" from the born-with-image path and NOT ONE
+  //    of kind "portrait". The fallback I wrote for old tiles matched none of the old tiles.
+  if (g.kind === "portrait" || g.kind === "npc") {
     const nm = String(g.caption || "").split("—")[0].trim().toLowerCase();
     if (!nm) return null;
     if (nm === String(character.name || "").toLowerCase()) return mk("character", character.id);
@@ -883,7 +938,15 @@ function galleryRegenFor(g) {
   }
   // 3. a tile with no subject and no record — a moment, a scene, a creature study. Its own stored prompt
   //    is enough to draw from, and the gallery is where a kept one lands, so it is fully regenerable.
-  if (g.prompt) return mk(REGEN_KINDS[g.kind] ? g.kind : "moment", null);
+  // ⛔ THE "✕ couldn't keep" ERIK HIT. This passed the tile's own kind straight through, so an `ability` or
+  //    `npc` tile with no subjectId became a RECORD-BACKED kind holding a NULL id — and its `keep` looked
+  //    the record up, found nothing, and returned false on click. A kind that needs an id and has none is
+  //    prompt-only in every way that matters, so it is treated as one: still drawable, still describable,
+  //    and its Keep votes on the tile rather than on a record that is not there.
+  if (g.prompt) {
+    const k = g.kind;
+    return mk(REGEN_KINDS[k] && !REGEN_KINDS[k].needsId ? k : "moment", null);
+  }
   return null;
 }
 
@@ -900,7 +963,7 @@ function regenLightboxItem(it, attempt, describe = null) {
   const out = regenerateImage(record, it.regen.kind, {
     ratingLevel: viewerRatingLevel(),            // §4: the ceiling applies to a re-roll exactly as to a first mint
     seedKey: it.regen.seedKey || record?.imageSeedKey || it.regen.subjectId || null,
-    promptOpts: spec.promptOpts ? spec.promptOpts(record) : {},
+    promptOpts: { ...(spec.promptOpts ? spec.promptOpts(record) : {}), keeps: keepsFor(it.regen) },
     promptOverride: describe || (record ? null : stored),
     attempt
   });
@@ -918,6 +981,16 @@ function keepLightboxItem(it) {
   const sub = regenSubject(it.regen);
   if (!sub || !it.url) return false;
   const { spec } = sub;
+  // CCODE-164: the vote comes FIRST and is the part that always works. Making it the displayed picture is
+  // a bonus that only some kinds can do; recording "this is what they look like" is the thing Erik asked
+  // for, and it must not be lost because a record moved or was merged away.
+  const lk = likenessKey(it.regen);
+  let kept = null;
+  if (lk) {
+    character.likeness = character.likeness || {};
+    kept = toggleKeep(character.likeness, lk, { url: it.url, prompt: it.prompt || it.regen.prompt || "", seedKey: it.seedKey, at: absoluteWorldDay() });
+    if (!kept.kept) { saveCharacter(character); return true; }   // un-keeping is the same button
+  }
   if (!spec.keep(it.regen.subjectId, it.url, it.seedKey)) return false;
   addGalleryImage(character, {
     kind: it.regen.galleryKind || it.regen.kind, prompt: it.prompt || "", url: it.url,
@@ -965,17 +1038,22 @@ function openLightbox(items, start = 0) {
     const spec = it.regen ? REGEN_KINDS[it.regen.kind] : null;
     const currentUrl = spec?.current ? spec.current(it.regen.subjectId) : null;
     const isCurrent = !!currentUrl && currentUrl === it.url;
-    const canKeep = !!it.regen && !!spec?.keep && !isCurrent;
+    // CCODE-164: a keep is a VOTE that accumulates, so the button is a TOGGLE and it is offered on the
+    // current picture too — "this is the one shown" and "this is what they look like" are now two
+    // different statements, and the second is the one that steers future renders.
+    const myKeeps = it.regen ? keepsFor(it.regen) : [];
+    const isKept = myKeeps.some(k => k.url === it.url);
+    const canKeep = !!it.regen && !!spec?.keep && !(spec.needsId && !it.regen.subjectId);
     const isNewDraw = !!it.regen && !!it.isDraw;
     el.innerHTML = `<div class="lightbox-inner">
       <img src="${esc(it.url)}" alt="${esc(it.caption || "")}" data-lbimg>
-      ${it.caption ? `<div class="lightbox-cap">${esc(it.caption)}${list.length > 1 ? ` · ${i + 1}/${list.length}` : ""}${isNewDraw ? " · a new draw — not kept yet" : isCurrent ? " · the one in use" : ""}</div>` : ""}
+      ${it.caption ? `<div class="lightbox-cap">${esc(it.caption)}${list.length > 1 ? ` · ${i + 1}/${list.length}` : ""}${isNewDraw ? " · a new draw" : ""}${isCurrent ? " · the one in use" : ""}${myKeeps.length ? ` · ${myKeeps.length} kept look${myKeeps.length === 1 ? "" : "s"} guiding them` : ""}</div>` : ""}
       ${list.length > 1 ? `<button class="lightbox-nav prev" data-lbprev>‹</button><button class="lightbox-nav next" data-lbnext>›</button>` : ""}
       <button class="lightbox-close" data-lbclose>✕</button>
       <button class="lightbox-save" data-lbsave title="Save this image to your device — it stays yours even if the link expires">⤓ Save</button>
       ${canRegen ? `<button class="lightbox-regen" data-lbregen title="Draw ${esc(it.regen.label || "this")} again — same description, a new hand. The one you have now is kept beside it; nothing is replaced unless you choose it.">↻ Draw again</button>` : ""}
       ${canRebuild ? `<button class="lightbox-rebuild" data-lbrebuild title="Describe ${esc(it.regen.label || "this")} differently — for when the picture is not merely unlucky but wrong (wrong place, wrong look, the wrong thing happening)">✎ Describe differently</button>` : ""}
-      ${canKeep ? `<button class="lightbox-keep" data-lbkeep title="Make this the picture for ${esc(it.regen.label || "this")} from now on — the others stay in your gallery">✓ ${isNewDraw ? "Keep this one" : "Use this one"}</button>` : ""}
+      ${canKeep ? `<button class="lightbox-keep${isKept ? " kept" : ""}" data-lbkeep title="${isKept ? "Stop using this one as a guide to what they look like" : `Keep this look for ${esc(it.regen.label || "them")} — future pictures of them will be drawn toward it. Keep as many as you like; what they agree on counts most.`}">${isKept ? "★ kept — remove" : "☆ Keep this look"}</button>` : ""}
     </div>`;
     el.querySelector("[data-lbclose]").onclick = close;
     // §4: name the failure. A dead draw that just sits blank reads as "the button doesn't work".
@@ -1026,8 +1104,8 @@ function openLightbox(items, start = 0) {
       ev.stopPropagation();
       keepBtn.disabled = true;
       const ok = keepLightboxItem(it);
-      keepBtn.textContent = ok ? "✓ kept" : "✕ couldn't keep";
-      if (ok) { it.isDraw = false; setTimeout(render, 900); }
+      if (ok) { it.isDraw = false; render(); }
+      else { keepBtn.textContent = "✕ couldn't keep"; keepBtn.title = "This picture has no subject to attach a look to."; }
     };
     // SNG-335 — ⚠️ SAVE IT WHERE NO LINK CAN EXPIRE. Erik: "add an option to save an image locally — that
     // would preserve it even if the url vanishes."
@@ -2810,7 +2888,7 @@ function ensureBondPortraits(c) {
     // because `formOf()` never returns falsy — so every figure was drawn from the same two words and
     // rendered as the same face. An authored form still wins; this only fills the silence behind it.
     const aes367 = npcAesthetic(n);
-    const url = ensureImage(n, "npc", { ratingLevel: viewerRatingLevel(), seedKey: `${n.id}-${tier}`, force: true, promptOpts: { character: c, aesthetic: aes367 } });
+    const url = ensureImage(n, "npc", { ratingLevel: viewerRatingLevel(), seedKey: `${n.id}-${tier}`, force: true, promptOpts: { character: c, aesthetic: aes367, keeps: keepsForSubject("npc", n.id) } });
       if (url) { // no empty tile — only record when the mint actually resolved
         n._portraitTier = tier; n.image = url;
         // SNG-401 §1: the tile remembers WHOSE face it is, so the lightbox can redraw the right person.
@@ -10486,6 +10564,7 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
       <div class="codex-topic-page">
         <div class="codex-kind">${esc(open.kind)}${open.entityId ? ` <span class="codex-anchor" title="anchored to a known entity">◈ ${esc(open.entityId)}</span>` : ""}</div>
         <h3 class="codex-title">${esc(open.label)}</h3>
+        ${codexTopImage(open)}
         ${(open.aliases || []).length ? `<div class="codex-aliases">also called: ${open.aliases.map(esc).join(" · ")}</div>` : ""}
         ${(() => {
           // SNG-BATCH-9 Phase 2: a GROWN entity carries a canon-tier badge + a one-tap ⭐ Keep

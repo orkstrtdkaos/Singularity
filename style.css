@@ -1322,3 +1322,8 @@ img[data-lightbox] { cursor: zoom-in; }
 .news-item.news-death .news-open:focus-visible .news-open-cue { opacity: 1; }
 .news-open-cue { font-family: var(--font-ui); font-size: 11px; opacity: .65; white-space: nowrap;
   border: 1px solid currentColor; border-radius: 10px; padding: 0 6px; margin-left: 4px; }
+/* CCODE-164 — a kept look is a VOTE, and a vote you have cast should look cast. */
+.lightbox-keep.kept { background: var(--panel); color: var(--ink); box-shadow: inset 0 0 0 2px var(--accent, #3c7d6e); }
+/* CCODE-165 — the codex page leads with its subject's face, same seed as the popup so it is the same person. */
+.codex-top-art { width: 100%; max-height: 260px; object-fit: cover; object-position: center 18%;
+  border-radius: 6px; margin: 6px 0 10px; cursor: zoom-in; display: block; }

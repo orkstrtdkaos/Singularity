@@ -12062,8 +12062,12 @@ await (async () => {
     // ⚠️ ASSERT THE PROPERTY, NOT THE SPELLING. This pinned the literal argument list, so SNG-399b's
     // life-or-death seed choice broke a gate about the AESTHETIC riding through — a gate failing for a
     // reason unrelated to what it protects. What matters is that promptOpts carries the aesthetic.
+    // ⚠️ RE-AIMED (CCODE-164). This pinned the LITERAL argument list, so adding `keeps:` alongside
+    // `aesthetic:` broke a gate about the people-layer for a reason that had nothing to do with it — the
+    // third time a gate in this file has failed on the spelling of a line instead of the property it
+    // protects. It now asserts what it is actually for: the aesthetic reaches promptOpts.
     check("367b: …and the people layer rides inside promptOpts, where assembleImagePrompt can read it",
-      /isMinor: false, promptOpts: \{ aesthetic: aesW \}/.test(appSrc367));
+      /promptOpts: \{[^}]*aesthetic: aesW/.test(appSrc367));
 
     check("367: …and the npc image call supplies the tradition aesthetic",
       /npcAesthetic\(n\)/.test(appSrc367) && /aesthetic: aes367/.test(appSrc367));
@@ -14270,6 +14274,67 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-164/165: Keep is a VOTE on the likeness, and the codex leads with its subject's face ----
+// Erik, redefining the feature after playing: "the keep button should be a highly weighted vote — I like
+// the way one image came out so I want to keep that look as the person in any future renderings. If I like
+// two images I should be able to keep both, or as many as I want."
+{
+  const { likenessClause, withLikeness, toggleKeep, likenessSeed, setArtMode: setArt164,
+          regenerateImage: regen164, ensureImage: ensure164 } = await import("../engine/art.js");
+  const was164 = localStorage.getItem("singularity.artMode");
+  setArt164("generate");
+  const keeps = [
+    { url: "a", prompt: "silver hair, sharp cheekbones, grey wool cloak, a scar at the jaw" },
+    { url: "b", prompt: "pale eyes, silver hair, grey wool cloak, lantern light" }
+  ];
+  const clause = likenessClause(keeps);
+  check("CCODE-164 THE VOTE: what two kept pictures AGREE on leads the likeness", /^silver hair, grey wool cloak/.test(clause), clause);
+  check("CCODE-164: …and what only one of them says still rides, behind the agreement", /sharp cheekbones/.test(clause) && /pale eyes/.test(clause), clause);
+  check("CCODE-164: one keep is a whole vote, in its own order", likenessClause([keeps[0]]).startsWith("silver hair, sharp cheekbones"));
+  // ⚠️ THE CASE HAS TO DISCRIMINATE. My first version asserted a thrice-repeated term still led — which it
+  // does whether or not repetition is deduped, so the check proved nothing and the mutation stayed green.
+  // Now: a term repeated three times in ONE keep must LOSE to a term two SEPARATE keeps agree on.
+  check("CCODE-164: a prompt repeating itself is still ONE vote — genuine agreement outranks ballot-stuffing",
+    likenessClause([{ url: "x", prompt: "red hat, red hat, red hat, blue coat" }, { url: "y", prompt: "blue coat, green boots" }]).startsWith("blue coat"));
+  check("CCODE-164: nothing kept = nothing added (the prompt is untouched)", likenessClause([]) === "" && withLikeness("a smith at her anvil", []) === "a smith at her anvil");
+  check("CCODE-164: the likeness LEADS the prompt (a diffusion prompt weights its opening most)", withLikeness("a smith at her anvil", keeps).startsWith("silver hair"));
+  check("CCODE-164: the clause is bounded — a preference, never an average of everything",
+    likenessClause(Array.from({ length: 8 }, (_, i) => ({ url: `u${i}`, prompt: `trait${i} aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, common thing` }))).length <= 240);
+
+  const store = {};
+  toggleKeep(store, "npc:pell", { url: "u1", prompt: "silver hair", seedKey: "s1" });
+  toggleKeep(store, "npc:pell", { url: "u2", prompt: "grey wool", seedKey: "s2" });
+  check("CCODE-164: keeps ACCUMULATE — two liked pictures both guide the face", store["npc:pell"].keeps.length === 2);
+  const off = toggleKeep(store, "npc:pell", { url: "u1", prompt: "silver hair" });
+  check("CCODE-164: the same button withdraws a vote (a vote you cannot take back is a trap)", off.kept === false && store["npc:pell"].keeps.length === 1);
+  check("CCODE-164: re-keeping restores it", toggleKeep(store, "npc:pell", { url: "u1", prompt: "silver hair" }).kept === true);
+  check("CCODE-164: keeps are capped — past a handful it stops being a preference and becomes an average",
+    (() => { const s2 = {}; for (let i = 0; i < 20; i++) toggleKeep(s2, "k", { url: `u${i}`, prompt: `p${i}` }); return s2.k.keeps.length <= 8; })());
+  check("CCODE-164: a kept SEED anchors a fresh mint (the strongest consistency lever a diffusion model has)",
+    likenessSeed(store["npc:pell"].keeps) !== null && likenessSeed([]) === null);
+
+  const pell164 = { id: "pell164", name: "Pell", description: "a village blacksmith" };
+  ensure164(pell164, "npc", { ratingLevel: 2, promptOpts: { keeps } });
+  check("CCODE-164: a FIRST mint of a liked subject is drawn toward the kept look", decodeURIComponent(pell164.image).includes("silver hair"));
+  const rr = regen164({ id: "p2", name: "Pell", description: "a village blacksmith" }, "npc", { ratingLevel: 2, attempt: 1, promptOpts: { keeps } });
+  check("CCODE-164: a RE-ROLL keeps the face and changes only the draw", decodeURIComponent(rr.url).includes("silver hair"));
+  const rb = regen164({ id: "p3", name: "Pell" }, "npc", { ratingLevel: 2, attempt: 1, promptOpts: { keeps }, promptOverride: "a bald man in red armour" });
+  check("CCODE-164: a REBUILD is NOT overridden by old votes — describing it differently must mean something",
+    decodeURIComponent(rb.url).includes("bald man in red armour") && !decodeURIComponent(rb.url).includes("silver hair"));
+  check("CCODE-164: the FLOORS still run after the likeness (a liked look cannot smuggle past the ceiling)",
+    decodeURIComponent(regen164({ id: "p4", name: "X" }, "npc", { ratingLevel: 0, attempt: 1, promptOpts: { keeps: [{ url: "z", prompt: "an erotic nude study" }] } }).url).match(/erotic|nude/) === null);
+
+  const src165 = readFileSync(join(root, "app.js"), "utf8");
+  const codexFn = src165.slice(src165.indexOf("function codexTopImage"));
+  check("CCODE-165: the codex topic page renders its subject at the top", /\$\{codexTopImage\(open\)\}/.test(src165));
+  check("CCODE-165: it uses the SAME seed as the popup, so it is the same person and not a second one", /const artSeed = `whois-\$\{seed\}`;/.test(codexFn));
+  check("CCODE-165: it opens into the lightbox with the same controls", /class="codex-top-art"[^`]*data-lightbox="figure"[^`]*data-regen-kind="figure"/.test(src165));
+  check("CCODE-165: only entries that HAVE a subject get a face (an event or a mystery is not a person)", /CODEX_PICTURABLE = new Set\(\["person", "place"\]\)/.test(src165));
+  check("CCODE-165: a kept look wins on the codex page too", /const chosen = character\?\.figureImages\?\.\[artSeed\] \|\| null;/.test(codexFn) && /const url = chosen \|\|/.test(codexFn));
+  check("CCODE-164: the votes reach the paths that draw people (bond portraits and figure cards)", (src165.match(/keeps: keepsForSubject\(/g) || []).length >= 2);
+  if (was164) localStorage.setItem("singularity.artMode", was164);
+}
+
 // ---- CCODE-163: the two gaps Erik found by testing SNG-401 ----
 // (1) "I don't see where I can select a portrait as Canon."  (2) "the popups that read the codex entry
 // don't have an image popup at all."  Both were mine: I gated Keep too narrowly, and I counted eight
@@ -14291,8 +14356,13 @@ await (async () => {
     /const chosen = character\?\.figureImages\?\.\[artSeed\] \|\| null;/.test(src163) && /const url = chosen \|\| ensureImage\(/.test(src163));
 
   // (1) SELECT AN EXISTING PICTURE AS THE ONE — Keep was reachable only from a fresh draw
-  check("CCODE-163: Keep is offered on ANY picture with provenance, not only on a new draw", /const canKeep = !!it\.regen && !!spec\?\.keep && !isCurrent;/.test(src163));
-  check("CCODE-163: …and never on the one already in use (that button would do nothing)", /const isCurrent = !!currentUrl && currentUrl === it\.url;/.test(src163) && /canKeep \? `<button class="lightbox-keep"/.test(src163));
+  // ⚠️ SUPERSEDED BY CCODE-164 AND THE CHANGE IS THE POINT. When Keep meant "make this the portrait", it
+  // was correct to hide it on the picture already in use — a no-op button. Now it means "this is what they
+  // look like", which is a DIFFERENT statement from "this is the one shown", and is perfectly sensible to
+  // cast on the current picture. What must still never appear is a Keep with nothing to attach to.
+  check("CCODE-163/164: Keep is offered on any picture with a subject, new draw or not", /const canKeep = !!it\.regen && !!spec\?\.keep && !\(spec\.needsId && !it\.regen\.subjectId\);/.test(src163));
+  check("CCODE-163/164: …and never where there is no subject to attach a look to (the '✕ couldn't keep' Erik hit)",
+    /needsId: true/.test(src163) && /REGEN_KINDS\[k\] && !REGEN_KINDS\[k\]\.needsId \? k : "moment"/.test(src163));
   check("CCODE-163: the caption says WHICH picture is the one in use, so 'use this one' has a reference point", /isCurrent \? " · the one in use" : ""/.test(src163));
   check("CCODE-163: every regenerable kind can say what its current picture is", (() => {
     const tbl = src163.slice(src163.indexOf("const REGEN_KINDS = {"), src163.indexOf("// SNG-401 §1, Aevi's constraint"));

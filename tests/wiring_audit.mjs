@@ -183,9 +183,15 @@ check("APP_VERSION matches index.html's cache stamp (feedback reports name the r
 // fails on a shallow clone teaches people to ignore gates.
 {
   let verdict = null;   // null = cannot tell, so say nothing
+  let broke = null;     // …and "the check itself failed" is NOT the same thing as "cannot tell"
   try {
     const { execFileSync } = await import("node:child_process");
-    const git = (...a) => execFileSync("git", a, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+    // ⛔ `maxBuffer`, AND IT IS WHY THIS GATE WENT QUIET. `git show HEAD~1:app.js` returns the WHOLE file,
+    // and app.js crossed Node's 1 MB default (1,102,559 bytes) — so the call threw ENOBUFS, the catch below
+    // set `verdict = null`, and the gate reported "not checkable here" on every commit from then on. It did
+    // not fail; it disabled itself, silently, exactly as the project got big enough to need it. FOUR of my
+    // own commits shipped under a frozen version while this printed a reassuring note.
+    const git = (...a) => execFileSync("git", a, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"], maxBuffer: 64 * 1024 * 1024 }).trim();
     const parents = git("rev-list", "--parents", "-n", "1", "HEAD").split(/\s+/);
     if (parents.length === 2) {   // exactly one parent: an ordinary commit, not a merge or a root
       const touched = git("diff", "--name-only", "HEAD~1", "HEAD").split(/\r?\n/).filter(Boolean);
@@ -195,9 +201,15 @@ check("APP_VERSION matches index.html's cache stamp (feedback reports name the r
         verdict = { moved: !!before && before !== appVersion, before, files: versioned.length, sample: versioned.slice(0, 3) };
       }
     }
-  } catch { verdict = null; }
+  } catch (e) { verdict = null; broke = e?.message || String(e); }
 
-  if (verdict === null) {
+  // ⚠️ A GATE THAT FAILS INTO SILENCE IS THE BUG. "Cannot tell" is a legitimate answer for a shallow
+  // clone or a merge; "the check threw" is a broken check wearing that answer's clothes, and it stayed on
+  // for weeks. They are told apart now, and the broken case FAILS rather than printing a note.
+  if (broke) {
+    check(`version freshness is CHECKABLE (the check must not disable itself)`, false,
+      `the freshness check threw: ${broke.slice(0, 160)}`);
+  } else if (verdict === null) {
     console.log("note  version freshness: not checkable here (no git, a merge, or no source change in HEAD)");
   } else {
     check(`the version MOVED with the source it describes (HEAD changed ${verdict.files} versioned file(s): ${verdict.sample.join(", ")})`,

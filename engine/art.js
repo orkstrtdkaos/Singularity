@@ -17,8 +17,27 @@ import { RATING_LEVEL } from "./playerprofile.js";
 // ⚠️ CCODE-174: EXPORTED, because it is part of every prompt and was invisible. It is appended at URL-build
 // time, AFTER the prompt that gets stored — so the details panel was showing the player a prompt that was
 // not the whole prompt. "Let me see the prompt that generated the image" has to mean all of it.
-export const IMAGE_STYLE = "digital painting, atmospheric concept art, muted earth tones with teal and gold accents, painterly, no text, no watermark";
-const STYLE = IMAGE_STYLE;
+//
+// ⛔ CCODE-179, ERIK'S RULING: "I like to keep the house style but make sure that house style is variable
+// based on the tradition they're from." The old constant locked a PALETTE — "muted earth tones with teal
+// and gold accents" — onto every image in the game, which fought the 26 authored tradition palettes for
+// control of the same slot. An Umbral rendered in teal and gold is not an Umbral.
+// ⚠️ The MEDIUM stays constant, because that is what makes the game look like one game; only the palette,
+// light and mood move, because that is what makes a people look like themselves. The tradition file's own
+// usage note asks for exactly this: "this is the STYLE wrapper so the whole tradition coheres."
+export const IMAGE_STYLE_MEDIUM = "digital painting, atmospheric concept art, painterly, no text, no watermark";
+export const IMAGE_STYLE_HOUSE = "muted earth tones with teal and gold accents";
+
+/** CCODE-179. The style wrapper for a picture: the constant medium, plus this people's own palette, light
+ *  and mood when the tradition is known, and the house palette when it is not. Each borrowed clause is
+ *  clamped — an aesthetic is authored prose and the style is a wrapper, not the subject. PURE. */
+export function houseStyleFor(aesthetic = null) {
+  const bits = [aesthetic?.palette, aesthetic?.light, aesthetic?.mood]
+    .filter(Boolean).map(v => String(v).split(/\s*[—–]\s*/)[0].trim().slice(0, 70));
+  return bits.length ? [IMAGE_STYLE_MEDIUM, ...bits].join(", ") : `${IMAGE_STYLE_MEDIUM}, ${IMAGE_STYLE_HOUSE}`;
+}
+
+export const IMAGE_STYLE = houseStyleFor(null);   // the default, for anything with no tradition to speak for it
 
 export const ART_MODES = ["off", "static", "generate"];
 
@@ -38,8 +57,8 @@ function seedFrom(s) {
   return Math.abs(h) % 100000;
 }
 
-function pollinationsURL(prompt, { width = 1024, height = 320, seed = 42 } = {}) {
-  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", " + STYLE)}?width=${width}&height=${height}&seed=${seed}&nologo=true`;
+function pollinationsURL(prompt, { width = 1024, height = 320, seed = 42, style = IMAGE_STYLE } = {}) {
+  return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", " + style)}?width=${width}&height=${height}&seed=${seed}&nologo=true`;
 }
 
 /** Image URL for a location banner, or null if art is off / nothing available. */
@@ -349,9 +368,10 @@ export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
 }
 
 /** Build the endpoint URL for a floors-sanitized prompt at a kind's size, seeded stably. Pure. */
-export function imageURLFor(kind, safePrompt, seedKey = "") {
+export function imageURLFor(kind, safePrompt, seedKey = "", { aesthetic = null } = {}) {
   const size = IMG_SIZES[kind] || IMG_SIZES.moment;
-  return pollinationsURL(safePrompt, { ...size, seed: seedFrom(String(seedKey) || safePrompt) });
+  // CCODE-179: the wrapper follows the PEOPLE when we know them; the medium never moves.
+  return pollinationsURL(safePrompt, { ...size, seed: seedFrom(String(seedKey) || safePrompt), style: houseStyleFor(aesthetic) });
 }
 
 // ---------- SNG-035: persist-once (born-with-image) ----------
@@ -373,7 +393,7 @@ export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, see
   // The floors still run after, so a liked look can never carry something past the ceiling.
   const looked = withLikeness(raw, promptOpts.keeps || []);
   const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor, kind }); // THE FLOORS run AFTER every addition
-  const url = imageURLFor(kind, safe, seedKey || likenessSeed(promptOpts.keeps || []) || record.id || record.name || raw);
+  const url = imageURLFor(kind, safe, seedKey || likenessSeed(promptOpts.keeps || []) || record.id || record.name || raw, { aesthetic: promptOpts.aesthetic || null });
   record[key] = url;
   return url;
 }
@@ -512,7 +532,7 @@ export function regenerateImage(record, kind, { ratingLevel = 2, isMinor = null,
   // old votes back in would silently refuse the instruction.
   const looked = promptOverride ? raw : withLikeness(raw, promptOpts.keeps || []);
   const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor, kind });
-  return { url: imageURLFor(kind, safe, nextKey), seedKey: nextKey, prompt: safe };
+  return { url: imageURLFor(kind, safe, nextKey, { aesthetic: promptOpts.aesthetic || null }), seedKey: nextKey, prompt: safe };
 }
 
 /** SNG-401 §2: may this image be REBUILT (re-described), or only re-rolled? Aevi's rule — "an authored

@@ -14321,6 +14321,46 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-179: the house style follows the PEOPLE ----
+// Erik: "I like to keep the house style but make sure that house style is variable based on the tradition
+// they're from." The old constant locked a PALETTE — "muted earth tones with teal and gold accents" — onto
+// every image in the game, competing with 26 authored tradition palettes for the same slot. An Umbral
+// rendered in teal and gold is not an Umbral. The tradition file's own usage note asks for exactly this.
+{
+  const A179 = await import("../engine/art.js");
+  const tr179 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/tradition_visual_aesthetics.json"), "utf8")).traditions;
+  const ids = Object.keys(tr179);
+  const styles = ids.map(t => A179.houseStyleFor(tr179[t]));
+
+  check(`CCODE179: all ${ids.length} traditions give ${ids.length} distinct style wrappers`, ids.length >= 26 && new Set(styles).size === ids.length);
+  // ⚠️ THE MEDIUM NEVER MOVES — that is what keeps it one game rather than 26 unrelated galleries.
+  check("CCODE179: every one keeps the constant medium", styles.every(v => v.startsWith(A179.IMAGE_STYLE_MEDIUM)));
+  check("CCODE179: …and the house palette is GONE from a tradition wrapper (it was the thing competing)",
+    styles.every(v => !v.includes(A179.IMAGE_STYLE_HOUSE)));
+  check("CCODE179: a subject with no tradition still gets the house look",
+    A179.houseStyleFor(null) === `${A179.IMAGE_STYLE_MEDIUM}, ${A179.IMAGE_STYLE_HOUSE}` && A179.houseStyleFor({}) === A179.houseStyleFor(null));
+  check("CCODE179: the wrapper carries palette, light and mood — the three that make a people look like themselves", (() => {
+    const w = A179.houseStyleFor(tr179.umbral);
+    return /near-black, cold indigo/.test(w) && /no light source/.test(w) && /soft-footed/.test(w);
+  })());
+  check("CCODE179: each borrowed clause is clamped — an aesthetic is prose, the wrapper is a wrapper", styles.every(v => v.length < 260));
+  check("CCODE179: the URL builder takes the aesthetic and BOTH mint paths hand it over", (() => {
+    const src = readFileSync(join(root, "engine/art.js"), "utf8");
+    return /export function imageURLFor\(kind, safePrompt, seedKey = "", \{ aesthetic = null \} = \{\}\)/.test(src)
+      && (src.match(/\{ aesthetic: promptOpts\.aesthetic \|\| null \}/g) || []).length === 2;
+  })());
+  check("CCODE179: two traditions genuinely produce different URLs for the same prompt", (() => {
+    const was = localStorage.getItem("singularity.artMode"); A179.setArtMode("generate");
+    const a = A179.imageURLFor("npc", "a person", "seed", { aesthetic: tr179.umbral });
+    const b = A179.imageURLFor("npc", "a person", "seed", { aesthetic: tr179.blazeborn });
+    if (was) localStorage.setItem("singularity.artMode", was);
+    return a !== b && decodeURIComponent(a).includes("cold indigo") && decodeURIComponent(b).includes("white-gold");
+  })());
+  const src179 = readFileSync(join(root, "app.js"), "utf8");
+  check("CCODE179: a re-roll keeps the people's look (the regen path resolves the aesthetic too)",
+    /promptOpts: rec => \(\{ aesthetic: npcAesthetic\(rec\) \}\)/.test(src179));
+}
+
 // ---- CCODE-175/176/177: Erik's rulings on what gets injected, and where a look actually comes from ----
 {
   const A176 = await import("../engine/art.js");
@@ -14434,9 +14474,11 @@ await (async () => {
 
   // the panel showed a prompt that was not the whole prompt
   const src174 = readFileSync(join(root, "app.js"), "utf8");
-  check("CCODE-174: the details panel shows the house style too — it is part of every prompt and was invisible",
-    /…and the house style, added to every image/.test(src174) && /esc\(IMAGE_STYLE\)/.test(src174));
-  check("CCODE-174: the style is a named export rather than a hidden constant", typeof STY174 === "string" && STY174.length > 20);
+  // ⚠️ UPDATED BY CCODE-179: the style is no longer one constant, so the panel shows the one THIS picture
+  // used. The property — the appended style is visible rather than hidden — is unchanged and stronger.
+  check("CCODE-174/179: the details panel shows the style wrapper this picture actually used",
+    /…and the style wrapper/.test(src174) && /esc\(houseStyleFor\(aes\)\)/.test(src174));
+  check("CCODE-174/179: the style is a named export rather than a hidden constant", typeof STY174 === "string" && STY174.length > 20);
   if (was174) localStorage.setItem("singularity.artMode", was174);
 }
 

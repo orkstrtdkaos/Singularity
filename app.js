@@ -34,7 +34,7 @@ import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive }
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, IMAGE_STYLE, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.140";
+const APP_VERSION = "1.9.141";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -849,7 +849,7 @@ const REGEN_KINDS = {
     find: id => figureArtRecord(rosterFigureOf(id), { dead: /^whois-death-/.test(String(id)) }),
     current: id => character?.figureImages?.[id] || null,
     keep: (id, url) => { character.figureImages = character.figureImages || {}; character.figureImages[id] = url; return true; },
-    promptOpts: rec => ({ aesthetic: rec?.tradition ? (CONTENT.traditionVisualAesthetics?.[rec.tradition] || null) : null })
+    promptOpts: rec => ({ aesthetic: npcAesthetic(rec) })
   },
   location: {
     needsId: true,
@@ -1170,8 +1170,14 @@ function openLightbox(items, start = 0) {
           ${/* CCODE-174: the house style is appended when the URL is built, so it never appeared in the
                 stored prompt. Shown apart rather than merged, because one half is this picture's own
                 description and the other is a constant on every image in the game. */""}
-          ${prompt ? `<div class="lb-prompt-h" style="margin-top:6px">…and the house style, added to every image</div>
-          <div class="lb-prompt dim">${esc(IMAGE_STYLE)}</div>` : ""}`;
+          ${/* CCODE-179: the style is no longer one constant — it follows the people. Show the one THIS
+                picture used, or the panel would be telling a comfortable lie about a variable thing. */""}
+          ${prompt ? (() => {
+            const aes = it.regen?.kind === "figure" ? npcAesthetic(rosterFigureOf(it.regen.subjectId))
+              : it.regen?.kind === "npc" ? npcAesthetic(character.npcRegistry?.[it.regen.subjectId]) : null;
+            return `<div class="lb-prompt-h" style="margin-top:6px">…and the style wrapper${aes?.name ? ` for ${esc(aes.name)}` : ""}</div>
+              <div class="lb-prompt dim">${esc(houseStyleFor(aes))}</div>`;
+          })() : ""}`;
       })()}</div>` : ""}
       ${list.length > 1 ? `<button class="lightbox-nav prev" data-lbprev>‹</button><button class="lightbox-nav next" data-lbnext>›</button>` : ""}
       <button class="lightbox-close" data-lbclose>✕</button>

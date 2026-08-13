@@ -11084,8 +11084,16 @@ await (async () => {
     delete ch.worldState.lastTickWorldDay;
     const stub = async ({ entities }) => ({ developments: entities.map(e => ({ entityId: e.id, note: "x", outcome: "progress" })) });
     const t0 = Date.now();
-    for (let d = 0; d < 730; d += 7)   // ⚠️ REAL DAYS — world time is wall-clock-derived, not clock.day
-      await wt.advanceGeneratedOffscreen({ character: ch, content: bloody, evolveFn: stub, rng, now: t0 + d * 24 * 3600000 });
+    // ⛔ SNG-431 §3: the news is COLLECTED as it is produced, not read off `ws.news` afterwards. That log is
+    // capped at 20 and keeps the LAST 20, so a fight early in a two-year run is evicted by ordinary chatter
+    // — and a gate reading the tail then passes VACUOUSLY over an empty list. Four of mine did exactly that
+    // before this line existed: `[].every(…)` is true, so "every fight names both figures" was green in a
+    // world with no fights in it.
+    const allNews = [];
+    for (let d = 0; d < 730; d += 7) {  // ⚠️ REAL DAYS — world time is wall-clock-derived, not clock.day
+      const out = await wt.advanceGeneratedOffscreen({ character: ch, content: bloody, evolveFn: stub, rng, now: t0 + d * 24 * 3600000 });
+      for (const n of (Array.isArray(out) ? out : (out?.news || []))) allNews.push(n);
+    }
     const minted = ch.worldState.mintedFigures || [];
     console.log(`      mint probe: ${minted.length} born, kinds: ${[...new Set(minted.map(m => m.originKind))].join(", ") || "(none)"}`);
 
@@ -11251,6 +11259,104 @@ await (async () => {
         wt.dirSign("+") === 1 && wt.dirSign("pro") === 1 && wt.dirSign("-") === -1 && wt.dirSign("con") === -1
         && wt.dirSign(-2) === -2 && wt.dirSign("banana") === 0 && wt.dirSign(NaN) === 0
         && wt.affinitiesOf({ arcAffinities: [{ arcId: "A", dir: "banana" }] }).length === 1);
+    }
+
+    // ── SNG-431 §3 — FIGHTS ARE CLICKABLE. "0 OF 20 NEWS ITEMS CARRY IDS." ──────────────────────────────
+    // ⛔ The measurement IS the gate, on the same live world. The death path was already correct and the
+    // `wounded`/`checked`/`stalemate` paths pushed BARE STRINGS — and every fight on Erik's screen is one of
+    // those three.
+    {
+      const stored = allNews.concat(ch.worldState.news || []);
+      const fights = stored.filter(n => n.kind === "clash" || n.kind === "death");
+      // ⚠️ EVERY GATE BELOW REQUIRES A FIGHT TO EXIST. `[].every(…)` is true, so without this the whole
+      // section reports green on a world where nothing ever fought — which is precisely the state the
+      // ticket is about.
+      const someFights = fights.length > 0;
+      const named = (id, bag) => bag?.[id]?.name || null;
+      const roster431 = wt.worldRoster(ch.worldState, bloody);
+      console.log(`      fights: ${fights.length}/${stored.length} news items` + (fights[0]
+        ? ` — e.g. at ${named(fights[0].locationId, C.locations) || "?"} with ${named(fights[0].abilityId, C.abilities) || "?"}` : ""));
+
+      check("431/3: a fight reaches the news AS a fight — a sentence and a tier is what 0-of-20 looked like",
+        someFights, `${stored.length} news items, none of them a clash or a death`);
+      check("431/3: every fight names BOTH figures, so the item can be opened back into the battle",
+        someFights && fights.every(n => (n.winnerId || n.killerId) && (n.loserId || n.victimId)),
+        `${fights.filter(n => !((n.winnerId || n.killerId) && (n.loserId || n.victimId))).length} carry no ids`);
+      // ⛔ WHERE AND WITH WHAT — the two fields that make the picture possible. `homeLocation` is on 70/70
+      // roster figures and every one resolves; 26 of the roster's 29 traditions have an ability pool.
+      check("431/3: …and WHERE it happened, resolving to a real place",
+        someFights && fights.every(n => n.locationId && C.locations?.[n.locationId]),
+        `${fights.filter(n => !n.locationId).length} with no place; ${fights.filter(n => n.locationId && !C.locations?.[n.locationId]).length} unresolvable`);
+      // ⚠️ A RATCHET AGAINST THE POOLS, NOT AN ABSOLUTE. Three of the roster's 29 traditions have NO
+      // abilities authored (harmonic_radiant, precursor_nanite_cold_noesis, valley_craft_administration), so
+      // their fights honestly record a place and no power. An invented ability id would be worse than an
+      // absent one — the prompt builder would draw a craft nobody in the world has. So the gate is: every
+      // fight whose winner's tradition HAS a pool records one from it, and the gap is REPORTED with a number.
+      const idx431 = wt.abilityIndexOf(bloody);
+      const couldName = fights.filter(n => {
+        const w = roster431.find(f => f.id === (n.winnerId || n.killerId));
+        return (idx431[w?.tradition || w?.legend?.tradition] || []).length > 0;
+      });
+      const missing431 = couldName.filter(n => !n.abilityId || !C.abilities?.[n.abilityId]);
+      const poolless = fights.length - couldName.length;
+      console.log(`      powers: ${couldName.length - missing431.length}/${couldName.length} named; ${poolless} fought by a tradition with no abilities authored`);
+      check("431/3: …and WITH WHAT — every fight whose winner HAS a craft pool records one from it",
+        someFights && missing431.length === 0,
+        `${missing431.length} droppable, ${poolless} genuinely pool-less`);
+      // ⛔ AND THE POWER IS THE WINNER'S OWN CRAFT. The resolver rolls its own winner while the arc-fight
+      // site FORCES the contest's winner and uses the roll only for severity — so a signature picked inside
+      // the resolver came from whoever the dice favoured. Measured before the fix: "The Hundred Hands bested
+      // The Thornmother … with Bark and Briar", a rootkin craft in a somatic fighter's hands.
+      const mismatched = fights.filter(n => {
+        const w = roster431.find(f => f.id === (n.winnerId || n.killerId));
+        const trad = w?.tradition || w?.legend?.tradition;
+        return trad && C.abilities?.[n.abilityId] && C.abilities[n.abilityId].tradition !== trad;
+      });
+      check("431/3: …and the power is the winner's OWN craft, not whoever the dice happened to favour",
+        someFights && mismatched.length === 0,
+        mismatched.slice(0, 2).map(n => `${n.winnerId} used ${C.abilities[n.abilityId]?.tradition}`).join(" | "));
+      // ⚠️ AND IT IS STABLE. A fight re-opened must be the SAME fight, or the picture changes every time.
+      check("431/3: the same fight names the same power every time — the news item is a handle, not a roll",
+        (() => { const idx = wt.abilityIndexOf(bloody);
+          const a = { id: "x", tradition: "somatic" }, b = { id: "y", tradition: "rootkin" };
+          return wt.signatureOf(a, b, idx) === wt.signatureOf(a, b, idx)
+            && wt.signatureOf(a, b, idx) !== wt.signatureOf(b, a, idx); })());
+      // ⛔ AND NO FIGHT ARRIVES AS "[object Object]" — the failure `clashNewsItem` exists to prevent, which
+      // was latent at the fourth site for every death and would have become every clash.
+      check("431/3: no fight line was flattened into '[object Object]' on its way to the news",
+        someFights && stored.every(n => !/\[object Object\]/.test(String(n.text || ""))));
+
+      // ⛔ THE CENSUS, NOT A SAMPLE. "A fight reaches the news" stayed GREEN when I mutated ONE of the three
+      // outcomes back to a bare string, because the other two still arrived structured and the count was
+      // still above zero. A gate on "at least one" cannot see three quarters of a feature go missing. So:
+      // ANY line that READS like a fight must BE one. The wording is the engine's own, from the four
+      // templates in `applyEpicClashOutcome`.
+      // ⚠️ AND IT IS PER-OUTCOME, NOT A WORD-MATCH ON PROSE. My first attempt matched "bested" in the text
+      // and could not tell a fight line from §2's "X was bested, and nobody has stood over Y" — a gate that
+      // reads sentences keeps colliding with every sentence written near it, and it failed to redden when I
+      // mutated one outcome back to a bare string. The four outcomes are DATA. Assert the data.
+      const seenOutcomes = new Set(fights.map(n => n.outcome || (n.kind === "death" ? "killed" : "?")));
+      const WANTED = ["killed", "wounded", "stopped", "stalemate"];
+      check("431/3: ALL FOUR outcomes arrive structured — wounded, checked and stalemate are the ones Erik sees",
+        someFights && WANTED.every(o => seenOutcomes.has(o)),
+        `saw ${JSON.stringify([...seenOutcomes])}, missing ${WANTED.filter(o => !seenOutcomes.has(o)).join(", ")}`);
+
+      // ⛔ AND THE STAMPER IS THE CHOKEPOINT. SNG-400 taught `stampNews` to carry the facts and TWO hand-
+      // rolled copies inside `advanceGeneratedOffscreen` were never switched over — they kept four fields and
+      // dropped every id, which is what Aevi actually measured. A UNIT check, because the stored log is
+      // capped at 20 and a gate reading its tail passes vacuously the day no fight survives the cap.
+      check("431/3: the one stamper carries a clash's facts — the four-field copy is what lost them",
+        (() => { const r = wt.stampNews({ text: "x", kind: "clash", outcome: "wounded", winnerId: "w", loserId: "l",
+                                          locationId: "loc", abilityId: "ab" }, { worldDay: 3 });
+          return r.kind === "clash" && r.outcome === "wounded" && r.winnerId === "w" && r.loserId === "l"
+            && r.locationId === "loc" && r.abilityId === "ab"; })());
+      {
+        const wsrc431 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+        const writes = (wsrc431.match(/ws\.news = \[\.\.\.ws\.news, \.\.\.stamped\]/g) || []).length;
+        const viaStamp = (wsrc431.match(/const stamped = news\.map\([^)]*=> stampNews\(/g) || []).length;
+        check("431/3: …and every writer of the news log goes through it — no second, thinner stamper",
+          writes > 0 && viaStamp === writes, `${writes} writers, ${viaStamp} of them via stampNews`);
+      }
     }
   }
 
@@ -14488,7 +14594,19 @@ await (async () => {
     && !/\[object Object\]/.test(String(clashNewsItem({ text: "fell", victimId: "v" }, {}).text)));
   const wtSrc400 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
   check("400 §1: the death is emitted WITH its ids at the source, not just in the propagated event", /news\.push\(\{ text: event\.text, kind: "death", victimId: loser\.id, killerId: winner\.id/.test(wtSrc400));
-  check("400 §1: every clash site emits through the one shaping", (wtSrc400.match(/news\.push\(clashNewsItem\(line,/g) || []).length === 3);
+  // ⛔ SNG-431 §3 — THE NUMBER IN THIS GATE ENCODED THE BUG. It asserted exactly 3 while its own sentence
+  // says EVERY site, and there are FOUR places that resolve a clash: the arc fight, the strike, the
+  // challenge, and the narrated stir. The fourth wrapped `{ text: line }` around the object — which is the
+  // "[object Object]" failure `clashNewsItem`'s own header warns about, latent there for every death.
+  // ⚠️ So it is a CENSUS now: as many shapings as there are outcomes to shape. A count that has to be
+  // hand-updated when a site is added is a count that will be left behind by the next one.
+  {
+    // …minus the declaration itself, which matches the same call shape.
+    const applies = (wtSrc400.match(/(?<!export function )applyEpicClashOutcome\(ws,/g) || []).length;
+    const shapings = (wtSrc400.match(/news\.push\(clashNewsItem\(line,/g) || []).length;
+    check("400 §1: every clash site emits through the one shaping",
+      applies === 4 && shapings === applies, `${applies} clash sites, ${shapings} shaped emissions`);
+  }
   check("400: a CHALLENGE carries no arcId — it is deliberately not part of an arc", /a challenge is NOT part of an arc[\s\S]{0,400}clashNewsItem\(line, \{ worldDay: currentWorldDay \}\)/.test(wtSrc400));
 
   // §3 THE BUILD — real figures from the shipped roster, not fixtures
@@ -14549,7 +14667,65 @@ await (async () => {
   // the reader — Aevi: "without ids there is nothing to click"
   const appSrc400 = readFileSync(join(root, "app.js"), "utf8");
   check("400 §3.2: a death news item is CLICKABLE and opens the battle", /data-battlenews=/.test(appSrc400) && /function battleImageFor/.test(appSrc400));
-  check("400 §3.2: …only when it is genuinely openable (a control that opens nothing is worse than prose)", /const canSee = \(n\) => n\?\.kind === "death" && n\.victimId && imagesEnabled\(\)/.test(appSrc400) && /\.some\(f => f\.id === n\.victimId\)/.test(appSrc400));
+  // ⚠️ SNG-431 §3 widened this to every clash, so the shape it asserts moved. The CLAIM is unchanged and is
+  // the load-bearing half: a control is offered only when the figures are on the roster and art is on —
+  // "a control that opens nothing is worse than a line of prose".
+  check("400 §3.2: …only when it is genuinely openable (a control that opens nothing is worse than prose)",
+    /const known = \(id\) => !!id && roster188\.some\(f => f\.id === id\);/.test(appSrc400)
+    && /const roster188 = worldRoster\(character\.worldState \|\| \{\}, CONTENT\) \|\| \[\];/.test(appSrc400)
+    && /const canSee = \(n\) => imagesEnabled\(\) && \(/.test(appSrc400)
+    && /\(n\?\.kind === "death" && known\(n\.victimId\)\)/.test(appSrc400));
+  // ⛔ SNG-431 §3: and the other three outcomes are the ones Erik actually sees.
+  check("431/3: a wounded, checked or stalemated fight is clickable too — not only a death",
+    /\(n\?\.kind === "clash" && known\(n\.winnerId\) && known\(n\.loserId\)\)\);/.test(appSrc400)
+    && /if \(!isDeath && !\(item\.kind === "clash" && outcome\)\) return null;/.test(appSrc400));
+  // ⚠️ THE OUTCOME IS IN THE CACHE KEY, or two fights between the same pair share one picture.
+  // ⛔ CCODE-188 (Erik): "there's no link to click on the 'bested' to see the scene where those two
+  // fought." The lines already in his log predate the ids and would never carry them, so a fix that only
+  // helps future fights leaves every fight he can currently see dead on the page. Recovered from the
+  // ENGINE'S OWN four templates — exact splits, whole-name `===` against the roster, null on any miss.
+  // ⚠️ AND IT ASSERTS THE USE, NOT THE PRESENCE. Written as "the CLASH_SHAPES constant exists" it stayed
+  // GREEN with the loop mutated to iterate an empty array — the table was still there and reached nothing.
+  // That is the same shape as a registered-but-unloaded content file, one layer down, and it is the fifth
+  // time this session a gate of mine has checked that something EXISTS rather than that it RUNS.
+  check("CCODE-188: a fight recorded before the ids existed is still openable",
+    /for \(const \[re, outcome\] of CLASH_SHAPES\) \{/.test(appSrc400)
+    && /const n = raw\?\.kind \? raw : \(recovered\(raw\) \|\| raw\);/.test(appSrc400)
+    && /const byName = \(nm\) => roster188\.find\(f => f\?\.name === nm\) \|\| null;/.test(appSrc400)
+    && /if \(!w \|\| !l\) return null;/.test(appSrc400));
+  // ⚠️ AND THE PATTERNS ARE THE ENGINE'S. A recovery regex that drifts from the template it parses is a
+  // silent no-op, so it is checked against what `applyEpicClashOutcome` actually writes, not against itself.
+  check("CCODE-188: …and the patterns still match what the engine writes, for all four outcomes", (() => {
+    const A = { id: "w", name: "The Unbound", tier: "heroic", homeLocation: "a" };
+    const B = { id: "l", name: "The Ender Who Forgot Why", tier: "heroic", homeLocation: "b" };
+    const SHAPES = [
+      [/^(.+?) bested (.+?) — .+ withdraws to lick their wounds\.$/, "wounded"],
+      [/^(.+?) checked (.+?) — for now, .+ designs are held\.$/, "stopped"],
+      [/^(.+?) and (.+?) met — and neither could break the other\.$/, "stalemate"],
+      [/^A legend has fallen: (.+?) has killed (.+?)\. The world is one great figure lighter/, "killed"],
+    ];
+    return ["wounded", "stopped", "stalemate", "killed"].every(k => {
+      const t = applyEpicClashOutcome({}, A, B, k, 10, {}).news[0].text;
+      return SHAPES.some(([re, o]) => { const m = re.exec(t); return m && o === k && m[1] === A.name && m[2] === B.name; });
+    });
+  })());
+  // ⛔ CCODE-188 (Erik, on the whois card for The Unbound): "this popup screen doesn't have a discard
+  // button." A world figure's portrait is minted from a seed and never enters the gallery, so it had
+  // neither a `meta` nor a second picture — the two things the old rule required.
+  check("CCODE-188: the ONLY picture of a subject can be discarded — the card re-mints from the seed",
+    /\|\| \(isGeneratedImage\(it\.url\) && !!it\.regen\?\.subjectId && !!spec\?\.keep\);/.test(appSrc400));
+
+  check("431/3: the same pair meeting twice gets two pictures — the outcome is part of the key",
+    /const key = battleKey\(\{ victimId: loserId, killerId: winnerId, abilityId: item\.abilityId, worldDay: item\.worldDay, outcome \}\);/.test(appSrc400));
+  // …and the picture is not a killing when nobody died.
+  check("431/3: the prompt frames what actually happened — a stalemate is not drawn as a death", (() => {
+    const bp = { name: "A", appearance: "lean", fightingStyle: "fast" }, cp = { name: "B", appearance: "vast", fightingStyle: "slow" };
+    const k = buildBattlePrompt({ victim: bp, killer: cp, place: "here", outcome: "killed" }).prompt;
+    const st = buildBattlePrompt({ victim: bp, killer: cp, place: "here", outcome: "stalemate" }).prompt;
+    return /standing over/.test(k) && /falling/.test(k) && /the moment of the ending/.test(k)
+      && /locked against/.test(st) && !/falling/.test(st) && !/the moment of the ending/.test(st)
+      && buildBattlePrompt({ victim: bp, killer: cp, outcome: "stalemate" }).kind === "battle";
+  })());
   check("400b: the cache key IS the image seed, so stability is a property of the build", /imageURLFor\(built\.kind, safe, key\)/.test(appSrc400));
   check("400b: the mint runs the FLOORS like every other image", /sanitizeImagePrompt\(built\.prompt, \{ ratingLevel: viewerRatingLevel\(\), isMinor: isMinorSubject\(victim\) \}\)/.test(appSrc400));
   check("400b: an unknown figure yields no picture rather than a guessed one", /if \(!victim\) return null;/.test(appSrc400));
@@ -14889,7 +15065,11 @@ await (async () => {
   // CCODE-177 — discarding
   const src177 = readFileSync(join(root, "app.js"), "utf8");
   check("CCODE-177: a picture can be discarded", /data-lbdiscard/.test(src177));
-  check("CCODE-177: …a KEPT picture too, not only an unsaved draw", /const canDiscard = isDraw172 \|\| \(!!it\.meta && list\.length > 1\);/.test(src177));
+  // ⚠️ CCODE-188 widened this — a subject's ONLY picture is discardable now too, because a figure portrait
+  // is minted from a seed and re-mints on the next open. The claim here is unchanged: a KEPT picture is
+  // discardable, not only an unsaved draw.
+  check("CCODE-177: …a KEPT picture too, not only an unsaved draw",
+    /const canDiscard = isDraw172 \|\| \(!!it\.meta && list\.length > 1\)/.test(src177));
   check("CCODE-177: an UNKEPT draw is simply dropped from the run — it was never written anywhere", /if \(isDraw172 && !keepsFor\(it\.regen\)\.some\(k => k\.url === it\.url\)\)/.test(src177));
   check("CCODE-177: a KEPT one is confirmed, and leaves the gallery", /deleteGalleryImage\(character, it\.url\)/.test(src177) && /Delete this picture\?/.test(src177));
   check("CCODE-177: ⛔ and its VOTE is withdrawn with it — a deleted picture must stop steering what they look like",

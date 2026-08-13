@@ -106,11 +106,23 @@ function depthNote(depth) {
   return "an ending that reaches past the body, the dark itself opening behind them";
 }
 
+/** ⛔ SNG-431 §3 — WHAT THE FIGHT ENDED AS, IN THE PICTURE. The builder framed EVERY fight as a death
+ *  ("standing over" / "falling") because a death was the only clash that could be opened. Aevi's point is
+ *  that the other three are the ones Erik actually sees, and a stalemate drawn as a killing is a lie in the
+ *  one place the player is looking. Two words per outcome, in the same slots, so the composition below is
+ *  unchanged — power first, then the hand, then the one it fell on, then the ground. */
+const OUTCOME_FRAME = {
+  killed:    { hand: "standing over",  other: "falling" },
+  wounded:   { hand: "driving back",   other: "reeling, hurt, still on their feet" },
+  stopped:   { hand: "checking",       other: "held, giving no ground" },
+  stalemate: { hand: "locked against", other: "neither of them breaking" },
+};
+
 /** SNG-400b §3 — THE BUILD. One short image prompt, composed rather than joined.
  *  `{ victim, killer, ability, place, depth }`; killer null → the single-figure fallback (§4: "not every
  *  death is a killing", and the world has no illness, so the real fallback is a death with no named
  *  killer). Returns { prompt, kind } — kind is "battle" or "death" so the caller can size it. PURE. */
-export function buildBattlePrompt({ victim = {}, killer = null, ability = null, place = "", depth = 0 } = {}) {
+export function buildBattlePrompt({ victim = {}, killer = null, ability = null, place = "", depth = 0, outcome = "killed" } = {}) {
   const v = figureLook(victim);
   const where = clause(place, CAP.place);
   // §4 FALLBACK — one figure. An authored deathImagePrompt is a whole scene already; do not compose over it.
@@ -128,19 +140,29 @@ export function buildBattlePrompt({ victim = {}, killer = null, ability = null, 
   const hand = [k.look || k.name, motionSaidAlready ? "" : k.motion].filter(Boolean).join(", ");
   // ⛔ THE ORDER IS THE DESIGN: power first (it is the subject), then the hand that made it, then the one
   // it fell on, then the ground. Two figures in ONE relation — not two descriptions with "AGAINST" between.
+  const frame = OUTCOME_FRAME[outcome] || OUTCOME_FRAME.killed;
   const parts = [
     power,
-    `${hand}, standing over`,
-    `${v.look || v.name}, falling`,
+    `${hand}, ${frame.hand}`,
+    `${v.look || v.name}, ${frame.other}`,
     where ? `at ${where}` : "",
-    depthNote(depth)
+    // ⚠️ THE DEPTH NOTE IS ABOUT AN ENDING. Appending "the moment of the ending, still and unmistakable"
+    // to a fight nobody died in is the same category error as the frame it sits beside.
+    outcome === "killed" ? depthNote(depth) : ""
   ].filter(Boolean);
+  // ⚠️ `kind` IS THE FRAME, NOT THE OUTCOME. `art.js` sizes on it — battle is 1024×512 wide, death is
+  // 768×512 — so a new "clash" kind would silently fall to the default portrait crop, which is the exact
+  // failure the wide frame was added to fix ("a portrait crop of a fight shows one shoulder").
   return { kind: "battle", prompt: smartClamp(parts.join(", ").replace(/\s+/g, " "), CAP.whole) };
 }
 
 /** ⚠️ SNG-400b §3: "Cache on victimId|killerId|abilityId|worldDay — same fight, same picture, forever. A
  *  re-rolling battle quietly says it was a different fight." This IS that key, and it is also the image
  *  seed, so the stability is a property of the composition rather than of remembering to pass a seed. */
-export function battleKey({ victimId = null, killerId = null, abilityId = null, worldDay = null } = {}) {
-  return [victimId || "?", killerId || "-", abilityId || "-", worldDay ?? "?"].join("|");
+export function battleKey({ victimId = null, killerId = null, abilityId = null, worldDay = null, outcome = null } = {}) {
+  // ⚠️ SNG-431 §3 adds the OUTCOME. The same two figures meet more than once — checked in spring, killed
+  // in autumn — and without it both fights share one cached picture, so the second shows the first.
+  // Appended, not inserted: an existing key keeps its identity, so no shipped battle image is orphaned.
+  const base = [victimId || "?", killerId || "-", abilityId || "-", worldDay ?? "?"].join("|");
+  return (!outcome || outcome === "killed") ? base : `${base}|${outcome}`;
 }

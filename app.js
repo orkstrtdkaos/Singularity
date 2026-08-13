@@ -744,29 +744,53 @@ async function downloadImage(url, caption = "", kind = "image") {
  *  engine/battleprompt.js — and the cache key IS the seed, so the same fight is the same picture forever:
  *  "a re-rolling battle quietly says it was a different fight."
  *  Returns { url, prompt, key, kind } or null when there is nothing honest to draw. */
+/** One sentence for what happened, used by the gallery tile and the lightbox alike — two spellings of the
+ *  same caption is how a stack comes to hold two subjects (CCODE-187). */
+function battleCaption(victim, killer, outcome) {
+  const v = victim?.name || "someone", k = killer?.name || null;
+  if (!k) return `${v} — the end`;
+  if (outcome === "killed") return `${v} — killed by ${k}`;
+  if (outcome === "wounded") return `${k} bested ${v}`;
+  if (outcome === "stopped") return `${k} checked ${v}`;
+  if (outcome === "stalemate") return `${k} and ${v} — neither could break the other`;
+  return `${k} and ${v}`;
+}
+
 function battleImageFor(item) {
-  if (!item || item.kind !== "death" || !item.victimId || !imagesEnabled()) return null;
+  // ⛔ SNG-431 §3: A CLASH IS A FIGHT TOO. This refused anything that was not a death, which was correct
+  // when a death was the only news item carrying ids — and is the reason Aevi could write "every fight on
+  // Erik's screen" is one of the three that could not be opened. The loser stands where the victim did and
+  // the winner where the killer did; the OUTCOME is what changes the picture, and it is in the prompt now.
+  if (!item || !imagesEnabled()) return null;
+  const isDeath = item.kind === "death";
+  const outcome = isDeath ? "killed" : (item.outcome || null);
+  if (!isDeath && !(item.kind === "clash" && outcome)) return null;
+  const loserId = item.victimId || item.loserId || null;
+  const winnerId = item.killerId || item.winnerId || null;
+  if (!loserId) return null;
   const roster = worldRoster(character.worldState || {}, CONTENT) || [];
-  const victim = roster.find(f => f.id === item.victimId);
+  const victim = roster.find(f => f.id === loserId);
   if (!victim) return null;                                    // an unknown figure is not a guessable one
-  const killer = item.killerId ? roster.find(f => f.id === item.killerId) || null : null;
+  const killer = winnerId ? roster.find(f => f.id === winnerId) || null : null;
   const ability = item.abilityId ? fullCatalog()[item.abilityId] || null : null;
-  const key = battleKey({ victimId: item.victimId, killerId: item.killerId, abilityId: item.abilityId, worldDay: item.worldDay });
+  // ⚠️ THE OUTCOME IS IN THE KEY. Without it the same two figures meeting twice — checked in spring,
+  // killed in autumn — would share one cached picture, and the second fight would show the first.
+  const key = battleKey({ victimId: loserId, killerId: winnerId, abilityId: item.abilityId, worldDay: item.worldDay, outcome });
   character.battleImages = character.battleImages || {};
   const cached = character.battleImages[key];
   if (cached?.url) return { ...cached, key };
   // the place: an offscreen clash happens on an ARC, not at a location — the honest "where" is its region.
   const place = item.locationId ? (CONTENT.locations?.[item.locationId]?.name || "")
     : String(item.regionId || item.arcId || "").replace(/^arc_/, "").replace(/_/g, " ");
-  const depth = character.worldState?.epicStatus?.[item.victimId]?.deathRoad?.depth ?? 0;
-  const built = buildBattlePrompt({ victim, killer, ability, place, depth });
+  const depth = character.worldState?.epicStatus?.[loserId]?.deathRoad?.depth ?? 0;
+  const built = buildBattlePrompt({ victim, killer, ability, place, depth, outcome });
   const safe = sanitizeImagePrompt(built.prompt, { ratingLevel: viewerRatingLevel(), isMinor: isMinorSubject(victim) });
   const url = imageURLFor(built.kind, safe, key);              // §3: the cache key IS the seed
   const rec = { url, prompt: safe, kind: built.kind };
   character.battleImages[key] = rec;
   notePromptFor(url, safe);                                    // SNG-401: so it can be redrawn and re-described
   addGalleryImage(character, { kind: built.kind, prompt: safe, url, worldDay: item.worldDay,
-    caption: killer ? `${victim.name} — killed by ${killer.name}` : `${victim.name} — the end`,
+    caption: battleCaption(victim, killer, outcome),
     subjectKind: built.kind, subjectId: key });
   saveCharacter(character);
   return { ...rec, key };
@@ -1260,7 +1284,18 @@ function openLightbox(items, start = 0, { onClose = null } = {}) {
     // staying to compare the rest, and no way at all to get rid of one already kept. Both are the same
     // verb to a player, so they are one button that does the right thing for what it is looking at.
     const isDraw172 = !!it.isDraw;
-    const canDiscard = isDraw172 || (!!it.meta && list.length > 1);
+    // ⛔ CCODE-188 (Erik, on the whois card for The Unbound): "this popup screen doesn't have a discard
+    // button." Right, and the rule that hid it was too narrow. `!!it.meta && list.length > 1` means "it is a
+    // gallery tile AND there is another picture to fall back to" — but a world figure's portrait is minted
+    // from a stable seed and never enters the gallery, so it had neither. It was the ONE picture of that
+    // person, which the old rule read as "must not be deleted" and Erik reads as "the one I want gone".
+    //
+    // ⚠️ AND DELETING IT LOSES NOTHING, which is why the old caution does not apply here: the card re-mints
+    // from the seed the next time it opens. The discard clears the chosen image and withdraws the vote, so
+    // what comes back is a fresh draw rather than the face just rejected. GENERATED only — an authored
+    // picture is content, and deleting it would leave a hole nothing refills.
+    const canDiscard = isDraw172 || (!!it.meta && list.length > 1)
+      || (isGeneratedImage(it.url) && !!it.regen?.subjectId && !!spec?.keep);
     el.innerHTML = `<div class="lightbox-inner">
       <img src="${esc(it.url)}" alt="${esc(it.caption || "")}" data-lbimg>
       ${(() => {
@@ -12854,11 +12889,50 @@ function renderPlay(turn, opts = {}) {
     // item was a sentence and a tier — "there is nothing to click". It now carries who fell and to whom,
     // so it gets an affordance. ⚠️ Only when it is genuinely openable: a victim the roster knows and
     // generation on. A control that opens nothing is worse than a line of prose.
-    const canSee = (n) => n?.kind === "death" && n.victimId && imagesEnabled()
-      && (worldRoster(character.worldState || {}, CONTENT) || []).some(f => f.id === n.victimId);
-    const items = (list) => list.map(n => canSee(n)
-      ? `<div class="news-item news-death"><button class="news-open" data-battlenews="${attrJson({ kind: "death", victimId: n.victimId, killerId: n.killerId || null, abilityId: n.abilityId || null, locationId: n.locationId || null, regionId: n.regionId || null, arcId: n.arcId || null, worldDay: n.worldDay ?? null })}" title="${n.killerId ? "See the fight that ended them" : "See how it ended"}">◈ ${esc(n.text)} <span class="news-open-cue">${n.killerId ? "⚔ see the battle" : "☠ see the end"}</span></button></div>`
-      : `<div class="news-item">◈ ${esc(n.text)}</div>`).join("");
+    // ⛔ SNG-431 §3 — AND EVERY OTHER FIGHT TOO. Aevi: *"The death path is correct… the `wounded`, `checked`
+    // and `stalemate` paths push BARE STRINGS — and EVERY FIGHT ON ERIK'S SCREEN IS ONE OF THOSE THREE."*
+    // The engine now gives all four the same shape, so the affordance follows the shape rather than the one
+    // outcome that happened to have it. ⚠️ A stalemate is deliberately included: "neither could break the
+    // other" is a picture worth having, and it is the commonest thing two well-matched figures do.
+    const roster188 = worldRoster(character.worldState || {}, CONTENT) || [];
+    const known = (id) => !!id && roster188.some(f => f.id === id);
+    // ⛔ CCODE-188 (Erik): "there's no link to click on the 'bested' to see the scene where those two
+    // fought." The lines already in his log were written BEFORE the ids existed, so they carry none and
+    // never will — a fix that only helps future fights leaves every fight he can currently see dead on the
+    // page.
+    //
+    // ⚠️ RECOVERED FROM THE ENGINE'S OWN TEMPLATES, NOT BY FUZZY MATCHING. These four sentences are
+    // written by `applyEpicClashOutcome` and nothing else, so the split points are exact and the names
+    // between them are whole roster names compared with `===`. A miss returns null and the line stays prose;
+    // it never guesses at a person. Legacy only — a structured item is used as it stands.
+    const CLASH_SHAPES = [
+      [/^(.+?) bested (.+?) — .+ withdraws to lick their wounds\.$/, "wounded"],
+      [/^(.+?) checked (.+?) — for now, .+ designs are held\.$/, "stopped"],
+      [/^(.+?) and (.+?) met — and neither could break the other\.$/, "stalemate"],
+      [/^A legend has fallen: (.+?) has killed (.+?)\. The world is one great figure lighter/, "killed"],
+    ];
+    const byName = (nm) => roster188.find(f => f?.name === nm) || null;
+    const recovered = (n) => {
+      if (!n || n.kind || !n.text) return null;
+      for (const [re, outcome] of CLASH_SHAPES) {
+        const m = re.exec(String(n.text));
+        if (!m) continue;
+        const w = byName(m[1].trim()), l = byName(m[2].trim());
+        if (!w || !l) return null;                       // an unknown name is not a guessable one
+        return { ...n, kind: outcome === "killed" ? "death" : "clash", outcome,
+                 winnerId: w.id, loserId: l.id, killerId: w.id, victimId: l.id,
+                 locationId: l.homeLocation || l.legend?.homeLocation || w.homeLocation || null };
+      }
+      return null;
+    };
+    const canSee = (n) => imagesEnabled() && (
+      (n?.kind === "death" && known(n.victimId)) ||
+      (n?.kind === "clash" && known(n.winnerId) && known(n.loserId)));
+    const cue = (n) => n.kind === "death" ? (n.killerId ? "⚔ see the battle" : "☠ see the end")
+      : n.outcome === "stalemate" ? "⚔ see where they met" : "⚔ see the fight";
+    const items = (list) => list.map(raw => { const n = raw?.kind ? raw : (recovered(raw) || raw); return canSee(n)
+      ? `<div class="news-item news-${n.kind === "death" ? "death" : "clash"}"><button class="news-open" data-battlenews="${attrJson({ kind: n.kind, outcome: n.outcome || null, victimId: n.victimId || n.loserId || null, killerId: n.killerId || n.winnerId || null, winnerId: n.winnerId || n.killerId || null, loserId: n.loserId || n.victimId || null, abilityId: n.abilityId || null, locationId: n.locationId || null, regionId: n.regionId || null, arcId: n.arcId || null, worldDay: n.worldDay ?? null })}" title="${n.kind === "death" ? (n.killerId ? "See the fight that ended them" : "See how it ended") : "See this fight"}">◈ ${esc(n.text)} <span class="news-open-cue">${cue(n)}</span></button></div>`
+      : `<div class="news-item">◈ ${esc(n.text)}</div>`; }).join("");
     const body = populated.length > 1
       ? populated.map(s => `<div class="news-section"><div class="news-section-title">${esc(s.title)}</div>${items(bySection.get(s.id))}</div>`).join("")
       : items(opts.newsFlash);
@@ -13179,11 +13253,11 @@ function renderPlay(turn, opts = {}) {
     const img = battleImageFor(item);
     if (!img) { b.title = "There is no picture for this one — the figure is not on the roster."; return; }
     const roster = worldRoster(character.worldState || {}, CONTENT) || [];
-    const victim = roster.find(f => f.id === item.victimId);
-    const killer = item.killerId ? roster.find(f => f.id === item.killerId) : null;
+    const victim = roster.find(f => f.id === (item.victimId || item.loserId));
+    const killer = (item.killerId || item.winnerId) ? roster.find(f => f.id === (item.killerId || item.winnerId)) : null;
     openLightbox([{
       url: img.url, prompt: img.prompt,
-      caption: killer ? `${victim?.name || "someone"} — killed by ${killer.name}` : `${victim?.name || "someone"} — the end`,
+      caption: battleCaption(victim, killer, item.kind === "death" ? "killed" : item.outcome),
       regen: { kind: img.kind, subjectId: img.key, label: killer ? "this battle" : "this ending", prompt: img.prompt }
     }]);
   };

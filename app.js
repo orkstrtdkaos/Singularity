@@ -29,6 +29,10 @@ import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, merg
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
+// ⚠️ `composeImagePrompt` ONLY. I imported `COMPOSED_MAX` beside it and never called it — the
+// importedNeverCalled ratchet caught it on the next run, which is the same "built, shipped, unreachable"
+// family this session has been chasing all day, committed by me while fixing it.
+import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: code selects the parts, a model composes the line
 import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
@@ -93,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.149";
+const APP_VERSION = "1.9.150";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -756,7 +760,7 @@ function battleCaption(victim, killer, outcome) {
   return `${k} and ${v}`;
 }
 
-function battleImageFor(item) {
+async function battleImageFor(item) {
   // ⛔ SNG-431 §3: A CLASH IS A FIGHT TOO. This refused anything that was not a death, which was correct
   // when a death was the only news item carrying ids — and is the reason Aevi could write "every fight on
   // Erik's screen" is one of the three that could not be opened. The loser stands where the victim did and
@@ -784,7 +788,12 @@ function battleImageFor(item) {
     : String(item.regionId || item.arcId || "").replace(/^arc_/, "").replace(/_/g, " ");
   const depth = character.worldState?.epicStatus?.[loserId]?.deathRoad?.depth ?? 0;
   const built = buildBattlePrompt({ victim, killer, ability, place, depth, outcome });
-  const safe = sanitizeImagePrompt(built.prompt, { ratingLevel: viewerRatingLevel(), isMinor: isMinorSubject(victim) });
+  // ⛔ CCODE-190 — COMPOSE BEFORE THE FLOORS, NEVER AFTER. The floors append the ceiling tone and the house
+  // style; composing on top of them would let the model compress away the very clauses they exist to add.
+  // The builder still owns WHICH fields are in the picture; this only turns its list into a line.
+  character.promptCompositions = character.promptCompositions || {};
+  const composedOut = await composeImagePrompt(built.prompt, { cache: character.promptCompositions, kind: built.kind });
+  const safe = sanitizeImagePrompt(composedOut.prompt, { ratingLevel: viewerRatingLevel(), isMinor: isMinorSubject(victim) });
   const url = imageURLFor(built.kind, safe, key);              // §3: the cache key IS the seed
   const rec = { url, prompt: safe, kind: built.kind };
   character.battleImages[key] = rec;
@@ -1094,18 +1103,28 @@ function soloSubjectId(g) {
 /** SNG-401 §2/§3: draw it again. `describe` carries the REBUILD's new words; without it this is the
  *  re-roll — same description, new seed. Returns a NEW lightbox item; the caller appends it, and the
  *  picture the player already had is untouched and still one arrow away. */
-function regenLightboxItem(it, attempt, describe = null) {
+async function regenLightboxItem(it, attempt, describe = null) {
   const sub = regenSubject(it.regen);
   if (!sub) return null;
   const { spec, record } = sub;
   // prompt-only kinds (and a subject that has since gone) fall back to the prompt the tile carried
   const stored = it.regen.prompt || _regenPrompts.get(String(it.url)) || it.prompt || null;
   if (!record && !describe && !stored) return null;
+  // ⛔ CCODE-190: compose the WORDS before the floors and the seed. `promptOverride` is the door — a
+  // record-backed re-roll normally re-derives its prompt inside `regenerateImage`, so the composed line has
+  // to be handed in as the override or it would be rebuilt as a list again on the way past.
+  character.promptCompositions = character.promptCompositions || {};
+  const rawWords = describe || (record ? null : stored);
+  let words = rawWords;
+  if (rawWords) {
+    const c = await composeImagePrompt(rawWords, { cache: character.promptCompositions, kind: it.regen.kind });
+    words = c.prompt;
+  }
   const out = regenerateImage(record, it.regen.kind, {
     ratingLevel: viewerRatingLevel(),            // §4: the ceiling applies to a re-roll exactly as to a first mint
     seedKey: it.regen.seedKey || record?.imageSeedKey || it.regen.subjectId || null,
     promptOpts: { ...(spec.promptOpts ? spec.promptOpts(record) : {}), keeps: keepsFor(it.regen) },
-    promptOverride: describe || (record ? null : stored),
+    promptOverride: words,
     attempt
   });
   if (!out) return null;
@@ -1364,7 +1383,7 @@ function openLightbox(items, start = 0, { onClose = null } = {}) {
       ev.stopPropagation();
       regenBtn.disabled = true; regenBtn.textContent = "…drawing";
       try {
-        const drawn = regenLightboxItem(it, ++attempts);
+        const drawn = await regenLightboxItem(it, ++attempts);
         if (!drawn) throw new Error("nothing to draw from");
         // CCODE-172: inserted NEXT TO the picture it was drawn from, not at the end of the gallery — the
         // point of keeping the old one is being able to flick between them.
@@ -1381,13 +1400,13 @@ function openLightbox(items, start = 0, { onClose = null } = {}) {
     // §2 the REBUILD. New words, then the same append-don't-replace path — a rebuild is no more
     // destructive than a re-roll, and is equally discardable by arrowing back.
     const rebuildBtn = el.querySelector("[data-lbrebuild]");
-    if (rebuildBtn) rebuildBtn.onclick = (ev) => {
+    if (rebuildBtn) rebuildBtn.onclick = async (ev) => {
       ev.stopPropagation();
       const said = prompt(`Describe ${it.regen.label || "this"} as it should look.\n\n(This draws a new picture from your words. Nothing is replaced — it appears beside the one you have, and you choose.)`, "");
       if (said === null || !said.trim()) return;
       rebuildBtn.disabled = true; rebuildBtn.textContent = "…drawing";
       try {
-        const drawn = regenLightboxItem(it, ++attempts, said.trim());
+        const drawn = await regenLightboxItem(it, ++attempts, said.trim());
         if (!drawn) throw new Error("nothing to draw from");
         list.splice(i + 1, 0, drawn);
         i = i + 1;
@@ -13247,10 +13266,14 @@ function renderPlay(turn, opts = {}) {
   };
   // SNG-400 §3.2: click the death, see the battle. Mints once, then opens it in the lightbox with the
   // SNG-401 controls live — so a composition the build got wrong is the player's to re-describe.
-  for (const b of app.querySelectorAll("[data-battlenews]")) b.onclick = (e) => {
+  for (const b of app.querySelectorAll("[data-battlenews]")) b.onclick = async (e) => {
     e.stopPropagation();
     let item; try { item = JSON.parse(b.dataset.battlenews); } catch { return; }
-    const img = battleImageFor(item);
+    // ⚠️ CCODE-190: the compose call sits in front of an image call that already costs more, but it is not
+    // free — say so, or a click looks dead for a second. The label is restored either way.
+    const was = b.title; b.title = "Drawing…";
+    const img = await battleImageFor(item);
+    b.title = was;
     if (!img) { b.title = "There is no picture for this one — the figure is not on the roster."; return; }
     const roster = worldRoster(character.worldState || {}, CONTENT) || [];
     const victim = roster.find(f => f.id === (item.victimId || item.loserId));

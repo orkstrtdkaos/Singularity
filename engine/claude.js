@@ -22,11 +22,19 @@ const MODEL_MAP = {
   "intent-parse": "claude-haiku-4-5-20251001",
   "codex-adjudicate": "claude-sonnet-4-6",   // SNG-153: identity judgement — worth Sonnet, one batched call
   "chronicle-compress": "claude-haiku-4-5-20251001",
+  // CCODE-190 (Erik): "wire it. Do this for every image because i think it will be hugely valuable."
+  // ⛔ THE DETERMINISTIC BUILDER CANNOT COMPOSE. Measured on 269 real fights: median 14 comma clauses,
+  // 268 of 269 with eight or more, 248 repeating a word — "a list with a conjunction in it", the exact
+  // failure battleprompt.js was written to replace, after two rounds of tuning the clamps. Selecting the
+  // right fields is code's job; turning four long authored fields into one sentence is a model's.
+  // ⚠️ HAIKU, AND CHEAP ON PURPOSE: one call per subject EVER (the result is cached beside the picture),
+  // in front of an image call that already costs more. `effort` is not passed — it ERRORS on Haiku 4.5.
+  "image-prompt": "claude-haiku-4-5-20251001",
   "chronicle": "claude-sonnet-4-6",
   _default: "claude-sonnet-4-6"
 };
 
-const BUDGETS = { "gm-narrate": 8000, "gm-narrate-fast": 4000, "gm-narrate-rich": 12000, "gm-retell": 4000, "codex-adjudicate": 900, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "generate": 1500, "intent-parse": 1024, "chronicle-compress": 1024, "chronicle": 768, _default: 2048 };
+const BUDGETS = { "gm-narrate": 8000, "gm-narrate-fast": 4000, "gm-narrate-rich": 12000, "gm-retell": 4000, "codex-adjudicate": 900, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "generate": 1500, "intent-parse": 1024, "chronicle-compress": 1024, "chronicle": 768, "image-prompt": 300, _default: 2048 };
 
 // Minimum cacheable prefix, per model (Anthropic silently skips caching below this,
 // with no write premium). A breakpoint on a sub-min block is wasted — we fold small

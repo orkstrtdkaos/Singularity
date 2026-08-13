@@ -14769,7 +14769,9 @@ await (async () => {
       && buildBattlePrompt({ victim: bp, killer: cp, outcome: "stalemate" }).kind === "battle";
   })());
   check("400b: the cache key IS the image seed, so stability is a property of the build", /imageURLFor\(built\.kind, safe, key\)/.test(appSrc400));
-  check("400b: the mint runs the FLOORS like every other image", /sanitizeImagePrompt\(built\.prompt, \{ ratingLevel: viewerRatingLevel\(\), isMinor: isMinorSubject\(victim\) \}\)/.test(appSrc400));
+  // ⚠️ CCODE-190 moved what the floors are applied TO — the COMPOSED line, not the builder's raw list.
+  // The claim is unchanged and is the load-bearing half: the floors run on whatever reaches the model.
+  check("400b: the mint runs the FLOORS like every other image", /sanitizeImagePrompt\(composedOut\.prompt, \{ ratingLevel: viewerRatingLevel\(\), isMinor: isMinorSubject\(victim\) \}\)/.test(appSrc400));
   check("400b: an unknown figure yields no picture rather than a guessed one", /if \(!victim\) return null;/.test(appSrc400));
   // ⚠️ WINDOW WIDENED FOR CCODE-186, which gave `battle` a `current` and a fallback store — the entry grew
   // past 200 characters and this went red on a change that made it MORE capable, not less. A byte-window
@@ -14780,6 +14782,90 @@ await (async () => {
   // ---- CCODE-189: author-directed text was reaching the image model ------------------------------------
   // ⛔ Measured on a live world: 35 of 385 abilities and 8 of 70 appearances carry ⛔/⚠️ markers or SHOUTING,
   // and all of it went into the picture. A real prompt opened "The Borne Bargain — reposition, ⚠️ ABYSSAL
+  // ---- CCODE-190: code selects the parts, a model composes the line -----------------------------------
+  // ⛔ Erik, on the measured numbers: "wire it. Do this for every image because i think it will be hugely
+  // valuable." Across 269 real fights the deterministic builder produced a median of 14 comma clauses,
+  // 268 of 269 with eight or more, and 248 repeating a word — "a list with a conjunction in it", the exact
+  // failure battleprompt.js exists to replace, after two rounds of tuning its clamps.
+  // ⚠️ EVERY CHECK HERE INJECTS ITS OWN `call`. No test spends Erik's API key.
+  {
+    const IP = await import("../engine/imageprompt.js");
+    const LIST = "The Borne Bargain — reposition, sovereign abyssal, horned, dressed better than anyone "
+      + "expects, closes a bargain that hollows someone, sovereign, bargain-marks lighting as they take, "
+      + "locked against, investigator verist, nothing concealed, says the true thing no one wanted said, "
+      + "neither of them breaking, at The Unblinking Stone";
+    const ONE_LINE = "a horned figure in fine dress closing a bargain, bargain-marks lighting as they take, "
+      + "locked against a plain-faced investigator, neither breaking, at the Unblinking Stone";
+
+    let calls = 0;
+    const call = async () => { calls++; return ONE_LINE; };
+    const cache = {};
+    const first = await IP.composeImagePrompt(LIST, { cache, kind: "battle", call });
+    check("CCODE-190: a list of parts comes back as one line",
+      first.composed && first.prompt === ONE_LINE && calls === 1, JSON.stringify(first));
+
+    // ⛔ AEVI'S STABILITY RULE IS THE LOAD-BEARING ONE: "same fight, same picture, forever. A re-rolling
+    // battle quietly says it was a different fight." Determinism is a property of the CACHE, so the model
+    // is asked once, ever — non-determinism never reaches the player.
+    const second = await IP.composeImagePrompt(LIST, { cache, kind: "battle", call: async () => { calls++; return "SOMETHING ELSE ENTIRELY"; } });
+    check("CCODE-190: the same subject is composed ONCE, ever — the cache is what makes it stable",
+      second.prompt === ONE_LINE && second.composed && calls === 1, `calls=${calls} prompt=${second.prompt}`);
+
+    // ⛔ AND IT NEVER BLOCKS A PICTURE. No key, offline, refused, rate-limited — the deterministic prompt
+    // is what comes back, unchanged. This is the project's own law applied to a call in front of an image.
+    // ⚠️ WRAPPED, BECAUSE A GATE THAT CRASHES IS NOT A GATE THAT FAILS. With the fallback mutated out,
+    // `composeImagePrompt` rejects, the rejection escapes this block, and the whole SUITE dies mid-file —
+    // taking the twelve checks below it with it. The run then looks like a crash rather than a red line,
+    // and a harness reading stdout's tail reports it as a pass. Turn the throw into the failure it is.
+    let boom;
+    try { boom = await IP.composeImagePrompt(LIST, { cache: {}, kind: "battle", call: async () => { throw new Error("NO_API_KEY"); } }); }
+    catch (e) { boom = { prompt: `THREW: ${e?.message}`, composed: null }; }
+    check("CCODE-190: a failed or keyless compose returns the builder's own prompt, unchanged",
+      boom.prompt === LIST && boom.composed === false, boom.prompt.slice(0, 60));
+
+    // ⚠️ A REFUSAL IS NOT A PROMPT — returning one puts "I can't help with that" into an image generator.
+    for (const bad of ["I can't help with that.", "Sorry, I cannot create that image.", "", "```", "  "]) {
+      const r = await IP.composeImagePrompt(LIST, { cache: {}, kind: "battle", call: async () => bad });
+      check(`CCODE-190: a refusal or empty reply is refused, not drawn — ${JSON.stringify(bad.slice(0, 22))}`,
+        r.prompt === LIST && r.composed === false, r.prompt.slice(0, 60));
+    }
+    // …and the wrapper a model adds anyway is stripped rather than trusted.
+    const wrapped = await IP.composeImagePrompt(LIST, { cache: {}, kind: "battle", call: async () => `Here's the prompt:\n"${ONE_LINE}"` });
+    check("CCODE-190: 'Here's the prompt:' and its quotes are stripped rather than drawn",
+      wrapped.composed && wrapped.prompt === ONE_LINE, wrapped.prompt);
+
+    // ⚠️ ASSERTED BEHAVIOURALLY, not against an imported constant — an exported constant that is only ever
+    // READ is indistinguishable from a dead export to the importedNeverCalled ratchet. 240 is the module's cap.
+    const longOut = (await IP.composeImagePrompt(LIST, { cache: {}, kind: "b", call: async () => "x, ".repeat(400) })).prompt;
+    check("CCODE-190: a composed line respects the cap the builders could not hold",
+      longOut.length <= 240 && longOut.length > 0, `${longOut.length} chars`);
+
+    // ⛔ A SHORT PROMPT IS NOT WORTH A CALL. Composing one adds drift and spends a request for nothing.
+    let cheap = 0;
+    const short = await IP.composeImagePrompt("a lean scarred woman on a wet stone bridge at dusk",
+      { cache: {}, kind: "npc", call: async () => { cheap++; return ONE_LINE; } });
+    check("CCODE-190: an already-short prompt is left alone — no call, no drift",
+      cheap === 0 && short.composed === false);
+
+    // ⛔ COMPOSE BEFORE THE FLOORS, NEVER AFTER — composing on top of them would let the model compress
+    // away the ceiling tone and house style they exist to add.
+    const src190 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-190: the composed line is what the floors are applied TO, not the other way round",
+      /const composedOut = await composeImagePrompt\(built\.prompt, \{ cache: character\.promptCompositions, kind: built\.kind \}\);\s*\n\s*const safe = sanitizeImagePrompt\(composedOut\.prompt,/.test(src190));
+    // …and a record-backed re-roll hands the composed words in as the override, or `regenerateImage`
+    // rebuilds the list from the record on the way past and the composition is silently discarded.
+    check("CCODE-190: a re-roll passes the composed words through, rather than re-deriving the list",
+      /const c = await composeImagePrompt\(rawWords, \{ cache: character\.promptCompositions, kind: it\.regen\.kind \}\);/.test(src190)
+      && /promptOverride: words,/.test(src190));
+    // \u26a0\uFE0F Haiku 4.5 rejects `effort` and takes `budget_tokens`, not adaptive thinking — neither belongs on a
+    // compression call, and passing either would 400 or be ignored.
+    const csrc190 = readFileSync(join(root, "engine/claude.js"), "utf8");
+    check("CCODE-190: the composer is routed to Haiku, with no effort or thinking config",
+      /"image-prompt": "claude-haiku-4-5-20251001"/.test(csrc190)
+      && !/effort/.test(readFileSync(join(root, "engine/imageprompt.js"), "utf8").replace(/\/\/.*|\/\*[\s\S]*?\*\//g, "")));
+  }
+
+
   // FLIGHT, AND YOU DO NOT DO IT, sovereign abyssal, HORNED…" — the first clause is a note from one author
   // to the next. Same class as the injection Erik caught before, arriving from the other direction:
   // authored INTO the content rather than appended by the engine.

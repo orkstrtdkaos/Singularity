@@ -1,0 +1,40 @@
+{
+ "_note": "⛔ SNG-433. THE CLASH NEWS TEMPLATES, RE-AUTHORED. Erik: 'Is it coherent? Interesting? Obvious why it's news?' — no, no and no. The old templates were mine and produced:\n   'The Choirmaster Who Would Not Return — The Choirmaster Who Would Not Return withdraws to lick their wounds.' ⛔ THE FULL NAME TWICE IN ONE SENTENCE, because the template was `${winner} bested ${loser} — ${loser} withdraws`.\n   'Overseer Grael of the Edge District a daughter who thinks he is a clerk' ⛔ NOT A SENTENCE — a personalVerbs fragment in a slot expecting a clause.",
+ "_shortName": "⛔ SHORT FORM ON SECOND MENTION. A figure's name is 'Neth, Who Has Buried More Than She Has Known'. Say that ONCE. After that: the part before the comma if there is one ('Neth'), else the last two words ('the Wild Half' → no; 'The Hollow King'). ⚠️ THE RULE: first mention full, every later mention short. That alone removes the stutter.",
+ "_whyItIsNews": "⛔ THE FIELD THAT MAKES A FIGHT NEWS IS `rivals`, AUTHORED ON 58 OF 66 FIGURES AND READ BY NOTHING SINCE SNG-208. 23 pairs are MUTUAL. ⚠️ A fight between rivals is not the same event as a fight between strangers, and the news must not report them in the same sentence.\n   RIVALS      → name the rivalry. This is the fight people were waiting for.\n   MUTUAL      → name it harder. Both of them have been waiting.\n   STRANGERS   → say so. 'had not met before' is itself interesting.",
+ "_whatChanged": "⛔ 'WITHDRAWS TO LICK THEIR WOUNDS' READ THE SAME WHETHER THE LOSER WAS OUT FOR EIGHT DAYS OR HAD LOST A WAR. Every line must now carry the CONSEQUENCE, and the four outcomes are four different sizes of event.",
+ "templates": {
+  "killed": {
+   "rival": "{W} killed {L} at {place}. They had been circling each other for years; {w} did not gloat, and did not stay.",
+   "mutual": "{W} killed {L} at {place} — the ending both of them had been walking toward. {w} left the field alone.",
+   "stranger": "{W} killed {L} at {place}. They had never met. {l} is not coming back.",
+   "_power": "{W} killed {L} at {place} — {power}. {l} is not coming back."
+  },
+  "wounded": {
+   "rival": "{W} broke {L} at {place}, and it was personal. {l} is out of the reckoning while the wound holds.",
+   "mutual": "{W} and {L} finally met at {place}. {w} walked away from it; {l} did not, and will not be seen for a season.",
+   "stranger": "{W} broke {L} at {place} — a stranger, and now an enemy. {l} is out of the reckoning while the wound holds.",
+   "_power": "{W} broke {L} at {place} with {power}. {l} is out of the reckoning while the wound holds."
+  },
+  "checked": {
+   "rival": "{W} held {L} at {place}. Neither will call it a defeat, and both know what it was. {l}'s design is stalled, not stopped.",
+   "mutual": "{W} and {L} met at {place} and nothing was settled — which suits {w} and does not suit {l}.",
+   "stranger": "{W} turned {L} back at {place}. {l} learned something, which is worse for everyone else.",
+   "_power": "{W} held {L} at {place} — {power} — and {l}'s design is stalled, not stopped."
+  },
+  "stalemate": {
+   "rival": "{W} and {L} met at {place}. Neither could break the other, and neither has ever been able to.",
+   "mutual": "{W} and {L} met at {place} and stopped, both standing. ⛔ THE THIRD TIME. Nobody is betting on it any more.",
+   "stranger": "{W} and {L} met at {place} and neither could break the other. They will both be thinking about it.",
+   "_power": "{W} and {L} met at {place}; {power} was not enough, and neither was anything {l} had."
+  }
+ },
+ "_placeholders": "{W} full winner name (first mention) · {w} short winner · {L} full loser · {l} short loser · {place} location DISPLAY NAME, never an id · {power} the ability's short description.\n⚠️ IF `place` IS NULL, DROP ' at {place}' RATHER THAN PRINTING 'at null'. If `power` is null use the non-`_power` variant. ⛔ NEVER PRINT A RAW ID — that is the 'the the_ceaseless' fault again.",
+ "_pick": "⛔ CHOOSE BY RELATIONSHIP FIRST, THEN POWER. If the two are mutual rivals use `mutual`; else if either lists the other use `rival`; else `stranger`. ⚠️ Use `_power` in place of the chosen variant roughly one time in three when an abilityId exists — the power should feel like a detail the teller happened to know, not a stat line on every entry.",
+ "fragments": {
+  "_note": "⛔ THE VERBLESS LINES. 'Sister Alder, the Ward That Does Not Break learning a faster road' and 'Overseer Grael a daughter who thinks he is a clerk' are a NAME concatenated to a personalVerb fragment. ⚠️ THE FRAGMENTS ARE FINE — the slot needed a clause and got a phrase.",
+  "offscreen": "{W} was seen {frag}.",
+  "offscreenAlt": "Word from {place}: {W}, {frag}.",
+  "_example": "'Sister Alder was seen learning a faster road.' · 'Word from the Heights: Overseer Grael, a daughter who thinks he is a clerk.'"
+ }
+}

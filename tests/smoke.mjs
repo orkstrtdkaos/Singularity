@@ -614,6 +614,91 @@ applyNpcUpdates(town, [{ op: "meet", npcId: "davan_channel_worker", name: "davan
 check("fuzzy match reuses the same human", Object.keys(town.npcRegistry).length === 1 && town.npcRegistry.davan.name === "Davan");
 applyNpcUpdates(town, [{ op: "update", npcId: "davan-channel-worker", note: "helped him clear the channel gate" }], { day: 3 });
 check("updates under variant ids land on the one person", town.npcRegistry.davan.history.length === 1);
+// --- SNG-431 §1: the GM-narration path is one of the three that mints a person, and it wrote whatever the
+// model put in the field. All three inputs below are VERBATIM from Erik's live saves.
+{
+  const N = await import("../engine/names.js");
+  const gm = { npcRegistry: {} };
+  const cases = [
+    { npcId: "cookhouse-boy", name: "Boy (name unknown)", role: "kitchen boy" },
+    { npcId: "third-farmer", name: "Unknown farmer", role: "farmer" },
+    { npcId: "east-bank-stranger", name: "Unknown (east bank traveler)", role: "traveler" },
+  ];
+  for (const c of cases) applyNpcUpdates(gm, [{ op: "meet", ...c }], { day: 1 });
+  const written = Object.values(gm.npcRegistry);
+  check("431/1: the GM path cannot write a DISCLAIMER into a name field",
+    written.length === 3 && written.every(n => !N.PLACEHOLDER_NAME.test(n.name || "")),
+    `wrote: ${written.map(n => JSON.stringify(n.name)).join(", ")}`);
+  // ⚠️ AND IT DOES NOT INVENT ONE EITHER. Aevi: "an unnamed person is legitimate — but then the field should
+  // be EMPTY and the UI renders the role." Inventing a name for someone the fiction deliberately left
+  // anonymous is worse than the disclaimer, so the descriptive words stay as a LABEL and the flag says so.
+  check("431/1: …and it does not invent one — the label stays, and `nameUnknown` says the name is unknown",
+    written.every(n => n.nameUnknown === true) && gm.npcRegistry["cookhouse-boy"].name === "Boy",
+    `${written.map(n => `${n.name}/${n.nameUnknown}`).join(", ")}`);
+  // ⛔ `nameUnknown` HAS BEEN READ BY `nameOf` SINCE SNG-111 AND WRITTEN BY NOTHING — a reader with no
+  // writer, the fourth door. The gate is that the reader now actually sees it.
+  check("431/1: `nameUnknown` reaches its reader — nameOf declines a label that is not a name",
+    N.nameOf("npc", "cookhouse-boy", { npcs: { "cookhouse-boy": { name: "Cookhouse Boy" } } }, { character: gm }) === "Cookhouse Boy");
+  // …and the moment the player learns it, the label goes and the name resolves.
+  const { setNpcName } = await import("../engine/npcs.js");
+  setNpcName(gm, "cookhouse-boy", "Tam", 4);
+  check("431/1: learning the name clears the flag, so the person is called by it from then on",
+    gm.npcRegistry["cookhouse-boy"].name === "Tam" && !gm.npcRegistry["cookhouse-boy"].nameUnknown
+    && N.nameOf("npc", "cookhouse-boy", { npcs: { "cookhouse-boy": { name: "Cookhouse Boy" } } }, { character: gm }) === "Tam");
+
+  // ── SNG-431 §1: the REPAIR, on the shape of Erik's actual saves. ────────────────────────────────────
+  const { repairUnnamedPeople } = await import("../engine/npcs.js");
+  const POOLS = JSON.parse(readFileSync(join(root, "content/packs/core/rules/minted_names.json"), "utf8"));
+  const CO = { locations: { the_ceaseless: { id: "the_ceaseless", name: "The Ceaseless" } }, legends: { roster: [] } };
+  const save = (figName, origin) => ({ npcRegistry: { "third-farmer": { id: "third-farmer", name: "Unknown farmer", role: "farmer", history: [] } },
+    worldState: { mintedFigures: [{ id: "minted-1", name: figName, provisional: true, tradition: "wright",
+      originKind: "casualty_survivor", wants: origin, origin }] } });
+
+  const hers = save("the one who outlived Cinder Vael, the Wright Who Would Not Stop", "of the the_ceaseless; watched them called out");
+  const fixed = repairUnnamedPeople(hers, POOLS, CO);
+  check("431/1: the repair applies Aevi's authored names to a save written before the namer existed",
+    hers.npcRegistry["third-farmer"].name === "Hessa Orm"
+    && hers.worldState.mintedFigures[0].name === "Sera Voight the Ashvow",
+    `got ${JSON.stringify(fixed)}`);
+  // ⛔ AND THE GATE IS ON WHAT ACTUALLY PROTECTS THE NAME. My first version asserted "a second call returns
+  // nothing", which stayed GREEN with the version guard deleted — the walk is idempotent over its own
+  // output, so re-running reports nothing either way. It stayed green a SECOND time when I renamed the
+  // figure, because the `was ===` identity check also declines a renamed one. The version guard turns out
+  // to be a cost guard, not a correctness guard; what is load-bearing is identity and `nameRevealed`. So the
+  // gate runs the repair over a world that play has moved on from, and checks nothing of the player's moved.
+  hers.worldState.mintedFigures[0].name = "Sera of the Long Road";
+  hers.npcRegistry["third-farmer"].name = "Hess";     // learned in play; `nameRevealed` was set by the repair
+  hers.nameRepairVersion = 0;                          // and the cost guard is not what is being tested
+  const second = repairUnnamedPeople(hers, POOLS, CO);
+  check("431/1: …and it never fires over what play has since changed — identity and `nameRevealed` hold it",
+    second.length === 0
+    && hers.worldState.mintedFigures[0].name === "Sera of the Long Road"
+    && hers.npcRegistry["third-farmer"].name === "Hess",
+    `figure=${JSON.stringify(hers.worldState.mintedFigures[0].name)} npc=${JSON.stringify(hers.npcRegistry["third-farmer"].name)}`);
+
+  // ⛔ `minted-1` IS NOT A UNIQUE ID — it is the first figure minted in EVERY world. Matched by id alone,
+  // Aevi's record (written about the figure who outlived Cinder Vael) landed on a DIFFERENT player's figure
+  // who outlived Saehara and rewrote their history with someone else's. Caught by printing the repair's
+  // real output over the five live saves before shipping it; `was` is the identity check.
+  const notHers = save("the one who outlived Saehara the Undefeated", "of the the_great_coliseum; survived the fighting");
+  repairUnnamedPeople(notHers, POOLS, CO);
+  const other = notHers.worldState.mintedFigures[0];
+  check("431/1: a figure who merely SHARES the id `minted-1` keeps their own history and is named from the pools",
+    other.name !== "Sera Voight the Ashvow" && !other.provisional && /Cinder Vael/.test(other.origin) === false
+    && other.epithet === "the one who outlived Saehara the Undefeated",
+    `name=${JSON.stringify(other.name)} origin=${JSON.stringify(other.origin)}`);
+
+  // ⛔ AND THE STORED PROSE STOPS SHOWING A PLAYER AN ID. Every legacy origin reads "of the the_ceaseless".
+  // ⛔ AND THE STORED PROSE STOPS SHOWING A PLAYER AN ID — for the figure the authored line replaces AND for
+  // the one it does not, whose origin is repaired in place. An id this build no longer ships is humanised
+  // rather than left raw: "the_great_coliseum" → "the Great Coliseum", not silently dropped.
+  const bothOrigins = [hers.worldState.mintedFigures[0].origin, other.origin];
+  check("431/1b: the repair takes the raw ids and the double article out of prose already on screen",
+    bothOrigins.every(o => !/\b[a-z][a-z0-9]*_[a-z0-9]+\b/.test(o) && !/\bthe the\b/i.test(o))
+    && /of the Great Coliseum/.test(other.origin),
+    `origins now: ${JSON.stringify(bothOrigins)}`);
+}
+
 // 3) duplicate healing + name prettifying for existing saves
 const dirty = { npcRegistry: {
   "davan": { id: "davan", name: "Davan", role: "channel worker", relationship: 2, history: ["[d1] met"], knownFacts: [], skillsObserved: [], status: "active" },
@@ -11005,16 +11090,85 @@ await (async () => {
     check("306b: every figure the world mints from a death has a homeland — nobody comes from nowhere",
       minted.filter(m => m.originKind === "casualty_survivor" || m.originKind === "faction_leaderless")
         .every(m => !!m.homeland));
+    // ⚠️ `m.origin`, NOT `m.wants`. These read `wants` because `wants` HELD the origin — which is the §1b
+    // fault, not the contract. The field they were always about is `origin`, populated all along. ⛔ AND THE
+    // ARTICLE IS THE PLACE'S, NOT THE TEMPLATE'S: "of the Ceaseless" but "of Millbrook", so a gate that
+    // insists on "of the …" is asserting the bug it was written beside.
     check("306b: …and the origin line SAYS where, so a narrator can tell it without inventing one",
-      minted.some(m => /^of the .+; (survived|was standing|was with|watched)/.test(m.wants || ""))
-      && minted.some(m => /^sent by the .+ to take up/.test(m.wants || "")));
+      minted.some(m => /^of .+; (survived|was standing|was with|watched)/.test(m.origin || ""))
+      && minted.some(m => /^sent by .+ to take up/.test(m.origin || "")));
     // ⚠️ AND IT SAYS **HOW**. Erik: "'walked away from it' is ambiguous" — and in a world where abandoning a
     // front is a real mechanic, it reads as desertion rather than survival. The engine knows which of the
     // three ways the figure died, so the line names it: no minted origin may use the ambiguous phrasing.
     const survivors = minted.filter(m => m.originKind === "casualty_survivor");
     check("306b: a survivor's origin names WHAT they survived — never the ambiguous 'walked away from it'",
-      survivors.length > 0 && survivors.every(m => !/walked away/.test(m.wants || ""))
-      && survivors.every(m => /(survived the fighting|standing beside|was with|watched)/.test(m.wants || "")));
+      survivors.length > 0 && survivors.every(m => !/walked away/.test(m.origin || ""))
+      && survivors.every(m => /(survived the fighting|standing beside|was with|watched)/.test(m.origin || "")));
+
+    // ── SNG-431 §1 — ONE NAMER. Aevi's three gates, plus the §1b faults, on this same live world. ────────
+    // ⚠️ THE RULES ARE IMPORTED, NOT RE-SPELLED. `PLACEHOLDER_NAME` and `MINTED_NAME_MAX` come from the
+    // module the WRITER uses; a gate carrying its own copy of the rule goes green while the writer drifts.
+    const N431 = await import("../engine/names.js");
+    console.log(`      namer: ${minted.filter(m => !m.provisional).length}/${minted.length} named — e.g. ${minted.slice(0, 3).map(m => m.name).join(" · ")}`);
+
+    // ⛔ REGISTERED AND LOADED, PROVED THROUGH THE REAL BAG. The pools were authored at 5ba1c26f and reachable
+    // by nothing: not in the manifest, so not merely unloaded — invisible one step earlier than CCODE-55 looks.
+    check("431/1a: the name pools are REACHABLE — in the manifest, loaded, and merged into `rules`",
+      !!C.rules?.mintedNames?.given && !!C.rules?.mintedNames?.byname,
+      `rules.mintedNames = ${JSON.stringify(Object.keys(C.rules?.mintedNames || {}))}`);
+
+    // ⚠️ AND THE ASSERTION IS WHAT THIS PATH CAN ACTUALLY GET WRONG. Written as Aevi's disclaimer regex
+    // alone, no mutation of the mint could redden it — the mint has never produced the word "unknown"; the
+    // disclaimers are the GM path's, and that gate is proved on the GM path. What THIS path gets wrong is
+    // shipping the fallback or the epithet in the name field, so the census says so and stays falsifiable.
+    const unnamedIsh = (m) => N431.PLACEHOLDER_NAME.test(m.name || "") || m.name === "someone newly spoken of" || m.name === m.epithet;
+    check("431/1: nobody the world mints is left holding a fallback, an epithet or a disclaimer for a name",
+      minted.length > 0 && !minted.some(unnamedIsh),
+      `offenders: ${minted.filter(unnamedIsh).map(m => m.name).slice(0, 3).join(" | ")}`);
+
+    // ⛔ `provisional: true` WAS THE ENGINE FLAGGING ITS OWN GAP AND NOTHING READ IT (Aevi) — the same shape
+    // as `parentUnresolved` in SNG-397. Something came back to author, so the flag must now be false.
+    check("431/1: no roster figure is still `provisional` after a tick",
+      minted.length > 0 && minted.every(m => !m.provisional),
+      `${minted.filter(m => m.provisional).length} of ${minted.length} still provisional`);
+
+    check("431/1: no minted name runs over 40 characters — a name that long is a sentence",
+      minted.length > 0 && minted.every(m => (m.name || "").length <= N431.MINTED_NAME_MAX),
+      `longest: ${minted.map(m => m.name || "").sort((a, b) => b.length - a.length)[0]}`);
+
+    // ⛔ AND IT IS A NAME, NOT A CAPTION OR A SUBTITLE — Erik's shape, which Aevi got wrong twice before he
+    // named it: NAME + THE + SHORT NOUN PHRASE. No verb, no "who", no clause. The battlefield-shout test.
+    // ⚠️ AND THE GATE IS HERS, NOT A STRICTER ONE OF MINE. My first cut allowed two words after "the" and
+    // went red on "Orla the No Fixed Anchor" — a byname SHE AUTHORED, and her rule says "two or three
+    // words". A gate that fails on the content it polices is asserting my taste, not the standard. The
+    // load-bearing half is the second clause: no verb, no "who", no comma — that is what made v1 a caption
+    // and v2 a subtitle, and the 40-char gate above already holds the length.
+    const SHOUTABLE = /^[A-Z][\w'’-]*( [A-Z][\w'’-]*)? the [\w'’-]+( [\w'’-]+){0,2}$/;
+    // ⚠️ AND NO "NO VERB" HEURISTIC. My first attempt at it was `\w+(ed|ing)` and it went red on "the
+    // Scarred", "the Burning Truth", "the No Fixed Anchor" — participles used as ADJECTIVES, which is what
+    // half the corpus is and what "Gandalf the White" is. What actually separated Aevi's v1 and v2 from a
+    // name was the RELATIVE CLAUSE: "the one WHO outlived…", "Sera Voight, WHO SHOULD HAVE DIED FIRST".
+    const CLAUSE = /\b(who|which|that|when|after|because)\b|[,;:—]/i;
+    check("431/1: a minted name is NAME + THE + SHORT NOUN PHRASE — shoutable, not a caption or a subtitle",
+      minted.length > 0 && minted.every(m => SHOUTABLE.test(m.name || "") && !CLAUSE.test(m.name || "")),
+      `not shoutable: ${minted.filter(m => !SHOUTABLE.test(m.name || "") || CLAUSE.test(m.name || "")).map(m => m.name).slice(0, 3).join(" | ")}`);
+
+    // ⛔ NOBODY CARRIES A NAME SOMEONE ELSE ALREADY HAS. A pool draw with no dedupe is two Sera the Ashvows.
+    check("431/1: two minted figures never end up with the same name",
+      new Set(minted.map(m => String(m.name).toLowerCase())).size === minted.length,
+      `${minted.length - new Set(minted.map(m => String(m.name).toLowerCase())).size} collision(s)`);
+
+    // §1b — the three other faults in the same record.
+    check("431/1b: `wants` holds a WANT, not the origin sentence",
+      minted.length > 0 && minted.every(m => m.wants && m.wants !== m.origin && !/^(of |sent by |stepped into |survived |was |watched |took up )/.test(m.wants)),
+      `offenders: ${minted.filter(m => !m.wants || m.wants === m.origin).map(m => m.wants).slice(0, 2).join(" | ")}`);
+    check("431/1b: the origin line shows a player NAMES, NOT IDS — and never a double article",
+      minted.length > 0 && minted.every(m => !/\b[a-z][a-z0-9]*_[a-z0-9]+\b/.test(m.origin || "") && !/\bthe the\b/i.test(m.origin || "")),
+      `offenders: ${minted.filter(m => /\b[a-z][a-z0-9]*_[a-z0-9]+\b/.test(m.origin || "") || /\bthe the\b/i.test(m.origin || "")).map(m => m.origin).slice(0, 2).join(" | ")}`);
+    // ⛔ THE EPITHET STAYS — as `epithet`, where it belongs (Aevi). It was never wrong, only mis-filed.
+    check("431/1b: the epithet the event produced is KEPT, in its own field",
+      minted.length > 0 && minted.every(m => !!m.epithet),
+      `${minted.filter(m => !m.epithet).length} figure(s) lost their epithet`);
   }
 
   // SNG-309 — WHAT HAPPENS WHEN THE PLAYER GOES DOWN. Erik: "we should also just make sure all the

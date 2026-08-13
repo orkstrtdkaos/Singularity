@@ -212,7 +212,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -252,7 +252,11 @@ export async function loadContent() {
     // destructured from one Promise.all while its loadRule sat in another.
     loadRule("quest_structure", null),
     loadRule("martial_paths", null),
-    loadRule("sub_attribute_ladder", null)
+    loadRule("sub_attribute_ladder", null),
+    // SNG-431 §1a — THE NAME POOLS. Authored at `5ba1c26f` and reachable by nothing: the file was never in
+    // the manifest, so it was not merely registered-but-unloaded (CCODE-55's catch) — it was invisible one
+    // step earlier. In THIS array beside the name that receives it, for the reason two comments up.
+    loadRule("minted_names", null)
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -281,6 +285,10 @@ export async function loadContent() {
   // SNG-297: the pools a minted figure is built from. Merged explicitly — a block sitting in the file that
   // nothing lifts into `rules` is a writer with no reader, which is the sweep's own finding pointed at me.
   if (arcResponseRule?.mintedFigures) rules.mintedFigures = arcResponseRule.mintedFigures;
+  // SNG-431 §1a: the pools the ONE NAMER draws from — given names by tradition, bynames built from each
+  // tradition's own craft-words, wants by originKind. Merged in the same breath as the load for the reason
+  // the line above says: a block sitting in a file that nothing lifts into `rules` is a writer with no reader.
+  if (mintedNamesRule?.given && mintedNamesRule?.byname) rules.mintedNames = mintedNamesRule;
   if (arcResponseRule?.careShift) rules.careShift = arcResponseRule.careShift;
   if (arcResponseRule?.engagement) rules.engagement = arcResponseRule.engagement;   // SNG-300: who seeks a fight   // SNG-298: how a figure changes their mind
   if (encountersRule) rules.encounters = { ...(rules.encounters || {}), ...encountersRule };

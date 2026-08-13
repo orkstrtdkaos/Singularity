@@ -10,6 +10,7 @@ import { smartClamp, normName } from "./namematch.js"; // SNG-152: model prose c
 import { isMinorSubject } from "./art.js";
 import { applyCodexUpdates } from "./codex.js"; // SNG-199 §5: meeting someone MUST write the codex — direct, never injected
 import { recordDeed, renownHeardAt } from "./reputation.js";   // CCODE-85: an NPC keeps a record the same way the player does
+import { personName, mintedWants, nameOf } from "./names.js";   // SNG-431 §1: the ONE namer — the GM path is one of the three that calls it
 
 /** SNG-190 §2: a generateRequest:npc in the SAME turn as an op:"meet" for that person is ONE person.
  *  Both ops are mandatory by the contract (rule 14 + the generateRequest rule) and nothing reconciled
@@ -176,9 +177,21 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         if (!goner) continue;                  // everyone left is protected — refuse rather than drop kin
         delete reg[goner];
       }
+      // ⛔ SNG-431 §1 — THE GM PATH GOES THROUGH THE NAMER. It wrote whatever the model put in the field,
+      // and the model writes disclaimers: "Boy (name unknown)", "Unknown farmer", "Unknown (east bank
+      // traveler)". `prettifyNpcName` is a slug-prettifier standing where a validator should be — it passes
+      // those straight through because they have a capital and no `._`.
+      //
+      // ⚠️ AND AN UNNAMED PERSON IS LEGITIMATE (Aevi). So this does NOT invent a name — inventing one for
+      // someone the fiction deliberately left anonymous is worse than the disclaimer. It keeps the
+      // DESCRIPTIVE words as a label and sets `nameUnknown`, which `nameOf` in names.js has read since
+      // SNG-111 and which nothing has ever written: a reader with no writer, closed here. `setNpcName`
+      // still overwrites the label the moment the player learns the real name.
+      const first = personName({ proposed: prettifyNpcName(String(u.name || id)), role: u.role, max: 60 });
       n = reg[id] = {
         id,
-        name: prettifyNpcName(String(u.name || id)).slice(0, 60),
+        name: first.name,
+        nameUnknown: first.nameUnknown || undefined,
         role: String(u.role || "").slice(0, 100),
         description: smartClamp(String(u.description || ""), 600), // SNG-152: model prose — word boundary, generous
         firstMet: { locationId: ctx.locationId || null, day: ctx.day ?? null },
@@ -202,7 +215,13 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       } catch { /* the codex is a mirror — never let it break the meet */ }
     }
     // updates are additive/evolving — never silently rewrite identity
-    if (u.name && !n.name) n.name = String(u.name).slice(0, 60);
+    // SNG-431 §1: the same namer on the fill-in-a-blank path. A second writer spelling its own rule is how
+    // the create path and the update path drift apart.
+    if (u.name && !n.name) {
+      const late = personName({ proposed: String(u.name), role: u.role || n.role, max: 60 });
+      n.name = late.name;
+      if (late.nameUnknown) n.nameUnknown = true;
+    }
     if (u.role) n.role = String(u.role).slice(0, 100);
     if (u.description && !n.description) n.description = smartClamp(String(u.description), 600); // SNG-152
     if (u.gender && !n.gender) n.gender = String(u.gender).slice(0, 40);       // SNG-143: fill it the first time the GM records it
@@ -219,6 +238,7 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         n.history = [...n.history, `[d${ctx.day ?? "?"}] Their name is revealed: ${newName} (was known as "${n.name}")`].slice(-CAPS.history);
         n.name = newName;
         n.nameRevealed = true;
+        delete n.nameUnknown;   // SNG-431: the label was standing in for a name they now have
       } else if (isExtension) {
         n.aliases = [...new Set([...(n.aliases || []), n.name])].slice(-4); // keep the given name for match continuity
         n.history = [...n.history, `[d${ctx.day ?? "?"}] You learn more of their name — ${newName}`].slice(-CAPS.history);
@@ -309,6 +329,95 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
   return character.npcRegistry;
 }
 
+/** SNG-431 §1 — THE REPAIRS, APPLIED. Bumping this re-runs them; leave it alone unless the content changes. */
+export const NAME_REPAIR_VERSION = 1;
+
+/** Apply the authored name repairs to a save that was written before the namer existed.
+ *
+ *  Two blocks in `rules/minted_names.json`, both Aevi's: `repairRegistry` for the three npcRegistry entries
+ *  that carried a DESCRIPTION in the `name` field ("Unknown farmer" → Hessa Orm), and `repair` for the
+ *  minted figures whose name field held an epithet ("the one who outlived Cinder Vael, the Wright Who Would
+ *  Not Stop" → Sera Voight the Ashvow).
+ *
+ *  ⚠️ NEVER OVER A NAME PLAY HAS SINCE CHANGED — a repair that fires over the player's world is a worse bug
+ *  than the one it fixes. Three separate things hold that, and it is worth being exact about which does the
+ *  work, because I first wrote a gate on the wrong one and it stayed green with the guard deleted:
+ *
+ *    · `was ===` on the authored record — the load-bearing one. It refuses any figure whose name is not
+ *      still the exact string the repair was written about, so a renamed figure is out of scope by identity.
+ *    · `nameRevealed` on a registry entry — the player learned this name; nothing may overwrite it.
+ *    · `nameRepairVersion` — ⚠️ A COST GUARD, NOT A CORRECTNESS ONE. It stops the walk re-running on every
+ *      load. The two checks above already make the walk idempotent, so removing this changes no outcome.
+ *
+ *  Returns what it changed; pure but for the character it is handed.
+ */
+export function repairUnnamedPeople(character, pools = null, content = {}) {
+  if (!character || !pools) return [];
+  if ((character.nameRepairVersion || 0) >= NAME_REPAIR_VERSION) return [];
+  const fixed = [];
+  for (const [id, rec] of Object.entries(pools.repairRegistry || {})) {
+    const n = character.npcRegistry?.[id];
+    if (!n || !rec?.name || n.nameRevealed || n.name === rec.name) continue;
+    fixed.push({ id, was: n.name, now: rec.name, kind: "npc" });
+    n.aliases = [...new Set([...(n.aliases || []), n.name].filter(Boolean))].slice(-4);
+    n.name = rec.name;
+    n.nameRevealed = true;      // authored, so no later reveal may overwrite it
+    delete n.nameUnknown;
+  }
+  const figures = character.worldState?.mintedFigures || [];
+  const taken = figures.map(f => f?.name).filter(Boolean)
+    .concat((content?.legends?.roster || []).map(f => f?.name).filter(Boolean));
+  // ⚠️ NAMES, NOT IDS, IN PROSE ALREADY STORED. Every legacy `origin` reads "of the the_ceaseless; …" — a raw
+  // id AND a double article, and it is on a player's screen today. Any snake_case token in there is the
+  // machine talking; resolve the ones content knows and leave the rest alone rather than guessing.
+  // ⚠️ AND AN ID CONTENT CANNOT RESOLVE STILL MAY NOT BE SHOWN RAW — `renderNames` already holds that rule
+  // ("NEVER shown raw to a player — degrades to the id in a readable form"), and a save can name a place
+  // this build no longer ships. So a miss is humanised rather than left as machine text.
+  const deIdify = (text) => String(text || "").replace(/\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b/g, (id) => {
+    const n = nameOf("loc", id, content) || nameOf("region", id, content) || nameOf("tradition", id, content) || nameOf("npc", id, content);
+    if (n) return n;
+    return id.replace(/_/g, " ").replace(/\b\w/g, (c, i) => (i === 0 && /^the /.test(id.replace(/_/g, " ")) ? c : c.toUpperCase()));
+  }).replace(/\bthe\s+[Tt]he\b/g, "the");
+  for (const f of figures) {
+    if (!f) continue;
+    // ⛔ `minted-1` IS NOT A UNIQUE ID. It is the first figure minted in EVERY world, and matching on it
+    // alone applied Aevi's record — written about the figure who outlived Cinder Vael — to a different
+    // player's figure who outlived Saehara, rewriting their origin with someone else's. `was` is the
+    // identity check, and a repair with no `was` is refused rather than guessed at.
+    const cand = pools.repair?.[f.id];
+    const rec = cand?.was && cand.was === f.name ? cand : null;
+    const before = f.name;
+    if (rec?.name && f.name !== rec.name) {
+      if (!f.epithet && f.name) f.epithet = f.name;   // the old name WAS the epithet — keep it where it belongs
+      f.name = rec.name;
+      if (rec.epithet) f.epithet = rec.epithet;
+      if (rec.wants) f.wants = rec.wants;
+      if (rec.origin) f.origin = rec.origin;
+      f.provisional = false;
+    } else if (f.provisional) {
+      // ⛔ NO AUTHORED REPAIR FOR THIS ONE — and Aevi's gate is "no roster figure still provisional after a
+      // tick", which a save full of legacy figures fails whatever the new mints do. So they get exactly what
+      // the namer would have given them at mint: a name in their own grain, from the same pools.
+      const m = personName({ pools, tradition: f.tradition || null, originKind: f.originKind || "_default", taken });
+      if (m.minted) {
+        if (!f.epithet && f.name) f.epithet = f.name;
+        f.name = m.name;
+        f.provisional = false;
+        taken.push(m.name);
+      }
+    }
+    // ⛔ AND `wants` HELD THE ORIGIN on every figure minted before today, repaired whether or not they were
+    // renamed — the field is read straight into the GM's world block.
+    if (f.origin && f.wants === f.origin) f.wants = mintedWants(f.originKind, pools) || f.wants;
+    if (f.origin) f.origin = deIdify(f.origin);
+    if (f.wants) f.wants = deIdify(f.wants);
+    if (f.epithet) f.epithet = deIdify(f.epithet);
+    if (f.name !== before) fixed.push({ id: f.id, was: before, now: f.name, kind: "figure" });
+  }
+  character.nameRepairVersion = NAME_REPAIR_VERSION;
+  return fixed;
+}
+
 /** SNG-012 Part C: player names an unnamed NPC directly (parallel to item naming).
  *  Sets display name on the stable id, records the old name as an alias, logs it. */
 export function setNpcName(character, npcId, name, day = null) {
@@ -320,6 +429,7 @@ export function setNpcName(character, npcId, name, day = null) {
   n.history = [...n.history, `[d${day ?? "?"}] You know this person's name now: ${newName} (was "${n.name}")`].slice(-CAPS.history);
   n.name = newName;
   n.nameRevealed = true;
+  delete n.nameUnknown;   // SNG-431: `nameOf` reads this flag — leaving it set would keep hiding the name we just learned
   return true;
 }
 

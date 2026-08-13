@@ -284,6 +284,8 @@
  "_displayFix": "⛔ 'of the the_ceaseless' — DOUBLE ARTICLE AND A RAW ID. `originOf` returns `home || people`, and homes are ids like `the_ceaseless`. ⚠️ THE ORIGIN LINE MUST RESOLVE THE ID TO A DISPLAY NAME AND NOT PREPEND 'the' TO A NAME THAT ALREADY HAS ONE. That is the same class as CCode's own note elsewhere in worldtick: 'NAMES, NOT IDS — dug in over arc_what_wakes_beneath is the machine talking'.",
  "repair": {
   "minted-1": {
+   "was": "the one who outlived Cinder Vael, the Wright Who Would Not Stop",
+   "_wasNote": "⛔ CCode, SNG-431. `minted-1` IS NOT A UNIQUE ID — it is the first figure minted in EVERY world, and applying this record by id alone overwrote a different player's figure (who outlived Saehara, not Cinder Vael) with this one's history. ⚠️ `was` is the identity check: the repair applies only to the figure it was actually written about. Everyone else keeps their own origin and is named from the pools instead.",
    "name": "Sera Voight the Ashvow",
    "epithet": "the Ashvow",
    "wants": "to be worth the one who did not come back",
@@ -293,5 +295,20 @@
  },
  "_standard": "⛔ ERIK: 'those are like SUBTITLES. I want names like Conan the Destroyer, Gandalf the White, Silas Weir the Necro-Wright, the Shadow Master, Pell the Iron Hammer.'\n⚠️ HE IS DESCRIBING A DIFFERENT STRUCTURE AND I HAD THE WRONG ONE TWICE.\n   MINE (v1): 'the one who outlived Cinder Vael' — an epithet, a caption.\n   MINE (v2): 'Who Should Have Died First' — a SUBTITLE. It explains. It is a clause.\n   ⛔ HIS: NAME + THE + SHORT NOUN PHRASE. Two or three words. NO VERB, NO 'WHO'.\n     Gandalf the White · Pell the Iron Hammer · Silas Weir the Necro-Wright\n⛔ THE TEST: CAN YOU SHOUT IT ACROSS A BATTLEFIELD? 'Sera Voight, Who Should Have Died First' cannot be shouted. 'Sera Voight the Ashvow' can.\n⚠️ AND IT MUST BE BUILT FROM THE TRADITION'S OWN CRAFT-WORDS, which are authored and were sitting unused: Umbracraft, Palework, Radiance, the Edge, Ruinwork, Makecraft, Hourcraft, Falsecraft, Descent. That is where 'Necro-Wright' comes from in Erik's own example — CRAFT + ROLE, compounded.",
  "_bynameNote": "⚠️ TITLE CASE, and WHO + PERFECT where the corpus uses it — these are how a world SPEAKS of someone, not how a log records them.\n⛔ 'THE ONE THEY SENT INSTEAD' is the honest version of what I first wrote as 'who was not the first choice': same fact, but it is a thing a rival says with contempt and the bearer wears anyway, which is how a real byname works. 'WHO SHOULD HAVE DIED FIRST' is what a survivor is actually called, and what they think.\n⚠️ A minted figure starts at `riffraff` or `notable` and CLIMBS. The byname must be worth carrying when they reach epic, because nobody renames a legend.",
- "_originModifier": "⛔ THE ORIGIN SHARPENS THE BYNAME; IT DOES NOT BECOME IT. A survivor of an ashwarden's death is 'the Last Kindness' or 'the Ashvow' — the CRAFT names them, the DEATH chooses which. ⚠️ Prefer these from the tradition list when the origin fits:\n   casualty_survivor → the darkest/most costly of the tradition's options\n   faction_leaderless → the most FORMAL — they hold an office now\n   vacancy → the most improvised\n⛔ AND WHERE THE FIGURE IS OF A CRAFT THAT COMPOUNDS, COMPOUND IT. Erik's own example is the shape: 'Necro-Wright' = a dark thing + Makecraft. An umbral wright is 'the Shadow-Wright'; an ashwarden mason is 'the Cairnwright'. CRAFT + ROLE, one hyphen, no clause."
+ "_originModifier": "⛔ THE ORIGIN SHARPENS THE BYNAME; IT DOES NOT BECOME IT. A survivor of an ashwarden's death is 'the Last Kindness' or 'the Ashvow' — the CRAFT names them, the DEATH chooses which. ⚠️ Prefer these from the tradition list when the origin fits:\n   casualty_survivor → the darkest/most costly of the tradition's options\n   faction_leaderless → the most FORMAL — they hold an office now\n   vacancy → the most improvised\n⛔ AND WHERE THE FIGURE IS OF A CRAFT THAT COMPOUNDS, COMPOUND IT. Erik's own example is the shape: 'Necro-Wright' = a dark thing + Makecraft. An umbral wright is 'the Shadow-Wright'; an ashwarden mason is 'the Cairnwright'. CRAFT + ROLE, one hyphen, no clause.",
+ "_repairNote": "⛔ SNG-431 §1. The staged registry repair from po/staged_content/name_repair_SNG-429.json, PROMOTED HERE so one file holds every authored name and one reader applies them. `repair` is keyed by MINTED FIGURE id (worldState.mintedFigures); `repairRegistry` by npcRegistry id. ⚠️ Both are applied ONCE per character, guarded by `nameRepairVersion` — a repair that re-runs would overwrite a name the player has since learned in play.",
+ "repairRegistry": {
+  "east-bank-stranger": {
+   "name": "Corrin Vale",
+   "why": "⛔ WAS 'Unknown (east bank traveler)' — a description in a name field. ⚠️ Named from his own record: 'young and lean, patched wool coat, mud-caked boots — moves like someone who has walked a long way.' Vale for the country he crossed; Corrin is a road-name, short enough to be shouted."
+  },
+  "third-farmer": {
+   "name": "Hessa Orm",
+   "why": "⛔ WAS 'Unknown farmer'. ⚠️ 'A quieter third party to the irrigation argument — has been staring at the ditch rather than at the people arguing.' Millbrook names run plain (Mara Wells, Dara Holt), so she is Hessa Orm: someone who watches the water instead of the quarrel."
+  },
+  "cookhouse-boy": {
+   "name": "Tam",
+   "why": "⛔ WAS 'Boy (name unknown)'. ⚠️ 'Maybe twelve, broom in hand — giving Silas the kind of attention children give to things adults refuse to look at.' ONE SYLLABLE AND NO SURNAME, deliberately: a cookhouse boy has a name people call across a room, and he has not earned a second one yet."
+  }
+ }
 }

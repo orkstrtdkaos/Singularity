@@ -19,6 +19,10 @@ import { spreadDeeds } from "./reputation.js";
 import { titleFor } from "./titles.js";   // SNG-287: a name from the material, not from a menu   // SNG-281: news travels, and that is a promotion source
 import { applyCodexUpdates } from "./codex.js";
 import { tierRank, tierBirthWeight } from "./legends.js";
+// SNG-431 §1 — ⛔ "worldtick.js does not import names.js at all" (Aevi). That sentence IS the ticket: the
+// file that creates people had no access to the file that names them. `personName` is the one namer;
+// `nameOf`/`asSpoken` are what stop an origin line saying "of the the_ceaseless" at a player.
+import { personName, mintedWants, nameOf, asSpoken } from "./names.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
@@ -1524,21 +1528,43 @@ export function worldRoster(ws, content = {}) {
  *  needs to let them push, fight, be struck at, and die. */
 export function mintFigure(ws, { tier = "notable", name = null, epithet = null, origin = "", originKind = "_default",
                                  region = null, arcAffinity = null, secondArc = null, worldDay = 0, weight = null,
-                                 cap = 140, pools = null, rng = Math.random } = {}) {
+                                 cap = 140, pools = null, namePools = null, tradition = null, taken = null,
+                                 rng = Math.random } = {}) {
   ws.mintedFigures = ws.mintedFigures || [];
   if (ws.mintedFigures.length >= cap) return null;
   const n = (ws.mintedCounter = (ws.mintedCounter || 0) + 1);
+  // SNG-431 §1 — THE NAMER, CALLED. The comment below was right for a year and nothing ever came back to
+  // do the authoring, which is Aevi's whole finding. `namePools` is the authoring, so the engine no longer
+  // has to choose between a null name (skipped by every `add()` in `offscreenPopulation`) and an epithet
+  // wearing the name field. ⚠️ NOBODY ALREADY IN THE ROSTER may be renamed onto: `taken` defaults to the
+  // minted names this world already carries, and the caller passes the AUTHORED ones too — "Pell" is in
+  // the enginewright given pool and Pell is a person Erik has met.
+  //
+  // ⛔ WITHOUT POOLS THE OLD FALLBACK STANDS, unchanged. A namer that invents a name when it has been given
+  // nothing to draw from is the same authorship gap one layer down, and the tests that mint bare figures
+  // must keep meaning what they meant.
+  const already = taken || ws.mintedFigures.map(f => f?.name).filter(Boolean);
+  const named = personName({ proposed: name, pools: namePools, tradition, originKind, rng, taken: already });
   const fig = {
     id: `minted-${n}`,
     // ⚠️ THE NAME IS AN EPITHET, NOT A NAME. The engine mints the slot and the story; naming is authorship.
     // But it cannot be NULL — a figure with no name is skipped by every `add()` in `offscreenPopulation`,
     // and would be born into the roster and then never act. An epithet drawn from the event that made them
     // is honest, distinguishable, and reads as what it is until content gives them a real name.
-    name: name || epithet || "someone newly spoken of",
-    provisional: !name,
+    name: (namePools && named.minted ? named.name : null) || name || epithet || "someone newly spoken of",
+    // ⛔ AND THE EPITHET STAYS, AS `epithet`, WHERE IT BELONGS (Aevi). A figure is "Sera the Ashvow, who
+    // outlived the Wright" — the caption was never wrong, only mis-filed.
+    epithet: epithet || null,
+    // ⛔ `provisional: true` WAS THE ENGINE FLAGGING ITS OWN GAP AND NOTHING READ IT — the same shape as
+    // `parentUnresolved` in SNG-397. It is now true only when it is still TRUE: nobody named them and the
+    // pools could not either.
+    provisional: !(name || (namePools && named.minted)),
     tier,
     weight: weight ?? tierBirthWeight(tier),
-    wants: origin || "to be counted among those who matter",
+    // ⛔ SNG-431 §1b — `wants` HELD THE ORIGIN, and the origin has its own field four lines down. A figure's
+    // stated desire read "of the the_ceaseless; watched Cinder Vael called out, and outlived them", which is
+    // not a want, is not a sentence, and printed a raw id at a player. Wants are authored by `originKind`.
+    wants: mintedWants(originKind, namePools) || "to be counted among those who matter",
     // ⚠️ WHY THEY EXIST, KEPT. `originKind` was used only to pick a verb pool and then thrown away, so
     // nothing downstream could tell a successor from a survivor — and a gate asserting "nobody is born of
     // the killing field" PASSED VACUOUSLY, because `m.originKind` was undefined on every figure and
@@ -2732,6 +2758,12 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // SNG-298 — PEOPLE CHANGE THEIR MINDS. Run AFTER the pass, so it reads what actually happened: who was
     // struck at and over what, where the player has been spending themselves, and which cares went untended
     // long enough to be let go of.
+    // ⚠️ NAMES, NOT IDS. "dug in over arc_what_wakes_beneath" is the machine talking — Aevi's rule for the
+    // World tab applies to the news just as much. ⛔ SNG-431: HOISTED OUT OF THE CARE-SHIFT BLOCK, because
+    // the MINT below was printing arc ids into a figure's epithet and origin line and could not see this.
+    // A second copy down there would be the same rule spelled twice, drifting on the next edit.
+    const arcTitle = Object.fromEntries((content.greaterArcs || []).map(a => [a.id, a.name]));
+    const nameOfArc = (id) => arcTitle[id] || String(id).replace(/^arc_/, "").replace(/_/g, " ");
     {
       const careCfg = content.rules?.careShift || {};
       const erodeAfter = Number.isFinite(careCfg.erodeAfterPasses) ? careCfg.erodeAfterPasses : 6;
@@ -2770,8 +2802,6 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       ws.careShifts = shifted;
       // ⚠️ NAMES, NOT IDS. "dug in over arc_what_wakes_beneath" is the machine talking — Aevi's rule for
       // the World tab applies to the news just as much.
-      const arcTitle = Object.fromEntries((content.greaterArcs || []).map(a => [a.id, a.name]));
-      const nameOfArc = (id) => arcTitle[id] || String(id).replace(/^arc_/, "").replace(/_/g, " ");
       for (const s of shifted.slice(0, 3)) {
         const got = s.changes.find(c => c.kind === "acquired");
         const hard = s.changes.find(c => c.kind === "hardened");
@@ -2824,10 +2854,21 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     //
     // ⚠️ THE ENGINE MINTS THE SLOT, NOT THE PERSON. A minted figure gets an id, a rung, a weight, an arc
     // they care about, and the reason they exist — everything the tick needs to let them push, fight, be
-    // struck at, and die. It does NOT get a name, because naming is authorship and the engine has no
-    // business doing it: they are flagged `provisional` until content names them.
+    // struck at, and die. ⛔ SNG-431 §1: AND IT NOW GETS A NAME. The paragraph above was right that naming
+    // is authorship — and the authorship arrived (`rules/minted_names.json`), so the engine is no longer
+    // choosing between inventing and shipping an epithet in the name field. `provisional` stays for the
+    // case it was written for: pools that cannot name this person.
     const mintRate = Number.isFinite(cfg.mintRate) ? cfg.mintRate : 0.5;
     const mintCap = Number.isFinite(cfg.mintCap) ? cfg.mintCap : 140;
+    const namePools = content.rules?.mintedNames || null;
+    // ⛔ NOBODY GETS A NAME SOMEONE ELSE IS ALREADY CARRYING. "Pell" is in the enginewright given pool and
+    // Pell is a person Erik has met — so the authored roster is in `taken`, not just the minted one.
+    const takenNames = worldRoster(ws, content).map(f => f?.name).filter(Boolean);
+    /** Where they are FROM, said the way a person says it: a display name, and never "the the_ceaseless".
+     *  ⚠️ `originOf().where` is `homeLocation || tradition`, and both are IDS. */
+    const placeName = (id) => (id
+      ? (nameOf("loc", id, content) || nameOf("region", id, content) || nameOf("tradition", id, content) || null)
+      : null);
     // SNG-297: the argument already loudest around them, from what this pass measured. `arcContests` counts
     // duels per arc, so "most contested" needs no new recording — Aevi's point exactly.
     const mintPools = content.rules?.mintedFigures || null;
@@ -2857,9 +2898,10 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       ws.arcUnheldStreak[arcId] = 0;   // the seat is taken; the clock restarts
       const f = mintFigure(ws, { tier: "notable", worldDay: currentWorldDay, arcAffinity: arcId,
         originKind: "vacancy_filled", secondArc: loudestArc(arcId), pools: mintPools, rng,
-        epithet: `the one who took up ${arcId}`,
-        origin: `stepped into ${arcId} after a long season when nobody was holding it`, cap: mintCap });
-      if (f) born.push(f);
+        namePools, taken: takenNames,
+        epithet: `the one who took up ${nameOfArc(arcId)}`,
+        origin: `stepped into ${nameOfArc(arcId)} after a long season when nobody was holding it`, cap: mintCap });
+      if (f) { takenNames.push(f.name); born.push(f); }
     }
     // A DEATH OPENS A SEAT — Aevi's second birth event, read correctly this time. "A faction that just lost
     // its leader" is a DEATH, not an unheld arc; the arc-vacancy door above turns out to fire almost never
@@ -2926,35 +2968,49 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     for (const d of deaths) {
       const from = originOf(d.id);
       d.who = from.name;
+      // ⛔ SNG-431 §1b — "of the the_ceaseless". A DOUBLE ARTICLE ON A RAW ID, AND THE ID IS SHOWN TO A
+      // PLAYER. `from.where` is `homeLocation || tradition` and both are ids; the article was hardcoded in
+      // the template, so a place whose display name already starts with "the" got a second one. Resolved to
+      // a display name, and the article is asked for rather than assumed.
+      const whereSaid = asSpoken(placeName(from.where) || "");
       if (rng() < mintRate) {
         // THE ONE WHO SURVIVED IT. They were not made by the battle — the battle is simply where the valley
         // first heard of them. They went home afterwards, and home is a place they already had.
         const f = mintFigure(ws, { tier: "riffraff", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
           originKind: "casualty_survivor", secondArc: loudestArc(d.arcId), pools: mintPools, rng,
+          namePools, tradition: from.people || null, taken: takenNames,
           region: from.home || null,
           epithet: `the one who outlived ${d.who}`,
-          origin: from.where
-            ? `of the ${from.where}; ${survivedWhat(d.how, d.who)}`
+          origin: whereSaid
+            ? `of ${whereSaid}; ${survivedWhat(d.how, d.who)}`
             : survivedWhat(d.how, d.who),
           cap: mintCap });
-        if (f) { f.tradition = from.people || null; f.homeland = from.where || null; born.push(f); }
+        if (f) { f.tradition = from.people || null; f.homeland = from.where || null; takenNames.push(f.name); born.push(f); }
       }
       if (rng() < mintRate) {
         // THE ONE WHO TAKES THE CHAIR. Sent for, from the same place, because that is who sends a successor.
         const f = mintFigure(ws, { tier: "notable", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
           originKind: "faction_leaderless", secondArc: loudestArc(d.arcId), pools: mintPools, rng,
+          namePools, tradition: from.people || null, taken: takenNames,
           region: from.home || null,
           epithet: `the one who took ${d.who}'s place`,
-          origin: from.where
-            ? `sent by the ${from.where} to take up what ${d.who} left unfinished`
+          origin: whereSaid
+            ? `sent by ${whereSaid} to take up what ${d.who} left unfinished`
             : `took up what ${d.who} left unfinished`,
           cap: mintCap });
-        if (f) { f.tradition = from.people || null; f.homeland = from.where || null; born.push(f); }
+        if (f) { f.tradition = from.people || null; f.homeland = from.where || null; takenNames.push(f.name); born.push(f); }
       }
     }
     if (born.length) {
-      ws.arcBirths = born.map(f => ({ id: f.id, tier: f.tier, origin: f.origin, arcId: f.arcAffinity }));
-      for (const f of born) news.push({ text: `Someone new is being spoken of — they ${f.origin}.`, worldDay: currentWorldDay, tier: "murmur" });
+      ws.arcBirths = born.map(f => ({ id: f.id, tier: f.tier, name: f.name, origin: f.origin, arcId: f.arcAffinity }));
+      // ⛔ SNG-431 §1: THE LINE NOW SAYS WHO. "Someone new is being spoken of — they of the the_ceaseless;
+      // watched X called out, and outlived them" was not a sentence, because it spliced an origin FRAGMENT
+      // into a slot expecting a clause. Named, the fragment reads as the apposition it always was; unnamed
+      // (no pools), the old wording still stands and still parses.
+      for (const f of born) news.push({
+        text: f.provisional ? `Someone new is being spoken of — they ${f.origin}.`
+                            : `A new name is being spoken of — ${f.name}, ${f.origin}.`,
+        worldDay: currentWorldDay, tier: "murmur", kind: "birth", figureId: f.id });
     } else ws.arcBirths = [];
     // The NET position per arc, so a reader (and the GM block) sees the settled truth rather than one side.
     const net = {};

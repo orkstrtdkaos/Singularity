@@ -60,7 +60,7 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
-import { canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
+import { canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
@@ -2733,6 +2733,15 @@ function migrate(c) {
       c._correctionAside = [c._correctionAside, `Set right: ${reclaimed.map(r => r.name).join(", ")} — the story gave you this and the ledger missed it.`].filter(Boolean).join(" ");
       console.warn(`[reclaim] restored ${reclaimed.length} established item(s):`, reclaimed.map(r => `${r.name} (trace: "${r.trace}")`).join(", "));
     }
+  }
+  // SNG-431 §1: the same shape one ticket later — repair the people the world named before there WAS a
+  // namer. Aevi's authored names for the three registry entries that carried a description ("Unknown
+  // farmer" → Hessa Orm) and for `minted-1` (Sera Voight the Ashvow); everyone else still `provisional`
+  // gets a name from the pools in their own grain. Quiet in the UI — unlike a returned item, a name the
+  // player only ever saw as a placeholder is not something they need told about.
+  {
+    const renamed = repairUnnamedPeople(c, CONTENT.rules?.mintedNames || null, CONTENT);
+    if (renamed.length) console.warn(`[names] repaired ${renamed.length} unnamed person/people:`, renamed.map(r => `${r.was} → ${r.now}`).join(", "));
   }
   if (!c.clock) c.clock = newClock();
   if (!c.companions) c.companions = [];

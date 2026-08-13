@@ -23,6 +23,9 @@ import { tierRank, tierBirthWeight } from "./legends.js";
 // file that creates people had no access to the file that names them. `personName` is the one namer;
 // `nameOf`/`asSpoken` are what stop an origin line saying "of the the_ceaseless" at a player.
 import { personName, mintedWants, nameOf, asSpoken } from "./names.js";
+// SNG-433: the sentences a fight is reported in are AUTHORED. This holds only the decisions the prose
+// cannot make for itself — which variant, how a name shortens, and when to drop a slot.
+import { newsVoiceOf, clashLine, fragmentLine } from "./newsvoice.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
@@ -1536,7 +1539,7 @@ export function resolveEpicClash(a, b, rng = Math.random, { abilitiesByTradition
  *  player can seek the killer — §3d). ⛔ Death is a LANDMARK: gated behind a long cooldown (a `killed`
  *  candidate too soon after the last epic death is DOWNGRADED to `stopped`), so a legend never quietly
  *  vanishes. Mutates ws.epicStatus. Returns { finalKind, news:[], event|null, codex|null }. */
-export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { deathCooldownDays = 20, locationId = null, abilityId = null, abilitiesByTradition = null } = {}) {
+export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { deathCooldownDays = 20, locationId = null, abilityId = null, abilitiesByTradition = null, content = null } = {}) {
   ws.epicStatus = ws.epicStatus || {};
   const st = ws.epicStatus[loser.id] || { status: "active" };
   if (st.status === "dead") return { finalKind: "already_dead", news: [], event: null, codex: null };
@@ -1549,7 +1552,16 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
   // ⛔ THE SIGNATURE FOLLOWS THE WINNER THIS FUNCTION WAS HANDED, not the one the resolver rolled — the
   // arc-fight site passes the contest's winner and uses the roll only for severity.
   const power = abilityId || signatureOf(winner, loser, abilitiesByTradition) || null;
-  const clash = (text, outcome) => ({ text, kind: "clash", outcome, winnerId: winner.id, loserId: loser.id,
+  // ⛔ SNG-433 — THE WORDS ARE AUTHORED NOW. Erik asked three things of this news ("coherent? interesting?
+  // obvious why it's news?") and the answer to all three was no, because the four sentences below were
+  // written by me in an engine file. Aevi's templates say the same four events with the RELATIONSHIP naming
+  // why it matters, the short form on second mention, and a consequence sized to the outcome.
+  // ⚠️ THE HARDCODED LINE STAYS AS THE FALLBACK, and `loadContent` says out loud which one is running — a
+  // pack without the rule file must still produce news, but it must not do so silently.
+  const voice = newsVoiceOf(content);
+  const said = (outcome) => clashLine({ templates: voice.templates, outcome, winner, loser,
+                                        place: voice.place(locationId), power: voice.power(power) });
+  const clash = (text, outcome) => ({ text: said(outcome) || text, kind: "clash", outcome, winnerId: winner.id, loserId: loser.id,
                                       locationId: locationId || null, abilityId: power, worldDay });
   if (kind === "stalemate") { news.push(clash(`${winner.name} and ${loser.name} met — and neither could break the other.`, "stalemate")); ws.epicStatus[loser.id] = st; return { finalKind: "stalemate", news, event, codex, abilityId: power, locationId: locationId || null }; }
   // SNG-304 — DRIVEN OFF HALVES THE HOLD; only walking away resets it. Aevi: "losing a front you were forced
@@ -1583,7 +1595,10 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
     // player will click, and a sentence cannot be clicked back into a battle.
     // ⚠️ …AND THE DEATH LINE CARRIES THE TWO NEW FIELDS TOO. It was already the correct SHAPE, which is why
     // it was the only clickable one; it still could not say where it happened or what did it.
-    news.push({ text: event.text, kind: "death", victimId: loser.id, killerId: winner.id,
+    // ⚠️ SNG-433: THE NEWS LINE IS THE AUTHORED ONE; `event.text` STAYS THE BROADCAST. They are two
+    // different registers and always were — the event is what other worlds hear ("A legend has fallen"),
+    // the news is what this player reads, and only the second one is a template Aevi wrote.
+    news.push({ text: said("killed") || event.text, kind: "death", victimId: loser.id, killerId: winner.id,
                 locationId: locationId || null, abilityId: power, worldDay });
   } else if (finalKind === "wounded") {
     st.status = "wounded"; st.woundedUntilDay = worldDay + 8; st.woundedBy = winner.id;
@@ -2414,7 +2429,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       if (personal > 0) {
         const pursuit = personalPursuitOf(f, rng);
         livesLived++;
-        if (pursuit) { livesOnThePage++; personalBeats.push({ id: f.id, name: f.name, pursuit }); }
+        // SNG-433 §3.4: the beat carries WHERE they are, because the authored fragment templates have a
+        // "Word from {place}" variant and a beat that dropped the figure's home could never reach it.
+        if (pursuit) { livesOnThePage++; personalBeats.push({ id: f.id, name: f.name, pursuit, locationId: f.homeLocation || f.legend?.homeLocation || f.region || null }); }
       } else if (neglected) {
         // the care they are spending themselves on is the one they actually took this pass
         neglectedLives.push({ id: f.id, name: f.name, arcId: spent[0]?.care?.arcId ?? null });
@@ -2608,7 +2625,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
             if (rng() > severity) continue;
             const clash = resolveEpicClash(wf, e.f, rng, { abilitiesByTradition });
             const outcome = applyEpicClashOutcome(ws, wf, e.f, clash.kind, currentWorldDay,
-              { locationId: clash.locationId, abilitiesByTradition });
+              { locationId: clash.locationId, abilitiesByTradition, content });
             if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
               // SNG-431 §3: the casualty record carries them too — §2's unavenged debt and the battle prompt
               // both read this list, and a field that stops at the news item is unavailable to either.
@@ -2733,7 +2750,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           continue;
         }
         const outcome = applyEpicClashOutcome(ws, sender.f, mark.f, clash.kind, currentWorldDay,
-          { locationId: clash.locationId, abilitiesByTradition });
+          { locationId: clash.locationId, abilitiesByTradition, content });
         if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
           strikes.push({ arcId, kind, target: mark.f.id, sender: sender.f.id, outcome: outcome.finalKind,
             targetTier: mark.f.tier ?? mark.f.legend?.tier ?? null });
@@ -2776,7 +2793,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         const outcome = applyEpicClashOutcome(ws, clash.kind === "killed" || clash.kind === "wounded" ? challenger : f,
                                               clash.kind === "killed" || clash.kind === "wounded" ? f : challenger,
                                               clash.kind, currentWorldDay,
-                                              { locationId: clash.locationId, abilitiesByTradition });
+                                              { locationId: clash.locationId, abilitiesByTradition, content });
         if (!outcome?.finalKind || outcome.finalKind === "already_dead") continue;
         challenges.push({ defender: f.id, defenderName: f.name, challenger: challenger.id,
           challengerName: challenger.name, outcome: outcome.finalKind, tier: tierOf(ws, f) });
@@ -2871,8 +2888,18 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     ws.strikeCoverage = strikeCoverage(cfg || {}, living);
     ws.personalBeats = personalBeats;
     ws.neglectedLives = neglectedLives;
-    for (const b of personalBeats.slice(0, 3)) {
-      news.push({ text: `${b.name} ${b.pursuit}`, worldDay: currentWorldDay, tier: "murmur" });
+    // ⛔ SNG-433 §2.2 — "Overseer Grael of the Edge District a daughter who thinks he is a clerk" IS NOT A
+    // SENTENCE, and this is the line that wrote it: a name, a space, and an authored fragment. The fragments
+    // come in two grammatical shapes and one template cannot take both, so the SHAPE picks the template.
+    // ⚠️ Measured: every fragment this site can draw — 219 personalVerbs, 38 interests, 32 kin lines — is a
+    // noun phrase, so in practice they all take "{W} is spoken of: {frag}". The verb form is not dead code,
+    // it is the form `offscreenVerbs` is written in (197 of 217) should this site ever be given them.
+    {
+      const voice = newsVoiceOf(content);
+      for (const b of personalBeats.slice(0, 3)) {
+        const line = fragmentLine({ templates: voice.fragments, name: b.name, frag: b.pursuit, place: voice.place(b.locationId) });
+        news.push({ text: line || `${b.name} ${b.pursuit}`, worldDay: currentWorldDay, tier: "murmur" });
+      }
     }
     for (const n of neglectedLives.slice(0, 2)) {
       news.push({ text: `${n.name} has not been seen at home in a long while — whatever is happening has all of them.`, worldDay: currentWorldDay, tier: "murmur" });
@@ -3327,7 +3354,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
               const clash = resolveEpicClash(def, rivalDef, rng, { abilitiesByTradition: abilityIndexOf(content) });
               const winner = clash.winnerId === def.id ? def : rivalDef, loser = clash.loserId === def.id ? def : rivalDef;
               const res = applyEpicClashOutcome(ws, winner, loser, clash.kind, currentWorldDay,
-                { locationId: clash.locationId, abilitiesByTradition: abilityIndexOf(content) });
+                { locationId: clash.locationId, abilitiesByTradition: abilityIndexOf(content), content });
               // ⛔ SNG-431 §3 — `clashNewsItem`, NOT `{ text: line }`. Its own header warns about exactly
               // this site: wrapping an object in `{ text: … }` turns it into the string "[object Object]"
               // the instant it is stamped. It was already latent here for a DEATH (the one path that

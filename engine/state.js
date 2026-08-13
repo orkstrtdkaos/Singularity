@@ -212,7 +212,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -256,7 +256,11 @@ export async function loadContent() {
     // SNG-431 §1a — THE NAME POOLS. Authored at `5ba1c26f` and reachable by nothing: the file was never in
     // the manifest, so it was not merely registered-but-unloaded (CCODE-55's catch) — it was invisible one
     // step earlier. In THIS array beside the name that receives it, for the reason two comments up.
-    loadRule("minted_names", null)
+    loadRule("minted_names", null),
+    // SNG-433 — THE CLASH TEMPLATES. Authored at `b197b719` and, like the pools above, in no manifest: the
+    // engine kept saying "withdraws to lick their wounds" while the words Erik asked for sat on disk. In
+    // THIS array beside the name that receives it, for the reason the `economy` comment gives.
+    loadRule("news_templates", null)
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -289,6 +293,17 @@ export async function loadContent() {
   // tradition's own craft-words, wants by originKind. Merged in the same breath as the load for the reason
   // the line above says: a block sitting in a file that nothing lifts into `rules` is a writer with no reader.
   if (mintedNamesRule?.given && mintedNamesRule?.byname) rules.mintedNames = mintedNamesRule;
+  // SNG-433: the sentences a fight is reported in. Merged in the same breath as the load — a rule bag that
+  // nothing lifts onto `rules` is the reader-with-no-writer failure one layer up, twice over on this file.
+  if (newsTemplatesRule?.templates) rules.newsTemplates = newsTemplatesRule;
+  // ⚠️ SAID OUT LOUD AT LOAD, like the titles report above. Without the templates the tick falls back to the
+  // four hardcoded sentences and everything still works — which is exactly how a missing file stays missing
+  // for two tickets. A fallback that nobody can see is not a fallback, it is a silence.
+  {
+    const t = rules.newsTemplates?.templates;
+    if (t) console.log(`[news] clash templates: ${Object.keys(t).length} outcomes × ${Object.keys(t[Object.keys(t)[0]] || {}).filter(k => !k.startsWith("_")).length} relationships`);
+    else console.log("[news] no clash templates loaded — clash news falls back to the engine's built-in lines");
+  }
   if (arcResponseRule?.careShift) rules.careShift = arcResponseRule.careShift;
   if (arcResponseRule?.engagement) rules.engagement = arcResponseRule.engagement;   // SNG-300: who seeks a fight   // SNG-298: how a figure changes their mind
   if (encountersRule) rules.encounters = { ...(rules.encounters || {}), ...encountersRule };

@@ -14623,7 +14623,7 @@ await (async () => {
 // ---- SNG-400/400b: the death news carries its facts, and the battle image is BUILT ----
 {
   const { buildBattlePrompt, battleKey, figureLook, powerPhrase } = await import("../engine/battleprompt.js");
-  const { stampNews, clashNewsItem } = await import("../engine/worldtick.js");
+  const { stampNews, clashNewsItem, applyEpicClashOutcome: applyClash400 } = await import("../engine/worldtick.js");
 
   // §1 THE BLOCKER. Aevi: "No victimId. No killerId. No locationId. A sentence, and a tier."
   const flat = stampNews("Word reaches you: Veln Ashpause was killed.", { worldDay: 32 });
@@ -14635,7 +14635,17 @@ await (async () => {
     && clashNewsItem({ text: "fell", kind: "death", victimId: "v" }, { worldDay: 3, arcId: "a1" }).victimId === "v"
     && !/\[object Object\]/.test(String(clashNewsItem({ text: "fell", victimId: "v" }, {}).text)));
   const wtSrc400 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
-  check("400 §1: the death is emitted WITH its ids at the source, not just in the propagated event", /news\.push\(\{ text: event\.text, kind: "death", victimId: loser\.id, killerId: winner\.id/.test(wtSrc400));
+  // ⛔ SNG-433 — THIS WAS A SOURCE REGEX PINNED TO `text: event.text`, AND IT WENT RED THE MOMENT THE NEWS
+  // LINE CAME FROM AEVI'S TEMPLATES INSTEAD OF THE ENGINE'S OWN SENTENCE. The claim was never about which
+  // words the item carries; it is that a DEATH NEWS ITEM CARRIES ITS IDS, so the player can click it back
+  // into the fight. Asserted behaviourally now — the prose is free to change and the contract is not.
+  {
+    const kNews = (applyClash400({}, { id: "w400", name: "W" }, { id: "l400", name: "L" }, "killed", 40).news || [])
+      .find(n => n.kind === "death");
+    check("400 §1: the death is emitted WITH its ids at the source, not just in the propagated event",
+      !!kNews && kNews.victimId === "l400" && kNews.killerId === "w400" && !!String(kNews.text || "").trim(),
+      JSON.stringify(kNews || null));
+  }
   // ⛔ SNG-431 §3 — THE NUMBER IN THIS GATE ENCODED THE BUG. It asserted exactly 3 while its own sentence
   // says EVERY site, and there are FOUR places that resolve a clash: the arc fight, the strike, the
   // challenge, and the narrated stir. The fourth wrapped `{ text: line }` around the object — which is the
@@ -15903,6 +15913,180 @@ await (async () => {
   for (const r of roots) walk(r);
   check(`CCODE-191: no source file carries a control character (${scanned.length} files scanned)`,
     dirty.length === 0, `a \b written as a literal backspace is an invisible dead regex: ${dirty.slice(0, 5).join(" · ")}`);
+}
+
+// ---- SNG-433: the clash news, in the authored voice ------------------------------------------------
+// ⛔ ERIK'S THREE QUESTIONS OF THE NEWS — "coherent? interesting? obvious why it's news?" — answered no,
+// no and no, because the four sentences were written by an engine and one of them printed a full name
+// twice. Aevi re-authored them; these gates are that the words a PLAYER READS come from her file.
+{
+  const NV = await import("../engine/newsvoice.js");
+  const { applyEpicClashOutcome: applyClash433, advanceGeneratedOffscreen: tick433, initWorldState: initWs433 } =
+    await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch433 } = await import("./headless_content.mjs");
+  const C433 = await lch433();
+  const T433 = C433.rules?.newsTemplates;
+
+  // 1 · REGISTERED **AND** LOADED. Authored at b197b719, in no manifest, read by nothing — the same
+  // invisible-one-step-earlier failure as the name pools, on the very next file Aevi shipped.
+  check("433: news_templates is registered AND loaded onto rules.newsTemplates (not merely on disk)",
+    !!T433?.templates && !!T433?.fragments,
+    `rules.newsTemplates = ${JSON.stringify(Object.keys(T433 || {}))}`);
+
+  // 2 · ⛔ THE ENGINE SAYS "stopped"; THE AUTHOR WROTE "checked". An unmapped outcome returns undefined and
+  // falls silently back to the hardcoded line — the exact way a wired file stays unwired.
+  {
+    const missing = Object.entries(NV.OUTCOME_TEMPLATE_KEY).filter(([, k]) => !T433?.templates?.[k]);
+    const thin = Object.entries(T433?.templates || {}).filter(([, b]) => !b.rival || !b.mutual || !b.stranger);
+    check("433: every outcome the engine can produce names a template block that exists, with all three relationships",
+      missing.length === 0 && thin.length === 0 && Object.keys(NV.OUTCOME_TEMPLATE_KEY).length === 4,
+      `unmapped=${missing.map(m => m[0])} thin=${thin.map(t => t[0])}`);
+  }
+
+  // 3 · THE TEXT COMES FROM THE FILE. Not "the function exists" — the sentence a player reads is hers.
+  {
+    const A433 = { id: "a433", name: "The Hollow King of the Wild Half", rivals: ["b433"] };
+    const B433 = { id: "b433", name: "Neth, Who Has Buried More Than She Has Known", rivals: ["a433"] };
+    const out = applyClash433({}, A433, B433, "stopped", 12, { content: C433 });
+    const text = out.news[0]?.text || "";
+    // ⚠️ THE LITERAL IS LIFTED FROM THE FILE, NOT RETYPED HERE. A gate carrying its own copy of Aevi's prose
+    // goes green while she rewords it, and then guards nothing — the longest run of words BETWEEN the
+    // placeholders is whatever she wrote today.
+    const authored = T433.templates.checked.mutual.split(/\{[a-zA-Z]+\}/)
+      .map(s => s.trim()).sort((a, b) => b.length - a.length)[0];
+    check("433: a 'stopped' clash is reported in the AUTHORED words (the 'checked' block), not the engine's own line",
+      text.includes(authored) && !/checked .*for now/.test(text), `${text.slice(0, 120)} ⟵ wanted "${authored}"`);
+    // 4 · SHORT FORM ON SECOND MENTION — the stutter Erik saw, measured rather than eyeballed.
+    check("433: the full name appears ONCE and the second mention is short",
+      text.split(B433.name).length === 2 && text.includes("Neth") && text.lastIndexOf("Neth") > text.indexOf(B433.name),
+      text);
+  }
+
+  // 5 · THE SHORT-NAME RULE, RE-VERIFIED ON THE REAL CORPUS. Aevi's first rule produced "Morvane of the";
+  // her claim about the second is "0 cut on a stopword across all 66". Claim, therefore gate.
+  {
+    const names = (C433.legends?.roster || []).map(f => f?.name).filter(Boolean);
+    const bad = names.filter(n => /\b(of|who|that|the|a|an|and|or|with|in|at|on|to|for|by|from)$/i.test(NV.shortName(n).trim()));
+    const shortened = names.filter(n => NV.shortName(n) !== n);
+    check(`433: no authored name shortens onto a preposition or article (${names.length} names, ${shortened.length} shorten)`,
+      names.length > 60 && bad.length === 0 && shortened.length > 20, bad.slice(0, 4).join(" · "));
+  }
+
+  // 6 · THE RELATIONSHIP IS WHY IT IS NEWS. Three different sentences for the same two people, chosen by
+  // `rivals` — a field authored on 58 of 66 figures and read by nothing since SNG-208.
+  {
+    const line = (ar, br) => NV.clashLine({ templates: T433.templates, outcome: "killed",
+      winner: { id: "x", name: "Winner Name Here", rivals: ar ? ["y"] : [] },
+      loser: { id: "y", name: "Loser Name Here", rivals: br ? ["x"] : [] }, place: "The Maw" });
+    const mutual = line(true, true), rival = line(true, false), stranger = line(false, false);
+    check("433: mutual, rival and stranger are three DIFFERENT sentences for the same two figures",
+      mutual !== rival && rival !== stranger && mutual !== stranger && [mutual, rival, stranger].every(s => s && s.includes("The Maw")),
+      `${mutual}\n      ${rival}\n      ${stranger}`);
+  }
+
+  // 7 · ⛔ NO PLACE → DROP THE PHRASE, NEVER "at null".
+  {
+    const noPlace = NV.clashLine({ templates: T433.templates, outcome: "killed",
+      winner: { id: "x", name: "A Winner" }, loser: { id: "y", name: "A Loser" }, place: null });
+    // ⚠️ AND A DANGLING " at ." IS THE SAME BUG WEARING BETTER MANNERS. Emptying the slot instead of
+    // dropping the phrase leaves "killed them at ." — which no assertion about the word "null" can see.
+    check("433: a clash with no place drops ' at {place}' rather than printing 'at null' or a dangling 'at'",
+      !!noPlace && !/\bat (null|undefined|\{place\})/.test(noPlace) && !/\bat\s*([.,;—]|$)/.test(noPlace)
+      && !/\s{2,}/.test(noPlace), noPlace);
+  }
+
+  // 8 · ⛔ A DISPLAY NAME, NEVER AN ID — "the the_ceaseless" is this fault and it has shipped before.
+  {
+    const locId = Object.keys(C433.locations || {}).find(id => C433.locations[id]?.name && id.includes("_"));
+    const rendered = applyClash433({}, { id: "p1", name: "One Name" }, { id: "p2", name: "Two Name" },
+      "wounded", 5, { content: C433, locationId: locId }).news[0]?.text || "";
+    check("433: the place in a clash line is the location's DISPLAY NAME, and the id never reaches the player",
+      rendered.includes(C433.locations[locId].name) && !rendered.includes(locId), `${locId} → ${rendered.slice(0, 110)}`);
+  }
+
+  // 9 · …AND THE SECOND DEFENCE, which fails differently: a caller that skipped the lookup and handed the
+  // renderer an id gets the phrase dropped rather than the id printed.
+  check("433: an id-shaped place handed straight to the renderer is refused, not printed",
+    NV.isIdShaped("the_ceaseless") && !NV.isIdShaped("The Ceaseless")
+    && !/the_ceaseless/.test(NV.fillTemplate("{W} killed {L} at {place}.", { W: "A", L: "B", place: "the_ceaseless" })));
+
+  // 10 · THE POWER IS A DETAIL THE TELLER KNEW, NOT A STAT LINE — "roughly one in three", and the SAME
+  // fight must say the same words every time, or a news item cannot be trusted to reopen the same battle.
+  {
+    const draw = (i) => NV.clashLine({ templates: T433.templates, outcome: "wounded",
+      winner: { id: `w${i}`, name: "Winner Name" }, loser: { id: `l${i}`, name: "Loser Name" },
+      place: "The Maw", power: "The Spent Hour" });
+    // ⛔ DETERMINISM OVER 300 FIGHTS, NOT ONE — and the difference is the whole gate. `draw(7) === draw(7)`
+    // was my first version, and mutation says it is worth nothing: with a 1-in-3 roll two draws of the SAME
+    // fight still agree 5 times in 9 (both roll the power, or both roll a variant — and the variant is fixed
+    // by the relationship). A gate that goes red 45% of the time is worse than no gate, because it will be
+    // seen green and believed. Two full passes must agree line for line.
+    const n = 300;
+    const pass = () => Array.from({ length: n }, (_, i) => draw(i));
+    const first = pass(), second = pass();
+    const withPower = first.filter(s => s.includes("The Spent Hour")).length;
+    check(`433: the power names the fight roughly one time in three (${withPower}/${n}) and never re-rolls`,
+      withPower > n * 0.2 && withPower < n * 0.47 && first.every((s, i) => s === second[i]));
+  }
+
+  // 11 · ⛔ "Overseer Grael of the Edge District a daughter who thinks he is a clerk" IS NOT A SENTENCE.
+  // Two grammatical shapes, two templates, chosen by the shape — and Aevi's FIELD hint is backwards for the
+  // shipped content, which is why only the shape decides: `personalVerbs` is 219 fragments and 0 verbs.
+  {
+    const F = T433.fragments;
+    const verb = NV.fragmentLine({ templates: F, name: "The Hollow King", frag: "sells a secret that wasn't his" });
+    const noun = NV.fragmentLine({ templates: F, name: "Overseer Grael", frag: "a daughter who thinks he is a clerk" });
+    check("433: a verb fragment and a noun fragment take DIFFERENT templates, and neither is a bare join",
+      NV.fragmentForm("sells a secret that wasn't his") === "verbForm"
+      && NV.fragmentForm("a daughter who thinks he is a clerk") === "nounForm"
+      && NV.fragmentForm("learning a faster road") === "nounForm"
+      && verb !== noun && !noun.startsWith("Overseer Grael a "), `${verb}\n      ${noun}`);
+    const pv = (C433.legends?.roster || []).flatMap(f => f.personalVerbs || []);
+    check(`433: every fragment this news site can draw is a noun phrase (${pv.length} personalVerbs, 0 verbs) — the shape decides, not the field`,
+      pv.length > 100 && pv.every(v => NV.fragmentForm(v) === "nounForm"),
+      pv.filter(v => NV.fragmentForm(v) !== "nounForm").slice(0, 3).join(" · "));
+  }
+
+  // 12 · AEVI'S OWN ASKED-FOR GATE, verbatim: *"no string under `templates` or `fragments` may contain ⛔ or
+  // ⚠️."* She caught one leaking into a stalemate line — an editorial marker inside prose a player reads.
+  {
+    const leaks = [];
+    const walk = (o, path) => {
+      if (typeof o === "string") { if (/[⛔⚠]/.test(o) && !path.split(".").pop().startsWith("_")) leaks.push(path); return; }
+      if (o && typeof o === "object") for (const [k, v] of Object.entries(o)) walk(v, `${path}.${k}`);
+    };
+    walk(T433.templates, "templates"); walk(T433.fragments, "fragments");
+    check("433: no editorial marker leaks into a string a player reads", leaks.length === 0, leaks.join(" · "));
+  }
+
+  // 13 · THE WIRING ITSELF, as a census rather than a number — four sites resolve a clash and all four must
+  // hand it the content, or three of them quietly keep the engine's own sentences.
+  {
+    const wt433 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+    const applies = (wt433.match(/(?<!export function )applyEpicClashOutcome\(ws,/g) || []).length;
+    const fed = (wt433.match(/abilitiesByTradition[^}]*, content \}/g) || []).length;
+    check("433: every clash site hands the tick's content to the reporter", applies === 4 && fed === applies,
+      `${applies} clash sites, ${fed} carrying content`);
+  }
+
+  // 14 · AND END TO END: a world that actually runs, and the murmurs it produces are sentences.
+  {
+    let seed433 = 12345;
+    const rng433 = () => ((seed433 = (seed433 * 1664525 + 1013904223) >>> 0) / 4294967296);
+    const ch433 = { name: "P", level: 6, worldState: initWs433(1) };
+    // 900 days, because the personal-beat path does not fire in the first 400: measured 0 murmurs at
+    // day 400 and 19 by day 600. A gate over an empty list is green and proves nothing.
+    for (let d = 1; d <= 900; d++) {
+      await tick433({ character: ch433, content: C433, evolveFn: async () => ({}), rng: rng433, now: Date.UTC(2025, 0, 1) + d * 86400000 });
+    }
+    const items = ch433.worldState.news || [];
+    const murmurs = items.filter(n => n.tier === "murmur" && !n.kind);
+    const templated = murmurs.filter(n => /is spoken of:|Word from/.test(n.text));
+    const rawIds = items.filter(n => /\b[a-z0-9]+_[a-z0-9_]+\b/.test(String(n.text)));
+    check(`433 END TO END: a live world's personal beats are sentences (${templated.length}/${murmurs.length} through a template) and no id reaches the page`,
+      murmurs.length > 0 && templated.length > 0 && rawIds.length === 0,
+      rawIds.slice(0, 2).map(n => n.text).join(" · "));
+  }
 }
 
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {

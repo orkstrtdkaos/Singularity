@@ -1,0 +1,142 @@
+{
+ "_note": "⛔ SNG-430. THE NAMING LAYER FOR MINTED FIGURES, WHICH NEVER EXISTED. `mintFigure` in worldtick.js says it outright: '⚠️ THE NAME IS AN EPITHET, NOT A NAME. The engine mints the slot and the story; NAMING IS AUTHORSHIP.' ⚠️ IT WAS RIGHT TO SAY SO AND NOTHING EVER CAME BACK TO DO THE AUTHORING. `worldtick.js` does not import `names.js` at all.\n⛔ RESULT ON A LIVE SAVE: a figure named 'the one who outlived Cinder Vael, the Wright Who Would Not Stop', with `provisional: true` and `wants` holding 'of the the_ceaseless; watched Cinder Vael… called out, and outlived them'. FOUR FAULTS IN ONE RECORD — an epithet in the name slot, a double article ('the the_ceaseless'), a raw id shown to a player, and a SENTENCE FRAGMENT in the `wants` field.",
+ "_howToUse": "⚠️ On mint, draw a given name from the tradition pool and a byname from the origin pool, then set `provisional: false`. ⛔ THE EPITHET STAYS — as `epithet`, where it belongs. A figure is 'Sera Voight, who outlived the Wright' — not 'the one who outlived Cinder Vael, the Wright Who Would Not Stop'.",
+ "given": {
+  "wright": [
+   "Sera",
+   "Coll",
+   "Brannic",
+   "Idra",
+   "Tolm",
+   "Vesh",
+   "Aran",
+   "Nyle"
+  ],
+  "ashwarden": [
+   "Neth",
+   "Corrin",
+   "Halda",
+   "Ossian",
+   "Rue",
+   "Vell",
+   "Marek"
+  ],
+  "marcher": [
+   "Dain",
+   "Ferrow",
+   "Kest",
+   "Bram",
+   "Suvi",
+   "Rold",
+   "Ganna"
+  ],
+  "somatic": [
+   "Ilo",
+   "Tarn",
+   "Vay",
+   "Sesh",
+   "Kord",
+   "Ammet"
+  ],
+  "rootkin": [
+   "Bryn",
+   "Ash",
+   "Willa",
+   "Corry",
+   "Fen",
+   "Marrow"
+  ],
+  "enginewright": [
+   "Cog",
+   "Vasser",
+   "Pell",
+   "Trit",
+   "Ordo",
+   "Belen"
+  ],
+  "abyssal": [
+   "Vane",
+   "Sallow",
+   "Grael",
+   "Orn",
+   "Thessaly"
+  ],
+  "umbral": [
+   "Dusk",
+   "Ren",
+   "Ossa",
+   "Vent",
+   "Lome"
+  ],
+  "threnodist": [
+   "Cadence",
+   "Miren",
+   "Sol",
+   "Antiphon",
+   "Vesper"
+  ],
+  "blazeborn": [
+   "Cinder",
+   "Ember",
+   "Kalix",
+   "Faro",
+   "Ash"
+  ],
+  "_default": [
+   "Corm",
+   "Vail",
+   "Estry",
+   "Holt",
+   "Ravel",
+   "Sennet",
+   "Orla",
+   "Dane"
+  ]
+ },
+ "byname": {
+  "casualty_survivor": [
+   "who walked back",
+   "the last one standing",
+   "who was there",
+   "who came home alone",
+   "who does not speak of it",
+   "the survivor"
+  ],
+  "faction_leaderless": [
+   "who took the chair",
+   "sent for",
+   "the second answer",
+   "who was not the first choice",
+   "who inherited the work",
+   "called up"
+  ],
+  "vacancy": [
+   "who stepped in",
+   "who was nearest",
+   "the one who noticed",
+   "who did not wait"
+  ],
+  "_default": [
+   "newly spoken of",
+   "lately arrived",
+   "not yet reckoned"
+  ]
+ },
+ "_wantsFix": "⛔ `wants` MUST BE A WANT, NOT AN ORIGIN. It currently holds the origin sentence, so a figure's stated desire reads 'of the the_ceaseless; watched X called out, and outlived them'. ⚠️ WANTS BY ORIGIN KIND:\n   casualty_survivor → 'to be worth the one who did not come back'\n   faction_leaderless → 'to be more than a stand-in'\n   vacancy → 'to hold what nobody else would'\nThe ORIGIN belongs in `origin`, where it already is.",
+ "wants": {
+  "casualty_survivor": "to be worth the one who did not come back",
+  "faction_leaderless": "to be more than a stand-in",
+  "vacancy": "to hold what nobody else would",
+  "_default": "to be counted among those who matter"
+ },
+ "_displayFix": "⛔ 'of the the_ceaseless' — DOUBLE ARTICLE AND A RAW ID. `originOf` returns `home || people`, and homes are ids like `the_ceaseless`. ⚠️ THE ORIGIN LINE MUST RESOLVE THE ID TO A DISPLAY NAME AND NOT PREPEND 'the' TO A NAME THAT ALREADY HAS ONE. That is the same class as CCode's own note elsewhere in worldtick: 'NAMES, NOT IDS — dug in over arc_what_wakes_beneath is the machine talking'.",
+ "repair": {
+  "minted-1": {
+   "name": "Sera Voight",
+   "epithet": "who walked back",
+   "wants": "to be worth the one who did not come back",
+   "origin": "of the Ceaseless; was standing beside Cinder Vael when the Wright was called out, and outlived it",
+   "why": "⛔ Was named 'the one who outlived Cinder Vael, the Wright Who Would Not Stop'. A wright's given name from the pool, a short byname, the epithet moved to its own field, the want made a want, and the double article and raw id resolved."
+  }
+ }
+}

@@ -14357,6 +14357,38 @@ await (async () => {
     /\.lightbox-close \{[^}]*position: absolute[^}]*top:/.test(css180) && /\.lightbox-meta-btn \{[^}]*position: absolute[^}]*top:/.test(css180));
 }
 
+// ---- CCODE-184: "I want to be able to set the default picture please." ----
+// ⛔ KEEP WAS DOING TWO JOBS. It cast the likeness vote AND silently became the shown picture — so keeping a
+// fifth image because you liked one detail of it replaced the face you had already chosen, and there was no
+// way to say which one represents someone. Two sentences, two buttons:
+//   ☆ Keep this look  — this is what they LOOK like   (a vote, many, accumulates, steers future renders)
+//   ★ Set as default  — this is the picture to SHOW   (exactly one, and it pins against the re-mint)
+{
+  const src184 = readFileSync(join(root, "app.js"), "utf8");
+  // ⚠️ THE MARKUP **AND** THE HANDLER. Checking the bare attribute passed while half the feature was gone —
+  // the mutation removed the button and the querySelector still matched.
+  check("CCODE184: there is a button that sets the default picture, and something listening to it",
+    /<button class="lightbox-default" data-lbdefault/.test(src184) && /★ Set as default/.test(src184)
+    && /el\.querySelector\("\[data-lbdefault\]"\)/.test(src184));
+  check("CCODE184: it is offered only when this is NOT already the default", /const canSetDefault = !!it\.regen\?\.subjectId && !!spec\?\.keep && !isCurrent;/.test(src184));
+  // ⛔ THE SPLIT ITSELF: keeping must no longer change what is shown
+  check("CCODE184: KEEP no longer sets the shown picture — it is a vote and only a vote",
+    !/if \(!spec\.keep\(it\.regen\.subjectId, it\.url, it\.seedKey\)\) return false;/.test(src184));
+  check("CCODE184: …and the default button is what calls the kind's keep", /const ok = sub\.spec\.keep\(it\.regen\.subjectId, it\.url, it\.seedKey\);/.test(src184));
+  check("CCODE184: a subject-less picture offers neither (nothing to represent, nothing to vote on)",
+    /const canKeep = !!it\.regen\?\.subjectId && !!spec\?\.keep;/.test(src184));
+  // the two must remain independent, which is the whole point
+  const { toggleKeep: tk184, acceptImage: ai184 } = await import("../engine/art.js");
+  const store184 = {}, rec184 = { id: "pell", name: "Pell", image: "chosen" };
+  tk184(store184, "npc:pell", { url: "other", note: "dark hair", prompt: "dark hair, strong build" });
+  check("CCODE184: keeping a DIFFERENT picture does not move the default", rec184.image === "chosen" && store184["npc:pell"].keeps.length === 1);
+  ai184(rec184, { url: "other", seedKey: "s" });
+  check("CCODE184: …and setting the default does not add a vote", rec184.image === "other" && store184["npc:pell"].keeps.length === 1);
+  check("CCODE184: setting a default still PINS, so the milestone re-mint cannot overrule the choice", rec184.imagePinned === true);
+  // and the gallery stack shows whatever the default is
+  check("CCODE184: the stack's representative follows the default", /const rep = st\.members\.find\(m => m\.url === chosen\) \|\| st\.members\[0\];/.test(src184));
+}
+
 // ---- CCODE-183: the gallery stacks by subject ----
 // Erik: "I have created several images of Pell now that I like and have kept. They don't need to appear
 // separate in the gallery — they should show up as the one I choose to represent her, and when clicked I

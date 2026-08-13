@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.144";
+const APP_VERSION = "1.9.145";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1079,7 +1079,12 @@ function keepLightboxItem(it) {
       prompt: [note, it.prompt || it.regen.prompt || ""].filter(Boolean).join(", "), seedKey: it.seedKey, at: absoluteWorldDay() });
     if (!kept.kept) { saveCharacter(character); return true; }   // un-keeping is the same button
   }
-  if (!spec.keep(it.regen.subjectId, it.url, it.seedKey)) return false;
+  // ⛔ CCODE-184 (Erik): "I want to be able to set the default picture please." Keep used to do BOTH — cast
+  // the likeness vote AND silently become the shown picture. So keeping a fifth image purely because you
+  // liked one detail of it replaced the face you had chosen, and there was no way to say which one
+  // represents them. They are two different sentences and they get two different buttons now:
+  //   ☆ Keep this look  — this is what they LOOK like   (a vote, many, accumulates)
+  //   ★ Set as default  — this is the picture to SHOW   (exactly one, and it pins)
   addGalleryImage(character, {
     kind: it.regen.galleryKind || it.regen.kind, prompt: it.prompt || "", url: it.url,
     caption: it.caption || "", worldDay: absoluteWorldDay(),
@@ -1163,6 +1168,8 @@ function openLightbox(items, start = 0) {
     // statement about a SUBJECT; a one-off moment has none, and offering it there is a lie that looks
     // like a feature.
     const canKeep = !!it.regen?.subjectId && !!spec?.keep;
+    // CCODE-184: which picture REPRESENTS this subject — the one the stack shows and the game uses.
+    const canSetDefault = !!it.regen?.subjectId && !!spec?.keep && !isCurrent;
     const isNewDraw = !!it.regen && !!it.isDraw;
     // ⛔ CCODE-177 (Erik): "I also need a way to discard re-rendered images." An unkept draw only lived in
     // this list, so closing the box threw it away — but there was no way to throw away just ONE while
@@ -1222,6 +1229,7 @@ function openLightbox(items, start = 0) {
       ${canRegen ? `<button class="lightbox-regen" data-lbregen title="Draw ${esc(it.regen.label || "this")} again — same description, a new hand. The one you have now is kept beside it; nothing is replaced unless you choose it.">↻ Draw again</button>` : ""}
       ${canRebuild ? `<button class="lightbox-rebuild" data-lbrebuild title="Describe ${esc(it.regen.label || "this")} differently — for when the picture is not merely unlucky but wrong (wrong place, wrong look, the wrong thing happening)">✎ Describe differently</button>` : ""}
       ${canDiscard ? `<button class="lightbox-discard" data-lbdiscard title="${isDraw172 ? "Throw this draw away — it was never saved" : "Delete this picture from your gallery, and stop it guiding what they look like"}">✕ Discard</button>` : ""}
+      ${canSetDefault ? `<button class="lightbox-default" data-lbdefault title="Make this the picture shown for ${esc(it.regen.label || "this")} everywhere — the others stay in the stack">★ Set as default</button>` : ""}
       ${canKeep ? `<button class="lightbox-keep${isKept ? " kept" : ""}" data-lbkeep title="${isKept ? "Stop using this one as a guide to what they look like" : `Keep this look for ${esc(it.regen.label || "them")} — future pictures of them will be drawn toward it. Keep as many as you like; what they agree on counts most.`}">${isKept ? "★ kept — remove" : "☆ Keep this look"}</button>` : ""}
       </div>
     </div>`;
@@ -1299,6 +1307,17 @@ It leaves your gallery, and stops guiding what ${it.regen?.label || "they"} look
       const back = Math.max(0, i - 1);
       list.splice(i, 1); i = Math.min(back, list.length - 1);
       if (!list.length) { close(); return; }
+      render();
+    };
+    const defBtn = el.querySelector("[data-lbdefault]");
+    if (defBtn) defBtn.onclick = (ev) => {
+      ev.stopPropagation();
+      const sub = regenSubject(it.regen);
+      if (!sub?.spec?.keep) return;
+      defBtn.disabled = true;
+      const ok = sub.spec.keep(it.regen.subjectId, it.url, it.seedKey);
+      if (!ok) { defBtn.textContent = "✕ couldn't set"; return; }
+      saveCharacter(character);
       render();
     };
     const keepBtn = el.querySelector("[data-lbkeep]");

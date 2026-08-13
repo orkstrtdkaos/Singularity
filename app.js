@@ -1048,10 +1048,24 @@ function galleryRegenFor(g) {
   return null;
 }
 
-/** The stable identity of a tile that has no record behind it. Its own url — the one thing a rendered
- *  image always has, and the thing every re-roll of it inherits. Prefixed so it can never collide with a
- *  real record id. */
-function soloSubjectId(g) { return g?.seedKey ? `solo:${g.seedKey}` : (g?.url ? `solo:${g.url}` : null); }
+/** The stable identity of a tile that has no record behind it.
+ *
+ *  ⛔ CCODE-187 (Erik): "my new versions of Resonant Sight have split from the default view in the gallery…
+ *  we can move that info to the different image details while leaving the more generic subject as the stack
+ *  title." He is right about the fix and the cause is one layer under the title: RESONANT SIGHT IS A
+ *  `discovery` FROM `emergence_recipes.json` — not on the sheet, not in `customAbilities`, not in the
+ *  ability catalog — so `galleryRegenFor`'s name lookup finds nothing and the tile falls through to
+ *  prompt-only. Keyed on its own URL, every picture of it is its own stack of one.
+ *
+ *  ⚠️ THE CAPTION IS THE SUBJECT when nothing else is. It is what the player reads as the name of the
+ *  thing, it is identical across every draw of it, and it is exactly what Erik means by "the more generic
+ *  subject". The url is the last resort, for a tile with no caption at all — where a stack of one is the
+ *  honest answer. Prefixed so it can never collide with a real record id. */
+function soloSubjectId(g) {
+  const cap = String(g?.caption || "").trim().toLowerCase().replace(/\s+/g, " ");
+  if (cap) return `solo:cap:${cap.slice(0, 90)}`;
+  return g?.seedKey ? `solo:${g.seedKey}` : (g?.url ? `solo:${g.url}` : null);
+}
 
 /** SNG-401 §2/§3: draw it again. `describe` carries the REBUILD's new words; without it this is the
  *  re-roll — same description, new seed. Returns a NEW lightbox item; the caller appends it, and the
@@ -1143,7 +1157,9 @@ function keepLightboxItem(it) {
  *  A picture with no url and no prompt is the only thing left with nothing to vote on. */
 function keepableRegen(it) {
   if (!it?.url) return it?.regen || null;
-  const solo = soloSubjectId({ seedKey: it.seedKey, url: it.url });
+  // ⚠️ THE CAPTION GOES IN. Without it this computes a url-keyed id while the gallery computes a
+  // caption-keyed one for the same picture — two names for one subject, which is the split it is fixing.
+  const solo = soloSubjectId({ caption: it.caption || it.meta?.caption, seedKey: it.seedKey, url: it.url });
   if (!it.regen) return { kind: "moment", subjectId: solo, label: "this moment", prompt: it.prompt || null, galleryKind: it.meta?.kind || "moment" };
   const spec = REGEN_KINDS[it.regen.kind];
   if (!spec) return { ...it.regen, kind: "moment", subjectId: it.regen.subjectId || solo };
@@ -9943,8 +9959,13 @@ function renderGallery() {
         ${/* Erik: "I don't need the 'chosen' tag on the display." It said the same thing the tile already
               says by BEING the one shown — the stack's chosen image is the one on top. The ▣ badge carries
               the only part that was news (there are others behind this). `portrait` stays: that is a
-              different fact, about the character sheet rather than about the stack. */""}
-        <figcaption>${esc(g.caption || g.kind)}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait${character.portraitPinned ? " · pinned" : ""}</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
+              different fact, about the character sheet rather than about the stack.
+              ⛔ CCODE-187, and world-day goes with it: "we can move that info to the different image
+              details while leaving the more generic subject as the stack title." A stack holds pictures
+              made on DIFFERENT days, so a single day stamped on the stack is wrong as soon as there are
+              two — it is a fact about ONE picture. The details panel already carries it per image
+              (`["world-day", m.worldDay]`), which is where it belongs; the title is the subject. */""}
+        <figcaption>${esc(g.caption || g.kind)}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait${character.portraitPinned ? " · pinned" : ""}</span>` : ""}${n > 1 ? ` <span class="hint">· ${n} pictures</span>` : g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
       </figure>`; }).join("")}</div>`; })()
       : gallery.length ? "<div class='insight'>Nothing in this category yet.</div>"
       : "<div class='insight'>No images yet — a portrait is minted at creation (with art on), and the world fills in as you play.</div>"}

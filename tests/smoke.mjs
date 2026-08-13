@@ -10844,8 +10844,10 @@ await (async () => {
     /const workMult = Number\.isFinite\(cfg\.indirectPushMult\)/.test(wsrc));
 
   // CCODE-117/118 — fights cost something, through ONE injury model, and the tier gap sets the toll.
+  // ⚠️ SNG-431 §3 added the ability index as a fourth argument. The claim is "one injury model", not "this
+  // call takes three parameters" — a gate spelled as an exact call signature fails when the call grows.
   check("272/117: an arc fight can COST something — one injury model, not two",
-    /casualtyRate/.test(wsrc) && /resolveEpicClash\(wf, e\.f, rng\)/.test(wsrc));
+    /casualtyRate/.test(wsrc) && /resolveEpicClash\(wf, e\.f, rng/.test(wsrc));
   check("272/118: the tier GAP decides how many a victor cuts down",
     /const reachByGap = cfg\.casualtyReachByGap/.test(wsrc));
 
@@ -14845,8 +14847,21 @@ await (async () => {
     // The rule lands at the ONE place all eleven surfaces pass through. Per-surface fixes are how this got here.
     check("CCODE-186: every picture the lightbox opens is given a subject, whatever surface it came from",
       /function keepableRegen\(it\)/.test(s186) && /for \(const it of list\) it\.regen = keepableRegen\(it\);/.test(s186));
-    check("CCODE-186: …a one-off's subject is its OWN url, so its re-draws stack with it rather than scattering",
-      /function soloSubjectId\(g\) \{ return g\?\.seedKey \? `solo:\$\{g\.seedKey\}` : \(g\?\.url \? `solo:\$\{g\.url\}` : null\); \}/.test(s186));
+    // ⛔ CCODE-187 (Erik): "my new versions of Resonant Sight have split from the default view… leave the
+    // more generic subject as the stack title." Resonant Sight is a `discovery` out of emergence_recipes
+    // — not on the sheet, not in customAbilities, not in the catalog — so the name lookup finds nothing and
+    // every picture of it keyed on its own URL: a stack of one, per draw. The CAPTION is the subject when
+    // nothing else is, and it is identical across every draw of the same thing.
+    check("CCODE-187: a tile with no record stacks on its CAPTION, so every draw of one thing is one stack",
+      /if \(cap\) return `solo:cap:\$\{cap\.slice\(0, 90\)\}`;/.test(s186)
+      && /const solo = soloSubjectId\(\{ caption: it\.caption \|\| it\.meta\?\.caption, seedKey: it\.seedKey, url: it\.url \}\);/.test(s186));
+    check("CCODE-187: …and a tile with NO caption still falls back to its url — a stack of one is honest there",
+      /return g\?\.seedKey \? `solo:\$\{g\.seedKey\}` : \(g\?\.url \? `solo:\$\{g\.url\}` : null\);/.test(s186));
+    // ⚠️ A stack holds pictures made on DIFFERENT days, so one day stamped on the stack is wrong the moment
+    // there are two. The details panel already carries it per image.
+    check("CCODE-187: the stack title is the subject — world-day is a fact about one picture, not the stack",
+      /\$\{n > 1 \? ` <span class="hint">· \$\{n\} pictures<\/span>` : g\.worldDay \?/.test(s186)
+      && /\["world-day", m\.worldDay\]/.test(s186));
     // ⛔ A KIND THAT NEEDS A RECORD AND HAS NONE MUST NOT BE HANDED A SYNTHETIC ID — its `keep` would look
     // up "solo:https://…" in the registry, find nothing, and return false on click. That is the exact
     // "✕ couldn't keep" Erik hit at CCODE-166, and giving every item a subject is a fresh way to cause it.

@@ -1430,8 +1430,22 @@ export function applyEpicArcPush(ws, figure, worldDay, urgency = 1) {
 /** SNG-208 §3b: resolve an epic-vs-rival clash into one of Erik's outcomes. Pure — relative legend weight
  *  sets the odds, a roll decides, the MARGIN sets how decisive (a near-toss-up stalemates; only a decisive,
  *  rare roll is a `killed` CANDIDATE — the death GATE itself lives in applyEpicClashOutcome). `a` is the one
- *  who stirred, `b` the rival. Returns {winnerId, loserId, winnerName, loserName, kind, margin}. */
-export function resolveEpicClash(a, b, rng = Math.random) {
+ *  who stirred, `b` the rival. Returns {winnerId, loserId, winnerName, loserName, kind, margin}.
+ *
+ *  ⛔ SNG-431 §3 — AND WHERE, AND WITH WHAT. Aevi: *"`resolveEpicClash` contains zero references to
+ *  `locationId` or `abilityId`… `battleprompt.js` already exists, so the builder is being written against
+ *  events that cannot feed it."* Two fields and the picture becomes possible.
+ *
+ *  ⚠️ AND BOTH ARE ALREADY AUTHORED, which is the only reason this is wiring. Measured on HEAD: `homeLocation`
+ *  is on 70 of 70 roster figures and every one of them resolves to a real location — the mint's own note that
+ *  it is "authored on 5 of 66, only one of which resolves" is STALE, and is corrected at that site too. 26 of
+ *  the roster's 29 traditions have an ability pool.
+ *
+ *  WHERE: the rival's ground. `a` STIRRED and went to `b`, so the fight is at `b`'s home; a's home is the
+ *  fallback for when the rival has none. WITH WHAT: an ability of the WINNER's tradition — the picture shows
+ *  what was done, not what was done to. Drawn deterministically from the pair, so re-opening a fight from the
+ *  news shows the same fight and not a new one every time. */
+export function resolveEpicClash(a, b, rng = Math.random, { abilitiesByTradition = null } = {}) {
   const wa = a?.legend?.weight ?? 5, wb = b?.legend?.weight ?? 5;
   const pA = wa / (wa + wb);
   const roll = rng();
@@ -1458,7 +1472,20 @@ export function resolveEpicClash(a, b, rng = Math.random) {
   else if (margin > 0.30 && r2 < lethal) kind = "killed";   // decisive + rare → a KILLED candidate (still gated on apply)
   else if (r2 < 0.45) kind = "wounded";
   else kind = "stopped";
-  return { winnerId: winner.id, loserId: loser.id, winnerName: winner.name, loserName: loser.name, kind, margin };
+  // ⚠️ NOT `rng()` FOR THE ABILITY. The roll is consumed above and re-rolling here would shift every
+  // downstream draw; more importantly a fight must look the same every time it is opened. A hash of the two
+  // ids is stable across reloads and across saves, which is what makes the news item CLICKABLE rather than
+  // merely decorated.
+  const locationId = b?.homeLocation || b?.legend?.homeLocation || a?.homeLocation || a?.legend?.homeLocation || null;
+  const pool = abilitiesByTradition?.[winner.tradition || winner.legend?.tradition] || null;
+  let abilityId = null;
+  if (pool?.length) {
+    let h = 0; const key = `${winner.id}|${loser.id}`;
+    for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
+    abilityId = pool[h % pool.length];
+  }
+  return { winnerId: winner.id, loserId: loser.id, winnerName: winner.name, loserName: loser.name,
+           kind, margin, locationId, abilityId };
 }
 
 /** SNG-208 §3b: apply a clash outcome durably. `wounded` → the loser acts at half for 8 days; `stopped` →
@@ -1466,13 +1493,19 @@ export function resolveEpicClash(a, b, rng = Math.random) {
  *  player can seek the killer — §3d). ⛔ Death is a LANDMARK: gated behind a long cooldown (a `killed`
  *  candidate too soon after the last epic death is DOWNGRADED to `stopped`), so a legend never quietly
  *  vanishes. Mutates ws.epicStatus. Returns { finalKind, news:[], event|null, codex|null }. */
-export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { deathCooldownDays = 20 } = {}) {
+export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { deathCooldownDays = 20, locationId = null, abilityId = null } = {}) {
   ws.epicStatus = ws.epicStatus || {};
   const st = ws.epicStatus[loser.id] || { status: "active" };
   if (st.status === "dead") return { finalKind: "already_dead", news: [], event: null, codex: null };
   let finalKind = kind, event = null, codex = null;
   const news = [];
-  if (kind === "stalemate") { news.push(`${winner.name} and ${loser.name} met — and neither could break the other.`); ws.epicStatus[loser.id] = st; return { finalKind: "stalemate", news, event, codex }; }
+  // ⛔ SNG-431 §3 — ALL FOUR PATHS, NOT ONE. Aevi: *"The death path is correct and quotes SNG-400 §1 in its
+  // comment. The `wounded`, `checked` and `stalemate` paths push BARE STRINGS — and every fight on Erik's
+  // screen is one of those three."* A sentence cannot be clicked back into a battle, so a fight the player
+  // can see and cannot open is the whole of "0 of 20 news items carry ids". One shape for all four.
+  const clash = (text, outcome) => ({ text, kind: "clash", outcome, winnerId: winner.id, loserId: loser.id,
+                                      locationId: locationId || null, abilityId: abilityId || null, worldDay });
+  if (kind === "stalemate") { news.push(clash(`${winner.name} and ${loser.name} met — and neither could break the other.`, "stalemate")); ws.epicStatus[loser.id] = st; return { finalKind: "stalemate", news, event, codex }; }
   // SNG-304 — DRIVEN OFF HALVES THE HOLD; only walking away resets it. Aevi: "losing a front you were forced
   // off is not the same as leaving it." This sits at the one place EVERY wound in the world passes through —
   // melee casualties and strikes both land here — so a future way of hurting somebody cannot forget to pay it.
@@ -1502,13 +1535,16 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
     codex = { entityId: loser.id, label: loser.name, kind: "person", fact: `[fell offscreen] Killed by ${winner.name}. Their unfinished work is loose in the world — and they are freshly in the death state, still within reach of the roads back, for now.` };
     // SNG-400 §1: the ids ride the news line, not just the propagated event — this is the item the
     // player will click, and a sentence cannot be clicked back into a battle.
-    news.push({ text: event.text, kind: "death", victimId: loser.id, killerId: winner.id, worldDay });
+    // ⚠️ …AND THE DEATH LINE CARRIES THE TWO NEW FIELDS TOO. It was already the correct SHAPE, which is why
+    // it was the only clickable one; it still could not say where it happened or what did it.
+    news.push({ text: event.text, kind: "death", victimId: loser.id, killerId: winner.id,
+                locationId: locationId || null, abilityId: abilityId || null, worldDay });
   } else if (finalKind === "wounded") {
     st.status = "wounded"; st.woundedUntilDay = worldDay + 8; st.woundedBy = winner.id;
-    news.push(`${winner.name} bested ${loser.name} — ${loser.name} withdraws to lick their wounds.`);
+    news.push(clash(`${winner.name} bested ${loser.name} — ${loser.name} withdraws to lick their wounds.`, "wounded"));
   } else { // stopped
     st.status = "stopped"; st.stoppedUntilDay = worldDay + 3; st.stoppedBy = winner.id;
-    news.push(`${winner.name} checked ${loser.name} — for now, ${loser.name}'s designs are held.`);
+    news.push(clash(`${winner.name} checked ${loser.name} — for now, ${loser.name}'s designs are held.`, "stopped"));
   }
   // ⛔ SNG-431 §2 — THE DEBT IS RECORDED HERE, at the one place every epic defeat passes through. A rung is
   // lost only to an event, and this is the event: beaten, with nobody standing over the one who did it. The
@@ -2218,6 +2254,18 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // ⛔ SNG-431 §2: …AND NOT THE DORMANT. This is the spec's rule doing its actual work — "drops out of
     // world-tick and proactive GM reference. NEVER DELETED." They keep their rank, their record and their
     // place in the roster; they simply stop being spent on until attention comes back to them.
+    // SNG-431 §3 — WHAT THE FIGHT LOOKED LIKE. Built once per pass rather than per clash: 376 abilities
+    // indexed by the tradition that authored them, which is the pool a winner's signature is drawn from.
+    // ⚠️ 26 of the roster's 29 traditions have one; the other three (harmonic_radiant,
+    // precursor_nanite_cold_noesis, valley_craft_administration) have no abilities authored, so their
+    // fights record a place and no power. Reported rather than faked — an invented ability id would be
+    // worse than an absent one, because the prompt builder would draw a craft nobody has.
+    const abilitiesByTradition = (() => {
+      const idx = {};
+      for (const [id, ab] of Object.entries(content.abilities || {})) if (ab?.tradition) (idx[ab.tradition] ||= []).push(id);
+      for (const k of Object.keys(idx)) idx[k].sort();   // stable, so the same fight draws the same power
+      return idx;
+    })();
     const living = worldRoster(ws, content).filter(f =>
       f?.arcAffinity?.arcId && effectiveEpicStatus(ws, f.id, currentWorldDay) !== "dead" && !isDormant(ws, f.id));
     // CCODE-106 — THEY RESPOND TO WHAT IS HAPPENING. Erik: "if it's heard that something is moving forward,
@@ -2511,10 +2559,14 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
             // ends a heroic. `resolveEpicClash` still owns the roll and the death GATE; this only weights it.
             const severity = Math.min(1, 0.25 + gap * 0.35);
             if (rng() > severity) continue;
-            const clash = resolveEpicClash(wf, e.f, rng);
-            const outcome = applyEpicClashOutcome(ws, wf, e.f, clash.kind, currentWorldDay);
+            const clash = resolveEpicClash(wf, e.f, rng, { abilitiesByTradition });
+            const outcome = applyEpicClashOutcome(ws, wf, e.f, clash.kind, currentWorldDay,
+              { locationId: clash.locationId, abilityId: clash.abilityId });
             if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
+              // SNG-431 §3: the casualty record carries them too — §2's unavenged debt and the battle prompt
+              // both read this list, and a field that stops at the news item is unavailable to either.
               casualties.push({ arcId, winner: wf.id, loser: e.f.id, kind: outcome.finalKind,
+                locationId: clash.locationId, abilityId: clash.abilityId,
                 winnerTier: wf.tier ?? wf.legend?.tier ?? null, loserTier: e.f.tier ?? e.f.legend?.tier ?? null });
               for (const line of (outcome.news || [])) news.push(clashNewsItem(line, { worldDay: currentWorldDay, arcId }));
             }

@@ -173,11 +173,25 @@ function descriptorLabel(raw, role, max) {
   return (label.charAt(0).toUpperCase() + label.slice(1)).slice(0, max);
 }
 
+/** ⛔ SNG-432: A POOL ENTRY IS EITHER A STRING OR `{text, tone}`. Aevi marked all 146 bynames dark/formal/
+ *  plain, and this reader filtered on `typeof x === "string"` — so every byname pool read as EMPTY the
+ *  moment her content landed and nobody could be named at all. ⚠️ The §1 gates caught it loudly (36 of 36
+ *  figures provisional), which is the whole reason they exist. Both shapes are accepted: `given` is still
+ *  strings, and a pool authored either way keeps working. */
+const entriesOf = (p) => (Array.isArray(p) ? p : []).map(x =>
+  typeof x === "string" ? { text: x.trim(), tone: null }
+    : (x && typeof x.text === "string" ? { text: x.text.trim(), tone: x.tone || null } : null)
+).filter(e => e && e.text);
+
 const poolFor = (pools, group, key) => {
   const g = pools?.[group] || {};
-  const p = (key && g[key]) || g._default || [];
-  return Array.isArray(p) ? p.filter(x => typeof x === "string" && x.trim()) : [];
+  return entriesOf((key && g[key]) || g._default || []);
 };
+
+/** ⛔ SNG-432 — WHICH TONE AN ORIGIN REACHES FOR (Aevi). A survivor is named for what it cost; a successor
+ *  holds an office now and the name is half a title; someone who stepped into a gap nobody planned gets
+ *  whatever people started calling them. */
+const ORIGIN_TONE = { casualty_survivor: "dark", faction_leaderless: "formal", vacancy: "plain" };
 
 /** The want a figure of this origin carries. Aevi: *"`wants` MUST BE A WANT, NOT AN ORIGIN."* Today it
  *  holds the origin sentence, so a figure's stated desire reads "of the the_ceaseless; watched X called
@@ -212,32 +226,40 @@ export function mintedName({ tradition = null, originKind = "_default", pools = 
   const surnames = poolFor(pools, "given", "_default");
   const used = new Set((taken || []).map(n => String(n || "").trim().toLowerCase()).filter(Boolean));
   const fits = (s) => s.length <= MINTED_NAME_MAX && !used.has(s.toLowerCase());
-  // ⚠️ originKind is IN THE OFFSET, not in the CHOICE. Aevi's `_originModifier` asks for more — a survivor
-  // should get the tradition's darkest byname, a successor its most formal — but which entry is dark and
-  // which is formal is not encoded anywhere in the pools, and her own repair drew index 0 for a survivor.
-  // Position does not carry it. So the origin varies the draw (two figures of one tradition and different
-  // origins get different bynames) and does NOT claim to have sharpened it. Flagged back to her.
-  const salt = String(ORIGIN_KIND_ALIAS[originKind] || originKind || "").length;
+  const key = ORIGIN_KIND_ALIAS[originKind] || originKind || "";
+  const salt = String(key).length;
   const gi = Math.floor(rng() * givens.length) + salt;
   const bi = Math.floor(rng() * bynames.length) + salt;
   const si = Math.floor(rng() * surnames.length);
-  for (let b = 0; b < bynames.length; b++) {
-    const by = bynames[(bi + b) % bynames.length];
+  // ⛔ SNG-432 — THE ORIGIN NOW SHARPENS THE BYNAME, because the tone is marked. It could not before: I said
+  // position does not carry it and left the draw unsharpened rather than invent an ordering, and Aevi marked
+  // all 146 entries dark/formal/plain in reply.
+  //
+  // ⚠️ PREFER, NOT REQUIRE — her rule, and the ordering IS the rule: the tone-matching entries of this
+  // tradition come first, then the REST OF THE SAME TRADITION. "A tradition-correct name of the wrong tone
+  // beats a generic one of the right tone every time: the tradition is who they are, the tone is only how
+  // they came to it." Nothing falls through to `_default` while the tradition has any entry at all — and
+  // some traditions have only one tone on purpose (churnfolk are all plain, and that is authored, not a gap).
+  const rot = (arr, n) => arr.map((_, i) => arr[(((n % arr.length) + arr.length) % arr.length + i) % arr.length]);
+  const wantTone = ORIGIN_TONE[key] || null;
+  const pref = wantTone ? bynames.filter(b => b.tone === wantTone) : [];
+  const rest = wantTone ? bynames.filter(b => b.tone !== wantTone) : bynames;
+  const ordered = [...(pref.length ? rot(pref, bi) : []), ...(rest.length ? rot(rest, bi) : [])];
+  for (const by of ordered) {
     for (let g = 0; g < givens.length; g++) {
-      const first = givens[(gi + g) % givens.length];
-      const cand = `${first} ${by}`;
-      if (fits(cand)) return { name: cand, given: first, surname: null, byname: by };
+      const first = givens[(gi + g) % givens.length].text;
+      const cand = `${first} ${by.text}`;
+      if (fits(cand)) return { name: cand, given: first, surname: null, byname: by.text, tone: by.tone };
     }
   }
   for (let s = 0; s < surnames.length; s++) {
-    const fam = surnames[(si + s) % surnames.length];
-    for (let b = 0; b < bynames.length; b++) {
-      const by = bynames[(bi + b) % bynames.length];
+    const fam = surnames[(si + s) % surnames.length].text;
+    for (const by of ordered) {
       for (let g = 0; g < givens.length; g++) {
-        const first = givens[(gi + g) % givens.length];
+        const first = givens[(gi + g) % givens.length].text;
         if (first === fam) continue;
-        const cand = `${first} ${fam} ${by}`;
-        if (fits(cand)) return { name: cand, given: first, surname: fam, byname: by };
+        const cand = `${first} ${fam} ${by.text}`;
+        if (fits(cand)) return { name: cand, given: first, surname: fam, byname: by.text, tone: by.tone };
       }
     }
   }

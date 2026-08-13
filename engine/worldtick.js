@@ -1520,7 +1520,13 @@ export function resolveEpicClash(a, b, rng = Math.random, { abilitiesByTradition
   // downstream draw; more importantly a fight must look the same every time it is opened. A hash of the two
   // ids is stable across reloads and across saves, which is what makes the news item CLICKABLE rather than
   // merely decorated.
-  const locationId = b?.homeLocation || b?.legend?.homeLocation || a?.homeLocation || a?.legend?.homeLocation || null;
+  // ⚠️ `region` TOO, BECAUSE A MINTED FIGURE HAS NO `homeLocation`. §1's mint stores the home it was born
+  // from in `region` (a location id) and puts `homeland` — which may be a TRADITION — beside it; reading
+  // only `homeLocation` left every fight between two minted figures with no place at all. Measured: 3 of
+  // 272. `homeland` is deliberately NOT in the chain: a tradition id would resolve to nothing and put the
+  // machine's own vocabulary in a picture caption.
+  const homeOf = (f) => f?.homeLocation || f?.legend?.homeLocation || f?.region || null;
+  const locationId = homeOf(b) || homeOf(a) || null;
   return { winnerId: winner.id, loserId: loser.id, winnerName: winner.name, loserName: loser.name,
            kind, margin, locationId, abilityId: signatureOf(winner, loser, abilitiesByTradition) };
 }

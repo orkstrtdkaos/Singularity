@@ -11130,6 +11130,48 @@ await (async () => {
 
     // ⛔ REGISTERED AND LOADED, PROVED THROUGH THE REAL BAG. The pools were authored at 5ba1c26f and reachable
     // by nothing: not in the manifest, so not merely unloaded — invisible one step earlier than CCODE-55 looks.
+    // ── SNG-432 — THE ORIGIN SHARPENS THE BYNAME, now that the tone is marked. ───────────────────
+    {
+      const P432 = C.rules?.mintedNames || {};
+      const toneOf = (trad, txt) => (P432.byname?.[trad] || []).find(b => b.text === txt)?.tone || null;
+      // ⛔ A POOL ENTRY IS A STRING **OR** `{text, tone}`. This reader filtered on `typeof x === "string"`,
+      // so the day Aevi marked all 146 bynames every pool read as EMPTY and NOBODY could be named — 36 of 36
+      // figures provisional. Caught by the §1 gates, which is the entire reason they exist.
+      check("432: a byname pool authored as {text, tone} still names people",
+        (() => { const m = N431.mintedName({ tradition: "ashwarden", originKind: "casualty_survivor", pools: P432, rng: () => 0.1 });
+          return !!m && /^\w+ the \w/.test(m.name); })(),
+        "the pools changed shape and the reader must accept both");
+      // Aevi: survivor → dark, successor → formal, vacancy → plain.
+      const drew = (trad, ok) => { const t = []; for (let i = 0; i < 6; i++) { const m = N431.mintedName({ tradition: trad, originKind: ok, pools: P432, rng: () => (i * 0.17) % 1, taken: t.map(x => x.name) }); if (m) t.push(m); } return t; };
+      // ⚠️ `.length > 0 &&` — `[].every(…)` is TRUE, so a namer that returned nothing at all would pass
+      // every tone check below while naming nobody. That is the same vacuous pass §3 already caught once.
+      const toneRun = (trad, ok, want) => { const d = drew(trad, ok); return d.length > 0 && d.every(m => toneOf(trad, m.byname) === want); };
+      check("432: a survivor is named for what it COST, a successor for the OFFICE they now hold",
+        toneRun("ashwarden", "casualty_survivor", "dark") && toneRun("ashwarden", "faction_leaderless", "formal")
+        && toneRun("ashwarden", "vacancy_filled", "plain"),
+        `survivor=${drew("ashwarden", "casualty_survivor").map(m => m.byname).join("/")}`);
+      // ⛔ PREFER, NOT REQUIRE (Aevi): "a tradition-correct name of the WRONG tone beats a generic one of the
+      // right tone every time." Umbral has no `formal` entry at all, so a successor there must still be
+      // UMBRAL — never one of the `_default` pool's three.
+      const umbralTexts = new Set((P432.byname?.umbral || []).map(b => b.text));
+      check("432: …and a tradition with no entry of that tone falls back INSIDE itself, never to _default",
+        (P432.byname?.umbral || []).every(b => b.tone !== "formal")
+        && drew("umbral", "faction_leaderless").length > 0
+        && drew("umbral", "faction_leaderless").every(m => umbralTexts.has(m.byname)),
+        `umbral successors drew: ${drew("umbral", "faction_leaderless").map(m => m.byname).join(", ")}`);
+      // ⚠️ AND AN UNEVEN DISTRIBUTION IS AUTHORED, NOT A GAP. Aevi: "churnfolk are all plain and that is
+      // correct — a people of improvised everything do not hold offices and do not brood. If a tone split ever
+      // comes out even across traditions, something has been generated rather than authored."
+      check("432: churnfolk are all plain — the distribution is authored and must not be evened out",
+        (P432.byname?.churnfolk || []).length > 0 && (P432.byname.churnfolk).every(b => b.tone === "plain"));
+      const tones = {};
+      for (const list of Object.values(P432.byname || {})) for (const b of list) tones[b.tone] = (tones[b.tone] || 0) + 1;
+      console.log(`      tones: ${JSON.stringify(tones)} across ${Object.keys(P432.byname || {}).length} traditions`);
+      check("432: every byname carries a tone — an unmarked one silently never gets preferred",
+        Object.values(P432.byname || {}).every(list => list.every(b => ["dark", "formal", "plain"].includes(b.tone))),
+        `unmarked: ${Object.entries(P432.byname || {}).flatMap(([k, l]) => l.filter(b => !b.tone).map(b => k + ":" + b.text)).slice(0, 3).join(", ")}`);
+    }
+
     check("431/1a: the name pools are REACHABLE — in the manifest, loaded, and merged into `rules`",
       !!C.rules?.mintedNames?.given && !!C.rules?.mintedNames?.byname,
       `rules.mintedNames = ${JSON.stringify(Object.keys(C.rules?.mintedNames || {}))}`);

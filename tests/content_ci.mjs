@@ -2372,5 +2372,33 @@ for (const pack of PACKS) {
     illegal.length === 0, illegal.join(", "));
 }
 
+// ---- SNG-432 §1: EVERY `tradition` IN CONTENT MUST EXIST IN traditions.json ----------------------------
+// ⛔ Aevi, on her own bug: "THE GATE IS WORTH MORE THAN THE FIX." Three legends carried `harmonic_radiant`,
+// `precursor_nanite_cold_noesis` and `valley_craft_administration` — a disposition pair, a power-source
+// stack and a job description, written into a field that wanted a PEOPLE, in a file that predates the
+// canonical 26-tradition list. They would have failed this on the day she wrote them; instead they sat for a
+// month and then cost a ticket — because a tradition that does not exist has no name pool and no abilities,
+// and everything keyed on it falls back to a default that reads almost right.
+{
+  const tradFile = rj("content/packs/core/rules/traditions.json");
+  const legal = new Set([
+    ...(tradFile.traditions || []).map(t => t.traditionId || t.id),
+    ...(tradFile.folkTraditions || []).map(t => t.traditionId || t.id),
+  ].filter(Boolean));
+  const peopleFiles = ["content/packs/valley/lore/legends.json", "content/packs/valley/tradition_epics.json"];
+  const bad = [];
+  const walkTrad = (node, file, path) => {
+    if (Array.isArray(node)) return node.forEach((v, n) => walkTrad(v, file, path + "[" + n + "]"));
+    if (!node || typeof node !== "object") return;
+    const t = node.tradition;
+    if (typeof t === "string" && t && !legal.has(t)) bad.push(file + ": " + (node.id || node.name || path) + " → \"" + t + "\"");
+    for (const [k, v] of Object.entries(node)) walkTrad(v, file, path + "." + k);
+  };
+  for (const f of peopleFiles) { try { walkTrad(rj(f), f.split("/").pop(), "$"); } catch { /* a missing pack is another gate's business */ } }
+  check("SNG-432: every authored `tradition` names a people that exists (" + legal.size + " legal ids)",
+    bad.length === 0, bad.slice(0, 6).join(" · "));
+}
+
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

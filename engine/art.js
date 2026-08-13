@@ -121,12 +121,19 @@ const ROMANTIC_MARKERS = /\b(romantic|romance|kiss\w*|embrac\w*|lover|passion\w*
 const GRAPHIC_VIOLENCE_MARKERS = /\b(gore|gory|blood(y|ied|bath)?|disembowel\w*|mutilat\w*|eviscerat\w*|dismember\w*|torture|flay\w*|decapitat\w*|corpse|entrails)\b/gi;
 
 // Per-ceiling tone modifier appended to the prompt (index by numeric RATING_LEVEL).
+// ⛔ CCODE-182 — A CEILING SAYS WHAT IS ALLOWED, NOT WHAT IT LOOKS LIKE. Erik, on Dawn Surgery: "I can't
+// get an image this full of light and clarity — this is a Radiant based skill!" His prompt read "Bright
+// lights to see and work every detail… focused light: clean cuts, sight into the wound" and then the
+// engine appended "dark, intense, cinematic, mature dramatic tone" — because that was the R+ tone, applied
+// to every image whatever it was of. A rating is a LIMIT, and the upper ones limit almost nothing, so they
+// should contribute almost nothing. Mood belongs to the subject, its people's palette, and its kind.
+// ⚠️ The LOW ceilings still speak, because they are the ones actually excluding something.
 const CEILING_TONE = [
   "wholesome, gentle, family-friendly, no violence, no gore",          // 0 G
   "adventurous, mild, no gore",                                        // 1 PG
-  "dramatic, mild peril, no gore",                                     // 2 PG-13
-  "dark, intense, dramatic",                                           // 3 R
-  "dark, intense, cinematic, mature dramatic tone"                     // 4 R+
+  "mild peril, no gore",                                               // 2 PG-13
+  "",                                                                  // 3 R   — nothing excluded worth naming
+  ""                                                                   // 4 R+  — the subject decides how it looks
 ];
 const SAFETY_TAIL = "tasteful, non-explicit, no nudity, original character not a real person, no copyrighted characters, no text, no watermark, no signature";
 // ⛔ ERIK'S RULING (CCODE-176): "The safety tail is not needed at all - remove it… right now it just eats up
@@ -140,6 +147,20 @@ const SAFETY_TAIL = "tasteful, non-explicit, no nudity, original character not a
 // minor-protection… if so, keep it short and to the point to make it effective." Short IS more effective —
 // six words the generator cannot average away, rather than a paragraph it dilutes.
 const MINOR_TONE = "a child, fully clothed, non-sexual, wholesome";
+
+// ⛔ CCODE-182 — THE STRIP MUST KNOW EVERY TONE THE FLOORS HAVE EVER APPENDED, not only the ones they
+// append today. Changing the wording (R+ "dark, intense, cinematic, mature dramatic tone" → nothing;
+// PG-13 losing its leading "dramatic,") instantly made every prompt STORED under the old wording
+// un-strippable — so re-sanitising one would keep the dead tone AND add the new one, which is the
+// double-append bug returning through a different door. Erik's own gallery is full of these.
+// ⚠️ Retired strings are kept forever. They cost a few bytes and they are the only way a picture minted
+// last week can still have its description read back cleanly.
+const RETIRED_TONES = [
+  "dark, intense, cinematic, mature dramatic tone",
+  "dark, intense, dramatic",
+  "dramatic, mild peril, no gore",
+  "child, age-appropriate, wholesome, fully clothed, non-sexual, innocent"
+];
 
 // CCODE-176, Erik: "The ceiling tone needs to shift wording depending on the image/scene. a fight might be
 // bloody, gory - a sex scene might be sensual or erotic… if we don't shift the wording at all it all starts
@@ -160,7 +181,12 @@ const KIND_TONE = {
 // nudity" was) and that copy has to come off too or it stays in the picture's description forever.
 const SAFETY_TAIL_RE = /,?\s*tasteful,\s*non-explicit,[\s\S]*?no signature/gi;
 const escRe174 = t => String(t).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-const TONE_RE = new RegExp(",?\\s*(?:" + [...CEILING_TONE, MINOR_TONE].map(escRe174).join("|") + ")", "gi");
+// ⛔ FILTER THE EMPTIES, AND THIS IS NOT DEFENSIVE PADDING. CCODE-182 set the R and R+ tones to "" so a
+// high ceiling stops imposing a mood — which put an EMPTY ALTERNATIVE into this alternation. `(?:a|b|)`
+// matches at every position, so `,?\s*(?:…|)` matched every run of whitespace and the strip deleted every
+// space in the prompt: "Surgery using Light as a scalpel" came out "SurgeryusingLightasascalpel".
+// ⚠️ Caught only because the verification PRINTED the real output instead of asserting a boolean about it.
+const TONE_RE = new RegExp(",?\\s*(?:" + [...CEILING_TONE, MINOR_TONE, ...RETIRED_TONES, ...Object.values(KIND_TONE)].filter(Boolean).map(escRe174).join("|") + ")", "gi");
 
 /** PURE. A prompt with the floors' own appended tone + safety tail removed — the DESCRIPTION, as written.
  *  Used to make `sanitizeImagePrompt` idempotent, and to keep the likeness vote counting what a picture

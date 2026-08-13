@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.142";
+const APP_VERSION = "1.9.143";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -814,6 +814,12 @@ function codexTopImage(open) {
   } catch { return ""; }   // a face is never worth breaking the page for
 }
 
+/** CCODE-181: a creature by id, from whichever shape the bestiary ships in. */
+function bestiaryOf(id) {
+  const roster = CONTENT.bestiary?.roster || (Array.isArray(CONTENT.bestiary) ? CONTENT.bestiary : []);
+  return roster.find(c => c && c.id === id) || null;
+}
+
 /** SNG-401 §1: a whois portrait is seeded `whois-<figureId>` (or `whois-death-<figureId>` once the world
  *  records their death), and that seed is the only handle the card has. Map it back to the person. */
 function rosterFigureOf(seed) {
@@ -846,7 +852,12 @@ const REGEN_KINDS = {
     needsId: true,
     label: id => rosterFigureOf(id)?.name || "this figure",
     // CCODE-173: the SAME record the card drew from — a re-roll must be the same description, new seed.
-    find: id => figureArtRecord(rosterFigureOf(id), { dead: /^whois-death-/.test(String(id)) }),
+    // ⛔ CCODE-181: "some images say they fail to redraw." `rosterFigureOf` searches the EPIC roster only —
+    // 66 legends — while the whois card opens for ANY person the player knows. So Pell, Aldric, Mara Wells,
+    // every ordinary NPC, resolved to nothing and Draw again reported failure. Since CCODE-171 the seed IS
+    // the canonical person id, so the registry is exactly the right second place to look.
+    find: id => figureArtRecord(rosterFigureOf(id), { dead: /^whois-death-/.test(String(id)) })
+      || character?.npcRegistry?.[String(id).replace(/^whois-(?:death-)?/, "")] || null,
     current: id => character?.figureImages?.[id] || null,
     keep: (id, url) => { character.figureImages = character.figureImages || {}; character.figureImages[id] = url; return true; },
     promptOpts: rec => ({ aesthetic: npcAesthetic(rec) })
@@ -870,11 +881,25 @@ const REGEN_KINDS = {
     label: id => fullCatalog()[id]?.name || character?.customAbilities?.[id]?.name || "this craft",
     find: id => fullCatalog()[id] || character?.customAbilities?.[id] || null,
     current: id => character?.abilityImages?.[id] || null,
+    // ⛔ CCODE-182 (Erik, on Dawn Surgery): "I can't get an image this full of light and clarity — this is a
+    // Radiant based skill!" The FIRST mint passes the craft's tradition; this entry had no promptOpts at
+    // all, so a RE-ROLL dropped it — losing both the "rendered in the aesthetic of…" clause and the style
+    // wrapper, and falling back to the house palette. A Radiant craft was being drawn in muted earth tones.
+    promptOpts: rec => ({ aesthetic: rec ? (CONTENT.traditionVisualAesthetics?.[abilityTradition(rec) || rec.tradition] || null) : null }),
     keep: (id, url) => { character.abilityImages = character.abilityImages || {}; character.abilityImages[id] = url; return true; }
   },
   // No record behind these — the gallery tile IS the record, so keeping one is keeping the tile.
   moment: { label: () => "this moment", find: () => null, keep: () => true },
-  beast: { label: () => "this creature", find: () => null, keep: () => true },
+  // ⛔ CCODE-181 (Erik): "no ability to keep this image" — on the warpling. A creature is not a one-off: it
+  // recurs, it has an authored `look`, and keeping how it turned out is exactly as meaningful as keeping a
+  // person's face. It was prompt-only purely because nothing ever gave its tile a subject.
+  beast: {
+    needsId: true,
+    label: id => bestiaryOf(id)?.name || "this creature",
+    find: id => bestiaryOf(id),
+    current: id => character?.beastImages?.[id] || null,
+    keep: (id, url) => { character.beastImages = character.beastImages || {}; character.beastImages[id] = url; return true; }
+  },
   // SNG-400b × SNG-401: a battle is prompt-only ON PURPOSE. Its prompt was BUILT once, deterministically,
   // so re-assembling it would return the same words — the re-roll varies the seed against the stored
   // prompt, and the REBUILD ("describe it differently") is the door that actually fixes a wrong
@@ -970,6 +995,12 @@ function galleryRegenFor(g) {
     const id = nm && (Object.keys(cat).find(k => cat[k]?.name && namesMatch(cat[k].name, nm))
       || Object.keys(character.customAbilities || {}).find(k => character.customAbilities[k]?.name && namesMatch(character.customAbilities[k].name, nm)));
     if (id) return mk("ability", id);
+  }
+  if (g.kind === "beast") {
+    const nm = String(g.caption || "").split("—")[0].trim();
+    const roster = CONTENT.bestiary?.roster || (Array.isArray(CONTENT.bestiary) ? CONTENT.bestiary : []);
+    const hit = nm && roster.find(c => c?.name && namesMatch(c.name, nm));
+    if (hit) return mk("beast", hit.id);
   }
   if (g.kind === "location") {
     const nm = String(g.caption || "").split("—")[0].trim();
@@ -3084,8 +3115,18 @@ function noteBeastImage(def) {
   const creature = roster.find(c => c && (c.id === idGuess || (c.name && oppName && oppName.includes(String(c.name).toLowerCase()))));
   if (!creature) return; // not a bestiary beast — a person duel; don't mint a "beast" tile
   const seedKey = `beast-${creature.id}`;
-  const url = ensureImage({ id: seedKey, name: creature.name, look: creature.look }, "beast", { ratingLevel: viewerRatingLevel(), seedKey });
-  if (url) { try { addGalleryImage(character, { kind: "beast", prompt: creature.look || creature.name, url, caption: creature.name, worldDay: absoluteWorldDay() }); saveCharacter(character); } catch { /* the gallery is a convenience */ } }
+  // CCODE-181: a look the player kept for this creature outranks a fresh mint, exactly as it does for people.
+  const chosenBeast = character?.beastImages?.[creature.id] || null;
+  const url = chosenBeast || ensureImage({ id: seedKey, name: creature.name, look: creature.look }, "beast", { ratingLevel: viewerRatingLevel(), seedKey });
+  if (url) {
+    try {
+      // CCODE-181: the creature rides on the tile, so a later lightbox needs no caption guessing to know
+      // what this is a picture OF — the same provenance every other kind carries.
+      addGalleryImage(character, { kind: "beast", prompt: creature.look || creature.name, url,
+        caption: creature.name, worldDay: absoluteWorldDay(), subjectKind: "beast", subjectId: creature.id });
+      saveCharacter(character);
+    } catch { /* the gallery is a convenience */ }
+  }
 }
 
 /** SNG-136: drop any gallery entries that never resolved to a real image URL (the blank Vash-style tile
@@ -3127,7 +3168,7 @@ function ensureAbilityImage(ab) {
     "ability", { ratingLevel: viewerRatingLevel(), field: "image", promptOpts: { aesthetic } });
   if (url) {
     character.abilityImages[ab.id] = url;
-    try { addGalleryImage(character, { kind: "ability", prompt: ab.name, url, caption: ab.name, worldDay: absoluteWorldDay() }); } catch { /* gallery is a convenience */ }
+    try { addGalleryImage(character, { kind: "ability", prompt: ab.name, url, caption: ab.name, worldDay: absoluteWorldDay(), subjectKind: "ability", subjectId: ab.id }); } catch { /* gallery is a convenience */ }
     try { saveCharacter(character); } catch { /* cache best-effort */ }
   }
   return url;

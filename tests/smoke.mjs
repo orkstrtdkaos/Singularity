@@ -14229,7 +14229,7 @@ await (async () => {
     check("035/401: ensureImage runs the FLOORS — the viewer's ceiling on a first mint", (() => { const u = decodeURIComponent(adultG.image || ""); return u.includes("family-friendly") && !/\bblood\b/.test(u); })());
     const tail = { id: "t1", name: "Anyone", role: "a traveller" };
     ensureImage(tail, "npc", { ratingLevel: 2 });
-    check("035/401/176: …and the ceiling rides every first mint", /dramatic, mild peril, no gore/.test(decodeURIComponent(tail.image || "")));
+    check("035/401/176/182: …and the ceiling rides every first mint that HAS one", /mild peril, no gore/.test(decodeURIComponent(tail.image || "")));
   }
   check("401: the prompt lookup is keyed off the DOM, not stored in it", /const _regenPrompts = new Map\(\)/.test(appSrc401) && /notePromptFor\(url, moment\.prompt\)/.test(appSrc401));
   if (artWas) localStorage.setItem("singularity.artMode", artWas);
@@ -14456,6 +14456,21 @@ await (async () => {
   check("CCODE-176: and the sexual scrub is still absolute for a minor at any ceiling",
     !/sensual|erotic/i.test(A176.sanitizeImagePrompt("a sensual erotic study", { ratingLevel: 4, isMinor: true })));
 
+  // ⛔ CCODE-181/182: three things that had no gate at all, found by mutating rather than by review.
+  check("CCODE-182: a KIND tone round-trips — it is strippable, so re-sanitising stays idempotent", (() => {
+    const wk = A176.sanitizeImagePrompt("a fight at the gate", { ratingLevel: 2, kind: "battle" });
+    return A176.bareImagePrompt(wk) === "a fight at the gate" && A176.sanitizeImagePrompt(wk, { ratingLevel: 2, kind: "battle" }) === wk;
+  })());
+  const srcA181 = readFileSync(join(root, "app.js"), "utf8");
+  // Erik on Dawn Surgery: a Radiant craft came back in muted earth tones because the RE-ROLL carried no
+  // tradition — the first mint passed one, this entry had no promptOpts at all.
+  check("CCODE-182: a CRAFT keeps its people on a re-roll (its tradition drives prompt and style alike)",
+    /promptOpts: rec => \(\{ aesthetic: rec \? \(CONTENT\.traditionVisualAesthetics\?\.\[abilityTradition\(rec\) \|\| rec\.tradition\]/.test(srcA181));
+  // "no ability to keep this image" — on the warpling. A creature recurs and has an authored look; it was
+  // prompt-only purely because nothing ever gave its tile a subject.
+  check("CCODE-181: a BEAST tile resolves to its creature, so its look can be kept",
+    /if \(g\.kind === "beast"\) \{/.test(srcA181) && /namesMatch\(c\.name, nm\)/.test(srcA181) && /subjectKind: "beast", subjectId: creature\.id/.test(srcA181));
+
   // CCODE-177 — discarding
   const src177 = readFileSync(join(root, "app.js"), "utf8");
   check("CCODE-177: a picture can be discarded", /data-lbdiscard/.test(src177));
@@ -14480,19 +14495,33 @@ await (async () => {
   const { sanitizeImagePrompt: san174, bareImagePrompt: bare174, likenessClause: lc174, IMAGE_STYLE: STY174, setArtMode: sam174 } = await import("../engine/art.js");
   const was174 = localStorage.getItem("singularity.artMode"); sam174("generate");
   const raw174 = "someone tending the waystation fire—shelter-keeper, traveler";
-  const once = san174(raw174, { ratingLevel: 4 });
+  const once = san174(raw174, { ratingLevel: 2, kind: "npc" });   // CCODE-182: R+ contributes no tone at all now, so idempotency is proved at a ceiling that does
 
-  check("CCODE-174 THE RULE: the floors are IDEMPOTENT — twice is the same as once", san174(once, { ratingLevel: 4 }) === once);
-  check("CCODE-174: …and so is three times, four times, forever", san174(san174(san174(once, { ratingLevel: 4 }), { ratingLevel: 4 }), { ratingLevel: 4 }) === once);
+  check("CCODE-174 THE RULE: the floors are IDEMPOTENT — twice is the same as once", san174(once, { ratingLevel: 2, kind: "npc" }) === once);
+  check("CCODE-174: …and so is three times, four times, forever", san174(san174(san174(once, { ratingLevel: 2, kind: "npc" }), { ratingLevel: 2, kind: "npc" }), { ratingLevel: 2, kind: "npc" }) === once);
   // the ORIGINAL bug was the tail eating its own word; the tail is gone (CCODE-176) so the property is now
   // simply that nothing repeats and nothing arrives mangled.
-  check("CCODE-174/176: nothing is appended twice and nothing arrives mangled", !/no ,/.test(once) && (once.match(/mature dramatic tone/g) || []).length === 1 && !/no signature/.test(once));
-  check("CCODE-174: the ceiling tone appears exactly once", (once.match(/mature dramatic tone/g) || []).length === 1);
+  check("CCODE-174/176/182: nothing is appended twice and nothing arrives mangled", !/no ,/.test(once) && (once.match(/mild peril, no gore/g) || []).length === 1 && !/no signature/.test(once));
+  check("CCODE-174/182: the ceiling tone appears exactly once", (once.match(/mild peril, no gore/g) || []).length === 1);
+  // ⛔ CCODE-182 REGRESSION GUARD: setting a ceiling tone to "" put an EMPTY ALTERNATIVE into the strip
+  // regex, so `(?:a|b|)` matched at every position and bareImagePrompt deleted every space in the prompt —
+  // "Surgery using Light as a scalpel" came out "SurgeryusingLightasascalpel". Caught only because the
+  // verification PRINTED real output instead of asserting a boolean about it.
+  check("CCODE-182: an empty ceiling tone does not turn the strip into a space-eater",
+    bare174("Surgery using Light as a scalpel. Bright lights to see every detail.") === "Surgery using Light as a scalpel. Bright lights to see every detail.",
+    () => bare174("Surgery using Light as a scalpel. Bright lights to see every detail."));
+  check("CCODE-182: …and a real prompt survives a full round-trip with its spaces",
+    /Bright lights to see/.test(san174("Bright lights to see and work", { ratingLevel: 4, kind: "ability" })));
+  check("CCODE-182: the upper ceilings impose no MOOD (a rating is a limit, not a look)",
+    san174("a bright clean workshop", { ratingLevel: 4, kind: "ability" }) === "a bright clean workshop"
+    && !/dark, intense/.test(san174("a bright clean workshop", { ratingLevel: 3, kind: "ability" })));
+  check("CCODE-182: …while the LOW ceilings still say what they exclude",
+    /no gore/.test(san174("x", { ratingLevel: 0 })) && /no gore/.test(san174("x", { ratingLevel: 2 })));
 
   // ⚠️ ERIK'S ACTUAL CORRUPTED STRING, recovered — an already-damaged prompt must heal, not stay damaged
   const broken174 = "someone tending the waystation fire—shelter-keeper, traveler, dark, intense, cinematic, mature dramatic tone, tasteful, non-explicit, no , original character not a real person, no copyrighted characters, no text, no watermark, no signature, dark, intense, cinematic, mature dramatic tone, tasteful, non-explicit, no nudity, original character not a real person, no copyrighted characters, no text, no watermark, no signature";
-  check("CCODE-174: the string Erik pasted strips back to its description", bare174(broken174) === raw174, bare174(broken174));
-  check("CCODE-174: …and re-sanitising it gives a clean single pass", san174(broken174, { ratingLevel: 4 }) === once);
+  check("CCODE-174: the string Erik pasted strips back to its description", bare174(broken174) === raw174, () => bare174(broken174));
+  check("CCODE-174: …and re-sanitising it gives a clean single pass", san174(broken174, { ratingLevel: 2, kind: "npc" }) === once);
 
   // the floors still DO their job — idempotency must not have softened them
   check("CCODE-174/178: the floors still scrub BELOW the ceiling that allows it", !/erotic|nude study/.test(san174("an erotic nude study of a woman", { ratingLevel: 2 })));
@@ -14957,9 +14986,17 @@ await (async () => {
   check("CCODE-163: the codex/whois portrait opens the lightbox and carries its provenance",
     /class="whois-portrait"[^`]*data-lightbox="figure"[^`]*data-regen-kind="figure"[^`]*data-regen-subject=/.test(src163));
   check("CCODE-163: `figure` is a real regen kind — found, current, and keepable", (() => {
+    // ⚠️ SLICE TO THE NEXT ENTRY, NOT N CHARACTERS. These read a fixed 600/700-char window from the entry
+    // start, so adding a comment inside an entry pushed its own properties out of view and failed a gate
+    // about the properties. A window measured in bytes is a window that closes when you explain something.
     const tbl = src163.slice(src163.indexOf("const REGEN_KINDS = {"), src163.indexOf("// SNG-401 §1, Aevi's constraint"));
-    const blk = tbl.slice(tbl.indexOf("figure: {"), tbl.indexOf("figure: {") + 600);
-    return /find: id => figureArtRecord\(rosterFigureOf\(id\)/.test(blk) && /current: id => character\?\.figureImages/.test(blk) && /keep: \(id, url\) =>/.test(blk);
+    const NEXT_ENTRY = new RegExp("\\n  \\w+: \\{");
+    const entryOf = (k) => { const i = tbl.indexOf(`${k}: {`); if (i < 0) return ""; const nxt = tbl.slice(i + 1).search(NEXT_ENTRY); return nxt < 0 ? tbl.slice(i) : tbl.slice(i, i + 1 + nxt); };
+    const blk = entryOf("figure");
+    // ⚠️ CCODE-181 widened `find` to fall back to the registry — the epic roster holds 66 legends while the
+    // card opens for anyone the player knows, so every ordinary NPC resolved to nothing. Both halves gated.
+    return /find: id => figureArtRecord\(rosterFigureOf\(id\)/.test(blk) && /character\?\.npcRegistry\?\.\[String\(id\)\.replace/.test(blk)
+      && /current: id => character\?\.figureImages/.test(blk) && /keep: \(id, url\) =>/.test(blk);
   })());
   check("CCODE-163: a figure's seed maps back to the person, alive or dead", /replace\(\/\^whois-\(\?:death-\)\?\/, ""\)/.test(src163));
   // ⛔ the card re-mints from a stable seed on every open, so a chosen picture MUST outrank the mint
@@ -14979,10 +15016,9 @@ await (async () => {
   check("CCODE-163: every regenerable kind can say what its current picture is", (() => {
     const tbl = src163.slice(src163.indexOf("const REGEN_KINDS = {"), src163.indexOf("// SNG-401 §1, Aevi's constraint"));
     // the record-backed kinds must all answer `current`; the prompt-only ones (moment/beast/battle/death) need not
-    return ["npc", "character", "figure", "location", "item", "ability"].every(k => {
-      const blk = tbl.slice(tbl.indexOf(`${k}: {`), tbl.indexOf(`${k}: {`) + 700);
-      return /current:/.test(blk);
-    });
+    const NEXT_ENTRY = new RegExp("\\n  \\w+: \\{");
+    const entryOf = (k) => { const i = tbl.indexOf(`${k}: {`); if (i < 0) return ""; const nxt = tbl.slice(i + 1).search(NEXT_ENTRY); return nxt < 0 ? tbl.slice(i) : tbl.slice(i, i + 1 + nxt); };
+    return ["npc", "character", "figure", "location", "item", "ability", "beast"].every(k => /current:/.test(entryOf(k)));
   })());
   // the lightbox must sit ABOVE the card it was opened from, or the picture opens invisibly
   const css163 = readFileSync(join(root, "style.css"), "utf8");

@@ -94,37 +94,184 @@
   ]
  },
  "byname": {
-  "casualty_survivor": [
-   "Who Should Have Died First",
-   "Who Counted the Fallen and Did Not Stop",
-   "Who Was Not Taken",
-   "the Debt Unpaid",
-   "Who Carries the Rest of Them",
-   "Who Answers for the Dead",
-   "the Last Name on the List",
-   "Who Was Left to Say It"
+  "wright": [
+   "the Ironhand",
+   "the Halfbuilt",
+   "the Scaffold",
+   "the Unfinished",
+   "the Forgewake",
+   "the Makefast"
   ],
-  "faction_leaderless": [
-   "Who Took a Chair Still Warm",
-   "the Second Answer",
-   "Who Was Given What Was Not Offered",
-   "Who Finishes What Was Started",
-   "the Unfinished Work Made Flesh",
-   "Who Holds the Line Alone",
-   "Who Inherited a War",
-   "the One They Sent Instead"
+  "ashwarden": [
+   "the Ashvow",
+   "the Grey Mercy",
+   "the Palehand",
+   "the Last Kindness",
+   "the Cairnbreaker",
+   "the Quiet End"
   ],
-  "vacancy": [
-   "Who Stepped Into the Gap",
-   "Who Would Not Watch It Fall",
-   "the One Who Was Nearest",
-   "Who Took It Because No One Would",
-   "Who Saw What Others Would Not"
+  "marcher": [
+   "the Iron Hammer",
+   "the Edgeholder",
+   "the Unbroken Line",
+   "the Scarred",
+   "the Bulwark",
+   "the Standfast"
+  ],
+  "somatic": [
+   "the Bloodrun",
+   "the Unarmoured",
+   "the Breathkeeper",
+   "the Sinew",
+   "the Standing Proof"
+  ],
+  "rootkin": [
+   "the Greenheart",
+   "the Slow Enormous",
+   "the Barkbound",
+   "the Sapwake",
+   "the Rootfast"
+  ],
+  "enginewright": [
+   "the Pressurehand",
+   "the Gear-Teeth",
+   "the Tireless",
+   "the Engineborn",
+   "the Sixth Gear"
+  ],
+  "abyssal": [
+   "the Horned Ledger",
+   "the Fair Price",
+   "the Deep Bargain",
+   "the Given",
+   "the Terms-Keeper"
+  ],
+  "umbral": [
+   "the Shadow Master",
+   "the Lightless",
+   "the Deepwalker",
+   "the Unlit",
+   "the Soft-Footed"
+  ],
+  "threnodist": [
+   "the Raw Chord",
+   "the Public Grief",
+   "the Tidewake",
+   "the Keening",
+   "the Last Verse"
+  ],
+  "blazeborn": [
+   "the Burning Truth",
+   "the Glassmaker",
+   "the Revelation",
+   "the Unshadowed",
+   "the Whitefire"
+  ],
+  "cogitant": [
+   "the Vast Interior",
+   "the Ninefold",
+   "the Memory Palace",
+   "the Thin Body",
+   "the Slow Solver"
+  ],
+  "unmaker": [
+   "the Beautiful Ruin",
+   "the Clearing Hand",
+   "the Last Demolition",
+   "the Unmade",
+   "the Correct End"
+  ],
+  "veilwright": [
+   "the Mirrorface",
+   "the Never-There",
+   "the Hospitable Lie",
+   "the Unremembered",
+   "the Mask"
+  ],
+  "hourkeeper": [
+   "the Deep Hour",
+   "the Unbearable Patience",
+   "the Clockfast",
+   "the Kept Moment",
+   "the Long Wait"
+  ],
+  "verist": [
+   "the Unadorned",
+   "the Plain Answer",
+   "the Stone Truth",
+   "the Uncaring Fact"
+  ],
+  "mason": [
+   "the Weight",
+   "the Ledger-Stone",
+   "the Deep Suspicion",
+   "the Unmoved",
+   "the Load-Bearing"
+  ],
+  "syllogist": [
+   "the Cold Pleasure",
+   "the Clean Line",
+   "the One Conclusion",
+   "the Argument"
+  ],
+  "seraphic": [
+   "the Administered Mercy",
+   "the Choral Certainty",
+   "the Tiered",
+   "the Unbearable"
+  ],
+  "stillhold": [
+   "the White Wall",
+   "the Unbroken Quiet",
+   "the Forgotten Peace",
+   "the Lidded"
+  ],
+  "churnfolk": [
+   "the Luck-Rider",
+   "the Never Twice",
+   "the Joyous Mess",
+   "the Improvised"
+  ],
+  "figurist": [
+   "the Impossible Angle",
+   "the Living Argument",
+   "the True Line",
+   "the Figure"
+  ],
+  "horizon": [
+   "the Long Road",
+   "the No Fixed Anchor",
+   "the Distance",
+   "the Tentborn"
+  ],
+  "lattice": [
+   "the Bound Possibility",
+   "the Perfect Prediction",
+   "the Arcology",
+   "the Foreseen"
+  ],
+  "numinous": [
+   "the Thinning",
+   "the Meaning Without Matter",
+   "the Half-Here",
+   "the Veilworn"
+  ],
+  "god_named": [
+   "the Borrowed Grandeur",
+   "the Ill-Fitting Crown",
+   "the Named",
+   "the Hall-Keeper"
+  ],
+  "bargainers": [
+   "the Fair Scale",
+   "the Shown Exit",
+   "the Good Table",
+   "the Terms"
   ],
   "_default": [
-   "Newly Spoken Of",
-   "Who Arrived Without Warning",
-   "the Name Not Yet Reckoned"
+   "the Newly Spoken",
+   "the Unreckoned",
+   "the Late Arrival"
   ]
  },
  "_wantsFix": "⛔ `wants` MUST BE A WANT, NOT AN ORIGIN. It currently holds the origin sentence, so a figure's stated desire reads 'of the the_ceaseless; watched X called out, and outlived them'. ⚠️ WANTS BY ORIGIN KIND:\n   casualty_survivor → 'to be worth the one who did not come back'\n   faction_leaderless → 'to be more than a stand-in'\n   vacancy → 'to hold what nobody else would'\nThe ORIGIN belongs in `origin`, where it already is.",
@@ -137,13 +284,14 @@
  "_displayFix": "⛔ 'of the the_ceaseless' — DOUBLE ARTICLE AND A RAW ID. `originOf` returns `home || people`, and homes are ids like `the_ceaseless`. ⚠️ THE ORIGIN LINE MUST RESOLVE THE ID TO A DISPLAY NAME AND NOT PREPEND 'the' TO A NAME THAT ALREADY HAS ONE. That is the same class as CCode's own note elsewhere in worldtick: 'NAMES, NOT IDS — dug in over arc_what_wakes_beneath is the machine talking'.",
  "repair": {
   "minted-1": {
-   "name": "Sera Voight, Who Should Have Died First",
-   "epithet": "Who Should Have Died First",
+   "name": "Sera Voight the Ashvow",
+   "epithet": "the Ashvow",
    "wants": "to be worth the one who did not come back",
    "origin": "of the Ceaseless; stood beside Cinder Vael when the Wright was called out, and outlived it",
-   "why": "⛔ WAS 'the one who outlived Cinder Vael, the Wright Who Would Not Stop' — an epithet in the name slot. Then briefly 'who walked back', which Erik correctly called lame. ⚠️ A WRIGHT'S GIVEN NAME from the tradition pool, and a byname that is a CLAIM: she survived the wright who would not stop, and the valley has an opinion about that. She is a `riffraff` who may climb — and this name still works at epic, which is the test."
+   "why": "⛔ THIRD ATTEMPT, and the first two were both the wrong SHAPE. v1 'the one who outlived Cinder Vael' — a caption. v2 'Who Should Have Died First' — a subtitle, which Erik correctly rejected. ⚠️ v3 IS A NAME: Sera Voight the Ashvow. Two words after the name, no verb, no clause. She is a wright who survived a wright's death — so the byname is a VOW, which is what a survivor makes and what the valley calls her by. SHOUTABLE, and it still works when she reaches epic."
   }
  },
- "_standard": "⛔ ERIK: 'Lame names. The one who walked back… who was not the first choice?! These are epic heroes — do better.' HE IS RIGHT AND THE FAULT IS DIAGNOSABLE.\nI wrote bynames that describe WHAT HAPPENED TO THEM. The authored corpus never does that. Look at it:\n   Neth, WHO HAS BURIED MORE THAN SHE HAS KNOWN — a claim about her whole life\n   Cinder Vael, THE WRIGHT WHO WOULD NOT STOP — a refusal\n   Halcyon, WHO BUILT ONE PERFECT THING — an achievement, and its cost\n   Valen Sunwrack, WHO LEFT NO SHADOW STANDING — a boast the world repeats\n⛔ THE BYNAME IS THE CLAIM, NOT THE CIRCUMSTANCE. 'Who walked back' is a stage direction. 'Who was not the first choice' is an INSULT — no world calls a hero that to their face and none of these figures would answer to it.\n⚠️ AND THE GRAMMAR IS PART OF IT: the corpus uses WHO + verb in the perfect or the absolute — 'who has buried', 'who would not return', 'who leaves nothing'. Present participles read as captions.",
- "_bynameNote": "⚠️ TITLE CASE, and WHO + PERFECT where the corpus uses it — these are how a world SPEAKS of someone, not how a log records them.\n⛔ 'THE ONE THEY SENT INSTEAD' is the honest version of what I first wrote as 'who was not the first choice': same fact, but it is a thing a rival says with contempt and the bearer wears anyway, which is how a real byname works. 'WHO SHOULD HAVE DIED FIRST' is what a survivor is actually called, and what they think.\n⚠️ A minted figure starts at `riffraff` or `notable` and CLIMBS. The byname must be worth carrying when they reach epic, because nobody renames a legend."
+ "_standard": "⛔ ERIK: 'those are like SUBTITLES. I want names like Conan the Destroyer, Gandalf the White, Silas Weir the Necro-Wright, the Shadow Master, Pell the Iron Hammer.'\n⚠️ HE IS DESCRIBING A DIFFERENT STRUCTURE AND I HAD THE WRONG ONE TWICE.\n   MINE (v1): 'the one who outlived Cinder Vael' — an epithet, a caption.\n   MINE (v2): 'Who Should Have Died First' — a SUBTITLE. It explains. It is a clause.\n   ⛔ HIS: NAME + THE + SHORT NOUN PHRASE. Two or three words. NO VERB, NO 'WHO'.\n     Gandalf the White · Pell the Iron Hammer · Silas Weir the Necro-Wright\n⛔ THE TEST: CAN YOU SHOUT IT ACROSS A BATTLEFIELD? 'Sera Voight, Who Should Have Died First' cannot be shouted. 'Sera Voight the Ashvow' can.\n⚠️ AND IT MUST BE BUILT FROM THE TRADITION'S OWN CRAFT-WORDS, which are authored and were sitting unused: Umbracraft, Palework, Radiance, the Edge, Ruinwork, Makecraft, Hourcraft, Falsecraft, Descent. That is where 'Necro-Wright' comes from in Erik's own example — CRAFT + ROLE, compounded.",
+ "_bynameNote": "⚠️ TITLE CASE, and WHO + PERFECT where the corpus uses it — these are how a world SPEAKS of someone, not how a log records them.\n⛔ 'THE ONE THEY SENT INSTEAD' is the honest version of what I first wrote as 'who was not the first choice': same fact, but it is a thing a rival says with contempt and the bearer wears anyway, which is how a real byname works. 'WHO SHOULD HAVE DIED FIRST' is what a survivor is actually called, and what they think.\n⚠️ A minted figure starts at `riffraff` or `notable` and CLIMBS. The byname must be worth carrying when they reach epic, because nobody renames a legend.",
+ "_originModifier": "⛔ THE ORIGIN SHARPENS THE BYNAME; IT DOES NOT BECOME IT. A survivor of an ashwarden's death is 'the Last Kindness' or 'the Ashvow' — the CRAFT names them, the DEATH chooses which. ⚠️ Prefer these from the tradition list when the origin fits:\n   casualty_survivor → the darkest/most costly of the tradition's options\n   faction_leaderless → the most FORMAL — they hold an office now\n   vacancy → the most improvised\n⛔ AND WHERE THE FIGURE IS OF A CRAFT THAT COMPOUNDS, COMPOUND IT. Erik's own example is the shape: 'Necro-Wright' = a dark thing + Makecraft. An umbral wright is 'the Shadow-Wright'; an ashwarden mason is 'the Cairnwright'. CRAFT + ROLE, one hyphen, no clause."
 }

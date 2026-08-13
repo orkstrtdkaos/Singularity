@@ -24,7 +24,7 @@
   },
   "stalemate": {
    "rival": "{W} and {L} met at {place}. Neither could break the other, and neither has ever been able to.",
-   "mutual": "{W} and {L} met at {place} and stopped, both standing. ⛔ THE THIRD TIME. Nobody is betting on it any more.",
+   "mutual": "{W} and {L} met at {place} and stopped, both standing. It is not the first time, and nobody is betting on it any more.",
    "stranger": "{W} and {L} met at {place} and neither could break the other. They will both be thinking about it.",
    "_power": "{W} and {L} met at {place}; {power} was not enough, and neither was anything {l} had."
   }
@@ -46,5 +46,6 @@
    "_example": "'Sister Alder, the Ward That Does Not Break is spoken of: learning a faster road.' · 'Word from the Heights — Overseer Grael of the Edge District: a daughter who thinks he is a clerk.'"
   },
   "_detect": "⚠️ CHEAP TEST: strip the leading article; if the first word ends in 's' and is not a known plural noun, treat it as a VERB form. Everything else is NOUN form. ⛔ WHEN IN DOUBT USE nounForm — '{W} is spoken of: {frag}' is grammatical for BOTH shapes, and a slightly stiff sentence beats a broken one."
- }
+ },
+ "_markerWarning": "⛔ TESTING CAUGHT A MARKER LEAKING INTO PLAYER PROSE: the stalemate/mutual line contained a literal '⛔ THE THIRD TIME' — an editorial marker inside a template that a PLAYER READS. ⚠️ THE MARKERS BELONG IN `_note` FIELDS, NEVER INSIDE A `template` VALUE. Rewritten as 'It is not the first time, and nobody is betting on it any more.'\n⛔ GATE: no string under `templates` or `fragments` may contain ⛔ or ⚠️."
 }

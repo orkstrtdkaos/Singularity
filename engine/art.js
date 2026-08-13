@@ -186,18 +186,37 @@ export function sanitizeImagePrompt(prompt, { ratingLevel = 2, isMinor = false, 
   // instruction it exists to add — the guard degrading itself each time a picture was redrawn.
   // Stripping its own previous output first makes running it twice identical to running it once.
   let p = bareImagePrompt(prompt);
-  // always-prohibited regardless of ceiling
-  p = p.replace(SEXUAL_MARKERS, " ");
+  // ⛔ CCODE-178, ERIK'S RULING: "If you're scrubbing sensual and erotic at every rating you're failing.
+  // Rating R and R+ specifically call for those in some scenes. You don't need to police this for the
+  // model, it will reject renders that are too explicit."
+  // He is right and the old line said so itself — "always-prohibited regardless of ceiling" made the
+  // CEILING meaningless for the one axis it most exists to express. A rating the player sets and then
+  // cannot use is not a rating. So this is a ceiling scrub now, exactly like gore: stripped below R,
+  // available at R and R+, with the provider's own refusal as the backstop he correctly points at.
+  // ⚠️ FOR A MINOR IT REMAINS UNCONDITIONAL — see below. That one is not a ceiling and never was.
+  if (isMinor || ratingLevel < RATING_LEVEL["R"]) p = p.replace(SEXUAL_MARKERS, " ");
   // above-ceiling scrubs
   if (ratingLevel < RATING_LEVEL["R"]) p = p.replace(GRAPHIC_VIOLENCE_MARKERS, " "); // gore only ever above R
   if (isMinor) {
     // absolute minor-protection: no romance, no sexualization, no graphic violence — at ANY ceiling
     p = p.replace(ROMANTIC_MARKERS, " ").replace(GRAPHIC_VIOLENCE_MARKERS, " ");
   }
-  p = p.replace(/\s{2,}/g, " ").trim();
+  // ⚠️ A SCRUB LEAVES A HOLE, AND THE HOLE IS VISIBLE. Removing a word from "a sensual, erotic encounter"
+  // left "a , encounter" — a dangling comma the generator reads as an empty clause. Same junk class as the
+  // "no ," Erik spotted in the safety tail; tidy the punctuation the removal orphaned.
+  p = p.replace(/\s{2,}/g, " ").replace(/\s+,/g, ",").replace(/,(\s*,)+/g, ",").replace(/(^[\s,]+|[\s,]+$)/g, "").trim();
   const level = Math.max(0, Math.min(4, isMinor ? Math.min(ratingLevel, RATING_LEVEL["PG"]) : ratingLevel));
-  // ⚠️ A MINOR'S CLAUSE IS THE WHOLE TONE, not one voice among several — nothing else may soften it.
-  const tone = isMinor ? MINOR_TONE : [CEILING_TONE[level], KIND_TONE[kind]].filter(Boolean).join(", ");
+  // ⛔ CCODE-178, ERIK AGAIN: "What do you mean the minor-protection is the whole tone? Let it just be
+  // there where it is, not make every image about minors… or you risk ruining legit images."
+  // He is right, and my version was worse than the one it replaced. Making the minor clause the ENTIRE tone
+  // stripped the kind register and the ceiling from any picture with a child in it — so a child standing in
+  // a battle got no battle, a child in a wide landscape got no landscape. It flattened the art to make a
+  // point. ⚠️ And `isMinorSubject` is a HEURISTIC: one false positive on an adult and that person's every
+  // image went bland, with nothing on screen to explain why.
+  // ADDITIVE is both safer and stronger. The words are present and unmissable; the picture is still a
+  // picture. The ceiling is already clamped to PG for a minor a line above, which is the real protection —
+  // this clause is the explicit statement of it, not a replacement for having a scene at all.
+  const tone = [CEILING_TONE[level], KIND_TONE[kind], isMinor ? MINOR_TONE : null].filter(Boolean).join(", ");
   return [p, tone].filter(Boolean).join(", ");
 }
 

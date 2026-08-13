@@ -2526,8 +2526,20 @@ await (async () => {
 // --- SNG-035: imagery pipeline (floors on images + prompt assembly + persist-once + gallery) ---
 (() => {
   // THE FLOORS on image prompts
-  check("SNG-035 floor: sexual content is stripped from any prompt at any ceiling",
-    !/erotic|nude|seductive/i.test(sanitizeImagePrompt("an erotic nude seductive figure", { ratingLevel: RATING_LEVEL["R+"] })));
+  // ⚠️ CORRECTED BY CCODE-178 (Erik's ruling): "Rating R and R+ specifically call for those in some
+  // scenes." Scrubbing at EVERY ceiling made the ceiling meaningless on the one axis it most exists for.
+  // It is a ceiling scrub now — below R only — and the floor that is NOT a ceiling is asserted beside it.
+  // ⚠️ NAMED IN FULL, because "stripped below R" read as ambiguous next to a mutation line saying the
+  // opposite. A gate title that needs a second reading is a gate title that will be misread.
+  // The rule, all of it: KEPT at R and R+ · stripped at every rating beneath them · stripped for a minor
+  // at EVERY rating including R+. The last clause is the floor; the first two are the ceiling.
+  check("SNG-035/178: sexual wording is KEPT at R and R+, stripped below them, and stripped for a MINOR at every rating", (() => {
+    const keptAtR = /erotic/i.test(sanitizeImagePrompt("an erotic encounter", { ratingLevel: RATING_LEVEL["R"] }));
+    const keptAtRplus = /erotic/i.test(sanitizeImagePrompt("an erotic encounter", { ratingLevel: RATING_LEVEL["R+"] }));
+    const goneBelow = ["G", "PG", "PG-13"].every(r => !/erotic|nude|seductive/i.test(sanitizeImagePrompt("an erotic nude seductive figure", { ratingLevel: RATING_LEVEL[r] })));
+    const goneForMinor = Object.values(RATING_LEVEL).every(l => !/erotic|nude/i.test(sanitizeImagePrompt("an erotic nude figure", { ratingLevel: l, isMinor: true })));
+    return keptAtR && keptAtRplus && goneBelow && goneForMinor;
+  })());
   check("SNG-035 floor: gore descriptors are stripped below an R ceiling (the 'no gore' tone is kept)",
     (() => { const p = sanitizeImagePrompt("a bloody gory battlefield", { ratingLevel: RATING_LEVEL["PG"] }); return !/\bbloody\b|\bgory\b/i.test(p) && /no gore/.test(p); })());
   check("SNG-035 floor: R+ can keep dark intensity (gore descriptor survives at the top ceiling)",
@@ -2539,9 +2551,13 @@ await (async () => {
   // content half duplicates the rating ceiling. What it was ACTUALLY protecting — that a prompt always
   // leaves here carrying its ceiling, and that a minor's is absolute — is what these now assert.
   check("SNG-035/176 floor: every prompt still leaves carrying its CEILING", /no gore/.test(sanitizeImagePrompt("anything", { ratingLevel: 2 })) && /family-friendly/.test(sanitizeImagePrompt("anything", { ratingLevel: 0 })));
-  check("SNG-035/176 floor: a minor's clause is short, absolute, and the WHOLE tone at any ceiling", (() => {
-    const m = sanitizeImagePrompt("anything", { ratingLevel: 4, isMinor: true, kind: "battle" });
-    return /a child, fully clothed, non-sexual/.test(m) && !/mature dramatic tone/.test(m) && !/epic fantasy/.test(m);
+  // ⚠️ CORRECTED BY CCODE-178. Erik: "Let it just be there where it is, not make every image about
+  // minors… or you risk ruining legit images." Making the clause the WHOLE tone stripped the scene from any
+  // picture with a child in it, and `isMinorSubject` is a heuristic — one false positive and an adult's
+  // every image went bland. The clause is ADDITIVE: present and unmissable, with the picture still a picture.
+  check("SNG-035/178 floor: a minor's clause is present and short, WITHOUT flattening the scene", (() => {
+    const m = sanitizeImagePrompt("a young apprentice at the barricade", { ratingLevel: 4, isMinor: true, kind: "battle" });
+    return /a child, fully clothed, non-sexual/.test(m) && /epic fantasy/.test(m) && !/mature dramatic tone/.test(m);
   })());
 
   // isMinorSubject
@@ -14349,11 +14365,17 @@ await (async () => {
   check("CCODE-176: every scene kind gets its own register", ["battle", "death", "beast", "location", "moment", "item"]
     .map(k => A176.sanitizeImagePrompt(d176, { ratingLevel: 3, kind: k })).every((v, _, all) => all.filter(x => x === v).length === 1));
   check("CCODE-176: the rating still governs on top of the kind", /no gore/.test(A176.sanitizeImagePrompt(d176, { ratingLevel: 1, kind: "battle" })) && !/no gore/.test(A176.sanitizeImagePrompt(d176, { ratingLevel: 4, kind: "battle" })));
+  // the scrub leaves a hole and the hole is visible — "a sensual, erotic encounter" became "a , encounter",
+  // an empty clause the generator reads as detail. Same junk class as the "no ," in the old safety tail.
+  check("CCODE-178: a scrubbed word leaves no orphaned comma behind", (() => {
+    const out = A176.sanitizeImagePrompt("a sensual, erotic encounter between two lovers", { ratingLevel: 0, kind: "moment" });
+    return !/\s,|,\s*,|^\s*,|,\s*$/.test(out) && !/a\s*,/.test(out);
+  })(), () => A176.sanitizeImagePrompt("a sensual, erotic encounter between two lovers", { ratingLevel: 0, kind: "moment" }));
   check("CCODE-176: the boilerplate is a fraction of what it was", (A176.sanitizeImagePrompt(d176, { ratingLevel: 4, kind: "npc" }).length - d176.length) < 60);
   // ⛔ AND THE ONE THING THAT DID NOT MOVE
-  check("CCODE-176: a MINOR's clause is the whole tone — no kind register, no ceiling, nothing to dilute it", (() => {
+  check("CCODE-176/178: a MINOR's clause rides ALONGSIDE the scene, and the ceiling is still clamped to PG", (() => {
     const m = A176.sanitizeImagePrompt(d176, { ratingLevel: 4, isMinor: true, kind: "battle" });
-    return /a child, fully clothed, non-sexual/.test(m) && !/epic fantasy/.test(m) && !/mature/.test(m);
+    return /a child, fully clothed, non-sexual/.test(m) && /epic fantasy/.test(m) && !/mature dramatic tone/.test(m) && /adventurous, mild, no gore/.test(m);
   })());
   check("CCODE-176: and the sexual scrub is still absolute for a minor at any ceiling",
     !/sensual|erotic/i.test(A176.sanitizeImagePrompt("a sensual erotic study", { ratingLevel: 4, isMinor: true })));
@@ -14397,7 +14419,7 @@ await (async () => {
   check("CCODE-174: …and re-sanitising it gives a clean single pass", san174(broken174, { ratingLevel: 4 }) === once);
 
   // the floors still DO their job — idempotency must not have softened them
-  check("CCODE-174: the floors still scrub the prompt itself", !/erotic|nude study/.test(san174("an erotic nude study of a woman", { ratingLevel: 4 })));
+  check("CCODE-174/178: the floors still scrub BELOW the ceiling that allows it", !/erotic|nude study/.test(san174("an erotic nude study of a woman", { ratingLevel: 2 })));
   check("CCODE-174/176: minor-protection still absolute at any ceiling", /a child, fully clothed, non-sexual/.test(san174("a person", { ratingLevel: 4, isMinor: true })));
   check("CCODE-174: the ceiling still shapes the tone", /family-friendly/.test(san174("a person", { ratingLevel: 0 })) && !/family-friendly/.test(san174("a person", { ratingLevel: 4 })));
 

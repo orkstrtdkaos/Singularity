@@ -14357,6 +14357,54 @@ await (async () => {
     /\.lightbox-close \{[^}]*position: absolute[^}]*top:/.test(css180) && /\.lightbox-meta-btn \{[^}]*position: absolute[^}]*top:/.test(css180));
 }
 
+// ---- CCODE-183: the gallery stacks by subject ----
+// Erik: "I have created several images of Pell now that I like and have kept. They don't need to appear
+// separate in the gallery — they should show up as the one I choose to represent her, and when clicked I
+// can see all the other kept images in a rotating stack… This can apply to all versions of images rendered.
+// If I like a battle scene I want to be able to render a few more images of it to keep."
+// ⚠️ THE GRID AND THE LIGHTBOX ALREADY DISAGREED: the lightbox has grouped versions by subject since
+// CCODE-172, and the grid never did — so one person held four tiles and the count said 76 for far fewer
+// actual subjects. This is that same grouping applied one layer up.
+{
+  const src183 = readFileSync(join(root, "app.js"), "utf8");
+  check("CCODE183: the grid groups into stacks before it renders", /const stacks = galleryStacks\(shown\);/.test(src183) && /function galleryStacks\(entries\)/.test(src183));
+  check("CCODE183: a stack shows the picture the player CHOSE, not merely the newest",
+    /const chosen = spec\?\.current \? spec\.current\(st\.regen\.subjectId\) : null;/.test(src183)
+    && /const rep = st\.members\.find\(m => m\.url === chosen\) \|\| st\.members\[0\];/.test(src183));
+  check("CCODE183: …and it says how many are behind it", /gal-stack-badge/.test(src183) && /\$\{n\} pictures of this/.test(src183));
+  check("CCODE183: a picture with NO subject stays its own tile (a moment is not part of anything)", /`solo:\$\{g\.url\}`/.test(src183));
+  check("CCODE183: opening a stack hands the lightbox the rep's index, so its own grouping takes over",
+    /data-lbindex="\$\{gi\}"/.test(src183) && /const gi = gallery\.indexOf\(g\);/.test(src183));
+
+  // ⚠️ THE SHAPE keepLightboxItem ACTUALLY WRITES — his four Pell tiles, plus a legacy one with no
+  // provenance that must still join them, plus two of one battle, plus a one-off that must not.
+  const tiles183 = [
+    { kind: "npc", caption: "Pell", url: "p1", subjectKind: "npc", subjectId: "pell" },
+    { kind: "npc", caption: "Pell", url: "p2", subjectKind: "npc", subjectId: "pell" },
+    { kind: "npc", caption: "Pell", url: "p3", subjectKind: "npc", subjectId: "pell" },
+    { kind: "npc", caption: "Pell — devoted", url: "p0" },
+    { kind: "battle", caption: "A — killed by B", url: "b1", subjectKind: "battle", subjectId: "a|b|-|44" },
+    { kind: "battle", caption: "A — killed by B", url: "b2", subjectKind: "battle", subjectId: "a|b|-|44" },
+    { kind: "moment", caption: "a chase", url: "m1" }
+  ];
+  const { namesMatch: nm183 } = await import("../engine/namematch.js");
+  const reg183 = [{ id: "pell", name: "Pell" }];
+  const keyOf = (t) => {
+    if (t.subjectKind && t.subjectId) return `${t.subjectKind}:${t.subjectId}`;
+    const nm = String(t.caption || "").split("—")[0].trim();
+    if (t.kind === "portrait" || t.kind === "npc") { const h = reg183.find(n => nm183(n.name, nm)); if (h) return `npc:${h.id}`; }
+    return `solo:${t.url}`;
+  };
+  const grouped = tiles183.reduce((m, t) => { const k = keyOf(t); (m[k] = m[k] || []).push(t); return m; }, {});
+  check("CCODE183: four kept Pell pictures become ONE tile", (grouped["npc:pell"] || []).length === 4);
+  check("CCODE183: …including one minted before provenance existed, joined by name", (grouped["npc:pell"] || []).some(t => t.url === "p0"));
+  check("CCODE183: two pictures of the SAME battle stack too — 'if I like a battle scene I want to render a few more'", (grouped["battle:a|b|-|44"] || []).length === 2);
+  check("CCODE183: a one-off moment is left alone", (grouped["solo:m1"] || []).length === 1 && Object.keys(grouped).length === 3);
+  // a battle is keepable, or "render a few more of it to keep" is not a thing you can do
+  check("CCODE183: a battle CAN be kept (it carries a subject, so the Keep button is real)",
+    /battle: \{[\s\S]{0,400}character\.battleImages\[key\]\.url = url/.test(src183));
+}
+
 // ---- CCODE-179: the house style follows the PEOPLE ----
 // Erik: "I like to keep the house style but make sure that house style is variable based on the tradition
 // they're from." The old constant locked a PALETTE — "muted earth tones with teal and gold accents" — onto

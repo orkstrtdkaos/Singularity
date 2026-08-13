@@ -1361,3 +1361,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .lb-prompt.dim { opacity: .62; }
 /* CCODE-177/180: discard now lives in .lightbox-actions with the rest — its absolute rule is gone,
    because a later absolute rule beats an earlier flex one and would have silently re-broken the row. */
+
+/* CCODE-183 — a stack reads as a stack: a lifted edge behind the tile, and a count. */
+.gallery-item.stacked { position: relative; }
+.gallery-item.stacked::before, .gallery-item.stacked::after {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 100%; border-radius: 6px;
+  background: var(--panel); border: 1px solid rgba(255,255,255,.08); z-index: -1; }
+.gallery-item.stacked::before { transform: translate(4px, -4px); }
+.gallery-item.stacked::after { transform: translate(8px, -8px); opacity: .6; }
+.gal-stack-badge { position: absolute; top: 6px; left: 6px; font-family: var(--font-ui); font-size: 11px;
+  background: rgba(0,0,0,.7); color: #eee; border-radius: 10px; padding: 1px 7px; pointer-events: none; }

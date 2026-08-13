@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.143";
+const APP_VERSION = "1.9.144";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9783,6 +9783,31 @@ function regeneratePortraitFlow() {
 // CCODE-31: the gallery's category filter — the order the chips render + their labels. "all" is implicit.
 const GALLERY_CATS = [["portraits", "Portraits"], ["people", "People"], ["skills", "Skills"], ["places", "Places"], ["beasts", "Beasts"], ["moments", "Moments"]];
 let galleryFilter = "all"; // CCODE-31: the active category chip (module state, survives re-renders)
+/** ⛔ CCODE-183 (Erik): "I have created several images of Pell now that I like and have kept. They don't
+ *  need to appear separate in the gallery — they should show up as the one I choose to represent her, and
+ *  when clicked I can see all the other kept images in a rotating stack."
+ *  ⚠️ THE GRID AND THE LIGHTBOX ALREADY DISAGREED. The lightbox has grouped versions by subject since
+ *  CCODE-172; the grid never did, so one person occupied four tiles and the count said 76 for far fewer
+ *  actual subjects. This is the same grouping, applied one layer up.
+ *  Returns [{ rep, members, key }] — `rep` is the picture that SPEAKS for the stack: the one the player
+ *  chose if it is in there, else the newest. Order follows the newest member, so a fresh draw surfaces. */
+function galleryStacks(entries) {
+  const byKey = new Map();
+  for (const g of entries) {
+    const r = galleryRegenFor(g);
+    // no subject → its own stack of one. A moment is a moment; it does not belong with anything.
+    const key = r?.subjectId ? `${r.kind}:${r.subjectId}` : `solo:${g.url}`;
+    if (!byKey.has(key)) byKey.set(key, { key, members: [], regen: r });
+    byKey.get(key).members.push(g);
+  }
+  return [...byKey.values()].map(st => {
+    const spec = st.regen ? REGEN_KINDS[st.regen.kind] : null;
+    const chosen = spec?.current ? spec.current(st.regen.subjectId) : null;
+    const rep = st.members.find(m => m.url === chosen) || st.members[0];
+    return { ...st, rep, chosen: !!chosen && st.members.some(m => m.url === chosen) };
+  });
+}
+
 function renderGallery() {
   const gallery = character.gallery || [];
   // CCODE-31: bucket every image by category so the chips can show counts + the grid can filter (Erik: skill
@@ -9798,8 +9823,8 @@ function renderGallery() {
       ? "Portraits, the people and places you've grown, the crafts you wield, the beasts that came for you, and the moments worth a picture. New art is added as you play."
       : "Image generation is off. Turn on <strong>Settings → Scene &amp; item art → Generate</strong> to start seeing the world."}</p>
     ${gallery.length ? `<div class="gal-cats" style="margin-bottom:12px">${chip("all", "All", gallery.length)}${present.map(([key, label]) => chip(key, label, counts[key])).join("")}</div>` : ""}
-    ${shown.length ? `<div class="gallery-grid">${shown.map(g => { const gi = gallery.indexOf(g); return `
-      <figure class="gallery-item">
+    ${shown.length ? (() => { const stacks = galleryStacks(shown); return `<div class="gallery-grid">${stacks.map(st => { const g = st.rep; const gi = gallery.indexOf(g); const n = st.members.length; return `
+      <figure class="gallery-item${n > 1 ? " stacked" : ""}">
         ${/* CCODE-32: a flaky image (pollinations rate-limits when many load at once) used to HIDE its whole tile
               (onerror → display:none), so a gallery of 48 looked like 3 — Erik's "something is collapsing them".
               Now: auto-retry ONCE with a cache-bust (recovers the transient failures), then leave a PLACEHOLDER
@@ -9808,8 +9833,9 @@ function renderGallery() {
         <button class="gallery-retry" data-galretry title="This image didn't load — try again">⟳ retry</button>
         <button class="gallery-del" data-galdel="${esc(g.url)}" title="Remove this image">✕</button>
         ${character.portrait === g.url ? "" : `<button class="gallery-pick" data-galpick="${esc(g.url)}" title="Make this the character's portrait">★ Set as portrait</button>`}
-        <figcaption>${esc(g.caption || g.kind)}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait${character.portraitPinned ? " · pinned" : ""}</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
-      </figure>`; }).join("")}</div>`
+        ${n > 1 ? `<span class="gal-stack-badge" title="${n} pictures of this — open it to walk them">▣ ${n}</span>` : ""}
+        <figcaption>${esc(g.caption || g.kind)}${st.chosen ? ` <span class="rep-band trusted">chosen</span>` : ""}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait${character.portraitPinned ? " · pinned" : ""}</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
+      </figure>`; }).join("")}</div>`; })()
       : gallery.length ? "<div class='insight'>Nothing in this category yet.</div>"
       : "<div class='insight'>No images yet — a portrait is minted at creation (with art on), and the world fills in as you play.</div>"}
     <button class="btn secondary" id="gal-back" style="margin-top:14px">Back</button>

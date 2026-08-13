@@ -1,6 +1,6 @@
 {
  "_note": "⛔ SNG-433. THE CLASH NEWS TEMPLATES, RE-AUTHORED. Erik: 'Is it coherent? Interesting? Obvious why it's news?' — no, no and no. The old templates were mine and produced:\n   'The Choirmaster Who Would Not Return — The Choirmaster Who Would Not Return withdraws to lick their wounds.' ⛔ THE FULL NAME TWICE IN ONE SENTENCE, because the template was `${winner} bested ${loser} — ${loser} withdraws`.\n   'Overseer Grael of the Edge District a daughter who thinks he is a clerk' ⛔ NOT A SENTENCE — a personalVerbs fragment in a slot expecting a clause.",
- "_shortName": "⛔ SHORT FORM ON SECOND MENTION. A figure's name is 'Neth, Who Has Buried More Than She Has Known'. Say that ONCE. After that: the part before the comma if there is one ('Neth'), else the last two words ('the Wild Half' → no; 'The Hollow King'). ⚠️ THE RULE: first mention full, every later mention short. That alone removes the stutter.",
+ "_shortName": "⛔ SHORT FORM — RULE REWRITTEN AFTER TESTING IT ON THE REAL 66. My first rule was 'part before the comma, else last two words', which produced 'Morvane of the' — IT CUT MID-PHRASE. ⚠️ THE NAMES COME IN THREE SHAPES: 9 with a comma, 18 beginning 'The', 3 plain.\n   1. IF THERE IS A COMMA, take everything before it. 'Neth, Who Has Buried…' → 'Neth'.\n   2. ELSE IF IT BEGINS 'The', take up to and including the first noun — stop BEFORE 'of', 'who', 'that'. 'The Hollow King of the Wild Half' → 'The Hollow King'. 'The Last Walker of the Sealed Wood' → 'The Last Walker'.\n   3. ELSE take up to the first 'of'/'who'/'that'. 'Morvane of the Harvest Hand' → 'Morvane'. 'Vessa Who Trades in True Names' → 'Vessa'.\n   4. IF THE RESULT IS UNDER 4 CHARACTERS OR EQUALS THE FULL NAME, USE THE FULL NAME. Some names do not shorten — 'The Raw Chord', 'The Starless One' — and that is fine.\n⛔ NEVER CUT ON A PREPOSITION OR AN ARTICLE. 'Morvane of the' is the whole class of bug.",
  "_whyItIsNews": "⛔ THE FIELD THAT MAKES A FIGHT NEWS IS `rivals`, AUTHORED ON 58 OF 66 FIGURES AND READ BY NOTHING SINCE SNG-208. 23 pairs are MUTUAL. ⚠️ A fight between rivals is not the same event as a fight between strangers, and the news must not report them in the same sentence.\n   RIVALS      → name the rivalry. This is the fight people were waiting for.\n   MUTUAL      → name it harder. Both of them have been waiting.\n   STRANGERS   → say so. 'had not met before' is itself interesting.",
  "_whatChanged": "⛔ 'WITHDRAWS TO LICK THEIR WOUNDS' READ THE SAME WHETHER THE LOSER WAS OUT FOR EIGHT DAYS OR HAD LOST A WAR. Every line must now carry the CONSEQUENCE, and the four outcomes are four different sizes of event.",
  "templates": {
@@ -32,9 +32,19 @@
  "_placeholders": "{W} full winner name (first mention) · {w} short winner · {L} full loser · {l} short loser · {place} location DISPLAY NAME, never an id · {power} the ability's short description.\n⚠️ IF `place` IS NULL, DROP ' at {place}' RATHER THAN PRINTING 'at null'. If `power` is null use the non-`_power` variant. ⛔ NEVER PRINT A RAW ID — that is the 'the the_ceaseless' fault again.",
  "_pick": "⛔ CHOOSE BY RELATIONSHIP FIRST, THEN POWER. If the two are mutual rivals use `mutual`; else if either lists the other use `rival`; else `stranger`. ⚠️ Use `_power` in place of the chosen variant roughly one time in three when an abilityId exists — the power should feel like a detail the teller happened to know, not a stat line on every entry.",
  "fragments": {
-  "_note": "⛔ THE VERBLESS LINES. 'Sister Alder, the Ward That Does Not Break learning a faster road' and 'Overseer Grael a daughter who thinks he is a clerk' are a NAME concatenated to a personalVerb fragment. ⚠️ THE FRAGMENTS ARE FINE — the slot needed a clause and got a phrase.",
-  "offscreen": "{W} was seen {frag}.",
-  "offscreenAlt": "Word from {place}: {W}, {frag}.",
-  "_example": "'Sister Alder was seen learning a faster road.' · 'Word from the Heights: Overseer Grael, a daughter who thinks he is a clerk.'"
+  "_note": "⛔ THE VERBLESS LINES, AND WHY ONE TEMPLATE COULD NOT FIX THEM. Testing revealed the fragments come in TWO GRAMMATICAL FORMS and my single template broke on the second:\n   THIRD-PERSON VERB — 'pulls a novice back from dissolving', 'sells a secret that wasn't his'\n   GERUND/NOUN — 'learning a faster road', 'a daughter who thinks he is a clerk'\n⚠️ 'Overseer Grael WAS SEEN a daughter who thinks he is a clerk' is still not a sentence. ⛔ TWO TEMPLATES, CHOSEN BY THE FRAGMENT'S OWN SHAPE.",
+  "verbForm": {
+   "_when": "the fragment begins with a third-person verb — ends in 's' on the first word, or is in `personalVerbs`",
+   "template": "{W} {frag}.",
+   "alt": "Word from {place}: {W} {frag}.",
+   "_example": "'The Hollow King of the Wild Half sells a secret that wasn't his.'"
+  },
+  "nounForm": {
+   "_when": "the fragment is a gerund or a noun phrase — 'learning a faster road', 'a daughter who…'",
+   "template": "{W} is spoken of: {frag}.",
+   "alt": "Word from {place} — {W}: {frag}.",
+   "_example": "'Sister Alder, the Ward That Does Not Break is spoken of: learning a faster road.' · 'Word from the Heights — Overseer Grael of the Edge District: a daughter who thinks he is a clerk.'"
+  },
+  "_detect": "⚠️ CHEAP TEST: strip the leading article; if the first word ends in 's' and is not a known plural noun, treat it as a VERB form. Everything else is NOUN form. ⛔ WHEN IN DOUBT USE nounForm — '{W} is spoken of: {frag}' is grammatical for BOTH shapes, and a slightly stiff sentence beats a broken one."
  }
 }

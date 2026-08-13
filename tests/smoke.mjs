@@ -10685,7 +10685,14 @@ await (async () => {
     ws.figureTenure?.x?.tier === "notable" && ws.figureTenure.x.sinceDay === 200 && ws.figureTenure.x.deeds === 0);
   check("2c: demotion exists — without a way DOWN, promotion alone makes everyone mythic",
     (() => { const w = {}; const g = { id: "g", tier: "epic" };
-             return demoteFigure(w, g, 10)?.to === "heroic" && tierOf(w, g) === "heroic"; })());
+             return demoteFigure(w, g, 10, "defeated_unavenged")?.to === "heroic" && tierOf(w, g) === "heroic"; })());
+  // ⛔ SNG-431 §2 — …AND ONLY AN EVENT MAY CALL IT. Erik's ruling: authored tiers do not demote. The old
+  // trigger was silence, which `SYSTEM_SPEC.md` does not authorise — its one demotion rule governs
+  // PROPAGATION for generated entities, not RANK for authored figures with a `tierBirthWeight`.
+  check("431/2: a rung cannot be taken without an event that took it",
+    (() => { const w = {}; const g = { id: "g", tier: "epic" };
+             return demoteFigure(w, g, 10) === null && demoteFigure(w, g, 10, "went quiet") === null
+               && tierOf(w, g) === "epic"; })());
   check("2c: the mechanics read the EARNED rung, not the authored one (budget and rank both)",
     /const t = tierOf\(ws, f\);\s*\/\/ SNG-269\/2c: the EARNED rung/.test(wtSrc2)
     && /const t = tierOf\(ws, f\);\s*\/\/ SNG-269\/2c: earned rung/.test(wtSrc2));
@@ -11169,6 +11176,80 @@ await (async () => {
     check("431/1b: the epithet the event produced is KEPT, in its own field",
       minted.length > 0 && minted.every(m => !!m.epithet),
       `${minted.filter(m => !m.epithet).length} figure(s) lost their epithet`);
+
+    // ── SNG-431 §2 — THE LADDER RUNS BOTH WAYS. Measured on this same world. ────────────────────────────
+    // ⛔ THE MEASUREMENT IS THE GATE. Aevi's finding was a COUNT — heroic ×6, epic ×2, legendary ×1 demoted,
+    // zero promotions — so a gate asserting "demotion is possible" would restate the bug. It asserts the
+    // shape of the ladder over a real run instead.
+    const RANK = { riffraff: 0, notable: 1, heroic: 2, epic: 3, legendary: 4, mythic: 5 };
+    const born = (f) => f.tier ?? f.legend?.tier;
+    const rosterNow = wt.worldRoster(ch.worldState, bloody);
+    const moved = rosterNow.map(f => ({ f, from: born(f), to: ch.worldState.figureTier?.[f.id] }))
+      .filter(x => x.from && x.to && x.to !== x.from);
+    const up = moved.filter(x => RANK[x.to] > RANK[x.from]).length;
+    const down = moved.filter(x => RANK[x.to] < RANK[x.from]).length;
+    console.log(`      ladder: ${up} up · ${down} down · ${Object.keys(ch.worldState.figureDormant || {}).length} dormant · ${Object.keys(ch.worldState.figureWokeDay || {}).length} woke`);
+    check("431/2: the ladder goes UP more than it goes down — 9 falls and 0 rises is the bug",
+      up > down, `${up} up vs ${down} down`);
+
+    // ⛔ SILENCE MAKES A FIGURE DORMANT, NOT LESSER — the spec's own rule, correctly applied. They keep the
+    // rank; they stop costing the tick anything.
+    const lossLog = ch.worldState.tierLossLog || [];
+    check("431/2: every rung that was lost was taken by an EVENT, and the event is on the record",
+      lossLog.length > 0 && lossLog.every(l => wt.DEMOTION_EVENTS.includes(l.reason)),
+      `reasons seen: ${JSON.stringify([...new Set(lossLog.map(l => l.reason))])}`);
+    check("431/2: a dormant figure keeps the rank they had — dormancy is not a demotion",
+      Object.entries(ch.worldState.figureDormant || {}).every(([id, d]) =>
+        !ch.worldState.figureTier?.[id] || ch.worldState.figureTier[id] === d.tier
+        || lossLog.some(l => l.id === id)),
+      `${Object.keys(ch.worldState.figureDormant || {}).length} dormant`);
+
+    // ⛔ AND DORMANT IS NOT A GRAVE. On a probe with no player attention at all, NOT ONE figure ever woke —
+    // the wake condition read the news, and a dormant figure does not act, so it can never appear in the
+    // news that would wake it. A death opening a seat is the world's own door.
+    check("431/2: dormancy has a door out — attention brings them back at the rank they kept",
+      Object.keys(ch.worldState.figureWokeDay || {}).length > 0,
+      `${Object.keys(ch.worldState.figureDormant || {}).length} asleep, none ever woke`);
+
+    // ⛔ AND THE THING DORMANCY IS FOR: THEY DROP OUT OF THE TICK. "Never deleted… drops out of world-tick
+    // and proactive GM reference" is the spec's own wording, and nothing gated it — deleting the
+    // `!isDormant` filter from `living` left every check above green, because they all measure RANK and this
+    // one is about SPENDING. A dormant figure's arc push may not move.
+    {
+      const pushOf = (id) => ch.worldState.epicArcPushes?.[id]?.push;
+      const asleep = Object.keys(ch.worldState.figureDormant || {});
+      const before = Object.fromEntries(asleep.map(id => [id, pushOf(id)]));
+      await wt.advanceGeneratedOffscreen({ character: ch, content: bloody, evolveFn: stub, rng, now: t0 + 1470 * 24 * 3600000 });
+      const stillAsleep = asleep.filter(id => ch.worldState.figureDormant?.[id]);
+      const moved2 = stillAsleep.filter(id => !Object.is(pushOf(id), before[id]));
+      check("431/2: a dormant figure drops OUT OF THE TICK — the world stops spending on them",
+        stillAsleep.length > 0 && moved2.length === 0,
+        `${moved2.length} of ${stillAsleep.length} dormant figures still pushed an arc`);
+
+      // ⛔ AND A DIRECTION IS A SIGNED NUMBER. This gate exists because the one above went red on real code
+      // and I nearly wrote it off as a `!==` quirk: two figures compared NaN-to-NaN. They were NaN because
+      // eight authored rows spell `dir` as `"+"`/`"-"`, and `"-" * weight` is NaN — a permanently dead push,
+      // AND `"+" > 0` is false, so a figure authored to push FOR a thing was counted against it.
+      const pushes = Object.entries(ch.worldState.epicArcPushes || {});
+      check("431/2: no figure carries a dead arc push — a direction is a signed number, whatever it was spelled",
+        pushes.length > 0 && pushes.every(([, v]) => Number.isFinite(v?.push)),
+        `${pushes.filter(([, v]) => !Number.isFinite(v?.push)).length} of ${pushes.length} pushes are not finite: ${pushes.filter(([, v]) => !Number.isFinite(v?.push)).map(([k]) => k).slice(0, 3).join(", ")}`);
+      // ⚠️ AND THE CENSUS ABOVE CANNOT PROVE THE NORMALISER, because the eight rows are fixed now — with
+      // clean content there is nothing left for it to normalise, so deleting it changes nothing that probe
+      // can see. The contract needs bad data on purpose.
+      check("431/2: …and a sign-spelled direction still pushes the right way, at the reader",
+        (() => {
+          const w = {};
+          const plus = wt.applyEpicArcPush(w, { id: "p", arcAffinity: { arcId: "A", dir: "+", weight: 2 } }, 1);
+          const minus = wt.applyEpicArcPush(w, { id: "m", arcAffinity: { arcId: "A", dir: "-", weight: 2 } }, 1);
+          return Number.isFinite(plus?.push) && plus.push > 0 && Number.isFinite(minus?.push) && minus.push < 0;
+        })(),
+        "a '+' or '-' in the dir field must not become NaN, and must not land on the wrong side");
+      check("431/2: …and an unreadable direction is left alone rather than dropped",
+        wt.dirSign("+") === 1 && wt.dirSign("pro") === 1 && wt.dirSign("-") === -1 && wt.dirSign("con") === -1
+        && wt.dirSign(-2) === -2 && wt.dirSign("banana") === 0 && wt.dirSign(NaN) === 0
+        && wt.affinitiesOf({ arcAffinities: [{ arcId: "A", dir: "banana" }] }).length === 1);
+    }
   }
 
   // SNG-309 — WHAT HAPPENS WHEN THE PLAYER GOES DOWN. Erik: "we should also just make sure all the
@@ -14470,7 +14551,11 @@ await (async () => {
   check("400b: the cache key IS the image seed, so stability is a property of the build", /imageURLFor\(built\.kind, safe, key\)/.test(appSrc400));
   check("400b: the mint runs the FLOORS like every other image", /sanitizeImagePrompt\(built\.prompt, \{ ratingLevel: viewerRatingLevel\(\), isMinor: isMinorSubject\(victim\) \}\)/.test(appSrc400));
   check("400b: an unknown figure yields no picture rather than a guessed one", /if \(!victim\) return null;/.test(appSrc400));
-  check("400b × 401: the battle is re-rollable AND re-describable — the first real builder behind Rebuild", /battle: \{[\s\S]{0,200}character\.battleImages\[key\]\.url = url/.test(appSrc400));
+  // ⚠️ WINDOW WIDENED FOR CCODE-186, which gave `battle` a `current` and a fallback store — the entry grew
+  // past 200 characters and this went red on a change that made it MORE capable, not less. A byte-window
+  // around a code shape is a gate that fails on its own subject growing; the assertion is what it stores.
+  check("400b × 401: the battle is re-rollable AND re-describable — the first real builder behind Rebuild",
+    /battle: \{[\s\S]{0,700}character\.battleImages\[key\]\.url = url/.test(appSrc400));
   const artSrc400 = readFileSync(join(root, "engine/art.js"), "utf8");
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
@@ -14566,7 +14651,12 @@ await (async () => {
   check("CCODE184: KEEP no longer sets the shown picture — it is a vote and only a vote",
     !/if \(!spec\.keep\(it\.regen\.subjectId, it\.url, it\.seedKey\)\) return false;/.test(src184));
   check("CCODE184: …and the default button is what calls the kind's keep", /const ok = sub\.spec\.keep\(it\.regen\.subjectId, it\.url, it\.seedKey\);/.test(src184));
-  check("CCODE184: a subject-less picture offers neither (nothing to represent, nothing to vote on)",
+  // ⚠️ CCODE-186 SUPERSEDED THE CLAIM THIS ONE USED TO MAKE. It read "a subject-less picture offers
+  // neither (nothing to represent, nothing to vote on)" — true when written, and Erik has since ruled the
+  // other way: *"make sure all images have this."* There are no subject-less pictures now; `keepableRegen`
+  // gives a one-off its own url as a subject. The LINE is still the right guard (a kind with no `keep`
+  // still offers nothing), so the check stays and its sentence is corrected rather than left lying.
+  check("CCODE184: the offer is keyed on a subject and a kind that can store one",
     /const canKeep = !!it\.regen\?\.subjectId && !!spec\?\.keep;/.test(src184));
   // the two must remain independent, which is the whole point
   const { toggleKeep: tk184, acceptImage: ai184 } = await import("../engine/art.js");
@@ -14745,6 +14835,41 @@ await (async () => {
   // prompt-only purely because nothing ever gave its tile a subject.
   check("CCODE-181: a BEAST tile resolves to its creature, so its look can be kept",
     /if \(g\.kind === "beast"\) \{/.test(srcA181) && /namesMatch\(c\.name, nm\)/.test(srcA181) && /subjectKind: "beast", subjectId: creature\.id/.test(srcA181));
+
+  // ⛔ CCODE-186 (Erik): "the keep button isn't showing up on every image type. I generated a new one I
+  // liked and neither the initial nor the regen had a keep button. Make sure all images have this."
+  // ⚠️ AND THE INTENT WAS ALREADY IN A COMMENT AND NEVER BUILT — `likenessKey` says a tile with no record
+  // "keys on its own url", and returned null. A comment describing behaviour that does not exist.
+  {
+    const s186 = srcA181;
+    // The rule lands at the ONE place all eleven surfaces pass through. Per-surface fixes are how this got here.
+    check("CCODE-186: every picture the lightbox opens is given a subject, whatever surface it came from",
+      /function keepableRegen\(it\)/.test(s186) && /for \(const it of list\) it\.regen = keepableRegen\(it\);/.test(s186));
+    check("CCODE-186: …a one-off's subject is its OWN url, so its re-draws stack with it rather than scattering",
+      /function soloSubjectId\(g\) \{ return g\?\.seedKey \? `solo:\$\{g\.seedKey\}` : \(g\?\.url \? `solo:\$\{g\.url\}` : null\); \}/.test(s186));
+    // ⛔ A KIND THAT NEEDS A RECORD AND HAS NONE MUST NOT BE HANDED A SYNTHETIC ID — its `keep` would look
+    // up "solo:https://…" in the registry, find nothing, and return false on click. That is the exact
+    // "✕ couldn't keep" Erik hit at CCODE-166, and giving every item a subject is a fresh way to cause it.
+    check("CCODE-186: …and a record-backed kind with no record falls to `moment`, never to a synthetic id",
+      /return spec\.needsId \? \{ \.\.\.it\.regen, kind: "moment", label: it\.regen\.label \|\| "this moment", subjectId: solo \}/.test(s186));
+    // Every kind in the table can store a keep — the census, not a spot check on the three I touched.
+    const table186 = s186.slice(s186.indexOf("const REGEN_KINDS = {"), s186.indexOf("const _regenPrompts"));
+    const kinds186 = [...table186.matchAll(/^  (\w+): \{/gm)].map(m => m[1]);
+    const noKeep186 = kinds186.filter(k => {
+      const seg = table186.slice(table186.indexOf(`  ${k}: {`), table186.indexOf(`  ${k}: {`) + 900);
+      return !/\bkeep: /.test(seg.slice(0, seg.indexOf("\n  },") + 1 || undefined));
+    });
+    check("CCODE-186: every image kind can be kept — the census, not the three I happened to touch",
+      kinds186.length >= 9 && noKeep186.length === 0, `${kinds186.length} kinds; without keep: ${noKeep186.join(", ")}`);
+    // ⚠️ AND OFFERING A DRAW WITH NOTHING TO DRAW FROM IS "some images say they fail to redraw" reborn.
+    check("CCODE-186: Draw again is offered only when there IS a record or a stored prompt behind it",
+      /const hasSource = !!\(it\.regen && \(REGEN_KINDS\[it\.regen\.kind\]\?\.find\?\.\(it\.regen\.subjectId\)/.test(s186)
+      && /const canRegen = !!\(it\.regen && it\.regen\.kind && hasSource && imagesEnabled\(\)\);/.test(s186));
+    // Erik: "I don't need the 'chosen' tag on the display."
+    check("CCODE-186: the gallery no longer tags the stack's own top picture as 'chosen'",
+      !/st\.chosen \? ` <span class="rep-band trusted">chosen<\/span>`/.test(s186)
+      && /class="gal-stack-badge"/.test(s186));
+  }
 
   // CCODE-177 — discarding
   const src177 = readFileSync(join(root, "app.js"), "utf8");

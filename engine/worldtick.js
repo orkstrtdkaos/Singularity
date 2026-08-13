@@ -984,10 +984,34 @@ export function currentCares(ws, figure) {
   return Array.isArray(evolved) && evolved.length ? evolved : affinitiesOf(figure);
 }
 
+/** ⛔ A DIRECTION IS A SIGNED NUMBER, AND EIGHT AUTHORED ROWS SPELL IT `"+"` / `"-"`.
+ *
+ *  Found while gating SNG-431 §2: four figures (the god-named ones in `tradition_epics.json`) carried
+ *  `arcPush: NaN` — permanently, silently — because `aff.dir * weight` on the string `"-"` is NaN. And it is
+ *  worse than a dead push: `s.care.dir > 0` is FALSE for `"+"`, so a figure authored to push FOR something
+ *  was counted on the side against it, and `Math.sign("-")` is NaN wherever urgency is computed.
+ *
+ *  ⚠️ THE READER OWNS THE CONTRACT — this repo's own rule, and the reason this is normalised here rather
+ *  than only in the eight rows: the next authored `"+"` should read correctly instead of poisoning an arc.
+ *  The rows are being fixed too; this is what stops it mattering. */
+export function dirSign(dir) {
+  if (typeof dir === "number") return Number.isFinite(dir) ? dir : 0;
+  const s = String(dir ?? "").trim().toLowerCase();
+  if (s === "+" || s === "pro" || s === "for") return 1;
+  if (s === "-" || s === "con" || s === "against") return -1;
+  const n = Number(s);
+  return Number.isFinite(n) && s !== "" ? n : 0;
+}
+
 export function affinitiesOf(figure) {
   const many = Array.isArray(figure?.arcAffinities) ? figure.arcAffinities : null;
   const list = (many && many.length ? many : [figure?.arcAffinity]).filter(a => a?.arcId && a?.dir);
-  return list;
+  // ⚠️ NORMALISE, DO NOT DROP. My first cut filtered out any row `dirSign` could not read, which is a bigger
+  // change than the fix: `"pro"` is a fourth spelling living in a fixture, and dropping it took a legendary
+  // guardian out of SNG-311 entirely. A row this cannot read is left exactly as it was — the same truthiness
+  // filter above has always let it through, and silently changing what reaches other readers is how a small
+  // fix becomes a regression.
+  return list.map(a => { const d = dirSign(a.dir); return d === 0 || d === a.dir ? a : { ...a, dir: d }; });
 }
 
 /** SNG-306 — THE PRICE OF STANDING HIGH. Erik: *"striking isn't just about the back line… between arc pushes
@@ -1395,7 +1419,9 @@ export function applyEpicArcPush(ws, figure, worldDay, urgency = 1) {
   // CCODE-106: `urgency` is how hard THIS figure is leaning right now — 1 when the arc is where they can live
   // with it, higher when it is running away from them. The CAP still holds, so responsiveness changes the
   // RATE a figure closes on their limit, never the limit itself.
-  const lean = aff.dir * Math.max(1, aff.weight || 1) * blunt * (Number.isFinite(urgency) ? urgency : 1);
+  // `dirSign`, not `aff.dir` — this function is also reached with a hand-built `{ ...f, arcAffinity: care }`,
+  // so it cannot rely on `affinitiesOf` having normalised the row on the way in.
+  const lean = dirSign(aff.dir) * Math.max(1, aff.weight || 1) * blunt * (Number.isFinite(urgency) ? urgency : 1);
   cur.push = Math.max(-EPIC_PUSH_CAP, Math.min(EPIC_PUSH_CAP, cur.push + lean));
   ws.epicArcPushes[figure.id] = cur;
   return { arcId: aff.arcId, push: cur.push, dir: aff.dir };
@@ -1483,6 +1509,16 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
   } else { // stopped
     st.status = "stopped"; st.stoppedUntilDay = worldDay + 3; st.stoppedBy = winner.id;
     news.push(`${winner.name} checked ${loser.name} — for now, ${loser.name}'s designs are held.`);
+  }
+  // ⛔ SNG-431 §2 — THE DEBT IS RECORDED HERE, at the one place every epic defeat passes through. A rung is
+  // lost only to an event, and this is the event: beaten, with nobody standing over the one who did it. The
+  // tick settles it — cleared the moment anyone beats the winner, collected only if nobody ever does.
+  // ⚠️ NOT ON A STALEMATE (which returns above) and not on a death (the loser is out of the ladder).
+  if (finalKind !== "killed") {
+    ws.unavenged = ws.unavenged || {};
+    // `winsAt` is the second half of Aevi's phrase. Beaten is not the same as beaten AND NEVER GOT BACK UP —
+    // if this figure wins anything at all before the season is out, the debt is void and no rung is at risk.
+    if (!ws.unavenged[loser.id]) ws.unavenged[loser.id] = { by: winner.id, byName: winner.name || null, sinceDay: worldDay, winsAt: career(ws, loser.id).wins || 0 };
   }
   ws.epicStatus[loser.id] = st;
   return { finalKind, news, event, codex };
@@ -1907,8 +1943,19 @@ export function advanceStandings(ws, roster, worldDay, cfg = {}) {
 
 /** Aevi: "a wounded figure who abandons every front should fall a rung — if lasting is what makes a legend,
  *  failing to last should cost the title." Demotion is the same ladder run downward, and it is what keeps
- *  the pyramid a pyramid: without it, promotion alone would eventually make everyone mythic. */
-export function demoteFigure(ws, f, worldDay) {
+ *  the pyramid a pyramid: without it, promotion alone would eventually make everyone mythic.
+ *
+ *  ⛔ SNG-431 §2 — AND IT MAY ONLY BE CALLED BY AN EVENT. Measured across all five players over 190 news
+ *  items: heroic ×6, epic ×2, legendary ×1 demoted, ZERO promotions — a ladder that only goes down. The
+ *  trigger was SILENCE (out of action N passes running), and `SYSTEM_SPEC.md` does not authorise it: its one
+ *  demotion rule is about `fresh` GENERATED entities dropping out of propagation, not about `heroic / epic /
+ *  legendary`, which are authored figures with a `tierBirthWeight`. The spec's governor is PROPAGATION, NOT
+ *  RANK. ⚠️ Erik's ruling: authored tiers do not demote. Silence makes a figure DORMANT (`goDormant` below);
+ *  a rung is LOST only to an event — defeated and unavenged, want permanently resolved, killed.
+ *
+ *  `reason` is required and recorded, so the next reader can see which event took the rung. */
+export function demoteFigure(ws, f, worldDay, reason = null) {
+  if (!DEMOTION_EVENTS.includes(reason)) return null;   // silence is not an event
   const DOWN = { mythic: "legendary", legendary: "epic", epic: "heroic", heroic: "notable", notable: "riffraff" };
   const tier = tierOf(ws, f);
   const to = DOWN[tier];
@@ -1917,7 +1964,45 @@ export function demoteFigure(ws, f, worldDay) {
   ws.figureTier[f.id] = to;
   ws.figureTenure = ws.figureTenure || {};
   ws.figureTenure[f.id] = { tier: to, sinceDay: worldDay, wins: 0, losses: 0 };
-  return { id: f.id, name: f.name, from: tier, to };
+  // ⚠️ AND IT IS WRITTEN DOWN. The news is capped, so "no tier-lost news" is not evidence that no rung was
+  // taken — I read exactly that off a probe and drew the wrong conclusion from it. A durable log is what
+  // makes the ladder's shape measurable at all.
+  (ws.tierLossLog = ws.tierLossLog || []).push({ id: f.id, name: f.name, from: tier, to, reason, worldDay });
+  if (ws.tierLossLog.length > 200) ws.tierLossLog.splice(0, ws.tierLossLog.length - 200);
+  return { id: f.id, name: f.name, from: tier, to, reason };
+}
+
+/** ⛔ THE ONLY THINGS THAT COST A RUNG. Erik's ruling, as data rather than as three scattered call sites —
+ *  a fourth caller has to be added here on purpose, which is the point. */
+export const DEMOTION_EVENTS = ["defeated_unavenged", "want_resolved"];
+
+/** SNG-431 §2 — SILENCE MAKES A FIGURE DORMANT, NOT LESSER.
+ *
+ *  This IS the spec's rule, correctly applied: *"Untouched `fresh` DEMOTES — drops out of world-tick and
+ *  proactive GM reference. Never deleted… attention keeps a thing real; inattention lets it go dormant."*
+ *  They keep their rank and their record; they simply stop costing the tick anything until something touches
+ *  them. ⚠️ AND THE LINE THE OLD PATH FIRED WAS AEVI'S OWN, MISAPPLIED: *"Nobody stood over him"* is what you
+ *  say when a legend is beaten and no one takes their place. Fired for a quiet season it is just wrong. */
+export function goDormant(ws, f, worldDay) {
+  ws.figureDormant = ws.figureDormant || {};
+  if (ws.figureDormant[f.id]) return null;
+  ws.figureDormant[f.id] = { sinceDay: worldDay, tier: tierOf(ws, f) };
+  return { id: f.id, name: f.name, tier: tierOf(ws, f) };
+}
+
+/** True while the world has stopped spending its attention on them. */
+export function isDormant(ws, id) { return !!ws?.figureDormant?.[id]; }
+
+/** ⛔ AND DORMANT IS NOT A GRAVE. Attention brings them back at the rank they kept — the player meeting or
+ *  asking after them, or the world naming them in something that happened. A door out is what makes this the
+ *  spec's dormancy rather than a slower deletion. Returns the id if it woke someone. */
+export function wakeFigure(ws, id, worldDay) {
+  if (!ws?.figureDormant?.[id]) return null;
+  delete ws.figureDormant[id];
+  if (ws.outOfAction) ws.outOfAction[id] = 0;   // the clock that put them under restarts too
+  ws.figureWokeDay = ws.figureWokeDay || {};
+  ws.figureWokeDay[id] = worldDay;
+  return id;
 }
 
 /** SNG-209/SNG-270 — GOING AFTER YOUR OWN DEAD. Erik: "death isn't permanent necessarily. Both NPCs and
@@ -2130,8 +2215,11 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   // This also answers "is 4 enough for the world?" — 4 was never the world's reach, only its VOICE. The world
   // now moves at full population; 4 is how many of those movements get words this pass.
   {
+    // ⛔ SNG-431 §2: …AND NOT THE DORMANT. This is the spec's rule doing its actual work — "drops out of
+    // world-tick and proactive GM reference. NEVER DELETED." They keep their rank, their record and their
+    // place in the roster; they simply stop being spent on until attention comes back to them.
     const living = worldRoster(ws, content).filter(f =>
-      f?.arcAffinity?.arcId && effectiveEpicStatus(ws, f.id, currentWorldDay) !== "dead");
+      f?.arcAffinity?.arcId && effectiveEpicStatus(ws, f.id, currentWorldDay) !== "dead" && !isDormant(ws, f.id));
     // CCODE-106 — THEY RESPOND TO WHAT IS HAPPENING. Erik: "if it's heard that something is moving forward,
     // other NPCs will become more motivated to try to stop or help it — where does that come in?"
     //
@@ -2692,27 +2780,96 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // SNG-269/2c — WHO ROSE. Erik: "the ones that stay the longest are the true legends." Run after the
     // pass's contests so this year's wins count toward this year's standing.
     const risen = advanceStandings(ws, living, currentWorldDay, content.rules?.tierLadder || {});
-    // A wounded figure holding NOTHING has stopped being what their title says. Aevi: failing to last
-    // should cost the title — and without a way DOWN, promotion alone eventually makes everyone mythic.
-    const fallen = [];
-    for (const f of living) {
+    // ⛔ SNG-431 §2 — THE LADDER ONLY WENT DOWN: 9 falls, 0 rises, across 190 news items and all five
+    // players. What follows is Erik's ruling in two halves — silence makes a figure DORMANT, and a rung is
+    // lost only to an EVENT.
+    const fallen = [], slept = [], woke = [];
 
+    // ── half one: silence. ──────────────────────────────────────────────────────────────────────────────
+    for (const f of living) {
       // ⚠️ WHAT "ABANDONS EVERY FRONT" HAS TO MEAN MECHANICALLY. Two readings failed: "cares about
       // nothing" can never be true of an authored figure, and "spent nothing this pass" can never be true
       // either, because a fractional budget always buys a share of something. Both produced 0.0 falls
       // across every ladder in the sweep, which reads exactly like a tuning result and is not one.
       //
-      // Aevi's framing is "failing to last should cost the title". The measurable version of not lasting is
-      // being OUT OF ACTION — wounded or stopped, pass after pass, while the front they hold goes on without
-      // them. That is a figure the world stops calling what it used to call them.
+      // ⛔ AND THE THIRD READING — out of action pass after pass — MEASURES SILENCE, WHICH IS THE SPEC'S
+      // CASE FOR DORMANCY AND NOT ITS CASE FOR RANK. So the same measurement stands and its consequence
+      // changes: they drop out of the tick and stay exactly what they are.
       ws.outOfAction = ws.outOfAction || {};
       const st = effectiveEpicStatus(ws, f.id, currentWorldDay);
       ws.outOfAction[f.id] = (st === "wounded" || st === "stopped") ? (ws.outOfAction[f.id] || 0) + 1 : 0;
       if (ws.outOfAction[f.id] < (Number.isFinite(cfg.fallAfterPasses) ? cfg.fallAfterPasses : 2)) continue;
-      ws.outOfAction[f.id] = 0;       // they still put themselves somewhere → still holding on
-      const d = demoteFigure(ws, f, currentWorldDay);
-      if (d) fallen.push(d);
+      ws.outOfAction[f.id] = 0;
+      const d = goDormant(ws, f, currentWorldDay);
+      if (d) slept.push(d);
     }
+
+    // ── and the door back out: ATTENTION. ───────────────────────────────────────────────────────────────
+    // ⚠️ "Attention keeps a thing real" is the spec's own reason, so the wake has to be attention and not a
+    // timer. Two kinds count: the player knows them (they are in the registry — someone met them, or asked
+    // after them), or the world named them in something that happened this pass.
+    {
+      const named = new Set(Object.keys(character?.npcRegistry || {}));
+      for (const item of news) {
+        for (const k of ["figureId", "victimId", "killerId", "winnerId", "loserId"]) if (item?.[k]) named.add(item[k]);
+      }
+      // ⛔ AND THE WORLD MUST BE ABLE TO OPEN THIS DOOR TOO, or dormancy is a slower deletion with a nicer
+      // name. Measured on a probe with no player attention at all: 54 of 101 figures asleep and NOT ONE ever
+      // woke, because a dormant figure does not act and therefore never appears in the news that would wake
+      // them — the wake condition depended on the thing dormancy prevents.
+      //
+      // A DEATH OPENS A SEAT. That is the same event §1's mint reads, and it is exactly the moment someone
+      // who had gone quiet has a reason to be spoken of again: whoever else cared about that fight.
+      const roster = worldRoster(ws, content);
+      const openedArcs = new Set(casualties.filter(c => c.kind === "killed" && c.arcId).map(c => c.arcId));
+      for (const id of Object.keys(ws.figureDormant || {})) {
+        const f = roster.find(x => x?.id === id);
+        const called = named.has(id) || (f?.arcAffinity?.arcId && openedArcs.has(f.arcAffinity.arcId));
+        if (called && wakeFigure(ws, id, currentWorldDay)) woke.push(id);
+      }
+    }
+
+    // ── half two: a rung is lost only to an EVENT. ──────────────────────────────────────────────────────
+    // ⛔ DEFEATED AND UNAVENGED. Aevi's line, and the one being misapplied: *"Nobody stood over him"* is what
+    // you say when a legend is beaten and NO ONE TAKES THEIR PLACE. So the clash records the debt, and it is
+    // settled — cleared, no rung lost — the moment anyone beats the figure who beat them. Only a debt nobody
+    // ever collects costs the title.
+    {
+      // ⚠️ DAYS, NOT PASSES, AND THE DIFFERENCE IS THE WHOLE MECHANIC. I first wrote `avengeWithinPasses: 6`
+      // and compared it to a DAY delta — so with the tick running weekly, every debt was overdue on the very
+      // next pass and one defeat cost a rung. Measured: 48 falls over four world-years, worse than the 9 the
+      // ticket is about. A season is how long the valley gives you to be avenged.
+      const avengeWithin = Number.isFinite(cfg.avengeWithinDays) ? cfg.avengeWithinDays : 90;
+      const beatenThisPass = new Set(casualties.filter(c => c.loser).map(c => c.loser)
+        .concat(challenges.filter(c => c.outcome !== "stalemate" && c.defender).map(c => c.defender)));
+      ws.unavenged = ws.unavenged || {};
+      for (const [loserId, debt] of Object.entries(ws.unavenged)) {
+        if (beatenThisPass.has(debt.by)) { delete ws.unavenged[loserId]; continue; }   // avenged — nothing is owed
+        // ⛔ AND THEY GOT BACK UP. "Defeated and unavenged" is not "lost a fight once": read that way it
+        // made DEFEAT ITSELF the demoter — 52 rungs lost over four world-years, worse than the 9 the ticket
+        // is about, because most defeats in a valley this size are never avenged by anybody. A single win
+        // since voids the debt, which is what "nobody stood over him" actually means.
+        if ((career(ws, loserId).wins || 0) > (debt.winsAt || 0)) { delete ws.unavenged[loserId]; continue; }
+        if ((currentWorldDay - debt.sinceDay) < avengeWithin) continue;
+        delete ws.unavenged[loserId];
+        const f = living.find(x => x.id === loserId);
+        const d = f && demoteFigure(ws, f, currentWorldDay, "defeated_unavenged");
+        if (d) { fallen.push(d); news.push({ text: `${f.name} was bested, and nobody has stood over ${debt.byName || "the one who did it"} since. The valley has started saying it differently.`, worldDay: currentWorldDay, tier: "murmur", kind: "tier_lost", figureId: f.id }); }
+      }
+    }
+    // ⛔ AND A WANT PERMANENTLY RESOLVED. A figure whose whole reason to be spoken of is finished does not
+    // stay at the rung that reason bought them. Once per figure — the debt is cleared when it is paid.
+    {
+      ws.tierLostFor = ws.tierLostFor || {};
+      for (const f of living) {
+        if (ws.wantProgress?.[f.id]?.status !== "resolved" || ws.tierLostFor[f.id]) continue;
+        ws.tierLostFor[f.id] = "want_resolved";
+        const d = demoteFigure(ws, f, currentWorldDay, "want_resolved");
+        if (d) { fallen.push(d); news.push({ text: `${f.name} finished what they were for. They are still spoken of — less often, and in the past tense.`, worldDay: currentWorldDay, tier: "murmur", kind: "tier_lost", figureId: f.id }); }
+      }
+    }
+    ws.figuresDormant = Object.keys(ws.figureDormant || {}).length;
+    if (slept.length || woke.length) ws.dormancyThisPass = { slept: slept.map(s => s.id), woke };
     // ⚠️ WHICH SOURCES ACTUALLY FIRE. A weight in the table with nothing writing it is the bug family this
     // repo keeps finding, so the engine COUNTS its own sources rather than trusting the table.
     // KNOWN GAP: `spreadPerHop` cannot fire — `reputation.js` carries a `spread` field and its own header says

@@ -889,7 +889,14 @@ const REGEN_KINDS = {
     keep: (id, url) => { character.abilityImages = character.abilityImages || {}; character.abilityImages[id] = url; return true; }
   },
   // No record behind these — the gallery tile IS the record, so keeping one is keeping the tile.
-  moment: { label: () => "this moment", find: () => null, keep: () => true },
+  // ⛔ CCODE-186: …and it needs somewhere for "the one to show" to LIVE, or ★ Set as default is a button
+  // that reports success and changes nothing. `sceneImages`, keyed by the tile's own solo id — the same
+  // shape `figureImages` and `beastImages` already use for subjects whose picture is minted, not stored.
+  moment: {
+    label: () => "this moment", find: () => null,
+    current: id => character?.sceneImages?.[id] || null,
+    keep: (id, url) => { if (!id) return true; character.sceneImages = character.sceneImages || {}; character.sceneImages[id] = url; return true; }
+  },
   // ⛔ CCODE-181 (Erik): "no ability to keep this image" — on the warpling. A creature is not a one-off: it
   // recurs, it has an authored `look`, and keeping how it turned out is exactly as meaningful as keeping a
   // person's face. It was prompt-only purely because nothing ever gave its tile a subject.
@@ -904,13 +911,23 @@ const REGEN_KINDS = {
   // so re-assembling it would return the same words — the re-roll varies the seed against the stored
   // prompt, and the REBUILD ("describe it differently") is the door that actually fixes a wrong
   // composition. ⚠️ It is the first place in the game where Aevi's §2 distinction has a real build behind it.
+  // ⛔ CCODE-186: Erik, earlier in this same thread — "if I like a battle scene I want to be able to render
+  // a few more images of it to keep." `battleImages[key]` only existed for a fight opened from the news, so
+  // a battle tile reached from the GALLERY had no key and Keep did nothing. It falls back to the tile's own
+  // solo id, which is what makes the button real everywhere rather than only on one route in.
   battle: {
     label: () => "this battle", find: () => null,
-    keep: (key, url) => { if (key && character.battleImages?.[key]) character.battleImages[key].url = url; return true; }
+    current: key => (key && character?.battleImages?.[key]?.url) || character?.sceneImages?.[key] || null,
+    keep: (key, url) => { if (!key) return true;
+      if (character.battleImages?.[key]) { character.battleImages[key].url = url; return true; }
+      character.sceneImages = character.sceneImages || {}; character.sceneImages[key] = url; return true; }
   },
   death: {
     label: () => "this ending", find: () => null,
-    keep: (key, url) => { if (key && character.battleImages?.[key]) character.battleImages[key].url = url; return true; }
+    current: key => (key && character?.battleImages?.[key]?.url) || character?.sceneImages?.[key] || null,
+    keep: (key, url) => { if (!key) return true;
+      if (character.battleImages?.[key]) { character.battleImages[key].url = url; return true; }
+      character.sceneImages = character.sceneImages || {}; character.sceneImages[key] = url; return true; }
   }
 };
 
@@ -1012,12 +1029,29 @@ function galleryRegenFor(g) {
   //    the record up, found nothing, and returned false on click. A kind that needs an id and has none is
   //    prompt-only in every way that matters, so it is treated as one: still drawable, still describable,
   //    and its Keep votes on the tile rather than on a record that is not there.
+  // ⛔ CCODE-186 (Erik): "the keep button isn't showing up on every image type. I generated a new one I
+  // liked and neither the initial nor the regen had a keep button. Make sure all images have this."
+  //
+  // ⚠️ AND THE INTENT WAS ALREADY WRITTEN DOWN AND NEVER BUILT. `likenessKey`'s own comment says *"a tile
+  // with no record keys on its own url, which still lets a one-off be kept without inventing a subject for
+  // it"* — and the function returns null when there is no subjectId, so `canKeep` was false for every
+  // moment, battle and scene in the game. A comment describing behaviour that does not exist.
+  //
+  // CCODE-166 was right that a vote needs something to vote on. It was wrong that a one-off has nothing:
+  // THE TILE IS THE SUBJECT. Its own url is stable, and a re-roll carries this `regen` forward unchanged,
+  // so every draw of that moment votes on the same key and stacks with it.
   if (g.prompt) {
     const k = g.kind;
-    return mk(REGEN_KINDS[k] && !REGEN_KINDS[k].needsId ? k : "moment", null);
+    const kind = REGEN_KINDS[k] && !REGEN_KINDS[k].needsId ? k : "moment";
+    return mk(kind, soloSubjectId(g));
   }
   return null;
 }
+
+/** The stable identity of a tile that has no record behind it. Its own url — the one thing a rendered
+ *  image always has, and the thing every re-roll of it inherits. Prefixed so it can never collide with a
+ *  real record id. */
+function soloSubjectId(g) { return g?.seedKey ? `solo:${g.seedKey}` : (g?.url ? `solo:${g.url}` : null); }
 
 /** SNG-401 §2/§3: draw it again. `describe` carries the REBUILD's new words; without it this is the
  *  re-roll — same description, new seed. Returns a NEW lightbox item; the caller appends it, and the
@@ -1095,9 +1129,35 @@ function keepLightboxItem(it) {
   return true;
 }
 
+/** ⛔ CCODE-186 — EVERY PICTURE CAN BE KEPT. Erik: *"the keep button isn't showing up on every image type…
+ *  make sure all images have this."*
+ *
+ *  The gallery route was fixed at `galleryRegenFor`, but the lightbox opens from ELEVEN surfaces and each
+ *  builds its own item — a moment straight out of the scene, a battle off a news line, a fresh draw. Fixing
+ *  them one at a time is how this got here, so the rule lands at the ONE PLACE they all pass through.
+ *
+ *  Two shapes need repairing, and they are different:
+ *    · no `regen` at all      → it can still be kept, as a moment, on its own url. It just cannot be redrawn.
+ *    · `regen` with no id     → a kind that NEEDS a record but has none is prompt-only in every way that
+ *                               matters (the "✕ couldn't keep" Erik hit), so it is treated as one.
+ *  A picture with no url and no prompt is the only thing left with nothing to vote on. */
+function keepableRegen(it) {
+  if (!it?.url) return it?.regen || null;
+  const solo = soloSubjectId({ seedKey: it.seedKey, url: it.url });
+  if (!it.regen) return { kind: "moment", subjectId: solo, label: "this moment", prompt: it.prompt || null, galleryKind: it.meta?.kind || "moment" };
+  const spec = REGEN_KINDS[it.regen.kind];
+  if (!spec) return { ...it.regen, kind: "moment", subjectId: it.regen.subjectId || solo };
+  if (it.regen.subjectId) return it.regen;
+  return spec.needsId ? { ...it.regen, kind: "moment", label: it.regen.label || "this moment", subjectId: solo }
+                      : { ...it.regen, subjectId: solo };
+}
+
 function openLightbox(items, start = 0, { onClose = null } = {}) {
   const list = (items || []).filter(it => it && it.url);
   if (!list.length) return;
+  // Normalised ON THE WAY IN, so `canKeep`, `keepsFor`, the stack key and `keepLightboxItem` all read the
+  // same subject — and a re-roll, which copies `it.regen` forward, inherits it.
+  for (const it of list) it.regen = keepableRegen(it);
   let i = Math.max(0, Math.min(start, list.length - 1));
   let showMeta = false;            // CCODE-172: the fields + the prompt, revealed on demand
   const el = document.createElement("div");
@@ -1143,7 +1203,13 @@ function openLightbox(items, start = 0, { onClose = null } = {}) {
   const render = () => {
     const it = list[i];
     // §2: only an item that arrived with provenance can be redrawn, and only while generation is on.
-    const canRegen = !!(it.regen && it.regen.kind && imagesEnabled());
+    // ⚠️ CCODE-186: …AND ONLY IF THERE IS SOMETHING TO DRAW FROM. Now that every item gets a `regen`, an
+    // offered "Draw again" with neither a record nor a stored prompt is `regenLightboxItem` returning null
+    // — which is Erik's "some images say they fail to redraw" reborn on a wider surface. Keep does not need
+    // a prompt; a re-draw does.
+    const hasSource = !!(it.regen && (REGEN_KINDS[it.regen.kind]?.find?.(it.regen.subjectId)
+      || it.regen.prompt || it.prompt || _regenPrompts.get(String(it.url))));
+    const canRegen = !!(it.regen && it.regen.kind && hasSource && imagesEnabled());
     // §2 — TWO BUTTONS, BECAUSE THEY ARE DIFFERENT ACTS. Re-roll is "draw this again"; rebuild is
     // "describe this differently". ⛔ Aevi's reason this matters: if the COMPOSITION is wrong — wrong
     // power, wrong place, two figures reading as one — a re-roll gives you the same wrong composition
@@ -9874,7 +9940,11 @@ function renderGallery() {
         <button class="gallery-del" data-galdel="${esc(g.url)}" title="Remove this image">✕</button>
         ${character.portrait === g.url ? "" : `<button class="gallery-pick" data-galpick="${esc(g.url)}" title="Make this the character's portrait">★ Set as portrait</button>`}
         ${n > 1 ? `<span class="gal-stack-badge" title="${n} pictures of this — open it to walk them">▣ ${n}</span>` : ""}
-        <figcaption>${esc(g.caption || g.kind)}${st.chosen ? ` <span class="rep-band trusted">chosen</span>` : ""}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait${character.portraitPinned ? " · pinned" : ""}</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
+        ${/* Erik: "I don't need the 'chosen' tag on the display." It said the same thing the tile already
+              says by BEING the one shown — the stack's chosen image is the one on top. The ▣ badge carries
+              the only part that was news (there are others behind this). `portrait` stays: that is a
+              different fact, about the character sheet rather than about the stack. */""}
+        <figcaption>${esc(g.caption || g.kind)}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait${character.portraitPinned ? " · pinned" : ""}</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
       </figure>`; }).join("")}</div>`; })()
       : gallery.length ? "<div class='insight'>Nothing in this category yet.</div>"
       : "<div class='insight'>No images yet — a portrait is minted at creation (with art on), and the world fills in as you play.</div>"}

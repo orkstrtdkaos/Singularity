@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.145";
+const APP_VERSION = "1.9.146";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1095,7 +1095,7 @@ function keepLightboxItem(it) {
   return true;
 }
 
-function openLightbox(items, start = 0) {
+function openLightbox(items, start = 0, { onClose = null } = {}) {
   const list = (items || []).filter(it => it && it.url);
   if (!list.length) return;
   let i = Math.max(0, Math.min(start, list.length - 1));
@@ -1127,7 +1127,9 @@ function openLightbox(items, start = 0) {
     i = ring[(at + dir + ring.length) % ring.length];
     render();
   };
-  const close = () => { el.remove(); document.removeEventListener("keydown", onKey); };
+  // CCODE-185: keeping, discarding or setting a default all happen INSIDE the box; the grid behind it is
+  // stale the moment any of them does. It re-renders on close rather than guessing mid-flight.
+  const close = () => { el.remove(); document.removeEventListener("keydown", onKey); try { onClose?.(); } catch { /* a redraw is never worth eating the close */ } };
   const onKey = (e) => {
     if (e.key === "Escape") close();
     else if (e.key === "i" || e.key === "I") { showMeta = !showMeta; render(); }
@@ -1376,7 +1378,17 @@ function wireLightbox() {
     if (!img) return;
     if (img.dataset.lbgroup === "gallery" && character?.gallery?.length) {
       // SNG-401 §1: carry each tile's provenance into the lightbox, so a portrait can be redrawn there.
-      openLightbox(character.gallery.map(g => ({ url: g.url, caption: g.caption, prompt: g.prompt, regen: galleryRegenFor(g), meta: g })), Number(img.dataset.lbindex) || 0);
+      // ⛔ CCODE-185 (Erik): "after keeping some photos the gallery doesn't refresh, so when I click on
+      // something it opens up something else." The tile used to carry `data-lbindex` — a POSITION captured
+      // when the grid rendered. Keeping an image unshifts a new entry at index 0, so every index the DOM
+      // was holding shifted by one and every tile opened its neighbour. ⚠️ AN INDEX INTO A MUTABLE LIST IS
+      // NOT A HANDLE. The url is; it is resolved against the CURRENT gallery at the moment of the click.
+      const items = character.gallery.map(g => ({ url: g.url, caption: g.caption, prompt: g.prompt, regen: galleryRegenFor(g), meta: g }));
+      const want = img.dataset.lburl || img.getAttribute("src");
+      const at = Math.max(0, items.findIndex(x => x.url === want));
+      // ⚠️ ASK THE DOM whether the grid is still on screen rather than tracking a flag — a flag about which
+      // screen is showing is one more thing that can be wrong, and this one is observable.
+      openLightbox(items, at, { onClose: () => { if (document.querySelector(".gallery-grid")) renderGallery(); } });
     } else {
       // SNG-401 §1: Aevi's own routing — `data-lightbox` is a string attribute on the img, so the
       // provenance rides there (data-regen-kind / data-regen-subject) without changing eight signatures.
@@ -9848,7 +9860,7 @@ function renderGallery() {
               (onerror → display:none), so a gallery of 48 looked like 3 — Erik's "something is collapsing them".
               Now: auto-retry ONCE with a cache-bust (recovers the transient failures), then leave a PLACEHOLDER
               tile (never hide it) so the count matches the grid and the image is retryable, not vanished. */""}
-        <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" data-lightbox="gallery" data-lbgroup="gallery" data-lbindex="${gi}" loading="lazy" onerror="if(!this.dataset.retried){this.dataset.retried=1;this.src=this.src+(this.src.includes('?')?'&':'?')+'_r='+Date.now()}else{this.closest('.gallery-item')?.classList.add('gallery-broken')}">
+        <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" data-lightbox="gallery" data-lbgroup="gallery" data-lburl="${esc(g.url)}" loading="lazy" onerror="if(!this.dataset.retried){this.dataset.retried=1;this.src=this.src+(this.src.includes('?')?'&':'?')+'_r='+Date.now()}else{this.closest('.gallery-item')?.classList.add('gallery-broken')}">
         <button class="gallery-retry" data-galretry title="This image didn't load — try again">⟳ retry</button>
         <button class="gallery-del" data-galdel="${esc(g.url)}" title="Remove this image">✕</button>
         ${character.portrait === g.url ? "" : `<button class="gallery-pick" data-galpick="${esc(g.url)}" title="Make this the character's portrait">★ Set as portrait</button>`}

@@ -14357,6 +14357,43 @@ await (async () => {
     /\.lightbox-close \{[^}]*position: absolute[^}]*top:/.test(css180) && /\.lightbox-meta-btn \{[^}]*position: absolute[^}]*top:/.test(css180));
 }
 
+// ---- CCODE-185: an index into a mutable list is not a handle ----
+// Erik: "after keeping some photos the gallery doesn't refresh, so when I click on something it opens up
+// something else." ⛔ The tile carried `data-lbindex` — a POSITION captured when the grid rendered. Keeping
+// an image unshifts a new entry at index 0, so every index the DOM was holding shifted by one and every
+// tile opened its neighbour. The bug is not "the gallery is stale"; it is that a position was ever used as
+// a name for a thing.
+{
+  const src185 = readFileSync(join(root, "app.js"), "utf8");
+  // the class of bug, demonstrated rather than described
+  check("CCODE185 THE BUG: an index handle points at the wrong picture once the list grows at the front", (() => {
+    const g = [{ url: "a" }, { url: "b" }, { url: "c" }];
+    const idxAtRender = 1;
+    g.unshift({ url: "NEW" });                    // exactly what addGalleryImage does on a Keep
+    return g[idxAtRender].url !== "b";
+  })());
+  check("CCODE185 THE FIX: a URL handle survives it", (() => {
+    const g = [{ url: "a" }, { url: "b" }, { url: "c" }];
+    g.unshift({ url: "NEW" });
+    return g[g.findIndex(x => x.url === "b")].url === "b";
+  })());
+  // ⚠️ STRIP COMMENTS BEFORE A NEGATIVE. The note above explaining this bug contains `data-lbindex`, so the
+  // assertion failed on its own explanation — the fifth time this session a checker has matched the prose
+  // about a thing rather than the thing. A negative claim about CODE has to be made against code.
+  const markup185 = src185.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+  check("CCODE185: the tile carries its url and no index at all",
+    /data-lburl="\$\{esc\(g\.url\)\}"/.test(markup185) && !/data-lbindex/.test(markup185));
+  check("CCODE185: …and the position is resolved against the CURRENT gallery at click time",
+    /const at = Math\.max\(0, items\.findIndex\(x => x\.url === want\)\);/.test(src185));
+  check("CCODE185: a url that has since been discarded still opens something rather than nothing", /Math\.max\(0, /.test(src185));
+  // and the grid catches up with whatever happened inside the box
+  check("CCODE185: the lightbox tells its caller when it closes", /function openLightbox\(items, start = 0, \{ onClose = null \} = \{\}\)/.test(src185)
+    && /try \{ onClose\?\.\(\); \} catch/.test(src185));
+  check("CCODE185: the gallery re-renders on close, so counts and defaults are current",
+    /onClose: \(\) => \{ if \(document\.querySelector\("\.gallery-grid"\)\) renderGallery\(\); \}/.test(src185));
+  check("CCODE185: …and a failing redraw never eats the close", /catch \{ \/\* a redraw is never worth eating the close \*\/ \}/.test(src185));
+}
+
 // ---- CCODE-184: "I want to be able to set the default picture please." ----
 // ⛔ KEEP WAS DOING TWO JOBS. It cast the likeness vote AND silently became the shown picture — so keeping a
 // fifth image because you liked one detail of it replaced the face you had already chosen, and there was no
@@ -14405,8 +14442,12 @@ await (async () => {
     && /const rep = st\.members\.find\(m => m\.url === chosen\) \|\| st\.members\[0\];/.test(src183));
   check("CCODE183: …and it says how many are behind it", /gal-stack-badge/.test(src183) && /\$\{n\} pictures of this/.test(src183));
   check("CCODE183: a picture with NO subject stays its own tile (a moment is not part of anything)", /`solo:\$\{g\.url\}`/.test(src183));
-  check("CCODE183: opening a stack hands the lightbox the rep's index, so its own grouping takes over",
-    /data-lbindex="\$\{gi\}"/.test(src183) && /const gi = gallery\.indexOf\(g\);/.test(src183));
+  // ⚠️ CORRECTED BY CCODE-185: the tile carries its URL, not a position — an index captured at render time
+  // pointed at the wrong picture the moment a Keep unshifted a new entry. The property is unchanged: the
+  // stack opens on its own representative, and the lightbox's per-subject ring takes it from there.
+  check("CCODE183/185: opening a stack opens the REPRESENTATIVE, resolved at click time",
+    /data-lburl="\$\{esc\(g\.url\)\}"/.test(src183)
+    && /const at = Math\.max\(0, items\.findIndex\(x => x\.url === want\)\);/.test(src183));
 
   // ⚠️ THE SHAPE keepLightboxItem ACTUALLY WRITES — his four Pell tiles, plus a legacy one with no
   // provenance that must still join them, plus two of one battle, plus a one-off that must not.

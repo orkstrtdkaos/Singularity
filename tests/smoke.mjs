@@ -14321,6 +14321,42 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-180: the caption was running under the buttons ----
+// Erik sent a screenshot: "…e waystation fire—shelter-keeper, traveler · version 2 of 2 · 19/29 in the
+// gallery · a new draw" with the head cut off by one button and the tail colliding with another.
+// ⛔ CAUSE: each action was ABSOLUTELY POSITIONED at its own offset into the band the caption occupies, so
+// a long caption slid beneath them, and a button that did not render left a hole instead of letting its
+// neighbours close up. Four independent anchors is how it got there; pixel-nudging them is how it stays.
+{
+  const css180 = readFileSync(join(root, "style.css"), "utf8");
+  const app180 = readFileSync(join(root, "app.js"), "utf8");
+  const ACTIONS = ["lightbox-regen", "lightbox-rebuild", "lightbox-discard", "lightbox-keep"];
+
+  check("CCODE180: the four actions live in ONE row", /<div class="lightbox-actions">/.test(app180)
+    && /\.lightbox-actions \{[^}]*display: flex[^}]*flex-wrap: wrap/.test(css180));
+  // ⛔ THE REGRESSION THAT ALMOST SHIPPED: a stale absolute rule sat LATER in the file than the new row and
+  // won the cascade, so the button would have re-absoluted itself while the row looked correct in source.
+  check("CCODE180: not one action is absolutely positioned any more", ACTIONS.every(cls => {
+    const rules = [...css180.matchAll(new RegExp(`\\.${cls}[^{]*\\{([^}]*)\\}`, "g"))].map(m => m[1]);
+    return rules.length > 0 && rules.every(body => !/position:\s*absolute/.test(body));
+  }), () => ACTIONS.filter(cls => [...css180.matchAll(new RegExp(`\\.${cls}[^{]*\\{([^}]*)\\}`, "g"))].some(m => /position:\s*absolute/.test(m[1]))).join(", "));
+  check("CCODE180: and none of them carries a hand-tuned left/right offset", ACTIONS.every(cls =>
+    [...css180.matchAll(new RegExp(`\\.${cls}[^{]*\\{([^}]*)\\}`, "g"))].every(m => !/(^|;)\s*(left|right):/.test(m[1]))));
+  // ⚠️ COUNT THE STRUCTURAL RULE, NOT EVERY MENTION. My first version counted `.lightbox-actions {` and
+  // caught the responsive `gap` override inside the media query — a legitimate second mention, not a
+  // second definition. What must be unique is the rule that decides the LAYOUT.
+  check("CCODE180: the row's layout is defined ONCE, so a later rule cannot quietly re-break it",
+    (css180.match(/\.lightbox-actions \{[^}]*display:/g) || []).length === 1);
+  check("CCODE180: the caption is free to wrap rather than slide under anything", /\.lightbox-cap \{ max-width: 92vw; \}/.test(css180));
+  // the image must yield room, or the row clips off the bottom and looks like it does not exist
+  check("CCODE180: the picture leaves room for the caption and the row on a short screen", (() => {
+    const m = css180.match(/\.lightbox-inner img \{[^}]*max-height:\s*(\d+)vh/);
+    return m && Number(m[1]) <= 80;
+  })());
+  check("CCODE180: close/save/details stay pinned at the top, away from the caption band",
+    /\.lightbox-close \{[^}]*position: absolute[^}]*top:/.test(css180) && /\.lightbox-meta-btn \{[^}]*position: absolute[^}]*top:/.test(css180));
+}
+
 // ---- CCODE-179: the house style follows the PEOPLE ----
 // Erik: "I like to keep the house style but make sure that house style is variable based on the tradition
 // they're from." The old constant locked a PALETTE — "muted earth tones with teal and gold accents" — onto

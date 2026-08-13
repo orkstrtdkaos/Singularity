@@ -509,7 +509,10 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 img[data-lightbox] { cursor: zoom-in; }
 .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; }
 .lightbox-inner { position: relative; max-width: 92vw; max-height: 92vh; display: flex; flex-direction: column; align-items: center; }
-.lightbox-inner img { max-width: 92vw; max-height: 86vh; object-fit: contain; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,.6); }
+/* CCODE-180: the image yields the room the caption and the action row need. At 86vh the picture plus a
+   wrapped caption plus a button row exceeded the container on a short viewport and the row clipped off the
+   bottom — the buttons were there and unreachable, which looks identical to them not existing. */
+.lightbox-inner img { max-width: 92vw; max-height: 76vh; object-fit: contain; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,.6); }
 .lightbox-cap { font-family: var(--font-ui); font-size: 13px; color: #ddd; margin-top: 8px; text-align: center; }
 .lightbox-close { position: absolute; top: -12px; right: -12px; width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--panel); color: var(--ink); font-size: 16px; cursor: pointer; }
 .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 60px; border: none; background: rgba(0,0,0,.4); color: #fff; font-size: 30px; cursor: pointer; border-radius: 8px; }
@@ -523,17 +526,28 @@ img[data-lightbox] { cursor: zoom-in; }
 /* SNG-401 — draw again / keep. Bottom edge, away from ✕ and ⤓ Save at the top: pressing one of these
    spends a real generation or replaces a face, so neither may sit where a hand reaches for chrome.
    "Keep" is the affirmative and is the only one tinted — it is the press that actually changes something. */
-.lightbox-regen, .lightbox-rebuild, .lightbox-keep { position: absolute; bottom: -14px; height: 32px; padding: 0 14px;
-  border-radius: 16px; border: none; font-size: 13px; cursor: pointer; white-space: nowrap; box-shadow: 0 2px 10px rgba(0,0,0,.35); }
-.lightbox-regen { left: -12px; background: var(--panel); color: var(--ink); }
-.lightbox-rebuild { left: 122px; background: var(--panel); color: var(--ink); }
-.lightbox-keep { right: -12px; background: var(--accent, #3c7d6e); color: #fff; font-weight: 600; }
+/* ⛔ CCODE-180 — ONE ROW, NOT FOUR ANCHORS. Erik sent a screenshot of the caption running underneath the
+   buttons. Each action was absolutely positioned at its own offset, so they shared a band with the caption,
+   a long caption slid under them, and a button that did not render left a hole rather than letting its
+   neighbours close up. A flex row that wraps cannot do any of that, and needs no per-button arithmetic. */
+.lightbox-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 8px; margin-top: 10px; max-width: 92vw; }
+.lightbox-regen, .lightbox-rebuild, .lightbox-discard, .lightbox-keep {
+  position: static; height: 32px; padding: 0 14px; border-radius: 16px; border: none;
+  font-size: 13px; cursor: pointer; white-space: nowrap; box-shadow: 0 2px 10px rgba(0,0,0,.35); }
+.lightbox-regen, .lightbox-rebuild { background: var(--panel); color: var(--ink); }
+.lightbox-discard { background: var(--panel); color: var(--ink); opacity: .8; }
+.lightbox-discard:hover { opacity: 1; }
+.lightbox-keep { background: var(--accent, #3c7d6e); color: #fff; font-weight: 600; }
+.lightbox-keep.kept { background: var(--panel); color: var(--ink); box-shadow: inset 0 0 0 2px var(--accent, #3c7d6e); }
 .lightbox-regen:disabled, .lightbox-rebuild:disabled, .lightbox-keep:disabled { opacity: .7; cursor: default; }
+/* the caption owns its own line and wraps rather than sliding under anything */
+.lightbox-cap { max-width: 92vw; }
 @media (max-width: 640px) {
   .lightbox-nav.prev { left: 4px; } .lightbox-nav.next { right: 4px; }
-  /* the three stack rather than overlap on a narrow screen — a Keep hidden under a Draw is a lost choice */
-  .lightbox-regen, .lightbox-rebuild, .lightbox-keep { bottom: -12px; font-size: 12px; padding: 0 10px; height: 30px; }
-  .lightbox-regen { left: 2px; } .lightbox-rebuild { left: 108px; } .lightbox-keep { right: 2px; }
+  .lightbox-actions { gap: 6px; }
+  .lightbox-regen, .lightbox-rebuild, .lightbox-discard, .lightbox-keep { font-size: 12px; padding: 0 10px; height: 30px; }
+}
 }
 /* SNG-059 creation v2: the great circle domain picker */
 .great-circle { width: 100%; max-height: 60vh; display: block; }
@@ -1323,7 +1337,6 @@ img[data-lightbox] { cursor: zoom-in; }
 .news-open-cue { font-family: var(--font-ui); font-size: 11px; opacity: .65; white-space: nowrap;
   border: 1px solid currentColor; border-radius: 10px; padding: 0 6px; margin-left: 4px; }
 /* CCODE-164 — a kept look is a VOTE, and a vote you have cast should look cast. */
-.lightbox-keep.kept { background: var(--panel); color: var(--ink); box-shadow: inset 0 0 0 2px var(--accent, #3c7d6e); }
 /* CCODE-165 — the codex page leads with its subject's face, same seed as the popup so it is the same person. */
 .codex-top-art { width: 100%; max-height: 260px; object-fit: cover; object-position: center 18%;
   border-radius: 6px; margin: 6px 0 10px; cursor: zoom-in; display: block; }
@@ -1346,9 +1359,5 @@ img[data-lightbox] { cursor: zoom-in; }
 .lb-ring { margin-left: 8px; font-size: 11px; border: 1px solid currentColor; border-radius: 10px; padding: 0 6px; opacity: .8; }
 @media (max-width: 640px) { .lightbox-meta-btn { left: 78px; font-size: 12px; padding: 0 9px; } }
 .lb-prompt.dim { opacity: .62; }
-/* CCODE-177 — discard sits apart from Keep, because one adds and one removes and a mis-hit is a loss. */
-.lightbox-discard { position: absolute; bottom: -14px; right: 150px; height: 32px; padding: 0 12px; border-radius: 16px;
-  border: none; background: var(--panel); color: var(--ink); font-size: 13px; cursor: pointer; opacity: .85;
-  box-shadow: 0 2px 10px rgba(0,0,0,.35); }
-.lightbox-discard:hover { opacity: 1; }
-@media (max-width: 640px) { .lightbox-discard { right: 104px; font-size: 12px; padding: 0 9px; height: 30px; } }
+/* CCODE-177/180: discard now lives in .lightbox-actions with the rest — its absolute rule is gone,
+   because a later absolute rule beats an earlier flex one and would have silently re-broken the row. */

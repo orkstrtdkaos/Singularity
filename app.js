@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.141";
+const APP_VERSION = "1.9.142";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1183,10 +1183,16 @@ function openLightbox(items, start = 0) {
       <button class="lightbox-close" data-lbclose>✕</button>
       <button class="lightbox-save" data-lbsave title="Save this image to your device — it stays yours even if the link expires">⤓ Save</button>
       <button class="lightbox-meta-btn${showMeta ? " on" : ""}" data-lbmeta title="Everything recorded about this picture, including the prompt that made it (or press i)">ⓘ ${showMeta ? "Hide" : "Details"}</button>
+      ${/* ⛔ CCODE-180 (Erik, with a screenshot): the caption was running UNDER these. They were each
+            absolutely positioned into the same band the caption occupies, so a long caption slid beneath
+            them and a missing button left a hole where its neighbour should have shifted. Pixel-nudging
+            four independent anchors is how it got here; they are ONE ROW now, and the row wraps. */""}
+      <div class="lightbox-actions">
       ${canRegen ? `<button class="lightbox-regen" data-lbregen title="Draw ${esc(it.regen.label || "this")} again — same description, a new hand. The one you have now is kept beside it; nothing is replaced unless you choose it.">↻ Draw again</button>` : ""}
       ${canRebuild ? `<button class="lightbox-rebuild" data-lbrebuild title="Describe ${esc(it.regen.label || "this")} differently — for when the picture is not merely unlucky but wrong (wrong place, wrong look, the wrong thing happening)">✎ Describe differently</button>` : ""}
       ${canDiscard ? `<button class="lightbox-discard" data-lbdiscard title="${isDraw172 ? "Throw this draw away — it was never saved" : "Delete this picture from your gallery, and stop it guiding what they look like"}">✕ Discard</button>` : ""}
       ${canKeep ? `<button class="lightbox-keep${isKept ? " kept" : ""}" data-lbkeep title="${isKept ? "Stop using this one as a guide to what they look like" : `Keep this look for ${esc(it.regen.label || "them")} — future pictures of them will be drawn toward it. Keep as many as you like; what they agree on counts most.`}">${isKept ? "★ kept — remove" : "☆ Keep this look"}</button>` : ""}
+      </div>
     </div>`;
     el.querySelector("[data-lbclose]").onclick = close;
     // §4: name the failure. A dead draw that just sits blank reads as "the button doesn't work".

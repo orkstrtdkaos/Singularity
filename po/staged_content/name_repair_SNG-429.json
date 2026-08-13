@@ -1,0 +1,18 @@
+{
+ "_note": "⛔ SNG-429 §3. NAME REPAIR. Three npcRegistry entries carried a DESCRIPTION in the `name` field — 'Unknown farmer', 'Boy (name unknown)'. All three have `_gen: null`: they were minted on the GM narration path, which writes the registry directly and NEVER PASSES THROUGH THE NAMER. ⚠️ THIS IS NOT A BACKFILL BUG — `backfill.js` does not name anyone. The fix is that every registry write goes through naming, whatever path minted it.",
+ "_gate": "⛔ NO `name` MAY MATCH /unknown|unnamed|placeholder|\\(name/i. Red on three rows today, which is the correct first observation. ⚠️ AND AN UNNAMED PERSON IS LEGITIMATE — but then the field should be EMPTY and the UI renders the role. 'The boy sweeping the cookhouse' is already authored and is better than 'Boy (name unknown)'.",
+ "names": {
+  "east-bank-stranger": {
+   "name": "Corrin Vale",
+   "why": "⛔ WAS 'Unknown (east bank traveler)' — a description in a name field. ⚠️ Named from his own record: 'young and lean, patched wool coat, mud-caked boots — moves like someone who has walked a long way.' Vale for the country he crossed; Corrin is a road-name, short enough to be shouted."
+  },
+  "third-farmer": {
+   "name": "Hessa Orm",
+   "why": "⛔ WAS 'Unknown farmer'. ⚠️ 'A quieter third party to the irrigation argument — has been staring at the ditch rather than at the people arguing.' Millbrook names run plain (Mara Wells, Dara Holt), so she is Hessa Orm: someone who watches the water instead of the quarrel."
+  },
+  "cookhouse-boy": {
+   "name": "Tam",
+   "why": "⛔ WAS 'Boy (name unknown)'. ⚠️ 'Maybe twelve, broom in hand — giving Silas the kind of attention children give to things adults refuse to look at.' ONE SYLLABLE AND NO SURNAME, deliberately: a cookhouse boy has a name people call across a room, and he has not earned a second one yet."
+  }
+ }
+}

@@ -119,7 +119,7 @@ for (const re of [/"((?:[^"\\]|\\.){25,300})"/g, /'((?:[^'\\]|\\.){25,300})'/g, 
 // Deduped by STRING AND SURFACE — the same sentence rendered in two panels is two pieces of work for
 // Aevi, not one, and collapsing them would hide half the migration.
 const seen = new Set();
-const uniq = strings.filter(r => { const k = r.surface + " " + r.s; return seen.has(k) ? false : (seen.add(k), true); });
+const uniq = strings.filter(r => { const k = r.surface + "\u0000" + r.s; return seen.has(k) ? false : (seen.add(k), true); });
 
 // ---------- apply the coupling test ----------
 const findings = [];

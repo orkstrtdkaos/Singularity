@@ -503,7 +503,7 @@ for (const pack of PACKS) {
       .map(l => { const i = l.search(/(^|[^:"'`])\/\//); return i === -1 ? l : l.slice(0, i); }).join(String.fromCharCode(10));
     // ⚠️ MINTING A LAYOUT POSITION FOR A NEW PLACE IS NOT READING ONE FOR GEOGRAPHY. app.js assigns
     // `map` to generated locations so they can be drawn; that is renderer work wearing app.js's clothes.
-    if (/map\.[xy]/.test(code) && !/coordForGenerated|existingMaps|existing\[/.test(code)) readers.push(f);
+    if (/\bmap\.[xy]\b/.test(code) && !/coordForGenerated|existingMaps|existing\[/.test(code)) readers.push(f);
   }
   check("SNG-387: `map.x/y` is read only by the renderer — worldPos is the sole positioning authority",
     readers.length === 0, `${readers.join(", ")} read the render layout for position`);

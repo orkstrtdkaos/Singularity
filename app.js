@@ -97,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.150";
+const APP_VERSION = "1.9.151";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -792,7 +792,7 @@ async function battleImageFor(item) {
   // style; composing on top of them would let the model compress away the very clauses they exist to add.
   // The builder still owns WHICH fields are in the picture; this only turns its list into a line.
   character.promptCompositions = character.promptCompositions || {};
-  const composedOut = await composeImagePrompt(built.prompt, { cache: character.promptCompositions, kind: built.kind });
+  const composedOut = await composeImagePrompt(built.prompt, { cache: character.promptCompositions, kind: built.kind, subjects: built.subjects || 1 });
   const safe = sanitizeImagePrompt(composedOut.prompt, { ratingLevel: viewerRatingLevel(), isMinor: isMinorSubject(victim) });
   const url = imageURLFor(built.kind, safe, key);              // §3: the cache key IS the seed
   const rec = { url, prompt: safe, kind: built.kind };
@@ -5141,8 +5141,8 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const abilityGrantDetail = (() => {
     const said = String(playerInput || "").toLowerCase();
     if (!said) return null;
-    const teaching = /(taught|teaches|teaching|shows? me|showed me|trains?|training|trained|apprentice|lesson|walks? me through|walked me through)/.test(said);
-    const finished = /(mine now|it is mine|last time|finish(es|ed)?|complete[ds]?|paid for|at last|final(ly)?|hands? it (to me|over)|passes it to me)/.test(said);
+    const teaching = /\b(taught|teaches|teaching|shows? me|showed me|trains?|training|trained|apprentice|lesson|walks? me through|walked me through)\b/.test(said);
+    const finished = /\b(mine now|it is mine|last time|finish(es|ed)?|complete[ds]?|paid for|at last|final(ly)?|hands? it (to me|over)|passes it to me)\b/.test(said);
     if (!(teaching && finished)) return null;
     return `A craft has just been TAUGHT TO COMPLETION in the fiction and handed to the player — the beat is finished, not in progress. You MUST emit \`newAbility\` this turn. It needs a name, a description of what it functionally does AND its limits, an \`attribute\`, a \`notFor\` naming what it is inappropriate for, and — REQUIRED — a \`functions\` array of 1-4 verbs taken ONLY from the closed vocabulary in the contract above. A craft with no functions engages no mechanic: it cannot fill a coverage gap, be recommended, or feed a braid, and the player has been handed a name with nothing behind it. The engine clamps the cost and the tier; you supply what it DOES.`;
   })();
@@ -5176,7 +5176,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     // clause at the tail of a long directive ("if the work SPLIT it..."), and a trailing conditional is
     // exactly what drops under load. The fix is the same one that made itemUpdates land — let the ENGINE
     // decide the split happened, and state it as its own unconditional sentence at the FRONT.
-    const splitWords = /(split|splits|splitting|twin|sever|severed|divide|divided|separate|second (spear|blade|copy)|call it to|shadow-?twin)/;
+    const splitWords = /\b(split|splits|splitting|twin|sever|severed|divide|divided|separate|second (spear|blade|copy)|call it to|shadow-?twin)\b/;
     const splitLine = splitWords.test(said)
       ? ` THIS BEAT ALSO SPLIT THE ITEM IN TWO. You MUST emit \`deriveItem\` this turn as well, naming the parent and giving the child its own description, imagePrompt and grants — a derived item is a PEER, complementary to the parent, never a weaker echo. Narrating the split without emitting the op leaves the player unable to call the thing they just made.`
       : "";

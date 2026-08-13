@@ -39,6 +39,38 @@ import { smartClamp } from "./namematch.js";
 // read looks identical to a dead export. The cap is enforced here and asserted behaviourally.
 const COMPOSED_MAX = 240;
 
+/** ⛔ CCODE-191 (Erik, on the first real results): "seems like you'll really need to start with the two
+ *  figures if you want to get them both in."
+ *
+ *  He is right, and the pictures proved it: BOTH fights came back as ONE person. The composer was told it
+ *  was compressing "a list of visual details" and had no idea two people were in the list, so it fused
+ *  them — Neth's grey wool robes wearing the Choirmaster's mid-blow palm, in one body. That is
+ *  `buildBattlePrompt`'s own design ("two figures in ONE relation") undone by the thing meant to serve it.
+ *
+ *  ⚠️ SUBJECT COUNT IS NOT A DETAIL, IT IS THE FRAME. An image model decides how many bodies to draw in
+ *  the first few words, so the count has to lead — not appear as a subordinate clause ("opponent locked
+ *  rigid") a third of the way in, which is what it produced and what got ignored.
+ *
+ *  ⚠️ AND ERIK'S SECOND HALF IS ALSO RIGHT — "not sure how effective it'll be though." Two distinct
+ *  subjects is a known weak spot for image generators; leading with the count improves the odds, it does
+ *  not guarantee two bodies. This is the best lever available at the prompt layer, honestly labelled. */
+const SYSTEM_TWO = [
+  "You compress details about TWO FIGHTING FIGURES into ONE image-generation prompt.",
+  "",
+  "RULES",
+  "- Open with the two figures. The FIRST WORDS must establish that there are two people, e.g.",
+  "  \"Two figures — a X, and a Y —\". An image generator decides how many bodies to draw from the",
+  "  opening, so the count cannot appear later as a clause.",
+  "- Keep each figure's details attached to THAT figure. Never merge one's clothing with the other's",
+  "  motion. If you cannot tell whose a detail is, drop it rather than give it to the wrong body.",
+  "- Then say what passes BETWEEN them: who acts, who receives, and how it ends.",
+  "- One line. No preamble, no quotes, no explanation. Output the prompt and nothing else.",
+  `- Under ${COMPOSED_MAX} characters.`,
+  "- Keep concrete visual detail: materials, light, posture, motion. Drop repetition, mechanics, and",
+  "  category words. Do NOT invent detail that is not in the input.",
+  "- Write it as a phrase a painter could work from, not as a sentence about a painting.",
+].join("\n");
+
 /** ⚠️ NO `effort`, NO `thinking`. Both error or are ignored on Haiku 4.5, and neither is wanted for a
  *  compression: there is nothing to reason about, only something to say more tightly. */
 const SYSTEM = [
@@ -72,9 +104,11 @@ export function composeKey(deterministic, kind = "") {
  *  @param kind          "battle" | "npc" | "location" | … — carried into the key, not into the prompt
  *  @returns { prompt, composed, key } — `composed` false means this is the deterministic line untouched
  */
-export async function composeImagePrompt(deterministic, { cache = null, kind = "", call = callClaude } = {}) {
+export async function composeImagePrompt(deterministic, { cache = null, kind = "", subjects = 1, call = callClaude } = {}) {
   const base = String(deterministic || "").trim();
-  const key = composeKey(base, kind);
+  // ⚠️ THE COUNT IS IN THE KEY. A fight composed as one figure before this fix must not be served from
+  // cache as a two-figure fight, or the picture Erik already has would never be re-composed.
+  const key = composeKey(base, `${kind}|${subjects >= 2 ? "2" : "1"}`);
   if (!base) return { prompt: base, composed: false, key };
   // ⚠️ THE CACHE IS CHECKED BEFORE ANYTHING ELSE, including the key check — a picture already composed must
   // never depend on the network again, or re-opening a saved fight could quietly change it.
@@ -86,8 +120,9 @@ export async function composeImagePrompt(deterministic, { cache = null, kind = "
     return { prompt: base, composed: false, key };
   }
   try {
-    const raw = await call([{ role: "user", content: base }], { task: "image-prompt", system: SYSTEM, maxTokens: 300 });
-    const line = cleanComposed(raw);
+    const two = subjects >= 2;
+    const raw = await call([{ role: "user", content: base }], { task: "image-prompt", system: two ? SYSTEM_TWO : SYSTEM, maxTokens: 300 });
+    const line = cleanComposed(raw, two);
     if (!line) return { prompt: base, composed: false, key };
     if (cache) cache[key] = line;
     return { prompt: line, composed: true, key };
@@ -100,7 +135,7 @@ export async function composeImagePrompt(deterministic, { cache = null, kind = "
 
 /** ⚠️ A MODEL ASKED FOR ONE LINE STILL SOMETIMES SAYS "Here's the prompt:". Strip the wrapper rather than
  *  trusting the instruction, and refuse anything that came back as prose ABOUT a prompt instead of one. */
-export function cleanComposed(raw) {
+export function cleanComposed(raw, twoFigures = false) {
   let s = String(raw || "").trim();
   s = s.replace(/^```[a-z]*\s*/i, "").replace(/\s*```$/, "");
   s = s.replace(/^(?:here(?:'s| is)[^:]*:|prompt:|image prompt:)\s*/i, "");
@@ -111,5 +146,11 @@ export function cleanComposed(raw) {
   // image generator, which draws it.
   if (!s || s.length < 12) return "";
   if (/^(i (can'?t|cannot|won'?t|am unable)|sorry|as an ai|i'?m not able)/i.test(s)) return "";
+  // ⛔ AND THE FRAME IS ENFORCED, NOT MERELY ASKED FOR. The model is instructed to lead with the count and
+  // mostly will; when it does not, code puts it back rather than shipping a two-person fight as one body.
+  // The division stays the same as everywhere else here: the model composes, code holds the invariant.
+  if (twoFigures && !/^\s*(two|both|a pair)\b/i.test(s) && !/\b(two figures|both figures)\b/i.test(s)) {
+    s = `Two figures — ${s.charAt(0).toLowerCase()}${s.slice(1)}`;
+  }
   return smartClamp(s, COMPOSED_MAX);
 }

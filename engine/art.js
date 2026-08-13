@@ -280,7 +280,16 @@ export function sanitizeImagePrompt(prompt, { ratingLevel = 2, isMinor = false, 
   // ⚠️ A SCRUB LEAVES A HOLE, AND THE HOLE IS VISIBLE. Removing a word from "a sensual, erotic encounter"
   // left "a , encounter" — a dangling comma the generator reads as an empty clause. Same junk class as the
   // "no ," Erik spotted in the safety tail; tidy the punctuation the removal orphaned.
-  p = p.replace(/\s{2,}/g, " ").replace(/\s+,/g, ",").replace(/,(\s*,)+/g, ",").replace(/(^[\s,]+|[\s,]+$)/g, "").trim();
+  // ⛔ CCODE-191 — AND CLOSING THE SPACE IS NOT TIDYING IT. This turned "a , encounter" into "a, encounter":
+  // the comma survives, and an article followed by a comma is the same empty clause with better spacing.
+  // ⚠️ The gate written to catch exactly this carried a literal BACKSPACE where its `\b` belonged, so its
+  // second assertion never ran and the bug it was written for shipped anyway. What is LEFT of an emptied
+  // clause is dropped now, rather than punctuated.
+  p = p.split(",")
+    .map(part => part.replace(/\s{2,}/g, " ").trim())
+    .filter(part => part && !/^(?:a|an|the|and|or|of|with|in|at|on)$/i.test(part))
+    .join(", ")
+    .replace(/\s{2,}/g, " ").replace(/\s+,/g, ",").replace(/,(\s*,)+/g, ",").replace(/(^[\s,]+|[\s,]+$)/g, "").trim();
   const level = Math.max(0, Math.min(4, isMinor ? Math.min(ratingLevel, RATING_LEVEL["PG"]) : ratingLevel));
   // ⛔ CCODE-178, ERIK AGAIN: "What do you mean the minor-protection is the whole tone? Let it just be
   // there where it is, not make every image about minors… or you risk ruining legit images."
@@ -478,7 +487,7 @@ const LIKENESS_KEEP_CAP = 8;   // more than a handful stops being a preference a
 // CCODE-175: the engine's OWN framing is boilerplate too. `bareImagePrompt` takes off the floors; these
 // come from assembleImagePrompt and are on every portrait, so they would win a vote counted by agreement
 // exactly as the safety tail did. A likeness is what makes this person look like THEMSELVES.
-const FRAMING_CLAUSE = /^(?:character portrait|named .+|a person|single item on plain dark background|a dangerous creature.*|rendered in the aesthetic of .+|.*portrait)$/i;
+const FRAMING_CLAUSE = /^(?:character portrait|named .+|a person|single item on plain dark background|a dangerous creature.*|rendered in the aesthetic of .+|.*\bportrait\b)$/i;
 
 /** PURE. The voted likeness clause: clauses ranked by HOW MANY kept prompts contain them, ties broken by
  *  first appearance so a single keep still reads in its own order. Returns "" when nothing is kept. */

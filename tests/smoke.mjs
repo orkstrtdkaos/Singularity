@@ -1,6 +1,6 @@
 // Node smoke test for the pure engine modules (no browser needed).
 // Run: node tests/smoke.mjs
-import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { resolveAction, successChance, spectrumAlignment, applyEnergyCost, critProfile as critProfileEarly } from "../engine/resolve.js";
@@ -14847,11 +14847,57 @@ await (async () => {
     check("CCODE-190: an already-short prompt is left alone — no call, no drift",
       cheap === 0 && short.composed === false);
 
+    // ---- CCODE-191: both fights came back as ONE person -------------------------------------------------
+    // ⛔ Erik, on the first real results: "seems like you'll really need to start with the two figures if you
+    // want to get them both in." The pictures proved it — Neth's grey wool robes wearing the Choirmaster's
+    // mid-blow palm, in one body. The composer was told it was compressing "a list of visual details" and had
+    // no idea two people were in the list, so it fused them: `buildBattlePrompt`'s own design ("two figures in
+    // ONE relation") undone by the thing meant to serve it.
+    {
+      const twoSys = [];
+      const spy = async (msgs, o) => { twoSys.push(o.system); return "figure in grey wool robes, palm raised mid-blow, kneeling"; };
+      const r2 = await IP.composeImagePrompt(LIST, { cache: {}, kind: "battle", subjects: 2, call: spy });
+      // ⚠️ SUBJECT COUNT IS THE FRAME, NOT A DETAIL. An image model decides how many bodies to draw in the
+      // first few words — a count that arrives as a subordinate clause a third of the way in gets ignored.
+      check("CCODE-191: a two-figure fight is composed as two figures, and the count LEADS",
+        /^two figures\b/i.test(r2.prompt), r2.prompt);
+      check("CCODE-191: …and the composer is told there are two, rather than left to guess from a comma list",
+        /TWO FIGHTING FIGURES/.test(twoSys[0] || "") && /FIRST WORDS/.test(twoSys[0] || ""));
+      // ⛔ ENFORCED, NOT MERELY ASKED FOR — the model mostly complies; when it does not, code puts the frame
+      // back rather than shipping a two-person fight as one body.
+      check("CCODE-191: a reply that forgets the count has it restored, not shipped as one body",
+        IP.cleanComposed("figure in grey wool robes, kneeling, palm raised", true).startsWith("Two figures"));
+      check("CCODE-191: …and a reply that already leads with it is not doubled",
+        (IP.cleanComposed("Two figures — a spectre and a kneeling woman", true).match(/two figures/gi) || []).length === 1);
+      check("CCODE-191: a single-subject picture is never given a second body",
+        !/two figures/i.test(IP.cleanComposed("a lean scarred woman on a wet bridge at dusk", false)));
+      // ⛔ AND THE COUNT IS IN THE CACHE KEY, or the one-figure picture Erik already has would be served
+      // back forever and never re-composed.
+      // ⚠️ ASSERTED THROUGH `composeImagePrompt`, NOT `composeKey`. Written against the helper it stayed GREEN
+      // with the count removed from the call site — the key function still distinguished "1" from "2" while
+      // nothing passed either. Testing the helper is not testing the wiring.
+      {
+        const shared = {};
+        await IP.composeImagePrompt(LIST, { cache: shared, kind: "battle", subjects: 1, call: async () => "one lone figure kneeling in mist, palm raised" });
+        const asTwo = await IP.composeImagePrompt(LIST, { cache: shared, kind: "battle", subjects: 2, call: async () => "Two figures locked, one striking, one giving no ground" });
+        check("CCODE-191: the subject count is part of the cache key — an old one-figure compose is not reused",
+          /^two figures/i.test(asTwo.prompt), asTwo.prompt);
+      }
+      // The builder is the only thing that knows there are two; it now says so.
+      const bp191 = await import("../engine/battleprompt.js");
+      const two191 = bp191.buildBattlePrompt({ victim: { name: "A", appearance: "grey wool" }, killer: { name: "B", appearance: "half-transparent" }, place: "x", outcome: "wounded" });
+      const one191 = bp191.buildBattlePrompt({ victim: { name: "A", appearance: "grey wool" }, place: "x" });
+      check("CCODE-191: the builder reports how many figures it composed for",
+        two191.subjects === 2 && one191.subjects === 1, `${two191.subjects}/${one191.subjects}`);
+      check("CCODE-191: …and the battle mint passes that count through to the composer",
+        /subjects: built\.subjects \|\| 1/.test(readFileSync(join(root, "app.js"), "utf8")));
+    }
+
     // ⛔ COMPOSE BEFORE THE FLOORS, NEVER AFTER — composing on top of them would let the model compress
     // away the ceiling tone and house style they exist to add.
     const src190 = readFileSync(join(root, "app.js"), "utf8");
     check("CCODE-190: the composed line is what the floors are applied TO, not the other way round",
-      /const composedOut = await composeImagePrompt\(built\.prompt, \{ cache: character\.promptCompositions, kind: built\.kind \}\);\s*\n\s*const safe = sanitizeImagePrompt\(composedOut\.prompt,/.test(src190));
+      /const composedOut = await composeImagePrompt\(built\.prompt, \{[^}]*\}\);\s*\n\s*const safe = sanitizeImagePrompt\(composedOut\.prompt,/.test(src190));
     // …and a record-backed re-roll hands the composed words in as the override, or `regenerateImage`
     // rebuilds the list from the record on the way past and the composition is silently discarded.
     check("CCODE-190: a re-roll passes the composed words through, rather than re-deriving the list",
@@ -15152,7 +15198,7 @@ await (async () => {
   // an empty clause the generator reads as detail. Same junk class as the "no ," in the old safety tail.
   check("CCODE-178: a scrubbed word leaves no orphaned comma behind", (() => {
     const out = A176.sanitizeImagePrompt("a sensual, erotic encounter between two lovers", { ratingLevel: 0, kind: "moment" });
-    return !/\s,|,\s*,|^\s*,|,\s*$/.test(out) && !/a\s*,/.test(out);
+    return !/\s,|,\s*,|^\s*,|,\s*$/.test(out) && !/\ba\s*,/.test(out);
   })(), () => A176.sanitizeImagePrompt("a sensual, erotic encounter between two lovers", { ratingLevel: 0, kind: "moment" }));
   check("CCODE-176: the boilerplate is a fraction of what it was", (A176.sanitizeImagePrompt(d176, { ratingLevel: 4, kind: "npc" }).length - d176.length) < 60);
   // ⛔ AND THE ONE THING THAT DID NOT MOVE
@@ -15824,10 +15870,45 @@ await (async () => {
 // ⚠️ ANYTHING APPENDED BELOW `process.exit` NEVER RUNS. This bit me: eight minting checks were added to
 // the end of this file, the suite went green, and not one of them had executed. A test that cannot fail is
 // worse than no test — it is a green light with nothing behind it. This guard makes the trap visible.
+// ---- CCODE-191: no source file may carry a control character ----------------------------------------
+// ⛔ FOUND BY ACCIDENT, AND IT WAS ALREADY SHIPPED. Three regexes in app.js carry a literal BACKSPACE
+// (U+0008) where \\b was intended — `teaching`, `finished` and `splitWords`, the guards for "someone is
+// teaching me this", "this is finished", and "split the spear". `/\b(taught|teaches|…)\b/` can only match
+// text that literally contains a backspace, so ALL THREE HAVE NEVER FIRED in play.
+//
+// ⚠️ THE CAUSE IS MY OWN TOOLING, four times in one session: a shell heredoc hands python "\\b", python
+// reads it as the backspace escape, and the file gets a control character that greps clean, renders
+// invisibly, and silently turns a word-boundary guard into a dead one. Reviewing the diff does not catch
+// it — the character has no width. A machine has to look.
+{
+  // ⚠️ WRITTEN AS \uXXXX ESCAPES, DELIBERATELY. Spelled with raw bytes — which is how it arrived the
+  // first time — the gate's own pattern would carry the very characters it exists to forbid, and fail on
+  // itself. A checker that cannot survive its own rule is not a checker.
+  const CONTROL = new RegExp("[\u0000-\u0008\u000b\u000c\u000e-\u001f]");
+  const scanned = [], dirty = [];
+  const roots = ["app.js", "engine", "tests", "scripts"];
+  const walk = (rel) => {
+    const abs = join(root, rel);
+    let st; try { st = statSync(abs); } catch { return; }
+    if (st.isDirectory()) { for (const f of readdirSync(abs)) walk(rel + "/" + f); return; }
+    if (!/\.(js|mjs)$/.test(rel)) return;
+    scanned.push(rel);
+    const txt = readFileSync(abs, "utf8");
+    const m = txt.match(CONTROL);
+    if (m) {
+      const at = txt.indexOf(m[0]);
+      dirty.push(`${rel}:${txt.slice(0, at).split("\n").length} (U+${m[0].charCodeAt(0).toString(16).padStart(4, "0")})`);
+    }
+  };
+  for (const r of roots) walk(r);
+  check(`CCODE-191: no source file carries a control character (${scanned.length} files scanned)`,
+    dirty.length === 0, `a \b written as a literal backspace is an invisible dead regex: ${dirty.slice(0, 5).join(" · ")}`);
+}
+
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {
   const src = readFileSync(join(root, "tests/smoke.mjs"), "utf8");
   const after = src.slice(src.indexOf("process.exit(failures") + 1);
-  return !/check\(/.test(after);
+  return !/\bcheck\(/.test(after);
 })());
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

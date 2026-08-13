@@ -139,7 +139,7 @@ export function buildBattlePrompt({ victim = {}, killer = null, ability = null, 
   if (!killer) {
     const authored = clause(victim.deathImagePrompt, CAP.whole);
     const body = authored || `${v.name}, ${v.look || "fallen"} — ${depthNote(depth)}`;
-    return { kind: "death", prompt: smartClamp(`${body}${where ? `, at ${where}` : ""}`, CAP.whole) };
+    return { kind: "death", subjects: 1, prompt: smartClamp(`${body}${where ? `, at ${where}` : ""}`, CAP.whole) };
   }
   const k = figureLook(killer);
   const power = powerPhrase(ability, killer);
@@ -163,7 +163,10 @@ export function buildBattlePrompt({ victim = {}, killer = null, ability = null, 
   // ⚠️ `kind` IS THE FRAME, NOT THE OUTCOME. `art.js` sizes on it — battle is 1024×512 wide, death is
   // 768×512 — so a new "clash" kind would silently fall to the default portrait crop, which is the exact
   // failure the wide frame was added to fix ("a portrait crop of a fight shows one shoulder").
-  return { kind: "battle", prompt: smartClamp(parts.join(", ").replace(/\s+/g, " "), CAP.whole) };
+  // ⚠️ CCODE-191: THE COUNT TRAVELS WITH THE PROMPT. This build is two figures in one relation and the
+  // composer cannot see that in a comma list — told nothing, it fused them into one body. The builder is
+  // the only thing that knows, so it says so.
+  return { kind: "battle", subjects: killer ? 2 : 1, prompt: smartClamp(parts.join(", ").replace(/\s+/g, " "), CAP.whole) };
 }
 
 /** ⚠️ SNG-400b §3: "Cache on victimId|killerId|abilityId|worldDay — same fight, same picture, forever. A

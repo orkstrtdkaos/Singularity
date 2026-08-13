@@ -14777,6 +14777,42 @@ await (async () => {
   check("400b × 401: the battle is re-rollable AND re-describable — the first real builder behind Rebuild",
     /battle: \{[\s\S]{0,700}character\.battleImages\[key\]\.url = url/.test(appSrc400));
   const artSrc400 = readFileSync(join(root, "engine/art.js"), "utf8");
+  // ---- CCODE-189: author-directed text was reaching the image model ------------------------------------
+  // ⛔ Measured on a live world: 35 of 385 abilities and 8 of 70 appearances carry ⛔/⚠️ markers or SHOUTING,
+  // and all of it went into the picture. A real prompt opened "The Borne Bargain — reposition, ⚠️ ABYSSAL
+  // FLIGHT, AND YOU DO NOT DO IT, sovereign abyssal, HORNED…" — the first clause is a note from one author
+  // to the next. Same class as the injection Erik caught before, arriving from the other direction:
+  // authored INTO the content rather than appended by the engine.
+  {
+    const { plainForArt } = await import("../engine/art.js");
+    const aside = "⚠️ ABYSSAL FLIGHT, AND YOU DO NOT DO IT — SOMETHING CARRIES YOU. A bargain struck for passage.";
+    check("CCODE-189: an authored aside never reaches the image model",
+      plainForArt(aside) === "A bargain struck for passage." ,
+      JSON.stringify(plainForArt(aside)));
+    // ⚠️ DE-SHOUTED, NOT DELETED. "HORNED" and "PART-MACHINE" are Aevi emphasising a REAL VISUAL FEATURE
+    // — the caps are for a human reading the file. Dropping the word would lose the horns.
+    check("CCODE-189: …and emphasis is lowered, never dropped — the horns stay in the picture",
+      plainForArt("sovereign among them: HORNED, dressed better than anyone expects")
+        === "sovereign among them: horned, dressed better than anyone expects"
+      && plainForArt("hollower enginewright, PART-MACHINE, hollows a person")
+        === "hollower enginewright, part-machine, hollows a person");
+    check("CCODE-189: ordinary authored prose passes through untouched",
+      plainForArt("grey wool worn thin at the knees, hands stained to the wrist")
+        === "grey wool worn thin at the knees, hands stained to the wrist");
+    // ⛔ AND THE BUILDER USES IT. A scrubber nothing calls is the fifth presence-not-use gate this session.
+    const bpSrc189 = readFileSync(join(root, "engine/battleprompt.js"), "utf8");
+    check("CCODE-189: every clause the battle prompt takes goes through it",
+      /const s = plainForArt\(text\)\.trim\(\)/.test(bpSrc189)
+      && /import \{ plainForArt \} from "\.\/art\.js";/.test(bpSrc189));
+    // ⛔ SHORT IS THE REQUIREMENT (Aevi). The description is reader-prose and was appended on top of the
+    // visual `shape`, pushing 269 real prompts to a 362-char average against a 400 cap.
+    check("CCODE-189: the power phrase leads with what it LOOKS like, not the paragraph explaining it",
+      /const visual = \[shape, tags\]\.filter\(Boolean\)\.join\(", "\);/.test(bpSrc189)
+      && /const named = visual \|\| clause\(ability\.description/.test(bpSrc189));
+    check("CCODE-189: …and a craft with no shape still says something",
+      /Old Hunger — a slow taking/.test(powerPhrase({ name: "Old Hunger", description: "a slow taking that leaves the shape behind" }, {})),
+      powerPhrase({ name: "Old Hunger", description: "a slow taking that leaves the shape behind" }, {}));
+  }
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 

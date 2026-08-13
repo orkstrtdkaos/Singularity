@@ -214,6 +214,37 @@ export function isMinorSubject(subject = {}) {
     && !/\b(adult|grown|elder|old(er)?|woman|man|men|veteran|matron|patriarch|widow|widower|aged)\b/i.test(text);
 }
 
+/** ⛔ CCODE-189 — AUTHOR-DIRECTED TEXT IS REACHING THE IMAGE MODEL.
+ *
+ *  Measured on a live world: 35 of 385 abilities and 8 of 70 appearances carry `⛔`/`⚠️` markers or
+ *  Aevi's SHOUTING emphasis, and all of it goes into the picture. A real battle prompt built today opens:
+ *
+ *    "The Borne Bargain — reposition, ⚠️ ABYSSAL FLIGHT, AND YOU DO NOT DO IT, sovereign abyssal, HORNED…"
+ *
+ *  That first clause is a note from the author to the next author. It is not in the picture; it is ABOUT
+ *  the picture. This is the same class Erik already caught once ("what's all this stuff getting injected
+ *  into my image prompt?") arriving from the other direction — not appended by the engine, but authored
+ *  INTO the content the engine reads.
+ *
+ *  ⚠️ AND IT IS DE-SHOUTED, NOT DELETED. "HORNED, dressed better than anyone expects" and "PART-MACHINE"
+ *  are Aevi emphasising a REAL VISUAL FEATURE — the caps are for a human reading the file. Dropping the
+ *  word would lose the horns. Only a clause that a marker actually HEADS is removed, because that is the
+ *  shape of an aside; everything else is lowered to ordinary prose and kept.
+ *
+ *  Runs on every prompt, not only the battle one: the same appearances feed portraits and the whois card. */
+export function plainForArt(text) {
+  let s = String(text || "");
+  // 1. A marker HEADS an aside, and the aside runs to the end of its SENTENCE — not to the em-dash. Aevi's
+  //    shape is "⚠️ SHOUTED CLAIM — SHOUTED CONTINUATION. Real prose follows.", so stopping at the dash left
+  //    "something carries YOU." glued to the front of a description. Measured on her own worst case.
+  s = s.replace(/[⛔⚠️‼️]️?\s*[^.]*(?:\.|$)\s*/gu, " ");
+  // 2. Any marker left is bare punctuation to a painter.
+  s = s.replace(/[⛔⚠️‼️]️?/gu, " ");
+  // 3. De-shout: 3+ capitals is emphasis for a human reading the file. Keep the words, lose the volume.
+  s = s.replace(/\b[A-Z][A-Z'’\-]{2,}\b/g, (w) => (w === w.toUpperCase() ? w.toLowerCase() : w));
+  return s.replace(/\s+/g, " ").replace(/\s+([,.;])/g, "$1").replace(/^[\s,;:—–-]+/, "").trim();
+}
+
 /** THE FLOORS, applied to a prompt STRING. Strips above-ceiling + always-prohibited content,
  *  then appends the ceiling tone + the absolute safety tail. A minor subject is forced
  *  child-safe (sexual/romantic/graphic-violence terms removed, wholesome tone imposed) at ANY

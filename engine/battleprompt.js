@@ -25,6 +25,9 @@
 // the other half of Aevi's rule: "a re-rolling battle quietly says it was a different fight."
 
 import { smartClamp } from "./namematch.js";
+// CCODE-189: author-directed text is authored INTO the content this file reads. One definition, in art.js,
+// because the same appearances feed portraits and the whois card — not a second copy here.
+import { plainForArt } from "./art.js";
 
 // Budgeted so the WHOLE survives: 100 + 65 + 65 + 35 + ~50 + separators sits under `whole`. ⚠️ These are
 // not decorative — a clamp applied to the assembled string instead of its parts truncates from the END,
@@ -35,7 +38,7 @@ const CAP = { look: 58, motion: 60, power: 95, place: 35, act: 42, whole: 400 };
  *  stained to the wrist, a…", and a trailing fragment is worse than a shorter sentence: the generator
  *  draws the dangling article as detail. Take comma-clauses while they fit and stop. */
 function clause(text, cap) {
-  const s = String(text || "").trim().replace(/\s+/g, " ");
+  const s = plainForArt(text).trim().replace(/\s+/g, " ");
   if (!s) return "";
   const first = s.split(/\s+[—–]\s+|[.;]\s+/)[0];
   if (first.length <= cap) return first.replace(/[.,;]$/, "");
@@ -89,8 +92,15 @@ export function powerPhrase(ability = null, killer = {}) {
   if (ability) {
     const shape = clause(ability.shape, 40);
     const tags = (ability.effectTags || []).slice(0, 2).join(", ");
-    const desc = clause(ability.description || ability.effect, CAP.power);
-    const named = [shape, tags, desc].filter(Boolean).join(", ");
+    // ⛔ CCODE-189 — THE DESCRIPTION ONLY WHEN THERE IS NO SHAPE. This file's own note says shape and
+    // effectTags "LEAD OVER the description, which is written for a reader rather than a painter" — and then
+    // appended the description anyway, up to 95 characters of reader-prose per fight. Measured across 269
+    // real fights: prompts averaged 362 characters against a 400 cap, so a third of them were TRUNCATED, and
+    // Aevi's rule is that short IS the requirement ("a long prompt averages into a generic picture, which is
+    // what the Thornmother card is already showing"). The name plus the shape is the picture; the paragraph
+    // explaining the mechanic is not.
+    const visual = [shape, tags].filter(Boolean).join(", ");
+    const named = visual || clause(ability.description || ability.effect, CAP.power);
     return smartClamp(`${ability.name}${named ? ` — ${named}` : ""}`, CAP.power);
   }
   const style = clause(killer.fightingStyle, CAP.power);

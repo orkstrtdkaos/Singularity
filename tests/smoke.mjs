@@ -2534,7 +2534,15 @@ await (async () => {
     /\bgory\b/i.test(sanitizeImagePrompt("a gory duel", { ratingLevel: RATING_LEVEL["R+"] })));
   check("SNG-035 floor: a MINOR subject is forced child-safe (no romance/sexual/gore) at ANY ceiling",
     (() => { const p = sanitizeImagePrompt("a seductive romantic bloody teenager", { ratingLevel: RATING_LEVEL["R+"], isMinor: true }); return /child|age-appropriate|wholesome/.test(p) && !/seductive|romantic|bloody/i.test(p); })());
-  check("SNG-035 floor: every prompt carries the absolute safety tail", /no text, no watermark/.test(sanitizeImagePrompt("anything", {})));
+  // ⚠️ RETIRED BY CCODE-176 (Erik's ruling): "The safety tail is not needed at all - remove it… right now
+  // it just eats up image prompt context." Most of it was hygiene the house style already carries, and the
+  // content half duplicates the rating ceiling. What it was ACTUALLY protecting — that a prompt always
+  // leaves here carrying its ceiling, and that a minor's is absolute — is what these now assert.
+  check("SNG-035/176 floor: every prompt still leaves carrying its CEILING", /no gore/.test(sanitizeImagePrompt("anything", { ratingLevel: 2 })) && /family-friendly/.test(sanitizeImagePrompt("anything", { ratingLevel: 0 })));
+  check("SNG-035/176 floor: a minor's clause is short, absolute, and the WHOLE tone at any ceiling", (() => {
+    const m = sanitizeImagePrompt("anything", { ratingLevel: 4, isMinor: true, kind: "battle" });
+    return /a child, fully clothed, non-sexual/.test(m) && !/mature dramatic tone/.test(m) && !/epic fantasy/.test(m);
+  })());
 
   // isMinorSubject
   check("SNG-035: isMinorSubject flags a generated minor (romanceEligible false)", isMinorSubject({ _gen: { romanceEligible: false } }) === true);
@@ -14205,7 +14213,7 @@ await (async () => {
     check("035/401: ensureImage runs the FLOORS — the viewer's ceiling on a first mint", (() => { const u = decodeURIComponent(adultG.image || ""); return u.includes("family-friendly") && !/\bblood\b/.test(u); })());
     const tail = { id: "t1", name: "Anyone", role: "a traveller" };
     ensureImage(tail, "npc", { ratingLevel: 2 });
-    check("035/401: …and the absolute safety tail rides every first mint", /non-explicit/.test(decodeURIComponent(tail.image || "")));
+    check("035/401/176: …and the ceiling rides every first mint", /dramatic, mild peril, no gore/.test(decodeURIComponent(tail.image || "")));
   }
   check("401: the prompt lookup is keyed off the DOM, not stored in it", /const _regenPrompts = new Map\(\)/.test(appSrc401) && /notePromptFor\(url, moment\.prompt\)/.test(appSrc401));
   if (artWas) localStorage.setItem("singularity.artMode", artWas);
@@ -14297,6 +14305,71 @@ await (async () => {
   check("400b: a battle has its own wide frame (a portrait crop of a fight shows one shoulder)", /battle:\s+\{ width: 1024, height: 512 \}/.test(artSrc400) && /death:\s+\{ width: 768, height: 512 \}/.test(artSrc400));
 }
 
+// ---- CCODE-175/176/177: Erik's rulings on what gets injected, and where a look actually comes from ----
+{
+  const A176 = await import("../engine/art.js");
+  const was176 = localStorage.getItem("singularity.artMode"); A176.setArtMode("generate");
+  const d176 = "scorched leather apron, forearms scarred";
+
+  // ⛔ CCODE-175 — WHERE A LOOK COMES FROM. Erik: "I have Cevaine's image with white hair that I love… but
+  // no re-render is giving her white hair anymore." MEASURED: nothing in her record mentions hair at all.
+  // Her beloved picture was minted from "a person, character portrait, named Cevaine, Woman, …" — the
+  // pre-SNG-367 generic lead — so the white hair was the model's invention from one seed. Keeping that
+  // image taught the likeness nothing, because the words were never there to count. A keep can carry the
+  // player's OWN words now, and they outrank clauses the engine merely assembled.
+  const st175 = {};
+  A176.toggleKeep(st175, "npc:cevaine", { url: "u1", note: "white hair, translucent skin",
+    prompt: A176.sanitizeImagePrompt("white hair, translucent skin, Tall, angular, character portrait, named Cevaine, Woman", { ratingLevel: 2 }) });
+  const lk175 = A176.likenessClause(st175["npc:cevaine"].keeps);
+  check("CCODE-175 CEVAINE: the words the player typed LEAD the likeness", lk175.startsWith("white hair, translucent skin"), lk175);
+  // ⚠️ A CASE WHERE THE WEIGHT ALONE DECIDES. My first version put the note first in BOTH weightings, because
+  // a note also sorts earliest on ties — so it proved order, not weight. Here one note (seen once) must beat
+  // an assembled clause that TWO keeps agree on; that only holds if a typed word counts double.
+  check("CCODE-175: …and a word the player typed ONCE outranks a clause two prompts merely share", (() => {
+    const s3 = {};
+    // the note must NOT also sit in the prompt, or it wins on ordinary count and the weight proves nothing
+    A176.toggleKeep(s3, "w", { url: "a", note: "white hair", prompt: "grey cloak" });
+    A176.toggleKeep(s3, "w", { url: "b", prompt: "grey cloak" });
+    return A176.likenessClause(s3.w.keeps).startsWith("white hair");
+  })(), () => { const s3 = {}; A176.toggleKeep(s3, "w", { url: "a", note: "white hair", prompt: "grey cloak" }); A176.toggleKeep(s3, "w", { url: "b", prompt: "grey cloak" }); return A176.likenessClause(s3.w.keeps); });
+  check("CCODE-175: the engine's own framing never gets a vote (it is on every portrait, so agreement would elect it)",
+    !/character portrait|named cevaine|a person/i.test(lk175), lk175);
+  check("CCODE-175: a keep with no note still votes on its description", (() => {
+    const s2 = {}; A176.toggleKeep(s2, "k", { url: "a", prompt: "grey wool cloak, a scar" });
+    return A176.likenessClause(s2.k.keeps).includes("grey wool cloak");
+  })());
+
+  // ⛔ CCODE-176 — ERIK'S RULING ON THE INJECTIONS
+  check("CCODE-176: the blanket safety tail is GONE from every prompt", !/no signature|no copyrighted characters/.test(A176.sanitizeImagePrompt(d176, { ratingLevel: 4, kind: "npc" })));
+  check("CCODE-176: the tone now shifts by KIND, so a battle and a portrait stop looking the same", (() => {
+    const b = A176.sanitizeImagePrompt(d176, { ratingLevel: 4, kind: "battle" });
+    const n = A176.sanitizeImagePrompt(d176, { ratingLevel: 4, kind: "npc" });
+    return /action, epic fantasy/.test(b) && !/action, epic fantasy/.test(n) && b !== n;
+  })());
+  check("CCODE-176: every scene kind gets its own register", ["battle", "death", "beast", "location", "moment", "item"]
+    .map(k => A176.sanitizeImagePrompt(d176, { ratingLevel: 3, kind: k })).every((v, _, all) => all.filter(x => x === v).length === 1));
+  check("CCODE-176: the rating still governs on top of the kind", /no gore/.test(A176.sanitizeImagePrompt(d176, { ratingLevel: 1, kind: "battle" })) && !/no gore/.test(A176.sanitizeImagePrompt(d176, { ratingLevel: 4, kind: "battle" })));
+  check("CCODE-176: the boilerplate is a fraction of what it was", (A176.sanitizeImagePrompt(d176, { ratingLevel: 4, kind: "npc" }).length - d176.length) < 60);
+  // ⛔ AND THE ONE THING THAT DID NOT MOVE
+  check("CCODE-176: a MINOR's clause is the whole tone — no kind register, no ceiling, nothing to dilute it", (() => {
+    const m = A176.sanitizeImagePrompt(d176, { ratingLevel: 4, isMinor: true, kind: "battle" });
+    return /a child, fully clothed, non-sexual/.test(m) && !/epic fantasy/.test(m) && !/mature/.test(m);
+  })());
+  check("CCODE-176: and the sexual scrub is still absolute for a minor at any ceiling",
+    !/sensual|erotic/i.test(A176.sanitizeImagePrompt("a sensual erotic study", { ratingLevel: 4, isMinor: true })));
+
+  // CCODE-177 — discarding
+  const src177 = readFileSync(join(root, "app.js"), "utf8");
+  check("CCODE-177: a picture can be discarded", /data-lbdiscard/.test(src177));
+  check("CCODE-177: …a KEPT picture too, not only an unsaved draw", /const canDiscard = isDraw172 \|\| \(!!it\.meta && list\.length > 1\);/.test(src177));
+  check("CCODE-177: an UNKEPT draw is simply dropped from the run — it was never written anywhere", /if \(isDraw172 && !keepsFor\(it\.regen\)\.some\(k => k\.url === it\.url\)\)/.test(src177));
+  check("CCODE-177: a KEPT one is confirmed, and leaves the gallery", /deleteGalleryImage\(character, it\.url\)/.test(src177) && /Delete this picture\?/.test(src177));
+  check("CCODE-177: ⛔ and its VOTE is withdrawn with it — a deleted picture must stop steering what they look like",
+    /if \(at >= 0\) ks\.splice\(at, 1\);/.test(src177));
+  check("CCODE-177: discarding the last one closes the box rather than showing nothing", (src177.match(/if \(!list\.length\) \{ close\(\); return; \}/g) || []).length >= 2);
+  if (was176) localStorage.setItem("singularity.artMode", was176);
+}
+
 // ---- CCODE-174: the floors were corrupting their own safety tail ----
 // Erik, reading a prompt in the details panel: "What's all this stuff getting injected into my image
 // prompt?" — the ceiling tone and safety tail appended TWICE, and the first copy mangled:
@@ -14313,7 +14386,9 @@ await (async () => {
 
   check("CCODE-174 THE RULE: the floors are IDEMPOTENT — twice is the same as once", san174(once, { ratingLevel: 4 }) === once);
   check("CCODE-174: …and so is three times, four times, forever", san174(san174(san174(once, { ratingLevel: 4 }), { ratingLevel: 4 }), { ratingLevel: 4 }) === once);
-  check("CCODE-174: the safety tail survives its own scrub intact (this is the bug)", /no nudity/.test(once) && !/no ,/.test(once) && (once.match(/no signature/g) || []).length === 1);
+  // the ORIGINAL bug was the tail eating its own word; the tail is gone (CCODE-176) so the property is now
+  // simply that nothing repeats and nothing arrives mangled.
+  check("CCODE-174/176: nothing is appended twice and nothing arrives mangled", !/no ,/.test(once) && (once.match(/mature dramatic tone/g) || []).length === 1 && !/no signature/.test(once));
   check("CCODE-174: the ceiling tone appears exactly once", (once.match(/mature dramatic tone/g) || []).length === 1);
 
   // ⚠️ ERIK'S ACTUAL CORRUPTED STRING, recovered — an already-damaged prompt must heal, not stay damaged
@@ -14323,7 +14398,7 @@ await (async () => {
 
   // the floors still DO their job — idempotency must not have softened them
   check("CCODE-174: the floors still scrub the prompt itself", !/erotic|nude study/.test(san174("an erotic nude study of a woman", { ratingLevel: 4 })));
-  check("CCODE-174: minor-protection still absolute at any ceiling", /child, age-appropriate/.test(san174("a person", { ratingLevel: 4, isMinor: true })));
+  check("CCODE-174/176: minor-protection still absolute at any ceiling", /a child, fully clothed, non-sexual/.test(san174("a person", { ratingLevel: 4, isMinor: true })));
   check("CCODE-174: the ceiling still shapes the tone", /family-friendly/.test(san174("a person", { ratingLevel: 0 })) && !/family-friendly/.test(san174("a person", { ratingLevel: 4 })));
 
   // ⛔ AND THE LIKENESS VOTE WAS COUNTING THE BOILERPLATE. Every kept prompt ends with the same tail, and

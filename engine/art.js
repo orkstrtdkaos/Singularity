@@ -110,7 +110,30 @@ const CEILING_TONE = [
   "dark, intense, cinematic, mature dramatic tone"                     // 4 R+
 ];
 const SAFETY_TAIL = "tasteful, non-explicit, no nudity, original character not a real person, no copyrighted characters, no text, no watermark, no signature";
-const MINOR_TONE = "child, age-appropriate, wholesome, fully clothed, non-sexual, innocent";
+// ⛔ ERIK'S RULING (CCODE-176): "The safety tail is not needed at all - remove it… right now it just eats up
+// image prompt context." He is right that it was mostly not safety: "no copyrighted characters, no text, no
+// watermark, no signature" is hygiene the house style already covers, and a blanket "non-explicit, no
+// nudity" on EVERY prompt duplicates the job the content ceiling already does per-rating. 180 characters of
+// constant text was outweighing a 150-character description on every image in the game.
+// ⚠️ THE CONSTANT IS KEPT — but only so `bareImagePrompt` can still strip it off prompts stored while it
+// was in use. It is no longer appended to anything.
+// ⛔ MINOR-PROTECTION STAYS, AND STAYS ABSOLUTE. Erik: "I wouldn't want to eliminate any NEEDED
+// minor-protection… if so, keep it short and to the point to make it effective." Short IS more effective —
+// six words the generator cannot average away, rather than a paragraph it dilutes.
+const MINOR_TONE = "a child, fully clothed, non-sexual, wholesome";
+
+// CCODE-176, Erik: "The ceiling tone needs to shift wording depending on the image/scene. a fight might be
+// bloody, gory - a sex scene might be sensual or erotic… if we don't shift the wording at all it all starts
+// to look the exact same." So the tone is now rating × KIND, and the kind half is what stops a battle, a
+// portrait and a place all arriving in the same register.
+const KIND_TONE = {
+  battle:   "action, epic fantasy, dramatic motion, weight and impact",
+  death:    "still, final, hushed, the aftermath rather than the blow",
+  beast:    "ominous, predatory, seen a moment too late",
+  location: "wide establishing shot, atmospheric, no figures in the foreground",
+  moment:   "cinematic still, a held beat",
+  item:     "clean even light, plain ground, the object alone"
+};
 
 // CCODE-174: everything the floors can APPEND, so a later pass can take its own output back off before
 // working. ⚠️ The tail is matched from its stable head to its stable end rather than by exact string,
@@ -150,7 +173,7 @@ export function isMinorSubject(subject = {}) {
  *  then appends the ceiling tone + the absolute safety tail. A minor subject is forced
  *  child-safe (sexual/romantic/graphic-violence terms removed, wholesome tone imposed) at ANY
  *  ceiling — minor-protection is a hard scrub, never a softening. Pure. */
-export function sanitizeImagePrompt(prompt, { ratingLevel = 2, isMinor = false } = {}) {
+export function sanitizeImagePrompt(prompt, { ratingLevel = 2, isMinor = false, kind = null } = {}) {
   // ⛔ CCODE-174 — THE FLOORS MUST BE IDEMPOTENT, AND THEY WERE NOT. Erik, reading a prompt in the new
   // details panel, found the ceiling tone and the safety tail appended TWICE — and the first copy mangled:
   //
@@ -173,8 +196,9 @@ export function sanitizeImagePrompt(prompt, { ratingLevel = 2, isMinor = false }
   }
   p = p.replace(/\s{2,}/g, " ").trim();
   const level = Math.max(0, Math.min(4, isMinor ? Math.min(ratingLevel, RATING_LEVEL["PG"]) : ratingLevel));
-  const tone = isMinor ? MINOR_TONE : CEILING_TONE[level];
-  return [p, tone, SAFETY_TAIL].filter(Boolean).join(", ");
+  // ⚠️ A MINOR'S CLAUSE IS THE WHOLE TONE, not one voice among several — nothing else may soften it.
+  const tone = isMinor ? MINOR_TONE : [CEILING_TONE[level], KIND_TONE[kind]].filter(Boolean).join(", ");
+  return [p, tone].filter(Boolean).join(", ");
 }
 
 // ---------- SNG-035: prompt assembly (pure) ----------
@@ -329,7 +353,7 @@ export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, see
   // CCODE-164: what the player has KEPT leads the prompt, and their most recent kept seed anchors the mint.
   // The floors still run after, so a liked look can never carry something past the ceiling.
   const looked = withLikeness(raw, promptOpts.keeps || []);
-  const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor }); // THE FLOORS run AFTER every addition
+  const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor, kind }); // THE FLOORS run AFTER every addition
   const url = imageURLFor(kind, safe, seedKey || likenessSeed(promptOpts.keeps || []) || record.id || record.name || raw);
   record[key] = url;
   return url;
@@ -355,10 +379,22 @@ export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, see
 const LIKENESS_CAP = 240;      // the clause is an addition to a prompt that is already budgeted
 const LIKENESS_KEEP_CAP = 8;   // more than a handful stops being a preference and becomes an average
 
+// CCODE-175: the engine's OWN framing is boilerplate too. `bareImagePrompt` takes off the floors; these
+// come from assembleImagePrompt and are on every portrait, so they would win a vote counted by agreement
+// exactly as the safety tail did. A likeness is what makes this person look like THEMSELVES.
+const FRAMING_CLAUSE = /^(?:character portrait|named .+|a person|single item on plain dark background|a dangerous creature.*|rendered in the aesthetic of .+|.*portrait)$/i;
+
 /** PURE. The voted likeness clause: clauses ranked by HOW MANY kept prompts contain them, ties broken by
  *  first appearance so a single keep still reads in its own order. Returns "" when nothing is kept. */
 export function likenessClause(keeps = [], cap = LIKENESS_CAP) {
   const votes = new Map(), order = new Map();
+  // CCODE-175: THE PLAYER'S OWN WORDS COUNT DOUBLE. A clause they typed about why they kept a picture is
+  // stronger evidence than a clause the engine assembled — they were looking at the image when they said it.
+  keeps.forEach((k) => { for (const c of String(k?.note || "").split(/\s*,\s*/).map(x => x.trim()).filter(x => x.length > 2)) {
+    const key = c.toLowerCase();
+    votes.set(key, (votes.get(key) || 0) + 2);
+    if (!order.has(key)) order.set(key, -1000);
+  } });
   keeps.forEach((k, ki) => {
     const seen = new Set();
     // ⛔ CCODE-174: VOTE ON THE DESCRIPTION, NOT THE BOILERPLATE. A stored keep is a SANITISED prompt, so
@@ -366,7 +402,8 @@ export function likenessClause(keeps = [], cap = LIKENESS_CAP) {
     // the unanimous winners would have been "tasteful", "non-explicit", "no nudity" and the actual likeness
     // would have been pushed out by the very clauses every prompt shares. The vote would have measured the
     // floors instead of the face.
-    bareImagePrompt(k?.prompt || "").split(/\s*,\s*/).map(s => s.trim()).filter(s => s.length > 2).forEach((c, ci) => {
+    bareImagePrompt(k?.prompt || "").split(/\s*,\s*/).map(s => s.trim())
+      .filter(s => s.length > 2 && !FRAMING_CLAUSE.test(s)).forEach((c, ci) => {
       const key = c.toLowerCase();
       if (seen.has(key)) return;            // one prompt is one vote, however often it repeats itself
       seen.add(key);
@@ -407,12 +444,14 @@ export function likenessSeed(keeps = []) {
 
 /** Toggle a keep. Returns { keeps, kept } — `kept` is the state AFTER, so a caller can label its button.
  *  Deduped by url, capped, and REMOVING is the same button: a vote you can't withdraw is a trap. */
-export function toggleKeep(store, key, { url, prompt, seedKey, at = null } = {}) {
+export function toggleKeep(store, key, { url, prompt, note = null, seedKey, at = null } = {}) {
   if (!store || !key || !url) return { keeps: [], kept: false };
   const rec = store[key] || (store[key] = { keeps: [] });
   const i = rec.keeps.findIndex(k => k.url === url);
   if (i >= 0) { rec.keeps.splice(i, 1); return { keeps: rec.keeps, kept: false }; }
-  rec.keeps.push({ url, prompt: String(prompt || "").slice(0, 400), seedKey: seedKey || null, at }); // prose-cap-ok: a stored image PROMPT, never displayed prose
+  // CCODE-175: `note` is the player's OWN words about why they kept it. It rides SEPARATELY as well as
+  // inside `prompt`, so a later pass can weight it above clauses the machine merely assembled.
+  rec.keeps.push({ url, prompt: String(prompt || "").slice(0, 400), note: note ? String(note).slice(0, 200) : null, seedKey: seedKey || null, at }); // prose-cap-ok: a stored image PROMPT, never displayed prose
   if (rec.keeps.length > LIKENESS_KEEP_CAP) rec.keeps.shift();
   return { keeps: rec.keeps, kept: true };
 }
@@ -453,7 +492,7 @@ export function regenerateImage(record, kind, { ratingLevel = 2, isMinor = null,
   // to a REBUILD: "describe it differently" is the player overriding the look on purpose, and folding the
   // old votes back in would silently refuse the instruction.
   const looked = promptOverride ? raw : withLikeness(raw, promptOpts.keeps || []);
-  const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor });
+  const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor, kind });
   return { url: imageURLFor(kind, safe, nextKey), seedKey: nextKey, prompt: safe };
 }
 

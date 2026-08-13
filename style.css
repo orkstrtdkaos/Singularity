@@ -1346,3 +1346,9 @@ img[data-lightbox] { cursor: zoom-in; }
 .lb-ring { margin-left: 8px; font-size: 11px; border: 1px solid currentColor; border-radius: 10px; padding: 0 6px; opacity: .8; }
 @media (max-width: 640px) { .lightbox-meta-btn { left: 78px; font-size: 12px; padding: 0 9px; } }
 .lb-prompt.dim { opacity: .62; }
+/* CCODE-177 — discard sits apart from Keep, because one adds and one removes and a mis-hit is a loss. */
+.lightbox-discard { position: absolute; bottom: -14px; right: 150px; height: 32px; padding: 0 12px; border-radius: 16px;
+  border: none; background: var(--panel); color: var(--ink); font-size: 13px; cursor: pointer; opacity: .85;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35); }
+.lightbox-discard:hover { opacity: 1; }
+@media (max-width: 640px) { .lightbox-discard { right: 104px; font-size: 12px; padding: 0 9px; height: 30px; } }

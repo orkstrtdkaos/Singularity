@@ -93,7 +93,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.138";
+const APP_VERSION = "1.9.139";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1029,7 +1029,23 @@ function keepLightboxItem(it) {
   let kept = null;
   if (lk) {
     character.likeness = character.likeness || {};
-    kept = toggleKeep(character.likeness, lk, { url: it.url, prompt: it.prompt || it.regen.prompt || "", seedKey: it.seedKey, at: absoluteWorldDay() });
+    // ⛔ CCODE-175 — THE VOTE READS THE PROMPT, AND THE PROMPT MAY NOT CONTAIN WHAT YOU LIKE. Erik: "I have
+    // Cevaine's image with white hair that I love… but no re-render is giving her white hair anymore."
+    // Measured: NOTHING in her record mentions hair. Her beloved picture was minted from "a person,
+    // character portrait, named Cevaine, Woman, …" — the pre-SNG-367 generic lead — so the white hair was
+    // the model's own invention from one seed and was never a description. Keeping that image taught the
+    // likeness nothing about hair, because the words were never there to be counted.
+    // ⚠️ So a keep may carry the PLAYER'S OWN words. It is the only way "I love this one" becomes something
+    // reproducible, and it costs one optional line at the moment they have already decided.
+    const alreadyKept = keepsFor(it.regen).some(k => k.url === it.url);
+    let note = "";
+    if (!alreadyKept) {
+      const said = prompt(`Keeping this look for ${it.regen.label || "them"}.\n\nWhat do you like about it? (optional — "white hair, sharp jaw". These words steer every future picture of them and count double. The picture's own description is kept either way.)`, "");
+      if (said === null) return true;                 // cancelled: nothing changed yet, so there is nothing to undo
+      note = String(said).trim();
+    }
+    kept = toggleKeep(character.likeness, lk, { url: it.url, note: note || null,
+      prompt: [note, it.prompt || it.regen.prompt || ""].filter(Boolean).join(", "), seedKey: it.seedKey, at: absoluteWorldDay() });
     if (!kept.kept) { saveCharacter(character); return true; }   // un-keeping is the same button
   }
   if (!spec.keep(it.regen.subjectId, it.url, it.seedKey)) return false;
@@ -1117,6 +1133,12 @@ function openLightbox(items, start = 0) {
     // like a feature.
     const canKeep = !!it.regen?.subjectId && !!spec?.keep;
     const isNewDraw = !!it.regen && !!it.isDraw;
+    // ⛔ CCODE-177 (Erik): "I also need a way to discard re-rendered images." An unkept draw only lived in
+    // this list, so closing the box threw it away — but there was no way to throw away just ONE while
+    // staying to compare the rest, and no way at all to get rid of one already kept. Both are the same
+    // verb to a player, so they are one button that does the right thing for what it is looking at.
+    const isDraw172 = !!it.isDraw;
+    const canDiscard = isDraw172 || (!!it.meta && list.length > 1);
     el.innerHTML = `<div class="lightbox-inner">
       <img src="${esc(it.url)}" alt="${esc(it.caption || "")}" data-lbimg>
       ${(() => {
@@ -1157,6 +1179,7 @@ function openLightbox(items, start = 0) {
       <button class="lightbox-meta-btn${showMeta ? " on" : ""}" data-lbmeta title="Everything recorded about this picture, including the prompt that made it (or press i)">ⓘ ${showMeta ? "Hide" : "Details"}</button>
       ${canRegen ? `<button class="lightbox-regen" data-lbregen title="Draw ${esc(it.regen.label || "this")} again — same description, a new hand. The one you have now is kept beside it; nothing is replaced unless you choose it.">↻ Draw again</button>` : ""}
       ${canRebuild ? `<button class="lightbox-rebuild" data-lbrebuild title="Describe ${esc(it.regen.label || "this")} differently — for when the picture is not merely unlucky but wrong (wrong place, wrong look, the wrong thing happening)">✎ Describe differently</button>` : ""}
+      ${canDiscard ? `<button class="lightbox-discard" data-lbdiscard title="${isDraw172 ? "Throw this draw away — it was never saved" : "Delete this picture from your gallery, and stop it guiding what they look like"}">✕ Discard</button>` : ""}
       ${canKeep ? `<button class="lightbox-keep${isKept ? " kept" : ""}" data-lbkeep title="${isKept ? "Stop using this one as a guide to what they look like" : `Keep this look for ${esc(it.regen.label || "them")} — future pictures of them will be drawn toward it. Keep as many as you like; what they agree on counts most.`}">${isKept ? "★ kept — remove" : "☆ Keep this look"}</button>` : ""}
     </div>`;
     el.querySelector("[data-lbclose]").onclick = close;
@@ -1204,6 +1227,36 @@ function openLightbox(items, start = 0) {
         rebuildBtn.textContent = "✕ couldn't draw";
         setTimeout(() => { rebuildBtn.disabled = false; rebuildBtn.textContent = "✎ Describe differently"; }, 2500);
       }
+    };
+    const discardBtn = el.querySelector("[data-lbdiscard]");
+    if (discardBtn) discardBtn.onclick = (ev) => {
+      ev.stopPropagation();
+      // an UNKEPT draw was never written anywhere — drop it from the run and step back to what it came from
+      if (isDraw172 && !keepsFor(it.regen).some(k => k.url === it.url)) {
+        const back = Math.max(0, i - 1);
+        list.splice(i, 1); i = Math.min(back, list.length - 1);
+        if (!list.length) { close(); return; }
+        render(); return;
+      }
+      if (!confirm(`Delete this picture?
+
+It leaves your gallery, and stops guiding what ${it.regen?.label || "they"} look like. The others stay.`)) return;
+      // ⚠️ WITHDRAW THE VOTE TOO. Deleting the picture while its words went on steering every future render
+      // would be the worst kind of half-delete: gone from sight, still shaping what you see.
+      const lk = likenessKey(it.regen);
+      if (lk && character.likeness?.[lk]) {
+        const ks = character.likeness[lk].keeps || [];
+        const at = ks.findIndex(k => k.url === it.url);
+        if (at >= 0) ks.splice(at, 1);
+      }
+      const spec2 = it.regen ? REGEN_KINDS[it.regen.kind] : null;
+      if (spec2?.current && spec2.current(it.regen.subjectId) === it.url) spec2.keep(it.regen.subjectId, null, null); // it was the one in use
+      deleteGalleryImage(character, it.url);
+      saveCharacter(character);
+      const back = Math.max(0, i - 1);
+      list.splice(i, 1); i = Math.min(back, list.length - 1);
+      if (!list.length) { close(); return; }
+      render();
     };
     const keepBtn = el.querySelector("[data-lbkeep]");
     if (keepBtn) keepBtn.onclick = (ev) => {

@@ -16089,6 +16089,32 @@ await (async () => {
   }
 }
 
+// ---- CCODE-192: an openable news line wears no browser chrome, whatever KIND it is ----------------
+// ⛔ ERIK SAW A WHITE BOX AROUND THE NEW CLASH LINES. It was the browser's own button chrome: the rules
+// that strip it were scoped to `.news-death`, and SNG-431 added a second openable kind, `.news-clash`, that
+// no selector ever reached. Markup emitting a class the stylesheet has no rule for is the reader-with-no-
+// writer failure one layer down, and it is invisible to every engine test.
+{
+  const css192 = readFileSync(join(root, "style.css"), "utf8");
+  const app192 = readFileSync(join(root, "app.js"), "utf8");
+  // The rule that removes the chrome must be reachable by EVERY button carrying the class — so it may not
+  // sit behind a kind. An unqualified `.news-open { … }` is the only shape that survives the next kind.
+  // ⚠️ THE NEWLINE IS AN ESCAPE CLASS, NOT A LITERAL ONE. Writing this pattern through a python heredoc
+  // turned "\n" into a real line break inside the regex literal — the same tooling hazard as the backspaces,
+  // caught here only because a broken regex is a syntax error and a broken \b is invisible.
+  const rule = /(?:^|[\r\n])\.news-open\s*\{([^}]*)\}/.exec(css192);
+  const kindScoped = /\.news-(?:death|clash|[a-z]+)\s+\.news-open\s*\{/.test(css192);
+  check("CCODE-192: the chrome-stripping rule is on .news-open itself, so a NEW openable kind is styled by construction",
+    !!rule && /background:\s*none/.test(rule[1]) && /border:\s*none/.test(rule[1]) && !kindScoped,
+    kindScoped ? "a kind-scoped .news-open rule is back" : `rule = ${rule ? rule[1].trim().slice(0, 70) : "ABSENT"}`);
+  // ⚠️ AND THE PREMISE: the renderer really does emit more than one kind here. A gate over one kind is
+  // the bug, not the guard — if this ever finds a single kind again, the check above is guarding nothing.
+  const emitted = new Set([...app192.matchAll(/news-item news-\$\{[^}]*?\}/g)].length
+    ? (app192.match(/n\.kind === "death" \? "([a-z]+)" : "([a-z]+)"/) || []).slice(1) : []);
+  check(`CCODE-192: the news renderer emits more than one openable kind (${[...emitted].join(", ") || "none found"})`,
+    emitted.size >= 2, "if this is 1, the rule above is guarding a case that cannot happen");
+}
+
 check("smoke: no checks are stranded after process.exit (dead tests report green forever)", (() => {
   const src = readFileSync(join(root, "tests/smoke.mjs"), "utf8");
   const after = src.slice(src.indexOf("process.exit(failures") + 1);

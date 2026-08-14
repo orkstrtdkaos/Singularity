@@ -1329,11 +1329,19 @@ img[data-lightbox] { cursor: zoom-in; }
 /* SNG-400 — a death you can open. The line stays prose; the cue is what says there is something behind
    it. A whole news item as a button would make every death look like a control, so only the openable
    ones get the affordance and it reads as an invitation rather than chrome. */
-.news-item.news-death { padding: 0; }
-.news-item.news-death .news-open { display: block; width: 100%; text-align: left; background: none; border: none;
-  font: inherit; color: inherit; cursor: pointer; padding: 2px 0; }
-.news-item.news-death .news-open:hover .news-open-cue,
-.news-item.news-death .news-open:focus-visible .news-open-cue { opacity: 1; }
+/* ⛔ CCODE-192 (Erik, on the clash lines): "the white boarder for the updated battle output — i think we
+   can change that format to more match what's around it." That border is the BROWSER'S default button
+   chrome, showing through because these rules were scoped to `.news-death` and SNG-431 added a second
+   openable kind, `.news-clash`, that no rule ever reached. A markup class with no stylesheet reader is the
+   same failure this project keeps finding one layer down.
+   ⚠️ SO NO SELECTOR HERE NAMES A KIND. The class exists only on these buttons; a rule that has to be
+   extended every time a kind is added is precisely what just broke. The button now carries a plain
+   `.news-item`'s own metrics — no padding of its own — so an openable line sits exactly like the lines
+   around it and only the cue says there is something behind it. */
+.news-open { display: block; width: 100%; text-align: left; background: none; border: none;
+  font: inherit; color: inherit; cursor: pointer; padding: 0; margin: 0; }
+.news-open:hover .news-open-cue,
+.news-open:focus-visible .news-open-cue { opacity: 1; }
 .news-open-cue { font-family: var(--font-ui); font-size: 11px; opacity: .65; white-space: nowrap;
   border: 1px solid currentColor; border-radius: 10px; padding: 0 6px; margin-left: 4px; }
 /* CCODE-164 — a kept look is a VOTE, and a vote you have cast should look cast. */

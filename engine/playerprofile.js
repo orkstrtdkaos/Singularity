@@ -299,14 +299,40 @@ export function aptitudeMods(profile, rulesAptitudes = []) {
 }
 
 /** Short natural-language readout for the profile UI ("who are you becoming?"). SNG-113: marks a fading
- *  aptitude (about to be lost — legible, never silent) and a lineage-granted one. */
+ *  aptitude (about to be lost — legible, never silent) and a lineage-granted one.
+ *
+ * ⛔ CCODE-194 — IT WAS NOT NEVER-WIRED, IT WAS DE-WIRED, and that changes what the fix is. SNG-118 replaced
+ * the profile's prose wall with tappable aptitude chips, and this went with the wall: imported by app.js,
+ * called by nothing, for eleven tickets. Erik, told it existed: *"You're right about the feature. It sounds
+ * like it could live on the character screen."*
+ *
+ * ⚠️ SO IT MAY NOT SAY WHAT THE CHIPS SAY. The chips already carry every earned aptitude, its description,
+ * its mods, whether it is lineage, whether it is fading, and how durable it is — tappable, and better than a
+ * sentence. Restoring the old body would have put a prose list directly above the chips that replaced it,
+ * which is not surfacing a feature, it is undoing a ticket.
+ *
+ * ⛔ WHAT HAS NO READER IS `tendencies` — the running counts underneath. A chip appears when a threshold is
+ * CROSSED; nothing has ever shown the player the drift that gets them there, so "who are you becoming?" was
+ * answerable only in hindsight. That is the half worth surfacing, and it is the half this now says. Both of
+ * SNG-113's original sentences survive verbatim for the states they were written for. */
 export function profileInsight(profile, rulesAptitudes = [], rules = {}) {
-  const earned = rulesAptitudes.filter(a => profile.aptitudes?.includes(a.id));
-  if (!earned.length) {
-    const top = Object.entries(profile.tendencies || {}).sort((a, b) => b[1] - a[1])[0];
-    return top ? `A pattern is forming: you lean ${top[0]}.` : "The world is still learning who you are.";
-  }
-  const fading = fadingAptitudes(profile, rulesAptitudes, rules);
-  const lineage = new Set(profile.grantedAptitudes || []);
-  return earned.map(a => `${a.id.replace(/_/g, " ")}${lineage.has(a.id) ? " (lineage)" : ""}${fading.has(a.id) ? " — fading" : ""}: ${a.description}`).join(" ");
+  const tend = Object.entries(profile?.tendencies || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+  if (!tend.length) return "The world is still learning who you are.";
+  const [lead, weight] = tend[0];
+  // ⚠️ A SECOND LEAN IS ONLY WORTH SAYING WHEN IT IS ACTUALLY CLOSE. Naming the runner-up regardless would
+  // make every character read as torn between two things, which is a claim about them that is usually false.
+  const near = tend[1] && tend[1][1] >= weight * 0.6 ? tend[1][0] : null;
+  const held = new Set(profile?.aptitudes || []);
+  const marked = rulesAptitudes.some(a => held.has(a.id) && a.tendency === lead);
+  const lean = marked ? `You lean ${lead}, and it has marked you` : `A pattern is forming: you lean ${lead}`;
+  // SNG-113's rule, kept: loss is legible, never silent. Said in words here rather than as the chips' glyph —
+  // a mark you are about to lose is the one piece of this the player may need to act on today.
+  const slipping = (() => {
+    const fading = fadingAptitudes(profile, rulesAptitudes, rules);
+    return rulesAptitudes.filter(a => fading.has(a.id)).map(a => a.id.replace(/_/g, " "));
+  })();
+  const line = `${lean}${near ? `, with ${near} close behind` : ""}.`;
+  if (!slipping.length) return line;
+  const named = slipping.join(" and ");
+  return `${line} ${named.charAt(0).toUpperCase()}${named.slice(1)} ${slipping.length > 1 ? "are" : "is"} slipping.`;
 }

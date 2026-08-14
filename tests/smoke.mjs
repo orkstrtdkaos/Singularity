@@ -16227,6 +16227,59 @@ await (async () => {
   A193.onImageMinted(null);
 }
 
+// ---- CCODE-194: the lean has a reader ------------------------------------------------------------
+// ⛔ `profileInsight` WAS NOT NEVER-WIRED, IT WAS DE-WIRED. SNG-118 replaced the profile prose wall with
+// tappable chips and this went with the wall — imported by app.js, called by nothing, for eleven tickets.
+// Erik: "You're right about the feature. It sounds like it could live on the character screen."
+{
+  const PP = await import("../engine/playerprofile.js");
+  const APT194 = [
+    { id: "open_handed", tendency: "generous", threshold: 5, description: "you give before you are asked", mods: {} },
+    { id: "shadow", tendency: "stealth", threshold: 5, description: "rooms forget you were in them", mods: {} },
+  ];
+  const say194 = (prof) => PP.profileInsight(prof, APT194, {});
+  // 1 · ⛔ THE HALF WITH NO READER IS `tendencies`. A chip appears when a threshold is CROSSED; nothing has
+  // ever shown the player the drift that gets them there, so "who are you becoming?" was answerable only in
+  // hindsight. Below the threshold, the lean is the whole of what can honestly be said.
+  check("CCODE-194: a character with drift and no marks is told which way they lean",
+    /you lean generous/.test(say194({ tendencies: { generous: 3, ruthless: 1 } })), say194({ tendencies: { generous: 3, ruthless: 1 } }));
+  check("CCODE-194: a character with no drift at all is told exactly that, and nothing is invented",
+    say194({}) === "The world is still learning who you are." && say194({ tendencies: { generous: 0 } }) === "The world is still learning who you are.");
+  // 2 · ⚠️ IT MAY NOT SAY WHAT THE CHIPS SAY. The chips carry every earned aptitude WITH its description,
+  // its mods and its standing. Restoring the old body would have put a prose list directly above the chips
+  // that replaced it — undoing SNG-118 rather than surfacing a feature.
+  {
+    const marked = say194({ tendencies: { generous: 7 }, aptitudes: ["open_handed"] });
+    check("CCODE-194: it does NOT re-list what the chips already show (no aptitude descriptions in the line)",
+      !marked.includes("you give before you are asked") && !/open.handed/i.test(marked) && marked.length < 120, marked);
+    check("CCODE-194: a crossed threshold reads differently from a drift — the mark is acknowledged, not repeated",
+      /has marked you/.test(marked) && !/A pattern is forming/.test(marked), marked);
+  }
+  // 3 · A SECOND LEAN ONLY WHEN IT IS ACTUALLY CLOSE — naming the runner-up regardless would make every
+  // character read as torn between two things, which is a claim about them that is usually false.
+  check("CCODE-194: a close second lean is named and a distant one is not",
+    /stealth close behind/.test(say194({ tendencies: { generous: 4, stealth: 3.2 } }))
+    && !/close behind/.test(say194({ tendencies: { generous: 9, stealth: 1 } })));
+  // 4 · SNG-113'S RULE, KEPT: loss is legible, never silent — and said in words here, because a mark you are
+  // about to lose is the one part of this a player may need to act on today.
+  {
+    const slip = say194({ tendencies: { generous: 7, stealth: 5.2 }, aptitudes: ["open_handed", "shadow"] });
+    check("CCODE-194: an aptitude about to be lost is said in words, and capitalised as its own sentence",
+      /Shadow is slipping\./.test(slip), slip);
+  }
+  // 5 · AND IT IS ON THE SCREEN ERIK NAMED, above the chips, in the one block about who this character is.
+  {
+    const app194 = readFileSync(join(root, "app.js"), "utf8");
+    const css194 = readFileSync(join(root, "style.css"), "utf8");
+    const block194 = app194.slice(app194.indexOf("Play-style (${esc(character.name)}'s own)"),
+                                 app194.indexOf("Active quests", app194.indexOf("Play-style (${esc(character.name)}'s own)")));
+    check("CCODE-194: the character screen renders it, ABOVE the chips (the drift comes before the threshold it crosses)",
+      /profileInsight\(character, CONTENT\.rules\.playerAptitudes/.test(block194)
+      && block194.indexOf("profileInsight") < block194.indexOf("aptitudeChips")
+      && /\.cs-lean \{/.test(css194), block194.replace(/\s+/g, " ").slice(0, 130));
+  }
+}
+
 // ---- CCODE-192: an openable news line wears no browser chrome, whatever KIND it is ----------------
 // ⛔ ERIK SAW A WHITE BOX AROUND THE NEW CLASH LINES. It was the browser's own button chrome: the rules
 // that strip it were scoped to `.news-death`, and SNG-431 added a second openable kind, `.news-clash`, that

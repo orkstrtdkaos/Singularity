@@ -1046,6 +1046,10 @@ img[data-lightbox] { cursor: zoom-in; }
 .data-link { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 12px; text-decoration: underline dotted; padding: 0; }
 
 /* SNG-118 — play-style aptitude chips */
+/* ⛔ CCODE-194 — THE LEAN, above the chips. A chip appears when a threshold is CROSSED; this is the
+   drift underneath it, and it is the only thing that has ever read `tendencies` back to the player.
+   ⚠️ Deliberately quieter than a chip: it is a reading of you, not a thing you hold. */
+.cs-lean { font-style: italic; color: var(--ink-dim); font-size: 13px; margin-bottom: 6px; }
 .aptitude-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .aptitude-chip { font-family: var(--font-ui); font-size: 12px; text-transform: capitalize; padding: 3px 10px; border-radius: 12px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink); cursor: pointer; line-height: 1.4; }
 .aptitude-chip:hover, .aptitude-chip:focus { border-color: var(--accent); outline: none; }

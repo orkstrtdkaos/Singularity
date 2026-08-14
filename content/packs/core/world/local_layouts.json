@@ -21,11 +21,12 @@
      "mi": 146
     },
     {
-     "to": "gen-watershed-road",
-     "bearing": -13,
-     "mi": 153
+     "to": "sunken_choir",
+     "bearing": -86,
+     "mi": 503
     }
-   ]
+   ],
+   "_refreshed": "⛔ SNG-434: roadsOut re-derived after the SNG-427 cluster move and the waystone region fix. ⚠️ WAYSTONE IS NOW 29 MI AWAY — a real neighbour, where before it was in another region 2600 miles off."
   },
   "_rebuiltNote": "⛔ SNG-427 REBUILT. Erik: 'you have the Well IN the river.' He was right — the well sat at 0,0 while the river ran 11 miles away, so the dock at 300 m reached water it could not reach. ⚠️ MILLBROOK IS NOW 2.2 MILES FROM THE ECHO, 14 MILES ABOVE THE CROSSING. The layout is rebuilt on the measured channel: river at −134°, flowing 162°, uphill at 300°.",
   "radiusMetres": 900,
@@ -132,10 +133,11 @@
     },
     "basis": "road",
     "toward": {
-     "road": "gen-watershed-road",
+     "road": "echo_river_crossing",
      "relation": "on"
     },
-    "why": "⛔ Promoted from play. On the north road, between the well and the way out."
+    "why": "⛔ Promoted from play. On the north road, between the well and the way out.",
+    "_towardFix": "⛔ its named road left the connection set; re-pointed at echo_river_crossing"
    },
    {
     "id": "millbrook_mill_lane",

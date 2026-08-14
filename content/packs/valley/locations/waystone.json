@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "waystone",
  "name": "Waystone",
- "regionId": "the_given_land",
+ "regionId": "valley",
  "communityId": "waystone",
  "spectrum": {
   "concrete_abstract": -0.3,
@@ -71,5 +71,6 @@
  ],
  "tier": "settlement",
  "parentId": null,
- "role": "waypoint"
+ "role": "waypoint",
+ "_regionNote": "⛔ SNG-434: MOVED FROM `the_given_land` TO `valley`. I placed Waystone on the Echo in SNG-427 (its seed: 'THE MASONS BUILD THE CROSSING') and never updated its region, so it sat 2604 miles from its own region's other members and made `the_given_land` read as global. ⚠️ ALL FIVE NEAREST NEIGHBOURS ARE `valley`, and it is 15 MILES FROM THE CROSSING ITS MASONS BUILD. ⛔ THE SAME MISS AS ECHO RIVER CROSSING: I moved the position and forgot the region is a separate field."
 }

@@ -35,10 +35,10 @@ import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engin
 import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: code selects the parts, a model composes the line
 import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
-import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
+import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, onImageMinted, onComposedLookup, swapImageUrl, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -97,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.153";
+const APP_VERSION = "1.9.154";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -805,6 +805,84 @@ async function battleImageFor(item) {
   return { ...rec, key };
 }
 
+// ---------- CCODE-193: the composer reaches every picture, one beat late ----------
+//
+// ⛔ ERIK'S ASK WAS "EVERY IMAGE" AND IT REACHED TWO PATHS. CCODE-190 composed the battle mint and the
+// lightbox regen; the other twelve — portrait, NPC, beast, ability, location, moment, discovery, companion —
+// still drew straight from the deterministic prompt, because they mint inside a synchronous template
+// literal and composing needs an `await`. His ruling closes it: *"I'm ok with an uncomposed followed by a
+// composed."*
+//
+// So: the picture appears immediately from what code built, the line is composed behind it, and the
+// composed picture REPLACES it in the save and on screen. ⚠️ ONCE PER SUBJECT, EVER — `ensureImage` is
+// persist-once, so the composed URL is what the record carries from then on and the next open has no flash
+// and makes no call. Aevi's stability rule is untouched: same subject, same picture, forever.
+//
+// ⚠️ AND A SWAP IS NOT ONE ASSIGNMENT. A minted URL is stored in as many places as the caller chose —
+// `record.image`, `character.locationImages[id]`, a gallery row, an NPC's own field. Chasing those by hand
+// is a list that rots, so the old URL is rewritten wherever it appears in the save. It is a long unique
+// string containing the prompt and the seed, so every copy of it means the same picture.
+const _composeQueue = [];
+const _composeSeen = new Set();
+let _composeDraining = false;
+
+async function recomposeMinted(job) {
+  character.promptCompositions = character.promptCompositions || {};
+  // ⚠️ `job.raw` IS THE PRE-FLOOR LINE, and the floors are re-applied to the composed result below —
+  // compose before the floors, never after, or the model compresses away the very clauses they add.
+  const out = await composeImagePrompt(job.raw, { cache: character.promptCompositions, kind: job.kind });
+  if (!out.composed || !out.prompt || out.prompt === job.raw) return false;   // nothing to compress, nothing to swap
+  const safe = sanitizeImagePrompt(out.prompt, { ratingLevel: job.ratingLevel, isMinor: job.isMinor, kind: job.kind });
+  const url = imageURLFor(job.kind, safe, job.seedKey, { aesthetic: job.aesthetic });
+  if (!url || url === job.url) return false;
+  swapImageUrl(character, job.url, url);
+  if (job.record && job.field && job.record[job.field] === job.url) job.record[job.field] = url;  // a record outside the save
+  // ⛔ AND THE ANSWER IS REMEMBERED AGAINST THE URL IT REPLACES, which is what makes the scene banner and
+  // the item study stick. Those two derive their URL at render and store nothing, so a swap alone would show
+  // the composed picture once and the raw one on every render after — a flicker forever instead of once.
+  (character.composedImages ||= {})[job.url] = url;
+  notePromptFor(url, safe);                                   // SNG-401: Draw again works from the composed line
+  saveCharacter(character);
+  // The picture on screen follows without a re-render — a full redraw would fight whatever the player is
+  // doing, and the only thing that changed is one address.
+  if (typeof document !== "undefined") {
+    for (const el of document.querySelectorAll("img")) if (el.getAttribute("src") === job.url) el.setAttribute("src", url);
+  }
+  return true;
+}
+
+async function drainCompositions() {
+  if (_composeDraining) return;
+  _composeDraining = true;
+  try {
+    // ⚠️ ONE AT A TIME. A page can mint a dozen pictures in one render, and a dozen simultaneous calls is
+    // both a rate limit and a bill. They are cheap and nobody is waiting on them.
+    while (_composeQueue.length) {
+      const job = _composeQueue.shift();
+      try { await recomposeMinted(job); } catch (e) { console.warn("[compose] skipped:", e?.message); }
+    }
+  } finally { _composeDraining = false; }
+}
+
+// ⚠️ THE RESOLVER RUNS ON EVERY MINT, so it must be a plain lookup and nothing else.
+onComposedLookup((url) => shownUrl(url) === url ? null : shownUrl(url));
+
+/** ⛔ CCODE-193: WHAT IS ACTUALLY ON SCREEN. A picture minted a beat ago may since have been replaced
+ *  by its composed re-mint, and a lightbox item is a plain object that was built before that happened — so
+ *  "Keep this look" and "Set as default" would store the address of a picture the player is not looking at.
+ *  One redirect table, consulted wherever a URL is about to be committed to. */
+function shownUrl(u) { return (u && character?.composedImages?.[u]) || u; }
+
+onImageMinted((job) => {
+  // ⛔ NO KEY, NO CALL. The picture is already drawn and the composition is the only part that costs
+  // anything; queueing without a key spends a failure per image for no visible difference.
+  if (!job?.url || !job.raw || !getApiKey()) return;
+  if (_composeSeen.has(job.url)) return;                      // the same mint reached from two renders
+  _composeSeen.add(job.url);
+  _composeQueue.push(job);
+  drainCompositions();
+});
+
 // ---------- SNG-401: regenerate an image, from the lightbox ----------
 // Aevi's obstacle, verbatim: "by the time an image is on screen the app has forgotten what produced it:
 // no kind, no prompt, no seed, no subject. A regenerate button on that data can only re-fetch the same
@@ -1141,6 +1219,7 @@ async function regenLightboxItem(it, attempt, describe = null) {
  *  said so. Every kind lands through its own `keep` — the record for the ones that have one, the gallery
  *  for the ones that don't. */
 function keepLightboxItem(it) {
+  if (it?.url) it = { ...it, url: shownUrl(it.url) };   // CCODE-193: vote on the picture they can see
   const sub = regenSubject(it.regen);
   if (!sub || !it.url) return false;
   const { spec } = sub;
@@ -1453,7 +1532,7 @@ It leaves your gallery, and stops guiding what ${it.regen?.label || "they"} look
       const sub = regenSubject(it.regen);
       if (!sub?.spec?.keep) return;
       defBtn.disabled = true;
-      const ok = sub.spec.keep(it.regen.subjectId, it.url, it.seedKey);
+      const ok = sub.spec.keep(it.regen.subjectId, shownUrl(it.url), it.seedKey);   // CCODE-193
       if (!ok) { defBtn.textContent = "✕ couldn't set"; return; }
       saveCharacter(character);
       render();

@@ -39,7 +39,9 @@ export function houseStyleFor(aesthetic = null) {
 
 export const IMAGE_STYLE = houseStyleFor(null);   // the default, for anything with no tradition to speak for it
 
-export const ART_MODES = ["off", "static", "generate"];
+// CCODE-193 §2: module-private. It was exported and imported by app.js, which never used it — the
+// "live code, needless public surface" third of the importedNeverCalled list. Nothing outside reads it.
+const ART_MODES = ["off", "static", "generate"];
 
 export function getArtMode() {
   const m = localStorage.getItem("singularity.artMode");
@@ -61,14 +63,51 @@ function pollinationsURL(prompt, { width = 1024, height = 320, seed = 42, style 
   return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", " + style)}?width=${width}&height=${height}&seed=${seed}&nologo=true`;
 }
 
+/** ⛔ CCODE-193 §2 — EVERY MINT PASSES THROUGH HERE, so "every image" means every image.
+ *
+ *  §1 put the composer behind `ensureImage`, which is four of the six places a URL is built. The other two
+ *  — the scene banner and the item study — derive their URL at render time and store nothing, so they got
+ *  no composition at all. A coverage claim with two holes in it is the thing this project keeps finding a
+ *  ticket later, so: one helper, and a path added tomorrow is covered by using it.
+ *
+ *  It does two things a bare `imageURLFor` cannot:
+ *  • ASKS whether this exact picture has already been composed, and hands back the composed one — which is
+ *    what makes a derive-at-render path STICK. Without it the banner would flip to the composed picture and
+ *    back to the raw one on the next render, forever.
+ *  • ANNOUNCES a genuinely new mint, so the composition can happen behind the picture the player already has.
+ *
+ *  ⚠️ `raw` IS THE PRE-FLOOR LINE and `safe` is what the URL is built from. Compose before the floors,
+ *  never after — the oldest law in this pipeline. */
+function mintURL(kind, { raw, safe, seed, record = null, field = null, ratingLevel = 2, isMinor = false, aesthetic = null }) {
+  const url = imageURLFor(kind, safe, seed, { aesthetic });
+  if (!url) return url;
+  const already = _composedFor ? _composedFor(url) : null;
+  if (already) return already;
+  if (_onMinted) {
+    try { _onMinted({ record, field, kind, raw, ratingLevel, isMinor, seedKey: seed, aesthetic, url }); }
+    catch { /* a composition is a grace on top of a picture that already exists — never a blocker */ }
+  }
+  return url;
+}
+
+/** CCODE-193: called with every freshly minted picture — never with one `ensureImage` already had, because
+ *  persist-once returns before the mint. The engine stays free of the network: the app installs the listener
+ *  that composes, and the resolver that says a composition is already known. */
+let _onMinted = null;
+let _composedFor = null;
+export function onImageMinted(fn) { _onMinted = typeof fn === "function" ? fn : null; }
+export function onComposedLookup(fn) { _composedFor = typeof fn === "function" ? fn : null; }
+
 /** Image URL for a location banner, or null if art is off / nothing available. */
-export function locationImage(location, { ratingLevel = 2 } = {}) {
+// CCODE-193 §2: module-private. `sceneImage` is its only caller; app.js imported it and never
+// called it, and smoke imported it and never used it. The capability stays, the needless surface goes.
+function locationImage(location, { ratingLevel = 2 } = {}) {
   const mode = getArtMode();
   if (mode === "off") return null;
   if (location.image) return location.image;
   if (mode !== "generate") return null;
-  const safe = sanitizeImagePrompt(assembleImagePrompt("location", location), { ratingLevel });
-  return imageURLFor("location", safe, location.id);
+  const raw = assembleImagePrompt("location", location);
+  return mintURL("location", { raw, safe: sanitizeImagePrompt(raw, { ratingLevel }), seed: location.id, ratingLevel });
 }
 
 /** Scene-level banner: in generate mode, the image follows the SCENE — a cottage
@@ -78,8 +117,8 @@ export function locationImage(location, { ratingLevel = 2 } = {}) {
 export function sceneImage(location, sceneState, { ratingLevel = 2 } = {}) {
   const mode = getArtMode();
   if (mode === "generate" && sceneState?.setting) {
-    const safe = sanitizeImagePrompt(`${location.name} — ${sceneState.setting.slice(0, 280)}`, { ratingLevel });
-    return imageURLFor("location", safe, sceneState.setting);
+    const raw = `${location.name} — ${sceneState.setting.slice(0, 280)}`;
+    return mintURL("location", { raw, safe: sanitizeImagePrompt(raw, { ratingLevel }), seed: sceneState.setting, ratingLevel });
   }
   return locationImage(location, { ratingLevel });
 }
@@ -94,22 +133,18 @@ export function itemImage(item, { ratingLevel = 2 } = {}) {
   // rather than trusted. This was half of what Erik reported: the spear grew runes, the art did not.
   if (item.image && !item.imageDirty) return item.image;
   if (mode !== "generate") return item.image || null;   // no generator running: the old picture beats none
-  const safe = sanitizeImagePrompt(assembleImagePrompt("item", item), { ratingLevel });
+  const raw = assembleImagePrompt("item", item);
   // `imageStamp` increments on every evolution, so it BUSTS the cache key — the new stage gets a genuinely
   // new image instead of the memoised one keyed on the (unchanged) item name.
   const seed = item.imageStamp ? `${item.name}#${item.imageStamp}` : item.name;
-  return imageURLFor("item", safe, seed);
+  return mintURL("item", { raw, safe: sanitizeImagePrompt(raw, { ratingLevel }), seed, ratingLevel });
 }
 
-/** Image URL for an NPC portrait, or null. */
-export function npcImage(npc) {
-  const mode = getArtMode();
-  if (mode === "off") return null;
-  if (npc.image) return npc.image;
-  if (mode !== "generate") return null;
-  const prompt = assembleImagePrompt("npc", npc);
-  return imageURLFor("npc", sanitizeImagePrompt(prompt, { ratingLevel: 2, isMinor: isMinorSubject(npc) }), npc.id);
-}
+// ⛔ CCODE-193 §2 — `npcImage` DELETED. SNG-169 found it as dead capability ("imported and never
+// invoked", the 11th of that batch) and it stayed on the books for eleven tickets after. `ensureImage(npc,
+// "npc")` supersedes it completely — persist-once, the likeness vote, the floors, and now the composition
+// — so what was left was a SECOND way to mint an NPC picture that would silently skip all four. Two paths
+// to one answer is how the sentence and the picture came to disagree in SNG-431. Same shape, so it goes.
 
 // ---------- SNG-035: THE FLOORS FOR IMAGES (rating ceiling + absolute minor-protection) ----------
 // Every image prompt routes through here before it ever reaches the endpoint — the same
@@ -459,10 +494,42 @@ export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, see
   // The floors still run after, so a liked look can never carry something past the ceiling.
   const looked = withLikeness(raw, promptOpts.keeps || []);
   const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor, kind }); // THE FLOORS run AFTER every addition
-  const url = imageURLFor(kind, safe, seedKey || likenessSeed(promptOpts.keeps || []) || record.id || record.name || raw, { aesthetic: promptOpts.aesthetic || null });
+  const usedSeed = seedKey || likenessSeed(promptOpts.keeps || []) || record.id || record.name || raw;
+  const url = mintURL(kind, { raw: looked, safe, seed: usedSeed, record, field: key, ratingLevel, isMinor: minor,
+                              aesthetic: promptOpts.aesthetic || null });
   record[key] = url;
+  // ⛔ CCODE-193 — THE COMPOSER REACHES EVERY PICTURE, ONE BEAT LATE. Erik: "do this for every image
+  // because i think it will be hugely valuable" — and it reached two paths out of fourteen, because
+  // composing needs an `await` and most mints happen inside a synchronous template literal. His ruling:
+  // "I'm ok with an uncomposed followed by a composed." `mintURL` is where that happens, for every path,
+  // so nothing here has to remember to ask.
   return url;
 }
+
+/** CCODE-193 — REWRITE EVERY STORED COPY OF ONE IMAGE URL, and return how many changed.
+ *
+ *  ⛔ A SWAP IS NOT ONE ASSIGNMENT. `ensureImage` writes the URL onto the record, and then the CALLER
+ *  writes it wherever it wants: `character.locationImages[id]`, a gallery row, an npc's own field, a
+ *  battle cache. Chasing those by hand is a list that rots the next time a picture is added — the same
+ *  shape as a stylesheet that names each kind. The URL is a long unique string carrying the prompt and the
+ *  seed, so every copy of it means the same picture, and rewriting all of them is exactly right.
+ *
+ *  ⚠️ `seen` IS NOT AN OPTIMISATION. A save holds cycles (a companion pointing back at the character),
+ *  and without it this walks forever on a real character rather than a fixture. PURE apart from the
+ *  rewrite it is asked to make. */
+export function swapImageUrl(root, oldUrl, newUrl, seen = new Set()) {
+  if (!root || typeof root !== "object" || !oldUrl || !newUrl || oldUrl === newUrl || seen.has(root)) return 0;
+  seen.add(root);
+  let n = 0;
+  for (const k of Object.keys(root)) {
+    const v = root[k];
+    if (v === oldUrl) { root[k] = newUrl; n++; }
+    else if (v && typeof v === "object") n += swapImageUrl(v, oldUrl, newUrl, seen);
+  }
+  return n;
+}
+
+
 
 // ---------- CCODE-164: KEEP IS A VOTE ON THE LIKENESS, NOT A REPLACEMENT ----------
 // ⛔ ERIK REDEFINED THIS AFTER PLAYING, AND HIS VERSION IS BETTER THAN THE SPEC'S. Aevi's §3 said "on
@@ -598,7 +665,11 @@ export function regenerateImage(record, kind, { ratingLevel = 2, isMinor = null,
   // old votes back in would silently refuse the instruction.
   const looked = promptOverride ? raw : withLikeness(raw, promptOpts.keeps || []);
   const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor, kind });
-  return { url: imageURLFor(kind, safe, nextKey, { aesthetic: promptOpts.aesthetic || null }), seedKey: nextKey, prompt: safe };
+  // ⛔ CCODE-193 §2: THE RE-ROLL MINTS THE SAME WAY AS THE FIRST DRAW. A record-backed "Draw again"
+  // derives its prompt in here, so the call site could not compose it without discarding the likeness
+  // vote — which left the one picture the player is looking hardest at as the only uncomposed one.
+  return { url: mintURL(kind, { raw: looked, safe, seed: nextKey, ratingLevel, isMinor: minor,
+                                aesthetic: promptOpts.aesthetic || null }), seedKey: nextKey, prompt: safe };
 }
 
 /** SNG-401 §2: may this image be REBUILT (re-described), or only re-rolled? Aevi's rule — "an authored

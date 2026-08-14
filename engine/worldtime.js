@@ -5,8 +5,11 @@
 // NOTE for v0.5 shared worlds: time mode must become a WORLD-level choice — one
 // world, one clock. Until then it's a per-player setting applied to their campaign.
 
-export const TIME_MODES = ["story", "real"];
-export const DEFAULT_RATIO = 3; // real mode default: 1 real hour = 1 game day // registry:internal
+// CCODE-193 §2: module-private. Exported and imported by app.js, which never used it — the
+// "live code, needless public surface" third of the importedNeverCalled list.
+const TIME_MODES = ["story", "real"];
+export const DEFAULT_RATIO = 3; // real mode default: 1 real hour = 1 game day
+ // registry:internal
 
 const SEASONS = ["early-spring", "late-spring", "early-summer", "late-summer", "harvest", "early-winter", "deep-winter", "thaw"];
 const DAYS_PER_SEASON = 45;

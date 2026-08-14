@@ -23,7 +23,7 @@ import { standingWithPeople } from "../engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, companyStandingRates, applyStandingOps, standingFor, standingRoster, dripScale, DRIP, CREATION_SEEDS } from "../engine/standing.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
-import { sceneImage, locationImage } from "../engine/art.js";
+import { sceneImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, eligibleEncountersFor, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
@@ -15048,7 +15048,11 @@ await (async () => {
   // ⛔ THE SPLIT ITSELF: keeping must no longer change what is shown
   check("CCODE184: KEEP no longer sets the shown picture — it is a vote and only a vote",
     !/if \(!spec\.keep\(it\.regen\.subjectId, it\.url, it\.seedKey\)\) return false;/.test(src184));
-  check("CCODE184: …and the default button is what calls the kind's keep", /const ok = sub\.spec\.keep\(it\.regen\.subjectId, it\.url, it\.seedKey\);/.test(src184));
+  // ⚠️ CCODE-193: loosened from the exact argument list, which broke the day the URL started being
+  // resolved through the composed-re-mint table. The claim is WHICH function the button calls and with
+  // whose id — not the spelling of its second argument.
+  check("CCODE184: …and the default button is what calls the kind's keep",
+    /const ok = sub\.spec\.keep\(it\.regen\.subjectId, [^;]*it\.seedKey\);/.test(src184));
   // ⚠️ CCODE-186 SUPERSEDED THE CLAIM THIS ONE USED TO MAKE. It read "a subject-less picture offers
   // neither (nothing to represent, nothing to vote on)" — true when written, and Erik has since ruled the
   // other way: *"make sure all images have this."* There are no subject-less pictures now; `keepableRegen`
@@ -15143,10 +15147,17 @@ await (async () => {
     return /near-black, cold indigo/.test(w) && /no light source/.test(w) && /soft-footed/.test(w);
   })());
   check("CCODE179: each borrowed clause is clamped — an aesthetic is prose, the wrapper is a wrapper", styles.every(v => v.length < 260));
+  // ⛔ CCODE-193: THIS WAS A SOURCE REGEX COUNTING A LITERAL, and it went red the moment both mints
+  // started routing through one helper — the shape moved, the claim did not. What it means is that a
+  // picture drawn for a people carries that people's palette, from EITHER path. Asserted on the URLs.
   check("CCODE179: the URL builder takes the aesthetic and BOTH mint paths hand it over", (() => {
-    const src = readFileSync(join(root, "engine/art.js"), "utf8");
-    return /export function imageURLFor\(kind, safePrompt, seedKey = "", \{ aesthetic = null \} = \{\}\)/.test(src)
-      && (src.match(/\{ aesthetic: promptOpts\.aesthetic \|\| null \}/g) || []).length === 2;
+    const aes = { palette: "near-black, cold indigo", light: "no light source", mood: "soft-footed" };
+    const rec = { id: "a179", name: "Someone", appearance: "a plain coat, worn at the cuff" };
+    const plain = A179.ensureImage({ ...rec }, "npc", { ratingLevel: 2 });
+    const styled = A179.ensureImage({ ...rec }, "npc", { ratingLevel: 2, promptOpts: { aesthetic: aes } });
+    const redrawn = A179.regenerateImage({ ...rec }, "npc", { ratingLevel: 2, promptOpts: { aesthetic: aes } });
+    const carries = (u) => !!u && u.includes(encodeURIComponent("near-black, cold indigo"));
+    return !carries(plain) && carries(styled) && carries(redrawn?.url);
   })());
   check("CCODE179: two traditions genuinely produce different URLs for the same prompt", (() => {
     const was = localStorage.getItem("singularity.artMode"); A179.setArtMode("generate");
@@ -16087,6 +16098,133 @@ await (async () => {
       murmurs.length > 0 && templated.length > 0 && rawIds.length === 0,
       rawIds.slice(0, 2).map(n => n.text).join(" · "));
   }
+}
+
+// ---- CCODE-193: the composer reaches EVERY picture, one beat late ---------------------------------
+// ⛔ ERIK'S ASK WAS "EVERY IMAGE" AND CCODE-190 REACHED TWO PATHS. The other twelve mint inside a
+// synchronous template literal, where there is nowhere to put an `await`. His ruling: "I'm ok with an
+// uncomposed followed by a composed." So the mint announces itself and the composition follows.
+{
+  const A193 = await import("../engine/art.js");
+  const { setArtMode: setArt193 } = A193;
+  setArt193("generate");
+  const fired = [];
+  A193.onImageMinted(j => fired.push(j));
+  const npc193 = { id: "n193", name: "Pell Ran Marsh",
+    appearance: "grey wool worn thin at the knees, hands stained to the wrist, a look that does not move" };
+  const url193 = A193.ensureImage(npc193, "npc", { ratingLevel: 2 });
+  const first = fired[0];
+  // 1 · IT FIRES ON A REAL MINT — and NOT on a cached one, or a saved character would re-compose every
+  // picture it owns on every open, which is a bill for nothing.
+  A193.ensureImage(npc193, "npc", { ratingLevel: 2 });
+  check("CCODE-193: a fresh mint announces itself and a persist-once cache hit does NOT (no re-compose on every open)",
+    !!url193 && fired.length === 1 && first?.url === url193 && first?.record === npc193 && first?.field === "image",
+    `fired ${fired.length}×`);
+  // 2 · ⛔ COMPOSE BEFORE THE FLOORS, NEVER AFTER. The hook must carry the line the floors have NOT yet
+  // been applied to — composing on top of them lets the model compress away the ceiling tone it just added.
+  {
+    const floored = A193.sanitizeImagePrompt(first.raw, { ratingLevel: first.ratingLevel, isMinor: first.isMinor, kind: first.kind });
+    check("CCODE-193: the hook carries the PRE-FLOOR line, and the floors are what the picture was actually minted from",
+      floored !== first.raw && floored.startsWith(first.raw) && url193.includes(encodeURIComponent(floored)),
+      `raw=${first.raw.slice(-40)} | floored=${floored.slice(-40)}`);
+  }
+  // 3 · A SWAP IS NOT ONE ASSIGNMENT. The caller stores the URL wherever it likes; every copy is the same
+  // picture, so every copy moves.
+  {
+    const OLD = "https://image.pollinations.ai/prompt/one?seed=1", NEW = "https://image.pollinations.ai/prompt/two?seed=1";
+    const save = { portrait: OLD, keep: OLD + "x", locationImages: { maw: OLD }, npcRegistry: { p: { image: OLD, name: "P" } },
+                   gallery: [{ url: OLD, caption: "c" }, { url: "other" }], nested: { deep: { arr: [OLD, "no"] } } };
+    const n = A193.swapImageUrl(save, OLD, NEW);
+    check("CCODE-193: a re-mint rewrites EVERY stored copy of the old URL and nothing that merely resembles it",
+      n === 5 && save.portrait === NEW && save.locationImages.maw === NEW && save.npcRegistry.p.image === NEW
+      && save.gallery[0].url === NEW && save.nested.deep.arr[0] === NEW
+      && save.keep === OLD + "x" && save.gallery[1].url === "other" && save.npcRegistry.p.name === "P", `changed ${n}`);
+  }
+  // 4 · ⚠️ A SAVE HOLDS CYCLES. `seen` is not an optimisation — without it this hangs on a real character
+  // rather than on a fixture, which is the kind of bug that only ever appears in play.
+  {
+    const a = { image: "OLD" }; a.self = a; a.kid = { parent: a, image: "OLD" };
+    // ⚠️ CAUGHT, NOT LEFT TO CRASH. Without the guard this overflows the stack, and a suite that dies
+    // reports nothing at all — a mutation has to produce a RED, not a corpse.
+    let n = -1; try { n = A193.swapImageUrl(a, "OLD", "NEW"); } catch (e) { n = `threw: ${e?.message}`; }
+    check("CCODE-193: the rewrite terminates on a save that points back at itself", n === 2 && a.image === "NEW" && a.kid.image === "NEW", String(n));
+  }
+  // 5 · ONE COMPOSITION PER SUBJECT, EVER — the cache is what keeps this from being a per-render bill, and
+  // it is also Aevi's stability rule: same subject, same picture, forever.
+  {
+    const { composeImagePrompt } = await import("../engine/imageprompt.js");
+    const long = Array.from({ length: 14 }, (_, i) => `clause number ${i} with some visual detail in it`).join(", ");
+    let calls = 0;
+    const stub = async () => { calls++; return "a composed line about a person in grey wool, hands stained, standing still"; };
+    const cache = {};
+    const a1 = await composeImagePrompt(long, { cache, kind: "npc", call: stub });
+    const a2 = await composeImagePrompt(long, { cache, kind: "npc", call: stub });
+    check("CCODE-193: a subject is composed ONCE — the second mint of the same line reads the cache and spends nothing",
+      calls === 1 && a1.composed && a2.composed && a1.prompt === a2.prompt, `${calls} call(s)`);
+  }
+  // 5b · ⛔ A DERIVE-AT-RENDER PATH HAS NOWHERE TO PUT THE ANSWER. The scene banner and the item study
+  // rebuild their URL every render and store nothing, so without a memory of what a composition replaced,
+  // the banner would show the composed picture once and the raw one forever after — a flicker on every
+  // render instead of one. The mint asks first, and a known answer is returned WITHOUT announcing again.
+  {
+    const asked = [];
+    const fired2 = [];
+    A193.onImageMinted(j => fired2.push(j));
+    const scene = { name: "The Maw" }, st = { setting: "a low hall of wet stone, one lamp guttering" };
+    const first2 = A193.sceneImage(scene, st, { ratingLevel: 2 });
+    A193.onComposedLookup(u => { asked.push(u); return u === first2 ? "COMPOSED-URL" : null; });
+    const second2 = A193.sceneImage(scene, st, { ratingLevel: 2 });
+    A193.onComposedLookup(null);
+    check("CCODE-193: a derive-at-render picture remembers the composed re-mint, and does not re-announce it",
+      !!first2 && fired2.length === 1 && second2 === "COMPOSED-URL" && asked.includes(first2) && fired2.length === 1,
+      `fired ${fired2.length}×, asked ${asked.length}×, got ${String(second2).slice(0, 40)}`);
+    A193.onImageMinted(null);
+  }
+  // 5c · ⚠️ AND THE PLAYER VOTES ON WHAT THEY CAN SEE. A lightbox item is built before the composition
+  // lands, so "Keep this look" and "Set as default" would otherwise commit the address of a picture that
+  // has already been replaced on screen — the vote would be cast on a picture nobody is looking at.
+  {
+    const app5c = readFileSync(join(root, "app.js"), "utf8");
+    // ⛔ BOTH HALVES OF THE TABLE, because mutation showed one of them was untested: 5b exercises
+    // art.js's lookup with a stub, which stays green with the app-side WRITE deleted. Testing the
+    // mechanism is not testing the wiring — the same lesson CCODE-191's cache-key gate learned.
+    check("CCODE-193: the composed re-mint is recorded against the URL it replaces, and read back wherever one is committed",
+      /\(character\.composedImages \|\|= \{\}\)\[job\.url\] = url;/.test(app5c)
+      && /onComposedLookup\(\(url\) => shownUrl\(url\)/.test(app5c)
+      && /it = \{ \.\.\.it, url: shownUrl\(it\.url\) \}/.test(app5c)
+      && /sub\.spec\.keep\(it\.regen\.subjectId, shownUrl\(it\.url\)/.test(app5c)
+      && /function shownUrl\(u\) \{ return \(u && character\?\.composedImages\?\.\[u\]\) \|\| u; \}/.test(app5c));
+  }
+  // 6 · THE WIRING, AS A CENSUS. The hook fires inside the ONE mint, so a picture added tomorrow is composed
+  // without anyone remembering to wire it — and the twelve call sites stay untouched.
+  {
+    const app193 = readFileSync(join(root, "app.js"), "utf8");
+    const art193 = readFileSync(join(root, "engine/art.js"), "utf8");
+    // ⛔ THE STRONGEST FORM OF "EVERY IMAGE": nothing in art.js builds a URL except `mintURL`. A gate
+    // that counted call sites would pass the day someone adds a thirteenth that mints around it — which
+    // is exactly how the scene banner and the item study missed §1.
+    const mintBody = art193.slice(art193.indexOf("function mintURL("), art193.indexOf("export function onImageMinted"));
+    // ⚠️ TWO OCCURRENCES ONLY: the declaration, and the single use inside `mintURL`. Anything else is a
+    // mint that skips the announcement, which is how the scene banner and the item study missed §1.
+    const mintStart = art193.indexOf("function mintURL("), mintEnd = art193.indexOf("export function onImageMinted");
+    const strays = [...art193.matchAll(/imageURLFor\(/g)]
+      .filter(m => !art193.startsWith("export function imageURLFor(", m.index - 16))
+      .filter(m => m.index < mintStart || m.index > mintEnd);
+    const sites = (app193.match(/ensureImage\(/g) || []).length;
+    const installs = (app193.match(/onImageMinted\(/g) || []).length;
+    check(`CCODE-193: every URL in art.js is minted through the ONE announcing helper (${sites} app call sites, ${installs} listener)`,
+      sites >= 10 && installs === 1 && /_onMinted\(\{/.test(mintBody) && strays.length === 0,
+      `${strays.length} mint(s) bypass mintURL`);
+    // ⛔ AND NO CALL SITE COMPOSES FOR ITSELF. Two paths to one answer is how the sentence and the picture
+    // came to disagree in SNG-431; the battle mint is the one deliberate exception, because it composes
+    // BEFORE minting (it knows there are two figures) rather than after.
+    const composeCalls = (app193.match(/composeImagePrompt\(/g) || []).length;
+    check("CCODE-193: composition is centralised — the only direct calls are the battle mint and the lightbox regen",
+      composeCalls === 3, `${composeCalls} direct composeImagePrompt call(s)`);
+    // ⛔ NO KEY, NO CALL. The picture is already drawn; queueing without a key spends a failure per image.
+    check("CCODE-193: nothing is queued without an API key", /if \(!job\?\.url \|\| !job\.raw \|\| !getApiKey\(\)\) return;/.test(app193));
+  }
+  A193.onImageMinted(null);
 }
 
 // ---- CCODE-192: an openable news line wears no browser chrome, whatever KIND it is ----------------

@@ -2373,7 +2373,14 @@ await (async () => {
     readClock(charA.clock).day !== readClock(charB.clock).day);
   check("worldclock: worldDayAt reconciles a real-time ISO stamp to the absolute", worldDayAt("2026-07-11T00:00:00Z", epoch) === 11);
   check("worldclock: unknown stamp → null (derives-never-fabricates)", worldDayAt("not-a-date", epoch) === null);
-  check("worldclock: worldDate carries day + season + label", (() => { const wd = worldDate(Date.UTC(2026, 6, 11), epoch); return wd.worldDay === 11 && !!wd.season && /World-day 11/.test(wd.label); })());
+  // ⛔ CCODE-195 INVERTED THIS: THE WORLD DATE MUST **NOT** CARRY A SEASON. It computed one from world
+  // days and put it in the feed label while the header computed a different one from character days, so one
+  // game could show two seasons for one moment. `world_clock.json` settles it — "Character time is days and
+  // seasons; world time is a monotonic COUNT" — and a season is something a traveller lives through.
+  check("worldclock: worldDate carries the day it can derive and does NOT assert a season", (() => {
+    const wd = worldDate(Date.UTC(2026, 6, 11), epoch);
+    return wd.worldDay === 11 && !("season" in wd) && wd.label === "World-day 11";
+  })());
   check("worldclock: relativeWorldDays phrases distance from the viewer's now", relativeWorldDays(5, 11) === "6 days ago" && relativeWorldDays(11, 11) === "today" && relativeWorldDays(10, 11) === "yesterday");
   check("worldclock: relative(unknown) is graceful", relativeWorldDays(null, 11) === "at an unknown time");
   check("worldclock: getWorldEpoch returns a usable default epoch (no override set)", (() => { const e = getWorldEpoch(); return Number.isFinite(e.atMs) && e.worldDay >= 1 && e.rate > 0; })());
@@ -16225,6 +16232,76 @@ await (async () => {
     check("CCODE-193: nothing is queued without an API key", /if \(!job\?\.url \|\| !job\.raw \|\| !getApiKey\(\)\) return;/.test(app193));
   }
   A193.onImageMinted(null);
+}
+
+// ---- CCODE-195: the season turns ------------------------------------------------------------------
+// ⛔ ERIK, FROM PLAY: "It never ceases to be early-spring... even after over 1000 world ticks." A season
+// was 45 character-days = 1080 character-hours against a beat worth 1–2, so ONE season cost ~600 turns and a
+// year ~4,800 — and what that hid was not a word in a header but seven of the eight authored SEASON_PRESSURE
+// entries, each with a condition line the GM narrates from and the arc-kinds it tilts toward.
+{
+  const WT = await import("../engine/worldtime.js");
+  const LA = await import("../engine/latentarcs.js");
+  const { loadContentHeadless: lch195 } = await import("./headless_content.mjs");
+  const C195 = await lch195();
+  const cal195 = WT.seasonCalendar();
+  // 1 · AUTHORED AND IN FORCE. Two engine constants meant the world's calendar could not be turned by the
+  // people who own the world; a dial nothing loads is the same thing wearing a JSON file.
+  check("CCODE-195: the season calendar is AUTHORED and in force (not the engine fallback)",
+    !!C195.worldClock?.calendar?.daysPerSeason
+    && cal195.daysPerSeason === C195.worldClock.calendar.daysPerSeason
+    && cal195.seasons.length === C195.worldClock.calendar.seasons.length,
+    `in force ${cal195.seasons.length}×${cal195.daysPerSeason}, authored ${C195.worldClock?.calendar?.seasons?.length}×${C195.worldClock?.calendar?.daysPerSeason}`);
+  // 2 · ⛔ AND IT IS REACHABLE, MEASURED RATHER THAN ASSERTED. A beat moves the clock ~1h and a scene end 2h;
+  // the claim is that a season turns inside a campaign, not inside a lifetime. 600 turns was the old answer.
+  {
+    const turnsPerSeason = Math.round(cal195.daysPerSeason * 24 / WT.ADVANCE.beat);
+    const turnsPerYear = turnsPerSeason * cal195.seasons.length;
+    console.log(`      season economy: ~${turnsPerSeason} turns per season, ~${turnsPerYear} per year (was 1080 / 8640)`);
+    check(`CCODE-195: a season is reachable in play (~${turnsPerSeason} turns, was ~1080)`,
+      turnsPerSeason > 40 && turnsPerSeason <= 400,
+      "under 40 and the season is weather; over 400 and no one arrives at the second one");
+  }
+  // 3 · ⛔ EVERY SEASON THE CLOCK CAN PRODUCE MUST HAVE A PRESSURE. The names live in two places now — the
+  // authored calendar and latentarcs' SEASON_PRESSURE — and a season with no condition line reaches the GM as
+  // silence. The whole point of making the calendar turnable is that someone WILL turn it.
+  {
+    const dumb = cal195.seasons.filter(s => !LA.seasonalPressure(s));
+    check(`CCODE-195: every season on the calendar has an authored pressure (${cal195.seasons.length} seasons)`,
+      dumb.length === 0, `no condition line for: ${dumb.join(", ")}`);
+  }
+  // 4 · IT ACTUALLY TURNS, and wraps rather than running off the end of the list.
+  {
+    const at = (d) => WT.readClock({ day: d, hour: 12 }).season;
+    const d = cal195.daysPerSeason;
+    check("CCODE-195: the season turns on the boundary and the year wraps",
+      at(1) === cal195.seasons[0] && at(d) === cal195.seasons[0] && at(d + 1) === cal195.seasons[1]
+      && at(d * cal195.seasons.length + 1) === cal195.seasons[0],
+      `${at(1)} → ${at(d + 1)} → ${at(d * cal195.seasons.length + 1)}`);
+  }
+  // 5 · ⚠️ A MALFORMED CALENDAR IS REFUSED, NOT HALF-APPLIED. No seasons is a division by nothing and a
+  // header that reads `undefined`; a pack should degrade to the engine's own calendar, never to garbage.
+  {
+    const before = WT.seasonCalendar();
+    const bad = [null, {}, { seasons: [], daysPerSeason: 5 }, { seasons: ["x"], daysPerSeason: 0 }, { seasons: "spring", daysPerSeason: 5 }];
+    const held = bad.every(b => { const c = WT.setSeasonCalendar(b); return c.seasons.length === before.seasons.length && c.daysPerSeason === before.daysPerSeason; });
+    check("CCODE-195: a malformed authored calendar is refused and the one in force is kept", held
+      && !!WT.readClock({ day: 3, hour: 12 }).season);
+  }
+  // 6 · ⛔ AND NOTHING PUSHES AN INVENTED CALENDAR INTO SHARED STATE. The world tick wrote a hardcoded
+  // `season: "late-spring", year: 15` into the file every other player reads — one writer, ZERO readers, and
+  // `remote?.calendar ||` then preserved the first invention forever. A fabricated fact in shared state is
+  // worse than a missing one: a missing field is obviously absent, and that one looked authored.
+  {
+    // ⚠️ COMMENTS STRIPPED FIRST, and this went red before they were: the note explaining what was
+    // removed QUOTES the removed code, so the gate read its own documentation as the offence. The wiring
+    // audit records the mirror of this — a check silenced by describing it — and both come from scanning prose
+    // as if it were code.
+    const wt195 = readFileSync(join(root, "engine/worldtick.js"), "utf8")
+      .replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:"'`\\])\/\/[^\r\n]*/g, "$1");
+    check("CCODE-195: no invented season or year is written into the shared region file",
+      !/season: "late-spring"/.test(wt195) && !/year: 15/.test(wt195) && !/calendar: remote/.test(wt195));
+  }
 }
 
 // ---- CCODE-194: the lean has a reader ------------------------------------------------------------

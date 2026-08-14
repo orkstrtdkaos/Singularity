@@ -158,7 +158,8 @@ export function resolveLocationId(ref, locations = {}) {
 }
 
 import { unusablePatterns as unusableTitlePatterns, orderSensitivePatterns } from "./titles.js";
-import { economyCoverage } from "./economy.js";   // SNG-302: say at load whether the second price axis is reachable   // SNG-287: report patterns with no slot source
+import { economyCoverage } from "./economy.js";
+import { setSeasonCalendar, seasonCalendar } from "./worldtime.js";   // CCODE-195: the world's calendar is authored, not compiled in   // SNG-302: say at load whether the second price axis is reachable   // SNG-287: report patterns with no slot source
 
 export async function loadContent() {
   const index = await fetchJSON("content/packs/core/manifest.json");
@@ -296,6 +297,19 @@ export async function loadContent() {
   // SNG-433: the sentences a fight is reported in. Merged in the same breath as the load — a rule bag that
   // nothing lifts onto `rules` is the reader-with-no-writer failure one layer up, twice over on this file.
   if (newsTemplatesRule?.templates) rules.newsTemplates = newsTemplatesRule;
+  // ⛔ CCODE-195: THE SEASON CALENDAR. It was two engine constants, so the world's own calendar could not be
+  // turned by the people who own the world — and at 45 days a season took ~600 turns of play, which is why Erik
+  // had never seen one change. Installed here, from the file that already documents the two clocks.
+  {
+    setSeasonCalendar(worldClock?.calendar);
+    // ⚠️ READ BACK WHAT IS IN FORCE, not what was handed over. A malformed block is REFUSED, so the two can
+    // differ — and the point of saying this out loud is to name the calendar the game is actually running,
+    // which is the one the clock will answer with.
+    const cal = seasonCalendar();
+    const authored = cal.daysPerSeason === Number(worldClock?.calendar?.daysPerSeason);
+    console.log(`[clock] season calendar: ${cal.seasons.length} seasons × ${cal.daysPerSeason} days` +
+      `${authored ? "" : " (engine fallback — this pack carries no usable authored calendar)"}`);
+  }
   // ⚠️ SAID OUT LOUD AT LOAD, like the titles report above. Without the templates the tick falls back to the
   // four hardcoded sentences and everything still works — which is exactly how a missing file stays missing
   // for two tickets. A fallback that nobody can see is not a fallback, it is a silence.

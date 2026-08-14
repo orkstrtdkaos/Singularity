@@ -11,8 +11,44 @@ const TIME_MODES = ["story", "real"];
 export const DEFAULT_RATIO = 3; // real mode default: 1 real hour = 1 game day
  // registry:internal
 
+// ⛔ CCODE-195 (Erik, from play): "It never ceases to be early-spring... even after over 1000 world ticks."
+//
+// He is right, and the arithmetic is brutal. A season was 45 character-days = 1080 character-hours, and a
+// beat moves the clock 1–2 hours, so ONE SEASON COST ~600 TURNS and a full year ~4,800. His character stands
+// at Day 15 — a third of the way into the first season — after weeks of play. The season was not slow, it
+// was unreachable.
+//
+// ⚠️ AND WHAT IT HID WAS AUTHORED CONTENT, NOT A LABEL. `latentarcs.js` carries a SEASON_PRESSURE table:
+// eight seasons, each with a condition line the GM narrates from and the arc-kinds it tilts toward — the dry,
+// the scarcity, the breaking. SEVEN OF THE EIGHT HAVE NEVER BEEN REACHABLE BY ANY PLAYER. It reads as a stuck
+// word in a header; what it actually did was hide seven-eighths of a written mechanic.
+//
+// ⛔ AND THE NUMBER WAS NOT TURNABLE. Both the length and the names were engine constants, so the people who
+// own the world could not change its calendar without editing engine source. They are a dial now
+// (`rules.worldClock.calendar`); these stay as the fallback for a pack that does not carry one.
 const SEASONS = ["early-spring", "late-spring", "early-summer", "late-summer", "harvest", "early-winter", "deep-winter", "thaw"];
 const DAYS_PER_SEASON = 45;
+
+let _calendar = { seasons: SEASONS, daysPerSeason: DAYS_PER_SEASON };
+
+/** The season calendar in force. */
+export function seasonCalendar() { return _calendar; }
+
+/** CCODE-195: install the authored calendar. Called once from `loadContent`. A malformed block is REFUSED
+ *  rather than half-applied — no seasons, or a season of zero days, is a division by nothing and a header
+ *  that reads `undefined`. Returns the calendar actually in force, so the caller can report which one. */
+export function setSeasonCalendar(cal) {
+  const seasons = Array.isArray(cal?.seasons) ? cal.seasons.filter(s => typeof s === "string" && s.trim()) : [];
+  const days = Number(cal?.daysPerSeason);
+  if (seasons.length && Number.isFinite(days) && days > 0) _calendar = { seasons, daysPerSeason: days };
+  return _calendar;
+}
+
+/** Which season a day falls in. ONE definition, so two readers cannot drift into two answers. */
+function seasonOf(day) {
+  const { seasons, daysPerSeason } = _calendar;
+  return seasons[Math.floor((day - 1) / daysPerSeason) % seasons.length];
+}
 
 export const ADVANCE = { beat: 1, travel: 3, rest: 8, sceneEnd: 2 };
 
@@ -59,7 +95,7 @@ export function advanceClock(clock, hours, settings = getTimeSettings()) {
 function fromTotalHours(total) {
   const day = Math.floor(total / 24);
   const hour = Math.floor(total % 24);
-  const season = SEASONS[Math.floor(((day - 1) / DAYS_PER_SEASON)) % SEASONS.length];
+  const season = seasonOf(day);
   return { day, hour, phase: phaseOf(hour), season, label: `Day ${day}, ${phaseOf(hour)} (${season})` };
 }
 
@@ -137,11 +173,16 @@ export function worldCountLabel(count, worldClock = null, peopleId = null) {
   return idiom ? `${count} ${idiom}` : `${formal} stands at ${count}`;
 }
 
-/** Full absolute world-date reading (day + season + label) — what the world clock shows. */
+/** Full absolute world-date reading — what the world clock shows.
+ *
+ * ⛔ CCODE-195: NO SEASON HERE. This computed one from WORLD days and put it in the feed label, while the
+ * header computed a different one from CHARACTER days — so one game could show two seasons for one moment,
+ * and did. `world_clock.json` settles which is real: *"Character time is days and seasons — personal,
+ * human. World time is a monotonic COUNT."* A season is something a traveller lives through, not a property
+ * of the shared count, so the world date states the day it can derive and stops there. */
 export function worldDate(nowMs = Date.now(), epoch = getWorldEpoch()) {
   const worldDay = absoluteWorldDay(nowMs, epoch);
-  const season = SEASONS[Math.floor((worldDay - 1) / DAYS_PER_SEASON) % SEASONS.length];
-  return { worldDay, season, label: `World-day ${worldDay} (${season})` };
+  return { worldDay, label: `World-day ${worldDay}` };
 }
 
 /** Absolute world-day for a real-time stamp (ISO string or ms) — e.g. a ledger event's `.at`,

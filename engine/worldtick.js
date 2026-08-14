@@ -737,7 +737,10 @@ export async function syncSharedWorld({ character, content }) {
     // 3. push the consolidated region state back (SHA-retry inside pushOwnedFile)
     await pushOwnedFile("world/regions/valley.json", {
       schemaVersion: 1, regionId: "valley",
-      calendar: remote?.calendar || { day: ws.lastTickDay, season: "late-spring", year: 15 },
+      // ⛔ CCODE-195: THE `calendar` KEY IS GONE. It had ONE writer and ZERO readers, and what it wrote
+      // was invented: a hardcoded `season: "late-spring", year: 15` pushed into the file every other player
+      // reads. `remote?.calendar ||` then preserved the first invention forever. A fabricated fact in shared
+      // state is worse than a missing one — a missing field is obviously absent, and that one looked authored.
       activeEvents: (content.region.activeEvents || []).map(({ eventId, stage }) => ({ eventId, stage: ws.eventStages[eventId]?.stage ?? stage })),
       eventStages: ws.eventStages, spectrumDrift: ws.spectrumDrift,
       worldFlags: remote?.worldFlags || {}, lastTick: new Date().toISOString()

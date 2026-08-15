@@ -1,0 +1,200 @@
+{
+ "_note": "⛔ SNG-436. WORDING AUDIT — Erik: 'some of the skills read like they don't do ANYTHING.' ⚠️ CHECKED FIRST: skill_utility_audit.json (2026-07-07) already exists, but it audited TACTICAL utility across 106 skills — which challenge each answers — and concluded 'not more skills, PRESENTATION + a few reframes'. This is the PRESENTATION half, never done, now measured across all 376.",
+ "_finding": "⛔ 87 OF 376 DESCRIPTIONS OPEN BY DEFINING THE CRAFT RATHER THAN SAYING WHAT YOU DO. 'The mind-pole mastery:', 'The chaos-craft:', 'The Figurists' first offense:', 'The Masons' holding-craft.' ⚠️ THEY PLACE THE SKILL IN THE TRADITION'S TAXONOMY, WHICH IS A LIBRARIAN'S JOB, NOT A PLAYER'S QUESTION. The player is asking 'what happens when I use this?'\n⛔ AND IT IS NOT A ROOT-ABILITY CONVENTION — I checked, because that would have made it legitimate: 46 of the 87 sit ABOVE levelReq 1, and mean level is 2.1 against 2.3 for the rest. The pattern is uncorrelated with tree position, so it is a habit rather than a rule.\n⚠️ THE SAME TRADITION DOES BOTH, WHICH PROVES IT IS FIXABLE: Cogitant has 'Noesis — the mind-pole mastery: memory, focus, reason...' AND 'Cold-Read — infer another's thoughts and intent from micro-signals.' The second one tells you what you do.",
+ "_theRule": "⛔ A DESCRIPTION'S FIRST CLAUSE MUST NAME AN ACTION AND ITS OUTCOME. The taxonomy line is welcome AFTER that, never instead of it. Radiant Lance is the model: 'Focus light into a searing coherent beam — precise, silent, fast as sight.' ⚠️ Verb, object, result, then flavour.\n⛔ WORST CASES FIRST: the 24 below define AND NEVER GET TO AN ACTION — no clause after the colon or dash. Those read as pure lore and are the ones Erik is hitting.",
+ "_layer1_generatedText": "⛔ SEPARATE AND CHEAPER: `plainly` is GENERATED from `mechanic` and the generator has grammar faults on 122 abilities. 64 'missing full stop before It' ('It rolls 1d6 It affects 1 target'), 46 'A' before a vowel sound ('A investigate/explore action'), 12 run-ons. ⚠️ THIS IS A CODE FIX, NOT CONTENT — one article rule and one join. It makes every skill read as sloppier than it is, and it is the FIRST thing a player sees under the name.",
+ "worstCases": [
+  {
+   "id": "the_whole_act",
+   "name": "The Whole Act",
+   "tradition": "somatic",
+   "levelReq": 4,
+   "description": "The braid-craft: body and mind as one instrument, acting faster than either could decide — the Middle Way's ideal.",
+   "narrationHints": "Thought and motion stop being two things."
+  },
+  {
+   "id": "the_sustained_regard",
+   "name": "The Sustained Regard",
+   "tradition": "cogitant",
+   "levelReq": 1,
+   "description": "The Cogitants' first offense. No vector, no contact, nothing crosses the space. Thought applied to a body that has been quietly running itself.",
+   "narrationHints": "You give them the whole of your attention and refuse to give it back. Under a regard that complete the body starts dropping the things it was doing unattended — balance, breath, the grip on a weapon, the clotting of a wound."
+  },
+  {
+   "id": "latticework",
+   "name": "Latticework",
+   "tradition": "lattice",
+   "levelReq": 2,
+   "description": "The order-craft: structure, prediction, law, the binding of possibility. The Lattice-Cities' discipline — order as power.",
+   "narrationHints": "Structure imposed and possibility bound — a plan that holds, a prediction that lands, a binding that will not slip."
+  },
+  {
+   "id": "the_sound_read",
+   "name": "The Sound Read",
+   "tradition": "mason",
+   "levelReq": 1,
+   "description": "The Masons' first craft, and the one they are actually hired for. Everything else they do rests on being right about this.",
+   "narrationHints": "You put a hand on a made thing and it tells you the truth about itself. Not a feeling about the stone — an answer: this member is bearing, that one is decorative, and the whole thing comes down from HERE."
+  },
+  {
+   "id": "the_set_stone",
+   "name": "The Set Stone",
+   "tradition": "mason",
+   "levelReq": 1,
+   "description": "The Masons' holding-craft. Half of building is making a thing stay where you put it.",
+   "narrationHints": "You set a thing where it is and it STAYS. A stone, a beam, a door, a cart — placed with intent, it now takes far more than ordinary force to shift, and it will not drift, sag, settle or be quietly moved."
+  },
+  {
+   "id": "umbracraft",
+   "name": "Umbracraft",
+   "tradition": "umbral",
+   "levelReq": 2,
+   "description": "The dark-pole mastery: concealment, sight-without-light, and the harboring of what should not be exposed. Not evil — the necessary shadow.",
+   "narrationHints": "The dark that hides and the dark that harbors — sight without light, the unseen made ally, the sheltering of what the blaze would burn."
+  },
+  {
+   "id": "the_carried_dark",
+   "name": "The Carried Dark",
+   "tradition": "umbral",
+   "levelReq": 1,
+   "description": "The Umbrals' first craft. Not hiding IN shadow — carrying one.",
+   "narrationHints": "You bring the dark with you rather than finding it. A pocket of unlight that travels at your pace, and inside it you are simply not available to be seen."
+  },
+  {
+   "id": "the_felt_room",
+   "name": "The Felt Room",
+   "tradition": "umbral",
+   "levelReq": 1,
+   "description": "The Umbrals' seeing-craft, which is not seeing. It works best exactly where every other perception craft fails.",
+   "narrationHints": "In the lightless deeps you learn a place by everything except seeing — air movement, the way sound returns, the temperature of stone, the tiny wrongness of a room that has someone standing in it."
+  },
+  {
+   "id": "the_hastened_grey",
+   "name": "The Hastened Grey",
+   "tradition": "ashwarden",
+   "levelReq": 1,
+   "description": "The Ashwardens' first offense, and it is the tradition doing precisely what the tradition is for. Endings are their work. This is the work applied against someone.",
+   "narrationHints": "Everything is already ending. You put a hand on this one and bring it forward. A blade greys and shears; a strained rope parts; a wound that was closing opens grey at the edges and does not stop; a man who was going to die in forty years does it considerably sooner."
+  },
+  {
+   "id": "the_kept_vigil",
+   "name": "The Kept Vigil",
+   "tradition": "ashwarden",
+   "levelReq": 1,
+   "description": "The Ashwardens' keeping-craft, and the mirror of their hastening one. They tend endings, which means they also know precisely how to postpone one.",
+   "narrationHints": "You hold a thing at the edge it is already standing on. Not healing, not repair — HOLDING. The rope does not part, the wound does not turn, the truce does not break, for exactly as long as you attend it and no longer."
+  },
+  {
+   "id": "the_true_account",
+   "name": "The True Account",
+   "tradition": "ashwarden",
+   "levelReq": 1,
+   "description": "The Ashwardens' seeing-craft. Everything is ending; the craft is knowing the schedule.",
+   "narrationHints": "You read what a thing has left. Not a feeling — a reckoning: what is wearing, how fast, and what it will fail from. Ashwardens are asked to look at bridges as often as at people."
+  },
+  {
+   "id": "descent",
+   "name": "Descent",
+   "tradition": "abyssal",
+   "levelReq": 2,
+   "description": "The demonic-pole mastery: appetite named, bargains struck, the refusal to pretend that want is not the engine. Not evil — the honest hunger.",
+   "narrationHints": "Something in the room admits what it wants, and the admitting has teeth."
+  },
+  {
+   "id": "ascent",
+   "name": "Ascent",
+   "tradition": "seraphic",
+   "levelReq": 2,
+   "description": "The angelic-pole mastery: mercy given, judgment pronounced, the luminous certainty that both heals and terrifies. Not good in the flat sense — certainty is a danger.",
+   "narrationHints": "The light here does not warm. It measures."
+  },
+  {
+   "id": "the_honest_price",
+   "name": "The Honest Price",
+   "tradition": "bargainers",
+   "levelReq": 1,
+   "description": "The Bargainers' making-craft, and the reason anyone sits at their table twice.",
+   "narrationHints": "You name what a thing will truly cost — to you, to them, to whoever is not in the room — and having named it, you can deliver it exactly. No trick is the trick. The Bargainers are trusted in the foothills because they are."
+  },
+  {
+   "id": "the_given_way",
+   "name": "The Given Way",
+   "tradition": "unmaker",
+   "levelReq": 1,
+   "description": "The Unmakers' opening-craft. The distinction from breaking in is the whole professional identity.",
+   "narrationHints": "Anything shut was shut by a method, and a method can be reversed. A lock, a seal, a bar, a knot, a bound working — it OPENS, undamaged, and can be shut again after by whoever is entitled to."
+  },
+  {
+   "id": "the_quick_work",
+   "name": "The Quick Work",
+   "tradition": "wright",
+   "levelReq": 1,
+   "description": "The Wrights' first craft. A day's carpentry in a quarter of an hour, and it holds.",
+   "narrationHints": "You build the thing now, out of what is here, and it works. Not conjuring — building, at a speed that looks like cheating to anyone who has ever built anything."
+  },
+  {
+   "id": "the_carried_name",
+   "name": "The Carried Name",
+   "tradition": "threnodist",
+   "levelReq": 1,
+   "description": "The Threnodists' keeping-craft. The dead are forgotten wrong before they are forgotten entirely, and this is the answer to the first part.",
+   "narrationHints": "You hold a dead person's name the way a room holds a struck bell. Speak it and what they were comes back into the space — not a ghost, a WEIGHT. People remember correctly for as long as you hold it."
+  },
+  {
+   "id": "the_shared_weight",
+   "name": "The Shared Weight",
+   "tradition": "threnodist",
+   "levelReq": 1,
+   "description": "The Threnodists' mercy, and it is a real one because it is not free. Grief-singers are the people who will hold your share.",
+   "narrationHints": "You take part of what someone is carrying and carry it yourself. Not comfort — TRANSFER. They can stand up because some of it is on you now."
+  },
+  {
+   "id": "the_plain_seeing",
+   "name": "The Plain Seeing",
+   "tradition": "verist",
+   "levelReq": 1,
+   "description": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it.",
+   "narrationHints": "You look at a thing and what is actually so about it is simply available. Not detection, not deduction — the removal of everything that was in the way, including what you were hoping."
+  },
+  {
+   "id": "the_kept_count",
+   "name": "The Kept Count",
+   "tradition": "hourkeeper",
+   "levelReq": 1,
+   "description": "The Hourkeepers' first craft and the reason valleys keep one. Everyone else estimates.",
+   "narrationHints": "You know how long. Not a guess — a count. How long the food lasts, how long before they arrive, how long this fever runs, how long you have been standing here thinking it was a moment."
+  },
+  {
+   "id": "the_stretched_hour",
+   "name": "The Stretched Hour",
+   "tradition": "hourkeeper",
+   "levelReq": 1,
+   "description": "The Hourkeepers' giving-craft, and the one they are begged for. It is the exact inverse of the Spent Hour and costs the same in the other direction.",
+   "narrationHints": "You give a thing more time than it has. The lamp burns an hour longer on the same oil; the poultice holds through the night; the food does not turn; the dying man gets until morning. Time added, not conjured — and taken from somewhere."
+  },
+  {
+   "id": "the_edge",
+   "name": "The Edge",
+   "tradition": "marcher",
+   "levelReq": 2,
+   "description": "The violence-pole mastery: the martial disciplines honed to an art. Not fury — force made exact.",
+   "narrationHints": "Violence as a discipline, not a rage — economical, decisive, terrible in its precision. The Marchers do not brawl; they end."
+  },
+  {
+   "id": "the_held_breath",
+   "name": "The Held Breath",
+   "tradition": "stillhold",
+   "levelReq": 4,
+   "description": "The braid-craft: hold a moment where violence is total and peace is total in perfect tension — an armed grace.",
+   "narrationHints": "Violence and peace both at a knife's edge, held by will alone."
+  },
+  {
+   "id": "the_read_field",
+   "name": "The Read Field",
+   "tradition": "marcher",
+   "levelReq": 1,
+   "description": "The Marchers' seeing-craft. The March holds because it chose the ground before anyone arrived.",
+   "narrationHints": "You look at ground and see the fight it will produce — where a charge must funnel, where a line will break first, which approach a sensible enemy takes and which a frightened one does."
+  }
+ ]
+}

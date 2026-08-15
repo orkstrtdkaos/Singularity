@@ -213,7 +213,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, visualVocabRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -261,7 +261,11 @@ export async function loadContent() {
     // SNG-433 — THE CLASH TEMPLATES. Authored at `b197b719` and, like the pools above, in no manifest: the
     // engine kept saying "withdraws to lick their wounds" while the words Erik asked for sat on disk. In
     // THIS array beside the name that receives it, for the reason the `economy` comment gives.
-    loadRule("news_templates", null)
+    loadRule("news_templates", null),
+    // SNG-435 §C1 — WHICH `shape` VALUES ARE TAXONOMY. Measured: 376 of 376 abilities carry a
+    // single-word shape, so the prompt builder has been drawing every craft from a category word. The list
+    // is CONTENT because adding a word to it changes which abilities draw their picture from narrationHints.
+    loadRule("visual_vocabulary", null)
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -297,6 +301,7 @@ export async function loadContent() {
   // SNG-433: the sentences a fight is reported in. Merged in the same breath as the load — a rule bag that
   // nothing lifts onto `rules` is the reader-with-no-writer failure one layer up, twice over on this file.
   if (newsTemplatesRule?.templates) rules.newsTemplates = newsTemplatesRule;
+  if (visualVocabRule?.categoryShapes) rules.visualVocabulary = visualVocabRule;   // SNG-435 §C1
   // ⛔ CCODE-195: THE SEASON CALENDAR. It was two engine constants, so the world's own calendar could not be
   // turned by the people who own the world — and at 45 days a season took ~600 turns of play, which is why Erik
   // had never seen one change. Installed here, from the file that already documents the two clocks.
@@ -595,6 +600,18 @@ export async function loadContent() {
     console.log(`[rules] martial: ${merged}/${Object.keys(derived).length} baseline+form abilities merged into the catalog`);
   }
 
+  // ⛔ SNG-435 §C3 — A SILENT FALLBACK IS THE BUG. An ability whose tradition has no aesthetics entry
+  // is rendered in the HOUSE palette — muted earth tones with teal and gold — and nothing says so. Erik hit
+  // it as "a searing white-light beam in muted earth tones": `radiant_folk` is not among the 26 authored
+  // traditions. Said out loud at load, like the titles report, because the picture still draws and the
+  // only evidence otherwise is a player squinting at it.
+  {
+    const have = new Set(Object.keys(traditionAestheticsDoc?.traditions || {}));
+    const gap = new Map();
+    for (const a of Object.values(abilities)) { const t = a?.tradition || a?.powerSystem; if (t && !have.has(t)) gap.set(t, (gap.get(t) || 0) + 1); }
+    if (gap.size) console.log(`[art] ${gap.size} ability tradition(s) have NO visual aesthetic and fall back to the house palette: ` +
+      [...gap].sort((x, y) => y[1] - x[1]).map(([t, n]) => `${t} (${n})`).join(", "));
+  }
   const content = { craftMechanics, spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.

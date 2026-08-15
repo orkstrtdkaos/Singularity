@@ -87,10 +87,36 @@ export function figureLook(fig) {
  *  authored style IS the resolution the world models at that scale), and finally to a plain violence.
  *  ⚠️ `shape` and `effectTags` are what make one craft LOOK different from another, so they lead over
  *  the description, which is written for a reader rather than a painter. */
-export function powerPhrase(ability = null, killer = {}) {
+export function powerPhrase(ability = null, killer = {}, { categoryShapes = null } = {}) {
   killer = killer || {};   // a null killer reaches here only on the fallback path; never throw mid-build
   if (ability) {
-    const shape = clause(ability.shape, 40);
+    // ⛔ SNG-435 §C1 — `shape` IS A TAXONOMY FIELD, AND THE MEASUREMENT IS NOT CLOSE. Erik could not get a
+    // good Radiant Lance picture; its `shape` is `"damage"`, so this produced "Radiant Lance — damage,
+    // attack, precise". There is no picture in that. Aevi predicted it would not be the only one.
+    //
+    // ⚠️ IT IS ALL OF THEM. Measured across the shipped catalogue: **376 of 376 abilities carry a
+    // single-word `shape`** — bolster, setup, construct, reposition, guard, damage, healing, hobble,
+    // strike, reveal — 25 distinct category words and not one visual phrase among them. So the rule this
+    // function was built on ("shape and effectTags LEAD OVER the description") rested on a premise that has
+    // never been true of the content, and every ability picture in the game has been drawn from a taxonomy.
+    //
+    // ⚠️ AND THE VISUAL FIELD WAS ALREADY THERE, ON ALL 376: `narrationHints`. Radiant Lance's reads
+    // "A coherent beam of focused light — silent, precise, instantaneous. Leaves clean scorch lines."
+    // A writer with no reader, sitting beside a reader with no writer.
+    //
+    // ⛔ THE DATA SELECTS, THE CODE DEFINES (Aevi's rule, and the `_MAKER_SIGNATURES` precedent): the
+    // category words are REGISTERED in content, not blocklisted here. A shape outside that registry is
+    // taken as genuinely visual and still leads — which is what makes an authored `visualShape` work the
+    // day someone writes one.
+    const isCategory = (s) => {
+      const w = String(s || "").trim().toLowerCase();
+      if (!w) return false;
+      const set = Array.isArray(categoryShapes) ? categoryShapes : null;
+      return set ? set.some(c => String(c).toLowerCase() === w) : false;
+    };
+    const shape = isCategory(ability.shape) ? "" : clause(ability.shape, 40);
+    const hint = isCategory(ability.shape) ? clause(ability.narrationHints, CAP.power) : "";
+    if (hint) return smartClamp(`${ability.name} — ${hint}`, CAP.power);
     const tags = (ability.effectTags || []).slice(0, 2).join(", ");
     // ⛔ CCODE-189 — THE DESCRIPTION ONLY WHEN THERE IS NO SHAPE. This file's own note says shape and
     // effectTags "LEAD OVER the description, which is written for a reader rather than a painter" — and then
@@ -132,7 +158,8 @@ const OUTCOME_FRAME = {
  *  `{ victim, killer, ability, place, depth }`; killer null → the single-figure fallback (§4: "not every
  *  death is a killing", and the world has no illness, so the real fallback is a death with no named
  *  killer). Returns { prompt, kind } — kind is "battle" or "death" so the caller can size it. PURE. */
-export function buildBattlePrompt({ victim = {}, killer = null, ability = null, place = "", depth = 0, outcome = "killed" } = {}) {
+export function buildBattlePrompt({ victim = {}, killer = null, ability = null, place = "", depth = 0, outcome = "killed",
+                                   categoryShapes = null } = {}) {   // SNG-435 §C1: which shapes are taxonomy, from content
   const v = figureLook(victim);
   const where = clause(place, CAP.place);
   // §4 FALLBACK — one figure. An authored deathImagePrompt is a whole scene already; do not compose over it.
@@ -142,7 +169,7 @@ export function buildBattlePrompt({ victim = {}, killer = null, ability = null, 
     return { kind: "death", subjects: 1, prompt: smartClamp(`${body}${where ? `, at ${where}` : ""}`, CAP.whole) };
   }
   const k = figureLook(killer);
-  const power = powerPhrase(ability, killer);
+  const power = powerPhrase(ability, killer, { categoryShapes });
   // ⚠️ DO NOT SAY THE MOTION TWICE. With no ability, `powerPhrase` IS the killer's fightingStyle — so
   // repeating it as their verb-phrase put the identical clause in the prompt twice, which is the join
   // failure this file exists to replace, reappearing inside the replacement.

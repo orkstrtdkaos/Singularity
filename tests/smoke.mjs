@@ -16380,6 +16380,76 @@ await (async () => {
   }
 }
 
+// ---- SNG-435 §C: the shape was a taxonomy, and the picture was already authored ------------------
+// ⛔ ERIK: "I have been having a hard time getting a good Radiant Lance skill image." Its `shape` is
+// "damage", and `powerPhrase` prefers shape over description on the stated ground that shape is what makes
+// one craft LOOK different from another — so it produced "Radiant Lance — damage, attack, precise".
+// ⚠️ AEVI PREDICTED IT WOULD NOT BE THE ONLY ONE. It is ALL of them.
+{
+  const { loadContentHeadless: lchC } = await import("./headless_content.mjs");
+  const CC = await lchC();
+  const BP = await import("../engine/battleprompt.js");
+  const cats = CC.rules?.visualVocabulary?.categoryShapes || null;
+  const abilities = Object.values(CC.abilities || {});
+  // 1 · THE PREMISE, MEASURED. If a single ability ever carries a genuinely visual shape this stops being a
+  // blanket rule and becomes a per-ability one — so the number is the gate, not a sentence about it.
+  {
+    const shaped = abilities.filter(a => a.shape);
+    const oneWord = shaped.filter(a => !/\s/.test(String(a.shape).trim()));
+    const hinted = shaped.filter(a => a.narrationHints);
+    console.log(`      shapes: ${oneWord.length}/${shaped.length} are single-word category words; ${hinted.length} carry narrationHints`);
+    check(`435 §C1 THE PREMISE: every authored shape is a category word (${oneWord.length}/${shaped.length}), and every ability has a visual field to fall back to`,
+      shaped.length > 300 && oneWord.length === shaped.length && hinted.length === shaped.length,
+      "if a visual shape ever appears, the blanket registry is the wrong shape of fix");
+  }
+  // 2 · ⛔ REGISTERED, NOT BLOCKLISTED. Aevi's rule and the `_MAKER_SIGNATURES` precedent: the data selects,
+  // the code defines. Every category word the catalogue uses must be in content, or the ability it belongs
+  // to silently goes back to drawing its picture from a taxonomy.
+  {
+    const used = new Set(abilities.map(a => String(a.shape || "").trim().toLowerCase()).filter(Boolean));
+    const known = new Set((cats || []).map(c => String(c).toLowerCase()));
+    const unregistered = [...used].filter(w => !known.has(w));
+    check(`435 §C1: every shape the catalogue uses is REGISTERED in content (${known.size} words)`,
+      !!cats && cats.length > 20 && unregistered.length === 0, `unregistered: ${unregistered.join(", ")}`);
+  }
+  // 3 · AND THE PICTURE CHANGES. The behaviour, on Erik's own ability, through the real registry.
+  {
+    const rl = abilities.find(a => /radiant lance/i.test(a.name || ""));
+    const before = BP.powerPhrase(rl, {});
+    const after = BP.powerPhrase(rl, {}, { categoryShapes: cats });
+    check("435 §C1: Radiant Lance draws from its narrationHints, not from \"damage, attack, precise\"",
+      !!rl && /damage/.test(before) && !/damage/.test(after) && /beam of focused light/i.test(after),
+      `${before}  →  ${after}`);
+    // ⚠️ AND A GENUINELY VISUAL SHAPE STILL LEADS. The registry is a list of taxonomy words, not a switch
+    // that turns shape off — an authored `shape: "a cut-thread motion that ends rather than wounds"` must
+    // still win, or this fix quietly forbids the field it is making room for.
+    const visual = { name: "The Cut Thread", shape: "a cut-thread motion that ends rather than wounds", effectTags: ["sever"], narrationHints: "unused here" };
+    check("435 §C1: a shape OUTSIDE the registry is taken as visual and still leads",
+      /cut-thread motion/.test(BP.powerPhrase(visual, {}, { categoryShapes: cats })), BP.powerPhrase(visual, {}, { categoryShapes: cats }));
+  }
+  // 4 · THE WIRING, end to end: the builder takes the registry and the app hands it over.
+  {
+    const appC = readFileSync(join(root, "app.js"), "utf8");
+    const bpC = readFileSync(join(root, "engine/battleprompt.js"), "utf8");
+    check("435 §C1: the registry reaches the builder from CONTENT, not from a constant in engine source",
+      /categoryShapes: CONTENT\.rules\?\.visualVocabulary\?\.categoryShapes/.test(appC)
+      && /powerPhrase\(ability, killer, \{ categoryShapes \}\)/.test(bpC)
+      && !/const CATEGORY_SHAPES\s*=/.test(bpC), "a hardcoded list here would be the blocklist Aevi ruled out");
+  }
+  // 5 · ⛔ §C3 — THE SILENT FALLBACK IS THE BUG. An ability whose tradition has no aesthetic is drawn in
+  // the house palette and nothing says so; Erik saw it as a searing white beam in muted earth tones. The
+  // CONTENT gap is Aevi's to author — what is gated is that it can never again be silent.
+  {
+    const stateC = readFileSync(join(root, "engine/state.js"), "utf8");
+    const have = new Set(Object.keys(CC.traditionVisualAesthetics || {}));
+    const gap = new Set(abilities.map(a => a.tradition || a.powerSystem).filter(t => t && !have.has(t)));
+    console.log(`      aesthetics: ${gap.size} ability tradition(s) with no palette — ${[...gap].join(", ")}`);
+    check("435 §C3: a tradition with no visual aesthetic is REPORTED at load, never silently housed-paletted",
+      /have NO visual aesthetic and fall back to the house palette/.test(stateC)
+      && /const have = new Set\(Object\.keys\(traditionAestheticsDoc/.test(stateC));
+  }
+}
+
 // ---- SNG-435 §A: a 200 is not proof of an image --------------------------------------------------
 // ⛔ AEVI MEASURED IT: a rate-limited Pollinations request answers HTTP 200 with a ZERO-BYTE body, and
 // Cloudflare caches that under the canonical URL as `immutable, max-age=31536000` — one year — carrying

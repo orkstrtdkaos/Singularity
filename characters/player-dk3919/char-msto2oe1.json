@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 67,
+  "xp": 69,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -63,13 +63,13 @@
   ],
   "alignment": {
     "falsehood_truth": 0.07601078124999999,
-    "violence_peace": -0.004875000000000001
+    "violence_peace": -0.009631250000000001
   },
   "attunement": 1,
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 24,
+  "energy": 19,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -108,7 +108,168 @@
     "Rhinofire assembled the shape of what lies north from strangers at the Marchward: a duelist's field report of a blackened hand and a listening face, an exile's confirmation of a pre-Transition authentication site gone silent eight months ago, a local's warning of high water and something moving the treeline at dusk, and a sealed note whose author — Eredan finally admitted — was part of the survey team, went north and came back, and chose silence deliberately. Marrow read the treeline's watcher as waiting on a person, not an event. The doorway gave everything it had. The north road waits."
   ],
   "currentLocationId": "the_marchward",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_marchward",
+    "turns": [
+      {
+        "player": "Head out — take the north road toward the second ford",
+        "summary": "Rhinofire sets out north and finds the road flooded before reaching the second ford — the log crossing east or a different approach is needed.",
+        "narration": "You shoulder the Traveler's Pack and step out of the hostel into the morning. The air has that particular early-spring quality — cold enough that your breath shows, warm enough to remember it won't always be — and the north road opens ahead of you, pale mud tracked with boot-prints going in both directions.\n\nThe trouble announces itself quietly: twenty minutes out, where the road dips to follow the streambed, the path simply ends in brown water. Not the ford — you haven't reached the ford yet — but a low section that has swallowed itself in snowmelt runoff, knee-deep at a guess, and the current is doing something wrong at the edges, cutting sideways. The local with the bucket warned you the second ford was up. He said nothing about this one.\n\nMarrow drops from nowhere in particular and lands on a post at the water's edge. He cocks one eye at the crossing, then at you. A silence of the weighted variety. You scan left and right: upstream, the bank is a tangle of exposed root and recent collapse. Downstream, there may be a narrowing — hard to say from here. The log crossing the local mentioned is east, back the way you came and then some.\n\nYou are not crossing here. The question is what you do about that."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You shoulder the Traveler's Pack and step out of the hostel into the morning. The air has that particular early-spring quality — cold enough that your breath shows, warm enough to remember it won't always be — and the north road opens ahead of you, pale mud tracked with boot-prints going in both directions.\n\nThe trouble announces itself quietly: twenty minutes out, where the road dips to follow the streambed, the path simply ends in brown water. Not the ford — you haven't reached the ford yet — but a low section that has swallowed itself in snowmelt runoff, knee-deep at a guess, and the current is doing something wrong at the edges, cutting sideways. The local with the bucket warned you the second ford was up. He said nothing about this one.\n\nMarrow drops from nowhere in particular and lands on a post at the water's edge. He cocks one eye at the crossing, then at you. A silence of the weighted variety. You scan left and right: upstream, the bank is a tangle of exposed root and recent collapse. Downstream, there may be a narrowing — hard to say from here. The log crossing the local mentioned is east, back the way you came and then some.\n\nYou are not crossing here. The question is what you do about that.",
+      "sceneSummary": "Rhinofire sets out north and finds the road flooded before reaching the second ford — the log crossing east or a different approach is needed.",
+      "choices": [
+        {
+          "label": "Backtrack east and find the log crossing the local described",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "violence_peace": 0.1
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Scout the bank downstream — there may be a narrowing you can cross or a branch you can fell",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "violence_peace": 0
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Trust Marrow — ask the bird plainly if something is ending up ahead and whether now is the time to press it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.35
+          },
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "marrow-companion",
+          "name": "Marrow",
+          "role": "Companion — Ashwarden-touched carrion bird",
+          "gender": "unknown",
+          "pronouns": "they/them",
+          "note": "Dropped to the post at the flooded crossing and watched the water with the particular unhurriedness of something that has decided this is not the ending. The timing of its silence read as a comment.",
+          "statusNote": "Perched at the flooded section of the north road, watching the current.",
+          "status": "active"
+        }
+      ],
+      "scene": {
+        "setting": "Outdoors, on the north road out of the Marchward, at a flooded low section where snowmelt runoff has drowned the path — knee-deep brown water, sideways current at the edges. Morning light, cold, breath visible. A tangle of collapsed bank upstream, possible narrowing downstream. A wooden post at the water's edge.",
+        "npcsPresent": [
+          {
+            "name": "Marrow",
+            "state": "perched on the post at the water's edge, one eye on the current, one eye on you — the weighted silence of an opinion held back"
+          }
+        ],
+        "objects": [
+          "Flooded road section, knee-deep",
+          "Exposed root-tangle and collapsed bank upstream",
+          "Possible narrowing downstream, uncertain from here",
+          "Wooden post at water's edge"
+        ],
+        "threads": [
+          "The log crossing east is the known safe route — costs time to backtrack",
+          "The downstream narrowing is uncertain — worth scouting or not",
+          "Marrow has an opinion about this crossing and has not shared it"
+        ]
+      },
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "Twenty minutes out from the hostel before the road ended in floodwater"
+      },
+      "codexUpdates": [
+        {
+          "topic": "water-crisis",
+          "label": "The Water Crisis",
+          "kind": "event",
+          "fact": "The north road out of the Marchward has a flooded section short of the second ford — snowmelt runoff, knee-deep, current cutting sideways at the edges. The log crossing east is the safe alternative.",
+          "links": [
+            "riven-marchward",
+            "marchward-local-muddyboots"
+          ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The low section of the north road, twenty minutes out, is flooded by snowmelt runoff — knee-deep, sideways current, impassable without a crossing. The log crossing east is the known alternative.",
+          "subPlace": {
+            "name": "Flooded North Road Section",
+            "parent": "the_marchward",
+            "note": "A low dip in the north road drowned in snowmelt — the path to the second ford runs through here; find the log crossing east or a downstream narrowing.",
+            "visited": true
+          }
+        }
+      ],
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Outdoors, on the north road out of the Marchward, at a flooded low section where snowmelt runoff has drowned the path — knee-deep brown water, sideways current at the edges. Morning light, cold, breath visible. A tangle of collapsed bank upstream, possible narrowing downstream. A wooden post at the water's edge.",
+      "npcsPresent": [
+        {
+          "name": "Marrow",
+          "state": "perched on the post at the water's edge, one eye on the current, one eye on you — the weighted silence of an opinion hel"
+        }
+      ],
+      "objects": [
+        "Flooded road section, knee-deep",
+        "Exposed root-tangle and collapsed bank upstream",
+        "Possible narrowing downstream, uncertain from here",
+        "Wooden post at water's edge"
+      ],
+      "threads": [
+        "The log crossing east is the known safe route — costs time to backtrack",
+        "The downstream narrowing is uncertain — worth scouting or not",
+        "Marrow has an opinion about this crossing and has not shared it"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -297,7 +458,9 @@
   "placeMemory": {
     "the_marchward": {
       "visits": 1,
-      "notes": [],
+      "notes": [
+        "[d1] The low section of the north road, twenty minutes out, is flooded by snowmelt runoff — knee-deep, sideways current, impassable without a crossing. The log crossing east is the known alternative."
+      ],
       "flags": {},
       "vectorsKnown": [],
       "subPlaces": {
@@ -307,6 +470,13 @@
           "day": 1,
           "visited": true,
           "note": "A sealed note with a plain wax thumb-press and no name sits here, left by a lone traveler from the northeast trail."
+        },
+        "flooded-north-road-section": {
+          "name": "Flooded North Road Section",
+          "parentId": "the_marchward",
+          "day": 1,
+          "visited": true,
+          "note": "A low dip in the north road drowned in snowmelt — the path to the second ford runs through here; find the log crossing east or a downstream narrowing."
         }
       }
     }
@@ -406,7 +576,7 @@
         "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -469,14 +639,16 @@
           "[d1] A lone traveler came down the Disputed Zone cutoff two or three days before Rhinofire's arrival — hooded, valley coin, asking specifically about the north road into the Zone. He left before morning and left a sealed unmarked note at the hostel.",
           "[d1] An unmarked note left at the Marchward hostel warns: the authentication site is not broken — it is waiting. It should not be told the water's composition, or it will attempt to complete the purification protocol. The sequence it wants is one the Council burned; it cannot be given. Telling it…",
           "[d1] Eredan's theory for the structure: say nothing, let it run its authentication, it waits for the burned sequence and eventually stops waiting. No one has stayed long enough to verify whether the theory holds.",
-          "[d1] The second ford north of the Marchward is running high on snowmelt — cross early or take the log crossing east. Something moves silent in the treeline at dusk, tracing the ford, noticed by locals in the last few nights."
+          "[d1] The second ford north of the Marchward is running high on snowmelt — cross early or take the log crossing east. Something moves silent in the treeline at dusk, tracing the ford, noticed by locals in the last few nights.",
+          "[d1] The north road out of the Marchward has a flooded section short of the second ford — snowmelt runoff, knee-deep, current cutting sideways at the edges. The log crossing east is the safe alternative."
         ],
         "links": [
           "riven-marchward",
           "what-wakes-beneath",
           "redline-duelist-marchward",
           "stillhold-exile-marchward",
-          "marchward-note-author"
+          "marchward-note-author",
+          "marchward-local-muddyboots"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -597,20 +769,19 @@
     }
   },
   "tendencies": {
-    "strategic": 12.40000843818433,
-    "amorous": 10.143855761741593,
-    "cautious": 8.168973494301387,
-    "cerebral": 5.966336952767827,
-    "social": 4.792861626081794,
-    "leadership": 0.7569213803350267
+    "strategic": 12.09000822722972,
+    "amorous": 9.890259367698052,
+    "cautious": 7.964749156943852,
+    "cerebral": 5.817178528948632,
+    "social": 4.673040085429749,
+    "leadership": 0.7379983458266509
   },
   "aptitudes": [
     "strategist",
     "charmer",
-    "devoted_lover",
     "ardent"
   ],
-  "actionCount": 18,
+  "actionCount": 19,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -786,8 +957,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786801992145,
-  "rev": 52,
+  "updatedAt": 1786802077260,
+  "rev": 53,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -811,7 +982,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 19
+    "riven_marches": 20
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -827,10 +998,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-15T13:45:38.317Z",
-      "lastAt": "2026-08-15T13:53:12.137Z",
+      "lastAt": "2026-08-15T13:54:37.238Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [],
@@ -949,20 +1120,20 @@
     "ask": 1,
     "calm": 1,
     "lead": 1,
-    "travel": 1
+    "travel": 2
   },
   "_opEmitted": {
-    "sceneSummary": 17,
-    "choices": 17,
-    "scene": 17,
-    "npcUpdates": 17,
-    "codexUpdates": 15,
-    "timeOps": 16,
-    "characterDeltas": 6,
+    "sceneSummary": 18,
+    "choices": 18,
+    "scene": 18,
+    "npcUpdates": 18,
+    "codexUpdates": 16,
+    "timeOps": 17,
+    "characterDeltas": 7,
     "offer": 2,
-    "sceneEnded": 5,
-    "placeUpdates": 1
+    "sceneEnded": 6,
+    "placeUpdates": 2
   },
-  "_opTurns": 17,
+  "_opTurns": 18,
   "_intentAsked": null
 }

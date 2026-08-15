@@ -1559,7 +1559,7 @@
     "sustain"
    ],
    "narrationHints": "You strike the chord and instead of fading it HOLDS — a resonance that keeps sounding, keeping everything tuned to it steady and strong for as long as you carry the note.",
-   "description": "The Harmonic art of the chord that does not fade — a sustained resonance that holds everything attuned to it in strength and coherence, a field of steadiness sung rather than built.",
+   "description": "Sing a chord that will not fade, and everything attuned to it holds steady — strength and coherence kept for as long as you carry the note. The Harmonic art of the sustained resonance.",
    "notFor": "It empowers and steadies but does not strike; a chord holds a thing together, it does not tear one apart. And you must carry the note the whole while — stop singing and the chord, and everything it held, lets go at once.",
    "tree": [
     {
@@ -1694,7 +1694,8 @@
      "note": "⚠️ THE VESSEL THAT CANNOT BE STOLEN — a chord is not an object. It is carried in the carrying, so an enemy who wants it must make you stop, not take a thing off you. That asymmetry with the Well is the point."
     },
     "note": "⚠️ THE SECOND VESSEL, and it proves the pattern travels: one instance is a craft, two is a mechanic."
-   }
+   },
+   "_descriptionWas": "The Harmonic art of the chord that does not fade — a sustained resonance that holds everything attuned to it in strength and coherence, a field of steadiness sung rather than built."
   },
   {
    "schemaVersion": 1,
@@ -1865,5 +1866,6 @@
    "plainly": "A travel and explore action. You ride a note the moving air is already holding, which makes it fast in wind and completely unavailable in still air or sealed places. It is audible for a mile, so every leg arrives announced by sound. At rank 2 it gets faster the worse the weather, but you travel where the wind is going unless you pay extra to fight it."
   }
  ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
 }

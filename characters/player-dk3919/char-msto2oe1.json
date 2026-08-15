@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 36,
+  "xp": 39,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -68,7 +68,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 62,
+  "energy": 57,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -118,157 +118,163 @@
         "player": "Take the note and break the seal — read what was left.",
         "summary": "Rhinofire breaks the seal on the unmarked note: a warning about the authentication site — it is waiting, not broken — and a single line about the wrong stag north of the second ford.",
         "narration": "The hostel-keeper slides the note across the counter without being asked — she's been waiting to be rid of it. The wax breaks clean under your thumb, plain, no sigil. Just a thumb.\n\nInside: six lines in a cramped, careful hand. The authentication site is not broken — it is waiting. Do not speak your name to it. Do not let it hear the water's composition — it will try to complete the protocol. If you are going anyway: the sequence it wants is the one the Council burned. It cannot be given. Tell it nothing and leave. The man who sent the survey crew back was not afraid. He was satisfied. Below that, a single line with no context: The wrong stag walks the treeline north of the second ford. Go around. No signature. The hand is educated — letters shaped with discipline — and the note smells faintly of something mineral, cold. Like stone after rain.\n\nMarrow drops from the rafter onto the counter between you and the keeper, which she accepts with the equanimity of someone who has dealt with worse. The bird looks at the note. Then at you. Then at the treeline through the small east window, as if it already knows exactly which ford the second one is."
+      },
+      {
+        "player": "Show the note to Eredan — he named the structure; he may recognize the hand or the warning's source.",
+        "summary": "Eredan reads the note without touching it, confirms the warning is accurate, and reveals that whoever wrote it has been north of the second ford — and recently.",
+        "narration": "You cross the room and set the note on the table beside Eredan's bowl without a word. Just the paper, open, where he can read it.\n\nHe doesn't look up at first. Finishes chewing, puts his spoon down, then glances at it the way you'd glance at something you already know is going to cost you. His eyes move across the six lines slowly — too slowly for a man reading; the pace of someone making sure they haven't missed a word they hoped wasn't there.\n\nWhen he's done he sits back. Doesn't touch the note.\n\n\"I don't know the hand,\" he says, and there's enough flatness in it that you believe him. \"But the warning's right. Everything in it is right.\" He's quiet for a moment. \"The wrong stag. That's not something people write down. That's something you only know if you've been north of the second ford.\" He looks up at you then — the first time he's met your eyes since his refusal. \"Whoever wrote this has been there. Recently.\"\n\nHe pushes the note back toward you. Not away from him — toward you, specifically. His hands have stopped shaking for the first time since you sat down. \"They're right about the sequence,\" he adds, quieter. \"The Council burned it. There's no version of giving it to the structure that ends well. You go there, you say nothing. You let it run its authentication, it waits for what won't come, and eventually it stops waiting.\" A pause. \"That's the theory. No one's stayed long enough to find out if it works.\""
       }
     ],
     "lastTurn": {
-      "narration": "The hostel-keeper slides the note across the counter without being asked — she's been waiting to be rid of it. The wax breaks clean under your thumb, plain, no sigil. Just a thumb.\n\nInside: six lines in a cramped, careful hand. The authentication site is not broken — it is waiting. Do not speak your name to it. Do not let it hear the water's composition — it will try to complete the protocol. If you are going anyway: the sequence it wants is the one the Council burned. It cannot be given. Tell it nothing and leave. The man who sent the survey crew back was not afraid. He was satisfied. Below that, a single line with no context: The wrong stag walks the treeline north of the second ford. Go around. No signature. The hand is educated — letters shaped with discipline — and the note smells faintly of something mineral, cold. Like stone after rain.\n\nMarrow drops from the rafter onto the counter between you and the keeper, which she accepts with the equanimity of someone who has dealt with worse. The bird looks at the note. Then at you. Then at the treeline through the small east window, as if it already knows exactly which ford the second one is.",
-      "sceneSummary": "Rhinofire breaks the seal on the unmarked note: a warning about the authentication site — it is waiting, not broken — and a single line about the wrong stag north of the second ford.",
+      "narration": "You cross the room and set the note on the table beside Eredan's bowl without a word. Just the paper, open, where he can read it.\n\nHe doesn't look up at first. Finishes chewing, puts his spoon down, then glances at it the way you'd glance at something you already know is going to cost you. His eyes move across the six lines slowly — too slowly for a man reading; the pace of someone making sure they haven't missed a word they hoped wasn't there.\n\nWhen he's done he sits back. Doesn't touch the note.\n\n\"I don't know the hand,\" he says, and there's enough flatness in it that you believe him. \"But the warning's right. Everything in it is right.\" He's quiet for a moment. \"The wrong stag. That's not something people write down. That's something you only know if you've been north of the second ford.\" He looks up at you then — the first time he's met your eyes since his refusal. \"Whoever wrote this has been there. Recently.\"\n\nHe pushes the note back toward you. Not away from him — toward you, specifically. His hands have stopped shaking for the first time since you sat down. \"They're right about the sequence,\" he adds, quieter. \"The Council burned it. There's no version of giving it to the structure that ends well. You go there, you say nothing. You let it run its authentication, it waits for what won't come, and eventually it stops waiting.\" A pause. \"That's the theory. No one's stayed long enough to find out if it works.\"",
+      "sceneSummary": "Eredan reads the note without touching it, confirms the warning is accurate, and reveals that whoever wrote it has been north of the second ford — and recently.",
       "choices": [
         {
-          "label": "Show the note to Eredan — he named the structure; he may recognize the hand or the warning's source.",
+          "label": "Ask Eredan who has been north of the second ford recently — someone connected to the Stillhold, or someone outside it",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": "easy",
-          "trivial": false,
+          "difficulty": "normal",
           "intentTags": [
-            "negotiate",
-            "study"
-          ]
+            "persuade",
+            "negotiate"
+          ],
+          "trivial": false
         },
         {
-          "label": "Ask the keeper directly — did the man say anything else, anything at all, before he left?",
+          "label": "Press on the theory — 'eventually it stops waiting' is not the same as 'it is safe.' Ask what he thinks the structure actually does if someone stays too long",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "easy",
+          "intentTags": [
+            "study"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Pick up the note, thank Eredan, and let him return to his breakfast — you have what you came for; the road north is the next thing",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": "easy",
-          "trivial": false,
-          "intentTags": [
-            "negotiate"
-          ]
-        },
-        {
-          "label": "Pocket the note and head north — you have what you need; more questions cost time.",
-          "attribute": "practical",
-          "subAttribute": "wits",
           "difficulty": "very easy",
-          "trivial": true,
           "intentTags": [
             "travel"
-          ]
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside the Marchward hostel, morning light through small windows. The keeper's counter, flour-dusted. Marrow now perched on the counter itself. The trestle where Eredan sits is visible behind.",
+        "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands at Eredan's trestle, the open note on the table between them. The keeper's counter is visible behind, Marrow still perched on it.",
         "npcsPresent": [
           {
-            "name": "Hostel-keeper",
-            "state": "Standing at the counter, watching Rhinofire, cloth in hand — not prying, but present."
+            "name": "Eredan",
+            "state": "Sitting back from the table, hands still for once, looking at Rhinofire directly."
           },
           {
-            "name": "Eredan",
-            "state": "At the trestle behind, eating barley, back turned."
+            "name": "Hostel-keeper",
+            "state": "Behind the counter, not watching but present, cloth in hand."
           },
           {
             "name": "Marrow",
-            "state": "Perched on the counter between Rhinofire and the keeper, regarding the note and then the east window."
+            "state": "On the counter, angled slightly toward the trestle — as if listening."
           }
         ],
         "objects": [
-          "The opened note — six lines, no signature, mineral smell",
+          "The open note — six lines, no signature, mineral smell, pushed back toward Rhinofire",
           "The broken wax seal — plain thumb-press",
-          "The counter, flour-dusted",
-          "Eredan's bowl of barley at the trestle"
+          "Eredan's bowl of barley, spoon set down beside it",
+          "The flour-dusted counter behind"
         ],
         "threads": [
-          "Who wrote the note — the hand is educated and deliberate",
-          "What 'the man who sent the crew back was satisfied' means",
-          "The wrong stag north of the second ford",
-          "Whether to show Eredan the note",
-          "Whether to press the keeper for anything else before the road north"
+          "Who has been north of the second ford recently — Eredan's slip implies someone specific",
+          "What actually happens if someone stays at the structure past the authentication window",
+          "The wrong stag north of the second ford — encounter flagged in the note",
+          "The road north into the Disputed Zone"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "hostel-keeper",
-          "name": "Hostel-keeper",
-          "role": "Keeper of the Marchward hostel",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Passed the sealed note across the counter without being asked — relieved to have the obligation leave her hand.",
-          "statusNote": "Behind her counter at the Marchward hostel, watching Rhinofire with the note open.",
-          "relationshipDelta": 0
+          "npcId": "eredan",
+          "name": "Eredan",
+          "role": "Former Stillhold resident, now sheltering at the Marchward",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Read the note slowly and without touching it. Confirmed every warning in it is accurate. Identified the wrong stag as knowledge only someone who has been north of the second ford would have — implying the author went there recently. Offered the theory: let the structure run its authentication, it waits for the burned sequence, eventually stops waiting. Admitted no one has stayed to verify. His hands stopped shaking when he pushed the note back.",
+          "learned": [
+            "The note's warning is accurate — confirmed without reservation",
+            "The wrong stag is not common knowledge — only someone who has been north of the second ford recently would know to write it down",
+            "The theory for the structure: say nothing, let it run, it waits for the burned sequence and eventually stops; no one has verified this by staying",
+            "There is no version of giving the structure the sequence that ends well"
+          ],
+          "skillsObserved": [
+            "institutional knowledge of the Stillhold and the Council",
+            "careful, deliberate reading"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At the trestle, hands still, meeting Rhinofire's eyes for the first time since his refusal."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "water-crisis",
-          "label": "The Water Crisis",
-          "kind": "event",
-          "fact": "An unmarked note left at the Marchward hostel warns: the authentication site is not broken — it is waiting. It should not be told the water's composition, or it will attempt to complete the purification protocol. The sequence it wants is one the Council burned; it cannot be given. Telling it nothing and leaving is the recommended approach.",
-          "links": [
-            "what-wakes-beneath",
-            "stillhold-exile-marchward",
-            "riven-marchward"
-          ]
-        },
-        {
-          "topic": "what-wakes-beneath",
-          "label": "What Wakes Beneath",
+          "topic": "marchward-note-author",
+          "label": "The Note's Author",
           "kind": "mystery",
-          "fact": "The note's author states the man who sent the survey crew back was not afraid — he was satisfied. This reframes the blackened hand and the listening face: not a retreat from danger but a completion of something. Someone may have intended what happened to the surveyor.",
+          "fact": "Eredan confirmed: whoever wrote the note has been north of the second ford, and recently — the wrong stag is not something people write down without firsthand knowledge.",
           "links": [
             "water-crisis",
+            "riven-marchward",
+            "what-wakes-beneath",
             "stillhold-exile-marchward"
           ]
         },
         {
-          "topic": "marchward-note-author",
-          "label": "The Note's Author",
-          "kind": "mystery",
-          "fact": "The note is written in an educated, disciplined hand — smells of cold stone and mineral water. No name, no mark. Left two to three days before Rhinofire arrived. Knew the structure's nature, knew the burned sequence, and knew the name of a specific beast north of the second ford: the wrong stag.",
+          "topic": "water-crisis",
+          "label": "The Water Crisis",
+          "kind": "event",
+          "entityId": "eredan",
+          "fact": "Eredan's theory for the structure: say nothing, let it run its authentication, it waits for the burned sequence and eventually stops waiting. No one has stayed long enough to verify whether the theory holds.",
           "links": [
-            "water-crisis",
-            "riven-marchward",
-            "what-wakes-beneath"
+            "marchward-note-author",
+            "what-wakes-beneath",
+            "riven-marchward"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quick reading of the note at the counter."
+        "why": "A brief exchange at the trestle — a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "Inside the Marchward hostel, morning light through small windows. The keeper's counter, flour-dusted. Marrow now perched on the counter itself. The trestle where Eredan sits is visible behind.",
+      "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands at Eredan's trestle, the open note on the table between them. The keeper's counter is visible behind, Marrow still perched on it.",
       "npcsPresent": [
         {
-          "name": "Hostel-keeper",
-          "state": "Standing at the counter, watching Rhinofire, cloth in hand — not prying, but present."
+          "name": "Eredan",
+          "state": "Sitting back from the table, hands still for once, looking at Rhinofire directly."
         },
         {
-          "name": "Eredan",
-          "state": "At the trestle behind, eating barley, back turned."
+          "name": "Hostel-keeper",
+          "state": "Behind the counter, not watching but present, cloth in hand."
         },
         {
           "name": "Marrow",
-          "state": "Perched on the counter between Rhinofire and the keeper, regarding the note and then the east window."
+          "state": "On the counter, angled slightly toward the trestle — as if listening."
         }
       ],
       "objects": [
-        "The opened note — six lines, no signature, mineral smell",
+        "The open note — six lines, no signature, mineral smell, pushed back toward Rhino",
         "The broken wax seal — plain thumb-press",
-        "The counter, flour-dusted",
-        "Eredan's bowl of barley at the trestle"
+        "Eredan's bowl of barley, spoon set down beside it",
+        "The flour-dusted counter behind"
       ],
       "threads": [
-        "Who wrote the note — the hand is educated and deliberate",
-        "What 'the man who sent the crew back was satisfied' means",
-        "The wrong stag north of the second ford",
-        "Whether to show Eredan the note",
-        "Whether to press the keeper for anything else before the road north"
+        "Who has been north of the second ford recently — Eredan's slip implies someone specific",
+        "What actually happens if someone stays at the structure past the authentication window",
+        "The wrong stag north of the second ford — encounter flagged in the note",
+        "The road north into the Disputed Zone"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
@@ -336,7 +342,7 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d1] Volunteered, quietly, that the Council lost contact with the upstream structure — it is there but no longer answers. Said it like a weight set down.",
         "[d1] Read: guilt as much as fear. His confession was a weight set down, not a report delivered. He is afraid of what he knows and what knowing it makes him part of — not of Rhinofire.",
@@ -346,25 +352,27 @@
         "[d1] Their name is revealed: Eredan (was known as \"Stillhold exile\")",
         "[d1] Named himself — Eredan, no surname. Confirmed the structure is a pre-Transition authentication site that held the Council's backup purification sequence. Went quiet eight months ago — present but not answering. Final words: 'Be careful what you let it hear.'",
         "[d1] Asked directly to come north to the structure. Refused with a single word and drew the conversation closed. Now eating his barley — the first time he's touched it.",
-        "[d1] Asked what Rhinofire should not let the structure hear. Refused with the same words as before — 'I've said what I can say' — but the refusal landed differently: not bureaucratic, something decided. He is protecting himself, not just information."
+        "[d1] Asked what Rhinofire should not let the structure hear. Refused with the same words as before — 'I've said what I can say' — but the refusal landed differently: not bureaucratic, something decided. He is protecting himself, not just information.",
+        "[d1] Read the note slowly and without touching it. Confirmed every warning in it is accurate. Identified the wrong stag as knowledge only someone who has been north of the second ford would have — implying the author went there recently. Offered the theory: let the structure run its authentication, it…"
       ],
       "knownFacts": [
-        "He spoke like a man confessing, not reporting — the lost structure carries personal guilt for him, not merely institutional knowledge.",
-        "Distinguishes between what he knows and what he can say — the rest is sealed, not forgotten",
-        "The listening expression on the burned surveyor may mean something to him specifically — his stillness after the duelist described it is pointed",
         "The upstream structure is a pre-Transition authentication site",
         "It held the sequence for the Council's secondary (backup) purification system — not the main flow",
         "It stopped responding eight months ago — not destroyed, not sealed, still present",
         "He will not go to the upstream structure — the refusal is final, not reluctant",
-        "His limit is not about what he knows — it is about what he is still willing to be responsible for. The last question reached that line."
+        "His limit is not about what he knows — it is about what he is still willing to be responsible for. The last question reached that line.",
+        "The note's warning is accurate — confirmed without reservation",
+        "The wrong stag is not common knowledge — only someone who has been north of the second ford recently would know to write it down",
+        "The theory for the structure: say nothing, let it run, it waits for the burned sequence and eventually stops; no one has verified this by staying"
       ],
       "skillsObserved": [
-        "institutional knowledge of the Stillhold and the Council"
+        "institutional knowledge of the Stillhold and the Council",
+        "careful, deliberate reading"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Sitting at the trestle, eating barley, conversation closed. Will not speak further on the structure.",
+      "statusNote": "At the trestle, hands still, meeting Rhinofire's eyes for the first time since his refusal.",
       "domains": {
         "primary": "stillhold"
       },
@@ -373,7 +381,7 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "met": 8,
+      "met": 9,
       "aliases": [
         "Stillhold exile"
       ],
@@ -512,24 +520,8 @@
     "lastSharedReadAt": "2026-08-15T01:01:14.781Z",
     "lastTickWorldDay": 46,
     "lastCanonWorldDay": 46,
-    "pressureQueue": [
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
-        "subjectId": "beast_mire_gulper",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "A a mire-gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_mire_gulper",
-          "name": "a mire-gulper"
-        },
-        "addedDay": 1,
-        "locationId": "the_marchward"
-      }
-    ],
-    "turnsSinceOffer": 3,
+    "pressureQueue": [],
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -586,17 +578,20 @@
           "[d1] The affected surveyor from the Disputed Zone retreat had fingers gone black from the second knuckle — not burned, not frostbitten, but still actively changing. He had his hand pressed flat against his sternum, not his side, and wore a listening expression — as if hearing something the others could…",
           "[d1] The upstream structure is a pre-Transition authentication site that held the Council's secondary (backup) purification sequence. It went silent eight months ago — not destroyed, not sealed, still present and 'not answering.' Eredan's warning: be careful what you let it hear.",
           "[d1] A lone traveler came down the Disputed Zone cutoff two or three days before Rhinofire's arrival — hooded, valley coin, asking specifically about the north road into the Zone. He left before morning and left a sealed unmarked note at the hostel.",
-          "[d1] An unmarked note left at the Marchward hostel warns: the authentication site is not broken — it is waiting. It should not be told the water's composition, or it will attempt to complete the purification protocol. The sequence it wants is one the Council burned; it cannot be given. Telling it…"
+          "[d1] An unmarked note left at the Marchward hostel warns: the authentication site is not broken — it is waiting. It should not be told the water's composition, or it will attempt to complete the purification protocol. The sequence it wants is one the Council burned; it cannot be given. Telling it…",
+          "[d1] Eredan's theory for the structure: say nothing, let it run its authentication, it waits for the burned sequence and eventually stops waiting. No one has stayed long enough to verify whether the theory holds."
         ],
         "links": [
           "riven-marchward",
           "what-wakes-beneath",
           "redline-duelist-marchward",
-          "stillhold-exile-marchward"
+          "stillhold-exile-marchward",
+          "marchward-note-author"
         ],
         "aliases": [],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "entityId": "eredan"
       },
       "what-wakes-beneath": {
         "id": "what-wakes-beneath",
@@ -676,12 +671,14 @@
         "label": "The Note's Author",
         "kind": "mystery",
         "facts": [
-          "[d1] The note is written in an educated, disciplined hand — smells of cold stone and mineral water. No name, no mark. Left two to three days before Rhinofire arrived. Knew the structure's nature, knew the burned sequence, and knew the name of a specific beast north of the second ford: the wrong stag."
+          "[d1] The note is written in an educated, disciplined hand — smells of cold stone and mineral water. No name, no mark. Left two to three days before Rhinofire arrived. Knew the structure's nature, knew the burned sequence, and knew the name of a specific beast north of the second ford: the wrong stag.",
+          "[d1] Eredan confirmed: whoever wrote the note has been north of the second ford, and recently — the wrong stag is not something people write down without firsthand knowledge."
         ],
         "links": [
           "water-crisis",
           "riven-marchward",
-          "what-wakes-beneath"
+          "what-wakes-beneath",
+          "stillhold-exile-marchward"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -690,12 +687,12 @@
     }
   },
   "tendencies": {
-    "strategic": 11.863520579704394,
-    "amorous": 12.421273933703002,
-    "cautious": 4.324616096455226,
-    "cerebral": 2.697747497021637,
-    "social": 3.6187638591247553,
-    "leadership": 0.9268593749999999
+    "strategic": 11.566932565211784,
+    "amorous": 12.110742085360426,
+    "cautious": 4.216500694043845,
+    "cerebral": 3.630303809596096,
+    "social": 4.528294762646636,
+    "leadership": 0.9036878906249999
   },
   "aptitudes": [
     "strategist",
@@ -703,7 +700,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 10,
+  "actionCount": 11,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -888,8 +885,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786758362106,
-  "rev": 34,
+  "updatedAt": 1786758511805,
+  "rev": 35,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -910,7 +907,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 11
+    "riven_marches": 12
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -918,10 +915,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-15T00:58:33.023Z",
-      "lastAt": "2026-08-15T01:46:02.084Z",
+      "lastAt": "2026-08-15T01:48:31.792Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 11
+      "beats": 12
     }
   ],
   "establishedFacts": [],
@@ -1013,24 +1010,24 @@
   "skillUses": {
     "scout": 2,
     "careful": 5,
-    "study": 3,
-    "negotiate": 4,
+    "study": 4,
+    "negotiate": 5,
     "ask": 1,
     "calm": 1,
     "lead": 1
   },
   "_opEmitted": {
-    "sceneSummary": 10,
-    "choices": 10,
-    "scene": 10,
-    "npcUpdates": 10,
-    "codexUpdates": 8,
-    "timeOps": 9,
+    "sceneSummary": 11,
+    "choices": 11,
+    "scene": 11,
+    "npcUpdates": 11,
+    "codexUpdates": 9,
+    "timeOps": 10,
     "characterDeltas": 3,
     "offer": 1,
     "sceneEnded": 1,
     "placeUpdates": 1
   },
-  "_opTurns": 10,
+  "_opTurns": 11,
   "_intentAsked": null
 }

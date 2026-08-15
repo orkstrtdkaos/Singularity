@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 39,
+  "xp": 44,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -62,13 +62,14 @@
     }
   ],
   "alignment": {
-    "falsehood_truth": 0.025
+    "falsehood_truth": 0.025,
+    "violence_peace": -0.0025000000000000005
   },
   "attunement": 1,
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 57,
+  "energy": 51,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -128,14 +129,19 @@
         "player": "Pick up the note, thank Eredan, and let him return to his breakfast — you have what you came for; the road north is the next thing",
         "summary": "Rhinofire took the note and thanked Eredan — the morning's two reluctant informants have given what they'll give. The road north is next.",
         "narration": "You pick up the note and fold it once along the crease it already holds, then tuck it inside your coat. The mineral smell comes with it — cold stone and something else, faint, like water that has sat in the dark a long time.\n\n\"Thank you,\" you say to Eredan, and you mean it plainly. No ceremony. He nods once — the nod of a man who has said his piece and is glad to stop saying it. His hand finds the spoon again and he turns to the barley without looking back up at you.\n\nThe hostel-keeper is already looking elsewhere, the cloth moving in slow circles on the counter. Marrow shifts on her counter-edge, settles, and watches you cross toward the door with that particular stillness it holds when something is about to begin.\n\nThe morning outside is early-spring cold — the melt has made the ground soft and the air smells of wet earth and yesterday's frost. The road north from the Marchward starts just past the waygate's neutral ground: an unpaved track that turns to mud a hundred paces in and keeps going. According to the note, the second ford is where the wrong stag walks the treeline. You haven't been there yet. The structure is beyond it."
+      },
+      {
+        "player": "Read the fight ahead — stand in the doorway and let your sense of what comes next settle before you move",
+        "summary": "Rhinofire stands in the hostel doorway and reads the road north — the wrong stag territorial and real past the second ford, the authentication structure a held breath rather than a threat, the danger there a matter of words rather than force.",
+        "narration": "You stop in the doorway — not hesitating, just standing. The morning light comes in flat and grey through the hostel's small windows, and you let the shape of the day ahead settle into you the way your training said it would: not thought, exactly, but attention finding its own level.\n\nThe Marchward is waking outside. You can hear the specific sounds of a border town in early spring: boot mud on a wooden step, a trader haggling in a language that isn't quite valley-common, the drip of snowmelt from the hostel eaves. None of it is urgent. The road north will be mud past the first fork and worse past the second — you already knew that. What the read gives you is the texture of what waits there.\n\nThe wrong stag is real. You feel it the way you feel a line before it snaps — not a fact you've assembled but a certainty that arrives whole. North of the second ford, in the treeline, something that used to die has stopped being willing to. It is not aggressive by nature. It is territorial by something older than aggression: the sense that it belongs to a crossing and the crossing belongs to it. You will not take it by surprise. You will not go around it without it knowing. What you can choose is the ground — and when you meet it, whether you stand or run first.\n\nThe authentication structure is further, and its read is quieter: a held breath, not a threat. It is waiting with the patience of something that does not experience time the way you do. The danger there is not violence. It is a question asked in the wrong language, at the wrong moment, with the wrong answer in your mouth. The note in your coat is the best map you have of what not to say. Marrow drops from the counter-edge to the floor with a soft double-tap of feet, and looks up at you once — patient, unhurried, already pointed toward the door."
       }
     ],
     "lastTurn": {
-      "narration": "You pick up the note and fold it once along the crease it already holds, then tuck it inside your coat. The mineral smell comes with it — cold stone and something else, faint, like water that has sat in the dark a long time.\n\n\"Thank you,\" you say to Eredan, and you mean it plainly. No ceremony. He nods once — the nod of a man who has said his piece and is glad to stop saying it. His hand finds the spoon again and he turns to the barley without looking back up at you.\n\nThe hostel-keeper is already looking elsewhere, the cloth moving in slow circles on the counter. Marrow shifts on her counter-edge, settles, and watches you cross toward the door with that particular stillness it holds when something is about to begin.\n\nThe morning outside is early-spring cold — the melt has made the ground soft and the air smells of wet earth and yesterday's frost. The road north from the Marchward starts just past the waygate's neutral ground: an unpaved track that turns to mud a hundred paces in and keeps going. According to the note, the second ford is where the wrong stag walks the treeline. You haven't been there yet. The structure is beyond it.",
-      "sceneSummary": "Rhinofire took the note and thanked Eredan — the morning's two reluctant informants have given what they'll give. The road north is next.",
+      "narration": "You stop in the doorway — not hesitating, just standing. The morning light comes in flat and grey through the hostel's small windows, and you let the shape of the day ahead settle into you the way your training said it would: not thought, exactly, but attention finding its own level.\n\nThe Marchward is waking outside. You can hear the specific sounds of a border town in early spring: boot mud on a wooden step, a trader haggling in a language that isn't quite valley-common, the drip of snowmelt from the hostel eaves. None of it is urgent. The road north will be mud past the first fork and worse past the second — you already knew that. What the read gives you is the texture of what waits there.\n\nThe wrong stag is real. You feel it the way you feel a line before it snaps — not a fact you've assembled but a certainty that arrives whole. North of the second ford, in the treeline, something that used to die has stopped being willing to. It is not aggressive by nature. It is territorial by something older than aggression: the sense that it belongs to a crossing and the crossing belongs to it. You will not take it by surprise. You will not go around it without it knowing. What you can choose is the ground — and when you meet it, whether you stand or run first.\n\nThe authentication structure is further, and its read is quieter: a held breath, not a threat. It is waiting with the patience of something that does not experience time the way you do. The danger there is not violence. It is a question asked in the wrong language, at the wrong moment, with the wrong answer in your mouth. The note in your coat is the best map you have of what not to say. Marrow drops from the counter-edge to the floor with a soft double-tap of feet, and looks up at you once — patient, unhurried, already pointed toward the door.",
+      "sceneSummary": "Rhinofire stands in the hostel doorway and reads the road north — the wrong stag territorial and real past the second ford, the authentication structure a held breath rather than a threat, the danger there a matter of words rather than force.",
       "choices": [
         {
-          "label": "Head out immediately — the note is enough; the road will tell you the rest",
+          "label": "Step out and take the north road — mud and the second ford ahead, wrong stag and all",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {
@@ -143,61 +149,73 @@
             "falsehood_truth": 0.2
           },
           "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "trivial": true
-        },
-        {
-          "label": "Check your pack before you go — waterskin full, bedroll secure, flint to hand",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "very easy",
-          "intentTags": [
+            "travel",
             "careful"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Read the fight ahead — stand in the doorway and let your sense of what comes next settle before you move",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "violence_peace": -0.05
-          },
-          "difficulty": "normal",
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": "read_the_fight",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Ask the hostel-keeper if anyone has left this morning for the north road — whether you are first or following",
+          "label": "Ask someone in the Marchward about the second ford before you go — a local read on the current state of the road and what's been seen near the treeline",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
             "falsehood_truth": 0.3
           },
           "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "scout"
+            "scout",
+            "careful"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Seek the wrong stag deliberately — meet it at the treeline on your terms, not its",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "violence_peace": -0.2
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "risky",
+            "scout"
+          ],
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": "beast_the_wrong_stag",
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
       "scene": {
-        "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands near the door, note folded and pocketed. Eredan is back at his barley; the hostel-keeper resumes her counter work.",
+        "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands at the doorway, note folded and pocketed, facing the street.",
         "npcsPresent": [
           {
             "name": "Eredan",
-            "state": "Eating his barley, spoon in hand, not looking up."
+            "state": "Eating his barley at the trestle, spoon in hand, not looking up."
           },
           {
             "name": "Hostel-keeper",
@@ -205,56 +223,70 @@
           },
           {
             "name": "Marrow",
-            "state": "Watching Rhinofire from the counter-edge, still and unhurried."
+            "state": "On the floor near the doorway, watching Rhinofire, pointed toward the street."
           }
         ],
         "objects": [
-          "The folded note — now in Rhinofire's coat pocket",
+          "The folded note — in Rhinofire's coat pocket",
           "The broken wax seal — still on the table",
           "Eredan's bowl of barley, spoon in hand",
           "The flour-dusted counter"
         ],
         "threads": [
-          "The road north from the Marchward — mud and the second ford ahead",
-          "The wrong stag — walks the treeline north of the second ford",
-          "The authentication structure — listening, waiting for a burned sequence",
+          "The road north — mud and the second ford ahead",
+          "The wrong stag — territorial in the treeline north of the second ford",
+          "The authentication structure — listening, waiting, a matter of words not force",
           "Who was satisfied when the surveyor's hand went black"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "eredan",
-          "name": "Eredan",
-          "role": "Former Stillhold resident, now sheltering at the Marchward",
-          "gender": "man",
-          "pronouns": "he/him",
-          "note": "Received Rhinofire's thanks with a single nod and returned to his breakfast without further word. His piece is said.",
-          "statusNote": "At the trestle, eating his barley, done speaking."
+          "npcId": "marrow",
+          "name": "Marrow",
+          "role": "Companion",
+          "gender": "unknown",
+          "pronouns": "they/them",
+          "note": "Dropped from the counter-edge and positioned near the doorway, already pointed north — reading Rhinofire's intent before it was spoken.",
+          "statusNote": "At Rhinofire's side in the hostel doorway, watching the street."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "marchward-note-author",
+          "label": "The Note's Author",
+          "kind": "mystery",
+          "fact": "The wrong stag is territorial, not aggressive by instinct — it holds a crossing the way something older than violence holds ground. Meeting it is a matter of choosing the ground and the moment, not avoiding it entirely.",
+          "links": [
+            "water-crisis",
+            "riven-marchward",
+            "what-wakes-beneath"
+          ]
         },
         {
-          "op": "update",
-          "npcId": "hostel-keeper",
-          "name": "Hostel-keeper",
-          "role": "Keeper of the Marchward hostel",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "The note is out of her hands; she is visibly relieved and back to ordinary work.",
-          "statusNote": "Behind her counter, cloth in hand, the unsealed note's weight gone from her."
+          "topic": "what-wakes-beneath",
+          "label": "What Wakes Beneath",
+          "kind": "mystery",
+          "fact": "The authentication structure reads as a held breath — not threatening, but waiting with a patience outside human time. The danger there is a question asked wrong, not a force to be withstood.",
+          "links": [
+            "water-crisis",
+            "riven-marchward",
+            "stillhold-exile-marchward"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief parting exchange and a moment's gathering before the door"
+        "why": "Standing in the doorway, letting the read settle — a short stillness, not long."
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands near the door, note folded and pocketed. Eredan is back at his barley; the hostel-keeper resumes her counter work.",
+      "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands at the doorway, note folded and pocketed, facing the street.",
       "npcsPresent": [
         {
           "name": "Eredan",
-          "state": "Eating his barley, spoon in hand, not looking up."
+          "state": "Eating his barley at the trestle, spoon in hand, not looking up."
         },
         {
           "name": "Hostel-keeper",
@@ -262,23 +294,23 @@
         },
         {
           "name": "Marrow",
-          "state": "Watching Rhinofire from the counter-edge, still and unhurried."
+          "state": "On the floor near the doorway, watching Rhinofire, pointed toward the street."
         }
       ],
       "objects": [
-        "The folded note — now in Rhinofire's coat pocket",
+        "The folded note — in Rhinofire's coat pocket",
         "The broken wax seal — still on the table",
         "Eredan's bowl of barley, spoon in hand",
         "The flour-dusted counter"
       ],
       "threads": [
-        "The road north from the Marchward — mud and the second ford ahead",
-        "The wrong stag — walks the treeline north of the second ford",
-        "The authentication structure — listening, waiting for a burned sequence",
+        "The road north — mud and the second ford ahead",
+        "The wrong stag — territorial in the treeline north of the second ford",
+        "The authentication structure — listening, waiting, a matter of words not force",
         "Who was satisfied when the surveyor's hand went black"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
@@ -510,7 +542,7 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1105,
+    "lastGenCount": 1117,
     "newsSpread": {
       "char-devtest::2026-08-01T15:05:35.966Z": [
         "waystone"
@@ -522,7 +554,7 @@
         "numinous.numen"
       ]
     },
-    "lastSharedReadAt": "2026-08-15T01:52:50.463Z",
+    "lastSharedReadAt": "2026-08-15T13:44:15.995Z",
     "lastTickWorldDay": 46,
     "lastCanonWorldDay": 46,
     "pressureQueue": [
@@ -542,7 +574,7 @@
         "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -623,7 +655,8 @@
           "[d1] The burned hand of the retreating surveyor and the exile's phrase 'no longer answers them' sit beside the substrate-talk — whatever is happening in the upper structure may be the same stirring felt in people's hands at the Marchward.",
           "[d1] The surveyor's listening face — hearing something no one else could, hand pressed to his chest as the blackness spread — reads less like a wound and more like a signal received. Something at the upstream structure may be transmitting, not merely malfunctioning.",
           "[d1] Eredan's warning — 'be careful what you let it hear' — implies the authentication site may be listening. An eight-month silence followed by renewed activity suggests it did not stop; it may have been waiting for something.",
-          "[d1] The note's author states the man who sent the survey crew back was not afraid — he was satisfied. This reframes the blackened hand and the listening face: not a retreat from danger but a completion of something. Someone may have intended what happened to the surveyor."
+          "[d1] The note's author states the man who sent the survey crew back was not afraid — he was satisfied. This reframes the blackened hand and the listening face: not a retreat from danger but a completion of something. Someone may have intended what happened to the surveyor.",
+          "[d1] The authentication structure reads as a held breath — not threatening, but waiting with a patience outside human time. The danger there is a question asked wrong, not a force to be withstood."
         ],
         "links": [
           "riven-marchward",
@@ -693,7 +726,8 @@
         "kind": "mystery",
         "facts": [
           "[d1] The note is written in an educated, disciplined hand — smells of cold stone and mineral water. No name, no mark. Left two to three days before Rhinofire arrived. Knew the structure's nature, knew the burned sequence, and knew the name of a specific beast north of the second ford: the wrong stag.",
-          "[d1] Eredan confirmed: whoever wrote the note has been north of the second ford, and recently — the wrong stag is not something people write down without firsthand knowledge."
+          "[d1] Eredan confirmed: whoever wrote the note has been north of the second ford, and recently — the wrong stag is not something people write down without firsthand knowledge.",
+          "[d1] The wrong stag is territorial, not aggressive by instinct — it holds a crossing the way something older than violence holds ground. Meeting it is a matter of choosing the ground and the moment, not avoiding it entirely."
         ],
         "links": [
           "water-crisis",
@@ -708,12 +742,12 @@
     }
   },
   "tendencies": {
-    "strategic": 11.27775925108149,
-    "amorous": 11.807973533226415,
-    "cautious": 4.111088176692749,
-    "cerebral": 3.5395462143561933,
-    "social": 4.41508739358047,
-    "leadership": 0.8810956933593749
+    "strategic": 11.995815269804451,
+    "amorous": 11.512774194895753,
+    "cautious": 5.00831097227543,
+    "cerebral": 3.4510575589972885,
+    "social": 4.304710208740959,
+    "leadership": 0.8590683010253904
   },
   "aptitudes": [
     "strategist",
@@ -721,7 +755,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 12,
+  "actionCount": 13,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -896,8 +930,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786759041574,
-  "rev": 43,
+  "updatedAt": 1786801538333,
+  "rev": 46,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -920,7 +954,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 13
+    "riven_marches": 14
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -932,6 +966,14 @@
       "startDay": 46,
       "endDay": 46,
       "beats": 13
+    },
+    {
+      "id": "sess-2",
+      "startedAt": "2026-08-15T13:45:38.317Z",
+      "lastAt": "2026-08-15T13:45:38.317Z",
+      "startDay": 46,
+      "endDay": 46,
+      "beats": 1
     }
   ],
   "establishedFacts": [],
@@ -947,13 +989,13 @@
   "nameRepairVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "marrow": 0.5
+    "marrow": 0.75
   },
   "bondLogFrom": 0,
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "read_the_fight": 1
+      "read_the_fight": 2
     },
     "coActivations": {},
     "aspirations": [],
@@ -1016,11 +1058,19 @@
       "day": 1,
       "worldDay": 46,
       "actionCount": 8
+    },
+    {
+      "companionId": "marrow",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 1,
+      "worldDay": 46,
+      "actionCount": 12
     }
   ],
   "skillUses": {
-    "scout": 2,
-    "careful": 5,
+    "scout": 3,
+    "careful": 6,
     "study": 4,
     "negotiate": 5,
     "ask": 1,
@@ -1033,9 +1083,9 @@
     "choices": 12,
     "scene": 12,
     "npcUpdates": 12,
-    "codexUpdates": 9,
+    "codexUpdates": 10,
     "timeOps": 11,
-    "characterDeltas": 3,
+    "characterDeltas": 4,
     "offer": 1,
     "sceneEnded": 2,
     "placeUpdates": 1

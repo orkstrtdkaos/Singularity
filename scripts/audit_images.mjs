@@ -85,11 +85,21 @@ for (const f of files) {
   catch { /* an unreadable save is not this script's problem */ }
 }
 
+// ⛔ A `composedImages` KEY IS A SUPERSEDED ADDRESS, NOT A PICTURE. CCODE-193 records the composed
+// re-mint against the URL it replaced, so those keys are the OLD address of something already swapped away
+// from — nothing renders them. Checking them spends a request and, on an evicted one, a generation, for a
+// picture no player can ever see. Four of the seven "burned" urls in the first clean run were exactly this.
+// ⚠️ Only when a URL appears NOWHERE ELSE. The same address is often also a live gallery row.
+const supersededOnly = (at) => at.every(a => /:: composedImages\./.test(a));
+const skipped = [...where.keys()].filter(u => supersededOnly(where.get(u)));
+for (const u of skipped) where.delete(u);
+if (skipped.length) console.log(`skipping           : ${skipped.length} superseded composedImages key(s) — replaced addresses, rendered by nothing`);
+
 const urls = [...where.keys()].slice(0, LIMIT);
 console.log(`saves scanned      : ${files.length}`);
 console.log(`unique image urls  : ${where.size}${urls.length < where.size ? ` (checking ${urls.length})` : ""}`);
 console.log(`references to them : ${[...where.values()].reduce((n, a) => n + a.length, 0)}`);
-console.log(`delay              : ${DELAY}ms, sequential, GET only on a cache HIT\n`);
+console.log(`delay              : ${DELAY}ms, sequential, ONE GET per url (no HEAD — a HEAD on a miss generates)\n`);
 
 // ---------- check ----------
 const rows = [];

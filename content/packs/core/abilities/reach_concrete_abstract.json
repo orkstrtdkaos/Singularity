@@ -23,7 +23,7 @@
     "shield"
    ],
    "narrationHints": "He puts his hand on the stone and the stone tells him the truth, because stone does not do anything else.",
-   "description": "The concrete-pole mastery: the real is what you can touch, weigh, and set. The world's finest building and its most stubborn skepticism, in one craft.",
+   "description": "Know a thing's true weight, material, soundness and worth by touch — no lie of appearance survives your hand. The concrete-pole mastery, and the world's most stubborn skepticism.",
    "notFor": "Symbol, glamour, and argument (Formcraft's country); anything that requires believing in what cannot be weighed.",
    "tree": [
     {
@@ -122,7 +122,8 @@
     }
    ],
    "plainly": "A explore/fight/investigate action that makes or animates something. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 deepens materialTruth; rank 3 adds to denial. Limit: it tells you what a thing IS, Never what it means or what it is For.",
-   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
+   "_descriptionWas": "The concrete-pole mastery: the real is what you can touch, weigh, and set. The world's finest building and its most stubborn skepticism, in one craft."
   },
   {
    "id": "stone_read",
@@ -362,7 +363,7 @@
     "reveal"
    ],
    "narrationHints": "She draws a shape that is not a picture of anything, and the room rearranges itself to agree with it.",
-   "description": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
+   "description": "See the pattern, symbol or structure a thing is an instance OF — the form behind the fact. The abstract-pole mastery: to a Figurist, matter is the coarse residue of form.",
    "notFor": "Anything that requires the touchable to be primary; the Masons' Denial defeats it outright.",
    "tree": [
     {
@@ -458,7 +459,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A investigate/social/explore action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 adds to special; rank 3 extends scope. Limit: seeing a form Does Not Give You Power Over Its Instance."
+   "plainly": "A investigate/social/explore action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 adds to special; rank 3 extends scope. Limit: seeing a form Does Not Give You Power Over Its Instance.",
+   "_descriptionWas": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form."
   },
   {
    "id": "pattern_sense",
@@ -1601,7 +1603,7 @@
     "make"
    ],
    "narrationHints": "You draw the figure and the thing it describes becomes bound to obey it — the map, for a while, ruling the territory.",
-   "description": "The Figurist art of the binding sign — a figure drawn so true that reality briefly consents to match it, the abstract pattern given authority over the concrete thing. To draw it right is to legislate, briefly, what is.",
+   "description": "Draw a figure so true that the thing it describes is bound to match it for a time — the map, briefly, ruling the territory. The Figurist art of the binding sign.",
    "notFor": "It binds through the figure's truth, so a false or sloppy figure binds nothing — and the world only consents for a while. Reality always resumes being itself; the figure rules until it doesn't.",
    "tree": [
     {
@@ -1670,7 +1672,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A create/investigate action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 6 hours Ranks: rank 2 extends duration. Limit: iT Fails IF The Figure IS Untrue."
+   "plainly": "A create/investigate action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 6 hours Ranks: rank 2 extends duration. Limit: iT Fails IF The Figure IS Untrue.",
+   "_descriptionWas": "The Figurist art of the binding sign — a figure drawn so true that reality briefly consents to match it, the abstract pattern given authority over the concrete thing. To draw it right is to legislate, briefly, what is."
   },
   {
    "schemaVersion": 1,
@@ -1763,7 +1766,7 @@
     "reveal"
    ],
    "narrationHints": "You do not batter the wall. You find the one stone the whole thing is truly resting on, and you strike THAT, and the wall discovers it was only ever an agreement between stones.",
-   "description": "The Mason art of the keystone blow — reading a made structure to its single load-bearing truth and striking exactly there, so the whole comes down for the cost of one perfect blow. To break well is to understand first.",
+   "description": "Find the one stone a structure is truly resting on and strike THAT, so the whole comes down for the cost of one blow. The Mason art of the keystone: to break well is to understand first.",
    "notFor": "It breaks the made, not the living or the grown — and it needs a real keystone; some things bear their load everywhere at once and have no single stone to strike. Read wrong and you have merely hit a wall.",
    "tree": [
     {
@@ -1835,7 +1838,8 @@
      "class": "soft"
     }
    ],
-   "plainly": "A fight/investigate action that deals damage. It rolls 4d6+2 Ranks: rank 2 adds to special. Limit: it works only on Made Structures with a true keystone at r1."
+   "plainly": "A fight/investigate action that deals damage. It rolls 4d6+2 Ranks: rank 2 adds to special. Limit: it works only on Made Structures with a true keystone at r1.",
+   "_descriptionWas": "The Mason art of the keystone blow — reading a made structure to its single load-bearing truth and striking exactly there, so the whole comes down for the cost of one perfect blow. To break well is to understand first."
   },
   {
    "schemaVersion": 1,
@@ -2212,7 +2216,7 @@
     "break"
    ],
    "narrationHints": "You hold a shape in mind and make the world honour it. An angle that should not exist opens across them; a line is drawn and the things on either side of it are no longer joined. No blade, no heat — a geometry, applied.",
-   "description": "The Figurists' first offense: pattern imposed on matter, and matter losing the argument.",
+   "description": "Impose a simple figure — a line, an angle, an arc — across a target in sight, and what it crosses is parted: mail, hide, timber, limb. No blade, no heat. The Figurists' first offense, and matter losing the argument.",
    "notFor": "Anything you cannot hold clearly in mind — a muddled figure cuts nothing, or cuts wrong; the Masons, who are trained precisely against this; working past sight; kindness — a drawn line does not care what it is drawn across.",
    "tree": [
     {
@@ -2297,7 +2301,8 @@
    "backlash": "The figure resolves half-drawn and cuts where you are, not where they are. A lapsed figure does not fail; it lands wrong.",
    "conserveSuppresses": "a short line, fully held — a lapse simply fails to cut",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung."
+   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
+   "_descriptionWas": "The Figurists' first offense: pattern imposed on matter, and matter losing the argument."
   },
   {
    "id": "the_plain_weight",
@@ -2315,7 +2320,7 @@
     "break"
    ],
    "narrationHints": "No figure, no argument, no craft you could call subtle. You give a thing its true weight and let it be where it is going. Stone remembers it is stone. A wall remembers it is heavy. The floor was always underneath.",
-   "description": "The Masons' first offense, and it is the tradition's whole position stated as violence: only what can be touched is real, and what is real has mass.",
+   "description": "Give something present its full and honest weight and send it — a stone, a beam, a shield, the ground under them. Blunt, total, and exactly as complicated as being hit by masonry. The Masons' first offense.",
    "notFor": "Anything that isn't there (this craft has no purchase on the abstract, the spiritual, or the merely likely); finesse; working where there is nothing to give weight to; being unnoticed — it is loud and everyone knows what happened.",
    "tree": [
     {
@@ -2399,7 +2404,8 @@
    "backlash": "It falls where it was going to fall, which is not where you set it. Structure comes down on the wielder and whoever is nearest.",
    "conserveSuppresses": "one stone, honestly thrown — it goes where you threw it",
    "backlashRung": "incapacitating",
-   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung."
+   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
+   "_descriptionWas": "The Masons' first offense, and it is the tradition's whole position stated as violence: only what can be touched is real, and what is real has mass."
   },
   {
    "id": "the_true_figure",
@@ -2416,7 +2422,7 @@
     "foresee"
    ],
    "narrationHints": "You see the shape a thing is actually making — the pattern under the mess, the geometry a crowd is unknowingly standing in, the figure a set of events describes. Once seen, it cannot be unseen.",
-   "description": "The Figurists' first craft: pattern read rather than imposed.",
+   "description": "Look at a scene, a record, a route, a crowd, a wound-pattern, and the craft names one thing: the element that does not fit, or the place where a piece is missing. The Figurists' first craft — pattern read rather than imposed.",
    "notFor": "Patterns that are not there (the craft returns nothing rather than obliging you); reading intent or meaning; anything genuinely random.",
    "tree": [
     {
@@ -2492,7 +2498,8 @@
      "class": "soft"
     }
    ],
-   "plainly": "A puzzle/social action that reads the pattern a thing is making. Rated 5 of 10 across a scope of 2 for about six hours."
+   "plainly": "A puzzle/social action that reads the pattern a thing is making. Rated 5 of 10 across a scope of 2 for about six hours.",
+   "_descriptionWas": "The Figurists' first craft: pattern read rather than imposed."
   },
   {
    "id": "the_standing_figure",
@@ -2510,7 +2517,7 @@
     "bind"
    ],
    "narrationHints": "You hold a figure in a place and the place keeps it. A drawn order that persists — a ward-line, a true corner, a boundary that is geometrically rather than legally so.",
-   "description": "The Figurists' making-craft: pattern imposed and left standing, which is what a Figurist means by building.",
+   "description": "Impose a lasting figure on a place and name what it does — a threshold one named kind of thing cannot cross, a true line, a boundary that is geometrically rather than legally so. The Figurists' making-craft.",
    "notFor": "Making matter (the figure orders what is there, it does not add); anything you cannot hold cleanly in mind while you set it; figures on living things.",
    "tree": [
     {
@@ -2588,7 +2595,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle/fight action that sets a lasting geometric order on a place. Rated 6 of 10 across a scope of 2 for about three days."
+   "plainly": "A puzzle/fight action that sets a lasting geometric order on a place. Rated 6 of 10 across a scope of 2 for about three days.",
+   "_descriptionWas": "The Figurists' making-craft: pattern imposed and left standing, which is what a Figurist means by building."
   },
   {
    "id": "the_sound_read",
@@ -2605,7 +2613,7 @@
     "foresee"
    ],
    "narrationHints": "You put a hand on a made thing and it tells you the truth about itself. Not a feeling about the stone — an answer: this member is bearing, that one is decorative, and the whole thing comes down from HERE.",
-   "description": "The Masons' first craft, and the one they are actually hired for. Everything else they do rests on being right about this.",
+   "description": "Touch a structure, vehicle, raft or scaffold and the craft names its load path and its first failure: which member carries, which is ornament, what gives way and roughly when. The Masons' first craft, and the one they are actually hired for.",
    "notFor": "Anything unmade (living wood, a hillside, weather); reading who built it or why; anything you cannot reach and touch; a thing already collapsed.",
    "tree": [
     {
@@ -2681,7 +2689,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that names a structure's load path and first failure. Rated 5 of 10 across a scope of 2 for about four hours."
+   "plainly": "A puzzle/social action that names a structure's load path and first failure. Rated 5 of 10 across a scope of 2 for about four hours.",
+   "_descriptionWas": "The Masons' first craft, and the one they are actually hired for. Everything else they do rests on being right about this."
   },
   {
    "id": "the_set_stone",
@@ -2700,7 +2709,7 @@
     "make"
    ],
    "narrationHints": "You set a thing where it is and it STAYS. A stone, a beam, a door, a cart — placed with intent, it now takes far more than ordinary force to shift, and it will not drift, sag, settle or be quietly moved.",
-   "description": "The Masons' holding-craft. Half of building is making a thing stay where you put it.",
+   "description": "Set one object where you have placed it and it STAYS — resisting levers, drift and quiet removal, and you know the instant it is being worked at. The Masons' holding-craft: half of building is making a thing stay put.",
    "notFor": "Making the thing stronger (a set rotten beam is a rotten beam that will not move); setting anything alive; setting what you cannot lift or lever into place first; anything already falling.",
    "tree": [
     {
@@ -2777,8 +2786,10 @@
      "class": "soft"
     }
    ],
-   "plainly": "A puzzle/fight action that fixes a placed object so it cannot be shifted. Rated 6 of 10 across a scope of 2 for about three days."
+   "plainly": "A puzzle/fight action that fixes a placed object so it cannot be shifted. Rated 6 of 10 across a scope of 2 for about three days.",
+   "_descriptionWas": "The Masons' holding-craft. Half of building is making a thing stay where you put it."
   }
  ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
 }

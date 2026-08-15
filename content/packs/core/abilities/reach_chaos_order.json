@@ -21,7 +21,7 @@
     "unmake-plan"
    ],
    "narrationHints": "The art of the unplanned — riding luck, breaking patterns, making the improvised thing work because you refused to plan it.",
-   "description": "The chaos-craft: improvisation as power, luck-riding, the unmaking of others' plans. The Churnfolk discipline of productive disorder.",
+   "description": "Turn a chaotic moment to advantage, improvise a working solution from whatever is to hand, and make one plan come apart usefully. The chaos-craft — the Churnfolk discipline of productive disorder.",
    "notFor": "Reliable repeatable results (that's Latticework's job); fine control; anything that needs to work the same way twice.",
    "tree": [
     {
@@ -136,7 +136,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A chase/fight/puzzle action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens variance; rank 3 extends scope. Limit: you Don'T Choose How IT Breaks, only that it does."
+   "plainly": "A chase/fight/puzzle action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens variance; rank 3 extends scope. Limit: you Don'T Choose How IT Breaks, only that it does.",
+   "_descriptionWas": "The chaos-craft: improvisation as power, luck-riding, the unmaking of others' plans. The Churnfolk discipline of productive disorder."
   },
   {
    "id": "latticework",
@@ -155,7 +156,7 @@
     "bind"
    ],
    "narrationHints": "Structure imposed and possibility bound — a plan that holds, a prediction that lands, a binding that will not slip.",
-   "description": "The order-craft: structure, prediction, law, the binding of possibility. The Lattice-Cities' discipline — order as power.",
+   "description": "Build a plan that holds under pressure, predict a system's next move, and impose enough order on chaos to act cleanly in it. The order-craft of the Lattice-Cities.",
    "notFor": "Improvisation or the genuinely novel (that's Wildcraft); anything that needs to breathe or grow; controlling people's hearts (only their structures).",
    "tree": [
     {
@@ -269,7 +270,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle/fight/social action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reliability; rank 3 extends scope. Limit: prediction fails on the Truly Chaotic."
+   "plainly": "A puzzle/fight/social action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reliability; rank 3 extends scope. Limit: prediction fails on the Truly Chaotic.",
+   "_descriptionWas": "The order-craft: structure, prediction, law, the binding of possibility. The Lattice-Cities' discipline — order as power."
   },
   {
    "id": "chaos_sense",
@@ -969,7 +971,7 @@
     "command"
    ],
    "narrationHints": "Unmake and re-make in one motion — collapse it, and catch the pieces as what you need.",
-   "description": "The braid-craft: unmake a structure and re-bind its falling pieces into a new form mid-collapse.",
+   "description": "Break a thing and reforge its falling pieces into what you need, in the same motion. The braid-craft: collapse it, and catch the pieces as the new form.",
    "notFor": "Slow, careful work; single-pole purity.",
    "tree": [
     {
@@ -1046,7 +1048,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight or puzzle action, and the only craft in the game with a timing window. You break something and reforge its falling pieces into a new shape in the same motion — but you must declare the new form before you break it, and you get one heartbeat to land it. Miss the window and you have simply destroyed the thing. Higher ranks widen the window and let you work on larger collapses, but the bigger the collapse the cruder the result: a shattered cart becomes a barricade, never a second cart."
+   "plainly": "A fight or puzzle action, and the only craft in the game with a timing window. You break something and reforge its falling pieces into a new shape in the same motion — but you must declare the new form before you break it, and you get one heartbeat to land it. Miss the window and you have simply destroyed the thing. Higher ranks widen the window and let you work on larger collapses, but the bigger the collapse the cruder the result: a shattered cart becomes a barricade, never a second cart.",
+   "_descriptionWas": "The braid-craft: unmake a structure and re-bind its falling pieces into a new form mid-collapse."
   },
   {
    "id": "the_long_odds",
@@ -2443,5 +2446,6 @@
    "plainly": "A social/puzzle action that structures a disordered effort so it holds without you. Rated 6 of 10 across a scope of 3 for about three days."
   }
  ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
 }

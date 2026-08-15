@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 13,
+  "xp": 15,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -66,7 +66,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 97,
+  "energy": 92,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -119,111 +119,115 @@
         "player": "Use Read the Fight — read this conversation's shape: who is afraid, who is relieved to have spoken, who is watching you",
         "summary": "Rhinofire reads the trestle: the duelist relieved and assessing, the exile guilty and afraid of what he knows, Marrow watching the exile with still attention.",
         "narration": "You look across the trestle the way you were taught to read a fight — not at the words, at the weight. Where the body is carrying itself. Where the eyes go when they're not performing.\n\nThe Redline duelist is watching the exile from the corner of her eye. Not suspicious — assessing. She said what she knows and she wants to see what he does with it, the way a fighter watches a sparring partner finish a combination. She is not afraid. She spoke because this place runs on plain speech and she is native to the Marchward's logic. The relief in her is professional: information given, weight transferred, contract fulfilled. Whatever she saw on the northeast trail still lives in her as a data-point, not a wound.\n\nThe Stillhold exile is different. His shoulders came down when he finished speaking — that is the posture of a man who has set something down that was too heavy to carry quietly, and now does not know what to do with his hands. He is eating his barley without tasting it. He is not watching you. He is watching the distance between himself and wherever the Stillhold is from here, and it is clearly very far. He spoke like a confession, which means the weight was not information — it was guilt. He is not afraid of you. He is afraid of what he knows, and what knowing it makes him part of.\n\nNeither of them is watching Marrow. But Marrow is watching the exile, and has been since he spoke about the upstream structure. Its head is tilted at the angle that means it finds something interesting. Whether interesting means what it means to you — that is the question the bird declines to answer."
+      },
+      {
+        "player": "Ask the exile directly — what was the structure, and what does 'no longer answers' mean",
+        "summary": "Rhinofire asks the exile directly; he closes — 'I've said what I can say' — and the distinction between what he knows and what he'll speak hangs on the trestle boards.",
+        "narration": "The exile's hands stop moving over the barley bowl. He does not look at you.\n\nYou keep your voice level — not soft, not hard, just plain. What was the structure, and what does *no longer answers* mean, exactly? The Marchward runs on plain speech and you offer him that: a direct question, no frame around it, no implication of threat.\n\nHe sits with it for a long moment. Then he picks up his spoon, sets it down again, and says, quietly: \"I've said what I can say.\" Not what he knows. What he *can* say. The distinction sits there between you on the trestle boards, and he does not take it back or soften it.\n\nThe duelist does not react. She has heard a man hit his limit before and she does not perform surprise. She takes a drink from her own cup and looks at the treeline. Marrow tilts its head once — a small adjustment — and stays where it is on the trestle boards, watching the exile the way it watches things that are concluding but not yet done.\n\nThe exile does not get up. He is not fleeing the question. He is just — finished with it, in a way that does not leave room to push. Whatever he is carrying, it is not the kind that releases on a second asking. He has confessed what he chose to confess, and the rest is sealed behind something older than this conversation."
       }
     ],
     "lastTurn": {
-      "narration": "You look across the trestle the way you were taught to read a fight — not at the words, at the weight. Where the body is carrying itself. Where the eyes go when they're not performing.\n\nThe Redline duelist is watching the exile from the corner of her eye. Not suspicious — assessing. She said what she knows and she wants to see what he does with it, the way a fighter watches a sparring partner finish a combination. She is not afraid. She spoke because this place runs on plain speech and she is native to the Marchward's logic. The relief in her is professional: information given, weight transferred, contract fulfilled. Whatever she saw on the northeast trail still lives in her as a data-point, not a wound.\n\nThe Stillhold exile is different. His shoulders came down when he finished speaking — that is the posture of a man who has set something down that was too heavy to carry quietly, and now does not know what to do with his hands. He is eating his barley without tasting it. He is not watching you. He is watching the distance between himself and wherever the Stillhold is from here, and it is clearly very far. He spoke like a confession, which means the weight was not information — it was guilt. He is not afraid of you. He is afraid of what he knows, and what knowing it makes him part of.\n\nNeither of them is watching Marrow. But Marrow is watching the exile, and has been since he spoke about the upstream structure. Its head is tilted at the angle that means it finds something interesting. Whether interesting means what it means to you — that is the question the bird declines to answer.",
-      "sceneSummary": "Rhinofire reads the trestle: the duelist relieved and assessing, the exile guilty and afraid of what he knows, Marrow watching the exile with still attention.",
+      "narration": "The exile's hands stop moving over the barley bowl. He does not look at you.\n\nYou keep your voice level — not soft, not hard, just plain. What was the structure, and what does *no longer answers* mean, exactly? The Marchward runs on plain speech and you offer him that: a direct question, no frame around it, no implication of threat.\n\nHe sits with it for a long moment. Then he picks up his spoon, sets it down again, and says, quietly: \"I've said what I can say.\" Not what he knows. What he *can* say. The distinction sits there between you on the trestle boards, and he does not take it back or soften it.\n\nThe duelist does not react. She has heard a man hit his limit before and she does not perform surprise. She takes a drink from her own cup and looks at the treeline. Marrow tilts its head once — a small adjustment — and stays where it is on the trestle boards, watching the exile the way it watches things that are concluding but not yet done.\n\nThe exile does not get up. He is not fleeing the question. He is just — finished with it, in a way that does not leave room to push. Whatever he is carrying, it is not the kind that releases on a second asking. He has confessed what he chose to confess, and the rest is sealed behind something older than this conversation.",
+      "sceneSummary": "Rhinofire asks the exile directly; he closes — 'I've said what I can say' — and the distinction between what he knows and what he'll speak hangs on the trestle boards.",
       "choices": [
         {
-          "label": "Ask the exile directly — what was the structure, and what does 'no longer answers' mean",
+          "label": "Ask the duelist instead — what made a trained crew run? Press the one detail she never finished: the burned hand.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "easy",
           "intentTags": [
-            "negotiate",
+            "ask",
             "careful"
           ],
-          "trivial": false,
           "abilityId": null,
-          "energyCost": null,
-          "encounterId": null
+          "trivial": false
         },
         {
-          "label": "Ask the duelist to finish the detail — what did the burned man's hand look like",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": "easy",
-          "intentTags": [
-            "study"
-          ],
-          "trivial": false,
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null
-        },
-        {
-          "label": "Say nothing and watch Marrow — let the bird make its comment, if it will",
+          "label": "Leave it for now — sit with the exile quietly; sometimes a closed door opens if you don't push it.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": "very easy",
           "intentTags": [
-            "scout"
+            "careful"
           ],
-          "trivial": true,
           "abilityId": null,
-          "energyCost": null,
-          "encounterId": null
+          "trivial": true
+        },
+        {
+          "label": "Tell him what you are — a Marcher, someone who holds lines for pay and principle; give him a reason to trust where the question came from.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": "normal",
+          "intentTags": [
+            "persuade",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "trivial": false
+        },
+        {
+          "label": "Watch Marrow — the bird is reading him like it reads a thing near its end; see what it sees.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "easy",
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. Marrow sits on the trestle beside Rhinofire, head tilted toward the exile.",
+        "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. Marrow sits on the trestle boards near the exile.",
         "npcsPresent": [
           {
             "name": "Redline duelist",
-            "state": "Watching the exile from the corner of her eye, professionally relieved, eating."
+            "state": "Looking at the treeline, cup in hand — not intervening, just waiting."
           },
           {
             "name": "Stillhold exile",
-            "state": "Eating barley without tasting it, shoulders down, staring at nothing — the posture of a man whose confession is out and who doesn't know what comes next."
+            "state": "Spoon set down, bowl in front of him, face averted — closed, not fleeing."
           },
           {
             "name": "Marrow",
-            "state": "Perched on the trestle, head tilted toward the exile, still and attentive."
+            "state": "Head tilted, watching the exile with still attention from the trestle boards."
           }
         ],
         "objects": [
           "Boiled-water barrel with ladle and warning sign by the common-house door",
-          "Long trestle bench with several clusters of travelers",
+          "Long trestle bench with clusters of travelers",
           "Waterskin on the trestle boards in front of Rhinofire",
-          "Marrow — on the trestle"
+          "Exile's barley bowl with spoon set beside it"
         ],
         "threads": [
-          "The exile's posture reads as guilt, not just fear — he feels implicated in what the Council lost",
-          "The duelist never finished describing the burned man's hand",
-          "Marrow is watching the exile with specific attention — the kind that means something is concluding near him"
+          "The exile closed — 'I've said what I can say' — the line between what he knows and what he'll speak is now explicit",
+          "The duelist's account of the burned hand was never finished",
+          "Marrow is watching the exile with specific, attending stillness"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "redline-duelist-marchward",
-          "name": "Redline duelist",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "role": "Mercenary contractor, recently through the Disputed Zone",
-          "note": "Read: relieved, professional. Spoke freely because the Marchward demands plain speech. Information given, weight transferred. Still watching the exile sideways.",
+          "npcId": "stillhold-exile",
+          "name": "Stillhold exile",
+          "role": "Former Stillhold resident, now sheltering at the Marchward",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Asked directly what the structure was and what 'no longer answers' means — closed the question: 'I've said what I can say.' Not fleeing, not hostile. The limit is older than this conversation.",
           "learned": [
-            "Her relief is professional — weight transferred, not guilt shed. She is assessing the exile the way a fighter watches a sparring partner."
+            "Distinguishes between what he knows and what he can say — the rest is sealed, not forgotten"
           ],
-          "skillsObserved": [],
-          "status": "active",
-          "statusNote": "At the Marchward trestle, eating, watching the exile sidelong."
+          "statusNote": "At the Marchward trestle, closed to further direct questioning — his confession is out and the rest is held."
         },
         {
           "op": "update",
-          "npcId": "stillhold-exile-marchward",
-          "name": "Stillhold exile",
-          "gender": "man",
-          "pronouns": "he/him",
-          "role": "Former Stillhold resident, now sheltering at the Marchward",
-          "note": "Read: guilt as much as fear. His confession was a weight set down, not a report delivered. He is afraid of what he knows and what knowing it makes him part of — not of Rhinofire.",
-          "learned": [
-            "He spoke like a man confessing, not reporting — the lost structure carries personal guilt for him, not merely institutional knowledge."
-          ],
-          "skillsObserved": [],
-          "status": "active",
-          "statusNote": "At the Marchward trestle, quiet, staring at nothing — his confession out, unsure what comes next."
+          "npcId": "redline-duelist",
+          "name": "Redline duelist",
+          "role": "Mercenary contractor, recently through the Disputed Zone",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Did not react to the exile closing — recognized it as a man hitting his limit, no performance of surprise. Looking at the treeline.",
+          "statusNote": "At the Marchward trestle, watchful, not engaged — waiting to see how this plays out."
         }
       ],
       "codexUpdates": [
@@ -231,65 +235,48 @@
           "topic": "stillhold-exile-marchward",
           "label": "Stillhold exile",
           "kind": "person",
-          "entityId": "stillhold-exile-marchward",
-          "fact": "His posture after confessing reads as guilt, not relief — he feels personally implicated in the Council losing contact with the upstream structure, not merely informed about it.",
+          "entityId": "stillhold-exile",
+          "fact": "When asked directly about the upstream structure, he drew a line: 'I've said what I can say' — distinguishing what he knows from what he will speak. The limit is deliberate, not ignorance.",
           "links": [
             "water-crisis",
-            "what-wakes-beneath",
-            "riven-marchward"
-          ]
-        },
-        {
-          "topic": "redline-duelist-marchward",
-          "label": "Redline duelist",
-          "kind": "person",
-          "entityId": "redline-duelist-marchward",
-          "fact": "Her relief after speaking is professional — information given, weight transferred. She is watching the exile the way she'd watch a potential threat: assessing, not hostile.",
-          "links": [
-            "water-crisis",
-            "riven-marchward"
+            "what-wakes-beneath"
           ]
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -3,
-        "xp": 0
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short read of the trestle — a few minutes of careful attention."
+        "why": "a short, direct exchange at the trestle"
       }
     },
     "sceneState": {
-      "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. Marrow sits on the trestle beside Rhinofire, head tilted toward the exile.",
+      "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. Marrow sits on the trestle boards near the exile.",
       "npcsPresent": [
         {
           "name": "Redline duelist",
-          "state": "Watching the exile from the corner of her eye, professionally relieved, eating."
+          "state": "Looking at the treeline, cup in hand — not intervening, just waiting."
         },
         {
           "name": "Stillhold exile",
-          "state": "Eating barley without tasting it, shoulders down, staring at nothing — the posture of a man whose confession is out and "
+          "state": "Spoon set down, bowl in front of him, face averted — closed, not fleeing."
         },
         {
           "name": "Marrow",
-          "state": "Perched on the trestle, head tilted toward the exile, still and attentive."
+          "state": "Head tilted, watching the exile with still attention from the trestle boards."
         }
       ],
       "objects": [
         "Boiled-water barrel with ladle and warning sign by the common-house door",
-        "Long trestle bench with several clusters of travelers",
+        "Long trestle bench with clusters of travelers",
         "Waterskin on the trestle boards in front of Rhinofire",
-        "Marrow — on the trestle"
+        "Exile's barley bowl with spoon set beside it"
       ],
       "threads": [
-        "The exile's posture reads as guilt, not just fear — he feels implicated in what the Council lost",
-        "The duelist never finished describing the burned man's hand",
-        "Marrow is watching the exile with specific attention — the kind that means something is concluding near him"
+        "The exile closed — 'I've said what I can say' — the line between what he knows and what he'll speak is now explicit",
+        "The duelist's account of the burned hand was never finished",
+        "Marrow is watching the exile with specific, attending stillness"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
@@ -315,7 +302,8 @@
       "relationship": 0,
       "history": [
         "[d1] Spoke unprompted about the survey crew she passed on the northeast trail eight days ago — a man holding his hand like it burned, crew moving fast with no gear.",
-        "[d1] Read: relieved, professional. Spoke freely because the Marchward demands plain speech. Information given, weight transferred. Still watching the exile sideways."
+        "[d1] Read: relieved, professional. Spoke freely because the Marchward demands plain speech. Information given, weight transferred. Still watching the exile sideways.",
+        "[d1] Did not react to the exile closing — recognized it as a man hitting his limit, no performance of surprise. Looking at the treeline."
       ],
       "knownFacts": [
         "Eight days ago she passed a Council survey crew retreating fast from the northeast trail in the Disputed Zone — no map-cases, one man's hand pressed against his thigh as if burned",
@@ -329,7 +317,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Marchward trestle, eating, watching the exile sidelong.",
+      "statusNote": "At the Marchward trestle, watchful, not engaged — waiting to see how this plays out.",
       "domains": {
         "primary": "marcher"
       },
@@ -338,7 +326,7 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "met": 2
+      "met": 3
     },
     "stillhold-exile-marchward": {
       "id": "stillhold-exile-marchward",
@@ -352,12 +340,14 @@
       "relationship": 0,
       "history": [
         "[d1] Volunteered, quietly, that the Council lost contact with the upstream structure — it is there but no longer answers. Said it like a weight set down.",
-        "[d1] Read: guilt as much as fear. His confession was a weight set down, not a report delivered. He is afraid of what he knows and what knowing it makes him part of — not of Rhinofire."
+        "[d1] Read: guilt as much as fear. His confession was a weight set down, not a report delivered. He is afraid of what he knows and what knowing it makes him part of — not of Rhinofire.",
+        "[d1] Asked directly what the structure was and what 'no longer answers' means — closed the question: 'I've said what I can say.' Not fleeing, not hostile. The limit is older than this conversation."
       ],
       "knownFacts": [
         "Says the Council 'lost' something in the upper structure — not destroyed, not sealed, but present and no longer responding to them",
         "Phrased it as a confession, not a report — carries it personally",
-        "He spoke like a man confessing, not reporting — the lost structure carries personal guilt for him, not merely institutional knowledge."
+        "He spoke like a man confessing, not reporting — the lost structure carries personal guilt for him, not merely institutional knowledge.",
+        "Distinguishes between what he knows and what he can say — the rest is sealed, not forgotten"
       ],
       "skillsObserved": [
         "institutional knowledge of the Stillhold and the Council"
@@ -365,7 +355,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Marchward trestle, quiet, staring at nothing — his confession out, unsure what comes next.",
+      "statusNote": "At the Marchward trestle, closed to further direct questioning — his confession is out and the rest is held.",
       "domains": {
         "primary": "stillhold"
       },
@@ -374,7 +364,7 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "met": 2
+      "met": 3
     }
   },
   "placeMemory": {
@@ -467,21 +457,6 @@
       {
         "source": "threat-attack",
         "kind": "threat-attack",
-        "subjectId": "beast_hollow_pace",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "A a hollow-pace has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_hollow_pace",
-          "name": "a hollow-pace"
-        },
-        "addedDay": 1,
-        "locationId": "the_marchward"
-      },
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
         "subjectId": "beast_mire_gulper",
         "aimedAtPlayer": true,
         "urgency": 3,
@@ -495,7 +470,7 @@
         "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -593,7 +568,8 @@
         "kind": "person",
         "facts": [
           "[d1] Former Stillhold resident, now sheltering at the Marchward",
-          "[d1] His posture after confessing reads as guilt, not relief — he feels personally implicated in the Council losing contact with the upstream structure, not merely informed about it."
+          "[d1] His posture after confessing reads as guilt, not relief — he feels personally implicated in the Council losing contact with the upstream structure, not merely informed about it.",
+          "[d1] When asked directly about the upstream structure, he drew a line: 'I've said what I can say' — distinguishing what he knows from what he will speak. The limit is deliberate, not ignorance."
         ],
         "links": [
           "water-crisis",
@@ -608,10 +584,11 @@
     }
   },
   "tendencies": {
-    "strategic": 13.333124999999999,
-    "amorous": 15.209999999999999,
-    "cautious": 0.975,
-    "cerebral": 1
+    "strategic": 12.999796875,
+    "amorous": 14.829749999999999,
+    "cautious": 1.950625,
+    "cerebral": 0.975,
+    "social": 1
   },
   "aptitudes": [
     "strategist",
@@ -619,7 +596,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 2,
+  "actionCount": 3,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -804,8 +781,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786757361954,
-  "rev": 26,
+  "updatedAt": 1786757567095,
+  "rev": 27,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -826,7 +803,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 3
+    "riven_marches": 4
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -834,10 +811,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-15T00:58:33.023Z",
-      "lastAt": "2026-08-15T01:29:21.945Z",
+      "lastAt": "2026-08-15T01:32:47.085Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [],
@@ -920,17 +897,18 @@
   ],
   "skillUses": {
     "scout": 1,
-    "careful": 1,
-    "study": 1
+    "careful": 2,
+    "study": 1,
+    "negotiate": 1
   },
   "_opEmitted": {
-    "sceneSummary": 2,
-    "choices": 2,
-    "scene": 2,
-    "npcUpdates": 2,
-    "codexUpdates": 2,
-    "timeOps": 2,
+    "sceneSummary": 3,
+    "choices": 3,
+    "scene": 3,
+    "npcUpdates": 3,
+    "codexUpdates": 3,
+    "timeOps": 3,
     "characterDeltas": 1
   },
-  "_opTurns": 2
+  "_opTurns": 3
 }

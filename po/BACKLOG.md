@@ -1,5 +1,35 @@
 # PO Backlog — Singularity
 
+> ⛔ **STATE AS OF 2026-08-14.** *(Moved here from a root `STATE.md` I created in error — **`STATE.md` is
+> the Tether/ErikIAm name** and duplicating it in this repo made two files with one name and two meanings.
+> PO state belongs in the backlog it drives.)*
+>
+> **THE HEADLINE: content is ahead of wiring.** Five map files — `region_maps`, `local_layouts`, `scale`,
+> `precursor_lines`, `areas` — are validated by `content_ci` and read by **no engine module**.
+> ⚠️ **`scale.json` has ZERO consumers, so any scale bar is still using Earth's radius.**
+> **Recommendation: wire one tier end-to-end before authoring more.**
+>
+> **Authored:** region maps 8/38 · local layouts 18/135 · areas 1 · figures complete (66/66 appearance,
+> fightingStyle, deathImagePrompt, offscreenVerbs, wants, homeLocation; `rivals` has 8 gaps).
+>
+> ⚠️ **TWO THINGS THAT CHANGE THE REAL NUMBERS:** 12 of the 38 regions hold a single location and probably
+> want **no region map at all** (30 left → 18). And **the Palelands and Umbral Depths have region maps and
+> ZERO local frames** — a player can zoom in and fall through. ⛔ **Completing those two proves the tier
+> transition end-to-end and is worth more than a nineteenth region.**
+>
+> **Geography is clean:** all five `content_ci` geography failures closed, world rebuilt, land 42.0%,
+> mainland 100% of land, **0 stranded, 1 off-mainland** (`the_slow_stair` — an island, which suits a stair
+> coming up out of the dark onto a shore; Erik's call).
+>
+> **Open for Erik:** seed images for NPCs/skills need a Pollinations API key — 36 models accept image
+> input, but the keyless endpoint the app uses **silently ignores both `model=` and `image=`** (200 and a
+> byte-different file, because the param changes the cache key); `gen.pollinations.ai` returns 401. ⛔ **A
+> key cannot go in client-side `art.js`** — needs a proxy or BYOP.
+>
+> **Open for CCode:** the battle image (clash now records `locationId`+`abilityId`, `battleprompt.js`
+> exists, content complete) · wire the map files · rival-weighted fight selection · `offscreenVerbs` for
+> the offscreen beat.
+
 *Owned by Aevi (PO). Order below is build order. CCode sessions: active task is always `po/ALERT.md`; this file is the queue behind it. One goal per session — decompose on pickup if a task won't fit one session.*
 
 **Ratifications on record (2026-07-04):** Erik ratified the Encounters direction (SNG-002) — new engine layer on top of existing resolution, resolution math itself unchanged.

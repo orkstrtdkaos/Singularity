@@ -1291,3 +1291,92 @@ is a grudge the word stops meaning anything.**
 
 ⛔ **NO STRING UNDER `templates` OR `fragments` MAY CONTAIN ⛔ OR ⚠️** — an editorial marker once leaked
 into player-facing prose.
+
+
+---
+
+## 28. Authored Corpus as Template: how a generation engine is derived (2026-08-14)
+
+⛔ **THIS METHOD HAS BEEN USED FOUR TIMES AND WAS NEVER WRITTEN DOWN.** Erik asked for it directly. It is
+the standing procedure for turning hand-authored content into a generator, and it is how the local
+detailing engine, the minted-name pools, the clash templates and the byname vocabulary were each built.
+
+### 28.1 The sequence
+
+1. **Author a small corpus by hand** — four to eight entries, not one and not thirty.
+2. **Derive the rules FROM the corpus**, stating them as a precedence order.
+3. ⛔ **Author a second batch chosen to BREAK those rules.** See §28.2.
+4. **Rewrite the rules from what broke.** The breaks are the specification.
+5. **Hand the corpus and the rules to the engine**, and keep authoring only where the engine cannot reach.
+
+### 28.2 ⛔ AUTHOR FOR CONTRAST, NOT COVERAGE
+
+The single most important step, and the least obvious. **The first four local layouts were all
+Valley-shaped and produced a tidy rule set. Four more on deliberately different ground broke it in four
+different ways, and every break became a rule:**
+
+| deliberately different | what it broke |
+|---|---|
+| a dead-flat town (relief 0.002) | **uphill is NOISE on flat ground** — the gradient is unusable below a threshold |
+| a steep town with no water | the mirror — **and its cistern EXISTS because the terrain forced it** |
+| a tunnel network | ⛔ **the horizontal frame entirely** — depth, not radius; `level` became a schema field |
+| a town with no usable gradient at all | ⛔ **the tradition had to carry the layout** — a fourth precedence rung |
+
+⚠️ **A corpus chosen for coverage teaches the engine the average case. A corpus chosen for contrast teaches
+it the boundaries.** Boundaries are what a generator needs; it will interpolate the middle by itself.
+
+### 28.3 ⛔ EVERY ENTRY RECORDS WHY
+
+Each authored entry carries the reason it is what it is — `why`, and `basis` naming which input decided it.
+
+**This is not commentary. It serves three purposes at once:**
+- **the training signal** — the engine learns the mapping from input to decision, not just the output
+- **the review surface** — ⚠️ **a layout nobody can argue with is a layout nobody can correct**
+- **the staleness query** — see §26.6; when inputs move, `basis` says which entries are exposed
+
+⛔ **AND IT GIVES THE ENGINE ITS ACCEPTANCE TEST: a generated entry that cannot cite a gradient, a line of
+the source's own prose, or a tradition rule is DECORATION, and must be dropped rather than shipped.**
+Gate on the presence of a reason. That gate goes red the first time the generator invents something, which
+is exactly when it should.
+
+### 28.4 ⛔ MINE THE EXISTING AUTHORED FIELDS BEFORE INVENTING A VOCABULARY
+
+**Every time, the material was already in the repo and unread:**
+
+- Millbrook's own seed said *"the village well and the river dock are the two centres of daily life"* —
+  **a layout instruction sitting in prose.**
+- The byname pools were built from each tradition's own `craft` word — **Umbracraft, Palework, Ruinwork,
+  the Edge** — authored in `traditions.json` and used by nothing.
+- `rivals` was authored on 58 of 66 figures and read by nothing for months.
+
+⚠️ **The first question is never "what vocabulary do we need?" It is "what has already been authored that
+nothing reads?"** ⛔ **A vocabulary invented alongside an existing one is a second source that will
+disagree with the first.**
+
+### 28.5 Do not narrow a threshold the corpus cannot support
+
+⛔ **A constant derived from a small corpus should be stated as a BRACKET, and the bracket published.**
+
+The relief threshold was 0.053–0.541 on eight frames — a range I declined to narrow, and said so.
+**Doubling the corpus narrowed it 9.6× to 0.079, and it then held through a further 33% increase.**
+⚠️ **Had I picked a midpoint at eight frames I would have been wrong and nobody would have known.**
+
+### 28.6 ⛔ THE CORPUS MUST BE ABLE TO REFUTE THE SPEC
+
+**The precedence order in the local detailing engine was originally gradient-first. The corpus refuted it:**
+a town measuring relief 0.001 used its uphill anyway, because its own seed said *"terraced gardens climb
+the lower slopes"* — while a town at 0.053, three times the relief, did not, because its seed said nothing
+about ground.
+
+⚠️ **The rule is PROSE FIRST, GRADIENT SECOND, and it was discovered by the corpus contradicting the
+specification written from the corpus.** ⛔ **If a corpus can only confirm the rules, it was authored to
+confirm them and is worth nothing as evidence.**
+
+### 28.7 Division of labour, restated
+
+**Author what a generator cannot know: intent, consequence, the reason a road bends, what a place means.**
+**Generate what follows mechanically from those.** ⛔ **Never author what the engine derives** — a second
+source will disagree with the first, and has (§26.2, and six instances logged 2026-08-14).
+
+⚠️ **Preferred steady state: the engine generates the next tranche and the author REVIEWS it.** The corpus
+exists to be argued with, not to be extended by hand forever.

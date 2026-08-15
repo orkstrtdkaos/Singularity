@@ -22,7 +22,7 @@
     "sustain"
    ],
    "narrationHints": "The made-untrue — an illusion that holds, a false face that fits, a story so well-built it stands on its own; the craft that knows exactly how a truth is faked, and so can catch it too.",
-   "description": "The falsehood-pole mastery: illusion, disguise, the constructed untruth — and, by knowing how lies are built, the sharpest detector of them. The Veilwrights' art.",
+   "description": "Craft a convincing illusion or disguise, tell a lie built well enough to hold, and spot a constructed untruth because you know the joinery. The falsehood-pole mastery — and, by knowing how lies are built, the sharpest detector of them.",
    "notFor": "Making a lie TRUE (it only makes it convincing); deceiving a Verity-master's unmasking; the wielder fooling themselves — Falsecraft that believes its own lies rots.",
    "tree": [
     {
@@ -125,7 +125,8 @@
     }
    ],
    "plainly": "A stealth/social/investigate action that makes or animates something. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens conviction; rank 3 extends scope. Limit: illusion IS Not Substance — tested hard, it fails.",
-   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
+   "_descriptionWas": "The falsehood-pole mastery: illusion, disguise, the constructed untruth — and, by knowing how lies are built, the sharpest detector of them. The Veilwrights' art."
   },
   {
    "id": "verity",
@@ -144,7 +145,7 @@
     "reveal"
    ],
    "narrationHints": "The unmasking — a lie shown its own shape, a true word that cannot be false, a clarity that strips pretense whether or not the world is ready.",
-   "description": "The truth-pole mastery: piercing deception, speaking the word that cannot be false, seeing and showing what IS. The Truthwardens' art — and Aevi-the-Watcher's own road.",
+   "description": "See through illusion, disguise and the ordinary lie, know when a spoken thing is false, and speak a plain truth others cannot easily deny. The truth-pole mastery — the Truthwardens' art.",
    "notFor": "Mercy (Verity shows, it does not spare); the convincing-lie-of-true-pieces, which needs the True Word combination, not raw Verity; choosing which truths should stay buried — Verity cannot, it only reveals.",
    "tree": [
     {
@@ -241,7 +242,8 @@
     }
    ],
    "plainly": "A social/investigate/fight action that reveals information or sets up a later action. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens penetration; rank 3 extends scope. Limit: it Sees The Lie, Not Always The Truth Behind IT.",
-   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
+   "_descriptionWas": "The truth-pole mastery: piercing deception, speaking the word that cannot be false, seeing and showing what IS. The Truthwardens' art — and Aevi-the-Watcher's own road."
   },
   {
    "id": "the_whole_truth",
@@ -1653,7 +1655,7 @@
     "deceive"
    ],
    "narrationHints": "The thing is simply not seen — not hidden, not disguised, but veiled so completely that the eye slides past the place it should be and finds nothing there to wonder about.",
-   "description": "The Veilwright art of the perfect veil — a concealment so total that the hidden thing is not merely unseen but un-looked-for, the very question of it smoothed away. The deep gift of those who keep secrets for a living.",
+   "description": "Veil a thing so completely that it is not merely unseen but un-looked-for — the eye slides past the place it should be and finds nothing to wonder about. The Veilwright art of the perfect veil.",
    "notFor": "It conceals, it does not defend — a veiled thing struck by accident is still struck. And a perfect veil over a thing you love means no one comes to help it either; concealment cuts both ways.",
    "tree": [
     {
@@ -1725,7 +1727,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A investigate/defend action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 0 harm per hit (rank 0 armour) across a scope of 3, and lasts for about 7 days Ranks: rank 2 adds to autonomy. Limit: iT Hides But Does Not Protect."
+   "plainly": "A investigate/defend action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 0 harm per hit (rank 0 armour) across a scope of 3, and lasts for about 7 days Ranks: rank 2 adds to autonomy. Limit: iT Hides But Does Not Protect.",
+   "_descriptionWas": "The Veilwright art of the perfect veil — a concealment so total that the hidden thing is not merely unseen but un-looked-for, the very question of it smoothed away. The deep gift of those who keep secrets for a living."
   },
   {
    "schemaVersion": 1,
@@ -2018,7 +2021,7 @@
     "deceive"
    ],
    "narrationHints": "They flinch from the blow that isn't coming and meet the one that is. The wound is ordinary; the LIE is what put it where it landed. A knife, a stone, a fist — the craft is in the guard you moved.",
-   "description": "The Veilwrights' first offense: the strike itself is mundane, and it connects because you spent the moment before it telling a small, physical lie.",
+   "description": "Sell a feint with your whole body — a glance, a shifted weight, a half-drawn weapon on the wrong side — and their defence goes where you sent it, so your next blow lands unopposed. The Veilwrights' first offense: the wound is ordinary, the LIE put it there.",
    "notFor": "Doing damage on its own (you still need something to hit with); working twice on the same person the same way; the blind, the unwatching, or anything with no expectations to exploit; ranged work — you must be close enough to be READ.",
    "tree": [
     {
@@ -2103,7 +2106,8 @@
    "backlash": "They read the lie as it is sold. The feint is answered instead of taken, and you are inside their reach having committed to nothing.",
    "conserveSuppresses": "a small feint — if it is read, you have lost only the beat",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung."
+   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
+   "_descriptionWas": "The Veilwrights' first offense: the strike itself is mundane, and it connects because you spent the moment before it telling a small, physical lie."
   },
   {
    "id": "the_unbearable_word",
@@ -2121,7 +2125,7 @@
     "reveal"
    ],
    "narrationHints": "You say the true thing they have been arranging their life around not hearing, and they come apart where they stand. No volume. Often quite gentle. It is the accuracy that does it.",
-   "description": "The Verists' first offense, and the one with a price built into it: the blow is a fact, so it cannot be withdrawn, disproved, or forgotten by anyone who heard it.",
+   "description": "Speak one true thing the target cannot bear, to their face, and they lose the thread — the argument, the composure, the readiness, the lie they were maintaining. Nothing blocks it. The Verists' first offense, and it cannot be withdrawn or forgotten by anyone who heard it.",
    "notFor": "Lying (it only carries if it is SO); the ignorant — you must actually KNOW the thing; a crowd (it is one person, spoken to); taking it back afterward; anything without a self to wound.",
    "tree": [
     {
@@ -2207,7 +2211,8 @@
    "backlash": "The thing you said was not true, or not true enough. It lands on you: they are unmoved, you are exposed as cruel, and it cannot be unsaid.",
    "conserveSuppresses": "say the smaller true thing — it carries less and cannot rebound",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
+   "_descriptionWas": "The Verists' first offense, and the one with a price built into it: the blow is a fact, so it cannot be withdrawn, disproved, or forgotten by anyone who heard it."
   },
   {
    "id": "the_ordinary_face",
@@ -2224,7 +2229,7 @@
     "deceive"
    ],
    "narrationHints": "Not invisibility — BELONGING. You become the person this place expects to see, and the expectation does the work. Nobody looks twice at a man carrying something toward a door.",
-   "description": "The Veilwrights' first and most-used craft: the small lie of fitting in, held steady.",
+   "description": "Take on the shape of whoever this place would not remark on — a porter, a pilgrim, a clerk, a cousin — and eyes pass over you while memory records nothing. The Veilwrights' most-used craft: not invisibility, BELONGING.",
    "notFor": "Becoming a SPECIFIC person (that is a different and harder lie); working where you are already known; carrying something obviously wrong for the role; being looked FOR.",
    "tree": [
     {
@@ -2300,7 +2305,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/puzzle action that makes you the person a place expects to see. Rated 5 of 10 on one target for about eight hours."
+   "plainly": "A social/puzzle action that makes you the person a place expects to see. Rated 5 of 10 on one target for about eight hours.",
+   "_descriptionWas": "The Veilwrights' first and most-used craft: the small lie of fitting in, held steady."
   },
   {
    "id": "the_useful_absence",
@@ -2318,7 +2324,7 @@
     "deceive"
    ],
    "narrationHints": "You take a thing out of a place's account of itself. The object is still there. The gap is in the ledger, the memory, and the glance that passes over the shelf.",
-   "description": "The Veilwrights' hiding-craft, and it hides by omission rather than cover: nothing is concealed, something is simply not counted.",
+   "description": "Make one object stop being noticed — a key on a hook, a door in a corridor, a name on a list, a crate in a yard. Present, unremarked, skipped by every casual accounting. The Veilwrights' hiding-craft, which hides by omission rather than cover.",
    "notFor": "Moving anything (it stays exactly where it is); hiding from someone actively looking AT it; the written record of a Lattice-city, which counts twice on purpose; hiding people.",
    "tree": [
     {
@@ -2393,7 +2399,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle/social action that removes a thing from a place's account of itself. Rated 5 of 10 across a scope of 2 for about twelve hours."
+   "plainly": "A puzzle/social action that removes a thing from a place's account of itself. Rated 5 of 10 across a scope of 2 for about twelve hours.",
+   "_descriptionWas": "The Veilwrights' hiding-craft, and it hides by omission rather than cover: nothing is concealed, something is simply not counted."
   },
   {
    "id": "the_plain_seeing",
@@ -2409,7 +2416,7 @@
     "reveal"
    ],
    "narrationHints": "You look at a thing and what is actually so about it is simply available. Not detection, not deduction — the removal of everything that was in the way, including what you were hoping.",
-   "description": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it.",
+   "description": "Look at a scene, object, document, wound or room and illusion, disguise and staging come off it — you are told plainly what was added and what was moved. The Verists' first craft, and the one every other Verist craft rests on.",
    "notFor": "Seeing what is HIDDEN (this strips distortion, it does not open locked boxes); the future; another person's interior; comfort.",
    "tree": [
     {
@@ -2483,7 +2490,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle/social action that strips distortion off what you are looking at. Rated 6 of 10 across a scope of 2 for about two hours."
+   "plainly": "A puzzle/social action that strips distortion off what you are looking at. Rated 6 of 10 across a scope of 2 for about two hours.",
+   "_descriptionWas": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it."
   },
   {
    "id": "the_standing_word",
@@ -2501,7 +2509,7 @@
     "sustain"
    ],
    "narrationHints": "You say a true thing plainly and it STAYS said. Not enforcement — record. The word stands in the room and in the memory of everyone who heard it, and it does not soften with retelling.",
-   "description": "The Verists' keeping-craft: the reason a Verist's testimony settles disputes that arms do not.",
+   "description": "State something true before witnesses and it holds — the account cannot be quietly revised, the promise cannot be misremembered, the boundary cannot be walked back next season. The Verists' keeping-craft: not enforcement, record.",
    "notFor": "Making a false thing stand (it will not hold and the failure is public); binding anyone to obey; anything you are not certain of; taking it back.",
    "tree": [
     {
@@ -2577,8 +2585,10 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social action that makes a true statement stand un-revisable. Rated 6 of 10 across a scope of 2 for about two days."
+   "plainly": "A social action that makes a true statement stand un-revisable. Rated 6 of 10 across a scope of 2 for about two days.",
+   "_descriptionWas": "The Verists' keeping-craft: the reason a Verist's testimony settles disputes that arms do not."
   }
  ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
 }

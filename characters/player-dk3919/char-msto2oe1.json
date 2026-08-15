@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 31,
+  "xp": 36,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -68,7 +68,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 67,
+  "energy": 62,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -113,107 +113,90 @@
         "player": "Ask the hostel-keeper if anyone else has come through from the northeast trail recently — one more voice before you commit the direction.",
         "summary": "The hostel-keeper describes a lone traveler from the Disputed Zone cutoff, asking after the north road; he left a sealed, unmarked note behind.",
         "narration": "The hostel-keeper is a broad woman with flour on her apron and the unhurried manner of someone who has heard every kind of question and stopped being surprised by any of them. She's wiping down the counter when you put the question to her — anyone through from the northeast trail lately, before the melt turned the ground soft?\n\nShe thinks for a moment, setting the cloth down. \"Two, maybe three days back. A man alone, coming down from the Disputed Zone cutoff. Kept his hood up, which people do, so I didn't press. But he paid in valley coin and he asked about the road north — not the way to the Redline, the *other* north, the one that goes into the Zone proper.\" She picks the cloth back up. \"He ate, he slept, he was gone before I came down in the morning. Left the bed neat, which I appreciated.\"\n\nMarrow shifts on the rafter above the counter — you didn't see it get up there, but here it is, watching the keeper with the specific calm attention it reserves for things that are concluding. The keeper glances up at it, unsurprised in the way border-town people learn not to be surprised by anything, and goes back to wiping.\n\n\"He left something, actually. Forgot it or didn't want it.\" She reaches under the counter and sets down a small square of folded paper, sealed with a plain wax thumb-press. No mark, no name. \"If you're going that direction anyway.\""
+      },
+      {
+        "player": "Take the note and break the seal — read what was left.",
+        "summary": "Rhinofire breaks the seal on the unmarked note: a warning about the authentication site — it is waiting, not broken — and a single line about the wrong stag north of the second ford.",
+        "narration": "The hostel-keeper slides the note across the counter without being asked — she's been waiting to be rid of it. The wax breaks clean under your thumb, plain, no sigil. Just a thumb.\n\nInside: six lines in a cramped, careful hand. The authentication site is not broken — it is waiting. Do not speak your name to it. Do not let it hear the water's composition — it will try to complete the protocol. If you are going anyway: the sequence it wants is the one the Council burned. It cannot be given. Tell it nothing and leave. The man who sent the survey crew back was not afraid. He was satisfied. Below that, a single line with no context: The wrong stag walks the treeline north of the second ford. Go around. No signature. The hand is educated — letters shaped with discipline — and the note smells faintly of something mineral, cold. Like stone after rain.\n\nMarrow drops from the rafter onto the counter between you and the keeper, which she accepts with the equanimity of someone who has dealt with worse. The bird looks at the note. Then at you. Then at the treeline through the small east window, as if it already knows exactly which ford the second one is."
       }
     ],
     "lastTurn": {
-      "narration": "The hostel-keeper is a broad woman with flour on her apron and the unhurried manner of someone who has heard every kind of question and stopped being surprised by any of them. She's wiping down the counter when you put the question to her — anyone through from the northeast trail lately, before the melt turned the ground soft?\n\nShe thinks for a moment, setting the cloth down. \"Two, maybe three days back. A man alone, coming down from the Disputed Zone cutoff. Kept his hood up, which people do, so I didn't press. But he paid in valley coin and he asked about the road north — not the way to the Redline, the *other* north, the one that goes into the Zone proper.\" She picks the cloth back up. \"He ate, he slept, he was gone before I came down in the morning. Left the bed neat, which I appreciated.\"\n\nMarrow shifts on the rafter above the counter — you didn't see it get up there, but here it is, watching the keeper with the specific calm attention it reserves for things that are concluding. The keeper glances up at it, unsurprised in the way border-town people learn not to be surprised by anything, and goes back to wiping.\n\n\"He left something, actually. Forgot it or didn't want it.\" She reaches under the counter and sets down a small square of folded paper, sealed with a plain wax thumb-press. No mark, no name. \"If you're going that direction anyway.\"",
-      "sceneSummary": "The hostel-keeper describes a lone traveler from the Disputed Zone cutoff, asking after the north road; he left a sealed, unmarked note behind.",
+      "narration": "The hostel-keeper slides the note across the counter without being asked — she's been waiting to be rid of it. The wax breaks clean under your thumb, plain, no sigil. Just a thumb.\n\nInside: six lines in a cramped, careful hand. The authentication site is not broken — it is waiting. Do not speak your name to it. Do not let it hear the water's composition — it will try to complete the protocol. If you are going anyway: the sequence it wants is the one the Council burned. It cannot be given. Tell it nothing and leave. The man who sent the survey crew back was not afraid. He was satisfied. Below that, a single line with no context: The wrong stag walks the treeline north of the second ford. Go around. No signature. The hand is educated — letters shaped with discipline — and the note smells faintly of something mineral, cold. Like stone after rain.\n\nMarrow drops from the rafter onto the counter between you and the keeper, which she accepts with the equanimity of someone who has dealt with worse. The bird looks at the note. Then at you. Then at the treeline through the small east window, as if it already knows exactly which ford the second one is.",
+      "sceneSummary": "Rhinofire breaks the seal on the unmarked note: a warning about the authentication site — it is waiting, not broken — and a single line about the wrong stag north of the second ford.",
       "choices": [
         {
-          "label": "Take the note and break the seal — read what was left.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "easy",
-          "intentTags": [
-            "study"
-          ],
-          "trivial": false,
-          "abilityId": null
-        },
-        {
-          "label": "Take the note unread and pocket it — whatever is inside keeps better sealed until you are north.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": "very easy",
-          "intentTags": [
-            "careful"
-          ],
-          "trivial": true,
-          "abilityId": null
-        },
-        {
-          "label": "Ask the keeper more — what the traveler looked like, how he moved, whether he seemed afraid.",
+          "label": "Show the note to Eredan — he named the structure; he may recognize the hand or the warning's source.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "easy",
-          "intentTags": [
-            "study"
-          ],
           "trivial": false,
-          "abilityId": null
+          "intentTags": [
+            "negotiate",
+            "study"
+          ]
         },
         {
-          "label": "Leave the note where it is. You have enough to go on — head north toward the Disputed Zone.",
+          "label": "Ask the keeper directly — did the man say anything else, anything at all, before he left?",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": "easy",
+          "trivial": false,
+          "intentTags": [
+            "negotiate"
+          ]
+        },
+        {
+          "label": "Pocket the note and head north — you have what you need; more questions cost time.",
           "attribute": "practical",
           "subAttribute": "wits",
-          "difficulty": "easy",
+          "difficulty": "very easy",
+          "trivial": true,
           "intentTags": [
-            "travel",
-            "careful"
-          ],
-          "trivial": false,
-          "abilityId": null
+            "travel"
+          ]
         }
       ],
       "scene": {
-        "setting": "Inside the Marchward hostel, morning light through small windows. The keeper's counter, flour-dusted. Marrow has claimed a rafter above the counter. The trestle where Eredan sat is visible behind you.",
+        "setting": "Inside the Marchward hostel, morning light through small windows. The keeper's counter, flour-dusted. Marrow now perched on the counter itself. The trestle where Eredan sits is visible behind.",
         "npcsPresent": [
           {
             "name": "Hostel-keeper",
-            "state": "Wiping the counter, the folded note sitting between you."
+            "state": "Standing at the counter, watching Rhinofire, cloth in hand — not prying, but present."
           },
           {
             "name": "Eredan",
-            "state": "At the trestle behind you, eating barley, conversation closed."
+            "state": "At the trestle behind, eating barley, back turned."
           },
           {
             "name": "Marrow",
-            "state": "On the rafter above the counter, watching the keeper with patient attention."
+            "state": "Perched on the counter between Rhinofire and the keeper, regarding the note and then the east window."
           }
         ],
         "objects": [
-          "A small folded square of paper sealed with a plain wax thumb-press — no mark, no name",
+          "The opened note — six lines, no signature, mineral smell",
+          "The broken wax seal — plain thumb-press",
           "The counter, flour-dusted",
           "Eredan's bowl of barley at the trestle"
         ],
         "threads": [
-          "The sealed note — whose, and what is inside",
-          "The lone traveler who went north before you",
-          "Whether to press the keeper further before committing to the road"
+          "Who wrote the note — the hand is educated and deliberate",
+          "What 'the man who sent the crew back was satisfied' means",
+          "The wrong stag north of the second ford",
+          "Whether to show Eredan the note",
+          "Whether to press the keeper for anything else before the road north"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "marchward-hostel-keeper",
+          "op": "update",
+          "npcId": "hostel-keeper",
           "name": "Hostel-keeper",
           "role": "Keeper of the Marchward hostel",
           "gender": "woman",
           "pronouns": "she/her",
-          "description": "Broad, flour-apron, unhurried — the manner of someone who has heard every kind of question and stopped being surprised.",
-          "note": "Asked about travelers from the northeast trail; described a lone hooded man, valley coin, asking about the north road into the Zone, gone before morning. Produced a sealed unmarked note he left behind.",
-          "learned": [
-            "A lone traveler came down from the Disputed Zone cutoff two or three days ago, kept his hood up, paid in valley coin",
-            "He asked specifically about the road north into the Zone proper — not the Redline road",
-            "He left before morning, bed left neat, and left behind a sealed note with a plain wax thumb-press and no name or mark"
-          ],
-          "skillsObserved": [
-            "observation",
-            "border-town discretion"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Behind her counter at the Marchward hostel."
+          "note": "Passed the sealed note across the counter without being asked — relieved to have the obligation leave her hand.",
+          "statusNote": "Behind her counter at the Marchward hostel, watching Rhinofire with the note open.",
+          "relationshipDelta": 0
         }
       ],
       "codexUpdates": [
@@ -221,60 +204,71 @@
           "topic": "water-crisis",
           "label": "The Water Crisis",
           "kind": "event",
-          "fact": "A lone traveler came down the Disputed Zone cutoff two or three days before Rhinofire's arrival — hooded, valley coin, asking specifically about the north road into the Zone. He left before morning and left a sealed unmarked note at the hostel.",
+          "fact": "An unmarked note left at the Marchward hostel warns: the authentication site is not broken — it is waiting. It should not be told the water's composition, or it will attempt to complete the purification protocol. The sequence it wants is one the Council burned; it cannot be given. Telling it nothing and leaving is the recommended approach.",
           "links": [
+            "what-wakes-beneath",
+            "stillhold-exile-marchward",
+            "riven-marchward"
+          ]
+        },
+        {
+          "topic": "what-wakes-beneath",
+          "label": "What Wakes Beneath",
+          "kind": "mystery",
+          "fact": "The note's author states the man who sent the survey crew back was not afraid — he was satisfied. This reframes the blackened hand and the listening face: not a retreat from danger but a completion of something. Someone may have intended what happened to the surveyor.",
+          "links": [
+            "water-crisis",
+            "stillhold-exile-marchward"
+          ]
+        },
+        {
+          "topic": "marchward-note-author",
+          "label": "The Note's Author",
+          "kind": "mystery",
+          "fact": "The note is written in an educated, disciplined hand — smells of cold stone and mineral water. No name, no mark. Left two to three days before Rhinofire arrived. Knew the structure's nature, knew the burned sequence, and knew the name of a specific beast north of the second ford: the wrong stag.",
+          "links": [
+            "water-crisis",
             "riven-marchward",
             "what-wakes-beneath"
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "subPlace": {
-            "name": "Marchward Hostel Counter",
-            "parent": "the_marchward",
-            "note": "A sealed note with a plain wax thumb-press and no name sits here, left by a lone traveler from the northeast trail.",
-            "visited": true
-          }
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange with the hostel-keeper."
+        "why": "A quick reading of the note at the counter."
       }
     },
     "sceneState": {
-      "setting": "Inside the Marchward hostel, morning light through small windows. The keeper's counter, flour-dusted. Marrow has claimed a rafter above the counter. The trestle where Eredan sat is visible behind you.",
+      "setting": "Inside the Marchward hostel, morning light through small windows. The keeper's counter, flour-dusted. Marrow now perched on the counter itself. The trestle where Eredan sits is visible behind.",
       "npcsPresent": [
         {
           "name": "Hostel-keeper",
-          "state": "Wiping the counter, the folded note sitting between you."
+          "state": "Standing at the counter, watching Rhinofire, cloth in hand — not prying, but present."
         },
         {
           "name": "Eredan",
-          "state": "At the trestle behind you, eating barley, conversation closed."
+          "state": "At the trestle behind, eating barley, back turned."
         },
         {
           "name": "Marrow",
-          "state": "On the rafter above the counter, watching the keeper with patient attention."
+          "state": "Perched on the counter between Rhinofire and the keeper, regarding the note and then the east window."
         }
       ],
       "objects": [
-        "A small folded square of paper sealed with a plain wax thumb-press — no mark, no",
+        "The opened note — six lines, no signature, mineral smell",
+        "The broken wax seal — plain thumb-press",
         "The counter, flour-dusted",
         "Eredan's bowl of barley at the trestle"
       ],
       "threads": [
-        "The sealed note — whose, and what is inside",
-        "The lone traveler who went north before you",
-        "Whether to press the keeper further before committing to the road"
+        "Who wrote the note — the hand is educated and deliberate",
+        "What 'the man who sent the crew back was satisfied' means",
+        "The wrong stag north of the second ford",
+        "Whether to show Eredan the note",
+        "Whether to press the keeper for anything else before the road north"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
@@ -396,7 +390,8 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Asked about travelers from the northeast trail; described a lone hooded man, valley coin, asking about the north road into the Zone, gone before morning. Produced a sealed unmarked note he left behind."
+        "[d1] Asked about travelers from the northeast trail; described a lone hooded man, valley coin, asking about the north road into the Zone, gone before morning. Produced a sealed unmarked note he left behind.",
+        "[d1] Passed the sealed note across the counter without being asked — relieved to have the obligation leave her hand."
       ],
       "knownFacts": [
         "A lone traveler came down from the Disputed Zone cutoff two or three days ago, kept his hood up, paid in valley coin",
@@ -410,7 +405,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Behind her counter at the Marchward hostel.",
+      "statusNote": "Behind her counter at the Marchward hostel, watching Rhinofire with the note open.",
       "domains": {
         "primary": "marcher"
       },
@@ -419,7 +414,7 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "met": 1
+      "met": 2
     }
   },
   "placeMemory": {
@@ -534,7 +529,7 @@
         "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -590,7 +585,8 @@
           "[d1] A Redline duelist passing the northeast trail of the Disputed Zone eight days ago saw a Council survey crew in panicked retreat — no gear, one man's hand burned somehow, saying only that 'the ground is doing something.' The Stillhold exile confirms the Council has 'lost' the upstream structure: it…",
           "[d1] The affected surveyor from the Disputed Zone retreat had fingers gone black from the second knuckle — not burned, not frostbitten, but still actively changing. He had his hand pressed flat against his sternum, not his side, and wore a listening expression — as if hearing something the others could…",
           "[d1] The upstream structure is a pre-Transition authentication site that held the Council's secondary (backup) purification sequence. It went silent eight months ago — not destroyed, not sealed, still present and 'not answering.' Eredan's warning: be careful what you let it hear.",
-          "[d1] A lone traveler came down the Disputed Zone cutoff two or three days before Rhinofire's arrival — hooded, valley coin, asking specifically about the north road into the Zone. He left before morning and left a sealed unmarked note at the hostel."
+          "[d1] A lone traveler came down the Disputed Zone cutoff two or three days before Rhinofire's arrival — hooded, valley coin, asking specifically about the north road into the Zone. He left before morning and left a sealed unmarked note at the hostel.",
+          "[d1] An unmarked note left at the Marchward hostel warns: the authentication site is not broken — it is waiting. It should not be told the water's composition, or it will attempt to complete the purification protocol. The sequence it wants is one the Council burned; it cannot be given. Telling it…"
         ],
         "links": [
           "riven-marchward",
@@ -610,7 +606,8 @@
           "[d1] Two separate clusters of people at the Marchward used the word 'substrate' unprompted — a mason's apprentice and a Marcher trader who then looked at his hand as if he'd felt something. The flickering has reached even the border-town.",
           "[d1] The burned hand of the retreating surveyor and the exile's phrase 'no longer answers them' sit beside the substrate-talk — whatever is happening in the upper structure may be the same stirring felt in people's hands at the Marchward.",
           "[d1] The surveyor's listening face — hearing something no one else could, hand pressed to his chest as the blackness spread — reads less like a wound and more like a signal received. Something at the upstream structure may be transmitting, not merely malfunctioning.",
-          "[d1] Eredan's warning — 'be careful what you let it hear' — implies the authentication site may be listening. An eight-month silence followed by renewed activity suggests it did not stop; it may have been waiting for something."
+          "[d1] Eredan's warning — 'be careful what you let it hear' — implies the authentication site may be listening. An eight-month silence followed by renewed activity suggests it did not stop; it may have been waiting for something.",
+          "[d1] The note's author states the man who sent the survey crew back was not afraid — he was satisfied. This reframes the blackened hand and the listening face: not a retreat from danger but a completion of something. Someone may have intended what happened to the surveyor."
         ],
         "links": [
           "riven-marchward",
@@ -673,16 +670,32 @@
         "createdDay": 1,
         "entityId": "marchward-hostel-keeper",
         "updatedDay": 1
+      },
+      "marchward-note-author": {
+        "id": "marchward-note-author",
+        "label": "The Note's Author",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The note is written in an educated, disciplined hand — smells of cold stone and mineral water. No name, no mark. Left two to three days before Rhinofire arrived. Knew the structure's nature, knew the burned sequence, and knew the name of a specific beast north of the second ford: the wrong stag."
+        ],
+        "links": [
+          "water-crisis",
+          "riven-marchward",
+          "what-wakes-beneath"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 12.16771341508143,
-    "amorous": 12.739768137131284,
-    "cautious": 4.435503688672027,
-    "cerebral": 1.7412794841247556,
-    "social": 3.71155267602539,
-    "leadership": 0.9506249999999999
+    "strategic": 11.863520579704394,
+    "amorous": 12.421273933703002,
+    "cautious": 4.324616096455226,
+    "cerebral": 2.697747497021637,
+    "social": 3.6187638591247553,
+    "leadership": 0.9268593749999999
   },
   "aptitudes": [
     "strategist",
@@ -690,7 +703,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 9,
+  "actionCount": 10,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -875,8 +888,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786758275879,
-  "rev": 33,
+  "updatedAt": 1786758362106,
+  "rev": 34,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -897,7 +910,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 10
+    "riven_marches": 11
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -905,10 +918,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-15T00:58:33.023Z",
-      "lastAt": "2026-08-15T01:44:35.854Z",
+      "lastAt": "2026-08-15T01:46:02.084Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 10
+      "beats": 11
     }
   ],
   "establishedFacts": [],
@@ -1000,24 +1013,24 @@
   "skillUses": {
     "scout": 2,
     "careful": 5,
-    "study": 2,
+    "study": 3,
     "negotiate": 4,
     "ask": 1,
     "calm": 1,
     "lead": 1
   },
   "_opEmitted": {
-    "sceneSummary": 9,
-    "choices": 9,
-    "scene": 9,
-    "npcUpdates": 9,
-    "codexUpdates": 7,
-    "timeOps": 8,
+    "sceneSummary": 10,
+    "choices": 10,
+    "scene": 10,
+    "npcUpdates": 10,
+    "codexUpdates": 8,
+    "timeOps": 9,
     "characterDeltas": 3,
     "offer": 1,
     "sceneEnded": 1,
     "placeUpdates": 1
   },
-  "_opTurns": 9,
+  "_opTurns": 10,
   "_intentAsked": null
 }

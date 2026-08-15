@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 20,
+  "xp": 22,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -66,7 +66,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 87,
+  "energy": 82,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -129,84 +129,101 @@
         "player": "Ask the duelist instead — what made a trained crew run? Press the one detail she never finished: the burned hand.",
         "summary": "The duelist fills in the missing detail — the burned hand pressed flat to the chest, fingers gone black and still going, a listening expression, a crew moving in deliberate silence rather than panic.",
         "narration": "You shift your weight on the trestle boards and turn to the duelist. The exile has drawn his line and you leave it where it is — but she started a sentence she never finished, and the Marchward's logic runs both ways. You ask her plainly: what made a trained crew run? Not the structure, not the Council, not the water. The hand. The one pressed against what, exactly?\n\nShe looks at you over the rim of her cup. A beat — the kind where someone decides whether you're worth the extra words. Then she sets the cup down.\n\n\"Pressed against his chest,\" she says. \"Not his side. He had it flat against his sternum, like he was holding something in. His fingers were black from the second knuckle down — not burned-black, not frostbite-black. The kind of black you see when something is still happening.\" She pauses. \"His face was wrong. Not pain-wrong. Listening-wrong. Like he could hear something the rest of them couldn't.\"\n\nShe picks the cup back up. \"They were moving fast but they weren't panicked. That's what stays with me. A panicked crew drops gear, shouts, pulls apart. These ones were quiet. Close together. Moving like they'd agreed on something they hadn't said out loud.\" Her eyes go back to the treeline. \"I've seen soldiers after a bad engagement. I've seen what fear does to a unit. This wasn't that. This was people who knew exactly what they'd seen and had decided, together, not to talk about it.\""
+      },
+      {
+        "player": "Sit with what she said. Don't press further — let Marrow's stillness do the work, and watch whether the exile reacts to the detail about the listening face",
+        "summary": "Silence fails — the exile does not surface; the duelist departs; the trestle empties to Rhinofire and Marrow.",
+        "narration": "The silence you offer is the right shape for the thing — you settle back on the trestle boards, let the detail about the listening face hang in the air, and watch.\n\nMarrow does not move. It sits at exactly the same angle it has held for the last ten minutes, head tilted, one eye on the exile. If you were hoping the bird's stillness would do some work for you, it is doing none. The exile is not watching Marrow. He is watching something that isn't here — his bowl, his hands, the middle distance between the trestle and the treeline — and whatever the duelist's words landed on inside him, it has not risen to the surface. His face is averted and still. He is not going to offer you the reaction you waited for.\n\nThe duelist drains the last of her cup, sets it on the planks with a small flat sound, and stands. She has given the Marchward its due — her account is out, her obligation to plain speech is met — and she has no further business at this trestle. She pulls her coat straight, glances once at the treeline, and walks back toward the hostel without ceremony. She does not say goodbye. That is not what the Marchward means by courtesy.\n\nYou are left with Marrow, the exile's untouched barley bowl, and a morning that is not getting warmer. The exile breathes, slowly. He has not moved in some time."
       }
     ],
     "lastTurn": {
-      "narration": "You shift your weight on the trestle boards and turn to the duelist. The exile has drawn his line and you leave it where it is — but she started a sentence she never finished, and the Marchward's logic runs both ways. You ask her plainly: what made a trained crew run? Not the structure, not the Council, not the water. The hand. The one pressed against what, exactly?\n\nShe looks at you over the rim of her cup. A beat — the kind where someone decides whether you're worth the extra words. Then she sets the cup down.\n\n\"Pressed against his chest,\" she says. \"Not his side. He had it flat against his sternum, like he was holding something in. His fingers were black from the second knuckle down — not burned-black, not frostbite-black. The kind of black you see when something is still happening.\" She pauses. \"His face was wrong. Not pain-wrong. Listening-wrong. Like he could hear something the rest of them couldn't.\"\n\nShe picks the cup back up. \"They were moving fast but they weren't panicked. That's what stays with me. A panicked crew drops gear, shouts, pulls apart. These ones were quiet. Close together. Moving like they'd agreed on something they hadn't said out loud.\" Her eyes go back to the treeline. \"I've seen soldiers after a bad engagement. I've seen what fear does to a unit. This wasn't that. This was people who knew exactly what they'd seen and had decided, together, not to talk about it.\"",
-      "sceneSummary": "The duelist fills in the missing detail — the burned hand pressed flat to the chest, fingers gone black and still going, a listening expression, a crew moving in deliberate silence rather than panic.",
+      "narration": "The silence you offer is the right shape for the thing — you settle back on the trestle boards, let the detail about the listening face hang in the air, and watch.\n\nMarrow does not move. It sits at exactly the same angle it has held for the last ten minutes, head tilted, one eye on the exile. If you were hoping the bird's stillness would do some work for you, it is doing none. The exile is not watching Marrow. He is watching something that isn't here — his bowl, his hands, the middle distance between the trestle and the treeline — and whatever the duelist's words landed on inside him, it has not risen to the surface. His face is averted and still. He is not going to offer you the reaction you waited for.\n\nThe duelist drains the last of her cup, sets it on the planks with a small flat sound, and stands. She has given the Marchward its due — her account is out, her obligation to plain speech is met — and she has no further business at this trestle. She pulls her coat straight, glances once at the treeline, and walks back toward the hostel without ceremony. She does not say goodbye. That is not what the Marchward means by courtesy.\n\nYou are left with Marrow, the exile's untouched barley bowl, and a morning that is not getting warmer. The exile breathes, slowly. He has not moved in some time.",
+      "sceneSummary": "Silence fails — the exile does not surface; the duelist departs; the trestle empties to Rhinofire and Marrow.",
       "choices": [
         {
-          "label": "Ask the duelist if she saw which direction the crew's leader was listening — and whether the black spread while she watched",
+          "label": "Say his name — or ask it — and tell him plainly what you intend to do next. Give him the Marchward's own courtesy: plain speech.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "easy",
+          "trivial": true,
           "intentTags": [
-            "negotiate",
-            "careful"
+            "calm",
+            "negotiate"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Tell her plainly what you know — the upstream structure, 'no longer answers,' the substrate-talk at the Marchward — and ask if any of it matches what she saw",
+          "label": "Tell him what you think you understand about the structure and the listening face — a statement, not a question — and leave room for him to correct you.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": "normal",
+          "trivial": false,
           "intentTags": [
-            "negotiate",
-            "persuade"
+            "persuade",
+            "careful"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Sit with what she said. Don't press further — let Marrow's stillness do the work, and watch whether the exile reacts to the detail about the listening face",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "easy",
-          "intentTags": [
-            "careful",
-            "study"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Stand, thank her, and head into the Marchward — find the mason's apprentice who used the word 'substrate' yesterday",
+          "label": "Let him go and turn your attention to the northeast trail. You have what the trestle will give. The rest is in the Disputed Zone.",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": "easy",
+          "trivial": true,
           "intentTags": [
             "travel",
             "scout"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Marrow — aloud, in the exile's hearing — whether something up that trail is ending. He doesn't know what Marrow is. He might.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": "hard",
+          "trivial": false,
+          "intentTags": [
+            "gamble",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. The duelist's cup is back in her hand; her eyes are on the treeline again.",
+        "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. The duelist has departed; the exile sits with his untouched barley bowl.",
         "npcsPresent": [
           {
-            "name": "Redline duelist",
-            "state": "Cup in hand, eyes on the treeline — she's said the extra words, weight transferred again, watching to see what's done with it."
-          },
-          {
             "name": "Stillhold exile",
-            "state": "Spoon set beside the bowl, face averted — the detail about the listening face landed somewhere; he has not moved."
+            "state": "Face averted, hands still, not eating — caught on something the duelist said, not offering it."
           },
           {
             "name": "Marrow",
-            "state": "Still on the trestle boards near the exile, head tilted at exactly the same angle it was before."
+            "state": "Head tilted at the same angle, one eye on the exile, unbothered and unhurried."
           }
         ],
         "objects": [
           "Boiled-water barrel with ladle and warning sign by the common-house door",
-          "Long trestle bench with clusters of travelers",
+          "Long trestle bench with a few remaining travelers",
           "Waterskin on the trestle boards in front of Rhinofire",
-          "Exile's barley bowl with spoon set beside it"
+          "Exile's barley bowl with spoon set beside it, untouched"
         ],
         "threads": [
           "The listening expression on the surveyor's face — what was he hearing?",
           "Fingers gone black and still going — an active process, not aftermath",
-          "The exile has not reacted visibly to the listening-face detail, but he has not moved",
-          "Marrow's attending stillness has not broken"
+          "The exile recognized something in the duelist's description but has not spoken it",
+          "The northeast trail remains uninvestigated"
         ]
       },
       "npcUpdates": [
@@ -217,19 +234,9 @@
           "role": "Mercenary contractor, recently through the Disputed Zone",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Filled in the missing detail — the hand pressed flat to the sternum, not the side; fingers black from the second knuckle and still going; the man's face listening, not pained. Noted the crew moved in deliberate, agreed-upon silence — not panic.",
-          "learned": [
-            "The burned hand was pressed flat to the chest, fingers black from the second knuckle — an active process, not aftermath",
-            "The affected surveyor had a listening expression — as if hearing something the others could not",
-            "The crew's silence was deliberate and coordinated, not panicked — they had decided together not to speak of what they saw"
-          ],
-          "skillsObserved": [
-            "tactical observation",
-            "reading unit behavior under stress"
-          ],
-          "relationshipDelta": 1,
+          "note": "Finished her cup, stood, and departed without ceremony — obligation to plain speech met, no further business at the trestle.",
           "status": "active",
-          "statusNote": "At the Marchward trestle — has now given the full account; weight transferred, watching the treeline."
+          "statusNote": "Departed the trestle, back toward the hostel interior."
         },
         {
           "op": "update",
@@ -238,73 +245,46 @@
           "role": "Former Stillhold resident, now sheltering at the Marchward",
           "gender": "man",
           "pronouns": "he/him",
-          "note": "The listening-face detail from the duelist landed somewhere — he has not moved or responded, but his stillness reads as recognition, not indifference.",
-          "learned": [
-            "The listening expression on the burned surveyor may mean something to him specifically — his stillness after the duelist described it is pointed"
-          ],
+          "note": "Did not surface a reaction to the listening-face detail despite the silence offered. Face averted, still, barley bowl untouched.",
           "status": "active",
-          "statusNote": "At the Marchward trestle, closed to further direct questioning — has gone very still at the listening-face detail."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "water-crisis",
-          "label": "The Water Crisis",
-          "kind": "event",
-          "fact": "The affected surveyor from the Disputed Zone retreat had fingers gone black from the second knuckle — not burned, not frostbitten, but still actively changing. He had his hand pressed flat against his sternum, not his side, and wore a listening expression — as if hearing something the others could not. The crew's retreat was deliberate and silent, not panicked: they had reached a shared decision not to speak of what they encountered.",
-          "links": [
-            "what-wakes-beneath",
-            "riven-marchward",
-            "redline-duelist-marchward"
-          ]
-        },
-        {
-          "topic": "what-wakes-beneath",
-          "label": "What Wakes Beneath",
-          "kind": "mystery",
-          "fact": "The surveyor's listening face — hearing something no one else could, hand pressed to his chest as the blackness spread — reads less like a wound and more like a signal received. Something at the upstream structure may be transmitting, not merely malfunctioning.",
-          "links": [
-            "water-crisis",
-            "riven-marchward",
-            "stillhold-exile-marchward"
-          ]
+          "statusNote": "At the trestle, closed inward — something from the duelist's account has landed but he is not offering it."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a direct exchange at the trestle — a few minutes of morning conversation"
+        "why": "A few quiet minutes at the trestle after the duelist departed."
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
       }
     },
     "sceneState": {
-      "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. The duelist's cup is back in her hand; her eyes are on the treeline again.",
+      "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. The duelist has departed; the exile sits with his untouched barley bowl.",
       "npcsPresent": [
         {
-          "name": "Redline duelist",
-          "state": "Cup in hand, eyes on the treeline — she's said the extra words, weight transferred again, watching to see what's done wi"
-        },
-        {
           "name": "Stillhold exile",
-          "state": "Spoon set beside the bowl, face averted — the detail about the listening face landed somewhere; he has not moved."
+          "state": "Face averted, hands still, not eating — caught on something the duelist said, not offering it."
         },
         {
           "name": "Marrow",
-          "state": "Still on the trestle boards near the exile, head tilted at exactly the same angle it was before."
+          "state": "Head tilted at the same angle, one eye on the exile, unbothered and unhurried."
         }
       ],
       "objects": [
         "Boiled-water barrel with ladle and warning sign by the common-house door",
-        "Long trestle bench with clusters of travelers",
+        "Long trestle bench with a few remaining travelers",
         "Waterskin on the trestle boards in front of Rhinofire",
-        "Exile's barley bowl with spoon set beside it"
+        "Exile's barley bowl with spoon set beside it, untouched"
       ],
       "threads": [
         "The listening expression on the surveyor's face — what was he hearing?",
         "Fingers gone black and still going — an active process, not aftermath",
-        "The exile has not reacted visibly to the listening-face detail, but he has not moved",
-        "Marrow's attending stillness has not broken"
+        "The exile recognized something in the duelist's description but has not spoken it",
+        "The northeast trail remains uninvestigated"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
@@ -332,7 +312,8 @@
         "[d1] Spoke unprompted about the survey crew she passed on the northeast trail eight days ago — a man holding his hand like it burned, crew moving fast with no gear.",
         "[d1] Read: relieved, professional. Spoke freely because the Marchward demands plain speech. Information given, weight transferred. Still watching the exile sideways.",
         "[d1] Did not react to the exile closing — recognized it as a man hitting his limit, no performance of surprise. Looking at the treeline.",
-        "[d1] Filled in the missing detail — the hand pressed flat to the sternum, not the side; fingers black from the second knuckle and still going; the man's face listening, not pained. Noted the crew moved in deliberate, agreed-upon silence — not panic."
+        "[d1] Filled in the missing detail — the hand pressed flat to the sternum, not the side; fingers black from the second knuckle and still going; the man's face listening, not pained. Noted the crew moved in deliberate, agreed-upon silence — not panic.",
+        "[d1] Finished her cup, stood, and departed without ceremony — obligation to plain speech met, no further business at the trestle."
       ],
       "knownFacts": [
         "Eight days ago she passed a Council survey crew retreating fast from the northeast trail in the Disputed Zone — no map-cases, one man's hand pressed against his thigh as if burned",
@@ -351,7 +332,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Marchward trestle — has now given the full account; weight transferred, watching the treeline.",
+      "statusNote": "Departed the trestle, back toward the hostel interior.",
       "domains": {
         "primary": "marcher"
       },
@@ -360,7 +341,7 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "met": 4
+      "met": 5
     },
     "stillhold-exile-marchward": {
       "id": "stillhold-exile-marchward",
@@ -376,7 +357,8 @@
         "[d1] Volunteered, quietly, that the Council lost contact with the upstream structure — it is there but no longer answers. Said it like a weight set down.",
         "[d1] Read: guilt as much as fear. His confession was a weight set down, not a report delivered. He is afraid of what he knows and what knowing it makes him part of — not of Rhinofire.",
         "[d1] Asked directly what the structure was and what 'no longer answers' means — closed the question: 'I've said what I can say.' Not fleeing, not hostile. The limit is older than this conversation.",
-        "[d1] The listening-face detail from the duelist landed somewhere — he has not moved or responded, but his stillness reads as recognition, not indifference."
+        "[d1] The listening-face detail from the duelist landed somewhere — he has not moved or responded, but his stillness reads as recognition, not indifference.",
+        "[d1] Did not surface a reaction to the listening-face detail despite the silence offered. Face averted, still, barley bowl untouched."
       ],
       "knownFacts": [
         "Says the Council 'lost' something in the upper structure — not destroyed, not sealed, but present and no longer responding to them",
@@ -391,7 +373,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Marchward trestle, closed to further direct questioning — has gone very still at the listening-face detail.",
+      "statusNote": "At the trestle, closed inward — something from the duelist's account has landed but he is not offering it.",
       "domains": {
         "primary": "stillhold"
       },
@@ -400,7 +382,7 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "met": 4
+      "met": 5
     }
   },
   "placeMemory": {
@@ -506,7 +488,7 @@
         "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -624,11 +606,11 @@
     }
   },
   "tendencies": {
-    "strategic": 12.674801953125,
-    "amorous": 14.459006249999998,
-    "cautious": 2.901859375,
-    "cerebral": 0.9506249999999999,
-    "social": 0.975
+    "strategic": 12.357931904296874,
+    "amorous": 14.097531093749998,
+    "cautious": 3.829312890625,
+    "cerebral": 1.9268593749999998,
+    "social": 0.9506249999999999
   },
   "aptitudes": [
     "strategist",
@@ -636,7 +618,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 4,
+  "actionCount": 5,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -821,8 +803,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786757672536,
-  "rev": 28,
+  "updatedAt": 1786757823971,
+  "rev": 29,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -843,7 +825,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 5
+    "riven_marches": 6
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -851,10 +833,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-15T00:58:33.023Z",
-      "lastAt": "2026-08-15T01:34:32.529Z",
+      "lastAt": "2026-08-15T01:37:03.950Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [],
@@ -937,19 +919,19 @@
   ],
   "skillUses": {
     "scout": 1,
-    "careful": 3,
-    "study": 1,
+    "careful": 4,
+    "study": 2,
     "negotiate": 1,
     "ask": 1
   },
   "_opEmitted": {
-    "sceneSummary": 4,
-    "choices": 4,
-    "scene": 4,
-    "npcUpdates": 4,
+    "sceneSummary": 5,
+    "choices": 5,
+    "scene": 5,
+    "npcUpdates": 5,
     "codexUpdates": 4,
-    "timeOps": 4,
-    "characterDeltas": 1
+    "timeOps": 5,
+    "characterDeltas": 2
   },
-  "_opTurns": 4
+  "_opTurns": 5
 }

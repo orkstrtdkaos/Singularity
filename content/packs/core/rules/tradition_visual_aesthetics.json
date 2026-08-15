@@ -318,5 +318,55 @@
    "people": "bears the name visibly — a sigil, a stole, a brand, a stance. Often tired underneath the bearing. The name is grander than the person and that gap SHOWS: fine device, plain body; great title, mended hem. Never radiant of themselves — the light is borrowed and the borrowing is the point."
   }
  },
- "_missingClosed": "SNG-367: bargainers and god_named authored 2026-08-07; all 26 traditions now covered."
+ "_missingClosed": "SNG-367: bargainers and god_named authored 2026-08-07; all 26 traditions now covered.",
+ "_powerSystemNote": "⛔ SNG-435 §C3. FIVE ABILITY GROUPS FALL BACK TO THE DEFAULT PALETTE, AND THEY ARE NOT PEOPLES. Measured: 55 of 376 abilities carry a `tradition` value that does not exist in traditions.json — `harmonic` (15), `valley_craft` (17), `radiant_folk` (14), `precursor` (6), `cross_pole_braid` (3).\n⚠️ IN EVERY CASE THE VALUE IS THE ABILITY'S `powerSystem`, NOT A CULTURE: harmonic→powerSystem `harmonic`, radiant_folk→`radiant`, precursor→`precursor`, valley_craft→`valley_craft`, and the three braids each carry a different `reach_*`. THE `tradition` FIELD IS HOLDING A POWER SOURCE.\n⛔ SO AUTHORING FIVE `traditions` ENTRIES WOULD INVENT FIVE PEOPLES THE WORLD DOES NOT HAVE — the same error as SNG-432, where `harmonic_radiant` turned out to be a disposition pair and `valley_craft_administration` a job description. They are authored below under `powerSystems` instead.\n⚠️ AND THIS AXIS IS THE BETTER ONE ANYWAY: what a harmonic craft LOOKS like comes from SOUND, not from a people. A tradition supplies CULTURE; a power system supplies PHYSICS. Resolve `powerSystems[ps]` first for these, `traditions[t]` for the other 321.",
+ "powerSystems": {
+  "harmonic": {
+   "name": "Harmonic working",
+   "source": "sound made structural",
+   "palette": "pale slate and bone-white, thin bands of amber where a wave stands",
+   "materials": "phononic crystal, tuned stone, taut cable, glass that rings",
+   "light": "even and sourceless — the air itself is patterned; visible interference rings and standing-wave shells",
+   "mood": "⛔ ORDERED AND FELT BEFORE SEEN — pressure, not glare. The picture should suggest a sound you can stand inside.",
+   "signature": "concentric rings, nodal lines, dust settling into pattern on a flat surface"
+  },
+  "radiant": {
+   "name": "Radiant working",
+   "source": "light made instrument",
+   "palette": "white-gold core, hard cyan edge, black cast shadows with knife borders",
+   "materials": "prism, polished sun-metal, braided light-guide, scorched surfaces",
+   "light": "⛔ THE LIGHT IS THE SUBJECT — coherent beams, caustics, hard shadow with no falloff",
+   "mood": "precise, silent, instantaneous. Clean scorch lines rather than fire.",
+   "signature": "a straight beam that does not diffuse; caustic patterns thrown on nearby stone",
+   "_note": "⚠️ DISTINCT FROM BLAZEBORN `Radiance`, which is revelation-as-violence and overexposed. This is light as a TOOL — focused, cold-edged, engineered."
+  },
+  "precursor": {
+   "name": "Precursor working",
+   "source": "the dormant lattice, roused",
+   "palette": "dull graphite and verdigris, with one line of cold blue where the lattice wakes",
+   "materials": "buried alloy, seamless joins, geometry too regular to be grown or built",
+   "light": "⚠️ NOTHING GLOWS UNTIL IT IS ROUSED, and then only in lines — light travels ALONG a path rather than filling a space",
+   "mood": "old, indifferent, still working. Not magical — MAINTAINED.",
+   "signature": "a single line of light running away into the dark along a buried course"
+  },
+  "valley_craft": {
+   "name": "Valley craft",
+   "source": "skill, and nothing else",
+   "palette": "⛔ MUTED EARTH — wool, leather, wet rope, iron. NO EMISSIVE COLOUR AT ALL.",
+   "materials": "hand tools, plain cloth, worn wood, honest metal",
+   "light": "ordinary daylight, lamplight, firelight. Whatever is actually there.",
+   "mood": "⚠️ THE ABSENCE OF SPECTACLE IS THE POINT. Wayfinding, greenlore, a mediator's tongue — these are people being GOOD AT SOMETHING, and the image must not imply a power system.",
+   "signature": "hands doing work, close in, no effect layer over the top"
+  },
+  "braid": {
+   "name": "Cross-pole braid",
+   "source": "two reaches held at once",
+   "palette": "the two parent palettes meeting WITHOUT blending — a seam, not a gradient",
+   "materials": "whatever both parents use, in contact",
+   "light": "two light logics in one frame, and the boundary between them is the subject",
+   "mood": "⛔ HELD, NOT RESOLVED. A braid is a tension sustained; if the image looks harmonious it is wrong.",
+   "signature": "a visible seam where two different physics meet and neither wins",
+   "_note": "⚠️ Braids are MINTED AT RUNTIME, so this entry must generalise. Read the two parent reaches from `powerSystem` and compose; do not author per-braid."
+  }
+ }
 }

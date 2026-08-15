@@ -38,7 +38,7 @@ import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive }
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, onImageMinted, onComposedLookup, swapImageUrl, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -97,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.156";
+const APP_VERSION = "1.9.157";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -826,6 +826,89 @@ const _composeQueue = [];
 const _composeSeen = new Set();
 let _composeDraining = false;
 
+// ---------- SNG-435 §A: verify the bytes, heal the URL, and never storm the endpoint ----------
+//
+// ⛔ A 200 IS NOT PROOF OF AN IMAGE. Aevi measured that a rate-limited Pollinations request answers 200
+// with a ZERO-BYTE body, cached immutable for a year under the canonical URL and indistinguishable from a
+// healthy hit. Persist-once plus a deterministic URL then makes that permanent: the record holds the burned
+// address and every later read returns the same nothing.
+//
+// ⚠️ AND CCODE-193 WIDENED THE EXPOSURE, which is why the queue below is spaced rather than merely
+// serialized: a genuinely new subject now mints TWO urls, the raw draw and the composed re-mint, so a busy
+// first turn makes roughly twice the requests it did yesterday. Aevi's own testing poisoned eight URLs by
+// firing eight at once. Sequential at ~11s apart ran clean.
+//
+// ⛔ THE VERIFY IS ALMOST FREE, and that is not an accident. The browser has already fetched the picture
+// to draw it, so this `fetch` of the same URL is served by the HTTP cache — which is also why the queue's
+// spacing matters more than the verify's cost.
+const MINT_SPACING_MS = 2000;     // §A3: between jobs, never inside one
+const RETRY_GAP_MS = 10000;       // §A2: the failure mode IS rate limiting — retrying fast deepens it
+const MAX_BUST_RETRIES = 2;       // §A2: bounded, or a dead endpoint becomes an infinite loop
+let _bustCounter = 0;
+
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+/** Fetch the URL and say what actually came back.
+ *  ⛔ THREE OUTCOMES, NOT TWO, and the third is the one that protects the player: `unknown` means the
+ *  request never completed — offline, a dead hop, a cancelled navigation — and says NOTHING about the
+ *  bytes. Nothing may be deleted on an `unknown`. Deleting a gallery because a train went into a tunnel
+ *  would be a worse bug than the one this fixes. */
+async function imageBytesVerdict(url) {
+  try {
+    const res = await fetch(url, { cache: "reload" });
+    if (!res.ok) return { verdict: "unknown", why: `http ${res.status}` };
+    const blob = await res.blob();
+    if (blob.size < IMAGE_MIN_BYTES) return { verdict: "empty", bytes: blob.size };
+    return { verdict: "ok", bytes: blob.size };
+  } catch (e) {
+    return { verdict: "unknown", why: e?.message || "fetch failed" };
+  }
+}
+
+/** §A1 + §A2: prove the URL has an image behind it, and heal it with a cache-buster if it does not.
+ *  Returns the URL that is known good (possibly busted), or null when it is proven empty and unrecoverable.
+ *  `undefined` means we could not tell — leave everything alone. */
+async function verifiedImageUrl(url) {
+  let cur = url;
+  for (let attempt = 0; ; attempt++) {
+    const { verdict, bytes, why } = await imageBytesVerdict(cur);
+    // ⚠️ THE POLICY IS `mintAction` IN art.js, not an `if` ladder here. It is the rule that decides
+    // whether a player's stored picture gets deleted, and a rule that important should be provable.
+    const act = mintAction(verdict, attempt, MAX_BUST_RETRIES);
+    if (act === "keep") return cur;
+    if (act === "leave") { console.warn("[image] could not verify:", why); return undefined; }
+    // ⛔ A DISTINCT, GREPPABLE CONDITION. Folded into generic network-error handling, the rate we are
+    // actually exposed to stays invisible — which is how this survived long enough to reach a player.
+    console.warn(`image_empty_body attempt=${attempt} bytes=${bytes} url=${String(cur).slice(0, 120)}`);
+    if (act === "forget") return null;
+    await sleep(RETRY_GAP_MS);
+    cur = bustedURL(url, attempt + 1, ++_bustCounter);
+  }
+}
+
+/** Move every stored copy of a proven-empty URL onto a healed one — or drop it entirely when there is no
+ *  healed one to move to. ⚠️ ABSENT BEATS POISONED: a record with no image re-mints on the next open, a
+ *  record holding a burned URL never recovers. */
+function settleMintedUrl(job, good) {
+  if (good === undefined) return false;                       // could not tell — change nothing
+  if (good && good !== job.url) {
+    swapImageUrl(character, job.url, good);
+    if (job.record && job.field && job.record[job.field] === job.url) job.record[job.field] = good;
+    (character.composedImages ||= {})[job.url] = good;
+    for (const el of document.querySelectorAll("img")) if (el.getAttribute("src") === job.url) el.setAttribute("src", good);
+    saveCharacter(character);
+    return true;
+  }
+  if (good === null) {
+    const dropped = forgetImageUrl(character, job.url);
+    if (job.record && job.field && job.record[job.field] === job.url) delete job.record[job.field];
+    if (dropped) saveCharacter(character);
+    console.warn(`image_empty_body unrecoverable — forgot ${dropped} stored copy(s)`);
+    return true;
+  }
+  return false;
+}
+
 async function recomposeMinted(job) {
   character.promptCompositions = character.promptCompositions || {};
   // ⚠️ `job.raw` IS THE PRE-FLOOR LINE, and the floors are re-applied to the composed result below —
@@ -833,8 +916,13 @@ async function recomposeMinted(job) {
   const out = await composeImagePrompt(job.raw, { cache: character.promptCompositions, kind: job.kind });
   if (!out.composed || !out.prompt || out.prompt === job.raw) return false;   // nothing to compress, nothing to swap
   const safe = sanitizeImagePrompt(out.prompt, { ratingLevel: job.ratingLevel, isMinor: job.isMinor, kind: job.kind });
-  const url = imageURLFor(job.kind, safe, job.seedKey, { aesthetic: job.aesthetic });
-  if (!url || url === job.url) return false;
+  const built = imageURLFor(job.kind, safe, job.seedKey, { aesthetic: job.aesthetic });
+  if (!built || built === job.url) return false;
+  // \u26d4 SNG-435: THE COMPOSED URL IS AS BURNABLE AS ANY OTHER. It is a fresh address minted from a fresh
+  // prompt, so it can land inside the same rate-limit window the raw one did. Verified before it replaces
+  // anything \u2014 swapping a good picture for an empty one would be this bug wearing an improvement.
+  const url = await verifiedImageUrl(built);
+  if (!url) return false;              // empty or unknowable: the raw picture stays, and it is a real one
   swapImageUrl(character, job.url, url);
   if (job.record && job.field && job.record[job.field] === job.url) job.record[job.field] = url;  // a record outside the save
   // ⛔ AND THE ANSWER IS REMEMBERED AGAINST THE URL IT REPLACES, which is what makes the scene banner and
@@ -855,11 +943,24 @@ async function drainCompositions() {
   if (_composeDraining) return;
   _composeDraining = true;
   try {
-    // ⚠️ ONE AT A TIME. A page can mint a dozen pictures in one render, and a dozen simultaneous calls is
-    // both a rate limit and a bill. They are cheap and nobody is waiting on them.
+    // \u26a0\ufe0f ONE AT A TIME, AND SPACED. A page can mint a dozen pictures in one render; a dozen at once is a
+    // rate limit, a bill, and \u2014 since SNG-435 \u2014 a dozen URLs burned for a year. Nobody is waiting on any of
+    // this, so it costs nothing to be polite.
     while (_composeQueue.length) {
-      const job = _composeQueue.shift();
-      try { await recomposeMinted(job); } catch (e) { console.warn("[compose] skipped:", e?.message); }
+      let job = _composeQueue.shift();            // reassigned when a poisoned URL heals onto a busted one
+      try {
+        // \u26d4 VERIFY BEFORE COMPOSE, ALWAYS. The picture the player is looking at RIGHT NOW is the raw mint,
+        // and if its bytes are empty that is the emergency \u2014 composing a second address first would leave the
+        // burned one persisted for however long the model takes to answer.
+        const good = await verifiedImageUrl(job.url);
+        const settled = settleMintedUrl(job, good);
+        if (good === null) { if (settled) continue; }              // proven empty and unhealable: nothing to compose onto
+        if (good && good !== job.url) job = { ...job, url: good }; // heal first, then compose from the healed address
+        // \u26d4 NO KEY, NO CALL \u2014 but the verify above ran anyway. Composition is the only part that costs
+        // money; correctness is not optional, and a player with no key still gets a real picture.
+        if (job.raw && getApiKey()) await recomposeMinted(job);
+      } catch (e) { console.warn("[mint] skipped:", e?.message); }
+      if (_composeQueue.length) await sleep(MINT_SPACING_MS);      // \u00a7A3: between jobs, never before the last
     }
   } finally { _composeDraining = false; }
 }
@@ -874,9 +975,10 @@ onComposedLookup((url) => shownUrl(url) === url ? null : shownUrl(url));
 function shownUrl(u) { return (u && character?.composedImages?.[u]) || u; }
 
 onImageMinted((job) => {
-  // ⛔ NO KEY, NO CALL. The picture is already drawn and the composition is the only part that costs
-  // anything; queueing without a key spends a failure per image for no visible difference.
-  if (!job?.url || !job.raw || !getApiKey()) return;
+  // \u26d4 SNG-435 MOVED THE KEY CHECK INWARDS, and that is the whole point of this line. It used to sit here,
+  // so a player without an API key queued nothing \u2014 and therefore VERIFIED nothing, and would collect burned
+  // URLs invisibly forever. Composition costs money and is optional; proving the picture exists is neither.
+  if (!job?.url || !imagesEnabled()) return;
   if (_composeSeen.has(job.url)) return;                      // the same mint reached from two renders
   _composeSeen.add(job.url);
   _composeQueue.push(job);

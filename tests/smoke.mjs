@@ -14480,9 +14480,25 @@ await (async () => {
   check("CCODE-161: every name Erik allows collapses onto the ONE object", ["shadow sheet", "Shadow Slate", "shadow-sheet", "my shadow tablet"].every(s => resolveInventoryItem(holder, s, cat427)?.id === "shadow_tablet"));
   check("CCODE-161: a save holding an ALTERNATE as a bare string re-links to the real item", (() => { const d = { inventory: ["Shadow Slate"] }; norm427(d, cat427); return d.inventory[0].id === "shadow_tablet" && d.inventory[0].kind === "focus"; })());
 
-  // the reclaim — trace-gated, and proved against Silas's ACTUAL save, not a fixture
-  const silas = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
-  check("CCODE-161: the defect is real in the live save (else this gate proves nothing)", !(silas.inventory || []).some(i => /shadow/i.test(i.name || "")) && JSON.stringify(silas.npcRegistry).toLowerCase().includes("shadow-slate"));
+  // the reclaim — trace-gated, and proved against Silas's ACTUAL save, not a fixture.
+  //
+  // ⛔ SNG-435 SESSION: THE LIVE DEFECT IS GONE, BECAUSE THE FIX WORKED. Silas now holds the tablet, so
+  // the premise gate ("the defect is real in the live save") went red on a save that had been REPAIRED — a
+  // gate reporting success as failure. That is the right thing for a premise check to do when its premise
+  // expires; what is wrong is to delete it, because the repair then loses its only real-data test.
+  //
+  // ⚠️ SO THE DEFECT IS RECONSTRUCTED FROM HIS OWN SAVE rather than kept as a copy of it: the same
+  // record with the tablet taken back out and the reclaim flag cleared, which is exactly the state it was in
+  // when Erik reported it. The npcRegistry trace — the evidence the repair reads — is still his and still
+  // real, so this stays a test against live data and not a fixture I wrote to pass.
+  const silasNow = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
+  const silas = { ...silasNow, inventory: (silasNow.inventory || []).filter(i => !/shadow/i.test(i.name || "") && i.id !== "shadow_tablet") };
+  delete silas.itemReclaimVersion;
+  check("CCODE-161: the defect shape is reconstructed from the live save, and the trace it repairs from is real",
+    !(silas.inventory || []).some(i => /shadow/i.test(i.name || ""))
+    && JSON.stringify(silas.npcRegistry).toLowerCase().includes("shadow-slate")
+    && (silasNow.inventory || []).length > (silas.inventory || []).length,
+    "if the live save no longer carries the trace, this repair has no evidence to work from and the gate is void");
   const got = reclaimEstablishedItems(silas, cat427);
   check("CCODE-161 THE FIX: the trace in his own record gives the tablet back", got.length === 1 && got[0].id === "shadow_tablet" && !!got[0].trace);
   const held = (silas.inventory || []).find(i => i.id === "shadow_tablet");
@@ -16229,7 +16245,14 @@ await (async () => {
     check("CCODE-193: composition is centralised — the only direct calls are the battle mint and the lightbox regen",
       composeCalls === 3, `${composeCalls} direct composeImagePrompt call(s)`);
     // ⛔ NO KEY, NO CALL. The picture is already drawn; queueing without a key spends a failure per image.
-    check("CCODE-193: nothing is queued without an API key", /if \(!job\?\.url \|\| !job\.raw \|\| !getApiKey\(\)\) return;/.test(app193));
+    // ⛔ SNG-435 INVERTED THIS ONE, and the inversion is the finding. CCODE-193 kept the key check on
+    // the LISTENER, which was right when the queue only composed — and became wrong the moment the queue also
+    // VERIFIED. A player with no API key queued nothing, so they verified nothing, and would have collected
+    // burned URLs invisibly forever. Composition costs money and is optional; proving the picture exists is
+    // neither. The claim now is that the key gates the CALL and not the queue.
+    check("CCODE-193/435: the API key gates the composition CALL, never the queue that verifies the picture",
+      /if \(!job\?\.url \|\| !imagesEnabled\(\)\) return;/.test(app193)
+      && /if \(job\.raw && getApiKey\(\)\) await recomposeMinted\(job\);/.test(app193));
   }
   A193.onImageMinted(null);
 }
@@ -16354,6 +16377,102 @@ await (async () => {
       /profileInsight\(character, CONTENT\.rules\.playerAptitudes/.test(block194)
       && block194.indexOf("profileInsight") < block194.indexOf("aptitudeChips")
       && /\.cs-lean \{/.test(css194), block194.replace(/\s+/g, " ").slice(0, 130));
+  }
+}
+
+// ---- SNG-435 §A: a 200 is not proof of an image --------------------------------------------------
+// ⛔ AEVI MEASURED IT: a rate-limited Pollinations request answers HTTP 200 with a ZERO-BYTE body, and
+// Cloudflare caches that under the canonical URL as `immutable, max-age=31536000` — one year — carrying
+// `x-cache: HIT`, byte-identical in headers to a healthy hit. This pipeline's two best properties are what
+// make it permanent: the URL is deterministic and the mint is persist-once, so the record holds the burned
+// address and every later read returns the same nothing. It cannot self-heal.
+{
+  const A435 = await import("../engine/art.js");
+  // 1 · ⛔ THE POLICY, WHICH DECIDES WHETHER A PLAYER'S PICTURE GETS DELETED. Three verdicts, not two —
+  // and the third is the one that protects them: a fetch that never completed is not evidence about the
+  // bytes. Deleting a gallery because a train went into a tunnel would be worse than the bug being fixed.
+  check("435 §A: an unverifiable response changes NOTHING — offline is not evidence of an empty image",
+    A435.mintAction("unknown", 0) === "leave" && A435.mintAction("unknown", 9) === "leave");
+  check("435 §A: a proven-empty response retries while retries remain, then forgets — absent beats poisoned",
+    A435.mintAction("empty", 0, 2) === "retry" && A435.mintAction("empty", 1, 2) === "retry"
+    && A435.mintAction("empty", 2, 2) === "forget" && A435.mintAction("ok", 0) === "keep");
+  check("435 §A1: the floor is a real size, not zero — a 200 with a few bytes is not an image either",
+    A435.IMAGE_MIN_BYTES >= 500);
+  // 2 · ⛔ THE RETRY MUST NOT BE THE SAME URL. Re-requesting the canonical address re-reads the poisoned
+  // cache entry; changing the cache key is the entire fix, and stacking busters would grow the URL forever.
+  {
+    const base = "https://image.pollinations.ai/prompt/x?width=512&seed=7&nologo=true";
+    const b1 = A435.bustedURL(base, 1, 111), b2 = A435.bustedURL(base, 2, 222);
+    const restack = A435.bustedURL(b1, 2, 222);
+    check("435 §A2: a retry gets a DIFFERENT url, busters do not stack, and a plain url gains a ? not a &",
+      b1 !== base && b2 !== b1 && A435.isBustedURL(b1) && !A435.isBustedURL(base)
+      && (restack.match(/_cb=/g) || []).length === 1 && restack === b2
+      && A435.bustedURL("https://x/y", 1, 5) === "https://x/y?_cb=5_1",
+      `${b1.slice(-24)} | restack ${restack.slice(-24)}`);
+  }
+  // 3 · ⚠️ FORGETTING IS NOT NULLING. A null in `record.image` re-mints, but a null in a gallery row is a
+  // tile with no picture — the visible half of the same bug. Keys are deleted; array members are spliced.
+  {
+    const BAD = "https://image.pollinations.ai/prompt/burned?seed=1";
+    const save = { portrait: BAD, keep: BAD + "x", locationImages: { maw: BAD },
+      npcRegistry: { p: { image: BAD, name: "P" } },
+      gallery: [{ url: BAD, caption: "c" }, { url: "other" }], arr: [BAD, "no"] };
+    const n = A435.forgetImageUrl(save, BAD);
+    check("435 §A1: a proven-empty url is REMOVED wherever it is stored, not nulled, and lookalikes survive",
+      n === 5 && !("portrait" in save) && !("maw" in save.locationImages) && !("image" in save.npcRegistry.p)
+      && save.gallery.length === 1 && save.gallery[0].url === "other" && save.arr.length === 1 && save.arr[0] === "no"
+      && save.keep === BAD + "x" && save.npcRegistry.p.name === "P", `dropped ${n}`);
+    const cyc = { image: "Z" }; cyc.self = cyc; cyc.kid = { parent: cyc, image: "Z" };
+    let m = -1; try { m = A435.forgetImageUrl(cyc, "Z"); } catch (e) { m = `threw: ${e?.message}`; }
+    check("435 §A1: forgetting terminates on a save that points back at itself", m === 2, String(m));
+  }
+  // 4 · ⛔ THE BUSTER MAY NEVER REACH THE COMPOSITION KEY. `composeKey` hashes the deterministic PROMPT;
+  // if a URL ever fed it, every retry would re-compose and Aevi's "same subject, same picture, forever"
+  // would break — the exact stability rule this whole pipeline is built around.
+  {
+    const IP = await import("../engine/imageprompt.js");
+    const prompt = "a figure in grey wool, hands stained to the wrist";
+    const app435 = readFileSync(join(root, "app.js"), "utf8");
+    check("435 §A2: the cache-buster cannot reach composeKey — it keys on the prompt, and the call passes the prompt",
+      IP.composeKey(prompt, "npc") === IP.composeKey(prompt, "npc")
+      && IP.composeKey(prompt, "npc") !== IP.composeKey(prompt + "?_cb=1_1", "npc")
+      && /composeImagePrompt\(job\.raw, \{ cache: character\.promptCompositions/.test(app435)
+      && !/composeImagePrompt\([^)]*job\.url/.test(app435));
+  }
+  // 5 · THE WIRING: verify BEFORE compose, spaced, and NOT behind the API key.
+  {
+    const app435 = readFileSync(join(root, "app.js"), "utf8");
+    const drain = app435.slice(app435.indexOf("async function drainCompositions"), app435.indexOf("onComposedLookup("));
+    check("435 §A: the queue VERIFIES before it composes — the burned url is the emergency, not the second draw",
+      drain.indexOf("verifiedImageUrl") > -1 && drain.indexOf("verifiedImageUrl") < drain.indexOf("recomposeMinted"),
+      "compose first would leave a proven-empty url persisted for as long as the model takes to answer");
+    // ⛔ AND THE COMPOSED RE-MINT IS VERIFIED TOO. It is a fresh address from a fresh prompt, so it can land
+    // inside the same rate-limit window the raw one did — and swapping a real picture for an empty one would
+    // be this bug wearing an improvement. Mutation found this uncovered: deleting the verify inside
+    // `recomposeMinted` reddened nothing, because the gate above only watches the drain loop.
+    const recompose435 = app435.slice(app435.indexOf("async function recomposeMinted"), app435.indexOf("async function drainCompositions"));
+    check("435 §A: the COMPOSED url is verified before it replaces the picture the player already has",
+      /const url = await verifiedImageUrl\(built\);/.test(recompose435)
+      && recompose435.indexOf("verifiedImageUrl") < recompose435.indexOf("swapImageUrl"));
+    // ⚠️ MATCHED WITH ITS GUARD, because the first version matched the CALL alone and stayed green with the
+    // whole line wrapped in `if (false)` — asserting presence rather than use, which is the failure mode this
+    // suite keeps rediscovering. It is a source-shape gate because the drain loop lives in app.js and cannot
+    // be imported; that limit is real, and it is why the POLICY was extracted into art.js instead, where it
+    // can be proved behaviourally.
+    check("435 §A3: jobs are spaced, not merely serialized (parallel mints are what create the window)",
+      /if \(_composeQueue\.length\) await sleep\(MINT_SPACING_MS\);/.test(drain)
+      && /MINT_SPACING_MS = \d{4,}/.test(app435));
+    // ⛔ AND THE KEY CHECK MOVED INWARDS. It used to gate the whole listener, so a player with no API key
+    // queued nothing, verified nothing, and would collect burned URLs invisibly forever. Composition costs
+    // money and is optional; proving the picture exists is neither.
+    const listener = app435.slice(app435.indexOf("onImageMinted((job) =>"), app435.indexOf("// ---------- SNG-401"));
+    check("435 §A: verification is NOT gated on an API key — only the composition is",
+      !/getApiKey\(\)/.test(listener) && /getApiKey\(\)/.test(drain), listener.replace(/\s+/g, " ").slice(0, 120));
+    // ⚠️ AND THE HEAL PATH REASSIGNS `job`. It was written `const job = ...` and would have thrown
+    // "Assignment to constant variable" on the FIRST poisoned url — a runtime error reachable only by the
+    // bug this ticket exists to fix, which is the worst place for one.
+    check("435 §A2: the heal can rebind the job (it was a const, and only a poisoned url would have found it)",
+      /let job = _composeQueue\.shift\(\)/.test(drain) && /job = \{ \.\.\.job, url: good \}/.test(drain));
   }
 }
 

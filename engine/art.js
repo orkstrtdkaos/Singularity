@@ -13,6 +13,7 @@
 // → display + drop into the character's gallery. Pure + headless-testable up to the URL.
 
 import { RATING_LEVEL } from "./playerprofile.js";
+import { smartClamp } from "./namematch.js";   // SNG-435: the scene banner clamps GM prose, and a cut word becomes drawn detail
 
 // ⚠️ CCODE-174: EXPORTED, because it is part of every prompt and was invisible. It is appended at URL-build
 // time, AFTER the prompt that gets stored — so the details panel was showing the player a prompt that was
@@ -98,6 +99,91 @@ let _composedFor = null;
 export function onImageMinted(fn) { _onMinted = typeof fn === "function" ? fn : null; }
 export function onComposedLookup(fn) { _composedFor = typeof fn === "function" ? fn : null; }
 
+// ---------- SNG-435 §A: a 200 IS NOT PROOF OF AN IMAGE ----------
+//
+// ⛔ AEVI MEASURED THIS AND IT IS THE WORST BUG IN THE PIPELINE. `image.pollinations.ai` answers a
+// rate-limited request with **HTTP 200 and a zero-byte body**, and Cloudflare caches that under the
+// canonical URL as `public, max-age=31536000, immutable` — ONE YEAR. The poisoned response carries
+// `x-cache: HIT` and is byte-identical in headers to a healthy hit. Her numbers, one prompt, three requests:
+//
+//     canonical URL              0 bytes
+//     canonical URL + &_cb=…     24,050 bytes
+//     same prompt, seed 39650    25,786 bytes
+//
+// ⚠️ THE PROMPT IS FINE. THE URL IS BURNED. And this file's two best properties are what make that
+// permanent: `mintURL` is deterministic and `ensureImage` is persist-once, so the record holds the burned
+// address forever and every later read returns the same empty body. It cannot self-heal.
+//
+// ⛔ SO: ABSENT BEATS POISONED. A URL that has been PROVEN empty is not persisted and not kept — a record
+// with no image re-mints on the next open; a record holding a burned URL never recovers.
+//
+// ⚠️ PROVEN, NOT SUSPECTED. A fetch that throws — offline, a dead wifi hop, a cancelled navigation — says
+// NOTHING about the bytes, and must leave the save exactly as it found it. Deleting a player's gallery
+// because their train went into a tunnel would be a far worse bug than the one being fixed.
+
+/** Smallest response that can be a real picture. Aevi's floor, with margin: the smallest healthy image she
+ *  measured was ~18 KB, and the poisoned ones are 0. */
+export const IMAGE_MIN_BYTES = 1000;
+
+/** SNG-435 §A2 — THE RETRY MUST NOT BE THE SAME URL. Re-requesting the canonical address re-reads the
+ *  poisoned cache entry; the buster is the whole fix, because it changes the cache key. The URL that comes
+ *  back with real bytes is the one that gets persisted — ugly, and correct: the canonical one is burned for
+ *  a year and cannot be un-burned.
+ *  ⚠️ `stamp` is injected rather than read from the clock so this stays pure and testable. */
+export function bustedURL(url, attempt = 1, stamp = 0) {
+  const u = String(url || "");
+  if (!u) return u;
+  const clean = u.replace(/([?&])_cb=[^&]*(&|$)/g, (m, p1, p2) => (p2 ? p1 : "")).replace(/[?&]$/, "");
+  return `${clean}${clean.includes("?") ? "&" : "?"}_cb=${stamp}_${Math.max(1, attempt | 0)}`;
+}
+
+/** Does this URL carry a cache-buster? ⚠️ A busted URL is a healed one, not a broken one — it is what a
+ *  record SHOULD hold after a poisoned mint, so nothing may treat it as suspect. */
+export function isBustedURL(url) { return /[?&]_cb=/.test(String(url || "")); }
+
+/** SNG-435 §A1/§A2 — WHAT TO DO ABOUT A RESPONSE, as a pure decision so the rule can be tested rather than
+ *  trusted. The I/O lives in the app; the policy lives here.
+ *
+ *  ⛔ THREE VERDICTS, NOT TWO, AND THE THIRD IS THE ONE THAT PROTECTS THE PLAYER. `unknown` — the request
+ *  never completed: offline, a dead hop, a cancelled navigation — is not evidence about the bytes, and must
+ *  never delete anything. Deleting a gallery because a train went into a tunnel would be a worse bug than
+ *  the one this fixes, and it is the obvious way to write this wrong.
+ *
+ *  @returns "keep" (it is a real picture) · "retry" (proven empty, buster left) · "forget" (proven empty,
+ *           out of retries — absent beats poisoned) · "leave" (we cannot tell; change nothing) */
+export function mintAction(verdict, attempt = 0, maxRetries = 2) {
+  if (verdict === "ok") return "keep";
+  if (verdict === "empty") return attempt >= maxRetries ? "forget" : "retry";
+  return "leave";
+}
+
+/** SNG-435 §A1 — FORGET a URL that has been proven empty, wherever the save holds it. Sibling of
+ *  `swapImageUrl`, and deliberately a different function: a swap replaces one picture with another, this
+ *  removes a picture that does not exist so the next open mints a new one. Returns how many it dropped.
+ *
+ *  ⛔ IT DELETES RATHER THAN NULLS. A `null` in `record.image` is falsy, so persist-once re-mints — but a
+ *  `null` in a gallery row is a tile with no picture, which is the visible half of the same bug. Object
+ *  keys are deleted; array members holding the URL (or an object whose `.url` is it) are spliced out. */
+export function forgetImageUrl(root, url, seen = new Set()) {
+  if (!root || typeof root !== "object" || !url || seen.has(root)) return 0;
+  seen.add(root);
+  let n = 0;
+  if (Array.isArray(root)) {
+    for (let i = root.length - 1; i >= 0; i--) {
+      const v = root[i];
+      if (v === url || (v && typeof v === "object" && v.url === url)) { root.splice(i, 1); n++; }
+      else if (v && typeof v === "object") n += forgetImageUrl(v, url, seen);
+    }
+    return n;
+  }
+  for (const k of Object.keys(root)) {
+    const v = root[k];
+    if (v === url) { delete root[k]; n++; }
+    else if (v && typeof v === "object") n += forgetImageUrl(v, url, seen);
+  }
+  return n;
+}
+
 /** Image URL for a location banner, or null if art is off / nothing available. */
 // CCODE-193 §2: module-private. `sceneImage` is its only caller; app.js imported it and never
 // called it, and smoke imported it and never used it. The capability stays, the needless surface goes.
@@ -117,7 +203,11 @@ function locationImage(location, { ratingLevel = 2 } = {}) {
 export function sceneImage(location, sceneState, { ratingLevel = 2 } = {}) {
   const mode = getArtMode();
   if (mode === "generate" && sceneState?.setting) {
-    const raw = `${location.name} — ${sceneState.setting.slice(0, 280)}`;
+    // ⚠️ SNG-435: `smartClamp`, NOT `.slice`. The setting is GM prose and this is an IMAGE prompt — a cut
+    // mid-word leaves a fragment the generator draws as detail, which is the whole reason `battleprompt`
+    // trims to whole clauses. The ratchet saw this the moment CCODE-193 lifted it onto its own line; it had
+    // been slicing model prose in place for as long as the scene banner has existed.
+    const raw = `${location.name} — ${smartClamp(sceneState.setting, 280)}`;
     return mintURL("location", { raw, safe: sanitizeImagePrompt(raw, { ratingLevel }), seed: sceneState.setting, ratingLevel });
   }
   return locationImage(location, { ratingLevel });

@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 52,
+  "xp": 57,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -62,14 +62,14 @@
     }
   ],
   "alignment": {
-    "falsehood_truth": 0.03875,
+    "falsehood_truth": 0.0518125,
     "violence_peace": -0.004875000000000001
   },
   "attunement": 1,
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 40,
+  "energy": 32,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -144,14 +144,19 @@
         "player": "Read the fight — stand here a moment and let your sense of the treeline's pattern settle before you pick a route",
         "summary": "Rhinofire reads the road north from the doorway — the ford clear, but the treeline pattern ambiguous: the wrong stag and the note's author may not be separate problems.",
         "narration": "You stay in the doorway another minute, letting the morning settle into you properly this time — not the hostel's warmth at your back, but the street ahead and what it connects to. The sense comes up the way it does: not vision, something more like weight. The road north. The ford. The treeline.\n\nThe ford you already understood. The log crossing east is a fact, not a read — cross early, keep to the east option if the current looks wrong. That much is clear. What the read gives you past the ford is harder to hold: there is something in the pattern up there that isn't resolved. The wrong stag, the local said. Something moving the treeline north to south at dusk, tracing the crossing. Your training wants to call it territorial — the stag holds its ground and the movement at the treeline is its circuit. But the note's author has been north of the second ford recently, and they came back with a warning about words, not teeth. Those two things don't quite sit together. Either the stag is what the local clocked and the author is a separate problem, or the movement is something the author already knows about and didn't name.\n\nYou can't press the read further from here. The second ford is where the ground speaks plainly — past it, and you'll have something true to work with.\n\nMarrow shifts on the step beside you, cocks its head, and regards the north road with that particular sideways attention it gives to things that are heading toward a conclusion. It doesn't croak. Its silence is, as usual, timed."
+      },
+      {
+        "player": "Ask Marrow plainly — is the thing in the treeline ending something, or waiting on something to end?",
+        "summary": "Rhinofire asked Marrow about the treeline's watcher — the bird's answer was plain: not ending, but waiting on something to end.",
+        "narration": "You turn to Marrow on the step beside you and ask it plainly, the way you've learned works best: not a request, just a question put into the air where it can land.\n\n\"Is the thing in the treeline ending something, or waiting on something to end?\"\n\nMarrow shifts on the step. One foot, then the other. It looks north — not at the road, at something past the road, past the first fork and the mud and the high water of the second ford. Then it looks back at you with that eye that has seen more deaths than anything you've ever stood beside, and it is calm the way it always is, which is to say completely.\n\nA single croak. Then, after a pause that feels timed: one more.\n\nYou've been with Marrow long enough to read the difference. The first croak is *not ending*. The second croak — the pause, then the one that follows — is *waiting*.\n\nWaiting on something to end. Not the stag's prey. Not the note's author. Something else, something that isn't there yet. The thing in the treeline is patient in the way Marrow is patient, which tells you it is not hunting. It is attending. The distinction matters. A thing that hunts you can be turned; a thing that is waiting for you to finish something is a different problem entirely, because you have to know what you're supposed to finish first."
       }
     ],
     "lastTurn": {
-      "narration": "You stay in the doorway another minute, letting the morning settle into you properly this time — not the hostel's warmth at your back, but the street ahead and what it connects to. The sense comes up the way it does: not vision, something more like weight. The road north. The ford. The treeline.\n\nThe ford you already understood. The log crossing east is a fact, not a read — cross early, keep to the east option if the current looks wrong. That much is clear. What the read gives you past the ford is harder to hold: there is something in the pattern up there that isn't resolved. The wrong stag, the local said. Something moving the treeline north to south at dusk, tracing the crossing. Your training wants to call it territorial — the stag holds its ground and the movement at the treeline is its circuit. But the note's author has been north of the second ford recently, and they came back with a warning about words, not teeth. Those two things don't quite sit together. Either the stag is what the local clocked and the author is a separate problem, or the movement is something the author already knows about and didn't name.\n\nYou can't press the read further from here. The second ford is where the ground speaks plainly — past it, and you'll have something true to work with.\n\nMarrow shifts on the step beside you, cocks its head, and regards the north road with that particular sideways attention it gives to things that are heading toward a conclusion. It doesn't croak. Its silence is, as usual, timed.",
-      "sceneSummary": "Rhinofire reads the road north from the doorway — the ford clear, but the treeline pattern ambiguous: the wrong stag and the note's author may not be separate problems.",
+      "narration": "You turn to Marrow on the step beside you and ask it plainly, the way you've learned works best: not a request, just a question put into the air where it can land.\n\n\"Is the thing in the treeline ending something, or waiting on something to end?\"\n\nMarrow shifts on the step. One foot, then the other. It looks north — not at the road, at something past the road, past the first fork and the mud and the high water of the second ford. Then it looks back at you with that eye that has seen more deaths than anything you've ever stood beside, and it is calm the way it always is, which is to say completely.\n\nA single croak. Then, after a pause that feels timed: one more.\n\nYou've been with Marrow long enough to read the difference. The first croak is *not ending*. The second croak — the pause, then the one that follows — is *waiting*.\n\nWaiting on something to end. Not the stag's prey. Not the note's author. Something else, something that isn't there yet. The thing in the treeline is patient in the way Marrow is patient, which tells you it is not hunting. It is attending. The distinction matters. A thing that hunts you can be turned; a thing that is waiting for you to finish something is a different problem entirely, because you have to know what you're supposed to finish first.",
+      "sceneSummary": "Rhinofire asked Marrow about the treeline's watcher — the bird's answer was plain: not ending, but waiting on something to end.",
       "choices": [
         {
-          "label": "Head out now — cross the second ford early before the current turns, keeping eyes on the treeline",
+          "label": "Head north now — cross early at the second ford before the current turns",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {
@@ -170,17 +175,19 @@
           "emergenceId": null
         },
         {
-          "label": "Take the log crossing east — trade the direct ford for safer footing and a different angle on the treeline",
+          "label": "Take the log crossing east — the longer route, but drier ground and less exposure at the ford",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {
-            "violence_peace": 0.1
+            "violence_peace": 0.1,
+            "falsehood_truth": 0.1
           },
           "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
             "travel",
-            "careful"
+            "careful",
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -189,63 +196,50 @@
           "emergenceId": null
         },
         {
-          "label": "Find somewhere quiet first and meditate — let the ambiguity settle before the road takes it away",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "violence_peace": 0.2,
-            "falsehood_truth": 0.1
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful",
-            "sustain"
-          ],
-          "abilityId": "the_sustained_order",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Marrow plainly — is the thing in the treeline ending something, or waiting on something to end?",
+          "label": "Hold the line here a moment more — ask Marrow what it thinks the thing in the treeline is waiting *for*",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
             "falsehood_truth": 0.3
           },
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": -3,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
       "scene": {
-        "setting": "Marchward hostel doorway, morning — Rhinofire stands at the threshold, coat pocket holding the folded note, looking out at the street and the north road beyond. Flat grey spring light. Drip of snowmelt from the eaves.",
+        "setting": "Marchward hostel doorway, morning — Rhinofire stands at the threshold, coat pocket holding the folded note, Marrow on the step beside them. Flat grey spring light. Drip of snowmelt from the eaves. The north road visible past the street.",
         "npcsPresent": [
           {
+            "name": "Marrow",
+            "state": "On the step, both feet shifted, looking north with that unhurried eye."
+          },
+          {
             "name": "Eredan",
-            "state": "At the trestle, eating his barley, not looking up."
+            "state": "At the trestle inside, eating his barley, not looking up."
           },
           {
             "name": "Hostel-keeper",
             "state": "Behind her counter, cloth moving in slow circles."
-          },
-          {
-            "name": "Marrow",
-            "state": "On the step beside Rhinofire, watching the north road with sideways attention."
           }
         ],
         "objects": [
@@ -256,8 +250,8 @@
         ],
         "threads": [
           "The second ford: high on snowmelt — cross early or take the log crossing east",
-          "Something moving silent in the treeline at dusk, tracing the ford north to south",
-          "The wrong stag — territorial north of the second ford; may or may not be the same movement",
+          "The thing in the treeline is waiting on something to end — not hunting, attending",
+          "The wrong stag — territorial north of the second ford; may or may not be the same presence",
           "The note's author: went north of the second ford recently and came back; whereabouts unknown",
           "The authentication structure — listening, waiting, a matter of words not force"
         ]
@@ -267,11 +261,20 @@
           "op": "update",
           "npcId": "marrow",
           "name": "Marrow",
-          "role": "Companion — an Ashwarden-touched carrion bird that attends endings, including yours",
+          "role": "Companion — Ashwarden-touched carrion bird",
           "gender": "unknown",
           "pronouns": "they/them",
-          "note": "Shifted on the doorstep and regarded the north road with sideways attention. Did not croak. The silence was timed.",
-          "statusNote": "On the step beside Rhinofire, watching the north road."
+          "note": "Asked directly about the treeline's watcher — answered with two distinct croaks after looking north. First: not ending. Second (after a pause): waiting. The timing was deliberate. The thing in the treeline is attending something, not hunting.",
+          "learned": [
+            "The thing in the treeline is not ending anything — it is waiting on something to end",
+            "Marrow distinguished the two clearly and without hesitation"
+          ],
+          "skillsObserved": [
+            "reading the nature of endings at distance"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the hostel step beside Rhinofire, watching north."
         }
       ],
       "codexUpdates": [
@@ -279,7 +282,7 @@
           "topic": "marchward-note-author",
           "label": "The Note's Author",
           "kind": "mystery",
-          "fact": "The wrong stag and the treeline movement may not be separate problems — the author went north of the second ford and returned with a warning about words; the pattern at the treeline doesn't resolve cleanly into 'stag holds ground' alone. The distinction between the two is something only the ground past the ford can answer.",
+          "fact": "Marrow's read: the thing in the treeline is not hunting — it is waiting on something to end. It attends rather than pursues. This changes the threat shape: not predator behavior, but witness behavior. Whatever it waits on, the ending has not yet arrived.",
           "links": [
             "water-crisis",
             "riven-marchward",
@@ -289,24 +292,23 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Standing in the doorway, reading the shape of the road ahead — a short deliberate pause."
-      },
-      "sceneEnded": false
+        "why": "A brief exchange in the doorway — a question put to Marrow, an answer received."
+      }
     },
     "sceneState": {
-      "setting": "Marchward hostel doorway, morning — Rhinofire stands at the threshold, coat pocket holding the folded note, looking out at the street and the north road beyond. Flat grey spring light. Drip of snowmelt from the eaves.",
+      "setting": "Marchward hostel doorway, morning — Rhinofire stands at the threshold, coat pocket holding the folded note, Marrow on the step beside them. Flat grey spring light. Drip of snowmelt from the eaves. The north road visible past the street.",
       "npcsPresent": [
         {
+          "name": "Marrow",
+          "state": "On the step, both feet shifted, looking north with that unhurried eye."
+        },
+        {
           "name": "Eredan",
-          "state": "At the trestle, eating his barley, not looking up."
+          "state": "At the trestle inside, eating his barley, not looking up."
         },
         {
           "name": "Hostel-keeper",
           "state": "Behind her counter, cloth moving in slow circles."
-        },
-        {
-          "name": "Marrow",
-          "state": "On the step beside Rhinofire, watching the north road with sideways attention."
         }
       ],
       "objects": [
@@ -317,13 +319,13 @@
       ],
       "threads": [
         "The second ford: high on snowmelt — cross early or take the log crossing east",
-        "Something moving silent in the treeline at dusk, tracing the ford north to south",
-        "The wrong stag — territorial north of the second ford; may or may not be the same movement",
+        "The thing in the treeline is waiting on something to end — not hunting, attending",
+        "The wrong stag — territorial north of the second ford; may or may not be the same presence",
         "The note's author: went north of the second ford recently and came back; whereabouts unknown",
         "The authentication structure — listening, waiting, a matter of words not force"
       ]
     },
-    "beats": 7
+    "beats": 8
   },
   "clock": {
     "schemaVersion": 1,
@@ -622,7 +624,7 @@
         "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -782,7 +784,8 @@
           "[d1] Eredan confirmed: whoever wrote the note has been north of the second ford, and recently — the wrong stag is not something people write down without firsthand knowledge.",
           "[d1] The wrong stag is territorial, not aggressive by instinct — it holds a crossing the way something older than violence holds ground. Meeting it is a matter of choosing the ground and the moment, not avoiding it entirely.",
           "[d1] Something has been moving silent in the treeline north of the second ford at dusk — north-south, tracing the crossing — for at least the last few nights. A local ruled out wolves and deer. This predates Rhinofire's arrival and may relate to the wrong stag or to whoever wrote the note.",
-          "[d1] The wrong stag and the treeline movement may not be separate problems — the author went north of the second ford and returned with a warning about words; the pattern at the treeline doesn't resolve cleanly into 'stag holds ground' alone. The distinction between the two is something only the ground…"
+          "[d1] The wrong stag and the treeline movement may not be separate problems — the author went north of the second ford and returned with a warning about words; the pattern at the treeline doesn't resolve cleanly into 'stag holds ground' alone. The distinction between the two is something only the ground…",
+          "[d1] Marrow's read: the thing in the treeline is not hunting — it is waiting on something to end. It attends rather than pursues. This changes the threat shape: not predator behavior, but witness behavior. Whatever it waits on, the ending has not yet arrived."
         ],
         "links": [
           "water-crisis",
@@ -810,12 +813,12 @@
     }
   },
   "tendencies": {
-    "strategic": 13.378521890857856,
-    "amorous": 10.944330969022776,
-    "cautious": 6.7360256180193305,
-    "cerebral": 3.280661592021797,
-    "social": 4.092165142184373,
-    "leadership": 0.8166518036622618
+    "strategic": 13.04405884358641,
+    "amorous": 10.670722694797206,
+    "cautious": 7.5676249775688476,
+    "cerebral": 4.198645052221252,
+    "social": 3.989861013629764,
+    "leadership": 0.7962355085707052
   },
   "aptitudes": [
     "strategist",
@@ -823,7 +826,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 15,
+  "actionCount": 16,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -998,8 +1001,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786801718028,
-  "rev": 48,
+  "updatedAt": 1786801804657,
+  "rev": 49,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1022,7 +1025,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 16
+    "riven_marches": 17
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1038,10 +1041,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-15T13:45:38.317Z",
-      "lastAt": "2026-08-15T13:48:38.008Z",
+      "lastAt": "2026-08-15T13:50:04.650Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [],
@@ -1154,8 +1157,8 @@
   ],
   "skillUses": {
     "scout": 5,
-    "careful": 8,
-    "study": 4,
+    "careful": 9,
+    "study": 5,
     "negotiate": 5,
     "ask": 1,
     "calm": 1,
@@ -1163,17 +1166,17 @@
     "travel": 1
   },
   "_opEmitted": {
-    "sceneSummary": 14,
-    "choices": 14,
-    "scene": 14,
-    "npcUpdates": 14,
-    "codexUpdates": 12,
-    "timeOps": 13,
-    "characterDeltas": 5,
+    "sceneSummary": 15,
+    "choices": 15,
+    "scene": 15,
+    "npcUpdates": 15,
+    "codexUpdates": 13,
+    "timeOps": 14,
+    "characterDeltas": 6,
     "offer": 2,
     "sceneEnded": 3,
     "placeUpdates": 1
   },
-  "_opTurns": 14,
+  "_opTurns": 15,
   "_intentAsked": null
 }

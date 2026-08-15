@@ -8,10 +8,10 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 0,
+  "xp": 8,
   "attributes": {
-    "physical": 3,
-    "mental": 3,
+    "physical": 4,
+    "mental": 4,
     "social": 3,
     "practical": 3
   },
@@ -63,10 +63,10 @@
   ],
   "alignment": {},
   "attunement": 1,
-  "maxHealth": 30,
-  "health": 30,
-  "maxEnergy": 100,
-  "energy": 100,
+  "maxHealth": 46,
+  "health": 46,
+  "maxEnergy": 108,
+  "energy": 103,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -109,95 +109,135 @@
         "player": null,
         "summary": "Rhinofire wakes in the Marchward on an early-spring morning: water-crisis talk at every table, border-watchfulness thick in the air, and Marrow noting the treeline.",
         "narration": "Morning in the Marchward comes in gray and cold, early-spring damp pressing through every gap in the timber-and-stone buildings that line the main track. The mud is real mud — boot-deep at the crossing, crusted at the edges where last night's freeze didn't quite finish. You stand outside the hostel where you slept, Marrow perched on the eave above your head with its wings slightly open, drying them against the pale sky. The bird looks down at you once, then back at the treeline to the west, where the Redline's edge begins.\n\nThe Marchward is awake and moving. At the long trestle outside the common-house, a Redline duelist in worn leathers — the horizontal scar across her collarbone the formal mark of a witnessed bout — shares a bench with a Stillhold exile whose grey robe has been patched three times over. They are not speaking but they are sharing the same pot of barley, which here counts as peace. The talk at the other tables is low and watchful: border-talk, the kind that moves in short sentences and pauses before proper nouns. You catch fragments — 'upstream,' 'the sickness is real this time,' 'Harmonic said the Radiant, the Radiant said the Harmonic, and meanwhile my cousin's children—'\n\nThe water crisis has found even this far-edge town. The Marchward runs on a spring-fed cistern separate from the valley's main flow, but travelers come through with news on their boots and bad news travels fastest. There is a barrel of boiled water outside the common-house with a wooden ladle and a sign scratched into the stave: DO NOT DRINK UNTREATED. Your waterskin, filled at the last clean spring, feels suddenly more valuable. Something else moves under the talk — a word you've now heard twice since you stepped outside, from two different clusters of people: 'the substrate.' A mason's apprentice said it to her journeyman. A Marcher trader said it to no one in particular, then looked at his hand as if he'd felt something in it. What Wakes Beneath is not valley gossip anymore. It has arrived here.\n\nMarrow drops from the eave and lands on your pack-strap, settles its weight, and says nothing. Which is its comment."
+      },
+      {
+        "player": "Sit at the trestle and listen — find out what the Marchward knows about the upstream structure and the water crisis",
+        "summary": "At the Marchward trestle, Rhinofire listens well — a Redline duelist's firsthand account of the Disputed Zone survey crew's panicked retreat, and a Stillhold exile's quiet admission that the Council has lost contact with the upstream structure.",
+        "narration": "You take a seat at the far end of the trestle, close enough to hear without closing the distance — a traveler's trick, unremarkable in a border-town full of people who are paid to notice things. You set the waterskin on the boards in front of you, pour nothing, and listen.\n\nThe Redline duelist speaks first. Her voice is low but she does not bother lowering it — truth costs less than pretense here, and she knows it. The scar at her collarbone moves when she talks. She says the upstream trouble is not sickness from bad water, not as she understands it. She was through the Disputed Zone eight days ago on a contract. She saw a survey crew coming down the northeast trail in a hurry — no gear, no map-cases — and one of them was holding his hand flat against his thigh like something had burned it. She asked. He said the ground up there is doing something. She did not ask what. She came south.\n\nThe Stillhold exile — older, patched grey robe, hands wrapped around a clay bowl — doesn't look up. But he says, quiet and flat: the Council lost something in the upper structure. Not destroyed. Not sealed. Lost, meaning it is there and no longer answers them. He says it the way a man says a thing he has been carrying and wants to put down. Then he eats his barley and does not say anything else. The duelist watches him for a moment, then looks back at her own bowl.\n\nMarrow drops from your pack-strap to the trestle beside you. It sits where the wood is dry, turns its head once at the exile, and is still. Nobody at the table comments. Border-town manners."
       }
     ],
     "lastTurn": {
-      "narration": "Morning in the Marchward comes in gray and cold, early-spring damp pressing through every gap in the timber-and-stone buildings that line the main track. The mud is real mud — boot-deep at the crossing, crusted at the edges where last night's freeze didn't quite finish. You stand outside the hostel where you slept, Marrow perched on the eave above your head with its wings slightly open, drying them against the pale sky. The bird looks down at you once, then back at the treeline to the west, where the Redline's edge begins.\n\nThe Marchward is awake and moving. At the long trestle outside the common-house, a Redline duelist in worn leathers — the horizontal scar across her collarbone the formal mark of a witnessed bout — shares a bench with a Stillhold exile whose grey robe has been patched three times over. They are not speaking but they are sharing the same pot of barley, which here counts as peace. The talk at the other tables is low and watchful: border-talk, the kind that moves in short sentences and pauses before proper nouns. You catch fragments — 'upstream,' 'the sickness is real this time,' 'Harmonic said the Radiant, the Radiant said the Harmonic, and meanwhile my cousin's children—'\n\nThe water crisis has found even this far-edge town. The Marchward runs on a spring-fed cistern separate from the valley's main flow, but travelers come through with news on their boots and bad news travels fastest. There is a barrel of boiled water outside the common-house with a wooden ladle and a sign scratched into the stave: DO NOT DRINK UNTREATED. Your waterskin, filled at the last clean spring, feels suddenly more valuable. Something else moves under the talk — a word you've now heard twice since you stepped outside, from two different clusters of people: 'the substrate.' A mason's apprentice said it to her journeyman. A Marcher trader said it to no one in particular, then looked at his hand as if he'd felt something in it. What Wakes Beneath is not valley gossip anymore. It has arrived here.\n\nMarrow drops from the eave and lands on your pack-strap, settles its weight, and says nothing. Which is its comment.",
-      "sceneSummary": "Rhinofire wakes in the Marchward on an early-spring morning: water-crisis talk at every table, border-watchfulness thick in the air, and Marrow noting the treeline.",
-      "scene": {
-        "setting": "Outside the Marchward hostel, main track, early morning. Mud and cold air, grey sky, the common-house trestle visible to the left. The treeline toward the Redline lies west.",
-        "npcsPresent": [
-          {
-            "name": "Marrow",
-            "state": "Perched on the character's pack-strap, wings settled, watching the treeline."
-          },
-          {
-            "name": "Redline duelist",
-            "state": "At the trestle, sharing barley with a Stillhold exile, not speaking."
-          },
-          {
-            "name": "Stillhold exile",
-            "state": "At the trestle, eating, patched grey robe, not meeting eyes."
-          }
-        ],
-        "objects": [
-          "Boiled-water barrel with wooden ladle and scratched warning sign outside the common-house",
-          "Long trestle bench with several occupied clusters of travelers",
-          "Marrow — on the pack-strap"
-        ],
-        "threads": [
-          "Substrate-talk overheard twice — something people are feeling in their hands",
-          "Water crisis news has reached the Marchward; the valley's politics follow close behind",
-          "Marrow is watching the treeline to the west — and has not said why"
-        ]
-      },
+      "narration": "You take a seat at the far end of the trestle, close enough to hear without closing the distance — a traveler's trick, unremarkable in a border-town full of people who are paid to notice things. You set the waterskin on the boards in front of you, pour nothing, and listen.\n\nThe Redline duelist speaks first. Her voice is low but she does not bother lowering it — truth costs less than pretense here, and she knows it. The scar at her collarbone moves when she talks. She says the upstream trouble is not sickness from bad water, not as she understands it. She was through the Disputed Zone eight days ago on a contract. She saw a survey crew coming down the northeast trail in a hurry — no gear, no map-cases — and one of them was holding his hand flat against his thigh like something had burned it. She asked. He said the ground up there is doing something. She did not ask what. She came south.\n\nThe Stillhold exile — older, patched grey robe, hands wrapped around a clay bowl — doesn't look up. But he says, quiet and flat: the Council lost something in the upper structure. Not destroyed. Not sealed. Lost, meaning it is there and no longer answers them. He says it the way a man says a thing he has been carrying and wants to put down. Then he eats his barley and does not say anything else. The duelist watches him for a moment, then looks back at her own bowl.\n\nMarrow drops from your pack-strap to the trestle beside you. It sits where the wood is dry, turns its head once at the exile, and is still. Nobody at the table comments. Border-town manners.",
+      "sceneSummary": "At the Marchward trestle, Rhinofire listens well — a Redline duelist's firsthand account of the Disputed Zone survey crew's panicked retreat, and a Stillhold exile's quiet admission that the Council has lost contact with the upstream structure.",
       "choices": [
         {
-          "label": "Sit at the trestle and listen — find out what the Marchward knows about the upstream structure and the water crisis",
+          "label": "Ask the duelist what the survey crew member's hand looked like — exactly",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "easy",
           "intentTags": [
-            "scout",
-            "careful"
+            "study"
           ],
+          "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Ask the duelist about the Redline — you want to know what the march is like right now before you go any further into it",
+          "label": "Ask the exile what 'no longer answers them' means — what was it answering before",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": "easy",
+          "difficulty": "normal",
           "intentTags": [
+            "study",
             "negotiate"
           ],
+          "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Watch the treeline where Marrow is looking — Read the Fight, feel whether something is building out there",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "normal",
-          "abilityId": "read_the_fight",
-          "energyCost": 3,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Check the waygate on the ward's neutral ground — you want to know what destinations you can reach from here",
+          "label": "Say nothing further — let them go back to their meal, then head northeast toward the Disputed Zone",
           "attribute": "practical",
           "subAttribute": "wits",
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "intentTags": [
-            "travel"
+            "travel",
+            "careful"
           ],
+          "abilityId": null,
           "trivial": true
+        },
+        {
+          "label": "Use Read the Fight — read this conversation's shape: who is afraid, who is relieved to have spoken, who is watching you",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "easy",
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false
         }
       ],
+      "scene": {
+        "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. Marrow has moved from the pack-strap to the trestle boards beside Rhinofire.",
+        "npcsPresent": [
+          {
+            "name": "Redline duelist",
+            "state": "Eating, has spoken her piece, watching the exile from the corner of her eye."
+          },
+          {
+            "name": "Stillhold exile",
+            "state": "Eating barley, quiet, shoulders down — the posture of someone who said what they meant to and wants to be done with it."
+          },
+          {
+            "name": "Marrow",
+            "state": "Perched on the trestle beside Rhinofire, head turned toward the exile, still."
+          }
+        ],
+        "objects": [
+          "Boiled-water barrel with ladle and warning sign by the common-house door",
+          "Long trestle bench with several clusters of travelers",
+          "Waterskin on the trestle boards in front of Rhinofire",
+          "Marrow — on the trestle"
+        ],
+        "threads": [
+          "The Redline duelist saw the survey crew retreat from the northeast trail eight days ago — one man's burned hand unexplained",
+          "The Stillhold exile says the Council has 'lost' the upstream structure — it is there but no longer answers",
+          "Marrow looked at the exile and went still — that timing is a comment",
+          "Substrate-talk and the water crisis hang over every conversation here"
+        ]
+      },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "marrow",
-          "name": "Marrow",
-          "role": "Companion — Ashwarden-touched carrion bird",
-          "gender": "unknown",
-          "pronouns": "they/them",
-          "note": "Perched on the pack-strap after drying wings on the eave; watching the treeline to the west without explanation.",
+          "op": "meet",
+          "npcId": "redline-duelist-marchward",
+          "name": "Redline duelist",
+          "role": "Mercenary contractor, recently through the Disputed Zone",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "Worn leathers, a horizontal scar across the collarbone, the economy of someone who earns with her body and has stopped pretending otherwise.",
+          "note": "Spoke unprompted about the survey crew she passed on the northeast trail eight days ago — a man holding his hand like it burned, crew moving fast with no gear.",
+          "learned": [
+            "Eight days ago she passed a Council survey crew retreating fast from the northeast trail in the Disputed Zone — no map-cases, one man's hand pressed against his thigh as if burned",
+            "She asked what was happening and was told 'the ground is doing something' — she left south rather than investigate"
+          ],
+          "skillsObserved": [
+            "frontier travel",
+            "border-town discretion"
+          ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Traveling with Rhinofire, perched and watchful at the Marchward."
+          "statusNote": "At the Marchward trestle, eating, having said what she knows"
+        },
+        {
+          "op": "meet",
+          "npcId": "stillhold-exile-marchward",
+          "name": "Stillhold exile",
+          "role": "Former Stillhold resident, now sheltering at the Marchward",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "Older, patched grey robe, hands that have been kept still for a long time and are starting to shake. Eats carefully.",
+          "note": "Volunteered, quietly, that the Council lost contact with the upstream structure — it is there but no longer answers. Said it like a weight set down.",
+          "learned": [
+            "Says the Council 'lost' something in the upper structure — not destroyed, not sealed, but present and no longer responding to them",
+            "Phrased it as a confession, not a report — carries it personally"
+          ],
+          "skillsObserved": [
+            "institutional knowledge of the Stillhold and the Council"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the Marchward trestle, quiet after speaking, done for now"
         }
       ],
       "codexUpdates": [
@@ -205,69 +245,58 @@
           "topic": "water-crisis",
           "label": "The Water Crisis",
           "kind": "event",
-          "fact": "News of the First Sickness has reached the Marchward. The hostel runs on a spring-fed cistern separate from the valley's main flow, but travelers carry the news. A boiled-water barrel stands outside the common-house by order.",
+          "fact": "A Redline duelist passing the northeast trail of the Disputed Zone eight days ago saw a Council survey crew in panicked retreat — no gear, one man's hand burned somehow, saying only that 'the ground is doing something.' The Stillhold exile confirms the Council has 'lost' the upstream structure: it is present but no longer responds to them.",
           "links": [
-            "riven.marchward"
+            "what-wakes-beneath",
+            "riven-marchward"
           ]
         },
         {
           "topic": "what-wakes-beneath",
           "label": "What Wakes Beneath",
           "kind": "mystery",
-          "fact": "Two separate clusters of people at the Marchward used the word 'substrate' unprompted — a mason's apprentice and a Marcher trader who then looked at his hand as if he'd felt something. The flickering has reached even the border-town.",
+          "fact": "The burned hand of the retreating surveyor and the exile's phrase 'no longer answers them' sit beside the substrate-talk — whatever is happening in the upper structure may be the same stirring felt in people's hands at the Marchward.",
           "links": [
-            "riven.marchward"
+            "water-crisis",
+            "riven-marchward"
           ]
         }
       ],
-      "offer": {
-        "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
-        "from": "Marrow's nature: it attends endings and knows when something is concluding, and it is looking at the Redline's edge without explanation"
-      },
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "Brief scene-opening, stepping outside the hostel into the morning"
-      },
-      "deeds": [],
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "sceneEnded": false
+        "hoursPassed": 0.5,
+        "why": "A careful half-hour of listening at the trestle"
+      }
     },
     "sceneState": {
-      "setting": "Outside the Marchward hostel, main track, early morning. Mud and cold air, grey sky, the common-house trestle visible to the left. The treeline toward the Redline lies west.",
+      "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. Marrow has moved from the pack-strap to the trestle boards beside Rhinofire.",
       "npcsPresent": [
         {
-          "name": "Marrow",
-          "state": "Perched on the character's pack-strap, wings settled, watching the treeline."
-        },
-        {
           "name": "Redline duelist",
-          "state": "At the trestle, sharing barley with a Stillhold exile, not speaking."
+          "state": "Eating, has spoken her piece, watching the exile from the corner of her eye."
         },
         {
           "name": "Stillhold exile",
-          "state": "At the trestle, eating, patched grey robe, not meeting eyes."
+          "state": "Eating barley, quiet, shoulders down — the posture of someone who said what they meant to and wants to be done with it."
+        },
+        {
+          "name": "Marrow",
+          "state": "Perched on the trestle beside Rhinofire, head turned toward the exile, still."
         }
       ],
       "objects": [
-        "Boiled-water barrel with wooden ladle and scratched warning sign outside the com",
-        "Long trestle bench with several occupied clusters of travelers",
-        "Marrow — on the pack-strap"
+        "Boiled-water barrel with ladle and warning sign by the common-house door",
+        "Long trestle bench with several clusters of travelers",
+        "Waterskin on the trestle boards in front of Rhinofire",
+        "Marrow — on the trestle"
       ],
       "threads": [
-        "Substrate-talk overheard twice — something people are feeling in their hands",
-        "Water crisis news has reached the Marchward; the valley's politics follow close behind",
-        "Marrow is watching the treeline to the west — and has not said why"
+        "The Redline duelist saw the survey crew retreat from the northeast trail eight days ago — one man's burned hand unexplained",
+        "The Stillhold exile says the Council has 'lost' the upstream structure — it is there but no longer answers",
+        "Marrow looked at the exile and went still — that timing is a comment",
+        "Substrate-talk and the water crisis hang over every conversation here"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
@@ -280,7 +309,77 @@
   ],
   "companionNames": {},
   "quests": [],
-  "npcRegistry": {},
+  "npcRegistry": {
+    "redline-duelist-marchward": {
+      "id": "redline-duelist-marchward",
+      "name": "Redline duelist",
+      "role": "Mercenary contractor, recently through the Disputed Zone",
+      "description": "Worn leathers, a horizontal scar across the collarbone, the economy of someone who earns with her body and has stopped pretending otherwise.",
+      "firstMet": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Spoke unprompted about the survey crew she passed on the northeast trail eight days ago — a man holding his hand like it burned, crew moving fast with no gear."
+      ],
+      "knownFacts": [
+        "Eight days ago she passed a Council survey crew retreating fast from the northeast trail in the Disputed Zone — no map-cases, one man's hand pressed against his thigh as if burned",
+        "She asked what was happening and was told 'the ground is doing something' — she left south rather than investigate"
+      ],
+      "skillsObserved": [
+        "frontier travel",
+        "border-town discretion"
+      ],
+      "status": "active",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "At the Marchward trestle, eating, having said what she knows",
+      "domains": {
+        "primary": "marcher"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "met": 1
+    },
+    "stillhold-exile-marchward": {
+      "id": "stillhold-exile-marchward",
+      "name": "Stillhold exile",
+      "role": "Former Stillhold resident, now sheltering at the Marchward",
+      "description": "Older, patched grey robe, hands that have been kept still for a long time and are starting to shake. Eats carefully.",
+      "firstMet": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Volunteered, quietly, that the Council lost contact with the upstream structure — it is there but no longer answers. Said it like a weight set down."
+      ],
+      "knownFacts": [
+        "Says the Council 'lost' something in the upper structure — not destroyed, not sealed, but present and no longer responding to them",
+        "Phrased it as a confession, not a report — carries it personally"
+      ],
+      "skillsObserved": [
+        "institutional knowledge of the Stillhold and the Council"
+      ],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "At the Marchward trestle, quiet after speaking, done for now",
+      "domains": {
+        "primary": "stillhold"
+      },
+      "domainsSource": "role",
+      "lastSeen": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "met": 1
+    }
+  },
   "placeMemory": {
     "the_marchward": {
       "visits": 1,
@@ -351,7 +450,7 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1104,
+    "lastGenCount": 1105,
     "newsSpread": {
       "char-devtest::2026-08-01T15:05:35.966Z": [
         "waystone"
@@ -363,7 +462,7 @@
         "numinous.numen"
       ]
     },
-    "lastSharedReadAt": "2026-08-15T00:57:51.419Z",
+    "lastSharedReadAt": "2026-08-15T01:01:14.781Z",
     "lastTickWorldDay": 46,
     "lastCanonWorldDay": 46,
     "pressureQueue": [
@@ -381,9 +480,24 @@
         },
         "addedDay": 1,
         "locationId": "the_marchward"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_mire_gulper",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a mire-gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_mire_gulper",
+          "name": "a mire-gulper"
+        },
+        "addedDay": 1,
+        "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -411,16 +525,16 @@
     "story": "Grew up in a fishing village, maintains humble lifestyle. You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs."
   },
   "subAttributes": {
-    "strength": 3,
+    "strength": 4,
     "agility": 3,
     "reason": 3,
-    "insight": 3,
+    "insight": 4,
     "presence": 3,
     "rapport": 3,
     "craft": 3,
     "wits": 3
   },
-  "pendingSubPoints": 2,
+  "pendingSubPoints": 0,
   "skillPoints": 0,
   "discoveries": [],
   "codex": {
@@ -431,10 +545,12 @@
         "label": "The Water Crisis",
         "kind": "event",
         "facts": [
-          "[d1] News of the First Sickness has reached the Marchward. The hostel runs on a spring-fed cistern separate from the valley's main flow, but travelers carry the news. A boiled-water barrel stands outside the common-house by order."
+          "[d1] News of the First Sickness has reached the Marchward. The hostel runs on a spring-fed cistern separate from the valley's main flow, but travelers carry the news. A boiled-water barrel stands outside the common-house by order.",
+          "[d1] A Redline duelist passing the northeast trail of the Disputed Zone eight days ago saw a Council survey crew in panicked retreat — no gear, one man's hand burned somehow, saying only that 'the ground is doing something.' The Stillhold exile confirms the Council has 'lost' the upstream structure: it…"
         ],
         "links": [
-          "riven-marchward"
+          "riven-marchward",
+          "what-wakes-beneath"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -445,20 +561,49 @@
         "label": "What Wakes Beneath",
         "kind": "mystery",
         "facts": [
-          "[d1] Two separate clusters of people at the Marchward used the word 'substrate' unprompted — a mason's apprentice and a Marcher trader who then looked at his hand as if he'd felt something. The flickering has reached even the border-town."
+          "[d1] Two separate clusters of people at the Marchward used the word 'substrate' unprompted — a mason's apprentice and a Marcher trader who then looked at his hand as if he'd felt something. The flickering has reached even the border-town.",
+          "[d1] The burned hand of the retreating surveyor and the exile's phrase 'no longer answers them' sit beside the substrate-talk — whatever is happening in the upper structure may be the same stirring felt in people's hands at the Marchward."
         ],
         "links": [
-          "riven-marchward"
+          "riven-marchward",
+          "water-crisis"
         ],
         "aliases": [],
         "createdDay": 1,
+        "updatedDay": 1
+      },
+      "redline-duelist-marchward": {
+        "id": "redline-duelist-marchward",
+        "label": "Redline duelist",
+        "kind": "person",
+        "facts": [
+          "[d1] Mercenary contractor, recently through the Disputed Zone"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "redline-duelist-marchward",
+        "updatedDay": 1
+      },
+      "stillhold-exile-marchward": {
+        "id": "stillhold-exile-marchward",
+        "label": "Stillhold exile",
+        "kind": "person",
+        "facts": [
+          "[d1] Former Stillhold resident, now sheltering at the Marchward"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "stillhold-exile-marchward",
         "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 13,
-    "amorous": 16
+    "strategic": 13.674999999999999,
+    "amorous": 15.6,
+    "cautious": 1
   },
   "aptitudes": [
     "strategist",
@@ -466,7 +611,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 0,
+  "actionCount": 1,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -519,6 +664,26 @@
   "reconcileVersion": 30,
   "gallery": [
     {
+      "kind": "ability",
+      "prompt": "The Answered Motion",
+      "url": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true",
+      "caption": "The Answered Motion",
+      "worldDay": 46,
+      "at": "2026-08-15T01:20:07.845Z",
+      "subjectKind": "ability",
+      "subjectId": "the_answered_motion"
+    },
+    {
+      "kind": "portrait",
+      "prompt": "Weathered, spare, carrying old scars the way old wood carries grain — not imposing, simply final. The blade is older than the hand that holds it., full-body character portrait, named Rhinofire, of the",
+      "url": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20traveler's%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20steady%20grip%2C%20full-body%20stance%20against%20neutral%20background%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true",
+      "caption": "Rhinofire — marcher",
+      "worldDay": 46,
+      "at": "2026-08-15T01:15:53.336Z",
+      "subjectKind": "character",
+      "subjectId": "char-msto2oe1"
+    },
+    {
       "kind": "portrait",
       "prompt": "Rhinofire",
       "url": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20traveler's%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20steady%20grip%2C%20full-body%20stance%20against%20neutral%20background%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=74433&nologo=true",
@@ -529,9 +694,12 @@
   ],
   "promptCompositions": {
     "cpy17aj3": "Weathered duelist in worn traveler's gear, scarred like old wood grain, holding an ancient blade with steady grip, full-body stance against neutral background",
-    "cp1yj5foo": "Border town at dusk, weathered stone buildings flanking a dusty main street, two poles—one deep red, one pale—driven into packed earth at opposite ends, red and pale light casting long shadows across worn wooden tavern tables where armed…"
+    "cp1yj5foo": "Border town at dusk, weathered stone buildings flanking a dusty main street, two poles—one deep red, one pale—driven into packed earth at opposite ends, red and pale light casting long shadows across worn wooden tavern tables where armed…",
+    "cpzl8ibm": "Large grey-black corvid perched high, feathers ragged and disheveled, regarding the scene below with an unnervingly calm, knowing eye; ashen, death-touched presence; silent witness to countless endings.",
+    "cp1xhew5a": "Weathered duelist in worn travel gear, scarred like old wood grain, holding an ancient blade with quiet finality, standing at rest with the confidence of someone who has walked far and fought long.",
+    "cp1i8stmj": "Bare torso twisting mid-motion in golden side-light, sweat-sheened skin catching warmth, muscles articulated in earth-toned shadow, breath visible, body folding back on itself in a gesture that completes its own undoing, no props, raw…"
   },
-  "portrait": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20traveler's%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20steady%20grip%2C%20full-body%20stance%20against%20neutral%20background%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=74433&nologo=true",
+  "portrait": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20traveler's%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20steady%20grip%2C%20full-body%20stance%20against%20neutral%20background%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true",
   "personalArc": {
     "id": "the-weight-of-the-net",
     "name": "The Weight of the Net",
@@ -628,8 +796,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786755513038,
-  "rev": 7,
+  "updatedAt": 1786757111952,
+  "rev": 25,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -641,12 +809,16 @@
   "holdings": [],
   "composedImages": {
     "https://image.pollinations.ai/prompt/Weathered%2C%20spare%2C%20carrying%20old%20scars%20the%20way%20old%20wood%20carries%20grain%20%E2%80%94%20not%20imposing%2C%20simply%20final.%20The%20blade%20is%20older%20than%20the%20hand%20that%20holds%20it.%2C%20full-body%20character%20portrait%2C%20named%20Rhinofire%2C%20of%20the%20marcher%2C%20duelist%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20To%20right%20the%20wrongs%20of%20the%20world%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=74433&nologo=true": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20traveler's%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20steady%20grip%2C%20full-body%20stance%20against%20neutral%20background%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=74433&nologo=true",
-    "https://image.pollinations.ai/prompt/The%20Marchward%3A%20The%20habitable%20border-town%20between%20the%20Redline%20and%20the%20Stillhold%20%E2%80%94%20where%20the%20violence-pole%20and%20the%20peace-pole%20both%20run%20moderate%20and%20TRUTH%20runs%20high%2C%20because%20a%20place%20that%20touches%20both%20extremes%20learns%20to%20speak%20plainly%20or%20die.%20The%20natural%20base%20for%20exploring%20the%20Reach%3A%20warriors%20and%20peace-keepers%20drink%20at%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=31569&nologo=true": "https://image.pollinations.ai/prompt/Border%20town%20at%20dusk%2C%20weathered%20stone%20buildings%20flanking%20a%20dusty%20main%20street%2C%20two%20poles%E2%80%94one%20deep%20red%2C%20one%20pale%E2%80%94driven%20into%20packed%20earth%20at%20opposite%20ends%2C%20red%20and%20pale%20light%20casting%20long%20shadows%20across%20worn%20wooden%20tavern%20tables%20where%20armed%E2%80%A6%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=31569&nologo=true"
+    "https://image.pollinations.ai/prompt/The%20Marchward%3A%20The%20habitable%20border-town%20between%20the%20Redline%20and%20the%20Stillhold%20%E2%80%94%20where%20the%20violence-pole%20and%20the%20peace-pole%20both%20run%20moderate%20and%20TRUTH%20runs%20high%2C%20because%20a%20place%20that%20touches%20both%20extremes%20learns%20to%20speak%20plainly%20or%20die.%20The%20natural%20base%20for%20exploring%20the%20Reach%3A%20warriors%20and%20peace-keepers%20drink%20at%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=31569&nologo=true": "https://image.pollinations.ai/prompt/Border%20town%20at%20dusk%2C%20weathered%20stone%20buildings%20flanking%20a%20dusty%20main%20street%2C%20two%20poles%E2%80%94one%20deep%20red%2C%20one%20pale%E2%80%94driven%20into%20packed%20earth%20at%20opposite%20ends%2C%20red%20and%20pale%20light%20casting%20long%20shadows%20across%20worn%20wooden%20tavern%20tables%20where%20armed%E2%80%A6%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=31569&nologo=true",
+    "https://image.pollinations.ai/prompt/A%20big%20grey-black%20corvid%2C%20ragged%20and%20unbothered%2C%20with%20an%20eye%20that%20is%20far%20too%20calm.%20Sits%20where%20it%20can%20see%20the%20whole%20situation.%20Has%20been%20present%20at%20more%20deaths%20than%20anything%20else%20you%20have%20ever%20met%20and%20it%2C%20character%20portrait%2C%20named%20Marrow%2C%20Companion%20%E2%80%94%20an%20Ashwarden-touched%20carrion%20bird%20that%20attends%20endings%2C%20including%20yours%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=57251&nologo=true": "https://image.pollinations.ai/prompt/Large%20grey-black%20corvid%20perched%20high%2C%20feathers%20ragged%20and%20disheveled%2C%20regarding%20the%20scene%20below%20with%20an%20unnervingly%20calm%2C%20knowing%20eye%3B%20ashen%2C%20death-touched%20presence%3B%20silent%20witness%20to%20countless%20endings.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=57251&nologo=true",
+    "https://image.pollinations.ai/prompt/Weathered%2C%20spare%2C%20carrying%20old%20scars%20the%20way%20old%20wood%20carries%20grain%20%E2%80%94%20not%20imposing%2C%20simply%20final.%20The%20blade%20is%20older%20than%20the%20hand%20that%20holds%20it.%2C%20full-body%20character%20portrait%2C%20named%20Rhinofire%2C%20of%20the%20marcher%2C%20duelist%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20To%20right%20the%20wrongs%20of%20the%20world%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20traveler's%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20steady%20grip%2C%20full-body%20stance%20against%20neutral%20background%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true",
+    "https://image.pollinations.ai/prompt/liked%20confidence%20of%20character%2C%20liked%20confidence%20of%20character%2C%20weathered%2C%20spare%2C%20carrying%20old%20scars%20the%20way%20old%20wood%20carries%20grain%20%E2%80%94%20not%20imposing%2C%20simply%20final.%20the%20blade%20is%20older%20than%20the%20hand%20that%20holds%20it.%2C%20of%20the%20marcher%2C%20duelist%2C%20Weathered%2C%20spare%2C%20carrying%20old%20scars%20the%20way%20old%20wood%20carries%20grain%20%E2%80%94%20not%20imposing%2C%20simply%20final.%20The%20blade%20is%20older%20than%20the%20hand%20that%20holds%20it.%2C%20full-body%20character%20portrait%2C%20named%20Rhinofire%2C%20of%20the%20marcher%2C%20duelist%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20To%20right%20the%20wrongs%20of%20the%20world%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20travel%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20quiet%20finality%2C%20standing%20at%20rest%20with%20the%20confidence%20of%20someone%20who%20has%20walked%20far%20and%20fought%20long.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true",
+    "https://image.pollinations.ai/prompt/The%20Answered%20Motion%3A%20The%20Somatics'%20first%20offense%3A%20not%20force%20but%20ANSWER%20%E2%80%94%20their%20own%20motion%2C%20completed%20in%20a%20direction%20that%20ruins%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20somatic%20tradition%3A%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%3B%20breath%2C%20sinew%2C%20bare%20movement%2C%20no%20tools%3B%20warm%20side-light%20modelling%20muscle%20and%20motion%3B%20the%20body%20as%20the%20only%20instrument%20%E2%80%94%20kinetic%2C%20present%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true"
   },
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 1
+    "riven_marches": 2
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -654,10 +826,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-15T00:58:33.023Z",
-      "lastAt": "2026-08-15T00:58:33.023Z",
+      "lastAt": "2026-08-15T01:25:11.910Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [],
@@ -669,16 +841,81 @@
     }
   },
   "_pendingArrival": null,
+  "itemReclaimVersion": 1,
+  "nameRepairVersion": 1,
+  "customAbilities": {},
+  "companionBonds": {
+    "marrow": 0.25
+  },
+  "bondLogFrom": 0,
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {},
+    "coActivations": {},
+    "aspirations": []
+  },
+  "teachers": {},
+  "foreclosed": [
+    "stillhold",
+    "rootkin"
+  ],
+  "forkChoices": {},
+  "backfillVersion": 1,
+  "ladderPaid": {
+    "strength": 4,
+    "reason": 3,
+    "rapport": 3,
+    "craft": 3
+  },
+  "companyCapacity": 3,
+  "equipmentBonusCap": 2,
+  "imageSeedKey": "char-msto2oe1#r1",
+  "imagePinned": true,
+  "portraitPinned": true,
+  "likeness": {
+    "character:char-msto2oe1": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20traveler's%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20steady%20grip%2C%20full-body%20stance%20against%20neutral%20background%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true",
+          "prompt": "liked  confidence of character, Weathered, spare, carrying old scars the way old wood carries grain — not imposing, simply final. The blade is older than the hand that holds it., full-body character portrait, named Rhinofire, of the marcher, duelist, carrying Traveler's Pack, Waterskin, To right the wrongs of the world",
+          "note": "liked  confidence of character",
+          "seedKey": "char-msto2oe1#r1",
+          "at": 46
+        }
+      ]
+    }
+  },
+  "abilityImages": {
+    "the_answered_motion": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true"
+  },
+  "_chronicleBusy": false,
+  "_chronicleError": null,
+  "chronicleCache": {
+    "hash": "d0|b|c|q|L1|To right the wrongs of the world",
+    "text": "You have become someone who carries a grievance older than your own name — a fury at wrongs not yet righted, a moral weight that sits in the chest like a coal still finding its heat. The Marchers know your face now, have registered your presence among them the way a wall registers a first crack: noted, not yet tested. The Ashwardens and the Unmakers have heard nothing particular about you, which means the world still holds its breath. Even the Stillhold watches from a wary distance, as if they sense something in you that hasn't declared itself yet. You have done nothing of consequence — not yet. That is the whole of the pressure.",
+    "at": "2026-08-15T01:21:12.061Z"
+  },
+  "bondLog": [
+    {
+      "companionId": "marrow",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 1,
+      "worldDay": 46,
+      "actionCount": 0
+    }
+  ],
+  "skillUses": {
+    "scout": 1,
+    "careful": 1
+  },
   "_opEmitted": {
     "sceneSummary": 1,
-    "scene": 1,
     "choices": 1,
+    "scene": 1,
     "npcUpdates": 1,
     "codexUpdates": 1,
-    "offer": 1,
-    "timeOps": 1,
-    "characterDeltas": 1,
-    "sceneEnded": 1
+    "timeOps": 1
   },
   "_opTurns": 1
 }

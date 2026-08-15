@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 57,
+  "xp": 62,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -62,14 +62,14 @@
     }
   ],
   "alignment": {
-    "falsehood_truth": 0.0518125,
+    "falsehood_truth": 0.064221875,
     "violence_peace": -0.004875000000000001
   },
   "attunement": 1,
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 32,
+  "energy": 29,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -149,93 +149,69 @@
         "player": "Ask Marrow plainly — is the thing in the treeline ending something, or waiting on something to end?",
         "summary": "Rhinofire asked Marrow about the treeline's watcher — the bird's answer was plain: not ending, but waiting on something to end.",
         "narration": "You turn to Marrow on the step beside you and ask it plainly, the way you've learned works best: not a request, just a question put into the air where it can land.\n\n\"Is the thing in the treeline ending something, or waiting on something to end?\"\n\nMarrow shifts on the step. One foot, then the other. It looks north — not at the road, at something past the road, past the first fork and the mud and the high water of the second ford. Then it looks back at you with that eye that has seen more deaths than anything you've ever stood beside, and it is calm the way it always is, which is to say completely.\n\nA single croak. Then, after a pause that feels timed: one more.\n\nYou've been with Marrow long enough to read the difference. The first croak is *not ending*. The second croak — the pause, then the one that follows — is *waiting*.\n\nWaiting on something to end. Not the stag's prey. Not the note's author. Something else, something that isn't there yet. The thing in the treeline is patient in the way Marrow is patient, which tells you it is not hunting. It is attending. The distinction matters. A thing that hunts you can be turned; a thing that is waiting for you to finish something is a different problem entirely, because you have to know what you're supposed to finish first."
+      },
+      {
+        "player": "Hold the line here a moment more — ask Marrow what it thinks the thing in the treeline is waiting *for*",
+        "summary": "Rhinofire drew two reluctant field accounts and a sealed warning from strangers at the Marchward, read the road north twice, and learned from Marrow that whatever waits in the treeline is not hunting but watching — waiting on a person, not an event. The doorway has given what it will give. The road north is next.",
+        "narration": "You put the question to Marrow a second time, more precisely. Not *what* it is — you asked that already. What is it waiting *for*?\n\nThe bird is quiet long enough that you think it won't answer. Then it does something you haven't seen it do before: it turns away from the north road entirely and looks back into the hostel, over your shoulder, toward the trestle where Eredan is still working through his barley. Holds that look for a beat. Then turns north again.\n\nA single sound, low in the throat. Not a croak — something drier.\n\nYou've been with Marrow long enough to read the silences. This one says: *not an event. A person.*\n\nWhatever waits in the treeline north of the second ford, it is not waiting for the authentication structure to finish what it started, or for the melt to peak, or for the season to turn. It is waiting on someone to arrive, or someone to leave, or someone to make a choice. The geometry of it points here, to the Marchward, to the small knot of people who know what lies at the upstream site and are deciding what to do about it. The wrong stag is territorial — every account agrees on that — but territory is only half the shape. The other half is *vigilance*.\n\nMarrow resettles its wings and goes back to looking unbothered. The north road is still there. The morning is still grey and cold, the eaves still dripping. You have everything this doorway is going to give you."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Marrow on the step beside you and ask it plainly, the way you've learned works best: not a request, just a question put into the air where it can land.\n\n\"Is the thing in the treeline ending something, or waiting on something to end?\"\n\nMarrow shifts on the step. One foot, then the other. It looks north — not at the road, at something past the road, past the first fork and the mud and the high water of the second ford. Then it looks back at you with that eye that has seen more deaths than anything you've ever stood beside, and it is calm the way it always is, which is to say completely.\n\nA single croak. Then, after a pause that feels timed: one more.\n\nYou've been with Marrow long enough to read the difference. The first croak is *not ending*. The second croak — the pause, then the one that follows — is *waiting*.\n\nWaiting on something to end. Not the stag's prey. Not the note's author. Something else, something that isn't there yet. The thing in the treeline is patient in the way Marrow is patient, which tells you it is not hunting. It is attending. The distinction matters. A thing that hunts you can be turned; a thing that is waiting for you to finish something is a different problem entirely, because you have to know what you're supposed to finish first.",
-      "sceneSummary": "Rhinofire asked Marrow about the treeline's watcher — the bird's answer was plain: not ending, but waiting on something to end.",
+      "narration": "You put the question to Marrow a second time, more precisely. Not *what* it is — you asked that already. What is it waiting *for*?\n\nThe bird is quiet long enough that you think it won't answer. Then it does something you haven't seen it do before: it turns away from the north road entirely and looks back into the hostel, over your shoulder, toward the trestle where Eredan is still working through his barley. Holds that look for a beat. Then turns north again.\n\nA single sound, low in the throat. Not a croak — something drier.\n\nYou've been with Marrow long enough to read the silences. This one says: *not an event. A person.*\n\nWhatever waits in the treeline north of the second ford, it is not waiting for the authentication structure to finish what it started, or for the melt to peak, or for the season to turn. It is waiting on someone to arrive, or someone to leave, or someone to make a choice. The geometry of it points here, to the Marchward, to the small knot of people who know what lies at the upstream site and are deciding what to do about it. The wrong stag is territorial — every account agrees on that — but territory is only half the shape. The other half is *vigilance*.\n\nMarrow resettles its wings and goes back to looking unbothered. The north road is still there. The morning is still grey and cold, the eaves still dripping. You have everything this doorway is going to give you.",
+      "sceneSummary": "Rhinofire drew two reluctant field accounts and a sealed warning from strangers at the Marchward, read the road north twice, and learned from Marrow that whatever waits in the treeline is not hunting but watching — waiting on a person, not an event. The doorway has given what it will give. The road north is next.",
       "choices": [
         {
-          "label": "Head north now — cross early at the second ford before the current turns",
+          "label": "Set out now — cross early, take the log crossing east if the ford is running wrong",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {
             "violence_peace": -0.1
           },
           "difficulty": "easy",
-          "opposedDifficulty": null,
           "intentTags": [
             "travel",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Take the log crossing east — the longer route, but drier ground and less exposure at the ford",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "violence_peace": 0.1,
-            "falsehood_truth": 0.1
-          },
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "careful",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Hold the line here a moment more — ask Marrow what it thinks the thing in the treeline is waiting *for*",
-          "attribute": "mental",
+          "label": "Ask Eredan one last thing before you go — not what he'll say, what he won't: does he know who wrote the note?",
+          "attribute": "social",
           "subAttribute": "insight",
           "axes": {
             "falsehood_truth": 0.3
           },
           "difficulty": "normal",
-          "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "careful"
+            "negotiate"
           ],
-          "abilityId": "read_the_fight",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
+        },
+        {
+          "label": "Leave a word with the hostel-keeper — if someone comes asking about the north road or the structure, she knows where you went",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.2
+          },
+          "difficulty": "very easy",
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -3,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
       "scene": {
         "setting": "Marchward hostel doorway, morning — Rhinofire stands at the threshold, coat pocket holding the folded note, Marrow on the step beside them. Flat grey spring light. Drip of snowmelt from the eaves. The north road visible past the street.",
         "npcsPresent": [
           {
             "name": "Marrow",
-            "state": "On the step, both feet shifted, looking north with that unhurried eye."
+            "state": "Back to looking north, wings resettled, unbothered."
           },
           {
             "name": "Eredan",
-            "state": "At the trestle inside, eating his barley, not looking up."
+            "state": "At the trestle inside, working through his barley, not looking up."
           },
           {
             "name": "Hostel-keeper",
@@ -249,11 +225,10 @@
           "The flour-dusted counter"
         ],
         "threads": [
+          "The wrong stag waits in the treeline — territorial, but also vigilant; watching on a person, not an event",
           "The second ford: high on snowmelt — cross early or take the log crossing east",
-          "The thing in the treeline is waiting on something to end — not hunting, attending",
-          "The wrong stag — territorial north of the second ford; may or may not be the same presence",
-          "The note's author: went north of the second ford recently and came back; whereabouts unknown",
-          "The authentication structure — listening, waiting, a matter of words not force"
+          "The authentication structure — listening, waiting, a matter of words not force",
+          "The note's author: went north of the second ford recently; whereabouts unknown"
         ]
       },
       "npcUpdates": [
@@ -261,20 +236,17 @@
           "op": "update",
           "npcId": "marrow",
           "name": "Marrow",
-          "role": "Companion — Ashwarden-touched carrion bird",
+          "role": "Companion — an Ashwarden-touched carrion bird",
           "gender": "unknown",
           "pronouns": "they/them",
-          "note": "Asked directly about the treeline's watcher — answered with two distinct croaks after looking north. First: not ending. Second (after a pause): waiting. The timing was deliberate. The thing in the treeline is attending something, not hunting.",
+          "note": "Answered a second, more precise question: turned to look at Eredan, then north again — the thing in the treeline is waiting on a person, not an event.",
           "learned": [
-            "The thing in the treeline is not ending anything — it is waiting on something to end",
-            "Marrow distinguished the two clearly and without hesitation"
+            "The wrong stag's vigil is person-shaped, not event-shaped — it attends the Marchward's small knot of knowing people, not a season or a deadline"
           ],
           "skillsObserved": [
-            "reading the nature of endings at distance"
+            "reading endings and the attendance of death-patterns"
           ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "On the hostel step beside Rhinofire, watching north."
+          "statusNote": "On the step, wings resettled, looking north."
         }
       ],
       "codexUpdates": [
@@ -282,29 +254,31 @@
           "topic": "marchward-note-author",
           "label": "The Note's Author",
           "kind": "mystery",
-          "fact": "Marrow's read: the thing in the treeline is not hunting — it is waiting on something to end. It attends rather than pursues. This changes the threat shape: not predator behavior, but witness behavior. Whatever it waits on, the ending has not yet arrived.",
+          "fact": "Marrow's second read: the thing in the treeline is waiting on a person, not an event — its geometry points back to the Marchward and the small group who know what lies upstream. Territory and vigilance together. The wrong stag watches who decides.",
           "links": [
             "water-crisis",
             "riven-marchward",
-            "what-wakes-beneath"
+            "what-wakes-beneath",
+            "stillhold-exile-marchward"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange in the doorway — a question put to Marrow, an answer received."
-      }
+        "why": "A brief pause in the doorway, one more question put to Marrow"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "Marchward hostel doorway, morning — Rhinofire stands at the threshold, coat pocket holding the folded note, Marrow on the step beside them. Flat grey spring light. Drip of snowmelt from the eaves. The north road visible past the street.",
       "npcsPresent": [
         {
           "name": "Marrow",
-          "state": "On the step, both feet shifted, looking north with that unhurried eye."
+          "state": "Back to looking north, wings resettled, unbothered."
         },
         {
           "name": "Eredan",
-          "state": "At the trestle inside, eating his barley, not looking up."
+          "state": "At the trestle inside, working through his barley, not looking up."
         },
         {
           "name": "Hostel-keeper",
@@ -318,14 +292,13 @@
         "The flour-dusted counter"
       ],
       "threads": [
+        "The wrong stag waits in the treeline — territorial, but also vigilant; watching on a person, not an event",
         "The second ford: high on snowmelt — cross early or take the log crossing east",
-        "The thing in the treeline is waiting on something to end — not hunting, attending",
-        "The wrong stag — territorial north of the second ford; may or may not be the same presence",
-        "The note's author: went north of the second ford recently and came back; whereabouts unknown",
-        "The authentication structure — listening, waiting, a matter of words not force"
+        "The authentication structure — listening, waiting, a matter of words not force",
+        "The note's author: went north of the second ford recently; whereabouts unknown"
       ]
     },
-    "beats": 8
+    "beats": 9
   },
   "clock": {
     "schemaVersion": 1,
@@ -624,7 +597,7 @@
         "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -785,7 +758,8 @@
           "[d1] The wrong stag is territorial, not aggressive by instinct — it holds a crossing the way something older than violence holds ground. Meeting it is a matter of choosing the ground and the moment, not avoiding it entirely.",
           "[d1] Something has been moving silent in the treeline north of the second ford at dusk — north-south, tracing the crossing — for at least the last few nights. A local ruled out wolves and deer. This predates Rhinofire's arrival and may relate to the wrong stag or to whoever wrote the note.",
           "[d1] The wrong stag and the treeline movement may not be separate problems — the author went north of the second ford and returned with a warning about words; the pattern at the treeline doesn't resolve cleanly into 'stag holds ground' alone. The distinction between the two is something only the ground…",
-          "[d1] Marrow's read: the thing in the treeline is not hunting — it is waiting on something to end. It attends rather than pursues. This changes the threat shape: not predator behavior, but witness behavior. Whatever it waits on, the ending has not yet arrived."
+          "[d1] Marrow's read: the thing in the treeline is not hunting — it is waiting on something to end. It attends rather than pursues. This changes the threat shape: not predator behavior, but witness behavior. Whatever it waits on, the ending has not yet arrived.",
+          "[d1] Marrow's second read: the thing in the treeline is waiting on a person, not an event — its geometry points back to the Marchward and the small group who know what lies upstream. Territory and vigilance together. The wrong stag watches who decides."
         ],
         "links": [
           "water-crisis",
@@ -813,12 +787,12 @@
     }
   },
   "tendencies": {
-    "strategic": 13.04405884358641,
-    "amorous": 10.670722694797206,
-    "cautious": 7.5676249775688476,
-    "cerebral": 4.198645052221252,
-    "social": 3.989861013629764,
-    "leadership": 0.7962355085707052
+    "strategic": 12.717957372496748,
+    "amorous": 10.403954627427275,
+    "cautious": 8.378434353129627,
+    "cerebral": 5.093678925915721,
+    "social": 3.8901144882890195,
+    "leadership": 0.7763296208564376
   },
   "aptitudes": [
     "strategist",
@@ -826,7 +800,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 16,
+  "actionCount": 17,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -902,7 +876,8 @@
     "cp1yj5foo": "Border town at dusk, weathered stone buildings flanking a dusty main street, two poles—one deep red, one pale—driven into packed earth at opposite ends, red and pale light casting long shadows across worn wooden tavern tables where armed…",
     "cpzl8ibm": "Large grey-black corvid perched high, feathers ragged and disheveled, regarding the scene below with an unnervingly calm, knowing eye; ashen, death-touched presence; silent witness to countless endings.",
     "cp1xhew5a": "Weathered duelist in worn travel gear, scarred like old wood grain, holding an ancient blade with quiet finality, standing at rest with the confidence of someone who has walked far and fought long.",
-    "cp1i8stmj": "Bare torso twisting mid-motion in golden side-light, sweat-sheened skin catching warmth, muscles articulated in earth-toned shadow, breath visible, body folding back on itself in a gesture that completes its own undoing, no props, raw…"
+    "cp1i8stmj": "Bare torso twisting mid-motion in golden side-light, sweat-sheened skin catching warmth, muscles articulated in earth-toned shadow, breath visible, body folding back on itself in a gesture that completes its own undoing, no props, raw…",
+    "cp1jdi3n9": "Rhinofire at hostel threshold in grey spring light, coat pocket bulging with folded note, Marrow beside on wet step, snowmelt dripping from eaves, north road stretching past."
   },
   "portrait": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20traveler's%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20steady%20grip%2C%20full-body%20stance%20against%20neutral%20background%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true",
   "personalArc": {
@@ -1001,8 +976,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786801804657,
-  "rev": 49,
+  "updatedAt": 1786801885119,
+  "rev": 51,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1020,12 +995,13 @@
     "https://image.pollinations.ai/prompt/liked%20confidence%20of%20character%2C%20liked%20confidence%20of%20character%2C%20weathered%2C%20spare%2C%20carrying%20old%20scars%20the%20way%20old%20wood%20carries%20grain%20%E2%80%94%20not%20imposing%2C%20simply%20final.%20the%20blade%20is%20older%20than%20the%20hand%20that%20holds%20it.%2C%20of%20the%20marcher%2C%20duelist%2C%20Weathered%2C%20spare%2C%20carrying%20old%20scars%20the%20way%20old%20wood%20carries%20grain%20%E2%80%94%20not%20imposing%2C%20simply%20final.%20The%20blade%20is%20older%20than%20the%20hand%20that%20holds%20it.%2C%20full-body%20character%20portrait%2C%20named%20Rhinofire%2C%20of%20the%20marcher%2C%20duelist%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20To%20right%20the%20wrongs%20of%20the%20world%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20travel%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20quiet%20finality%2C%20standing%20at%20rest%20with%20the%20confidence%20of%20someone%20who%20has%20walked%20far%20and%20fought%20long.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true",
     "https://image.pollinations.ai/prompt/The%20Answered%20Motion%3A%20The%20Somatics'%20first%20offense%3A%20not%20force%20but%20ANSWER%20%E2%80%94%20their%20own%20motion%2C%20completed%20in%20a%20direction%20that%20ruins%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20somatic%20tradition%3A%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%3B%20breath%2C%20sinew%2C%20bare%20movement%2C%20no%20tools%3B%20warm%20side-light%20modelling%20muscle%20and%20motion%3B%20the%20body%20as%20the%20only%20instrument%20%E2%80%94%20kinetic%2C%20present%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true",
     "https://image.pollinations.ai/prompt/The%20Answered%20Motion%3A%20The%20Somatics'%20first%20offense%3A%20not%20force%20but%20ANSWER%20%E2%80%94%20their%20own%20motion%2C%20completed%20in%20a%20direction%20that%20ruins%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20somatic%20tradition%3A%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%3B%20breath%2C%20sinew%2C%20bare%20movement%2C%20no%20tools%3B%20warm%20side-light%20modelling%20muscle%20and%20motion%3B%20the%20body%20as%20the%20only%20instrument%20%E2%80%94%20kinetic%2C%20present%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51544&nologo=true": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51544&nologo=true",
-    "https://image.pollinations.ai/prompt/The%20Answered%20Motion%3A%20The%20Somatics'%20first%20offense%3A%20not%20force%20but%20ANSWER%20%E2%80%94%20their%20own%20motion%2C%20completed%20in%20a%20direction%20that%20ruins%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20somatic%20tradition%3A%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%3B%20breath%2C%20sinew%2C%20bare%20movement%2C%20no%20tools%3B%20warm%20side-light%20modelling%20muscle%20and%20motion%3B%20the%20body%20as%20the%20only%20instrument%20%E2%80%94%20kinetic%2C%20present%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51545&nologo=true": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51545&nologo=true"
+    "https://image.pollinations.ai/prompt/The%20Answered%20Motion%3A%20The%20Somatics'%20first%20offense%3A%20not%20force%20but%20ANSWER%20%E2%80%94%20their%20own%20motion%2C%20completed%20in%20a%20direction%20that%20ruins%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20somatic%20tradition%3A%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%3B%20breath%2C%20sinew%2C%20bare%20movement%2C%20no%20tools%3B%20warm%20side-light%20modelling%20muscle%20and%20motion%3B%20the%20body%20as%20the%20only%20instrument%20%E2%80%94%20kinetic%2C%20present%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51545&nologo=true": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51545&nologo=true",
+    "https://image.pollinations.ai/prompt/The%20Marchward%20%E2%80%94%20Marchward%20hostel%20doorway%2C%20morning%20%E2%80%94%20Rhinofire%20stands%20at%20the%20threshold%2C%20coat%20pocket%20holding%20the%20folded%20note%2C%20Marrow%20on%20the%20step%20beside%20them.%20Flat%20grey%20spring%20light.%20Drip%20of%20snowmelt%20from%20the%20eaves.%20The%20north%20road%20visible%20past%20the%20street.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=57223&nologo=true": "https://image.pollinations.ai/prompt/Rhinofire%20at%20hostel%20threshold%20in%20grey%20spring%20light%2C%20coat%20pocket%20bulging%20with%20folded%20note%2C%20Marrow%20beside%20on%20wet%20step%2C%20snowmelt%20dripping%20from%20eaves%2C%20north%20road%20stretching%20past.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=57223&nologo=true"
   },
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 17
+    "riven_marches": 18
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -1041,10 +1017,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-15T13:45:38.317Z",
-      "lastAt": "2026-08-15T13:50:04.650Z",
+      "lastAt": "2026-08-15T13:51:25.111Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [],
@@ -1066,7 +1042,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "read_the_fight": 3
+      "read_the_fight": 4
     },
     "coActivations": {},
     "aspirations": [],
@@ -1157,8 +1133,8 @@
   ],
   "skillUses": {
     "scout": 5,
-    "careful": 9,
-    "study": 5,
+    "careful": 10,
+    "study": 6,
     "negotiate": 5,
     "ask": 1,
     "calm": 1,
@@ -1166,17 +1142,17 @@
     "travel": 1
   },
   "_opEmitted": {
-    "sceneSummary": 15,
-    "choices": 15,
-    "scene": 15,
-    "npcUpdates": 15,
-    "codexUpdates": 13,
-    "timeOps": 14,
+    "sceneSummary": 16,
+    "choices": 16,
+    "scene": 16,
+    "npcUpdates": 16,
+    "codexUpdates": 14,
+    "timeOps": 15,
     "characterDeltas": 6,
     "offer": 2,
-    "sceneEnded": 3,
+    "sceneEnded": 4,
     "placeUpdates": 1
   },
-  "_opTurns": 15,
+  "_opTurns": 16,
   "_intentAsked": null
 }

@@ -148,7 +148,7 @@
     "still"
    ],
    "narrationHints": "The mercy and the weight of endings — a thing allowed to stop, a rot read like a map, a stillness that is not cruelty.",
-   "description": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art — not killing, but tending the end.",
+   "description": "Ease a dying thing's passing, read how and how long ago something died, and grant true rest to what cannot find it. The craft of endings — not killing, but tending the end.",
    "notFor": "It EASES an end and it can BRING one — but it works through what is already in a thing, so it is slow, it is visible, and the dying know what is happening to them. Its offense is taught at rank 2 (hasten a decline already present) and rank 3 (the full ending). It cannot smite a healthy thing dead where it stands (that is The Cut Thread), it cannot animate what it has ended, and it will not stop a death that must happen.",
    "tree": [
     {
@@ -255,7 +255,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A investigate/fight/puzzle/social action that reveals information or sets up a later action. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens precision; rank 3 extends scope. Limit: cannot Bring Back."
+   "plainly": "A investigate/fight/puzzle/social action that reveals information or sets up a later action. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens precision; rank 3 extends scope. Limit: cannot Bring Back.",
+   "_descriptionWas": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art — not killing, but tending the end."
   },
   {
    "id": "deathsense",
@@ -1510,7 +1511,7 @@
     "strike"
    ],
    "narrationHints": "There is no wound. There is no sound. The thread was there and then it was cut, and everyone in the room understands exactly what they have just watched.",
-   "description": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway.",
+   "description": "End one living thing. No wound, no struggle, no argument — it simply stops. The Fates' shears, the deepest thing the Ashwardens hold, and taught to almost nobody.",
    "notFor": "One thing, once, and it costs you enormously. It cannot be aimed at what has no thread — a machine, a figure, a Precursor working. And it cannot be taken back. There is no version of this you get to regret quietly: it is done, it is witnessed, and it is yours.",
    "tree": [
     {
@@ -1574,7 +1575,8 @@
    "upkeep": {
     "prepHours": 0,
     "note": "⚠️ COOLDOWN REMOVED (Erik). It is a T5 ashwarden capstone — the difficulty of OBTAINING it is already the limit, and very few people in the world can use it at all. A weeks-long cooldown on top of that is a second gate behind a locked door. Its cost is what it costs the wielder, not a timer."
-   }
+   },
+   "_descriptionWas": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway."
   },
   {
    "id": "the_grey_road",
@@ -2997,7 +2999,7 @@
     "hinder"
    ],
    "narrationHints": "Everything is already ending. You put a hand on this one and bring it forward. A blade greys and shears; a strained rope parts; a wound that was closing opens grey at the edges and does not stop; a man who was going to die in forty years does it considerably sooner.",
-   "description": "The Ashwardens' first offense, and it is the tradition doing precisely what the tradition is for. Endings are their work. This is the work applied against someone.",
+   "description": "Touch what is already failing and bring its end forward — a notched blade shears, a strained rope parts, a wound already open goes grey and stops closing. The Ashwardens' first offense: their work, applied against someone.",
    "notFor": "Beginning an ending that was not underway — it HASTENS, always; anything new, whole and perfectly kept offers little grip; distance at first rank (this is a hand on the thing); taking it back.",
    "tree": [
     {
@@ -3087,7 +3089,8 @@
    "backlash": "The grey turns on the nearest failing thing, which is you: every wound and worn strap you carry comes due at once.",
    "conserveSuppresses": "a small hastening — the grey stays where your hand is",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
+   "_descriptionWas": "The Ashwardens' first offense, and it is the tradition doing precisely what the tradition is for. Endings are their work. This is the work applied against someone."
   },
   {
    "id": "the_kept_vigil",
@@ -3104,7 +3107,7 @@
     "ward"
    ],
    "narrationHints": "You hold a thing at the edge it is already standing on. Not healing, not repair — HOLDING. The rope does not part, the wound does not turn, the truce does not break, for exactly as long as you attend it and no longer.",
-   "description": "The Ashwardens' keeping-craft, and the mirror of their hastening one. They tend endings, which means they also know precisely how to postpone one.",
+   "description": "Hold one failing thing exactly where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve and it does not worsen. The Ashwardens' keeping-craft, and the mirror of their hastening one.",
    "notFor": "Reversing anything (what is ending still ends when you stop); attending two things at once; healing; anything not already at its edge.",
    "tree": [
     {
@@ -3181,7 +3184,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that holds a failing thing at its edge. Rated 5 of 10 on one target for about twelve hours."
+   "plainly": "A puzzle/social action that holds a failing thing at its edge. Rated 5 of 10 on one target for about twelve hours.",
+   "_descriptionWas": "The Ashwardens' keeping-craft, and the mirror of their hastening one. They tend endings, which means they also know precisely how to postpone one."
   },
   {
    "id": "the_true_account",
@@ -3199,7 +3203,7 @@
     "foresee"
    ],
    "narrationHints": "You read what a thing has left. Not a feeling — a reckoning: what is wearing, how fast, and what it will fail from. Ashwardens are asked to look at bridges as often as at people.",
-   "description": "The Ashwardens' seeing-craft. Everything is ending; the craft is knowing the schedule.",
+   "description": "Look at a person, structure or working and know what is failing in it, roughly how long it has, and what it will go from. The Ashwardens' seeing-craft: everything is ending, and the craft is knowing the schedule.",
    "notFor": "The healthy and new (nothing is wearing yet worth reading); causing anything; being wrong gently — the account is what it is; reading how something will be REPAIRED.",
    "tree": [
     {
@@ -3275,9 +3279,11 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that reads what a thing has left and what it will fail from. Rated 5 of 10 across a scope of 2 for about four hours."
+   "plainly": "A puzzle/social action that reads what a thing has left and what it will fail from. Rated 5 of 10 across a scope of 2 for about four hours.",
+   "_descriptionWas": "The Ashwardens' seeing-craft. Everything is ending; the craft is knowing the schedule."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
- "rankModel": "SNG-147c: functions and harmRung accrue PER RANK and are additive — each rank either BROADENS (gains a new function verb) or DEEPENS (materially extends one it has), and says which in `gains`. Every rank is meaningful. The ability-level `functions` is the union; the ability-level `harmRung` is the ceiling. The intent gate (SNG-145) reads the rank the character HAS, not the ability's maximum."
+ "rankModel": "SNG-147c: functions and harmRung accrue PER RANK and are additive — each rank either BROADENS (gains a new function verb) or DEEPENS (materially extends one it has), and says which in `gains`. Every rank is meaningful. The ability-level `functions` is the union; the ability-level `harmRung` is the ceiling. The intent gate (SNG-145) reads the rank the character HAS, not the ability's maximum.",
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
 }

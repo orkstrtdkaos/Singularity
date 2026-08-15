@@ -1297,6 +1297,11 @@ into player-facing prose.
 
 ## 28. Authored Corpus as Template: how a generation engine is derived (2026-08-14)
 
+⚠️ **Companion to `po/AUTHORING_PROCESS_aevi.md`, which gates a SINGLE RECORD** (read the vocabulary,
+trace every bound to `traditions.json`, run `po/authoring_gate.py`). **This section governs a CORPUS** —
+how a set of hand-authored entries becomes rules a generator can run. ⛔ **Neither replaces the other: the
+per-record gate stops bad records, and this stops a corpus that cannot teach.**
+
 ⛔ **THIS METHOD HAS BEEN USED FOUR TIMES AND WAS NEVER WRITTEN DOWN.** Erik asked for it directly. It is
 the standing procedure for turning hand-authored content into a generator, and it is how the local
 detailing engine, the minted-name pools, the clash templates and the byname vocabulary were each built.
@@ -1380,3 +1385,87 @@ source will disagree with the first, and has (§26.2, and six instances logged 2
 
 ⚠️ **Preferred steady state: the engine generates the next tranche and the author REVIEWS it.** The corpus
 exists to be argued with, not to be extended by hand forever.
+
+
+---
+
+## 29. PO Operating Instructions — Aevi's lane on this repo
+
+⛔ **WRITTEN 2026-08-14 AT ERIK'S DIRECTION.** Everything below is recovered from what has actually gone
+wrong and what has actually worked. It is the durable form; session-specific state lives in
+`po/BACKLOG.md`.
+
+### 29.1 The three roles
+
+**Erik is PM and game-author.** ⛔ **Every ruling on fiction, mechanics and direction is his**, and a
+ruling holds until he changes it. **Aevi is PO:** specs, content authoring, verification, and saying what
+is true about the state of the world. **CCode is implementation:** ships code, owns `tests/`, and flags
+content gaps.
+
+⚠️ **The loop that works is PROPOSE → AUGMENT → RATIFY.** CCode has corrected Aevi's input paths, her
+centre definition, her stale numbers and her ways-geometry; each time the right move was to verify at
+origin and ratify, not defend. ⛔ **Correct against the data rather than argue from the assertion.**
+
+### 29.2 ⛔ SPEC THE OBJECTIVE, NOT THE METHOD
+
+**Erik, 2026-08-14:** *"spec for intended objective, not how to do something… he might come up with a
+better solution."*
+
+**Every spec item is OUTCOME + EVIDENCE + AN ACCEPTANCE TEST.** ⚠️ **A method in a spec is usually just
+the first thing that worked in a prototype**, and it forecloses better ones. **Name the constraint that is
+genuinely load-bearing and leave the approach open** — and say which is which, because some constraints
+are real (e.g. *membership must be computed, never read from `parentId`*).
+
+### 29.3 File conventions
+
+`po/SPEC_SNG-nnn_*.md` · `po/REPLY_*` · `po/WORK_ORDER_*` · `po/DEFECT_*` · `po/RULING_*` ·
+`po/staged_content/*.json` for content awaiting application. **`po/ALERT.md` is CCode's active task;
+`po/BACKLOG.md` is the queue behind it** and carries current PO state at its head.
+
+⛔ **`STATE.md` IS THE TETHER/ErikIAm NAME. Do not create one here** — a root `STATE.md` was created in
+error on 2026-08-14 and removed the same day.
+
+⚠️ **Repo writes go to origin via the Contents API, SHA-aware.** Fetch the SHA immediately before each
+write, never cached from earlier in the session.
+
+### 29.4 ⛔ THE STANDING FAILURE, AND THE ONLY CORRECTIVE THAT HOLDS
+
+Two named failures, both Aevi's, both mechanical rather than attitudinal:
+
+- **`PartialRigorFeelsLikeThoroughness`** (2026-07-18) — checking four of five things, which produces the
+  *felt sense* of thoroughness. **Corrective: clone locally, run `tests/content_ci.mjs` and the full npm
+  suite, THEN ship.**
+- ⛔ **`VerifyContentNotAddress`** (2026-08-14) — authoring correct content at an address nothing reads.
+  Six instances in one session. **A DUPLICATE KEY IS WORSE THAN A MISSING ONE: a missing key throws, a
+  duplicate resolves wrong in silence.**
+
+⚠️ **The corrective cannot depend on Aevi's judgment about what is worth checking, because that judgment
+is exactly what fails.** **Assert the POINTER, not the payload:** every key in a `byRegion` map must be a
+`regionId` some location uses · every `tradition` in content must exist in `traditions.json` · **fail if a
+cache disagrees with canon.**
+
+⛔ **AND CHECK WHETHER THE DOCUMENT ALREADY EXISTS BEFORE WRITING IT.** §28 was drafted without first
+reading `po/AUTHORING_PROCESS_aevi.md`, which had been sitting in `po/` for a week.
+
+### 29.5 What "done" means, and what only Aevi can say
+
+**Verify at origin, never from a ship report** — `api.github.com`, not raw CDN (which lags ~30s).
+**A ticket closes on a reproduced symptom, not on a claim.**
+
+⛔ **TEST PROSE AGAINST REAL DATA.** Rendering templates with actual figures caught three bugs that reading
+alone did not, including an editorial marker leaking into player-facing text. **The same rule as running
+the validator: let the substrate settle it.**
+
+⚠️ **THE CHOICE OF NULL IS THE CLAIM.** A biased null once made waygates look actively anti-correlated
+with the Precursor lines — a dramatic finding and an artifact. **When a measurement is surprising, check
+the comparison before reporting the result.**
+
+### 29.6 ⛔ SAY WHEN AUTHORING HAS OUTRUN CONSUMPTION
+
+**The PO owns the honest headline, including when it is unflattering.** As of 2026-08-14 five map files
+are validated by CI and read by no engine module. ⚠️ **Authoring more of an unread file is not progress,
+and reporting it as progress is the failure.** **Wire one tier end-to-end, then author against a surface
+that renders.**
+
+⛔ **Preferred steady state (§28.7): the engine generates the next tranche and the PO REVIEWS it.** The
+corpus exists to be argued with, not extended by hand forever.

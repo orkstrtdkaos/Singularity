@@ -22,7 +22,7 @@
     "strike"
    ],
    "narrationHints": "Violence as a discipline, not a rage — economical, decisive, terrible in its precision. The Marchers do not brawl; they end.",
-   "description": "The violence-pole mastery: the martial disciplines honed to an art. Not fury — force made exact.",
+   "description": "Strike with trained decisiveness, stand where others break, and end a fight fast once you commit. The violence-pole mastery: not fury, force made exact.",
    "notFor": "Cruelty (the Edge is decisive, not sadistic — that's a different corruption); winning without cost; anything that must be gentle.",
    "tree": [
     {
@@ -121,7 +121,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/duel action that deals damage. It rolls 2d6 Ranks: rank 2 extends targets; rank 3 adds to special. Limit: force IS Force — it makes enemies and consequences."
+   "plainly": "A fight/duel action that deals damage. It rolls 2d6 Ranks: rank 2 extends targets; rank 3 adds to special. Limit: force IS Force — it makes enemies and consequences.",
+   "_descriptionWas": "The violence-pole mastery: the martial disciplines honed to an art. Not fury — force made exact."
   },
   {
    "id": "stillcraft",
@@ -141,7 +142,7 @@
     "truce"
    ],
    "narrationHints": "Peace as an act, not an absence — the will to hold a room, a feud, a war from tipping, one breath at a time.",
-   "description": "The peace-pole mastery: de-escalation, arbitration, and the making of truces that hold. The full craft the Valley's Mediator's Tongue only shadows.",
+   "description": "Halt a rising conflict before it breaks, read what each side truly needs, and make yourself the still point a room organizes around. The peace-pole mastery: peace as an act, not an absence.",
    "notFor": "Forcing calm on the unwilling (Stillcraft opens the door, never shoves through it); winning a fight (it prevents them); a peace built on a lie holds only until the lie breaks.",
    "tree": [
     {
@@ -247,7 +248,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/fight/duel action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 deepens deescalation; rank 3 extends scope. Limit: cannot Stop Violence Already Loosed."
+   "plainly": "A social/fight/duel action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 deepens deescalation; rank 3 extends scope. Limit: cannot Stop Violence Already Loosed.",
+   "_descriptionWas": "The peace-pole mastery: de-escalation, arbitration, and the making of truces that hold. The full craft the Valley's Mediator's Tongue only shadows."
   },
   {
    "id": "read_the_fight",
@@ -929,7 +931,7 @@
     "shield"
    ],
    "narrationHints": "Violence and peace both at a knife's edge, held by will alone.",
-   "description": "The braid-craft: hold a moment where violence is total and peace is total in perfect tension — an armed grace.",
+   "description": "Hold a razor's-edge standoff open — maximum threat and maximum restraint at once — by sheer presence. The braid-craft: an armed grace, held by will alone.",
    "notFor": "Resolving the tension (this holds it); rest.",
    "tree": [
     {
@@ -1010,7 +1012,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "A duel, fight or social action. You hold a standoff open by presence alone — everyone armed, nobody moving — soaking 5 damage for up to six people while it stands. It does not resolve anything; it buys you the scene to resolve it in, and it ends when you stop paying. It is exhausting, costing energy every round. And one slip looses it: if you are struck, startled, or made to move, everything held breaks at once and the fight starts from where it was."
+   "plainly": "A duel, fight or social action. You hold a standoff open by presence alone — everyone armed, nobody moving — soaking 5 damage for up to six people while it stands. It does not resolve anything; it buys you the scene to resolve it in, and it ends when you stop paying. It is exhausting, costing energy every round. And one slip looses it: if you are struck, startled, or made to move, everything held breaks at once and the fight starts from where it was.",
+   "_descriptionWas": "The braid-craft: hold a moment where violence is total and peace is total in perfect tension — an armed grace."
   },
   {
    "id": "last_form",
@@ -2361,7 +2364,7 @@
     "sustain"
    ],
    "narrationHints": "You stand where the line is and it holds because you are standing there. Not a wall — a decision, made with your body, that others can put their shoulders against.",
-   "description": "The Marchers' first craft and the reason the March exists: a line is people, and people hold when someone visibly will not move.",
+   "description": "Take a position and hold it, and those beside you steady — a wavering line stops wavering, a retreat becomes an orderly one, and you are much harder to move than your size explains. The Marchers' first craft, and the reason the March exists.",
    "notFor": "Holding alone against overwhelming force (it steadies people, it does not multiply them); attacking; holding a line you do not believe in — the craft reads the difference.",
    "tree": [
     {
@@ -2441,7 +2444,8 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/social action that holds a position and steadies everyone on it. Rated 6 of 10 across a scope of 2 for about eight hours."
+   "plainly": "A fight/social action that holds a position and steadies everyone on it. Rated 6 of 10 across a scope of 2 for about eight hours.",
+   "_descriptionWas": "The Marchers' first craft and the reason the March exists: a line is people, and people hold when someone visibly will not move."
   },
   {
    "id": "the_read_field",
@@ -2459,7 +2463,7 @@
     "reveal"
    ],
    "narrationHints": "You look at ground and see the fight it will produce — where a charge must funnel, where a line will break first, which approach a sensible enemy takes and which a frightened one does.",
-   "description": "The Marchers' seeing-craft. The March holds because it chose the ground before anyone arrived.",
+   "description": "Look at terrain and know the fight it will produce — chokepoints, dead angles, where footing fails, which line is holdable with what you have. The Marchers' seeing-craft: the March holds because it chose the ground first.",
    "notFor": "Reading people's intentions (this reads GROUND); anything indoors and small; a fight already joined — read it before, not during.",
    "tree": [
     {
@@ -2536,8 +2540,10 @@
      "class": "soft"
     }
    ],
-   "plainly": "A fight/puzzle action that reads the fight a piece of ground will produce. Rated 5 of 10 across a scope of 3 for about twelve hours."
+   "plainly": "A fight/puzzle action that reads the fight a piece of ground will produce. Rated 5 of 10 across a scope of 3 for about twelve hours.",
+   "_descriptionWas": "The Marchers' seeing-craft. The March holds because it chose the ground before anyone arrived."
   }
  ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
 }

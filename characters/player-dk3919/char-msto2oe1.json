@@ -123,71 +123,102 @@
         "player": "Show the note to Eredan — he named the structure; he may recognize the hand or the warning's source.",
         "summary": "Eredan reads the note without touching it, confirms the warning is accurate, and reveals that whoever wrote it has been north of the second ford — and recently.",
         "narration": "You cross the room and set the note on the table beside Eredan's bowl without a word. Just the paper, open, where he can read it.\n\nHe doesn't look up at first. Finishes chewing, puts his spoon down, then glances at it the way you'd glance at something you already know is going to cost you. His eyes move across the six lines slowly — too slowly for a man reading; the pace of someone making sure they haven't missed a word they hoped wasn't there.\n\nWhen he's done he sits back. Doesn't touch the note.\n\n\"I don't know the hand,\" he says, and there's enough flatness in it that you believe him. \"But the warning's right. Everything in it is right.\" He's quiet for a moment. \"The wrong stag. That's not something people write down. That's something you only know if you've been north of the second ford.\" He looks up at you then — the first time he's met your eyes since his refusal. \"Whoever wrote this has been there. Recently.\"\n\nHe pushes the note back toward you. Not away from him — toward you, specifically. His hands have stopped shaking for the first time since you sat down. \"They're right about the sequence,\" he adds, quieter. \"The Council burned it. There's no version of giving it to the structure that ends well. You go there, you say nothing. You let it run its authentication, it waits for what won't come, and eventually it stops waiting.\" A pause. \"That's the theory. No one's stayed long enough to find out if it works.\""
+      },
+      {
+        "player": "Pick up the note, thank Eredan, and let him return to his breakfast — you have what you came for; the road north is the next thing",
+        "summary": "Rhinofire took the note and thanked Eredan — the morning's two reluctant informants have given what they'll give. The road north is next.",
+        "narration": "You pick up the note and fold it once along the crease it already holds, then tuck it inside your coat. The mineral smell comes with it — cold stone and something else, faint, like water that has sat in the dark a long time.\n\n\"Thank you,\" you say to Eredan, and you mean it plainly. No ceremony. He nods once — the nod of a man who has said his piece and is glad to stop saying it. His hand finds the spoon again and he turns to the barley without looking back up at you.\n\nThe hostel-keeper is already looking elsewhere, the cloth moving in slow circles on the counter. Marrow shifts on her counter-edge, settles, and watches you cross toward the door with that particular stillness it holds when something is about to begin.\n\nThe morning outside is early-spring cold — the melt has made the ground soft and the air smells of wet earth and yesterday's frost. The road north from the Marchward starts just past the waygate's neutral ground: an unpaved track that turns to mud a hundred paces in and keeps going. According to the note, the second ford is where the wrong stag walks the treeline. You haven't been there yet. The structure is beyond it."
       }
     ],
     "lastTurn": {
-      "narration": "You cross the room and set the note on the table beside Eredan's bowl without a word. Just the paper, open, where he can read it.\n\nHe doesn't look up at first. Finishes chewing, puts his spoon down, then glances at it the way you'd glance at something you already know is going to cost you. His eyes move across the six lines slowly — too slowly for a man reading; the pace of someone making sure they haven't missed a word they hoped wasn't there.\n\nWhen he's done he sits back. Doesn't touch the note.\n\n\"I don't know the hand,\" he says, and there's enough flatness in it that you believe him. \"But the warning's right. Everything in it is right.\" He's quiet for a moment. \"The wrong stag. That's not something people write down. That's something you only know if you've been north of the second ford.\" He looks up at you then — the first time he's met your eyes since his refusal. \"Whoever wrote this has been there. Recently.\"\n\nHe pushes the note back toward you. Not away from him — toward you, specifically. His hands have stopped shaking for the first time since you sat down. \"They're right about the sequence,\" he adds, quieter. \"The Council burned it. There's no version of giving it to the structure that ends well. You go there, you say nothing. You let it run its authentication, it waits for what won't come, and eventually it stops waiting.\" A pause. \"That's the theory. No one's stayed long enough to find out if it works.\"",
-      "sceneSummary": "Eredan reads the note without touching it, confirms the warning is accurate, and reveals that whoever wrote it has been north of the second ford — and recently.",
+      "narration": "You pick up the note and fold it once along the crease it already holds, then tuck it inside your coat. The mineral smell comes with it — cold stone and something else, faint, like water that has sat in the dark a long time.\n\n\"Thank you,\" you say to Eredan, and you mean it plainly. No ceremony. He nods once — the nod of a man who has said his piece and is glad to stop saying it. His hand finds the spoon again and he turns to the barley without looking back up at you.\n\nThe hostel-keeper is already looking elsewhere, the cloth moving in slow circles on the counter. Marrow shifts on her counter-edge, settles, and watches you cross toward the door with that particular stillness it holds when something is about to begin.\n\nThe morning outside is early-spring cold — the melt has made the ground soft and the air smells of wet earth and yesterday's frost. The road north from the Marchward starts just past the waygate's neutral ground: an unpaved track that turns to mud a hundred paces in and keeps going. According to the note, the second ford is where the wrong stag walks the treeline. You haven't been there yet. The structure is beyond it.",
+      "sceneSummary": "Rhinofire took the note and thanked Eredan — the morning's two reluctant informants have given what they'll give. The road north is next.",
       "choices": [
         {
-          "label": "Ask Eredan who has been north of the second ford recently — someone connected to the Stillhold, or someone outside it",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "normal",
-          "intentTags": [
-            "persuade",
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Press on the theory — 'eventually it stops waiting' is not the same as 'it is safe.' Ask what he thinks the structure actually does if someone stays too long",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Head out immediately — the note is enough; the road will tell you the rest",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": -0.1,
+            "falsehood_truth": 0.2
+          },
           "difficulty": "easy",
-          "intentTags": [
-            "study"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Pick up the note, thank Eredan, and let him return to his breakfast — you have what you came for; the road north is the next thing",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": "very easy",
           "intentTags": [
             "travel"
           ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Check your pack before you go — waterskin full, bedroll secure, flint to hand",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "very easy",
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Read the fight ahead — stand in the doorway and let your sense of what comes next settle before you move",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "violence_peace": -0.05
+          },
+          "difficulty": "normal",
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Ask the hostel-keeper if anyone has left this morning for the north road — whether you are first or following",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
+          "difficulty": "easy",
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands at Eredan's trestle, the open note on the table between them. The keeper's counter is visible behind, Marrow still perched on it.",
+        "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands near the door, note folded and pocketed. Eredan is back at his barley; the hostel-keeper resumes her counter work.",
         "npcsPresent": [
           {
             "name": "Eredan",
-            "state": "Sitting back from the table, hands still for once, looking at Rhinofire directly."
+            "state": "Eating his barley, spoon in hand, not looking up."
           },
           {
             "name": "Hostel-keeper",
-            "state": "Behind the counter, not watching but present, cloth in hand."
+            "state": "Wiping down the counter, the obligation of the note gone from her."
           },
           {
             "name": "Marrow",
-            "state": "On the counter, angled slightly toward the trestle — as if listening."
+            "state": "Watching Rhinofire from the counter-edge, still and unhurried."
           }
         ],
         "objects": [
-          "The open note — six lines, no signature, mineral smell, pushed back toward Rhinofire",
-          "The broken wax seal — plain thumb-press",
-          "Eredan's bowl of barley, spoon set down beside it",
-          "The flour-dusted counter behind"
+          "The folded note — now in Rhinofire's coat pocket",
+          "The broken wax seal — still on the table",
+          "Eredan's bowl of barley, spoon in hand",
+          "The flour-dusted counter"
         ],
         "threads": [
-          "Who has been north of the second ford recently — Eredan's slip implies someone specific",
-          "What actually happens if someone stays at the structure past the authentication window",
-          "The wrong stag north of the second ford — encounter flagged in the note",
-          "The road north into the Disputed Zone"
+          "The road north from the Marchward — mud and the second ford ahead",
+          "The wrong stag — walks the treeline north of the second ford",
+          "The authentication structure — listening, waiting for a burned sequence",
+          "Who was satisfied when the surveyor's hand went black"
         ]
       },
       "npcUpdates": [
@@ -198,83 +229,56 @@
           "role": "Former Stillhold resident, now sheltering at the Marchward",
           "gender": "man",
           "pronouns": "he/him",
-          "note": "Read the note slowly and without touching it. Confirmed every warning in it is accurate. Identified the wrong stag as knowledge only someone who has been north of the second ford would have — implying the author went there recently. Offered the theory: let the structure run its authentication, it waits for the burned sequence, eventually stops waiting. Admitted no one has stayed to verify. His hands stopped shaking when he pushed the note back.",
-          "learned": [
-            "The note's warning is accurate — confirmed without reservation",
-            "The wrong stag is not common knowledge — only someone who has been north of the second ford recently would know to write it down",
-            "The theory for the structure: say nothing, let it run, it waits for the burned sequence and eventually stops; no one has verified this by staying",
-            "There is no version of giving the structure the sequence that ends well"
-          ],
-          "skillsObserved": [
-            "institutional knowledge of the Stillhold and the Council",
-            "careful, deliberate reading"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "At the trestle, hands still, meeting Rhinofire's eyes for the first time since his refusal."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "marchward-note-author",
-          "label": "The Note's Author",
-          "kind": "mystery",
-          "fact": "Eredan confirmed: whoever wrote the note has been north of the second ford, and recently — the wrong stag is not something people write down without firsthand knowledge.",
-          "links": [
-            "water-crisis",
-            "riven-marchward",
-            "what-wakes-beneath",
-            "stillhold-exile-marchward"
-          ]
+          "note": "Received Rhinofire's thanks with a single nod and returned to his breakfast without further word. His piece is said.",
+          "statusNote": "At the trestle, eating his barley, done speaking."
         },
         {
-          "topic": "water-crisis",
-          "label": "The Water Crisis",
-          "kind": "event",
-          "entityId": "eredan",
-          "fact": "Eredan's theory for the structure: say nothing, let it run its authentication, it waits for the burned sequence and eventually stops waiting. No one has stayed long enough to verify whether the theory holds.",
-          "links": [
-            "marchward-note-author",
-            "what-wakes-beneath",
-            "riven-marchward"
-          ]
+          "op": "update",
+          "npcId": "hostel-keeper",
+          "name": "Hostel-keeper",
+          "role": "Keeper of the Marchward hostel",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "The note is out of her hands; she is visibly relieved and back to ordinary work.",
+          "statusNote": "Behind her counter, cloth in hand, the unsealed note's weight gone from her."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the trestle — a few minutes at most."
-      }
+        "why": "a brief parting exchange and a moment's gathering before the door"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands at Eredan's trestle, the open note on the table between them. The keeper's counter is visible behind, Marrow still perched on it.",
+      "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands near the door, note folded and pocketed. Eredan is back at his barley; the hostel-keeper resumes her counter work.",
       "npcsPresent": [
         {
           "name": "Eredan",
-          "state": "Sitting back from the table, hands still for once, looking at Rhinofire directly."
+          "state": "Eating his barley, spoon in hand, not looking up."
         },
         {
           "name": "Hostel-keeper",
-          "state": "Behind the counter, not watching but present, cloth in hand."
+          "state": "Wiping down the counter, the obligation of the note gone from her."
         },
         {
           "name": "Marrow",
-          "state": "On the counter, angled slightly toward the trestle — as if listening."
+          "state": "Watching Rhinofire from the counter-edge, still and unhurried."
         }
       ],
       "objects": [
-        "The open note — six lines, no signature, mineral smell, pushed back toward Rhino",
-        "The broken wax seal — plain thumb-press",
-        "Eredan's bowl of barley, spoon set down beside it",
-        "The flour-dusted counter behind"
+        "The folded note — now in Rhinofire's coat pocket",
+        "The broken wax seal — still on the table",
+        "Eredan's bowl of barley, spoon in hand",
+        "The flour-dusted counter"
       ],
       "threads": [
-        "Who has been north of the second ford recently — Eredan's slip implies someone specific",
-        "What actually happens if someone stays at the structure past the authentication window",
-        "The wrong stag north of the second ford — encounter flagged in the note",
-        "The road north into the Disputed Zone"
+        "The road north from the Marchward — mud and the second ford ahead",
+        "The wrong stag — walks the treeline north of the second ford",
+        "The authentication structure — listening, waiting for a burned sequence",
+        "Who was satisfied when the surveyor's hand went black"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
@@ -344,7 +348,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Volunteered, quietly, that the Council lost contact with the upstream structure — it is there but no longer answers. Said it like a weight set down.",
         "[d1] Read: guilt as much as fear. His confession was a weight set down, not a report delivered. He is afraid of what he knows and what knowing it makes him part of — not of Rhinofire.",
         "[d1] Asked directly what the structure was and what 'no longer answers' means — closed the question: 'I've said what I can say.' Not fleeing, not hostile. The limit is older than this conversation.",
         "[d1] The listening-face detail from the duelist landed somewhere — he has not moved or responded, but his stillness reads as recognition, not indifference.",
@@ -353,7 +356,8 @@
         "[d1] Named himself — Eredan, no surname. Confirmed the structure is a pre-Transition authentication site that held the Council's backup purification sequence. Went quiet eight months ago — present but not answering. Final words: 'Be careful what you let it hear.'",
         "[d1] Asked directly to come north to the structure. Refused with a single word and drew the conversation closed. Now eating his barley — the first time he's touched it.",
         "[d1] Asked what Rhinofire should not let the structure hear. Refused with the same words as before — 'I've said what I can say' — but the refusal landed differently: not bureaucratic, something decided. He is protecting himself, not just information.",
-        "[d1] Read the note slowly and without touching it. Confirmed every warning in it is accurate. Identified the wrong stag as knowledge only someone who has been north of the second ford would have — implying the author went there recently. Offered the theory: let the structure run its authentication, it…"
+        "[d1] Read the note slowly and without touching it. Confirmed every warning in it is accurate. Identified the wrong stag as knowledge only someone who has been north of the second ford would have — implying the author went there recently. Offered the theory: let the structure run its authentication, it…",
+        "[d1] Received Rhinofire's thanks with a single nod and returned to his breakfast without further word. His piece is said."
       ],
       "knownFacts": [
         "The upstream structure is a pre-Transition authentication site",
@@ -372,7 +376,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the trestle, hands still, meeting Rhinofire's eyes for the first time since his refusal.",
+      "statusNote": "At the trestle, eating his barley, done speaking.",
       "domains": {
         "primary": "stillhold"
       },
@@ -381,7 +385,7 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "met": 9,
+      "met": 10,
       "aliases": [
         "Stillhold exile"
       ],
@@ -399,7 +403,8 @@
       "relationship": 0,
       "history": [
         "[d1] Asked about travelers from the northeast trail; described a lone hooded man, valley coin, asking about the north road into the Zone, gone before morning. Produced a sealed unmarked note he left behind.",
-        "[d1] Passed the sealed note across the counter without being asked — relieved to have the obligation leave her hand."
+        "[d1] Passed the sealed note across the counter without being asked — relieved to have the obligation leave her hand.",
+        "[d1] The note is out of her hands; she is visibly relieved and back to ordinary work."
       ],
       "knownFacts": [
         "A lone traveler came down from the Disputed Zone cutoff two or three days ago, kept his hood up, paid in valley coin",
@@ -413,7 +418,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Behind her counter at the Marchward hostel, watching Rhinofire with the note open.",
+      "statusNote": "Behind her counter, cloth in hand, the unsealed note's weight gone from her.",
       "domains": {
         "primary": "marcher"
       },
@@ -422,7 +427,7 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "met": 2
+      "met": 3
     }
   },
   "placeMemory": {
@@ -517,11 +522,27 @@
         "numinous.numen"
       ]
     },
-    "lastSharedReadAt": "2026-08-15T01:01:14.781Z",
+    "lastSharedReadAt": "2026-08-15T01:52:50.463Z",
     "lastTickWorldDay": 46,
     "lastCanonWorldDay": 46,
-    "pressureQueue": [],
-    "turnsSinceOffer": 4,
+    "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_hollow_pace",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a hollow-pace has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_hollow_pace",
+          "name": "a hollow-pace"
+        },
+        "addedDay": 1,
+        "locationId": "the_marchward"
+      }
+    ],
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -687,12 +708,12 @@
     }
   },
   "tendencies": {
-    "strategic": 11.566932565211784,
-    "amorous": 12.110742085360426,
-    "cautious": 4.216500694043845,
-    "cerebral": 3.630303809596096,
-    "social": 4.528294762646636,
-    "leadership": 0.9036878906249999
+    "strategic": 11.27775925108149,
+    "amorous": 11.807973533226415,
+    "cautious": 4.111088176692749,
+    "cerebral": 3.5395462143561933,
+    "social": 4.41508739358047,
+    "leadership": 0.8810956933593749
   },
   "aptitudes": [
     "strategist",
@@ -700,7 +721,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 11,
+  "actionCount": 12,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -752,16 +773,6 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 30,
   "gallery": [
-    {
-      "kind": "ability",
-      "prompt": "The Answered Motion",
-      "url": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true",
-      "caption": "The Answered Motion",
-      "worldDay": 46,
-      "at": "2026-08-15T01:20:07.845Z",
-      "subjectKind": "ability",
-      "subjectId": "the_answered_motion"
-    },
     {
       "kind": "portrait",
       "prompt": "Weathered, spare, carrying old scars the way old wood carries grain — not imposing, simply final. The blade is older than the hand that holds it., full-body character portrait, named Rhinofire, of the",
@@ -885,8 +896,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786758511805,
-  "rev": 35,
+  "updatedAt": 1786759041574,
+  "rev": 43,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -902,12 +913,14 @@
     "https://image.pollinations.ai/prompt/A%20big%20grey-black%20corvid%2C%20ragged%20and%20unbothered%2C%20with%20an%20eye%20that%20is%20far%20too%20calm.%20Sits%20where%20it%20can%20see%20the%20whole%20situation.%20Has%20been%20present%20at%20more%20deaths%20than%20anything%20else%20you%20have%20ever%20met%20and%20it%2C%20character%20portrait%2C%20named%20Marrow%2C%20Companion%20%E2%80%94%20an%20Ashwarden-touched%20carrion%20bird%20that%20attends%20endings%2C%20including%20yours%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=57251&nologo=true": "https://image.pollinations.ai/prompt/Large%20grey-black%20corvid%20perched%20high%2C%20feathers%20ragged%20and%20disheveled%2C%20regarding%20the%20scene%20below%20with%20an%20unnervingly%20calm%2C%20knowing%20eye%3B%20ashen%2C%20death-touched%20presence%3B%20silent%20witness%20to%20countless%20endings.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=57251&nologo=true",
     "https://image.pollinations.ai/prompt/Weathered%2C%20spare%2C%20carrying%20old%20scars%20the%20way%20old%20wood%20carries%20grain%20%E2%80%94%20not%20imposing%2C%20simply%20final.%20The%20blade%20is%20older%20than%20the%20hand%20that%20holds%20it.%2C%20full-body%20character%20portrait%2C%20named%20Rhinofire%2C%20of%20the%20marcher%2C%20duelist%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20To%20right%20the%20wrongs%20of%20the%20world%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20traveler's%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20steady%20grip%2C%20full-body%20stance%20against%20neutral%20background%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true",
     "https://image.pollinations.ai/prompt/liked%20confidence%20of%20character%2C%20liked%20confidence%20of%20character%2C%20weathered%2C%20spare%2C%20carrying%20old%20scars%20the%20way%20old%20wood%20carries%20grain%20%E2%80%94%20not%20imposing%2C%20simply%20final.%20the%20blade%20is%20older%20than%20the%20hand%20that%20holds%20it.%2C%20of%20the%20marcher%2C%20duelist%2C%20Weathered%2C%20spare%2C%20carrying%20old%20scars%20the%20way%20old%20wood%20carries%20grain%20%E2%80%94%20not%20imposing%2C%20simply%20final.%20The%20blade%20is%20older%20than%20the%20hand%20that%20holds%20it.%2C%20full-body%20character%20portrait%2C%20named%20Rhinofire%2C%20of%20the%20marcher%2C%20duelist%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20To%20right%20the%20wrongs%20of%20the%20world%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true": "https://image.pollinations.ai/prompt/Weathered%20duelist%20in%20worn%20travel%20gear%2C%20scarred%20like%20old%20wood%20grain%2C%20holding%20an%20ancient%20blade%20with%20quiet%20finality%2C%20standing%20at%20rest%20with%20the%20confidence%20of%20someone%20who%20has%20walked%20far%20and%20fought%20long.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=58177&nologo=true",
-    "https://image.pollinations.ai/prompt/The%20Answered%20Motion%3A%20The%20Somatics'%20first%20offense%3A%20not%20force%20but%20ANSWER%20%E2%80%94%20their%20own%20motion%2C%20completed%20in%20a%20direction%20that%20ruins%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20somatic%20tradition%3A%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%3B%20breath%2C%20sinew%2C%20bare%20movement%2C%20no%20tools%3B%20warm%20side-light%20modelling%20muscle%20and%20motion%3B%20the%20body%20as%20the%20only%20instrument%20%E2%80%94%20kinetic%2C%20present%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true"
+    "https://image.pollinations.ai/prompt/The%20Answered%20Motion%3A%20The%20Somatics'%20first%20offense%3A%20not%20force%20but%20ANSWER%20%E2%80%94%20their%20own%20motion%2C%20completed%20in%20a%20direction%20that%20ruins%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20somatic%20tradition%3A%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%3B%20breath%2C%20sinew%2C%20bare%20movement%2C%20no%20tools%3B%20warm%20side-light%20modelling%20muscle%20and%20motion%3B%20the%20body%20as%20the%20only%20instrument%20%E2%80%94%20kinetic%2C%20present%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true",
+    "https://image.pollinations.ai/prompt/The%20Answered%20Motion%3A%20The%20Somatics'%20first%20offense%3A%20not%20force%20but%20ANSWER%20%E2%80%94%20their%20own%20motion%2C%20completed%20in%20a%20direction%20that%20ruins%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20somatic%20tradition%3A%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%3B%20breath%2C%20sinew%2C%20bare%20movement%2C%20no%20tools%3B%20warm%20side-light%20modelling%20muscle%20and%20motion%3B%20the%20body%20as%20the%20only%20instrument%20%E2%80%94%20kinetic%2C%20present%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51544&nologo=true": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51544&nologo=true",
+    "https://image.pollinations.ai/prompt/The%20Answered%20Motion%3A%20The%20Somatics'%20first%20offense%3A%20not%20force%20but%20ANSWER%20%E2%80%94%20their%20own%20motion%2C%20completed%20in%20a%20direction%20that%20ruins%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20somatic%20tradition%3A%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%3B%20breath%2C%20sinew%2C%20bare%20movement%2C%20no%20tools%3B%20warm%20side-light%20modelling%20muscle%20and%20motion%3B%20the%20body%20as%20the%20only%20instrument%20%E2%80%94%20kinetic%2C%20present%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51545&nologo=true": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=51545&nologo=true"
   },
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 12
+    "riven_marches": 13
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -915,10 +928,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-15T00:58:33.023Z",
-      "lastAt": "2026-08-15T01:48:31.792Z",
+      "lastAt": "2026-08-15T01:57:21.553Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 12
+      "beats": 13
     }
   ],
   "establishedFacts": [],
@@ -980,10 +993,8 @@
     }
   },
   "abilityImages": {
-    "the_answered_motion": "https://image.pollinations.ai/prompt/Bare%20torso%20twisting%20mid-motion%20in%20golden%20side-light%2C%20sweat-sheened%20skin%20catching%20warmth%2C%20muscles%20articulated%20in%20earth-toned%20shadow%2C%20breath%20visible%2C%20body%20folding%20back%20on%20itself%20in%20a%20gesture%20that%20completes%20its%20own%20undoing%2C%20no%20props%2C%20raw%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20warm%20skin-tones%2C%20sweat-sheen%2C%20earth%2C%20warm%20side-light%20modelling%20muscle%20and%20motion%2C%20the%20body%20as%20the%20only%20instrument?width=1024&height=512&seed=42375&nologo=true"
+    "the_answered_motion": null
   },
-  "_chronicleBusy": false,
-  "_chronicleError": null,
   "chronicleCache": {
     "hash": "d0|b|c|q|L1|To right the wrongs of the world",
     "text": "You have become someone who carries a grievance older than your own name — a fury at wrongs not yet righted, a moral weight that sits in the chest like a coal still finding its heat. The Marchers know your face now, have registered your presence among them the way a wall registers a first crack: noted, not yet tested. The Ashwardens and the Unmakers have heard nothing particular about you, which means the world still holds its breath. Even the Stillhold watches from a wary distance, as if they sense something in you that hasn't declared itself yet. You have done nothing of consequence — not yet. That is the whole of the pressure.",
@@ -1014,20 +1025,21 @@
     "negotiate": 5,
     "ask": 1,
     "calm": 1,
-    "lead": 1
+    "lead": 1,
+    "travel": 1
   },
   "_opEmitted": {
-    "sceneSummary": 11,
-    "choices": 11,
-    "scene": 11,
-    "npcUpdates": 11,
+    "sceneSummary": 12,
+    "choices": 12,
+    "scene": 12,
+    "npcUpdates": 12,
     "codexUpdates": 9,
-    "timeOps": 10,
+    "timeOps": 11,
     "characterDeltas": 3,
     "offer": 1,
-    "sceneEnded": 1,
+    "sceneEnded": 2,
     "placeUpdates": 1
   },
-  "_opTurns": 11,
+  "_opTurns": 12,
   "_intentAsked": null
 }

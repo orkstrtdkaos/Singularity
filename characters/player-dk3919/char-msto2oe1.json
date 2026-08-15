@@ -134,157 +134,162 @@
         "player": "Sit with what she said. Don't press further — let Marrow's stillness do the work, and watch whether the exile reacts to the detail about the listening face",
         "summary": "Silence fails — the exile does not surface; the duelist departs; the trestle empties to Rhinofire and Marrow.",
         "narration": "The silence you offer is the right shape for the thing — you settle back on the trestle boards, let the detail about the listening face hang in the air, and watch.\n\nMarrow does not move. It sits at exactly the same angle it has held for the last ten minutes, head tilted, one eye on the exile. If you were hoping the bird's stillness would do some work for you, it is doing none. The exile is not watching Marrow. He is watching something that isn't here — his bowl, his hands, the middle distance between the trestle and the treeline — and whatever the duelist's words landed on inside him, it has not risen to the surface. His face is averted and still. He is not going to offer you the reaction you waited for.\n\nThe duelist drains the last of her cup, sets it on the planks with a small flat sound, and stands. She has given the Marchward its due — her account is out, her obligation to plain speech is met — and she has no further business at this trestle. She pulls her coat straight, glances once at the treeline, and walks back toward the hostel without ceremony. She does not say goodbye. That is not what the Marchward means by courtesy.\n\nYou are left with Marrow, the exile's untouched barley bowl, and a morning that is not getting warmer. The exile breathes, slowly. He has not moved in some time."
+      },
+      {
+        "player": "Say his name — or ask it — and tell him plainly what you intend to do next. Give him the Marchward's own courtesy: plain speech.",
+        "summary": "Rhinofire speaks plain — gives Eredan name and intent; the exile names the structure: a pre-Transition authentication site holding the Council's backup purification sequence, gone quiet eight months ago. His final warning: be careful what you let it hear.",
+        "narration": "The exile has not touched his barley since the duelist left. You watch him for another moment — the still hands, the averted face — and then you do what the Marchward asks of everyone who sits at its tables. You speak plainly.\n\nYou tell him you don't know his name, and that you'd like to. And then, without framing it as a request or a threat: you're going to the northeast trail. Not to report to anyone, not to bring anything back for the Council. To see what's there. You've heard two accounts of a hand going black, a man wearing a listening expression, a structure that no longer answers — and you have a companion who knows when something is ending and how. That's the thing you have to offer, and that's where you intend to go.\n\nMarrow shifts its weight on the bench boards and tucks one foot up, the way it does when it has decided a situation is going to be a while. Its eye stays on the exile.\n\nThe man is quiet for a long moment. Then he says, without looking up: 'Eredan.' Just that — no family name, no title. He picks up his spoon and turns it in his fingers, not eating. 'The structure was a pre-Transition authentication site,' he says, voice low. 'It held a sequence the Council needed to run the secondary purification system. Not the main flow. The backup.' He sets the spoon down. 'Eight months ago it stopped responding. Not destroyed, not sealed. Present. Just — not answering.' He finally looks at you, and his eyes are the eyes of a man who has been carrying something heavier than guilt for a long time. 'If it's started doing something again—' He stops. Looks back at his bowl. 'Be careful what you let it hear.'"
       }
     ],
     "lastTurn": {
-      "narration": "The silence you offer is the right shape for the thing — you settle back on the trestle boards, let the detail about the listening face hang in the air, and watch.\n\nMarrow does not move. It sits at exactly the same angle it has held for the last ten minutes, head tilted, one eye on the exile. If you were hoping the bird's stillness would do some work for you, it is doing none. The exile is not watching Marrow. He is watching something that isn't here — his bowl, his hands, the middle distance between the trestle and the treeline — and whatever the duelist's words landed on inside him, it has not risen to the surface. His face is averted and still. He is not going to offer you the reaction you waited for.\n\nThe duelist drains the last of her cup, sets it on the planks with a small flat sound, and stands. She has given the Marchward its due — her account is out, her obligation to plain speech is met — and she has no further business at this trestle. She pulls her coat straight, glances once at the treeline, and walks back toward the hostel without ceremony. She does not say goodbye. That is not what the Marchward means by courtesy.\n\nYou are left with Marrow, the exile's untouched barley bowl, and a morning that is not getting warmer. The exile breathes, slowly. He has not moved in some time.",
-      "sceneSummary": "Silence fails — the exile does not surface; the duelist departs; the trestle empties to Rhinofire and Marrow.",
+      "narration": "The exile has not touched his barley since the duelist left. You watch him for another moment — the still hands, the averted face — and then you do what the Marchward asks of everyone who sits at its tables. You speak plainly.\n\nYou tell him you don't know his name, and that you'd like to. And then, without framing it as a request or a threat: you're going to the northeast trail. Not to report to anyone, not to bring anything back for the Council. To see what's there. You've heard two accounts of a hand going black, a man wearing a listening expression, a structure that no longer answers — and you have a companion who knows when something is ending and how. That's the thing you have to offer, and that's where you intend to go.\n\nMarrow shifts its weight on the bench boards and tucks one foot up, the way it does when it has decided a situation is going to be a while. Its eye stays on the exile.\n\nThe man is quiet for a long moment. Then he says, without looking up: 'Eredan.' Just that — no family name, no title. He picks up his spoon and turns it in his fingers, not eating. 'The structure was a pre-Transition authentication site,' he says, voice low. 'It held a sequence the Council needed to run the secondary purification system. Not the main flow. The backup.' He sets the spoon down. 'Eight months ago it stopped responding. Not destroyed, not sealed. Present. Just — not answering.' He finally looks at you, and his eyes are the eyes of a man who has been carrying something heavier than guilt for a long time. 'If it's started doing something again—' He stops. Looks back at his bowl. 'Be careful what you let it hear.'",
+      "sceneSummary": "Rhinofire speaks plain — gives Eredan name and intent; the exile names the structure: a pre-Transition authentication site holding the Council's backup purification sequence, gone quiet eight months ago. His final warning: be careful what you let it hear.",
       "choices": [
         {
-          "label": "Say his name — or ask it — and tell him plainly what you intend to do next. Give him the Marchward's own courtesy: plain speech.",
+          "label": "Ask what 'let it hear' means — press the warning before you go",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": "easy",
-          "trivial": true,
+          "difficulty": "normal",
           "intentTags": [
-            "calm",
-            "negotiate"
+            "negotiate",
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Tell him what you think you understand about the structure and the listening face — a statement, not a question — and leave room for him to correct you.",
+          "label": "Ask if Eredan wants to come — he knows the site, and knowing is worth the weight he carries",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": "normal",
-          "trivial": false,
           "intentTags": [
-            "persuade",
-            "careful"
+            "negotiate",
+            "lead"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Let him go and turn your attention to the northeast trail. You have what the trestle will give. The rest is in the Disputed Zone.",
+          "label": "Thank him, leave him to his bowl, and set out northeast — you have enough to move on",
           "attribute": "practical",
           "subAttribute": "wits",
-          "difficulty": "easy",
-          "trivial": true,
+          "difficulty": "very easy",
           "intentTags": [
-            "travel",
-            "scout"
+            "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "stillhold-exile-marchward",
+          "name": "Eredan",
+          "role": "Former Stillhold resident, now sheltering at the Marchward",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Named himself — Eredan, no surname. Confirmed the structure is a pre-Transition authentication site that held the Council's backup purification sequence. Went quiet eight months ago — present but not answering. Final words: 'Be careful what you let it hear.'",
+          "learned": [
+            "The upstream structure is a pre-Transition authentication site",
+            "It held the sequence for the Council's secondary (backup) purification system — not the main flow",
+            "It stopped responding eight months ago — not destroyed, not sealed, still present",
+            "His warning: be careful what you let it hear — implying the structure listens, or can"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Sitting at the trestle, bowl untouched. Has given what he will give. The warning is his last word on it.",
+          "revealName": "Eredan"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "water-crisis",
+          "label": "The Water Crisis",
+          "kind": "event",
+          "fact": "The upstream structure is a pre-Transition authentication site that held the Council's secondary (backup) purification sequence. It went silent eight months ago — not destroyed, not sealed, still present and 'not answering.' Eredan's warning: be careful what you let it hear.",
+          "links": [
+            "stillhold-exile-marchward",
+            "what-wakes-beneath",
+            "riven-marchward"
+          ]
         },
         {
-          "label": "Ask Marrow — aloud, in the exile's hearing — whether something up that trail is ending. He doesn't know what Marrow is. He might.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": "hard",
-          "trivial": false,
-          "intentTags": [
-            "gamble",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
+          "topic": "what-wakes-beneath",
+          "label": "What Wakes Beneath",
+          "kind": "mystery",
+          "fact": "Eredan's warning — 'be careful what you let it hear' — implies the authentication site may be listening. An eight-month silence followed by renewed activity suggests it did not stop; it may have been waiting for something.",
+          "links": [
+            "water-crisis",
+            "stillhold-exile-marchward",
+            "riven-marchward"
+          ]
+        },
+        {
+          "topic": "stillhold-exile-marchward",
+          "label": "Eredan",
+          "kind": "person",
+          "entityId": "stillhold-exile-marchward",
+          "fact": "Named himself Eredan — no surname offered. Confirmed the structure's nature and gave a final warning: be careful what you let it hear. Carries the weight of knowing personally, not institutionally.",
+          "links": [
+            "water-crisis",
+            "what-wakes-beneath"
+          ]
         }
       ],
       "scene": {
-        "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. The duelist has departed; the exile sits with his untouched barley bowl.",
+        "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. The duelist is gone; Eredan sits across the trestle with his barley bowl still untouched.",
         "npcsPresent": [
           {
-            "name": "Stillhold exile",
-            "state": "Face averted, hands still, not eating — caught on something the duelist said, not offering it."
+            "name": "Eredan",
+            "state": "Looking back at his bowl after speaking — the warning given, the door shut. Not hostile, not open."
           },
           {
             "name": "Marrow",
-            "state": "Head tilted at the same angle, one eye on the exile, unbothered and unhurried."
+            "state": "Foot tucked up, settled, eye still on Eredan."
           }
         ],
         "objects": [
           "Boiled-water barrel with ladle and warning sign by the common-house door",
           "Long trestle bench with a few remaining travelers",
           "Waterskin on the trestle boards in front of Rhinofire",
-          "Exile's barley bowl with spoon set beside it, untouched"
+          "Eredan's barley bowl with spoon set beside it, untouched"
         ],
         "threads": [
-          "The listening expression on the surveyor's face — what was he hearing?",
-          "Fingers gone black and still going — an active process, not aftermath",
-          "The exile recognized something in the duelist's description but has not spoken it",
-          "The northeast trail remains uninvestigated"
+          "What does 'be careful what you let it hear' mean — the structure listens?",
+          "The backup purification sequence: the Council needs it and cannot reach it",
+          "The northeast trail remains uninvestigated",
+          "Eredan knows more than he has said — and knows the limits of what he'll carry"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "redline-duelist-marchward",
-          "name": "Redline duelist",
-          "role": "Mercenary contractor, recently through the Disputed Zone",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Finished her cup, stood, and departed without ceremony — obligation to plain speech met, no further business at the trestle.",
-          "status": "active",
-          "statusNote": "Departed the trestle, back toward the hostel interior."
-        },
-        {
-          "op": "update",
-          "npcId": "stillhold-exile-marchward",
-          "name": "Stillhold exile",
-          "role": "Former Stillhold resident, now sheltering at the Marchward",
-          "gender": "man",
-          "pronouns": "he/him",
-          "note": "Did not surface a reaction to the listening-face detail despite the silence offered. Face averted, still, barley bowl untouched.",
-          "status": "active",
-          "statusNote": "At the trestle, closed inward — something from the duelist's account has landed but he is not offering it."
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A few quiet minutes at the trestle after the duelist departed."
-      },
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
+        "why": "A brief exchange — a few minutes at the trestle"
       }
     },
     "sceneState": {
-      "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. The duelist has departed; the exile sits with his untouched barley bowl.",
+      "setting": "Outside the Marchward hostel, long trestle bench, early morning. Grey sky, mud, cold air. The duelist is gone; Eredan sits across the trestle with his barley bowl still untouched.",
       "npcsPresent": [
         {
-          "name": "Stillhold exile",
-          "state": "Face averted, hands still, not eating — caught on something the duelist said, not offering it."
+          "name": "Eredan",
+          "state": "Looking back at his bowl after speaking — the warning given, the door shut. Not hostile, not open."
         },
         {
           "name": "Marrow",
-          "state": "Head tilted at the same angle, one eye on the exile, unbothered and unhurried."
+          "state": "Foot tucked up, settled, eye still on Eredan."
         }
       ],
       "objects": [
         "Boiled-water barrel with ladle and warning sign by the common-house door",
         "Long trestle bench with a few remaining travelers",
         "Waterskin on the trestle boards in front of Rhinofire",
-        "Exile's barley bowl with spoon set beside it, untouched"
+        "Eredan's barley bowl with spoon set beside it, untouched"
       ],
       "threads": [
-        "The listening expression on the surveyor's face — what was he hearing?",
-        "Fingers gone black and still going — an active process, not aftermath",
-        "The exile recognized something in the duelist's description but has not spoken it",
-        "The northeast trail remains uninvestigated"
+        "What does 'be careful what you let it hear' mean — the structure listens?",
+        "The backup purification sequence: the Council needs it and cannot reach it",
+        "The northeast trail remains uninvestigated",
+        "Eredan knows more than he has said — and knows the limits of what he'll carry"
       ]
     },
-    "beats": 6
+    "beats": 7
   },
   "clock": {
     "schemaVersion": 1,
@@ -345,27 +350,32 @@
     },
     "stillhold-exile-marchward": {
       "id": "stillhold-exile-marchward",
-      "name": "Stillhold exile",
+      "name": "Eredan",
       "role": "Former Stillhold resident, now sheltering at the Marchward",
       "description": "Older, patched grey robe, hands that have been kept still for a long time and are starting to shake. Eats carefully.",
       "firstMet": {
         "locationId": "the_marchward",
         "day": 1
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d1] Volunteered, quietly, that the Council lost contact with the upstream structure — it is there but no longer answers. Said it like a weight set down.",
         "[d1] Read: guilt as much as fear. His confession was a weight set down, not a report delivered. He is afraid of what he knows and what knowing it makes him part of — not of Rhinofire.",
         "[d1] Asked directly what the structure was and what 'no longer answers' means — closed the question: 'I've said what I can say.' Not fleeing, not hostile. The limit is older than this conversation.",
         "[d1] The listening-face detail from the duelist landed somewhere — he has not moved or responded, but his stillness reads as recognition, not indifference.",
-        "[d1] Did not surface a reaction to the listening-face detail despite the silence offered. Face averted, still, barley bowl untouched."
+        "[d1] Did not surface a reaction to the listening-face detail despite the silence offered. Face averted, still, barley bowl untouched.",
+        "[d1] Their name is revealed: Eredan (was known as \"Stillhold exile\")",
+        "[d1] Named himself — Eredan, no surname. Confirmed the structure is a pre-Transition authentication site that held the Council's backup purification sequence. Went quiet eight months ago — present but not answering. Final words: 'Be careful what you let it hear.'"
       ],
       "knownFacts": [
         "Says the Council 'lost' something in the upper structure — not destroyed, not sealed, but present and no longer responding to them",
         "Phrased it as a confession, not a report — carries it personally",
         "He spoke like a man confessing, not reporting — the lost structure carries personal guilt for him, not merely institutional knowledge.",
         "Distinguishes between what he knows and what he can say — the rest is sealed, not forgotten",
-        "The listening expression on the burned surveyor may mean something to him specifically — his stillness after the duelist described it is pointed"
+        "The listening expression on the burned surveyor may mean something to him specifically — his stillness after the duelist described it is pointed",
+        "The upstream structure is a pre-Transition authentication site",
+        "It held the sequence for the Council's secondary (backup) purification system — not the main flow",
+        "It stopped responding eight months ago — not destroyed, not sealed, still present"
       ],
       "skillsObserved": [
         "institutional knowledge of the Stillhold and the Council"
@@ -373,7 +383,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the trestle, closed inward — something from the duelist's account has landed but he is not offering it.",
+      "statusNote": "Sitting at the trestle, bowl untouched. Has given what he will give. The warning is his last word on it.",
       "domains": {
         "primary": "stillhold"
       },
@@ -382,7 +392,11 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "met": 5
+      "met": 6,
+      "aliases": [
+        "Stillhold exile"
+      ],
+      "nameRevealed": true
     }
   },
   "placeMemory": {
@@ -488,7 +502,7 @@
         "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -538,12 +552,14 @@
         "facts": [
           "[d1] News of the First Sickness has reached the Marchward. The hostel runs on a spring-fed cistern separate from the valley's main flow, but travelers carry the news. A boiled-water barrel stands outside the common-house by order.",
           "[d1] A Redline duelist passing the northeast trail of the Disputed Zone eight days ago saw a Council survey crew in panicked retreat — no gear, one man's hand burned somehow, saying only that 'the ground is doing something.' The Stillhold exile confirms the Council has 'lost' the upstream structure: it…",
-          "[d1] The affected surveyor from the Disputed Zone retreat had fingers gone black from the second knuckle — not burned, not frostbitten, but still actively changing. He had his hand pressed flat against his sternum, not his side, and wore a listening expression — as if hearing something the others could…"
+          "[d1] The affected surveyor from the Disputed Zone retreat had fingers gone black from the second knuckle — not burned, not frostbitten, but still actively changing. He had his hand pressed flat against his sternum, not his side, and wore a listening expression — as if hearing something the others could…",
+          "[d1] The upstream structure is a pre-Transition authentication site that held the Council's secondary (backup) purification sequence. It went silent eight months ago — not destroyed, not sealed, still present and 'not answering.' Eredan's warning: be careful what you let it hear."
         ],
         "links": [
           "riven-marchward",
           "what-wakes-beneath",
-          "redline-duelist-marchward"
+          "redline-duelist-marchward",
+          "stillhold-exile-marchward"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -556,7 +572,8 @@
         "facts": [
           "[d1] Two separate clusters of people at the Marchward used the word 'substrate' unprompted — a mason's apprentice and a Marcher trader who then looked at his hand as if he'd felt something. The flickering has reached even the border-town.",
           "[d1] The burned hand of the retreating surveyor and the exile's phrase 'no longer answers them' sit beside the substrate-talk — whatever is happening in the upper structure may be the same stirring felt in people's hands at the Marchward.",
-          "[d1] The surveyor's listening face — hearing something no one else could, hand pressed to his chest as the blackness spread — reads less like a wound and more like a signal received. Something at the upstream structure may be transmitting, not merely malfunctioning."
+          "[d1] The surveyor's listening face — hearing something no one else could, hand pressed to his chest as the blackness spread — reads less like a wound and more like a signal received. Something at the upstream structure may be transmitting, not merely malfunctioning.",
+          "[d1] Eredan's warning — 'be careful what you let it hear' — implies the authentication site may be listening. An eight-month silence followed by renewed activity suggests it did not stop; it may have been waiting for something."
         ],
         "links": [
           "riven-marchward",
@@ -591,14 +608,17 @@
         "facts": [
           "[d1] Former Stillhold resident, now sheltering at the Marchward",
           "[d1] His posture after confessing reads as guilt, not relief — he feels personally implicated in the Council losing contact with the upstream structure, not merely informed about it.",
-          "[d1] When asked directly about the upstream structure, he drew a line: 'I've said what I can say' — distinguishing what he knows from what he will speak. The limit is deliberate, not ignorance."
+          "[d1] When asked directly about the upstream structure, he drew a line: 'I've said what I can say' — distinguishing what he knows from what he will speak. The limit is deliberate, not ignorance.",
+          "[d1] Named himself Eredan — no surname offered. Confirmed the structure's nature and gave a final warning: be careful what you let it hear. Carries the weight of knowing personally, not institutionally."
         ],
         "links": [
           "water-crisis",
           "what-wakes-beneath",
           "riven-marchward"
         ],
-        "aliases": [],
+        "aliases": [
+          "Eredan"
+        ],
         "createdDay": 1,
         "entityId": "stillhold-exile-marchward",
         "updatedDay": 1
@@ -606,11 +626,11 @@
     }
   },
   "tendencies": {
-    "strategic": 12.357931904296874,
-    "amorous": 14.097531093749998,
-    "cautious": 3.829312890625,
-    "cerebral": 1.9268593749999998,
-    "social": 0.9506249999999999
+    "strategic": 12.048983606689452,
+    "amorous": 13.745092816406247,
+    "cautious": 3.7335800683593745,
+    "cerebral": 1.8786878906249997,
+    "social": 1.9268593749999998
   },
   "aptitudes": [
     "strategist",
@@ -618,7 +638,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 5,
+  "actionCount": 6,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -803,8 +823,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786757823971,
-  "rev": 29,
+  "updatedAt": 1786757939179,
+  "rev": 30,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -825,7 +845,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 6
+    "riven_marches": 7
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -833,10 +853,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-15T00:58:33.023Z",
-      "lastAt": "2026-08-15T01:37:03.950Z",
+      "lastAt": "2026-08-15T01:38:59.166Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [],
@@ -921,17 +941,18 @@
     "scout": 1,
     "careful": 4,
     "study": 2,
-    "negotiate": 1,
-    "ask": 1
+    "negotiate": 2,
+    "ask": 1,
+    "calm": 1
   },
   "_opEmitted": {
-    "sceneSummary": 5,
-    "choices": 5,
-    "scene": 5,
-    "npcUpdates": 5,
-    "codexUpdates": 4,
-    "timeOps": 5,
+    "sceneSummary": 6,
+    "choices": 6,
+    "scene": 6,
+    "npcUpdates": 6,
+    "codexUpdates": 5,
+    "timeOps": 6,
     "characterDeltas": 2
   },
-  "_opTurns": 5
+  "_opTurns": 6
 }

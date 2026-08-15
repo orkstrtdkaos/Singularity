@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "duelist",
   "level": 1,
-  "xp": 44,
+  "xp": 49,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -62,14 +62,14 @@
     }
   ],
   "alignment": {
-    "falsehood_truth": 0.025,
+    "falsehood_truth": 0.03875,
     "violence_peace": -0.0025000000000000005
   },
   "attunement": 1,
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 51,
+  "energy": 46,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -134,121 +134,112 @@
         "player": "Read the fight ahead — stand in the doorway and let your sense of what comes next settle before you move",
         "summary": "Rhinofire stands in the hostel doorway and reads the road north — the wrong stag territorial and real past the second ford, the authentication structure a held breath rather than a threat, the danger there a matter of words rather than force.",
         "narration": "You stop in the doorway — not hesitating, just standing. The morning light comes in flat and grey through the hostel's small windows, and you let the shape of the day ahead settle into you the way your training said it would: not thought, exactly, but attention finding its own level.\n\nThe Marchward is waking outside. You can hear the specific sounds of a border town in early spring: boot mud on a wooden step, a trader haggling in a language that isn't quite valley-common, the drip of snowmelt from the hostel eaves. None of it is urgent. The road north will be mud past the first fork and worse past the second — you already knew that. What the read gives you is the texture of what waits there.\n\nThe wrong stag is real. You feel it the way you feel a line before it snaps — not a fact you've assembled but a certainty that arrives whole. North of the second ford, in the treeline, something that used to die has stopped being willing to. It is not aggressive by nature. It is territorial by something older than aggression: the sense that it belongs to a crossing and the crossing belongs to it. You will not take it by surprise. You will not go around it without it knowing. What you can choose is the ground — and when you meet it, whether you stand or run first.\n\nThe authentication structure is further, and its read is quieter: a held breath, not a threat. It is waiting with the patience of something that does not experience time the way you do. The danger there is not violence. It is a question asked in the wrong language, at the wrong moment, with the wrong answer in your mouth. The note in your coat is the best map you have of what not to say. Marrow drops from the counter-edge to the floor with a soft double-tap of feet, and looks up at you once — patient, unhurried, already pointed toward the door."
+      },
+      {
+        "player": "Ask someone in the Marchward about the second ford before you go — a local read on the current state of the road and what's been seen near the treeline",
+        "summary": "A local with muddy boots confirmed the second ford is running high on snowmelt — cross early or take the log crossing east — and reported something moving silent along the treeline at dusk, tracing the ford.",
+        "narration": "You don't move from the doorway yet. The Marchward is small enough that someone local is usually within earshot, and sure enough there's a man on the step of the building opposite — thick-coated, mud on his boots to the shin, a bucket of something he's not in any hurry to carry further. He looks like he walked the north road this morning or yesterday at the latest.\n\nYou ask him about the second ford. He sets the bucket down and gives you the patient look of a man who has answered this question before.\n\n\"Ford's up,\" he says. \"Snowmelt. You'll want to cross early if you're going — afternoon and the current's wrong. There's a log crossing a half-mile east that's still holding, if you'd rather keep your boots dry.\" He pauses, and something shifts in his expression — not worry, exactly, but the particular attention of someone who has noticed something he doesn't have a word for yet. \"Treeline north of the ford. Something's been moving in it at dusk the last few nights. Not wolves — wolves you hear. This is quiet. Just…movement. In and out of the line, north to south, like it's tracing the crossing.\"\n\nHe picks the bucket back up and shrugs the way people shrug when they want to communicate that a thing has been noted and set aside and they intend to keep doing exactly that. \"Probably nothing. Could be deer. But it's not deer.\" He nods once and goes inside."
       }
     ],
     "lastTurn": {
-      "narration": "You stop in the doorway — not hesitating, just standing. The morning light comes in flat and grey through the hostel's small windows, and you let the shape of the day ahead settle into you the way your training said it would: not thought, exactly, but attention finding its own level.\n\nThe Marchward is waking outside. You can hear the specific sounds of a border town in early spring: boot mud on a wooden step, a trader haggling in a language that isn't quite valley-common, the drip of snowmelt from the hostel eaves. None of it is urgent. The road north will be mud past the first fork and worse past the second — you already knew that. What the read gives you is the texture of what waits there.\n\nThe wrong stag is real. You feel it the way you feel a line before it snaps — not a fact you've assembled but a certainty that arrives whole. North of the second ford, in the treeline, something that used to die has stopped being willing to. It is not aggressive by nature. It is territorial by something older than aggression: the sense that it belongs to a crossing and the crossing belongs to it. You will not take it by surprise. You will not go around it without it knowing. What you can choose is the ground — and when you meet it, whether you stand or run first.\n\nThe authentication structure is further, and its read is quieter: a held breath, not a threat. It is waiting with the patience of something that does not experience time the way you do. The danger there is not violence. It is a question asked in the wrong language, at the wrong moment, with the wrong answer in your mouth. The note in your coat is the best map you have of what not to say. Marrow drops from the counter-edge to the floor with a soft double-tap of feet, and looks up at you once — patient, unhurried, already pointed toward the door.",
-      "sceneSummary": "Rhinofire stands in the hostel doorway and reads the road north — the wrong stag territorial and real past the second ford, the authentication structure a held breath rather than a threat, the danger there a matter of words rather than force.",
+      "narration": "You don't move from the doorway yet. The Marchward is small enough that someone local is usually within earshot, and sure enough there's a man on the step of the building opposite — thick-coated, mud on his boots to the shin, a bucket of something he's not in any hurry to carry further. He looks like he walked the north road this morning or yesterday at the latest.\n\nYou ask him about the second ford. He sets the bucket down and gives you the patient look of a man who has answered this question before.\n\n\"Ford's up,\" he says. \"Snowmelt. You'll want to cross early if you're going — afternoon and the current's wrong. There's a log crossing a half-mile east that's still holding, if you'd rather keep your boots dry.\" He pauses, and something shifts in his expression — not worry, exactly, but the particular attention of someone who has noticed something he doesn't have a word for yet. \"Treeline north of the ford. Something's been moving in it at dusk the last few nights. Not wolves — wolves you hear. This is quiet. Just…movement. In and out of the line, north to south, like it's tracing the crossing.\"\n\nHe picks the bucket back up and shrugs the way people shrug when they want to communicate that a thing has been noted and set aside and they intend to keep doing exactly that. \"Probably nothing. Could be deer. But it's not deer.\" He nods once and goes inside.",
+      "sceneSummary": "A local with muddy boots confirmed the second ford is running high on snowmelt — cross early or take the log crossing east — and reported something moving silent along the treeline at dusk, tracing the ford.",
       "choices": [
         {
-          "label": "Step out and take the north road — mud and the second ford ahead, wrong stag and all",
+          "label": "Head north now — cross early, take the main ford before the current turns",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {
-            "violence_peace": -0.1,
-            "falsehood_truth": 0.2
+            "violence_peace": -0.05
           },
           "difficulty": "easy",
-          "opposedDifficulty": null,
           "intentTags": [
             "travel",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Ask someone in the Marchward about the second ford before you go — a local read on the current state of the road and what's been seen near the treeline",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Take the log crossing to the east — drier boots, a different angle on what's moving in the treeline",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "axes": {
-            "falsehood_truth": 0.3
+            "falsehood_truth": 0.1
           },
           "difficulty": "easy",
-          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "scout"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Read the fight — stand here a moment and let your sense of the treeline's pattern settle before you pick a route",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "violence_peace": -0.05
+          },
+          "difficulty": "easy",
           "intentTags": [
             "scout",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Seek the wrong stag deliberately — meet it at the treeline on your terms, not its",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "violence_peace": -0.2
-          },
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "risky",
-            "scout"
-          ],
           "abilityId": "read_the_fight",
           "energyCost": 3,
-          "trivial": false,
-          "encounterId": "beast_the_wrong_stag",
-          "emergenceId": null
+          "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -3,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
       "scene": {
-        "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands at the doorway, note folded and pocketed, facing the street.",
+        "setting": "Marchward hostel doorway, morning — Rhinofire stands at the threshold facing the street, note in coat pocket. The man with the bucket has gone inside the building opposite.",
         "npcsPresent": [
           {
             "name": "Eredan",
-            "state": "Eating his barley at the trestle, spoon in hand, not looking up."
+            "state": "Eating his barley at the trestle, not looking up."
           },
           {
             "name": "Hostel-keeper",
-            "state": "Wiping down the counter, the obligation of the note gone from her."
+            "state": "Wiping the counter in slow circles, not watching."
           },
           {
             "name": "Marrow",
-            "state": "On the floor near the doorway, watching Rhinofire, pointed toward the street."
+            "state": "On the step beside Rhinofire, watching the street."
           }
         ],
         "objects": [
           "The folded note — in Rhinofire's coat pocket",
-          "The broken wax seal — still on the table",
+          "The broken wax seal — still on the table inside",
           "Eredan's bowl of barley, spoon in hand",
           "The flour-dusted counter"
         ],
         "threads": [
-          "The road north — mud and the second ford ahead",
-          "The wrong stag — territorial in the treeline north of the second ford",
-          "The authentication structure — listening, waiting, a matter of words not force",
-          "Who was satisfied when the surveyor's hand went black"
+          "The second ford is running high — cross early or use the log crossing east",
+          "Something moving silent in the treeline at dusk, tracing the ford north to south",
+          "The wrong stag — territorial north of the second ford",
+          "The authentication structure — listening, waiting, a matter of words not force"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "marrow",
-          "name": "Marrow",
-          "role": "Companion",
-          "gender": "unknown",
-          "pronouns": "they/them",
-          "note": "Dropped from the counter-edge and positioned near the doorway, already pointed north — reading Rhinofire's intent before it was spoken.",
-          "statusNote": "At Rhinofire's side in the hostel doorway, watching the street."
+          "op": "meet",
+          "npcId": "marchward-local-muddyboots",
+          "name": "Local with a bucket",
+          "role": "Marchward resident, recent north-road walker",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "Thick-coated, mud to the shin, unhurried — the bearing of someone who walks the north road often enough to stop finding it interesting.",
+          "note": "Described the second ford as running high on snowmelt; advised crossing early or taking the log crossing east. Reported silent movement in the treeline at dusk, north-south along the ford — not wolves, not deer. Noted it and moved on.",
+          "learned": [
+            "The second ford is up on snowmelt — cross early, afternoon current is wrong",
+            "A log crossing a half-mile east is still holding",
+            "Something has been moving silent in the treeline at dusk the last few nights, tracing the ford north to south — he ruled out wolves and deer"
+          ],
+          "skillsObserved": [
+            "practical observation, frontier trail knowledge"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Went inside the building opposite after speaking; a local, findable if needed"
         }
       ],
       "codexUpdates": [
@@ -256,61 +247,64 @@
           "topic": "marchward-note-author",
           "label": "The Note's Author",
           "kind": "mystery",
-          "fact": "The wrong stag is territorial, not aggressive by instinct — it holds a crossing the way something older than violence holds ground. Meeting it is a matter of choosing the ground and the moment, not avoiding it entirely.",
+          "fact": "Something has been moving silent in the treeline north of the second ford at dusk — north-south, tracing the crossing — for at least the last few nights. A local ruled out wolves and deer. This predates Rhinofire's arrival and may relate to the wrong stag or to whoever wrote the note.",
           "links": [
             "water-crisis",
-            "riven-marchward",
-            "what-wakes-beneath"
+            "what-wakes-beneath",
+            "riven-marchward"
           ]
         },
         {
-          "topic": "what-wakes-beneath",
-          "label": "What Wakes Beneath",
-          "kind": "mystery",
-          "fact": "The authentication structure reads as a held breath — not threatening, but waiting with a patience outside human time. The danger there is a question asked wrong, not a force to be withstood.",
+          "topic": "water-crisis",
+          "label": "The Water Crisis",
+          "kind": "event",
+          "fact": "The second ford north of the Marchward is running high on snowmelt — cross early or take the log crossing east. Something moves silent in the treeline at dusk, tracing the ford, noticed by locals in the last few nights.",
           "links": [
-            "water-crisis",
             "riven-marchward",
-            "stillhold-exile-marchward"
+            "marchward-note-author",
+            "what-wakes-beneath"
           ]
         }
       ],
+      "offer": {
+        "thing": "A local's unprompted addition — not just the ford's state, but a pattern of movement in the treeline at dusk, tracing the crossing north to south, that he can't name",
+        "from": "What this place is — a border-town where people pay attention to things they can't explain, because pretense is expensive here"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Standing in the doorway, letting the read settle — a short stillness, not long."
-      },
-      "sceneEnded": false
+        "why": "a brief word at the doorstep"
+      }
     },
     "sceneState": {
-      "setting": "Inside the Marchward hostel, morning light through small windows. Rhinofire stands at the doorway, note folded and pocketed, facing the street.",
+      "setting": "Marchward hostel doorway, morning — Rhinofire stands at the threshold facing the street, note in coat pocket. The man with the bucket has gone inside the building opposite.",
       "npcsPresent": [
         {
           "name": "Eredan",
-          "state": "Eating his barley at the trestle, spoon in hand, not looking up."
+          "state": "Eating his barley at the trestle, not looking up."
         },
         {
           "name": "Hostel-keeper",
-          "state": "Wiping down the counter, the obligation of the note gone from her."
+          "state": "Wiping the counter in slow circles, not watching."
         },
         {
           "name": "Marrow",
-          "state": "On the floor near the doorway, watching Rhinofire, pointed toward the street."
+          "state": "On the step beside Rhinofire, watching the street."
         }
       ],
       "objects": [
         "The folded note — in Rhinofire's coat pocket",
-        "The broken wax seal — still on the table",
+        "The broken wax seal — still on the table inside",
         "Eredan's bowl of barley, spoon in hand",
         "The flour-dusted counter"
       ],
       "threads": [
-        "The road north — mud and the second ford ahead",
-        "The wrong stag — territorial in the treeline north of the second ford",
-        "The authentication structure — listening, waiting, a matter of words not force",
-        "Who was satisfied when the surveyor's hand went black"
+        "The second ford is running high — cross early or use the log crossing east",
+        "Something moving silent in the treeline at dusk, tracing the ford north to south",
+        "The wrong stag — territorial north of the second ford",
+        "The authentication structure — listening, waiting, a matter of words not force"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
@@ -460,6 +454,41 @@
         "day": 1
       },
       "met": 3
+    },
+    "marchward-local-muddyboots": {
+      "id": "marchward-local-muddyboots",
+      "name": "Local with a bucket",
+      "role": "Marchward resident, recent north-road walker",
+      "description": "Thick-coated, mud to the shin, unhurried — the bearing of someone who walks the north road often enough to stop finding it interesting.",
+      "firstMet": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Described the second ford as running high on snowmelt; advised crossing early or taking the log crossing east. Reported silent movement in the treeline at dusk, north-south along the ford — not wolves, not deer. Noted it and moved on."
+      ],
+      "knownFacts": [
+        "The second ford is up on snowmelt — cross early, afternoon current is wrong",
+        "A log crossing a half-mile east is still holding",
+        "Something has been moving silent in the treeline at dusk the last few nights, tracing the ford north to south — he ruled out wolves and deer"
+      ],
+      "skillsObserved": [
+        "practical observation, frontier trail knowledge"
+      ],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "Went inside the building opposite after speaking; a local, findable if needed",
+      "domains": {
+        "primary": "marcher"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -574,7 +603,7 @@
         "locationId": "the_marchward"
       }
     ],
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 0,
     "recentOffers": [
       {
         "thing": "Marrow watching the treeline to the west — something it has noticed that it has not named",
@@ -583,6 +612,10 @@
       {
         "thing": "Marrow's small adjustment — the bird settling as if something has concluded — is a tell. It knows when things end. This exchange may have…",
         "from": "Marrow's nature: it attends endings, including small ones, and its movements are timed and deliberate"
+      },
+      {
+        "thing": "A local's unprompted addition — not just the ford's state, but a pattern of movement in the treeline at dusk, tracing the crossing north…",
+        "from": "What this place is — a border-town where people pay attention to things they can't explain, because pretense is expensive here"
       }
     ]
   },
@@ -632,7 +665,8 @@
           "[d1] The upstream structure is a pre-Transition authentication site that held the Council's secondary (backup) purification sequence. It went silent eight months ago — not destroyed, not sealed, still present and 'not answering.' Eredan's warning: be careful what you let it hear.",
           "[d1] A lone traveler came down the Disputed Zone cutoff two or three days before Rhinofire's arrival — hooded, valley coin, asking specifically about the north road into the Zone. He left before morning and left a sealed unmarked note at the hostel.",
           "[d1] An unmarked note left at the Marchward hostel warns: the authentication site is not broken — it is waiting. It should not be told the water's composition, or it will attempt to complete the purification protocol. The sequence it wants is one the Council burned; it cannot be given. Telling it…",
-          "[d1] Eredan's theory for the structure: say nothing, let it run its authentication, it waits for the burned sequence and eventually stops waiting. No one has stayed long enough to verify whether the theory holds."
+          "[d1] Eredan's theory for the structure: say nothing, let it run its authentication, it waits for the burned sequence and eventually stops waiting. No one has stayed long enough to verify whether the theory holds.",
+          "[d1] The second ford north of the Marchward is running high on snowmelt — cross early or take the log crossing east. Something moves silent in the treeline at dusk, tracing the ford, noticed by locals in the last few nights."
         ],
         "links": [
           "riven-marchward",
@@ -727,7 +761,8 @@
         "facts": [
           "[d1] The note is written in an educated, disciplined hand — smells of cold stone and mineral water. No name, no mark. Left two to three days before Rhinofire arrived. Knew the structure's nature, knew the burned sequence, and knew the name of a specific beast north of the second ford: the wrong stag.",
           "[d1] Eredan confirmed: whoever wrote the note has been north of the second ford, and recently — the wrong stag is not something people write down without firsthand knowledge.",
-          "[d1] The wrong stag is territorial, not aggressive by instinct — it holds a crossing the way something older than violence holds ground. Meeting it is a matter of choosing the ground and the moment, not avoiding it entirely."
+          "[d1] The wrong stag is territorial, not aggressive by instinct — it holds a crossing the way something older than violence holds ground. Meeting it is a matter of choosing the ground and the moment, not avoiding it entirely.",
+          "[d1] Something has been moving silent in the treeline north of the second ford at dusk — north-south, tracing the crossing — for at least the last few nights. A local ruled out wolves and deer. This predates Rhinofire's arrival and may relate to the wrong stag or to whoever wrote the note."
         ],
         "links": [
           "water-crisis",
@@ -738,16 +773,29 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "marchward-local-muddyboots": {
+        "id": "marchward-local-muddyboots",
+        "label": "Local with a bucket",
+        "kind": "person",
+        "facts": [
+          "[d1] Marchward resident, recent north-road walker"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "marchward-local-muddyboots",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 11.995815269804451,
-    "amorous": 11.512774194895753,
-    "cautious": 5.00831097227543,
-    "cerebral": 3.4510575589972885,
-    "social": 4.304710208740959,
-    "leadership": 0.8590683010253904
+    "strategic": 12.69591988805934,
+    "amorous": 11.22495484002336,
+    "cautious": 5.883103197968544,
+    "cerebral": 3.3647811200223563,
+    "social": 4.197092453522434,
+    "leadership": 0.8375915934997556
   },
   "aptitudes": [
     "strategist",
@@ -755,7 +803,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 13,
+  "actionCount": 14,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -930,8 +978,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786801538333,
-  "rev": 46,
+  "updatedAt": 1786801637250,
+  "rev": 47,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -954,7 +1002,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 14
+    "riven_marches": 15
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -970,16 +1018,16 @@
     {
       "id": "sess-2",
       "startedAt": "2026-08-15T13:45:38.317Z",
-      "lastAt": "2026-08-15T13:45:38.317Z",
+      "lastAt": "2026-08-15T13:47:17.219Z",
       "startDay": 46,
       "endDay": 46,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [],
   "_opLedger": {
     "offer": {
-      "applied": 2,
+      "applied": 3,
       "rejected": 0,
       "lastWhy": null
     }
@@ -989,7 +1037,7 @@
   "nameRepairVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "marrow": 0.75
+    "marrow": 1
   },
   "bondLogFrom": 0,
   "practice": {
@@ -1066,11 +1114,19 @@
       "day": 1,
       "worldDay": 46,
       "actionCount": 12
+    },
+    {
+      "companionId": "marrow",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 1,
+      "worldDay": 46,
+      "actionCount": 13
     }
   ],
   "skillUses": {
-    "scout": 3,
-    "careful": 6,
+    "scout": 4,
+    "careful": 7,
     "study": 4,
     "negotiate": 5,
     "ask": 1,
@@ -1079,17 +1135,17 @@
     "travel": 1
   },
   "_opEmitted": {
-    "sceneSummary": 12,
-    "choices": 12,
-    "scene": 12,
-    "npcUpdates": 12,
-    "codexUpdates": 10,
-    "timeOps": 11,
+    "sceneSummary": 13,
+    "choices": 13,
+    "scene": 13,
+    "npcUpdates": 13,
+    "codexUpdates": 11,
+    "timeOps": 12,
     "characterDeltas": 4,
-    "offer": 1,
+    "offer": 2,
     "sceneEnded": 2,
     "placeUpdates": 1
   },
-  "_opTurns": 12,
+  "_opTurns": 13,
   "_intentAsked": null
 }

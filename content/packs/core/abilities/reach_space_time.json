@@ -157,11 +157,14 @@
      "grants": "Slow duration around you — a fight, a fall, a conversation stretches, and you have room inside it.",
      "cannot": "It costs continuously and it costs steeply. And the world outside your slow hour arrives on time regardless.",
      "functions": [
-      "reveal",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -169,12 +172,16 @@
      "grants": "Remember forward — an hour that has not happened arrives in you as memory does, with a memory's specificity and a memory's unreliability.",
      "cannot": "You cannot tell a true pre-memory from a feared one. Hourkeepers who trust it wrongly are the reason the craft is feared.",
      "functions": [
-      "reveal",
       "bind",
       "foresee"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "foresee"
+     ]
     }
    ],
    "gated": "learned",
@@ -230,7 +237,13 @@
     }
    ],
    "plainly": "A investigate/fight/social action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about 2 hours Ranks: rank 2 deepens duration; rank 3 adds to special. Limit: the Moment Still Passes For Everyone Else — you get to Look.",
-   "_descriptionWas": "The time-pole mastery: duration tended, held, and read. The Hourkeepers remember forward and backward, and pay for both."
+   "_descriptionWas": "The time-pole mastery: duration tended, held, and read. The Hourkeepers remember forward and backward, and pay for both.",
+   "_functionsWas": [
+    "bind",
+    "foresee",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_long_reach",
@@ -644,13 +657,18 @@
      "grants": "Make the crossing — any crossing — by knowing exactly where to commit and exactly how. What the land calls uncrossable is only waiting for someone who can read its grain.",
      "cannot": "Nothing further; this is the craft's ceiling; it FINDS or MAKES a crossing; and it still costs what it costs: knowing where to commit means COMMITTING.",
      "functions": [
-      "reveal",
       "make",
       "open",
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "make",
+      "open",
+      "travel"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -696,7 +714,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A exploration/navigation/tactical action that moves you or someone else. Its strength is rated 5 out of 10, and lasts for about 4 hours. Range is 15. Ranks: rank 2 deepens access; rank 3 adds to special. Limit: it Finds or Makes a crossing — it does not make it Safe."
+   "plainly": "A exploration/navigation/tactical action that moves you or someone else. Its strength is rated 5 out of 10, and lasts for about 4 hours. Range is 15. Ranks: rank 2 deepens access; rank 3 adds to special. Limit: it Finds or Makes a crossing — it does not make it Safe.",
+   "_functionsWas": [
+    "make",
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_land_knowledge",
@@ -719,8 +744,7 @@
    "tradition": "horizon",
    "harmRung": "none",
    "functions": [
-    "command",
-    "reveal"
+    "command"
    ],
    "challengeTypes": [
     "leadership",
@@ -734,11 +758,14 @@
      "grants": "Speak with the authority of someone who has been where others haven't — your intelligence about terrain, routes, and distances commands genuine trust.",
      "cannot": "Anything rank 2 adds — use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything; IT REQUIRES HAVING BEEN THERE.",
      "functions": [
-      "reveal",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "command"
+     ]
     },
     {
      "rank": 2,
@@ -746,11 +773,14 @@
      "grants": "Use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything.",
      "cannot": "Anything rank 3 adds — in territory you have walked, your knowledge is comprehensive enough to command any situation that depends on terrain — you are the map and the map is right; IT REQUIRES HAVING BEEN THERE.",
      "functions": [
-      "reveal",
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "command"
+     ]
     },
     {
      "rank": 3,
@@ -758,11 +788,14 @@
      "grants": "In territory you have walked, your knowledge is comprehensive enough to command any situation that depends on terrain — you are the map and the map is right.",
      "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES HAVING BEEN THERE.",
      "functions": [
-      "reveal",
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "command"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -807,7 +840,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A leadership/navigation/social action that strengthens someone. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 extends scope. Limit: iT Requires Having Been There — an unwalked region offers nothing."
+   "plainly": "A leadership/navigation/social action that strengthens someone. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 extends scope. Limit: iT Requires Having Been There — an unwalked region offers nothing.",
+   "_functionsWas": [
+    "command",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_road_ahead",
@@ -2418,8 +2456,9 @@
     "space_time": -0.6
    },
    "functions": [
-    "travel",
-    "reveal"
+    "move",
+    "reveal",
+    "travel"
    ],
    "narrationHints": "You know the road you have never walked. Not a map — a WAY: which fork, which ford, where the going is bad, and how long it truly takes rather than how long they told you.",
    "description": "The Horizon-Walkers' first craft. The March's roads are held by people who have never been lost.",
@@ -2444,11 +2483,15 @@
      "cannot": "It optimises for what you NAME. Ask for fast and get fast; the craft will not warn you that fast was the wrong ask.",
      "functions": [
       "travel",
-      "reveal",
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "travel",
+      "reveal",
+      "move"
+     ]
     },
     {
      "rank": 3,
@@ -2457,11 +2500,15 @@
      "cannot": "⚠ YOU NOW KNOW THE WAYS INTO PLACES YOU CARE ABOUT, and so does anyone who can make you say them. Horizon-Walkers are taken for this and the March knows it.",
      "functions": [
       "travel",
-      "reveal",
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "travel",
+      "reveal",
+      "move"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2499,7 +2546,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that gives you a route you have never walked, with true travel time. Rated 5 of 10 across a scope of 3 for about twelve hours."
+   "plainly": "A puzzle/social action that gives you a route you have never walked, with true travel time. Rated 5 of 10 across a scope of 3 for about twelve hours.",
+   "_functionsWas": [
+    "travel",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_shortened_road",

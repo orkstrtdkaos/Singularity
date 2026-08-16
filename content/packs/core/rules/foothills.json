@@ -1,0 +1,74 @@
+{
+ "schemaVersion": 1,
+ "id": "foothills",
+ "kind": "content",
+ "note": "⛔ SNG-441. FOOTHILLS AND FOLK — Erik, 2026-08-15: 'Foothills are the FUNCTIONAL VERSION of the pole in many cases; in some cases the place that is APPROACHABLE and the ECONOMIC CENTER. They are also NOT strictly one pole per parent. We need balance, but foothills are most likely a BLEND of a primary domain with 1-2 of its neighbors.'\n⚠️ THERE ARE 26 CANONICAL TRADITIONS — 24 ring poles on 12 axes, plus god_named and bargainers already carrying `pole: foothill`. I had been counting 31 by treating collection-keys as peoples.",
+ "_theRule": "⛔ A FOOTHILL IS NOT A LESSER TRADITION — IT IS A POLE MADE USABLE. The pole states the position absolutely; the foothill is what you can actually buy, hire, learn and live beside. ⚠️ AND THE EXISTING TWO PROVE THE BLEND CROSSES AXES rather than staying on neighbours:\n   GOD-NAMED — 'borrowed grandeur worn slightly wrong; a man addressed by a name nobody in this valley can check.' ⛔ THAT IS SERAPHIC (angelic authority) BLENDED WITH VEILWRIGHT (falsehood). The functional version of divine authority is a borrowed one.\n   BARGAINERS — 'a good table, a fair scale, an exit that is always shown to you and always costed.' ⛔ ABYSSAL (the named want, the struck term) BLENDED WITH VERIST (truth). The functional version of the bargain is an HONEST one, which is precisely why anyone sits down twice.\n⚠️ SO THE PATTERN IS: TAKE THE POLE'S POWER AND ADD WHAT MAKES IT SURVIVABLE TO DEAL WITH.",
+ "foothills": {
+  "god_named": {
+   "parents": {
+    "seraphic": 0.7,
+    "veilwright": 0.3
+   },
+   "axis": "demonic_angelic",
+   "craft": "Service",
+   "status": "authored — blend inferred from aesthetic, ⚠️ Erik to confirm the weights"
+  },
+  "bargainers": {
+   "parents": {
+    "abyssal": 0.7,
+    "verist": 0.3
+   },
+   "axis": "demonic_angelic",
+   "craft": "Terms",
+   "status": "authored — blend inferred from aesthetic, ⚠️ Erik to confirm the weights"
+  },
+  "harmonic": {
+   "parents": {
+    "threnodist": 0.6,
+    "lattice": 0.4
+   },
+   "axis": "emotional_logical",
+   "craft": "Resonance",
+   "place": "harmonic_heights_terrace",
+   "abilities": 15,
+   "ratified": "⛔ ERIK 2026-08-15: 'I agree with you about the Threnodists with the lattice aesthetic for the resonant/harmonic foothill.'",
+   "why": "⚠️ THRENODIST FOR CRAFT, LATTICE FOR AESTHETIC — the Threnodists sing what they FEEL; the Heights sing what they can BUILD WITH. Sound made structural: standing waves, phononic crystal, interference held as architecture. ⛔ AND LATTICE IS NOT A THRENODIST RING-NEIGHBOUR (pos 15 vs 23), which is fine — the two existing foothills also blend across the ring.",
+   "note": "⚠️ Sound is not one of the twelve axes. The foothill is where it enters the world."
+  },
+  "radiant_folk": {
+   "parents": {
+    "blazeborn": 0.7,
+    "wright": 0.3
+   },
+   "axis": "dark_light",
+   "craft": "Glasswork",
+   "place": "radiant_plateau_edge",
+   "abilities": 14,
+   "why": "⛔ RADIANCE IS THE BLAZEBORN CRAFT, and the Plateau does the USABLE version: Sun Coax, Light Well, Clarity Lens, Beacon Thread — warming, storing, magnifying, signalling — rather than revelation-as-violence. ⚠️ THE WRIGHT SHARE IS WHY: light-guides and prisms are MADE THINGS. The Blazeborn reveal; the Plateau BUILDS WITH light, which is the functional turn.",
+   "_erikRules": "whether the second parent is wright (making) or lattice (ordering) — both defensible"
+  }
+ },
+ "folk": {
+  "_ruling": "⛔ ERIK AGREED THE ALLOCATION: `valley_craft` is FOLK, not a foothill. THE DISTINCTION: a FOOTHILL is the functional version of ONE pole, has a place and an economy, and is a tradition. FOLK is the ordinary person's version of MANY — no single parent, no gate, learnable by anyone.\n⚠️ Wayfinding, Greenlore, Rivercraft, Quiet Step, Stonewise, Hearthbinding. `body 0.75 / precursor 0.20 / nanite 0.05`, and two are openly borrowed — 'the valley's BORROWED sound-work' (Carrying Call) and Glasswork, 'what a people learn from living under the plateau edge.'",
+  "key": "valley_craft",
+  "abilities": 17,
+  "isTradition": false,
+  "gate": null
+ },
+ "braids": {
+  "_ruling": "⛔ ERIK 2026-08-15: 'The crossroads needs to have PERFECT power sources. It's a MYSTERY OF THE WORLD that it exists — massive quests are here, with a mythical behind it. Likely a BRAID OF PRECURSOR AND VEIL that harmonizes all power sources, such as meta, nanite, etc.'",
+  "key": "cross_pole_braid",
+  "place": "the_crossing",
+  "abilities": 3,
+  "theCrossing": {
+   "mechanic": "⛔ UNIVERSAL NEXUS — every power source reads ON-BAND at the Crossing, with no penalty for any.",
+   "cause": "⚠️ A STANDING BRAID OF PRECURSOR AND VEIL. Precursor wants density 0.90 and veil wants 0.10 — ⛔ THEY ARE EXACT MIRRORS, and `power_sources.json` already says so: 'the veil is the MIRROR of precursor, because thinning one strengthens the other.' A braid holding both in balance would cancel the density term entirely, which is what 'every axis crosses here at nothing' has always meant.",
+   "fiction": "⛔ NOBODY KNOWS WHY IT IS THERE. It is not a built thing anyone will admit to, and the braid holds without a wielder. ⚠️ THAT IS THE MYSTERY AND THE QUEST HOOK: something is sustaining a cross-pole braid at world scale, permanently, and the Crossing is the shadow it casts.",
+   "consequence": "This is WHY braids cluster here and nowhere else — a braid needs two sources at once, and the Crossing is the only ground that gives both without cost. ⚠️ It also explains the Made Gate: a player built the 27th waygate HERE, and the 26 inherited ones are elsewhere."
+  }
+ },
+ "notATradition": {
+  "precursor": "⛔ A POWER SOURCE MISFILED AS A TRADITION. 6 abilities — Address-Sense, Latticespeak, Wake the Line, Unmake Seal, Hold the Aperture, Foreclose. No people owns them; anyone who learns to speak to the lattice has them. ⚠️ Should carry `tradition: null` with `powerSystem: precursor`."
+ }
+}

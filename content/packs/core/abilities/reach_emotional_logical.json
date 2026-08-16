@@ -247,7 +247,9 @@
     }
    ],
    "plainly": "A social/fight/puzzle action that deals damage. It rolls 2d6 reason damage across a scope of 2 Ranks: rank 2 deepens damage; rank 3 extends scope. Limit: the Unreasonable And The Emotion-Ruled Resist.",
-   "_descriptionWas": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art."
+   "_descriptionWas": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
+   "_markedForRemoval": "⛔ SNG-453, ERIK'S RULING: 'Those MYSTERIES WERE NON-EXISTENT — leave a reminder to fill in if we get so inspired, but MARK THEM FOR REMOVAL in the meantime.'\n⚠️ Logos is the sect's namesake 'pole mastery' and its ranks summarise the whole sect rather than doing anything — r1 duplicates two or three other abilities in its own sect. ⛔ IF THE MYSTERY IS EVER AUTHORED, THIS IS WHERE IT ATTACHES: a mystery should be the thing the tradition knows that nobody else does, not a digest of its skill list.",
+   "status": "marked-for-removal"
   },
   {
    "id": "the_turning_word",
@@ -1037,9 +1039,9 @@
    "notFor": [],
    "tradition": "syllogist",
    "functions": [
-    "bind",
     "shield",
-    "ward"
+    "ward",
+    "bind"
    ],
    "challengeTypes": [
     "social",
@@ -1056,7 +1058,10 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "shield"
+     ]
     },
     {
      "rank": 2,
@@ -1068,7 +1073,11 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "shield",
+      "ward"
+     ]
     },
     {
      "rank": 3,
@@ -1081,7 +1090,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "shield",
+      "ward",
+      "bind"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1128,7 +1142,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/intellectual/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: iT Wards What Must Answer Reason — a fist does not answer the proof."
+   "plainly": "A social/intellectual/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: iT Wards What Must Answer Reason — a fist does not answer the proof.",
+   "_functionsWas": [
+    "bind",
+    "shield",
+    "ward"
+   ],
+   "_strip": "⛔ SNG-453: incidental `reveal`/`foresee` stripped — the perceiving is the setup step, not the effect."
   },
   {
    "id": "the_built_system",
@@ -1242,114 +1262,6 @@
     }
    ],
    "plainly": "A intellectual/leadership/craft action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 adds to autonomy; rank 3 extends scope. Limit: iT Runs ON Its Logic — a system whose logic is unsound fails exactly where the flaw is."
-  },
-  {
-   "id": "the_axiom_holds",
-   "name": "The Axiom Holds",
-   "levelReq": 1,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "emotional_logical": 0.3
-   },
-   "effectTags": [
-    "certainty",
-    "endurance",
-    "logic"
-   ],
-   "harmRung": "none",
-   "narrationHints": "The certainty was enough. The axiom held and therefore so did he.",
-   "description": "Sustain through the certainty of what you know — fear, pain, and doubt don't reach the level of the axioms.",
-   "notFor": [],
-   "tradition": "syllogist",
-   "functions": [
-    "resist",
-    "sustain"
-   ],
-   "challengeTypes": [
-    "endurance",
-    "hardship",
-    "intellectual"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Axiomatic Ground",
-     "grants": "Hold function under pressure through the certainty of what you know — fear, pain, and doubt operate below the level the axioms hold.",
-     "cannot": "Anything rank 2 adds — sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them; it requires SOMETHING ACTUALLY TRUE to stand on.",
-     "functions": [
-      "resist"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "The Correct Sequence",
-     "grants": "Sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them.",
-     "cannot": "Anything rank 3 adds — as long as what you know is true remains true, you remain functional around it; it requires SOMETHING ACTUALLY TRUE to stand on.",
-     "functions": [
-      "resist",
-      "sustain"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "The Axiom Holds",
-     "grants": "As long as what you know is true remains true, you remain functional around it. The axiom is the ground and the ground does not give.",
-     "cannot": "Nothing further; this is the craft's ceiling; it requires SOMETHING ACTUALLY TRUE to stand on.",
-     "functions": [
-      "resist",
-      "sustain"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
-    }
-   ],
-   "nativeOrCombination": "native",
-   "shape": "bolster",
-   "operativeAxis": [
-    "upkeepRelief",
-    "duration"
-   ],
-   "mechanic": {
-    "magnitude": 3,
-    "duration": 24
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "upkeepRelief",
-     "delta": "sustain through PURE LOGICAL DISCIPLINE — the sequence of correct actions that keeps you going when feeling would not",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: as long as WHAT YOU KNOW IS TRUE REMAINS TRUE, you remain functional around it — the axiom is the ground and the ground holds",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "hold the line of reasoning — half the relief, and it costs nothing",
-    "surge": "double it; an axiom that turns out to be FALSE takes the ground with it"
-   },
-   "bounds": [
-    {
-     "text": "it requires SOMETHING ACTUALLY TRUE to stand on",
-     "class": "hard"
-    },
-    {
-     "text": "AN AXIOM THAT TURNS OUT TO BE FALSE TAKES THE GROUND WITH IT",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A endurance/hardship/intellectual action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it requires Something Actually True to stand on."
   },
   {
    "schemaVersion": 1,
@@ -2098,9 +2010,14 @@
     "duration"
    ],
    "mechanic": {
-    "magnitude": 6,
-    "duration": 2,
-    "scope": 1
+    "dice": {
+     "n": 1,
+     "d": 4
+    },
+    "plus": 0,
+    "range": 6,
+    "targets": 1,
+    "marginFloorPer": 0.02
    },
    "intensity": {
     "conserve": "a single objection — they lose the beat, no more",
@@ -2124,12 +2041,18 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/fight action that stops a move already underway. Rated 6 of 10 on one target for about two hours. Limit: reactive only — it cannot open an exchange.",
+   "plainly": "A social/fight action that deals damage. It rolls 1d4. Range is 6.",
    "backlash": "You name a flaw that was not there. The position stands, you are publicly wrong, and everyone who heard it now discounts the next true thing you say.",
    "conserveSuppresses": "you object rather than dismantle — no public exposure if you are mistaken",
    "backlashRungNone": "the failure is REPUTATIONAL — you are publicly wrong and discounted. No body is touched.",
    "_backlashRungNote": "SNG-359: DELIBERATELY NO RUNG — declared, not omitted. the failure is REPUTATIONAL — you are publicly wrong and discounted. No body is touched. ⚠️ A gate should assert this list is DECLARED rather than empty, the same way runtime_unwired works.",
-   "_descriptionWas": "The Syllogists' first offense, and the strangest shape on the circle: it cannot start a fight, only unmake a move already underway."
+   "_descriptionWas": "The Syllogists' first offense, and the strangest shape on the circle: it cannot start a fight, only unmake a move already underway.",
+   "_mechanicWas": {
+    "magnitude": 6,
+    "duration": 2,
+    "scope": 1
+   },
+   "_diceFix": "⚠️ SNG-453: shape `hinder` — it halts rather than wounds, so 1d4; the value is the interrupt, not the number."
   },
   {
    "id": "the_carried_name",

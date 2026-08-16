@@ -570,120 +570,6 @@
    "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it senses Intent — a rockfall, a machine, or an animal has no feeling to read."
   },
   {
-   "id": "the_true_feeling",
-   "name": "The True Feeling",
-   "levelReq": 1,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "social",
-   "axes": {
-    "emotional_logical": -0.3
-   },
-   "effectTags": [
-    "feeling",
-    "perception",
-    "truth"
-   ],
-   "harmRung": "none",
-   "narrationHints": "She knew what the room was feeling before anyone spoke.",
-   "description": "Read what is actually felt — not what is shown, what is present.",
-   "notFor": [],
-   "tradition": "threnodist",
-   "functions": [
-    "reveal",
-    "track"
-   ],
-   "challengeTypes": [
-    "social",
-    "investigation",
-    "intellectual"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Actual State",
-     "grants": "Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.",
-     "cannot": "Anything rank 2 adds — track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched; it reads WHAT IS FELT, not what is TRUE.",
-     "functions": [
-      "reveal"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "The Feeling Trail",
-     "grants": "Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
-     "cannot": "Anything rank 3 adds — read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming; it reads WHAT IS FELT, not what is TRUE.",
-     "functions": [
-      "reveal",
-      "track"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "The Emotional History",
-     "grants": "Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.",
-     "cannot": "Nothing further; this is the craft's ceiling; it reads WHAT IS FELT, not what is TRUE; and it still costs what it costs: what you read of a history, you carry some of.",
-     "functions": [
-      "reveal",
-      "track"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
-    }
-   ],
-   "nativeOrCombination": "native",
-   "shape": "setup",
-   "operativeAxis": [
-    "perceptionDepth",
-    "timeReach"
-   ],
-   "mechanic": {
-    "magnitude": 3,
-    "duration": 1,
-    "range": 15,
-    "note": "SOCIAL attribute throughout this tradition"
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "extend",
-     "axis": "timeReach",
-     "delta": "TRACK A FEELING OVER TIME — follow grief, find WHERE FEAR DEVELOPED, trace the emotional mark a person left in a place",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "deepen",
-     "axis": "perceptionDepth",
-     "delta": "read the FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, WHAT A PEOPLE HAVE BEEN RUNNING FROM",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "a read of the room — half the depth, and it does not stay with you",
-    "surge": "double it; feeling the truth of a whole history means CARRYING some of it"
-   },
-   "bounds": [
-    {
-     "text": "it reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere",
-     "class": "hard"
-    },
-    {
-     "text": "THE GUARDED CAN CLOSE",
-     "class": "soft"
-    },
-    {
-     "text": "what you read of a history, you carry some of",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A social/investigation/intellectual action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 15. Ranks: rank 2 extends timeReach; rank 3 deepens perceptionDepth. Limit: it reads What IS Felt, not what is True — a person sincerely wrong reads sincere."
-  },
-  {
    "id": "the_made_elegy",
    "name": "The Made Elegy",
    "levelReq": 2,
@@ -2246,5 +2132,6 @@
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json."
+ "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json.",
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
 }

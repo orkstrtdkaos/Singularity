@@ -1,0 +1,292 @@
+{
+ "_note": "⛔ SNG-449. IDEAL DISTRIBUTION BY EFFECT. Erik: 'a psionic (Mind) can be very physical — hitting with psychic blasts that do PHYSICAL damage, while some skills could be damaging the mind.' ⚠️ SO THE TARGET IS BUILT ON EFFECT, NOT ATTRIBUTE. The medium belongs to the tradition; the effect can be anything. Mind carries HARM 3 for exactly this reason.",
+ "_scale": "4 signature · 3 strong · 2 present · 1 floor. EVERY CELL >= 1 → 100% function coverage, all 14.",
+ "_controlRuling": "⛔ ERIK 2026-08-15: 'Bring CONTROL down by 1 per tradition-ish. Control should be a bit more RARE, while some traditions SPECIALIZE in it.' Column 44 → 31. Only DEMONIC keeps 4 — the named want and the struck term is what control IS for them. ⚠️ Body, Light, Life and Spirit drop to the floor: a Rootkin or a Numinous restricting someone should feel like a borrowed act.",
+ "functions": [
+  "HARM",
+  "DEFEND",
+  "RESTORE",
+  "CONTROL",
+  "MOVE",
+  "PERCEIVE",
+  "BOLSTER",
+  "CONCEAL",
+  "MAKE",
+  "SOCIAL"
+ ],
+ "target": {
+  "Mind": {
+   "HARM": 3,
+   "DEFEND": 2,
+   "RESTORE": 2,
+   "CONTROL": 3,
+   "MOVE": 1,
+   "PERCEIVE": 4,
+   "BOLSTER": 3,
+   "CONCEAL": 2,
+   "MAKE": 1,
+   "SOCIAL": 3,
+   "sig": "⛔ CONTROL + PERCEIVE. A psionic reads and dominates. ⚠️ HARM AT 3 IS THE POINT ERIK MADE — a psychic blast does PHYSICAL damage; the medium is mental, the effect is not. MAKE at 1: thought builds nothing that stands."
+  },
+  "Body": {
+   "HARM": 3,
+   "DEFEND": 4,
+   "RESTORE": 3,
+   "CONTROL": 1,
+   "MOVE": 4,
+   "PERCEIVE": 2,
+   "BOLSTER": 4,
+   "CONCEAL": 1,
+   "MAKE": 2,
+   "SOCIAL": 1,
+   "sig": "DEFEND + MOVE + BOLSTER. ⚠️ Ki is endurance and placement before it is a strike."
+  },
+  "Light": {
+   "HARM": 4,
+   "DEFEND": 3,
+   "RESTORE": 2,
+   "CONTROL": 1,
+   "MOVE": 1,
+   "PERCEIVE": 4,
+   "BOLSTER": 2,
+   "CONCEAL": 1,
+   "MAKE": 2,
+   "SOCIAL": 3,
+   "sig": "⛔ HARM + PERCEIVE — revelation as violence, and truth as an attack. CONCEAL AT 1 IS THE FLOOR AND SHOULD STAY 1: a Light tradition that hides well is a contradiction, but it must still be able to."
+  },
+  "Dark": {
+   "HARM": 3,
+   "DEFEND": 2,
+   "RESTORE": 1,
+   "CONTROL": 2,
+   "MOVE": 3,
+   "PERCEIVE": 4,
+   "BOLSTER": 1,
+   "CONCEAL": 4,
+   "MAKE": 2,
+   "SOCIAL": 2,
+   "sig": "⛔ CONCEAL + PERCEIVE. Exact mirror of Light and deliberately so. RESTORE at 1 — the deeps do not mend."
+  },
+  "Life": {
+   "HARM": 1,
+   "DEFEND": 3,
+   "RESTORE": 4,
+   "CONTROL": 1,
+   "MOVE": 2,
+   "PERCEIVE": 2,
+   "BOLSTER": 4,
+   "CONCEAL": 2,
+   "MAKE": 4,
+   "SOCIAL": 2,
+   "sig": "⛔ RESTORE + BOLSTER + MAKE. HARM AT 1 IS DELIBERATE — the floor exists so a Rootkin is not helpless, and nothing more."
+  },
+  "Death": {
+   "HARM": 4,
+   "DEFEND": 2,
+   "RESTORE": 1,
+   "CONTROL": 3,
+   "MOVE": 1,
+   "PERCEIVE": 3,
+   "BOLSTER": 2,
+   "CONCEAL": 2,
+   "MAKE": 1,
+   "SOCIAL": 4,
+   "sig": "⛔ HARM + CONTROL + SOCIAL. ⚠️ SOCIAL AT 4 IS THE PATHOS SECT — grief shared is a social act with mechanical teeth. RESTORE at 1: they tend endings, they do not reverse them."
+  },
+  "Angelic": {
+   "HARM": 2,
+   "DEFEND": 4,
+   "RESTORE": 4,
+   "CONTROL": 2,
+   "MOVE": 1,
+   "PERCEIVE": 2,
+   "BOLSTER": 4,
+   "CONCEAL": 1,
+   "MAKE": 2,
+   "SOCIAL": 3,
+   "sig": "DEFEND + RESTORE + BOLSTER. ⚠️ Mercy administered — and CONTROL at 3, because administration is control."
+  },
+  "Demonic": {
+   "HARM": 3,
+   "DEFEND": 2,
+   "RESTORE": 2,
+   "CONTROL": 4,
+   "MOVE": 1,
+   "PERCEIVE": 3,
+   "BOLSTER": 2,
+   "CONCEAL": 2,
+   "MAKE": 2,
+   "SOCIAL": 4,
+   "sig": "⛔ SOCIAL + CONTROL. The named want and the struck term. ⚠️ THIS IS WHERE THE MISSING CHARM SPACE BELONGS FIRST."
+  },
+  "Breaking": {
+   "HARM": 4,
+   "DEFEND": 2,
+   "RESTORE": 1,
+   "CONTROL": 3,
+   "MOVE": 3,
+   "PERCEIVE": 2,
+   "BOLSTER": 3,
+   "CONCEAL": 1,
+   "MAKE": 1,
+   "SOCIAL": 2,
+   "sig": "⛔ HARM + CONTROL. The Edge and Ruinwork. MAKE at 1 is almost comic and should stay so."
+  },
+  "Building": {
+   "HARM": 1,
+   "DEFEND": 4,
+   "RESTORE": 3,
+   "CONTROL": 2,
+   "MOVE": 1,
+   "PERCEIVE": 2,
+   "BOLSTER": 3,
+   "CONCEAL": 2,
+   "MAKE": 4,
+   "SOCIAL": 3,
+   "sig": "⛔ MAKE + DEFEND. ⚠️ CONTROL at 3 is Stillcraft — halting a conflict IS control, and it is the sect's whole craft."
+  },
+  "Chaos": {
+   "HARM": 3,
+   "DEFEND": 2,
+   "RESTORE": 2,
+   "CONTROL": 3,
+   "MOVE": 4,
+   "PERCEIVE": 2,
+   "BOLSTER": 2,
+   "CONCEAL": 3,
+   "MAKE": 2,
+   "SOCIAL": 2,
+   "sig": "⛔ MOVE + CONTROL. Luck-riding is repositioning, and unmaking another's plan is control."
+  },
+  "Order": {
+   "HARM": 2,
+   "DEFEND": 4,
+   "RESTORE": 2,
+   "CONTROL": 3,
+   "MOVE": 1,
+   "PERCEIVE": 4,
+   "BOLSTER": 3,
+   "CONCEAL": 1,
+   "MAKE": 4,
+   "SOCIAL": 2,
+   "sig": "⛔ MAKE + PERCEIVE + CONTROL + DEFEND — the widest signature on the chart, and correct: prediction, binding, arcologies, systems. ⚠️ The cost is MOVE 1 and CONCEAL 1."
+  },
+  "Span": {
+   "HARM": 2,
+   "DEFEND": 2,
+   "RESTORE": 2,
+   "CONTROL": 2,
+   "MOVE": 4,
+   "PERCEIVE": 4,
+   "BOLSTER": 3,
+   "CONCEAL": 2,
+   "MAKE": 1,
+   "SOCIAL": 1,
+   "sig": "⛔ MOVE + PERCEIVE. Distance and duration — the far step, and the kept count."
+  },
+  "Spirit": {
+   "HARM": 2,
+   "DEFEND": 3,
+   "RESTORE": 4,
+   "CONTROL": 1,
+   "MOVE": 2,
+   "PERCEIVE": 4,
+   "BOLSTER": 3,
+   "CONCEAL": 2,
+   "MAKE": 1,
+   "SOCIAL": 4,
+   "sig": "⛔ PERCEIVE + RESTORE + SOCIAL. ⚠️ Numenwork steadies a soul in crisis, which is restoration and social at once. Raised from 10 abilities to 27 — the most under-built tradition in the game."
+  }
+ },
+ "totals": {
+  "Mind": 24,
+  "Body": 25,
+  "Light": 23,
+  "Dark": 24,
+  "Life": 25,
+  "Death": 23,
+  "Angelic": 25,
+  "Demonic": 25,
+  "Breaking": 22,
+  "Building": 25,
+  "Chaos": 25,
+  "Order": 26,
+  "Span": 23,
+  "Spirit": 26
+ },
+ "columnTotals": {
+  "HARM": 37,
+  "DEFEND": 39,
+  "RESTORE": 33,
+  "CONTROL": 31,
+  "MOVE": 29,
+  "PERCEIVE": 42,
+  "BOLSTER": 39,
+  "CONCEAL": 26,
+  "MAKE": 29,
+  "SOCIAL": 36
+ },
+ "subfunctions": {
+  "_finding": "⛔ THE SUBFUNCTION LAYER ALREADY EXISTS AND IS SOUND: `functions`, 24 distinct values across 948 uses. ⚠️ NOT `effectTags` — that is 266 distinct tags for 477 uses, free text rather than a taxonomy, and it carries heal/healing, precise/precision and reveal/perceive as separate tags. IT SHOULD NOT BE USED FOR ANYTHING STRUCTURAL.",
+  "rollup": {
+   "HARM": [
+    "strike",
+    "break"
+   ],
+   "DEFEND": [
+    "ward",
+    "shield"
+   ],
+   "RESTORE": [
+    "heal",
+    "restore",
+    "mend"
+   ],
+   "CONTROL": [
+    "bind",
+    "hinder",
+    "command"
+   ],
+   "MOVE": [
+    "move",
+    "travel"
+   ],
+   "PERCEIVE": [
+    "reveal",
+    "foresee"
+   ],
+   "BOLSTER": [
+    "sustain",
+    "empower"
+   ],
+   "CONCEAL": [
+    "conceal",
+    "deceive"
+   ],
+   "MAKE": [
+    "make",
+    "transform",
+    "summon"
+   ],
+   "SOCIAL": [
+    "persuade",
+    "bargain",
+    "provoke",
+    "soothe"
+   ]
+  },
+  "_currentCounts": {
+   "HARM": 101,
+   "DEFEND": 63,
+   "RESTORE": 80,
+   "CONTROL": 153,
+   "MOVE": 75,
+   "PERCEIVE": 191,
+   "BOLSTER": 88,
+   "CONCEAL": 25,
+   "MAKE": 46,
+   "SOCIAL": 0
+  },
+  "_theSubfunctionFindings": "⛔ PERCEIVE IS 191 USES AND `reveal` ALONE IS 145 — the single most common thing an ability does in this game is TELL YOU SOMETHING. That is the 2026-07-07 critique with a number on it.\n⛔ SOCIAL IS **ZERO**. Not thin — ABSENT. There is no persuade, no bargain, no provoke, no soothe subfunction anywhere in 948 uses. ⚠️ Which is why the charm search returned nothing: the game has no social VERBS, only social-attributed abilities that do something else.\n⚠️ CONCEAL IS 25, the thinnest real column, and 28 of 31 old traditions had none.\n⛔ SIX SUBFUNCTIONS DO NOT ROLL UP AND FOUR OF THEM SHOULD BECOME CANON: `resist` 33 (belongs under DEFEND), `open` 23 (its own thing — locks, seals, passage), `transform` 20 and `summon` 16 (MAKE), `deceive` 19 (CONCEAL), `track` 15 (PERCEIVE)."
+ }
+}

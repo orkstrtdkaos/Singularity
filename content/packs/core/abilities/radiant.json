@@ -424,11 +424,14 @@
      "grants": "A jar of noon holds a lantern's worth through one night; release it steady or all at once as a soft flare.",
      "cannot": "Keeps one night only; leaks visibly (a glowing pack is a beacon); one vessel at a time.",
      "functions": [
-      "bind",
-      "reveal"
+      "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "bind",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -437,11 +440,15 @@
      "cannot": "Nothing brighter than the day you banked; cloudy-day light is thin gruel.",
      "functions": [
       "bind",
-      "reveal",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "bind",
+      "reveal",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -450,20 +457,25 @@
      "cannot": "The great cache takes a week of clear noons to fill; broken early, it is simply GONE — light does not forgive vessels.",
      "functions": [
       "bind",
-      "reveal",
       "hinder",
       "ward",
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "bind",
+      "reveal",
+      "hinder",
+      "ward",
+      "heal"
+     ]
     }
    ],
    "functions": [
     "bind",
     "heal",
     "hinder",
-    "reveal",
     "ward"
    ],
    "challengeTypes": [
@@ -592,7 +604,15 @@
      "worth": "valuable while charged, trivial when empty",
      "note": "⚠️ ERIK: 'yes a charged vessel is takeable.' A full Well is portable stored power and worth stealing — and a thief who does not know the capacity is carrying something that will burst. That is a good hook rather than a griefing problem, because the danger travels with the prize."
     }
-   }
+   },
+   "_functionsWas": [
+    "bind",
+    "heal",
+    "hinder",
+    "reveal",
+    "ward"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "sun_coax",
@@ -1126,11 +1146,14 @@
      "grants": "One companion sees a faint thread pointing to you across a mile of open valley; three pulse-signals (come, wait, danger).",
      "cannot": "Line of sight bends around hills poorly; the thread dies at running water; strangers with light-craft can glimpse it.",
      "functions": [
-      "bind",
-      "reveal"
+      "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "bind",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1138,11 +1161,14 @@
      "grants": "Three companions threaded at once; threads persist through a night; a snapped thread (member fallen or taken) is felt by all instantly.",
      "cannot": "The weave frays past a few miles; in the Disputed Zone, interference gnaws threads within the hour.",
      "functions": [
-      "bind",
-      "reveal"
+      "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "bind",
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -1150,18 +1176,19 @@
      "grants": "A party moves as fixed stars to each other — night operations without a lantern shown; thread a stranger IN for one scene by shared consent; the snap-alarm wakes sleepers.",
      "cannot": "You are the loom — if YOU fall, every thread dies at once; a woven night costs you dawn-headache and dimmed light-craft till noon.",
      "functions": [
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_functionsWas": [
       "bind",
       "reveal",
       "track"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
+     ]
     }
    ],
    "functions": [
-    "bind",
-    "reveal",
-    "track"
+    "bind"
    ],
    "challengeTypes": [
     "EXPLORE",
@@ -1222,7 +1249,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 2 out of 10 It affects 1 target, and lasts for about 8 hours. Range is 1600. Ranks: rank 2 extends targets+duration; rank 3 adds to special. Limit: the Thread Dies AT Running Water."
+   "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 2 out of 10 It affects 1 target, and lasts for about 8 hours. Range is 1600. Ranks: rank 2 extends targets+duration; rank 3 adds to special. Limit: the Thread Dies AT Running Water.",
+   "_functionsWas": [
+    "bind",
+    "reveal",
+    "track"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "dawn_surgery",
@@ -1274,18 +1307,22 @@
      "functions": [
       "heal",
       "mend",
-      "reveal",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "heal",
+      "mend",
+      "reveal",
+      "restore"
+     ]
     }
    ],
    "functions": [
     "heal",
     "mend",
-    "restore",
-    "reveal"
+    "restore"
    ],
    "challengeTypes": [
     "SURVIVE"
@@ -1354,7 +1391,14 @@
      "all": 24
     },
     "note": "KEPT: the cooldown is the surgeon's own exhaustion, which is a body limit rather than a rule"
-   }
+   },
+   "_functionsWas": [
+    "heal",
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "prism_ward",
@@ -1381,11 +1425,14 @@
      "grants": "One doorway or path warded till dawn — you know THAT something crossed and how big; the lattice is near-invisible in dusk or dark.",
      "cannot": "Reports only at your next quiet moment unless you hold vigil; a light-crafter who SEES it can step through a made gap.",
      "functions": [
-      "ward",
-      "reveal"
+      "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "ward",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1393,11 +1440,14 @@
      "grants": "Three wards held; crossing reports arrive as a felt color instantly at any distance in the valley; the ward reads direction and count.",
      "cannot": "Running water and Zone interference eat wards in hours; your sleep is thinner for each ward held.",
      "functions": [
-      "ward",
-      "reveal"
+      "ward"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "ward",
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -1406,17 +1456,21 @@
      "cannot": "A season-fence is community work — the village will know and must consent; Precursor movers leave no color at all, and THAT absence is its own cold report.",
      "functions": [
       "ward",
-      "reveal",
       "resist",
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "ward",
+      "reveal",
+      "resist",
+      "shield"
+     ]
     }
    ],
    "functions": [
     "resist",
-    "reveal",
     "shield",
     "ward"
    ],
@@ -1498,7 +1552,14 @@
      "3": 720
     },
     "note": "GATE, not rate: you have the village's consent or you do not, and half-consent banks nothing."
-   }
+   },
+   "_functionsWas": [
+    "resist",
+    "reveal",
+    "shield",
+    "ward"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "sun_seal",
@@ -1511,7 +1572,6 @@
    },
    "functions": [
     "bind",
-    "reveal",
     "shield",
     "ward"
    ],
@@ -1526,11 +1586,14 @@
      "grants": "Ward a place against dark-drawn things; reveal any intrusion in light.",
      "cannot": "Needs periodic re-lighting; physical foes ignore it.",
      "functions": [
-      "ward",
-      "reveal"
+      "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "ward",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1539,11 +1602,15 @@
      "cannot": "A seal is only as good as who holds its word. Light-seals are famously stolen.",
      "functions": [
       "ward",
-      "reveal",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "ward",
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -1552,12 +1619,17 @@
      "cannot": "Sealed by right means someone with the right can always open it. There is no seal against the rightful.",
      "functions": [
       "ward",
-      "reveal",
       "bind",
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "ward",
+      "reveal",
+      "bind",
+      "shield"
+     ]
     }
    ],
    "gated": "learned",
@@ -1617,7 +1689,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A survive/explore/fight action that reduces incoming harm. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 deepens sealStrength; rank 3 adds to special. Limit: physical Foes Ignore IT."
+   "plainly": "A survive/explore/fight action that reduces incoming harm. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 deepens sealStrength; rank 3 adds to special. Limit: physical Foes Ignore IT.",
+   "_functionsWas": [
+    "bind",
+    "reveal",
+    "shield",
+    "ward"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "light_borne",
@@ -1631,7 +1710,6 @@
    },
    "functions": [
     "move",
-    "reveal",
     "travel"
    ],
    "narrationHints": "Made briefly of your own held light, you rise — and for a while the ground is a suggestion.",
@@ -1645,11 +1723,15 @@
      "cannot": "You shine — seen for miles, no concealment; the interval ends and you must be down or near it; costly.",
      "functions": [
       "move",
-      "travel",
-      "reveal"
+      "travel"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "move",
+      "travel",
+      "reveal"
+     ]
     }
    ],
    "powerSystem": "radiant",
@@ -1693,7 +1775,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that moves you or someone else. Its strength is rated 5 out of 10, and lasts for about 3 hours. Range is 5 Limit: you Shine — seen for miles, NO Concealment possible."
+   "plainly": "An action that moves you or someone else. Its strength is rated 5 out of 10, and lasts for about 3 hours. Range is 5 Limit: you Shine — seen for miles, NO Concealment possible.",
+   "_functionsWas": [
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

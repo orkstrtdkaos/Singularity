@@ -473,46 +473,40 @@
     "concrete_abstract": 0.3
    },
    "functions": [
-    "foresee",
-    "reveal"
+    "reveal",
+    "foresee"
    ],
-   "narrationHints": "The repetition surfaces — this has a shape, and the shape has a name.",
-   "description": "See the pattern beneath particulars — the first gift of the Pattern Reach.",
+   "narrationHints": "They stop mid-sentence, look at three unrelated things, and tell you what the fourth one is going to be.",
+   "description": "See that a set of particulars is an instance of a pattern, name the pattern, and know what the pattern does next.",
    "notFor": "Reading material (Stone-Read); reading order-as-structure (Order-Sense). This reads FORM.",
    "tree": [
     {
      "rank": 1,
-     "name": "Pattern-Sense",
-     "grants": "See that a set of particulars is an instance of a pattern, and roughly what pattern.",
-     "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly.",
+     "name": "The Instance",
      "functions": [
       "reveal"
      ],
-     "gains": "broaden",
-     "harmRung": "none"
+     "grants": "See that particulars are an instance of something, and roughly what — a scam, a siege pattern, an illness, a way of building, a way of lying.",
+     "cannot": "Roughly. You get the family, not the name."
     },
     {
      "rank": 2,
      "name": "The Named Form",
-     "grants": "Name the form exactly — and once named, its other instances become visible to you everywhere.",
-     "cannot": "Once you can see it everywhere, you will see it where it is not.",
      "functions": [
       "reveal"
      ],
-     "gains": "deepen",
-     "harmRung": "none"
+     "grants": "⚠️ ADDS PRECISION AND REACH. Name it exactly — and once named, its OTHER instances become visible to you everywhere you go, including ones nobody has connected.",
+     "cannot": "You must have seen enough of this one to name it."
     },
     {
      "rank": 3,
-     "name": "The Formal Reach",
-     "grants": "Read the form of an event, a life, or a history — the shape it is completing.",
-     "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry.",
+     "name": "Where the Form Breaks",
      "functions": [
       "reveal",
       "foresee"
      ],
-     "gains": "broaden",
-     "harmRung": "none"
+     "grants": "⛔ ADDS THE ACTIONABLE PART. Read the shape a thing is completing — an event, a campaign, a life — and name THE POINT AT WHICH IT MUST BREAK: the step the pattern cannot survive skipping, the piece it requires and does not have yet. ⚠️ A pattern named at r2 is knowledge; a pattern broken here is an ACT.",
+     "cannot": "One form at a time, and breaking it still has to be done by somebody."
     }
    ],
    "gated": "learned",
@@ -566,7 +560,45 @@
      "class": "hard"
     }
    ],
-   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing The Pattern IS Not Seeing Whether IT IS A True One."
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing The Pattern IS Not Seeing Whether IT IS A True One.",
+   "_treeWas": [
+    {
+     "rank": 1,
+     "name": "Pattern-Sense",
+     "grants": "See that a set of particulars is an instance of a pattern, and roughly what pattern.",
+     "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Named Form",
+     "grants": "Name the form exactly — and once named, its other instances become visible to you everywhere.",
+     "cannot": "Once you can see it everywhere, you will see it where it is not.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Formal Reach",
+     "grants": "Read the form of an event, a life, or a history — the shape it is completing.",
+     "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "_descriptionWas": "See the pattern beneath particulars — the first gift of the Pattern Reach.",
+   "_revised": "⚠️ SNG-450. Erik: 'DON'T REMOVE r3 FROM PATTERN-SENSE — ADD SOMETHING TO IT.' ⛔ He is right that the fix for a weak rank is to make it do something, not to delete it. r3 was 'read the form of an event, a life, or a history — the shape it is completing', which is an observation. IT NOW ACTS ON THE FORM: name where the pattern must break, and act there."
   },
   {
    "id": "the_walking_figure",
@@ -1136,120 +1168,6 @@
    "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it sustains Work, not rest — there is no version of this that restores you."
   },
   {
-   "id": "the_restored_form",
-   "name": "The Restored Form",
-   "levelReq": 2,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "concrete_abstract": 0.4
-   },
-   "effectTags": [
-    "restoration",
-    "pattern",
-    "correction"
-   ],
-   "narrationHints": "Correct the form and the thing follows. The pattern is what was broken.",
-   "description": "Restore by identifying the correct form and reinstating it — not by nursing the wound but by re-establishing the pattern that was disrupted.",
-   "notFor": [],
-   "tradition": "figurist",
-   "harmRung": "none",
-   "functions": [
-    "heal",
-    "restore",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "medical",
-    "repair",
-    "intellectual"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Correct Pattern",
-     "grants": "Identify the form a broken thing is a disruption of, and name the intervention that restores the pattern — not approximate, but correct.",
-     "cannot": "Anything rank 2 adds — restore the underlying structure — the form a person, plan, or object is supposed to have — and function follows without separate work; IT RESTORES THE FORM.",
-     "functions": [
-      "reveal"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "Form Before Function",
-     "grants": "Restore the underlying structure — the form a person, plan, or object is supposed to have — and function follows without separate work.",
-     "cannot": "Anything rank 3 adds — return a thing entirely to its proper form — the body that heals from the inside out, the relationship that finds its right shape, the plan that coheres again — by working at the level of pattern rather than symptom; IT RESTORES THE FORM.",
-     "functions": [
-      "reveal",
-      "restore"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "Full Re-Instantiation",
-     "grants": "Return a thing entirely to its proper form — the body that heals from the inside out, the relationship that finds its right shape, the plan that coheres again — by working at the level of pattern rather than symptom.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT RESTORES THE FORM.",
-     "functions": [
-      "reveal",
-      "restore",
-      "heal"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    }
-   ],
-   "nativeOrCombination": "native",
-   "shape": "healing",
-   "operativeAxis": [
-    "restoration",
-    "precision"
-   ],
-   "mechanic": {
-    "dice": {
-     "n": 2,
-     "d": 4
-    },
-    "plus": 2,
-    "note": "A TENTH THEORY OF MEDICINE — FORM RESTORATION: 'not appearance, the FORM a thing is supposed to have', and function follows."
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "restoration",
-     "delta": "restore THE UNDERLYING STRUCTURE — the form a person, plan, or object is SUPPOSED to have — AND FUNCTION FOLLOWS",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: return a thing ENTIRELY to its proper form — THE BODY THAT HEALS FROM THE INSIDE OUT, the relationship that finds its shape again",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "restore the outline — half the healing, and nothing is forced",
-    "surge": "double it; restoring the form a thing is SUPPOSED to have requires being right about what it is supposed to be"
-   },
-   "bounds": [
-    {
-     "text": "IT RESTORES THE FORM — a thing whose true form is broken cannot be restored TO it",
-     "class": "hard"
-    },
-    {
-     "text": "restoring what a thing is SUPPOSED to be requires BEING RIGHT about that",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A medical/repair/intellectual action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: iT Restores The Form — a thing whose true form is broken cannot be restored TO it."
-  },
-  {
    "id": "the_warding_mark",
    "name": "The Warding Mark",
    "levelReq": 2,
@@ -1364,117 +1282,6 @@
     }
    ],
    "plainly": "A defense/magical/social action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about a day Ranks: rank 2 adds to autonomy; rank 3 adds to special. Limit: iT Wards A Category — a thing outside the named category walks through untouched."
-  },
-  {
-   "id": "the_patterned_way",
-   "name": "The Patterned Way",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "concrete_abstract": 0.3,
-    "space_time": 0.1
-   },
-   "effectTags": [
-    "navigation",
-    "pattern",
-    "movement"
-   ],
-   "narrationHints": "A landscape has a shape. Move along its lines.",
-   "description": "Navigate by reading the pattern a space is — not terrain but form; not where the road goes but what the space is an instance of.",
-   "notFor": [],
-   "tradition": "figurist",
-   "harmRung": "none",
-   "functions": [
-    "move",
-    "reveal",
-    "travel"
-   ],
-   "challengeTypes": [
-    "navigation",
-    "intellectual",
-    "exploration"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Shape of a Place",
-     "grants": "Read a landscape or structure as a pattern — see where it opens, where it funnels, where it repeats — and move along its lines rather than across them.",
-     "cannot": "Anything rank 2 adds — navigate any environment you can read the form of without needing roads, signs, or memory — the pattern tells you where you are and where leads where; it needs A READABLE PATTERN.",
-     "functions": [
-      "reveal",
-      "move"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "Pattern Navigation",
-     "grants": "Navigate any environment you can read the form of without needing roads, signs, or memory — the pattern tells you where you are and where leads where.",
-     "cannot": "Anything rank 3 adds — recognize that a place is an instance of a form you know — and everything about it becomes legible: every exit, every blind spot, every place the pattern says something must be; it needs A READABLE PATTERN.",
-     "functions": [
-      "reveal",
-      "move",
-      "travel"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "This Place Is an Instance",
-     "grants": "Recognize that a place is an instance of a form you know — and everything about it becomes legible: every exit, every blind spot, every place the pattern says something must be.",
-     "cannot": "Nothing further; this is the craft's ceiling; it needs A READABLE PATTERN.",
-     "functions": [
-      "reveal",
-      "move",
-      "travel"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
-    }
-   ],
-   "nativeOrCombination": "native",
-   "shape": "reposition",
-   "operativeAxis": [
-    "navigation",
-    "range"
-   ],
-   "mechanic": {
-    "range": 12,
-    "push": 0,
-    "magnitude": 4,
-    "duration": 3
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "navigation",
-     "delta": "navigate ANY environment you can read the form of — WITHOUT roads, signs, or memory; THE PATTERN TELLS YOU",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: RECOGNIZE THAT A PLACE IS AN INSTANCE OF A FORM YOU KNOW — and everything about it becomes legible: every exit, every hidden room",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "read the layout — half the certainty, and it costs nothing",
-    "surge": "double it; a place that is NOT an instance of any form you know offers nothing at all"
-   },
-   "bounds": [
-    {
-     "text": "it needs A READABLE PATTERN — genuine chaos or true novelty defeats it",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A navigation/intellectual/exploration action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it needs A Readable Pattern — genuine chaos or true novelty defeats it."
   },
   {
    "id": "the_held_form",
@@ -2791,5 +2598,6 @@
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
- "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
+ "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json."
 }

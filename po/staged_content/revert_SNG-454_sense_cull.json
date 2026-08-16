@@ -1,0 +1,3133 @@
+{
+ "_note": "⛔ SNG-454 REVERT LOG — THE FIRST-GIFT SENSE CULL. Every perceive-only ability captured verbatim before removal.\n⚠️ THE FINDING: 21 traditions each carried an L1 '-Sense' ability at ENERGY 3, MAGNITUDE 3, with the IDENTICAL three-rank arc — sense the thing · sense more of it or at range · sense all of it at once. Stone-Read, Body-Read, Chaos-Sense, Lifesense, Way-Sense, Hour-Sense, Order-Sense, Numen-Sense, Lightsense, Deathsense, Mechanism-Sense, Appetite-Sense, Fault-Sense, Read the Fight. ⛔ ONE SKILL WRITTEN TWENTY-ONE TIMES WITH THE NOUN CHANGED — the same fault as the three navigation skills, at seven times the scale.",
+ "_replacedBy": "content/packs/core/abilities/attunement.json — ONE ability, `Attunement`, whose sect flavour is what you sense.",
+ "abilities": {
+  "echo_sense": {
+   "id": "echo_sense",
+   "name": "Echo Sense",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "dark_light": -0.2,
+    "body_mind": 0.4
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "perceive",
+    "detect",
+    "through-walls"
+   ],
+   "narrationHints": "Sound-based perception like echolocation — hearing shapes, movement, and hollow spaces through walls and darkness.",
+   "description": "Perceive your surroundings through sound reflection — even through walls, smoke, or darkness.",
+   "notFor": "Reading emotion, intent, or words on a page; anything at true distance (beyond ~50 paces); seeing color or light-based detail.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Near Echo",
+     "grants": "Map bodies and large objects through one wall or in darkness within ~10 paces; count people; sense sudden movement behind you.",
+     "cannot": "No fine detail (a face, a small tool); one wall only; loud environments blind it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Carried Echo",
+     "grants": "Range ~30 paces and two walls; distinguish individuals you know by gait and breath; overhear muffled speech as rhythm and tone (not words); sense hollow spaces and hidden voids.",
+     "cannot": "Still cannot resolve words reliably; running water scrambles it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Deep Listening",
+     "grants": "Hear actual words through barriers at ~20 paces; read a building's whole layout in a minute of stillness; detect the sub-sound of active nanite fields and Precursor machinery.",
+     "cannot": "Requires stillness — cannot deep-listen while moving or fighting; Precursor tech notices being listened to.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "harmonic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "harmonic",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 10,
+    "note": "r1: map bodies through ONE wall or in darkness within ~10 paces"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "~30 paces and TWO walls; distinguish individuals you know by gait and breath; overhear muffled speech as rhythm and tone (NOT words)",
+     "from": "r2 grants — its own numbers"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "hear ACTUAL WORDS through barriers at ~20 paces; read a building's whole layout in a minute; detect the sub-sound of active nanite fields",
+     "from": "r3 grants — resolution finally reaches words"
+    }
+   ],
+   "intensity": {
+    "conserve": "a listen — half the range, and you can keep moving",
+    "surge": "double the reach, and you are deaf to everything nearer while you hold it"
+   },
+   "bounds": [
+    {
+     "text": "no fine detail — a face, a small tool",
+     "class": "hard"
+    },
+    {
+     "text": "one wall only at r1",
+     "class": "soft"
+    },
+    {
+     "text": "loud environments blind it",
+     "class": "hard"
+    },
+    {
+     "text": "running water scrambles it",
+     "class": "hard"
+    },
+    {
+     "text": "REQUIRES STILLNESS — cannot deep-listen while moving or fighting",
+     "class": "soft"
+    },
+    {
+     "text": "Precursor tech reads as a blank",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 extends range; rank 3 deepens perceptionDepth. Limit: no fine detail — a face, a small tool.",
+   "_file": "harmonic.json"
+  },
+  "tremor_sense": {
+   "id": "tremor_sense",
+   "name": "Tremor Sense",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "body_mind": -0.3,
+    "concrete_abstract": -0.4
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "perceive",
+    "ground",
+    "warning"
+   ],
+   "narrationHints": "Palm or sole to earth — reading footfalls, wheels, and digging as ripples in stone and soil.",
+   "description": "Read vibration through the ground: who approaches, how many, how heavy.",
+   "notFor": "Anything airborne, floating, or standing still; reading intent or identity beyond gait; working from horseback or bridges of rope.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Ground Ear",
+     "grants": "Feel approach through earth within ~30 paces: count walkers, tell cart from horse, catch a digger at work below.",
+     "cannot": "Still targets are invisible; rain and river-roar drown it; wooden floors blur everything.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Deep Tread",
+     "grants": "Range ~80 paces on good ground; know a known person's gait; feel hollow spaces underfoot; sense a collapse or slide seconds early.",
+     "cannot": "Cannot localize precisely past 40 paces (direction and count only); a crowd is one bright smear.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Valley's Pulse",
+     "grants": "Standing still a full minute, read a hillside: every mover, every void, water veins, the grind of old machinery underground.",
+     "cannot": "The minute of stillness is absolute — one step resets it; Precursor works read as SILENCE, and that silence is information others notice you noticing.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "harmonic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "harmonic",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 30,
+    "note": "r1's own number: approach through earth within ~30 paces"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "~80 paces on good ground; know a person's gait; feel hollow spaces underfoot; sense a collapse SECONDS EARLY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "a full minute standing still reads a HILLSIDE: every mover, every void, water veins, the grind of old machinery underground",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick read of the ground — half the range, no stillness required",
+    "surge": "double the reach and the detail, at the cost of a full minute of absolute stillness"
+   },
+   "bounds": [
+    {
+     "text": "STILL TARGETS ARE INVISIBLE",
+     "class": "hard"
+    },
+    {
+     "text": "rain and river-roar drown it",
+     "class": "hard"
+    },
+    {
+     "text": "wooden floors blur everything",
+     "class": "soft"
+    },
+    {
+     "text": "cannot localize precisely past 40 paces",
+     "class": "soft"
+    },
+    {
+     "text": "the minute of stillness is ABSOLUTE — one step resets it",
+     "class": "soft"
+    },
+    {
+     "text": "Precursor works read as silence",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 30. Ranks: rank 2 extends range; rank 3 deepens perceptionDepth. Limit: still Targets Are Invisible.",
+   "_file": "harmonic.json"
+  },
+  "echo_memory": {
+   "id": "echo_memory",
+   "name": "Echo Memory",
+   "levelReq": 3,
+   "energyCost": 11,
+   "axes": {
+    "space_time": 0.5,
+    "dark_light": -0.2
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "perceive",
+    "past",
+    "investigate"
+   ],
+   "narrationHints": "Old sound never fully leaves a place — coaxing walls and stone to give back what they heard.",
+   "description": "Draw recent sounds back out of a quiet place: voices, footsteps, the shape of what happened.",
+   "notFor": "Places still noisy (the present drowns the past); anything older than days; images of any kind — this is sound alone.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Lingering Note",
+     "grants": "In a quiet room, recover the tone of the last loud event — argument or laughter, how many voices, a door slammed or eased shut.",
+     "cannot": "Words stay smeared; hours old at best; open sky holds almost nothing.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Stone Remembers",
+     "grants": "Recover fragments of actual words from the last day in an enclosed space; identify a known voice; hear the ORDER of events.",
+     "cannot": "Fragments, never transcripts; a space scrubbed by wind or a Stillness Field yields nothing — and the scrubbing itself is evidence.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "opensAccess": {
+      "system": "precursor",
+      "abilityIds": [
+       "latticespeak"
+      ],
+      "via": "the Long Echo let you hear what a Precursor mechanism last said, and something in you learned to answer",
+      "note": "SNG-261 §B (CCode wiring — Aevi's to change): this craft's OWN rank-3 text already says it can 'hear what a Precursor mechanism last said, if it spoke'. latticespeak is the craft that speaks BACK to those mechanisms. The mapping is a proposal ON YOUR PROSE, not new fiction — swap the id or delete this block and the door closes."
+     },
+     "name": "The Long Echo",
+     "grants": "In deep stone — a cellar, the Archive, a cave — reach back weeks; recover a conversation's spine; hear what a Precursor mechanism last said, if it spoke. And follow it: a recovered footfall can be traced the way it went, room to room, for as long as the stone kept it.",
+     "cannot": "Costs a night's sleep of focus; what the deep stacks answer, you cannot unhear — some echoes look back.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE"
+   ],
+   "tradition": "harmonic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "harmonic",
+   "shape": "setup",
+   "operativeAxis": [
+    "recallDepth",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 1,
+    "note": "T-III setup. r1: recover the TONE of the last loud event in a quiet room"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "recallDepth+timeReach",
+     "delta": "recover FRAGMENTS OF ACTUAL WORDS from the last DAY in an enclosed space; identify a known voice; hear the ORDER of events",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "timeReach",
+     "delta": "in DEEP STONE reach back WEEKS; recover a conversation's spine; HEAR WHAT A PRECURSOR MECHANISM LAST SAID, if it spoke",
+     "from": "r3 grants — and this is a second in-catalog PRECURSOR hook (SNG-261 §B)"
+    }
+   ],
+   "intensity": {
+    "conserve": "a listen back — half the reach, and it costs you nothing",
+    "surge": "double the reach; it costs a night's sleep of focus, and what the deep stacks answer YOU CANNOT UNHEAR"
+   },
+   "bounds": [
+    {
+     "text": "words stay SMEARED",
+     "class": "soft"
+    },
+    {
+     "text": "open sky holds almost nothing",
+     "class": "hard"
+    },
+    {
+     "text": "FRAGMENTS, NEVER TRANSCRIPTS",
+     "class": "hard"
+    },
+    {
+     "text": "a space scrubbed by wind or a Stillness Field yields nothing",
+     "class": "hard"
+    },
+    {
+     "text": "costs a NIGHT'S SLEEP of focus",
+     "class": "soft"
+    },
+    {
+     "text": "WHAT THE DEEP STACKS ANSWER, YOU CANNOT UNHEAR",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about an hour Ranks: rank 2 deepens recallDepth+timeReach; rank 3 extends timeReach. Limit: open sky holds almost nothing.",
+   "upkeep": {
+    "prepHoursByRank": {
+     "1": 0,
+     "2": 8,
+     "3": 8
+    },
+    "prepCondition": "uninterrupted sleep for r2+",
+    "attended": true,
+    "interruptible": true,
+    "onInterrupt": "recoverable next night"
+   },
+   "_file": "harmonic.json"
+  },
+  "address_sense": {
+   "id": "address_sense",
+   "name": "Address-Sense",
+   "levelReq": 3,
+   "energyCost": 8,
+   "axes": {
+    "concrete_abstract": 0.5,
+    "space_time": 0.3
+   },
+   "attribute": "mental",
+   "powerSystem": "precursor",
+   "effectTags": [
+    "precursor",
+    "perceive",
+    "vector"
+   ],
+   "peril": "Reading the coordinate layer too long unmoors the reader — repeated use risks a drift toward abstract, away from the concrete present.",
+   "narrationHints": "The world briefly shows its addressing — every thing sitting at a coordinate it cannot not-occupy. Places and people as fixed points in a field that hums.",
+   "description": "Perceive the cosmic-address layer directly: read the deep spectrum-vector of a place, person, or object — where it sits, which axes it runs strong.",
+   "notFor": "Changing what you read (this is perception only); reading intent or future (only the standing vector); the gray water, which addresses to nowhere.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Standing Vector",
+     "grants": "Read a location's or object's strong spectrum axes on sight — which way it leans and how hard. Reveals location vectors fully without approximation.",
+     "cannot": "One target at a time; the read fades when you look away; people resist unless still and willing.",
+     "functions": [
+      "reveal"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    },
+    {
+     "rank": 2,
+     "name": "Coordinate Read",
+     "grants": "Read a person's deep vector — their standing alignment, not their mood; sense when a place's vector has recently SHIFTED and roughly toward what.",
+     "cannot": "Not mind-reading — vector is disposition, not thought; shift-sense gives direction, not cause.",
+     "functions": [
+      "reveal"
+     ],
+     "harmRung": "none",
+     "gains": "deepen"
+    },
+    {
+     "rank": 3,
+     "name": "The Address Itself",
+     "grants": "Perceive the unrepeatable coordinate of a thing — its cosmic address, the point it alone occupies; find your way to a place or person by their vector alone across any distance.",
+     "cannot": "The address is felt, not spoken — you can navigate to it but not name it; the drift-cost compounds; the Precursors' own addresses read as holes in the field.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    }
+   ],
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "precursor",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "targets": 1,
+    "damageType": "precursor"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read a PERSON'S deep vector — standing alignment, not mood; sense when a place's vector has recently MOVED",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: perceive THE UNREPEATABLE COORDINATE of a thing — the point it alone occupies",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "one quiet read — half the depth, and nothing notices being read",
+    "surge": "double it; THE ADDRESS IS FELT, NOT SPOKEN — you can navigate to it and never describe it"
+   },
+   "bounds": [
+    {
+     "text": "ONE TARGET AT A TIME; the read fades when you look away",
+     "class": "hard"
+    },
+    {
+     "text": "NOT MIND-READING — vector is disposition, not thought",
+     "class": "hard"
+    },
+    {
+     "text": "THE ADDRESS IS FELT, NOT SPOKEN",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: one Target AT A Time; the read fades when you look away.",
+   "_file": "precursor.json"
+  },
+  "prism_sight": {
+   "id": "prism_sight",
+   "name": "Prism Sight",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "dark_light": 0.5,
+    "falsehood_truth": 0.4
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "perceive",
+    "reveal",
+    "analyze"
+   ],
+   "narrationHints": "Splitting light into revealing spectra — seeing heat traces, hidden markings, tampering, recent presence, and through glamours.",
+   "description": "See the hidden spectra — heat traces, concealed marks, tampering, and lies of light.",
+   "notFor": "Seeing through solid barriers (it reads light, not matter); reading thoughts; working with eyes closed or in absolute darkness.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "True Spectrum",
+     "grants": "See heat traces (a hand's warmth on a handle, a body's passage within minutes); spot tampering, overpainting, recent digging; notice light-bending at work.",
+     "cannot": "Traces fade in minutes to hours; rain and cold erase them; cannot identify WHO, only THAT.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Layered Reading",
+     "grants": "Read a scene's last hour of light-history in still places; see through rank-1 veils and mirages; catch the micro-flush of a lie on a face in good light.",
+     "cannot": "Lie-reading is a hint, not proof (one reroll of a social sense, not a truth machine); crowded scenes smear.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "opensAccess": {
+      "system": "precursor",
+      "abilityIds": [
+       "address_sense"
+      ],
+      "via": "the Light Beneath showed you the seams of Precursor work, and you learned to read what you were seeing",
+      "note": "SNG-261 §B (CCode wiring — Aevi's to change): this craft's OWN rank-3 text already says it sees 'the seams of Precursor work' and that 'some Precursor light looks back'. address_sense is the craft that reads that layer deliberately. The mapping is a proposal ON YOUR PROSE, not new fiction — swap the id or delete this block and the door closes."
+     },
+     "name": "The Light Beneath",
+     "grants": "See the structural light of things: stress lines in a bridge, sickness in a body, active nanite flows, the seams of Precursor work; pierce any mirage of lower rank instantly.",
+     "cannot": "Minutes of use cost hours of eye-ache; what you see you cannot always name; some Precursor light looks back.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "STEALTH",
+    "FIGHT"
+   ],
+   "tradition": "radiant_folk",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "radiant",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "KNOW→setup: a read that buys advantage. r1 sees heat traces, tampering, light-bending at work",
+    "range": 10
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read a scene's LAST HOUR of light-history; see through rank-1 veils and mirages; catch the micro-flush of a lie (one reroll of a social sense — a hint, NOT a truth machine)",
+     "from": "r2 grants, incl. its own explicit mechanical bound"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "see STRUCTURAL light: stress lines in a bridge, sickness in a body, active nanite flows, the seams of PRECURSOR work; pierce any mirage",
+     "from": "r3 grants — and note it names Precursor-seam detection, a legitimate hook for SNG-261 §B staging"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance — half the depth, no eye-cost",
+    "surge": "double the read, and pay it in hours of eye-ache"
+   },
+   "bounds": [
+    {
+     "text": "traces fade in minutes to hours; rain and cold erase them",
+     "class": "soft"
+    },
+    {
+     "text": "cannot identify WHO, only that",
+     "class": "hard"
+    },
+    {
+     "text": "lie-reading is a HINT, not proof",
+     "class": "hard"
+    },
+    {
+     "text": "minutes of use cost HOURS of eye-ache",
+     "class": "soft"
+    },
+    {
+     "text": "some Precursor work reads as blank",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/stealth/fight action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 deepens perceptionDepth. Limit: cannot identify Who, only that.",
+   "_file": "radiant.json"
+  },
+  "body_read": {
+   "id": "body_read",
+   "name": "Body-Read",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "mental",
+   "axes": {
+    "body_mind": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "A person's health, strength, and hurt read from how they stand.",
+   "description": "Read a body — its condition, hidden injury, strength, exhaustion, tells.",
+   "notFor": "Reading thoughts; healing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Body-Read",
+     "grants": "Read another's physical condition, hidden hurts, and capacities at a glance.",
+     "cannot": "Body, not mind; the trained conceal tells.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Tell",
+     "grants": "Read the whole body at once — weight, breath, the held shoulder, what the hands are doing when the face is busy lying.",
+     "cannot": "It reads the body's report. A trained body reports what its owner chooses.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Body Cannot Lie",
+     "grants": "Nothing a body does escapes you. Pain, intent, love, the decision made a half-second before it is acted on.",
+     "cannot": "You cannot stop reading. The Somatics say knowing every body in a room is its own kind of loneliness.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_body_mind",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "FIGHT"
+   ],
+   "tradition": "somatic",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 10
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the WHOLE body at once — weight, breath, the held shoulder, WHAT THE HANDS ARE DOING WHILE THE FACE IS LYING",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: nothing a body does escapes you — pain, intent, love, THE DECISION MADE A HALF-SECOND BEFORE IT IS ACTED ON",
+     "from": "r3 grants — pre-cognition of action is a kind"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick look — half the depth, and you can stop looking",
+    "surge": "double the read; YOU CANNOT STOP READING"
+   },
+   "bounds": [
+    {
+     "text": "BODY, NOT MIND — the trained conceal tells",
+     "class": "hard"
+    },
+    {
+     "text": "it reads THE BODY'S REPORT — a trained body reports what its owner chooses",
+     "class": "hard"
+    },
+    {
+     "text": "YOU CANNOT STOP READING — the Somatics say knowing every body in a room is its own loneliness",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/fight action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: body, Not Mind — the trained conceal tells.",
+   "_file": "reach_body_mind.json"
+  },
+  "chaos_sense": {
+   "id": "chaos_sense",
+   "name": "Chaos-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "mental",
+   "axes": {
+    "chaos_order": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "A feel for where a situation is about to come apart.",
+   "description": "Sense instability, imminent disorder, the fault-line in a plan.",
+   "notFor": "Predicting exactly how; ordered systems' inner logic.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Chaos-Sense",
+     "grants": "Feel where and roughly when something will break down; find the loose thread.",
+     "cannot": "Feel, not detail; the truly stable reads quiet.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Coming Turbulence",
+     "grants": "Feel where a situation is about to come apart, and roughly how.",
+     "cannot": "You feel the break coming; you do not get to choose where you are standing when it does.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Break Before It Breaks",
+     "grants": "The failure announces itself to you before it happens — the bridge, the alliance, the plan.",
+     "cannot": "Knowing is not preventing, and the Churnfolk have made peace with that in a way others find infuriating.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_chaos_order",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "churnfolk",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "foresight",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "r1: feel WHERE and roughly WHEN something will break down; find the loose thread"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "foresight",
+     "delta": "feel where a SITUATION is about to come apart, and roughly HOW — from a thing to a situation, and the failure MODE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the failure ANNOUNCES ITSELF to you before it happens — the bridge, the alliance, the plan. Unprompted warning is a different act from looking for the flaw.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a feel for the loose thread — half the warning, no cost",
+    "surge": "double the reach: the failure comes to you, and you still do not get to choose where you are standing when it lands"
+   },
+   "bounds": [
+    {
+     "text": "FEEL, NOT DETAIL — the truly stable reads quiet",
+     "class": "hard"
+    },
+    {
+     "text": "you feel the break coming; YOU DO NOT GET TO CHOOSE WHERE YOU ARE STANDING when it arrives",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING IS NOT PREVENTING — and the Churnfolk have made peace with that",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens foresight; rank 3 adds to special. Limit: feel, Not Detail — the truly stable reads quiet.",
+   "_file": "reach_chaos_order.json"
+  },
+  "order_sense": {
+   "id": "order_sense",
+   "name": "Order-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "mental",
+   "axes": {
+    "chaos_order": 0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "The hidden structure of a thing laid bare to a reading eye.",
+   "description": "Perceive the underlying order, rule, or pattern in a system.",
+   "notFor": "Improvised/random things; commanding the structure.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Order-Sense",
+     "grants": "See a system's structure, rules, and load-bearing points at a glance.",
+     "cannot": "Reads structure, not intent; pure chaos returns noise.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Pattern Beneath",
+     "grants": "Read the structure under a mess — the schedule behind a crowd, the rule behind a ritual.",
+     "cannot": "Some messes have no pattern. Reading one into them is how the Lattice makes its worst mistakes.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Design",
+     "grants": "See the entire design a thing is part of — including the parts of it that are not present.",
+     "cannot": "Seeing the design does not give you standing to change it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_chaos_order",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "lattice",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "scope": 1,
+    "note": "r1: see a system's structure, rules, and load-bearing points AT A GLANCE"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the structure UNDER A MESS — the schedule behind a crowd, the rule behind a ritual",
+     "from": "r2 grants — from visible order to hidden order"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: see the ENTIRE DESIGN a thing is part of — INCLUDING THE PARTS THAT ARE NOT PRESENT. Inferring absent structure is a different act from reading present structure.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance — half the depth, and it costs nothing",
+    "surge": "double the read: the whole design, and you will see patterns that are not there if you push it"
+   },
+   "bounds": [
+    {
+     "text": "reads STRUCTURE, not INTENT",
+     "class": "hard"
+    },
+    {
+     "text": "pure chaos returns noise",
+     "class": "hard"
+    },
+    {
+     "text": "SOME MESSES HAVE NO PATTERN — reading one into them is how the Lattice makes its mistakes",
+     "class": "hard"
+    },
+    {
+     "text": "seeing the design does not give you STANDING to change it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10 across a scope of 1, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: reads Structure, not Intent.",
+   "_file": "reach_chaos_order.json"
+  },
+  "stone_read": {
+   "id": "stone_read",
+   "name": "Stone-Read",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.3
+   },
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "narrationHints": "The material gives up its history under his palm.",
+   "description": "Read a material's truth by touch — the first gift of the Given.",
+   "notFor": "Reading meaning or intent; anything not physically present.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Stone-Read",
+     "grants": "Know what a material truly is, and whether it is sound.",
+     "cannot": "Materials, not makers. It says the beam will fail; not who cut it badly.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Grain",
+     "grants": "Read a thing's history in its material — the stresses it took, the repairs, the day it nearly broke.",
+     "cannot": "History, not future. It reports what happened, not what happens next.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Given Word",
+     "grants": "The material of a whole structure is legible at once — every fault, every honest joint, every lie the builder told.",
+     "cannot": "Buildings you love turn out to be full of lies. The Masons say this is why they are hard to live with.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "mason",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "history"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "history",
+     "delta": "read a thing's HISTORY IN ITS MATERIAL — the stresses it took, the repairs, THE DAY IT NEARLY BROKE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "perceptionDepth",
+     "delta": "a whole structure legible at once — every fault, every honest joint, EVERY LIE THE BUILDER TOLD",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a touch — half the depth, and instant",
+    "surge": "double the read; BUILDINGS YOU LOVE TURN OUT TO BE FULL OF LIES"
+   },
+   "bounds": [
+    {
+     "text": "MATERIALS, NOT MAKERS — it says the beam will fail, not who cut it",
+     "class": "hard"
+    },
+    {
+     "text": "HISTORY, NOT FUTURE — it reports what happened, not what happens next",
+     "class": "hard"
+    },
+    {
+     "text": "BUILDINGS YOU LOVE TURN OUT TO BE FULL OF LIES",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens history; rank 3 extends perceptionDepth. Limit: materials, Not Makers — it says the beam will fail, not who cut it.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "pattern_sense": {
+   "id": "pattern_sense",
+   "name": "Pattern-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.3
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "They stop mid-sentence, look at three unrelated things, and tell you what the fourth one is going to be.",
+   "description": "See that a set of particulars is an instance of a pattern, name the pattern, and know what the pattern does next.",
+   "notFor": "Reading material (Stone-Read); reading order-as-structure (Order-Sense). This reads FORM.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Instance",
+     "functions": [
+      "reveal"
+     ],
+     "grants": "See that particulars are an instance of something, and roughly what — a scam, a siege pattern, an illness, a way of building, a way of lying.",
+     "cannot": "Roughly. You get the family, not the name.",
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Named Form",
+     "functions": [
+      "reveal"
+     ],
+     "grants": "⚠️ ADDS PRECISION AND REACH. Name it exactly — and once named, its OTHER instances become visible to you everywhere you go, including ones nobody has connected.",
+     "cannot": "You must have seen enough of this one to name it.",
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Where the Form Breaks",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "grants": "⛔ ADDS THE ACTIONABLE PART. Read the shape a thing is completing — an event, a campaign, a life — and name THE POINT AT WHICH IT MUST BREAK: the step the pattern cannot survive skipping, the piece it requires and does not have yet. ⚠️ A pattern named at r2 is knowledge; a pattern broken here is an ACT.",
+     "cannot": "One form at a time, and breaking it still has to be done by somebody.",
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "NAME THE FORM EXACTLY — and once named, ITS OTHER INSTANCES BECOME VISIBLE TO YOU EVERYWHERE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: read the form of an event, a life, or a history — THE SHAPE IT IS COMPLETING",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the shape — half the depth, and it does not follow you",
+    "surge": "double it; ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T"
+   },
+   "bounds": [
+    {
+     "text": "SEEING THE PATTERN IS NOT SEEING WHETHER IT IS A TRUE ONE",
+     "class": "hard"
+    },
+    {
+     "text": "ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T",
+     "class": "cost"
+    },
+    {
+     "text": "KNOWING THE SHAPE A LIFE IS COMPLETING DOES NOT PERMIT YOU TO SAY SO",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing The Pattern IS Not Seeing Whether IT IS A True One.",
+   "_treeWas": [
+    {
+     "rank": 1,
+     "name": "Pattern-Sense",
+     "grants": "See that a set of particulars is an instance of a pattern, and roughly what pattern.",
+     "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Named Form",
+     "grants": "Name the form exactly — and once named, its other instances become visible to you everywhere.",
+     "cannot": "Once you can see it everywhere, you will see it where it is not.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Formal Reach",
+     "grants": "Read the form of an event, a life, or a history — the shape it is completing.",
+     "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "_descriptionWas": "See the pattern beneath particulars — the first gift of the Pattern Reach.",
+   "_revised": "⚠️ SNG-450. Erik: 'DON'T REMOVE r3 FROM PATTERN-SENSE — ADD SOMETHING TO IT.' ⛔ He is right that the fix for a weak rank is to make it do something, not to delete it. r3 was 'read the form of an event, a life, or a history — the shape it is completing', which is an observation. IT NOW ACTS ON THE FORM: name where the pattern must break, and act there.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "the_true_figure": {
+   "id": "the_true_figure",
+   "name": "The True Figure",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.5
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You see the shape a thing is actually making — the pattern under the mess, the geometry a crowd is unknowingly standing in, the figure a set of events describes. Once seen, it cannot be unseen.",
+   "description": "Look at a scene, a record, a route, a crowd, a wound-pattern, and the craft names one thing: the element that does not fit, or the place where a piece is missing. The Figurists' first craft — pattern read rather than imposed.",
+   "notFor": "Patterns that are not there (the craft returns nothing rather than obliging you); reading intent or meaning; anything genuinely random.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shape Under It",
+     "grants": "Look at a scene, a set of records, a route, a crowd, a wound-pattern — and the craft NAMES ONE THING for you: the element that does not fit, or the place where a piece is missing and what shape it must be. One concrete answer, pointed at: this ledger entry, that stone, the fourth man, the room nobody uses.",
+     "cannot": "It shows the SHAPE, never the reason. And a genuinely chaotic thing has no figure — it returns nothing, which Figurists insist is a real answer.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Continued Line",
+     "grants": "Extend the figure — where the pattern goes next, what the missing piece must be, where the sixth one will be found.",
+     "cannot": "The extension is only as sound as the figure, and a partial pattern extends confidently and wrongly. Say which you have.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Figure",
+     "grants": "The complete shape of a large thing — a campaign, a season of disappearances, a city's flow, a tradition's drift.",
+     "cannot": "⚠ A LARGE FIGURE IS HARD TO STOP SEEING. Figurists at this rank read pattern into things that have none, and the craft cannot tell them apart from inside.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read the near shape",
+    "surge": "the whole figure; IT IS HARD TO STOP SEEING, and the craft cannot tell you when there is none"
+   },
+   "bounds": [
+    {
+     "text": "shows the SHAPE, never the reason",
+     "class": "hard"
+    },
+    {
+     "text": "a genuinely chaotic thing returns NOTHING",
+     "class": "hard"
+    },
+    {
+     "text": "a partial pattern extends confidently and wrongly",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A puzzle/social action that reads the pattern a thing is making. Rated 5 of 10 across a scope of 2 for about six hours.",
+   "_descriptionWas": "The Figurists' first craft: pattern read rather than imposed.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "lightsense": {
+   "id": "lightsense",
+   "name": "Lightsense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "mental",
+   "axes": {
+    "dark_light": 0.3
+   },
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "narrationHints": "Every source and shadow of light in a place, mapped at a glance.",
+   "description": "Read light and shadow — where it falls, what it hides, how to use it.",
+   "notFor": "Making light; deep concealment.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Lightsense",
+     "grants": "Read a place's light and shadow; know where you're seen and where you're not.",
+     "cannot": "Reads, doesn't make; the deep-hidden stay hidden.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Spectrum-Read",
+     "grants": "Read light's whole spectrum — residual heat, the age of a scorch, the flush of a lie rising in a face.",
+     "cannot": "It reports what the light says, not what is true; a good liar with cold blood defeats it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unbroken Beam",
+     "grants": "Follow any beam back to its source across a valley, and know every surface it touched on the way.",
+     "cannot": "Darkness stays genuinely opaque — the gap the Umbrals built an entire art inside.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_dark_light",
+   "gated": "learned",
+   "challengeTypes": [
+    "STEALTH",
+    "INVESTIGATE"
+   ],
+   "tradition": "blazeborn",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 30
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "perceptionDepth",
+     "delta": "+spectrum: residual heat, age of a scorch, the flush of a lie rising in a face",
+     "from": "r2 grants names KINDS of reading, not distance"
+    },
+    {
+     "rank": 3,
+     "axis": "range",
+     "delta": "×valley-scale — follow any beam to its source and know every surface it touched",
+     "from": "r3 grants names DISTANCE and a trace-history; the increment goes to RANGE, not depth"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance — the room's lit and unlit, no detail beyond where you'd be seen",
+    "surge": "double the read: the whole spectrum at once, and the trace held long enough to follow"
+   },
+   "bounds": [
+    {
+     "text": "reads, does not make; the deep-hidden stay hidden",
+     "class": "hard"
+    },
+    {
+     "text": "reports what the LIGHT says, not what is true — a good liar with cold blood defeats it",
+     "class": "hard"
+    },
+    {
+     "text": "darkness stays genuinely opaque (the gap the Umbrals built an art inside)",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A stealth/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 30. Ranks: rank 2 adds to perceptionDepth; rank 3 adds to range. Limit: reads, does not make; the deep-hidden stay hidden.",
+   "_file": "reach_dark_light.json"
+  },
+  "deathsense": {
+   "id": "deathsense",
+   "name": "Deathsense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_death_life",
+   "attribute": "mental",
+   "axes": {
+    "death_life": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "A quiet knowing of what has died, is dying, or is near its end nearby.",
+   "description": "Sense death and dying around you — the living whose thread is fraying, the near-gone, the actively failing. Deathsense reads what is HAPPENING NOW. For what has already finished, Palework reads the evidence.",
+   "notFor": "It reads endings; it does not cause them. And it cannot see the future of a death — only the shape of the one already underway.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Deathsense",
+     "grants": "Feel where a living thing is dying or near death. Judge how far along they are. Sense the failing in a person or creature before it shows on the outside.",
+     "cannot": "Reads the living and the dying, not the already-dead. A corpse has nothing left to sense.",
+     "functions": [
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Count",
+     "grants": "Sense not only that something living is dying but HOW — the cause, the shape, roughly how long. A body tells its ending to the Ashwarden before it tells anyone else.",
+     "cannot": "Knowing the hour does not give you the power to move it, and it will not let you unknow it.",
+     "functions": [
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Hour Known",
+     "grants": "The dying stands plain: you perceive its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning, and can say aloud what is present in them right now.",
+     "cannot": "Some endings have no turning-aside. Deathsense does not make endings negotiable; it makes them visible.",
+     "functions": [
+      "foresee",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "ashwarden",
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "schoolAffinity": "ash_plain",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "setup",
+   "operativeAxis": [
+    "foresight",
+    "precision"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 20
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "sense not only THAT something is dying but HOW — the cause, the shape, roughly how long",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the dying stands PLAIN — cause, trajectory, and WHAT WOULD TURN IT ASIDE, if anything would",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the failing — half the detail, no weight",
+    "surge": "double the read; KNOWING THE HOUR DOES NOT GIVE YOU THE POWER TO MOVE IT"
+   },
+   "bounds": [
+    {
+     "text": "reads the LIVING AND THE DYING, not the already-dead",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING THE HOUR DOES NOT GIVE YOU THE POWER TO MOVE IT",
+     "class": "hard"
+    },
+    {
+     "text": "SOME ENDINGS HAVE NO TURNING-ASIDE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: reads the Living And The Dying, not the already-dead.",
+   "_file": "reach_death_life.json"
+  },
+  "lifesense": {
+   "id": "lifesense",
+   "name": "Lifesense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_death_life",
+   "attribute": "mental",
+   "axes": {
+    "death_life": 0.3
+   },
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "narrationHints": "The warmth of the living felt like heat through a wall — who is near, how strong their spark.",
+   "description": "Sense living things nearby — number, vigor, hidden presence.",
+   "notFor": "Reading thoughts; distinguishing individuals by identity.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Lifesense",
+     "grants": "Perceive living things through walls and dark — how many, where, and how strong; judge their vigor; notice one holding still to avoid being found.",
+     "cannot": "Vigor, not identity; the barely-alive read faint.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Green Read",
+     "grants": "Read the whole living field of a place — what is thriving, what is failing, what is merely holding on.",
+     "cannot": "It reports vitality, not virtue. A thriving thing may be thriving on something you love.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Living Field",
+     "grants": "Feel every living thing for a great distance as one continuous fabric, and feel where it is torn.",
+     "cannot": "You cannot stop feeling it. Rootkin at this depth grieve forests the way others grieve people.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "STEALTH"
+   ],
+   "tradition": "rootkin",
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 20
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the whole LIVING FIELD of a place — what thrives, what fails, what merely holds on",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "every living thing for a GREAT DISTANCE as one continuous fabric — and where it is TORN",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick read — half the range, no lingering",
+    "surge": "double the reach; at this depth you cannot stop feeling it"
+   },
+   "bounds": [
+    {
+     "text": "VIGOR, NOT IDENTITY — the barely-alive read faint",
+     "class": "hard"
+    },
+    {
+     "text": "it reports VITALITY, NOT VIRTUE — a thriving thing may be thriving on something terrible",
+     "class": "hard"
+    },
+    {
+     "text": "YOU CANNOT STOP FEELING IT — Rootkin at this depth grieve forests the way others grieve people",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/stealth action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 extends range. Limit: vigor, Not Identity — the barely-alive read faint.",
+   "_file": "reach_death_life.json"
+  },
+  "appetite_sense": {
+   "id": "appetite_sense",
+   "name": "Appetite-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You can feel the shape of what they are hungry for before they say a word.",
+   "description": "Sense the true want under the presented want — the first gift of the Descent.",
+   "notFor": "Reading facts (that is Verity); reading feeling (that is Pathos). This reads HUNGER.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Appetite-Sense",
+     "grants": "Feel what a person actually wants, beneath what they are asking for.",
+     "cannot": "It reads want, not intent. What they will DO about the want is a different craft.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Hollow Read",
+     "grants": "Feel the want a person is refusing to admit to themselves — the one doing the most work.",
+     "cannot": "Knowing the want they deny is a weapon, and it is very hard not to use it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Hunger",
+     "grants": "Read the appetite of a crowd, a faction, a city — what the whole thing is actually reaching for.",
+     "cannot": "A crowd's hunger is not the sum of its people's. It is stupider and much stronger.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 10,
+    "note": "SOCIAL attribute throughout"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "feel the want A PERSON IS REFUSING TO ADMIT TO THEMSELVES — the one doing the most work",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "read the appetite of A CROWD, A FACTION, A CITY — what the whole thing is actually reaching for",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the want — half the depth, and it stays surface",
+    "surge": "double it; KNOWING THE WANT THEY DENY IS A WEAPON, and it is very hard to un-know"
+   },
+   "bounds": [
+    {
+     "text": "IT READS WANT, NOT INTENT — what they will DO about it is their own",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING THE WANT THEY DENY IS A WEAPON, and very hard to un-know",
+     "class": "cost"
+    },
+    {
+     "text": "A CROWD'S HUNGER IS NOT THE SUM OF ITS PEOPLE'S — it is its own thing",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 10. Ranks: rank 2 deepens perceptionDepth; rank 3 extends scope. Limit: iT Reads Want, Not Intent — what they will DO about it is their own.",
+   "_file": "reach_demonic_angelic.json"
+  },
+  "the_read_want": {
+   "id": "the_read_want",
+   "name": "The Read Want",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.4,
+    "falsehood_truth": 0.3
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You see what someone actually wants, which is reliably not what they are asking for. The Bargainers' whole trade rests on this and they will tell you so without embarrassment.",
+   "description": "Look at a person in conversation and see the want beneath the request — the man asking for money who wants to be taken seriously, the one asking for justice who wants an apology. The Bargainers' first craft: read the want before naming the price.",
+   "notFor": "Reading anything but WANT (not plans, not lies, not history); people who genuinely want nothing; using it without their knowing you can — Bargainers announce it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Want Under It",
+     "grants": "Look at a person in conversation and see the want beneath the request — the man asking for money who wants to be taken seriously, the one asking for justice who wants an apology.",
+     "cannot": "It reads WANT and nothing else. The self-deceived read as they believe themselves, which is often the useful thing anyway. Someone who wants nothing gives you nothing.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Table Read",
+     "grants": "Read a room of them, or read one deeply enough to see which want they would trade the others for.",
+     "cannot": "Knowing the want does not tell you what it is WORTH to them, and the two are different numbers. A wrong guess at price after a right read of want is the classic Bargainer failure.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Appetite",
+     "grants": "A person's wants entire and in order, including the ones they have never said out loud and the one they would be ruined by getting.",
+     "cannot": "⚠ YOU NOW KNOW SOMETHING ABOUT THEM THEY DO NOT KNOW, and the Bargainers' own rule is that you name what you read before you trade on it. Trading on an unannounced read is the thing that gets a Bargainer refused at every table in the foothills.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "bargainers",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 3,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "read the surface want",
+    "surge": "the whole appetite; NAME WHAT YOU READ BEFORE YOU TRADE ON IT"
+   },
+   "bounds": [
+    {
+     "text": "reads WANT and nothing else",
+     "class": "hard"
+    },
+    {
+     "text": "the self-deceived read as they BELIEVE themselves",
+     "class": "soft"
+    },
+    {
+     "text": "knowing the want does not tell you the PRICE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/puzzle action that reads what someone actually wants. Rated 6 of 10 on one target for about three hours.",
+   "_descriptionWas": "The Bargainers' first craft: read the want before naming the price, because a price against the wrong want is an insult.",
+   "_file": "reach_demonic_angelic.json"
+  },
+  "the_read_hunger": {
+   "id": "the_read_hunger",
+   "name": "The Read Hunger",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_demonic_angelic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": -0.6
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "Everything that eats has a shape to its eating. You read it — what this thing wants, how badly, what it will cross to get it, and what it will not.",
+   "description": "The Abyssal Choir's first craft, and the reason they survive down there. You do not negotiate with an appetite you have not read.",
+   "notFor": "Reading thought, plan, or loyalty (only APPETITE); the genuinely sated; changing anything; anything with no want at all — a machine, a corpse, a Stopped thing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shape of Its Eating",
+     "grants": "Read one creature, person, or thing-that-wants and the craft NAMES it: what it hungers for, how strongly, what it will risk, and the one thing it will not do even hungry.",
+     "cannot": "APPETITE ONLY — it tells you nothing about plans, loyalties or what it knows. The truly sated read as empty and are the most dangerous thing in the room for exactly that reason.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Fed and the Starving",
+     "grants": "Read a group or a place — which of them is hungriest, which is nearly full, and where in a warren the eating happens.",
+     "cannot": "Reading a room of appetites is nauseating and it lingers. And knowing what a thing wants is not knowing you can supply it.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Great Appetite",
+     "grants": "Something large — a deep thing, a host, a place's whole hunger — read entire, including the want under the want.",
+     "cannot": "⚠ IT NOTICES BEING READ AT THIS DEPTH. You have introduced yourself, and the Devouring find being understood almost as satisfying as being fed.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "abyssal",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 3,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read one appetite",
+    "surge": "the great appetite; IT NOTICES BEING READ AT THIS DEPTH"
+   },
+   "bounds": [
+    {
+     "text": "APPETITE ONLY — no plans, loyalties or knowledge",
+     "class": "hard"
+    },
+    {
+     "text": "the truly SATED read as empty",
+     "class": "hard"
+    },
+    {
+     "text": "knowing the want is not being able to supply it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A puzzle/social action that names what a thing hungers for and what it will risk. Rated 5 of 10 across a scope of 2 for about three hours.",
+   "_file": "reach_demonic_angelic.json"
+  },
+  "fault_sense": {
+   "id": "fault_sense",
+   "name": "Fault-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "He looks at the thing and sees where it is already halfway to failing.",
+   "description": "See where a thing is failing, or wants to — the first gift of the Unmade.",
+   "notFor": "Seeing what should be built (Maker's-Eye); mending.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Fault-Sense",
+     "grants": "See where a structure, plan, or relationship is under stress and where it will give.",
+     "cannot": "Seeing the fault does not tell you whether to press it.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Rotten Beam",
+     "grants": "Find the ONE piece whose failure brings the rest — the keystone of the collapse.",
+     "cannot": "Finding it makes you responsible for knowing it. You cannot un-know where the keystone is.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Failing",
+     "grants": "Read the entire arc of a thing's decline — how it will end, in what order, and how long it has.",
+     "cannot": "You will be right, and nobody will want to hear it, and it will end exactly as you said.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "unmaker",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "PHYSICAL attribute — the unmaker reads stress in the body of a thing"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "find THE ONE PIECE whose failure brings the rest — THE KEYSTONE OF THE COLLAPSE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: read the ENTIRE ARC of a thing's decline — how it will end, IN WHAT ORDER, and how long it has",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the stress — half the depth, and you can look away",
+    "surge": "double the read; YOU WILL BE RIGHT, AND NOBODY WILL WANT TO HEAR IT"
+   },
+   "bounds": [
+    {
+     "text": "SEEING THE FAULT DOES NOT TELL YOU WHETHER TO PRESS IT",
+     "class": "hard"
+    },
+    {
+     "text": "FINDING IT MAKES YOU RESPONSIBLE FOR KNOWING IT — you cannot un-see it",
+     "class": "cost"
+    },
+    {
+     "text": "YOU WILL BE RIGHT, AND NOBODY WILL WANT TO HEAR IT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing The Fault Does Not Tell You Whether TO Press IT.",
+   "_file": "reach_destruction_creation.json"
+  },
+  "the_true_feeling": {
+   "id": "the_true_feeling",
+   "name": "The True Feeling",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3
+   },
+   "effectTags": [
+    "feeling",
+    "perception",
+    "truth"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She knew what the room was feeling before anyone spoke.",
+   "description": "Read what is actually felt — not what is shown, what is present.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "challengeTypes": [
+    "social",
+    "investigation",
+    "intellectual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Actual State",
+     "grants": "Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.",
+     "cannot": "Anything rank 2 adds — track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched; it reads WHAT IS FELT, not what is TRUE.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Feeling Trail",
+     "grants": "Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
+     "cannot": "Anything rank 3 adds — read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming; it reads WHAT IS FELT, not what is TRUE.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Emotional History",
+     "grants": "Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.",
+     "cannot": "Nothing further; this is the craft's ceiling; it reads WHAT IS FELT, not what is TRUE; and it still costs what it costs: what you read of a history, you carry some of.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 15,
+    "note": "SOCIAL attribute throughout this tradition"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "timeReach",
+     "delta": "TRACK A FEELING OVER TIME — follow grief, find WHERE FEAR DEVELOPED, trace the emotional mark a person left in a place",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, WHAT A PEOPLE HAVE BEEN RUNNING FROM",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the room — half the depth, and it does not stay with you",
+    "surge": "double it; feeling the truth of a whole history means CARRYING some of it"
+   },
+   "bounds": [
+    {
+     "text": "it reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere",
+     "class": "hard"
+    },
+    {
+     "text": "THE GUARDED CAN CLOSE",
+     "class": "soft"
+    },
+    {
+     "text": "what you read of a history, you carry some of",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigation/intellectual action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 15. Ranks: rank 2 extends timeReach; rank 3 deepens perceptionDepth. Limit: it reads What IS Felt, not what is True — a person sincerely wrong reads sincere.",
+   "_file": "reach_emotional_logical.json"
+  },
+  "see_the_made_thing": {
+   "id": "see_the_made_thing",
+   "name": "See the Made Thing",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "falsehood_truth": -0.3
+   },
+   "effectTags": [
+    "detection",
+    "falsecraft",
+    "seams"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She saw the seams in everything. That was the price of the craft.",
+   "description": "Read what is constructed versus what is found — see the falsecrafts in any situation.",
+   "notFor": [],
+   "tradition": "veilwright",
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "investigation",
+    "intellectual",
+    "magical"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Construction",
+     "grants": "Read any falsehood or illusion's construction — see how it was made, what it is made of, where it will fail.",
+     "cannot": "Anything rank 2 adds — see all the falsecrafts in a situation simultaneously — who is building what version of events, what holds, what is already cracking under its own weight; it reads CONSTRUCTION, not truth.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "All the Seams",
+     "grants": "See all the falsecrafts in a situation simultaneously — who is building what version of events, what holds, what is already cracking under its own weight.",
+     "cannot": "Anything rank 3 adds — read what is being constructed before it completes — see the lie before it is fully told, the illusion before it has fully taken shape; it reads CONSTRUCTION, not truth.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unfinished Lie",
+     "grants": "Read what is being constructed before it completes — see the lie before it is fully told, the illusion before it has fully taken shape.",
+     "cannot": "Nothing further; this is the craft's ceiling; it reads CONSTRUCTION, not truth.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "see ALL the falsecrafts in a situation SIMULTANEOUSLY — who is building what version of events, what holds, what is already cracking",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: read what is BEING CONSTRUCTED BEFORE IT COMPLETES — see the lie before it is fully told",
+     "from": "r3 grants — pre-emption is a kind, not a depth"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the seams — half the depth, and instant",
+    "surge": "double the read: every construction in the room at once, and you will see craft where there is only sincerity"
+   },
+   "bounds": [
+    {
+     "text": "it reads CONSTRUCTION, not truth — a sincere person building nothing reads blank",
+     "class": "hard"
+    },
+    {
+     "text": "knowing HOW a lie is made is not knowing WHAT IS TRUE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigation/intellectual/magical action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: it reads Construction, not truth — a sincere person building nothing reads blank.",
+   "_file": "reach_falsehood_truth.json"
+  },
+  "the_plain_seeing": {
+   "id": "the_plain_seeing",
+   "name": "The Plain Seeing",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_falsehood_truth",
+   "attribute": "mental",
+   "axes": {
+    "falsehood_truth": 0.6
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You look at a thing and what is actually so about it is simply available. Not detection, not deduction — the removal of everything that was in the way, including what you were hoping.",
+   "description": "Look at a scene, object, document, wound or room and illusion, disguise and staging come off it — you are told plainly what was added and what was moved. The Verists' first craft, and the one every other Verist craft rests on.",
+   "notFor": "Seeing what is HIDDEN (this strips distortion, it does not open locked boxes); the future; another person's interior; comfort.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Cleared Look",
+     "grants": "Look at a scene, an object, a document, a wound, a room. Illusion, disguise and staging come off it — you are told plainly WHAT WAS ADDED and what was moved: this blood was poured, that seal is recent, this man is not who he is dressed as. ⚠ It also strips what YOU were hoping to find, which in practice means it will contradict you.",
+     "cannot": "It removes DISTORTION, not concealment — a genuinely hidden thing stays hidden. And it strips YOUR preferences too, which is the part Verists warn apprentices about.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Clarity",
+     "grants": "Keep it up while you work through a place, or turn it on a person's account and see where the account and the world part company.",
+     "cannot": "Sustained plain seeing is exhausting in a way that is not only energy. A Falsecraft worker can feel it running and will adjust.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Unobstructed",
+     "grants": "Nothing between you and what is so — a whole site, a whole affair, a whole person's situation, entire.",
+     "cannot": "⚠ YOU DO NOT GET TO CHOOSE WHAT YOU SEE. Verists at this rank learn things about people they love, and about themselves, that they cannot un-see and cannot honestly pretend away.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "verist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a cleared glance",
+    "surge": "the unobstructed; YOU DO NOT GET TO CHOOSE WHAT YOU SEE"
+   },
+   "bounds": [
+    {
+     "text": "removes DISTORTION, not concealment",
+     "class": "hard"
+    },
+    {
+     "text": "it strips YOUR preferences too",
+     "class": "hard"
+    },
+    {
+     "text": "you do not choose what you see",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle/social action that strips distortion off what you are looking at. Rated 6 of 10 across a scope of 2 for about two hours.",
+   "_descriptionWas": "The Verists' first craft and the one every other Verist craft rests on. You cannot say the true thing until you can see it.",
+   "_file": "reach_falsehood_truth.json"
+  },
+  "numen_sense": {
+   "id": "numen_sense",
+   "name": "Numen-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "social",
+   "axes": {
+    "mechanical_spiritual": 0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "The weight of meaning in a place felt on the skin.",
+   "description": "Sense where meaning runs dense — sacred ground, a charged moment, a numinous site.",
+   "notFor": "Reading mechanism; forcing the meaning.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Numen-Sense",
+     "grants": "Feel the significance-density of a place or moment; know where the world is 'thin.'",
+     "cannot": "Feel, not command; barren places read empty.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Thinning",
+     "grants": "Feel where the veil is thin — where meaning presses close enough to touch, and where something is pressing back.",
+     "cannot": "Feeling the thin place is not surviving it. Not everything on the other side is glad to be noticed.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Numen Plain",
+     "grants": "The numinous is simply visible to you — the sacred, the haunted, the charged, all plain as furniture.",
+     "cannot": "Once seen, never unseen. The Numinous who reach this depth find the ordinary world thin and hard to care about.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_mechanical_spiritual",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "numinous",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 20,
+    "note": "SOCIAL attribute — numinous reads MEANING, and meaning is social"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "feel WHERE THE VEIL IS THIN — where meaning presses close enough to touch, AND WHERE SOMETHING IS PRESSING BACK",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the numinous is simply VISIBLE to you — the sacred, the haunted, the charged, all plain as furniture",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a feel for the room — half the depth, and it does not stay with you",
+    "surge": "double the sensitivity; ONCE SEEN, NEVER UNSEEN"
+   },
+   "bounds": [
+    {
+     "text": "FEEL, NOT COMMAND — barren places read empty",
+     "class": "hard"
+    },
+    {
+     "text": "FEELING THE THIN PLACE IS NOT SURVIVING IT",
+     "class": "hard"
+    },
+    {
+     "text": "ONCE SEEN, NEVER UNSEEN — the Numinous who reach this depth find the ordinary world thinner afterward",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: feel, Not Command — barren places read empty.",
+   "_file": "reach_mechanical_spiritual.json"
+  },
+  "way_sense": {
+   "id": "way_sense",
+   "name": "Way-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_space_time",
+   "attribute": "mental",
+   "axes": {
+    "space_time": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal",
+    "track"
+   ],
+   "narrationHints": "He knows which way, and does not know how he knows.",
+   "description": "Know where you are, where things lie, and the true way between — the first gift of the Open Reach.",
+   "notFor": "Reading time; knowing what waits at the far end.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Way-Sense",
+     "grants": "Never be lost. Know your bearing, your distance, and the shape of the way ahead.",
+     "cannot": "Knowing the way is not knowing what is on it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Read Road",
+     "grants": "Read a route's true cost before walking it — where it will be hard, where it will be watched, where it lies.",
+     "cannot": "A read road is still a road. It does not walk itself.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Map",
+     "grants": "Hold a region entire in your sense of it — every way in, every way out, every gap between the ways.",
+     "cannot": "Regions change. The map you hold is the one you built, and it ages.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "EXPLORE",
+    "CHASE"
+   ],
+   "tradition": "horizon",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "navigation",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 100
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "navigation",
+     "delta": "read a route's TRUE COST before walking it — where it will be hard, where it will be WATCHED, WHERE IT LIES",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "hold A REGION ENTIRE in your sense of it — every way in, every way out, EVERY GAP BETWEEN THE WAYS",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a bearing — half the depth, and instant",
+    "surge": "double the read; REGIONS CHANGE, and the map you hold is the one YOU built"
+   },
+   "bounds": [
+    {
+     "text": "KNOWING THE WAY IS NOT KNOWING WHAT IS ON IT",
+     "class": "hard"
+    },
+    {
+     "text": "A READ ROAD IS STILL A ROAD — it does not walk itself",
+     "class": "hard"
+    },
+    {
+     "text": "REGIONS CHANGE — the map you hold is the one you built, and it ages",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A explore/chase action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 100. Ranks: rank 2 deepens navigation; rank 3 extends range. Limit: knowing The Way IS Not Knowing What IS ON IT.",
+   "_file": "reach_space_time.json"
+  },
+  "hour_sense": {
+   "id": "hour_sense",
+   "name": "Hour-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_space_time",
+   "attribute": "mental",
+   "axes": {
+    "space_time": 0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "She knows how long it has been, and how long it has left.",
+   "description": "Know duration truly — how long since, how long until — the first gift of the Kept Reach.",
+   "notFor": "Knowing WHAT will happen. This knows WHEN.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Hour-Sense",
+     "grants": "Know exactly how long since a thing happened, and how long until a thing due will come.",
+     "cannot": "When, never what. The hour is knowable; the event is not.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Count",
+     "grants": "Read the age of a place, a wound, a working, or a lie — and when it will fail.",
+     "cannot": "It counts. It does not care whether you are ready.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Kept Ledger",
+     "grants": "Hold the whole duration of a place or a people — its beginning, its hours, and the hour it is running out of.",
+     "cannot": "Knowing a people's remaining hours and being unable to say so is the Hourkeepers' particular grief.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "hourkeeper",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "temporalDepth",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "temporalDepth",
+     "delta": "read the AGE of a place, a wound, a working, or A LIE — and WHEN IT WILL FAIL",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "timeReach",
+     "delta": "hold the WHOLE DURATION of a place or a people — its beginning, its hours, and THE HOUR IT IS RUNNING OUT OF",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the clock — half the depth, and it costs nothing",
+    "surge": "double the read; KNOWING A PEOPLE'S REMAINING HOURS AND BEING UNABLE TO SAY SO is the Hourkeeper's particular grief"
+   },
+   "bounds": [
+    {
+     "text": "WHEN, NEVER WHAT — the hour is knowable; THE EVENT IS NOT",
+     "class": "hard"
+    },
+    {
+     "text": "IT COUNTS. IT DOES NOT CARE WHETHER YOU ARE READY.",
+     "class": "hard"
+    },
+    {
+     "text": "knowing a people's remaining hours AND BEING UNABLE TO SAY SO",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens temporalDepth; rank 3 extends timeReach. Limit: when, Never What — the hour is knowable; The Event IS Not.",
+   "_file": "reach_space_time.json"
+  },
+  "read_the_fight": {
+   "id": "read_the_fight",
+   "name": "Read the Fight",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "physical",
+   "axes": {
+    "violence_peace": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "The shape of the coming violence, seen a beat early.",
+   "description": "Read a fight's flow, a foe's next move, the moment before it breaks.",
+   "notFor": "Winning it for you; non-combat reads.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Read the Fight",
+     "grants": "See a fight's shape and a foe's tell a beat early; know when violence is about to erupt.",
+     "cannot": "Reads, not wins; the truly wild are harder to call.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Field",
+     "grants": "Read every fighter at once — who is committed, who is looking for the door, where the line will fail first.",
+     "cannot": "Reading the fight is not surviving it. The field tells you where it breaks, not how to be elsewhere.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Three Moves Ahead",
+     "grants": "See the fight's shape before it takes it — where this ends, and the two or three ways it could end otherwise.",
+     "cannot": "Seeing the end does not mean you can choose it. The Marchers say the field always keeps one move back.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_violence_peace",
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL",
+    "INVESTIGATE"
+   ],
+   "tradition": "marcher",
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "schoolAffinity": "mar_plain",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "setup",
+   "operativeAxis": [
+    "foresight",
+    "perceptionDepth"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "PHYSICAL attribute"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read EVERY FIGHTER AT ONCE — who is committed, who is looking for the door, WHERE THE LINE WILL FAIL FIRST",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: see the fight's shape BEFORE IT TAKES IT — where this ends, and the two or three ways it could end otherwise",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the field — half the read, instantly",
+    "surge": "double it; SEEING THE END DOES NOT MEAN YOU CAN CHOOSE IT"
+   },
+   "bounds": [
+    {
+     "text": "READS, NOT WINS — the truly wild are harder to call",
+     "class": "hard"
+    },
+    {
+     "text": "READING THE FIGHT IS NOT SURVIVING IT",
+     "class": "hard"
+    },
+    {
+     "text": "SEEING THE END DOES NOT MEAN YOU CAN CHOOSE IT",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight/duel/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: reads, Not Wins — the truly wild are harder to call.",
+   "_file": "reach_violence_peace.json"
+  },
+  "read_the_room": {
+   "id": "read_the_room",
+   "name": "Read the Room",
+   "levelReq": 1,
+   "energyCost": 3,
+   "attribute": "social",
+   "axes": {
+    "violence_peace": 0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "Every unspoken tension in a room, felt at once.",
+   "description": "Sense a room's tensions, alliances, and the true temperature under the words.",
+   "notFor": "Resolving it (that's Stillcraft); combat.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Read the Room",
+     "grants": "Read the social tensions and true feeling in a gathering; find who's about to break the peace.",
+     "cannot": "Reads, not calms; the disciplined mask well.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Room's True Weather",
+     "grants": "Read what a room is actually doing under what it is saying — the alliance forming, the grudge about to speak.",
+     "cannot": "It reads the room, not the world. What is decided elsewhere arrives regardless of how well you read this table.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Thing Nobody Said",
+     "grants": "Name the thing everyone in the room is carefully not saying — and know what will happen if it is said.",
+     "cannot": "Knowing it and saying it are different acts, and the second one is rarely free.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_violence_peace",
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "tradition": "stillhold",
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "SOCIAL attribute"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read what a room is ACTUALLY DOING under what it is SAYING — the alliance forming, the grudge about to speak",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NAME THE THING EVERYONE IS CAREFULLY NOT SAYING — and know what will happen if it is said",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the mood — half the depth, and nobody notices you looking",
+    "surge": "double the read; KNOWING IT AND SAYING IT ARE DIFFERENT ACTS, and the second is not always right"
+   },
+   "bounds": [
+    {
+     "text": "READS, NOT CALMS — the disciplined mask well",
+     "class": "hard"
+    },
+    {
+     "text": "it reads THE ROOM, NOT THE WORLD — what is decided elsewhere arrives anyway",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING IT AND SAYING IT ARE DIFFERENT ACTS, and the second is not always right",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: reads, Not Calms — the disciplined mask well.",
+   "_file": "reach_violence_peace.json"
+  },
+  "storykeeper": {
+   "id": "storykeeper",
+   "name": "Storykeeper",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "tradition_innovation": -0.5,
+    "concrete_abstract": 0.3
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "lore",
+    "memory",
+    "perform"
+   ],
+   "narrationHints": "The one who holds the valley's memory out loud. A story for every stone, and the discipline to keep them straight.",
+   "description": "Hold, recall, and deploy the valley's stories — living memory as a working tool.",
+   "notFor": "Reading (this is oral craft); knowing what nobody ever told anyone; lying — a storykeeper's coin is accuracy.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Long Memory",
+     "grants": "Recall any story you've heard verbatim; know the common lore of any valley place or family; earn welcome in a strange hall by performing.",
+     "cannot": "Recall is of what you've HEARD — gaps are gaps; welcome isn't trust.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Threads Between",
+     "grants": "Cross-reference stories to surface what they jointly imply (codex synergy: +insight when a known topic is in play); notice when a live account contradicts the record; a told story can steady a shaken group.",
+     "cannot": "Implication isn't proof; steadying works once per group per trouble.",
+     "functions": [
+      "reveal",
+      "track"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Keeper of the Deep Stock",
+     "grants": "Access the old stratum — pre-crisis stories most keepers lost; recognize when events are RHYMING with an old story and read the pattern forward; your tellings enter the community record with weight.",
+     "cannot": "The old stratum is fragmentary and the GM holds its gaps; pattern-rhyme is probabilistic, never prophecy.",
+     "functions": [
+      "reveal",
+      "track",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "foresee",
+    "reveal",
+    "track"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "setup",
+   "operativeAxis": [
+    "recall",
+    "implication"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "implication",
+     "delta": "CROSS-REFERENCE stories to surface WHAT THEY JOINTLY IMPLY (+insight when a known topic is in play)",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: access THE OLD STRATUM — pre-crisis stories most keepers lost; recognize when events are RHYMING WITH AN OLD STORY",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "recall what you heard — half the cross-reference, and it costs nothing",
+    "surge": "double it; IMPLICATION ISN'T PROOF"
+   },
+   "bounds": [
+    {
+     "text": "recall is of WHAT YOU HAVE HEARD — gaps are gaps",
+     "class": "hard"
+    },
+    {
+     "text": "IMPLICATION ISN'T PROOF",
+     "class": "hard"
+    },
+    {
+     "text": "the old stratum is FRAGMENTARY and the GM holds its gaps",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens implication; rank 3 adds to special. Limit: recall is of What You Have Heard — gaps are gaps.",
+   "_file": "valley_craft.json"
+  },
+  "keen_appraisal": {
+   "id": "keen_appraisal",
+   "name": "Keen Appraisal",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "concrete_abstract": -0.2,
+    "instinct_analysis": 0.4
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "observe",
+    "value",
+    "detail"
+   ],
+   "narrationHints": "The glance that inventories a room. Worth, wear, provenance, and the one thing that doesn't belong.",
+   "description": "See what's actually there: value, provenance, condition, and the detail everyone else missed.",
+   "notFor": "Speed-reading people's intent (objects and scenes, not minds); magic-sense; appraising the truly unique without comparables.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "True Worth",
+     "grants": "Price goods accurately at a glance; spot forgery, shoddy work, and hidden damage; notice the one detail out of place in a scene.",
+     "cannot": "Exotic and Precursor items read as 'beyond scale'; the detail is noticed, not explained.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Provenance",
+     "grants": "Read an object's history from wear (who used it, how, how long); estimate any collection's worth in minutes; spot a concealed item on a person by how they carry.",
+     "cannot": "History is inference — deliberate aging can fool a first read; carrying-reads need line of sight.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Nothing Hidden",
+     "grants": "One sweep of a room yields its full inventory including the concealed (GM names what's findable); appraise the priceless by structural logic; your valuation is accepted as expert in any market.",
+     "cannot": "The sweep is once per location per visit; some Precursor concealment is beyond craft.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "setup",
+   "operativeAxis": [
+    "appraisal",
+    "perceptionDepth"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read an object's HISTORY FROM WEAR — who used it, how, how long; estimate a collection's worth in minutes",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: ONE SWEEP OF A ROOM yields its FULL INVENTORY INCLUDING THE CONCEALED (once per location per visit)",
+     "from": "r3 grants — its own stated rate"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the goods — half the depth, instant",
+    "surge": "double it; EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'"
+   },
+   "bounds": [
+    {
+     "text": "EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'",
+     "class": "hard"
+    },
+    {
+     "text": "HISTORY IS INFERENCE — deliberate aging can fool a first read",
+     "class": "soft"
+    },
+    {
+     "text": "the sweep is ONCE PER LOCATION PER VISIT",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: exotic And Precursor Items Read AS 'Beyond Scale'.",
+   "_file": "valley_craft.json"
+  }
+ }
+}

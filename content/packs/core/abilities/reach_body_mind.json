@@ -383,128 +383,6 @@
    "plainly": "A survive/chase/fight action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about an hour Ranks: rank 2 extends uses; rank 3 adds to special. Limit: held Off IS Not Healed — everything deferred Arrives AT Once when you stop."
   },
   {
-   "id": "total_focus",
-   "name": "Total Focus",
-   "levelReq": 1,
-   "energyCost": 4,
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.3
-   },
-   "functions": [
-    "resist"
-   ],
-   "narrationHints": "The world narrows to the one thing, and nothing reaches you.",
-   "description": "Enter absolute focus — ignore fear, distraction, and pain to think or work clean. Folk-Noesis.",
-   "notFor": "Physical feats; wisdom.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Total Focus",
-     "grants": "Focus so completely that fear, pain, and distraction fall away while you think or work.",
-     "cannot": "Can miss the body's warnings; tight focus narrows the view.",
-     "functions": [
-      "resist"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "resist"
-     ]
-    },
-    {
-     "rank": 2,
-     "name": "The Narrowed World",
-     "grants": "Narrow to one thing so completely that fear, pain, and noise stop reaching you.",
-     "cannot": "What you narrow out is still happening. People have been focused to death.",
-     "functions": [
-      "resist"
-     ],
-     "gains": "deepen",
-     "harmRung": "none",
-     "_functionsWas": [
-      "resist"
-     ]
-    },
-    {
-     "rank": 3,
-     "name": "The Single Point",
-     "grants": "Narrow to one thing so completely that nothing else exists — not fear, not pain, not the wound you are standing on. And within that narrowing the thing opens completely: every detail of it available at once, because nothing at all is competing for the attention. The task is completed.",
-     "cannot": "You will not notice what it cost until afterward. Cogitants have finished the task and then simply fallen over.",
-     "functions": [
-      "resist"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "resist",
-      "reveal"
-     ]
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "challengeTypes": [
-    "FIGHT",
-    "PUZZLE",
-    "SURVIVE"
-   ],
-   "tradition": "cogitant",
-   "nativeOrCombination": "native",
-   "harmRung": "none",
-   "schoolAffinity": "cog_unaided",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
-   "shape": "bolster",
-   "operativeAxis": [
-    "focus",
-    "duration"
-   ],
-   "mechanic": {
-    "magnitude": 4,
-    "duration": 4
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "focus",
-     "delta": "narrow so completely that FEAR, PAIN, AND NOISE STOP REACHING YOU",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: narrow so completely that NOTHING ELSE EXISTS — not fear, not pain, NOT THE WOUND YOU ARE STANDING ON",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "narrow a little — half the focus, and you keep your peripheral sense",
-    "surge": "double it; WHAT YOU NARROW OUT IS STILL HAPPENING"
-   },
-   "bounds": [
-    {
-     "text": "it can MISS THE BODY'S WARNINGS; tight focus narrows the view",
-     "class": "hard"
-    },
-    {
-     "text": "WHAT YOU NARROW OUT IS STILL HAPPENING — people have been focused to death",
-     "class": "hard"
-    },
-    {
-     "text": "YOU WILL NOT NOTICE WHAT IT COST UNTIL AFTERWARD",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A fight/puzzle/survive action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens focus; rank 3 adds to special. Limit: it can Miss The Body'S Warnings; tight focus narrows the view.",
-   "_functionsWas": [
-    "resist",
-    "reveal"
-   ],
-   "_strip": "⛔ SNG-453: incidental `reveal`/`foresee` stripped — the perceiving is the setup step, not the effect."
-  },
-  {
    "id": "perfect_motion",
    "name": "Perfect Motion",
    "levelReq": 2,
@@ -1425,38 +1303,41 @@
     "resist"
    ],
    "narrationHints": "Everything they throw at your thoughts slides off a stillness that was there before they arrived and will be there after they tire. You did not brace. You were simply already still.",
-   "description": "Enter a stillness nothing can move — fear, deception and the fastest attack all slide off it. You read everything and grant nothing. The Cogitant art of mushin.",
+   "description": "Enter a stillness nothing can move — fear, pain, deception and the fastest attack all slide off it, and you keep reading the room while they try.",
    "notFor": "It is defense and clarity, never force — you cannot strike with stillness, only see and endure. And a mind held perfectly still holds nothing else; while you are unmoving you are only unmoving.",
    "tree": [
     {
      "rank": 1,
-     "name": "The Unmoving Mind",
-     "grants": "Enter a perfect mental stillness — immune to fear, deception, and disruption, reading all with total clarity.",
-     "cannot": "It grants no offense, only the unshakeable read; it occupies you wholly to hold; and a stillness this deep can look, to those who love you, like you have gone somewhere they cannot follow.",
-     "functions": [
-      "resist"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "resist",
-      "reveal"
-     ]
-    },
-    {
-     "rank": 2,
-     "name": "The Moving Stillness",
-     "grants": "The stillness no longer occupies you wholly — hold it while fighting, walking, negotiating, and the clarity holds with it. And it reaches past you: those who stand with you and trust you are steadied by proximity, and do not break when they should.",
-     "cannot": "Extending it thins it — the more you shelter, the less clearly you read. It still grants no offense at any depth. And those sheltered feel the flinch you are not having, which more than one person has found worse than their own fear.",
+     "name": "The Still Mind",
+     "grants": "Enter a stillness fear, pain and distraction do not reach. You think and work clean while the room comes apart.",
+     "cannot": "⚠️ It occupies you — entering it means standing still and doing one thing.",
      "functions": [
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none",
-     "_functionsWas": [
-      "resist",
-      "reveal"
-     ]
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Stillness While Moving",
+     "grants": "⛔ ADDS ACTING. Hold it while fighting, walking, negotiating or climbing — the clarity comes with you instead of costing you the scene.",
+     "cannot": "You are calm, not faster. It does not help you win, only stop losing to yourself.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Nothing Lands",
+     "grants": "⚠️ ADDS DECEPTION AND DISRUPTION. Not only fear and pain now — a lie, a feint, a shock or a working meant to unseat you slides off, and you read it as it fails.",
+     "cannot": "⛔ A true thing you cannot bear is still true. This turns aside what is AIMED at you, not what is so.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
     }
    ],
    "gated": "learned",
@@ -1514,7 +1395,40 @@
     "resist",
     "reveal"
    ],
-   "_strip": "⛔ SNG-453: incidental `reveal`/`foresee` stripped — the perceiving is the setup step, not the effect."
+   "_strip": "⛔ SNG-453: incidental `reveal`/`foresee` stripped — the perceiving is the setup step, not the effect.",
+   "_treeWas": [
+    {
+     "rank": 1,
+     "name": "The Unmoving Mind",
+     "grants": "Enter a perfect mental stillness — immune to fear, deception, and disruption, reading all with total clarity.",
+     "cannot": "It grants no offense, only the unshakeable read; it occupies you wholly to hold; and a stillness this deep can look, to those who love you, like you have gone somewhere they cannot follow.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_functionsWas": [
+      "resist",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "name": "The Moving Stillness",
+     "grants": "The stillness no longer occupies you wholly — hold it while fighting, walking, negotiating, and the clarity holds with it. And it reaches past you: those who stand with you and trust you are steadied by proximity, and do not break when they should.",
+     "cannot": "Extending it thins it — the more you shelter, the less clearly you read. It still grants no offense at any depth. And those sheltered feel the flinch you are not having, which more than one person has found worse than their own fear.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "_functionsWas": [
+      "resist",
+      "reveal"
+     ]
+    }
+   ],
+   "_merged": "⛔ SNG-457: MERGES Total Focus (L1, e4) — whose three ranks were one sentence with intensifiers: 'fear, pain and distraction fall away' → 'stop reaching you' → 'nothing else exists'. ⚠️ THE UNMOVING MIND'S r2 WAS THE ONLY REAL ADVANCE IN EITHER — 'hold it while fighting, walking, negotiating' — and it had only two ranks. One skill now, and each rank adds a thing: stillness → stillness while acting → deception slides off too."
   },
   {
    "schemaVersion": 1,

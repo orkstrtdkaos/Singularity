@@ -410,11 +410,15 @@
      "cannot": "It needs a frame they would plausibly accept; a picture that contradicts what they can plainly check collapses and takes your credibility with it. And the longer it is held, the more of it must be maintained — a Verist who tugs one loose thread gets the whole of it.",
      "functions": [
       "deceive",
-      "hinder",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "deceive",
+      "hinder",
+      "strike"
+     ]
     },
     {
      "rank": 3,
@@ -423,11 +427,15 @@
      "cannot": "Nothing further; this is the craft's ceiling; IT NEEDS A FRAME THEY WOULD PLAUSIBLY ACCEPT; and it still costs what it costs: they acted CORRECTLY BY THEIR LIGHTS.",
      "functions": [
       "deceive",
-      "hinder",
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "deceive",
+      "hinder",
+      "strike"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -471,7 +479,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A combat/social/tactical action that weakens or restricts a target. Its strength is rated 4 out of 10, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: iT Needs A Frame They Would Plausibly Accept — a picture that contradicts what they know fails."
+   "plainly": "A combat/social/tactical action that weakens or restricts a target. Its strength is rated 4 out of 10, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: iT Needs A Frame They Would Plausibly Accept — a picture that contradicts what they know fails.",
+   "_functionsWas": [
+    "deceive",
+    "hinder",
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_better_story",
@@ -1296,11 +1310,14 @@
      "grants": "Speak truth plainly into a situation of equivocation — the accurate account breaks what comfortable vagueness was protecting.",
      "cannot": "Anything rank 3 adds — in a room where you have always been right, your word on a new matter is the word — the weight of a perfect record on past facts carries into the present one; A PERFECT RECORD IS A THING YOU CAN LOSE EXACTLY ONCE.",
      "functions": [
-      "command",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "command",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -1308,11 +1325,14 @@
      "grants": "In a room where you have always been right, your word on a new matter is the word — the weight of a perfect record on past facts carries into the present one.",
      "cannot": "Nothing further; this is the craft's ceiling; A PERFECT RECORD IS A THING YOU CAN LOSE EXACTLY ONCE.",
      "functions": [
-      "command",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "command",
+      "break"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1355,7 +1375,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/leadership/negotiation action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: a Perfect Record IS A Thing You Can Lose Exactly Once."
+   "plainly": "A social/leadership/negotiation action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: a Perfect Record IS A Thing You Can Lose Exactly Once.",
+   "_functionsWas": [
+    "break",
+    "command"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_direct_path",
@@ -1870,8 +1895,8 @@
     "falsehood_truth": -0.8
    },
    "functions": [
-    "deceive",
     "bind",
+    "deceive",
     "strike"
    ],
    "narrationHints": "Nobody kills them. It is simply that after a while there is no longer anyone there to be.",
@@ -1897,11 +1922,15 @@
      "cannot": "Undoing it later — a name given back is not a life given back.",
      "functions": [
       "deceive",
-      "bind",
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "deceive",
+      "bind",
+      "strike"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1957,7 +1986,13 @@
     "interruptible": true,
     "onInterrupt": "⚠️ THE WHOLE WORKING BREAKS — anyone who restores one record ends it",
     "note": "⚠️ ATTENDED: FALSE. You do not sit with an erasure; you live as them and the records rot on their own. That is what makes it 90 days a player can spend elsewhere — and what makes the counterplay real, since it is answerable the entire time by someone who was never watching you."
-   }
+   },
+   "_functionsWas": [
+    "deceive",
+    "bind",
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_wrong_wound",
@@ -1971,8 +2006,9 @@
     "violence_peace": -0.2
    },
    "functions": [
-    "strike",
-    "deceive"
+    "conceal",
+    "deceive",
+    "strike"
    ],
    "narrationHints": "They flinch from the blow that isn't coming and meet the one that is. The wound is ordinary; the LIE is what put it where it landed. A knife, a stone, a fist — the craft is in the guard you moved.",
    "description": "Sell a feint with your whole body — a glance, a shifted weight, a half-drawn weapon on the wrong side — and their defence goes where you sent it, so your next blow lands unopposed. The Veilwrights' first offense: the wound is ordinary, the LIE put it there.",
@@ -1997,11 +2033,15 @@
      "cannot": "A crowd is harder than a person and the lie must be BIG, which means witnesses remember it. Anyone who has seen you work is no longer easy to sell.",
      "functions": [
       "strike",
-      "deceive",
-      "hinder"
+      "deceive"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "deceive",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -2011,11 +2051,16 @@
      "functions": [
       "strike",
       "deceive",
-      "hinder",
       "conceal"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "deceive",
+      "hinder",
+      "conceal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2061,7 +2106,12 @@
    "conserveSuppresses": "a small feint — if it is read, you have lost only the beat",
    "backlashRung": "damaging",
    "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
-   "_descriptionWas": "The Veilwrights' first offense: the strike itself is mundane, and it connects because you spent the moment before it telling a small, physical lie."
+   "_descriptionWas": "The Veilwrights' first offense: the strike itself is mundane, and it connects because you spent the moment before it telling a small, physical lie.",
+   "_functionsWas": [
+    "strike",
+    "deceive"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_unbearable_word",
@@ -2076,7 +2126,6 @@
    },
    "functions": [
     "break",
-    "hinder",
     "strike"
    ],
    "narrationHints": "You say the true thing they have been arranging their life around not hearing, and they come apart where they stand. No volume. Often quite gentle. It is the accuracy that does it.",
@@ -2104,14 +2153,12 @@
      "grants": "Say it where it will be heard by the people whose opinion holds them up. Standing, command, and authority go with it.",
      "cannot": "You have done this to their whole life, not their afternoon. Bystanders who liked them will not forgive you for being right.",
      "functions": [
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_functionsWas": [
       "strike",
-      "reveal",
       "hinder"
      ]
     },
@@ -2122,14 +2169,12 @@
      "cannot": "This is a rung above a wound. Some who take it never come back, and the Verists' own tradition holds you answerable for what you knew when you said it.",
      "functions": [
       "strike",
-      "hinder",
       "break"
      ],
      "gains": "deepen",
      "harmRung": "incapacitating",
      "_functionsWas": [
       "strike",
-      "reveal",
       "hinder",
       "break"
      ]
@@ -2181,10 +2226,12 @@
    "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
    "_descriptionWas": "The Verists' first offense, and the one with a price built into it: the blow is a fact, so it cannot be withdrawn, disproved, or forgotten by anyone who heard it.",
    "_functionsWas": [
-    "strike",
-    "reveal"
+    "break",
+    "hinder",
+    "strike"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_ordinary_face",

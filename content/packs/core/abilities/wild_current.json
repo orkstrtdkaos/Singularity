@@ -309,7 +309,6 @@
     "appetite_judgement": -0.8
    },
    "functions": [
-    "bind",
     "strike"
    ],
    "narrationHints": "There is no violence in it. There is a debt, and a date, and the date arrives.",
@@ -322,11 +321,14 @@
      "grants": "BIND the named price and collect it — a life pledged against a struck bargain. The collection strikes the pledged party wherever they stand, and a life pledged is a life ended. It arrives however it arrives.",
      "cannot": "Any debt not actually incurred. Choosing the manner.",
      "functions": [
-      "bind",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "bind",
+      "strike"
+     ]
     },
     {
      "rank": 2,
@@ -334,11 +336,14 @@
      "grants": "BIND it across distance and time — neither of you needs to be present when it closes.",
      "cannot": "Being elsewhere as an alibi: everyone knows who held the account.",
      "functions": [
-      "bind",
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "bind",
+      "strike"
+     ]
     }
    ],
    "challengeTypes": [
@@ -389,7 +394,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "Not an attack you can open with. It requires a previously recorded bargain in which a life was the named price; without one the engine refuses it. When invoked it deals 4d6 plus 2 and the target gets no defence, because the debt was already agreed. At rank 2 neither party needs to be present. Everyone learns who held the account — it is never deniable."
+   "plainly": "Not an attack you can open with. It requires a previously recorded bargain in which a life was the named price; without one the engine refuses it. When invoked it deals 4d6 plus 2 and the target gets no defence, because the debt was already agreed. At rank 2 neither party needs to be present. Everyone learns who held the account — it is never deniable.",
+   "_functionsWas": [
+    "bind",
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "schemaVersion": 1,

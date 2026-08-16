@@ -41,11 +41,15 @@
      "cannot": "Cannot lift (only push); two targets max; fails in heavy interference without a check.",
      "functions": [
       "move",
-      "break",
-      "bind"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "break",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -55,15 +59,19 @@
      "functions": [
       "move",
       "break",
-      "bind",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "move",
+      "break",
+      "bind",
+      "strike"
+     ]
     }
    ],
    "functions": [
-    "bind",
     "break",
     "move",
     "strike"
@@ -143,7 +151,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/puzzle action that deals damage. It rolls 1d6 It affects 1 target. Range is 10. Ranks: rank 2 extends targets+duration; rank 3 adds to special. Limit: no effect through solid stone."
+   "plainly": "A fight/puzzle action that deals damage. It rolls 1d6 It affects 1 target. Range is 10. Ranks: rank 2 extends targets+duration; rank 3 adds to special. Limit: no effect through solid stone.",
+   "_functionsWas": [
+    "bind",
+    "break",
+    "move",
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "resonant_shield",

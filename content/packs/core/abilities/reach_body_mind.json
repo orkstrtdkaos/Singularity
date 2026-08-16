@@ -831,7 +831,9 @@
       "reveal"
      ],
      "grants": "⛔ SEARCH WHAT YOU HAVE ATTENDED TO IN RECENT WEEKS AND FIND THE MATCH — the face at this gate was at that funeral, the same hand signed both ledgers, this phrase was in a letter you read.",
-     "cannot": "Only what you ATTENDED to, and only weeks back. Background you did not look at was never stored."
+     "cannot": "Only what you ATTENDED to, and only weeks back. Background you did not look at was never stored.",
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
      "rank": 2,
@@ -840,7 +842,9 @@
       "reveal"
      ],
      "grants": "⚠️ ADDS DEPTH OF TIME. The search runs across your entire life — childhood, the war, a road you walked once twenty years ago — and returns it whole: tone, order, who said what, and what was not said.",
-     "cannot": "Still only your own attending. A long search takes a quiet minute you may not have."
+     "cannot": "Still only your own attending. A long search takes a quiet minute you may not have.",
+     "gains": "deepen",
+     "harmRung": "none"
     },
     {
      "rank": 3,
@@ -850,7 +854,9 @@
       "track"
      ],
      "grants": "⛔ ADDS SOMEONE ELSE. Enter a willing — or unresisting — mind and search THEIR memory the same way. The dying man's last road, the witness who saw it and cannot say it, the prisoner who does not know what they know.",
-     "cannot": "⚠️ A RESISTING MIND CAN REFUSE, and a hostile one costs you. You get what THEY attended to, including what they were wrong about."
+     "cannot": "⚠️ A RESISTING MIND CAN REFUSE, and a hostile one costs you. You get what THEY attended to, including what they were wrong about.",
+     "gains": "broaden",
+     "harmRung": "none"
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -1227,7 +1233,9 @@
       "make"
      ],
      "grants": "⛔ ONE ITEM, OR A SPACE YOU CAN STAND IN AND SEE. A lock, a brace, a splint, a door, a cart-repair, a small room re-laid. You need no plan and you waste no material.",
-     "cannot": "One object or one small space at a time. You must be able to examine it."
+     "cannot": "One object or one small space at a time. You must be able to examine it.",
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
      "rank": 2,
@@ -1237,7 +1245,9 @@
       "mend"
      ],
      "grants": "⚠️ ADDS SYSTEMS AND COMPOUNDS. A machine with parts that move against each other, a building, a body, a workshop yard — anything whose pieces have to agree. Diagnose its faults and redesign it from the inside.",
-     "cannot": "You must have access to the whole of it; a system half-hidden is modelled half-wrong."
+     "cannot": "You must have access to the whole of it; a system half-hidden is modelled half-wrong.",
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
      "rank": 3,
@@ -1247,7 +1257,9 @@
       "mend"
      ],
      "grants": "⛔ ADDS COMPLEXITY AND DISTRICT SCALE. A mill and its race, a fortification and its approaches, a quarter's drainage. Held entire, and rebuilt entire.",
-     "cannot": "One such working at a time, and you must be able to get around the whole of it."
+     "cannot": "One such working at a time, and you must be able to get around the whole of it.",
+     "gains": "broaden",
+     "harmRung": "none"
     }
    ],
    "nativeOrCombination": "native",
@@ -2157,5 +2169,6 @@
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json."
+ "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json.",
+ "_schemaFix2": "⛔ SNG-452: gains/harmRung restored on ranks I replaced wholesale during batch 1 — replacing a tree dropped fields I had not read."
 }

@@ -817,51 +817,40 @@
     "concrete_abstract": 0.3
    },
    "functions": [
-    "foresee",
-    "restore",
-    "reveal"
+    "reveal",
+    "track"
    ],
-   "narrationHints": "Vast knowledge held in a built inner architecture, retrieved instantly.",
-   "description": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
+   "narrationHints": "They go still and their eyes track across nothing, left to right, like someone reading. Then they tell you where they have seen that man before.",
+   "description": "Search your own memory the way you would search a library — cross-reference a face, a hand, a phrase against everything you have ever attended to, and find the match.",
    "notFor": "Wisdom; presence in the body it forgets.",
    "tree": [
     {
      "rank": 1,
-     "name": "Memory-Palace",
-     "grants": "Store and recall huge structured knowledge; model and predict a system or person in your head.",
-     "cannot": "Only as good as its inputs; living in the model loses the room.",
+     "name": "The Near Rooms",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
-     "gains": "broaden",
-     "harmRung": "none"
+     "grants": "⛔ SEARCH WHAT YOU HAVE ATTENDED TO IN RECENT WEEKS AND FIND THE MATCH — the face at this gate was at that funeral, the same hand signed both ledgers, this phrase was in a letter you read.",
+     "cannot": "Only what you ATTENDED to, and only weeks back. Background you did not look at was never stored."
     },
     {
      "rank": 2,
-     "name": "The Deeper Rooms",
-     "grants": "Store not just facts but experiences whole — walk back into a conversation and hear it again exactly.",
-     "cannot": "What you store, you keep. Including what you would rather have let fade.",
+     "name": "The Whole House",
      "functions": [
-      "reveal",
-      "foresee",
-      "restore"
+      "reveal"
      ],
-     "gains": "broaden",
-     "harmRung": "none"
+     "grants": "⚠️ ADDS DEPTH OF TIME. The search runs across your entire life — childhood, the war, a road you walked once twenty years ago — and returns it whole: tone, order, who said what, and what was not said.",
+     "cannot": "Still only your own attending. A long search takes a quiet minute you may not have."
     },
     {
      "rank": 3,
-     "name": "The Palace Entire",
-     "grants": "Nothing you have attended to is lost. The whole of your life is a place you can walk through.",
-     "cannot": "The Cogitants who build the deepest palaces have trouble leaving them.",
+     "name": "The Borrowed Room",
      "functions": [
       "reveal",
-      "foresee",
-      "restore"
+      "track"
      ],
-     "gains": "deepen",
-     "harmRung": "none"
+     "grants": "⛔ ADDS SOMEONE ELSE. Enter a willing — or unresisting — mind and search THEIR memory the same way. The dying man's last road, the witness who saw it and cannot say it, the prisoner who does not know what they know.",
+     "cannot": "⚠️ A RESISTING MIND CAN REFUSE, and a hostile one costs you. You get what THEY attended to, including what they were wrong about."
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -919,7 +908,49 @@
      "class": "cost"
     }
    ],
-   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 6 out of 10, and lasts for about 12 months Ranks: rank 2 deepens recallDepth; rank 3 adds to special. Limit: only AS Good AS Its Inputs — living in the model loses the room."
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 6 out of 10, and lasts for about 12 months Ranks: rank 2 deepens recallDepth; rank 3 adds to special. Limit: only AS Good AS Its Inputs — living in the model loses the room.",
+   "_treeWas": [
+    {
+     "rank": 1,
+     "name": "Memory-Palace",
+     "grants": "Store and recall huge structured knowledge; model and predict a system or person in your head.",
+     "cannot": "Only as good as its inputs; living in the model loses the room.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Deeper Rooms",
+     "grants": "Store not just facts but experiences whole — walk back into a conversation and hear it again exactly.",
+     "cannot": "What you store, you keep. Including what you would rather have let fade.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Palace Entire",
+     "grants": "Nothing you have attended to is lost. The whole of your life is a place you can walk through.",
+     "cannot": "The Cogitants who build the deepest palaces have trouble leaving them.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "restore"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "_descriptionWas": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
+   "_revised": "⛔ SNG-450, REBUILT TWICE. Erik first: 'I'm not even sure what Memory Palace does for an ADVENTURER' — it was a faculty, not a tool. Then: 'r3 IS THE FUNCTIONAL USE — MAKE THAT THE THEME OF THE SKILL, with ranking up being FURTHER BACK IN TIME and then RECALLING SOMEONE ELSE'S MEMORY.'\n⚠️ SO SEARCH IS THE WHOLE SKILL AND THE RANKS EXTEND ITS REACH: recent → your whole life → ANOTHER PERSON'S. ⛔ THE LAST RANK MAKES IT A PSIONIC CRAFT RATHER THAN A GOOD MEMORY, which is what a Mind capstone should be."
   },
   {
    "id": "the_whole_act",
@@ -1174,15 +1205,14 @@
     "analyze",
     "precision"
    ],
-   "narrationHints": "Think it through until it builds itself. A plan become a blueprint become a thing.",
-   "description": "You can think a thing into existence — model it so completely in your mind that the making is just following the thought.",
+   "narrationHints": "They stand still for a long moment doing nothing visible, and then work without pausing once, and there are no offcuts.",
+   "description": "Model a thing so completely in your head that the making is only following the thought — and build it faster and truer than your tools should allow.",
    "notFor": [],
    "tradition": "cogitant",
    "harmRung": "none",
    "functions": [
     "make",
-    "mend",
-    "reveal"
+    "mend"
    ],
    "challengeTypes": [
     "craft",
@@ -1192,41 +1222,32 @@
    "tree": [
     {
      "rank": 1,
-     "name": "Blueprint",
-     "grants": "Think through a construction or modification so precisely that the making is near-guaranteed, even with inferior tools; identify exactly what you need before you touch anything.",
-     "cannot": "Anything rank 2 adds — build a mental model of a complex system — a machine, a building, a body — complete enough to diagnose its faults and redesign its structure from the inside out; the model is NOT THE THING.",
+     "name": "The Single Thing",
      "functions": [
-      "reveal",
       "make"
      ],
-     "gains": "broaden",
-     "harmRung": "none"
+     "grants": "⛔ ONE ITEM, OR A SPACE YOU CAN STAND IN AND SEE. A lock, a brace, a splint, a door, a cart-repair, a small room re-laid. You need no plan and you waste no material.",
+     "cannot": "One object or one small space at a time. You must be able to examine it."
     },
     {
      "rank": 2,
-     "name": "The Complete Model",
-     "grants": "Build a mental model of a complex system — a machine, a building, a body — complete enough to diagnose its faults and redesign its structure from the inside out.",
-     "cannot": "Anything rank 3 adds — a thing you have modeled completely you can build with uncanny precision and speed — faster and more accurately than available materials or tools should allow; the model is NOT THE THING.",
+     "name": "The Whole Working",
      "functions": [
-      "reveal",
       "make",
       "mend"
      ],
-     "gains": "broaden",
-     "harmRung": "none"
+     "grants": "⚠️ ADDS SYSTEMS AND COMPOUNDS. A machine with parts that move against each other, a building, a body, a workshop yard — anything whose pieces have to agree. Diagnose its faults and redesign it from the inside.",
+     "cannot": "You must have access to the whole of it; a system half-hidden is modelled half-wrong."
     },
     {
      "rank": 3,
-     "name": "Think-Built",
-     "grants": "A thing you have modeled completely you can build with uncanny precision and speed — faster and more accurately than available materials or tools should allow.",
-     "cannot": "Nothing further; this is the craft's ceiling; the model is NOT THE THING.",
+     "name": "The Modelled Country",
      "functions": [
-      "reveal",
       "make",
       "mend"
      ],
-     "gains": "deepen",
-     "harmRung": "none"
+     "grants": "⛔ ADDS COMPLEXITY AND DISTRICT SCALE. A mill and its race, a fortification and its approaches, a quarter's drainage. Held entire, and rebuilt entire.",
+     "cannot": "One such working at a time, and you must be able to get around the whole of it."
     }
    ],
    "nativeOrCombination": "native",
@@ -1272,242 +1293,49 @@
      "class": "soft"
     }
    ],
-   "plainly": "A craft/technical/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: the model is Not The Thing — reality has details your model omitted."
-  },
-  {
-   "id": "the_necessary_case",
-   "name": "The Necessary Case",
-   "levelReq": 3,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.4,
-    "concrete_abstract": 0.3
-   },
-   "effectTags": [
-    "argument",
-    "logic",
-    "pressure"
-   ],
-   "narrationHints": "Not persuasion. Demonstration. The conclusion is the only place the logic goes.",
-   "description": "You present a case so airtight that refusal becomes irrational. Not manipulation — proof. The other person can disagree, but they cannot explain why.",
-   "notFor": [],
-   "tradition": "cogitant",
-   "harmRung": "none",
-   "functions": [
-    "bind",
-    "command",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "social",
-    "intellectual",
-    "negotiation"
-   ],
-   "tree": [
+   "plainly": "A craft/technical/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: the model is Not The Thing — reality has details your model omitted.",
+   "_treeWas": [
     {
      "rank": 1,
-     "name": "Closed Argument",
-     "grants": "Present a case so logically complete that the other person cannot find a gap — not because you've overwhelmed them, but because there isn't one.",
-     "cannot": "Anything rank 2 adds — show that a conclusion follows so inevitably that the person cannot act against it without explaining why — and you can dismantle whatever they offer; IT PERSUADES BY BEING RIGHT.",
+     "name": "Blueprint",
+     "grants": "Think through a construction or modification so precisely that the making is near-guaranteed, even with inferior tools; identify exactly what you need before you touch anything.",
+     "cannot": "Anything rank 2 adds — build a mental model of a complex system — a machine, a building, a body — complete enough to diagnose its faults and redesign its structure from the inside out; the model is NOT THE THING.",
      "functions": [
-      "reveal"
+      "reveal",
+      "make"
      ],
      "gains": "broaden",
      "harmRung": "none"
     },
     {
      "rank": 2,
-     "name": "Demonstrated Necessity",
-     "grants": "Show that a conclusion follows so inevitably that the person cannot act against it without explaining why — and you can dismantle whatever they offer.",
-     "cannot": "Anything rank 3 adds — make the logic of a situation so visible that a group reorganizes around it — not because you commanded them, but because the structure of the situation leaves no other rational position; IT PERSUADES BY BEING RIGHT.",
+     "name": "The Complete Model",
+     "grants": "Build a mental model of a complex system — a machine, a building, a body — complete enough to diagnose its faults and redesign its structure from the inside out.",
+     "cannot": "Anything rank 3 adds — a thing you have modeled completely you can build with uncanny precision and speed — faster and more accurately than available materials or tools should allow; the model is NOT THE THING.",
      "functions": [
       "reveal",
-      "bind"
+      "make",
+      "mend"
      ],
      "gains": "broaden",
      "harmRung": "none"
     },
     {
      "rank": 3,
-     "name": "The Only Conclusion",
-     "grants": "Make the logic of a situation so visible that a group reorganizes around it — not because you commanded them, but because the structure of the situation leaves no other rational position.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT PERSUADES BY BEING RIGHT; and it still costs what it costs: a person cornered by logic is still A CORNERED PERSON.",
+     "name": "Think-Built",
+     "grants": "A thing you have modeled completely you can build with uncanny precision and speed — faster and more accurately than available materials or tools should allow.",
+     "cannot": "Nothing further; this is the craft's ceiling; the model is NOT THE THING.",
      "functions": [
       "reveal",
-      "bind",
-      "command"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    }
-   ],
-   "nativeOrCombination": "native",
-   "schoolAffinity": "cog_reaching",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
-   "shape": "bolster",
-   "operativeAxis": [
-    "persuasion",
-    "scope"
-   ],
-   "mechanic": {
-    "magnitude": 6,
-    "duration": 4,
-    "scope": 2
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "persuasion",
-     "delta": "show that a conclusion FOLLOWS SO INEVITABLY that the person cannot act against it WITHOUT EXPLAINING WHY",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: make the logic of a situation SO VISIBLE THAT A GROUP REORGANIZES AROUND IT — not because you commanded them, but because they can all see it",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "make the argument — half the force, and it invites disagreement",
-    "surge": "double it; a person cornered by logic is still a cornered person"
-   },
-   "bounds": [
-    {
-     "text": "IT PERSUADES BY BEING RIGHT — a flawed case gains nothing from this craft",
-     "class": "hard"
-    },
-    {
-     "text": "it works by BEING RIGHT — a flawed case gains nothing, and a cornered mind can still refuse the conclusion at a cost to itself",
-     "class": "soft"
-    },
-    {
-     "text": "a person cornered by logic is still A CORNERED PERSON",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A social/intellectual/negotiation action that strengthens someone. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens persuasion; rank 3 adds to special. Limit: iT Persuades BY Being Right — a flawed case gains nothing from this craft."
-  },
-  {
-   "id": "the_clear_path",
-   "name": "The Clear Path",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.3,
-    "space_time": 0.2
-   },
-   "effectTags": [
-    "navigation",
-    "prediction",
-    "movement"
-   ],
-   "narrationHints": "The gap is there before you look. The model says where to step.",
-   "description": "Navigate by modeling everything — obstacles, crowd, guard rotation — before you move a foot. The path is solved before it is walked.",
-   "notFor": [],
-   "tradition": "cogitant",
-   "harmRung": "none",
-   "functions": [
-    "foresee",
-    "move",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "navigation",
-    "stealth",
-    "tactical"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Modeled Route",
-     "grants": "Find the quickest, safest route through any observable space — crowd, ruin, wilderness — by calculating rather than feeling your way.",
-     "cannot": "Anything rank 2 adds — move through a dynamic space without friction by staying two steps ahead of everyone in it — the guard, the crowd, the chaos; it CALCULATES rather than feels.",
-     "functions": [
-      "reveal",
-      "move"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "Anticipatory Movement",
-     "grants": "Move through a dynamic space without friction by staying two steps ahead of everyone in it — the guard, the crowd, the chaos.",
-     "cannot": "Anything rank 3 adds — in a space you understand, you move as if you designed the whole scene — every obstacle parts, every gap opens, every opening appears the instant you need it; it CALCULATES rather than feels.",
-     "functions": [
-      "reveal",
-      "move",
-      "foresee"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "The Written Choreography",
-     "grants": "In a space you understand, you move as if you designed the whole scene — every obstacle parts, every gap opens, every opening appears the instant you need it.",
-     "cannot": "Nothing further; this is the craft's ceiling; it CALCULATES rather than feels.",
-     "functions": [
-      "reveal",
-      "move",
-      "foresee"
+      "make",
+      "mend"
      ],
      "gains": "deepen",
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native",
-   "schoolAffinity": "cog_instrumented",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
-   "shape": "reposition",
-   "operativeAxis": [
-    "navigation",
-    "range"
-   ],
-   "mechanic": {
-    "range": 12,
-    "push": 0,
-    "magnitude": 4,
-    "duration": 3
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "navigation",
-     "delta": "move through a DYNAMIC space without friction by STAYING TWO STEPS AHEAD of everyone in it",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: in a space you understand, you move AS IF YOU DESIGNED THE WHOLE SCENE",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "a calculated route — half the advantage, and it costs nothing",
-    "surge": "double it; calculating a crowd means you are not FEELING the crowd, and crowds do surprising things"
-   },
-   "bounds": [
-    {
-     "text": "it CALCULATES rather than feels — a space that behaves unreasonably defeats it",
-     "class": "hard"
-    },
-    {
-     "text": "it requires an OBSERVABLE space",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A navigation/stealth/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it Calculates rather than feels — a space that behaves unreasonably defeats it."
+   "_descriptionWas": "You can think a thing into existence — model it so completely in your mind that the making is just following the thought.",
+   "_revised": "⛔ SNG-450. Erik: 'I agree on the working model — but I LIKE that skill. Its rank progression should be r1 A SINGLE ITEM OR SMALL AREA, r2 A SINGLE SYSTEM OR COMPOUND/AREA, r3 COMPLEX SYSTEM AND LARGE AREA.' ⚠️ The old arc added only adverbs — 'near-guaranteed' → 'complex system' → 'uncanny precision and speed', which is r1 again, faster. THE NEW ARC IS SCOPE, and scope is legible at the table. `reveal` stripped: the modelling is HOW it makes, not a separate perception. ⚠️ ERIK: 'NO to the cost' on r3. Removed."
   },
   {
    "id": "the_long_form",
@@ -2328,5 +2156,6 @@
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
- "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
+ "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json."
 }

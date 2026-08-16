@@ -38,7 +38,7 @@ import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive }
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -97,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.158";
+const APP_VERSION = "1.9.159";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -281,7 +281,7 @@ function showWhoIs(known) {
       // about fame and came back as the same person. Feed the portrait what a portrait needs: an authored
       // appearance if one exists, the figure's PEOPLE if not (SNG-367's layer, which reached the NPC path
       // and not this one), and the role as what they DO rather than as what they look like.
-      const aesW = known.tradition ? (CONTENT.traditionVisualAesthetics?.[known.tradition] || null) : null;
+      const aesW = aestheticFor(known, CONTENT.visualAesthetics);   // SNG-435 §C3
       // ⛔ SNG-399b — A DEAD FIGURE IS DRAWN FROM THEIR AUTHORED DEATH, NOT THEIR LIFE. Erik: "some
       // characters are dying… I thought that was supposed to trigger a battle scene image?" The prompt is
       // a STRING Aevi wrote, not a URL, and it is preferred over the living portrait the moment the world
@@ -787,10 +787,7 @@ async function battleImageFor(item) {
   const place = item.locationId ? (CONTENT.locations?.[item.locationId]?.name || "")
     : String(item.regionId || item.arcId || "").replace(/^arc_/, "").replace(/_/g, " ");
   const depth = character.worldState?.epicStatus?.[loserId]?.deathRoad?.depth ?? 0;
-  // SNG-435 §C1: the registry of category shapes rides in from content, so `shape: "damage"` yields the
-  // ability's own narrationHints instead of "damage, attack, precise".
-  const built = buildBattlePrompt({ victim, killer, ability, place, depth, outcome,
-                                   categoryShapes: CONTENT.rules?.visualVocabulary?.categoryShapes || null });
+  const built = buildBattlePrompt({ victim, killer, ability, place, depth, outcome });
   // ⛔ CCODE-190 — COMPOSE BEFORE THE FLOORS, NEVER AFTER. The floors append the ceiling tone and the house
   // style; composing on top of them would let the model compress away the very clauses they exist to add.
   // The builder still owns WHICH fields are in the picture; this only turns its list into a line.
@@ -1024,7 +1021,7 @@ function codexTopImage(open) {
         descriptionSeed: isPlace ? (open.facts || [])[0] || open.label : undefined },
       isPlace ? "location" : "npc",
       { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false,
-        promptOpts: { aesthetic: fig?.tradition ? (CONTENT.traditionVisualAesthetics?.[fig.tradition] || null) : null, keeps: keepsForSubject("figure", artSeed) } });
+        promptOpts: { aesthetic: aestheticFor(fig, CONTENT.visualAesthetics), keeps: keepsForSubject("figure", artSeed) } });   // SNG-435 §C3
     if (!url) return "";
     return `<img class="codex-top-art" src="${esc(url)}" alt="${esc(open.label)}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(artSeed)}" loading="lazy" title="Open it — draw again, or keep this look">`;
   } catch { return ""; }   // a face is never worth breaking the page for
@@ -1101,7 +1098,7 @@ const REGEN_KINDS = {
     // Radiant based skill!" The FIRST mint passes the craft's tradition; this entry had no promptOpts at
     // all, so a RE-ROLL dropped it — losing both the "rendered in the aesthetic of…" clause and the style
     // wrapper, and falling back to the house palette. A Radiant craft was being drawn in muted earth tones.
-    promptOpts: rec => ({ aesthetic: rec ? (CONTENT.traditionVisualAesthetics?.[abilityTradition(rec) || rec.tradition] || null) : null }),
+    promptOpts: rec => ({ aesthetic: rec ? aestheticFor({ tradition: abilityTradition(rec) || rec.tradition, powerSystem: rec.powerSystem }, CONTENT.visualAesthetics) : null }),   // SNG-435 §C3
     keep: (id, url) => { character.abilityImages = character.abilityImages || {}; character.abilityImages[id] = url; return true; }
   },
   // No record behind these — the gallery tile IS the record, so keeping one is keeping the tile.

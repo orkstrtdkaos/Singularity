@@ -15261,8 +15261,16 @@ await (async () => {
   const srcA181 = readFileSync(join(root, "app.js"), "utf8");
   // Erik on Dawn Surgery: a Radiant craft came back in muted earth tones because the RE-ROLL carried no
   // tradition — the first mint passed one, this entry had no promptOpts at all.
-  check("CCODE-182: a CRAFT keeps its people on a re-roll (its tradition drives prompt and style alike)",
-    /promptOpts: rec => \(\{ aesthetic: rec \? \(CONTENT\.traditionVisualAesthetics\?\.\[abilityTradition\(rec\) \|\| rec\.tradition\]/.test(srcA181));
+  // ⚠️ SNG-435 §C3 REWROTE THIS. It was a source regex pinned to `CONTENT.traditionVisualAesthetics[...]`
+  // and went red the moment six hand-rolled lookups became one resolver — the spelling moved, the claim did
+  // not. The claim is that a re-roll of a craft still comes back in that craft's own colours, and it is
+  // stronger now: it keeps its people where there is one, and its PHYSICS where there is not.
+  check("CCODE-182: a CRAFT keeps its people on a re-roll (its own colours drive prompt and style alike)", (() => {
+    const wired = /promptOpts: rec => \(\{ aesthetic: rec \? aestheticFor\(\{ tradition: abilityTradition\(rec\) \|\| rec\.tradition, powerSystem: rec\.powerSystem \}/.test(srcA181);
+    const house = A176.houseStyleFor(null);
+    const rootkin = A176.houseStyleFor({ palette: "deep green, bark-brown, sap-amber" });
+    return wired && rootkin !== house && /deep green/.test(rootkin);
+  })());
   // "no ability to keep this image" — on the warpling. A creature recurs and has an authored look; it was
   // prompt-only purely because nothing ever gave its tile a subject.
   check("CCODE-181: a BEAST tile resolves to its creature, so its look can be kept",
@@ -15300,9 +15308,13 @@ await (async () => {
     // Every kind in the table can store a keep — the census, not a spot check on the three I touched.
     const table186 = s186.slice(s186.indexOf("const REGEN_KINDS = {"), s186.indexOf("const _regenPrompts"));
     const kinds186 = [...table186.matchAll(/^  (\w+): \{/gm)].map(m => m[1]);
+    // ⚠️ SLICED TO THE BLOCK'S END, not to a guessed 900 characters. SNG-435 lengthened one entry's
+    // `promptOpts` line and this reported `ability` as having no keep — the census was measuring line
+    // length, not capability, and it would have failed for a comment just as easily.
     const noKeep186 = kinds186.filter(k => {
-      const seg = table186.slice(table186.indexOf(`  ${k}: {`), table186.indexOf(`  ${k}: {`) + 900);
-      return !/\bkeep: /.test(seg.slice(0, seg.indexOf("\n  },") + 1 || undefined));
+      const start = table186.indexOf(`  ${k}: {`);
+      const end = table186.indexOf("\n  },", start);
+      return !/\bkeep: /.test(table186.slice(start, end > -1 ? end : undefined));
     });
     check("CCODE-186: every image kind can be kept — the census, not the three I happened to touch",
       kinds186.length >= 9 && noKeep186.length === 0, `${kinds186.length} kinds; without keep: ${noKeep186.join(", ")}`);
@@ -16380,73 +16392,99 @@ await (async () => {
   }
 }
 
-// ---- SNG-435 §C: the shape was a taxonomy, and the picture was already authored ------------------
+// ---- SNG-435 §C: the picture field was authored on all 376 and read by nothing ------------------
 // ⛔ ERIK: "I have been having a hard time getting a good Radiant Lance skill image." Its `shape` is
-// "damage", and `powerPhrase` prefers shape over description on the stated ground that shape is what makes
-// one craft LOOK different from another — so it produced "Radiant Lance — damage, attack, precise".
-// ⚠️ AEVI PREDICTED IT WOULD NOT BE THE ONLY ONE. It is ALL of them.
+// "damage", so `powerPhrase` built "Radiant Lance — damage, attack, precise".
+// ⚠️ MY FIRST FIX REGISTERED THE CATEGORY WORDS. Aevi's answer is better and retired it: the argument is
+// INFORMATION, not word-choice — 25 distinct `shape` values against 376 distinct `narrationHints`. A field
+// that can name 25 things cannot distinguish 376, whatever words are in it.
 {
   const { loadContentHeadless: lchC } = await import("./headless_content.mjs");
   const CC = await lchC();
   const BP = await import("../engine/battleprompt.js");
-  const cats = CC.rules?.visualVocabulary?.categoryShapes || null;
+  const AR = await import("../engine/art.js");
   const abilities = Object.values(CC.abilities || {});
-  // 1 · THE PREMISE, MEASURED. If a single ability ever carries a genuinely visual shape this stops being a
-  // blanket rule and becomes a per-ability one — so the number is the gate, not a sentence about it.
+  // 1 · THE MEASUREMENT THAT DECIDES IT. If `shape` ever out-resolves `narrationHints`, the rule below is
+  // the wrong one and this says so before anybody has to look at a picture to find out.
   {
-    const shaped = abilities.filter(a => a.shape);
-    const oneWord = shaped.filter(a => !/\s/.test(String(a.shape).trim()));
-    const hinted = shaped.filter(a => a.narrationHints);
-    console.log(`      shapes: ${oneWord.length}/${shaped.length} are single-word category words; ${hinted.length} carry narrationHints`);
-    check(`435 §C1 THE PREMISE: every authored shape is a category word (${oneWord.length}/${shaped.length}), and every ability has a visual field to fall back to`,
-      shaped.length > 300 && oneWord.length === shaped.length && hinted.length === shaped.length,
-      "if a visual shape ever appears, the blanket registry is the wrong shape of fix");
+    const shapes = new Set(abilities.map(a => String(a.shape || "").trim().toLowerCase()).filter(Boolean));
+    const hints = new Set(abilities.map(a => String(a.narrationHints || "").trim()).filter(Boolean));
+    console.log(`      cardinality: ${shapes.size} distinct shapes vs ${hints.size} distinct narrationHints across ${abilities.length} abilities`);
+    check(`435 §C1 THE ARGUMENT: narrationHints out-resolves shape by two orders (${hints.size} vs ${shapes.size})`,
+      hints.size === abilities.length && shapes.size < 40 && abilities.length > 300,
+      "a low-cardinality field cannot be the picture, whatever words are in it");
   }
-  // 2 · ⛔ REGISTERED, NOT BLOCKLISTED. Aevi's rule and the `_MAKER_SIGNATURES` precedent: the data selects,
-  // the code defines. Every category word the catalogue uses must be in content, or the ability it belongs
-  // to silently goes back to drawing its picture from a taxonomy.
-  {
-    const used = new Set(abilities.map(a => String(a.shape || "").trim().toLowerCase()).filter(Boolean));
-    const known = new Set((cats || []).map(c => String(c).toLowerCase()));
-    const unregistered = [...used].filter(w => !known.has(w));
-    check(`435 §C1: every shape the catalogue uses is REGISTERED in content (${known.size} words)`,
-      !!cats && cats.length > 20 && unregistered.length === 0, `unregistered: ${unregistered.join(", ")}`);
-  }
-  // 3 · AND THE PICTURE CHANGES. The behaviour, on Erik's own ability, through the real registry.
+  // 2 · AND THE PICTURE CHANGES, on Erik's own ability.
   {
     const rl = abilities.find(a => /radiant lance/i.test(a.name || ""));
-    const before = BP.powerPhrase(rl, {});
-    const after = BP.powerPhrase(rl, {}, { categoryShapes: cats });
-    check("435 §C1: Radiant Lance draws from its narrationHints, not from \"damage, attack, precise\"",
-      !!rl && /damage/.test(before) && !/damage/.test(after) && /beam of focused light/i.test(after),
-      `${before}  →  ${after}`);
-    // ⚠️ AND A GENUINELY VISUAL SHAPE STILL LEADS. The registry is a list of taxonomy words, not a switch
-    // that turns shape off — an authored `shape: "a cut-thread motion that ends rather than wounds"` must
-    // still win, or this fix quietly forbids the field it is making room for.
-    const visual = { name: "The Cut Thread", shape: "a cut-thread motion that ends rather than wounds", effectTags: ["sever"], narrationHints: "unused here" };
-    check("435 §C1: a shape OUTSIDE the registry is taken as visual and still leads",
-      /cut-thread motion/.test(BP.powerPhrase(visual, {}, { categoryShapes: cats })), BP.powerPhrase(visual, {}, { categoryShapes: cats }));
+    const out = BP.powerPhrase(rl, {});
+    check("435 §C1: Radiant Lance is its beam of focused light, not \"damage, attack, precise\"",
+      !!rl && /beam of focused light/i.test(out) && !/damage/.test(out), out);
+    // ⚠️ AND THE FALLBACK SURVIVES, for a craft minted in play that has no hints yet — without it this
+    // fix would leave runtime braids and discoveries with no power phrase at all.
+    const minted = { name: "A Minted Braid", shape: "damage", effectTags: ["sever", "quiet"] };
+    check("435 §C1: a craft with NO narrationHints still gets a phrase from shape and tags",
+      /damage/.test(BP.powerPhrase(minted, {})), BP.powerPhrase(minted, {}));
   }
-  // 4 · THE WIRING, end to end: the builder takes the registry and the app hands it over.
+  // 3 · ⛔ §C3 — THE FIVE WERE NEVER PEOPLES. Aevi swept them: `harmonic`, `radiant_folk`, `precursor`,
+  // `valley_craft`, `cross_pole_braid` are POWER SYSTEMS wearing the `tradition` field, and authoring five
+  // traditions for them would have invented five cultures the world does not have — the SNG-432 error again.
+  // A tradition supplies CULTURE; a power system supplies PHYSICS, and physics is what a craft looks like.
   {
-    const appC = readFileSync(join(root, "app.js"), "utf8");
-    const bpC = readFileSync(join(root, "engine/battleprompt.js"), "utf8");
-    check("435 §C1: the registry reaches the builder from CONTENT, not from a constant in engine source",
-      /categoryShapes: CONTENT\.rules\?\.visualVocabulary\?\.categoryShapes/.test(appC)
-      && /powerPhrase\(ability, killer, \{ categoryShapes \}\)/.test(bpC)
-      && !/const CATEGORY_SHAPES\s*=/.test(bpC), "a hardcoded list here would be the blocklist Aevi ruled out");
+    const doc = CC.visualAesthetics || {};
+    check("435 §C3: the WHOLE aesthetics doc reaches CONTENT — `powerSystems` was being flattened away at load",
+      Object.keys(doc.traditions || {}).length > 20 && Object.keys(doc.powerSystems || {}).length >= 5,
+      `traditions ${Object.keys(doc.traditions || {}).length}, powerSystems ${Object.keys(doc.powerSystems || {}).length}`);
+    const rl = abilities.find(a => /radiant lance/i.test(a.name || ""));
+    const vc = abilities.find(a => a.powerSystem === "valley_craft");
+    const br = abilities.find(a => a.tradition === "cross_pole_braid");
+    const rk = abilities.find(a => a.tradition === "rootkin");
+    check("435 §C3: a people wins where there is one, and the physics answers where there is not",
+      AR.aestheticFor(rk, doc) === doc.traditions.rootkin
+      && AR.aestheticFor(rl, doc) === doc.powerSystems.radiant
+      && AR.aestheticFor(vc, doc) === doc.powerSystems.valley_craft
+      && AR.aestheticFor(br, doc) === doc.powerSystems.braid,
+      "a runtime braid carries a reach_* power system and must reach the one braid entry, not be authored per braid");
+    // ⛔ THE ORDER NEEDS A FIXTURE, BECAUSE NO LIVE ABILITY CAN CURRENTLY SHOW IT. Mutation proved that:
+    // inverting people-then-physics reddened NOTHING, because the two palette sets are disjoint today — every
+    // ability that has a people has no power-system entry and vice versa. The rule exists for the day Aevi
+    // authors a `traditions.harmonic` palette beside the `powerSystems.harmonic` one, and on that day the
+    // people must win, or her choice of axis stops being reversible. A latent rule still needs a gate.
+    {
+      const both = { traditions: { people_x: { palette: "the people" } }, powerSystems: { phys_x: { palette: "the physics" } } };
+      const subj = { tradition: "people_x", powerSystem: "phys_x" };
+      check("435 §C3: when a subject has BOTH, the people wins — so authoring a palette later overrides the physics",
+        AR.aestheticFor(subj, both) === both.traditions.people_x,
+        "no live ability exercises this today; it is the reversibility of Aevi's axis choice");
+    }
+    const gap = abilities.filter(a => !AR.aestheticFor(a, doc));
+    console.log(`      aesthetics: ${abilities.length - gap.length}/${abilities.length} abilities resolve a palette` + (gap.length ? ` — still house-paletted: ${[...new Set(gap.map(a => a.tradition || a.powerSystem || "(neither)"))].join(", ")}` : ""));
+    check("435 §C3: what is still house-paletted is REPORTED at load, never silent",
+      /still fall back to the house palette/.test(readFileSync(join(root, "engine/state.js"), "utf8")));
+    // ⛔ AND THE COVERAGE IS RATCHETED, NOT MERELY PRINTED. A file-level check cannot see this class: 46 of
+    // the 55 carry a `tradition` that IS in traditions.json and simply had no palette, so only the LOADED
+    // catalogue can say who resolves and who does not. 9 baseline martial abilities carry neither a people
+    // nor an authored power system — the known remainder, and it may only shrink.
+    check(`435 §C3: ${abilities.length - gap.length}/${abilities.length} abilities resolve a palette — the uncovered remainder may only shrink`,
+      gap.length <= 9, [...new Set(gap.map(a => a.tradition || a.powerSystem || "(neither)"))].join(", "));
   }
-  // 5 · ⛔ §C3 — THE SILENT FALLBACK IS THE BUG. An ability whose tradition has no aesthetic is drawn in
-  // the house palette and nothing says so; Erik saw it as a searing white beam in muted earth tones. The
-  // CONTENT gap is Aevi's to author — what is gated is that it can never again be silent.
+  // 4 · ⛔ AND NO EDITORIAL MARKER REACHES THE GENERATOR. Wiring the palettes surfaced this immediately:
+  // every valley-craft ability was minting with "⛔ MUTED EARTH" and "⚠️ THE ABSENCE OF SPECTACLE IS THE
+  // POINT" inside the prompt. An image prompt is read by something that draws whatever it is given, so
+  // SNG-433's rule applies here at least as hard as it does to prose a player reads.
   {
-    const stateC = readFileSync(join(root, "engine/state.js"), "utf8");
-    const have = new Set(Object.keys(CC.traditionVisualAesthetics || {}));
-    const gap = new Set(abilities.map(a => a.tradition || a.powerSystem).filter(t => t && !have.has(t)));
-    console.log(`      aesthetics: ${gap.size} ability tradition(s) with no palette — ${[...gap].join(", ")}`);
-    check("435 §C3: a tradition with no visual aesthetic is REPORTED at load, never silently housed-paletted",
-      /have NO visual aesthetic and fall back to the house palette/.test(stateC)
-      && /const have = new Set\(Object\.keys\(traditionAestheticsDoc/.test(stateC));
+    const doc = CC.visualAesthetics || {};
+    const all = [...Object.values(doc.traditions || {}), ...Object.values(doc.powerSystems || {})];
+    const dirty = all.map(a => AR.houseStyleFor(a)).filter(w => /[\u26d4\u26a0]/.test(w));
+    check(`435 §C3: no authored marker survives into an image prompt (${all.length} aesthetics)`,
+      all.length > 25 && dirty.length === 0, dirty[0]?.slice(0, 90));
+    // ⚠️ AND THE SUBSTANCE SURVIVES THE STRIPPING. `plainForArt` would have cut "⛔ MUTED EARTH — wool,
+    // leather, wet rope, iron" to "NO emissive colour AT all" — throwing the palette away and keeping the
+    // instruction, because it strips a marker-headed aside to the END OF THE SENTENCE. Here the marker heads
+    // the CONTENT, so the marker goes and the colours stay.
+    const vcStyle = AR.houseStyleFor(doc.powerSystems?.valley_craft);
+    check("435 §C3: stripping the marker keeps the palette (not the instruction that followed it)",
+      /muted earth/i.test(vcStyle) && !/[\u26d4\u26a0]/.test(vcStyle), vcStyle.slice(0, 100));
   }
 }
 

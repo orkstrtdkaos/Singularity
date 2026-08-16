@@ -32,9 +32,34 @@ export const IMAGE_STYLE_HOUSE = "muted earth tones with teal and gold accents";
 /** CCODE-179. The style wrapper for a picture: the constant medium, plus this people's own palette, light
  *  and mood when the tradition is known, and the house palette when it is not. Each borrowed clause is
  *  clamped — an aesthetic is authored prose and the style is a wrapper, not the subject. PURE. */
+/** ⛔ SNG-435 §C3 — AN AUTHORED MARKER WAS GOING STRAIGHT INTO THE GENERATOR. Wiring the `powerSystems`
+ *  aesthetics surfaced it immediately: every valley-craft ability was minting with
+ *
+ *      "…, ⛔ MUTED EARTH, ordinary daylight…, ⚠️ THE ABSENCE OF SPECTACLE IS THE POINT. Wayfinding…"
+ *
+ *  ⚠️ AN IMAGE PROMPT IS READ BY SOMETHING THAT DRAWS WHATEVER IT IS GIVEN, so SNG-433's rule — no ⛔ or ⚠️
+ *  in a string a player reads — applies here at least as hard, and "THE ABSENCE OF SPECTACLE IS THE POINT"
+ *  is SNG-195's A6 writerly class exactly: an instruction the model cannot evaluate, spending weight to say
+ *  nothing. ⛔ The CONTENT fix is Aevi's; this is the consumer refusing to pass it on.
+ *
+ *  ⚠️ AND `plainForArt` IS THE WRONG TOOL HERE, WHICH IS WHY THIS IS ITS OWN THREE LINES. It strips a
+ *  marker-headed aside TO THE END OF THE SENTENCE — correct when the marker heads an aside, and destructive
+ *  here, where the marker heads the CONTENT: it turns "⛔ MUTED EARTH — wool, leather, wet rope, iron" into
+ *  "NO emissive colour AT all", throwing away the palette and keeping the instruction. A style field needs
+ *  the marker and the shout removed and the substance kept. */
+function styleClause(v) {
+  return String(v || "")
+    .replace(/[⛔⚠️]+/gu, " ")                                     // the marker itself, wherever it sits
+    .replace(/\b[A-Z]{2,}(?:\s+[A-Z]{2,})+\b/g, m => m.toLowerCase())   // a shouted run is emphasis, not a colour
+    .split(/\s*[—–]\s*/)[0]                                        // the lead clause; the rest is authoring note
+    .replace(/\s{2,}/g, " ").trim().replace(/[,.\s]+$/, "");
+}
+
 export function houseStyleFor(aesthetic = null) {
+  // ⚠️ `smartClamp`, NOT `.slice` — a hard cut left "the boundary between them is the su" in a live
+  // prompt, and a generator draws a dangling fragment as detail. Same lesson as the scene banner an hour ago.
   const bits = [aesthetic?.palette, aesthetic?.light, aesthetic?.mood]
-    .filter(Boolean).map(v => String(v).split(/\s*[—–]\s*/)[0].trim().slice(0, 70));
+    .filter(Boolean).map(v => smartClamp(styleClause(v), 70)).filter(Boolean);
   return bits.length ? [IMAGE_STYLE_MEDIUM, ...bits].join(", ") : `${IMAGE_STYLE_MEDIUM}, ${IMAGE_STYLE_HOUSE}`;
 }
 
@@ -140,6 +165,35 @@ export function bustedURL(url, attempt = 1, stamp = 0) {
 /** Does this URL carry a cache-buster? ⚠️ A busted URL is a healed one, not a broken one — it is what a
  *  record SHOULD hold after a poisoned mint, so nothing may treat it as suspect. */
 export function isBustedURL(url) { return /[?&]_cb=/.test(String(url || "")); }
+
+/** ⛔ SNG-435 §C3 — WHICH PALETTE A THING IS DRAWN IN, resolved ONCE for six call sites.
+ *
+ *  Aevi swept the abilities and found something better than the gap I reported: **55 abilities carry a
+ *  `tradition` that is not a people at all.** `harmonic`, `radiant_folk`, `precursor`, `valley_craft`,
+ *  `cross_pole_braid` — in every case the value is the ability's own POWER SYSTEM, and authoring five
+ *  `traditions` entries would have invented five peoples the world does not have. That is the SNG-432 error
+ *  exactly, where `harmonic_radiant` turned out to be a disposition pair.
+ *
+ *  ⚠️ AND THE POWER-SYSTEM AXIS IS THE RIGHT ONE ANYWAY, in her words: *a tradition supplies CULTURE; a
+ *  power system supplies PHYSICS.* What a harmonic craft LOOKS like comes from sound, not from a people.
+ *
+ *  Order: the authored people first (321 abilities), then the physics (55). A `reach_*` power system is a
+ *  runtime-minted braid and resolves to the one `braid` entry — which composes the two parent palettes
+ *  rather than being authored per braid, because braids are minted in play and cannot be enumerated.
+ *
+ *  ⛔ ONE RESOLVER, because six sites were each doing `aesthetics[trad] || null` by hand and the day a
+ *  second axis appeared, all six were wrong together. Returns null when nothing is authored — the caller
+ *  falls back to the house palette, and `loadContent` says out loud who is falling. PURE. */
+export function aestheticFor(subject, doc) {
+  const trad = subject?.tradition || null;
+  const ps = subject?.powerSystem || null;
+  const byTrad = doc?.traditions || doc || {};
+  const bySystem = doc?.powerSystems || {};
+  if (trad && byTrad[trad]) return byTrad[trad];
+  if (ps && bySystem[ps]) return bySystem[ps];
+  if (ps && /^reach_/.test(ps) && bySystem.braid) return bySystem.braid;
+  return null;
+}
 
 /** SNG-435 §A1/§A2 — WHAT TO DO ABOUT A RESPONSE, as a pure decision so the rule can be tested rather than
  *  trusted. The I/O lives in the app; the policy lives here.

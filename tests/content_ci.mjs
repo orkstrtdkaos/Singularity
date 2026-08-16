@@ -2397,6 +2397,38 @@ for (const pack of PACKS) {
   for (const f of peopleFiles) { try { walkTrad(rj(f), f.split("/").pop(), "$"); } catch { /* a missing pack is another gate's business */ } }
   check("SNG-432: every authored `tradition` names a people that exists (" + legal.size + " legal ids)",
     bad.length === 0, bad.slice(0, 6).join(" · "));
+
+  // ⛔ SNG-435 §3, AEVI'S OWN ASK: *"I proposed it against the three legends and did not think to sweep the
+  // ABILITIES — which is the same shape as the failure itself: I fixed the instance and not the class."*
+  // Swept: 55 abilities carry a `tradition` that is not a people. In every case the value is the ability's
+  // own POWER SYSTEM — harmonic, radiant_folk, precursor, valley_craft, cross_pole_braid — and authoring five
+  // `traditions` entries for them would have invented five cultures the world does not have.
+  //
+  // ⚠️ SO THEY ARE LEGITIMATE UNDER A DIFFERENT KEY, NOT WHITELISTED AS TRADITIONS. A power system must
+  // have an entry in `tradition_visual_aesthetics.powerSystems`; a people must be in `traditions.json`.
+  // Either way the value has to MEAN something — what may never happen is a `tradition` that names neither,
+  // because then everything keyed on it falls back to a default that reads almost right.
+  {
+    const aes = rj("content/packs/core/rules/tradition_visual_aesthetics.json");
+    const systems = new Set(Object.keys(aes.powerSystems || {}));
+    const abilityFiles = (rj("content/packs/core/manifest.json").provides?.abilities || []).map(f => "content/packs/core/" + f);
+    const orphan = [];
+    const seen = new Map();
+    for (const f of abilityFiles) {
+      let doc; try { doc = rj(f); } catch { continue; }
+      for (const a of (doc.abilities || [])) {
+        const t = a?.tradition;
+        if (typeof t !== "string" || !t || legal.has(t)) continue;
+        // not a people — then it must be a power system with a palette, resolved the way the engine resolves it
+        const ps = a.powerSystem || "";
+        const ok = systems.has(ps) || (/^reach_/.test(ps) && systems.has("braid"));
+        if (!ok) orphan.push(`${f.split("/").pop()}: ${a.id || a.name} → tradition "${t}", powerSystem "${ps || "(none)"}"`);
+        else seen.set(t, (seen.get(t) || 0) + 1);
+      }
+    }
+    check(`SNG-435 §3: an ability tradition that is not a people must be a POWER SYSTEM with a palette (${[...seen.keys()].length} such)`,
+      orphan.length === 0, orphan.slice(0, 6).join(" · "));
+  }
 }
 
 

@@ -3,7 +3,7 @@
  "id": "foothills",
  "kind": "content",
  "note": "⛔ SNG-441. FOOTHILLS AND FOLK — Erik, 2026-08-15: 'Foothills are the FUNCTIONAL VERSION of the pole in many cases; in some cases the place that is APPROACHABLE and the ECONOMIC CENTER. They are also NOT strictly one pole per parent. We need balance, but foothills are most likely a BLEND of a primary domain with 1-2 of its neighbors.'\n⚠️ THERE ARE 26 CANONICAL TRADITIONS — 24 ring poles on 12 axes, plus god_named and bargainers already carrying `pole: foothill`. I had been counting 31 by treating collection-keys as peoples.",
- "_theRule": "⛔ A FOOTHILL IS NOT A LESSER TRADITION — IT IS A POLE MADE USABLE. The pole states the position absolutely; the foothill is what you can actually buy, hire, learn and live beside. ⚠️ AND THE EXISTING TWO PROVE THE BLEND CROSSES AXES rather than staying on neighbours:\n   GOD-NAMED — 'borrowed grandeur worn slightly wrong; a man addressed by a name nobody in this valley can check.' ⛔ THAT IS SERAPHIC (angelic authority) BLENDED WITH VEILWRIGHT (falsehood). The functional version of divine authority is a borrowed one.\n   BARGAINERS — 'a good table, a fair scale, an exit that is always shown to you and always costed.' ⛔ ABYSSAL (the named want, the struck term) BLENDED WITH VERIST (truth). The functional version of the bargain is an HONEST one, which is precisely why anyone sits down twice.\n⚠️ SO THE PATTERN IS: TAKE THE POLE'S POWER AND ADD WHAT MAKES IT SURVIVABLE TO DEAL WITH.\n⛔ ERIK 2026-08-15, REFINEMENT: 'It's likely that these foothills will have THREE DOMAINS, as each character does.' ⚠️ THAT IS THE RULE — a foothill is not a pole plus a qualifier, it is a THREE-DOMAIN BLEND, the same shape a player character has. Which is the point: a foothill is where the world is LIVED IN rather than argued from.",
+ "_theRule": "⛔ A FOOTHILL IS NOT A LESSER TRADITION — IT IS A POLE MADE USABLE. The pole states the position absolutely; the foothill is what you can actually buy, hire, learn and live beside. ⚠️ AND THE EXISTING TWO PROVE THE BLEND CROSSES AXES rather than staying on neighbours:\n   GOD-NAMED — 'borrowed grandeur worn slightly wrong; a man addressed by a name nobody in this valley can check.' ⛔ THAT IS SERAPHIC (angelic authority) BLENDED WITH VEILWRIGHT (falsehood). The functional version of divine authority is a borrowed one.\n   BARGAINERS — 'a good table, a fair scale, an exit that is always shown to you and always costed.' ⛔ ABYSSAL (the named want, the struck term) BLENDED WITH VERIST (truth). The functional version of the bargain is an HONEST one, which is precisely why anyone sits down twice.\n⚠️ SO THE PATTERN IS: TAKE THE POLE'S POWER AND ADD WHAT MAKES IT SURVIVABLE TO DEAL WITH.\n⛔ ERIK 2026-08-15, REFINEMENT: 'It's likely that these foothills will have THREE DOMAINS, as each character does.' ⚠️ THAT IS THE RULE — a foothill is not a pole plus a qualifier, it is a THREE-DOMAIN BLEND, the same shape a player character has. Which is the point: a foothill is where the world is LIVED IN rather than argued from.\n⛔ HARDLINE IS THE CLEANEST EXAMPLE OF THE PATTERN: pole + neighbour (method) + ANTIPODE (the thing that makes it sellable). god_named blends authority with falsehood, bargainers blends appetite with truth, hardline blends violence with peace. ⚠️ IN EVERY CASE THE SECOND OR THIRD DOMAIN IS WHAT LETS OTHER PEOPLE DEAL WITH THE FIRST.",
  "foothills": {
   "god_named": {
    "parents": {
@@ -54,6 +54,40 @@
    "abilities": 14,
    "ratified": "⛔ ERIK 2026-08-15: 'Radiant plateau can be light, wright, and order.'",
    "why": "⛔ LIGHT + MAKING + ORDER, and the crafts show all three. BLAZEBORN gives the medium — Radiance is theirs. WRIGHT gives the turn that makes it usable: Light Well STORES light, Clarity Lens SHAPES it, Beacon Thread STRINGS it between people. LATTICE gives the discipline — light-guides paved into streets and towers that braid sunlight into working beams are an infrastructure, laid out and maintained.\n⚠️ THE DIFFERENCE FROM THE PARENT, PLAINLY: A BLAZEBORN SPENDS LIGHT TO EXPOSE SOMETHING AND THE LIGHT IS GONE. THE PLATEAU STORES IT AND SELLS IT. ⛔ That is what makes a foothill an economic centre — the pole performs its position, the foothill runs a utility."
+  },
+  "hardline": {
+   "parents": {
+    "marcher": 0.5,
+    "somatic": 0.3,
+    "stillhold": 0.2
+   },
+   "axis": "violence_peace",
+   "craft": "Drill",
+   "place": "hardline",
+   "region": "foothill_hardline",
+   "abilities": 0,
+   "ratified": "⛔ ERIK 2026-08-15: 'The Marchers foothill likely produces fantastic martial training, as well as mercenary units.'",
+   "why": "⛔ THE BLEND IS ALREADY IN HARDLINE'S OWN SEED, which I authored without seeing what it was: 'drill-yards, body-halls and mediators in one town, DELIBERATELY. The only place where a marcher and a stillholder train in the same yard, and it works because everyone here has needed both.'\n   MARCHER gives the Edge — force made exact, the line that holds.\n   SOMATIC gives the teaching. ⚠️ A ring-neighbour (pos 6 and 7), and the reason this foothill can TRAIN rather than merely fight: the Marchers have discipline, the Somatics have a method for putting a body through it. Body-halls beside drill-yards.\n   STILLHOLD gives the contract. ⛔ MARCHER'S OWN ANTIPODE, and that is not a contradiction — it is what makes the violence SELLABLE. A company that will stop when the terms say stop can be hired by someone who has to live in the town afterwards.",
+   "theFunctionalTurn": "⛔ THE POLE HOLDS A LINE OUT OF CONVICTION. THE FOOTHILL HOLDS ONE UNDER CONTRACT. ⚠️ That is the whole difference and it is not a diminishment — a conviction cannot be hired, budgeted for, or relieved at the end of a season. The March exists because someone visibly will not move; Hardline exists because someone will move, on the date agreed, for the agreed fee, and both parties know it in advance.",
+   "produces": [
+    {
+     "what": "Martial training, sold",
+     "detail": "⛔ THE BEST IN THE WORLD, and available to anyone who pays — which the Marchers find distasteful and use anyway. A season at Hardline is how a valley guard-captain becomes worth the title."
+    },
+    {
+     "what": "Mercenary companies",
+     "detail": "⚠️ Raised, drilled, contracted and DISBANDED here. The disbanding is the part that matters — a company that cannot be dissolved is not a company, it is an occupation, and Hardline's whole standing rests on never having produced one."
+    },
+    {
+     "what": "Arbitrated combat",
+     "detail": "⛔ The stillholder share, working. Duels, trials-by-arms and settlements fought under a mediator who can stop it. ⚠️ People bring their wars here to have them fought SMALLER."
+    },
+    {
+     "what": "Veterans who can be treated",
+     "detail": "The body-halls. What real use does to a person, addressed by people who have seen it before — and the reason the queue at the Grindstone exists at all."
+    }
+   ],
+   "_abilityGap": "⛔ HARDLINE HAS A PLACE, A REGION, A BIOME AND AN ECONOMY, AND ZERO ABILITIES. ⚠️ It is the clearest home for the physical/ranged crafts I filed as valley_craft under SNG-440 — the bow, the crossbow and the hurled weight are TRAINED skills sold to anyone, which is exactly what this foothill is for. Erik's call, and it resolves the Hunter's Strike collision at the same time."
   }
  },
  "folk": {

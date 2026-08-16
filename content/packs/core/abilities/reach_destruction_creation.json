@@ -33,7 +33,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -45,7 +48,11 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -53,12 +60,16 @@
      "grants": "End a thing WELL — a building, an institution, a life's work, a war — so that what it was is honored and what comes after is not poisoned by how it went.",
      "cannot": "You must be right that it should end. The Unmakers' cult, the Scouring, is what this becomes when that judgment stops being made.",
      "functions": [
-      "reveal",
       "break",
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "break",
+      "open"
+     ]
     }
    ],
    "gated": "learned",
@@ -119,7 +130,13 @@
     }
    ],
    "plainly": "A fight/explore/social action that deals damage. It rolls 2d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: seeing The Fault IS Not Being Right That IT Should BE Broken.",
-   "_descriptionWas": "The destruction-pole mastery: ending things well. Not violence — DEMOLITION, with an ethic: what should end, ends cleanly, and what should stand is left standing."
+   "_descriptionWas": "The destruction-pole mastery: ending things well. Not violence — DEMOLITION, with an ethic: what should end, ends cleanly, and what should stand is left standing.",
+   "_functionsWas": [
+    "break",
+    "open",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "makecraft",
@@ -249,7 +266,6 @@
     "destruction_creation": 0.3
    },
    "functions": [
-    "foresee",
     "make",
     "reveal"
    ],
@@ -266,7 +282,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -274,11 +293,14 @@
      "grants": "See the better form a thing is capable of, and the shortest road to it.",
      "cannot": "There is always a better shape. Wrights at this rank cannot leave anything alone.",
      "functions": [
-      "reveal",
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "make"
+     ]
     },
     {
      "rank": 3,
@@ -286,12 +308,15 @@
      "grants": "See what a thing, a place, or a person is REACHING toward — the shape it would take if nothing stopped it.",
      "cannot": "Seeing what someone could be is the most seductive and most dangerous sight in this Reach. It is not your business to build them.",
      "functions": [
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_functionsWas": [
       "reveal",
       "make",
       "foresee"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
+     ]
     }
    ],
    "gated": "learned",
@@ -345,7 +370,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing What Could BE Made IS Not Knowing Whether IT Should BE."
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing What Could BE Made IS Not Knowing Whether IT Should BE.",
+   "_functionsWas": [
+    "foresee",
+    "make",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_raised_thing",
@@ -610,7 +641,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -618,11 +652,14 @@
      "grants": "Your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim.",
      "cannot": "Anything rank 3 adds — the thing you have built is the argument and the evidence; IT REQUIRES REAL WORK TO SHOW.",
      "functions": [
-      "reveal",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "command"
+     ]
     },
     {
      "rank": 3,
@@ -630,11 +667,14 @@
      "grants": "The thing you have built is the argument and the evidence. Anyone who has seen it cannot pretend otherwise — and they have all seen it.",
      "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES REAL WORK TO SHOW; and it still costs what it costs: a reputation built on work MUST KEEP PRODUCING WORK.",
      "functions": [
-      "reveal",
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "command"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -679,7 +719,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/craft/negotiation action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: iT Requires Real Work TO Show — a Wright with nothing built carries nothing."
+   "plainly": "A social/craft/negotiation action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: iT Requires Real Work TO Show — a Wright with nothing built carries nothing.",
+   "_functionsWas": [
+    "command",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_built_way",
@@ -924,8 +969,7 @@
    "harmRung": "none",
    "functions": [
     "mend",
-    "restore",
-    "reveal"
+    "restore"
    ],
    "challengeTypes": [
     "medical",
@@ -939,11 +983,14 @@
      "grants": "Identify and remove exactly what is interfering with a person or system's recovery — the splinter, the bad element, the thing that was keeping it from healing on its own.",
      "cannot": "Anything rank 2 adds — restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain; it removes.",
      "functions": [
-      "reveal",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "restore"
+     ]
     },
     {
      "rank": 2,
@@ -951,12 +998,16 @@
      "grants": "Restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain.",
      "cannot": "Anything rank 3 adds — remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference; it removes.",
      "functions": [
-      "reveal",
       "mend",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "mend",
+      "restore"
+     ]
     },
     {
      "rank": 3,
@@ -964,12 +1015,16 @@
      "grants": "Remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference.",
      "cannot": "Nothing further; this is the craft's ceiling; it removes.",
      "functions": [
-      "reveal",
       "mend",
       "restore"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "mend",
+      "restore"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1017,7 +1072,13 @@
     }
    ],
    "plainly": "A medical/repair/tactical action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: it removes; IT Does Not Add — what was lost stays lost.",
-   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
+   "_functionsWas": [
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_ended_threat",
@@ -1070,13 +1131,18 @@
      "grants": "Protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it. The threat is not turned aside; it is disabled at the point it was coming from, and whoever was carrying it is weakened out of the fight rather than merely stopped.",
      "cannot": "Anything rank 3 adds — identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming; IT REQUIRES SEEING THE THREAT FORM.",
      "functions": [
-      "foresee",
       "break",
       "shield",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "foresee",
+      "break",
+      "shield",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -1084,13 +1150,18 @@
      "grants": "Identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming.",
      "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES SEEING THE THREAT FORM; and it still costs what it costs: NOBODY WILL EVER KNOW WHAT YOU PREVENTED.",
      "functions": [
-      "foresee",
       "break",
       "shield",
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "foresee",
+      "break",
+      "shield",
+      "hinder"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1137,7 +1208,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A combat/tactical/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: iT Requires Seeing The Threat Form — an ambush already sprung is past it."
+   "plainly": "A combat/tactical/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: iT Requires Seeing The Threat Form — an ambush already sprung is past it.",
+   "_functionsWas": [
+    "break",
+    "foresee",
+    "hinder",
+    "shield"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_open_material",
@@ -1374,9 +1452,8 @@
    "tradition": "unmaker",
    "harmRung": "none",
    "functions": [
-    "reveal",
-    "sustain",
-    "restore"
+    "restore",
+    "sustain"
    ],
    "challengeTypes": [
     "endurance",
@@ -1390,11 +1467,14 @@
      "grants": "Identify precisely what is consuming your capacity — exhaustion, fear, a specific obligation — and end it cleanly so you can continue.",
      "cannot": "Anything rank 2 adds — sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
-      "reveal",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "restore"
+     ]
     },
     {
      "rank": 2,
@@ -1402,12 +1482,16 @@
      "grants": "Sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction.",
      "cannot": "Anything rank 3 adds — end what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
-      "reveal",
       "sustain",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "sustain",
+      "restore"
+     ]
     },
     {
      "rank": 3,
@@ -1415,12 +1499,16 @@
      "grants": "End what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on.",
      "cannot": "Nothing further; this is the craft's ceiling; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
-      "reveal",
       "sustain",
       "restore"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "sustain",
+      "restore"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1462,7 +1550,13 @@
     }
    ],
    "plainly": "A endurance/hardship/psychological action that strengthens someone. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 extends targets. Limit: what You End TO Sustain Yourself, You Have Ended — it does not come back when the hard stretch does.",
-   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
+   "_functionsWas": [
+    "reveal",
+    "sustain",
+    "restore"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -2262,11 +2356,15 @@
      "cannot": "⚠ WHAT YOU TAKE APART IS APART. There is no half-measure and no putting it back without building it again — and you are an Unmaker, not a Wright.",
      "functions": [
       "make",
-      "open",
-      "reveal"
+      "open"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "make",
+      "open",
+      "reveal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2304,7 +2402,12 @@
     }
    ],
    "plainly": "A puzzle action that disassembles a made thing and recovers its parts intact. Rated 5 of 10 across a scope of 2.",
-   "_descriptionWas": "The Unmakers' first craft and the one that pays: salvage, recovery, and the quiet business of getting a thing back to its parts."
+   "_descriptionWas": "The Unmakers' first craft and the one that pays: salvage, recovery, and the quiet business of getting a thing back to its parts.",
+   "_functionsWas": [
+    "make",
+    "open"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_given_way",
@@ -2318,8 +2421,7 @@
     "concrete_abstract": 0.2
    },
    "functions": [
-    "open",
-    "reveal"
+    "open"
    ],
    "narrationHints": "Anything shut was shut by a method, and a method can be reversed. A lock, a seal, a bar, a knot, a bound working — it OPENS, undamaged, and can be shut again after by whoever is entitled to.",
    "description": "Open one deliberately-closed thing without damage — a lock, a bar, a lashed knot, a wax seal, a barred shutter — and it still works, and can be closed again behind you. The Unmakers' opening-craft, and the distinction from breaking in is the whole professional identity.",
@@ -2342,11 +2444,14 @@
      "grants": "A sequence — a gate, then a stair-door, then a strongbox — or one thing closed several ways at once.",
      "cannot": "Each takes its own time and you are standing there for all of it. A guarded route is a guarded route; this answers the lock, never the guard.",
      "functions": [
-      "open",
-      "reveal"
+      "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "open",
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -2354,11 +2459,14 @@
      "grants": "What was closed to stay closed — a vault, a bound working, a door with a name on it that was meant never to open again.",
      "cannot": "⚠ SOME THINGS WERE SHUT FOR A REASON AND THE REASON IS STILL IN THERE. The Unmakers keep a list of what they have opened, and a shorter one of what they will not.",
      "functions": [
-      "open",
-      "reveal"
+      "open"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "open",
+      "reveal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2397,7 +2505,12 @@
     }
    ],
    "plainly": "A puzzle/social action that opens a deliberately-closed thing without damaging it. Rated 6 of 10 on one target.",
-   "_descriptionWas": "The Unmakers' opening-craft. The distinction from breaking in is the whole professional identity."
+   "_descriptionWas": "The Unmakers' opening-craft. The distinction from breaking in is the whole professional identity.",
+   "_functionsWas": [
+    "open",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_quick_work",

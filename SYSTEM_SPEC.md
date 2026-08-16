@@ -1469,3 +1469,129 @@ that renders.**
 
 ⛔ **Preferred steady state (§28.7): the engine generates the next tranche and the PO REVIEWS it.** The
 corpus exists to be argued with, not extended by hand forever.
+
+
+---
+
+## 30. The Power Cosmology, the Veil, and the 14-Tradition Restructure (2026-08-15)
+
+⚠️ **PROPOSAL STATUS: §30.4 (the restructure) is authored and NOT MIGRATED.** 24 poles remain live in
+`traditions.json` and `progression.js`. §30.1–30.3 are ratified canon.
+
+### 30.1 ⛔ THE SYMMETRY — two pure forms, two human access methods
+
+**Crystal-based power has two sides, and each has a pure form and a way humans reach it.**
+
+| | **pure form** | **human access** |
+|---|---|---|
+| **precursor side** | the **lattice substrate** — built by Akinetos | **nanites**, ordered or wild |
+| **metaphysical side** | ⛔ **the VEIL** — *not built; what remains where Kenosis stopped being present* | **ki · psychic · numen-work · stillness** |
+
+⛔ **Nanites and metaphysics are the same kind of thing: human workarounds reaching a power we did not
+build, from opposite directions.** *"The nanites are how humans closed the gap with the Precursors, prior
+to the Transition."* ⚠️ **Nothing in this world is magic; everything is a method.**
+
+### 30.2 The four fields, and how they move
+
+| field | densest where | moves? |
+|---|---|---|
+| **precursor lattice** | Precursor lines and structures. `substrateDensity`, 0.12–0.98 | ⛔ **never** |
+| **ordered nanite** | where human activity was — works, cities, yards | yes |
+| **wild nanite** | same origin, ungoverned rather than absent | yes |
+| **metaphysical** | ⛔ **at NEXUSES, which are not a terrain function** | yes |
+
+**Nexus kinds:** **natural** (the ground was already like that), **consecrated** (⚠️ *made by sustained
+attention — the practice creates the nexus, not the architecture*), **forced** (⛔ *an altar, a massacre
+site — a single act instead of long attention; works, and is not the same*).
+
+⛔ **THE CONVERSION FIGHT.** Rootkin and Churnfolk break ordered nanite down into wild as they use it;
+Seraphim and Enginewrights order wild as they use ordered. ⚠️ **The field is contested ground that moves,
+and two peoples working one valley leave it measurably different without either attacking anything.**
+
+### 30.3 ⛔ THE VEIL — a second axis, perpendicular to the sources
+
+**The Veil is the divide between this side and the Other Side.** A source says what you draw on; **veil
+effect says what your drawing does to the divide.** ⚠️ **Nobody has to intend it and everybody is doing
+it.**
+
+| position | who |
+|---|---|
+| **strengthens** | precursor lattice work · ordered nanite work |
+| **thins** | Veilwork · anything performed at a Thinning |
+| **neutral** | wild nanite · **ki — metaphysics turned INWARD** |
+| ⛔ **bidirectional** | **Makecraft · Ruinwork** |
+
+**The bidirectional table — the target determines the effect, not the act:**
+
+| | lattice | nexus |
+|---|---|---|
+| **make** | strengthens | thins |
+| **unmake** | thins | strengthens |
+
+⛔ **THE THINNINGS.** As old as the substrate, and **built to thin the Veil so the Other Side can come
+through — what Lucifer fell to wanting.** ⚠️ **The lattice and the Thinnings are one construction
+programme with two purposes**, which gives the Precursor disagreement its subject. **`the_thinning` is
+already canon and already a tier-2 waygate, and the Numinous sit beside it.** ⛔ **A Thinning is a machine
+for opening a door, left running at low power for four centuries, and every metaphysical practitioner who
+has drawn on one has been helping.**
+
+**This is the setting's actual war and almost nobody in it knows they are enlisted.** ⚠️ **Chaos, Life,
+Body, Death and Mind are genuinely neutral — the only messengers either side can trust. Breaking and
+Building are for hire, and both sides know it.**
+
+### 30.4 The 14 traditions (proposal) — `traditions_v2.json`
+
+**24 wheel poles absorbed as sects. Coverage verified 24/24, no orphans. Wheel survives at 7 axes, p↔p+7.**
+
+| tradition | ↔ | sects | primary | secondary |
+|---|---|---|---|---|
+| **Mind** | Body | Noesis · Logos · Formcraft | metaphysical | ordered, wild |
+| **Light** | Dark | Radiance · Verity | precursor | metaphysical |
+| **Life** | Death | Vivimancy | wild | metaphysical |
+| **Angelic** | Demonic | Ascent | ordered | precursor |
+| **Breaking** | Building | The Edge · Ruinwork | metaphysical | precursor |
+| **Chaos** | Order | Wildcraft | wild | metaphysical |
+| **Span** | Spirit | Spanwork · Hourcraft | precursor | ordered |
+| **Body** | Mind | Soma · Thingcraft | metaphysical | ordered |
+| **Dark** | Light | Umbracraft · Falsecraft | precursor | metaphysical |
+| **Death** | Life | Palework · Pathos | metaphysical | wild |
+| **Demonic** | Angelic | Descent | precursor | ⛔ metaphysical |
+| **Building** | Breaking | Makecraft · Stillcraft | precursor | metaphysical |
+| **Order** | Chaos | Enginecraft · Latticework | ordered | precursor |
+| **Spirit** | Span | Numenwork | metaphysical | precursor |
+
+⛔ **SECTS DIFFER BY SOURCE, AND THAT IS WHAT MAKES A SECT MEAN SOMETHING** — 9 of 14 are split. Two
+members of one tradition can be strong in completely different ground.
+
+**Three that carry weight:** ⛔ **Demonic's metaphysical secondary is not scholarly** — Lucifer wanted the
+Veil thinned and the Thinnings are the apparatus. ⛔ **Latticework is humans using ordered nanites to
+reproduce what the substrate is and does** — the Lattice-Cities are homage to something that has never
+answered them. ⛔ **Spirit needs meaning-dense ground, and the meaning-densest places are Precursor
+sites** — so the Numinous live at substrate 0.82, permanently obstructed by the ground they must stand on.
+
+### 30.5 Foothills, Folk and Braids
+
+⛔ **26 canonical traditions in the current structure: 24 poles + god_named + bargainers.** A **foothill**
+is the **functional version of a pole** — approachable, and an economic centre. ⚠️ **A THREE-DOMAIN
+BLEND, the same shape a character has**, and the second and third domains are **what let other people deal
+with the first**: god_named blends authority with falsehood, bargainers appetite with truth, hardline
+violence with peace.
+
+**Authored:** god_named · bargainers · harmonic (threnodist/lattice/mason) · radiant_folk
+(blazeborn/wright/lattice) · hardline (marcher/somatic/stillhold).
+
+⚠️ **Seraphic → God-named is a FIDELITY relation, not a blend of equals:** **Archangel** (held the ideal),
+**Seraph**, **God-named** (human, fallible, same powers), **Fallen Seraph**. ⛔ **Falling does not change
+your source — it changes what you run the machinery for, which is worse.**
+
+**Folk** (`valley_craft`) is the ordinary person's version of many, not a foothill of one. **Braids**
+cluster at the Crossing because ⛔ **a standing precursor/veil braid cancels the density term there** —
+every source reads on-band, which is why *"every axis crosses here at nothing, and the result is not grey,
+it is clear."*
+
+### 30.6 ⛔ TWO AXES: LINEAGE AND ACCESS
+
+**`tradition` is the lineage a craft descends from. `learnedAt` is where a person can be taught it.**
+⚠️ **A foothill is a place of ACCESS, not a new ancestry — Hardline teaches the Edge; it does not own
+it.** ⛔ **Filing a craft as `valley_craft` because it is open to anyone confuses access with ancestry.**
+A craft need not be pure to belong to a tradition; **true combinations are braids.**

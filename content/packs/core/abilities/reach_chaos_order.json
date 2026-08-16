@@ -43,11 +43,15 @@
      "cannot": "Cannot impose an outcome, only surf toward a good one; the ordered and prepared can still beat you.",
      "functions": [
       "make",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "make",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -57,16 +61,20 @@
      "functions": [
       "make",
       "break",
-      "hinder",
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "make",
+      "break",
+      "hinder",
+      "transform"
+     ]
     }
    ],
    "functions": [
     "break",
-    "hinder",
     "make",
     "transform"
    ],
@@ -137,7 +145,14 @@
     }
    ],
    "plainly": "A chase/fight/puzzle action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens variance; rank 3 extends scope. Limit: you Don'T Choose How IT Breaks, only that it does.",
-   "_descriptionWas": "The chaos-craft: improvisation as power, luck-riding, the unmaking of others' plans. The Churnfolk discipline of productive disorder."
+   "_descriptionWas": "The chaos-craft: improvisation as power, luck-riding, the unmaking of others' plans. The Churnfolk discipline of productive disorder.",
+   "_functionsWas": [
+    "break",
+    "hinder",
+    "make",
+    "transform"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "latticework",
@@ -181,14 +196,12 @@
      "cannot": "Binding is brittle against Wildcraft; over-bound systems can't adapt and shatter when they must.",
      "functions": [
       "make",
-      "bind",
       "break"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_functionsWas": [
       "make",
-      "foresee",
       "bind",
       "break"
      ]
@@ -200,15 +213,12 @@
      "cannot": "The wielder drifts order-hot — and order at full strength IS the foreclosure the framework names as the enemy; the Churn and the free places will not forgive it; perfect order is a cage even when it's yours.",
      "functions": [
       "make",
-      "bind",
-      "break",
-      "command"
+      "break"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_functionsWas": [
       "make",
-      "foresee",
       "bind",
       "break",
       "command"
@@ -216,9 +226,7 @@
     }
    ],
    "functions": [
-    "bind",
     "break",
-    "command",
     "make"
    ],
    "challengeTypes": [
@@ -289,10 +297,10 @@
     "bind",
     "break",
     "command",
-    "foresee",
     "make"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "scatter",
@@ -305,7 +313,6 @@
    },
    "functions": [
     "break",
-    "hinder",
     "move"
    ],
    "narrationHints": "One shove and the neat thing is a mess and you're through the gap.",
@@ -318,11 +325,14 @@
      "grants": "Disrupt a formation, jam a device, break a pattern to make an opening.",
      "cannot": "You don't pick how it scatters; brief.",
      "functions": [
-      "hinder",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "hinder",
+      "break"
+     ]
     },
     {
      "rank": 2,
@@ -330,12 +340,16 @@
      "grants": "Scatter a formation, a plan, a crowd — the thing that was one thing becomes many and cannot re-form quickly. Each of them is weakened by it: alone, out of place, and fighting or working at a fraction of what they were worth in line.",
      "cannot": "What you scatter you no longer control. Scattering a mob makes many small problems.",
      "functions": [
-      "hinder",
       "break",
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "hinder",
+      "break",
+      "move"
+     ]
     },
     {
      "rank": 3,
@@ -343,12 +357,16 @@
      "grants": "Unmake the coherence of a thing entirely — an army, a contract, a certainty — and it does not come back together.",
      "cannot": "The Churnfolk warn: you will not be able to put it back. Nobody will.",
      "functions": [
-      "hinder",
       "break",
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "hinder",
+      "break",
+      "move"
+     ]
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -411,7 +429,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/chase/puzzle action that weakens or restricts a target. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 extends scope; rank 3 adds to special. Limit: you Don'T Pick How IT Scatters."
+   "plainly": "A fight/chase/puzzle action that weakens or restricts a target. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 extends scope; rank 3 adds to special. Limit: you Don'T Pick How IT Scatters.",
+   "_functionsWas": [
+    "break",
+    "hinder",
+    "move"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "truename_order",
@@ -782,9 +806,7 @@
     "chaos_order": 0
    },
    "functions": [
-    "bind",
-    "break",
-    "command"
+    "break"
    ],
    "narrationHints": "Unmake and re-make in one motion — collapse it, and catch the pieces as what you need.",
    "description": "Break a thing and reforge its falling pieces into what you need, in the same motion. The braid-craft: collapse it, and catch the pieces as the new form.",
@@ -796,12 +818,15 @@
      "grants": "Break a thing and reforge its pieces into what you need in the same motion.",
      "cannot": "A heartbeat's window; miss it and you've only made chaos.",
      "functions": [
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_functionsWas": [
       "command",
       "break",
       "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
+     ]
     },
     {
      "rank": 2,
@@ -809,12 +834,15 @@
      "grants": "The window widens from a heartbeat to a breath, and the scale from a thing to a structure — ride the collapse of a wall, a wagon, a bridge, a formation, and set what is falling into the shape you need before it lands.",
      "cannot": "A widened window is still a window. The larger the collapse the cruder the form that comes out of it. And what you ride, you own — a structure re-bound wrong comes down on you first, and the Riders consider that only fair.",
      "functions": [
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "_functionsWas": [
       "command",
       "break",
       "bind"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
+     ]
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -865,7 +893,13 @@
     }
    ],
    "plainly": "A fight or puzzle action, and the only craft in the game with a timing window. You break something and reforge its falling pieces into a new shape in the same motion — but you must declare the new form before you break it, and you get one heartbeat to land it. Miss the window and you have simply destroyed the thing. Higher ranks widen the window and let you work on larger collapses, but the bigger the collapse the cruder the result: a shattered cart becomes a barricade, never a second cart.",
-   "_descriptionWas": "The braid-craft: unmake a structure and re-bind its falling pieces into a new form mid-collapse."
+   "_descriptionWas": "The braid-craft: unmake a structure and re-bind its falling pieces into a new form mid-collapse.",
+   "_functionsWas": [
+    "bind",
+    "break",
+    "command"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_long_odds",
@@ -1732,9 +1766,8 @@
     "violence_peace": -0.2
    },
    "functions": [
-    "strike",
     "break",
-    "hinder"
+    "strike"
    ],
    "narrationHints": "Nothing is aimed at them. The strap simply parts, the footing simply goes, the ember simply finds the oil, the horse simply decides. Any one of these was possible. You made all of them likely at once, and then stood back.",
    "description": "The Churnfolk's first offense: you do not attack, you spend the world's unlikeliness. Whatever could go wrong for them, does.",
@@ -1747,11 +1780,15 @@
      "cannot": "YOU DO NOT CHOOSE WHAT. The GM picks the misfortune from what is actually present. A target in a bare, empty place is nearly immune. It works ONCE cleanly; the second use in a scene is weaker and stranger.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 2,
@@ -1760,11 +1797,15 @@
      "cannot": "⚠ THE CHURN DOES NOT SORT: anyone else in the same area is struck ONE RUNG LOWER by the same run of luck. And nobody believes it was luck twice.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -1773,11 +1814,15 @@
      "cannot": "You still do not choose WHAT. The Churn takes what it takes, and the unlikely thing may cost a bridge, a building, or someone you needed alive — it is exempt from harming you, not from ruining your plans.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1819,7 +1864,13 @@
    "backlash": "The Churn spends itself on YOU. The improbable bad thing happens to the wielder instead, and it is the one that was available.",
    "conserveSuppresses": "a small turn — the odds you spend stay small enough to survive",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
+   "_functionsWas": [
+    "strike",
+    "break",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_predicted_man",
@@ -1833,9 +1884,10 @@
     "concrete_abstract": 0.2
    },
    "functions": [
-    "strike",
+    "bind",
+    "break",
     "hinder",
-    "bind"
+    "strike"
    ],
    "narrationHints": "You do not react. You were already there. The Lattice does not fight a person, it resolves them — reads the shape they are committed to and puts the consequence exactly where they are about to be.",
    "description": "The Lattice-Cities' first offense: prediction closed into a trap. Harm delivered by arriving first.",
@@ -1847,11 +1899,14 @@
      "grants": "Read a target you have watched this scene and place harm where they are going — a blade already at the height their head will reach, a step onto ground you prepared. The wound lands because they walked into it.",
      "cannot": "REQUIRES OBSERVATION — at least one exchange watched. The improvising, the panicked, and the Churn-touched cannot be read and this simply fails against them.",
      "functions": [
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "strike",
+      "hinder"
+     ]
     },
     {
      "rank": 2,
@@ -1920,7 +1975,13 @@
    "backlash": "You solved the wrong man. Every consequence you placed is now placed where you are going, and they were watching you do it.",
    "conserveSuppresses": "close one line — a misread costs you the line, nothing more",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung."
+   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
+   "_functionsWas": [
+    "strike",
+    "hinder",
+    "bind"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_loose_thread",

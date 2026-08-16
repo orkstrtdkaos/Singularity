@@ -979,7 +979,6 @@
    "tradition": "hourkeeper",
    "harmRung": "lethal",
    "functions": [
-    "hinder",
     "strike"
    ],
    "challengeTypes": [
@@ -994,11 +993,14 @@
      "grants": "Identify and act in the precise instant when a person is off-balance, distracted, or committed — so your action lands without meaningful response.",
      "cannot": "Anything rank 2 adds — dictate when the confrontation happens by waiting for the exact moment that advantages you most — the ambush, the interruption, the word at the one instant it cannot be answered; IT NEEDS SOMEONE WHO CAN BE CAUGHT OFF-BALANCE.",
      "functions": [
-      "hinder",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "hinder",
+      "strike"
+     ]
     },
     {
      "rank": 2,
@@ -1006,11 +1008,14 @@
      "grants": "Dictate when the confrontation happens by waiting for the exact moment that advantages you most — the ambush, the interruption, the word at the one instant it cannot be answered.",
      "cannot": "Anything rank 3 adds — act in a sequence of moments so precisely chosen that the other person is never in a position to respond effectively — they are always recovering from the last thing when the next arrives; IT NEEDS SOMEONE WHO CAN BE CAUGHT OFF-BALANCE.",
      "functions": [
-      "hinder",
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "hinder",
+      "strike"
+     ]
     },
     {
      "rank": 3,
@@ -1018,11 +1023,14 @@
      "grants": "Act in a sequence of moments so precisely chosen that the other person is never in a position to respond effectively — they are always recovering from the last thing when the next arrives — each strike lands unanswered because the moment to answer never comes.",
      "cannot": "It needs someone who can be caught off-balance — the genuinely unpredictable, the unhurried, and anyone who simply refuses to be drawn all defeat it. And a sequence this precise is a decision to finish someone, made several moments before the last one: the Reach does not let its people pretend otherwise afterward.",
      "functions": [
-      "hinder",
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "hinder",
+      "strike"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1066,7 +1074,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A combat/social/tactical action that deals damage. It rolls 2d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: iT Needs Someone Who Can BE Caught Off-Balance — the genuinely ready are outside it."
+   "plainly": "A combat/social/tactical action that deals damage. It rolls 2d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: iT Needs Someone Who Can BE Caught Off-Balance — the genuinely ready are outside it.",
+   "_functionsWas": [
+    "hinder",
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_given_time",
@@ -2066,9 +2079,9 @@
     "violence_peace": -0.2
    },
    "functions": [
-    "strike",
     "break",
-    "move"
+    "move",
+    "strike"
    ],
    "narrationHints": "Distance is a thing you carry. You put some of it where it should not be — inside a stride, inside a swing, inside a body — and the parts of them that were a hand apart are suddenly not.",
    "description": "The Horizon-Walkers' first offense: span applied inward. A road-craft turned on a person.",
@@ -2094,11 +2107,16 @@
      "functions": [
       "strike",
       "break",
-      "move",
-      "hinder"
+      "move"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "move",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -2152,7 +2170,13 @@
    "backlash": "The fold closes on the wrong side. The distance you took out of them comes out of you, and a closed span does not reopen.",
    "conserveSuppresses": "a hand's fold — a slip wrenches, it does not close",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
+   "_functionsWas": [
+    "strike",
+    "break",
+    "move"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_spent_hour",
@@ -2166,8 +2190,8 @@
     "death_life": -0.3
    },
    "functions": [
-    "strike",
-    "hinder"
+    "break",
+    "strike"
    ],
    "narrationHints": "You take time off a thing. Not from its future — from it, now. Steel ages through in the swing, a rope goes to dust in the grip, a wound arrives having already gone bad, a man spends years standing still.",
    "description": "Take time off what a target relies on, or off the target — gear ages through at the moment of use, a wound presents days old and septic, a body pays years in a breath and feels every one. The Hourkeepers' first offense: duration levied.",
@@ -2179,11 +2203,14 @@
      "grants": "Take time off what one target relies on, or off the target. Gear ages through at the moment of use; a wound presents days old and septic; a body pays years in a breath and feels every one.",
      "cannot": "ONE THING AT A TIME and it must be in reach or in clear sight. What you spend cannot be returned — including if you were wrong about who deserved it.",
      "functions": [
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "strike",
+      "hinder"
+     ]
     },
     {
      "rank": 2,
@@ -2192,11 +2219,15 @@
      "cannot": "⚠ THE HOUR DOES NOT SORT: anyone else in the area is struck ONE RUNG LOWER by the same toll, and their gear ages with everyone else's.",
      "functions": [
       "strike",
-      "hinder",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "hinder",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -2205,11 +2236,15 @@
      "cannot": "What is spent still cannot be returned, ever, including if you were wrong about who deserved it. The Stopped, who will not let a moment pass, began by doing this too often and too well.",
      "functions": [
       "strike",
-      "hinder",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "hinder",
+      "break"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2252,7 +2287,12 @@
    "conserveSuppresses": "a small levy — what you spend, you can afford",
    "backlashRung": "damaging",
    "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
-   "_descriptionWas": "The Hourkeepers' first offense: duration levied. Everything has time in it and you can take some."
+   "_descriptionWas": "The Hourkeepers' first offense: duration levied. Everything has time in it and you can take some.",
+   "_functionsWas": [
+    "strike",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_kept_count",

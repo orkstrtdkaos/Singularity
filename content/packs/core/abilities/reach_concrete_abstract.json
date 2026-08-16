@@ -487,7 +487,9 @@
       "reveal"
      ],
      "grants": "See that particulars are an instance of something, and roughly what — a scam, a siege pattern, an illness, a way of building, a way of lying.",
-     "cannot": "Roughly. You get the family, not the name."
+     "cannot": "Roughly. You get the family, not the name.",
+     "gains": "deepen",
+     "harmRung": "none"
     },
     {
      "rank": 2,
@@ -496,7 +498,9 @@
       "reveal"
      ],
      "grants": "⚠️ ADDS PRECISION AND REACH. Name it exactly — and once named, its OTHER instances become visible to you everywhere you go, including ones nobody has connected.",
-     "cannot": "You must have seen enough of this one to name it."
+     "cannot": "You must have seen enough of this one to name it.",
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
      "rank": 3,
@@ -506,7 +510,9 @@
       "foresee"
      ],
      "grants": "⛔ ADDS THE ACTIONABLE PART. Read the shape a thing is completing — an event, a campaign, a life — and name THE POINT AT WHICH IT MUST BREAK: the step the pattern cannot survive skipping, the piece it requires and does not have yet. ⚠️ A pattern named at r2 is knowledge; a pattern broken here is an ACT.",
-     "cannot": "One form at a time, and breaking it still has to be done by somebody."
+     "cannot": "One form at a time, and breaking it still has to be done by somebody.",
+     "gains": "deepen",
+     "harmRung": "none"
     }
    ],
    "gated": "learned",
@@ -2599,5 +2605,6 @@
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json."
+ "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json.",
+ "_schemaFix2": "⛔ SNG-452: gains/harmRung restored on ranks I replaced wholesale during batch 1 — replacing a tree dropped fields I had not read."
 }

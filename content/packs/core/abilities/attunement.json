@@ -1,0 +1,121 @@
+{
+ "schemaVersion": 1,
+ "id": "attunement",
+ "kind": "content",
+ "note": "⛔ SNG-454. ONE ATTUNEMENT REPLACES 32 PERCEIVE-ONLY ABILITIES. Every tradition carried an L1 'first gift' sense at energy 3, magnitude 3, with the identical arc: sense the thing · sense more of it · sense all of it. ⚠️ WHAT DIFFERED WAS THE NOUN, WHICH IS FLAVOUR, NOT A SKILL.\n⛔ ATTUNEMENT IS ONE ABILITY WHOSE SECT FLAVOUR IS WHAT YOU PERCEIVE — a Mason reads material, an Ashwarden reads dying, a Horizon-walker reads the way. Same craft, same cost, same ranks, and it stops consuming a slot in every tradition's L1 tier.",
+ "abilities": [
+  {
+   "id": "attunement",
+   "name": "Attunement",
+   "levelReq": 1,
+   "energyCost": 3,
+   "axes": {
+    "concrete_abstract": 0.2
+   },
+   "attribute": "mental",
+   "narrationHints": "They go quiet and slightly unfocused for a breath, the way someone does listening for a sound they think they heard. Then they tell you the thing.",
+   "description": "Perceive your tradition's own domain directly — not by inference or instrument, but because you are attuned to it and it is simply there.",
+   "notFor": "Anything outside your tradition's domain; acting on what you find; certainty at range where the world is noisy.",
+   "tradition": "*",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "*",
+   "shape": "reveal",
+   "operativeAxis": "concrete_abstract",
+   "intensity": "minor",
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 2,
+    "scope": 2
+   },
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SURVIVE",
+    "SOCIAL"
+   ],
+   "bounds": [
+    {
+     "text": "⛔ YOUR TRADITION'S DOMAIN ONLY — a Mason attunes to material, never to a want",
+     "class": "hard"
+    },
+    {
+     "text": "tells you what IS, never what to do about it",
+     "class": "hard"
+    },
+    {
+     "text": "a noisy environment for your domain drowns it — a crowd for feeling, a foundry for sound",
+     "class": "soft"
+    },
+    {
+     "text": "⚠️ it costs a breath of standing still, and people notice",
+     "class": "cost"
+    }
+   ],
+   "plainly": "An investigate/survive action that reveals information. Its strength is rated 3 out of 10. Ranks: rank 2 adds depth and history, rank 3 adds a whole place at once.",
+   "functions": [
+    "reveal"
+   ],
+   "sectFlavour": {
+    "mason": "STONE-READ — what a material truly is, whether it is sound, and the stresses it has taken.",
+    "somatic": "BODY-READ — condition, hidden hurt, exhaustion, and what the hands do when the face does not.",
+    "churnfolk": "CHAOS-SENSE — where and roughly when a thing will come apart, and the loose thread.",
+    "rootkin": "LIFESENSE — living things through wall and dark; number, vigour, what is merely holding on.",
+    "horizon": "WAY-SENSE — bearing, distance, and the true cost of a route before you walk it.",
+    "hourkeeper": "HOUR-SENSE — how long since, how long until, and the age of a place or a lie.",
+    "lattice": "ORDER-SENSE — a system's rules and load-bearing points, and the design it is part of.",
+    "enginewright": "MECHANISM-SENSE — how a working functions on sight, and where it will fail.",
+    "numinous": "NUMEN-SENSE — where meaning runs dense, where the world is thin, and where something presses.",
+    "blazeborn": "LIGHTSENSE — where light falls and what it hides; residual heat, the age of a scorch.",
+    "ashwarden": "DEATHSENSE — what is dying, how, and roughly how long.",
+    "abyssal": "APPETITE-SENSE — the want beneath the asking, including the one they refuse to admit.",
+    "unmaker": "FAULT-SENSE — where a thing is under stress, and the one piece whose failure brings the rest.",
+    "marcher": "READ THE FIGHT — a foe's tell a beat early, who is committed, where the line fails first.",
+    "stillhold": "READ THE ROOM — the true temperature under the words, and who is about to move.",
+    "seraphic": "THE WEIGHING LOOK — the moral weight a person carries, and what it cost others.",
+    "veilwright": "SEE THE MADE THING — what is constructed against what is found; the falsecraft in the room.",
+    "threnodist": "THE TRUE FEELING — what is actually felt, not what is shown.",
+    "cogitant": "COLD-READ — thought and intent from micro-signal; not magic, mastery.",
+    "figurist": "PATTERN-SENSE — that these particulars are an instance of something, and of what.",
+    "verist": "THE PLAIN SEEING — illusion, disguise and staging come off it; what was added and what moved.",
+    "wright": "THE SOUND JOINT — what was made well, what was made fast, and what is about to let go.",
+    "syllogist": "THE STATED GROUND — the premise a person is standing on without having said it."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Near Sense",
+     "grants": "⛔ PERCEIVE YOUR DOMAIN IN WHAT IS PRESENT — the thing in front of you, plainly, without instrument or inference.",
+     "cannot": "What is present and close. Your domain only.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Depth and History",
+     "grants": "⚠️ ADDS TIME AND HIDDENNESS. Read what your domain has BEEN — the stresses it took, the repair, the day it nearly broke — and what is deliberately hidden from you within it.",
+     "cannot": "You must be near enough to attend properly; a busy environment for your domain drowns it.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Field",
+     "grants": "⛔ ADDS SCALE. A whole place at once, as one continuous fabric — and where it is torn.",
+     "cannot": "One place at a time, and holding it is a minute of standing still.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "_replaces": "⛔ SNG-454: replaces 32 perceive-only abilities across 21 traditions. See po/staged_content/revert_SNG-454_sense_cull.json for the full pre-cut state."
+  }
+ ]
+}

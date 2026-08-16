@@ -462,12 +462,17 @@
      "cannot": "A figure sent to harm is a figure that will do the SECOND thing you meant, not the first — the Figurists lose more of their own to this than to any enemy. It arrives at the pace of a walking thing and can be outrun, argued with, or unmade by a Mason's denial. And what it does, you wrote.",
      "functions": [
       "summon",
-      "bind",
       "ward",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "summon",
+      "bind",
+      "ward",
+      "strike"
+     ]
     }
    ],
    "gated": "learned",
@@ -524,7 +529,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/social/explore action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to persistence; rank 3 adds to special. Limit: it acts Once and is Spent at r1; it acts on What IT Means."
+   "plainly": "A fight/social/explore action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to persistence; rank 3 adds to special. Limit: it acts Once and is Spent at r1; it acts on What IT Means.",
+   "_functionsWas": [
+    "bind",
+    "strike",
+    "summon",
+    "ward"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "sound_repair",
@@ -1680,8 +1692,8 @@
     "violence_peace": -0.2
    },
    "functions": [
-    "strike",
-    "break"
+    "break",
+    "strike"
    ],
    "narrationHints": "You hold a shape in mind and make the world honour it. An angle that should not exist opens across them; a line is drawn and the things on either side of it are no longer joined. No blade, no heat — a geometry, applied.",
    "description": "Impose a simple figure — a line, an angle, an arc — across a target in sight, and what it crosses is parted: mail, hide, timber, limb. No blade, no heat. The Figurists' first offense, and matter losing the argument.",
@@ -1706,11 +1718,15 @@
      "cannot": "Compound figures are harder to hold and a lapse leaves them half-drawn and unpredictable. A HELD FIGURE STRIKES ANYONE WHO CROSSES IT AT THE SAME RUNG.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -1719,11 +1735,15 @@
      "cannot": "⚠ THE FIGURE IS TRUER THAN THEY ARE and it does not distinguish among its contents. And the Untethered — who forgot bodies suffer — do exactly this and call it elegant; doing it well puts you in their company whether you like it or not.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1781,7 +1801,12 @@
     "duration": 1,
     "scope": 2
    },
-   "_diceFix": "⛔ SNG-453: shape `strike`, mag7, NO DICE — and its own prose says it parts 'mail, hide, timber, limb'. L1 rung 1d6."
+   "_diceFix": "⛔ SNG-453: shape `strike`, mag7, NO DICE — and its own prose says it parts 'mail, hide, timber, limb'. L1 rung 1d6.",
+   "_functionsWas": [
+    "strike",
+    "break"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_plain_weight",
@@ -1795,8 +1820,8 @@
     "violence_peace": -0.3
    },
    "functions": [
-    "strike",
-    "break"
+    "break",
+    "strike"
    ],
    "narrationHints": "No figure, no argument, no craft you could call subtle. You give a thing its true weight and let it be where it is going. Stone remembers it is stone. A wall remembers it is heavy. The floor was always underneath.",
    "description": "Give something present its full and honest weight and send it — a stone, a beam, a shield, the ground under them. Blunt, total, and exactly as complicated as being hit by masonry. The Masons' first offense.",
@@ -1821,11 +1846,15 @@
      "cannot": "You have taken part of a building down and buildings are used by people who are not in your fight. Masons are held to account by other Masons for exactly this.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -1834,11 +1863,15 @@
      "cannot": "You still cannot make weight where there is none, and a building coming down is used by people who were not in your fight. It remains loud, and everyone knows what happened and who did it.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1884,7 +1917,12 @@
    "conserveSuppresses": "one stone, honestly thrown — it goes where you threw it",
    "backlashRung": "incapacitating",
    "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
-   "_descriptionWas": "The Masons' first offense, and it is the tradition's whole position stated as violence: only what can be touched is real, and what is real has mass."
+   "_descriptionWas": "The Masons' first offense, and it is the tradition's whole position stated as violence: only what can be touched is real, and what is real has mass.",
+   "_functionsWas": [
+    "strike",
+    "break"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_sound_read",

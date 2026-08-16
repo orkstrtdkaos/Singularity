@@ -151,11 +151,14 @@
      "grants": "Halt a rising conflict before it breaks; read what each side truly needs; make yourself the still point a room organizes around.",
      "cannot": "Can't stop violence already loosed; the truly bent-on-blood pass through it.",
      "functions": [
-      "reveal",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 2,
@@ -163,13 +166,18 @@
      "grants": "Broker truces that HOLD — agreements weighted by your standing; bind two enemies to a peace neither wanted but both can live in; feel a truce start to fray before it snaps.",
      "cannot": "A truce is only as true as its terms; brokering a peace over an injustice buys time, not resolution — and Stillcraft knows the difference.",
      "functions": [
-      "reveal",
       "bind",
       "sustain",
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "sustain",
+      "shield"
+     ]
     },
     {
      "rank": 3,
@@ -177,18 +185,22 @@
      "grants": "Hold a peace at the scale of peoples — end a generational feud, stand a war down, keep a Held Breath from letting out. The Stillhold's power in miniature; the counter-road to the Ender.",
      "cannot": "The wielder drifts peace-hot — and peace at all costs becomes the Stillhold's prison, a stillness that forecloses on justice to keep the quiet. A peace that suppresses is its own violence, delayed.",
      "functions": [
-      "reveal",
       "bind",
       "sustain",
       "shield"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "sustain",
+      "shield"
+     ]
     }
    ],
    "functions": [
     "bind",
-    "reveal",
     "shield",
     "sustain"
    ],
@@ -249,7 +261,14 @@
     }
    ],
    "plainly": "A social/fight/duel action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 deepens deescalation; rank 3 extends scope. Limit: cannot Stop Violence Already Loosed.",
-   "_descriptionWas": "The peace-pole mastery: de-escalation, arbitration, and the making of truces that hold. The full craft the Valley's Mediator's Tongue only shadows."
+   "_descriptionWas": "The peace-pole mastery: de-escalation, arbitration, and the making of truces that hold. The full craft the Valley's Mediator's Tongue only shadows.",
+   "_functionsWas": [
+    "bind",
+    "reveal",
+    "shield",
+    "sustain"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "disarm",
@@ -807,7 +826,6 @@
     "body_mind": -0.2
    },
    "functions": [
-    "reveal",
     "strike"
    ],
    "narrationHints": "One form, perfectly read and perfectly answered — the duel ends in a single exchange no one saw complete.",
@@ -820,11 +838,14 @@
      "grants": "End a formal duel in a single exchange — you have read them fully and answer perfectly, and the answer strikes them down.",
      "cannot": "Only against one committed opponent; a foe who refuses the form, or a chaos-fighter with no form to read, defeats it.",
      "functions": [
-      "strike",
-      "reveal"
+      "strike"
      ],
      "harmRung": "damaging",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "strike",
+      "reveal"
+     ]
     }
    ],
    "powerSystem": "reach_violence_peace",
@@ -872,7 +893,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that deals damage. It rolls 5d6+6 It affects 1 target Limit: only Against One Committed Opponent."
+   "plainly": "An action that deals damage. It rolls 5d6+6 It affects 1 target Limit: only Against One Committed Opponent.",
+   "_functionsWas": [
+    "reveal",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "soldiers_hand",
@@ -900,11 +926,14 @@
      "grants": "Close a wound fast enough to stay in the fight; shore up a companion who is starting to falter; read a body's capacity correctly and tell it the truth.",
      "cannot": "Haste costs. A wound bound in a fight is bound wrong — it holds, but not well. Real healing comes later.",
      "functions": [
-      "heal",
-      "reveal"
+      "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "heal",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -913,11 +942,15 @@
      "cannot": "You cannot heal what was never whole. The Soldier's Hand works on wounds, not on illness, curse, or damage from inside.",
      "functions": [
       "heal",
-      "reveal",
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "heal",
+      "reveal",
+      "empower"
+     ]
     },
     {
      "rank": 3,
@@ -926,17 +959,20 @@
      "cannot": "This is acute performance in a crisis, not chronic endurance. The Long Road handles the march; Soldier's Hand handles the moment. Pushing this hard in the moment always costs something when it's over.",
      "functions": [
       "heal",
-      "reveal",
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "heal",
+      "reveal",
+      "empower"
+     ]
     }
    ],
    "functions": [
     "empower",
-    "heal",
-    "reveal"
+    "heal"
    ],
    "challengeTypes": [
     "FIGHT",
@@ -995,7 +1031,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/survive action that restores health. It rolls 2d4+1 It affects 1 target Ranks: rank 2 extends targets; rank 3 extends targets. Limit: haste Costs — a wound bound in a fight is Bound Wrong; it holds, and it costs later."
+   "plainly": "A fight/survive action that restores health. It rolls 2d4+1 It affects 1 target Ranks: rank 2 extends targets; rank 3 extends targets. Limit: haste Costs — a wound bound in a fight is Bound Wrong; it holds, and it costs later.",
+   "_functionsWas": [
+    "empower",
+    "heal",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "whats_at_hand",
@@ -1493,7 +1535,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1504,7 +1549,10 @@
       "reveal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -1512,11 +1560,14 @@
      "grants": "Make the reckoning complete and lasting. The person carries it — not a feeling, a settled knowledge they can't unthink. The violence becomes practically impossible for them because they cannot make it smaller than it is.",
      "cannot": "What you show has to be TRUE — a reckoning assembled from exaggeration collapses and takes your standing with it. And it does not come off: you have put something in a person that they will carry, and the Stillhold is clear that doing this to someone is an act of force, performed by people who have chosen not to use any other kind.",
      "functions": [
-      "reveal",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "reveal",
+      "hinder"
+     ]
     }
    ],
    "functions": [
@@ -1576,7 +1627,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/fight/investigate action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: one Person at r1; Those Who Have Made Peace With The Cost Are Unmoved."
+   "plainly": "A social/fight/investigate action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: one Person at r1; Those Who Have Made Peace With The Cost Are Unmoved.",
+   "_functionsWas": [
+    "hinder",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_laid_ground",
@@ -1749,15 +1805,18 @@
      "cannot": "Being in the way is not the same as stopping something. The Stillhold who steps between takes the consequences of being between.",
      "functions": [
       "move",
-      "shield",
-      "foresee"
+      "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "shield",
+      "foresee"
+     ]
     }
    ],
    "functions": [
-    "foresee",
     "move",
     "shield"
    ],
@@ -1816,7 +1875,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/fight/survive action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 2 harm per hit (rank 1 armour) It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: you Are Not Armored — Some People GO Through Anyway."
+   "plainly": "A social/fight/survive action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 2 harm per hit (rank 1 armour) It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: you Are Not Armored — Some People GO Through Anyway.",
+   "_functionsWas": [
+    "foresee",
+    "move",
+    "shield"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "safe_ground",
@@ -2240,7 +2305,7 @@
     "chaos_order": 0.3
    },
    "functions": [
-    "foresee",
+    "empower",
     "reveal"
    ],
    "narrationHints": "You look at ground and see the fight it will produce — where a charge must funnel, where a line will break first, which approach a sensible enemy takes and which a frightened one does.",
@@ -2253,11 +2318,14 @@
      "grants": "Look at terrain and know its fight: chokepoints, dead angles, where footing fails, which line is holdable with what you have.",
      "cannot": "It reads GROUND, not enemies. Numbers, morale and surprise are yours to find elsewhere. And it needs open enough country — a stairwell is not a field.",
      "functions": [
-      "foresee",
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -2265,12 +2333,15 @@
      "grants": "Read several approaches and pick — where to meet them, where to be found, where to make them come to you.",
      "cannot": "Choosing ground means committing to it, and an enemy who declines the ground you chose has taken the first exchange without a blow.",
      "functions": [
-      "foresee",
-      "reveal",
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee",
+      "reveal",
+      "empower"
+     ]
     },
     {
      "rank": 3,
@@ -2278,12 +2349,15 @@
      "grants": "A region's fight read at once — passes, fords, the three farms that will burn, the one road that decides it.",
      "cannot": "⚠ YOU WILL SEE WHICH PLACES CANNOT BE HELD, and which people are in them. The March's hardest work is not fighting; it is choosing what to leave.",
      "functions": [
-      "foresee",
-      "reveal",
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee",
+      "reveal",
+      "empower"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2322,7 +2396,12 @@
     }
    ],
    "plainly": "A fight/puzzle action that reads the fight a piece of ground will produce. Rated 5 of 10 across a scope of 3 for about twelve hours.",
-   "_descriptionWas": "The Marchers' seeing-craft. The March holds because it chose the ground before anyone arrived."
+   "_descriptionWas": "The Marchers' seeing-craft. The March holds because it chose the ground before anyone arrived.",
+   "_functionsWas": [
+    "foresee",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -28,11 +28,14 @@
      "grants": "Follow a clear trail up to a day old; judge party size and burden; find water and shelter in known country.",
      "cannot": "Trails older than a day; deliberate anti-tracking beats you without a check.",
      "functions": [
-      "reveal",
-      "track"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "track"
+     ]
     },
     {
      "rank": 2,
@@ -40,12 +43,15 @@
      "grants": "Follow trails days old; read a campsite's story (numbers, mood, hurry); shortcut known routes — travel time -1h on familiar ground.",
      "cannot": "No effect in true wilderness whiteout; can't track flyers or swimmers.",
      "functions": [
-      "reveal",
-      "track",
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "track",
+      "travel"
+     ]
     },
     {
      "rank": 3,
@@ -53,19 +59,20 @@
      "grants": "One look at open country reveals routes, hazards, and anything recently unusual; anticipate where quarry is HEADED, not just where it went.",
      "cannot": "Prediction fails against quarry that knows you're tracking; not mind-reading — a feint can still fool you.",
      "functions": [
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_functionsWas": [
       "reveal",
       "track",
       "travel",
       "foresee"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
+     ]
     }
    ],
    "functions": [
-    "foresee",
     "reveal",
-    "track",
     "travel"
    ],
    "challengeTypes": [
@@ -130,7 +137,14 @@
      "2": 72,
      "3": 168
     }
-   }
+   },
+   "_functionsWas": [
+    "foresee",
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "greenlore",
@@ -157,11 +171,14 @@
      "grants": "Forage safe food and common medicinals; brew a poultice or tea that restores small health over a rest; identify common poisons.",
      "cannot": "Can't treat serious wounds or strong toxins; needs local plants and an hour.",
      "functions": [
-      "reveal",
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "heal"
+     ]
     },
     {
      "rank": 2,
@@ -169,12 +186,16 @@
      "grants": "Counter most natural poisons and sickness; remedies now also restore energy; read a person's ailment from face, breath, and gait.",
      "cannot": "Precursor-touched afflictions resist; can't stockpile — preparations spoil in days.",
      "functions": [
-      "reveal",
       "heal",
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "heal",
+      "sustain"
+     ]
     },
     {
      "rank": 3,
@@ -182,19 +203,23 @@
      "grants": "Brews that verge on legend: a night's sleep in an hour, clarity through exhaustion, one dose that stabilizes the dying. Recognize Precursor-altered growth. And the hand that knows all of this knows it BOTH WAYS — a draught that dulls, slows, sickens, or drops a person where they stand, prepared as carefully as any remedy.",
      "cannot": "It has to be taken, which means it has to be given — this is patient, deliberate work and never a thing done in a fight. Valley folk hang people for it. And every herbalist good enough to do it is the first person suspected when someone falls ill, which is why most of them never learn this rank at all.",
      "functions": [
-      "reveal",
       "heal",
       "sustain",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "reveal",
+      "heal",
+      "sustain",
+      "hinder"
+     ]
     }
    ],
    "functions": [
     "heal",
     "hinder",
-    "reveal",
     "sustain"
    ],
    "challengeTypes": [
@@ -255,7 +280,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A survive action that restores health. It rolls 1d4+1 Ranks: rank 2 deepens remedy; rank 3 adds to special. Limit: cannot treat Serious Wounds or strong toxins; needs Local Plants."
+   "plainly": "A survive action that restores health. It rolls 1d4+1 Ranks: rank 2 deepens remedy; rank 3 adds to special. Limit: cannot treat Serious Wounds or strong toxins; needs Local Plants.",
+   "_functionsWas": [
+    "heal",
+    "hinder",
+    "reveal",
+    "sustain"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "mediators_tongue",
@@ -282,11 +314,14 @@
      "grants": "Halt a brewing fight long enough for words; read what each party actually wants beneath what they're saying.",
      "cannot": "Doesn't work mid-violence; can't make anyone accept — only opens the door.",
      "functions": [
-      "reveal",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 2,
@@ -294,12 +329,16 @@
      "grants": "Broker deals that hold — agreements you mediate gain weight in the community ledger; call out a lie in negotiation and be believed.",
      "cannot": "Can't broker what one side truly can't give; your reputation is collateral on every deal.",
      "functions": [
-      "reveal",
       "bind",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "command"
+     ]
     },
     {
      "rank": 3,
@@ -307,18 +346,21 @@
      "grants": "Arbitrate feuds of long standing; your settlements carry near-law in communities that know you; once per season, one hostile audience becomes neutral.",
      "cannot": "Fails against zealotry; a settlement you break yourself burns this ability's trust to rank 1 until amends.",
      "functions": [
-      "reveal",
       "bind",
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "command"
+     ]
     }
    ],
    "functions": [
     "bind",
-    "command",
-    "reveal"
+    "command"
    ],
    "challengeTypes": [
     "SOCIAL"
@@ -375,7 +417,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: cannot broker What One Side Truly Cannot Give."
+   "plainly": "A social action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: cannot broker What One Side Truly Cannot Give.",
+   "_functionsWas": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "tinkers_hand",
@@ -429,18 +477,22 @@
      "functions": [
       "mend",
       "make",
-      "open",
-      "reveal"
+      "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "mend",
+      "make",
+      "open",
+      "reveal"
+     ]
     }
    ],
    "functions": [
     "make",
     "mend",
-    "open",
-    "reveal"
+    "open"
    ],
    "challengeTypes": [
     "PUZZLE",
@@ -497,7 +549,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/survive action that restores health. It rolls 1d4+1 Ranks: rank 2 extends access; rank 3 adds to special. Limit: precursor Mechanisms Still Resist."
+   "plainly": "A puzzle/survive action that restores health. It rolls 1d4+1 Ranks: rank 2 extends access; rank 3 adds to special. Limit: precursor Mechanisms Still Resist.",
+   "_functionsWas": [
+    "make",
+    "mend",
+    "open",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "beastfriend",
@@ -536,12 +595,16 @@
      "grants": "Ask simple tasks of animals that know you (carry, guard, find); a companion beast may take you on; sense what nearby animals sense.",
      "cannot": "Companion is a partner, not a tool — mistreat it and it's gone; borrowed senses are impressions, not sight.",
      "functions": [
-      "reveal",
       "command",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "command",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -549,14 +612,20 @@
      "grants": "Parley meaningfully with any natural creature; Precursor-touched beasts recognize you as neutral. And in wild country you may call for aid and something answers — it places itself between you and what threatens you, and it will strike to wound: a large animal in earnest breaks bone and tears, and none of that is yours to moderate once it has begun.",
      "cannot": "You ASK — always. Nothing here is compelled, and a creature that answers is risking its own life for you, may be hurt or killed doing it, and remembers. Ask too often, or for the wrong thing, and the wild country stops answering.",
      "functions": [
-      "reveal",
       "command",
       "bind",
       "summon",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "reveal",
+      "command",
+      "bind",
+      "summon",
+      "strike"
+     ]
     }
    ],
    "functions": [
@@ -620,7 +689,15 @@
      "class": "soft"
     }
    ],
-   "plainly": "A social/explore/stealth action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: nO Commands — Only Trust; predators stay dangerous."
+   "plainly": "A social/explore/stealth action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: nO Commands — Only Trust; predators stay dangerous.",
+   "_functionsWas": [
+    "bind",
+    "command",
+    "reveal",
+    "strike",
+    "summon"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "stonewise",
@@ -650,7 +727,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -658,12 +738,16 @@
      "grants": "Date construction and read its story (repairs, sieges, haste); detect voids by resonance tap; find the weak point that brings a structure down — or the brace that saves it. Named to a crew with hammers, that point breaks a wall in one session, and whatever is standing under it comes down with it.",
      "cannot": "Void detection gives presence, not layout; Precursor materials read as 'wrong' without detail.",
      "functions": [
-      "reveal",
       "mend",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "reveal",
+      "mend",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -671,18 +755,21 @@
      "grants": "Read geology like architecture: predict collapse, slide, or sinkhole; navigate caves by stone-sense; Precursor construction yields its structural logic (not its purpose).",
      "cannot": "Prediction is hours-scale, not weeks; living rock keeps some secrets — margin of error the GM holds.",
      "functions": [
+      "mend",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "_functionsWas": [
       "reveal",
       "mend",
       "break",
       "foresee"
-     ],
-     "gains": "broaden",
-     "harmRung": "damaging"
+     ]
     }
    ],
    "functions": [
     "break",
-    "foresee",
     "mend",
     "reveal"
    ],
@@ -742,7 +829,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A explore/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens structuralRead; rank 3 extends foresight. Limit: void Detection Gives Presence, Not Layout."
+   "plainly": "A explore/puzzle action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens structuralRead; rank 3 extends foresight. Limit: void Detection Gives Presence, Not Layout.",
+   "_functionsWas": [
+    "break",
+    "foresee",
+    "mend",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "rivercraft",
@@ -782,11 +876,15 @@
      "cannot": "The gray water reads as silence — a gap, not a message; can't read still water's depths.",
      "functions": [
       "move",
-      "reveal",
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal",
+      "travel"
+     ]
     },
     {
      "rank": 3,
@@ -795,16 +893,19 @@
      "cannot": "Tracing needs a sample in hand; the watershed's Precursor plumbing appears in the model only as anomalies.",
      "functions": [
       "move",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
       "reveal",
       "travel",
       "foresee"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
+     ]
     }
    ],
    "functions": [
-    "foresee",
     "move",
     "reveal",
     "travel"
@@ -864,7 +965,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A explore/chase/survive action that moves you or someone else. Its strength is rated 3 out of 10, and lasts for about 4 hours. Range is 10. Ranks: rank 2 deepens watercraft; rank 3 adds to special. Limit: rapids Beyond Your Craft'S Class still say no."
+   "plainly": "A explore/chase/survive action that moves you or someone else. Its strength is rated 3 out of 10, and lasts for about 4 hours. Range is 10. Ranks: rank 2 deepens watercraft; rank 3 adds to special. Limit: rapids Beyond Your Craft'S Class still say no.",
+   "_functionsWas": [
+    "foresee",
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "quiet_step",
@@ -1144,11 +1252,14 @@
      "grants": "Sense Precursor material and workings nearby (direction and rough distance); recognize safe salvage from live remnant; follow a buried alignment across country.",
      "cannot": "Sense, not sight — no detail; depth beyond a few meters muddies the read.",
      "functions": [
-      "reveal",
-      "track"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "track"
+     ]
     },
     {
      "rank": 2,
@@ -1156,12 +1267,15 @@
      "grants": "Map a site's Precursor layout by walking it; judge whether a remnant is dormant, cycling, or waking; salvage from the edge of live systems without triggering them.",
      "cannot": "Judgment is craft, not certainty — 'waking' can lie; nothing here opens what's sealed.",
      "functions": [
-      "reveal",
-      "track",
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "track",
+      "travel"
+     ]
     },
     {
      "rank": 3,
@@ -1169,17 +1283,19 @@
      "grants": "The deep net reveals itself: perceive the valley's whole Precursor lattice from any node; sense when the lattice CHANGES state anywhere on it; approach places that repel others.",
      "cannot": "The lattice's purpose stays dark — pattern without meaning; state-changes arrive as feeling, not fact; some doors notice being noticed.",
      "functions": [
-      "reveal",
-      "track",
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "track",
+      "travel"
+     ]
     }
    ],
    "functions": [
     "reveal",
-    "track",
     "travel"
    ],
    "challengeTypes": [
@@ -1235,7 +1351,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 4 out of 10, and lasts for about 2 hours. Range is 30. Ranks: rank 2 deepens precursorSense; rank 3 adds to special. Limit: sense, Not Sight — no detail; depth beyond a few meters muddies."
+   "plainly": "A explore/investigate action that reveals information or sets up a later action. Its strength is rated 4 out of 10, and lasts for about 2 hours. Range is 30. Ranks: rank 2 deepens precursorSense; rank 3 adds to special. Limit: sense, Not Sight — no detail; depth beyond a few meters muddies.",
+   "_functionsWas": [
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "blend_in",
@@ -1578,7 +1700,6 @@
     "mechanical_spiritual": -0.2
    },
    "functions": [
-    "reveal",
     "command",
     "travel"
    ],
@@ -1592,11 +1713,14 @@
      "grants": "Pitch a call so it travels — up a valley, across a lake, through a working mill — and arrives understandable to someone a mile off who knows the call. ⚠️ Also READS one back: you can tell distance and rough direction from an answering call.",
      "cannot": "IT NEEDS SOMETHING TO CARRY ALONG — water, a valley wall, a still evening. Open flat ground eats it. And it is a CALL: anyone in between hears it too, including whoever you were avoiding.",
      "functions": [
-      "reveal",
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "travel"
+     ]
     },
     {
      "rank": 2,
@@ -1604,12 +1728,16 @@
      "grants": "Set a chain of calls along a route — a mill-line, a river run, a ridge — so word travels the valley faster than a rider.",
      "cannot": "You need people at the stations who know the calls, which means the calls are known, which means they can be read by anyone who learned them. Valley call-lines have been used against the valley before.",
      "functions": [
-      "reveal",
       "travel",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "travel",
+      "command"
+     ]
     },
     {
      "rank": 3,
@@ -1617,12 +1745,16 @@
      "grants": "A call the entire settled valley picks up and passes — flood, fire, a column on the road. It has been used four times in living memory and everyone knows all four.",
      "cannot": "⚠️ IT CANNOT BE UNSAID AND IT CANNOT BE QUIET. You have told everyone, including the thing you are calling about. A false raising costs a family its standing for a generation.",
      "functions": [
-      "reveal",
       "travel",
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "travel",
+      "command"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1660,7 +1792,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that sends and reads a call across the valley. Rated 4 of 10 across a scope of 3."
+   "plainly": "A puzzle/social action that sends and reads a call across the valley. Rated 4 of 10 across a scope of 3.",
+   "_functionsWas": [
+    "reveal",
+    "command",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "glasswork",
@@ -1673,9 +1811,8 @@
     "dark_light": 0.2
    },
    "functions": [
-    "make",
-    "reveal",
-    "conceal"
+    "conceal",
+    "make"
    ],
    "narrationHints": "Not Radiant craft — the folk version. Valley glass, valley mirrors, valley lamps: catching light, throwing it where you need it, and knowing by eye what a piece of glass will do before you cut it.",
    "description": "What a people learn from living under the plateau edge. No coherent beams, no mirage — a lens, a signal, a lamp that gets light down a mineshaft.",
@@ -1687,11 +1824,14 @@
      "grants": "Work glass and mirror to put light where it does not reach — down a shaft, around a corner, into a wound you are trying to close — or throw a signal flash to a ridge in daylight. ⚠️ And you can READ a piece of glass by eye: what it will do, where it will fail, whether it was ground or found.",
      "cannot": "THERE MUST BE LIGHT TO CATCH. This makes none. In true dark it is a bag of glass. And a signal flash is seen by everyone with a line of sight to the ridge.",
      "functions": [
-      "make",
-      "reveal"
+      "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "make",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1700,11 +1840,15 @@
      "cannot": "It is FIXED where you built it and it takes hours. Weather, dust and a curious child all defeat it.",
      "functions": [
       "make",
-      "reveal",
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "make",
+      "reveal",
+      "conceal"
+     ]
     },
     {
      "rank": 3,
@@ -1713,11 +1857,15 @@
      "cannot": "⚠️ YOU ARE NOW WORTH ROBBING. Valley glass of this quality is the most portable wealth a farming family will ever hold, and everyone who has seen it knows where it lives.",
      "functions": [
       "make",
-      "reveal",
       "conceal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "make",
+      "reveal",
+      "conceal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1755,7 +1903,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that catches and directs existing light with worked glass. Rated 4 of 10 across a scope of 2 for about twelve hours."
+   "plainly": "A puzzle/social action that catches and directs existing light with worked glass. Rated 4 of 10 across a scope of 2 for about twelve hours.",
+   "_functionsWas": [
+    "make",
+    "reveal",
+    "conceal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -35,7 +35,10 @@
       "reveal"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -46,7 +49,10 @@
       "reveal"
      ],
      "harmRung": "none",
-     "gains": "deepen"
+     "gains": "deepen",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -58,7 +64,11 @@
       "bind"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     }
    ],
    "functions": [
@@ -116,7 +126,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/investigate action that reveals information or sets up a later action. Its strength is rated 6 out of 10, and lasts for about 3 hours Ranks: rank 2 deepens fidelity; rank 3 extends reach. Limit: iT Performs Its Own Function, Not Yours."
+   "plainly": "A puzzle/investigate action that reveals information or sets up a later action. Its strength is rated 6 out of 10, and lasts for about 3 hours Ranks: rank 2 deepens fidelity; rank 3 extends reach. Limit: iT Performs Its Own Function, Not Yours.",
+   "_functionsWas": [
+    "bind",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "wake_the_line",
@@ -382,11 +397,14 @@
      "grants": "Open minor Precursor bindings — a sealed cache, a locked mechanism, a bound remnant. Read a seal's rough weight (minor/major/grave) before you try.",
      "cannot": "Minor seals only; weight-read is rough; what's inside is the GM's to reveal — sometimes gift, sometimes not.",
      "functions": [
-      "open",
-      "reveal"
+      "open"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "open",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -394,12 +412,16 @@
      "grants": "Open major seals — vaults, containments, the doors the valley learned to walk around; sense a seal's PURPOSE-shadow (prison? dam? mercy?) before opening. The shadow is a warning, not a formality: a seal set as a prison has something in it, and it has had a very long time to want out.",
      "cannot": "Purpose-shadow is a hint, not certainty; some doors notice being opened and remember you; grave seals still refuse.",
      "functions": [
-      "reveal",
       "open",
       "break"
      ],
      "harmRung": "damaging",
-     "gains": "deepen"
+     "gains": "deepen",
+     "_functionsWas": [
+      "reveal",
+      "open",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -407,20 +429,25 @@
      "grants": "Open grave seals — the ones holding back the worst the Precursors feared; open a thing at distance by its address (with Address-Sense); the valley's deepest containments become things you may simply undo. AND WHAT WAS HELD COMES OUT. A grave seal can be opened onto a place, or onto people — the Precursors did not seal these because they were dangerous to leave alone, but because they were dangerous to MEET, and meeting them kills — what comes out strikes whatever is nearest, and it does not stop because you opened the door.",
      "cannot": "Nothing about this is aimed. What comes out was contained by people cleverer than you, and it does not distinguish between what you opened it at and whatever else is standing there — including you. It cannot be re-sealed by the hand that opened it: re-containment is a different working, usually a longer one, and usually somebody else's.",
      "functions": [
-      "reveal",
       "open",
       "break",
       "summon",
       "strike"
      ],
      "harmRung": "lethal",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "reveal",
+      "open",
+      "break",
+      "summon",
+      "strike"
+     ]
     }
    ],
    "functions": [
     "break",
     "open",
-    "reveal",
     "strike",
     "summon"
    ],
@@ -483,7 +510,15 @@
      "3": 2160
     },
     "note": "KEPT: this is not a battle skill. Opening a GRAVE SEAL twice in a season is a world event happening twice, and the cooldown is about the WORLD's tolerance rather than the wielder's."
-   }
+   },
+   "_functionsWas": [
+    "break",
+    "open",
+    "reveal",
+    "strike",
+    "summon"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "hold_the_aperture",

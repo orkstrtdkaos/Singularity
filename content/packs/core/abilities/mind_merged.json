@@ -1,0 +1,219 @@
+{
+ "schemaVersion": 1,
+ "id": "mind_merged",
+ "kind": "content",
+ "note": "⛔ SNG-450 MIND BATCH 1 — MERGED ABILITIES. Three skills replacing seven, per Erik's review.\n⚠️ THE MERGE TEST WAS FLAVOUR-DUPLICATION AT IDENTICAL STATS: The Clear Path / Derived Route / Patterned Way were all L2, mag4, energy 1, with the same three-rank arc and only the noun changed (calculating / reasoning / pattern). The Correct Protocol / Restored Form were both L2, 2d4, energy 2, same arc. The Stated Case / Necessary Case did the same job at different costs.\n⛔ FLAVOUR IS NOW INTERNAL — each carries a `sectFlavour` map so a cogitant, syllogist and figurist describe the same craft in their own terms without it being three entries.",
+ "abilities": [
+  {
+   "id": "the_solved_route",
+   "name": "The Solved Route",
+   "levelReq": 2,
+   "energyCost": 1,
+   "attribute": "mental",
+   "tradition": "Mind",
+   "nativeOrCombination": "native",
+   "powerSystem": "metaphysical",
+   "shape": "reposition",
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 2,
+    "scope": 2
+   },
+   "description": "Work out the way through before you take a step, and then take it — the quickest line through a crowd, a ruin, a guard rotation or open country, walked as though you had been given the plan.",
+   "narrationHints": "They do not hesitate at junctions. The gap opens a half-second before they reach it, every time, and it looks like luck until the fourth time.",
+   "functions": [
+    "move",
+    "travel"
+   ],
+   "sectFlavour": {
+    "cogitant": "You CALCULATE it — the crowd modelled, the rotation timed.",
+    "syllogist": "You REASON it — what must be true of a place you have not seen.",
+    "figurist": "You READ ITS FORM — the space is an instance of a shape you know, and shapes have exits."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Route",
+     "functions": [
+      "move"
+     ],
+     "grants": "Find and walk the fastest safe line through any space you can observe. You do not backtrack and you do not get lost.",
+     "cannot": "Only what you can see or have been described. Does not make you faster, only better-directed."
+    },
+    {
+     "rank": 2,
+     "name": "The Moving Space",
+     "functions": [
+      "move",
+      "travel"
+     ],
+     "grants": "⛔ THE SPACE IS NOW ALLOWED TO MOVE. Cross a shifting one — a crowd, a patrol, a running fight — without friction, staying two steps ahead of everyone in it. Adds unseen ground: derive the route through terrain you have not entered.",
+     "cannot": "Cannot route around what you have no information about at all."
+    },
+    {
+     "rank": 3,
+     "name": "The Designed Scene",
+     "functions": [
+      "move",
+      "travel"
+     ],
+     "grants": "⚠️ ADDS OTHERS. In a space you understand, you move as though you laid it out — and you can walk a whole party through on the same line, calling it as you go.",
+     "cannot": "One space at a time; you must have read it."
+    }
+   ],
+   "_merged": "⛔ SNG-450: MERGES The Clear Path (cogitant), The Derived Route (syllogist) and The Patterned Way (figurist) — three skills at the same level, same magnitude, same energy, same three-rank arc, differing only in the noun. Erik: 'yes on the nav skills.' Flavour is now internal.",
+   "harmRung": "none",
+   "intensity": "moderate",
+   "_authored": "SNG-450",
+   "plainly": "A movement action that finds and walks the best line. Its strength is rated 4 out of 10.",
+   "challengeTypes": [
+    "CHASE",
+    "STEALTH",
+    "SURVIVE"
+   ]
+  },
+  {
+   "id": "the_correct_restoration",
+   "name": "The Correct Restoration",
+   "levelReq": 2,
+   "energyCost": 2,
+   "attribute": "mental",
+   "tradition": "Mind",
+   "nativeOrCombination": "native",
+   "powerSystem": "metaphysical",
+   "shape": "healing",
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 0,
+    "range": 1,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "description": "Find what is actually wrong and put it right — by procedure or by pattern, but correctly, so that it does not come back.",
+   "narrationHints": "No comfort offered and none needed. They find the thing, name it, and fix it, and the patient is left slightly unnerved by how little reassurance was involved.",
+   "functions": [
+    "heal",
+    "restore",
+    "mend"
+   ],
+   "sectFlavour": {
+    "syllogist": "BY PROTOCOL — the correct actions in the correct order, nothing left out.",
+    "figurist": "BY FORM — you restore the pattern the thing is a disruption of, and function follows.",
+    "cogitant": "BY MODEL — you hold the whole working in your head and correct it there first."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Diagnosis and First Care",
+     "functions": [
+      "heal",
+      "reveal"
+     ],
+     "grants": "⛔ NAME WHAT IS ACTUALLY WRONG — the real fault, not the presenting one — AND TREAT IT. A small heal on top of the diagnosis: the bleeding stopped, the joint set, the fever broken tonight.",
+     "cannot": "One patient or one object; the fault must be present, not historical."
+    },
+    {
+     "rank": 2,
+     "name": "The Full Sequence",
+     "functions": [
+      "heal",
+      "restore",
+      "mend"
+     ],
+     "grants": "⚠️ A BIG HEAL. The whole correct sequence, in order, nothing left out — they get up, and they can fight or walk today.",
+     "cannot": "Cannot regrow what is gone; cannot work on what you cannot examine."
+    },
+    {
+     "rank": 3,
+     "name": "Root and Branch",
+     "functions": [
+      "heal",
+      "restore",
+      "mend"
+     ],
+     "grants": "⛔ A FULL HEAL. Whole, to the bone, in one working — and the same for an object or a system: back to what it was before.",
+     "cannot": "One subject per use, and you must be able to reach the whole of it."
+    }
+   ],
+   "_merged": "⛔ SNG-450: MERGES The Correct Protocol (syllogist) and The Restored Form (figurist) — identical level, dice, energy and rank arc. Erik: 'yes on the restore skills, but LEVEL ONE SHOULD HEAL A BIT ON TOP OF THE DIAGNOSIS.' ⚠️ ERIK: 'HEALED IS HEALED — permanence isn't a good r3. Perhaps r2 should be a BIG HEAL and r3 a FULL HEAL.' The ladder is now small → big → full, which is a quantity a player can read.",
+   "harmRung": "none",
+   "intensity": "moderate",
+   "_authored": "SNG-450",
+   "plainly": "A social/investigate action that restores health. It rolls 2d4.",
+   "challengeTypes": [
+    "SURVIVE",
+    "INVESTIGATE"
+   ]
+  },
+  {
+   "id": "case_closed",
+   "name": "Case Closed",
+   "levelReq": 1,
+   "energyCost": 4,
+   "attribute": "social",
+   "tradition": "Mind",
+   "nativeOrCombination": "native",
+   "powerSystem": "metaphysical",
+   "shape": "setup",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 3
+   },
+   "description": "Lay a matter out so completely that the argument ends — not by winning it, but by leaving nothing further to say.",
+   "narrationHints": "Nobody is humiliated and nobody is shouted down. The room simply arrives somewhere and stays there, and afterwards no one can quite remember what the disagreement was.",
+   "functions": [
+    "persuade",
+    "empower"
+   ],
+   "sectFlavour": {
+    "syllogist": "THE LAID-OUT CASE — premises in order, and the conclusion is simply visible.",
+    "cogitant": "THE CLOSED ARGUMENT — no gap for them to find, because there isn't one.",
+    "figurist": "THE WHOLE FIGURE — you show them the shape the facts make, and it is not arguable."
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Matter Settled",
+     "functions": [
+      "persuade"
+     ],
+     "grants": "Set a matter out to people willing to follow. A dispute resolves, a council decides, a wrong belief comes apart — and nobody is humiliated, which is why it holds.",
+     "cannot": "⛔ THEY MUST BE WILLING TO FOLLOW. Does nothing to someone who will not engage."
+    },
+    {
+     "rank": 2,
+     "name": "The Case That Keeps",
+     "functions": [
+      "persuade",
+      "empower"
+     ],
+     "grants": "⚠️ ADDS DURATION AND ABSENCE. Build it to last — written, taught, left behind. It goes on convincing after you have gone, and someone else can carry it.",
+     "cannot": "Cannot be built against a matter you do not actually understand."
+    },
+    {
+     "rank": 3,
+     "name": "No Longer Litigated",
+     "functions": [
+      "persuade",
+      "empower"
+     ],
+     "grants": "⛔ ADDS SCALE AND FINALITY. A case so complete a whole community stops reopening it. Feuds end this way; so do bad laws.",
+     "cannot": "One matter at a time, and it must be a matter people are actually arguing about."
+    }
+   ],
+   "_merged": "⛔ SNG-450: MERGES The Stated Case (syllogist) and The Necessary Case (cogitant), which did the same job at different energy costs. Erik: 'could be Case Closed, and the flavour goes internal like the move skills did.' ⚠️ RETAGGED SOCIAL — this was `reveal/command/bind` and it is persuasion. ⚠️ ERIK: 'NO to the r3 cost — the case doesn't have to be true.' Removed.",
+   "harmRung": "none",
+   "intensity": "moderate",
+   "_authored": "SNG-450",
+   "plainly": "A social action that settles a matter. Its strength is rated 5 out of 10.",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ]
+  }
+ ]
+}

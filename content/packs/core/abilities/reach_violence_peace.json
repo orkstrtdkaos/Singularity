@@ -305,11 +305,14 @@
      "grants": "Take the weapon rather than the life — cleanly, from a committed strike, without opening yourself.",
      "cannot": "An emptied hand is not an ended fight. Some fighters are worse without the weapon.",
      "functions": [
-      "hinder",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "hinder",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -317,11 +320,14 @@
      "grants": "End a fight by taking everything it needed to continue — the weapon, the footing, the will, in one motion.",
      "cannot": "It ends the fight, not the enmity. What you disarm today comes back better armed.",
      "functions": [
-      "hinder",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "hinder",
+      "break"
+     ]
     }
    ],
    "powerSystem": "reach_violence_peace",
@@ -378,7 +384,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/duel action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 deepens disable; rank 3 adds to special. Limit: aN Emptied Hand IS Not AN Ended Fight."
+   "plainly": "A fight/duel action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 deepens disable; rank 3 adds to special. Limit: aN Emptied Hand IS Not AN Ended Fight.",
+   "_functionsWas": [
+    "break",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "calm_word",
@@ -2105,9 +2116,8 @@
     "emotional_logical": 0.2
    },
    "functions": [
-    "strike",
-    "hinder",
-    "bind"
+    "break",
+    "strike"
    ],
    "narrationHints": "The Stillhold's peace is not gentleness — it is a pressure, held. You take everything a room was holding down and put all of it into one person. What has been kept still for a hundred years does not come out kindly.",
    "description": "The Stillhold's first offense. A peace this absolute is a great deal of violence with a lid on it, and the craft is knowing where to lift the lid.",
@@ -2119,11 +2129,14 @@
      "grants": "Take the held tension in a room — the grudge, the fear, the swallowed rage, your own — and put it into one target at once. It strikes like a beam coming down: ribs break, breath goes, and whatever they were about to say goes with it.",
      "cannot": "IT MUST ALREADY BE THERE — the GM must be able to POINT AT SOMETHING SPECIFIC being held back in this scene: a grudge named, a fear shown, an order obeyed under protest, a hostility swallowed. If nothing can be pointed at, the craft does nothing. You cannot meter it — what was held is what arrives.",
      "functions": [
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "strike",
+      "hinder"
+     ]
     },
     {
      "rank": 2,
@@ -2131,12 +2144,15 @@
      "grants": "Or hold it ON them instead — the same pressure applied as stillness, so they cannot move, cannot speak, cannot raise a hand, while you decide.",
      "cannot": "Holding costs continuously and everyone can see you doing it. The Stillhold does not forgive using the peace as a weapon in front of witnesses.",
      "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "_functionsWas": [
       "strike",
       "hinder",
       "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "incapacitating"
+     ]
     },
     {
      "rank": 3,
@@ -2145,12 +2161,16 @@
      "cannot": "⚠ THE PEACE IS SPENT: whatever the GM pointed at is now LOOSE and acts — the grudge is taken, the fear breaks, the order is refused — and this craft cannot be used in this place again until something new is being held back. You have won a fight by ending a peace, and the Silent will come to see who did it.",
      "functions": [
       "strike",
-      "hinder",
-      "bind",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "hinder",
+      "bind",
+      "break"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2192,7 +2212,13 @@
    "backlash": "The pressure comes out sideways. What was being held is loose and it goes where it wants — a riot rather than a strike, and you are standing in the middle of it.",
    "conserveSuppresses": "lift a corner — what comes up is small enough to stay pointed",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung."
+   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
+   "_functionsWas": [
+    "strike",
+    "hinder",
+    "bind"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_held_line",

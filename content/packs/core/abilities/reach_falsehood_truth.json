@@ -18,7 +18,6 @@
    "functions": [
     "conceal",
     "deceive",
-    "reveal",
     "sustain"
    ],
    "narrationHints": "The made-untrue — an illusion that holds, a false face that fits, a story so well-built it stands on its own; the craft that knows exactly how a truth is faked, and so can catch it too.",
@@ -32,11 +31,15 @@
      "cannot": "Illusion is not substance — tested hard, it fails; a Verity read can pierce it; the truly perceptive feel the seam.",
      "functions": [
       "deceive",
-      "conceal",
-      "reveal"
+      "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "deceive",
+      "conceal",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -46,11 +49,16 @@
      "functions": [
       "deceive",
       "conceal",
-      "reveal",
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "deceive",
+      "conceal",
+      "reveal",
+      "sustain"
+     ]
     },
     {
      "rank": 3,
@@ -60,11 +68,16 @@
      "functions": [
       "deceive",
       "conceal",
-      "reveal",
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "deceive",
+      "conceal",
+      "reveal",
+      "sustain"
+     ]
     }
    ],
    "challengeTypes": [
@@ -126,7 +139,14 @@
    ],
    "plainly": "A stealth/social/investigate action that makes or animates something. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens conviction; rank 3 extends scope. Limit: illusion IS Not Substance — tested hard, it fails.",
    "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
-   "_descriptionWas": "The falsehood-pole mastery: illusion, disguise, the constructed untruth — and, by knowing how lies are built, the sharpest detector of them. The Veilwrights' art."
+   "_descriptionWas": "The falsehood-pole mastery: illusion, disguise, the constructed untruth — and, by knowing how lies are built, the sharpest detector of them. The Veilwrights' art.",
+   "_functionsWas": [
+    "conceal",
+    "deceive",
+    "reveal",
+    "sustain"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "verity",
@@ -157,7 +177,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -168,7 +191,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -176,12 +202,16 @@
      "grants": "Truth at scale — a deception undone before a people, a buried thing dragged into day, a word spoken so truly it cannot be unsaid or unbelieved. The Truthwardens' power in miniature; the pole Aevi-the-Watcher lives nearest.",
      "cannot": "The wielder drifts truth-hot — toward revealing everything, always, sparing nothing; total truth burns every shelter, the foreclosure of a world with no privacy, no mercy, no shadow left to heal in (the Blaze's cousin on another axis).",
      "functions": [
-      "reveal",
       "bind",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "restore"
+     ]
     }
    ],
    "challengeTypes": [
@@ -243,7 +273,13 @@
    ],
    "plainly": "A social/investigate/fight action that reveals information or sets up a later action. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens penetration; rank 3 extends scope. Limit: it Sees The Lie, Not Always The Truth Behind IT.",
    "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
-   "_descriptionWas": "The truth-pole mastery: piercing deception, speaking the word that cannot be false, seeing and showing what IS. The Truthwardens' art — and Aevi-the-Watcher's own road."
+   "_descriptionWas": "The truth-pole mastery: piercing deception, speaking the word that cannot be false, seeing and showing what IS. The Truthwardens' art — and Aevi-the-Watcher's own road.",
+   "_functionsWas": [
+    "bind",
+    "restore",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_whole_truth",
@@ -256,8 +292,7 @@
     "dark_light": 0.2
    },
    "functions": [
-    "restore",
-    "reveal"
+    "restore"
    ],
    "narrationHints": "Everything hidden in a place or person surfaces at once — every lie, every secret, the whole shape of the truth.",
    "description": "The investigate capstone: lay bare the ENTIRE truth of a person, place, or mystery in one act — every deception, every hidden thing, the full pattern. Even the Cathedral of Convincing's true-pieces-false-whole yields to it.",
@@ -269,11 +304,14 @@
      "grants": "Reveal the complete hidden truth of a subject at once — the only thing that cracks a lie built from true pieces. And the record rights itself: someone falsely made into a thing they were not is restored to what they actually are, in front of everyone who believed otherwise.",
      "cannot": "Overwhelming — you learn things you can't unlearn; the powerful will kill to keep some truths buried; reveals, cannot compel.",
      "functions": [
-      "reveal",
       "restore"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "reveal",
+      "restore"
+     ]
     }
    ],
    "powerSystem": "reach_falsehood_truth",
@@ -315,7 +353,12 @@
     }
    ],
    "plainly": "An action that reveals information or sets up a later action. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about an hour.",
-   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
+   "_functionsWas": [
+    "restore",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_wrong_reality",
@@ -1375,12 +1418,16 @@
      "grants": "Navigate to the truth of any place — the real exit, the actual center, the genuine threat — by seeing past every falsification of the terrain.",
      "cannot": "Nothing further; this is the craft's ceiling; it finds the REAL route, not a SAFE one.",
      "functions": [
-      "reveal",
       "move",
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "move",
+      "travel"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1425,7 +1472,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A navigation/investigation/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it finds the Real route, not a Safe one."
+   "plainly": "A navigation/investigation/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it finds the Real route, not a Safe one.",
+   "_functionsWas": [
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_held_truth",
@@ -1738,11 +1791,14 @@
      "grants": "Say it where it spreads. What breaks is not the person's day but their PLACE — and some do not outlive losing it.",
      "cannot": "Choosing whether they outlive it. That is theirs and it is not quick.",
      "functions": [
-      "reveal",
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "reveal",
+      "strike"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1794,7 +1850,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social contest against the target's standing. You must possess a real fact they have built their reputation on concealing — you cannot invent one, and a false fact does nothing at all. On a win they lose access to that standing: any roll relying on their reputation fails for the scene. At rank 2 the effect is public and lasts until they rebuild it, which takes months. Some targets never recover socially; the GM decides that, not the roll. Anyone whose position rests on no concealment cannot be touched by this."
+   "plainly": "A social contest against the target's standing. You must possess a real fact they have built their reputation on concealing — you cannot invent one, and a false fact does nothing at all. On a win they lose access to that standing: any roll relying on their reputation fails for the scene. At rank 2 the effect is public and lasts until they rebuild it, which takes months. Some targets never recover socially; the GM decides that, not the roll. Anyone whose position rests on no concealment cannot be touched by this.",
+   "_functionsWas": [
+    "reveal",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -2014,8 +2075,9 @@
     "violence_peace": -0.3
    },
    "functions": [
-    "strike",
-    "reveal"
+    "break",
+    "hinder",
+    "strike"
    ],
    "narrationHints": "You say the true thing they have been arranging their life around not hearing, and they come apart where they stand. No volume. Often quite gentle. It is the accuracy that does it.",
    "description": "Speak one true thing the target cannot bear, to their face, and they lose the thread — the argument, the composure, the readiness, the lie they were maintaining. Nothing blocks it. The Verists' first offense, and it cannot be withdrawn or forgotten by anyone who heard it.",
@@ -2027,11 +2089,14 @@
      "grants": "Speak one true thing the target cannot bear, to their face. They lose the thread — the argument, the composure, the readiness, the lie they were maintaining. Nothing blocks it, because there is nothing to block — the word strikes past armour, guard and composure alike.",
      "cannot": "You must KNOW it to be true; a guess that misses makes you cruel and wrong. It is SAID — they must hear you. And you cannot unsay it: they will carry it, and they will remember who handed it over.",
      "functions": [
-      "strike",
-      "reveal"
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -2040,11 +2105,15 @@
      "cannot": "You have done this to their whole life, not their afternoon. Bystanders who liked them will not forgive you for being right.",
      "functions": [
       "strike",
-      "reveal",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "reveal",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -2053,12 +2122,17 @@
      "cannot": "This is a rung above a wound. Some who take it never come back, and the Verists' own tradition holds you answerable for what you knew when you said it.",
      "functions": [
       "strike",
-      "reveal",
       "hinder",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "reveal",
+      "hinder",
+      "break"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2105,7 +2179,12 @@
    "conserveSuppresses": "say the smaller true thing — it carries less and cannot rebound",
    "backlashRung": "damaging",
    "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
-   "_descriptionWas": "The Verists' first offense, and the one with a price built into it: the blow is a fact, so it cannot be withdrawn, disproved, or forgotten by anyone who heard it."
+   "_descriptionWas": "The Verists' first offense, and the one with a price built into it: the blow is a fact, so it cannot be withdrawn, disproved, or forgotten by anyone who heard it.",
+   "_functionsWas": [
+    "strike",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_ordinary_face",
@@ -2333,11 +2412,15 @@
      "cannot": "A kept account is kept against EVERYONE, including you and yours. Verists are asked to leave places for this.",
      "functions": [
       "bind",
-      "sustain",
-      "reveal"
+      "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "bind",
+      "sustain",
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -2346,11 +2429,15 @@
      "cannot": "⚠ SOME THINGS WERE BEING SURVIVED BY BEING FORGOTTEN. You have made that impossible, permanently, for people who did not ask you to.",
      "functions": [
       "bind",
-      "sustain",
-      "reveal"
+      "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "bind",
+      "sustain",
+      "reveal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2388,7 +2475,12 @@
     }
    ],
    "plainly": "A social action that makes a true statement stand un-revisable. Rated 6 of 10 across a scope of 2 for about two days.",
-   "_descriptionWas": "The Verists' keeping-craft: the reason a Verist's testimony settles disputes that arms do not."
+   "_descriptionWas": "The Verists' keeping-craft: the reason a Verist's testimony settles disputes that arms do not.",
+   "_functionsWas": [
+    "bind",
+    "sustain"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

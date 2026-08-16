@@ -186,13 +186,11 @@
      "grants": "Grant endings at scale — a battlefield eased, a plague stopped by stilling its front, a thing that should have died a century ago finally allowed to. AND THE FULL STRIKE: against a living opponent, take the ending every living thing carries and pull it forward whole. This kills. It is slow enough to be interrupted, bright enough to be witnessed, and the dying understand exactly what is being done and by whom. Ashwardens call it the mercy turned around, and they do not call it that kindly.",
      "cannot": "The wielder drifts death-hot; never raises, never forces a death that must not happen. It cannot smite a healthy thing dead where it stands from nothing — it works THROUGH what is in them, so it is slow and it is seen. For the instant, unseen ending, that is The Cut Thread, and it costs accordingly.",
      "functions": [
-      "hinder",
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "lethal",
      "_functionsWas": [
-      "foresee",
       "hinder",
       "strike"
      ]
@@ -268,11 +266,12 @@
    "plainly": "A investigate/fight/puzzle/social action that reveals information or sets up a later action. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens precision; rank 3 extends scope. Limit: cannot Bring Back.",
    "_descriptionWas": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art — not killing, but tending the end.",
    "_functionsWas": [
-    "foresee",
     "hinder",
+    "reveal",
     "strike"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "staunch",
@@ -424,11 +423,14 @@
      "grants": "Age a structure — a wall, a bridge, a barricade — decades in moments, until it can no longer carry what it was built to carry; a gate you have aged breaks under one shoulder. Halt a spreading blight by giving the growth-front a clean, sudden end.",
      "cannot": "Withering is not breaking. The thing fails as things fail — structurally, from within. It takes a moment, not an instant.",
      "functions": [
-      "hinder",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "hinder",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -436,11 +438,14 @@
      "grants": "Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields, all weakened past use and broken by their own weight. The terrain itself becomes unreliable underfoot.",
      "cannot": "Living flesh is outside it at every rank. At scale it takes fields, fortifications, and siege works — and the Ashwardens note that starving a valley is the commonest use it has ever been put to, which is a harm done to people without the craft ever touching one.",
      "functions": [
-      "hinder",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "hinder",
+      "break"
+     ]
     }
    ],
    "challengeTypes": [
@@ -502,7 +507,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/puzzle/chase action that deals damage. It rolls 2d6 across a scope of 2 Ranks: rank 2 extends scope; rank 3 extends scope. Limit: it Hastens What Was Already Going — sound new stone and fresh work resist."
+   "plainly": "A fight/puzzle/chase action that deals damage. It rolls 2d6 across a scope of 2 Ranks: rank 2 extends scope; rank 3 extends scope. Limit: it Hastens What Was Already Going — sound new stone and fresh work resist.",
+   "_functionsWas": [
+    "break",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "graftlife",
@@ -960,7 +970,6 @@
    },
    "functions": [
     "heal",
-    "hinder",
     "strike"
    ],
    "narrationHints": "What leaves him arrives in you, and it is warm, and that is the worst part.",
@@ -974,11 +983,15 @@
      "cannot": "Touch, and only from the living. The dead have nothing left to give and will be insulted by the asking.",
      "functions": [
       "strike",
-      "hinder",
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "strike",
+      "hinder",
+      "heal"
+     ]
     },
     {
      "rank": 2,
@@ -987,11 +1000,15 @@
      "cannot": "Every person watching you do this will remember it. Some of them will decide something about you.",
      "functions": [
       "strike",
-      "hinder",
       "heal"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "hinder",
+      "heal"
+     ]
     },
     {
      "rank": 3,
@@ -1000,11 +1017,15 @@
      "cannot": "There is no partial version of this rank — a thing drawn entirely down does not recover, and what is left is not a corpse anyone can grieve properly. It requires the drawer to keep going past every point where stopping was possible. The Ashwardens do not forbid Draw-Down; they forbid teaching rank three to anyone who asked for it.",
      "functions": [
       "strike",
-      "hinder",
       "heal"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "hinder",
+      "heal"
+     ]
     }
    ],
    "gated": "learned",
@@ -1064,7 +1085,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight action that deals damage. It rolls 3d6+2 It affects 1 target. Range is 1. Ranks: rank 2 extends range+targets; rank 3 adds to special. Limit: touch, and only from the Living — the dead have nothing to give."
+   "plainly": "A fight action that deals damage. It rolls 3d6+2 It affects 1 target. Range is 1. Ranks: rank 2 extends range+targets; rank 3 adds to special. Limit: touch, and only from the Living — the dead have nothing to give.",
+   "_functionsWas": [
+    "heal",
+    "hinder",
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "schemaVersion": 1,
@@ -1668,11 +1695,15 @@
      "cannot": "The growth is approximate. It holds and hinders as much as it harms. A determined foe pushes through, slower.",
      "functions": [
       "summon",
-      "strike",
-      "bind"
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "summon",
+      "strike",
+      "bind"
+     ]
     },
     {
      "rank": 2,
@@ -1681,11 +1712,15 @@
      "cannot": "Wide response is slow response. The Rootkin's force is not fast enough for a fight already at blade's edge.",
      "functions": [
       "summon",
-      "strike",
-      "bind"
+      "strike"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "summon",
+      "strike",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -1694,15 +1729,18 @@
      "cannot": "A claim at this scale cannot be called off quickly — the region does not forget on your say-so, and it does not distinguish finely between the one you named and whoever is travelling with them. What you have made is not an attack but a condition, and conditions outlast the reason for them.",
      "functions": [
       "summon",
-      "strike",
-      "bind"
+      "strike"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "summon",
+      "strike",
+      "bind"
+     ]
     }
    ],
    "functions": [
-    "bind",
     "strike",
     "summon"
    ],
@@ -1765,7 +1803,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/explore/survive action that deals damage. It rolls 2d6 Ranks: rank 2 extends area; rank 3 adds to special. Limit: the growth is Approximate — it holds and hinders as much as it harms."
+   "plainly": "A fight/explore/survive action that deals damage. It rolls 2d6 Ranks: rank 2 extends area; rank 3 adds to special. Limit: the growth is Approximate — it holds and hinders as much as it harms.",
+   "_functionsWas": [
+    "bind",
+    "strike",
+    "summon"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "bark_and_briar",
@@ -2754,8 +2798,9 @@
    },
    "functions": [
     "bind",
-    "strike",
-    "hinder"
+    "hinder",
+    "make",
+    "strike"
    ],
    "narrationHints": "Root and briar come up through the ground and take hold — and then keep taking. Thorn works inward, wood thickens in the grip, and green things that had all the time in the world discover they have very little.",
    "description": "The Rootkin's first offense. It begins as a hold and becomes a killing: growth is patient right up until it is inside you.",
@@ -2792,13 +2837,17 @@
      "grants": "It keeps working. Wood thickens through the hold, thorn travels, and the harm continues for as long as they are held — which, unless you release it, is until it finishes. THE GREEN ANSWERS YOU: open the hold at will, on one of them or all of them, in the moment you decide the fight is over. Surrender is a thing you can accept.",
      "cannot": "Releasing is a CHOICE you must actually make — it does not stop on its own, and a wielder who goes down or is driven off leaves it working. It holds anyone else present at bind only, no harm rung — but a general release frees everyone or none. And what you grow REMAINS after the hold opens; the Ashwardens will come and look at it.",
      "functions": [
+      "strike",
+      "make"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "_functionsWas": [
       "bind",
       "strike",
       "hinder",
       "make"
-     ],
-     "gains": "deepen",
-     "harmRung": "lethal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2852,7 +2901,13 @@
    "backlash": "The green takes YOU as readily as them — the wielder is held at the surged rung, and a held wielder cannot release the hold on anyone.",
    "conserveSuppresses": "the snare stays at bind only — no bite, on anyone, including you",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
+   "_functionsWas": [
+    "bind",
+    "strike",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_hastened_grey",
@@ -2866,9 +2921,8 @@
     "violence_peace": -0.3
    },
    "functions": [
-    "strike",
     "break",
-    "hinder"
+    "strike"
    ],
    "narrationHints": "Everything is already ending. You put a hand on this one and bring it forward. A blade greys and shears; a strained rope parts; a wound that was closing opens grey at the edges and does not stop; a man who was going to die in forty years does it considerably sooner.",
    "description": "Touch what is already failing and bring its end forward — a notched blade shears, a strained rope parts, a wound already open goes grey and stops closing. The Ashwardens' first offense: their work, applied against someone.",
@@ -2893,11 +2947,15 @@
      "cannot": "The cost of taking something whole is real and you pay it in yourself. And a grey hand is a thing the Valley has stories about; people who watched will not travel with you.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -2906,12 +2964,16 @@
      "cannot": "⚠ IT DOES NOT SORT. What is due is due, and EVERYONE ELSE INSIDE THE REACH IS STRUCK ONE RUNG LOWER — everything present is due, including yours. And the Hollow — who would end everything to end suffering — will hear about this and will want to talk to you.",
      "functions": [
       "strike",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
       "break",
       "hinder",
       "command"
-     ],
-     "gains": "deepen",
-     "harmRung": "lethal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2962,7 +3024,13 @@
    "conserveSuppresses": "a small hastening — the grey stays where your hand is",
    "backlashRung": "damaging",
    "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
-   "_descriptionWas": "The Ashwardens' first offense, and it is the tradition doing precisely what the tradition is for. Endings are their work. This is the work applied against someone."
+   "_descriptionWas": "The Ashwardens' first offense, and it is the tradition doing precisely what the tradition is for. Endings are their work. This is the work applied against someone.",
+   "_functionsWas": [
+    "strike",
+    "break",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_kept_vigil",

@@ -31,11 +31,14 @@
      "grants": "Understand any mechanism's design and purpose on study; build reliable machines and devices; run Precursor systems that Latticespeak could only ask.",
      "cannot": "Understanding function is not understanding WHY it was made; live-hostile systems still resist.",
      "functions": [
-      "reveal",
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "make"
+     ]
     },
     {
      "rank": 2,
@@ -43,13 +46,18 @@
      "grants": "Command a machine-system to reconfigure toward your intent; chain devices into working wholes; repair or repurpose Precursor works at the component level.",
      "cannot": "The system does what its mechanism allows, not what you wish; the numinous layer stays opaque — you move the body, not the meaning.",
      "functions": [
-      "reveal",
       "make",
       "command",
       "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "make",
+      "command",
+      "mend"
+     ]
     },
     {
      "rank": 3,
@@ -57,20 +65,24 @@
      "grants": "Command machine-country — a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale; build engines that outlive you. The Great Engine's power in miniature.",
      "cannot": "The wielder drifts hard-mechanical; a person who becomes all-Engine forgets why anything is FOR — the framework's foreclosure by another road; and the Great Engine notices a rival wright.",
      "functions": [
-      "reveal",
       "make",
       "command",
       "mend"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "make",
+      "command",
+      "mend"
+     ]
     }
    ],
    "functions": [
     "command",
     "make",
-    "mend",
-    "reveal"
+    "mend"
    ],
    "challengeTypes": [
     "PUZZLE"
@@ -123,7 +135,14 @@
     }
    ],
    "plainly": "A puzzle action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: understanding Function IS Not Understanding Why IT Was Made.",
-   "_descriptionWas": "The mechanical-pole mastery: design, run, and command machine-systems, Precursor works included, at the Enginewrights' depth."
+   "_descriptionWas": "The mechanical-pole mastery: design, run, and command machine-systems, Precursor works included, at the Enginewrights' depth.",
+   "_functionsWas": [
+    "command",
+    "make",
+    "mend",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "numenwork",
@@ -152,11 +171,14 @@
      "grants": "Attend so fully that the truth of a person, place, or moment surfaces; steady a soul in crisis by presence alone; perceive the meaning-layer of a Precursor site the Engine can't reach.",
      "cannot": "Attention reveals and steadies; it does not command or coerce; the unwilling can close to it.",
      "functions": [
-      "reveal",
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "heal"
+     ]
     },
     {
      "rank": 2,
@@ -164,13 +186,18 @@
      "grants": "Where meaning is dense, the material softens — a symbol made briefly real, a threshold held open by significance, a wound that was always metaphor healed as one. Read the numinous truth of the deep works.",
      "cannot": "Only where meaning already runs dense; it bends the world, never breaks it; the price is proportional to the bending.",
      "functions": [
-      "reveal",
       "heal",
       "summon",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "heal",
+      "summon",
+      "restore"
+     ]
     },
     {
      "rank": 3,
@@ -178,20 +205,25 @@
      "grants": "Attention as a force that holds — keep a foreclosing thing open by significance alone, hold a truth in a place until it can't be unsaid, meet the numinous heart of What Sleeps Under as an equal rather than a trespasser. The Numen's power in miniature; the framework's 'hold the aperture' made a discipline.",
      "cannot": "The wielder drifts hard-spiritual, toward leaving the material behind entirely; presence holds, it does not decide; what you hold open, others must walk through.",
      "functions": [
-      "reveal",
       "heal",
       "summon",
       "restore",
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "heal",
+      "summon",
+      "restore",
+      "sustain"
+     ]
     }
    ],
    "functions": [
     "heal",
     "restore",
-    "reveal",
     "summon",
     "sustain"
    ],
@@ -252,7 +284,15 @@
     }
    ],
    "plainly": "A investigate/social/survive action that restores health. It rolls 3d4+2 across a scope of 2 Ranks: rank 2 deepens attention; rank 3 adds to special. Limit: only Where Meaning Already Runs Dense — it bends the world, never builds it.",
-   "_descriptionWas": "The spiritual-pole mastery: the mystic practices where meaning acts directly on the world. The road the Valley's framework keeps recognizing itself in."
+   "_descriptionWas": "The spiritual-pole mastery: the mystic practices where meaning acts directly on the world. The road the Valley's framework keeps recognizing itself in.",
+   "_functionsWas": [
+    "heal",
+    "restore",
+    "reveal",
+    "summon",
+    "sustain"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "mend_device",
@@ -601,7 +641,6 @@
    "functions": [
     "make",
     "open",
-    "reveal",
     "strike",
     "summon",
     "sustain"
@@ -616,11 +655,14 @@
      "grants": "In a meaning-dense place, make a symbol briefly literal — a held threshold, a metaphor made real.",
      "cannot": "Only where meaning is dense; costs proportional.",
      "functions": [
-      "reveal",
       "summon"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "summon"
+     ]
     },
     {
      "rank": 2,
@@ -628,13 +670,18 @@
      "grants": "Hold a thin place open — long enough for others to see, to speak, to pass a thing through. What passes goes both ways: where something has been pressing back, holding the way open is an invitation it will take, and it arrives on its own terms rather than yours.",
      "cannot": "You hold the opening, never what comes through it. A thing that answers a held threshold is not summoned and not bound — it is merely no longer prevented.",
      "functions": [
-      "reveal",
       "summon",
       "open",
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "reveal",
+      "summon",
+      "open",
+      "sustain"
+     ]
     },
     {
      "rank": 3,
@@ -642,7 +689,6 @@
      "grants": "Open a thin place where there was none, in a room that had no reason to be sacred. And a door opened is a door BOTH ways: what waits on the other side can be let through onto something you point it at, and what it does to a living body is not a working you are performing — it is a thing with its own appetite, arriving, and it strikes whatever it was pointed at.",
      "cannot": "You cannot choose what answers, you cannot call it off, and it does not leave when you are finished — it is here now, in a place that had no reason to be thin, and it knows exactly who opened the way. The Numinous Reach does not forbid this. It simply keeps a list of everyone who has done it.",
      "functions": [
-      "reveal",
       "summon",
       "open",
       "sustain",
@@ -650,7 +696,15 @@
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "reveal",
+      "summon",
+      "open",
+      "sustain",
+      "make",
+      "strike"
+     ]
     }
    ],
    "powerSystem": "reach_mechanical_spiritual",
@@ -710,7 +764,16 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/explore/survive action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: you Hold The Opening, Never What Comes Through IT."
+   "plainly": "A puzzle/explore/survive action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: you Hold The Opening, Never What Comes Through IT.",
+   "_functionsWas": [
+    "make",
+    "open",
+    "reveal",
+    "strike",
+    "summon",
+    "sustain"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "meaning_engine",
@@ -723,8 +786,7 @@
    },
    "functions": [
     "command",
-    "mend",
-    "reveal"
+    "mend"
    ],
    "narrationHints": "The machine runs on why, not just how.",
    "description": "Run a deep Precursor work by both its mechanism AND its meaning — the way to treat with What Sleeps Under. The braid-craft: the machine runs on why, not just how.",
@@ -737,11 +799,15 @@
      "cannot": "Needs dense substrate; what answers may not be tame.",
      "functions": [
       "command",
-      "mend",
-      "reveal"
+      "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "command",
+      "mend",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -750,11 +816,15 @@
      "cannot": "Being addressed specifically is not the same as being welcome. It still needs dense substrate, and the density is not yours to arrange. And a work that has learned your particular meaning can be reached through you by anything else that learns it.",
      "functions": [
       "command",
-      "mend",
-      "reveal"
+      "mend"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "command",
+      "mend",
+      "reveal"
+     ]
     }
    ],
    "powerSystem": "reach_mechanical_spiritual",
@@ -804,7 +874,13 @@
     }
    ],
    "plainly": "A puzzle or investigate action, and it needs two poles: you must have both enginewright and numinous training to attempt it at all. It lets you operate a deep precursor work by addressing what it means as well as what it does, which is the only way to treat with the things down there that answer. It needs dense substrate — a thin place will not carry it. And what answers may not be what you addressed: being heard specifically is not the same as being answered honestly.",
-   "_descriptionWas": "The braid-craft: command a Precursor work by significance, not only mechanism — body and meaning at once."
+   "_descriptionWas": "The braid-craft: command a Precursor work by significance, not only mechanism — body and meaning at once.",
+   "_functionsWas": [
+    "command",
+    "mend",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "shortfold",
@@ -1012,7 +1088,6 @@
    "functions": [
     "break",
     "hinder",
-    "reveal",
     "strike"
    ],
    "challengeTypes": [
@@ -1027,12 +1102,16 @@
      "grants": "Strike a person or device at its structural weak point — the joint under load, the nerve cluster, the part compensating for an earlier damage — for targeted, efficient harm.",
      "cannot": "Anything rank 2 adds — hit a mechanism's fault so precisely it fails in the way you need — not just broken, stopped; it is PRECISION, not power.",
      "functions": [
-      "reveal",
       "strike",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "reveal",
+      "strike",
+      "break"
+     ]
     },
     {
      "rank": 2,
@@ -1040,13 +1119,18 @@
      "grants": "Hit a mechanism's fault so precisely it fails in the way you need — not just broken, stopped; not just damaged, disabled at the point that matters.",
      "cannot": "Anything rank 3 adds — end what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved; it is PRECISION, not power.",
      "functions": [
-      "reveal",
       "strike",
       "break",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "reveal",
+      "strike",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -1054,13 +1138,18 @@
      "grants": "End what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved.",
      "cannot": "Nothing further; this is the craft's ceiling; it is PRECISION, not power.",
      "functions": [
-      "reveal",
       "strike",
       "break",
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "reveal",
+      "strike",
+      "break",
+      "hinder"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1108,7 +1197,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A combat/technical/tactical action that deals damage. It rolls 2d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: it is Precision, not power — a thing with no fault to find resists it."
+   "plainly": "A combat/technical/tactical action that deals damage. It rolls 2d6 Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: it is Precision, not power — a thing with no fault to find resists it.",
+   "_functionsWas": [
+    "break",
+    "hinder",
+    "reveal",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_mechanical_defense",
@@ -1838,9 +1934,8 @@
     "mechanical_spiritual": 0.7
    },
    "functions": [
-    "summon",
-    "reveal",
-    "bind"
+    "bind",
+    "summon"
    ],
    "narrationHints": "Nothing dramatic. A door that was shut is ajar, and someone on the other side notices.",
    "description": "⚠️ RETRIEVAL BY ATTENDANCE. The Numinous do not walk down and do not haul. They hold the threshold OPEN and make the way back legible — and then it is up to the one in the dark whether they come. It reaches the furthest of the three roads and it is the only one that can fail because THEY CHOSE NOT TO.",
@@ -1852,11 +1947,14 @@
      "grants": "Hold the way open for someone at THE THRESHOLD or THE NEAR DARK. They may come back if they will.",
      "cannot": "Making them come. Some do not, and the Attenders teach that this is information, not failure.",
      "functions": [
-      "summon",
-      "reveal"
+      "summon"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "summon",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1865,11 +1963,15 @@
      "cannot": "Holding it costs continuously, and everything down there can see a lit door.",
      "functions": [
       "summon",
-      "reveal",
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "summon",
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -1940,7 +2042,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/social action that reveals information or sets up a later action. Its strength is rated 7 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 deepens depth; rank 3 extends duration. Limit: iT Opens A Road; IT Does Not Walk Anyone Down IT — some do not come."
+   "plainly": "A survive/social action that reveals information or sets up a later action. Its strength is rated 7 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 deepens depth; rank 3 extends duration. Limit: iT Opens A Road; IT Does Not Walk Anyone Down IT — some do not come.",
+   "_functionsWas": [
+    "summon",
+    "reveal",
+    "bind"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_thinned_veil",

@@ -1104,7 +1104,6 @@
    "functions": [
     "break",
     "foresee",
-    "hinder",
     "shield"
    ],
    "challengeTypes": [
@@ -1132,13 +1131,11 @@
      "cannot": "Anything rank 3 adds — identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming; IT REQUIRES SEEING THE THREAT FORM.",
      "functions": [
       "break",
-      "shield",
-      "hinder"
+      "shield"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_functionsWas": [
-      "foresee",
       "break",
       "shield",
       "hinder"
@@ -1151,13 +1148,11 @@
      "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES SEEING THE THREAT FORM; and it still costs what it costs: NOBODY WILL EVER KNOW WHAT YOU PREVENTED.",
      "functions": [
       "break",
-      "shield",
-      "hinder"
+      "shield"
      ],
      "gains": "deepen",
      "harmRung": "incapacitating",
      "_functionsWas": [
-      "foresee",
       "break",
       "shield",
       "hinder"
@@ -1215,7 +1210,8 @@
     "hinder",
     "shield"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_open_material",
@@ -2134,11 +2130,15 @@
      "cannot": "⚠ A STRUCTURE COMES DOWN ON WHAT IS UNDER IT: anyone else in the area is struck ONE RUNG LOWER. You choose where it falls, not who is there.",
      "functions": [
       "break",
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "break",
+      "strike",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -2147,11 +2147,15 @@
      "cannot": "⚠ THE WIELDER IS STRUCK ONE RUNG LOWER if inside the ruin, and it CANNOT BE PUT BACK — the Unmakers hold you answerable for what you cleared and whether it should have been. The Scouring do this for its own sake.",
      "functions": [
       "break",
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "break",
+      "strike",
+      "hinder"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2198,7 +2202,12 @@
    "conserveSuppresses": "one small fault — a misread wastes the placement, nothing falls",
    "backlashRung": "incapacitating",
    "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
-   "_descriptionWas": "The Unmakers' first offense: the smallest correct action. Not power, placement."
+   "_descriptionWas": "The Unmakers' first offense: the smallest correct action. Not power, placement.",
+   "_functionsWas": [
+    "break",
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_sudden_work",
@@ -2212,9 +2221,9 @@
     "concrete_abstract": 0.4
    },
    "functions": [
-    "strike",
     "break",
-    "make"
+    "make",
+    "strike"
    ],
    "narrationHints": "You make something. Here, now, fast, and in the space a person is currently occupying. A spar through the gap in their guard; a wall closing where they were going to be; a bracket around a limb. The Wrights do not fight so much as build inconveniently.",
    "description": "Take material to hand and make it FAST, into them — a spar through a guard, a spike out of the floor, an iron bracket closing on an arm. It stays there afterward. The Wrights' first offense, which they find slightly embarrassing and are very good at.",
@@ -2240,11 +2249,16 @@
      "functions": [
       "strike",
       "break",
-      "make",
-      "hinder"
+      "make"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "make",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -2254,11 +2268,16 @@
      "functions": [
       "strike",
       "break",
-      "make",
-      "bind"
+      "make"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "make",
+      "bind"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2305,7 +2324,13 @@
    "conserveSuppresses": "drive one spar — if it goes wrong it is one spar, in the floor",
    "backlashRung": "incapacitating",
    "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
-   "_descriptionWas": "The Wrights' first offense: creation used as an attack, which the Wrights find slightly embarrassing and are very good at."
+   "_descriptionWas": "The Wrights' first offense: creation used as an attack, which the Wrights find slightly embarrassing and are very good at.",
+   "_functionsWas": [
+    "strike",
+    "break",
+    "make"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_clean_taking",

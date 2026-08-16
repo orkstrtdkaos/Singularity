@@ -16236,8 +16236,12 @@ await (async () => {
     // ⛔ BOTH HALVES OF THE TABLE, because mutation showed one of them was untested: 5b exercises
     // art.js's lookup with a stub, which stays green with the app-side WRITE deleted. Testing the
     // mechanism is not testing the wiring — the same lesson CCODE-191's cache-key gate learned.
-    check("CCODE-193: the composed re-mint is recorded against the URL it replaces, and read back wherever one is committed",
-      /\(character\.composedImages \|\|= \{\}\)\[job\.url\] = url;/.test(app5c)
+    // ⚠️ CCODE-198 CHANGED THE TABLE'S WRITER, NOT ITS PURPOSE. It used to record the composed re-mint;
+    // now the only thing that replaces a minted URL is the SNG-435 heal (a proven-empty address swapped for a
+    // busted one that has bytes). The table and both readers stay, because the reason they exist is unchanged:
+    // a lightbox item is built before the swap, so committing `it.url` would commit an address nothing serves.
+    check("CCODE-193/198: a replaced URL is recorded against the one it replaces, and read back wherever one is committed",
+      /\(character\.composedImages \|\|= \{\}\)\[job\.url\] = good;/.test(app5c)
       && /onComposedLookup\(\(url\) => shownUrl\(url\)/.test(app5c)
       && /it = \{ \.\.\.it, url: shownUrl\(it\.url\) \}/.test(app5c)
       && /sub\.spec\.keep\(it\.regen\.subjectId, shownUrl\(it\.url\)/.test(app5c)
@@ -16267,17 +16271,28 @@ await (async () => {
     // came to disagree in SNG-431; the battle mint is the one deliberate exception, because it composes
     // BEFORE minting (it knows there are two figures) rather than after.
     const composeCalls = (app193.match(/composeImagePrompt\(/g) || []).length;
-    check("CCODE-193: composition is centralised — the only direct calls are the battle mint and the lightbox regen",
-      composeCalls === 3, `${composeCalls} direct composeImagePrompt call(s)`);
+    // ⛔ CCODE-198: TWO, NOT THREE. The automatic post-mint compose is gone at Erik's word, so what is
+    // left is the battle mint (which composes BEFORE minting, because it knows there are two figures) and the
+    // lightbox re-roll (which composes because he asked for it). Both are places a player is waiting on a
+    // picture they requested; neither replaces one they already have.
+    check("CCODE-193/198: composition happens only where it was ASKED for — the battle mint and Draw again",
+      composeCalls === 2, `${composeCalls} direct composeImagePrompt call(s)`);
     // ⛔ NO KEY, NO CALL. The picture is already drawn; queueing without a key spends a failure per image.
     // ⛔ SNG-435 INVERTED THIS ONE, and the inversion is the finding. CCODE-193 kept the key check on
     // the LISTENER, which was right when the queue only composed — and became wrong the moment the queue also
     // VERIFIED. A player with no API key queued nothing, so they verified nothing, and would have collected
     // burned URLs invisibly forever. Composition costs money and is optional; proving the picture exists is
     // neither. The claim now is that the key gates the CALL and not the queue.
-    check("CCODE-193/435: the API key gates the composition CALL, never the queue that verifies the picture",
+    // ⛔ CCODE-198 SETTLED THIS ONE BY REMOVING THE QUESTION. The queue does not compose at all now, so
+    // there is no API key decision left in it — it verifies, and verification is free and not optional. What
+    // must stay true is that a player with no key still has every picture checked.
+    check("CCODE-193/198: the mint queue verifies and does NOTHING else — no key decision, no second draw",
       /if \(!job\?\.url \|\| !imagesEnabled\(\)\) return;/.test(app193)
-      && /if \(job\.raw && getApiKey\(\)\) await recomposeMinted\(job\);/.test(app193));
+      // ⚠️ THE DECLARATION, not the word. The note recording why it was deleted quotes its name, and a
+      // scan for the bare string would read that documentation as the offence — the same trap the shared-
+      // calendar gate fell into this morning. Asserting the declaration is gone is narrower and exactly the claim.
+      && !/async function recomposeMinted/.test(app193)
+      && !/getApiKey\(\)/.test(app193.slice(app193.indexOf("async function drainCompositions"), app193.indexOf("onComposedLookup("))));
   }
   A193.onImageMinted(null);
 }
@@ -16446,6 +16461,46 @@ await (async () => {
   }
 }
 
+// ---- CCODE-198: the first picture stays, and the composer waits to be asked ----------------------
+// ⛔ ERIK: "I don't want the first generated image to disappear. sometimes it's quite good... I'm
+// leaning to not even generating a second image immediately. Let the user click regen if they want (that
+// will use the prompt gen feature)."
+// ⚠️ CCODE-193 WAS TWO DECISIONS BOLTED TOGETHER: compose the line (good) and replace the picture
+// unasked (his to refuse). Only the second one is reversed here.
+{
+  const AR198 = await import("../engine/art.js");
+  const app198 = readFileSync(join(root, "app.js"), "utf8");
+  // 1 · ⛔ A RE-ROLL COMPOSES FOR A RECORD-BACKED SUBJECT, which is what makes "click regen if you want"
+  // a real offer. It did not before: `regenerateImage` re-derives its own prompt, so the composer at the
+  // call site only ever saw a re-describe or a prompt-only tile.
+  check("CCODE-198: Draw again composes for a record-backed subject, not just a re-describe",
+    /const rawWords = describe \|\| \(record \? regenPromptFor\(record, it\.regen\.kind/.test(app198),
+    "without this, the button Erik was pointed at does not use the feature he was pointed at it for");
+  // 2 · ⚠️ AND THE LIKENESS SURVIVES IT. `promptOverride` deliberately skips `withLikeness`, so composing
+  // the bare assembly would have thrown away every look the player kept — a silent cost paid on the exact
+  // button they press when they care most about how someone looks.
+  {
+    const rec = { id: "x198", name: "Someone", appearance: "a plain coat" };
+    const keeps = [{ prompt: "white hair, sharp jaw" }, { prompt: "white hair, a long scar" }];
+    const bare = AR198.regenPromptFor(rec, "npc", { promptOpts: {} });
+    const voted = AR198.regenPromptFor(rec, "npc", { promptOpts: { keeps } });
+    check("CCODE-198: the line a re-roll composes INCLUDES the kept likeness",
+      /white hair/i.test(voted) && !/white hair/i.test(bare) && /plain coat/.test(voted), voted.slice(0, 90));
+  }
+  // 3 · ⛔ AND NOTHING REPLACES A PICTURE THE PLAYER DID NOT ASK ABOUT. The queue verifies; it does not
+  // draw. A second draw now costs a click, and the first one stays as a version rather than being overwritten.
+  {
+    const drain198 = app198.slice(app198.indexOf("async function drainCompositions"), app198.indexOf("onComposedLookup("));
+    check("CCODE-198: the automatic second draw is GONE — the queue never composes and never re-mints",
+      !/composeImagePrompt/.test(drain198) && !/imageURLFor/.test(drain198)
+      && /settleMintedUrl\(job, await verifiedImageUrl\(job\.url\)\);/.test(drain198));
+    // ⚠️ "KEEP THE FIRST ONE AND STACK THEM" NEEDS NO NEW MACHINERY, and that is worth gating rather than
+    // assuming: SNG-401's re-roll returns a NEW item carrying `versionOf`, so the old picture stays in the
+    // stack. If that ever became a replacement, Erik's first sentence would break silently.
+    check("CCODE-198: a re-roll ADDS a version rather than replacing the picture it was launched from",
+      /versionOf: it\.versionOf \|\| it\.url/.test(app198));
+  }
+}
 // ---- CCODE-197: hold several traditions, and ask by exact function ------------------------------
 // ⛔ ERIK, THREE THINGS IN ONE BREATH: "a bare tradition click should hide things too. Also, the bare
 // tradition include the adjacent ones by mistake. I want to be able to click multiple traditions at a time
@@ -16672,24 +16727,26 @@ await (async () => {
     check("435 §A2: the cache-buster cannot reach composeKey — it keys on the prompt, and the call passes the prompt",
       IP.composeKey(prompt, "npc") === IP.composeKey(prompt, "npc")
       && IP.composeKey(prompt, "npc") !== IP.composeKey(prompt + "?_cb=1_1", "npc")
-      && /composeImagePrompt\(job\.raw, \{ cache: character\.promptCompositions/.test(app435)
-      && !/composeImagePrompt\([^)]*job\.url/.test(app435));
+      && /composeImagePrompt\(rawWords, \{ cache: character\.promptCompositions/.test(app435)
+      && !/composeImagePrompt\([^)]*\.url/.test(app435));
   }
   // 5 · THE WIRING: verify BEFORE compose, spaced, and NOT behind the API key.
   {
     const app435 = readFileSync(join(root, "app.js"), "utf8");
     const drain = app435.slice(app435.indexOf("async function drainCompositions"), app435.indexOf("onComposedLookup("));
-    check("435 §A: the queue VERIFIES before it composes — the burned url is the emergency, not the second draw",
-      drain.indexOf("verifiedImageUrl") > -1 && drain.indexOf("verifiedImageUrl") < drain.indexOf("recomposeMinted"),
-      "compose first would leave a proven-empty url persisted for as long as the model takes to answer");
-    // ⛔ AND THE COMPOSED RE-MINT IS VERIFIED TOO. It is a fresh address from a fresh prompt, so it can land
-    // inside the same rate-limit window the raw one did — and swapping a real picture for an empty one would
-    // be this bug wearing an improvement. Mutation found this uncovered: deleting the verify inside
-    // `recomposeMinted` reddened nothing, because the gate above only watches the drain loop.
-    const recompose435 = app435.slice(app435.indexOf("async function recomposeMinted"), app435.indexOf("async function drainCompositions"));
-    check("435 §A: the COMPOSED url is verified before it replaces the picture the player already has",
-      /const url = await verifiedImageUrl\(built\);/.test(recompose435)
-      && recompose435.indexOf("verifiedImageUrl") < recompose435.indexOf("swapImageUrl"));
+    check("435 §A/198: the queue VERIFIES, and that is the whole of its job",
+      /settleMintedUrl\(job, await verifiedImageUrl\(job\.url\)\);/.test(drain),
+      "a burned url must be found and healed whether or not anyone ever asks for a second draw");
+    // ⛔ AND A RE-ROLL'S URL IS VERIFIED TOO — BY CONSTRUCTION, which is the better answer. CCODE-198
+    // removed the hand-written verify that sat inside the automatic re-mint; what replaced it is that
+    // `regenerateImage` mints through `mintURL` like everything else, so its address announces itself and
+    // lands in the same queue. One path, and no second copy of the rule to drift out of step.
+    {
+      const art435 = readFileSync(join(root, "engine/art.js"), "utf8");
+      const regen435 = art435.slice(art435.indexOf("export function regenerateImage"), art435.indexOf("export function isGeneratedImage"));
+      check("435 §A/198: a re-roll mints through the announcing helper, so its url is verified like any other",
+        /return \{ url: mintURL\(kind, \{/.test(regen435) && !/imageURLFor\(/.test(regen435));
+    }
     // ⚠️ MATCHED WITH ITS GUARD, because the first version matched the CALL alone and stayed green with the
     // whole line wrapped in `if (false)` — asserting presence rather than use, which is the failure mode this
     // suite keeps rediscovering. It is a source-shape gate because the drain loop lives in app.js and cannot
@@ -16702,13 +16759,21 @@ await (async () => {
     // queued nothing, verified nothing, and would collect burned URLs invisibly forever. Composition costs
     // money and is optional; proving the picture exists is neither.
     const listener = app435.slice(app435.indexOf("onImageMinted((job) =>"), app435.indexOf("// ---------- SNG-401"));
-    check("435 §A: verification is NOT gated on an API key — only the composition is",
-      !/getApiKey\(\)/.test(listener) && /getApiKey\(\)/.test(drain), listener.replace(/\s+/g, " ").slice(0, 120));
-    // ⚠️ AND THE HEAL PATH REASSIGNS `job`. It was written `const job = ...` and would have thrown
-    // "Assignment to constant variable" on the FIRST poisoned url — a runtime error reachable only by the
-    // bug this ticket exists to fix, which is the worst place for one.
-    check("435 §A2: the heal can rebind the job (it was a const, and only a poisoned url would have found it)",
-      /let job = _composeQueue\.shift\(\)/.test(drain) && /job = \{ \.\.\.job, url: good \}/.test(drain));
+    // ⚠️ CCODE-198 MOVED THE KEY OUT OF THE QUEUE ENTIRELY, so the claim moves with it: the key gates
+    // nothing on the path that CHECKS a picture, and the only place it can gate anything is the button a
+    // player pressed. Verification stays free and unconditional; composition stays paid and asked-for.
+    check("435 §A/198: no API key decision stands between a picture and the check that it exists",
+      !/getApiKey\(\)/.test(listener) && !/getApiKey\(\)/.test(drain)
+      && /getApiKey\(\)/.test(app435), listener.replace(/\s+/g, " ").slice(0, 120));
+    // ⚠️ THE HEAL ITSELF, wherever it lives. CCODE-193 did it by rebinding `job` in the drain loop —
+    // written `const job = …`, which would have thrown "Assignment to constant variable" on the FIRST poisoned
+    // url, a runtime error reachable only by the bug this ticket exists to fix. CCODE-198 removed that loop,
+    // so the claim follows the behaviour rather than the line: a healed address replaces the burned one
+    // everywhere it is stored, and an unhealable one is forgotten.
+    check("435 §A2/198: the heal swaps a burned url for the busted one that has bytes, and forgets what cannot be healed",
+      /if \(good && good !== job\.url\) \{/.test(app435)
+      && /swapImageUrl\(character, job\.url, good\);/.test(app435)
+      && /const dropped = forgetImageUrl\(character, job\.url\);/.test(app435));
   }
 }
 

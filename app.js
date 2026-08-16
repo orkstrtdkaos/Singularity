@@ -38,7 +38,7 @@ import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive }
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -97,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.162";
+const APP_VERSION = "1.9.163";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -909,35 +909,10 @@ function settleMintedUrl(job, good) {
   return false;
 }
 
-async function recomposeMinted(job) {
-  character.promptCompositions = character.promptCompositions || {};
-  // ⚠️ `job.raw` IS THE PRE-FLOOR LINE, and the floors are re-applied to the composed result below —
-  // compose before the floors, never after, or the model compresses away the very clauses they add.
-  const out = await composeImagePrompt(job.raw, { cache: character.promptCompositions, kind: job.kind });
-  if (!out.composed || !out.prompt || out.prompt === job.raw) return false;   // nothing to compress, nothing to swap
-  const safe = sanitizeImagePrompt(out.prompt, { ratingLevel: job.ratingLevel, isMinor: job.isMinor, kind: job.kind });
-  const built = imageURLFor(job.kind, safe, job.seedKey, { aesthetic: job.aesthetic });
-  if (!built || built === job.url) return false;
-  // \u26d4 SNG-435: THE COMPOSED URL IS AS BURNABLE AS ANY OTHER. It is a fresh address minted from a fresh
-  // prompt, so it can land inside the same rate-limit window the raw one did. Verified before it replaces
-  // anything \u2014 swapping a good picture for an empty one would be this bug wearing an improvement.
-  const url = await verifiedImageUrl(built);
-  if (!url) return false;              // empty or unknowable: the raw picture stays, and it is a real one
-  swapImageUrl(character, job.url, url);
-  if (job.record && job.field && job.record[job.field] === job.url) job.record[job.field] = url;  // a record outside the save
-  // ⛔ AND THE ANSWER IS REMEMBERED AGAINST THE URL IT REPLACES, which is what makes the scene banner and
-  // the item study stick. Those two derive their URL at render and store nothing, so a swap alone would show
-  // the composed picture once and the raw one on every render after — a flicker forever instead of once.
-  (character.composedImages ||= {})[job.url] = url;
-  notePromptFor(url, safe);                                   // SNG-401: Draw again works from the composed line
-  saveCharacter(character);
-  // The picture on screen follows without a re-render — a full redraw would fight whatever the player is
-  // doing, and the only thing that changed is one address.
-  if (typeof document !== "undefined") {
-    for (const el of document.querySelectorAll("img")) if (el.getAttribute("src") === job.url) el.setAttribute("src", url);
-  }
-  return true;
-}
+// ⛔ CCODE-198: `recomposeMinted` DELETED. It was CCODE-193's worker — compose, re-mint, swap the
+// picture out from under the player. Erik refused the swap, and what remains of the idea now lives behind
+// Draw again, where the old picture is kept as a version instead of replaced. A function with no caller is
+// the thing this project sweeps for; leaving it here "in case" would be the same debt in a nicer coat.
 
 async function drainCompositions() {
   if (_composeDraining) return;
@@ -952,13 +927,19 @@ async function drainCompositions() {
         // \u26d4 VERIFY BEFORE COMPOSE, ALWAYS. The picture the player is looking at RIGHT NOW is the raw mint,
         // and if its bytes are empty that is the emergency \u2014 composing a second address first would leave the
         // burned one persisted for however long the model takes to answer.
-        const good = await verifiedImageUrl(job.url);
-        const settled = settleMintedUrl(job, good);
-        if (good === null) { if (settled) continue; }              // proven empty and unhealable: nothing to compose onto
-        if (good && good !== job.url) job = { ...job, url: good }; // heal first, then compose from the healed address
-        // \u26d4 NO KEY, NO CALL \u2014 but the verify above ran anyway. Composition is the only part that costs
-        // money; correctness is not optional, and a player with no key still gets a real picture.
-        if (job.raw && getApiKey()) await recomposeMinted(job);
+        // \u26d4 CCODE-198 (Erik): "I don't want the first generated image to disappear. sometimes it's quite
+        // good... I'm leaning to not even generating a second image immediately. Let the user click regen if
+        // they want (that will use the prompt gen feature)."
+        //
+        // He is right, and CCODE-193 was two decisions bolted together: COMPOSE THE LINE (good) and REPLACE
+        // THE PICTURE UNASKED (his to refuse). The second threw away a draw he might have liked, spent a
+        // generation nobody requested, and \u2014 as SNG-435 measured \u2014 doubled the requests per new subject on
+        // the one endpoint that burns URLs when it is hurried.
+        //
+        // \u26a0\ufe0f SO THE QUEUE ONLY VERIFIES NOW. The composer is not gone; it moved behind the button where he
+        // can ask for it. And "keep the first one and stack them" needs no new machinery \u2014 SNG-401's re-roll
+        // already adds a version rather than replacing one.
+        settleMintedUrl(job, await verifiedImageUrl(job.url));
       } catch (e) { console.warn("[mint] skipped:", e?.message); }
       if (_composeQueue.length) await sleep(MINT_SPACING_MS);      // \u00a7A3: between jobs, never before the last
     }
@@ -1294,7 +1275,14 @@ async function regenLightboxItem(it, attempt, describe = null) {
   // record-backed re-roll normally re-derives its prompt inside `regenerateImage`, so the composed line has
   // to be handed in as the override or it would be rebuilt as a list again on the way past.
   character.promptCompositions = character.promptCompositions || {};
-  const rawWords = describe || (record ? null : stored);
+  // ⛔ CCODE-198 (Erik): "Let the user click regen if they want (that will use the prompt gen feature)."
+  // It did not, for a record-backed subject — `regenerateImage` re-derives its own prompt, so the composer
+  // here only ever saw a re-describe or a prompt-only tile. Now the re-roll asks the builder for the line it
+  // WOULD have used, composes THAT, and hands it back as the override.
+  // ⚠️ `regenPromptFor` FOLDS IN THE LIKENESS, and it must: the override path deliberately skips
+  // `withLikeness`, so composing the bare assembly would have thrown away every look the player kept.
+  const regenOpts = { ...(spec.promptOpts ? spec.promptOpts(record) : {}), keeps: keepsFor(it.regen) };
+  const rawWords = describe || (record ? regenPromptFor(record, it.regen.kind, { promptOpts: regenOpts }) : stored);
   let words = rawWords;
   if (rawWords) {
     const c = await composeImagePrompt(rawWords, { cache: character.promptCompositions, kind: it.regen.kind });
@@ -1303,7 +1291,7 @@ async function regenLightboxItem(it, attempt, describe = null) {
   const out = regenerateImage(record, it.regen.kind, {
     ratingLevel: viewerRatingLevel(),            // §4: the ceiling applies to a re-roll exactly as to a first mint
     seedKey: it.regen.seedKey || record?.imageSeedKey || it.regen.subjectId || null,
-    promptOpts: { ...(spec.promptOpts ? spec.promptOpts(record) : {}), keeps: keepsFor(it.regen) },
+    promptOpts: regenOpts,
     promptOverride: words,
     attempt
   });

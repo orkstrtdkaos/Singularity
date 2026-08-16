@@ -789,6 +789,22 @@ export function toggleKeep(store, key, { url, prompt, note = null, seedKey, at =
  *  not a way around the floors — it goes through the same one, which is why the sanitize call is inline
  *  rather than inherited from wherever the first image came from.
  *  Returns {url, seedKey, prompt} or null when art is off. Pure. */
+/** ⛔ CCODE-198 — THE LINE A RE-ROLL WOULD DRAW FROM, before the floors and before the seed.
+ *
+ *  Erik: *"Let the user click regen if they want (that will use the prompt gen feature)."* It did not, for
+ *  a RECORD-BACKED subject: `regenerateImage` re-derives its own prompt internally, so the composer at the
+ *  call site only ever saw a re-describe or a prompt-only tile. Handing a composed line in as
+ *  `promptOverride` was the door — but the override path deliberately SKIPS `withLikeness`, so composing
+ *  the bare assembly would have silently thrown away every look the player had kept.
+ *
+ *  So this returns exactly what `regenerateImage` computes as `looked`: assembled, likeness folded in, and
+ *  NOT yet floored. Compose that, hand it back as the override, and both rules hold — the vote survives,
+ *  and the floors still run last on whatever the model returns. PURE. */
+export function regenPromptFor(record, kind, { promptOpts = {} } = {}) {
+  const raw = assembleImagePrompt(kind, record || {}, promptOpts);
+  return withLikeness(raw, promptOpts.keeps || []);
+}
+
 export function regenerateImage(record, kind, { ratingLevel = 2, isMinor = null, seedKey = null, promptOpts = {}, attempt = 1, promptOverride = null } = {}) {
   if (!imagesEnabled()) return null;
   // §2 REBUILD, and the no-record case in one field. `promptOverride` is a prompt that did NOT come from

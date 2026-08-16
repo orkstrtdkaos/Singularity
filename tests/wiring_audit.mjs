@@ -403,6 +403,10 @@ const OFFENSIVE_RE = new RegExp(String.raw`\b(`
 const claimsCombat = (a) => (a.functions || []).some(f => HARM_FUNCTIONS.has(String(f)));
 const teachesCombat = (a) => (a.tree || a.ranks || []).some(r => OFFENSIVE_RE.test(String(r.grants || "")));
 const combatUntaught = abilityRecords.filter(a => claimsCombat(a) && !teachesCombat(a));
+// ⚠️ NAME THEM. A ratchet that reports a COUNT and not the offenders is a number an author cannot act
+// on — "4" sends whoever reads it hunting through 382 abilities for the four. Printed on every run, not only
+// on regression, so a rising number arrives with its cause attached.
+if (combatUntaught.length) console.log(`note  ${combatUntaught.length} abilit(ies) claim combat and no rank grants teaches it: ${combatUntaught.map(a => a.id || a.name).join(", ")}`);
 
 // ---------- SNG-152 §5e: the gate that makes this the LAST truncation fix ----------
 // The spec asked for this and I shipped without it, so corrections.js — listed in my own sweep

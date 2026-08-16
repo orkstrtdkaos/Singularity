@@ -248,7 +248,9 @@
     }
    ],
    "plainly": "A fight/investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reasoning; rank 3 adds to special. Limit: recall IS Not Understanding.",
-   "_descriptionWas": "The mind-pole mastery: memory, focus, reason, thought as an instrument sharp enough to act on the world. The Cogitarium's art."
+   "_descriptionWas": "The mind-pole mastery: memory, focus, reason, thought as an instrument sharp enough to act on the world. The Cogitarium's art.",
+   "_markedForRemoval": "⛔ SNG-453, ERIK'S RULING: 'Those MYSTERIES WERE NON-EXISTENT — leave a reminder to fill in if we get so inspired, but MARK THEM FOR REMOVAL in the meantime.'\n⚠️ Noesis is the sect's namesake 'pole mastery' and its ranks summarise the whole sect rather than doing anything — r1 duplicates two or three other abilities in its own sect. ⛔ IF THE MYSTERY IS EVER AUTHORED, THIS IS WHERE IT ATTACHES: a mystery should be the thing the tradition knows that nobody else does, not a digest of its skill list.",
+   "status": "marked-for-removal"
   },
   {
    "id": "body_read",
@@ -591,8 +593,7 @@
     "body_mind": 0.3
    },
    "functions": [
-    "resist",
-    "reveal"
+    "resist"
    ],
    "narrationHints": "The world narrows to the one thing, and nothing reaches you.",
    "description": "Enter absolute focus — ignore fear, distraction, and pain to think or work clean. Folk-Noesis.",
@@ -607,7 +608,10 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "resist"
+     ]
     },
     {
      "rank": 2,
@@ -618,7 +622,10 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "resist"
+     ]
     },
     {
      "rank": 3,
@@ -626,11 +633,14 @@
      "grants": "Narrow to one thing so completely that nothing else exists — not fear, not pain, not the wound you are standing on. And within that narrowing the thing opens completely: every detail of it available at once, because nothing at all is competing for the attention. The task is completed.",
      "cannot": "You will not notice what it cost until afterward. Cogitants have finished the task and then simply fallen over.",
      "functions": [
-      "resist",
-      "reveal"
+      "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "resist",
+      "reveal"
+     ]
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -688,7 +698,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/puzzle/survive action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens focus; rank 3 adds to special. Limit: it can Miss The Body'S Warnings; tight focus narrows the view."
+   "plainly": "A fight/puzzle/survive action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens focus; rank 3 adds to special. Limit: it can Miss The Body'S Warnings; tight focus narrows the view.",
+   "_functionsWas": [
+    "resist",
+    "reveal"
+   ],
+   "_strip": "⛔ SNG-453: incidental `reveal`/`foresee` stripped — the perceiving is the setup step, not the effect."
   },
   {
    "id": "perfect_motion",
@@ -1350,116 +1365,6 @@
    "_revised": "⛔ SNG-450. Erik: 'I agree on the working model — but I LIKE that skill. Its rank progression should be r1 A SINGLE ITEM OR SMALL AREA, r2 A SINGLE SYSTEM OR COMPOUND/AREA, r3 COMPLEX SYSTEM AND LARGE AREA.' ⚠️ The old arc added only adverbs — 'near-guaranteed' → 'complex system' → 'uncanny precision and speed', which is r1 again, faster. THE NEW ARC IS SCOPE, and scope is legible at the table. `reveal` stripped: the modelling is HOW it makes, not a separate perception. ⚠️ ERIK: 'NO to the cost' on r3. Removed."
   },
   {
-   "id": "the_long_form",
-   "name": "The Long Form",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.4
-   },
-   "effectTags": [
-    "endurance",
-    "cognition",
-    "persistence"
-   ],
-   "narrationHints": "The problem is still there. So is the mind working it.",
-   "description": "Mental work that doesn't stop — held across days, against exhaustion, against everything that says to let go.",
-   "notFor": [],
-   "tradition": "cogitant",
-   "harmRung": "none",
-   "functions": [
-    "resist",
-    "sustain"
-   ],
-   "challengeTypes": [
-    "endurance",
-    "intellectual",
-    "hardship"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Maintained Function",
-     "grants": "Hold a complex train of thought through interruption, fear, pain, or deprivation; return to exactly where you were without loss.",
-     "cannot": "Anything rank 2 adds — sustain complex cognitive work — a problem, a plan, a translation — across days without the thinking degrading, even as sleep and food grow scarce; the BODY still fails on its own schedule.",
-     "functions": [
-      "sustain"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "Extended Work",
-     "grants": "Sustain complex cognitive work — a problem, a plan, a translation — across days without the thinking degrading, even as sleep and food grow scarce.",
-     "cannot": "Anything rank 3 adds — your mind is simply the last thing to fail; the BODY still fails on its own schedule.",
-     "functions": [
-      "sustain",
-      "resist"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "The Mind That Holds",
-     "grants": "Your mind is simply the last thing to fail. Function clearly under conditions that have broken better bodies — cold, injury, grief, weeks of pressure — until the work is done.",
-     "cannot": "Nothing further; this is the craft's ceiling; the BODY still fails on its own schedule; and it still costs what it costs: being the last thing to fail means YOU ARE AWAKE FOR ALL OF IT.",
-     "functions": [
-      "sustain",
-      "resist"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
-    }
-   ],
-   "nativeOrCombination": "native",
-   "schoolAffinity": "cog_unaided",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
-   "shape": "bolster",
-   "operativeAxis": [
-    "upkeepRelief",
-    "duration"
-   ],
-   "mechanic": {
-    "magnitude": 4,
-    "duration": 72
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "extend",
-     "axis": "duration",
-     "delta": "sustain complex cognitive work ACROSS DAYS without the thinking degrading",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: YOUR MIND IS SIMPLY THE LAST THING TO FAIL — function clearly under conditions that have broken better bodies",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "hold the thread — half the duration, and it costs little",
-    "surge": "double it; the mind being the last thing to fail means you are AWAKE for all of it"
-   },
-   "bounds": [
-    {
-     "text": "the BODY still fails on its own schedule",
-     "class": "hard"
-    },
-    {
-     "text": "being the last thing to fail means YOU ARE AWAKE FOR ALL OF IT",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A endurance/intellectual/hardship action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 3 days Ranks: rank 2 extends duration; rank 3 adds to special. Limit: the Body still fails on its own schedule."
-  },
-  {
    "id": "the_shaped_body",
    "name": "The Shaped Body",
    "levelReq": 3,
@@ -1708,8 +1613,7 @@
     "body_mind": 0.7
    },
    "functions": [
-    "resist",
-    "reveal"
+    "resist"
    ],
    "narrationHints": "Everything they throw at your thoughts slides off a stillness that was there before they arrived and will be there after they tire. You did not brace. You were simply already still.",
    "description": "Enter a stillness nothing can move — fear, deception and the fastest attack all slide off it. You read everything and grant nothing. The Cogitant art of mushin.",
@@ -1721,11 +1625,14 @@
      "grants": "Enter a perfect mental stillness — immune to fear, deception, and disruption, reading all with total clarity.",
      "cannot": "It grants no offense, only the unshakeable read; it occupies you wholly to hold; and a stillness this deep can look, to those who love you, like you have gone somewhere they cannot follow.",
      "functions": [
-      "resist",
-      "reveal"
+      "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "resist",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1733,11 +1640,14 @@
      "grants": "The stillness no longer occupies you wholly — hold it while fighting, walking, negotiating, and the clarity holds with it. And it reaches past you: those who stand with you and trust you are steadied by proximity, and do not break when they should.",
      "cannot": "Extending it thins it — the more you shelter, the less clearly you read. It still grants no offense at any depth. And those sheltered feel the flinch you are not having, which more than one person has found worse than their own fear.",
      "functions": [
-      "resist",
-      "reveal"
+      "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "resist",
+      "reveal"
+     ]
     }
    ],
    "gated": "learned",
@@ -1790,7 +1700,12 @@
     }
    ],
    "plainly": "A defend/investigate action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 5 harm per hit (rank 3 armour), and lasts for about 4 hours Ranks: rank 2 adds to autonomy. Limit: iT Grants NO Offense, only the unshakeable read.",
-   "_descriptionWas": "The Cogitant art of mushin — no-mind, the perfect stillness that nothing can move: not fear, not deception, not the fastest attack, because a mind that does not flinch reads everything and grants nothing. The blade-discipline made total."
+   "_descriptionWas": "The Cogitant art of mushin — no-mind, the perfect stillness that nothing can move: not fear, not deception, not the fastest attack, because a mind that does not flinch reads everything and grants nothing. The blade-discipline made total.",
+   "_functionsWas": [
+    "resist",
+    "reveal"
+   ],
+   "_strip": "⛔ SNG-453: incidental `reveal`/`foresee` stripped — the perceiving is the setup step, not the effect."
   },
   {
    "schemaVersion": 1,
@@ -2137,9 +2052,14 @@
     "duration"
    ],
    "mechanic": {
-    "magnitude": 7,
-    "duration": 1,
-    "scope": 1
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 8,
+    "targets": 1,
+    "marginFloorPer": 0.02
    },
    "intensity": {
     "conserve": "a moment's regard — a stumble, a greying",
@@ -2159,12 +2079,18 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/social action that harms one person through undivided attention. Rated 7 of 10 on one target. Limit: one target, and it costs nearly all your action.",
+   "plainly": "A fight/social action that deals damage. It rolls 1d6. Range is 8.",
    "backlash": "The regard reverses. You have given a mind your entire attention and it now has yours — the wielder is struck at the surged rung and cannot act for the round.",
    "conserveSuppresses": "a moment's regard — you keep your own footing",
    "backlashRung": "damaging",
    "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
-   "_descriptionWas": "The Cogitants' first offense. No vector, no contact, nothing crosses the space. Thought applied to a body that has been quietly running itself."
+   "_descriptionWas": "The Cogitants' first offense. No vector, no contact, nothing crosses the space. Thought applied to a body that has been quietly running itself.",
+   "_mechanicWas": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 1
+   },
+   "_diceFix": "⛔ SNG-453: shape `strike`, mag7, NO DICE — the Cogitant first offense could not deal damage. L1 rung is 1d6 (SNG-437)."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

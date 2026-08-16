@@ -295,5 +295,104 @@
  },
  "_rebase": "SNG-378: lattice→precursor · natural→body · inherent→metaphysical · material→body. ⛔ Anything keying on the string 'lattice', 'natural', 'inherent' or 'material' is now keying on nothing — that is how the school band table died silently. Bands live in the_substrate.json → sourceBands.",
  "_fiveFamilies": "SNG-381: valley_craft · harmonic · radiant_folk · precursor · cross_pole_braid are NOT TRADITIONS — none appears in traditions.json. They are craft FAMILIES and categories that abilities declare in their `tradition` field, so they fall through `abilityTradition(ab) || ab.powerSystem` into this lookup and found nothing. 53 crafts were invisible to both tables. ⚠️ They carry `density: null` because a craft family has no homeland — unlike a people, which does.",
- "_valleyCraftGap": "⚠️ SNG-381 AUTHORING GAP, found while correcting the above: valley_craft has NO folk-harmonic and NO folk-radiant craft, and the valley contains harmonic_heights_terrace, radiant_plateau_edge, echo_river_crossing and the sunken_choir. Two craft families next door for generations and the folk tradition borrowed nothing from either. ⛔ That is a hole, not a design: a valley kid who grew up by the Choir should have a plain, unschooled way of using sound, the way `old_roads` is a plain unschooled way of using Precursor work."
+ "_valleyCraftGap": "⚠️ SNG-381 AUTHORING GAP, found while correcting the above: valley_craft has NO folk-harmonic and NO folk-radiant craft, and the valley contains harmonic_heights_terrace, radiant_plateau_edge, echo_river_crossing and the sunken_choir. Two craft families next door for generations and the folk tradition borrowed nothing from either. ⛔ That is a hole, not a design: a valley kid who grew up by the Choir should have a plain, unschooled way of using sound, the way `old_roads` is a plain unschooled way of using Precursor work.",
+ "_reallocation_20260815": "⛔ ERIK'S PRIMARY ALLOCATION, 2026-08-15. FOUR SOURCES, 24 TRADITIONS, exact coverage — no gaps, no doubles. precursor 7 · metaphysical 8 · ordered_nanite 5 · wild_nanite 4.\n⛔ THE STRUCTURAL CHANGE: `body` IS GONE AS A SOURCE, absorbed into metaphysical as 'Veil/Psychic/Ki type INNATE power'. ⚠️ THIS IS BETTER THAN WHAT I HAD. I was carrying 9 traditions on `body`, a source defined as REACHING FOR NOTHING — a residual bucket for 'no visible power'. Naming it innate gives it a mechanism, and it makes theTradeoff coherent: METAPHYSICAL WORKS ANYWHERE BECAUSE IT IS CARRIED, NOT DRAWN. The Marchers and Somatics become ki-traditions rather than people who merely trained hard.\n⚠️ CONSEQUENCE TO WATCH: 8 traditions are innate and work anywhere; 16 depend on substrate. A two-thirds majority goes weak off the lattice.\n⛔ AND `veil` AND `wild` ARE NO LONGER FREE-STANDING PRIMARIES — veil folds into metaphysical, wild becomes wild_nanite. That resolves 'veil is primary for nobody' by making it part of something.",
+ "byTradition_primary_20260815": {
+  "seraphic": {
+   "primary": "ordered_nanite",
+   "why": "'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace."
+  },
+  "enginewright": {
+   "primary": "ordered_nanite",
+   "why": "⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation."
+  },
+  "syllogist": {
+   "primary": "ordered_nanite",
+   "why": "Argument as architecture; a proof is an ordered process and runs like one."
+  },
+  "mason": {
+   "primary": "ordered_nanite",
+   "why": "⚠️ Ordered nanite is WORKED MATTER, which is the one immaterial thing a Mason would accept — a load path is real."
+  },
+  "lattice": {
+   "primary": "ordered_nanite",
+   "why": "Perfect prediction, the binding of possibility. Definitional."
+  },
+  "churnfolk": {
+   "primary": "wild_nanite",
+   "why": "Improvised everything, luck-riding, nothing twice. Definitional."
+  },
+  "rootkin": {
+   "primary": "wild_nanite",
+   "why": "'Grown not built, sap and bark.' Wild nanite as growth."
+  },
+  "threnodist": {
+   "primary": "wild_nanite",
+   "why": "⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too."
+  },
+  "figurist": {
+   "primary": "wild_nanite",
+   "why": "⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Formcraft is the most ordered craft on the wheel, and I was anchoring on skills I authored myself ('buildings that are arguments') that Erik notes may not be useful skills anyway. ABSTRACTION IS NOT ORDER — it is the leap, and the leap is wild."
+  },
+  "abyssal": {
+   "primary": "precursor",
+   "why": "⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the alien source directly."
+  },
+  "wright": {
+   "primary": "precursor",
+   "why": "Scaffolds forever, half-built cathedrals. Making at that scale is crystal-assisted, and the waste is the tell."
+  },
+  "unmaker": {
+   "primary": "precursor",
+   "why": "Controlled ruin — and what they unmake is largely Precursor work."
+  },
+  "blazeborn": {
+   "primary": "precursor",
+   "why": "Glass plains, revelation as violence. Light shaped through crystal."
+  },
+  "umbral": {
+   "primary": "precursor",
+   "why": "They live in the deeps, which is where the lattice is buried."
+  },
+  "hourkeeper": {
+   "primary": "precursor",
+   "why": "'Archives that RUN FORWARD.' Only one thing in this world does that."
+  },
+  "horizon": {
+   "primary": "precursor",
+   "why": "⛔ THE WAYGATES. The far step is Precursor tech, and I missed it when I first allocated them body."
+  },
+  "somatic": {
+   "primary": "metaphysical",
+   "why": "Ki, definitional — 'the body as the only instrument.'"
+  },
+  "cogitant": {
+   "primary": "metaphysical",
+   "why": "⛔ Psychic. Erik 2026-08-15, overturning his own earlier worked example."
+  },
+  "verist": {
+   "primary": "metaphysical",
+   "why": "Seeing truly, without an instrument between."
+  },
+  "veilwright": {
+   "primary": "metaphysical",
+   "why": "⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'."
+  },
+  "stillhold": {
+   "primary": "metaphysical",
+   "why": "Inner stillness as a held power, not an absence of one."
+  },
+  "marcher": {
+   "primary": "metaphysical",
+   "why": "⚠️ Ki-warrior. 'Honed steel, the line that holds' is carried, not drawn."
+  },
+  "ashwarden": {
+   "primary": "metaphysical",
+   "why": "The mercy of stopping needs no apparatus."
+  },
+  "numinous": {
+   "primary": "metaphysical",
+   "why": "Meaning without matter. Definitional."
+  }
+ }
 }

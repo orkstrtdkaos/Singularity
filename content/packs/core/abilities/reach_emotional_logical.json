@@ -990,138 +990,6 @@
    "plainly": "A endurance/hardship/social action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: it sustains by Feeling, not by easing — a person who wants comfort gets depth instead."
   },
   {
-   "id": "the_proved_position",
-   "name": "The Proved Position",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "emotional_logical": 0.4
-   },
-   "effectTags": [
-    "logic",
-    "proof",
-    "protection"
-   ],
-   "harmRung": "none",
-   "narrationHints": "He had proved it. They could attack him all they liked. The proof still stood.",
-   "description": "Protect through irrefutable argument — attacks on a proved position must answer the proof before they can land.",
-   "notFor": [],
-   "tradition": "syllogist",
-   "functions": [
-    "shield",
-    "ward",
-    "bind"
-   ],
-   "challengeTypes": [
-    "social",
-    "intellectual",
-    "defense"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Proved Ground",
-     "grants": "Establish a position so logically secure that attacks — social, rhetorical, physical — must first answer the proof before they have any purchase.",
-     "cannot": "Anything rank 2 adds — extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial; IT WARDS WHAT MUST ANSWER REASON.",
-     "functions": [
-      "shield"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "shield"
-     ]
-    },
-    {
-     "rank": 2,
-     "name": "The Extended Proof",
-     "grants": "Extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial.",
-     "cannot": "Anything rank 3 adds — a proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established; IT WARDS WHAT MUST ANSWER REASON.",
-     "functions": [
-      "shield",
-      "ward"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "shield",
-      "ward"
-     ]
-    },
-    {
-     "rank": 3,
-     "name": "The Self-Maintaining Proof",
-     "grants": "A proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established.",
-     "cannot": "Nothing further; this is the craft's ceiling; IT WARDS WHAT MUST ANSWER REASON.",
-     "functions": [
-      "shield",
-      "ward",
-      "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "shield",
-      "ward",
-      "bind"
-     ]
-    }
-   ],
-   "nativeOrCombination": "native",
-   "shape": "guard",
-   "operativeAxis": [
-    "logicalGround",
-    "scope"
-   ],
-   "mechanic": {
-    "magnitude": 5,
-    "soak": 4,
-    "soakRank": 2,
-    "type": "rhetorical",
-    "duration": 8,
-    "note": "A SIXTEENTH DEFENSIVE LOGIC — PROVED: a TYPED guard (rhetorical/social attacks) whose soak is the soundness of your position. 'Attacks must first ANSWER THE PROOF.' Transparent to a blade."
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "extend",
-     "axis": "scope",
-     "delta": "extend the proved position to cover A SPACE OR A GROUP — a claim so airtight it FUNCTIONS AS A WARD",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "extend",
-     "axis": "scope",
-     "delta": "a proved position holds AT SCALE — at the level of INSTITUTIONS, TREATIES, OR LAWS",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "state your ground — half the protection, and it is easy to hold",
-    "surge": "double it; a position proved at the scale of laws is a position you must keep defending"
-   },
-   "bounds": [
-    {
-     "text": "IT WARDS WHAT MUST ANSWER REASON — a fist does not answer the proof",
-     "class": "hard"
-    },
-    {
-     "text": "the position must ACTUALLY BE SOUND — a proved-wrong position wards nothing",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A social/intellectual/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: iT Wards What Must Answer Reason — a fist does not answer the proof.",
-   "_functionsWas": [
-    "bind",
-    "shield",
-    "ward"
-   ],
-   "_strip": "⛔ SNG-453: incidental `reveal`/`foresee` stripped — the perceiving is the setup step, not the effect."
-  },
-  {
    "id": "the_built_system",
    "name": "The Built System",
    "levelReq": 3,
@@ -1232,7 +1100,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A intellectual/leadership/craft action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 adds to autonomy; rank 3 extends scope. Limit: iT Runs ON Its Logic — a system whose logic is unsound fails exactly where the flaw is."
+   "plainly": "A intellectual/leadership/craft action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 adds to autonomy; rank 3 extends scope. Limit: iT Runs ON Its Logic — a system whose logic is unsound fails exactly where the flaw is.",
+   "downtime": true,
+   "_flag": "⚠️ SNG-457: FLAGGED DOWNTIME. Good rank arc — design a system · it self-maintains · it runs at scale without you — but nothing rolls and the effect lands between sessions. Erik: 'ok with flagging built system.'"
   },
   {
    "schemaVersion": 1,

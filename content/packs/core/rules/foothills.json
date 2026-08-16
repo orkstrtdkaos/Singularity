@@ -3,30 +3,35 @@
  "id": "foothills",
  "kind": "content",
  "note": "⛔ SNG-441. FOOTHILLS AND FOLK — Erik, 2026-08-15: 'Foothills are the FUNCTIONAL VERSION of the pole in many cases; in some cases the place that is APPROACHABLE and the ECONOMIC CENTER. They are also NOT strictly one pole per parent. We need balance, but foothills are most likely a BLEND of a primary domain with 1-2 of its neighbors.'\n⚠️ THERE ARE 26 CANONICAL TRADITIONS — 24 ring poles on 12 axes, plus god_named and bargainers already carrying `pole: foothill`. I had been counting 31 by treating collection-keys as peoples.",
- "_theRule": "⛔ A FOOTHILL IS NOT A LESSER TRADITION — IT IS A POLE MADE USABLE. The pole states the position absolutely; the foothill is what you can actually buy, hire, learn and live beside. ⚠️ AND THE EXISTING TWO PROVE THE BLEND CROSSES AXES rather than staying on neighbours:\n   GOD-NAMED — 'borrowed grandeur worn slightly wrong; a man addressed by a name nobody in this valley can check.' ⛔ THAT IS SERAPHIC (angelic authority) BLENDED WITH VEILWRIGHT (falsehood). The functional version of divine authority is a borrowed one.\n   BARGAINERS — 'a good table, a fair scale, an exit that is always shown to you and always costed.' ⛔ ABYSSAL (the named want, the struck term) BLENDED WITH VERIST (truth). The functional version of the bargain is an HONEST one, which is precisely why anyone sits down twice.\n⚠️ SO THE PATTERN IS: TAKE THE POLE'S POWER AND ADD WHAT MAKES IT SURVIVABLE TO DEAL WITH.",
+ "_theRule": "⛔ A FOOTHILL IS NOT A LESSER TRADITION — IT IS A POLE MADE USABLE. The pole states the position absolutely; the foothill is what you can actually buy, hire, learn and live beside. ⚠️ AND THE EXISTING TWO PROVE THE BLEND CROSSES AXES rather than staying on neighbours:\n   GOD-NAMED — 'borrowed grandeur worn slightly wrong; a man addressed by a name nobody in this valley can check.' ⛔ THAT IS SERAPHIC (angelic authority) BLENDED WITH VEILWRIGHT (falsehood). The functional version of divine authority is a borrowed one.\n   BARGAINERS — 'a good table, a fair scale, an exit that is always shown to you and always costed.' ⛔ ABYSSAL (the named want, the struck term) BLENDED WITH VERIST (truth). The functional version of the bargain is an HONEST one, which is precisely why anyone sits down twice.\n⚠️ SO THE PATTERN IS: TAKE THE POLE'S POWER AND ADD WHAT MAKES IT SURVIVABLE TO DEAL WITH.\n⛔ ERIK 2026-08-15, REFINEMENT: 'It's likely that these foothills will have THREE DOMAINS, as each character does.' ⚠️ THAT IS THE RULE — a foothill is not a pole plus a qualifier, it is a THREE-DOMAIN BLEND, the same shape a player character has. Which is the point: a foothill is where the world is LIVED IN rather than argued from.",
  "foothills": {
   "god_named": {
    "parents": {
-    "seraphic": 0.7,
-    "veilwright": 0.3
+    "seraphic": 0.5,
+    "veilwright": 0.3,
+    "lattice": 0.2
    },
    "axis": "demonic_angelic",
    "craft": "Service",
-   "status": "authored — blend inferred from aesthetic, ⚠️ Erik to confirm the weights"
+   "status": "authored — blend inferred from aesthetic, ⚠️ Erik to confirm the weights",
+   "_thirdDomain": "⚠️ Proposed under the three-domain rule: LATTICE for the hall, the office and the retinue — borrowed grandeur needs an administration to be borrowed FROM."
   },
   "bargainers": {
    "parents": {
-    "abyssal": 0.7,
-    "verist": 0.3
+    "abyssal": 0.5,
+    "verist": 0.3,
+    "mason": 0.2
    },
    "axis": "demonic_angelic",
    "craft": "Terms",
-   "status": "authored — blend inferred from aesthetic, ⚠️ Erik to confirm the weights"
+   "status": "authored — blend inferred from aesthetic, ⚠️ Erik to confirm the weights",
+   "_thirdDomain": "⚠️ Proposed: MASON for the fair scale and the honest weight — 'only what can be touched is real' is the Bargainers' guarantee as much as the Masons'."
   },
   "harmonic": {
    "parents": {
-    "threnodist": 0.6,
-    "lattice": 0.4
+    "threnodist": 0.5,
+    "lattice": 0.3,
+    "mason": 0.2
    },
    "axis": "emotional_logical",
    "craft": "Resonance",
@@ -34,19 +39,21 @@
    "abilities": 15,
    "ratified": "⛔ ERIK 2026-08-15: 'I agree with you about the Threnodists with the lattice aesthetic for the resonant/harmonic foothill.'",
    "why": "⚠️ THRENODIST FOR CRAFT, LATTICE FOR AESTHETIC — the Threnodists sing what they FEEL; the Heights sing what they can BUILD WITH. Sound made structural: standing waves, phononic crystal, interference held as architecture. ⛔ AND LATTICE IS NOT A THRENODIST RING-NEIGHBOUR (pos 15 vs 23), which is fine — the two existing foothills also blend across the ring.",
-   "note": "⚠️ Sound is not one of the twelve axes. The foothill is where it enters the world."
+   "note": "⚠️ Sound is not one of the twelve axes. The foothill is where it enters the world.",
+   "_thirdDomain": "⚠️ THIRD DOMAIN ADDED under Erik's three-domain rule. MASON, and the seed argues it: 'buildings GROWN FROM PHONONIC CRYSTAL hum at frequencies you feel in your teeth', and the terraces are cut. ⛔ THRENODIST GIVES SOUND, LATTICE GIVES STRUCTURE, MASON GIVES THE MATERIAL — you cannot hold a standing wave in air alone; something has to be shaped to ring. ⚠️ Erik to confirm mason over numinous, which would make it meaning-in-sound instead."
   },
   "radiant_folk": {
    "parents": {
-    "blazeborn": 0.7,
-    "wright": 0.3
+    "blazeborn": 0.5,
+    "wright": 0.3,
+    "lattice": 0.2
    },
    "axis": "dark_light",
    "craft": "Glasswork",
    "place": "radiant_plateau_edge",
    "abilities": 14,
-   "why": "⛔ RADIANCE IS THE BLAZEBORN CRAFT, and the Plateau does the USABLE version: Sun Coax, Light Well, Clarity Lens, Beacon Thread — warming, storing, magnifying, signalling — rather than revelation-as-violence. ⚠️ THE WRIGHT SHARE IS WHY: light-guides and prisms are MADE THINGS. The Blazeborn reveal; the Plateau BUILDS WITH light, which is the functional turn.",
-   "_erikRules": "whether the second parent is wright (making) or lattice (ordering) — both defensible"
+   "ratified": "⛔ ERIK 2026-08-15: 'Radiant plateau can be light, wright, and order.'",
+   "why": "⛔ LIGHT + MAKING + ORDER, and the crafts show all three. BLAZEBORN gives the medium — Radiance is theirs. WRIGHT gives the turn that makes it usable: Light Well STORES it, Clarity Lens SHAPES it, Beacon Thread STRINGS it — these are made things, not revelations. LATTICE gives the discipline: light-guides paved into streets and towers that BRAID sunlight into working beams are an infrastructure, laid out and maintained.\n⚠️ THE BLAZEBORN REVEAL, AND IT COSTS THEM EVERYTHING. The Plateau plumbs it."
   }
  },
  "folk": {

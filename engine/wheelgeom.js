@@ -105,13 +105,47 @@ export function leanOffset(spokeAng, comp, n = 24, maxSwingPos = 2) {
  *  @param tradRel   the SNG-202B relation of this node to the selected tradition ("related"|"adjacent"|"dim")
  *  @returns true when the node must not be drawn at all
  */
-export function wheelRejects(node, { fnFilter = null, suggestOnly = false, buyableOnly = false, selTrad = null, tradRel = null } = {}) {
-  const fns = fnFilter && fnFilter.size ? fnFilter : null;
-  if (!fns && !suggestOnly && !buyableOnly) return false;   // a relation display, not a filter
+export function wheelRejects(node, { fnFilter = null, suggestOnly = false, buyableOnly = false, selTrads = null } = {}) {
   const nd = node || {};
-  if (fns && !(nd.families || []).some(f => fns.has(f))) return true;
+  const trads = selTrads && selTrads.size ? selTrads : null;
+  const fns = fnFilter && fnFilter.size ? fnFilter : null;
+  if (!trads && !fns && !suggestOnly && !buyableOnly) return false;   // nothing is filtering; nothing hides
+  if (trads && !inTraditions(nd, trads)) return true;
+  if (fns && !matchesFunction(nd, fns)) return true;
   if (suggestOnly && !(nd.recommended && !nd.owned)) return true;
   if (buyableOnly && !(nd.reachable && !nd.owned)) return true;
-  if (selTrad && tradRel === "dim") return true;
   return false;
+}
+
+/** ⛔ CCODE-197 (Erik): "the bare tradition include the adjacent ones by mistake."
+ *
+ *  It did, and deliberately — SNG-202B lit a selected tradition's ring-NEIGHBOURS as "adjacent" to show the
+ *  circle's structure. As a display of shape that is defensible; as a FILTER it is wrong, because the answer
+ *  to "show me the death ones" must not include the two traditions either side of death. Now that a
+ *  tradition click hides rather than dims, the distinction stopped being cosmetic: adjacency was quietly
+ *  widening the set the player thought they had narrowed.
+ *
+ *  ⚠️ A BRAID BELONGS TO BOTH ITS PARENTS. It is not "adjacent" to them, it is made of them, so a
+ *  selected tradition shows the braids built from it — which is the one inclusion that is not a widening. */
+export function inTraditions(node, selected) {
+  const nd = node || {};
+  if (!selected || !selected.size) return true;
+  if (nd.braid) return (nd.parentTrads || []).some(t => selected.has(t));
+  return selected.has(nd.cls);
+}
+
+/** ⛔ CCODE-197 (Erik): "filter by ALL the skill functions, not just the primary families, so I can
+ *  find very specific skill options."
+ *
+ *  The wheel filtered on the 8 FAMILIES — HARM, RESTORE, PROTECT, KNOW, SHAPE, INFLUENCE, MOVE, SUSTAIN —
+ *  which are buckets the 24 authored function verbs fall into. Measured across the catalogue: 24 distinct
+ *  verbs on 376 abilities (reveal 145, bind 73, strike 59, sustain 57, foresee 46, make 46 …). "HARM" cannot
+ *  tell `strike` from `break`; a player hunting a specific option was being handed a third of the wheel.
+ *
+ *  ⚠️ ONE SET HOLDS BOTH. A family and a verb are different grains of the same question, and a filter
+ *  that made the player choose which grain to think in would be a worse answer than the one it replaced. */
+export function matchesFunction(node, chosen) {
+  const nd = node || {};
+  if (!chosen || !chosen.size) return true;
+  return (nd.families || []).some(f => chosen.has(f)) || (nd.functions || []).some(f => chosen.has(f));
 }

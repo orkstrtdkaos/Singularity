@@ -8182,9 +8182,22 @@ await (async () => {
   // §1 wired: buildWheelModel rotates spoke crafts by compositionAngle+leanOffset (not a bare spoke fan).
   check("202B §1: buildWheelModel leans spoke crafts by composition (compositionAngle + leanOffset)", /leanOffset\(ang0, compositionAngle\(ab\.axes, axisPoles, n\)/.test(appSrc202));
   // §2 wired: the wheel is a browse surface — click a tradition / click a braid highlights across the wheel.
-  check("202B §2: a tradition ring node is clickable (data-wheeltrad) + toggles wheelSelTrad", /data-wheeltrad=/.test(appSrc202) && /wheelSelTrad = wheelSelTrad === t \? null : t/.test(appSrc202));
+  // ⚠️ CCODE-197 SUPERSEDED THE SHAPE, NOT THE CLAIM. Erik: "I want to be able to click multiple
+  // traditions at a time as well... with a second click to turn them off." One variable became a Set;
+  // what still has to be true is that the ring is the control and a second click releases it.
+  check("202B §2/CCODE-197: the ring is the control, several may be held, and a second click releases one",
+    /data-wheeltrad=/.test(appSrc202)
+    && /if \(wheelSelTrads\.has\(t\)\) wheelSelTrads\.delete\(t\); else wheelSelTrads\.add\(t\);/.test(appSrc202)
+    && /let wheelSelTrads = new Set\(\)/.test(appSrc202));
   check("202B §2: the pole-label WORDS carry a hit target (rim node gets covered by capstones)", /class="hit label-hit"/.test(appSrc202) && /poleLbl\.length \* 6\.6/.test(appSrc202));
-  check("202B §2: a clicked tradition highlights its crafts + braids-with-a-parent, dims the rest (tradRelOf)", /parentTrads[\s\S]{0,40}includes\(wheelSelTrad\)/.test(appSrc202) && /trad-" \+ tradRelOf\(nd\)/.test(appSrc202));
+  // ⛔ CCODE-197: IT HIDES NOW, AND ADJACENCY IS GONE. Erik: "a bare tradition click should hide
+  // things too. Also, the bare tradition include the adjacent ones by mistake." SNG-202B lit the ring-
+  // neighbours to show the circle's structure — defensible as a display, wrong as a filter, and the
+  // moment the click began HIDING it was quietly widening the set the player thought they had narrowed.
+  // The braid inclusion survives, because a braid is MADE of its parents rather than adjacent to them.
+  check("202B §2/CCODE-197: a held tradition keeps its own crafts and its braids — and nothing else",
+    /parentTrads[\s\S]{0,60}some\(t => selected\.has\(t\)\)/.test(readFileSync(join(root, "engine/wheelgeom.js"), "utf8"))
+    && !/ringDistance\([^)]*\) === 1 \? "adjacent"/.test(appSrc202));
   check("202B §2: the foreclosure line to the antipode is drawn as geometry (wheel-foreclose)", /wheel-foreclose/.test(appSrc202) && /only a braid crosses this axis/.test(appSrc202));
   check("202B §2: a selected braid lights both parent spokes + the joining arc", /selBraidParents\.length !== 2[\s\S]*?wheel-braid-parent[\s\S]*?wheel-braid-arc/.test(appSrc202));
 }
@@ -16404,9 +16417,9 @@ await (async () => {
   const ownedSugg = { id: "o", families: ["break"], recommended: true, owned: true };
   // 1 · ⚠️ A TRADITION CLICK ALONE REJECTS NOTHING. SNG-202B's related/adjacent/dim rings are how the
   // wheel shows its shape — hiding the far side would tell the player the circle is smaller than it is.
-  check("CCODE-196: a tradition selection is a RELATION, not a filter — it hides nothing",
-    !wheelRejects(harm, { selTrad: "death", tradRel: "dim" })
-    && !wheelRejects(heal, { selTrad: "death", tradRel: "related" }));
+  check("CCODE-196/197: a held tradition HIDES the rest (Erik: \"a bare tradition click should hide things too\")",
+    wheelRejects({ cls: "life" }, { selTrads: new Set(["death"]) })
+    && !wheelRejects({ cls: "death" }, { selTrads: new Set(["death"]) }));
   // 2 · each real filter rejects what it is for
   check("CCODE-196: the function filter rejects a craft with none of the chosen families",
     wheelRejects(harm, { fnFilter: new Set(["mend"]) }) && !wheelRejects(heal, { fnFilter: new Set(["mend"]) }));
@@ -16418,8 +16431,8 @@ await (async () => {
   // 3 · ⛔ AND THEY COMPOSE, which is what Erik asked for at SNG-218: "the death ones" + "which of those
   // heal" + "which are suggested" must resolve to ONE visible set, not three overlapping paint jobs.
   check("CCODE-196: the filters INTERSECT — failing any one of them removes the craft",
-    wheelRejects(heal, { fnFilter: new Set(["mend"]), selTrad: "death", tradRel: "dim" })
-    && !wheelRejects(heal, { fnFilter: new Set(["mend"]), selTrad: "death", tradRel: "related" }));
+    wheelRejects({ ...heal, cls: "life" }, { fnFilter: new Set(["mend"]), selTrads: new Set(["death"]) })
+    && !wheelRejects({ ...heal, cls: "death" }, { fnFilter: new Set(["mend"]), selTrads: new Set(["death"]) }));
   // 4 · and the render DROPS it rather than fading it — the hit circle is the bug, so it must not be built.
   {
     const app196 = readFileSync(join(root, "app.js"), "utf8");
@@ -16430,6 +16443,80 @@ await (async () => {
       "dimming it leaves a 13px invisible target on top of the wheel");
     check("CCODE-196: a hidden craft reserves no label slot either (visible labels must not be shoved by invisible nodes)",
       /m\.nodes\.filter\(nd => nd\.name && !rejectsNode\(nd\) &&/.test(app196));
+  }
+}
+
+// ---- CCODE-197: hold several traditions, and ask by exact function ------------------------------
+// ⛔ ERIK, THREE THINGS IN ONE BREATH: "a bare tradition click should hide things too. Also, the bare
+// tradition include the adjacent ones by mistake. I want to be able to click multiple traditions at a time
+// as well... with a second click to turn them off. In addition, it would be great to filter by ALL the
+// skill functions, not just the primary families, so I can find very specific skill options."
+{
+  const { wheelRejects, inTraditions, matchesFunction } = await import("../engine/wheelgeom.js");
+  const { loadContentHeadless: lch197 } = await import("./headless_content.mjs");
+  const C197 = await lch197();
+  const death = { cls: "death", functions: ["strike"], families: ["HARM"] };
+  const life = { cls: "life", functions: ["heal"], families: ["RESTORE"] };
+  const braid = { braid: true, parentTrads: ["death", "order"], functions: ["bind"], families: ["PROTECT"] };
+  // 1 · SEVERAL AT ONCE, and holding two is not the same as holding neither.
+  {
+    const two = new Set(["death", "life"]);
+    check("CCODE-197: several traditions can be held at once, and each one keeps its own crafts",
+      inTraditions(death, two) && inTraditions(life, two)
+      && !inTraditions({ cls: "chaos" }, two)
+      && !wheelRejects(life, { selTrads: two }) && wheelRejects({ cls: "chaos" }, { selTrads: two }));
+    check("CCODE-197: an empty selection filters nothing (releasing the last one restores the wheel)",
+      !wheelRejects({ cls: "chaos" }, { selTrads: new Set() }));
+  }
+  // 2 · ⛔ AND ADJACENCY IS NOT MEMBERSHIP. This is the one Erik called a mistake: the ring-neighbours of
+  // a held tradition were being shown as though they belonged to it, so a narrowing silently widened.
+  {
+    const idx = C197.traditionIndex || {};
+    const ring = Object.keys(idx.ringPos || idx.positions || {});
+    check(`CCODE-197: a tradition NEXT to a held one is not included (${ring.length ? "checked on the live ring" : "no ring index"})`,
+      !inTraditions({ cls: "life" }, new Set(["death"])), "adjacency is a fact about the circle, not about a craft");
+    // ⚠️ BUT A BRAID IS MADE OF ITS PARENTS, which is the one inclusion that is not a widening.
+    check("CCODE-197: a braid built FROM a held tradition is kept; one built from neither is not",
+      inTraditions(braid, new Set(["death"])) && inTraditions(braid, new Set(["order"]))
+      && !inTraditions(braid, new Set(["life"])));
+  }
+  // 3 · ⛔ THE 24 VERBS, NOT THE 8 BUCKETS. "HARM" cannot tell `strike` from `break`.
+  {
+    const abs = Object.values(C197.abilities || {});
+    const verbs = new Set(abs.flatMap(a => a.functions || []));
+    const fams = new Set(abs.flatMap(a => a.families || []));
+    console.log(`      grain: ${verbs.size} authored function verbs vs 8 families, across ${abs.length} abilities`);
+    check(`CCODE-197: the catalogue carries far more grain than the families expose (${verbs.size} verbs vs 8)`,
+      verbs.size >= 20, "if the verbs ever collapse to 8, this filter stops being worth its row");
+    check("CCODE-197: a VERB matches, and it is finer than the family it sits in",
+      matchesFunction(death, new Set(["strike"])) && !matchesFunction(death, new Set(["break"]))
+      && matchesFunction(death, new Set(["HARM"])),
+      "strike and break share a family; a filter that cannot separate them is the bug");
+    // ⚠️ EACH GRAIN ON ITS OWN, because a mixed set proves neither: mutation showed that dropping the
+    // FAMILY half left this green, since `heal` alone still matched. A family chip must match a craft whose
+    // verbs are nowhere in the set, and a verb chip must match one whose family is not.
+    check("CCODE-197: families and verbs live in ONE set — the player never picks which grain to think in",
+      matchesFunction(death, new Set(["HARM"]))            // family alone, no verb overlap
+      && matchesFunction(death, new Set(["strike"]))       // verb alone, no family in the set
+      && matchesFunction(life, new Set(["HARM", "heal"]))  // mixed set, matched on the verb
+      && !matchesFunction(life, new Set(["HARM", "strike"])));
+  }
+  // 4 · the surfaces: the verb row exists, it is scoped to what the wheel HAS, and clear drops the traditions
+  {
+    const app197 = readFileSync(join(root, "app.js"), "utf8");
+    check("CCODE-197: the verb chips are rendered, grouped under their family",
+      /class="fn-verb-row"/.test(app197) && /fn-filter fn-verb/.test(app197)
+      && /FN_INDEX\.byFamily\?\.\[fam\]/.test(app197));
+    // ⚠️ A CHIP FOR A VERB NO CRAFT HAS can only ever return nothing, which reads as a broken button
+    // rather than an empty answer.
+    check("CCODE-197: the verb chips are scoped to the verbs this wheel actually carries",
+      /const inPlay = new Set\(m\.nodes\.flatMap\(nd => nd\.functions \|\| \[\]\)\)/.test(app197)
+      && /\.filter\(v => inPlay\.has\(v\)\)/.test(app197));
+    // ⛔ AND CLEAR MUST DROP THEM. They HIDE crafts now, so a "clear" that left them held would leave most
+    // of the wheel missing with no lit chip to explain why — invisible and on is the worst state a filter has.
+    check("CCODE-197: ✕ clear releases the held traditions too, and the button appears when only they are on",
+      /fnClear\.onclick = \(\) => \{ wheelFnFilter = new Set\(\); wheelSelTrads = new Set\(\);/.test(app197)
+      && /\(wheelFnFilter\.size \|\| wheelSelTrads\.size \|\| wheelSuggestFilter/.test(app197));
   }
 }
 

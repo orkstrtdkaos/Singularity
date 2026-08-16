@@ -1134,6 +1134,11 @@ img[data-lightbox] { cursor: zoom-in; }
    stays as the record of why: at 0.22 the node read as absent and still carried a 13px hit circle, so it
    intercepted clicks meant for the crafts that passed. Erik: "dimmed they still interfere with selection." */
 .wheel-node.fn-dim { opacity:0.22; }
+/* CCODE-197: the verb chips — the same question as a family chip, asked one grain finer. Smaller and
+   grouped behind their family glyph so 24 of them read as a hierarchy rather than a word search. */
+.fn-verb-row summary { font-size:11px; }
+.fn-verb-group { display:inline-flex; align-items:center; gap:3px; margin:0 8px 4px 0; }
+.fn-filter.fn-verb { font-size:10px; padding:1px 5px; letter-spacing:0; text-transform:none; }
 .wheel-node.fn-match .wnode-shape { stroke-width:2.4; }
 .wheel-node.fn-match .wheel-node-label { fill:var(--ink); }
 /* SNG-202B §2: click a tradition → its crafts + braids light, neighbours dim-highlight, the rest fade. */

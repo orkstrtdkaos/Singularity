@@ -93,22 +93,48 @@ console.log(`Radiant L. : seed 48556`);
 console.log(`             narrationHints: "${rlHints.slice(0, 90)}…"`);
 console.log(`\n${VARIANTS.length} variants, ${DELAY}ms apart, unique cache-buster on every request\n`);
 
+const RUN = Date.now().toString(36);   // this run's token: every request it makes is a first request
 const rows = [];
 for (let i = 0; i < VARIANTS.length; i++) {
   const v = VARIANTS[i];
-  const u = url(v.prompt, v.w, v.h, v.seed, `${i}_${VARIANTS.length}`);
-  let bytes = 0, why = "";
-  try {
-    const res = await fetch(u);
-    if (!res.ok) why = `http ${res.status}`;
-    else { const b = await res.blob(); bytes = b.size; }
-  } catch (e) { why = e?.message || "fetch failed"; }
+  // ⛔ UNIQUE PER RUN, NOT PER INDEX. The first version keyed the buster on the loop index, so a second
+  // run requested the IDENTICAL urls — a cache-buster that busts nothing, which is worse than none because it
+  // reads like a safeguard. The re-run then hit an evicted entry, the regeneration was rate-limited, and
+  // variant A came back 0 bytes. (The halt caught it, which is the one part that worked.)
+  const u = url(v.prompt, v.w, v.h, v.seed, `${RUN}_${i}`);
+  // ⛔ A FETCH THAT NEVER COMPLETED IS NOT A ZERO-BYTE BODY, and the first version of this loop said it
+  // was: it caught the network error, left `bytes` at 0, and halted with "came back 0 bytes." That is the
+  // exact distinction I built into `mintAction` for the runtime an hour earlier and then failed to apply
+  // here — a transport failure is evidence about the wire, not about the picture. So the two are separate,
+  // and only the second one stops the run.
+  let bytes = 0, why = "", data = "", threw = "";
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const res = await fetch(u);
+      if (!res.ok) { why = `http ${res.status}`; threw = ""; break; }
+      const buf = Buffer.from(await res.arrayBuffer());
+      bytes = buf.length;
+      // ⛔ EMBEDDED, NOT LINKED. The first grid rendered as eight broken tiles: a viewer with a strict CSP
+      // blocks every external host, so the <img src="https://…"> never loaded and the page said nothing
+      // about why. A comparison sheet that needs the network to be READ is not a deliverable — and these are
+      // exactly the urls that get evicted, so it would rot anyway.
+      data = `data:${res.headers.get("content-type") || "image/jpeg"};base64,${buf.toString("base64")}`;
+      threw = "";
+      break;
+    } catch (e) {
+      threw = e?.message || "fetch failed";
+      if (attempt < 2) { console.log(`      ${v.id}: ${threw} — waiting ${Math.round(DELAY / 1000)}s and trying again`); await sleep(DELAY); }
+    }
+  }
   const ok = bytes >= MIN_BYTES;
-  rows.push({ ...v, url: u, bytes, ok });
-  console.log(`${v.id.padEnd(5)} ${ok ? String(bytes).padStart(7) + " bytes" : "FAILED  " + why}   ${v.label}`);
-  // ⛔ A BLANK TILE IS NOT A RESULT. If the endpoint starts answering empty, stop rather than hand over a
-  // grid with holes in it that look like verdicts about prompts.
-  if (!ok) { console.error(`\n⛔ halted: ${v.id} came back ${bytes} bytes. Wait, then re-run with a larger --delay.`); break; }
+  rows.push({ ...v, url: u, data, bytes, ok });
+  console.log(`${v.id.padEnd(5)} ${ok ? String(bytes).padStart(7) + " bytes" : (threw ? "UNREACHED " + threw : "EMPTY  " + why)}   ${v.label}`);
+  // ⚠️ UNREACHED is not a result and not a burn — the grid is incomplete and says so, without claiming
+  // anything about the endpoint. A 200 with no bytes IS a burn, and that one halts.
+  if (!ok && !threw) { console.error(`
+⛔ halted: ${v.id} returned a body under ${MIN_BYTES} bytes. Wait, then re-run with a larger --delay.`); break; }
+  if (!ok) { console.error(`
+⚠️ ${v.id} could not be reached after 3 tries — the grid is incomplete, not the prompt's fault.`); }
   if (i < VARIANTS.length - 1) await sleep(DELAY);
 }
 
@@ -130,10 +156,10 @@ const html = `<!doctype html><meta charset="utf-8"><title>SNG-435 §B3 — order
 </style>
 <h1>SNG-435 §B3 — prompt ordering grid</h1>
 <p class="note">One seed held constant per subject, so ordering is the only moving part. Erik's eye is the
-verdict — if A or RL_A wins, B1/B2 do not ship. Generated ${new Date().toISOString().slice(0, 16).replace("T", " ")}.</p>
+verdict. Images are embedded, so this page needs no network. Generated ${new Date().toISOString().slice(0, 16).replace("T", " ")}.</p>
 ${bySubject.map(sub => `<h2>${esc(sub)}</h2><div class="grid">${rows.filter(r => r.subject === sub).map(r => `
  <figure>
-  <img src="${esc(r.url)}" width="${r.w}" height="${r.h}" alt="${esc(r.id)}">
+  <img src="${r.data}" width="${r.w}" height="${r.h}" alt="${esc(r.id)}">
   <figcaption><span class="id">${esc(r.id)}</span> — ${esc(r.label)} · ${r.bytes.toLocaleString()} bytes
    <pre>${esc(r.prompt)}</pre></figcaption>
  </figure>`).join("")}</div>`).join("")}

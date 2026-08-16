@@ -26,7 +26,7 @@ import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own
 import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
-import { braidPlacement, compositionAngle, leanOffset, wheelRejects } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
+import { braidPlacement, compositionAngle, leanOffset, wheelRejects, inTraditions, matchesFunction } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
 // ⚠️ `composeImagePrompt` ONLY. I imported `COMPOSED_MAX` beside it and never called it — the
@@ -97,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.160";
+const APP_VERSION = "1.9.162";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -475,7 +475,7 @@ let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs,
 let FN_INDEX = { families: [], verbToFamily: {}, byFamily: {} }; // SNG-124: function-family index (built at load)
 let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter on the skill wheel
 let learnBuyableOnly = false;  // SNG-348 (Erik): show only crafts the current skill points actually reach
-let wheelSelTrad = null; // SNG-202B §2: the tradition clicked to highlight its crafts/braids across the wheel
+let wheelSelTrads = new Set(); // CCODE-197 (Erik): "I want to be able to click multiple traditions at a time... with a second click to turn them off"   // SNG-202B §2
 let wheelRecommended = new Set(); // SNG-218 §3: the level-up suggestion's picks, lit ON the wheel (browse + highlight)
 let wheelReturnTo = null; // SNG-218 §3: when the wheel is opened FROM level-up, its Back returns there
 let wheelLearnMode = false; // SNG-218 §3 (Erik): opened from level-up → hide OWNED crafts (you're browsing what to LEARN, not your kit)
@@ -9204,13 +9204,15 @@ function renderSkillWheel(selectedId = null, status = "") {
   // it light up, its ring-neighbours dim-highlight, everything else fades, and the foreclosure line to its
   // antipode becomes visible geometry ("only a braid crosses"). Click a braid node → its two parent spokes
   // and the arc joining them light. Per-node relation is computed once here and stamped into the node class.
-  const selTradOpp = wheelSelTrad ? antipodeOf(wheelSelTrad, idx) : null;
-  const tradRelOf = (nd) => {
-    if (!wheelSelTrad) return "";
-    if (nd.braid) return (nd.parentTrads || []).includes(wheelSelTrad) ? "related" : "dim";
-    if (nd.cls === wheelSelTrad) return "related";
-    return ringDistance(nd.cls, wheelSelTrad, idx) === 1 ? "adjacent" : "dim";
-  };
+  // ⚠️ CCODE-197: THE FORECLOSURE LINE ONLY MEANS SOMETHING FOR ONE TRADITION. "Your antipode" is a fact
+  // about a single axis; drawing four of them at once would be noise, not geometry. Shown when exactly one
+  // tradition is selected, which is also the case where the player is asking a question about that axis.
+  const soleTrad = wheelSelTrads.size === 1 ? [...wheelSelTrads][0] : null;
+  const selTradOpp = soleTrad ? antipodeOf(soleTrad, idx) : null;
+  // ⛔ CCODE-197: NO MORE "adjacent". A tradition click is a FILTER now, and the answer to "show me the
+  // death ones" must not include the two traditions either side of death. `inTraditions` is the one rule,
+  // shared with the hide decision so the paint and the hit target can never disagree again.
+  const tradRelOf = (nd) => (!wheelSelTrads.size ? "" : (inTraditions(nd, wheelSelTrads) ? "related" : "dim"));
   const selBraid = selectedId ? m.nodes.find(x => x.id === selectedId && x.braid) : null;
   const selBraidParents = selBraid ? (selBraid.parentTrads || []).filter(t => nodeFor(t)) : [];
 
@@ -9232,18 +9234,21 @@ function renderSkillWheel(selectedId = null, status = "") {
       if (B) return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="wheel-braid cross-axis"><title>${esc(b.name)} — a cross-axis braid</title></line>`;
       return ""; }).join("")}
     ${/* SNG-202B §2: a clicked tradition's foreclosure line to its antipode — "only a braid crosses this axis" as geometry */""}
-    ${(() => { if (!wheelSelTrad || !selTradOpp) return ""; const A = nodeFor(wheelSelTrad), B = nodeFor(selTradOpp); if (!A || !B) return "";
-      return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="wheel-foreclose"><title>${esc(traditionLabel(wheelSelTrad))} ↔ ${esc(traditionLabel(selTradOpp))} — your antipode; only a braid crosses this axis</title></line>`; })()}
+    ${(() => { if (!soleTrad || !selTradOpp) return ""; const A = nodeFor(soleTrad), B = nodeFor(selTradOpp); if (!A || !B) return "";
+      return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="wheel-foreclose"><title>${esc(traditionLabel(soleTrad))} ↔ ${esc(traditionLabel(selTradOpp))} — your antipode; only a braid crosses this axis</title></line>`; })()}
     ${/* SNG-202B §2: a selected braid → light both parent spokes + the arc joining them (the composition, drawn) */""}
     ${(() => { if (selBraidParents.length !== 2) return ""; const An = nodeFor(selBraidParents[0]), Bn = nodeFor(selBraidParents[1]);
       const Ai = wheelPt(An.ang, S.rInner), Bi = wheelPt(Bn.ang, S.rInner);
       return `<line x1="${Ai.x}" y1="${Ai.y}" x2="${An.x}" y2="${An.y}" class="wheel-braid-parent"/><line x1="${Bi.x}" y1="${Bi.y}" x2="${Bn.x}" y2="${Bn.y}" class="wheel-braid-parent"/><path d="M ${An.x} ${An.y} Q ${selBraid.x} ${selBraid.y} ${Bn.x} ${Bn.y}" class="wheel-braid-arc" fill="none"/>`; })()}
     ${/* tradition ring nodes + pole labels */""}
     ${ringNodes.map(rn => { const lp = wheelPt(rn.ang, S.rNode + 30);
-      const selCls = !wheelSelTrad ? "" : rn.t === wheelSelTrad ? "trad-sel" : rn.t === selTradOpp ? "trad-sel-opp" : ringDistance(rn.t, wheelSelTrad, idx) === 1 ? "trad-sel-adj" : "trad-sel-dim";
+      // ⚠️ CCODE-197: three states, not four. With several traditions selected "adjacent to which one?"
+      // has no answer, and a ring tier that means different things depending on how many are lit is worse
+      // than none. Selected, the sole selection's antipode, or plain.
+      const selCls = !wheelSelTrads.size ? "" : wheelSelTrads.has(rn.t) ? "trad-sel" : rn.t === selTradOpp ? "trad-sel-opp" : "trad-sel-dim";
       const poleLbl = String(rn.pole).slice(0, 12);
       const lw = Math.max(52, poleLbl.length * 6.6); // SNG-202B: the pole-label WORDS are the reliable click target —
-      return `<g class="wheel-trad ${rn.closed ? "closed" : rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : ""} ${selCls}" data-wheeltrad="${esc(rn.t)}"><title>${esc(traditionLabel(rn.t))} — tap the label to light its crafts, braids and its antipode</title>
+      return `<g class="wheel-trad ${rn.closed ? "closed" : rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : ""} ${selCls}" data-wheeltrad="${esc(rn.t)}"><title>${esc(traditionLabel(rn.t))} — tap to show only its crafts and braids; tap again to drop it. Several may be held at once.</title>
         ${/* a generous hit box behind the label (outside the rim, in clear space where no ability node overlaps it — the rim node gets covered by capstones landing there) */""}
         <rect class="hit label-hit" x="${(lp.x - lw / 2).toFixed(1)}" y="${(lp.y - 9).toFixed(1)}" width="${lw.toFixed(1)}" height="22" rx="5"/>
         <circle class="hit" cx="${rn.x}" cy="${rn.y}" r="11"/>
@@ -9267,7 +9272,7 @@ function renderSkillWheel(selectedId = null, status = "") {
       // ⚠️ THE RULE LIVES IN `wheelgeom.js`, not here. It decides what a player can CLICK, and a rule
       // that important should be provable rather than asserted by a regex over this file.
       const rejectsNode = (nd) => wheelRejects(nd, { fnFilter: wheelFnFilter, suggestOnly: wheelSuggestFilter,
-        buyableOnly: wheelBuyableFilter, selTrad: wheelSelTrad, tradRel: wheelSelTrad ? tradRelOf(nd) : null });
+        buyableOnly: wheelBuyableFilter, selTrads: wheelSelTrads });
       // SNG-218 §3 (Erik): ZOOM LEVELS OF DETAIL. Overview stays clean — only your kit, the selected node, and
       // the ✨-suggested picks are named. Zoom in and the LEARNABLE crafts get labeled; zoom way in and
       // everything is (except the closed antipode). The wheel re-renders on a zoom-settle so labels appear as
@@ -9279,8 +9284,8 @@ function renderSkillWheel(selectedId = null, status = "") {
       // invisible ones — the same bug as the hit circle, in typography.
       const labelSet = m.nodes.filter(nd => nd.name && !rejectsNode(nd) && (
         nd.owned || selectedId === nd.id || (nd.recommended && !nd.owned) ||
-        (zoomed && filterOn && (nd.families || []).some(f => wheelFnFilter.has(f))) ||
-        (zoomed && wheelSelTrad && tradRelOf(nd) === "related") ||
+        (zoomed && filterOn && matchesFunction(nd, wheelFnFilter)) ||
+        (zoomed && wheelSelTrads.size && tradRelOf(nd) === "related") ||
         (midZoom && nd.reachable) || (deepZoom && !nd.closed)));
       const placed = [], labelAt = {};
       for (const nd of labelSet) {
@@ -9295,7 +9300,7 @@ function renderSkillWheel(selectedId = null, status = "") {
         // the player deliberately applied is the same interference wearing a friendlier face.
         if (rejectsNode(nd)) return "";
         const r = 5 + (nd.levelReq - 1) * 1.2;
-        const matched = filterOn && (nd.families || []).some(f => wheelFnFilter.has(f));
+        const matched = filterOn && matchesFunction(nd, wheelFnFilter);   // CCODE-197: families OR verbs
         const fam = (nd.families || [])[0];
         const sealed = nd.isPrecursor && !nd.precursorUnlocked;   // narrative-locked, NOT tier-locked
         const opened = nd.isPrecursor && nd.precursorUnlocked;
@@ -9305,17 +9310,17 @@ function renderSkillWheel(selectedId = null, status = "") {
         // "✨ Suggested" filter can all be on at once, so "the death ones" + "which of those heal" + "which are
         // suggested" compose. A node lights only if it passes EVERY active filter; else it dims. Recommended
         // nodes keep their halo through the dim (CSS !important), so suggestions stay findable under any filter.
-        const passTrad = !wheelSelTrad || tradRelOf(nd) !== "dim";
+        const passTrad = !wheelSelTrads.size || tradRelOf(nd) !== "dim";
         const passFn = !filterOn || matched;
         const passSug = !wheelSuggestFilter || (nd.recommended && !nd.owned);
         const passBuy = !wheelBuyableFilter || (nd.reachable && !nd.owned);
         const otherFilters = filterOn || wheelSuggestFilter || wheelBuyableFilter;
-        const anyFilter = wheelSelTrad || otherFilters;
+        const anyFilter = wheelSelTrads.size || otherFilters;
         const litByFilter = anyFilter && passTrad && passFn && passSug && passBuy;
         // A tradition click ALONE keeps its rich related/adjacent/dim relation (SNG-202B). The moment a function
         // or the ✨-Suggested filter joins it, the highlight becomes the INTERSECTION (Erik: "the death ones" +
         // "which of those heal" + "which are suggested" compose into one lit set; everything else dims).
-        const filterCls = (wheelSelTrad && !otherFilters) ? ("trad-" + tradRelOf(nd)) : (anyFilter ? (litByFilter ? "fn-match" : "fn-dim") : "");
+        const filterCls = (wheelSelTrads.size && !otherFilters) ? ("trad-" + tradRelOf(nd)) : (anyFilter ? (litByFilter ? "fn-match" : "fn-dim") : "");
         const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${nd.braid ? "braid" : ""} ${nd.antipodal ? "braid-antipodal" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterCls} ${nd.recommended && !nd.owned ? "recommended" : ""} ${nd.aspirational ? "aspirational" : ""}`;
         const secondaries = (nd.families || []).slice(1, 3);
         const lbl = labelAt[nd.id];
@@ -9386,8 +9391,30 @@ function renderSkillWheel(selectedId = null, status = "") {
            ONE gate — level, domain, attribute, standing, capacity AND affordability. So this filter cannot
            disagree with the Learn button, because it is asking the same function the button asks. */""}
       <button class="fn-filter reco-filter ${wheelBuyableFilter ? "on" : ""}" id="buy-filter" title="Only crafts you can take right now — gates met, capacity free, and affordable on ${character.skillPoints || 0} point${(character.skillPoints || 0) === 1 ? "" : "s"}">◉ Attainable</button>
-      ${(wheelFnFilter.size || wheelSuggestFilter || wheelBuyableFilter) ? `<button class="fn-filter" id="fn-filter-clear" title="Clear the filters">✕ clear</button>` : ""}
+      ${(wheelFnFilter.size || wheelSelTrads.size || wheelSuggestFilter || wheelBuyableFilter) ? `<button class="fn-filter" id="fn-filter-clear" title="Clear every filter, including the held traditions">✕ clear</button>` : ""}
     </div>
+    ${/* ⛔ CCODE-197 (Erik): "it would be great to filter by ALL the skill functions, not just the primary
+         families, so I can find very specific skill options." The 8 families are buckets over 24 authored
+         verbs — measured: reveal 145, bind 73, strike 59, sustain 57, foresee 46, make 46, and eighteen more.
+         "HARM" cannot tell `strike` from `break`, so a player hunting one option was handed a third of the wheel.
+         ⚠️ GROUPED UNDER THEIR OWN FAMILY, not listed flat: 24 loose chips is a word search. The family
+         chip above stays as the coarse answer, and these are the same question asked finer. */""}
+    <details class="fn-verb-row"${wheelFnFilter.size ? " open" : ""}><summary class="hint" style="cursor:pointer">…or by exact function ↓</summary>
+      <div class="fn-filter-row" style="margin-top:4px">
+        ${(() => {
+        // ⚠️ ONLY THE VERBS THIS WHEEL ACTUALLY HAS. The vocabulary is authored across the whole game;
+        // offering a chip for a verb no craft on this player's wheel carries is a filter that can only ever
+        // return nothing, which reads as a broken button rather than an empty answer.
+        const inPlay = new Set(m.nodes.flatMap(nd => nd.functions || []));
+        return FUNCTION_FAMILIES.map(fam => {
+          const verbs = (FN_INDEX.byFamily?.[fam] || []).filter(v => inPlay.has(v));
+          if (!verbs.length) return "";
+          return `<span class="fn-verb-group"><span class="hint" style="color:${FAMILY_COLOR[fam]}">${FAMILY_GLYPH[fam]}</span>${verbs.map(v =>
+            `<button class="fn-filter fn-verb ${wheelFnFilter.has(v) ? "on" : ""}" data-fnfilter="${esc(v)}" title="${esc(v)} — show only crafts that ${esc(v)}" style="${wheelFnFilter.has(v) ? `background:${FAMILY_COLOR[fam]};color:var(--bg);border-color:${FAMILY_COLOR[fam]}` : `color:${FAMILY_COLOR[fam]};border-color:${FAMILY_COLOR[fam]}`}">${esc(v)}</button>`).join("")}</span>`;
+        }).join("");
+        })()}
+      </div>
+    </details>
 
     ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent); margin-bottom:8px">${esc(status)}</div>` : ""}
     <div class="graph-wrap" id="graph-wrap">
@@ -9418,7 +9445,8 @@ function renderSkillWheel(selectedId = null, status = "") {
   for (const g of app.querySelectorAll("[data-wheeltrad]")) g.onclick = () => {
     if (_graphDidPan) { _graphDidPan = false; return; }
     const t = g.dataset.wheeltrad;
-    wheelSelTrad = wheelSelTrad === t ? null : t;
+    // CCODE-197: a second click drops it, and several may be held at once.
+    if (wheelSelTrads.has(t)) wheelSelTrads.delete(t); else wheelSelTrads.add(t);
     renderSkillWheel(null, status); // a tradition highlight clears any single-craft selection
   };
   // SNG-197 p2: rename a braid from its node (the second rename home, alongside the mint moment).
@@ -9432,7 +9460,10 @@ function renderSkillWheel(selectedId = null, status = "") {
   };
   const recoFilter = document.getElementById("reco-filter"); if (recoFilter) recoFilter.onclick = () => { wheelSuggestFilter = !wheelSuggestFilter; renderSkillWheel(selectedId, status); }; // SNG-218 §3: isolate the suggested crafts
   const buyFilter = document.getElementById("buy-filter"); if (buyFilter) buyFilter.onclick = () => { wheelBuyableFilter = !wheelBuyableFilter; renderSkillWheel(selectedId, status); };
-  const fnClear = document.getElementById("fn-filter-clear"); if (fnClear) fnClear.onclick = () => { wheelFnFilter = new Set(); wheelSuggestFilter = false; wheelBuyableFilter = false; renderSkillWheel(selectedId, status); };
+  // ⛔ CCODE-197: CLEAR DROPS THE TRADITIONS TOO. They HIDE crafts now, so leaving them held after a
+  // "clear" would leave most of the wheel missing with no lit chip to explain why — the worst state a
+  // filter can be in is invisible and on.
+  const fnClear = document.getElementById("fn-filter-clear"); if (fnClear) fnClear.onclick = () => { wheelFnFilter = new Set(); wheelSelTrads = new Set(); wheelSuggestFilter = false; wheelBuyableFilter = false; renderSkillWheel(selectedId, status); };
   wireSkillSelectionActions((id, msg) => renderSkillWheel(id, msg)); // SNG-097: learn/deepen in place
   document.getElementById("wheel-back").onclick = () => { graphViews[graphSurface] = null; clearTimeout(_wheelLODTimer); _rerenderWheel = null; const rt = wheelReturnTo; wheelReturnTo = null; wheelLearnMode = false; wheelSuggestFilter = false; wheelBuyableFilter = false; if (rt === "levelup") renderLevelUp(); else renderCharacterScreen(); }; // SNG-218 §3: reset browse modes + cancel any pending LOD re-render
   document.getElementById("wheel-list").onclick = () => { graphViews[graphSurface] = null; renderSkillGraph(); };

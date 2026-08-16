@@ -1060,7 +1060,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1068,11 +1071,14 @@
      "grants": "See where a bridge, scaffold, or dam WILL fail and when; sabotage that looks like age; certify a structure safe with real authority.",
      "cannot": "Predictions hold only while loads stay as read; a lie about what you read is still a lie.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 3,
@@ -1080,18 +1086,21 @@
      "grants": "Read a mechanism mid-motion; call the shatterpoint of a Harmonic shield or Radiant lattice in a single held breath; your warning shouted in time counts as an ally's reroll. AND A BODY IS A STRUCTURE TOO: the old break that never set right, the joint worn past its tolerance, the seam where armour was repaired — name it and strike there, and the blow lands where they were already going to fail.",
      "cannot": "A living structure must HAVE a flaw for the song to find; the young, sound, and unarmoured give it nothing to work with. Reading a body takes the same quiet minute, which a fight rarely offers. And a struck shatterpoint is a real injury at a real place — the Harmonics who do this to people are not confused about what they are doing.",
      "functions": [
-      "reveal",
-      "foresee",
       "break",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "break",
+      "strike"
+     ]
     }
    ],
    "functions": [
     "break",
-    "foresee",
     "reveal",
     "strike"
    ],
@@ -1151,7 +1160,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/puzzle action that reveals information or sets up a later action. Its strength is rated 6 out of 10, and lasts for about an hour Ranks: rank 2 extends foresight; rank 3 adds to special. Limit: knowing The Point IS Not Reaching IT."
+   "plainly": "A fight/puzzle action that reveals information or sets up a later action. Its strength is rated 6 out of 10, and lasts for about an hour Ranks: rank 2 extends foresight; rank 3 adds to special. Limit: knowing The Point IS Not Reaching IT.",
+   "_functionsWas": [
+    "break",
+    "foresee",
+    "reveal",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -1322,9 +1338,7 @@
     "space_time": 0.9
    },
    "functions": [
-    "empower",
-    "foresee",
-    "reveal"
+    "empower"
    ],
    "narrationHints": "For a moment you hear it — the whole resonance of a place across time, every note it has ever sounded still ringing faintly — and you sing WITH it, and the place remembers what it was and could be.",
    "description": "The Harmonic capstone — the song of a place across all its time, heard and joined. To sing the Worldsong is to touch what a place has been and might become, and to move it, gently, toward its truest note.",
@@ -1336,12 +1350,15 @@
      "grants": "Hear and join a place's resonance across all its time, moving it toward its truest note. A place moved toward its truest note makes everything in it better — the living things in it grow stronger, and the people who work there find the work goes right in ways they cannot account for.",
      "cannot": "It costs nearly all you have, it can only draw out what is already latent, and to hear a place's whole song is to carry, after, the weight of every note it ever sounded — including the grievous ones.",
      "functions": [
-      "reveal",
-      "foresee",
       "empower"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
     }
    ],
    "gated": "learned",
@@ -1394,7 +1411,13 @@
      "all": 72
     },
     "note": "KEPT but shortened 168h -> 72h. It is a working, not a strike; three days rather than a week."
-   }
+   },
+   "_functionsWas": [
+    "empower",
+    "foresee",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,

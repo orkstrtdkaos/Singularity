@@ -34,7 +34,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -42,11 +45,14 @@
      "grants": "Strike a binding bargain: both sides get what they truly want, and both sides pay what it truly costs.",
      "cannot": "The Bargain is exactly fair, which is the horror of it. It will not protect someone from the price of their own wanting.",
      "functions": [
-      "reveal",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -54,12 +60,16 @@
      "grants": "Descend into a person, a place, or an institution and surface with its true engine — the appetite it is actually running on, however it dresses.",
      "cannot": "What you surface with, you now carry. The Choir's deepest are unable to see anyone as anything but their hunger, and are usually right, and are unbearable.",
      "functions": [
-      "reveal",
       "bind",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "command"
+     ]
     }
    ],
    "gated": "learned",
@@ -116,7 +126,13 @@
     }
    ],
    "plainly": "A social/investigate/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 adds to special; rank 3 extends scope. Limit: naming A Want IS Not Granting IT — some people will hate you for the naming alone.",
-   "_descriptionWas": "The demonic-pole mastery: appetite named, bargains struck, the refusal to pretend that want is not the engine. Not evil — the honest hunger."
+   "_descriptionWas": "The demonic-pole mastery: appetite named, bargains struck, the refusal to pretend that want is not the engine. Not evil — the honest hunger.",
+   "_functionsWas": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_offered_price",
@@ -147,7 +163,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -155,11 +174,14 @@
      "grants": "The price, once named and accepted, BINDS — it will be paid, in the coin named, whatever they do afterward.",
      "cannot": "You are now the one who holds it. Collecting is not optional, even when you have come to love them.",
      "functions": [
-      "reveal",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -172,7 +194,12 @@
       "foresee"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "foresee"
+     ]
     }
    ],
    "gated": "learned",
@@ -226,7 +253,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to bindStrength; rank 3 deepens foresight. Limit: naming The Price Does Not Stop Them — it only means they knew."
+   "plainly": "A social/investigate action that reveals information or sets up a later action. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to bindStrength; rank 3 deepens foresight. Limit: naming The Price Does Not Stop Them — it only means they knew.",
+   "_functionsWas": [
+    "bind",
+    "foresee",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "ascent",
@@ -259,7 +292,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -267,11 +303,14 @@
      "grants": "Grant a real absolution — lift a weight a person has carried, genuinely, and they will feel it leave.",
      "cannot": "Mercy given is mercy TAKEN ON. The weight does not vanish; it moves to you.",
      "functions": [
-      "reveal",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "restore"
+     ]
     },
     {
      "rank": 3,
@@ -279,13 +318,18 @@
      "grants": "Pronounce a judgment that BINDS — it is true, everyone present knows it is true, and it does not come undone.",
      "cannot": "If you are wrong, the judgment binds anyway. The Seraphic Orders' history is a long argument about that sentence.",
      "functions": [
-      "reveal",
       "restore",
       "bind",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "restore",
+      "bind",
+      "command"
+     ]
     }
    ],
    "gated": "learned",
@@ -342,7 +386,14 @@
     }
    ],
    "plainly": "A social/investigate/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 adds to special; rank 3 adds to special. Limit: iT Measures The Deed, Not The Person.",
-   "_descriptionWas": "The angelic-pole mastery: mercy given, judgment pronounced, the luminous certainty that both heals and terrifies. Not good in the flat sense — certainty is a danger."
+   "_descriptionWas": "The angelic-pole mastery: mercy given, judgment pronounced, the luminous certainty that both heals and terrifies. Not good in the flat sense — certainty is a danger.",
+   "_functionsWas": [
+    "bind",
+    "command",
+    "restore",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_shielding_word",
@@ -827,7 +878,6 @@
    "tradition": "abyssal",
    "functions": [
     "command",
-    "reveal",
     "summon",
     "transform"
    ],
@@ -843,11 +893,14 @@
      "grants": "Summon the underside of a thing — the fear beneath the anger, the hunger beneath the pride — and give it momentary form in the room.",
      "cannot": "Anything rank 2 adds — call a form from the deep that serves a purpose — an appetite made briefly real, a fear given body — and it holds until it is dismissed; what you call is AN APPETITE GIVEN FORM.",
      "functions": [
-      "summon",
-      "reveal"
+      "summon"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "summon",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -856,11 +909,15 @@
      "cannot": "Anything rank 3 adds — what you call up holds, acts in the world, and is yours to direct until you release it; what you call is AN APPETITE GIVEN FORM.",
      "functions": [
       "summon",
-      "reveal",
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "summon",
+      "reveal",
+      "transform"
+     ]
     },
     {
      "rank": 3,
@@ -869,12 +926,17 @@
      "cannot": "Nothing further; this is the craft's ceiling; what you call is AN APPETITE GIVEN FORM; and it still costs what it costs: IT IS NOT DOCILE. IT IS DIRECTED.",
      "functions": [
       "summon",
-      "reveal",
       "transform",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "summon",
+      "reveal",
+      "transform",
+      "command"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -919,7 +981,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A magical/social/tactical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens summonPower; rank 3 extends control. Limit: what you call is AN Appetite Given Form — it wants what it is."
+   "plainly": "A magical/social/tactical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens summonPower; rank 3 extends control. Limit: what you call is AN Appetite Given Form — it wants what it is.",
+   "_functionsWas": [
+    "command",
+    "reveal",
+    "summon",
+    "transform"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_descent_path",
@@ -944,7 +1013,6 @@
    "tradition": "abyssal",
    "functions": [
     "open",
-    "reveal",
     "travel"
    ],
    "challengeTypes": [
@@ -959,11 +1027,14 @@
      "grants": "Find the passage to the below — the underground route, the hidden bottom of a space, the layer the map doesn't show.",
      "cannot": "Anything rank 2 adds — travel through the below — beneath sight, beneath light, along the layer others don't know how to reach; it goes DOWN.",
      "functions": [
-      "reveal",
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "open"
+     ]
     },
     {
      "rank": 2,
@@ -971,12 +1042,16 @@
      "grants": "Travel through the below — beneath sight, beneath light, along the layer others don't know how to reach.",
      "cannot": "Anything rank 3 adds — take others down the descent path and bring them back up; it goes DOWN.",
      "functions": [
-      "reveal",
       "open",
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "open",
+      "travel"
+     ]
     },
     {
      "rank": 3,
@@ -984,12 +1059,16 @@
      "grants": "Take others down the descent path and bring them back up. The route is yours to walk now and to share.",
      "cannot": "Nothing further; this is the craft's ceiling; it goes DOWN; and it still costs what it costs: the below is A PLACE, and places have inhabitants.",
      "functions": [
-      "reveal",
       "open",
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "open",
+      "travel"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1035,7 +1114,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A exploration/stealth/navigation action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 10. Ranks: rank 2 deepens access; rank 3 extends targets. Limit: it goes Down — there is no version of this that goes up."
+   "plainly": "A exploration/stealth/navigation action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 10. Ranks: rank 2 deepens access; rank 3 extends targets. Limit: it goes Down — there is no version of this that goes up.",
+   "_functionsWas": [
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_choir_sustains",
@@ -1168,8 +1253,8 @@
    "notFor": [],
    "tradition": "seraphic",
    "functions": [
-    "strike",
-    "reveal"
+    "reveal",
+    "strike"
    ],
    "challengeTypes": [
     "combat",
@@ -1207,10 +1292,13 @@
      "cannot": "Nothing further; this is the craft's ceiling; THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED; and it still costs what it costs: a blow that is also a pronouncement is one YOU CANNOT TAKE BACK.",
      "harmRung": "lethal",
      "functions": [
+      "strike"
+     ],
+     "gains": "deepen",
+     "_functionsWas": [
       "strike",
       "reveal"
-     ],
-     "gains": "deepen"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1259,7 +1347,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A combat/social/tactical action that deals damage. It rolls 2d6 judgement damage Ranks: rank 2 adds to revelation; rank 3 adds to special. Limit: the Blow Lands Harder Because IT IS Warranted — an unwarranted strike is just a strike."
+   "plainly": "A combat/social/tactical action that deals damage. It rolls 2d6 judgement damage Ranks: rank 2 adds to revelation; rank 3 adds to special. Limit: the Blow Lands Harder Because IT IS Warranted — an unwarranted strike is just a strike.",
+   "_functionsWas": [
+    "strike",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_raised_form",
@@ -1703,8 +1796,7 @@
     "demonic_angelic": -0.9
    },
    "functions": [
-    "hinder",
-    "reveal"
+    "hinder"
    ],
    "narrationHints": "The floor of the world opens under one person's certainty and they feel, for one endless moment, exactly how far down it goes — and how alone they are at the top of that fall.",
    "description": "The deepest Abyssal working — you show someone the full depth beneath their footing, the vertigo of a self with no floor. Most who receive it never stand quite the same way again. The Abyssals do it anyway.",
@@ -1716,11 +1808,14 @@
      "grants": "Show one person the full depth beneath their footing. What they were most certain of stops bearing weight — they hesitate where they never hesitated, and the vertigo weakens every act that rested on that certainty until they either rebuild it or find another floor to stand on.",
      "cannot": "It costs nearly all you have. It fails entirely against someone at genuine peace with their own depths — they look down and are simply not afraid. And it CANNOT BE TAKEN BACK: you have shown them the deep and they have seen it, and the Abyssals are honest that this is the cruelest thing they do.",
      "functions": [
-      "reveal",
       "hinder"
      ],
      "harmRung": "incapacitating",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "reveal",
+      "hinder"
+     ]
     }
    ],
    "gated": "learned",
@@ -1764,7 +1859,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social action that weakens or restricts a target. Its strength is rated 9 out of 10 It affects 1 target, and lasts for about 4 hours Limit: iT Costs Nearly All You Have."
+   "plainly": "A social action that weakens or restricts a target. Its strength is rated 9 out of 10 It affects 1 target, and lasts for about 4 hours Limit: iT Costs Nearly All You Have.",
+   "_functionsWas": [
+    "hinder",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -2135,7 +2235,6 @@
    },
    "functions": [
     "transform",
-    "reveal",
     "travel"
    ],
    "narrationHints": "They do not flap. They are simply higher than they were, and everyone below has stopped talking.",
@@ -2148,11 +2247,14 @@
      "grants": "Rise and hold above a place, under control, for as long as you can pay. Everyone present sees.",
      "cannot": "Doing it unseen. Travelling far — this is presence, not distance.",
      "functions": [
-      "transform",
-      "reveal"
+      "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "transform",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -2203,7 +2305,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A travel and social action, and it cannot be hidden. You rise and hold above a place under control for as long as you can pay the energy, and everyone in sight sees exactly what you are. At rank 2 you can cross country by it, which is fast but arrives pre-announced — every settlement on the route watches you pass, so whatever waits at the end has had the entire approach to prepare. Rank 1 is presence over one place rather than distance."
+   "plainly": "A travel and social action, and it cannot be hidden. You rise and hold above a place under control for as long as you can pay the energy, and everyone in sight sees exactly what you are. At rank 2 you can cross country by it, which is fast but arrives pre-announced — every settlement on the route watches you pass, so whatever waits at the end has had the entire approach to prepare. Rank 1 is presence over one place rather than distance.",
+   "_functionsWas": [
+    "transform",
+    "reveal",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -2613,9 +2721,10 @@
     "falsehood_truth": 0.3
    },
    "functions": [
-    "strike",
+    "break",
+    "hinder",
     "reveal",
-    "hinder"
+    "strike"
    ],
    "narrationHints": "The light weighs first and burns second. It is not wrath — the Orders are quite clear that it is not wrath — it is a measure taken and a sentence carried out in the same motion, from above, and the measure is accurate.",
    "description": "The Seraphic Orders' first offense: judgment as a physical event. What is found wanting is burned in proportion to the finding.",
@@ -2640,11 +2749,15 @@
      "cannot": "⚠ IT MEASURES EVERYONE ELSE IN THE AREA TOO, at their own honest weight, one rung lower. There is no exempting anyone from a judgment.",
      "functions": [
       "strike",
-      "reveal",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "reveal",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -2653,12 +2766,17 @@
      "cannot": "THE MEASURE IS STILL HONEST — you may exempt someone from being weighed, but you cannot make a heavy man light. Exempting the guilty is itself a judgment, and the Orders keep a record of who was spared and by whom.",
      "functions": [
       "strike",
-      "reveal",
       "hinder",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "reveal",
+      "hinder",
+      "break"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2700,7 +2818,13 @@
    "backlash": "The judgment was false and the light knows. The sentence falls on the one who passed it, at their own honest weight.",
    "conserveSuppresses": "weigh lightly — a false light mark costs standing, not skin",
    "backlashRung": "damaging",
-   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
+   "_functionsWas": [
+    "strike",
+    "reveal",
+    "hinder"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_sheltering_name",
@@ -3000,6 +3124,8 @@
     "falsehood_truth": 0.4
    },
    "functions": [
+    "bind",
+    "command",
     "reveal"
    ],
    "narrationHints": "You ask, and the light answers for them. Not mind-reading — WEIGHING. A person under it can refuse to speak, and their silence is itself weighed, and everyone sees the scale move.",
@@ -3015,7 +3141,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -3027,7 +3156,11 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -3035,12 +3168,16 @@
      "grants": "A whole matter weighed — a killing, a fraud, a betrayal — with every party answering under the light and the community watching the scale.",
      "cannot": "⚠ IT WILL FIND SOMETHING NOBODY WAS LOOKING FOR. An assize that begins as a theft ends as a marriage undone, and the Orders hold you responsible for having opened it.",
      "functions": [
-      "reveal",
       "bind",
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "command"
+     ]
     }
    ],
    "challengeTypes": [
@@ -3078,7 +3215,11 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/puzzle action that shows publicly whether an answer was honest. Rated 6 of 10 across a scope of 2 for about three hours."
+   "plainly": "A social/puzzle action that shows publicly whether an answer was honest. Rated 6 of 10 across a scope of 2 for about three hours.",
+   "_functionsWas": [
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_shielding_light",

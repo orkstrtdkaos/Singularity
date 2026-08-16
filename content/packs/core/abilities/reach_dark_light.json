@@ -211,13 +211,11 @@
      "cannot": "The wielder drifts light-hot — and total revelation burns its own land to glass; the one who reveals everything leaves nothing sheltered enough to live; light absolute is foreclosure by exposure, a world with no shadow left to grow in.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
      "harmRung": "lethal",
      "_functionsWas": [
-      "reveal",
       "strike",
       "break",
       "hinder"
@@ -226,7 +224,6 @@
    ],
    "functions": [
     "break",
-    "hinder",
     "reveal",
     "strike"
    ],
@@ -296,7 +293,8 @@
     "reveal",
     "strike"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "darksight",
@@ -423,8 +421,7 @@
    },
    "functions": [
     "break",
-    "conceal",
-    "hinder"
+    "conceal"
    ],
    "narrationHints": "The light gutters where you wish it, and you're gone into the gap.",
    "description": "Pull shadow around yourself or a space — dim a lamp, deepen a shadow, slip from sight.",
@@ -448,11 +445,15 @@
      "cannot": "You cannot douse the sun, and you cannot douse the Blaze. Dousing is always noticed.",
      "functions": [
       "conceal",
-      "hinder",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "conceal",
+      "hinder",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -461,11 +462,15 @@
      "cannot": "Holding costs continuously; a determined light-worker can push back against you, and will.",
      "functions": [
       "conceal",
-      "hinder",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "conceal",
+      "hinder",
+      "break"
+     ]
     }
    ],
    "powerSystem": "reach_dark_light",
@@ -523,7 +528,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A stealth/chase action that weakens or restricts a target. Its strength is rated 3 out of 10, and lasts for about 2 hours Ranks: rank 2 adds to special; rank 3 extends area+duration. Limit: you Cannot Douse The Sun, And You Cannot Douse The Blaze."
+   "plainly": "A stealth/chase action that weakens or restricts a target. Its strength is rated 3 out of 10, and lasts for about 2 hours Ranks: rank 2 adds to special; rank 3 extends area+duration. Limit: you Cannot Douse The Sun, And You Cannot Douse The Blaze.",
+   "_functionsWas": [
+    "break",
+    "conceal",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "kindle",
@@ -535,7 +546,6 @@
     "dark_light": 0.3
    },
    "functions": [
-    "hinder",
     "make",
     "strike"
    ],
@@ -567,14 +577,12 @@
      "cannot": "Blunt. It announces you; nothing about a flare is subtle, and the dark remembers who lit it.",
      "functions": [
       "make",
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
      "_functionsWas": [
       "make",
-      "reveal",
       "strike",
       "hinder"
      ]
@@ -586,14 +594,12 @@
      "cannot": "What you light you may not be able to put out. Ask the Blazeborn how that ends.",
      "functions": [
       "make",
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "deepen",
      "harmRung": "damaging",
      "_functionsWas": [
       "make",
-      "reveal",
       "strike",
       "hinder"
      ]
@@ -662,10 +668,10 @@
    "_functionsWas": [
     "hinder",
     "make",
-    "reveal",
     "strike"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_harbor",
@@ -795,7 +801,6 @@
    },
    "functions": [
     "break",
-    "hinder",
     "reveal"
    ],
    "narrationHints": "Every concealment in the place falls away at once.",
@@ -832,13 +837,11 @@
      "grants": "Nothing within your reach can stay concealed — shroud, harbor, and false trail all fail at once in your presence. Those who were relying on cover are badly weakened by its loss: an infiltrator stripped mid-work is exposed, off-plan, and acts worse for the rest of it.",
      "cannot": "The Umbrals consider this an atrocity, and they are not entirely wrong. Some things were harbored for a reason.",
      "functions": [
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_functionsWas": [
-      "reveal",
       "break",
       "hinder"
      ]
@@ -907,7 +910,8 @@
     "hinder",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "harbored_flame",

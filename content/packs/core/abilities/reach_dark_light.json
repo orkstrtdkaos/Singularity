@@ -376,111 +376,6 @@
    "plainly": "A explore/stealth/fight action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 extends range; rank 3 adds to special. Limit: total Light Defeats IT — sees dark, not hidden intent."
   },
   {
-   "id": "lightsense",
-   "name": "Lightsense",
-   "levelReq": 1,
-   "energyCost": 3,
-   "attribute": "mental",
-   "axes": {
-    "dark_light": 0.3
-   },
-   "functions": [
-    "reveal",
-    "track"
-   ],
-   "narrationHints": "Every source and shadow of light in a place, mapped at a glance.",
-   "description": "Read light and shadow — where it falls, what it hides, how to use it.",
-   "notFor": "Making light; deep concealment.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Lightsense",
-     "grants": "Read a place's light and shadow; know where you're seen and where you're not.",
-     "cannot": "Reads, doesn't make; the deep-hidden stay hidden.",
-     "functions": [
-      "reveal"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "Spectrum-Read",
-     "grants": "Read light's whole spectrum — residual heat, the age of a scorch, the flush of a lie rising in a face.",
-     "cannot": "It reports what the light says, not what is true; a good liar with cold blood defeats it.",
-     "functions": [
-      "reveal"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "The Unbroken Beam",
-     "grants": "Follow any beam back to its source across a valley, and know every surface it touched on the way.",
-     "cannot": "Darkness stays genuinely opaque — the gap the Umbrals built an entire art inside.",
-     "functions": [
-      "reveal",
-      "track"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    }
-   ],
-   "powerSystem": "reach_dark_light",
-   "gated": "learned",
-   "challengeTypes": [
-    "STEALTH",
-    "INVESTIGATE"
-   ],
-   "tradition": "blazeborn",
-   "nativeOrCombination": "native",
-   "harmRung": "none",
-   "shape": "setup",
-   "operativeAxis": [
-    "perceptionDepth",
-    "range"
-   ],
-   "mechanic": {
-    "magnitude": 3,
-    "duration": 1,
-    "range": 30
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "axis": "perceptionDepth",
-     "delta": "+spectrum: residual heat, age of a scorch, the flush of a lie rising in a face",
-     "from": "r2 grants names KINDS of reading, not distance"
-    },
-    {
-     "rank": 3,
-     "axis": "range",
-     "delta": "×valley-scale — follow any beam to its source and know every surface it touched",
-     "from": "r3 grants names DISTANCE and a trace-history; the increment goes to RANGE, not depth"
-    }
-   ],
-   "intensity": {
-    "conserve": "a glance — the room's lit and unlit, no detail beyond where you'd be seen",
-    "surge": "double the read: the whole spectrum at once, and the trace held long enough to follow"
-   },
-   "bounds": [
-    {
-     "text": "reads, does not make; the deep-hidden stay hidden",
-     "class": "hard"
-    },
-    {
-     "text": "reports what the LIGHT says, not what is true — a good liar with cold blood defeats it",
-     "class": "hard"
-    },
-    {
-     "text": "darkness stays genuinely opaque (the gap the Umbrals built an art inside)",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A stealth/investigate action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 30. Ranks: rank 2 adds to perceptionDepth; rank 3 adds to range. Limit: reads, does not make; the deep-hidden stay hidden."
-  },
-  {
    "id": "dim",
    "name": "Dim",
    "levelReq": 1,
@@ -3152,5 +3047,6 @@
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
- "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
 }

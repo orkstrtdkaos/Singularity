@@ -31,11 +31,14 @@
      "grants": "See truly in lightlessness; wrap yourself and a small space in concealment; find and use the shadows any place holds.",
      "cannot": "Total light defeats it; concealment hides, it does not defend.",
      "functions": [
-      "reveal",
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "conceal"
+     ]
     },
     {
      "rank": 2,
@@ -43,13 +46,18 @@
      "grants": "Hide a person, a truth, or a thing so well even a searcher who knows it's there can't find it; move unseen through watched places; shelter what the light hunts.",
      "cannot": "Harboring something makes you responsible for it; some things should not be harbored, and the Harbor doesn't judge — you must.",
      "functions": [
-      "reveal",
       "conceal",
       "move",
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "conceal",
+      "move",
+      "ward"
+     ]
     },
     {
      "rank": 3,
@@ -57,21 +65,26 @@
      "grants": "Command shadow at scale — hide a caravan, a rite, a rebellion; see into the hidden hearts of things and places; give sanctuary the Blaze cannot breach. The Underlight's power in miniature.",
      "cannot": "The wielder drifts dark-hot — and the one who harbors everything eventually harbors the things that should have faced the light; darkness total is its own foreclosure, a world that never has to be seen.",
      "functions": [
-      "reveal",
       "conceal",
       "move",
       "ward",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "conceal",
+      "move",
+      "ward",
+      "command"
+     ]
     }
    ],
    "functions": [
     "command",
     "conceal",
     "move",
-    "reveal",
     "ward"
    ],
    "challengeTypes": [
@@ -131,7 +144,15 @@
     }
    ],
    "plainly": "A stealth/explore/fight action that makes or animates something. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens concealment; rank 3 extends scope. Limit: total Light Defeats IT.",
-   "_descriptionWas": "The dark-pole mastery: concealment, sight-without-light, and the harboring of what should not be exposed. Not evil — the necessary shadow."
+   "_descriptionWas": "The dark-pole mastery: concealment, sight-without-light, and the harboring of what should not be exposed. Not evil — the necessary shadow.",
+   "_functionsWas": [
+    "command",
+    "conceal",
+    "move",
+    "reveal",
+    "ward"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "radiance",
@@ -172,12 +193,16 @@
      "grants": "Strip a place or person of every concealment at once; make a lie visibly a lie (unless it's built of true pieces — the Cathedral defeats this); a beam that ends a threat cleanly.",
      "cannot": "The convincing-lie-of-true-pieces survives it; some truths, revealed, do more harm than the hiding did — and Radiance can't tell which.",
      "functions": [
-      "reveal",
       "strike",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "reveal",
+      "strike",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -185,13 +210,18 @@
      "grants": "Revelation at scale — a whole deception undone, a hidden thing dragged into the light before a people, a beam that ends the unendurable. And the light at full flood weakens everything that must look into it: eyes fail, aim goes, and a company caught in it is slowed to a stumble for as long as it burns.",
      "cannot": "The wielder drifts light-hot — and total revelation burns its own land to glass; the one who reveals everything leaves nothing sheltered enough to live; light absolute is foreclosure by exposure, a world with no shadow left to grow in.",
      "functions": [
-      "reveal",
       "strike",
       "break",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "reveal",
+      "strike",
+      "break",
+      "hinder"
+     ]
     }
    ],
    "functions": [
@@ -259,7 +289,14 @@
     }
    ],
    "plainly": "A fight/investigate action that deals damage. It rolls 2d6 Ranks: rank 2 adds to area; rank 3 adds to area+scale. Limit: reveals surfaces and shapes, Not hearts.",
-   "_descriptionWas": "The light-pole mastery: revelation, exposure, and the burning beam. The full craft the Valley's Prism Sight only foreshadows."
+   "_descriptionWas": "The light-pole mastery: revelation, exposure, and the burning beam. The full craft the Valley's Prism Sight only foreshadows.",
+   "_functionsWas": [
+    "break",
+    "hinder",
+    "reveal",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "darksight",
@@ -500,7 +537,6 @@
    "functions": [
     "hinder",
     "make",
-    "reveal",
     "strike"
    ],
    "narrationHints": "A word and light springs up — to see by, or to sear.",
@@ -514,11 +550,15 @@
      "cannot": "Ordinary light; spent, it blinds you too.",
      "functions": [
       "make",
-      "reveal",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "make",
+      "reveal",
+      "strike"
+     ]
     },
     {
      "rank": 2,
@@ -527,12 +567,17 @@
      "cannot": "Blunt. It announces you; nothing about a flare is subtle, and the dark remembers who lit it.",
      "functions": [
       "make",
-      "reveal",
       "strike",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "make",
+      "reveal",
+      "strike",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -541,12 +586,17 @@
      "cannot": "What you light you may not be able to put out. Ask the Blazeborn how that ends.",
      "functions": [
       "make",
-      "reveal",
       "strike",
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "make",
+      "reveal",
+      "strike",
+      "hinder"
+     ]
     }
    ],
    "powerSystem": "reach_dark_light",
@@ -608,7 +658,14 @@
      "class": "soft"
     }
    ],
-   "plainly": "A fight/explore/survive action that deals damage. It rolls 1d6, and lasts for about an hour. Range is 15. Ranks: rank 2 adds to damage; rank 3 adds to range+duration."
+   "plainly": "A fight/explore/survive action that deals damage. It rolls 1d6, and lasts for about an hour. Range is 15. Ranks: rank 2 adds to damage; rank 3 adds to range+duration.",
+   "_functionsWas": [
+    "hinder",
+    "make",
+    "reveal",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_harbor",
@@ -775,12 +832,16 @@
      "grants": "Nothing within your reach can stay concealed — shroud, harbor, and false trail all fail at once in your presence. Those who were relying on cover are badly weakened by its loss: an infiltrator stripped mid-work is exposed, off-plan, and acts worse for the rest of it.",
      "cannot": "The Umbrals consider this an atrocity, and they are not entirely wrong. Some things were harbored for a reason.",
      "functions": [
-      "reveal",
       "break",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "reveal",
+      "break",
+      "hinder"
+     ]
     }
    ],
    "powerSystem": "reach_dark_light",
@@ -840,7 +901,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/investigate/social action that weakens or restricts a target. It rolls 3d6+3 Ranks: rank 2 adds to area; rank 3 adds to debuff. Limit: the Cathedral's true-piece lie survives."
+   "plainly": "A fight/investigate/social action that weakens or restricts a target. It rolls 3d6+3 Ranks: rank 2 adds to area; rank 3 adds to debuff. Limit: the Cathedral's true-piece lie survives.",
+   "_functionsWas": [
+    "break",
+    "hinder",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "harbored_flame",
@@ -2774,8 +2841,9 @@
     "dark_light": -0.5
    },
    "functions": [
-    "reveal",
-    "foresee"
+    "foresee",
+    "move",
+    "reveal"
    ],
    "narrationHints": "In the lightless deeps you learn a place by everything except seeing — air movement, the way sound returns, the temperature of stone, the tiny wrongness of a room that has someone standing in it.",
    "description": "Know a lightless space entire — its shape, its exits, its drop-offs, and whether something living is in it and roughly where. The Umbrals' seeing-craft, which is not seeing, and which works best where every other perception craft fails.",
@@ -2787,11 +2855,14 @@
      "grants": "Know a lightless space entire — its shape, its exits, its drop-offs, and whether something living is in it and roughly where. Better in the dark than most people manage lit.",
      "cannot": "⚠ IT IS WORSE IN LIGHT, not better — a lit room is full of noise for this craft. It cannot read colour, writing, or a face. Loud places flood it.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -2804,7 +2875,12 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "move"
+     ]
     },
     {
      "rank": 3,
@@ -2817,7 +2893,12 @@
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "move"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2855,7 +2936,12 @@
     }
    ],
    "plainly": "A puzzle action that reads a lightless place by everything except sight. Rated 5 of 10 across a scope of 3 for about three hours.",
-   "_descriptionWas": "The Umbrals' seeing-craft, which is not seeing. It works best exactly where every other perception craft fails."
+   "_descriptionWas": "The Umbrals' seeing-craft, which is not seeing. It works best exactly where every other perception craft fails.",
+   "_functionsWas": [
+    "reveal",
+    "foresee"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_kept_fire",
@@ -2963,8 +3049,9 @@
     "concrete_abstract": 0.2
    },
    "functions": [
-    "reveal",
-    "foresee"
+    "empower",
+    "foresee",
+    "reveal"
    ],
    "narrationHints": "You look at heat and it tells you. What burned here, how hot, how long ago, and — looking forward — where this fire goes next and how fast.",
    "description": "The Blazeborn's seeing-craft. Half of fire-work is knowing what a fire is about to do.",
@@ -2976,11 +3063,14 @@
      "grants": "Read a burned place or a live fire and the craft NAMES it: what it started in, roughly how hot, how long ago it began — or, on a live one, where it goes next, how fast, and which way is survivable.",
      "cannot": "HEAT ONLY, and recent — a season-old burn is cold and silent. It says nothing about who or why. On a live fire it reads the NEXT few minutes, not the hour.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -2988,11 +3078,14 @@
      "grants": "A fire's entire behaviour across a site, or a burned building read room by room — origin, path, and the spots that were fed on purpose.",
      "cannot": "Reading a live fire at this depth means being close to it for longer than is sensible.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 3,
@@ -3005,7 +3098,12 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
     }
    ],
    "challengeTypes": [
@@ -3043,7 +3141,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/fight action that reads what burned here and where a live fire goes next. Rated 5 of 10 across a scope of 3 for about two hours."
+   "plainly": "A puzzle/fight action that reads what burned here and where a live fire goes next. Rated 5 of 10 across a scope of 3 for about two hours.",
+   "_functionsWas": [
+    "reveal",
+    "foresee"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

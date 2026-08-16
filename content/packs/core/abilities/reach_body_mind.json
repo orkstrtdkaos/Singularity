@@ -154,11 +154,14 @@
      "grants": "Perfect recall of what you attend to; focus that ignores pain, fear, and distraction; reason a problem faster and further than the unpracticed.",
      "cannot": "Recall is not understanding; focus this tight can miss the body's warnings.",
      "functions": [
-      "reveal",
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "resist"
+     ]
     },
     {
      "rank": 2,
@@ -166,12 +169,15 @@
      "grants": "Hold vast structured knowledge and retrieve it instantly; model a system or a person in your head and predict them; think through a crisis in the space others panic in.",
      "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room.",
      "functions": [
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_functionsWas": [
       "reveal",
       "resist",
       "foresee"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
+     ]
     },
     {
      "rank": 3,
@@ -179,19 +185,21 @@
      "grants": "Thought as force — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. And turned on a person: a conclusion assembled and delivered exactly where their reasoning rests, which staggers a mind the way a blow staggers a body, and leaves the same kind of mark.",
      "cannot": "It is sharp, not wise, and this use of it least of all. It needs a mind that reasons — the disciplined, the genuinely mad, and the simply uninterested all shrug it off. And the Cogitarium teaches that what you take apart in someone this way, you are responsible for putting back.",
      "functions": [
+      "resist",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "_functionsWas": [
       "reveal",
       "resist",
       "foresee",
       "strike"
-     ],
-     "gains": "broaden",
-     "harmRung": "damaging"
+     ]
     }
    ],
    "functions": [
-    "foresee",
     "resist",
-    "reveal",
     "strike"
    ],
    "challengeTypes": [
@@ -250,7 +258,14 @@
    "plainly": "A fight/investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reasoning; rank 3 adds to special. Limit: recall IS Not Understanding.",
    "_descriptionWas": "The mind-pole mastery: memory, focus, reason, thought as an instrument sharp enough to act on the world. The Cogitarium's art.",
    "_markedForRemoval": "⛔ SNG-453, ERIK'S RULING: 'Those MYSTERIES WERE NON-EXISTENT — leave a reminder to fill in if we get so inspired, but MARK THEM FOR REMOVAL in the meantime.'\n⚠️ Noesis is the sect's namesake 'pole mastery' and its ranks summarise the whole sect rather than doing anything — r1 duplicates two or three other abilities in its own sect. ⛔ IF THE MYSTERY IS EVER AUTHORED, THIS IS WHERE IT ATTACHES: a mystery should be the thing the tradition knows that nobody else does, not a digest of its skill list.",
-   "status": "marked-for-removal"
+   "status": "marked-for-removal",
+   "_functionsWas": [
+    "foresee",
+    "resist",
+    "reveal",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "second_wind",
@@ -767,8 +782,7 @@
     "body_mind": 0
    },
    "functions": [
-    "move",
-    "reveal"
+    "move"
    ],
    "narrationHints": "Thought and motion stop being two things.",
    "description": "Act with body and mind fused, so perception, decision and motion arrive as one instant. Thought and motion stop being two things — the Middle Way's ideal.",
@@ -780,11 +794,14 @@
      "grants": "Act with body and mind fused — perception, decision, and motion as a single instant.",
      "cannot": "Needs both trained near-equal; the pure poles cannot do it.",
      "functions": [
-      "move",
-      "reveal"
+      "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -792,11 +809,14 @@
      "grants": "Hold the fusion across a whole engagement rather than a single instant. Every movement in the exchange is one continuous act — you are already correct before you have consciously read why, and you stay correct as the situation changes under you.",
      "cannot": "It still needs both trained near-equal and the pure poles still cannot do it; holding it leaves you unable to afterward explain what you did or why, which matters when someone asks; and a whole act cannot be interrupted and resumed — broken, it must be re-entered from stillness.",
      "functions": [
-      "move",
-      "reveal"
+      "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal"
+     ]
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -838,7 +858,12 @@
     }
    ],
    "plainly": "A fight or duel action, and the catalog's only dual-pole craft — it requires somatic and cogitant training at near-equal depth, which means a pure practitioner of either pole cannot do it at all, ever. You act with perception, decision and motion as one instant, taking your action before the round resolves rather than in it. It sets up rather than strikes: what it buys is going first with full information, which is usually worth more than the blow you would have thrown.",
-   "_descriptionWas": "The braid-craft: body and mind as one instrument, acting faster than either could decide — the Middle Way's ideal."
+   "_descriptionWas": "The braid-craft: body and mind as one instrument, acting faster than either could decide — the Middle Way's ideal.",
+   "_functionsWas": [
+    "move",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "pathless_way",

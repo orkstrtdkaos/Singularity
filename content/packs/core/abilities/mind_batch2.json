@@ -253,7 +253,8 @@
    "functions": [
     "ward",
     "bind",
-    "make"
+    "make",
+    "command"
    ],
    "tree": [
     {
@@ -284,7 +285,7 @@
     {
      "rank": 3,
      "name": "The Governed Ground",
-     "grants": "⛔ ADDS RULE. A figure a whole site obeys — water runs where it says, sound carries where it says, a named thing does not cross anywhere within it.",
+     "grants": "⛔ ADDS RULE AND COMPULSION. A figure a whole site obeys — water runs where it says, sound carries where it says, a named thing does not cross anywhere within it — AND a concrete thing within it is bound to match the pattern you set for as long as the figure holds.",
      "cannot": "One site, and setting it takes a day. A figure this large is visible to anyone who reads figures.",
      "functions": [
       "ward",
@@ -296,7 +297,8 @@
      "harmRung": "none"
     }
    ],
-   "_merged": "⛔ SNG-453: MERGES The Standing Figure (L1, mag6, e5) and The Warding Mark (L2, mag4, e2) — both 'set a persistent figure that excludes a named category', with the later one strictly cheaper. ⚠️ The Standing Figure's r3 site-rule survives as the new r3."
+   "_merged": "⛔ SNG-453: MERGES The Standing Figure (L1, mag6, e5) and The Warding Mark (L2, mag4, e2) — both 'set a persistent figure that excludes a named category', with the later one strictly cheaper. ⚠️ The Standing Figure's r3 site-rule survives as the new r3.",
+   "_absorbed": "⛔ SNG-457: absorbed The Binding Figure — r3 now binds a concrete thing to a set pattern as well as governing the site."
   },
   {
    "id": "the_unbroken_thread",

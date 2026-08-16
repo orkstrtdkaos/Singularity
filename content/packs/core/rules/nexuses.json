@@ -1,0 +1,64 @@
+{
+ "_note": "⛔ SNG-439. THE NEXUS MAP AND THE MOON. Erik, 2026-08-15: 'The cogitants should have skills that use PSYCHIC energy, which they unlock through the powers of the mind. The meaning people, numinous, will use something similar — the metaphysical powers. We'll need a map of NEXUSES that will be a variable power source for them all — perhaps also the MOON CYCLE could give a bonus (light and dark) depending on the phase.'\n⚠️ HALF OF THIS ALREADY EXISTS AND NOTHING READS IT. `power_sources.json` says `metaphysical` 'WANTS THIN GROUND: a dense lattice is apparatus standing between the practitioner and the thing itself', with a density band {0.15, 0.22}. And `substrateDensity` varies 0.12–0.98 across 39 regions. ⛔ THE VARIABLE POWER SOURCE IS ALREADY ON THE MAP. A nexus is where it PEAKS.",
+ "_theModel": "⛔ A NEXUS IS NOT A NEW FIELD — IT IS AN EXTREMUM OF ONE THAT EXISTS. Two kinds, because the sources want opposite ground:\n   THIN NEXUS — substrate density at a local minimum. Metaphysical and psychic draw here. The lattice is not in the way.\n   DEEP NEXUS — density at a local maximum. Precursor and lattice crafts draw here.\n⚠️ THAT MEANS THE SAME MAP POWERS BOTH, IN OPPOSITE DIRECTIONS, and a party of mixed traditions is always somewhere that suits someone. ⛔ THAT IS THE INTERESTING VERSION — a Cogitant and a Figurist want different ground, and the route becomes an argument.",
+ "thinNexuses": [
+  {
+   "region": "the_quickwood",
+   "density": 0.12,
+   "name": "The Heartroot Hollow",
+   "why": "⛔ THE THINNEST GROUND IN THE WORLD. Grown, not built — nothing was ever laid here. The Rootkin do not use it and the Numinous walk three months to sit in it."
+  },
+  {
+   "region": "riven_marches",
+   "density": 0.2,
+   "name": "The Unwalled Quiet",
+   "why": "⚠️ Between two poles that refuse each other. Thin because neither side ever built."
+  },
+  {
+   "region": "somatic_reaches",
+   "density": 0.22,
+   "name": "The Breath Ground",
+   "why": "The Somatics tuned AWAY from the lattice deliberately; the ground followed."
+  },
+  {
+   "region": "the_palelands",
+   "density": 0.32,
+   "name": "The Last Cairn",
+   "why": "⛔ Already authored as the edge of tending (SNG-414). Where the keeping stops, the lattice stopped first."
+  }
+ ],
+ "deepNexuses": [
+  {
+   "region": "the_gearlands",
+   "density": 0.98,
+   "name": "The Great Engine",
+   "why": "⛔ THE DENSEST GROUND IN THE WORLD. An Enginewright standing here is standing inside their own power source."
+  },
+  {
+   "region": "the_lattice_cities",
+   "density": 0.94,
+   "name": "The Bound Arcology",
+   "why": "Order made structural, and the structure is the substrate."
+  },
+  {
+   "region": "manifest_domain",
+   "density": 0.9,
+   "name": "The Made Ground"
+  },
+  {
+   "region": "the_ascent",
+   "density": 0.88,
+   "name": "The Rising Lattice"
+  }
+ ],
+ "_mechanic": "⚠️ PROPOSED, ERIK RULES THE NUMBERS. A craft's effective magnitude shifts by how well the local density matches its source's band: ON-BAND +2, one step off +0, two steps off −2, and at a NEXUS of the matching kind +4. ⛔ THE POINT IS THAT WHERE YOU STAND MATTERS, which is the thing a map is for and the thing this game's map has not yet done.",
+ "moon": {
+  "_note": "⛔ NEW — no moon exists in canon. Search returned zero for moon, lunar and phase. ⚠️ SO THE MOON ITSELF NEEDS ERIK'S RULING BEFORE THE MECHANIC: how many moons, and does this world's sky work like ours? The Crossing is the south pole and the world is 0.38× Earth.",
+  "_proposal": "A single moon, 28-day cycle, tracked against `worldDay` which already exists. It modulates the DARK_LIGHT axis only — not everything, or it becomes a global weather system nobody can plan around.\n   FULL — Blazeborn and Radiant crafts +2; Umbral −2\n   NEW  — Umbral and Veilwright +2; Blazeborn −2\n   QUARTERS — no modifier, and that is most of the month\n⚠️ THE ASYMMETRY IS THE FICTION: an Umbral plans raids by the calendar and a Blazeborn does not have to, which tells you something true about both.",
+  "_erikRules": "whether there is a moon at all, how many, and whether it touches more than dark_light"
+ },
+ "psychic": {
+  "_finding": "⛔ COGITANT IS CURRENTLY `combination` — precursor 0.5 / body 0.5, from Erik's own worked example: 'nanite to move matter with a mind'. ⚠️ ERIK NOW WANTS PSYCHIC, UNLOCKED THROUGH THE POWERS OF THE MIND, which is a DIFFERENT CLAIM: not nanite-mediated thought, but thought itself as a source.\n⛔ THAT IS A CANON AMENDMENT AND IT IS HIS TO MAKE. `metaphysical` already exists and already wants thin ground — the question is whether PSYCHIC is a second name for it, a sibling source, or a cogitant-flavoured band within it.",
+  "_erikRules": "psychic = metaphysical, or a new source beside it"
+ }
+}

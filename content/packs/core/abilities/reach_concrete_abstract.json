@@ -35,7 +35,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -43,12 +46,16 @@
      "grants": "Set a thing so it STAYS — a wall, a joint, a boundary, a claim. What you set does not shift, sag, or come apart.",
      "cannot": "What is set is hard to un-set, including by you, including when you were wrong to set it.",
      "functions": [
-      "reveal",
       "make",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "make",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -56,13 +63,18 @@
      "grants": "Deny an abstraction purchase on the real: illusion, glamour, symbol-working and figure all simply fail in your presence. The thing is what it is.",
      "cannot": "It denies the abstract INDISCRIMINATELY — including meanings you needed, including a Figurist ally's working, including hope.",
      "functions": [
-      "reveal",
       "make",
       "bind",
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "make",
+      "bind",
+      "shield"
+     ]
     }
    ],
    "gated": "learned",
@@ -123,7 +135,14 @@
    ],
    "plainly": "A explore/fight/investigate action that makes or animates something. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 deepens materialTruth; rank 3 adds to denial. Limit: it tells you what a thing IS, Never what it means or what it is For.",
    "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
-   "_descriptionWas": "The concrete-pole mastery: the real is what you can touch, weigh, and set. The world's finest building and its most stubborn skepticism, in one craft."
+   "_descriptionWas": "The concrete-pole mastery: the real is what you can touch, weigh, and set. The world's finest building and its most stubborn skepticism, in one craft.",
+   "_functionsWas": [
+    "bind",
+    "make",
+    "reveal",
+    "shield"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_plain_fact",
@@ -153,7 +172,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -164,7 +186,10 @@
       "reveal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -172,11 +197,14 @@
      "grants": "In your presence the touchable simply IS the real, and abstraction cannot get purchase — no symbol acts, no figure walks.",
      "cannot": "You have made a world where nothing means anything. Some people find that a relief, and the ones who do worry the Masons most.",
      "functions": [
-      "reveal",
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "ward"
+     ]
     }
    ],
    "gated": "learned",
@@ -236,7 +264,12 @@
     }
    ],
    "plainly": "A social/investigate/fight action that reduces incoming harm. Its strength is rated 6 out of 10 and absorbs 5 harm per hit (rank 3 armour), and lasts for about 4 hours Ranks: rank 2 deepens denial; rank 3 adds to special. Limit: some Abstractions Are True — reducing them does not unmake them.",
-   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'."
+   "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
+   "_functionsWas": [
+    "reveal",
+    "ward"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "formcraft",
@@ -268,7 +301,10 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -276,12 +312,16 @@
      "grants": "Make a symbol that ACTS — a mark, a shape, a figure that does in the world what it means.",
      "cannot": "A figure does what it MEANS, not what you wanted it to mean. Be precise, or be surprised.",
      "functions": [
-      "reveal",
       "make",
       "deceive"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "make",
+      "deceive"
+     ]
     },
     {
      "rank": 3,
@@ -289,13 +329,18 @@
      "grants": "Build an idea into the world so completely that it becomes a fact others must move around — a rule, a boundary, a truth-in-effect.",
      "cannot": "The Masons can deny it. Reality can, eventually, decline. And a made truth that was never true rots from the inside.",
      "functions": [
-      "reveal",
       "make",
       "deceive",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "make",
+      "deceive",
+      "bind"
+     ]
     }
    ],
    "gated": "learned",
@@ -355,7 +400,14 @@
    "plainly": "A investigate/social/explore action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 adds to special; rank 3 extends scope. Limit: seeing a form Does Not Give You Power Over Its Instance.",
    "_descriptionWas": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
    "_markedForRemoval": "⛔ SNG-453, ERIK'S RULING: 'Those MYSTERIES WERE NON-EXISTENT — leave a reminder to fill in if we get so inspired, but MARK THEM FOR REMOVAL in the meantime.'\n⚠️ Formcraft is the sect's namesake 'pole mastery' and its ranks summarise the whole sect rather than doing anything — r1 duplicates two or three other abilities in its own sect. ⛔ IF THE MYSTERY IS EVER AUTHORED, THIS IS WHERE IT ATTACHES: a mystery should be the thing the tradition knows that nobody else does, not a digest of its skill list.",
-   "status": "marked-for-removal"
+   "status": "marked-for-removal",
+   "_functionsWas": [
+    "bind",
+    "deceive",
+    "make",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_walking_figure",
@@ -496,8 +548,7 @@
    "harmRung": "none",
    "functions": [
     "mend",
-    "restore",
-    "reveal"
+    "restore"
    ],
    "challengeTypes": [
     "repair",
@@ -511,11 +562,14 @@
      "grants": "Repair what is broken by understanding what it truly is — the right material intervention, no more and no less, that makes the thing sound again.",
      "cannot": "Anything rank 2 adds — restore not just function but structural integrity — the wall that will not sag, the wound that will not fester, the joint that will hold under load; it repairs the MATERIAL.",
      "functions": [
-      "reveal",
       "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "mend"
+     ]
     },
     {
      "rank": 2,
@@ -523,12 +577,16 @@
      "grants": "Restore not just function but structural integrity — the wall that will not sag, the wound that will not fester, the joint that will hold under load.",
      "cannot": "Anything rank 3 adds — return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken; it repairs the MATERIAL.",
      "functions": [
-      "reveal",
       "mend",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "mend",
+      "restore"
+     ]
     },
     {
      "rank": 3,
@@ -536,12 +594,16 @@
      "grants": "Return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken.",
      "cannot": "Nothing further; this is the craft's ceiling; it repairs the MATERIAL.",
      "functions": [
-      "reveal",
       "mend",
       "restore"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "mend",
+      "restore"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -588,7 +650,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A repair/medical/craft action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens repair; rank 3 adds to special. Limit: it repairs the Material — a sound body is not a well person."
+   "plainly": "A repair/medical/craft action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens repair; rank 3 adds to special. Limit: it repairs the Material — a sound body is not a well person.",
+   "_functionsWas": [
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_set_word",
@@ -723,8 +791,7 @@
    "functions": [
     "make",
     "move",
-    "open",
-    "reveal"
+    "open"
    ],
    "challengeTypes": [
     "navigation",
@@ -738,11 +805,14 @@
      "grants": "Find the gap, the loose stone, the door that's always in the structure — the mason knows how things are built and knows where they open.",
      "cannot": "Anything rank 2 adds — move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material; BUILT structures only.",
      "functions": [
-      "reveal",
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "open"
+     ]
     },
     {
      "rank": 2,
@@ -750,12 +820,16 @@
      "grants": "Move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material.",
      "cannot": "Anything rank 3 adds — in any built structure, find or make the passage; BUILT structures only.",
      "functions": [
-      "reveal",
       "open",
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "open",
+      "move"
+     ]
     },
     {
      "rank": 3,
@@ -763,13 +837,18 @@
      "grants": "In any built structure, find or make the passage. Not by brute force — by knowing exactly where the material wants to open.",
      "cannot": "Nothing further; this is the craft's ceiling; BUILT structures only; and it still costs what it costs: what you open, you have OPENED.",
      "functions": [
-      "reveal",
       "open",
       "move",
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "open",
+      "move",
+      "make"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -814,7 +893,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A navigation/infiltration/craft action that moves you or someone else. Its strength is rated 3 out of 10, and lasts for about 2 hours. Range is 8. Ranks: rank 2 deepens access; rank 3 adds to special. Limit: built structures only — open ground offers a mason nothing."
+   "plainly": "A navigation/infiltration/craft action that moves you or someone else. Its strength is rated 3 out of 10, and lasts for about 2 hours. Range is 8. Ranks: rank 2 deepens access; rank 3 adds to special. Limit: built structures only — open ground offers a mason nothing.",
+   "_functionsWas": [
+    "make",
+    "move",
+    "open",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_long_haul",
@@ -1304,8 +1390,8 @@
     "concrete_abstract": 0.8
    },
    "functions": [
-    "reveal",
-    "break"
+    "break",
+    "reveal"
    ],
    "narrationHints": "They take it apart in front of them, honestly, piece by piece, until nothing is left that was worth standing up for.",
    "description": "⚠️ THE LEVELLERS' CRAFT. A Mason reduces the abstract to what can be touched. Turned on a person it takes their faith, their vow, their grief, their reason for the last twenty years, and shows them the physical basis of each — accurately. What is left is a person in a world where nothing means anything, and some do not go on in it.",
@@ -1329,11 +1415,14 @@
      "grants": "BREAK all of it. They are intact, correct about everything, and have nothing left worth standing up for.",
      "cannot": "Restoring it. Nobody has ever restored it.",
      "functions": [
-      "reveal",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "reveal",
+      "break"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1380,7 +1469,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social or puzzle contest against the target's conviction. Every reduction you make must be factually true; the GM will reject a false one and the craft fails. On a win, one belief they act from stops giving them any bonus, permanently. At rank 2 you do this to all of them at once and they lose every conviction-based bonus they had. Some targets do not continue afterward; that is the GM's call and it is slow. A target whose motivations are already purely physical is immune."
+   "plainly": "A social or puzzle contest against the target's conviction. Every reduction you make must be factually true; the GM will reject a false one and the craft fails. On a win, one belief they act from stops giving them any bonus, permanently. At rank 2 you do this to all of them at once and they lose every conviction-based bonus they had. Some targets do not continue afterward; that is the GM's call and it is slow. A target whose motivations are already purely physical is immune.",
+   "_functionsWas": [
+    "reveal",
+    "break"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -1803,8 +1897,9 @@
     "concrete_abstract": 0.6
    },
    "functions": [
-    "reveal",
-    "foresee"
+    "empower",
+    "foresee",
+    "reveal"
    ],
    "narrationHints": "You put a hand on a made thing and it tells you the truth about itself. Not a feeling about the stone — an answer: this member is bearing, that one is decorative, and the whole thing comes down from HERE.",
    "description": "Touch a structure, vehicle, raft or scaffold and the craft names its load path and its first failure: which member carries, which is ornament, what gives way and roughly when. The Masons' first craft, and the one they are actually hired for.",
@@ -1816,11 +1911,14 @@
      "grants": "Touch a structure, a vehicle, a raft, a scaffold, and the craft NAMES the load path and the first failure: which member carries, which is ornament, what gives way first and roughly under what. A specific piece, pointed at.",
      "cannot": "TOUCH, and made things only. It tells you what fails FIRST, not when — a bridge can be told it is doomed and still stand a decade. It says nothing about who built it or why.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -1828,11 +1926,14 @@
      "grants": "Read a building or a span entire — every load path, every member carrying more than it was cut for, the order the failures come in.",
      "cannot": "It takes real time and you must reach every part you read. And a full reading of a place people live in is frequently unwelcome news you are now obliged to deliver.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 3,
@@ -1845,7 +1946,12 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1884,7 +1990,12 @@
     }
    ],
    "plainly": "A puzzle/social action that names a structure's load path and first failure. Rated 5 of 10 across a scope of 2 for about four hours.",
-   "_descriptionWas": "The Masons' first craft, and the one they are actually hired for. Everything else they do rests on being right about this."
+   "_descriptionWas": "The Masons' first craft, and the one they are actually hired for. Everything else they do rests on being right about this.",
+   "_functionsWas": [
+    "reveal",
+    "foresee"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_set_stone",

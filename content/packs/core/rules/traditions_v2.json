@@ -1,0 +1,298 @@
+{
+ "schemaVersion": 1,
+ "id": "traditions_v2",
+ "kind": "content",
+ "note": "⛔ SNG-447. THE PROPOSED RESTRUCTURE — 14 primary traditions on 7 axes, absorbing all 24 wheel poles as sects. Erik's demotions and absorptions, plus his rulings: Abstract joins Mind with Logic as 'different approaches or schools'; Violence pairs with Destruction and Creation with Peace; the pole name inverts to ORDER so Chaos keeps its antipode.\n⚠️ COVERAGE VERIFIED: 24 of 24 poles, no duplicates, no orphans. The wheel survives at 14 poles, p ↔ p+7.",
+ "traditions": {
+  "Mind": {
+   "pos": 0,
+   "anti": "Body",
+   "sects": [
+    [
+     "Noesis",
+     "cogitant",
+     "metaphysical"
+    ],
+    [
+     "Logos",
+     "syllogist",
+     "ordered"
+    ],
+    [
+     "Formcraft",
+     "figurist",
+     "wild"
+    ]
+   ],
+   "primary": "metaphysical",
+   "secondary": [
+    "ordered",
+    "wild"
+   ],
+   "why": "⛔ THE ONLY THREE-SECT TRADITION AND THE ONLY ONE HOLDING THREE SOURCES. Thought reached directly (psychic), thought as ordered process (proof), thought as the wild leap (abstraction). ⚠️ Its secondaries ARE its other sects — nothing borrowed from outside."
+  },
+  "Body": {
+   "pos": 7,
+   "anti": "Mind",
+   "sects": [
+    [
+     "Soma",
+     "somatic",
+     "metaphysical"
+    ],
+    [
+     "Thingcraft",
+     "mason",
+     "ordered"
+    ]
+   ],
+   "primary": "metaphysical",
+   "secondary": [
+    "ordered"
+   ],
+   "why": "Ki as the primary, worked matter as the second. ⚠️ A Mason reading a load path and a Somatic reading a body are the same act on different material."
+  },
+  "Light": {
+   "pos": 1,
+   "anti": "Dark",
+   "sects": [
+    [
+     "Radiance",
+     "blazeborn",
+     "precursor"
+    ],
+    [
+     "Verity",
+     "verist",
+     "metaphysical"
+    ]
+   ],
+   "primary": "precursor",
+   "secondary": [
+    "metaphysical"
+   ],
+   "why": "⛔ Light shaped through crystal, and truth seen without an instrument. Both are REVELATION — one burns it out of a place, one says it."
+  },
+  "Dark": {
+   "pos": 8,
+   "anti": "Light",
+   "sects": [
+    [
+     "Umbracraft",
+     "umbral",
+     "precursor"
+    ],
+    [
+     "Falsecraft",
+     "veilwright",
+     "metaphysical"
+    ]
+   ],
+   "primary": "precursor",
+   "secondary": [
+    "metaphysical"
+   ],
+   "why": "⛔ EXACT MIRROR OF LIGHT, and deliberately. The Umbrals work the buried lattice in the deeps; the Veilwrights work the pure metaphysical form. ⚠️ Both are NOT BEING SEEN."
+  },
+  "Life": {
+   "pos": 2,
+   "anti": "Death",
+   "sects": [
+    [
+     "Vivimancy",
+     "rootkin",
+     "wild"
+    ]
+   ],
+   "primary": "wild",
+   "secondary": [
+    "metaphysical"
+   ],
+   "why": "⚠️ Wild nanite as growth. Metaphysical second because green-heart work reaches something that is not in the soil — and because the Rootkin BREAK ORDERED DOWN as they go."
+  },
+  "Death": {
+   "pos": 9,
+   "anti": "Life",
+   "sects": [
+    [
+     "Palework",
+     "ashwarden",
+     "metaphysical"
+    ],
+    [
+     "Pathos",
+     "threnodist",
+     "wild"
+    ]
+   ],
+   "primary": "metaphysical",
+   "secondary": [
+    "wild"
+   ],
+   "why": "⛔ The mercy of stopping needs no apparatus; grief is tidal and ungoverned. ⚠️ Both handle the ending — one tends it, one mourns it."
+  },
+  "Angelic": {
+   "pos": 3,
+   "anti": "Demonic",
+   "sects": [
+    [
+     "Ascent",
+     "seraphic",
+     "ordered"
+    ]
+   ],
+   "primary": "ordered",
+   "secondary": [
+    "precursor"
+   ],
+   "why": "⛔ ORDERED NANITE PRIMARY — mercy administered is machinery. PRECURSOR SECOND because the Seraphim are the human end of an argument the Precursors started, and the apparatus is an imitation of something older."
+  },
+  "Demonic": {
+   "pos": 10,
+   "anti": "Angelic",
+   "sects": [
+    [
+     "Descent",
+     "abyssal",
+     "precursor"
+    ]
+   ],
+   "primary": "precursor",
+   "secondary": [
+    "metaphysical"
+   ],
+   "why": "⛔ PRECURSOR PRIMARY — they draw on the alien source directly, being the other half of that disagreement. ⚠️ METAPHYSICAL SECOND IS THE LOAD-BEARING ONE: what Lucifer fell to wanting was the Veil thinned, and the Thinnings are the apparatus. THE DEMONIC INTEREST IN METAPHYSICS IS NOT SCHOLARLY."
+  },
+  "Breaking": {
+   "pos": 4,
+   "anti": "Building",
+   "sects": [
+    [
+     "The Edge",
+     "marcher",
+     "metaphysical"
+    ],
+    [
+     "Ruinwork",
+     "unmaker",
+     "precursor"
+    ]
+   ],
+   "primary": "metaphysical",
+   "secondary": [
+    "precursor"
+   ],
+   "why": "⛔ Ki for the blow, crystal for the demolition. ⚠️ Violence and destruction are one impulse at two scales — people and things — and the old violence↔peace / destruction↔creation were the same argument drawn twice."
+  },
+  "Building": {
+   "pos": 11,
+   "anti": "Breaking",
+   "sects": [
+    [
+     "Makecraft",
+     "wright",
+     "precursor"
+    ],
+    [
+     "Stillcraft",
+     "stillhold",
+     "metaphysical"
+    ]
+   ],
+   "primary": "precursor",
+   "secondary": [
+    "metaphysical"
+   ],
+   "why": "⛔ Crystal-assisted making, and held stillness. ⚠️ Both are about WHAT ENDURES — one raises it, one keeps it from being knocked down."
+  },
+  "Chaos": {
+   "pos": 5,
+   "anti": "Order",
+   "sects": [
+    [
+     "Wildcraft",
+     "churnfolk",
+     "wild"
+    ]
+   ],
+   "primary": "wild",
+   "secondary": [
+    "metaphysical"
+   ],
+   "why": "⚠️ Wild nanite, definitionally. Metaphysical second for the luck-riding — ⛔ and because the Churnfolk BREAK ORDERED DOWN, which makes them Order's actual enemy rather than its opposite number."
+  },
+  "Order": {
+   "pos": 12,
+   "anti": "Chaos",
+   "sects": [
+    [
+     "Enginecraft",
+     "enginewright",
+     "ordered"
+    ],
+    [
+     "Latticework",
+     "lattice",
+     "ordered"
+    ]
+   ],
+   "primary": "ordered",
+   "secondary": [
+    "precursor"
+   ],
+   "why": "⛔ THE ONLY TRADITION WHOSE SECTS SHARE A SOURCE. Precursor second is precise, not decorative: LATTICEWORK IS HUMANS USING ORDERED NANITES TO REPRODUCE WHAT THE PRECURSOR SUBSTRATE IS AND DOES. The Lattice-Cities are an act of homage to something that has never answered them."
+  },
+  "Span": {
+   "pos": 6,
+   "anti": "Spirit",
+   "sects": [
+    [
+     "Spanwork",
+     "horizon",
+     "precursor"
+    ],
+    [
+     "Hourcraft",
+     "hourkeeper",
+     "precursor"
+    ]
+   ],
+   "primary": "precursor",
+   "secondary": [
+    "ordered"
+   ],
+   "why": "⛔ THE WAYGATES AND THE ARCHIVES THAT RUN FORWARD are both Precursor works. ⚠️ Ordered nanite second for the clock-towers — an hourkeeper's instruments are made, and a horizon-walker's roads are maintained."
+  },
+  "Spirit": {
+   "pos": 13,
+   "anti": "Span",
+   "sects": [
+    [
+     "Numenwork",
+     "numinous",
+     "metaphysical"
+    ]
+   ],
+   "primary": "metaphysical",
+   "secondary": [
+    "precursor"
+   ],
+   "why": "⛔ Meaning without matter. PRECURSOR SECOND AND IT IS THE TRADITION'S WHOLE PROBLEM: they need MEANING-dense ground to work on, and the meaning-densest places in the world are Precursor sites — so they live at substrate 0.82, permanently obstructed by the ground they must stand on to find anything."
+  }
+ },
+ "_balance": {
+  "primary": {
+   "metaphysical": 5,
+   "precursor": 5,
+   "wild": 2,
+   "ordered": 2
+  },
+  "secondary": {
+   "ordered": 3,
+   "wild": 2,
+   "metaphysical": 6,
+   "precursor": 4
+  },
+  "_note": "⛔ PRIMARY: metaphysical 5 · precursor 5 · wild 2 · ordered 2. ⚠️ SECONDARY: metaphysical 6 · precursor 5 · ordered 3 · wild 2.\n⛔ METAPHYSICAL IS THE MOST COMMON SECONDARY AND THE JOINT-MOST COMMON PRIMARY, WHICH IS A DESIGN DECISION AND SHOULD BE DELIBERATE. It reads correct to me: metaphysics is INNATE, so it is the source anyone can fall back on when the ground is wrong. ⚠️ It is also what makes the two-thirds substrate-dependent majority survivable — a precursor-primary tradition with a metaphysical secondary is weakened off-lattice, not helpless.\n⚠️ ORDERED IS THE THINNEST at 2 primary. That may be right — ordered nanite is the newest and most human of the four — but Erik should see it stated."
+ }
+}

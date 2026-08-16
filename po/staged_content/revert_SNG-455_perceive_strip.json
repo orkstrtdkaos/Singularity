@@ -1,0 +1,3538 @@
+{
+ "_note": "⛔ SNG-455 REVERT LOG — the perceive-tag review. Erik: 'I don't want a MECHANICAL strip. I want to be able to keep it on the skills and ranks it REALLY BELONGS ON.'\n⚠️ RULE AGREED: KEEP the tag when the player RECEIVES INFORMATION THEY THEN ACT ON. STRIP it when the perceiving is how the ability works INTERNALLY. ⛔ The Kept Count tells you a number — keep. The Land Knowledge makes people obey you because you know things — nobody learns anything, so strip. The Wasted Moment is the middle case: the foreseeing is not the output, but remove it and the shield has no mechanism — keep.",
+ "abilities": {
+  "attunement": {
+   "name": "Attunement",
+   "functions": [
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "shatterpoint": {
+   "name": "Shatterpoint",
+   "functions": [
+    "break",
+    "foresee",
+    "reveal",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "foresee",
+      "break",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "the_worldsong": {
+   "name": "The Worldsong",
+   "functions": [
+    "empower",
+    "foresee",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "quicken_the_ground": {
+   "name": "Quicken the Ground",
+   "functions": [
+    "open",
+    "reveal",
+    "sustain"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "open"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "open",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "open",
+      "reveal",
+      "sustain"
+     ]
+    }
+   ]
+  },
+  "the_shared_room": {
+   "name": "The Shared Room",
+   "functions": [
+    "reveal",
+    "empower",
+    "sustain"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "empower"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "empower",
+      "sustain"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "empower",
+      "sustain"
+     ]
+    }
+   ]
+  },
+  "the_correct_restoration": {
+   "name": "The Correct Restoration",
+   "functions": [
+    "heal",
+    "restore",
+    "mend"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "heal",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "heal",
+      "restore",
+      "mend"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "heal",
+      "restore",
+      "mend"
+     ]
+    }
+   ]
+  },
+  "the_quick_hands": {
+   "name": "The Quick Hands",
+   "functions": [
+    "reveal",
+    "move"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "hinder"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "hinder",
+      "strike"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "hinder",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "latticespeak": {
+   "name": "Latticespeak",
+   "functions": [
+    "bind",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    }
+   ]
+  },
+  "unmake_seal": {
+   "name": "Unmake Seal",
+   "functions": [
+    "break",
+    "open",
+    "reveal",
+    "strike",
+    "summon"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "open",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "open",
+      "break"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "open",
+      "break",
+      "summon",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "light_well": {
+   "name": "Light Well",
+   "functions": [
+    "bind",
+    "heal",
+    "hinder",
+    "reveal",
+    "ward"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "bind",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "bind",
+      "reveal",
+      "hinder"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "bind",
+      "reveal",
+      "hinder",
+      "ward",
+      "heal"
+     ]
+    }
+   ]
+  },
+  "clarity_lens": {
+   "name": "Clarity Lens",
+   "functions": [
+    "empower",
+    "reveal",
+    "track"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "empower"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "empower"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "empower",
+      "track"
+     ]
+    }
+   ]
+  },
+  "beacon_thread": {
+   "name": "Beacon Thread",
+   "functions": [
+    "bind",
+    "reveal",
+    "track"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "bind",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "bind",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "bind",
+      "reveal",
+      "track"
+     ]
+    }
+   ]
+  },
+  "dawn_surgery": {
+   "name": "Dawn Surgery",
+   "functions": [
+    "heal",
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "heal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "heal",
+      "mend"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "heal",
+      "mend",
+      "reveal",
+      "restore"
+     ]
+    }
+   ]
+  },
+  "prism_ward": {
+   "name": "Prism Ward",
+   "functions": [
+    "resist",
+    "reveal",
+    "shield",
+    "ward"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "ward",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "ward",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "ward",
+      "reveal",
+      "resist",
+      "shield"
+     ]
+    }
+   ]
+  },
+  "sun_seal": {
+   "name": "Sun-Seal",
+   "functions": [
+    "bind",
+    "reveal",
+    "shield",
+    "ward"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "ward",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "ward",
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "ward",
+      "reveal",
+      "bind",
+      "shield"
+     ]
+    }
+   ]
+  },
+  "light_borne": {
+   "name": "Light-Borne",
+   "functions": [
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "move",
+      "travel",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "noesis": {
+   "name": "Noesis",
+   "functions": [
+    "foresee",
+    "resist",
+    "reveal",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "resist"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "resist",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "resist",
+      "foresee",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "memory_palace": {
+   "name": "Memory-Palace",
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "track"
+     ]
+    }
+   ]
+  },
+  "the_whole_act": {
+   "name": "The Whole Act",
+   "functions": [
+    "move",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "move",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "move",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_single_stroke": {
+   "name": "The Single Stroke",
+   "functions": [
+    "strike",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "strike",
+      "foresee"
+     ]
+    }
+   ]
+  },
+  "latticework": {
+   "name": "Latticework",
+   "functions": [
+    "bind",
+    "break",
+    "command",
+    "foresee",
+    "make"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "make",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "make",
+      "foresee",
+      "bind",
+      "break"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "make",
+      "foresee",
+      "bind",
+      "break",
+      "command"
+     ]
+    }
+   ]
+  },
+  "probability_tilt": {
+   "name": "Tilt",
+   "functions": [
+    "empower",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "foresee",
+      "empower"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "foresee",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "the_long_odds": {
+   "name": "The Long Odds",
+   "functions": [
+    "empower",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "foresee",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "set_to_rights": {
+   "name": "Set to Rights",
+   "functions": [
+    "heal",
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "mend"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "mend",
+      "heal",
+      "restore"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "mend",
+      "heal",
+      "restore"
+     ]
+    }
+   ]
+  },
+  "the_established_route": {
+   "name": "The Established Route",
+   "functions": [
+    "move",
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "open"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "open",
+      "travel",
+      "move"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "open",
+      "travel",
+      "move"
+     ]
+    }
+   ]
+  },
+  "the_loose_thread": {
+   "name": "The Loose Thread",
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "the_way_out": {
+   "name": "The Way Out",
+   "functions": [
+    "move",
+    "reveal",
+    "conceal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "move",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "move",
+      "reveal",
+      "conceal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "move",
+      "reveal",
+      "conceal"
+     ]
+    }
+   ]
+  },
+  "the_ordered_record": {
+   "name": "The Ordered Record",
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "foresee",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "foresee",
+      "bind"
+     ]
+    }
+   ]
+  },
+  "thingcraft": {
+   "name": "Thingcraft",
+   "functions": [
+    "bind",
+    "make",
+    "reveal",
+    "shield"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "make",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "make",
+      "bind",
+      "shield"
+     ]
+    }
+   ]
+  },
+  "the_plain_fact": {
+   "name": "The Plain Fact",
+   "functions": [
+    "reveal",
+    "ward"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "ward"
+     ]
+    }
+   ]
+  },
+  "formcraft": {
+   "name": "Formcraft",
+   "functions": [
+    "bind",
+    "deceive",
+    "make",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "make",
+      "deceive"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "make",
+      "deceive",
+      "bind"
+     ]
+    }
+   ]
+  },
+  "sound_repair": {
+   "name": "Sound Repair",
+   "functions": [
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "mend"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "mend",
+      "restore"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "mend",
+      "restore"
+     ]
+    }
+   ]
+  },
+  "the_near_way": {
+   "name": "The Near Way",
+   "functions": [
+    "make",
+    "move",
+    "open",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "open"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "open",
+      "move"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "open",
+      "move",
+      "make"
+     ]
+    }
+   ]
+  },
+  "the_keystone_blow": {
+   "name": "The Keystone Blow",
+   "functions": [
+    "break",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "break",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "break",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_reduction": {
+   "name": "The Reduction",
+   "functions": [
+    "reveal",
+    "break"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "break"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "break"
+     ]
+    }
+   ]
+  },
+  "the_sound_read": {
+   "name": "The Sound Read",
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "umbracraft": {
+   "name": "Umbracraft",
+   "functions": [
+    "command",
+    "conceal",
+    "move",
+    "reveal",
+    "ward"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "conceal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "conceal",
+      "move",
+      "ward"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "conceal",
+      "move",
+      "ward",
+      "command"
+     ]
+    }
+   ]
+  },
+  "radiance": {
+   "name": "Radiance",
+   "functions": [
+    "break",
+    "hinder",
+    "reveal",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "strike"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "strike",
+      "break"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "strike",
+      "break",
+      "hinder"
+     ]
+    }
+   ]
+  },
+  "darksight": {
+   "name": "Darksight",
+   "functions": [
+    "move",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "move"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "move"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "move"
+     ]
+    }
+   ]
+  },
+  "kindle": {
+   "name": "Kindle",
+   "functions": [
+    "hinder",
+    "make",
+    "reveal",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "make",
+      "reveal",
+      "strike"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "make",
+      "reveal",
+      "strike",
+      "hinder"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "make",
+      "reveal",
+      "strike",
+      "hinder"
+     ]
+    }
+   ]
+  },
+  "unshadow": {
+   "name": "Unshadow",
+   "functions": [
+    "break",
+    "hinder",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "break"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "break"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "break",
+      "hinder"
+     ]
+    }
+   ]
+  },
+  "the_revealing_burn": {
+   "name": "The Revealing Burn",
+   "functions": [
+    "reveal",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "strike"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "the_felt_room": {
+   "name": "The Felt Room",
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "foresee",
+      "move"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "foresee",
+      "move"
+     ]
+    }
+   ]
+  },
+  "the_read_burn": {
+   "name": "The Read Burn",
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "palework": {
+   "name": "Palework",
+   "functions": [
+    "foresee",
+    "hinder",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "foresee",
+      "hinder"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "foresee",
+      "hinder",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "the_last_gift": {
+   "name": "The Last Gift",
+   "functions": [
+    "heal",
+    "restore",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "heal",
+      "restore"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "heal",
+      "restore",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "ask_the_dead": {
+   "name": "Ask the Dead",
+   "functions": [
+    "reveal",
+    "summon"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "summon"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "summon"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "summon"
+     ]
+    }
+   ]
+  },
+  "the_speaking_grove": {
+   "name": "The Speaking Grove",
+   "functions": [
+    "command",
+    "reveal",
+    "track"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "command",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "command",
+      "reveal",
+      "track"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "command",
+      "reveal",
+      "track"
+     ]
+    }
+   ]
+  },
+  "the_root_road": {
+   "name": "The Root Road",
+   "functions": [
+    "move",
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "move",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "move",
+      "reveal",
+      "open"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "move",
+      "reveal",
+      "open",
+      "travel"
+     ]
+    }
+   ]
+  },
+  "the_calling_back": {
+   "name": "The Calling Back",
+   "functions": [
+    "heal",
+    "summon",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "heal",
+      "summon"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "heal",
+      "summon",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "heal",
+      "summon",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_true_account": {
+   "name": "The True Account",
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "descent": {
+   "name": "Descent",
+   "functions": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "bind",
+      "command"
+     ]
+    }
+   ]
+  },
+  "the_offered_price": {
+   "name": "The Offered Price",
+   "functions": [
+    "bind",
+    "foresee",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "bind",
+      "foresee"
+     ]
+    }
+   ]
+  },
+  "ascent": {
+   "name": "Ascent",
+   "functions": [
+    "bind",
+    "command",
+    "restore",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "restore"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "restore",
+      "bind",
+      "command"
+     ]
+    }
+   ]
+  },
+  "the_called_form": {
+   "name": "The Called Form",
+   "functions": [
+    "command",
+    "reveal",
+    "summon",
+    "transform"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "summon",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "summon",
+      "reveal",
+      "transform"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "summon",
+      "reveal",
+      "transform",
+      "command"
+     ]
+    }
+   ]
+  },
+  "the_descent_path": {
+   "name": "The Descent Path",
+   "functions": [
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "open"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "open",
+      "travel"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "open",
+      "travel"
+     ]
+    }
+   ]
+  },
+  "the_judged_strike": {
+   "name": "The Judged Strike",
+   "functions": [
+    "strike",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "strike"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "strike",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "strike",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_drowning_deep": {
+   "name": "The Drowning Deep",
+   "functions": [
+    "hinder",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "hinder"
+     ]
+    }
+   ]
+  },
+  "the_lever": {
+   "name": "The Lever",
+   "functions": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "bind",
+      "command"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "bind",
+      "command"
+     ]
+    }
+   ]
+  },
+  "the_lifted_word": {
+   "name": "The Lifted Word",
+   "functions": [
+    "transform",
+    "reveal",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "transform",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "transform",
+      "travel"
+     ]
+    }
+   ]
+  },
+  "the_measured_sentence": {
+   "name": "The Measured Sentence",
+   "functions": [
+    "strike",
+    "reveal",
+    "hinder"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "strike",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "strike",
+      "reveal",
+      "hinder"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "strike",
+      "reveal",
+      "hinder",
+      "break"
+     ]
+    }
+   ]
+  },
+  "the_weighed_word": {
+   "name": "The Weighed Word",
+   "functions": [
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "bind",
+      "command"
+     ]
+    }
+   ]
+  },
+  "ruinwork": {
+   "name": "Ruinwork",
+   "functions": [
+    "break",
+    "open",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "break"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "break",
+      "open"
+     ]
+    }
+   ]
+  },
+  "makers_eye": {
+   "name": "Maker's-Eye",
+   "functions": [
+    "foresee",
+    "make",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "make"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "make",
+      "foresee"
+     ]
+    }
+   ]
+  },
+  "the_work_speaks": {
+   "name": "The Work Speaks",
+   "functions": [
+    "command",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "command"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "command"
+     ]
+    }
+   ]
+  },
+  "the_clean_removal": {
+   "name": "The Clean Removal",
+   "functions": [
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "restore"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "mend",
+      "restore"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "mend",
+      "restore"
+     ]
+    }
+   ]
+  },
+  "the_ended_threat": {
+   "name": "The Ended Threat",
+   "functions": [
+    "break",
+    "foresee",
+    "hinder",
+    "shield"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "foresee",
+      "break"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "foresee",
+      "break",
+      "shield",
+      "hinder"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "foresee",
+      "break",
+      "shield",
+      "hinder"
+     ]
+    }
+   ]
+  },
+  "the_ended_burden": {
+   "name": "The Ended Burden",
+   "functions": [
+    "reveal",
+    "sustain",
+    "restore"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "restore"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "sustain",
+      "restore"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "sustain",
+      "restore"
+     ]
+    }
+   ]
+  },
+  "the_clean_taking": {
+   "name": "The Clean Taking",
+   "functions": [
+    "make",
+    "open"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "make",
+      "open"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "make",
+      "open"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "make",
+      "open",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_given_way": {
+   "name": "The Given Way",
+   "functions": [
+    "open",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "open"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "open",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "open",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "pathos": {
+   "name": "Pathos",
+   "functions": [
+    "command",
+    "empower",
+    "heal",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "heal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "heal",
+      "empower",
+      "command"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "heal",
+      "empower",
+      "command"
+     ]
+    }
+   ]
+  },
+  "logos": {
+   "name": "Logos",
+   "functions": [
+    "bind",
+    "break",
+    "reveal",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "bind",
+      "break",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "the_turning_word": {
+   "name": "The Turning Word",
+   "functions": [
+    "bind",
+    "heal",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "bind",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "bind",
+      "heal",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_felt_wall": {
+   "name": "The Felt Wall",
+   "functions": [
+    "foresee",
+    "shield"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "foresee",
+      "shield"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "foresee",
+      "shield"
+     ]
+    }
+   ]
+  },
+  "the_feeling_road": {
+   "name": "The Feeling Road",
+   "functions": [
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "track"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ]
+    }
+   ]
+  },
+  "the_shared_grief": {
+   "name": "The Shared Grief",
+   "functions": [
+    "empower",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "empower"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "empower",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "empower",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_names_of_the_lost": {
+   "name": "The Names of the Lost",
+   "functions": [
+    "empower",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "empower",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "empower",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_contradiction": {
+   "name": "The Contradiction",
+   "functions": [
+    "hinder",
+    "break"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "hinder",
+      "break"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "hinder",
+      "break",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "hinder",
+      "break",
+      "bind",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_carried_name": {
+   "name": "The Carried Name",
+   "functions": [
+    "reveal",
+    "sustain"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "sustain"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "sustain",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "sustain",
+      "bind"
+     ]
+    }
+   ]
+  },
+  "falsecraft": {
+   "name": "Falsecraft",
+   "functions": [
+    "conceal",
+    "deceive",
+    "reveal",
+    "sustain"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "deceive",
+      "conceal",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "deceive",
+      "conceal",
+      "reveal",
+      "sustain"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "deceive",
+      "conceal",
+      "reveal",
+      "sustain"
+     ]
+    }
+   ]
+  },
+  "verity": {
+   "name": "Verity",
+   "functions": [
+    "bind",
+    "restore",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "bind",
+      "restore"
+     ]
+    }
+   ]
+  },
+  "the_whole_truth": {
+   "name": "The Whole Truth",
+   "functions": [
+    "restore",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "restore"
+     ]
+    }
+   ]
+  },
+  "the_direct_path": {
+   "name": "The Direct Path",
+   "functions": [
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "move"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "move"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "move",
+      "travel"
+     ]
+    }
+   ]
+  },
+  "the_unsurvivable_fact": {
+   "name": "The Unsurvivable Fact",
+   "functions": [
+    "reveal",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "strike"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "the_unbearable_word": {
+   "name": "The Unbearable Word",
+   "functions": [
+    "strike",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "strike",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "strike",
+      "reveal",
+      "hinder"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "strike",
+      "reveal",
+      "hinder",
+      "break"
+     ]
+    }
+   ]
+  },
+  "the_standing_word": {
+   "name": "The Standing Word",
+   "functions": [
+    "bind",
+    "sustain"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "bind",
+      "sustain"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "bind",
+      "sustain",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "bind",
+      "sustain",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "enginecraft": {
+   "name": "Enginecraft",
+   "functions": [
+    "command",
+    "make",
+    "mend",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "make"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "make",
+      "command",
+      "mend"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "make",
+      "command",
+      "mend"
+     ]
+    }
+   ]
+  },
+  "numenwork": {
+   "name": "Numenwork",
+   "functions": [
+    "heal",
+    "restore",
+    "reveal",
+    "summon",
+    "sustain"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "heal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "heal",
+      "summon",
+      "restore"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "heal",
+      "summon",
+      "restore",
+      "sustain"
+     ]
+    }
+   ]
+  },
+  "thin_place": {
+   "name": "Open the Thin Place",
+   "functions": [
+    "make",
+    "open",
+    "reveal",
+    "strike",
+    "summon",
+    "sustain"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "summon"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "summon",
+      "open",
+      "sustain"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "summon",
+      "open",
+      "sustain",
+      "make",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "meaning_engine": {
+   "name": "The Meaning-Engine",
+   "functions": [
+    "command",
+    "mend",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "command",
+      "mend",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "command",
+      "mend",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "the_fault_strike": {
+   "name": "The Fault Strike",
+   "functions": [
+    "break",
+    "hinder",
+    "reveal",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "strike",
+      "break"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "strike",
+      "break",
+      "hinder"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "strike",
+      "break",
+      "hinder"
+     ]
+    }
+   ]
+  },
+  "the_open_threshold": {
+   "name": "The Open Threshold",
+   "functions": [
+    "summon",
+    "reveal",
+    "bind"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "summon",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "summon",
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "summon",
+      "bind"
+     ]
+    }
+   ]
+  },
+  "hourcraft": {
+   "name": "Hourcraft",
+   "functions": [
+    "bind",
+    "foresee",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "bind",
+      "foresee"
+     ]
+    }
+   ]
+  },
+  "the_made_crossing": {
+   "name": "The Made Crossing",
+   "functions": [
+    "make",
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "make",
+      "open",
+      "travel"
+     ]
+    }
+   ]
+  },
+  "the_land_knowledge": {
+   "name": "The Land Knowledge",
+   "functions": [
+    "command",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "command"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "command"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "command"
+     ]
+    }
+   ]
+  },
+  "the_wasted_moment": {
+   "name": "The Wasted Moment",
+   "functions": [
+    "foresee",
+    "shield"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "foresee",
+      "shield"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "foresee",
+      "shield"
+     ]
+    }
+   ]
+  },
+  "the_kept_count": {
+   "name": "The Kept Count",
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "foresee"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "the_known_way": {
+   "name": "The Known Way",
+   "functions": [
+    "travel",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "travel",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "travel",
+      "reveal",
+      "move"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "travel",
+      "reveal",
+      "move"
+     ]
+    }
+   ]
+  },
+  "stillcraft": {
+   "name": "Stillcraft",
+   "functions": [
+    "bind",
+    "reveal",
+    "shield",
+    "sustain"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "bind",
+      "sustain",
+      "shield"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "bind",
+      "sustain",
+      "shield"
+     ]
+    }
+   ]
+  },
+  "last_form": {
+   "name": "The Last Form",
+   "functions": [
+    "reveal",
+    "strike"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "strike",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "soldiers_hand": {
+   "name": "Soldier's Hand",
+   "functions": [
+    "empower",
+    "heal",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "heal",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "heal",
+      "reveal",
+      "empower"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "heal",
+      "reveal",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "the_price_shown": {
+   "name": "The Price Shown",
+   "functions": [
+    "hinder",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "hinder"
+     ]
+    }
+   ]
+  },
+  "step_between": {
+   "name": "Step Between",
+   "functions": [
+    "foresee",
+    "move",
+    "shield"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "move",
+      "shield"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "move",
+      "shield"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "move",
+      "shield",
+      "foresee"
+     ]
+    }
+   ]
+  },
+  "the_read_field": {
+   "name": "The Read Field",
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "foresee",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "foresee",
+      "reveal",
+      "empower"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "foresee",
+      "reveal",
+      "empower"
+     ]
+    }
+   ]
+  },
+  "wayfinding": {
+   "name": "Wayfinding",
+   "functions": [
+    "foresee",
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "track"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "track",
+      "travel",
+      "foresee"
+     ]
+    }
+   ]
+  },
+  "greenlore": {
+   "name": "Greenlore",
+   "functions": [
+    "heal",
+    "hinder",
+    "reveal",
+    "sustain"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "heal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "heal",
+      "sustain"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "heal",
+      "sustain",
+      "hinder"
+     ]
+    }
+   ]
+  },
+  "mediators_tongue": {
+   "name": "Mediator's Tongue",
+   "functions": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "bind",
+      "command"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "bind",
+      "command"
+     ]
+    }
+   ]
+  },
+  "tinkers_hand": {
+   "name": "Tinker's Hand",
+   "functions": [
+    "make",
+    "mend",
+    "open",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "mend",
+      "make"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "mend",
+      "make",
+      "open"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "mend",
+      "make",
+      "open",
+      "reveal"
+     ]
+    }
+   ]
+  },
+  "beastfriend": {
+   "name": "Beastfriend",
+   "functions": [
+    "bind",
+    "command",
+    "reveal",
+    "strike",
+    "summon"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "command"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "command",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "command",
+      "bind",
+      "summon",
+      "strike"
+     ]
+    }
+   ]
+  },
+  "stonewise": {
+   "name": "Stonewise",
+   "functions": [
+    "break",
+    "foresee",
+    "mend",
+    "reveal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "mend",
+      "break"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "mend",
+      "break",
+      "foresee"
+     ]
+    }
+   ]
+  },
+  "rivercraft": {
+   "name": "Rivercraft",
+   "functions": [
+    "foresee",
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "move",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "move",
+      "reveal",
+      "travel"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "move",
+      "reveal",
+      "travel",
+      "foresee"
+     ]
+    }
+   ]
+  },
+  "old_roads": {
+   "name": "Old Roads",
+   "functions": [
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "track"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "track",
+      "travel"
+     ]
+    }
+   ]
+  },
+  "carrying_call": {
+   "name": "The Carrying Call",
+   "functions": [
+    "reveal",
+    "command",
+    "travel"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "reveal",
+      "travel"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "reveal",
+      "travel",
+      "command"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "reveal",
+      "travel",
+      "command"
+     ]
+    }
+   ]
+  },
+  "glasswork": {
+   "name": "Glasswork",
+   "functions": [
+    "make",
+    "reveal",
+    "conceal"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "functions": [
+      "make",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "functions": [
+      "make",
+      "reveal",
+      "conceal"
+     ]
+    },
+    {
+     "rank": 3,
+     "functions": [
+      "make",
+      "reveal",
+      "conceal"
+     ]
+    }
+   ]
+  }
+ }
+}

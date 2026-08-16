@@ -6,120 +6,6 @@
  "note": "NOT available at character creation. Precursor abilities are learned only through deep engagement — Old Roads mastery, quest unlocks, or discovery at a live remnant. Rarer, harder, costlier than any tradition. They touch the foreclosing layer: the lattice tends toward contraction, and every use tugs the wielder that way. Powerful and perilous by design. GM guards what the sealed things are.",
  "abilities": [
   {
-   "id": "address_sense",
-   "name": "Address-Sense",
-   "levelReq": 3,
-   "energyCost": 8,
-   "axes": {
-    "concrete_abstract": 0.5,
-    "space_time": 0.3
-   },
-   "attribute": "mental",
-   "powerSystem": "precursor",
-   "effectTags": [
-    "precursor",
-    "perceive",
-    "vector"
-   ],
-   "peril": "Reading the coordinate layer too long unmoors the reader — repeated use risks a drift toward abstract, away from the concrete present.",
-   "narrationHints": "The world briefly shows its addressing — every thing sitting at a coordinate it cannot not-occupy. Places and people as fixed points in a field that hums.",
-   "description": "Perceive the cosmic-address layer directly: read the deep spectrum-vector of a place, person, or object — where it sits, which axes it runs strong.",
-   "notFor": "Changing what you read (this is perception only); reading intent or future (only the standing vector); the gray water, which addresses to nowhere.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Standing Vector",
-     "grants": "Read a location's or object's strong spectrum axes on sight — which way it leans and how hard. Reveals location vectors fully without approximation.",
-     "cannot": "One target at a time; the read fades when you look away; people resist unless still and willing.",
-     "functions": [
-      "reveal"
-     ],
-     "harmRung": "none",
-     "gains": "broaden"
-    },
-    {
-     "rank": 2,
-     "name": "Coordinate Read",
-     "grants": "Read a person's deep vector — their standing alignment, not their mood; sense when a place's vector has recently SHIFTED and roughly toward what.",
-     "cannot": "Not mind-reading — vector is disposition, not thought; shift-sense gives direction, not cause.",
-     "functions": [
-      "reveal"
-     ],
-     "harmRung": "none",
-     "gains": "deepen"
-    },
-    {
-     "rank": 3,
-     "name": "The Address Itself",
-     "grants": "Perceive the unrepeatable coordinate of a thing — its cosmic address, the point it alone occupies; find your way to a place or person by their vector alone across any distance.",
-     "cannot": "The address is felt, not spoken — you can navigate to it but not name it; the drift-cost compounds; the Precursors' own addresses read as holes in the field.",
-     "functions": [
-      "reveal",
-      "track"
-     ],
-     "harmRung": "none",
-     "gains": "broaden"
-    }
-   ],
-   "functions": [
-    "reveal",
-    "track"
-   ],
-   "challengeTypes": [
-    "INVESTIGATE",
-    "EXPLORE"
-   ],
-   "tradition": "precursor",
-   "nativeOrCombination": "native",
-   "harmRung": "none",
-   "shape": "setup",
-   "operativeAxis": [
-    "perceptionDepth",
-    "targets"
-   ],
-   "mechanic": {
-    "magnitude": 6,
-    "duration": 2,
-    "targets": 1,
-    "damageType": "precursor"
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "perceptionDepth",
-     "delta": "read a PERSON'S deep vector — standing alignment, not mood; sense when a place's vector has recently MOVED",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: perceive THE UNREPEATABLE COORDINATE of a thing — the point it alone occupies",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "one quiet read — half the depth, and nothing notices being read",
-    "surge": "double it; THE ADDRESS IS FELT, NOT SPOKEN — you can navigate to it and never describe it"
-   },
-   "bounds": [
-    {
-     "text": "ONE TARGET AT A TIME; the read fades when you look away",
-     "class": "hard"
-    },
-    {
-     "text": "NOT MIND-READING — vector is disposition, not thought",
-     "class": "hard"
-    },
-    {
-     "text": "THE ADDRESS IS FELT, NOT SPOKEN",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 deepens perceptionDepth; rank 3 adds to special. Limit: one Target AT A Time; the read fades when you look away."
-  },
-  {
    "id": "latticespeak",
    "name": "Latticespeak",
    "levelReq": 3,
@@ -724,5 +610,6 @@
    "plainly": "A survive/puzzle/explore action that reduces incoming harm. Its strength is rated 9 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends anchorStrength; rank 3 adds to special. Limit: one Thing, One Scene; costs continuously; When You Let GO IT Closes."
   }
  ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
 }

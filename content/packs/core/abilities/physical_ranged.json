@@ -137,12 +137,15 @@
      "name": "The Aimed Stone",
      "grants": "Call the hit — a hand, a knee, the lamp, the horse. It goes where you called.",
      "functions": [
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "cannot": "Called shots at range still miss; loud in the way a bow is not."
+     "cannot": "Called shots at range still miss; loud in the way a bow is not.",
+     "_functionsWas": [
+      "strike",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -158,6 +161,7 @@
     }
    ],
    "functions": [
+    "break",
     "strike"
    ],
    "tradition": "valley_craft",
@@ -200,7 +204,11 @@
    "_authored": "SNG-440",
    "_traditionWas": "valley_craft",
    "learnedAt": "the wilds",
-   "_rootWhy": "⛔ GENUINELY FOLK, AND ROOTED THERE. A shepherd's weapon: free ammunition, learned young, carried without anyone calling it a weapon. ⚠️ No tradition taught this; the valley did."
+   "_rootWhy": "⛔ GENUINELY FOLK, AND ROOTED THERE. A shepherd's weapon: free ammunition, learned young, carried without anyone calling it a weapon. ⚠️ No tradition taught this; the valley did.",
+   "_functionsWas": [
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_drawn_bow",
@@ -446,17 +454,21 @@
      "grants": "Throw into a group: everyone in the path goes over, not just the first.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "cannot": "One throw, one line — and recovering costs you an action."
+     "cannot": "One throw, one line — and recovering costs you an action.",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     }
    ],
    "functions": [
-    "strike",
-    "break"
+    "break",
+    "strike"
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
@@ -497,7 +509,12 @@
    "_authored": "SNG-440",
    "_traditionWas": "valley_craft",
    "learnedAt": "hardline / the wilds",
-   "_rootWhy": "⛔ SOMA. 'Get under it, commit your whole body' is the perfected-body discipline applied to a bench. ⚠️ Not the Edge — there is no weapon in it, only a person and something heavy."
+   "_rootWhy": "⛔ SOMA. 'Get under it, commit your whole body' is the perfected-body discipline applied to a bench. ⚠️ Not the Edge — there is no weapon in it, only a person and something heavy.",
+   "_functionsWas": [
+    "strike",
+    "break"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_quick_hands",
@@ -537,14 +554,12 @@
      "name": "The Turned Catch",
      "grants": "Catch it and send it back in the same motion, at the thrower, at short range.",
      "functions": [
-      "hinder",
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
      "cannot": "Short range only on the return; still nothing from behind.",
      "_functionsWas": [
-      "reveal",
       "hinder",
       "strike"
      ]
@@ -554,14 +569,12 @@
      "name": "Both Hands",
      "grants": "Two objects, or one arrow from a bow you did not see drawn.",
      "functions": [
-      "hinder",
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
      "cannot": "⛔ NOT A BOLT — a crossbow bolt takes the hand off.",
      "_functionsWas": [
-      "reveal",
       "hinder",
       "strike"
      ]
@@ -608,10 +621,11 @@
    "learnedAt": "anywhere",
    "_rootWhy": "⛔ PERFECT MOTION, NARROWED. Catching a thrown thing early is the Somatic reading-of-movement at hand scale. ⚠️ Also the pickpocket's craft, which the Flesh-Temples do not discuss.",
    "_functionsWas": [
-    "reveal",
-    "move"
+    "hinder",
+    "strike"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."

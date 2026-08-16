@@ -1,0 +1,464 @@
+{
+ "schemaVersion": 1,
+ "id": "physical_ranged",
+ "kind": "content",
+ "note": "⛔ SNG-440. PHYSICAL RANGED CRAFT — Erik: 'I want more physical skills. Some can use agility, such as throwing knives, stars, stones. Some should be bow or crossbow style. Some are various raw power thrown.'\n⚠️ MEASURED FIRST: of 376 abilities, only 45 are `physical` (12%, against 161 mental), and exactly ONE was a genuine ranged physical attack. 21 of 31 traditions have NO physical ability at all.\n⛔ AUTHORED AS `valley_craft` ON PURPOSE. Valley craft is 'skill and nothing else' — no power system, no tradition gate — so these are available to ANY character and they close the coverage gap at the same time as the physical one. A Cogitant can now throw a knife. ⚠️ ALL SIX ROLL DICE on the existing ladder (L1 1d6, L2 2d6), because Erik's standard is that a skill DOES what its label says.",
+ "abilities": [
+  {
+   "id": "the_thrown_edge",
+   "name": "The Thrown Edge",
+   "levelReq": 1,
+   "energyCost": 3,
+   "axes": {
+    "violence_peace": -0.4
+   },
+   "attribute": "physical",
+   "effectTags": [
+    "attack",
+    "ranged",
+    "precise",
+    "concealed"
+   ],
+   "narrationHints": "The hand goes to the belt and comes away empty and there is already a knife in them. No draw, no aim you could see, no sound until it lands.",
+   "description": "Put a knife, a star or a spike into someone at eight paces, underhand and without a windup. Quiet, deniable, and it does not announce itself the way a drawn bow does.",
+   "notFor": "Armour (find the gap or find another craft); anything past a room's width; a fight you want witnessed.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Underhand",
+     "grants": "One blade at 8 paces, from concealment or mid-stride. No windup a watcher could call.",
+     "cannot": "Cannot punch through mail or a shield; one blade per action."
+    },
+    {
+     "rank": 2,
+     "name": "The Second Knife",
+     "grants": "Two blades in the time of one — the same target twice, or two targets standing close."
+    },
+    {
+     "rank": 3,
+     "name": "The Full Belt",
+     "grants": "Throw anything with a point and an edge, and it flies true: a chisel, a shard, a fork."
+    }
+   ],
+   "functions": [
+    "strike"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "powerSystem": "valley_craft",
+   "shape": "damage",
+   "operativeAxis": "violence_peace",
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 8,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "intensity": "moderate",
+   "bounds": [
+    {
+     "text": "needs a blade or a point — improvised counts, empty hands do not",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ EIGHT PACES. Past that the blade tumbles and lands flat",
+     "class": "hard"
+    },
+    {
+     "text": "you must recover your knives afterward or you are out",
+     "class": "cost"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "STEALTH",
+    "DUEL"
+   ],
+   "plainly": "A fight/stealth/duel action that deals damage. It rolls 1d6. Range is 8.",
+   "_authored": "SNG-440"
+  },
+  {
+   "id": "the_sling_and_stone",
+   "name": "The Sling and Stone",
+   "levelReq": 1,
+   "energyCost": 2,
+   "axes": {
+    "violence_peace": -0.4
+   },
+   "attribute": "physical",
+   "effectTags": [
+    "attack",
+    "ranged",
+    "cheap"
+   ],
+   "narrationHints": "Two turns of the wrist and a sound like a wasp going past, and the man at the far end of the field sits down. The stone was free. There will be another one.",
+   "description": "Whip a stone out to forty paces hard enough to drop a man, using ammunition that is lying on the ground everywhere you will ever stand.",
+   "notFor": "Close quarters; silence; anything you need to hit through a shield.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Loosed Stone",
+     "grants": "One stone at 40 paces. Ammunition is whatever is underfoot — you are never out.",
+     "cannot": "Needs room to swing; useless in a press or a low tunnel."
+    },
+    {
+     "rank": 2,
+     "name": "The Aimed Stone",
+     "grants": "Call the hit — a hand, a knee, the lamp, the horse. It goes where you called."
+    },
+    {
+     "rank": 3,
+     "name": "Skull-Weight",
+     "grants": "Lead or cast shot instead of river stone: it goes through a helm and keeps going."
+    }
+   ],
+   "functions": [
+    "strike"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "powerSystem": "valley_craft",
+   "shape": "damage",
+   "operativeAxis": "violence_peace",
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 40,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "intensity": "moderate",
+   "bounds": [
+    {
+     "text": "⛔ NEEDS ROOM TO SWING — a press, a tunnel or a doorway kills it",
+     "class": "hard"
+    },
+    {
+     "text": "loud in the way a bow is not — everyone hears where it came from",
+     "class": "soft"
+    },
+    {
+     "text": "one stone per action; you must find or carry them",
+     "class": "hard"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SURVIVE",
+    "CHASE"
+   ],
+   "plainly": "A fight/survive/chase action that deals damage. It rolls 1d6. Range is 40.",
+   "_authored": "SNG-440"
+  },
+  {
+   "id": "the_drawn_bow",
+   "name": "The Drawn Bow",
+   "levelReq": 2,
+   "energyCost": 4,
+   "axes": {
+    "violence_peace": -0.4
+   },
+   "attribute": "physical",
+   "effectTags": [
+    "attack",
+    "ranged",
+    "penetrating"
+   ],
+   "narrationHints": "You are not fast. You are UNHURRIED, which is different and much worse for them — the third arrow is already nocked while they are deciding whether to run at you or away.",
+   "description": "Put an arrow through someone at a hundred and twenty paces, and keep doing it while they cross the ground between you.",
+   "notFor": "Anything within arm's reach; fighting in a crowd; rain without a case.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Long Draw",
+     "grants": "One arrow at 120 paces, through leather and gambeson. You can hold at full draw and wait.",
+     "cannot": "Cannot shoot in a press; a shield-wall stops you cold."
+    },
+    {
+     "rank": 2,
+     "name": "The Kept Rhythm",
+     "grants": "An arrow every action without losing accuracy — you can hold a corridor or a bridge alone."
+    },
+    {
+     "rank": 3,
+     "name": "The Heavy Head",
+     "grants": "Bodkin heads: mail and plate stop mattering at under sixty paces."
+    }
+   ],
+   "functions": [
+    "strike"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "powerSystem": "valley_craft",
+   "shape": "damage",
+   "operativeAxis": "violence_peace",
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 120,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "intensity": "moderate",
+   "bounds": [
+    {
+     "text": "⛔ NEEDS BOTH HANDS AND CLEAR SIGHT — no bow works in a grapple",
+     "class": "hard"
+    },
+    {
+     "text": "arrows are counted; a quiver is twenty and you will notice",
+     "class": "cost"
+    },
+    {
+     "text": "wet bowstring, no shot",
+     "class": "hard"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SURVIVE",
+    "DUEL"
+   ],
+   "plainly": "A fight/survive/duel action that deals damage. It rolls 2d6. Range is 120.",
+   "_authored": "SNG-440"
+  },
+  {
+   "id": "the_levelled_crossbow",
+   "name": "The Levelled Crossbow",
+   "levelReq": 2,
+   "energyCost": 5,
+   "axes": {
+    "violence_peace": -0.4
+   },
+   "attribute": "physical",
+   "effectTags": [
+    "attack",
+    "ranged",
+    "armor-piercing"
+   ],
+   "narrationHints": "It does not care how strong you are or how long you trained. It is a machine that stores a stronger man's pull and gives it back on a hair trigger, and the bolt goes through a breastplate like the breastplate was a suggestion.",
+   "description": "Level a crossbow and put a bolt through armour at ninety paces — and you can hand one to a farmer and they can do it too, which is the whole political problem with the thing.",
+   "notFor": "Volume of fire; subtlety; anywhere carrying one gets you stopped at the gate.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Spanned and Levelled",
+     "grants": "One bolt at 90 paces, through mail. Aim is trivial; anyone can be taught in an afternoon.",
+     "cannot": "⛔ SPANNING TAKES A FULL ACTION — one shot, then you are a man holding a stick."
+    },
+    {
+     "rank": 2,
+     "name": "The Belt Claw",
+     "grants": "Span and shoot in the same action, if you have both feet under you."
+    },
+    {
+     "rank": 3,
+     "name": "The Windlass",
+     "grants": "A heavy bow that will go through plate, a shield, and the arm behind it."
+    }
+   ],
+   "functions": [
+    "strike"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "powerSystem": "valley_craft",
+   "shape": "damage",
+   "operativeAxis": "violence_peace",
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 90,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "intensity": "moderate",
+   "bounds": [
+    {
+     "text": "⛔ RESPANNING COSTS AN ACTION at r1 — the gap is the whole weakness",
+     "class": "cost"
+    },
+    {
+     "text": "heavy, obvious, and illegal in three cities",
+     "class": "soft"
+    },
+    {
+     "text": "a cranked string in the wet is a slow disaster",
+     "class": "hard"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL",
+    "SURVIVE"
+   ],
+   "plainly": "A fight/duel/survive action that deals damage. It rolls 2d6. Range is 90.",
+   "_authored": "SNG-440"
+  },
+  {
+   "id": "the_hurled_weight",
+   "name": "The Hurled Weight",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "violence_peace": -0.4
+   },
+   "attribute": "physical",
+   "effectTags": [
+    "attack",
+    "thrown",
+    "heavy"
+   ],
+   "narrationHints": "There is no craft in it and that is the craft. You get under the thing, you commit your whole body, and it goes. People do not expect the furniture.",
+   "description": "Pick up something heavy and throw it hard enough to matter — a stone, a keg, a bench, a man. Fifteen paces, and what it hits stops being shaped the way it was.",
+   "notFor": "Range; precision; anything delicate; a bare room.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Get Under It",
+     "grants": "Throw anything you could lift at 15 paces. Objects break; people go down and stay down a moment.",
+     "cannot": "Needs something to throw and room to wind up."
+    },
+    {
+     "rank": 2,
+     "name": "The Committed Throw",
+     "grants": "Throw something you should not be able to lift — a table, a door, a person of your own size."
+    },
+    {
+     "rank": 3,
+     "name": "The Scattering",
+     "grants": "Throw into a group: everyone in the path goes over, not just the first."
+    }
+   ],
+   "functions": [
+    "strike",
+    "break"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "powerSystem": "valley_craft",
+   "shape": "damage",
+   "operativeAxis": "violence_peace",
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 15,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "intensity": "moderate",
+   "bounds": [
+    {
+     "text": "⛔ YOU MUST HAVE SOMETHING TO THROW and be able to lift it",
+     "class": "hard"
+    },
+    {
+     "text": "you are off balance afterward — a full action to recover",
+     "class": "cost"
+    },
+    {
+     "text": "fifteen paces and it drops",
+     "class": "hard"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SURVIVE"
+   ],
+   "plainly": "A fight/survive action that deals damage. It rolls 1d6. Range is 15.",
+   "_authored": "SNG-440"
+  },
+  {
+   "id": "the_quick_hands",
+   "name": "The Quick Hands",
+   "levelReq": 1,
+   "energyCost": 2,
+   "axes": {},
+   "attribute": "physical",
+   "effectTags": [
+    "defend",
+    "precise",
+    "sleight"
+   ],
+   "narrationHints": "Your hand is where the thing is going to be. Not fast exactly — EARLY, because you read the throw before it left the hand.",
+   "description": "Catch, snatch or redirect a thing in flight — an arrow, a thrown blade, a dropped lamp, a purse leaving your belt — and have it in your hand instead of where it was going.",
+   "notFor": "Crossbow bolts; anything heavy; things thrown from outside your sight.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Early Hands",
+     "grants": "Catch or deflect one thrown object per action if you saw it thrown. Also: take a small thing off a person without them feeling it."
+    },
+    {
+     "rank": 2,
+     "name": "The Turned Catch",
+     "grants": "Catch it and send it back in the same motion, at the thrower, at short range."
+    },
+    {
+     "rank": 3,
+     "name": "Both Hands",
+     "grants": "Two objects, or one arrow from a bow you did not see drawn."
+    }
+   ],
+   "functions": [
+    "reveal",
+    "move"
+   ],
+   "tradition": "valley_craft",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "valley_craft",
+   "shape": "setup",
+   "operativeAxis": "concrete_abstract",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 2,
+    "scope": 1
+   },
+   "intensity": "moderate",
+   "bounds": [
+    {
+     "text": "you must SEE it coming — nothing from behind",
+     "class": "hard"
+    },
+    {
+     "text": "⛔ NOT A BOLT. A crossbow bolt takes the hand off",
+     "class": "hard"
+    },
+    {
+     "text": "one object per action at r1",
+     "class": "soft"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "STEALTH",
+    "INVESTIGATE"
+   ],
+   "plainly": "A fight/stealth/investigate action that catches or redirects something in flight. Its strength is rated 5 out of 10.",
+   "_authored": "SNG-440"
+  }
+ ]
+}

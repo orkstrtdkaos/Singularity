@@ -1,0 +1,1494 @@
+{
+ "_note": "⛔ SNG-450 BATCH 1 REVERT LOG. Full pre-edit state of all 14 Mind abilities touched in batch 1, captured before any change. ⚠️ Erik: 'let's make sure we log the current skills in case we want to revert.' Every field, every rank, verbatim.",
+ "_batch": "Mind · navigation, restore, case, and the perceive-only set",
+ "_date": "2026-08-15",
+ "abilities": {
+  "memory_palace": {
+   "id": "memory_palace",
+   "name": "Memory-Palace",
+   "levelReq": 3,
+   "energyCost": 6,
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.4,
+    "concrete_abstract": 0.3
+   },
+   "functions": [
+    "foresee",
+    "restore",
+    "reveal"
+   ],
+   "narrationHints": "Vast knowledge held in a built inner architecture, retrieved instantly.",
+   "description": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
+   "notFor": "Wisdom; presence in the body it forgets.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Memory-Palace",
+     "grants": "Store and recall huge structured knowledge; model and predict a system or person in your head.",
+     "cannot": "Only as good as its inputs; living in the model loses the room.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Deeper Rooms",
+     "grants": "Store not just facts but experiences whole — walk back into a conversation and hear it again exactly.",
+     "cannot": "What you store, you keep. Including what you would rather have let fade.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Palace Entire",
+     "grants": "Nothing you have attended to is lost. The whole of your life is a place you can walk through.",
+     "cannot": "The Cogitants who build the deepest palaces have trouble leaving them.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "restore"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_body_mind",
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "cogitant",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "schoolAffinity": "cog_unaided",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "setup",
+   "operativeAxis": [
+    "recallDepth",
+    "permanence"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8760,
+    "note": "T-III. duration effectively permanent — 'nothing you have attended to is lost'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "recallDepth",
+     "delta": "store not just FACTS but EXPERIENCES WHOLE — walk back into a conversation and hear it again exactly",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NOTHING YOU HAVE ATTENDED TO IS LOST — the whole of your life is a place you can walk through",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "store what matters — half the depth, and you can let the rest go",
+    "surge": "double it; WHAT YOU STORE, YOU KEEP — INCLUDING WHAT YOU WOULD RATHER HAVE LOST"
+   },
+   "bounds": [
+    {
+     "text": "ONLY AS GOOD AS ITS INPUTS — living in the model loses the room",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU STORE, YOU KEEP — INCLUDING WHAT YOU WOULD RATHER HAVE LOST",
+     "class": "hard"
+    },
+    {
+     "text": "the deepest palaces have trouble LEAVING them",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 6 out of 10, and lasts for about 12 months Ranks: rank 2 deepens recallDepth; rank 3 adds to special. Limit: only AS Good AS Its Inputs — living in the model loses the room.",
+   "_file": "reach_body_mind"
+  },
+  "the_working_model": {
+   "id": "the_working_model",
+   "name": "The Working Model",
+   "levelReq": 3,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.4,
+    "concrete_abstract": 0.4
+   },
+   "effectTags": [
+    "construct",
+    "analyze",
+    "precision"
+   ],
+   "narrationHints": "Think it through until it builds itself. A plan become a blueprint become a thing.",
+   "description": "You can think a thing into existence — model it so completely in your mind that the making is just following the thought.",
+   "notFor": [],
+   "tradition": "cogitant",
+   "harmRung": "none",
+   "functions": [
+    "make",
+    "mend",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "craft",
+    "technical",
+    "intellectual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Blueprint",
+     "grants": "Think through a construction or modification so precisely that the making is near-guaranteed, even with inferior tools; identify exactly what you need before you touch anything.",
+     "cannot": "Anything rank 2 adds — build a mental model of a complex system — a machine, a building, a body — complete enough to diagnose its faults and redesign its structure from the inside out; the model is NOT THE THING.",
+     "functions": [
+      "reveal",
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Complete Model",
+     "grants": "Build a mental model of a complex system — a machine, a building, a body — complete enough to diagnose its faults and redesign its structure from the inside out.",
+     "cannot": "Anything rank 3 adds — a thing you have modeled completely you can build with uncanny precision and speed — faster and more accurately than available materials or tools should allow; the model is NOT THE THING.",
+     "functions": [
+      "reveal",
+      "make",
+      "mend"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Think-Built",
+     "grants": "A thing you have modeled completely you can build with uncanny precision and speed — faster and more accurately than available materials or tools should allow.",
+     "cannot": "Nothing further; this is the craft's ceiling; the model is NOT THE THING.",
+     "functions": [
+      "reveal",
+      "make",
+      "mend"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "schoolAffinity": "cog_reaching",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "construct",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 6,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "build a mental model of a complex system COMPLETE ENOUGH TO DIAGNOSE ITS FAULTS AND REPAIR IT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a thing you have modeled completely you can BUILD WITH UNCANNY PRECISION AND SPEED — faster and more accurately than available tools should allow",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "model the essentials — half the precision, and it is quick",
+    "surge": "double the model; a complete model takes as long as it takes"
+   },
+   "bounds": [
+    {
+     "text": "the model is NOT THE THING — reality has details your model omitted",
+     "class": "hard"
+    },
+    {
+     "text": "modelling takes TIME the situation may not give you",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A craft/technical/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: the model is Not The Thing — reality has details your model omitted.",
+   "_file": "reach_body_mind"
+  },
+  "the_necessary_case": {
+   "id": "the_necessary_case",
+   "name": "The Necessary Case",
+   "levelReq": 3,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.4,
+    "concrete_abstract": 0.3
+   },
+   "effectTags": [
+    "argument",
+    "logic",
+    "pressure"
+   ],
+   "narrationHints": "Not persuasion. Demonstration. The conclusion is the only place the logic goes.",
+   "description": "You present a case so airtight that refusal becomes irrational. Not manipulation — proof. The other person can disagree, but they cannot explain why.",
+   "notFor": [],
+   "tradition": "cogitant",
+   "harmRung": "none",
+   "functions": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "social",
+    "intellectual",
+    "negotiation"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Closed Argument",
+     "grants": "Present a case so logically complete that the other person cannot find a gap — not because you've overwhelmed them, but because there isn't one.",
+     "cannot": "Anything rank 2 adds — show that a conclusion follows so inevitably that the person cannot act against it without explaining why — and you can dismantle whatever they offer; IT PERSUADES BY BEING RIGHT.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Demonstrated Necessity",
+     "grants": "Show that a conclusion follows so inevitably that the person cannot act against it without explaining why — and you can dismantle whatever they offer.",
+     "cannot": "Anything rank 3 adds — make the logic of a situation so visible that a group reorganizes around it — not because you commanded them, but because the structure of the situation leaves no other rational position; IT PERSUADES BY BEING RIGHT.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Only Conclusion",
+     "grants": "Make the logic of a situation so visible that a group reorganizes around it — not because you commanded them, but because the structure of the situation leaves no other rational position.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT PERSUADES BY BEING RIGHT; and it still costs what it costs: a person cornered by logic is still A CORNERED PERSON.",
+     "functions": [
+      "reveal",
+      "bind",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "schoolAffinity": "cog_reaching",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "bolster",
+   "operativeAxis": [
+    "persuasion",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "persuasion",
+     "delta": "show that a conclusion FOLLOWS SO INEVITABLY that the person cannot act against it WITHOUT EXPLAINING WHY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: make the logic of a situation SO VISIBLE THAT A GROUP REORGANIZES AROUND IT — not because you commanded them, but because they can all see it",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "make the argument — half the force, and it invites disagreement",
+    "surge": "double it; a person cornered by logic is still a cornered person"
+   },
+   "bounds": [
+    {
+     "text": "IT PERSUADES BY BEING RIGHT — a flawed case gains nothing from this craft",
+     "class": "hard"
+    },
+    {
+     "text": "it works by BEING RIGHT — a flawed case gains nothing, and a cornered mind can still refuse the conclusion at a cost to itself",
+     "class": "soft"
+    },
+    {
+     "text": "a person cornered by logic is still A CORNERED PERSON",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/intellectual/negotiation action that strengthens someone. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens persuasion; rank 3 adds to special. Limit: iT Persuades BY Being Right — a flawed case gains nothing from this craft.",
+   "_file": "reach_body_mind"
+  },
+  "the_clear_path": {
+   "id": "the_clear_path",
+   "name": "The Clear Path",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.3,
+    "space_time": 0.2
+   },
+   "effectTags": [
+    "navigation",
+    "prediction",
+    "movement"
+   ],
+   "narrationHints": "The gap is there before you look. The model says where to step.",
+   "description": "Navigate by modeling everything — obstacles, crowd, guard rotation — before you move a foot. The path is solved before it is walked.",
+   "notFor": [],
+   "tradition": "cogitant",
+   "harmRung": "none",
+   "functions": [
+    "foresee",
+    "move",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "navigation",
+    "stealth",
+    "tactical"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Modeled Route",
+     "grants": "Find the quickest, safest route through any observable space — crowd, ruin, wilderness — by calculating rather than feeling your way.",
+     "cannot": "Anything rank 2 adds — move through a dynamic space without friction by staying two steps ahead of everyone in it — the guard, the crowd, the chaos; it CALCULATES rather than feels.",
+     "functions": [
+      "reveal",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Anticipatory Movement",
+     "grants": "Move through a dynamic space without friction by staying two steps ahead of everyone in it — the guard, the crowd, the chaos.",
+     "cannot": "Anything rank 3 adds — in a space you understand, you move as if you designed the whole scene — every obstacle parts, every gap opens, every opening appears the instant you need it; it CALCULATES rather than feels.",
+     "functions": [
+      "reveal",
+      "move",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Written Choreography",
+     "grants": "In a space you understand, you move as if you designed the whole scene — every obstacle parts, every gap opens, every opening appears the instant you need it.",
+     "cannot": "Nothing further; this is the craft's ceiling; it CALCULATES rather than feels.",
+     "functions": [
+      "reveal",
+      "move",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "schoolAffinity": "cog_instrumented",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "reposition",
+   "operativeAxis": [
+    "navigation",
+    "range"
+   ],
+   "mechanic": {
+    "range": 12,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "navigation",
+     "delta": "move through a DYNAMIC space without friction by STAYING TWO STEPS AHEAD of everyone in it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: in a space you understand, you move AS IF YOU DESIGNED THE WHOLE SCENE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a calculated route — half the advantage, and it costs nothing",
+    "surge": "double it; calculating a crowd means you are not FEELING the crowd, and crowds do surprising things"
+   },
+   "bounds": [
+    {
+     "text": "it CALCULATES rather than feels — a space that behaves unreasonably defeats it",
+     "class": "hard"
+    },
+    {
+     "text": "it requires an OBSERVABLE space",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A navigation/stealth/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it Calculates rather than feels — a space that behaves unreasonably defeats it.",
+   "_file": "reach_body_mind"
+  },
+  "pattern_sense": {
+   "id": "pattern_sense",
+   "name": "Pattern-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "The repetition surfaces — this has a shape, and the shape has a name.",
+   "description": "See the pattern beneath particulars — the first gift of the Pattern Reach.",
+   "notFor": "Reading material (Stone-Read); reading order-as-structure (Order-Sense). This reads FORM.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Pattern-Sense",
+     "grants": "See that a set of particulars is an instance of a pattern, and roughly what pattern.",
+     "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Named Form",
+     "grants": "Name the form exactly — and once named, its other instances become visible to you everywhere.",
+     "cannot": "Once you can see it everywhere, you will see it where it is not.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Formal Reach",
+     "grants": "Read the form of an event, a life, or a history — the shape it is completing.",
+     "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "NAME THE FORM EXACTLY — and once named, ITS OTHER INSTANCES BECOME VISIBLE TO YOU EVERYWHERE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: read the form of an event, a life, or a history — THE SHAPE IT IS COMPLETING",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the shape — half the depth, and it does not follow you",
+    "surge": "double it; ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T"
+   },
+   "bounds": [
+    {
+     "text": "SEEING THE PATTERN IS NOT SEEING WHETHER IT IS A TRUE ONE",
+     "class": "hard"
+    },
+    {
+     "text": "ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T",
+     "class": "cost"
+    },
+    {
+     "text": "KNOWING THE SHAPE A LIFE IS COMPLETING DOES NOT PERMIT YOU TO SAY SO",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/explore action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour Ranks: rank 2 deepens perceptionDepth; rank 3 adds to foresight. Limit: seeing The Pattern IS Not Seeing Whether IT IS A True One.",
+   "_file": "reach_concrete_abstract"
+  },
+  "the_restored_form": {
+   "id": "the_restored_form",
+   "name": "The Restored Form",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.4
+   },
+   "effectTags": [
+    "restoration",
+    "pattern",
+    "correction"
+   ],
+   "narrationHints": "Correct the form and the thing follows. The pattern is what was broken.",
+   "description": "Restore by identifying the correct form and reinstating it — not by nursing the wound but by re-establishing the pattern that was disrupted.",
+   "notFor": [],
+   "tradition": "figurist",
+   "harmRung": "none",
+   "functions": [
+    "heal",
+    "restore",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "medical",
+    "repair",
+    "intellectual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Correct Pattern",
+     "grants": "Identify the form a broken thing is a disruption of, and name the intervention that restores the pattern — not approximate, but correct.",
+     "cannot": "Anything rank 2 adds — restore the underlying structure — the form a person, plan, or object is supposed to have — and function follows without separate work; IT RESTORES THE FORM.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Form Before Function",
+     "grants": "Restore the underlying structure — the form a person, plan, or object is supposed to have — and function follows without separate work.",
+     "cannot": "Anything rank 3 adds — return a thing entirely to its proper form — the body that heals from the inside out, the relationship that finds its right shape, the plan that coheres again — by working at the level of pattern rather than symptom; IT RESTORES THE FORM.",
+     "functions": [
+      "reveal",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Full Re-Instantiation",
+     "grants": "Return a thing entirely to its proper form — the body that heals from the inside out, the relationship that finds its right shape, the plan that coheres again — by working at the level of pattern rather than symptom.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT RESTORES THE FORM.",
+     "functions": [
+      "reveal",
+      "restore",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "restoration",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "note": "A TENTH THEORY OF MEDICINE — FORM RESTORATION: 'not appearance, the FORM a thing is supposed to have', and function follows."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "restoration",
+     "delta": "restore THE UNDERLYING STRUCTURE — the form a person, plan, or object is SUPPOSED to have — AND FUNCTION FOLLOWS",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: return a thing ENTIRELY to its proper form — THE BODY THAT HEALS FROM THE INSIDE OUT, the relationship that finds its shape again",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "restore the outline — half the healing, and nothing is forced",
+    "surge": "double it; restoring the form a thing is SUPPOSED to have requires being right about what it is supposed to be"
+   },
+   "bounds": [
+    {
+     "text": "IT RESTORES THE FORM — a thing whose true form is broken cannot be restored TO it",
+     "class": "hard"
+    },
+    {
+     "text": "restoring what a thing is SUPPOSED to be requires BEING RIGHT about that",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A medical/repair/intellectual action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: iT Restores The Form — a thing whose true form is broken cannot be restored TO it.",
+   "_file": "reach_concrete_abstract"
+  },
+  "the_patterned_way": {
+   "id": "the_patterned_way",
+   "name": "The Patterned Way",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.3,
+    "space_time": 0.1
+   },
+   "effectTags": [
+    "navigation",
+    "pattern",
+    "movement"
+   ],
+   "narrationHints": "A landscape has a shape. Move along its lines.",
+   "description": "Navigate by reading the pattern a space is — not terrain but form; not where the road goes but what the space is an instance of.",
+   "notFor": [],
+   "tradition": "figurist",
+   "harmRung": "none",
+   "functions": [
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "challengeTypes": [
+    "navigation",
+    "intellectual",
+    "exploration"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shape of a Place",
+     "grants": "Read a landscape or structure as a pattern — see where it opens, where it funnels, where it repeats — and move along its lines rather than across them.",
+     "cannot": "Anything rank 2 adds — navigate any environment you can read the form of without needing roads, signs, or memory — the pattern tells you where you are and where leads where; it needs A READABLE PATTERN.",
+     "functions": [
+      "reveal",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Pattern Navigation",
+     "grants": "Navigate any environment you can read the form of without needing roads, signs, or memory — the pattern tells you where you are and where leads where.",
+     "cannot": "Anything rank 3 adds — recognize that a place is an instance of a form you know — and everything about it becomes legible: every exit, every blind spot, every place the pattern says something must be; it needs A READABLE PATTERN.",
+     "functions": [
+      "reveal",
+      "move",
+      "travel"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "This Place Is an Instance",
+     "grants": "Recognize that a place is an instance of a form you know — and everything about it becomes legible: every exit, every blind spot, every place the pattern says something must be.",
+     "cannot": "Nothing further; this is the craft's ceiling; it needs A READABLE PATTERN.",
+     "functions": [
+      "reveal",
+      "move",
+      "travel"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "navigation",
+    "range"
+   ],
+   "mechanic": {
+    "range": 12,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "navigation",
+     "delta": "navigate ANY environment you can read the form of — WITHOUT roads, signs, or memory; THE PATTERN TELLS YOU",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: RECOGNIZE THAT A PLACE IS AN INSTANCE OF A FORM YOU KNOW — and everything about it becomes legible: every exit, every hidden room",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "read the layout — half the certainty, and it costs nothing",
+    "surge": "double it; a place that is NOT an instance of any form you know offers nothing at all"
+   },
+   "bounds": [
+    {
+     "text": "it needs A READABLE PATTERN — genuine chaos or true novelty defeats it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A navigation/intellectual/exploration action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it needs A Readable Pattern — genuine chaos or true novelty defeats it.",
+   "_file": "reach_concrete_abstract"
+  },
+  "the_correct_protocol": {
+   "id": "the_correct_protocol",
+   "name": "The Correct Protocol",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.4
+   },
+   "effectTags": [
+    "diagnosis",
+    "treatment",
+    "precision"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He knew exactly what was wrong. The treatment followed.",
+   "description": "Heal through precise diagnosis and correct procedure — the methodical application of what is known to work.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "heal",
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "medical",
+    "craft",
+    "intellectual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Correct Diagnosis",
+     "grants": "Diagnose and treat through methodical application of what is known to work — no guesswork, no comfort, the correct intervention.",
+     "cannot": "Anything rank 2 adds — restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out; NO GUESSWORK, NO COMFORT.",
+     "functions": [
+      "reveal",
+      "heal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "By Protocol",
+     "grants": "Restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out.",
+     "cannot": "Anything rank 3 adds — restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left; NO GUESSWORK, NO COMFORT.",
+     "functions": [
+      "reveal",
+      "heal",
+      "mend",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Root Cause",
+     "grants": "Restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left.",
+     "cannot": "Nothing further; this is the craft's ceiling; NO GUESSWORK, NO COMFORT.",
+     "functions": [
+      "reveal",
+      "heal",
+      "mend",
+      "restore"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "precision",
+    "completeness"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "note": "A TWELFTH THEORY OF MEDICINE — PROTOCOL: 'no guesswork, no comfort, THE CORRECT INTERVENTION.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "completeness",
+     "delta": "restore THROUGH PROPER SEQUENCE — the correct actions IN THE CORRECT ORDER return the body or system to function",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: restore completely by identifying THE UNDERLYING CAUSE and applying THE FULL CHAIN of correct interventions",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "the correct minimum — half the restoration, and nothing is wasted",
+    "surge": "double it; the correct intervention is CORRECT, not KIND"
+   },
+   "bounds": [
+    {
+     "text": "NO GUESSWORK, NO COMFORT — it does not soothe and does not pretend to",
+     "class": "hard"
+    },
+    {
+     "text": "it requires that the correct protocol IS KNOWN — a novel affliction defeats it",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A medical/craft/intellectual action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens completeness; rank 3 adds to special. Limit: nO Guesswork, NO Comfort — it does not soothe and does not pretend to.",
+   "_file": "reach_emotional_logical"
+  },
+  "the_derived_route": {
+   "id": "the_derived_route",
+   "name": "The Derived Route",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.3
+   },
+   "effectTags": [
+    "navigation",
+    "reasoning",
+    "inference"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He hadn't walked it. He had worked it out.",
+   "description": "Navigate through pure reasoning — derive the correct path from what you know before taking a step.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "foresee",
+    "move",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "navigation",
+    "intellectual",
+    "tactical"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Reasoned Path",
+     "grants": "Navigate any space by reasoning about it — what must be true about the layout, the route, the exits — without needing to see it first.",
+     "cannot": "Anything rank 2 adds — derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits; it needs SOUND PREMISES.",
+     "functions": [
+      "reveal",
+      "move"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Inferred Route",
+     "grants": "Derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits.",
+     "cannot": "Anything rank 3 adds — navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires; it needs SOUND PREMISES.",
+     "functions": [
+      "reveal",
+      "move",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Necessary Route",
+     "grants": "Navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires.",
+     "cannot": "Nothing further; this is the craft's ceiling; it needs SOUND PREMISES.",
+     "functions": [
+      "reveal",
+      "move",
+      "foresee"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "navigation",
+    "range"
+   ],
+   "mechanic": {
+    "range": 12,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "navigation",
+     "delta": "DERIVE the correct path through UNKNOWN territory BY INFERENCE — from what you know about the type of space",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: navigate to ANY CONCLUSION THAT FOLLOWS NECESSARILY from known premises — the route that MUST exist, the exit that MUST be there",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "reason it out — half the certainty, and it costs nothing",
+    "surge": "double it; a route that MUST exist by inference still has to actually be there"
+   },
+   "bounds": [
+    {
+     "text": "it needs SOUND PREMISES — reasoning from a wrong assumption arrives confidently at nowhere",
+     "class": "hard"
+    },
+    {
+     "text": "a route that MUST exist BY INFERENCE still has to actually BE THERE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A navigation/intellectual/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it needs Sound Premises — reasoning from a wrong assumption arrives confidently at nowhere.",
+   "_file": "reach_emotional_logical"
+  },
+  "the_inescapable_conclusion": {
+   "schemaVersion": 1,
+   "id": "the_inescapable_conclusion",
+   "name": "The Inescapable Conclusion",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "syllogist",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.6
+   },
+   "functions": [
+    "bind",
+    "reveal"
+   ],
+   "narrationHints": "You lay the premises down one at a time, each one they must agree to, until they arrive — of their own reasoning — at a conclusion they would have run from if they'd seen it coming.",
+   "description": "The Syllogist art of the inescapable argument — a chain of reasoning so sound that agreeing to the start compels agreeing to the end, binding a mind by its own logic. Not deception; the opposite. The trap is that it is TRUE.",
+   "notFor": "It binds only the reasonable — a mind that will simply refuse a true conclusion cannot be caught by one. And a true argument binds you too; you cannot walk someone to a conclusion you are unwilling to stand on yourself.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Inescapable Conclusion",
+     "grants": "Bind a reasoning mind to a conclusion by an argument it cannot honestly escape.",
+     "cannot": "It fails against those who refuse reason itself, it binds its wielder to the same truth, and a conclusion someone was walked into by force of logic can curdle into resentment of the one who walked them.",
+     "functions": [
+      "bind",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Proof",
+     "grants": "Walk a whole body of reasoning minds to the same conclusion at once — a council, a court, a school — and the binding holds against later private doubt, because each of them watched the others agree. The chain can be built across days now rather than one exchange.",
+     "cannot": "It still fails entirely against those who will simply refuse a true conclusion, and a group holds more of them than a person does. It binds you to the same truth, publicly and on the record. And a conclusion a body was walked into together curdles together — the Syllogists have begun more than one schism this way.",
+     "functions": [
+      "bind",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "harmRung": "incapacitating",
+   "shape": "hobble",
+   "operativeAxis": [
+    "bindStrength",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 6,
+    "targets": 1,
+    "damageType": "reason",
+    "note": "T-IV, incapacitating"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "WALK A WHOLE BODY OF REASONING MINDS to the same conclusion AT ONCE — a council, a court, a school",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "make the argument — half the binding, and they can still walk away thinking",
+    "surge": "double it; IT STILL FAILS ENTIRELY against those who will simply REFUSE"
+   },
+   "bounds": [
+    {
+     "text": "IT FAILS AGAINST THOSE WHO REFUSE REASON ITSELF",
+     "class": "hard"
+    },
+    {
+     "text": "it binds A REASONING MIND — the unreasoning are outside it entirely",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/investigate action that weakens or restricts a target. Its strength is rated 7 out of 10 It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets. Limit: iT Fails Against Those Who Refuse Reason Itself.",
+   "_file": "reach_emotional_logical"
+  },
+  "the_proof": {
+   "schemaVersion": 1,
+   "id": "the_proof",
+   "name": "The Proof",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "syllogist",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.9
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "You assemble it whole — the complete proof, every step airtight, of a thing that is simply TRUE — and lay it before the world, and the world has no honest answer but to accept it.",
+   "description": "The Syllogist capstone — a complete, irrefutable proof of a true thing, assembled and offered so soundly that no honest mind can deny it. The deepest gift of the logical kind, and the loneliest: to be right past all argument is to be right, often, alone.",
+   "notFor": "One proof, once, at enormous cost — it can only prove what is actually true; there is no proof of a falsehood, only clever forgery that the next sound mind unpicks. And a proof, once offered, is loose in the world; you cannot un-prove a thing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Proof",
+     "grants": "Assemble and offer a complete, irrefutable proof of a true thing.",
+     "cannot": "It proves only the true, it costs nearly all you have, and to be irrefutably right is a lonely country — the proof convinces, but conviction is not love.",
+     "functions": [
+      "reveal"
+     ],
+     "harmRung": "none",
+     "gains": "broaden"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL"
+   ],
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "completeness",
+    "penetration"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 2,
+    "damageType": "reason"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: ASSEMBLE AND OFFER A COMPLETE, IRREFUTABLE PROOF of a true thing. The capstone is a KIND (irrefutability itself) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a partial proof is an argument, and arguments are what the Cathedral survives.",
+    "surge": "REFUSED — it already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "IT PROVES ONLY THE TRUE",
+     "class": "hard"
+    },
+    {
+     "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 9 out of 10, and lasts for about 2 hours Limit: iT Proves Only The True.",
+   "_file": "reach_emotional_logical"
+  },
+  "the_closing_argument": {
+   "schemaVersion": 1,
+   "id": "the_closing_argument",
+   "name": "The Closing Argument",
+   "levelReq": 5,
+   "energyCost": 12,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "syllogist",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.8
+   },
+   "functions": [
+    "reveal",
+    "bind"
+   ],
+   "narrationHints": "Every step is one they agreed to. That is what makes the last step impossible to refuse.",
+   "description": "⚠️ THE CORNERS' CRAFT. A Syllogist walks a person, honestly, from premises they already hold to a conclusion that ends them — that the work was worthless, that they cannot be forgiven, that the only consistent act remaining is the one they will now perform. NOTHING IN IT IS FALSE. That is the whole horror.",
+   "notFor": "Anyone who will not reason — the unreasonable are genuinely immune and the Corners resent it. And it CANNOT USE A FALSE PREMISE: the argument must be sound or it does nothing at all.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Closing Argument",
+     "grants": "Walk them, honestly, to a conclusion that unmakes their footing. They cannot act against it while it holds.",
+     "cannot": "A false premise. Anyone who refuses to follow.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Only Consistent Act",
+     "grants": "Reach the conclusion where the consistent act is a final one — and STOP TALKING. What they do next is theirs.",
+     "cannot": "Making them. It is their hand and both of you know it.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "harmRung": "lethal",
+   "nativeOrCombination": "native",
+   "shape": "hobble",
+   "operativeAxis": [
+    "soundness",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 48,
+    "targets": 1,
+    "damageType": "truth",
+    "note": "⚠️ THE ONLY KILL IN THE CATALOG THE WIELDER DOES NOT PERFORM. Resolve as a hobble; the lethal outcome is the target's OWN act, gated on the argument being sound and the target being a reasoner. The engine should never render it as damage dealt."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "soundness",
+     "delta": "SPECIAL: the conclusion where the only consistent act is final — and you stop talking",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "walk them partway — shaken, and they can turn back",
+    "surge": "reach the end; IT IS THEIR HAND, AND BOTH OF YOU KNOW IT"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT USE A FALSE PREMISE — an unsound argument does nothing",
+     "class": "hard"
+    },
+    {
+     "text": "THE UNREASONABLE ARE IMMUNE",
+     "class": "hard"
+    },
+    {
+     "text": "YOU DO NOT PERFORM IT. IT IS THEIR HAND, AND BOTH OF YOU KNOW IT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social contest against the target's resolve. You must be able to state a sound argument from something they already believe — the GM judges soundness, and an unsound argument fails automatically. On a win they cannot act against that conclusion for the rest of the scene. At rank 2, if the conclusion is that a final act is the only consistent one, the GM decides whether the target performs it; you never roll for that part. The target may disengage from the conversation at any time, and anyone who refuses to reason is immune outright.",
+   "_file": "reach_emotional_logical"
+  },
+  "the_stated_case": {
+   "id": "the_stated_case",
+   "name": "The Stated Case",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.6
+   },
+   "functions": [
+    "reveal",
+    "command"
+   ],
+   "narrationHints": "You lay a matter out so completely that the conclusion is simply visible, and there is nothing left to argue about — not because you won, but because the shape of it is now in the room.",
+   "description": "The Syllogists' building-craft, opposite to their unmaking one: not the flaw named, but the case made.",
+   "notFor": "Making a false case hold (a Syllogist who does this is a Veilwright and is treated as one); convincing people who do not care about being right; brevity.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Laid-Out Case",
+     "grants": "Set a matter out in full to people willing to follow. Disputes resolve; a council decides; a wrong belief comes apart without anyone being humiliated.",
+     "cannot": "It needs TIME and an audience that will follow reasoning. The uninterested, the frightened, and the paid are immune. And the case must be SOUND — you cannot build this out of nothing.",
+     "functions": [
+      "reveal",
+      "command"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Argument",
+     "grants": "Build it to last — write it, teach it, leave it. It goes on convincing people after you have left the room.",
+     "cannot": "A standing argument can be answered by a better one, and you have given them the shape to answer. Syllogists consider that a feature.",
+     "functions": [
+      "reveal",
+      "command",
+      "empower"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Settled Question",
+     "grants": "A case so complete a community stops relitigating it. Feuds end this way; so do bad laws.",
+     "cannot": "⚠ A SETTLED QUESTION SETTLES FOR EVERYONE, including people who were living well off it being open. And the Grand Lattice regards settled questions as their own property.",
+     "functions": [
+      "reveal",
+      "command",
+      "empower",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "PUZZLE"
+   ],
+   "tradition": "syllogist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 24,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "state the narrow case",
+    "surge": "settle the question; IT SETTLES FOR EVERYONE, including those living off it being open"
+   },
+   "bounds": [
+    {
+     "text": "needs TIME and an audience that will follow",
+     "class": "hard"
+    },
+    {
+     "text": "the case must be SOUND — you cannot build it from nothing",
+     "class": "hard"
+    },
+    {
+     "text": "the uninterested, the frightened and the PAID are immune",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/puzzle action that resolves a dispute by laying the whole case out. Rated 5 of 10 across a scope of 2 for about a day.",
+   "_file": "reach_emotional_logical"
+  },
+  "the_followed_thread": {
+   "id": "the_followed_thread",
+   "name": "The Followed Thread",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.5,
+    "falsehood_truth": 0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "Given what is true now, you follow it to what must therefore be true. Not prophecy — CONSEQUENCE. The world is more determined than people find comfortable, and Syllogists find that restful.",
+   "description": "The Syllogists' seeing-craft: inference run far enough forward to arrive before the event does.",
+   "notFor": "Anything genuinely undetermined (a free choice not yet made, a Churn-touched outcome); working from premises you have not checked; certainty about people.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Next Step",
+     "grants": "From what you actually know, name what must follow — the shortage three weeks out, the betrayal the arrangement requires, the collapse the load implies.",
+     "cannot": "GARBAGE IN. A wrong premise gives a confident wrong answer, and this craft does not feel any different when it is wrong. Free choices break the thread.",
+     "functions": [
+      "foresee",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Thread",
+     "grants": "Follow it further, through several turns, and see where a situation is actually going rather than where everyone says it is.",
+     "cannot": "Each step multiplies the error in your premises. Syllogists state their confidence out loud for this reason, and are trusted because of it.",
+     "functions": [
+      "foresee",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Consequence",
+     "grants": "The full downstream shape of a present fact — who is ruined, who profits, what ends, what must be built.",
+     "cannot": "⚠ KNOWING IS NOT PREVENTING, and you will often be the only person who saw it and was not believed. That is the Syllogist's characteristic and unglamorous suffering.",
+     "functions": [
+      "foresee",
+      "reveal",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "syllogist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "foresee",
+   "operativeAxis": [
+    "precision",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "one step forward",
+    "surge": "the whole consequence; KNOWING IS NOT PREVENTING and you will not be believed"
+   },
+   "bounds": [
+    {
+     "text": "GARBAGE IN — a wrong premise gives a confident wrong answer",
+     "class": "hard"
+    },
+    {
+     "text": "FREE CHOICES break the thread",
+     "class": "hard"
+    },
+    {
+     "text": "error compounds with each step",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A puzzle/social action that derives what must follow from what is true now. Rated 5 of 10 on one target for about six hours.",
+   "_file": "reach_emotional_logical"
+  }
+ }
+}

@@ -1,0 +1,85 @@
+{
+ "schemaVersion": 1,
+ "id": "power_cosmology",
+ "kind": "content",
+ "note": "⛔ SNG-446. THE POWER COSMOLOGY — Erik, 2026-08-15. This is the frame the four sources hang from, and it was not written down anywhere.",
+ "theSymmetry": {
+  "_statement": "⛔ CRYSTAL-BASED POWER HAS TWO SIDES, AND EACH HAS A PURE FORM AND A HUMAN ACCESS METHOD.\n   PRECURSOR SIDE — pure form: THE LATTICE SUBSTRATE. Human access: NANITES.\n   METAPHYSICAL SIDE — pure form: THE VEIL. Human access: THE METAPHYSICAL PRACTICES (ki, psychic, numen-work, stillness).\n⚠️ ERIK: 'The nanites are how humans CLOSED THE GAP with the Precursors, prior to the Transition… the other metaphysics are new ways to access the power the Veil uses, just like the nanites are a new way to access or channel the Precursor power.'\n⛔ SO NANITE AND METAPHYSICS ARE THE SAME KIND OF THING — both are HUMAN WORKAROUNDS, reaching a power we did not build, from two opposite directions. That is why nothing in this world is 'magic' and everything is a method.",
+  "grid": {
+   "precursor_pure": {
+    "is": "the lattice substrate",
+    "builtBy": "Akinetos",
+    "access": "direct, and almost nobody can"
+   },
+   "precursor_human": {
+    "is": "nanites",
+    "builtBy": "humans, pre-Transition",
+    "access": "ordered or wild, see below"
+   },
+   "metaphysical_pure": {
+    "is": "THE VEIL",
+    "builtBy": "⛔ NOT BUILT — it is what remains where Kenosis stopped being present",
+    "access": "direct, and it is a breach"
+   },
+   "metaphysical_human": {
+    "is": "ki · psychic · numen-work · stillness",
+    "builtBy": "discovered after the Transition",
+    "access": "practice, at a nexus"
+   }
+  },
+  "_consequence": "⚠️ THE VEIL IS TO METAPHYSICS WHAT THE LATTICE IS TO PRECURSOR — the pure case nobody can hold. ⛔ AND IT EXPLAINS THE VEILWRIGHTS: they are the one people working the pure form directly, which is why their craft is rare, why it is dangerous, and why thinning the Veil opens a breach rather than a door."
+ },
+ "theFourFields": {
+  "precursor_lattice": {
+   "densestWhere": "⛔ where Precursor lines and structures are — buried relay, waygate, seamless join",
+   "map": "substrateDensity, 0.12–0.98 across 39 regions. The Gearlands 0.98, the Quickwood 0.12.",
+   "static": true,
+   "note": "⚠️ It does not move and nobody makes more of it."
+  },
+  "ordered_nanite": {
+   "densestWhere": "⛔ where HUMAN ACTIVITY WAS — old works, cities, roads, yards, anywhere people processed things",
+   "static": false,
+   "note": "⚠️ Distinct from the lattice and mapped separately. `naniteField.byRegion` already carries state ordered/wild/clear across 39 regions."
+  },
+  "wild_nanite": {
+   "densestWhere": "same origin as ordered — ungoverned rather than absent",
+   "static": false,
+   "note": "⛔ NOT A DIFFERENT SUBSTANCE. The same nanites, differently processed."
+  },
+  "metaphysical": {
+   "densestWhere": "⛔ AT NEXUSES, AND A NEXUS CAN COME FROM SEVERAL SOURCES. Erik: 'a Buddhist temple, a medicine wheel near a standing stone, a sacrificial altar, etc. NATURAL OR UNNATURAL.'\n⚠️ SO METAPHYSICAL DENSITY IS NOT A TERRAIN FUNCTION — it is a function of WHAT HAPPENED SOMEWHERE and what was built to mark it. A place is a nexus because of attention paid, not because of ground.",
+   "static": false,
+   "kinds": [
+    {
+     "kind": "natural",
+     "example": "a standing stone, a spring, a thin place, a peak",
+     "how": "the ground was already like that and people noticed"
+    },
+    {
+     "kind": "consecrated",
+     "example": "a temple, a medicine wheel, a burial field, a hall of vigil",
+     "how": "⚠️ MADE by sustained attention over time — the practice creates the nexus, not the architecture"
+    },
+    {
+     "kind": "forced",
+     "example": "⛔ a sacrificial altar, a massacre site, a place where something enormous was done at once",
+     "how": "made by a single act instead of long attention. ⚠️ Works, and is not the same as consecrated."
+    }
+   ],
+   "_resolves": "⛔ THIS ANSWERS SNG-444. I had three canon statements that could not all be true because I was scoring metaphysical against SUBSTRATE density. It has its own field and always did — that is why the Numinous live at 0.82 and are not contradicting themselves."
+  }
+ },
+ "theConversion": {
+  "_statement": "⛔ THE ORDERED/WILD SPLIT IS NOT A MAP FEATURE — IT IS A LIVE FACTIONAL ARGUMENT OVER ONE SHARED RESOURCE. Erik: 'Rootkin and Churnfolk tend to BREAK ORDERED NANITE DOWN INTO WILD as they use wild. Seraph and Enginewright do the opposite — ORDERING WILD while they use ordered nanite.'\n⚠️ THE FIELD IS THEREFORE CONTESTED GROUND THAT MOVES. Two peoples working the same valley for a season leave it measurably different, and neither has to attack anything to do it.",
+  "breakers": [
+   "rootkin",
+   "churnfolk"
+  ],
+  "orderers": [
+   "seraphic",
+   "enginewright"
+  ],
+  "_consequence": "⛔ THIS IS THE BEST THING ON THIS PAGE FOR PLAY. A Rootkin grove and an Enginewright works cannot share a district without one of them slowly losing their power source. ⚠️ No war declared, no villain — just two crafts that consume each other's fuel by existing. AND IT IS ALREADY HALF-AUTHORED: `naniteField.byRegion` reads ordered 21 · wild 10 · clear 8, and the 12 foothill regions I authored under SNG-414 set state per region for exactly this reason."
+ },
+ "_poleNaming": "⛔ ERIK: 'You can INVERT THE POLE NAME so that Order is still Chaos's antipole. Enginecraft falls out of order and nanite systems naturally. And the Latticework practice is using ORDERED NANITES TO BASICALLY REPRODUCE WHAT PRECURSOR SUBSTRATE IS AND DOES.'\n⚠️ SO THE TRADITION IS **ORDER**, not Mechanism, and Chaos keeps its antipode. Enginecraft and Latticework are its two sects — and Latticework is now precisely defined: HUMANS IMITATING THE LATTICE WITH NANITES. ⛔ Which makes the Lattice-Cities an act of homage to something that has never answered them."
+}

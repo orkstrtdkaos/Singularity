@@ -1087,7 +1087,6 @@
    "tradition": "enginewright",
    "functions": [
     "break",
-    "hinder",
     "strike"
    ],
    "challengeTypes": [
@@ -1120,13 +1119,11 @@
      "cannot": "Anything rank 3 adds — end what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved; it is PRECISION, not power.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_functionsWas": [
-      "reveal",
       "strike",
       "break",
       "hinder"
@@ -1139,13 +1136,11 @@
      "cannot": "Nothing further; this is the craft's ceiling; it is PRECISION, not power.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "deepen",
      "harmRung": "incapacitating",
      "_functionsWas": [
-      "reveal",
       "strike",
       "break",
       "hinder"
@@ -1201,10 +1196,10 @@
    "_functionsWas": [
     "break",
     "hinder",
-    "reveal",
     "strike"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_mechanical_defense",
@@ -1476,11 +1471,14 @@
      "grants": "Break a thing's significance so completely that those who relied on it lose orientation — the sacred desecrated in ways they feel immediately.",
      "cannot": "Anything rank 3 adds — withdraw numinous presence from an entire place or working — what meaning was sustaining simply stops, and what it held together comes apart; it drains MEANING, not function.",
      "functions": [
-      "hinder",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "hinder",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -1488,11 +1486,14 @@
      "grants": "Withdraw numinous presence from an entire place or working — what meaning was sustaining simply stops, and what it held together comes apart.",
      "cannot": "Nothing further; this is the craft's ceiling; it drains MEANING, not function; and it still costs what it costs: withdrawing meaning from a place takes YOURS TOO.",
      "functions": [
-      "hinder",
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "hinder",
+      "break"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1537,7 +1538,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A magical/intellectual/combat action that weakens or restricts a target. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: it drains Meaning, not function — the thing still exists and still works."
+   "plainly": "A magical/intellectual/combat action that weakens or restricts a target. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: it drains Meaning, not function — the thing still exists and still works.",
+   "_functionsWas": [
+    "break",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_weight_of_practice",
@@ -2062,9 +2068,9 @@
     "concrete_abstract": -0.2
    },
    "functions": [
-    "strike",
     "break",
-    "reveal"
+    "strike",
+    "summon"
    ],
    "narrationHints": "You thin the veil to a membrane where they are standing — and something on the other side, which has been waiting a very long time, gets a claw through. Then a tooth. Then more of itself. The wounds are real, wet, and shaped wrong.",
    "description": "Thin the veil to a membrane where a target is standing until something reaches through — a claw opens them shoulder to hip, a mouth takes a hand, acid comes through and does not stop eating. The Numinous first offense, and NOT the common one: most of the tradition works meaning, these few turn the same attention outward and find the actual membrane.",
@@ -2089,11 +2095,15 @@
      "cannot": "Sustaining means standing near an open hole with a hungry thing in it. ANYONE ELSE INSIDE THE THINNING IS STRUCK AT THE SAME RUNG. Things on that side talk to each other, and now some of them know your face.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -2103,11 +2113,16 @@
      "functions": [
       "strike",
       "break",
-      "hinder",
       "summon"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder",
+      "summon"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2154,7 +2169,13 @@
    "backlashRung": "incapacitating",
    "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
    "_schoolGateNote": "⛔ SNG-378 CORRECTED BY ERIK 2026-08-08: I gated this to the num_beyond school. WRONG. 'The power source doesn't gate — any Numinous can still pick it up, it just isn't as optimal.' ⚠️ SCHOOLS SET OPTIMALITY, NEVER ACCESS — which is what SNG-193's 'a school NEVER grants exclusive abilities' already said, and I broke it while flagging that I was breaking it. Any Numinous may learn this craft; a Beyond-Facing works it in thin ground at full strength and everyone else works it uphill.",
-   "_descriptionWas": "The Numinous first offense — and NOT the common one. Most of the tradition works meaning; these few turn the same attention outward and find the actual membrane. You thin it to a skin where they are standing, and something on the other side, which has been waiting a very long time, gets a claw through."
+   "_descriptionWas": "The Numinous first offense — and NOT the common one. Most of the tradition works meaning; these few turn the same attention outward and find the actual membrane. You thin it to a skin where they are standing, and something on the other side, which has been waiting a very long time, gets a claw through.",
+   "_functionsWas": [
+    "strike",
+    "break",
+    "reveal"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_seized_works",
@@ -2168,9 +2189,8 @@
     "concrete_abstract": 0.3
    },
    "functions": [
-    "strike",
     "break",
-    "hinder"
+    "strike"
    ],
    "narrationHints": "You do not stop the mechanism. You stop it AT LOAD — the drawn cord at release, the turning axle at speed, the pressure-vessel at full — and a made thing under strain that is suddenly told not to move puts all of it somewhere. Usually into the hand holding it.",
    "description": "Seize a worked mechanism at the moment of maximum strain — the crossbow's limbs come apart into the shooter's face, the buckle binds and the strap crushes, the winch's pawl snaps. The Enginewrights' first offense: force that cannot go where it was going goes into whoever is nearest.",
@@ -2195,11 +2215,15 @@
      "cannot": "A rival wright can feel this being done and answer it. And you have made everyone present distrust their own equipment, including your own — ANY ALLY RELYING ON A SEIZED MECHANISM IS STRUCK ONE RUNG LOWER.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -2208,12 +2232,16 @@
      "cannot": "⚠ A SYSTEM'S STORED FORCE DOES NOT DISCRIMINATE. This kills people who were operating it and often people who were only near it, and a mill is load-bearing for a village that had nothing to do with your fight.",
      "functions": [
       "strike",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
       "break",
       "hinder",
       "command"
-     ],
-     "gains": "deepen",
-     "harmRung": "lethal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2260,7 +2288,13 @@
    "conserveSuppresses": "one small piece, chosen and perceived — no stray seizing",
    "backlashRung": "damaging",
    "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
-   "_descriptionWas": "The Enginewrights' first offense: their own principle turned outward. Every mechanism stores force, and force that cannot go where it was going goes into whoever is nearest."
+   "_descriptionWas": "The Enginewrights' first offense: their own principle turned outward. Every mechanism stores force, and force that cannot go where it was going goes into whoever is nearest.",
+   "_functionsWas": [
+    "strike",
+    "break",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

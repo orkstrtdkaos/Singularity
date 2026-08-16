@@ -17,7 +17,6 @@
    },
    "functions": [
     "open",
-    "reveal",
     "sustain"
    ],
    "narrationHints": "You press your hand to the earth and it ANSWERS — the living current beneath everything stirring up to meet you, green and enormous and older than the nanites.",
@@ -41,11 +40,14 @@
      "grants": "Hold the waking through a scene rather than a moment, and feel BACK along it — the roused current reports what is rooted near it: who passed and how recently, what grows under the surface, what living thing lies buried and still breathing.",
      "cannot": "Feeling back is not seeing — you get presence and direction, never faces; the made and the dead remain absent from it; and holding the waking costs continuously.",
      "functions": [
-      "open",
-      "reveal"
+      "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "open",
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -54,11 +56,15 @@
      "cannot": "A district roused is a district AWAKE; the Rootkin hold that what you wake you tend, and the GM will name what the waking costs the land; ground worked too often goes sullen and answers slower, not faster.",
      "functions": [
       "open",
-      "reveal",
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "open",
+      "reveal",
+      "sustain"
+     ]
     }
    ],
    "gated": "learned",
@@ -108,7 +114,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "An action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends duration; rank 3 extends scope. Limit: it touches Only The Living Substrate and answers only a true channel."
+   "plainly": "An action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends duration; rank 3 extends scope. Limit: it touches Only The Living Substrate and answers only a true channel.",
+   "_functionsWas": [
+    "open",
+    "reveal",
+    "sustain"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,

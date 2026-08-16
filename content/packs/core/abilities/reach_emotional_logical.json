@@ -1017,125 +1017,6 @@
    "plainly": "A endurance/hardship/social action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: it sustains by Feeling, not by easing — a person who wants comfort gets depth instead."
   },
   {
-   "id": "the_correct_protocol",
-   "name": "The Correct Protocol",
-   "levelReq": 2,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "emotional_logical": 0.4
-   },
-   "effectTags": [
-    "diagnosis",
-    "treatment",
-    "precision"
-   ],
-   "harmRung": "none",
-   "narrationHints": "He knew exactly what was wrong. The treatment followed.",
-   "description": "Heal through precise diagnosis and correct procedure — the methodical application of what is known to work.",
-   "notFor": [],
-   "tradition": "syllogist",
-   "functions": [
-    "heal",
-    "mend",
-    "restore",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "medical",
-    "craft",
-    "intellectual"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Correct Diagnosis",
-     "grants": "Diagnose and treat through methodical application of what is known to work — no guesswork, no comfort, the correct intervention.",
-     "cannot": "Anything rank 2 adds — restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out; NO GUESSWORK, NO COMFORT.",
-     "functions": [
-      "reveal",
-      "heal"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "By Protocol",
-     "grants": "Restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out.",
-     "cannot": "Anything rank 3 adds — restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left; NO GUESSWORK, NO COMFORT.",
-     "functions": [
-      "reveal",
-      "heal",
-      "mend",
-      "restore"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "Root Cause",
-     "grants": "Restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left.",
-     "cannot": "Nothing further; this is the craft's ceiling; NO GUESSWORK, NO COMFORT.",
-     "functions": [
-      "reveal",
-      "heal",
-      "mend",
-      "restore"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
-    }
-   ],
-   "nativeOrCombination": "native",
-   "shape": "healing",
-   "operativeAxis": [
-    "precision",
-    "completeness"
-   ],
-   "mechanic": {
-    "dice": {
-     "n": 2,
-     "d": 4
-    },
-    "plus": 2,
-    "note": "A TWELFTH THEORY OF MEDICINE — PROTOCOL: 'no guesswork, no comfort, THE CORRECT INTERVENTION.'"
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "completeness",
-     "delta": "restore THROUGH PROPER SEQUENCE — the correct actions IN THE CORRECT ORDER return the body or system to function",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: restore completely by identifying THE UNDERLYING CAUSE and applying THE FULL CHAIN of correct interventions",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "the correct minimum — half the restoration, and nothing is wasted",
-    "surge": "double it; the correct intervention is CORRECT, not KIND"
-   },
-   "bounds": [
-    {
-     "text": "NO GUESSWORK, NO COMFORT — it does not soothe and does not pretend to",
-     "class": "hard"
-    },
-    {
-     "text": "it requires that the correct protocol IS KNOWN — a novel affliction defeats it",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A medical/craft/intellectual action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens completeness; rank 3 adds to special. Limit: nO Guesswork, NO Comfort — it does not soothe and does not pretend to."
-  },
-  {
    "id": "the_proved_position",
    "name": "The Proved Position",
    "levelReq": 2,
@@ -1363,120 +1244,6 @@
    "plainly": "A intellectual/leadership/craft action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 adds to autonomy; rank 3 extends scope. Limit: iT Runs ON Its Logic — a system whose logic is unsound fails exactly where the flaw is."
   },
   {
-   "id": "the_derived_route",
-   "name": "The Derived Route",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "emotional_logical": 0.3
-   },
-   "effectTags": [
-    "navigation",
-    "reasoning",
-    "inference"
-   ],
-   "harmRung": "none",
-   "narrationHints": "He hadn't walked it. He had worked it out.",
-   "description": "Navigate through pure reasoning — derive the correct path from what you know before taking a step.",
-   "notFor": [],
-   "tradition": "syllogist",
-   "functions": [
-    "foresee",
-    "move",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "navigation",
-    "intellectual",
-    "tactical"
-   ],
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Reasoned Path",
-     "grants": "Navigate any space by reasoning about it — what must be true about the layout, the route, the exits — without needing to see it first.",
-     "cannot": "Anything rank 2 adds — derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits; it needs SOUND PREMISES.",
-     "functions": [
-      "reveal",
-      "move"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "Inferred Route",
-     "grants": "Derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits.",
-     "cannot": "Anything rank 3 adds — navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires; it needs SOUND PREMISES.",
-     "functions": [
-      "reveal",
-      "move",
-      "foresee"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "The Necessary Route",
-     "grants": "Navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires.",
-     "cannot": "Nothing further; this is the craft's ceiling; it needs SOUND PREMISES.",
-     "functions": [
-      "reveal",
-      "move",
-      "foresee"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
-    }
-   ],
-   "nativeOrCombination": "native",
-   "shape": "reposition",
-   "operativeAxis": [
-    "navigation",
-    "range"
-   ],
-   "mechanic": {
-    "range": 12,
-    "push": 0,
-    "magnitude": 4,
-    "duration": 3
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "navigation",
-     "delta": "DERIVE the correct path through UNKNOWN territory BY INFERENCE — from what you know about the type of space",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: navigate to ANY CONCLUSION THAT FOLLOWS NECESSARILY from known premises — the route that MUST exist, the exit that MUST be there",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "reason it out — half the certainty, and it costs nothing",
-    "surge": "double it; a route that MUST exist by inference still has to actually be there"
-   },
-   "bounds": [
-    {
-     "text": "it needs SOUND PREMISES — reasoning from a wrong assumption arrives confidently at nowhere",
-     "class": "hard"
-    },
-    {
-     "text": "a route that MUST exist BY INFERENCE still has to actually BE THERE",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A navigation/intellectual/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 3 hours. Range is 12. Ranks: rank 2 deepens navigation; rank 3 adds to special. Limit: it needs Sound Premises — reasoning from a wrong assumption arrives confidently at nowhere."
-  },
-  {
    "id": "the_axiom_holds",
    "name": "The Axiom Holds",
    "levelReq": 1,
@@ -1597,8 +1364,8 @@
     "emotional_logical": 0.6
    },
    "functions": [
-    "bind",
-    "reveal"
+    "persuade",
+    "bind"
    ],
    "narrationHints": "You lay the premises down one at a time, each one they must agree to, until they arrive — of their own reasoning — at a conclusion they would have run from if they'd seen it coming.",
    "description": "Lay premises down one at a time, each one they must agree to, until they arrive by their own reasoning at a conclusion they would have fled. The Syllogist art of the inescapable argument — and the trap is that it is TRUE.",
@@ -1610,11 +1377,15 @@
      "grants": "Bind a reasoning mind to a conclusion by an argument it cannot honestly escape.",
      "cannot": "It fails against those who refuse reason itself, it binds its wielder to the same truth, and a conclusion someone was walked into by force of logic can curdle into resentment of the one who walked them.",
      "functions": [
-      "bind",
-      "reveal"
+      "persuade",
+      "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "bind",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1622,11 +1393,15 @@
      "grants": "Walk a whole body of reasoning minds to the same conclusion at once — a council, a court, a school — and the binding holds against later private doubt, because each of them watched the others agree. The chain can be built across days now rather than one exchange.",
      "cannot": "It still fails entirely against those who will simply refuse a true conclusion, and a group holds more of them than a person does. It binds you to the same truth, publicly and on the record. And a conclusion a body was walked into together curdles together — the Syllogists have begun more than one schism this way.",
      "functions": [
-      "bind",
-      "reveal"
+      "persuade",
+      "bind"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "bind",
+      "reveal"
+     ]
     }
    ],
    "gated": "learned",
@@ -1672,80 +1447,12 @@
     }
    ],
    "plainly": "A social/investigate action that weakens or restricts a target. Its strength is rated 7 out of 10 It affects 1 target, and lasts for about 6 hours Ranks: rank 2 extends targets. Limit: iT Fails Against Those Who Refuse Reason Itself.",
-   "_descriptionWas": "The Syllogist art of the inescapable argument — a chain of reasoning so sound that agreeing to the start compels agreeing to the end, binding a mind by its own logic. Not deception; the opposite. The trap is that it is TRUE."
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_proof",
-   "name": "The Proof",
-   "levelReq": 5,
-   "energyCost": 13,
-   "powerSystem": "reach_emotional_logical",
-   "tradition": "syllogist",
-   "attribute": "mental",
-   "axes": {
-    "emotional_logical": 0.9
-   },
-   "functions": [
+   "_descriptionWas": "The Syllogist art of the inescapable argument — a chain of reasoning so sound that agreeing to the start compels agreeing to the end, binding a mind by its own logic. Not deception; the opposite. The trap is that it is TRUE.",
+   "_functionsWas": [
+    "bind",
     "reveal"
    ],
-   "narrationHints": "You assemble it whole — the complete proof, every step airtight, of a thing that is simply TRUE — and lay it before the world, and the world has no honest answer but to accept it.",
-   "description": "The Syllogist capstone — a complete, irrefutable proof of a true thing, assembled and offered so soundly that no honest mind can deny it. The deepest gift of the logical kind, and the loneliest: to be right past all argument is to be right, often, alone.",
-   "notFor": "One proof, once, at enormous cost — it can only prove what is actually true; there is no proof of a falsehood, only clever forgery that the next sound mind unpicks. And a proof, once offered, is loose in the world; you cannot un-prove a thing.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Proof",
-     "grants": "Assemble and offer a complete, irrefutable proof of a true thing.",
-     "cannot": "It proves only the true, it costs nearly all you have, and to be irrefutably right is a lonely country — the proof convinces, but conviction is not love.",
-     "functions": [
-      "reveal"
-     ],
-     "harmRung": "none",
-     "gains": "broaden"
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "INVESTIGATE",
-    "SOCIAL"
-   ],
-   "harmRung": "none",
-   "shape": "setup",
-   "operativeAxis": [
-    "completeness",
-    "penetration"
-   ],
-   "mechanic": {
-    "magnitude": 9,
-    "duration": 2,
-    "damageType": "reason"
-   },
-   "rankDeltas": [
-    {
-     "rank": 1,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: ASSEMBLE AND OFFER A COMPLETE, IRREFUTABLE PROOF of a true thing. The capstone is a KIND (irrefutability itself) at near-total cost.",
-     "from": "r1 grants — single-rank capstone"
-    }
-   ],
-   "intensity": {
-    "conserve": "REFUSED — a partial proof is an argument, and arguments are what the Cathedral survives.",
-    "surge": "REFUSED — it already costs nearly all you have."
-   },
-   "bounds": [
-    {
-     "text": "IT PROVES ONLY THE TRUE",
-     "class": "hard"
-    },
-    {
-     "text": "it costs your whole remaining energy pool and leaves you at zero, unable to use any craft until you rest a full night",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A investigate/social action that reveals information or sets up a later action. Its strength is rated 9 out of 10, and lasts for about 2 hours Limit: iT Proves Only The True."
+   "_retag": "⛔ SNG-450: retagged SOCIAL. This is persuasion and was filed as reveal/bind."
   },
   {
    "schemaVersion": 1,
@@ -2122,7 +1829,7 @@
     "emotional_logical": 0.8
    },
    "functions": [
-    "reveal",
+    "persuade",
     "bind"
    ],
    "narrationHints": "Every step is one they agreed to. That is what makes the last step impossible to refuse.",
@@ -2135,11 +1842,15 @@
      "grants": "Walk them, honestly, to a conclusion that unmakes their footing. They cannot act against it while it holds.",
      "cannot": "A false premise. Anyone who refuses to follow.",
      "functions": [
-      "reveal",
+      "persuade",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 2,
@@ -2147,11 +1858,15 @@
      "grants": "Reach the conclusion where the consistent act is a final one — and STOP TALKING. What they do next is theirs.",
      "cannot": "Making them. It is their hand and both of you know it.",
      "functions": [
-      "reveal",
+      "persuade",
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2199,7 +1914,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social contest against the target's resolve. You must be able to state a sound argument from something they already believe — the GM judges soundness, and an unsound argument fails automatically. On a win they cannot act against that conclusion for the rest of the scene. At rank 2, if the conclusion is that a final act is the only consistent one, the GM decides whether the target performs it; you never roll for that part. The target may disengage from the conversation at any time, and anyone who refuses to reason is immune outright."
+   "plainly": "A social contest against the target's resolve. You must be able to state a sound argument from something they already believe — the GM judges soundness, and an unsound argument fails automatically. On a win they cannot act against that conclusion for the rest of the scene. At rank 2, if the conclusion is that a final act is the only consistent one, the GM decides whether the target performs it; you never roll for that part. The target may disengage from the conversation at any time, and anyone who refuses to reason is immune outright.",
+   "_functionsWas": [
+    "reveal",
+    "bind"
+   ],
+   "_retag": "⛔ SNG-450: retagged SOCIAL. This is persuasion and was filed as reveal/bind."
   },
   {
    "id": "the_keening",
@@ -2599,199 +2319,9 @@
    ],
    "plainly": "A social action that transfers part of someone's grief onto you. Rated 6 of 10 on one target for about twelve hours.",
    "_descriptionWas": "The Threnodists' mercy, and it is a real one because it is not free. Grief-singers are the people who will hold your share."
-  },
-  {
-   "id": "the_stated_case",
-   "name": "The Stated Case",
-   "levelReq": 1,
-   "energyCost": 4,
-   "powerSystem": "reach_emotional_logical",
-   "attribute": "mental",
-   "axes": {
-    "emotional_logical": 0.6
-   },
-   "functions": [
-    "reveal",
-    "command"
-   ],
-   "narrationHints": "You lay a matter out so completely that the conclusion is simply visible, and there is nothing left to argue about — not because you won, but because the shape of it is now in the room.",
-   "description": "Set a matter out in full to people willing to follow, until the conclusion is simply visible and there is nothing left to argue. Disputes resolve, councils decide, a wrong belief comes apart without anyone humiliated. The Syllogists' building-craft.",
-   "notFor": "Making a false case hold (a Syllogist who does this is a Veilwright and is treated as one); convincing people who do not care about being right; brevity.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Laid-Out Case",
-     "grants": "Set a matter out in full to people willing to follow. Disputes resolve; a council decides; a wrong belief comes apart without anyone being humiliated.",
-     "cannot": "It needs TIME and an audience that will follow reasoning. The uninterested, the frightened, and the paid are immune. And the case must be SOUND — you cannot build this out of nothing.",
-     "functions": [
-      "reveal",
-      "command"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "The Standing Argument",
-     "grants": "Build it to last — write it, teach it, leave it. It goes on convincing people after you have left the room.",
-     "cannot": "A standing argument can be answered by a better one, and you have given them the shape to answer. Syllogists consider that a feature.",
-     "functions": [
-      "reveal",
-      "command",
-      "empower"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "The Settled Question",
-     "grants": "A case so complete a community stops relitigating it. Feuds end this way; so do bad laws.",
-     "cannot": "⚠ A SETTLED QUESTION SETTLES FOR EVERYONE, including people who were living well off it being open. And the Grand Lattice regards settled questions as their own property.",
-     "functions": [
-      "reveal",
-      "command",
-      "empower",
-      "bind"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
-    }
-   ],
-   "challengeTypes": [
-    "SOCIAL",
-    "PUZZLE"
-   ],
-   "tradition": "syllogist",
-   "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
-   "shape": "reveal",
-   "operativeAxis": [
-    "duration",
-    "scope"
-   ],
-   "mechanic": {
-    "magnitude": 5,
-    "duration": 24,
-    "scope": 2
-   },
-   "intensity": {
-    "conserve": "state the narrow case",
-    "surge": "settle the question; IT SETTLES FOR EVERYONE, including those living off it being open"
-   },
-   "bounds": [
-    {
-     "text": "needs TIME and an audience that will follow",
-     "class": "hard"
-    },
-    {
-     "text": "the case must be SOUND — you cannot build it from nothing",
-     "class": "hard"
-    },
-    {
-     "text": "the uninterested, the frightened and the PAID are immune",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A social/puzzle action that resolves a dispute by laying the whole case out. Rated 5 of 10 across a scope of 2 for about a day.",
-   "_descriptionWas": "The Syllogists' building-craft, opposite to their unmaking one: not the flaw named, but the case made."
-  },
-  {
-   "id": "the_followed_thread",
-   "name": "The Followed Thread",
-   "levelReq": 1,
-   "energyCost": 4,
-   "powerSystem": "reach_emotional_logical",
-   "attribute": "mental",
-   "axes": {
-    "emotional_logical": 0.5,
-    "falsehood_truth": 0.3
-   },
-   "functions": [
-    "foresee",
-    "reveal"
-   ],
-   "narrationHints": "Given what is true now, you follow it to what must therefore be true. Not prophecy — CONSEQUENCE. The world is more determined than people find comfortable, and Syllogists find that restful.",
-   "description": "From what you actually know, name what must follow — the shortage three weeks out, the betrayal the arrangement requires, the collapse the load implies. The Syllogists' seeing-craft: not prophecy, CONSEQUENCE.",
-   "notFor": "Anything genuinely undetermined (a free choice not yet made, a Churn-touched outcome); working from premises you have not checked; certainty about people.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Next Step",
-     "grants": "From what you actually know, name what must follow — the shortage three weeks out, the betrayal the arrangement requires, the collapse the load implies.",
-     "cannot": "GARBAGE IN. A wrong premise gives a confident wrong answer, and this craft does not feel any different when it is wrong. Free choices break the thread.",
-     "functions": [
-      "foresee",
-      "reveal"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 2,
-     "name": "The Long Thread",
-     "grants": "Follow it further, through several turns, and see where a situation is actually going rather than where everyone says it is.",
-     "cannot": "Each step multiplies the error in your premises. Syllogists state their confidence out loud for this reason, and are trusted because of it.",
-     "functions": [
-      "foresee",
-      "reveal"
-     ],
-     "gains": "broaden",
-     "harmRung": "none"
-    },
-    {
-     "rank": 3,
-     "name": "The Whole Consequence",
-     "grants": "The full downstream shape of a present fact — who is ruined, who profits, what ends, what must be built.",
-     "cannot": "⚠ KNOWING IS NOT PREVENTING, and you will often be the only person who saw it and was not believed. That is the Syllogist's characteristic and unglamorous suffering.",
-     "functions": [
-      "foresee",
-      "reveal",
-      "empower"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
-    }
-   ],
-   "challengeTypes": [
-    "PUZZLE",
-    "SOCIAL"
-   ],
-   "tradition": "syllogist",
-   "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
-   "shape": "foresee",
-   "operativeAxis": [
-    "precision",
-    "duration"
-   ],
-   "mechanic": {
-    "magnitude": 5,
-    "duration": 6,
-    "scope": 1
-   },
-   "intensity": {
-    "conserve": "one step forward",
-    "surge": "the whole consequence; KNOWING IS NOT PREVENTING and you will not be believed"
-   },
-   "bounds": [
-    {
-     "text": "GARBAGE IN — a wrong premise gives a confident wrong answer",
-     "class": "hard"
-    },
-    {
-     "text": "FREE CHOICES break the thread",
-     "class": "hard"
-    },
-    {
-     "text": "error compounds with each step",
-     "class": "soft"
-    }
-   ],
-   "plainly": "A puzzle/social action that derives what must follow from what is true now. Rated 5 of 10 on one target for about six hours.",
-   "_descriptionWas": "The Syllogists' seeing-craft: inference run far enough forward to arrive before the event does."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
- "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`."
+ "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
+ "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json."
 }

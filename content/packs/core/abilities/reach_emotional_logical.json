@@ -18,8 +18,7 @@
    "functions": [
     "command",
     "empower",
-    "heal",
-    "reveal"
+    "heal"
    ],
    "narrationHints": "Feeling made a force — the true emotion of a room surfaced, a grief shared and eased, a passion kindled or cooled by one who feels it first and hardest.",
    "description": "Feel the true emotion under a room or a person past what they show, share a feeling so it eases, and kindle a genuine passion in the willing. The emotional-pole mastery — not manipulation, resonance.",
@@ -31,11 +30,14 @@
      "grants": "Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.",
      "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it.",
      "functions": [
-      "reveal",
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "heal"
+     ]
     },
     {
      "rank": 2,
@@ -43,13 +45,18 @@
      "grants": "Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.",
      "cannot": "You take on what you move — the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it.",
      "functions": [
-      "reveal",
       "heal",
       "empower",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "heal",
+      "empower",
+      "command"
+     ]
     },
     {
      "rank": 3,
@@ -57,13 +64,18 @@
      "grants": "Feeling at the scale of peoples — turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.",
      "cannot": "The wielder drifts emotion-hot — feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling.",
      "functions": [
-      "reveal",
       "heal",
       "empower",
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "heal",
+      "empower",
+      "command"
+     ]
     }
    ],
    "challengeTypes": [
@@ -122,7 +134,14 @@
     }
    ],
    "plainly": "A social/fight action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: a Will Set Against You IS Set Against You.",
-   "_descriptionWas": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation — resonance; the Deepfeelers' art."
+   "_descriptionWas": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation — resonance; the Deepfeelers' art.",
+   "_functionsWas": [
+    "command",
+    "empower",
+    "heal",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "logos",
@@ -138,7 +157,6 @@
    "functions": [
     "bind",
     "break",
-    "reveal",
     "strike"
    ],
    "narrationHints": "Reason made a force — an argument that lands like a blow, a contradiction exposed, a conclusion so clean it changes what people must do.",
@@ -151,11 +169,14 @@
      "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
      "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false.",
      "functions": [
-      "reveal",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 2,
@@ -163,11 +184,14 @@
      "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
      "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force.",
      "functions": [
-      "reveal",
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -175,13 +199,18 @@
      "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it reorganises what everyone present thought they knew. And turned on one person: a contradiction opened in what they have built themselves on, which does not wound the body and takes the ground out from under them all the same. They will keep standing. They will not keep believing.",
      "cannot": "It needs something true to work with — Logos cannot prove a falsehood, only forge one that the next sound mind unpicks. It fails against those who will simply refuse a true conclusion. And the Syllogists hold that a person you have taken apart this way is owed the time to rebuild, which is a debt many of them do not pay.",
      "functions": [
-      "reveal",
       "bind",
       "break",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "reveal",
+      "bind",
+      "break",
+      "strike"
+     ]
     }
    ],
    "challengeTypes": [
@@ -249,7 +278,14 @@
    "plainly": "A social/fight/puzzle action that deals damage. It rolls 2d6 reason damage across a scope of 2 Ranks: rank 2 deepens damage; rank 3 extends scope. Limit: the Unreasonable And The Emotion-Ruled Resist.",
    "_descriptionWas": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
    "_markedForRemoval": "⛔ SNG-453, ERIK'S RULING: 'Those MYSTERIES WERE NON-EXISTENT — leave a reminder to fill in if we get so inspired, but MARK THEM FOR REMOVAL in the meantime.'\n⚠️ Logos is the sect's namesake 'pole mastery' and its ranks summarise the whole sect rather than doing anything — r1 duplicates two or three other abilities in its own sect. ⛔ IF THE MYSTERY IS EVER AUTHORED, THIS IS WHERE IT ATTACHES: a mystery should be the thing the tradition knows that nobody else does, not a digest of its skill list.",
-   "status": "marked-for-removal"
+   "status": "marked-for-removal",
+   "_functionsWas": [
+    "bind",
+    "break",
+    "reveal",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_turning_word",
@@ -262,8 +298,7 @@
    },
    "functions": [
     "bind",
-    "heal",
-    "reveal"
+    "heal"
    ],
    "narrationHints": "The room turns — a crowd, a court, a mob — moved as one by the exact true thing said the exact right way.",
    "description": "The social capstone: move a whole gathering at once — turn a hostile crowd, sway a council, stop a mob — by finding and speaking the one thing that reaches all of them. Pathos and Logos fused into mass persuasion.",
@@ -275,11 +310,14 @@
      "grants": "Turn a crowd or council decisively — the room moves as one when you find the word that reaches them.",
      "cannot": "Needs a real shared chord to strike; a crowd set immovably resists; you feel/carry what you move.",
      "functions": [
-      "bind",
-      "reveal"
+      "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "bind",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -288,11 +326,15 @@
      "cannot": "A chord you made is a chord you are answerable for; the Rhetors hold that inventing a commonality is how peoples are built and also how they are ruined. It still cannot move a will genuinely set. And you carry what you move for as long as it stays moved.",
      "functions": [
       "bind",
-      "heal",
-      "reveal"
+      "heal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "bind",
+      "heal",
+      "reveal"
+     ]
     }
    ],
    "powerSystem": "reach_emotional_logical",
@@ -338,7 +380,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social action, and it needs two poles: threnodist and syllogist together. You turn an entire crowd or council at once by finding the one thing they all already feel and saying it. It needs a real shared chord to strike — a crowd with nothing in common cannot be turned, and the craft fails outright rather than working weakly. And you are answerable for what you struck: a room you turned toward something will hold you responsible for where it goes, which is a debt that outlasts the scene."
+   "plainly": "A social action, and it needs two poles: threnodist and syllogist together. You turn an entire crowd or council at once by finding the one thing they all already feel and saying it. It needs a real shared chord to strike — a crowd with nothing in common cannot be turned, and the craft fails outright rather than working weakly. And you are answerable for what you struck: a room you turned toward something will hold you responsible for where it goes, which is a debt that outlasts the scene.",
+   "_functionsWas": [
+    "bind",
+    "heal",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_grief_strike",
@@ -476,7 +524,7 @@
    "notFor": [],
    "tradition": "threnodist",
    "functions": [
-    "foresee",
+    "reveal",
     "shield"
    ],
    "challengeTypes": [
@@ -491,10 +539,13 @@
      "grants": "Feel a threat forming in a room's emotional weather — in a person's shifting feeling-state — in time to move before the action completes.",
      "cannot": "Anything rank 2 adds — protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch; it senses INTENT.",
      "functions": [
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -502,11 +553,14 @@
      "grants": "Protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch.",
      "cannot": "Anything rank 3 adds — what shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives; it senses INTENT.",
      "functions": [
-      "foresee",
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee",
+      "shield"
+     ]
     },
     {
      "rank": 3,
@@ -514,11 +568,14 @@
      "grants": "What shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives.",
      "cannot": "Nothing further; this is the craft's ceiling; it senses INTENT; and it still costs what it costs: feeling every shift toward harm means FEELING EVERY SHIFT.",
      "functions": [
-      "foresee",
       "shield"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee",
+      "shield"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -567,7 +624,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it senses Intent — a rockfall, a machine, or an animal has no feeling to read."
+   "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it senses Intent — a rockfall, a machine, or an animal has no feeling to read.",
+   "_functionsWas": [
+    "foresee",
+    "shield"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_made_elegy",
@@ -702,7 +764,6 @@
    "tradition": "threnodist",
    "functions": [
     "reveal",
-    "track",
     "travel"
    ],
    "challengeTypes": [
@@ -717,11 +778,14 @@
      "grants": "Navigate toward a feeling — find a person, a place, or a source by following the emotional trace they leave across a space.",
      "cannot": "Anything rank 2 adds — travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it; it follows FEELING.",
      "functions": [
-      "reveal",
-      "track"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "track"
+     ]
     },
     {
      "rank": 2,
@@ -729,12 +793,15 @@
      "grants": "Travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it.",
      "cannot": "Anything rank 3 adds — follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community; it follows FEELING.",
      "functions": [
-      "reveal",
-      "track",
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "track",
+      "travel"
+     ]
     },
     {
      "rank": 3,
@@ -742,12 +809,15 @@
      "grants": "Follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community.",
      "cannot": "Nothing further; this is the craft's ceiling; it follows FEELING; and it still costs what it costs: arriving at the source of a great feeling means ARRIVING AT ITS SOURCE.",
      "functions": [
-      "reveal",
-      "track",
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "track",
+      "travel"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -792,7 +862,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A navigation/investigation/social action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 4 hours. Range is 50. Ranks: rank 2 extends range; rank 3 extends range. Limit: it follows Feeling — a person who feels nothing about where they went leaves no road."
+   "plainly": "A navigation/investigation/social action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 4 hours. Range is 50. Ranks: rank 2 extends range; rank 3 extends range. Limit: it follows Feeling — a person who feels nothing about where they went leaves no road.",
+   "_functionsWas": [
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_wellspring",
@@ -1302,11 +1378,14 @@
      "grants": "Hold a lament across days rather than a night, and across a settlement rather than a room — a whole community may carry one loss together until it is bearable. The gathering-point can be handed to another singer, so the lament outlasts any one voice.",
      "cannot": "You hold the gathering while you hold the lament, and days of it mark the singer; handing the point on requires a singer able to take it; and a grief carried by everyone becomes part of what that place IS — the GM records it in the world, not the character.",
      "functions": [
-      "empower",
-      "reveal"
+      "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "empower",
+      "reveal"
+     ]
     }
    ],
    "gated": "learned",
@@ -1361,7 +1440,12 @@
     }
    ],
    "plainly": "A social action that strengthens someone. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens distribution; rank 3 extends scope+duration. Limit: iT Cannot Remove Grief, Only Distribute Its Weight.",
-   "_descriptionWas": "The Threnodist art of the shared lament — a song of grief that lets many carry one sorrow together, so no single heart bears the whole. The mourning-singers' first true gift."
+   "_descriptionWas": "The Threnodist art of the shared lament — a song of grief that lets many carry one sorrow together, so no single heart bears the whole. The mourning-singers' first true gift.",
+   "_functionsWas": [
+    "empower",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -1377,8 +1461,7 @@
     "death_life": 0.2
    },
    "functions": [
-    "empower",
-    "reveal"
+    "empower"
    ],
    "narrationHints": "You sing the names — all of them, every one lost — and for the length of the song they are not gone, exactly; they are HELD, present in the keeping of their names.",
    "description": "Sing the names of the lost — all of them — and for the length of the song they are held present rather than gone. The Threnodist naming-song, and the deep work of those who refuse to let go be the same as forget.",
@@ -1390,11 +1473,14 @@
      "grants": "Sing the names of the lost, holding them present in memory for the length of the lament.",
      "cannot": "It cannot restore the dead, only attend them; it lays every named loss on the singer at once; and the song ends, and they are gone again, and you chose to feel that twice.",
      "functions": [
-      "empower",
-      "reveal"
+      "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "empower",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1402,11 +1488,14 @@
      "grants": "The names keep past the lament. Sung over a place — a barrow, a battlefield, a hall — the attending holds without you, and any who come after feel the lost attended there. The song can hold names you were told rather than only names you carried yourself. Those who hear the names are strengthened by the attending — steadied, clearer about what they are doing and why, and harder to move off it.",
      "cannot": "It still does not return them; a name kept is not a life restored. A place that holds its lost is a place that does not move on, which is not always mercy. And a name taken from another's telling is held on trust — sing one wrong and the Threnodists count it a wound.",
      "functions": [
-      "empower",
-      "reveal"
+      "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "empower",
+      "reveal"
+     ]
     }
    ],
    "gated": "learned",
@@ -1449,7 +1538,12 @@
     }
    ],
    "plainly": "A social action that strengthens someone. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 30 days Ranks: rank 2 adds to persistence. Limit: iT Cannot Restore The Dead, Only Attend Them.",
-   "_descriptionWas": "The Threnodist art of the naming-song — a lament that holds the lost present through the keeping of their names, so that for a while the dead are not absent but attended. The deep work of those who refuse to let go be the same as forget."
+   "_descriptionWas": "The Threnodist art of the naming-song — a lament that holds the lost present through the keeping of their names, so that for a while the dead are not absent but attended. The deep work of those who refuse to let go be the same as forget.",
+   "_functionsWas": [
+    "empower",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -1836,8 +1930,9 @@
     "falsehood_truth": 0.2
    },
    "functions": [
-    "hinder",
-    "break"
+    "bind",
+    "break",
+    "hinder"
    ],
    "narrationHints": "You name the flaw in what someone is doing WHILE they are doing it, and the doing comes apart. Not a taunt — a demonstration. Spoken, precise, and only ever second.",
    "description": "Interrupt an action by naming its actual error out loud while it is happening — the plan with the gap, the boast with the hole, the ritual with the wrong step — and the move falters. The Syllogists' first offense, and the only one that cannot start a fight.",
@@ -1876,11 +1971,16 @@
      "functions": [
       "hinder",
       "break",
-      "bind",
-      "reveal"
+      "bind"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "hinder",
+      "break",
+      "bind",
+      "reveal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1938,7 +2038,12 @@
     "duration": 2,
     "scope": 1
    },
-   "_diceFix": "⚠️ SNG-453: shape `hinder` — it halts rather than wounds, so 1d4; the value is the interrupt, not the number."
+   "_diceFix": "⚠️ SNG-453: shape `hinder` — it halts rather than wounds, so 1d4; the value is the interrupt, not the number.",
+   "_functionsWas": [
+    "hinder",
+    "break"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_carried_name",
@@ -1951,7 +2056,7 @@
     "emotional_logical": -0.5
    },
    "functions": [
-    "reveal",
+    "bind",
     "sustain"
    ],
    "narrationHints": "You hold a dead person's name the way a room holds a struck bell. Speak it and what they were comes back into the space — not a ghost, a WEIGHT. People remember correctly for as long as you hold it.",
@@ -1964,11 +2069,14 @@
      "grants": "Speak a name you carry and the room remembers that person as they WERE — not the softened version, not the useful version. Lies about the dead do not hold while you hold the name.",
      "cannot": "You must have KNOWN them or been told truly. It corrects memory; it does not summon. And what returns is accurate, which is sometimes worse for everyone present.",
      "functions": [
-      "reveal",
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "sustain"
+     ]
     },
     {
      "rank": 2,
@@ -1976,12 +2084,16 @@
      "grants": "Hold several, or hold one long enough that a place keeps them — a threshold, a stone, a hall that will not let the name go crooked.",
      "cannot": "Holding costs, and the names you carry do not leave you between uses. A Threnodist knows exactly how many they hold.",
      "functions": [
-      "reveal",
       "sustain",
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "sustain",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -1989,12 +2101,16 @@
      "grants": "Everyone a place has lost, held at once, correctly. Communities have changed their minds about their own history under this.",
      "cannot": "You are carrying all of it while you hold it. And an honest accounting of a place's dead will name people that place decided to forget on purpose.",
      "functions": [
-      "reveal",
       "sustain",
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "sustain",
+      "bind"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2033,7 +2149,12 @@
     }
    ],
    "plainly": "A social/puzzle action that makes a place remember a dead person accurately. Rated 4 of 10 across a scope of 2 for about eight hours.",
-   "_descriptionWas": "The Threnodists' keeping-craft. The dead are forgotten wrong before they are forgotten entirely, and this is the answer to the first part."
+   "_descriptionWas": "The Threnodists' keeping-craft. The dead are forgotten wrong before they are forgotten entirely, and this is the answer to the first part.",
+   "_functionsWas": [
+    "reveal",
+    "sustain"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_shared_weight",

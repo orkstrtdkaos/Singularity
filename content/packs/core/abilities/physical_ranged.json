@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "physical_ranged",
  "kind": "content",
- "note": "⛔ SNG-440. PHYSICAL RANGED CRAFT — Erik: 'I want more physical skills. Some can use agility, such as throwing knives, stars, stones. Some should be bow or crossbow style. Some are various raw power thrown.'\n⚠️ MEASURED FIRST: of 376 abilities, only 45 are `physical` (12%, against 161 mental), and exactly ONE was a genuine ranged physical attack. 21 of 31 traditions have NO physical ability at all.\n⛔ AUTHORED AS `valley_craft` ON PURPOSE. Valley craft is 'skill and nothing else' — no power system, no tradition gate — so these are available to ANY character and they close the coverage gap at the same time as the physical one. A Cogitant can now throw a knife. ⚠️ ALL SIX ROLL DICE on the existing ladder (L1 1d6, L2 2d6), because Erik's standard is that a skill DOES what its label says.",
+ "note": "⛔ SNG-440. PHYSICAL RANGED CRAFT — Erik: 'I want more physical skills. Some can use agility, such as throwing knives, stars, stones. Some should be bow or crossbow style. Some are various raw power thrown.'\n⚠️ MEASURED FIRST: of 376 abilities, only 45 are `physical` (12%, against 161 mental), and exactly ONE was a genuine ranged physical attack. 21 of 31 traditions have NO physical ability at all.\n⛔ AUTHORED AS `valley_craft` ON PURPOSE. Valley craft is 'skill and nothing else' — no power system, no tradition gate — so these are available to ANY character and they close the coverage gap at the same time as the physical one. A Cogitant can now throw a knife. ⚠️ ALL SIX ROLL DICE on the existing ladder (L1 1d6, L2 2d6), because Erik's standard is that a skill DOES what its label says.\n\n⛔ RE-ROOTED, SNG-443. ERIK: 'Skills may be learned at PLACES — or in the wilds as a hunter — but they would be TIED BACK TO THEIR TRADITION ROOTS otherwise.'\n⚠️ THAT IS TWO AXES AND I HAD COLLAPSED THEM INTO ONE. `tradition` is the LINEAGE a craft descends from; `learnedAt` is where a person can actually acquire it. ⛔ FILING EVERYTHING AS valley_craft BECAUSE IT WAS OPEN TO ANYONE CONFUSED ACCESS WITH ANCESTRY.\n⛔ AND IT DISSOLVES THE HUNTER'S STRIKE COLLISION RATHER THAN PATCHING IT: Hunter's Strike is a working hunter's shot, valley-rooted, learned in the wilds, taken for meat. The Drawn Bow is line-holding doctrine at range, marcher-rooted, learned at Hardline for money. ⚠️ SAME WEAPON, DIFFERENT CRAFT, DIFFERENT ROOT — they were never duplicates, they were two crafts I had mislabelled as one.",
  "abilities": [
   {
    "id": "the_thrown_edge",
@@ -43,10 +43,10 @@
    "functions": [
     "strike"
    ],
-   "tradition": "valley_craft",
+   "tradition": "marcher",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "valley_craft",
+   "powerSystem": "body",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -80,7 +80,10 @@
     "DUEL"
    ],
    "plainly": "A fight/stealth/duel action that deals damage. It rolls 1d6. Range is 8.",
-   "_authored": "SNG-440"
+   "_authored": "SNG-440",
+   "_traditionWas": "valley_craft",
+   "learnedAt": "hardline / the wilds",
+   "_rootWhy": "⛔ THE EDGE, THROWN. A blade leaving the hand is still skill at arms, and the Marchers teach it even though they consider it a poor cousin of a held weapon. ⚠️ Learned at Hardline for money, or in the wilds by anyone who has had to eat."
   },
   {
    "id": "the_sling_and_stone",
@@ -123,7 +126,7 @@
    "tradition": "valley_craft",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "valley_craft",
+   "powerSystem": "body",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -157,7 +160,10 @@
     "CHASE"
    ],
    "plainly": "A fight/survive/chase action that deals damage. It rolls 1d6. Range is 40.",
-   "_authored": "SNG-440"
+   "_authored": "SNG-440",
+   "_traditionWas": "valley_craft",
+   "learnedAt": "the wilds",
+   "_rootWhy": "⛔ GENUINELY FOLK, AND ROOTED THERE. A shepherd's weapon: free ammunition, learned young, carried without anyone calling it a weapon. ⚠️ No tradition taught this; the valley did."
   },
   {
    "id": "the_drawn_bow",
@@ -197,10 +203,10 @@
    "functions": [
     "strike"
    ],
-   "tradition": "valley_craft",
+   "tradition": "marcher",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "valley_craft",
+   "powerSystem": "body",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -234,7 +240,10 @@
     "DUEL"
    ],
    "plainly": "A fight/survive/duel action that deals damage. It rolls 2d6. Range is 120.",
-   "_authored": "SNG-440"
+   "_authored": "SNG-440",
+   "_traditionWas": "valley_craft",
+   "learnedAt": "hardline",
+   "_rootWhy": "⛔ MILITARY ARCHERY. Holding a bridge alone, an arrow every action, the unhurried third shot — that is the March's line-holding doctrine at range and it descends from the Edge. ⚠️ DISTINCT FROM HUNTER'S STRIKE, which is a working hunter's shot for meat. Same weapon, different craft, different root."
   },
   {
    "id": "the_levelled_crossbow",
@@ -274,10 +283,10 @@
    "functions": [
     "strike"
    ],
-   "tradition": "valley_craft",
+   "tradition": "marcher",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "valley_craft",
+   "powerSystem": "body",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -311,7 +320,10 @@
     "SURVIVE"
    ],
    "plainly": "A fight/duel/survive action that deals damage. It rolls 2d6. Range is 90.",
-   "_authored": "SNG-440"
+   "_authored": "SNG-440",
+   "_traditionWas": "valley_craft",
+   "learnedAt": "hardline / anywhere",
+   "_rootWhy": "⚠️ MARCHER ROOT, BUT THE POLITICS ARE THE POINT: 'you can hand one to a farmer and they can do it too.' ⛔ The Marchers teach it and quietly resent that teaching is barely required. Illegal in three cities for exactly this reason."
   },
   {
    "id": "the_hurled_weight",
@@ -352,10 +364,10 @@
     "strike",
     "break"
    ],
-   "tradition": "valley_craft",
+   "tradition": "somatic",
    "nativeOrCombination": "native",
    "harmRung": "damaging",
-   "powerSystem": "valley_craft",
+   "powerSystem": "body",
    "shape": "damage",
    "operativeAxis": "violence_peace",
    "mechanic": {
@@ -388,7 +400,10 @@
     "SURVIVE"
    ],
    "plainly": "A fight/survive action that deals damage. It rolls 1d6. Range is 15.",
-   "_authored": "SNG-440"
+   "_authored": "SNG-440",
+   "_traditionWas": "valley_craft",
+   "learnedAt": "hardline / the wilds",
+   "_rootWhy": "⛔ SOMA. 'Get under it, commit your whole body' is the perfected-body discipline applied to a bench. ⚠️ Not the Edge — there is no weapon in it, only a person and something heavy."
   },
   {
    "id": "the_quick_hands",
@@ -426,10 +441,10 @@
     "reveal",
     "move"
    ],
-   "tradition": "valley_craft",
+   "tradition": "somatic",
    "nativeOrCombination": "native",
    "harmRung": "none",
-   "powerSystem": "valley_craft",
+   "powerSystem": "body",
    "shape": "setup",
    "operativeAxis": "concrete_abstract",
    "mechanic": {
@@ -458,7 +473,10 @@
     "INVESTIGATE"
    ],
    "plainly": "A fight/stealth/investigate action that catches or redirects something in flight. Its strength is rated 5 out of 10.",
-   "_authored": "SNG-440"
+   "_authored": "SNG-440",
+   "_traditionWas": "valley_craft",
+   "learnedAt": "anywhere",
+   "_rootWhy": "⛔ PERFECT MOTION, NARROWED. Catching a thrown thing early is the Somatic reading-of-movement at hand scale. ⚠️ Also the pickpocket's craft, which the Flesh-Temples do not discuss."
   }
  ]
 }

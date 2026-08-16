@@ -121,8 +121,8 @@
    "narrationHints": "No comfort offered and none needed. They find the thing, name it, and fix it, and the patient is left slightly unnerved by how little reassurance was involved.",
    "functions": [
     "heal",
-    "restore",
-    "mend"
+    "mend",
+    "restore"
    ],
    "sectFlavour": {
     "syllogist": "BY PROTOCOL — the correct actions in the correct order, nothing left out.",
@@ -134,13 +134,16 @@
      "rank": 1,
      "name": "Diagnosis and First Care",
      "functions": [
-      "heal",
-      "reveal"
+      "heal"
      ],
      "grants": "⛔ NAME WHAT IS ACTUALLY WRONG — the real fault, not the presenting one — AND TREAT IT. A small heal on top of the diagnosis: the bleeding stopped, the joint set, the fever broken tonight.",
      "cannot": "One patient or one object; the fault must be present, not historical.",
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "heal",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -200,7 +203,13 @@
      "text": "⚠️ the practitioner carries the fatigue of the correction",
      "class": "cost"
     }
-   ]
+   ],
+   "_functionsWas": [
+    "heal",
+    "restore",
+    "mend"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "case_closed",

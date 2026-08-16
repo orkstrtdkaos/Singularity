@@ -38,7 +38,9 @@
       "move"
      ],
      "grants": "Find and walk the fastest safe line through any space you can observe. You do not backtrack and you do not get lost.",
-     "cannot": "Only what you can see or have been described. Does not make you faster, only better-directed."
+     "cannot": "Only what you can see or have been described. Does not make you faster, only better-directed.",
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
      "rank": 2,
@@ -48,7 +50,9 @@
       "travel"
      ],
      "grants": "⛔ THE SPACE IS NOW ALLOWED TO MOVE. Cross a shifting one — a crowd, a patrol, a running fight — without friction, staying two steps ahead of everyone in it. Adds unseen ground: derive the route through terrain you have not entered.",
-     "cannot": "Cannot route around what you have no information about at all."
+     "cannot": "Cannot route around what you have no information about at all.",
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
      "rank": 3,
@@ -58,7 +62,9 @@
       "travel"
      ],
      "grants": "⚠️ ADDS OTHERS. In a space you understand, you move as though you laid it out — and you can walk a whole party through on the same line, calling it as you go.",
-     "cannot": "One space at a time; you must have read it."
+     "cannot": "One space at a time; you must have read it.",
+     "gains": "broaden",
+     "harmRung": "none"
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Clear Path (cogitant), The Derived Route (syllogist) and The Patterned Way (figurist) — three skills at the same level, same magnitude, same energy, same three-rank arc, differing only in the noun. Erik: 'yes on the nav skills.' Flavour is now internal.",
@@ -70,6 +76,25 @@
     "CHASE",
     "STEALTH",
     "SURVIVE"
+   ],
+   "axes": {
+    "space_time": 0.3
+   },
+   "operativeAxis": "space_time",
+   "notFor": "Ground you have no information about at all; outrunning anyone (it directs, it does not hasten); a space that changes faster than you can read it.",
+   "bounds": [
+    {
+     "text": "you must be able to observe, reason about, or read the form of the space",
+     "class": "hard"
+    },
+    {
+     "text": "directs, never hastens — it does not make you faster",
+     "class": "hard"
+    },
+    {
+     "text": "holding the route occupies your attention while you walk it",
+     "class": "cost"
+    }
    ]
   },
   {
@@ -113,7 +138,9 @@
       "reveal"
      ],
      "grants": "⛔ NAME WHAT IS ACTUALLY WRONG — the real fault, not the presenting one — AND TREAT IT. A small heal on top of the diagnosis: the bleeding stopped, the joint set, the fever broken tonight.",
-     "cannot": "One patient or one object; the fault must be present, not historical."
+     "cannot": "One patient or one object; the fault must be present, not historical.",
+     "gains": "deepen",
+     "harmRung": "none"
     },
     {
      "rank": 2,
@@ -124,7 +151,9 @@
       "mend"
      ],
      "grants": "⚠️ A BIG HEAL. The whole correct sequence, in order, nothing left out — they get up, and they can fight or walk today.",
-     "cannot": "Cannot regrow what is gone; cannot work on what you cannot examine."
+     "cannot": "Cannot regrow what is gone; cannot work on what you cannot examine.",
+     "gains": "deepen",
+     "harmRung": "none"
     },
     {
      "rank": 3,
@@ -135,7 +164,9 @@
       "mend"
      ],
      "grants": "⛔ A FULL HEAL. Whole, to the bone, in one working — and the same for an object or a system: back to what it was before.",
-     "cannot": "One subject per use, and you must be able to reach the whole of it."
+     "cannot": "One subject per use, and you must be able to reach the whole of it.",
+     "gains": "deepen",
+     "harmRung": "none"
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Correct Protocol (syllogist) and The Restored Form (figurist) — identical level, dice, energy and rank arc. Erik: 'yes on the restore skills, but LEVEL ONE SHOULD HEAL A BIT ON TOP OF THE DIAGNOSIS.' ⚠️ ERIK: 'HEALED IS HEALED — permanence isn't a good r3. Perhaps r2 should be a BIG HEAL and r3 a FULL HEAL.' The ladder is now small → big → full, which is a quantity a player can read.",
@@ -146,6 +177,29 @@
    "challengeTypes": [
     "SURVIVE",
     "INVESTIGATE"
+   ],
+   "axes": {
+    "death_life": 0.4
+   },
+   "operativeAxis": "death_life",
+   "notFor": "Regrowing what is gone; anything you cannot examine; comfort — this craft does not reassure.",
+   "bounds": [
+    {
+     "text": "the fault must be present and examinable, not historical",
+     "class": "hard"
+    },
+    {
+     "text": "one subject per use",
+     "class": "hard"
+    },
+    {
+     "text": "you must reach the whole of it to treat the root",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ the practitioner carries the fatigue of the correction",
+     "class": "cost"
+    }
    ]
   },
   {
@@ -182,7 +236,9 @@
       "persuade"
      ],
      "grants": "Set a matter out to people willing to follow. A dispute resolves, a council decides, a wrong belief comes apart — and nobody is humiliated, which is why it holds.",
-     "cannot": "⛔ THEY MUST BE WILLING TO FOLLOW. Does nothing to someone who will not engage."
+     "cannot": "⛔ THEY MUST BE WILLING TO FOLLOW. Does nothing to someone who will not engage.",
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
      "rank": 2,
@@ -192,7 +248,9 @@
       "empower"
      ],
      "grants": "⚠️ ADDS DURATION AND ABSENCE. Build it to last — written, taught, left behind. It goes on convincing after you have gone, and someone else can carry it.",
-     "cannot": "Cannot be built against a matter you do not actually understand."
+     "cannot": "Cannot be built against a matter you do not actually understand.",
+     "gains": "broaden",
+     "harmRung": "none"
     },
     {
      "rank": 3,
@@ -202,7 +260,9 @@
       "empower"
      ],
      "grants": "⛔ ADDS SCALE AND FINALITY. A case so complete a whole community stops reopening it. Feuds end this way; so do bad laws.",
-     "cannot": "One matter at a time, and it must be a matter people are actually arguing about."
+     "cannot": "One matter at a time, and it must be a matter people are actually arguing about.",
+     "gains": "broaden",
+     "harmRung": "none"
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Stated Case (syllogist) and The Necessary Case (cogitant), which did the same job at different energy costs. Erik: 'could be Case Closed, and the flavour goes internal like the move skills did.' ⚠️ RETAGGED SOCIAL — this was `reveal/command/bind` and it is persuasion. ⚠️ ERIK: 'NO to the r3 cost — the case doesn't have to be true.' Removed.",
@@ -213,7 +273,31 @@
    "challengeTypes": [
     "SOCIAL",
     "INVESTIGATE"
+   ],
+   "axes": {
+    "emotional_logical": 0.5
+   },
+   "operativeAxis": "emotional_logical",
+   "notFor": "Anyone who will not engage; a matter nobody is actually arguing about; speed — a case takes as long as it takes.",
+   "bounds": [
+    {
+     "text": "⛔ THEY MUST BE WILLING TO FOLLOW. Does nothing to someone who refuses to hear it",
+     "class": "hard"
+    },
+    {
+     "text": "one matter at a time",
+     "class": "hard"
+    },
+    {
+     "text": "you must actually understand the matter — a case you have not done the work on comes apart",
+     "class": "hard"
+    },
+    {
+     "text": "the time and standing you spend making it",
+     "class": "cost"
+    }
    ]
   }
- ]
+ ],
+ "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."
 }

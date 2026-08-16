@@ -533,7 +533,6 @@
    "notFor": [],
    "tradition": "abyssal",
    "functions": [
-    "hinder",
     "strike"
    ],
    "challengeTypes": [
@@ -559,11 +558,14 @@
      "grants": "Name the appetite and hit it — not the body, what the body has been protecting. The wound is real and lands where they cannot wall it out.",
      "cannot": "Anything rank 3 adds — hit what they kept unnamed; it needs a REAL, HELD appetite.",
      "functions": [
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "strike",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -571,11 +573,14 @@
      "grants": "Hit what they kept unnamed. They will know what was struck. They will not be the same on the other side of it.",
      "cannot": "Nothing further; this is the craft's ceiling; it needs a REAL, HELD appetite.",
      "functions": [
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "hinder"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -624,7 +629,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A combat/social/psychological action that deals damage. It rolls 2d6 appetite damage Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: it needs a Real, Held appetite — a person who wants nothing is proof against it."
+   "plainly": "A combat/social/psychological action that deals damage. It rolls 2d6 appetite damage Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: it needs a Real, Held appetite — a person who wants nothing is proof against it.",
+   "_functionsWas": [
+    "hinder",
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_consumed_wound",
@@ -789,11 +799,14 @@
      "grants": "The dread around you is a genuine deterrent — not fear you project but weight others feel before they decide. Those who press anyway do it weakened: the nerve goes out of the approach, the first move comes slower and worse than they meant it to.",
      "cannot": "Anything rank 3 adds — the mantle arrives before you do; IT DETERS THOSE WHO CHOOSE.",
      "functions": [
-      "ward",
-      "hinder"
+      "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "ward",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -854,7 +867,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 8 hours Ranks: rank 2 deepens deterrence; rank 3 adds to autonomy. Limit: iT Deters Those Who Choose — a beast, a machine, or a fanatic is undeterred."
+   "plainly": "A combat/social/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 0 harm per hit (rank 0 armour), and lasts for about 8 hours Ranks: rank 2 deepens deterrence; rank 3 adds to autonomy. Limit: iT Deters Those Who Choose — a beast, a machine, or a fanatic is undeterred.",
+   "_functionsWas": [
+    "hinder",
+    "shield",
+    "ward"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_called_form",
@@ -2408,9 +2427,10 @@
     "violence_peace": -0.2
    },
    "functions": [
-    "strike",
+    "command",
+    "empower",
     "hinder",
-    "command"
+    "strike"
    ],
    "narrationHints": "You say the name you carry — the borrowed, too-large, unverifiable name — the way it was meant to be said, and the ones who believe it falter. Nothing happens to the ones who don't.",
    "description": "The God-Named's first offense: authority made a weapon, and it works exactly as far as it is believed and not one step further.",
@@ -2434,12 +2454,15 @@
      "grants": "Hold the moment rather than buying a breath — those who credit the name will not act against you while you hold it, and some will obey a small instruction. And you can spend the name AGAINST a believer: name them faithless in front of the others and the belief turns on them — they are struck by their own people, or by what the name means to them, and it leaves marks.",
      "cannot": "Holding it is exhausting and visible. Each instruction spends belief; ask for something the name would not ask for and you spend it all at once.",
      "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "_functionsWas": [
       "strike",
       "hinder",
       "command"
-     ],
-     "gains": "broaden",
-     "harmRung": "damaging"
+     ]
     },
     {
      "rank": 3,
@@ -2448,12 +2471,16 @@
      "cannot": "You are now what they knelt to and the valley will hold you to it. The cult that believes the NAME rather than you will defend it harder than you do — and they will notice first when you fall short.",
      "functions": [
       "strike",
-      "hinder",
-      "command",
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "hinder",
+      "command",
+      "empower"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2499,7 +2526,13 @@
    "backlash": "The name fails in front of everyone who was holding it. The belief does not just fail to work — it breaks, and the cult that believed the NAME comes looking for who wore it badly.",
    "conserveSuppresses": "invoke quietly, to one person — a failure costs you only that one",
    "backlashRungNone": "the failure BREAKS THE NAME and sets a cult looking for you. A future consequence, not a present wound.",
-   "_backlashRungNote": "SNG-359: DELIBERATELY NO RUNG — declared, not omitted. the failure BREAKS THE NAME and sets a cult looking for you. A future consequence, not a present wound. ⚠️ A gate should assert this list is DECLARED rather than empty, the same way runtime_unwired works."
+   "_backlashRungNote": "SNG-359: DELIBERATELY NO RUNG — declared, not omitted. the failure BREAKS THE NAME and sets a cult looking for you. A future consequence, not a present wound. ⚠️ A gate should assert this list is DECLARED rather than empty, the same way runtime_unwired works.",
+   "_functionsWas": [
+    "strike",
+    "hinder",
+    "command"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_struck_term",
@@ -2513,8 +2546,7 @@
     "falsehood_truth": 0.3
    },
    "functions": [
-    "strike",
-    "bind"
+    "strike"
    ],
    "narrationHints": "You offer terms that are genuinely good and genuinely costly, they take them, and the cost lands. No trick, no fine print — the harm was named aloud and accepted, which is the whole craft.",
    "description": "Name a real exchange to someone who wants something — a passage, a name, a wound closed — with a real cost attached; if they accept, they get it and pay, and the price can be blood. The Bargainers' first offense, and the only attack on the circle you cannot make on someone who says no.",
@@ -2526,11 +2558,14 @@
      "grants": "Name a real exchange to someone who wants something — a passage, a name, a wound closed — with a real cost attached. If they accept, they get the thing and pay the price, and the price can be a way out of the fight for you.",
      "cannot": "REFUSAL ENDS IT — there is no forcing this, and the cautious simply walk. You must DELIVER what you promised, exactly. And you have to have something they actually want.",
      "functions": [
-      "strike",
-      "bind"
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "bind"
+     ]
     },
     {
      "rank": 2,
@@ -2538,12 +2573,15 @@
      "grants": "Structure the cost so it falls where it is useful to you — a debt owed, an advantage surrendered, a door held open. Still stated plainly; still accepted freely.",
      "cannot": "Everyone watching now knows what you do with a table. The wary stop wanting things in front of you, which is a real and growing cost.",
      "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "_functionsWas": [
       "strike",
       "bind",
       "hinder"
-     ],
-     "gains": "broaden",
-     "harmRung": "incapacitating"
+     ]
     },
     {
      "rank": 3,
@@ -2551,13 +2589,16 @@
      "grants": "A bargain that keeps — an ongoing arrangement someone entered willingly and cannot simply stop paying. The Bargainers' actual power in the foothills.",
      "cannot": "It BINDS YOU TOO, and the Bargainers keep their terms; you have entered a relationship, not won an exchange. Break your side once and no one in the foothills sits at your table again.",
      "functions": [
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "_functionsWas": [
       "strike",
       "bind",
       "hinder",
       "command"
-     ],
-     "gains": "deepen",
-     "harmRung": "lethal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2604,7 +2645,12 @@
    "conserveSuppresses": "small terms — a broken small term is a debt, not a ruin",
    "backlashRungNone": "the failure is a DEBT — you owe what you promised, by the Bargainers' own rule. Enforced socially, not physically.",
    "_backlashRungNote": "SNG-359: DELIBERATELY NO RUNG — declared, not omitted. the failure is a DEBT — you owe what you promised, by the Bargainers' own rule. Enforced socially, not physically. ⚠️ A gate should assert this list is DECLARED rather than empty, the same way runtime_unwired works.",
-   "_descriptionWas": "The Bargainers' first offense, and the only one on the circle that requires the target's agreement: an attack you cannot make on someone who says no."
+   "_descriptionWas": "The Bargainers' first offense, and the only one on the circle that requires the target's agreement: an attack you cannot make on someone who says no.",
+   "_functionsWas": [
+    "strike",
+    "bind"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_offered_mouth",
@@ -2619,7 +2665,7 @@
    },
    "functions": [
     "strike",
-    "hinder"
+    "summon"
    ],
    "narrationHints": "You show something its appetite and where to put it. The Choir does not summon and does not command — it introduces, and appetite does the rest, and appetite is honest in a way very little else is.",
    "description": "The Abyssal Choir's first offense: harm by acquaintance. What eats was always going to eat; you told it where.",
@@ -2631,11 +2677,14 @@
      "grants": "Show a nearby hunger a target — a beast, a thing in the water, something in the walls, a person's own worst want. It goes and it takes, and what it takes does not grow back.",
      "cannot": "IT IS NOT COMMANDED. Once shown, it eats on its own judgement and stops when it is done, not when you are. There must be an appetite present to show.",
      "functions": [
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "strike",
+      "hinder"
+     ]
     },
     {
      "rank": 2,
@@ -2643,12 +2692,15 @@
      "grants": "Show it more, or show several at once. A place with hungry things in it becomes a place a person cannot cross.",
      "cannot": "⚠ APPETITE DOES NOT SORT: anyone else in the area is struck ONE RUNG LOWER, and once fed, what you showed remembers who does the showing.",
      "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "_functionsWas": [
       "strike",
       "hinder",
       "bind"
-     ],
-     "gains": "broaden",
-     "harmRung": "incapacitating"
+     ]
     },
     {
      "rank": 3,
@@ -2657,12 +2709,16 @@
      "cannot": "Calling it off is a CHOICE you must make and it is not free — what you send back remembers being interrupted, and remembers you. Anyone else in the area is still struck ONE RUNG LOWER until you end it.",
      "functions": [
       "strike",
-      "hinder",
-      "bind",
       "summon"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "hinder",
+      "bind",
+      "summon"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2707,7 +2763,12 @@
    "backlash": "It looks at the person who showed it. You are the nearest appetite it has been introduced to, and it does not distinguish host from meal.",
    "conserveSuppresses": "show it a small hunger — small hungers finish and go",
    "backlashRung": "incapacitating",
-   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them."
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
+   "_functionsWas": [
+    "strike",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_measured_sentence",
@@ -2722,7 +2783,6 @@
    },
    "functions": [
     "break",
-    "hinder",
     "reveal",
     "strike"
    ],
@@ -2748,14 +2808,12 @@
      "grants": "Judge a group. Each is measured separately and each takes their own weight — which is the Orders' entire point and is also horrible to watch.",
      "cannot": "⚠ IT MEASURES EVERYONE ELSE IN THE AREA TOO, at their own honest weight, one rung lower. There is no exempting anyone from a judgment.",
      "functions": [
-      "strike",
-      "hinder"
+      "strike"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_functionsWas": [
       "strike",
-      "reveal",
       "hinder"
      ]
     },
@@ -2766,14 +2824,12 @@
      "cannot": "THE MEASURE IS STILL HONEST — you may exempt someone from being weighed, but you cannot make a heavy man light. Exempting the guilty is itself a judgment, and the Orders keep a record of who was spared and by whom.",
      "functions": [
       "strike",
-      "hinder",
       "break"
      ],
      "gains": "deepen",
      "harmRung": "lethal",
      "_functionsWas": [
       "strike",
-      "reveal",
       "hinder",
       "break"
      ]
@@ -2820,11 +2876,13 @@
    "backlashRung": "damaging",
    "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
    "_functionsWas": [
-    "strike",
+    "break",
+    "hinder",
     "reveal",
-    "hinder"
+    "strike"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_sheltering_name",

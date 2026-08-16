@@ -1,0 +1,200 @@
+{
+ "_note": "⛔ SNG-437. WHAT A SKILL IS FOR — Erik, 2026-08-15, verbatim: 'They express how the traditions interact with the world in mostly GREATER THAN NORMAL ways. They are something a player hero type character would WANT to do because it's useful. They are things that NOT JUST ANYONE can do. They are neat, cool, interesting, effective, powerful, functional, amazing. They DO the things the function labels say they do, IN THE WAY THE PROSE DESCRIBES.'\n⚠️ THIS IS THE STANDARD. Everything below is that spec turned into checks and run against all 376. ⛔ I HAD TWICE ANSWERED THIS CRITIQUE WITH PROSE — the 2026-07-07 utility audit said 'thematically pretty but tactically weak' and I rewrote descriptions. THE WORDS WERE NEVER THE PROBLEM.",
+ "theFiveChecks": {
+  "1_greaterThanNormal": {
+   "fails": 19,
+   "test": "a skilled mundane person could not do this",
+   "note": "⚠️ The smallest failure and the least urgent. A quartermaster estimates; The Kept Count knows. That is a real difference — but it is THIN, and thin is what Erik felt."
+  },
+  "2_worthWanting": {
+   "fails": 164,
+   "test": "`bounds[].class === 'cost'` — using it is a DECISION",
+   "note": "⛔ THE DIAGNOSTIC PAIR, and it is the sharpest thing in this audit. THE STRETCHED HOUR: 'the time comes out of the wielder, PERMANENTLY.' THE WAY OUT: 'it gets YOU out; others are your cost.' THE KEPT COUNT: every bound is `hard` — reads what is already running, gives duration never outcome. ⚠️ A RESTRICTION IS NOT A DECISION. The first two are a trade a player makes; the third is a lookup the GM was going to answer anyway. 164 abilities cost nothing to use."
+  },
+  "3_notJustAnyone": {
+   "fails": 260,
+   "test": "`gated` is set",
+   "note": "⚠️ Probably over-reported — the tree may gate by tradition elsewhere. Worth confirming before acting."
+  },
+  "4_effective": {
+   "fails": 295,
+   "test": "resolves via dice or soak",
+   "note": "⛔ 295 OF 376 NEVER ROLL ANYTHING. They carry `magnitude 5, duration 4, scope 2`, which generates the line 'its strength is rated 5 out of 10'. ⚠️ THAT IS A STAT, NOT AN ACTION, and it is the literal answer to Erik's 'BUT WHAT DOES THAT DO?'"
+  },
+  "5_labelMatchesMechanic": {
+   "fails": 20,
+   "test": "shape in (damage, strike, break) has dice",
+   "note": "⛔ THE MOST DAMNING AND THE MOST FIXABLE. All 20 are levelReq 1, and they are ONE PER TRADITION — every tradition's signature FIRST OFFENSE cannot hurt anything. The Cutting Figure's prose says it parts 'mail, hide, timber, limb'; its mechanic is `magnitude 7`."
+  }
+ },
+ "_distribution": {
+  "fails0": 16,
+  "fails1": 85,
+  "fails2": 166,
+  "fails3": 95,
+  "fails4": 14,
+  "note": "⛔ ONLY 16 OF 376 PASS ALL FIVE. 109 fail three or more."
+ },
+ "_theLadderThatExists": {
+  "L1": "1d6 ×3, 1d4 ×6",
+  "L2": "2d6 ×14, 2d4 ×14",
+  "L3": "3d6 ×3, 3d4 ×3",
+  "L4": "4d6 ×6",
+  "L5": "5d6 ×7",
+  "note": "⚠️ The ladder is real and consistent. The 20 first-offenses were simply never put on it."
+ },
+ "proposal_A_firstOffenses": {
+  "_what": "⛔ PUT THE 20 FIRST-OFFENSES ON THE EXISTING LADDER. They are gated, signature, one per tradition — they should be the BEST L1 attack in the game, not the only ones that cannot roll. ⚠️ Proposed mapping from their authored magnitude, which already ranks them: mag 5 → 1d4 · mag 6-7 → 1d6 · mag 8 → 2d4 (same average, higher floor — the heaviest traditions hit reliably rather than wildly).\n⛔ THEIR EFFECT PROSE STAYS. The dice are what was missing, not the character.",
+  "_erikRules": "the mapping, and whether a gated signature attack should out-damage an ungated one",
+  "rows": [
+   {
+    "levelReq": 1,
+    "magnitude": 5,
+    "id": "the_keening",
+    "name": "The Keening",
+    "tradition": "threnodist"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 5,
+    "id": "the_struck_term",
+    "name": "The Struck Term",
+    "tradition": "bargainers"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 6,
+    "id": "the_wrong_wound",
+    "name": "The Wrong Wound",
+    "tradition": "veilwright"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_answered_motion",
+    "name": "The Answered Motion",
+    "tradition": "somatic"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_broken_quiet",
+    "name": "The Broken Quiet",
+    "tradition": "stillhold"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_cutting_figure",
+    "name": "The Cutting Figure",
+    "tradition": "figurist"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_folded_pace",
+    "name": "The Folded Pace",
+    "tradition": "horizon"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_found_fault",
+    "name": "The Found Fault",
+    "tradition": "unmaker"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_hastened_grey",
+    "name": "The Hastened Grey",
+    "tradition": "ashwarden"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_long_odds_come_in",
+    "name": "The Long Odds Come In",
+    "tradition": "churnfolk"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_predicted_man",
+    "name": "The Predicted Man",
+    "tradition": "lattice"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_seized_works",
+    "name": "The Seized Works",
+    "tradition": "enginewright"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_spent_hour",
+    "name": "The Spent Hour",
+    "tradition": "hourkeeper"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_sudden_work",
+    "name": "The Sudden Work",
+    "tradition": "wright"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_sustained_regard",
+    "name": "The Sustained Regard",
+    "tradition": "cogitant"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 7,
+    "id": "the_unbearable_word",
+    "name": "The Unbearable Word",
+    "tradition": "verist"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 8,
+    "id": "the_measured_sentence",
+    "name": "The Measured Sentence",
+    "tradition": "seraphic"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 8,
+    "id": "the_offered_mouth",
+    "name": "The Offered Mouth",
+    "tradition": "abyssal"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 8,
+    "id": "the_plain_weight",
+    "name": "The Plain Weight",
+    "tradition": "mason"
+   },
+   {
+    "levelReq": 1,
+    "magnitude": 8,
+    "id": "the_thinned_veil",
+    "name": "The Thinned Veil",
+    "tradition": "numinous"
+   }
+  ]
+ },
+ "proposal_B_costOrCut": {
+  "_what": "⛔ EVERY ABILITY GETS A `cost` BOUND OR IS RECONSIDERED. 164 currently have none. ⚠️ A cost is not a nerf — it is what makes using the thing a moment. The Stretched Hour is the model: it is POWERFUL and it takes the time out of you, permanently, and that is why a player remembers casting it.",
+  "_erikRules": "whether this is a sweep or a case-by-case pass"
+ },
+ "proposal_C_magnitudeIsNotAnAction": {
+  "_what": "⚠️ `magnitude/duration/scope` needs a RESOLUTION RULE, or those 295 abilities stay ratings. ⛔ THIS IS THE BIG ONE AND IT IS NOT CONTENT — it is the battle system. Either magnitude converts to dice at the table, or it gates an automatic effect with a named threshold. Until it does, 'rated 5 out of 10' is what a player reads.",
+  "_erikRules": "⛔ ALL OF IT — this is a system decision, not an authoring one"
+ }
+}

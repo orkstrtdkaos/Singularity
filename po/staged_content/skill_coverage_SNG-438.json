@@ -1,0 +1,312 @@
+{
+ "_note": "⛔ SNG-438. SKILL COVERAGE AUDIT — Erik: 'my spec isn't comprehensive, it was a start. Think critically about it and any other RPG games. What does a PC need to be able to do? Can each type of character do those things with their primary domain at about 75% minimum, and a secondary adjacent domain to cover 100%? Map the skills to primary stats. My characters tend to flirt and woo — are there skills to help with that?'",
+ "_headline": "⛔ THE FLIRT TEST RETURNS ZERO. Searched all 376 for flirt/woo/charm/seduce/allure/attract/desire/romance/courtship/beguile: NOT ONE ABILITY. ⚠️ INTIMIDATE RETURNS ZERO BY NAME TOO — the effect exists (The Dread, The Weight of Presence) but nothing is authored AS intimidation.\n⛔ THE 136 SOCIAL ABILITIES ARE ALL AUTHORITY, ORDER, TRUTH AND FEAR. Not one is warmth, attraction, seduction, or intimacy. A player who plays a charmer has NOTHING to reach for, and Erik plays charmers.",
+ "attributeBalance": {
+  "mental": 161,
+  "practical": 99,
+  "social": 71,
+  "physical": 45,
+  "_finding": "⛔ MENTAL IS 3.6× PHYSICAL. An even split would be 94 each. ⚠️ THE GAME IS AUTHORED BY PREFERENCE — the traditions that think have three times the options of the traditions that act, and PHYSICAL at 12% means a body-first character is starved across the whole corpus.",
+  "_erikRules": "the target split. Even quarters is one answer; another is that mental SHOULD lead in a world about reaches of mind — but not 3.6×."
+ },
+ "traditionAttributeGaps": {
+  "_finding": "⛔ 27 OF 31 TRADITIONS HAVE AT LEAST ONE COMPLETELY EMPTY ATTRIBUTE. Only valley_craft, rootkin, mason and wright cover all four.\n⚠️ SIX HAVE THREE EMPTY: hourkeeper, figurist, syllogist, cogitant (all mental-only), god_named and bargainers (social-only). ⛔ A COGITANT HAS 11 MENTAL ABILITIES AND ZERO PHYSICAL, SOCIAL OR PRACTICAL — they cannot pick a lock, throw a punch, or charm anyone using their own tradition."
+ },
+ "pcNeedsCoverage": {
+  "_needs": [
+   "HARM",
+   "DEFEND",
+   "HEAL",
+   "CONTROL",
+   "MOVE",
+   "PERCEIVE",
+   "MAKE",
+   "BOLSTER",
+   "CONCEAL",
+   "SOCIAL"
+  ],
+  "_finding": "⛔ MEAN PRIMARY-DOMAIN COVERAGE IS 68%, AGAINST ERIK'S 75% BAR. Only 12 of 31 traditions reach 75%; four sit at 40%.\n⚠️ CONCEAL IS MISSING FROM 28 OF 31 — it is not a gap, it is an unauthored function. Only the Veilwrights and Umbrals can hide, which may be intended, but it means every other character is visible always.\n⛔ SOCIAL IS MISSING FROM 13 TRADITIONS, which compounds the flirt gap: not only is there no charm ability anywhere, most traditions have no social ability at all.",
+  "byTradition": {
+   "harmonic": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MOVE"
+   ],
+   "rootkin": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "SOCIAL"
+   ],
+   "precursor": [
+    "CONTROL",
+    "DEFEND",
+    "MAKE",
+    "SOCIAL"
+   ],
+   "radiant_folk": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE"
+   ],
+   "somatic": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "MAKE",
+    "MOVE",
+    "SOCIAL"
+   ],
+   "cogitant": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "MAKE",
+    "MOVE"
+   ],
+   "churnfolk": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE"
+   ],
+   "lattice": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE"
+   ],
+   "mason": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE",
+    "SOCIAL"
+   ],
+   "figurist": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE"
+   ],
+   "umbral": [
+    "BOLSTER",
+    "CONCEAL",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE"
+   ],
+   "blazeborn": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE"
+   ],
+   "cross_pole_braid": [
+    "BOLSTER",
+    "HEAL",
+    "MAKE",
+    "SOCIAL"
+   ],
+   "ashwarden": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE",
+    "SOCIAL"
+   ],
+   "abyssal": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE",
+    "SOCIAL"
+   ],
+   "seraphic": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE",
+    "SOCIAL"
+   ],
+   "god_named": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "SOCIAL"
+   ],
+   "bargainers": [
+    "HARM",
+    "MAKE",
+    "PERCEIVE",
+    "SOCIAL"
+   ],
+   "unmaker": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE"
+   ],
+   "wright": [
+    "BOLSTER",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "SOCIAL"
+   ],
+   "threnodist": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE",
+    "SOCIAL"
+   ],
+   "syllogist": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE"
+   ],
+   "veilwright": [
+    "BOLSTER",
+    "CONCEAL",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "SOCIAL"
+   ],
+   "verist": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE",
+    "SOCIAL"
+   ],
+   "enginewright": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE"
+   ],
+   "numinous": [
+    "BOLSTER",
+    "CONTROL",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "SOCIAL"
+   ],
+   "horizon": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MOVE"
+   ],
+   "hourkeeper": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE"
+   ],
+   "marcher": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MOVE",
+    "PERCEIVE",
+    "SOCIAL"
+   ],
+   "stillhold": [
+    "BOLSTER",
+    "CONTROL",
+    "DEFEND",
+    "HARM",
+    "MAKE",
+    "SOCIAL"
+   ],
+   "valley_craft": [
+    "BOLSTER",
+    "DEFEND",
+    "HARM",
+    "HEAL",
+    "MAKE",
+    "MOVE",
+    "PERCEIVE",
+    "SOCIAL"
+   ]
+  }
+ },
+ "proposals": {
+  "A_theMissingSocialSpace": "⛔ AUTHOR THE ATTRACTION/INTIMACY SPACE — it is a whole missing quadrant, not a few skills. ⚠️ AND IT MUST BE TRADITION-SHAPED, not a generic 'Charm': a Threnodist woos by shared feeling, an Abyssal by naming the want, a Verist by unbearable honesty, a Veilwright by being exactly who you wanted to meet, a Somatic by presence. ⛔ THAT IS FIVE GENUINELY DIFFERENT SKILLS AND THEY WRITE THEMSELVES FROM THE TRADITIONS ALREADY AUTHORED.",
+  "B_intimidation": "⚠️ The effect exists unlabelled. Either tag the existing ones (The Dread, The Weight of Presence, The Blazing Word) or author per-tradition versions as with A.",
+  "C_physicalStarvation": "⛔ PHYSICAL AT 12% NEEDS A DELIBERATE PASS. Grapple, climb, leap, endure, carry, hold-your-breath, break-down-a-door — the ordinary physical verbs are largely absent, and they are what a body-first PC reaches for.",
+  "D_theSecondaryDomainRULE": "⚠️ ERIK'S 75%+SECONDARY MODEL IS SOUND AND THE CORPUS DOES NOT MEET IT. ⛔ BEFORE AUTHORING, THE ADJACENCY MAP MUST BE RULED: which tradition is 'adjacent' to which? The reaches suggest pole-pairs (umbral/blazeborn share dark_light), but a player picking their OPPOSITE pole as secondary is a different game than picking a neighbour. THIS IS ERIK'S CALL and everything else waits on it."
+ },
+ "_whatIWillNotDo": "⛔ I am not authoring 50 abilities off my own judgement. The attribute target, the adjacency map, and whether CONCEAL should be universal are all system decisions. ⚠️ Give me those three rulings and the authoring is mechanical."
+}

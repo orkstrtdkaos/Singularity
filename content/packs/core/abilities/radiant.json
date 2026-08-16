@@ -192,16 +192,19 @@
      "cannot": "The line of light is visible to everyone, always — there is no quiet way to do this. Mirror-finish and running water still defeat it. And at full focus it is a killing tool: a Sunlance put through a person is not a wound, and the Blazeborn who carry it are taught to flare it wide before they are taught to narrow it.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     }
    ],
    "functions": [
     "break",
-    "hinder",
     "strike"
    ],
    "challengeTypes": [
@@ -277,7 +280,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/puzzle action that deals damage. It rolls 2d6 light damage. Range is 20. Ranks: rank 2 extends penetration+special; rank 3 deepens damage+penetration. Limit: useless in smoke."
+   "plainly": "A fight/puzzle action that deals damage. It rolls 2d6 light damage. Range is 20. Ranks: rank 2 extends penetration+special; rank 3 deepens damage+penetration. Limit: useless in smoke.",
+   "_functionsWas": [
+    "break",
+    "hinder",
+    "strike"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "daybreak_mantle",

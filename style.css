@@ -1130,6 +1130,9 @@ img[data-lightbox] { cursor: zoom-in; }
 .wheel-node-label { fill:var(--ink-dim); font-family:var(--font-ui); font-size:8px; pointer-events:none; }
 .wheel-node-label.owned { fill:var(--ink); }
 .wheel-fn-dot { pointer-events:none; }
+/* ⛔ CCODE-196: `fn-dim` IS NO LONGER EMITTED — a craft a filter rejects is not drawn at all. The rule
+   stays as the record of why: at 0.22 the node read as absent and still carried a 13px hit circle, so it
+   intercepted clicks meant for the crafts that passed. Erik: "dimmed they still interfere with selection." */
 .wheel-node.fn-dim { opacity:0.22; }
 .wheel-node.fn-match .wnode-shape { stroke-width:2.4; }
 .wheel-node.fn-match .wheel-node-label { fill:var(--ink); }

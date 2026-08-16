@@ -26,7 +26,7 @@ import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own
 import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
-import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
+import { braidPlacement, compositionAngle, leanOffset, wheelRejects } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
 // ⚠️ `composeImagePrompt` ONLY. I imported `COMPOSED_MAX` beside it and never called it — the
@@ -97,7 +97,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.159";
+const APP_VERSION = "1.9.160";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9253,13 +9253,31 @@ function renderSkillWheel(selectedId = null, status = "") {
         de-collided labels (owned/selected always; matched added at zoom). */""}
     ${(() => {
       const filterOn = wheelFnFilter.size > 0;
+      // ⛔ CCODE-196 (Erik): "if i filter out skills have them disappear completely, not just dim... dimmed
+      // they still interfere with selection." He is right and the cause is one line further down: a dimmed
+      // node still emitted `<circle class="hit" r="13">`, a 13px invisible target sitting on top of the wheel.
+      // At 0.22 opacity it reads as absent and behaves as present — so a click meant for a craft that PASSED
+      // the filter could land on one the filter was supposed to remove. A filter that changes only the paint
+      // is not a filter.
+      //
+      // ⚠️ A TRADITION CLICK ALONE IS NOT A FILTER, and must not lose anything. SNG-202B's related /
+      // adjacent / dim rings are how the wheel SHOWS ITS SHAPE — removing the far side would tell the player
+      // the circle is smaller than it is. So this hides only what an actual filter rejected: the function
+      // filter, ✨ Suggested, Attainable, or an intersection any of those are part of.
+      // ⚠️ THE RULE LIVES IN `wheelgeom.js`, not here. It decides what a player can CLICK, and a rule
+      // that important should be provable rather than asserted by a regex over this file.
+      const rejectsNode = (nd) => wheelRejects(nd, { fnFilter: wheelFnFilter, suggestOnly: wheelSuggestFilter,
+        buyableOnly: wheelBuyableFilter, selTrad: wheelSelTrad, tradRel: wheelSelTrad ? tradRelOf(nd) : null });
       // SNG-218 §3 (Erik): ZOOM LEVELS OF DETAIL. Overview stays clean — only your kit, the selected node, and
       // the ✨-suggested picks are named. Zoom in and the LEARNABLE crafts get labeled; zoom way in and
       // everything is (except the closed antipode). The wheel re-renders on a zoom-settle so labels appear as
       // you go (wheelLabelZoomBucket + the debounced re-render in wireSkillGraphViewport).
       const k = graphViews[graphSurface]?.k || 1;
       const zoomed = k >= 1.25, midZoom = k >= 2.2, deepZoom = k >= 3.6;
-      const labelSet = m.nodes.filter(nd => nd.name && (
+      // ⚠️ AND A HIDDEN NODE RESERVES NO LABEL SLOT. The placement loop pushes labels apart to stop them
+      // colliding; leaving rejected nodes in it would have the labels of VISIBLE crafts shoved around by
+      // invisible ones — the same bug as the hit circle, in typography.
+      const labelSet = m.nodes.filter(nd => nd.name && !rejectsNode(nd) && (
         nd.owned || selectedId === nd.id || (nd.recommended && !nd.owned) ||
         (zoomed && filterOn && (nd.families || []).some(f => wheelFnFilter.has(f))) ||
         (zoomed && wheelSelTrad && tradRelOf(nd) === "related") ||
@@ -9272,6 +9290,10 @@ function renderSkillWheel(selectedId = null, status = "") {
       }
       return m.nodes.map(nd => {
         if (wheelLearnMode && nd.owned && !nd.braid) return ""; // SNG-218 §3: browsing to LEARN — owned crafts are noise
+        // ⛔ CCODE-196: REMOVED, not dimmed. The hit circle goes with it, which is the whole point — and so
+        // does the ✨ halo a recommendation used to keep through a dim. A suggestion that survives a filter
+        // the player deliberately applied is the same interference wearing a friendlier face.
+        if (rejectsNode(nd)) return "";
         const r = 5 + (nd.levelReq - 1) * 1.2;
         const matched = filterOn && (nd.families || []).some(f => wheelFnFilter.has(f));
         const fam = (nd.families || [])[0];

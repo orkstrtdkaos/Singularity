@@ -16392,6 +16392,47 @@ await (async () => {
   }
 }
 
+// ---- CCODE-196: a filtered-out craft is GONE, not faint ------------------------------------------
+// ⛔ ERIK: "if i filter out skills have them disappear completely, not just dim... dimmed they still
+// interfere with selection." A dimmed node kept its 13px hit circle — absent to the eye, present to the
+// mouse — so a click meant for a craft that PASSED the filter could land on one it rejected.
+{
+  const { wheelRejects } = await import("../engine/wheelgeom.js");
+  const heal = { id: "h", families: ["mend"], reachable: true };
+  const harm = { id: "x", families: ["break"], reachable: true };
+  const sugg = { id: "s", families: ["break"], recommended: true, reachable: true };
+  const ownedSugg = { id: "o", families: ["break"], recommended: true, owned: true };
+  // 1 · ⚠️ A TRADITION CLICK ALONE REJECTS NOTHING. SNG-202B's related/adjacent/dim rings are how the
+  // wheel shows its shape — hiding the far side would tell the player the circle is smaller than it is.
+  check("CCODE-196: a tradition selection is a RELATION, not a filter — it hides nothing",
+    !wheelRejects(harm, { selTrad: "death", tradRel: "dim" })
+    && !wheelRejects(heal, { selTrad: "death", tradRel: "related" }));
+  // 2 · each real filter rejects what it is for
+  check("CCODE-196: the function filter rejects a craft with none of the chosen families",
+    wheelRejects(harm, { fnFilter: new Set(["mend"]) }) && !wheelRejects(heal, { fnFilter: new Set(["mend"]) }));
+  check("CCODE-196: ✨ Suggested rejects the unsuggested — and the already-owned, which is not a suggestion",
+    wheelRejects(harm, { suggestOnly: true }) && !wheelRejects(sugg, { suggestOnly: true })
+    && wheelRejects(ownedSugg, { suggestOnly: true }));
+  check("CCODE-196: Attainable rejects what the points do not reach",
+    wheelRejects({ families: ["break"] }, { buyableOnly: true }) && !wheelRejects(harm, { buyableOnly: true }));
+  // 3 · ⛔ AND THEY COMPOSE, which is what Erik asked for at SNG-218: "the death ones" + "which of those
+  // heal" + "which are suggested" must resolve to ONE visible set, not three overlapping paint jobs.
+  check("CCODE-196: the filters INTERSECT — failing any one of them removes the craft",
+    wheelRejects(heal, { fnFilter: new Set(["mend"]), selTrad: "death", tradRel: "dim" })
+    && !wheelRejects(heal, { fnFilter: new Set(["mend"]), selTrad: "death", tradRel: "related" }));
+  // 4 · and the render DROPS it rather than fading it — the hit circle is the bug, so it must not be built.
+  {
+    const app196 = readFileSync(join(root, "app.js"), "utf8");
+    const map196 = app196.slice(app196.indexOf("return m.nodes.map(nd => {"), app196.indexOf("}).join(\"\");", app196.indexOf("return m.nodes.map(nd => {")));
+    check("CCODE-196: a rejected node returns EMPTY before the hit circle is ever emitted",
+      /if \(rejectsNode\(nd\)\) return "";/.test(map196)
+      && map196.indexOf("rejectsNode(nd)) return") < map196.indexOf('class="hit"'),
+      "dimming it leaves a 13px invisible target on top of the wheel");
+    check("CCODE-196: a hidden craft reserves no label slot either (visible labels must not be shoved by invisible nodes)",
+      /m\.nodes\.filter\(nd => nd\.name && !rejectsNode\(nd\) &&/.test(app196));
+  }
+}
+
 // ---- SNG-435 §C: the picture field was authored on all 376 and read by nothing ------------------
 // ⛔ ERIK: "I have been having a hard time getting a good Radiant Lance skill image." Its `shape` is
 // "damage", so `powerPhrase` built "Radiant Lance — damage, attack, precise".

@@ -84,3 +84,34 @@ export function leanOffset(spokeAng, comp, n = 24, maxSwingPos = 2) {
   const maxSwing = (maxSwingPos / n) * Math.PI * 2;
   return Math.max(-maxSwing, Math.min(maxSwing, d));
 }
+
+/** ⛔ CCODE-196 (Erik): "if i filter out skills have them disappear completely, not just dim... dimmed
+ *  they still interfere with selection."
+ *
+ *  He is right, and the cause was one line: a dimmed node still emitted a 13px invisible hit circle. At 0.22
+ *  opacity it READS as absent and BEHAVES as present, so a click meant for a craft that passed the filter
+ *  could land on one the filter was supposed to remove. A filter that changes only the paint is not a filter.
+ *
+ *  ⚠️ A TRADITION CLICK ALONE IS NOT A FILTER. SNG-202B's related / adjacent / dim rings are how the
+ *  wheel SHOWS ITS SHAPE; removing the far side would tell the player the circle is smaller than it is. So a
+ *  bare tradition selection rejects nothing, and the moment a real filter joins it the two INTERSECT — which
+ *  is the composition Erik asked for at SNG-218: "the death ones" + "which of those heal" + "which are
+ *  suggested" resolve to one visible set.
+ *
+ *  Lives here, out of the render, because it decides what a player can CLICK and that deserves a test rather
+ *  than a source regex. PURE.
+ *
+ *  @param node      {families, recommended, owned, reachable}
+ *  @param tradRel   the SNG-202B relation of this node to the selected tradition ("related"|"adjacent"|"dim")
+ *  @returns true when the node must not be drawn at all
+ */
+export function wheelRejects(node, { fnFilter = null, suggestOnly = false, buyableOnly = false, selTrad = null, tradRel = null } = {}) {
+  const fns = fnFilter && fnFilter.size ? fnFilter : null;
+  if (!fns && !suggestOnly && !buyableOnly) return false;   // a relation display, not a filter
+  const nd = node || {};
+  if (fns && !(nd.families || []).some(f => fns.has(f))) return true;
+  if (suggestOnly && !(nd.recommended && !nd.owned)) return true;
+  if (buyableOnly && !(nd.reachable && !nd.owned)) return true;
+  if (selTrad && tradRel === "dim") return true;
+  return false;
+}

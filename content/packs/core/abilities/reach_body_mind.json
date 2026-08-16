@@ -1698,9 +1698,8 @@
     "violence_peace": -0.2
    },
    "functions": [
-    "strike",
     "break",
-    "hinder"
+    "strike"
    ],
    "narrationHints": "You read the body's next movement in the movement before it, and put your hand exactly where that movement is going. Joints go the wrong way. Weight arrives where they were not standing. Nothing wasted, nothing telegraphed, all of it at contact range.",
    "description": "Meet a committed movement and finish it wrong — an elbow past its travel, a knee folded inward, a wrist that will not close on a weapon again today. Real breakage at contact range, and the Somatics' first offense: not force but ANSWER.",
@@ -1725,11 +1724,15 @@
      "cannot": "The harder they come, the harder it lands — which cuts both ways when you misread. A second opponent while you are inside the first one's motion is how Somatics die.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -1738,11 +1741,15 @@
      "cannot": "⚠ IT ONLY WORKS ON THE MOVING. Someone who simply stops — sets a shield, waits, brings up a bow at ten paces — is a problem this craft has no answer for at all.",
      "functions": [
       "strike",
-      "break",
-      "hinder"
+      "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1788,7 +1795,13 @@
    "conserveSuppresses": "turn the joint and let go — a misread costs position, not bone",
    "backlashRung": "damaging",
    "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
-   "_descriptionWas": "The Somatics' first offense: not force but ANSWER — their own motion, completed in a direction that ruins them."
+   "_descriptionWas": "The Somatics' first offense: not force but ANSWER — their own motion, completed in a direction that ruins them.",
+   "_functionsWas": [
+    "strike",
+    "break",
+    "hinder"
+   ],
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
    "id": "the_sustained_regard",

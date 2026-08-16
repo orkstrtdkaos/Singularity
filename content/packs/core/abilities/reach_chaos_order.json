@@ -165,11 +165,14 @@
      "grants": "Build a plan that holds under pressure; predict a system's next move; impose enough order on chaos to act cleanly in it.",
      "cannot": "Prediction fails on the truly chaotic; a plan is not a guarantee, only good odds.",
      "functions": [
-      "make",
-      "foresee"
+      "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "make",
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -178,12 +181,17 @@
      "cannot": "Binding is brittle against Wildcraft; over-bound systems can't adapt and shatter when they must.",
      "functions": [
       "make",
-      "foresee",
       "bind",
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "make",
+      "foresee",
+      "bind",
+      "break"
+     ]
     },
     {
      "rank": 3,
@@ -192,20 +200,25 @@
      "cannot": "The wielder drifts order-hot — and order at full strength IS the foreclosure the framework names as the enemy; the Churn and the free places will not forgive it; perfect order is a cage even when it's yours.",
      "functions": [
       "make",
-      "foresee",
       "bind",
       "break",
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "make",
+      "foresee",
+      "bind",
+      "break",
+      "command"
+     ]
     }
    ],
    "functions": [
     "bind",
     "break",
     "command",
-    "foresee",
     "make"
    ],
    "challengeTypes": [
@@ -271,7 +284,15 @@
     }
    ],
    "plainly": "A puzzle/fight/social action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reliability; rank 3 extends scope. Limit: prediction fails on the Truly Chaotic.",
-   "_descriptionWas": "The order-craft: structure, prediction, law, the binding of possibility. The Lattice-Cities' discipline — order as power."
+   "_descriptionWas": "The order-craft: structure, prediction, law, the binding of possibility. The Lattice-Cities' discipline — order as power.",
+   "_functionsWas": [
+    "bind",
+    "break",
+    "command",
+    "foresee",
+    "make"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "scatter",
@@ -516,7 +537,7 @@
    },
    "functions": [
     "empower",
-    "foresee"
+    "reveal"
    ],
    "narrationHints": "The dice of the moment lean your way, just once, just enough.",
    "description": "Nudge chance in a chaotic moment — the lucky slip, the fumbled guard, the door that happens to be open.",
@@ -528,10 +549,13 @@
      "grants": "Tilt an uncertain moment toward a good break for you.",
      "cannot": "Only where chance is live; spends fast.",
      "functions": [
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -539,11 +563,14 @@
      "grants": "Tilt the odds of a whole sequence, not one roll — the run of luck bends your way. Inside that run everything you attempt comes off better than your skill alone should manage — the throw lands, the grip holds, the word arrives right.",
      "cannot": "Tilted odds are still odds. The Churn keeps its right to the improbable.",
      "functions": [
-      "foresee",
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee",
+      "empower"
+     ]
     },
     {
      "rank": 3,
@@ -551,11 +578,14 @@
      "grants": "Around you, the unlikely simply happens — the gap opens, the guard turns, the coin lands.",
      "cannot": "The world balances its books. Whatever you tilt toward you, something tilts away, and you will not see it coming.",
      "functions": [
-      "foresee",
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee",
+      "empower"
+     ]
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -617,7 +647,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/duel/chase action that strengthens someone. Its strength is rated 5 out of 10, and lasts for about an hour Ranks: rank 2 extends duration; rank 3 adds to special. Limit: only Where Chance IS Live — a certainty cannot be tilted."
+   "plainly": "A fight/duel/chase action that strengthens someone. Its strength is rated 5 out of 10, and lasts for about an hour Ranks: rank 2 extends duration; rank 3 adds to special. Limit: only Where Chance IS Live — a certainty cannot be tilted.",
+   "_functionsWas": [
+    "empower",
+    "foresee"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_fixed_point",
@@ -843,8 +878,7 @@
     "space_time": 0.2
    },
    "functions": [
-    "empower",
-    "foresee"
+    "empower"
    ],
    "narrationHints": "Every break falls your way at once — the impossible escape, the pursuit that always closes.",
    "description": "The chase capstone: in flight or pursuit, bend a whole cascade of chance — the gate that's open, the guard that looks away, the ledge that holds. The escape (or the catch) that shouldn't have been possible.",
@@ -856,11 +890,14 @@
      "grants": "Turn a whole chase — escape a closing net, or run down a fleeing foe — by riding a cascade of lucky breaks no one could plan. Everyone running with you is carried by it too: for the length of the chase they are faster and surer than they are, because nothing goes wrong for them.",
      "cannot": "Spends enormously; the ordered and prepared can still corner you; fails hard if the luck runs out mid-flight.",
      "functions": [
-      "foresee",
       "empower"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_functionsWas": [
+      "foresee",
+      "empower"
+     ]
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -906,7 +943,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that strengthens someone. Its strength is rated 9 out of 10, and lasts for about 3 hours Limit: spends Enormously."
+   "plainly": "An action that strengthens someone. Its strength is rated 9 out of 10, and lasts for about 3 hours Limit: spends Enormously.",
+   "_functionsWas": [
+    "empower",
+    "foresee"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "set_to_rights",
@@ -935,8 +977,7 @@
    "functions": [
     "heal",
     "mend",
-    "restore",
-    "reveal"
+    "restore"
    ],
    "challengeTypes": [
     "repair",
@@ -950,11 +991,14 @@
      "grants": "Diagnose exactly what's wrong with a broken body, object, or system and apply the precise intervention — no guessing, no waste.",
      "cannot": "Anything rank 2 adds — restore not just function but the underlying conditions for continued function — the body that heals cleanly, the mechanism that runs without further adjustment; requires knowing what the INTENDED STATE was.",
      "functions": [
-      "reveal",
       "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "mend"
+     ]
     },
     {
      "rank": 2,
@@ -962,13 +1006,18 @@
      "grants": "Restore not just function but the underlying conditions for continued function — the body that heals cleanly, the mechanism that runs without further adjustment.",
      "cannot": "Anything rank 3 adds — return a thing fully to its intended state — a person to health, a plan to viability, a structure to integrity — through methodical, exhaustive work; requires knowing what the INTENDED STATE was.",
      "functions": [
-      "reveal",
       "mend",
       "heal",
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "mend",
+      "heal",
+      "restore"
+     ]
     },
     {
      "rank": 3,
@@ -976,13 +1025,18 @@
      "grants": "Return a thing fully to its intended state — a person to health, a plan to viability, a structure to integrity — through methodical, exhaustive work.",
      "cannot": "Nothing further; this is the craft's ceiling; requires knowing what the INTENDED STATE was.",
      "functions": [
-      "reveal",
       "mend",
       "heal",
       "restore"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "mend",
+      "heal",
+      "restore"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1033,7 +1087,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A repair/medical/logistical action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens precision; rank 3 extends scope. Limit: requires knowing what the Intended State was."
+   "plainly": "A repair/medical/logistical action that restores health. It rolls 2d4+2 Ranks: rank 2 deepens precision; rank 3 extends scope. Limit: requires knowing what the Intended State was.",
+   "_functionsWas": [
+    "heal",
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_established_route",
@@ -1063,7 +1124,6 @@
    "functions": [
     "move",
     "open",
-    "reveal",
     "travel"
    ],
    "challengeTypes": [
@@ -1078,11 +1138,14 @@
      "grants": "Find the lawful, structured way through a guarded or ordered space — the correct credentials, the right corridor, the official route that no one thinks to deny.",
      "cannot": "Anything rank 2 adds — navigate any sufficiently structured system — a city's hierarchy, a fortress's regulations, a court's protocols — using its own rules to go where you need to go; requires a system that HAS rules.",
      "functions": [
-      "reveal",
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "open"
+     ]
     },
     {
      "rank": 2,
@@ -1090,13 +1153,18 @@
      "grants": "Navigate any sufficiently structured system — a city's hierarchy, a fortress's regulations, a court's protocols — using its own rules to go where you need to go.",
      "cannot": "Anything rank 3 adds — move through a system as if you designed it — through the parts only insiders know, at the speed the structure permits at its best, without a door that won't open for you; requires a system that HAS rules.",
      "functions": [
-      "reveal",
       "open",
       "travel",
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "open",
+      "travel",
+      "move"
+     ]
     },
     {
      "rank": 3,
@@ -1104,13 +1172,18 @@
      "grants": "Move through a system as if you designed it — through the parts only insiders know, at the speed the structure permits at its best, without a door that won't open for you.",
      "cannot": "Nothing further; this is the craft's ceiling; requires a system that HAS rules; and it still costs what it costs: the route is LAWFUL, which means it is also LOGGED.",
      "functions": [
-      "reveal",
       "open",
       "travel",
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "open",
+      "travel",
+      "move"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1157,7 +1230,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A infiltration/navigation/social action that moves you or someone else. Its strength is rated 3 out of 10 across a scope of 1, and lasts for about 2 hours. Range is 1. Ranks: rank 2 extends scope; rank 3 adds to special. Limit: requires a system that Has rules — the lawless offer no route."
+   "plainly": "A infiltration/navigation/social action that moves you or someone else. Its strength is rated 3 out of 10 across a scope of 1, and lasts for about 2 hours. Range is 1. Ranks: rank 2 extends scope; rank 3 adds to special. Limit: requires a system that Has rules — the lawless offer no route.",
+   "_functionsWas": [
+    "move",
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_maintained_order",
@@ -1853,8 +1933,9 @@
     "chaos_order": -0.6
    },
    "functions": [
-    "reveal",
-    "foresee"
+    "empower",
+    "foresee",
+    "reveal"
    ],
    "narrationHints": "You look at an arrangement and see where it is NOT nailed down — the assumption nobody checked, the guard who leaves early, the door that only looks locked. Order always leaves a thread.",
    "description": "The Churnfolk's first craft, and the reason the Lattice hates them. Every system has a place it is only pretending.",
@@ -1866,11 +1947,14 @@
      "grants": "Look at a plan, a guard rotation, a lock-up, a ritual, a contract, and the craft NAMES ONE LOOSE THING: the specific assumption, gap, habit or shortcut that the whole arrangement is quietly resting on.",
      "cannot": "It finds ONE and it must EXIST — a genuinely sound arrangement gives nothing, and the craft says nothing rather than inventing. It finds the thread; pulling it is a separate problem entirely.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -1878,11 +1962,14 @@
      "grants": "Take a whole arrangement apart in the looking — every loose place, ordered by how much comes away if you pull.",
      "cannot": "The more you look the more you are seen looking. And knowing four ways in does not give you four ways out.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 3,
@@ -1895,7 +1982,12 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1933,7 +2025,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that names the one loose assumption an arrangement rests on. Rated 5 of 10 across a scope of 2 for about six hours."
+   "plainly": "A puzzle/social action that names the one loose assumption an arrangement rests on. Rated 5 of 10 across a scope of 2 for about six hours.",
+   "_functionsWas": [
+    "reveal",
+    "foresee"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_way_out",
@@ -1947,9 +2044,9 @@
     "space_time": -0.2
    },
    "functions": [
+    "conceal",
     "move",
-    "reveal",
-    "conceal"
+    "reveal"
    ],
    "narrationHints": "There is always something. A drain, a distraction, a cart going the right way, a man who owes you, a moment when everyone looks left. You do not create it — you FIND it, and it is always there, and Churnfolk will not explain why.",
    "description": "The Churnfolk's escaping-craft. The Lattice calls it luck; the Churnfolk call it looking.",
@@ -1974,11 +2071,15 @@
      "cannot": "The more people, the worse and slower the out. And someone always has to be last.",
      "functions": [
       "move",
-      "reveal",
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal",
+      "conceal"
+     ]
     },
     {
      "rank": 3,
@@ -1987,11 +2088,15 @@
      "cannot": "⚠ THE PRICE IS NAMED BY THE SITUATION, NOT BY YOU, and at this rank it is real: something is left behind, and the craft does not let you choose what.",
      "functions": [
       "move",
-      "reveal",
       "conceal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal",
+      "conceal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2033,7 +2138,13 @@
      "class": "soft"
     }
    ],
-   "plainly": "A puzzle/fight action that names a specific escape available in the next minute. Rated 6 of 10 across a scope of 2."
+   "plainly": "A puzzle/fight action that names a specific escape available in the next minute. Rated 6 of 10 across a scope of 2.",
+   "_functionsWas": [
+    "move",
+    "reveal",
+    "conceal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_ordered_record",
@@ -2046,8 +2157,9 @@
     "chaos_order": 0.6
    },
    "functions": [
-    "reveal",
-    "foresee"
+    "bind",
+    "foresee",
+    "reveal"
    ],
    "narrationHints": "You hold an order in mind completely and notice, instantly, anything out of it. A name not on the roll, a stone recently moved, a coin in the wrong purse, a man where he should not be.",
    "description": "The Lattice-Cities' first craft, and the one their whole administration runs on.",
@@ -2059,11 +2171,14 @@
      "grants": "Take the order of a thing — a room, a roll, a ledger, a rotation, a shelf — then the craft NAMES WHAT HAS CHANGED, precisely: this entry is new, that item is missing, he was not here yesterday.",
      "cannot": "YOU MUST TAKE THE ORDER FIRST — this compares against a reading you made, so a place you have never ordered gives nothing. It names the DEPARTURE, never the reason.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -2076,7 +2191,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "bind"
+     ]
     },
     {
      "rank": 3,
@@ -2089,7 +2209,12 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "bind"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2127,7 +2252,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that names exactly what has changed against an order you took. Rated 5 of 10 across a scope of 2 for about a day."
+   "plainly": "A puzzle/social action that names exactly what has changed against an order you took. Rated 5 of 10 across a scope of 2 for about a day.",
+   "_functionsWas": [
+    "reveal",
+    "foresee"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_working_order",

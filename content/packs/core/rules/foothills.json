@@ -87,7 +87,7 @@
      "detail": "The body-halls. What real use does to a person, addressed by people who have seen it before — and the reason the queue at the Grindstone exists at all."
     }
    ],
-   "_abilityGap": "⛔ HARDLINE HAS A PLACE, A REGION, A BIOME AND AN ECONOMY, AND ZERO ABILITIES. ⚠️ It is the clearest home for the physical/ranged crafts I filed as valley_craft under SNG-440 — the bow, the crossbow and the hurled weight are TRAINED skills sold to anyone, which is exactly what this foothill is for. Erik's call, and it resolves the Hunter's Strike collision at the same time."
+   "_abilityGap": "⛔ RESOLVED BY THE TWO-AXIS RULE RATHER THAN BY MOVING CRAFTS INTO IT. Hardline has zero abilities OF ITS OWN and should — it is a place of ACCESS. Five of the six new physical crafts now list it under `learnedAt` while rooting to marcher, somatic or valley_craft.\n⚠️ WHETHER A FOOTHILL SHOULD EVER HAVE ITS OWN ROOTED CRAFTS IS STILL ERIK'S CALL — harmonic and radiant_folk between them hold 29, so the precedent says yes. ⛔ THE DISTINCTION I WOULD DRAW: a foothill roots a craft when the BLEND produces something neither parent has. Glasswork is not Radiance done cheaply; it is light stored and sold, which no Blazeborn would author. Hardline's equivalent would be a craft about CONTRACTED violence — starting, stopping and being paid — that neither the Marchers nor the Stillhold would ever write down."
   }
  },
  "folk": {
@@ -111,5 +111,6 @@
  },
  "notATradition": {
   "precursor": "⛔ A POWER SOURCE MISFILED AS A TRADITION. 6 abilities — Address-Sense, Latticespeak, Wake the Line, Unmake Seal, Hold the Aperture, Foreclose. No people owns them; anyone who learns to speak to the lattice has them. ⚠️ Should carry `tradition: null` with `powerSystem: precursor`."
- }
+ },
+ "_twoAxes": "⛔ SNG-443, ERIK'S RULING: 'Skills may be learned at PLACES — or in the wilds as a hunter — but they would be TIED BACK TO THEIR TRADITION ROOTS otherwise.'\n⚠️ TWO SEPARATE AXES, AND I HAD COLLAPSED THEM:\n   `tradition` — THE LINEAGE. Which people's craft this descends from. Permanent, and it is what the power source, the aesthetic and the wheel position all key off.\n   `learnedAt` — THE ACCESS. Where a person can actually be taught it: a foothill, a school, a place, or the wilds.\n⛔ A FOOTHILL IS A PLACE OF ACCESS, NOT A NEW ANCESTRY. Hardline teaches the Edge; it does not own it. That is exactly what makes a foothill an economic centre — it SELLS ACCESS to something it did not invent, which is also true of the Radiant Plateau selling stored light and the Bargainers selling honest terms.\n⚠️ MY ERROR, NAMED: I filed six crafts as `valley_craft` because they were open to anyone, which CONFUSED ACCESS WITH ANCESTRY. Open-to-anyone is a property of the learning, not of the lineage."
 }

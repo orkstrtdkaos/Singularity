@@ -157,10 +157,13 @@
      "grants": "Ease a dying thing's passing; read how and how long ago something died; grant true rest to what cannot find it.",
      "cannot": "Cannot kill the healthy; cannot bring back; the easing is a mercy, refused if unwilling.",
      "functions": [
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -168,11 +171,14 @@
      "grants": "Read the physical evidence of death — what killed a ruin, what a plague did and will do next, what ended a thing and when. Halt a spreading rot by giving its front a clean end. AND TURN IT OUTWARD: against a living opponent, find the decline ALREADY in them — an infected wound, a sickness, exhaustion, an old injury — and hasten it. Their own ending is the weapon; you only bring it forward. It takes a few breaths, it is plainly visible, and they feel it starting.",
      "cannot": "Reading is not undoing; some rots refuse a clean end. Turned outward it needs something already failing in them — a hale opponent offers nothing to hasten. And they KNOW, from the first moment.",
      "functions": [
-      "foresee",
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "foresee",
+      "hinder"
+     ]
     },
     {
      "rank": 3,
@@ -180,17 +186,21 @@
      "grants": "Grant endings at scale — a battlefield eased, a plague stopped by stilling its front, a thing that should have died a century ago finally allowed to. AND THE FULL STRIKE: against a living opponent, take the ending every living thing carries and pull it forward whole. This kills. It is slow enough to be interrupted, bright enough to be witnessed, and the dying understand exactly what is being done and by whom. Ashwardens call it the mercy turned around, and they do not call it that kindly.",
      "cannot": "The wielder drifts death-hot; never raises, never forces a death that must not happen. It cannot smite a healthy thing dead where it stands from nothing — it works THROUGH what is in them, so it is slow and it is seen. For the instant, unseen ending, that is The Cut Thread, and it costs accordingly.",
      "functions": [
-      "foresee",
       "hinder",
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "foresee",
+      "hinder",
+      "strike"
+     ]
     }
    ],
    "functions": [
-    "foresee",
     "hinder",
+    "reveal",
     "strike"
    ],
    "challengeTypes": [
@@ -256,7 +266,13 @@
     }
    ],
    "plainly": "A investigate/fight/puzzle/social action that reveals information or sets up a later action. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens precision; rank 3 extends scope. Limit: cannot Bring Back.",
-   "_descriptionWas": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art — not killing, but tending the end."
+   "_descriptionWas": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art — not killing, but tending the end.",
+   "_functionsWas": [
+    "foresee",
+    "hinder",
+    "strike"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "staunch",
@@ -728,8 +744,7 @@
    },
    "functions": [
     "heal",
-    "restore",
-    "reveal"
+    "restore"
    ],
    "narrationHints": "At the very edge, the dying are given one clear hour — lucid, painless, theirs.",
    "description": "Grant a dying being a final lucid, painless interval to say and do what remains — the co-firing craft, life and death held together in mercy.",
@@ -754,11 +769,15 @@
      "cannot": "There is no version of this that is not a decision about someone else's end. The Ashwardens teach it late, to people who have already sat with enough dying to tell the difference — and they teach that being wrong about it once is a thing you carry for good.",
      "functions": [
       "heal",
-      "restore",
-      "reveal"
+      "restore"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "heal",
+      "restore",
+      "reveal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -806,7 +825,13 @@
    "upkeep": {
     "prepHours": 0,
     "note": "⚠️ COOLDOWN REMOVED (Erik), same reason. A rootkin T4 capstone that ends a life is limited by who can reach it and by what using it does to them — not by a calendar."
-   }
+   },
+   "_functionsWas": [
+    "heal",
+    "restore",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -1174,7 +1199,6 @@
     "falsehood_truth": 0.3
    },
    "functions": [
-    "reveal",
     "summon"
    ],
    "narrationHints": "It answers. It is not glad to. It tells you the small thing it knew and nothing more.",
@@ -1187,11 +1211,14 @@
      "grants": "The recently dead answer one question, truthfully, and badly.",
      "cannot": "Recently. A week is far. A season is gone.",
      "functions": [
-      "reveal",
       "summon"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "summon"
+     ]
     },
     {
      "rank": 2,
@@ -1199,11 +1226,14 @@
      "grants": "Ask further back, and ask more — three questions, and the answers are clearer.",
      "cannot": "Each question takes something from what is left of them. You will feel it go.",
      "functions": [
-      "reveal",
       "summon"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "summon"
+     ]
     },
     {
      "rank": 3,
@@ -1211,11 +1241,14 @@
      "grants": "The dead tell you what they knew, entire, and what they wanted, and what they were afraid of.",
      "cannot": "You will hear things about them that were not yours to know, and you cannot give them back.",
      "functions": [
-      "reveal",
       "summon"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "summon"
+     ]
     }
    ],
    "gated": "learned",
@@ -1278,7 +1311,12 @@
    "upkeep": {
     "targetAgeHoursMax": 168,
     "note": "a week is far, a season is gone — the reach is measured from time of death"
-   }
+   },
+   "_functionsWas": [
+    "reveal",
+    "summon"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -1877,11 +1915,14 @@
      "grants": "Speak to living things and be heard: a basic request to plants or animals is understood and followed, in their way. Ask and receive — the living world tells you what it has sensed nearby.",
      "cannot": "Living things understand requests, not plans. Ask them to hold still, to move aside, to come — not to execute a strategy.",
      "functions": [
-      "command",
-      "reveal"
+      "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "command",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -1894,7 +1935,12 @@
       "track"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "command",
+      "reveal",
+      "track"
+     ]
     },
     {
      "rank": 3,
@@ -1902,12 +1948,15 @@
      "grants": "Speak to the living world at regional scale. The whole grove turns its attention toward you. What it knows of every thing that has moved through it is yours. What you ask of it — at the pace of trees — is done.",
      "cannot": "At the pace of trees. Urgency is a concept the grove does not share.",
      "functions": [
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "_functionsWas": [
       "command",
       "reveal",
       "track"
-     ],
-     "gains": "deepen",
-     "harmRung": "none"
+     ]
     }
    ],
    "functions": [
@@ -1967,7 +2016,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A investigate/explore/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about 4 hours. Range is 30. Ranks: rank 2 deepens complexity; rank 3 extends reach. Limit: living things understand Requests, Not Plans."
+   "plainly": "A investigate/explore/social action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about 4 hours. Range is 30. Ranks: rank 2 deepens complexity; rank 3 extends reach. Limit: living things understand Requests, Not Plans.",
+   "_functionsWas": [
+    "command",
+    "reveal",
+    "track"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "id": "the_root_road",
@@ -1996,11 +2051,14 @@
      "grants": "Move through living terrain faster than it should allow. The paths exist; you know how to find them. The road also shows you: what grows along it, who has used it, what condition the terrain ahead is in.",
      "cannot": "You must be in terrain with living things. Stone cities, blasted ground — the Road doesn't run there.",
      "functions": [
-      "move",
-      "reveal"
+      "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal"
+     ]
     },
     {
      "rank": 2,
@@ -2009,11 +2067,15 @@
      "cannot": "The opened way closes again. It isn't a road until you make it one by using it repeatedly.",
      "functions": [
       "move",
-      "reveal",
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal",
+      "open"
+     ]
     },
     {
      "rank": 3,
@@ -2022,18 +2084,22 @@
      "cannot": "Emergence takes time and you cannot choose exactly where — you emerge where the network is willing, within the range you name. And dead ground, sealed vaults, stone-over-stone — the roots have not gone there.",
      "functions": [
       "move",
-      "reveal",
       "open",
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "move",
+      "reveal",
+      "open",
+      "travel"
+     ]
     }
    ],
    "functions": [
     "move",
     "open",
-    "reveal",
     "travel"
    ],
    "challengeTypes": [
@@ -2089,7 +2155,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A explore/survive/stealth action that moves you or someone else. Its strength is rated 3 out of 10, and lasts for about 3 hours. Range is 6. Ranks: rank 2 adds to access; rank 3 adds to special. Limit: requires Terrain With Living Things — stone cities and blasted ground offer nothing."
+   "plainly": "A explore/survive/stealth action that moves you or someone else. Its strength is rated 3 out of 10, and lasts for about 3 hours. Range is 6. Ranks: rank 2 adds to access; rank 3 adds to special. Limit: requires Terrain With Living Things — stone cities and blasted ground offer nothing.",
+   "_functionsWas": [
+    "move",
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -2345,8 +2418,7 @@
    },
    "functions": [
     "heal",
-    "summon",
-    "reveal"
+    "summon"
    ],
    "narrationHints": "You say the name the way you would say it across a room, not across a grave. That is the whole technique.",
    "description": "⚠️ RETRIEVAL. The Ashwarden road runs both ways, and this is the walk back. You reach for someone who has died and bring them up the ladder — from the threshold, and at rank, from further down. THE DEEPER THEY HAVE SUNK, THE HARDER THE REACH AND THE MORE IT COSTS YOU.",
@@ -2371,11 +2443,15 @@
      "cannot": "The deep dark. And the further you reach, the more of the way back you walk yourself.",
      "functions": [
       "heal",
-      "summon",
-      "reveal"
+      "summon"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "heal",
+      "summon",
+      "reveal"
+     ]
     },
     {
      "rank": 3,
@@ -2384,11 +2460,15 @@
      "cannot": "THE SEALED. A failed reach at this depth SEALS THEM, and the tradition holds that as the reason to be certain before you try.",
      "functions": [
       "heal",
-      "summon",
-      "reveal"
+      "summon"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "heal",
+      "summon",
+      "reveal"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2460,7 +2540,13 @@
      "3": 2880
     },
     "note": "⚠️ COOLDOWN REMOVED. Retrieval is already gated hard — by depth, by the sealed being unreachable, and by a failed reach SINKING them. Stacking a timer on that punishes the thing the tradition exists to do."
-   }
+   },
+   "_functionsWas": [
+    "heal",
+    "summon",
+    "reveal"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
    "schemaVersion": 1,
@@ -2985,8 +3071,9 @@
     "falsehood_truth": 0.4
    },
    "functions": [
-    "reveal",
-    "foresee"
+    "empower",
+    "foresee",
+    "reveal"
    ],
    "narrationHints": "You read what a thing has left. Not a feeling — a reckoning: what is wearing, how fast, and what it will fail from. Ashwardens are asked to look at bridges as often as at people.",
    "description": "Look at a person, structure or working and know what is failing in it, roughly how long it has, and what it will go from. The Ashwardens' seeing-craft: everything is ending, and the craft is knowing the schedule.",
@@ -2998,11 +3085,14 @@
      "grants": "Look at a person, structure, or working and know what is failing in it, roughly how long it has, and what it will go from.",
      "cannot": "It reads DECLINE, not danger — a healthy man about to be murdered reads as healthy. And you must SAY it plainly; an Ashwarden who softens a reckoning has stopped practising.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 2,
@@ -3010,11 +3100,14 @@
      "grants": "Read a whole site — which beams, which wells, which people. Ashwardens are hired for exactly this and it is unglamorous, essential work.",
      "cannot": "Knowing does not fix, and a place told its true account frequently blames the one who read it. Prepare for that or do not take the work.",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee"
+     ]
     },
     {
      "rank": 3,
@@ -3027,7 +3120,12 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "foresee",
+      "empower"
+     ]
     }
    ],
    "challengeTypes": [
@@ -3066,7 +3164,12 @@
     }
    ],
    "plainly": "A puzzle/social action that reads what a thing has left and what it will fail from. Rated 5 of 10 across a scope of 2 for about four hours.",
-   "_descriptionWas": "The Ashwardens' seeing-craft. Everything is ending; the craft is knowing the schedule."
+   "_descriptionWas": "The Ashwardens' seeing-craft. Everything is ending; the craft is knowing the schedule.",
+   "_functionsWas": [
+    "reveal",
+    "foresee"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -522,43 +522,54 @@
      "name": "Early Hands",
      "grants": "Catch or deflect one thrown object per action if you saw it thrown. Also: take a small thing off a person without them feeling it.",
      "functions": [
-      "reveal",
       "hinder"
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "cannot": "You must SEE it coming — nothing from behind; one object per action."
+     "cannot": "You must SEE it coming — nothing from behind; one object per action.",
+     "_functionsWas": [
+      "reveal",
+      "hinder"
+     ]
     },
     {
      "rank": 2,
      "name": "The Turned Catch",
      "grants": "Catch it and send it back in the same motion, at the thrower, at short range.",
      "functions": [
-      "reveal",
       "hinder",
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "cannot": "Short range only on the return; still nothing from behind."
+     "cannot": "Short range only on the return; still nothing from behind.",
+     "_functionsWas": [
+      "reveal",
+      "hinder",
+      "strike"
+     ]
     },
     {
      "rank": 3,
      "name": "Both Hands",
      "grants": "Two objects, or one arrow from a bow you did not see drawn.",
      "functions": [
-      "reveal",
       "hinder",
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "cannot": "⛔ NOT A BOLT — a crossbow bolt takes the hand off."
+     "cannot": "⛔ NOT A BOLT — a crossbow bolt takes the hand off.",
+     "_functionsWas": [
+      "reveal",
+      "hinder",
+      "strike"
+     ]
     }
    ],
    "functions": [
-    "reveal",
-    "move"
+    "hinder",
+    "strike"
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
@@ -595,7 +606,12 @@
    "_authored": "SNG-440",
    "_traditionWas": "valley_craft",
    "learnedAt": "anywhere",
-   "_rootWhy": "⛔ PERFECT MOTION, NARROWED. Catching a thrown thing early is the Somatic reading-of-movement at hand scale. ⚠️ Also the pickpocket's craft, which the Flesh-Temples do not discuss."
+   "_rootWhy": "⛔ PERFECT MOTION, NARROWED. Catching a thrown thing early is the Somatic reading-of-movement at hand scale. ⚠️ Also the pickpocket's craft, which the Flesh-Temples do not discuss.",
+   "_functionsWas": [
+    "reveal",
+    "move"
+   ],
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."

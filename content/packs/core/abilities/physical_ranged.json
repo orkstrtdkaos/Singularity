@@ -21,23 +21,41 @@
    ],
    "narrationHints": "The hand goes to the belt and comes away empty and there is already a knife in them. No draw, no aim you could see, no sound until it lands.",
    "description": "Put a knife, a star or a spike into someone at eight paces, underhand and without a windup. Quiet, deniable, and it does not announce itself the way a drawn bow does.",
-   "notFor": "Armour (find the gap or find another craft); anything past a room's width; a fight you want witnessed.",
+   "notFor": "Armour without a gap; anything past a room's width; a fight you want witnessed.",
    "tree": [
     {
      "rank": 1,
      "name": "Underhand",
      "grants": "One blade at 8 paces, from concealment or mid-stride. No windup a watcher could call.",
-     "cannot": "Cannot punch through mail or a shield; one blade per action."
+     "cannot": "Cannot punch through mail or a shield; one blade per action.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging"
     },
     {
      "rank": 2,
      "name": "The Second Knife",
-     "grants": "Two blades in the time of one — the same target twice, or two targets standing close."
+     "grants": "Two blades in the time of one — the same target twice, or two targets standing close.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "cannot": "Two targets must be standing close; you are still out of blades eventually."
     },
     {
      "rank": 3,
      "name": "The Full Belt",
-     "grants": "Throw anything with a point and an edge, and it flies true: a chisel, a shard, a fork."
+     "grants": "Throw anything with a point and an edge, and it flies true: a chisel, a shard, a fork.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "cannot": "Improvised points do less than a true blade; you must have something with an edge."
     }
    ],
    "functions": [
@@ -66,7 +84,7 @@
      "class": "hard"
     },
     {
-     "text": "⛔ EIGHT PACES. Past that the blade tumbles and lands flat",
+     "text": "⛔ EIGHT PACES — past that the blade tumbles and lands flat",
      "class": "hard"
     },
     {
@@ -107,17 +125,36 @@
      "rank": 1,
      "name": "The Loosed Stone",
      "grants": "One stone at 40 paces. Ammunition is whatever is underfoot — you are never out.",
-     "cannot": "Needs room to swing; useless in a press or a low tunnel."
+     "cannot": "Needs room to swing; useless in a press or a low tunnel.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging"
     },
     {
      "rank": 2,
      "name": "The Aimed Stone",
-     "grants": "Call the hit — a hand, a knee, the lamp, the horse. It goes where you called."
+     "grants": "Call the hit — a hand, a knee, the lamp, the horse. It goes where you called.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "cannot": "Called shots at range still miss; loud in the way a bow is not."
     },
     {
      "rank": 3,
      "name": "Skull-Weight",
-     "grants": "Lead or cast shot instead of river stone: it goes through a helm and keeps going."
+     "grants": "Lead or cast shot instead of river stone: it goes through a helm and keeps going.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "cannot": "Cast shot must be carried and counted; still needs room to swing."
     }
    ],
    "functions": [
@@ -142,16 +179,16 @@
    "intensity": "moderate",
    "bounds": [
     {
-     "text": "⛔ NEEDS ROOM TO SWING — a press, a tunnel or a doorway kills it",
+     "text": "⛔ NEEDS ROOM TO SWING",
      "class": "hard"
     },
     {
-     "text": "loud in the way a bow is not — everyone hears where it came from",
+     "text": "loud — everyone hears where it came from",
      "class": "soft"
     },
     {
      "text": "one stone per action; you must find or carry them",
-     "class": "hard"
+     "class": "cost"
     }
    ],
    "challengeTypes": [
@@ -171,7 +208,7 @@
    "levelReq": 2,
    "energyCost": 4,
    "axes": {
-    "violence_peace": -0.4
+    "violence_peace": -0.5
    },
    "attribute": "physical",
    "effectTags": [
@@ -187,17 +224,35 @@
      "rank": 1,
      "name": "The Long Draw",
      "grants": "One arrow at 120 paces, through leather and gambeson. You can hold at full draw and wait.",
-     "cannot": "Cannot shoot in a press; a shield-wall stops you cold."
+     "cannot": "Cannot shoot in a press; a shield-wall stops you cold; wet string, no shot.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging"
     },
     {
      "rank": 2,
      "name": "The Kept Rhythm",
-     "grants": "An arrow every action without losing accuracy — you can hold a corridor or a bridge alone."
+     "grants": "An arrow every action without losing accuracy — you can hold a corridor or a bridge alone.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "cannot": "Arrows are counted — a quiver is twenty and you will notice."
     },
     {
      "rank": 3,
      "name": "The Heavy Head",
-     "grants": "Bodkin heads: mail and plate stop mattering at under sixty paces."
+     "grants": "Bodkin heads: mail and plate stop mattering at under sixty paces.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "cannot": "Bodkin heads only bite inside sixty paces; still both hands and clear sight."
     }
    ],
    "functions": [
@@ -222,11 +277,11 @@
    "intensity": "moderate",
    "bounds": [
     {
-     "text": "⛔ NEEDS BOTH HANDS AND CLEAR SIGHT — no bow works in a grapple",
+     "text": "⛔ BOTH HANDS AND CLEAR SIGHT — no bow works in a grapple",
      "class": "hard"
     },
     {
-     "text": "arrows are counted; a quiver is twenty and you will notice",
+     "text": "arrows are counted; a quiver is twenty",
      "class": "cost"
     },
     {
@@ -251,7 +306,7 @@
    "levelReq": 2,
    "energyCost": 5,
    "axes": {
-    "violence_peace": -0.4
+    "violence_peace": -0.5
    },
    "attribute": "physical",
    "effectTags": [
@@ -267,17 +322,35 @@
      "rank": 1,
      "name": "Spanned and Levelled",
      "grants": "One bolt at 90 paces, through mail. Aim is trivial; anyone can be taught in an afternoon.",
-     "cannot": "⛔ SPANNING TAKES A FULL ACTION — one shot, then you are a man holding a stick."
+     "cannot": "⛔ SPANNING TAKES A FULL ACTION — one shot, then you are a man holding a stick.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging"
     },
     {
      "rank": 2,
      "name": "The Belt Claw",
-     "grants": "Span and shoot in the same action, if you have both feet under you."
+     "grants": "Span and shoot in the same action, if you have both feet under you.",
+     "functions": [
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "cannot": "You need both feet under you; a cranked string in the wet is a slow disaster."
     },
     {
      "rank": 3,
      "name": "The Windlass",
-     "grants": "A heavy bow that will go through plate, a shield, and the arm behind it."
+     "grants": "A heavy bow that will go through plate, a shield, and the arm behind it.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "cannot": "Heavy, obvious, and illegal in three cities."
     }
    ],
    "functions": [
@@ -302,7 +375,7 @@
    "intensity": "moderate",
    "bounds": [
     {
-     "text": "⛔ RESPANNING COSTS AN ACTION at r1 — the gap is the whole weakness",
+     "text": "⛔ RESPANNING COSTS AN ACTION at r1",
      "class": "cost"
     },
     {
@@ -347,17 +420,38 @@
      "rank": 1,
      "name": "Get Under It",
      "grants": "Throw anything you could lift at 15 paces. Objects break; people go down and stay down a moment.",
-     "cannot": "Needs something to throw and room to wind up."
+     "cannot": "Needs something to throw and room to wind up; you are off balance afterward.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging"
     },
     {
      "rank": 2,
      "name": "The Committed Throw",
-     "grants": "Throw something you should not be able to lift — a table, a door, a person of your own size."
+     "grants": "Throw something you should not be able to lift — a table, a door, a person of your own size.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "cannot": "You must be able to lift it; fifteen paces and it drops."
     },
     {
      "rank": 3,
      "name": "The Scattering",
-     "grants": "Throw into a group: everyone in the path goes over, not just the first."
+     "grants": "Throw into a group: everyone in the path goes over, not just the first.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "cannot": "One throw, one line — and recovering costs you an action."
     }
    ],
    "functions": [
@@ -410,7 +504,9 @@
    "name": "The Quick Hands",
    "levelReq": 1,
    "energyCost": 2,
-   "axes": {},
+   "axes": {
+    "violence_peace": -0.1
+   },
    "attribute": "physical",
    "effectTags": [
     "defend",
@@ -424,17 +520,40 @@
     {
      "rank": 1,
      "name": "Early Hands",
-     "grants": "Catch or deflect one thrown object per action if you saw it thrown. Also: take a small thing off a person without them feeling it."
+     "grants": "Catch or deflect one thrown object per action if you saw it thrown. Also: take a small thing off a person without them feeling it.",
+     "functions": [
+      "reveal",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "cannot": "You must SEE it coming — nothing from behind; one object per action."
     },
     {
      "rank": 2,
      "name": "The Turned Catch",
-     "grants": "Catch it and send it back in the same motion, at the thrower, at short range."
+     "grants": "Catch it and send it back in the same motion, at the thrower, at short range.",
+     "functions": [
+      "reveal",
+      "hinder",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "cannot": "Short range only on the return; still nothing from behind."
     },
     {
      "rank": 3,
      "name": "Both Hands",
-     "grants": "Two objects, or one arrow from a bow you did not see drawn."
+     "grants": "Two objects, or one arrow from a bow you did not see drawn.",
+     "functions": [
+      "reveal",
+      "hinder",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "cannot": "⛔ NOT A BOLT — a crossbow bolt takes the hand off."
     }
    ],
    "functions": [
@@ -478,5 +597,6 @@
    "learnedAt": "anywhere",
    "_rootWhy": "⛔ PERFECT MOTION, NARROWED. Catching a thrown thing early is the Somatic reading-of-movement at hand scale. ⚠️ Also the pickpocket's craft, which the Flesh-Temples do not discuss."
   }
- ]
+ ],
+ "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."
 }

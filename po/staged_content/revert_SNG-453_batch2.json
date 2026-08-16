@@ -1,0 +1,2127 @@
+{
+ "_note": "⛔ SNG-453 BATCH 2 REVERT LOG. Full pre-edit state of 20 Mind abilities (HARM/CONTROL/DEFEND), captured before any change.",
+ "_batch": "Mind · harm, control, defend, and the three mastery skills",
+ "_date": "2026-08-15",
+ "abilities": {
+  "noesis": {
+   "id": "noesis",
+   "name": "Noesis",
+   "levelReq": 2,
+   "energyCost": 5,
+   "powerSystem": "reach_body_mind",
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.5,
+    "concrete_abstract": 0.3,
+    "chaos_order": 0.2
+   },
+   "effectTags": [
+    "mind",
+    "memory",
+    "thought"
+   ],
+   "narrationHints": "Thought made a discipline and a force — memory-palaces, absolute focus, reasoning that outruns the room, the mind holding what the body can't.",
+   "description": "Recall perfectly what you attend to, focus past pain and fear, and reason a problem faster and further than the unpracticed. The mind-pole mastery — the Cogitarium's art.",
+   "notFor": "Physical feats (that's Soma); wisdom (Noesis is sharp, not necessarily wise); anything requiring presence in the body it keeps trying to leave.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Ordered Mind",
+     "grants": "Perfect recall of what you attend to; focus that ignores pain, fear, and distraction; reason a problem faster and further than the unpracticed.",
+     "cannot": "Recall is not understanding; focus this tight can miss the body's warnings.",
+     "functions": [
+      "reveal",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Memory-Palace",
+     "grants": "Hold vast structured knowledge and retrieve it instantly; model a system or a person in your head and predict them; think through a crisis in the space others panic in.",
+     "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room.",
+     "functions": [
+      "reveal",
+      "resist",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Cogitant's Height",
+     "grants": "Thought as force — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. And turned on a person: a conclusion assembled and delivered exactly where their reasoning rests, which staggers a mind the way a blow staggers a body, and leaves the same kind of mark.",
+     "cannot": "It is sharp, not wise, and this use of it least of all. It needs a mind that reasons — the disciplined, the genuinely mad, and the simply uninterested all shrug it off. And the Cogitarium teaches that what you take apart in someone this way, you are responsible for putting back.",
+     "functions": [
+      "reveal",
+      "resist",
+      "foresee",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    }
+   ],
+   "functions": [
+    "foresee",
+    "resist",
+    "reveal",
+    "strike"
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "INVESTIGATE",
+    "PUZZLE"
+   ],
+   "tradition": "cogitant",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "shape": "setup",
+   "operativeAxis": [
+    "reasoning",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 2,
+    "note": "damaging rung — 'thought as force'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "reasoning",
+     "delta": "hold VAST STRUCTURED KNOWLEDGE and retrieve it instantly; MODEL a system or a person and PREDICT them",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THOUGHT AS FORCE — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to have arranged it",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "think it through — half the reach, and it costs you no time",
+    "surge": "double it; IT IS SHARP, NOT WISE, and this use of it least of all"
+   },
+   "bounds": [
+    {
+     "text": "RECALL IS NOT UNDERSTANDING",
+     "class": "hard"
+    },
+    {
+     "text": "THE MODEL IS ONLY AS GOOD AS ITS INPUTS — a mind that lives in the model loses the room",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS SHARP, NOT WISE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight/investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reasoning; rank 3 adds to special. Limit: recall IS Not Understanding.",
+   "_descriptionWas": "The mind-pole mastery: memory, focus, reason, thought as an instrument sharp enough to act on the world. The Cogitarium's art.",
+   "_file": "reach_body_mind.json"
+  },
+  "total_focus": {
+   "id": "total_focus",
+   "name": "Total Focus",
+   "levelReq": 1,
+   "energyCost": 4,
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.3
+   },
+   "functions": [
+    "resist",
+    "reveal"
+   ],
+   "narrationHints": "The world narrows to the one thing, and nothing reaches you.",
+   "description": "Enter absolute focus — ignore fear, distraction, and pain to think or work clean. Folk-Noesis.",
+   "notFor": "Physical feats; wisdom.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Total Focus",
+     "grants": "Focus so completely that fear, pain, and distraction fall away while you think or work.",
+     "cannot": "Can miss the body's warnings; tight focus narrows the view.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Narrowed World",
+     "grants": "Narrow to one thing so completely that fear, pain, and noise stop reaching you.",
+     "cannot": "What you narrow out is still happening. People have been focused to death.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Single Point",
+     "grants": "Narrow to one thing so completely that nothing else exists — not fear, not pain, not the wound you are standing on. And within that narrowing the thing opens completely: every detail of it available at once, because nothing at all is competing for the attention. The task is completed.",
+     "cannot": "You will not notice what it cost until afterward. Cogitants have finished the task and then simply fallen over.",
+     "functions": [
+      "resist",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "powerSystem": "reach_body_mind",
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE",
+    "SURVIVE"
+   ],
+   "tradition": "cogitant",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "schoolAffinity": "cog_unaided",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "bolster",
+   "operativeAxis": [
+    "focus",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "focus",
+     "delta": "narrow so completely that FEAR, PAIN, AND NOISE STOP REACHING YOU",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: narrow so completely that NOTHING ELSE EXISTS — not fear, not pain, NOT THE WOUND YOU ARE STANDING ON",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "narrow a little — half the focus, and you keep your peripheral sense",
+    "surge": "double it; WHAT YOU NARROW OUT IS STILL HAPPENING"
+   },
+   "bounds": [
+    {
+     "text": "it can MISS THE BODY'S WARNINGS; tight focus narrows the view",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU NARROW OUT IS STILL HAPPENING — people have been focused to death",
+     "class": "hard"
+    },
+    {
+     "text": "YOU WILL NOT NOTICE WHAT IT COST UNTIL AFTERWARD",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A fight/puzzle/survive action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens focus; rank 3 adds to special. Limit: it can Miss The Body'S Warnings; tight focus narrows the view.",
+   "_file": "reach_body_mind.json"
+  },
+  "the_long_form": {
+   "id": "the_long_form",
+   "name": "The Long Form",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.4
+   },
+   "effectTags": [
+    "endurance",
+    "cognition",
+    "persistence"
+   ],
+   "narrationHints": "The problem is still there. So is the mind working it.",
+   "description": "Mental work that doesn't stop — held across days, against exhaustion, against everything that says to let go.",
+   "notFor": [],
+   "tradition": "cogitant",
+   "harmRung": "none",
+   "functions": [
+    "resist",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "intellectual",
+    "hardship"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Maintained Function",
+     "grants": "Hold a complex train of thought through interruption, fear, pain, or deprivation; return to exactly where you were without loss.",
+     "cannot": "Anything rank 2 adds — sustain complex cognitive work — a problem, a plan, a translation — across days without the thinking degrading, even as sleep and food grow scarce; the BODY still fails on its own schedule.",
+     "functions": [
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Extended Work",
+     "grants": "Sustain complex cognitive work — a problem, a plan, a translation — across days without the thinking degrading, even as sleep and food grow scarce.",
+     "cannot": "Anything rank 3 adds — your mind is simply the last thing to fail; the BODY still fails on its own schedule.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Mind That Holds",
+     "grants": "Your mind is simply the last thing to fail. Function clearly under conditions that have broken better bodies — cold, injury, grief, weeks of pressure — until the work is done.",
+     "cannot": "Nothing further; this is the craft's ceiling; the BODY still fails on its own schedule; and it still costs what it costs: being the last thing to fail means YOU ARE AWAKE FOR ALL OF IT.",
+     "functions": [
+      "sustain",
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "schoolAffinity": "cog_unaided",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 72
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "sustain complex cognitive work ACROSS DAYS without the thinking degrading",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: YOUR MIND IS SIMPLY THE LAST THING TO FAIL — function clearly under conditions that have broken better bodies",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold the thread — half the duration, and it costs little",
+    "surge": "double it; the mind being the last thing to fail means you are AWAKE for all of it"
+   },
+   "bounds": [
+    {
+     "text": "the BODY still fails on its own schedule",
+     "class": "hard"
+    },
+    {
+     "text": "being the last thing to fail means YOU ARE AWAKE FOR ALL OF IT",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A endurance/intellectual/hardship action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about 3 days Ranks: rank 2 extends duration; rank 3 adds to special. Limit: the Body still fails on its own schedule.",
+   "_file": "reach_body_mind.json"
+  },
+  "the_unmoving_mind": {
+   "schemaVersion": 1,
+   "id": "the_unmoving_mind",
+   "name": "The Unmoving Mind",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_body_mind",
+   "tradition": "cogitant",
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.7
+   },
+   "functions": [
+    "resist",
+    "reveal"
+   ],
+   "narrationHints": "Everything they throw at your thoughts slides off a stillness that was there before they arrived and will be there after they tire. You did not brace. You were simply already still.",
+   "description": "Enter a stillness nothing can move — fear, deception and the fastest attack all slide off it. You read everything and grant nothing. The Cogitant art of mushin.",
+   "notFor": "It is defense and clarity, never force — you cannot strike with stillness, only see and endure. And a mind held perfectly still holds nothing else; while you are unmoving you are only unmoving.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Unmoving Mind",
+     "grants": "Enter a perfect mental stillness — immune to fear, deception, and disruption, reading all with total clarity.",
+     "cannot": "It grants no offense, only the unshakeable read; it occupies you wholly to hold; and a stillness this deep can look, to those who love you, like you have gone somewhere they cannot follow.",
+     "functions": [
+      "resist",
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Moving Stillness",
+     "grants": "The stillness no longer occupies you wholly — hold it while fighting, walking, negotiating, and the clarity holds with it. And it reaches past you: those who stand with you and trust you are steadied by proximity, and do not break when they should.",
+     "cannot": "Extending it thins it — the more you shelter, the less clearly you read. It still grants no offense at any depth. And those sheltered feel the flinch you are not having, which more than one person has found worse than their own fear.",
+     "functions": [
+      "resist",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "DEFEND",
+    "INVESTIGATE"
+   ],
+   "harmRung": "none",
+   "schoolAffinity": "cog_unaided",
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "guard",
+   "operativeAxis": [
+    "clarity",
+    "duration",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "soak": 5,
+    "soakRank": 3,
+    "duration": 4,
+    "note": "T-IV guard — TYPED like the_true_ground: it soaks FEAR, DECEPTION and DISRUPTION at rank 3, and grants NOTHING against physical harm ('it grants no offense, only the unshakeable read')."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "SPECIAL: the stillness NO LONGER OCCUPIES YOU WHOLLY — hold it while fighting, walking, negotiating, and the clarity holds with it",
+     "from": "r2 grants — a FOURTH autonomy-increment craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "a moment's stillness — half the clarity, and you can act freely",
+    "surge": "double it; EXTENDING IT THINS IT — the more you shelter, the less clearly you see"
+   },
+   "bounds": [
+    {
+     "text": "IT GRANTS NO OFFENSE, only the unshakeable read",
+     "class": "hard"
+    },
+    {
+     "text": "it OCCUPIES YOU at r1",
+     "class": "soft"
+    },
+    {
+     "text": "EXTENDING IT THINS IT — the more you shelter, the less clearly you see",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A defend/investigate action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 5 harm per hit (rank 3 armour), and lasts for about 4 hours Ranks: rank 2 adds to autonomy. Limit: iT Grants NO Offense, only the unshakeable read.",
+   "_descriptionWas": "The Cogitant art of mushin — no-mind, the perfect stillness that nothing can move: not fear, not deception, not the fastest attack, because a mind that does not flinch reads everything and grants nothing. The blade-discipline made total.",
+   "_file": "reach_body_mind.json"
+  },
+  "the_single_stroke": {
+   "schemaVersion": 1,
+   "id": "the_single_stroke",
+   "name": "The Single Stroke",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_body_mind",
+   "tradition": "cogitant",
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.8
+   },
+   "functions": [
+    "strike",
+    "foresee"
+   ],
+   "narrationHints": "You have already seen it — the one moment, the only opening, the single stroke that ends the contest before it was properly a contest. You do not rush. You wait for the instant you already know is coming, and then it simply is.",
+   "description": "The Cogitant capstone — mind and act become one perfect stroke, the whole contest read to its single decisive instant and then delivered without waste. The sword-saint's art: not the fastest blade, the ONLY necessary one.",
+   "notFor": "One stroke, read and delivered perfectly, at enormous cost of focus — and it demands the opening be real; against something with no decisive instant (a flood, a crowd, a lie with no center) there is no single stroke to find.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Single Stroke",
+     "grants": "Read a contest to its one decisive instant and deliver the single perfect stroke that ends it — one strike, placed where a contest breaks.",
+     "cannot": "It costs nearly all your focus, it requires a real decisive instant to exist, and it is the blade's truth and the pen's alike — some contests have no single stroke, and mistaking that is how the sure-handed fall.",
+     "harmRung": "lethal",
+     "functions": [
+      "strike",
+      "foresee"
+     ]
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "harmRung": "lethal",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 5,
+     "d": 6
+    },
+    "plus": 6,
+    "marginFloorPer": 0.04,
+    "targets": 1,
+    "note": "T-V capstone, lethal. The highest marginFloorPer in the catalog: this craft IS the decisive margin — 'read a contest to its ONE DECISIVE INSTANT.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: READ A CONTEST TO ITS ONE DECISIVE INSTANT and deliver the single perfect stroke that ends it. The capstone is a KIND (ending a contest by seeing it whole) at near-total focus-cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-committed single stroke is just a strike, and it will not end anything.",
+    "surge": "REFUSED — it already costs nearly all your focus."
+   },
+   "bounds": [
+    {
+     "text": "IT COSTS NEARLY ALL YOUR FOCUS",
+     "class": "hard"
+    },
+    {
+     "text": "IT REQUIRES A REAL DECISIVE INSTANT — a contest without one offers nothing",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight action that deals damage. It rolls 5d6+6 It affects 1 target Limit: iT Costs Nearly All Your Focus.",
+   "_file": "reach_body_mind.json"
+  },
+  "the_sustained_regard": {
+   "id": "the_sustained_regard",
+   "name": "The Sustained Regard",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_body_mind",
+   "attribute": "mental",
+   "axes": {
+    "body_mind": 0.6,
+    "emotional_logical": 0.2
+   },
+   "functions": [
+    "strike",
+    "hinder"
+   ],
+   "narrationHints": "You give them the whole of your attention and refuse to give it back. Under a regard that complete the body starts dropping the things it was doing unattended — balance, breath, the grip on a weapon, the clotting of a wound.",
+   "description": "Fix the whole of your attention on one person in sight and refuse to give it back. Balance, breath, grip and the clotting of a wound all falter. No vector, no contact — the Cogitants' first offense.",
+   "notFor": "Anything you cannot see or have not met; several at once (it is ALL of your attention, that is the whole mechanism); acting well yourself while you hold it; the disciplined, who can hold their own attention against yours.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Whole of It",
+     "grants": "Fix the entirety of your attention on one person in sight. Autonomic things falter — vision greys, a limb goes uncertain, breath stumbles, an open wound stops closing. They know they are being looked at and cannot say why it hurts.",
+     "cannot": "ONE TARGET, and it costs you nearly all of your own action while it holds. A trained mind resists and knows what you are doing. Break line of sight and it ends.",
+     "functions": [
+      "strike",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Regard",
+     "grants": "Keep it. What their body was running unattended stays unrun — they cannot rally, cannot steady, cannot stop bleeding, for as long as you look.",
+     "cannot": "You are doing nothing else. ⚠ A SECOND ENEMY WHILE YOU HOLD THIS IS HOW COGITANTS DIE. No one else takes a harm rung from it, and no one else can lift it for you; only the wielder can drop it.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Undivided",
+     "grants": "Attention at a weight a body cannot be looked at under. Things stop. Hearts are things. AND YOU KEEP YOURSELF NOW: the wielder no longer stops running their own body to do it, and can act while the regard holds.",
+     "cannot": "Still ONE TARGET, still line of sight, and a trained mind still knows what you are doing and who is doing it. The Discarnate reach this rank and then keep going, which is how they stop coming back.",
+     "functions": [
+      "strike",
+      "hinder",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "tradition": "cogitant",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "magnitude",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "a moment's regard — a stumble, a greying",
+    "surge": "give it more than the whole of your attention — reach past line of sight, and THE WIELDER IS STRUCK AT 'damaging' for it"
+   },
+   "bounds": [
+    {
+     "text": "ONE TARGET — it is ALL of your attention",
+     "class": "hard"
+    },
+    {
+     "text": "you act at almost nothing else while it holds",
+     "class": "cost"
+    },
+    {
+     "text": "LINE OF SIGHT — break it and the craft ends",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight/social action that harms one person through undivided attention. Rated 7 of 10 on one target. Limit: one target, and it costs nearly all your action.",
+   "backlash": "The regard reverses. You have given a mind your entire attention and it now has yours — the wielder is struck at the surged rung and cannot act for the round.",
+   "conserveSuppresses": "a moment's regard — you keep your own footing",
+   "backlashRung": "damaging",
+   "_backlashRungNote": "SNG-359: INTRINSIC craft — the wielder is the conduit, so a surge that slips comes back through them. PLACED crafts (plain_weight, sudden_work, found_fault, cutting_figure, seized_works) carry NO rung: they endanger the wielder positionally, which 'if inside the ruin' already covers, and a rung there would double-charge them.",
+   "_descriptionWas": "The Cogitants' first offense. No vector, no contact, nothing crosses the space. Thought applied to a body that has been quietly running itself.",
+   "_file": "reach_body_mind.json"
+  },
+  "formcraft": {
+   "id": "formcraft",
+   "name": "Formcraft",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.5,
+    "mechanical_spiritual": 0.2
+   },
+   "functions": [
+    "bind",
+    "deceive",
+    "make",
+    "reveal"
+   ],
+   "narrationHints": "She draws a shape that is not a picture of anything, and the room rearranges itself to agree with it.",
+   "description": "See the pattern, symbol or structure a thing is an instance OF — the form behind the fact. The abstract-pole mastery: to a Figurist, matter is the coarse residue of form.",
+   "notFor": "Anything that requires the touchable to be primary; the Masons' Denial defeats it outright.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Pattern Eye",
+     "grants": "See the pattern, symbol, or structure a thing is an instance OF — the form behind the fact.",
+     "cannot": "Seeing a form does not give you power over its instance. Not yet.",
+     "functions": [
+      "reveal"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Figure",
+     "grants": "Make a symbol that ACTS — a mark, a shape, a figure that does in the world what it means.",
+     "cannot": "A figure does what it MEANS, not what you wanted it to mean. Be precise, or be surprised.",
+     "functions": [
+      "reveal",
+      "make",
+      "deceive"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Argument Made Real",
+     "grants": "Build an idea into the world so completely that it becomes a fact others must move around — a rule, a boundary, a truth-in-effect.",
+     "cannot": "The Masons can deny it. Reality can, eventually, decline. And a made truth that was never true rots from the inside.",
+     "functions": [
+      "reveal",
+      "make",
+      "deceive",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL",
+    "EXPLORE"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "symbolPower",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 8,
+    "scope": 2,
+    "damageType": "abstraction"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "MAKE A SYMBOL THAT ACTS — a mark, a shape, a figure that DOES IN THE WORLD WHAT IT MEANS",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "BUILD AN IDEA INTO THE WORLD so completely it becomes A FACT OTHERS MUST MOVE AROUND — a rule, a boundary, a truth",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small figure — half the power, and it means exactly what you drew",
+    "surge": "double it; A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN"
+   },
+   "bounds": [
+    {
+     "text": "seeing a form DOES NOT GIVE YOU POWER OVER ITS INSTANCE",
+     "class": "hard"
+    },
+    {
+     "text": "A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN",
+     "class": "hard"
+    },
+    {
+     "text": "THE MASONS CAN DENY IT. REALITY CAN, EVENTUALLY, DECLINE.",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate/social/explore action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 adds to special; rank 3 extends scope. Limit: seeing a form Does Not Give You Power Over Its Instance.",
+   "_descriptionWas": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "the_walking_figure": {
+   "id": "the_walking_figure",
+   "name": "The Walking Figure",
+   "levelReq": 3,
+   "energyCost": 7,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.4,
+    "chaos_order": 0.1
+   },
+   "functions": [
+    "bind",
+    "strike",
+    "summon",
+    "ward"
+   ],
+   "narrationHints": "The mark she drew stands up off the wall and goes to do the thing it means.",
+   "description": "Send a made figure to act at a distance — a symbol given errand and enough form to run it.",
+   "notFor": "Making a figure that means what you did not mean; the figure will do the second thing, not the first.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Walking Figure",
+     "grants": "Send a figure to carry a meaning somewhere — a warning, a ward, a binding — and it arrives and acts.",
+     "cannot": "It acts once and it is spent. And it acts on what it MEANS.",
+     "functions": [
+      "summon",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Figure",
+     "grants": "The figure persists — it keeps meaning, keeps acting, keeps the ward or the rule in force after you have gone.",
+     "cannot": "A standing figure is a rule nobody is supervising. It will apply itself to cases you never imagined.",
+     "functions": [
+      "summon",
+      "bind",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Figure That Learns",
+     "grants": "The figure adapts its meaning to circumstance — it keeps doing what you MEANT even where you did not foresee. And a figure can be sent meaning harm: not a blow but a verdict walking, which arrives, finds the one it was addressed to, and enacts what was written into it.",
+     "cannot": "A figure sent to harm is a figure that will do the SECOND thing you meant, not the first — the Figurists lose more of their own to this than to any enemy. It arrives at the pace of a walking thing and can be outrun, argued with, or unmade by a Mason's denial. And what it does, you wrote.",
+     "functions": [
+      "summon",
+      "bind",
+      "ward",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL",
+    "EXPLORE"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "shape": "construct",
+   "operativeAxis": [
+    "autonomy",
+    "persistence"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8,
+    "damageType": "abstraction",
+    "note": "damaging rung — a sent figure that ACTS"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "THE FIGURE PERSISTS — it keeps meaning, keeps acting, KEEPS THE WARD OR THE RULE IN FORCE AFTER YOU HAVE GONE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the figure ADAPTS ITS MEANING TO CIRCUMSTANCE — it keeps doing WHAT YOU MEANT even where you did not foresee",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "send a small figure — half the persistence, and it acts once cleanly",
+    "surge": "double it; A STANDING FIGURE IS A RULE NOBODY IS SUPERVISING"
+   },
+   "bounds": [
+    {
+     "text": "it acts ONCE and is SPENT at r1; it acts on WHAT IT MEANS",
+     "class": "hard"
+    },
+    {
+     "text": "A STANDING FIGURE IS A RULE NOBODY IS SUPERVISING",
+     "class": "cost"
+    },
+    {
+     "text": "A FIGURE SENT TO HARM IS A FIGURE THAT WILL DO THE SECOND HARM TOO",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight/social/explore action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to persistence; rank 3 adds to special. Limit: it acts Once and is Spent at r1; it acts on What IT Means.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "the_warding_mark": {
+   "id": "the_warding_mark",
+   "name": "The Warding Mark",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.4,
+    "chaos_order": 0.1
+   },
+   "effectTags": [
+    "ward",
+    "protection",
+    "symbol"
+   ],
+   "narrationHints": "She drew a mark that means NOT HERE. The thing reads it correctly.",
+   "description": "A figure drawn against something keeps it back. The mark is a statement about what belongs and what doesn't.",
+   "notFor": [],
+   "tradition": "figurist",
+   "harmRung": "none",
+   "functions": [
+    "bind",
+    "shield",
+    "ward"
+   ],
+   "challengeTypes": [
+    "defense",
+    "magical",
+    "social"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Mark Against",
+     "grants": "Draw or declare a figure that keeps a specific category of thing — an intent, a person, a working — from entering or acting in a space.",
+     "cannot": "Anything rank 2 adds — set a warding figure that holds without your continued attention — it knows what it's keeping back and it keeps it back until the mark is broken; IT WARDS A CATEGORY.",
+     "functions": [
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Persistent Ward",
+     "grants": "Set a warding figure that holds without your continued attention — it knows what it's keeping back and it keeps it back until the mark is broken.",
+     "cannot": "Anything rank 3 adds — name what does not belong here with such formal clarity that it cannot be here — the working fails, the intent dissolves, the thing that should not be cannot maintain form in the space you've marked; IT WARDS A CATEGORY.",
+     "functions": [
+      "ward",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Absolute Exclusion",
+     "grants": "Name what does not belong here with such formal clarity that it cannot be here — the working fails, the intent dissolves, the thing that should not be cannot maintain form in the space you've marked.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT WARDS A CATEGORY; and it still costs what it costs: a ward that decides what BELONGS is a ward that can be WRONG about belonging.",
+     "functions": [
+      "ward",
+      "bind",
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "ward",
+    "duration",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 4,
+    "soakRank": 2,
+    "type": "category",
+    "duration": 12,
+    "note": "A TYPED GUARD of a new kind: it wards A NAMED CATEGORY of thing — 'an intent, a person, a working' — chosen at casting. CCODE: this is typed soak where the TYPE IS AUTHORED AT CAST TIME rather than fixed on the craft."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "set a warding figure that HOLDS WITHOUT YOUR CONTINUED ATTENTION — IT KNOWS WHAT IT IS KEEPING BACK and it keeps it back",
+     "from": "r2 grants — a SEVENTH autonomy-increment craft"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NAME WHAT DOES NOT BELONG HERE with such formal clarity that IT CANNOT BE HERE — the working fails, the intent dissolves",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small mark — half the ward, and it keeps back one thing",
+    "surge": "double it; a ward that knows what it keeps back also decides what belongs"
+   },
+   "bounds": [
+    {
+     "text": "IT WARDS A CATEGORY — a thing outside the named category walks through untouched",
+     "class": "hard"
+    },
+    {
+     "text": "a ward that decides what BELONGS is a ward that can be WRONG about belonging",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A defense/magical/social action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about a day Ranks: rank 2 adds to autonomy; rank 3 adds to special. Limit: iT Wards A Category — a thing outside the named category walks through untouched.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "the_held_form": {
+   "id": "the_held_form",
+   "name": "The Held Form",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.4,
+    "chaos_order": 0.2
+   },
+   "effectTags": [
+    "sustain",
+    "pattern",
+    "continuity"
+   ],
+   "narrationHints": "Keep the form alive and what it represents persists.",
+   "description": "Sustain something by maintaining its correct form in your mind — the pattern held is the thing held.",
+   "notFor": [],
+   "tradition": "figurist",
+   "harmRung": "none",
+   "functions": [
+    "bind",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "intellectual",
+    "logistics"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Form Maintenance",
+     "grants": "Hold a pattern clearly in mind and the thing it represents persists longer than it otherwise would — an agreement, a working, a person's coherence under pressure.",
+     "cannot": "Anything rank 2 adds — keep the form of something alive across time and distance — a relationship, a plan, a person's sense of themselves — by maintaining its correct representation; YOU MUST HOLD IT.",
+     "functions": [
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Sustained Pattern",
+     "grants": "Keep the form of something alive across time and distance — a relationship, a plan, a person's sense of themselves — by maintaining its correct representation.",
+     "cannot": "Anything rank 3 adds — while you hold the form of something perfectly in your mind, it does not cease — the pattern is the sustaining principle, and you are the one sustaining it; YOU MUST HOLD IT.",
+     "functions": [
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "As Long as the Form Holds",
+     "grants": "While you hold the form of something perfectly in your mind, it does not cease — the pattern is the sustaining principle, and you are the one sustaining it.",
+     "cannot": "Nothing further; this is the craft's ceiling; YOU MUST HOLD IT; and it still costs what it costs: holding A PERSON'S SENSE OF THEMSELVES means YOU are holding it, and you may be WRONG about its shape.",
+     "functions": [
+      "sustain",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "persistence",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 24,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "persistence",
+     "delta": "keep the form of something alive ACROSS TIME AND DISTANCE — a relationship, a plan, A PERSON'S SENSE OF THEMSELVES",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: while you HOLD THE FORM perfectly in mind, IT DOES NOT CEASE — the pattern is the sustaining principle",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold the shape — half the persistence, and you can set it down",
+    "surge": "double it; holding a person's sense of themselves means YOU are holding it, and you may be holding it wrong"
+   },
+   "bounds": [
+    {
+     "text": "YOU MUST HOLD IT — attention lapses and the form lapses with it",
+     "class": "hard"
+    },
+    {
+     "text": "holding A PERSON'S SENSE OF THEMSELVES means YOU are holding it, and you may be WRONG about its shape",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A endurance/intellectual/logistics action that strengthens someone. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends persistence; rank 3 adds to special. Limit: you Must Hold IT — attention lapses and the form lapses with it.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "the_binding_figure": {
+   "schemaVersion": 1,
+   "id": "the_binding_figure",
+   "name": "The Binding Figure",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_concrete_abstract",
+   "tradition": "figurist",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.6,
+    "chaos_order": 0.3
+   },
+   "functions": [
+    "bind",
+    "make"
+   ],
+   "narrationHints": "You draw the figure and the thing it describes becomes bound to obey it — the map, for a while, ruling the territory.",
+   "description": "Draw a figure so true that the thing it describes is bound to match it for a time — the map, briefly, ruling the territory. The Figurist art of the binding sign.",
+   "notFor": "It binds through the figure's truth, so a false or sloppy figure binds nothing — and the world only consents for a while. Reality always resumes being itself; the figure rules until it doesn't.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Binding Figure",
+     "grants": "Draw a binding figure that compels a concrete thing to match its abstract pattern for a time.",
+     "cannot": "It fails if the figure is untrue, it holds only for a while before reality resumes, and a figure that binds the world binds you to its upkeep while it lasts.",
+     "functions": [
+      "bind",
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Figure",
+     "grants": "The figure holds past its moment — a working, a room, a thing's shape held to the pattern for as long as the figure stands undefaced. And you may bind a rule rather than a thing: not this stone matching the sign, but everything in this place doing so.",
+     "cannot": "The figure must remain physically intact and true — deface it and everything resumes at once, all of it, immediately. A rule bound over a place binds you inside it too. And reality resumes harder for having been held longer; the Figurists call the rebound the figure's answer.",
+     "functions": [
+      "bind",
+      "make"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE",
+    "INVESTIGATE"
+   ],
+   "harmRung": "incapacitating",
+   "shape": "construct",
+   "operativeAxis": [
+    "bindStrength",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 6,
+    "damageType": "abstraction",
+    "note": "T-IV, incapacitating"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "THE FIGURE HOLDS PAST ITS MOMENT — a working, a room, a thing's shape held to the pattern FOR AS LONG AS THE FIGURE STANDS",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a light binding — half the hold, and it releases cleanly",
+    "surge": "double it; THE FIGURE MUST REMAIN PHYSICALLY INTACT AND TRUE — deface it and the binding ends"
+   },
+   "bounds": [
+    {
+     "text": "IT FAILS IF THE FIGURE IS UNTRUE",
+     "class": "hard"
+    },
+    {
+     "text": "THE FIGURE MUST REMAIN PHYSICALLY INTACT — DEFACE IT AND THE BINDING ENDS",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A create/investigate action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 6 hours Ranks: rank 2 extends duration. Limit: iT Fails IF The Figure IS Untrue.",
+   "_descriptionWas": "The Figurist art of the binding sign — a figure drawn so true that reality briefly consents to match it, the abstract pattern given authority over the concrete thing. To draw it right is to legislate, briefly, what is.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "the_true_name": {
+   "schemaVersion": 1,
+   "id": "the_true_name",
+   "name": "The True Name",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_concrete_abstract",
+   "tradition": "figurist",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.9
+   },
+   "functions": [
+    "bind",
+    "reveal"
+   ],
+   "narrationHints": "You find the one figure that is not a description of the thing but the thing's own name — and a thing called by its true name has no choice but to turn and answer.",
+   "description": "The Figurist capstone — the true figure, the sign that IS the thing rather than describes it. To know a thing's true name is to hold a handle on its very being. The deepest and most dangerous Figurist working, because names cut both ways.",
+   "notFor": "One true name, found at enormous cost, and it must be TRUE — a guessed name binds nothing and warns the thing you tried. And to speak a true name is to be known by it in turn: the naming runs both directions.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The True Name",
+     "grants": "Find and speak a thing's true name, gaining a hold on its very being.",
+     "cannot": "A false name fails and forewarns, the finding costs nearly all you have, and to name truly is to be truly named — you cannot hold a thing's name without offering your own.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "harmRung": "incapacitating",
+     "gains": "broaden"
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "INVESTIGATE"
+   ],
+   "harmRung": "incapacitating",
+   "shape": "setup",
+   "operativeAxis": [
+    "bindStrength",
+    "penetration"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 2,
+    "damageType": "abstraction"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: FIND AND SPEAK A THING'S TRUE NAME, gaining A HOLD ON ITS VERY BEING. The capstone is a KIND (power over a thing's essence) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a partially-spoken true name is a false name, and a false name forewarns.",
+    "surge": "REFUSED — the finding already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "A FALSE NAME FAILS AND FOREWARNS",
+     "class": "hard"
+    },
+    {
+     "text": "THE FINDING COSTS NEARLY ALL YOU HAVE",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A investigate action that reveals information or sets up a later action. Its strength is rated 9 out of 10, and lasts for about 2 hours Limit: a False Name Fails And Forewarns.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "the_cutting_figure": {
+   "id": "the_cutting_figure",
+   "name": "The Cutting Figure",
+   "levelReq": 1,
+   "energyCost": 6,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.6,
+    "violence_peace": -0.2
+   },
+   "functions": [
+    "strike",
+    "break"
+   ],
+   "narrationHints": "You hold a shape in mind and make the world honour it. An angle that should not exist opens across them; a line is drawn and the things on either side of it are no longer joined. No blade, no heat — a geometry, applied.",
+   "description": "Impose a simple figure — a line, an angle, an arc — across a target in sight, and what it crosses is parted: mail, hide, timber, limb. No blade, no heat. The Figurists' first offense, and matter losing the argument.",
+   "notFor": "Anything you cannot hold clearly in mind — a muddled figure cuts nothing, or cuts wrong; the Masons, who are trained precisely against this; working past sight; kindness — a drawn line does not care what it is drawn across.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Drawn Line",
+     "grants": "Impose a simple figure — a line, an angle, an arc — across a target within sight. What it crosses is parted: mail, hide, timber, limb. Clean edges, no blade present.",
+     "cannot": "You must hold the figure CLEANLY. Distraction makes it cut short, cut wrong, or cut across your own line of sight. Masons resist it and know they are doing so.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Compound Figure",
+     "grants": "Several lines at once, or one held open so it keeps parting what moves through — a doorway that divides what enters it.",
+     "cannot": "Compound figures are harder to hold and a lapse leaves them half-drawn and unpredictable. A HELD FIGURE STRIKES ANYONE WHO CROSSES IT AT THE SAME RUNG.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Impossible Solid",
+     "grants": "A figure that should not resolve in three dimensions, resolved anyway, around them. What is inside it is reorganised according to the figure — flesh, bone and stone alike are parted and rejoined wrong, which strikes as surely as any blade.",
+     "cannot": "⚠ THE FIGURE IS TRUER THAN THEY ARE and it does not distinguish among its contents. And the Untethered — who forgot bodies suffer — do exactly this and call it elegant; doing it well puts you in their company whether you like it or not.",
+     "functions": [
+      "strike",
+      "break",
+      "hinder"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal"
+    }
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "strike",
+   "operativeAxis": [
+    "precision",
+    "magnitude"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "a short line — a cut, not a parting",
+    "surge": "the impossible solid; IT DOES NOT DISTINGUISH AMONG ITS CONTENTS"
+   },
+   "bounds": [
+    {
+     "text": "you must hold the figure CLEANLY — a muddled one cuts wrong",
+     "class": "hard"
+    },
+    {
+     "text": "MASONS resist it and know they are doing it",
+     "class": "hard"
+    },
+    {
+     "text": "line of sight required",
+     "class": "hard"
+    },
+    {
+     "text": "a held figure strikes ANYONE WHO CROSSES IT at the same rung",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A fight/puzzle action that parts matter along an imposed geometry. Rated 7 of 10 across a scope of 2. Limit: you must hold the figure cleanly.",
+   "backlash": "The figure resolves half-drawn and cuts where you are, not where they are. A lapsed figure does not fail; it lands wrong.",
+   "conserveSuppresses": "a short line, fully held — a lapse simply fails to cut",
+   "backlashRung": "damaging",
+   "_backlashRungNote": "SNG-359 CORRECTION 2026-08-08: my first split was intrinsic-vs-placed — does the CRAFT route through the wielder. That is the wrong question. The only question a backlash rung answers is: DOES THIS FAILURE HARM THE WIELDER? A placed craft that comes down on the person who placed it harms them just as surely as a conduit craft that reverses. 9 of the 12 I had left unset do harm the wielder and now carry a rung.",
+   "_descriptionWas": "The Figurists' first offense: pattern imposed on matter, and matter losing the argument.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "the_true_figure": {
+   "id": "the_true_figure",
+   "name": "The True Figure",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.5
+   },
+   "functions": [
+    "reveal",
+    "foresee"
+   ],
+   "narrationHints": "You see the shape a thing is actually making — the pattern under the mess, the geometry a crowd is unknowingly standing in, the figure a set of events describes. Once seen, it cannot be unseen.",
+   "description": "Look at a scene, a record, a route, a crowd, a wound-pattern, and the craft names one thing: the element that does not fit, or the place where a piece is missing. The Figurists' first craft — pattern read rather than imposed.",
+   "notFor": "Patterns that are not there (the craft returns nothing rather than obliging you); reading intent or meaning; anything genuinely random.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shape Under It",
+     "grants": "Look at a scene, a set of records, a route, a crowd, a wound-pattern — and the craft NAMES ONE THING for you: the element that does not fit, or the place where a piece is missing and what shape it must be. One concrete answer, pointed at: this ledger entry, that stone, the fourth man, the room nobody uses.",
+     "cannot": "It shows the SHAPE, never the reason. And a genuinely chaotic thing has no figure — it returns nothing, which Figurists insist is a real answer.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Continued Line",
+     "grants": "Extend the figure — where the pattern goes next, what the missing piece must be, where the sixth one will be found.",
+     "cannot": "The extension is only as sound as the figure, and a partial pattern extends confidently and wrongly. Say which you have.",
+     "functions": [
+      "reveal",
+      "foresee"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Figure",
+     "grants": "The complete shape of a large thing — a campaign, a season of disappearances, a city's flow, a tradition's drift.",
+     "cannot": "⚠ A LARGE FIGURE IS HARD TO STOP SEEING. Figurists at this rank read pattern into things that have none, and the craft cannot tell them apart from inside.",
+     "functions": [
+      "reveal",
+      "foresee",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "SOCIAL"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "reveal",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "read the near shape",
+    "surge": "the whole figure; IT IS HARD TO STOP SEEING, and the craft cannot tell you when there is none"
+   },
+   "bounds": [
+    {
+     "text": "shows the SHAPE, never the reason",
+     "class": "hard"
+    },
+    {
+     "text": "a genuinely chaotic thing returns NOTHING",
+     "class": "hard"
+    },
+    {
+     "text": "a partial pattern extends confidently and wrongly",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A puzzle/social action that reads the pattern a thing is making. Rated 5 of 10 across a scope of 2 for about six hours.",
+   "_descriptionWas": "The Figurists' first craft: pattern read rather than imposed.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "the_standing_figure": {
+   "id": "the_standing_figure",
+   "name": "The Standing Figure",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": -0.6
+   },
+   "functions": [
+    "make",
+    "ward",
+    "bind"
+   ],
+   "narrationHints": "You hold a figure in a place and the place keeps it. A drawn order that persists — a ward-line, a true corner, a boundary that is geometrically rather than legally so.",
+   "description": "Impose a lasting figure on a place and name what it does — a threshold one named kind of thing cannot cross, a true line, a boundary that is geometrically rather than legally so. The Figurists' making-craft.",
+   "notFor": "Making matter (the figure orders what is there, it does not add); anything you cannot hold cleanly in mind while you set it; figures on living things.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Set Figure",
+     "grants": "Impose a lasting figure on a place, and name what it does when you set it: a threshold that STOPS one named kind of thing from crossing (a person, a beast, water, a working); a true line that makes building or aiming along it reliable; or a mark that stays legible and unaltered whatever is done to the surface. ONE of the three, declared at setting, and it holds until broken.",
+     "cannot": "It ORDERS, it does not create. It must be set on something — ground, wall, floor. Masons can read it and, being Masons, will have opinions.",
+     "functions": [
+      "make",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Held Order",
+     "grants": "Larger, or compound — a room made regular, a route made unambiguous, a ward that turns a specific kind of thing.",
+     "cannot": "A compound figure has more places to lapse, and a lapsed figure is not neutral: it holds a WRONG order until corrected.",
+     "functions": [
+      "make",
+      "ward",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Governing Figure",
+     "grants": "A figure a whole site obeys. Water runs where it says, sound carries where it says, things do not cross where it says.",
+     "cannot": "⚠ THE PLACE NOW HAS YOUR SHAPE IN IT and it will outlast your reason for setting it. The Untethered do this to whole valleys and call it improvement.",
+     "functions": [
+      "make",
+      "ward",
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "FIGHT"
+   ],
+   "tradition": "figurist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "make",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 72,
+    "scope": 2
+   },
+   "intensity": {
+    "conserve": "set a small figure",
+    "surge": "a governing figure; THE PLACE NOW HAS YOUR SHAPE IN IT and it outlasts your reason"
+   },
+   "bounds": [
+    {
+     "text": "it ORDERS what is there; it does not create",
+     "class": "hard"
+    },
+    {
+     "text": "must be set on something — ground, wall, floor",
+     "class": "hard"
+    },
+    {
+     "text": "a LAPSED figure holds a wrong order until corrected",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A puzzle/fight action that sets a lasting geometric order on a place. Rated 6 of 10 across a scope of 2 for about three days.",
+   "_descriptionWas": "The Figurists' making-craft: pattern imposed and left standing, which is what a Figurist means by building.",
+   "_file": "reach_concrete_abstract.json"
+  },
+  "logos": {
+   "id": "logos",
+   "name": "Logos",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.5,
+    "concrete_abstract": 0.2
+   },
+   "functions": [
+    "bind",
+    "break",
+    "reveal",
+    "strike"
+   ],
+   "narrationHints": "Reason made a force — an argument that lands like a blow, a contradiction exposed, a conclusion so clean it changes what people must do.",
+   "description": "Build an argument that compels the reasonable, expose a contradiction so it cannot be unseen, and deduce a hidden fact from what is present. The logical-pole mastery — the Reasoners' art.",
+   "notFor": "Reaching a heart set against reason (that's Pathos); wisdom (Logos is valid, not necessarily wise); a premise that's false — Logos builds truly on what it's given, garbage in and all.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Clear Argument",
+     "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
+     "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Binding Proof",
+     "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
+     "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force.",
+     "functions": [
+      "reveal",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Necessary Conclusion",
+     "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it reorganises what everyone present thought they knew. And turned on one person: a contradiction opened in what they have built themselves on, which does not wound the body and takes the ground out from under them all the same. They will keep standing. They will not keep believing.",
+     "cannot": "It needs something true to work with — Logos cannot prove a falsehood, only forge one that the next sound mind unpicks. It fails against those who will simply refuse a true conclusion. And the Syllogists hold that a person you have taken apart this way is owed the time to rebuild, which is a debt many of them do not pay.",
+     "functions": [
+      "reveal",
+      "bind",
+      "break",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "tradition": "syllogist",
+   "nativeOrCombination": "native",
+   "harmRung": "damaging",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "scope"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.03,
+    "scope": 2,
+    "damageType": "reason",
+    "note": "damaging — 'thought as force' in the argumentative register. Compare cogitant's noesis (also damaging, also mental): noesis out-thinks a SITUATION, logos out-argues a PERSON."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "damage",
+     "delta": "PROVE A THING SO CLEANLY THE PROOF ITSELF CHANGES WHAT PEOPLE MUST DO; CORNER A LIAR IN THEIR OWN LOGIC",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "REASON AT THE SCALE OF PEOPLES — an argument A WHOLE COUNCIL CANNOT ANSWER, a contradiction THAT TOPPLES A DOCTRINE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "make the point — half the force, and it invites reply",
+    "surge": "double it; A VALID ARGUMENT IS NOT A TRUE ONE, and the unreasonable simply resist"
+   },
+   "bounds": [
+    {
+     "text": "THE UNREASONABLE AND THE EMOTION-RULED RESIST",
+     "class": "hard"
+    },
+    {
+     "text": "A VALID ARGUMENT IS NOT A TRUE ONE",
+     "class": "hard"
+    },
+    {
+     "text": "PROOF BINDS THE HONEST AND THE LOGICAL — THE CATHEDRAL OF CERTAINTY IS NEITHER",
+     "class": "hard"
+    },
+    {
+     "text": "IT NEEDS SOMETHING TRUE TO WORK WITH — Logos cannot prove what is not so",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/fight/puzzle action that deals damage. It rolls 2d6 reason damage across a scope of 2 Ranks: rank 2 deepens damage; rank 3 extends scope. Limit: the Unreasonable And The Emotion-Ruled Resist.",
+   "_descriptionWas": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
+   "_file": "reach_emotional_logical.json"
+  },
+  "the_proved_position": {
+   "id": "the_proved_position",
+   "name": "The Proved Position",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.4
+   },
+   "effectTags": [
+    "logic",
+    "proof",
+    "protection"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He had proved it. They could attack him all they liked. The proof still stood.",
+   "description": "Protect through irrefutable argument — attacks on a proved position must answer the proof before they can land.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "bind",
+    "shield",
+    "ward"
+   ],
+   "challengeTypes": [
+    "social",
+    "intellectual",
+    "defense"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Proved Ground",
+     "grants": "Establish a position so logically secure that attacks — social, rhetorical, physical — must first answer the proof before they have any purchase.",
+     "cannot": "Anything rank 2 adds — extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial; IT WARDS WHAT MUST ANSWER REASON.",
+     "functions": [
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Extended Proof",
+     "grants": "Extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial.",
+     "cannot": "Anything rank 3 adds — a proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established; IT WARDS WHAT MUST ANSWER REASON.",
+     "functions": [
+      "shield",
+      "ward"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Self-Maintaining Proof",
+     "grants": "A proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT WARDS WHAT MUST ANSWER REASON.",
+     "functions": [
+      "shield",
+      "ward",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "logicalGround",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "soak": 4,
+    "soakRank": 2,
+    "type": "rhetorical",
+    "duration": 8,
+    "note": "A SIXTEENTH DEFENSIVE LOGIC — PROVED: a TYPED guard (rhetorical/social attacks) whose soak is the soundness of your position. 'Attacks must first ANSWER THE PROOF.' Transparent to a blade."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "extend the proved position to cover A SPACE OR A GROUP — a claim so airtight it FUNCTIONS AS A WARD",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "a proved position holds AT SCALE — at the level of INSTITUTIONS, TREATIES, OR LAWS",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "state your ground — half the protection, and it is easy to hold",
+    "surge": "double it; a position proved at the scale of laws is a position you must keep defending"
+   },
+   "bounds": [
+    {
+     "text": "IT WARDS WHAT MUST ANSWER REASON — a fist does not answer the proof",
+     "class": "hard"
+    },
+    {
+     "text": "the position must ACTUALLY BE SOUND — a proved-wrong position wards nothing",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/intellectual/defense action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: iT Wards What Must Answer Reason — a fist does not answer the proof.",
+   "_file": "reach_emotional_logical.json"
+  },
+  "the_built_system": {
+   "id": "the_built_system",
+   "name": "The Built System",
+   "levelReq": 3,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.5,
+    "chaos_order": 0.2
+   },
+   "effectTags": [
+    "system",
+    "logic",
+    "construct"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He didn't build a thing. He built a rule, and the rule built things.",
+   "description": "Build a logical structure that operates in the world — a system whose internal logic sustains it without constant maintenance.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "bind",
+    "make",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "intellectual",
+    "leadership",
+    "craft"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Working Rule",
+     "grants": "Design a system — legal, social, procedural — that functions because the logic it runs on is sound.",
+     "cannot": "Anything rank 2 adds — build something that maintains itself through its internal logic — not enforced, not reminded, running because the reasoning it embodies is correct; IT RUNS ON ITS LOGIC.",
+     "functions": [
+      "make"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Self-Regulating",
+     "grants": "Build something that maintains itself through its internal logic — not enforced, not reminded, running because the reasoning it embodies is correct.",
+     "cannot": "Anything rank 3 adds — construct a system so logically coherent it operates at scale without you — the laws, institutions, or mechanisms that run because the reasoning they embody is right; IT RUNS ON ITS LOGIC.",
+     "functions": [
+      "make",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Lasting Structure",
+     "grants": "Construct a system so logically coherent it operates at scale without you — the laws, institutions, or mechanisms that run because the reasoning they embody is right.",
+     "cannot": "Nothing further; this is the craft's ceiling; IT RUNS ON ITS LOGIC; and it still costs what it costs: a system that runs without you RUNS WITHOUT YOU, including when it should stop.",
+     "functions": [
+      "make",
+      "sustain",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "coherence",
+    "scope",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8760,
+    "scope": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "build something that MAINTAINS ITSELF THROUGH ITS INTERNAL LOGIC — not enforced, not reminded, RUNNING BECAUSE THE LOGIC RUNS",
+     "from": "r2 grants — a NINTH autonomy-increment craft"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "construct a system so LOGICALLY COHERENT it operates AT SCALE WITHOUT YOU — laws, institutions, mechanisms",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small sound system — half the scope, and you can revise it",
+    "surge": "double it; a system that runs without you RUNS WITHOUT YOU"
+   },
+   "bounds": [
+    {
+     "text": "IT RUNS ON ITS LOGIC — a system whose logic is unsound fails exactly where the flaw is",
+     "class": "hard"
+    },
+    {
+     "text": "a system that runs without you RUNS WITHOUT YOU, including when it should stop",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A intellectual/leadership/craft action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 adds to autonomy; rank 3 extends scope. Limit: iT Runs ON Its Logic — a system whose logic is unsound fails exactly where the flaw is.",
+   "_file": "reach_emotional_logical.json"
+  },
+  "the_axiom_holds": {
+   "id": "the_axiom_holds",
+   "name": "The Axiom Holds",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.3
+   },
+   "effectTags": [
+    "certainty",
+    "endurance",
+    "logic"
+   ],
+   "harmRung": "none",
+   "narrationHints": "The certainty was enough. The axiom held and therefore so did he.",
+   "description": "Sustain through the certainty of what you know — fear, pain, and doubt don't reach the level of the axioms.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "resist",
+    "sustain"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "hardship",
+    "intellectual"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Axiomatic Ground",
+     "grants": "Hold function under pressure through the certainty of what you know — fear, pain, and doubt operate below the level the axioms hold.",
+     "cannot": "Anything rank 2 adds — sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them; it requires SOMETHING ACTUALLY TRUE to stand on.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Correct Sequence",
+     "grants": "Sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them.",
+     "cannot": "Anything rank 3 adds — as long as what you know is true remains true, you remain functional around it; it requires SOMETHING ACTUALLY TRUE to stand on.",
+     "functions": [
+      "resist",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Axiom Holds",
+     "grants": "As long as what you know is true remains true, you remain functional around it. The axiom is the ground and the ground does not give.",
+     "cannot": "Nothing further; this is the craft's ceiling; it requires SOMETHING ACTUALLY TRUE to stand on.",
+     "functions": [
+      "resist",
+      "sustain"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ],
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "upkeepRelief",
+     "delta": "sustain through PURE LOGICAL DISCIPLINE — the sequence of correct actions that keeps you going when feeling would not",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: as long as WHAT YOU KNOW IS TRUE REMAINS TRUE, you remain functional around it — the axiom is the ground and the ground holds",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold the line of reasoning — half the relief, and it costs nothing",
+    "surge": "double it; an axiom that turns out to be FALSE takes the ground with it"
+   },
+   "bounds": [
+    {
+     "text": "it requires SOMETHING ACTUALLY TRUE to stand on",
+     "class": "hard"
+    },
+    {
+     "text": "AN AXIOM THAT TURNS OUT TO BE FALSE TAKES THE GROUND WITH IT",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A endurance/hardship/intellectual action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it requires Something Actually True to stand on.",
+   "_file": "reach_emotional_logical.json"
+  },
+  "the_contradiction": {
+   "id": "the_contradiction",
+   "name": "The Contradiction",
+   "levelReq": 1,
+   "energyCost": 5,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.6,
+    "falsehood_truth": 0.2
+   },
+   "functions": [
+    "hinder",
+    "break"
+   ],
+   "narrationHints": "You name the flaw in what someone is doing WHILE they are doing it, and the doing comes apart. Not a taunt — a demonstration. Spoken, precise, and only ever second.",
+   "description": "Interrupt an action by naming its actual error out loud while it is happening — the plan with the gap, the boast with the hole, the ritual with the wrong step — and the move falters. The Syllogists' first offense, and the only one that cannot start a fight.",
+   "notFor": "Opening an exchange (there must be a claim or an action to contradict); the mindless, the mid-swing berserk, anything not REASONING; being right — it works on the flaw, so a sound plan is immune.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Named Flaw",
+     "grants": "Interrupt an action or claim by naming its actual error out loud — the plan with the gap, the boast with the hole, the ritual with the wrong step. The move falters and must be reworked — the interruption hinders them for as long as the flaw stands unanswered.",
+     "cannot": "REACTIVE ONLY — nothing to contradict means nothing happens. The flaw must be REAL; inventing one is Falsecraft and this is not that. The unreasoning are immune.",
+     "functions": [
+      "hinder",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 2,
+     "name": "The Reductio",
+     "grants": "Follow their position to where it collapses. A commitment they made becomes a thing they cannot act on — the oath that now forbids the blow, the doctrine that now forbids the door.",
+     "cannot": "They must have STATED the position; you cannot bind someone to a belief they never claimed. The shameless simply proceed anyway.",
+     "functions": [
+      "hinder",
+      "break",
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating"
+    },
+    {
+     "rank": 3,
+     "name": "The Collapse",
+     "grants": "Take a whole structure apart in front of the people who live in it — a case, a command, a faith. What they were doing stops, and it stays stopped.",
+     "cannot": "You have made a permanent enemy of everyone whose ground you took, and the truth of it will not soften that. A structure with no flaw stands, and you look like a fool.",
+     "functions": [
+      "hinder",
+      "break",
+      "bind",
+      "reveal"
+     ],
+     "gains": "deepen",
+     "harmRung": "incapacitating"
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "tradition": "syllogist",
+   "nativeOrCombination": "native",
+   "harmRung": "incapacitating",
+   "shape": "hinder",
+   "operativeAxis": [
+    "precision",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "scope": 1
+   },
+   "intensity": {
+    "conserve": "a single objection — they lose the beat, no more",
+    "surge": "take the whole structure; YOU HAVE MADE A PERMANENT ENEMY of everyone standing on it"
+   },
+   "bounds": [
+    {
+     "text": "REACTIVE ONLY — it cannot open, only unmake a move underway",
+     "class": "hard"
+    },
+    {
+     "text": "the flaw must be REAL — a sound plan is immune",
+     "class": "hard"
+    },
+    {
+     "text": "the UNREASONING are untouched",
+     "class": "hard"
+    },
+    {
+     "text": "you make enemies of everyone whose ground you took",
+     "class": "cost"
+    }
+   ],
+   "plainly": "A social/fight action that stops a move already underway. Rated 6 of 10 on one target for about two hours. Limit: reactive only — it cannot open an exchange.",
+   "backlash": "You name a flaw that was not there. The position stands, you are publicly wrong, and everyone who heard it now discounts the next true thing you say.",
+   "conserveSuppresses": "you object rather than dismantle — no public exposure if you are mistaken",
+   "backlashRungNone": "the failure is REPUTATIONAL — you are publicly wrong and discounted. No body is touched.",
+   "_backlashRungNote": "SNG-359: DELIBERATELY NO RUNG — declared, not omitted. the failure is REPUTATIONAL — you are publicly wrong and discounted. No body is touched. ⚠️ A gate should assert this list is DECLARED rather than empty, the same way runtime_unwired works.",
+   "_descriptionWas": "The Syllogists' first offense, and the strangest shape on the circle: it cannot start a fight, only unmake a move already underway.",
+   "_file": "reach_emotional_logical.json"
+  }
+ }
+}

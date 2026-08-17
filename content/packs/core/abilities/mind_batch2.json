@@ -5,8 +5,8 @@
  "note": "⛔ SNG-453 MIND BATCH 2. Two capstones (domination and meld) plus two merges. Full schema. Revert log: po/staged_content/revert_SNG-453_batch2.json",
  "abilities": [
   {
-   "id": "the_names_they_answer_to",
-   "name": "The Names They Answer To",
+   "id": "names_of_power",
+   "name": "Names of Power",
    "levelReq": 5,
    "energyCost": 13,
    "axes": {
@@ -68,7 +68,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Name They Are Called",
+     "name": "Name They Are Called",
      "grants": "⛔ ONE NAME. Speak it and they must stop, turn, or answer — one compelled act, briefly, and nothing that harms them or theirs.",
      "cannot": "⚠️ A public name compels only a public act. They know exactly what happened and who did it.",
      "functions": [
@@ -76,11 +76,12 @@
       "persuade"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Name They Are Called"
     },
     {
      "rank": 2,
-     "name": "The Name They Are Known By",
+     "name": "Name They Are Known By",
      "grants": "⚠️ TWO NAMES. Sustained control while you hold attention on them — they walk, speak, hand over, stand down.",
      "cannot": "You must hold attention; doing anything else releases them. They can still refuse an act that would end them.",
      "functions": [
@@ -89,11 +90,12 @@
       "persuade"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Name They Are Known By"
     },
     {
      "rank": 3,
-     "name": "The Name They Call Themselves",
+     "name": "Name They Call Themselves",
      "grants": "⛔ ALL THREE NAMES. The hold no longer needs your attention and no longer ends when you look away — it runs for a day, and they carry it with them out of the room. ⚠️ They will do what they would never do, and remember agreeing to it.",
      "cannot": "⚠️ Almost nobody gives this name away — getting it is a campaign, not a roll. One person at a time, and it is the kind of act a person does not come back from being.",
      "functions": [
@@ -113,16 +115,20 @@
       "autonomy",
       "targets"
      ],
-     "_rebalance": "⛔ MY OWN CAPSTONE'S FINAL RANK GAINED NOTHING. 'No part of them left outside the hold' is qualitative. It now buys AUTONOMY — the hold runs without you — which is the one thing r2 explicitly could not do."
+     "_rebalance": "⛔ MY OWN CAPSTONE'S FINAL RANK GAINED NOTHING. 'No part of them left outside the hold' is qualitative. It now buys AUTONOMY — the hold runs without you — which is the one thing r2 explicitly could not do.",
+     "_nameWas": "The Name They Call Themselves"
     }
    ],
    "_replaces": "⛔ SNG-453: replaces The True Name (L5, e14, ONE rank, no roll, 'a hold on its very being' — meaning nothing mechanically). Erik: 'A Mind capstone should include DOMINATION. It would rank up and be more effective the more of the target's true names.' ⚠️ Ranks are NAMES HELD, not power tiers, so gathering names becomes play — and the bynames authored in SNG-430 are now weapons.",
    "traditionV2": "Mind",
-   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
+   "_idWas": "the_names_they_answer_to",
+   "_nameWas": "The Names They Answer To",
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
   },
   {
-   "id": "the_shared_room",
-   "name": "The Shared Room",
+   "id": "mind_meld",
+   "name": "Mind Meld",
    "levelReq": 4,
    "energyCost": 8,
    "axes": {
@@ -177,7 +183,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Open Door",
+     "name": "Open Door",
      "grants": "⛔ ONE WILLING PERSON IN SIGHT. Share senses and surface thought both ways — coordination without signals, acting on the same instant.",
      "cannot": "Willing only, and in sight. Surface thought — not memory, not what they are hiding.",
      "functions": [
@@ -185,11 +191,12 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Open Door"
     },
     {
      "rank": 2,
-     "name": "The Long Room",
+     "name": "Long Room",
      "grants": "⚠️ ADDS DISTANCE AND NUMBER. Hold it across miles and with several at once — ⛔ A SCOUT WHO REPORTS WITHOUT COMING BACK; a party split across a building acting as one.",
      "cannot": "All must be willing and must have been in sight when it opened. You feel what they feel, including dying.",
      "functions": [
@@ -198,11 +205,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Room"
     },
     {
      "rank": 3,
-     "name": "The One Mind",
+     "name": "One Mind",
      "grants": "⛔ ADDS CAPABILITY-SHARING. Everyone linked can use what any one of them KNOWS — and the link now survives one of you being unconscious, panicking, or under a working meant to break it.",
      "cannot": "Knowledge, never craft: you cannot use their tradition's power. What one believes, all believe while it holds.",
      "functions": [
@@ -222,16 +230,20 @@
       "quality",
       "conditions"
      ],
-     "_rebalance": "⚠️ Was scope, its third. Quality + conditions makes the capstone rank about RELIABILITY, which is what a party actually needs from a link."
+     "_rebalance": "⚠️ Was scope, its third. Quality + conditions makes the capstone rank about RELIABILITY, which is what a party actually needs from a link.",
+     "_nameWas": "The One Mind"
     }
    ],
    "_authored": "⛔ SNG-453. Erik: 'It could be a MIND MELD alternatively — meld with your allies or scouts.' Authored as a SECOND capstone rather than an alternative: domination and communion are different crafts and a Mind tradition should have both.",
    "traditionV2": "Mind",
-   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
+   "_idWas": "the_shared_room",
+   "_nameWas": "The Shared Room",
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
   },
   {
-   "id": "the_named_exclusion",
-   "name": "The Named Exclusion",
+   "id": "named_exclusion",
+   "name": "Named Exclusion",
    "levelReq": 1,
    "energyCost": 4,
    "axes": {
@@ -287,7 +299,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Set Mark",
+     "name": "Set Mark",
      "grants": "⛔ A THRESHOLD ONE NAMED KIND OF THING CANNOT CROSS — a person, an intent, a working, a category of creature. A door, a circle, a line across a road.",
      "cannot": "One category, one threshold, and it lasts while you are within a short walk of it.",
      "functions": [
@@ -295,11 +307,12 @@
       "make"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Set Mark"
     },
     {
      "rank": 2,
-     "name": "The Mark That Keeps",
+     "name": "Mark That Keeps",
      "grants": "⚠️ ADDS INDEPENDENCE AND SIZE. It holds without your attention or presence, and covers a room, a camp or a compound rather than a doorway.",
      "cannot": "You must return to renew it before the season turns; a determined breaker can still break the mark itself.",
      "functions": [
@@ -308,11 +321,12 @@
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Mark That Keeps"
     },
     {
      "rank": 3,
-     "name": "The Governed Ground",
+     "name": "Governed Ground",
      "grants": "⛔ ADDS RULE AND COMPULSION. A figure a whole site obeys — water runs where it says, sound carries where it says, a named thing does not cross anywhere within it — AND a concrete thing within it is bound to match the pattern you set for as long as the figure holds.",
      "cannot": "One site, and setting it takes a day. A figure this large is visible to anyone who reads figures.",
      "functions": [
@@ -322,17 +336,21 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Governed Ground"
     }
    ],
    "_merged": "⛔ SNG-453: MERGES The Standing Figure (L1, mag6, e5) and The Warding Mark (L2, mag4, e2) — both 'set a persistent figure that excludes a named category', with the later one strictly cheaper. ⚠️ The Standing Figure's r3 site-rule survives as the new r3.",
    "_absorbed": "⛔ SNG-457: absorbed The Binding Figure — r3 now binds a concrete thing to a set pattern as well as governing the site.",
    "traditionV2": "Mind",
-   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
+   "_idWas": "the_named_exclusion",
+   "_nameWas": "The Named Exclusion",
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
   },
   {
-   "id": "the_unbroken_thread",
-   "name": "The Unbroken Thread",
+   "id": "unbroken_thread",
+   "name": "Unbroken Thread",
    "levelReq": 1,
    "energyCost": 1,
    "axes": {
@@ -404,7 +422,7 @@
     },
     {
      "rank": 3,
-     "name": "The Last Thing to Fail",
+     "name": "Last Thing to Fail",
      "grants": "⛔ ADDS CONDITIONS. Function clearly where better bodies have stopped — cold, blood loss, three days without water, a burning building.",
      "cannot": "⚠️ The body still fails on schedule. This only means you are thinking clearly while it does.",
      "functions": [
@@ -412,7 +430,8 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Last Thing to Fail"
     }
    ],
    "_merged": "⛔ SNG-453: MERGES The Axiom Holds (syllogist, L1, e1) and The Long Form (cogitant, L2, e1) — both 'keep functioning under pressure through mental discipline', same arc: hold → hold for days → you are the last thing to fail. Flavour internal.",
@@ -422,7 +441,10 @@
     "figurist": "THE KEPT PATTERN — you hold the shape of the work and the work keeps its shape."
    },
    "traditionV2": "Mind",
-   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
+   "_idWas": "the_unbroken_thread",
+   "_nameWas": "The Unbroken Thread",
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
   }
  ]
 }

@@ -1636,3 +1636,28 @@ Space · The Designed Scene* is three headings, not three things you do.
 **I agreed this once and drifted back within the same session**, on abilities I authored after agreeing.
 ⛔ **The rule cannot depend on my remembering it, so it is written where the next authoring pass will hit
 it**, and it belongs in the pre-ship checklist alongside the schema check.
+
+
+### 31.5 SOP — the four social verbs, and why they went missing
+
+⛔ **`bargain`, `provoke` and `soothe` were ZERO across all 342 abilities. `persuade` had 4, all authored
+today.** The social column was empty not because social abilities were missing — there were 136 — but
+because **every one of them was tagged with what it did MECHANICALLY (`bind`, `command`, `reveal`) rather
+than with the social act it performs.**
+
+⚠️ **THE CAUSE, NAMED: a social craft resolves by affecting a mind, so the tag reached for the mind-effect
+and skipped the social verb.** *Case Closed* was `reveal/command/bind` — a persuasion filed as perception
+and control. *The Struck Term* is a bargain filed as `bind`.
+
+⛔ **STANDING RULE: IF A CRAFT WORKS BY SPEAKING TO SOMEONE, IT CARRIES A SOCIAL VERB.** The mechanical
+tag may accompany it; it may not replace it.
+
+| verb | what it is | not to be confused with |
+|---|---|---|
+| **persuade** | they come to agree | `command`, which does not need agreement |
+| **bargain** | ⚠️ **both sides give something** — the only social verb with a price on both sides | `persuade`, which is free |
+| **provoke** | you make them act, usually badly — ⛔ **the only social verb whose success looks like their choice** | `hinder` |
+| **soothe** | you take the heat out — fear, grief, rage, panic | `heal`, which mends a body |
+
+⚠️ **Every tradition should reach at least two of the four.** A tradition that can only `persuade` has one
+social move; one that can `provoke` and `soothe` can start and stop a fight without touching anyone.

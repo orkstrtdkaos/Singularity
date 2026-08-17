@@ -26,7 +26,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Lucky Break",
+     "name": "Lucky Break",
      "grants": "Turn a chaotic moment to advantage; improvise a working solution from whatever's to hand; make one plan (yours or theirs) come apart usefully.",
      "cannot": "You don't choose HOW it breaks, only that it does; luck spent runs thin.",
      "functions": [
@@ -34,7 +34,8 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Lucky Break"
     },
     {
      "rank": 2,
@@ -55,7 +56,7 @@
     },
     {
      "rank": 3,
-     "name": "The Unspooling",
+     "name": "Unspooling",
      "grants": "Unmake order at scale — a fortress's discipline, a system's certainty, a plan a season in the making, come apart; and out of the loosed chaos, seize the one opening that wouldn't have existed in order.",
      "cannot": "What you unspool you cannot re-order; the wielder drifts chaos-hot; the Grand Lattice marks you as an enemy.",
      "functions": [
@@ -70,7 +71,8 @@
       "break",
       "hinder",
       "transform"
-     ]
+     ],
+     "_nameWas": "The Unspooling"
     }
    ],
    "functions": [
@@ -176,7 +178,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Sure Plan",
+     "name": "Sure Plan",
      "grants": "Build a plan that holds under pressure; predict a system's next move; impose enough order on chaos to act cleanly in it.",
      "cannot": "Prediction fails on the truly chaotic; a plan is not a guarantee, only good odds.",
      "functions": [
@@ -187,11 +189,12 @@
      "_functionsWas": [
       "make",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Sure Plan"
     },
     {
      "rank": 2,
-     "name": "The Binding Frame",
+     "name": "Binding Frame",
      "grants": "Bind a possibility down — make a thing reliably true, a route reliably safe, an agreement reliably kept; read a system deeply enough to break OR fortify it at the load-bearing point.",
      "cannot": "Binding is brittle against Wildcraft; over-bound systems can't adapt and shatter when they must.",
      "functions": [
@@ -204,11 +207,12 @@
       "make",
       "bind",
       "break"
-     ]
+     ],
+     "_nameWas": "The Binding Frame"
     },
     {
      "rank": 3,
-     "name": "The Grand Order",
+     "name": "Grand Order",
      "grants": "Impose structure at scale — a lawless place made orderly, a chaotic force predicted and countered, a possibility foreclosed by sheer structure. The Lattice's power in miniature.",
      "cannot": "The wielder drifts order-hot — and order at full strength IS the foreclosure the framework names as the enemy; the Churn and the free places will not forgive it; perfect order is a cage even when it's yours.",
      "functions": [
@@ -222,7 +226,8 @@
       "bind",
       "break",
       "command"
-     ]
+     ],
+     "_nameWas": "The Grand Order"
     }
    ],
    "functions": [
@@ -336,7 +341,7 @@
     },
     {
      "rank": 2,
-     "name": "The Scattering",
+     "name": "Scattering",
      "grants": "Scatter a formation, a plan, a crowd — the thing that was one thing becomes many and cannot re-form quickly. Each of them is weakened by it: alone, out of place, and fighting or working at a fraction of what they were worth in line.",
      "cannot": "What you scatter you no longer control. Scattering a mob makes many small problems.",
      "functions": [
@@ -349,7 +354,8 @@
       "hinder",
       "break",
       "move"
-     ]
+     ],
+     "_nameWas": "The Scattering"
     },
     {
      "rank": 3,
@@ -468,7 +474,7 @@
     },
     {
      "rank": 2,
-     "name": "The Righted Thing",
+     "name": "Righted Thing",
      "grants": "Set a thing into its proper order and it STAYS — a room, a ledger, a broken argument.",
      "cannot": "Order imposed is not order accepted. What you right, someone may resent being righted.",
      "functions": [
@@ -476,7 +482,8 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Righted Thing"
     },
     {
      "rank": 3,
@@ -583,7 +590,7 @@
     },
     {
      "rank": 2,
-     "name": "The Long Tilt",
+     "name": "Long Tilt",
      "grants": "Tilt the odds of a whole sequence, not one roll — the run of luck bends your way. Inside that run everything you attempt comes off better than your skill alone should manage — the throw lands, the grip holds, the word arrives right.",
      "cannot": "Tilted odds are still odds. The Churn keeps its right to the improbable.",
      "functions": [
@@ -594,11 +601,12 @@
      "_functionsWas": [
       "foresee",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Long Tilt"
     },
     {
      "rank": 3,
-     "name": "The Loaded World",
+     "name": "Loaded World",
      "grants": "Around you, the unlikely simply happens — the gap opens, the guard turns, the coin lands.",
      "cannot": "The world balances its books. Whatever you tilt toward you, something tilts away, and you will not see it coming.",
      "functions": [
@@ -609,7 +617,8 @@
      "_functionsWas": [
       "foresee",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Loaded World"
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -679,8 +688,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_fixed_point",
-   "name": "The Fixed Point",
+   "id": "fixed_point",
+   "name": "Fixed Point",
    "levelReq": 3,
    "energyCost": 6,
    "attribute": "practical",
@@ -699,18 +708,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Fixed Point",
+     "name": "Fixed Point",
      "grants": "Be the still, reliable point in a chaotic scene; let others rally to you.",
      "cannot": "You must hold still; strong chaos still batters.",
      "functions": [
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Fixed Point"
     },
     {
      "rank": 2,
-     "name": "The Anchor",
+     "name": "Anchor",
      "grants": "Be the thing that does not move — a person, a promise, a position — while everything around you does.",
      "cannot": "Being unmoved is not being unharmed. The Churn breaks around you, and around includes on.",
      "functions": [
@@ -718,11 +728,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Anchor"
     },
     {
      "rank": 3,
-     "name": "The Point That Does Not Move",
+     "name": "Point That Does Not Move",
      "grants": "You become the fixed point others navigate by; chaos itself organizes around your refusal to shift.",
      "cannot": "A fixed point cannot also be a traveler. What you anchor, you are anchored to.",
      "functions": [
@@ -731,7 +742,8 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Point That Does Not Move"
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -794,11 +806,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/survive action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens anchorStrength; rank 3 adds to special. Limit: you must Hold Still."
+   "plainly": "A fight/survive action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens anchorStrength; rank 3 adds to special. Limit: you must Hold Still.",
+   "_nameWas": "The Fixed Point",
+   "_idWas": "the_fixed_point"
   },
   {
    "id": "riding_order",
-   "name": "The Riding Order",
+   "name": "Riding Order",
    "levelReq": 4,
    "energyCost": 9,
    "attribute": "practical",
@@ -814,7 +828,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Riding Order",
+     "name": "Riding Order",
      "grants": "Break a thing and reforge its pieces into what you need in the same motion.",
      "cannot": "A heartbeat's window; miss it and you've only made chaos.",
      "functions": [
@@ -826,11 +840,12 @@
       "command",
       "break",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Riding Order"
     },
     {
      "rank": 2,
-     "name": "The Long Riding",
+     "name": "Long Riding",
      "grants": "The window widens from a heartbeat to a breath, and the scale from a thing to a structure — ride the collapse of a wall, a wagon, a bridge, a formation, and set what is falling into the shape you need before it lands.",
      "cannot": "A widened window is still a window. The larger the collapse the cruder the form that comes out of it. And what you ride, you own — a structure re-bound wrong comes down on you first, and the Riders consider that only fair.",
      "functions": [
@@ -842,7 +857,8 @@
       "command",
       "break",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Long Riding"
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -899,11 +915,12 @@
     "break",
     "command"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Riding Order"
   },
   {
-   "id": "the_long_odds",
-   "name": "The Long Odds",
+   "id": "long_odds",
+   "name": "Long Odds",
    "levelReq": 5,
    "energyCost": 10,
    "attribute": "practical",
@@ -920,7 +937,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Long Odds",
+     "name": "Long Odds",
      "grants": "Turn a whole chase — escape a closing net, or run down a fleeing foe — by riding a cascade of lucky breaks no one could plan. Everyone running with you is carried by it too: for the length of the chase they are faster and surer than they are, because nothing goes wrong for them.",
      "cannot": "Spends enormously; the ordered and prepared can still corner you; fails hard if the luck runs out mid-flight.",
      "functions": [
@@ -931,7 +948,8 @@
      "_functionsWas": [
       "foresee",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Long Odds"
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -982,7 +1000,9 @@
     "empower",
     "foresee"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Long Odds",
+   "_idWas": "the_long_odds"
   },
   {
    "id": "set_to_rights",
@@ -1131,8 +1151,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_established_route",
-   "name": "The Established Route",
+   "id": "established_route",
+   "name": "Established Route",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1202,7 +1222,7 @@
     },
     {
      "rank": 3,
-     "name": "The Inside Line",
+     "name": "Inside Line",
      "grants": "Move through a system as if you designed it — through the parts only insiders know, at the speed the structure permits at its best, without a door that won't open for you.",
      "cannot": "Nothing further; this is the craft's ceiling; requires a system that HAS rules; and it still costs what it costs: the route is LAWFUL, which means it is also LOGGED.",
      "functions": [
@@ -1217,7 +1237,8 @@
       "open",
       "travel",
       "move"
-     ]
+     ],
+     "_nameWas": "The Inside Line"
     }
    ],
    "nativeOrCombination": "native",
@@ -1271,11 +1292,13 @@
     "reveal",
     "travel"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Established Route",
+   "_idWas": "the_established_route"
   },
   {
-   "id": "the_maintained_order",
-   "name": "The Maintained Order",
+   "id": "maintained_order",
+   "name": "Maintained Order",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1332,7 +1355,7 @@
     },
     {
      "rank": 3,
-     "name": "The Standing Order",
+     "name": "Standing Order",
      "grants": "A structure you maintain simply does not collapse while you attend to it — the siege holds, the treaty stands, the organization functions — for as long as the task requires.",
      "cannot": "Nothing further; this is the craft's ceiling; requires CONTINUOUS ATTENTION; and it still costs what it costs: attending costs you everything else you might have done.",
      "functions": [
@@ -1340,7 +1363,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Standing Order"
     }
    ],
    "nativeOrCombination": "native",
@@ -1389,11 +1413,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A logistics/leadership/endurance action that strengthens someone. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: requires Continuous Attention — it holds while you attend and not after."
+   "plainly": "A logistics/leadership/endurance action that strengthens someone. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 8 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: requires Continuous Attention — it holds while you attend and not after.",
+   "_nameWas": "The Maintained Order",
+   "_idWas": "the_maintained_order"
   },
   {
-   "id": "the_wrong_target",
-   "name": "The Wrong Target",
+   "id": "wrong_target",
+   "name": "Wrong Target",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1440,7 +1466,7 @@
     },
     {
      "rank": 2,
-     "name": "The Moving Gap",
+     "name": "Moving Gap",
      "grants": "Make yourself so hard to anticipate that organized attempts to harm you dissolve — they are always aiming at where you were a moment ago.",
      "cannot": "Anything rank 3 adds — the disorder around you actively deflects organized harm — not just you moving unpredictably, but the situation itself refusing to cooperate with anyone trying to fix you in place; it works against AIMED and ORGANIZED harm.",
      "functions": [
@@ -1448,7 +1474,8 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Moving Gap"
     },
     {
      "rank": 3,
@@ -1512,11 +1539,13 @@
      "class": "soft"
     }
    ],
-   "plainly": "A combat/evasion/tactical action that reduces incoming harm. and absorbs 2 harm per hit (rank 1 armour), and lasts for about 3 hours Ranks: rank 2 deepens evasion; rank 3 adds to special. Limit: it works against Aimed and Organized harm — an area effect or a collapsing roof does not care where you are."
+   "plainly": "A combat/evasion/tactical action that reduces incoming harm. and absorbs 2 harm per hit (rank 1 armour), and lasts for about 3 hours Ranks: rank 2 deepens evasion; rank 3 adds to special. Limit: it works against Aimed and Organized harm — an area effect or a collapsing roof does not care where you are.",
+   "_nameWas": "The Wrong Target",
+   "_idWas": "the_wrong_target"
   },
   {
-   "id": "the_misdirect",
-   "name": "The Misdirect",
+   "id": "misdirect",
+   "name": "Misdirect",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1551,7 +1580,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The False Signal",
+     "name": "False Signal",
      "grants": "Create a distraction or misdirection convincing enough to buy one clean move — for you, or for a friend.",
      "cannot": "Anything rank 2 adds — plant a false trail so credible that pursuit follows it seriously, or misdirect a group's full attention at exactly the moment it matters — and a group looking the wrong way is weakened for those moments: slow to turn, slow to answer, and behind whatever happens next; it buys a MOVE, not a victory.",
      "functions": [
@@ -1559,11 +1588,12 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The False Signal"
     },
     {
      "rank": 2,
-     "name": "The Wrong Trail",
+     "name": "Wrong Trail",
      "grants": "Plant a false trail so credible that pursuit follows it seriously, or misdirect a group's full attention at exactly the moment it matters — and a group looking the wrong way is weakened for those moments: slow to turn, slow to answer, and behind whatever happens next.",
      "cannot": "Anything rank 3 adds — introduce a misdirection so fundamental — the wrong door, the wrong figure, the wrong danger — that the opposition organizes around something that isn't there and can't recover before it's over; it buys a MOVE, not a victory.",
      "functions": [
@@ -1572,11 +1602,12 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Wrong Trail"
     },
     {
      "rank": 3,
-     "name": "The Wrong Threat",
+     "name": "Wrong Threat",
      "grants": "Introduce a misdirection so fundamental — the wrong door, the wrong figure, the wrong danger — that the opposition organizes around something that isn't there and can't recover before it's over.",
      "cannot": "Nothing further; this is the craft's ceiling; it buys a MOVE, not a victory; and it still costs what it costs: when it breaks, they know they were played.",
      "functions": [
@@ -1585,7 +1616,8 @@
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Wrong Threat"
     }
    ],
    "nativeOrCombination": "native",
@@ -1635,7 +1667,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A stealth/social/combat action that weakens or restricts a target. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about an hour Ranks: rank 2 extends targets+duration; rank 3 adds to special. Limit: it buys a Move, not a victory."
+   "plainly": "A stealth/social/combat action that weakens or restricts a target. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about an hour Ranks: rank 2 extends targets+duration; rank 3 adds to special. Limit: it buys a Move, not a victory.",
+   "_nameWas": "The Misdirect",
+   "_idWas": "the_misdirect"
   },
   {
    "id": "catch_as_catch_can",
@@ -1873,8 +1907,8 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
-   "id": "the_predicted_man",
-   "name": "The Predicted Man",
+   "id": "predicted_man",
+   "name": "Predicted Man",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_chaos_order",
@@ -1895,7 +1929,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Closed Line",
+     "name": "Closed Line",
      "grants": "Read a target you have watched this scene and place harm where they are going — a blade already at the height their head will reach, a step onto ground you prepared. The wound lands because they walked into it.",
      "cannot": "REQUIRES OBSERVATION — at least one exchange watched. The improvising, the panicked, and the Churn-touched cannot be read and this simply fails against them.",
      "functions": [
@@ -1906,11 +1940,12 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Closed Line"
     },
     {
      "rank": 2,
-     "name": "The Solved Position",
+     "name": "Solved Position",
      "grants": "Every line they have is a line you have costed. Take the ones that hurt them and leave one that does not, and they will take it.",
      "cannot": "A person who accepts a bad outcome to break the pattern escapes it. Holding the solve costs continuously.",
      "functions": [
@@ -1919,11 +1954,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Solved Position"
     },
     {
      "rank": 3,
-     "name": "The Resolved Man",
+     "name": "Resolved Man",
      "grants": "There is no line. Every option terminates, and you have placed the terminations. They are finished before it looks like anything is happening.",
      "cannot": "⚠ THE INNER RING DOES THIS TO PEOPLE and calls freedom a defect. Doing it well is a step toward them, and the Lattice notices who is good at it.",
      "functions": [
@@ -1933,7 +1969,8 @@
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Resolved Man"
     }
    ],
    "challengeTypes": [
@@ -1981,11 +2018,13 @@
     "hinder",
     "bind"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Predicted Man",
+   "_idWas": "the_predicted_man"
   },
   {
-   "id": "the_loose_thread",
-   "name": "The Loose Thread",
+   "id": "loose_thread",
+   "name": "Loose Thread",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "reach_chaos_order",
@@ -2004,7 +2043,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Thread Found",
+     "name": "Thread Found",
      "grants": "Look at a plan, a guard rotation, a lock-up, a ritual, a contract, and the craft NAMES ONE LOOSE THING: the specific assumption, gap, habit or shortcut that the whole arrangement is quietly resting on.",
      "cannot": "It finds ONE and it must EXIST — a genuinely sound arrangement gives nothing, and the craft says nothing rather than inventing. It finds the thread; pulling it is a separate problem entirely.",
      "functions": [
@@ -2015,11 +2054,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Thread Found"
     },
     {
      "rank": 2,
-     "name": "The Several Threads",
+     "name": "Several Threads",
      "grants": "Take a whole arrangement apart in the looking — every loose place, ordered by how much comes away if you pull.",
      "cannot": "The more you look the more you are seen looking. And knowing four ways in does not give you four ways out.",
      "functions": [
@@ -2030,11 +2070,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Several Threads"
     },
     {
      "rank": 3,
-     "name": "The Fraying Whole",
+     "name": "Fraying Whole",
      "grants": "A system entire — a fortress's routine, a market's settlement, a house's whole security — read down to where it actually rests.",
      "cannot": "⚠ YOU CANNOT UN-SEE HOW LITTLE HOLDS ANYTHING TOGETHER. Churnfolk at this rank find it hard to take institutions seriously, which is a social problem and occasionally a fatal one.",
      "functions": [
@@ -2048,7 +2089,8 @@
       "reveal",
       "foresee",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Fraying Whole"
     }
    ],
    "challengeTypes": [
@@ -2091,7 +2133,9 @@
     "reveal",
     "foresee"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Loose Thread",
+   "_idWas": "the_loose_thread"
   },
   {
    "id": "the_way_out",
@@ -2208,8 +2252,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_ordered_record",
-   "name": "The Ordered Record",
+   "id": "ordered_record",
+   "name": "Ordered Record",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "reach_chaos_order",
@@ -2228,7 +2272,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Departure Named",
+     "name": "Departure Named",
      "grants": "Take the order of a thing — a room, a roll, a ledger, a rotation, a shelf — then the craft NAMES WHAT HAS CHANGED, precisely: this entry is new, that item is missing, he was not here yesterday.",
      "cannot": "YOU MUST TAKE THE ORDER FIRST — this compares against a reading you made, so a place you have never ordered gives nothing. It names the DEPARTURE, never the reason.",
      "functions": [
@@ -2239,11 +2283,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Departure Named"
     },
     {
      "rank": 2,
-     "name": "The Held Order",
+     "name": "Held Order",
      "grants": "Hold several orders at once and keep them current — a household, a garrison's rotation, a merchant's stock — and notice departures as they happen rather than on inspection.",
      "cannot": "Holding orders is constant low attention and Lattice-folk are famously poor company while doing it. An order you took carelessly gives careless answers.",
      "functions": [
@@ -2257,11 +2302,12 @@
       "reveal",
       "foresee",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Held Order"
     },
     {
      "rank": 3,
-     "name": "The City's Order",
+     "name": "City's Order",
      "grants": "A whole institution held: who is where, what moved, which of ten thousand small things is not as it was.",
      "cannot": "⚠ THIS IS HOW THE INNER RING BEGINS. Perfect record-keeping about people is a short walk from deciding where people belong, and the Grand Lattice will find you and be delighted.",
      "functions": [
@@ -2275,7 +2321,8 @@
       "reveal",
       "foresee",
       "bind"
-     ]
+     ],
+     "_nameWas": "The City's Order"
     }
    ],
    "challengeTypes": [
@@ -2318,11 +2365,13 @@
     "reveal",
     "foresee"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Ordered Record",
+   "_idWas": "the_ordered_record"
   },
   {
-   "id": "the_working_order",
-   "name": "The Working Order",
+   "id": "working_order",
+   "name": "Working Order",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_chaos_order",
@@ -2342,7 +2391,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Arrangement Set",
+     "name": "Arrangement Set",
      "grants": "Take a disordered effort — a bucket-line, a triage, a load-out, a search, a market queue — and set an order that roughly doubles what it accomplishes. It HOLDS after you stop directing it.",
      "cannot": "They must be WILLING and able to see the shape. It orders WORK, not combat. And an order set on bad information is followed faithfully off a cliff.",
      "functions": [
@@ -2350,11 +2399,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Arrangement Set"
     },
     {
      "rank": 2,
-     "name": "The Standing Arrangement",
+     "name": "Standing Arrangement",
      "grants": "A rotation, a supply chain, a watch — something that runs for weeks without you and stays true.",
      "cannot": "It becomes THEIRS, and a standing arrangement resists being changed, including by you. Lattice-folk find this appropriate.",
      "functions": [
@@ -2363,11 +2413,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Standing Arrangement"
     },
     {
      "rank": 3,
-     "name": "The Ordered Body",
+     "name": "Ordered Body",
      "grants": "An institution: a garrison, a guild, a relief effort at scale, running well because of a shape you put in it.",
      "cannot": "⚠ AN ORDER OUTLIVES ITS REASON. What you build to survive a winter will still be running in ten years, and the people inside it will not remember there was a winter.",
      "functions": [
@@ -2377,7 +2428,8 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Ordered Body"
     }
    ],
    "challengeTypes": [
@@ -2415,10 +2467,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/puzzle action that structures a disordered effort so it holds without you. Rated 6 of 10 across a scope of 3 for about three days."
+   "plainly": "A social/puzzle action that structures a disordered effort so it holds without you. Rated 6 of 10 across a scope of 3 for about three days.",
+   "_nameWas": "The Working Order",
+   "_idWas": "the_working_order"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

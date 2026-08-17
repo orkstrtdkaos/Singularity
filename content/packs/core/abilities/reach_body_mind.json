@@ -131,149 +131,6 @@
    "_descriptionWas": "The body-pole mastery: breath-control, endurance, poise, the physical self honed to an instrument. The Flesh-Temples' art."
   },
   {
-   "id": "noesis",
-   "name": "Noesis",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "reach_body_mind",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.5,
-    "concrete_abstract": 0.3,
-    "chaos_order": 0.2
-   },
-   "effectTags": [
-    "mind",
-    "memory",
-    "thought"
-   ],
-   "narrationHints": "Thought made a discipline and a force — memory-palaces, absolute focus, reasoning that outruns the room, the mind holding what the body can't.",
-   "description": "Recall perfectly what you attend to, focus past pain and fear, and reason a problem faster and further than the unpracticed. The mind-pole mastery — the Cogitarium's art.",
-   "notFor": "Physical feats (that's Soma); wisdom (Noesis is sharp, not necessarily wise); anything requiring presence in the body it keeps trying to leave.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Ordered Mind",
-     "grants": "Perfect recall of what you attend to; focus that ignores pain, fear, and distraction; reason a problem faster and further than the unpracticed.",
-     "cannot": "Recall is not understanding; focus this tight can miss the body's warnings.",
-     "functions": [
-      "resist"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "resist"
-     ],
-     "_nameWas": "The Ordered Mind"
-    },
-    {
-     "rank": 2,
-     "name": "Memory-Palace",
-     "grants": "Hold vast structured knowledge and retrieve it instantly; model a system or a person in your head and predict them; think through a crisis in the space others panic in.",
-     "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room.",
-     "functions": [
-      "resist"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_functionsWas": [
-      "reveal",
-      "resist",
-      "foresee"
-     ],
-     "_nameWas": "The Memory-Palace"
-    },
-    {
-     "rank": 3,
-     "name": "Cogitant's Height",
-     "grants": "Thought as force — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. And turned on a person: a conclusion assembled and delivered exactly where their reasoning rests, which staggers a mind the way a blow staggers a body, and leaves the same kind of mark.",
-     "cannot": "It is sharp, not wise, and this use of it least of all. It needs a mind that reasons — the disciplined, the genuinely mad, and the simply uninterested all shrug it off. And the Cogitarium teaches that what you take apart in someone this way, you are responsible for putting back.",
-     "functions": [
-      "resist",
-      "strike"
-     ],
-     "gains": "broaden",
-     "harmRung": "damaging",
-     "_functionsWas": [
-      "reveal",
-      "resist",
-      "foresee",
-      "strike"
-     ],
-     "_nameWas": "The Cogitant's Height"
-    }
-   ],
-   "functions": [
-    "resist",
-    "strike"
-   ],
-   "challengeTypes": [
-    "FIGHT",
-    "INVESTIGATE",
-    "PUZZLE"
-   ],
-   "tradition": "cogitant",
-   "nativeOrCombination": "native",
-   "harmRung": "damaging",
-   "shape": "setup",
-   "operativeAxis": [
-    "reasoning",
-    "scope"
-   ],
-   "mechanic": {
-    "magnitude": 5,
-    "duration": 4,
-    "scope": 2,
-    "note": "damaging rung — 'thought as force'"
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "deepen",
-     "axis": "reasoning",
-     "delta": "hold VAST STRUCTURED KNOWLEDGE and retrieve it instantly; MODEL a system or a person and PREDICT them",
-     "from": "r2 grants"
-    },
-    {
-     "rank": 3,
-     "kind": "add",
-     "axis": "special",
-     "delta": "SPECIAL: THOUGHT AS FORCE — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to have arranged it",
-     "from": "r3 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "think it through — half the reach, and it costs you no time",
-    "surge": "double it; IT IS SHARP, NOT WISE, and this use of it least of all"
-   },
-   "bounds": [
-    {
-     "text": "RECALL IS NOT UNDERSTANDING",
-     "class": "hard"
-    },
-    {
-     "text": "THE MODEL IS ONLY AS GOOD AS ITS INPUTS — a mind that lives in the model loses the room",
-     "class": "hard"
-    },
-    {
-     "text": "IT IS SHARP, NOT WISE",
-     "class": "hard"
-    }
-   ],
-   "plainly": "A fight/investigate/puzzle action that reveals information or sets up a later action. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reasoning; rank 3 adds to special. Limit: recall IS Not Understanding.",
-   "_descriptionWas": "The mind-pole mastery: memory, focus, reason, thought as an instrument sharp enough to act on the world. The Cogitarium's art.",
-   "_markedForRemoval": "⛔ SNG-453, ERIK'S RULING: 'Those MYSTERIES WERE NON-EXISTENT — leave a reminder to fill in if we get so inspired, but MARK THEM FOR REMOVAL in the meantime.'\n⚠️ Noesis is the sect's namesake 'pole mastery' and its ranks summarise the whole sect rather than doing anything — r1 duplicates two or three other abilities in its own sect. ⛔ IF THE MYSTERY IS EVER AUTHORED, THIS IS WHERE IT ATTACHES: a mystery should be the thing the tradition knows that nobody else does, not a digest of its skill list.",
-   "status": "marked-for-removal",
-   "_functionsWas": [
-    "foresee",
-    "resist",
-    "reveal",
-    "strike"
-   ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
-  },
-  {
    "id": "second_wind",
    "name": "Second Wind",
    "levelReq": 1,
@@ -518,49 +375,56 @@
     "concrete_abstract": 0.3
    },
    "functions": [
+    "empower",
     "reveal",
     "track"
    ],
    "narrationHints": "They go still and their eyes track across nothing, left to right, like someone reading. Then they tell you where they have seen that man before.",
-   "description": "Search your own memory the way you would search a library — cross-reference a face, a hand, a phrase against everything you have ever attended to, and find the match.",
+   "description": "Search your own memory for something that bears on what you are doing — and let it sharpen the attempt.",
    "notFor": "Wisdom; presence in the body it forgets.",
    "tree": [
     {
      "rank": 1,
-     "name": "Near Rooms",
+     "name": "Cross-Reference",
+     "grants": "⛔ SEARCH YOUR OWN ATTENDED MEMORY FOR SOMETHING THAT BEARS ON WHAT YOU ARE DOING — a similar lock, a face, a passage read once, a fight fought before. ⚠️ MECHANICALLY: roll to determine how much it helps; on a success your next attempt gains a bonus to succeed AND a widened crit range.",
+     "cannot": "One attempt, and you must have attended to something relevant. A subject you have never encountered gives you nothing.",
      "functions": [
+      "empower",
       "reveal"
      ],
-     "grants": "⛔ SEARCH WHAT YOU HAVE ATTENDED TO IN RECENT WEEKS AND FIND THE MATCH — the face at this gate was at that funeral, the same hand signed both ledgers, this phrase was in a letter you read.",
-     "cannot": "Only what you ATTENDED to, and only weeks back. Background you did not look at was never stored.",
-     "gains": "broaden",
+     "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Near Rooms"
+     "gainAxes": []
     },
     {
      "rank": 2,
-     "name": "Whole House",
+     "name": "The Whole House",
+     "grants": "⚠️ ADDS RELIABILITY AND CEILING. The search no longer fails to find something usable, and the bonus lands at its maximum rather than being rolled for.",
+     "cannot": "Still your own memory. It takes a quiet moment you may not have in a fight.",
      "functions": [
-      "reveal"
+      "empower"
      ],
-     "grants": "⚠️ ADDS DEPTH OF TIME. The search runs across your entire life — childhood, the war, a road you walked once twenty years ago — and returns it whole: tone, order, who said what, and what was not said.",
-     "cannot": "Still only your own attending. A long search takes a quiet minute you may not have.",
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Whole House"
+     "gainAxes": [
+      "quality"
+     ]
     },
     {
      "rank": 3,
-     "name": "Borrowed Room",
+     "name": "The Borrowed Room",
+     "grants": "⛔ ADDS SOMEONE ELSE'S. Enter a willing — or unresisting — mind and search THEIR memory: their route, their language, their trade. ⚠️ FOR ONE ATTEMPT YOU MAY USE A SKILL THEY HAVE AND YOU DO NOT, at their rank.",
+     "cannot": "⚠️ A resisting mind can refuse and a hostile one costs you. You get what THEY attended to, including what they were wrong about.",
      "functions": [
-      "reveal",
+      "empower",
       "track"
      ],
-     "grants": "⛔ ADDS SOMEONE ELSE. Enter a willing — or unresisting — mind and search THEIR memory the same way. The dying man's last road, the witness who saw it and cannot say it, the prisoner who does not know what they know.",
-     "cannot": "⚠️ A RESISTING MIND CAN REFUSE, and a hostile one costs you. You get what THEY attended to, including what they were wrong about.",
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Borrowed Room"
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ]
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -574,7 +438,7 @@
    "harmRung": "none",
    "schoolAffinity": "cog_unaided",
    "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
-   "shape": "setup",
+   "shape": "bolster",
    "operativeAxis": [
     "recallDepth",
     "permanence"
@@ -622,45 +486,44 @@
    "_treeWas": [
     {
      "rank": 1,
-     "name": "Memory-Palace",
-     "grants": "Store and recall huge structured knowledge; model and predict a system or person in your head.",
-     "cannot": "Only as good as its inputs; living in the model loses the room.",
+     "name": "Near Rooms",
      "functions": [
-      "reveal",
-      "foresee"
+      "reveal"
      ],
+     "grants": "⛔ SEARCH WHAT YOU HAVE ATTENDED TO IN RECENT WEEKS AND FIND THE MATCH — the face at this gate was at that funeral, the same hand signed both ledgers, this phrase was in a letter you read.",
+     "cannot": "Only what you ATTENDED to, and only weeks back. Background you did not look at was never stored.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Near Rooms"
     },
     {
      "rank": 2,
-     "name": "The Deeper Rooms",
-     "grants": "Store not just facts but experiences whole — walk back into a conversation and hear it again exactly.",
-     "cannot": "What you store, you keep. Including what you would rather have let fade.",
+     "name": "Whole House",
      "functions": [
-      "reveal",
-      "foresee",
-      "restore"
+      "reveal"
      ],
-     "gains": "broaden",
-     "harmRung": "none"
+     "grants": "⚠️ ADDS DEPTH OF TIME. The search runs across your entire life — childhood, the war, a road you walked once twenty years ago — and returns it whole: tone, order, who said what, and what was not said.",
+     "cannot": "Still only your own attending. A long search takes a quiet minute you may not have.",
+     "gains": "deepen",
+     "harmRung": "none",
+     "_nameWas": "The Whole House"
     },
     {
      "rank": 3,
-     "name": "The Palace Entire",
-     "grants": "Nothing you have attended to is lost. The whole of your life is a place you can walk through.",
-     "cannot": "The Cogitants who build the deepest palaces have trouble leaving them.",
+     "name": "Borrowed Room",
      "functions": [
       "reveal",
-      "foresee",
-      "restore"
+      "track"
      ],
-     "gains": "deepen",
-     "harmRung": "none"
+     "grants": "⛔ ADDS SOMEONE ELSE. Enter a willing — or unresisting — mind and search THEIR memory the same way. The dying man's last road, the witness who saw it and cannot say it, the prisoner who does not know what they know.",
+     "cannot": "⚠️ A RESISTING MIND CAN REFUSE, and a hostile one costs you. You get what THEY attended to, including what they were wrong about.",
+     "gains": "broaden",
+     "harmRung": "none",
+     "_nameWas": "The Borrowed Room"
     }
    ],
    "_descriptionWas": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
-   "_revised": "⛔ SNG-450, REBUILT TWICE. Erik first: 'I'm not even sure what Memory Palace does for an ADVENTURER' — it was a faculty, not a tool. Then: 'r3 IS THE FUNCTIONAL USE — MAKE THAT THE THEME OF THE SKILL, with ranking up being FURTHER BACK IN TIME and then RECALLING SOMEONE ELSE'S MEMORY.'\n⚠️ SO SEARCH IS THE WHOLE SKILL AND THE RANKS EXTEND ITS REACH: recent → your whole life → ANOTHER PERSON'S. ⛔ THE LAST RANK MAKES IT A PSIONIC CRAFT RATHER THAN A GOOD MEMORY, which is what a Mind capstone should be."
+   "_revised": "⛔ SNG-463. Erik: 'Searching your own memory could be the FLAVOUR TEXT OF AN EMPOWER FUNCTION — something that increases success chance and crit range, a roll to determine by how much. r2 makes it more reliable and maximises the benefit. r3 lets you use someone ELSE'S SKILL.' ⚠️ That fixes assessment Q4: recall was information the GM would have given; empower is a thing you spend an action on."
   },
   {
    "id": "whole_act",
@@ -1485,8 +1348,8 @@
   },
   {
    "schemaVersion": 1,
-   "id": "the_single_stroke",
-   "name": "The Single Stroke",
+   "id": "convergent_strike",
+   "name": "Convergent Strike",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_body_mind",
@@ -1499,14 +1362,14 @@
     "foresee",
     "strike"
    ],
-   "narrationHints": "You have already seen it — the one moment, the only opening, the single stroke that ends the contest before it was properly a contest. You do not rush. You wait for the instant you already know is coming, and then it simply is.",
-   "description": "The Cogitant capstone — mind and act become one perfect stroke, the whole contest read to its single decisive instant and then delivered without waste. The sword-saint's art: not the fastest blade, the ONLY necessary one.",
+   "narrationHints": "No wind-up and no flourish. They move once, and the thing that was a fight is over, and afterwards nobody can agree on what they saw.",
+   "description": "Read every thread of threat in a contest at once — the unarmoured seam, the failing grip, the worst possible instant, the sharpest part of the blade or the finest edge of a psychic figure — and bring them all onto one point.",
    "notFor": "One stroke, read and delivered perfectly, at enormous cost of focus — and it demands the opening be real; against something with no decisive instant (a flood, a crowd, a lie with no center) there is no single stroke to find.",
    "tree": [
     {
      "rank": 1,
-     "name": "The Single Stroke",
-     "grants": "Read a contest to its one decisive instant and deliver the single perfect stroke that ends it — one strike, placed where a contest breaks.",
+     "name": "Convergent Strike",
+     "grants": "⛔ EVERY THREAD OF THREAT CONVERGES ON ONE POINT — weak spot, unarmoured seam, maximum leverage, the sharpest part of the blade or the finest edge of a figure, all at the same instant. ⚠️ THE LARGEST SINGLE HIT IN THE TRADITION.",
      "cannot": "It costs nearly all your focus, it requires a real decisive instant to exist, and it is the blade's truth and the pen's alike — some contests have no single stroke, and mistaking that is how the sure-handed fall.",
      "harmRung": "lethal",
      "functions": [
@@ -1559,7 +1422,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight action that deals damage. It rolls 5d6+6 It affects 1 target Limit: iT Costs Nearly All Your Focus."
+   "plainly": "A fight action that deals damage. It rolls 5d6+6 It affects 1 target Limit: iT Costs Nearly All Your Focus.",
+   "_nameWas": "The Single Stroke",
+   "_renamed": "⛔ SNG-463. Erik: 'rename to Convergent Strike — simply a super powerful strike of multiple threat threads converging: weak spots, unarmoured area, maximum leverage, sharpest part of the blade, or psychic edge. It's a big damage skill so that's good.' ⚠️ Fixes Q6 — the old grant was a mood ('the single decisive instant')."
   },
   {
    "schemaVersion": 1,

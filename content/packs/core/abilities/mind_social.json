@@ -5,8 +5,8 @@
  "note": "⛔ SNG-462. Two Mind social abilities closing the `provoke` and `soothe` zeros. See SYSTEM_SPEC §31.5.",
  "abilities": [
   {
-   "id": "cold_certainty",
-   "name": "Cold Certainty",
+   "id": "force_the_move",
+   "name": "Force the Move",
    "levelReq": 2,
    "energyCost": 4,
    "axes": {
@@ -14,9 +14,9 @@
     "emotional_logical": 0.4
    },
    "attribute": "mental",
-   "narrationHints": "They say something quiet and specific about the person, and the person stops arguing and starts deciding — badly, and fast, and in public.",
-   "description": "Name the thing a person is most afraid is true about them, and let them act on it — you do not tell them what to do, you make waiting unbearable.",
-   "notFor": "Anyone who genuinely does not care what you think; crowds; making someone do a SPECIFIC thing — you get action, not obedience.",
+   "narrationHints": "A short, specific, true observation. Not an insult — insults are easy to ignore. The archer comes down off the wall to say something back, and is now an archer standing in a courtyard.",
+   "description": "Say the one thing that makes waiting impossible — and an enemy who was holding a good position gives it up to answer you.",
+   "notFor": "Anyone with no stake in what you say; making them do a SPECIFIC thing; anything already in motion.",
    "tradition": "cogitant",
    "traditionV2": "Mind",
    "nativeOrCombination": "native",
@@ -58,16 +58,16 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/duel action that provokes a target into acting. It rolls 2d6. Range is 6. Ranks: rank 2 provokes a group, rank 3 forces a public commitment.",
+   "plainly": "A social/duel action that forces an enemy to act early. It rolls 2d6. Range is 6. Ranks: rank 2 breaks a formation, rank 3 forces a binding commitment.",
    "functions": [
     "provoke"
    ],
    "tree": [
     {
      "rank": 1,
-     "name": "Named Aloud",
-     "grants": "⛔ NAME IT AND THEY MOVE. The careful one attacks; the patient one speaks out of turn; the liar over-explains. You have taken away their option to wait.",
-     "cannot": "One person, in earshot, who cares what is said of them. What they do next is their choice, not yours.",
+     "name": "Make Them Answer",
+     "grants": "⛔ AN ENEMY WHO IS HOLDING ADVANTAGE GIVES IT UP TO RESPOND. The archer leaves the wall. The captain answers instead of ordering. The one waiting in ambush speaks. ⚠️ MECHANICALLY: they lose their held action, their cover or their prepared position for a round, and act on YOUR timing.",
+     "cannot": "You choose WHEN they act, never WHAT. What they do is still theirs, and a good fighter provoked is still a good fighter.",
      "functions": [
       "provoke"
      ],
@@ -77,9 +77,9 @@
     },
     {
      "rank": 2,
-     "name": "The Room Hears It",
-     "grants": "⚠️ ADDS TARGETS AND WITNESSES. Say it where it lands on several at once — a command group, a council, a family — and each of them moves on their own account.",
-     "cannot": "The more people hear it, the less precisely it lands on any one of them.",
+     "name": "Break the Line",
+     "grants": "⚠️ ADDS TARGETS AND FORMATION. Say it to a group and several answer at once — a shield line opens, a patrol turns to look, a council all speak over each other. ⛔ Formations, ambushes and coordinated actions break for a round.",
+     "cannot": "The bigger the group, the shallower it lands on any one of them. Disciplined troops re-form fast.",
      "functions": [
       "provoke"
      ],
@@ -93,7 +93,7 @@
     {
      "rank": 3,
      "name": "On the Record",
-     "grants": "⛔ ADDS PERMANENCE. Provoke a commitment they cannot walk back — an oath, an accusation, an order given in front of the people who must carry it out. ⚠️ They will regret it and they will honour it.",
+     "grants": "⛔ ADDS PERMANENCE. Force a commitment they cannot walk back — an order given in front of the people who must carry it out, an accusation with witnesses, a challenge accepted. ⚠️ They will regret it and they will honour it, and you can plan around it.",
      "cannot": "They must have standing to lose. Someone with no reputation cannot be trapped by one.",
      "functions": [
       "provoke",
@@ -107,7 +107,7 @@
      ]
     }
    ],
-   "_authored": "⛔ SNG-462. `provoke` was ZERO across all 342 abilities. ⚠️ THE ONLY SOCIAL VERB WHOSE SUCCESS LOOKS LIKE THE TARGET'S OWN CHOICE — which is why it belongs to the mind tradition and why it is a weapon rather than a conversation."
+   "_authored": "⛔ SNG-462, REWRITTEN. Erik: 'good that it gets action — that's the point of provoke — but limiting it to what they are MOST AFRAID OF? OMG SPIDERS... what?? Make this less flavour and MORE SPECIFIC. How would a player BENEFIT from using this?'\n⚠️ THE OLD TEXT PUT FLAVOUR WHERE THE MECHANIC GOES. ⛔ THE BENEFIT IS TEMPO: you use it when the ENEMY HAS THE ADVANTAGE OF PATIENCE — the archer on the wall, the ambush that is waiting, the captain who has not committed. It converts their good position into a bad one because they had to answer you."
   },
   {
    "id": "quiet_the_room",
@@ -119,8 +119,8 @@
     "violence_peace": 0.5
    },
    "attribute": "mental",
-   "narrationHints": "Nobody is told to calm down. The shouting simply runs out of somewhere to go, and afterwards people cannot say who stopped it.",
-   "description": "Take the heat out of a person or a room — panic, grief, rage, the moment before a fight — so that whatever happens next is chosen rather than spilled.",
+   "narrationHints": "Nobody is told to calm down. The shouting runs out of somewhere to go, and afterwards nobody can say who stopped it.",
+   "description": "End fear, rage or panic as a condition — stop a rout, talk a mob down, or bring an ally back who has been provoked, frightened or broken.",
    "notFor": "Making anyone agree with you; a fear that is correct; anything already in motion — a swung blade lands.",
    "tradition": "cogitant",
    "traditionV2": "Mind",
@@ -158,16 +158,16 @@
      "class": "soft"
     }
    ],
-   "plainly": "A social/survive action that soothes fear, grief or rage. Its strength is rated 5 out of 10. Ranks: rank 2 covers a crowd, rank 3 restores someone already broken.",
+   "plainly": "A social/survive action that ends fear, rage or panic. Its strength is rated 5 out of 10. Ranks: rank 2 stops a rout, rank 3 restores someone already broken.",
    "functions": [
     "soothe"
    ],
    "tree": [
     {
      "rank": 1,
-     "name": "Take the Heat Out",
-     "grants": "⛔ ONE PERSON OR A SMALL GROUP STOPS BEING RUN BY IT — the panicking stop panicking, the grieving can speak, the man about to swing lowers his arm and thinks about it.",
-     "cannot": "They still want what they wanted. It removes heat, not reasons.",
+     "name": "End the Condition",
+     "grants": "⛔ REMOVE FEAR, RAGE OR PANIC FROM ONE PERSON OR A SMALL GROUP. ⚠️ MECHANICALLY: it ends a fear or provoke effect on an ally, stops a fleeing NPC fleeing, or makes a frightened witness able to speak. ⛔ IT IS THE COUNTER TO PROVOKE, and to every craft that works by terror.",
+     "cannot": "They still want what they wanted — it removes the heat, not the reason. Nothing already swung stops.",
      "functions": [
       "soothe"
      ],
@@ -177,9 +177,9 @@
     },
     {
      "rank": 2,
-     "name": "The Whole Room",
-     "grants": "⚠️ ADDS SCALE. A crowd, a rout, a market turning ugly, a ward full of wounded — the temperature comes down across all of it at once.",
-     "cannot": "The larger the room, the shallower it goes. A determined agitator can bring it back up.",
+     "name": "Stop the Rout",
+     "grants": "⚠️ ADDS SCALE AND COMBAT USE. A whole unit stops routing and re-forms; a mob turning ugly does not turn; a ward full of wounded stops screaming and can be worked in. ⛔ In a fight this rallies allies who have broken.",
+     "cannot": "The larger the group, the shallower it goes. A determined agitator can bring it back up next round.",
      "functions": [
       "soothe"
      ],
@@ -193,8 +193,8 @@
     {
      "rank": 3,
      "name": "Back From It",
-     "grants": "⛔ ADDS RECOVERY. Bring one person back from where fear or grief has already taken them — the broken soldier, the witness who has stopped speaking, the one who has decided to die.",
-     "cannot": "⚠️ One person, and it takes a quiet hour. It gives them back the ability to choose; it does not choose for them.",
+     "grants": "⛔ ADDS RECOVERY OF THE LONG-TERM. Bring one person back from where fear or grief has ALREADY taken them — the broken soldier who has stopped fighting for good, the witness who has not spoken in weeks, the one who has decided to die. ⚠️ This is not a combat rank; it restores an NPC or a companion to usefulness.",
+     "cannot": "One person, and it takes a quiet hour. It gives them back the ability to choose; it does not choose for them.",
      "functions": [
       "soothe",
       "restore"
@@ -207,7 +207,7 @@
      ]
     }
    ],
-   "_authored": "⛔ SNG-462. `soothe` was ZERO corpus-wide. ⚠️ Distinct from `heal`, which mends a body — this takes the heat out of a mind, and the r3 recovery case is what the game had no ability for at all."
+   "_authored": "⛔ SNG-462, REWRITTEN. Erik: 'ok, but what does REMOVING HEAT DO??? functionally in game. When would a player use this, and is it so rare as to not be worth the skill slot?'\n⚠️ FAIR — 'takes the heat out' is a mood, not an effect. ⛔ IT ENDS A CONDITION: fear, rage, panic, and any provoke effect. THAT IS ITS FREQUENCY ANSWER TOO — it is the direct counter to Force the Move and to every terror-based craft, plus rallying a rout, which is common in any fight that goes badly."
   }
  ]
 }

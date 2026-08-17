@@ -25,18 +25,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Long Stride",
+     "name": "Long Stride",
      "grants": "Cover ground far past what a body should — a day's march in an hour, tirelessly.",
      "cannot": "The ground is still crossed. What is on it still meets you.",
      "functions": [
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Stride"
     },
     {
      "rank": 2,
-     "name": "The Closed Distance",
+     "name": "Closed Distance",
      "grants": "Close a distance you can see — arrive at the far ridge, the far bank, the far door, without crossing the between.",
      "cannot": "You must SEE it. And whatever was in the between is still in the between, un-dealt-with.",
      "functions": [
@@ -44,7 +45,8 @@
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Closed Distance"
     },
     {
      "rank": 3,
@@ -142,18 +144,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Kept Hour",
+     "name": "Kept Hour",
      "grants": "Hold a moment exactly — perceive it whole, at length, while it is still happening.",
      "cannot": "The moment still passes for everyone else. You get to look; you do not get to act longer.",
      "functions": [
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Kept Hour"
     },
     {
      "rank": 2,
-     "name": "The Slow Hour",
+     "name": "Slow Hour",
      "grants": "Slow duration around you — a fight, a fall, a conversation stretches, and you have room inside it.",
      "cannot": "It costs continuously and it costs steeply. And the world outside your slow hour arrives on time regardless.",
      "functions": [
@@ -164,11 +167,12 @@
      "_functionsWas": [
       "reveal",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Slow Hour"
     },
     {
      "rank": 3,
-     "name": "The Pre-Remembered",
+     "name": "Pre-Remembered",
      "grants": "Remember forward — an hour that has not happened arrives in you as memory does, with a memory's specificity and a memory's unreliability.",
      "cannot": "You cannot tell a true pre-memory from a feared one. Hourkeepers who trust it wrongly are the reason the craft is feared.",
      "functions": [
@@ -181,7 +185,8 @@
       "reveal",
       "bind",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Pre-Remembered"
     }
    ],
    "gated": "learned",
@@ -246,8 +251,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_long_reach",
-   "name": "The Long Reach",
+   "id": "long_reach",
+   "name": "Long Reach",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -290,7 +295,7 @@
     },
     {
      "rank": 2,
-     "name": "The Running Strike",
+     "name": "Running Strike",
      "grants": "Attack in full motion — without losing accuracy or force to the movement; the speed is the weapon.",
      "cannot": "Anything rank 3 adds — distance ceases to reduce your effectiveness — whether across a room or across a field, you arrive with full force or make the throw as if there were no gap at all; it extends REACH, not power.",
      "functions": [
@@ -298,7 +303,8 @@
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Running Strike"
     },
     {
      "rank": 3,
@@ -358,11 +364,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A combat/ranged/tactical action that deals damage. It rolls 2d6. Range is 20. Ranks: rank 2 deepens damage; rank 3 extends range. Limit: it extends Reach, not power — the same blow, from further."
+   "plainly": "A combat/ranged/tactical action that deals damage. It rolls 2d6. Range is 20. Ranks: rank 2 deepens damage; rank 3 extends range. Limit: it extends Reach, not power — the same blow, from further.",
+   "_nameWas": "The Long Reach",
+   "_idWas": "the_long_reach"
   },
   {
-   "id": "the_fresh_horizon",
-   "name": "The Fresh Horizon",
+   "id": "fresh_horizon",
+   "name": "Fresh Horizon",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -406,7 +414,7 @@
     },
     {
      "rank": 2,
-     "name": "The Road Restores",
+     "name": "Road Restores",
      "grants": "A journey restores the party — physically and otherwise; the movement is the medicine, and you know how to pace it so it heals rather than depletes.",
      "cannot": "Anything rank 3 adds — show someone the next horizon and it fills them again — despair fails against the sight of further to go, and you can make that sight real; IT REQUIRES ACTUALLY GOING.",
      "functions": [
@@ -415,7 +423,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Road Restores"
     },
     {
      "rank": 3,
@@ -477,11 +486,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A healing/morale/endurance action that restores health. It rolls 2d4+1 It affects 1 target Ranks: rank 2 extends targets; rank 3 adds to special. Limit: iT Requires Actually Going — a person who cannot move gets nothing."
+   "plainly": "A healing/morale/endurance action that restores health. It rolls 2d4+1 It affects 1 target Ranks: rank 2 extends targets; rank 3 adds to special. Limit: iT Requires Actually Going — a person who cannot move gets nothing.",
+   "_nameWas": "The Fresh Horizon",
+   "_idWas": "the_fresh_horizon"
   },
   {
-   "id": "the_kept_distance",
-   "name": "The Kept Distance",
+   "id": "kept_distance",
+   "name": "Kept Distance",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -524,7 +535,7 @@
     },
     {
      "rank": 2,
-     "name": "The Managed Gap",
+     "name": "Managed Gap",
      "grants": "Control the distance between yourself and a threat — always too far for it to act, close enough for you to — and maintain that gap through a whole engagement.",
      "cannot": "Anything rank 3 adds — stay perpetually where the threat isn't — and bring others with you; it needs SOMEWHERE TO GO.",
      "functions": [
@@ -533,7 +544,8 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Managed Gap"
     },
     {
      "rank": 3,
@@ -595,11 +607,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A combat/evasion/tactical action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens evasion; rank 3 extends targets. Limit: it needs Somewhere TO GO — cornered, it is worth nothing."
+   "plainly": "A combat/evasion/tactical action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 deepens evasion; rank 3 extends targets. Limit: it needs Somewhere TO GO — cornered, it is worth nothing.",
+   "_nameWas": "The Kept Distance",
+   "_idWas": "the_kept_distance"
   },
   {
-   "id": "the_made_crossing",
-   "name": "The Made Crossing",
+   "id": "made_crossing",
+   "name": "Made Crossing",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -631,14 +645,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Found Way",
+     "name": "Found Way",
      "grants": "Find a crossing across an obstacle that wasn't apparent — the shallows, the ledge, the fallen tree — by reading terrain the way a horizon-walker does.",
      "cannot": "Anything rank 2 adds — identify and exploit the specific point where an obstacle can be crossed — not the obvious attempt but the place where the distance relents; it FINDS or MAKES a crossing.",
      "functions": [
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Found Way"
     },
     {
      "rank": 2,
@@ -721,11 +736,13 @@
     "reveal",
     "travel"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Made Crossing",
+   "_idWas": "the_made_crossing"
   },
   {
-   "id": "the_land_knowledge",
-   "name": "The Land Knowledge",
+   "id": "land_knowledge",
+   "name": "Land Knowledge",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -754,7 +771,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Scout's Word",
+     "name": "Scout's Word",
      "grants": "Speak with the authority of someone who has been where others haven't — your intelligence about terrain, routes, and distances commands genuine trust.",
      "cannot": "Anything rank 2 adds — use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything; IT REQUIRES HAVING BEEN THERE.",
      "functions": [
@@ -765,11 +782,12 @@
      "_functionsWas": [
       "reveal",
       "command"
-     ]
+     ],
+     "_nameWas": "The Scout's Word"
     },
     {
      "rank": 2,
-     "name": "The Strategic Ground",
+     "name": "Strategic Ground",
      "grants": "Use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything.",
      "cannot": "Anything rank 3 adds — in territory you have walked, your knowledge is comprehensive enough to command any situation that depends on terrain — you are the map and the map is right; IT REQUIRES HAVING BEEN THERE.",
      "functions": [
@@ -780,7 +798,8 @@
      "_functionsWas": [
       "reveal",
       "command"
-     ]
+     ],
+     "_nameWas": "The Strategic Ground"
     },
     {
      "rank": 3,
@@ -845,11 +864,13 @@
     "command",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Land Knowledge",
+   "_idWas": "the_land_knowledge"
   },
   {
-   "id": "the_road_ahead",
-   "name": "The Road Ahead",
+   "id": "road_ahead",
+   "name": "Road Ahead",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -890,7 +911,7 @@
     },
     {
      "rank": 2,
-     "name": "The Sustained March",
+     "name": "Sustained March",
      "grants": "Keep a party moving and functional across brutal distances — through exhaustion, injury, and conditions that would stop others — by knowing how to pace the impossible road. Paced by you they travel better than they know how to — covering more ground, arriving in condition to act, stronger at the end of a march than they would have been at its middle.",
      "cannot": "Anything rank 3 adds — you and your party can go on for as long as the task requires — rest when you must, move when you must — until the road has been walked; it needs GROUND AHEAD.",
      "functions": [
@@ -898,7 +919,8 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Sustained March"
     },
     {
      "rank": 3,
@@ -955,11 +977,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A endurance/survival/travel action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends duration. Limit: it needs Ground Ahead — this sustains Movement, not a siege."
+   "plainly": "A endurance/survival/travel action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends duration. Limit: it needs Ground Ahead — this sustains Movement, not a siege.",
+   "_nameWas": "The Road Ahead",
+   "_idWas": "the_road_ahead"
   },
   {
-   "id": "the_wrong_moment",
-   "name": "The Wrong Moment",
+   "id": "wrong_moment",
+   "name": "Wrong Moment",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1079,11 +1103,13 @@
     "hinder",
     "strike"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Wrong Moment",
+   "_idWas": "the_wrong_moment"
   },
   {
-   "id": "the_given_time",
-   "name": "The Given Time",
+   "id": "given_time",
+   "name": "Given Time",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1125,7 +1151,7 @@
     },
     {
      "rank": 2,
-     "name": "The Hour Given",
+     "name": "Hour Given",
      "grants": "Create the time a person or situation needs — not by stopping anything, but by managing the duration so that what needs time to work has time to work.",
      "cannot": "Anything rank 3 adds — hold open the duration of a recovery, a negotiation, or a healing — as long as it requires — without the outside closing in until it is ready; IT GIVES TIME, IT DOES NOT HEAL.",
      "functions": [
@@ -1133,7 +1159,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Hour Given"
     },
     {
      "rank": 3,
@@ -1194,11 +1221,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A healing/logistics/endurance action that restores health. It rolls 2d4+2 It affects 1 target Ranks: rank 2 deepens duration; rank 3 extends duration. Limit: iT Gives Time, IT Does Not Heal — someone else still has to do the work."
+   "plainly": "A healing/logistics/endurance action that restores health. It rolls 2d4+2 It affects 1 target Ranks: rank 2 deepens duration; rank 3 extends duration. Limit: iT Gives Time, IT Does Not Heal — someone else still has to do the work.",
+   "_nameWas": "The Given Time",
+   "_idWas": "the_given_time"
   },
   {
-   "id": "the_wasted_moment",
-   "name": "The Wasted Moment",
+   "id": "wasted_moment",
+   "name": "Wasted Moment",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1251,7 +1280,7 @@
     },
     {
      "rank": 3,
-     "name": "The Protected Duration",
+     "name": "Protected Duration",
      "grants": "For as long as you attend to a person's safety, no moment that could harm them arrives — you see it and fill or empty it before it becomes a wound.",
      "cannot": "Nothing further; this is the craft's ceiling; it defeats TIMED harm; and it still costs what it costs: attending means ATTENDING.",
      "functions": [
@@ -1259,7 +1288,8 @@
       "shield"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Protected Duration"
     }
    ],
    "nativeOrCombination": "native",
@@ -1308,11 +1338,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A combat/defense/tactical action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it defeats Timed harm — a collapsing roof has no timing to defeat."
+   "plainly": "A combat/defense/tactical action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: it defeats Timed harm — a collapsing roof has no timing to defeat.",
+   "_nameWas": "The Wasted Moment",
+   "_idWas": "the_wasted_moment"
   },
   {
-   "id": "the_shaped_duration",
-   "name": "The Shaped Duration",
+   "id": "shaped_duration",
+   "name": "Shaped Duration",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1343,14 +1375,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Stretched Moment",
+     "name": "Stretched Moment",
      "grants": "Make a short span feel and function longer — enough to act fully in what should only be an instant.",
      "cannot": "Anything rank 2 adds — collapse a long span into less — a day's travel has the fatigue of an hour, a complex process completes in time it shouldn't; IT ONLY BENDS WHAT IS ALREADY RUNNING.",
      "functions": [
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Stretched Moment"
     },
     {
      "rank": 2,
@@ -1420,11 +1453,13 @@
     "prepHours": 0,
     "attended": true,
     "note": "NO PREP. Erik's principle applied in the negative: this craft is ABOUT time and so its prose reads as a cost, but shaping how long something takes is an act, not a build. The detector flagged it and the judgement rejects it — which is the process working."
-   }
+   },
+   "_nameWas": "The Shaped Duration",
+   "_idWas": "the_shaped_duration"
   },
   {
-   "id": "the_opened_moment",
-   "name": "The Opened Moment",
+   "id": "opened_moment",
+   "name": "Opened Moment",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1466,7 +1501,7 @@
     },
     {
      "rank": 2,
-     "name": "The Cleared Interval",
+     "name": "Cleared Interval",
      "grants": "Open a window in time — a pause in a guard rotation, a silence in a conversation, a beat between alarms — and move through it cleanly.",
      "cannot": "Anything rank 3 adds — create the gap that didn't exist — find or open the instant that allows passage — and step through it, bringing others if needed; it moves you through TIME'S gaps, not space's.",
      "functions": [
@@ -1474,11 +1509,12 @@
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Cleared Interval"
     },
     {
      "rank": 3,
-     "name": "The Moment Made",
+     "name": "Moment Made",
      "grants": "Create the gap that didn't exist — find or open the instant that allows passage — and step through it, bringing others if needed.",
      "cannot": "Nothing further; this is the craft's ceiling; it moves you through TIME'S gaps, not space's.",
      "functions": [
@@ -1487,7 +1523,8 @@
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Moment Made"
     }
    ],
    "nativeOrCombination": "native",
@@ -1529,11 +1566,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A stealth/navigation/tactical action that moves you or someone else. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about an hour. Range is 5. Ranks: rank 2 deepens access; rank 3 extends targets. Limit: it moves you through Time'S gaps, not space's — a locked door is still locked."
+   "plainly": "A stealth/navigation/tactical action that moves you or someone else. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about an hour. Range is 5. Ranks: rank 2 deepens access; rank 3 extends targets. Limit: it moves you through Time'S gaps, not space's — a locked door is still locked.",
+   "_nameWas": "The Opened Moment",
+   "_idWas": "the_opened_moment"
   },
   {
-   "id": "the_long_watch",
-   "name": "The Long Watch",
+   "id": "long_watch",
+   "name": "Long Watch",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1574,7 +1613,7 @@
     },
     {
      "rank": 2,
-     "name": "The Longer Wait",
+     "name": "Longer Wait",
      "grants": "Sustain any activity that requires patience across duration — a negotiation, a stake-out, a long recovery — by feeling the time accurately rather than agonizingly.",
      "cannot": "Anything rank 3 adds — you can hold as long as the situation requires — the vigil, the wait, the watch — and remain fully functional throughout; it sustains WAITING, not moving.",
      "functions": [
@@ -1582,7 +1621,8 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Longer Wait"
     },
     {
      "rank": 3,
@@ -1637,12 +1677,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A endurance/stealth/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 2 days Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it sustains Waiting, not moving — a march gets nothing from it."
+   "plainly": "A endurance/stealth/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 2 days Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it sustains Waiting, not moving — a march gets nothing from it.",
+   "_nameWas": "The Long Watch",
+   "_idWas": "the_long_watch"
   },
   {
    "schemaVersion": 1,
-   "id": "the_far_step",
-   "name": "The Far Step",
+   "id": "far_step",
+   "name": "Far Step",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "reach_space_time",
@@ -1660,25 +1702,27 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Far Step",
+     "name": "Far Step",
      "grants": "Cross a great visible or known distance in a single step.",
      "cannot": "It carries only you and what you bear, it needs a seen or known destination, and it strands you as easily as it delivers you — far is far, whichever way you stepped.",
      "functions": [
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Far Step"
     },
     {
      "rank": 2,
-     "name": "The Carried Step",
+     "name": "Carried Step",
      "grants": "Carry others with you — a party crosses in the same stride. And the requirement softens: a place described truly enough by someone who has stood there can be stepped to, though the arrival is rougher than a place you have met yourself.",
      "cannot": "A described place is a described place; the Horizon peoples lose walkers this way, and the GM decides what a rough arrival costs. Carrying others multiplies the stranding risk. And it still strands as readily as it delivers.",
      "functions": [
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Carried Step"
     }
    ],
    "gated": "learned",
@@ -1722,12 +1766,14 @@
     }
    ],
    "plainly": "A travel action that moves you or someone else. Its strength is rated 7 out of 10 It affects 1 target. Range is 500. Ranks: rank 2 extends targets. Limit: it needs a Seen OR Known place at r1.",
-   "_descriptionWas": "The Horizon art of the far step — collapsing a great distance into a single stride, arriving where the eye could only reach. The wandering peoples' deepest gift: no place is truly far."
+   "_descriptionWas": "The Horizon art of the far step — collapsing a great distance into a single stride, arriving where the eye could only reach. The wandering peoples' deepest gift: no place is truly far.",
+   "_nameWas": "The Far Step",
+   "_idWas": "the_far_step"
   },
   {
    "schemaVersion": 1,
-   "id": "the_edge_of_the_map",
-   "name": "The Edge of the Map",
+   "id": "edge_of_the_map",
+   "name": "Edge of the Map",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_space_time",
@@ -1746,7 +1792,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Edge of the Map",
+     "name": "Edge of the Map",
      "grants": "Step beyond the known world into the unmapped, helping call a new place into being by arriving.",
      "cannot": "It costs nearly all you have, the destination is unfixed until you make it, and there is no quick way back — the edge of the map is reached by stepping and left by walking.",
      "functions": [
@@ -1754,7 +1800,8 @@
       "make"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Edge of the Map"
     }
    ],
    "gated": "learned",
@@ -1797,12 +1844,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A travel action that moves you or someone else. Its strength is rated 9 out of 10 across a scope of 4. Range is 9999 Limit: iT Costs Nearly All You Have."
+   "plainly": "A travel action that moves you or someone else. Its strength is rated 9 out of 10 across a scope of 4. Range is 9999 Limit: iT Costs Nearly All You Have.",
+   "_nameWas": "The Edge of the Map",
+   "_idWas": "the_edge_of_the_map"
   },
   {
    "schemaVersion": 1,
-   "id": "the_held_hour",
-   "name": "The Held Hour",
+   "id": "held_hour",
+   "name": "Held Hour",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_space_time",
@@ -1821,7 +1870,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Held Hour",
+     "name": "Held Hour",
      "grants": "Hold a single hour open past its passing, keeping time for what must be finished.",
      "cannot": "It cannot rewind, only delay the passing; the same hour cannot be re-held; and the one holding time does not get to rest in it.",
      "functions": [
@@ -1829,11 +1878,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Hour"
     },
     {
      "rank": 2,
-     "name": "The Kept Hours",
+     "name": "Kept Hours",
      "grants": "Hold more than a single hour — a night's work finished inside a kept evening, a siege's preparation inside one afternoon. And those working within it now benefit fully: what they finish in kept time is genuinely finished.",
      "cannot": "The holder still does not rest, and holding several hours ages the holder for real. The same ground cannot be re-held. And an hour kept too long is noticed — the Hourkeepers hold that time collects its debts, and the GM decides when.",
      "functions": [
@@ -1841,7 +1891,8 @@
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Kept Hours"
     }
    ],
    "gated": "learned",
@@ -1888,12 +1939,14 @@
     }
    ],
    "plainly": "A defend action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about an hour Ranks: rank 2 extends scope. Limit: iT Cannot Rewind, Only Delay The Passing.",
-   "_descriptionWas": "The Hourkeeper art of the held hour — keeping a single hour open past its natural passing, a pocket of kept time in which the necessary can be finished. The timekeepers' patient gift."
+   "_descriptionWas": "The Hourkeeper art of the held hour — keeping a single hour open past its natural passing, a pocket of kept time in which the necessary can be finished. The timekeepers' patient gift.",
+   "_nameWas": "The Held Hour",
+   "_idWas": "the_held_hour"
   },
   {
    "schemaVersion": 1,
-   "id": "the_stepped_span",
-   "name": "The Stepped Span",
+   "id": "stepped_span",
+   "name": "Stepped Span",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_space_time",
@@ -1912,25 +1965,27 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Stepped Span",
+     "name": "Stepped Span",
      "grants": "Walk across open air in a straight line, one span at a time, at walking pace.",
      "cannot": "Hurrying, or turning sharply. A span goes where you were already going.",
      "functions": [
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Stepped Span"
     },
     {
      "rank": 2,
-     "name": "The Long Span",
+     "name": "Long Span",
      "grants": "Hold it for a whole crossing — a gorge, a flood, a closed border, a lake.",
      "cannot": "Carrying much: the span holds you and what you can lift, not a caravan.",
      "functions": [
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Span"
     }
    ],
    "challengeTypes": [
@@ -1969,12 +2024,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A travel and explore action. A bridge forms one pace ahead of your foot and unmakes behind you, so you walk across open air in a straight line at ordinary walking pace. It removes obstacles rather than distance — a leg blocked by a gorge, flood or closed border becomes passable, but takes exactly as many days as walking it would. At rank 2 you can hold it for a whole crossing. It carries you and what you can lift, not a group."
+   "plainly": "A travel and explore action. A bridge forms one pace ahead of your foot and unmakes behind you, so you walk across open air in a straight line at ordinary walking pace. It removes obstacles rather than distance — a leg blocked by a gorge, flood or closed border becomes passable, but takes exactly as many days as walking it would. At rank 2 you can hold it for a whole crossing. It carries you and what you can lift, not a group.",
+   "_nameWas": "The Stepped Span",
+   "_idWas": "the_stepped_span"
   },
   {
    "schemaVersion": 1,
-   "id": "the_borrowed_hour",
-   "name": "The Borrowed Hour",
+   "id": "borrowed_hour",
+   "name": "Borrowed Hour",
    "levelReq": 5,
    "energyCost": 15,
    "powerSystem": "reach_space_time",
@@ -1993,7 +2050,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Borrowed Hour",
+     "name": "Borrowed Hour",
      "grants": "Take time from the plants, timber and stone around you and spend it crossing. A leg costs a fraction of its days.",
      "cannot": "Taking from nothing — bare rock and salt give little, and you go barely faster.",
      "functions": [
@@ -2001,11 +2058,12 @@
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Borrowed Hour"
     },
     {
      "rank": 2,
-     "name": "The Wide Draw",
+     "name": "Wide Draw",
      "grants": "Draw from a whole stretch at once and cross a route in days rather than weeks. What you drew from is visibly aged and stays that way.",
      "cannot": "Hiding it. Anyone who knows the country sees what happened to it.",
      "functions": [
@@ -2013,11 +2071,12 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Wide Draw"
     },
     {
      "rank": 3,
-     "name": "The Taken Year",
+     "name": "Taken Year",
      "grants": "⚠️ Take time from a PERSON. They age the difference and you cross on it. This is a strike and is recognised as one.",
      "cannot": "Taking it back, or taking it unnoticed from someone who survives.",
      "functions": [
@@ -2025,7 +2084,8 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Taken Year"
     }
    ],
    "challengeTypes": [
@@ -2065,11 +2125,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A travel action, and at rank 3 also an attack. You take time out of the things around you — plants bud and wither, timber greys, stone weathers — and spend it on the road, crossing a leg in a fraction of its days. It needs things nearby with time in them, so bare salt or dead rock give almost nothing. What you drew from stays aged: crops fail, wood rots, and the people who live there notice and know what did it. At rank 2 you draw from a whole stretch and cross a route in days rather than weeks. At rank 3 you can take the time from a person instead, who ages the difference while you travel on it, which is a recognised attack and costs you standing."
+   "plainly": "A travel action, and at rank 3 also an attack. You take time out of the things around you — plants bud and wither, timber greys, stone weathers — and spend it on the road, crossing a leg in a fraction of its days. It needs things nearby with time in them, so bare salt or dead rock give almost nothing. What you drew from stays aged: crops fail, wood rots, and the people who live there notice and know what did it. At rank 2 you draw from a whole stretch and cross a route in days rather than weeks. At rank 3 you can take the time from a person instead, who ages the difference while you travel on it, which is a recognised attack and costs you standing.",
+   "_nameWas": "The Borrowed Hour",
+   "_idWas": "the_borrowed_hour"
   },
   {
-   "id": "the_folded_pace",
-   "name": "The Folded Pace",
+   "id": "folded_pace",
+   "name": "Folded Pace",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_space_time",
@@ -2089,7 +2151,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Wrong Stride",
+     "name": "Wrong Stride",
      "grants": "Fold a pace of distance into a target within a few strides. A leg arrives where the other leg is; an arm crosses a span that was not there. The joint is crushed and the bone breaks — the craft strikes through armour because it does not cross the space between.",
      "cannot": "SHORT RANGE — a few strides, and you must see the whole of what you fold. Warded or anchored targets are immune, and the March keeps such wards.",
      "functions": [
@@ -2097,11 +2159,12 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Wrong Stride"
     },
     {
      "rank": 2,
-     "name": "The Gathered Ground",
+     "name": "Gathered Ground",
      "grants": "Fold the ground instead — pull a line of them into the same few feet, or put a wall where their charge already is.",
      "cannot": "⚠ FOLDED GROUND TAKES ANYONE ELSE STANDING ON IT TOO, one rung lower — space does not check colours. It unfolds when you stop, and things that were folded come back wrong.",
      "functions": [
@@ -2116,11 +2179,12 @@
       "break",
       "move",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Gathered Ground"
     },
     {
      "rank": 3,
-     "name": "The Closed Span",
+     "name": "Closed Span",
      "grants": "Fold enough distance into a person that there is no room left in them for the distance they are made of. AND YOU HAVE THE FOLD NOW: hold it clear of yourself and anyone you name, and set exactly where the span closes.",
      "cannot": "A closed span cannot be reopened — what you fold out of someone does not come back. Warded ground still refuses you, and the March keeps such wards precisely because of this rank. The Unlanded, who never arrive anywhere, end up this way by degrees.",
      "functions": [
@@ -2129,7 +2193,8 @@
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Closed Span"
     }
    ],
    "challengeTypes": [
@@ -2176,11 +2241,13 @@
     "break",
     "move"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Folded Pace",
+   "_idWas": "the_folded_pace"
   },
   {
-   "id": "the_spent_hour",
-   "name": "The Spent Hour",
+   "id": "spent_hour",
+   "name": "Spent Hour",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_space_time",
@@ -2199,7 +2266,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Levy",
+     "name": "Levy",
      "grants": "Take time off what one target relies on, or off the target. Gear ages through at the moment of use; a wound presents days old and septic; a body pays years in a breath and feels every one.",
      "cannot": "ONE THING AT A TIME and it must be in reach or in clear sight. What you spend cannot be returned — including if you were wrong about who deserved it.",
      "functions": [
@@ -2210,11 +2277,12 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Levy"
     },
     {
      "rank": 2,
-     "name": "The Long Toll",
+     "name": "Long Toll",
      "grants": "Levy continuously — they age, their gear fails piece by piece, and their wounds keep arriving older than they are.",
      "cannot": "⚠ THE HOUR DOES NOT SORT: anyone else in the area is struck ONE RUNG LOWER by the same toll, and their gear ages with everyone else's.",
      "functions": [
@@ -2227,11 +2295,12 @@
       "strike",
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Long Toll"
     },
     {
      "rank": 3,
-     "name": "The Whole Duration",
+     "name": "Whole Duration",
      "grants": "Take all of it at once. What was going to be a life happens now, in front of you, quickly. AND THE LEVY PASSES YOU BY: you and anyone you name are no longer inside the toll you call.",
      "cannot": "What is spent still cannot be returned, ever, including if you were wrong about who deserved it. The Stopped, who will not let a moment pass, began by doing this too often and too well.",
      "functions": [
@@ -2244,7 +2313,8 @@
       "strike",
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Whole Duration"
     }
    ],
    "challengeTypes": [
@@ -2292,11 +2362,13 @@
     "strike",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Spent Hour",
+   "_idWas": "the_spent_hour"
   },
   {
-   "id": "the_kept_count",
-   "name": "The Kept Count",
+   "id": "kept_count",
+   "name": "Kept Count",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "reach_space_time",
@@ -2314,7 +2386,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Count Read",
+     "name": "Count Read",
      "grants": "Name a thing already running and the craft gives you the SPECIFIC REMAINING TIME: the stores last eleven days; the tide turns in two hours; the fever breaks tonight or not at all; that column is four hours out at their pace.",
      "cannot": "It reads what is ALREADY RUNNING. A thing not yet begun has no count. It gives DURATION, never outcome — the fever breaking tonight does not mean breaking well.",
      "functions": [
@@ -2322,11 +2394,12 @@
       "foresee"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Count Read"
     },
     {
      "rank": 2,
-     "name": "The Several Counts",
+     "name": "Several Counts",
      "grants": "Hold many at once — a siege's stores, water, sickness, relief, and the weather — and know which runs out first and by how far.",
      "cannot": "Holding counts is tiring in a specific dull way, and Hourkeepers describe the world as a set of expiries whether or not anyone asked.",
      "functions": [
@@ -2335,11 +2408,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Several Counts"
     },
     {
      "rank": 3,
-     "name": "The Whole Reckoning of Hours",
+     "name": "Whole Reckoning of Hours",
      "grants": "Everything running in a place, ordered by when it ends. Campaigns and harvests are planned on one Hourkeeper's afternoon.",
      "cannot": "⚠ YOU WILL SEE YOUR OWN COUNTS IN THE SAME PASS, and the people you love have counts too. Hourkeepers are not morbid by temperament; they are morbid by information.",
      "functions": [
@@ -2348,7 +2422,8 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Whole Reckoning of Hours"
     }
    ],
    "challengeTypes": [
@@ -2387,11 +2462,13 @@
     }
    ],
    "plainly": "A puzzle/social action that gives the specific remaining time on anything already running. Rated 5 of 10 across a scope of 2 for about six hours.",
-   "_descriptionWas": "The Hourkeepers' first craft and the reason valleys keep one. Everyone else estimates."
+   "_descriptionWas": "The Hourkeepers' first craft and the reason valleys keep one. Everyone else estimates.",
+   "_nameWas": "The Kept Count",
+   "_idWas": "the_kept_count"
   },
   {
-   "id": "the_stretched_hour",
-   "name": "The Stretched Hour",
+   "id": "stretched_hour",
+   "name": "Stretched Hour",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_space_time",
@@ -2410,7 +2487,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Hour Given",
+     "name": "Hour Given",
      "grants": "Give one thing more duration than it has: a lamp, a ration, a poultice, a truce, a failing person's night. ⚠ NAME HOW MUCH — the craft is exact, and roughly doubles what remained.",
      "cannot": "⛔ THE TIME IS YOURS. The wielder ages the difference — real hours off a real life, small at this rank and permanent. It cannot add to what has nothing left.",
      "functions": [
@@ -2418,11 +2495,12 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Hour Given"
     },
     {
      "rank": 2,
-     "name": "The Held Hours",
+     "name": "Held Hours",
      "grants": "Several things, or one thing considerably — a siege's water through an extra week, a wound held from turning until a healer arrives.",
      "cannot": "The cost scales and it is still yours. Hourkeepers who do this often are visibly older than their years and do not discuss it.",
      "functions": [
@@ -2431,11 +2509,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Hours"
     },
     {
      "rank": 3,
-     "name": "The Long Gift",
+     "name": "Long Gift",
      "grants": "Time enough to change an outcome — a season's stores made to reach spring, a person kept until the thing that saves them arrives.",
      "cannot": "⚠ YOU ARE SPENDING YEARS, PLAINLY AND KNOWINGLY. The Stopped began by giving too much away and then refused to let any moment pass at all. Every Hourkeeper is told this story early.",
      "functions": [
@@ -2444,7 +2523,8 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Gift"
     }
    ],
    "challengeTypes": [
@@ -2483,11 +2563,13 @@
     }
    ],
    "plainly": "A puzzle/social action that gives something more duration, paid out of your own life. Rated 6 of 10 on one target for about a day.",
-   "_descriptionWas": "The Hourkeepers' giving-craft, and the one they are begged for. It is the exact inverse of the Spent Hour and costs the same in the other direction."
+   "_descriptionWas": "The Hourkeepers' giving-craft, and the one they are begged for. It is the exact inverse of the Spent Hour and costs the same in the other direction.",
+   "_nameWas": "The Stretched Hour",
+   "_idWas": "the_stretched_hour"
   },
   {
-   "id": "the_known_way",
-   "name": "The Known Way",
+   "id": "known_way",
+   "name": "Known Way",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "reach_space_time",
@@ -2506,7 +2588,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Way Known",
+     "name": "Way Known",
      "grants": "Name a destination and the craft GIVES YOU THE ROUTE: the forks, the fords, where footing fails, the true travel time, and whether it is passable at all for what you are carrying.",
      "cannot": "It reads the GROUND, not the traffic — it will not tell you the bridge fell yesterday or who is waiting at the ford. And if there is genuinely no way through, it says so, which people dislike.",
      "functions": [
@@ -2514,11 +2596,12 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Way Known"
     },
     {
      "rank": 2,
-     "name": "The Better Way",
+     "name": "Better Way",
      "grants": "Compare several, or find the way that suits what you have — the route a cart can take, the one that avoids a valley, the one a wounded party can survive.",
      "cannot": "It optimises for what you NAME. Ask for fast and get fast; the craft will not warn you that fast was the wrong ask.",
      "functions": [
@@ -2531,11 +2614,12 @@
       "travel",
       "reveal",
       "move"
-     ]
+     ],
+     "_nameWas": "The Better Way"
     },
     {
      "rank": 3,
-     "name": "The Whole Country",
+     "name": "Whole Country",
      "grants": "A region's ways entire — every route between everywhere, and which of them a season or a flood has just closed.",
      "cannot": "⚠ YOU NOW KNOW THE WAYS INTO PLACES YOU CARE ABOUT, and so does anyone who can make you say them. Horizon-Walkers are taken for this and the March knows it.",
      "functions": [
@@ -2548,7 +2632,8 @@
       "travel",
       "reveal",
       "move"
-     ]
+     ],
+     "_nameWas": "The Whole Country"
     }
    ],
    "challengeTypes": [
@@ -2591,11 +2676,13 @@
     "travel",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Known Way",
+   "_idWas": "the_known_way"
   },
   {
-   "id": "the_shortened_road",
-   "name": "The Shortened Road",
+   "id": "shortened_road",
+   "name": "Shortened Road",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_space_time",
@@ -2614,7 +2701,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Ground Given",
+     "name": "Ground Given",
      "grants": "A journey takes roughly HALF the time and costs the party far less — you arrive rested where you would have arrived spent. Works for you and those walking with you.",
      "cannot": "It shortens the CROSSING, never the distance — you still pass everything in between, including whoever is on the road. Everyone must keep pace; a straggler ends it for themselves.",
      "functions": [
@@ -2622,11 +2709,12 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Ground Given"
     },
     {
      "rank": 2,
-     "name": "The Long March",
+     "name": "Long March",
      "grants": "Hold it across days, or across a larger company — a caravan, a relief column, a household moving.",
      "cannot": "Sustained, the cost lands on you rather than them, and it lands afterward. Horizon-Walkers arrive with the party and then sleep for a day.",
      "functions": [
@@ -2635,11 +2723,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long March"
     },
     {
      "rank": 3,
-     "name": "The Road Made Short",
+     "name": "Road Made Short",
      "grants": "A journey that could not be made in time, made in time — relief arrives before the fall, word arrives before the decision. AND YOU STOP PAYING IT FORWARD: at this rank the crossing no longer costs the wielder more than anyone else walking it. You arrive with the party, and you arrive able to act.",
      "cannot": "It is still TRAVEL — you pass everything between, and a road with an army on it is a road with an army on it. Everyone must still keep pace. And arriving in time is not the same as arriving in force: you have brought whoever you brought, no more.",
      "functions": [
@@ -2648,7 +2737,8 @@
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Road Made Short"
     }
    ],
    "challengeTypes": [
@@ -2686,10 +2776,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle/social action that halves a journey's time and cost for the whole party. Rated 6 of 10 across a scope of 3 for about two days."
+   "plainly": "A puzzle/social action that halves a journey's time and cost for the whole party. Rated 6 of 10 across a scope of 3 for about two days.",
+   "_nameWas": "The Shortened Road",
+   "_idWas": "the_shortened_road"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

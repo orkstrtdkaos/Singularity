@@ -1,0 +1,54 @@
+{
+ "schemaVersion": 1,
+ "id": "tempo",
+ "kind": "rules",
+ "note": "⛔ SNG-466. THE SENSE ROUND AND BONUS-ACTION BUILDUP. Erik: 'I don't know how it will work to concede the momentum that round. I think it would be better to make sure it's TAGGED WITH READ at r1 so it can be used in the SENSE ROUND of a fight then used AGAIN in the action round. We do have a system in place that earns bonus actions in combat, so perhaps we should think through a more elaborate BONUS ACTION BUILDUP SYSTEM.'\n⚠️ BUILT ON `charges.json` RATHER THAN BESIDE IT — that file already defines `rate` (every pass banks something) and `gate` (a pass banks its full value or nothing). ⛔ TEMPO IS A CHARGE THAT BANKS IN COMBAT AND SPENDS AS AN ACTION.",
+ "theSenseRound": {
+  "what": "⛔ A ROUND HAS TWO SLOTS: a SENSE slot and an ACTION slot. Most crafts use the action slot. A craft tagged `read` uses the SENSE slot instead — ⚠️ WHICH MEANS IT DOES NOT COST YOU YOUR ACTION, and the same craft can be used again in the action slot the same round.",
+  "why": "⚠️ My first draft had the reader FORFEIT the round's momentum. ⛔ ERIK IS RIGHT THAT THIS IS BOTH HARD TO WIRE AND WRONG IN FEEL: a fighter who reads their opponent is not standing still, they are fighting and watching. The sense slot says that plainly.",
+  "rule": "⛔ A CRAFT MAY OCCUPY THE SENSE SLOT ONLY IF IT CARRIES THE `read` TAG. One sense action per round.",
+  "readTag": {
+   "grants": "resolves in the sense slot; does not consume the action slot",
+   "carriedBy": [
+    "deduced_strike r1",
+    "attunement",
+    "memory_palace r1",
+    "pattern_sense",
+    "the_read_field",
+    "the_true_account"
+   ],
+   "note": "⚠️ The `read` tag is NOT the same as the `reveal` FUNCTION. Reveal says what the craft produces; read says WHEN IT RESOLVES."
+  }
+ },
+ "tempo": {
+  "what": "⛔ TEMPO IS A BANKED CHARGE. It accrues during a contest and spends as an extra action slot.",
+  "accrual": {
+   "kind": "rate",
+   "note": "⚠️ Per `charges.json`: every qualifying pass banks something. There is no zero pass.",
+   "sources": {
+    "a read that produced usable information": 1.0,
+    "winning a round on the momentum meter": 0.6,
+    "an ally's read shared with you (Mind Meld, a called warning)": 0.5,
+    "acting on ground you prepared (a ward, a figure, a set trap)": 0.4,
+    "Conserve intensity — you spent less than you could have": 0.3,
+    "Surge intensity": 0.0
+   }
+  },
+  "spend": {
+   "1 tempo": "a second action this round",
+   "2 tempo": "an action that would normally take the whole round — a full crafting, a long shot, a considered strike",
+   "3 tempo": "⛔ ACT BEFORE THE ROUND OPENS, ahead of everyone, once"
+  },
+  "cap": "⚠️ THREE. Tempo does not bank across a contest — it is momentum, not savings, and it empties when the fight ends.",
+  "_whyItIsGood": "⛔ IT REWARDS THE THING THE TRADITIONS ACTUALLY DO. A Cogitant reads and banks; a Marcher wins rounds and banks; a Figurist prepares ground and banks; a careful fighter conserving energy banks slowly. ⚠️ AND SURGE BANKS NOTHING — the gamble is already its own reward, so the greedy line and the patient line are genuinely different strategies rather than one being strictly better."
+ },
+ "forCCode": {
+  "wiring": [
+   "add a `senseSlot` to the round alongside the action slot",
+   "a craft with `read: true` resolves in the sense slot and does not consume the action",
+   "tempo accrues per the rate table above and caps at 3",
+   "tempo spends per the spend table; spending is declared before the round's rolls"
+  ],
+  "smallest": "⛔ THE MINIMUM VIABLE VERSION IS THE `read` TAG AND THE SENSE SLOT. Tempo can follow; the sense slot alone makes Deduced Strike work as authored."
+ }
+}

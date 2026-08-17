@@ -32,7 +32,8 @@
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -48,7 +49,8 @@
       "open",
       "reveal"
      ],
-     "_nameWas": "The Ground Answers"
+     "_nameWas": "The Ground Answers",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -66,7 +68,12 @@
       "reveal",
       "sustain"
      ],
-     "_nameWas": "The Deep Rousing"
+     "_nameWas": "The Deep Rousing",
+     "gainAxes": [
+      "range",
+      "scope",
+      "targets"
+     ]
     }
    ],
    "gated": "learned",
@@ -155,7 +162,8 @@
      ],
      "harmRung": "none",
      "gains": "broaden",
-     "_nameWas": "The Green Road"
+     "_nameWas": "The Green Road",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -168,7 +176,11 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Deep Road"
+     "_nameWas": "The Deep Road",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
     }
    ],
    "gated": "learned",
@@ -218,5 +230,6 @@
    "_idWas": "the_green_road"
   }
  ],
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

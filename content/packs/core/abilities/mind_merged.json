@@ -41,7 +41,8 @@
      "cannot": "Only what you can see or have been described. Does not make you faster, only better-directed.",
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Route"
+     "_nameWas": "The Route",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -54,7 +55,8 @@
      "cannot": "Cannot route around what you have no information about at all.",
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Moving Space"
+     "_nameWas": "The Moving Space",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -161,7 +163,8 @@
      "_functionsWas": [
       "heal",
       "reveal"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -175,7 +178,11 @@
      "cannot": "Cannot regrow what is gone; cannot work on what you cannot examine.",
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Full Sequence"
+     "_nameWas": "The Full Sequence",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ]
     },
     {
      "rank": 3,
@@ -399,5 +406,6 @@
    "_rankFix": "⛔ SNG-465. Erik: 'We don't have rank methodology beyond r3 — which tells me you haven't read enough about how the system works yet.' ⚠️ HE IS RIGHT AND I SHOULD HAVE CHECKED: 282 abilities carry 3 ranks, 38 carry 2, 21 carry 1, and the ONLY 5-rank tree in the corpus was the one I had just authored. ⛔ COMPULSION FOLDED INTO r2, FINALITY AND PERSISTENCE INTO r3."
   }
  ],
- "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."
+ "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

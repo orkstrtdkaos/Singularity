@@ -261,11 +261,12 @@
     "duration": 4,
     "scope": 3
    },
-   "description": "Lay a matter out so completely that the argument ends — not by winning it, but by leaving nothing further to say.",
+   "description": "Lay a matter out so completely that the argument ends — and at its height, walk one person to the conclusion that ends them.",
    "narrationHints": "Nobody is humiliated and nobody is shouted down. The room simply arrives somewhere and stays there, and afterwards no one can quite remember what the disagreement was.",
    "functions": [
-    "empower",
-    "persuade"
+    "persuade",
+    "bind",
+    "empower"
    ],
    "sectFlavour": {
     "syllogist": "THE LAID-OUT CASE — premises in order, and the conclusion is simply visible.",
@@ -273,6 +274,117 @@
     "figurist": "THE WHOLE FIGURE — you show them the shape the facts make, and it is not arguable."
    },
    "tree": [
+    {
+     "rank": 1,
+     "name": "Matter Settled",
+     "grants": "⛔ SET A MATTER OUT TO PEOPLE WILLING TO FOLLOW. A dispute resolves, a council decides, a wrong belief comes apart — and nobody is humiliated, which is why it holds.",
+     "cannot": "They must be willing to follow. Does nothing to someone who will not engage.",
+     "functions": [
+      "persuade"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Case That Keeps",
+     "grants": "⚠️ ADDS DURATION AND ABSENCE. Build it to last — written, taught, left behind. It goes on convincing after you have gone, and someone else can carry it.",
+     "cannot": "Cannot be built against a matter you do not actually understand.",
+     "functions": [
+      "persuade",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "No Longer Litigated",
+     "grants": "⛔ ADDS SCALE. A case so complete a whole community stops reopening it. Feuds end this way; so do bad laws.",
+     "cannot": "One matter, and it must be one people are actually arguing about.",
+     "functions": [
+      "persuade"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ]
+    },
+    {
+     "rank": 4,
+     "name": "Inescapable Conclusion",
+     "grants": "⛔ ADDS COMPULSION. Lay premises they must each agree to until they arrive by their own reasoning at a conclusion they would have fled — and they CANNOT ACT AGAINST IT while it holds. ⚠️ Works on a whole body of reasoning minds at once: a council, a court, a school.",
+     "cannot": "⚠️ It must be honest. A reasoning mind that finds the false premise is freed and knows you tried.",
+     "functions": [
+      "persuade",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging",
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ]
+    },
+    {
+     "rank": 5,
+     "name": "Only Consistent Act",
+     "grants": "⛔ ADDS FINALITY. Walk them to the conclusion where the consistent act is a final one — that the work was worthless, that the post cannot be held, that they should not continue — AND THEN STOP TALKING. ⚠️ What they do next is theirs, and nothing in it was false.",
+     "cannot": "⛔ One person. It cannot be withdrawn, and everyone who heard it heard it.",
+     "functions": [
+      "persuade",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "severe",
+     "gainAxes": [
+      "damage",
+      "autonomy"
+     ]
+    }
+   ],
+   "_merged": "⛔ SNG-450: MERGES The Stated Case (syllogist) and The Necessary Case (cogitant), which did the same job at different energy costs. Erik: 'could be Case Closed, and the flavour goes internal like the move skills did.' ⚠️ RETAGGED SOCIAL — this was `reveal/command/bind` and it is persuasion. ⚠️ ERIK: 'NO to the r3 cost — the case doesn't have to be true.' Removed.",
+   "harmRung": "none",
+   "intensity": "moderate",
+   "_authored": "SNG-450",
+   "plainly": "A social action that settles a matter. Its strength is rated 5 out of 10.",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "axes": {
+    "emotional_logical": 0.5
+   },
+   "operativeAxis": "emotional_logical",
+   "notFor": "Anyone who will not engage; a matter nobody is actually arguing about; speed — a case takes as long as it takes.",
+   "bounds": [
+    {
+     "text": "⛔ THEY MUST BE WILLING TO FOLLOW. Does nothing to someone who refuses to hear it",
+     "class": "hard"
+    },
+    {
+     "text": "one matter at a time",
+     "class": "hard"
+    },
+    {
+     "text": "you must actually understand the matter — a case you have not done the work on comes apart",
+     "class": "hard"
+    },
+    {
+     "text": "the time and standing you spend making it",
+     "class": "cost"
+    }
+   ],
+   "traditionV2": "Mind",
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do.",
+   "_treeWas": [
     {
      "rank": 1,
      "name": "Matter Settled",
@@ -311,41 +423,7 @@
      "harmRung": "none"
     }
    ],
-   "_merged": "⛔ SNG-450: MERGES The Stated Case (syllogist) and The Necessary Case (cogitant), which did the same job at different energy costs. Erik: 'could be Case Closed, and the flavour goes internal like the move skills did.' ⚠️ RETAGGED SOCIAL — this was `reveal/command/bind` and it is persuasion. ⚠️ ERIK: 'NO to the r3 cost — the case doesn't have to be true.' Removed.",
-   "harmRung": "none",
-   "intensity": "moderate",
-   "_authored": "SNG-450",
-   "plainly": "A social action that settles a matter. Its strength is rated 5 out of 10.",
-   "challengeTypes": [
-    "SOCIAL",
-    "INVESTIGATE"
-   ],
-   "axes": {
-    "emotional_logical": 0.5
-   },
-   "operativeAxis": "emotional_logical",
-   "notFor": "Anyone who will not engage; a matter nobody is actually arguing about; speed — a case takes as long as it takes.",
-   "bounds": [
-    {
-     "text": "⛔ THEY MUST BE WILLING TO FOLLOW. Does nothing to someone who refuses to hear it",
-     "class": "hard"
-    },
-    {
-     "text": "one matter at a time",
-     "class": "hard"
-    },
-    {
-     "text": "you must actually understand the matter — a case you have not done the work on comes apart",
-     "class": "hard"
-    },
-    {
-     "text": "the time and standing you spend making it",
-     "class": "cost"
-    }
-   ],
-   "traditionV2": "Mind",
-   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
-   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
+   "_merged5": "⛔ SNG-464: ABSORBS Inescapable Conclusion (L4) and Closing Argument (L5) as ranks 4 and 5. ⚠️ ALL THREE WERE ONE IDEA — 'lay a matter out so the argument ends', 'bind a reasoning mind to a conclusion', 'walk them to a conclusion that unmakes their footing'. ⛔ NOW A FIVE-RANK LADDER: settle · persist · community-wide · compel · end them."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."

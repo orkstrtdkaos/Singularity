@@ -33,7 +33,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Long Stride"
+     "_nameWas": "The Long Stride",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -46,7 +47,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Closed Distance"
+     "_nameWas": "The Closed Distance",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -58,7 +60,8 @@
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -152,7 +155,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Kept Hour"
+     "_nameWas": "The Kept Hour",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -168,7 +172,11 @@
       "reveal",
       "bind"
      ],
-     "_nameWas": "The Slow Hour"
+     "_nameWas": "The Slow Hour",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -186,7 +194,10 @@
       "bind",
       "foresee"
      ],
-     "_nameWas": "The Pre-Remembered"
+     "_nameWas": "The Pre-Remembered",
+     "gainAxes": [
+      "duration"
+     ]
     }
    ],
    "gated": "learned",
@@ -291,7 +302,8 @@
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -304,7 +316,11 @@
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "_nameWas": "The Running Strike"
+     "_nameWas": "The Running Strike",
+     "gainAxes": [
+      "damage",
+      "quality"
+     ]
     },
     {
      "rank": 3,
@@ -316,7 +332,12 @@
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "gainAxes": [
+      "range",
+      "scope",
+      "quality"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -410,7 +431,8 @@
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -424,7 +446,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Road Restores"
+     "_nameWas": "The Road Restores",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -438,7 +463,10 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "range"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -531,7 +559,8 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -545,7 +574,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Managed Gap"
+     "_nameWas": "The Managed Gap",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -558,7 +590,10 @@
       "shield"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -653,7 +688,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Found Way"
+     "_nameWas": "The Found Way",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -664,7 +700,8 @@
       "reveal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -683,7 +720,8 @@
       "make",
       "open",
       "travel"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -783,7 +821,8 @@
       "reveal",
       "command"
      ],
-     "_nameWas": "The Scout's Word"
+     "_nameWas": "The Scout's Word",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -799,7 +838,10 @@
       "reveal",
       "command"
      ],
-     "_nameWas": "The Strategic Ground"
+     "_nameWas": "The Strategic Ground",
+     "gainAxes": [
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -814,7 +856,8 @@
      "_functionsWas": [
       "reveal",
       "command"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -907,7 +950,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -920,7 +964,12 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Sustained March"
+     "_nameWas": "The Sustained March",
+     "gainAxes": [
+      "range",
+      "scope",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -932,7 +981,10 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1024,7 +1076,8 @@
      "_functionsWas": [
       "hinder",
       "strike"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1039,6 +1092,9 @@
      "_functionsWas": [
       "hinder",
       "strike"
+     ],
+     "gainAxes": [
+      "quality"
      ]
     },
     {
@@ -1054,6 +1110,10 @@
      "_functionsWas": [
       "hinder",
       "strike"
+     ],
+     "gainAxes": [
+      "damage",
+      "targets"
      ]
     }
    ],
@@ -1147,7 +1207,8 @@
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1160,7 +1221,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Hour Given"
+     "_nameWas": "The Hour Given",
+     "gainAxes": [
+      "duration",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -1173,7 +1238,8 @@
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1264,7 +1330,8 @@
       "foresee"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1276,7 +1343,8 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1289,7 +1357,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Protected Duration"
+     "_nameWas": "The Protected Duration",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1383,7 +1454,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Stretched Moment"
+     "_nameWas": "The Stretched Moment",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1394,7 +1466,10 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "duration"
+     ]
     },
     {
      "rank": 3,
@@ -1407,7 +1482,12 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "duration",
+      "scope",
+      "quality"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1497,7 +1577,8 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1510,7 +1591,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Cleared Interval"
+     "_nameWas": "The Cleared Interval",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1524,7 +1606,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Moment Made"
+     "_nameWas": "The Moment Made",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1609,7 +1694,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1622,7 +1708,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Longer Wait"
+     "_nameWas": "The Longer Wait",
+     "gainAxes": [
+      "range",
+      "duration"
+     ]
     },
     {
      "rank": 3,
@@ -1634,7 +1724,10 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "quality"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1710,7 +1803,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Far Step"
+     "_nameWas": "The Far Step",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1722,7 +1816,11 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Carried Step"
+     "_nameWas": "The Carried Step",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
     }
    ],
    "gated": "learned",
@@ -1801,7 +1899,8 @@
      ],
      "harmRung": "none",
      "gains": "broaden",
-     "_nameWas": "The Edge of the Map"
+     "_nameWas": "The Edge of the Map",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -1879,7 +1978,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Held Hour"
+     "_nameWas": "The Held Hour",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1892,7 +1992,11 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Kept Hours"
+     "_nameWas": "The Kept Hours",
+     "gainAxes": [
+      "duration",
+      "quality"
+     ]
     }
    ],
    "gated": "learned",
@@ -1973,7 +2077,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Stepped Span"
+     "_nameWas": "The Stepped Span",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1985,7 +2090,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Long Span"
+     "_nameWas": "The Long Span",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2059,7 +2167,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Borrowed Hour"
+     "_nameWas": "The Borrowed Hour",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2072,7 +2181,11 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Wide Draw"
+     "_nameWas": "The Wide Draw",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -2085,7 +2198,11 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Taken Year"
+     "_nameWas": "The Taken Year",
+     "gainAxes": [
+      "damage",
+      "targets"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2160,7 +2277,8 @@
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "_nameWas": "The Wrong Stride"
+     "_nameWas": "The Wrong Stride",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2180,7 +2298,8 @@
       "move",
       "hinder"
      ],
-     "_nameWas": "The Gathered Ground"
+     "_nameWas": "The Gathered Ground",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -2194,7 +2313,11 @@
      ],
      "gains": "deepen",
      "harmRung": "lethal",
-     "_nameWas": "The Closed Span"
+     "_nameWas": "The Closed Span",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2278,7 +2401,8 @@
       "strike",
       "hinder"
      ],
-     "_nameWas": "The Levy"
+     "_nameWas": "The Levy",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2296,7 +2420,8 @@
       "hinder",
       "break"
      ],
-     "_nameWas": "The Long Toll"
+     "_nameWas": "The Long Toll",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -2314,7 +2439,11 @@
       "hinder",
       "break"
      ],
-     "_nameWas": "The Whole Duration"
+     "_nameWas": "The Whole Duration",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2395,7 +2524,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Count Read"
+     "_nameWas": "The Count Read",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2409,7 +2539,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Several Counts"
+     "_nameWas": "The Several Counts",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -2423,7 +2556,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Whole Reckoning of Hours"
+     "_nameWas": "The Whole Reckoning of Hours",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2496,7 +2632,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Hour Given"
+     "_nameWas": "The Hour Given",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2510,7 +2647,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Held Hours"
+     "_nameWas": "The Held Hours",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -2524,7 +2665,12 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Long Gift"
+     "_nameWas": "The Long Gift",
+     "gainAxes": [
+      "range",
+      "duration",
+      "targets"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2597,7 +2743,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Way Known"
+     "_nameWas": "The Way Known",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2615,7 +2762,10 @@
       "reveal",
       "move"
      ],
-     "_nameWas": "The Better Way"
+     "_nameWas": "The Better Way",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -2633,7 +2783,11 @@
       "reveal",
       "move"
      ],
-     "_nameWas": "The Whole Country"
+     "_nameWas": "The Whole Country",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2710,7 +2864,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Ground Given"
+     "_nameWas": "The Ground Given",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2724,7 +2879,12 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Long March"
+     "_nameWas": "The Long March",
+     "gainAxes": [
+      "range",
+      "duration",
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -2738,7 +2898,11 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Road Made Short"
+     "_nameWas": "The Road Made Short",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2784,5 +2948,6 @@
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
  "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

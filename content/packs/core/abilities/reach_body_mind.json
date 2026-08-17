@@ -27,7 +27,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Trained Body",
+     "name": "Trained Body",
      "grants": "Endurance and poise past the ordinary; control breath and heartbeat to steady fear, pain, or cold; move with a precision that reads as grace.",
      "cannot": "The body still has limits; Soma raises the ceiling, it doesn't remove it.",
      "functions": [
@@ -36,11 +36,12 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Trained Body"
     },
     {
      "rank": 2,
-     "name": "The Instrument",
+     "name": "Instrument",
      "grants": "Feats of body that look impossible — hold a bridge-pose an hour, run past collapse, slow your own bleeding, take a blow and keep the form; teach the body a skill in days that takes others years.",
      "cannot": "Pushing past the true limit still breaks you; the body remembers what you spend.",
      "functions": [
@@ -49,11 +50,12 @@
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Instrument"
     },
     {
      "rank": 3,
-     "name": "The Perfected Vessel",
+     "name": "Perfected Vessel",
      "grants": "The body as a mastered whole — survive what kills others, perform at the edge of the humanly possible, make the physical self answer the will completely. AND THE BODY AS THE INSTRUMENT IT IS: a strike thrown with the whole mastered frame behind it — stance, breath, and timing arriving together — wounds far past what the same arm could do untrained.",
      "cannot": "The wielder drifts body-hot — and the Temple that rejects thought forgets to warn itself; a perfected body with a starved mind is its own foreclosure, mastery with nothing left to aim it.",
      "functions": [
@@ -63,7 +65,8 @@
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Perfected Vessel"
     }
    ],
    "functions": [
@@ -150,7 +153,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Ordered Mind",
+     "name": "Ordered Mind",
      "grants": "Perfect recall of what you attend to; focus that ignores pain, fear, and distraction; reason a problem faster and further than the unpracticed.",
      "cannot": "Recall is not understanding; focus this tight can miss the body's warnings.",
      "functions": [
@@ -161,11 +164,12 @@
      "_functionsWas": [
       "reveal",
       "resist"
-     ]
+     ],
+     "_nameWas": "The Ordered Mind"
     },
     {
      "rank": 2,
-     "name": "The Memory-Palace",
+     "name": "Memory-Palace",
      "grants": "Hold vast structured knowledge and retrieve it instantly; model a system or a person in your head and predict them; think through a crisis in the space others panic in.",
      "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room.",
      "functions": [
@@ -177,11 +181,12 @@
       "reveal",
       "resist",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Memory-Palace"
     },
     {
      "rank": 3,
-     "name": "The Cogitant's Height",
+     "name": "Cogitant's Height",
      "grants": "Thought as force — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. And turned on a person: a conclusion assembled and delivered exactly where their reasoning rests, which staggers a mind the way a blow staggers a body, and leaves the same kind of mark.",
      "cannot": "It is sharp, not wise, and this use of it least of all. It needs a mind that reasons — the disciplined, the genuinely mad, and the simply uninterested all shrug it off. And the Cogitarium teaches that what you take apart in someone this way, you are responsible for putting back.",
      "functions": [
@@ -195,7 +200,8 @@
       "resist",
       "foresee",
       "strike"
-     ]
+     ],
+     "_nameWas": "The Cogitant's Height"
     }
    ],
    "functions": [
@@ -300,7 +306,7 @@
     },
     {
      "rank": 2,
-     "name": "The Third Wind",
+     "name": "Third Wind",
      "grants": "Find breath and strength past where the body had none — twice, in one day, at a cost. And what you find is not simply more of what you had: for as long as it lasts you are stronger and faster than your own rested self, which is exactly why it costs what it costs.",
      "cannot": "The body is borrowing from tomorrow, and tomorrow collects with interest.",
      "functions": [
@@ -309,11 +315,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Third Wind"
     },
     {
      "rank": 3,
-     "name": "The Wind That Doesn't End",
+     "name": "Wind That Doesn't End",
      "grants": "Go on past exhaustion for as long as the thing needs doing — the body simply does not stop. And it tends itself as it runs: bleeding slows, shock recedes, the worst of the damage held off until the work is finished.",
      "cannot": "Held off is not healed — everything deferred arrives at once when you stop, and it arrives worse. This is borrowing, at a rate the Flesh-Temples consider usurious.",
      "functions": [
@@ -323,7 +330,8 @@
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Wind That Doesn't End"
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -413,7 +421,7 @@
     },
     {
      "rank": 2,
-     "name": "The Unwasted Motion",
+     "name": "Unwasted Motion",
      "grants": "No motion you make is wasted — every step, block, and reach does exactly and only what it must.",
      "cannot": "Efficiency is not power. A perfect motion still loses to a stronger one.",
      "functions": [
@@ -422,7 +430,8 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Unwasted Motion"
     },
     {
      "rank": 3,
@@ -518,29 +527,31 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Near Rooms",
+     "name": "Near Rooms",
      "functions": [
       "reveal"
      ],
      "grants": "⛔ SEARCH WHAT YOU HAVE ATTENDED TO IN RECENT WEEKS AND FIND THE MATCH — the face at this gate was at that funeral, the same hand signed both ledgers, this phrase was in a letter you read.",
      "cannot": "Only what you ATTENDED to, and only weeks back. Background you did not look at was never stored.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Near Rooms"
     },
     {
      "rank": 2,
-     "name": "The Whole House",
+     "name": "Whole House",
      "functions": [
       "reveal"
      ],
      "grants": "⚠️ ADDS DEPTH OF TIME. The search runs across your entire life — childhood, the war, a road you walked once twenty years ago — and returns it whole: tone, order, who said what, and what was not said.",
      "cannot": "Still only your own attending. A long search takes a quiet minute you may not have.",
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Whole House"
     },
     {
      "rank": 3,
-     "name": "The Borrowed Room",
+     "name": "Borrowed Room",
      "functions": [
       "reveal",
       "track"
@@ -548,7 +559,8 @@
      "grants": "⛔ ADDS SOMEONE ELSE. Enter a willing — or unresisting — mind and search THEIR memory the same way. The dying man's last road, the witness who saw it and cannot say it, the prisoner who does not know what they know.",
      "cannot": "⚠️ A RESISTING MIND CAN REFUSE, and a hostile one costs you. You get what THEY attended to, including what they were wrong about.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Borrowed Room"
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -651,8 +663,8 @@
    "_revised": "⛔ SNG-450, REBUILT TWICE. Erik first: 'I'm not even sure what Memory Palace does for an ADVENTURER' — it was a faculty, not a tool. Then: 'r3 IS THE FUNCTIONAL USE — MAKE THAT THE THEME OF THE SKILL, with ranking up being FURTHER BACK IN TIME and then RECALLING SOMEONE ELSE'S MEMORY.'\n⚠️ SO SEARCH IS THE WHOLE SKILL AND THE RANKS EXTEND ITS REACH: recent → your whole life → ANOTHER PERSON'S. ⛔ THE LAST RANK MAKES IT A PSIONIC CRAFT RATHER THAN A GOOD MEMORY, which is what a Mind capstone should be."
   },
   {
-   "id": "the_whole_act",
-   "name": "The Whole Act",
+   "id": "whole_act",
+   "name": "Whole Act",
    "levelReq": 4,
    "energyCost": 9,
    "attribute": "physical",
@@ -668,7 +680,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Whole Act",
+     "name": "Whole Act",
      "grants": "Act with body and mind fused — perception, decision, and motion as a single instant.",
      "cannot": "Needs both trained near-equal; the pure poles cannot do it.",
      "functions": [
@@ -679,11 +691,12 @@
      "_functionsWas": [
       "move",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Whole Act"
     },
     {
      "rank": 2,
-     "name": "The Unbroken Act",
+     "name": "Unbroken Act",
      "grants": "Hold the fusion across a whole engagement rather than a single instant. Every movement in the exchange is one continuous act — you are already correct before you have consciously read why, and you stay correct as the situation changes under you.",
      "cannot": "It still needs both trained near-equal and the pure poles still cannot do it; holding it leaves you unable to afterward explain what you did or why, which matters when someone asks; and a whole act cannot be interrupted and resumed — broken, it must be re-entered from stillness.",
      "functions": [
@@ -694,7 +707,8 @@
      "_functionsWas": [
       "move",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Unbroken Act"
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -741,11 +755,13 @@
     "move",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Whole Act",
+   "_idWas": "the_whole_act"
   },
   {
    "id": "pathless_way",
-   "name": "The Pathless Way",
+   "name": "Pathless Way",
    "levelReq": 5,
    "energyCost": 10,
    "attribute": "physical",
@@ -764,7 +780,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Pathless Way",
+     "name": "Pathless Way",
      "grants": "Cross the uncrossable — any natural barrier yields to enough skill, breath, and will; lead a party through what would kill them alone.",
      "cannot": "The truly impossible (a sheer mile of ice in a storm) still exacts a price; you can fail, spectacularly, and the fall is real.",
      "functions": [
@@ -773,7 +789,8 @@
       "resist"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Pathless Way"
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -811,7 +828,8 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that moves you or someone else. Its strength is rated 9 out of 10 It affects 3 targets. Range is 100 Limit: the Truly Impossible still exacts its price."
+   "plainly": "An action that moves you or someone else. Its strength is rated 9 out of 10 It affects 3 targets. Range is 100 Limit: the Truly Impossible still exacts its price.",
+   "_nameWas": "The Pathless Way"
   },
   {
    "id": "skydancer",
@@ -845,7 +863,7 @@
     },
     {
      "rank": 2,
-     "name": "The Long Air",
+     "name": "Long Air",
      "grants": "Chain the air-steps without touching down — cross a canyon, ascend a tower face in one unbroken sequence, hold the air long enough to choose your landing. And you may carry another person through it with you.",
      "cannot": "Still momentum-bound; there is no hover at any mastery, only better momentum. Carrying another halves your reach and a mistimed step now falls two people. Heavy burden still grounds you outright.",
      "functions": [
@@ -853,7 +871,8 @@
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Air"
     }
    ],
    "powerSystem": "reach_body_mind",
@@ -898,8 +917,8 @@
    "plainly": "An action that moves you or someone else. Its strength is rated 7 out of 10, and lasts for about 2 hours. Range is 20. Ranks: rank 2 extends chain. Limit: momentum-Bound — you must keep moving; There IS NO Hover AT Any Mastery."
   },
   {
-   "id": "the_working_model",
-   "name": "The Working Model",
+   "id": "working_model",
+   "name": "Working Model",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -930,18 +949,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Single Thing",
+     "name": "Single Thing",
      "functions": [
       "make"
      ],
      "grants": "⛔ ONE ITEM, OR A SPACE YOU CAN STAND IN AND SEE. A lock, a brace, a splint, a door, a cart-repair, a small room re-laid. You need no plan and you waste no material.",
      "cannot": "One object or one small space at a time. You must be able to examine it.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Single Thing"
     },
     {
      "rank": 2,
-     "name": "The Whole Working",
+     "name": "Whole Working",
      "functions": [
       "make",
       "mend"
@@ -949,11 +969,12 @@
      "grants": "⚠️ ADDS SYSTEMS AND COMPOUNDS. A machine with parts that move against each other, a building, a body, a workshop yard — anything whose pieces have to agree. Diagnose its faults and redesign it from the inside.",
      "cannot": "You must have access to the whole of it; a system half-hidden is modelled half-wrong.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Whole Working"
     },
     {
      "rank": 3,
-     "name": "The Modelled Country",
+     "name": "Modelled Country",
      "functions": [
       "make",
       "mend"
@@ -972,7 +993,8 @@
       "quality",
       "autonomy"
      ],
-     "_rebalance": "⚠️ Was the third scope-gain in a row for this skill. Delegation is what a modeller actually does at that scale."
+     "_rebalance": "⚠️ Was the third scope-gain in a row for this skill. Delegation is what a modeller actually does at that scale.",
+     "_nameWas": "The Modelled Country"
     }
    ],
    "nativeOrCombination": "native",
@@ -1060,11 +1082,13 @@
     }
    ],
    "_descriptionWas": "You can think a thing into existence — model it so completely in your mind that the making is just following the thought.",
-   "_revised": "⛔ SNG-450. Erik: 'I agree on the working model — but I LIKE that skill. Its rank progression should be r1 A SINGLE ITEM OR SMALL AREA, r2 A SINGLE SYSTEM OR COMPOUND/AREA, r3 COMPLEX SYSTEM AND LARGE AREA.' ⚠️ The old arc added only adverbs — 'near-guaranteed' → 'complex system' → 'uncanny precision and speed', which is r1 again, faster. THE NEW ARC IS SCOPE, and scope is legible at the table. `reveal` stripped: the modelling is HOW it makes, not a separate perception. ⚠️ ERIK: 'NO to the cost' on r3. Removed."
+   "_revised": "⛔ SNG-450. Erik: 'I agree on the working model — but I LIKE that skill. Its rank progression should be r1 A SINGLE ITEM OR SMALL AREA, r2 A SINGLE SYSTEM OR COMPOUND/AREA, r3 COMPLEX SYSTEM AND LARGE AREA.' ⚠️ The old arc added only adverbs — 'near-guaranteed' → 'complex system' → 'uncanny precision and speed', which is r1 again, faster. THE NEW ARC IS SCOPE, and scope is legible at the table. `reveal` stripped: the modelling is HOW it makes, not a separate perception. ⚠️ ERIK: 'NO to the cost' on r3. Removed.",
+   "_nameWas": "The Working Model",
+   "_idWas": "the_working_model"
   },
   {
-   "id": "the_shaped_body",
-   "name": "The Shaped Body",
+   "id": "shaped_body",
+   "name": "Shaped Body",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1116,7 +1140,7 @@
     },
     {
      "rank": 3,
-     "name": "The Body Is Clay",
+     "name": "Body Is Clay",
      "grants": "You have worked your body long enough to know it as material. Any physical capacity you turn full, sustained attention to becomes, in time, what you need it to be.",
      "cannot": "Nothing further; this is the craft's ceiling; and it still costs what it costs: what you shape you HAVE SHAPED.",
      "functions": [
@@ -1124,7 +1148,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Body Is Clay"
     }
    ],
    "nativeOrCombination": "native",
@@ -1186,11 +1211,13 @@
      "nothing": 0.0
     },
     "note": "⚠️ RATE, on Erik's principle generalised: partial training is not nothing. A body kept in some condition progresses slower rather than not at all."
-   }
+   },
+   "_nameWas": "The Shaped Body",
+   "_idWas": "the_shaped_body"
   },
   {
-   "id": "the_weight_of_presence",
-   "name": "The Weight of Presence",
+   "id": "weight_of_presence",
+   "name": "Weight of Presence",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1232,14 +1259,15 @@
     },
     {
      "rank": 2,
-     "name": "The Organizing Fact",
+     "name": "Organizing Fact",
      "grants": "Command a space through presence alone — enter a room and it restructures; stand still and the situation organizes itself relative to where you are.",
      "cannot": "Anything rank 3 adds — your presence is the fixed fact in a room.",
      "functions": [
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Organizing Fact"
     },
     {
      "rank": 3,
@@ -1296,12 +1324,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/tactical/intimidation action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 adds to special."
+   "plainly": "A social/tactical/intimidation action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 adds to special.",
+   "_nameWas": "The Weight of Presence",
+   "_idWas": "the_weight_of_presence"
   },
   {
    "schemaVersion": 1,
-   "id": "the_unmoving_mind",
-   "name": "The Unmoving Mind",
+   "id": "unmoving_mind",
+   "name": "Unmoving Mind",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "reach_body_mind",
@@ -1319,14 +1349,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Still Mind",
+     "name": "Still Mind",
      "grants": "Enter a stillness fear, pain and distraction do not reach. You think and work clean while the room comes apart.",
      "cannot": "⚠️ It occupies you — entering it means standing still and doing one thing.",
      "functions": [
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Still Mind"
     },
     {
      "rank": 2,
@@ -1448,7 +1479,9 @@
      ]
     }
    ],
-   "_merged": "⛔ SNG-457: MERGES Total Focus (L1, e4) — whose three ranks were one sentence with intensifiers: 'fear, pain and distraction fall away' → 'stop reaching you' → 'nothing else exists'. ⚠️ THE UNMOVING MIND'S r2 WAS THE ONLY REAL ADVANCE IN EITHER — 'hold it while fighting, walking, negotiating' — and it had only two ranks. One skill now, and each rank adds a thing: stillness → stillness while acting → deception slides off too."
+   "_merged": "⛔ SNG-457: MERGES Total Focus (L1, e4) — whose three ranks were one sentence with intensifiers: 'fear, pain and distraction fall away' → 'stop reaching you' → 'nothing else exists'. ⚠️ THE UNMOVING MIND'S r2 WAS THE ONLY REAL ADVANCE IN EITHER — 'hold it while fighting, walking, negotiating' — and it had only two ranks. One skill now, and each rank adds a thing: stillness → stillness while acting → deception slides off too.",
+   "_nameWas": "The Unmoving Mind",
+   "_idWas": "the_unmoving_mind"
   },
   {
    "schemaVersion": 1,
@@ -1530,8 +1563,8 @@
   },
   {
    "schemaVersion": 1,
-   "id": "the_taken_apart",
-   "name": "The Taken Apart",
+   "id": "taken_apart",
+   "name": "Taken Apart",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "reach_body_mind",
@@ -1549,25 +1582,27 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Taken Apart",
+     "name": "Taken Apart",
      "grants": "Go to the seams — joints and rhythm. They stop being able to fight long before they stop.",
      "cannot": "A fast resolution. Non-bodies.",
      "functions": [
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Taken Apart"
     },
     {
      "rank": 2,
-     "name": "The Last Seam",
+     "name": "Last Seam",
      "grants": "Continue past fighting-stopped to stopped. Precise, and the practitioner is never in doubt about which they did.",
      "cannot": ": there is no ambiguity available; the tradition does not let you claim you did not mean to.",
      "functions": [
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Last Seam"
     }
    ],
    "challengeTypes": [
@@ -1618,11 +1653,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight or duel attack resolving in two steps. Rank 1 deals 4d6 plus 1 and reduces the target's ability to fight; rank 2 continues from there to a lethal result. You always pass through the first step, so continuing is a separate decision the GM will make you state aloud. It is slow — if you are rushed or interrupted you only get the first step. It works only on things built like bodies."
+   "plainly": "A fight or duel attack resolving in two steps. Rank 1 deals 4d6 plus 1 and reduces the target's ability to fight; rank 2 continues from there to a lethal result. You always pass through the first step, so continuing is a separate decision the GM will make you state aloud. It is slow — if you are rushed or interrupted you only get the first step. It works only on things built like bodies.",
+   "_nameWas": "The Taken Apart",
+   "_idWas": "the_taken_apart"
   },
   {
-   "id": "the_answered_motion",
-   "name": "The Answered Motion",
+   "id": "answered_motion",
+   "name": "Answered Motion",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_body_mind",
@@ -1641,7 +1678,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Turned Joint",
+     "name": "Turned Joint",
      "grants": "Meet a committed movement and finish it wrong — an elbow past its travel, a knee folded inward, a wrist that will not close on a weapon again today. Real breakage at contact range.",
      "cannot": "CONTACT RANGE ONLY and they must be MOVING. A braced, patient opponent offers nothing to answer; a polearm keeps you out entirely.",
      "functions": [
@@ -1649,11 +1686,12 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Turned Joint"
     },
     {
      "rank": 2,
-     "name": "The Given Fall",
+     "name": "Given Fall",
      "grants": "Take their weight as well as their limb — put a body into the ground, a wall, a stairwell, or another body, using what they brought.",
      "cannot": "The harder they come, the harder it lands — which cuts both ways when you misread. A second opponent while you are inside the first one's motion is how Somatics die.",
      "functions": [
@@ -1666,11 +1704,12 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Given Fall"
     },
     {
      "rank": 3,
-     "name": "The Whole Answer",
+     "name": "Whole Answer",
      "grants": "Every motion answered as it arrives, for as long as they keep making them. Necks, spines, and the base of the skull are motions like any other.",
      "cannot": "⚠ IT ONLY WORKS ON THE MOVING. Someone who simply stops — sets a shield, waits, brings up a bow at ten paces — is a problem this craft has no answer for at all.",
      "functions": [
@@ -1683,7 +1722,8 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Whole Answer"
     }
    ],
    "challengeTypes": [
@@ -1735,11 +1775,13 @@
     "break",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Answered Motion",
+   "_idWas": "the_answered_motion"
   },
   {
-   "id": "the_sustained_regard",
-   "name": "The Sustained Regard",
+   "id": "sustained_regard",
+   "name": "Sustained Regard",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_body_mind",
@@ -1759,7 +1801,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Whole of It",
+     "name": "Whole of It",
      "grants": "Fix the entirety of your attention on one person in sight. Autonomic things falter — vision greys, a limb goes uncertain, breath stumbles, an open wound stops closing. They know they are being looked at and cannot say why it hurts.",
      "cannot": "ONE TARGET, and it costs you nearly all of your own action while it holds. A trained mind resists and knows what you are doing. Break line of sight and it ends.",
      "functions": [
@@ -1767,11 +1809,12 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Whole of It"
     },
     {
      "rank": 2,
-     "name": "The Held Regard",
+     "name": "Held Regard",
      "grants": "Keep it. What their body was running unattended stays unrun — they cannot rally, cannot steady, cannot stop bleeding, for as long as you look.",
      "cannot": "You are doing nothing else. ⚠ A SECOND ENEMY WHILE YOU HOLD THIS IS HOW COGITANTS DIE. No one else takes a harm rung from it, and no one else can lift it for you; only the wielder can drop it.",
      "functions": [
@@ -1780,11 +1823,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Held Regard"
     },
     {
      "rank": 3,
-     "name": "The Undivided",
+     "name": "Undivided",
      "grants": "Attention at a weight a body cannot be looked at under. Things stop. Hearts are things. AND YOU KEEP YOURSELF NOW: the wielder no longer stops running their own body to do it, and can act while the regard holds.",
      "cannot": "Still ONE TARGET, still line of sight, and a trained mind still knows what you are doing and who is doing it. The Discarnate reach this rank and then keep going, which is how they stop coming back.",
      "functions": [
@@ -1793,7 +1837,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Undivided"
     }
    ],
    "challengeTypes": [
@@ -1847,12 +1892,15 @@
     "duration": 1,
     "scope": 1
    },
-   "_diceFix": "⛔ SNG-453: shape `strike`, mag7, NO DICE — the Cogitant first offense could not deal damage. L1 rung is 1d6 (SNG-437)."
+   "_diceFix": "⛔ SNG-453: shape `strike`, mag7, NO DICE — the Cogitant first offense could not deal damage. L1 rung is 1d6 (SNG-437).",
+   "_nameWas": "The Sustained Regard",
+   "_idWas": "the_sustained_regard"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
  "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json.",
  "_schemaFix2": "⛔ SNG-452: gains/harmRung restored on ranks I replaced wholesale during batch 1 — replacing a tree dropped fields I had not read.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

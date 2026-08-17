@@ -15,8 +15,8 @@
    },
    "attribute": "mental",
    "narrationHints": "They watch for one exchange without engaging, and then hit once — the buckle, the old break, the foot that carries the weight — and a much better fighter is suddenly on the ground wondering how.",
-   "description": "Watch a foe fight, work out exactly where they will be weakest, and land an ordinary blow there — thought aimed through a body, and it hits like a much stronger arm.",
-   "notFor": "An enemy you have not observed; a first exchange; anything you cannot physically reach.",
+   "description": "Read a foe mid-fight and land an ordinary blow exactly where it does the most — thought aimed through a body, and it hits like a much stronger arm.",
+   "notFor": "An enemy you have not read; anything you cannot physically reach; a contest that ends before you get a second round.",
    "tradition": "cogitant",
    "traditionV2": "Mind",
    "nativeOrCombination": "combination",
@@ -31,7 +31,6 @@
      "d": 6
     },
     "plus": 0,
-    "range": 1,
     "targets": 1,
     "marginFloorPer": 0.02
    },
@@ -57,7 +56,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/duel action that deals damage. It rolls 2d6. Range is 1. Ranks: rank 2 adds a called effect, rank 3 needs no observation.",
+   "plainly": "A fight/duel action that deals damage. It rolls 2d6. Ranks: rank 2 lets you call the effect, rank 3 reads and strikes in the same round.",
    "functions": [
     "strike"
    ],
@@ -69,9 +68,9 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Watched Exchange",
-     "grants": "⛔ SPEND ONE EXCHANGE WATCHING, THEN STRIKE. The blow lands where they are weakest — an old injury, a badly-set strap, the foot carrying the weight — and does far more than the arm behind it should.",
-     "cannot": "You must have watched them. A first-contact strike gets nothing.",
+     "name": "Read the Exchange",
+     "grants": "⛔ SPEND ONE ROUND OF THE EXCHANGE READING RATHER THAN CONTESTING — you concede that round's momentum — and your NEXT strike lands where they are weakest: an old injury, a badly-set strap, the foot carrying the weight. ⚠️ IN SYSTEM TERMS: a forfeited round buys a large matchup edge on the following one.",
+     "cannot": "You give up a round to get it. Against someone who ends the contest in one blow, that round is fatal.",
      "functions": [
       "strike"
      ],
@@ -81,7 +80,7 @@
     },
     {
      "rank": 2,
-     "name": "The Called Effect",
+     "name": "Called Effect",
      "grants": "⚠️ ADDS A DECLARED OUTCOME. Name what the blow does as well as that it lands — the shield arm drops, the weapon goes, the knee gives, they cannot pursue. ⛔ It happens because you aimed at the thing that causes it.",
      "cannot": "One declared effect, and it must be physically plausible from where you hit.",
      "functions": [
@@ -97,9 +96,9 @@
     },
     {
      "rank": 3,
-     "name": "No Watching Needed",
-     "grants": "⛔ ADDS SPEED. You no longer need the exchange — you read a stance, a build, a way of standing, and know the answer on sight. ⚠️ Works on the first blow of a fight, which is when it matters.",
-     "cannot": "A foe genuinely unlike anything you have met still takes an exchange to read.",
+     "name": "Strike While Reading",
+     "grants": "⛔ ADDS TEMPO — THE POINT OF THE SKILL. You no longer forfeit the round: you read AND strike in the same exchange, so the edge arrives without the cost. ⚠️ Against someone you have fought before, it lands on the opening blow.",
+     "cannot": "A foe genuinely unlike anything you have met still costs you the reading round.",
      "functions": [
       "strike",
       "hinder"
@@ -108,11 +107,13 @@
      "harmRung": "damaging",
      "gainAxes": [
       "conditions",
-      "range"
+      "targets"
      ]
     }
    ],
-   "_authored": "⛔ SNG-464. Erik: 'a Mind character should be able to use the mind (LIKE SHERLOCK HOLMES) to perform PHYSICAL ATTACKS with incredible accuracy and effect — a combo ability powered by thought.' ⚠️ `nativeOrCombination: combination` — this is thought aimed through a body, and the sect flavours differ in HOW the answer is reached."
+   "_authored": "⛔ SNG-464. Erik: 'a Mind character should be able to use the mind (LIKE SHERLOCK HOLMES) to perform PHYSICAL ATTACKS with incredible accuracy and effect — a combo ability powered by thought.' ⚠️ `nativeOrCombination: combination` — this is thought aimed through a body, and the sect flavours differ in HOW the answer is reached.",
+   "_systemFit": "⛔ SNG-465, RE-AUTHORED ONTO THE EXISTING SKILL-BATTLE SYSTEM. Erik: 'it can be used in the SENSE ROUND, then again in the main action... I'm not sure we have the wiring for this effect. Plus at r3 you could strike during the sense round.'\n⚠️ THE WIRING LARGELY EXISTS. `skill_battle_system.json` already runs multi-round exchanges with a MOMENTUM METER and a MATCHUP BONUS. ⛔ SO A READING ROUND IS A ROUND YOU FORFEIT: you concede that round's momentum and buy a large matchup edge on the next. r3 removes the forfeit — read and strike in the same exchange.\n⚠️ WHAT CCODE STILL NEEDS TO WIRE: a declared 'read' action that skips contesting and banks a named bonus. That is one flag on the round, not a new subsystem.",
+   "_rangeNote": "⚠️ Erik: 'I don't think we have a measured range to utilise — keep that part defined in the prose for now.' `range` removed from mechanic; reach is described in the text."
   },
   {
    "id": "psychic_lance",
@@ -141,7 +142,6 @@
      "d": 6
     },
     "plus": 0,
-    "range": 20,
     "targets": 1,
     "marginFloorPer": 0.02
    },
@@ -167,7 +167,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/duel action that deals damage. It rolls 3d6. Range is 20. Ranks: rank 2 strikes two minds, rank 3 leaves the target unable to concentrate.",
+   "plainly": "A fight/duel action that deals damage. It rolls 3d6. Ranks: rank 2 strikes two minds, rank 3 leaves the target unable to hold anything.",
    "functions": [
     "strike"
    ],
@@ -215,7 +215,8 @@
      ]
     }
    ],
-   "_authored": "⛔ SNG-464. Erik: 'a Mind character should have some GREAT PSYCHIC STRIKES.' ⚠️ Mind's existing damage was Cutting Figure (1d6, figurist geometry) and Sustained Regard (1d6, attention). ⛔ NEITHER WAS A DIRECT PSYCHIC ATTACK — this is the tradition's straight ranged hit, and its defining property is that NOTHING CAN BE INTERPOSED."
+   "_authored": "⛔ SNG-464. Erik: 'a Mind character should have some GREAT PSYCHIC STRIKES.' ⚠️ Mind's existing damage was Cutting Figure (1d6, figurist geometry) and Sustained Regard (1d6, attention). ⛔ NEITHER WAS A DIRECT PSYCHIC ATTACK — this is the tradition's straight ranged hit, and its defining property is that NOTHING CAN BE INTERPOSED.",
+   "_rangeNote": "⚠️ SNG-465: measured `range` removed per Erik — reach stays in the prose ('any mind in sight')."
   }
  ]
 }

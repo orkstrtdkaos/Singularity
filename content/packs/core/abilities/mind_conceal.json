@@ -106,8 +106,8 @@
    "_authored": "⛔ SNG-459. Erik: 'write a full skill for Ignore Me — a skill that uses mental psychic suggestion to HIDE IN PLAIN SIGHT.' ⚠️ Mind had ZERO conceal at t1 against a target of 2. The distinction from Umbral concealment is deliberate and stated in sectFlavour: an Umbral carries darkness, this carries indifference."
   },
   {
-   "id": "the_plain_room",
-   "name": "The Plain Room",
+   "id": "my_reality",
+   "name": "My Reality",
    "levelReq": 3,
    "energyCost": 6,
    "axes": {
@@ -115,8 +115,8 @@
     "concrete_abstract": 0.3
    },
    "attribute": "mental",
-   "narrationHints": "The searchers walk into the cellar, look at a wall of stacked barrels, and leave. There is no door behind the barrels as far as anyone in the room is concerned, including — for an unpleasant moment — you.",
-   "description": "Lay a suggested picture over a place so that everyone who enters sees somewhere ordinary — and at its height, the picture pushes back.",
+   "narrationHints": "The searchers walk into the cellar, look at a wall of stacked barrels, and leave. There is no door behind the barrels as far as anyone in the room is concerned — and the barrel that bit the last one who reached for it is still sitting there, being a barrel.",
+   "description": "Lay a suggested picture over a place so that everyone who enters sees somewhere else — and at its height, give the picture ONE thing it can really do.",
    "notFor": "Fooling a machine, a ward, a dog or a map; hiding something already known to be there; anywhere you cannot stand while you set it.",
    "tradition": "figurist",
    "traditionV2": "Mind",
@@ -128,7 +128,7 @@
    "intensity": "moderate",
    "mechanic": {
     "magnitude": 6,
-    "duration": 5,
+    "duration": 6,
     "scope": 3
    },
    "challengeTypes": [
@@ -138,31 +138,32 @@
    ],
    "bounds": [
     {
-     "text": "⛔ MINDS ONLY. A tripwire still trips, a dog still smells it, a surveyor's chain still measures true",
+     "text": "⛔ MINDS ONLY at r1–r2. A tripwire still trips, a dog still smells it, a surveyor's chain still measures true",
      "class": "hard"
     },
     {
-     "text": "⚠️ THE PICTURE MUST BE PLAUSIBLE FOR THE PLACE. A blank wall in a cellar works; a blank wall in a doorway is remarked on",
+     "text": "⚠️ THE PICTURE MUST BE PLAUSIBLE FOR THE PLACE — a blank wall in a cellar works; a blank wall in a doorway is remarked on",
      "class": "hard"
     },
     {
-     "text": "someone who KNOWS what is really there sees through it, and can point",
+     "text": "⛔ ANYONE TOLD THE TRUTH BEFORE THEY ACT ignores the picture and its effect — this is the counter, and it is cheap",
      "class": "hard"
     },
     {
-     "text": "⛔ YOU SEE IT TOO while it holds, which has killed people who forgot where they left the stairs",
-     "class": "cost"
+     "text": "r3: ONE effect, declared at setting, six rounds",
+     "class": "hard"
     },
     {
      "text": "setting it takes minutes of standing in the place",
      "class": "cost"
     }
    ],
-   "plainly": "A stealth/infiltrate action that conceals a place. Its strength is rated 6 out of 10. Ranks: rank 2 covers a larger area, rank 3 makes the illusion physically real.",
+   "plainly": "A stealth/infiltrate action that conceals a place. Its strength is rated 6 out of 10, lasting 6 rounds. Ranks: rank 2 covers a larger area, rank 3 adds one real effect that deals 1d6.",
    "functions": [
     "conceal",
     "deceive",
-    "make"
+    "make",
+    "strike"
    ],
    "tree": [
     {
@@ -191,19 +192,20 @@
     },
     {
      "rank": 3,
-     "name": "The Room That Pushes Back",
-     "grants": "⛔ ADDS REAL EFFECT. The picture stops being only seen. The wall that is not there STOPS A HAND. The floor that reads as solid takes weight for a step and a half. The door that reads as blank cannot be opened by someone who believes it blank.",
-     "cannot": "⚠️ IT IS CONVICTION MADE BRIEFLY LOAD-BEARING, NOT MATTER — it holds against belief, not against a crowbar swung by someone who was told the truth.",
+     "name": "My Reality",
+     "grants": "⛔ ADDS ONE REAL EFFECT, DECLARED WHEN YOU SET IT, AND IT WORKS FOR THE FULL DURATION — not only while you attend to it. Choose ONE: a WALL that blocks (stops movement through that face), TEETH that bite or a SPEAR that pierces (1d6 to the first who tries it each round), or GROUND that holds (footing fails, the crosser is hindered for a round).\n⚠️ SIX ROUNDS, OR ABOUT A MINUTE. The effect is part of the picture and does not need you present.",
+     "cannot": "⛔ ONE EFFECT ONLY, chosen at setting and unchangeable. ⚠️ It is conviction made load-bearing, not matter — anyone TOLD THE TRUTH before they act ignores both the picture and its effect.",
      "functions": [
       "conceal",
       "deceive",
-      "make"
+      "make",
+      "strike"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "damaging"
     }
    ],
-   "_authored": "⛔ SNG-459. Erik: 'a second skill that creates a PSYCHIC ILLUSION OF AN AREA — to conceal the true nature of it somehow, a trap, a hideout door. r2 is bigger area, r3 can add REAL EFFECTS.' ⚠️ r3 is the interesting rung and the bound is what keeps it honest: it holds against BELIEF, not against a crowbar swung by someone who was told the truth."
+   "_authored": "⛔ SNG-459, REVISED. Erik: 'Instead of The Plain Room call it MY REALITY. At r3 the limit could be ONE EFFECT ADDED AS STANDARD — including real teeth bite, spear pierces, wall blocks. I don't like the WHILE IT HOLDS part — it should be FOR THE DURATION.'\n⚠️ SO r3 IS NOW: one declared effect, working the full six rounds without your attention. ⛔ DAMAGE SET AT 1d6 — the L1 rung — deliberately: this is a trap you prepared, not an attack you make, and it should not out-damage a Cutting Figure. ⛔ AND THE 'YOU SEE IT TOO' COST IS REMOVED with the attention requirement; the counter is now being TOLD THE TRUTH, which is cheap and available to anyone."
   }
  ]
 }

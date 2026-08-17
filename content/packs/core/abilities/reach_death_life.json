@@ -38,7 +38,7 @@
     },
     {
      "rank": 2,
-     "name": "The Quick Return",
+     "name": "Quick Return",
      "grants": "Pull the nearly-dead back if reached in time; regrow what was lost (within reason); make barren ground bloom.",
      "cannot": "A return has a cost the GM names; the regrown is not always the same as the lost.",
      "functions": [
@@ -48,7 +48,8 @@
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Quick Return"
     },
     {
      "rank": 3,
@@ -153,7 +154,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Easing",
+     "name": "Easing",
      "grants": "Ease a dying thing's passing; read how and how long ago something died; grant true rest to what cannot find it.",
      "cannot": "Cannot kill the healthy; cannot bring back; the easing is a mercy, refused if unwilling.",
      "functions": [
@@ -163,7 +164,8 @@
      "harmRung": "none",
      "_functionsWas": [
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Easing"
     },
     {
      "rank": 2,
@@ -182,7 +184,7 @@
     },
     {
      "rank": 3,
-     "name": "The Long Stillness",
+     "name": "Long Stillness",
      "grants": "Grant endings at scale — a battlefield eased, a plague stopped by stilling its front, a thing that should have died a century ago finally allowed to. AND THE FULL STRIKE: against a living opponent, take the ending every living thing carries and pull it forward whole. This kills. It is slow enough to be interrupted, bright enough to be witnessed, and the dying understand exactly what is being done and by whom. Ashwardens call it the mercy turned around, and they do not call it that kindly.",
      "cannot": "The wielder drifts death-hot; never raises, never forces a death that must not happen. It cannot smite a healthy thing dead where it stands from nothing — it works THROUGH what is in them, so it is slow and it is seen. For the instant, unseen ending, that is The Cut Thread, and it costs accordingly.",
      "functions": [
@@ -193,7 +195,8 @@
      "_functionsWas": [
       "hinder",
       "strike"
-     ]
+     ],
+     "_nameWas": "The Long Stillness"
     }
    ],
    "functions": [
@@ -304,7 +307,7 @@
     },
     {
      "rank": 2,
-     "name": "The Held Wound",
+     "name": "Held Wound",
      "grants": "Hold a mortal wound closed by will — buy hours where there were minutes.",
      "cannot": "Held is not healed. When you let go, the wound resumes exactly where it was.",
      "functions": [
@@ -312,11 +315,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Wound"
     },
     {
      "rank": 3,
-     "name": "The Refused Bleed",
+     "name": "Refused Bleed",
      "grants": "Refuse a death outright at the moment of bleeding — the body stops losing what it cannot spare.",
      "cannot": "Refusal costs you what it saves them; the Rootkin pay it gladly and it still costs.",
      "functions": [
@@ -324,7 +328,8 @@
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Refused Bleed"
     }
    ],
    "challengeTypes": [
@@ -419,7 +424,7 @@
     },
     {
      "rank": 2,
-     "name": "The Grey Touch",
+     "name": "Grey Touch",
      "grants": "Age a structure — a wall, a bridge, a barricade — decades in moments, until it can no longer carry what it was built to carry; a gate you have aged breaks under one shoulder. Halt a spreading blight by giving the growth-front a clean, sudden end.",
      "cannot": "Withering is not breaking. The thing fails as things fail — structurally, from within. It takes a moment, not an instant.",
      "functions": [
@@ -430,11 +435,12 @@
      "_functionsWas": [
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Grey Touch"
     },
     {
      "rank": 3,
-     "name": "The Withering",
+     "name": "Withering",
      "grants": "Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields, all weakened past use and broken by their own weight. The terrain itself becomes unreliable underfoot.",
      "cannot": "Living flesh is outside it at every rank. At scale it takes fields, fortifications, and siege works — and the Ashwardens note that starving a valley is the commonest use it has ever been put to, which is a harm done to people without the craft ever touching one.",
      "functions": [
@@ -445,7 +451,8 @@
      "_functionsWas": [
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Withering"
     }
    ],
    "challengeTypes": [
@@ -546,7 +553,7 @@
     },
     {
      "rank": 2,
-     "name": "The Grafted Limb",
+     "name": "Grafted Limb",
      "grants": "Graft living tissue that was not there — replace what was lost with what still grows.",
      "cannot": "The graft is not the original, and it knows it. The body argues with it for a long time.",
      "functions": [
@@ -554,7 +561,8 @@
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Grafted Limb"
     },
     {
      "rank": 3,
@@ -660,7 +668,7 @@
     },
     {
      "rank": 2,
-     "name": "The Turned Hour",
+     "name": "Turned Hour",
      "grants": "Turn aside an unnatural death — a curse taking hold, a wraith's grip, a working that was about to close. Not heal the wound, not hold the dying: refuse this specific end, and push it back.",
      "cannot": "Unnatural only. A person dying of their wounds in the cold needs The Kept Breath, not this. And 'later' is still owed.",
      "functions": [
@@ -668,7 +676,8 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Turned Hour"
     },
     {
      "rank": 3,
@@ -742,8 +751,8 @@
    "plainly": "A survive/fight/stealth action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 5 harm per hit (rank 3 armour) It affects 1 target, and lasts for about 6 hours Ranks: rank 2 deepens soak; rank 3 adds to special. Limit: wards the Threshold, Not The Outcome."
   },
   {
-   "id": "the_last_gift",
-   "name": "The Last Gift",
+   "id": "last_gift",
+   "name": "Last Gift",
    "levelReq": 4,
    "energyCost": 9,
    "powerSystem": "reach_death_life",
@@ -762,7 +771,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Last Gift",
+     "name": "Last Gift",
      "grants": "Give the dying a clear, painless final interval — words said, peace made, the end met whole.",
      "cannot": "Does not postpone death; the gift is the hour, not more hours.",
      "harmRung": "none",
@@ -770,11 +779,12 @@
       "heal",
       "restore"
      ],
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Last Gift"
     },
     {
      "rank": 2,
-     "name": "The Gathered Hour",
+     "name": "Gathered Hour",
      "grants": "Give the gift to several at once — a room, a field after a fight — so none of them ends alone or unheard. Those attending share the interval: what is said inside it reaches them. And the judgement is yours: you decide who is dying, and giving the gift to one who might have been pulled back is a death you chose for them.",
      "cannot": "There is no version of this that is not a decision about someone else's end. The Ashwardens teach it late, to people who have already sat with enough dying to tell the difference — and they teach that being wrong about it once is a thing you carry for good.",
      "functions": [
@@ -787,7 +797,8 @@
       "heal",
       "restore",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Gathered Hour"
     }
    ],
    "challengeTypes": [
@@ -841,12 +852,14 @@
     "restore",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Last Gift",
+   "_idWas": "the_last_gift"
   },
   {
    "schemaVersion": 1,
-   "id": "the_grey_hand",
-   "name": "The Grey Hand",
+   "id": "grey_hand",
+   "name": "Grey Hand",
    "levelReq": 2,
    "energyCost": 5,
    "powerSystem": "reach_death_life",
@@ -865,36 +878,39 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Grey Hand",
+     "name": "Grey Hand",
      "grants": "Weaken a living thing by touch. Its strength fails; its will to use that strength fails with it.",
      "cannot": "Touch. You must reach them, and reaching a strong thing is the whole problem.",
      "functions": [
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Grey Hand"
     },
     {
      "rank": 2,
-     "name": "The Long Grey",
+     "name": "Long Grey",
      "grants": "Weaken at a distance, and hold it there — they do not recover while you are attending to them.",
      "cannot": "Attending costs you continuously. Let go and it comes back, and it comes back angry.",
      "functions": [
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Long Grey"
     },
     {
      "rank": 3,
-     "name": "The Withered Hour",
+     "name": "Withered Hour",
      "grants": "Weaken a group, or weaken one thing so thoroughly it cannot stand.",
      "cannot": "It never kills and never wounds — a Grey Hand that has done its worst leaves someone unable to stand, not dying, and they recover once you stop. Nothing it does is deniable: the Ashwardens hold that this is the honest one, because the victim and every witness can see exactly who is doing it and that it is being chosen.",
      "functions": [
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Withered Hour"
     }
    ],
    "gated": "learned",
@@ -953,7 +969,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/social action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 1. Ranks: rank 2 extends range+duration; rank 3 extends targets. Limit: attending Costs You Continuously — let go and it comes back."
+   "plainly": "A fight/social action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 1. Ranks: rank 2 extends range+duration; rank 3 extends targets. Limit: attending Costs You Continuously — let go and it comes back.",
+   "_nameWas": "The Grey Hand",
+   "_idWas": "the_grey_hand"
   },
   {
    "schemaVersion": 1,
@@ -995,7 +1013,7 @@
     },
     {
      "rank": 2,
-     "name": "The Long Draught",
+     "name": "Long Draught",
      "grants": "Draw at reach, and from more than one — a battlefield is, to a Draw-Down, a table set.",
      "cannot": "Every person watching you do this will remember it. Some of them will decide something about you.",
      "functions": [
@@ -1008,11 +1026,12 @@
       "strike",
       "hinder",
       "heal"
-     ]
+     ],
+     "_nameWas": "The Long Draught"
     },
     {
      "rank": 3,
-     "name": "The Emptied Vessel",
+     "name": "Emptied Vessel",
      "grants": "Draw a thing entirely down. What is left is not dead, exactly. It is finished.",
      "cannot": "There is no partial version of this rank — a thing drawn entirely down does not recover, and what is left is not a corpse anyone can grieve properly. It requires the drawer to keep going past every point where stopping was possible. The Ashwardens do not forbid Draw-Down; they forbid teaching rank three to anyone who asked for it.",
      "functions": [
@@ -1025,7 +1044,8 @@
       "strike",
       "hinder",
       "heal"
-     ]
+     ],
+     "_nameWas": "The Emptied Vessel"
     }
    ],
    "gated": "learned",
@@ -1095,8 +1115,8 @@
   },
   {
    "schemaVersion": 1,
-   "id": "the_dread",
-   "name": "The Dread",
+   "id": "dread",
+   "name": "Dread",
    "levelReq": 2,
    "energyCost": 4,
    "powerSystem": "reach_death_life",
@@ -1116,18 +1136,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Dread",
+     "name": "Dread",
      "grants": "One living thing feels its own ending approach. It will act on that, and you do not get to choose how — but it is badly weakened while it lasts: the hands go unsteady, the judgement narrows, and nothing they attempt comes out at the strength they meant.",
      "cannot": "The unafraid are unmoved, and there are more of them than you think.",
      "functions": [
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Dread"
     },
     {
      "rank": 2,
-     "name": "The Cold Room",
+     "name": "Cold Room",
      "grants": "A room, a line, a crowd feels it at once. Formations come apart; conversations stop.",
      "cannot": "A frightened crowd is a stampede, and a stampede does not check who is in its way. Including you.",
      "functions": [
@@ -1135,11 +1156,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Cold Room"
     },
     {
      "rank": 3,
-     "name": "The Certain Hour",
+     "name": "Certain Hour",
      "grants": "They do not merely feel it — they KNOW it, with the Ashwarden's own clarity, and they cannot un-know it.",
      "cannot": "Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which.",
      "functions": [
@@ -1147,7 +1169,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Certain Hour"
     }
    ],
    "gated": "learned",
@@ -1210,7 +1233,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/social action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets; rank 3 deepens fear. Limit: the Unafraid Are Unmoved, and there are more of them than you think."
+   "plainly": "A fight/social action that weakens or restricts a target. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets; rank 3 deepens fear. Limit: the Unafraid Are Unmoved, and there are more of them than you think.",
+   "_nameWas": "The Dread",
+   "_idWas": "the_dread"
   },
   {
    "schemaVersion": 1,
@@ -1249,7 +1274,7 @@
     },
     {
      "rank": 2,
-     "name": "The Long Question",
+     "name": "Long Question",
      "grants": "Ask further back, and ask more — three questions, and the answers are clearer.",
      "cannot": "Each question takes something from what is left of them. You will feel it go.",
      "functions": [
@@ -1260,11 +1285,12 @@
      "_functionsWas": [
       "reveal",
       "summon"
-     ]
+     ],
+     "_nameWas": "The Long Question"
     },
     {
      "rank": 3,
-     "name": "The Full Account",
+     "name": "Full Account",
      "grants": "The dead tell you what they knew, entire, and what they wanted, and what they were afraid of.",
      "cannot": "You will hear things about them that were not yours to know, and you cannot give them back.",
      "functions": [
@@ -1275,7 +1301,8 @@
      "_functionsWas": [
       "reveal",
       "summon"
-     ]
+     ],
+     "_nameWas": "The Full Account"
     }
    ],
    "gated": "learned",
@@ -1430,8 +1457,8 @@
    "_descriptionWas": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway."
   },
   {
-   "id": "the_grey_road",
-   "name": "The Grey Road",
+   "id": "grey_road",
+   "name": "Grey Road",
    "levelReq": 2,
    "energyCost": 5,
    "powerSystem": "reach_death_life",
@@ -1463,7 +1490,7 @@
     },
     {
      "rank": 2,
-     "name": "The Passage",
+     "name": "Passage",
      "grants": "Bring one person through with you. Open sealed doors, tombs, and quarantine gates that the dead have passed before — not by breaking, by fitting. Sense the safe path through a lethal space before you commit.",
      "cannot": "One only. A ward that has never held a death cannot be opened this way — only thresholds that have been crossed before.",
      "functions": [
@@ -1472,11 +1499,12 @@
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Passage"
     },
     {
      "rank": 3,
-     "name": "The Long Walk",
+     "name": "Long Walk",
      "grants": "Move through any space where death has been substantial and recent — major battlefields, plague grounds, sealed necropolises, active collapse sites — as if they were open road. Bring a small group. Move through quarantine cordons and siege-lines that are held by mortal hands, not wards.",
      "cannot": "Substantial and recent. A meadow where someone died a hundred years ago is not a Grey Road. A magically-sealed door with no death behind it is not a Grey Road. The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other.",
      "functions": [
@@ -1485,7 +1513,8 @@
       "open"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Walk"
     }
    ],
    "functions": [
@@ -1549,11 +1578,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A explore/survive/stealth action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 4. Ranks: rank 2 extends targets+access; rank 3 extends access. Limit: a Ward That Has Never Held A Death Cannot BE Opened This Way."
+   "plainly": "A explore/survive/stealth action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 4. Ranks: rank 2 extends targets+access; rank 3 extends access. Limit: a Ward That Has Never Held A Death Cannot BE Opened This Way.",
+   "_nameWas": "The Grey Road",
+   "_idWas": "the_grey_road"
   },
   {
-   "id": "the_kept_breath",
-   "name": "The Kept Breath",
+   "id": "kept_breath",
+   "name": "Kept Breath",
    "levelReq": 2,
    "energyCost": 4,
    "powerSystem": "reach_death_life",
@@ -1664,11 +1695,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A survive/explore action that strengthens someone. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: this Holds The Threshold — IT Does Not Move IT; you remain in the condition."
+   "plainly": "A survive/explore action that strengthens someone. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: this Holds The Threshold — IT Does Not Move IT; you remain in the condition.",
+   "_nameWas": "The Kept Breath",
+   "_idWas": "the_kept_breath"
   },
   {
-   "id": "the_green_claim",
-   "name": "The Green Claim",
+   "id": "green_claim",
+   "name": "Green Claim",
    "levelReq": 2,
    "energyCost": 5,
    "powerSystem": "reach_death_life",
@@ -1690,7 +1723,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Answer",
+     "name": "Answer",
      "grants": "Call living growth to act: vines that grip, roots that erupt underfoot, branches that bar passage. Strike one threat with the weight of what grows here. The living things that answer also tell you where the intruder has been.",
      "cannot": "The growth is approximate. It holds and hinders as much as it harms. A determined foe pushes through, slower.",
      "functions": [
@@ -1703,11 +1736,12 @@
       "summon",
       "strike",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Answer"
     },
     {
      "rank": 2,
-     "name": "The Living Response",
+     "name": "Living Response",
      "grants": "The call goes wider: thorns across a passage, roots that trip a line, surging growth across a broader area. What you summon shows you its awareness — the animal that answers has seen what you need to know.",
      "cannot": "Wide response is slow response. The Rootkin's force is not fast enough for a fight already at blade's edge.",
      "functions": [
@@ -1720,11 +1754,12 @@
       "summon",
       "strike",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Living Response"
     },
     {
      "rank": 3,
-     "name": "The Reclamation",
+     "name": "Reclamation",
      "grants": "The living world treats something as having been named as threat at scale — the terrain itself becomes hostile to what you've claimed. A region reclaims. What tried to pass does not.",
      "cannot": "A claim at this scale cannot be called off quickly — the region does not forget on your say-so, and it does not distinguish finely between the one you named and whoever is travelling with them. What you have made is not an attack but a condition, and conditions outlast the reason for them.",
      "functions": [
@@ -1737,7 +1772,8 @@
       "summon",
       "strike",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Reclamation"
     }
    ],
    "functions": [
@@ -1809,7 +1845,9 @@
     "strike",
     "summon"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Green Claim",
+   "_idWas": "the_green_claim"
   },
   {
    "id": "bark_and_briar",
@@ -1857,7 +1895,7 @@
     },
     {
      "rank": 3,
-     "name": "The Grove's Resilience",
+     "name": "Grove's Resilience",
      "grants": "Resist effects that would take hold in a lesser life: disease, poison, cold, a working aimed at you — because the life-force present in you is so strong it crowds them out. Extend this to those sheltered within your ward.",
      "cannot": "Resilience is not immunity. Very strong effects still land; the Rootkin just takes longer to fall.",
      "functions": [
@@ -1866,7 +1904,8 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Grove's Resilience"
     }
    ],
    "functions": [
@@ -1932,8 +1971,8 @@
    "plainly": "A fight/survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets+duration; rank 3 deepens soak. Limit: a Living Ward Can BE Broken — Fire IS Its Particular Enemy."
   },
   {
-   "id": "the_speaking_grove",
-   "name": "The Speaking Grove",
+   "id": "speaking_grove",
+   "name": "Speaking Grove",
    "levelReq": 2,
    "energyCost": 4,
    "powerSystem": "reach_death_life",
@@ -1970,7 +2009,7 @@
     },
     {
      "rank": 2,
-     "name": "The Asking",
+     "name": "Asking",
      "grants": "Ask more complex things; command more deliberately. The forest tracks what has moved through it — query that track. An animal guide, a tree that opens its memory of who has passed, a flock that scouts ahead.",
      "cannot": "What the living world knows is sensory, not analytical. It can tell you a person was here; it cannot tell you what they were planning.",
      "functions": [
@@ -1984,11 +2023,12 @@
       "command",
       "reveal",
       "track"
-     ]
+     ],
+     "_nameWas": "The Asking"
     },
     {
      "rank": 3,
-     "name": "The Grove Speaks",
+     "name": "Grove Speaks",
      "grants": "Speak to the living world at regional scale. The whole grove turns its attention toward you. What it knows of every thing that has moved through it is yours. What you ask of it — at the pace of trees — is done.",
      "cannot": "At the pace of trees. Urgency is a concept the grove does not share.",
      "functions": [
@@ -2000,7 +2040,8 @@
       "command",
       "reveal",
       "track"
-     ]
+     ],
+     "_nameWas": "The Grove Speaks"
     }
    ],
    "functions": [
@@ -2066,11 +2107,13 @@
     "reveal",
     "track"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Speaking Grove",
+   "_idWas": "the_speaking_grove"
   },
   {
-   "id": "the_root_road",
-   "name": "The Root Road",
+   "id": "root_road",
+   "name": "Root Road",
    "levelReq": 2,
    "energyCost": 5,
    "powerSystem": "reach_death_life",
@@ -2106,7 +2149,7 @@
     },
     {
      "rank": 2,
-     "name": "The Opened Way",
+     "name": "Opened Way",
      "grants": "Open passages that weren't visible: a thicket parts, a root-arch forms, a way through terrain that looked impassable appears. Bring one other with you. The living world makes a road.",
      "cannot": "The opened way closes again. It isn't a road until you make it one by using it repeatedly.",
      "functions": [
@@ -2119,11 +2162,12 @@
       "move",
       "reveal",
       "open"
-     ]
+     ],
+     "_nameWas": "The Opened Way"
     },
     {
      "rank": 3,
-     "name": "The Root Network",
+     "name": "Root Network",
      "grants": "Travel the root-network itself: move through the living web and emerge where it reaches, which is almost anywhere soil has held life. Bring a small group. The network tells you what it knows of the destination before you arrive.",
      "cannot": "Emergence takes time and you cannot choose exactly where — you emerge where the network is willing, within the range you name. And dead ground, sealed vaults, stone-over-stone — the roots have not gone there.",
      "functions": [
@@ -2138,7 +2182,8 @@
       "reveal",
       "open",
       "travel"
-     ]
+     ],
+     "_nameWas": "The Root Network"
     }
    ],
    "functions": [
@@ -2206,12 +2251,14 @@
     "reveal",
     "travel"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Root Road",
+   "_idWas": "the_root_road"
   },
   {
    "schemaVersion": 1,
-   "id": "the_set_hand",
-   "name": "The Set Hand",
+   "id": "set_hand",
+   "name": "Set Hand",
    "levelReq": 3,
    "energyCost": 9,
    "powerSystem": "reach_death_life",
@@ -2232,7 +2279,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Set Hand",
+     "name": "Set Hand",
      "grants": "Set one finished body to a simple repeated task — carry, haul, turn, hold. It works until you unset it or it comes apart.",
      "cannot": "One body, one task, and the task must be simple enough to state in a sentence.",
      "functions": [
@@ -2240,11 +2287,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Set Hand"
     },
     {
      "rank": 2,
-     "name": "The Standing Crew",
+     "name": "Standing Crew",
      "grants": "Set several, and give them a task with STEPS. They will do the steps in order and will not improvise when a step fails.",
      "cannot": "They do not adapt. A crew whose third step is blocked will attempt the third step until you come and say otherwise.",
      "functions": [
@@ -2253,11 +2301,12 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Standing Crew"
     },
     {
      "rank": 3,
-     "name": "The Long Labour",
+     "name": "Long Labour",
      "grants": "Set bodies that hold for SEASONS, and give a standing instruction they resume without you. The Palelands' quarries and dykes have run on this for four hundred years.",
      "cannot": "What you set outlives your attention, and the Palelands are full of crews nobody remembers setting. Some are still working.",
      "functions": [
@@ -2266,7 +2315,8 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Long Labour"
     }
    ],
    "challengeTypes": [
@@ -2331,12 +2381,14 @@
    "upkeep": {
     "persistHours": 2160,
     "note": "set bodies hold for seasons; the duration IS the craft"
-   }
+   },
+   "_nameWas": "The Set Hand",
+   "_idWas": "the_set_hand"
   },
   {
    "schemaVersion": 1,
-   "id": "the_forced_bloom",
-   "name": "The Forced Bloom",
+   "id": "forced_bloom",
+   "name": "Forced Bloom",
    "levelReq": 3,
    "energyCost": 10,
    "powerSystem": "reach_death_life",
@@ -2356,7 +2408,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Forced Bloom",
+     "name": "Forced Bloom",
      "grants": "Drive growth into a living thing past its own pace — a wound closed in moments, a sapling to a staff, a field to harvest out of season.",
      "cannot": "It takes what growing takes. The body spends what the growth costs, and it does not get to decline.",
      "functions": [
@@ -2364,11 +2416,12 @@
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Forced Bloom"
     },
     {
      "rank": 2,
-     "name": "The Overgrowth",
+     "name": "Overgrowth",
      "grants": "Grow a thing PAST its right size. In a body this is an injury that looks like health; in a field it is a season's yield and a dead soil after.",
      "cannot": "You cannot stop it partway. What you start finishes growing.",
      "functions": [
@@ -2376,11 +2429,12 @@
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Overgrowth"
     },
     {
      "rank": 3,
-     "name": "The Strangling Green",
+     "name": "Strangling Green",
      "grants": "Drive growth into someone until the growth is what harms them — bone that keeps going, green that fills a chest. The Quickwood does not teach this rank and cannot stop it being learned.",
      "cannot": "It is unmistakable and it is slow. Everyone present knows exactly what is happening, including them.",
      "functions": [
@@ -2388,7 +2442,8 @@
       "hinder"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Strangling Green"
     }
    ],
    "challengeTypes": [
@@ -2446,12 +2501,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/survive action that deals damage. It rolls 3d6 living damage Ranks: rank 2 deepens growth; rank 3 adds to special. Limit: the Living Only."
+   "plainly": "A fight/survive action that deals damage. It rolls 3d6 living damage Ranks: rank 2 deepens growth; rank 3 adds to special. Limit: the Living Only.",
+   "_nameWas": "The Forced Bloom",
+   "_idWas": "the_forced_bloom"
   },
   {
    "schemaVersion": 1,
-   "id": "the_calling_back",
-   "name": "The Calling Back",
+   "id": "calling_back",
+   "name": "Calling Back",
    "levelReq": 3,
    "energyCost": 12,
    "powerSystem": "reach_death_life",
@@ -2590,12 +2647,14 @@
     "summon",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Calling Back",
+   "_idWas": "the_calling_back"
   },
   {
    "schemaVersion": 1,
-   "id": "the_root_that_holds",
-   "name": "The Root That Holds",
+   "id": "root_that_holds",
+   "name": "Root That Holds",
    "levelReq": 4,
    "energyCost": 13,
    "powerSystem": "reach_death_life",
@@ -2615,7 +2674,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Root That Holds",
+     "name": "Root That Holds",
      "grants": "Reach someone at THE THRESHOLD with the living current. They come back whole and starving.",
      "cannot": "Anything past the threshold. The current takes its fuel from what is near — and near includes you.",
      "functions": [
@@ -2623,11 +2682,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Root That Holds"
     },
     {
      "rank": 2,
-     "name": "The Deep Green",
+     "name": "Deep Green",
      "grants": "Reach into THE NEAR DARK. The current runs further than it should and something pays for the distance.",
      "cannot": "The deep dark. The cost is drawn from the living around you and you do not fully choose from what.",
      "functions": [
@@ -2636,7 +2696,8 @@
       "summon"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Deep Green"
     }
    ],
    "challengeTypes": [
@@ -2687,12 +2748,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A survive/explore action that restores health. It rolls 2d6+3 It affects 1 target Ranks: rank 2 deepens depth. Limit: iT Does Not Reach The Deep Dark OR The Sealed — the current stops."
+   "plainly": "A survive/explore action that restores health. It rolls 2d6+3 It affects 1 target Ranks: rank 2 deepens depth. Limit: iT Does Not Reach The Deep Dark OR The Sealed — the current stops.",
+   "_nameWas": "The Root That Holds",
+   "_idWas": "the_root_that_holds"
   },
   {
    "schemaVersion": 1,
-   "id": "the_carried_green",
-   "name": "The Carried Green",
+   "id": "carried_green",
+   "name": "Carried Green",
    "levelReq": 4,
    "energyCost": 13,
    "powerSystem": "reach_death_life",
@@ -2711,7 +2774,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Carried Green",
+     "name": "Carried Green",
      "grants": "Be lifted and handed along by thick growth — forest, field, marsh — at about twice walking speed.",
      "cannot": "Thin country. Over open water or bare rock there is not enough to take your weight.",
      "functions": [
@@ -2719,11 +2782,12 @@
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Carried Green"
     },
     {
      "rank": 2,
-     "name": "The Thin Growth",
+     "name": "Thin Growth",
      "grants": "⚠️ Work with what little there is: seaweed and lily mats over water, the scrub in a rock seam, the plants at a desert's edge. Slower, harder, and it holds.",
      "cannot": "Ground with genuinely nothing living in it, and hurrying — thin growth carries you at a walk.",
      "functions": [
@@ -2731,11 +2795,12 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Thin Growth"
     },
     {
      "rank": 3,
-     "name": "The Grown Wing",
+     "name": "Grown Wing",
      "grants": "Grow wings of living matter and fly under your own control, independent of what is below you.",
      "cannot": "Keeping them past a day without feeding them as any growth is fed.",
      "functions": [
@@ -2743,7 +2808,8 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Grown Wing"
     }
    ],
    "challengeTypes": [
@@ -2783,11 +2849,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A travel and explore action. Growth lifts you and hands you along — in thick country like forest or marsh that is about twice walking speed and roughly halves a leg's days. At rank 2 you can work with very little: seaweed and lily mats across open water, scrub in a rock seam, the plants at a desert's edge — it carries you at walking pace rather than fast, but it goes where rank 1 cannot. Only genuinely dead ground is closed to it, meaning the Unmade, salt flats, and worked stone with nothing living in the seams. At rank 3 you grow real wings and fly independent of what is below you; held past a day they draw on your own body."
+   "plainly": "A travel and explore action. Growth lifts you and hands you along — in thick country like forest or marsh that is about twice walking speed and roughly halves a leg's days. At rank 2 you can work with very little: seaweed and lily mats across open water, scrub in a rock seam, the plants at a desert's edge — it carries you at walking pace rather than fast, but it goes where rank 1 cannot. Only genuinely dead ground is closed to it, meaning the Unmade, salt flats, and worked stone with nothing living in the seams. At rank 3 you grow real wings and fly independent of what is below you; held past a day they draw on your own body.",
+   "_nameWas": "The Carried Green",
+   "_idWas": "the_carried_green"
   },
   {
-   "id": "the_snaring_green",
-   "name": "The Snaring Green",
+   "id": "snaring_green",
+   "name": "Snaring Green",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_death_life",
@@ -2808,7 +2876,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Green Comes Up",
+     "name": "Green Comes Up",
      "grants": "Root and briar surge up and HOLD. Footing gone, movement halved, a charge dead where it stood. No wound yet — this rank is the grip.",
      "cannot": "NEEDS LIVING GROUND. A quick target may clear it before it closes. Blade and fire both answer it. It holds; at this rank it does not yet harm.",
      "functions": [
@@ -2816,11 +2884,12 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Green Comes Up"
     },
     {
      "rank": 2,
-     "name": "The Thorn Turns In",
+     "name": "Thorn Turns In",
      "grants": "The hold closes and BITES — thorn drives inward, the grip constricts, and what is caught is opened up as it struggles. One real wound, and worse for anyone who fights the snare.",
      "cannot": "Struggling makes it worse, which means a calm captive takes less than a panicking one — and anyone else caught in it is held at bind only, no harm rung, until you release.",
      "functions": [
@@ -2829,11 +2898,12 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Thorn Turns In"
     },
     {
      "rank": 3,
-     "name": "The Long Green Death",
+     "name": "Long Green Death",
      "grants": "It keeps working. Wood thickens through the hold, thorn travels, and the harm continues for as long as they are held — which, unless you release it, is until it finishes. THE GREEN ANSWERS YOU: open the hold at will, on one of them or all of them, in the moment you decide the fight is over. Surrender is a thing you can accept.",
      "cannot": "Releasing is a CHOICE you must actually make — it does not stop on its own, and a wielder who goes down or is driven off leaves it working. It holds anyone else present at bind only, no harm rung — but a general release frees everyone or none. And what you grow REMAINS after the hold opens; the Ashwardens will come and look at it.",
      "functions": [
@@ -2847,7 +2917,8 @@
       "strike",
       "hinder",
       "make"
-     ]
+     ],
+     "_nameWas": "The Long Green Death"
     }
    ],
    "challengeTypes": [
@@ -2907,11 +2978,13 @@
     "strike",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Snaring Green",
+   "_idWas": "the_snaring_green"
   },
   {
-   "id": "the_hastened_grey",
-   "name": "The Hastened Grey",
+   "id": "hastened_grey",
+   "name": "Hastened Grey",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_death_life",
@@ -2930,7 +3003,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Grey Hand",
+     "name": "Grey Hand",
      "grants": "Touch what is already failing and bring its end forward — a notched blade shears, a strained rope parts, and a WOUND ALREADY OPEN goes grey and stops closing. On a hurt person this is a killing pace, laid on by hand.",
      "cannot": "It HASTENS what is underway. An unhurt, unarmoured, unworn target gives you very little to pull on — this craft rewards finishing, not opening. TOUCH ONLY at this rank.",
      "functions": [
@@ -2938,11 +3011,12 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Grey Hand"
     },
     {
      "rank": 2,
-     "name": "The Nearer End",
+     "name": "Nearer End",
      "grants": "Work at a pace's distance, and on the sound as well as the failing — a whole man ends sooner, though a sound thing costs far more and gives less. What you take does not recover.",
      "cannot": "The cost of taking something whole is real and you pay it in yourself. And a grey hand is a thing the Valley has stories about; people who watched will not travel with you.",
      "functions": [
@@ -2955,11 +3029,12 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Nearer End"
     },
     {
      "rank": 3,
-     "name": "The Keeper's Due",
+     "name": "Keeper's Due",
      "grants": "You call the endings due — the failing and the sound, gates and engines and walls and men, everything within reach that was ever going to stop.",
      "cannot": "⚠ IT DOES NOT SORT. What is due is due, and EVERYONE ELSE INSIDE THE REACH IS STRUCK ONE RUNG LOWER — everything present is due, including yours. And the Hollow — who would end everything to end suffering — will hear about this and will want to talk to you.",
      "functions": [
@@ -2973,7 +3048,8 @@
       "break",
       "hinder",
       "command"
-     ]
+     ],
+     "_nameWas": "The Keeper's Due"
     }
    ],
    "challengeTypes": [
@@ -3030,11 +3106,13 @@
     "break",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Hastened Grey",
+   "_idWas": "the_hastened_grey"
   },
   {
-   "id": "the_kept_vigil",
-   "name": "The Kept Vigil",
+   "id": "kept_vigil",
+   "name": "Kept Vigil",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_death_life",
@@ -3052,7 +3130,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Held Edge",
+     "name": "Held Edge",
      "grants": "Hold one failing thing where it is — a wound that would turn septic, a strained beam, a dying fire, a person's last hours. It does not improve. It does not get worse.",
      "cannot": "It HOLDS, it does not mend. The moment you stop attending, it resumes exactly where it was. ONE THING, and you can do almost nothing else while you hold it.",
      "functions": [
@@ -3060,11 +3138,12 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Edge"
     },
     {
      "rank": 2,
-     "name": "The Long Watch",
+     "name": "Long Watch",
      "grants": "Hold through a night, or hold something large — a breach, a flooding hull, a fever. Enough time for someone else to arrive with the actual answer.",
      "cannot": "You are spent afterward in a way sleep does not entirely fix. And you have bought TIME, which is only worth what someone does with it.",
      "functions": [
@@ -3073,11 +3152,12 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Watch"
     },
     {
      "rank": 3,
-     "name": "The Unfinished Ending",
+     "name": "Unfinished Ending",
      "grants": "Hold something that should already be over — a person past saving, a structure past standing — for as long as you can bear to.",
      "cannot": "⚠ THIS IS THE CRAFT ASHWARDENS ARGUE ABOUT. Holding an ending open is not mercy by default; sometimes it is only refusal, and the thing held knows the difference. The Hollow think it obscene.",
      "functions": [
@@ -3086,7 +3166,8 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Unfinished Ending"
     }
    ],
    "challengeTypes": [
@@ -3125,11 +3206,13 @@
     }
    ],
    "plainly": "A puzzle/social action that holds a failing thing at its edge. Rated 5 of 10 on one target for about twelve hours.",
-   "_descriptionWas": "The Ashwardens' keeping-craft, and the mirror of their hastening one. They tend endings, which means they also know precisely how to postpone one."
+   "_descriptionWas": "The Ashwardens' keeping-craft, and the mirror of their hastening one. They tend endings, which means they also know precisely how to postpone one.",
+   "_nameWas": "The Kept Vigil",
+   "_idWas": "the_kept_vigil"
   },
   {
-   "id": "the_true_account",
-   "name": "The True Account",
+   "id": "true_account",
+   "name": "True Account",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_death_life",
@@ -3149,7 +3232,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Reckoning",
+     "name": "Reckoning",
      "grants": "Look at a person, structure, or working and know what is failing in it, roughly how long it has, and what it will go from.",
      "cannot": "It reads DECLINE, not danger — a healthy man about to be murdered reads as healthy. And you must SAY it plainly; an Ashwarden who softens a reckoning has stopped practising.",
      "functions": [
@@ -3160,11 +3243,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Reckoning"
     },
     {
      "rank": 2,
-     "name": "The Ledger of a Place",
+     "name": "Ledger of a Place",
      "grants": "Read a whole site — which beams, which wells, which people. Ashwardens are hired for exactly this and it is unglamorous, essential work.",
      "cannot": "Knowing does not fix, and a place told its true account frequently blames the one who read it. Prepare for that or do not take the work.",
      "functions": [
@@ -3175,11 +3259,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Ledger of a Place"
     },
     {
      "rank": 3,
-     "name": "The Whole Reckoning",
+     "name": "Whole Reckoning",
      "grants": "Everything ending in reach, ordered by when. Communities have been evacuated on this and communities have refused to be.",
      "cannot": "⚠ YOU WILL READ PEOPLE YOU LOVE IN THE SAME PASS, and the craft does not let you skip them. This is why Ashwardens are quiet, and it is not temperament.",
      "functions": [
@@ -3193,7 +3278,8 @@
       "reveal",
       "foresee",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Whole Reckoning"
     }
    ],
    "challengeTypes": [
@@ -3237,11 +3323,14 @@
     "reveal",
     "foresee"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The True Account",
+   "_idWas": "the_true_account"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "rankModel": "SNG-147c: functions and harmRung accrue PER RANK and are additive — each rank either BROADENS (gains a new function verb) or DEEPENS (materially extends one it has), and says which in `gains`. Every rank is meaningful. The ability-level `functions` is the union; the ability-level `harmRung` is the ceiling. The intent gate (SNG-145) reads the rank the character HAS, not the ability's maximum.",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

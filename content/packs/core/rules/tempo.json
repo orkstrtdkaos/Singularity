@@ -42,15 +42,17 @@
   "what": "⛔ TEMPO IS A BANKED CHARGE. It accrues during a contest and spends as an extra action slot.",
   "accrual": {
    "kind": "rate",
-   "note": "⚠️ Per `charges.json`: every qualifying pass banks something. There is no zero pass.",
+   "_movedOffSense": "⛔ SENSE NO LONGER BANKS TEMPO. The read already pays — Deduced Strike's mark, Attunement's information, Memory-Palace's bonus. ⚠️ BANKING ON TOP OF THAT DOUBLE-PAYS THE SAME ACTION and turns a consequence-free step into the strongest economic move in the round.",
    "sources": {
-    "a read that produced usable information": 1.0,
     "winning a round on the momentum meter": 0.6,
-    "an ally's read shared with you (Mind Meld, a called warning)": 0.5,
-    "acting on ground you prepared (a ward, a figure, a set trap)": 0.4,
-    "Conserve intensity — you spent less than you could have": 0.3,
-    "Surge intensity": 0.0
-   }
+    "acting on ground you prepared (a ward, a figure, a set trap)": 0.5,
+    "Conserve intensity — you spent less than you could have": 0.4,
+    "an ally spending their action to set you up": 0.4,
+    "a landed blow that was not your own opening": 0.3,
+    "Surge intensity": 0.0,
+    "⛔ a sense action": 0.0
+   },
+   "_note": "⚠️ Tempo now banks entirely off the ACTION slot and the momentum meter. Reading remains free and remains consequence-free."
   },
   "spend": {
    "1 tempo": "a second action this round",
@@ -58,7 +60,7 @@
    "3 tempo": "⛔ ACT BEFORE THE ROUND OPENS, ahead of everyone, once"
   },
   "cap": "⚠️ THREE. Tempo does not bank across a contest — it is momentum, not savings, and it empties when the fight ends.",
-  "_whyItIsGood": "⛔ IT REWARDS THE THING THE TRADITIONS ACTUALLY DO. A Cogitant reads and banks; a Marcher wins rounds and banks; a Figurist prepares ground and banks; a careful fighter conserving energy banks slowly. ⚠️ AND SURGE BANKS NOTHING — the gamble is already its own reward, so the greedy line and the patient line are genuinely different strategies rather than one being strictly better."
+  "_whyItIsGood": "⛔ IT REWARDS COMMITTING WELL, NOT OBSERVING. A Marcher wins rounds and banks; a Figurist who prepared the ground banks; a careful fighter conserving banks slowly; ⚠️ AND SURGE BANKS NOTHING, so the greedy line and the patient line stay genuinely different.\n⛔ AND READING STAYS FREE — which is what CCode's warning protects: the sense step is where you learn, not where you win."
  },
  "forCCode": {
   "wiring": [
@@ -68,6 +70,20 @@
    "tempo accrues per the rate table above and caps at 3",
    "tempo spends per the spend table; spending is declared before the round's rolls"
   ],
-  "smallest": "⛔ THE MINIMUM VIABLE VERSION IS THE `read` TAG AND THE SENSE SLOT. Tempo can follow; the sense slot alone makes Deduced Strike work as authored."
- }
+  "smallest": "⛔ THE MINIMUM VIABLE VERSION IS THE `read` TAG AND THE SENSE SLOT. Tempo can follow; the sense slot alone makes Deduced Strike work as authored.",
+  "statusPerCCode20260816": {
+   "alreadyShipped": [
+    "the sense→action→bonus turn (CCODE-45, sbFreshTurn)",
+    "the sense slot not consuming the action",
+    "the read contested against a concealing craft (CCODE-51, senseResistOf)",
+    "obscure as an EFFECT (phaseDenied(…, 'sense'), senseBlinded)"
+   ],
+   "actuallyNew": [
+    "obscure as a DECLARED choice rather than passive resistance",
+    "⛔ THE TIE RULE — the obscurer wins ties",
+    "the tempo bank (now banking off the action slot only)"
+   ]
+  }
+ },
+ "_correction_20260816": "⛔ CCODE, 2026-08-16, AND HE IS RIGHT: 'The sense step DELIBERATELY DOES NOT MOVE MOMENTUM — it was built consequence-free so that READING ISN'T A WAY TO WIN. Tempo banking off it reverses that, and it is the kind of decision that should be reversed ON PURPOSE rather than arrive as a side effect of a new currency.'\n⚠️ MY TABLE HAD 'a read that produced usable information: 1.0' AS THE TOP ACCRUAL — the single largest source, sitting directly on the step that was built to be consequence-free. ⛔ I WOULD HAVE OVERTURNED A DELIBERATE DESIGN DECISION AS A SIDE EFFECT OF A NEW CURRENCY.\n⛔ ALSO CORRECTED: §4.1's headline — 'a sense craft resolves in its own slot and does not consume the action' — IS ALREADY SHIPPED BEHAVIOUR. CCODE-45 established 'a TURN is sense → action → bonus' and `sbFreshTurn()` holds three selections; CCODE-51 already contests the read via `senseResistOf`, and `phaseDenied(…, 'sense')` already exists as obscure-as-an-effect. ⚠️ I WROTE A SPEC SECTION FOR SOMETHING THAT EXISTS. Same class as counting my own hand-applied `sense` tag and concluding the corpus had three sense crafts when it had fifty-six.\n⛔ WHAT IS ACTUALLY NEW IS THREE SMALL THINGS: obscure as a DECLARED choice rather than a passive resistance, the tie rule, and the tempo bank."
 }

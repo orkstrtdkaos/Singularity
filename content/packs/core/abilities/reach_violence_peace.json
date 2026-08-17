@@ -5,8 +5,8 @@
  "gated": "learned",
  "abilities": [
   {
-   "id": "the_edge",
-   "name": "The Edge",
+   "id": "edge",
+   "name": "Edge",
    "levelReq": 2,
    "energyCost": 6,
    "powerSystem": "reach_violence_peace",
@@ -27,36 +27,39 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The First Cut",
+     "name": "First Cut",
      "grants": "Strike with trained decisiveness — the fighter's discipline applied cleanly. Stand where others break. End a fight fast once you commit.",
      "cannot": "Force is force — it makes enemies and consequences; the Edge cannot un-hurt. Reading the fight is Read the Fight's territory, not this one.",
      "harmRung": "damaging",
      "functions": [
       "strike"
      ],
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The First Cut"
     },
     {
      "rank": 2,
-     "name": "The Marcher's Calm",
+     "name": "Marcher's Calm",
      "grants": "Fight many, fight cornered, fight wounded and keep the discipline; disarm and disable without killing when you choose; make your reputation do half the work.",
      "cannot": "The calm can slip; every use of the Edge writes on you; a foe past reason isn't disabled by skill alone.",
      "harmRung": "lethal",
      "functions": [
       "strike"
      ],
-     "gains": "deepen"
+     "gains": "deepen",
+     "_nameWas": "The Marcher's Calm"
     },
     {
      "rank": 3,
-     "name": "The Ender",
+     "name": "Ender",
      "grants": "Meet even the great and the many; end a threat at the scale of a warband; the Edge at full mastery, where a single figure turns a field. The Redline's power in miniature.",
      "cannot": "The wielder drifts violence-hot — the Ender who forgets peace becomes the thing the Marches are fleeing from; force at this scale foreclosing on everything it touches.",
      "harmRung": "lethal",
      "functions": [
       "strike"
      ],
-     "gains": "deepen"
+     "gains": "deepen",
+     "_nameWas": "The Ender"
     }
    ],
    "functions": [
@@ -122,7 +125,9 @@
     }
    ],
    "plainly": "A fight/duel action that deals damage. It rolls 2d6 Ranks: rank 2 extends targets; rank 3 adds to special. Limit: force IS Force — it makes enemies and consequences.",
-   "_descriptionWas": "The violence-pole mastery: the martial disciplines honed to an art. Not fury — force made exact."
+   "_descriptionWas": "The violence-pole mastery: the martial disciplines honed to an art. Not fury — force made exact.",
+   "_nameWas": "The Edge",
+   "_idWas": "the_edge"
   },
   {
    "id": "stillcraft",
@@ -147,7 +152,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Held Room",
+     "name": "Held Room",
      "grants": "Halt a rising conflict before it breaks; read what each side truly needs; make yourself the still point a room organizes around.",
      "cannot": "Can't stop violence already loosed; the truly bent-on-blood pass through it.",
      "functions": [
@@ -158,11 +163,12 @@
      "_functionsWas": [
       "reveal",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Held Room"
     },
     {
      "rank": 2,
-     "name": "The Binding Truce",
+     "name": "Binding Truce",
      "grants": "Broker truces that HOLD — agreements weighted by your standing; bind two enemies to a peace neither wanted but both can live in; feel a truce start to fray before it snaps.",
      "cannot": "A truce is only as true as its terms; brokering a peace over an injustice buys time, not resolution — and Stillcraft knows the difference.",
      "functions": [
@@ -177,11 +183,12 @@
       "bind",
       "sustain",
       "shield"
-     ]
+     ],
+     "_nameWas": "The Binding Truce"
     },
     {
      "rank": 3,
-     "name": "The Long Peace",
+     "name": "Long Peace",
      "grants": "Hold a peace at the scale of peoples — end a generational feud, stand a war down, keep a Held Breath from letting out. The Stillhold's power in miniature; the counter-road to the Ender.",
      "cannot": "The wielder drifts peace-hot — and peace at all costs becomes the Stillhold's prison, a stillness that forecloses on justice to keep the quiet. A peace that suppresses is its own violence, delayed.",
      "functions": [
@@ -196,7 +203,8 @@
       "bind",
       "sustain",
       "shield"
-     ]
+     ],
+     "_nameWas": "The Long Peace"
     }
    ],
    "functions": [
@@ -301,7 +309,7 @@
     },
     {
      "rank": 2,
-     "name": "The Emptied Hand",
+     "name": "Emptied Hand",
      "grants": "Take the weapon rather than the life — cleanly, from a committed strike, without opening yourself.",
      "cannot": "An emptied hand is not an ended fight. Some fighters are worse without the weapon.",
      "functions": [
@@ -312,11 +320,12 @@
      "_functionsWas": [
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Emptied Hand"
     },
     {
      "rank": 3,
-     "name": "The Ended Fight",
+     "name": "Ended Fight",
      "grants": "End a fight by taking everything it needed to continue — the weapon, the footing, the will, in one motion.",
      "cannot": "It ends the fight, not the enmity. What you disarm today comes back better armed.",
      "functions": [
@@ -327,7 +336,8 @@
      "_functionsWas": [
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Ended Fight"
     }
    ],
    "powerSystem": "reach_violence_peace",
@@ -393,7 +403,7 @@
   },
   {
    "id": "calm_word",
-   "name": "The Calming Word",
+   "name": "Calming Word",
    "levelReq": 1,
    "energyCost": 4,
    "attribute": "social",
@@ -411,18 +421,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Calming Word",
+     "name": "Calming Word",
      "grants": "De-escalate one person or a small tense moment before it turns violent.",
      "cannot": "Small scale; the set-on-blood pass through it.",
      "functions": [
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Calming Word"
     },
     {
      "rank": 2,
-     "name": "The Cooling Word",
+     "name": "Cooling Word",
      "grants": "Cool a room off a violence it had already decided on — the raised hand comes down, unsure why.",
      "cannot": "It cools the heat, not the cause. What made them raise the hand is still sitting there.",
      "functions": [
@@ -430,11 +441,12 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Cooling Word"
     },
     {
      "rank": 3,
-     "name": "The Word That Lands",
+     "name": "Word That Lands",
      "grants": "Say the one thing that makes the violence impossible — the true word, aimed exactly, that they cannot go past.",
      "cannot": "You must actually find the true thing. The Stillhold's failure is a beautiful word that is not true, and everyone hears it.",
      "functions": [
@@ -443,7 +455,8 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Word That Lands"
     }
    ],
    "powerSystem": "reach_violence_peace",
@@ -499,11 +512,12 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/fight action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: iT Cools The Heat, Not The Cause — what made them raise the hand is still there."
+   "plainly": "A social/fight action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about 2 hours Ranks: rank 2 extends targets; rank 3 adds to special. Limit: iT Cools The Heat, Not The Cause — what made them raise the hand is still there.",
+   "_nameWas": "The Calming Word"
   },
   {
-   "id": "the_stand",
-   "name": "The Stand",
+   "id": "stand",
+   "name": "Stand",
    "levelReq": 2,
    "energyCost": 5,
    "attribute": "physical",
@@ -522,7 +536,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Stand",
+     "name": "Stand",
      "grants": "Stand firm protecting a spot or person; absorb an assault and keep the line.",
      "cannot": "Holds, doesn't advance; overwhelming force still breaks through.",
      "functions": [
@@ -530,11 +544,12 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Stand"
     },
     {
      "rank": 2,
-     "name": "The Held Line",
+     "name": "Held Line",
      "grants": "Hold a doorway, a bridge, a breach — and hold it against numbers, for longer than a body should.",
      "cannot": "Holding is not winning. The line you hold is still a line you are standing on when it fails.",
      "functions": [
@@ -542,11 +557,12 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Line"
     },
     {
      "rank": 3,
-     "name": "The Line That Holds",
+     "name": "Line That Holds",
      "grants": "The line does not break while you are on it. Others rally to it; it becomes the fact the fight bends around.",
      "cannot": "It bends around you — including everything aimed at you. Ask Kesh Ardent what the Edge That Holds has paid.",
      "functions": [
@@ -555,7 +571,8 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Line That Holds"
     }
    ],
    "powerSystem": "reach_violence_peace",
@@ -615,7 +632,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/survive action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 5 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: holds, Doesn'T Advance — overwhelming force still breaks through."
+   "plainly": "A fight/survive action that reduces incoming harm. Its strength is rated 5 out of 10 and absorbs 5 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 4 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: holds, Doesn'T Advance — overwhelming force still breaks through.",
+   "_nameWas": "The Stand",
+   "_idWas": "the_stand"
   },
   {
    "id": "broker_truce",
@@ -649,7 +668,7 @@
     },
     {
      "rank": 2,
-     "name": "The Kept Truce",
+     "name": "Kept Truce",
      "grants": "Broker a truce that HOLDS — bound to something both sides actually value, not merely agreed to.",
      "cannot": "A truce holds until one side's need outgrows what it was bound to. Then it holds nothing.",
      "functions": [
@@ -657,11 +676,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Kept Truce"
     },
     {
      "rank": 3,
-     "name": "The Binding Peace",
+     "name": "Binding Peace",
      "grants": "Bind a peace so well made that breaking it costs more than the war would — and both sides can see it.",
      "cannot": "You must find the thing they both value. Where no such thing exists, the Stillcraft has nothing to offer, and says so.",
      "functions": [
@@ -670,7 +690,8 @@
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Binding Peace"
     }
    ],
    "powerSystem": "reach_violence_peace",
@@ -728,8 +749,8 @@
    "plainly": "A social/fight action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 30 days Ranks: rank 2 deepens bindStrength; rank 3 adds to special. Limit: only AS True AS Its Terms — injustice buried buys time, not peace."
   },
   {
-   "id": "the_held_breath",
-   "name": "The Held Breath",
+   "id": "held_breath",
+   "name": "Held Breath",
    "levelReq": 4,
    "energyCost": 9,
    "attribute": "social",
@@ -747,7 +768,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Held Breath",
+     "name": "Held Breath",
      "grants": "Hold a razor's-edge standoff open — maximum threat, maximum restraint — by sheer presence.",
      "cannot": "Holds, doesn't end; exhausting; one slip and it looses.",
      "functions": [
@@ -756,11 +777,12 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Breath"
     },
     {
      "rank": 2,
-     "name": "The Long Breath",
+     "name": "Long Breath",
      "grants": "Hold the edge across many rather than a few, and long enough for something to actually change inside it — words exchanged, a party withdrawn, terms found. You can shape the standoff while holding it now, rather than only maintaining it.",
      "cannot": "It still holds rather than ends; nothing is resolved by the holding itself. Holding many is exhausting past ordinary limits. And one slip still looses everything at once — a larger held breath breaks larger.",
      "functions": [
@@ -769,7 +791,8 @@
       "shield"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Breath"
     }
    ],
    "powerSystem": "reach_violence_peace",
@@ -824,11 +847,13 @@
     }
    ],
    "plainly": "A duel, fight or social action. You hold a standoff open by presence alone — everyone armed, nobody moving — soaking 5 damage for up to six people while it stands. It does not resolve anything; it buys you the scene to resolve it in, and it ends when you stop paying. It is exhausting, costing energy every round. And one slip looses it: if you are struck, startled, or made to move, everything held breaks at once and the fight starts from where it was.",
-   "_descriptionWas": "The braid-craft: hold a moment where violence is total and peace is total in perfect tension — an armed grace."
+   "_descriptionWas": "The braid-craft: hold a moment where violence is total and peace is total in perfect tension — an armed grace.",
+   "_nameWas": "The Held Breath",
+   "_idWas": "the_held_breath"
   },
   {
    "id": "last_form",
-   "name": "The Last Form",
+   "name": "Last Form",
    "levelReq": 5,
    "energyCost": 10,
    "attribute": "physical",
@@ -845,7 +870,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Last Form",
+     "name": "Last Form",
      "grants": "End a formal duel in a single exchange — you have read them fully and answer perfectly, and the answer strikes them down.",
      "cannot": "Only against one committed opponent; a foe who refuses the form, or a chaos-fighter with no form to read, defeats it.",
      "functions": [
@@ -856,7 +881,8 @@
      "_functionsWas": [
       "strike",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Last Form"
     }
    ],
    "powerSystem": "reach_violence_peace",
@@ -909,7 +935,8 @@
     "reveal",
     "strike"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Last Form"
   },
   {
    "id": "soldiers_hand",
@@ -948,7 +975,7 @@
     },
     {
      "rank": 2,
-     "name": "The Counted Cost",
+     "name": "Counted Cost",
      "grants": "Keep two people functional through a sustained engagement; read a companion's condition in a glance and act correctly; turn a fight by putting someone back in it who should be down. Someone you put back in a fight does not merely return to it: they come back steadier and clearer than they were before they went down, because you have told them exactly what their body can still do.",
      "cannot": "You cannot heal what was never whole. The Soldier's Hand works on wounds, not on illness, curse, or damage from inside.",
      "functions": [
@@ -961,7 +988,8 @@
       "heal",
       "reveal",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Counted Cost"
     },
     {
      "rank": 3,
@@ -1097,7 +1125,7 @@
     },
     {
      "rank": 3,
-     "name": "The Marcher's Forge",
+     "name": "Marcher's Forge",
      "grants": "Turn a whole environment into an armory; improvise something with lasting utility — a barricade that holds, a sealed door, a weapon that outlives the fight it was made for. Arm a group from nothing.",
      "cannot": "The marcher makes weapons, not wonders. What comes from this is always recognizable as having been something else first.",
      "functions": [
@@ -1106,7 +1134,8 @@
       "shield"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Marcher's Forge"
     }
    ],
    "functions": [
@@ -1174,8 +1203,8 @@
    "plainly": "A fight/survive/explore action that deals damage. It rolls 2d6 Ranks: rank 2 extends improvisation; rank 3 adds to special. Limit: the Marcher Makes Weapons, Not Wonders."
   },
   {
-   "id": "the_weight",
-   "name": "The Weight",
+   "id": "weight",
+   "name": "Weight",
    "levelReq": 2,
    "energyCost": 5,
    "powerSystem": "reach_violence_peace",
@@ -1206,7 +1235,7 @@
     },
     {
      "rank": 2,
-     "name": "The Agreement",
+     "name": "Agreement",
      "grants": "Proactive extraction in a deliberate context — interrogation, negotiation, a formal demand. You are making someone do something they don't want to do, and they comply because the alternative is demonstrated. Not a spontaneous deterrence; a sustained, intentional pressure.",
      "cannot": "Compliance is not consent. The agreement holds as long as the marcher's presence does. The moment they find a way around you, they take it.",
      "functions": [
@@ -1214,7 +1243,8 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Agreement"
     },
     {
      "rank": 3,
@@ -1286,11 +1316,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/fight/duel action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 extends scope. Limit: it works IN The Moment violence is still a choice — past that point it is nothing."
+   "plainly": "A social/fight/duel action that strengthens someone. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 extends scope. Limit: it works IN The Moment violence is still a choice — past that point it is nothing.",
+   "_nameWas": "The Weight",
+   "_idWas": "the_weight"
   },
   {
-   "id": "the_advance",
-   "name": "The Advance",
+   "id": "advance",
+   "name": "Advance",
    "levelReq": 2,
    "energyCost": 4,
    "powerSystem": "reach_violence_peace",
@@ -1332,14 +1364,15 @@
     },
     {
      "rank": 3,
-     "name": "The Geometry",
+     "name": "Geometry",
      "grants": "Control a full field — move so that opponents find themselves in positions they did not choose, while you stand where you need to be; move a small group through an ambush without taking the loss.",
      "cannot": "The wielder drifts violence-hot. The Advance assumes a fight is always coming — and eventually it is right.",
      "functions": [
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Geometry"
     }
    ],
    "functions": [
@@ -1399,7 +1432,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/duel/chase action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 6. Ranks: rank 2 extends targets; rank 3 adds to special."
+   "plainly": "A fight/duel/chase action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 3 hours. Range is 6. Ranks: rank 2 extends targets; rank 3 adds to special.",
+   "_nameWas": "The Advance",
+   "_idWas": "the_advance"
   },
   {
    "id": "long_road",
@@ -1446,7 +1481,7 @@
     },
     {
      "rank": 3,
-     "name": "The Long Campaign",
+     "name": "Long Campaign",
      "grants": "Sustain a full group through extended hardship; plan resource management across days; outlast an opponent not by being stronger but by still being there when they are not.",
      "cannot": "Outlasting requires that something is over eventually. The Long Campaign is not a life — it is a duration. Even the marcher has a limit; this only extends it.",
      "functions": [
@@ -1454,7 +1489,8 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Campaign"
     }
    ],
    "functions": [
@@ -1518,8 +1554,8 @@
    "plainly": "A survive/explore action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about 3 days Ranks: rank 2 extends targets; rank 3 extends targets. Limit: not For Acute Crisis — this is days, not moments."
   },
   {
-   "id": "the_price_shown",
-   "name": "The Price Shown",
+   "id": "price_shown",
+   "name": "Price Shown",
    "levelReq": 2,
    "energyCost": 4,
    "powerSystem": "reach_violence_peace",
@@ -1539,7 +1575,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Reckoning",
+     "name": "Reckoning",
      "grants": "Show one person exactly what this violence will cost — the relationship, the person they become, the future they close. Reveal what is true and let it hinder them. Some people cannot go past it.",
      "cannot": "One person. Those who have made peace with the cost are unmoved.",
      "functions": [
@@ -1549,11 +1585,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Reckoning"
     },
     {
      "rank": 2,
-     "name": "The Room That Sees",
+     "name": "Room That Sees",
      "grants": "Extend to a whole situation — a crowd, a formation, everyone about to participate in something terrible. The truth lands in multiple people at once. The room sees what it was about to do.",
      "cannot": "A frightened crowd acts on the seeing. You do not control how they process it.",
      "functions": [
@@ -1563,11 +1600,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Room That Sees"
     },
     {
      "rank": 3,
-     "name": "The Unseen Thing",
+     "name": "Unseen Thing",
      "grants": "Make the reckoning complete and lasting. The person carries it — not a feeling, a settled knowledge they can't unthink. The violence becomes practically impossible for them because they cannot make it smaller than it is.",
      "cannot": "What you show has to be TRUE — a reckoning assembled from exaggeration collapses and takes your standing with it. And it does not come off: you have put something in a person that they will carry, and the Stillhold is clear that doing this to someone is an act of force, performed by people who have chosen not to use any other kind.",
      "functions": [
@@ -1578,7 +1616,8 @@
      "_functionsWas": [
       "reveal",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Unseen Thing"
     }
    ],
    "functions": [
@@ -1643,11 +1682,13 @@
     "hinder",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Price Shown",
+   "_idWas": "the_price_shown"
   },
   {
-   "id": "the_laid_ground",
-   "name": "The Laid Ground",
+   "id": "laid_ground",
+   "name": "Laid Ground",
    "levelReq": 2,
    "energyCost": 5,
    "powerSystem": "reach_violence_peace",
@@ -1667,7 +1708,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Marked Place",
+     "name": "Marked Place",
      "grants": "Designate a space as peace-ground while you are present: violence becomes harder here, not impossible. A neutral meeting room, a truce-fire camp, a single room carved out of a war.",
      "cannot": "The ward requires your presence and attention. It lapses when you leave.",
      "functions": [
@@ -1675,11 +1716,12 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Marked Place"
     },
     {
      "rank": 2,
-     "name": "The Held Ground",
+     "name": "Held Ground",
      "grants": "Inscribe the peace so it holds without you. Ward a space against the drift toward violence — it persists after you leave, anchored to the place itself. Make a treaty object that carries the ward with it.",
      "cannot": "It holds as long as no one actively breaks it. A determined party can, it simply costs them noticeably.",
      "functions": [
@@ -1687,11 +1729,12 @@
       "ward"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Ground"
     },
     {
      "rank": 3,
-     "name": "The Lasting Ground",
+     "name": "Lasting Ground",
      "grants": "Create a sanctuary that time-holds: peace woven into a place so deeply that it resists even sustained pressure. A neutral ground that survives wars around it. Others recognise it and come to it.",
      "cannot": "Making the ground does not make the peace. People have to want to keep coming. When they stop, it goes.",
      "functions": [
@@ -1700,7 +1743,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Lasting Ground"
     }
    ],
    "functions": [
@@ -1763,7 +1807,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/explore/survive action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 1 armour), and lasts for about 8 hours Ranks: rank 2 adds to autonomy; rank 3 extends duration. Limit: iT Holds AS Long AS NO One Actively Breaks IT — a determined breaker breaks it."
+   "plainly": "A social/explore/survive action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 3 harm per hit (rank 1 armour), and lasts for about 8 hours Ranks: rank 2 adds to autonomy; rank 3 extends duration. Limit: iT Holds AS Long AS NO One Actively Breaks IT — a determined breaker breaks it.",
+   "_nameWas": "The Laid Ground",
+   "_idWas": "the_laid_ground"
   },
   {
    "id": "step_between",
@@ -1799,7 +1845,7 @@
     },
     {
      "rank": 2,
-     "name": "The Living Line",
+     "name": "Living Line",
      "grants": "Draw a line with your body between two sides — not just one person but a confrontation. Bring a companion into the interposition. The two of you become the cost the violence has to accept.",
      "cannot": "Two people are not a wall. This is still presence and choice, not force.",
      "functions": [
@@ -1807,7 +1853,8 @@
       "shield"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Living Line"
     },
     {
      "rank": 3,
@@ -1916,7 +1963,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Clear Camp",
+     "name": "Clear Camp",
      "grants": "Establish temporary sanctuary: a camp, a room, a space that is genuinely safe and comfortable enough for rest and basic recovery. People can eat, sleep, heal naturally. It lasts while the conditions hold.",
      "cannot": "Temporary, and only as safe as you can make the surrounding situation.",
      "functions": [
@@ -1924,11 +1971,12 @@
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Clear Camp"
     },
     {
      "rank": 2,
-     "name": "The Known House",
+     "name": "Known House",
      "grants": "Create lasting sanctuary: a place that holds its quality without constant tending. A larger group can shelter here. Rest here heals because it is genuinely restful — the body trusts the space.",
      "cannot": "The sanctuary's quality depends on it remaining genuinely safe. If the peace breaks, the healing stops.",
      "functions": [
@@ -1936,11 +1984,12 @@
       "heal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Known House"
     },
     {
      "rank": 3,
-     "name": "The Open Table",
+     "name": "Open Table",
      "grants": "The ground itself sustains: a sanctuary so established that people know to seek it, that survivors find their way to it, that healing comes faster here because this place has a history of safety. A small institution of care.",
      "cannot": "Institutions require tending. What the Stillhold builds, others must maintain — or it becomes a ruin with a good reputation.",
      "functions": [
@@ -1948,7 +1997,8 @@
       "heal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Open Table"
     }
    ],
    "functions": [
@@ -2012,8 +2062,8 @@
   },
   {
    "schemaVersion": 1,
-   "id": "the_quieting",
-   "name": "The Quieting",
+   "id": "quieting",
+   "name": "Quieting",
    "levelReq": 4,
    "energyCost": 13,
    "powerSystem": "reach_violence_peace",
@@ -2032,7 +2082,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Quieting",
+     "name": "Quieting",
      "grants": "End one who has refused a truce and is mid-harm. Interposition that does not yield.",
      "cannot": "Anyone who has not refused a truce first. A struck-from-behind kill — this is face-on.",
      "functions": [
@@ -2040,11 +2090,12 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Quieting"
     },
     {
      "rank": 2,
-     "name": "The Held Field",
+     "name": "Held Field",
      "grants": "Do it in the middle of a fight without the fight closing on you — the field stays still around it.",
      "cannot": "Doing it twice in one place; the second time the room turns on you.",
      "functions": [
@@ -2052,7 +2103,8 @@
       "ward"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Held Field"
     }
    ],
    "challengeTypes": [
@@ -2102,11 +2154,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight attack available only against someone who has refused an offered truce — you must have made the offer first. It deals 4d6 plus 2 damage face-on and is meant to end the fight in one act. At rank 2 the surrounding fight does not close on you while you do it. Afterward you can never broker a truce again: that standing is spent permanently."
+   "plainly": "A fight attack available only against someone who has refused an offered truce — you must have made the offer first. It deals 4d6 plus 2 damage face-on and is meant to end the fight in one act. At rank 2 the surrounding fight does not close on you while you do it. Afterward you can never broker a truce again: that standing is spent permanently.",
+   "_nameWas": "The Quieting",
+   "_idWas": "the_quieting"
   },
   {
-   "id": "the_broken_quiet",
-   "name": "The Broken Quiet",
+   "id": "broken_quiet",
+   "name": "Broken Quiet",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_violence_peace",
@@ -2125,7 +2179,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Lid Lifted",
+     "name": "Lid Lifted",
      "grants": "Take the held tension in a room — the grudge, the fear, the swallowed rage, your own — and put it into one target at once. It strikes like a beam coming down: ribs break, breath goes, and whatever they were about to say goes with it.",
      "cannot": "IT MUST ALREADY BE THERE — the GM must be able to POINT AT SOMETHING SPECIFIC being held back in this scene: a grudge named, a fear shown, an order obeyed under protest, a hostility swallowed. If nothing can be pointed at, the craft does nothing. You cannot meter it — what was held is what arrives.",
      "functions": [
@@ -2136,11 +2190,12 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Lid Lifted"
     },
     {
      "rank": 2,
-     "name": "The Long Silence",
+     "name": "Long Silence",
      "grants": "Or hold it ON them instead — the same pressure applied as stillness, so they cannot move, cannot speak, cannot raise a hand, while you decide.",
      "cannot": "Holding costs continuously and everyone can see you doing it. The Stillhold does not forgive using the peace as a weapon in front of witnesses.",
      "functions": [
@@ -2152,11 +2207,12 @@
       "strike",
       "hinder",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Long Silence"
     },
     {
      "rank": 3,
-     "name": "The Hold Breaks",
+     "name": "Hold Breaks",
      "grants": "Everything the place was keeping down comes up at once, into whoever you name. A century of enforced quiet has weight and it arrives all together.",
      "cannot": "⚠ THE PEACE IS SPENT: whatever the GM pointed at is now LOOSE and acts — the grudge is taken, the fear breaks, the order is refused — and this craft cannot be used in this place again until something new is being held back. You have won a fight by ending a peace, and the Silent will come to see who did it.",
      "functions": [
@@ -2170,7 +2226,8 @@
       "hinder",
       "bind",
       "break"
-     ]
+     ],
+     "_nameWas": "The Hold Breaks"
     }
    ],
    "challengeTypes": [
@@ -2218,11 +2275,13 @@
     "hinder",
     "bind"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Broken Quiet",
+   "_idWas": "the_broken_quiet"
   },
   {
-   "id": "the_held_line",
-   "name": "The Held Line",
+   "id": "held_line",
+   "name": "Held Line",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_violence_peace",
@@ -2241,7 +2300,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Set Stance",
+     "name": "Set Stance",
      "grants": "Take a position and hold it. Those beside you steady; a wavering line stops wavering; a retreat becomes an orderly one. You are much harder to move than your size explains.",
      "cannot": "It steadies PEOPLE. Alone it is only good footing. And a line you do not believe in does not hold — Marchers have tested this and stopped arguing about it.",
      "functions": [
@@ -2250,11 +2309,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Set Stance"
     },
     {
      "rank": 2,
-     "name": "The Long Hold",
+     "name": "Long Hold",
      "grants": "Hold through a sustained press — hours, a night, repeated pushes. Those with you recover between as if they had rested more than they did.",
      "cannot": "You do not get that recovery. Holding is a debt you pay afterward, and Marchers are stiff and old before their time.",
      "functions": [
@@ -2264,11 +2324,12 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Hold"
     },
     {
      "rank": 3,
-     "name": "The Line That Held",
+     "name": "Line That Held",
      "grants": "The one everyone talks about afterward. A gate, a bridge, a pass, held past when it should have gone.",
      "cannot": "⚠ THE COST IS PAID IN FULL AT THE TIME. This rank is not survived by everyone who reaches it, and the March's honours are mostly posthumous. They think that is fine and say so.",
      "functions": [
@@ -2278,7 +2339,8 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Line That Held"
     }
    ],
    "challengeTypes": [
@@ -2317,11 +2379,13 @@
     }
    ],
    "plainly": "A fight/social action that holds a position and steadies everyone on it. Rated 6 of 10 across a scope of 2 for about eight hours.",
-   "_descriptionWas": "The Marchers' first craft and the reason the March exists: a line is people, and people hold when someone visibly will not move."
+   "_descriptionWas": "The Marchers' first craft and the reason the March exists: a line is people, and people hold when someone visibly will not move.",
+   "_nameWas": "The Held Line",
+   "_idWas": "the_held_line"
   },
   {
-   "id": "the_read_field",
-   "name": "The Read Field",
+   "id": "read_field",
+   "name": "Read Field",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_violence_peace",
@@ -2340,7 +2404,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Ground Read",
+     "name": "Ground Read",
      "grants": "Look at terrain and know its fight: chokepoints, dead angles, where footing fails, which line is holdable with what you have.",
      "cannot": "It reads GROUND, not enemies. Numbers, morale and surprise are yours to find elsewhere. And it needs open enough country — a stairwell is not a field.",
      "functions": [
@@ -2351,11 +2415,12 @@
      "_functionsWas": [
       "foresee",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Ground Read"
     },
     {
      "rank": 2,
-     "name": "The Chosen Ground",
+     "name": "Chosen Ground",
      "grants": "Read several approaches and pick — where to meet them, where to be found, where to make them come to you.",
      "cannot": "Choosing ground means committing to it, and an enemy who declines the ground you chose has taken the first exchange without a blow.",
      "functions": [
@@ -2367,11 +2432,12 @@
       "foresee",
       "reveal",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Chosen Ground"
     },
     {
      "rank": 3,
-     "name": "The Whole Field",
+     "name": "Whole Field",
      "grants": "A region's fight read at once — passes, fords, the three farms that will burn, the one road that decides it.",
      "cannot": "⚠ YOU WILL SEE WHICH PLACES CANNOT BE HELD, and which people are in them. The March's hardest work is not fighting; it is choosing what to leave.",
      "functions": [
@@ -2383,7 +2449,8 @@
       "foresee",
       "reveal",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Whole Field"
     }
    ],
    "challengeTypes": [
@@ -2427,10 +2494,13 @@
     "foresee",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Read Field",
+   "_idWas": "the_read_field"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

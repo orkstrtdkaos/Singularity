@@ -5,8 +5,8 @@
  "note": "⛔ SNG-450 MIND BATCH 1 — MERGED ABILITIES. Three skills replacing seven, per Erik's review.\n⚠️ THE MERGE TEST WAS FLAVOUR-DUPLICATION AT IDENTICAL STATS: The Clear Path / Derived Route / Patterned Way were all L2, mag4, energy 1, with the same three-rank arc and only the noun changed (calculating / reasoning / pattern). The Correct Protocol / Restored Form were both L2, 2d4, energy 2, same arc. The Stated Case / Necessary Case did the same job at different costs.\n⛔ FLAVOUR IS NOW INTERNAL — each carries a `sectFlavour` map so a cogitant, syllogist and figurist describe the same craft in their own terms without it being three entries.",
  "abilities": [
   {
-   "id": "the_solved_route",
-   "name": "The Solved Route",
+   "id": "solved_route",
+   "name": "Solved Route",
    "levelReq": 2,
    "energyCost": 1,
    "attribute": "mental",
@@ -33,18 +33,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Route",
+     "name": "Route",
      "functions": [
       "move"
      ],
      "grants": "Find and walk the fastest safe line through any space you can observe. You do not backtrack and you do not get lost.",
      "cannot": "Only what you can see or have been described. Does not make you faster, only better-directed.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Route"
     },
     {
      "rank": 2,
-     "name": "The Moving Space",
+     "name": "Moving Space",
      "functions": [
       "move",
       "travel"
@@ -52,11 +53,12 @@
      "grants": "⛔ THE SPACE IS NOW ALLOWED TO MOVE. Cross a shifting one — a crowd, a patrol, a running fight — without friction, staying two steps ahead of everyone in it. Adds unseen ground: derive the route through terrain you have not entered.",
      "cannot": "Cannot route around what you have no information about at all.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Moving Space"
     },
     {
      "rank": 3,
-     "name": "The Designed Scene",
+     "name": "Designed Scene",
      "functions": [
       "move",
       "travel"
@@ -74,7 +76,8 @@
       "targets",
       "conditions"
      ],
-     "_rebalance": "⚠️ Was scope-only ('as though you laid it out'). Targets + conditions is the same fiction with a mechanical edge."
+     "_rebalance": "⚠️ Was scope-only ('as though you laid it out'). Targets + conditions is the same fiction with a mechanical edge.",
+     "_nameWas": "The Designed Scene"
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Clear Path (cogitant), The Derived Route (syllogist) and The Patterned Way (figurist) — three skills at the same level, same magnitude, same energy, same three-rank arc, differing only in the noun. Erik: 'yes on the nav skills.' Flavour is now internal.",
@@ -107,11 +110,14 @@
     }
    ],
    "traditionV2": "Mind",
-   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
+   "_idWas": "the_solved_route",
+   "_nameWas": "The Solved Route",
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
   },
   {
-   "id": "the_correct_restoration",
-   "name": "The Correct Restoration",
+   "id": "physicians_tome",
+   "name": "Physician's Tome",
    "levelReq": 2,
    "energyCost": 2,
    "attribute": "mental",
@@ -159,7 +165,7 @@
     },
     {
      "rank": 2,
-     "name": "The Full Sequence",
+     "name": "Full Sequence",
      "functions": [
       "heal",
       "restore",
@@ -168,7 +174,8 @@
      "grants": "⚠️ A BIG HEAL. The whole correct sequence, in order, nothing left out — they get up, and they can fight or walk today.",
      "cannot": "Cannot regrow what is gone; cannot work on what you cannot examine.",
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Full Sequence"
     },
     {
      "rank": 3,
@@ -234,7 +241,10 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "traditionV2": "Mind",
-   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
+   "_idWas": "the_correct_restoration",
+   "_nameWas": "The Correct Restoration",
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
   },
   {
    "id": "case_closed",
@@ -265,18 +275,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Matter Settled",
+     "name": "Matter Settled",
      "functions": [
       "persuade"
      ],
      "grants": "Set a matter out to people willing to follow. A dispute resolves, a council decides, a wrong belief comes apart — and nobody is humiliated, which is why it holds.",
      "cannot": "⛔ THEY MUST BE WILLING TO FOLLOW. Does nothing to someone who will not engage.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Matter Settled"
     },
     {
      "rank": 2,
-     "name": "The Case That Keeps",
+     "name": "Case That Keeps",
      "functions": [
       "persuade",
       "empower"
@@ -284,7 +295,8 @@
      "grants": "⚠️ ADDS DURATION AND ABSENCE. Build it to last — written, taught, left behind. It goes on convincing after you have gone, and someone else can carry it.",
      "cannot": "Cannot be built against a matter you do not actually understand.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Case That Keeps"
     },
     {
      "rank": 3,
@@ -332,7 +344,8 @@
     }
    ],
    "traditionV2": "Mind",
-   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."

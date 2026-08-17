@@ -10,7 +10,7 @@
    "levelReq": 2,
    "energyCost": 1,
    "attribute": "mental",
-   "tradition": "Mind",
+   "tradition": "cogitant",
    "nativeOrCombination": "native",
    "powerSystem": "metaphysical",
    "shape": "reposition",
@@ -95,7 +95,9 @@
      "text": "holding the route occupies your attention while you walk it",
      "class": "cost"
     }
-   ]
+   ],
+   "traditionV2": "Mind",
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
   },
   {
    "id": "the_correct_restoration",
@@ -103,7 +105,7 @@
    "levelReq": 2,
    "energyCost": 2,
    "attribute": "mental",
-   "tradition": "Mind",
+   "tradition": "syllogist",
    "nativeOrCombination": "native",
    "powerSystem": "metaphysical",
    "shape": "healing",
@@ -209,7 +211,9 @@
     "restore",
     "mend"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "traditionV2": "Mind",
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
   },
   {
    "id": "case_closed",
@@ -217,7 +221,7 @@
    "levelReq": 1,
    "energyCost": 4,
    "attribute": "social",
-   "tradition": "Mind",
+   "tradition": "syllogist",
    "nativeOrCombination": "native",
    "powerSystem": "metaphysical",
    "shape": "setup",
@@ -305,7 +309,9 @@
      "text": "the time and standing you spend making it",
      "class": "cost"
     }
-   ]
+   ],
+   "traditionV2": "Mind",
+   "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field."
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."

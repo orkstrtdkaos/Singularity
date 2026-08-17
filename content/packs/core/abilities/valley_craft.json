@@ -328,12 +328,12 @@
      "grants": "Halt a brewing fight long enough for words; read what each party actually wants beneath what they're saying.",
      "cannot": "Doesn't work mid-violence; can't make anyone accept — only opens the door.",
      "functions": [
+      "bargain",
       "bind"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_functionsWas": [
-      "reveal",
       "bind"
      ],
      "gainAxes": []
@@ -382,6 +382,7 @@
     }
    ],
    "functions": [
+    "bargain",
     "bind",
     "command"
    ],
@@ -443,10 +444,10 @@
    "plainly": "A social action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: cannot broker What One Side Truly Cannot Give.",
    "_functionsWas": [
     "bind",
-    "command",
-    "reveal"
+    "command"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. 'De-escalate, arbitrate, and find the shape of a deal both sides can live with.'\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
   },
   {
    "id": "tinkers_hand",

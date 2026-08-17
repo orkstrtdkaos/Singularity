@@ -25,14 +25,9 @@
    "operativeAxis": "body_mind",
    "intensity": "severe",
    "mechanic": {
-    "dice": {
-     "n": 4,
-     "d": 6
-    },
-    "plus": 0,
-    "range": 10,
-    "targets": 1,
-    "marginFloorPer": 0.02
+    "magnitude": 7,
+    "duration": 4,
+    "scope": 2
    },
    "challengeTypes": [
     "SOCIAL",
@@ -57,7 +52,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/duel action that binds a target. It rolls 4d6. Range is 10. Ranks: more of the target's true names, deeper the hold.",
+   "plainly": "A social/duel action that binds a target. Its strength is rated 7 out of 10.",
    "functions": [
     "bind",
     "command",
@@ -128,7 +123,18 @@
    "_taxonomyNote": "⛔ SNG-458. `tradition` holds the LIVE pole id; `traditionV2` holds the proposed 14-tradition name. ⚠️ I had authored these with tradition='Mind', which does not exist in traditions.json yet — so they were INVISIBLE to every count I ran. Erik: 'label them how you need to, as long as you know how to correct them at the end.' ⛔ AT MIGRATION: swap tradition ← traditionV2 and drop this field.",
    "_idWas": "the_names_they_answer_to",
    "_nameWas": "The Names They Answer To",
-   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
+   "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do.",
+   "_mechanicWas": {
+    "dice": {
+     "n": 4,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 10,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "_diceStrip": "⛔ SNG-471, CCODE Q1: `mechanic.dice` IS consumed — craftmechanics.mechanicFor → rollMagnitude → skill_battle.js:798 — ⚠️ BUT THE GUARD IS `shape === 'damage'`, and only `damage` and `strike` resolve to it. `hobble` and `hinder` DO NOT.\n⛔ SO THIS CRAFT AUTHORED 4d6 THAT NOTHING WOULD EVER ROLL. Erik's shape is right — a hold is not damage — so the DICE GO, not the shape. ⚠️ CCode: 'I would not widen the guard silently — \"this craft does 4d6 of hold\" is a different claim about the world.' AGREED."
   },
   {
    "id": "mind_meld",

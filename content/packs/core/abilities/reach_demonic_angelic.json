@@ -158,6 +158,7 @@
     "falsehood_truth": 0.2
    },
    "functions": [
+    "bargain",
     "bind",
     "foresee",
     "reveal"
@@ -172,6 +173,7 @@
      "grants": "Name what a thing will truly cost the person who wants it. They may still take it.",
      "cannot": "Naming the price does not stop them. It only means they cannot say they were not told.",
      "functions": [
+      "bargain",
       "reveal"
      ],
      "gains": "broaden",
@@ -279,7 +281,8 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Offered Price",
-   "_idWas": "the_offered_price"
+   "_idWas": "the_offered_price",
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ 'Name the true price of a thing someone wants — exactly, honestly, including the part they were hoping you would not mention.' That is a BARGAIN and it was tagged bind/foresee/reveal.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
   },
   {
    "id": "ascent",
@@ -705,6 +708,7 @@
    "notFor": [],
    "tradition": "abyssal",
    "functions": [
+    "bargain",
     "break",
     "heal",
     "restore"
@@ -721,11 +725,15 @@
      "grants": "Offer a wound, pain, or carried weight to the deep — the abyss will take it. The wound goes with it.",
      "cannot": "Anything rank 2 adds — not healed in the ordinary sense — gone; IT REMOVES, IT DOES NOT MEND.",
      "functions": [
+      "bargain",
       "heal"
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "gainAxes": []
+     "gainAxes": [],
+     "_functionsWas": [
+      "heal"
+     ]
     },
     {
      "rank": 2,
@@ -807,7 +815,13 @@
    ],
    "plainly": "A medical/magical/hardship action that restores health. It rolls 2d4+2 It affects 1 target Ranks: rank 2 deepens removal; rank 3 extends targets. Limit: iT Removes, IT Does Not Mend — what is eaten is Gone.",
    "_nameWas": "The Consumed Wound",
-   "_idWas": "the_consumed_wound"
+   "_idWas": "the_consumed_wound",
+   "_functionsWas": [
+    "break",
+    "heal",
+    "restore"
+   ],
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ 'Offer a wound or pain to the deep — it will be taken.' An exchange with a price.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
   },
   {
    "id": "dread_mantle",
@@ -1855,6 +1869,7 @@
     "demonic_angelic": -0.6
    },
    "functions": [
+    "bargain",
     "bind",
     "command"
    ],
@@ -1868,13 +1883,18 @@
      "grants": "Bind a willing-if-they-knew-it party to a lasting pact that shapes their choices toward your end.",
      "cannot": "It cannot compel the truly unwilling, it frays when spoken plainly by a witness, and every covenant you set is a thread that runs both ways — they are bound to you, and you to the keeping of it.",
      "functions": [
-      "command",
-      "bind"
+      "bargain",
+      "bind",
+      "command"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_nameWas": "The Deep Covenant",
-     "gainAxes": []
+     "gainAxes": [],
+     "_functionsWas": [
+      "command",
+      "bind"
+     ]
     },
     {
      "rank": 2,
@@ -1943,7 +1963,12 @@
    "plainly": "A social action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about 30 days Ranks: rank 2 extends scope. Limit: ⚠️ IT Needs A Lever — a want, a debt, a person they will not lose. The unwilling with Nothing to lose are genuinely outside it, and they are rarer than anyone hopes.",
    "_descriptionWas": "The Abyssal art of the binding pact — a covenant offered so precisely to the hollow in someone that refusing it feels like refusing themselves. Not domination. Invitation, with a hook already set.",
    "_nameWas": "The Deep Covenant",
-   "_idWas": "the_deep_covenant"
+   "_idWas": "the_deep_covenant",
+   "_functionsWas": [
+    "bind",
+    "command"
+   ],
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. binds a party to a lasting pact — a bargain with the hook already set\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
   },
   {
    "schemaVersion": 1,
@@ -2304,6 +2329,7 @@
     "appetite_judgement": -0.7
    },
    "functions": [
+    "bargain",
     "bind",
     "command",
     "reveal"
@@ -2318,13 +2344,18 @@
      "grants": "Find the one thing a person will not risk, and price a demand against it. They comply.",
      "cannot": "You must find a real lever. A guess that misses tells them exactly what you were reaching for.",
      "functions": [
-      "reveal",
-      "bind"
+      "bargain",
+      "bind",
+      "reveal"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_nameWas": "The Lever",
-     "gainAxes": []
+     "gainAxes": [],
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
     },
     {
      "rank": 2,
@@ -2417,7 +2448,13 @@
    "_nameWas": "The Lever",
    "_idWas": "the_lever",
    "sense": true,
-   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. finds what a person cannot give up\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. finds what a person cannot give up\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify.",
+   "_functionsWas": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ finds what a person cannot give up, then trades on it\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
   },
   {
    "schemaVersion": 1,
@@ -2751,6 +2788,7 @@
     "falsehood_truth": 0.3
    },
    "functions": [
+    "bargain",
     "strike"
    ],
    "narrationHints": "You offer terms that are genuinely good and genuinely costly, they take them, and the cost lands. No trick, no fine print — the harm was named aloud and accepted, which is the whole craft.",
@@ -2763,13 +2801,13 @@
      "grants": "Name a real exchange to someone who wants something — a passage, a name, a wound closed — with a real cost attached. If they accept, they get the thing and pay the price, and the price can be a way out of the fight for you.",
      "cannot": "REFUSAL ENDS IT — there is no forcing this, and the cautious simply walk. You must DELIVER what you promised, exactly. And you have to have something they actually want.",
      "functions": [
+      "bargain",
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
      "_functionsWas": [
-      "strike",
-      "bind"
+      "strike"
      ],
      "gainAxes": []
     },
@@ -2859,12 +2897,12 @@
    "_backlashRungNote": "SNG-359: DELIBERATELY NO RUNG — declared, not omitted. the failure is a DEBT — you owe what you promised, by the Bargainers' own rule. Enforced socially, not physically. ⚠️ A gate should assert this list is DECLARED rather than empty, the same way runtime_unwired works.",
    "_descriptionWas": "The Bargainers' first offense, and the only one on the circle that requires the target's agreement: an attack you cannot make on someone who says no.",
    "_functionsWas": [
-    "strike",
-    "bind"
+    "strike"
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_nameWas": "The Struck Term",
-   "_idWas": "the_struck_term"
+   "_idWas": "the_struck_term",
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ THE SHARPEST CASE — 'name a real exchange to someone who wants something, with a real cost attached' was tagged `strike`. A NEGOTIATION FILED AS AN ATTACK.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
   },
   {
    "id": "offered_mouth",
@@ -3348,9 +3386,10 @@
     "falsehood_truth": 0.4
    },
    "functions": [
-    "make",
+    "bargain",
     "bind",
-    "empower"
+    "empower",
+    "make"
    ],
    "narrationHints": "You name what a thing will truly cost — to you, to them, to whoever is not in the room — and having named it, you can deliver it exactly. No trick is the trick. The Bargainers are trusted in the foothills because they are.",
    "description": "State the full cost of a thing aloud, including the parts everyone was politely not mentioning — and having named it, deliver it exactly. Deals close that were stuck, or die honestly. The Bargainers' making-craft, and the reason anyone sits at their table twice.",
@@ -3362,13 +3401,18 @@
      "grants": "State the full cost of a thing aloud, including the parts everyone was politely not mentioning. Deals close that were stuck, or die honestly instead of curdling for a season.",
      "cannot": "It must be THE TRUE PRICE. Understate it to close and the craft fails publicly and permanently for you. It does not make anyone AGREE — it makes agreement possible.",
      "functions": [
-      "make",
-      "bind"
+      "bargain",
+      "bind",
+      "make"
      ],
      "gains": "broaden",
      "harmRung": "none",
      "_nameWas": "The Price Named",
-     "gainAxes": []
+     "gainAxes": [],
+     "_functionsWas": [
+      "make",
+      "bind"
+     ]
     },
     {
      "rank": 2,
@@ -3442,7 +3486,13 @@
    "plainly": "A social/puzzle action that names a thing's true cost so a deal can be made. Rated 5 of 10 across a scope of 2 for about two days.",
    "_descriptionWas": "The Bargainers' making-craft, and the reason anyone sits at their table twice.",
    "_nameWas": "The Honest Price",
-   "_idWas": "the_honest_price"
+   "_idWas": "the_honest_price",
+   "_functionsWas": [
+    "make",
+    "bind",
+    "empower"
+   ],
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⛔ 'State the full cost of a thing aloud, including the parts everyone was politely not mentioning — and deliver it exactly.' The Bargainers' making-craft.\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
   },
   {
    "id": "weighed_word",

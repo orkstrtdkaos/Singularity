@@ -28,7 +28,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Weighed Thing",
+     "name": "Weighed Thing",
      "grants": "Know a thing's true weight, material, soundness and worth by touch — no lie of appearance survives your hand.",
      "cannot": "It tells you what a thing IS, never what it means or what it is for.",
      "functions": [
@@ -38,11 +38,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Weighed Thing"
     },
     {
      "rank": 2,
-     "name": "The Set Stone",
+     "name": "Set Stone",
      "grants": "Set a thing so it STAYS — a wall, a joint, a boundary, a claim. What you set does not shift, sag, or come apart.",
      "cannot": "What is set is hard to un-set, including by you, including when you were wrong to set it.",
      "functions": [
@@ -55,11 +56,12 @@
       "reveal",
       "make",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Set Stone"
     },
     {
      "rank": 3,
-     "name": "The Denial",
+     "name": "Denial",
      "grants": "Deny an abstraction purchase on the real: illusion, glamour, symbol-working and figure all simply fail in your presence. The thing is what it is.",
      "cannot": "It denies the abstract INDISCRIMINATELY — including meanings you needed, including a Figurist ally's working, including hope.",
      "functions": [
@@ -74,7 +76,8 @@
       "make",
       "bind",
       "shield"
-     ]
+     ],
+     "_nameWas": "The Denial"
     }
    ],
    "gated": "learned",
@@ -145,8 +148,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_plain_fact",
-   "name": "The Plain Fact",
+   "id": "plain_fact",
+   "name": "Plain Fact",
    "levelReq": 3,
    "energyCost": 5,
    "powerSystem": "reach_concrete_abstract",
@@ -165,7 +168,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Plain Fact",
+     "name": "Plain Fact",
      "grants": "Cut through a rhetorical or symbolic working to the concrete fact beneath, out loud, and make it land.",
      "cannot": "Some abstractions are TRUE. Reducing them does not unmake them; it only makes you look small when it fails.",
      "functions": [
@@ -175,11 +178,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Plain Fact"
     },
     {
      "rank": 2,
-     "name": "The Bedrock",
+     "name": "Bedrock",
      "grants": "Reduce an argument, a glamour, or a doctrine to its physical basis — and if it has none, that becomes visible to all.",
      "cannot": "A doctrine with no physical basis is not thereby false. The Masons lose this argument to the Figurists roughly every generation.",
      "functions": [
@@ -189,11 +193,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Bedrock"
     },
     {
      "rank": 3,
-     "name": "The Only Real",
+     "name": "Only Real",
      "grants": "In your presence the touchable simply IS the real, and abstraction cannot get purchase — no symbol acts, no figure walks.",
      "cannot": "You have made a world where nothing means anything. Some people find that a relief, and the ones who do worry the Masons most.",
      "functions": [
@@ -204,7 +209,8 @@
      "_functionsWas": [
       "reveal",
       "ward"
-     ]
+     ],
+     "_nameWas": "The Only Real"
     }
    ],
    "gated": "learned",
@@ -269,7 +275,9 @@
     "reveal",
     "ward"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Plain Fact",
+   "_idWas": "the_plain_fact"
   },
   {
    "id": "formcraft",
@@ -294,7 +302,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Pattern Eye",
+     "name": "Pattern Eye",
      "grants": "See the pattern, symbol, or structure a thing is an instance OF — the form behind the fact.",
      "cannot": "Seeing a form does not give you power over its instance. Not yet.",
      "functions": [
@@ -304,11 +312,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Pattern Eye"
     },
     {
      "rank": 2,
-     "name": "The Figure",
+     "name": "Figure",
      "grants": "Make a symbol that ACTS — a mark, a shape, a figure that does in the world what it means.",
      "cannot": "A figure does what it MEANS, not what you wanted it to mean. Be precise, or be surprised.",
      "functions": [
@@ -321,11 +330,12 @@
       "reveal",
       "make",
       "deceive"
-     ]
+     ],
+     "_nameWas": "The Figure"
     },
     {
      "rank": 3,
-     "name": "The Argument Made Real",
+     "name": "Argument Made Real",
      "grants": "Build an idea into the world so completely that it becomes a fact others must move around — a rule, a boundary, a truth-in-effect.",
      "cannot": "The Masons can deny it. Reality can, eventually, decline. And a made truth that was never true rots from the inside.",
      "functions": [
@@ -340,7 +350,8 @@
       "make",
       "deceive",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Argument Made Real"
     }
    ],
    "gated": "learned",
@@ -410,8 +421,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_walking_figure",
-   "name": "The Walking Figure",
+   "id": "walking_figure",
+   "name": "Walking Figure",
    "levelReq": 3,
    "energyCost": 7,
    "powerSystem": "reach_concrete_abstract",
@@ -431,7 +442,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Sent Figure",
+     "name": "Sent Figure",
      "grants": "⛔ SEND A FIGURE TO A PLACE YOU KNOW. It arrives and DOES ONE NAMED THING — bars a door, warns a person, marks a passage, holds a threshold — then ends.",
      "cannot": "One thing, one place you have seen. It cannot improvise and it cannot fight.",
      "functions": [
@@ -439,11 +450,12 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Sent Figure"
     },
     {
      "rank": 2,
-     "name": "The Figure That Stays",
+     "name": "Figure That Stays",
      "grants": "⚠️ ADDS PERSISTENCE AND REPORT. The ward, the watch or the rule holds after you have gone — and you know when it fires and roughly what tripped it.",
      "cannot": "It holds until broken or until the season turns. A determined breaker can still break the mark.",
      "functions": [
@@ -452,11 +464,12 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Figure That Stays"
     },
     {
      "rank": 3,
-     "name": "The Figure That Judges",
+     "name": "Figure That Judges",
      "grants": "⛔ ADDS JUDGEMENT. Give it INTENT rather than instruction — 'let no one through who is carrying steel' becomes 'let no one through who means her harm' — and it decides the cases you did not foresee.",
      "cannot": "⚠️ A FIGURE THAT INTERPRETS CAN INTERPRET WRONGLY, and it will not check with you first.",
      "functions": [
@@ -465,7 +478,8 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Figure That Judges"
     }
    ],
    "gated": "learned",
@@ -576,7 +590,9 @@
      ]
     }
    ],
-   "_rewritten": "⛔ SNG-457. The old text was 'carry a meaning somewhere' / 'the figure persists' / 'adapts its meaning' — ⚠️ 'CARRY A MEANING' IS NOT A GAME ACTION and a player could not say what happens. ⛔ WHAT IT REACHES FOR IS THE ONE THING NO OTHER MIND SKILL DOES: ACT SOMEWHERE YOU ARE NOT. The Named Exclusion is a static mark where you stand; this GOES, and at r3 it DECIDES. Erik: 'I like your rewrite and it's a good summon skill. Keep it.'"
+   "_rewritten": "⛔ SNG-457. The old text was 'carry a meaning somewhere' / 'the figure persists' / 'adapts its meaning' — ⚠️ 'CARRY A MEANING' IS NOT A GAME ACTION and a player could not say what happens. ⛔ WHAT IT REACHES FOR IS THE ONE THING NO OTHER MIND SKILL DOES: ACT SOMEWHERE YOU ARE NOT. The Named Exclusion is a static mark where you stand; this GOES, and at r3 it DECIDES. Erik: 'I like your rewrite and it's a good summon skill. Keep it.'",
+   "_nameWas": "The Walking Figure",
+   "_idWas": "the_walking_figure"
   },
   {
    "id": "sound_repair",
@@ -711,8 +727,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_set_word",
-   "name": "The Set Word",
+   "id": "set_word",
+   "name": "Set Word",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -754,7 +770,7 @@
     },
     {
      "rank": 2,
-     "name": "The Word That Holds",
+     "name": "Word That Holds",
      "grants": "Make an agreement or declaration that sticks — not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so.",
      "cannot": "Anything rank 3 adds — name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against; IT IS SOLIDITY, NOT ELOQUENCE.",
      "functions": [
@@ -762,7 +778,8 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Word That Holds"
     },
     {
      "rank": 3,
@@ -818,11 +835,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/negotiation/leadership action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: iT IS Solidity, Not Eloquence — a mason who is Wrong lands just as hard and is just as wrong."
+   "plainly": "A social/negotiation/leadership action that strengthens someone. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: iT IS Solidity, Not Eloquence — a mason who is Wrong lands just as hard and is just as wrong.",
+   "_nameWas": "The Set Word",
+   "_idWas": "the_set_word"
   },
   {
-   "id": "the_near_way",
-   "name": "The Near Way",
+   "id": "near_way",
+   "name": "Near Way",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -853,7 +872,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Seam",
+     "name": "Seam",
      "grants": "Find the gap, the loose stone, the door that's always in the structure — the mason knows how things are built and knows where they open.",
      "cannot": "Anything rank 2 adds — move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material; BUILT structures only.",
      "functions": [
@@ -864,7 +883,8 @@
      "_functionsWas": [
       "reveal",
       "open"
-     ]
+     ],
+     "_nameWas": "The Seam"
     },
     {
      "rank": 2,
@@ -885,7 +905,7 @@
     },
     {
      "rank": 3,
-     "name": "The Way In",
+     "name": "Way In",
      "grants": "In any built structure, find or make the passage. Not by brute force — by knowing exactly where the material wants to open.",
      "cannot": "Nothing further; this is the craft's ceiling; BUILT structures only; and it still costs what it costs: what you open, you have OPENED.",
      "functions": [
@@ -900,7 +920,8 @@
       "open",
       "move",
       "make"
-     ]
+     ],
+     "_nameWas": "The Way In"
     }
    ],
    "nativeOrCombination": "native",
@@ -952,11 +973,13 @@
     "open",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Near Way",
+   "_idWas": "the_near_way"
   },
   {
-   "id": "the_long_haul",
-   "name": "The Long Haul",
+   "id": "long_haul",
+   "name": "Long Haul",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -997,7 +1020,7 @@
     },
     {
      "rank": 2,
-     "name": "The Steady Pace",
+     "name": "Steady Pace",
      "grants": "Sustain useful work across a long haul without the degradation that hits others — the quality doesn't fall, the pace doesn't drop, the hand stays true.",
      "cannot": "Anything rank 3 adds — continue until the work is finished, regardless of what the body says; it sustains WORK, not rest.",
      "functions": [
@@ -1005,7 +1028,8 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Steady Pace"
     },
     {
      "rank": 3,
@@ -1060,12 +1084,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it sustains Work, not rest — there is no version of this that restores you."
+   "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: it sustains Work, not rest — there is no version of this that restores you.",
+   "_nameWas": "The Long Haul",
+   "_idWas": "the_long_haul"
   },
   {
    "schemaVersion": 1,
-   "id": "the_keystone_blow",
-   "name": "The Keystone Blow",
+   "id": "keystone_blow",
+   "name": "Keystone Blow",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "reach_concrete_abstract",
@@ -1084,7 +1110,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Keystone Blow",
+     "name": "Keystone Blow",
      "grants": "Find and strike a structure's single load-bearing point, bringing the whole down with one blow.",
      "cannot": "It works only on made structures with a true keystone, it fails on distributed loads, and a thing brought down cannot be un-broken — you understood it in order to end it.",
      "functions": [
@@ -1092,11 +1118,12 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Keystone Blow"
     },
     {
      "rank": 2,
-     "name": "The Made Keystone",
+     "name": "Made Keystone",
      "grants": "Where there is no true keystone, make one — a sequence of lesser strikes that manufactures the single load-bearing point, then takes it. Distributed loads no longer refuse you, and the scale rises from a structure to a span: a bridge, a gatehouse, a curtain wall.",
      "cannot": "Manufacturing a keystone takes time and cover the moment rarely gives. Still the made, never the living or the grown. And a span brought down takes everything under it — the Masons hold you answerable for what was standing there, and they keep records.",
      "functions": [
@@ -1104,7 +1131,8 @@
       "reveal"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Made Keystone"
     }
    ],
    "gated": "learned",
@@ -1152,12 +1180,14 @@
     }
    ],
    "plainly": "A fight/investigate action that deals damage. It rolls 4d6+2 Ranks: rank 2 adds to special. Limit: it works only on Made Structures with a true keystone at r1.",
-   "_descriptionWas": "The Mason art of the keystone blow — reading a made structure to its single load-bearing truth and striking exactly there, so the whole comes down for the cost of one perfect blow. To break well is to understand first."
+   "_descriptionWas": "The Mason art of the keystone blow — reading a made structure to its single load-bearing truth and striking exactly there, so the whole comes down for the cost of one perfect blow. To break well is to understand first.",
+   "_nameWas": "The Keystone Blow",
+   "_idWas": "the_keystone_blow"
   },
   {
    "schemaVersion": 1,
-   "id": "the_unmaking_of_walls",
-   "name": "The Unmaking of Walls",
+   "id": "unmaking_of_walls",
+   "name": "Unmaking of Walls",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_concrete_abstract",
@@ -1175,14 +1205,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Unmaking of Walls",
+     "name": "Unmaking of Walls",
      "grants": "Unmake a whole built structure back to its raw, un-built material.",
      "cannot": "It touches only the made, it costs nearly all you have, and it CANNOT be undone — the ones who understand building are the ones who feel the unmaking most.",
      "functions": [
       "break"
      ],
      "harmRung": "damaging",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Unmaking of Walls"
     }
    ],
    "gated": "learned",
@@ -1228,12 +1259,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight action that deals damage. It rolls 5d6+6 across a scope of 4 Limit: iT Touches Only The Made."
+   "plainly": "A fight action that deals damage. It rolls 5d6+6 across a scope of 4 Limit: iT Touches Only The Made.",
+   "_nameWas": "The Unmaking of Walls",
+   "_idWas": "the_unmaking_of_walls"
   },
   {
    "schemaVersion": 1,
-   "id": "the_reduction",
-   "name": "The Reduction",
+   "id": "reduction",
+   "name": "Reduction",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_concrete_abstract",
@@ -1252,7 +1285,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Reduction",
+     "name": "Reduction",
      "grants": "BREAK one thing they live by down to its physical basis, truthfully. It does not come back the same.",
      "cannot": "Reducing something already concrete. Lying.",
      "functions": [
@@ -1260,7 +1293,8 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Reduction"
     },
     {
      "rank": 2,
@@ -1327,12 +1361,14 @@
     "reveal",
     "break"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Reduction",
+   "_idWas": "the_reduction"
   },
   {
    "schemaVersion": 1,
-   "id": "the_drawn_ascent",
-   "name": "The Borrowed Form",
+   "id": "drawn_ascent",
+   "name": "Borrowed Form",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_concrete_abstract",
@@ -1351,7 +1387,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Borrowed Form",
+     "name": "Borrowed Form",
      "grants": "Take the form of a flying creature and fly as it flies, gear and mind intact, for about an hour.",
      "cannot": "Holding it past the hour, or taking anyone with you.",
      "functions": [
@@ -1359,11 +1395,12 @@
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Borrowed Form"
     },
     {
      "rank": 2,
-     "name": "The Long Form",
+     "name": "Long Form",
      "grants": "Hold it for a day — enough to cross a leg — and carry one other person in a form of their own.",
      "cannot": "Taking more than one other, or holding past the day without setting down.",
      "functions": [
@@ -1371,11 +1408,12 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Form"
     },
     {
      "rank": 3,
-     "name": "The Shared Form",
+     "name": "Shared Form",
      "grants": "⚠️ Take the whole party up together, each in their own shape, for a day.",
      "cannot": "Doing it to anyone unwilling, or twice in a day.",
      "functions": [
@@ -1383,7 +1421,8 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Shared Form"
     }
    ],
    "challengeTypes": [
@@ -1423,12 +1462,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A travel and explore action. You take the form of a flying creature and fly as it flies, with your gear folded into the form and your own mind intact. Rank 1 holds about an hour, solo. Rank 2 holds a day — enough to cross a leg — and carries one other person in a form of their own. Rank 3 takes the whole party up together, each in their own shape, for a day. The limit is duration and how many, not what you can do: when the hold ends you are yourself again wherever you are, so if it ends mid-air you fall. Anyone you carry has to be willing."
+   "plainly": "A travel and explore action. You take the form of a flying creature and fly as it flies, with your gear folded into the form and your own mind intact. Rank 1 holds about an hour, solo. Rank 2 holds a day — enough to cross a leg — and carries one other person in a form of their own. Rank 3 takes the whole party up together, each in their own shape, for a day. The limit is duration and how many, not what you can do: when the hold ends you are yourself again wherever you are, so if it ends mid-air you fall. Anyone you carry has to be willing.",
+   "_nameWas": "The Borrowed Form",
+   "_idWas": "the_drawn_ascent"
   },
   {
    "schemaVersion": 1,
-   "id": "the_raised_road",
-   "name": "The Rising Step",
+   "id": "raised_road",
+   "name": "Rising Step",
    "levelReq": 4,
    "energyCost": 14,
    "powerSystem": "reach_concrete_abstract",
@@ -1447,7 +1488,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Rising Step",
+     "name": "Rising Step",
      "grants": "Climb open air on stone that arrives under each foot — a cliff, a wall, a gorge side.",
      "cannot": "Bringing anyone with you; it is one person's footing.",
      "functions": [
@@ -1455,11 +1496,12 @@
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Rising Step"
     },
     {
      "rank": 2,
-     "name": "The Company Stair",
+     "name": "Company Stair",
      "grants": "⚠️ Raise it for a PARTY — treads broad and steady enough that everyone crosses, pack animals with them.",
      "cannot": "Holding it after the last of them is across.",
      "functions": [
@@ -1467,11 +1509,12 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Company Stair"
     },
     {
      "rank": 3,
-     "name": "The Kept Crossing",
+     "name": "Kept Crossing",
      "grants": "⚠️ CHOOSE TO LEAVE IT. The stone stays: a real crossing on the map that anyone may use, forever.",
      "cannot": "Taking it back — a kept crossing is the world's now, not yours.",
      "functions": [
@@ -1479,7 +1522,8 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Kept Crossing"
     }
    ],
    "challengeTypes": [
@@ -1519,11 +1563,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A travel and explore action. Stone arrives under each foot as you need it, so you climb or cross open air at ordinary pace — a cliff, a wall, a gorge. It answers a vertical or a gap rather than a distance, so a leg that is merely long stays long. Rank 1 carries one person and their load. Rank 2 raises it broad and steady enough for a whole party and their pack animals. At rank 3 you may leave it standing, putting a permanent crossing on the map that anyone can use, including whoever you were avoiding."
+   "plainly": "A travel and explore action. Stone arrives under each foot as you need it, so you climb or cross open air at ordinary pace — a cliff, a wall, a gorge. It answers a vertical or a gap rather than a distance, so a leg that is merely long stays long. Rank 1 carries one person and their load. Rank 2 raises it broad and steady enough for a whole party and their pack animals. At rank 3 you may leave it standing, putting a permanent crossing on the map that anyone can use, including whoever you were avoiding.",
+   "_nameWas": "The Rising Step",
+   "_idWas": "the_raised_road"
   },
   {
-   "id": "the_cutting_figure",
-   "name": "The Cutting Figure",
+   "id": "cutting_figure",
+   "name": "Cutting Figure",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_concrete_abstract",
@@ -1543,7 +1589,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Drawn Line",
+     "name": "Drawn Line",
      "grants": "Impose a simple figure — a line, an angle, an arc — across a target within sight. What it crosses is parted: mail, hide, timber, limb. Clean edges, no blade present.",
      "cannot": "You must hold the figure CLEANLY. Distraction makes it cut short, cut wrong, or cut across your own line of sight. Masons resist it and know they are doing so.",
      "functions": [
@@ -1551,11 +1597,12 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Drawn Line"
     },
     {
      "rank": 2,
-     "name": "The Compound Figure",
+     "name": "Compound Figure",
      "grants": "Several lines at once, or one held open so it keeps parting what moves through — a doorway that divides what enters it.",
      "cannot": "Compound figures are harder to hold and a lapse leaves them half-drawn and unpredictable. A HELD FIGURE STRIKES ANYONE WHO CROSSES IT AT THE SAME RUNG.",
      "functions": [
@@ -1568,11 +1615,12 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Compound Figure"
     },
     {
      "rank": 3,
-     "name": "The Cut Thought",
+     "name": "Cut Thought",
      "grants": "⛔ CUT A THOUGHT. Impose the figure across what someone is HOLDING rather than what they are made of — the next action they had lined up is severed before it starts, or a craft they are sustaining parts from them and drops. ⚠️ Damage rises to 2d6 against a mind so occupied.",
      "cannot": "One thought per action, and they must be doing something you can see them doing. A mind holding nothing loses nothing.",
      "functions": [
@@ -1591,7 +1639,8 @@
       "damage",
       "conditions"
      ],
-     "_rebalance": "⛔ ERIK: 'Let the Cutting Figure r3 be able to CUT A THOUGHT — so the opponent loses track of the next action or loses concentration on a skill.' ⚠️ The old r3 was 'a figure that should not resolve in three dimensions' — evocative and mechanically empty."
+     "_rebalance": "⛔ ERIK: 'Let the Cutting Figure r3 be able to CUT A THOUGHT — so the opponent loses track of the next action or loses concentration on a skill.' ⚠️ The old r3 was 'a figure that should not resolve in three dimensions' — evocative and mechanically empty.",
+     "_nameWas": "The Cut Thought"
     }
    ],
    "challengeTypes": [
@@ -1654,11 +1703,13 @@
     "strike",
     "break"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Cutting Figure",
+   "_idWas": "the_cutting_figure"
   },
   {
-   "id": "the_plain_weight",
-   "name": "The Plain Weight",
+   "id": "plain_weight",
+   "name": "Plain Weight",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_concrete_abstract",
@@ -1677,7 +1728,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The True Weight",
+     "name": "True Weight",
      "grants": "Give something present its full and honest weight and send it — a stone, a beam, a pack, a shield, the ground under them. Blunt, total, and exactly as complicated as being hit by masonry.",
      "cannot": "SOMETHING MUST BE THERE. An empty road offers nothing. It is slow enough to be seen coming by anyone watching for it, and it is very loud.",
      "functions": [
@@ -1685,11 +1736,12 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The True Weight"
     },
     {
      "rank": 2,
-     "name": "The Settled Fact",
+     "name": "Settled Fact",
      "grants": "Take the structure rather than the piece — a lintel, a stair, a cart, a section of wall. What was holding is now falling, and it falls honestly.",
      "cannot": "You have taken part of a building down and buildings are used by people who are not in your fight. Masons are held to account by other Masons for exactly this.",
      "functions": [
@@ -1702,11 +1754,12 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Settled Fact"
     },
     {
      "rank": 3,
-     "name": "The Leaden Word",
+     "name": "Leaden Word",
      "grants": "Everything nearby remembers its weight at once. Roofs, walls, armour, the load a man is carrying, the man — everything that can fall strikes what is beneath it, and armour breaks under its own weight. AND YOU SET THE FALL NOW: mastery is choosing where the weight goes, so you and anyone you name stand in the one place it does not.",
      "cannot": "You still cannot make weight where there is none, and a building coming down is used by people who were not in your fight. It remains loud, and everyone knows what happened and who did it.",
      "functions": [
@@ -1719,7 +1772,8 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Leaden Word"
     }
    ],
    "challengeTypes": [
@@ -1770,11 +1824,13 @@
     "strike",
     "break"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Plain Weight",
+   "_idWas": "the_plain_weight"
   },
   {
-   "id": "the_sound_read",
-   "name": "The Sound Read",
+   "id": "sound_read",
+   "name": "Sound Read",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "reach_concrete_abstract",
@@ -1793,7 +1849,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Hand On It",
+     "name": "Hand On It",
      "grants": "Touch a structure, a vehicle, a raft, a scaffold, and the craft NAMES the load path and the first failure: which member carries, which is ornament, what gives way first and roughly under what. A specific piece, pointed at.",
      "cannot": "TOUCH, and made things only. It tells you what fails FIRST, not when — a bridge can be told it is doomed and still stand a decade. It says nothing about who built it or why.",
      "functions": [
@@ -1804,11 +1860,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Hand On It"
     },
     {
      "rank": 2,
-     "name": "The Whole Fabric",
+     "name": "Whole Fabric",
      "grants": "Read a building or a span entire — every load path, every member carrying more than it was cut for, the order the failures come in.",
      "cannot": "It takes real time and you must reach every part you read. And a full reading of a place people live in is frequently unwelcome news you are now obliged to deliver.",
      "functions": [
@@ -1819,11 +1876,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Whole Fabric"
     },
     {
      "rank": 3,
-     "name": "The Standing Truth of It",
+     "name": "Standing Truth of It",
      "grants": "A site: walls, wells, foundations, the ground under them. Masons are called before sieges and after floods for exactly this.",
      "cannot": "⚠ YOU WILL BE BELIEVED OR YOU WILL BE IGNORED, and both are worse than you expect. A Mason who condemns a hall is answerable to everyone who used it, and one who clears it is answerable if they were wrong.",
      "functions": [
@@ -1837,7 +1895,8 @@
       "reveal",
       "foresee",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Standing Truth of It"
     }
    ],
    "challengeTypes": [
@@ -1881,11 +1940,13 @@
     "reveal",
     "foresee"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Sound Read",
+   "_idWas": "the_sound_read"
   },
   {
-   "id": "the_set_stone",
-   "name": "The Set Stone",
+   "id": "set_stone",
+   "name": "Set Stone",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_concrete_abstract",
@@ -1905,7 +1966,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Placed Thing",
+     "name": "Placed Thing",
      "grants": "Set one object you have positioned. It resists being moved, levered, or shifted by anything short of deliberate concerted effort — and you know the instant it is being worked at.",
      "cannot": "It holds POSITION, not integrity — a set thing still breaks, rots, and burns normally. You must have PLACED it. And a determined crew with tools gets it eventually; this buys time and warning.",
      "functions": [
@@ -1913,11 +1974,12 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Placed Thing"
     },
     {
      "rank": 2,
-     "name": "The Kept Course",
+     "name": "Kept Course",
      "grants": "Set several, or set a working assembly — a door in its frame, a wheel on its axle, a raft's lashings — so the whole thing holds true under use.",
      "cannot": "The more you hold, the more thinly. And a set assembly cannot be adjusted by anyone, including you, without unsetting it first.",
      "functions": [
@@ -1926,11 +1988,12 @@
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Kept Course"
     },
     {
      "rank": 3,
-     "name": "The Unmoved Work",
+     "name": "Unmoved Work",
      "grants": "A structure that does not settle, shift, or subside — a wall on bad ground, a span over a moving river, a gate that will not be forced.",
      "cannot": "⚠ THE GROUND STILL MOVES; you have only refused to move WITH it. A set structure on failing ground does not sag — it stands until it does not, and there is no warning creak. Masons argue about whether that is a virtue.",
      "functions": [
@@ -1939,7 +2002,8 @@
       "make"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Unmoved Work"
     }
    ],
    "challengeTypes": [
@@ -1978,12 +2042,15 @@
     }
    ],
    "plainly": "A puzzle/fight action that fixes a placed object so it cannot be shifted. Rated 6 of 10 across a scope of 2 for about three days.",
-   "_descriptionWas": "The Masons' holding-craft. Half of building is making a thing stay where you put it."
+   "_descriptionWas": "The Masons' holding-craft. Half of building is making a thing stay where you put it.",
+   "_nameWas": "The Set Stone",
+   "_idWas": "the_set_stone"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
  "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json.",
  "_schemaFix2": "⛔ SNG-452: gains/harmRung restored on ranks I replaced wholesale during batch 1 — replacing a tree dropped fields I had not read.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

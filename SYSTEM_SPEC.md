@@ -1862,3 +1862,47 @@ consume those, not restate them.**
 ⛔ **A skill judged on the wrong clock reads as useless and gets cut.** I proposed cutting Built System for
 failing "how often does this arise" when the real answer was *"every time the party has a week."*
 **Assess a project skill on project frequency and a journey skill on journey frequency.**
+
+
+---
+
+## 34. The Sense Slot and Tempo (2026-08-15)
+
+⛔ **A round has TWO slots: a SENSE slot and an ACTION slot.** A craft tagged `read` resolves in the sense
+slot and **does not consume your action** — so the same round can contain the read and the blow it earns.
+
+⚠️ **`read` is not the same as the `reveal` FUNCTION.** Reveal says what a craft produces; **read says WHEN
+IT RESOLVES.** One sense action per round.
+
+### 34.1 ⛔ TEMPO — the bonus-action buildup
+
+**Built on `charges.json`, not beside it** — that file already defines `rate` accrual (every qualifying
+pass banks something) and `gate` accrual. **Tempo is a charge that banks in combat and spends as an
+action.**
+
+| banks tempo | rate |
+|---|---|
+| a read that produced usable information | **1.0** |
+| winning a round on the momentum meter | 0.6 |
+| an ally's read shared with you (Mind Meld, a called warning) | 0.5 |
+| acting on ground you prepared — a ward, a figure, a set trap | 0.4 |
+| **Conserve** intensity — you spent less than you could have | 0.3 |
+| ⛔ **Surge** intensity | **0.0** |
+
+| spend | |
+|---|---|
+| **1** | a second action this round |
+| **2** | an action that would normally take the whole round |
+| **3** | ⛔ **act before the round opens, ahead of everyone, once** |
+
+⚠️ **Cap 3, and it empties when the fight ends** — tempo is momentum, not savings.
+
+### 34.2 Why it is shaped this way
+
+⛔ **IT REWARDS WHAT THE TRADITIONS ACTUALLY DO.** A Cogitant reads and banks. A Marcher wins rounds and
+banks. A Figurist prepares ground and banks. ⚠️ **And Surge banks nothing** — the gamble is already its own
+reward, so **the greedy line and the patient line are genuinely different strategies** rather than one
+being strictly better.
+
+⚠️ **MINIMUM VIABLE VERSION IS THE `read` TAG AND THE SENSE SLOT.** Tempo can follow; the sense slot alone
+makes read-then-strike work.

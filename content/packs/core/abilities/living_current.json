@@ -36,7 +36,7 @@
     },
     {
      "rank": 2,
-     "name": "The Ground Answers",
+     "name": "Ground Answers",
      "grants": "Hold the waking through a scene rather than a moment, and feel BACK along it — the roused current reports what is rooted near it: who passed and how recently, what grows under the surface, what living thing lies buried and still breathing.",
      "cannot": "Feeling back is not seeing — you get presence and direction, never faces; the made and the dead remain absent from it; and holding the waking costs continuously.",
      "functions": [
@@ -47,11 +47,12 @@
      "_functionsWas": [
       "open",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Ground Answers"
     },
     {
      "rank": 3,
-     "name": "The Deep Rousing",
+     "name": "Deep Rousing",
      "grants": "Wake the living current across a whole rooted district. Ground once woken by you answers your touch faster ever after, and the roused life will carry others — a party moving over ground you have quickened travels rested, fed by what you woke.",
      "cannot": "A district roused is a district AWAKE; the Rootkin hold that what you wake you tend, and the GM will name what the waking costs the land; ground worked too often goes sullen and answers slower, not faster.",
      "functions": [
@@ -64,7 +65,8 @@
       "open",
       "reveal",
       "sustain"
-     ]
+     ],
+     "_nameWas": "The Deep Rousing"
     }
    ],
    "gated": "learned",
@@ -124,8 +126,8 @@
   },
   {
    "schemaVersion": 1,
-   "id": "the_green_road",
-   "name": "The Green Road",
+   "id": "green_road",
+   "name": "Green Road",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "living_current",
@@ -144,7 +146,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Green Road",
+     "name": "Green Road",
      "grants": "Travel the connected living substrate — the green road between rooted places.",
      "cannot": "It reaches only where life runs unbroken, it cannot cross the dead or the made, and the current that carries you also claims you for the length of the road.",
      "functions": [
@@ -152,11 +154,12 @@
       "travel"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Green Road"
     },
     {
      "rank": 2,
-     "name": "The Deep Road",
+     "name": "Deep Road",
      "grants": "Carry others along the green road — a party moves as one, rooted place to rooted place. And the road begins to open toward places you have never walked, if something living there already knows your touch.",
      "cannot": "It still cannot cross the dead or the made. A longer road claims you longer; you arrive rooted and slow. Carrying others multiplies what the current takes, and when the road is choosing your destination it also chooses the pace.",
      "functions": [
@@ -164,7 +167,8 @@
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Deep Road"
     }
    ],
    "gated": "learned",
@@ -209,7 +213,10 @@
      "class": "cost"
     }
    ],
-   "plainly": "An action that moves you or someone else. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about 2 hours. Range is 40. Ranks: rank 2 extends targets. Limit: it reaches Only Where Life Runs Unbroken."
+   "plainly": "An action that moves you or someone else. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about 2 hours. Range is 40. Ranks: rank 2 extends targets. Limit: it reaches Only Where Life Runs Unbroken.",
+   "_nameWas": "The Green Road",
+   "_idWas": "the_green_road"
   }
- ]
+ ],
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

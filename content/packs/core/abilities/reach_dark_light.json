@@ -27,7 +27,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Seeing Dark",
+     "name": "Seeing Dark",
      "grants": "See truly in lightlessness; wrap yourself and a small space in concealment; find and use the shadows any place holds.",
      "cannot": "Total light defeats it; concealment hides, it does not defend.",
      "functions": [
@@ -38,11 +38,12 @@
      "_functionsWas": [
       "reveal",
       "conceal"
-     ]
+     ],
+     "_nameWas": "The Seeing Dark"
     },
     {
      "rank": 2,
-     "name": "The Harbor",
+     "name": "Harbor",
      "grants": "Hide a person, a truth, or a thing so well even a searcher who knows it's there can't find it; move unseen through watched places; shelter what the light hunts.",
      "cannot": "Harboring something makes you responsible for it; some things should not be harbored, and the Harbor doesn't judge — you must.",
      "functions": [
@@ -57,11 +58,12 @@
       "conceal",
       "move",
       "ward"
-     ]
+     ],
+     "_nameWas": "The Harbor"
     },
     {
      "rank": 3,
-     "name": "The Deep Umbral",
+     "name": "Deep Umbral",
      "grants": "Command shadow at scale — hide a caravan, a rite, a rebellion; see into the hidden hearts of things and places; give sanctuary the Blaze cannot breach. The Underlight's power in miniature.",
      "cannot": "The wielder drifts dark-hot — and the one who harbors everything eventually harbors the things that should have faced the light; darkness total is its own foreclosure, a world that never has to be seen.",
      "functions": [
@@ -78,7 +80,8 @@
       "move",
       "ward",
       "command"
-     ]
+     ],
+     "_nameWas": "The Deep Umbral"
     }
    ],
    "functions": [
@@ -177,7 +180,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Revealing Light",
+     "name": "Revealing Light",
      "grants": "Throw light that shows things as they are — no illusion, no disguise, no shadow holds; a focused beam that can burn or blind.",
      "cannot": "Reveals surfaces and shapes, not hearts; light spent blinds you too.",
      "functions": [
@@ -185,11 +188,12 @@
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Revealing Light"
     },
     {
      "rank": 2,
-     "name": "The Unshadowed",
+     "name": "Unshadowed",
      "grants": "Strip a place or person of every concealment at once; make a lie visibly a lie (unless it's built of true pieces — the Cathedral defeats this); a beam that ends a threat cleanly.",
      "cannot": "The convincing-lie-of-true-pieces survives it; some truths, revealed, do more harm than the hiding did — and Radiance can't tell which.",
      "functions": [
@@ -202,11 +206,12 @@
       "reveal",
       "strike",
       "break"
-     ]
+     ],
+     "_nameWas": "The Unshadowed"
     },
     {
      "rank": 3,
-     "name": "The Blaze",
+     "name": "Blaze",
      "grants": "Revelation at scale — a whole deception undone, a hidden thing dragged into the light before a people, a beam that ends the unendurable. And the light at full flood weakens everything that must look into it: eyes fail, aim goes, and a company caught in it is slowed to a stumble for as long as it burns.",
      "cannot": "The wielder drifts light-hot — and total revelation burns its own land to glass; the one who reveals everything leaves nothing sheltered enough to live; light absolute is foreclosure by exposure, a world with no shadow left to grow in.",
      "functions": [
@@ -219,7 +224,8 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Blaze"
     }
    ],
    "functions": [
@@ -327,7 +333,7 @@
     },
     {
      "rank": 2,
-     "name": "The Long Dark",
+     "name": "Long Dark",
      "grants": "See far and fine without light — read a face across a black room, follow a trail by the shape of the air in it.",
      "cannot": "Sudden light still blinds you; you see the dark, not the intent moving through it.",
      "functions": [
@@ -335,7 +341,8 @@
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Dark"
     },
     {
      "rank": 3,
@@ -457,7 +464,7 @@
     },
     {
      "rank": 3,
-     "name": "The Long Dusk",
+     "name": "Long Dusk",
      "grants": "Dim a whole place — a hall, a street, a courtyard — down to working shadow, and hold it there.",
      "cannot": "Holding costs continuously; a determined light-worker can push back against you, and will.",
      "functions": [
@@ -470,7 +477,8 @@
       "conceal",
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Long Dusk"
     }
    ],
    "powerSystem": "reach_dark_light",
@@ -589,7 +597,7 @@
     },
     {
      "rank": 3,
-     "name": "The Struck Match",
+     "name": "Struck Match",
      "grants": "Light from nothing, anywhere within sight, at will — and it goes on burning after you let go.",
      "cannot": "What you light you may not be able to put out. Ask the Blazeborn how that ends.",
      "functions": [
@@ -602,7 +610,8 @@
       "make",
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Struck Match"
     }
    ],
    "powerSystem": "reach_dark_light",
@@ -674,8 +683,8 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
-   "id": "the_harbor",
-   "name": "The Harbor",
+   "id": "harbor",
+   "name": "Harbor",
    "levelReq": 2,
    "energyCost": 5,
    "attribute": "mental",
@@ -693,25 +702,27 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Harbor",
+     "name": "Harbor",
      "grants": "Conceal someone or something past even a determined, knowing search.",
      "cannot": "You become responsible for what you harbor; the Blaze can still burn it out.",
      "functions": [
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Harbor"
     },
     {
      "rank": 2,
-     "name": "The Deeper Harbor",
+     "name": "Deeper Harbor",
      "grants": "Harbor a person, a truth, or a thing so completely that a searcher who KNOWS it is there still comes away empty.",
      "cannot": "The harbored thing is now yours to answer for. The Harbor shelters; it does not judge — you must.",
      "functions": [
       "conceal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Deeper Harbor"
     },
     {
      "rank": 3,
@@ -787,7 +798,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A stealth/survive action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 8 hours Ranks: rank 2 deepens concealment; rank 3 adds to special. Limit: you Become Responsible For What You Harbor."
+   "plainly": "A stealth/survive action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 0 harm per hit (rank 0 armour) It affects 1 target, and lasts for about 8 hours Ranks: rank 2 deepens concealment; rank 3 adds to special. Limit: you Become Responsible For What You Harbor.",
+   "_nameWas": "The Harbor",
+   "_idWas": "the_harbor"
   },
   {
    "id": "unshadow",
@@ -821,7 +834,7 @@
     },
     {
      "rank": 2,
-     "name": "The Stripping Light",
+     "name": "Stripping Light",
      "grants": "Strip concealment from a place, not merely a thing — every shadow in a room gives up what it held.",
      "cannot": "It reveals indiscriminately: yours, theirs, and things nobody wanted found.",
      "functions": [
@@ -829,7 +842,8 @@
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Stripping Light"
     },
     {
      "rank": 3,
@@ -915,7 +929,7 @@
   },
   {
    "id": "harbored_flame",
-   "name": "The Harbored Flame",
+   "name": "Harbored Flame",
    "levelReq": 4,
    "energyCost": 9,
    "attribute": "mental",
@@ -932,7 +946,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Harbored Flame",
+     "name": "Harbored Flame",
      "grants": "Make a hidden sanctuary of healing light — unfindable, and restoring within.",
      "cannot": "The two poles fight; costly; own-light searchers can crack it.",
      "functions": [
@@ -940,11 +954,12 @@
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Harbored Flame"
     },
     {
      "rank": 2,
-     "name": "The Carried Harbor",
+     "name": "Carried Harbor",
      "grants": "The harbor moves with those it holds — a company travels inside it, hidden and mending as they go. It holds through a night rather than an hour, and what mends inside it mends fully rather than merely stabilising.",
      "cannot": "The two poles still fight, and the cost rises with every person carried. A moving harbor is thinner than a still one and an own-light searcher cracks it faster. And you cannot fight from inside it without breaking it for everyone.",
      "functions": [
@@ -952,7 +967,8 @@
       "heal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Carried Harbor"
     }
    ],
    "powerSystem": "reach_dark_light",
@@ -1007,7 +1023,8 @@
     }
    ],
    "plainly": "A survive or stealth action, and it needs two poles: umbral and blazeborn together. It makes a hidden sanctuary that heals — 4d4+2 to up to four people over about eight hours, in a place nobody can find. The two poles fight, so it costs more than either alone, and the cost rises with every person you shelter. Its one hole is the obvious one: the light inside is real light, so anyone searching for your own light specifically can find you by it.",
-   "_descriptionWas": "The braid-craft: a concealed place filled with restoring radiance — shelter and healing woven from opposite poles."
+   "_descriptionWas": "The braid-craft: a concealed place filled with restoring radiance — shelter and healing woven from opposite poles.",
+   "_nameWas": "The Harbored Flame"
   },
   {
    "id": "shroud",
@@ -1051,7 +1068,7 @@
     },
     {
      "rank": 3,
-     "name": "The Long Shroud",
+     "name": "Long Shroud",
      "grants": "The shroud holds without your attention — set it and walk away; it keeps until something breaks it.",
      "cannot": "What you shroud and forget, you may never find again. The Umbrals have lost cities this way.",
      "functions": [
@@ -1059,7 +1076,8 @@
       "deceive"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Shroud"
     }
    ],
    "powerSystem": "reach_dark_light",
@@ -1147,18 +1165,19 @@
     },
     {
      "rank": 2,
-     "name": "The Braided Trail",
+     "name": "Braided Trail",
      "grants": "Lay several trails at once, each equally convincing, and let a pursuer choose wrong.",
      "cannot": "A tracker who knows your work will read the braid itself as a signature.",
      "functions": [
       "deceive"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Braided Trail"
     },
     {
      "rank": 3,
-     "name": "The Trail That Was Never Walked",
+     "name": "Trail That Was Never Walked",
      "grants": "Lay a trail you did not walk — a path leading somewhere you have never been, convincing all the way to its end.",
      "cannot": "It must end somewhere. What waits at the end of a trail you invented is not yours to control.",
      "functions": [
@@ -1166,7 +1185,8 @@
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Trail That Was Never Walked"
     }
    ],
    "powerSystem": "reach_dark_light",
@@ -1226,8 +1246,8 @@
    "plainly": "A chase/stealth action that weakens or restricts a target. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 extends trails; rank 3 adds to special. Limit: a Master Tracker or Truth-Reader may catch the lie."
   },
   {
-   "id": "the_never_there",
-   "name": "The Never-There",
+   "id": "never_there",
+   "name": "Never-There",
    "levelReq": 5,
    "energyCost": 10,
    "attribute": "mental",
@@ -1244,7 +1264,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Never-There",
+     "name": "Never-There",
      "grants": "Move through the most-watched place leaving no trace, memory, or evidence you were ever there.",
      "cannot": "A single overt action ends it; a Verity-reader present may feel the absence; costs enormously to sustain.",
      "functions": [
@@ -1252,7 +1272,8 @@
       "deceive"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Never-There"
     }
    ],
    "powerSystem": "reach_dark_light",
@@ -1293,7 +1314,9 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: a Single Overt Action Ends IT."
+   "plainly": "An action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: a Single Overt Action Ends IT.",
+   "_nameWas": "The Never-There",
+   "_idWas": "the_never_there"
   },
   {
    "id": "shadowstep",
@@ -1328,7 +1351,7 @@
     },
     {
      "rank": 2,
-     "name": "The Stepping Dark",
+     "name": "Stepping Dark",
      "grants": "Step between shadows across a room, a street, a battlefield — anywhere dark touches dark.",
      "cannot": "Both ends must be genuinely shadowed; a lit gap is a wall.",
      "functions": [
@@ -1336,7 +1359,8 @@
       "conceal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Stepping Dark"
     },
     {
      "rank": 3,
@@ -1405,8 +1429,8 @@
    "plainly": "An action that moves you or someone else. Its strength is rated 5 out of 10 It affects 1 target. Range is 15. Ranks: rank 2 extends range; rank 3 adds to special. Limit: both Ends Need Real Shadow — a lit gap is a Wall."
   },
   {
-   "id": "the_shadowed_mending",
-   "name": "The Shadowed Mending",
+   "id": "shadowed_mending",
+   "name": "Shadowed Mending",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1447,18 +1471,19 @@
     },
     {
      "rank": 2,
-     "name": "The Dark Aids",
+     "name": "Dark Aids",
      "grants": "In true shadow, recovery proceeds with unusual speed — fever breaks faster, pain quiets, wounds close cleaner than they should.",
      "cannot": "Anything rank 3 adds — set a person in genuine lightlessness and the healing proceeds past the ordinary — as if darkness itself were medicine for whatever the light had been aggravating; REQUIRES DARKNESS to exceed ordinary mending.",
      "functions": [
       "heal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Dark Aids"
     },
     {
      "rank": 3,
-     "name": "The Dark Heals",
+     "name": "Dark Heals",
      "grants": "Set a person in genuine lightlessness and the healing proceeds past the ordinary — as if darkness itself were medicine for whatever the light had been aggravating. And the umbral hands mend what the blaze warped: scarring laid down wrong under too much light, a working scorched out of true, a thing the radiance half-finished.",
      "cannot": "Nothing further; this is the craft's ceiling; REQUIRES DARKNESS to exceed ordinary mending.",
      "functions": [
@@ -1466,7 +1491,8 @@
       "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Dark Heals"
     }
    ],
    "nativeOrCombination": "native",
@@ -1513,11 +1539,13 @@
      "class": "soft"
     }
    ],
-   "plainly": "A medical/survival/hardship action that restores health. It rolls 2d4+1 Ranks: rank 2 deepens healing; rank 3 adds to special. Limit: requires Darkness to exceed ordinary mending — in light it is merely competent."
+   "plainly": "A medical/survival/hardship action that restores health. It rolls 2d4+1 Ranks: rank 2 deepens healing; rank 3 adds to special. Limit: requires Darkness to exceed ordinary mending — in light it is merely competent.",
+   "_nameWas": "The Shadowed Mending",
+   "_idWas": "the_shadowed_mending"
   },
   {
-   "id": "the_shadow_work",
-   "name": "The Shadow Work",
+   "id": "shadow_work",
+   "name": "Shadow Work",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1560,7 +1588,7 @@
     },
     {
      "rank": 2,
-     "name": "The Held Dark",
+     "name": "Held Dark",
      "grants": "Transform a space's light conditions and give shadow the shape you need — it holds until you release it or something breaks it.",
      "cannot": "Anything rank 3 adds — work in shadow as a master works in material — make things that persist, transform environments, give the darkness a form that serves a purpose as long as you need it; it is SHADOW.",
      "functions": [
@@ -1569,7 +1597,8 @@
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Dark"
     },
     {
      "rank": 3,
@@ -1626,11 +1655,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A craft/stealth/magical action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends scope; rank 3 adds to persistence. Limit: it is Shadow — it screens and conceals; it stops nothing physical."
+   "plainly": "A craft/stealth/magical action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends scope; rank 3 adds to persistence. Limit: it is Shadow — it screens and conceals; it stops nothing physical.",
+   "_nameWas": "The Shadow Work",
+   "_idWas": "the_shadow_work"
   },
   {
-   "id": "the_long_dark",
-   "name": "The Long Dark",
+   "id": "long_dark",
+   "name": "Long Dark",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1671,7 +1702,7 @@
     },
     {
      "rank": 2,
-     "name": "The Dark Sustains",
+     "name": "Dark Sustains",
      "grants": "Draw sustenance from genuine lightlessness — reduced need for warmth, light, and ordinary comforts in conditions of true dark.",
      "cannot": "Anything rank 3 adds — in the lightless depths where others run out, you run deeper; REQUIRES GENUINE LIGHTLESSNESS.",
      "functions": [
@@ -1679,11 +1710,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Dark Sustains"
     },
     {
      "rank": 3,
-     "name": "The Deepest Ground",
+     "name": "Deepest Ground",
      "grants": "In the lightless depths where others run out, you run deeper. The dark is not deprivation — it is where you are most alive.",
      "cannot": "Nothing further; this is the craft's ceiling; REQUIRES GENUINE LIGHTLESSNESS.",
      "functions": [
@@ -1691,7 +1723,8 @@
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Deepest Ground"
     }
    ],
    "nativeOrCombination": "native",
@@ -1730,11 +1763,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A endurance/survival/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: requires Genuine Lightlessness — a dim room is not the dark."
+   "plainly": "A endurance/survival/hardship action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about a day Ranks: rank 2 deepens upkeepRelief; rank 3 adds to special. Limit: requires Genuine Lightlessness — a dim room is not the dark.",
+   "_nameWas": "The Long Dark",
+   "_idWas": "the_long_dark"
   },
   {
-   "id": "the_cleansing_light",
-   "name": "The Cleansing Light",
+   "id": "cleansing_light",
+   "name": "Cleansing Light",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1776,7 +1811,7 @@
     },
     {
      "rank": 2,
-     "name": "The Burn-Out",
+     "name": "Burn-Out",
      "grants": "Burn away infection, corruption, or a poisonous working — the light doesn't soften, but what survives it is clean.",
      "cannot": "Anything rank 3 adds — show a wound or a working to the complete radiance and it is purified entirely — the light returns what it was consuming to nothing; light does not SOOTHE, it purifies.",
      "functions": [
@@ -1784,7 +1819,8 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Burn-Out"
     },
     {
      "rank": 3,
@@ -1843,11 +1879,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A medical/magical/craft action that restores health. It rolls 2d4 Ranks: rank 2 adds to purge; rank 3 adds to purge. Limit: light does not Soothe, it purifies — the healing hurts."
+   "plainly": "A medical/magical/craft action that restores health. It rolls 2d4 Ranks: rank 2 adds to purge; rank 3 adds to purge. Limit: light does not Soothe, it purifies — the healing hurts.",
+   "_nameWas": "The Cleansing Light",
+   "_idWas": "the_cleansing_light"
   },
   {
-   "id": "the_blaze_wall",
-   "name": "The Blaze Wall",
+   "id": "blaze_wall",
+   "name": "Blaze Wall",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1900,7 +1938,7 @@
     },
     {
      "rank": 3,
-     "name": "The Blaze Itself",
+     "name": "Blaze Itself",
      "grants": "The full radiance walls approach — a brightness so complete that passage through it requires what only a blazeborn has, and most don't.",
      "cannot": "Nothing further; this is the craft's ceiling; those WITH radiance-tolerance pass it.",
      "functions": [
@@ -1908,7 +1946,8 @@
       "ward"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Blaze Itself"
     }
    ],
    "nativeOrCombination": "native",
@@ -1953,7 +1992,9 @@
      "class": "soft"
     }
    ],
-   "plainly": "A combat/defense/magical action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about 3 hours Ranks: rank 2 adds to duration; rank 3 adds to soak. Limit: those With radiance-tolerance pass it."
+   "plainly": "A combat/defense/magical action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour), and lasts for about 3 hours Ranks: rank 2 adds to duration; rank 3 adds to soak. Limit: those With radiance-tolerance pass it.",
+   "_nameWas": "The Blaze Wall",
+   "_idWas": "the_blaze_wall"
   },
   {
    "id": "glass_work",
@@ -1988,14 +2029,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Glass Form",
+     "name": "Glass Form",
      "grants": "Shape glass or heat-worked material quickly and precisely, using radiance as the tool — what would take others hours takes moments.",
      "cannot": "Anything rank 2 adds — work any material susceptible to intense light and heat — glass, metal, crystal — into any form you need with blazeborn precision; requires material that ANSWERS to light and heat.",
      "functions": [
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Glass Form"
     },
     {
      "rank": 2,
@@ -2064,8 +2106,8 @@
    "plainly": "A craft/technical/art action that makes or animates something. Its strength is rated 2 out of 10, and lasts for about 6 hours Ranks: rank 2 adds to materials; rank 3 adds to persistence. Limit: requires material that Answers to light and heat."
   },
   {
-   "id": "the_blazing_word",
-   "name": "The Blazing Word",
+   "id": "blazing_word",
+   "name": "Blazing Word",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -2096,18 +2138,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Open Word",
+     "name": "Open Word",
      "grants": "Speak in full light with a blazeborn's authority — what is said in the open, in front of all, carries a weight that shadows and whispers undermine.",
      "cannot": "Anything rank 2 adds — command through total transparency — a word spoken in the blaze binds because there is no shadow to hide the lie in; it binds the SPEAKER equally.",
      "functions": [
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Open Word"
     },
     {
      "rank": 2,
-     "name": "The Binding Light",
+     "name": "Binding Light",
      "grants": "Command through total transparency — a word spoken in the blaze binds because there is no shadow to hide the lie in; what was agreed is agreed.",
      "cannot": "Anything rank 3 adds — declare something in the blaze and it is real — not a promise, an established fact that those who witnessed the light cannot pretend they didn't see; it binds the SPEAKER equally.",
      "functions": [
@@ -2115,11 +2158,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Binding Light"
     },
     {
      "rank": 3,
-     "name": "The Established Fact",
+     "name": "Established Fact",
      "grants": "Declare something in the blaze and it is real — not a promise, an established fact that those who witnessed the light cannot pretend they didn't see.",
      "cannot": "Nothing further; this is the craft's ceiling; it binds the SPEAKER equally.",
      "functions": [
@@ -2127,7 +2171,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Established Fact"
     }
    ],
    "nativeOrCombination": "native",
@@ -2169,11 +2214,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/negotiation/leadership action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 6 hours Ranks: rank 2 adds to bindStrength; rank 3 adds to duration. Limit: it binds the Speaker equally."
+   "plainly": "A social/negotiation/leadership action that strengthens someone. Its strength is rated 3 out of 10, and lasts for about 6 hours Ranks: rank 2 adds to bindStrength; rank 3 adds to duration. Limit: it binds the Speaker equally.",
+   "_nameWas": "The Blazing Word",
+   "_idWas": "the_blazing_word"
   },
   {
-   "id": "the_line_of_light",
-   "name": "The Line of Light",
+   "id": "line_of_light",
+   "name": "Line of Light",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -2204,14 +2251,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Lit Crossing",
+     "name": "Lit Crossing",
      "grants": "Move as fast as a thrown light across any space you can illuminate — arrive at any visible point in a single committed crossing.",
      "cannot": "Anything rank 2 adds — illuminate a point and cross to it instantly — the path between here and there collapses to the line of light; requires a LIT path.",
      "functions": [
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Lit Crossing"
     },
     {
      "rank": 2,
@@ -2278,11 +2326,13 @@
      "class": "soft"
     }
    ],
-   "plainly": "A tactical/exploration/stealth action that moves you or someone else. It affects 1 target. Range is 8. Ranks: rank 2 adds to range; rank 3 adds to targets+uses. Limit: requires a Lit path — no light, no road."
+   "plainly": "A tactical/exploration/stealth action that moves you or someone else. It affects 1 target. Range is 8. Ranks: rank 2 adds to range; rank 3 adds to targets+uses. Limit: requires a Lit path — no light, no road.",
+   "_nameWas": "The Line of Light",
+   "_idWas": "the_line_of_light"
   },
   {
-   "id": "the_radiant_ground",
-   "name": "The Radiant Ground",
+   "id": "radiant_ground",
+   "name": "Radiant Ground",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -2323,7 +2373,7 @@
     },
     {
      "rank": 2,
-     "name": "The Radiant Meal",
+     "name": "Radiant Meal",
      "grants": "Draw genuine sustenance from intense light — reduced need for food, rest, and shelter in conditions of full radiance.",
      "cannot": "Anything rank 3 adds — in the fullest light, you do not diminish; requires INTENSE light.",
      "functions": [
@@ -2331,7 +2381,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Radiant Meal"
     },
     {
      "rank": 3,
@@ -2380,12 +2431,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A endurance/survival/hardship action that strengthens someone. Its strength is rated 2 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to upkeepRelief; rank 3 adds to duration. Limit: requires Intense light — worthless in shade."
+   "plainly": "A endurance/survival/hardship action that strengthens someone. Its strength is rated 2 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to upkeepRelief; rank 3 adds to duration. Limit: requires Intense light — worthless in shade.",
+   "_nameWas": "The Radiant Ground",
+   "_idWas": "the_radiant_ground"
   },
   {
    "schemaVersion": 1,
-   "id": "the_revealing_burn",
-   "name": "The Revealing Burn",
+   "id": "revealing_burn",
+   "name": "Revealing Burn",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "reach_dark_light",
@@ -2404,7 +2457,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Revealing Burn",
+     "name": "Revealing Burn",
      "grants": "Burn away all falsehood and concealment in a place, exposing what is truly there.",
      "cannot": "It cannot un-reveal what it shows, it does not discriminate whose secret burns free, and a fire lit to expose another can just as easily light you.",
      "functions": [
@@ -2412,11 +2465,12 @@
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Revealing Burn"
     },
     {
      "rank": 2,
-     "name": "The Wider Burning",
+     "name": "Wider Burning",
      "grants": "The burn takes a district rather than a room, and it reaches what is false in a PERSON — an assumed shape, a worn name, a glamour kept so long it has grown into them. Tearing it off harms the one who wore it: the body under a long-held false shape is wounded by the return to its own, and they will need tending afterward.",
      "cannot": "It still does not choose whose falsehood burns, and at this scale that reliably includes allies and yourself. A person burned true cannot be disguised again by any craft for a long while. The Blazeborn are not forgiven for this one, and they do not ask to be.",
      "functions": [
@@ -2424,7 +2478,8 @@
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Wider Burning"
     }
    ],
    "gated": "learned",
@@ -2477,12 +2532,14 @@
     }
    ],
    "plainly": "A fight/investigate action that deals damage. It rolls 4d6+2 Ranks: rank 2 adds to special. Limit: it Cannot UN-Reveal what it shows.",
-   "_descriptionWas": "The Blazeborn art of the fire that reveals — a flame that consumes the false, the hidden, the disguised, leaving only the true thing exposed in the light it casts. To burn, here, is to uncover."
+   "_descriptionWas": "The Blazeborn art of the fire that reveals — a flame that consumes the false, the hidden, the disguised, leaving only the true thing exposed in the light it casts. To burn, here, is to uncover.",
+   "_nameWas": "The Revealing Burn",
+   "_idWas": "the_revealing_burn"
   },
   {
    "schemaVersion": 1,
-   "id": "the_last_light",
-   "name": "The Last Light",
+   "id": "last_light",
+   "name": "Last Light",
    "levelReq": 5,
    "energyCost": 14,
    "powerSystem": "reach_dark_light",
@@ -2500,14 +2557,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Last Light",
+     "name": "Last Light",
      "grants": "Spend your entire inner fire in one absolute light that unmakes all shadow in reach — and everything in that reach which lives by the dark takes the full weight of it: an umbral working is torn out, a shadow-thing is harmed directly and badly, and any living creature caught unready is burned and left reeling.",
      "cannot": "It leaves you spent to nothing and cold after, it cannot be held or sustained, and it cannot be half-given — the last light is all of it or none.",
      "functions": [
       "strike"
      ],
      "harmRung": "damaging",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Last Light"
     }
    ],
    "gated": "learned",
@@ -2558,12 +2616,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight action that deals damage. It rolls 5d6+4 Limit: it leaves you Spent TO Nothing and cold after."
+   "plainly": "A fight action that deals damage. It rolls 5d6+4 Limit: it leaves you Spent TO Nothing and cold after.",
+   "_nameWas": "The Last Light",
+   "_idWas": "the_last_light"
   },
   {
    "schemaVersion": 1,
-   "id": "the_stopped_breath",
-   "name": "The Stopped Breath",
+   "id": "stopped_breath",
+   "name": "Stopped Breath",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_dark_light",
@@ -2582,7 +2642,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Stopped Breath",
+     "name": "Stopped Breath",
      "grants": "Hide a person's own breath from them. They weaken; unattended, they die.",
      "cannot": "A braced or warned target. It takes long minutes.",
      "functions": [
@@ -2590,11 +2650,12 @@
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Stopped Breath"
     },
     {
      "rank": 2,
-     "name": "The Unlit Room",
+     "name": "Unlit Room",
      "grants": "Take sight and sound with it, so they cannot find help or be found calling.",
      "cannot": "Anyone already being attended to.",
      "functions": [
@@ -2602,7 +2663,8 @@
       "conceal"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Unlit Room"
     }
    ],
    "challengeTypes": [
@@ -2653,12 +2715,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A stealth attack that only works on a target unaware of you. It deals 3d6 shadow damage spread over several minutes rather than instantly, so the target has time to be found and helped. At rank 2 they also cannot call out or be heard. Any healer who reaches them before it finishes undoes it completely. A braced or warned target simply notices you and it fails."
+   "plainly": "A stealth attack that only works on a target unaware of you. It deals 3d6 shadow damage spread over several minutes rather than instantly, so the target has time to be found and helped. At rank 2 they also cannot call out or be heard. Any healer who reaches them before it finishes undoes it completely. A braced or warned target simply notices you and it fails.",
+   "_nameWas": "The Stopped Breath",
+   "_idWas": "the_stopped_breath"
   },
   {
    "schemaVersion": 1,
-   "id": "the_unlit_step",
-   "name": "The Unlit Step",
+   "id": "unlit_step",
+   "name": "Unlit Step",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_dark_light",
@@ -2677,7 +2741,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Unlit Step",
+     "name": "Unlit Step",
      "grants": "Descend and glide through shadow, silently, at speed. Down and across, never up.",
      "cannot": "Rising. Lit ground and open daylight.",
      "functions": [
@@ -2685,11 +2749,12 @@
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Unlit Step"
     },
     {
      "rank": 2,
-     "name": "The Long Fall",
+     "name": "Long Fall",
      "grants": "Cross whole valleys by it at night, unseen — the only travel in the game that no one observes.",
      "cannot": "Doing it by day, or arriving anywhere lit without being seen the moment you land.",
      "functions": [
@@ -2697,7 +2762,8 @@
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Fall"
     }
    ],
    "challengeTypes": [
@@ -2737,11 +2803,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A travel, stealth and chase action. You descend and glide through shadow, silently and fast — down and across only, never up, so you have to climb before you can use it, and lit ground or open daylight close it completely. At rank 2 you can cross whole valleys by night unseen. It is the only travel in the game that generates no road encounters and no arrival notice, which cuts both ways: nobody sees you go, so nobody knows you came either."
+   "plainly": "A travel, stealth and chase action. You descend and glide through shadow, silently and fast — down and across only, never up, so you have to climb before you can use it, and lit ground or open daylight close it completely. At rank 2 you can cross whole valleys by night unseen. It is the only travel in the game that generates no road encounters and no arrival notice, which cuts both ways: nobody sees you go, so nobody knows you came either.",
+   "_nameWas": "The Unlit Step",
+   "_idWas": "the_unlit_step"
   },
   {
-   "id": "the_carried_dark",
-   "name": "The Carried Dark",
+   "id": "carried_dark",
+   "name": "Carried Dark",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_dark_light",
@@ -2759,7 +2827,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Pocket of Unlight",
+     "name": "Pocket of Unlight",
      "grants": "Draw dark around yourself and move in it. Sight slides off you. You can cross a lit room slowly, or a dim one at pace.",
      "cannot": "IT IS ONLY SIGHT. You make the same noise, leave the same tracks, smell the same. Direct strong sun thins it to nothing. And moving fast tears it.",
      "functions": [
@@ -2767,11 +2835,12 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Pocket of Unlight"
     },
     {
      "rank": 2,
-     "name": "The Shared Dark",
+     "name": "Shared Dark",
      "grants": "Extend it to others moving with you, or hold it while doing something with your hands.",
      "cannot": "Everyone inside must move as you move; one person hurrying breaks it for all of them. Umbrals practise this together for months.",
      "functions": [
@@ -2780,11 +2849,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Shared Dark"
     },
     {
      "rank": 3,
-     "name": "The Travelling Night",
+     "name": "Travelling Night",
      "grants": "A moving dark large enough for a column, or deep enough that even a Radiant's kindled light does not reach into it.",
      "cannot": "⚠ YOU ARE ALSO INSIDE IT, and Umbral sight is not universal — the people you are carrying are blind. A travelling night full of people who cannot see is its own emergency.",
      "functions": [
@@ -2793,7 +2863,8 @@
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Travelling Night"
     }
    ],
    "challengeTypes": [
@@ -2832,11 +2903,13 @@
     }
    ],
    "plainly": "A puzzle/social action that carries a pocket of unlight with you. Rated 5 of 10 across a scope of 2 for about four hours.",
-   "_descriptionWas": "The Umbrals' first craft. Not hiding IN shadow — carrying one."
+   "_descriptionWas": "The Umbrals' first craft. Not hiding IN shadow — carrying one.",
+   "_nameWas": "The Carried Dark",
+   "_idWas": "the_carried_dark"
   },
   {
-   "id": "the_felt_room",
-   "name": "The Felt Room",
+   "id": "felt_room",
+   "name": "Felt Room",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_dark_light",
@@ -2855,7 +2928,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Read Dark",
+     "name": "Read Dark",
      "grants": "Know a lightless space entire — its shape, its exits, its drop-offs, and whether something living is in it and roughly where. Better in the dark than most people manage lit.",
      "cannot": "⚠ IT IS WORSE IN LIGHT, not better — a lit room is full of noise for this craft. It cannot read colour, writing, or a face. Loud places flood it.",
      "functions": [
@@ -2866,11 +2939,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Read Dark"
     },
     {
      "rank": 2,
-     "name": "The Held Sense",
+     "name": "Held Sense",
      "grants": "Keep it up while moving, or read a whole complex — passages, water, the wrongness of a collapsed section before you reach it.",
      "cannot": "Sustained, it crowds out ordinary attention; Umbrals doing this walk into things that are obvious to everyone else.",
      "functions": [
@@ -2884,11 +2958,12 @@
       "reveal",
       "foresee",
       "move"
-     ]
+     ],
+     "_nameWas": "The Held Sense"
     },
     {
      "rank": 3,
-     "name": "The Whole Deep",
+     "name": "Whole Deep",
      "grants": "An entire underplace known at once, and the things moving in it known as they move.",
      "cannot": "⚠ YOU WILL FEEL THINGS DOWN THERE YOU CANNOT IDENTIFY, and the craft gives you their position and nothing else. The Unlit stopped coming up after doing this too often.",
      "functions": [
@@ -2902,7 +2977,8 @@
       "reveal",
       "foresee",
       "move"
-     ]
+     ],
+     "_nameWas": "The Whole Deep"
     }
    ],
    "challengeTypes": [
@@ -2945,11 +3021,13 @@
     "reveal",
     "foresee"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Felt Room",
+   "_idWas": "the_felt_room"
   },
   {
-   "id": "the_kept_fire",
-   "name": "The Kept Fire",
+   "id": "kept_fire",
+   "name": "Kept Fire",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "reach_dark_light",
@@ -2967,7 +3045,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Fire Held",
+     "name": "Fire Held",
      "grants": "Take an existing flame — a coal, a spark, a lamp — and it burns on almost nothing, through rain and wind, for hours, and it DOES NOT SPREAD past a line you name aloud when you set it.",
      "cannot": "A SOURCE MUST EXIST. It does not burn hotter and it will not take hold on what genuinely will not burn. Lose sight of it for long and it becomes an ordinary fire again, with ordinary appetites.",
      "functions": [
@@ -2975,11 +3053,12 @@
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Fire Held"
     },
     {
      "rank": 2,
-     "name": "The Several Fires",
+     "name": "Several Fires",
      "grants": "A camp's worth, a forge, a signal-chain along a ridge, a controlled burn with an edge you drew — all held at once, all obedient to their lines.",
      "cannot": "Each one is attention, and a Blazeborn holding six fires is doing nothing else. A line you drew badly is a line the fire will honour exactly.",
      "functions": [
@@ -2988,11 +3067,12 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Several Fires"
     },
     {
      "rank": 3,
-     "name": "The Long Burning",
+     "name": "Long Burning",
      "grants": "A fire kept for days — a beacon through a siege, a forge through a working, a burn that clears exactly what you meant and stops at the boundary.",
      "cannot": "⚠ WHEN YOU LET GO IT IS JUST FIRE, in whatever state you left it, and it has been building for days. Blazeborn are taught to put a long burning DOWN, not to walk away from one.",
      "functions": [
@@ -3001,7 +3081,8 @@
       "ward"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Burning"
     }
    ],
    "challengeTypes": [
@@ -3039,11 +3120,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/social action that keeps a fire burning where you put it and nowhere else. Rated 5 of 10 across a scope of 2 for about a day."
+   "plainly": "A puzzle/social action that keeps a fire burning where you put it and nowhere else. Rated 5 of 10 across a scope of 2 for about a day.",
+   "_nameWas": "The Kept Fire",
+   "_idWas": "the_kept_fire"
   },
   {
-   "id": "the_read_burn",
-   "name": "The Read Burn",
+   "id": "read_burn",
+   "name": "Read Burn",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "reach_dark_light",
@@ -3063,7 +3146,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Heat Read",
+     "name": "Heat Read",
      "grants": "Read a burned place or a live fire and the craft NAMES it: what it started in, roughly how hot, how long ago it began — or, on a live one, where it goes next, how fast, and which way is survivable.",
      "cannot": "HEAT ONLY, and recent — a season-old burn is cold and silent. It says nothing about who or why. On a live fire it reads the NEXT few minutes, not the hour.",
      "functions": [
@@ -3074,11 +3157,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Heat Read"
     },
     {
      "rank": 2,
-     "name": "The Whole Burn",
+     "name": "Whole Burn",
      "grants": "A fire's entire behaviour across a site, or a burned building read room by room — origin, path, and the spots that were fed on purpose.",
      "cannot": "Reading a live fire at this depth means being close to it for longer than is sensible.",
      "functions": [
@@ -3089,11 +3173,12 @@
      "_functionsWas": [
       "reveal",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Whole Burn"
     },
     {
      "rank": 3,
-     "name": "The Fire's Whole Course",
+     "name": "Fire's Whole Course",
      "grants": "A wildfire, a burning quarter, a forge-city — where it goes over hours, what it takes, and the one line that holds it.",
      "cannot": "⚠ KNOWING THE LINE IS NOT HOLDING IT, and you will very often be the person who knows exactly which village is not savable.",
      "functions": [
@@ -3107,7 +3192,8 @@
       "reveal",
       "foresee",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Fire's Whole Course"
     }
    ],
    "challengeTypes": [
@@ -3150,10 +3236,13 @@
     "reveal",
     "foresee"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Read Burn",
+   "_idWas": "the_read_burn"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

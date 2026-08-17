@@ -39,7 +39,8 @@
       "reveal",
       "make"
      ],
-     "_nameWas": "The Wright's Eye"
+     "_nameWas": "The Wright's Eye",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -58,7 +59,8 @@
       "make",
       "command",
       "mend"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -77,6 +79,9 @@
       "make",
       "command",
       "mend"
+     ],
+     "gainAxes": [
+      "scope"
      ]
     }
    ],
@@ -179,7 +184,8 @@
      "_functionsWas": [
       "reveal",
       "heal"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -199,7 +205,8 @@
       "summon",
       "restore"
      ],
-     "_nameWas": "The Negotiable World"
+     "_nameWas": "The Negotiable World",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -221,7 +228,8 @@
       "restore",
       "sustain"
      ],
-     "_nameWas": "The Standing Presence"
+     "_nameWas": "The Standing Presence",
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -324,7 +332,8 @@
       "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -336,7 +345,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The True Mend"
+     "_nameWas": "The True Mend",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -349,7 +359,8 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "powerSystem": "reach_mechanical_spiritual",
@@ -437,7 +448,8 @@
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -450,7 +462,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Steadied Hand"
+     "_nameWas": "The Steadied Hand",
+     "gainAxes": [
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -464,7 +479,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Unshaken"
+     "_nameWas": "The Unshaken",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "powerSystem": "reach_mechanical_spiritual",
@@ -553,7 +571,8 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -565,7 +584,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Larger Engine"
+     "_nameWas": "The Larger Engine",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -578,7 +598,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Engine Obeys"
+     "_nameWas": "The Engine Obeys",
+     "gainAxes": []
     }
    ],
    "powerSystem": "reach_mechanical_spiritual",
@@ -670,7 +691,8 @@
      "_functionsWas": [
       "reveal",
       "summon"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -690,7 +712,11 @@
       "open",
       "sustain"
      ],
-     "_nameWas": "The Held Thin Place"
+     "_nameWas": "The Held Thin Place",
+     "gainAxes": [
+      "targets",
+      "autonomy"
+     ]
     },
     {
      "rank": 3,
@@ -714,7 +740,10 @@
       "make",
       "strike"
      ],
-     "_nameWas": "The Open Door"
+     "_nameWas": "The Open Door",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "powerSystem": "reach_mechanical_spiritual",
@@ -818,7 +847,8 @@
       "mend",
       "reveal"
      ],
-     "_nameWas": "The Meaning-Engine"
+     "_nameWas": "The Meaning-Engine",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -836,7 +866,10 @@
       "mend",
       "reveal"
      ],
-     "_nameWas": "The Deeper Register"
+     "_nameWas": "The Deeper Register",
+     "gainAxes": [
+      "damage"
+     ]
     }
    ],
    "powerSystem": "reach_mechanical_spiritual",
@@ -922,7 +955,8 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -935,7 +969,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Longer Fold"
+     "_nameWas": "The Longer Fold",
+     "gainAxes": [
+      "duration",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -948,7 +986,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Folded Road"
+     "_nameWas": "The Folded Road",
+     "gainAxes": [
+      "duration"
+     ]
     }
    ],
    "powerSystem": "reach_mechanical_spiritual",
@@ -1034,7 +1075,8 @@
       "summon"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "gainAxes": []
     }
    ],
    "powerSystem": "reach_mechanical_spiritual",
@@ -1125,7 +1167,8 @@
       "reveal",
       "strike",
       "break"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1142,7 +1185,8 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1159,6 +1203,9 @@
       "strike",
       "break",
       "hinder"
+     ],
+     "gainAxes": [
+      "damage"
      ]
     }
    ],
@@ -1259,7 +1306,8 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1271,7 +1319,10 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "conditions"
+     ]
     },
     {
      "rank": 3,
@@ -1284,7 +1335,10 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1374,7 +1428,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1386,7 +1441,10 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "damage"
+     ]
     },
     {
      "rank": 3,
@@ -1398,7 +1456,11 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "quality"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1484,7 +1546,8 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1499,7 +1562,8 @@
      "_functionsWas": [
       "hinder",
       "break"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1515,7 +1579,8 @@
       "hinder",
       "break"
      ],
-     "_nameWas": "The Voided Place"
+     "_nameWas": "The Voided Place",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1608,7 +1673,8 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1621,7 +1687,12 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Deep Pull"
+     "_nameWas": "The Deep Pull",
+     "gainAxes": [
+      "range",
+      "scope",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -1633,7 +1704,10 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1721,7 +1795,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Form Holds"
+     "_nameWas": "The Form Holds",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1733,7 +1808,11 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "damage",
+      "quality"
+     ]
     },
     {
      "rank": 3,
@@ -1745,7 +1824,8 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1823,7 +1903,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Self-Mending Work"
+     "_nameWas": "The Self-Mending Work",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1836,7 +1917,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Work That Learns"
+     "_nameWas": "The Work That Learns",
+     "gainAxes": [
+      "duration"
+     ]
     }
    ],
    "gated": "learned",
@@ -1917,7 +2001,8 @@
      ],
      "harmRung": "none",
      "gains": "broaden",
-     "_nameWas": "The Deep Works"
+     "_nameWas": "The Deep Works",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -1998,7 +2083,8 @@
       "summon",
       "reveal"
      ],
-     "_nameWas": "The Open Threshold"
+     "_nameWas": "The Open Threshold",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2016,7 +2102,8 @@
       "reveal",
       "bind"
      ],
-     "_nameWas": "The Long Door"
+     "_nameWas": "The Long Door",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -2029,7 +2116,11 @@
      ],
      "gains": "deepen",
      "harmRung": "lethal",
-     "_nameWas": "The Door That Waits"
+     "_nameWas": "The Door That Waits",
+     "gainAxes": [
+      "duration",
+      "autonomy"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2129,7 +2220,8 @@
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "_nameWas": "The Claw Through"
+     "_nameWas": "The Claw Through",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2147,7 +2239,12 @@
       "break",
       "hinder"
      ],
-     "_nameWas": "The Wider Gap"
+     "_nameWas": "The Wider Gap",
+     "gainAxes": [
+      "range",
+      "scope",
+      "conditions"
+     ]
     },
     {
      "rank": 3,
@@ -2166,7 +2263,8 @@
       "break",
       "hinder",
       "summon"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2252,7 +2350,8 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2270,7 +2369,10 @@
       "break",
       "hinder"
      ],
-     "_nameWas": "The Failing Line"
+     "_nameWas": "The Failing Line",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -2289,7 +2391,10 @@
       "hinder",
       "command"
      ],
-     "_nameWas": "The Great Refusal"
+     "_nameWas": "The Great Refusal",
+     "gainAxes": [
+      "damage"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2350,5 +2455,6 @@
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
  "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

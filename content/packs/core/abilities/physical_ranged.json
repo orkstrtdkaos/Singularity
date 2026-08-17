@@ -5,8 +5,8 @@
  "note": "⛔ SNG-440. PHYSICAL RANGED CRAFT — Erik: 'I want more physical skills. Some can use agility, such as throwing knives, stars, stones. Some should be bow or crossbow style. Some are various raw power thrown.'\n⚠️ MEASURED FIRST: of 376 abilities, only 45 are `physical` (12%, against 161 mental), and exactly ONE was a genuine ranged physical attack. 21 of 31 traditions have NO physical ability at all.\n⛔ AUTHORED AS `valley_craft` ON PURPOSE. Valley craft is 'skill and nothing else' — no power system, no tradition gate — so these are available to ANY character and they close the coverage gap at the same time as the physical one. A Cogitant can now throw a knife. ⚠️ ALL SIX ROLL DICE on the existing ladder (L1 1d6, L2 2d6), because Erik's standard is that a skill DOES what its label says.\n\n⛔ RE-ROOTED, SNG-443. ERIK: 'Skills may be learned at PLACES — or in the wilds as a hunter — but they would be TIED BACK TO THEIR TRADITION ROOTS otherwise.'\n⚠️ THAT IS TWO AXES AND I HAD COLLAPSED THEM INTO ONE. `tradition` is the LINEAGE a craft descends from; `learnedAt` is where a person can actually acquire it. ⛔ FILING EVERYTHING AS valley_craft BECAUSE IT WAS OPEN TO ANYONE CONFUSED ACCESS WITH ANCESTRY.\n⛔ AND IT DISSOLVES THE HUNTER'S STRIKE COLLISION RATHER THAN PATCHING IT: Hunter's Strike is a working hunter's shot, valley-rooted, learned in the wilds, taken for meat. The Drawn Bow is line-holding doctrine at range, marcher-rooted, learned at Hardline for money. ⚠️ SAME WEAPON, DIFFERENT CRAFT, DIFFERENT ROOT — they were never duplicates, they were two crafts I had mislabelled as one.",
  "abilities": [
   {
-   "id": "the_thrown_edge",
-   "name": "The Thrown Edge",
+   "id": "thrown_edge",
+   "name": "Thrown Edge",
    "levelReq": 1,
    "energyCost": 3,
    "axes": {
@@ -36,18 +36,19 @@
     },
     {
      "rank": 2,
-     "name": "The Second Knife",
+     "name": "Second Knife",
      "grants": "Two blades in the time of one — the same target twice, or two targets standing close.",
      "functions": [
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "cannot": "Two targets must be standing close; you are still out of blades eventually."
+     "cannot": "Two targets must be standing close; you are still out of blades eventually.",
+     "_nameWas": "The Second Knife"
     },
     {
      "rank": 3,
-     "name": "The Full Belt",
+     "name": "Full Belt",
      "grants": "Throw anything with a point and an edge, and it flies true: a chisel, a shard, a fork.",
      "functions": [
       "strike",
@@ -55,7 +56,8 @@
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "cannot": "Improvised points do less than a true blade; you must have something with an edge."
+     "cannot": "Improvised points do less than a true blade; you must have something with an edge.",
+     "_nameWas": "The Full Belt"
     }
    ],
    "functions": [
@@ -101,11 +103,13 @@
    "_authored": "SNG-440",
    "_traditionWas": "valley_craft",
    "learnedAt": "hardline / the wilds",
-   "_rootWhy": "⛔ THE EDGE, THROWN. A blade leaving the hand is still skill at arms, and the Marchers teach it even though they consider it a poor cousin of a held weapon. ⚠️ Learned at Hardline for money, or in the wilds by anyone who has had to eat."
+   "_rootWhy": "⛔ THE EDGE, THROWN. A blade leaving the hand is still skill at arms, and the Marchers teach it even though they consider it a poor cousin of a held weapon. ⚠️ Learned at Hardline for money, or in the wilds by anyone who has had to eat.",
+   "_nameWas": "The Thrown Edge",
+   "_idWas": "the_thrown_edge"
   },
   {
-   "id": "the_sling_and_stone",
-   "name": "The Sling and Stone",
+   "id": "sling_and_stone",
+   "name": "Sling and Stone",
    "levelReq": 1,
    "energyCost": 2,
    "axes": {
@@ -123,18 +127,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Loosed Stone",
+     "name": "Loosed Stone",
      "grants": "One stone at 40 paces. Ammunition is whatever is underfoot — you are never out.",
      "cannot": "Needs room to swing; useless in a press or a low tunnel.",
      "functions": [
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Loosed Stone"
     },
     {
      "rank": 2,
-     "name": "The Aimed Stone",
+     "name": "Aimed Stone",
      "grants": "Call the hit — a hand, a knee, the lamp, the horse. It goes where you called.",
      "functions": [
       "strike"
@@ -145,7 +150,8 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Aimed Stone"
     },
     {
      "rank": 3,
@@ -208,11 +214,13 @@
    "_functionsWas": [
     "strike"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Sling and Stone",
+   "_idWas": "the_sling_and_stone"
   },
   {
-   "id": "the_drawn_bow",
-   "name": "The Drawn Bow",
+   "id": "drawn_bow",
+   "name": "Drawn Bow",
    "levelReq": 2,
    "energyCost": 4,
    "axes": {
@@ -230,29 +238,31 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Long Draw",
+     "name": "Long Draw",
      "grants": "One arrow at 120 paces, through leather and gambeson. You can hold at full draw and wait.",
      "cannot": "Cannot shoot in a press; a shield-wall stops you cold; wet string, no shot.",
      "functions": [
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Long Draw"
     },
     {
      "rank": 2,
-     "name": "The Kept Rhythm",
+     "name": "Kept Rhythm",
      "grants": "An arrow every action without losing accuracy — you can hold a corridor or a bridge alone.",
      "functions": [
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "cannot": "Arrows are counted — a quiver is twenty and you will notice."
+     "cannot": "Arrows are counted — a quiver is twenty and you will notice.",
+     "_nameWas": "The Kept Rhythm"
     },
     {
      "rank": 3,
-     "name": "The Heavy Head",
+     "name": "Heavy Head",
      "grants": "Bodkin heads: mail and plate stop mattering at under sixty paces.",
      "functions": [
       "strike",
@@ -260,7 +270,8 @@
      ],
      "gains": "deepen",
      "harmRung": "lethal",
-     "cannot": "Bodkin heads only bite inside sixty paces; still both hands and clear sight."
+     "cannot": "Bodkin heads only bite inside sixty paces; still both hands and clear sight.",
+     "_nameWas": "The Heavy Head"
     }
    ],
    "functions": [
@@ -306,11 +317,13 @@
    "_authored": "SNG-440",
    "_traditionWas": "valley_craft",
    "learnedAt": "hardline",
-   "_rootWhy": "⛔ MILITARY ARCHERY. Holding a bridge alone, an arrow every action, the unhurried third shot — that is the March's line-holding doctrine at range and it descends from the Edge. ⚠️ DISTINCT FROM HUNTER'S STRIKE, which is a working hunter's shot for meat. Same weapon, different craft, different root."
+   "_rootWhy": "⛔ MILITARY ARCHERY. Holding a bridge alone, an arrow every action, the unhurried third shot — that is the March's line-holding doctrine at range and it descends from the Edge. ⚠️ DISTINCT FROM HUNTER'S STRIKE, which is a working hunter's shot for meat. Same weapon, different craft, different root.",
+   "_nameWas": "The Drawn Bow",
+   "_idWas": "the_drawn_bow"
   },
   {
-   "id": "the_levelled_crossbow",
-   "name": "The Levelled Crossbow",
+   "id": "levelled_crossbow",
+   "name": "Levelled Crossbow",
    "levelReq": 2,
    "energyCost": 5,
    "axes": {
@@ -339,18 +352,19 @@
     },
     {
      "rank": 2,
-     "name": "The Belt Claw",
+     "name": "Belt Claw",
      "grants": "Span and shoot in the same action, if you have both feet under you.",
      "functions": [
       "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "cannot": "You need both feet under you; a cranked string in the wet is a slow disaster."
+     "cannot": "You need both feet under you; a cranked string in the wet is a slow disaster.",
+     "_nameWas": "The Belt Claw"
     },
     {
      "rank": 3,
-     "name": "The Windlass",
+     "name": "Windlass",
      "grants": "A heavy bow that will go through plate, a shield, and the arm behind it.",
      "functions": [
       "strike",
@@ -358,7 +372,8 @@
      ],
      "gains": "deepen",
      "harmRung": "lethal",
-     "cannot": "Heavy, obvious, and illegal in three cities."
+     "cannot": "Heavy, obvious, and illegal in three cities.",
+     "_nameWas": "The Windlass"
     }
    ],
    "functions": [
@@ -404,11 +419,13 @@
    "_authored": "SNG-440",
    "_traditionWas": "valley_craft",
    "learnedAt": "hardline / anywhere",
-   "_rootWhy": "⚠️ MARCHER ROOT, BUT THE POLITICS ARE THE POINT: 'you can hand one to a farmer and they can do it too.' ⛔ The Marchers teach it and quietly resent that teaching is barely required. Illegal in three cities for exactly this reason."
+   "_rootWhy": "⚠️ MARCHER ROOT, BUT THE POLITICS ARE THE POINT: 'you can hand one to a farmer and they can do it too.' ⛔ The Marchers teach it and quietly resent that teaching is barely required. Illegal in three cities for exactly this reason.",
+   "_nameWas": "The Levelled Crossbow",
+   "_idWas": "the_levelled_crossbow"
   },
   {
-   "id": "the_hurled_weight",
-   "name": "The Hurled Weight",
+   "id": "hurled_weight",
+   "name": "Hurled Weight",
    "levelReq": 1,
    "energyCost": 4,
    "axes": {
@@ -438,7 +455,7 @@
     },
     {
      "rank": 2,
-     "name": "The Committed Throw",
+     "name": "Committed Throw",
      "grants": "Throw something you should not be able to lift — a table, a door, a person of your own size.",
      "functions": [
       "strike",
@@ -446,11 +463,12 @@
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "cannot": "You must be able to lift it; fifteen paces and it drops."
+     "cannot": "You must be able to lift it; fifteen paces and it drops.",
+     "_nameWas": "The Committed Throw"
     },
     {
      "rank": 3,
-     "name": "The Scattering",
+     "name": "Scattering",
      "grants": "Throw into a group: everyone in the path goes over, not just the first.",
      "functions": [
       "strike",
@@ -463,7 +481,8 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Scattering"
     }
    ],
    "functions": [
@@ -514,11 +533,13 @@
     "strike",
     "break"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Hurled Weight",
+   "_idWas": "the_hurled_weight"
   },
   {
-   "id": "the_quick_hands",
-   "name": "The Quick Hands",
+   "id": "quick_hands",
+   "name": "Quick Hands",
    "levelReq": 1,
    "energyCost": 2,
    "axes": {
@@ -551,7 +572,7 @@
     },
     {
      "rank": 2,
-     "name": "The Turned Catch",
+     "name": "Turned Catch",
      "grants": "Catch it and send it back in the same motion, at the thrower, at short range.",
      "functions": [
       "strike"
@@ -562,7 +583,8 @@
      "_functionsWas": [
       "hinder",
       "strike"
-     ]
+     ],
+     "_nameWas": "The Turned Catch"
     },
     {
      "rank": 3,
@@ -625,8 +647,11 @@
     "strike"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Quick Hands",
+   "_idWas": "the_quick_hands"
   }
  ],
- "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address."
+ "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

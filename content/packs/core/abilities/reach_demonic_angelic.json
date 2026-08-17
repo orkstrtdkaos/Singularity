@@ -27,7 +27,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Named Want",
+     "name": "Named Want",
      "grants": "Name what a person actually wants — not what they claim, not what they should — and speak it aloud so they hear it.",
      "cannot": "Naming a want is not granting it. Some people will hate you forever for the naming.",
      "functions": [
@@ -37,11 +37,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Named Want"
     },
     {
      "rank": 2,
-     "name": "The Bargain",
+     "name": "Bargain",
      "grants": "Strike a binding bargain: both sides get what they truly want, and both sides pay what it truly costs.",
      "cannot": "The Bargain is exactly fair, which is the horror of it. It will not protect someone from the price of their own wanting.",
      "functions": [
@@ -52,11 +53,12 @@
      "_functionsWas": [
       "reveal",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Bargain"
     },
     {
      "rank": 3,
-     "name": "The Deep Descent",
+     "name": "Deep Descent",
      "grants": "Descend into a person, a place, or an institution and surface with its true engine — the appetite it is actually running on, however it dresses.",
      "cannot": "What you surface with, you now carry. The Choir's deepest are unable to see anyone as anything but their hunger, and are usually right, and are unbearable.",
      "functions": [
@@ -69,7 +71,8 @@
       "reveal",
       "bind",
       "command"
-     ]
+     ],
+     "_nameWas": "The Deep Descent"
     }
    ],
    "gated": "learned",
@@ -135,8 +138,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_offered_price",
-   "name": "The Offered Price",
+   "id": "offered_price",
+   "name": "Offered Price",
    "levelReq": 2,
    "energyCost": 5,
    "powerSystem": "reach_demonic_angelic",
@@ -156,7 +159,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Offered Price",
+     "name": "Offered Price",
      "grants": "Name what a thing will truly cost the person who wants it. They may still take it.",
      "cannot": "Naming the price does not stop them. It only means they cannot say they were not told.",
      "functions": [
@@ -166,11 +169,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Offered Price"
     },
     {
      "rank": 2,
-     "name": "The Held Price",
+     "name": "Held Price",
      "grants": "The price, once named and accepted, BINDS — it will be paid, in the coin named, whatever they do afterward.",
      "cannot": "You are now the one who holds it. Collecting is not optional, even when you have come to love them.",
      "functions": [
@@ -181,11 +185,12 @@
      "_functionsWas": [
       "reveal",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Held Price"
     },
     {
      "rank": 3,
-     "name": "The True Cost",
+     "name": "True Cost",
      "grants": "Name what a course of action will ultimately cost — not the ledger price, the real one, years out.",
      "cannot": "People do not believe true costs. The Choir's oldest grief is being right and ignored.",
      "functions": [
@@ -199,7 +204,8 @@
       "reveal",
       "bind",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The True Cost"
     }
    ],
    "gated": "learned",
@@ -259,7 +265,9 @@
     "foresee",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Offered Price",
+   "_idWas": "the_offered_price"
   },
   {
    "id": "ascent",
@@ -285,7 +293,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Measuring Eye",
+     "name": "Measuring Eye",
      "grants": "See a person's moral weight — what they have done, what it cost others, what they carry.",
      "cannot": "It measures the deed, not the person. The Orders forget this distinction constantly and catastrophically.",
      "functions": [
@@ -295,11 +303,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Measuring Eye"
     },
     {
      "rank": 2,
-     "name": "The Mercy",
+     "name": "Mercy",
      "grants": "Grant a real absolution — lift a weight a person has carried, genuinely, and they will feel it leave.",
      "cannot": "Mercy given is mercy TAKEN ON. The weight does not vanish; it moves to you.",
      "functions": [
@@ -310,11 +319,12 @@
      "_functionsWas": [
       "reveal",
       "restore"
-     ]
+     ],
+     "_nameWas": "The Mercy"
     },
     {
      "rank": 3,
-     "name": "The Judgment",
+     "name": "Judgment",
      "grants": "Pronounce a judgment that BINDS — it is true, everyone present knows it is true, and it does not come undone.",
      "cannot": "If you are wrong, the judgment binds anyway. The Seraphic Orders' history is a long argument about that sentence.",
      "functions": [
@@ -329,7 +339,8 @@
       "restore",
       "bind",
       "command"
-     ]
+     ],
+     "_nameWas": "The Judgment"
     }
    ],
    "gated": "learned",
@@ -396,8 +407,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_shielding_word",
-   "name": "The Shielding Word",
+   "id": "shielding_word",
+   "name": "Shielding Word",
    "levelReq": 3,
    "energyCost": 6,
    "powerSystem": "reach_demonic_angelic",
@@ -417,7 +428,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Shielding Word",
+     "name": "Shielding Word",
      "grants": "Ward one person from one harm with a spoken certainty.",
      "cannot": "You must actually believe it. A hollow word wards nothing, and everyone can hear the hollow.",
      "functions": [
@@ -425,11 +436,12 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Shielding Word"
     },
     {
      "rank": 2,
-     "name": "The Standing Ward",
+     "name": "Standing Ward",
      "grants": "The ward holds over a place and a people, for as long as you keep speaking for them.",
      "cannot": "You must keep speaking. And you must keep meaning it, which is harder.",
      "functions": [
@@ -438,11 +450,12 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Standing Ward"
     },
     {
      "rank": 3,
-     "name": "The Unbroken Word",
+     "name": "Unbroken Word",
      "grants": "A ward that holds after you have gone — a word spoken so wholly it keeps standing on its own.",
      "cannot": "It stands on what you meant when you said it. If you change, it does not. Sister Alder's ward is of this kind, and she has thought about that a great deal.",
      "functions": [
@@ -451,7 +464,8 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Unbroken Word"
     }
    ],
    "gated": "learned",
@@ -510,11 +524,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight/social action that reduces incoming harm. Its strength is rated 6 out of 10 and absorbs 5 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 8 hours Ranks: rank 2 extends targets; rank 3 adds to autonomy. Limit: you Must Actually Believe IT — A Hollow Word Wards Nothing."
+   "plainly": "A fight/social action that reduces incoming harm. Its strength is rated 6 out of 10 and absorbs 5 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 8 hours Ranks: rank 2 extends targets; rank 3 adds to autonomy. Limit: you Must Actually Believe IT — A Hollow Word Wards Nothing.",
+   "_nameWas": "The Shielding Word",
+   "_idWas": "the_shielding_word"
   },
   {
-   "id": "the_appetite_strike",
-   "name": "The Appetite Strike",
+   "id": "appetite_strike",
+   "name": "Appetite Strike",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -543,14 +559,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Unguarded Want",
+     "name": "Unguarded Want",
      "grants": "Strike at what a person most doesn't want to lose — they are fortified against the ordinary attack but have no guard on what they want.",
      "cannot": "Anything rank 2 adds — name the appetite and hit it — not the body, what the body has been protecting; it needs a REAL, HELD appetite.",
      "functions": [
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Unguarded Want"
     },
     {
      "rank": 2,
@@ -569,7 +586,7 @@
     },
     {
      "rank": 3,
-     "name": "The Thing They Would Not Name",
+     "name": "Thing They Would Not Name",
      "grants": "Hit what they kept unnamed. They will know what was struck. They will not be the same on the other side of it.",
      "cannot": "Nothing further; this is the craft's ceiling; it needs a REAL, HELD appetite.",
      "functions": [
@@ -580,7 +597,8 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Thing They Would Not Name"
     }
    ],
    "nativeOrCombination": "native",
@@ -634,11 +652,13 @@
     "hinder",
     "strike"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Appetite Strike",
+   "_idWas": "the_appetite_strike"
   },
   {
-   "id": "the_consumed_wound",
-   "name": "The Consumed Wound",
+   "id": "consumed_wound",
+   "name": "Consumed Wound",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -692,7 +712,7 @@
     },
     {
      "rank": 3,
-     "name": "The Transfer",
+     "name": "Transfer",
      "grants": "Take a wound from another into yourself and offer it down. You carry it briefly; then you don't; then neither does anyone.",
      "cannot": "Nothing further; this is the craft's ceiling; IT REMOVES, IT DOES NOT MEND.",
      "functions": [
@@ -701,7 +721,8 @@
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Transfer"
     }
    ],
    "nativeOrCombination": "native",
@@ -749,11 +770,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A medical/magical/hardship action that restores health. It rolls 2d4+2 It affects 1 target Ranks: rank 2 deepens removal; rank 3 extends targets. Limit: iT Removes, IT Does Not Mend — what is eaten is Gone."
+   "plainly": "A medical/magical/hardship action that restores health. It rolls 2d4+2 It affects 1 target Ranks: rank 2 deepens removal; rank 3 extends targets. Limit: iT Removes, IT Does Not Mend — what is eaten is Gone.",
+   "_nameWas": "The Consumed Wound",
+   "_idWas": "the_consumed_wound"
   },
   {
-   "id": "the_dread_mantle",
-   "name": "The Dread Mantle",
+   "id": "dread_mantle",
+   "name": "Dread Mantle",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -795,7 +818,7 @@
     },
     {
      "rank": 2,
-     "name": "The Real Weight",
+     "name": "Real Weight",
      "grants": "The dread around you is a genuine deterrent — not fear you project but weight others feel before they decide. Those who press anyway do it weakened: the nerve goes out of the approach, the first move comes slower and worse than they meant it to.",
      "cannot": "Anything rank 3 adds — the mantle arrives before you do; IT DETERS THOSE WHO CHOOSE.",
      "functions": [
@@ -806,7 +829,8 @@
      "_functionsWas": [
       "ward",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Real Weight"
     },
     {
      "rank": 3,
@@ -873,11 +897,13 @@
     "shield",
     "ward"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Dread Mantle",
+   "_idWas": "the_dread_mantle"
   },
   {
-   "id": "the_called_form",
-   "name": "The Called Form",
+   "id": "called_form",
+   "name": "Called Form",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -908,7 +934,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Surfaced Want",
+     "name": "Surfaced Want",
      "grants": "Summon the underside of a thing — the fear beneath the anger, the hunger beneath the pride — and give it momentary form in the room.",
      "cannot": "Anything rank 2 adds — call a form from the deep that serves a purpose — an appetite made briefly real, a fear given body — and it holds until it is dismissed; what you call is AN APPETITE GIVEN FORM.",
      "functions": [
@@ -919,7 +945,8 @@
      "_functionsWas": [
       "summon",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Surfaced Want"
     },
     {
      "rank": 2,
@@ -1007,11 +1034,13 @@
     "summon",
     "transform"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Called Form",
+   "_idWas": "the_called_form"
   },
   {
-   "id": "the_descent_path",
-   "name": "The Descent Path",
+   "id": "descent_path",
+   "name": "Descent Path",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1042,7 +1071,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Way Down",
+     "name": "Way Down",
      "grants": "Find the passage to the below — the underground route, the hidden bottom of a space, the layer the map doesn't show.",
      "cannot": "Anything rank 2 adds — travel through the below — beneath sight, beneath light, along the layer others don't know how to reach; it goes DOWN.",
      "functions": [
@@ -1053,11 +1082,12 @@
      "_functionsWas": [
       "reveal",
       "open"
-     ]
+     ],
+     "_nameWas": "The Way Down"
     },
     {
      "rank": 2,
-     "name": "The Deep Road",
+     "name": "Deep Road",
      "grants": "Travel through the below — beneath sight, beneath light, along the layer others don't know how to reach.",
      "cannot": "Anything rank 3 adds — take others down the descent path and bring them back up; it goes DOWN.",
      "functions": [
@@ -1070,7 +1100,8 @@
       "reveal",
       "open",
       "travel"
-     ]
+     ],
+     "_nameWas": "The Deep Road"
     },
     {
      "rank": 3,
@@ -1139,11 +1170,13 @@
     "reveal",
     "travel"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Descent Path",
+   "_idWas": "the_descent_path"
   },
   {
-   "id": "the_choir_sustains",
-   "name": "The Choir Sustains",
+   "id": "choir_sustains",
+   "name": "Choir Sustains",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1173,14 +1206,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Deep Holds",
+     "name": "Deep Holds",
      "grants": "When you begin to run out, the communion sustains — something from below keeps going what above has exhausted.",
      "cannot": "Anything rank 2 adds — draw from the depth to carry your party through the hardest part — the energy isn't yours, but it is available to those who have been where you have been; THE ENERGY IS NOT YOURS.",
      "functions": [
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Deep Holds"
     },
     {
      "rank": 2,
@@ -1196,7 +1230,7 @@
     },
     {
      "rank": 3,
-     "name": "The Unexhausted Deep",
+     "name": "Unexhausted Deep",
      "grants": "The communion sustains indefinitely in conditions of deprivation — as long as the connection holds, you and yours hold. And the communion gives more than endurance: those who share it are steadier of hand and clearer of head than they were before it took them — better at what they do, not merely still able to do it.",
      "cannot": "Nothing further; this is the craft's ceiling; THE ENERGY IS NOT YOURS.",
      "functions": [
@@ -1204,7 +1238,8 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Unexhausted Deep"
     }
    ],
    "nativeOrCombination": "native",
@@ -1248,11 +1283,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A endurance/hardship/survival action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: the Energy IS Not Yours — it comes from the communion, and the communion is a relationship."
+   "plainly": "A endurance/hardship/survival action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: the Energy IS Not Yours — it comes from the communion, and the communion is a relationship.",
+   "_nameWas": "The Choir Sustains",
+   "_idWas": "the_choir_sustains"
   },
   {
-   "id": "the_judged_strike",
-   "name": "The Judged Strike",
+   "id": "judged_strike",
+   "name": "Judged Strike",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1283,14 +1320,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Warranted Blow",
+     "name": "Warranted Blow",
      "grants": "Strike with the weight of judgment — the blow lands harder because it is warranted; the target knows it.",
      "cannot": "Anything rank 2 adds — a judged blow harms and reveals — what they have done is named in the moment of impact; THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED.",
      "harmRung": "damaging",
      "functions": [
       "strike"
      ],
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Warranted Blow"
     },
     {
      "rank": 2,
@@ -1371,11 +1409,13 @@
     "strike",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Judged Strike",
+   "_idWas": "the_judged_strike"
   },
   {
-   "id": "the_raised_form",
-   "name": "The Raised Form",
+   "id": "raised_form",
+   "name": "Raised Form",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1407,18 +1447,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Ordered Thing",
+     "name": "Ordered Thing",
      "grants": "Make something that embodies proper order — a structure, a space, an object whose form holds the hierarchy clearly.",
      "cannot": "Anything rank 2 adds — raise a form that organizes what surrounds it — the made thing sets the tone for the space it occupies; it instantiates what a thing SHOULD be.",
      "functions": [
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Ordered Thing"
     },
     {
      "rank": 2,
-     "name": "The Organizing Made",
+     "name": "Organizing Made",
      "grants": "Raise a form that organizes what surrounds it — the made thing sets the tone for the space it occupies.",
      "cannot": "Anything rank 3 adds — summon the form a thing should have and instantiate it — the building that should stand, the arrangement that should be — made real by the authority to say what is proper; it instantiates what a thing SHOULD be.",
      "functions": [
@@ -1426,7 +1467,8 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Organizing Made"
     },
     {
      "rank": 3,
@@ -1483,11 +1525,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A craft/leadership/magical action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens order; rank 3 adds to special. Limit: it instantiates what a thing Should be — which requires being Right about that."
+   "plainly": "A craft/leadership/magical action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens order; rank 3 adds to special. Limit: it instantiates what a thing Should be — which requires being Right about that.",
+   "_nameWas": "The Raised Form",
+   "_idWas": "the_raised_form"
   },
   {
-   "id": "the_ascent_path",
-   "name": "The Ascent Path",
+   "id": "ascent_path",
+   "name": "Ascent Path",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1531,7 +1575,7 @@
     },
     {
      "rank": 2,
-     "name": "The Opened Way",
+     "name": "Opened Way",
      "grants": "Show the ascent path and others can follow — the route up that wasn't there before is there now for those you lead.",
      "cannot": "Anything rank 3 adds — travel the ascent as a road — any height, any approach — and carry your party with you to wherever the way up leads; it goes UP.",
      "functions": [
@@ -1540,11 +1584,12 @@
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Opened Way"
     },
     {
      "rank": 3,
-     "name": "The Choir-Height",
+     "name": "Choir-Height",
      "grants": "Travel the ascent as a road — any height, any approach — and carry your party with you to wherever the way up leads.",
      "cannot": "Nothing further; this is the craft's ceiling; it goes UP.",
      "functions": [
@@ -1553,7 +1598,8 @@
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Choir-Height"
     }
    ],
    "nativeOrCombination": "native",
@@ -1599,11 +1645,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A exploration/tactical/navigation action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 15. Ranks: rank 2 extends targets; rank 3 extends range. Limit: it goes UP — there is no version of this that goes down."
+   "plainly": "A exploration/tactical/navigation action that moves you or someone else. Its strength is rated 4 out of 10 It affects 1 target, and lasts for about 4 hours. Range is 15. Ranks: rank 2 extends targets; rank 3 extends range. Limit: it goes UP — there is no version of this that goes down.",
+   "_nameWas": "The Ascent Path",
+   "_idWas": "the_ascent_path"
   },
   {
-   "id": "the_sustained_order",
-   "name": "The Sustained Order",
+   "id": "sustained_order",
+   "name": "Sustained Order",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1633,14 +1681,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Order Holds",
+     "name": "Order Holds",
      "grants": "Draw from the hierarchy to go on — the seraphic who holds their place in the order does not run out alone.",
      "cannot": "Anything rank 2 adds — sustain your party through the hierarchy's resources — not comfort but genuine sustaining authority; YOU MUST HOLD YOUR PLACE IN THE ORDER.",
      "functions": [
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Order Holds"
     },
     {
      "rank": 2,
@@ -1708,12 +1757,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A endurance/hardship/leadership action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: you Must Hold Your Place IN The Order — a seraphic cast out has nothing."
+   "plainly": "A endurance/hardship/leadership action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to special. Limit: you Must Hold Your Place IN The Order — a seraphic cast out has nothing.",
+   "_nameWas": "The Sustained Order",
+   "_idWas": "the_sustained_order"
   },
   {
    "schemaVersion": 1,
-   "id": "the_deep_covenant",
-   "name": "The Deep Covenant",
+   "id": "deep_covenant",
+   "name": "Deep Covenant",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_demonic_angelic",
@@ -1732,7 +1783,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Deep Covenant",
+     "name": "Deep Covenant",
      "grants": "Bind a willing-if-they-knew-it party to a lasting pact that shapes their choices toward your end.",
      "cannot": "It cannot compel the truly unwilling, it frays when spoken plainly by a witness, and every covenant you set is a thread that runs both ways — they are bound to you, and you to the keeping of it.",
      "functions": [
@@ -1740,11 +1791,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Deep Covenant"
     },
     {
      "rank": 2,
-     "name": "The Covenant That Spreads",
+     "name": "Covenant That Spreads",
      "grants": "Set a covenant on a household, a company, or an office rather than a person — those who take the role take the pact with it, without ever being offered it. And a covenant you already hold can be tightened: the hook set deeper, the choices narrowed further.",
      "cannot": "It still catches only what already wanted the bargain; a body with nothing owed offers nothing to hook. A covenant on an office becomes known to that office in time, and they will go looking for the witness who can name it aloud. And tightening a hook is felt — they may not know what, but they know.",
      "functions": [
@@ -1752,7 +1804,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Covenant That Spreads"
     }
    ],
    "gated": "learned",
@@ -1800,12 +1853,14 @@
     }
    ],
    "plainly": "A social action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about 30 days Ranks: rank 2 extends scope. Limit: ⚠️ IT Needs A Lever — a want, a debt, a person they will not lose. The unwilling with Nothing to lose are genuinely outside it, and they are rarer than anyone hopes.",
-   "_descriptionWas": "The Abyssal art of the binding pact — a covenant offered so precisely to the hollow in someone that refusing it feels like refusing themselves. Not domination. Invitation, with a hook already set."
+   "_descriptionWas": "The Abyssal art of the binding pact — a covenant offered so precisely to the hollow in someone that refusing it feels like refusing themselves. Not domination. Invitation, with a hook already set.",
+   "_nameWas": "The Deep Covenant",
+   "_idWas": "the_deep_covenant"
   },
   {
    "schemaVersion": 1,
-   "id": "the_drowning_deep",
-   "name": "The Drowning Deep",
+   "id": "drowning_deep",
+   "name": "Drowning Deep",
    "levelReq": 5,
    "energyCost": 14,
    "powerSystem": "reach_demonic_angelic",
@@ -1823,7 +1878,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Drowning Deep",
+     "name": "Drowning Deep",
      "grants": "Show one person the full depth beneath their footing. What they were most certain of stops bearing weight — they hesitate where they never hesitated, and the vertigo weakens every act that rested on that certainty until they either rebuild it or find another floor to stand on.",
      "cannot": "It costs nearly all you have. It fails entirely against someone at genuine peace with their own depths — they look down and are simply not afraid. And it CANNOT BE TAKEN BACK: you have shown them the deep and they have seen it, and the Abyssals are honest that this is the cruelest thing they do.",
      "functions": [
@@ -1834,7 +1889,8 @@
      "_functionsWas": [
       "reveal",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Drowning Deep"
     }
    ],
    "gated": "learned",
@@ -1883,12 +1939,14 @@
     "hinder",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Drowning Deep",
+   "_idWas": "the_drowning_deep"
   },
   {
    "schemaVersion": 1,
-   "id": "the_unfaltering_light",
-   "name": "The Unfaltering Light",
+   "id": "unfaltering_light",
+   "name": "Unfaltering Light",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_demonic_angelic",
@@ -1907,7 +1965,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Unfaltering Light",
+     "name": "Unfaltering Light",
      "grants": "Sustain an unbreakable ward of radiance over a person or place, outlasting the assault against it.",
      "cannot": "It cannot attack, only endure; it drains you the whole while it holds; and if you fall, the light falls with you.",
      "functions": [
@@ -1915,11 +1973,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Unfaltering Light"
     },
     {
      "rank": 2,
-     "name": "The Light That Carries",
+     "name": "Light That Carries",
      "grants": "The ward extends from a person to a company, and from a stand to a march — it moves with those it covers. Those inside are not merely shielded but sustained: they do not tire as they should, and wounds taken within it do not worsen while the light holds. and they are made better by it rather than merely preserved — hands steadier, aim truer, fear further off than it has any right to be.",
      "cannot": "It still cannot strike, at any mastery. It still burns you before it burns anything else. Extending it to a company means feeling each of them, continuously. And if you fall now, considerably more falls with you than before.",
      "functions": [
@@ -1927,7 +1986,8 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Light That Carries"
     }
    ],
    "gated": "learned",
@@ -1973,12 +2033,14 @@
     }
    ],
    "plainly": "A defend action that reduces incoming harm. Its strength is rated 7 out of 10 and absorbs 6 harm per hit (rank 3 armour) It affects 4 targets, and lasts for about 8 hours Ranks: rank 2 extends targets. Limit: iT Cannot Attack, Only Endure — AT Any Mastery.",
-   "_descriptionWas": "The Seraphic art of the light that does not gutter — a radiance sustained past all reason to sustain it, warding a place or a person through what should overwhelm them."
+   "_descriptionWas": "The Seraphic art of the light that does not gutter — a radiance sustained past all reason to sustain it, warding a place or a person through what should overwhelm them.",
+   "_nameWas": "The Unfaltering Light",
+   "_idWas": "the_unfaltering_light"
   },
   {
    "schemaVersion": 1,
-   "id": "the_kept_flame",
-   "name": "The Kept Flame",
+   "id": "kept_flame",
+   "name": "Kept Flame",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_demonic_angelic",
@@ -1998,7 +2060,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Kept Flame",
+     "name": "Kept Flame",
      "grants": "Channel the fabricated substrate directly as sustained radiant power — a precursor-tier working innate to your kind.",
      "cannot": "It carries an ongoing upkeep the whole time it burns, it can unmake one who is not substrate-born, and it marks you to anything that reads the substrate — you are a lit thing in a dark room, and not everything in the dark is friendly.",
      "functions": [
@@ -2006,7 +2068,8 @@
       "sustain"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Kept Flame"
     }
    ],
    "gated": "learned",
@@ -2046,12 +2109,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A defend action that strengthens someone. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep The Whole Time IT Burns."
+   "plainly": "A defend action that strengthens someone. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep The Whole Time IT Burns.",
+   "_nameWas": "The Kept Flame",
+   "_idWas": "the_kept_flame"
   },
   {
    "schemaVersion": 1,
-   "id": "the_hollow_that_holds",
-   "name": "The Hollow That Holds",
+   "id": "hollow_that_holds",
+   "name": "Hollow That Holds",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_demonic_angelic",
@@ -2071,7 +2136,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Hollow That Holds",
+     "name": "Hollow That Holds",
      "grants": "Channel the fabricated substrate through the kept Abyssal hollow — a precursor-tier working innate to your kind.",
      "cannot": "It carries an ongoing upkeep while open, it can swallow one who is not abyssal-born, and it marks you to anything that reads the substrate — the deep calls to the deep, and not all of it is on your side.",
      "functions": [
@@ -2079,7 +2144,8 @@
       "sustain"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Hollow That Holds"
     }
    ],
    "gated": "learned",
@@ -2122,12 +2188,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social action that makes or animates something. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep While Open."
+   "plainly": "A social action that makes or animates something. Its strength is rated 9 out of 10, and lasts for about 8 hours Limit: iT Carries Ongoing Upkeep While Open.",
+   "_nameWas": "The Hollow That Holds",
+   "_idWas": "the_hollow_that_holds"
   },
   {
    "schemaVersion": 1,
-   "id": "the_lever",
-   "name": "The Lever",
+   "id": "lever",
+   "name": "Lever",
    "levelReq": 3,
    "energyCost": 10,
    "powerSystem": "reach_demonic_angelic",
@@ -2147,7 +2215,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Lever",
+     "name": "Lever",
      "grants": "Find the one thing a person will not risk, and price a demand against it. They comply.",
      "cannot": "You must find a real lever. A guess that misses tells them exactly what you were reaching for.",
      "functions": [
@@ -2155,11 +2223,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Lever"
     },
     {
      "rank": 2,
-     "name": "The Held Lever",
+     "name": "Held Lever",
      "grants": "Hold the lever across time — a standing compliance rather than one act. They act as you require until the lever is taken from you.",
      "cannot": "A held lever must be MAINTAINED, and everything you hold over someone is a thing they are working to remove.",
      "functions": [
@@ -2167,11 +2236,12 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Held Lever"
     },
     {
      "rank": 3,
-     "name": "The Long Lever",
+     "name": "Long Lever",
      "grants": "Set a lever on a house, an office, or a line — those who take the role take the compulsion, whether or not they know why.",
      "cannot": "Those who inherit it did not choose it, and the Maw has never argued otherwise.",
      "functions": [
@@ -2179,7 +2249,8 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Long Lever"
     }
    ],
    "challengeTypes": [
@@ -2238,12 +2309,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/investigate action that weakens or restricts a target. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends duration; rank 3 extends targets. Limit: iT Needs A Real Lever — someone with nothing to lose is genuinely outside it."
+   "plainly": "A social/investigate action that weakens or restricts a target. Its strength is rated 6 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends duration; rank 3 extends targets. Limit: iT Needs A Real Lever — someone with nothing to lose is genuinely outside it.",
+   "_nameWas": "The Lever",
+   "_idWas": "the_lever"
   },
   {
    "schemaVersion": 1,
-   "id": "the_lifted_word",
-   "name": "The Lifted Word",
+   "id": "lifted_word",
+   "name": "Lifted Word",
    "levelReq": 5,
    "energyCost": 15,
    "powerSystem": "reach_demonic_angelic",
@@ -2262,7 +2335,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Lifted Word",
+     "name": "Lifted Word",
      "grants": "Rise and hold above a place, under control, for as long as you can pay. Everyone present sees.",
      "cannot": "Doing it unseen. Travelling far — this is presence, not distance.",
      "functions": [
@@ -2273,11 +2346,12 @@
      "_functionsWas": [
       "transform",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Lifted Word"
     },
     {
      "rank": 2,
-     "name": "The Long Ascent",
+     "name": "Long Ascent",
      "grants": "Travel by it — cross country above the roads, arriving visibly and from the wrong direction.",
      "cannot": "Arriving unannounced. You are a light in the sky for the whole approach.",
      "functions": [
@@ -2285,7 +2359,8 @@
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Ascent"
     }
    ],
    "challengeTypes": [
@@ -2330,12 +2405,14 @@
     "reveal",
     "travel"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Lifted Word",
+   "_idWas": "the_lifted_word"
   },
   {
    "schemaVersion": 1,
-   "id": "the_borne_bargain",
-   "name": "The Borne Bargain",
+   "id": "borne_bargain",
+   "name": "Borne Bargain",
    "levelReq": 5,
    "energyCost": 14,
    "powerSystem": "reach_demonic_angelic",
@@ -2354,7 +2431,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Borne Bargain",
+     "name": "Borne Bargain",
      "grants": "Be carried aloft and across at speed. The price is named up front and paid on arrival.",
      "cannot": "Bargaining after you are airborne. The terms are fixed at the moment you leave the ground.",
      "functions": [
@@ -2362,11 +2439,12 @@
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Borne Bargain"
     },
     {
      "rank": 2,
-     "name": "The Standing Passage",
+     "name": "Standing Passage",
      "grants": "A standing arrangement — passage whenever you call for it, on an account that accrues.",
      "cannot": "Forgetting the account. It is being kept whether or not you keep it.",
      "functions": [
@@ -2374,7 +2452,8 @@
       "travel"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Standing Passage"
     }
    ],
    "challengeTypes": [
@@ -2413,11 +2492,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A travel and social action. You do not fly; something carries you, fast and silent, on a price named before you leave the ground and paid on arrival — it is not refunded if you land early. At rank 2 you open a standing arrangement you can call on any time, on an account that accrues and is being kept whether or not you keep it, and an abyssal account is collectable. It is the fastest travel in the game and the only one that leaves you owing."
+   "plainly": "A travel and social action. You do not fly; something carries you, fast and silent, on a price named before you leave the ground and paid on arrival — it is not refunded if you land early. At rank 2 you open a standing arrangement you can call on any time, on an account that accrues and is being kept whether or not you keep it, and an abyssal account is collectable. It is the fastest travel in the game and the only one that leaves you owing.",
+   "_nameWas": "The Borne Bargain",
+   "_idWas": "the_borne_bargain"
   },
   {
-   "id": "the_name_invoked",
-   "name": "The Name Invoked",
+   "id": "name_invoked",
+   "name": "Name Invoked",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_demonic_angelic",
@@ -2438,7 +2519,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Spoken Name",
+     "name": "Spoken Name",
      "grants": "Speak the name into a moment and those who credit it stop — a raised hand lowers, a mob's front rank hesitates, a door is opened that was not going to be. Enough time to act, or to leave.",
      "cannot": "It works ONLY on those who believe the name. Strangers, foreigners, and anyone who has actually checked feel nothing. Fail once in front of someone and the name is thinner for them forever.",
      "functions": [
@@ -2446,11 +2527,12 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Spoken Name"
     },
     {
      "rank": 2,
-     "name": "The Weight of It",
+     "name": "Weight of It",
      "grants": "Hold the moment rather than buying a breath — those who credit the name will not act against you while you hold it, and some will obey a small instruction. And you can spend the name AGAINST a believer: name them faithless in front of the others and the belief turns on them — they are struck by their own people, or by what the name means to them, and it leaves marks.",
      "cannot": "Holding it is exhausting and visible. Each instruction spends belief; ask for something the name would not ask for and you spend it all at once.",
      "functions": [
@@ -2462,11 +2544,12 @@
       "strike",
       "hinder",
       "command"
-     ]
+     ],
+     "_nameWas": "The Weight of It"
     },
     {
      "rank": 3,
-     "name": "The Name in Full",
+     "name": "Name in Full",
      "grants": "The name at its full height in front of a crowd that carries it. A charge stops. A judgment is reversed. A hall kneels — or turns on whoever you named, and a crowd that believes you will strike for the name without being asked twice, and will kill on it.",
      "cannot": "You are now what they knelt to and the valley will hold you to it. The cult that believes the NAME rather than you will defend it harder than you do — and they will notice first when you fall short.",
      "functions": [
@@ -2480,7 +2563,8 @@
       "hinder",
       "command",
       "empower"
-     ]
+     ],
+     "_nameWas": "The Name in Full"
     }
    ],
    "challengeTypes": [
@@ -2532,11 +2616,13 @@
     "hinder",
     "command"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Name Invoked",
+   "_idWas": "the_name_invoked"
   },
   {
-   "id": "the_struck_term",
-   "name": "The Struck Term",
+   "id": "struck_term",
+   "name": "Struck Term",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_demonic_angelic",
@@ -2569,7 +2655,7 @@
     },
     {
      "rank": 2,
-     "name": "The Exact Price",
+     "name": "Exact Price",
      "grants": "Structure the cost so it falls where it is useful to you — a debt owed, an advantage surrendered, a door held open. Still stated plainly; still accepted freely.",
      "cannot": "Everyone watching now knows what you do with a table. The wary stop wanting things in front of you, which is a real and growing cost.",
      "functions": [
@@ -2581,11 +2667,12 @@
       "strike",
       "bind",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Exact Price"
     },
     {
      "rank": 3,
-     "name": "The Standing Term",
+     "name": "Standing Term",
      "grants": "A bargain that keeps — an ongoing arrangement someone entered willingly and cannot simply stop paying. The Bargainers' actual power in the foothills.",
      "cannot": "It BINDS YOU TOO, and the Bargainers keep their terms; you have entered a relationship, not won an exchange. Break your side once and no one in the foothills sits at your table again.",
      "functions": [
@@ -2598,7 +2685,8 @@
       "bind",
       "hinder",
       "command"
-     ]
+     ],
+     "_nameWas": "The Standing Term"
     }
    ],
    "challengeTypes": [
@@ -2650,11 +2738,13 @@
     "strike",
     "bind"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Struck Term",
+   "_idWas": "the_struck_term"
   },
   {
-   "id": "the_offered_mouth",
-   "name": "The Offered Mouth",
+   "id": "offered_mouth",
+   "name": "Offered Mouth",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_demonic_angelic",
@@ -2673,7 +2763,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Introduction",
+     "name": "Introduction",
      "grants": "Show a nearby hunger a target — a beast, a thing in the water, something in the walls, a person's own worst want. It goes and it takes, and what it takes does not grow back.",
      "cannot": "IT IS NOT COMMANDED. Once shown, it eats on its own judgement and stops when it is done, not when you are. There must be an appetite present to show.",
      "functions": [
@@ -2684,11 +2774,12 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Introduction"
     },
     {
      "rank": 2,
-     "name": "The Shown Table",
+     "name": "Shown Table",
      "grants": "Show it more, or show several at once. A place with hungry things in it becomes a place a person cannot cross.",
      "cannot": "⚠ APPETITE DOES NOT SORT: anyone else in the area is struck ONE RUNG LOWER, and once fed, what you showed remembers who does the showing.",
      "functions": [
@@ -2700,11 +2791,12 @@
       "strike",
       "hinder",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Shown Table"
     },
     {
      "rank": 3,
-     "name": "The Devouring Introduced",
+     "name": "Devouring Introduced",
      "grants": "You show something large. It is honest about what it is and it does that, thoroughly, in front of everyone — it strikes whoever it was shown and keeps striking until it is finished or called off. AND IT HEEDS THE END OF THE INTRODUCTION: at this rank you can call it off, and send it back to what it came from.",
      "cannot": "Calling it off is a CHOICE you must make and it is not free — what you send back remembers being interrupted, and remembers you. Anyone else in the area is still struck ONE RUNG LOWER until you end it.",
      "functions": [
@@ -2718,7 +2810,8 @@
       "hinder",
       "bind",
       "summon"
-     ]
+     ],
+     "_nameWas": "The Devouring Introduced"
     }
    ],
    "challengeTypes": [
@@ -2768,11 +2861,13 @@
     "strike",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Offered Mouth",
+   "_idWas": "the_offered_mouth"
   },
   {
-   "id": "the_measured_sentence",
-   "name": "The Measured Sentence",
+   "id": "measured_sentence",
+   "name": "Measured Sentence",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_demonic_angelic",
@@ -2792,7 +2887,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Weighing Light",
+     "name": "Weighing Light",
      "grants": "Judge one person in sight and let the sentence fall. Light comes down; what is found wanting burns, in proportion. ⚠ THE MEASURE IS HONEST — a target with little to answer for takes little, whatever you intended.",
      "cannot": "IT MEASURES, THEN BURNS — you do not set the amount. A genuinely clean target takes nearly nothing and everyone watching sees that happen. You must actually pass judgment; a false one measures YOU.",
      "functions": [
@@ -2800,11 +2895,12 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Weighing Light"
     },
     {
      "rank": 2,
-     "name": "The Sentence Read",
+     "name": "Sentence Read",
      "grants": "Judge a group. Each is measured separately and each takes their own weight — which is the Orders' entire point and is also horrible to watch.",
      "cannot": "⚠ IT MEASURES EVERYONE ELSE IN THE AREA TOO, at their own honest weight, one rung lower. There is no exempting anyone from a judgment.",
      "functions": [
@@ -2815,11 +2911,12 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Sentence Read"
     },
     {
      "rank": 3,
-     "name": "The Unfallen Light",
+     "name": "Unfallen Light",
      "grants": "The full sentence, unmitigated. Those with much to answer for do not survive being measured — the light strikes each in proportion to the weighing. AND YOU HOLD THE SCALE NOW: exempt whom you name from the weighing, and temper a sentence you have already begun.",
      "cannot": "THE MEASURE IS STILL HONEST — you may exempt someone from being weighed, but you cannot make a heavy man light. Exempting the guilty is itself a judgment, and the Orders keep a record of who was spared and by whom.",
      "functions": [
@@ -2832,7 +2929,8 @@
       "strike",
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Unfallen Light"
     }
    ],
    "challengeTypes": [
@@ -2882,11 +2980,13 @@
     "strike"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Measured Sentence",
+   "_idWas": "the_measured_sentence"
   },
   {
-   "id": "the_sheltering_name",
-   "name": "The Sheltering Name",
+   "id": "sheltering_name",
+   "name": "Sheltering Name",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_demonic_angelic",
@@ -2905,7 +3005,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Name Laid Over",
+     "name": "Name Laid Over",
      "grants": "Name a person as under your name's protection, aloud, in front of people. Those who credit it will not move against them — and often will not let others.",
      "cannot": "Works only where the name is BELIEVED. It shelters from PEOPLE, not from the world. And it costs the name: shelter someone the crowd thinks unworthy and the name is thinner afterward.",
      "functions": [
@@ -2913,11 +3013,12 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Name Laid Over"
     },
     {
      "rank": 2,
-     "name": "The Kept Household",
+     "name": "Kept Household",
      "grants": "Extend it to several, or to a place — a house, a wagon, a sickroom. It holds while you are away, on the strength of having been said.",
      "cannot": "The wider it goes the thinner it is, and you are answerable for everyone under it. Someone sheltering under your name who does something ugly does it in your name.",
      "functions": [
@@ -2926,11 +3027,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Kept Household"
     },
     {
      "rank": 3,
-     "name": "The Sanctuary Declared",
+     "name": "Sanctuary Declared",
      "grants": "A place placed under the name entirely. Armed men stop at the threshold and argue with each other about it rather than crossing.",
      "cannot": "⚠ YOU MUST BE ABLE TO STAND THERE AND MEAN IT. A declared sanctuary that fails is not merely a failure — it is the public unmaking of the name, and everyone inside it was relying on you.",
      "functions": [
@@ -2939,7 +3041,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Sanctuary Declared"
     }
    ],
    "challengeTypes": [
@@ -2977,11 +3080,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/fight action that places your name's protection over someone else. Rated 5 of 10 across a scope of 2 for about a day."
+   "plainly": "A social/fight action that places your name's protection over someone else. Rated 5 of 10 across a scope of 2 for about a day.",
+   "_nameWas": "The Sheltering Name",
+   "_idWas": "the_sheltering_name"
   },
   {
-   "id": "the_borrowed_certainty",
-   "name": "The Borrowed Certainty",
+   "id": "borrowed_certainty",
+   "name": "Borrowed Certainty",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_demonic_angelic",
@@ -3000,7 +3105,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Word Given",
+     "name": "Word Given",
      "grants": "Tell people, as the name, that they can do this. A line holds that was breaking; a crew goes back into the water; someone says the thing they have not been able to say.",
      "cannot": "They must CREDIT the name, and it grants PERMISSION, not ability — a frightened man who cannot swim still cannot swim. If it goes badly they will remember who told them.",
      "functions": [
@@ -3008,11 +3113,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Word Given"
     },
     {
      "rank": 2,
-     "name": "The Steady Company",
+     "name": "Steady Company",
      "grants": "Hold it over a group through a long hard stretch — a march, a siege watch, a night of triage.",
      "cannot": "Holding it means being seen to be certain the entire time, including when you are not. That is the private cost and it does not show.",
      "functions": [
@@ -3020,11 +3126,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Steady Company"
     },
     {
      "rank": 3,
-     "name": "The Named Cause",
+     "name": "Named Cause",
      "grants": "A community acts as one because the name says it is right. Harvests are saved this way, and so are stupid wars begun.",
      "cannot": "⚠ THE NAME IS BORROWED AND THE CONSEQUENCE IS YOURS. What a whole people does on your word is on your account, and the God-Named have a long institutional memory of the ones who got this wrong.",
      "functions": [
@@ -3033,7 +3140,8 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Named Cause"
     }
    ],
    "challengeTypes": [
@@ -3070,11 +3178,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social action that lets people act because the name says they may. Rated 5 of 10 across a scope of 3 for about twelve hours."
+   "plainly": "A social action that lets people act because the name says they may. Rated 5 of 10 across a scope of 3 for about twelve hours.",
+   "_nameWas": "The Borrowed Certainty",
+   "_idWas": "the_borrowed_certainty"
   },
   {
-   "id": "the_honest_price",
-   "name": "The Honest Price",
+   "id": "honest_price",
+   "name": "Honest Price",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_demonic_angelic",
@@ -3094,7 +3204,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Price Named",
+     "name": "Price Named",
      "grants": "State the full cost of a thing aloud, including the parts everyone was politely not mentioning. Deals close that were stuck, or die honestly instead of curdling for a season.",
      "cannot": "It must be THE TRUE PRICE. Understate it to close and the craft fails publicly and permanently for you. It does not make anyone AGREE — it makes agreement possible.",
      "functions": [
@@ -3102,11 +3212,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Price Named"
     },
     {
      "rank": 2,
-     "name": "The Kept Terms",
+     "name": "Kept Terms",
      "grants": "Structure a real exchange between parties who do not trust each other, and hold it — both sides can verify the terms are what was said.",
      "cannot": "You are now a party to it, and a broken term is broken against you as well. Bargainers spend real years repairing this.",
      "functions": [
@@ -3115,11 +3226,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Kept Terms"
     },
     {
      "rank": 3,
-     "name": "The Standing Table",
+     "name": "Standing Table",
      "grants": "A place where terms can be made at all — a neutral table between feuding houses, a market where a stranger's word is worth something.",
      "cannot": "⚠ THE TABLE IS ONLY WORTH WHAT YOU ARE. It rests entirely on your record; one softened price in your history and the whole thing is furniture. The foothills remember.",
      "functions": [
@@ -3129,7 +3241,8 @@
       "ward"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Standing Table"
     }
    ],
    "challengeTypes": [
@@ -3168,11 +3281,13 @@
     }
    ],
    "plainly": "A social/puzzle action that names a thing's true cost so a deal can be made. Rated 5 of 10 across a scope of 2 for about two days.",
-   "_descriptionWas": "The Bargainers' making-craft, and the reason anyone sits at their table twice."
+   "_descriptionWas": "The Bargainers' making-craft, and the reason anyone sits at their table twice.",
+   "_nameWas": "The Honest Price",
+   "_idWas": "the_honest_price"
   },
   {
-   "id": "the_weighed_word",
-   "name": "The Weighed Word",
+   "id": "weighed_word",
+   "name": "Weighed Word",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_demonic_angelic",
@@ -3192,7 +3307,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Question Weighed",
+     "name": "Question Weighed",
      "grants": "Ask a question aloud with the light on it, and everyone present — you included — SEES whether the answer given was honest. Not what is true: whether they believe it.",
      "cannot": "It reads HONESTY, NOT ACCURACY. A sincere fool weighs clean. Silence is allowed and reads as silence. ⚠ And the Orders require you to announce it before asking — an unannounced weighing is the thing that gets an Order-bearer stripped.",
      "functions": [
@@ -3202,11 +3317,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Question Weighed"
     },
     {
      "rank": 2,
-     "name": "The Weighed Room",
+     "name": "Weighed Room",
      "grants": "Several people, or a matter run through to the end — a dispute, an accusation, a claim of ownership, with each answer weighed in front of everyone.",
      "cannot": "You have made a public record and it cuts both ways: the person you were defending is weighed too, on every question.",
      "functions": [
@@ -3218,11 +3334,12 @@
      "_functionsWas": [
       "reveal",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Weighed Room"
     },
     {
      "rank": 3,
-     "name": "The Assize",
+     "name": "Assize",
      "grants": "A whole matter weighed — a killing, a fraud, a betrayal — with every party answering under the light and the community watching the scale.",
      "cannot": "⚠ IT WILL FIND SOMETHING NOBODY WAS LOOKING FOR. An assize that begins as a theft ends as a marriage undone, and the Orders hold you responsible for having opened it.",
      "functions": [
@@ -3235,7 +3352,8 @@
       "reveal",
       "bind",
       "command"
-     ]
+     ],
+     "_nameWas": "The Assize"
     }
    ],
    "challengeTypes": [
@@ -3277,11 +3395,13 @@
    "_functionsWas": [
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Weighed Word",
+   "_idWas": "the_weighed_word"
   },
   {
-   "id": "the_shielding_light",
-   "name": "The Shielding Light",
+   "id": "shielding_light",
+   "name": "Shielding Light",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_demonic_angelic",
@@ -3301,7 +3421,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Light Interposed",
+     "name": "Light Interposed",
      "grants": "Put the light between one person and one source of harm. Blows, fire, falling stone and hostile workings turn aside from them while you hold it.",
      "cannot": "⛔ NOT YOURSELF — the craft interposes for ANOTHER, always. You can do nothing else while it holds. And it turns harm aside; it does not undo what already landed.",
      "functions": [
@@ -3309,11 +3429,12 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Light Interposed"
     },
     {
      "rank": 2,
-     "name": "The Held Ground",
+     "name": "Held Ground",
      "grants": "Several people, or one held through a sustained assault — a doorway, a wounded line, a family in a burning house.",
      "cannot": "The wider it goes the thinner, and ⚠ WHAT IT TURNS ASIDE GOES SOMEWHERE — usually into you, and the Orders consider that the correct destination.",
      "functions": [
@@ -3322,11 +3443,12 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Held Ground"
     },
     {
      "rank": 3,
-     "name": "The Standing Light",
+     "name": "Standing Light",
      "grants": "A place harm does not enter while an Order-bearer stands in it. Sieges have broken on one of these.",
      "cannot": "⚠ IT ENDS WHEN YOU DO. Everyone behind it is relying on a single person remaining upright, and the Unfallen would tell you that is the proper shape of faith. The Orders' honours, like the March's, are mostly posthumous.",
      "functions": [
@@ -3335,7 +3457,8 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Standing Light"
     }
    ],
    "challengeTypes": [
@@ -3377,11 +3500,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/social action that turns harm aside from someone else while you hold it. Rated 6 of 10 across a scope of 2 for about four hours."
+   "plainly": "A fight/social action that turns harm aside from someone else while you hold it. Rated 6 of 10 across a scope of 2 for about four hours.",
+   "_nameWas": "The Shielding Light",
+   "_idWas": "the_shielding_light"
   },
   {
-   "id": "the_offered_lesser",
-   "name": "The Offered Lesser",
+   "id": "offered_lesser",
+   "name": "Offered Lesser",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_demonic_angelic",
@@ -3400,18 +3525,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Lesser Given",
+     "name": "Lesser Given",
      "grants": "Offer a hunger a substitute it will accept — livestock, a stored thing, blood freely given, a name, a memory. It takes that instead and disengages.",
      "cannot": "SOMETHING IS EATEN. The offering is gone and it must be genuinely wanted — a token it does not want insults it and makes things worse. ⛔ Never a person who has not agreed.",
      "functions": [
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Lesser Given"
     },
     {
      "rank": 2,
-     "name": "The Standing Offering",
+     "name": "Standing Offering",
      "grants": "Set a substitution that keeps — a place regularly fed, so what lives near it does not take what you care about.",
      "cannot": "⚠ A STANDING OFFERING IS A RELATIONSHIP, and it grows. What you feed gets larger and its want gets more specific over time.",
      "functions": [
@@ -3419,11 +3545,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Standing Offering"
     },
     {
      "rank": 3,
-     "name": "The Turned Appetite",
+     "name": "Turned Appetite",
      "grants": "Redirect a large hunger entirely — off a village, off a road, off a person it had fixed on.",
      "cannot": "⚠ IT GOES SOMEWHERE. You have not reduced the eating; you have moved it, and the Choir requires you to know where and say so. Turning a thing onto a place you have not warned is the other unforgivable one.",
      "functions": [
@@ -3432,7 +3559,8 @@
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Turned Appetite"
     }
    ],
    "challengeTypes": [
@@ -3474,10 +3602,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/fight action that feeds a hunger something smaller so it disengages. Rated 6 of 10 across a scope of 2 for about eight hours."
+   "plainly": "A social/fight action that feeds a hunger something smaller so it disengages. Rated 6 of 10 across a scope of 2 for about eight hours.",
+   "_nameWas": "The Offered Lesser",
+   "_idWas": "the_offered_lesser"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

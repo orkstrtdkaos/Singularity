@@ -39,7 +39,8 @@
      "_functionsWas": [
       "reveal"
      ],
-     "_nameWas": "The Weighed Thing"
+     "_nameWas": "The Weighed Thing",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -57,7 +58,10 @@
       "make",
       "bind"
      ],
-     "_nameWas": "The Set Stone"
+     "_nameWas": "The Set Stone",
+     "gainAxes": [
+      "duration"
+     ]
     },
     {
      "rank": 3,
@@ -77,7 +81,8 @@
       "bind",
       "shield"
      ],
-     "_nameWas": "The Denial"
+     "_nameWas": "The Denial",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -179,7 +184,8 @@
      "_functionsWas": [
       "reveal"
      ],
-     "_nameWas": "The Plain Fact"
+     "_nameWas": "The Plain Fact",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -194,7 +200,8 @@
      "_functionsWas": [
       "reveal"
      ],
-     "_nameWas": "The Bedrock"
+     "_nameWas": "The Bedrock",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -210,7 +217,8 @@
       "reveal",
       "ward"
      ],
-     "_nameWas": "The Only Real"
+     "_nameWas": "The Only Real",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -313,7 +321,8 @@
      "_functionsWas": [
       "reveal"
      ],
-     "_nameWas": "The Pattern Eye"
+     "_nameWas": "The Pattern Eye",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -331,7 +340,8 @@
       "make",
       "deceive"
      ],
-     "_nameWas": "The Figure"
+     "_nameWas": "The Figure",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -351,7 +361,10 @@
       "deceive",
       "bind"
      ],
-     "_nameWas": "The Argument Made Real"
+     "_nameWas": "The Argument Made Real",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "gated": "learned",
@@ -451,7 +464,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Sent Figure"
+     "_nameWas": "The Sent Figure",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -465,7 +479,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Figure That Stays"
+     "_nameWas": "The Figure That Stays",
+     "gainAxes": [
+      "duration"
+     ]
     },
     {
      "rank": 3,
@@ -479,7 +496,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Figure That Judges"
+     "_nameWas": "The Figure That Judges",
+     "gainAxes": [
+      "autonomy"
+     ]
     }
    ],
    "gated": "learned",
@@ -637,7 +657,8 @@
      "_functionsWas": [
       "reveal",
       "mend"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -654,7 +675,8 @@
       "reveal",
       "mend",
       "restore"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -671,6 +693,9 @@
       "reveal",
       "mend",
       "restore"
+     ],
+     "gainAxes": [
+      "quality"
      ]
     }
    ],
@@ -766,7 +791,8 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -779,7 +805,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Word That Holds"
+     "_nameWas": "The Word That Holds",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -791,7 +818,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -884,7 +912,8 @@
       "reveal",
       "open"
      ],
-     "_nameWas": "The Seam"
+     "_nameWas": "The Seam",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -901,7 +930,8 @@
       "reveal",
       "open",
       "move"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -921,7 +951,8 @@
       "move",
       "make"
      ],
-     "_nameWas": "The Way In"
+     "_nameWas": "The Way In",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1016,7 +1047,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1029,7 +1061,12 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Steady Pace"
+     "_nameWas": "The Steady Pace",
+     "gainAxes": [
+      "range",
+      "duration",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -1041,7 +1078,8 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1119,7 +1157,8 @@
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "_nameWas": "The Keystone Blow"
+     "_nameWas": "The Keystone Blow",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1132,7 +1171,10 @@
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "_nameWas": "The Made Keystone"
+     "_nameWas": "The Made Keystone",
+     "gainAxes": [
+      "duration"
+     ]
     }
    ],
    "gated": "learned",
@@ -1213,7 +1255,8 @@
      ],
      "harmRung": "damaging",
      "gains": "broaden",
-     "_nameWas": "The Unmaking of Walls"
+     "_nameWas": "The Unmaking of Walls",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -1294,7 +1337,8 @@
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
-     "_nameWas": "The Reduction"
+     "_nameWas": "The Reduction",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1309,7 +1353,8 @@
      "_functionsWas": [
       "reveal",
       "break"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -1396,7 +1441,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Borrowed Form"
+     "_nameWas": "The Borrowed Form",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1409,7 +1455,12 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Long Form"
+     "_nameWas": "The Long Form",
+     "gainAxes": [
+      "range",
+      "duration",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -1422,7 +1473,12 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Shared Form"
+     "_nameWas": "The Shared Form",
+     "gainAxes": [
+      "duration",
+      "scope",
+      "targets"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1497,7 +1553,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Rising Step"
+     "_nameWas": "The Rising Step",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1510,7 +1567,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Company Stair"
+     "_nameWas": "The Company Stair",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -1523,7 +1583,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Kept Crossing"
+     "_nameWas": "The Kept Crossing",
+     "gainAxes": [
+      "duration"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1598,7 +1661,8 @@
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "_nameWas": "The Drawn Line"
+     "_nameWas": "The Drawn Line",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1616,7 +1680,10 @@
       "break",
       "hinder"
      ],
-     "_nameWas": "The Compound Figure"
+     "_nameWas": "The Compound Figure",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -1737,7 +1804,8 @@
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "_nameWas": "The True Weight"
+     "_nameWas": "The True Weight",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1755,7 +1823,8 @@
       "break",
       "hinder"
      ],
-     "_nameWas": "The Settled Fact"
+     "_nameWas": "The Settled Fact",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1773,7 +1842,8 @@
       "break",
       "hinder"
      ],
-     "_nameWas": "The Leaden Word"
+     "_nameWas": "The Leaden Word",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -1861,7 +1931,8 @@
       "reveal",
       "foresee"
      ],
-     "_nameWas": "The Hand On It"
+     "_nameWas": "The Hand On It",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1877,7 +1948,10 @@
       "reveal",
       "foresee"
      ],
-     "_nameWas": "The Whole Fabric"
+     "_nameWas": "The Whole Fabric",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -1896,7 +1970,10 @@
       "foresee",
       "empower"
      ],
-     "_nameWas": "The Standing Truth of It"
+     "_nameWas": "The Standing Truth of It",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -1975,7 +2052,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Placed Thing"
+     "_nameWas": "The Placed Thing",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1989,7 +2067,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Kept Course"
+     "_nameWas": "The Kept Course",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -2003,7 +2084,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Unmoved Work"
+     "_nameWas": "The Unmoved Work",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2052,5 +2134,6 @@
  "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json.",
  "_schemaFix2": "⛔ SNG-452: gains/harmRung restored on ranks I replaced wholesale during batch 1 — replacing a tree dropped fields I had not read.",
  "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

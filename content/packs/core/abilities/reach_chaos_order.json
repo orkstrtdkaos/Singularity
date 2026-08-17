@@ -35,7 +35,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Lucky Break"
+     "_nameWas": "The Lucky Break",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -52,6 +53,9 @@
       "make",
       "break",
       "hinder"
+     ],
+     "gainAxes": [
+      "targets"
      ]
     },
     {
@@ -72,7 +76,10 @@
       "hinder",
       "transform"
      ],
-     "_nameWas": "The Unspooling"
+     "_nameWas": "The Unspooling",
+     "gainAxes": [
+      "duration"
+     ]
     }
    ],
    "functions": [
@@ -190,7 +197,8 @@
       "make",
       "foresee"
      ],
-     "_nameWas": "The Sure Plan"
+     "_nameWas": "The Sure Plan",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -208,7 +216,8 @@
       "bind",
       "break"
      ],
-     "_nameWas": "The Binding Frame"
+     "_nameWas": "The Binding Frame",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -227,7 +236,8 @@
       "break",
       "command"
      ],
-     "_nameWas": "The Grand Order"
+     "_nameWas": "The Grand Order",
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -337,7 +347,8 @@
      "_functionsWas": [
       "hinder",
       "break"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -355,7 +366,11 @@
       "break",
       "move"
      ],
-     "_nameWas": "The Scattering"
+     "_nameWas": "The Scattering",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -372,7 +387,8 @@
       "hinder",
       "break",
       "move"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -470,7 +486,8 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -483,7 +500,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Righted Thing"
+     "_nameWas": "The Righted Thing",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -496,7 +517,8 @@
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -586,7 +608,8 @@
      "harmRung": "none",
      "_functionsWas": [
       "foresee"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -602,7 +625,10 @@
       "foresee",
       "empower"
      ],
-     "_nameWas": "The Long Tilt"
+     "_nameWas": "The Long Tilt",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -618,7 +644,8 @@
       "foresee",
       "empower"
      ],
-     "_nameWas": "The Loaded World"
+     "_nameWas": "The Loaded World",
+     "gainAxes": []
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -716,7 +743,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Fixed Point"
+     "_nameWas": "The Fixed Point",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -729,7 +757,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Anchor"
+     "_nameWas": "The Anchor",
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ]
     },
     {
      "rank": 3,
@@ -743,7 +775,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Point That Does Not Move"
+     "_nameWas": "The Point That Does Not Move",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -841,7 +876,8 @@
       "break",
       "bind"
      ],
-     "_nameWas": "The Riding Order"
+     "_nameWas": "The Riding Order",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -858,7 +894,8 @@
       "break",
       "bind"
      ],
-     "_nameWas": "The Long Riding"
+     "_nameWas": "The Long Riding",
+     "gainAxes": []
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -949,7 +986,8 @@
       "foresee",
       "empower"
      ],
-     "_nameWas": "The Long Odds"
+     "_nameWas": "The Long Odds",
+     "gainAxes": []
     }
    ],
    "powerSystem": "reach_chaos_order",
@@ -1052,7 +1090,8 @@
      "_functionsWas": [
       "reveal",
       "mend"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1071,6 +1110,9 @@
       "mend",
       "heal",
       "restore"
+     ],
+     "gainAxes": [
+      "range"
      ]
     },
     {
@@ -1090,6 +1132,10 @@
       "mend",
       "heal",
       "restore"
+     ],
+     "gainAxes": [
+      "targets",
+      "quality"
      ]
     }
    ],
@@ -1199,7 +1245,8 @@
      "_functionsWas": [
       "reveal",
       "open"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1218,7 +1265,8 @@
       "open",
       "travel",
       "move"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1238,7 +1286,8 @@
       "travel",
       "move"
      ],
-     "_nameWas": "The Inside Line"
+     "_nameWas": "The Inside Line",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1339,7 +1388,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1351,7 +1401,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "duration",
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -1364,7 +1419,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Standing Order"
+     "_nameWas": "The Standing Order",
+     "gainAxes": [
+      "conditions"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1462,7 +1520,8 @@
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1475,7 +1534,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Moving Gap"
+     "_nameWas": "The Moving Gap",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1488,7 +1548,8 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1589,7 +1650,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The False Signal"
+     "_nameWas": "The False Signal",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1603,7 +1665,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Wrong Trail"
+     "_nameWas": "The Wrong Trail",
+     "gainAxes": [
+      "scope",
+      "quality"
+     ]
     },
     {
      "rank": 3,
@@ -1617,7 +1683,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Wrong Threat"
+     "_nameWas": "The Wrong Threat",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1714,7 +1781,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1725,7 +1793,10 @@
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -1737,7 +1808,10 @@
       "restore"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1822,7 +1896,8 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1839,6 +1914,9 @@
       "strike",
       "break",
       "hinder"
+     ],
+     "gainAxes": [
+      "scope"
      ]
     },
     {
@@ -1856,7 +1934,8 @@
       "strike",
       "break",
       "hinder"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -1941,7 +2020,8 @@
       "strike",
       "hinder"
      ],
-     "_nameWas": "The Closed Line"
+     "_nameWas": "The Closed Line",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1955,7 +2035,8 @@
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
-     "_nameWas": "The Solved Position"
+     "_nameWas": "The Solved Position",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1970,7 +2051,8 @@
      ],
      "gains": "deepen",
      "harmRung": "lethal",
-     "_nameWas": "The Resolved Man"
+     "_nameWas": "The Resolved Man",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2055,7 +2137,8 @@
       "reveal",
       "foresee"
      ],
-     "_nameWas": "The Thread Found"
+     "_nameWas": "The Thread Found",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2071,7 +2154,10 @@
       "reveal",
       "foresee"
      ],
-     "_nameWas": "The Several Threads"
+     "_nameWas": "The Several Threads",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -2090,7 +2176,10 @@
       "foresee",
       "empower"
      ],
-     "_nameWas": "The Fraying Whole"
+     "_nameWas": "The Fraying Whole",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2167,7 +2256,8 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2184,6 +2274,9 @@
       "move",
       "reveal",
       "conceal"
+     ],
+     "gainAxes": [
+      "scope"
      ]
     },
     {
@@ -2201,7 +2294,8 @@
       "move",
       "reveal",
       "conceal"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2284,7 +2378,8 @@
       "reveal",
       "foresee"
      ],
-     "_nameWas": "The Departure Named"
+     "_nameWas": "The Departure Named",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2303,7 +2398,10 @@
       "foresee",
       "bind"
      ],
-     "_nameWas": "The Held Order"
+     "_nameWas": "The Held Order",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -2322,7 +2420,10 @@
       "foresee",
       "bind"
      ],
-     "_nameWas": "The City's Order"
+     "_nameWas": "The City's Order",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2400,7 +2501,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Arrangement Set"
+     "_nameWas": "The Arrangement Set",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2414,7 +2516,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Standing Arrangement"
+     "_nameWas": "The Standing Arrangement",
+     "gainAxes": [
+      "duration",
+      "autonomy"
+     ]
     },
     {
      "rank": 3,
@@ -2429,7 +2535,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Ordered Body"
+     "_nameWas": "The Ordered Body",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2475,5 +2582,6 @@
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
  "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

@@ -61,10 +61,20 @@
       "move",
       "travel"
      ],
-     "grants": "⚠️ ADDS OTHERS. In a space you understand, you move as though you laid it out — and you can walk a whole party through on the same line, calling it as you go.",
-     "cannot": "One space at a time; you must have read it.",
+     "grants": "⚠️ ADDS THE PARTY AND HOSTILE GROUND. Walk a whole group through on your line, calling it as you go — and hold the route through a space that is actively working against you: a rout, a fire, a collapsing floor.",
+     "cannot": "They must follow closely and trust it; one person breaking away breaks their own line, not yours.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_grantsWas": "⚠️ ADDS OTHERS. In a space you understand, you move as though you laid it out — and you can walk a whole party through on the same line, calling it as you go.",
+     "_functionsWas": [
+      "move",
+      "travel"
+     ],
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ],
+     "_rebalance": "⚠️ Was scope-only ('as though you laid it out'). Targets + conditions is the same fiction with a mechanical edge."
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Clear Path (cogitant), The Derived Route (syllogist) and The Patterned Way (figurist) — three skills at the same level, same magnitude, same energy, same three-rank arc, differing only in the noun. Erik: 'yes on the nav skills.' Flavour is now internal.",
@@ -168,10 +178,21 @@
       "restore",
       "mend"
      ],
-     "grants": "⛔ A FULL HEAL. Whole, to the bone, in one working — and the same for an object or a system: back to what it was before.",
-     "cannot": "One subject per use, and you must be able to reach the whole of it.",
+     "grants": "⛔ A FULL HEAL — whole, to the bone, in one working — and you can carry it to a SECOND subject in the same working if they are within reach.",
+     "cannot": "Two subjects at most, and you must be able to reach the whole of each.",
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_grantsWas": "⛔ A FULL HEAL. Whole, to the bone, in one working — and the same for an object or a system: back to what it was before.",
+     "_functionsWas": [
+      "heal",
+      "restore",
+      "mend"
+     ],
+     "gainAxes": [
+      "quality",
+      "targets"
+     ],
+     "_rebalance": "⚠️ Was scope+quality where scope meant nothing (a heal has no area). Targets is the honest second axis."
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Correct Protocol (syllogist) and The Restored Form (figurist) — identical level, dice, energy and rank arc. Erik: 'yes on the restore skills, but LEVEL ONE SHOULD HEAL A BIT ON TOP OF THE DIAGNOSIS.' ⚠️ ERIK: 'HEALED IS HEALED — permanence isn't a good r3. Perhaps r2 should be a BIG HEAL and r3 a FULL HEAL.' The ladder is now small → big → full, which is a quantity a player can read.",
@@ -233,8 +254,8 @@
    "description": "Lay a matter out so completely that the argument ends — not by winning it, but by leaving nothing further to say.",
    "narrationHints": "Nobody is humiliated and nobody is shouted down. The room simply arrives somewhere and stays there, and afterwards no one can quite remember what the disagreement was.",
    "functions": [
-    "persuade",
-    "empower"
+    "empower",
+    "persuade"
    ],
    "sectFlavour": {
     "syllogist": "THE LAID-OUT CASE — premises in order, and the conclusion is simply visible.",

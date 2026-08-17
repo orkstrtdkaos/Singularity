@@ -38,7 +38,8 @@
      "_functionsWas": [
       "reveal"
      ],
-     "_nameWas": "The Named Want"
+     "_nameWas": "The Named Want",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -54,7 +55,10 @@
       "reveal",
       "bind"
      ],
-     "_nameWas": "The Bargain"
+     "_nameWas": "The Bargain",
+     "gainAxes": [
+      "damage"
+     ]
     },
     {
      "rank": 3,
@@ -72,7 +76,10 @@
       "bind",
       "command"
      ],
-     "_nameWas": "The Deep Descent"
+     "_nameWas": "The Deep Descent",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "gated": "learned",
@@ -170,7 +177,8 @@
      "_functionsWas": [
       "reveal"
      ],
-     "_nameWas": "The Offered Price"
+     "_nameWas": "The Offered Price",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -186,7 +194,8 @@
       "reveal",
       "bind"
      ],
-     "_nameWas": "The Held Price"
+     "_nameWas": "The Held Price",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -205,7 +214,8 @@
       "bind",
       "foresee"
      ],
-     "_nameWas": "The True Cost"
+     "_nameWas": "The True Cost",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -304,7 +314,8 @@
      "_functionsWas": [
       "reveal"
      ],
-     "_nameWas": "The Measuring Eye"
+     "_nameWas": "The Measuring Eye",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -320,7 +331,10 @@
       "reveal",
       "restore"
      ],
-     "_nameWas": "The Mercy"
+     "_nameWas": "The Mercy",
+     "gainAxes": [
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -340,7 +354,8 @@
       "bind",
       "command"
      ],
-     "_nameWas": "The Judgment"
+     "_nameWas": "The Judgment",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -437,7 +452,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Shielding Word"
+     "_nameWas": "The Shielding Word",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -451,7 +467,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Standing Ward"
+     "_nameWas": "The Standing Ward",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -465,7 +482,11 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Unbroken Word"
+     "_nameWas": "The Unbroken Word",
+     "gainAxes": [
+      "duration",
+      "autonomy"
+     ]
     }
    ],
    "gated": "learned",
@@ -567,7 +588,8 @@
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "_nameWas": "The Unguarded Want"
+     "_nameWas": "The Unguarded Want",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -582,7 +604,8 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -598,7 +621,8 @@
       "strike",
       "hinder"
      ],
-     "_nameWas": "The Thing They Would Not Name"
+     "_nameWas": "The Thing They Would Not Name",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -696,7 +720,8 @@
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -708,7 +733,10 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -722,7 +750,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Transfer"
+     "_nameWas": "The Transfer",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -814,7 +845,8 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -830,7 +862,10 @@
       "ward",
       "hinder"
      ],
-     "_nameWas": "The Real Weight"
+     "_nameWas": "The Real Weight",
+     "gainAxes": [
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -843,7 +878,8 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -946,7 +982,8 @@
       "summon",
       "reveal"
      ],
-     "_nameWas": "The Surfaced Want"
+     "_nameWas": "The Surfaced Want",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -963,7 +1000,8 @@
       "summon",
       "reveal",
       "transform"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -982,7 +1020,8 @@
       "reveal",
       "transform",
       "command"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1083,7 +1122,8 @@
       "reveal",
       "open"
      ],
-     "_nameWas": "The Way Down"
+     "_nameWas": "The Way Down",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1101,7 +1141,11 @@
       "open",
       "travel"
      ],
-     "_nameWas": "The Deep Road"
+     "_nameWas": "The Deep Road",
+     "gainAxes": [
+      "range",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -1118,6 +1162,9 @@
       "reveal",
       "open",
       "travel"
+     ],
+     "gainAxes": [
+      "targets"
      ]
     }
    ],
@@ -1214,7 +1261,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Deep Holds"
+     "_nameWas": "The Deep Holds",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1226,7 +1274,10 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -1239,7 +1290,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Unexhausted Deep"
+     "_nameWas": "The Unexhausted Deep",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1328,7 +1380,8 @@
       "strike"
      ],
      "gains": "broaden",
-     "_nameWas": "The Warranted Blow"
+     "_nameWas": "The Warranted Blow",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1340,7 +1393,10 @@
       "strike",
       "reveal"
      ],
-     "gains": "broaden"
+     "gains": "broaden",
+     "gainAxes": [
+      "damage"
+     ]
     },
     {
      "rank": 3,
@@ -1355,6 +1411,10 @@
      "_functionsWas": [
       "strike",
       "reveal"
+     ],
+     "gainAxes": [
+      "damage",
+      "quality"
      ]
     }
    ],
@@ -1455,7 +1515,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Ordered Thing"
+     "_nameWas": "The Ordered Thing",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1468,7 +1529,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Organizing Made"
+     "_nameWas": "The Organizing Made",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1481,7 +1543,8 @@
       "summon"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "nativeOrCombination": "native",
@@ -1571,7 +1634,8 @@
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1585,7 +1649,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Opened Way"
+     "_nameWas": "The Opened Way",
+     "gainAxes": [
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -1599,7 +1666,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Choir-Height"
+     "_nameWas": "The Choir-Height",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1689,7 +1759,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Order Holds"
+     "_nameWas": "The Order Holds",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1701,7 +1772,10 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -1713,7 +1787,10 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "nativeOrCombination": "native",
@@ -1792,7 +1869,8 @@
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
-     "_nameWas": "The Deep Covenant"
+     "_nameWas": "The Deep Covenant",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1805,7 +1883,13 @@
      ],
      "gains": "deepen",
      "harmRung": "incapacitating",
-     "_nameWas": "The Covenant That Spreads"
+     "_nameWas": "The Covenant That Spreads",
+     "gainAxes": [
+      "range",
+      "damage",
+      "scope",
+      "targets"
+     ]
     }
    ],
    "gated": "learned",
@@ -1890,7 +1974,8 @@
       "reveal",
       "hinder"
      ],
-     "_nameWas": "The Drowning Deep"
+     "_nameWas": "The Drowning Deep",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -1974,7 +2059,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Unfaltering Light"
+     "_nameWas": "The Unfaltering Light",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1987,7 +2073,14 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Light That Carries"
+     "_nameWas": "The Light That Carries",
+     "gainAxes": [
+      "range",
+      "scope",
+      "targets",
+      "quality",
+      "conditions"
+     ]
     }
    ],
    "gated": "learned",
@@ -2069,7 +2162,8 @@
      ],
      "harmRung": "none",
      "gains": "broaden",
-     "_nameWas": "The Kept Flame"
+     "_nameWas": "The Kept Flame",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -2145,7 +2239,8 @@
      ],
      "harmRung": "none",
      "gains": "broaden",
-     "_nameWas": "The Hollow That Holds"
+     "_nameWas": "The Hollow That Holds",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -2224,7 +2319,8 @@
      ],
      "gains": "broaden",
      "harmRung": "incapacitating",
-     "_nameWas": "The Lever"
+     "_nameWas": "The Lever",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2237,7 +2333,10 @@
      ],
      "gains": "deepen",
      "harmRung": "incapacitating",
-     "_nameWas": "The Held Lever"
+     "_nameWas": "The Held Lever",
+     "gainAxes": [
+      "range"
+     ]
     },
     {
      "rank": 3,
@@ -2250,7 +2349,8 @@
      ],
      "gains": "deepen",
      "harmRung": "incapacitating",
-     "_nameWas": "The Long Lever"
+     "_nameWas": "The Long Lever",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2347,7 +2447,8 @@
       "transform",
       "reveal"
      ],
-     "_nameWas": "The Lifted Word"
+     "_nameWas": "The Lifted Word",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2360,7 +2461,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Long Ascent"
+     "_nameWas": "The Long Ascent",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2440,7 +2542,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Borne Bargain"
+     "_nameWas": "The Borne Bargain",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2453,7 +2556,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Standing Passage"
+     "_nameWas": "The Standing Passage",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2528,7 +2632,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Spoken Name"
+     "_nameWas": "The Spoken Name",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2545,7 +2650,11 @@
       "hinder",
       "command"
      ],
-     "_nameWas": "The Weight of It"
+     "_nameWas": "The Weight of It",
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ]
     },
     {
      "rank": 3,
@@ -2564,7 +2673,11 @@
       "command",
       "empower"
      ],
-     "_nameWas": "The Name in Full"
+     "_nameWas": "The Name in Full",
+     "gainAxes": [
+      "damage",
+      "quality"
+     ]
     }
    ],
    "challengeTypes": [
@@ -2651,7 +2764,8 @@
      "_functionsWas": [
       "strike",
       "bind"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2668,7 +2782,10 @@
       "bind",
       "hinder"
      ],
-     "_nameWas": "The Exact Price"
+     "_nameWas": "The Exact Price",
+     "gainAxes": [
+      "quality"
+     ]
     },
     {
      "rank": 3,
@@ -2686,7 +2803,8 @@
       "hinder",
       "command"
      ],
-     "_nameWas": "The Standing Term"
+     "_nameWas": "The Standing Term",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2775,7 +2893,8 @@
       "strike",
       "hinder"
      ],
-     "_nameWas": "The Introduction"
+     "_nameWas": "The Introduction",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2792,7 +2911,11 @@
       "hinder",
       "bind"
      ],
-     "_nameWas": "The Shown Table"
+     "_nameWas": "The Shown Table",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -2811,7 +2934,8 @@
       "bind",
       "summon"
      ],
-     "_nameWas": "The Devouring Introduced"
+     "_nameWas": "The Devouring Introduced",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -2896,7 +3020,8 @@
      ],
      "gains": "broaden",
      "harmRung": "damaging",
-     "_nameWas": "The Weighing Light"
+     "_nameWas": "The Weighing Light",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -2912,7 +3037,11 @@
       "strike",
       "hinder"
      ],
-     "_nameWas": "The Sentence Read"
+     "_nameWas": "The Sentence Read",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -2930,7 +3059,11 @@
       "hinder",
       "break"
      ],
-     "_nameWas": "The Unfallen Light"
+     "_nameWas": "The Unfallen Light",
+     "gainAxes": [
+      "targets",
+      "quality"
+     ]
     }
    ],
    "challengeTypes": [
@@ -3014,7 +3147,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Name Laid Over"
+     "_nameWas": "The Name Laid Over",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -3028,7 +3162,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Kept Household"
+     "_nameWas": "The Kept Household",
+     "gainAxes": [
+      "scope",
+      "conditions"
+     ]
     },
     {
      "rank": 3,
@@ -3042,7 +3180,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Sanctuary Declared"
+     "_nameWas": "The Sanctuary Declared",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "challengeTypes": [
@@ -3114,7 +3255,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Word Given"
+     "_nameWas": "The Word Given",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -3127,7 +3269,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Steady Company"
+     "_nameWas": "The Steady Company",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -3141,7 +3286,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Named Cause"
+     "_nameWas": "The Named Cause",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -3213,7 +3361,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Price Named"
+     "_nameWas": "The Price Named",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -3227,7 +3376,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Kept Terms"
+     "_nameWas": "The Kept Terms",
+     "gainAxes": [
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -3242,7 +3394,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Standing Table"
+     "_nameWas": "The Standing Table",
+     "gainAxes": []
     }
    ],
    "challengeTypes": [
@@ -3318,7 +3471,8 @@
      "_functionsWas": [
       "reveal"
      ],
-     "_nameWas": "The Question Weighed"
+     "_nameWas": "The Question Weighed",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -3335,7 +3489,11 @@
       "reveal",
       "bind"
      ],
-     "_nameWas": "The Weighed Room"
+     "_nameWas": "The Weighed Room",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -3353,7 +3511,10 @@
       "bind",
       "command"
      ],
-     "_nameWas": "The Assize"
+     "_nameWas": "The Assize",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "challengeTypes": [
@@ -3430,7 +3591,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Light Interposed"
+     "_nameWas": "The Light Interposed",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -3444,7 +3606,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Held Ground"
+     "_nameWas": "The Held Ground",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -3458,7 +3623,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Standing Light"
+     "_nameWas": "The Standing Light",
+     "gainAxes": [
+      "conditions"
+     ]
     }
    ],
    "challengeTypes": [
@@ -3533,7 +3701,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Lesser Given"
+     "_nameWas": "The Lesser Given",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -3546,7 +3715,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Standing Offering"
+     "_nameWas": "The Standing Offering",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -3560,7 +3730,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Turned Appetite"
+     "_nameWas": "The Turned Appetite",
+     "gainAxes": [
+      "targets"
+     ]
     }
    ],
    "challengeTypes": [
@@ -3610,5 +3783,6 @@
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
  "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

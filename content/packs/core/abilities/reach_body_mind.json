@@ -958,10 +958,21 @@
       "make",
       "mend"
      ],
-     "grants": "⛔ ADDS COMPLEXITY AND DISTRICT SCALE. A mill and its race, a fortification and its approaches, a quarter's drainage. Held entire, and rebuilt entire.",
+     "grants": "⛔ ADDS COMPLEXITY AND DELEGATION. Hold a working with many interacting parts — a mill and its race, a fortification and its approaches — and hand the model to others: anyone you brief can build their piece correctly without understanding the whole.",
      "cannot": "One such working at a time, and you must be able to get around the whole of it.",
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_grantsWas": "⛔ ADDS COMPLEXITY AND DISTRICT SCALE. A mill and its race, a fortification and its approaches, a quarter's drainage. Held entire, and rebuilt entire.",
+     "_functionsWas": [
+      "make",
+      "mend"
+     ],
+     "gainAxes": [
+      "targets",
+      "quality",
+      "autonomy"
+     ],
+     "_rebalance": "⚠️ Was the third scope-gain in a row for this skill. Delegation is what a modeller actually does at that scale."
     }
    ],
    "nativeOrCombination": "native",
@@ -1331,13 +1342,22 @@
     {
      "rank": 3,
      "name": "Nothing Lands",
-     "grants": "⚠️ ADDS DECEPTION AND DISRUPTION. Not only fear and pain now — a lie, a feint, a shock or a working meant to unseat you slides off, and you read it as it fails.",
-     "cannot": "⛔ A true thing you cannot bear is still true. This turns aside what is AIMED at you, not what is so.",
+     "grants": "⛔ ADDS DECEPTION AND DISRUPTION AS CONDITIONS YOU ACT THROUGH. A lie, a feint, a shock or a working meant to unseat you slides off — and you read the attempt AS IT FAILS, which tells you what they wanted.",
+     "cannot": "A true thing you cannot bear is still true. This turns aside what is AIMED at you, not what is so.",
      "functions": [
       "resist"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_grantsWas": "⚠️ ADDS DECEPTION AND DISRUPTION. Not only fear and pain now — a lie, a feint, a shock or a working meant to unseat you slides off, and you read it as it fails.",
+     "_functionsWas": [
+      "resist"
+     ],
+     "gainAxes": [
+      "conditions",
+      "quality"
+     ],
+     "_rebalance": "⛔ I authored this rank in batch 2 and it failed my own test — 'deception slides off too' named no gain. Now it is conditions + quality, and the reading-the-attempt clause makes it an act rather than a state."
     }
    ],
    "gated": "learned",
@@ -1443,8 +1463,8 @@
     "body_mind": 0.8
    },
    "functions": [
-    "strike",
-    "foresee"
+    "foresee",
+    "strike"
    ],
    "narrationHints": "You have already seen it — the one moment, the only opening, the single stroke that ends the contest before it was properly a contest. You do not rush. You wait for the instant you already know is coming, and then it simply is.",
    "description": "The Cogitant capstone — mind and act become one perfect stroke, the whole contest read to its single decisive instant and then delivered without waste. The sword-saint's art: not the fastest blade, the ONLY necessary one.",
@@ -1729,8 +1749,9 @@
     "emotional_logical": 0.2
    },
    "functions": [
-    "strike",
-    "hinder"
+    "bind",
+    "hinder",
+    "strike"
    ],
    "narrationHints": "You give them the whole of your attention and refuse to give it back. Under a regard that complete the body starts dropping the things it was doing unattended — balance, breath, the grip on a weapon, the clotting of a wound.",
    "description": "Fix the whole of your attention on one person in sight and refuse to give it back. Balance, breath, grip and the clotting of a wound all falter. No vector, no contact — the Cogitants' first offense.",

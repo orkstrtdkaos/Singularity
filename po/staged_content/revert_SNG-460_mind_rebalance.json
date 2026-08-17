@@ -1,0 +1,357 @@
+{
+ "_note": "⛔ SNG-460 REVERT LOG — Mind rank-gain rebalance. ⚠️ THE MATRIX FOUND FIVE RANKS THAT ADDED NOTHING AT ALL — The Cutting Figure t3, Logos t2, The Borrowed Form t2, The Unmoving Mind t3, and The Names They Answer To t3 (MY OWN CAPSTONE). And SCOPE was 29 of 79 gains: 'bigger area' was the default answer to what rank 2 buys, across 15 skills.\n⛔ FOUR LAZY SCOPE GAINS SWAPPED for targets, quality, autonomy and conditions — axes a player feels.",
+ "abilities": {
+  "the_names_they_answer_to": {
+   "name": "The Names They Answer To",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Name They Are Called",
+     "grants": "⛔ ONE NAME. Speak it and they must stop, turn, or answer — one compelled act, briefly, and nothing that harms them or theirs.",
+     "cannot": "⚠️ A public name compels only a public act. They know exactly what happened and who did it.",
+     "functions": [
+      "bind",
+      "persuade"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Name They Are Known By",
+     "grants": "⚠️ TWO NAMES. Sustained control while you hold attention on them — they walk, speak, hand over, stand down.",
+     "cannot": "You must hold attention; doing anything else releases them. They can still refuse an act that would end them.",
+     "functions": [
+      "bind",
+      "command",
+      "persuade"
+     ],
+     "gains": "deepen",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 3,
+     "name": "The Name They Call Themselves",
+     "grants": "⛔ ALL THREE. No part of them is left outside the hold. They will do what they would never do, and remember agreeing to it.",
+     "cannot": "⚠️ Almost nobody gives this name away — getting it is a campaign, not a roll.",
+     "functions": [
+      "bind",
+      "command"
+     ],
+     "gains": "deepen",
+     "harmRung": "severe"
+    }
+   ]
+  },
+  "the_shared_room": {
+   "name": "The Shared Room",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Open Door",
+     "grants": "⛔ ONE WILLING PERSON IN SIGHT. Share senses and surface thought both ways — coordination without signals, acting on the same instant.",
+     "cannot": "Willing only, and in sight. Surface thought — not memory, not what they are hiding.",
+     "functions": [
+      "reveal",
+      "empower"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Long Room",
+     "grants": "⚠️ ADDS DISTANCE AND NUMBER. Hold it across miles and with several at once — ⛔ A SCOUT WHO REPORTS WITHOUT COMING BACK; a party split across a building acting as one.",
+     "cannot": "All must be willing and must have been in sight when it opened. You feel what they feel, including dying.",
+     "functions": [
+      "reveal",
+      "empower",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The One Mind",
+     "grants": "⛔ ADDS CAPABILITY-SHARING. Everyone linked can use what any one of them KNOWS — the linguist's language, the mason's eye for a load, the fighter's read of a stance.",
+     "cannot": "⚠️ Knowledge, never craft: you cannot use their tradition's power. And what one believes, all believe while it holds.",
+     "functions": [
+      "reveal",
+      "empower",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ]
+  },
+  "the_solved_route": {
+   "name": "The Solved Route",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Route",
+     "functions": [
+      "move"
+     ],
+     "grants": "Find and walk the fastest safe line through any space you can observe. You do not backtrack and you do not get lost.",
+     "cannot": "Only what you can see or have been described. Does not make you faster, only better-directed.",
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Moving Space",
+     "functions": [
+      "move",
+      "travel"
+     ],
+     "grants": "⛔ THE SPACE IS NOW ALLOWED TO MOVE. Cross a shifting one — a crowd, a patrol, a running fight — without friction, staying two steps ahead of everyone in it. Adds unseen ground: derive the route through terrain you have not entered.",
+     "cannot": "Cannot route around what you have no information about at all.",
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Designed Scene",
+     "functions": [
+      "move",
+      "travel"
+     ],
+     "grants": "⚠️ ADDS OTHERS. In a space you understand, you move as though you laid it out — and you can walk a whole party through on the same line, calling it as you go.",
+     "cannot": "One space at a time; you must have read it.",
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ]
+  },
+  "the_correct_restoration": {
+   "name": "The Correct Restoration",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Diagnosis and First Care",
+     "functions": [
+      "heal"
+     ],
+     "grants": "⛔ NAME WHAT IS ACTUALLY WRONG — the real fault, not the presenting one — AND TREAT IT. A small heal on top of the diagnosis: the bleeding stopped, the joint set, the fever broken tonight.",
+     "cannot": "One patient or one object; the fault must be present, not historical.",
+     "gains": "deepen",
+     "harmRung": "none",
+     "_functionsWas": [
+      "heal",
+      "reveal"
+     ]
+    },
+    {
+     "rank": 2,
+     "name": "The Full Sequence",
+     "functions": [
+      "heal",
+      "restore",
+      "mend"
+     ],
+     "grants": "⚠️ A BIG HEAL. The whole correct sequence, in order, nothing left out — they get up, and they can fight or walk today.",
+     "cannot": "Cannot regrow what is gone; cannot work on what you cannot examine.",
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Root and Branch",
+     "functions": [
+      "heal",
+      "restore",
+      "mend"
+     ],
+     "grants": "⛔ A FULL HEAL. Whole, to the bone, in one working — and the same for an object or a system: back to what it was before.",
+     "cannot": "One subject per use, and you must be able to reach the whole of it.",
+     "gains": "deepen",
+     "harmRung": "none"
+    }
+   ]
+  },
+  "the_working_model": {
+   "name": "The Working Model",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Single Thing",
+     "functions": [
+      "make"
+     ],
+     "grants": "⛔ ONE ITEM, OR A SPACE YOU CAN STAND IN AND SEE. A lock, a brace, a splint, a door, a cart-repair, a small room re-laid. You need no plan and you waste no material.",
+     "cannot": "One object or one small space at a time. You must be able to examine it.",
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Working",
+     "functions": [
+      "make",
+      "mend"
+     ],
+     "grants": "⚠️ ADDS SYSTEMS AND COMPOUNDS. A machine with parts that move against each other, a building, a body, a workshop yard — anything whose pieces have to agree. Diagnose its faults and redesign it from the inside.",
+     "cannot": "You must have access to the whole of it; a system half-hidden is modelled half-wrong.",
+     "gains": "broaden",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "The Modelled Country",
+     "functions": [
+      "make",
+      "mend"
+     ],
+     "grants": "⛔ ADDS COMPLEXITY AND DISTRICT SCALE. A mill and its race, a fortification and its approaches, a quarter's drainage. Held entire, and rebuilt entire.",
+     "cannot": "One such working at a time, and you must be able to get around the whole of it.",
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ]
+  },
+  "the_unmoving_mind": {
+   "name": "The Unmoving Mind",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Still Mind",
+     "grants": "Enter a stillness fear, pain and distraction do not reach. You think and work clean while the room comes apart.",
+     "cannot": "⚠️ It occupies you — entering it means standing still and doing one thing.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 2,
+     "name": "Stillness While Moving",
+     "grants": "⛔ ADDS ACTING. Hold it while fighting, walking, negotiating or climbing — the clarity comes with you instead of costing you the scene.",
+     "cannot": "You are calm, not faster. It does not help you win, only stop losing to yourself.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "deepen",
+     "harmRung": "none"
+    },
+    {
+     "rank": 3,
+     "name": "Nothing Lands",
+     "grants": "⚠️ ADDS DECEPTION AND DISRUPTION. Not only fear and pain now — a lie, a feint, a shock or a working meant to unseat you slides off, and you read it as it fails.",
+     "cannot": "⛔ A true thing you cannot bear is still true. This turns aside what is AIMED at you, not what is so.",
+     "functions": [
+      "resist"
+     ],
+     "gains": "broaden",
+     "harmRung": "none"
+    }
+   ]
+  },
+  "the_cutting_figure": {
+   "name": "The Cutting Figure",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Drawn Line",
+     "grants": "Impose a simple figure — a line, an angle, an arc — across a target within sight. What it crosses is parted: mail, hide, timber, limb. Clean edges, no blade present.",
+     "cannot": "You must hold the figure CLEANLY. Distraction makes it cut short, cut wrong, or cut across your own line of sight. Masons resist it and know they are doing so.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging"
+    },
+    {
+     "rank": 2,
+     "name": "The Compound Figure",
+     "grants": "Several lines at once, or one held open so it keeps parting what moves through — a doorway that divides what enters it.",
+     "cannot": "Compound figures are harder to hold and a lapse leaves them half-drawn and unpredictable. A HELD FIGURE STRIKES ANYONE WHO CROSSES IT AT THE SAME RUNG.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "broaden",
+     "harmRung": "incapacitating",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Impossible Solid",
+     "grants": "A figure that should not resolve in three dimensions, resolved anyway, around them. What is inside it is reorganised according to the figure — flesh, bone and stone alike are parted and rejoined wrong, which strikes as surely as any blade.",
+     "cannot": "⚠ THE FIGURE IS TRUER THAN THEY ARE and it does not distinguish among its contents. And the Untethered — who forgot bodies suffer — do exactly this and call it elegant; doing it well puts you in their company whether you like it or not.",
+     "functions": [
+      "strike",
+      "break"
+     ],
+     "gains": "deepen",
+     "harmRung": "lethal",
+     "_functionsWas": [
+      "strike",
+      "break",
+      "hinder"
+     ]
+    }
+   ]
+  },
+  "logos": {
+   "name": "Logos",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Clear Argument",
+     "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
+     "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false.",
+     "functions": [
+      "bind"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 2,
+     "name": "The Binding Proof",
+     "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
+     "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force.",
+     "functions": [
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "_functionsWas": [
+      "reveal",
+      "bind"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Necessary Conclusion",
+     "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it reorganises what everyone present thought they knew. And turned on one person: a contradiction opened in what they have built themselves on, which does not wound the body and takes the ground out from under them all the same. They will keep standing. They will not keep believing.",
+     "cannot": "It needs something true to work with — Logos cannot prove a falsehood, only forge one that the next sound mind unpicks. It fails against those who will simply refuse a true conclusion. And the Syllogists hold that a person you have taken apart this way is owed the time to rebuild, which is a debt many of them do not pay.",
+     "functions": [
+      "break",
+      "strike"
+     ],
+     "gains": "broaden",
+     "harmRung": "damaging",
+     "_functionsWas": [
+      "bind",
+      "break",
+      "strike"
+     ]
+    }
+   ]
+  }
+ }
+}

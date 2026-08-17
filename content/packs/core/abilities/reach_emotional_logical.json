@@ -26,7 +26,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Open Heart",
+     "name": "Open Heart",
      "grants": "Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.",
      "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it.",
      "functions": [
@@ -37,11 +37,12 @@
      "_functionsWas": [
       "reveal",
       "heal"
-     ]
+     ],
+     "_nameWas": "The Open Heart"
     },
     {
      "rank": 2,
-     "name": "The Shared Fire",
+     "name": "Shared Fire",
      "grants": "Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.",
      "cannot": "You take on what you move — the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it.",
      "functions": [
@@ -56,11 +57,12 @@
       "heal",
       "empower",
       "command"
-     ]
+     ],
+     "_nameWas": "The Shared Fire"
     },
     {
      "rank": 3,
-     "name": "The Deep Chord",
+     "name": "Deep Chord",
      "grants": "Feeling at the scale of peoples — turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.",
      "cannot": "The wielder drifts emotion-hot — feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling.",
      "functions": [
@@ -75,7 +77,8 @@
       "heal",
       "empower",
       "command"
-     ]
+     ],
+     "_nameWas": "The Deep Chord"
     }
    ],
    "challengeTypes": [
@@ -165,7 +168,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Clear Argument",
+     "name": "Clear Argument",
      "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
      "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false.",
      "functions": [
@@ -176,11 +179,12 @@
      "_functionsWas": [
       "reveal",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Clear Argument"
     },
     {
      "rank": 2,
-     "name": "The Binding Proof",
+     "name": "Binding Proof",
      "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
      "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force.",
      "functions": [
@@ -191,11 +195,12 @@
      "_functionsWas": [
       "reveal",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Binding Proof"
     },
     {
      "rank": 3,
-     "name": "The Necessary Conclusion",
+     "name": "Necessary Conclusion",
      "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it reorganises what everyone present thought they knew. And turned on one person: a contradiction opened in what they have built themselves on, which does not wound the body and takes the ground out from under them all the same. They will keep standing. They will not keep believing.",
      "cannot": "It needs something true to work with — Logos cannot prove a falsehood, only forge one that the next sound mind unpicks. It fails against those who will simply refuse a true conclusion. And the Syllogists hold that a person you have taken apart this way is owed the time to rebuild, which is a debt many of them do not pay.",
      "functions": [
@@ -208,7 +213,8 @@
       "bind",
       "break",
       "strike"
-     ]
+     ],
+     "_nameWas": "The Necessary Conclusion"
     }
    ],
    "challengeTypes": [
@@ -286,8 +292,8 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
   },
   {
-   "id": "the_turning_word",
-   "name": "The Turning Word",
+   "id": "turning_word",
+   "name": "Turning Word",
    "levelReq": 4,
    "energyCost": 9,
    "attribute": "social",
@@ -304,7 +310,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Turning Word",
+     "name": "Turning Word",
      "grants": "Turn a crowd or council decisively — the room moves as one when you find the word that reaches them.",
      "cannot": "Needs a real shared chord to strike; a crowd set immovably resists; you feel/carry what you move.",
      "functions": [
@@ -315,11 +321,12 @@
      "_functionsWas": [
       "bind",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Turning Word"
     },
     {
      "rank": 2,
-     "name": "The Word That Holds",
+     "name": "Word That Holds",
      "grants": "The turning holds past the moment — a crowd moved stays moved after you have gone, a council's decision keeps its shape when you are not in the room. And where there is no shared chord to strike, you can make one: name the thing they did not know they held in common. A room turned off something ugly does not merely stop: the turning closes the rift that was opening in it, and people who were a minute from being enemies go back to being neighbours.",
      "cannot": "A chord you made is a chord you are answerable for; the Rhetors hold that inventing a commonality is how peoples are built and also how they are ruined. It still cannot move a will genuinely set. And you carry what you move for as long as it stays moved.",
      "functions": [
@@ -332,7 +339,8 @@
       "bind",
       "heal",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Word That Holds"
     }
    ],
    "powerSystem": "reach_emotional_logical",
@@ -384,11 +392,13 @@
     "heal",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Turning Word",
+   "_idWas": "the_turning_word"
   },
   {
-   "id": "the_grief_strike",
-   "name": "The Grief Strike",
+   "id": "grief_strike",
+   "name": "Grief Strike",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -418,18 +428,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The True Feeling",
+     "name": "True Feeling",
      "grants": "Direct a genuine, intense feeling at a person — grief, shame, terror — that they cannot close off because it is true and they know it.",
      "cannot": "Anything rank 2 adds — find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening; IT MUST BE GENUINE FEELING.",
      "functions": [
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The True Feeling"
     },
     {
      "rank": 2,
-     "name": "The Unguarded Place",
+     "name": "Unguarded Place",
      "grants": "Find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening.",
      "cannot": "Anything rank 3 adds — break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again; IT MUST BE GENUINE FEELING.",
      "functions": [
@@ -440,11 +451,12 @@
      "_functionsWas": [
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Unguarded Place"
     },
     {
      "rank": 3,
-     "name": "The Shattered Fortification",
+     "name": "Shattered Fortification",
      "grants": "Break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again.",
      "cannot": "Nothing further; this is the craft's ceiling; IT MUST BE GENUINE FEELING; and it still costs what it costs: breaking what someone was using TO STAY FUNCTIONAL leaves them not functional.",
      "functions": [
@@ -455,7 +467,8 @@
      "_functionsWas": [
       "hinder",
       "break"
-     ]
+     ],
+     "_nameWas": "The Shattered Fortification"
     }
    ],
    "nativeOrCombination": "native",
@@ -510,11 +523,13 @@
     "break",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Grief Strike",
+   "_idWas": "the_grief_strike"
   },
   {
-   "id": "the_felt_wall",
-   "name": "The Felt Wall",
+   "id": "felt_wall",
+   "name": "Felt Wall",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -558,7 +573,7 @@
     },
     {
      "rank": 2,
-     "name": "The Feeling Guard",
+     "name": "Feeling Guard",
      "grants": "Protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch.",
      "cannot": "Anything rank 3 adds — what shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives; it senses INTENT.",
      "functions": [
@@ -569,11 +584,12 @@
      "_functionsWas": [
       "foresee",
       "shield"
-     ]
+     ],
+     "_nameWas": "The Feeling Guard"
     },
     {
      "rank": 3,
-     "name": "The Felt Ward",
+     "name": "Felt Ward",
      "grants": "What shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives.",
      "cannot": "Nothing further; this is the craft's ceiling; it senses INTENT; and it still costs what it costs: feeling every shift toward harm means FEELING EVERY SHIFT.",
      "functions": [
@@ -584,7 +600,8 @@
      "_functionsWas": [
       "foresee",
       "shield"
-     ]
+     ],
+     "_nameWas": "The Felt Ward"
     }
    ],
    "nativeOrCombination": "native",
@@ -638,11 +655,13 @@
     "foresee",
     "shield"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Felt Wall",
+   "_idWas": "the_felt_wall"
   },
   {
-   "id": "the_made_elegy",
-   "name": "The Made Elegy",
+   "id": "made_elegy",
+   "name": "Made Elegy",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -673,18 +692,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Feeling Held",
+     "name": "Feeling Held",
      "grants": "Make something that holds a feeling correctly — a song, an object, a gesture — so the feeling persists in it and can be shared or returned to.",
      "cannot": "Anything rank 2 adds — bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it; THE FEELING MUST BE TRUE to bind.",
      "functions": [
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Feeling Held"
     },
     {
      "rank": 2,
-     "name": "The Acting Elegy",
+     "name": "Acting Elegy",
      "grants": "Bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it.",
      "cannot": "Anything rank 3 adds — make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone; THE FEELING MUST BE TRUE to bind.",
      "functions": [
@@ -692,11 +712,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Acting Elegy"
     },
     {
      "rank": 3,
-     "name": "The Lasting Work",
+     "name": "Lasting Work",
      "grants": "Make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone.",
      "cannot": "Nothing further; this is the craft's ceiling; THE FEELING MUST BE TRUE to bind; and it still costs what it costs: it carries the feeling TO EVERYONE, including those who did not ask.",
      "functions": [
@@ -704,7 +725,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Lasting Work"
     }
    ],
    "nativeOrCombination": "native",
@@ -749,11 +771,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A art/social/craft action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 adds to special; rank 3 extends scope. Limit: the Feeling Must BE True to bind — a made sentiment does not hold."
+   "plainly": "A art/social/craft action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 adds to special; rank 3 extends scope. Limit: the Feeling Must BE True to bind — a made sentiment does not hold.",
+   "_nameWas": "The Made Elegy",
+   "_idWas": "the_made_elegy"
   },
   {
-   "id": "the_feeling_road",
-   "name": "The Feeling Road",
+   "id": "feeling_road",
+   "name": "Feeling Road",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -783,7 +807,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Resonance Trail",
+     "name": "Resonance Trail",
      "grants": "Navigate toward a feeling — find a person, a place, or a source by following the emotional trace they leave across a space.",
      "cannot": "Anything rank 2 adds — travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it; it follows FEELING.",
      "functions": [
@@ -794,11 +818,12 @@
      "_functionsWas": [
       "reveal",
       "track"
-     ]
+     ],
+     "_nameWas": "The Resonance Trail"
     },
     {
      "rank": 2,
-     "name": "The Feeling Landmark",
+     "name": "Feeling Landmark",
      "grants": "Travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it.",
      "cannot": "Anything rank 3 adds — follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community; it follows FEELING.",
      "functions": [
@@ -810,11 +835,12 @@
       "reveal",
       "track",
       "travel"
-     ]
+     ],
+     "_nameWas": "The Feeling Landmark"
     },
     {
      "rank": 3,
-     "name": "The Long Trail",
+     "name": "Long Trail",
      "grants": "Follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community.",
      "cannot": "Nothing further; this is the craft's ceiling; it follows FEELING; and it still costs what it costs: arriving at the source of a great feeling means ARRIVING AT ITS SOURCE.",
      "functions": [
@@ -826,7 +852,8 @@
       "reveal",
       "track",
       "travel"
-     ]
+     ],
+     "_nameWas": "The Long Trail"
     }
    ],
    "nativeOrCombination": "native",
@@ -877,11 +904,13 @@
     "track",
     "travel"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Feeling Road",
+   "_idWas": "the_feeling_road"
   },
   {
-   "id": "the_wellspring",
-   "name": "The Wellspring",
+   "id": "wellspring",
+   "name": "Wellspring",
    "levelReq": 1,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -923,7 +952,7 @@
     },
     {
      "rank": 2,
-     "name": "The Carried Weight",
+     "name": "Carried Weight",
      "grants": "Your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone. And they are braver for it: a person who is not carrying it alone attempts things they would not have attempted, and does them better.",
      "cannot": "Anything rank 3 adds — the depth sustains the party through the hardest stretch — not comfort, depth; it sustains by FEELING, not by easing.",
      "functions": [
@@ -931,11 +960,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Carried Weight"
     },
     {
      "rank": 3,
-     "name": "The Wellspring Holds",
+     "name": "Wellspring Holds",
      "grants": "The depth sustains the party through the hardest stretch — not comfort, depth; not peace, feeling so genuine it holds people together until it's over.",
      "cannot": "Nothing further; this is the craft's ceiling; it sustains by FEELING, not by easing; and it still costs what it costs: carrying some of it with them MEANS CARRYING IT.",
      "functions": [
@@ -943,7 +973,8 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Wellspring Holds"
     }
    ],
    "nativeOrCombination": "native",
@@ -987,11 +1018,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A endurance/hardship/social action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: it sustains by Feeling, not by easing — a person who wants comfort gets depth instead."
+   "plainly": "A endurance/hardship/social action that strengthens someone. Its strength is rated 3 out of 10 It affects 1 target, and lasts for about a day Ranks: rank 2 extends targets; rank 3 extends targets. Limit: it sustains by Feeling, not by easing — a person who wants comfort gets depth instead.",
+   "_nameWas": "The Wellspring",
+   "_idWas": "the_wellspring"
   },
   {
-   "id": "the_built_system",
-   "name": "The Built System",
+   "id": "built_system",
+   "name": "Built System",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1023,14 +1056,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Working Rule",
+     "name": "Working Rule",
      "grants": "Design a system — legal, social, procedural — that functions because the logic it runs on is sound.",
      "cannot": "Anything rank 2 adds — build something that maintains itself through its internal logic — not enforced, not reminded, running because the reasoning it embodies is correct; IT RUNS ON ITS LOGIC.",
      "functions": [
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Working Rule"
     },
     {
      "rank": 2,
@@ -1046,7 +1080,7 @@
     },
     {
      "rank": 3,
-     "name": "The Lasting Structure",
+     "name": "Lasting Structure",
      "grants": "Construct a system so logically coherent it operates at scale without you — the laws, institutions, or mechanisms that run because the reasoning they embody is right.",
      "cannot": "Nothing further; this is the craft's ceiling; IT RUNS ON ITS LOGIC; and it still costs what it costs: a system that runs without you RUNS WITHOUT YOU, including when it should stop.",
      "functions": [
@@ -1055,7 +1089,8 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Lasting Structure"
     }
    ],
    "nativeOrCombination": "native",
@@ -1102,12 +1137,14 @@
    ],
    "plainly": "A intellectual/leadership/craft action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 adds to autonomy; rank 3 extends scope. Limit: iT Runs ON Its Logic — a system whose logic is unsound fails exactly where the flaw is.",
    "downtime": true,
-   "_flag": "⚠️ SNG-457: FLAGGED DOWNTIME. Good rank arc — design a system · it self-maintains · it runs at scale without you — but nothing rolls and the effect lands between sessions. Erik: 'ok with flagging built system.'"
+   "_flag": "⚠️ SNG-457: FLAGGED DOWNTIME. Good rank arc — design a system · it self-maintains · it runs at scale without you — but nothing rolls and the effect lands between sessions. Erik: 'ok with flagging built system.'",
+   "_nameWas": "The Built System",
+   "_idWas": "the_built_system"
   },
   {
    "schemaVersion": 1,
-   "id": "the_inescapable_conclusion",
-   "name": "The Inescapable Conclusion",
+   "id": "inescapable_conclusion",
+   "name": "Inescapable Conclusion",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "reach_emotional_logical",
@@ -1126,7 +1163,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Inescapable Conclusion",
+     "name": "Inescapable Conclusion",
      "grants": "Bind a reasoning mind to a conclusion by an argument it cannot honestly escape.",
      "cannot": "It fails against those who refuse reason itself, it binds its wielder to the same truth, and a conclusion someone was walked into by force of logic can curdle into resentment of the one who walked them.",
      "functions": [
@@ -1138,11 +1175,12 @@
      "_functionsWas": [
       "bind",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Inescapable Conclusion"
     },
     {
      "rank": 2,
-     "name": "The Standing Proof",
+     "name": "Standing Proof",
      "grants": "Walk a whole body of reasoning minds to the same conclusion at once — a council, a court, a school — and the binding holds against later private doubt, because each of them watched the others agree. The chain can be built across days now rather than one exchange.",
      "cannot": "It still fails entirely against those who will simply refuse a true conclusion, and a group holds more of them than a person does. It binds you to the same truth, publicly and on the record. And a conclusion a body was walked into together curdles together — the Syllogists have begun more than one schism this way.",
      "functions": [
@@ -1154,7 +1192,8 @@
      "_functionsWas": [
       "bind",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Standing Proof"
     }
    ],
    "gated": "learned",
@@ -1205,12 +1244,14 @@
     "bind",
     "reveal"
    ],
-   "_retag": "⛔ SNG-450: retagged SOCIAL. This is persuasion and was filed as reveal/bind."
+   "_retag": "⛔ SNG-450: retagged SOCIAL. This is persuasion and was filed as reveal/bind.",
+   "_nameWas": "The Inescapable Conclusion",
+   "_idWas": "the_inescapable_conclusion"
   },
   {
    "schemaVersion": 1,
-   "id": "the_shared_grief",
-   "name": "The Shared Grief",
+   "id": "shared_grief",
+   "name": "Shared Grief",
    "levelReq": 3,
    "energyCost": 7,
    "powerSystem": "reach_emotional_logical",
@@ -1230,18 +1271,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Shared Grief",
+     "name": "Shared Grief",
      "grants": "Lead a shared lament that spreads one grief across many, so none carries it alone.",
      "cannot": "It cannot remove grief, only distribute its weight; the singer bears the gathering of it; and a grief shared is a grief made real to everyone who joins the song.",
      "functions": [
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Shared Grief"
     },
     {
      "rank": 2,
-     "name": "The Named Sorrow",
+     "name": "Named Sorrow",
      "grants": "The lament finds the true shape of what is mourned. Singing it, you perceive what the grief is ACTUALLY for — the loss beneath the stated one — and those who join hear it named as well, often for the first time.",
      "cannot": "Naming is not mending; a sorrow correctly named can wound worse before it eases. The singer cannot choose what surfaces, and what the lament names in company cannot be unnamed.",
      "functions": [
@@ -1249,11 +1291,12 @@
       "reveal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Named Sorrow"
     },
     {
      "rank": 3,
-     "name": "The Long Lament",
+     "name": "Long Lament",
      "grants": "Hold a lament across days rather than a night, and across a settlement rather than a room — a whole community may carry one loss together until it is bearable. The gathering-point can be handed to another singer, so the lament outlasts any one voice.",
      "cannot": "You hold the gathering while you hold the lament, and days of it mark the singer; handing the point on requires a singer able to take it; and a grief carried by everyone becomes part of what that place IS — the GM records it in the world, not the character.",
      "functions": [
@@ -1264,7 +1307,8 @@
      "_functionsWas": [
       "empower",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Long Lament"
     }
    ],
    "gated": "learned",
@@ -1324,12 +1368,14 @@
     "empower",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Shared Grief",
+   "_idWas": "the_shared_grief"
   },
   {
    "schemaVersion": 1,
-   "id": "the_names_of_the_lost",
-   "name": "The Names of the Lost",
+   "id": "names_of_the_lost",
+   "name": "Names of the Lost",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "reach_emotional_logical",
@@ -1348,7 +1394,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Names of the Lost",
+     "name": "Names of the Lost",
      "grants": "Sing the names of the lost, holding them present in memory for the length of the lament.",
      "cannot": "It cannot restore the dead, only attend them; it lays every named loss on the singer at once; and the song ends, and they are gone again, and you chose to feel that twice.",
      "functions": [
@@ -1359,11 +1405,12 @@
      "_functionsWas": [
       "empower",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Names of the Lost"
     },
     {
      "rank": 2,
-     "name": "The Kept Names",
+     "name": "Kept Names",
      "grants": "The names keep past the lament. Sung over a place — a barrow, a battlefield, a hall — the attending holds without you, and any who come after feel the lost attended there. The song can hold names you were told rather than only names you carried yourself. Those who hear the names are strengthened by the attending — steadied, clearer about what they are doing and why, and harder to move off it.",
      "cannot": "It still does not return them; a name kept is not a life restored. A place that holds its lost is a place that does not move on, which is not always mercy. And a name taken from another's telling is held on trust — sing one wrong and the Threnodists count it a wound.",
      "functions": [
@@ -1374,7 +1421,8 @@
      "_functionsWas": [
       "empower",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Kept Names"
     }
    ],
    "gated": "learned",
@@ -1422,12 +1470,14 @@
     "empower",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Names of the Lost",
+   "_idWas": "the_names_of_the_lost"
   },
   {
    "schemaVersion": 1,
-   "id": "the_last_lament",
-   "name": "The Last Lament",
+   "id": "last_lament",
+   "name": "Last Lament",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_emotional_logical",
@@ -1447,7 +1497,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Last Lament",
+     "name": "Last Lament",
      "grants": "Sing a complete lament that lets all who hear finish a grief they could not finish alone.",
      "cannot": "It costs nearly all you have, it makes the singer feel every grief entire, and it does not undo loss — it only, mercifully, completes the mourning of it.",
      "functions": [
@@ -1455,7 +1505,8 @@
       "restore"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Last Lament"
     }
    ],
    "gated": "learned",
@@ -1497,12 +1548,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social action that strengthens someone. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: iT Costs Nearly All You Have."
+   "plainly": "A social action that strengthens someone. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: iT Costs Nearly All You Have.",
+   "_nameWas": "The Last Lament",
+   "_idWas": "the_last_lament"
   },
   {
    "schemaVersion": 1,
-   "id": "the_grief_that_stops",
-   "name": "The Grief That Stops",
+   "id": "grief_that_stops",
+   "name": "Grief That Stops",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_emotional_logical",
@@ -1520,14 +1573,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Grief That Stops",
+     "name": "Grief That Stops",
      "grants": "Set the full weight of their own losses on them at once. They are overwhelmed and afterward not the same.",
      "cannot": "Inventing a grief. Anyone who has lost nothing.",
      "functions": [
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Grief That Stops"
     },
     {
      "rank": 2,
@@ -1585,12 +1639,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social contest against the target's composure, drawing only on losses they have actually suffered — a target who has lost nothing gets a large bonus to resist. On a win they are incapacitated for several minutes and carry a lasting penalty to composure rolls afterward. At rank 2 the GM additionally rolls a small independent chance that the target's heart stops, scaled to how much they have genuinely lost. You cannot aim for that outcome and you cannot call it off once cast."
+   "plainly": "A social contest against the target's composure, drawing only on losses they have actually suffered — a target who has lost nothing gets a large bonus to resist. On a win they are incapacitated for several minutes and carry a lasting penalty to composure rolls afterward. At rank 2 the GM additionally rolls a small independent chance that the target's heart stops, scaled to how much they have genuinely lost. You cannot aim for that outcome and you cannot call it off once cast.",
+   "_nameWas": "The Grief That Stops",
+   "_idWas": "the_grief_that_stops"
   },
   {
    "schemaVersion": 1,
-   "id": "the_closing_argument",
-   "name": "The Closing Argument",
+   "id": "closing_argument",
+   "name": "Closing Argument",
    "levelReq": 5,
    "energyCost": 12,
    "powerSystem": "reach_emotional_logical",
@@ -1609,7 +1665,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Closing Argument",
+     "name": "Closing Argument",
      "grants": "Walk them, honestly, to a conclusion that unmakes their footing. They cannot act against it while it holds.",
      "cannot": "A false premise. Anyone who refuses to follow.",
      "functions": [
@@ -1621,11 +1677,12 @@
      "_functionsWas": [
       "reveal",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Closing Argument"
     },
     {
      "rank": 2,
-     "name": "The Only Consistent Act",
+     "name": "Only Consistent Act",
      "grants": "Reach the conclusion where the consistent act is a final one — and STOP TALKING. What they do next is theirs.",
      "cannot": "Making them. It is their hand and both of you know it.",
      "functions": [
@@ -1637,7 +1694,8 @@
      "_functionsWas": [
       "reveal",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Only Consistent Act"
     }
    ],
    "challengeTypes": [
@@ -1690,11 +1748,13 @@
     "reveal",
     "bind"
    ],
-   "_retag": "⛔ SNG-450: retagged SOCIAL. This is persuasion and was filed as reveal/bind."
+   "_retag": "⛔ SNG-450: retagged SOCIAL. This is persuasion and was filed as reveal/bind.",
+   "_nameWas": "The Closing Argument",
+   "_idWas": "the_closing_argument"
   },
   {
-   "id": "the_keening",
-   "name": "The Keening",
+   "id": "keening",
+   "name": "Keening",
    "levelReq": 1,
    "energyCost": 7,
    "powerSystem": "reach_emotional_logical",
@@ -1712,7 +1772,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Cry Let Go",
+     "name": "Cry Let Go",
      "grants": "Release a grief you actually hold as sound. Everyone in earshot who can feel is staggered — weapons lowered, a charge broken, a pursuit stalled for a breath. It works through walls and in the dark.",
      "cannot": "It is UNAIMED — ANYONE ELSE IN EARSHOT IS STRUCK ONE RUNG LOWER, and the wielder takes the same one rung lower. The deaf are untouched. It needs a grief you truly carry; a performed one makes noise and nothing else.",
      "functions": [
@@ -1723,11 +1783,12 @@
      "_functionsWas": [
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Cry Let Go"
     },
     {
      "rank": 2,
-     "name": "The Held Note",
+     "name": "Held Note",
      "grants": "Sustain it — the stagger holds while you keen, and those caught cannot rally. Or narrow it to one throat and drop them where they stand.",
      "cannot": "Sustaining costs you the whole time; you cannot act while you hold it. The grief-hardened ride it out. Narrowing to one means the rest hear a woman weeping and come to see.",
      "functions": [
@@ -1739,11 +1800,12 @@
       "strike",
       "hinder",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Held Note"
     },
     {
      "rank": 3,
-     "name": "The Threnody",
+     "name": "Threnody",
      "grants": "The full lament — a crowd, a hall, a street stopped where it stands and made to feel what you feel. Fights end. Some of the caught do not get up; grief at full weight stops hearts, and the Threnodists know it.",
      "cannot": "You are emptied by it — what you spent, you no longer carry, and some of it does not come back. A tradition of grief-singers can answer it in kind.",
      "functions": [
@@ -1756,7 +1818,8 @@
       "hinder",
       "bind",
       "command"
-     ]
+     ],
+     "_nameWas": "The Threnody"
     }
    ],
    "challengeTypes": [
@@ -1808,11 +1871,13 @@
     "strike",
     "hinder"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Keening",
+   "_idWas": "the_keening"
   },
   {
-   "id": "the_contradiction",
-   "name": "The Contradiction",
+   "id": "contradiction",
+   "name": "Contradiction",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_emotional_logical",
@@ -1832,7 +1897,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Named Flaw",
+     "name": "Named Flaw",
      "grants": "Interrupt an action or claim by naming its actual error out loud — the plan with the gap, the boast with the hole, the ritual with the wrong step. The move falters and must be reworked — the interruption hinders them for as long as the flaw stands unanswered.",
      "cannot": "REACTIVE ONLY — nothing to contradict means nothing happens. The flaw must be REAL; inventing one is Falsecraft and this is not that. The unreasoning are immune.",
      "functions": [
@@ -1840,11 +1905,12 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Named Flaw"
     },
     {
      "rank": 2,
-     "name": "The Reductio",
+     "name": "Reductio",
      "grants": "Follow their position to where it collapses. A commitment they made becomes a thing they cannot act on — the oath that now forbids the blow, the doctrine that now forbids the door.",
      "cannot": "They must have STATED the position; you cannot bind someone to a belief they never claimed. The shameless simply proceed anyway.",
      "functions": [
@@ -1853,11 +1919,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Reductio"
     },
     {
      "rank": 3,
-     "name": "The Collapse",
+     "name": "Collapse",
      "grants": "Take a whole structure apart in front of the people who live in it — a case, a command, a faith. What they were doing stops, and it stays stopped.",
      "cannot": "You have made a permanent enemy of everyone whose ground you took, and the truth of it will not soften that. A structure with no flaw stands, and you look like a fool.",
      "functions": [
@@ -1872,7 +1939,8 @@
       "break",
       "bind",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Collapse"
     }
    ],
    "challengeTypes": [
@@ -1935,11 +2003,13 @@
     "hinder",
     "break"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Contradiction",
+   "_idWas": "the_contradiction"
   },
   {
-   "id": "the_carried_name",
-   "name": "The Carried Name",
+   "id": "carried_name",
+   "name": "Carried Name",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_emotional_logical",
@@ -1957,7 +2027,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Name Held",
+     "name": "Name Held",
      "grants": "Speak a name you carry and the room remembers that person as they WERE — not the softened version, not the useful version. Lies about the dead do not hold while you hold the name.",
      "cannot": "You must have KNOWN them or been told truly. It corrects memory; it does not summon. And what returns is accurate, which is sometimes worse for everyone present.",
      "functions": [
@@ -1968,11 +2038,12 @@
      "_functionsWas": [
       "reveal",
       "sustain"
-     ]
+     ],
+     "_nameWas": "The Name Held"
     },
     {
      "rank": 2,
-     "name": "The Kept Room",
+     "name": "Kept Room",
      "grants": "Hold several, or hold one long enough that a place keeps them — a threshold, a stone, a hall that will not let the name go crooked.",
      "cannot": "Holding costs, and the names you carry do not leave you between uses. A Threnodist knows exactly how many they hold.",
      "functions": [
@@ -1985,11 +2056,12 @@
       "reveal",
       "sustain",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Kept Room"
     },
     {
      "rank": 3,
-     "name": "The Whole Lament",
+     "name": "Whole Lament",
      "grants": "Everyone a place has lost, held at once, correctly. Communities have changed their minds about their own history under this.",
      "cannot": "You are carrying all of it while you hold it. And an honest accounting of a place's dead will name people that place decided to forget on purpose.",
      "functions": [
@@ -2002,7 +2074,8 @@
       "reveal",
       "sustain",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Whole Lament"
     }
    ],
    "challengeTypes": [
@@ -2046,11 +2119,13 @@
     "reveal",
     "sustain"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Carried Name",
+   "_idWas": "the_carried_name"
   },
   {
-   "id": "the_shared_weight",
-   "name": "The Shared Weight",
+   "id": "shared_weight",
+   "name": "Shared Weight",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_emotional_logical",
@@ -2068,7 +2143,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Portion Taken",
+     "name": "Portion Taken",
      "grants": "Take a share of another's grief, fear, or despair onto yourself. They function again — steady hands, clear speech, able to act. You carry it in their place.",
      "cannot": "They must GIVE it; taking uninvited fails and they will know you tried. And you now have it. It does not evaporate because the crisis passed.",
      "functions": [
@@ -2076,11 +2151,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Portion Taken"
     },
     {
      "rank": 2,
-     "name": "The Steady Hand",
+     "name": "Steady Hand",
      "grants": "Take from several, or take enough that someone catastrophically broken can function through the next hours.",
      "cannot": "The load is cumulative and does not clear on its own. A Threnodist who takes too much becomes someone who needs a Threnodist.",
      "functions": [
@@ -2089,11 +2165,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Steady Hand"
     },
     {
      "rank": 3,
-     "name": "The Borne Grief",
+     "name": "Borne Grief",
      "grants": "Carry a person's whole weight for a time — a parent at a graveside, a commander after a rout — so they can do the thing that must be done today.",
      "cannot": "⚠ YOU ARE NOW THE ONE CARRYING IT and you may be carrying it long after they have recovered. This is the craft that ends Threnodists, and every one of them knows it and does it anyway.",
      "functions": [
@@ -2102,7 +2179,8 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Borne Grief"
     }
    ],
    "challengeTypes": [
@@ -2140,11 +2218,14 @@
     }
    ],
    "plainly": "A social action that transfers part of someone's grief onto you. Rated 6 of 10 on one target for about twelve hours.",
-   "_descriptionWas": "The Threnodists' mercy, and it is a real one because it is not free. Grief-singers are the people who will hold your share."
+   "_descriptionWas": "The Threnodists' mercy, and it is a real one because it is not free. Grief-singers are the people who will hold your share.",
+   "_nameWas": "The Shared Weight",
+   "_idWas": "the_shared_weight"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
  "_batch1": "⛔ SNG-450 MIND BATCH 1. Merges, cuts, revisions and SOCIAL retags per Erik's review. Full pre-edit state of all 14 in po/staged_content/revert_SNG-450_batch1.json.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

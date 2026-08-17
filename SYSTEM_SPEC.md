@@ -1811,3 +1811,54 @@ lose their held action and act on your timing"*** is the grant.
 4. Without it you must break a prepared position by force.
 5. r2 targets+scope (breaks a formation) · r3 duration+autonomy (a commitment they must honour).
 6. ⚠️ The naming is the method; the tempo loss is the mechanic.
+
+
+---
+
+## 33. Projects and Journeys — skills that resolve over world ticks (2026-08-15)
+
+⛔ **ERIK, 2026-08-15: *"These kinds of delegations should flow into the WORLD TICK COUNT so we actually
+know how long it takes to complete and it PROGRESSES. Similar to how we want to build journeys. Some
+skills AID IN A JOURNEY, some skills AID IN YOUR BUILD PROJECTS."***
+
+### 33.1 Three resolution scales, not one
+
+⚠️ **The assessment (§32.11 Q3) asks how often a situation arises — and a skill can fail that question
+only because it was measured on the wrong clock.** `Built System` looked unusable because it resolves
+between sessions, not in a scene.
+
+| scale | resolves | example |
+|---|---|---|
+| **scene** | this round, this roll | Cutting Figure · Force the Move |
+| **PROJECT** | ⛔ **banks progress per world tick, completes on a named day** | Built System · Working Model r3 |
+| **JOURNEY** | ⛔ **applies per leg of travel, shortening or securing it** | Solved Route · Way-craft |
+
+### 33.2 ⛔ PROJECT SKILLS
+
+**A project skill declares `downtime: true` and `projectTicks: true`.** It does not resolve when used —
+**it opens a project the world tick advances.**
+
+- **The tick banks progress** each pass, so a player can be told *"the mill is nine days out"* rather than
+  *"you build a mill."*
+- ⚠️ **DELEGATION IS THE POINT.** Working Model r3 lets others build their piece correctly without
+  understanding the whole; Built System r3 runs at scale without you. ⛔ **Both mean the project continues
+  while the party is elsewhere**, which is what makes them worth a slot.
+- **A project can be interrupted, sabotaged, accelerated by more hands, or inherited.**
+
+### 33.3 ⛔ JOURNEY SKILLS
+
+**A journey skill applies per LEG, against the `walkingDays` a route already carries.**
+
+⚠️ **The geography for this exists**: `scale.json` (1° = 26 miles, 15.6 miles per walking day),
+`region_maps.json` ways with their bends, `roadFactor` on outlier routes. ⛔ **A journey skill should
+consume those, not restate them.**
+
+- **Shorten** — fewer days on a leg (Solved Route).
+- **Secure** — the leg does not roll for hazard, or rolls better.
+- **Carry** — more people or goods move at the same cost.
+
+### 33.4 ⚠️ WHY THIS IS A SPEC SECTION AND NOT A NOTE
+
+⛔ **A skill judged on the wrong clock reads as useless and gets cut.** I proposed cutting Built System for
+failing "how often does this arise" when the real answer was *"every time the party has a week."*
+**Assess a project skill on project frequency and a journey skill on journey frequency.**

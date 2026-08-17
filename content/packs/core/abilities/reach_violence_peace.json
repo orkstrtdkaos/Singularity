@@ -1657,6 +1657,7 @@
      "grants": "Show one person exactly what this violence will cost — the relationship, the person they become, the future they close. Reveal what is true and let it hinder them. Some people cannot go past it.",
      "cannot": "One person. Those who have made peace with the cost are unmoved.",
      "functions": [
+      "bargain",
       "reveal"
      ],
      "gains": "broaden",
@@ -1708,6 +1709,7 @@
     }
    ],
    "functions": [
+    "bargain",
     "hinder",
     "reveal"
    ],
@@ -1771,7 +1773,8 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Price Shown",
-   "_idWas": "the_price_shown"
+   "_idWas": "the_price_shown",
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. ⚠️ 'Show someone the real cost of the violence they are about to commit' — a bargain offered instead of a fight\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
   },
   {
    "id": "laid_ground",

@@ -32,7 +32,8 @@
       "deceive"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -45,7 +46,8 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -59,7 +61,14 @@
       "hinder"
      ],
      "gains": "broaden",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "gainAxes": [
+      "duration",
+      "scope",
+      "targets",
+      "quality",
+      "conditions"
+     ]
     }
    ],
    "functions": [
@@ -171,7 +180,8 @@
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -183,7 +193,11 @@
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "gainAxes": [
+      "range",
+      "damage"
+     ]
     },
     {
      "rank": 3,
@@ -200,6 +214,9 @@
       "strike",
       "break",
       "hinder"
+     ],
+     "gainAxes": [
+      "damage"
      ]
     }
    ],
@@ -316,7 +333,8 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -328,7 +346,10 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -341,7 +362,8 @@
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -440,7 +462,8 @@
      "_functionsWas": [
       "bind",
       "reveal"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -457,7 +480,8 @@
       "bind",
       "reveal",
       "hinder"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -478,6 +502,9 @@
       "hinder",
       "ward",
       "heal"
+     ],
+     "gainAxes": [
+      "duration"
      ]
     }
    ],
@@ -652,7 +679,8 @@
       "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -665,7 +693,11 @@
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -678,7 +710,10 @@
       "heal"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "duration"
+     ]
     }
    ],
    "functions": [
@@ -778,7 +813,8 @@
       "deceive"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -791,7 +827,12 @@
       "move"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "damage",
+      "conditions"
+     ]
     },
     {
      "rank": 3,
@@ -804,7 +845,8 @@
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -908,7 +950,8 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -920,7 +963,10 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "range"
+     ]
     },
     {
      "rank": 3,
@@ -934,7 +980,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Patient Eye"
+     "_nameWas": "The Patient Eye",
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -1035,7 +1082,8 @@
       "conceal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1048,7 +1096,11 @@
       "ward"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -1061,7 +1113,8 @@
       "ward"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -1163,7 +1216,8 @@
      "_functionsWas": [
       "bind",
       "reveal"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1178,6 +1232,9 @@
      "_functionsWas": [
       "bind",
       "reveal"
+     ],
+     "gainAxes": [
+      "duration"
      ]
     },
     {
@@ -1194,6 +1251,10 @@
       "bind",
       "reveal",
       "track"
+     ],
+     "gainAxes": [
+      "scope",
+      "targets"
      ]
     }
    ],
@@ -1295,7 +1356,8 @@
       "heal"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1308,7 +1370,8 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Fine Blade"
+     "_nameWas": "The Fine Blade",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1327,7 +1390,8 @@
       "mend",
       "reveal",
       "restore"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -1443,7 +1507,8 @@
      "_functionsWas": [
       "ward",
       "reveal"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1458,7 +1523,8 @@
      "_functionsWas": [
       "ward",
       "reveal"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -1478,7 +1544,10 @@
       "resist",
       "shield"
      ],
-     "_nameWas": "The Bright Fence"
+     "_nameWas": "The Bright Fence",
+     "gainAxes": [
+      "duration"
+     ]
     }
    ],
    "functions": [
@@ -1605,7 +1674,8 @@
      "_functionsWas": [
       "ward",
       "reveal"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -1623,7 +1693,10 @@
       "reveal",
       "bind"
      ],
-     "_nameWas": "The Deeper Seal"
+     "_nameWas": "The Deeper Seal",
+     "gainAxes": [
+      "damage"
+     ]
     },
     {
      "rank": 3,
@@ -1643,7 +1716,8 @@
       "bind",
       "shield"
      ],
-     "_nameWas": "The Seal That Holds"
+     "_nameWas": "The Seal That Holds",
+     "gainAxes": []
     }
    ],
    "gated": "learned",
@@ -1745,7 +1819,8 @@
       "move",
       "travel",
       "reveal"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "powerSystem": "radiant",
@@ -1800,5 +1875,6 @@
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

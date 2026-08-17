@@ -242,6 +242,7 @@
     "chaos_order": -0.3
    },
    "functions": [
+    "bargain",
     "bind",
     "command"
    ],
@@ -255,13 +256,18 @@
      "grants": "Seal a fair but wild bargain that keeps itself — the terms exact, the fulfilling uncontrollable.",
      "cannot": "It needs a genuine bargain to bind, it is fair to the letter (which is the horror), and once sealed it fulfills its terms its OWN way — you cannot take it back, and you cannot fully steer how it comes due.",
      "functions": [
+      "bargain",
       "bind",
       "command"
      ],
      "harmRung": "incapacitating",
      "gains": "broaden",
      "_nameWas": "The Honest Bargain",
-     "gainAxes": []
+     "gainAxes": [],
+     "_functionsWas": [
+      "bind",
+      "command"
+     ]
     },
     {
      "rank": 2,
@@ -320,7 +326,12 @@
    ],
    "plainly": "An action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Needs A Genuine Bargain TO Bind.",
    "_nameWas": "The Honest Bargain",
-   "_idWas": "the_honest_bargain"
+   "_idWas": "the_honest_bargain",
+   "_functionsWas": [
+    "bind",
+    "command"
+   ],
+   "_bargainTag": "⛔ SNG-471: `bargain` ADDED. 'a pact struck from the true side' — the Wild Half's demonic bargain\n⚠️ SYSTEM_SPEC §31.5: if a craft works by SPEAKING to someone, it carries a social verb. ⛔ `bargain` WAS ZERO ACROSS 342 ABILITIES not because nothing bargains, but because every craft that does was tagged with its MECHANICAL effect instead. Erik: 'bargain isn't only for Demonic and Bargainers — it's what ANY tradition would want to do because THERE IS AN ECONOMY.'"
   },
   {
    "schemaVersion": 1,

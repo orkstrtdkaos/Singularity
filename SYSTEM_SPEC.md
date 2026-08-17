@@ -1661,3 +1661,125 @@ tag may accompany it; it may not replace it.
 
 ⚠️ **Every tradition should reach at least two of the four.** A tradition that can only `persuade` has one
 social move; one that can `provoke` and `soothe` can start and stop a fight without touching anyone.
+
+
+---
+
+## 32. SOP — Skill Authoring and Auditing (2026-08-15)
+
+⛔ **EVERY RULE BELOW EXISTS BECAUSE ERIK CORRECTED ME ON IT.** Several are here twice because I was
+corrected, agreed, and drifted back inside the same session. **This section is the pre-ship checklist.**
+
+### 32.1 The standard, in Erik's words
+
+> *"They express how the traditions interact with the world in mostly GREATER THAN NORMAL ways. They are
+> something a player hero type character would WANT to do because it's useful. They are things that NOT
+> JUST ANYONE can do. They are neat, cool, interesting, effective, powerful, functional, amazing. They DO
+> the things the function labels say they do, IN THE WAY THE PROSE DESCRIBES."*
+
+### 32.2 ⛔ WHAT A DESCRIPTION MUST DO
+
+**Lead with an ACTION and its OUTCOME.** Verb, object, result, then flavour. *"Focus light into a searing
+coherent beam"* — not *"the light-pole mastery."*
+
+⚠️ **"BUT WHAT DOES THAT DO?"** — Erik on my Noesis rewrite. **A capacity is not an action.** *"Recall
+perfectly, focus past pain, reason faster"* describes being clever. It does not describe a thing you do at
+a table.
+
+⛔ **NEVER WRITE A SENTENCE THAT SOUNDS LIKE MEANING.** *"The Blazeborn reveal, and it costs them
+everything"* was a chiasmus with no content — if it costs everything, why do it? **Check every line for a
+claim someone could argue with.**
+
+⛔ **A DESCRIPTION THAT PLACES THE SKILL IN THE TAXONOMY IS A LIBRARIAN'S JOB.** *"The Masons'
+holding-craft"* tells a player nothing. The taxonomy line is welcome AFTER the action, never instead.
+
+### 32.3 ⛔ WHAT EARNS A SLOT
+
+**Erik, on The Kept Count:** *"Why would I need that as a primary skill?"* ⚠️ **It told you a number the GM
+was going to have to decide anyway.**
+
+- ⛔ **Answering a question is not an action.** If the GM would have told you, it is not a skill.
+- ⛔ **A skill must let a player DO something they could not otherwise do**, under pressure, at a table.
+- ⚠️ **Do not defend a skill you have to talk Erik into.** If the argument is needed, cut it.
+
+### 32.4 ⛔ RANKS
+
+**Erik: *"ranking up has to add something useful as well."*** And: *"I need to see what each rank does so I
+can tell what the NEXT RANK ADDS."*
+
+| a rank may buy | |
+|---|---|
+| **range · duration · damage · scope · targets · quality · autonomy · conditions** | pick one or two, state them |
+
+- ⛔ **A rank that restates its parent with intensifiers is not a rank.** *"Fear falls away"* → *"stops
+  reaching you"* → *"nothing else exists"* is one rank written three times.
+- ⚠️ **WHERE THE FUNCTION IS QUANTITATIVE, THE GAIN IS A QUANTITY.** Erik: *"HEALED IS HEALED — permanence
+  isn't a good r3."* Small heal → big heal → full heal.
+- ⛔ **DO NOT DELETE A WEAK RANK — MAKE IT DO SOMETHING.** Erik: *"don't remove r3 from Pattern-Sense, ADD
+  something to it."*
+- ⚠️ **SCOPE IS THE LAZY ANSWER.** It was 37% of all Mind rank-gains. **Reach for targets, autonomy or
+  conditions first.**
+- ⛔ **A count only rises where the rank ADDS A NEW FUNCTION TAG.** Re-listing `bind` is not a gain.
+
+### 32.5 ⛔ MECHANICS MUST BE REAL
+
+- ⛔ **IF THE SHAPE SAYS HARM, IT ROLLS.** I proposed keeping three attack skills with no dice, having
+  filed that exact finding myself the day before.
+- ⛔ **DURATION IS A NUMBER OF ROUNDS.** Erik: *"I don't like the WHILE IT HOLDS part — it should be for
+  the DURATION."* **Say how many rounds, how much damage, how many targets.**
+- ⚠️ **`energyCost` IS THE COST.** Erik: *"having a cost is not a requirement — it costs energy."* **Do not
+  invent a cost-bound rule.** A cost BEYOND energy is for the few crafts that deserve one.
+- ⛔ **DO NOT ADD COSTS THAT ARE NOT WARRANTED.** Two of mine were rejected in one review — the truth
+  requirement on Case Closed r3 and the *"poor company"* on Working Model r3.
+
+### 32.6 ⛔ FULL SCHEMA, EVERY TIME
+
+**Required on the ability:** `id · name · levelReq · energyCost · axes · attribute · narrationHints ·
+description · notFor · tree · functions · tradition · nativeOrCombination · harmRung · powerSystem ·
+shape · operativeAxis · mechanic · intensity · bounds · plainly · challengeTypes`
+
+**Required on EVERY rank:** `rank · name · grants · cannot · functions · gains · harmRung`
+
+⚠️ **All nine abilities I authored in one session were incomplete, and replacing a tree wholesale dropped
+fields I had never read.** ⛔ **Check the shape, not just the content.**
+
+### 32.7 ⛔ AUDITING
+
+- ⛔ **NO MECHANICAL STRIPS.** Erik: *"I don't want a mechanical strip — I want to keep it on the skills
+  and ranks it REALLY BELONGS ON."* **Judge each rank on its text.**
+- ⚠️ **TAG RULE — PERCEIVE:** keep where the player receives information they act on; strip where the
+  perceiving is the ability's internal mechanism.
+- ⚠️ **TAG RULE — CONTROL:** keep where restricting the target is the point; strip where the restriction is
+  a consequence of damage.
+- ⛔ **IF A CRAFT WORKS BY SPEAKING TO SOMEONE, IT CARRIES A SOCIAL VERB** (§31.5).
+- ⛔ **LOG BEFORE CUTTING.** Every batch gets a revert file with the full pre-edit state.
+- ⚠️ **VERIFY THE MARK BEFORE REMOVING.** Check what the corpus loses without it — I nearly cut three
+  skills without testing whether anything else covered their functions.
+- ⛔ **DO NOT ANCHOR ON YOUR OWN AUTHORING AS EVIDENCE.** Erik, on Figurist: *"don't get confused by the
+  skills you've already written — they may not be useful skills anyway."* **I defended a reading of
+  abstraction using a bad skill I had written to illustrate it.**
+
+### 32.8 ⛔ MERGING
+
+**Merge when two crafts share level, cost, mechanic AND rank-arc, differing only in the noun.** Twenty-one
+traditions each had an L1 "first gift" sense at energy 3, magnitude 3, with the same three ranks — **one
+skill written twenty-one times.**
+
+⚠️ **Flavour goes INTERNAL** via `sectFlavour`, so each sect describes the same craft in its own terms.
+
+### 32.9 Naming — see §31
+
+⛔ **No "The" unless the article is doing work.** ⚠️ **Applies to rank names too.**
+
+### 32.10 ⛔ THE ECONOMY
+
+**Erik: *"`bargain` isn't only for Demonic and Bargainers — it's what ANY tradition would want to do
+because THERE IS AN ECONOMY."*** ⛔ **I had scoped a whole social verb to two traditions on flavour
+grounds.**
+
+⚠️ **Every tradition trades**, and each has its own lever: a Mind tradition bargains by **knowing what the
+other side will accept before they say it**; a Body tradition by **what its labour is worth**; a Death
+tradition by **what a person will pay to be spared an ending**. **These are low-level crafts that rank up
+into larger negotiations.**
+
+⛔ **Every tradition should reach at least two of the four social verbs.**

@@ -100,25 +100,28 @@
     },
     {
      "rank": 3,
-     "name": "Read the Room",
-     "grants": "⛔ ADDS TARGETS AND PERSISTENCE. Mark EVERY foe you can see in one sense action, and the marks hold until spent rather than clearing when they change. ⚠️ You are reading the fight, not a fighter.",
-     "cannot": "You must be able to see them. A foe you have never seen fight still gives you less.",
+     "name": "Strike in the Reading",
+     "read": true,
+     "grants": "⛔ THE BLOW LANDS IN THE SENSE SLOT ITSELF. You do not read and then strike — the reading IS the strike, resolved before the round's actions are declared, and your action slot is still untouched. ⚠️ TWO ATTACKS IN A ROUND, AND THE FIRST ONE ARRIVES BEFORE ANYONE HAS MOVED.",
+     "cannot": "⚠️ Once per round, and against one foe — the second blow is still an ordinary action. A foe you have never seen fight gives you less to aim at.",
      "functions": [
       "strike",
+      "reveal",
       "hinder"
      ],
-     "gains": "broaden",
+     "gains": "deepen",
      "harmRung": "damaging",
      "gainAxes": [
-      "targets",
-      "duration"
+      "tempo",
+      "conditions"
      ]
     }
    ],
    "_authored": "⛔ SNG-464. Erik: 'a Mind character should be able to use the mind (LIKE SHERLOCK HOLMES) to perform PHYSICAL ATTACKS with incredible accuracy and effect — a combo ability powered by thought.' ⚠️ `nativeOrCombination: combination` — this is thought aimed through a body, and the sect flavours differ in HOW the answer is reached.",
    "_systemFit": "⛔ SNG-466, RE-AUTHORED. Erik: 'I don't know how it will work to CONCEDE THE MOMENTUM that round. Better to make sure it's TAGGED WITH READ at r1 so it can be used in the SENSE ROUND of a fight then used AGAIN in the action round.'\n⚠️ HE IS RIGHT AND MY VERSION WAS WORSE IN FEEL AS WELL AS HARDER TO WIRE — a fighter reading their opponent is not standing still. ⛔ r1 NOW RESOLVES IN THE SENSE SLOT and does not spend the action, so the same round contains the read AND the strike. See content/packs/core/rules/tempo.json.",
    "_rangeNote": "⚠️ Erik: 'I don't think we have a measured range to utilise — keep that part defined in the prose for now.' `range` removed from mechanic; reach is described in the text.",
-   "read": true
+   "read": true,
+   "_r3": "⛔ SNG-467. Erik: 'I really like the r3 ability to EXECUTE THE ATTACK IN THE READ STEP — that is super powerful.' ⚠️ It is, and that is correct for a level-2 tradition capstone rank: the blow resolves before the round's actions are declared, and the action slot stays free. TWO ATTACKS, THE FIRST ONE PRE-EMPTIVE."
   },
   {
    "id": "psychic_lance",

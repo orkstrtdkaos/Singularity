@@ -5,8 +5,8 @@
  "abilities": [
   {
    "schemaVersion": 1,
-   "id": "the_churns_gift",
-   "name": "The Churn's Gift",
+   "id": "churns_gift",
+   "name": "Churn's Gift",
    "levelReq": 3,
    "energyCost": 7,
    "powerSystem": "wild_current",
@@ -26,7 +26,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Churn's Gift",
+     "name": "Churn's Gift",
      "grants": "Shape a potent working from the wild substrate — generous and strong, but never exactly as aimed.",
      "cannot": "You cannot control its precise form, it gives its own way rather than yours, and the wild current owes you nothing — it may give more than you asked, or sideways to it.",
      "functions": [
@@ -34,11 +34,12 @@
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Churn's Gift"
     },
     {
      "rank": 2,
-     "name": "The Larger Asking",
+     "name": "Larger Asking",
      "grants": "Ask more of the Churn and it gives more. You may now name the SHAPE of what you want — a weapon, a warmth, a way through — and the wild current will honour the shape even as it invents every detail you did not name.",
      "cannot": "The shape holds; nothing inside it does. Ask larger and the sideways-ness grows with the gift — a bigger asking is a stranger answer, never a safer one.",
      "functions": [
@@ -46,7 +47,8 @@
       "make"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Larger Asking"
     },
     {
      "rank": 3,
@@ -116,12 +118,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "An action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens control; rank 3 adds to special. Limit: you Cannot Control Its Precise Form — it gives its own way rather than yours."
+   "plainly": "An action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens control; rank 3 adds to special. Limit: you Cannot Control Its Precise Form — it gives its own way rather than yours.",
+   "_nameWas": "The Churn's Gift",
+   "_idWas": "the_churns_gift"
   },
   {
    "schemaVersion": 1,
-   "id": "the_wild_flowering",
-   "name": "The Wild Flowering",
+   "id": "wild_flowering",
+   "name": "Wild Flowering",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "wild_current",
@@ -141,7 +145,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Wild Flowering",
+     "name": "Wild Flowering",
      "grants": "Unleash a wild flowering of tangled growth-and-ruin — potent, beautiful, and beyond precise control.",
      "cannot": "It cannot be aimed at pure creation or pure destruction, what it makes will not hold its shape, and the wild current, once opened, flowers where IT wills, not only where you meant.",
      "functions": [
@@ -149,11 +153,12 @@
       "transform"
      ],
      "harmRung": "incapacitating",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Wild Flowering"
     },
     {
      "rank": 2,
-     "name": "The Long Flowering",
+     "name": "Long Flowering",
      "grants": "The flowering takes a district rather than a room, and what it makes now lasts — days rather than moments — before the tangle takes it back. Long enough to shelter in, to harvest from, to be changed by.",
      "cannot": "You still cannot aim it at pure growth or pure ruin; the larger the flowering, the more of both arrives. What lasts longer takes longer to unmake and unmakes harder when it goes. And a district that has flowered is not the district it was.",
      "functions": [
@@ -161,7 +166,8 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Long Flowering"
     }
    ],
    "gated": "learned",
@@ -208,12 +214,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 4, and lasts for about 6 hours Ranks: rank 2 adds to special. Limit: iT Cannot BE Aimed AT Pure Creation OR Pure Destruction — it is always both."
+   "plainly": "An action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 4, and lasts for about 6 hours Ranks: rank 2 adds to special. Limit: iT Cannot BE Aimed AT Pure Creation OR Pure Destruction — it is always both.",
+   "_nameWas": "The Wild Flowering",
+   "_idWas": "the_wild_flowering"
   },
   {
    "schemaVersion": 1,
-   "id": "the_honest_bargain",
-   "name": "The Honest Bargain",
+   "id": "honest_bargain",
+   "name": "Honest Bargain",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "wild_current",
@@ -233,7 +241,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Honest Bargain",
+     "name": "Honest Bargain",
      "grants": "Seal a fair but wild bargain that keeps itself — the terms exact, the fulfilling uncontrollable.",
      "cannot": "It needs a genuine bargain to bind, it is fair to the letter (which is the horror), and once sealed it fulfills its terms its OWN way — you cannot take it back, and you cannot fully steer how it comes due.",
      "functions": [
@@ -241,11 +249,12 @@
       "command"
      ],
      "harmRung": "incapacitating",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Honest Bargain"
     },
     {
      "rank": 2,
-     "name": "The Standing Bargain",
+     "name": "Standing Bargain",
      "grants": "A bargain may be struck now with what is not a person — a place, a current, a thing that simply persists — and it may be set to outlive both parties, passing to heirs and successors who never sat at the table.",
      "cannot": "It is still scrupulously fair, which at this scale is considerably worse. A bargain with a place is kept by the place, in the place's own understanding of the terms. And a pact that outlives you is a pact you cannot renegotiate.",
      "functions": [
@@ -253,7 +262,8 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "incapacitating"
+     "harmRung": "incapacitating",
+     "_nameWas": "The Standing Bargain"
     }
    ],
    "gated": "learned",
@@ -294,12 +304,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Needs A Genuine Bargain TO Bind."
+   "plainly": "An action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Needs A Genuine Bargain TO Bind.",
+   "_nameWas": "The Honest Bargain",
+   "_idWas": "the_honest_bargain"
   },
   {
    "schemaVersion": 1,
-   "id": "the_collection",
-   "name": "The Collection",
+   "id": "collection",
+   "name": "Collection",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "wild_current",
@@ -317,7 +329,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Collection",
+     "name": "Collection",
      "grants": "BIND the named price and collect it — a life pledged against a struck bargain. The collection strikes the pledged party wherever they stand, and a life pledged is a life ended. It arrives however it arrives.",
      "cannot": "Any debt not actually incurred. Choosing the manner.",
      "functions": [
@@ -328,11 +340,12 @@
      "_functionsWas": [
       "bind",
       "strike"
-     ]
+     ],
+     "_nameWas": "The Collection"
     },
     {
      "rank": 2,
-     "name": "The Standing Account",
+     "name": "Standing Account",
      "grants": "BIND it across distance and time — neither of you needs to be present when it closes.",
      "cannot": "Being elsewhere as an alibi: everyone knows who held the account.",
      "functions": [
@@ -343,7 +356,8 @@
      "_functionsWas": [
       "bind",
       "strike"
-     ]
+     ],
+     "_nameWas": "The Standing Account"
     }
    ],
    "challengeTypes": [
@@ -399,7 +413,9 @@
     "bind",
     "strike"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Collection",
+   "_idWas": "the_collection"
   },
   {
    "schemaVersion": 1,
@@ -435,7 +451,7 @@
     },
     {
      "rank": 2,
-     "name": "The Long Glide",
+     "name": "Long Glide",
      "grants": "Fly a whole leg, fast and tireless, drifting toward where the churn is going.",
      "cannot": "Holding a true line against the drift without paying extra.",
      "functions": [
@@ -443,11 +459,12 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Glide"
     },
     {
      "rank": 3,
-     "name": "The Given Wing",
+     "name": "Given Wing",
      "grants": "⚠️ Give wings to others — the party flies with you, a shorter span each.",
      "cannot": "Giving them to more than a few, or to anyone unwilling.",
      "functions": [
@@ -455,7 +472,8 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Given Wing"
     }
    ],
    "challengeTypes": [
@@ -497,5 +515,6 @@
    ],
    "plainly": "A travel, chase and explore action, learned rather than inherited — anyone with churnfolk training flies this way, whatever they are. Rank 1 is short flights: over a wall, across a river, out of a fall. Rank 2 flies a whole leg and roughly halves its days, though you drift toward where the churn is going unless you pay to hold a line. Rank 3 gives wings to the rest of the party for a shorter span each. The catch is reliability rather than danger: needing them badly makes them less likely to come, and a failure grounds you rather than dropping you."
   }
- ]
+ ],
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

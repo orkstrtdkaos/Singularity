@@ -1935,3 +1935,32 @@ foe*, *only on ground you prepared*.
 
 ⚠️ **AND IT MUST STAY SCARCE ACROSS THE CORPUS.** If most traditions have a tempo rank, the round stops
 meaning anything. **A tradition should have at most one or two, and they should be its signature.**
+
+
+### 34.4 ⛔ THE SENSE SLOT IS CONTESTED — sense or obscure
+
+**Erik: *"you can choose to attempt to SENSE (normal success buildup chance) or to OBSCURE — certain
+skills and abilities are designed to beat a sense — and the opponent can choose to sense or obscure as
+well."***
+
+⚠️ **This is better than the free sense slot I authored.** A free slot is value with no decision in it. **A
+contested one is a real choice every round — and it gives the physical traditions something to do in a
+slot I had quietly reserved for the clever ones.**
+
+| declaration | on success |
+|---|---|
+| **SENSE** | read them: bank tempo, take the edge your craft grants |
+| **OBSCURE** | deny their read: their sense fails, they bank nothing, and some obscure crafts carry a penalty into their action slot |
+
+**Resolution:** SENSE vs SENSE — both read, both bank. SENSE vs OBSCURE — contested roll, ⛔ **and the
+obscurer wins ties, because throwing dirt is easier than reading a man with dirt in his eyes.** OBSCURE vs
+OBSCURE — both waste the slot.
+
+⛔ **THAT TIE RULE IS THE WHOLE BALANCE.** It stops the sense slot from belonging permanently to the
+perceptive traditions.
+
+**Obscure is flavoured by tradition and every tradition should reach one:** ⛔ **dirt in the eyes**
+(Marcher) · **a globe of shadow over the head** (Umbral) · **a false tell they read correctly and are wrong
+about** (Veilwright) · **glare** (Blazeborn — denying sight with too much rather than too little) · **a
+stance that reads as three attacks and resolves as a fourth** (Somatic) · ⚠️ **they look at you and see how
+they end** (Ashwarden).

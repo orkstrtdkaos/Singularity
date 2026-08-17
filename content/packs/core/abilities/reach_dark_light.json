@@ -434,7 +434,9 @@
      "class": "cost"
     }
    ],
-   "plainly": "A explore/stealth/fight action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 extends range; rank 3 adds to special. Limit: total Light Defeats IT — sees dark, not hidden intent."
+   "plainly": "A explore/stealth/fight action that reveals information or sets up a later action. Its strength is rated 3 out of 10, and lasts for about an hour. Range is 20. Ranks: rank 2 extends range; rank 3 adds to special. Limit: total Light Defeats IT — sees dark, not hidden intent.",
+   "sense": true,
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. sees in lightlessness, which is a read others cannot make\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
   },
   {
    "id": "dim",
@@ -3189,7 +3191,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Felt Room",
-   "_idWas": "the_felt_room"
+   "_idWas": "the_felt_room",
+   "sense": true,
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ DARK'S SENSE — knows a lightless space and what lives in it\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
   },
   {
    "id": "kept_fire",
@@ -3419,7 +3423,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_nameWas": "The Read Burn",
-   "_idWas": "the_read_burn"
+   "_idWas": "the_read_burn",
+   "sense": true,
+   "_senseNote": "⛔ SNG-470: USABLE IN THE SENSE SLOT. ⛔ LIGHT'S SENSE — what a fire will do next\n⚠️ Erik: 'you're not quite right about the sense abilities — they're probably listed as REVEAL. Check again.' ⛔ HE WAS RIGHT: 56 crafts carry reveal/foresee/track and EVERY tradition has one. My 'only 3 sense crafts' was counting the tag I had hand-applied, not the corpus. ⚠️ THE FILTER IS WHETHER IT READS A LIVE OPPONENT IN THE MOMENT — terrain, objects, history and the dead do not qualify."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

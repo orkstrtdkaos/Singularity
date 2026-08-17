@@ -32,7 +32,8 @@
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -44,7 +45,10 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "cannot": "Two targets must be standing close; you are still out of blades eventually.",
-     "_nameWas": "The Second Knife"
+     "_nameWas": "The Second Knife",
+     "gainAxes": [
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -57,7 +61,10 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "cannot": "Improvised points do less than a true blade; you must have something with an edge.",
-     "_nameWas": "The Full Belt"
+     "_nameWas": "The Full Belt",
+     "gainAxes": [
+      "quality"
+     ]
     }
    ],
    "functions": [
@@ -135,7 +142,8 @@
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "_nameWas": "The Loosed Stone"
+     "_nameWas": "The Loosed Stone",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -151,7 +159,8 @@
       "strike",
       "hinder"
      ],
-     "_nameWas": "The Aimed Stone"
+     "_nameWas": "The Aimed Stone",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -163,7 +172,8 @@
      ],
      "gains": "deepen",
      "harmRung": "lethal",
-     "cannot": "Cast shot must be carried and counted; still needs room to swing."
+     "cannot": "Cast shot must be carried and counted; still needs room to swing.",
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -246,7 +256,8 @@
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "_nameWas": "The Long Draw"
+     "_nameWas": "The Long Draw",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -258,7 +269,8 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "cannot": "Arrows are counted — a quiver is twenty and you will notice.",
-     "_nameWas": "The Kept Rhythm"
+     "_nameWas": "The Kept Rhythm",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -271,7 +283,10 @@
      "gains": "deepen",
      "harmRung": "lethal",
      "cannot": "Bodkin heads only bite inside sixty paces; still both hands and clear sight.",
-     "_nameWas": "The Heavy Head"
+     "_nameWas": "The Heavy Head",
+     "gainAxes": [
+      "range"
+     ]
     }
    ],
    "functions": [
@@ -348,7 +363,8 @@
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -360,7 +376,8 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "cannot": "You need both feet under you; a cranked string in the wet is a slow disaster.",
-     "_nameWas": "The Belt Claw"
+     "_nameWas": "The Belt Claw",
+     "gainAxes": []
     },
     {
      "rank": 3,
@@ -373,7 +390,8 @@
      "gains": "deepen",
      "harmRung": "lethal",
      "cannot": "Heavy, obvious, and illegal in three cities.",
-     "_nameWas": "The Windlass"
+     "_nameWas": "The Windlass",
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -451,7 +469,8 @@
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -464,7 +483,10 @@
      "gains": "deepen",
      "harmRung": "damaging",
      "cannot": "You must be able to lift it; fifteen paces and it drops.",
-     "_nameWas": "The Committed Throw"
+     "_nameWas": "The Committed Throw",
+     "gainAxes": [
+      "targets"
+     ]
     },
     {
      "rank": 3,
@@ -482,7 +504,10 @@
       "break",
       "hinder"
      ],
-     "_nameWas": "The Scattering"
+     "_nameWas": "The Scattering",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "functions": [
@@ -568,7 +593,8 @@
      "_functionsWas": [
       "reveal",
       "hinder"
-     ]
+     ],
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -584,7 +610,10 @@
       "hinder",
       "strike"
      ],
-     "_nameWas": "The Turned Catch"
+     "_nameWas": "The Turned Catch",
+     "gainAxes": [
+      "range"
+     ]
     },
     {
      "rank": 3,
@@ -599,7 +628,8 @@
      "_functionsWas": [
       "hinder",
       "strike"
-     ]
+     ],
+     "gainAxes": []
     }
    ],
    "functions": [
@@ -653,5 +683,6 @@
   }
  ],
  "_schemaFix": "⛔ SNG-452. Erik: 'make sure you're authoring with FULL SCHEMA CORRECTNESS.' ⚠️ ALL NINE ABILITIES I AUTHORED THIS SESSION WERE INCOMPLETE — the merged three missing axes/notFor/operativeAxis/bounds and every rank missing gains/harmRung; the six ranged missing cannot/functions/gains/harmRung on every rank. ⛔ I CHECKED THE CONTENT AND NOT THE SHAPE, which is the same failure as verifying content and not address.",
- "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

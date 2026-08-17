@@ -1534,6 +1534,7 @@
    },
    "functions": [
     "break",
+    "hinder",
     "strike"
    ],
    "narrationHints": "You hold a shape in mind and make the world honour it. An angle that should not exist opens across them; a line is drawn and the things on either side of it are no longer joined. No blade, no heat — a geometry, applied.",
@@ -1571,20 +1572,26 @@
     },
     {
      "rank": 3,
-     "name": "The Impossible Solid",
-     "grants": "A figure that should not resolve in three dimensions, resolved anyway, around them. What is inside it is reorganised according to the figure — flesh, bone and stone alike are parted and rejoined wrong, which strikes as surely as any blade.",
-     "cannot": "⚠ THE FIGURE IS TRUER THAN THEY ARE and it does not distinguish among its contents. And the Untethered — who forgot bodies suffer — do exactly this and call it elegant; doing it well puts you in their company whether you like it or not.",
+     "name": "The Cut Thought",
+     "grants": "⛔ CUT A THOUGHT. Impose the figure across what someone is HOLDING rather than what they are made of — the next action they had lined up is severed before it starts, or a craft they are sustaining parts from them and drops. ⚠️ Damage rises to 2d6 against a mind so occupied.",
+     "cannot": "One thought per action, and they must be doing something you can see them doing. A mind holding nothing loses nothing.",
      "functions": [
-      "strike",
-      "break"
+      "break",
+      "hinder",
+      "strike"
      ],
      "gains": "deepen",
      "harmRung": "lethal",
      "_functionsWas": [
       "strike",
-      "break",
-      "hinder"
-     ]
+      "break"
+     ],
+     "_grantsWas": "A figure that should not resolve in three dimensions, resolved anyway, around them. What is inside it is reorganised according to the figure — flesh, bone and stone alike are parted and rejoined wrong, which strikes as surely as any blade.",
+     "gainAxes": [
+      "damage",
+      "conditions"
+     ],
+     "_rebalance": "⛔ ERIK: 'Let the Cutting Figure r3 be able to CUT A THOUGHT — so the opponent loses track of the next action or loses concentration on a skill.' ⚠️ The old r3 was 'a figure that should not resolve in three dimensions' — evocative and mechanically empty."
     }
    ],
    "challengeTypes": [
@@ -1889,8 +1896,8 @@
    },
    "functions": [
     "bind",
-    "ward",
-    "make"
+    "make",
+    "ward"
    ],
    "narrationHints": "You set a thing where it is and it STAYS. A stone, a beam, a door, a cart — placed with intent, it now takes far more than ordinary force to shift, and it will not drift, sag, settle or be quietly moved.",
    "description": "Set one object where you have placed it and it STAYS — resisting levers, drift and quiet removal, and you know the instant it is being worked at. The Masons' holding-craft: half of building is making a thing stay put.",

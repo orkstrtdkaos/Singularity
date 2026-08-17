@@ -77,7 +77,8 @@
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "_nameWas": "The Name They Are Called"
+     "_nameWas": "The Name They Are Called",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -91,7 +92,10 @@
      ],
      "gains": "deepen",
      "harmRung": "damaging",
-     "_nameWas": "The Name They Are Known By"
+     "_nameWas": "The Name They Are Known By",
+     "gainAxes": [
+      "conditions"
+     ]
     },
     {
      "rank": 3,
@@ -192,7 +196,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Open Door"
+     "_nameWas": "The Open Door",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -206,7 +211,11 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Long Room"
+     "_nameWas": "The Long Room",
+     "gainAxes": [
+      "range",
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -308,7 +317,8 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Set Mark"
+     "_nameWas": "The Set Mark",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -322,7 +332,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Mark That Keeps"
+     "_nameWas": "The Mark That Keeps",
+     "gainAxes": [
+      "scope"
+     ]
     },
     {
      "rank": 3,
@@ -337,7 +350,10 @@
      ],
      "gains": "broaden",
      "harmRung": "none",
-     "_nameWas": "The Governed Ground"
+     "_nameWas": "The Governed Ground",
+     "gainAxes": [
+      "scope"
+     ]
     }
    ],
    "_merged": "⛔ SNG-453: MERGES The Standing Figure (L1, mag6, e5) and The Warding Mark (L2, mag4, e2) — both 'set a persistent figure that excludes a named category', with the later one strictly cheaper. ⚠️ The Standing Figure's r3 site-rule survives as the new r3.",
@@ -406,7 +422,8 @@
       "sustain"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": []
     },
     {
      "rank": 2,
@@ -418,7 +435,11 @@
       "resist"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "duration"
+     ]
     },
     {
      "rank": 3,
@@ -431,7 +452,10 @@
      ],
      "gains": "deepen",
      "harmRung": "none",
-     "_nameWas": "The Last Thing to Fail"
+     "_nameWas": "The Last Thing to Fail",
+     "gainAxes": [
+      "duration"
+     ]
     }
    ],
    "_merged": "⛔ SNG-453: MERGES The Axiom Holds (syllogist, L1, e1) and The Long Form (cogitant, L2, e1) — both 'keep functioning under pressure through mental discipline', same arc: hold → hold for days → you are the last thing to fail. Flavour internal.",
@@ -446,5 +470,6 @@
    "_nameWas": "The Unbroken Thread",
    "_namingSOP": "⛔ SNG-461, SYSTEM_SPEC §31. Erik: 'you've started adding THE to everything again.' ⚠️ I agreed this once and drifted back inside the same session, on abilities I authored AFTER agreeing. Article removed from the craft name and every rank name — a tree of 'The Route / The Moving Space / The Designed Scene' is three headings, not three things you do."
   }
- ]
+ ],
+ "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN."
 }

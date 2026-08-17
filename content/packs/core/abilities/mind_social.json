@@ -1,0 +1,213 @@
+{
+ "schemaVersion": 1,
+ "id": "mind_social",
+ "kind": "content",
+ "note": "⛔ SNG-462. Two Mind social abilities closing the `provoke` and `soothe` zeros. See SYSTEM_SPEC §31.5.",
+ "abilities": [
+  {
+   "id": "cold_certainty",
+   "name": "Cold Certainty",
+   "levelReq": 2,
+   "energyCost": 4,
+   "axes": {
+    "body_mind": 0.4,
+    "emotional_logical": 0.4
+   },
+   "attribute": "mental",
+   "narrationHints": "They say something quiet and specific about the person, and the person stops arguing and starts deciding — badly, and fast, and in public.",
+   "description": "Name the thing a person is most afraid is true about them, and let them act on it — you do not tell them what to do, you make waiting unbearable.",
+   "notFor": "Anyone who genuinely does not care what you think; crowds; making someone do a SPECIFIC thing — you get action, not obedience.",
+   "tradition": "cogitant",
+   "traditionV2": "Mind",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "hobble",
+   "operativeAxis": "emotional_logical",
+   "intensity": "moderate",
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 6,
+    "targets": 1,
+    "marginFloorPer": 0.02
+   },
+   "challengeTypes": [
+    "SOCIAL",
+    "DUEL",
+    "FIGHT"
+   ],
+   "bounds": [
+    {
+     "text": "⛔ YOU GET ACTION, NOT OBEDIENCE — they move, and what they do is theirs",
+     "class": "hard"
+    },
+    {
+     "text": "it must be TRUE, or true enough that they fear it is",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ they remember who said it, and people do not forgive this",
+     "class": "cost"
+    },
+    {
+     "text": "one person, in earshot, who cares what is said about them",
+     "class": "hard"
+    }
+   ],
+   "plainly": "A social/duel action that provokes a target into acting. It rolls 2d6. Range is 6. Ranks: rank 2 provokes a group, rank 3 forces a public commitment.",
+   "functions": [
+    "provoke"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Named Aloud",
+     "grants": "⛔ NAME IT AND THEY MOVE. The careful one attacks; the patient one speaks out of turn; the liar over-explains. You have taken away their option to wait.",
+     "cannot": "One person, in earshot, who cares what is said of them. What they do next is their choice, not yours.",
+     "functions": [
+      "provoke"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "The Room Hears It",
+     "grants": "⚠️ ADDS TARGETS AND WITNESSES. Say it where it lands on several at once — a command group, a council, a family — and each of them moves on their own account.",
+     "cannot": "The more people hear it, the less precisely it lands on any one of them.",
+     "functions": [
+      "provoke"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "scope"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "On the Record",
+     "grants": "⛔ ADDS PERMANENCE. Provoke a commitment they cannot walk back — an oath, an accusation, an order given in front of the people who must carry it out. ⚠️ They will regret it and they will honour it.",
+     "cannot": "They must have standing to lose. Someone with no reputation cannot be trapped by one.",
+     "functions": [
+      "provoke",
+      "bind"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "duration",
+      "autonomy"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-462. `provoke` was ZERO across all 342 abilities. ⚠️ THE ONLY SOCIAL VERB WHOSE SUCCESS LOOKS LIKE THE TARGET'S OWN CHOICE — which is why it belongs to the mind tradition and why it is a weapon rather than a conversation."
+  },
+  {
+   "id": "quiet_the_room",
+   "name": "Quiet the Room",
+   "levelReq": 1,
+   "energyCost": 3,
+   "axes": {
+    "body_mind": 0.3,
+    "violence_peace": 0.5
+   },
+   "attribute": "mental",
+   "narrationHints": "Nobody is told to calm down. The shouting simply runs out of somewhere to go, and afterwards people cannot say who stopped it.",
+   "description": "Take the heat out of a person or a room — panic, grief, rage, the moment before a fight — so that whatever happens next is chosen rather than spilled.",
+   "notFor": "Making anyone agree with you; a fear that is correct; anything already in motion — a swung blade lands.",
+   "tradition": "cogitant",
+   "traditionV2": "Mind",
+   "nativeOrCombination": "native",
+   "harmRung": "none",
+   "powerSystem": "metaphysical",
+   "shape": "guard",
+   "operativeAxis": "violence_peace",
+   "intensity": "minor",
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 3
+   },
+   "challengeTypes": [
+    "SOCIAL",
+    "SURVIVE",
+    "FIGHT"
+   ],
+   "bounds": [
+    {
+     "text": "⛔ IT REMOVES HEAT, NOT REASONS. They still want what they wanted, calmly",
+     "class": "hard"
+    },
+    {
+     "text": "nothing already in motion stops — a swung blade lands",
+     "class": "hard"
+    },
+    {
+     "text": "⚠️ it works on YOU too, and a person who needed their fear may resent that",
+     "class": "cost"
+    },
+    {
+     "text": "a second use on the same people the same day does much less",
+     "class": "soft"
+    }
+   ],
+   "plainly": "A social/survive action that soothes fear, grief or rage. Its strength is rated 5 out of 10. Ranks: rank 2 covers a crowd, rank 3 restores someone already broken.",
+   "functions": [
+    "soothe"
+   ],
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Take the Heat Out",
+     "grants": "⛔ ONE PERSON OR A SMALL GROUP STOPS BEING RUN BY IT — the panicking stop panicking, the grieving can speak, the man about to swing lowers his arm and thinks about it.",
+     "cannot": "They still want what they wanted. It removes heat, not reasons.",
+     "functions": [
+      "soothe"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "The Whole Room",
+     "grants": "⚠️ ADDS SCALE. A crowd, a rout, a market turning ugly, a ward full of wounded — the temperature comes down across all of it at once.",
+     "cannot": "The larger the room, the shallower it goes. A determined agitator can bring it back up.",
+     "functions": [
+      "soothe"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": [
+      "scope",
+      "targets"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Back From It",
+     "grants": "⛔ ADDS RECOVERY. Bring one person back from where fear or grief has already taken them — the broken soldier, the witness who has stopped speaking, the one who has decided to die.",
+     "cannot": "⚠️ One person, and it takes a quiet hour. It gives them back the ability to choose; it does not choose for them.",
+     "functions": [
+      "soothe",
+      "restore"
+     ],
+     "gains": "deepen",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "conditions"
+     ]
+    }
+   ],
+   "_authored": "⛔ SNG-462. `soothe` was ZERO corpus-wide. ⚠️ Distinct from `heal`, which mends a body — this takes the heat out of a mind, and the r3 recovery case is what the game had no ability for at all."
+  }
+ ]
+}

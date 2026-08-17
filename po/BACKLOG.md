@@ -91,3 +91,53 @@ Move origins and backgrounds out of `app.js` into `content/packs/*/origins/` + `
 ## Ordering (2026-07-04, Erik: emergence bumped ahead of origins)
 **SNG-009 hotfix (ACTIVE build) → SNG-010 Practice & Emergence → SNG-001 party play → SNG-004 origins (+SNG-008 weave) →** remaining §9.
 SNG-010 recipe layer pre-authored at `content/packs/core/rules/emergence_recipes.json`.
+
+---
+
+## ⛔ CARRY-FORWARD: what every tradition audit must now include
+
+**Established while auditing Mind (SNG-450 → SNG-470). Apply per tradition as each is reached.**
+
+### The per-tradition checklist
+
+1. ⛔ **Run the six-question assessment** (`SYSTEM_SPEC §32.11`) on every skill. Cut what fails.
+2. ⛔ **Merge flavour-duplicates** — same level, cost, mechanic and rank-arc, differing only in the noun.
+   Flavour goes internal via `sectFlavour`.
+3. ⚠️ **Review perceive and control tags per rank** — keep where the player receives information they act
+   on / where restricting is the point; strip where it is the internal mechanism or a consequence of
+   damage.
+4. ⛔ **AUTHOR ONE OBSCURE CRAFT.** Ten traditions have none, and the sense slot is currently
+   Dark-and-Mind only. **This is the biggest live gap.**
+5. ⚠️ **Confirm sense coverage** — 27 crafts are tagged and 13 of 14 traditions have one; only **Spirit**
+   lacks it, which may be correct.
+6. ⛔ **Check the four social verbs.** `persuade`, `bargain`, `provoke`, `soothe` — every tradition should
+   reach at least two, and **`bargain` is still ZERO corpus-wide.**
+7. ⚠️ **Ranks max at 3.** Every rank names a gain axis: range · duration · damage · scope · targets ·
+   quality · autonomy · conditions · **tempo**.
+8. ⛔ **Tempo is the strongest axis — at most one or two per tradition**, and it should be the tradition's
+   signature form (sense-slot use, extra action, banking, or compression).
+9. ⚠️ **Naming SOP §31** — no "The" unless the article works, rank names included.
+10. ⛔ **Full schema** (§32.6), and **log a revert file before cutting.**
+
+### Obscure crafts still to author — one per tradition
+
+**Angelic · Body · Breaking · Building · Death · Demonic · Life · Order · Span · Spirit**
+
+⚠️ Erik's own examples to build from: ⛔ **dirt in the eyes** (Breaking/marcher) · **a stance that reads as
+three attacks and resolves as a fourth** (Body/somatic) · **they look at you and see how they end**
+(Death/ashwarden) · **a ledger so regular it carries no information** (Order/lattice).
+
+### Open system questions for CCode
+
+- ⛔ **`mechanic.dice` and `magnitude` have ZERO consumers.** Combat resolves d100 + attribute + tier +
+  matchup. **Damage intent is authored and unwired.**
+- ⛔ **The sense slot needs wiring** — a declared SENSE/OBSCURE per side, obscure wins ties. Minimum
+  viable is the slot plus the `sense`/`obscure` tags, which are now on 40 crafts.
+- ⚠️ **Tempo** banks per `charges.json` `rate` accrual, caps at 3, empties at end of contest.
+- ⚠️ **Project and journey skills** (`SYSTEM_SPEC §33`) resolve over world ticks, not in a scene.
+
+### Mind — done
+
+**36 → 24 skills.** PERCEIVE 519 → 111 corpus-wide; CONTROL 372 → 251. SOCIAL 0 → 9. Every function
+present. Revert logs: `revert_SNG-450` · `revert_SNG-453` · `revert_SNG-454` · `revert_SNG-455` ·
+`revert_SNG-456` · `revert_SNG-457` · `revert_SNG-460`.

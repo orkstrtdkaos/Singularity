@@ -199,7 +199,7 @@
     },
     {
      "rank": 3,
-     "name": "The Old Recipes",
+     "name": "Old Recipes",
      "grants": "Brews that verge on legend: a night's sleep in an hour, clarity through exhaustion, one dose that stabilizes the dying. Recognize Precursor-altered growth. And the hand that knows all of this knows it BOTH WAYS — a draught that dulls, slows, sickens, or drops a person where they stand, prepared as carefully as any remedy.",
      "cannot": "It has to be taken, which means it has to be given — this is patient, deliberate work and never a thing done in a fight. Valley folk hang people for it. And every herbalist good enough to do it is the first person suspected when someone falls ill, which is why most of them never learn this rank at all.",
      "functions": [
@@ -214,7 +214,8 @@
       "heal",
       "sustain",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Old Recipes"
     }
    ],
    "functions": [
@@ -342,7 +343,7 @@
     },
     {
      "rank": 3,
-     "name": "The Binding Word",
+     "name": "Binding Word",
      "grants": "Arbitrate feuds of long standing; your settlements carry near-law in communities that know you; once per season, one hostile audience becomes neutral.",
      "cannot": "Fails against zealotry; a settlement you break yourself burns this ability's trust to rank 1 until amends.",
      "functions": [
@@ -355,7 +356,8 @@
       "reveal",
       "bind",
       "command"
-     ]
+     ],
+     "_nameWas": "The Binding Word"
     }
    ],
    "functions": [
@@ -608,7 +610,7 @@
     },
     {
      "rank": 3,
-     "name": "The Old Accord",
+     "name": "Old Accord",
      "grants": "Parley meaningfully with any natural creature; Precursor-touched beasts recognize you as neutral. And in wild country you may call for aid and something answers — it places itself between you and what threatens you, and it will strike to wound: a large animal in earnest breaks bone and tears, and none of that is yours to moderate once it has begun.",
      "cannot": "You ASK — always. Nothing here is compelled, and a creature that answers is risking its own life for you, may be hurt or killed doing it, and remembers. Ask too often, or for the wrong thing, and the wild country stops answering.",
      "functions": [
@@ -622,7 +624,8 @@
       "bind",
       "summon",
       "strike"
-     ]
+     ],
+     "_nameWas": "The Old Accord"
     }
    ],
    "functions": [
@@ -1017,7 +1020,7 @@
     },
     {
      "rank": 3,
-     "name": "The Unseen Errand",
+     "name": "Unseen Errand",
      "grants": "Enter and leave watched places as if the watch blinked; move a small party quietly using your reads; once per day, break line-of-sight and be simply gone.",
      "cannot": "'Gone' means escaped, not teleported — the GM places you plausibly; Precursor sensors don't blink.",
      "functions": [
@@ -1025,7 +1028,8 @@
       "move"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Unseen Errand"
     }
    ],
    "functions": [
@@ -1139,7 +1143,7 @@
     },
     {
      "rank": 3,
-     "name": "The Standing Hearth",
+     "name": "Standing Hearth",
      "grants": "A camp you keep three nights becomes a named place (enters place memory); companions and party bond faster at your fire (bond-relevant deeds count +1 weight); once per journey, a full night at your hearth restores as a rest at home.",
      "cannot": "Named places persist but so does their reputation — what happens there is remembered; the once-per-journey rest can't raise the incapacitated.",
      "functions": [
@@ -1148,7 +1152,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Standing Hearth"
     }
    ],
    "functions": [
@@ -1246,7 +1251,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Straight Feeling",
+     "name": "Straight Feeling",
      "grants": "Sense Precursor material and workings nearby (direction and rough distance); recognize safe salvage from live remnant; follow a buried alignment across country.",
      "cannot": "Sense, not sight — no detail; depth beyond a few meters muddies the read.",
      "functions": [
@@ -1257,7 +1262,8 @@
      "_functionsWas": [
       "reveal",
       "track"
-     ]
+     ],
+     "_nameWas": "The Straight Feeling"
     },
     {
      "rank": 2,
@@ -1500,7 +1506,7 @@
     },
     {
      "rank": 2,
-     "name": "The Kept Boundary",
+     "name": "Kept Boundary",
      "grants": "Set a boundary that holds — a threshold, a claim, a line that things notice and respect.",
      "cannot": "A boundary is a claim, and claims are contested. It holds against what respects it.",
      "functions": [
@@ -1508,11 +1514,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Kept Boundary"
     },
     {
      "rank": 3,
-     "name": "The Old Boundary",
+     "name": "Old Boundary",
      "grants": "Set a boundary that has the weight of the old ones — it feels ANCIENT, and even things that do not respect you respect that.",
      "cannot": "The old boundaries were set by people who paid for them. Yours borrows that credit; the Valley remembers who actually paid.",
      "functions": [
@@ -1520,7 +1527,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Old Boundary"
     }
    ],
    "challengeTypes": [
@@ -1610,25 +1618,27 @@
     },
     {
      "rank": 2,
-     "name": "The Clean Kill",
+     "name": "Clean Kill",
      "grants": "Strike where a thing actually ends — quickly, without waste, without suffering you did not need.",
      "cannot": "Clean is a discipline, not a mercy. The animal is still dead, and you still did it.",
      "harmRung": "lethal",
      "functions": [
       "strike"
      ],
-     "gains": "deepen"
+     "gains": "deepen",
+     "_nameWas": "The Clean Kill"
     },
     {
      "rank": 3,
-     "name": "The Strike That Feeds",
+     "name": "Strike That Feeds",
      "grants": "Nothing is wasted — the strike, the taking, the use. The old Valley ethic made into a single motion.",
      "cannot": "It is a hunter's craft, not a soldier's. Turned on people it is exactly as ugly as it sounds.",
      "harmRung": "lethal",
      "functions": [
       "strike"
      ],
-     "gains": "deepen"
+     "gains": "deepen",
+     "_nameWas": "The Strike That Feeds"
     }
    ],
    "challengeTypes": [
@@ -1689,7 +1699,7 @@
   },
   {
    "id": "carrying_call",
-   "name": "The Carrying Call",
+   "name": "Carrying Call",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "valley_craft",
@@ -1707,7 +1717,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Call That Carries",
+     "name": "Call That Carries",
      "grants": "Pitch a call so it travels — up a valley, across a lake, through a working mill — and arrives understandable to someone a mile off who knows the call. ⚠️ Also READS one back: you can tell distance and rough direction from an answering call.",
      "cannot": "IT NEEDS SOMETHING TO CARRY ALONG — water, a valley wall, a still evening. Open flat ground eats it. And it is a CALL: anyone in between hears it too, including whoever you were avoiding.",
      "functions": [
@@ -1718,11 +1728,12 @@
      "_functionsWas": [
       "reveal",
       "travel"
-     ]
+     ],
+     "_nameWas": "The Call That Carries"
     },
     {
      "rank": 2,
-     "name": "The Worked Line",
+     "name": "Worked Line",
      "grants": "Set a chain of calls along a route — a mill-line, a river run, a ridge — so word travels the valley faster than a rider.",
      "cannot": "You need people at the stations who know the calls, which means the calls are known, which means they can be read by anyone who learned them. Valley call-lines have been used against the valley before.",
      "functions": [
@@ -1735,11 +1746,12 @@
       "reveal",
       "travel",
       "command"
-     ]
+     ],
+     "_nameWas": "The Worked Line"
     },
     {
      "rank": 3,
-     "name": "The Whole Valley Hears",
+     "name": "Whole Valley Hears",
      "grants": "A call the entire settled valley picks up and passes — flood, fire, a column on the road. It has been used four times in living memory and everyone knows all four.",
      "cannot": "⚠️ IT CANNOT BE UNSAID AND IT CANNOT BE QUIET. You have told everyone, including the thing you are calling about. A false raising costs a family its standing for a generation.",
      "functions": [
@@ -1752,7 +1764,8 @@
       "reveal",
       "travel",
       "command"
-     ]
+     ],
+     "_nameWas": "The Whole Valley Hears"
     }
    ],
    "challengeTypes": [
@@ -1796,7 +1809,8 @@
     "command",
     "travel"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Carrying Call"
   },
   {
    "id": "glasswork",
@@ -1818,7 +1832,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Caught Light",
+     "name": "Caught Light",
      "grants": "Work glass and mirror to put light where it does not reach — down a shaft, around a corner, into a wound you are trying to close — or throw a signal flash to a ridge in daylight. ⚠️ And you can READ a piece of glass by eye: what it will do, where it will fail, whether it was ground or found.",
      "cannot": "THERE MUST BE LIGHT TO CATCH. This makes none. In true dark it is a bag of glass. And a signal flash is seen by everyone with a line of sight to the ridge.",
      "functions": [
@@ -1829,11 +1843,12 @@
      "_functionsWas": [
       "make",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Caught Light"
     },
     {
      "rank": 2,
-     "name": "The Set Piece",
+     "name": "Set Piece",
      "grants": "Build a standing arrangement — a lamp-run that lights a whole works, a mirror-line that watches a road, a lens that starts a fire from noon sun.",
      "cannot": "It is FIXED where you built it and it takes hours. Weather, dust and a curious child all defeat it.",
      "functions": [
@@ -1846,11 +1861,12 @@
       "make",
       "reveal",
       "conceal"
-     ]
+     ],
+     "_nameWas": "The Set Piece"
     },
     {
      "rank": 3,
-     "name": "The Valley Glass",
+     "name": "Valley Glass",
      "grants": "The good work: a lens that shows you what is on the far ridge, a mirror-chain that carries a signal the length of the settled valley, a lamp that burns a night on a thumb of oil.",
      "cannot": "⚠️ YOU ARE NOW WORTH ROBBING. Valley glass of this quality is the most portable wealth a farming family will ever hold, and everyone who has seen it knows where it lives.",
      "functions": [
@@ -1863,7 +1879,8 @@
       "make",
       "reveal",
       "conceal"
-     ]
+     ],
+     "_nameWas": "The Valley Glass"
     }
    ],
    "challengeTypes": [
@@ -1911,5 +1928,6 @@
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }

@@ -26,7 +26,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Fault Line",
+     "name": "Fault Line",
      "grants": "See exactly where a thing wants to break — a wall, a plan, an alliance, an argument.",
      "cannot": "Seeing the fault is not being right that it should be broken.",
      "functions": [
@@ -36,11 +36,12 @@
      "harmRung": "none",
      "_functionsWas": [
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Fault Line"
     },
     {
      "rank": 2,
-     "name": "The Clean Break",
+     "name": "Clean Break",
      "grants": "Break precisely at the fault — the thing comes apart where you chose and nowhere else.",
      "cannot": "Precise is not reversible. A clean break is still a break.",
      "functions": [
@@ -52,11 +53,12 @@
      "_functionsWas": [
       "reveal",
       "break"
-     ]
+     ],
+     "_nameWas": "The Clean Break"
     },
     {
      "rank": 3,
-     "name": "The Good Ending",
+     "name": "Good Ending",
      "grants": "End a thing WELL — a building, an institution, a life's work, a war — so that what it was is honored and what comes after is not poisoned by how it went.",
      "cannot": "You must be right that it should end. The Unmakers' cult, the Scouring, is what this becomes when that judgment stops being made.",
      "functions": [
@@ -69,7 +71,8 @@
       "reveal",
       "break",
       "open"
-     ]
+     ],
+     "_nameWas": "The Good Ending"
     }
    ],
    "gated": "learned",
@@ -161,7 +164,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Raised Thing",
+     "name": "Raised Thing",
      "grants": "Make something real, quickly — a bridge, a shelter, a tool, a wall — out of what is to hand.",
      "cannot": "Quick is not sound. Raised things want tending, and the Wrights are already elsewhere.",
      "functions": [
@@ -169,11 +172,12 @@
       "shield"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Raised Thing"
     },
     {
      "rank": 2,
-     "name": "The Made Better",
+     "name": "Made Better",
      "grants": "Make a thing better than it was — improve in the making, so what you raise exceeds what stood.",
      "cannot": "Better by whose measure? The Wrights improve what nobody asked to have improved, constantly.",
      "functions": [
@@ -182,11 +186,12 @@
       "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Made Better"
     },
     {
      "rank": 3,
-     "name": "The Unfinished",
+     "name": "Unfinished",
      "grants": "Deliberately leave a made thing incomplete — and it KEEPS MAKING ITSELF, growing on, adapting, never done.",
      "cannot": "It never stops. The Forge-Eternal is what a whole city of this becomes, and the Wrights are genuinely unsure whether it is a triumph.",
      "functions": [
@@ -196,7 +201,8 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Unfinished"
     }
    ],
    "gated": "learned",
@@ -289,7 +295,7 @@
     },
     {
      "rank": 2,
-     "name": "The Better Shape",
+     "name": "Better Shape",
      "grants": "See the better form a thing is capable of, and the shortest road to it.",
      "cannot": "There is always a better shape. Wrights at this rank cannot leave anything alone.",
      "functions": [
@@ -300,11 +306,12 @@
      "_functionsWas": [
       "reveal",
       "make"
-     ]
+     ],
+     "_nameWas": "The Better Shape"
     },
     {
      "rank": 3,
-     "name": "The Thing It Wants to Be",
+     "name": "Thing It Wants to Be",
      "grants": "See what a thing, a place, or a person is REACHING toward — the shape it would take if nothing stopped it.",
      "cannot": "Seeing what someone could be is the most seductive and most dangerous sight in this Reach. It is not your business to build them.",
      "functions": [
@@ -316,7 +323,8 @@
       "reveal",
       "make",
       "foresee"
-     ]
+     ],
+     "_nameWas": "The Thing It Wants to Be"
     }
    ],
    "gated": "learned",
@@ -379,8 +387,8 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
   },
   {
-   "id": "the_raised_thing",
-   "name": "The Raised Thing",
+   "id": "raised_thing",
+   "name": "Raised Thing",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_destruction_creation",
@@ -400,14 +408,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Raised Thing",
+     "name": "Raised Thing",
      "grants": "Make something real and functional, quickly — a bridge, a shelter, a tool, a wall — from what is here. It will hold long enough to matter.",
      "cannot": "Quick is not sound. Raised things want tending, and the Wright in you is already somewhere else.",
      "functions": [
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Raised Thing"
     },
     {
      "rank": 2,
@@ -423,7 +432,7 @@
     },
     {
      "rank": 3,
-     "name": "The Thing That Outlasts",
+     "name": "Thing That Outlasts",
      "grants": "Make something that will be here long after you. It will be found and used by people who do not know your name, and that will be enough.",
      "cannot": "You will not see what becomes of it. The Wrights have made peace with this.",
      "functions": [
@@ -431,7 +440,8 @@
       "mend"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Thing That Outlasts"
     }
    ],
    "gated": "accord",
@@ -485,11 +495,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A explore/investigate/fight action that makes or animates something. Its strength is rated 3 out of 10, and lasts for about 3 days Ranks: rank 2 deepens durability; rank 3 adds to special. Limit: quick IS Not Sound — raised things want tending."
+   "plainly": "A explore/investigate/fight action that makes or animates something. Its strength is rated 3 out of 10, and lasts for about 3 days Ranks: rank 2 deepens durability; rank 3 adds to special. Limit: quick IS Not Sound — raised things want tending.",
+   "_nameWas": "The Raised Thing",
+   "_idWas": "the_raised_thing"
   },
   {
-   "id": "the_weapon_at_hand",
-   "name": "The Weapon at Hand",
+   "id": "weapon_at_hand",
+   "name": "Weapon at Hand",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -544,7 +556,7 @@
     },
     {
      "rank": 3,
-     "name": "The Right Tool",
+     "name": "Right Tool",
      "grants": "Look at the materials at hand and see the weapon they are already; build it in moments, and it is exactly what this situation required.",
      "cannot": "Nothing further; this is the craft's ceiling; it makes a WEAPON, not a warrior.",
      "functions": [
@@ -552,7 +564,8 @@
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Right Tool"
     }
    ],
    "nativeOrCombination": "native",
@@ -600,11 +613,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A combat/craft/survival action that deals damage. It rolls 2d6 Ranks: rank 2 deepens speed; rank 3 adds to special. Limit: it makes a Weapon, not a warrior — it does not swing itself."
+   "plainly": "A combat/craft/survival action that deals damage. It rolls 2d6 Ranks: rank 2 deepens speed; rank 3 adds to special. Limit: it makes a Weapon, not a warrior — it does not swing itself.",
+   "_nameWas": "The Weapon at Hand",
+   "_idWas": "the_weapon_at_hand"
   },
   {
-   "id": "the_work_speaks",
-   "name": "The Work Speaks",
+   "id": "work_speaks",
+   "name": "Work Speaks",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -648,7 +663,7 @@
     },
     {
      "rank": 2,
-     "name": "The Reputation",
+     "name": "Reputation",
      "grants": "Your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim.",
      "cannot": "Anything rank 3 adds — the thing you have built is the argument and the evidence; IT REQUIRES REAL WORK TO SHOW.",
      "functions": [
@@ -659,7 +674,8 @@
      "_functionsWas": [
       "reveal",
       "command"
-     ]
+     ],
+     "_nameWas": "The Reputation"
     },
     {
      "rank": 3,
@@ -724,11 +740,13 @@
     "command",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Work Speaks",
+   "_idWas": "the_work_speaks"
   },
   {
-   "id": "the_built_way",
-   "name": "The Built Way",
+   "id": "built_way",
+   "name": "Built Way",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -760,7 +778,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Crossing",
+     "name": "Crossing",
      "grants": "Build a passage across an obstacle — a bridge, a stair, a ramp — quickly enough that the party can use it before circumstances change.",
      "cannot": "Anything rank 2 adds — open a way through or across any natural or built obstacle by constructing what's needed — not by force, by craft; IT TAKES TIME AND MATERIALS.",
      "functions": [
@@ -768,7 +786,8 @@
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Crossing"
     },
     {
      "rank": 2,
@@ -784,7 +803,7 @@
     },
     {
      "rank": 3,
-     "name": "The Road That Wasn't",
+     "name": "Road That Wasn't",
      "grants": "Build a path where there was truly none — spanning what shouldn't be spanned, opening what was sealed — and have it hold the weight it needs to hold.",
      "cannot": "Nothing further; this is the craft's ceiling; IT TAKES TIME AND MATERIALS; and it still costs what it costs: WHAT YOU BUILD TO CROSS BY, OTHERS WILL CROSS BY TOO.",
      "functions": [
@@ -793,7 +812,8 @@
       "travel"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Road That Wasn't"
     }
    ],
    "nativeOrCombination": "native",
@@ -838,11 +858,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A exploration/craft/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 2 days. Range is 10. Ranks: rank 2 deepens access; rank 3 adds to special. Limit: iT Takes Time And Materials — craft is not force."
+   "plainly": "A exploration/craft/tactical action that moves you or someone else. Its strength is rated 4 out of 10, and lasts for about 2 days. Range is 10. Ranks: rank 2 deepens access; rank 3 adds to special. Limit: iT Takes Time And Materials — craft is not force.",
+   "_nameWas": "The Built Way",
+   "_idWas": "the_built_way"
   },
   {
-   "id": "the_ongoing_work",
-   "name": "The Ongoing Work",
+   "id": "ongoing_work",
+   "name": "Ongoing Work",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -945,11 +967,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to autonomy. Limit: you Must Actually BE Making Something — the work is the anchor, and idleness ends it."
+   "plainly": "A endurance/craft/hardship action that strengthens someone. Its strength is rated 4 out of 10 It affects 4 targets, and lasts for about a day Ranks: rank 2 extends targets; rank 3 adds to autonomy. Limit: you Must Actually BE Making Something — the work is the anchor, and idleness ends it.",
+   "_nameWas": "The Ongoing Work",
+   "_idWas": "the_ongoing_work"
   },
   {
-   "id": "the_clean_removal",
-   "name": "The Clean Removal",
+   "id": "clean_removal",
+   "name": "Clean Removal",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1078,11 +1102,13 @@
     "restore",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Clean Removal",
+   "_idWas": "the_clean_removal"
   },
   {
-   "id": "the_ended_threat",
-   "name": "The Ended Threat",
+   "id": "ended_threat",
+   "name": "Ended Threat",
    "levelReq": 2,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1126,7 +1152,7 @@
     },
     {
      "rank": 2,
-     "name": "The Stopped Thing",
+     "name": "Stopped Thing",
      "grants": "Protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it. The threat is not turned aside; it is disabled at the point it was coming from, and whoever was carrying it is weakened out of the fight rather than merely stopped.",
      "cannot": "Anything rank 3 adds — identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming; IT REQUIRES SEEING THE THREAT FORM.",
      "functions": [
@@ -1139,7 +1165,8 @@
       "break",
       "shield",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Stopped Thing"
     },
     {
      "rank": 3,
@@ -1211,11 +1238,13 @@
     "shield"
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Ended Threat",
+   "_idWas": "the_ended_threat"
   },
   {
-   "id": "the_open_material",
-   "name": "The Open Material",
+   "id": "open_material",
+   "name": "Open Material",
    "levelReq": 3,
    "energyCost": 2,
    "powerSystem": "attribute",
@@ -1268,7 +1297,7 @@
     },
     {
      "rank": 3,
-     "name": "The Open Form",
+     "name": "Open Form",
      "grants": "Return something complex — a structure, a plan, a fixed belief — to the state before it became that specific thing, clearing the way for something new to take form.",
      "cannot": "Nothing further; this is the craft's ceiling; A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS.",
      "functions": [
@@ -1276,7 +1305,8 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Open Form"
     }
    ],
    "nativeOrCombination": "native",
@@ -1316,11 +1346,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A craft/tactical/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens decomposition; rank 3 adds to special. Limit: a Thing Returned TO Before-IT-Was Cannot BE Returned TO What IT Was."
+   "plainly": "A craft/tactical/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens decomposition; rank 3 adds to special. Limit: a Thing Returned TO Before-IT-Was Cannot BE Returned TO What IT Was.",
+   "_nameWas": "The Open Material",
+   "_idWas": "the_open_material"
   },
   {
-   "id": "the_demonstrated_end",
-   "name": "The Demonstrated End",
+   "id": "demonstrated_end",
+   "name": "Demonstrated End",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1350,18 +1382,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Known Capacity",
+     "name": "Known Capacity",
      "grants": "Your reputation for ending things precisely and completely gives weight to what you say — a warning from you lands differently than from someone without your history.",
      "cannot": "Anything rank 2 adds — show what you can dismantle — or name it plainly — and command the terms of an agreement; IT REQUIRES A REAL RECORD of ending things.",
      "functions": [
       "command"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Known Capacity"
     },
     {
      "rank": 2,
-     "name": "The Demonstrated Threat",
+     "name": "Demonstrated Threat",
      "grants": "Show what you can dismantle — or name it plainly — and command the terms of an agreement; they know what refusal means.",
      "cannot": "Anything rank 3 adds — you are the person who decides what ends; IT REQUIRES A REAL RECORD of ending things.",
      "functions": [
@@ -1369,11 +1402,12 @@
       "bind"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Demonstrated Threat"
     },
     {
      "rank": 3,
-     "name": "The Final Authority",
+     "name": "Final Authority",
      "grants": "You are the person who decides what ends. In a situation where endings are at stake, your word is the one that stands — not because you outranked anyone, but because everyone knows you can do what you say.",
      "cannot": "Nothing further; this is the craft's ceiling; IT REQUIRES A REAL RECORD of ending things; and it still costs what it costs: authority built on what you can END is authority people OBEY AND DO NOT LOVE.",
      "functions": [
@@ -1381,7 +1415,8 @@
       "bind"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Final Authority"
     }
    ],
    "nativeOrCombination": "native",
@@ -1425,11 +1460,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/negotiation/leadership action that strengthens someone. Its strength is rated 4 out of 10 It affects 3 targets, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: iT Requires A Real Record of ending things — an empty threat is an empty threat."
+   "plainly": "A social/negotiation/leadership action that strengthens someone. Its strength is rated 4 out of 10 It affects 3 targets, and lasts for about 6 hours Ranks: rank 2 deepens authority; rank 3 adds to special. Limit: iT Requires A Real Record of ending things — an empty threat is an empty threat.",
+   "_nameWas": "The Demonstrated End",
+   "_idWas": "the_demonstrated_end"
   },
   {
-   "id": "the_ended_burden",
-   "name": "The Ended Burden",
+   "id": "ended_burden",
+   "name": "Ended Burden",
    "levelReq": 2,
    "energyCost": 1,
    "powerSystem": "attribute",
@@ -1459,7 +1496,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Cut",
+     "name": "Cut",
      "grants": "Identify precisely what is consuming your capacity — exhaustion, fear, a specific obligation — and end it cleanly so you can continue.",
      "cannot": "Anything rank 2 adds — sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
@@ -1470,7 +1507,8 @@
      "_functionsWas": [
       "reveal",
       "restore"
-     ]
+     ],
+     "_nameWas": "The Cut"
     },
     {
      "rank": 2,
@@ -1491,7 +1529,7 @@
     },
     {
      "rank": 3,
-     "name": "The Lighter Load",
+     "name": "Lighter Load",
      "grants": "End what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on.",
      "cannot": "Nothing further; this is the craft's ceiling; WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED.",
      "functions": [
@@ -1504,7 +1542,8 @@
       "reveal",
       "sustain",
       "restore"
-     ]
+     ],
+     "_nameWas": "The Lighter Load"
     }
    ],
    "nativeOrCombination": "native",
@@ -1552,12 +1591,14 @@
     "sustain",
     "restore"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Ended Burden",
+   "_idWas": "the_ended_burden"
   },
   {
    "schemaVersion": 1,
-   "id": "the_undoing_word",
-   "name": "The Undoing Word",
+   "id": "undoing_word",
+   "name": "Undoing Word",
    "levelReq": 4,
    "energyCost": 12,
    "powerSystem": "reach_destruction_creation",
@@ -1575,25 +1616,27 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Undoing Word",
+     "name": "Undoing Word",
      "grants": "Unmake an assembled thing back to its unbound parts, reversing its making.",
      "cannot": "It cannot touch the living or the singular, it costs dearly, and un-done is still gone — cleanness is not the same as no loss.",
      "functions": [
       "break"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Undoing Word"
     },
     {
      "rank": 2,
-     "name": "The Longer Unmaking",
+     "name": "Longer Unmaking",
      "grants": "The word reaches what is BOUND as well as what is built — a working, a ward, a seal, a pact held by craft rather than by will. And the scale rises: not a thing but an assembly, a mechanism, a gate, the whole of something that was put together.",
      "cannot": "Still never the living, never the truly singular. Unmaking a binding releases whatever that binding held, and the GM decides what that was. And the cost climbs with the scale — Unmakers who reach too far come apart along the seams they opened.",
      "functions": [
       "break"
      ],
      "gains": "deepen",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Longer Unmaking"
     }
    ],
    "gated": "learned",
@@ -1645,12 +1688,14 @@
     }
    ],
    "plainly": "A fight action that deals damage. It rolls 4d6+2 across a scope of 3 Ranks: rank 2 adds to special. Limit: iT Cannot Touch The Living OR The Singular.",
-   "_descriptionWas": "The Unmaker art of the undoing — returning a made or bound thing to its unassembled state, so it is not destroyed but un-done, its making reversed. The clean art of those who end things properly."
+   "_descriptionWas": "The Unmaker art of the undoing — returning a made or bound thing to its unassembled state, so it is not destroyed but un-done, its making reversed. The clean art of those who end things properly.",
+   "_nameWas": "The Undoing Word",
+   "_idWas": "the_undoing_word"
   },
   {
    "schemaVersion": 1,
-   "id": "the_last_unmaking",
-   "name": "The Last Unmaking",
+   "id": "last_unmaking",
+   "name": "Last Unmaking",
    "levelReq": 5,
    "energyCost": 14,
    "powerSystem": "reach_destruction_creation",
@@ -1668,14 +1713,15 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Last Unmaking",
+     "name": "Last Unmaking",
      "grants": "Unmake a thing meant to be permanent — a fixed working, an ancient bond.",
      "cannot": "It costs nearly all you have, the world resists the unmaking of the fixed, and some things were sealed for reasons you learn only after you have broken the seal.",
      "functions": [
       "break"
      ],
      "harmRung": "damaging",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Last Unmaking"
     }
    ],
    "gated": "learned",
@@ -1721,12 +1767,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight action that deals damage. It rolls 5d6+6 across a scope of 4 Limit: iT Costs Nearly All You Have."
+   "plainly": "A fight action that deals damage. It rolls 5d6+6 across a scope of 4 Limit: iT Costs Nearly All You Have.",
+   "_nameWas": "The Last Unmaking",
+   "_idWas": "the_last_unmaking"
   },
   {
    "schemaVersion": 1,
-   "id": "the_true_making",
-   "name": "The True Making",
+   "id": "true_making",
+   "name": "True Making",
    "levelReq": 3,
    "energyCost": 7,
    "powerSystem": "reach_destruction_creation",
@@ -1745,18 +1793,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The True Making",
+     "name": "True Making",
      "grants": "Make a thing truly and completely, sound to its core and enduring.",
      "cannot": "It makes the made, not the living; it cannot be hurried without ceasing to be true; and a thing made right outlasts its maker, with all that carries.",
      "functions": [
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The True Making"
     },
     {
      "rank": 2,
-     "name": "The Sound Repair",
+     "name": "Sound Repair",
      "grants": "Bring a made thing back to true rather than merely patching it — find where the making was cut short or has failed, and remake that part as it should have been. A true repair is not a seam; the thing is sound again to its core.",
      "cannot": "It repairs the made, never the living; it needs enough of the original left to read the maker's intent; and a true repair takes the same care the true making did — you cannot hurry it either.",
      "functions": [
@@ -1764,11 +1813,12 @@
       "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Sound Repair"
     },
     {
      "rank": 3,
-     "name": "The Work That Outlasts",
+     "name": "Work That Outlasts",
      "grants": "Make at scale and for time — a hall, a bridge, a road built so completely that generations use it without knowing your name. Your makings resist decay, ill-use, and weather beyond what their materials should allow, and another Wright can read the trueness in your work and learn from it.",
      "cannot": "Scale multiplies the time and care, never reduces it; a thing made right outlasts its maker, with all that carries; and the Wrights hold that what endures is judged by what it was FOR — the GM prices a great making by what it serves.",
      "functions": [
@@ -1776,7 +1826,8 @@
       "mend"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Work That Outlasts"
     }
    ],
    "gated": "learned",
@@ -1831,12 +1882,14 @@
     }
    ],
    "plainly": "A create action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 12 months Ranks: rank 2 deepens quality; rank 3 extends scope. Limit: iT Makes The Made, Not The Living.",
-   "_descriptionWas": "The Wright art of true making — building a thing correctly and completely, so it is sound to its core and endures because nothing in it was cut short. The maker's first real mastery: not fast, but right."
+   "_descriptionWas": "The Wright art of true making — building a thing correctly and completely, so it is sound to its core and endures because nothing in it was cut short. The maker's first real mastery: not fast, but right.",
+   "_nameWas": "The True Making",
+   "_idWas": "the_true_making"
   },
   {
    "schemaVersion": 1,
-   "id": "the_reforging",
-   "name": "The Reforging",
+   "id": "reforging",
+   "name": "Reforging",
    "levelReq": 4,
    "energyCost": 11,
    "powerSystem": "reach_destruction_creation",
@@ -1855,7 +1908,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Reforging",
+     "name": "Reforging",
      "grants": "Reforge a broken thing so its break becomes its strength.",
      "cannot": "It works on the made, not the living; it needs a true break to work with; and the reforged thing is changed — stronger, but no longer the thing it was before it broke.",
      "functions": [
@@ -1863,11 +1916,12 @@
       "mend"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Reforging"
     },
     {
      "rank": 2,
-     "name": "The Deep Reforging",
+     "name": "Deep Reforging",
      "grants": "Work breaks that should be past working — a thing shattered rather than cracked, a thing broken many times over, a thing broken so long ago its maker is forgotten. The reforged piece carries every break as a line of strength, and a Wright who reads it can recite the whole history from the metal.",
      "cannot": "Still the made, never the living. The more breaks worked in, the further the thing travels from what it was — at some point it is a new thing wearing an old name, and the Wrights argue about where that point falls. And a reforging this deep takes days, not hours.",
      "functions": [
@@ -1875,7 +1929,8 @@
       "mend"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Deep Reforging"
     }
    ],
    "gated": "learned",
@@ -1922,12 +1977,14 @@
     }
    ],
    "plainly": "A create action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 12 months Ranks: rank 2 adds to special. Limit: iT Works ON The Made, Not The Living.",
-   "_descriptionWas": "The Wright art of reforging — remaking a broken thing so that its breaking becomes its strength, the flaw worked into a truer form. The deep gift of makers who know that broken is not the same as ruined."
+   "_descriptionWas": "The Wright art of reforging — remaking a broken thing so that its breaking becomes its strength, the flaw worked into a truer form. The deep gift of makers who know that broken is not the same as ruined.",
+   "_nameWas": "The Reforging",
+   "_idWas": "the_reforging"
   },
   {
    "schemaVersion": 1,
-   "id": "the_masterwork",
-   "name": "The Masterwork",
+   "id": "masterwork",
+   "name": "Masterwork",
    "levelReq": 5,
    "energyCost": 13,
    "powerSystem": "reach_destruction_creation",
@@ -1946,7 +2003,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Masterwork",
+     "name": "Masterwork",
      "grants": "Make a single masterwork that gathers a lifetime's craft into one enduring, teaching thing.",
      "cannot": "It demands real time and nearly all you have, it stands as a permanent fact and teacher, and you may never make its equal again — a masterwork is, often, the making you are measured by ever after.",
      "functions": [
@@ -1954,7 +2011,8 @@
       "empower"
      ],
      "harmRung": "none",
-     "gains": "broaden"
+     "gains": "broaden",
+     "_nameWas": "The Masterwork"
     }
    ],
    "gated": "learned",
@@ -1996,12 +2054,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A create action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 122 months Limit: iT Demands Real Time And Nearly All You Have."
+   "plainly": "A create action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 122 months Limit: iT Demands Real Time And Nearly All You Have.",
+   "_nameWas": "The Masterwork",
+   "_idWas": "the_masterwork"
   },
   {
    "schemaVersion": 1,
-   "id": "the_last_fault",
-   "name": "The Last Fault",
+   "id": "last_fault",
+   "name": "Last Fault",
    "levelReq": 5,
    "energyCost": 15,
    "powerSystem": "reach_destruction_creation",
@@ -2020,7 +2080,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Last Fault",
+     "name": "Last Fault",
      "grants": "Find the fault in a living thing and BREAK it open. What follows follows the fault, not your intent.",
      "cannot": "Choosing what the fault does. Anything already ended.",
      "functions": [
@@ -2028,11 +2088,12 @@
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Last Fault"
     },
     {
      "rank": 2,
-     "name": "The Whole Fault",
+     "name": "Whole Fault",
      "grants": "BREAK every fault at once. Nothing about this rank is careful and the tradition says so plainly.",
      "cannot": "Stopping. Bystanders — the faults nearest yours break too.",
      "functions": [
@@ -2040,7 +2101,8 @@
       "strike"
      ],
      "gains": "deepen",
-     "harmRung": "lethal"
+     "harmRung": "lethal",
+     "_nameWas": "The Whole Fault"
     }
    ],
    "challengeTypes": [
@@ -2090,11 +2152,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A fight attack dealing 5d6 with the highest damage variance in the game, because you do not control what the fault does when it opens. You cannot choose the effect and you cannot stop it partway. At rank 2 it also hits others near the target, including you. Everything living has a fault, so nothing is immune."
+   "plainly": "A fight attack dealing 5d6 with the highest damage variance in the game, because you do not control what the fault does when it opens. You cannot choose the effect and you cannot stop it partway. At rank 2 it also hits others near the target, including you. Everything living has a fault, so nothing is immune.",
+   "_nameWas": "The Last Fault",
+   "_idWas": "the_last_fault"
   },
   {
-   "id": "the_found_fault",
-   "name": "The Found Fault",
+   "id": "found_fault",
+   "name": "Found Fault",
    "levelReq": 1,
    "energyCost": 5,
    "powerSystem": "reach_destruction_creation",
@@ -2113,7 +2177,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The One Place",
+     "name": "One Place",
      "grants": "Find the fault in a made thing on or around a target — a shield's grain, a helm's seam, a joist, a buckle, the flaw in the stone they are standing on — and open it. What was holding stops holding, onto them.",
      "cannot": "MADE OR FLAWED THINGS — a whole, new, well-kept object gives you very little, and living bodies only where they are already hurt. You must perceive the fault; guessing wastes the placement.",
      "functions": [
@@ -2121,11 +2185,12 @@
       "strike"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The One Place"
     },
     {
      "rank": 2,
-     "name": "The Clean Break",
+     "name": "Clean Break",
      "grants": "Take the fault that matters rather than the nearest one — the load-bearing member, the keystone, the axle. Structures come down where you decide they come down.",
      "cannot": "⚠ A STRUCTURE COMES DOWN ON WHAT IS UNDER IT: anyone else in the area is struck ONE RUNG LOWER. You choose where it falls, not who is there.",
      "functions": [
@@ -2138,11 +2203,12 @@
       "break",
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Clean Break"
     },
     {
      "rank": 3,
-     "name": "The Beautiful Ruin",
+     "name": "Beautiful Ruin",
      "grants": "A whole made thing, opened at every fault at once, in the order that brings it down best. Halls, gates, bridges and engines break at every fault at once, and the fall strikes the people relying on them.",
      "cannot": "⚠ THE WIELDER IS STRUCK ONE RUNG LOWER if inside the ruin, and it CANNOT BE PUT BACK — the Unmakers hold you answerable for what you cleared and whether it should have been. The Scouring do this for its own sake.",
      "functions": [
@@ -2155,7 +2221,8 @@
       "break",
       "strike",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Beautiful Ruin"
     }
    ],
    "challengeTypes": [
@@ -2207,11 +2274,13 @@
     "break",
     "strike"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Found Fault",
+   "_idWas": "the_found_fault"
   },
   {
-   "id": "the_sudden_work",
-   "name": "The Sudden Work",
+   "id": "sudden_work",
+   "name": "Sudden Work",
    "levelReq": 1,
    "energyCost": 6,
    "powerSystem": "reach_destruction_creation",
@@ -2231,7 +2300,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Driven Spar",
+     "name": "Driven Spar",
      "grants": "Take material to hand and make it FAST, into them — a spar through a guard, a spike out of the floor, an iron bracket that closes on an arm. Crude, immediate, and it stays there afterward.",
      "cannot": "MATERIAL MUST BE PRESENT — bare ground and no wreckage gives you nothing. What you make REMAINS, in them or in the room, and you cannot unmake it.",
      "functions": [
@@ -2239,11 +2308,12 @@
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "damaging"
+     "harmRung": "damaging",
+     "_nameWas": "The Driven Spar"
     },
     {
      "rank": 2,
-     "name": "The Raised Work",
+     "name": "Raised Work",
      "grants": "Build at scale in the middle of the fight — a wall across a charge, a cage, a collapsing scaffold over a line of them.",
      "cannot": "⚠ WHAT YOU RAISE IS IN EVERYONE'S WAY: anyone else in the area is struck ONE RUNG LOWER or cut off by your own work. It stays up until someone takes it down.",
      "functions": [
@@ -2258,11 +2328,12 @@
       "break",
       "make",
       "hinder"
-     ]
+     ],
+     "_nameWas": "The Raised Work"
     },
     {
      "rank": 3,
-     "name": "The Thing That Was Not There",
+     "name": "Thing That Was Not There",
      "grants": "A whole work, at speed, where people are standing. It is finished before they understand it is being built, and they are inside it.",
      "cannot": "⚠ THE WIELDER IS STRUCK ONE RUNG LOWER if inside their own work, and it REMAINS AFTERWARD — a permanent structure on the site of your fight, which the Ceaseless would call a good day and the valley may not.",
      "functions": [
@@ -2277,7 +2348,8 @@
       "break",
       "make",
       "bind"
-     ]
+     ],
+     "_nameWas": "The Thing That Was Not There"
     }
    ],
    "challengeTypes": [
@@ -2330,11 +2402,13 @@
     "break",
     "make"
    ],
-   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage."
+   "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
+   "_nameWas": "The Sudden Work",
+   "_idWas": "the_sudden_work"
   },
   {
-   "id": "the_clean_taking",
-   "name": "The Clean Taking",
+   "id": "clean_taking",
+   "name": "Clean Taking",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_destruction_creation",
@@ -2352,7 +2426,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Joins Found",
+     "name": "Joins Found",
      "grants": "Take a made object apart in minutes and RECOVER ITS PARTS INTACT AND REUSABLE — a lock into its pins, a wagon into its timber and iron, a lantern into glass, wick and frame. You have the pieces and they are good.",
      "cannot": "ASSEMBLED things only — a cast or carved single piece has no joins. It takes MINUTES, not a moment, and you must be able to handle the thing. Broken parts come away broken.",
      "functions": [
@@ -2360,11 +2434,12 @@
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Joins Found"
     },
     {
      "rank": 2,
-     "name": "The Larger Work",
+     "name": "Larger Work",
      "grants": "A door, a cart, a mechanism, a small structure — taken down to salvage in an hour rather than a day, with nothing wasted.",
      "cannot": "Time and space are the cost, and you have made a very obvious pile. Nobody takes a gate apart discreetly.",
      "functions": [
@@ -2372,11 +2447,12 @@
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Larger Work"
     },
     {
      "rank": 3,
-     "name": "The Whole Unbuilding",
+     "name": "Whole Unbuilding",
      "grants": "A building, an engine, a bridge — reduced to its materials, sorted, and nothing ruined. Communities relocate on this.",
      "cannot": "⚠ WHAT YOU TAKE APART IS APART. There is no half-measure and no putting it back without building it again — and you are an Unmaker, not a Wright.",
      "functions": [
@@ -2389,7 +2465,8 @@
       "make",
       "open",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Whole Unbuilding"
     }
    ],
    "challengeTypes": [
@@ -2432,11 +2509,13 @@
     "make",
     "open"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Clean Taking",
+   "_idWas": "the_clean_taking"
   },
   {
-   "id": "the_given_way",
-   "name": "The Given Way",
+   "id": "given_way",
+   "name": "Given Way",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_destruction_creation",
@@ -2454,18 +2533,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Way Given",
+     "name": "Way Given",
      "grants": "Open one deliberately-closed thing without damage: a lock, a bar, a lashed knot, a wax seal, a barred shutter. It is OPEN and it still works — it can be closed again behind you.",
      "cannot": "It must have been CLOSED ON PURPOSE by a method. A collapsed tunnel is not shut, it is fallen. And it leaves the honest trace of having been opened; concealment is Veilcraft, not this.",
      "functions": [
       "open"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Way Given"
     },
     {
      "rank": 2,
-     "name": "The Several Ways",
+     "name": "Several Ways",
      "grants": "A sequence — a gate, then a stair-door, then a strongbox — or one thing closed several ways at once.",
      "cannot": "Each takes its own time and you are standing there for all of it. A guarded route is a guarded route; this answers the lock, never the guard.",
      "functions": [
@@ -2476,11 +2556,12 @@
      "_functionsWas": [
       "open",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Several Ways"
     },
     {
      "rank": 3,
-     "name": "The Sealed Thing",
+     "name": "Sealed Thing",
      "grants": "What was closed to stay closed — a vault, a bound working, a door with a name on it that was meant never to open again.",
      "cannot": "⚠ SOME THINGS WERE SHUT FOR A REASON AND THE REASON IS STILL IN THERE. The Unmakers keep a list of what they have opened, and a shorter one of what they will not.",
      "functions": [
@@ -2491,7 +2572,8 @@
      "_functionsWas": [
       "open",
       "reveal"
-     ]
+     ],
+     "_nameWas": "The Sealed Thing"
     }
    ],
    "challengeTypes": [
@@ -2535,11 +2617,13 @@
     "open",
     "reveal"
    ],
-   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism."
+   "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
+   "_nameWas": "The Given Way",
+   "_idWas": "the_given_way"
   },
   {
-   "id": "the_quick_work",
-   "name": "The Quick Work",
+   "id": "quick_work",
+   "name": "Quick Work",
    "levelReq": 1,
    "energyCost": 4,
    "powerSystem": "reach_destruction_creation",
@@ -2556,18 +2640,19 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Thing Made",
+     "name": "Thing Made",
      "grants": "From materials at hand, build one working functional object in about a quarter-hour: a ladder, a raft, a sledge, a splint, a door, a winch, a shelter that keeps rain off. It WORKS and it is ugly.",
      "cannot": "MATERIAL MUST BE PRESENT AND SUFFICIENT — you cannot make a raft out of gravel. It is ROUGH: it works, it is not fine, and anyone who knows the trade can see it was rushed. No mechanisms of any subtlety.",
      "functions": [
       "make"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Thing Made"
     },
     {
      "rank": 2,
-     "name": "The Larger Build",
+     "name": "Larger Build",
      "grants": "A span, a palisade section, a cart, a hoist — hours instead of days, with a crew doing what you tell them.",
      "cannot": "You need the crew and you need the stock. And a Quick Work at this size is visibly a Quick Work: it will be pointed at later by whoever maintains it.",
      "functions": [
@@ -2575,11 +2660,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Larger Build"
     },
     {
      "rank": 3,
-     "name": "The Built Answer",
+     "name": "Built Answer",
      "grants": "The thing the situation actually needs, built inside the situation — a bridge while the water rises, a barricade while they come, a machine nobody in the valley has seen.",
      "cannot": "⚠ IT IS STILL ROUGH, AND NOW IT IS LOAD-BEARING. A Quick Work that a place comes to rely on is a Wright's characteristic disaster: built in an afternoon, trusted for a decade, and nobody remembers it was meant to be temporary.",
      "functions": [
@@ -2587,7 +2673,8 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Built Answer"
     }
    ],
    "challengeTypes": [
@@ -2626,11 +2713,13 @@
     }
    ],
    "plainly": "A puzzle/social action that builds a working object fast from materials at hand. Rated 5 of 10 across a scope of 2.",
-   "_descriptionWas": "The Wrights' first craft. A day's carpentry in a quarter of an hour, and it holds."
+   "_descriptionWas": "The Wrights' first craft. A day's carpentry in a quarter of an hour, and it holds.",
+   "_nameWas": "The Quick Work",
+   "_idWas": "the_quick_work"
   },
   {
-   "id": "the_held_repair",
-   "name": "The Held Repair",
+   "id": "held_repair",
+   "name": "Held Repair",
    "levelReq": 1,
    "energyCost": 3,
    "powerSystem": "reach_destruction_creation",
@@ -2648,7 +2737,7 @@
    "tree": [
     {
      "rank": 1,
-     "name": "The Thing Persuaded",
+     "name": "Thing Persuaded",
      "grants": "A broken made thing functions again for about a day — a cracked axle, a split shaft, a torn bellows, a failed hinge. It carries what it carried before. ⚠ NAME THE HOUR IT WILL FAIL; the craft tells you and you must say it.",
      "cannot": "It is NOT REPAIRED. When it goes, it goes without warning and usually worse than it broke the first time. It must still be mostly present — a shattered thing is not mostly there.",
      "functions": [
@@ -2656,11 +2745,12 @@
       "sustain"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Thing Persuaded"
     },
     {
      "rank": 2,
-     "name": "The Long Persuasion",
+     "name": "Long Persuasion",
      "grants": "Several things, or one thing for several days — a caravan's wheels across a season's bad road, a mill through the harvest.",
      "cannot": "Every extension makes the eventual failure worse, and you are accumulating a list of things that will all fail near the same time.",
      "functions": [
@@ -2669,11 +2759,12 @@
       "empower"
      ],
      "gains": "broaden",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Long Persuasion"
     },
     {
      "rank": 3,
-     "name": "The Kept Machine",
+     "name": "Kept Machine",
      "grants": "Something large and badly broken kept in service — a mill, a lock-gate, a pump — while the real repair is impossible or unaffordable.",
      "cannot": "⚠ PEOPLE WILL STOP TREATING IT AS BROKEN. That is the danger: a kept machine becomes a working machine in everyone's mind except yours, and you are the only one who knows the hour.",
      "functions": [
@@ -2682,7 +2773,8 @@
       "empower"
      ],
      "gains": "deepen",
-     "harmRung": "none"
+     "harmRung": "none",
+     "_nameWas": "The Kept Machine"
     }
    ],
    "challengeTypes": [
@@ -2721,10 +2813,13 @@
     }
    ],
    "plainly": "A puzzle/social action that makes a broken thing work again temporarily. Rated 5 of 10 across a scope of 2 for about a day.",
-   "_descriptionWas": "The Wrights' field-craft: get it moving, get it home, fix it properly there."
+   "_descriptionWas": "The Wrights' field-craft: get it moving, get it home, fix it properly there.",
+   "_nameWas": "The Held Repair",
+   "_idWas": "the_held_repair"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
  "_wordingFix": "⛔ SNG-436: descriptions rewritten so the FIRST CLAUSE NAMES AN ACTION AND ITS OUTCOME. Erik: 'some of the skills read like they don't do ANYTHING.' 87 of 376 opened by defining the craft — 'The mind-pole mastery:', 'The Masons' holding-craft.' — which places the skill in the tradition's taxonomy, a librarian's job rather than the player's question. ⚠️ THE ACTION WAS ALREADY AUTHORED in `narrationHints` and `tree[0].grants`; this promotes it and keeps the taxonomy line AFTER. Prior text preserved in `_descriptionWas`.",
- "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive."
+ "_senseCull": "⛔ SNG-454: perceive-only 'first gift' senses removed — replaced by the single `Attunement` ability whose sectFlavour carries what you perceive.",
+ "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke."
 }
